@@ -1,469 +1,492 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
+// smithy-typescript generated code
 /**
- * <p>You do not have sufficient access to perform this action.</p>
+ * <p>This structure contains Amazon Web Services-specific parameter extensions and the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html">identity context</a>.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace AccessDeniedException {
+export interface AwsAdditionalDetails {
   /**
-   * @internal
+   * <p>The trusted context assertion is signed and encrypted by STS. It provides access to
+   *         <code>sts:identity_context</code> claim in the <code>idToken</code> without JWT
+   *       parsing</p>
+   *          <p>Identity context comprises information that Amazon Web Services services use to make authorization
+   *       decisions when they receive requests.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
+  identityContext?: string | undefined;
 }
 
 /**
- * <p>Indicates that a request to authorize a client with an access user session token is pending.</p>
+ * @public
  */
-export interface AuthorizationPendingException extends __SmithyException, $MetadataBearer {
-  name: "AuthorizationPendingException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace AuthorizationPendingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthorizationPendingException): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateTokenRequest {
   /**
-   * <p>The unique identifier string for each client. This value should come from the persisted result of the <a>RegisterClient</a> API.</p>
+   * <p>The unique identifier string for the client or application. This value comes from the
+   *       result of the <a>RegisterClient</a> API.</p>
+   * @public
    */
   clientId: string | undefined;
 
   /**
-   * <p>A secret string generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API.</p>
+   * <p>A secret string generated for the client. This value should come from the persisted result
+   *       of the <a>RegisterClient</a> API.</p>
+   * @public
    */
   clientSecret: string | undefined;
 
   /**
-   * <p>Supports grant types for authorization code, refresh token, and device code request.</p>
+   * <p>Supports the following OAuth grant types: Authorization Code, Device Code, and Refresh
+   *       Token. Specify one of the following values, depending on the grant type that you want:</p>
+   *          <p>* Authorization Code - <code>authorization_code</code>
+   *          </p>
+   *          <p>* Device Code - <code>urn:ietf:params:oauth:grant-type:device_code</code>
+   *          </p>
+   *          <p>* Refresh Token - <code>refresh_token</code>
+   *          </p>
+   * @public
    */
   grantType: string | undefined;
 
   /**
-   * <p>Used only when calling this API for the device code grant type. This short-term code is
-   *       used to identify this authentication attempt. This should come from an in-memory reference to
-   *       the result of the <a>StartDeviceAuthorization</a> API.</p>
+   * <p>Used only when calling this API for the Device Code grant type. This short-lived code is
+   *       used to identify this authorization request. This comes from the result of the <a>StartDeviceAuthorization</a> API.</p>
+   * @public
    */
-  deviceCode: string | undefined;
+  deviceCode?: string | undefined;
 
   /**
-   * <p>The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.</p>
+   * <p>Used only when calling this API for the Authorization Code grant type. The short-lived
+   *       code is used to identify this authorization request.</p>
+   * @public
    */
-  code?: string;
+  code?: string | undefined;
 
   /**
-   * <p>The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.</p>
+   * <p>Used only when calling this API for the Refresh Token grant type. This token is used to
+   *       refresh short-lived tokens, such as the access token, that might expire.</p>
+   *          <p>For more information about the features and limitations of the current IAM Identity Center OIDC
+   *       implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center
+   *         OIDC API Reference</a>.</p>
+   * @public
    */
-  refreshToken?: string;
+  refreshToken?: string | undefined;
 
   /**
-   * <p>The list of scopes that is defined by the client. Upon authorization, this list is used to
-   *       restrict permissions when granting an access token.</p>
+   * <p>The list of scopes for which authorization is requested. This parameter has no effect; the access token will always include all scopes configured during client registration.</p>
+   * @public
    */
-  scope?: string[];
+  scope?: string[] | undefined;
 
   /**
-   * <p>The location of the application that will receive the authorization code. Users authorize
-   *       the service to send the request to this location.</p>
+   * <p>Used only when calling this API for the Authorization Code grant type. This value
+   *       specifies the location of the client or application that has registered to receive the
+   *       authorization code.</p>
+   * @public
    */
-  redirectUri?: string;
+  redirectUri?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Authorization Code grant type. This value is
+   *       generated by the client and presented to validate the original code challenge value the client
+   *       passed at authorization time.</p>
+   * @public
+   */
+  codeVerifier?: string | undefined;
 }
 
-export namespace CreateTokenRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTokenRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateTokenResponse {
   /**
-   * <p>An opaque token to access AWS SSO resources assigned to a user.</p>
+   * <p>A bearer token to access Amazon Web Services accounts and applications assigned to a user.</p>
+   * @public
    */
-  accessToken?: string;
+  accessToken?: string | undefined;
 
   /**
-   * <p>Used to notify the client that the returned token is an access token. The supported type
-   *       is <code>BearerToken</code>.</p>
+   * <p>Used to notify the client that the returned token is an access token. The supported token
+   *       type is <code>Bearer</code>.</p>
+   * @public
    */
-  tokenType?: string;
+  tokenType?: string | undefined;
 
   /**
    * <p>Indicates the time in seconds when an access token will expire.</p>
+   * @public
    */
-  expiresIn?: number;
+  expiresIn?: number | undefined;
 
   /**
    * <p>A token that, if present, can be used to refresh a previously issued access token that
    *       might have expired.</p>
+   *          <p>For more information about the features and limitations of the current IAM Identity Center OIDC
+   *       implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center
+   *         OIDC API Reference</a>.</p>
+   * @public
    */
-  refreshToken?: string;
+  refreshToken?: string | undefined;
 
   /**
-   * <p>The identifier of the user that associated with the access token, if present.</p>
+   * <p>The <code>idToken</code> is not implemented or supported. For more information about the
+   *       features and limitations of the current IAM Identity Center OIDC implementation, see
+   *         <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center
+   *         OIDC API Reference</a>.</p>
+   *          <p>A JSON Web Token (JWT) that identifies who is associated with the issued access token.
+   *     </p>
+   * @public
    */
-  idToken?: string;
-}
-
-export namespace CreateTokenResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTokenResponse): any => ({
-    ...obj,
-  });
+  idToken?: string | undefined;
 }
 
 /**
- * <p>Indicates that the token issued by the service is expired and is no longer valid.</p>
+ * @public
  */
-export interface ExpiredTokenException extends __SmithyException, $MetadataBearer {
-  name: "ExpiredTokenException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace ExpiredTokenException {
+export interface CreateTokenWithIAMRequest {
   /**
-   * @internal
+   * <p>The unique identifier string for the client or application. This value is an application
+   *       ARN that has OAuth grants configured.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ExpiredTokenException): any => ({
-    ...obj,
-  });
+  clientId: string | undefined;
+
+  /**
+   * <p>Supports the following OAuth grant types: Authorization Code, Refresh Token, JWT Bearer,
+   *       and Token Exchange. Specify one of the following values, depending on the grant type that you
+   *       want:</p>
+   *          <p>* Authorization Code - <code>authorization_code</code>
+   *          </p>
+   *          <p>* Refresh Token - <code>refresh_token</code>
+   *          </p>
+   *          <p>* JWT Bearer - <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code>
+   *          </p>
+   *          <p>* Token Exchange - <code>urn:ietf:params:oauth:grant-type:token-exchange</code>
+   *          </p>
+   * @public
+   */
+  grantType: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Authorization Code grant type. This short-lived
+   *       code is used to identify this authorization request. The code is obtained through a redirect
+   *       from IAM Identity Center to a redirect URI persisted in the Authorization Code GrantOptions for the
+   *       application.</p>
+   * @public
+   */
+  code?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Refresh Token grant type. This token is used to
+   *       refresh short-lived tokens, such as the access token, that might expire.</p>
+   *          <p>For more information about the features and limitations of the current IAM Identity Center OIDC
+   *       implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center
+   *         OIDC API Reference</a>.</p>
+   * @public
+   */
+  refreshToken?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the JWT Bearer grant type. This value specifies the
+   *       JSON Web Token (JWT) issued by a trusted token issuer. To authorize a trusted token issuer,
+   *       configure the JWT Bearer GrantOptions for the application.</p>
+   * @public
+   */
+  assertion?: string | undefined;
+
+  /**
+   * <p>The list of scopes for which authorization is requested. The access token that is issued
+   *       is limited to the scopes that are granted. If the value is not specified, IAM Identity Center authorizes all
+   *       scopes configured for the application, including the following default scopes:
+   *         <code>openid</code>, <code>aws</code>, <code>sts:identity_context</code>.</p>
+   * @public
+   */
+  scope?: string[] | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Authorization Code grant type. This value
+   *       specifies the location of the client or application that has registered to receive the
+   *       authorization code. </p>
+   * @public
+   */
+  redirectUri?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Token Exchange grant type. This value specifies
+   *       the subject of the exchange. The value of the subject token must be an access token issued by
+   *       IAM Identity Center to a different client or application. The access token must have authorized scopes that
+   *       indicate the requested application as a target audience.</p>
+   * @public
+   */
+  subjectToken?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Token Exchange grant type. This value specifies
+   *       the type of token that is passed as the subject of the exchange. The following value is
+   *       supported:</p>
+   *          <p>* Access Token - <code>urn:ietf:params:oauth:token-type:access_token</code>
+   *          </p>
+   * @public
+   */
+  subjectTokenType?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Token Exchange grant type. This value specifies
+   *       the type of token that the requester can receive. The following values are supported:</p>
+   *          <p>* Access Token - <code>urn:ietf:params:oauth:token-type:access_token</code>
+   *          </p>
+   *          <p>* Refresh Token - <code>urn:ietf:params:oauth:token-type:refresh_token</code>
+   *          </p>
+   * @public
+   */
+  requestedTokenType?: string | undefined;
+
+  /**
+   * <p>Used only when calling this API for the Authorization Code grant type. This value is
+   *       generated by the client and presented to validate the original code challenge value the client
+   *       passed at authorization time.</p>
+   * @public
+   */
+  codeVerifier?: string | undefined;
 }
 
 /**
- * <p>Indicates that an error from the service occurred while trying to process a request.</p>
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace InternalServerException {
+export interface CreateTokenWithIAMResponse {
   /**
-   * @internal
+   * <p>A bearer token to access Amazon Web Services accounts and applications assigned to a user.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
+  accessToken?: string | undefined;
+
+  /**
+   * <p>Used to notify the requester that the returned token is an access token. The supported
+   *       token type is <code>Bearer</code>.</p>
+   * @public
+   */
+  tokenType?: string | undefined;
+
+  /**
+   * <p>Indicates the time in seconds when an access token will expire.</p>
+   * @public
+   */
+  expiresIn?: number | undefined;
+
+  /**
+   * <p>A token that, if present, can be used to refresh a previously issued access token that
+   *       might have expired.</p>
+   *          <p>For more information about the features and limitations of the current IAM Identity Center OIDC
+   *       implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center
+   *         OIDC API Reference</a>.</p>
+   * @public
+   */
+  refreshToken?: string | undefined;
+
+  /**
+   * <p>A JSON Web Token (JWT) that identifies the user associated with the issued access token.
+   *     </p>
+   * @public
+   */
+  idToken?: string | undefined;
+
+  /**
+   * <p>Indicates the type of tokens that are issued by IAM Identity Center. The following values are supported: </p>
+   *          <p>* Access Token - <code>urn:ietf:params:oauth:token-type:access_token</code>
+   *          </p>
+   *          <p>* Refresh Token - <code>urn:ietf:params:oauth:token-type:refresh_token</code>
+   *          </p>
+   * @public
+   */
+  issuedTokenType?: string | undefined;
+
+  /**
+   * <p>The list of scopes for which authorization is granted. The access token that is issued is
+   *       limited to the scopes that are granted.</p>
+   * @public
+   */
+  scope?: string[] | undefined;
+
+  /**
+   * <p>A structure containing information from IAM Identity Center managed user and group
+   *       information.</p>
+   * @public
+   */
+  awsAdditionalDetails?: AwsAdditionalDetails | undefined;
 }
 
 /**
- * <p>Indicates that the <code>clientId</code> or <code>clientSecret</code> in the request is
- *       invalid. For example, this can occur when a client sends an incorrect <code>clientId</code> or
- *       an expired <code>clientSecret</code>.</p>
+ * @public
  */
-export interface InvalidClientException extends __SmithyException, $MetadataBearer {
-  name: "InvalidClientException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace InvalidClientException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidClientException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that a request contains an invalid grant. This can occur if a client makes a <a>CreateToken</a> request with an invalid grant type.</p>
- */
-export interface InvalidGrantException extends __SmithyException, $MetadataBearer {
-  name: "InvalidGrantException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace InvalidGrantException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidGrantException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that something is wrong with the input to the request. For example, a required
- *       parameter might be missing or out of range.</p>
- */
-export interface InvalidRequestException extends __SmithyException, $MetadataBearer {
-  name: "InvalidRequestException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace InvalidRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidRequestException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the scope provided in the request is invalid.</p>
- */
-export interface InvalidScopeException extends __SmithyException, $MetadataBearer {
-  name: "InvalidScopeException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace InvalidScopeException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidScopeException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the client is making the request too frequently and is more than the service can handle. </p>
- */
-export interface SlowDownException extends __SmithyException, $MetadataBearer {
-  name: "SlowDownException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace SlowDownException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SlowDownException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the client is not currently authorized to make the request. This can happen
- *       when a <code>clientId</code> is not issued for a public client.</p>
- */
-export interface UnauthorizedClientException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedClientException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace UnauthorizedClientException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedClientException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the grant type in the request is not supported by the service.</p>
- */
-export interface UnsupportedGrantTypeException extends __SmithyException, $MetadataBearer {
-  name: "UnsupportedGrantTypeException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace UnsupportedGrantTypeException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnsupportedGrantTypeException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the client information sent in the request during registration is invalid.</p>
- */
-export interface InvalidClientMetadataException extends __SmithyException, $MetadataBearer {
-  name: "InvalidClientMetadataException";
-  $fault: "client";
-  error?: string;
-  error_description?: string;
-}
-
-export namespace InvalidClientMetadataException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidClientMetadataException): any => ({
-    ...obj,
-  });
-}
-
 export interface RegisterClientRequest {
   /**
    * <p>The friendly name of the client.</p>
+   * @public
    */
   clientName: string | undefined;
 
   /**
-   * <p>The type of client. The service supports only <code>public</code> as a client type. Anything other than public will be rejected by the service.</p>
+   * <p>The type of client. The service supports only <code>public</code> as a client type.
+   *       Anything other than public will be rejected by the service.</p>
+   * @public
    */
   clientType: string | undefined;
 
   /**
    * <p>The list of scopes that are defined by the client. Upon authorization, this list is used
    *       to restrict permissions when granting an access token.</p>
+   * @public
    */
-  scopes?: string[];
-}
+  scopes?: string[] | undefined;
 
-export namespace RegisterClientRequest {
   /**
-   * @internal
+   * <p>The list of redirect URI that are defined by the client. At completion of authorization,
+   *       this list is used to restrict what locations the user agent can be redirected back to.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RegisterClientRequest): any => ({
-    ...obj,
-  });
+  redirectUris?: string[] | undefined;
+
+  /**
+   * <p>The list of OAuth 2.0 grant types that are defined by the client. This list is used to
+   *       restrict the token granting flows available to the client. Supports the following OAuth 2.0
+   *       grant types: Authorization Code, Device Code, and Refresh Token. </p>
+   *          <p>* Authorization Code - <code>authorization_code</code>
+   *          </p>
+   *          <p>* Device Code - <code>urn:ietf:params:oauth:grant-type:device_code</code>
+   *          </p>
+   *          <p>* Refresh Token - <code>refresh_token</code>
+   *          </p>
+   * @public
+   */
+  grantTypes?: string[] | undefined;
+
+  /**
+   * <p>The IAM Identity Center Issuer URL associated with an instance of IAM Identity Center. This value is needed for user
+   *       access to resources through the client.</p>
+   * @public
+   */
+  issuerUrl?: string | undefined;
+
+  /**
+   * <p>This IAM Identity Center application ARN is used to define administrator-managed configuration for
+   *       public client access to resources. At authorization, the scopes, grants, and redirect URI
+   *       available to this client will be restricted by this application resource.</p>
+   * @public
+   */
+  entitledApplicationArn?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RegisterClientResponse {
   /**
    * <p>The unique identifier string for each client. This client uses this identifier to get
    *       authenticated by the service in subsequent calls.</p>
+   * @public
    */
-  clientId?: string;
+  clientId?: string | undefined;
 
   /**
    * <p>A secret string generated for the client. The client will use this string to get
    *       authenticated by the service in subsequent calls.</p>
+   * @public
    */
-  clientSecret?: string;
+  clientSecret?: string | undefined;
 
   /**
-   * <p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were issued.</p>
+   * <p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were
+   *       issued.</p>
+   * @public
    */
-  clientIdIssuedAt?: number;
+  clientIdIssuedAt?: number | undefined;
 
   /**
-   * <p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will become invalid.</p>
+   * <p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will
+   *       become invalid.</p>
+   * @public
    */
-  clientSecretExpiresAt?: number;
+  clientSecretExpiresAt?: number | undefined;
 
   /**
-   * <p>The endpoint where the client can request authorization.</p>
+   * <p>An endpoint that the client can use to request authorization.</p>
+   * @public
    */
-  authorizationEndpoint?: string;
+  authorizationEndpoint?: string | undefined;
 
   /**
-   * <p>The endpoint where the client can get an access token.</p>
+   * <p>An endpoint that the client can use to create tokens.</p>
+   * @public
    */
-  tokenEndpoint?: string;
+  tokenEndpoint?: string | undefined;
 }
 
-export namespace RegisterClientResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterClientResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartDeviceAuthorizationRequest {
   /**
-   * <p>The unique identifier string for the client that is registered with AWS SSO. This value
+   * <p>The unique identifier string for the client that is registered with IAM Identity Center. This value
    *       should come from the persisted result of the <a>RegisterClient</a> API
    *       operation.</p>
+   * @public
    */
   clientId: string | undefined;
 
   /**
    * <p>A secret string that is generated for the client. This value should come from the
    *       persisted result of the <a>RegisterClient</a> API operation.</p>
+   * @public
    */
   clientSecret: string | undefined;
 
   /**
-   * <p>The URL for the AWS SSO user portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using
-   *         the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.</p>
+   * <p>The URL for the Amazon Web Services access portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using
+   *         the Amazon Web Services access portal</a> in the <i>IAM Identity Center User Guide</i>.</p>
+   * @public
    */
   startUrl: string | undefined;
 }
 
-export namespace StartDeviceAuthorizationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartDeviceAuthorizationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartDeviceAuthorizationResponse {
   /**
    * <p>The short-lived code that is used by the device when polling for a session token.</p>
+   * @public
    */
-  deviceCode?: string;
+  deviceCode?: string | undefined;
 
   /**
    * <p>A one-time user verification code. This is needed to authorize an in-use device.</p>
+   * @public
    */
-  userCode?: string;
+  userCode?: string | undefined;
 
   /**
-   * <p>The URI of the verification page that takes the <code>userCode</code> to authorize the device.</p>
+   * <p>The URI of the verification page that takes the <code>userCode</code> to authorize the
+   *       device.</p>
+   * @public
    */
-  verificationUri?: string;
+  verificationUri?: string | undefined;
 
   /**
    * <p>An alternate URL that the client can use to automatically launch a browser. This process
    *       skips the manual step in which the user visits the verification page and enters their
    *       code.</p>
+   * @public
    */
-  verificationUriComplete?: string;
+  verificationUriComplete?: string | undefined;
 
   /**
    * <p>Indicates the number of seconds in which the verification code will become invalid.</p>
+   * @public
    */
-  expiresIn?: number;
+  expiresIn?: number | undefined;
 
   /**
-   * <p>Indicates the number of seconds the client must wait between attempts when polling for a session.</p>
+   * <p>Indicates the number of seconds the client must wait between attempts when polling for a
+   *       session.</p>
+   * @public
    */
-  interval?: number;
-}
-
-export namespace StartDeviceAuthorizationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartDeviceAuthorizationResponse): any => ({
-    ...obj,
-  });
+  interval?: number | undefined;
 }

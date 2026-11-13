@@ -1,0 +1,66 @@
+{
+  "name": "@aws-sdk/aws-middleware-test",
+  "version": "3.1169.0",
+  "private": true,
+  "description": "Integration test suite for AWS middleware",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "AWS SDK for JavaScript Team",
+    "url": "https://aws.amazon.com/sdk-for-javascript/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws/aws-sdk-js-v3.git",
+    "directory": "private/aws-middleware-test"
+  },
+  "files": [
+    "dist-*/**"
+  ],
+  "sideEffects": false,
+  "main": "./dist-cjs/index.js",
+  "module": "./dist-es/index.js",
+  "types": "./dist-types/index.d.ts",
+  "typesVersions": {
+    "<4.5": {
+      "dist-types/*": [
+        "dist-types/ts3.4/*"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "exit 0",
+    "build:cjs": "exit 0",
+    "build:es": "exit 0",
+    "build:include:deps": "yarn g:turbo run build -F=\"$npm_package_name\"",
+    "build:types": "exit 0",
+    "build:types:downlevel": "exit 0",
+    "clean": "premove dist-cjs dist-es dist-types tsconfig.cjs.tsbuildinfo tsconfig.es.tsbuildinfo tsconfig.types.tsbuildinfo",
+    "test": "yarn g:vitest run",
+    "test:watch": "yarn g:vitest watch"
+  },
+  "dependencies": {
+    "@aws-sdk/client-accessanalyzer": "workspace:3.1169.0",
+    "@aws-sdk/client-ec2": "workspace:3.1169.0",
+    "@aws-sdk/client-lambda": "workspace:3.1169.0",
+    "@aws-sdk/client-s3": "workspace:3.1169.0",
+    "@aws-sdk/client-s3-control": "workspace:3.1169.0",
+    "@aws-sdk/client-sagemaker": "workspace:3.1169.0",
+    "@aws-sdk/client-sagemaker-runtime": "workspace:3.1169.0",
+    "@aws-sdk/client-xray": "workspace:3.1169.0",
+    "@smithy/protocol-http": "^5.6.2",
+    "@smithy/types": "^4.20.0",
+    "@smithy/util-stream": "^4.8.2",
+    "@smithy/util-utf8": "^4.5.2",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "20.1.8",
+    "@types/node": "^20.14.8",
+    "concurrently": "7.0.0",
+    "downlevel-dts": "0.10.1",
+    "typescript": "~7.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

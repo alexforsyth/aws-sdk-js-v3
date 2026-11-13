@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RegisterWorkflowTypeInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0RegisterWorkflowTypeCommand,
-  serializeAws_json1_0RegisterWorkflowTypeCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterWorkflowTypeInput } from "../models/models_0";
+import { RegisterWorkflowType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterWorkflowTypeCommand}.
+ */
 export interface RegisterWorkflowTypeCommandInput extends RegisterWorkflowTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterWorkflowTypeCommand}.
+ */
 export interface RegisterWorkflowTypeCommandOutput extends __MetadataBearer {}
 
 /**
@@ -75,68 +76,68 @@ export interface RegisterWorkflowTypeCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SWFClient, RegisterWorkflowTypeCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, RegisterWorkflowTypeCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // RegisterWorkflowTypeInput
+ *   domain: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   version: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   defaultTaskStartToCloseTimeout: "STRING_VALUE",
+ *   defaultExecutionStartToCloseTimeout: "STRING_VALUE",
+ *   defaultTaskList: { // TaskList
+ *     name: "STRING_VALUE", // required
+ *   },
+ *   defaultTaskPriority: "STRING_VALUE",
+ *   defaultChildPolicy: "TERMINATE" || "REQUEST_CANCEL" || "ABANDON",
+ *   defaultLambdaRole: "STRING_VALUE",
+ * };
  * const command = new RegisterWorkflowTypeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RegisterWorkflowTypeCommandInput - {@link RegisterWorkflowTypeCommandInput}
+ * @returns {@link RegisterWorkflowTypeCommandOutput}
  * @see {@link RegisterWorkflowTypeCommandInput} for command's `input` shape.
  * @see {@link RegisterWorkflowTypeCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link LimitExceededFault} (client fault)
+ *  <p>Returned by any operation if a system imposed limitation has been reached. To address this fault you should either clean up unused resources or increase the limit by contacting AWS.</p>
+ *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link TypeAlreadyExistsFault} (client fault)
+ *  <p>Returned if the type already exists in the specified domain. You may get this fault if you are registering a type that is either already registered or deprecated, or if you undeprecate a type that is currently registered.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterWorkflowTypeCommand extends $Command<
-  RegisterWorkflowTypeCommandInput,
-  RegisterWorkflowTypeCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterWorkflowTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterWorkflowTypeCommandInput, RegisterWorkflowTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "RegisterWorkflowTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterWorkflowTypeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RegisterWorkflowTypeCommand extends command<RegisterWorkflowTypeCommandInput, RegisterWorkflowTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterWorkflowType",
+  RegisterWorkflowType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterWorkflowTypeInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterWorkflowTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0RegisterWorkflowTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterWorkflowTypeCommandOutput> {
-    return deserializeAws_json1_0RegisterWorkflowTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterWorkflowTypeCommandInput;
+      output: RegisterWorkflowTypeCommandOutput;
+    };
+  };
 }

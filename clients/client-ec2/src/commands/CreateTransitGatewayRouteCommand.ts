@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateTransitGatewayRouteRequest, CreateTransitGatewayRouteResult } from "../models/models_1";
-import {
-  deserializeAws_ec2CreateTransitGatewayRouteCommand,
-  serializeAws_ec2CreateTransitGatewayRouteCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateTransitGatewayRouteRequest, CreateTransitGatewayRouteResult } from "../models/models_2";
+import { CreateTransitGatewayRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateTransitGatewayRouteCommand}.
+ */
 export interface CreateTransitGatewayRouteCommandInput extends CreateTransitGatewayRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateTransitGatewayRouteCommand}.
+ */
 export interface CreateTransitGatewayRouteCommandOutput extends CreateTransitGatewayRouteResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,64 @@ export interface CreateTransitGatewayRouteCommandOutput extends CreateTransitGat
  * ```javascript
  * import { EC2Client, CreateTransitGatewayRouteCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateTransitGatewayRouteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateTransitGatewayRouteRequest
+ *   DestinationCidrBlock: "STRING_VALUE", // required
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   TransitGatewayAttachmentId: "STRING_VALUE",
+ *   Blackhole: true || false,
+ *   DryRun: true || false,
+ * };
  * const command = new CreateTransitGatewayRouteCommand(input);
  * const response = await client.send(command);
+ * // { // CreateTransitGatewayRouteResult
+ * //   Route: { // TransitGatewayRoute
+ * //     DestinationCidrBlock: "STRING_VALUE",
+ * //     PrefixListId: "STRING_VALUE",
+ * //     TransitGatewayRouteTableAnnouncementId: "STRING_VALUE",
+ * //     TransitGatewayAttachments: [ // TransitGatewayRouteAttachmentList
+ * //       { // TransitGatewayRouteAttachment
+ * //         ResourceId: "STRING_VALUE",
+ * //         TransitGatewayAttachmentId: "STRING_VALUE",
+ * //         ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //       },
+ * //     ],
+ * //     Type: "static" || "propagated" || "system",
+ * //     State: "pending" || "active" || "blackhole" || "deleting" || "deleted",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateTransitGatewayRouteCommandInput - {@link CreateTransitGatewayRouteCommandInput}
+ * @returns {@link CreateTransitGatewayRouteCommandOutput}
  * @see {@link CreateTransitGatewayRouteCommandInput} for command's `input` shape.
  * @see {@link CreateTransitGatewayRouteCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateTransitGatewayRouteCommand extends $Command<
-  CreateTransitGatewayRouteCommandInput,
-  CreateTransitGatewayRouteCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateTransitGatewayRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateTransitGatewayRouteCommandInput, CreateTransitGatewayRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateTransitGatewayRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateTransitGatewayRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateTransitGatewayRouteResult.filterSensitiveLog,
+export class CreateTransitGatewayRouteCommand extends command<CreateTransitGatewayRouteCommandInput, CreateTransitGatewayRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateTransitGatewayRoute",
+  CreateTransitGatewayRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTransitGatewayRouteRequest;
+      output: CreateTransitGatewayRouteResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateTransitGatewayRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateTransitGatewayRouteCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateTransitGatewayRouteCommandOutput> {
-    return deserializeAws_ec2CreateTransitGatewayRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateTransitGatewayRouteCommandInput;
+      output: CreateTransitGatewayRouteCommandOutput;
+    };
+  };
 }

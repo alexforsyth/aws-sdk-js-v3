@@ -1,107 +1,131 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { BatchGetDeploymentInstancesInput, BatchGetDeploymentInstancesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetDeploymentInstancesCommand,
-  serializeAws_json1_1BatchGetDeploymentInstancesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetDeploymentInstancesInput, BatchGetDeploymentInstancesOutput } from "../models/models_0";
+import { BatchGetDeploymentInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetDeploymentInstancesCommand}.
+ */
 export interface BatchGetDeploymentInstancesCommandInput extends BatchGetDeploymentInstancesInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetDeploymentInstancesCommand}.
+ */
 export interface BatchGetDeploymentInstancesCommandOutput extends BatchGetDeploymentInstancesOutput, __MetadataBearer {}
 
 /**
- * @deprecated
- *
  * <note>
  *             <p> This method works, but is deprecated. Use <code>BatchGetDeploymentTargets</code>
  *                 instead. </p>
- *         </note>
- *         <p> Returns an array of one or more instances associated with a deployment. This method
- *             works with EC2/On-premises and AWS Lambda compute platforms. The newer
+ *          </note>
+ *          <p> Returns an array of one or more instances associated with a deployment. This method
+ *             works with EC2/On-premises and Lambda compute platforms. The newer
  *                 <code>BatchGetDeploymentTargets</code> works with all compute platforms. The maximum
  *             number of instances that can be returned is 25.</p>
+ *
+ * @deprecated This operation is deprecated, use BatchGetDeploymentTargets instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, BatchGetDeploymentInstancesCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, BatchGetDeploymentInstancesCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // BatchGetDeploymentInstancesInput
+ *   deploymentId: "STRING_VALUE", // required
+ *   instanceIds: [ // InstancesList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetDeploymentInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetDeploymentInstancesOutput
+ * //   instancesSummary: [ // InstanceSummaryList
+ * //     { // InstanceSummary
+ * //       deploymentId: "STRING_VALUE",
+ * //       instanceId: "STRING_VALUE",
+ * //       status: "Pending" || "InProgress" || "Succeeded" || "Failed" || "Skipped" || "Unknown" || "Ready",
+ * //       lastUpdatedAt: new Date("TIMESTAMP"),
+ * //       lifecycleEvents: [ // LifecycleEventList
+ * //         { // LifecycleEvent
+ * //           lifecycleEventName: "STRING_VALUE",
+ * //           diagnostics: { // Diagnostics
+ * //             errorCode: "Success" || "ScriptMissing" || "ScriptNotExecutable" || "ScriptTimedOut" || "ScriptFailed" || "UnknownError",
+ * //             scriptName: "STRING_VALUE",
+ * //             message: "STRING_VALUE",
+ * //             logTail: "STRING_VALUE",
+ * //           },
+ * //           startTime: new Date("TIMESTAMP"),
+ * //           endTime: new Date("TIMESTAMP"),
+ * //           status: "Pending" || "InProgress" || "Succeeded" || "Failed" || "Skipped" || "Unknown",
+ * //         },
+ * //       ],
+ * //       instanceType: "Blue" || "Green",
+ * //     },
+ * //   ],
+ * //   errorMessage: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param BatchGetDeploymentInstancesCommandInput - {@link BatchGetDeploymentInstancesCommandInput}
+ * @returns {@link BatchGetDeploymentInstancesCommandOutput}
  * @see {@link BatchGetDeploymentInstancesCommandInput} for command's `input` shape.
  * @see {@link BatchGetDeploymentInstancesCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link BatchLimitExceededException} (client fault)
+ *  <p>The maximum number of names or IDs allowed for this request (100) was exceeded.</p>
+ *
+ * @throws {@link DeploymentDoesNotExistException} (client fault)
+ *  <p>The deployment with the user or Amazon Web Services account does not exist.</p>
+ *
+ * @throws {@link DeploymentIdRequiredException} (client fault)
+ *  <p>At least one deployment ID must be specified.</p>
+ *
+ * @throws {@link InstanceIdRequiredException} (client fault)
+ *  <p>The instance ID was not specified.</p>
+ *
+ * @throws {@link InvalidComputePlatformException} (client fault)
+ *  <p>The computePlatform is invalid. The computePlatform should be <code>Lambda</code>, <code>Server</code>, or <code>ECS</code>.</p>
+ *
+ * @throws {@link InvalidDeploymentIdException} (client fault)
+ *  <p>At least one of the deployment IDs was specified in an invalid format.</p>
+ *
+ * @throws {@link InvalidInstanceNameException} (client fault)
+ *  <p>The on-premises instance name was specified in an invalid format.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetDeploymentInstancesCommand extends $Command<
-  BatchGetDeploymentInstancesCommandInput,
-  BatchGetDeploymentInstancesCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetDeploymentInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetDeploymentInstancesCommandInput, BatchGetDeploymentInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "BatchGetDeploymentInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetDeploymentInstancesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetDeploymentInstancesOutput.filterSensitiveLog,
+export class BatchGetDeploymentInstancesCommand extends command<BatchGetDeploymentInstancesCommandInput, BatchGetDeploymentInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetDeploymentInstances",
+  BatchGetDeploymentInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetDeploymentInstancesInput;
+      output: BatchGetDeploymentInstancesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetDeploymentInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetDeploymentInstancesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchGetDeploymentInstancesCommandOutput> {
-    return deserializeAws_json1_1BatchGetDeploymentInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetDeploymentInstancesCommandInput;
+      output: BatchGetDeploymentInstancesCommandOutput;
+    };
+  };
 }

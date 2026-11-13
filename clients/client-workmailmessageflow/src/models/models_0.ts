@@ -1,125 +1,26 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-import { Readable } from "stream";
+// smithy-typescript generated code
+import type { StreamingBlobTypes } from "@smithy/types";
 
+/**
+ * @public
+ */
 export interface GetRawMessageContentRequest {
   /**
    * <p>The identifier of the email message to retrieve.</p>
+   * @public
    */
   messageId: string | undefined;
 }
 
-export namespace GetRawMessageContentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRawMessageContentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRawMessageContentResponse {
   /**
    * <p>The raw content of the email message, in MIME format.</p>
+   * @public
    */
-  messageContent: Readable | ReadableStream | Blob | undefined;
-}
-
-export namespace GetRawMessageContentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRawMessageContentResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested email message is not found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>WorkMail could not access the updated email content. Possible reasons:</p>
- *          <ul>
- *             <li>
- *                <p>You made the request in a region other than your S3 bucket region.</p>
- *             </li>
- *             <li>
- *                <p>The <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-owner-condition.html">S3 bucket owner</a> is not the
- *         same as the calling AWS account.</p>
- *             </li>
- *             <li>
- *                <p>You have an incomplete or missing S3 bucket policy. For more information about policies, see
- *         <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html">
- *           Updating message content with AWS Lambda
- *         </a> in the <i>WorkMail Administrator
- *           Guide</i>.</p>
- *             </li>
- *          </ul>
- */
-export interface InvalidContentLocation extends __SmithyException, $MetadataBearer {
-  name: "InvalidContentLocation";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidContentLocation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidContentLocation): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested email is not eligible for update. This is usually the case for a redirected email.</p>
- */
-export interface MessageFrozen extends __SmithyException, $MetadataBearer {
-  name: "MessageFrozen";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace MessageFrozen {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MessageFrozen): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested email could not be updated due to an error in the MIME content. Check the error message for more information about
- *       what caused the error.</p>
- */
-export interface MessageRejected extends __SmithyException, $MetadataBearer {
-  name: "MessageRejected";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace MessageRejected {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MessageRejected): any => ({
-    ...obj,
-  });
+  messageContent: StreamingBlobTypes | undefined;
 }
 
 /**
@@ -130,31 +31,26 @@ export namespace MessageRejected {
  *       <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html">
  *         Updating message content with AWS Lambda</a>.</p>
  *          </note>
+ * @public
  */
 export interface S3Reference {
   /**
    * <p>The S3 bucket name.</p>
+   * @public
    */
   bucket: string | undefined;
 
   /**
    * <p>The S3 key object name.</p>
+   * @public
    */
   key: string | undefined;
 
   /**
    * <p>If you enable versioning for the bucket, you can specify the object version.</p>
+   * @public
    */
-  objectVersion?: string;
-}
-
-export namespace S3Reference {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Reference): any => ({
-    ...obj,
-  });
+  objectVersion?: string | undefined;
 }
 
 /**
@@ -185,51 +81,34 @@ export namespace S3Reference {
  *                <p>Certain unique headers can only appear once. Check the returned error message for more information.</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export interface RawMessageContent {
   /**
    * <p>The S3 reference of an email message.</p>
+   * @public
    */
   s3Reference: S3Reference | undefined;
 }
 
-export namespace RawMessageContent {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RawMessageContent): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutRawMessageContentRequest {
   /**
    * <p>The identifier of the email message being updated.</p>
+   * @public
    */
   messageId: string | undefined;
 
   /**
    * <p>Describes the raw message content of the updated email message.</p>
+   * @public
    */
   content: RawMessageContent | undefined;
 }
 
-export namespace PutRawMessageContentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutRawMessageContentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutRawMessageContentResponse {}
-
-export namespace PutRawMessageContentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutRawMessageContentResponse): any => ({
-    ...obj,
-  });
-}

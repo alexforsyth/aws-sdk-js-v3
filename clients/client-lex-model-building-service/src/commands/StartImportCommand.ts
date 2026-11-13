@@ -1,99 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { StartImportRequest, StartImportResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartImportCommand,
-  serializeAws_restJson1StartImportCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartImportRequest, StartImportResponse } from "../models/models_0";
+import { StartImport$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartImportCommand}.
+ */
 export interface StartImportCommandInput extends StartImportRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartImportCommand}.
+ */
 export interface StartImportCommandOutput extends StartImportResponse, __MetadataBearer {}
 
 /**
  * <p>Starts a job to import a resource to Amazon Lex.</p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, StartImportCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, StartImportCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // StartImportRequest
+ *   payload: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ *   resourceType: "BOT" || "INTENT" || "SLOT_TYPE", // required
+ *   mergeStrategy: "OVERWRITE_LATEST" || "FAIL_ON_CONFLICT", // required
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new StartImportCommand(input);
  * const response = await client.send(command);
+ * // { // StartImportResponse
+ * //   name: "STRING_VALUE",
+ * //   resourceType: "BOT" || "INTENT" || "SLOT_TYPE",
+ * //   mergeStrategy: "OVERWRITE_LATEST" || "FAIL_ON_CONFLICT",
+ * //   importId: "STRING_VALUE",
+ * //   importStatus: "IN_PROGRESS" || "COMPLETE" || "FAILED",
+ * //   tags: [ // TagList
+ * //     { // Tag
+ * //       key: "STRING_VALUE", // required
+ * //       value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   createdDate: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param StartImportCommandInput - {@link StartImportCommandInput}
+ * @returns {@link StartImportCommandOutput}
  * @see {@link StartImportCommandInput} for command's `input` shape.
  * @see {@link StartImportCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @public
  */
-export class StartImportCommand extends $Command<
-  StartImportCommandInput,
-  StartImportCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartImportCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartImportCommandInput, StartImportCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "StartImportCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartImportRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartImportResponse.filterSensitiveLog,
+export class StartImportCommand extends command<StartImportCommandInput, StartImportCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartImport",
+  StartImport$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartImportRequest;
+      output: StartImportResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartImportCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartImportCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartImportCommandOutput> {
-    return deserializeAws_restJson1StartImportCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartImportCommandInput;
+      output: StartImportCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { DescribeArchiveRequest, DescribeArchiveResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeArchiveCommand,
-  serializeAws_json1_1DescribeArchiveCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeArchiveRequest, DescribeArchiveResponse } from "../models/models_0";
+import { DescribeArchive$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeArchiveCommand}.
+ */
 export interface DescribeArchiveCommandInput extends DescribeArchiveRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeArchiveCommand}.
+ */
 export interface DescribeArchiveCommandOutput extends DescribeArchiveResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface DescribeArchiveCommandOutput extends DescribeArchiveResponse, _
  * ```javascript
  * import { CloudWatchEventsClient, DescribeArchiveCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, DescribeArchiveCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // DescribeArchiveRequest
+ *   ArchiveName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeArchiveCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeArchiveResponse
+ * //   ArchiveArn: "STRING_VALUE",
+ * //   ArchiveName: "STRING_VALUE",
+ * //   EventSourceArn: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   EventPattern: "STRING_VALUE",
+ * //   State: "ENABLED" || "DISABLED" || "CREATING" || "UPDATING" || "CREATE_FAILED" || "UPDATE_FAILED",
+ * //   StateReason: "STRING_VALUE",
+ * //   RetentionDays: Number("int"),
+ * //   SizeBytes: Number("long"),
+ * //   EventCount: Number("long"),
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeArchiveCommandInput - {@link DescribeArchiveCommandInput}
+ * @returns {@link DescribeArchiveCommandOutput}
  * @see {@link DescribeArchiveCommandInput} for command's `input` shape.
  * @see {@link DescribeArchiveCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource you are trying to create already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeArchiveCommand extends $Command<
-  DescribeArchiveCommandInput,
-  DescribeArchiveCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeArchiveCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeArchiveCommandInput, DescribeArchiveCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "DescribeArchiveCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeArchiveRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeArchiveResponse.filterSensitiveLog,
+export class DescribeArchiveCommand extends command<DescribeArchiveCommandInput, DescribeArchiveCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeArchive",
+  DescribeArchive$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeArchiveRequest;
+      output: DescribeArchiveResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeArchiveCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeArchiveCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeArchiveCommandOutput> {
-    return deserializeAws_json1_1DescribeArchiveCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeArchiveCommandInput;
+      output: DescribeArchiveCommandOutput;
+    };
+  };
 }

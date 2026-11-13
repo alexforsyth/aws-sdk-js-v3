@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { ListResolversByFunctionRequest, ListResolversByFunctionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListResolversByFunctionCommand,
-  serializeAws_restJson1ListResolversByFunctionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListResolversByFunctionRequest, ListResolversByFunctionResponse } from "../models/models_0";
+import { ListResolversByFunction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListResolversByFunctionCommand}.
+ */
 export interface ListResolversByFunctionCommandInput extends ListResolversByFunctionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListResolversByFunctionCommand}.
+ */
 export interface ListResolversByFunctionCommandOutput extends ListResolversByFunctionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,100 @@ export interface ListResolversByFunctionCommandOutput extends ListResolversByFun
  * ```javascript
  * import { AppSyncClient, ListResolversByFunctionCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, ListResolversByFunctionCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // ListResolversByFunctionRequest
+ *   apiId: "STRING_VALUE", // required
+ *   functionId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListResolversByFunctionCommand(input);
  * const response = await client.send(command);
+ * // { // ListResolversByFunctionResponse
+ * //   resolvers: [ // Resolvers
+ * //     { // Resolver
+ * //       typeName: "STRING_VALUE",
+ * //       fieldName: "STRING_VALUE",
+ * //       dataSourceName: "STRING_VALUE",
+ * //       resolverArn: "STRING_VALUE",
+ * //       requestMappingTemplate: "STRING_VALUE",
+ * //       responseMappingTemplate: "STRING_VALUE",
+ * //       kind: "UNIT" || "PIPELINE",
+ * //       pipelineConfig: { // PipelineConfig
+ * //         functions: [ // FunctionsIds
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       syncConfig: { // SyncConfig
+ * //         conflictHandler: "OPTIMISTIC_CONCURRENCY" || "LAMBDA" || "AUTOMERGE" || "NONE",
+ * //         conflictDetection: "VERSION" || "NONE",
+ * //         lambdaConflictHandlerConfig: { // LambdaConflictHandlerConfig
+ * //           lambdaConflictHandlerArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       cachingConfig: { // CachingConfig
+ * //         ttl: Number("long"), // required
+ * //         cachingKeys: [ // CachingKeys
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       maxBatchSize: Number("int"),
+ * //       runtime: { // AppSyncRuntime
+ * //         name: "APPSYNC_JS", // required
+ * //         runtimeVersion: "STRING_VALUE", // required
+ * //       },
+ * //       code: "STRING_VALUE",
+ * //       metricsConfig: "ENABLED" || "DISABLED",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListResolversByFunctionCommandInput - {@link ListResolversByFunctionCommandInput}
+ * @returns {@link ListResolversByFunctionCommandOutput}
  * @see {@link ListResolversByFunctionCommandInput} for command's `input` shape.
  * @see {@link ListResolversByFunctionCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class ListResolversByFunctionCommand extends $Command<
-  ListResolversByFunctionCommandInput,
-  ListResolversByFunctionCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListResolversByFunctionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListResolversByFunctionCommandInput, ListResolversByFunctionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "ListResolversByFunctionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListResolversByFunctionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListResolversByFunctionResponse.filterSensitiveLog,
+export class ListResolversByFunctionCommand extends command<ListResolversByFunctionCommandInput, ListResolversByFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListResolversByFunction",
+  ListResolversByFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResolversByFunctionRequest;
+      output: ListResolversByFunctionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListResolversByFunctionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListResolversByFunctionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListResolversByFunctionCommandOutput> {
-    return deserializeAws_restJson1ListResolversByFunctionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListResolversByFunctionCommandInput;
+      output: ListResolversByFunctionCommandOutput;
+    };
+  };
 }

@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetInstanceProfileCommand, GetInstanceProfileCommandInput } from "../commands/GetInstanceProfileCommand";
-import { IAMClient } from "../IAMClient";
+import {
+  type GetInstanceProfileCommandInput,
+  type GetInstanceProfileCommandOutput,
+  GetInstanceProfileCommand,
+} from "../commands/GetInstanceProfileCommand";
+import type { IAMClient } from "../IAMClient";
+import type { IAMServiceException } from "../models/IAMServiceException";
 
-const checkState = async (client: IAMClient, input: GetInstanceProfileCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: IAMClient, input: GetInstanceProfileCommandInput): Promise<WaiterResult<GetInstanceProfileCommandOutput | IAMServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetInstanceProfileCommand(input));
+    let result: GetInstanceProfileCommandOutput & any = await client.send(new GetInstanceProfileCommand(input));
     reason = result;
     return { state: WaiterState.SUCCESS, reason };
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "NoSuchEntityException") {
+    if (exception.name === "NoSuchEntityException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -24,7 +36,7 @@ const checkState = async (client: IAMClient, input: GetInstanceProfileCommandInp
 export const waitForInstanceProfileExists = async (
   params: WaiterConfiguration<IAMClient>,
   input: GetInstanceProfileCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetInstanceProfileCommandOutput | IAMServiceException>> => {
   const serviceDefaults = { minDelay: 1, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -36,8 +48,8 @@ export const waitForInstanceProfileExists = async (
 export const waitUntilInstanceProfileExists = async (
   params: WaiterConfiguration<IAMClient>,
   input: GetInstanceProfileCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetInstanceProfileCommandOutput>> => {
   const serviceDefaults = { minDelay: 1, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetInstanceProfileCommandOutput>;
 };

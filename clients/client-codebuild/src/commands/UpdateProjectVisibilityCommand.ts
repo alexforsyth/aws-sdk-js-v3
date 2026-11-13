@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { UpdateProjectVisibilityInput, UpdateProjectVisibilityOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateProjectVisibilityCommand,
-  serializeAws_json1_1UpdateProjectVisibilityCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateProjectVisibilityInput, UpdateProjectVisibilityOutput } from "../models/models_0";
+import { UpdateProjectVisibility$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateProjectVisibilityCommand}.
+ */
 export interface UpdateProjectVisibilityCommandInput extends UpdateProjectVisibilityInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateProjectVisibilityCommand}.
+ */
 export interface UpdateProjectVisibilityCommandOutput extends UpdateProjectVisibilityOutput, __MetadataBearer {}
 
 /**
@@ -39,8 +40,7 @@ export interface UpdateProjectVisibilityCommandOutput extends UpdateProjectVisib
  *             are:</p>
  *                   <ul>
  *                      <li>
- *                         <p>Do not store sensitive values, especially Amazon Web Services access key IDs and secret access
- *                 keys, in environment variables. We recommend that you use an Amazon EC2 Systems Manager Parameter Store
+ *                         <p>Do not store sensitive values in environment variables. We recommend that you use an Amazon EC2 Systems Manager Parameter Store
  *                 or Secrets Manager to store sensitive values.</p>
  *                      </li>
  *                      <li>
@@ -65,68 +65,57 @@ export interface UpdateProjectVisibilityCommandOutput extends UpdateProjectVisib
  * ```javascript
  * import { CodeBuildClient, UpdateProjectVisibilityCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, UpdateProjectVisibilityCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // UpdateProjectVisibilityInput
+ *   projectArn: "STRING_VALUE", // required
+ *   projectVisibility: "PUBLIC_READ" || "PRIVATE", // required
+ *   resourceAccessRole: "STRING_VALUE",
+ * };
  * const command = new UpdateProjectVisibilityCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateProjectVisibilityOutput
+ * //   projectArn: "STRING_VALUE",
+ * //   publicProjectAlias: "STRING_VALUE",
+ * //   projectVisibility: "PUBLIC_READ" || "PRIVATE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateProjectVisibilityCommandInput - {@link UpdateProjectVisibilityCommandInput}
+ * @returns {@link UpdateProjectVisibilityCommandOutput}
  * @see {@link UpdateProjectVisibilityCommandInput} for command's `input` shape.
  * @see {@link UpdateProjectVisibilityCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be found.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateProjectVisibilityCommand extends $Command<
-  UpdateProjectVisibilityCommandInput,
-  UpdateProjectVisibilityCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateProjectVisibilityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateProjectVisibilityCommandInput, UpdateProjectVisibilityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "UpdateProjectVisibilityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateProjectVisibilityInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateProjectVisibilityOutput.filterSensitiveLog,
+export class UpdateProjectVisibilityCommand extends command<UpdateProjectVisibilityCommandInput, UpdateProjectVisibilityCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateProjectVisibility",
+  UpdateProjectVisibility$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateProjectVisibilityInput;
+      output: UpdateProjectVisibilityOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateProjectVisibilityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateProjectVisibilityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateProjectVisibilityCommandOutput> {
-    return deserializeAws_json1_1UpdateProjectVisibilityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateProjectVisibilityCommandInput;
+      output: UpdateProjectVisibilityCommandOutput;
+    };
+  };
 }

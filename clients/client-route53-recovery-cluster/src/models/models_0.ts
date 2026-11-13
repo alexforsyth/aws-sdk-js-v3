@@ -1,322 +1,216 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { RoutingControlState } from "./enums";
 
 /**
- * <p>You don't have sufficient permissions to query the routing control state.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>There was a conflict with this request. Try again.</p>
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  /**
-   * Description of the ConflictException error
-   */
-  message: string | undefined;
-
-  /**
-   * Identifier of the resource in use
-   */
-  resourceId: string | undefined;
-
-  /**
-   * Type of the resource in use
-   */
-  resourceType: string | undefined;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The cluster endpoint isn't available. Try another cluster endpoint.</p>
- */
-export interface EndpointTemporarilyUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "EndpointTemporarilyUnavailableException";
-  $fault: "server";
-  message: string | undefined;
-}
-
-export namespace EndpointTemporarilyUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EndpointTemporarilyUnavailableException): any => ({
-    ...obj,
-  });
-}
-
 export interface GetRoutingControlStateRequest {
   /**
-   * <p>The Amazon Resource Number (ARN) for the routing control that you want to get the state for.</p>
+   * <p>The Amazon Resource Name (ARN) for the routing control that you want to get the state for.</p>
+   * @public
    */
   RoutingControlArn: string | undefined;
 }
 
-export namespace GetRoutingControlStateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRoutingControlStateRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum RoutingControlState {
-  Off = "Off",
-  On = "On",
-}
-
+/**
+ * @public
+ */
 export interface GetRoutingControlStateResponse {
   /**
-   * <p>The Amazon Resource Number (ARN) of the response.</p>
+   * <p>The Amazon Resource Name (ARN) of the response.</p>
+   * @public
    */
   RoutingControlArn: string | undefined;
 
   /**
    * <p>The state of the routing control.</p>
+   * @public
    */
-  RoutingControlState: RoutingControlState | string | undefined;
-}
-
-export namespace GetRoutingControlStateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRoutingControlStateResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>There was an unexpected error during processing of the request.</p>
- */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  message: string | undefined;
-  /**
-   * Advice to clients on when the call can be safely retried
-   */
-  retryAfterSeconds?: number;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request references a routing control that was not found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message: string | undefined;
-  /**
-   * Hypothetical resource identifier that was not found
-   */
-  resourceId: string | undefined;
+  RoutingControlState: RoutingControlState | undefined;
 
   /**
-   * Hypothetical resource type that was not found
+   * <p>The routing control name.</p>
+   * @public
    */
-  resourceType: string | undefined;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was denied because of request throttling.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  message: string | undefined;
-  /**
-   * Advice to clients on when the call can be safely retried
-   */
-  retryAfterSeconds?: number;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
+  RoutingControlName?: string | undefined;
 }
 
 /**
  * <p>There was a validation error on the request.</p>
+ * @public
  */
 export interface ValidationExceptionField {
   /**
    * <p>The field that had the validation exception.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>Information about the validation exception.</p>
+   * @public
    */
   message: string | undefined;
-}
-
-export namespace ValidationExceptionField {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationExceptionField): any => ({
-    ...obj,
-  });
-}
-
-export enum ValidationExceptionReason {
-  CANNOT_PARSE = "cannotParse",
-  FIELD_VALIDATION_FAILED = "fieldValidationFailed",
-  OTHER = "other",
-  UNKNOWN_OPERATION = "unknownOperation",
 }
 
 /**
- * <p>There was a validation error on the request.</p>
+ * @public
  */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  message: string | undefined;
+export interface ListRoutingControlsRequest {
   /**
-   * Reason the request failed validation
+   * <p>The Amazon Resource Name (ARN) of the control panel of the routing controls to list.</p>
+   * @public
    */
-  reason?: ValidationExceptionReason | string;
+  ControlPanelArn?: string | undefined;
 
   /**
-   * The fields that caused the error, if applicable
+   * <p>The token for the next set of results. You receive this token from a previous call.</p>
+   * @public
    */
-  fields?: ValidationExceptionField[];
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The number of routing controls objects that you want to return with this call. The default value is 500.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
 }
 
-export namespace ValidationException {
+/**
+ * <p>A routing control, which is a simple on/off switch that you
+ * 			can use to route traffic to cells. When a routing control state is set to ON, traffic flows to a cell. When
+ * 			the state is set to OFF, traffic does not flow. </p>
+ * @public
+ */
+export interface RoutingControl {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the control panel where the routing control is located.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
+  ControlPanelArn?: string | undefined;
+
+  /**
+   * <p>The name of the control panel where the routing control is located. Only ASCII characters are supported for control
+   * 		panel names.</p>
+   * @public
+   */
+  ControlPanelName?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the routing control.</p>
+   * @public
+   */
+  RoutingControlArn?: string | undefined;
+
+  /**
+   * <p>The name of the routing control.</p>
+   * @public
+   */
+  RoutingControlName?: string | undefined;
+
+  /**
+   * <p>The current state of the routing control. When a routing control state is set to ON, traffic flows to a cell. When
+   * 			the state is set to OFF, traffic does not flow. </p>
+   * @public
+   */
+  RoutingControlState?: RoutingControlState | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the routing control owner.</p>
+   * @public
+   */
+  Owner?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListRoutingControlsResponse {
+  /**
+   * <p>The list of routing controls.</p>
+   * @public
+   */
+  RoutingControls: RoutingControl[] | undefined;
+
+  /**
+   * <p>The token for the next set of results. You receive this token from a previous call.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateRoutingControlStateRequest {
   /**
-   * <p>The Amazon Resource Number (ARN) for the routing control that you want to update the state for.</p>
+   * <p>The Amazon Resource Name (ARN) for the routing control that you want to update the state for.</p>
+   * @public
    */
   RoutingControlArn: string | undefined;
 
   /**
-   * <p>The state of the routing control. You can set the value to be On or Off.</p>
+   * <p>The state of the routing control. You can set the value to ON or OFF.</p>
+   * @public
    */
-  RoutingControlState: RoutingControlState | string | undefined;
-}
+  RoutingControlState: RoutingControlState | undefined;
 
-export namespace UpdateRoutingControlStateRequest {
   /**
-   * @internal
+   * <p>The Amazon Resource Names (ARNs) for the safety rules that you want to override when you're updating the state of
+   * 			a routing control. You can override one safety rule or multiple safety rules by including one or more ARNs, separated
+   * 			by commas.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html">
+   * 			Override safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateRoutingControlStateRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface UpdateRoutingControlStateResponse {}
-
-export namespace UpdateRoutingControlStateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoutingControlStateResponse): any => ({
-    ...obj,
-  });
+  SafetyRulesToOverride?: string[] | undefined;
 }
 
 /**
- * <p>A routing control state.</p>
+ * @public
+ */
+export interface UpdateRoutingControlStateResponse {}
+
+/**
+ * <p>A routing control state entry.</p>
+ * @public
  */
 export interface UpdateRoutingControlStateEntry {
   /**
-   * <p>The Amazon Resource Number (ARN) for the routing control state entry.</p>
+   * <p>The Amazon Resource Name (ARN) for a routing control state entry.</p>
+   * @public
    */
   RoutingControlArn: string | undefined;
 
   /**
    * <p>The routing control state in a set of routing control state entries.</p>
+   * @public
    */
-  RoutingControlState: RoutingControlState | string | undefined;
+  RoutingControlState: RoutingControlState | undefined;
 }
 
-export namespace UpdateRoutingControlStateEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoutingControlStateEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRoutingControlStatesRequest {
   /**
    * <p>A set of routing control entries that you want to update.</p>
+   * @public
    */
   UpdateRoutingControlStateEntries: UpdateRoutingControlStateEntry[] | undefined;
-}
 
-export namespace UpdateRoutingControlStatesRequest {
   /**
-   * @internal
+   * <p>The Amazon Resource Names (ARNs) for the safety rules that you want to override when you're updating routing
+   * 			control states. You can override one safety rule or multiple safety rules by including one or more ARNs, separated
+   * 			by commas.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html">
+   * 			Override safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateRoutingControlStatesRequest): any => ({
-    ...obj,
-  });
+  SafetyRulesToOverride?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateRoutingControlStatesResponse {}
-
-export namespace UpdateRoutingControlStatesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoutingControlStatesResponse): any => ({
-    ...obj,
-  });
-}

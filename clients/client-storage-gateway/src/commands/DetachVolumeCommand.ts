@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetachVolumeInput, DetachVolumeOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DetachVolumeCommand,
-  serializeAws_json1_1DetachVolumeCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DetachVolumeInput, DetachVolumeOutput } from "../models/models_0";
+import { DetachVolume$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DetachVolumeCommand}.
+ */
 export interface DetachVolumeCommandInput extends DetachVolumeInput {}
+/**
+ * @public
+ *
+ * The output of {@link DetachVolumeCommand}.
+ */
 export interface DetachVolumeCommandOutput extends DetachVolumeOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +33,56 @@ export interface DetachVolumeCommandOutput extends DetachVolumeOutput, __Metadat
  * ```javascript
  * import { StorageGatewayClient, DetachVolumeCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DetachVolumeCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DetachVolumeInput
+ *   VolumeARN: "STRING_VALUE", // required
+ *   ForceDetach: true || false,
+ * };
  * const command = new DetachVolumeCommand(input);
  * const response = await client.send(command);
+ * // { // DetachVolumeOutput
+ * //   VolumeARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DetachVolumeCommandInput - {@link DetachVolumeCommandInput}
+ * @returns {@link DetachVolumeCommandOutput}
  * @see {@link DetachVolumeCommandInput} for command's `input` shape.
  * @see {@link DetachVolumeCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @public
  */
-export class DetachVolumeCommand extends $Command<
-  DetachVolumeCommandInput,
-  DetachVolumeCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DetachVolumeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DetachVolumeCommandInput, DetachVolumeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DetachVolumeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DetachVolumeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DetachVolumeOutput.filterSensitiveLog,
+export class DetachVolumeCommand extends command<DetachVolumeCommandInput, DetachVolumeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DetachVolume",
+  DetachVolume$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetachVolumeInput;
+      output: DetachVolumeOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DetachVolumeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DetachVolumeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DetachVolumeCommandOutput> {
-    return deserializeAws_json1_1DetachVolumeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DetachVolumeCommandInput;
+      output: DetachVolumeCommandOutput;
+    };
+  };
 }

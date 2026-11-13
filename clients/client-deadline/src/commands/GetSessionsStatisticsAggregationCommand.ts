@@ -1,0 +1,125 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetSessionsStatisticsAggregationRequest,
+  GetSessionsStatisticsAggregationResponse,
+} from "../models/models_1";
+import { GetSessionsStatisticsAggregation$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSessionsStatisticsAggregationCommand}.
+ */
+export interface GetSessionsStatisticsAggregationCommandInput extends GetSessionsStatisticsAggregationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSessionsStatisticsAggregationCommand}.
+ */
+export interface GetSessionsStatisticsAggregationCommandOutput extends GetSessionsStatisticsAggregationResponse, __MetadataBearer {}
+
+/**
+ * Gets a set of statistics for queues or farms. Before you can call the <code>GetSessionStatisticsAggregation</code> operation, you must first call the <code>StartSessionsStatisticsAggregation</code> operation. Statistics are available for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, GetSessionsStatisticsAggregationCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, GetSessionsStatisticsAggregationCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // GetSessionsStatisticsAggregationRequest
+ *   farmId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   aggregationId: "STRING_VALUE", // required
+ * };
+ * const command = new GetSessionsStatisticsAggregationCommand(input);
+ * const response = await client.send(command);
+ * // { // GetSessionsStatisticsAggregationResponse
+ * //   statistics: [ // StatisticsList
+ * //     { // Statistics
+ * //       queueId: "STRING_VALUE",
+ * //       fleetId: "STRING_VALUE",
+ * //       jobId: "STRING_VALUE",
+ * //       jobName: "STRING_VALUE",
+ * //       userId: "STRING_VALUE",
+ * //       usageType: "COMPUTE" || "LICENSE" || "PERSISTENT_VOLUME",
+ * //       licenseProduct: "STRING_VALUE",
+ * //       instanceType: "STRING_VALUE",
+ * //       count: Number("int"), // required
+ * //       costInUsd: { // Stats
+ * //         min: Number("double"),
+ * //         max: Number("double"),
+ * //         avg: Number("double"),
+ * //         sum: Number("double"),
+ * //       },
+ * //       runtimeInSeconds: {
+ * //         min: Number("double"),
+ * //         max: Number("double"),
+ * //         avg: Number("double"),
+ * //         sum: Number("double"),
+ * //       },
+ * //       aggregationStartTime: new Date("TIMESTAMP"),
+ * //       aggregationEndTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   status: "IN_PROGRESS" || "TIMEOUT" || "FAILED" || "COMPLETED", // required
+ * //   statusMessage: "STRING_VALUE",
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetSessionsStatisticsAggregationCommandInput - {@link GetSessionsStatisticsAggregationCommandInput}
+ * @returns {@link GetSessionsStatisticsAggregationCommandOutput}
+ * @see {@link GetSessionsStatisticsAggregationCommandInput} for command's `input` shape.
+ * @see {@link GetSessionsStatisticsAggregationCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class GetSessionsStatisticsAggregationCommand extends command<GetSessionsStatisticsAggregationCommandInput, GetSessionsStatisticsAggregationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSessionsStatisticsAggregation",
+  GetSessionsStatisticsAggregation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSessionsStatisticsAggregationRequest;
+      output: GetSessionsStatisticsAggregationResponse;
+    };
+    sdk: {
+      input: GetSessionsStatisticsAggregationCommandInput;
+      output: GetSessionsStatisticsAggregationCommandOutput;
+    };
+  };
+}

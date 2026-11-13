@@ -1,30 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeReplicationTasksCommandInput,
+  type DescribeReplicationTasksCommandOutput,
   DescribeReplicationTasksCommand,
-  DescribeReplicationTasksCommandInput,
 } from "../commands/DescribeReplicationTasksCommand";
-import { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
+import type { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
+import type { DatabaseMigrationServiceServiceException } from "../models/DatabaseMigrationServiceServiceException";
 
-const checkState = async (
-  client: DatabaseMigrationServiceClient,
-  input: DescribeReplicationTasksCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: DatabaseMigrationServiceClient, input: DescribeReplicationTasksCommandInput): Promise<WaiterResult<DescribeReplicationTasksCommandOutput | DatabaseMigrationServiceServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeReplicationTasksCommand(input));
+    let result: DescribeReplicationTasksCommandOutput & any = await client.send(new DescribeReplicationTasksCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "stopped";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "stopped")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -32,13 +38,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "ready") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -46,13 +52,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "creating") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -60,13 +66,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "starting") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -74,13 +80,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "failed") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -88,13 +94,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "modifying") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -102,13 +108,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "testing") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -116,13 +122,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.ReplicationTasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.ReplicationTasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleting") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -140,7 +146,7 @@ const checkState = async (
 export const waitForReplicationTaskStopped = async (
   params: WaiterConfiguration<DatabaseMigrationServiceClient>,
   input: DescribeReplicationTasksCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeReplicationTasksCommandOutput | DatabaseMigrationServiceServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -152,8 +158,8 @@ export const waitForReplicationTaskStopped = async (
 export const waitUntilReplicationTaskStopped = async (
   params: WaiterConfiguration<DatabaseMigrationServiceClient>,
   input: DescribeReplicationTasksCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeReplicationTasksCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeReplicationTasksCommandOutput>;
 };

@@ -1,4 +1,7 @@
+// smithy-typescript generated code
 export * from "./waitForChangeSetCreateComplete";
+export * from "./waitForStackRefactorCreateComplete";
+export * from "./waitForStackRefactorExecuteComplete";
 export * from "./waitForStackCreateComplete";
 export * from "./waitForStackDeleteComplete";
 export * from "./waitForStackExists";

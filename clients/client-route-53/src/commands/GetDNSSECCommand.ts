@@ -1,94 +1,108 @@
-import { getIdNormalizerPlugin } from "@aws-sdk/middleware-sdk-route53";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetDNSSECRequest, GetDNSSECResponse } from "../models/models_0";
-import { deserializeAws_restXmlGetDNSSECCommand, serializeAws_restXmlGetDNSSECCommand } from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDNSSECRequest, GetDNSSECResponse } from "../models/models_0";
+import { GetDNSSEC$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDNSSECCommand}.
+ */
 export interface GetDNSSECCommandInput extends GetDNSSECRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDNSSECCommand}.
+ */
 export interface GetDNSSECCommandOutput extends GetDNSSECResponse, __MetadataBearer {}
 
 /**
- * <p>Returns information about DNSSEC for a specific hosted zone, including the key-signing keys (KSKs) in the hosted zone.</p>
+ * <p>Returns information about DNSSEC for a specific hosted zone, including the key-signing
+ * 			keys (KSKs) in the hosted zone.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53Client, GetDNSSECCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, GetDNSSECCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = { // GetDNSSECRequest
+ *   HostedZoneId: "STRING_VALUE", // required
+ * };
  * const command = new GetDNSSECCommand(input);
  * const response = await client.send(command);
+ * // { // GetDNSSECResponse
+ * //   Status: { // DNSSECStatus
+ * //     ServeSignature: "STRING_VALUE",
+ * //     StatusMessage: "STRING_VALUE",
+ * //   },
+ * //   KeySigningKeys: [ // KeySigningKeys // required
+ * //     { // KeySigningKey
+ * //       Name: "STRING_VALUE",
+ * //       KmsArn: "STRING_VALUE",
+ * //       Flag: Number("int"),
+ * //       SigningAlgorithmMnemonic: "STRING_VALUE",
+ * //       SigningAlgorithmType: Number("int"),
+ * //       DigestAlgorithmMnemonic: "STRING_VALUE",
+ * //       DigestAlgorithmType: Number("int"),
+ * //       KeyTag: Number("int"),
+ * //       DigestValue: "STRING_VALUE",
+ * //       PublicKey: "STRING_VALUE",
+ * //       DSRecord: "STRING_VALUE",
+ * //       DNSKEYRecord: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetDNSSECCommandInput - {@link GetDNSSECCommandInput}
+ * @returns {@link GetDNSSECCommandOutput}
  * @see {@link GetDNSSECCommandInput} for command's `input` shape.
  * @see {@link GetDNSSECCommandOutput} for command's `response` shape.
- * @see {@link Route53ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>Parameter name is not valid.</p>
+ *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link NoSuchHostedZone} (client fault)
+ *  <p>No hosted zone exists with the ID that you specified.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class GetDNSSECCommand extends $Command<
-  GetDNSSECCommandInput,
-  GetDNSSECCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDNSSECCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDNSSECCommandInput, GetDNSSECCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getIdNormalizerPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "GetDNSSECCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDNSSECRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDNSSECResponse.filterSensitiveLog,
+export class GetDNSSECCommand extends command<GetDNSSECCommandInput, GetDNSSECCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDNSSEC",
+  GetDNSSEC$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDNSSECRequest;
+      output: GetDNSSECResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDNSSECCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetDNSSECCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDNSSECCommandOutput> {
-    return deserializeAws_restXmlGetDNSSECCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDNSSECCommandInput;
+      output: GetDNSSECCommandOutput;
+    };
+  };
 }

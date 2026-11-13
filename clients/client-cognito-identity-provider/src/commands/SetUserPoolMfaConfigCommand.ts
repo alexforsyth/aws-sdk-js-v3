@@ -1,118 +1,203 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { SetUserPoolMfaConfigRequest, SetUserPoolMfaConfigResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SetUserPoolMfaConfigCommand,
-  serializeAws_json1_1SetUserPoolMfaConfigCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetUserPoolMfaConfigRequest, SetUserPoolMfaConfigResponse } from "../models/models_1";
+import { SetUserPoolMfaConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetUserPoolMfaConfigCommand}.
+ */
 export interface SetUserPoolMfaConfigCommandInput extends SetUserPoolMfaConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SetUserPoolMfaConfigCommand}.
+ */
 export interface SetUserPoolMfaConfigCommandOutput extends SetUserPoolMfaConfigResponse, __MetadataBearer {}
 
 /**
- * <p>Set the user pool multi-factor authentication (MFA) configuration.</p>
- *
- *         <note>
- *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
- *                 telecom carriers require that you register an origination phone number before you can
- *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
- *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
- *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
- *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
- *                 in.</p>
- *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
+ * <p>Sets user pool multi-factor authentication (MFA) and passkey configuration. For more
+ *             information about user pool MFA, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html">Adding MFA</a>. For more information about WebAuthn passkeys see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html#amazon-cognito-user-pools-authentication-flow-methods-passkey">Authentication flows</a>.</p>
+ *          <note>
+ *             <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers
+ *             require you to register an origination phone number before you can send SMS messages
+ *             to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a
+ *             phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
+ *             Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must
+ *             receive SMS messages might not be able to sign up, activate their accounts, or sign
+ *             in.</p>
+ *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Services service,
+ *             Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>
  *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
  *                     mode</a>
- *                </i>, you’ll have limitations, such as sending messages
- *                 to only verified phone numbers. After testing in the sandbox environment, you can
- *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
- *                         Cognito Developer Guide</i>. </p>
- *         </note>
+ *                </i>, you can send messages only to verified phone
+ *             numbers. After you test your app while in the sandbox environment, you can move out
+ *             of the sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito
+ *                 Developer Guide</i>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, SetUserPoolMfaConfigCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, SetUserPoolMfaConfigCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // SetUserPoolMfaConfigRequest
+ *   UserPoolId: "STRING_VALUE", // required
+ *   SmsMfaConfiguration: { // SmsMfaConfigType
+ *     SmsAuthenticationMessage: "STRING_VALUE",
+ *     SmsConfiguration: { // SmsConfigurationType
+ *       SnsCallerArn: "STRING_VALUE",
+ *       ExternalId: "STRING_VALUE",
+ *       SnsRegion: "STRING_VALUE",
+ *       EumsSms: { // EumsSmsConfigurationType
+ *         CallerArn: "STRING_VALUE", // required
+ *         ExternalId: "STRING_VALUE",
+ *         OriginationIdentity: "STRING_VALUE",
+ *         ConfigurationSetName: "STRING_VALUE",
+ *         InEntityId: "STRING_VALUE",
+ *         InTemplateId: "STRING_VALUE",
+ *         Region: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   SoftwareTokenMfaConfiguration: { // SoftwareTokenMfaConfigType
+ *     Enabled: true || false,
+ *   },
+ *   EmailMfaConfiguration: { // EmailMfaConfigType
+ *     Message: "STRING_VALUE",
+ *     Subject: "STRING_VALUE",
+ *   },
+ *   MfaConfiguration: "OFF" || "ON" || "OPTIONAL",
+ *   WebAuthnConfiguration: { // WebAuthnConfigurationType
+ *     RelyingPartyId: "STRING_VALUE",
+ *     UserVerification: "required" || "preferred",
+ *     FactorConfiguration: "SINGLE_FACTOR" || "MULTI_FACTOR_WITH_USER_VERIFICATION",
+ *   },
+ * };
  * const command = new SetUserPoolMfaConfigCommand(input);
  * const response = await client.send(command);
+ * // { // SetUserPoolMfaConfigResponse
+ * //   SmsMfaConfiguration: { // SmsMfaConfigType
+ * //     SmsAuthenticationMessage: "STRING_VALUE",
+ * //     SmsConfiguration: { // SmsConfigurationType
+ * //       SnsCallerArn: "STRING_VALUE",
+ * //       ExternalId: "STRING_VALUE",
+ * //       SnsRegion: "STRING_VALUE",
+ * //       EumsSms: { // EumsSmsConfigurationType
+ * //         CallerArn: "STRING_VALUE", // required
+ * //         ExternalId: "STRING_VALUE",
+ * //         OriginationIdentity: "STRING_VALUE",
+ * //         ConfigurationSetName: "STRING_VALUE",
+ * //         InEntityId: "STRING_VALUE",
+ * //         InTemplateId: "STRING_VALUE",
+ * //         Region: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * //   SoftwareTokenMfaConfiguration: { // SoftwareTokenMfaConfigType
+ * //     Enabled: true || false,
+ * //   },
+ * //   EmailMfaConfiguration: { // EmailMfaConfigType
+ * //     Message: "STRING_VALUE",
+ * //     Subject: "STRING_VALUE",
+ * //   },
+ * //   MfaConfiguration: "OFF" || "ON" || "OPTIONAL",
+ * //   WebAuthnConfiguration: { // WebAuthnConfigurationType
+ * //     RelyingPartyId: "STRING_VALUE",
+ * //     UserVerification: "required" || "preferred",
+ * //     FactorConfiguration: "SINGLE_FACTOR" || "MULTI_FACTOR_WITH_USER_VERIFICATION",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param SetUserPoolMfaConfigCommandInput - {@link SetUserPoolMfaConfigCommandInput}
+ * @returns {@link SetUserPoolMfaConfigCommandOutput}
  * @see {@link SetUserPoolMfaConfigCommandInput} for command's `input` shape.
  * @see {@link SetUserPoolMfaConfigCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>This exception is thrown if two or more modifications are happening
+ *             concurrently.</p>
+ *
+ * @throws {@link FeatureUnavailableInTierException} (client fault)
+ *  <p>This exception is thrown when a feature that you attempted to use or configure
+ *             isn't included in your user pool's current feature plan. This can occur
+ *             when:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You configure a feature that your feature plan doesn't support.</p>
+ *             </li>
+ *             <li>
+ *                <p>You make a request that uses a feature that requires a higher feature
+ *                     plan.</p>
+ *             </li>
+ *          </ul>
+ *          <p>To resolve this issue, upgrade your user pool to a feature plan that includes the
+ *             feature.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link InvalidSmsRoleAccessPolicyException} (client fault)
+ *  <p>This exception is returned when the role provided for SMS configuration doesn't have
+ *             permission to publish using Amazon SNS.</p>
+ *
+ * @throws {@link InvalidSmsRoleTrustRelationshipException} (client fault)
+ *  <p>This exception is thrown when the trust relationship is not valid for the role
+ *             provided for SMS configuration. This can happen if you don't trust
+ *                 <code>cognito-idp.amazonaws.com</code> or the external ID provided in the role does
+ *             not match what is provided in the SMS configuration for the user pool.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>This exception is thrown when the user has made too many requests for a given
+ *             operation.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class SetUserPoolMfaConfigCommand extends $Command<
-  SetUserPoolMfaConfigCommandInput,
-  SetUserPoolMfaConfigCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetUserPoolMfaConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetUserPoolMfaConfigCommandInput, SetUserPoolMfaConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "SetUserPoolMfaConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetUserPoolMfaConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SetUserPoolMfaConfigResponse.filterSensitiveLog,
+export class SetUserPoolMfaConfigCommand extends command<SetUserPoolMfaConfigCommandInput, SetUserPoolMfaConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetUserPoolMfaConfig",
+  SetUserPoolMfaConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetUserPoolMfaConfigRequest;
+      output: SetUserPoolMfaConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetUserPoolMfaConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SetUserPoolMfaConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetUserPoolMfaConfigCommandOutput> {
-    return deserializeAws_json1_1SetUserPoolMfaConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetUserPoolMfaConfigCommandInput;
+      output: SetUserPoolMfaConfigCommandOutput;
+    };
+  };
 }

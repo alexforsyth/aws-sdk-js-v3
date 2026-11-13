@@ -1,97 +1,137 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HealthLakeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../HealthLakeClient";
-import { ListFHIRImportJobsRequest, ListFHIRImportJobsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListFHIRImportJobsCommand,
-  serializeAws_json1_0ListFHIRImportJobsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFHIRImportJobsRequest, ListFHIRImportJobsResponse } from "../models/models_0";
+import { ListFHIRImportJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFHIRImportJobsCommand}.
+ */
 export interface ListFHIRImportJobsCommandInput extends ListFHIRImportJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFHIRImportJobsCommand}.
+ */
 export interface ListFHIRImportJobsCommandOutput extends ListFHIRImportJobsResponse, __MetadataBearer {}
 
 /**
- * <p>
- *             Lists all FHIR import jobs associated with an account and their statuses.
- *          </p>
+ * <p>List all FHIR import jobs associated with an account and their statuses.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { HealthLakeClient, ListFHIRImportJobsCommand } from "@aws-sdk/client-healthlake"; // ES Modules import
  * // const { HealthLakeClient, ListFHIRImportJobsCommand } = require("@aws-sdk/client-healthlake"); // CommonJS import
+ * // import type { HealthLakeClientConfig } from "@aws-sdk/client-healthlake";
+ * const config = {}; // type is HealthLakeClientConfig
  * const client = new HealthLakeClient(config);
+ * const input = { // ListFHIRImportJobsRequest
+ *   DatastoreId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   JobName: "STRING_VALUE",
+ *   JobStatus: "SUBMITTED" || "QUEUED" || "IN_PROGRESS" || "COMPLETED_WITH_ERRORS" || "COMPLETED" || "FAILED" || "CANCEL_SUBMITTED" || "CANCEL_IN_PROGRESS" || "CANCEL_COMPLETED" || "CANCEL_FAILED",
+ *   SubmittedBefore: new Date("TIMESTAMP"),
+ *   SubmittedAfter: new Date("TIMESTAMP"),
+ * };
  * const command = new ListFHIRImportJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFHIRImportJobsResponse
+ * //   ImportJobPropertiesList: [ // ImportJobPropertiesList // required
+ * //     { // ImportJobProperties
+ * //       JobId: "STRING_VALUE", // required
+ * //       JobName: "STRING_VALUE",
+ * //       JobStatus: "SUBMITTED" || "QUEUED" || "IN_PROGRESS" || "COMPLETED_WITH_ERRORS" || "COMPLETED" || "FAILED" || "CANCEL_SUBMITTED" || "CANCEL_IN_PROGRESS" || "CANCEL_COMPLETED" || "CANCEL_FAILED", // required
+ * //       SubmitTime: new Date("TIMESTAMP"), // required
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       DatastoreId: "STRING_VALUE", // required
+ * //       InputDataConfig: { // InputDataConfig Union: only one key present
+ * //         S3Uri: "STRING_VALUE",
+ * //       },
+ * //       JobOutputDataConfig: { // OutputDataConfig Union: only one key present
+ * //         S3Configuration: { // S3Configuration
+ * //           S3Uri: "STRING_VALUE", // required
+ * //           KmsKeyId: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //       JobProgressReport: { // JobProgressReport
+ * //         TotalNumberOfScannedFiles: Number("long"),
+ * //         TotalSizeOfScannedFilesInMB: Number("double"),
+ * //         TotalNumberOfImportedFiles: Number("long"),
+ * //         TotalNumberOfResourcesScanned: Number("long"),
+ * //         TotalNumberOfResourcesImported: Number("long"),
+ * //         TotalNumberOfResourcesWithCustomerError: Number("long"),
+ * //         TotalNumberOfFilesReadWithCustomerError: Number("long"),
+ * //         TotalNumberOfScannedNonFhirFiles: Number("long"),
+ * //         TotalSizeOfScannedNonFhirFilesInMB: Number("double"),
+ * //         TotalNumberOfImportedNonFhirFiles: Number("long"),
+ * //         TotalNumberOfNonFhirResourcesScanned: Number("long"),
+ * //         TotalNumberOfNonFhirResourcesImported: Number("long"),
+ * //         TotalNumberOfNonFhirResourcesWithCustomerError: Number("long"),
+ * //         TotalNumberOfNonFhirFilesReadWithCustomerError: Number("long"),
+ * //         Throughput: Number("double"),
+ * //         TotalFilesConverted: Number("long"),
+ * //         TotalResourcesGenerated: Number("long"),
+ * //       },
+ * //       DataAccessRoleArn: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       ValidationLevel: "strict" || "structure-only" || "minimal",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFHIRImportJobsCommandInput - {@link ListFHIRImportJobsCommandInput}
+ * @returns {@link ListFHIRImportJobsCommandOutput}
  * @see {@link ListFHIRImportJobsCommandInput} for command's `input` shape.
  * @see {@link ListFHIRImportJobsCommandOutput} for command's `response` shape.
- * @see {@link HealthLakeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link HealthLakeClientResolvedConfig | config} for HealthLakeClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied. Your account is not authorized to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred in the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested data store was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The user has exceeded their maximum number of allowed calls to the given API. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input parameter was invalid.</p>
+ *
+ * @throws {@link HealthLakeServiceException}
+ * <p>Base exception class for all service exceptions from HealthLake service.</p>
+ *
+ *
+ * @public
  */
-export class ListFHIRImportJobsCommand extends $Command<
-  ListFHIRImportJobsCommandInput,
-  ListFHIRImportJobsCommandOutput,
-  HealthLakeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFHIRImportJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: HealthLakeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFHIRImportJobsCommandInput, ListFHIRImportJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "HealthLakeClient";
-    const commandName = "ListFHIRImportJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFHIRImportJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFHIRImportJobsResponse.filterSensitiveLog,
+export class ListFHIRImportJobsCommand extends command<ListFHIRImportJobsCommandInput, ListFHIRImportJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFHIRImportJobs",
+  ListFHIRImportJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFHIRImportJobsRequest;
+      output: ListFHIRImportJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFHIRImportJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListFHIRImportJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFHIRImportJobsCommandOutput> {
-    return deserializeAws_json1_0ListFHIRImportJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFHIRImportJobsCommandInput;
+      output: ListFHIRImportJobsCommandOutput;
+    };
+  };
 }

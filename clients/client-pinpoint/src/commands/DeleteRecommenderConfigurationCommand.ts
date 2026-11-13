@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteRecommenderConfigurationRequest, DeleteRecommenderConfigurationResponse } from "../models/models_0";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1DeleteRecommenderConfigurationCommand,
-  serializeAws_restJson1DeleteRecommenderConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRecommenderConfigurationRequest, DeleteRecommenderConfigurationResponse } from "../models/models_0";
+import { DeleteRecommenderConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRecommenderConfigurationCommand}.
+ */
 export interface DeleteRecommenderConfigurationCommandInput extends DeleteRecommenderConfigurationRequest {}
-export interface DeleteRecommenderConfigurationCommandOutput
-  extends DeleteRecommenderConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRecommenderConfigurationCommand}.
+ */
+export interface DeleteRecommenderConfigurationCommandOutput extends DeleteRecommenderConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes an Amazon Pinpoint configuration for a recommender model.</p>
@@ -30,74 +29,83 @@ export interface DeleteRecommenderConfigurationCommandOutput
  * ```javascript
  * import { PinpointClient, DeleteRecommenderConfigurationCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, DeleteRecommenderConfigurationCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // DeleteRecommenderConfigurationRequest
+ *   RecommenderId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRecommenderConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRecommenderConfigurationResponse
+ * //   RecommenderConfigurationResponse: { // RecommenderConfigurationResponse
+ * //     Attributes: { // MapOf__string
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     CreationDate: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     Id: "STRING_VALUE", // required
+ * //     LastModifiedDate: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     RecommendationProviderIdType: "STRING_VALUE",
+ * //     RecommendationProviderRoleArn: "STRING_VALUE", // required
+ * //     RecommendationProviderUri: "STRING_VALUE", // required
+ * //     RecommendationTransformerUri: "STRING_VALUE",
+ * //     RecommendationsDisplayName: "STRING_VALUE",
+ * //     RecommendationsPerMessage: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteRecommenderConfigurationCommandInput - {@link DeleteRecommenderConfigurationCommandInput}
+ * @returns {@link DeleteRecommenderConfigurationCommandOutput}
  * @see {@link DeleteRecommenderConfigurationCommandInput} for command's `input` shape.
  * @see {@link DeleteRecommenderConfigurationCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRecommenderConfigurationCommand extends $Command<
-  DeleteRecommenderConfigurationCommandInput,
-  DeleteRecommenderConfigurationCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRecommenderConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRecommenderConfigurationCommandInput, DeleteRecommenderConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "DeleteRecommenderConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRecommenderConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRecommenderConfigurationResponse.filterSensitiveLog,
+export class DeleteRecommenderConfigurationCommand extends command<DeleteRecommenderConfigurationCommandInput, DeleteRecommenderConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRecommenderConfiguration",
+  DeleteRecommenderConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRecommenderConfigurationRequest;
+      output: DeleteRecommenderConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteRecommenderConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteRecommenderConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteRecommenderConfigurationCommandOutput> {
-    return deserializeAws_restJson1DeleteRecommenderConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRecommenderConfigurationCommandInput;
+      output: DeleteRecommenderConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,89 +1,59 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-/**
- * <p>You do not have sufficient access to perform this action.</p>
- */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-export enum ApplicationStatus {
-  COMPLETED = "COMPLETED",
-  IN_PROGRESS = "IN_PROGRESS",
-  NOT_STARTED = "NOT_STARTED",
-}
+// smithy-typescript generated code
+import type { ApplicationStatus, ResourceAttributeType, Status, UpdateType } from "./enums";
 
 /**
  * <p>The state of an application discovered through Migration Hub import, the AWS Agentless
  *          Discovery Connector, or the AWS Application Discovery Agent.</p>
+ * @public
  */
 export interface ApplicationState {
   /**
    * <p>The configurationId from the Application Discovery Service that uniquely identifies an
    *          application.</p>
+   * @public
    */
-  ApplicationId?: string;
+  ApplicationId?: string | undefined;
 
   /**
    * <p>The current status of an application.</p>
+   * @public
    */
-  ApplicationStatus?: ApplicationStatus | string;
+  ApplicationStatus?: ApplicationStatus | undefined;
 
   /**
    * <p>The timestamp when the application status was last updated.</p>
+   * @public
    */
-  LastUpdatedTime?: Date;
-}
-
-export namespace ApplicationState {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationState): any => ({
-    ...obj,
-  });
+  LastUpdatedTime?: Date | undefined;
 }
 
 /**
  * <p>An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
  *          instance, RDS instance, etc.).</p>
+ * @public
  */
 export interface CreatedArtifact {
   /**
    * <p>An ARN that uniquely identifies the result of a migration task.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>A description that can be free-form text to record additional detail about the artifact
    *          for clarity or for later reference.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace CreatedArtifact {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatedArtifact): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateCreatedArtifactRequest {
   /**
    * <p>The name of the ProgressUpdateStream. </p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -91,230 +61,57 @@ export interface AssociateCreatedArtifactRequest {
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
   /**
    * <p>An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS
    *          instance, etc.) </p>
+   * @public
    */
   CreatedArtifact: CreatedArtifact | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace AssociateCreatedArtifactRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateCreatedArtifactRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateCreatedArtifactResult {}
-
-export namespace AssociateCreatedArtifactResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateCreatedArtifactResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception raised to indicate a successfully authorized action when the
- *             <code>DryRun</code> flag is set to "true".</p>
- */
-export interface DryRunOperation extends __SmithyException, $MetadataBearer {
-  name: "DryRunOperation";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace DryRunOperation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DryRunOperation): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The home region is not set. Set the home region to continue.</p>
- */
-export interface HomeRegionNotSetException extends __SmithyException, $MetadataBearer {
-  name: "HomeRegionNotSetException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace HomeRegionNotSetException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HomeRegionNotSetException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception raised when an internal, configuration, or dependency error is
- *          encountered.</p>
- */
-export interface InternalServerError extends __SmithyException, $MetadataBearer {
-  name: "InternalServerError";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServerError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception raised when the provided input violates a policy constraint or is entered in
- *          the wrong format or data type.</p>
- */
-export interface InvalidInputException extends __SmithyException, $MetadataBearer {
-  name: "InvalidInputException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidInputException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidInputException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception raised when the request references a resource (Application Discovery Service
- *          configuration, update stream, migration task, etc.) that does not exist in Application
- *          Discovery Service (Application Discovery Service) or in Migration Hub's repository.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception raised when there is an internal, configuration, or dependency error
- *          encountered.</p>
- */
-export interface ServiceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ServiceUnavailableException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace ServiceUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was denied due to request throttling.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  /**
-   * <p>A message that provides information about the exception.</p>
-   */
-  Message: string | undefined;
-
-  /**
-   * <p>The number of seconds the caller should wait before retrying.</p>
-   */
-  RetryAfterSeconds?: number;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception raised to indicate a request was not authorized when the <code>DryRun</code>
- *          flag is set to "true".</p>
- */
-export interface UnauthorizedOperation extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedOperation";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace UnauthorizedOperation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedOperation): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>Object representing the on-premises resource being migrated.</p>
+ * @public
  */
 export interface DiscoveredResource {
   /**
    * <p>The configurationId in Application Discovery Service that uniquely identifies the
    *          on-premise resource.</p>
+   * @public
    */
   ConfigurationId: string | undefined;
 
   /**
    * <p>A description that can be free-form text to record additional detail about the
    *          discovered resource for clarity or later reference.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace DiscoveredResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DiscoveredResource): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateDiscoveredResourceRequest {
   /**
    * <p>The name of the ProgressUpdateStream.</p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -322,172 +119,185 @@ export interface AssociateDiscoveredResourceRequest {
    * <p>The identifier given to the MigrationTask. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
   /**
    * <p>Object representing a Resource.</p>
+   * @public
    */
   DiscoveredResource: DiscoveredResource | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
-}
-
-export namespace AssociateDiscoveredResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateDiscoveredResourceRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateDiscoveredResourceResult {}
-
-export namespace AssociateDiscoveredResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateDiscoveredResourceResult): any => ({
-    ...obj,
-  });
+  DryRun?: boolean | undefined;
 }
 
 /**
- * <p>Exception raised when there are problems accessing Application Discovery Service
- *          (Application Discovery Service); most likely due to a misconfigured policy or the
- *             <code>migrationhub-discovery</code> role is missing or not configured correctly.</p>
+ * @public
  */
-export interface PolicyErrorException extends __SmithyException, $MetadataBearer {
-  name: "PolicyErrorException";
-  $fault: "client";
-  Message?: string;
-}
+export interface AssociateDiscoveredResourceResult {}
 
-export namespace PolicyErrorException {
+/**
+ * <p>A source resource can be a source server, a migration wave, an application, or any other
+ *          resource that you track.</p>
+ * @public
+ */
+export interface SourceResource {
   /**
-   * @internal
+   * <p>This is the name that you want to use to identify the resource. If the resource is an
+   *          AWS resource, we recommend that you set this parameter to the ARN of the resource.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PolicyErrorException): any => ({
-    ...obj,
-  });
+  Name: string | undefined;
+
+  /**
+   * <p>A description that can be free-form text to record additional detail about the resource
+   *          for clarity or later reference.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>A free-form description of the status of the resource.</p>
+   * @public
+   */
+  StatusDetail?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface AssociateSourceResourceRequest {
+  /**
+   * <p>The name of the progress-update stream, which is used for access control as well as a
+   *          namespace for migration-task names that is implicitly linked to your AWS account. The
+   *          progress-update stream must uniquely identify the migration tool as it is used for all
+   *          updates made by the tool; however, it does not need to be unique for each AWS account
+   *          because it is scoped to the AWS account.</p>
+   * @public
+   */
+  ProgressUpdateStream: string | undefined;
+
+  /**
+   * <p>A unique identifier that references the migration task. <i>Do not include
+   *             sensitive data in this field.</i>
+   *          </p>
+   * @public
+   */
+  MigrationTaskName: string | undefined;
+
+  /**
+   * <p>The source resource that you want to associate.</p>
+   * @public
+   */
+  SourceResource: SourceResource | undefined;
+
+  /**
+   * <p>This is an optional parameter that you can use to test whether the call will succeed.
+   *          Set this parameter to <code>true</code> to verify that you have the permissions that are
+   *          required to make the call, and that you have specified the other parameters in the call
+   *          correctly.</p>
+   * @public
+   */
+  DryRun?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateSourceResourceResult {}
+
+/**
+ * @public
+ */
 export interface CreateProgressUpdateStreamRequest {
   /**
    * <p>The name of the ProgressUpdateStream. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
   ProgressUpdateStreamName: string | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace CreateProgressUpdateStreamRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProgressUpdateStreamRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateProgressUpdateStreamResult {}
 
-export namespace CreateProgressUpdateStreamResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProgressUpdateStreamResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteProgressUpdateStreamRequest {
   /**
    * <p>The name of the ProgressUpdateStream. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
   ProgressUpdateStreamName: string | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace DeleteProgressUpdateStreamRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProgressUpdateStreamRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteProgressUpdateStreamResult {}
 
-export namespace DeleteProgressUpdateStreamResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProgressUpdateStreamResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeApplicationStateRequest {
   /**
    * <p>The configurationId in Application Discovery Service that uniquely identifies the
    *          grouped application.</p>
+   * @public
    */
   ApplicationId: string | undefined;
 }
 
-export namespace DescribeApplicationStateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeApplicationStateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeApplicationStateResult {
   /**
    * <p>Status of the application - Not Started, In-Progress, Complete.</p>
+   * @public
    */
-  ApplicationStatus?: ApplicationStatus | string;
+  ApplicationStatus?: ApplicationStatus | undefined;
 
   /**
    * <p>The timestamp when the application status was last updated.</p>
+   * @public
    */
-  LastUpdatedTime?: Date;
+  LastUpdatedTime?: Date | undefined;
 }
 
-export namespace DescribeApplicationStateResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeApplicationStateResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeMigrationTaskRequest {
   /**
    * <p>The name of the ProgressUpdateStream. </p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -495,37 +305,14 @@ export interface DescribeMigrationTaskRequest {
    * <p>The identifier given to the MigrationTask. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
-}
-
-export namespace DescribeMigrationTaskRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeMigrationTaskRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ResourceAttributeType {
-  BIOS_ID = "BIOS_ID",
-  FQDN = "FQDN",
-  IPV4_ADDRESS = "IPV4_ADDRESS",
-  IPV6_ADDRESS = "IPV6_ADDRESS",
-  MAC_ADDRESS = "MAC_ADDRESS",
-  MOTHERBOARD_SERIAL_NUMBER = "MOTHERBOARD_SERIAL_NUMBER",
-  VM_MANAGED_OBJECT_REFERENCE = "VM_MANAGED_OBJECT_REFERENCE",
-  VM_MANAGER_ID = "VM_MANAGER_ID",
-  VM_NAME = "VM_NAME",
-  VM_PATH = "VM_PATH",
 }
 
 /**
  * <p>Attribute associated with a resource.</p>
  *          <p>Note the corresponding format required per type listed below:</p>
- *
- *
  *          <dl>
  *             <dt>IPV4</dt>
  *             <dd>
@@ -549,137 +336,115 @@ export enum ResourceAttributeType {
  *             <dt>MAC_ADDRESS</dt>
  *             <dd>
  *                <p>
- *                   <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code>
+ *                   <code>^([0-9A-Fa-f]\{2\}[:-])\{5\}([0-9A-Fa-f]\{2\})$</code>
  *                </p>
  *             </dd>
  *             <dt>FQDN</dt>
  *             <dd>
  *                <p>
- *                   <code>^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$</code>
+ *                   <code>^[^<>\{\}\\\\/?,=\\p\{Cntrl\}]\{1,256\}$</code>
  *                </p>
  *             </dd>
  *          </dl>
+ * @public
  */
 export interface ResourceAttribute {
   /**
    * <p>Type of resource.</p>
+   * @public
    */
-  Type: ResourceAttributeType | string | undefined;
+  Type: ResourceAttributeType | undefined;
 
   /**
    * <p>Value of the resource type.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace ResourceAttribute {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceAttribute): any => ({
-    ...obj,
-  });
-}
-
-export enum Status {
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  NOT_STARTED = "NOT_STARTED",
-}
-
 /**
  * <p>Task object encapsulating task information.</p>
+ * @public
  */
 export interface Task {
   /**
    * <p>Status of the task - Not Started, In-Progress, Complete.</p>
+   * @public
    */
-  Status: Status | string | undefined;
+  Status: Status | undefined;
 
   /**
    * <p>Details of task status as notified by a migration tool. A tool might use this field to
    *          provide clarifying information about the status that is unique to that tool or that
    *          explains an error state.</p>
+   * @public
    */
-  StatusDetail?: string;
+  StatusDetail?: string | undefined;
 
   /**
    * <p>Indication of the percentage completion of the task.</p>
+   * @public
    */
-  ProgressPercent?: number;
-}
-
-export namespace Task {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Task): any => ({
-    ...obj,
-  });
+  ProgressPercent?: number | undefined;
 }
 
 /**
  * <p>Represents a migration task in a migration tool.</p>
+ * @public
  */
 export interface MigrationTask {
   /**
    * <p>A name that identifies the vendor of the migration tool being used.</p>
+   * @public
    */
-  ProgressUpdateStream?: string;
+  ProgressUpdateStream?: string | undefined;
 
   /**
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
-  MigrationTaskName?: string;
+  MigrationTaskName?: string | undefined;
 
   /**
    * <p>Task object encapsulating task information.</p>
+   * @public
    */
-  Task?: Task;
+  Task?: Task | undefined;
 
   /**
    * <p>The timestamp when the task was gathered.</p>
+   * @public
    */
-  UpdateDateTime?: Date;
+  UpdateDateTime?: Date | undefined;
 
   /**
    * <p>Information about the resource that is being migrated. This data will be used to map the
    *          task to a resource in the Application Discovery Service repository.</p>
+   * @public
    */
-  ResourceAttributeList?: ResourceAttribute[];
+  ResourceAttributeList?: ResourceAttribute[] | undefined;
 }
 
-export namespace MigrationTask {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MigrationTask): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeMigrationTaskResult {
   /**
    * <p>Object encapsulating information about the migration task.</p>
+   * @public
    */
-  MigrationTask?: MigrationTask;
+  MigrationTask?: MigrationTask | undefined;
 }
 
-export namespace DescribeMigrationTaskResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeMigrationTaskResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateCreatedArtifactRequest {
   /**
    * <p>The name of the ProgressUpdateStream. </p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -687,45 +452,37 @@ export interface DisassociateCreatedArtifactRequest {
    * <p>Unique identifier that references the migration task to be disassociated with the
    *          artifact. <i>Do not store personal data in this field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
   /**
    * <p>An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS
    *          instance, etc.)</p>
+   * @public
    */
   CreatedArtifactName: string | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace DisassociateCreatedArtifactRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateCreatedArtifactRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateCreatedArtifactResult {}
 
-export namespace DisassociateCreatedArtifactResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateCreatedArtifactResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateDiscoveredResourceRequest {
   /**
    * <p>The name of the ProgressUpdateStream.</p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -733,45 +490,80 @@ export interface DisassociateDiscoveredResourceRequest {
    * <p>The identifier given to the MigrationTask. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
   /**
    * <p>ConfigurationId of the Application Discovery Service resource to be
    *          disassociated.</p>
+   * @public
    */
   ConfigurationId: string | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace DisassociateDiscoveredResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateDiscoveredResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateDiscoveredResourceResult {}
 
-export namespace DisassociateDiscoveredResourceResult {
+/**
+ * @public
+ */
+export interface DisassociateSourceResourceRequest {
   /**
-   * @internal
+   * <p>The name of the progress-update stream, which is used for access control as well as a
+   *          namespace for migration-task names that is implicitly linked to your AWS account. The
+   *          progress-update stream must uniquely identify the migration tool as it is used for all
+   *          updates made by the tool; however, it does not need to be unique for each AWS account
+   *          because it is scoped to the AWS account.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DisassociateDiscoveredResourceResult): any => ({
-    ...obj,
-  });
+  ProgressUpdateStream: string | undefined;
+
+  /**
+   * <p>A unique identifier that references the migration task. <i>Do not include
+   *             sensitive data in this field.</i>
+   *          </p>
+   * @public
+   */
+  MigrationTaskName: string | undefined;
+
+  /**
+   * <p>The name that was specified for the source resource.</p>
+   * @public
+   */
+  SourceResourceName: string | undefined;
+
+  /**
+   * <p>This is an optional parameter that you can use to test whether the call will succeed.
+   *          Set this parameter to <code>true</code> to verify that you have the permissions that are
+   *          required to make the call, and that you have specified the other parameters in the call
+   *          correctly.</p>
+   * @public
+   */
+  DryRun?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DisassociateSourceResourceResult {}
+
+/**
+ * @public
+ */
 export interface ImportMigrationTaskRequest {
   /**
    * <p>The name of the ProgressUpdateStream. ></p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -779,91 +571,75 @@ export interface ImportMigrationTaskRequest {
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace ImportMigrationTaskRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImportMigrationTaskRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ImportMigrationTaskResult {}
 
-export namespace ImportMigrationTaskResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImportMigrationTaskResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListApplicationStatesRequest {
   /**
    * <p>The configurationIds from the Application Discovery Service that uniquely identifies
    *          your applications.</p>
+   * @public
    */
-  ApplicationIds?: string[];
+  ApplicationIds?: string[] | undefined;
 
   /**
    * <p>If a <code>NextToken</code> was returned by a previous call, there are more results
    *          available. To retrieve the next page of results, make the call again using the returned
    *          token in <code>NextToken</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to be returned per page.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListApplicationStatesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListApplicationStatesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListApplicationStatesResult {
   /**
    * <p>A list of Applications that exist in Application Discovery Service.</p>
+   * @public
    */
-  ApplicationStateList?: ApplicationState[];
+  ApplicationStateList?: ApplicationState[] | undefined;
 
   /**
    * <p>If a <code>NextToken</code> was returned by a previous call, there are more results
    *          available. To retrieve the next page of results, make the call again using the returned
    *          token in <code>NextToken</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListApplicationStatesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListApplicationStatesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCreatedArtifactsRequest {
   /**
    * <p>The name of the ProgressUpdateStream. </p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -871,6 +647,7 @@ export interface ListCreatedArtifactsRequest {
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
@@ -878,50 +655,43 @@ export interface ListCreatedArtifactsRequest {
    * <p>If a <code>NextToken</code> was returned by a previous call, there are more results
    *          available. To retrieve the next page of results, make the call again using the returned
    *          token in <code>NextToken</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to be returned per page.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListCreatedArtifactsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCreatedArtifactsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCreatedArtifactsResult {
   /**
    * <p>If there are more created artifacts than the max result, return the next token to be
    *          passed to the next call as a bookmark of where to start from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>List of created artifacts up to the maximum number of results specified in the
    *          request.</p>
+   * @public
    */
-  CreatedArtifactList?: CreatedArtifact[];
+  CreatedArtifactList?: CreatedArtifact[] | undefined;
 }
 
-export namespace ListCreatedArtifactsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCreatedArtifactsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDiscoveredResourcesRequest {
   /**
    * <p>The name of the ProgressUpdateStream.</p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -929,6 +699,7 @@ export interface ListDiscoveredResourcesRequest {
    * <p>The name of the MigrationTask. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
@@ -936,262 +707,375 @@ export interface ListDiscoveredResourcesRequest {
    * <p>If a <code>NextToken</code> was returned by a previous call, there are more results
    *          available. To retrieve the next page of results, make the call again using the returned
    *          token in <code>NextToken</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results returned per page.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListDiscoveredResourcesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDiscoveredResourcesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDiscoveredResourcesResult {
   /**
    * <p>If there are more discovered resources than the max result, return the next token to be
    *          passed to the next call as a bookmark of where to start from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Returned list of discovered resources associated with the given MigrationTask.</p>
+   * @public
    */
-  DiscoveredResourceList?: DiscoveredResource[];
+  DiscoveredResourceList?: DiscoveredResource[] | undefined;
 }
 
-export namespace ListDiscoveredResourcesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDiscoveredResourcesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListMigrationTasksRequest {
   /**
    * <p>If a <code>NextToken</code> was returned by a previous call, there are more results
    *          available. To retrieve the next page of results, make the call again using the returned
    *          token in <code>NextToken</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Value to specify how many results are returned per page.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Filter migration tasks by discovered resource name.</p>
+   * @public
    */
-  ResourceName?: string;
-}
-
-export namespace ListMigrationTasksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListMigrationTasksRequest): any => ({
-    ...obj,
-  });
+  ResourceName?: string | undefined;
 }
 
 /**
  * <p>MigrationTaskSummary includes <code>MigrationTaskName</code>,
  *             <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>,
  *          and <code>UpdateDateTime</code> for each task.</p>
+ * @public
  */
 export interface MigrationTaskSummary {
   /**
    * <p>An AWS resource used for access control. It should uniquely identify the migration tool
    *          as it is used for all updates made by the tool.</p>
+   * @public
    */
-  ProgressUpdateStream?: string;
+  ProgressUpdateStream?: string | undefined;
 
   /**
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
-  MigrationTaskName?: string;
+  MigrationTaskName?: string | undefined;
 
   /**
    * <p>Status of the task.</p>
+   * @public
    */
-  Status?: Status | string;
+  Status?: Status | undefined;
 
   /**
    * <p>Indication of the percentage completion of the task.</p>
+   * @public
    */
-  ProgressPercent?: number;
+  ProgressPercent?: number | undefined;
 
   /**
    * <p>Detail information of what is being done within the overall status state.</p>
+   * @public
    */
-  StatusDetail?: string;
+  StatusDetail?: string | undefined;
 
   /**
    * <p>The timestamp when the task was gathered.</p>
+   * @public
    */
-  UpdateDateTime?: Date;
+  UpdateDateTime?: Date | undefined;
 }
 
-export namespace MigrationTaskSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MigrationTaskSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListMigrationTasksResult {
   /**
    * <p>If there are more migration tasks than the max result, return the next token to be
    *          passed to the next call as a bookmark of where to start from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Lists the migration task's summary which includes: <code>MigrationTaskName</code>,
    *             <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>,
    *          and the <code>UpdateDateTime</code> for each task.</p>
+   * @public
    */
-  MigrationTaskSummaryList?: MigrationTaskSummary[];
+  MigrationTaskSummaryList?: MigrationTaskSummary[] | undefined;
 }
 
-export namespace ListMigrationTasksResult {
+/**
+ * @public
+ */
+export interface ListMigrationTaskUpdatesRequest {
   /**
-   * @internal
+   * <p>The name of the progress-update stream, which is used for access control as well as a
+   *          namespace for migration-task names that is implicitly linked to your AWS account. The
+   *          progress-update stream must uniquely identify the migration tool as it is used for all
+   *          updates made by the tool; however, it does not need to be unique for each AWS account
+   *          because it is scoped to the AWS account.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListMigrationTasksResult): any => ({
-    ...obj,
-  });
+  ProgressUpdateStream: string | undefined;
+
+  /**
+   * <p>A unique identifier that references the migration task. <i>Do not include
+   *             sensitive data in this field.</i>
+   *          </p>
+   * @public
+   */
+  MigrationTaskName: string | undefined;
+
+  /**
+   * <p>If <code>NextToken</code> was returned by a previous call, there are more results
+   *          available. The value of <code>NextToken</code> is a unique pagination token for each page.
+   *          To retrieve the next page of results, specify the <code>NextToken</code> value that the
+   *          previous call returned. Keep all other arguments unchanged. Each pagination token expires
+   *          after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken
+   *          error.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to include in the response. If more results exist than the
+   *          value that you specify here for <code>MaxResults</code>, the response will include a token
+   *          that you can use to retrieve the next set of results.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
 }
 
+/**
+ * <p>A migration-task progress update.</p>
+ * @public
+ */
+export interface MigrationTaskUpdate {
+  /**
+   * <p>The timestamp for the update.</p>
+   * @public
+   */
+  UpdateDateTime?: Date | undefined;
+
+  /**
+   * <p>The type of the update.</p>
+   * @public
+   */
+  UpdateType?: UpdateType | undefined;
+
+  /**
+   * <p>Task object encapsulating task information.</p>
+   * @public
+   */
+  MigrationTaskState?: Task | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMigrationTaskUpdatesResult {
+  /**
+   * <p>If the response includes a <code>NextToken</code> value, that means that there are more
+   *          results available. The value of <code>NextToken</code> is a unique pagination token for
+   *          each page. To retrieve the next page of results, call this API again and specify this
+   *             <code>NextToken</code> value in the request. Keep all other arguments unchanged. Each
+   *          pagination token expires after 24 hours. Using an expired pagination token will return an
+   *          HTTP 400 InvalidToken error.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The list of migration-task updates.</p>
+   * @public
+   */
+  MigrationTaskUpdateList?: MigrationTaskUpdate[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListProgressUpdateStreamsRequest {
   /**
    * <p>If a <code>NextToken</code> was returned by a previous call, there are more results
    *          available. To retrieve the next page of results, make the call again using the returned
    *          token in <code>NextToken</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Filter to limit the maximum number of results to list per page.</p>
+   * @public
    */
-  MaxResults?: number;
-}
-
-export namespace ListProgressUpdateStreamsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProgressUpdateStreamsRequest): any => ({
-    ...obj,
-  });
+  MaxResults?: number | undefined;
 }
 
 /**
  * <p>Summary of the AWS resource used for access control that is implicitly linked to your
  *          AWS account.</p>
+ * @public
  */
 export interface ProgressUpdateStreamSummary {
   /**
    * <p>The name of the ProgressUpdateStream. <i>Do not store personal data in this
    *             field.</i>
    *          </p>
+   * @public
    */
-  ProgressUpdateStreamName?: string;
+  ProgressUpdateStreamName?: string | undefined;
 }
 
-export namespace ProgressUpdateStreamSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProgressUpdateStreamSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListProgressUpdateStreamsResult {
   /**
    * <p>List of progress update streams up to the max number of results passed in the
    *          input.</p>
+   * @public
    */
-  ProgressUpdateStreamSummaryList?: ProgressUpdateStreamSummary[];
+  ProgressUpdateStreamSummaryList?: ProgressUpdateStreamSummary[] | undefined;
 
   /**
    * <p>If there are more streams created than the max result, return the next token to be
    *          passed to the next call as a bookmark of where to start from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListProgressUpdateStreamsResult {
+/**
+ * @public
+ */
+export interface ListSourceResourcesRequest {
   /**
-   * @internal
+   * <p>The name of the progress-update stream, which is used for access control as well as a
+   *          namespace for migration-task names that is implicitly linked to your AWS account. The
+   *          progress-update stream must uniquely identify the migration tool as it is used for all
+   *          updates made by the tool; however, it does not need to be unique for each AWS account
+   *          because it is scoped to the AWS account.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListProgressUpdateStreamsResult): any => ({
-    ...obj,
-  });
+  ProgressUpdateStream: string | undefined;
+
+  /**
+   * <p>A unique identifier that references the migration task. <i>Do not store
+   *             confidential data in this field.</i>
+   *          </p>
+   * @public
+   */
+  MigrationTaskName: string | undefined;
+
+  /**
+   * <p>If <code>NextToken</code> was returned by a previous call, there are more results
+   *          available. The value of <code>NextToken</code> is a unique pagination token for each page.
+   *          To retrieve the next page of results, specify the <code>NextToken</code> value that the
+   *          previous call returned. Keep all other arguments unchanged. Each pagination token expires
+   *          after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken
+   *          error.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to include in the response. If more results exist than the
+   *          value that you specify here for <code>MaxResults</code>, the response will include a token
+   *          that you can use to retrieve the next set of results.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListSourceResourcesResult {
+  /**
+   * <p>If the response includes a <code>NextToken</code> value, that means that there are more
+   *          results available. The value of <code>NextToken</code> is a unique pagination token for
+   *          each page. To retrieve the next page of results, call this API again and specify this
+   *             <code>NextToken</code> value in the request. Keep all other arguments unchanged. Each
+   *          pagination token expires after 24 hours. Using an expired pagination token will return an
+   *          HTTP 400 InvalidToken error.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The list of source resources.</p>
+   * @public
+   */
+  SourceResourceList?: SourceResource[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface NotifyApplicationStateRequest {
   /**
    * <p>The configurationId in Application Discovery Service that uniquely identifies the
    *          grouped application.</p>
+   * @public
    */
   ApplicationId: string | undefined;
 
   /**
    * <p>Status of the application - Not Started, In-Progress, Complete.</p>
+   * @public
    */
-  Status: ApplicationStatus | string | undefined;
+  Status: ApplicationStatus | undefined;
 
   /**
    * <p>The timestamp when the application state changed.</p>
+   * @public
    */
-  UpdateDateTime?: Date;
+  UpdateDateTime?: Date | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace NotifyApplicationStateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyApplicationStateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface NotifyApplicationStateResult {}
 
-export namespace NotifyApplicationStateResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyApplicationStateResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface NotifyMigrationTaskStateRequest {
   /**
    * <p>The name of the ProgressUpdateStream. </p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -1199,16 +1083,19 @@ export interface NotifyMigrationTaskStateRequest {
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
   /**
    * <p>Information about the task's progress and status.</p>
+   * @public
    */
   Task: Task | undefined;
 
   /**
    * <p>The timestamp when the task was gathered.</p>
+   * @public
    */
   UpdateDateTime: Date | undefined;
 
@@ -1216,39 +1103,30 @@ export interface NotifyMigrationTaskStateRequest {
    * <p>Number of seconds after the UpdateDateTime within which the Migration Hub can expect an
    *          update. If Migration Hub does not receive an update within the specified interval, then the
    *          migration task will be considered stale.</p>
+   * @public
    */
   NextUpdateSeconds: number | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace NotifyMigrationTaskStateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyMigrationTaskStateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface NotifyMigrationTaskStateResult {}
 
-export namespace NotifyMigrationTaskStateResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyMigrationTaskStateResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutResourceAttributesRequest {
   /**
    * <p>The name of the ProgressUpdateStream. </p>
+   * @public
    */
   ProgressUpdateStream: string | undefined;
 
@@ -1256,6 +1134,7 @@ export interface PutResourceAttributesRequest {
    * <p>Unique identifier that references the migration task. <i>Do not store personal
    *             data in this field.</i>
    *          </p>
+   * @public
    */
   MigrationTaskName: string | undefined;
 
@@ -1272,7 +1151,6 @@ export interface PutResourceAttributesRequest {
    *          <important>
    *             <ul>
    *                <li>
-   *
    *                   <p>If any "VM" related value is set for a <code>ResourceAttribute</code> object,
    *                   it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always set. If
    *                      <code>VM_MANAGER_ID</code> is not set, then all "VM" fields will be discarded
@@ -1288,32 +1166,19 @@ export interface PutResourceAttributesRequest {
    *                </li>
    *             </ul>
    *          </important>
+   * @public
    */
   ResourceAttributeList: ResourceAttribute[] | undefined;
 
   /**
    * <p>Optional boolean flag to indicate whether any effect should take place. Used to test if
    *          the caller has permission to make the call.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
-export namespace PutResourceAttributesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutResourceAttributesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutResourceAttributesResult {}
-
-export namespace PutResourceAttributesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutResourceAttributesResult): any => ({
-    ...obj,
-  });
-}

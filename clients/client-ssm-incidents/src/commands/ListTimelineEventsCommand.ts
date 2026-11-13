@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListTimelineEventsInput, ListTimelineEventsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListTimelineEventsCommand,
-  serializeAws_restJson1ListTimelineEventsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMIncidentsClientResolvedConfig } from "../SSMIncidentsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTimelineEventsInput, ListTimelineEventsOutput } from "../models/models_0";
+import { ListTimelineEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTimelineEventsCommand}.
+ */
 export interface ListTimelineEventsCommandInput extends ListTimelineEventsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListTimelineEventsCommand}.
+ */
 export interface ListTimelineEventsCommandOutput extends ListTimelineEventsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,97 @@ export interface ListTimelineEventsCommandOutput extends ListTimelineEventsOutpu
  * ```javascript
  * import { SSMIncidentsClient, ListTimelineEventsCommand } from "@aws-sdk/client-ssm-incidents"; // ES Modules import
  * // const { SSMIncidentsClient, ListTimelineEventsCommand } = require("@aws-sdk/client-ssm-incidents"); // CommonJS import
+ * // import type { SSMIncidentsClientConfig } from "@aws-sdk/client-ssm-incidents";
+ * const config = {}; // type is SSMIncidentsClientConfig
  * const client = new SSMIncidentsClient(config);
+ * const input = { // ListTimelineEventsInput
+ *   incidentRecordArn: "STRING_VALUE", // required
+ *   filters: [ // FilterList
+ *     { // Filter
+ *       key: "STRING_VALUE", // required
+ *       condition: { // Condition Union: only one key present
+ *         before: new Date("TIMESTAMP"),
+ *         after: new Date("TIMESTAMP"),
+ *         equals: { // AttributeValueList Union: only one key present
+ *           stringValues: [ // StringList
+ *             "STRING_VALUE",
+ *           ],
+ *           integerValues: [ // IntegerList
+ *             Number("int"),
+ *           ],
+ *         },
+ *       },
+ *     },
+ *   ],
+ *   sortBy: "STRING_VALUE",
+ *   sortOrder: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListTimelineEventsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTimelineEventsOutput
+ * //   eventSummaries: [ // EventSummaryList // required
+ * //     { // EventSummary
+ * //       incidentRecordArn: "STRING_VALUE", // required
+ * //       eventId: "STRING_VALUE", // required
+ * //       eventTime: new Date("TIMESTAMP"), // required
+ * //       eventUpdatedTime: new Date("TIMESTAMP"), // required
+ * //       eventType: "STRING_VALUE", // required
+ * //       eventReferences: [ // EventReferenceList
+ * //         { // EventReference Union: only one key present
+ * //           resource: "STRING_VALUE",
+ * //           relatedItemId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTimelineEventsCommandInput - {@link ListTimelineEventsCommandInput}
+ * @returns {@link ListTimelineEventsCommandOutput}
  * @see {@link ListTimelineEventsCommandInput} for command's `input` shape.
  * @see {@link ListTimelineEventsCommandOutput} for command's `response` shape.
- * @see {@link SSMIncidentsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMIncidentsClientResolvedConfig | config} for SSMIncidentsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *       service.</p>
+ *
+ * @throws {@link SSMIncidentsServiceException}
+ * <p>Base exception class for all service exceptions from SSMIncidents service.</p>
+ *
+ *
+ * @public
  */
-export class ListTimelineEventsCommand extends $Command<
-  ListTimelineEventsCommandInput,
-  ListTimelineEventsCommandOutput,
-  SSMIncidentsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTimelineEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMIncidentsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTimelineEventsCommandInput, ListTimelineEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMIncidentsClient";
-    const commandName = "ListTimelineEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTimelineEventsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTimelineEventsOutput.filterSensitiveLog,
+export class ListTimelineEventsCommand extends command<ListTimelineEventsCommandInput, ListTimelineEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTimelineEvents",
+  ListTimelineEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTimelineEventsInput;
+      output: ListTimelineEventsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTimelineEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTimelineEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTimelineEventsCommandOutput> {
-    return deserializeAws_restJson1ListTimelineEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTimelineEventsCommandInput;
+      output: ListTimelineEventsCommandOutput;
+    };
+  };
 }

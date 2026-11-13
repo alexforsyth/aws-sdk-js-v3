@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeEndpointAccessMessage, EndpointAccessList } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeEndpointAccessCommand,
-  serializeAws_queryDescribeEndpointAccessCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEndpointAccessMessage, EndpointAccessList } from "../models/models_0";
+import { DescribeEndpointAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEndpointAccessCommand}.
+ */
 export interface DescribeEndpointAccessCommandInput extends DescribeEndpointAccessMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEndpointAccessCommand}.
+ */
 export interface DescribeEndpointAccessCommandOutput extends EndpointAccessList, __MetadataBearer {}
 
 /**
@@ -28,68 +29,93 @@ export interface DescribeEndpointAccessCommandOutput extends EndpointAccessList,
  * ```javascript
  * import { RedshiftClient, DescribeEndpointAccessCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeEndpointAccessCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeEndpointAccessMessage
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   ResourceOwner: "STRING_VALUE",
+ *   EndpointName: "STRING_VALUE",
+ *   VpcId: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeEndpointAccessCommand(input);
  * const response = await client.send(command);
+ * // { // EndpointAccessList
+ * //   EndpointAccessList: [ // EndpointAccesses
+ * //     { // EndpointAccess
+ * //       ClusterIdentifier: "STRING_VALUE",
+ * //       ResourceOwner: "STRING_VALUE",
+ * //       SubnetGroupName: "STRING_VALUE",
+ * //       EndpointStatus: "STRING_VALUE",
+ * //       EndpointName: "STRING_VALUE",
+ * //       EndpointCreateTime: new Date("TIMESTAMP"),
+ * //       Port: Number("int"),
+ * //       Address: "STRING_VALUE",
+ * //       VpcSecurityGroups: [ // VpcSecurityGroupMembershipList
+ * //         { // VpcSecurityGroupMembership
+ * //           VpcSecurityGroupId: "STRING_VALUE",
+ * //           Status: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       VpcEndpoint: { // VpcEndpoint
+ * //         VpcEndpointId: "STRING_VALUE",
+ * //         VpcId: "STRING_VALUE",
+ * //         NetworkInterfaces: [ // NetworkInterfaceList
+ * //           { // NetworkInterface
+ * //             NetworkInterfaceId: "STRING_VALUE",
+ * //             SubnetId: "STRING_VALUE",
+ * //             PrivateIpAddress: "STRING_VALUE",
+ * //             AvailabilityZone: "STRING_VALUE",
+ * //             Ipv6Address: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEndpointAccessCommandInput - {@link DescribeEndpointAccessCommandInput}
+ * @returns {@link DescribeEndpointAccessCommandOutput}
  * @see {@link DescribeEndpointAccessCommandInput} for command's `input` shape.
  * @see {@link DescribeEndpointAccessCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link EndpointNotFoundFault} (client fault)
+ *  <p>The endpoint name doesn't refer to an existing endpoint.</p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The specified cluster is not in the <code>available</code> state. </p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEndpointAccessCommand extends $Command<
-  DescribeEndpointAccessCommandInput,
-  DescribeEndpointAccessCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEndpointAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEndpointAccessCommandInput, DescribeEndpointAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeEndpointAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEndpointAccessMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EndpointAccessList.filterSensitiveLog,
+export class DescribeEndpointAccessCommand extends command<DescribeEndpointAccessCommandInput, DescribeEndpointAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEndpointAccess",
+  DescribeEndpointAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEndpointAccessMessage;
+      output: EndpointAccessList;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEndpointAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEndpointAccessCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEndpointAccessCommandOutput> {
-    return deserializeAws_queryDescribeEndpointAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEndpointAccessCommandInput;
+      output: DescribeEndpointAccessCommandOutput;
+    };
+  };
 }

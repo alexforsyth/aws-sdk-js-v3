@@ -1,29 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { MergeProfilesRequest, MergeProfilesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1MergeProfilesCommand,
-  serializeAws_restJson1MergeProfilesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { MergeProfilesRequest, MergeProfilesResponse } from "../models/models_1";
+import { MergeProfiles$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MergeProfilesCommand}.
+ */
 export interface MergeProfilesCommandInput extends MergeProfilesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link MergeProfilesCommand}.
+ */
 export interface MergeProfilesCommandOutput extends MergeProfilesResponse, __MetadataBearer {}
 
 /**
- * <p>This API is in preview release for Amazon Connect and subject to change.</p>
- *          <p>Runs an AWS Lambda job that does the following:</p>
+ * <p>Runs an AWS Lambda job that does the following:</p>
  *          <ol>
  *             <li>
  *                <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the
@@ -49,7 +49,6 @@ export interface MergeProfilesCommandOutput extends MergeProfilesResponse, __Met
  *                   </li>
  *                   <li>
  *                      <p>When there are conflicting fields:</p>
- *
  *                      <ol>
  *                         <li>
  *                            <p>If no <code>SourceProfileIds</code> entry is specified, the main
@@ -72,68 +71,90 @@ export interface MergeProfilesCommandOutput extends MergeProfilesResponse, __Met
  * ```javascript
  * import { CustomerProfilesClient, MergeProfilesCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, MergeProfilesCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // MergeProfilesRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   MainProfileId: "STRING_VALUE", // required
+ *   ProfileIdsToBeMerged: [ // ProfileIdToBeMergedList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   FieldSourceProfileIds: { // FieldSourceProfileIds
+ *     AccountNumber: "STRING_VALUE",
+ *     AdditionalInformation: "STRING_VALUE",
+ *     PartyType: "STRING_VALUE",
+ *     BusinessName: "STRING_VALUE",
+ *     FirstName: "STRING_VALUE",
+ *     MiddleName: "STRING_VALUE",
+ *     LastName: "STRING_VALUE",
+ *     BirthDate: "STRING_VALUE",
+ *     Gender: "STRING_VALUE",
+ *     PhoneNumber: "STRING_VALUE",
+ *     MobilePhoneNumber: "STRING_VALUE",
+ *     HomePhoneNumber: "STRING_VALUE",
+ *     BusinessPhoneNumber: "STRING_VALUE",
+ *     EmailAddress: "STRING_VALUE",
+ *     PersonalEmailAddress: "STRING_VALUE",
+ *     BusinessEmailAddress: "STRING_VALUE",
+ *     Address: "STRING_VALUE",
+ *     ShippingAddress: "STRING_VALUE",
+ *     MailingAddress: "STRING_VALUE",
+ *     BillingAddress: "STRING_VALUE",
+ *     Attributes: { // AttributeSourceIdMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     ProfileType: "STRING_VALUE",
+ *     EngagementPreferences: "STRING_VALUE",
+ *   },
+ * };
  * const command = new MergeProfilesCommand(input);
  * const response = await client.send(command);
+ * // { // MergeProfilesResponse
+ * //   Message: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param MergeProfilesCommandInput - {@link MergeProfilesCommandInput}
+ * @returns {@link MergeProfilesCommandOutput}
  * @see {@link MergeProfilesCommandInput} for command's `input` shape.
  * @see {@link MergeProfilesCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class MergeProfilesCommand extends $Command<
-  MergeProfilesCommandInput,
-  MergeProfilesCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: MergeProfilesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MergeProfilesCommandInput, MergeProfilesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "MergeProfilesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: MergeProfilesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: MergeProfilesResponse.filterSensitiveLog,
+export class MergeProfilesCommand extends command<MergeProfilesCommandInput, MergeProfilesCommandOutput>(
+  _ep0,
+  _mw0,
+  "MergeProfiles",
+  MergeProfiles$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MergeProfilesRequest;
+      output: MergeProfilesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: MergeProfilesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1MergeProfilesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<MergeProfilesCommandOutput> {
-    return deserializeAws_restJson1MergeProfilesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MergeProfilesCommandInput;
+      output: MergeProfilesCommandOutput;
+    };
+  };
 }

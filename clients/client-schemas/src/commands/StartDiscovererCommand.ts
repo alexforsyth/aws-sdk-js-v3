@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StartDiscovererRequest, StartDiscovererResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartDiscovererCommand,
-  serializeAws_restJson1StartDiscovererCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartDiscovererRequest, StartDiscovererResponse } from "../models/models_0";
+import { StartDiscoverer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartDiscovererCommand}.
+ */
 export interface StartDiscovererCommandInput extends StartDiscovererRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartDiscovererCommand}.
+ */
 export interface StartDiscovererCommandOutput extends StartDiscovererResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface StartDiscovererCommandOutput extends StartDiscovererResponse, _
  * ```javascript
  * import { SchemasClient, StartDiscovererCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, StartDiscovererCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // StartDiscovererRequest
+ *   DiscovererId: "STRING_VALUE", // required
+ * };
  * const command = new StartDiscovererCommand(input);
  * const response = await client.send(command);
+ * // { // StartDiscovererResponse
+ * //   DiscovererId: "STRING_VALUE",
+ * //   State: "STARTED" || "STOPPED",
+ * // };
+ *
  * ```
  *
+ * @param StartDiscovererCommandInput - {@link StartDiscovererCommandInput}
+ * @returns {@link StartDiscovererCommandOutput}
  * @see {@link StartDiscovererCommandInput} for command's `input` shape.
  * @see {@link StartDiscovererCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class StartDiscovererCommand extends $Command<
-  StartDiscovererCommandInput,
-  StartDiscovererCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartDiscovererCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartDiscovererCommandInput, StartDiscovererCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "StartDiscovererCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartDiscovererRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartDiscovererResponse.filterSensitiveLog,
+export class StartDiscovererCommand extends command<StartDiscovererCommandInput, StartDiscovererCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartDiscoverer",
+  StartDiscoverer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDiscovererRequest;
+      output: StartDiscovererResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartDiscovererCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartDiscovererCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartDiscovererCommandOutput> {
-    return deserializeAws_restJson1StartDiscovererCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartDiscovererCommandInput;
+      output: StartDiscovererCommandOutput;
+    };
+  };
 }

@@ -1,97 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { ListBotsRequest, ListBotsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListBotsCommand,
-  serializeAws_restJson1ListBotsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBotsRequest, ListBotsResponse } from "../models/models_2";
+import { ListBots$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBotsCommand}.
+ */
 export interface ListBotsCommandInput extends ListBotsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBotsCommand}.
+ */
 export interface ListBotsCommandOutput extends ListBotsResponse, __MetadataBearer {}
 
 /**
- * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
- *          <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the
- *    instance. </p>
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots
+ *    currently associated with the instance. Use this API to return both Amazon Lex V1 and V2
+ *    bots.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, ListBotsCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, ListBotsCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // ListBotsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   LexVersion: "V1" || "V2", // required
+ * };
  * const command = new ListBotsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBotsResponse
+ * //   LexBots: [ // LexBotConfigList
+ * //     { // LexBotConfig
+ * //       LexBot: { // LexBot
+ * //         Name: "STRING_VALUE", // required
+ * //         LexRegion: "STRING_VALUE", // required
+ * //       },
+ * //       LexV2Bot: { // LexV2Bot
+ * //         AliasArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBotsCommandInput - {@link ListBotsCommandInput}
+ * @returns {@link ListBotsCommandOutput}
  * @see {@link ListBotsCommandInput} for command's `input` shape.
  * @see {@link ListBotsCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class ListBotsCommand extends $Command<
-  ListBotsCommandInput,
-  ListBotsCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBotsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBotsCommandInput, ListBotsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "ListBotsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBotsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBotsResponse.filterSensitiveLog,
+export class ListBotsCommand extends command<ListBotsCommandInput, ListBotsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBots",
+  ListBots$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBotsRequest;
+      output: ListBotsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBotsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBotsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBotsCommandOutput> {
-    return deserializeAws_restJson1ListBotsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBotsCommandInput;
+      output: ListBotsCommandOutput;
+    };
+  };
 }

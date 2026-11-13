@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeDominantLanguageDetectionJobRequest,
   DescribeDominantLanguageDetectionJobResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDominantLanguageDetectionJobCommand,
-  serializeAws_json1_1DescribeDominantLanguageDetectionJobCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeDominantLanguageDetectionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDominantLanguageDetectionJobCommand}.
+ */
 export interface DescribeDominantLanguageDetectionJobCommandInput extends DescribeDominantLanguageDetectionJobRequest {}
-export interface DescribeDominantLanguageDetectionJobCommandOutput
-  extends DescribeDominantLanguageDetectionJobResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDominantLanguageDetectionJobCommand}.
+ */
+export interface DescribeDominantLanguageDetectionJobCommandOutput extends DescribeDominantLanguageDetectionJobResponse, __MetadataBearer {}
 
 /**
  * <p>Gets the properties associated with a dominant language detection job. Use this operation
@@ -34,74 +33,92 @@ export interface DescribeDominantLanguageDetectionJobCommandOutput
  * ```javascript
  * import { ComprehendClient, DescribeDominantLanguageDetectionJobCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, DescribeDominantLanguageDetectionJobCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // DescribeDominantLanguageDetectionJobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDominantLanguageDetectionJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDominantLanguageDetectionJobResponse
+ * //   DominantLanguageDetectionJobProperties: { // DominantLanguageDetectionJobProperties
+ * //     JobId: "STRING_VALUE",
+ * //     JobArn: "STRING_VALUE",
+ * //     JobName: "STRING_VALUE",
+ * //     JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * //     Message: "STRING_VALUE",
+ * //     SubmitTime: new Date("TIMESTAMP"),
+ * //     EndTime: new Date("TIMESTAMP"),
+ * //     InputDataConfig: { // InputDataConfig
+ * //       S3Uri: "STRING_VALUE", // required
+ * //       InputFormat: "ONE_DOC_PER_FILE" || "ONE_DOC_PER_LINE",
+ * //       DocumentReaderConfig: { // DocumentReaderConfig
+ * //         DocumentReadAction: "TEXTRACT_DETECT_DOCUMENT_TEXT" || "TEXTRACT_ANALYZE_DOCUMENT", // required
+ * //         DocumentReadMode: "SERVICE_DEFAULT" || "FORCE_DOCUMENT_READ_ACTION",
+ * //         FeatureTypes: [ // ListOfDocumentReadFeatureTypes
+ * //           "TABLES" || "FORMS",
+ * //         ],
+ * //       },
+ * //     },
+ * //     OutputDataConfig: { // OutputDataConfig
+ * //       S3Uri: "STRING_VALUE", // required
+ * //       KmsKeyId: "STRING_VALUE",
+ * //     },
+ * //     DataAccessRoleArn: "STRING_VALUE",
+ * //     VolumeKmsKeyId: "STRING_VALUE",
+ * //     VpcConfig: { // VpcConfig
+ * //       SecurityGroupIds: [ // SecurityGroupIds // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Subnets: [ // Subnets // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeDominantLanguageDetectionJobCommandInput - {@link DescribeDominantLanguageDetectionJobCommandInput}
+ * @returns {@link DescribeDominantLanguageDetectionJobCommandOutput}
  * @see {@link DescribeDominantLanguageDetectionJobCommandInput} for command's `input` shape.
  * @see {@link DescribeDominantLanguageDetectionJobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link JobNotFoundException} (client fault)
+ *  <p>The specified job was not found. Check the job ID and try again.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDominantLanguageDetectionJobCommand extends $Command<
-  DescribeDominantLanguageDetectionJobCommandInput,
-  DescribeDominantLanguageDetectionJobCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDominantLanguageDetectionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDominantLanguageDetectionJobCommandInput, DescribeDominantLanguageDetectionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "DescribeDominantLanguageDetectionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDominantLanguageDetectionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDominantLanguageDetectionJobResponse.filterSensitiveLog,
+export class DescribeDominantLanguageDetectionJobCommand extends command<DescribeDominantLanguageDetectionJobCommandInput, DescribeDominantLanguageDetectionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDominantLanguageDetectionJob",
+  DescribeDominantLanguageDetectionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDominantLanguageDetectionJobRequest;
+      output: DescribeDominantLanguageDetectionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeDominantLanguageDetectionJobCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDominantLanguageDetectionJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDominantLanguageDetectionJobCommandOutput> {
-    return deserializeAws_json1_1DescribeDominantLanguageDetectionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDominantLanguageDetectionJobCommandInput;
+      output: DescribeDominantLanguageDetectionJobCommandOutput;
+    };
+  };
 }

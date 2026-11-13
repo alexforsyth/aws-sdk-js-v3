@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { Connector, UpdateConnectorRequest } from "../models/models_0";
+import { UpdateConnector$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConnectorCommand}.
+ */
+export interface UpdateConnectorCommandInput extends UpdateConnectorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConnectorCommand}.
+ */
+export interface UpdateConnectorCommandOutput extends Connector, __MetadataBearer {}
+
+/**
+ * <p>Update Connector.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MgnClient, UpdateConnectorCommand } from "@aws-sdk/client-mgn"; // ES Modules import
+ * // const { MgnClient, UpdateConnectorCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
+ * const client = new MgnClient(config);
+ * const input = { // UpdateConnectorRequest
+ *   connectorID: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   ssmCommandConfig: { // ConnectorSsmCommandConfig
+ *     s3OutputEnabled: true || false, // required
+ *     outputS3BucketName: "STRING_VALUE",
+ *     cloudWatchOutputEnabled: true || false, // required
+ *     cloudWatchLogGroupName: "STRING_VALUE",
+ *   },
+ * };
+ * const command = new UpdateConnectorCommand(input);
+ * const response = await client.send(command);
+ * // { // Connector
+ * //   connectorID: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   ssmInstanceID: "STRING_VALUE",
+ * //   arn: "STRING_VALUE",
+ * //   tags: { // TagsMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   ssmCommandConfig: { // ConnectorSsmCommandConfig
+ * //     s3OutputEnabled: true || false, // required
+ * //     outputS3BucketName: "STRING_VALUE",
+ * //     cloudWatchOutputEnabled: true || false, // required
+ * //     cloudWatchLogGroupName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateConnectorCommandInput - {@link UpdateConnectorCommandInput}
+ * @returns {@link UpdateConnectorCommandOutput}
+ * @see {@link UpdateConnectorCommandInput} for command's `input` shape.
+ * @see {@link UpdateConnectorCommandOutput} for command's `response` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found exception.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validate exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateConnectorCommand extends command<UpdateConnectorCommandInput, UpdateConnectorCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConnector",
+  UpdateConnector$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConnectorRequest;
+      output: Connector;
+    };
+    sdk: {
+      input: UpdateConnectorCommandInput;
+      output: UpdateConnectorCommandOutput;
+    };
+  };
+}

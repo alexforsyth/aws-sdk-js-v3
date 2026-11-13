@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import { GetFindingsFilterRequest, GetFindingsFilterResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFindingsFilterCommand,
-  serializeAws_restJson1GetFindingsFilterCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFindingsFilterRequest, GetFindingsFilterResponse } from "../models/models_0";
+import { GetFindingsFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFindingsFilterCommand}.
+ */
 export interface GetFindingsFilterCommandInput extends GetFindingsFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFindingsFilterCommand}.
+ */
 export interface GetFindingsFilterCommandOutput extends GetFindingsFilterResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,95 @@ export interface GetFindingsFilterCommandOutput extends GetFindingsFilterRespons
  * ```javascript
  * import { Macie2Client, GetFindingsFilterCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, GetFindingsFilterCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // GetFindingsFilterRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new GetFindingsFilterCommand(input);
  * const response = await client.send(command);
+ * // { // GetFindingsFilterResponse
+ * //   action: "ARCHIVE" || "NOOP",
+ * //   arn: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   findingCriteria: { // FindingCriteria
+ * //     criterion: { // Criterion
+ * //       "<keys>": { // CriterionAdditionalProperties
+ * //         eq: [ // __listOf__string
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         eqExactMatch: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         gt: Number("long"),
+ * //         gte: Number("long"),
+ * //         lt: Number("long"),
+ * //         lte: Number("long"),
+ * //         neq: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //   },
+ * //   id: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   position: Number("int"),
+ * //   tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetFindingsFilterCommandInput - {@link GetFindingsFilterCommandInput}
+ * @returns {@link GetFindingsFilterCommandOutput}
  * @see {@link GetFindingsFilterCommandInput} for command's `input` shape.
  * @see {@link GetFindingsFilterCommandOutput} for command's `response` shape.
- * @see {@link Macie2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Provides information about an error that occurred due to a versioning conflict for a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetFindingsFilterCommand extends $Command<
-  GetFindingsFilterCommandInput,
-  GetFindingsFilterCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFindingsFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFindingsFilterCommandInput, GetFindingsFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "GetFindingsFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFindingsFilterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFindingsFilterResponse.filterSensitiveLog,
+export class GetFindingsFilterCommand extends command<GetFindingsFilterCommandInput, GetFindingsFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFindingsFilter",
+  GetFindingsFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFindingsFilterRequest;
+      output: GetFindingsFilterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFindingsFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFindingsFilterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFindingsFilterCommandOutput> {
-    return deserializeAws_restJson1GetFindingsFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFindingsFilterCommandInput;
+      output: GetFindingsFilterCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UntagContactRequest, UntagContactResponse } from "../models/models_3";
+import { UntagContact$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UntagContactCommand}.
+ */
+export interface UntagContactCommandInput extends UntagContactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UntagContactCommand}.
+ */
+export interface UntagContactCommandOutput extends UntagContactResponse, __MetadataBearer {}
+
+/**
+ * <p>Removes the specified tags from the contact resource. For more information about this API is used, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html">Set up granular billing for a detailed
+ *     view of your Connect Customer usage</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, UntagContactCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, UntagContactCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // UntagContactRequest
+ *   ContactId: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE", // required
+ *   TagKeys: [ // ContactTagKeys // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
+ * const command = new UntagContactCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UntagContactCommandInput - {@link UntagContactCommandInput}
+ * @returns {@link UntagContactCommandOutput}
+ * @see {@link UntagContactCommandInput} for command's `input` shape.
+ * @see {@link UntagContactCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidActiveRegionException} (client fault)
+ *  <p>This exception occurs when an API request is made to a non-active region in an Amazon Connect instance configured with Amazon Connect Global Resiliency. For example, if the active region is US West (Oregon) and a request is made to US East (N. Virginia), the exception will be returned.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class UntagContactCommand extends command<UntagContactCommandInput, UntagContactCommandOutput>(
+  _ep0,
+  _mw0,
+  "UntagContact",
+  UntagContact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UntagContactRequest;
+      output: {};
+    };
+    sdk: {
+      input: UntagContactCommandInput;
+      output: UntagContactCommandOutput;
+    };
+  };
+}

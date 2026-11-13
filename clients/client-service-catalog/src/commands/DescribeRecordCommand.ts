@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeRecordInput, DescribeRecordOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeRecordCommand,
-  serializeAws_json1_1DescribeRecordCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRecordInput, DescribeRecordOutput } from "../models/models_0";
+import { DescribeRecord$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRecordCommand}.
+ */
 export interface DescribeRecordCommandInput extends DescribeRecordInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRecordCommand}.
+ */
 export interface DescribeRecordCommandOutput extends DescribeRecordOutput, __MetadataBearer {}
 
 /**
@@ -36,68 +37,86 @@ export interface DescribeRecordCommandOutput extends DescribeRecordOutput, __Met
  * ```javascript
  * import { ServiceCatalogClient, DescribeRecordCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, DescribeRecordCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // DescribeRecordInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   Id: "STRING_VALUE", // required
+ *   PageToken: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ * };
  * const command = new DescribeRecordCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRecordOutput
+ * //   RecordDetail: { // RecordDetail
+ * //     RecordId: "STRING_VALUE",
+ * //     ProvisionedProductName: "STRING_VALUE",
+ * //     Status: "CREATED" || "IN_PROGRESS" || "IN_PROGRESS_IN_ERROR" || "SUCCEEDED" || "FAILED",
+ * //     CreatedTime: new Date("TIMESTAMP"),
+ * //     UpdatedTime: new Date("TIMESTAMP"),
+ * //     ProvisionedProductType: "STRING_VALUE",
+ * //     RecordType: "STRING_VALUE",
+ * //     ProvisionedProductId: "STRING_VALUE",
+ * //     ProductId: "STRING_VALUE",
+ * //     ProvisioningArtifactId: "STRING_VALUE",
+ * //     PathId: "STRING_VALUE",
+ * //     RecordErrors: [ // RecordErrors
+ * //       { // RecordError
+ * //         Code: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     RecordTags: [ // RecordTags
+ * //       { // RecordTag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     LaunchRoleArn: "STRING_VALUE",
+ * //   },
+ * //   RecordOutputs: [ // RecordOutputs
+ * //     { // RecordOutput
+ * //       OutputKey: "STRING_VALUE",
+ * //       OutputValue: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeRecordCommandInput - {@link DescribeRecordCommandInput}
+ * @returns {@link DescribeRecordCommandOutput}
  * @see {@link DescribeRecordCommandInput} for command's `input` shape.
  * @see {@link DescribeRecordCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeRecordCommand extends $Command<
-  DescribeRecordCommandInput,
-  DescribeRecordCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRecordCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRecordCommandInput, DescribeRecordCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "DescribeRecordCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRecordInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRecordOutput.filterSensitiveLog,
+export class DescribeRecordCommand extends command<DescribeRecordCommandInput, DescribeRecordCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRecord",
+  DescribeRecord$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRecordInput;
+      output: DescribeRecordOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRecordCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeRecordCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRecordCommandOutput> {
-    return deserializeAws_json1_1DescribeRecordCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRecordCommandInput;
+      output: DescribeRecordCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StartCanaryRequest, StartCanaryResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartCanaryCommand,
-  serializeAws_restJson1StartCanaryCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SyntheticsClientResolvedConfig } from "../SyntheticsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartCanaryRequest, StartCanaryResponse } from "../models/models_0";
+import { StartCanary$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartCanaryCommand}.
+ */
 export interface StartCanaryCommandInput extends StartCanaryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartCanaryCommand}.
+ */
 export interface StartCanaryCommandOutput extends StartCanaryResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,57 @@ export interface StartCanaryCommandOutput extends StartCanaryResponse, __Metadat
  * ```javascript
  * import { SyntheticsClient, StartCanaryCommand } from "@aws-sdk/client-synthetics"; // ES Modules import
  * // const { SyntheticsClient, StartCanaryCommand } = require("@aws-sdk/client-synthetics"); // CommonJS import
+ * // import type { SyntheticsClientConfig } from "@aws-sdk/client-synthetics";
+ * const config = {}; // type is SyntheticsClientConfig
  * const client = new SyntheticsClient(config);
+ * const input = { // StartCanaryRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new StartCanaryCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StartCanaryCommandInput - {@link StartCanaryCommandInput}
+ * @returns {@link StartCanaryCommandOutput}
  * @see {@link StartCanaryCommandInput} for command's `input` shape.
  * @see {@link StartCanaryCommandOutput} for command's `response` shape.
- * @see {@link SyntheticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SyntheticsClientResolvedConfig | config} for SyntheticsClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflicting operation is already in progress.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One of the specified resources was not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter could not be validated.</p>
+ *
+ * @throws {@link SyntheticsServiceException}
+ * <p>Base exception class for all service exceptions from Synthetics service.</p>
+ *
+ *
+ * @public
  */
-export class StartCanaryCommand extends $Command<
-  StartCanaryCommandInput,
-  StartCanaryCommandOutput,
-  SyntheticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartCanaryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SyntheticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartCanaryCommandInput, StartCanaryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SyntheticsClient";
-    const commandName = "StartCanaryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartCanaryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartCanaryResponse.filterSensitiveLog,
+export class StartCanaryCommand extends command<StartCanaryCommandInput, StartCanaryCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartCanary",
+  StartCanary$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartCanaryRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartCanaryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartCanaryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartCanaryCommandOutput> {
-    return deserializeAws_restJson1StartCanaryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartCanaryCommandInput;
+      output: StartCanaryCommandOutput;
+    };
+  };
 }

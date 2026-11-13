@@ -1,122 +1,158 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeSecretRequest, DescribeSecretResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSecretCommand,
-  serializeAws_json1_1DescribeSecretCommand,
-} from "../protocols/Aws_json1_1";
-import { SecretsManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecretsManagerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSecretRequest, DescribeSecretResponse } from "../models/models_0";
+import { DescribeSecret$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSecretCommand}.
+ */
 export interface DescribeSecretCommandInput extends DescribeSecretRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSecretCommand}.
+ */
 export interface DescribeSecretCommandOutput extends DescribeSecretResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves the details of a secret. It does not include the encrypted fields. Secrets
- *       Manager only returns fields populated with a value in the response. </p>
+ * <p>Retrieves the details of a secret. It does not include the encrypted secret value.
+ *             Secrets Manager only returns fields that have a value in the response. </p>
+ *          <note>
+ *             <p>The <code>VersionIdsToStages</code> field in the response includes every version ID
+ *                 that has a staging label attached, even if that version doesn't contain a secret
+ *                 value. In contrast, <code>ListSecretVersionIds</code> only returns versions that
+ *                 contain a secret value. To check whether a secret version contains a value, call
+ *                     <a>GetSecretValue</a>.</p>
+ *          </note>
+ *          <p>Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html">Logging Secrets Manager events with CloudTrail</a>.</p>
  *          <p>
- *             <b>Minimum permissions</b>
- *          </p>
- *          <p>To run this command, you must have the following permissions:</p>
- *          <ul>
- *             <li>
- *                <p>secretsmanager:DescribeSecret</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Related operations</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>To create a secret, use <a>CreateSecret</a>.</p>
- *             </li>
- *             <li>
- *                <p>To modify a secret, use <a>UpdateSecret</a>.</p>
- *             </li>
- *             <li>
- *                <p>To retrieve the encrypted secret information in a version of the secret, use <a>GetSecretValue</a>.</p>
- *             </li>
- *             <li>
- *                <p>To list all of the secrets in the Amazon Web Services account, use <a>ListSecrets</a>.</p>
- *             </li>
- *          </ul>
+ *             <b>Required permissions:
+ *                 </b>
+ *             <code>secretsmanager:DescribeSecret</code>. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions">
+ *       IAM policy actions for Secrets Manager</a> and <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html">Authentication
+ *       and access control in Secrets Manager</a>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecretsManagerClient, DescribeSecretCommand } from "@aws-sdk/client-secrets-manager"; // ES Modules import
  * // const { SecretsManagerClient, DescribeSecretCommand } = require("@aws-sdk/client-secrets-manager"); // CommonJS import
+ * // import type { SecretsManagerClientConfig } from "@aws-sdk/client-secrets-manager";
+ * const config = {}; // type is SecretsManagerClientConfig
  * const client = new SecretsManagerClient(config);
+ * const input = { // DescribeSecretRequest
+ *   SecretId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeSecretCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSecretResponse
+ * //   ARN: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Type: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   KmsKeyId: "STRING_VALUE",
+ * //   RotationEnabled: true || false,
+ * //   RotationLambdaARN: "STRING_VALUE",
+ * //   RotationRules: { // RotationRulesType
+ * //     AutomaticallyAfterDays: Number("long"),
+ * //     Duration: "STRING_VALUE",
+ * //     ScheduleExpression: "STRING_VALUE",
+ * //   },
+ * //   ExternalSecretRotationMetadata: [ // ExternalSecretRotationMetadataType
+ * //     { // ExternalSecretRotationMetadataItem
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   ExternalSecretRotationRoleArn: "STRING_VALUE",
+ * //   LastRotatedDate: new Date("TIMESTAMP"),
+ * //   LastChangedDate: new Date("TIMESTAMP"),
+ * //   LastAccessedDate: new Date("TIMESTAMP"),
+ * //   DeletedDate: new Date("TIMESTAMP"),
+ * //   NextRotationDate: new Date("TIMESTAMP"),
+ * //   Tags: [ // TagListType
+ * //     { // Tag
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   VersionIdsToStages: { // SecretVersionsToStagesMapType
+ * //     "<keys>": [ // SecretVersionStagesType
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   OwningService: "STRING_VALUE",
+ * //   CreatedDate: new Date("TIMESTAMP"),
+ * //   PrimaryRegion: "STRING_VALUE",
+ * //   ReplicationStatus: [ // ReplicationStatusListType
+ * //     { // ReplicationStatusType
+ * //       Region: "STRING_VALUE",
+ * //       KmsKeyId: "STRING_VALUE",
+ * //       Status: "InSync" || "Failed" || "InProgress" || "Pending" || "Detached",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       LastAccessedDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   CrossAccountPrimary: { // CrossAccountPrimaryType
+ * //     PrimarySecretARN: "STRING_VALUE",
+ * //     ReplicationStatus: "InSync" || "Failed" || "InProgress" || "Pending" || "Detached",
+ * //     StatusMessage: "STRING_VALUE",
+ * //   },
+ * //   CrossAccountReplicas: [ // CrossAccountReplicaListType
+ * //     { // CrossAccountReplicaEntry
+ * //       ReplicaSecretARN: "STRING_VALUE",
+ * //       ReplicationRoleARN: "STRING_VALUE",
+ * //       ReplicationStatus: "InSync" || "Failed" || "InProgress" || "Pending" || "Detached",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeSecretCommandInput - {@link DescribeSecretCommandInput}
+ * @returns {@link DescribeSecretCommandOutput}
  * @see {@link DescribeSecretCommandInput} for command's `input` shape.
  * @see {@link DescribeSecretCommandOutput} for command's `response` shape.
- * @see {@link SecretsManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecretsManagerClientResolvedConfig | config} for SecretsManagerClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The parameter name or value is invalid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Secrets Manager can't find the resource that you asked for.</p>
+ *
+ * @throws {@link SecretsManagerServiceException}
+ * <p>Base exception class for all service exceptions from SecretsManager service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSecretCommand extends $Command<
-  DescribeSecretCommandInput,
-  DescribeSecretCommandOutput,
-  SecretsManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSecretCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecretsManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSecretCommandInput, DescribeSecretCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecretsManagerClient";
-    const commandName = "DescribeSecretCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSecretRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSecretResponse.filterSensitiveLog,
+export class DescribeSecretCommand extends command<DescribeSecretCommandInput, DescribeSecretCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSecret",
+  DescribeSecret$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSecretRequest;
+      output: DescribeSecretResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSecretCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSecretCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSecretCommandOutput> {
-    return deserializeAws_json1_1DescribeSecretCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSecretCommandInput;
+      output: DescribeSecretCommandOutput;
+    };
+  };
 }

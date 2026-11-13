@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingV2Client";
-import { ModifyListenerInput, ModifyListenerOutput } from "../models/models_0";
-import {
-  deserializeAws_queryModifyListenerCommand,
-  serializeAws_queryModifyListenerCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyListenerInput, ModifyListenerOutput } from "../models/models_0";
+import { ModifyListener$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyListenerCommand}.
+ */
 export interface ModifyListenerCommandInput extends ModifyListenerInput {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyListenerCommand}.
+ */
 export interface ModifyListenerCommandOutput extends ModifyListenerOutput, __MetadataBearer {}
 
 /**
@@ -39,68 +36,369 @@ export interface ModifyListenerCommandOutput extends ModifyListenerOutput, __Met
  * ```javascript
  * import { ElasticLoadBalancingV2Client, ModifyListenerCommand } from "@aws-sdk/client-elastic-load-balancing-v2"; // ES Modules import
  * // const { ElasticLoadBalancingV2Client, ModifyListenerCommand } = require("@aws-sdk/client-elastic-load-balancing-v2"); // CommonJS import
+ * // import type { ElasticLoadBalancingV2ClientConfig } from "@aws-sdk/client-elastic-load-balancing-v2";
+ * const config = {}; // type is ElasticLoadBalancingV2ClientConfig
  * const client = new ElasticLoadBalancingV2Client(config);
+ * const input = { // ModifyListenerInput
+ *   ListenerArn: "STRING_VALUE", // required
+ *   Port: Number("int"),
+ *   Protocol: "HTTP" || "HTTPS" || "TCP" || "TLS" || "UDP" || "TCP_UDP" || "GENEVE" || "QUIC" || "TCP_QUIC",
+ *   SslPolicy: "STRING_VALUE",
+ *   Certificates: [ // CertificateList
+ *     { // Certificate
+ *       CertificateArn: "STRING_VALUE",
+ *       IsDefault: true || false,
+ *     },
+ *   ],
+ *   DefaultActions: [ // Actions
+ *     { // Action
+ *       Type: "forward" || "authenticate-oidc" || "authenticate-cognito" || "redirect" || "fixed-response" || "jwt-validation", // required
+ *       TargetGroupArn: "STRING_VALUE",
+ *       AuthenticateOidcConfig: { // AuthenticateOidcActionConfig
+ *         Issuer: "STRING_VALUE", // required
+ *         AuthorizationEndpoint: "STRING_VALUE", // required
+ *         TokenEndpoint: "STRING_VALUE", // required
+ *         UserInfoEndpoint: "STRING_VALUE", // required
+ *         ClientId: "STRING_VALUE", // required
+ *         ClientSecret: "STRING_VALUE",
+ *         SessionCookieName: "STRING_VALUE",
+ *         Scope: "STRING_VALUE",
+ *         SessionTimeout: Number("long"),
+ *         AuthenticationRequestExtraParams: { // AuthenticateOidcActionAuthenticationRequestExtraParams
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         OnUnauthenticatedRequest: "deny" || "allow" || "authenticate",
+ *         UseExistingClientSecret: true || false,
+ *       },
+ *       AuthenticateCognitoConfig: { // AuthenticateCognitoActionConfig
+ *         UserPoolArn: "STRING_VALUE", // required
+ *         UserPoolClientId: "STRING_VALUE", // required
+ *         UserPoolDomain: "STRING_VALUE", // required
+ *         SessionCookieName: "STRING_VALUE",
+ *         Scope: "STRING_VALUE",
+ *         SessionTimeout: Number("long"),
+ *         AuthenticationRequestExtraParams: { // AuthenticateCognitoActionAuthenticationRequestExtraParams
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         OnUnauthenticatedRequest: "deny" || "allow" || "authenticate",
+ *       },
+ *       Order: Number("int"),
+ *       RedirectConfig: { // RedirectActionConfig
+ *         Protocol: "STRING_VALUE",
+ *         Port: "STRING_VALUE",
+ *         Host: "STRING_VALUE",
+ *         Path: "STRING_VALUE",
+ *         Query: "STRING_VALUE",
+ *         StatusCode: "HTTP_301" || "HTTP_302", // required
+ *       },
+ *       FixedResponseConfig: { // FixedResponseActionConfig
+ *         MessageBody: "STRING_VALUE",
+ *         StatusCode: "STRING_VALUE", // required
+ *         ContentType: "STRING_VALUE",
+ *       },
+ *       ForwardConfig: { // ForwardActionConfig
+ *         TargetGroups: [ // TargetGroupList
+ *           { // TargetGroupTuple
+ *             TargetGroupArn: "STRING_VALUE",
+ *             Weight: Number("int"),
+ *           },
+ *         ],
+ *         TargetGroupStickinessConfig: { // TargetGroupStickinessConfig
+ *           Enabled: true || false,
+ *           DurationSeconds: Number("int"),
+ *         },
+ *       },
+ *       JwtValidationConfig: { // JwtValidationActionConfig
+ *         JwksEndpoint: "STRING_VALUE", // required
+ *         Issuer: "STRING_VALUE", // required
+ *         AdditionalClaims: [ // JwtValidationActionAdditionalClaims
+ *           { // JwtValidationActionAdditionalClaim
+ *             Format: "single-string" || "string-array" || "space-separated-values", // required
+ *             Name: "STRING_VALUE", // required
+ *             Values: [ // JwtValidationActionAdditionalClaimValues // required
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *     },
+ *   ],
+ *   AlpnPolicy: [ // AlpnPolicyName
+ *     "STRING_VALUE",
+ *   ],
+ *   MutualAuthentication: { // MutualAuthenticationAttributes
+ *     Mode: "STRING_VALUE",
+ *     TrustStoreArn: "STRING_VALUE",
+ *     IgnoreClientCertificateExpiry: true || false,
+ *     TrustStoreAssociationStatus: "active" || "removed",
+ *     AdvertiseTrustStoreCaNames: "on" || "off",
+ *   },
+ * };
  * const command = new ModifyListenerCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyListenerOutput
+ * //   Listeners: [ // Listeners
+ * //     { // Listener
+ * //       ListenerArn: "STRING_VALUE",
+ * //       LoadBalancerArn: "STRING_VALUE",
+ * //       Port: Number("int"),
+ * //       Protocol: "HTTP" || "HTTPS" || "TCP" || "TLS" || "UDP" || "TCP_UDP" || "GENEVE" || "QUIC" || "TCP_QUIC",
+ * //       Certificates: [ // CertificateList
+ * //         { // Certificate
+ * //           CertificateArn: "STRING_VALUE",
+ * //           IsDefault: true || false,
+ * //         },
+ * //       ],
+ * //       SslPolicy: "STRING_VALUE",
+ * //       DefaultActions: [ // Actions
+ * //         { // Action
+ * //           Type: "forward" || "authenticate-oidc" || "authenticate-cognito" || "redirect" || "fixed-response" || "jwt-validation", // required
+ * //           TargetGroupArn: "STRING_VALUE",
+ * //           AuthenticateOidcConfig: { // AuthenticateOidcActionConfig
+ * //             Issuer: "STRING_VALUE", // required
+ * //             AuthorizationEndpoint: "STRING_VALUE", // required
+ * //             TokenEndpoint: "STRING_VALUE", // required
+ * //             UserInfoEndpoint: "STRING_VALUE", // required
+ * //             ClientId: "STRING_VALUE", // required
+ * //             ClientSecret: "STRING_VALUE",
+ * //             SessionCookieName: "STRING_VALUE",
+ * //             Scope: "STRING_VALUE",
+ * //             SessionTimeout: Number("long"),
+ * //             AuthenticationRequestExtraParams: { // AuthenticateOidcActionAuthenticationRequestExtraParams
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             OnUnauthenticatedRequest: "deny" || "allow" || "authenticate",
+ * //             UseExistingClientSecret: true || false,
+ * //           },
+ * //           AuthenticateCognitoConfig: { // AuthenticateCognitoActionConfig
+ * //             UserPoolArn: "STRING_VALUE", // required
+ * //             UserPoolClientId: "STRING_VALUE", // required
+ * //             UserPoolDomain: "STRING_VALUE", // required
+ * //             SessionCookieName: "STRING_VALUE",
+ * //             Scope: "STRING_VALUE",
+ * //             SessionTimeout: Number("long"),
+ * //             AuthenticationRequestExtraParams: { // AuthenticateCognitoActionAuthenticationRequestExtraParams
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             OnUnauthenticatedRequest: "deny" || "allow" || "authenticate",
+ * //           },
+ * //           Order: Number("int"),
+ * //           RedirectConfig: { // RedirectActionConfig
+ * //             Protocol: "STRING_VALUE",
+ * //             Port: "STRING_VALUE",
+ * //             Host: "STRING_VALUE",
+ * //             Path: "STRING_VALUE",
+ * //             Query: "STRING_VALUE",
+ * //             StatusCode: "HTTP_301" || "HTTP_302", // required
+ * //           },
+ * //           FixedResponseConfig: { // FixedResponseActionConfig
+ * //             MessageBody: "STRING_VALUE",
+ * //             StatusCode: "STRING_VALUE", // required
+ * //             ContentType: "STRING_VALUE",
+ * //           },
+ * //           ForwardConfig: { // ForwardActionConfig
+ * //             TargetGroups: [ // TargetGroupList
+ * //               { // TargetGroupTuple
+ * //                 TargetGroupArn: "STRING_VALUE",
+ * //                 Weight: Number("int"),
+ * //               },
+ * //             ],
+ * //             TargetGroupStickinessConfig: { // TargetGroupStickinessConfig
+ * //               Enabled: true || false,
+ * //               DurationSeconds: Number("int"),
+ * //             },
+ * //           },
+ * //           JwtValidationConfig: { // JwtValidationActionConfig
+ * //             JwksEndpoint: "STRING_VALUE", // required
+ * //             Issuer: "STRING_VALUE", // required
+ * //             AdditionalClaims: [ // JwtValidationActionAdditionalClaims
+ * //               { // JwtValidationActionAdditionalClaim
+ * //                 Format: "single-string" || "string-array" || "space-separated-values", // required
+ * //                 Name: "STRING_VALUE", // required
+ * //                 Values: [ // JwtValidationActionAdditionalClaimValues // required
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       ],
+ * //       AlpnPolicy: [ // AlpnPolicyName
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MutualAuthentication: { // MutualAuthenticationAttributes
+ * //         Mode: "STRING_VALUE",
+ * //         TrustStoreArn: "STRING_VALUE",
+ * //         IgnoreClientCertificateExpiry: true || false,
+ * //         TrustStoreAssociationStatus: "active" || "removed",
+ * //         AdvertiseTrustStoreCaNames: "on" || "off",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ModifyListenerCommandInput - {@link ModifyListenerCommandInput}
+ * @returns {@link ModifyListenerCommandOutput}
  * @see {@link ModifyListenerCommandInput} for command's `input` shape.
  * @see {@link ModifyListenerCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for ElasticLoadBalancingV2Client's `config` shape.
  *
+ * @throws {@link ALPNPolicyNotSupportedException} (client fault)
+ *  <p>The specified ALPN policy is not supported.</p>
+ *
+ * @throws {@link CertificateNotFoundException} (client fault)
+ *  <p>The specified certificate does not exist.</p>
+ *
+ * @throws {@link DuplicateListenerException} (client fault)
+ *  <p>A listener with the specified port already exists.</p>
+ *
+ * @throws {@link IncompatibleProtocolsException} (client fault)
+ *  <p>The specified configuration is not valid with this protocol.</p>
+ *
+ * @throws {@link InvalidConfigurationRequestException} (client fault)
+ *  <p>The requested configuration is not valid.</p>
+ *
+ * @throws {@link InvalidLoadBalancerActionException} (client fault)
+ *  <p>The requested action is not valid.</p>
+ *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The specified listener does not exist.</p>
+ *
+ * @throws {@link SSLPolicyNotFoundException} (client fault)
+ *  <p>The specified SSL policy does not exist.</p>
+ *
+ * @throws {@link TargetGroupAssociationLimitException} (client fault)
+ *  <p>You've reached the limit on the number of load balancers per target group.</p>
+ *
+ * @throws {@link TargetGroupNotFoundException} (client fault)
+ *  <p>The specified target group does not exist.</p>
+ *
+ * @throws {@link TooManyActionsException} (client fault)
+ *  <p>You've reached the limit on the number of actions per rule.</p>
+ *
+ * @throws {@link TooManyCertificatesException} (client fault)
+ *  <p>You've reached the limit on the number of certificates per load balancer.</p>
+ *
+ * @throws {@link TooManyListenersException} (client fault)
+ *  <p>You've reached the limit on the number of listeners per load balancer.</p>
+ *
+ * @throws {@link TooManyRegistrationsForTargetIdException} (client fault)
+ *  <p>You've reached the limit on the number of times a target can be registered with a load
+ *       balancer.</p>
+ *
+ * @throws {@link TooManyTargetsException} (client fault)
+ *  <p>You've reached the limit on the number of targets.</p>
+ *
+ * @throws {@link TooManyUniqueTargetGroupsPerLoadBalancerException} (client fault)
+ *  <p>You've reached the limit on the number of unique target groups per load balancer across
+ *       all listeners. If a target group is used by multiple actions for a load balancer, it is
+ *       counted as only one use.</p>
+ *
+ * @throws {@link TrustStoreNotFoundException} (client fault)
+ *  <p>The specified trust store does not exist.</p>
+ *
+ * @throws {@link TrustStoreNotReadyException} (client fault)
+ *  <p>The specified trust store is not active.</p>
+ *
+ * @throws {@link UnsupportedProtocolException} (client fault)
+ *  <p>The specified protocol is not supported.</p>
+ *
+ * @throws {@link ElasticLoadBalancingV2ServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancingV2 service.</p>
+ *
+ *
+ * @example To change the default action for a listener
+ * ```javascript
+ * // This example changes the default action for the specified listener.
+ * const input = {
+ *   DefaultActions: [
+ *     {
+ *       TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f",
+ *       Type: "forward"
+ *     }
+ *   ],
+ *   ListenerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"
+ * };
+ * const command = new ModifyListenerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Listeners: [
+ *     {
+ *       DefaultActions: [
+ *         {
+ *           TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f",
+ *           Type: "forward"
+ *         }
+ *       ],
+ *       ListenerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2",
+ *       LoadBalancerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+ *       Port: 80,
+ *       Protocol: "HTTP"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example To change the server certificate
+ * ```javascript
+ * // This example changes the server certificate for the specified HTTPS listener.
+ * const input = {
+ *   Certificates: [
+ *     {
+ *       CertificateArn: "arn:aws:iam::123456789012:server-certificate/my-new-server-cert"
+ *     }
+ *   ],
+ *   ListenerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65"
+ * };
+ * const command = new ModifyListenerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Listeners: [
+ *     {
+ *       Certificates: [
+ *         {
+ *           CertificateArn: "arn:aws:iam::123456789012:server-certificate/my-new-server-cert"
+ *         }
+ *       ],
+ *       DefaultActions: [
+ *         {
+ *           TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+ *           Type: "forward"
+ *         }
+ *       ],
+ *       ListenerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65",
+ *       LoadBalancerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+ *       Port: 443,
+ *       Protocol: "HTTPS",
+ *       SslPolicy: "ELBSecurityPolicy-2015-05"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifyListenerCommand extends $Command<
-  ModifyListenerCommandInput,
-  ModifyListenerCommandOutput,
-  ElasticLoadBalancingV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyListenerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyListenerCommandInput, ModifyListenerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingV2Client";
-    const commandName = "ModifyListenerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyListenerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyListenerOutput.filterSensitiveLog,
+export class ModifyListenerCommand extends command<ModifyListenerCommandInput, ModifyListenerCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyListener",
+  ModifyListener$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyListenerInput;
+      output: ModifyListenerOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyListenerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyListenerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyListenerCommandOutput> {
-    return deserializeAws_queryModifyListenerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyListenerCommandInput;
+      output: ModifyListenerCommandOutput;
+    };
+  };
 }

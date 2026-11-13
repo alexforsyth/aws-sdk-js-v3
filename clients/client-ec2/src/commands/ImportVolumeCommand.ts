@@ -1,98 +1,145 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ImportVolumeRequest, ImportVolumeResult } from "../models/models_4";
-import { deserializeAws_ec2ImportVolumeCommand, serializeAws_ec2ImportVolumeCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ImportVolumeRequest, ImportVolumeResult } from "../models/models_7";
+import { ImportVolume$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ImportVolumeCommand}.
+ */
 export interface ImportVolumeCommandInput extends ImportVolumeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ImportVolumeCommand}.
+ */
 export interface ImportVolumeCommandOutput extends ImportVolumeResult, __MetadataBearer {}
 
 /**
- * <p>Creates an import volume task using metadata from the specified disk image.</p>
- *          <p>This API action supports only single-volume VMs. To import multi-volume VMs, use
+ * <note>
+ *             <p>This API action supports only single-volume VMs. To import multi-volume VMs, use
  *    <a>ImportImage</a> instead. To import a disk to a snapshot, use
  *    <a>ImportSnapshot</a> instead.</p>
- *          <p>This API action is not supported by the Command Line Interface (CLI). For
- *    information about using the Amazon EC2 CLI, which is deprecated, see <a href="https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs">Importing Disks to Amazon EBS</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p>
+ *          </note>
+ *          <p>Creates an import volume task using metadata from the specified disk image.</p>
  *          <p>For information about the import manifest referenced by this API action, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html">VM Import Manifest</a>.</p>
+ *          <p>This API action is not supported by the Command Line Interface (CLI).</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ImportVolumeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ImportVolumeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ImportVolumeRequest
+ *   AvailabilityZoneId: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   AvailabilityZone: "STRING_VALUE",
+ *   Image: { // DiskImageDetail
+ *     Format: "VMDK" || "RAW" || "VHD", // required
+ *     Bytes: Number("long"), // required
+ *     ImportManifestUrl: "STRING_VALUE", // required
+ *   },
+ *   Description: "STRING_VALUE",
+ *   Volume: { // VolumeDetail
+ *     Size: Number("long"), // required
+ *   },
+ * };
  * const command = new ImportVolumeCommand(input);
  * const response = await client.send(command);
+ * // { // ImportVolumeResult
+ * //   ConversionTask: { // ConversionTask
+ * //     ConversionTaskId: "STRING_VALUE",
+ * //     ExpirationTime: "STRING_VALUE",
+ * //     ImportInstance: { // ImportInstanceTaskDetails
+ * //       Description: "STRING_VALUE",
+ * //       InstanceId: "STRING_VALUE",
+ * //       Platform: "Windows",
+ * //       Volumes: [ // ImportInstanceVolumeDetailSet
+ * //         { // ImportInstanceVolumeDetailItem
+ * //           AvailabilityZone: "STRING_VALUE",
+ * //           AvailabilityZoneId: "STRING_VALUE",
+ * //           BytesConverted: Number("long"),
+ * //           Description: "STRING_VALUE",
+ * //           Image: { // DiskImageDescription
+ * //             Checksum: "STRING_VALUE",
+ * //             Format: "VMDK" || "RAW" || "VHD",
+ * //             ImportManifestUrl: "STRING_VALUE",
+ * //             Size: Number("long"),
+ * //           },
+ * //           Status: "STRING_VALUE",
+ * //           StatusMessage: "STRING_VALUE",
+ * //           Volume: { // DiskImageVolumeDescription
+ * //             Id: "STRING_VALUE",
+ * //             Size: Number("long"),
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //     ImportVolume: { // ImportVolumeTaskDetails
+ * //       AvailabilityZone: "STRING_VALUE",
+ * //       AvailabilityZoneId: "STRING_VALUE",
+ * //       BytesConverted: Number("long"),
+ * //       Description: "STRING_VALUE",
+ * //       Image: {
+ * //         Checksum: "STRING_VALUE",
+ * //         Format: "VMDK" || "RAW" || "VHD",
+ * //         ImportManifestUrl: "STRING_VALUE",
+ * //         Size: Number("long"),
+ * //       },
+ * //       Volume: {
+ * //         Id: "STRING_VALUE",
+ * //         Size: Number("long"),
+ * //       },
+ * //     },
+ * //     State: "active" || "cancelling" || "cancelled" || "completed",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ImportVolumeCommandInput - {@link ImportVolumeCommandInput}
+ * @returns {@link ImportVolumeCommandOutput}
  * @see {@link ImportVolumeCommandInput} for command's `input` shape.
  * @see {@link ImportVolumeCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ImportVolumeCommand extends $Command<
-  ImportVolumeCommandInput,
-  ImportVolumeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ImportVolumeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ImportVolumeCommandInput, ImportVolumeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ImportVolumeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ImportVolumeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ImportVolumeResult.filterSensitiveLog,
+export class ImportVolumeCommand extends command<ImportVolumeCommandInput, ImportVolumeCommandOutput>(
+  _ep0,
+  _mw0,
+  "ImportVolume",
+  ImportVolume$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportVolumeRequest;
+      output: ImportVolumeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ImportVolumeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ImportVolumeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ImportVolumeCommandOutput> {
-    return deserializeAws_ec2ImportVolumeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ImportVolumeCommandInput;
+      output: ImportVolumeCommandOutput;
+    };
+  };
 }

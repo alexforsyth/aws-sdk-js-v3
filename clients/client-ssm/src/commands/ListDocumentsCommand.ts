@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListDocumentsRequest, ListDocumentsResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1ListDocumentsCommand,
-  serializeAws_json1_1ListDocumentsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDocumentsRequest, ListDocumentsResult } from "../models/models_1";
+import { ListDocuments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDocumentsCommand}.
+ */
 export interface ListDocumentsCommandInput extends ListDocumentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDocumentsCommand}.
+ */
 export interface ListDocumentsCommandOutput extends ListDocumentsResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,104 @@ export interface ListDocumentsCommandOutput extends ListDocumentsResult, __Metad
  * ```javascript
  * import { SSMClient, ListDocumentsCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, ListDocumentsCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // ListDocumentsRequest
+ *   DocumentFilterList: [ // DocumentFilterList
+ *     { // DocumentFilter
+ *       key: "Name" || "Owner" || "PlatformTypes" || "DocumentType", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   Filters: [ // DocumentKeyValuesFilterList
+ *     { // DocumentKeyValuesFilter
+ *       Key: "STRING_VALUE",
+ *       Values: [ // DocumentKeyValuesFilterValues
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListDocumentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDocumentsResult
+ * //   DocumentIdentifiers: [ // DocumentIdentifierList
+ * //     { // DocumentIdentifier
+ * //       Name: "STRING_VALUE",
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       DisplayName: "STRING_VALUE",
+ * //       Owner: "STRING_VALUE",
+ * //       VersionName: "STRING_VALUE",
+ * //       PlatformTypes: [ // PlatformTypeList
+ * //         "Windows" || "Linux" || "MacOS",
+ * //       ],
+ * //       DocumentVersion: "STRING_VALUE",
+ * //       DocumentType: "Command" || "Policy" || "Automation" || "Session" || "Package" || "ApplicationConfiguration" || "ApplicationConfigurationSchema" || "DeploymentStrategy" || "ChangeCalendar" || "Automation.ChangeTemplate" || "ProblemAnalysis" || "ProblemAnalysisTemplate" || "CloudFormation" || "ConformancePackTemplate" || "QuickSetup" || "ManualApprovalPolicy" || "AutoApprovalPolicy",
+ * //       SchemaVersion: "STRING_VALUE",
+ * //       DocumentFormat: "YAML" || "JSON" || "TEXT",
+ * //       TargetType: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       Requires: [ // DocumentRequiresList
+ * //         { // DocumentRequires
+ * //           Name: "STRING_VALUE", // required
+ * //           Version: "STRING_VALUE",
+ * //           RequireType: "STRING_VALUE",
+ * //           VersionName: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ReviewStatus: "APPROVED" || "NOT_REVIEWED" || "PENDING" || "REJECTED",
+ * //       Author: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDocumentsCommandInput - {@link ListDocumentsCommandInput}
+ * @returns {@link ListDocumentsCommandOutput}
  * @see {@link ListDocumentsCommandInput} for command's `input` shape.
  * @see {@link ListDocumentsCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidFilterKey} (client fault)
+ *  <p>The specified key isn't valid.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class ListDocumentsCommand extends $Command<
-  ListDocumentsCommandInput,
-  ListDocumentsCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDocumentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDocumentsCommandInput, ListDocumentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "ListDocumentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDocumentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDocumentsResult.filterSensitiveLog,
+export class ListDocumentsCommand extends command<ListDocumentsCommandInput, ListDocumentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDocuments",
+  ListDocuments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDocumentsRequest;
+      output: ListDocumentsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDocumentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDocumentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDocumentsCommandOutput> {
-    return deserializeAws_json1_1ListDocumentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDocumentsCommandInput;
+      output: ListDocumentsCommandOutput;
+    };
+  };
 }

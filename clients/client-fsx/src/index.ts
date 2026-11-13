@@ -1,5 +1,23 @@
-export * from "./FSx";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Amazon FSx is a fully managed service that makes it easy for storage and
+ *             application administrators to launch and use shared file storage.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./FSxClient";
+export * from "./FSx";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { FSxExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { FSxServiceException } from "./models/FSxServiceException";

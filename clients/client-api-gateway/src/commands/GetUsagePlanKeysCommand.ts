@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { APIGatewayClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../APIGatewayClient";
-import { GetUsagePlanKeysRequest, UsagePlanKeys } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetUsagePlanKeysCommand,
-  serializeAws_restJson1GetUsagePlanKeysCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetUsagePlanKeysRequest, UsagePlanKeys } from "../models/models_0";
+import { GetUsagePlanKeys$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetUsagePlanKeysCommand}.
+ */
 export interface GetUsagePlanKeysCommandInput extends GetUsagePlanKeysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetUsagePlanKeysCommand}.
+ */
 export interface GetUsagePlanKeysCommandOutput extends UsagePlanKeys, __MetadataBearer {}
 
 /**
@@ -28,68 +29,70 @@ export interface GetUsagePlanKeysCommandOutput extends UsagePlanKeys, __Metadata
  * ```javascript
  * import { APIGatewayClient, GetUsagePlanKeysCommand } from "@aws-sdk/client-api-gateway"; // ES Modules import
  * // const { APIGatewayClient, GetUsagePlanKeysCommand } = require("@aws-sdk/client-api-gateway"); // CommonJS import
+ * // import type { APIGatewayClientConfig } from "@aws-sdk/client-api-gateway";
+ * const config = {}; // type is APIGatewayClientConfig
  * const client = new APIGatewayClient(config);
+ * const input = { // GetUsagePlanKeysRequest
+ *   usagePlanId: "STRING_VALUE", // required
+ *   position: "STRING_VALUE",
+ *   limit: Number("int"),
+ *   nameQuery: "STRING_VALUE",
+ * };
  * const command = new GetUsagePlanKeysCommand(input);
  * const response = await client.send(command);
+ * // { // UsagePlanKeys
+ * //   items: [ // ListOfUsagePlanKey
+ * //     { // UsagePlanKey
+ * //       id: "STRING_VALUE",
+ * //       type: "STRING_VALUE",
+ * //       value: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   position: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetUsagePlanKeysCommandInput - {@link GetUsagePlanKeysCommandInput}
+ * @returns {@link GetUsagePlanKeysCommandOutput}
  * @see {@link GetUsagePlanKeysCommandInput} for command's `input` shape.
  * @see {@link GetUsagePlanKeysCommandOutput} for command's `response` shape.
- * @see {@link APIGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link APIGatewayClientResolvedConfig | config} for APIGatewayClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource is not found. Make sure that the request URI is correct.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request has reached its throttling limit. Retry after the specified time period.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The request is denied because the caller has insufficient permissions.</p>
+ *
+ * @throws {@link APIGatewayServiceException}
+ * <p>Base exception class for all service exceptions from APIGateway service.</p>
+ *
+ *
+ * @public
  */
-export class GetUsagePlanKeysCommand extends $Command<
-  GetUsagePlanKeysCommandInput,
-  GetUsagePlanKeysCommandOutput,
-  APIGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetUsagePlanKeysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: APIGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetUsagePlanKeysCommandInput, GetUsagePlanKeysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "APIGatewayClient";
-    const commandName = "GetUsagePlanKeysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetUsagePlanKeysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UsagePlanKeys.filterSensitiveLog,
+export class GetUsagePlanKeysCommand extends command<GetUsagePlanKeysCommandInput, GetUsagePlanKeysCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetUsagePlanKeys",
+  GetUsagePlanKeys$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUsagePlanKeysRequest;
+      output: UsagePlanKeys;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetUsagePlanKeysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetUsagePlanKeysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetUsagePlanKeysCommandOutput> {
-    return deserializeAws_restJson1GetUsagePlanKeysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetUsagePlanKeysCommandInput;
+      output: GetUsagePlanKeysCommandOutput;
+    };
+  };
 }

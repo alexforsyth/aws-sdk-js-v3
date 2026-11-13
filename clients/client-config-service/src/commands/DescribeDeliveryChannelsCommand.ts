@@ -1,101 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import { DescribeDeliveryChannelsRequest, DescribeDeliveryChannelsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDeliveryChannelsCommand,
-  serializeAws_json1_1DescribeDeliveryChannelsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDeliveryChannelsRequest, DescribeDeliveryChannelsResponse } from "../models/models_0";
+import { DescribeDeliveryChannels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDeliveryChannelsCommand}.
+ */
 export interface DescribeDeliveryChannelsCommandInput extends DescribeDeliveryChannelsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDeliveryChannelsCommand}.
+ */
 export interface DescribeDeliveryChannelsCommandOutput extends DescribeDeliveryChannelsResponse, __MetadataBearer {}
 
 /**
  * <p>Returns details about the specified delivery channel. If a
- * 			delivery channel is not specified, this action returns the details
+ * 			delivery channel is not specified, this operation returns the details
  * 			of all delivery channels associated with the account.</p>
- * 		       <note>
- * 			         <p>Currently, you can specify only one delivery channel per
+ *          <note>
+ *             <p>Currently, you can specify only one delivery channel per
  * 				region in your account.</p>
- * 		       </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConfigServiceClient, DescribeDeliveryChannelsCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DescribeDeliveryChannelsCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DescribeDeliveryChannelsRequest
+ *   DeliveryChannelNames: [ // DeliveryChannelNameList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeDeliveryChannelsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDeliveryChannelsResponse
+ * //   DeliveryChannels: [ // DeliveryChannelList
+ * //     { // DeliveryChannel
+ * //       name: "STRING_VALUE",
+ * //       s3BucketName: "STRING_VALUE",
+ * //       s3KeyPrefix: "STRING_VALUE",
+ * //       s3KmsKeyArn: "STRING_VALUE",
+ * //       snsTopicARN: "STRING_VALUE",
+ * //       configSnapshotDeliveryProperties: { // ConfigSnapshotDeliveryProperties
+ * //         deliveryFrequency: "One_Hour" || "Three_Hours" || "Six_Hours" || "Twelve_Hours" || "TwentyFour_Hours",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeDeliveryChannelsCommandInput - {@link DescribeDeliveryChannelsCommandInput}
+ * @returns {@link DescribeDeliveryChannelsCommandOutput}
  * @see {@link DescribeDeliveryChannelsCommandInput} for command's `input` shape.
  * @see {@link DescribeDeliveryChannelsCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link NoSuchDeliveryChannelException} (client fault)
+ *  <p>You have specified a delivery channel that does not
+ * 			exist.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDeliveryChannelsCommand extends $Command<
-  DescribeDeliveryChannelsCommandInput,
-  DescribeDeliveryChannelsCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDeliveryChannelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDeliveryChannelsCommandInput, DescribeDeliveryChannelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DescribeDeliveryChannelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDeliveryChannelsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDeliveryChannelsResponse.filterSensitiveLog,
+export class DescribeDeliveryChannelsCommand extends command<DescribeDeliveryChannelsCommandInput, DescribeDeliveryChannelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDeliveryChannels",
+  DescribeDeliveryChannels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDeliveryChannelsRequest;
+      output: DescribeDeliveryChannelsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDeliveryChannelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDeliveryChannelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDeliveryChannelsCommandOutput> {
-    return deserializeAws_json1_1DescribeDeliveryChannelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDeliveryChannelsCommandInput;
+      output: DescribeDeliveryChannelsCommandOutput;
+    };
+  };
 }

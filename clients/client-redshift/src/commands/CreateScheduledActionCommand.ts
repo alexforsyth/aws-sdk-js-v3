@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateScheduledActionMessage, ScheduledAction } from "../models/models_0";
-import {
-  deserializeAws_queryCreateScheduledActionCommand,
-  serializeAws_queryCreateScheduledActionCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateScheduledActionMessage, ScheduledAction } from "../models/models_0";
+import { CreateScheduledAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateScheduledActionCommand}.
+ */
 export interface CreateScheduledActionCommandInput extends CreateScheduledActionMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateScheduledActionCommand}.
+ */
 export interface CreateScheduledActionCommandOutput extends ScheduledAction, __MetadataBearer {}
 
 /**
@@ -30,68 +31,121 @@ export interface CreateScheduledActionCommandOutput extends ScheduledAction, __M
  * ```javascript
  * import { RedshiftClient, CreateScheduledActionCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, CreateScheduledActionCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // CreateScheduledActionMessage
+ *   ScheduledActionName: "STRING_VALUE", // required
+ *   TargetAction: { // ScheduledActionType
+ *     ResizeCluster: { // ResizeClusterMessage
+ *       ClusterIdentifier: "STRING_VALUE", // required
+ *       ClusterType: "STRING_VALUE",
+ *       NodeType: "STRING_VALUE",
+ *       NumberOfNodes: Number("int"),
+ *       Classic: true || false,
+ *       ReservedNodeId: "STRING_VALUE",
+ *       TargetReservedNodeOfferingId: "STRING_VALUE",
+ *     },
+ *     PauseCluster: { // PauseClusterMessage
+ *       ClusterIdentifier: "STRING_VALUE", // required
+ *     },
+ *     ResumeCluster: { // ResumeClusterMessage
+ *       ClusterIdentifier: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   Schedule: "STRING_VALUE", // required
+ *   IamRole: "STRING_VALUE", // required
+ *   ScheduledActionDescription: "STRING_VALUE",
+ *   StartTime: new Date("TIMESTAMP"),
+ *   EndTime: new Date("TIMESTAMP"),
+ *   Enable: true || false,
+ * };
  * const command = new CreateScheduledActionCommand(input);
  * const response = await client.send(command);
+ * // { // ScheduledAction
+ * //   ScheduledActionName: "STRING_VALUE",
+ * //   TargetAction: { // ScheduledActionType
+ * //     ResizeCluster: { // ResizeClusterMessage
+ * //       ClusterIdentifier: "STRING_VALUE", // required
+ * //       ClusterType: "STRING_VALUE",
+ * //       NodeType: "STRING_VALUE",
+ * //       NumberOfNodes: Number("int"),
+ * //       Classic: true || false,
+ * //       ReservedNodeId: "STRING_VALUE",
+ * //       TargetReservedNodeOfferingId: "STRING_VALUE",
+ * //     },
+ * //     PauseCluster: { // PauseClusterMessage
+ * //       ClusterIdentifier: "STRING_VALUE", // required
+ * //     },
+ * //     ResumeCluster: { // ResumeClusterMessage
+ * //       ClusterIdentifier: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   Schedule: "STRING_VALUE",
+ * //   IamRole: "STRING_VALUE",
+ * //   ScheduledActionDescription: "STRING_VALUE",
+ * //   State: "ACTIVE" || "DISABLED",
+ * //   NextInvocations: [ // ScheduledActionTimeList
+ * //     new Date("TIMESTAMP"),
+ * //   ],
+ * //   StartTime: new Date("TIMESTAMP"),
+ * //   EndTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param CreateScheduledActionCommandInput - {@link CreateScheduledActionCommandInput}
+ * @returns {@link CreateScheduledActionCommandOutput}
  * @see {@link CreateScheduledActionCommandInput} for command's `input` shape.
  * @see {@link CreateScheduledActionCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link InvalidScheduledActionFault} (client fault)
+ *  <p>The scheduled action is not valid. </p>
+ *
+ * @throws {@link InvalidScheduleFault} (client fault)
+ *  <p>The schedule you submitted isn't valid.</p>
+ *
+ * @throws {@link ScheduledActionAlreadyExistsFault} (client fault)
+ *  <p>The scheduled action already exists. </p>
+ *
+ * @throws {@link ScheduledActionQuotaExceededFault} (client fault)
+ *  <p>The quota for scheduled actions exceeded. </p>
+ *
+ * @throws {@link ScheduledActionTypeUnsupportedFault} (client fault)
+ *  <p>The action type specified for a scheduled action is not supported. </p>
+ *
+ * @throws {@link UnauthorizedOperation} (client fault)
+ *  <p>Your account is not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateScheduledActionCommand extends $Command<
-  CreateScheduledActionCommandInput,
-  CreateScheduledActionCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateScheduledActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateScheduledActionCommandInput, CreateScheduledActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "CreateScheduledActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateScheduledActionMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ScheduledAction.filterSensitiveLog,
+export class CreateScheduledActionCommand extends command<CreateScheduledActionCommandInput, CreateScheduledActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateScheduledAction",
+  CreateScheduledAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateScheduledActionMessage;
+      output: ScheduledAction;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateScheduledActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateScheduledActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateScheduledActionCommandOutput> {
-    return deserializeAws_queryCreateScheduledActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateScheduledActionCommandInput;
+      output: CreateScheduledActionCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDomainRequest, DescribeDomainResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeDomainCommand,
-  serializeAws_json1_0DescribeDomainCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, VoiceIDClientResolvedConfig } from "../VoiceIDClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDomainRequest, DescribeDomainResponse } from "../models/models_0";
+import { DescribeDomain$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDomainCommand}.
+ */
 export interface DescribeDomainCommandInput extends DescribeDomainRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDomainCommand}.
+ */
 export interface DescribeDomainCommandOutput extends DescribeDomainResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,87 @@ export interface DescribeDomainCommandOutput extends DescribeDomainResponse, __M
  * ```javascript
  * import { VoiceIDClient, DescribeDomainCommand } from "@aws-sdk/client-voice-id"; // ES Modules import
  * // const { VoiceIDClient, DescribeDomainCommand } = require("@aws-sdk/client-voice-id"); // CommonJS import
+ * // import type { VoiceIDClientConfig } from "@aws-sdk/client-voice-id";
+ * const config = {}; // type is VoiceIDClientConfig
  * const client = new VoiceIDClient(config);
+ * const input = { // DescribeDomainRequest
+ *   DomainId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDomainCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDomainResponse
+ * //   Domain: { // Domain
+ * //     DomainId: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     DomainStatus: "STRING_VALUE",
+ * //     ServerSideEncryptionConfiguration: { // ServerSideEncryptionConfiguration
+ * //       KmsKeyId: "STRING_VALUE", // required
+ * //     },
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     UpdatedAt: new Date("TIMESTAMP"),
+ * //     ServerSideEncryptionUpdateDetails: { // ServerSideEncryptionUpdateDetails
+ * //       OldKmsKeyId: "STRING_VALUE",
+ * //       UpdateStatus: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     WatchlistDetails: { // WatchlistDetails
+ * //       DefaultWatchlistId: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeDomainCommandInput - {@link DescribeDomainCommandInput}
+ * @returns {@link DescribeDomainCommandOutput}
  * @see {@link DescribeDomainCommandInput} for command's `input` shape.
  * @see {@link DescribeDomainCommandOutput} for command's `response` shape.
- * @see {@link VoiceIDClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link VoiceIDClientResolvedConfig | config} for VoiceIDClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action. Check the error message
+ *             and try again.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed due to an unknown error on the server side.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found. Check the <code>ResourceType</code> and error
+ *             message for more details.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. Please slow down your request rate.
+ *             Refer to <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas">
+ *                 Amazon Connect Voice ID Service API throttling quotas </a> and try your
+ *             request again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed one or more validations; check the error message for more
+ *             details.</p>
+ *
+ * @throws {@link VoiceIDServiceException}
+ * <p>Base exception class for all service exceptions from VoiceID service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDomainCommand extends $Command<
-  DescribeDomainCommandInput,
-  DescribeDomainCommandOutput,
-  VoiceIDClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDomainCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: VoiceIDClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDomainCommandInput, DescribeDomainCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "VoiceIDClient";
-    const commandName = "DescribeDomainCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDomainRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDomainResponse.filterSensitiveLog,
+export class DescribeDomainCommand extends command<DescribeDomainCommandInput, DescribeDomainCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDomain",
+  DescribeDomain$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDomainRequest;
+      output: DescribeDomainResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDomainCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeDomainCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDomainCommandOutput> {
-    return deserializeAws_json1_0DescribeDomainCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDomainCommandInput;
+      output: DescribeDomainCommandOutput;
+    };
+  };
 }

@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetDomainDeliverabilityCampaignRequest, GetDomainDeliverabilityCampaignResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDomainDeliverabilityCampaignCommand,
-  serializeAws_restJson1GetDomainDeliverabilityCampaignCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetDomainDeliverabilityCampaignRequest,
+  GetDomainDeliverabilityCampaignResponse,
+} from "../models/models_0";
+import { GetDomainDeliverabilityCampaign$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDomainDeliverabilityCampaignCommand}.
+ */
 export interface GetDomainDeliverabilityCampaignCommandInput extends GetDomainDeliverabilityCampaignRequest {}
-export interface GetDomainDeliverabilityCampaignCommandOutput
-  extends GetDomainDeliverabilityCampaignResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetDomainDeliverabilityCampaignCommand}.
+ */
+export interface GetDomainDeliverabilityCampaignCommandOutput extends GetDomainDeliverabilityCampaignResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieve all the deliverability data for a specific campaign. This data is available
@@ -32,74 +34,75 @@ export interface GetDomainDeliverabilityCampaignCommandOutput
  * ```javascript
  * import { SESv2Client, GetDomainDeliverabilityCampaignCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, GetDomainDeliverabilityCampaignCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // GetDomainDeliverabilityCampaignRequest
+ *   CampaignId: "STRING_VALUE", // required
+ * };
  * const command = new GetDomainDeliverabilityCampaignCommand(input);
  * const response = await client.send(command);
+ * // { // GetDomainDeliverabilityCampaignResponse
+ * //   DomainDeliverabilityCampaign: { // DomainDeliverabilityCampaign
+ * //     CampaignId: "STRING_VALUE",
+ * //     ImageUrl: "STRING_VALUE",
+ * //     Subject: "STRING_VALUE",
+ * //     FromAddress: "STRING_VALUE",
+ * //     SendingIps: [ // IpList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     FirstSeenDateTime: new Date("TIMESTAMP"),
+ * //     LastSeenDateTime: new Date("TIMESTAMP"),
+ * //     InboxCount: Number("long"),
+ * //     SpamCount: Number("long"),
+ * //     ReadRate: Number("double"),
+ * //     DeleteRate: Number("double"),
+ * //     ReadDeleteRate: Number("double"),
+ * //     ProjectedVolume: Number("long"),
+ * //     Esps: [ // Esps
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDomainDeliverabilityCampaignCommandInput - {@link GetDomainDeliverabilityCampaignCommandInput}
+ * @returns {@link GetDomainDeliverabilityCampaignCommandOutput}
  * @see {@link GetDomainDeliverabilityCampaignCommandInput} for command's `input` shape.
  * @see {@link GetDomainDeliverabilityCampaignCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetDomainDeliverabilityCampaignCommand extends $Command<
-  GetDomainDeliverabilityCampaignCommandInput,
-  GetDomainDeliverabilityCampaignCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDomainDeliverabilityCampaignCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDomainDeliverabilityCampaignCommandInput, GetDomainDeliverabilityCampaignCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "GetDomainDeliverabilityCampaignCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDomainDeliverabilityCampaignRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDomainDeliverabilityCampaignResponse.filterSensitiveLog,
+export class GetDomainDeliverabilityCampaignCommand extends command<GetDomainDeliverabilityCampaignCommandInput, GetDomainDeliverabilityCampaignCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDomainDeliverabilityCampaign",
+  GetDomainDeliverabilityCampaign$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDomainDeliverabilityCampaignRequest;
+      output: GetDomainDeliverabilityCampaignResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetDomainDeliverabilityCampaignCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDomainDeliverabilityCampaignCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetDomainDeliverabilityCampaignCommandOutput> {
-    return deserializeAws_restJson1GetDomainDeliverabilityCampaignCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDomainDeliverabilityCampaignCommandInput;
+      output: GetDomainDeliverabilityCampaignCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,89 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLineageGroupsRequest, ListLineageGroupsResponse } from "../models/models_4";
+import { ListLineageGroups$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLineageGroupsCommand}.
+ */
+export interface ListLineageGroupsCommandInput extends ListLineageGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListLineageGroupsCommand}.
+ */
+export interface ListLineageGroupsCommandOutput extends ListLineageGroupsResponse, __MetadataBearer {}
+
+/**
+ * <p>A list of lineage groups shared with your Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html"> Cross-Account Lineage Tracking </a> in the <i>Amazon SageMaker Developer Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { SageMakerClient, ListLineageGroupsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
+ * // const { SageMakerClient, ListLineageGroupsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
+ * const client = new SageMakerClient(config);
+ * const input = { // ListLineageGroupsRequest
+ *   CreatedAfter: new Date("TIMESTAMP"),
+ *   CreatedBefore: new Date("TIMESTAMP"),
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
+ * const command = new ListLineageGroupsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListLineageGroupsResponse
+ * //   LineageGroupSummaries: [ // LineageGroupSummaries
+ * //     { // LineageGroupSummary
+ * //       LineageGroupArn: "STRING_VALUE",
+ * //       LineageGroupName: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListLineageGroupsCommandInput - {@link ListLineageGroupsCommandInput}
+ * @returns {@link ListLineageGroupsCommandOutput}
+ * @see {@link ListLineageGroupsCommandInput} for command's `input` shape.
+ * @see {@link ListLineageGroupsCommandOutput} for command's `response` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
+ */
+export class ListLineageGroupsCommand extends command<ListLineageGroupsCommandInput, ListLineageGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLineageGroups",
+  ListLineageGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLineageGroupsRequest;
+      output: ListLineageGroupsResponse;
+    };
+    sdk: {
+      input: ListLineageGroupsCommandInput;
+      output: ListLineageGroupsCommandOutput;
+    };
+  };
+}

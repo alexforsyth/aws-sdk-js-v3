@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetServiceCommand, GetServiceCommandInput } from "../commands/GetServiceCommand";
-import { ProtonClient } from "../ProtonClient";
+import {
+  type GetServiceCommandInput,
+  type GetServiceCommandOutput,
+  GetServiceCommand,
+} from "../commands/GetServiceCommand";
+import type { ProtonServiceException } from "../models/ProtonServiceException";
+import type { ProtonClient } from "../ProtonClient";
 
-const checkState = async (client: ProtonClient, input: GetServiceCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ProtonClient, input: GetServiceCommandInput): Promise<WaiterResult<GetServiceCommandOutput | ProtonServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetServiceCommand(input));
+    let result: GetServiceCommandOutput & any = await client.send(new GetServiceCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.service.status;
-      };
+      }
       if (returnComparator() === "ACTIVE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: ProtonClient, input: GetServiceCommandInput): 
     try {
       const returnComparator = () => {
         return result.service.status;
-      };
+      }
       if (returnComparator() === "CREATE_FAILED_CLEANUP_COMPLETE") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -27,7 +39,7 @@ const checkState = async (client: ProtonClient, input: GetServiceCommandInput): 
     try {
       const returnComparator = () => {
         return result.service.status;
-      };
+      }
       if (returnComparator() === "CREATE_FAILED_CLEANUP_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -35,7 +47,7 @@ const checkState = async (client: ProtonClient, input: GetServiceCommandInput): 
     try {
       const returnComparator = () => {
         return result.service.status;
-      };
+      }
       if (returnComparator() === "CREATE_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -52,7 +64,7 @@ const checkState = async (client: ProtonClient, input: GetServiceCommandInput): 
 export const waitForServiceCreated = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetServiceCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetServiceCommandOutput | ProtonServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 4999 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -64,8 +76,8 @@ export const waitForServiceCreated = async (
 export const waitUntilServiceCreated = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetServiceCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetServiceCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 4999 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetServiceCommandOutput>;
 };

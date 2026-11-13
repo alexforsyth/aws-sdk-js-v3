@@ -1,35 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateThemePermissionsRequest, UpdateThemePermissionsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateThemePermissionsCommand,
-  serializeAws_restJson1UpdateThemePermissionsCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateThemePermissionsRequest, UpdateThemePermissionsResponse } from "../models/models_5";
+import { UpdateThemePermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateThemePermissionsCommand}.
+ */
 export interface UpdateThemePermissionsCommandInput extends UpdateThemePermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateThemePermissionsCommand}.
+ */
 export interface UpdateThemePermissionsCommandOutput extends UpdateThemePermissionsResponse, __MetadataBearer {}
 
 /**
  * <p>Updates the resource permissions for a theme. Permissions apply to the action to grant or
  * 			revoke permissions on, for example <code>"quicksight:DescribeTheme"</code>.</p>
- * 		       <p>Theme permissions apply in groupings. Valid groupings include the following for the three
+ *          <p>Theme permissions apply in groupings. Valid groupings include the following for the three
  * 			levels of permissions, which are user, owner, or no permissions: </p>
- * 			      <ul>
+ *          <ul>
  *             <li>
  *                <p>User</p>
- * 					          <ul>
+ *                <ul>
  *                   <li>
  *                      <p>
  *                         <code>"quicksight:DescribeTheme"</code>
@@ -51,10 +52,10 @@ export interface UpdateThemePermissionsCommandOutput extends UpdateThemePermissi
  *                      </p>
  *                   </li>
  *                </ul>
- * 				        </li>
+ *             </li>
  *             <li>
  *                <p>Owner</p>
- * 					          <ul>
+ *                <ul>
  *                   <li>
  *                      <p>
  *                         <code>"quicksight:DescribeTheme"</code>
@@ -111,7 +112,7 @@ export interface UpdateThemePermissionsCommandOutput extends UpdateThemePermissi
  *                      </p>
  *                   </li>
  *                </ul>
- * 				        </li>
+ *             </li>
  *             <li>
  *                <p>To specify no permissions, omit the permissions list.</p>
  *             </li>
@@ -121,68 +122,102 @@ export interface UpdateThemePermissionsCommandOutput extends UpdateThemePermissi
  * ```javascript
  * import { QuickSightClient, UpdateThemePermissionsCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, UpdateThemePermissionsCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // UpdateThemePermissionsRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   ThemeId: "STRING_VALUE", // required
+ *   GrantPermissions: [ // UpdateResourcePermissionList
+ *     { // ResourcePermission
+ *       Principal: "STRING_VALUE", // required
+ *       Actions: [ // ActionList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   RevokePermissions: [
+ *     {
+ *       Principal: "STRING_VALUE", // required
+ *       Actions: [ // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new UpdateThemePermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateThemePermissionsResponse
+ * //   ThemeId: "STRING_VALUE",
+ * //   ThemeArn: "STRING_VALUE",
+ * //   Permissions: [ // UpdateResourcePermissionList
+ * //     { // ResourcePermission
+ * //       Principal: "STRING_VALUE", // required
+ * //       Actions: [ // ActionList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateThemePermissionsCommandInput - {@link UpdateThemePermissionsCommandInput}
+ * @returns {@link UpdateThemePermissionsCommandOutput}
  * @see {@link UpdateThemePermissionsCommandInput} for command's `input` shape.
  * @see {@link UpdateThemePermissionsCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit is exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateThemePermissionsCommand extends $Command<
-  UpdateThemePermissionsCommandInput,
-  UpdateThemePermissionsCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateThemePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateThemePermissionsCommandInput, UpdateThemePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "UpdateThemePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateThemePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateThemePermissionsResponse.filterSensitiveLog,
+export class UpdateThemePermissionsCommand extends command<UpdateThemePermissionsCommandInput, UpdateThemePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateThemePermissions",
+  UpdateThemePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateThemePermissionsRequest;
+      output: UpdateThemePermissionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateThemePermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateThemePermissionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateThemePermissionsCommandOutput> {
-    return deserializeAws_restJson1UpdateThemePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateThemePermissionsCommandInput;
+      output: UpdateThemePermissionsCommandOutput;
+    };
+  };
 }

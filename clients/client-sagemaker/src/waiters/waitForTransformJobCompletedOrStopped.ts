@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeTransformJobCommand, DescribeTransformJobCommandInput } from "../commands/DescribeTransformJobCommand";
-import { SageMakerClient } from "../SageMakerClient";
+import {
+  type DescribeTransformJobCommandInput,
+  type DescribeTransformJobCommandOutput,
+  DescribeTransformJobCommand,
+} from "../commands/DescribeTransformJobCommand";
+import type { SageMakerServiceException } from "../models/SageMakerServiceException";
+import type { SageMakerClient } from "../SageMakerClient";
 
-const checkState = async (client: SageMakerClient, input: DescribeTransformJobCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SageMakerClient, input: DescribeTransformJobCommandInput): Promise<WaiterResult<DescribeTransformJobCommandOutput | SageMakerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeTransformJobCommand(input));
+    let result: DescribeTransformJobCommandOutput & any = await client.send(new DescribeTransformJobCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.TransformJobStatus;
-      };
+      }
       if (returnComparator() === "Completed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: SageMakerClient, input: DescribeTransformJobCo
     try {
       const returnComparator = () => {
         return result.TransformJobStatus;
-      };
+      }
       if (returnComparator() === "Stopped") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -27,14 +39,14 @@ const checkState = async (client: SageMakerClient, input: DescribeTransformJobCo
     try {
       const returnComparator = () => {
         return result.TransformJobStatus;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ValidationException") {
+    if (exception.name === "ValidationException") {
       return { state: WaiterState.FAILURE, reason };
     }
   }
@@ -47,8 +59,8 @@ const checkState = async (client: SageMakerClient, input: DescribeTransformJobCo
 export const waitForTransformJobCompletedOrStopped = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeTransformJobCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<DescribeTransformJobCommandOutput | SageMakerServiceException>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 3600 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -59,8 +71,8 @@ export const waitForTransformJobCompletedOrStopped = async (
 export const waitUntilTransformJobCompletedOrStopped = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeTransformJobCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<DescribeTransformJobCommandOutput>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 3600 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeTransformJobCommandOutput>;
 };

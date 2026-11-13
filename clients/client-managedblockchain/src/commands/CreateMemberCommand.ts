@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ManagedBlockchainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ManagedBlockchainClient";
-import { CreateMemberInput, CreateMemberOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateMemberCommand,
-  serializeAws_restJson1CreateMemberCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateMemberInput, CreateMemberOutput } from "../models/models_0";
+import { CreateMember$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateMemberCommand}.
+ */
 export interface CreateMemberCommandInput extends CreateMemberInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateMemberCommand}.
+ */
 export interface CreateMemberCommandOutput extends CreateMemberOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +30,103 @@ export interface CreateMemberCommandOutput extends CreateMemberOutput, __Metadat
  * ```javascript
  * import { ManagedBlockchainClient, CreateMemberCommand } from "@aws-sdk/client-managedblockchain"; // ES Modules import
  * // const { ManagedBlockchainClient, CreateMemberCommand } = require("@aws-sdk/client-managedblockchain"); // CommonJS import
+ * // import type { ManagedBlockchainClientConfig } from "@aws-sdk/client-managedblockchain";
+ * const config = {}; // type is ManagedBlockchainClientConfig
  * const client = new ManagedBlockchainClient(config);
+ * const input = { // CreateMemberInput
+ *   ClientRequestToken: "STRING_VALUE", // required
+ *   InvitationId: "STRING_VALUE", // required
+ *   NetworkId: "STRING_VALUE", // required
+ *   MemberConfiguration: { // MemberConfiguration
+ *     Name: "STRING_VALUE", // required
+ *     Description: "STRING_VALUE",
+ *     FrameworkConfiguration: { // MemberFrameworkConfiguration
+ *       Fabric: { // MemberFabricConfiguration
+ *         AdminUsername: "STRING_VALUE", // required
+ *         AdminPassword: "STRING_VALUE", // required
+ *       },
+ *     },
+ *     LogPublishingConfiguration: { // MemberLogPublishingConfiguration
+ *       Fabric: { // MemberFabricLogPublishingConfiguration
+ *         CaLogs: { // LogConfigurations
+ *           Cloudwatch: { // LogConfiguration
+ *             Enabled: true || false,
+ *           },
+ *         },
+ *       },
+ *     },
+ *     Tags: { // InputTagMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     KmsKeyArn: "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateMemberCommand(input);
  * const response = await client.send(command);
+ * // { // CreateMemberOutput
+ * //   MemberId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateMemberCommandInput - {@link CreateMemberCommandInput}
+ * @returns {@link CreateMemberCommandOutput}
  * @see {@link CreateMemberCommandInput} for command's `input` shape.
  * @see {@link CreateMemberCommandOutput} for command's `response` shape.
- * @see {@link ManagedBlockchainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ManagedBlockchainClientResolvedConfig | config} for ManagedBlockchainClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>A resource request is issued for a resource that already exists.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>The maximum number of resources of that type already exist. Ensure the resources requested
+ *          are within the boundaries of the service edition and your account limits.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource doesn't exist. It may have been deleted or referenced incorrectly.</p>
+ *
+ * @throws {@link ResourceNotReadyException} (client fault)
+ *  <p>The requested resource exists but isn't in a status that can complete the operation.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is
+ *          throttling requests. The most common source of throttling errors is
+ *          creating resources that exceed your service limit for this resource type.
+ *          Request a limit increase or delete unused resources if possible.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ManagedBlockchainServiceException}
+ * <p>Base exception class for all service exceptions from ManagedBlockchain service.</p>
+ *
+ *
+ * @public
  */
-export class CreateMemberCommand extends $Command<
-  CreateMemberCommandInput,
-  CreateMemberCommandOutput,
-  ManagedBlockchainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateMemberCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ManagedBlockchainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateMemberCommandInput, CreateMemberCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ManagedBlockchainClient";
-    const commandName = "CreateMemberCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateMemberInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateMemberOutput.filterSensitiveLog,
+export class CreateMemberCommand extends command<CreateMemberCommandInput, CreateMemberCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateMember",
+  CreateMember$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMemberInput;
+      output: CreateMemberOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateMemberCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateMemberCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateMemberCommandOutput> {
-    return deserializeAws_restJson1CreateMemberCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateMemberCommandInput;
+      output: CreateMemberCommandOutput;
+    };
+  };
 }

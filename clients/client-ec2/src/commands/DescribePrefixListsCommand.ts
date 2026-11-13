@@ -1,97 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribePrefixListsRequest, DescribePrefixListsResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribePrefixListsCommand,
-  serializeAws_ec2DescribePrefixListsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePrefixListsRequest, DescribePrefixListsResult } from "../models/models_5";
+import { DescribePrefixLists$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePrefixListsCommand}.
+ */
 export interface DescribePrefixListsCommandInput extends DescribePrefixListsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePrefixListsCommand}.
+ */
 export interface DescribePrefixListsCommandOutput extends DescribePrefixListsResult, __MetadataBearer {}
 
 /**
  * <p>Describes available Amazon Web Services services in a prefix list format, which includes the prefix list
  *             name and prefix list ID of the service and the IP address range for the service.</p>
- *         <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribePrefixListsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribePrefixListsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribePrefixListsRequest
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   PrefixListIds: [ // PrefixListResourceIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribePrefixListsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePrefixListsResult
+ * //   NextToken: "STRING_VALUE",
+ * //   PrefixLists: [ // PrefixListSet
+ * //     { // PrefixList
+ * //       Cidrs: [ // ValueStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       PrefixListId: "STRING_VALUE",
+ * //       PrefixListName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribePrefixListsCommandInput - {@link DescribePrefixListsCommandInput}
+ * @returns {@link DescribePrefixListsCommandOutput}
  * @see {@link DescribePrefixListsCommandInput} for command's `input` shape.
  * @see {@link DescribePrefixListsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePrefixListsCommand extends $Command<
-  DescribePrefixListsCommandInput,
-  DescribePrefixListsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePrefixListsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePrefixListsCommandInput, DescribePrefixListsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribePrefixListsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePrefixListsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePrefixListsResult.filterSensitiveLog,
+export class DescribePrefixListsCommand extends command<DescribePrefixListsCommandInput, DescribePrefixListsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePrefixLists",
+  DescribePrefixLists$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePrefixListsRequest;
+      output: DescribePrefixListsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePrefixListsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribePrefixListsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribePrefixListsCommandOutput> {
-    return deserializeAws_ec2DescribePrefixListsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePrefixListsCommandInput;
+      output: DescribePrefixListsCommandOutput;
+    };
+  };
 }

@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { CloudFrontClient } from "../CloudFrontClient";
-import { GetInvalidationCommand, GetInvalidationCommandInput } from "../commands/GetInvalidationCommand";
+import type { CloudFrontClient } from "../CloudFrontClient";
+import {
+  type GetInvalidationCommandInput,
+  type GetInvalidationCommandOutput,
+  GetInvalidationCommand,
+} from "../commands/GetInvalidationCommand";
+import type { CloudFrontServiceException } from "../models/CloudFrontServiceException";
 
-const checkState = async (client: CloudFrontClient, input: GetInvalidationCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: CloudFrontClient, input: GetInvalidationCommandInput): Promise<WaiterResult<GetInvalidationCommandOutput | CloudFrontServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetInvalidationCommand(input));
+    let result: GetInvalidationCommandOutput & any = await client.send(new GetInvalidationCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Invalidation.Status;
-      };
+      }
       if (returnComparator() === "Completed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -28,8 +40,8 @@ const checkState = async (client: CloudFrontClient, input: GetInvalidationComman
 export const waitForInvalidationCompleted = async (
   params: WaiterConfiguration<CloudFrontClient>,
   input: GetInvalidationCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 20, maxDelay: 120 };
+): Promise<WaiterResult<GetInvalidationCommandOutput | CloudFrontServiceException>> => {
+  const serviceDefaults = { minDelay: 20, maxDelay: 600 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -40,8 +52,8 @@ export const waitForInvalidationCompleted = async (
 export const waitUntilInvalidationCompleted = async (
   params: WaiterConfiguration<CloudFrontClient>,
   input: GetInvalidationCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 20, maxDelay: 120 };
+): Promise<WaiterResult<GetInvalidationCommandOutput>> => {
+  const serviceDefaults = { minDelay: 20, maxDelay: 600 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetInvalidationCommandOutput>;
 };

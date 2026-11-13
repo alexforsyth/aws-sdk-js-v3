@@ -1,95 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateLocalGatewayRouteRequest, CreateLocalGatewayRouteResult } from "../models/models_1";
-import {
-  deserializeAws_ec2CreateLocalGatewayRouteCommand,
-  serializeAws_ec2CreateLocalGatewayRouteCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateLocalGatewayRouteRequest, CreateLocalGatewayRouteResult } from "../models/models_1";
+import { CreateLocalGatewayRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateLocalGatewayRouteCommand}.
+ */
 export interface CreateLocalGatewayRouteCommandInput extends CreateLocalGatewayRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateLocalGatewayRouteCommand}.
+ */
 export interface CreateLocalGatewayRouteCommandOutput extends CreateLocalGatewayRouteResult, __MetadataBearer {}
 
 /**
- * <p>Creates a static route for the specified local gateway route table.</p>
+ * <p>Creates a static route for the specified local gateway route table. You must specify one of the
+ *          following targets: </p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <code>LocalGatewayVirtualInterfaceGroupId</code>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>NetworkInterfaceId</code>
+ *                </p>
+ *             </li>
+ *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateLocalGatewayRouteCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateLocalGatewayRouteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateLocalGatewayRouteRequest
+ *   DestinationCidrBlock: "STRING_VALUE",
+ *   LocalGatewayRouteTableId: "STRING_VALUE", // required
+ *   LocalGatewayVirtualInterfaceGroupId: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   NetworkInterfaceId: "STRING_VALUE",
+ *   DestinationPrefixListId: "STRING_VALUE",
+ * };
  * const command = new CreateLocalGatewayRouteCommand(input);
  * const response = await client.send(command);
+ * // { // CreateLocalGatewayRouteResult
+ * //   Route: { // LocalGatewayRoute
+ * //     DestinationCidrBlock: "STRING_VALUE",
+ * //     LocalGatewayVirtualInterfaceGroupId: "STRING_VALUE",
+ * //     Type: "static" || "propagated",
+ * //     State: "pending" || "active" || "blackhole" || "deleting" || "deleted",
+ * //     LocalGatewayRouteTableId: "STRING_VALUE",
+ * //     LocalGatewayRouteTableArn: "STRING_VALUE",
+ * //     OwnerId: "STRING_VALUE",
+ * //     SubnetId: "STRING_VALUE",
+ * //     CoipPoolId: "STRING_VALUE",
+ * //     NetworkInterfaceId: "STRING_VALUE",
+ * //     DestinationPrefixListId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateLocalGatewayRouteCommandInput - {@link CreateLocalGatewayRouteCommandInput}
+ * @returns {@link CreateLocalGatewayRouteCommandOutput}
  * @see {@link CreateLocalGatewayRouteCommandInput} for command's `input` shape.
  * @see {@link CreateLocalGatewayRouteCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateLocalGatewayRouteCommand extends $Command<
-  CreateLocalGatewayRouteCommandInput,
-  CreateLocalGatewayRouteCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateLocalGatewayRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateLocalGatewayRouteCommandInput, CreateLocalGatewayRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateLocalGatewayRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateLocalGatewayRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateLocalGatewayRouteResult.filterSensitiveLog,
+export class CreateLocalGatewayRouteCommand extends command<CreateLocalGatewayRouteCommandInput, CreateLocalGatewayRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateLocalGatewayRoute",
+  CreateLocalGatewayRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLocalGatewayRouteRequest;
+      output: CreateLocalGatewayRouteResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateLocalGatewayRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateLocalGatewayRouteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateLocalGatewayRouteCommandOutput> {
-    return deserializeAws_ec2CreateLocalGatewayRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateLocalGatewayRouteCommandInput;
+      output: CreateLocalGatewayRouteCommandOutput;
+    };
+  };
 }

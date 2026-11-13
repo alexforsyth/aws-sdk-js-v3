@@ -1,101 +1,128 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InviteMembersRequest, InviteMembersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1InviteMembersCommand,
-  serializeAws_restJson1InviteMembersCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { InviteMembersRequest, InviteMembersResponse } from "../models/models_3";
+import { InviteMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link InviteMembersCommand}.
+ */
 export interface InviteMembersCommandInput extends InviteMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link InviteMembersCommand}.
+ */
 export interface InviteMembersCommandOutput extends InviteMembersResponse, __MetadataBearer {}
 
 /**
- * <p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that
+ * <note>
+ *             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+ *            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+ *            in the <i>Security Hub CSPM User Guide</i>.</p>
+ *          </note>
+ *          <p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub CSPM administrator account that
  *          the invitation is sent from.</p>
- *          <p>This operation is only used to invite accounts that do not belong to an organization.
- *          Organization accounts do not receive invitations.</p>
- *          <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub.</p>
- *          <p>When the account owner enables Security Hub and accepts the invitation to become a member
- *          account, the administrator account can view the findings generated from the member account.</p>
+ *          <p>This operation is only used to invite accounts that don't belong to an Amazon Web Services organization.
+ *          Organization accounts don't receive invitations.</p>
+ *          <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub CSPM.</p>
+ *          <p>When the account owner enables Security Hub CSPM and accepts the invitation to become a member
+ *          account, the administrator account can view the findings generated in the member account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, InviteMembersCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, InviteMembersCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // InviteMembersRequest
+ *   AccountIds: [ // AccountIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new InviteMembersCommand(input);
  * const response = await client.send(command);
+ * // { // InviteMembersResponse
+ * //   UnprocessedAccounts: [ // ResultList
+ * //     { // Result
+ * //       AccountId: "STRING_VALUE",
+ * //       ProcessingResult: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param InviteMembersCommandInput - {@link InviteMembersCommandInput}
+ * @returns {@link InviteMembersCommandOutput}
  * @see {@link InviteMembersCommandInput} for command's `input` shape.
  * @see {@link InviteMembersCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To invite accounts to become members
+ * ```javascript
+ * // The following example invites the specified AWS accounts to become member accounts associated with the calling Security Hub administrator account. You only use this operation to invite accounts that don't belong to an AWS Organizations organization.
+ * const input = {
+ *   AccountIds: [
+ *     "111122223333",
+ *     "444455556666"
+ *   ]
+ * };
+ * const command = new InviteMembersCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   UnprocessedAccounts:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class InviteMembersCommand extends $Command<
-  InviteMembersCommandInput,
-  InviteMembersCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: InviteMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<InviteMembersCommandInput, InviteMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "InviteMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: InviteMembersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: InviteMembersResponse.filterSensitiveLog,
+export class InviteMembersCommand extends command<InviteMembersCommandInput, InviteMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "InviteMembers",
+  InviteMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InviteMembersRequest;
+      output: InviteMembersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: InviteMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1InviteMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<InviteMembersCommandOutput> {
-    return deserializeAws_restJson1InviteMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: InviteMembersCommandInput;
+      output: InviteMembersCommandOutput;
+    };
+  };
 }

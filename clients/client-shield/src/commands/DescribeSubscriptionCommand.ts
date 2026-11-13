@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeSubscriptionRequest, DescribeSubscriptionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSubscriptionCommand,
-  serializeAws_json1_1DescribeSubscriptionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSubscriptionRequest, DescribeSubscriptionResponse } from "../models/models_0";
+import { DescribeSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSubscriptionCommand}.
+ */
 export interface DescribeSubscriptionCommandInput extends DescribeSubscriptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSubscriptionCommand}.
+ */
 export interface DescribeSubscriptionCommandOutput extends DescribeSubscriptionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface DescribeSubscriptionCommandOutput extends DescribeSubscriptionR
  * ```javascript
  * import { ShieldClient, DescribeSubscriptionCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, DescribeSubscriptionCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = {};
  * const command = new DescribeSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSubscriptionResponse
+ * //   Subscription: { // Subscription
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     EndTime: new Date("TIMESTAMP"),
+ * //     TimeCommitmentInSeconds: Number("long"),
+ * //     AutoRenew: "ENABLED" || "DISABLED",
+ * //     Limits: [ // Limits
+ * //       { // Limit
+ * //         Type: "STRING_VALUE",
+ * //         Max: Number("long"),
+ * //       },
+ * //     ],
+ * //     ProactiveEngagementStatus: "ENABLED" || "DISABLED" || "PENDING",
+ * //     SubscriptionLimits: { // SubscriptionLimits
+ * //       ProtectionLimits: { // ProtectionLimits
+ * //         ProtectedResourceTypeLimits: [ // required
+ * //           {
+ * //             Type: "STRING_VALUE",
+ * //             Max: Number("long"),
+ * //           },
+ * //         ],
+ * //       },
+ * //       ProtectionGroupLimits: { // ProtectionGroupLimits
+ * //         MaxProtectionGroups: Number("long"), // required
+ * //         PatternTypeLimits: { // ProtectionGroupPatternTypeLimits
+ * //           ArbitraryPatternLimits: { // ProtectionGroupArbitraryPatternLimits
+ * //             MaxMembers: Number("long"), // required
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     SubscriptionArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeSubscriptionCommandInput - {@link DescribeSubscriptionCommandInput}
+ * @returns {@link DescribeSubscriptionCommandOutput}
  * @see {@link DescribeSubscriptionCommandInput} for command's `input` shape.
  * @see {@link DescribeSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSubscriptionCommand extends $Command<
-  DescribeSubscriptionCommandInput,
-  DescribeSubscriptionCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSubscriptionCommandInput, DescribeSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "DescribeSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSubscriptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSubscriptionResponse.filterSensitiveLog,
+export class DescribeSubscriptionCommand extends command<DescribeSubscriptionCommandInput, DescribeSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSubscription",
+  DescribeSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeSubscriptionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSubscriptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSubscriptionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSubscriptionCommandOutput> {
-    return deserializeAws_json1_1DescribeSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSubscriptionCommandInput;
+      output: DescribeSubscriptionCommandOutput;
+    };
+  };
 }

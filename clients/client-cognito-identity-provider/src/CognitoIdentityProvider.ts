@@ -1,4102 +1,3376 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { CognitoIdentityProviderClient } from "./CognitoIdentityProviderClient";
 import {
+  type AddCustomAttributesCommandInput,
+  type AddCustomAttributesCommandOutput,
   AddCustomAttributesCommand,
-  AddCustomAttributesCommandInput,
-  AddCustomAttributesCommandOutput,
 } from "./commands/AddCustomAttributesCommand";
 import {
+  type AddUserPoolClientSecretCommandInput,
+  type AddUserPoolClientSecretCommandOutput,
+  AddUserPoolClientSecretCommand,
+} from "./commands/AddUserPoolClientSecretCommand";
+import {
+  type AdminAddUserToGroupCommandInput,
+  type AdminAddUserToGroupCommandOutput,
   AdminAddUserToGroupCommand,
-  AdminAddUserToGroupCommandInput,
-  AdminAddUserToGroupCommandOutput,
 } from "./commands/AdminAddUserToGroupCommand";
 import {
+  type AdminConfirmSignUpCommandInput,
+  type AdminConfirmSignUpCommandOutput,
   AdminConfirmSignUpCommand,
-  AdminConfirmSignUpCommandInput,
-  AdminConfirmSignUpCommandOutput,
 } from "./commands/AdminConfirmSignUpCommand";
 import {
+  type AdminCreateUserCommandInput,
+  type AdminCreateUserCommandOutput,
   AdminCreateUserCommand,
-  AdminCreateUserCommandInput,
-  AdminCreateUserCommandOutput,
 } from "./commands/AdminCreateUserCommand";
 import {
+  type AdminDeleteSoftwareTokenCommandInput,
+  type AdminDeleteSoftwareTokenCommandOutput,
+  AdminDeleteSoftwareTokenCommand,
+} from "./commands/AdminDeleteSoftwareTokenCommand";
+import {
+  type AdminDeleteUserAttributesCommandInput,
+  type AdminDeleteUserAttributesCommandOutput,
   AdminDeleteUserAttributesCommand,
-  AdminDeleteUserAttributesCommandInput,
-  AdminDeleteUserAttributesCommandOutput,
 } from "./commands/AdminDeleteUserAttributesCommand";
 import {
+  type AdminDeleteUserCommandInput,
+  type AdminDeleteUserCommandOutput,
   AdminDeleteUserCommand,
-  AdminDeleteUserCommandInput,
-  AdminDeleteUserCommandOutput,
 } from "./commands/AdminDeleteUserCommand";
 import {
+  type AdminDisableProviderForUserCommandInput,
+  type AdminDisableProviderForUserCommandOutput,
   AdminDisableProviderForUserCommand,
-  AdminDisableProviderForUserCommandInput,
-  AdminDisableProviderForUserCommandOutput,
 } from "./commands/AdminDisableProviderForUserCommand";
 import {
+  type AdminDisableUserCommandInput,
+  type AdminDisableUserCommandOutput,
   AdminDisableUserCommand,
-  AdminDisableUserCommandInput,
-  AdminDisableUserCommandOutput,
 } from "./commands/AdminDisableUserCommand";
 import {
+  type AdminEnableUserCommandInput,
+  type AdminEnableUserCommandOutput,
   AdminEnableUserCommand,
-  AdminEnableUserCommandInput,
-  AdminEnableUserCommandOutput,
 } from "./commands/AdminEnableUserCommand";
 import {
+  type AdminForgetDeviceCommandInput,
+  type AdminForgetDeviceCommandOutput,
   AdminForgetDeviceCommand,
-  AdminForgetDeviceCommandInput,
-  AdminForgetDeviceCommandOutput,
 } from "./commands/AdminForgetDeviceCommand";
 import {
+  type AdminGetDeviceCommandInput,
+  type AdminGetDeviceCommandOutput,
   AdminGetDeviceCommand,
-  AdminGetDeviceCommandInput,
-  AdminGetDeviceCommandOutput,
 } from "./commands/AdminGetDeviceCommand";
 import {
+  type AdminGetUserAuthFactorsCommandInput,
+  type AdminGetUserAuthFactorsCommandOutput,
+  AdminGetUserAuthFactorsCommand,
+} from "./commands/AdminGetUserAuthFactorsCommand";
+import {
+  type AdminGetUserCommandInput,
+  type AdminGetUserCommandOutput,
   AdminGetUserCommand,
-  AdminGetUserCommandInput,
-  AdminGetUserCommandOutput,
 } from "./commands/AdminGetUserCommand";
 import {
+  type AdminInitiateAuthCommandInput,
+  type AdminInitiateAuthCommandOutput,
   AdminInitiateAuthCommand,
-  AdminInitiateAuthCommandInput,
-  AdminInitiateAuthCommandOutput,
 } from "./commands/AdminInitiateAuthCommand";
 import {
+  type AdminLinkProviderForUserCommandInput,
+  type AdminLinkProviderForUserCommandOutput,
   AdminLinkProviderForUserCommand,
-  AdminLinkProviderForUserCommandInput,
-  AdminLinkProviderForUserCommandOutput,
 } from "./commands/AdminLinkProviderForUserCommand";
 import {
+  type AdminListDevicesCommandInput,
+  type AdminListDevicesCommandOutput,
   AdminListDevicesCommand,
-  AdminListDevicesCommandInput,
-  AdminListDevicesCommandOutput,
 } from "./commands/AdminListDevicesCommand";
 import {
+  type AdminListGroupsForUserCommandInput,
+  type AdminListGroupsForUserCommandOutput,
   AdminListGroupsForUserCommand,
-  AdminListGroupsForUserCommandInput,
-  AdminListGroupsForUserCommandOutput,
 } from "./commands/AdminListGroupsForUserCommand";
 import {
+  type AdminListUserAuthEventsCommandInput,
+  type AdminListUserAuthEventsCommandOutput,
   AdminListUserAuthEventsCommand,
-  AdminListUserAuthEventsCommandInput,
-  AdminListUserAuthEventsCommandOutput,
 } from "./commands/AdminListUserAuthEventsCommand";
 import {
+  type AdminListUserSessionsCommandInput,
+  type AdminListUserSessionsCommandOutput,
+  AdminListUserSessionsCommand,
+} from "./commands/AdminListUserSessionsCommand";
+import {
+  type AdminRemoveUserFromGroupCommandInput,
+  type AdminRemoveUserFromGroupCommandOutput,
   AdminRemoveUserFromGroupCommand,
-  AdminRemoveUserFromGroupCommandInput,
-  AdminRemoveUserFromGroupCommandOutput,
 } from "./commands/AdminRemoveUserFromGroupCommand";
 import {
+  type AdminResetUserPasswordCommandInput,
+  type AdminResetUserPasswordCommandOutput,
   AdminResetUserPasswordCommand,
-  AdminResetUserPasswordCommandInput,
-  AdminResetUserPasswordCommandOutput,
 } from "./commands/AdminResetUserPasswordCommand";
 import {
+  type AdminRespondToAuthChallengeCommandInput,
+  type AdminRespondToAuthChallengeCommandOutput,
   AdminRespondToAuthChallengeCommand,
-  AdminRespondToAuthChallengeCommandInput,
-  AdminRespondToAuthChallengeCommandOutput,
 } from "./commands/AdminRespondToAuthChallengeCommand";
 import {
+  type AdminRevokeUserSessionCommandInput,
+  type AdminRevokeUserSessionCommandOutput,
+  AdminRevokeUserSessionCommand,
+} from "./commands/AdminRevokeUserSessionCommand";
+import {
+  type AdminSetUserMFAPreferenceCommandInput,
+  type AdminSetUserMFAPreferenceCommandOutput,
   AdminSetUserMFAPreferenceCommand,
-  AdminSetUserMFAPreferenceCommandInput,
-  AdminSetUserMFAPreferenceCommandOutput,
 } from "./commands/AdminSetUserMFAPreferenceCommand";
 import {
+  type AdminSetUserPasswordCommandInput,
+  type AdminSetUserPasswordCommandOutput,
   AdminSetUserPasswordCommand,
-  AdminSetUserPasswordCommandInput,
-  AdminSetUserPasswordCommandOutput,
 } from "./commands/AdminSetUserPasswordCommand";
 import {
+  type AdminSetUserSettingsCommandInput,
+  type AdminSetUserSettingsCommandOutput,
   AdminSetUserSettingsCommand,
-  AdminSetUserSettingsCommandInput,
-  AdminSetUserSettingsCommandOutput,
 } from "./commands/AdminSetUserSettingsCommand";
 import {
+  type AdminUpdateAuthEventFeedbackCommandInput,
+  type AdminUpdateAuthEventFeedbackCommandOutput,
   AdminUpdateAuthEventFeedbackCommand,
-  AdminUpdateAuthEventFeedbackCommandInput,
-  AdminUpdateAuthEventFeedbackCommandOutput,
 } from "./commands/AdminUpdateAuthEventFeedbackCommand";
 import {
+  type AdminUpdateDeviceStatusCommandInput,
+  type AdminUpdateDeviceStatusCommandOutput,
   AdminUpdateDeviceStatusCommand,
-  AdminUpdateDeviceStatusCommandInput,
-  AdminUpdateDeviceStatusCommandOutput,
 } from "./commands/AdminUpdateDeviceStatusCommand";
 import {
+  type AdminUpdateUserAttributesCommandInput,
+  type AdminUpdateUserAttributesCommandOutput,
   AdminUpdateUserAttributesCommand,
-  AdminUpdateUserAttributesCommandInput,
-  AdminUpdateUserAttributesCommandOutput,
 } from "./commands/AdminUpdateUserAttributesCommand";
 import {
+  type AdminUserGlobalSignOutCommandInput,
+  type AdminUserGlobalSignOutCommandOutput,
   AdminUserGlobalSignOutCommand,
-  AdminUserGlobalSignOutCommandInput,
-  AdminUserGlobalSignOutCommandOutput,
 } from "./commands/AdminUserGlobalSignOutCommand";
 import {
+  type AssociateSoftwareTokenCommandInput,
+  type AssociateSoftwareTokenCommandOutput,
   AssociateSoftwareTokenCommand,
-  AssociateSoftwareTokenCommandInput,
-  AssociateSoftwareTokenCommandOutput,
 } from "./commands/AssociateSoftwareTokenCommand";
 import {
+  type ChangePasswordCommandInput,
+  type ChangePasswordCommandOutput,
   ChangePasswordCommand,
-  ChangePasswordCommandInput,
-  ChangePasswordCommandOutput,
 } from "./commands/ChangePasswordCommand";
 import {
+  type CompleteWebAuthnRegistrationCommandInput,
+  type CompleteWebAuthnRegistrationCommandOutput,
+  CompleteWebAuthnRegistrationCommand,
+} from "./commands/CompleteWebAuthnRegistrationCommand";
+import {
+  type ConfirmDeviceCommandInput,
+  type ConfirmDeviceCommandOutput,
   ConfirmDeviceCommand,
-  ConfirmDeviceCommandInput,
-  ConfirmDeviceCommandOutput,
 } from "./commands/ConfirmDeviceCommand";
 import {
+  type ConfirmForgotPasswordCommandInput,
+  type ConfirmForgotPasswordCommandOutput,
   ConfirmForgotPasswordCommand,
-  ConfirmForgotPasswordCommandInput,
-  ConfirmForgotPasswordCommandOutput,
 } from "./commands/ConfirmForgotPasswordCommand";
 import {
+  type ConfirmSignUpCommandInput,
+  type ConfirmSignUpCommandOutput,
   ConfirmSignUpCommand,
-  ConfirmSignUpCommandInput,
-  ConfirmSignUpCommandOutput,
 } from "./commands/ConfirmSignUpCommand";
-import { CreateGroupCommand, CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
 import {
+  type CreateGroupCommandInput,
+  type CreateGroupCommandOutput,
+  CreateGroupCommand,
+} from "./commands/CreateGroupCommand";
+import {
+  type CreateIdentityProviderCommandInput,
+  type CreateIdentityProviderCommandOutput,
   CreateIdentityProviderCommand,
-  CreateIdentityProviderCommandInput,
-  CreateIdentityProviderCommandOutput,
 } from "./commands/CreateIdentityProviderCommand";
 import {
+  type CreateManagedLoginBrandingCommandInput,
+  type CreateManagedLoginBrandingCommandOutput,
+  CreateManagedLoginBrandingCommand,
+} from "./commands/CreateManagedLoginBrandingCommand";
+import {
+  type CreateResourceServerCommandInput,
+  type CreateResourceServerCommandOutput,
   CreateResourceServerCommand,
-  CreateResourceServerCommandInput,
-  CreateResourceServerCommandOutput,
 } from "./commands/CreateResourceServerCommand";
 import {
+  type CreateTermsCommandInput,
+  type CreateTermsCommandOutput,
+  CreateTermsCommand,
+} from "./commands/CreateTermsCommand";
+import {
+  type CreateUserImportJobCommandInput,
+  type CreateUserImportJobCommandOutput,
   CreateUserImportJobCommand,
-  CreateUserImportJobCommandInput,
-  CreateUserImportJobCommandOutput,
 } from "./commands/CreateUserImportJobCommand";
 import {
+  type CreateUserPoolClientCommandInput,
+  type CreateUserPoolClientCommandOutput,
   CreateUserPoolClientCommand,
-  CreateUserPoolClientCommandInput,
-  CreateUserPoolClientCommandOutput,
 } from "./commands/CreateUserPoolClientCommand";
 import {
+  type CreateUserPoolCommandInput,
+  type CreateUserPoolCommandOutput,
   CreateUserPoolCommand,
-  CreateUserPoolCommandInput,
-  CreateUserPoolCommandOutput,
 } from "./commands/CreateUserPoolCommand";
 import {
+  type CreateUserPoolDomainCommandInput,
+  type CreateUserPoolDomainCommandOutput,
   CreateUserPoolDomainCommand,
-  CreateUserPoolDomainCommandInput,
-  CreateUserPoolDomainCommandOutput,
 } from "./commands/CreateUserPoolDomainCommand";
-import { DeleteGroupCommand, DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
 import {
+  type CreateUserPoolReplicaCommandInput,
+  type CreateUserPoolReplicaCommandOutput,
+  CreateUserPoolReplicaCommand,
+} from "./commands/CreateUserPoolReplicaCommand";
+import {
+  type DeleteGroupCommandInput,
+  type DeleteGroupCommandOutput,
+  DeleteGroupCommand,
+} from "./commands/DeleteGroupCommand";
+import {
+  type DeleteIdentityProviderCommandInput,
+  type DeleteIdentityProviderCommandOutput,
   DeleteIdentityProviderCommand,
-  DeleteIdentityProviderCommandInput,
-  DeleteIdentityProviderCommandOutput,
 } from "./commands/DeleteIdentityProviderCommand";
 import {
+  type DeleteManagedLoginBrandingCommandInput,
+  type DeleteManagedLoginBrandingCommandOutput,
+  DeleteManagedLoginBrandingCommand,
+} from "./commands/DeleteManagedLoginBrandingCommand";
+import {
+  type DeleteResourceServerCommandInput,
+  type DeleteResourceServerCommandOutput,
   DeleteResourceServerCommand,
-  DeleteResourceServerCommandInput,
-  DeleteResourceServerCommandOutput,
 } from "./commands/DeleteResourceServerCommand";
 import {
-  DeleteUserAttributesCommand,
-  DeleteUserAttributesCommandInput,
-  DeleteUserAttributesCommandOutput,
-} from "./commands/DeleteUserAttributesCommand";
-import { DeleteUserCommand, DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+  type DeleteTermsCommandInput,
+  type DeleteTermsCommandOutput,
+  DeleteTermsCommand,
+} from "./commands/DeleteTermsCommand";
 import {
+  type DeleteUserAttributesCommandInput,
+  type DeleteUserAttributesCommandOutput,
+  DeleteUserAttributesCommand,
+} from "./commands/DeleteUserAttributesCommand";
+import {
+  type DeleteUserCommandInput,
+  type DeleteUserCommandOutput,
+  DeleteUserCommand,
+} from "./commands/DeleteUserCommand";
+import {
+  type DeleteUserPoolClientCommandInput,
+  type DeleteUserPoolClientCommandOutput,
   DeleteUserPoolClientCommand,
-  DeleteUserPoolClientCommandInput,
-  DeleteUserPoolClientCommandOutput,
 } from "./commands/DeleteUserPoolClientCommand";
 import {
+  type DeleteUserPoolClientSecretCommandInput,
+  type DeleteUserPoolClientSecretCommandOutput,
+  DeleteUserPoolClientSecretCommand,
+} from "./commands/DeleteUserPoolClientSecretCommand";
+import {
+  type DeleteUserPoolCommandInput,
+  type DeleteUserPoolCommandOutput,
   DeleteUserPoolCommand,
-  DeleteUserPoolCommandInput,
-  DeleteUserPoolCommandOutput,
 } from "./commands/DeleteUserPoolCommand";
 import {
+  type DeleteUserPoolDomainCommandInput,
+  type DeleteUserPoolDomainCommandOutput,
   DeleteUserPoolDomainCommand,
-  DeleteUserPoolDomainCommandInput,
-  DeleteUserPoolDomainCommandOutput,
 } from "./commands/DeleteUserPoolDomainCommand";
 import {
+  type DeleteUserPoolReplicaCommandInput,
+  type DeleteUserPoolReplicaCommandOutput,
+  DeleteUserPoolReplicaCommand,
+} from "./commands/DeleteUserPoolReplicaCommand";
+import {
+  type DeleteWebAuthnCredentialCommandInput,
+  type DeleteWebAuthnCredentialCommandOutput,
+  DeleteWebAuthnCredentialCommand,
+} from "./commands/DeleteWebAuthnCredentialCommand";
+import {
+  type DescribeIdentityProviderCommandInput,
+  type DescribeIdentityProviderCommandOutput,
   DescribeIdentityProviderCommand,
-  DescribeIdentityProviderCommandInput,
-  DescribeIdentityProviderCommandOutput,
 } from "./commands/DescribeIdentityProviderCommand";
 import {
+  type DescribeManagedLoginBrandingByClientCommandInput,
+  type DescribeManagedLoginBrandingByClientCommandOutput,
+  DescribeManagedLoginBrandingByClientCommand,
+} from "./commands/DescribeManagedLoginBrandingByClientCommand";
+import {
+  type DescribeManagedLoginBrandingCommandInput,
+  type DescribeManagedLoginBrandingCommandOutput,
+  DescribeManagedLoginBrandingCommand,
+} from "./commands/DescribeManagedLoginBrandingCommand";
+import {
+  type DescribeResourceServerCommandInput,
+  type DescribeResourceServerCommandOutput,
   DescribeResourceServerCommand,
-  DescribeResourceServerCommandInput,
-  DescribeResourceServerCommandOutput,
 } from "./commands/DescribeResourceServerCommand";
 import {
+  type DescribeRiskConfigurationCommandInput,
+  type DescribeRiskConfigurationCommandOutput,
   DescribeRiskConfigurationCommand,
-  DescribeRiskConfigurationCommandInput,
-  DescribeRiskConfigurationCommandOutput,
 } from "./commands/DescribeRiskConfigurationCommand";
 import {
+  type DescribeTermsByClientCommandInput,
+  type DescribeTermsByClientCommandOutput,
+  DescribeTermsByClientCommand,
+} from "./commands/DescribeTermsByClientCommand";
+import {
+  type DescribeTermsCommandInput,
+  type DescribeTermsCommandOutput,
+  DescribeTermsCommand,
+} from "./commands/DescribeTermsCommand";
+import {
+  type DescribeUserImportJobCommandInput,
+  type DescribeUserImportJobCommandOutput,
   DescribeUserImportJobCommand,
-  DescribeUserImportJobCommandInput,
-  DescribeUserImportJobCommandOutput,
 } from "./commands/DescribeUserImportJobCommand";
 import {
+  type DescribeUserPoolClientCommandInput,
+  type DescribeUserPoolClientCommandOutput,
   DescribeUserPoolClientCommand,
-  DescribeUserPoolClientCommandInput,
-  DescribeUserPoolClientCommandOutput,
 } from "./commands/DescribeUserPoolClientCommand";
 import {
+  type DescribeUserPoolCommandInput,
+  type DescribeUserPoolCommandOutput,
   DescribeUserPoolCommand,
-  DescribeUserPoolCommandInput,
-  DescribeUserPoolCommandOutput,
 } from "./commands/DescribeUserPoolCommand";
 import {
+  type DescribeUserPoolDomainCommandInput,
+  type DescribeUserPoolDomainCommandOutput,
   DescribeUserPoolDomainCommand,
-  DescribeUserPoolDomainCommandInput,
-  DescribeUserPoolDomainCommandOutput,
 } from "./commands/DescribeUserPoolDomainCommand";
 import {
+  type ForgetDeviceCommandInput,
+  type ForgetDeviceCommandOutput,
   ForgetDeviceCommand,
-  ForgetDeviceCommandInput,
-  ForgetDeviceCommandOutput,
 } from "./commands/ForgetDeviceCommand";
 import {
+  type ForgotPasswordCommandInput,
+  type ForgotPasswordCommandOutput,
   ForgotPasswordCommand,
-  ForgotPasswordCommandInput,
-  ForgotPasswordCommandOutput,
 } from "./commands/ForgotPasswordCommand";
 import {
-  GetCSVHeaderCommand,
-  GetCSVHeaderCommandInput,
-  GetCSVHeaderCommandOutput,
-} from "./commands/GetCSVHeaderCommand";
-import { GetDeviceCommand, GetDeviceCommandInput, GetDeviceCommandOutput } from "./commands/GetDeviceCommand";
-import { GetGroupCommand, GetGroupCommandInput, GetGroupCommandOutput } from "./commands/GetGroupCommand";
+  type GetClientTokenCommandInput,
+  type GetClientTokenCommandOutput,
+  GetClientTokenCommand,
+} from "./commands/GetClientTokenCommand";
 import {
+  type GetCSVHeaderCommandInput,
+  type GetCSVHeaderCommandOutput,
+  GetCSVHeaderCommand,
+} from "./commands/GetCSVHeaderCommand";
+import { type GetDeviceCommandInput, type GetDeviceCommandOutput, GetDeviceCommand } from "./commands/GetDeviceCommand";
+import { type GetGroupCommandInput, type GetGroupCommandOutput, GetGroupCommand } from "./commands/GetGroupCommand";
+import {
+  type GetIdentityProviderByIdentifierCommandInput,
+  type GetIdentityProviderByIdentifierCommandOutput,
   GetIdentityProviderByIdentifierCommand,
-  GetIdentityProviderByIdentifierCommandInput,
-  GetIdentityProviderByIdentifierCommandOutput,
 } from "./commands/GetIdentityProviderByIdentifierCommand";
 import {
+  type GetLogDeliveryConfigurationCommandInput,
+  type GetLogDeliveryConfigurationCommandOutput,
+  GetLogDeliveryConfigurationCommand,
+} from "./commands/GetLogDeliveryConfigurationCommand";
+import {
+  type GetProvisionedLimitCommandInput,
+  type GetProvisionedLimitCommandOutput,
+  GetProvisionedLimitCommand,
+} from "./commands/GetProvisionedLimitCommand";
+import {
+  type GetSigningCertificateCommandInput,
+  type GetSigningCertificateCommandOutput,
   GetSigningCertificateCommand,
-  GetSigningCertificateCommandInput,
-  GetSigningCertificateCommandOutput,
 } from "./commands/GetSigningCertificateCommand";
 import {
+  type GetTokensFromRefreshTokenCommandInput,
+  type GetTokensFromRefreshTokenCommandOutput,
+  GetTokensFromRefreshTokenCommand,
+} from "./commands/GetTokensFromRefreshTokenCommand";
+import {
+  type GetUICustomizationCommandInput,
+  type GetUICustomizationCommandOutput,
   GetUICustomizationCommand,
-  GetUICustomizationCommandInput,
-  GetUICustomizationCommandOutput,
 } from "./commands/GetUICustomizationCommand";
 import {
+  type GetUserAttributeVerificationCodeCommandInput,
+  type GetUserAttributeVerificationCodeCommandOutput,
   GetUserAttributeVerificationCodeCommand,
-  GetUserAttributeVerificationCodeCommandInput,
-  GetUserAttributeVerificationCodeCommandOutput,
 } from "./commands/GetUserAttributeVerificationCodeCommand";
-import { GetUserCommand, GetUserCommandInput, GetUserCommandOutput } from "./commands/GetUserCommand";
 import {
+  type GetUserAuthFactorsCommandInput,
+  type GetUserAuthFactorsCommandOutput,
+  GetUserAuthFactorsCommand,
+} from "./commands/GetUserAuthFactorsCommand";
+import { type GetUserCommandInput, type GetUserCommandOutput, GetUserCommand } from "./commands/GetUserCommand";
+import {
+  type GetUserPoolClientSessionConfigurationCommandInput,
+  type GetUserPoolClientSessionConfigurationCommandOutput,
+  GetUserPoolClientSessionConfigurationCommand,
+} from "./commands/GetUserPoolClientSessionConfigurationCommand";
+import {
+  type GetUserPoolMfaConfigCommandInput,
+  type GetUserPoolMfaConfigCommandOutput,
   GetUserPoolMfaConfigCommand,
-  GetUserPoolMfaConfigCommandInput,
-  GetUserPoolMfaConfigCommandOutput,
 } from "./commands/GetUserPoolMfaConfigCommand";
 import {
+  type GetUserPoolSessionConfigurationCommandInput,
+  type GetUserPoolSessionConfigurationCommandOutput,
+  GetUserPoolSessionConfigurationCommand,
+} from "./commands/GetUserPoolSessionConfigurationCommand";
+import {
+  type GlobalSignOutCommandInput,
+  type GlobalSignOutCommandOutput,
   GlobalSignOutCommand,
-  GlobalSignOutCommandInput,
-  GlobalSignOutCommandOutput,
 } from "./commands/GlobalSignOutCommand";
 import {
+  type InitiateAuthCommandInput,
+  type InitiateAuthCommandOutput,
   InitiateAuthCommand,
-  InitiateAuthCommandInput,
-  InitiateAuthCommandOutput,
 } from "./commands/InitiateAuthCommand";
-import { ListDevicesCommand, ListDevicesCommandInput, ListDevicesCommandOutput } from "./commands/ListDevicesCommand";
-import { ListGroupsCommand, ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
 import {
+  type ListDevicesCommandInput,
+  type ListDevicesCommandOutput,
+  ListDevicesCommand,
+} from "./commands/ListDevicesCommand";
+import {
+  type ListGroupsCommandInput,
+  type ListGroupsCommandOutput,
+  ListGroupsCommand,
+} from "./commands/ListGroupsCommand";
+import {
+  type ListIdentityProvidersCommandInput,
+  type ListIdentityProvidersCommandOutput,
   ListIdentityProvidersCommand,
-  ListIdentityProvidersCommandInput,
-  ListIdentityProvidersCommandOutput,
 } from "./commands/ListIdentityProvidersCommand";
 import {
+  type ListResourceServersCommandInput,
+  type ListResourceServersCommandOutput,
   ListResourceServersCommand,
-  ListResourceServersCommandInput,
-  ListResourceServersCommandOutput,
 } from "./commands/ListResourceServersCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
+import { type ListTermsCommandInput, type ListTermsCommandOutput, ListTermsCommand } from "./commands/ListTermsCommand";
 import {
+  type ListUserImportJobsCommandInput,
+  type ListUserImportJobsCommandOutput,
   ListUserImportJobsCommand,
-  ListUserImportJobsCommandInput,
-  ListUserImportJobsCommandOutput,
 } from "./commands/ListUserImportJobsCommand";
 import {
+  type ListUserPoolClientsCommandInput,
+  type ListUserPoolClientsCommandOutput,
   ListUserPoolClientsCommand,
-  ListUserPoolClientsCommandInput,
-  ListUserPoolClientsCommandOutput,
 } from "./commands/ListUserPoolClientsCommand";
 import {
-  ListUserPoolsCommand,
-  ListUserPoolsCommandInput,
-  ListUserPoolsCommandOutput,
-} from "./commands/ListUserPoolsCommand";
-import { ListUsersCommand, ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
+  type ListUserPoolClientSecretsCommandInput,
+  type ListUserPoolClientSecretsCommandOutput,
+  ListUserPoolClientSecretsCommand,
+} from "./commands/ListUserPoolClientSecretsCommand";
 import {
+  type ListUserPoolReplicasCommandInput,
+  type ListUserPoolReplicasCommandOutput,
+  ListUserPoolReplicasCommand,
+} from "./commands/ListUserPoolReplicasCommand";
+import {
+  type ListUserPoolsCommandInput,
+  type ListUserPoolsCommandOutput,
+  ListUserPoolsCommand,
+} from "./commands/ListUserPoolsCommand";
+import { type ListUsersCommandInput, type ListUsersCommandOutput, ListUsersCommand } from "./commands/ListUsersCommand";
+import {
+  type ListUserSessionsCommandInput,
+  type ListUserSessionsCommandOutput,
+  ListUserSessionsCommand,
+} from "./commands/ListUserSessionsCommand";
+import {
+  type ListUsersInGroupCommandInput,
+  type ListUsersInGroupCommandOutput,
   ListUsersInGroupCommand,
-  ListUsersInGroupCommandInput,
-  ListUsersInGroupCommandOutput,
 } from "./commands/ListUsersInGroupCommand";
 import {
+  type ListWebAuthnCredentialsCommandInput,
+  type ListWebAuthnCredentialsCommandOutput,
+  ListWebAuthnCredentialsCommand,
+} from "./commands/ListWebAuthnCredentialsCommand";
+import {
+  type ResendConfirmationCodeCommandInput,
+  type ResendConfirmationCodeCommandOutput,
   ResendConfirmationCodeCommand,
-  ResendConfirmationCodeCommandInput,
-  ResendConfirmationCodeCommandOutput,
 } from "./commands/ResendConfirmationCodeCommand";
 import {
+  type RespondToAuthChallengeCommandInput,
+  type RespondToAuthChallengeCommandOutput,
   RespondToAuthChallengeCommand,
-  RespondToAuthChallengeCommandInput,
-  RespondToAuthChallengeCommandOutput,
 } from "./commands/RespondToAuthChallengeCommand";
-import { RevokeTokenCommand, RevokeTokenCommandInput, RevokeTokenCommandOutput } from "./commands/RevokeTokenCommand";
 import {
+  type RevokeTokenCommandInput,
+  type RevokeTokenCommandOutput,
+  RevokeTokenCommand,
+} from "./commands/RevokeTokenCommand";
+import {
+  type RevokeUserSessionCommandInput,
+  type RevokeUserSessionCommandOutput,
+  RevokeUserSessionCommand,
+} from "./commands/RevokeUserSessionCommand";
+import {
+  type SetLogDeliveryConfigurationCommandInput,
+  type SetLogDeliveryConfigurationCommandOutput,
+  SetLogDeliveryConfigurationCommand,
+} from "./commands/SetLogDeliveryConfigurationCommand";
+import {
+  type SetRiskConfigurationCommandInput,
+  type SetRiskConfigurationCommandOutput,
   SetRiskConfigurationCommand,
-  SetRiskConfigurationCommandInput,
-  SetRiskConfigurationCommandOutput,
 } from "./commands/SetRiskConfigurationCommand";
 import {
+  type SetUICustomizationCommandInput,
+  type SetUICustomizationCommandOutput,
   SetUICustomizationCommand,
-  SetUICustomizationCommandInput,
-  SetUICustomizationCommandOutput,
 } from "./commands/SetUICustomizationCommand";
 import {
+  type SetUserMFAPreferenceCommandInput,
+  type SetUserMFAPreferenceCommandOutput,
   SetUserMFAPreferenceCommand,
-  SetUserMFAPreferenceCommandInput,
-  SetUserMFAPreferenceCommandOutput,
 } from "./commands/SetUserMFAPreferenceCommand";
 import {
+  type SetUserPoolClientSessionConfigurationCommandInput,
+  type SetUserPoolClientSessionConfigurationCommandOutput,
+  SetUserPoolClientSessionConfigurationCommand,
+} from "./commands/SetUserPoolClientSessionConfigurationCommand";
+import {
+  type SetUserPoolMfaConfigCommandInput,
+  type SetUserPoolMfaConfigCommandOutput,
   SetUserPoolMfaConfigCommand,
-  SetUserPoolMfaConfigCommandInput,
-  SetUserPoolMfaConfigCommandOutput,
 } from "./commands/SetUserPoolMfaConfigCommand";
 import {
-  SetUserSettingsCommand,
-  SetUserSettingsCommandInput,
-  SetUserSettingsCommandOutput,
-} from "./commands/SetUserSettingsCommand";
-import { SignUpCommand, SignUpCommandInput, SignUpCommandOutput } from "./commands/SignUpCommand";
+  type SetUserPoolSessionConfigurationCommandInput,
+  type SetUserPoolSessionConfigurationCommandOutput,
+  SetUserPoolSessionConfigurationCommand,
+} from "./commands/SetUserPoolSessionConfigurationCommand";
 import {
+  type SetUserSettingsCommandInput,
+  type SetUserSettingsCommandOutput,
+  SetUserSettingsCommand,
+} from "./commands/SetUserSettingsCommand";
+import { type SignUpCommandInput, type SignUpCommandOutput, SignUpCommand } from "./commands/SignUpCommand";
+import {
+  type StartUserImportJobCommandInput,
+  type StartUserImportJobCommandOutput,
   StartUserImportJobCommand,
-  StartUserImportJobCommandInput,
-  StartUserImportJobCommandOutput,
 } from "./commands/StartUserImportJobCommand";
 import {
-  StopUserImportJobCommand,
-  StopUserImportJobCommandInput,
-  StopUserImportJobCommandOutput,
-} from "./commands/StopUserImportJobCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type StartWebAuthnRegistrationCommandInput,
+  type StartWebAuthnRegistrationCommandOutput,
+  StartWebAuthnRegistrationCommand,
+} from "./commands/StartWebAuthnRegistrationCommand";
 import {
+  type StopUserImportJobCommandInput,
+  type StopUserImportJobCommandOutput,
+  StopUserImportJobCommand,
+} from "./commands/StopUserImportJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAuthEventFeedbackCommandInput,
+  type UpdateAuthEventFeedbackCommandOutput,
   UpdateAuthEventFeedbackCommand,
-  UpdateAuthEventFeedbackCommandInput,
-  UpdateAuthEventFeedbackCommandOutput,
 } from "./commands/UpdateAuthEventFeedbackCommand";
 import {
+  type UpdateDeviceStatusCommandInput,
+  type UpdateDeviceStatusCommandOutput,
   UpdateDeviceStatusCommand,
-  UpdateDeviceStatusCommandInput,
-  UpdateDeviceStatusCommandOutput,
 } from "./commands/UpdateDeviceStatusCommand";
-import { UpdateGroupCommand, UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
 import {
+  type UpdateGroupCommandInput,
+  type UpdateGroupCommandOutput,
+  UpdateGroupCommand,
+} from "./commands/UpdateGroupCommand";
+import {
+  type UpdateIdentityProviderCommandInput,
+  type UpdateIdentityProviderCommandOutput,
   UpdateIdentityProviderCommand,
-  UpdateIdentityProviderCommandInput,
-  UpdateIdentityProviderCommandOutput,
 } from "./commands/UpdateIdentityProviderCommand";
 import {
+  type UpdateManagedLoginBrandingCommandInput,
+  type UpdateManagedLoginBrandingCommandOutput,
+  UpdateManagedLoginBrandingCommand,
+} from "./commands/UpdateManagedLoginBrandingCommand";
+import {
+  type UpdateProvisionedLimitCommandInput,
+  type UpdateProvisionedLimitCommandOutput,
+  UpdateProvisionedLimitCommand,
+} from "./commands/UpdateProvisionedLimitCommand";
+import {
+  type UpdateResourceServerCommandInput,
+  type UpdateResourceServerCommandOutput,
   UpdateResourceServerCommand,
-  UpdateResourceServerCommandInput,
-  UpdateResourceServerCommandOutput,
 } from "./commands/UpdateResourceServerCommand";
 import {
+  type UpdateTermsCommandInput,
+  type UpdateTermsCommandOutput,
+  UpdateTermsCommand,
+} from "./commands/UpdateTermsCommand";
+import {
+  type UpdateUserAttributesCommandInput,
+  type UpdateUserAttributesCommandOutput,
   UpdateUserAttributesCommand,
-  UpdateUserAttributesCommandInput,
-  UpdateUserAttributesCommandOutput,
 } from "./commands/UpdateUserAttributesCommand";
 import {
+  type UpdateUserPoolClientCommandInput,
+  type UpdateUserPoolClientCommandOutput,
   UpdateUserPoolClientCommand,
-  UpdateUserPoolClientCommandInput,
-  UpdateUserPoolClientCommandOutput,
 } from "./commands/UpdateUserPoolClientCommand";
 import {
+  type UpdateUserPoolCommandInput,
+  type UpdateUserPoolCommandOutput,
   UpdateUserPoolCommand,
-  UpdateUserPoolCommandInput,
-  UpdateUserPoolCommandOutput,
 } from "./commands/UpdateUserPoolCommand";
 import {
+  type UpdateUserPoolDomainCommandInput,
+  type UpdateUserPoolDomainCommandOutput,
   UpdateUserPoolDomainCommand,
-  UpdateUserPoolDomainCommandInput,
-  UpdateUserPoolDomainCommandOutput,
 } from "./commands/UpdateUserPoolDomainCommand";
 import {
+  type UpdateUserPoolReplicaCommandInput,
+  type UpdateUserPoolReplicaCommandOutput,
+  UpdateUserPoolReplicaCommand,
+} from "./commands/UpdateUserPoolReplicaCommand";
+import {
+  type VerifySoftwareTokenCommandInput,
+  type VerifySoftwareTokenCommandOutput,
   VerifySoftwareTokenCommand,
-  VerifySoftwareTokenCommandInput,
-  VerifySoftwareTokenCommandOutput,
 } from "./commands/VerifySoftwareTokenCommand";
 import {
+  type VerifyUserAttributeCommandInput,
+  type VerifyUserAttributeCommandOutput,
   VerifyUserAttributeCommand,
-  VerifyUserAttributeCommandInput,
-  VerifyUserAttributeCommandOutput,
 } from "./commands/VerifyUserAttributeCommand";
+import { paginateAdminListGroupsForUser } from "./pagination/AdminListGroupsForUserPaginator";
+import { paginateAdminListUserAuthEvents } from "./pagination/AdminListUserAuthEventsPaginator";
+import { paginateListGroups } from "./pagination/ListGroupsPaginator";
+import { paginateListIdentityProviders } from "./pagination/ListIdentityProvidersPaginator";
+import { paginateListResourceServers } from "./pagination/ListResourceServersPaginator";
+import { paginateListUserPoolClients } from "./pagination/ListUserPoolClientsPaginator";
+import { paginateListUserPools } from "./pagination/ListUserPoolsPaginator";
+import { paginateListUsersInGroup } from "./pagination/ListUsersInGroupPaginator";
+import { paginateListUsers } from "./pagination/ListUsersPaginator";
+
+const commands = {
+  AddCustomAttributesCommand,
+  AddUserPoolClientSecretCommand,
+  AdminAddUserToGroupCommand,
+  AdminConfirmSignUpCommand,
+  AdminCreateUserCommand,
+  AdminDeleteSoftwareTokenCommand,
+  AdminDeleteUserCommand,
+  AdminDeleteUserAttributesCommand,
+  AdminDisableProviderForUserCommand,
+  AdminDisableUserCommand,
+  AdminEnableUserCommand,
+  AdminForgetDeviceCommand,
+  AdminGetDeviceCommand,
+  AdminGetUserCommand,
+  AdminGetUserAuthFactorsCommand,
+  AdminInitiateAuthCommand,
+  AdminLinkProviderForUserCommand,
+  AdminListDevicesCommand,
+  AdminListGroupsForUserCommand,
+  AdminListUserAuthEventsCommand,
+  AdminListUserSessionsCommand,
+  AdminRemoveUserFromGroupCommand,
+  AdminResetUserPasswordCommand,
+  AdminRespondToAuthChallengeCommand,
+  AdminRevokeUserSessionCommand,
+  AdminSetUserMFAPreferenceCommand,
+  AdminSetUserPasswordCommand,
+  AdminSetUserSettingsCommand,
+  AdminUpdateAuthEventFeedbackCommand,
+  AdminUpdateDeviceStatusCommand,
+  AdminUpdateUserAttributesCommand,
+  AdminUserGlobalSignOutCommand,
+  AssociateSoftwareTokenCommand,
+  ChangePasswordCommand,
+  CompleteWebAuthnRegistrationCommand,
+  ConfirmDeviceCommand,
+  ConfirmForgotPasswordCommand,
+  ConfirmSignUpCommand,
+  CreateGroupCommand,
+  CreateIdentityProviderCommand,
+  CreateManagedLoginBrandingCommand,
+  CreateResourceServerCommand,
+  CreateTermsCommand,
+  CreateUserImportJobCommand,
+  CreateUserPoolCommand,
+  CreateUserPoolClientCommand,
+  CreateUserPoolDomainCommand,
+  CreateUserPoolReplicaCommand,
+  DeleteGroupCommand,
+  DeleteIdentityProviderCommand,
+  DeleteManagedLoginBrandingCommand,
+  DeleteResourceServerCommand,
+  DeleteTermsCommand,
+  DeleteUserCommand,
+  DeleteUserAttributesCommand,
+  DeleteUserPoolCommand,
+  DeleteUserPoolClientCommand,
+  DeleteUserPoolClientSecretCommand,
+  DeleteUserPoolDomainCommand,
+  DeleteUserPoolReplicaCommand,
+  DeleteWebAuthnCredentialCommand,
+  DescribeIdentityProviderCommand,
+  DescribeManagedLoginBrandingCommand,
+  DescribeManagedLoginBrandingByClientCommand,
+  DescribeResourceServerCommand,
+  DescribeRiskConfigurationCommand,
+  DescribeTermsCommand,
+  DescribeTermsByClientCommand,
+  DescribeUserImportJobCommand,
+  DescribeUserPoolCommand,
+  DescribeUserPoolClientCommand,
+  DescribeUserPoolDomainCommand,
+  ForgetDeviceCommand,
+  ForgotPasswordCommand,
+  GetClientTokenCommand,
+  GetCSVHeaderCommand,
+  GetDeviceCommand,
+  GetGroupCommand,
+  GetIdentityProviderByIdentifierCommand,
+  GetLogDeliveryConfigurationCommand,
+  GetProvisionedLimitCommand,
+  GetSigningCertificateCommand,
+  GetTokensFromRefreshTokenCommand,
+  GetUICustomizationCommand,
+  GetUserCommand,
+  GetUserAttributeVerificationCodeCommand,
+  GetUserAuthFactorsCommand,
+  GetUserPoolClientSessionConfigurationCommand,
+  GetUserPoolMfaConfigCommand,
+  GetUserPoolSessionConfigurationCommand,
+  GlobalSignOutCommand,
+  InitiateAuthCommand,
+  ListDevicesCommand,
+  ListGroupsCommand,
+  ListIdentityProvidersCommand,
+  ListResourceServersCommand,
+  ListTagsForResourceCommand,
+  ListTermsCommand,
+  ListUserImportJobsCommand,
+  ListUserPoolClientsCommand,
+  ListUserPoolClientSecretsCommand,
+  ListUserPoolReplicasCommand,
+  ListUserPoolsCommand,
+  ListUsersCommand,
+  ListUserSessionsCommand,
+  ListUsersInGroupCommand,
+  ListWebAuthnCredentialsCommand,
+  ResendConfirmationCodeCommand,
+  RespondToAuthChallengeCommand,
+  RevokeTokenCommand,
+  RevokeUserSessionCommand,
+  SetLogDeliveryConfigurationCommand,
+  SetRiskConfigurationCommand,
+  SetUICustomizationCommand,
+  SetUserMFAPreferenceCommand,
+  SetUserPoolClientSessionConfigurationCommand,
+  SetUserPoolMfaConfigCommand,
+  SetUserPoolSessionConfigurationCommand,
+  SetUserSettingsCommand,
+  SignUpCommand,
+  StartUserImportJobCommand,
+  StartWebAuthnRegistrationCommand,
+  StopUserImportJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAuthEventFeedbackCommand,
+  UpdateDeviceStatusCommand,
+  UpdateGroupCommand,
+  UpdateIdentityProviderCommand,
+  UpdateManagedLoginBrandingCommand,
+  UpdateProvisionedLimitCommand,
+  UpdateResourceServerCommand,
+  UpdateTermsCommand,
+  UpdateUserAttributesCommand,
+  UpdateUserPoolCommand,
+  UpdateUserPoolClientCommand,
+  UpdateUserPoolDomainCommand,
+  UpdateUserPoolReplicaCommand,
+  VerifySoftwareTokenCommand,
+  VerifyUserAttributeCommand,
+};
+const paginators = {
+  paginateAdminListGroupsForUser,
+  paginateAdminListUserAuthEvents,
+  paginateListGroups,
+  paginateListIdentityProviders,
+  paginateListResourceServers,
+  paginateListUserPoolClients,
+  paginateListUserPools,
+  paginateListUsers,
+  paginateListUsersInGroup,
+};
 
 /**
- * <p>Using the Amazon Cognito User Pools API, you can create a user pool to manage
- *             directories and users. You can authenticate a user to obtain tokens related to user
- *             identity and access policies.</p>
- *         <p>This API reference provides information about user pools in Amazon Cognito User
- *             Pools.</p>
- *         <p>For more information, see the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html">Amazon Cognito
- *                 Documentation</a>.</p>
+ * @public
  */
-export class CognitoIdentityProvider extends CognitoIdentityProviderClient {
+export interface CognitoIdentityProviderRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CognitoIdentityProvider {
   /**
-   * <p>Adds additional user attributes to the user pool schema.</p>
+   * @see {@link AddCustomAttributesCommand}
    */
-  public addCustomAttributes(
+  addCustomAttributes(
     args: AddCustomAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AddCustomAttributesCommandOutput>;
-  public addCustomAttributes(
+  addCustomAttributes(
     args: AddCustomAttributesCommandInput,
     cb: (err: any, data?: AddCustomAttributesCommandOutput) => void
   ): void;
-  public addCustomAttributes(
+  addCustomAttributes(
     args: AddCustomAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AddCustomAttributesCommandOutput) => void
   ): void;
-  public addCustomAttributes(
-    args: AddCustomAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddCustomAttributesCommandOutput) => void),
-    cb?: (err: any, data?: AddCustomAttributesCommandOutput) => void
-  ): Promise<AddCustomAttributesCommandOutput> | void {
-    const command = new AddCustomAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds the specified user to the specified group.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AddUserPoolClientSecretCommand}
    */
-  public adminAddUserToGroup(
+  addUserPoolClientSecret(
+    args: AddUserPoolClientSecretCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<AddUserPoolClientSecretCommandOutput>;
+  addUserPoolClientSecret(
+    args: AddUserPoolClientSecretCommandInput,
+    cb: (err: any, data?: AddUserPoolClientSecretCommandOutput) => void
+  ): void;
+  addUserPoolClientSecret(
+    args: AddUserPoolClientSecretCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: AddUserPoolClientSecretCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AdminAddUserToGroupCommand}
+   */
+  adminAddUserToGroup(
     args: AdminAddUserToGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminAddUserToGroupCommandOutput>;
-  public adminAddUserToGroup(
+  adminAddUserToGroup(
     args: AdminAddUserToGroupCommandInput,
     cb: (err: any, data?: AdminAddUserToGroupCommandOutput) => void
   ): void;
-  public adminAddUserToGroup(
+  adminAddUserToGroup(
     args: AdminAddUserToGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminAddUserToGroupCommandOutput) => void
   ): void;
-  public adminAddUserToGroup(
-    args: AdminAddUserToGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminAddUserToGroupCommandOutput) => void),
-    cb?: (err: any, data?: AdminAddUserToGroupCommandOutput) => void
-  ): Promise<AdminAddUserToGroupCommandOutput> | void {
-    const command = new AdminAddUserToGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Confirms user registration as an admin without using a confirmation code. Works on any
-   *             user.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminConfirmSignUpCommand}
    */
-  public adminConfirmSignUp(
+  adminConfirmSignUp(
     args: AdminConfirmSignUpCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminConfirmSignUpCommandOutput>;
-  public adminConfirmSignUp(
+  adminConfirmSignUp(
     args: AdminConfirmSignUpCommandInput,
     cb: (err: any, data?: AdminConfirmSignUpCommandOutput) => void
   ): void;
-  public adminConfirmSignUp(
+  adminConfirmSignUp(
     args: AdminConfirmSignUpCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminConfirmSignUpCommandOutput) => void
   ): void;
-  public adminConfirmSignUp(
-    args: AdminConfirmSignUpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminConfirmSignUpCommandOutput) => void),
-    cb?: (err: any, data?: AdminConfirmSignUpCommandOutput) => void
-  ): Promise<AdminConfirmSignUpCommandOutput> | void {
-    const command = new AdminConfirmSignUpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new user in the specified user pool.</p>
-   *         <p>If <code>MessageAction</code> is not set, the default is to send a welcome message via
-   *             email or phone (SMS).</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
-   *
-   *         <p>This message is based on a template that you configured in your call to create or
-   *             update a user pool. This template includes your custom sign-up instructions and
-   *             placeholders for user name and temporary password.</p>
-   *         <p>Alternatively, you can call <code>AdminCreateUser</code> with “SUPPRESS” for the
-   *                 <code>MessageAction</code> parameter, and Amazon Cognito will not send any email. </p>
-   *         <p>In either case, the user will be in the <code>FORCE_CHANGE_PASSWORD</code> state until
-   *             they sign in and change their password.</p>
-   *         <p>
-   *             <code>AdminCreateUser</code> requires developer credentials.</p>
+   * @see {@link AdminCreateUserCommand}
    */
-  public adminCreateUser(
+  adminCreateUser(
     args: AdminCreateUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminCreateUserCommandOutput>;
-  public adminCreateUser(
+  adminCreateUser(
     args: AdminCreateUserCommandInput,
     cb: (err: any, data?: AdminCreateUserCommandOutput) => void
   ): void;
-  public adminCreateUser(
+  adminCreateUser(
     args: AdminCreateUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminCreateUserCommandOutput) => void
   ): void;
-  public adminCreateUser(
-    args: AdminCreateUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminCreateUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminCreateUserCommandOutput) => void
-  ): Promise<AdminCreateUserCommandOutput> | void {
-    const command = new AdminCreateUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a user as an administrator. Works on any user.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminDeleteSoftwareTokenCommand}
    */
-  public adminDeleteUser(
+  adminDeleteSoftwareToken(
+    args: AdminDeleteSoftwareTokenCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<AdminDeleteSoftwareTokenCommandOutput>;
+  adminDeleteSoftwareToken(
+    args: AdminDeleteSoftwareTokenCommandInput,
+    cb: (err: any, data?: AdminDeleteSoftwareTokenCommandOutput) => void
+  ): void;
+  adminDeleteSoftwareToken(
+    args: AdminDeleteSoftwareTokenCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: AdminDeleteSoftwareTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AdminDeleteUserCommand}
+   */
+  adminDeleteUser(
     args: AdminDeleteUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminDeleteUserCommandOutput>;
-  public adminDeleteUser(
+  adminDeleteUser(
     args: AdminDeleteUserCommandInput,
     cb: (err: any, data?: AdminDeleteUserCommandOutput) => void
   ): void;
-  public adminDeleteUser(
+  adminDeleteUser(
     args: AdminDeleteUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminDeleteUserCommandOutput) => void
   ): void;
-  public adminDeleteUser(
-    args: AdminDeleteUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminDeleteUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminDeleteUserCommandOutput) => void
-  ): Promise<AdminDeleteUserCommandOutput> | void {
-    const command = new AdminDeleteUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the user attributes in a user pool as an administrator. Works on any
-   *             user.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminDeleteUserAttributesCommand}
    */
-  public adminDeleteUserAttributes(
+  adminDeleteUserAttributes(
     args: AdminDeleteUserAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminDeleteUserAttributesCommandOutput>;
-  public adminDeleteUserAttributes(
+  adminDeleteUserAttributes(
     args: AdminDeleteUserAttributesCommandInput,
     cb: (err: any, data?: AdminDeleteUserAttributesCommandOutput) => void
   ): void;
-  public adminDeleteUserAttributes(
+  adminDeleteUserAttributes(
     args: AdminDeleteUserAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminDeleteUserAttributesCommandOutput) => void
   ): void;
-  public adminDeleteUserAttributes(
-    args: AdminDeleteUserAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminDeleteUserAttributesCommandOutput) => void),
-    cb?: (err: any, data?: AdminDeleteUserAttributesCommandOutput) => void
-  ): Promise<AdminDeleteUserAttributesCommandOutput> | void {
-    const command = new AdminDeleteUserAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disables the user from signing in with the specified external (SAML or social)
-   *             identity provider. If the user to disable is a Cognito User Pools native username +
-   *             password user, they are not permitted to use their password to sign-in. If the user to
-   *             disable is a linked external IdP user, any link between that user and an existing user
-   *             is removed. The next time the external user (no longer attached to the previously linked
-   *                 <code>DestinationUser</code>) signs in, they must create a new user account. See
-   *                 <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html">AdminLinkProviderForUser</a>.</p>
-   *         <p>This action is enabled only for admin access and requires developer
-   *             credentials.</p>
-   *         <p>The <code>ProviderName</code> must match the value specified when creating an IdP for
-   *             the pool. </p>
-   *         <p>To disable a native username + password user, the <code>ProviderName</code> value must
-   *             be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be
-   *                 <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the
-   *             name that is used in the user pool for the user.</p>
-   *         <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for
-   *             social identity providers. The <code>ProviderAttributeValue</code> must always be the
-   *             exact subject that was used when the user was originally linked as a source user.</p>
-   *         <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has
-   *             not yet been used to sign-in, the <code>ProviderAttributeName</code> and
-   *                 <code>ProviderAttributeValue</code> must be the same values that were used for the
-   *                 <code>SourceUser</code> when the identities were originally linked using <code>
-   *                 AdminLinkProviderForUser</code> call. (If the linking was done with
-   *                 <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same
-   *             applies here). However, if the user has already signed in, the
-   *                 <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and
-   *                 <code>ProviderAttributeValue</code> must be the subject of the SAML
-   *             assertion.</p>
+   * @see {@link AdminDisableProviderForUserCommand}
    */
-  public adminDisableProviderForUser(
+  adminDisableProviderForUser(
     args: AdminDisableProviderForUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminDisableProviderForUserCommandOutput>;
-  public adminDisableProviderForUser(
+  adminDisableProviderForUser(
     args: AdminDisableProviderForUserCommandInput,
     cb: (err: any, data?: AdminDisableProviderForUserCommandOutput) => void
   ): void;
-  public adminDisableProviderForUser(
+  adminDisableProviderForUser(
     args: AdminDisableProviderForUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminDisableProviderForUserCommandOutput) => void
   ): void;
-  public adminDisableProviderForUser(
-    args: AdminDisableProviderForUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminDisableProviderForUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminDisableProviderForUserCommandOutput) => void
-  ): Promise<AdminDisableProviderForUserCommandOutput> | void {
-    const command = new AdminDisableProviderForUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disables the specified user.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminDisableUserCommand}
    */
-  public adminDisableUser(
+  adminDisableUser(
     args: AdminDisableUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminDisableUserCommandOutput>;
-  public adminDisableUser(
+  adminDisableUser(
     args: AdminDisableUserCommandInput,
     cb: (err: any, data?: AdminDisableUserCommandOutput) => void
   ): void;
-  public adminDisableUser(
+  adminDisableUser(
     args: AdminDisableUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminDisableUserCommandOutput) => void
   ): void;
-  public adminDisableUser(
-    args: AdminDisableUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminDisableUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminDisableUserCommandOutput) => void
-  ): Promise<AdminDisableUserCommandOutput> | void {
-    const command = new AdminDisableUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Enables the specified user as an administrator. Works on any user.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminEnableUserCommand}
    */
-  public adminEnableUser(
+  adminEnableUser(
     args: AdminEnableUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminEnableUserCommandOutput>;
-  public adminEnableUser(
+  adminEnableUser(
     args: AdminEnableUserCommandInput,
     cb: (err: any, data?: AdminEnableUserCommandOutput) => void
   ): void;
-  public adminEnableUser(
+  adminEnableUser(
     args: AdminEnableUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminEnableUserCommandOutput) => void
   ): void;
-  public adminEnableUser(
-    args: AdminEnableUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminEnableUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminEnableUserCommandOutput) => void
-  ): Promise<AdminEnableUserCommandOutput> | void {
-    const command = new AdminEnableUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Forgets the device, as an administrator.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminForgetDeviceCommand}
    */
-  public adminForgetDevice(
+  adminForgetDevice(
     args: AdminForgetDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminForgetDeviceCommandOutput>;
-  public adminForgetDevice(
+  adminForgetDevice(
     args: AdminForgetDeviceCommandInput,
     cb: (err: any, data?: AdminForgetDeviceCommandOutput) => void
   ): void;
-  public adminForgetDevice(
+  adminForgetDevice(
     args: AdminForgetDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminForgetDeviceCommandOutput) => void
   ): void;
-  public adminForgetDevice(
-    args: AdminForgetDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminForgetDeviceCommandOutput) => void),
-    cb?: (err: any, data?: AdminForgetDeviceCommandOutput) => void
-  ): Promise<AdminForgetDeviceCommandOutput> | void {
-    const command = new AdminForgetDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the device, as an administrator.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminGetDeviceCommand}
    */
-  public adminGetDevice(
+  adminGetDevice(
     args: AdminGetDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminGetDeviceCommandOutput>;
-  public adminGetDevice(
+  adminGetDevice(
     args: AdminGetDeviceCommandInput,
     cb: (err: any, data?: AdminGetDeviceCommandOutput) => void
   ): void;
-  public adminGetDevice(
+  adminGetDevice(
     args: AdminGetDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminGetDeviceCommandOutput) => void
   ): void;
-  public adminGetDevice(
-    args: AdminGetDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminGetDeviceCommandOutput) => void),
-    cb?: (err: any, data?: AdminGetDeviceCommandOutput) => void
-  ): Promise<AdminGetDeviceCommandOutput> | void {
-    const command = new AdminGetDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the specified user by user name in a user pool as an administrator. Works on any
-   *             user.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminGetUserCommand}
    */
-  public adminGetUser(
+  adminGetUser(
     args: AdminGetUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminGetUserCommandOutput>;
-  public adminGetUser(args: AdminGetUserCommandInput, cb: (err: any, data?: AdminGetUserCommandOutput) => void): void;
-  public adminGetUser(
+  adminGetUser(
     args: AdminGetUserCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: AdminGetUserCommandOutput) => void
   ): void;
-  public adminGetUser(
+  adminGetUser(
     args: AdminGetUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminGetUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminGetUserCommandOutput) => void
-  ): Promise<AdminGetUserCommandOutput> | void {
-    const command = new AdminGetUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: AdminGetUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Initiates the authentication flow, as an administrator.</p>
-   *
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
-   *
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminGetUserAuthFactorsCommand}
    */
-  public adminInitiateAuth(
+  adminGetUserAuthFactors(
+    args: AdminGetUserAuthFactorsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<AdminGetUserAuthFactorsCommandOutput>;
+  adminGetUserAuthFactors(
+    args: AdminGetUserAuthFactorsCommandInput,
+    cb: (err: any, data?: AdminGetUserAuthFactorsCommandOutput) => void
+  ): void;
+  adminGetUserAuthFactors(
+    args: AdminGetUserAuthFactorsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: AdminGetUserAuthFactorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AdminInitiateAuthCommand}
+   */
+  adminInitiateAuth(
     args: AdminInitiateAuthCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminInitiateAuthCommandOutput>;
-  public adminInitiateAuth(
+  adminInitiateAuth(
     args: AdminInitiateAuthCommandInput,
     cb: (err: any, data?: AdminInitiateAuthCommandOutput) => void
   ): void;
-  public adminInitiateAuth(
+  adminInitiateAuth(
     args: AdminInitiateAuthCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminInitiateAuthCommandOutput) => void
   ): void;
-  public adminInitiateAuth(
-    args: AdminInitiateAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminInitiateAuthCommandOutput) => void),
-    cb?: (err: any, data?: AdminInitiateAuthCommandOutput) => void
-  ): Promise<AdminInitiateAuthCommandOutput> | void {
-    const command = new AdminInitiateAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Links an existing user account in a user pool (<code>DestinationUser</code>) to an
-   *             identity from an external identity provider (<code>SourceUser</code>) based on a
-   *             specified attribute name and value from the external identity provider. This allows you
-   *             to create a link from the existing user account to an external federated user identity
-   *             that has not yet been used to sign in, so that the federated user identity can be used
-   *             to sign in as the existing user account. </p>
-   *         <p> For example, if there is an existing user with a username and password, this API
-   *             links that user to a federated user identity, so that when the federated user identity
-   *             is used, the user signs in as the existing user account. </p>
-   *         <note>
-   *             <p>The maximum number of federated identities linked to a user is 5.</p>
-   *         </note>
-   *         <important>
-   *             <p>Because this API allows a user with an external federated identity to sign in as
-   *                 an existing user in the user pool, it is critical that it only be used with external
-   *                 identity providers and provider attributes that have been trusted by the application
-   *                 owner.</p>
-   *         </important>
-   *
-   *         <p>This action is enabled only for admin access and requires developer
-   *             credentials.</p>
+   * @see {@link AdminLinkProviderForUserCommand}
    */
-  public adminLinkProviderForUser(
+  adminLinkProviderForUser(
     args: AdminLinkProviderForUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminLinkProviderForUserCommandOutput>;
-  public adminLinkProviderForUser(
+  adminLinkProviderForUser(
     args: AdminLinkProviderForUserCommandInput,
     cb: (err: any, data?: AdminLinkProviderForUserCommandOutput) => void
   ): void;
-  public adminLinkProviderForUser(
+  adminLinkProviderForUser(
     args: AdminLinkProviderForUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminLinkProviderForUserCommandOutput) => void
   ): void;
-  public adminLinkProviderForUser(
-    args: AdminLinkProviderForUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminLinkProviderForUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminLinkProviderForUserCommandOutput) => void
-  ): Promise<AdminLinkProviderForUserCommandOutput> | void {
-    const command = new AdminLinkProviderForUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists devices, as an administrator.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminListDevicesCommand}
    */
-  public adminListDevices(
+  adminListDevices(
     args: AdminListDevicesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminListDevicesCommandOutput>;
-  public adminListDevices(
+  adminListDevices(
     args: AdminListDevicesCommandInput,
     cb: (err: any, data?: AdminListDevicesCommandOutput) => void
   ): void;
-  public adminListDevices(
+  adminListDevices(
     args: AdminListDevicesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminListDevicesCommandOutput) => void
   ): void;
-  public adminListDevices(
-    args: AdminListDevicesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminListDevicesCommandOutput) => void),
-    cb?: (err: any, data?: AdminListDevicesCommandOutput) => void
-  ): Promise<AdminListDevicesCommandOutput> | void {
-    const command = new AdminListDevicesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the groups that the user belongs to.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminListGroupsForUserCommand}
    */
-  public adminListGroupsForUser(
+  adminListGroupsForUser(
     args: AdminListGroupsForUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminListGroupsForUserCommandOutput>;
-  public adminListGroupsForUser(
+  adminListGroupsForUser(
     args: AdminListGroupsForUserCommandInput,
     cb: (err: any, data?: AdminListGroupsForUserCommandOutput) => void
   ): void;
-  public adminListGroupsForUser(
+  adminListGroupsForUser(
     args: AdminListGroupsForUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminListGroupsForUserCommandOutput) => void
   ): void;
-  public adminListGroupsForUser(
-    args: AdminListGroupsForUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminListGroupsForUserCommandOutput) => void),
-    cb?: (err: any, data?: AdminListGroupsForUserCommandOutput) => void
-  ): Promise<AdminListGroupsForUserCommandOutput> | void {
-    const command = new AdminListGroupsForUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists a history of user activity and any risks detected as part of Amazon Cognito
-   *             advanced security.</p>
+   * @see {@link AdminListUserAuthEventsCommand}
    */
-  public adminListUserAuthEvents(
+  adminListUserAuthEvents(
     args: AdminListUserAuthEventsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminListUserAuthEventsCommandOutput>;
-  public adminListUserAuthEvents(
+  adminListUserAuthEvents(
     args: AdminListUserAuthEventsCommandInput,
     cb: (err: any, data?: AdminListUserAuthEventsCommandOutput) => void
   ): void;
-  public adminListUserAuthEvents(
+  adminListUserAuthEvents(
     args: AdminListUserAuthEventsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminListUserAuthEventsCommandOutput) => void
   ): void;
-  public adminListUserAuthEvents(
-    args: AdminListUserAuthEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminListUserAuthEventsCommandOutput) => void),
-    cb?: (err: any, data?: AdminListUserAuthEventsCommandOutput) => void
-  ): Promise<AdminListUserAuthEventsCommandOutput> | void {
-    const command = new AdminListUserAuthEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the specified user from the specified group.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminListUserSessionsCommand}
    */
-  public adminRemoveUserFromGroup(
+  adminListUserSessions(
+    args: AdminListUserSessionsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<AdminListUserSessionsCommandOutput>;
+  adminListUserSessions(
+    args: AdminListUserSessionsCommandInput,
+    cb: (err: any, data?: AdminListUserSessionsCommandOutput) => void
+  ): void;
+  adminListUserSessions(
+    args: AdminListUserSessionsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: AdminListUserSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AdminRemoveUserFromGroupCommand}
+   */
+  adminRemoveUserFromGroup(
     args: AdminRemoveUserFromGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminRemoveUserFromGroupCommandOutput>;
-  public adminRemoveUserFromGroup(
+  adminRemoveUserFromGroup(
     args: AdminRemoveUserFromGroupCommandInput,
     cb: (err: any, data?: AdminRemoveUserFromGroupCommandOutput) => void
   ): void;
-  public adminRemoveUserFromGroup(
+  adminRemoveUserFromGroup(
     args: AdminRemoveUserFromGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminRemoveUserFromGroupCommandOutput) => void
   ): void;
-  public adminRemoveUserFromGroup(
-    args: AdminRemoveUserFromGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminRemoveUserFromGroupCommandOutput) => void),
-    cb?: (err: any, data?: AdminRemoveUserFromGroupCommandOutput) => void
-  ): Promise<AdminRemoveUserFromGroupCommandOutput> | void {
-    const command = new AdminRemoveUserFromGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Resets the specified user's password in a user pool as an administrator. Works on any
-   *             user.</p>
-   *         <p>When a developer calls this API, the current password is invalidated, so it must be
-   *             changed. If a user tries to sign in after the API is called, the app will get a
-   *             PasswordResetRequiredException exception back and should direct the user down the flow
-   *             to reset the password, which is the same as the forgot password flow. In addition, if
-   *             the user pool has phone verification selected and a verified phone number exists for the
-   *             user, or if email verification is selected and a verified email exists for the user,
-   *             calling this API will also result in sending a message to the end user with the code to
-   *             change their password.</p>
-   *
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
-   *
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminResetUserPasswordCommand}
    */
-  public adminResetUserPassword(
+  adminResetUserPassword(
     args: AdminResetUserPasswordCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminResetUserPasswordCommandOutput>;
-  public adminResetUserPassword(
+  adminResetUserPassword(
     args: AdminResetUserPasswordCommandInput,
     cb: (err: any, data?: AdminResetUserPasswordCommandOutput) => void
   ): void;
-  public adminResetUserPassword(
+  adminResetUserPassword(
     args: AdminResetUserPasswordCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminResetUserPasswordCommandOutput) => void
   ): void;
-  public adminResetUserPassword(
-    args: AdminResetUserPasswordCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminResetUserPasswordCommandOutput) => void),
-    cb?: (err: any, data?: AdminResetUserPasswordCommandOutput) => void
-  ): Promise<AdminResetUserPasswordCommandOutput> | void {
-    const command = new AdminResetUserPasswordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Responds to an authentication challenge, as an administrator.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
-   *
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminRespondToAuthChallengeCommand}
    */
-  public adminRespondToAuthChallenge(
+  adminRespondToAuthChallenge(
     args: AdminRespondToAuthChallengeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminRespondToAuthChallengeCommandOutput>;
-  public adminRespondToAuthChallenge(
+  adminRespondToAuthChallenge(
     args: AdminRespondToAuthChallengeCommandInput,
     cb: (err: any, data?: AdminRespondToAuthChallengeCommandOutput) => void
   ): void;
-  public adminRespondToAuthChallenge(
+  adminRespondToAuthChallenge(
     args: AdminRespondToAuthChallengeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminRespondToAuthChallengeCommandOutput) => void
   ): void;
-  public adminRespondToAuthChallenge(
-    args: AdminRespondToAuthChallengeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminRespondToAuthChallengeCommandOutput) => void),
-    cb?: (err: any, data?: AdminRespondToAuthChallengeCommandOutput) => void
-  ): Promise<AdminRespondToAuthChallengeCommandOutput> | void {
-    const command = new AdminRespondToAuthChallengeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets the user's multi-factor authentication (MFA) preference, including which MFA
-   *             options are enabled and if any are preferred. Only one factor can be set as preferred.
-   *             The preferred MFA factor will be used to authenticate a user if multiple factors are
-   *             enabled. If multiple options are enabled and no preference is set, a challenge to choose
-   *             an MFA option will be returned during sign in.</p>
+   * @see {@link AdminRevokeUserSessionCommand}
    */
-  public adminSetUserMFAPreference(
+  adminRevokeUserSession(
+    args: AdminRevokeUserSessionCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<AdminRevokeUserSessionCommandOutput>;
+  adminRevokeUserSession(
+    args: AdminRevokeUserSessionCommandInput,
+    cb: (err: any, data?: AdminRevokeUserSessionCommandOutput) => void
+  ): void;
+  adminRevokeUserSession(
+    args: AdminRevokeUserSessionCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: AdminRevokeUserSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AdminSetUserMFAPreferenceCommand}
+   */
+  adminSetUserMFAPreference(
     args: AdminSetUserMFAPreferenceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminSetUserMFAPreferenceCommandOutput>;
-  public adminSetUserMFAPreference(
+  adminSetUserMFAPreference(
     args: AdminSetUserMFAPreferenceCommandInput,
     cb: (err: any, data?: AdminSetUserMFAPreferenceCommandOutput) => void
   ): void;
-  public adminSetUserMFAPreference(
+  adminSetUserMFAPreference(
     args: AdminSetUserMFAPreferenceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminSetUserMFAPreferenceCommandOutput) => void
   ): void;
-  public adminSetUserMFAPreference(
-    args: AdminSetUserMFAPreferenceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminSetUserMFAPreferenceCommandOutput) => void),
-    cb?: (err: any, data?: AdminSetUserMFAPreferenceCommandOutput) => void
-  ): Promise<AdminSetUserMFAPreferenceCommandOutput> | void {
-    const command = new AdminSetUserMFAPreferenceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets the specified user's password in a user pool as an administrator. Works on any
-   *             user. </p>
-   *         <p>The password can be temporary or permanent. If it is temporary, the user status will
-   *             be placed into the <code>FORCE_CHANGE_PASSWORD</code> state. When the user next tries to
-   *             sign in, the InitiateAuth/AdminInitiateAuth response will contain the
-   *                 <code>NEW_PASSWORD_REQUIRED</code> challenge. If the user does not sign in before it
-   *             expires, the user will not be able to sign in and their password will need to be reset
-   *             by an administrator. </p>
-   *         <p>Once the user has set a new password, or the password is permanent, the user status
-   *             will be set to <code>Confirmed</code>.</p>
+   * @see {@link AdminSetUserPasswordCommand}
    */
-  public adminSetUserPassword(
+  adminSetUserPassword(
     args: AdminSetUserPasswordCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminSetUserPasswordCommandOutput>;
-  public adminSetUserPassword(
+  adminSetUserPassword(
     args: AdminSetUserPasswordCommandInput,
     cb: (err: any, data?: AdminSetUserPasswordCommandOutput) => void
   ): void;
-  public adminSetUserPassword(
+  adminSetUserPassword(
     args: AdminSetUserPasswordCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminSetUserPasswordCommandOutput) => void
   ): void;
-  public adminSetUserPassword(
-    args: AdminSetUserPasswordCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminSetUserPasswordCommandOutput) => void),
-    cb?: (err: any, data?: AdminSetUserPasswordCommandOutput) => void
-  ): Promise<AdminSetUserPasswordCommandOutput> | void {
-    const command = new AdminSetUserPasswordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             <i>This action is no longer supported.</i> You can use it to configure
-   *             only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either
-   *             type of MFA, use <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html">AdminSetUserMFAPreference</a> instead.</p>
+   * @see {@link AdminSetUserSettingsCommand}
    */
-  public adminSetUserSettings(
+  adminSetUserSettings(
     args: AdminSetUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminSetUserSettingsCommandOutput>;
-  public adminSetUserSettings(
+  adminSetUserSettings(
     args: AdminSetUserSettingsCommandInput,
     cb: (err: any, data?: AdminSetUserSettingsCommandOutput) => void
   ): void;
-  public adminSetUserSettings(
+  adminSetUserSettings(
     args: AdminSetUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminSetUserSettingsCommandOutput) => void
   ): void;
-  public adminSetUserSettings(
-    args: AdminSetUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminSetUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: AdminSetUserSettingsCommandOutput) => void
-  ): Promise<AdminSetUserSettingsCommandOutput> | void {
-    const command = new AdminSetUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides feedback for an authentication event as to whether it was from a valid user.
-   *             This feedback is used for improving the risk evaluation decision for the user pool as
-   *             part of Amazon Cognito advanced security.</p>
+   * @see {@link AdminUpdateAuthEventFeedbackCommand}
    */
-  public adminUpdateAuthEventFeedback(
+  adminUpdateAuthEventFeedback(
     args: AdminUpdateAuthEventFeedbackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminUpdateAuthEventFeedbackCommandOutput>;
-  public adminUpdateAuthEventFeedback(
+  adminUpdateAuthEventFeedback(
     args: AdminUpdateAuthEventFeedbackCommandInput,
     cb: (err: any, data?: AdminUpdateAuthEventFeedbackCommandOutput) => void
   ): void;
-  public adminUpdateAuthEventFeedback(
+  adminUpdateAuthEventFeedback(
     args: AdminUpdateAuthEventFeedbackCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminUpdateAuthEventFeedbackCommandOutput) => void
   ): void;
-  public adminUpdateAuthEventFeedback(
-    args: AdminUpdateAuthEventFeedbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminUpdateAuthEventFeedbackCommandOutput) => void),
-    cb?: (err: any, data?: AdminUpdateAuthEventFeedbackCommandOutput) => void
-  ): Promise<AdminUpdateAuthEventFeedbackCommandOutput> | void {
-    const command = new AdminUpdateAuthEventFeedbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the device status as an administrator.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminUpdateDeviceStatusCommand}
    */
-  public adminUpdateDeviceStatus(
+  adminUpdateDeviceStatus(
     args: AdminUpdateDeviceStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminUpdateDeviceStatusCommandOutput>;
-  public adminUpdateDeviceStatus(
+  adminUpdateDeviceStatus(
     args: AdminUpdateDeviceStatusCommandInput,
     cb: (err: any, data?: AdminUpdateDeviceStatusCommandOutput) => void
   ): void;
-  public adminUpdateDeviceStatus(
+  adminUpdateDeviceStatus(
     args: AdminUpdateDeviceStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminUpdateDeviceStatusCommandOutput) => void
   ): void;
-  public adminUpdateDeviceStatus(
-    args: AdminUpdateDeviceStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminUpdateDeviceStatusCommandOutput) => void),
-    cb?: (err: any, data?: AdminUpdateDeviceStatusCommandOutput) => void
-  ): Promise<AdminUpdateDeviceStatusCommandOutput> | void {
-    const command = new AdminUpdateDeviceStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified user's attributes, including developer attributes, as an
-   *             administrator. Works on any user.</p>
-   *         <p>For custom attributes, you must prepend the <code>custom:</code> prefix to the
-   *             attribute name.</p>
-   *         <p>In addition to updating user attributes, this API can also be used to mark phone and
-   *             email as verified.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
-   *
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminUpdateUserAttributesCommand}
    */
-  public adminUpdateUserAttributes(
+  adminUpdateUserAttributes(
     args: AdminUpdateUserAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminUpdateUserAttributesCommandOutput>;
-  public adminUpdateUserAttributes(
+  adminUpdateUserAttributes(
     args: AdminUpdateUserAttributesCommandInput,
     cb: (err: any, data?: AdminUpdateUserAttributesCommandOutput) => void
   ): void;
-  public adminUpdateUserAttributes(
+  adminUpdateUserAttributes(
     args: AdminUpdateUserAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminUpdateUserAttributesCommandOutput) => void
   ): void;
-  public adminUpdateUserAttributes(
-    args: AdminUpdateUserAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminUpdateUserAttributesCommandOutput) => void),
-    cb?: (err: any, data?: AdminUpdateUserAttributesCommandOutput) => void
-  ): Promise<AdminUpdateUserAttributesCommandOutput> | void {
-    const command = new AdminUpdateUserAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Signs out users from all devices, as an administrator. It also invalidates all refresh
-   *             tokens issued to a user. The user's current access and Id tokens remain valid until
-   *             their expiry. Access and Id tokens expire one hour after they are issued.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link AdminUserGlobalSignOutCommand}
    */
-  public adminUserGlobalSignOut(
+  adminUserGlobalSignOut(
     args: AdminUserGlobalSignOutCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AdminUserGlobalSignOutCommandOutput>;
-  public adminUserGlobalSignOut(
+  adminUserGlobalSignOut(
     args: AdminUserGlobalSignOutCommandInput,
     cb: (err: any, data?: AdminUserGlobalSignOutCommandOutput) => void
   ): void;
-  public adminUserGlobalSignOut(
+  adminUserGlobalSignOut(
     args: AdminUserGlobalSignOutCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AdminUserGlobalSignOutCommandOutput) => void
   ): void;
-  public adminUserGlobalSignOut(
-    args: AdminUserGlobalSignOutCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AdminUserGlobalSignOutCommandOutput) => void),
-    cb?: (err: any, data?: AdminUserGlobalSignOutCommandOutput) => void
-  ): Promise<AdminUserGlobalSignOutCommandOutput> | void {
-    const command = new AdminUserGlobalSignOutCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a unique generated shared secret key code for the user account. The request
-   *             takes an access token or a session string, but not both.</p>
-   *         <note>
-   *             <p>Calling AssociateSoftwareToken immediately disassociates the existing software
-   *                 token from the user account. If the user doesn't subsequently verify the software
-   *                 token, their account is essentially set up to authenticate without MFA. If MFA
-   *                 config is set to Optional at the user pool level, the user can then login without
-   *                 MFA. However, if MFA is set to Required for the user pool, the user will be asked to
-   *                 setup a new software token MFA during sign in.</p>
-   *         </note>
+   * @see {@link AssociateSoftwareTokenCommand}
    */
-  public associateSoftwareToken(
+  associateSoftwareToken(): Promise<AssociateSoftwareTokenCommandOutput>;
+  associateSoftwareToken(
     args: AssociateSoftwareTokenCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<AssociateSoftwareTokenCommandOutput>;
-  public associateSoftwareToken(
+  associateSoftwareToken(
     args: AssociateSoftwareTokenCommandInput,
     cb: (err: any, data?: AssociateSoftwareTokenCommandOutput) => void
   ): void;
-  public associateSoftwareToken(
+  associateSoftwareToken(
     args: AssociateSoftwareTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: AssociateSoftwareTokenCommandOutput) => void
   ): void;
-  public associateSoftwareToken(
-    args: AssociateSoftwareTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateSoftwareTokenCommandOutput) => void),
-    cb?: (err: any, data?: AssociateSoftwareTokenCommandOutput) => void
-  ): Promise<AssociateSoftwareTokenCommandOutput> | void {
-    const command = new AssociateSoftwareTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Changes the password for a specified user in a user pool.</p>
+   * @see {@link ChangePasswordCommand}
    */
-  public changePassword(
+  changePassword(
     args: ChangePasswordCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ChangePasswordCommandOutput>;
-  public changePassword(
+  changePassword(
     args: ChangePasswordCommandInput,
     cb: (err: any, data?: ChangePasswordCommandOutput) => void
   ): void;
-  public changePassword(
+  changePassword(
     args: ChangePasswordCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ChangePasswordCommandOutput) => void
   ): void;
-  public changePassword(
-    args: ChangePasswordCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ChangePasswordCommandOutput) => void),
-    cb?: (err: any, data?: ChangePasswordCommandOutput) => void
-  ): Promise<ChangePasswordCommandOutput> | void {
-    const command = new ChangePasswordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Confirms tracking of the device. This API call is the call that begins device
-   *             tracking.</p>
+   * @see {@link CompleteWebAuthnRegistrationCommand}
    */
-  public confirmDevice(
+  completeWebAuthnRegistration(
+    args: CompleteWebAuthnRegistrationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<CompleteWebAuthnRegistrationCommandOutput>;
+  completeWebAuthnRegistration(
+    args: CompleteWebAuthnRegistrationCommandInput,
+    cb: (err: any, data?: CompleteWebAuthnRegistrationCommandOutput) => void
+  ): void;
+  completeWebAuthnRegistration(
+    args: CompleteWebAuthnRegistrationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: CompleteWebAuthnRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ConfirmDeviceCommand}
+   */
+  confirmDevice(
     args: ConfirmDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ConfirmDeviceCommandOutput>;
-  public confirmDevice(
+  confirmDevice(
     args: ConfirmDeviceCommandInput,
     cb: (err: any, data?: ConfirmDeviceCommandOutput) => void
   ): void;
-  public confirmDevice(
+  confirmDevice(
     args: ConfirmDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ConfirmDeviceCommandOutput) => void
   ): void;
-  public confirmDevice(
-    args: ConfirmDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ConfirmDeviceCommandOutput) => void),
-    cb?: (err: any, data?: ConfirmDeviceCommandOutput) => void
-  ): Promise<ConfirmDeviceCommandOutput> | void {
-    const command = new ConfirmDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows a user to enter a confirmation code to reset a forgotten password.</p>
+   * @see {@link ConfirmForgotPasswordCommand}
    */
-  public confirmForgotPassword(
+  confirmForgotPassword(
     args: ConfirmForgotPasswordCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ConfirmForgotPasswordCommandOutput>;
-  public confirmForgotPassword(
+  confirmForgotPassword(
     args: ConfirmForgotPasswordCommandInput,
     cb: (err: any, data?: ConfirmForgotPasswordCommandOutput) => void
   ): void;
-  public confirmForgotPassword(
+  confirmForgotPassword(
     args: ConfirmForgotPasswordCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ConfirmForgotPasswordCommandOutput) => void
   ): void;
-  public confirmForgotPassword(
-    args: ConfirmForgotPasswordCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ConfirmForgotPasswordCommandOutput) => void),
-    cb?: (err: any, data?: ConfirmForgotPasswordCommandOutput) => void
-  ): Promise<ConfirmForgotPasswordCommandOutput> | void {
-    const command = new ConfirmForgotPasswordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Confirms registration of a user and handles the existing alias from a previous
-   *             user.</p>
+   * @see {@link ConfirmSignUpCommand}
    */
-  public confirmSignUp(
+  confirmSignUp(
     args: ConfirmSignUpCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ConfirmSignUpCommandOutput>;
-  public confirmSignUp(
+  confirmSignUp(
     args: ConfirmSignUpCommandInput,
     cb: (err: any, data?: ConfirmSignUpCommandOutput) => void
   ): void;
-  public confirmSignUp(
+  confirmSignUp(
     args: ConfirmSignUpCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ConfirmSignUpCommandOutput) => void
   ): void;
-  public confirmSignUp(
-    args: ConfirmSignUpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ConfirmSignUpCommandOutput) => void),
-    cb?: (err: any, data?: ConfirmSignUpCommandOutput) => void
-  ): Promise<ConfirmSignUpCommandOutput> | void {
-    const command = new ConfirmSignUpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new group in the specified user pool.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link CreateGroupCommand}
    */
-  public createGroup(args: CreateGroupCommandInput, options?: __HttpHandlerOptions): Promise<CreateGroupCommandOutput>;
-  public createGroup(args: CreateGroupCommandInput, cb: (err: any, data?: CreateGroupCommandOutput) => void): void;
-  public createGroup(
+  createGroup(
     args: CreateGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<CreateGroupCommandOutput>;
+  createGroup(
+    args: CreateGroupCommandInput,
     cb: (err: any, data?: CreateGroupCommandOutput) => void
   ): void;
-  public createGroup(
+  createGroup(
     args: CreateGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateGroupCommandOutput) => void
-  ): Promise<CreateGroupCommandOutput> | void {
-    const command = new CreateGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: CreateGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates an identity provider for a user pool.</p>
+   * @see {@link CreateIdentityProviderCommand}
    */
-  public createIdentityProvider(
+  createIdentityProvider(
     args: CreateIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<CreateIdentityProviderCommandOutput>;
-  public createIdentityProvider(
+  createIdentityProvider(
     args: CreateIdentityProviderCommandInput,
     cb: (err: any, data?: CreateIdentityProviderCommandOutput) => void
   ): void;
-  public createIdentityProvider(
+  createIdentityProvider(
     args: CreateIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: CreateIdentityProviderCommandOutput) => void
   ): void;
-  public createIdentityProvider(
-    args: CreateIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: CreateIdentityProviderCommandOutput) => void
-  ): Promise<CreateIdentityProviderCommandOutput> | void {
-    const command = new CreateIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new OAuth2.0 resource server and defines custom scopes in it.</p>
+   * @see {@link CreateManagedLoginBrandingCommand}
    */
-  public createResourceServer(
+  createManagedLoginBranding(
+    args: CreateManagedLoginBrandingCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<CreateManagedLoginBrandingCommandOutput>;
+  createManagedLoginBranding(
+    args: CreateManagedLoginBrandingCommandInput,
+    cb: (err: any, data?: CreateManagedLoginBrandingCommandOutput) => void
+  ): void;
+  createManagedLoginBranding(
+    args: CreateManagedLoginBrandingCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: CreateManagedLoginBrandingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateResourceServerCommand}
+   */
+  createResourceServer(
     args: CreateResourceServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<CreateResourceServerCommandOutput>;
-  public createResourceServer(
+  createResourceServer(
     args: CreateResourceServerCommandInput,
     cb: (err: any, data?: CreateResourceServerCommandOutput) => void
   ): void;
-  public createResourceServer(
+  createResourceServer(
     args: CreateResourceServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: CreateResourceServerCommandOutput) => void
   ): void;
-  public createResourceServer(
-    args: CreateResourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateResourceServerCommandOutput) => void),
-    cb?: (err: any, data?: CreateResourceServerCommandOutput) => void
-  ): Promise<CreateResourceServerCommandOutput> | void {
-    const command = new CreateResourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates the user import job.</p>
+   * @see {@link CreateTermsCommand}
    */
-  public createUserImportJob(
+  createTerms(
+    args: CreateTermsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<CreateTermsCommandOutput>;
+  createTerms(
+    args: CreateTermsCommandInput,
+    cb: (err: any, data?: CreateTermsCommandOutput) => void
+  ): void;
+  createTerms(
+    args: CreateTermsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: CreateTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUserImportJobCommand}
+   */
+  createUserImportJob(
     args: CreateUserImportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<CreateUserImportJobCommandOutput>;
-  public createUserImportJob(
+  createUserImportJob(
     args: CreateUserImportJobCommandInput,
     cb: (err: any, data?: CreateUserImportJobCommandOutput) => void
   ): void;
-  public createUserImportJob(
+  createUserImportJob(
     args: CreateUserImportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: CreateUserImportJobCommandOutput) => void
   ): void;
-  public createUserImportJob(
-    args: CreateUserImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserImportJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserImportJobCommandOutput) => void
-  ): Promise<CreateUserImportJobCommandOutput> | void {
-    const command = new CreateUserImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new Amazon Cognito user pool and sets the password policy for the
-   *             pool.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link CreateUserPoolCommand}
    */
-  public createUserPool(
+  createUserPool(
     args: CreateUserPoolCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<CreateUserPoolCommandOutput>;
-  public createUserPool(
+  createUserPool(
     args: CreateUserPoolCommandInput,
     cb: (err: any, data?: CreateUserPoolCommandOutput) => void
   ): void;
-  public createUserPool(
+  createUserPool(
     args: CreateUserPoolCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: CreateUserPoolCommandOutput) => void
   ): void;
-  public createUserPool(
-    args: CreateUserPoolCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserPoolCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserPoolCommandOutput) => void
-  ): Promise<CreateUserPoolCommandOutput> | void {
-    const command = new CreateUserPoolCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates the user pool client.</p>
-   *         <p>When you create a new user pool client, token revocation is automatically enabled. For more information
-   *             about revoking tokens, see <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html">RevokeToken</a>.</p>
+   * @see {@link CreateUserPoolClientCommand}
    */
-  public createUserPoolClient(
+  createUserPoolClient(
     args: CreateUserPoolClientCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<CreateUserPoolClientCommandOutput>;
-  public createUserPoolClient(
+  createUserPoolClient(
     args: CreateUserPoolClientCommandInput,
     cb: (err: any, data?: CreateUserPoolClientCommandOutput) => void
   ): void;
-  public createUserPoolClient(
+  createUserPoolClient(
     args: CreateUserPoolClientCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: CreateUserPoolClientCommandOutput) => void
   ): void;
-  public createUserPoolClient(
-    args: CreateUserPoolClientCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserPoolClientCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserPoolClientCommandOutput) => void
-  ): Promise<CreateUserPoolClientCommandOutput> | void {
-    const command = new CreateUserPoolClientCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new domain for a user pool.</p>
+   * @see {@link CreateUserPoolDomainCommand}
    */
-  public createUserPoolDomain(
+  createUserPoolDomain(
     args: CreateUserPoolDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<CreateUserPoolDomainCommandOutput>;
-  public createUserPoolDomain(
+  createUserPoolDomain(
     args: CreateUserPoolDomainCommandInput,
     cb: (err: any, data?: CreateUserPoolDomainCommandOutput) => void
   ): void;
-  public createUserPoolDomain(
+  createUserPoolDomain(
     args: CreateUserPoolDomainCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: CreateUserPoolDomainCommandOutput) => void
   ): void;
-  public createUserPoolDomain(
-    args: CreateUserPoolDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserPoolDomainCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserPoolDomainCommandOutput) => void
-  ): Promise<CreateUserPoolDomainCommandOutput> | void {
-    const command = new CreateUserPoolDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a group.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link CreateUserPoolReplicaCommand}
    */
-  public deleteGroup(args: DeleteGroupCommandInput, options?: __HttpHandlerOptions): Promise<DeleteGroupCommandOutput>;
-  public deleteGroup(args: DeleteGroupCommandInput, cb: (err: any, data?: DeleteGroupCommandOutput) => void): void;
-  public deleteGroup(
+  createUserPoolReplica(
+    args: CreateUserPoolReplicaCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<CreateUserPoolReplicaCommandOutput>;
+  createUserPoolReplica(
+    args: CreateUserPoolReplicaCommandInput,
+    cb: (err: any, data?: CreateUserPoolReplicaCommandOutput) => void
+  ): void;
+  createUserPoolReplica(
+    args: CreateUserPoolReplicaCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: CreateUserPoolReplicaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteGroupCommand}
+   */
+  deleteGroup(
     args: DeleteGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteGroupCommandOutput>;
+  deleteGroup(
+    args: DeleteGroupCommandInput,
     cb: (err: any, data?: DeleteGroupCommandOutput) => void
   ): void;
-  public deleteGroup(
+  deleteGroup(
     args: DeleteGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteGroupCommandOutput) => void
-  ): Promise<DeleteGroupCommandOutput> | void {
-    const command = new DeleteGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes an identity provider for a user pool.</p>
+   * @see {@link DeleteIdentityProviderCommand}
    */
-  public deleteIdentityProvider(
+  deleteIdentityProvider(
     args: DeleteIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DeleteIdentityProviderCommandOutput>;
-  public deleteIdentityProvider(
+  deleteIdentityProvider(
     args: DeleteIdentityProviderCommandInput,
     cb: (err: any, data?: DeleteIdentityProviderCommandOutput) => void
   ): void;
-  public deleteIdentityProvider(
+  deleteIdentityProvider(
     args: DeleteIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DeleteIdentityProviderCommandOutput) => void
   ): void;
-  public deleteIdentityProvider(
-    args: DeleteIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIdentityProviderCommandOutput) => void
-  ): Promise<DeleteIdentityProviderCommandOutput> | void {
-    const command = new DeleteIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a resource server.</p>
+   * @see {@link DeleteManagedLoginBrandingCommand}
    */
-  public deleteResourceServer(
+  deleteManagedLoginBranding(
+    args: DeleteManagedLoginBrandingCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteManagedLoginBrandingCommandOutput>;
+  deleteManagedLoginBranding(
+    args: DeleteManagedLoginBrandingCommandInput,
+    cb: (err: any, data?: DeleteManagedLoginBrandingCommandOutput) => void
+  ): void;
+  deleteManagedLoginBranding(
+    args: DeleteManagedLoginBrandingCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteManagedLoginBrandingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourceServerCommand}
+   */
+  deleteResourceServer(
     args: DeleteResourceServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DeleteResourceServerCommandOutput>;
-  public deleteResourceServer(
+  deleteResourceServer(
     args: DeleteResourceServerCommandInput,
     cb: (err: any, data?: DeleteResourceServerCommandOutput) => void
   ): void;
-  public deleteResourceServer(
+  deleteResourceServer(
     args: DeleteResourceServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DeleteResourceServerCommandOutput) => void
   ): void;
-  public deleteResourceServer(
-    args: DeleteResourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourceServerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourceServerCommandOutput) => void
-  ): Promise<DeleteResourceServerCommandOutput> | void {
-    const command = new DeleteResourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows a user to delete himself or herself.</p>
+   * @see {@link DeleteTermsCommand}
    */
-  public deleteUser(args: DeleteUserCommandInput, options?: __HttpHandlerOptions): Promise<DeleteUserCommandOutput>;
-  public deleteUser(args: DeleteUserCommandInput, cb: (err: any, data?: DeleteUserCommandOutput) => void): void;
-  public deleteUser(
+  deleteTerms(
+    args: DeleteTermsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteTermsCommandOutput>;
+  deleteTerms(
+    args: DeleteTermsCommandInput,
+    cb: (err: any, data?: DeleteTermsCommandOutput) => void
+  ): void;
+  deleteTerms(
+    args: DeleteTermsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUserCommand}
+   */
+  deleteUser(
     args: DeleteUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteUserCommandOutput>;
+  deleteUser(
+    args: DeleteUserCommandInput,
     cb: (err: any, data?: DeleteUserCommandOutput) => void
   ): void;
-  public deleteUser(
+  deleteUser(
     args: DeleteUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserCommandOutput) => void
-  ): Promise<DeleteUserCommandOutput> | void {
-    const command = new DeleteUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the attributes for a user.</p>
+   * @see {@link DeleteUserAttributesCommand}
    */
-  public deleteUserAttributes(
+  deleteUserAttributes(
     args: DeleteUserAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DeleteUserAttributesCommandOutput>;
-  public deleteUserAttributes(
+  deleteUserAttributes(
     args: DeleteUserAttributesCommandInput,
     cb: (err: any, data?: DeleteUserAttributesCommandOutput) => void
   ): void;
-  public deleteUserAttributes(
+  deleteUserAttributes(
     args: DeleteUserAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DeleteUserAttributesCommandOutput) => void
   ): void;
-  public deleteUserAttributes(
-    args: DeleteUserAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserAttributesCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserAttributesCommandOutput) => void
-  ): Promise<DeleteUserAttributesCommandOutput> | void {
-    const command = new DeleteUserAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified Amazon Cognito user pool.</p>
+   * @see {@link DeleteUserPoolCommand}
    */
-  public deleteUserPool(
+  deleteUserPool(
     args: DeleteUserPoolCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DeleteUserPoolCommandOutput>;
-  public deleteUserPool(
+  deleteUserPool(
     args: DeleteUserPoolCommandInput,
     cb: (err: any, data?: DeleteUserPoolCommandOutput) => void
   ): void;
-  public deleteUserPool(
+  deleteUserPool(
     args: DeleteUserPoolCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DeleteUserPoolCommandOutput) => void
   ): void;
-  public deleteUserPool(
-    args: DeleteUserPoolCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserPoolCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserPoolCommandOutput) => void
-  ): Promise<DeleteUserPoolCommandOutput> | void {
-    const command = new DeleteUserPoolCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows the developer to delete the user pool client.</p>
+   * @see {@link DeleteUserPoolClientCommand}
    */
-  public deleteUserPoolClient(
+  deleteUserPoolClient(
     args: DeleteUserPoolClientCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DeleteUserPoolClientCommandOutput>;
-  public deleteUserPoolClient(
+  deleteUserPoolClient(
     args: DeleteUserPoolClientCommandInput,
     cb: (err: any, data?: DeleteUserPoolClientCommandOutput) => void
   ): void;
-  public deleteUserPoolClient(
+  deleteUserPoolClient(
     args: DeleteUserPoolClientCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DeleteUserPoolClientCommandOutput) => void
   ): void;
-  public deleteUserPoolClient(
-    args: DeleteUserPoolClientCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserPoolClientCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserPoolClientCommandOutput) => void
-  ): Promise<DeleteUserPoolClientCommandOutput> | void {
-    const command = new DeleteUserPoolClientCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a domain for a user pool.</p>
+   * @see {@link DeleteUserPoolClientSecretCommand}
    */
-  public deleteUserPoolDomain(
+  deleteUserPoolClientSecret(
+    args: DeleteUserPoolClientSecretCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteUserPoolClientSecretCommandOutput>;
+  deleteUserPoolClientSecret(
+    args: DeleteUserPoolClientSecretCommandInput,
+    cb: (err: any, data?: DeleteUserPoolClientSecretCommandOutput) => void
+  ): void;
+  deleteUserPoolClientSecret(
+    args: DeleteUserPoolClientSecretCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteUserPoolClientSecretCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUserPoolDomainCommand}
+   */
+  deleteUserPoolDomain(
     args: DeleteUserPoolDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DeleteUserPoolDomainCommandOutput>;
-  public deleteUserPoolDomain(
+  deleteUserPoolDomain(
     args: DeleteUserPoolDomainCommandInput,
     cb: (err: any, data?: DeleteUserPoolDomainCommandOutput) => void
   ): void;
-  public deleteUserPoolDomain(
+  deleteUserPoolDomain(
     args: DeleteUserPoolDomainCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DeleteUserPoolDomainCommandOutput) => void
   ): void;
-  public deleteUserPoolDomain(
-    args: DeleteUserPoolDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserPoolDomainCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserPoolDomainCommandOutput) => void
-  ): Promise<DeleteUserPoolDomainCommandOutput> | void {
-    const command = new DeleteUserPoolDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a specific identity provider.</p>
+   * @see {@link DeleteUserPoolReplicaCommand}
    */
-  public describeIdentityProvider(
+  deleteUserPoolReplica(
+    args: DeleteUserPoolReplicaCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteUserPoolReplicaCommandOutput>;
+  deleteUserPoolReplica(
+    args: DeleteUserPoolReplicaCommandInput,
+    cb: (err: any, data?: DeleteUserPoolReplicaCommandOutput) => void
+  ): void;
+  deleteUserPoolReplica(
+    args: DeleteUserPoolReplicaCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteUserPoolReplicaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWebAuthnCredentialCommand}
+   */
+  deleteWebAuthnCredential(
+    args: DeleteWebAuthnCredentialCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DeleteWebAuthnCredentialCommandOutput>;
+  deleteWebAuthnCredential(
+    args: DeleteWebAuthnCredentialCommandInput,
+    cb: (err: any, data?: DeleteWebAuthnCredentialCommandOutput) => void
+  ): void;
+  deleteWebAuthnCredential(
+    args: DeleteWebAuthnCredentialCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DeleteWebAuthnCredentialCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeIdentityProviderCommand}
+   */
+  describeIdentityProvider(
     args: DescribeIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeIdentityProviderCommandOutput>;
-  public describeIdentityProvider(
+  describeIdentityProvider(
     args: DescribeIdentityProviderCommandInput,
     cb: (err: any, data?: DescribeIdentityProviderCommandOutput) => void
   ): void;
-  public describeIdentityProvider(
+  describeIdentityProvider(
     args: DescribeIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeIdentityProviderCommandOutput) => void
   ): void;
-  public describeIdentityProvider(
-    args: DescribeIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: DescribeIdentityProviderCommandOutput) => void
-  ): Promise<DescribeIdentityProviderCommandOutput> | void {
-    const command = new DescribeIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a resource server.</p>
+   * @see {@link DescribeManagedLoginBrandingCommand}
    */
-  public describeResourceServer(
+  describeManagedLoginBranding(
+    args: DescribeManagedLoginBrandingCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DescribeManagedLoginBrandingCommandOutput>;
+  describeManagedLoginBranding(
+    args: DescribeManagedLoginBrandingCommandInput,
+    cb: (err: any, data?: DescribeManagedLoginBrandingCommandOutput) => void
+  ): void;
+  describeManagedLoginBranding(
+    args: DescribeManagedLoginBrandingCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DescribeManagedLoginBrandingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeManagedLoginBrandingByClientCommand}
+   */
+  describeManagedLoginBrandingByClient(
+    args: DescribeManagedLoginBrandingByClientCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DescribeManagedLoginBrandingByClientCommandOutput>;
+  describeManagedLoginBrandingByClient(
+    args: DescribeManagedLoginBrandingByClientCommandInput,
+    cb: (err: any, data?: DescribeManagedLoginBrandingByClientCommandOutput) => void
+  ): void;
+  describeManagedLoginBrandingByClient(
+    args: DescribeManagedLoginBrandingByClientCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DescribeManagedLoginBrandingByClientCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourceServerCommand}
+   */
+  describeResourceServer(
     args: DescribeResourceServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeResourceServerCommandOutput>;
-  public describeResourceServer(
+  describeResourceServer(
     args: DescribeResourceServerCommandInput,
     cb: (err: any, data?: DescribeResourceServerCommandOutput) => void
   ): void;
-  public describeResourceServer(
+  describeResourceServer(
     args: DescribeResourceServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeResourceServerCommandOutput) => void
   ): void;
-  public describeResourceServer(
-    args: DescribeResourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResourceServerCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResourceServerCommandOutput) => void
-  ): Promise<DescribeResourceServerCommandOutput> | void {
-    const command = new DescribeResourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the risk configuration.</p>
+   * @see {@link DescribeRiskConfigurationCommand}
    */
-  public describeRiskConfiguration(
+  describeRiskConfiguration(
     args: DescribeRiskConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeRiskConfigurationCommandOutput>;
-  public describeRiskConfiguration(
+  describeRiskConfiguration(
     args: DescribeRiskConfigurationCommandInput,
     cb: (err: any, data?: DescribeRiskConfigurationCommandOutput) => void
   ): void;
-  public describeRiskConfiguration(
+  describeRiskConfiguration(
     args: DescribeRiskConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeRiskConfigurationCommandOutput) => void
   ): void;
-  public describeRiskConfiguration(
-    args: DescribeRiskConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRiskConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRiskConfigurationCommandOutput) => void
-  ): Promise<DescribeRiskConfigurationCommandOutput> | void {
-    const command = new DescribeRiskConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the user import job.</p>
+   * @see {@link DescribeTermsCommand}
    */
-  public describeUserImportJob(
+  describeTerms(
+    args: DescribeTermsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DescribeTermsCommandOutput>;
+  describeTerms(
+    args: DescribeTermsCommandInput,
+    cb: (err: any, data?: DescribeTermsCommandOutput) => void
+  ): void;
+  describeTerms(
+    args: DescribeTermsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DescribeTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTermsByClientCommand}
+   */
+  describeTermsByClient(
+    args: DescribeTermsByClientCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<DescribeTermsByClientCommandOutput>;
+  describeTermsByClient(
+    args: DescribeTermsByClientCommandInput,
+    cb: (err: any, data?: DescribeTermsByClientCommandOutput) => void
+  ): void;
+  describeTermsByClient(
+    args: DescribeTermsByClientCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: DescribeTermsByClientCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeUserImportJobCommand}
+   */
+  describeUserImportJob(
     args: DescribeUserImportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeUserImportJobCommandOutput>;
-  public describeUserImportJob(
+  describeUserImportJob(
     args: DescribeUserImportJobCommandInput,
     cb: (err: any, data?: DescribeUserImportJobCommandOutput) => void
   ): void;
-  public describeUserImportJob(
+  describeUserImportJob(
     args: DescribeUserImportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeUserImportJobCommandOutput) => void
   ): void;
-  public describeUserImportJob(
-    args: DescribeUserImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserImportJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserImportJobCommandOutput) => void
-  ): Promise<DescribeUserImportJobCommandOutput> | void {
-    const command = new DescribeUserImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the configuration information and metadata of the specified user pool.</p>
+   * @see {@link DescribeUserPoolCommand}
    */
-  public describeUserPool(
+  describeUserPool(
     args: DescribeUserPoolCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeUserPoolCommandOutput>;
-  public describeUserPool(
+  describeUserPool(
     args: DescribeUserPoolCommandInput,
     cb: (err: any, data?: DescribeUserPoolCommandOutput) => void
   ): void;
-  public describeUserPool(
+  describeUserPool(
     args: DescribeUserPoolCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeUserPoolCommandOutput) => void
   ): void;
-  public describeUserPool(
-    args: DescribeUserPoolCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserPoolCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserPoolCommandOutput) => void
-  ): Promise<DescribeUserPoolCommandOutput> | void {
-    const command = new DescribeUserPoolCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Client method for returning the configuration information and metadata of the
-   *             specified user pool app client.</p>
+   * @see {@link DescribeUserPoolClientCommand}
    */
-  public describeUserPoolClient(
+  describeUserPoolClient(
     args: DescribeUserPoolClientCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeUserPoolClientCommandOutput>;
-  public describeUserPoolClient(
+  describeUserPoolClient(
     args: DescribeUserPoolClientCommandInput,
     cb: (err: any, data?: DescribeUserPoolClientCommandOutput) => void
   ): void;
-  public describeUserPoolClient(
+  describeUserPoolClient(
     args: DescribeUserPoolClientCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeUserPoolClientCommandOutput) => void
   ): void;
-  public describeUserPoolClient(
-    args: DescribeUserPoolClientCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserPoolClientCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserPoolClientCommandOutput) => void
-  ): Promise<DescribeUserPoolClientCommandOutput> | void {
-    const command = new DescribeUserPoolClientCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a domain.</p>
+   * @see {@link DescribeUserPoolDomainCommand}
    */
-  public describeUserPoolDomain(
+  describeUserPoolDomain(
     args: DescribeUserPoolDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<DescribeUserPoolDomainCommandOutput>;
-  public describeUserPoolDomain(
+  describeUserPoolDomain(
     args: DescribeUserPoolDomainCommandInput,
     cb: (err: any, data?: DescribeUserPoolDomainCommandOutput) => void
   ): void;
-  public describeUserPoolDomain(
+  describeUserPoolDomain(
     args: DescribeUserPoolDomainCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: DescribeUserPoolDomainCommandOutput) => void
   ): void;
-  public describeUserPoolDomain(
-    args: DescribeUserPoolDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserPoolDomainCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserPoolDomainCommandOutput) => void
-  ): Promise<DescribeUserPoolDomainCommandOutput> | void {
-    const command = new DescribeUserPoolDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Forgets the specified device.</p>
+   * @see {@link ForgetDeviceCommand}
    */
-  public forgetDevice(
+  forgetDevice(
     args: ForgetDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ForgetDeviceCommandOutput>;
-  public forgetDevice(args: ForgetDeviceCommandInput, cb: (err: any, data?: ForgetDeviceCommandOutput) => void): void;
-  public forgetDevice(
+  forgetDevice(
     args: ForgetDeviceCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ForgetDeviceCommandOutput) => void
   ): void;
-  public forgetDevice(
+  forgetDevice(
     args: ForgetDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ForgetDeviceCommandOutput) => void),
-    cb?: (err: any, data?: ForgetDeviceCommandOutput) => void
-  ): Promise<ForgetDeviceCommandOutput> | void {
-    const command = new ForgetDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ForgetDeviceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Calling this API causes a message to be sent to the end user with a confirmation code
-   *             that is required to change the user's password. For the <code>Username</code> parameter,
-   *             you can use the username or user alias. The method used to send the confirmation code is
-   *             sent according to the specified AccountRecoverySetting. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html">Recovering
-   *                 User Accounts</a> in the <i>Amazon Cognito Developer Guide</i>. If
-   *             neither a verified phone number nor a verified email exists, an
-   *                 <code>InvalidParameterException</code> is thrown. To use the confirmation code for
-   *             resetting the password, call <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html">ConfirmForgotPassword</a>.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link ForgotPasswordCommand}
    */
-  public forgotPassword(
+  forgotPassword(
     args: ForgotPasswordCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ForgotPasswordCommandOutput>;
-  public forgotPassword(
+  forgotPassword(
     args: ForgotPasswordCommandInput,
     cb: (err: any, data?: ForgotPasswordCommandOutput) => void
   ): void;
-  public forgotPassword(
+  forgotPassword(
     args: ForgotPasswordCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ForgotPasswordCommandOutput) => void
   ): void;
-  public forgotPassword(
-    args: ForgotPasswordCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ForgotPasswordCommandOutput) => void),
-    cb?: (err: any, data?: ForgotPasswordCommandOutput) => void
-  ): Promise<ForgotPasswordCommandOutput> | void {
-    const command = new ForgotPasswordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the header information for the .csv file to be used as input for the user import
-   *             job.</p>
+   * @see {@link GetClientTokenCommand}
    */
-  public getCSVHeader(
+  getClientToken(
+    args: GetClientTokenCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetClientTokenCommandOutput>;
+  getClientToken(
+    args: GetClientTokenCommandInput,
+    cb: (err: any, data?: GetClientTokenCommandOutput) => void
+  ): void;
+  getClientToken(
+    args: GetClientTokenCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetClientTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCSVHeaderCommand}
+   */
+  getCSVHeader(
     args: GetCSVHeaderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GetCSVHeaderCommandOutput>;
-  public getCSVHeader(args: GetCSVHeaderCommandInput, cb: (err: any, data?: GetCSVHeaderCommandOutput) => void): void;
-  public getCSVHeader(
+  getCSVHeader(
     args: GetCSVHeaderCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetCSVHeaderCommandOutput) => void
   ): void;
-  public getCSVHeader(
+  getCSVHeader(
     args: GetCSVHeaderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCSVHeaderCommandOutput) => void),
-    cb?: (err: any, data?: GetCSVHeaderCommandOutput) => void
-  ): Promise<GetCSVHeaderCommandOutput> | void {
-    const command = new GetCSVHeaderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetCSVHeaderCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets the device.</p>
+   * @see {@link GetDeviceCommand}
    */
-  public getDevice(args: GetDeviceCommandInput, options?: __HttpHandlerOptions): Promise<GetDeviceCommandOutput>;
-  public getDevice(args: GetDeviceCommandInput, cb: (err: any, data?: GetDeviceCommandOutput) => void): void;
-  public getDevice(
+  getDevice(
     args: GetDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetDeviceCommandOutput>;
+  getDevice(
+    args: GetDeviceCommandInput,
     cb: (err: any, data?: GetDeviceCommandOutput) => void
   ): void;
-  public getDevice(
+  getDevice(
     args: GetDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeviceCommandOutput) => void),
-    cb?: (err: any, data?: GetDeviceCommandOutput) => void
-  ): Promise<GetDeviceCommandOutput> | void {
-    const command = new GetDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetDeviceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a group.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link GetGroupCommand}
    */
-  public getGroup(args: GetGroupCommandInput, options?: __HttpHandlerOptions): Promise<GetGroupCommandOutput>;
-  public getGroup(args: GetGroupCommandInput, cb: (err: any, data?: GetGroupCommandOutput) => void): void;
-  public getGroup(
+  getGroup(
     args: GetGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetGroupCommandOutput>;
+  getGroup(
+    args: GetGroupCommandInput,
     cb: (err: any, data?: GetGroupCommandOutput) => void
   ): void;
-  public getGroup(
+  getGroup(
     args: GetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetGroupCommandOutput) => void),
-    cb?: (err: any, data?: GetGroupCommandOutput) => void
-  ): Promise<GetGroupCommandOutput> | void {
-    const command = new GetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets the specified identity provider.</p>
+   * @see {@link GetIdentityProviderByIdentifierCommand}
    */
-  public getIdentityProviderByIdentifier(
+  getIdentityProviderByIdentifier(
     args: GetIdentityProviderByIdentifierCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GetIdentityProviderByIdentifierCommandOutput>;
-  public getIdentityProviderByIdentifier(
+  getIdentityProviderByIdentifier(
     args: GetIdentityProviderByIdentifierCommandInput,
     cb: (err: any, data?: GetIdentityProviderByIdentifierCommandOutput) => void
   ): void;
-  public getIdentityProviderByIdentifier(
+  getIdentityProviderByIdentifier(
     args: GetIdentityProviderByIdentifierCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: GetIdentityProviderByIdentifierCommandOutput) => void
   ): void;
-  public getIdentityProviderByIdentifier(
-    args: GetIdentityProviderByIdentifierCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIdentityProviderByIdentifierCommandOutput) => void),
-    cb?: (err: any, data?: GetIdentityProviderByIdentifierCommandOutput) => void
-  ): Promise<GetIdentityProviderByIdentifierCommandOutput> | void {
-    const command = new GetIdentityProviderByIdentifierCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This method takes a user pool ID, and returns the signing certificate.</p>
+   * @see {@link GetLogDeliveryConfigurationCommand}
    */
-  public getSigningCertificate(
+  getLogDeliveryConfiguration(
+    args: GetLogDeliveryConfigurationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetLogDeliveryConfigurationCommandOutput>;
+  getLogDeliveryConfiguration(
+    args: GetLogDeliveryConfigurationCommandInput,
+    cb: (err: any, data?: GetLogDeliveryConfigurationCommandOutput) => void
+  ): void;
+  getLogDeliveryConfiguration(
+    args: GetLogDeliveryConfigurationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetLogDeliveryConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProvisionedLimitCommand}
+   */
+  getProvisionedLimit(
+    args: GetProvisionedLimitCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetProvisionedLimitCommandOutput>;
+  getProvisionedLimit(
+    args: GetProvisionedLimitCommandInput,
+    cb: (err: any, data?: GetProvisionedLimitCommandOutput) => void
+  ): void;
+  getProvisionedLimit(
+    args: GetProvisionedLimitCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetProvisionedLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSigningCertificateCommand}
+   */
+  getSigningCertificate(
     args: GetSigningCertificateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GetSigningCertificateCommandOutput>;
-  public getSigningCertificate(
+  getSigningCertificate(
     args: GetSigningCertificateCommandInput,
     cb: (err: any, data?: GetSigningCertificateCommandOutput) => void
   ): void;
-  public getSigningCertificate(
+  getSigningCertificate(
     args: GetSigningCertificateCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: GetSigningCertificateCommandOutput) => void
   ): void;
-  public getSigningCertificate(
-    args: GetSigningCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSigningCertificateCommandOutput) => void),
-    cb?: (err: any, data?: GetSigningCertificateCommandOutput) => void
-  ): Promise<GetSigningCertificateCommandOutput> | void {
-    const command = new GetSigningCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the UI Customization information for a particular app client's app UI, if there
-   *             is something set. If nothing is set for the particular client, but there is an existing
-   *             pool level customization (app <code>clientId</code> will be <code>ALL</code>), then that
-   *             is returned. If nothing is present, then an empty shape is returned.</p>
+   * @see {@link GetTokensFromRefreshTokenCommand}
    */
-  public getUICustomization(
+  getTokensFromRefreshToken(
+    args: GetTokensFromRefreshTokenCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetTokensFromRefreshTokenCommandOutput>;
+  getTokensFromRefreshToken(
+    args: GetTokensFromRefreshTokenCommandInput,
+    cb: (err: any, data?: GetTokensFromRefreshTokenCommandOutput) => void
+  ): void;
+  getTokensFromRefreshToken(
+    args: GetTokensFromRefreshTokenCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetTokensFromRefreshTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUICustomizationCommand}
+   */
+  getUICustomization(
     args: GetUICustomizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GetUICustomizationCommandOutput>;
-  public getUICustomization(
+  getUICustomization(
     args: GetUICustomizationCommandInput,
     cb: (err: any, data?: GetUICustomizationCommandOutput) => void
   ): void;
-  public getUICustomization(
+  getUICustomization(
     args: GetUICustomizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: GetUICustomizationCommandOutput) => void
   ): void;
-  public getUICustomization(
-    args: GetUICustomizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUICustomizationCommandOutput) => void),
-    cb?: (err: any, data?: GetUICustomizationCommandOutput) => void
-  ): Promise<GetUICustomizationCommandOutput> | void {
-    const command = new GetUICustomizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the user attributes and metadata for a user.</p>
+   * @see {@link GetUserCommand}
    */
-  public getUser(args: GetUserCommandInput, options?: __HttpHandlerOptions): Promise<GetUserCommandOutput>;
-  public getUser(args: GetUserCommandInput, cb: (err: any, data?: GetUserCommandOutput) => void): void;
-  public getUser(
+  getUser(
     args: GetUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetUserCommandOutput>;
+  getUser(
+    args: GetUserCommandInput,
     cb: (err: any, data?: GetUserCommandOutput) => void
   ): void;
-  public getUser(
+  getUser(
     args: GetUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUserCommandOutput) => void),
-    cb?: (err: any, data?: GetUserCommandOutput) => void
-  ): Promise<GetUserCommandOutput> | void {
-    const command = new GetUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets the user attribute verification code for the specified attribute name.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link GetUserAttributeVerificationCodeCommand}
    */
-  public getUserAttributeVerificationCode(
+  getUserAttributeVerificationCode(
     args: GetUserAttributeVerificationCodeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GetUserAttributeVerificationCodeCommandOutput>;
-  public getUserAttributeVerificationCode(
+  getUserAttributeVerificationCode(
     args: GetUserAttributeVerificationCodeCommandInput,
     cb: (err: any, data?: GetUserAttributeVerificationCodeCommandOutput) => void
   ): void;
-  public getUserAttributeVerificationCode(
+  getUserAttributeVerificationCode(
     args: GetUserAttributeVerificationCodeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: GetUserAttributeVerificationCodeCommandOutput) => void
   ): void;
-  public getUserAttributeVerificationCode(
-    args: GetUserAttributeVerificationCodeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUserAttributeVerificationCodeCommandOutput) => void),
-    cb?: (err: any, data?: GetUserAttributeVerificationCodeCommandOutput) => void
-  ): Promise<GetUserAttributeVerificationCodeCommandOutput> | void {
-    const command = new GetUserAttributeVerificationCodeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the user pool multi-factor authentication (MFA) configuration.</p>
+   * @see {@link GetUserAuthFactorsCommand}
    */
-  public getUserPoolMfaConfig(
+  getUserAuthFactors(
+    args: GetUserAuthFactorsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetUserAuthFactorsCommandOutput>;
+  getUserAuthFactors(
+    args: GetUserAuthFactorsCommandInput,
+    cb: (err: any, data?: GetUserAuthFactorsCommandOutput) => void
+  ): void;
+  getUserAuthFactors(
+    args: GetUserAuthFactorsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetUserAuthFactorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUserPoolClientSessionConfigurationCommand}
+   */
+  getUserPoolClientSessionConfiguration(
+    args: GetUserPoolClientSessionConfigurationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetUserPoolClientSessionConfigurationCommandOutput>;
+  getUserPoolClientSessionConfiguration(
+    args: GetUserPoolClientSessionConfigurationCommandInput,
+    cb: (err: any, data?: GetUserPoolClientSessionConfigurationCommandOutput) => void
+  ): void;
+  getUserPoolClientSessionConfiguration(
+    args: GetUserPoolClientSessionConfigurationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetUserPoolClientSessionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUserPoolMfaConfigCommand}
+   */
+  getUserPoolMfaConfig(
     args: GetUserPoolMfaConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GetUserPoolMfaConfigCommandOutput>;
-  public getUserPoolMfaConfig(
+  getUserPoolMfaConfig(
     args: GetUserPoolMfaConfigCommandInput,
     cb: (err: any, data?: GetUserPoolMfaConfigCommandOutput) => void
   ): void;
-  public getUserPoolMfaConfig(
+  getUserPoolMfaConfig(
     args: GetUserPoolMfaConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: GetUserPoolMfaConfigCommandOutput) => void
   ): void;
-  public getUserPoolMfaConfig(
-    args: GetUserPoolMfaConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUserPoolMfaConfigCommandOutput) => void),
-    cb?: (err: any, data?: GetUserPoolMfaConfigCommandOutput) => void
-  ): Promise<GetUserPoolMfaConfigCommandOutput> | void {
-    const command = new GetUserPoolMfaConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Signs out users from all devices. It also invalidates all refresh tokens issued to a
-   *             user. The user's current access and Id tokens remain valid until their expiry. Access
-   *             and Id tokens expire one hour after they are issued.</p>
+   * @see {@link GetUserPoolSessionConfigurationCommand}
    */
-  public globalSignOut(
+  getUserPoolSessionConfiguration(
+    args: GetUserPoolSessionConfigurationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<GetUserPoolSessionConfigurationCommandOutput>;
+  getUserPoolSessionConfiguration(
+    args: GetUserPoolSessionConfigurationCommandInput,
+    cb: (err: any, data?: GetUserPoolSessionConfigurationCommandOutput) => void
+  ): void;
+  getUserPoolSessionConfiguration(
+    args: GetUserPoolSessionConfigurationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: GetUserPoolSessionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GlobalSignOutCommand}
+   */
+  globalSignOut(
     args: GlobalSignOutCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<GlobalSignOutCommandOutput>;
-  public globalSignOut(
+  globalSignOut(
     args: GlobalSignOutCommandInput,
     cb: (err: any, data?: GlobalSignOutCommandOutput) => void
   ): void;
-  public globalSignOut(
+  globalSignOut(
     args: GlobalSignOutCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: GlobalSignOutCommandOutput) => void
   ): void;
-  public globalSignOut(
-    args: GlobalSignOutCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GlobalSignOutCommandOutput) => void),
-    cb?: (err: any, data?: GlobalSignOutCommandOutput) => void
-  ): Promise<GlobalSignOutCommandOutput> | void {
-    const command = new GlobalSignOutCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Initiates the authentication flow.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link InitiateAuthCommand}
    */
-  public initiateAuth(
+  initiateAuth(
     args: InitiateAuthCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<InitiateAuthCommandOutput>;
-  public initiateAuth(args: InitiateAuthCommandInput, cb: (err: any, data?: InitiateAuthCommandOutput) => void): void;
-  public initiateAuth(
+  initiateAuth(
     args: InitiateAuthCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: InitiateAuthCommandOutput) => void
   ): void;
-  public initiateAuth(
+  initiateAuth(
     args: InitiateAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InitiateAuthCommandOutput) => void),
-    cb?: (err: any, data?: InitiateAuthCommandOutput) => void
-  ): Promise<InitiateAuthCommandOutput> | void {
-    const command = new InitiateAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: InitiateAuthCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the devices.</p>
+   * @see {@link ListDevicesCommand}
    */
-  public listDevices(args: ListDevicesCommandInput, options?: __HttpHandlerOptions): Promise<ListDevicesCommandOutput>;
-  public listDevices(args: ListDevicesCommandInput, cb: (err: any, data?: ListDevicesCommandOutput) => void): void;
-  public listDevices(
+  listDevices(
     args: ListDevicesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListDevicesCommandOutput>;
+  listDevices(
+    args: ListDevicesCommandInput,
     cb: (err: any, data?: ListDevicesCommandOutput) => void
   ): void;
-  public listDevices(
+  listDevices(
     args: ListDevicesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDevicesCommandOutput) => void),
-    cb?: (err: any, data?: ListDevicesCommandOutput) => void
-  ): Promise<ListDevicesCommandOutput> | void {
-    const command = new ListDevicesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListDevicesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the groups associated with a user pool.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link ListGroupsCommand}
    */
-  public listGroups(args: ListGroupsCommandInput, options?: __HttpHandlerOptions): Promise<ListGroupsCommandOutput>;
-  public listGroups(args: ListGroupsCommandInput, cb: (err: any, data?: ListGroupsCommandOutput) => void): void;
-  public listGroups(
+  listGroups(
     args: ListGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListGroupsCommandOutput>;
+  listGroups(
+    args: ListGroupsCommandInput,
     cb: (err: any, data?: ListGroupsCommandOutput) => void
   ): void;
-  public listGroups(
+  listGroups(
     args: ListGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListGroupsCommandOutput) => void
-  ): Promise<ListGroupsCommandOutput> | void {
-    const command = new ListGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListGroupsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists information about all identity providers for a user pool.</p>
+   * @see {@link ListIdentityProvidersCommand}
    */
-  public listIdentityProviders(
+  listIdentityProviders(
     args: ListIdentityProvidersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListIdentityProvidersCommandOutput>;
-  public listIdentityProviders(
+  listIdentityProviders(
     args: ListIdentityProvidersCommandInput,
     cb: (err: any, data?: ListIdentityProvidersCommandOutput) => void
   ): void;
-  public listIdentityProviders(
+  listIdentityProviders(
     args: ListIdentityProvidersCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListIdentityProvidersCommandOutput) => void
   ): void;
-  public listIdentityProviders(
-    args: ListIdentityProvidersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIdentityProvidersCommandOutput) => void),
-    cb?: (err: any, data?: ListIdentityProvidersCommandOutput) => void
-  ): Promise<ListIdentityProvidersCommandOutput> | void {
-    const command = new ListIdentityProvidersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the resource servers for a user pool.</p>
+   * @see {@link ListResourceServersCommand}
    */
-  public listResourceServers(
+  listResourceServers(
     args: ListResourceServersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListResourceServersCommandOutput>;
-  public listResourceServers(
+  listResourceServers(
     args: ListResourceServersCommandInput,
     cb: (err: any, data?: ListResourceServersCommandOutput) => void
   ): void;
-  public listResourceServers(
+  listResourceServers(
     args: ListResourceServersCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListResourceServersCommandOutput) => void
   ): void;
-  public listResourceServers(
-    args: ListResourceServersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResourceServersCommandOutput) => void),
-    cb?: (err: any, data?: ListResourceServersCommandOutput) => void
-  ): Promise<ListResourceServersCommandOutput> | void {
-    const command = new ListResourceServersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags that are assigned to an Amazon Cognito user pool.</p>
-   *         <p>A tag is a label that you can apply to user pools to categorize and manage them in
-   *             different ways, such as by purpose, owner, environment, or other criteria.</p>
-   *         <p>You can use this action up to 10 times per second, per account.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the user import jobs.</p>
+   * @see {@link ListTermsCommand}
    */
-  public listUserImportJobs(
+  listTerms(
+    args: ListTermsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListTermsCommandOutput>;
+  listTerms(
+    args: ListTermsCommandInput,
+    cb: (err: any, data?: ListTermsCommandOutput) => void
+  ): void;
+  listTerms(
+    args: ListTermsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUserImportJobsCommand}
+   */
+  listUserImportJobs(
     args: ListUserImportJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListUserImportJobsCommandOutput>;
-  public listUserImportJobs(
+  listUserImportJobs(
     args: ListUserImportJobsCommandInput,
     cb: (err: any, data?: ListUserImportJobsCommandOutput) => void
   ): void;
-  public listUserImportJobs(
+  listUserImportJobs(
     args: ListUserImportJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListUserImportJobsCommandOutput) => void
   ): void;
-  public listUserImportJobs(
-    args: ListUserImportJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUserImportJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListUserImportJobsCommandOutput) => void
-  ): Promise<ListUserImportJobsCommandOutput> | void {
-    const command = new ListUserImportJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the clients that have been created for the specified user pool.</p>
+   * @see {@link ListUserPoolClientsCommand}
    */
-  public listUserPoolClients(
+  listUserPoolClients(
     args: ListUserPoolClientsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListUserPoolClientsCommandOutput>;
-  public listUserPoolClients(
+  listUserPoolClients(
     args: ListUserPoolClientsCommandInput,
     cb: (err: any, data?: ListUserPoolClientsCommandOutput) => void
   ): void;
-  public listUserPoolClients(
+  listUserPoolClients(
     args: ListUserPoolClientsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListUserPoolClientsCommandOutput) => void
   ): void;
-  public listUserPoolClients(
-    args: ListUserPoolClientsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUserPoolClientsCommandOutput) => void),
-    cb?: (err: any, data?: ListUserPoolClientsCommandOutput) => void
-  ): Promise<ListUserPoolClientsCommandOutput> | void {
-    const command = new ListUserPoolClientsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the user pools associated with an account.</p>
+   * @see {@link ListUserPoolClientSecretsCommand}
    */
-  public listUserPools(
+  listUserPoolClientSecrets(
+    args: ListUserPoolClientSecretsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListUserPoolClientSecretsCommandOutput>;
+  listUserPoolClientSecrets(
+    args: ListUserPoolClientSecretsCommandInput,
+    cb: (err: any, data?: ListUserPoolClientSecretsCommandOutput) => void
+  ): void;
+  listUserPoolClientSecrets(
+    args: ListUserPoolClientSecretsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListUserPoolClientSecretsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUserPoolReplicasCommand}
+   */
+  listUserPoolReplicas(
+    args: ListUserPoolReplicasCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListUserPoolReplicasCommandOutput>;
+  listUserPoolReplicas(
+    args: ListUserPoolReplicasCommandInput,
+    cb: (err: any, data?: ListUserPoolReplicasCommandOutput) => void
+  ): void;
+  listUserPoolReplicas(
+    args: ListUserPoolReplicasCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListUserPoolReplicasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUserPoolsCommand}
+   */
+  listUserPools(
     args: ListUserPoolsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListUserPoolsCommandOutput>;
-  public listUserPools(
+  listUserPools(
     args: ListUserPoolsCommandInput,
     cb: (err: any, data?: ListUserPoolsCommandOutput) => void
   ): void;
-  public listUserPools(
+  listUserPools(
     args: ListUserPoolsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListUserPoolsCommandOutput) => void
   ): void;
-  public listUserPools(
-    args: ListUserPoolsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUserPoolsCommandOutput) => void),
-    cb?: (err: any, data?: ListUserPoolsCommandOutput) => void
-  ): Promise<ListUserPoolsCommandOutput> | void {
-    const command = new ListUserPoolsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the users in the Amazon Cognito user pool.</p>
+   * @see {@link ListUsersCommand}
    */
-  public listUsers(args: ListUsersCommandInput, options?: __HttpHandlerOptions): Promise<ListUsersCommandOutput>;
-  public listUsers(args: ListUsersCommandInput, cb: (err: any, data?: ListUsersCommandOutput) => void): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListUsersCommandOutput>;
+  listUsers(
+    args: ListUsersCommandInput,
     cb: (err: any, data?: ListUsersCommandOutput) => void
   ): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsersCommandOutput) => void),
-    cb?: (err: any, data?: ListUsersCommandOutput) => void
-  ): Promise<ListUsersCommandOutput> | void {
-    const command = new ListUsersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListUsersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the users in the specified group.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link ListUserSessionsCommand}
    */
-  public listUsersInGroup(
+  listUserSessions(
+    args: ListUserSessionsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListUserSessionsCommandOutput>;
+  listUserSessions(
+    args: ListUserSessionsCommandInput,
+    cb: (err: any, data?: ListUserSessionsCommandOutput) => void
+  ): void;
+  listUserSessions(
+    args: ListUserSessionsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListUserSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUsersInGroupCommand}
+   */
+  listUsersInGroup(
     args: ListUsersInGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ListUsersInGroupCommandOutput>;
-  public listUsersInGroup(
+  listUsersInGroup(
     args: ListUsersInGroupCommandInput,
     cb: (err: any, data?: ListUsersInGroupCommandOutput) => void
   ): void;
-  public listUsersInGroup(
+  listUsersInGroup(
     args: ListUsersInGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ListUsersInGroupCommandOutput) => void
   ): void;
-  public listUsersInGroup(
-    args: ListUsersInGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsersInGroupCommandOutput) => void),
-    cb?: (err: any, data?: ListUsersInGroupCommandOutput) => void
-  ): Promise<ListUsersInGroupCommandOutput> | void {
-    const command = new ListUsersInGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Resends the confirmation (for confirmation of registration) to a specific user in the
-   *             user pool.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link ListWebAuthnCredentialsCommand}
    */
-  public resendConfirmationCode(
+  listWebAuthnCredentials(
+    args: ListWebAuthnCredentialsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<ListWebAuthnCredentialsCommandOutput>;
+  listWebAuthnCredentials(
+    args: ListWebAuthnCredentialsCommandInput,
+    cb: (err: any, data?: ListWebAuthnCredentialsCommandOutput) => void
+  ): void;
+  listWebAuthnCredentials(
+    args: ListWebAuthnCredentialsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: ListWebAuthnCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResendConfirmationCodeCommand}
+   */
+  resendConfirmationCode(
     args: ResendConfirmationCodeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<ResendConfirmationCodeCommandOutput>;
-  public resendConfirmationCode(
+  resendConfirmationCode(
     args: ResendConfirmationCodeCommandInput,
     cb: (err: any, data?: ResendConfirmationCodeCommandOutput) => void
   ): void;
-  public resendConfirmationCode(
+  resendConfirmationCode(
     args: ResendConfirmationCodeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: ResendConfirmationCodeCommandOutput) => void
   ): void;
-  public resendConfirmationCode(
-    args: ResendConfirmationCodeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResendConfirmationCodeCommandOutput) => void),
-    cb?: (err: any, data?: ResendConfirmationCodeCommandOutput) => void
-  ): Promise<ResendConfirmationCodeCommandOutput> | void {
-    const command = new ResendConfirmationCodeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Responds to the authentication challenge.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link RespondToAuthChallengeCommand}
    */
-  public respondToAuthChallenge(
+  respondToAuthChallenge(
     args: RespondToAuthChallengeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<RespondToAuthChallengeCommandOutput>;
-  public respondToAuthChallenge(
+  respondToAuthChallenge(
     args: RespondToAuthChallengeCommandInput,
     cb: (err: any, data?: RespondToAuthChallengeCommandOutput) => void
   ): void;
-  public respondToAuthChallenge(
+  respondToAuthChallenge(
     args: RespondToAuthChallengeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: RespondToAuthChallengeCommandOutput) => void
   ): void;
-  public respondToAuthChallenge(
-    args: RespondToAuthChallengeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RespondToAuthChallengeCommandOutput) => void),
-    cb?: (err: any, data?: RespondToAuthChallengeCommandOutput) => void
-  ): Promise<RespondToAuthChallengeCommandOutput> | void {
-    const command = new RespondToAuthChallengeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Revokes all of the access tokens generated by the specified refresh token. After the token is revoked, you can not
-   *             use the revoked token to access Cognito authenticated APIs.</p>
+   * @see {@link RevokeTokenCommand}
    */
-  public revokeToken(args: RevokeTokenCommandInput, options?: __HttpHandlerOptions): Promise<RevokeTokenCommandOutput>;
-  public revokeToken(args: RevokeTokenCommandInput, cb: (err: any, data?: RevokeTokenCommandOutput) => void): void;
-  public revokeToken(
+  revokeToken(
     args: RevokeTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<RevokeTokenCommandOutput>;
+  revokeToken(
+    args: RevokeTokenCommandInput,
     cb: (err: any, data?: RevokeTokenCommandOutput) => void
   ): void;
-  public revokeToken(
+  revokeToken(
     args: RevokeTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RevokeTokenCommandOutput) => void),
-    cb?: (err: any, data?: RevokeTokenCommandOutput) => void
-  ): Promise<RevokeTokenCommandOutput> | void {
-    const command = new RevokeTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: RevokeTokenCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Configures actions on detected risks. To delete the risk configuration for
-   *                 <code>UserPoolId</code> or <code>ClientId</code>, pass null values for all four
-   *             configuration types.</p>
-   *         <p>To enable Amazon Cognito advanced security features, update the user pool to include
-   *             the <code>UserPoolAddOns</code> key<code>AdvancedSecurityMode</code>.</p>
+   * @see {@link RevokeUserSessionCommand}
    */
-  public setRiskConfiguration(
+  revokeUserSession(
+    args: RevokeUserSessionCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<RevokeUserSessionCommandOutput>;
+  revokeUserSession(
+    args: RevokeUserSessionCommandInput,
+    cb: (err: any, data?: RevokeUserSessionCommandOutput) => void
+  ): void;
+  revokeUserSession(
+    args: RevokeUserSessionCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: RevokeUserSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetLogDeliveryConfigurationCommand}
+   */
+  setLogDeliveryConfiguration(
+    args: SetLogDeliveryConfigurationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<SetLogDeliveryConfigurationCommandOutput>;
+  setLogDeliveryConfiguration(
+    args: SetLogDeliveryConfigurationCommandInput,
+    cb: (err: any, data?: SetLogDeliveryConfigurationCommandOutput) => void
+  ): void;
+  setLogDeliveryConfiguration(
+    args: SetLogDeliveryConfigurationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: SetLogDeliveryConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetRiskConfigurationCommand}
+   */
+  setRiskConfiguration(
     args: SetRiskConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<SetRiskConfigurationCommandOutput>;
-  public setRiskConfiguration(
+  setRiskConfiguration(
     args: SetRiskConfigurationCommandInput,
     cb: (err: any, data?: SetRiskConfigurationCommandOutput) => void
   ): void;
-  public setRiskConfiguration(
+  setRiskConfiguration(
     args: SetRiskConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: SetRiskConfigurationCommandOutput) => void
   ): void;
-  public setRiskConfiguration(
-    args: SetRiskConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetRiskConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: SetRiskConfigurationCommandOutput) => void
-  ): Promise<SetRiskConfigurationCommandOutput> | void {
-    const command = new SetRiskConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets the UI customization information for a user pool's built-in app UI.</p>
-   *         <p>You can specify app UI customization settings for a single client (with a specific
-   *                 <code>clientId</code>) or for all clients (by setting the <code>clientId</code> to
-   *                 <code>ALL</code>). If you specify <code>ALL</code>, the default configuration will
-   *             be used for every client that has no UI customization set previously. If you specify UI
-   *             customization settings for a particular client, it will no longer fall back to the
-   *                 <code>ALL</code> configuration. </p>
-   *         <note>
-   *             <p>To use this API, your user pool must have a domain associated with it. Otherwise,
-   *                 there is no place to host the app's pages, and the service will throw an
-   *                 error.</p>
-   *         </note>
+   * @see {@link SetUICustomizationCommand}
    */
-  public setUICustomization(
+  setUICustomization(
     args: SetUICustomizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<SetUICustomizationCommandOutput>;
-  public setUICustomization(
+  setUICustomization(
     args: SetUICustomizationCommandInput,
     cb: (err: any, data?: SetUICustomizationCommandOutput) => void
   ): void;
-  public setUICustomization(
+  setUICustomization(
     args: SetUICustomizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: SetUICustomizationCommandOutput) => void
   ): void;
-  public setUICustomization(
-    args: SetUICustomizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetUICustomizationCommandOutput) => void),
-    cb?: (err: any, data?: SetUICustomizationCommandOutput) => void
-  ): Promise<SetUICustomizationCommandOutput> | void {
-    const command = new SetUICustomizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Set the user's multi-factor authentication (MFA) method preference, including which
-   *             MFA factors are enabled and if any are preferred. Only one factor can be set as
-   *             preferred. The preferred MFA factor will be used to authenticate a user if multiple
-   *             factors are enabled. If multiple options are enabled and no preference is set, a
-   *             challenge to choose an MFA option will be returned during sign in. If an MFA type is
-   *             enabled for a user, the user will be prompted for MFA during all sign in attempts,
-   *             unless device tracking is turned on and the device has been trusted. If you would like
-   *             MFA to be applied selectively based on the assessed risk level of sign in attempts,
-   *             disable MFA for users and turn on Adaptive Authentication for the user pool.</p>
+   * @see {@link SetUserMFAPreferenceCommand}
    */
-  public setUserMFAPreference(
+  setUserMFAPreference(
     args: SetUserMFAPreferenceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<SetUserMFAPreferenceCommandOutput>;
-  public setUserMFAPreference(
+  setUserMFAPreference(
     args: SetUserMFAPreferenceCommandInput,
     cb: (err: any, data?: SetUserMFAPreferenceCommandOutput) => void
   ): void;
-  public setUserMFAPreference(
+  setUserMFAPreference(
     args: SetUserMFAPreferenceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: SetUserMFAPreferenceCommandOutput) => void
   ): void;
-  public setUserMFAPreference(
-    args: SetUserMFAPreferenceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetUserMFAPreferenceCommandOutput) => void),
-    cb?: (err: any, data?: SetUserMFAPreferenceCommandOutput) => void
-  ): Promise<SetUserMFAPreferenceCommandOutput> | void {
-    const command = new SetUserMFAPreferenceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Set the user pool multi-factor authentication (MFA) configuration.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link SetUserPoolClientSessionConfigurationCommand}
    */
-  public setUserPoolMfaConfig(
+  setUserPoolClientSessionConfiguration(
+    args: SetUserPoolClientSessionConfigurationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<SetUserPoolClientSessionConfigurationCommandOutput>;
+  setUserPoolClientSessionConfiguration(
+    args: SetUserPoolClientSessionConfigurationCommandInput,
+    cb: (err: any, data?: SetUserPoolClientSessionConfigurationCommandOutput) => void
+  ): void;
+  setUserPoolClientSessionConfiguration(
+    args: SetUserPoolClientSessionConfigurationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: SetUserPoolClientSessionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetUserPoolMfaConfigCommand}
+   */
+  setUserPoolMfaConfig(
     args: SetUserPoolMfaConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<SetUserPoolMfaConfigCommandOutput>;
-  public setUserPoolMfaConfig(
+  setUserPoolMfaConfig(
     args: SetUserPoolMfaConfigCommandInput,
     cb: (err: any, data?: SetUserPoolMfaConfigCommandOutput) => void
   ): void;
-  public setUserPoolMfaConfig(
+  setUserPoolMfaConfig(
     args: SetUserPoolMfaConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: SetUserPoolMfaConfigCommandOutput) => void
   ): void;
-  public setUserPoolMfaConfig(
-    args: SetUserPoolMfaConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetUserPoolMfaConfigCommandOutput) => void),
-    cb?: (err: any, data?: SetUserPoolMfaConfigCommandOutput) => void
-  ): Promise<SetUserPoolMfaConfigCommandOutput> | void {
-    const command = new SetUserPoolMfaConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             <i>This action is no longer supported.</i> You can use it to configure
-   *             only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either
-   *             type of MFA, use <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserMFAPreference.html">SetUserMFAPreference</a> instead.</p>
+   * @see {@link SetUserPoolSessionConfigurationCommand}
    */
-  public setUserSettings(
+  setUserPoolSessionConfiguration(
+    args: SetUserPoolSessionConfigurationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<SetUserPoolSessionConfigurationCommandOutput>;
+  setUserPoolSessionConfiguration(
+    args: SetUserPoolSessionConfigurationCommandInput,
+    cb: (err: any, data?: SetUserPoolSessionConfigurationCommandOutput) => void
+  ): void;
+  setUserPoolSessionConfiguration(
+    args: SetUserPoolSessionConfigurationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: SetUserPoolSessionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetUserSettingsCommand}
+   */
+  setUserSettings(
     args: SetUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<SetUserSettingsCommandOutput>;
-  public setUserSettings(
+  setUserSettings(
     args: SetUserSettingsCommandInput,
     cb: (err: any, data?: SetUserSettingsCommandOutput) => void
   ): void;
-  public setUserSettings(
+  setUserSettings(
     args: SetUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: SetUserSettingsCommandOutput) => void
   ): void;
-  public setUserSettings(
-    args: SetUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: SetUserSettingsCommandOutput) => void
-  ): Promise<SetUserSettingsCommandOutput> | void {
-    const command = new SetUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Registers the user in the specified user pool and creates a user name, password, and
-   *             user attributes.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link SignUpCommand}
    */
-  public signUp(args: SignUpCommandInput, options?: __HttpHandlerOptions): Promise<SignUpCommandOutput>;
-  public signUp(args: SignUpCommandInput, cb: (err: any, data?: SignUpCommandOutput) => void): void;
-  public signUp(
+  signUp(
     args: SignUpCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<SignUpCommandOutput>;
+  signUp(
+    args: SignUpCommandInput,
     cb: (err: any, data?: SignUpCommandOutput) => void
   ): void;
-  public signUp(
+  signUp(
     args: SignUpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SignUpCommandOutput) => void),
-    cb?: (err: any, data?: SignUpCommandOutput) => void
-  ): Promise<SignUpCommandOutput> | void {
-    const command = new SignUpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: SignUpCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Starts the user import.</p>
+   * @see {@link StartUserImportJobCommand}
    */
-  public startUserImportJob(
+  startUserImportJob(
     args: StartUserImportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<StartUserImportJobCommandOutput>;
-  public startUserImportJob(
+  startUserImportJob(
     args: StartUserImportJobCommandInput,
     cb: (err: any, data?: StartUserImportJobCommandOutput) => void
   ): void;
-  public startUserImportJob(
+  startUserImportJob(
     args: StartUserImportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: StartUserImportJobCommandOutput) => void
   ): void;
-  public startUserImportJob(
-    args: StartUserImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartUserImportJobCommandOutput) => void),
-    cb?: (err: any, data?: StartUserImportJobCommandOutput) => void
-  ): Promise<StartUserImportJobCommandOutput> | void {
-    const command = new StartUserImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops the user import job.</p>
+   * @see {@link StartWebAuthnRegistrationCommand}
    */
-  public stopUserImportJob(
+  startWebAuthnRegistration(
+    args: StartWebAuthnRegistrationCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<StartWebAuthnRegistrationCommandOutput>;
+  startWebAuthnRegistration(
+    args: StartWebAuthnRegistrationCommandInput,
+    cb: (err: any, data?: StartWebAuthnRegistrationCommandOutput) => void
+  ): void;
+  startWebAuthnRegistration(
+    args: StartWebAuthnRegistrationCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: StartWebAuthnRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopUserImportJobCommand}
+   */
+  stopUserImportJob(
     args: StopUserImportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<StopUserImportJobCommandOutput>;
-  public stopUserImportJob(
+  stopUserImportJob(
     args: StopUserImportJobCommandInput,
     cb: (err: any, data?: StopUserImportJobCommandOutput) => void
   ): void;
-  public stopUserImportJob(
+  stopUserImportJob(
     args: StopUserImportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: StopUserImportJobCommandOutput) => void
   ): void;
-  public stopUserImportJob(
-    args: StopUserImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopUserImportJobCommandOutput) => void),
-    cb?: (err: any, data?: StopUserImportJobCommandOutput) => void
-  ): Promise<StopUserImportJobCommandOutput> | void {
-    const command = new StopUserImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns a set of tags to an Amazon Cognito user pool. A tag is a label that you can
-   *             use to categorize and manage user pools in different ways, such as by purpose, owner,
-   *             environment, or other criteria.</p>
-   *         <p>Each tag consists of a key and value, both of which you define. A key is a general
-   *             category for more specific values. For example, if you have two versions of a user pool,
-   *             one for testing and another for production, you might assign an <code>Environment</code>
-   *             tag key to both user pools. The value of this key might be <code>Test</code> for one
-   *             user pool and <code>Production</code> for the other.</p>
-   *         <p>Tags are useful for cost tracking and access control. You can activate your tags so
-   *             that they appear on the Billing and Cost Management console, where you can track the
-   *             costs associated with your user pools. In an IAM policy, you can constrain permissions
-   *             for user pools based on specific tags or tag values.</p>
-   *         <p>You can use this action up to 5 times per second, per account. A user pool can have as
-   *             many as 50 tags.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified tags from an Amazon Cognito user pool. You can use this action
-   *             up to 5 times per second, per account</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides the feedback for an authentication event whether it was from a valid user or
-   *             not. This feedback is used for improving the risk evaluation decision for the user pool
-   *             as part of Amazon Cognito advanced security.</p>
+   * @see {@link UpdateAuthEventFeedbackCommand}
    */
-  public updateAuthEventFeedback(
+  updateAuthEventFeedback(
     args: UpdateAuthEventFeedbackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateAuthEventFeedbackCommandOutput>;
-  public updateAuthEventFeedback(
+  updateAuthEventFeedback(
     args: UpdateAuthEventFeedbackCommandInput,
     cb: (err: any, data?: UpdateAuthEventFeedbackCommandOutput) => void
   ): void;
-  public updateAuthEventFeedback(
+  updateAuthEventFeedback(
     args: UpdateAuthEventFeedbackCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateAuthEventFeedbackCommandOutput) => void
   ): void;
-  public updateAuthEventFeedback(
-    args: UpdateAuthEventFeedbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAuthEventFeedbackCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAuthEventFeedbackCommandOutput) => void
-  ): Promise<UpdateAuthEventFeedbackCommandOutput> | void {
-    const command = new UpdateAuthEventFeedbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the device status.</p>
+   * @see {@link UpdateDeviceStatusCommand}
    */
-  public updateDeviceStatus(
+  updateDeviceStatus(
     args: UpdateDeviceStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateDeviceStatusCommandOutput>;
-  public updateDeviceStatus(
+  updateDeviceStatus(
     args: UpdateDeviceStatusCommandInput,
     cb: (err: any, data?: UpdateDeviceStatusCommandOutput) => void
   ): void;
-  public updateDeviceStatus(
+  updateDeviceStatus(
     args: UpdateDeviceStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateDeviceStatusCommandOutput) => void
   ): void;
-  public updateDeviceStatus(
-    args: UpdateDeviceStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDeviceStatusCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDeviceStatusCommandOutput) => void
-  ): Promise<UpdateDeviceStatusCommandOutput> | void {
-    const command = new UpdateDeviceStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified group with the specified attributes.</p>
-   *         <p>Calling this action requires developer credentials.</p>
+   * @see {@link UpdateGroupCommand}
    */
-  public updateGroup(args: UpdateGroupCommandInput, options?: __HttpHandlerOptions): Promise<UpdateGroupCommandOutput>;
-  public updateGroup(args: UpdateGroupCommandInput, cb: (err: any, data?: UpdateGroupCommandOutput) => void): void;
-  public updateGroup(
+  updateGroup(
     args: UpdateGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<UpdateGroupCommandOutput>;
+  updateGroup(
+    args: UpdateGroupCommandInput,
     cb: (err: any, data?: UpdateGroupCommandOutput) => void
   ): void;
-  public updateGroup(
+  updateGroup(
     args: UpdateGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateGroupCommandOutput) => void
-  ): Promise<UpdateGroupCommandOutput> | void {
-    const command = new UpdateGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: UpdateGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates identity provider information for a user pool.</p>
+   * @see {@link UpdateIdentityProviderCommand}
    */
-  public updateIdentityProvider(
+  updateIdentityProvider(
     args: UpdateIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateIdentityProviderCommandOutput>;
-  public updateIdentityProvider(
+  updateIdentityProvider(
     args: UpdateIdentityProviderCommandInput,
     cb: (err: any, data?: UpdateIdentityProviderCommandOutput) => void
   ): void;
-  public updateIdentityProvider(
+  updateIdentityProvider(
     args: UpdateIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateIdentityProviderCommandOutput) => void
   ): void;
-  public updateIdentityProvider(
-    args: UpdateIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIdentityProviderCommandOutput) => void
-  ): Promise<UpdateIdentityProviderCommandOutput> | void {
-    const command = new UpdateIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the name and scopes of resource server. All other fields are read-only.</p>
-   *         <important>
-   *             <p>If you don't provide a value for an attribute, it will be set to the default
-   *                 value.</p>
-   *         </important>
+   * @see {@link UpdateManagedLoginBrandingCommand}
    */
-  public updateResourceServer(
+  updateManagedLoginBranding(): Promise<UpdateManagedLoginBrandingCommandOutput>;
+  updateManagedLoginBranding(
+    args: UpdateManagedLoginBrandingCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<UpdateManagedLoginBrandingCommandOutput>;
+  updateManagedLoginBranding(
+    args: UpdateManagedLoginBrandingCommandInput,
+    cb: (err: any, data?: UpdateManagedLoginBrandingCommandOutput) => void
+  ): void;
+  updateManagedLoginBranding(
+    args: UpdateManagedLoginBrandingCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: UpdateManagedLoginBrandingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProvisionedLimitCommand}
+   */
+  updateProvisionedLimit(
+    args: UpdateProvisionedLimitCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<UpdateProvisionedLimitCommandOutput>;
+  updateProvisionedLimit(
+    args: UpdateProvisionedLimitCommandInput,
+    cb: (err: any, data?: UpdateProvisionedLimitCommandOutput) => void
+  ): void;
+  updateProvisionedLimit(
+    args: UpdateProvisionedLimitCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: UpdateProvisionedLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateResourceServerCommand}
+   */
+  updateResourceServer(
     args: UpdateResourceServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateResourceServerCommandOutput>;
-  public updateResourceServer(
+  updateResourceServer(
     args: UpdateResourceServerCommandInput,
     cb: (err: any, data?: UpdateResourceServerCommandOutput) => void
   ): void;
-  public updateResourceServer(
+  updateResourceServer(
     args: UpdateResourceServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateResourceServerCommandOutput) => void
   ): void;
-  public updateResourceServer(
-    args: UpdateResourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourceServerCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourceServerCommandOutput) => void
-  ): Promise<UpdateResourceServerCommandOutput> | void {
-    const command = new UpdateResourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows a user to update a specific attribute (one at a time).</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link UpdateTermsCommand}
    */
-  public updateUserAttributes(
+  updateTerms(
+    args: UpdateTermsCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<UpdateTermsCommandOutput>;
+  updateTerms(
+    args: UpdateTermsCommandInput,
+    cb: (err: any, data?: UpdateTermsCommandOutput) => void
+  ): void;
+  updateTerms(
+    args: UpdateTermsCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: UpdateTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserAttributesCommand}
+   */
+  updateUserAttributes(
     args: UpdateUserAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateUserAttributesCommandOutput>;
-  public updateUserAttributes(
+  updateUserAttributes(
     args: UpdateUserAttributesCommandInput,
     cb: (err: any, data?: UpdateUserAttributesCommandOutput) => void
   ): void;
-  public updateUserAttributes(
+  updateUserAttributes(
     args: UpdateUserAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateUserAttributesCommandOutput) => void
   ): void;
-  public updateUserAttributes(
-    args: UpdateUserAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserAttributesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserAttributesCommandOutput) => void
-  ): Promise<UpdateUserAttributesCommandOutput> | void {
-    const command = new UpdateUserAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified user pool with the specified attributes. You can get a list of
-   *             the current user pool settings using <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html">DescribeUserPool</a>. If you don't provide a value for an attribute, it will be set to the default
-   *             value.</p>
-   *
-   *         <note>
-   *             <p>This action might generate an SMS text message. Starting June 1, 2021, U.S.
-   *                 telecom carriers require that you register an origination phone number before you can
-   *                 send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-   *                 you must register a phone number with <a href="https://console.aws.amazon.com/pinpoint/home/">Amazon Pinpoint</a>.
-   *                 Cognito  will use the the registered number automatically. Otherwise, Cognito users that must
-   *                 receive SMS messages might be unable to sign up, activate their accounts, or sign
-   *                 in.</p>
-   *             <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon SNS might place your account in SMS sandbox. In <i>
-   *                   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-   *                     mode</a>
-   *                </i>, you’ll have limitations, such as sending messages
-   *                 to only verified phone numbers. After testing in the sandbox environment, you can
-   *                 move out of the SMS sandbox and into production. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html"> SMS message settings for Cognito User Pools</a> in the <i>Amazon
-   *                         Cognito Developer Guide</i>. </p>
-   *         </note>
+   * @see {@link UpdateUserPoolCommand}
    */
-  public updateUserPool(
+  updateUserPool(
     args: UpdateUserPoolCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateUserPoolCommandOutput>;
-  public updateUserPool(
+  updateUserPool(
     args: UpdateUserPoolCommandInput,
     cb: (err: any, data?: UpdateUserPoolCommandOutput) => void
   ): void;
-  public updateUserPool(
+  updateUserPool(
     args: UpdateUserPoolCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateUserPoolCommandOutput) => void
   ): void;
-  public updateUserPool(
-    args: UpdateUserPoolCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserPoolCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserPoolCommandOutput) => void
-  ): Promise<UpdateUserPoolCommandOutput> | void {
-    const command = new UpdateUserPoolCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified user pool app client with the specified attributes. You can get
-   *             a list of the current user pool app client settings using <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPoolClient.html">DescribeUserPoolClient</a>.</p>
-   *         <important>
-   *             <p>If you don't provide a value for an attribute, it will be set to the default
-   *                 value.</p>
-   *         </important>
-   *         <p>You can also use this operation to enable token revocation for user pool clients. For more information
-   *         about revoking tokens, see <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html">RevokeToken</a>.</p>
+   * @see {@link UpdateUserPoolClientCommand}
    */
-  public updateUserPoolClient(
+  updateUserPoolClient(
     args: UpdateUserPoolClientCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateUserPoolClientCommandOutput>;
-  public updateUserPoolClient(
+  updateUserPoolClient(
     args: UpdateUserPoolClientCommandInput,
     cb: (err: any, data?: UpdateUserPoolClientCommandOutput) => void
   ): void;
-  public updateUserPoolClient(
+  updateUserPoolClient(
     args: UpdateUserPoolClientCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateUserPoolClientCommandOutput) => void
   ): void;
-  public updateUserPoolClient(
-    args: UpdateUserPoolClientCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserPoolClientCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserPoolClientCommandOutput) => void
-  ): Promise<UpdateUserPoolClientCommandOutput> | void {
-    const command = new UpdateUserPoolClientCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user
-   *             pool.</p>
-   *         <p>You can use this operation to provide the Amazon Resource Name (ARN) of a new
-   *             certificate to Amazon Cognito. You cannot use it to change the domain for a user
-   *             pool.</p>
-   *         <p>A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up
-   *             and sign-in pages for your application. When you set up a custom domain, you provide a
-   *             certificate that you manage with Certificate Manager (ACM). When necessary, you can
-   *             use this operation to change the certificate that you applied to your custom
-   *             domain.</p>
-   *         <p>Usually, this is unnecessary following routine certificate renewal with ACM. When you
-   *             renew your existing certificate in ACM, the ARN for your certificate remains the same,
-   *             and your custom domain uses the new certificate automatically.</p>
-   *         <p>However, if you replace your existing certificate with a new one, ACM gives the new
-   *             certificate a new ARN. To apply the new certificate to your custom domain, you must
-   *             provide this ARN to Amazon Cognito.</p>
-   *         <p>When you add your new certificate in ACM, you must choose US East (N. Virginia) as the
-   *             Region.</p>
-   *         <p>After you submit your request, Amazon Cognito requires up to 1 hour to distribute your
-   *             new certificate to your custom domain.</p>
-   *         <p>For more information about adding a custom domain to your user pool, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html">Using Your Own Domain for the Hosted UI</a>.</p>
+   * @see {@link UpdateUserPoolDomainCommand}
    */
-  public updateUserPoolDomain(
+  updateUserPoolDomain(
     args: UpdateUserPoolDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<UpdateUserPoolDomainCommandOutput>;
-  public updateUserPoolDomain(
+  updateUserPoolDomain(
     args: UpdateUserPoolDomainCommandInput,
     cb: (err: any, data?: UpdateUserPoolDomainCommandOutput) => void
   ): void;
-  public updateUserPoolDomain(
+  updateUserPoolDomain(
     args: UpdateUserPoolDomainCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: UpdateUserPoolDomainCommandOutput) => void
   ): void;
-  public updateUserPoolDomain(
-    args: UpdateUserPoolDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserPoolDomainCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserPoolDomainCommandOutput) => void
-  ): Promise<UpdateUserPoolDomainCommandOutput> | void {
-    const command = new UpdateUserPoolDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Use this API to register a user's entered TOTP code and mark the user's software token
-   *             MFA status as "verified" if successful. The request takes an access token or a session
-   *             string, but not both.</p>
+   * @see {@link UpdateUserPoolReplicaCommand}
    */
-  public verifySoftwareToken(
+  updateUserPoolReplica(
+    args: UpdateUserPoolReplicaCommandInput,
+    options?: CognitoIdentityProviderRequestOptions
+  ): Promise<UpdateUserPoolReplicaCommandOutput>;
+  updateUserPoolReplica(
+    args: UpdateUserPoolReplicaCommandInput,
+    cb: (err: any, data?: UpdateUserPoolReplicaCommandOutput) => void
+  ): void;
+  updateUserPoolReplica(
+    args: UpdateUserPoolReplicaCommandInput,
+    options: CognitoIdentityProviderRequestOptions,
+    cb: (err: any, data?: UpdateUserPoolReplicaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link VerifySoftwareTokenCommand}
+   */
+  verifySoftwareToken(
     args: VerifySoftwareTokenCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<VerifySoftwareTokenCommandOutput>;
-  public verifySoftwareToken(
+  verifySoftwareToken(
     args: VerifySoftwareTokenCommandInput,
     cb: (err: any, data?: VerifySoftwareTokenCommandOutput) => void
   ): void;
-  public verifySoftwareToken(
+  verifySoftwareToken(
     args: VerifySoftwareTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: VerifySoftwareTokenCommandOutput) => void
   ): void;
-  public verifySoftwareToken(
-    args: VerifySoftwareTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: VerifySoftwareTokenCommandOutput) => void),
-    cb?: (err: any, data?: VerifySoftwareTokenCommandOutput) => void
-  ): Promise<VerifySoftwareTokenCommandOutput> | void {
-    const command = new VerifySoftwareTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Verifies the specified user attributes in the user pool.</p>
+   * @see {@link VerifyUserAttributeCommand}
    */
-  public verifyUserAttribute(
+  verifyUserAttribute(
     args: VerifyUserAttributeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CognitoIdentityProviderRequestOptions
   ): Promise<VerifyUserAttributeCommandOutput>;
-  public verifyUserAttribute(
+  verifyUserAttribute(
     args: VerifyUserAttributeCommandInput,
     cb: (err: any, data?: VerifyUserAttributeCommandOutput) => void
   ): void;
-  public verifyUserAttribute(
+  verifyUserAttribute(
     args: VerifyUserAttributeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CognitoIdentityProviderRequestOptions,
     cb: (err: any, data?: VerifyUserAttributeCommandOutput) => void
   ): void;
-  public verifyUserAttribute(
-    args: VerifyUserAttributeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: VerifyUserAttributeCommandOutput) => void),
-    cb?: (err: any, data?: VerifyUserAttributeCommandOutput) => void
-  ): Promise<VerifyUserAttributeCommandOutput> | void {
-    const command = new VerifyUserAttributeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link AdminListGroupsForUserCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link AdminListGroupsForUserCommandOutput}.
+   */
+  paginateAdminListGroupsForUser(
+    args: AdminListGroupsForUserCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<AdminListGroupsForUserCommandOutput>;
+
+  /**
+   * @see {@link AdminListUserAuthEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link AdminListUserAuthEventsCommandOutput}.
+   */
+  paginateAdminListUserAuthEvents(
+    args: AdminListUserAuthEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<AdminListUserAuthEventsCommandOutput>;
+
+  /**
+   * @see {@link ListGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGroupsCommandOutput}.
+   */
+  paginateListGroups(
+    args: ListGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListIdentityProvidersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIdentityProvidersCommandOutput}.
+   */
+  paginateListIdentityProviders(
+    args: ListIdentityProvidersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIdentityProvidersCommandOutput>;
+
+  /**
+   * @see {@link ListResourceServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceServersCommandOutput}.
+   */
+  paginateListResourceServers(
+    args: ListResourceServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceServersCommandOutput>;
+
+  /**
+   * @see {@link ListUserPoolClientsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserPoolClientsCommandOutput}.
+   */
+  paginateListUserPoolClients(
+    args: ListUserPoolClientsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserPoolClientsCommandOutput>;
+
+  /**
+   * @see {@link ListUserPoolsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserPoolsCommandOutput}.
+   */
+  paginateListUserPools(
+    args: ListUserPoolsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserPoolsCommandOutput>;
+
+  /**
+   * @see {@link ListUsersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsersCommandOutput}.
+   */
+  paginateListUsers(
+    args: ListUsersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsersCommandOutput>;
+
+  /**
+   * @see {@link ListUsersInGroupCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsersInGroupCommandOutput}.
+   */
+  paginateListUsersInGroup(
+    args: ListUsersInGroupCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsersInGroupCommandOutput>;
 }
+
+/**
+ * <p>With the Amazon Cognito user pools API, you can configure user pools and authenticate users. To
+ *             authenticate users from third-party identity providers (IdPs) in this API, you can
+ *                 <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html">link IdP users to native user profiles</a>. Learn more
+ *             about the authentication and authorization of federated users at <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html">Adding user pool sign-in through a third party</a> and in the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-userpools-server-contract-reference.html">User pool federation endpoints and managed login reference</a>.</p>
+ *          <p>This API reference provides detailed information about API operations and object types
+ *             in Amazon Cognito.</p>
+ *          <p>Along with resource management operations, the Amazon Cognito user pools API includes classes
+ *             of operations and authorization models for client-side and server-side authentication of
+ *             users. You can interact with operations in the Amazon Cognito user pools API as any of the
+ *             following subjects.</p>
+ *          <ol>
+ *             <li>
+ *                <p>An administrator who wants to configure user pools, app clients, users,
+ *                     groups, or other user pool functions.</p>
+ *             </li>
+ *             <li>
+ *                <p>A server-side app, like a web application, that wants to use its Amazon Web Services
+ *                     privileges to manage, authenticate, or authorize a user.</p>
+ *             </li>
+ *             <li>
+ *                <p>A client-side app, like a mobile app, that wants to make unauthenticated
+ *                     requests to manage, authenticate, or authorize a user.</p>
+ *             </li>
+ *          </ol>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-public-server-side.html#user-pools-API-operations">Understanding API, OIDC, and managed login pages
+ *                 authentication</a> in the <i>Amazon Cognito Developer Guide</i>.</p>
+ *          <p>With your Amazon Web Services SDK, you can build the logic to support operational flows in every use
+ *             case for this API. You can also make direct REST API requests to <a href="https://docs.aws.amazon.com/general/latest/gr/cognito_identity.html#cognito_identity_your_user_pools_region">Amazon Cognito user pools service endpoints</a>. The following links can get you started
+ *             with the <code>CognitoIdentityProvider</code> client in supported Amazon Web Services SDKs.</p>
+ *          <p>To get started with an Amazon Web Services SDK, see <a href="http://aws.amazon.com/developer/tools/">Tools to Build on Amazon Web Services</a>. For example actions and scenarios, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/service_code_examples_cognito-identity-provider.html">Code examples for Amazon Cognito Identity Provider using Amazon Web Services
+ *                 SDKs</a>.</p>
+ * @public
+ */
+export class CognitoIdentityProvider extends CognitoIdentityProviderClient implements CognitoIdentityProvider {}
+createAggregatedClient(commands, CognitoIdentityProvider, { paginators });

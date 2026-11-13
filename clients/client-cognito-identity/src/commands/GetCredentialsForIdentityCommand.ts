@@ -1,102 +1,121 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoIdentityClient";
-import { GetCredentialsForIdentityInput, GetCredentialsForIdentityResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetCredentialsForIdentityCommand,
-  serializeAws_json1_1GetCredentialsForIdentityCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCredentialsForIdentityInput, GetCredentialsForIdentityResponse } from "../models/models_0";
+import { GetCredentialsForIdentity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCredentialsForIdentityCommand}.
+ */
 export interface GetCredentialsForIdentityCommandInput extends GetCredentialsForIdentityInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetCredentialsForIdentityCommand}.
+ */
 export interface GetCredentialsForIdentityCommandOutput extends GetCredentialsForIdentityResponse, __MetadataBearer {}
 
 /**
  * <p>Returns credentials for the provided identity ID. Any provided logins will be
  *          validated against supported login providers. If the token is for
- *          cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service
- *          with the appropriate role for the token.</p>
+ *             <code>cognito-identity.amazonaws.com</code>, it will be passed through to Security Token Service with the appropriate role for the token.</p>
  *          <p>This is a public API. You do not need any credentials to call this API.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityClient, GetCredentialsForIdentityCommand } from "@aws-sdk/client-cognito-identity"; // ES Modules import
  * // const { CognitoIdentityClient, GetCredentialsForIdentityCommand } = require("@aws-sdk/client-cognito-identity"); // CommonJS import
+ * // import type { CognitoIdentityClientConfig } from "@aws-sdk/client-cognito-identity";
+ * const config = {}; // type is CognitoIdentityClientConfig
  * const client = new CognitoIdentityClient(config);
+ * const input = { // GetCredentialsForIdentityInput
+ *   IdentityId: "STRING_VALUE", // required
+ *   Logins: { // LoginsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   CustomRoleArn: "STRING_VALUE",
+ * };
  * const command = new GetCredentialsForIdentityCommand(input);
  * const response = await client.send(command);
+ * // { // GetCredentialsForIdentityResponse
+ * //   IdentityId: "STRING_VALUE",
+ * //   Credentials: { // Credentials
+ * //     AccessKeyId: "STRING_VALUE",
+ * //     SecretKey: "STRING_VALUE",
+ * //     SessionToken: "STRING_VALUE",
+ * //     Expiration: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetCredentialsForIdentityCommandInput - {@link GetCredentialsForIdentityCommandInput}
+ * @returns {@link GetCredentialsForIdentityCommandOutput}
  * @see {@link GetCredentialsForIdentityCommandInput} for command's `input` shape.
  * @see {@link GetCredentialsForIdentityCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityClientResolvedConfig | config} for CognitoIdentityClient's `config` shape.
  *
+ * @throws {@link ExternalServiceException} (client fault)
+ *  <p>An exception thrown when a dependent service such as Facebook or Twitter is not
+ *          responding</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Thrown when the service encounters an error during processing the request.</p>
+ *
+ * @throws {@link InvalidIdentityPoolConfigurationException} (client fault)
+ *  <p>If you provided authentication information in the request, the identity pool has no
+ *          authenticated role configured, or STS returned an error response to the
+ *          request to assume the authenticated role from the identity pool. If you provided no
+ *          authentication information in the request, the identity pool has no unauthenticated role
+ *          configured, or STS returned an error response to the request to assume the
+ *          unauthenticated role from the identity pool.</p>
+ *          <p>Your role trust policy must grant <code>AssumeRoleWithWebIdentity</code> permissions to <code>cognito-identity.amazonaws.com</code>.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Thrown for missing or bad input parameter(s).</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>Thrown when a user is not authorized to access the requested resource.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>Thrown when a user tries to use a login which is already linked to another
+ *          account.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Thrown when the requested resource (for example, a dataset or record) does not
+ *          exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Thrown when a request is throttled.</p>
+ *
+ * @throws {@link CognitoIdentityServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentity service.</p>
+ *
+ *
+ * @public
  */
-export class GetCredentialsForIdentityCommand extends $Command<
-  GetCredentialsForIdentityCommandInput,
-  GetCredentialsForIdentityCommandOutput,
-  CognitoIdentityClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCredentialsForIdentityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCredentialsForIdentityCommandInput, GetCredentialsForIdentityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityClient";
-    const commandName = "GetCredentialsForIdentityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCredentialsForIdentityInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCredentialsForIdentityResponse.filterSensitiveLog,
+export class GetCredentialsForIdentityCommand extends command<GetCredentialsForIdentityCommandInput, GetCredentialsForIdentityCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCredentialsForIdentity",
+  GetCredentialsForIdentity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCredentialsForIdentityInput;
+      output: GetCredentialsForIdentityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCredentialsForIdentityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetCredentialsForIdentityCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetCredentialsForIdentityCommandOutput> {
-    return deserializeAws_json1_1GetCredentialsForIdentityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCredentialsForIdentityCommandInput;
+      output: GetCredentialsForIdentityCommandOutput;
+    };
+  };
 }

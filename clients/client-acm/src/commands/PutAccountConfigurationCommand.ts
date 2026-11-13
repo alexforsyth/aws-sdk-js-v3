@@ -1,103 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMClient";
-import { PutAccountConfigurationRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutAccountConfigurationCommand,
-  serializeAws_json1_1PutAccountConfigurationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAccountConfigurationRequest } from "../models/models_0";
+import { PutAccountConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAccountConfigurationCommand}.
+ */
 export interface PutAccountConfigurationCommandInput extends PutAccountConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutAccountConfigurationCommand}.
+ */
 export interface PutAccountConfigurationCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Adds or modifies
- *       account-level configurations in ACM.
- *       </p>
- *          <p>The
- *       supported configuration option is <code>DaysBeforeExpiry</code>. This option specifies the
- *       number of days prior to certificate expiration when ACM starts generating
- *         <code>EventBridge</code> events. ACM sends one event per day per certificate until the
- *       certificate expires. By default, accounts receive events starting 45 days before certificate
- *       expiration.</p>
+ * <p>Adds or modifies account-level configurations in ACM. </p> <p>The supported configuration option is <code>DaysBeforeExpiry</code>. This option specifies the number of days prior to certificate expiration when ACM starts generating <code>EventBridge</code> events. ACM sends one event per day per certificate until the certificate expires. By default, accounts receive events starting 45 days before certificate expiration.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMClient, PutAccountConfigurationCommand } from "@aws-sdk/client-acm"; // ES Modules import
  * // const { ACMClient, PutAccountConfigurationCommand } = require("@aws-sdk/client-acm"); // CommonJS import
+ * // import type { ACMClientConfig } from "@aws-sdk/client-acm";
+ * const config = {}; // type is ACMClientConfig
  * const client = new ACMClient(config);
+ * const input = { // PutAccountConfigurationRequest
+ *   ExpiryEvents: { // ExpiryEventsConfiguration
+ *     DaysBeforeExpiry: Number("int"),
+ *   },
+ *   IdempotencyToken: "STRING_VALUE", // required
+ * };
  * const command = new PutAccountConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutAccountConfigurationCommandInput - {@link PutAccountConfigurationCommandInput}
+ * @returns {@link PutAccountConfigurationCommandOutput}
  * @see {@link PutAccountConfigurationCommandInput} for command's `input` shape.
  * @see {@link PutAccountConfigurationCommandOutput} for command's `response` shape.
- * @see {@link ACMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMClientResolvedConfig | config} for ACMClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have access required to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>You are trying to update a resource or configuration that is already being created or updated. Wait for the previous operation to finish and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded a quota.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>
+ *
+ * @throws {@link ACMServiceException}
+ * <p>Base exception class for all service exceptions from ACM service.</p>
+ *
+ *
+ * @public
  */
-export class PutAccountConfigurationCommand extends $Command<
-  PutAccountConfigurationCommandInput,
-  PutAccountConfigurationCommandOutput,
-  ACMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutAccountConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutAccountConfigurationCommandInput, PutAccountConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMClient";
-    const commandName = "PutAccountConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutAccountConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutAccountConfigurationCommand extends command<PutAccountConfigurationCommandInput, PutAccountConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAccountConfiguration",
+  PutAccountConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAccountConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutAccountConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutAccountConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutAccountConfigurationCommandOutput> {
-    return deserializeAws_json1_1PutAccountConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutAccountConfigurationCommandInput;
+      output: PutAccountConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,805 @@
+const _ADE = "AccessDeniedException";
+const _CC = "ClusterConfiguration";
+const _CDB = "CreateDbBackup";
+const _CDBI = "CreateDbBackupInput";
+const _CDBO = "CreateDbBackupOutput";
+const _CDC = "CreateDbCluster";
+const _CDCI = "CreateDbClusterInput";
+const _CDCO = "CreateDbClusterOutput";
+const _CDI = "CreateDbInstance";
+const _CDII = "CreateDbInstanceInput";
+const _CDIO = "CreateDbInstanceOutput";
+const _CDPG = "CreateDbParameterGroup";
+const _CDPGI = "CreateDbParameterGroupInput";
+const _CDPGO = "CreateDbParameterGroupOutput";
+const _CE = "ConflictException";
+const _D = "Duration";
+const _DBC = "DbBackupConfiguration";
+const _DBCIL = "DbBackupConfigurationInputList";
+const _DBCO = "DbBackupConfigurationOutput";
+const _DBCOL = "DbBackupConfigurationOutputList";
+const _DBS = "DbBackupSummary";
+const _DBSL = "DbBackupSummaryList";
+const _DC = "DeploymentConfiguration";
+const _DCS = "DbClusterSummary";
+const _DCSL = "DbClusterSummaryList";
+const _DDB = "DeleteDbBackup";
+const _DDBI = "DeleteDbBackupInput";
+const _DDBO = "DeleteDbBackupOutput";
+const _DDC = "DeleteDbCluster";
+const _DDCI = "DeleteDbClusterInput";
+const _DDCO = "DeleteDbClusterOutput";
+const _DDI = "DeleteDbInstance";
+const _DDII = "DeleteDbInstanceInput";
+const _DDIO = "DeleteDbInstanceOutput";
+const _DIFCS = "DbInstanceForClusterSummary";
+const _DIFCSL = "DbInstanceForClusterSummaryList";
+const _DIS = "DbInstanceSummary";
+const _DISL = "DbInstanceSummaryList";
+const _DPGS = "DbParameterGroupSummary";
+const _DPGSL = "DbParameterGroupSummaryList";
+const _GDB = "GetDbBackup";
+const _GDBI = "GetDbBackupInput";
+const _GDBO = "GetDbBackupOutput";
+const _GDC = "GetDbCluster";
+const _GDCI = "GetDbClusterInput";
+const _GDCO = "GetDbClusterOutput";
+const _GDI = "GetDbInstance";
+const _GDII = "GetDbInstanceInput";
+const _GDIO = "GetDbInstanceOutput";
+const _GDPG = "GetDbParameterGroup";
+const _GDPGI = "GetDbParameterGroupInput";
+const _GDPGO = "GetDbParameterGroupOutput";
+const _IDB = "InfluxDBv2";
+const _IDBC = "InfluxDBv3Core";
+const _IDBCP = "InfluxDBv3CoreParameters";
+const _IDBE = "InfluxDBv3Enterprise";
+const _IDBEDC = "InfluxDBv3EnterpriseDeploymentConfiguration";
+const _IDBEP = "InfluxDBv3EnterpriseParameters";
+const _IDBP = "InfluxDBv2Parameters";
+const _ISE = "InternalServerException";
+const _LDB = "ListDbBackups";
+const _LDBI = "ListDbBackupsInput";
+const _LDBO = "ListDbBackupsOutput";
+const _LDC = "LogDeliveryConfiguration";
+const _LDCI = "ListDbClustersInput";
+const _LDCO = "ListDbClustersOutput";
+const _LDCi = "ListDbClusters";
+const _LDI = "ListDbInstances";
+const _LDIFC = "ListDbInstancesForCluster";
+const _LDIFCI = "ListDbInstancesForClusterInput";
+const _LDIFCO = "ListDbInstancesForClusterOutput";
+const _LDII = "ListDbInstancesInput";
+const _LDIO = "ListDbInstancesOutput";
+const _LDPG = "ListDbParameterGroups";
+const _LDPGI = "ListDbParameterGroupsInput";
+const _LDPGO = "ListDbParameterGroupsOutput";
+const _LTFR = "ListTagsForResource";
+const _LTFRR = "ListTagsForResourceRequest";
+const _LTFRRi = "ListTagsForResourceResponse";
+const _MS = "MaintenanceSchedule";
+const _NG = "NodeGroup";
+const _NGL = "NodeGroupList";
+const _P = "Password";
+const _POAL = "PercentOrAbsoluteLong";
+const _Pa = "Parameters";
+const _RA = "Retry-After";
+const _RDC = "RebootDbCluster";
+const _RDCI = "RebootDbClusterInput";
+const _RDCO = "RebootDbClusterOutput";
+const _RDI = "RebootDbInstance";
+const _RDII = "RebootDbInstanceInput";
+const _RDIO = "RebootDbInstanceOutput";
+const _RFDB = "RestoreFromDbBackup";
+const _RFDBI = "RestoreFromDbBackupInput";
+const _RFDBO = "RestoreFromDbBackupOutput";
+const _RNFE = "ResourceNotFoundException";
+const _SC = "S3Configuration";
+const _SQEE = "ServiceQuotaExceededException";
+const _TE = "ThrottlingException";
+const _TR = "TagResource";
+const _TRR = "TagResourceRequest";
+const _U = "Username";
+const _UDC = "UpdateDbCluster";
+const _UDCI = "UpdateDbClusterInput";
+const _UDCO = "UpdateDbClusterOutput";
+const _UDI = "UpdateDbInstance";
+const _UDII = "UpdateDbInstanceInput";
+const _UDIO = "UpdateDbInstanceOutput";
+const _UR = "UntagResource";
+const _URR = "UntagResourceRequest";
+const _VE = "ValidationException";
+const _a = "arn";
+const _aS = "allocatedStorage";
+const _aZ = "availabilityZone";
+const _ab = "absolute";
+const _b = "bucket";
+const _bN = "bucketName";
+const _c = "client";
+const _cA = "createdAt";
+const _cC = "clusterConfiguration";
+const _cCI = "compactionCheckInterval";
+const _cCW = "compactionCleanupWait";
+const _cGD = "compactionGen2Duration";
+const _cM = "compactionMultipliers";
+const _cMNFPP = "compactionMaxNumFilesPerPlan";
+const _cRL = "compactionRowLimit";
+const _cS = "customSchedule";
+const _cSI = "catalogSyncInterval";
+const _co = "count";
+const _d = "description";
+const _dBC = "dbBackupConfigurations";
+const _dBI = "dbBackupId";
+const _dC = "dedicatedCompactor";
+const _dCEI = "distinctCacheEvictionInterval";
+const _dCI = "dbClusterId";
+const _dCS = "dbClusterStatus";
+const _dCe = "deploymentConfiguration";
+const _dFC = "dataFusionConfig";
+const _dFMPF = "dataFusionMaxParquetFanout";
+const _dFNT = "dataFusionNumThreads";
+const _dFRDLS = "dataFusionRuntimeDisableLifoSlot";
+const _dFREI = "dataFusionRuntimeEventInterval";
+const _dFRGQI = "dataFusionRuntimeGlobalQueueInterval";
+const _dFRMBT = "dataFusionRuntimeMaxBlockingThreads";
+const _dFRMIEPT = "dataFusionRuntimeMaxIoEventsPerTick";
+const _dFRT = "dataFusionRuntimeType";
+const _dFRTKA = "dataFusionRuntimeThreadKeepAlive";
+const _dFRTP = "dataFusionRuntimeThreadPriority";
+const _dFUCPL = "dataFusionUseCachedParquetLoader";
+const _dGP = "deleteGracePeriod";
+const _dIT = "dbInstanceType";
+const _dPGI = "dbParameterGroupId";
+const _dPGIb = "dbParameterGroupIdentifier";
+const _dPMC = "disableParquetMemCache";
+const _dRI = "dbResourceId";
+const _dST = "dbStorageType";
+const _dT = "deploymentType";
+const _dTu = "durationType";
+const _dVCDFH = "distinctValueCacheDisableFromHistory";
+const _e = "error";
+const _eA = "expiresAfter";
+const _eDPGI = "effectiveDbParameterGroupIdentifier";
+const _eMPB = "execMemPoolBytes";
+const _eT = "engineType";
+const _en = "endpoint";
+const _ena = "enabled";
+const _fLE = "fluxLogEnabled";
+const _fM = "failoverMode";
+const _fSMT = "forceSnapshotMemThreshold";
+const _gD = "gen1Duration";
+const _gLD = "gen1LookbackDuration";
+const _hDDD = "hardDeleteDefaultDuration";
+const _hE = "httpError";
+const _hH = "httpHeader";
+const _hIT = "httpIdleTimeout";
+const _hRHT = "httpReadHeaderTimeout";
+const _hRT = "httpReadTimeout";
+const _hWT = "httpWriteTimeout";
+const _i = "id";
+const _iAPSA = "influxAuthParametersSecretArn";
+const _iI = "instanceIds";
+const _iM = "instanceMode";
+const _iMSB = "influxqlMaxSelectBuckets";
+const _iMSP = "influxqlMaxSelectPoint";
+const _iMSS = "influxqlMaxSelectSeries";
+const _iMn = "instanceModes";
+const _iQI = "ingestQueryInstances";
+const _iT = "instanceType";
+const _id = "identifier";
+const _it = "items";
+const _kKI = "kmsKeyId";
+const _lCEI = "lastCacheEvictionInterval";
+const _lDC = "logDeliveryConfiguration";
+const _lF = "logFilter";
+const _lFo = "logFormat";
+const _lL = "logLevel";
+const _lMT = "lastMaintenanceTime";
+const _lVCDFH = "lastValueCacheDisableFromHistory";
+const _m = "message";
+const _mD = "metricsDisabled";
+const _mHRS = "maxHttpRequestSize";
+const _mR = "maxResults";
+const _mS = "maintenanceSchedule";
+const _n = "name";
+const _nABT = "nextAutomatedBackupTime";
+const _nG = "nodeGroups";
+const _nMT = "nextMaintenanceTime";
+const _nT = "networkType";
+const _nTe = "nextToken";
+const _nTo = "noTasks";
+const _o = "organization";
+const _p = "port";
+const _pA = "publiclyAccessible";
+const _pCA = "preemptiveCacheAge";
+const _pD = "pprofDisabled";
+const _pMCPI = "parquetMemCachePruneInterval";
+const _pMCPP = "parquetMemCachePrunePercentage";
+const _pMCQPD = "parquetMemCacheQueryPathDuration";
+const _pMCS = "parquetMemCacheSize";
+const _pMW = "preferredMaintenanceWindow";
+const _pRSA = "pluginRepositorySecretArn";
+const _pRU = "pluginRepositoryUrl";
+const _pa = "password";
+const _par = "parameters";
+const _pe = "percent";
+const _qC = "queryConcurrency";
+const _qFL = "queryFileLimit";
+const _qIMB = "queryInitialMemoryBytes";
+const _qLS = "queryLogSize";
+const _qMB = "queryMemoryBytes";
+const _qMMB = "queryMaxMemoryBytes";
+const _qOI = "queryOnlyInstances";
+const _qQS = "queryQueueSize";
+const _r = "reason";
+const _rA = "resourceArn";
+const _rAB = "retainAutomatedBackups";
+const _rAS = "retryAfterSeconds";
+const _rCI = "retentionCheckInterval";
+const _rD = "retentionDays";
+const _rDRI = "restoredDbResourceId";
+const _rE = "readerEndpoint";
+const _rI = "resourceId";
+const _rIe = "replicationInterval";
+const _rM = "restoreMode";
+const _rS = "restoreStatus";
+const _rT = "resourceType";
+const _rTT = "restoreToTime";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.timestreaminfluxdb";
+const _sAZ = "secondaryAvailabilityZone";
+const _sC = "s3Configuration";
+const _sCFWCD = "storageCompactFullWriteColdDuration";
+const _sCMMS = "storageCacheMaxMemorySize";
+const _sCSMS = "storageCacheSnapshotMemorySize";
+const _sCSWCD = "storageCacheSnapshotWriteColdDuration";
+const _sCTB = "storageCompactThroughputBurst";
+const _sD = "snapshotDuration";
+const _sL = "sessionLength";
+const _sMCC = "storageMaxConcurrentCompactions";
+const _sMILFS = "storageMaxIndexLogFileSize";
+const _sNVFS = "storageNoValidateFieldSize";
+const _sRCI = "storageRetentionCheckInterval";
+const _sRD = "sessionRenewDisabled";
+const _sS = "snapshotSize";
+const _sSFMCSC = "storageSeriesFileMaxConcurrentSnapshotCompactions";
+const _sSISCS = "storageSeriesIdSetCacheSize";
+const _sWFTK = "snapshottedWalFilesToKeep";
+const _sWMCW = "storageWalMaxConcurrentWrites";
+const _sWMWD = "storageWalMaxWriteDelay";
+const _se = "server";
+const _st = "status";
+const _t = "tags";
+const _tICCL = "tableIndexCacheConcurrencyLimit";
+const _tICME = "tableIndexCacheMaxEntries";
+const _tK = "tagKeys";
+const _tT = "tracingType";
+const _ti = "timezone";
+const _ty = "type";
+const _u = "username";
+const _uD = "uiDisabled";
+const _uPT = "upgradePachaTree";
+const _v = "value";
+const _vSGI = "vpcSecurityGroupIds";
+const _vSI = "vpcSubnetIds";
+const _wBS = "walBufferSize";
+const _wMWBS = "walMaxWriteBufferSize";
+const _wRCL = "walReplayConcurrencyLimit";
+const _wRFOE = "walReplayFailOnError";
+const _wSS = "walSnapshotSize";
+const n0 = "com.amazonaws.timestreaminfluxdb";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import {
+  AccessDeniedException,
+  ConflictException,
+  InternalServerException,
+  ResourceNotFoundException,
+  ServiceQuotaExceededException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+import { TimestreamInfluxDBServiceException } from "../models/TimestreamInfluxDBServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var TimestreamInfluxDBServiceException$: StaticErrorSchema = [-3, _s, "TimestreamInfluxDBServiceException", 0, [], []];
+_s_registry.registerError(TimestreamInfluxDBServiceException$, TimestreamInfluxDBServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m, _rI, _rT],
+  [0, 0, 0], 3
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_m, _rI, _rT],
+  [0, 0, 0], 3
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ServiceQuotaExceededException$: StaticErrorSchema = [-3, n0, _SQEE,
+  { [_e]: _c, [_hE]: 402 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(ServiceQuotaExceededException$, ServiceQuotaExceededException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_m, _rAS],
+  [0, [1, { [_hH]: _RA }]], 1
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m, _r],
+  [0, 0], 2
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var Password: StaticSimpleSchema = [0, n0, _P, 8, 0];
+var Username: StaticSimpleSchema = [0, n0, _U, 8, 0];
+export var ClusterConfiguration$: StaticStructureSchema = [3, n0, _CC,
+  0,
+  [_iQI, _qOI, _dC],
+  [1, 1, 2]
+];
+export var CreateDbBackupInput$: StaticStructureSchema = [3, n0, _CDBI,
+  0,
+  [_n, _dRI, _rD, _t],
+  [0, 0, 1, 128 | 0], 2
+];
+export var CreateDbBackupOutput$: StaticStructureSchema = [3, n0, _CDBO,
+  0,
+  [_i, _a, _n, _st, _cA, _eA, _dRI, _ty, _eT, _dT, _kKI, _cC, _dCe, _dPGI, _dIT, _lDC, _fM, _dST, _aS, _vSI, _vSGI, _pA, _p, _nT, _iAPSA, _mS],
+  [0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, () => ClusterConfiguration$, () => DeploymentConfiguration$, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 1, 64 | 0, 64 | 0, 2, 1, 0, 0, () => MaintenanceSchedule$], 2
+];
+export var CreateDbClusterInput$: StaticStructureSchema = [3, n0, _CDCI,
+  0,
+  [_n, _vSI, _vSGI, _u, _pa, _o, _b, _p, _dPGIb, _dIT, _dST, _aS, _nT, _pA, _dT, _dCe, _fM, _lDC, _mS, _dBC, _kKI, _t],
+  [0, 64 | 0, 64 | 0, [() => Username, 0], [() => Password, 0], 0, 0, 1, 0, 0, 0, 1, 0, 2, 0, () => DeploymentConfiguration$, 0, () => LogDeliveryConfiguration$, () => MaintenanceSchedule$, () => DbBackupConfigurationInputList, 0, 128 | 0], 3
+];
+export var CreateDbClusterOutput$: StaticStructureSchema = [3, n0, _CDCO,
+  0,
+  [_dCI, _dCS],
+  [0, 0]
+];
+export var CreateDbInstanceInput$: StaticStructureSchema = [3, n0, _CDII,
+  0,
+  [_n, _pa, _dIT, _vSI, _vSGI, _aS, _u, _o, _b, _pA, _dST, _dPGIb, _dT, _lDC, _mS, _t, _p, _nT, _dBC, _kKI],
+  [0, [() => Password, 0], 0, 64 | 0, 64 | 0, 1, [() => Username, 0], 0, 0, 2, 0, 0, 0, () => LogDeliveryConfiguration$, () => MaintenanceSchedule$, 128 | 0, 1, 0, () => DbBackupConfigurationInputList, 0], 6
+];
+export var CreateDbInstanceOutput$: StaticStructureSchema = [3, n0, _CDIO,
+  0,
+  [_i, _n, _a, _vSI, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT, _pA, _vSGI, _dPGIb, _aZ, _sAZ, _lDC, _iAPSA, _dCI, _iM, _iMn, _mS, _lMT, _nMT, _dBC, _kKI],
+  [0, 0, 0, 64 | 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 | 0, 0, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 0, 64 | 0, () => MaintenanceSchedule$, 5, 5, () => DbBackupConfigurationOutputList, 0], 4
+];
+export var CreateDbParameterGroupInput$: StaticStructureSchema = [3, n0, _CDPGI,
+  0,
+  [_n, _d, _par, _t],
+  [0, 0, () => _Parameters$, 128 | 0], 1
+];
+export var CreateDbParameterGroupOutput$: StaticStructureSchema = [3, n0, _CDPGO,
+  0,
+  [_i, _n, _a, _d, _par],
+  [0, 0, 0, 0, () => _Parameters$], 3
+];
+export var DbBackupConfiguration$: StaticStructureSchema = [3, n0, _DBC,
+  0,
+  [_ty, _rD, _ena, _cS],
+  [0, 1, 2, 0], 3
+];
+export var DbBackupConfigurationOutput$: StaticStructureSchema = [3, n0, _DBCO,
+  0,
+  [_ty, _rD, _ena, _cS, _nABT],
+  [0, 1, 2, 0, 5], 3
+];
+export var DbBackupSummary$: StaticStructureSchema = [3, n0, _DBS,
+  0,
+  [_i, _a, _n, _st, _cA, _eA, _dRI, _ty, _eT, _dT, _kKI],
+  [0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0], 2
+];
+export var DbClusterSummary$: StaticStructureSchema = [3, n0, _DCS,
+  0,
+  [_i, _n, _a, _st, _en, _rE, _p, _dT, _dIT, _nT, _dST, _aS, _eT],
+  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0], 3
+];
+export var DbInstanceForClusterSummary$: StaticStructureSchema = [3, n0, _DIFCS,
+  0,
+  [_i, _n, _a, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT, _iM, _iMn],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64 | 0], 3
+];
+export var DbInstanceSummary$: StaticStructureSchema = [3, n0, _DIS,
+  0,
+  [_i, _n, _a, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0], 3
+];
+export var DbParameterGroupSummary$: StaticStructureSchema = [3, n0, _DPGS,
+  0,
+  [_i, _n, _a, _d],
+  [0, 0, 0, 0], 3
+];
+export var DeleteDbBackupInput$: StaticStructureSchema = [3, n0, _DDBI,
+  0,
+  [_id],
+  [0], 1
+];
+export var DeleteDbBackupOutput$: StaticStructureSchema = [3, n0, _DDBO,
+  0,
+  [_i, _a, _n, _st, _cA, _eA, _dRI, _ty, _eT, _dT, _kKI, _cC, _dCe, _dPGI, _dIT, _lDC, _fM, _dST, _aS, _vSI, _vSGI, _pA, _p, _nT, _iAPSA, _mS],
+  [0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, () => ClusterConfiguration$, () => DeploymentConfiguration$, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 1, 64 | 0, 64 | 0, 2, 1, 0, 0, () => MaintenanceSchedule$], 2
+];
+export var DeleteDbClusterInput$: StaticStructureSchema = [3, n0, _DDCI,
+  0,
+  [_dCI, _rAB],
+  [0, 2], 1
+];
+export var DeleteDbClusterOutput$: StaticStructureSchema = [3, n0, _DDCO,
+  0,
+  [_dCS],
+  [0]
+];
+export var DeleteDbInstanceInput$: StaticStructureSchema = [3, n0, _DDII,
+  0,
+  [_id, _rAB],
+  [0, 2], 1
+];
+export var DeleteDbInstanceOutput$: StaticStructureSchema = [3, n0, _DDIO,
+  0,
+  [_i, _n, _a, _vSI, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT, _pA, _vSGI, _dPGIb, _aZ, _sAZ, _lDC, _iAPSA, _dCI, _iM, _iMn, _mS, _lMT, _nMT, _dBC, _kKI],
+  [0, 0, 0, 64 | 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 | 0, 0, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 0, 64 | 0, () => MaintenanceSchedule$, 5, 5, () => DbBackupConfigurationOutputList, 0], 4
+];
+export var Duration$: StaticStructureSchema = [3, n0, _D,
+  0,
+  [_dTu, _v],
+  [0, 1], 2
+];
+export var GetDbBackupInput$: StaticStructureSchema = [3, n0, _GDBI,
+  0,
+  [_id],
+  [0], 1
+];
+export var GetDbBackupOutput$: StaticStructureSchema = [3, n0, _GDBO,
+  0,
+  [_i, _a, _n, _st, _cA, _eA, _dRI, _ty, _eT, _dT, _kKI, _cC, _dCe, _dPGI, _dIT, _lDC, _fM, _dST, _aS, _vSI, _vSGI, _pA, _p, _nT, _iAPSA, _mS],
+  [0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, () => ClusterConfiguration$, () => DeploymentConfiguration$, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 1, 64 | 0, 64 | 0, 2, 1, 0, 0, () => MaintenanceSchedule$], 2
+];
+export var GetDbClusterInput$: StaticStructureSchema = [3, n0, _GDCI,
+  0,
+  [_dCI],
+  [0], 1
+];
+export var GetDbClusterOutput$: StaticStructureSchema = [3, n0, _GDCO,
+  0,
+  [_i, _n, _a, _st, _en, _rE, _p, _dT, _dIT, _nT, _dST, _aS, _eT, _pA, _dPGIb, _eDPGI, _lDC, _mS, _lMT, _nMT, _iAPSA, _vSI, _vSGI, _fM, _cC, _dCe, _dBC, _kKI],
+  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 0, 0, () => LogDeliveryConfiguration$, () => MaintenanceSchedule$, 5, 5, 0, 64 | 0, 64 | 0, 0, () => ClusterConfiguration$, () => DeploymentConfiguration$, () => DbBackupConfigurationOutputList, 0], 3
+];
+export var GetDbInstanceInput$: StaticStructureSchema = [3, n0, _GDII,
+  0,
+  [_id],
+  [0], 1
+];
+export var GetDbInstanceOutput$: StaticStructureSchema = [3, n0, _GDIO,
+  0,
+  [_i, _n, _a, _vSI, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT, _pA, _vSGI, _dPGIb, _aZ, _sAZ, _lDC, _iAPSA, _dCI, _iM, _iMn, _mS, _lMT, _nMT, _dBC, _kKI],
+  [0, 0, 0, 64 | 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 | 0, 0, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 0, 64 | 0, () => MaintenanceSchedule$, 5, 5, () => DbBackupConfigurationOutputList, 0], 4
+];
+export var GetDbParameterGroupInput$: StaticStructureSchema = [3, n0, _GDPGI,
+  0,
+  [_id],
+  [0], 1
+];
+export var GetDbParameterGroupOutput$: StaticStructureSchema = [3, n0, _GDPGO,
+  0,
+  [_i, _n, _a, _d, _par],
+  [0, 0, 0, 0, () => _Parameters$], 3
+];
+export var InfluxDBv2Parameters$: StaticStructureSchema = [3, n0, _IDBP,
+  0,
+  [_fLE, _lL, _nTo, _qC, _qQS, _tT, _mD, _hIT, _hRHT, _hRT, _hWT, _iMSB, _iMSP, _iMSS, _pD, _qIMB, _qMMB, _qMB, _sL, _sRD, _sCMMS, _sCSMS, _sCSWCD, _sCFWCD, _sCTB, _sMCC, _sMILFS, _sNVFS, _sRCI, _sSFMCSC, _sSISCS, _sWMCW, _sWMWD, _uD],
+  [2, 0, 2, 1, 1, 0, 2, () => Duration$, () => Duration$, () => Duration$, () => Duration$, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, () => Duration$, () => Duration$, 1, 1, 1, 2, () => Duration$, 1, 1, 1, () => Duration$, 2]
+];
+export var InfluxDBv3CoreParameters$: StaticStructureSchema = [3, n0, _IDBCP,
+  0,
+  [_qFL, _qLS, _lF, _lFo, _dFNT, _dFRT, _dFRDLS, _dFREI, _dFRGQI, _dFRMBT, _dFRMIEPT, _dFRTKA, _dFRTP, _dFMPF, _dFUCPL, _dFC, _mHRS, _fSMT, _wSS, _wMWBS, _sWFTK, _pCA, _pMCPP, _pMCPI, _dPMC, _pMCQPD, _lCEI, _dCEI, _gD, _eMPB, _pMCS, _wRFOE, _wRCL, _tICME, _tICCL, _gLD, _rCI, _dGP, _hDDD, _pRU, _pRSA],
+  [1, 1, 0, 0, 1, 0, 2, 1, 1, 1, 1, () => Duration$, 1, 1, 2, 0, 1, () => PercentOrAbsoluteLong$, 1, 1, 1, () => Duration$, 1, () => Duration$, 2, () => Duration$, () => Duration$, () => Duration$, () => Duration$, () => PercentOrAbsoluteLong$, () => PercentOrAbsoluteLong$, 2, 1, 1, 1, () => Duration$, () => Duration$, () => Duration$, () => Duration$, 0, 0]
+];
+export var InfluxDBv3EnterpriseDeploymentConfiguration$: StaticStructureSchema = [3, n0, _IDBEDC,
+  0,
+  [_nG],
+  [() => NodeGroupList], 1
+];
+export var InfluxDBv3EnterpriseParameters$: StaticStructureSchema = [3, n0, _IDBEP,
+  0,
+  [_qFL, _qLS, _lF, _lFo, _dFNT, _dFRT, _dFRDLS, _dFREI, _dFRGQI, _dFRMBT, _dFRMIEPT, _dFRTKA, _dFRTP, _dFMPF, _dFUCPL, _dFC, _mHRS, _fSMT, _wSS, _wMWBS, _sWFTK, _pCA, _pMCPP, _pMCPI, _dPMC, _pMCQPD, _lCEI, _dCEI, _gD, _eMPB, _pMCS, _wRFOE, _wRCL, _tICME, _tICCL, _gLD, _rCI, _dGP, _hDDD, _pRU, _pRSA, _iQI, _qOI, _dC, _cRL, _cMNFPP, _cGD, _cM, _cCW, _cCI, _lVCDFH, _dVCDFH, _rIe, _cSI, _uPT, _wBS, _sS, _sD],
+  [1, 1, 0, 0, 1, 0, 2, 1, 1, 1, 1, () => Duration$, 1, 1, 2, 0, 1, () => PercentOrAbsoluteLong$, 1, 1, 1, () => Duration$, 1, () => Duration$, 2, () => Duration$, () => Duration$, () => Duration$, () => Duration$, () => PercentOrAbsoluteLong$, () => PercentOrAbsoluteLong$, 2, 1, 1, 1, () => Duration$, () => Duration$, () => Duration$, () => Duration$, 0, 0, 1, 1, 2, 1, 1, () => Duration$, 0, () => Duration$, () => Duration$, 2, 2, () => Duration$, () => Duration$, 2, 1, () => PercentOrAbsoluteLong$, () => Duration$]
+];
+export var ListDbBackupsInput$: StaticStructureSchema = [3, n0, _LDBI,
+  0,
+  [_dRI, _nTe, _mR],
+  [0, 0, 1]
+];
+export var ListDbBackupsOutput$: StaticStructureSchema = [3, n0, _LDBO,
+  0,
+  [_it, _nTe],
+  [() => DbBackupSummaryList, 0], 1
+];
+export var ListDbClustersInput$: StaticStructureSchema = [3, n0, _LDCI,
+  0,
+  [_nTe, _mR],
+  [0, 1]
+];
+export var ListDbClustersOutput$: StaticStructureSchema = [3, n0, _LDCO,
+  0,
+  [_it, _nTe],
+  [() => DbClusterSummaryList, 0], 1
+];
+export var ListDbInstancesForClusterInput$: StaticStructureSchema = [3, n0, _LDIFCI,
+  0,
+  [_dCI, _nTe, _mR],
+  [0, 0, 1], 1
+];
+export var ListDbInstancesForClusterOutput$: StaticStructureSchema = [3, n0, _LDIFCO,
+  0,
+  [_it, _nTe],
+  [() => DbInstanceForClusterSummaryList, 0], 1
+];
+export var ListDbInstancesInput$: StaticStructureSchema = [3, n0, _LDII,
+  0,
+  [_nTe, _mR],
+  [0, 1]
+];
+export var ListDbInstancesOutput$: StaticStructureSchema = [3, n0, _LDIO,
+  0,
+  [_it, _nTe],
+  [() => DbInstanceSummaryList, 0], 1
+];
+export var ListDbParameterGroupsInput$: StaticStructureSchema = [3, n0, _LDPGI,
+  0,
+  [_nTe, _mR],
+  [0, 1]
+];
+export var ListDbParameterGroupsOutput$: StaticStructureSchema = [3, n0, _LDPGO,
+  0,
+  [_it, _nTe],
+  [() => DbParameterGroupSummaryList, 0], 1
+];
+export var ListTagsForResourceRequest$: StaticStructureSchema = [3, n0, _LTFRR,
+  0,
+  [_rA],
+  [0], 1
+];
+export var ListTagsForResourceResponse$: StaticStructureSchema = [3, n0, _LTFRRi,
+  0,
+  [_t],
+  [128 | 0]
+];
+export var LogDeliveryConfiguration$: StaticStructureSchema = [3, n0, _LDC,
+  0,
+  [_sC],
+  [() => S3Configuration$], 1
+];
+export var MaintenanceSchedule$: StaticStructureSchema = [3, n0, _MS,
+  0,
+  [_ti, _pMW],
+  [0, 0], 2
+];
+export var NodeGroup$: StaticStructureSchema = [3, n0, _NG,
+  0,
+  [_iMn, _iT, _co],
+  [64 | 0, 0, 1], 3
+];
+export var RebootDbClusterInput$: StaticStructureSchema = [3, n0, _RDCI,
+  0,
+  [_dCI, _iI],
+  [0, 64 | 0], 1
+];
+export var RebootDbClusterOutput$: StaticStructureSchema = [3, n0, _RDCO,
+  0,
+  [_dCS],
+  [0]
+];
+export var RebootDbInstanceInput$: StaticStructureSchema = [3, n0, _RDII,
+  0,
+  [_id],
+  [0], 1
+];
+export var RebootDbInstanceOutput$: StaticStructureSchema = [3, n0, _RDIO,
+  0,
+  [_i, _n, _a, _vSI, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT, _pA, _vSGI, _dPGIb, _aZ, _sAZ, _lDC, _iAPSA, _dCI, _iM, _iMn, _mS, _lMT, _nMT, _dBC, _kKI],
+  [0, 0, 0, 64 | 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 | 0, 0, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 0, 64 | 0, () => MaintenanceSchedule$, 5, 5, () => DbBackupConfigurationOutputList, 0], 4
+];
+export var RestoreFromDbBackupInput$: StaticStructureSchema = [3, n0, _RFDBI,
+  0,
+  [_n, _dBI, _rTT, _rM, _vSI, _vSGI, _pA, _lDC, _mS, _t, _p, _nT, _dT, _dBC, _kKI],
+  [0, 0, 5, 0, 64 | 0, 64 | 0, 2, () => LogDeliveryConfiguration$, () => MaintenanceSchedule$, 128 | 0, 1, 0, 0, () => DbBackupConfigurationInputList, 0], 2
+];
+export var RestoreFromDbBackupOutput$: StaticStructureSchema = [3, n0, _RFDBO,
+  0,
+  [_rDRI, _rS, _rT, _eT, _dT],
+  [0, 0, 0, 0, 0]
+];
+export var S3Configuration$: StaticStructureSchema = [3, n0, _SC,
+  0,
+  [_bN, _ena],
+  [0, 2], 2
+];
+export var TagResourceRequest$: StaticStructureSchema = [3, n0, _TRR,
+  0,
+  [_rA, _t],
+  [0, 128 | 0], 2
+];
+export var UntagResourceRequest$: StaticStructureSchema = [3, n0, _URR,
+  0,
+  [_rA, _tK],
+  [[0, 1], 64 | 0], 2
+];
+export var UpdateDbClusterInput$: StaticStructureSchema = [3, n0, _UDCI,
+  0,
+  [_dCI, _lDC, _dPGIb, _p, _dIT, _dCe, _fM, _mS, _dBC],
+  [0, () => LogDeliveryConfiguration$, 0, 1, 0, () => DeploymentConfiguration$, 0, () => MaintenanceSchedule$, () => DbBackupConfigurationInputList], 1
+];
+export var UpdateDbClusterOutput$: StaticStructureSchema = [3, n0, _UDCO,
+  0,
+  [_dCS],
+  [0]
+];
+export var UpdateDbInstanceInput$: StaticStructureSchema = [3, n0, _UDII,
+  0,
+  [_id, _lDC, _dPGIb, _p, _dIT, _dT, _dST, _aS, _mS, _dBC],
+  [0, () => LogDeliveryConfiguration$, 0, 1, 0, 0, 0, 1, () => MaintenanceSchedule$, () => DbBackupConfigurationInputList], 1
+];
+export var UpdateDbInstanceOutput$: StaticStructureSchema = [3, n0, _UDIO,
+  0,
+  [_i, _n, _a, _vSI, _st, _en, _p, _nT, _dIT, _dST, _aS, _dT, _pA, _vSGI, _dPGIb, _aZ, _sAZ, _lDC, _iAPSA, _dCI, _iM, _iMn, _mS, _lMT, _nMT, _dBC, _kKI],
+  [0, 0, 0, 64 | 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 | 0, 0, 0, 0, () => LogDeliveryConfiguration$, 0, 0, 0, 64 | 0, () => MaintenanceSchedule$, 5, 5, () => DbBackupConfigurationOutputList, 0], 4
+];
+var __Unit = "unit" as const;
+var DbBackupConfigurationInputList: StaticListSchema = [1, n0, _DBCIL,
+  0, () => DbBackupConfiguration$
+];
+var DbBackupConfigurationOutputList: StaticListSchema = [1, n0, _DBCOL,
+  0, () => DbBackupConfigurationOutput$
+];
+var DbBackupSummaryList: StaticListSchema = [1, n0, _DBSL,
+  0, () => DbBackupSummary$
+];
+var DbClusterSummaryList: StaticListSchema = [1, n0, _DCSL,
+  0, () => DbClusterSummary$
+];
+var DbInstanceForClusterSummaryList: StaticListSchema = [1, n0, _DIFCSL,
+  0, () => DbInstanceForClusterSummary$
+];
+var DbInstanceIdList = 64 | 0;
+var DbInstanceSummaryList: StaticListSchema = [1, n0, _DISL,
+  0, () => DbInstanceSummary$
+];
+var DbParameterGroupSummaryList: StaticListSchema = [1, n0, _DPGSL,
+  0, () => DbParameterGroupSummary$
+];
+var InstanceModeList = 64 | 0;
+var NodeGroupList: StaticListSchema = [1, n0, _NGL,
+  0, () => NodeGroup$
+];
+var TagKeys = 64 | 0;
+var VpcSecurityGroupIdList = 64 | 0;
+var VpcSubnetIdList = 64 | 0;
+var RequestTagMap = 128 | 0;
+var ResponseTagMap = 128 | 0;
+export var DeploymentConfiguration$: StaticUnionSchema = [4, n0, _DC,
+  0,
+  [_IDBE],
+  [() => InfluxDBv3EnterpriseDeploymentConfiguration$]
+];
+export var _Parameters$: StaticUnionSchema = [4, n0, _Pa,
+  0,
+  [_IDB, _IDBC, _IDBE],
+  [() => InfluxDBv2Parameters$, () => InfluxDBv3CoreParameters$, () => InfluxDBv3EnterpriseParameters$]
+];
+export var PercentOrAbsoluteLong$: StaticUnionSchema = [4, n0, _POAL,
+  0,
+  [_pe, _ab],
+  [0, 1]
+];
+export var CreateDbBackup$: StaticOperationSchema = [9, n0, _CDB,
+  2, () => CreateDbBackupInput$, () => CreateDbBackupOutput$
+];
+export var CreateDbCluster$: StaticOperationSchema = [9, n0, _CDC,
+  2, () => CreateDbClusterInput$, () => CreateDbClusterOutput$
+];
+export var CreateDbInstance$: StaticOperationSchema = [9, n0, _CDI,
+  2, () => CreateDbInstanceInput$, () => CreateDbInstanceOutput$
+];
+export var CreateDbParameterGroup$: StaticOperationSchema = [9, n0, _CDPG,
+  2, () => CreateDbParameterGroupInput$, () => CreateDbParameterGroupOutput$
+];
+export var DeleteDbBackup$: StaticOperationSchema = [9, n0, _DDB,
+  2, () => DeleteDbBackupInput$, () => DeleteDbBackupOutput$
+];
+export var DeleteDbCluster$: StaticOperationSchema = [9, n0, _DDC,
+  2, () => DeleteDbClusterInput$, () => DeleteDbClusterOutput$
+];
+export var DeleteDbInstance$: StaticOperationSchema = [9, n0, _DDI,
+  2, () => DeleteDbInstanceInput$, () => DeleteDbInstanceOutput$
+];
+export var GetDbBackup$: StaticOperationSchema = [9, n0, _GDB,
+  0, () => GetDbBackupInput$, () => GetDbBackupOutput$
+];
+export var GetDbCluster$: StaticOperationSchema = [9, n0, _GDC,
+  0, () => GetDbClusterInput$, () => GetDbClusterOutput$
+];
+export var GetDbInstance$: StaticOperationSchema = [9, n0, _GDI,
+  0, () => GetDbInstanceInput$, () => GetDbInstanceOutput$
+];
+export var GetDbParameterGroup$: StaticOperationSchema = [9, n0, _GDPG,
+  0, () => GetDbParameterGroupInput$, () => GetDbParameterGroupOutput$
+];
+export var ListDbBackups$: StaticOperationSchema = [9, n0, _LDB,
+  0, () => ListDbBackupsInput$, () => ListDbBackupsOutput$
+];
+export var ListDbClusters$: StaticOperationSchema = [9, n0, _LDCi,
+  0, () => ListDbClustersInput$, () => ListDbClustersOutput$
+];
+export var ListDbInstances$: StaticOperationSchema = [9, n0, _LDI,
+  0, () => ListDbInstancesInput$, () => ListDbInstancesOutput$
+];
+export var ListDbInstancesForCluster$: StaticOperationSchema = [9, n0, _LDIFC,
+  0, () => ListDbInstancesForClusterInput$, () => ListDbInstancesForClusterOutput$
+];
+export var ListDbParameterGroups$: StaticOperationSchema = [9, n0, _LDPG,
+  0, () => ListDbParameterGroupsInput$, () => ListDbParameterGroupsOutput$
+];
+export var ListTagsForResource$: StaticOperationSchema = [9, n0, _LTFR,
+  0, () => ListTagsForResourceRequest$, () => ListTagsForResourceResponse$
+];
+export var RebootDbCluster$: StaticOperationSchema = [9, n0, _RDC,
+  2, () => RebootDbClusterInput$, () => RebootDbClusterOutput$
+];
+export var RebootDbInstance$: StaticOperationSchema = [9, n0, _RDI,
+  2, () => RebootDbInstanceInput$, () => RebootDbInstanceOutput$
+];
+export var RestoreFromDbBackup$: StaticOperationSchema = [9, n0, _RFDB,
+  2, () => RestoreFromDbBackupInput$, () => RestoreFromDbBackupOutput$
+];
+export var TagResource$: StaticOperationSchema = [9, n0, _TR,
+  2, () => TagResourceRequest$, () => __Unit
+];
+export var UntagResource$: StaticOperationSchema = [9, n0, _UR,
+  2, () => UntagResourceRequest$, () => __Unit
+];
+export var UpdateDbCluster$: StaticOperationSchema = [9, n0, _UDC,
+  2, () => UpdateDbClusterInput$, () => UpdateDbClusterOutput$
+];
+export var UpdateDbInstance$: StaticOperationSchema = [9, n0, _UDI,
+  2, () => UpdateDbInstanceInput$, () => UpdateDbInstanceOutput$
+];

@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeAssetModelCommand, DescribeAssetModelCommandInput } from "../commands/DescribeAssetModelCommand";
-import { IoTSiteWiseClient } from "../IoTSiteWiseClient";
+import {
+  type DescribeAssetModelCommandInput,
+  type DescribeAssetModelCommandOutput,
+  DescribeAssetModelCommand,
+} from "../commands/DescribeAssetModelCommand";
+import type { IoTSiteWiseClient } from "../IoTSiteWiseClient";
+import type { IoTSiteWiseServiceException } from "../models/IoTSiteWiseServiceException";
 
-const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetModelCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetModelCommandInput): Promise<WaiterResult<DescribeAssetModelCommandOutput | IoTSiteWiseServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeAssetModelCommand(input));
+    let result: DescribeAssetModelCommandOutput & any = await client.send(new DescribeAssetModelCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.assetModelStatus.state;
-      };
+      }
       if (returnComparator() === "ACTIVE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetModelCo
     try {
       const returnComparator = () => {
         return result.assetModelStatus.state;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -36,7 +48,7 @@ const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetModelCo
 export const waitForAssetModelActive = async (
   params: WaiterConfiguration<IoTSiteWiseClient>,
   input: DescribeAssetModelCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAssetModelCommandOutput | IoTSiteWiseServiceException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -48,8 +60,8 @@ export const waitForAssetModelActive = async (
 export const waitUntilAssetModelActive = async (
   params: WaiterConfiguration<IoTSiteWiseClient>,
   input: DescribeAssetModelCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAssetModelCommandOutput>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeAssetModelCommandOutput>;
 };

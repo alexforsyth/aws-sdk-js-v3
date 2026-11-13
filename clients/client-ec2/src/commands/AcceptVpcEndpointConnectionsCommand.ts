@@ -1,101 +1,87 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AcceptVpcEndpointConnectionsRequest, AcceptVpcEndpointConnectionsResult } from "../models/models_0";
-import {
-  deserializeAws_ec2AcceptVpcEndpointConnectionsCommand,
-  serializeAws_ec2AcceptVpcEndpointConnectionsCommand,
-} from "../protocols/Aws_ec2";
-
-export interface AcceptVpcEndpointConnectionsCommandInput extends AcceptVpcEndpointConnectionsRequest {}
-export interface AcceptVpcEndpointConnectionsCommandOutput
-  extends AcceptVpcEndpointConnectionsResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AcceptVpcEndpointConnectionsRequest, AcceptVpcEndpointConnectionsResult } from "../models/models_0";
+import { AcceptVpcEndpointConnections$ } from "../schemas/schemas_0";
 
 /**
- * <p>Accepts one or more interface VPC endpoint connection requests to your VPC endpoint
- *             service.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptVpcEndpointConnectionsCommand}.
+ */
+export interface AcceptVpcEndpointConnectionsCommandInput extends AcceptVpcEndpointConnectionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptVpcEndpointConnectionsCommand}.
+ */
+export interface AcceptVpcEndpointConnectionsCommandOutput extends AcceptVpcEndpointConnectionsResult, __MetadataBearer {}
+
+/**
+ * <p>Accepts connection requests to your VPC endpoint service.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, AcceptVpcEndpointConnectionsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AcceptVpcEndpointConnectionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AcceptVpcEndpointConnectionsRequest
+ *   DryRun: true || false,
+ *   ServiceId: "STRING_VALUE", // required
+ *   VpcEndpointIds: [ // VpcEndpointIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new AcceptVpcEndpointConnectionsCommand(input);
  * const response = await client.send(command);
+ * // { // AcceptVpcEndpointConnectionsResult
+ * //   Unsuccessful: [ // UnsuccessfulItemSet
+ * //     { // UnsuccessfulItem
+ * //       Error: { // UnsuccessfulItemError
+ * //         Code: "STRING_VALUE",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //       ResourceId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param AcceptVpcEndpointConnectionsCommandInput - {@link AcceptVpcEndpointConnectionsCommandInput}
+ * @returns {@link AcceptVpcEndpointConnectionsCommandOutput}
  * @see {@link AcceptVpcEndpointConnectionsCommandInput} for command's `input` shape.
  * @see {@link AcceptVpcEndpointConnectionsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptVpcEndpointConnectionsCommand extends $Command<
-  AcceptVpcEndpointConnectionsCommandInput,
-  AcceptVpcEndpointConnectionsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptVpcEndpointConnectionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptVpcEndpointConnectionsCommandInput, AcceptVpcEndpointConnectionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AcceptVpcEndpointConnectionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptVpcEndpointConnectionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptVpcEndpointConnectionsResult.filterSensitiveLog,
+export class AcceptVpcEndpointConnectionsCommand extends command<AcceptVpcEndpointConnectionsCommandInput, AcceptVpcEndpointConnectionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptVpcEndpointConnections",
+  AcceptVpcEndpointConnections$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptVpcEndpointConnectionsRequest;
+      output: AcceptVpcEndpointConnectionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AcceptVpcEndpointConnectionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2AcceptVpcEndpointConnectionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AcceptVpcEndpointConnectionsCommandOutput> {
-    return deserializeAws_ec2AcceptVpcEndpointConnectionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptVpcEndpointConnectionsCommandInput;
+      output: AcceptVpcEndpointConnectionsCommandOutput;
+    };
+  };
 }

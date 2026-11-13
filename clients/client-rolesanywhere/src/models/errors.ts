@@ -1,0 +1,117 @@
+// smithy-typescript generated code
+import type { ExceptionOptionType as __ExceptionOptionType } from "@smithy/core/client";
+
+import { RolesAnywhereServiceException as __BaseException } from "./RolesAnywhereServiceException";
+
+/**
+ * <p>You do not have sufficient access to perform this action.</p>
+ * @public
+ */
+export class AccessDeniedException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.rolesanywhere#AccessDeniedException";
+  readonly name = "AccessDeniedException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
+    super({
+      name: "AccessDeniedException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, AccessDeniedException.prototype);
+  }
+}
+
+/**
+ * <p>The request has failed due to a temporary failure of the service.</p>
+ * @public
+ */
+export class ServiceUnavailableException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.rolesanywhere#ServiceUnavailableException";
+  readonly name = "ServiceUnavailableException" as const;
+  readonly $fault = "server" as const;
+  $retryable = {};
+  /**
+   * <p>The recommended number of seconds after which the client should retry the request.</p>
+   * @public
+   */
+  retryAfterSeconds?: number | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ServiceUnavailableException, __BaseException>) {
+    super({
+      name: "ServiceUnavailableException",
+      $fault: "server",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ServiceUnavailableException.prototype);
+    this.retryAfterSeconds = opts.retryAfterSeconds;
+  }
+}
+
+/**
+ * <p>Validation exception error.</p>
+ * @public
+ */
+export class ValidationException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.rolesanywhere#ValidationException";
+  readonly name = "ValidationException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ValidationException, __BaseException>) {
+    super({
+      name: "ValidationException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ValidationException.prototype);
+  }
+}
+
+/**
+ * <p>The resource could not be found.</p>
+ * @public
+ */
+export class ResourceNotFoundException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.rolesanywhere#ResourceNotFoundException";
+  readonly name = "ResourceNotFoundException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
+    super({
+      name: "ResourceNotFoundException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
+  }
+}
+
+/**
+ * <p>Too many tags.</p>
+ * @public
+ */
+export class TooManyTagsException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.rolesanywhere#TooManyTagsException";
+  readonly name = "TooManyTagsException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<TooManyTagsException, __BaseException>) {
+    super({
+      name: "TooManyTagsException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, TooManyTagsException.prototype);
+  }
+}

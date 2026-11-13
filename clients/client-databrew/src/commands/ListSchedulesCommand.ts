@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { ListSchedulesRequest, ListSchedulesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSchedulesCommand,
-  serializeAws_restJson1ListSchedulesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSchedulesRequest, ListSchedulesResponse } from "../models/models_0";
+import { ListSchedules$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSchedulesCommand}.
+ */
 export interface ListSchedulesCommandInput extends ListSchedulesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSchedulesCommand}.
+ */
 export interface ListSchedulesCommandOutput extends ListSchedulesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,70 @@ export interface ListSchedulesCommandOutput extends ListSchedulesResponse, __Met
  * ```javascript
  * import { DataBrewClient, ListSchedulesCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, ListSchedulesCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // ListSchedulesRequest
+ *   JobName: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListSchedulesCommand(input);
  * const response = await client.send(command);
+ * // { // ListSchedulesResponse
+ * //   Schedules: [ // ScheduleList // required
+ * //     { // Schedule
+ * //       AccountId: "STRING_VALUE",
+ * //       CreatedBy: "STRING_VALUE",
+ * //       CreateDate: new Date("TIMESTAMP"),
+ * //       JobNames: [ // JobNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       LastModifiedBy: "STRING_VALUE",
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       ResourceArn: "STRING_VALUE",
+ * //       CronExpression: "STRING_VALUE",
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSchedulesCommandInput - {@link ListSchedulesCommandInput}
+ * @returns {@link ListSchedulesCommandOutput}
  * @see {@link ListSchedulesCommandInput} for command's `input` shape.
  * @see {@link ListSchedulesCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class ListSchedulesCommand extends $Command<
-  ListSchedulesCommandInput,
-  ListSchedulesCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSchedulesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSchedulesCommandInput, ListSchedulesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "ListSchedulesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSchedulesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSchedulesResponse.filterSensitiveLog,
+export class ListSchedulesCommand extends command<ListSchedulesCommandInput, ListSchedulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSchedules",
+  ListSchedules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSchedulesRequest;
+      output: ListSchedulesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSchedulesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSchedulesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSchedulesCommandOutput> {
-    return deserializeAws_restJson1ListSchedulesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSchedulesCommandInput;
+      output: ListSchedulesCommandOutput;
+    };
+  };
 }

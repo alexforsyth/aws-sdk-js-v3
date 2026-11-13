@@ -1,97 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteMembersRequest, DeleteMembersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeleteMembersCommand,
-  serializeAws_restJson1DeleteMembersCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMembersRequest, DeleteMembersResponse } from "../models/models_2";
+import { DeleteMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMembersCommand}.
+ */
 export interface DeleteMembersCommandInput extends DeleteMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMembersCommand}.
+ */
 export interface DeleteMembersCommandOutput extends DeleteMembersResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes the specified member accounts from Security Hub.</p>
- *          <p>Can be used to delete member accounts that belong to an organization as well as member
- *          accounts that were invited manually.</p>
+ * <p>Deletes the specified member accounts from Security Hub CSPM.</p>
+ *          <p>You can invoke this API only to delete accounts that became members through invitation. You can't invoke this
+ *         API to delete accounts that belong to an Organizations organization.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, DeleteMembersCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, DeleteMembersCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // DeleteMembersRequest
+ *   AccountIds: [ // AccountIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DeleteMembersCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteMembersResponse
+ * //   UnprocessedAccounts: [ // ResultList
+ * //     { // Result
+ * //       AccountId: "STRING_VALUE",
+ * //       ProcessingResult: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteMembersCommandInput - {@link DeleteMembersCommandInput}
+ * @returns {@link DeleteMembersCommandOutput}
  * @see {@link DeleteMembersCommandInput} for command's `input` shape.
  * @see {@link DeleteMembersCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To delete a member account
+ * ```javascript
+ * // The following example deletes the specified member account from Security Hub. This operation can be used to delete member accounts that are part of an organization or that were invited manually.
+ * const input = {
+ *   AccountIds: [
+ *     "123456789111",
+ *     "123456789222"
+ *   ]
+ * };
+ * const command = new DeleteMembersCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   UnprocessedAccounts:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteMembersCommand extends $Command<
-  DeleteMembersCommandInput,
-  DeleteMembersCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMembersCommandInput, DeleteMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "DeleteMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMembersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMembersResponse.filterSensitiveLog,
+export class DeleteMembersCommand extends command<DeleteMembersCommandInput, DeleteMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMembers",
+  DeleteMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMembersRequest;
+      output: DeleteMembersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteMembersCommandOutput> {
-    return deserializeAws_restJson1DeleteMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMembersCommandInput;
+      output: DeleteMembersCommandOutput;
+    };
+  };
 }

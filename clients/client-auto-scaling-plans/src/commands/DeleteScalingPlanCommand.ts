@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingPlansClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingPlansClient";
-import { DeleteScalingPlanRequest, DeleteScalingPlanResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteScalingPlanCommand,
-  serializeAws_json1_1DeleteScalingPlanCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteScalingPlanRequest, DeleteScalingPlanResponse } from "../models/models_0";
+import { DeleteScalingPlan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteScalingPlanCommand}.
+ */
 export interface DeleteScalingPlanCommandInput extends DeleteScalingPlanRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteScalingPlanCommand}.
+ */
 export interface DeleteScalingPlanCommandOutput extends DeleteScalingPlanResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +33,59 @@ export interface DeleteScalingPlanCommandOutput extends DeleteScalingPlanRespons
  * ```javascript
  * import { AutoScalingPlansClient, DeleteScalingPlanCommand } from "@aws-sdk/client-auto-scaling-plans"; // ES Modules import
  * // const { AutoScalingPlansClient, DeleteScalingPlanCommand } = require("@aws-sdk/client-auto-scaling-plans"); // CommonJS import
+ * // import type { AutoScalingPlansClientConfig } from "@aws-sdk/client-auto-scaling-plans";
+ * const config = {}; // type is AutoScalingPlansClientConfig
  * const client = new AutoScalingPlansClient(config);
+ * const input = { // DeleteScalingPlanRequest
+ *   ScalingPlanName: "STRING_VALUE", // required
+ *   ScalingPlanVersion: Number("long"), // required
+ * };
  * const command = new DeleteScalingPlanCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteScalingPlanCommandInput - {@link DeleteScalingPlanCommandInput}
+ * @returns {@link DeleteScalingPlanCommandOutput}
  * @see {@link DeleteScalingPlanCommandInput} for command's `input` shape.
  * @see {@link DeleteScalingPlanCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingPlansClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingPlansClientResolvedConfig | config} for AutoScalingPlansClient's `config` shape.
  *
+ * @throws {@link ConcurrentUpdateException} (server fault)
+ *  <p>Concurrent updates caused an exception, for example, if you request an update to a
+ *          scaling plan that already has a pending update.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an internal error.</p>
+ *
+ * @throws {@link ObjectNotFoundException} (client fault)
+ *  <p>The specified object could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception was thrown for a validation issue. Review the parameters provided.</p>
+ *
+ * @throws {@link AutoScalingPlansServiceException}
+ * <p>Base exception class for all service exceptions from AutoScalingPlans service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteScalingPlanCommand extends $Command<
-  DeleteScalingPlanCommandInput,
-  DeleteScalingPlanCommandOutput,
-  AutoScalingPlansClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteScalingPlanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingPlansClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteScalingPlanCommandInput, DeleteScalingPlanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingPlansClient";
-    const commandName = "DeleteScalingPlanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteScalingPlanRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteScalingPlanResponse.filterSensitiveLog,
+export class DeleteScalingPlanCommand extends command<DeleteScalingPlanCommandInput, DeleteScalingPlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteScalingPlan",
+  DeleteScalingPlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteScalingPlanRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteScalingPlanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteScalingPlanCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteScalingPlanCommandOutput> {
-    return deserializeAws_json1_1DeleteScalingPlanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteScalingPlanCommandInput;
+      output: DeleteScalingPlanCommandOutput;
+    };
+  };
 }

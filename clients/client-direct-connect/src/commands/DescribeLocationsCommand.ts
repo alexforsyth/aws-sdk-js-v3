@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectConnectClient";
-import { Locations } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeLocationsCommand,
-  serializeAws_json1_1DescribeLocationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { Locations } from "../models/models_0";
+import { DescribeLocations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLocationsCommand}.
+ */
 export interface DescribeLocationsCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLocationsCommand}.
+ */
 export interface DescribeLocationsCommandOutput extends Locations, __MetadataBearer {}
 
 /**
@@ -29,68 +30,77 @@ export interface DescribeLocationsCommandOutput extends Locations, __MetadataBea
  * ```javascript
  * import { DirectConnectClient, DescribeLocationsCommand } from "@aws-sdk/client-direct-connect"; // ES Modules import
  * // const { DirectConnectClient, DescribeLocationsCommand } = require("@aws-sdk/client-direct-connect"); // CommonJS import
+ * // import type { DirectConnectClientConfig } from "@aws-sdk/client-direct-connect";
+ * const config = {}; // type is DirectConnectClientConfig
  * const client = new DirectConnectClient(config);
+ * const input = {};
  * const command = new DescribeLocationsCommand(input);
  * const response = await client.send(command);
+ * // { // Locations
+ * //   locations: [ // LocationList
+ * //     { // Location
+ * //       locationCode: "STRING_VALUE",
+ * //       locationName: "STRING_VALUE",
+ * //       region: "STRING_VALUE",
+ * //       availablePortSpeeds: [ // AvailablePortSpeeds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       availableProviders: [ // ProviderList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       availableMacSecPortSpeeds: [ // AvailableMacSecPortSpeeds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       availableBillingModes: [ // AvailableBillingModeList
+ * //         { // AvailableBillingMode
+ * //           billingMode: "PayAsYouGo" || "FlatRateTier1" || "FlatRateTier2" || "FlatRateTier3" || "FlatRateTier4" || "FlatRateTier5" || "PortPairFlatRateTier1" || "PortPairFlatRateTier2" || "PortPairFlatRateTier3" || "PortPairFlatRateTier4" || "PortPairFlatRateTier5",
+ * //           availablePortSpeeds: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           includedRegions: [ // IncludedRegionList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeLocationsCommandInput - {@link DescribeLocationsCommandInput}
+ * @returns {@link DescribeLocationsCommandOutput}
  * @see {@link DescribeLocationsCommandInput} for command's `input` shape.
  * @see {@link DescribeLocationsCommandOutput} for command's `response` shape.
- * @see {@link DirectConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectConnectClientResolvedConfig | config} for DirectConnectClient's `config` shape.
  *
+ * @throws {@link DirectConnectClientException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link DirectConnectServerException} (server fault)
+ *  <p>A server-side error occurred.</p>
+ *
+ * @throws {@link DirectConnectServiceException}
+ * <p>Base exception class for all service exceptions from DirectConnect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeLocationsCommand extends $Command<
-  DescribeLocationsCommandInput,
-  DescribeLocationsCommandOutput,
-  DirectConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLocationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLocationsCommandInput, DescribeLocationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectConnectClient";
-    const commandName = "DescribeLocationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: Locations.filterSensitiveLog,
+export class DescribeLocationsCommand extends command<DescribeLocationsCommandInput, DescribeLocationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLocations",
+  DescribeLocations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: Locations;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeLocationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeLocationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeLocationsCommandOutput> {
-    return deserializeAws_json1_1DescribeLocationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLocationsCommandInput;
+      output: DescribeLocationsCommandOutput;
+    };
+  };
 }

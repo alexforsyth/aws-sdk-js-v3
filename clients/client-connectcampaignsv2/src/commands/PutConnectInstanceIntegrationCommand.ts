@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutConnectInstanceIntegrationRequest } from "../models/models_0";
+import { PutConnectInstanceIntegration$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutConnectInstanceIntegrationCommand}.
+ */
+export interface PutConnectInstanceIntegrationCommandInput extends PutConnectInstanceIntegrationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutConnectInstanceIntegrationCommand}.
+ */
+export interface PutConnectInstanceIntegrationCommandOutput extends __MetadataBearer {}
+
+/**
+ * Put or update the integration for the specified Amazon Connect instance.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectCampaignsV2Client, PutConnectInstanceIntegrationCommand } from "@aws-sdk/client-connectcampaignsv2"; // ES Modules import
+ * // const { ConnectCampaignsV2Client, PutConnectInstanceIntegrationCommand } = require("@aws-sdk/client-connectcampaignsv2"); // CommonJS import
+ * // import type { ConnectCampaignsV2ClientConfig } from "@aws-sdk/client-connectcampaignsv2";
+ * const config = {}; // type is ConnectCampaignsV2ClientConfig
+ * const client = new ConnectCampaignsV2Client(config);
+ * const input = { // PutConnectInstanceIntegrationRequest
+ *   connectInstanceId: "STRING_VALUE", // required
+ *   integrationConfig: { // IntegrationConfig Union: only one key present
+ *     customerProfiles: { // CustomerProfilesIntegrationConfig
+ *       domainArn: "STRING_VALUE", // required
+ *       objectTypeNames: { // ObjectTypeNamesMap // required
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *     qConnect: { // QConnectIntegrationConfig
+ *       knowledgeBaseArn: "STRING_VALUE", // required
+ *     },
+ *     lambda: { // LambdaIntegrationConfig
+ *       functionArn: "STRING_VALUE", // required
+ *     },
+ *   },
+ * };
+ * const command = new PutConnectInstanceIntegrationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param PutConnectInstanceIntegrationCommandInput - {@link PutConnectInstanceIntegrationCommandInput}
+ * @returns {@link PutConnectInstanceIntegrationCommandOutput}
+ * @see {@link PutConnectInstanceIntegrationCommandInput} for command's `input` shape.
+ * @see {@link PutConnectInstanceIntegrationCommandOutput} for command's `response` shape.
+ * @see {@link ConnectCampaignsV2ClientResolvedConfig | config} for ConnectCampaignsV2Client's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The request could not be processed because of conflict in the current state of the resource.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  The request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsV2ServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaignsV2 service.</p>
+ *
+ *
+ * @public
+ */
+export class PutConnectInstanceIntegrationCommand extends command<PutConnectInstanceIntegrationCommandInput, PutConnectInstanceIntegrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutConnectInstanceIntegration",
+  PutConnectInstanceIntegration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutConnectInstanceIntegrationRequest;
+      output: {};
+    };
+    sdk: {
+      input: PutConnectInstanceIntegrationCommandInput;
+      output: PutConnectInstanceIntegrationCommandOutput;
+    };
+  };
+}

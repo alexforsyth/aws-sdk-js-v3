@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AcceptTransitGatewayPeeringAttachmentRequest,
   AcceptTransitGatewayPeeringAttachmentResult,
 } from "../models/models_0";
-import {
-  deserializeAws_ec2AcceptTransitGatewayPeeringAttachmentCommand,
-  serializeAws_ec2AcceptTransitGatewayPeeringAttachmentCommand,
-} from "../protocols/Aws_ec2";
+import { AcceptTransitGatewayPeeringAttachment$ } from "../schemas/schemas_0";
 
-export interface AcceptTransitGatewayPeeringAttachmentCommandInput
-  extends AcceptTransitGatewayPeeringAttachmentRequest {}
-export interface AcceptTransitGatewayPeeringAttachmentCommandOutput
-  extends AcceptTransitGatewayPeeringAttachmentResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptTransitGatewayPeeringAttachmentCommand}.
+ */
+export interface AcceptTransitGatewayPeeringAttachmentCommandInput extends AcceptTransitGatewayPeeringAttachmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptTransitGatewayPeeringAttachmentCommand}.
+ */
+export interface AcceptTransitGatewayPeeringAttachmentCommandOutput extends AcceptTransitGatewayPeeringAttachmentResult, __MetadataBearer {}
 
 /**
  * <p>Accepts a transit gateway peering attachment request. The peering attachment must be
@@ -35,74 +33,78 @@ export interface AcceptTransitGatewayPeeringAttachmentCommandOutput
  * ```javascript
  * import { EC2Client, AcceptTransitGatewayPeeringAttachmentCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AcceptTransitGatewayPeeringAttachmentCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AcceptTransitGatewayPeeringAttachmentRequest
+ *   TransitGatewayAttachmentId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new AcceptTransitGatewayPeeringAttachmentCommand(input);
  * const response = await client.send(command);
+ * // { // AcceptTransitGatewayPeeringAttachmentResult
+ * //   TransitGatewayPeeringAttachment: { // TransitGatewayPeeringAttachment
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     AccepterTransitGatewayAttachmentId: "STRING_VALUE",
+ * //     RequesterTgwInfo: { // PeeringTgwInfo
+ * //       TransitGatewayId: "STRING_VALUE",
+ * //       CoreNetworkId: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     AccepterTgwInfo: {
+ * //       TransitGatewayId: "STRING_VALUE",
+ * //       CoreNetworkId: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     Options: { // TransitGatewayPeeringAttachmentOptions
+ * //       DynamicRouting: "enable" || "disable",
+ * //     },
+ * //     Status: { // PeeringAttachmentStatus
+ * //       Code: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     State: "initiating" || "initiatingRequest" || "pendingAcceptance" || "rollingBack" || "pending" || "available" || "modifying" || "deleting" || "deleted" || "failed" || "rejected" || "rejecting" || "failing",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AcceptTransitGatewayPeeringAttachmentCommandInput - {@link AcceptTransitGatewayPeeringAttachmentCommandInput}
+ * @returns {@link AcceptTransitGatewayPeeringAttachmentCommandOutput}
  * @see {@link AcceptTransitGatewayPeeringAttachmentCommandInput} for command's `input` shape.
  * @see {@link AcceptTransitGatewayPeeringAttachmentCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptTransitGatewayPeeringAttachmentCommand extends $Command<
-  AcceptTransitGatewayPeeringAttachmentCommandInput,
-  AcceptTransitGatewayPeeringAttachmentCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptTransitGatewayPeeringAttachmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptTransitGatewayPeeringAttachmentCommandInput, AcceptTransitGatewayPeeringAttachmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AcceptTransitGatewayPeeringAttachmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptTransitGatewayPeeringAttachmentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptTransitGatewayPeeringAttachmentResult.filterSensitiveLog,
+export class AcceptTransitGatewayPeeringAttachmentCommand extends command<AcceptTransitGatewayPeeringAttachmentCommandInput, AcceptTransitGatewayPeeringAttachmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptTransitGatewayPeeringAttachment",
+  AcceptTransitGatewayPeeringAttachment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptTransitGatewayPeeringAttachmentRequest;
+      output: AcceptTransitGatewayPeeringAttachmentResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AcceptTransitGatewayPeeringAttachmentCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2AcceptTransitGatewayPeeringAttachmentCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AcceptTransitGatewayPeeringAttachmentCommandOutput> {
-    return deserializeAws_ec2AcceptTransitGatewayPeeringAttachmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptTransitGatewayPeeringAttachmentCommandInput;
+      output: AcceptTransitGatewayPeeringAttachmentCommandOutput;
+    };
+  };
 }

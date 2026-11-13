@@ -1,0 +1,125 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TransferContactRequest, TransferContactResponse } from "../models/models_3";
+import { TransferContact$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TransferContactCommand}.
+ */
+export interface TransferContactCommandInput extends TransferContactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TransferContactCommand}.
+ */
+export interface TransferContactCommandOutput extends TransferContactResponse, __MetadataBearer {}
+
+/**
+ * <p>Transfers <code>TASK</code> or <code>EMAIL</code>
+ *     contacts from one agent or queue to another agent or queue at any point after a contact is
+ *    created. You can transfer a contact to another queue by providing the flow which orchestrates the contact to the
+ *    destination queue. This gives you more control over contact handling and helps you adhere to the service level
+ *    agreement (SLA) guaranteed to your customers.</p>
+ *          <p>Note the following requirements:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Transfer is only supported for <code>TASK</code> and <code>EMAIL</code> contacts.</p>
+ *             </li>
+ *             <li>
+ *                <p>Do not use both <code>QueueId</code> and <code>UserId</code> in the same call.</p>
+ *             </li>
+ *             <li>
+ *                <p>The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer to queue
+ *      flow.</p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>TransferContact</code> API can be called only on active contacts.</p>
+ *             </li>
+ *             <li>
+ *                <p>A contact cannot be transferred more than 11 times.</p>
+ *             </li>
+ *          </ul>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, TransferContactCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, TransferContactCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // TransferContactRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactId: "STRING_VALUE", // required
+ *   QueueId: "STRING_VALUE",
+ *   UserId: "STRING_VALUE",
+ *   ContactFlowId: "STRING_VALUE", // required
+ *   ClientToken: "STRING_VALUE",
+ * };
+ * const command = new TransferContactCommand(input);
+ * const response = await client.send(command);
+ * // { // TransferContactResponse
+ * //   ContactId: "STRING_VALUE",
+ * //   ContactArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param TransferContactCommandInput - {@link TransferContactCommandInput}
+ * @returns {@link TransferContactCommandOutput}
+ * @see {@link TransferContactCommandInput} for command's `input` shape.
+ * @see {@link TransferContactCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link IdempotencyException} (client fault)
+ *  <p>An entity with the same name already exists.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class TransferContactCommand extends command<TransferContactCommandInput, TransferContactCommandOutput>(
+  _ep0,
+  _mw0,
+  "TransferContact",
+  TransferContact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TransferContactRequest;
+      output: TransferContactResponse;
+    };
+    sdk: {
+      input: TransferContactCommandInput;
+      output: TransferContactCommandOutput;
+    };
+  };
+}

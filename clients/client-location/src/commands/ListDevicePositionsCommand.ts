@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { ListDevicePositionsRequest, ListDevicePositionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDevicePositionsCommand,
-  serializeAws_restJson1ListDevicePositionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDevicePositionsRequest, ListDevicePositionsResponse } from "../models/models_0";
+import { ListDevicePositions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDevicePositionsCommand}.
+ */
 export interface ListDevicePositionsCommandInput extends ListDevicePositionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDevicePositionsCommand}.
+ */
 export interface ListDevicePositionsCommandOutput extends ListDevicePositionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,85 @@ export interface ListDevicePositionsCommandOutput extends ListDevicePositionsRes
  * ```javascript
  * import { LocationClient, ListDevicePositionsCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, ListDevicePositionsCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // ListDevicePositionsRequest
+ *   TrackerName: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   FilterGeometry: { // TrackingFilterGeometry
+ *     Polygon: [ // LinearRings
+ *       [ // LinearRing
+ *         [ // Position
+ *           Number("double"),
+ *         ],
+ *       ],
+ *     ],
+ *   },
+ * };
  * const command = new ListDevicePositionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDevicePositionsResponse
+ * //   Entries: [ // ListDevicePositionsResponseEntryList // required
+ * //     { // ListDevicePositionsResponseEntry
+ * //       DeviceId: "STRING_VALUE", // required
+ * //       SampleTime: new Date("TIMESTAMP"), // required
+ * //       Position: [ // Position // required
+ * //         Number("double"),
+ * //       ],
+ * //       Accuracy: { // PositionalAccuracy
+ * //         Horizontal: Number("double"), // required
+ * //       },
+ * //       PositionProperties: { // PositionPropertyMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDevicePositionsCommandInput - {@link ListDevicePositionsCommandInput}
+ * @returns {@link ListDevicePositionsCommandOutput}
  * @see {@link ListDevicePositionsCommandInput} for command's `input` shape.
  * @see {@link ListDevicePositionsCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class ListDevicePositionsCommand extends $Command<
-  ListDevicePositionsCommandInput,
-  ListDevicePositionsCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDevicePositionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDevicePositionsCommandInput, ListDevicePositionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "ListDevicePositionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDevicePositionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDevicePositionsResponse.filterSensitiveLog,
+export class ListDevicePositionsCommand extends command<ListDevicePositionsCommandInput, ListDevicePositionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDevicePositions",
+  ListDevicePositions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDevicePositionsRequest;
+      output: ListDevicePositionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDevicePositionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDevicePositionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDevicePositionsCommandOutput> {
-    return deserializeAws_restJson1ListDevicePositionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDevicePositionsCommandInput;
+      output: ListDevicePositionsCommandOutput;
+    };
+  };
 }

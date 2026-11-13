@@ -1,30 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeProjectVersionsRequest, DescribeProjectVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeProjectVersionsCommand,
-  serializeAws_json1_1DescribeProjectVersionsCommand,
-} from "../protocols/Aws_json1_1";
-import { RekognitionClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RekognitionClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeProjectVersionsRequest, DescribeProjectVersionsResponse } from "../models/models_0";
+import { DescribeProjectVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeProjectVersionsCommand}.
+ */
 export interface DescribeProjectVersionsCommandInput extends DescribeProjectVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeProjectVersionsCommand}.
+ */
 export interface DescribeProjectVersionsCommandOutput extends DescribeProjectVersionsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists and describes the models in an Amazon Rekognition Custom Labels project. You
- *          can specify up to 10 model versions in <code>ProjectVersionArns</code>. If
- *          you don't specify a value, descriptions for all models are returned.</p>
+ * <p>Lists and describes the versions of an Amazon Rekognition project. You can specify up to 10 model or
+ *          adapter versions in <code>ProjectVersionArns</code>. If you don't specify a value,
+ *          descriptions for all model/adapter versions in the project are returned.</p>
  *          <p>This operation requires permissions to perform the <code>rekognition:DescribeProjectVersions</code>
  *             action.</p>
  * @example
@@ -32,68 +33,182 @@ export interface DescribeProjectVersionsCommandOutput extends DescribeProjectVer
  * ```javascript
  * import { RekognitionClient, DescribeProjectVersionsCommand } from "@aws-sdk/client-rekognition"; // ES Modules import
  * // const { RekognitionClient, DescribeProjectVersionsCommand } = require("@aws-sdk/client-rekognition"); // CommonJS import
+ * // import type { RekognitionClientConfig } from "@aws-sdk/client-rekognition";
+ * const config = {}; // type is RekognitionClientConfig
  * const client = new RekognitionClient(config);
+ * const input = { // DescribeProjectVersionsRequest
+ *   ProjectArn: "STRING_VALUE", // required
+ *   VersionNames: [ // VersionNames
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeProjectVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeProjectVersionsResponse
+ * //   ProjectVersionDescriptions: [ // ProjectVersionDescriptions
+ * //     { // ProjectVersionDescription
+ * //       ProjectVersionArn: "STRING_VALUE",
+ * //       CreationTimestamp: new Date("TIMESTAMP"),
+ * //       MinInferenceUnits: Number("int"),
+ * //       Status: "TRAINING_IN_PROGRESS" || "TRAINING_COMPLETED" || "TRAINING_FAILED" || "STARTING" || "RUNNING" || "FAILED" || "STOPPING" || "STOPPED" || "DELETING" || "COPYING_IN_PROGRESS" || "COPYING_COMPLETED" || "COPYING_FAILED" || "DEPRECATED" || "EXPIRED",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       BillableTrainingTimeInSeconds: Number("long"),
+ * //       TrainingEndTimestamp: new Date("TIMESTAMP"),
+ * //       OutputConfig: { // OutputConfig
+ * //         S3Bucket: "STRING_VALUE",
+ * //         S3KeyPrefix: "STRING_VALUE",
+ * //       },
+ * //       TrainingDataResult: { // TrainingDataResult
+ * //         Input: { // TrainingData
+ * //           Assets: [ // Assets
+ * //             { // Asset
+ * //               GroundTruthManifest: { // GroundTruthManifest
+ * //                 S3Object: { // S3Object
+ * //                   Bucket: "STRING_VALUE",
+ * //                   Name: "STRING_VALUE",
+ * //                   Version: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //         Output: {
+ * //           Assets: [
+ * //             {
+ * //               GroundTruthManifest: {
+ * //                 S3Object: {
+ * //                   Bucket: "STRING_VALUE",
+ * //                   Name: "STRING_VALUE",
+ * //                   Version: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //         Validation: { // ValidationData
+ * //           Assets: [
+ * //             {
+ * //               GroundTruthManifest: {
+ * //                 S3Object: {
+ * //                   Bucket: "STRING_VALUE",
+ * //                   Name: "STRING_VALUE",
+ * //                   Version: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //       TestingDataResult: { // TestingDataResult
+ * //         Input: { // TestingData
+ * //           Assets: [
+ * //             {
+ * //               GroundTruthManifest: {
+ * //                 S3Object: {
+ * //                   Bucket: "STRING_VALUE",
+ * //                   Name: "STRING_VALUE",
+ * //                   Version: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //           ],
+ * //           AutoCreate: true || false,
+ * //         },
+ * //         Output: {
+ * //           Assets: [
+ * //             {
+ * //               GroundTruthManifest: {
+ * //                 S3Object: {
+ * //                   Bucket: "STRING_VALUE",
+ * //                   Name: "STRING_VALUE",
+ * //                   Version: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //           ],
+ * //           AutoCreate: true || false,
+ * //         },
+ * //         Validation: {
+ * //           Assets: "<Assets>",
+ * //         },
+ * //       },
+ * //       EvaluationResult: { // EvaluationResult
+ * //         F1Score: Number("float"),
+ * //         Summary: { // Summary
+ * //           S3Object: "<S3Object>",
+ * //         },
+ * //       },
+ * //       ManifestSummary: "<GroundTruthManifest>",
+ * //       KmsKeyId: "STRING_VALUE",
+ * //       MaxInferenceUnits: Number("int"),
+ * //       SourceProjectVersionArn: "STRING_VALUE",
+ * //       VersionDescription: "STRING_VALUE",
+ * //       Feature: "CONTENT_MODERATION" || "CUSTOM_LABELS",
+ * //       BaseModelVersion: "STRING_VALUE",
+ * //       FeatureConfig: { // CustomizationFeatureConfig
+ * //         ContentModeration: { // CustomizationFeatureContentModerationConfig
+ * //           ConfidenceThreshold: Number("float"),
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeProjectVersionsCommandInput - {@link DescribeProjectVersionsCommandInput}
+ * @returns {@link DescribeProjectVersionsCommandOutput}
  * @see {@link DescribeProjectVersionsCommandInput} for command's `input` shape.
  * @see {@link DescribeProjectVersionsCommandOutput} for command's `response` shape.
- * @see {@link RekognitionClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RekognitionClientResolvedConfig | config} for RekognitionClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to perform the action.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Amazon Rekognition experienced a service issue. Try your call again.</p>
+ *
+ * @throws {@link InvalidPaginationTokenException} (client fault)
+ *  <p>Pagination token in the request is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Input parameter violated a constraint. Validate your parameter before calling the API
+ *       operation again.</p>
+ *
+ * @throws {@link ProvisionedThroughputExceededException} (client fault)
+ *  <p>The number of requests exceeded your throughput limit. If you want to increase this
+ *       limit, contact Amazon Rekognition.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (server fault)
+ *  <p>Amazon Rekognition is temporarily unable to process the request. Try your call again.</p>
+ *
+ * @throws {@link RekognitionServiceException}
+ * <p>Base exception class for all service exceptions from Rekognition service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeProjectVersionsCommand extends $Command<
-  DescribeProjectVersionsCommandInput,
-  DescribeProjectVersionsCommandOutput,
-  RekognitionClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeProjectVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RekognitionClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeProjectVersionsCommandInput, DescribeProjectVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RekognitionClient";
-    const commandName = "DescribeProjectVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeProjectVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeProjectVersionsResponse.filterSensitiveLog,
+export class DescribeProjectVersionsCommand extends command<DescribeProjectVersionsCommandInput, DescribeProjectVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeProjectVersions",
+  DescribeProjectVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProjectVersionsRequest;
+      output: DescribeProjectVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeProjectVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeProjectVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeProjectVersionsCommandOutput> {
-    return deserializeAws_json1_1DescribeProjectVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeProjectVersionsCommandInput;
+      output: DescribeProjectVersionsCommandOutput;
+    };
+  };
 }

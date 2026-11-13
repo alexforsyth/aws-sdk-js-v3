@@ -1,200 +1,232 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddFacetToObjectCommandInput, AddFacetToObjectCommandOutput } from "./commands/AddFacetToObjectCommand";
-import { ApplySchemaCommandInput, ApplySchemaCommandOutput } from "./commands/ApplySchemaCommand";
-import { AttachObjectCommandInput, AttachObjectCommandOutput } from "./commands/AttachObjectCommand";
-import { AttachPolicyCommandInput, AttachPolicyCommandOutput } from "./commands/AttachPolicyCommand";
-import { AttachToIndexCommandInput, AttachToIndexCommandOutput } from "./commands/AttachToIndexCommand";
-import { AttachTypedLinkCommandInput, AttachTypedLinkCommandOutput } from "./commands/AttachTypedLinkCommand";
-import { BatchReadCommandInput, BatchReadCommandOutput } from "./commands/BatchReadCommand";
-import { BatchWriteCommandInput, BatchWriteCommandOutput } from "./commands/BatchWriteCommand";
-import { CreateDirectoryCommandInput, CreateDirectoryCommandOutput } from "./commands/CreateDirectoryCommand";
-import { CreateFacetCommandInput, CreateFacetCommandOutput } from "./commands/CreateFacetCommand";
-import { CreateIndexCommandInput, CreateIndexCommandOutput } from "./commands/CreateIndexCommand";
-import { CreateObjectCommandInput, CreateObjectCommandOutput } from "./commands/CreateObjectCommand";
-import { CreateSchemaCommandInput, CreateSchemaCommandOutput } from "./commands/CreateSchemaCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultCloudDirectoryHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AddFacetToObjectCommandInput, AddFacetToObjectCommandOutput } from "./commands/AddFacetToObjectCommand";
+import type { ApplySchemaCommandInput, ApplySchemaCommandOutput } from "./commands/ApplySchemaCommand";
+import type { AttachObjectCommandInput, AttachObjectCommandOutput } from "./commands/AttachObjectCommand";
+import type { AttachPolicyCommandInput, AttachPolicyCommandOutput } from "./commands/AttachPolicyCommand";
+import type { AttachToIndexCommandInput, AttachToIndexCommandOutput } from "./commands/AttachToIndexCommand";
+import type { AttachTypedLinkCommandInput, AttachTypedLinkCommandOutput } from "./commands/AttachTypedLinkCommand";
+import type { BatchReadCommandInput, BatchReadCommandOutput } from "./commands/BatchReadCommand";
+import type { BatchWriteCommandInput, BatchWriteCommandOutput } from "./commands/BatchWriteCommand";
+import type { CreateDirectoryCommandInput, CreateDirectoryCommandOutput } from "./commands/CreateDirectoryCommand";
+import type { CreateFacetCommandInput, CreateFacetCommandOutput } from "./commands/CreateFacetCommand";
+import type { CreateIndexCommandInput, CreateIndexCommandOutput } from "./commands/CreateIndexCommand";
+import type { CreateObjectCommandInput, CreateObjectCommandOutput } from "./commands/CreateObjectCommand";
+import type { CreateSchemaCommandInput, CreateSchemaCommandOutput } from "./commands/CreateSchemaCommand";
+import type {
   CreateTypedLinkFacetCommandInput,
   CreateTypedLinkFacetCommandOutput,
 } from "./commands/CreateTypedLinkFacetCommand";
-import { DeleteDirectoryCommandInput, DeleteDirectoryCommandOutput } from "./commands/DeleteDirectoryCommand";
-import { DeleteFacetCommandInput, DeleteFacetCommandOutput } from "./commands/DeleteFacetCommand";
-import { DeleteObjectCommandInput, DeleteObjectCommandOutput } from "./commands/DeleteObjectCommand";
-import { DeleteSchemaCommandInput, DeleteSchemaCommandOutput } from "./commands/DeleteSchemaCommand";
-import {
+import type { DeleteDirectoryCommandInput, DeleteDirectoryCommandOutput } from "./commands/DeleteDirectoryCommand";
+import type { DeleteFacetCommandInput, DeleteFacetCommandOutput } from "./commands/DeleteFacetCommand";
+import type { DeleteObjectCommandInput, DeleteObjectCommandOutput } from "./commands/DeleteObjectCommand";
+import type { DeleteSchemaCommandInput, DeleteSchemaCommandOutput } from "./commands/DeleteSchemaCommand";
+import type {
   DeleteTypedLinkFacetCommandInput,
   DeleteTypedLinkFacetCommandOutput,
 } from "./commands/DeleteTypedLinkFacetCommand";
-import { DetachFromIndexCommandInput, DetachFromIndexCommandOutput } from "./commands/DetachFromIndexCommand";
-import { DetachObjectCommandInput, DetachObjectCommandOutput } from "./commands/DetachObjectCommand";
-import { DetachPolicyCommandInput, DetachPolicyCommandOutput } from "./commands/DetachPolicyCommand";
-import { DetachTypedLinkCommandInput, DetachTypedLinkCommandOutput } from "./commands/DetachTypedLinkCommand";
-import { DisableDirectoryCommandInput, DisableDirectoryCommandOutput } from "./commands/DisableDirectoryCommand";
-import { EnableDirectoryCommandInput, EnableDirectoryCommandOutput } from "./commands/EnableDirectoryCommand";
-import {
+import type { DetachFromIndexCommandInput, DetachFromIndexCommandOutput } from "./commands/DetachFromIndexCommand";
+import type { DetachObjectCommandInput, DetachObjectCommandOutput } from "./commands/DetachObjectCommand";
+import type { DetachPolicyCommandInput, DetachPolicyCommandOutput } from "./commands/DetachPolicyCommand";
+import type { DetachTypedLinkCommandInput, DetachTypedLinkCommandOutput } from "./commands/DetachTypedLinkCommand";
+import type { DisableDirectoryCommandInput, DisableDirectoryCommandOutput } from "./commands/DisableDirectoryCommand";
+import type { EnableDirectoryCommandInput, EnableDirectoryCommandOutput } from "./commands/EnableDirectoryCommand";
+import type {
   GetAppliedSchemaVersionCommandInput,
   GetAppliedSchemaVersionCommandOutput,
 } from "./commands/GetAppliedSchemaVersionCommand";
-import { GetDirectoryCommandInput, GetDirectoryCommandOutput } from "./commands/GetDirectoryCommand";
-import { GetFacetCommandInput, GetFacetCommandOutput } from "./commands/GetFacetCommand";
-import { GetLinkAttributesCommandInput, GetLinkAttributesCommandOutput } from "./commands/GetLinkAttributesCommand";
-import {
+import type { GetDirectoryCommandInput, GetDirectoryCommandOutput } from "./commands/GetDirectoryCommand";
+import type { GetFacetCommandInput, GetFacetCommandOutput } from "./commands/GetFacetCommand";
+import type {
+  GetLinkAttributesCommandInput,
+  GetLinkAttributesCommandOutput,
+} from "./commands/GetLinkAttributesCommand";
+import type {
   GetObjectAttributesCommandInput,
   GetObjectAttributesCommandOutput,
 } from "./commands/GetObjectAttributesCommand";
-import {
+import type {
   GetObjectInformationCommandInput,
   GetObjectInformationCommandOutput,
 } from "./commands/GetObjectInformationCommand";
-import { GetSchemaAsJsonCommandInput, GetSchemaAsJsonCommandOutput } from "./commands/GetSchemaAsJsonCommand";
-import {
+import type { GetSchemaAsJsonCommandInput, GetSchemaAsJsonCommandOutput } from "./commands/GetSchemaAsJsonCommand";
+import type {
   GetTypedLinkFacetInformationCommandInput,
   GetTypedLinkFacetInformationCommandOutput,
 } from "./commands/GetTypedLinkFacetInformationCommand";
-import {
+import type {
   ListAppliedSchemaArnsCommandInput,
   ListAppliedSchemaArnsCommandOutput,
 } from "./commands/ListAppliedSchemaArnsCommand";
-import {
+import type {
   ListAttachedIndicesCommandInput,
   ListAttachedIndicesCommandOutput,
 } from "./commands/ListAttachedIndicesCommand";
-import {
+import type {
   ListDevelopmentSchemaArnsCommandInput,
   ListDevelopmentSchemaArnsCommandOutput,
 } from "./commands/ListDevelopmentSchemaArnsCommand";
-import { ListDirectoriesCommandInput, ListDirectoriesCommandOutput } from "./commands/ListDirectoriesCommand";
-import {
+import type { ListDirectoriesCommandInput, ListDirectoriesCommandOutput } from "./commands/ListDirectoriesCommand";
+import type {
   ListFacetAttributesCommandInput,
   ListFacetAttributesCommandOutput,
 } from "./commands/ListFacetAttributesCommand";
-import { ListFacetNamesCommandInput, ListFacetNamesCommandOutput } from "./commands/ListFacetNamesCommand";
-import {
+import type { ListFacetNamesCommandInput, ListFacetNamesCommandOutput } from "./commands/ListFacetNamesCommand";
+import type {
   ListIncomingTypedLinksCommandInput,
   ListIncomingTypedLinksCommandOutput,
 } from "./commands/ListIncomingTypedLinksCommand";
-import { ListIndexCommandInput, ListIndexCommandOutput } from "./commands/ListIndexCommand";
-import {
+import type { ListIndexCommandInput, ListIndexCommandOutput } from "./commands/ListIndexCommand";
+import type {
   ListManagedSchemaArnsCommandInput,
   ListManagedSchemaArnsCommandOutput,
 } from "./commands/ListManagedSchemaArnsCommand";
-import {
+import type {
   ListObjectAttributesCommandInput,
   ListObjectAttributesCommandOutput,
 } from "./commands/ListObjectAttributesCommand";
-import { ListObjectChildrenCommandInput, ListObjectChildrenCommandOutput } from "./commands/ListObjectChildrenCommand";
-import {
+import type {
+  ListObjectChildrenCommandInput,
+  ListObjectChildrenCommandOutput,
+} from "./commands/ListObjectChildrenCommand";
+import type {
   ListObjectParentPathsCommandInput,
   ListObjectParentPathsCommandOutput,
 } from "./commands/ListObjectParentPathsCommand";
-import { ListObjectParentsCommandInput, ListObjectParentsCommandOutput } from "./commands/ListObjectParentsCommand";
-import { ListObjectPoliciesCommandInput, ListObjectPoliciesCommandOutput } from "./commands/ListObjectPoliciesCommand";
-import {
+import type {
+  ListObjectParentsCommandInput,
+  ListObjectParentsCommandOutput,
+} from "./commands/ListObjectParentsCommand";
+import type {
+  ListObjectPoliciesCommandInput,
+  ListObjectPoliciesCommandOutput,
+} from "./commands/ListObjectPoliciesCommand";
+import type {
   ListOutgoingTypedLinksCommandInput,
   ListOutgoingTypedLinksCommandOutput,
 } from "./commands/ListOutgoingTypedLinksCommand";
-import {
+import type {
   ListPolicyAttachmentsCommandInput,
   ListPolicyAttachmentsCommandOutput,
 } from "./commands/ListPolicyAttachmentsCommand";
-import {
+import type {
   ListPublishedSchemaArnsCommandInput,
   ListPublishedSchemaArnsCommandOutput,
 } from "./commands/ListPublishedSchemaArnsCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ListTypedLinkFacetAttributesCommandInput,
   ListTypedLinkFacetAttributesCommandOutput,
 } from "./commands/ListTypedLinkFacetAttributesCommand";
-import {
+import type {
   ListTypedLinkFacetNamesCommandInput,
   ListTypedLinkFacetNamesCommandOutput,
 } from "./commands/ListTypedLinkFacetNamesCommand";
-import { LookupPolicyCommandInput, LookupPolicyCommandOutput } from "./commands/LookupPolicyCommand";
-import { PublishSchemaCommandInput, PublishSchemaCommandOutput } from "./commands/PublishSchemaCommand";
-import { PutSchemaFromJsonCommandInput, PutSchemaFromJsonCommandOutput } from "./commands/PutSchemaFromJsonCommand";
-import {
+import type { LookupPolicyCommandInput, LookupPolicyCommandOutput } from "./commands/LookupPolicyCommand";
+import type { PublishSchemaCommandInput, PublishSchemaCommandOutput } from "./commands/PublishSchemaCommand";
+import type {
+  PutSchemaFromJsonCommandInput,
+  PutSchemaFromJsonCommandOutput,
+} from "./commands/PutSchemaFromJsonCommand";
+import type {
   RemoveFacetFromObjectCommandInput,
   RemoveFacetFromObjectCommandOutput,
 } from "./commands/RemoveFacetFromObjectCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateFacetCommandInput, UpdateFacetCommandOutput } from "./commands/UpdateFacetCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateFacetCommandInput, UpdateFacetCommandOutput } from "./commands/UpdateFacetCommand";
+import type {
   UpdateLinkAttributesCommandInput,
   UpdateLinkAttributesCommandOutput,
 } from "./commands/UpdateLinkAttributesCommand";
-import {
+import type {
   UpdateObjectAttributesCommandInput,
   UpdateObjectAttributesCommandOutput,
 } from "./commands/UpdateObjectAttributesCommand";
-import { UpdateSchemaCommandInput, UpdateSchemaCommandOutput } from "./commands/UpdateSchemaCommand";
-import {
+import type { UpdateSchemaCommandInput, UpdateSchemaCommandOutput } from "./commands/UpdateSchemaCommand";
+import type {
   UpdateTypedLinkFacetCommandInput,
   UpdateTypedLinkFacetCommandOutput,
 } from "./commands/UpdateTypedLinkFacetCommand";
-import {
+import type {
   UpgradeAppliedSchemaCommandInput,
   UpgradeAppliedSchemaCommandOutput,
 } from "./commands/UpgradeAppliedSchemaCommand";
-import {
+import type {
   UpgradePublishedSchemaCommandInput,
   UpgradePublishedSchemaCommandOutput,
 } from "./commands/UpgradePublishedSchemaCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddFacetToObjectCommandInput
   | ApplySchemaCommandInput
@@ -263,6 +295,9 @@ export type ServiceInputTypes =
   | UpgradeAppliedSchemaCommandInput
   | UpgradePublishedSchemaCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddFacetToObjectCommandOutput
   | ApplySchemaCommandOutput
@@ -331,18 +366,21 @@ export type ServiceOutputTypes =
   | UpgradeAppliedSchemaCommandOutput
   | UpgradePublishedSchemaCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -354,7 +392,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -393,25 +431,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -424,58 +453,107 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type CloudDirectoryClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of CloudDirectoryClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type CloudDirectoryClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of CloudDirectoryClient class constructor that set the region, credentials and other options.
  */
 export interface CloudDirectoryClientConfig extends CloudDirectoryClientConfigType {}
 
-type CloudDirectoryClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of CloudDirectoryClient class. This is resolved and normalized from the {@link CloudDirectoryClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type CloudDirectoryClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of CloudDirectoryClient class. This is resolved and normalized from the {@link CloudDirectoryClientConfig | constructor configuration interface}.
  */
 export interface CloudDirectoryClientResolvedConfig extends CloudDirectoryClientResolvedConfigType {}
 
@@ -486,6 +564,8 @@ export interface CloudDirectoryClientResolvedConfig extends CloudDirectoryClient
  *       describes the Cloud Directory operations that you can call programmatically and includes
  *       detailed information on data types and errors. For information about Cloud Directory features, see <a href="https://aws.amazon.com/directoryservice/">AWS Directory
  *         Service</a> and the <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/what_is_cloud_directory.html">Amazon Cloud Directory Developer Guide</a>.</p>
+ *          <p>Amazon Cloud Directory is no longer open to new customers and will reach end of support on July 24, 2027. For alternatives to Amazon Cloud Directory, explore <a href="https://aws.amazon.com/dynamodb/">Amazon DynamoDB</a> and <a href="https://aws.amazon.com/neptune/">Amazon Neptune</a>. If you need help choosing the right alternative for your use case, or for any other questions, contact <a href="https://aws.amazon.com/support/">AWS Support</a>.</p>
+ * @public
  */
 export class CloudDirectoryClient extends __Client<
   __HttpHandlerOptions,
@@ -498,22 +578,36 @@ export class CloudDirectoryClient extends __Client<
    */
   readonly config: CloudDirectoryClientResolvedConfig;
 
-  constructor(configuration: CloudDirectoryClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<CloudDirectoryClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultCloudDirectoryHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: CloudDirectoryClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

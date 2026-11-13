@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { GetIndexingConfigurationRequest, GetIndexingConfigurationResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1GetIndexingConfigurationCommand,
-  serializeAws_restJson1GetIndexingConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIndexingConfigurationRequest, GetIndexingConfigurationResponse } from "../models/models_1";
+import { GetIndexingConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIndexingConfigurationCommand}.
+ */
 export interface GetIndexingConfigurationCommandInput extends GetIndexingConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIndexingConfigurationCommand}.
+ */
 export interface GetIndexingConfigurationCommandOutput extends GetIndexingConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,108 @@ export interface GetIndexingConfigurationCommandOutput extends GetIndexingConfig
  * ```javascript
  * import { IoTClient, GetIndexingConfigurationCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, GetIndexingConfigurationCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = {};
  * const command = new GetIndexingConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetIndexingConfigurationResponse
+ * //   thingIndexingConfiguration: { // ThingIndexingConfiguration
+ * //     thingIndexingMode: "OFF" || "REGISTRY" || "REGISTRY_AND_SHADOW", // required
+ * //     thingConnectivityIndexingMode: "OFF" || "STATUS",
+ * //     deviceDefenderIndexingMode: "OFF" || "VIOLATIONS",
+ * //     namedShadowIndexingMode: "OFF" || "ON",
+ * //     managedFields: [ // Fields
+ * //       { // Field
+ * //         name: "STRING_VALUE",
+ * //         type: "Number" || "String" || "Boolean",
+ * //       },
+ * //     ],
+ * //     customFields: [
+ * //       {
+ * //         name: "STRING_VALUE",
+ * //         type: "Number" || "String" || "Boolean",
+ * //       },
+ * //     ],
+ * //     filter: { // IndexingFilter
+ * //       namedShadowNames: [ // NamedShadowNamesFilter
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       geoLocations: [ // GeoLocationsFilter
+ * //         { // GeoLocationTarget
+ * //           name: "STRING_VALUE",
+ * //           order: "LatLon" || "LonLat",
+ * //         },
+ * //       ],
+ * //       connectivity: { // ConnectivityFilter
+ * //         includeSocketInformation: [ // FleetIndexingApiList
+ * //           "GET_THING_CONNECTIVITY_DATA",
+ * //         ],
+ * //       },
+ * //     },
+ * //   },
+ * //   thingGroupIndexingConfiguration: { // ThingGroupIndexingConfiguration
+ * //     thingGroupIndexingMode: "OFF" || "ON", // required
+ * //     managedFields: [
+ * //       {
+ * //         name: "STRING_VALUE",
+ * //         type: "Number" || "String" || "Boolean",
+ * //       },
+ * //     ],
+ * //     customFields: [
+ * //       {
+ * //         name: "STRING_VALUE",
+ * //         type: "Number" || "String" || "Boolean",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetIndexingConfigurationCommandInput - {@link GetIndexingConfigurationCommandInput}
+ * @returns {@link GetIndexingConfigurationCommandOutput}
  * @see {@link GetIndexingConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetIndexingConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class GetIndexingConfigurationCommand extends $Command<
-  GetIndexingConfigurationCommandInput,
-  GetIndexingConfigurationCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIndexingConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIndexingConfigurationCommandInput, GetIndexingConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "GetIndexingConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIndexingConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIndexingConfigurationResponse.filterSensitiveLog,
+export class GetIndexingConfigurationCommand extends command<GetIndexingConfigurationCommandInput, GetIndexingConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIndexingConfiguration",
+  GetIndexingConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetIndexingConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIndexingConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetIndexingConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIndexingConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetIndexingConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIndexingConfigurationCommandInput;
+      output: GetIndexingConfigurationCommandOutput;
+    };
+  };
 }

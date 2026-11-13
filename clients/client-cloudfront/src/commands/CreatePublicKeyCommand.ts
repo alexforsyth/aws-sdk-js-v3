@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { CreatePublicKeyRequest, CreatePublicKeyResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlCreatePublicKeyCommand,
-  serializeAws_restXmlCreatePublicKeyCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePublicKeyRequest, CreatePublicKeyResult } from "../models/models_0";
+import { CreatePublicKey$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePublicKeyCommand}.
+ */
 export interface CreatePublicKeyCommandInput extends CreatePublicKeyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePublicKeyCommand}.
+ */
 export interface CreatePublicKeyCommandOutput extends CreatePublicKeyResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface CreatePublicKeyCommandOutput extends CreatePublicKeyResult, __M
  * ```javascript
  * import { CloudFrontClient, CreatePublicKeyCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, CreatePublicKeyCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // CreatePublicKeyRequest
+ *   PublicKeyConfig: { // PublicKeyConfig
+ *     CallerReference: "STRING_VALUE", // required
+ *     Name: "STRING_VALUE", // required
+ *     EncodedKey: "STRING_VALUE", // required
+ *     Comment: "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreatePublicKeyCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePublicKeyResult
+ * //   PublicKey: { // PublicKey
+ * //     Id: "STRING_VALUE", // required
+ * //     CreatedTime: new Date("TIMESTAMP"), // required
+ * //     PublicKeyConfig: { // PublicKeyConfig
+ * //       CallerReference: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //       EncodedKey: "STRING_VALUE", // required
+ * //       Comment: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   Location: "STRING_VALUE",
+ * //   ETag: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePublicKeyCommandInput - {@link CreatePublicKeyCommandInput}
+ * @returns {@link CreatePublicKeyCommandOutput}
  * @see {@link CreatePublicKeyCommandInput} for command's `input` shape.
  * @see {@link CreatePublicKeyCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link PublicKeyAlreadyExists} (client fault)
+ *  <p>The specified public key already exists.</p>
+ *
+ * @throws {@link TooManyPublicKeys} (client fault)
+ *  <p>The maximum number of public keys for field-level encryption have been created. To create a new public key, delete one of the existing keys.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePublicKeyCommand extends $Command<
-  CreatePublicKeyCommandInput,
-  CreatePublicKeyCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePublicKeyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePublicKeyCommandInput, CreatePublicKeyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "CreatePublicKeyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePublicKeyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePublicKeyResult.filterSensitiveLog,
+export class CreatePublicKeyCommand extends command<CreatePublicKeyCommandInput, CreatePublicKeyCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePublicKey",
+  CreatePublicKey$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePublicKeyRequest;
+      output: CreatePublicKeyResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePublicKeyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlCreatePublicKeyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePublicKeyCommandOutput> {
-    return deserializeAws_restXmlCreatePublicKeyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePublicKeyCommandInput;
+      output: CreatePublicKeyCommandOutput;
+    };
+  };
 }

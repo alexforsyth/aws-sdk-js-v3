@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { ListSatellitesRequest, ListSatellitesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSatellitesCommand,
-  serializeAws_restJson1ListSatellitesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSatellitesRequest, ListSatellitesResponse } from "../models/models_0";
+import { ListSatellites$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSatellitesCommand}.
+ */
 export interface ListSatellitesCommandInput extends ListSatellitesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSatellitesCommand}.
+ */
 export interface ListSatellitesCommandOutput extends ListSatellitesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface ListSatellitesCommandOutput extends ListSatellitesResponse, __M
  * ```javascript
  * import { GroundStationClient, ListSatellitesCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, ListSatellitesCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // ListSatellitesRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListSatellitesCommand(input);
  * const response = await client.send(command);
+ * // { // ListSatellitesResponse
+ * //   nextToken: "STRING_VALUE",
+ * //   satellites: [ // SatelliteList
+ * //     { // SatelliteListItem
+ * //       satelliteId: "STRING_VALUE",
+ * //       satelliteArn: "STRING_VALUE",
+ * //       noradSatelliteID: Number("int"),
+ * //       groundStations: [ // GroundStationIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       currentEphemeris: { // EphemerisMetaData
+ * //         source: "CUSTOMER_PROVIDED" || "SPACE_TRACK", // required
+ * //         ephemerisId: "STRING_VALUE",
+ * //         epoch: new Date("TIMESTAMP"),
+ * //         name: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListSatellitesCommandInput - {@link ListSatellitesCommandInput}
+ * @returns {@link ListSatellitesCommandOutput}
  * @see {@link ListSatellitesCommandInput} for command's `input` shape.
  * @see {@link ListSatellitesCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class ListSatellitesCommand extends $Command<
-  ListSatellitesCommandInput,
-  ListSatellitesCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSatellitesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSatellitesCommandInput, ListSatellitesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "ListSatellitesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSatellitesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSatellitesResponse.filterSensitiveLog,
+export class ListSatellitesCommand extends command<ListSatellitesCommandInput, ListSatellitesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSatellites",
+  ListSatellites$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSatellitesRequest;
+      output: ListSatellitesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSatellitesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSatellitesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSatellitesCommandOutput> {
-    return deserializeAws_restJson1ListSatellitesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSatellitesCommandInput;
+      output: ListSatellitesCommandOutput;
+    };
+  };
 }

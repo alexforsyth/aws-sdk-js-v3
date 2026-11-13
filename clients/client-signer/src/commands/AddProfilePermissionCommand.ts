@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AddProfilePermissionRequest, AddProfilePermissionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1AddProfilePermissionCommand,
-  serializeAws_restJson1AddProfilePermissionCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SignerClientResolvedConfig } from "../SignerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddProfilePermissionRequest, AddProfilePermissionResponse } from "../models/models_0";
+import { AddProfilePermission$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddProfilePermissionCommand}.
+ */
 export interface AddProfilePermissionCommandInput extends AddProfilePermissionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddProfilePermissionCommand}.
+ */
 export interface AddProfilePermissionCommandOutput extends AddProfilePermissionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,74 @@ export interface AddProfilePermissionCommandOutput extends AddProfilePermissionR
  * ```javascript
  * import { SignerClient, AddProfilePermissionCommand } from "@aws-sdk/client-signer"; // ES Modules import
  * // const { SignerClient, AddProfilePermissionCommand } = require("@aws-sdk/client-signer"); // CommonJS import
+ * // import type { SignerClientConfig } from "@aws-sdk/client-signer";
+ * const config = {}; // type is SignerClientConfig
  * const client = new SignerClient(config);
+ * const input = { // AddProfilePermissionRequest
+ *   profileName: "STRING_VALUE", // required
+ *   profileVersion: "STRING_VALUE",
+ *   action: "STRING_VALUE", // required
+ *   principal: "STRING_VALUE", // required
+ *   revisionId: "STRING_VALUE",
+ *   statementId: "STRING_VALUE", // required
+ * };
  * const command = new AddProfilePermissionCommand(input);
  * const response = await client.send(command);
+ * // { // AddProfilePermissionResponse
+ * //   revisionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AddProfilePermissionCommandInput - {@link AddProfilePermissionCommandInput}
+ * @returns {@link AddProfilePermissionCommandOutput}
  * @see {@link AddProfilePermissionCommandInput} for command's `input` shape.
  * @see {@link AddProfilePermissionCommandOutput} for command's `response` shape.
- * @see {@link SignerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SignerClientResolvedConfig | config} for SignerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The resource encountered a conflicting state.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource could not be found.</p>
+ *
+ * @throws {@link ServiceLimitExceededException} (client fault)
+ *  <p>The client is making a request that exceeds service limits.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The allowed number of job-signing requests has been exceeded.</p>
+ *          <p>This error supersedes the error <code>ThrottlingException</code>.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>You signing certificate could not be validated.</p>
+ *
+ * @throws {@link SignerServiceException}
+ * <p>Base exception class for all service exceptions from Signer service.</p>
+ *
+ *
+ * @public
  */
-export class AddProfilePermissionCommand extends $Command<
-  AddProfilePermissionCommandInput,
-  AddProfilePermissionCommandOutput,
-  SignerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddProfilePermissionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SignerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddProfilePermissionCommandInput, AddProfilePermissionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SignerClient";
-    const commandName = "AddProfilePermissionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddProfilePermissionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddProfilePermissionResponse.filterSensitiveLog,
+export class AddProfilePermissionCommand extends command<AddProfilePermissionCommandInput, AddProfilePermissionCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddProfilePermission",
+  AddProfilePermission$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddProfilePermissionRequest;
+      output: AddProfilePermissionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddProfilePermissionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AddProfilePermissionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddProfilePermissionCommandOutput> {
-    return deserializeAws_restJson1AddProfilePermissionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddProfilePermissionCommandInput;
+      output: AddProfilePermissionCommandOutput;
+    };
+  };
 }

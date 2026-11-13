@@ -1,0 +1,1729 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { BedrockAgentCoreClient } from "./BedrockAgentCoreClient";
+import {
+  type BatchCreateMemoryRecordsCommandInput,
+  type BatchCreateMemoryRecordsCommandOutput,
+  BatchCreateMemoryRecordsCommand,
+} from "./commands/BatchCreateMemoryRecordsCommand";
+import {
+  type BatchDeleteMemoryRecordsCommandInput,
+  type BatchDeleteMemoryRecordsCommandOutput,
+  BatchDeleteMemoryRecordsCommand,
+} from "./commands/BatchDeleteMemoryRecordsCommand";
+import {
+  type BatchUpdateMemoryRecordsCommandInput,
+  type BatchUpdateMemoryRecordsCommandOutput,
+  BatchUpdateMemoryRecordsCommand,
+} from "./commands/BatchUpdateMemoryRecordsCommand";
+import {
+  type CompleteResourceTokenAuthCommandInput,
+  type CompleteResourceTokenAuthCommandOutput,
+  CompleteResourceTokenAuthCommand,
+} from "./commands/CompleteResourceTokenAuthCommand";
+import {
+  type CreateABTestCommandInput,
+  type CreateABTestCommandOutput,
+  CreateABTestCommand,
+} from "./commands/CreateABTestCommand";
+import {
+  type CreateEventCommandInput,
+  type CreateEventCommandOutput,
+  CreateEventCommand,
+} from "./commands/CreateEventCommand";
+import {
+  type CreatePaymentInstrumentCommandInput,
+  type CreatePaymentInstrumentCommandOutput,
+  CreatePaymentInstrumentCommand,
+} from "./commands/CreatePaymentInstrumentCommand";
+import {
+  type CreatePaymentSessionCommandInput,
+  type CreatePaymentSessionCommandOutput,
+  CreatePaymentSessionCommand,
+} from "./commands/CreatePaymentSessionCommand";
+import {
+  type DeleteABTestCommandInput,
+  type DeleteABTestCommandOutput,
+  DeleteABTestCommand,
+} from "./commands/DeleteABTestCommand";
+import {
+  type DeleteBatchEvaluationCommandInput,
+  type DeleteBatchEvaluationCommandOutput,
+  DeleteBatchEvaluationCommand,
+} from "./commands/DeleteBatchEvaluationCommand";
+import {
+  type DeleteCapacityProviderSessionCommandInput,
+  type DeleteCapacityProviderSessionCommandOutput,
+  DeleteCapacityProviderSessionCommand,
+} from "./commands/DeleteCapacityProviderSessionCommand";
+import {
+  type DeleteEventCommandInput,
+  type DeleteEventCommandOutput,
+  DeleteEventCommand,
+} from "./commands/DeleteEventCommand";
+import {
+  type DeleteMemoryRecordCommandInput,
+  type DeleteMemoryRecordCommandOutput,
+  DeleteMemoryRecordCommand,
+} from "./commands/DeleteMemoryRecordCommand";
+import {
+  type DeletePaymentInstrumentCommandInput,
+  type DeletePaymentInstrumentCommandOutput,
+  DeletePaymentInstrumentCommand,
+} from "./commands/DeletePaymentInstrumentCommand";
+import {
+  type DeletePaymentSessionCommandInput,
+  type DeletePaymentSessionCommandOutput,
+  DeletePaymentSessionCommand,
+} from "./commands/DeletePaymentSessionCommand";
+import {
+  type DeleteRecommendationCommandInput,
+  type DeleteRecommendationCommandOutput,
+  DeleteRecommendationCommand,
+} from "./commands/DeleteRecommendationCommand";
+import { type EvaluateCommandInput, type EvaluateCommandOutput, EvaluateCommand } from "./commands/EvaluateCommand";
+import { type GetABTestCommandInput, type GetABTestCommandOutput, GetABTestCommand } from "./commands/GetABTestCommand";
+import {
+  type GetAgentCardCommandInput,
+  type GetAgentCardCommandOutput,
+  GetAgentCardCommand,
+} from "./commands/GetAgentCardCommand";
+import {
+  type GetBatchEvaluationCommandInput,
+  type GetBatchEvaluationCommandOutput,
+  GetBatchEvaluationCommand,
+} from "./commands/GetBatchEvaluationCommand";
+import {
+  type GetBrowserSessionCommandInput,
+  type GetBrowserSessionCommandOutput,
+  GetBrowserSessionCommand,
+} from "./commands/GetBrowserSessionCommand";
+import {
+  type GetCodeInterpreterSessionCommandInput,
+  type GetCodeInterpreterSessionCommandOutput,
+  GetCodeInterpreterSessionCommand,
+} from "./commands/GetCodeInterpreterSessionCommand";
+import { type GetEventCommandInput, type GetEventCommandOutput, GetEventCommand } from "./commands/GetEventCommand";
+import {
+  type GetMemoryRecordCommandInput,
+  type GetMemoryRecordCommandOutput,
+  GetMemoryRecordCommand,
+} from "./commands/GetMemoryRecordCommand";
+import {
+  type GetPaymentInstrumentBalanceCommandInput,
+  type GetPaymentInstrumentBalanceCommandOutput,
+  GetPaymentInstrumentBalanceCommand,
+} from "./commands/GetPaymentInstrumentBalanceCommand";
+import {
+  type GetPaymentInstrumentCommandInput,
+  type GetPaymentInstrumentCommandOutput,
+  GetPaymentInstrumentCommand,
+} from "./commands/GetPaymentInstrumentCommand";
+import {
+  type GetPaymentSessionCommandInput,
+  type GetPaymentSessionCommandOutput,
+  GetPaymentSessionCommand,
+} from "./commands/GetPaymentSessionCommand";
+import {
+  type GetRecommendationCommandInput,
+  type GetRecommendationCommandOutput,
+  GetRecommendationCommand,
+} from "./commands/GetRecommendationCommand";
+import {
+  type GetResourceApiKeyCommandInput,
+  type GetResourceApiKeyCommandOutput,
+  GetResourceApiKeyCommand,
+} from "./commands/GetResourceApiKeyCommand";
+import {
+  type GetResourceOauth2TokenCommandInput,
+  type GetResourceOauth2TokenCommandOutput,
+  GetResourceOauth2TokenCommand,
+} from "./commands/GetResourceOauth2TokenCommand";
+import {
+  type GetResourcePaymentTokenCommandInput,
+  type GetResourcePaymentTokenCommandOutput,
+  GetResourcePaymentTokenCommand,
+} from "./commands/GetResourcePaymentTokenCommand";
+import {
+  type GetWorkloadAccessTokenCommandInput,
+  type GetWorkloadAccessTokenCommandOutput,
+  GetWorkloadAccessTokenCommand,
+} from "./commands/GetWorkloadAccessTokenCommand";
+import {
+  type GetWorkloadAccessTokenForJWTCommandInput,
+  type GetWorkloadAccessTokenForJWTCommandOutput,
+  GetWorkloadAccessTokenForJWTCommand,
+} from "./commands/GetWorkloadAccessTokenForJWTCommand";
+import {
+  type GetWorkloadAccessTokenForUserIdCommandInput,
+  type GetWorkloadAccessTokenForUserIdCommandOutput,
+  GetWorkloadAccessTokenForUserIdCommand,
+} from "./commands/GetWorkloadAccessTokenForUserIdCommand";
+import {
+  type IngestDataCommandInput,
+  type IngestDataCommandOutput,
+  IngestDataCommand,
+} from "./commands/IngestDataCommand";
+import {
+  type InvokeAgentRuntimeCommandInput,
+  type InvokeAgentRuntimeCommandOutput,
+  InvokeAgentRuntimeCommand,
+} from "./commands/InvokeAgentRuntimeCommand";
+import {
+  type InvokeAgentRuntimeCommandCommandInput,
+  type InvokeAgentRuntimeCommandCommandOutput,
+  InvokeAgentRuntimeCommandCommand,
+} from "./commands/InvokeAgentRuntimeCommandCommand";
+import {
+  type InvokeBrowserCommandInput,
+  type InvokeBrowserCommandOutput,
+  InvokeBrowserCommand,
+} from "./commands/InvokeBrowserCommand";
+import {
+  type InvokeCodeInterpreterCommandInput,
+  type InvokeCodeInterpreterCommandOutput,
+  InvokeCodeInterpreterCommand,
+} from "./commands/InvokeCodeInterpreterCommand";
+import {
+  type InvokeHarnessCommandInput,
+  type InvokeHarnessCommandOutput,
+  InvokeHarnessCommand,
+} from "./commands/InvokeHarnessCommand";
+import {
+  type InvokeWebSearchCommandInput,
+  type InvokeWebSearchCommandOutput,
+  InvokeWebSearchCommand,
+} from "./commands/InvokeWebSearchCommand";
+import {
+  type ListABTestsCommandInput,
+  type ListABTestsCommandOutput,
+  ListABTestsCommand,
+} from "./commands/ListABTestsCommand";
+import {
+  type ListActorsCommandInput,
+  type ListActorsCommandOutput,
+  ListActorsCommand,
+} from "./commands/ListActorsCommand";
+import {
+  type ListBatchEvaluationsCommandInput,
+  type ListBatchEvaluationsCommandOutput,
+  ListBatchEvaluationsCommand,
+} from "./commands/ListBatchEvaluationsCommand";
+import {
+  type ListBrowserSessionsCommandInput,
+  type ListBrowserSessionsCommandOutput,
+  ListBrowserSessionsCommand,
+} from "./commands/ListBrowserSessionsCommand";
+import {
+  type ListCodeInterpreterSessionsCommandInput,
+  type ListCodeInterpreterSessionsCommandOutput,
+  ListCodeInterpreterSessionsCommand,
+} from "./commands/ListCodeInterpreterSessionsCommand";
+import {
+  type ListEventsCommandInput,
+  type ListEventsCommandOutput,
+  ListEventsCommand,
+} from "./commands/ListEventsCommand";
+import {
+  type ListMemoryExtractionJobsCommandInput,
+  type ListMemoryExtractionJobsCommandOutput,
+  ListMemoryExtractionJobsCommand,
+} from "./commands/ListMemoryExtractionJobsCommand";
+import {
+  type ListMemoryRecordsCommandInput,
+  type ListMemoryRecordsCommandOutput,
+  ListMemoryRecordsCommand,
+} from "./commands/ListMemoryRecordsCommand";
+import {
+  type ListPaymentInstrumentsCommandInput,
+  type ListPaymentInstrumentsCommandOutput,
+  ListPaymentInstrumentsCommand,
+} from "./commands/ListPaymentInstrumentsCommand";
+import {
+  type ListPaymentSessionsCommandInput,
+  type ListPaymentSessionsCommandOutput,
+  ListPaymentSessionsCommand,
+} from "./commands/ListPaymentSessionsCommand";
+import {
+  type ListRecommendationsCommandInput,
+  type ListRecommendationsCommandOutput,
+  ListRecommendationsCommand,
+} from "./commands/ListRecommendationsCommand";
+import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ProcessPaymentCommandInput,
+  type ProcessPaymentCommandOutput,
+  ProcessPaymentCommand,
+} from "./commands/ProcessPaymentCommand";
+import {
+  type RetrieveMemoryRecordsCommandInput,
+  type RetrieveMemoryRecordsCommandOutput,
+  RetrieveMemoryRecordsCommand,
+} from "./commands/RetrieveMemoryRecordsCommand";
+import {
+  type SaveBrowserSessionProfileCommandInput,
+  type SaveBrowserSessionProfileCommandOutput,
+  SaveBrowserSessionProfileCommand,
+} from "./commands/SaveBrowserSessionProfileCommand";
+import {
+  type SearchRegistryRecordsCommandInput,
+  type SearchRegistryRecordsCommandOutput,
+  SearchRegistryRecordsCommand,
+} from "./commands/SearchRegistryRecordsCommand";
+import {
+  type StartBatchEvaluationCommandInput,
+  type StartBatchEvaluationCommandOutput,
+  StartBatchEvaluationCommand,
+} from "./commands/StartBatchEvaluationCommand";
+import {
+  type StartBrowserSessionCommandInput,
+  type StartBrowserSessionCommandOutput,
+  StartBrowserSessionCommand,
+} from "./commands/StartBrowserSessionCommand";
+import {
+  type StartCodeInterpreterSessionCommandInput,
+  type StartCodeInterpreterSessionCommandOutput,
+  StartCodeInterpreterSessionCommand,
+} from "./commands/StartCodeInterpreterSessionCommand";
+import {
+  type StartMemoryExtractionJobCommandInput,
+  type StartMemoryExtractionJobCommandOutput,
+  StartMemoryExtractionJobCommand,
+} from "./commands/StartMemoryExtractionJobCommand";
+import {
+  type StartRecommendationCommandInput,
+  type StartRecommendationCommandOutput,
+  StartRecommendationCommand,
+} from "./commands/StartRecommendationCommand";
+import {
+  type StopBatchEvaluationCommandInput,
+  type StopBatchEvaluationCommandOutput,
+  StopBatchEvaluationCommand,
+} from "./commands/StopBatchEvaluationCommand";
+import {
+  type StopBrowserSessionCommandInput,
+  type StopBrowserSessionCommandOutput,
+  StopBrowserSessionCommand,
+} from "./commands/StopBrowserSessionCommand";
+import {
+  type StopCodeInterpreterSessionCommandInput,
+  type StopCodeInterpreterSessionCommandOutput,
+  StopCodeInterpreterSessionCommand,
+} from "./commands/StopCodeInterpreterSessionCommand";
+import {
+  type StopRuntimeSessionCommandInput,
+  type StopRuntimeSessionCommandOutput,
+  StopRuntimeSessionCommand,
+} from "./commands/StopRuntimeSessionCommand";
+import {
+  type UpdateABTestCommandInput,
+  type UpdateABTestCommandOutput,
+  UpdateABTestCommand,
+} from "./commands/UpdateABTestCommand";
+import {
+  type UpdateBrowserStreamCommandInput,
+  type UpdateBrowserStreamCommandOutput,
+  UpdateBrowserStreamCommand,
+} from "./commands/UpdateBrowserStreamCommand";
+import { paginateListABTests } from "./pagination/ListABTestsPaginator";
+import { paginateListActors } from "./pagination/ListActorsPaginator";
+import { paginateListBatchEvaluations } from "./pagination/ListBatchEvaluationsPaginator";
+import { paginateListEvents } from "./pagination/ListEventsPaginator";
+import { paginateListMemoryExtractionJobs } from "./pagination/ListMemoryExtractionJobsPaginator";
+import { paginateListMemoryRecords } from "./pagination/ListMemoryRecordsPaginator";
+import { paginateListPaymentInstruments } from "./pagination/ListPaymentInstrumentsPaginator";
+import { paginateListPaymentSessions } from "./pagination/ListPaymentSessionsPaginator";
+import { paginateListRecommendations } from "./pagination/ListRecommendationsPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+import { paginateRetrieveMemoryRecords } from "./pagination/RetrieveMemoryRecordsPaginator";
+
+const commands = {
+  BatchCreateMemoryRecordsCommand,
+  BatchDeleteMemoryRecordsCommand,
+  BatchUpdateMemoryRecordsCommand,
+  CompleteResourceTokenAuthCommand,
+  CreateABTestCommand,
+  CreateEventCommand,
+  CreatePaymentInstrumentCommand,
+  CreatePaymentSessionCommand,
+  DeleteABTestCommand,
+  DeleteBatchEvaluationCommand,
+  DeleteCapacityProviderSessionCommand,
+  DeleteEventCommand,
+  DeleteMemoryRecordCommand,
+  DeletePaymentInstrumentCommand,
+  DeletePaymentSessionCommand,
+  DeleteRecommendationCommand,
+  EvaluateCommand,
+  GetABTestCommand,
+  GetAgentCardCommand,
+  GetBatchEvaluationCommand,
+  GetBrowserSessionCommand,
+  GetCodeInterpreterSessionCommand,
+  GetEventCommand,
+  GetMemoryRecordCommand,
+  GetPaymentInstrumentCommand,
+  GetPaymentInstrumentBalanceCommand,
+  GetPaymentSessionCommand,
+  GetRecommendationCommand,
+  GetResourceApiKeyCommand,
+  GetResourceOauth2TokenCommand,
+  GetResourcePaymentTokenCommand,
+  GetWorkloadAccessTokenCommand,
+  GetWorkloadAccessTokenForJWTCommand,
+  GetWorkloadAccessTokenForUserIdCommand,
+  IngestDataCommand,
+  InvokeAgentRuntimeCommand,
+  InvokeAgentRuntimeCommandCommand,
+  InvokeBrowserCommand,
+  InvokeCodeInterpreterCommand,
+  InvokeHarnessCommand,
+  InvokeWebSearchCommand,
+  ListABTestsCommand,
+  ListActorsCommand,
+  ListBatchEvaluationsCommand,
+  ListBrowserSessionsCommand,
+  ListCodeInterpreterSessionsCommand,
+  ListEventsCommand,
+  ListMemoryExtractionJobsCommand,
+  ListMemoryRecordsCommand,
+  ListPaymentInstrumentsCommand,
+  ListPaymentSessionsCommand,
+  ListRecommendationsCommand,
+  ListSessionsCommand,
+  ProcessPaymentCommand,
+  RetrieveMemoryRecordsCommand,
+  SaveBrowserSessionProfileCommand,
+  SearchRegistryRecordsCommand,
+  StartBatchEvaluationCommand,
+  StartBrowserSessionCommand,
+  StartCodeInterpreterSessionCommand,
+  StartMemoryExtractionJobCommand,
+  StartRecommendationCommand,
+  StopBatchEvaluationCommand,
+  StopBrowserSessionCommand,
+  StopCodeInterpreterSessionCommand,
+  StopRuntimeSessionCommand,
+  UpdateABTestCommand,
+  UpdateBrowserStreamCommand,
+};
+const paginators = {
+  paginateListABTests,
+  paginateListActors,
+  paginateListBatchEvaluations,
+  paginateListEvents,
+  paginateListMemoryExtractionJobs,
+  paginateListMemoryRecords,
+  paginateListPaymentInstruments,
+  paginateListPaymentSessions,
+  paginateListRecommendations,
+  paginateListSessions,
+  paginateRetrieveMemoryRecords,
+};
+
+/**
+ * @public
+ */
+export interface BedrockAgentCoreRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface BedrockAgentCore {
+  /**
+   * @see {@link BatchCreateMemoryRecordsCommand}
+   */
+  batchCreateMemoryRecords(
+    args: BatchCreateMemoryRecordsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<BatchCreateMemoryRecordsCommandOutput>;
+  batchCreateMemoryRecords(
+    args: BatchCreateMemoryRecordsCommandInput,
+    cb: (err: any, data?: BatchCreateMemoryRecordsCommandOutput) => void
+  ): void;
+  batchCreateMemoryRecords(
+    args: BatchCreateMemoryRecordsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: BatchCreateMemoryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteMemoryRecordsCommand}
+   */
+  batchDeleteMemoryRecords(
+    args: BatchDeleteMemoryRecordsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<BatchDeleteMemoryRecordsCommandOutput>;
+  batchDeleteMemoryRecords(
+    args: BatchDeleteMemoryRecordsCommandInput,
+    cb: (err: any, data?: BatchDeleteMemoryRecordsCommandOutput) => void
+  ): void;
+  batchDeleteMemoryRecords(
+    args: BatchDeleteMemoryRecordsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: BatchDeleteMemoryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateMemoryRecordsCommand}
+   */
+  batchUpdateMemoryRecords(
+    args: BatchUpdateMemoryRecordsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<BatchUpdateMemoryRecordsCommandOutput>;
+  batchUpdateMemoryRecords(
+    args: BatchUpdateMemoryRecordsCommandInput,
+    cb: (err: any, data?: BatchUpdateMemoryRecordsCommandOutput) => void
+  ): void;
+  batchUpdateMemoryRecords(
+    args: BatchUpdateMemoryRecordsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: BatchUpdateMemoryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CompleteResourceTokenAuthCommand}
+   */
+  completeResourceTokenAuth(
+    args: CompleteResourceTokenAuthCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<CompleteResourceTokenAuthCommandOutput>;
+  completeResourceTokenAuth(
+    args: CompleteResourceTokenAuthCommandInput,
+    cb: (err: any, data?: CompleteResourceTokenAuthCommandOutput) => void
+  ): void;
+  completeResourceTokenAuth(
+    args: CompleteResourceTokenAuthCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: CompleteResourceTokenAuthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateABTestCommand}
+   */
+  createABTest(
+    args: CreateABTestCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<CreateABTestCommandOutput>;
+  createABTest(
+    args: CreateABTestCommandInput,
+    cb: (err: any, data?: CreateABTestCommandOutput) => void
+  ): void;
+  createABTest(
+    args: CreateABTestCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: CreateABTestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventCommand}
+   */
+  createEvent(
+    args: CreateEventCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<CreateEventCommandOutput>;
+  createEvent(
+    args: CreateEventCommandInput,
+    cb: (err: any, data?: CreateEventCommandOutput) => void
+  ): void;
+  createEvent(
+    args: CreateEventCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: CreateEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePaymentInstrumentCommand}
+   */
+  createPaymentInstrument(
+    args: CreatePaymentInstrumentCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<CreatePaymentInstrumentCommandOutput>;
+  createPaymentInstrument(
+    args: CreatePaymentInstrumentCommandInput,
+    cb: (err: any, data?: CreatePaymentInstrumentCommandOutput) => void
+  ): void;
+  createPaymentInstrument(
+    args: CreatePaymentInstrumentCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: CreatePaymentInstrumentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePaymentSessionCommand}
+   */
+  createPaymentSession(
+    args: CreatePaymentSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<CreatePaymentSessionCommandOutput>;
+  createPaymentSession(
+    args: CreatePaymentSessionCommandInput,
+    cb: (err: any, data?: CreatePaymentSessionCommandOutput) => void
+  ): void;
+  createPaymentSession(
+    args: CreatePaymentSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: CreatePaymentSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteABTestCommand}
+   */
+  deleteABTest(
+    args: DeleteABTestCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeleteABTestCommandOutput>;
+  deleteABTest(
+    args: DeleteABTestCommandInput,
+    cb: (err: any, data?: DeleteABTestCommandOutput) => void
+  ): void;
+  deleteABTest(
+    args: DeleteABTestCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeleteABTestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBatchEvaluationCommand}
+   */
+  deleteBatchEvaluation(
+    args: DeleteBatchEvaluationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeleteBatchEvaluationCommandOutput>;
+  deleteBatchEvaluation(
+    args: DeleteBatchEvaluationCommandInput,
+    cb: (err: any, data?: DeleteBatchEvaluationCommandOutput) => void
+  ): void;
+  deleteBatchEvaluation(
+    args: DeleteBatchEvaluationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeleteBatchEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCapacityProviderSessionCommand}
+   */
+  deleteCapacityProviderSession(
+    args: DeleteCapacityProviderSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeleteCapacityProviderSessionCommandOutput>;
+  deleteCapacityProviderSession(
+    args: DeleteCapacityProviderSessionCommandInput,
+    cb: (err: any, data?: DeleteCapacityProviderSessionCommandOutput) => void
+  ): void;
+  deleteCapacityProviderSession(
+    args: DeleteCapacityProviderSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeleteCapacityProviderSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEventCommand}
+   */
+  deleteEvent(
+    args: DeleteEventCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeleteEventCommandOutput>;
+  deleteEvent(
+    args: DeleteEventCommandInput,
+    cb: (err: any, data?: DeleteEventCommandOutput) => void
+  ): void;
+  deleteEvent(
+    args: DeleteEventCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeleteEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMemoryRecordCommand}
+   */
+  deleteMemoryRecord(
+    args: DeleteMemoryRecordCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeleteMemoryRecordCommandOutput>;
+  deleteMemoryRecord(
+    args: DeleteMemoryRecordCommandInput,
+    cb: (err: any, data?: DeleteMemoryRecordCommandOutput) => void
+  ): void;
+  deleteMemoryRecord(
+    args: DeleteMemoryRecordCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeleteMemoryRecordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePaymentInstrumentCommand}
+   */
+  deletePaymentInstrument(
+    args: DeletePaymentInstrumentCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeletePaymentInstrumentCommandOutput>;
+  deletePaymentInstrument(
+    args: DeletePaymentInstrumentCommandInput,
+    cb: (err: any, data?: DeletePaymentInstrumentCommandOutput) => void
+  ): void;
+  deletePaymentInstrument(
+    args: DeletePaymentInstrumentCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeletePaymentInstrumentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePaymentSessionCommand}
+   */
+  deletePaymentSession(
+    args: DeletePaymentSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeletePaymentSessionCommandOutput>;
+  deletePaymentSession(
+    args: DeletePaymentSessionCommandInput,
+    cb: (err: any, data?: DeletePaymentSessionCommandOutput) => void
+  ): void;
+  deletePaymentSession(
+    args: DeletePaymentSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeletePaymentSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecommendationCommand}
+   */
+  deleteRecommendation(
+    args: DeleteRecommendationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<DeleteRecommendationCommandOutput>;
+  deleteRecommendation(
+    args: DeleteRecommendationCommandInput,
+    cb: (err: any, data?: DeleteRecommendationCommandOutput) => void
+  ): void;
+  deleteRecommendation(
+    args: DeleteRecommendationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: DeleteRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EvaluateCommand}
+   */
+  evaluate(
+    args: EvaluateCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<EvaluateCommandOutput>;
+  evaluate(
+    args: EvaluateCommandInput,
+    cb: (err: any, data?: EvaluateCommandOutput) => void
+  ): void;
+  evaluate(
+    args: EvaluateCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: EvaluateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetABTestCommand}
+   */
+  getABTest(
+    args: GetABTestCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetABTestCommandOutput>;
+  getABTest(
+    args: GetABTestCommandInput,
+    cb: (err: any, data?: GetABTestCommandOutput) => void
+  ): void;
+  getABTest(
+    args: GetABTestCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetABTestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentCardCommand}
+   */
+  getAgentCard(
+    args: GetAgentCardCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetAgentCardCommandOutput>;
+  getAgentCard(
+    args: GetAgentCardCommandInput,
+    cb: (err: any, data?: GetAgentCardCommandOutput) => void
+  ): void;
+  getAgentCard(
+    args: GetAgentCardCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetAgentCardCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBatchEvaluationCommand}
+   */
+  getBatchEvaluation(
+    args: GetBatchEvaluationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetBatchEvaluationCommandOutput>;
+  getBatchEvaluation(
+    args: GetBatchEvaluationCommandInput,
+    cb: (err: any, data?: GetBatchEvaluationCommandOutput) => void
+  ): void;
+  getBatchEvaluation(
+    args: GetBatchEvaluationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetBatchEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBrowserSessionCommand}
+   */
+  getBrowserSession(
+    args: GetBrowserSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetBrowserSessionCommandOutput>;
+  getBrowserSession(
+    args: GetBrowserSessionCommandInput,
+    cb: (err: any, data?: GetBrowserSessionCommandOutput) => void
+  ): void;
+  getBrowserSession(
+    args: GetBrowserSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetBrowserSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCodeInterpreterSessionCommand}
+   */
+  getCodeInterpreterSession(
+    args: GetCodeInterpreterSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetCodeInterpreterSessionCommandOutput>;
+  getCodeInterpreterSession(
+    args: GetCodeInterpreterSessionCommandInput,
+    cb: (err: any, data?: GetCodeInterpreterSessionCommandOutput) => void
+  ): void;
+  getCodeInterpreterSession(
+    args: GetCodeInterpreterSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetCodeInterpreterSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEventCommand}
+   */
+  getEvent(
+    args: GetEventCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetEventCommandOutput>;
+  getEvent(
+    args: GetEventCommandInput,
+    cb: (err: any, data?: GetEventCommandOutput) => void
+  ): void;
+  getEvent(
+    args: GetEventCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMemoryRecordCommand}
+   */
+  getMemoryRecord(
+    args: GetMemoryRecordCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetMemoryRecordCommandOutput>;
+  getMemoryRecord(
+    args: GetMemoryRecordCommandInput,
+    cb: (err: any, data?: GetMemoryRecordCommandOutput) => void
+  ): void;
+  getMemoryRecord(
+    args: GetMemoryRecordCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetMemoryRecordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPaymentInstrumentCommand}
+   */
+  getPaymentInstrument(
+    args: GetPaymentInstrumentCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetPaymentInstrumentCommandOutput>;
+  getPaymentInstrument(
+    args: GetPaymentInstrumentCommandInput,
+    cb: (err: any, data?: GetPaymentInstrumentCommandOutput) => void
+  ): void;
+  getPaymentInstrument(
+    args: GetPaymentInstrumentCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetPaymentInstrumentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPaymentInstrumentBalanceCommand}
+   */
+  getPaymentInstrumentBalance(
+    args: GetPaymentInstrumentBalanceCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetPaymentInstrumentBalanceCommandOutput>;
+  getPaymentInstrumentBalance(
+    args: GetPaymentInstrumentBalanceCommandInput,
+    cb: (err: any, data?: GetPaymentInstrumentBalanceCommandOutput) => void
+  ): void;
+  getPaymentInstrumentBalance(
+    args: GetPaymentInstrumentBalanceCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetPaymentInstrumentBalanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPaymentSessionCommand}
+   */
+  getPaymentSession(
+    args: GetPaymentSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetPaymentSessionCommandOutput>;
+  getPaymentSession(
+    args: GetPaymentSessionCommandInput,
+    cb: (err: any, data?: GetPaymentSessionCommandOutput) => void
+  ): void;
+  getPaymentSession(
+    args: GetPaymentSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetPaymentSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationCommand}
+   */
+  getRecommendation(
+    args: GetRecommendationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetRecommendationCommandOutput>;
+  getRecommendation(
+    args: GetRecommendationCommandInput,
+    cb: (err: any, data?: GetRecommendationCommandOutput) => void
+  ): void;
+  getRecommendation(
+    args: GetRecommendationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceApiKeyCommand}
+   */
+  getResourceApiKey(
+    args: GetResourceApiKeyCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetResourceApiKeyCommandOutput>;
+  getResourceApiKey(
+    args: GetResourceApiKeyCommandInput,
+    cb: (err: any, data?: GetResourceApiKeyCommandOutput) => void
+  ): void;
+  getResourceApiKey(
+    args: GetResourceApiKeyCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetResourceApiKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceOauth2TokenCommand}
+   */
+  getResourceOauth2Token(
+    args: GetResourceOauth2TokenCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetResourceOauth2TokenCommandOutput>;
+  getResourceOauth2Token(
+    args: GetResourceOauth2TokenCommandInput,
+    cb: (err: any, data?: GetResourceOauth2TokenCommandOutput) => void
+  ): void;
+  getResourceOauth2Token(
+    args: GetResourceOauth2TokenCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetResourceOauth2TokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePaymentTokenCommand}
+   */
+  getResourcePaymentToken(
+    args: GetResourcePaymentTokenCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetResourcePaymentTokenCommandOutput>;
+  getResourcePaymentToken(
+    args: GetResourcePaymentTokenCommandInput,
+    cb: (err: any, data?: GetResourcePaymentTokenCommandOutput) => void
+  ): void;
+  getResourcePaymentToken(
+    args: GetResourcePaymentTokenCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetResourcePaymentTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkloadAccessTokenCommand}
+   */
+  getWorkloadAccessToken(
+    args: GetWorkloadAccessTokenCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetWorkloadAccessTokenCommandOutput>;
+  getWorkloadAccessToken(
+    args: GetWorkloadAccessTokenCommandInput,
+    cb: (err: any, data?: GetWorkloadAccessTokenCommandOutput) => void
+  ): void;
+  getWorkloadAccessToken(
+    args: GetWorkloadAccessTokenCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetWorkloadAccessTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkloadAccessTokenForJWTCommand}
+   */
+  getWorkloadAccessTokenForJWT(
+    args: GetWorkloadAccessTokenForJWTCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetWorkloadAccessTokenForJWTCommandOutput>;
+  getWorkloadAccessTokenForJWT(
+    args: GetWorkloadAccessTokenForJWTCommandInput,
+    cb: (err: any, data?: GetWorkloadAccessTokenForJWTCommandOutput) => void
+  ): void;
+  getWorkloadAccessTokenForJWT(
+    args: GetWorkloadAccessTokenForJWTCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetWorkloadAccessTokenForJWTCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkloadAccessTokenForUserIdCommand}
+   */
+  getWorkloadAccessTokenForUserId(
+    args: GetWorkloadAccessTokenForUserIdCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<GetWorkloadAccessTokenForUserIdCommandOutput>;
+  getWorkloadAccessTokenForUserId(
+    args: GetWorkloadAccessTokenForUserIdCommandInput,
+    cb: (err: any, data?: GetWorkloadAccessTokenForUserIdCommandOutput) => void
+  ): void;
+  getWorkloadAccessTokenForUserId(
+    args: GetWorkloadAccessTokenForUserIdCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: GetWorkloadAccessTokenForUserIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link IngestDataCommand}
+   */
+  ingestData(
+    args: IngestDataCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<IngestDataCommandOutput>;
+  ingestData(
+    args: IngestDataCommandInput,
+    cb: (err: any, data?: IngestDataCommandOutput) => void
+  ): void;
+  ingestData(
+    args: IngestDataCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: IngestDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeAgentRuntimeCommand}
+   */
+  invokeAgentRuntime(
+    args: InvokeAgentRuntimeCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<InvokeAgentRuntimeCommandOutput>;
+  invokeAgentRuntime(
+    args: InvokeAgentRuntimeCommandInput,
+    cb: (err: any, data?: InvokeAgentRuntimeCommandOutput) => void
+  ): void;
+  invokeAgentRuntime(
+    args: InvokeAgentRuntimeCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: InvokeAgentRuntimeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeAgentRuntimeCommandCommand}
+   */
+  invokeAgentRuntimeCommand(
+    args: InvokeAgentRuntimeCommandCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<InvokeAgentRuntimeCommandCommandOutput>;
+  invokeAgentRuntimeCommand(
+    args: InvokeAgentRuntimeCommandCommandInput,
+    cb: (err: any, data?: InvokeAgentRuntimeCommandCommandOutput) => void
+  ): void;
+  invokeAgentRuntimeCommand(
+    args: InvokeAgentRuntimeCommandCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: InvokeAgentRuntimeCommandCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeBrowserCommand}
+   */
+  invokeBrowser(
+    args: InvokeBrowserCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<InvokeBrowserCommandOutput>;
+  invokeBrowser(
+    args: InvokeBrowserCommandInput,
+    cb: (err: any, data?: InvokeBrowserCommandOutput) => void
+  ): void;
+  invokeBrowser(
+    args: InvokeBrowserCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: InvokeBrowserCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeCodeInterpreterCommand}
+   */
+  invokeCodeInterpreter(
+    args: InvokeCodeInterpreterCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<InvokeCodeInterpreterCommandOutput>;
+  invokeCodeInterpreter(
+    args: InvokeCodeInterpreterCommandInput,
+    cb: (err: any, data?: InvokeCodeInterpreterCommandOutput) => void
+  ): void;
+  invokeCodeInterpreter(
+    args: InvokeCodeInterpreterCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: InvokeCodeInterpreterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeHarnessCommand}
+   */
+  invokeHarness(
+    args: InvokeHarnessCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<InvokeHarnessCommandOutput>;
+  invokeHarness(
+    args: InvokeHarnessCommandInput,
+    cb: (err: any, data?: InvokeHarnessCommandOutput) => void
+  ): void;
+  invokeHarness(
+    args: InvokeHarnessCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: InvokeHarnessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeWebSearchCommand}
+   */
+  invokeWebSearch(
+    args: InvokeWebSearchCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<InvokeWebSearchCommandOutput>;
+  invokeWebSearch(
+    args: InvokeWebSearchCommandInput,
+    cb: (err: any, data?: InvokeWebSearchCommandOutput) => void
+  ): void;
+  invokeWebSearch(
+    args: InvokeWebSearchCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: InvokeWebSearchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListABTestsCommand}
+   */
+  listABTests(): Promise<ListABTestsCommandOutput>;
+  listABTests(
+    args: ListABTestsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListABTestsCommandOutput>;
+  listABTests(
+    args: ListABTestsCommandInput,
+    cb: (err: any, data?: ListABTestsCommandOutput) => void
+  ): void;
+  listABTests(
+    args: ListABTestsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListABTestsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListActorsCommand}
+   */
+  listActors(
+    args: ListActorsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListActorsCommandOutput>;
+  listActors(
+    args: ListActorsCommandInput,
+    cb: (err: any, data?: ListActorsCommandOutput) => void
+  ): void;
+  listActors(
+    args: ListActorsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListActorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchEvaluationsCommand}
+   */
+  listBatchEvaluations(): Promise<ListBatchEvaluationsCommandOutput>;
+  listBatchEvaluations(
+    args: ListBatchEvaluationsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListBatchEvaluationsCommandOutput>;
+  listBatchEvaluations(
+    args: ListBatchEvaluationsCommandInput,
+    cb: (err: any, data?: ListBatchEvaluationsCommandOutput) => void
+  ): void;
+  listBatchEvaluations(
+    args: ListBatchEvaluationsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListBatchEvaluationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBrowserSessionsCommand}
+   */
+  listBrowserSessions(
+    args: ListBrowserSessionsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListBrowserSessionsCommandOutput>;
+  listBrowserSessions(
+    args: ListBrowserSessionsCommandInput,
+    cb: (err: any, data?: ListBrowserSessionsCommandOutput) => void
+  ): void;
+  listBrowserSessions(
+    args: ListBrowserSessionsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListBrowserSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCodeInterpreterSessionsCommand}
+   */
+  listCodeInterpreterSessions(
+    args: ListCodeInterpreterSessionsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListCodeInterpreterSessionsCommandOutput>;
+  listCodeInterpreterSessions(
+    args: ListCodeInterpreterSessionsCommandInput,
+    cb: (err: any, data?: ListCodeInterpreterSessionsCommandOutput) => void
+  ): void;
+  listCodeInterpreterSessions(
+    args: ListCodeInterpreterSessionsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListCodeInterpreterSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEventsCommand}
+   */
+  listEvents(
+    args: ListEventsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListEventsCommandOutput>;
+  listEvents(
+    args: ListEventsCommandInput,
+    cb: (err: any, data?: ListEventsCommandOutput) => void
+  ): void;
+  listEvents(
+    args: ListEventsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMemoryExtractionJobsCommand}
+   */
+  listMemoryExtractionJobs(
+    args: ListMemoryExtractionJobsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListMemoryExtractionJobsCommandOutput>;
+  listMemoryExtractionJobs(
+    args: ListMemoryExtractionJobsCommandInput,
+    cb: (err: any, data?: ListMemoryExtractionJobsCommandOutput) => void
+  ): void;
+  listMemoryExtractionJobs(
+    args: ListMemoryExtractionJobsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListMemoryExtractionJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMemoryRecordsCommand}
+   */
+  listMemoryRecords(
+    args: ListMemoryRecordsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListMemoryRecordsCommandOutput>;
+  listMemoryRecords(
+    args: ListMemoryRecordsCommandInput,
+    cb: (err: any, data?: ListMemoryRecordsCommandOutput) => void
+  ): void;
+  listMemoryRecords(
+    args: ListMemoryRecordsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListMemoryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPaymentInstrumentsCommand}
+   */
+  listPaymentInstruments(
+    args: ListPaymentInstrumentsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListPaymentInstrumentsCommandOutput>;
+  listPaymentInstruments(
+    args: ListPaymentInstrumentsCommandInput,
+    cb: (err: any, data?: ListPaymentInstrumentsCommandOutput) => void
+  ): void;
+  listPaymentInstruments(
+    args: ListPaymentInstrumentsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListPaymentInstrumentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPaymentSessionsCommand}
+   */
+  listPaymentSessions(
+    args: ListPaymentSessionsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListPaymentSessionsCommandOutput>;
+  listPaymentSessions(
+    args: ListPaymentSessionsCommandInput,
+    cb: (err: any, data?: ListPaymentSessionsCommandOutput) => void
+  ): void;
+  listPaymentSessions(
+    args: ListPaymentSessionsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListPaymentSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendationsCommand}
+   */
+  listRecommendations(): Promise<ListRecommendationsCommandOutput>;
+  listRecommendations(
+    args: ListRecommendationsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListRecommendationsCommandOutput>;
+  listRecommendations(
+    args: ListRecommendationsCommandInput,
+    cb: (err: any, data?: ListRecommendationsCommandOutput) => void
+  ): void;
+  listRecommendations(
+    args: ListRecommendationsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   */
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ProcessPaymentCommand}
+   */
+  processPayment(
+    args: ProcessPaymentCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<ProcessPaymentCommandOutput>;
+  processPayment(
+    args: ProcessPaymentCommandInput,
+    cb: (err: any, data?: ProcessPaymentCommandOutput) => void
+  ): void;
+  processPayment(
+    args: ProcessPaymentCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: ProcessPaymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetrieveMemoryRecordsCommand}
+   */
+  retrieveMemoryRecords(
+    args: RetrieveMemoryRecordsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<RetrieveMemoryRecordsCommandOutput>;
+  retrieveMemoryRecords(
+    args: RetrieveMemoryRecordsCommandInput,
+    cb: (err: any, data?: RetrieveMemoryRecordsCommandOutput) => void
+  ): void;
+  retrieveMemoryRecords(
+    args: RetrieveMemoryRecordsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: RetrieveMemoryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SaveBrowserSessionProfileCommand}
+   */
+  saveBrowserSessionProfile(
+    args: SaveBrowserSessionProfileCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<SaveBrowserSessionProfileCommandOutput>;
+  saveBrowserSessionProfile(
+    args: SaveBrowserSessionProfileCommandInput,
+    cb: (err: any, data?: SaveBrowserSessionProfileCommandOutput) => void
+  ): void;
+  saveBrowserSessionProfile(
+    args: SaveBrowserSessionProfileCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: SaveBrowserSessionProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchRegistryRecordsCommand}
+   */
+  searchRegistryRecords(
+    args: SearchRegistryRecordsCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<SearchRegistryRecordsCommandOutput>;
+  searchRegistryRecords(
+    args: SearchRegistryRecordsCommandInput,
+    cb: (err: any, data?: SearchRegistryRecordsCommandOutput) => void
+  ): void;
+  searchRegistryRecords(
+    args: SearchRegistryRecordsCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: SearchRegistryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBatchEvaluationCommand}
+   */
+  startBatchEvaluation(
+    args: StartBatchEvaluationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StartBatchEvaluationCommandOutput>;
+  startBatchEvaluation(
+    args: StartBatchEvaluationCommandInput,
+    cb: (err: any, data?: StartBatchEvaluationCommandOutput) => void
+  ): void;
+  startBatchEvaluation(
+    args: StartBatchEvaluationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StartBatchEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBrowserSessionCommand}
+   */
+  startBrowserSession(
+    args: StartBrowserSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StartBrowserSessionCommandOutput>;
+  startBrowserSession(
+    args: StartBrowserSessionCommandInput,
+    cb: (err: any, data?: StartBrowserSessionCommandOutput) => void
+  ): void;
+  startBrowserSession(
+    args: StartBrowserSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StartBrowserSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCodeInterpreterSessionCommand}
+   */
+  startCodeInterpreterSession(
+    args: StartCodeInterpreterSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StartCodeInterpreterSessionCommandOutput>;
+  startCodeInterpreterSession(
+    args: StartCodeInterpreterSessionCommandInput,
+    cb: (err: any, data?: StartCodeInterpreterSessionCommandOutput) => void
+  ): void;
+  startCodeInterpreterSession(
+    args: StartCodeInterpreterSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StartCodeInterpreterSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMemoryExtractionJobCommand}
+   */
+  startMemoryExtractionJob(
+    args: StartMemoryExtractionJobCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StartMemoryExtractionJobCommandOutput>;
+  startMemoryExtractionJob(
+    args: StartMemoryExtractionJobCommandInput,
+    cb: (err: any, data?: StartMemoryExtractionJobCommandOutput) => void
+  ): void;
+  startMemoryExtractionJob(
+    args: StartMemoryExtractionJobCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StartMemoryExtractionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecommendationCommand}
+   */
+  startRecommendation(
+    args: StartRecommendationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StartRecommendationCommandOutput>;
+  startRecommendation(
+    args: StartRecommendationCommandInput,
+    cb: (err: any, data?: StartRecommendationCommandOutput) => void
+  ): void;
+  startRecommendation(
+    args: StartRecommendationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StartRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopBatchEvaluationCommand}
+   */
+  stopBatchEvaluation(
+    args: StopBatchEvaluationCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StopBatchEvaluationCommandOutput>;
+  stopBatchEvaluation(
+    args: StopBatchEvaluationCommandInput,
+    cb: (err: any, data?: StopBatchEvaluationCommandOutput) => void
+  ): void;
+  stopBatchEvaluation(
+    args: StopBatchEvaluationCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StopBatchEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopBrowserSessionCommand}
+   */
+  stopBrowserSession(
+    args: StopBrowserSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StopBrowserSessionCommandOutput>;
+  stopBrowserSession(
+    args: StopBrowserSessionCommandInput,
+    cb: (err: any, data?: StopBrowserSessionCommandOutput) => void
+  ): void;
+  stopBrowserSession(
+    args: StopBrowserSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StopBrowserSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopCodeInterpreterSessionCommand}
+   */
+  stopCodeInterpreterSession(
+    args: StopCodeInterpreterSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StopCodeInterpreterSessionCommandOutput>;
+  stopCodeInterpreterSession(
+    args: StopCodeInterpreterSessionCommandInput,
+    cb: (err: any, data?: StopCodeInterpreterSessionCommandOutput) => void
+  ): void;
+  stopCodeInterpreterSession(
+    args: StopCodeInterpreterSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StopCodeInterpreterSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopRuntimeSessionCommand}
+   */
+  stopRuntimeSession(
+    args: StopRuntimeSessionCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<StopRuntimeSessionCommandOutput>;
+  stopRuntimeSession(
+    args: StopRuntimeSessionCommandInput,
+    cb: (err: any, data?: StopRuntimeSessionCommandOutput) => void
+  ): void;
+  stopRuntimeSession(
+    args: StopRuntimeSessionCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: StopRuntimeSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateABTestCommand}
+   */
+  updateABTest(
+    args: UpdateABTestCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<UpdateABTestCommandOutput>;
+  updateABTest(
+    args: UpdateABTestCommandInput,
+    cb: (err: any, data?: UpdateABTestCommandOutput) => void
+  ): void;
+  updateABTest(
+    args: UpdateABTestCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: UpdateABTestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrowserStreamCommand}
+   */
+  updateBrowserStream(
+    args: UpdateBrowserStreamCommandInput,
+    options?: BedrockAgentCoreRequestOptions
+  ): Promise<UpdateBrowserStreamCommandOutput>;
+  updateBrowserStream(
+    args: UpdateBrowserStreamCommandInput,
+    cb: (err: any, data?: UpdateBrowserStreamCommandOutput) => void
+  ): void;
+  updateBrowserStream(
+    args: UpdateBrowserStreamCommandInput,
+    options: BedrockAgentCoreRequestOptions,
+    cb: (err: any, data?: UpdateBrowserStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListABTestsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListABTestsCommandOutput}.
+   */
+  paginateListABTests(
+    args?: ListABTestsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListABTestsCommandOutput>;
+
+  /**
+   * @see {@link ListActorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListActorsCommandOutput}.
+   */
+  paginateListActors(
+    args: ListActorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListActorsCommandOutput>;
+
+  /**
+   * @see {@link ListBatchEvaluationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBatchEvaluationsCommandOutput}.
+   */
+  paginateListBatchEvaluations(
+    args?: ListBatchEvaluationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBatchEvaluationsCommandOutput>;
+
+  /**
+   * @see {@link ListEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventsCommandOutput}.
+   */
+  paginateListEvents(
+    args: ListEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventsCommandOutput>;
+
+  /**
+   * @see {@link ListMemoryExtractionJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMemoryExtractionJobsCommandOutput}.
+   */
+  paginateListMemoryExtractionJobs(
+    args: ListMemoryExtractionJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMemoryExtractionJobsCommandOutput>;
+
+  /**
+   * @see {@link ListMemoryRecordsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMemoryRecordsCommandOutput}.
+   */
+  paginateListMemoryRecords(
+    args: ListMemoryRecordsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMemoryRecordsCommandOutput>;
+
+  /**
+   * @see {@link ListPaymentInstrumentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPaymentInstrumentsCommandOutput}.
+   */
+  paginateListPaymentInstruments(
+    args: ListPaymentInstrumentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPaymentInstrumentsCommandOutput>;
+
+  /**
+   * @see {@link ListPaymentSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPaymentSessionsCommandOutput}.
+   */
+  paginateListPaymentSessions(
+    args: ListPaymentSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPaymentSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendationsCommandOutput}.
+   */
+  paginateListRecommendations(
+    args?: ListRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+
+  /**
+   * @see {@link RetrieveMemoryRecordsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link RetrieveMemoryRecordsCommandOutput}.
+   */
+  paginateRetrieveMemoryRecords(
+    args: RetrieveMemoryRecordsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<RetrieveMemoryRecordsCommandOutput>;
+}
+
+/**
+ * <p>Welcome to the Amazon Bedrock AgentCore Data Plane API reference. Data Plane actions process and handle data or workloads within Amazon Web Services services. </p>
+ * @public
+ */
+export class BedrockAgentCore extends BedrockAgentCoreClient implements BedrockAgentCore {}
+createAggregatedClient(commands, BedrockAgentCore, { paginators });

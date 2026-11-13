@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { ListProjectsRequest, ListProjectsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListProjectsCommand,
-  serializeAws_json1_1ListProjectsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProjectsRequest, ListProjectsResult } from "../models/models_0";
+import { ListProjects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProjectsCommand}.
+ */
 export interface ListProjectsCommandInput extends ListProjectsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListProjectsCommand}.
+ */
 export interface ListProjectsCommandOutput extends ListProjectsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,84 @@ export interface ListProjectsCommandOutput extends ListProjectsResult, __Metadat
  * ```javascript
  * import { DeviceFarmClient, ListProjectsCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, ListProjectsCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // ListProjectsRequest
+ *   arn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListProjectsCommand(input);
  * const response = await client.send(command);
+ * // { // ListProjectsResult
+ * //   projects: [ // Projects
+ * //     { // Project
+ * //       arn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       defaultJobTimeoutMinutes: Number("int"),
+ * //       created: new Date("TIMESTAMP"),
+ * //       vpcConfig: { // VpcConfig
+ * //         securityGroupIds: [ // VpcSecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         subnetIds: [ // VpcSubnetIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         vpcId: "STRING_VALUE", // required
+ * //       },
+ * //       environmentVariables: [ // EnvironmentVariables
+ * //         { // EnvironmentVariable
+ * //           name: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       executionRoleArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProjectsCommandInput - {@link ListProjectsCommandInput}
+ * @returns {@link ListProjectsCommandOutput}
  * @see {@link ListProjectsCommandInput} for command's `input` shape.
  * @see {@link ListProjectsCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class ListProjectsCommand extends $Command<
-  ListProjectsCommandInput,
-  ListProjectsCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProjectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProjectsCommandInput, ListProjectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "ListProjectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProjectsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProjectsResult.filterSensitiveLog,
+export class ListProjectsCommand extends command<ListProjectsCommandInput, ListProjectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProjects",
+  ListProjects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProjectsRequest;
+      output: ListProjectsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProjectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListProjectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProjectsCommandOutput> {
-    return deserializeAws_json1_1ListProjectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProjectsCommandInput;
+      output: ListProjectsCommandOutput;
+    };
+  };
 }

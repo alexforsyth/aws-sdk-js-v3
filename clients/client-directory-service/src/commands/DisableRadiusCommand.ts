@@ -1,96 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { DisableRadiusRequest, DisableRadiusResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DisableRadiusCommand,
-  serializeAws_json1_1DisableRadiusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisableRadiusRequest, DisableRadiusResult } from "../models/models_0";
+import { DisableRadius$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableRadiusCommand}.
+ */
 export interface DisableRadiusCommandInput extends DisableRadiusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableRadiusCommand}.
+ */
 export interface DisableRadiusCommandOutput extends DisableRadiusResult, __MetadataBearer {}
 
 /**
- * <p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In
- *          User Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>
+ * <p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User
+ *          Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DirectoryServiceClient, DisableRadiusCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, DisableRadiusCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // DisableRadiusRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ * };
  * const command = new DisableRadiusCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisableRadiusCommandInput - {@link DisableRadiusCommandInput}
+ * @returns {@link DisableRadiusCommandOutput}
  * @see {@link DisableRadiusCommandInput} for command's `input` shape.
  * @see {@link DisableRadiusCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To disable radius
+ * ```javascript
+ * // The following example disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed"
+ * };
+ * const command = new DisableRadiusCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisableRadiusCommand extends $Command<
-  DisableRadiusCommandInput,
-  DisableRadiusCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableRadiusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisableRadiusCommandInput, DisableRadiusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "DisableRadiusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableRadiusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisableRadiusResult.filterSensitiveLog,
+export class DisableRadiusCommand extends command<DisableRadiusCommandInput, DisableRadiusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableRadius",
+  DisableRadius$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableRadiusRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisableRadiusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DisableRadiusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisableRadiusCommandOutput> {
-    return deserializeAws_json1_1DisableRadiusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableRadiusCommandInput;
+      output: DisableRadiusCommandOutput;
+    };
+  };
 }

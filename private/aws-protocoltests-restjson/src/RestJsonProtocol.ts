@@ -1,2796 +1,2690 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type AllQueryStringTypesCommandInput,
+  type AllQueryStringTypesCommandOutput,
   AllQueryStringTypesCommand,
-  AllQueryStringTypesCommandInput,
-  AllQueryStringTypesCommandOutput,
 } from "./commands/AllQueryStringTypesCommand";
 import {
+  type ConstantAndVariableQueryStringCommandInput,
+  type ConstantAndVariableQueryStringCommandOutput,
   ConstantAndVariableQueryStringCommand,
-  ConstantAndVariableQueryStringCommandInput,
-  ConstantAndVariableQueryStringCommandOutput,
 } from "./commands/ConstantAndVariableQueryStringCommand";
 import {
+  type ConstantQueryStringCommandInput,
+  type ConstantQueryStringCommandOutput,
   ConstantQueryStringCommand,
-  ConstantQueryStringCommandInput,
-  ConstantQueryStringCommandOutput,
 } from "./commands/ConstantQueryStringCommand";
 import {
+  type ContentTypeParametersCommandInput,
+  type ContentTypeParametersCommandOutput,
+  ContentTypeParametersCommand,
+} from "./commands/ContentTypeParametersCommand";
+import {
+  type DatetimeOffsetsCommandInput,
+  type DatetimeOffsetsCommandOutput,
+  DatetimeOffsetsCommand,
+} from "./commands/DatetimeOffsetsCommand";
+import {
+  type DocumentTypeAsMapValueCommandInput,
+  type DocumentTypeAsMapValueCommandOutput,
+  DocumentTypeAsMapValueCommand,
+} from "./commands/DocumentTypeAsMapValueCommand";
+import {
+  type DocumentTypeAsPayloadCommandInput,
+  type DocumentTypeAsPayloadCommandOutput,
   DocumentTypeAsPayloadCommand,
-  DocumentTypeAsPayloadCommandInput,
-  DocumentTypeAsPayloadCommandOutput,
 } from "./commands/DocumentTypeAsPayloadCommand";
 import {
+  type DocumentTypeCommandInput,
+  type DocumentTypeCommandOutput,
   DocumentTypeCommand,
-  DocumentTypeCommandInput,
-  DocumentTypeCommandOutput,
 } from "./commands/DocumentTypeCommand";
 import {
+  type DuplexStreamCommandInput,
+  type DuplexStreamCommandOutput,
+  DuplexStreamCommand,
+} from "./commands/DuplexStreamCommand";
+import {
+  type DuplexStreamWithDistinctStreamsCommandInput,
+  type DuplexStreamWithDistinctStreamsCommandOutput,
+  DuplexStreamWithDistinctStreamsCommand,
+} from "./commands/DuplexStreamWithDistinctStreamsCommand";
+import {
+  type DuplexStreamWithInitialMessagesCommandInput,
+  type DuplexStreamWithInitialMessagesCommandOutput,
+  DuplexStreamWithInitialMessagesCommand,
+} from "./commands/DuplexStreamWithInitialMessagesCommand";
+import {
+  type EmptyInputAndEmptyOutputCommandInput,
+  type EmptyInputAndEmptyOutputCommandOutput,
   EmptyInputAndEmptyOutputCommand,
-  EmptyInputAndEmptyOutputCommandInput,
-  EmptyInputAndEmptyOutputCommandOutput,
 } from "./commands/EmptyInputAndEmptyOutputCommand";
 import {
+  type EndpointOperationCommandInput,
+  type EndpointOperationCommandOutput,
   EndpointOperationCommand,
-  EndpointOperationCommandInput,
-  EndpointOperationCommandOutput,
 } from "./commands/EndpointOperationCommand";
 import {
+  type EndpointWithHostLabelOperationCommandInput,
+  type EndpointWithHostLabelOperationCommandOutput,
   EndpointWithHostLabelOperationCommand,
-  EndpointWithHostLabelOperationCommandInput,
-  EndpointWithHostLabelOperationCommandOutput,
 } from "./commands/EndpointWithHostLabelOperationCommand";
 import {
+  type FractionalSecondsCommandInput,
+  type FractionalSecondsCommandOutput,
+  FractionalSecondsCommand,
+} from "./commands/FractionalSecondsCommand";
+import {
+  type GreetingWithErrorsCommandInput,
+  type GreetingWithErrorsCommandOutput,
   GreetingWithErrorsCommand,
-  GreetingWithErrorsCommandInput,
-  GreetingWithErrorsCommandOutput,
 } from "./commands/GreetingWithErrorsCommand";
 import {
+  type HostWithPathOperationCommandInput,
+  type HostWithPathOperationCommandOutput,
   HostWithPathOperationCommand,
-  HostWithPathOperationCommandInput,
-  HostWithPathOperationCommandOutput,
 } from "./commands/HostWithPathOperationCommand";
 import {
+  type HttpChecksumRequiredCommandInput,
+  type HttpChecksumRequiredCommandOutput,
   HttpChecksumRequiredCommand,
-  HttpChecksumRequiredCommandInput,
-  HttpChecksumRequiredCommandOutput,
 } from "./commands/HttpChecksumRequiredCommand";
 import {
+  type HttpEmptyPrefixHeadersCommandInput,
+  type HttpEmptyPrefixHeadersCommandOutput,
+  HttpEmptyPrefixHeadersCommand,
+} from "./commands/HttpEmptyPrefixHeadersCommand";
+import {
+  type HttpEnumPayloadCommandInput,
+  type HttpEnumPayloadCommandOutput,
   HttpEnumPayloadCommand,
-  HttpEnumPayloadCommandInput,
-  HttpEnumPayloadCommandOutput,
 } from "./commands/HttpEnumPayloadCommand";
 import {
+  type HttpPayloadTraitsCommandInput,
+  type HttpPayloadTraitsCommandOutput,
   HttpPayloadTraitsCommand,
-  HttpPayloadTraitsCommandInput,
-  HttpPayloadTraitsCommandOutput,
 } from "./commands/HttpPayloadTraitsCommand";
 import {
+  type HttpPayloadTraitsWithMediaTypeCommandInput,
+  type HttpPayloadTraitsWithMediaTypeCommandOutput,
   HttpPayloadTraitsWithMediaTypeCommand,
-  HttpPayloadTraitsWithMediaTypeCommandInput,
-  HttpPayloadTraitsWithMediaTypeCommandOutput,
 } from "./commands/HttpPayloadTraitsWithMediaTypeCommand";
 import {
+  type HttpPayloadWithStructureCommandInput,
+  type HttpPayloadWithStructureCommandOutput,
   HttpPayloadWithStructureCommand,
-  HttpPayloadWithStructureCommandInput,
-  HttpPayloadWithStructureCommandOutput,
 } from "./commands/HttpPayloadWithStructureCommand";
 import {
+  type HttpPayloadWithUnionCommandInput,
+  type HttpPayloadWithUnionCommandOutput,
+  HttpPayloadWithUnionCommand,
+} from "./commands/HttpPayloadWithUnionCommand";
+import {
+  type HttpPrefixHeadersCommandInput,
+  type HttpPrefixHeadersCommandOutput,
   HttpPrefixHeadersCommand,
-  HttpPrefixHeadersCommandInput,
-  HttpPrefixHeadersCommandOutput,
 } from "./commands/HttpPrefixHeadersCommand";
 import {
-  HttpPrefixHeadersResponseCommand,
-  HttpPrefixHeadersResponseCommandInput,
-  HttpPrefixHeadersResponseCommandOutput,
-} from "./commands/HttpPrefixHeadersResponseCommand";
+  type HttpPrefixHeadersInResponseCommandInput,
+  type HttpPrefixHeadersInResponseCommandOutput,
+  HttpPrefixHeadersInResponseCommand,
+} from "./commands/HttpPrefixHeadersInResponseCommand";
 import {
+  type HttpQueryParamsOnlyOperationCommandInput,
+  type HttpQueryParamsOnlyOperationCommandOutput,
+  HttpQueryParamsOnlyOperationCommand,
+} from "./commands/HttpQueryParamsOnlyOperationCommand";
+import {
+  type HttpRequestWithFloatLabelsCommandInput,
+  type HttpRequestWithFloatLabelsCommandOutput,
   HttpRequestWithFloatLabelsCommand,
-  HttpRequestWithFloatLabelsCommandInput,
-  HttpRequestWithFloatLabelsCommandOutput,
 } from "./commands/HttpRequestWithFloatLabelsCommand";
 import {
+  type HttpRequestWithGreedyLabelInPathCommandInput,
+  type HttpRequestWithGreedyLabelInPathCommandOutput,
   HttpRequestWithGreedyLabelInPathCommand,
-  HttpRequestWithGreedyLabelInPathCommandInput,
-  HttpRequestWithGreedyLabelInPathCommandOutput,
 } from "./commands/HttpRequestWithGreedyLabelInPathCommand";
 import {
+  type HttpRequestWithLabelsAndTimestampFormatCommandInput,
+  type HttpRequestWithLabelsAndTimestampFormatCommandOutput,
   HttpRequestWithLabelsAndTimestampFormatCommand,
-  HttpRequestWithLabelsAndTimestampFormatCommandInput,
-  HttpRequestWithLabelsAndTimestampFormatCommandOutput,
 } from "./commands/HttpRequestWithLabelsAndTimestampFormatCommand";
 import {
+  type HttpRequestWithLabelsCommandInput,
+  type HttpRequestWithLabelsCommandOutput,
   HttpRequestWithLabelsCommand,
-  HttpRequestWithLabelsCommandInput,
-  HttpRequestWithLabelsCommandOutput,
 } from "./commands/HttpRequestWithLabelsCommand";
 import {
+  type HttpRequestWithRegexLiteralCommandInput,
+  type HttpRequestWithRegexLiteralCommandOutput,
+  HttpRequestWithRegexLiteralCommand,
+} from "./commands/HttpRequestWithRegexLiteralCommand";
+import {
+  type HttpResponseCodeCommandInput,
+  type HttpResponseCodeCommandOutput,
   HttpResponseCodeCommand,
-  HttpResponseCodeCommandInput,
-  HttpResponseCodeCommandOutput,
 } from "./commands/HttpResponseCodeCommand";
 import {
+  type HttpStringPayloadCommandInput,
+  type HttpStringPayloadCommandOutput,
   HttpStringPayloadCommand,
-  HttpStringPayloadCommandInput,
-  HttpStringPayloadCommandOutput,
 } from "./commands/HttpStringPayloadCommand";
 import {
+  type IgnoreQueryParamsInResponseCommandInput,
+  type IgnoreQueryParamsInResponseCommandOutput,
   IgnoreQueryParamsInResponseCommand,
-  IgnoreQueryParamsInResponseCommandInput,
-  IgnoreQueryParamsInResponseCommandOutput,
 } from "./commands/IgnoreQueryParamsInResponseCommand";
 import {
+  type InputAndOutputWithHeadersCommandInput,
+  type InputAndOutputWithHeadersCommandOutput,
   InputAndOutputWithHeadersCommand,
-  InputAndOutputWithHeadersCommandInput,
-  InputAndOutputWithHeadersCommandOutput,
 } from "./commands/InputAndOutputWithHeadersCommand";
-import { JsonBlobsCommand, JsonBlobsCommandInput, JsonBlobsCommandOutput } from "./commands/JsonBlobsCommand";
-import { JsonEnumsCommand, JsonEnumsCommandInput, JsonEnumsCommandOutput } from "./commands/JsonEnumsCommand";
-import { JsonListsCommand, JsonListsCommandInput, JsonListsCommandOutput } from "./commands/JsonListsCommand";
-import { JsonMapsCommand, JsonMapsCommandInput, JsonMapsCommandOutput } from "./commands/JsonMapsCommand";
 import {
+  type InputStreamCommandInput,
+  type InputStreamCommandOutput,
+  InputStreamCommand,
+} from "./commands/InputStreamCommand";
+import {
+  type InputStreamWithInitialRequestCommandInput,
+  type InputStreamWithInitialRequestCommandOutput,
+  InputStreamWithInitialRequestCommand,
+} from "./commands/InputStreamWithInitialRequestCommand";
+import { type JsonBlobsCommandInput, type JsonBlobsCommandOutput, JsonBlobsCommand } from "./commands/JsonBlobsCommand";
+import { type JsonEnumsCommandInput, type JsonEnumsCommandOutput, JsonEnumsCommand } from "./commands/JsonEnumsCommand";
+import {
+  type JsonIntEnumsCommandInput,
+  type JsonIntEnumsCommandOutput,
+  JsonIntEnumsCommand,
+} from "./commands/JsonIntEnumsCommand";
+import { type JsonListsCommandInput, type JsonListsCommandOutput, JsonListsCommand } from "./commands/JsonListsCommand";
+import { type JsonMapsCommandInput, type JsonMapsCommandOutput, JsonMapsCommand } from "./commands/JsonMapsCommand";
+import {
+  type JsonTimestampsCommandInput,
+  type JsonTimestampsCommandOutput,
   JsonTimestampsCommand,
-  JsonTimestampsCommandInput,
-  JsonTimestampsCommandOutput,
 } from "./commands/JsonTimestampsCommand";
-import { JsonUnionsCommand, JsonUnionsCommandInput, JsonUnionsCommandOutput } from "./commands/JsonUnionsCommand";
 import {
+  type JsonUnionsCommandInput,
+  type JsonUnionsCommandOutput,
+  JsonUnionsCommand,
+} from "./commands/JsonUnionsCommand";
+import {
+  type MalformedAcceptWithBodyCommandInput,
+  type MalformedAcceptWithBodyCommandOutput,
   MalformedAcceptWithBodyCommand,
-  MalformedAcceptWithBodyCommandInput,
-  MalformedAcceptWithBodyCommandOutput,
 } from "./commands/MalformedAcceptWithBodyCommand";
 import {
+  type MalformedAcceptWithGenericStringCommandInput,
+  type MalformedAcceptWithGenericStringCommandOutput,
   MalformedAcceptWithGenericStringCommand,
-  MalformedAcceptWithGenericStringCommandInput,
-  MalformedAcceptWithGenericStringCommandOutput,
 } from "./commands/MalformedAcceptWithGenericStringCommand";
 import {
+  type MalformedAcceptWithPayloadCommandInput,
+  type MalformedAcceptWithPayloadCommandOutput,
   MalformedAcceptWithPayloadCommand,
-  MalformedAcceptWithPayloadCommandInput,
-  MalformedAcceptWithPayloadCommandOutput,
 } from "./commands/MalformedAcceptWithPayloadCommand";
 import {
+  type MalformedBlobCommandInput,
+  type MalformedBlobCommandOutput,
   MalformedBlobCommand,
-  MalformedBlobCommandInput,
-  MalformedBlobCommandOutput,
 } from "./commands/MalformedBlobCommand";
 import {
+  type MalformedBooleanCommandInput,
+  type MalformedBooleanCommandOutput,
   MalformedBooleanCommand,
-  MalformedBooleanCommandInput,
-  MalformedBooleanCommandOutput,
 } from "./commands/MalformedBooleanCommand";
 import {
+  type MalformedByteCommandInput,
+  type MalformedByteCommandOutput,
   MalformedByteCommand,
-  MalformedByteCommandInput,
-  MalformedByteCommandOutput,
 } from "./commands/MalformedByteCommand";
 import {
+  type MalformedContentTypeWithBodyCommandInput,
+  type MalformedContentTypeWithBodyCommandOutput,
   MalformedContentTypeWithBodyCommand,
-  MalformedContentTypeWithBodyCommandInput,
-  MalformedContentTypeWithBodyCommandOutput,
 } from "./commands/MalformedContentTypeWithBodyCommand";
 import {
+  type MalformedContentTypeWithGenericStringCommandInput,
+  type MalformedContentTypeWithGenericStringCommandOutput,
   MalformedContentTypeWithGenericStringCommand,
-  MalformedContentTypeWithGenericStringCommandInput,
-  MalformedContentTypeWithGenericStringCommandOutput,
 } from "./commands/MalformedContentTypeWithGenericStringCommand";
 import {
+  type MalformedContentTypeWithoutBodyCommandInput,
+  type MalformedContentTypeWithoutBodyCommandOutput,
   MalformedContentTypeWithoutBodyCommand,
-  MalformedContentTypeWithoutBodyCommandInput,
-  MalformedContentTypeWithoutBodyCommandOutput,
 } from "./commands/MalformedContentTypeWithoutBodyCommand";
 import {
+  type MalformedContentTypeWithoutBodyEmptyInputCommandInput,
+  type MalformedContentTypeWithoutBodyEmptyInputCommandOutput,
+  MalformedContentTypeWithoutBodyEmptyInputCommand,
+} from "./commands/MalformedContentTypeWithoutBodyEmptyInputCommand";
+import {
+  type MalformedContentTypeWithPayloadCommandInput,
+  type MalformedContentTypeWithPayloadCommandOutput,
   MalformedContentTypeWithPayloadCommand,
-  MalformedContentTypeWithPayloadCommandInput,
-  MalformedContentTypeWithPayloadCommandOutput,
 } from "./commands/MalformedContentTypeWithPayloadCommand";
 import {
+  type MalformedDoubleCommandInput,
+  type MalformedDoubleCommandOutput,
   MalformedDoubleCommand,
-  MalformedDoubleCommandInput,
-  MalformedDoubleCommandOutput,
 } from "./commands/MalformedDoubleCommand";
 import {
+  type MalformedFloatCommandInput,
+  type MalformedFloatCommandOutput,
   MalformedFloatCommand,
-  MalformedFloatCommandInput,
-  MalformedFloatCommandOutput,
 } from "./commands/MalformedFloatCommand";
 import {
+  type MalformedIntegerCommandInput,
+  type MalformedIntegerCommandOutput,
   MalformedIntegerCommand,
-  MalformedIntegerCommandInput,
-  MalformedIntegerCommandOutput,
 } from "./commands/MalformedIntegerCommand";
 import {
+  type MalformedListCommandInput,
+  type MalformedListCommandOutput,
   MalformedListCommand,
-  MalformedListCommandInput,
-  MalformedListCommandOutput,
 } from "./commands/MalformedListCommand";
 import {
+  type MalformedLongCommandInput,
+  type MalformedLongCommandOutput,
   MalformedLongCommand,
-  MalformedLongCommandInput,
-  MalformedLongCommandOutput,
 } from "./commands/MalformedLongCommand";
 import {
+  type MalformedMapCommandInput,
+  type MalformedMapCommandOutput,
   MalformedMapCommand,
-  MalformedMapCommandInput,
-  MalformedMapCommandOutput,
 } from "./commands/MalformedMapCommand";
 import {
+  type MalformedRequestBodyCommandInput,
+  type MalformedRequestBodyCommandOutput,
   MalformedRequestBodyCommand,
-  MalformedRequestBodyCommandInput,
-  MalformedRequestBodyCommandOutput,
 } from "./commands/MalformedRequestBodyCommand";
 import {
-  MalformedSetCommand,
-  MalformedSetCommandInput,
-  MalformedSetCommandOutput,
-} from "./commands/MalformedSetCommand";
-import {
+  type MalformedShortCommandInput,
+  type MalformedShortCommandOutput,
   MalformedShortCommand,
-  MalformedShortCommandInput,
-  MalformedShortCommandOutput,
 } from "./commands/MalformedShortCommand";
 import {
+  type MalformedStringCommandInput,
+  type MalformedStringCommandOutput,
   MalformedStringCommand,
-  MalformedStringCommandInput,
-  MalformedStringCommandOutput,
 } from "./commands/MalformedStringCommand";
 import {
+  type MalformedTimestampBodyDateTimeCommandInput,
+  type MalformedTimestampBodyDateTimeCommandOutput,
   MalformedTimestampBodyDateTimeCommand,
-  MalformedTimestampBodyDateTimeCommandInput,
-  MalformedTimestampBodyDateTimeCommandOutput,
 } from "./commands/MalformedTimestampBodyDateTimeCommand";
 import {
+  type MalformedTimestampBodyDefaultCommandInput,
+  type MalformedTimestampBodyDefaultCommandOutput,
   MalformedTimestampBodyDefaultCommand,
-  MalformedTimestampBodyDefaultCommandInput,
-  MalformedTimestampBodyDefaultCommandOutput,
 } from "./commands/MalformedTimestampBodyDefaultCommand";
 import {
+  type MalformedTimestampBodyHttpDateCommandInput,
+  type MalformedTimestampBodyHttpDateCommandOutput,
   MalformedTimestampBodyHttpDateCommand,
-  MalformedTimestampBodyHttpDateCommandInput,
-  MalformedTimestampBodyHttpDateCommandOutput,
 } from "./commands/MalformedTimestampBodyHttpDateCommand";
 import {
+  type MalformedTimestampHeaderDateTimeCommandInput,
+  type MalformedTimestampHeaderDateTimeCommandOutput,
   MalformedTimestampHeaderDateTimeCommand,
-  MalformedTimestampHeaderDateTimeCommandInput,
-  MalformedTimestampHeaderDateTimeCommandOutput,
 } from "./commands/MalformedTimestampHeaderDateTimeCommand";
 import {
+  type MalformedTimestampHeaderDefaultCommandInput,
+  type MalformedTimestampHeaderDefaultCommandOutput,
   MalformedTimestampHeaderDefaultCommand,
-  MalformedTimestampHeaderDefaultCommandInput,
-  MalformedTimestampHeaderDefaultCommandOutput,
 } from "./commands/MalformedTimestampHeaderDefaultCommand";
 import {
+  type MalformedTimestampHeaderEpochCommandInput,
+  type MalformedTimestampHeaderEpochCommandOutput,
   MalformedTimestampHeaderEpochCommand,
-  MalformedTimestampHeaderEpochCommandInput,
-  MalformedTimestampHeaderEpochCommandOutput,
 } from "./commands/MalformedTimestampHeaderEpochCommand";
 import {
+  type MalformedTimestampPathDefaultCommandInput,
+  type MalformedTimestampPathDefaultCommandOutput,
   MalformedTimestampPathDefaultCommand,
-  MalformedTimestampPathDefaultCommandInput,
-  MalformedTimestampPathDefaultCommandOutput,
 } from "./commands/MalformedTimestampPathDefaultCommand";
 import {
+  type MalformedTimestampPathEpochCommandInput,
+  type MalformedTimestampPathEpochCommandOutput,
   MalformedTimestampPathEpochCommand,
-  MalformedTimestampPathEpochCommandInput,
-  MalformedTimestampPathEpochCommandOutput,
 } from "./commands/MalformedTimestampPathEpochCommand";
 import {
+  type MalformedTimestampPathHttpDateCommandInput,
+  type MalformedTimestampPathHttpDateCommandOutput,
   MalformedTimestampPathHttpDateCommand,
-  MalformedTimestampPathHttpDateCommandInput,
-  MalformedTimestampPathHttpDateCommandOutput,
 } from "./commands/MalformedTimestampPathHttpDateCommand";
 import {
+  type MalformedTimestampQueryDefaultCommandInput,
+  type MalformedTimestampQueryDefaultCommandOutput,
   MalformedTimestampQueryDefaultCommand,
-  MalformedTimestampQueryDefaultCommandInput,
-  MalformedTimestampQueryDefaultCommandOutput,
 } from "./commands/MalformedTimestampQueryDefaultCommand";
 import {
+  type MalformedTimestampQueryEpochCommandInput,
+  type MalformedTimestampQueryEpochCommandOutput,
   MalformedTimestampQueryEpochCommand,
-  MalformedTimestampQueryEpochCommandInput,
-  MalformedTimestampQueryEpochCommandOutput,
 } from "./commands/MalformedTimestampQueryEpochCommand";
 import {
+  type MalformedTimestampQueryHttpDateCommandInput,
+  type MalformedTimestampQueryHttpDateCommandOutput,
   MalformedTimestampQueryHttpDateCommand,
-  MalformedTimestampQueryHttpDateCommandInput,
-  MalformedTimestampQueryHttpDateCommandOutput,
 } from "./commands/MalformedTimestampQueryHttpDateCommand";
 import {
+  type MalformedUnionCommandInput,
+  type MalformedUnionCommandOutput,
   MalformedUnionCommand,
-  MalformedUnionCommandInput,
-  MalformedUnionCommandOutput,
 } from "./commands/MalformedUnionCommand";
 import {
+  type MediaTypeHeaderCommandInput,
+  type MediaTypeHeaderCommandOutput,
   MediaTypeHeaderCommand,
-  MediaTypeHeaderCommandInput,
-  MediaTypeHeaderCommandOutput,
 } from "./commands/MediaTypeHeaderCommand";
 import {
+  type NoInputAndNoOutputCommandInput,
+  type NoInputAndNoOutputCommandOutput,
   NoInputAndNoOutputCommand,
-  NoInputAndNoOutputCommandInput,
-  NoInputAndNoOutputCommandOutput,
 } from "./commands/NoInputAndNoOutputCommand";
 import {
+  type NoInputAndOutputCommandInput,
+  type NoInputAndOutputCommandOutput,
   NoInputAndOutputCommand,
-  NoInputAndOutputCommandInput,
-  NoInputAndOutputCommandOutput,
 } from "./commands/NoInputAndOutputCommand";
 import {
+  type NullAndEmptyHeadersClientCommandInput,
+  type NullAndEmptyHeadersClientCommandOutput,
   NullAndEmptyHeadersClientCommand,
-  NullAndEmptyHeadersClientCommandInput,
-  NullAndEmptyHeadersClientCommandOutput,
 } from "./commands/NullAndEmptyHeadersClientCommand";
 import {
+  type NullAndEmptyHeadersServerCommandInput,
+  type NullAndEmptyHeadersServerCommandOutput,
   NullAndEmptyHeadersServerCommand,
-  NullAndEmptyHeadersServerCommandInput,
-  NullAndEmptyHeadersServerCommandOutput,
 } from "./commands/NullAndEmptyHeadersServerCommand";
 import {
+  type OmitsNullSerializesEmptyStringCommandInput,
+  type OmitsNullSerializesEmptyStringCommandOutput,
   OmitsNullSerializesEmptyStringCommand,
-  OmitsNullSerializesEmptyStringCommandInput,
-  OmitsNullSerializesEmptyStringCommandOutput,
 } from "./commands/OmitsNullSerializesEmptyStringCommand";
 import {
+  type OmitsSerializingEmptyListsCommandInput,
+  type OmitsSerializingEmptyListsCommandOutput,
+  OmitsSerializingEmptyListsCommand,
+} from "./commands/OmitsSerializingEmptyListsCommand";
+import {
+  type OperationWithDefaultsCommandInput,
+  type OperationWithDefaultsCommandOutput,
+  OperationWithDefaultsCommand,
+} from "./commands/OperationWithDefaultsCommand";
+import {
+  type OperationWithNestedStructureCommandInput,
+  type OperationWithNestedStructureCommandOutput,
+  OperationWithNestedStructureCommand,
+} from "./commands/OperationWithNestedStructureCommand";
+import {
+  type OutputStreamCommandInput,
+  type OutputStreamCommandOutput,
+  OutputStreamCommand,
+} from "./commands/OutputStreamCommand";
+import {
+  type OutputStreamWithInitialResponseCommandInput,
+  type OutputStreamWithInitialResponseCommandOutput,
+  OutputStreamWithInitialResponseCommand,
+} from "./commands/OutputStreamWithInitialResponseCommand";
+import {
+  type PostPlayerActionCommandInput,
+  type PostPlayerActionCommandOutput,
+  PostPlayerActionCommand,
+} from "./commands/PostPlayerActionCommand";
+import {
+  type PostUnionWithJsonNameCommandInput,
+  type PostUnionWithJsonNameCommandOutput,
+  PostUnionWithJsonNameCommand,
+} from "./commands/PostUnionWithJsonNameCommand";
+import {
+  type PutWithContentEncodingCommandInput,
+  type PutWithContentEncodingCommandOutput,
+  PutWithContentEncodingCommand,
+} from "./commands/PutWithContentEncodingCommand";
+import {
+  type QueryIdempotencyTokenAutoFillCommandInput,
+  type QueryIdempotencyTokenAutoFillCommandOutput,
   QueryIdempotencyTokenAutoFillCommand,
-  QueryIdempotencyTokenAutoFillCommandInput,
-  QueryIdempotencyTokenAutoFillCommandOutput,
 } from "./commands/QueryIdempotencyTokenAutoFillCommand";
 import {
+  type QueryParamsAsStringListMapCommandInput,
+  type QueryParamsAsStringListMapCommandOutput,
   QueryParamsAsStringListMapCommand,
-  QueryParamsAsStringListMapCommandInput,
-  QueryParamsAsStringListMapCommandOutput,
 } from "./commands/QueryParamsAsStringListMapCommand";
 import {
+  type QueryPrecedenceCommandInput,
+  type QueryPrecedenceCommandOutput,
   QueryPrecedenceCommand,
-  QueryPrecedenceCommandInput,
-  QueryPrecedenceCommandOutput,
 } from "./commands/QueryPrecedenceCommand";
 import {
+  type RecursiveShapesCommandInput,
+  type RecursiveShapesCommandOutput,
   RecursiveShapesCommand,
-  RecursiveShapesCommandInput,
-  RecursiveShapesCommandOutput,
 } from "./commands/RecursiveShapesCommand";
 import {
+  type ResponseCodeHttpFallbackCommandInput,
+  type ResponseCodeHttpFallbackCommandOutput,
+  ResponseCodeHttpFallbackCommand,
+} from "./commands/ResponseCodeHttpFallbackCommand";
+import {
+  type ResponseCodeRequiredCommandInput,
+  type ResponseCodeRequiredCommandOutput,
+  ResponseCodeRequiredCommand,
+} from "./commands/ResponseCodeRequiredCommand";
+import {
+  type SimpleScalarPropertiesCommandInput,
+  type SimpleScalarPropertiesCommandOutput,
   SimpleScalarPropertiesCommand,
-  SimpleScalarPropertiesCommandInput,
-  SimpleScalarPropertiesCommandOutput,
 } from "./commands/SimpleScalarPropertiesCommand";
 import {
+  type SparseJsonListsCommandInput,
+  type SparseJsonListsCommandOutput,
+  SparseJsonListsCommand,
+} from "./commands/SparseJsonListsCommand";
+import {
+  type SparseJsonMapsCommandInput,
+  type SparseJsonMapsCommandOutput,
+  SparseJsonMapsCommand,
+} from "./commands/SparseJsonMapsCommand";
+import {
+  type StreamingTraitsCommandInput,
+  type StreamingTraitsCommandOutput,
   StreamingTraitsCommand,
-  StreamingTraitsCommandInput,
-  StreamingTraitsCommandOutput,
 } from "./commands/StreamingTraitsCommand";
 import {
+  type StreamingTraitsRequireLengthCommandInput,
+  type StreamingTraitsRequireLengthCommandOutput,
   StreamingTraitsRequireLengthCommand,
-  StreamingTraitsRequireLengthCommandInput,
-  StreamingTraitsRequireLengthCommandOutput,
 } from "./commands/StreamingTraitsRequireLengthCommand";
 import {
+  type StreamingTraitsWithMediaTypeCommandInput,
+  type StreamingTraitsWithMediaTypeCommandOutput,
   StreamingTraitsWithMediaTypeCommand,
-  StreamingTraitsWithMediaTypeCommandInput,
-  StreamingTraitsWithMediaTypeCommandOutput,
 } from "./commands/StreamingTraitsWithMediaTypeCommand";
 import {
+  type TestBodyStructureCommandInput,
+  type TestBodyStructureCommandOutput,
+  TestBodyStructureCommand,
+} from "./commands/TestBodyStructureCommand";
+import {
+  type TestGetNoInputNoPayloadCommandInput,
+  type TestGetNoInputNoPayloadCommandOutput,
+  TestGetNoInputNoPayloadCommand,
+} from "./commands/TestGetNoInputNoPayloadCommand";
+import {
+  type TestGetNoPayloadCommandInput,
+  type TestGetNoPayloadCommandOutput,
+  TestGetNoPayloadCommand,
+} from "./commands/TestGetNoPayloadCommand";
+import {
+  type TestPayloadBlobCommandInput,
+  type TestPayloadBlobCommandOutput,
+  TestPayloadBlobCommand,
+} from "./commands/TestPayloadBlobCommand";
+import {
+  type TestPayloadStructureCommandInput,
+  type TestPayloadStructureCommandOutput,
+  TestPayloadStructureCommand,
+} from "./commands/TestPayloadStructureCommand";
+import {
+  type TestPostNoInputNoPayloadCommandInput,
+  type TestPostNoInputNoPayloadCommandOutput,
+  TestPostNoInputNoPayloadCommand,
+} from "./commands/TestPostNoInputNoPayloadCommand";
+import {
+  type TestPostNoPayloadCommandInput,
+  type TestPostNoPayloadCommandOutput,
+  TestPostNoPayloadCommand,
+} from "./commands/TestPostNoPayloadCommand";
+import {
+  type TimestampFormatHeadersCommandInput,
+  type TimestampFormatHeadersCommandOutput,
   TimestampFormatHeadersCommand,
-  TimestampFormatHeadersCommandInput,
-  TimestampFormatHeadersCommandOutput,
 } from "./commands/TimestampFormatHeadersCommand";
+import {
+  type UnitInputAndOutputCommandInput,
+  type UnitInputAndOutputCommandOutput,
+  UnitInputAndOutputCommand,
+} from "./commands/UnitInputAndOutputCommand";
 import { RestJsonProtocolClient } from "./RestJsonProtocolClient";
 
+const commands = {
+  AllQueryStringTypesCommand,
+  ConstantAndVariableQueryStringCommand,
+  ConstantQueryStringCommand,
+  ContentTypeParametersCommand,
+  DatetimeOffsetsCommand,
+  DocumentTypeCommand,
+  DocumentTypeAsMapValueCommand,
+  DocumentTypeAsPayloadCommand,
+  DuplexStreamCommand,
+  DuplexStreamWithDistinctStreamsCommand,
+  DuplexStreamWithInitialMessagesCommand,
+  EmptyInputAndEmptyOutputCommand,
+  EndpointOperationCommand,
+  EndpointWithHostLabelOperationCommand,
+  FractionalSecondsCommand,
+  GreetingWithErrorsCommand,
+  HostWithPathOperationCommand,
+  HttpChecksumRequiredCommand,
+  HttpEmptyPrefixHeadersCommand,
+  HttpEnumPayloadCommand,
+  HttpPayloadTraitsCommand,
+  HttpPayloadTraitsWithMediaTypeCommand,
+  HttpPayloadWithStructureCommand,
+  HttpPayloadWithUnionCommand,
+  HttpPrefixHeadersCommand,
+  HttpPrefixHeadersInResponseCommand,
+  HttpQueryParamsOnlyOperationCommand,
+  HttpRequestWithFloatLabelsCommand,
+  HttpRequestWithGreedyLabelInPathCommand,
+  HttpRequestWithLabelsCommand,
+  HttpRequestWithLabelsAndTimestampFormatCommand,
+  HttpRequestWithRegexLiteralCommand,
+  HttpResponseCodeCommand,
+  HttpStringPayloadCommand,
+  IgnoreQueryParamsInResponseCommand,
+  InputAndOutputWithHeadersCommand,
+  InputStreamCommand,
+  InputStreamWithInitialRequestCommand,
+  JsonBlobsCommand,
+  JsonEnumsCommand,
+  JsonIntEnumsCommand,
+  JsonListsCommand,
+  JsonMapsCommand,
+  JsonTimestampsCommand,
+  JsonUnionsCommand,
+  MalformedAcceptWithBodyCommand,
+  MalformedAcceptWithGenericStringCommand,
+  MalformedAcceptWithPayloadCommand,
+  MalformedBlobCommand,
+  MalformedBooleanCommand,
+  MalformedByteCommand,
+  MalformedContentTypeWithBodyCommand,
+  MalformedContentTypeWithGenericStringCommand,
+  MalformedContentTypeWithoutBodyCommand,
+  MalformedContentTypeWithoutBodyEmptyInputCommand,
+  MalformedContentTypeWithPayloadCommand,
+  MalformedDoubleCommand,
+  MalformedFloatCommand,
+  MalformedIntegerCommand,
+  MalformedListCommand,
+  MalformedLongCommand,
+  MalformedMapCommand,
+  MalformedRequestBodyCommand,
+  MalformedShortCommand,
+  MalformedStringCommand,
+  MalformedTimestampBodyDateTimeCommand,
+  MalformedTimestampBodyDefaultCommand,
+  MalformedTimestampBodyHttpDateCommand,
+  MalformedTimestampHeaderDateTimeCommand,
+  MalformedTimestampHeaderDefaultCommand,
+  MalformedTimestampHeaderEpochCommand,
+  MalformedTimestampPathDefaultCommand,
+  MalformedTimestampPathEpochCommand,
+  MalformedTimestampPathHttpDateCommand,
+  MalformedTimestampQueryDefaultCommand,
+  MalformedTimestampQueryEpochCommand,
+  MalformedTimestampQueryHttpDateCommand,
+  MalformedUnionCommand,
+  MediaTypeHeaderCommand,
+  NoInputAndNoOutputCommand,
+  NoInputAndOutputCommand,
+  NullAndEmptyHeadersClientCommand,
+  NullAndEmptyHeadersServerCommand,
+  OmitsNullSerializesEmptyStringCommand,
+  OmitsSerializingEmptyListsCommand,
+  OperationWithDefaultsCommand,
+  OperationWithNestedStructureCommand,
+  OutputStreamCommand,
+  OutputStreamWithInitialResponseCommand,
+  PostPlayerActionCommand,
+  PostUnionWithJsonNameCommand,
+  PutWithContentEncodingCommand,
+  QueryIdempotencyTokenAutoFillCommand,
+  QueryParamsAsStringListMapCommand,
+  QueryPrecedenceCommand,
+  RecursiveShapesCommand,
+  ResponseCodeHttpFallbackCommand,
+  ResponseCodeRequiredCommand,
+  SimpleScalarPropertiesCommand,
+  SparseJsonListsCommand,
+  SparseJsonMapsCommand,
+  StreamingTraitsCommand,
+  StreamingTraitsRequireLengthCommand,
+  StreamingTraitsWithMediaTypeCommand,
+  TestBodyStructureCommand,
+  TestGetNoInputNoPayloadCommand,
+  TestGetNoPayloadCommand,
+  TestPayloadBlobCommand,
+  TestPayloadStructureCommand,
+  TestPostNoInputNoPayloadCommand,
+  TestPostNoPayloadCommand,
+  TimestampFormatHeadersCommand,
+  UnitInputAndOutputCommand,
+};
+
 /**
- * A REST JSON service that sends JSON requests and responses.
+ * @public
  */
-export class RestJsonProtocol extends RestJsonProtocolClient {
+export interface RestJsonProtocolRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RestJsonProtocol {
   /**
-   * This example uses all query string types.
+   * @see {@link AllQueryStringTypesCommand}
    */
-  public allQueryStringTypes(
+  allQueryStringTypes(): Promise<AllQueryStringTypesCommandOutput>;
+  allQueryStringTypes(
     args: AllQueryStringTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<AllQueryStringTypesCommandOutput>;
-  public allQueryStringTypes(
+  allQueryStringTypes(
     args: AllQueryStringTypesCommandInput,
     cb: (err: any, data?: AllQueryStringTypesCommandOutput) => void
   ): void;
-  public allQueryStringTypes(
+  allQueryStringTypes(
     args: AllQueryStringTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: AllQueryStringTypesCommandOutput) => void
   ): void;
-  public allQueryStringTypes(
-    args: AllQueryStringTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AllQueryStringTypesCommandOutput) => void),
-    cb?: (err: any, data?: AllQueryStringTypesCommandOutput) => void
-  ): Promise<AllQueryStringTypesCommandOutput> | void {
-    const command = new AllQueryStringTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example uses fixed query string params and variable query string params.
-   * The fixed query string parameters and variable parameters must both be
-   * serialized (implementations may need to merge them together).
+   * @see {@link ConstantAndVariableQueryStringCommand}
    */
-  public constantAndVariableQueryString(
+  constantAndVariableQueryString(): Promise<ConstantAndVariableQueryStringCommandOutput>;
+  constantAndVariableQueryString(
     args: ConstantAndVariableQueryStringCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<ConstantAndVariableQueryStringCommandOutput>;
-  public constantAndVariableQueryString(
+  constantAndVariableQueryString(
     args: ConstantAndVariableQueryStringCommandInput,
     cb: (err: any, data?: ConstantAndVariableQueryStringCommandOutput) => void
   ): void;
-  public constantAndVariableQueryString(
+  constantAndVariableQueryString(
     args: ConstantAndVariableQueryStringCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: ConstantAndVariableQueryStringCommandOutput) => void
   ): void;
-  public constantAndVariableQueryString(
-    args: ConstantAndVariableQueryStringCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ConstantAndVariableQueryStringCommandOutput) => void),
-    cb?: (err: any, data?: ConstantAndVariableQueryStringCommandOutput) => void
-  ): Promise<ConstantAndVariableQueryStringCommandOutput> | void {
-    const command = new ConstantAndVariableQueryStringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example uses a constant query string parameters and a label.
-   * This simply tests that labels and query string parameters are
-   * compatible. The fixed query string parameter named "hello" should
-   * in no way conflict with the label, `{hello}`.
+   * @see {@link ConstantQueryStringCommand}
    */
-  public constantQueryString(
+  constantQueryString(
     args: ConstantQueryStringCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<ConstantQueryStringCommandOutput>;
-  public constantQueryString(
+  constantQueryString(
     args: ConstantQueryStringCommandInput,
     cb: (err: any, data?: ConstantQueryStringCommandOutput) => void
   ): void;
-  public constantQueryString(
+  constantQueryString(
     args: ConstantQueryStringCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: ConstantQueryStringCommandOutput) => void
   ): void;
-  public constantQueryString(
-    args: ConstantQueryStringCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ConstantQueryStringCommandOutput) => void),
-    cb?: (err: any, data?: ConstantQueryStringCommandOutput) => void
-  ): Promise<ConstantQueryStringCommandOutput> | void {
-    const command = new ConstantQueryStringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example serializes a document as part of the payload.
+   * @see {@link ContentTypeParametersCommand}
    */
-  public documentType(
+  contentTypeParameters(): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DatetimeOffsetsCommand}
+   */
+  datetimeOffsets(): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DocumentTypeCommand}
+   */
+  documentType(): Promise<DocumentTypeCommandOutput>;
+  documentType(
     args: DocumentTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<DocumentTypeCommandOutput>;
-  public documentType(args: DocumentTypeCommandInput, cb: (err: any, data?: DocumentTypeCommandOutput) => void): void;
-  public documentType(
+  documentType(
     args: DocumentTypeCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DocumentTypeCommandOutput) => void
   ): void;
-  public documentType(
+  documentType(
     args: DocumentTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DocumentTypeCommandOutput) => void),
-    cb?: (err: any, data?: DocumentTypeCommandOutput) => void
-  ): Promise<DocumentTypeCommandOutput> | void {
-    const command = new DocumentTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: DocumentTypeCommandOutput) => void
+  ): void;
 
   /**
-   * This example serializes a document as the entire HTTP payload.
+   * @see {@link DocumentTypeAsMapValueCommand}
    */
-  public documentTypeAsPayload(
+  documentTypeAsMapValue(): Promise<DocumentTypeAsMapValueCommandOutput>;
+  documentTypeAsMapValue(
+    args: DocumentTypeAsMapValueCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<DocumentTypeAsMapValueCommandOutput>;
+  documentTypeAsMapValue(
+    args: DocumentTypeAsMapValueCommandInput,
+    cb: (err: any, data?: DocumentTypeAsMapValueCommandOutput) => void
+  ): void;
+  documentTypeAsMapValue(
+    args: DocumentTypeAsMapValueCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: DocumentTypeAsMapValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DocumentTypeAsPayloadCommand}
+   */
+  documentTypeAsPayload(): Promise<DocumentTypeAsPayloadCommandOutput>;
+  documentTypeAsPayload(
     args: DocumentTypeAsPayloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<DocumentTypeAsPayloadCommandOutput>;
-  public documentTypeAsPayload(
+  documentTypeAsPayload(
     args: DocumentTypeAsPayloadCommandInput,
     cb: (err: any, data?: DocumentTypeAsPayloadCommandOutput) => void
   ): void;
-  public documentTypeAsPayload(
+  documentTypeAsPayload(
     args: DocumentTypeAsPayloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: DocumentTypeAsPayloadCommandOutput) => void
   ): void;
-  public documentTypeAsPayload(
-    args: DocumentTypeAsPayloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DocumentTypeAsPayloadCommandOutput) => void),
-    cb?: (err: any, data?: DocumentTypeAsPayloadCommandOutput) => void
-  ): Promise<DocumentTypeAsPayloadCommandOutput> | void {
-    const command = new DocumentTypeAsPayloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has an empty input
-   * and empty output structure that reuses the same shape. While this should
-   * be rare, code generators must support this.
+   * @see {@link DuplexStreamCommand}
    */
-  public emptyInputAndEmptyOutput(
+  duplexStream(): Promise<DuplexStreamCommandOutput>;
+  duplexStream(
+    args: DuplexStreamCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<DuplexStreamCommandOutput>;
+  duplexStream(
+    args: DuplexStreamCommandInput,
+    cb: (err: any, data?: DuplexStreamCommandOutput) => void
+  ): void;
+  duplexStream(
+    args: DuplexStreamCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: DuplexStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DuplexStreamWithDistinctStreamsCommand}
+   */
+  duplexStreamWithDistinctStreams(): Promise<DuplexStreamWithDistinctStreamsCommandOutput>;
+  duplexStreamWithDistinctStreams(
+    args: DuplexStreamWithDistinctStreamsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<DuplexStreamWithDistinctStreamsCommandOutput>;
+  duplexStreamWithDistinctStreams(
+    args: DuplexStreamWithDistinctStreamsCommandInput,
+    cb: (err: any, data?: DuplexStreamWithDistinctStreamsCommandOutput) => void
+  ): void;
+  duplexStreamWithDistinctStreams(
+    args: DuplexStreamWithDistinctStreamsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: DuplexStreamWithDistinctStreamsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DuplexStreamWithInitialMessagesCommand}
+   */
+  duplexStreamWithInitialMessages(
+    args: DuplexStreamWithInitialMessagesCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<DuplexStreamWithInitialMessagesCommandOutput>;
+  duplexStreamWithInitialMessages(
+    args: DuplexStreamWithInitialMessagesCommandInput,
+    cb: (err: any, data?: DuplexStreamWithInitialMessagesCommandOutput) => void
+  ): void;
+  duplexStreamWithInitialMessages(
+    args: DuplexStreamWithInitialMessagesCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: DuplexStreamWithInitialMessagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EmptyInputAndEmptyOutputCommand}
+   */
+  emptyInputAndEmptyOutput(): Promise<EmptyInputAndEmptyOutputCommandOutput>;
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<EmptyInputAndEmptyOutputCommandOutput>;
-  public emptyInputAndEmptyOutput(
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
     cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
   ): void;
-  public emptyInputAndEmptyOutput(
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
   ): void;
-  public emptyInputAndEmptyOutput(
-    args: EmptyInputAndEmptyOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void),
-    cb?: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
-  ): Promise<EmptyInputAndEmptyOutputCommandOutput> | void {
-    const command = new EmptyInputAndEmptyOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointOperation(
+  /**
+   * @see {@link EndpointOperationCommand}
+   */
+  endpointOperation(): Promise<EndpointOperationCommandOutput>;
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<EndpointOperationCommandOutput>;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
-    args: EndpointOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointOperationCommandOutput) => void
-  ): Promise<EndpointOperationCommandOutput> | void {
-    const command = new EndpointOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointWithHostLabelOperation(
+  /**
+   * @see {@link EndpointWithHostLabelOperationCommand}
+   */
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<EndpointWithHostLabelOperationCommandOutput>;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
-    args: EndpointWithHostLabelOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
-  ): Promise<EndpointWithHostLabelOperationCommandOutput> | void {
-    const command = new EndpointWithHostLabelOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This operation has four possible return values:
-   *
-   * 1. A successful response in the form of GreetingWithErrorsOutput
-   * 2. An InvalidGreeting error.
-   * 3. A BadRequest error.
-   * 4. A FooError.
-   *
-   * Implementations must be able to successfully take a response and
-   * properly (de)serialize successful and error responses based on the
-   * the presence of the
+   * @see {@link FractionalSecondsCommand}
    */
-  public greetingWithErrors(
+  fractionalSeconds(): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GreetingWithErrorsCommand}
+   */
+  greetingWithErrors(): Promise<GreetingWithErrorsCommandOutput>;
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<GreetingWithErrorsCommandOutput>;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
-    args: GreetingWithErrorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GreetingWithErrorsCommandOutput) => void),
-    cb?: (err: any, data?: GreetingWithErrorsCommandOutput) => void
-  ): Promise<GreetingWithErrorsCommandOutput> | void {
-    const command = new GreetingWithErrorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public hostWithPathOperation(
+  /**
+   * @see {@link HostWithPathOperationCommand}
+   */
+  hostWithPathOperation(): Promise<HostWithPathOperationCommandOutput>;
+  hostWithPathOperation(
     args: HostWithPathOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HostWithPathOperationCommandOutput>;
-  public hostWithPathOperation(
+  hostWithPathOperation(
     args: HostWithPathOperationCommandInput,
     cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
   ): void;
-  public hostWithPathOperation(
+  hostWithPathOperation(
     args: HostWithPathOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
   ): void;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HostWithPathOperationCommandOutput) => void),
-    cb?: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): Promise<HostWithPathOperationCommandOutput> | void {
-    const command = new HostWithPathOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example tests httpChecksumRequired trait
+   * @see {@link HttpChecksumRequiredCommand}
    */
-  public httpChecksumRequired(
+  httpChecksumRequired(): Promise<HttpChecksumRequiredCommandOutput>;
+  httpChecksumRequired(
     args: HttpChecksumRequiredCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpChecksumRequiredCommandOutput>;
-  public httpChecksumRequired(
+  httpChecksumRequired(
     args: HttpChecksumRequiredCommandInput,
     cb: (err: any, data?: HttpChecksumRequiredCommandOutput) => void
   ): void;
-  public httpChecksumRequired(
+  httpChecksumRequired(
     args: HttpChecksumRequiredCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpChecksumRequiredCommandOutput) => void
   ): void;
-  public httpChecksumRequired(
-    args: HttpChecksumRequiredCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpChecksumRequiredCommandOutput) => void),
-    cb?: (err: any, data?: HttpChecksumRequiredCommandOutput) => void
-  ): Promise<HttpChecksumRequiredCommandOutput> | void {
-    const command = new HttpChecksumRequiredCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public httpEnumPayload(
+  /**
+   * @see {@link HttpEmptyPrefixHeadersCommand}
+   */
+  httpEmptyPrefixHeaders(): Promise<HttpEmptyPrefixHeadersCommandOutput>;
+  httpEmptyPrefixHeaders(
+    args: HttpEmptyPrefixHeadersCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<HttpEmptyPrefixHeadersCommandOutput>;
+  httpEmptyPrefixHeaders(
+    args: HttpEmptyPrefixHeadersCommandInput,
+    cb: (err: any, data?: HttpEmptyPrefixHeadersCommandOutput) => void
+  ): void;
+  httpEmptyPrefixHeaders(
+    args: HttpEmptyPrefixHeadersCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: HttpEmptyPrefixHeadersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpEnumPayloadCommand}
+   */
+  httpEnumPayload(): Promise<HttpEnumPayloadCommandOutput>;
+  httpEnumPayload(
     args: HttpEnumPayloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpEnumPayloadCommandOutput>;
-  public httpEnumPayload(
+  httpEnumPayload(
     args: HttpEnumPayloadCommandInput,
     cb: (err: any, data?: HttpEnumPayloadCommandOutput) => void
   ): void;
-  public httpEnumPayload(
+  httpEnumPayload(
     args: HttpEnumPayloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpEnumPayloadCommandOutput) => void
   ): void;
-  public httpEnumPayload(
-    args: HttpEnumPayloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpEnumPayloadCommandOutput) => void),
-    cb?: (err: any, data?: HttpEnumPayloadCommandOutput) => void
-  ): Promise<HttpEnumPayloadCommandOutput> | void {
-    const command = new HttpEnumPayloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples serializes a blob shape in the payload.
-   *
-   * In this example, no JSON document is synthesized because the payload is
-   * not a structure or a union type.
+   * @see {@link HttpPayloadTraitsCommand}
    */
-  public httpPayloadTraits(
+  httpPayloadTraits(): Promise<HttpPayloadTraitsCommandOutput>;
+  httpPayloadTraits(
     args: HttpPayloadTraitsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpPayloadTraitsCommandOutput>;
-  public httpPayloadTraits(
+  httpPayloadTraits(
     args: HttpPayloadTraitsCommandInput,
     cb: (err: any, data?: HttpPayloadTraitsCommandOutput) => void
   ): void;
-  public httpPayloadTraits(
+  httpPayloadTraits(
     args: HttpPayloadTraitsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpPayloadTraitsCommandOutput) => void
   ): void;
-  public httpPayloadTraits(
-    args: HttpPayloadTraitsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpPayloadTraitsCommandOutput) => void),
-    cb?: (err: any, data?: HttpPayloadTraitsCommandOutput) => void
-  ): Promise<HttpPayloadTraitsCommandOutput> | void {
-    const command = new HttpPayloadTraitsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples uses a `@mediaType` trait on the payload to force a custom
-   * content-type to be serialized.
+   * @see {@link HttpPayloadTraitsWithMediaTypeCommand}
    */
-  public httpPayloadTraitsWithMediaType(
+  httpPayloadTraitsWithMediaType(): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput>;
+  httpPayloadTraitsWithMediaType(
     args: HttpPayloadTraitsWithMediaTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput>;
-  public httpPayloadTraitsWithMediaType(
+  httpPayloadTraitsWithMediaType(
     args: HttpPayloadTraitsWithMediaTypeCommandInput,
     cb: (err: any, data?: HttpPayloadTraitsWithMediaTypeCommandOutput) => void
   ): void;
-  public httpPayloadTraitsWithMediaType(
+  httpPayloadTraitsWithMediaType(
     args: HttpPayloadTraitsWithMediaTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpPayloadTraitsWithMediaTypeCommandOutput) => void
   ): void;
-  public httpPayloadTraitsWithMediaType(
-    args: HttpPayloadTraitsWithMediaTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpPayloadTraitsWithMediaTypeCommandOutput) => void),
-    cb?: (err: any, data?: HttpPayloadTraitsWithMediaTypeCommandOutput) => void
-  ): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> | void {
-    const command = new HttpPayloadTraitsWithMediaTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples serializes a structure in the payload.
-   *
-   * Note that serializing a structure changes the wrapper element name
-   * to match the targeted structure.
+   * @see {@link HttpPayloadWithStructureCommand}
    */
-  public httpPayloadWithStructure(
+  httpPayloadWithStructure(): Promise<HttpPayloadWithStructureCommandOutput>;
+  httpPayloadWithStructure(
     args: HttpPayloadWithStructureCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpPayloadWithStructureCommandOutput>;
-  public httpPayloadWithStructure(
+  httpPayloadWithStructure(
     args: HttpPayloadWithStructureCommandInput,
     cb: (err: any, data?: HttpPayloadWithStructureCommandOutput) => void
   ): void;
-  public httpPayloadWithStructure(
+  httpPayloadWithStructure(
     args: HttpPayloadWithStructureCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpPayloadWithStructureCommandOutput) => void
   ): void;
-  public httpPayloadWithStructure(
-    args: HttpPayloadWithStructureCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpPayloadWithStructureCommandOutput) => void),
-    cb?: (err: any, data?: HttpPayloadWithStructureCommandOutput) => void
-  ): Promise<HttpPayloadWithStructureCommandOutput> | void {
-    const command = new HttpPayloadWithStructureCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples adds headers to the input of a request and response by prefix.
+   * @see {@link HttpPayloadWithUnionCommand}
    */
-  public httpPrefixHeaders(
+  httpPayloadWithUnion(): Promise<HttpPayloadWithUnionCommandOutput>;
+  httpPayloadWithUnion(
+    args: HttpPayloadWithUnionCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<HttpPayloadWithUnionCommandOutput>;
+  httpPayloadWithUnion(
+    args: HttpPayloadWithUnionCommandInput,
+    cb: (err: any, data?: HttpPayloadWithUnionCommandOutput) => void
+  ): void;
+  httpPayloadWithUnion(
+    args: HttpPayloadWithUnionCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithUnionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPrefixHeadersCommand}
+   */
+  httpPrefixHeaders(): Promise<HttpPrefixHeadersCommandOutput>;
+  httpPrefixHeaders(
     args: HttpPrefixHeadersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpPrefixHeadersCommandOutput>;
-  public httpPrefixHeaders(
+  httpPrefixHeaders(
     args: HttpPrefixHeadersCommandInput,
     cb: (err: any, data?: HttpPrefixHeadersCommandOutput) => void
   ): void;
-  public httpPrefixHeaders(
+  httpPrefixHeaders(
     args: HttpPrefixHeadersCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpPrefixHeadersCommandOutput) => void
   ): void;
-  public httpPrefixHeaders(
-    args: HttpPrefixHeadersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpPrefixHeadersCommandOutput) => void),
-    cb?: (err: any, data?: HttpPrefixHeadersCommandOutput) => void
-  ): Promise<HttpPrefixHeadersCommandOutput> | void {
-    const command = new HttpPrefixHeadersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Clients that perform this test extract all headers from the response.
+   * @see {@link HttpPrefixHeadersInResponseCommand}
    */
-  public httpPrefixHeadersResponse(
-    args: HttpPrefixHeadersResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<HttpPrefixHeadersResponseCommandOutput>;
-  public httpPrefixHeadersResponse(
-    args: HttpPrefixHeadersResponseCommandInput,
-    cb: (err: any, data?: HttpPrefixHeadersResponseCommandOutput) => void
+  httpPrefixHeadersInResponse(): Promise<HttpPrefixHeadersInResponseCommandOutput>;
+  httpPrefixHeadersInResponse(
+    args: HttpPrefixHeadersInResponseCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<HttpPrefixHeadersInResponseCommandOutput>;
+  httpPrefixHeadersInResponse(
+    args: HttpPrefixHeadersInResponseCommandInput,
+    cb: (err: any, data?: HttpPrefixHeadersInResponseCommandOutput) => void
   ): void;
-  public httpPrefixHeadersResponse(
-    args: HttpPrefixHeadersResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: HttpPrefixHeadersResponseCommandOutput) => void
+  httpPrefixHeadersInResponse(
+    args: HttpPrefixHeadersInResponseCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: HttpPrefixHeadersInResponseCommandOutput) => void
   ): void;
-  public httpPrefixHeadersResponse(
-    args: HttpPrefixHeadersResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpPrefixHeadersResponseCommandOutput) => void),
-    cb?: (err: any, data?: HttpPrefixHeadersResponseCommandOutput) => void
-  ): Promise<HttpPrefixHeadersResponseCommandOutput> | void {
-    const command = new HttpPrefixHeadersResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public httpRequestWithFloatLabels(
+  /**
+   * @see {@link HttpQueryParamsOnlyOperationCommand}
+   */
+  httpQueryParamsOnlyOperation(): Promise<HttpQueryParamsOnlyOperationCommandOutput>;
+  httpQueryParamsOnlyOperation(
+    args: HttpQueryParamsOnlyOperationCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<HttpQueryParamsOnlyOperationCommandOutput>;
+  httpQueryParamsOnlyOperation(
+    args: HttpQueryParamsOnlyOperationCommandInput,
+    cb: (err: any, data?: HttpQueryParamsOnlyOperationCommandOutput) => void
+  ): void;
+  httpQueryParamsOnlyOperation(
+    args: HttpQueryParamsOnlyOperationCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: HttpQueryParamsOnlyOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpRequestWithFloatLabelsCommand}
+   */
+  httpRequestWithFloatLabels(
     args: HttpRequestWithFloatLabelsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpRequestWithFloatLabelsCommandOutput>;
-  public httpRequestWithFloatLabels(
+  httpRequestWithFloatLabels(
     args: HttpRequestWithFloatLabelsCommandInput,
     cb: (err: any, data?: HttpRequestWithFloatLabelsCommandOutput) => void
   ): void;
-  public httpRequestWithFloatLabels(
+  httpRequestWithFloatLabels(
     args: HttpRequestWithFloatLabelsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpRequestWithFloatLabelsCommandOutput) => void
   ): void;
-  public httpRequestWithFloatLabels(
-    args: HttpRequestWithFloatLabelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpRequestWithFloatLabelsCommandOutput) => void),
-    cb?: (err: any, data?: HttpRequestWithFloatLabelsCommandOutput) => void
-  ): Promise<HttpRequestWithFloatLabelsCommandOutput> | void {
-    const command = new HttpRequestWithFloatLabelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public httpRequestWithGreedyLabelInPath(
+  /**
+   * @see {@link HttpRequestWithGreedyLabelInPathCommand}
+   */
+  httpRequestWithGreedyLabelInPath(
     args: HttpRequestWithGreedyLabelInPathCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpRequestWithGreedyLabelInPathCommandOutput>;
-  public httpRequestWithGreedyLabelInPath(
+  httpRequestWithGreedyLabelInPath(
     args: HttpRequestWithGreedyLabelInPathCommandInput,
     cb: (err: any, data?: HttpRequestWithGreedyLabelInPathCommandOutput) => void
   ): void;
-  public httpRequestWithGreedyLabelInPath(
+  httpRequestWithGreedyLabelInPath(
     args: HttpRequestWithGreedyLabelInPathCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpRequestWithGreedyLabelInPathCommandOutput) => void
   ): void;
-  public httpRequestWithGreedyLabelInPath(
-    args: HttpRequestWithGreedyLabelInPathCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpRequestWithGreedyLabelInPathCommandOutput) => void),
-    cb?: (err: any, data?: HttpRequestWithGreedyLabelInPathCommandOutput) => void
-  ): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> | void {
-    const command = new HttpRequestWithGreedyLabelInPathCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests are serialized when there's no input
-   * payload but there are HTTP labels.
+   * @see {@link HttpRequestWithLabelsCommand}
    */
-  public httpRequestWithLabels(
+  httpRequestWithLabels(
     args: HttpRequestWithLabelsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpRequestWithLabelsCommandOutput>;
-  public httpRequestWithLabels(
+  httpRequestWithLabels(
     args: HttpRequestWithLabelsCommandInput,
     cb: (err: any, data?: HttpRequestWithLabelsCommandOutput) => void
   ): void;
-  public httpRequestWithLabels(
+  httpRequestWithLabels(
     args: HttpRequestWithLabelsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpRequestWithLabelsCommandOutput) => void
   ): void;
-  public httpRequestWithLabels(
-    args: HttpRequestWithLabelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpRequestWithLabelsCommandOutput) => void),
-    cb?: (err: any, data?: HttpRequestWithLabelsCommandOutput) => void
-  ): Promise<HttpRequestWithLabelsCommandOutput> | void {
-    const command = new HttpRequestWithLabelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests serialize different timestamp formats in the
-   * URI path.
+   * @see {@link HttpRequestWithLabelsAndTimestampFormatCommand}
    */
-  public httpRequestWithLabelsAndTimestampFormat(
+  httpRequestWithLabelsAndTimestampFormat(
     args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput>;
-  public httpRequestWithLabelsAndTimestampFormat(
+  httpRequestWithLabelsAndTimestampFormat(
     args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
     cb: (err: any, data?: HttpRequestWithLabelsAndTimestampFormatCommandOutput) => void
   ): void;
-  public httpRequestWithLabelsAndTimestampFormat(
+  httpRequestWithLabelsAndTimestampFormat(
     args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpRequestWithLabelsAndTimestampFormatCommandOutput) => void
   ): void;
-  public httpRequestWithLabelsAndTimestampFormat(
-    args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: HttpRequestWithLabelsAndTimestampFormatCommandOutput) => void),
-    cb?: (err: any, data?: HttpRequestWithLabelsAndTimestampFormatCommandOutput) => void
-  ): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> | void {
-    const command = new HttpRequestWithLabelsAndTimestampFormatCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public httpResponseCode(
+  /**
+   * @see {@link HttpRequestWithRegexLiteralCommand}
+   */
+  httpRequestWithRegexLiteral(
+    args: HttpRequestWithRegexLiteralCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<HttpRequestWithRegexLiteralCommandOutput>;
+  httpRequestWithRegexLiteral(
+    args: HttpRequestWithRegexLiteralCommandInput,
+    cb: (err: any, data?: HttpRequestWithRegexLiteralCommandOutput) => void
+  ): void;
+  httpRequestWithRegexLiteral(
+    args: HttpRequestWithRegexLiteralCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: HttpRequestWithRegexLiteralCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpResponseCodeCommand}
+   */
+  httpResponseCode(): Promise<HttpResponseCodeCommandOutput>;
+  httpResponseCode(
     args: HttpResponseCodeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpResponseCodeCommandOutput>;
-  public httpResponseCode(
+  httpResponseCode(
     args: HttpResponseCodeCommandInput,
     cb: (err: any, data?: HttpResponseCodeCommandOutput) => void
   ): void;
-  public httpResponseCode(
+  httpResponseCode(
     args: HttpResponseCodeCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpResponseCodeCommandOutput) => void
   ): void;
-  public httpResponseCode(
-    args: HttpResponseCodeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpResponseCodeCommandOutput) => void),
-    cb?: (err: any, data?: HttpResponseCodeCommandOutput) => void
-  ): Promise<HttpResponseCodeCommandOutput> | void {
-    const command = new HttpResponseCodeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public httpStringPayload(
+  /**
+   * @see {@link HttpStringPayloadCommand}
+   */
+  httpStringPayload(): Promise<HttpStringPayloadCommandOutput>;
+  httpStringPayload(
     args: HttpStringPayloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<HttpStringPayloadCommandOutput>;
-  public httpStringPayload(
+  httpStringPayload(
     args: HttpStringPayloadCommandInput,
     cb: (err: any, data?: HttpStringPayloadCommandOutput) => void
   ): void;
-  public httpStringPayload(
+  httpStringPayload(
     args: HttpStringPayloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: HttpStringPayloadCommandOutput) => void
   ): void;
-  public httpStringPayload(
-    args: HttpStringPayloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HttpStringPayloadCommandOutput) => void),
-    cb?: (err: any, data?: HttpStringPayloadCommandOutput) => void
-  ): Promise<HttpStringPayloadCommandOutput> | void {
-    const command = new HttpStringPayloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example ensures that query string bound request parameters are
-   * serialized in the body of responses if the structure is used in both
-   * the request and response.
+   * @see {@link IgnoreQueryParamsInResponseCommand}
    */
-  public ignoreQueryParamsInResponse(
+  ignoreQueryParamsInResponse(): Promise<IgnoreQueryParamsInResponseCommandOutput>;
+  ignoreQueryParamsInResponse(
     args: IgnoreQueryParamsInResponseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<IgnoreQueryParamsInResponseCommandOutput>;
-  public ignoreQueryParamsInResponse(
+  ignoreQueryParamsInResponse(
     args: IgnoreQueryParamsInResponseCommandInput,
     cb: (err: any, data?: IgnoreQueryParamsInResponseCommandOutput) => void
   ): void;
-  public ignoreQueryParamsInResponse(
+  ignoreQueryParamsInResponse(
     args: IgnoreQueryParamsInResponseCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: IgnoreQueryParamsInResponseCommandOutput) => void
   ): void;
-  public ignoreQueryParamsInResponse(
-    args: IgnoreQueryParamsInResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: IgnoreQueryParamsInResponseCommandOutput) => void),
-    cb?: (err: any, data?: IgnoreQueryParamsInResponseCommandOutput) => void
-  ): Promise<IgnoreQueryParamsInResponseCommandOutput> | void {
-    const command = new IgnoreQueryParamsInResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there is
-   * no input or output payload but there are HTTP header bindings.
+   * @see {@link InputAndOutputWithHeadersCommand}
    */
-  public inputAndOutputWithHeaders(
+  inputAndOutputWithHeaders(): Promise<InputAndOutputWithHeadersCommandOutput>;
+  inputAndOutputWithHeaders(
     args: InputAndOutputWithHeadersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<InputAndOutputWithHeadersCommandOutput>;
-  public inputAndOutputWithHeaders(
+  inputAndOutputWithHeaders(
     args: InputAndOutputWithHeadersCommandInput,
     cb: (err: any, data?: InputAndOutputWithHeadersCommandOutput) => void
   ): void;
-  public inputAndOutputWithHeaders(
+  inputAndOutputWithHeaders(
     args: InputAndOutputWithHeadersCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: InputAndOutputWithHeadersCommandOutput) => void
   ): void;
-  public inputAndOutputWithHeaders(
-    args: InputAndOutputWithHeadersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InputAndOutputWithHeadersCommandOutput) => void),
-    cb?: (err: any, data?: InputAndOutputWithHeadersCommandOutput) => void
-  ): Promise<InputAndOutputWithHeadersCommandOutput> | void {
-    const command = new InputAndOutputWithHeadersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Blobs are base64 encoded
+   * @see {@link InputStreamCommand}
    */
-  public jsonBlobs(args: JsonBlobsCommandInput, options?: __HttpHandlerOptions): Promise<JsonBlobsCommandOutput>;
-  public jsonBlobs(args: JsonBlobsCommandInput, cb: (err: any, data?: JsonBlobsCommandOutput) => void): void;
-  public jsonBlobs(
+  inputStream(): Promise<InputStreamCommandOutput>;
+  inputStream(
+    args: InputStreamCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<InputStreamCommandOutput>;
+  inputStream(
+    args: InputStreamCommandInput,
+    cb: (err: any, data?: InputStreamCommandOutput) => void
+  ): void;
+  inputStream(
+    args: InputStreamCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: InputStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InputStreamWithInitialRequestCommand}
+   */
+  inputStreamWithInitialRequest(
+    args: InputStreamWithInitialRequestCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<InputStreamWithInitialRequestCommandOutput>;
+  inputStreamWithInitialRequest(
+    args: InputStreamWithInitialRequestCommandInput,
+    cb: (err: any, data?: InputStreamWithInitialRequestCommandOutput) => void
+  ): void;
+  inputStreamWithInitialRequest(
+    args: InputStreamWithInitialRequestCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: InputStreamWithInitialRequestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link JsonBlobsCommand}
+   */
+  jsonBlobs(): Promise<JsonBlobsCommandOutput>;
+  jsonBlobs(
     args: JsonBlobsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<JsonBlobsCommandOutput>;
+  jsonBlobs(
+    args: JsonBlobsCommandInput,
     cb: (err: any, data?: JsonBlobsCommandOutput) => void
   ): void;
-  public jsonBlobs(
+  jsonBlobs(
     args: JsonBlobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonBlobsCommandOutput) => void),
-    cb?: (err: any, data?: JsonBlobsCommandOutput) => void
-  ): Promise<JsonBlobsCommandOutput> | void {
-    const command = new JsonBlobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonBlobsCommandOutput) => void
+  ): void;
 
   /**
-   * This example serializes enums as top level properties, in lists, sets, and maps.
+   * @see {@link JsonEnumsCommand}
    */
-  public jsonEnums(args: JsonEnumsCommandInput, options?: __HttpHandlerOptions): Promise<JsonEnumsCommandOutput>;
-  public jsonEnums(args: JsonEnumsCommandInput, cb: (err: any, data?: JsonEnumsCommandOutput) => void): void;
-  public jsonEnums(
+  jsonEnums(): Promise<JsonEnumsCommandOutput>;
+  jsonEnums(
     args: JsonEnumsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<JsonEnumsCommandOutput>;
+  jsonEnums(
+    args: JsonEnumsCommandInput,
     cb: (err: any, data?: JsonEnumsCommandOutput) => void
   ): void;
-  public jsonEnums(
+  jsonEnums(
     args: JsonEnumsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonEnumsCommandOutput) => void),
-    cb?: (err: any, data?: JsonEnumsCommandOutput) => void
-  ): Promise<JsonEnumsCommandOutput> | void {
-    const command = new JsonEnumsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonEnumsCommandOutput) => void
+  ): void;
 
   /**
-   * This test case serializes JSON lists for the following cases for both
-   * input and output:
-   *
-   * 1. Normal JSON lists.
-   * 2. Normal JSON sets.
-   * 3. JSON lists of lists.
-   * 4. Lists of structures.
+   * @see {@link JsonIntEnumsCommand}
    */
-  public jsonLists(args: JsonListsCommandInput, options?: __HttpHandlerOptions): Promise<JsonListsCommandOutput>;
-  public jsonLists(args: JsonListsCommandInput, cb: (err: any, data?: JsonListsCommandOutput) => void): void;
-  public jsonLists(
+  jsonIntEnums(): Promise<JsonIntEnumsCommandOutput>;
+  jsonIntEnums(
+    args: JsonIntEnumsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<JsonIntEnumsCommandOutput>;
+  jsonIntEnums(
+    args: JsonIntEnumsCommandInput,
+    cb: (err: any, data?: JsonIntEnumsCommandOutput) => void
+  ): void;
+  jsonIntEnums(
+    args: JsonIntEnumsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonIntEnumsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link JsonListsCommand}
+   */
+  jsonLists(): Promise<JsonListsCommandOutput>;
+  jsonLists(
     args: JsonListsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<JsonListsCommandOutput>;
+  jsonLists(
+    args: JsonListsCommandInput,
     cb: (err: any, data?: JsonListsCommandOutput) => void
   ): void;
-  public jsonLists(
+  jsonLists(
     args: JsonListsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonListsCommandOutput) => void),
-    cb?: (err: any, data?: JsonListsCommandOutput) => void
-  ): Promise<JsonListsCommandOutput> | void {
-    const command = new JsonListsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonListsCommandOutput) => void
+  ): void;
 
   /**
-   * The example tests basic map serialization.
+   * @see {@link JsonMapsCommand}
    */
-  public jsonMaps(args: JsonMapsCommandInput, options?: __HttpHandlerOptions): Promise<JsonMapsCommandOutput>;
-  public jsonMaps(args: JsonMapsCommandInput, cb: (err: any, data?: JsonMapsCommandOutput) => void): void;
-  public jsonMaps(
+  jsonMaps(): Promise<JsonMapsCommandOutput>;
+  jsonMaps(
     args: JsonMapsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<JsonMapsCommandOutput>;
+  jsonMaps(
+    args: JsonMapsCommandInput,
     cb: (err: any, data?: JsonMapsCommandOutput) => void
   ): void;
-  public jsonMaps(
+  jsonMaps(
     args: JsonMapsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonMapsCommandOutput) => void),
-    cb?: (err: any, data?: JsonMapsCommandOutput) => void
-  ): Promise<JsonMapsCommandOutput> | void {
-    const command = new JsonMapsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonMapsCommandOutput) => void
+  ): void;
 
   /**
-   * This tests how timestamps are serialized, including using the
-   * default format of date-time and various @timestampFormat trait
-   * values.
+   * @see {@link JsonTimestampsCommand}
    */
-  public jsonTimestamps(
+  jsonTimestamps(): Promise<JsonTimestampsCommandOutput>;
+  jsonTimestamps(
     args: JsonTimestampsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<JsonTimestampsCommandOutput>;
-  public jsonTimestamps(
+  jsonTimestamps(
     args: JsonTimestampsCommandInput,
     cb: (err: any, data?: JsonTimestampsCommandOutput) => void
   ): void;
-  public jsonTimestamps(
+  jsonTimestamps(
     args: JsonTimestampsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: JsonTimestampsCommandOutput) => void
   ): void;
-  public jsonTimestamps(
-    args: JsonTimestampsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonTimestampsCommandOutput) => void),
-    cb?: (err: any, data?: JsonTimestampsCommandOutput) => void
-  ): Promise<JsonTimestampsCommandOutput> | void {
-    const command = new JsonTimestampsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This operation uses unions for inputs and outputs.
+   * @see {@link JsonUnionsCommand}
    */
-  public jsonUnions(args: JsonUnionsCommandInput, options?: __HttpHandlerOptions): Promise<JsonUnionsCommandOutput>;
-  public jsonUnions(args: JsonUnionsCommandInput, cb: (err: any, data?: JsonUnionsCommandOutput) => void): void;
-  public jsonUnions(
+  jsonUnions(): Promise<JsonUnionsCommandOutput>;
+  jsonUnions(
     args: JsonUnionsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<JsonUnionsCommandOutput>;
+  jsonUnions(
+    args: JsonUnionsCommandInput,
     cb: (err: any, data?: JsonUnionsCommandOutput) => void
   ): void;
-  public jsonUnions(
+  jsonUnions(
     args: JsonUnionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonUnionsCommandOutput) => void),
-    cb?: (err: any, data?: JsonUnionsCommandOutput) => void
-  ): Promise<JsonUnionsCommandOutput> | void {
-    const command = new JsonUnionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonUnionsCommandOutput) => void
+  ): void;
 
-  public malformedAcceptWithBody(
+  /**
+   * @see {@link MalformedAcceptWithBodyCommand}
+   */
+  malformedAcceptWithBody(): Promise<MalformedAcceptWithBodyCommandOutput>;
+  malformedAcceptWithBody(
     args: MalformedAcceptWithBodyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedAcceptWithBodyCommandOutput>;
-  public malformedAcceptWithBody(
+  malformedAcceptWithBody(
     args: MalformedAcceptWithBodyCommandInput,
     cb: (err: any, data?: MalformedAcceptWithBodyCommandOutput) => void
   ): void;
-  public malformedAcceptWithBody(
+  malformedAcceptWithBody(
     args: MalformedAcceptWithBodyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedAcceptWithBodyCommandOutput) => void
   ): void;
-  public malformedAcceptWithBody(
-    args: MalformedAcceptWithBodyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedAcceptWithBodyCommandOutput) => void),
-    cb?: (err: any, data?: MalformedAcceptWithBodyCommandOutput) => void
-  ): Promise<MalformedAcceptWithBodyCommandOutput> | void {
-    const command = new MalformedAcceptWithBodyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedAcceptWithGenericString(
+  /**
+   * @see {@link MalformedAcceptWithGenericStringCommand}
+   */
+  malformedAcceptWithGenericString(): Promise<MalformedAcceptWithGenericStringCommandOutput>;
+  malformedAcceptWithGenericString(
     args: MalformedAcceptWithGenericStringCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedAcceptWithGenericStringCommandOutput>;
-  public malformedAcceptWithGenericString(
+  malformedAcceptWithGenericString(
     args: MalformedAcceptWithGenericStringCommandInput,
     cb: (err: any, data?: MalformedAcceptWithGenericStringCommandOutput) => void
   ): void;
-  public malformedAcceptWithGenericString(
+  malformedAcceptWithGenericString(
     args: MalformedAcceptWithGenericStringCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedAcceptWithGenericStringCommandOutput) => void
   ): void;
-  public malformedAcceptWithGenericString(
-    args: MalformedAcceptWithGenericStringCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedAcceptWithGenericStringCommandOutput) => void),
-    cb?: (err: any, data?: MalformedAcceptWithGenericStringCommandOutput) => void
-  ): Promise<MalformedAcceptWithGenericStringCommandOutput> | void {
-    const command = new MalformedAcceptWithGenericStringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedAcceptWithPayload(
+  /**
+   * @see {@link MalformedAcceptWithPayloadCommand}
+   */
+  malformedAcceptWithPayload(): Promise<MalformedAcceptWithPayloadCommandOutput>;
+  malformedAcceptWithPayload(
     args: MalformedAcceptWithPayloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedAcceptWithPayloadCommandOutput>;
-  public malformedAcceptWithPayload(
+  malformedAcceptWithPayload(
     args: MalformedAcceptWithPayloadCommandInput,
     cb: (err: any, data?: MalformedAcceptWithPayloadCommandOutput) => void
   ): void;
-  public malformedAcceptWithPayload(
+  malformedAcceptWithPayload(
     args: MalformedAcceptWithPayloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedAcceptWithPayloadCommandOutput) => void
   ): void;
-  public malformedAcceptWithPayload(
-    args: MalformedAcceptWithPayloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedAcceptWithPayloadCommandOutput) => void),
-    cb?: (err: any, data?: MalformedAcceptWithPayloadCommandOutput) => void
-  ): Promise<MalformedAcceptWithPayloadCommandOutput> | void {
-    const command = new MalformedAcceptWithPayloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedBlob(
+  /**
+   * @see {@link MalformedBlobCommand}
+   */
+  malformedBlob(): Promise<MalformedBlobCommandOutput>;
+  malformedBlob(
     args: MalformedBlobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedBlobCommandOutput>;
-  public malformedBlob(
+  malformedBlob(
     args: MalformedBlobCommandInput,
     cb: (err: any, data?: MalformedBlobCommandOutput) => void
   ): void;
-  public malformedBlob(
+  malformedBlob(
     args: MalformedBlobCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedBlobCommandOutput) => void
   ): void;
-  public malformedBlob(
-    args: MalformedBlobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedBlobCommandOutput) => void),
-    cb?: (err: any, data?: MalformedBlobCommandOutput) => void
-  ): Promise<MalformedBlobCommandOutput> | void {
-    const command = new MalformedBlobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedBoolean(
+  /**
+   * @see {@link MalformedBooleanCommand}
+   */
+  malformedBoolean(
     args: MalformedBooleanCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedBooleanCommandOutput>;
-  public malformedBoolean(
+  malformedBoolean(
     args: MalformedBooleanCommandInput,
     cb: (err: any, data?: MalformedBooleanCommandOutput) => void
   ): void;
-  public malformedBoolean(
+  malformedBoolean(
     args: MalformedBooleanCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedBooleanCommandOutput) => void
   ): void;
-  public malformedBoolean(
-    args: MalformedBooleanCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedBooleanCommandOutput) => void),
-    cb?: (err: any, data?: MalformedBooleanCommandOutput) => void
-  ): Promise<MalformedBooleanCommandOutput> | void {
-    const command = new MalformedBooleanCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedByte(
+  /**
+   * @see {@link MalformedByteCommand}
+   */
+  malformedByte(
     args: MalformedByteCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedByteCommandOutput>;
-  public malformedByte(
+  malformedByte(
     args: MalformedByteCommandInput,
     cb: (err: any, data?: MalformedByteCommandOutput) => void
   ): void;
-  public malformedByte(
+  malformedByte(
     args: MalformedByteCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedByteCommandOutput) => void
   ): void;
-  public malformedByte(
-    args: MalformedByteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedByteCommandOutput) => void),
-    cb?: (err: any, data?: MalformedByteCommandOutput) => void
-  ): Promise<MalformedByteCommandOutput> | void {
-    const command = new MalformedByteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedContentTypeWithBody(
+  /**
+   * @see {@link MalformedContentTypeWithBodyCommand}
+   */
+  malformedContentTypeWithBody(): Promise<MalformedContentTypeWithBodyCommandOutput>;
+  malformedContentTypeWithBody(
     args: MalformedContentTypeWithBodyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedContentTypeWithBodyCommandOutput>;
-  public malformedContentTypeWithBody(
+  malformedContentTypeWithBody(
     args: MalformedContentTypeWithBodyCommandInput,
     cb: (err: any, data?: MalformedContentTypeWithBodyCommandOutput) => void
   ): void;
-  public malformedContentTypeWithBody(
+  malformedContentTypeWithBody(
     args: MalformedContentTypeWithBodyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedContentTypeWithBodyCommandOutput) => void
   ): void;
-  public malformedContentTypeWithBody(
-    args: MalformedContentTypeWithBodyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedContentTypeWithBodyCommandOutput) => void),
-    cb?: (err: any, data?: MalformedContentTypeWithBodyCommandOutput) => void
-  ): Promise<MalformedContentTypeWithBodyCommandOutput> | void {
-    const command = new MalformedContentTypeWithBodyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedContentTypeWithGenericString(
+  /**
+   * @see {@link MalformedContentTypeWithGenericStringCommand}
+   */
+  malformedContentTypeWithGenericString(): Promise<MalformedContentTypeWithGenericStringCommandOutput>;
+  malformedContentTypeWithGenericString(
     args: MalformedContentTypeWithGenericStringCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedContentTypeWithGenericStringCommandOutput>;
-  public malformedContentTypeWithGenericString(
+  malformedContentTypeWithGenericString(
     args: MalformedContentTypeWithGenericStringCommandInput,
     cb: (err: any, data?: MalformedContentTypeWithGenericStringCommandOutput) => void
   ): void;
-  public malformedContentTypeWithGenericString(
+  malformedContentTypeWithGenericString(
     args: MalformedContentTypeWithGenericStringCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedContentTypeWithGenericStringCommandOutput) => void
   ): void;
-  public malformedContentTypeWithGenericString(
-    args: MalformedContentTypeWithGenericStringCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: MalformedContentTypeWithGenericStringCommandOutput) => void),
-    cb?: (err: any, data?: MalformedContentTypeWithGenericStringCommandOutput) => void
-  ): Promise<MalformedContentTypeWithGenericStringCommandOutput> | void {
-    const command = new MalformedContentTypeWithGenericStringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedContentTypeWithoutBody(
+  /**
+   * @see {@link MalformedContentTypeWithoutBodyCommand}
+   */
+  malformedContentTypeWithoutBody(): Promise<MalformedContentTypeWithoutBodyCommandOutput>;
+  malformedContentTypeWithoutBody(
     args: MalformedContentTypeWithoutBodyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedContentTypeWithoutBodyCommandOutput>;
-  public malformedContentTypeWithoutBody(
+  malformedContentTypeWithoutBody(
     args: MalformedContentTypeWithoutBodyCommandInput,
     cb: (err: any, data?: MalformedContentTypeWithoutBodyCommandOutput) => void
   ): void;
-  public malformedContentTypeWithoutBody(
+  malformedContentTypeWithoutBody(
     args: MalformedContentTypeWithoutBodyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedContentTypeWithoutBodyCommandOutput) => void
   ): void;
-  public malformedContentTypeWithoutBody(
-    args: MalformedContentTypeWithoutBodyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedContentTypeWithoutBodyCommandOutput) => void),
-    cb?: (err: any, data?: MalformedContentTypeWithoutBodyCommandOutput) => void
-  ): Promise<MalformedContentTypeWithoutBodyCommandOutput> | void {
-    const command = new MalformedContentTypeWithoutBodyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedContentTypeWithPayload(
+  /**
+   * @see {@link MalformedContentTypeWithoutBodyEmptyInputCommand}
+   */
+  malformedContentTypeWithoutBodyEmptyInput(): Promise<MalformedContentTypeWithoutBodyEmptyInputCommandOutput>;
+  malformedContentTypeWithoutBodyEmptyInput(
+    args: MalformedContentTypeWithoutBodyEmptyInputCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<MalformedContentTypeWithoutBodyEmptyInputCommandOutput>;
+  malformedContentTypeWithoutBodyEmptyInput(
+    args: MalformedContentTypeWithoutBodyEmptyInputCommandInput,
+    cb: (err: any, data?: MalformedContentTypeWithoutBodyEmptyInputCommandOutput) => void
+  ): void;
+  malformedContentTypeWithoutBodyEmptyInput(
+    args: MalformedContentTypeWithoutBodyEmptyInputCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: MalformedContentTypeWithoutBodyEmptyInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link MalformedContentTypeWithPayloadCommand}
+   */
+  malformedContentTypeWithPayload(): Promise<MalformedContentTypeWithPayloadCommandOutput>;
+  malformedContentTypeWithPayload(
     args: MalformedContentTypeWithPayloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedContentTypeWithPayloadCommandOutput>;
-  public malformedContentTypeWithPayload(
+  malformedContentTypeWithPayload(
     args: MalformedContentTypeWithPayloadCommandInput,
     cb: (err: any, data?: MalformedContentTypeWithPayloadCommandOutput) => void
   ): void;
-  public malformedContentTypeWithPayload(
+  malformedContentTypeWithPayload(
     args: MalformedContentTypeWithPayloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedContentTypeWithPayloadCommandOutput) => void
   ): void;
-  public malformedContentTypeWithPayload(
-    args: MalformedContentTypeWithPayloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedContentTypeWithPayloadCommandOutput) => void),
-    cb?: (err: any, data?: MalformedContentTypeWithPayloadCommandOutput) => void
-  ): Promise<MalformedContentTypeWithPayloadCommandOutput> | void {
-    const command = new MalformedContentTypeWithPayloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedDouble(
+  /**
+   * @see {@link MalformedDoubleCommand}
+   */
+  malformedDouble(
     args: MalformedDoubleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedDoubleCommandOutput>;
-  public malformedDouble(
+  malformedDouble(
     args: MalformedDoubleCommandInput,
     cb: (err: any, data?: MalformedDoubleCommandOutput) => void
   ): void;
-  public malformedDouble(
+  malformedDouble(
     args: MalformedDoubleCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedDoubleCommandOutput) => void
   ): void;
-  public malformedDouble(
-    args: MalformedDoubleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedDoubleCommandOutput) => void),
-    cb?: (err: any, data?: MalformedDoubleCommandOutput) => void
-  ): Promise<MalformedDoubleCommandOutput> | void {
-    const command = new MalformedDoubleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedFloat(
+  /**
+   * @see {@link MalformedFloatCommand}
+   */
+  malformedFloat(
     args: MalformedFloatCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedFloatCommandOutput>;
-  public malformedFloat(
+  malformedFloat(
     args: MalformedFloatCommandInput,
     cb: (err: any, data?: MalformedFloatCommandOutput) => void
   ): void;
-  public malformedFloat(
+  malformedFloat(
     args: MalformedFloatCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedFloatCommandOutput) => void
   ): void;
-  public malformedFloat(
-    args: MalformedFloatCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedFloatCommandOutput) => void),
-    cb?: (err: any, data?: MalformedFloatCommandOutput) => void
-  ): Promise<MalformedFloatCommandOutput> | void {
-    const command = new MalformedFloatCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedInteger(
+  /**
+   * @see {@link MalformedIntegerCommand}
+   */
+  malformedInteger(
     args: MalformedIntegerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedIntegerCommandOutput>;
-  public malformedInteger(
+  malformedInteger(
     args: MalformedIntegerCommandInput,
     cb: (err: any, data?: MalformedIntegerCommandOutput) => void
   ): void;
-  public malformedInteger(
+  malformedInteger(
     args: MalformedIntegerCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedIntegerCommandOutput) => void
   ): void;
-  public malformedInteger(
-    args: MalformedIntegerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedIntegerCommandOutput) => void),
-    cb?: (err: any, data?: MalformedIntegerCommandOutput) => void
-  ): Promise<MalformedIntegerCommandOutput> | void {
-    const command = new MalformedIntegerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedList(
+  /**
+   * @see {@link MalformedListCommand}
+   */
+  malformedList(): Promise<MalformedListCommandOutput>;
+  malformedList(
     args: MalformedListCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedListCommandOutput>;
-  public malformedList(
+  malformedList(
     args: MalformedListCommandInput,
     cb: (err: any, data?: MalformedListCommandOutput) => void
   ): void;
-  public malformedList(
+  malformedList(
     args: MalformedListCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedListCommandOutput) => void
   ): void;
-  public malformedList(
-    args: MalformedListCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedListCommandOutput) => void),
-    cb?: (err: any, data?: MalformedListCommandOutput) => void
-  ): Promise<MalformedListCommandOutput> | void {
-    const command = new MalformedListCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedLong(
+  /**
+   * @see {@link MalformedLongCommand}
+   */
+  malformedLong(
     args: MalformedLongCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedLongCommandOutput>;
-  public malformedLong(
+  malformedLong(
     args: MalformedLongCommandInput,
     cb: (err: any, data?: MalformedLongCommandOutput) => void
   ): void;
-  public malformedLong(
+  malformedLong(
     args: MalformedLongCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedLongCommandOutput) => void
   ): void;
-  public malformedLong(
-    args: MalformedLongCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedLongCommandOutput) => void),
-    cb?: (err: any, data?: MalformedLongCommandOutput) => void
-  ): Promise<MalformedLongCommandOutput> | void {
-    const command = new MalformedLongCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedMap(
+  /**
+   * @see {@link MalformedMapCommand}
+   */
+  malformedMap(): Promise<MalformedMapCommandOutput>;
+  malformedMap(
     args: MalformedMapCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedMapCommandOutput>;
-  public malformedMap(args: MalformedMapCommandInput, cb: (err: any, data?: MalformedMapCommandOutput) => void): void;
-  public malformedMap(
+  malformedMap(
     args: MalformedMapCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: MalformedMapCommandOutput) => void
   ): void;
-  public malformedMap(
+  malformedMap(
     args: MalformedMapCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedMapCommandOutput) => void),
-    cb?: (err: any, data?: MalformedMapCommandOutput) => void
-  ): Promise<MalformedMapCommandOutput> | void {
-    const command = new MalformedMapCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: MalformedMapCommandOutput) => void
+  ): void;
 
-  public malformedRequestBody(
+  /**
+   * @see {@link MalformedRequestBodyCommand}
+   */
+  malformedRequestBody(): Promise<MalformedRequestBodyCommandOutput>;
+  malformedRequestBody(
     args: MalformedRequestBodyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedRequestBodyCommandOutput>;
-  public malformedRequestBody(
+  malformedRequestBody(
     args: MalformedRequestBodyCommandInput,
     cb: (err: any, data?: MalformedRequestBodyCommandOutput) => void
   ): void;
-  public malformedRequestBody(
+  malformedRequestBody(
     args: MalformedRequestBodyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedRequestBodyCommandOutput) => void
   ): void;
-  public malformedRequestBody(
-    args: MalformedRequestBodyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedRequestBodyCommandOutput) => void),
-    cb?: (err: any, data?: MalformedRequestBodyCommandOutput) => void
-  ): Promise<MalformedRequestBodyCommandOutput> | void {
-    const command = new MalformedRequestBodyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedSet(
-    args: MalformedSetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<MalformedSetCommandOutput>;
-  public malformedSet(args: MalformedSetCommandInput, cb: (err: any, data?: MalformedSetCommandOutput) => void): void;
-  public malformedSet(
-    args: MalformedSetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: MalformedSetCommandOutput) => void
-  ): void;
-  public malformedSet(
-    args: MalformedSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedSetCommandOutput) => void),
-    cb?: (err: any, data?: MalformedSetCommandOutput) => void
-  ): Promise<MalformedSetCommandOutput> | void {
-    const command = new MalformedSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public malformedShort(
+  /**
+   * @see {@link MalformedShortCommand}
+   */
+  malformedShort(
     args: MalformedShortCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedShortCommandOutput>;
-  public malformedShort(
+  malformedShort(
     args: MalformedShortCommandInput,
     cb: (err: any, data?: MalformedShortCommandOutput) => void
   ): void;
-  public malformedShort(
+  malformedShort(
     args: MalformedShortCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedShortCommandOutput) => void
   ): void;
-  public malformedShort(
-    args: MalformedShortCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedShortCommandOutput) => void),
-    cb?: (err: any, data?: MalformedShortCommandOutput) => void
-  ): Promise<MalformedShortCommandOutput> | void {
-    const command = new MalformedShortCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedString(
+  /**
+   * @see {@link MalformedStringCommand}
+   */
+  malformedString(): Promise<MalformedStringCommandOutput>;
+  malformedString(
     args: MalformedStringCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedStringCommandOutput>;
-  public malformedString(
+  malformedString(
     args: MalformedStringCommandInput,
     cb: (err: any, data?: MalformedStringCommandOutput) => void
   ): void;
-  public malformedString(
+  malformedString(
     args: MalformedStringCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedStringCommandOutput) => void
   ): void;
-  public malformedString(
-    args: MalformedStringCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedStringCommandOutput) => void),
-    cb?: (err: any, data?: MalformedStringCommandOutput) => void
-  ): Promise<MalformedStringCommandOutput> | void {
-    const command = new MalformedStringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampBodyDateTime(
+  /**
+   * @see {@link MalformedTimestampBodyDateTimeCommand}
+   */
+  malformedTimestampBodyDateTime(
     args: MalformedTimestampBodyDateTimeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampBodyDateTimeCommandOutput>;
-  public malformedTimestampBodyDateTime(
+  malformedTimestampBodyDateTime(
     args: MalformedTimestampBodyDateTimeCommandInput,
     cb: (err: any, data?: MalformedTimestampBodyDateTimeCommandOutput) => void
   ): void;
-  public malformedTimestampBodyDateTime(
+  malformedTimestampBodyDateTime(
     args: MalformedTimestampBodyDateTimeCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampBodyDateTimeCommandOutput) => void
   ): void;
-  public malformedTimestampBodyDateTime(
-    args: MalformedTimestampBodyDateTimeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampBodyDateTimeCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampBodyDateTimeCommandOutput) => void
-  ): Promise<MalformedTimestampBodyDateTimeCommandOutput> | void {
-    const command = new MalformedTimestampBodyDateTimeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampBodyDefault(
+  /**
+   * @see {@link MalformedTimestampBodyDefaultCommand}
+   */
+  malformedTimestampBodyDefault(
     args: MalformedTimestampBodyDefaultCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampBodyDefaultCommandOutput>;
-  public malformedTimestampBodyDefault(
+  malformedTimestampBodyDefault(
     args: MalformedTimestampBodyDefaultCommandInput,
     cb: (err: any, data?: MalformedTimestampBodyDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampBodyDefault(
+  malformedTimestampBodyDefault(
     args: MalformedTimestampBodyDefaultCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampBodyDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampBodyDefault(
-    args: MalformedTimestampBodyDefaultCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampBodyDefaultCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampBodyDefaultCommandOutput) => void
-  ): Promise<MalformedTimestampBodyDefaultCommandOutput> | void {
-    const command = new MalformedTimestampBodyDefaultCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampBodyHttpDate(
+  /**
+   * @see {@link MalformedTimestampBodyHttpDateCommand}
+   */
+  malformedTimestampBodyHttpDate(
     args: MalformedTimestampBodyHttpDateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampBodyHttpDateCommandOutput>;
-  public malformedTimestampBodyHttpDate(
+  malformedTimestampBodyHttpDate(
     args: MalformedTimestampBodyHttpDateCommandInput,
     cb: (err: any, data?: MalformedTimestampBodyHttpDateCommandOutput) => void
   ): void;
-  public malformedTimestampBodyHttpDate(
+  malformedTimestampBodyHttpDate(
     args: MalformedTimestampBodyHttpDateCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampBodyHttpDateCommandOutput) => void
   ): void;
-  public malformedTimestampBodyHttpDate(
-    args: MalformedTimestampBodyHttpDateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampBodyHttpDateCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampBodyHttpDateCommandOutput) => void
-  ): Promise<MalformedTimestampBodyHttpDateCommandOutput> | void {
-    const command = new MalformedTimestampBodyHttpDateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampHeaderDateTime(
+  /**
+   * @see {@link MalformedTimestampHeaderDateTimeCommand}
+   */
+  malformedTimestampHeaderDateTime(
     args: MalformedTimestampHeaderDateTimeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampHeaderDateTimeCommandOutput>;
-  public malformedTimestampHeaderDateTime(
+  malformedTimestampHeaderDateTime(
     args: MalformedTimestampHeaderDateTimeCommandInput,
     cb: (err: any, data?: MalformedTimestampHeaderDateTimeCommandOutput) => void
   ): void;
-  public malformedTimestampHeaderDateTime(
+  malformedTimestampHeaderDateTime(
     args: MalformedTimestampHeaderDateTimeCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampHeaderDateTimeCommandOutput) => void
   ): void;
-  public malformedTimestampHeaderDateTime(
-    args: MalformedTimestampHeaderDateTimeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampHeaderDateTimeCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampHeaderDateTimeCommandOutput) => void
-  ): Promise<MalformedTimestampHeaderDateTimeCommandOutput> | void {
-    const command = new MalformedTimestampHeaderDateTimeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampHeaderDefault(
+  /**
+   * @see {@link MalformedTimestampHeaderDefaultCommand}
+   */
+  malformedTimestampHeaderDefault(
     args: MalformedTimestampHeaderDefaultCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampHeaderDefaultCommandOutput>;
-  public malformedTimestampHeaderDefault(
+  malformedTimestampHeaderDefault(
     args: MalformedTimestampHeaderDefaultCommandInput,
     cb: (err: any, data?: MalformedTimestampHeaderDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampHeaderDefault(
+  malformedTimestampHeaderDefault(
     args: MalformedTimestampHeaderDefaultCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampHeaderDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampHeaderDefault(
-    args: MalformedTimestampHeaderDefaultCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampHeaderDefaultCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampHeaderDefaultCommandOutput) => void
-  ): Promise<MalformedTimestampHeaderDefaultCommandOutput> | void {
-    const command = new MalformedTimestampHeaderDefaultCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampHeaderEpoch(
+  /**
+   * @see {@link MalformedTimestampHeaderEpochCommand}
+   */
+  malformedTimestampHeaderEpoch(
     args: MalformedTimestampHeaderEpochCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampHeaderEpochCommandOutput>;
-  public malformedTimestampHeaderEpoch(
+  malformedTimestampHeaderEpoch(
     args: MalformedTimestampHeaderEpochCommandInput,
     cb: (err: any, data?: MalformedTimestampHeaderEpochCommandOutput) => void
   ): void;
-  public malformedTimestampHeaderEpoch(
+  malformedTimestampHeaderEpoch(
     args: MalformedTimestampHeaderEpochCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampHeaderEpochCommandOutput) => void
   ): void;
-  public malformedTimestampHeaderEpoch(
-    args: MalformedTimestampHeaderEpochCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampHeaderEpochCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampHeaderEpochCommandOutput) => void
-  ): Promise<MalformedTimestampHeaderEpochCommandOutput> | void {
-    const command = new MalformedTimestampHeaderEpochCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampPathDefault(
+  /**
+   * @see {@link MalformedTimestampPathDefaultCommand}
+   */
+  malformedTimestampPathDefault(
     args: MalformedTimestampPathDefaultCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampPathDefaultCommandOutput>;
-  public malformedTimestampPathDefault(
+  malformedTimestampPathDefault(
     args: MalformedTimestampPathDefaultCommandInput,
     cb: (err: any, data?: MalformedTimestampPathDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampPathDefault(
+  malformedTimestampPathDefault(
     args: MalformedTimestampPathDefaultCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampPathDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampPathDefault(
-    args: MalformedTimestampPathDefaultCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampPathDefaultCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampPathDefaultCommandOutput) => void
-  ): Promise<MalformedTimestampPathDefaultCommandOutput> | void {
-    const command = new MalformedTimestampPathDefaultCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampPathEpoch(
+  /**
+   * @see {@link MalformedTimestampPathEpochCommand}
+   */
+  malformedTimestampPathEpoch(
     args: MalformedTimestampPathEpochCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampPathEpochCommandOutput>;
-  public malformedTimestampPathEpoch(
+  malformedTimestampPathEpoch(
     args: MalformedTimestampPathEpochCommandInput,
     cb: (err: any, data?: MalformedTimestampPathEpochCommandOutput) => void
   ): void;
-  public malformedTimestampPathEpoch(
+  malformedTimestampPathEpoch(
     args: MalformedTimestampPathEpochCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampPathEpochCommandOutput) => void
   ): void;
-  public malformedTimestampPathEpoch(
-    args: MalformedTimestampPathEpochCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampPathEpochCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampPathEpochCommandOutput) => void
-  ): Promise<MalformedTimestampPathEpochCommandOutput> | void {
-    const command = new MalformedTimestampPathEpochCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampPathHttpDate(
+  /**
+   * @see {@link MalformedTimestampPathHttpDateCommand}
+   */
+  malformedTimestampPathHttpDate(
     args: MalformedTimestampPathHttpDateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampPathHttpDateCommandOutput>;
-  public malformedTimestampPathHttpDate(
+  malformedTimestampPathHttpDate(
     args: MalformedTimestampPathHttpDateCommandInput,
     cb: (err: any, data?: MalformedTimestampPathHttpDateCommandOutput) => void
   ): void;
-  public malformedTimestampPathHttpDate(
+  malformedTimestampPathHttpDate(
     args: MalformedTimestampPathHttpDateCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampPathHttpDateCommandOutput) => void
   ): void;
-  public malformedTimestampPathHttpDate(
-    args: MalformedTimestampPathHttpDateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampPathHttpDateCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampPathHttpDateCommandOutput) => void
-  ): Promise<MalformedTimestampPathHttpDateCommandOutput> | void {
-    const command = new MalformedTimestampPathHttpDateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampQueryDefault(
+  /**
+   * @see {@link MalformedTimestampQueryDefaultCommand}
+   */
+  malformedTimestampQueryDefault(
     args: MalformedTimestampQueryDefaultCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampQueryDefaultCommandOutput>;
-  public malformedTimestampQueryDefault(
+  malformedTimestampQueryDefault(
     args: MalformedTimestampQueryDefaultCommandInput,
     cb: (err: any, data?: MalformedTimestampQueryDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampQueryDefault(
+  malformedTimestampQueryDefault(
     args: MalformedTimestampQueryDefaultCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampQueryDefaultCommandOutput) => void
   ): void;
-  public malformedTimestampQueryDefault(
-    args: MalformedTimestampQueryDefaultCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampQueryDefaultCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampQueryDefaultCommandOutput) => void
-  ): Promise<MalformedTimestampQueryDefaultCommandOutput> | void {
-    const command = new MalformedTimestampQueryDefaultCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampQueryEpoch(
+  /**
+   * @see {@link MalformedTimestampQueryEpochCommand}
+   */
+  malformedTimestampQueryEpoch(
     args: MalformedTimestampQueryEpochCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampQueryEpochCommandOutput>;
-  public malformedTimestampQueryEpoch(
+  malformedTimestampQueryEpoch(
     args: MalformedTimestampQueryEpochCommandInput,
     cb: (err: any, data?: MalformedTimestampQueryEpochCommandOutput) => void
   ): void;
-  public malformedTimestampQueryEpoch(
+  malformedTimestampQueryEpoch(
     args: MalformedTimestampQueryEpochCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampQueryEpochCommandOutput) => void
   ): void;
-  public malformedTimestampQueryEpoch(
-    args: MalformedTimestampQueryEpochCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampQueryEpochCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampQueryEpochCommandOutput) => void
-  ): Promise<MalformedTimestampQueryEpochCommandOutput> | void {
-    const command = new MalformedTimestampQueryEpochCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedTimestampQueryHttpDate(
+  /**
+   * @see {@link MalformedTimestampQueryHttpDateCommand}
+   */
+  malformedTimestampQueryHttpDate(
     args: MalformedTimestampQueryHttpDateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedTimestampQueryHttpDateCommandOutput>;
-  public malformedTimestampQueryHttpDate(
+  malformedTimestampQueryHttpDate(
     args: MalformedTimestampQueryHttpDateCommandInput,
     cb: (err: any, data?: MalformedTimestampQueryHttpDateCommandOutput) => void
   ): void;
-  public malformedTimestampQueryHttpDate(
+  malformedTimestampQueryHttpDate(
     args: MalformedTimestampQueryHttpDateCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedTimestampQueryHttpDateCommandOutput) => void
   ): void;
-  public malformedTimestampQueryHttpDate(
-    args: MalformedTimestampQueryHttpDateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedTimestampQueryHttpDateCommandOutput) => void),
-    cb?: (err: any, data?: MalformedTimestampQueryHttpDateCommandOutput) => void
-  ): Promise<MalformedTimestampQueryHttpDateCommandOutput> | void {
-    const command = new MalformedTimestampQueryHttpDateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public malformedUnion(
+  /**
+   * @see {@link MalformedUnionCommand}
+   */
+  malformedUnion(): Promise<MalformedUnionCommandOutput>;
+  malformedUnion(
     args: MalformedUnionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MalformedUnionCommandOutput>;
-  public malformedUnion(
+  malformedUnion(
     args: MalformedUnionCommandInput,
     cb: (err: any, data?: MalformedUnionCommandOutput) => void
   ): void;
-  public malformedUnion(
+  malformedUnion(
     args: MalformedUnionCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MalformedUnionCommandOutput) => void
   ): void;
-  public malformedUnion(
-    args: MalformedUnionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MalformedUnionCommandOutput) => void),
-    cb?: (err: any, data?: MalformedUnionCommandOutput) => void
-  ): Promise<MalformedUnionCommandOutput> | void {
-    const command = new MalformedUnionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example ensures that mediaType strings are base64 encoded in headers.
+   * @see {@link MediaTypeHeaderCommand}
    */
-  public mediaTypeHeader(
+  mediaTypeHeader(): Promise<MediaTypeHeaderCommandOutput>;
+  mediaTypeHeader(
     args: MediaTypeHeaderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<MediaTypeHeaderCommandOutput>;
-  public mediaTypeHeader(
+  mediaTypeHeader(
     args: MediaTypeHeaderCommandInput,
     cb: (err: any, data?: MediaTypeHeaderCommandOutput) => void
   ): void;
-  public mediaTypeHeader(
+  mediaTypeHeader(
     args: MediaTypeHeaderCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: MediaTypeHeaderCommandOutput) => void
   ): void;
-  public mediaTypeHeader(
-    args: MediaTypeHeaderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MediaTypeHeaderCommandOutput) => void),
-    cb?: (err: any, data?: MediaTypeHeaderCommandOutput) => void
-  ): Promise<MediaTypeHeaderCommandOutput> | void {
-    const command = new MediaTypeHeaderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has no input or output.
-   * While this should be rare, code generators must support this.
+   * @see {@link NoInputAndNoOutputCommand}
    */
-  public noInputAndNoOutput(
+  noInputAndNoOutput(): Promise<NoInputAndNoOutputCommandOutput>;
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<NoInputAndNoOutputCommandOutput>;
-  public noInputAndNoOutput(
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
     cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
   ): void;
-  public noInputAndNoOutput(
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
   ): void;
-  public noInputAndNoOutput(
-    args: NoInputAndNoOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NoInputAndNoOutputCommandOutput) => void),
-    cb?: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
-  ): Promise<NoInputAndNoOutputCommandOutput> | void {
-    const command = new NoInputAndNoOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has no input and the
-   * output is empty. While this should be rare, code generators must support
-   * this.
+   * @see {@link NoInputAndOutputCommand}
    */
-  public noInputAndOutput(
+  noInputAndOutput(): Promise<NoInputAndOutputCommandOutput>;
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<NoInputAndOutputCommandOutput>;
-  public noInputAndOutput(
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
   ): void;
-  public noInputAndOutput(
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
   ): void;
-  public noInputAndOutput(
-    args: NoInputAndOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NoInputAndOutputCommandOutput) => void),
-    cb?: (err: any, data?: NoInputAndOutputCommandOutput) => void
-  ): Promise<NoInputAndOutputCommandOutput> | void {
-    const command = new NoInputAndOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Null and empty headers are not sent over the wire.
+   * @see {@link NullAndEmptyHeadersClientCommand}
    */
-  public nullAndEmptyHeadersClient(
+  nullAndEmptyHeadersClient(): Promise<NullAndEmptyHeadersClientCommandOutput>;
+  nullAndEmptyHeadersClient(
     args: NullAndEmptyHeadersClientCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<NullAndEmptyHeadersClientCommandOutput>;
-  public nullAndEmptyHeadersClient(
+  nullAndEmptyHeadersClient(
     args: NullAndEmptyHeadersClientCommandInput,
     cb: (err: any, data?: NullAndEmptyHeadersClientCommandOutput) => void
   ): void;
-  public nullAndEmptyHeadersClient(
+  nullAndEmptyHeadersClient(
     args: NullAndEmptyHeadersClientCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: NullAndEmptyHeadersClientCommandOutput) => void
   ): void;
-  public nullAndEmptyHeadersClient(
-    args: NullAndEmptyHeadersClientCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NullAndEmptyHeadersClientCommandOutput) => void),
-    cb?: (err: any, data?: NullAndEmptyHeadersClientCommandOutput) => void
-  ): Promise<NullAndEmptyHeadersClientCommandOutput> | void {
-    const command = new NullAndEmptyHeadersClientCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Null and empty headers are not sent over the wire.
+   * @see {@link NullAndEmptyHeadersServerCommand}
    */
-  public nullAndEmptyHeadersServer(
+  nullAndEmptyHeadersServer(): Promise<NullAndEmptyHeadersServerCommandOutput>;
+  nullAndEmptyHeadersServer(
     args: NullAndEmptyHeadersServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<NullAndEmptyHeadersServerCommandOutput>;
-  public nullAndEmptyHeadersServer(
+  nullAndEmptyHeadersServer(
     args: NullAndEmptyHeadersServerCommandInput,
     cb: (err: any, data?: NullAndEmptyHeadersServerCommandOutput) => void
   ): void;
-  public nullAndEmptyHeadersServer(
+  nullAndEmptyHeadersServer(
     args: NullAndEmptyHeadersServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: NullAndEmptyHeadersServerCommandOutput) => void
   ): void;
-  public nullAndEmptyHeadersServer(
-    args: NullAndEmptyHeadersServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NullAndEmptyHeadersServerCommandOutput) => void),
-    cb?: (err: any, data?: NullAndEmptyHeadersServerCommandOutput) => void
-  ): Promise<NullAndEmptyHeadersServerCommandOutput> | void {
-    const command = new NullAndEmptyHeadersServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Omits null, but serializes empty string value.
+   * @see {@link OmitsNullSerializesEmptyStringCommand}
    */
-  public omitsNullSerializesEmptyString(
+  omitsNullSerializesEmptyString(): Promise<OmitsNullSerializesEmptyStringCommandOutput>;
+  omitsNullSerializesEmptyString(
     args: OmitsNullSerializesEmptyStringCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<OmitsNullSerializesEmptyStringCommandOutput>;
-  public omitsNullSerializesEmptyString(
+  omitsNullSerializesEmptyString(
     args: OmitsNullSerializesEmptyStringCommandInput,
     cb: (err: any, data?: OmitsNullSerializesEmptyStringCommandOutput) => void
   ): void;
-  public omitsNullSerializesEmptyString(
+  omitsNullSerializesEmptyString(
     args: OmitsNullSerializesEmptyStringCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: OmitsNullSerializesEmptyStringCommandOutput) => void
   ): void;
-  public omitsNullSerializesEmptyString(
-    args: OmitsNullSerializesEmptyStringCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: OmitsNullSerializesEmptyStringCommandOutput) => void),
-    cb?: (err: any, data?: OmitsNullSerializesEmptyStringCommandOutput) => void
-  ): Promise<OmitsNullSerializesEmptyStringCommandOutput> | void {
-    const command = new OmitsNullSerializesEmptyStringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Automatically adds idempotency tokens.
+   * @see {@link OmitsSerializingEmptyListsCommand}
    */
-  public queryIdempotencyTokenAutoFill(
+  omitsSerializingEmptyLists(): Promise<OmitsSerializingEmptyListsCommandOutput>;
+  omitsSerializingEmptyLists(
+    args: OmitsSerializingEmptyListsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<OmitsSerializingEmptyListsCommandOutput>;
+  omitsSerializingEmptyLists(
+    args: OmitsSerializingEmptyListsCommandInput,
+    cb: (err: any, data?: OmitsSerializingEmptyListsCommandOutput) => void
+  ): void;
+  omitsSerializingEmptyLists(
+    args: OmitsSerializingEmptyListsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: OmitsSerializingEmptyListsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OperationWithDefaultsCommand}
+   */
+  operationWithDefaults(): Promise<OperationWithDefaultsCommandOutput>;
+  operationWithDefaults(
+    args: OperationWithDefaultsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<OperationWithDefaultsCommandOutput>;
+  operationWithDefaults(
+    args: OperationWithDefaultsCommandInput,
+    cb: (err: any, data?: OperationWithDefaultsCommandOutput) => void
+  ): void;
+  operationWithDefaults(
+    args: OperationWithDefaultsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: OperationWithDefaultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OperationWithNestedStructureCommand}
+   */
+  operationWithNestedStructure(
+    args: OperationWithNestedStructureCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<OperationWithNestedStructureCommandOutput>;
+  operationWithNestedStructure(
+    args: OperationWithNestedStructureCommandInput,
+    cb: (err: any, data?: OperationWithNestedStructureCommandOutput) => void
+  ): void;
+  operationWithNestedStructure(
+    args: OperationWithNestedStructureCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: OperationWithNestedStructureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OutputStreamCommand}
+   */
+  outputStream(): Promise<OutputStreamCommandOutput>;
+  outputStream(
+    args: OutputStreamCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<OutputStreamCommandOutput>;
+  outputStream(
+    args: OutputStreamCommandInput,
+    cb: (err: any, data?: OutputStreamCommandOutput) => void
+  ): void;
+  outputStream(
+    args: OutputStreamCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: OutputStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OutputStreamWithInitialResponseCommand}
+   */
+  outputStreamWithInitialResponse(): Promise<OutputStreamWithInitialResponseCommandOutput>;
+  outputStreamWithInitialResponse(
+    args: OutputStreamWithInitialResponseCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<OutputStreamWithInitialResponseCommandOutput>;
+  outputStreamWithInitialResponse(
+    args: OutputStreamWithInitialResponseCommandInput,
+    cb: (err: any, data?: OutputStreamWithInitialResponseCommandOutput) => void
+  ): void;
+  outputStreamWithInitialResponse(
+    args: OutputStreamWithInitialResponseCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: OutputStreamWithInitialResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PostPlayerActionCommand}
+   */
+  postPlayerAction(): Promise<PostPlayerActionCommandOutput>;
+  postPlayerAction(
+    args: PostPlayerActionCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<PostPlayerActionCommandOutput>;
+  postPlayerAction(
+    args: PostPlayerActionCommandInput,
+    cb: (err: any, data?: PostPlayerActionCommandOutput) => void
+  ): void;
+  postPlayerAction(
+    args: PostPlayerActionCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: PostPlayerActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PostUnionWithJsonNameCommand}
+   */
+  postUnionWithJsonName(): Promise<PostUnionWithJsonNameCommandOutput>;
+  postUnionWithJsonName(
+    args: PostUnionWithJsonNameCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<PostUnionWithJsonNameCommandOutput>;
+  postUnionWithJsonName(
+    args: PostUnionWithJsonNameCommandInput,
+    cb: (err: any, data?: PostUnionWithJsonNameCommandOutput) => void
+  ): void;
+  postUnionWithJsonName(
+    args: PostUnionWithJsonNameCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: PostUnionWithJsonNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutWithContentEncodingCommand}
+   */
+  putWithContentEncoding(): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryIdempotencyTokenAutoFillCommand}
+   */
+  queryIdempotencyTokenAutoFill(): Promise<QueryIdempotencyTokenAutoFillCommandOutput>;
+  queryIdempotencyTokenAutoFill(
     args: QueryIdempotencyTokenAutoFillCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<QueryIdempotencyTokenAutoFillCommandOutput>;
-  public queryIdempotencyTokenAutoFill(
+  queryIdempotencyTokenAutoFill(
     args: QueryIdempotencyTokenAutoFillCommandInput,
     cb: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
   ): void;
-  public queryIdempotencyTokenAutoFill(
+  queryIdempotencyTokenAutoFill(
     args: QueryIdempotencyTokenAutoFillCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
   ): void;
-  public queryIdempotencyTokenAutoFill(
-    args: QueryIdempotencyTokenAutoFillCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void),
-    cb?: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
-  ): Promise<QueryIdempotencyTokenAutoFillCommandOutput> | void {
-    const command = new QueryIdempotencyTokenAutoFillCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public queryParamsAsStringListMap(
+  /**
+   * @see {@link QueryParamsAsStringListMapCommand}
+   */
+  queryParamsAsStringListMap(): Promise<QueryParamsAsStringListMapCommandOutput>;
+  queryParamsAsStringListMap(
     args: QueryParamsAsStringListMapCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<QueryParamsAsStringListMapCommandOutput>;
-  public queryParamsAsStringListMap(
+  queryParamsAsStringListMap(
     args: QueryParamsAsStringListMapCommandInput,
     cb: (err: any, data?: QueryParamsAsStringListMapCommandOutput) => void
   ): void;
-  public queryParamsAsStringListMap(
+  queryParamsAsStringListMap(
     args: QueryParamsAsStringListMapCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: QueryParamsAsStringListMapCommandOutput) => void
   ): void;
-  public queryParamsAsStringListMap(
-    args: QueryParamsAsStringListMapCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryParamsAsStringListMapCommandOutput) => void),
-    cb?: (err: any, data?: QueryParamsAsStringListMapCommandOutput) => void
-  ): Promise<QueryParamsAsStringListMapCommandOutput> | void {
-    const command = new QueryParamsAsStringListMapCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public queryPrecedence(
+  /**
+   * @see {@link QueryPrecedenceCommand}
+   */
+  queryPrecedence(): Promise<QueryPrecedenceCommandOutput>;
+  queryPrecedence(
     args: QueryPrecedenceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<QueryPrecedenceCommandOutput>;
-  public queryPrecedence(
+  queryPrecedence(
     args: QueryPrecedenceCommandInput,
     cb: (err: any, data?: QueryPrecedenceCommandOutput) => void
   ): void;
-  public queryPrecedence(
+  queryPrecedence(
     args: QueryPrecedenceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: QueryPrecedenceCommandOutput) => void
   ): void;
-  public queryPrecedence(
-    args: QueryPrecedenceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryPrecedenceCommandOutput) => void),
-    cb?: (err: any, data?: QueryPrecedenceCommandOutput) => void
-  ): Promise<QueryPrecedenceCommandOutput> | void {
-    const command = new QueryPrecedenceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Recursive shapes
+   * @see {@link RecursiveShapesCommand}
    */
-  public recursiveShapes(
+  recursiveShapes(): Promise<RecursiveShapesCommandOutput>;
+  recursiveShapes(
     args: RecursiveShapesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<RecursiveShapesCommandOutput>;
-  public recursiveShapes(
+  recursiveShapes(
     args: RecursiveShapesCommandInput,
     cb: (err: any, data?: RecursiveShapesCommandOutput) => void
   ): void;
-  public recursiveShapes(
+  recursiveShapes(
     args: RecursiveShapesCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: RecursiveShapesCommandOutput) => void
   ): void;
-  public recursiveShapes(
-    args: RecursiveShapesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RecursiveShapesCommandOutput) => void),
-    cb?: (err: any, data?: RecursiveShapesCommandOutput) => void
-  ): Promise<RecursiveShapesCommandOutput> | void {
-    const command = new RecursiveShapesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public simpleScalarProperties(
+  /**
+   * @see {@link ResponseCodeHttpFallbackCommand}
+   */
+  responseCodeHttpFallback(): Promise<ResponseCodeHttpFallbackCommandOutput>;
+  responseCodeHttpFallback(
+    args: ResponseCodeHttpFallbackCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<ResponseCodeHttpFallbackCommandOutput>;
+  responseCodeHttpFallback(
+    args: ResponseCodeHttpFallbackCommandInput,
+    cb: (err: any, data?: ResponseCodeHttpFallbackCommandOutput) => void
+  ): void;
+  responseCodeHttpFallback(
+    args: ResponseCodeHttpFallbackCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: ResponseCodeHttpFallbackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResponseCodeRequiredCommand}
+   */
+  responseCodeRequired(): Promise<ResponseCodeRequiredCommandOutput>;
+  responseCodeRequired(
+    args: ResponseCodeRequiredCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<ResponseCodeRequiredCommandOutput>;
+  responseCodeRequired(
+    args: ResponseCodeRequiredCommandInput,
+    cb: (err: any, data?: ResponseCodeRequiredCommandOutput) => void
+  ): void;
+  responseCodeRequired(
+    args: ResponseCodeRequiredCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: ResponseCodeRequiredCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SimpleScalarPropertiesCommand}
+   */
+  simpleScalarProperties(): Promise<SimpleScalarPropertiesCommandOutput>;
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<SimpleScalarPropertiesCommandOutput>;
-  public simpleScalarProperties(
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
     cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
   ): void;
-  public simpleScalarProperties(
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
   ): void;
-  public simpleScalarProperties(
-    args: SimpleScalarPropertiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SimpleScalarPropertiesCommandOutput) => void),
-    cb?: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
-  ): Promise<SimpleScalarPropertiesCommandOutput> | void {
-    const command = new SimpleScalarPropertiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples serializes a streaming blob shape in the request body.
-   *
-   * In this example, no JSON document is synthesized because the payload is
-   * not a structure or a union type.
+   * @see {@link SparseJsonListsCommand}
    */
-  public streamingTraits(
+  sparseJsonLists(): Promise<SparseJsonListsCommandOutput>;
+  sparseJsonLists(
+    args: SparseJsonListsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<SparseJsonListsCommandOutput>;
+  sparseJsonLists(
+    args: SparseJsonListsCommandInput,
+    cb: (err: any, data?: SparseJsonListsCommandOutput) => void
+  ): void;
+  sparseJsonLists(
+    args: SparseJsonListsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: SparseJsonListsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SparseJsonMapsCommand}
+   */
+  sparseJsonMaps(): Promise<SparseJsonMapsCommandOutput>;
+  sparseJsonMaps(
+    args: SparseJsonMapsCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<SparseJsonMapsCommandOutput>;
+  sparseJsonMaps(
+    args: SparseJsonMapsCommandInput,
+    cb: (err: any, data?: SparseJsonMapsCommandOutput) => void
+  ): void;
+  sparseJsonMaps(
+    args: SparseJsonMapsCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: SparseJsonMapsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StreamingTraitsCommand}
+   */
+  streamingTraits(): Promise<StreamingTraitsCommandOutput>;
+  streamingTraits(
     args: StreamingTraitsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<StreamingTraitsCommandOutput>;
-  public streamingTraits(
+  streamingTraits(
     args: StreamingTraitsCommandInput,
     cb: (err: any, data?: StreamingTraitsCommandOutput) => void
   ): void;
-  public streamingTraits(
+  streamingTraits(
     args: StreamingTraitsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: StreamingTraitsCommandOutput) => void
   ): void;
-  public streamingTraits(
-    args: StreamingTraitsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StreamingTraitsCommandOutput) => void),
-    cb?: (err: any, data?: StreamingTraitsCommandOutput) => void
-  ): Promise<StreamingTraitsCommandOutput> | void {
-    const command = new StreamingTraitsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples serializes a streaming blob shape with a required content
-   * length in the request body.
-   *
-   * In this example, no JSON document is synthesized because the payload is
-   * not a structure or a union type.
+   * @see {@link StreamingTraitsRequireLengthCommand}
    */
-  public streamingTraitsRequireLength(
+  streamingTraitsRequireLength(): Promise<StreamingTraitsRequireLengthCommandOutput>;
+  streamingTraitsRequireLength(
     args: StreamingTraitsRequireLengthCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<StreamingTraitsRequireLengthCommandOutput>;
-  public streamingTraitsRequireLength(
+  streamingTraitsRequireLength(
     args: StreamingTraitsRequireLengthCommandInput,
     cb: (err: any, data?: StreamingTraitsRequireLengthCommandOutput) => void
   ): void;
-  public streamingTraitsRequireLength(
+  streamingTraitsRequireLength(
     args: StreamingTraitsRequireLengthCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: StreamingTraitsRequireLengthCommandOutput) => void
   ): void;
-  public streamingTraitsRequireLength(
-    args: StreamingTraitsRequireLengthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StreamingTraitsRequireLengthCommandOutput) => void),
-    cb?: (err: any, data?: StreamingTraitsRequireLengthCommandOutput) => void
-  ): Promise<StreamingTraitsRequireLengthCommandOutput> | void {
-    const command = new StreamingTraitsRequireLengthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This examples serializes a streaming media-typed blob shape in the request body.
-   *
-   * This examples uses a `@mediaType` trait on the payload to force a custom
-   * content-type to be serialized.
+   * @see {@link StreamingTraitsWithMediaTypeCommand}
    */
-  public streamingTraitsWithMediaType(
+  streamingTraitsWithMediaType(): Promise<StreamingTraitsWithMediaTypeCommandOutput>;
+  streamingTraitsWithMediaType(
     args: StreamingTraitsWithMediaTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<StreamingTraitsWithMediaTypeCommandOutput>;
-  public streamingTraitsWithMediaType(
+  streamingTraitsWithMediaType(
     args: StreamingTraitsWithMediaTypeCommandInput,
     cb: (err: any, data?: StreamingTraitsWithMediaTypeCommandOutput) => void
   ): void;
-  public streamingTraitsWithMediaType(
+  streamingTraitsWithMediaType(
     args: StreamingTraitsWithMediaTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: StreamingTraitsWithMediaTypeCommandOutput) => void
   ): void;
-  public streamingTraitsWithMediaType(
-    args: StreamingTraitsWithMediaTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StreamingTraitsWithMediaTypeCommandOutput) => void),
-    cb?: (err: any, data?: StreamingTraitsWithMediaTypeCommandOutput) => void
-  ): Promise<StreamingTraitsWithMediaTypeCommandOutput> | void {
-    const command = new StreamingTraitsWithMediaTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example tests how timestamp request and response headers are serialized.
+   * @see {@link TestBodyStructureCommand}
    */
-  public timestampFormatHeaders(
+  testBodyStructure(): Promise<TestBodyStructureCommandOutput>;
+  testBodyStructure(
+    args: TestBodyStructureCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestBodyStructureCommandOutput>;
+  testBodyStructure(
+    args: TestBodyStructureCommandInput,
+    cb: (err: any, data?: TestBodyStructureCommandOutput) => void
+  ): void;
+  testBodyStructure(
+    args: TestBodyStructureCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestBodyStructureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestGetNoInputNoPayloadCommand}
+   */
+  testGetNoInputNoPayload(): Promise<TestGetNoInputNoPayloadCommandOutput>;
+  testGetNoInputNoPayload(
+    args: TestGetNoInputNoPayloadCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestGetNoInputNoPayloadCommandOutput>;
+  testGetNoInputNoPayload(
+    args: TestGetNoInputNoPayloadCommandInput,
+    cb: (err: any, data?: TestGetNoInputNoPayloadCommandOutput) => void
+  ): void;
+  testGetNoInputNoPayload(
+    args: TestGetNoInputNoPayloadCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestGetNoInputNoPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestGetNoPayloadCommand}
+   */
+  testGetNoPayload(): Promise<TestGetNoPayloadCommandOutput>;
+  testGetNoPayload(
+    args: TestGetNoPayloadCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestGetNoPayloadCommandOutput>;
+  testGetNoPayload(
+    args: TestGetNoPayloadCommandInput,
+    cb: (err: any, data?: TestGetNoPayloadCommandOutput) => void
+  ): void;
+  testGetNoPayload(
+    args: TestGetNoPayloadCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestGetNoPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestPayloadBlobCommand}
+   */
+  testPayloadBlob(): Promise<TestPayloadBlobCommandOutput>;
+  testPayloadBlob(
+    args: TestPayloadBlobCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestPayloadBlobCommandOutput>;
+  testPayloadBlob(
+    args: TestPayloadBlobCommandInput,
+    cb: (err: any, data?: TestPayloadBlobCommandOutput) => void
+  ): void;
+  testPayloadBlob(
+    args: TestPayloadBlobCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestPayloadBlobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestPayloadStructureCommand}
+   */
+  testPayloadStructure(): Promise<TestPayloadStructureCommandOutput>;
+  testPayloadStructure(
+    args: TestPayloadStructureCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestPayloadStructureCommandOutput>;
+  testPayloadStructure(
+    args: TestPayloadStructureCommandInput,
+    cb: (err: any, data?: TestPayloadStructureCommandOutput) => void
+  ): void;
+  testPayloadStructure(
+    args: TestPayloadStructureCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestPayloadStructureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestPostNoInputNoPayloadCommand}
+   */
+  testPostNoInputNoPayload(): Promise<TestPostNoInputNoPayloadCommandOutput>;
+  testPostNoInputNoPayload(
+    args: TestPostNoInputNoPayloadCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestPostNoInputNoPayloadCommandOutput>;
+  testPostNoInputNoPayload(
+    args: TestPostNoInputNoPayloadCommandInput,
+    cb: (err: any, data?: TestPostNoInputNoPayloadCommandOutput) => void
+  ): void;
+  testPostNoInputNoPayload(
+    args: TestPostNoInputNoPayloadCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestPostNoInputNoPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestPostNoPayloadCommand}
+   */
+  testPostNoPayload(): Promise<TestPostNoPayloadCommandOutput>;
+  testPostNoPayload(
+    args: TestPostNoPayloadCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<TestPostNoPayloadCommandOutput>;
+  testPostNoPayload(
+    args: TestPostNoPayloadCommandInput,
+    cb: (err: any, data?: TestPostNoPayloadCommandOutput) => void
+  ): void;
+  testPostNoPayload(
+    args: TestPostNoPayloadCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: TestPostNoPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TimestampFormatHeadersCommand}
+   */
+  timestampFormatHeaders(): Promise<TimestampFormatHeadersCommandOutput>;
+  timestampFormatHeaders(
     args: TimestampFormatHeadersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RestJsonProtocolRequestOptions
   ): Promise<TimestampFormatHeadersCommandOutput>;
-  public timestampFormatHeaders(
+  timestampFormatHeaders(
     args: TimestampFormatHeadersCommandInput,
     cb: (err: any, data?: TimestampFormatHeadersCommandOutput) => void
   ): void;
-  public timestampFormatHeaders(
+  timestampFormatHeaders(
     args: TimestampFormatHeadersCommandInput,
-    options: __HttpHandlerOptions,
+    options: RestJsonProtocolRequestOptions,
     cb: (err: any, data?: TimestampFormatHeadersCommandOutput) => void
   ): void;
-  public timestampFormatHeaders(
-    args: TimestampFormatHeadersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TimestampFormatHeadersCommandOutput) => void),
-    cb?: (err: any, data?: TimestampFormatHeadersCommandOutput) => void
-  ): Promise<TimestampFormatHeadersCommandOutput> | void {
-    const command = new TimestampFormatHeadersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UnitInputAndOutputCommand}
+   */
+  unitInputAndOutput(): Promise<UnitInputAndOutputCommandOutput>;
+  unitInputAndOutput(
+    args: UnitInputAndOutputCommandInput,
+    options?: RestJsonProtocolRequestOptions
+  ): Promise<UnitInputAndOutputCommandOutput>;
+  unitInputAndOutput(
+    args: UnitInputAndOutputCommandInput,
+    cb: (err: any, data?: UnitInputAndOutputCommandOutput) => void
+  ): void;
+  unitInputAndOutput(
+    args: UnitInputAndOutputCommandInput,
+    options: RestJsonProtocolRequestOptions,
+    cb: (err: any, data?: UnitInputAndOutputCommandOutput) => void
+  ): void;
 }
+
+/**
+ * @public
+ */
+export class RestJsonProtocol extends RestJsonProtocolClient implements RestJsonProtocol {}
+createAggregatedClient(commands, RestJsonProtocol);

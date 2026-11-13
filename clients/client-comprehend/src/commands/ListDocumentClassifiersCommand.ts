@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { ListDocumentClassifiersRequest, ListDocumentClassifiersResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListDocumentClassifiersCommand,
-  serializeAws_json1_1ListDocumentClassifiersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDocumentClassifiersRequest, ListDocumentClassifiersResponse } from "../models/models_0";
+import { ListDocumentClassifiers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDocumentClassifiersCommand}.
+ */
 export interface ListDocumentClassifiersCommandInput extends ListDocumentClassifiersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDocumentClassifiersCommand}.
+ */
 export interface ListDocumentClassifiersCommandOutput extends ListDocumentClassifiersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,144 @@ export interface ListDocumentClassifiersCommandOutput extends ListDocumentClassi
  * ```javascript
  * import { ComprehendClient, ListDocumentClassifiersCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, ListDocumentClassifiersCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // ListDocumentClassifiersRequest
+ *   Filter: { // DocumentClassifierFilter
+ *     Status: "SUBMITTED" || "TRAINING" || "DELETING" || "STOP_REQUESTED" || "STOPPED" || "IN_ERROR" || "TRAINED" || "TRAINED_WITH_WARNING",
+ *     DocumentClassifierName: "STRING_VALUE",
+ *     SubmitTimeBefore: new Date("TIMESTAMP"),
+ *     SubmitTimeAfter: new Date("TIMESTAMP"),
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListDocumentClassifiersCommand(input);
  * const response = await client.send(command);
+ * // { // ListDocumentClassifiersResponse
+ * //   DocumentClassifierPropertiesList: [ // DocumentClassifierPropertiesList
+ * //     { // DocumentClassifierProperties
+ * //       DocumentClassifierArn: "STRING_VALUE",
+ * //       LanguageCode: "en" || "es" || "fr" || "de" || "it" || "pt" || "ar" || "hi" || "ja" || "ko" || "zh" || "zh-TW",
+ * //       Status: "SUBMITTED" || "TRAINING" || "DELETING" || "STOP_REQUESTED" || "STOPPED" || "IN_ERROR" || "TRAINED" || "TRAINED_WITH_WARNING",
+ * //       Message: "STRING_VALUE",
+ * //       SubmitTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       TrainingStartTime: new Date("TIMESTAMP"),
+ * //       TrainingEndTime: new Date("TIMESTAMP"),
+ * //       InputDataConfig: { // DocumentClassifierInputDataConfig
+ * //         DataFormat: "COMPREHEND_CSV" || "AUGMENTED_MANIFEST",
+ * //         S3Uri: "STRING_VALUE",
+ * //         TestS3Uri: "STRING_VALUE",
+ * //         LabelDelimiter: "STRING_VALUE",
+ * //         AugmentedManifests: [ // DocumentClassifierAugmentedManifestsList
+ * //           { // AugmentedManifestsListItem
+ * //             S3Uri: "STRING_VALUE", // required
+ * //             Split: "TRAIN" || "TEST",
+ * //             AttributeNames: [ // AttributeNamesList // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             AnnotationDataS3Uri: "STRING_VALUE",
+ * //             SourceDocumentsS3Uri: "STRING_VALUE",
+ * //             DocumentType: "PLAIN_TEXT_DOCUMENT" || "SEMI_STRUCTURED_DOCUMENT",
+ * //           },
+ * //         ],
+ * //         DocumentType: "PLAIN_TEXT_DOCUMENT" || "SEMI_STRUCTURED_DOCUMENT",
+ * //         Documents: { // DocumentClassifierDocuments
+ * //           S3Uri: "STRING_VALUE", // required
+ * //           TestS3Uri: "STRING_VALUE",
+ * //         },
+ * //         DocumentReaderConfig: { // DocumentReaderConfig
+ * //           DocumentReadAction: "TEXTRACT_DETECT_DOCUMENT_TEXT" || "TEXTRACT_ANALYZE_DOCUMENT", // required
+ * //           DocumentReadMode: "SERVICE_DEFAULT" || "FORCE_DOCUMENT_READ_ACTION",
+ * //           FeatureTypes: [ // ListOfDocumentReadFeatureTypes
+ * //             "TABLES" || "FORMS",
+ * //           ],
+ * //         },
+ * //       },
+ * //       OutputDataConfig: { // DocumentClassifierOutputDataConfig
+ * //         S3Uri: "STRING_VALUE",
+ * //         KmsKeyId: "STRING_VALUE",
+ * //         FlywheelStatsS3Prefix: "STRING_VALUE",
+ * //       },
+ * //       ClassifierMetadata: { // ClassifierMetadata
+ * //         NumberOfLabels: Number("int"),
+ * //         NumberOfTrainedDocuments: Number("int"),
+ * //         NumberOfTestDocuments: Number("int"),
+ * //         EvaluationMetrics: { // ClassifierEvaluationMetrics
+ * //           Accuracy: Number("double"),
+ * //           Precision: Number("double"),
+ * //           Recall: Number("double"),
+ * //           F1Score: Number("double"),
+ * //           MicroPrecision: Number("double"),
+ * //           MicroRecall: Number("double"),
+ * //           MicroF1Score: Number("double"),
+ * //           HammingLoss: Number("double"),
+ * //         },
+ * //       },
+ * //       DataAccessRoleArn: "STRING_VALUE",
+ * //       VolumeKmsKeyId: "STRING_VALUE",
+ * //       VpcConfig: { // VpcConfig
+ * //         SecurityGroupIds: [ // SecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Subnets: [ // Subnets // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Mode: "MULTI_CLASS" || "MULTI_LABEL",
+ * //       ModelKmsKeyId: "STRING_VALUE",
+ * //       VersionName: "STRING_VALUE",
+ * //       SourceModelArn: "STRING_VALUE",
+ * //       FlywheelArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDocumentClassifiersCommandInput - {@link ListDocumentClassifiersCommandInput}
+ * @returns {@link ListDocumentClassifiersCommandOutput}
  * @see {@link ListDocumentClassifiersCommandInput} for command's `input` shape.
  * @see {@link ListDocumentClassifiersCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidFilterException} (client fault)
+ *  <p>The filter specified for the operation is invalid. Specify a different
+ *       filter.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class ListDocumentClassifiersCommand extends $Command<
-  ListDocumentClassifiersCommandInput,
-  ListDocumentClassifiersCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDocumentClassifiersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDocumentClassifiersCommandInput, ListDocumentClassifiersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "ListDocumentClassifiersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDocumentClassifiersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDocumentClassifiersResponse.filterSensitiveLog,
+export class ListDocumentClassifiersCommand extends command<ListDocumentClassifiersCommandInput, ListDocumentClassifiersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDocumentClassifiers",
+  ListDocumentClassifiers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDocumentClassifiersRequest;
+      output: ListDocumentClassifiersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDocumentClassifiersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDocumentClassifiersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDocumentClassifiersCommandOutput> {
-    return deserializeAws_json1_1ListDocumentClassifiersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDocumentClassifiersCommandInput;
+      output: ListDocumentClassifiersCommandOutput;
+    };
+  };
 }

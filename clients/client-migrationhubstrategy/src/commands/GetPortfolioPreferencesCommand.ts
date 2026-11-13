@@ -1,0 +1,133 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPortfolioPreferencesRequest, GetPortfolioPreferencesResponse } from "../models/models_0";
+import { GetPortfolioPreferences$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPortfolioPreferencesCommand}.
+ */
+export interface GetPortfolioPreferencesCommandInput extends GetPortfolioPreferencesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPortfolioPreferencesCommand}.
+ */
+export interface GetPortfolioPreferencesCommandOutput extends GetPortfolioPreferencesResponse, __MetadataBearer {}
+
+/**
+ * <p> Retrieves your migration and modernization preferences. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MigrationHubStrategyClient, GetPortfolioPreferencesCommand } from "@aws-sdk/client-migrationhubstrategy"; // ES Modules import
+ * // const { MigrationHubStrategyClient, GetPortfolioPreferencesCommand } = require("@aws-sdk/client-migrationhubstrategy"); // CommonJS import
+ * // import type { MigrationHubStrategyClientConfig } from "@aws-sdk/client-migrationhubstrategy";
+ * const config = {}; // type is MigrationHubStrategyClientConfig
+ * const client = new MigrationHubStrategyClient(config);
+ * const input = {};
+ * const command = new GetPortfolioPreferencesCommand(input);
+ * const response = await client.send(command);
+ * // { // GetPortfolioPreferencesResponse
+ * //   prioritizeBusinessGoals: { // PrioritizeBusinessGoals
+ * //     businessGoals: { // BusinessGoals
+ * //       speedOfMigration: Number("int"),
+ * //       reduceOperationalOverheadWithManagedServices: Number("int"),
+ * //       modernizeInfrastructureWithCloudNativeTechnologies: Number("int"),
+ * //       licenseCostReduction: Number("int"),
+ * //     },
+ * //   },
+ * //   applicationPreferences: { // ApplicationPreferences
+ * //     managementPreference: { // ManagementPreference Union: only one key present
+ * //       awsManagedResources: { // AwsManagedResources
+ * //         targetDestination: [ // AwsManagedTargetDestinations // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       selfManageResources: { // SelfManageResources
+ * //         targetDestination: [ // SelfManageTargetDestinations // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       noPreference: { // NoManagementPreference
+ * //         targetDestination: [ // NoPreferenceTargetDestinations // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //   },
+ * //   databasePreferences: { // DatabasePreferences
+ * //     databaseManagementPreference: "STRING_VALUE",
+ * //     databaseMigrationPreference: { // DatabaseMigrationPreference Union: only one key present
+ * //       heterogeneous: { // Heterogeneous
+ * //         targetDatabaseEngine: [ // HeterogeneousTargetDatabaseEngines // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       homogeneous: { // Homogeneous
+ * //         targetDatabaseEngine: [ // HomogeneousTargetDatabaseEngines
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       noPreference: { // NoDatabaseMigrationPreference
+ * //         targetDatabaseEngine: [ // TargetDatabaseEngines // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //   },
+ * //   applicationMode: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetPortfolioPreferencesCommandInput - {@link GetPortfolioPreferencesCommandInput}
+ * @returns {@link GetPortfolioPreferencesCommandOutput}
+ * @see {@link GetPortfolioPreferencesCommandInput} for command's `input` shape.
+ * @see {@link GetPortfolioPreferencesCommandOutput} for command's `response` shape.
+ * @see {@link MigrationHubStrategyClientResolvedConfig | config} for MigrationHubStrategyClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> The user does not have permission to perform the action. Check the
+ *       AWS Identity and Access Management (IAM) policy associated with this user.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> The server experienced an internal error. Try again. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The specified ID in the request is not found. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p> The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MigrationHubStrategyServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubStrategy service.</p>
+ *
+ *
+ * @public
+ */
+export class GetPortfolioPreferencesCommand extends command<GetPortfolioPreferencesCommandInput, GetPortfolioPreferencesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPortfolioPreferences",
+  GetPortfolioPreferences$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetPortfolioPreferencesResponse;
+    };
+    sdk: {
+      input: GetPortfolioPreferencesCommandInput;
+      output: GetPortfolioPreferencesCommandOutput;
+    };
+  };
+}

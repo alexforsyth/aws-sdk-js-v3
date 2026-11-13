@@ -1,247 +1,299 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AttachInstancesCommandInput, AttachInstancesCommandOutput } from "./commands/AttachInstancesCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultAutoScalingHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AttachInstancesCommandInput, AttachInstancesCommandOutput } from "./commands/AttachInstancesCommand";
+import type {
   AttachLoadBalancersCommandInput,
   AttachLoadBalancersCommandOutput,
 } from "./commands/AttachLoadBalancersCommand";
-import {
+import type {
   AttachLoadBalancerTargetGroupsCommandInput,
   AttachLoadBalancerTargetGroupsCommandOutput,
 } from "./commands/AttachLoadBalancerTargetGroupsCommand";
-import {
+import type {
+  AttachTrafficSourcesCommandInput,
+  AttachTrafficSourcesCommandOutput,
+} from "./commands/AttachTrafficSourcesCommand";
+import type {
   BatchDeleteScheduledActionCommandInput,
   BatchDeleteScheduledActionCommandOutput,
 } from "./commands/BatchDeleteScheduledActionCommand";
-import {
+import type {
   BatchPutScheduledUpdateGroupActionCommandInput,
   BatchPutScheduledUpdateGroupActionCommandOutput,
 } from "./commands/BatchPutScheduledUpdateGroupActionCommand";
-import {
+import type {
   CancelInstanceRefreshCommandInput,
   CancelInstanceRefreshCommandOutput,
 } from "./commands/CancelInstanceRefreshCommand";
-import {
+import type {
   CompleteLifecycleActionCommandInput,
   CompleteLifecycleActionCommandOutput,
 } from "./commands/CompleteLifecycleActionCommand";
-import {
+import type {
   CreateAutoScalingGroupCommandInput,
   CreateAutoScalingGroupCommandOutput,
 } from "./commands/CreateAutoScalingGroupCommand";
-import {
+import type {
   CreateLaunchConfigurationCommandInput,
   CreateLaunchConfigurationCommandOutput,
 } from "./commands/CreateLaunchConfigurationCommand";
-import { CreateOrUpdateTagsCommandInput, CreateOrUpdateTagsCommandOutput } from "./commands/CreateOrUpdateTagsCommand";
-import {
+import type {
+  CreateOrUpdateTagsCommandInput,
+  CreateOrUpdateTagsCommandOutput,
+} from "./commands/CreateOrUpdateTagsCommand";
+import type {
   DeleteAutoScalingGroupCommandInput,
   DeleteAutoScalingGroupCommandOutput,
 } from "./commands/DeleteAutoScalingGroupCommand";
-import {
+import type {
   DeleteLaunchConfigurationCommandInput,
   DeleteLaunchConfigurationCommandOutput,
 } from "./commands/DeleteLaunchConfigurationCommand";
-import {
+import type {
   DeleteLifecycleHookCommandInput,
   DeleteLifecycleHookCommandOutput,
 } from "./commands/DeleteLifecycleHookCommand";
-import {
+import type {
   DeleteNotificationConfigurationCommandInput,
   DeleteNotificationConfigurationCommandOutput,
 } from "./commands/DeleteNotificationConfigurationCommand";
-import { DeletePolicyCommandInput, DeletePolicyCommandOutput } from "./commands/DeletePolicyCommand";
-import {
+import type { DeletePolicyCommandInput, DeletePolicyCommandOutput } from "./commands/DeletePolicyCommand";
+import type {
   DeleteScheduledActionCommandInput,
   DeleteScheduledActionCommandOutput,
 } from "./commands/DeleteScheduledActionCommand";
-import { DeleteTagsCommandInput, DeleteTagsCommandOutput } from "./commands/DeleteTagsCommand";
-import { DeleteWarmPoolCommandInput, DeleteWarmPoolCommandOutput } from "./commands/DeleteWarmPoolCommand";
-import {
+import type { DeleteTagsCommandInput, DeleteTagsCommandOutput } from "./commands/DeleteTagsCommand";
+import type { DeleteWarmPoolCommandInput, DeleteWarmPoolCommandOutput } from "./commands/DeleteWarmPoolCommand";
+import type {
   DescribeAccountLimitsCommandInput,
   DescribeAccountLimitsCommandOutput,
 } from "./commands/DescribeAccountLimitsCommand";
-import {
+import type {
+  DescribeAccountSettingsCommandInput,
+  DescribeAccountSettingsCommandOutput,
+} from "./commands/DescribeAccountSettingsCommand";
+import type {
   DescribeAdjustmentTypesCommandInput,
   DescribeAdjustmentTypesCommandOutput,
 } from "./commands/DescribeAdjustmentTypesCommand";
-import {
+import type {
   DescribeAutoScalingGroupsCommandInput,
   DescribeAutoScalingGroupsCommandOutput,
 } from "./commands/DescribeAutoScalingGroupsCommand";
-import {
+import type {
   DescribeAutoScalingInstancesCommandInput,
   DescribeAutoScalingInstancesCommandOutput,
 } from "./commands/DescribeAutoScalingInstancesCommand";
-import {
+import type {
   DescribeAutoScalingNotificationTypesCommandInput,
   DescribeAutoScalingNotificationTypesCommandOutput,
 } from "./commands/DescribeAutoScalingNotificationTypesCommand";
-import {
+import type {
   DescribeInstanceRefreshesCommandInput,
   DescribeInstanceRefreshesCommandOutput,
 } from "./commands/DescribeInstanceRefreshesCommand";
-import {
+import type {
   DescribeLaunchConfigurationsCommandInput,
   DescribeLaunchConfigurationsCommandOutput,
 } from "./commands/DescribeLaunchConfigurationsCommand";
-import {
+import type {
   DescribeLifecycleHooksCommandInput,
   DescribeLifecycleHooksCommandOutput,
 } from "./commands/DescribeLifecycleHooksCommand";
-import {
+import type {
   DescribeLifecycleHookTypesCommandInput,
   DescribeLifecycleHookTypesCommandOutput,
 } from "./commands/DescribeLifecycleHookTypesCommand";
-import {
+import type {
   DescribeLoadBalancersCommandInput,
   DescribeLoadBalancersCommandOutput,
 } from "./commands/DescribeLoadBalancersCommand";
-import {
+import type {
   DescribeLoadBalancerTargetGroupsCommandInput,
   DescribeLoadBalancerTargetGroupsCommandOutput,
 } from "./commands/DescribeLoadBalancerTargetGroupsCommand";
-import {
+import type {
   DescribeMetricCollectionTypesCommandInput,
   DescribeMetricCollectionTypesCommandOutput,
 } from "./commands/DescribeMetricCollectionTypesCommand";
-import {
+import type {
   DescribeNotificationConfigurationsCommandInput,
   DescribeNotificationConfigurationsCommandOutput,
 } from "./commands/DescribeNotificationConfigurationsCommand";
-import { DescribePoliciesCommandInput, DescribePoliciesCommandOutput } from "./commands/DescribePoliciesCommand";
-import {
+import type { DescribePoliciesCommandInput, DescribePoliciesCommandOutput } from "./commands/DescribePoliciesCommand";
+import type {
   DescribeScalingActivitiesCommandInput,
   DescribeScalingActivitiesCommandOutput,
 } from "./commands/DescribeScalingActivitiesCommand";
-import {
+import type {
   DescribeScalingProcessTypesCommandInput,
   DescribeScalingProcessTypesCommandOutput,
 } from "./commands/DescribeScalingProcessTypesCommand";
-import {
+import type {
   DescribeScheduledActionsCommandInput,
   DescribeScheduledActionsCommandOutput,
 } from "./commands/DescribeScheduledActionsCommand";
-import { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
-import {
+import type { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
+import type {
   DescribeTerminationPolicyTypesCommandInput,
   DescribeTerminationPolicyTypesCommandOutput,
 } from "./commands/DescribeTerminationPolicyTypesCommand";
-import { DescribeWarmPoolCommandInput, DescribeWarmPoolCommandOutput } from "./commands/DescribeWarmPoolCommand";
-import { DetachInstancesCommandInput, DetachInstancesCommandOutput } from "./commands/DetachInstancesCommand";
-import {
+import type {
+  DescribeTrafficSourcesCommandInput,
+  DescribeTrafficSourcesCommandOutput,
+} from "./commands/DescribeTrafficSourcesCommand";
+import type { DescribeWarmPoolCommandInput, DescribeWarmPoolCommandOutput } from "./commands/DescribeWarmPoolCommand";
+import type { DetachInstancesCommandInput, DetachInstancesCommandOutput } from "./commands/DetachInstancesCommand";
+import type {
   DetachLoadBalancersCommandInput,
   DetachLoadBalancersCommandOutput,
 } from "./commands/DetachLoadBalancersCommand";
-import {
+import type {
   DetachLoadBalancerTargetGroupsCommandInput,
   DetachLoadBalancerTargetGroupsCommandOutput,
 } from "./commands/DetachLoadBalancerTargetGroupsCommand";
-import {
+import type {
+  DetachTrafficSourcesCommandInput,
+  DetachTrafficSourcesCommandOutput,
+} from "./commands/DetachTrafficSourcesCommand";
+import type {
   DisableMetricsCollectionCommandInput,
   DisableMetricsCollectionCommandOutput,
 } from "./commands/DisableMetricsCollectionCommand";
-import {
+import type {
   EnableMetricsCollectionCommandInput,
   EnableMetricsCollectionCommandOutput,
 } from "./commands/EnableMetricsCollectionCommand";
-import { EnterStandbyCommandInput, EnterStandbyCommandOutput } from "./commands/EnterStandbyCommand";
-import { ExecutePolicyCommandInput, ExecutePolicyCommandOutput } from "./commands/ExecutePolicyCommand";
-import { ExitStandbyCommandInput, ExitStandbyCommandOutput } from "./commands/ExitStandbyCommand";
-import {
+import type { EnterStandbyCommandInput, EnterStandbyCommandOutput } from "./commands/EnterStandbyCommand";
+import type { ExecutePolicyCommandInput, ExecutePolicyCommandOutput } from "./commands/ExecutePolicyCommand";
+import type { ExitStandbyCommandInput, ExitStandbyCommandOutput } from "./commands/ExitStandbyCommand";
+import type {
   GetPredictiveScalingForecastCommandInput,
   GetPredictiveScalingForecastCommandOutput,
 } from "./commands/GetPredictiveScalingForecastCommand";
-import { PutLifecycleHookCommandInput, PutLifecycleHookCommandOutput } from "./commands/PutLifecycleHookCommand";
-import {
+import type { LaunchInstancesCommandInput, LaunchInstancesCommandOutput } from "./commands/LaunchInstancesCommand";
+import type {
+  PutAccountSettingCommandInput,
+  PutAccountSettingCommandOutput,
+} from "./commands/PutAccountSettingCommand";
+import type { PutLifecycleHookCommandInput, PutLifecycleHookCommandOutput } from "./commands/PutLifecycleHookCommand";
+import type {
   PutNotificationConfigurationCommandInput,
   PutNotificationConfigurationCommandOutput,
 } from "./commands/PutNotificationConfigurationCommand";
-import { PutScalingPolicyCommandInput, PutScalingPolicyCommandOutput } from "./commands/PutScalingPolicyCommand";
-import {
+import type { PutScalingPolicyCommandInput, PutScalingPolicyCommandOutput } from "./commands/PutScalingPolicyCommand";
+import type {
   PutScheduledUpdateGroupActionCommandInput,
   PutScheduledUpdateGroupActionCommandOutput,
 } from "./commands/PutScheduledUpdateGroupActionCommand";
-import { PutWarmPoolCommandInput, PutWarmPoolCommandOutput } from "./commands/PutWarmPoolCommand";
-import {
+import type { PutWarmPoolCommandInput, PutWarmPoolCommandOutput } from "./commands/PutWarmPoolCommand";
+import type {
   RecordLifecycleActionHeartbeatCommandInput,
   RecordLifecycleActionHeartbeatCommandOutput,
 } from "./commands/RecordLifecycleActionHeartbeatCommand";
-import { ResumeProcessesCommandInput, ResumeProcessesCommandOutput } from "./commands/ResumeProcessesCommand";
-import { SetDesiredCapacityCommandInput, SetDesiredCapacityCommandOutput } from "./commands/SetDesiredCapacityCommand";
-import { SetInstanceHealthCommandInput, SetInstanceHealthCommandOutput } from "./commands/SetInstanceHealthCommand";
-import {
+import type { ResumeProcessesCommandInput, ResumeProcessesCommandOutput } from "./commands/ResumeProcessesCommand";
+import type {
+  RollbackInstanceRefreshCommandInput,
+  RollbackInstanceRefreshCommandOutput,
+} from "./commands/RollbackInstanceRefreshCommand";
+import type {
+  SetDesiredCapacityCommandInput,
+  SetDesiredCapacityCommandOutput,
+} from "./commands/SetDesiredCapacityCommand";
+import type {
+  SetInstanceHealthCommandInput,
+  SetInstanceHealthCommandOutput,
+} from "./commands/SetInstanceHealthCommand";
+import type {
   SetInstanceProtectionCommandInput,
   SetInstanceProtectionCommandOutput,
 } from "./commands/SetInstanceProtectionCommand";
-import {
+import type {
   StartInstanceRefreshCommandInput,
   StartInstanceRefreshCommandOutput,
 } from "./commands/StartInstanceRefreshCommand";
-import { SuspendProcessesCommandInput, SuspendProcessesCommandOutput } from "./commands/SuspendProcessesCommand";
-import {
+import type { SuspendProcessesCommandInput, SuspendProcessesCommandOutput } from "./commands/SuspendProcessesCommand";
+import type {
   TerminateInstanceInAutoScalingGroupCommandInput,
   TerminateInstanceInAutoScalingGroupCommandOutput,
 } from "./commands/TerminateInstanceInAutoScalingGroupCommand";
-import {
+import type {
   UpdateAutoScalingGroupCommandInput,
   UpdateAutoScalingGroupCommandOutput,
 } from "./commands/UpdateAutoScalingGroupCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AttachInstancesCommandInput
   | AttachLoadBalancerTargetGroupsCommandInput
   | AttachLoadBalancersCommandInput
+  | AttachTrafficSourcesCommandInput
   | BatchDeleteScheduledActionCommandInput
   | BatchPutScheduledUpdateGroupActionCommandInput
   | CancelInstanceRefreshCommandInput
@@ -258,6 +310,7 @@ export type ServiceInputTypes =
   | DeleteTagsCommandInput
   | DeleteWarmPoolCommandInput
   | DescribeAccountLimitsCommandInput
+  | DescribeAccountSettingsCommandInput
   | DescribeAdjustmentTypesCommandInput
   | DescribeAutoScalingGroupsCommandInput
   | DescribeAutoScalingInstancesCommandInput
@@ -276,16 +329,20 @@ export type ServiceInputTypes =
   | DescribeScheduledActionsCommandInput
   | DescribeTagsCommandInput
   | DescribeTerminationPolicyTypesCommandInput
+  | DescribeTrafficSourcesCommandInput
   | DescribeWarmPoolCommandInput
   | DetachInstancesCommandInput
   | DetachLoadBalancerTargetGroupsCommandInput
   | DetachLoadBalancersCommandInput
+  | DetachTrafficSourcesCommandInput
   | DisableMetricsCollectionCommandInput
   | EnableMetricsCollectionCommandInput
   | EnterStandbyCommandInput
   | ExecutePolicyCommandInput
   | ExitStandbyCommandInput
   | GetPredictiveScalingForecastCommandInput
+  | LaunchInstancesCommandInput
+  | PutAccountSettingCommandInput
   | PutLifecycleHookCommandInput
   | PutNotificationConfigurationCommandInput
   | PutScalingPolicyCommandInput
@@ -293,6 +350,7 @@ export type ServiceInputTypes =
   | PutWarmPoolCommandInput
   | RecordLifecycleActionHeartbeatCommandInput
   | ResumeProcessesCommandInput
+  | RollbackInstanceRefreshCommandInput
   | SetDesiredCapacityCommandInput
   | SetInstanceHealthCommandInput
   | SetInstanceProtectionCommandInput
@@ -301,10 +359,14 @@ export type ServiceInputTypes =
   | TerminateInstanceInAutoScalingGroupCommandInput
   | UpdateAutoScalingGroupCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AttachInstancesCommandOutput
   | AttachLoadBalancerTargetGroupsCommandOutput
   | AttachLoadBalancersCommandOutput
+  | AttachTrafficSourcesCommandOutput
   | BatchDeleteScheduledActionCommandOutput
   | BatchPutScheduledUpdateGroupActionCommandOutput
   | CancelInstanceRefreshCommandOutput
@@ -321,6 +383,7 @@ export type ServiceOutputTypes =
   | DeleteTagsCommandOutput
   | DeleteWarmPoolCommandOutput
   | DescribeAccountLimitsCommandOutput
+  | DescribeAccountSettingsCommandOutput
   | DescribeAdjustmentTypesCommandOutput
   | DescribeAutoScalingGroupsCommandOutput
   | DescribeAutoScalingInstancesCommandOutput
@@ -339,16 +402,20 @@ export type ServiceOutputTypes =
   | DescribeScheduledActionsCommandOutput
   | DescribeTagsCommandOutput
   | DescribeTerminationPolicyTypesCommandOutput
+  | DescribeTrafficSourcesCommandOutput
   | DescribeWarmPoolCommandOutput
   | DetachInstancesCommandOutput
   | DetachLoadBalancerTargetGroupsCommandOutput
   | DetachLoadBalancersCommandOutput
+  | DetachTrafficSourcesCommandOutput
   | DisableMetricsCollectionCommandOutput
   | EnableMetricsCollectionCommandOutput
   | EnterStandbyCommandOutput
   | ExecutePolicyCommandOutput
   | ExitStandbyCommandOutput
   | GetPredictiveScalingForecastCommandOutput
+  | LaunchInstancesCommandOutput
+  | PutAccountSettingCommandOutput
   | PutLifecycleHookCommandOutput
   | PutNotificationConfigurationCommandOutput
   | PutScalingPolicyCommandOutput
@@ -356,6 +423,7 @@ export type ServiceOutputTypes =
   | PutWarmPoolCommandOutput
   | RecordLifecycleActionHeartbeatCommandOutput
   | ResumeProcessesCommandOutput
+  | RollbackInstanceRefreshCommandOutput
   | SetDesiredCapacityCommandOutput
   | SetInstanceHealthCommandOutput
   | SetInstanceProtectionCommandOutput
@@ -364,18 +432,21 @@ export type ServiceOutputTypes =
   | TerminateInstanceInAutoScalingGroupCommandOutput
   | UpdateAutoScalingGroupCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -387,7 +458,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -426,25 +497,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -457,78 +519,118 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type AutoScalingClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of AutoScalingClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type AutoScalingClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of AutoScalingClient class constructor that set the region, credentials and other options.
  */
 export interface AutoScalingClientConfig extends AutoScalingClientConfigType {}
 
-type AutoScalingClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of AutoScalingClient class. This is resolved and normalized from the {@link AutoScalingClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type AutoScalingClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of AutoScalingClient class. This is resolved and normalized from the {@link AutoScalingClientConfig | constructor configuration interface}.
  */
 export interface AutoScalingClientResolvedConfig extends AutoScalingClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon EC2 Auto Scaling</fullname>
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *         <p>Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances
+ *          <p>The <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html">DescribeAutoScalingGroups</a> API operation might be throttled when retrieving details for an Auto Scaling group that contains many instances. By default, this operation returns details for all instances in the group.
+ *             To help prevent throttling, you can set the <code>IncludeInstances</code> parameter to <code>false</code> to exclude instance details from the response.</p>
+ *          <p>Amazon EC2 Auto Scaling is designed to automatically launch and terminate EC2 instances
  *             based on user-defined scaling policies, scheduled actions, and health checks.</p>
- *         <p>For more information about Amazon EC2 Auto Scaling, see the <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Amazon EC2 Auto Scaling User Guide</a>. For information about granting IAM users required
- *             permissions for calls to Amazon EC2 Auto Scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/ec2-auto-scaling-api-permissions.html">Granting
- *                 IAM users required permissions for Amazon EC2 Auto Scaling resources</a> in the
- *                 <i>Amazon EC2 Auto Scaling API Reference</i>.</p>
+ *          <p>For more information, see the <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Amazon EC2 Auto Scaling User Guide</a> and the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/Welcome.html">Amazon EC2 Auto Scaling API Reference</a>.</p>
+ * @public
  */
 export class AutoScalingClient extends __Client<
   __HttpHandlerOptions,
@@ -541,22 +643,36 @@ export class AutoScalingClient extends __Client<
    */
   readonly config: AutoScalingClientResolvedConfig;
 
-  constructor(configuration: AutoScalingClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<AutoScalingClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultAutoScalingHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: AutoScalingClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

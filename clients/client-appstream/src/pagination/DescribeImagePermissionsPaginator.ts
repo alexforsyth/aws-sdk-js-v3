@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { AppStream } from "../AppStream";
 import { AppStreamClient } from "../AppStreamClient";
 import {
   DescribeImagePermissionsCommand,
   DescribeImagePermissionsCommandInput,
   DescribeImagePermissionsCommandOutput,
 } from "../commands/DescribeImagePermissionsCommand";
-import { AppStreamPaginationConfiguration } from "./Interfaces";
+import type { AppStreamPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: AppStreamClient,
-  input: DescribeImagePermissionsCommandInput,
-  ...args: any
-): Promise<DescribeImagePermissionsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeImagePermissionsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: AppStream,
-  input: DescribeImagePermissionsCommandInput,
-  ...args: any
-): Promise<DescribeImagePermissionsCommandOutput> => {
-  // @ts-ignore
-  return await client.describeImagePermissions(input, ...args);
-};
-export async function* paginateDescribeImagePermissions(
+export const paginateDescribeImagePermissions: (
   config: AppStreamPaginationConfiguration,
   input: DescribeImagePermissionsCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeImagePermissionsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeImagePermissionsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof AppStream) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof AppStreamClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected AppStream | AppStreamClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeImagePermissionsCommandOutput> = createPaginator<
+  AppStreamPaginationConfiguration,
+  DescribeImagePermissionsCommandInput,
+  DescribeImagePermissionsCommandOutput
+>(AppStreamClient, DescribeImagePermissionsCommand, "NextToken", "NextToken", "MaxResults");

@@ -1,25 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UsageLimit } from "../models/models_0";
-import { ModifyUsageLimitMessage } from "../models/models_1";
-import {
-  deserializeAws_queryModifyUsageLimitCommand,
-  serializeAws_queryModifyUsageLimitCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UsageLimit } from "../models/models_0";
+import type { ModifyUsageLimitMessage } from "../models/models_1";
+import { ModifyUsageLimit$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyUsageLimitCommand}.
+ */
 export interface ModifyUsageLimitCommandInput extends ModifyUsageLimitMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyUsageLimitCommand}.
+ */
 export interface ModifyUsageLimitCommandOutput extends UsageLimit, __MetadataBearer {}
 
 /**
@@ -30,68 +31,70 @@ export interface ModifyUsageLimitCommandOutput extends UsageLimit, __MetadataBea
  * ```javascript
  * import { RedshiftClient, ModifyUsageLimitCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, ModifyUsageLimitCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // ModifyUsageLimitMessage
+ *   UsageLimitId: "STRING_VALUE", // required
+ *   Amount: Number("long"),
+ *   BreachAction: "log" || "emit-metric" || "disable",
+ * };
  * const command = new ModifyUsageLimitCommand(input);
  * const response = await client.send(command);
+ * // { // UsageLimit
+ * //   UsageLimitId: "STRING_VALUE",
+ * //   ClusterIdentifier: "STRING_VALUE",
+ * //   FeatureType: "spectrum" || "concurrency-scaling" || "cross-region-datasharing" || "extra-compute-for-automatic-optimization",
+ * //   LimitType: "time" || "data-scanned",
+ * //   Amount: Number("long"),
+ * //   Period: "daily" || "weekly" || "monthly",
+ * //   BreachAction: "log" || "emit-metric" || "disable",
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ModifyUsageLimitCommandInput - {@link ModifyUsageLimitCommandInput}
+ * @returns {@link ModifyUsageLimitCommandOutput}
  * @see {@link ModifyUsageLimitCommandInput} for command's `input` shape.
  * @see {@link ModifyUsageLimitCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidUsageLimitFault} (client fault)
+ *  <p>The usage limit is not valid.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link UsageLimitNotFoundFault} (client fault)
+ *  <p>The usage limit identifier can't be found.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyUsageLimitCommand extends $Command<
-  ModifyUsageLimitCommandInput,
-  ModifyUsageLimitCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyUsageLimitCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyUsageLimitCommandInput, ModifyUsageLimitCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "ModifyUsageLimitCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyUsageLimitMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: UsageLimit.filterSensitiveLog,
+export class ModifyUsageLimitCommand extends command<ModifyUsageLimitCommandInput, ModifyUsageLimitCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyUsageLimit",
+  ModifyUsageLimit$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyUsageLimitMessage;
+      output: UsageLimit;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyUsageLimitCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyUsageLimitCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyUsageLimitCommandOutput> {
-    return deserializeAws_queryModifyUsageLimitCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyUsageLimitCommandInput;
+      output: ModifyUsageLimitCommandOutput;
+    };
+  };
 }

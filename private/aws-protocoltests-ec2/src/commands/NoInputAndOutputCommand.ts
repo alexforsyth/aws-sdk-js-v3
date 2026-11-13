@@ -1,24 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2ProtocolClient";
-import { NoInputAndOutputOutput } from "../models/models_0";
-import {
-  deserializeAws_ec2NoInputAndOutputCommand,
-  serializeAws_ec2NoInputAndOutputCommand,
-} from "../protocols/Aws_ec2";
+import type { EC2ProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2ProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { NoInputAndOutputOutput } from "../models/models_0";
+import { de_NoInputAndOutputCommand, se_NoInputAndOutputCommand } from "../protocols/Aws_ec2";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link NoInputAndOutputCommand}.
+ */
 export interface NoInputAndOutputCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link NoInputAndOutputCommand}.
+ */
 export interface NoInputAndOutputCommandOutput extends NoInputAndOutputOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +36,58 @@ export interface NoInputAndOutputCommandOutput extends NoInputAndOutputOutput, _
  * ```javascript
  * import { EC2ProtocolClient, NoInputAndOutputCommand } from "@aws-sdk/aws-protocoltests-ec2"; // ES Modules import
  * // const { EC2ProtocolClient, NoInputAndOutputCommand } = require("@aws-sdk/aws-protocoltests-ec2"); // CommonJS import
+ * // import type { EC2ProtocolClientConfig } from "@aws-sdk/aws-protocoltests-ec2";
+ * const config = {}; // type is EC2ProtocolClientConfig
  * const client = new EC2ProtocolClient(config);
+ * const input = {};
  * const command = new NoInputAndOutputCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param NoInputAndOutputCommandInput - {@link NoInputAndOutputCommandInput}
+ * @returns {@link NoInputAndOutputCommandOutput}
  * @see {@link NoInputAndOutputCommandInput} for command's `input` shape.
  * @see {@link NoInputAndOutputCommandOutput} for command's `response` shape.
- * @see {@link EC2ProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ProtocolClientResolvedConfig | config} for EC2ProtocolClient's `config` shape.
  *
+ * @throws {@link EC2ProtocolServiceException}
+ * <p>Base exception class for all service exceptions from EC2Protocol service.</p>
+ *
+ *
+ * @public
  */
-export class NoInputAndOutputCommand extends $Command<
-  NoInputAndOutputCommandInput,
-  NoInputAndOutputCommandOutput,
-  EC2ProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: NoInputAndOutputCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<NoInputAndOutputCommandInput, NoInputAndOutputCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2ProtocolClient";
-    const commandName = "NoInputAndOutputCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: NoInputAndOutputOutput.filterSensitiveLog,
+export class NoInputAndOutputCommand extends $Command
+  .classBuilder<
+    NoInputAndOutputCommandInput,
+    NoInputAndOutputCommandOutput,
+    EC2ProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: EC2ProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("AwsEc2", "NoInputAndOutput", {})
+  .n("EC2ProtocolClient", "NoInputAndOutputCommand")
+  .f(void 0, void 0)
+  .ser(se_NoInputAndOutputCommand)
+  .de(de_NoInputAndOutputCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: NoInputAndOutputCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2NoInputAndOutputCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<NoInputAndOutputCommandOutput> {
-    return deserializeAws_ec2NoInputAndOutputCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: NoInputAndOutputCommandInput;
+      output: NoInputAndOutputCommandOutput;
+    };
+  };
 }

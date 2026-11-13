@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { ListIpRoutesRequest, ListIpRoutesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListIpRoutesCommand,
-  serializeAws_json1_1ListIpRoutesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListIpRoutesRequest, ListIpRoutesResult } from "../models/models_0";
+import { ListIpRoutes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListIpRoutesCommand}.
+ */
 export interface ListIpRoutesCommandInput extends ListIpRoutesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListIpRoutesCommand}.
+ */
 export interface ListIpRoutesCommandOutput extends ListIpRoutesResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,99 @@ export interface ListIpRoutesCommandOutput extends ListIpRoutesResult, __Metadat
  * ```javascript
  * import { DirectoryServiceClient, ListIpRoutesCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, ListIpRoutesCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // ListIpRoutesRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListIpRoutesCommand(input);
  * const response = await client.send(command);
+ * // { // ListIpRoutesResult
+ * //   IpRoutesInfo: [ // IpRoutesInfo
+ * //     { // IpRouteInfo
+ * //       DirectoryId: "STRING_VALUE",
+ * //       CidrIp: "STRING_VALUE",
+ * //       CidrIpv6: "STRING_VALUE",
+ * //       IpRouteStatusMsg: "Adding" || "Added" || "Removing" || "Removed" || "AddFailed" || "RemoveFailed",
+ * //       AddedDateTime: new Date("TIMESTAMP"),
+ * //       IpRouteStatusReason: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListIpRoutesCommandInput - {@link ListIpRoutesCommandInput}
+ * @returns {@link ListIpRoutesCommandOutput}
  * @see {@link ListIpRoutesCommandInput} for command's `input` shape.
  * @see {@link ListIpRoutesCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To list IP routes
+ * ```javascript
+ * // The following example lists the address blocks that have been added to a specified directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   Limit: 0
+ * };
+ * const command = new ListIpRoutesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   IpRoutesInfo: [
+ *     {
+ *       AddedDateTime: 1.48157763163E9,
+ *       CidrIp: "12.12.12.12/32",
+ *       Description: "example",
+ *       DirectoryId: "d-92654abfed",
+ *       IpRouteStatusMsg: "Added"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListIpRoutesCommand extends $Command<
-  ListIpRoutesCommandInput,
-  ListIpRoutesCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListIpRoutesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListIpRoutesCommandInput, ListIpRoutesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "ListIpRoutesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListIpRoutesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListIpRoutesResult.filterSensitiveLog,
+export class ListIpRoutesCommand extends command<ListIpRoutesCommandInput, ListIpRoutesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListIpRoutes",
+  ListIpRoutes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIpRoutesRequest;
+      output: ListIpRoutesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListIpRoutesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListIpRoutesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListIpRoutesCommandOutput> {
-    return deserializeAws_json1_1ListIpRoutesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListIpRoutesCommandInput;
+      output: ListIpRoutesCommandOutput;
+    };
+  };
 }

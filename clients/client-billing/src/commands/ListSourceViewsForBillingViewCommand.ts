@@ -1,0 +1,112 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSourceViewsForBillingViewRequest, ListSourceViewsForBillingViewResponse } from "../models/models_0";
+import { ListSourceViewsForBillingView$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSourceViewsForBillingViewCommand}.
+ */
+export interface ListSourceViewsForBillingViewCommandInput extends ListSourceViewsForBillingViewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSourceViewsForBillingViewCommand}.
+ */
+export interface ListSourceViewsForBillingViewCommandOutput extends ListSourceViewsForBillingViewResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists the source views (managed Amazon Web Services billing views) associated with the billing view. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BillingClient, ListSourceViewsForBillingViewCommand } from "@aws-sdk/client-billing"; // ES Modules import
+ * // const { BillingClient, ListSourceViewsForBillingViewCommand } = require("@aws-sdk/client-billing"); // CommonJS import
+ * // import type { BillingClientConfig } from "@aws-sdk/client-billing";
+ * const config = {}; // type is BillingClientConfig
+ * const client = new BillingClient(config);
+ * const input = { // ListSourceViewsForBillingViewRequest
+ *   arn: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
+ * const command = new ListSourceViewsForBillingViewCommand(input);
+ * const response = await client.send(command);
+ * // { // ListSourceViewsForBillingViewResponse
+ * //   sourceViews: [ // BillingViewSourceViewsList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListSourceViewsForBillingViewCommandInput - {@link ListSourceViewsForBillingViewCommandInput}
+ * @returns {@link ListSourceViewsForBillingViewCommandOutput}
+ * @see {@link ListSourceViewsForBillingViewCommandInput} for command's `input` shape.
+ * @see {@link ListSourceViewsForBillingViewCommandOutput} for command's `response` shape.
+ * @see {@link BillingClientResolvedConfig | config} for BillingClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing failed because of an unknown error, exception, or failure. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The specified ARN in the request doesn't exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
+ *
+ * @throws {@link BillingServiceException}
+ * <p>Base exception class for all service exceptions from Billing service.</p>
+ *
+ *
+ * @example Invoke ListSourceViewsForBillingView
+ * ```javascript
+ * //
+ * const input = {
+ *   arn: "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+ * };
+ * const command = new ListSourceViewsForBillingViewCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   sourceViews: [
+ *     "arn:aws:billing::123456789101:billingview/primary"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class ListSourceViewsForBillingViewCommand extends command<ListSourceViewsForBillingViewCommandInput, ListSourceViewsForBillingViewCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSourceViewsForBillingView",
+  ListSourceViewsForBillingView$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSourceViewsForBillingViewRequest;
+      output: ListSourceViewsForBillingViewResponse;
+    };
+    sdk: {
+      input: ListSourceViewsForBillingViewCommandInput;
+      output: ListSourceViewsForBillingViewCommandOutput;
+    };
+  };
+}

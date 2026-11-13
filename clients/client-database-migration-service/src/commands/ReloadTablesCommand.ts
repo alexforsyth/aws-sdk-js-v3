@@ -1,101 +1,90 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { ReloadTablesMessage, ReloadTablesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ReloadTablesCommand,
-  serializeAws_json1_1ReloadTablesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ReloadTablesMessage, ReloadTablesResponse } from "../models/models_1";
+import { ReloadTables$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ReloadTablesCommand}.
+ */
 export interface ReloadTablesCommandInput extends ReloadTablesMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ReloadTablesCommand}.
+ */
 export interface ReloadTablesCommandOutput extends ReloadTablesResponse, __MetadataBearer {}
 
 /**
  * <p>Reloads the target database table with the source data. </p>
- *          <p>You can only use this operation with a task in the <code>RUNNING</code> state, otherwise the service
- *            will throw an <code>InvalidResourceStateFault</code> exception.</p>
+ *          <p>You can only use this operation with a task in the <code>RUNNING</code> state, otherwise
+ *          the service will throw an <code>InvalidResourceStateFault</code> exception.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DatabaseMigrationServiceClient, ReloadTablesCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, ReloadTablesCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // ReloadTablesMessage
+ *   ReplicationTaskArn: "STRING_VALUE", // required
+ *   TablesToReload: [ // TableListToReload // required
+ *     { // TableToReload
+ *       SchemaName: "STRING_VALUE", // required
+ *       TableName: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   ReloadOption: "data-reload" || "validate-only",
+ * };
  * const command = new ReloadTablesCommand(input);
  * const response = await client.send(command);
+ * // { // ReloadTablesResponse
+ * //   ReplicationTaskArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ReloadTablesCommandInput - {@link ReloadTablesCommandInput}
+ * @returns {@link ReloadTablesCommandOutput}
  * @see {@link ReloadTablesCommandInput} for command's `input` shape.
  * @see {@link ReloadTablesCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @public
  */
-export class ReloadTablesCommand extends $Command<
-  ReloadTablesCommandInput,
-  ReloadTablesCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ReloadTablesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ReloadTablesCommandInput, ReloadTablesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "ReloadTablesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ReloadTablesMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ReloadTablesResponse.filterSensitiveLog,
+export class ReloadTablesCommand extends command<ReloadTablesCommandInput, ReloadTablesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ReloadTables",
+  ReloadTables$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReloadTablesMessage;
+      output: ReloadTablesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ReloadTablesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ReloadTablesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ReloadTablesCommandOutput> {
-    return deserializeAws_json1_1ReloadTablesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ReloadTablesCommandInput;
+      output: ReloadTablesCommandOutput;
+    };
+  };
 }

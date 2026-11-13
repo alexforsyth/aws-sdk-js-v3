@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteTransitGatewayPeeringAttachmentRequest,
   DeleteTransitGatewayPeeringAttachmentResult,
-} from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTransitGatewayPeeringAttachmentCommand,
-  serializeAws_ec2DeleteTransitGatewayPeeringAttachmentCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_3";
+import { DeleteTransitGatewayPeeringAttachment$ } from "../schemas/schemas_0";
 
-export interface DeleteTransitGatewayPeeringAttachmentCommandInput
-  extends DeleteTransitGatewayPeeringAttachmentRequest {}
-export interface DeleteTransitGatewayPeeringAttachmentCommandOutput
-  extends DeleteTransitGatewayPeeringAttachmentResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayPeeringAttachmentCommand}.
+ */
+export interface DeleteTransitGatewayPeeringAttachmentCommandInput extends DeleteTransitGatewayPeeringAttachmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayPeeringAttachmentCommand}.
+ */
+export interface DeleteTransitGatewayPeeringAttachmentCommandOutput extends DeleteTransitGatewayPeeringAttachmentResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a transit gateway peering attachment.</p>
@@ -34,74 +32,78 @@ export interface DeleteTransitGatewayPeeringAttachmentCommandOutput
  * ```javascript
  * import { EC2Client, DeleteTransitGatewayPeeringAttachmentCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTransitGatewayPeeringAttachmentCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayPeeringAttachmentRequest
+ *   TransitGatewayAttachmentId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTransitGatewayPeeringAttachmentCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTransitGatewayPeeringAttachmentResult
+ * //   TransitGatewayPeeringAttachment: { // TransitGatewayPeeringAttachment
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     AccepterTransitGatewayAttachmentId: "STRING_VALUE",
+ * //     RequesterTgwInfo: { // PeeringTgwInfo
+ * //       TransitGatewayId: "STRING_VALUE",
+ * //       CoreNetworkId: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     AccepterTgwInfo: {
+ * //       TransitGatewayId: "STRING_VALUE",
+ * //       CoreNetworkId: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     Options: { // TransitGatewayPeeringAttachmentOptions
+ * //       DynamicRouting: "enable" || "disable",
+ * //     },
+ * //     Status: { // PeeringAttachmentStatus
+ * //       Code: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     State: "initiating" || "initiatingRequest" || "pendingAcceptance" || "rollingBack" || "pending" || "available" || "modifying" || "deleting" || "deleted" || "failed" || "rejected" || "rejecting" || "failing",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteTransitGatewayPeeringAttachmentCommandInput - {@link DeleteTransitGatewayPeeringAttachmentCommandInput}
+ * @returns {@link DeleteTransitGatewayPeeringAttachmentCommandOutput}
  * @see {@link DeleteTransitGatewayPeeringAttachmentCommandInput} for command's `input` shape.
  * @see {@link DeleteTransitGatewayPeeringAttachmentCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTransitGatewayPeeringAttachmentCommand extends $Command<
-  DeleteTransitGatewayPeeringAttachmentCommandInput,
-  DeleteTransitGatewayPeeringAttachmentCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTransitGatewayPeeringAttachmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTransitGatewayPeeringAttachmentCommandInput, DeleteTransitGatewayPeeringAttachmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTransitGatewayPeeringAttachmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTransitGatewayPeeringAttachmentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTransitGatewayPeeringAttachmentResult.filterSensitiveLog,
+export class DeleteTransitGatewayPeeringAttachmentCommand extends command<DeleteTransitGatewayPeeringAttachmentCommandInput, DeleteTransitGatewayPeeringAttachmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGatewayPeeringAttachment",
+  DeleteTransitGatewayPeeringAttachment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayPeeringAttachmentRequest;
+      output: DeleteTransitGatewayPeeringAttachmentResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteTransitGatewayPeeringAttachmentCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTransitGatewayPeeringAttachmentCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTransitGatewayPeeringAttachmentCommandOutput> {
-    return deserializeAws_ec2DeleteTransitGatewayPeeringAttachmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTransitGatewayPeeringAttachmentCommandInput;
+      output: DeleteTransitGatewayPeeringAttachmentCommandOutput;
+    };
+  };
 }

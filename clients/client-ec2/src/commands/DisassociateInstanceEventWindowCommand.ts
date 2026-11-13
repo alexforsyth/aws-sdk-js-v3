@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DisassociateInstanceEventWindowRequest, DisassociateInstanceEventWindowResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateInstanceEventWindowCommand,
-  serializeAws_ec2DisassociateInstanceEventWindowCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateInstanceEventWindowRequest, DisassociateInstanceEventWindowResult } from "../models/models_6";
+import { DisassociateInstanceEventWindow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateInstanceEventWindowCommand}.
+ */
 export interface DisassociateInstanceEventWindowCommandInput extends DisassociateInstanceEventWindowRequest {}
-export interface DisassociateInstanceEventWindowCommandOutput
-  extends DisassociateInstanceEventWindowResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateInstanceEventWindowCommand}.
+ */
+export interface DisassociateInstanceEventWindowCommandOutput extends DisassociateInstanceEventWindowResult, __MetadataBearer {}
 
 /**
  * <p>Disassociates one or more targets from an event window.</p>
@@ -32,74 +31,95 @@ export interface DisassociateInstanceEventWindowCommandOutput
  * ```javascript
  * import { EC2Client, DisassociateInstanceEventWindowCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateInstanceEventWindowCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateInstanceEventWindowRequest
+ *   DryRun: true || false,
+ *   InstanceEventWindowId: "STRING_VALUE", // required
+ *   AssociationTarget: { // InstanceEventWindowDisassociationRequest
+ *     InstanceIds: [ // InstanceIdList
+ *       "STRING_VALUE",
+ *     ],
+ *     InstanceTags: [ // TagList
+ *       { // Tag
+ *         Key: "STRING_VALUE",
+ *         Value: "STRING_VALUE",
+ *       },
+ *     ],
+ *     DedicatedHostIds: [ // DedicatedHostIdList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new DisassociateInstanceEventWindowCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateInstanceEventWindowResult
+ * //   InstanceEventWindow: { // InstanceEventWindow
+ * //     InstanceEventWindowId: "STRING_VALUE",
+ * //     TimeRanges: [ // InstanceEventWindowTimeRangeList
+ * //       { // InstanceEventWindowTimeRange
+ * //         StartWeekDay: "sunday" || "monday" || "tuesday" || "wednesday" || "thursday" || "friday" || "saturday",
+ * //         StartHour: Number("int"),
+ * //         EndWeekDay: "sunday" || "monday" || "tuesday" || "wednesday" || "thursday" || "friday" || "saturday",
+ * //         EndHour: Number("int"),
+ * //       },
+ * //     ],
+ * //     Name: "STRING_VALUE",
+ * //     CronExpression: "STRING_VALUE",
+ * //     AssociationTarget: { // InstanceEventWindowAssociationTarget
+ * //       InstanceIds: [ // InstanceIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       DedicatedHostIds: [ // DedicatedHostIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     State: "creating" || "deleting" || "active" || "deleted",
+ * //     Tags: [
+ * //       {
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisassociateInstanceEventWindowCommandInput - {@link DisassociateInstanceEventWindowCommandInput}
+ * @returns {@link DisassociateInstanceEventWindowCommandOutput}
  * @see {@link DisassociateInstanceEventWindowCommandInput} for command's `input` shape.
  * @see {@link DisassociateInstanceEventWindowCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateInstanceEventWindowCommand extends $Command<
-  DisassociateInstanceEventWindowCommandInput,
-  DisassociateInstanceEventWindowCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateInstanceEventWindowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateInstanceEventWindowCommandInput, DisassociateInstanceEventWindowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateInstanceEventWindowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateInstanceEventWindowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateInstanceEventWindowResult.filterSensitiveLog,
+export class DisassociateInstanceEventWindowCommand extends command<DisassociateInstanceEventWindowCommandInput, DisassociateInstanceEventWindowCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateInstanceEventWindow",
+  DisassociateInstanceEventWindow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateInstanceEventWindowRequest;
+      output: DisassociateInstanceEventWindowResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateInstanceEventWindowCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateInstanceEventWindowCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateInstanceEventWindowCommandOutput> {
-    return deserializeAws_ec2DisassociateInstanceEventWindowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateInstanceEventWindowCommandInput;
+      output: DisassociateInstanceEventWindowCommandOutput;
+    };
+  };
 }

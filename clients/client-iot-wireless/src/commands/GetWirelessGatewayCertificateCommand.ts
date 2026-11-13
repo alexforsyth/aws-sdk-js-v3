@@ -1,100 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { GetWirelessGatewayCertificateRequest, GetWirelessGatewayCertificateResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetWirelessGatewayCertificateCommand,
-  serializeAws_restJson1GetWirelessGatewayCertificateCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetWirelessGatewayCertificateCommandInput extends GetWirelessGatewayCertificateRequest {}
-export interface GetWirelessGatewayCertificateCommandOutput
-  extends GetWirelessGatewayCertificateResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetWirelessGatewayCertificateRequest, GetWirelessGatewayCertificateResponse } from "../models/models_0";
+import { GetWirelessGatewayCertificate$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets the ID of the certificate that is currently associated with a wireless gateway.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetWirelessGatewayCertificateCommand}.
+ */
+export interface GetWirelessGatewayCertificateCommandInput extends GetWirelessGatewayCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetWirelessGatewayCertificateCommand}.
+ */
+export interface GetWirelessGatewayCertificateCommandOutput extends GetWirelessGatewayCertificateResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets the ID of the certificate that is currently associated with a wireless
+ *             gateway.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTWirelessClient, GetWirelessGatewayCertificateCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, GetWirelessGatewayCertificateCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // GetWirelessGatewayCertificateRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new GetWirelessGatewayCertificateCommand(input);
  * const response = await client.send(command);
+ * // { // GetWirelessGatewayCertificateResponse
+ * //   IotCertificateId: "STRING_VALUE",
+ * //   LoRaWANNetworkServerCertificateId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetWirelessGatewayCertificateCommandInput - {@link GetWirelessGatewayCertificateCommandInput}
+ * @returns {@link GetWirelessGatewayCertificateCommandOutput}
  * @see {@link GetWirelessGatewayCertificateCommandInput} for command's `input` shape.
  * @see {@link GetWirelessGatewayCertificateCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class GetWirelessGatewayCertificateCommand extends $Command<
-  GetWirelessGatewayCertificateCommandInput,
-  GetWirelessGatewayCertificateCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetWirelessGatewayCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetWirelessGatewayCertificateCommandInput, GetWirelessGatewayCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "GetWirelessGatewayCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetWirelessGatewayCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetWirelessGatewayCertificateResponse.filterSensitiveLog,
+export class GetWirelessGatewayCertificateCommand extends command<GetWirelessGatewayCertificateCommandInput, GetWirelessGatewayCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetWirelessGatewayCertificate",
+  GetWirelessGatewayCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWirelessGatewayCertificateRequest;
+      output: GetWirelessGatewayCertificateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetWirelessGatewayCertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetWirelessGatewayCertificateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetWirelessGatewayCertificateCommandOutput> {
-    return deserializeAws_restJson1GetWirelessGatewayCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetWirelessGatewayCertificateCommandInput;
+      output: GetWirelessGatewayCertificateCommandOutput;
+    };
+  };
 }

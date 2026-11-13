@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchGetRecordRequest, BatchGetRecordResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchGetRecordCommand,
-  serializeAws_restJson1BatchGetRecordCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  SageMakerFeatureStoreRuntimeClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../SageMakerFeatureStoreRuntimeClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetRecordRequest, BatchGetRecordResponse } from "../models/models_0";
+import { BatchGetRecord$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetRecordCommand}.
+ */
 export interface BatchGetRecordCommandInput extends BatchGetRecordRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetRecordCommand}.
+ */
 export interface BatchGetRecordCommandOutput extends BatchGetRecordResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,105 @@ export interface BatchGetRecordCommandOutput extends BatchGetRecordResponse, __M
  * ```javascript
  * import { SageMakerFeatureStoreRuntimeClient, BatchGetRecordCommand } from "@aws-sdk/client-sagemaker-featurestore-runtime"; // ES Modules import
  * // const { SageMakerFeatureStoreRuntimeClient, BatchGetRecordCommand } = require("@aws-sdk/client-sagemaker-featurestore-runtime"); // CommonJS import
+ * // import type { SageMakerFeatureStoreRuntimeClientConfig } from "@aws-sdk/client-sagemaker-featurestore-runtime";
+ * const config = {}; // type is SageMakerFeatureStoreRuntimeClientConfig
  * const client = new SageMakerFeatureStoreRuntimeClient(config);
+ * const input = { // BatchGetRecordRequest
+ *   Identifiers: [ // BatchGetRecordIdentifiers // required
+ *     { // BatchGetRecordIdentifier
+ *       FeatureGroupName: "STRING_VALUE", // required
+ *       RecordIdentifiersValueAsString: [ // RecordIdentifiers // required
+ *         "STRING_VALUE",
+ *       ],
+ *       FeatureNames: [ // FeatureNames
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   ExpirationTimeResponse: "Enabled" || "Disabled",
+ * };
  * const command = new BatchGetRecordCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetRecordResponse
+ * //   Records: [ // BatchGetRecordResultDetails // required
+ * //     { // BatchGetRecordResultDetail
+ * //       FeatureGroupName: "STRING_VALUE", // required
+ * //       RecordIdentifierValueAsString: "STRING_VALUE", // required
+ * //       Record: [ // Record // required
+ * //         { // FeatureValue
+ * //           FeatureName: "STRING_VALUE", // required
+ * //           ValueAsString: "STRING_VALUE",
+ * //           ValueAsStringList: [ // ValueAsStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       ExpiresAt: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Errors: [ // BatchGetRecordErrors // required
+ * //     { // BatchGetRecordError
+ * //       FeatureGroupName: "STRING_VALUE", // required
+ * //       RecordIdentifierValueAsString: "STRING_VALUE", // required
+ * //       ErrorCode: "STRING_VALUE", // required
+ * //       ErrorMessage: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   UnprocessedIdentifiers: [ // UnprocessedIdentifiers // required
+ * //     { // BatchGetRecordIdentifier
+ * //       FeatureGroupName: "STRING_VALUE", // required
+ * //       RecordIdentifiersValueAsString: [ // RecordIdentifiers // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       FeatureNames: [ // FeatureNames
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetRecordCommandInput - {@link BatchGetRecordCommandInput}
+ * @returns {@link BatchGetRecordCommandOutput}
  * @see {@link BatchGetRecordCommandInput} for command's `input` shape.
  * @see {@link BatchGetRecordCommandOutput} for command's `response` shape.
- * @see {@link SageMakerFeatureStoreRuntimeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerFeatureStoreRuntimeClientResolvedConfig | config} for SageMakerFeatureStoreRuntimeClient's `config` shape.
  *
+ * @throws {@link AccessForbidden} (client fault)
+ *  <p>You do not have permission to perform an action.</p>
+ *
+ * @throws {@link InternalFailure} (server fault)
+ *  <p>An internal failure occurred. Try your request again. If the problem persists, contact
+ *             Amazon Web Services customer support.</p>
+ *
+ * @throws {@link ServiceUnavailable} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ValidationError} (client fault)
+ *  <p>There was an error validating your request.</p>
+ *
+ * @throws {@link SageMakerFeatureStoreRuntimeServiceException}
+ * <p>Base exception class for all service exceptions from SageMakerFeatureStoreRuntime service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetRecordCommand extends $Command<
-  BatchGetRecordCommandInput,
-  BatchGetRecordCommandOutput,
-  SageMakerFeatureStoreRuntimeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetRecordCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerFeatureStoreRuntimeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetRecordCommandInput, BatchGetRecordCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerFeatureStoreRuntimeClient";
-    const commandName = "BatchGetRecordCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetRecordRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetRecordResponse.filterSensitiveLog,
+export class BatchGetRecordCommand extends command<BatchGetRecordCommandInput, BatchGetRecordCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetRecord",
+  BatchGetRecord$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetRecordRequest;
+      output: BatchGetRecordResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetRecordCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchGetRecordCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetRecordCommandOutput> {
-    return deserializeAws_restJson1BatchGetRecordCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetRecordCommandInput;
+      output: BatchGetRecordCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteFirewallRequest, DeleteFirewallResponse } from "../models/models_0";
-import { NetworkFirewallClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkFirewallClient";
-import {
-  deserializeAws_json1_0DeleteFirewallCommand,
-  serializeAws_json1_0DeleteFirewallCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFirewallRequest, DeleteFirewallResponse } from "../models/models_0";
+import { DeleteFirewall$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFirewallCommand}.
+ */
 export interface DeleteFirewallCommandInput extends DeleteFirewallRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFirewallCommand}.
+ */
 export interface DeleteFirewallCommandOutput extends DeleteFirewallResponse, __MetadataBearer {}
 
 /**
@@ -33,73 +34,202 @@ export interface DeleteFirewallCommandOutput extends DeleteFirewallResponse, __M
  *          you can remove the firewall safely.</p>
  *          <p>To delete a firewall, remove the delete protection if you need to using <a>UpdateFirewallDeleteProtection</a>,
  *          then delete the firewall by calling <a>DeleteFirewall</a>. </p>
+ *          <p>Deleting a proxy mode firewall detaches its NAT gateways. To also delete the NAT gateways that Network Firewall created for the firewall, specify <code>DeleteAssociatedNatGateways</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { NetworkFirewallClient, DeleteFirewallCommand } from "@aws-sdk/client-network-firewall"; // ES Modules import
  * // const { NetworkFirewallClient, DeleteFirewallCommand } = require("@aws-sdk/client-network-firewall"); // CommonJS import
+ * // import type { NetworkFirewallClientConfig } from "@aws-sdk/client-network-firewall";
+ * const config = {}; // type is NetworkFirewallClientConfig
  * const client = new NetworkFirewallClient(config);
+ * const input = { // DeleteFirewallRequest
+ *   FirewallName: "STRING_VALUE",
+ *   FirewallArn: "STRING_VALUE",
+ *   DeleteAssociatedNatGateways: true || false,
+ * };
  * const command = new DeleteFirewallCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFirewallResponse
+ * //   Firewall: { // Firewall
+ * //     FirewallName: "STRING_VALUE",
+ * //     FirewallArn: "STRING_VALUE",
+ * //     FirewallPolicyArn: "STRING_VALUE", // required
+ * //     VpcId: "STRING_VALUE", // required
+ * //     SubnetMappings: [ // SubnetMappings // required
+ * //       { // SubnetMapping
+ * //         SubnetId: "STRING_VALUE", // required
+ * //         IPAddressType: "DUALSTACK" || "IPV4" || "IPV6",
+ * //       },
+ * //     ],
+ * //     DeleteProtection: true || false,
+ * //     SubnetChangeProtection: true || false,
+ * //     FirewallPolicyChangeProtection: true || false,
+ * //     Description: "STRING_VALUE",
+ * //     FirewallId: "STRING_VALUE", // required
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     EncryptionConfiguration: { // EncryptionConfiguration
+ * //       KeyId: "STRING_VALUE",
+ * //       Type: "CUSTOMER_KMS" || "AWS_OWNED_KMS_KEY", // required
+ * //     },
+ * //     NumberOfAssociations: Number("int"),
+ * //     EnabledAnalysisTypes: [ // EnabledAnalysisTypes
+ * //       "TLS_SNI" || "HTTP_HOST",
+ * //     ],
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     TransitGatewayOwnerAccountId: "STRING_VALUE",
+ * //     AvailabilityZoneMappings: [ // AvailabilityZoneMappings
+ * //       { // AvailabilityZoneMapping
+ * //         AvailabilityZone: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     AvailabilityZoneChangeProtection: true || false,
+ * //     NatGatewayCreateMappings: [ // NatGatewayCreateMappingsList
+ * //       { // NatGatewayCreateMapping
+ * //         SubnetId: "STRING_VALUE", // required
+ * //         AllocationIds: [ // NatGatewayAllocationIdList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         PrivateIps: [ // NatGatewayPrivateIpList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     ProxySettings: { // ProxySettings
+ * //       ListenerProperties: [ // ListenerProperties // required
+ * //         { // ListenerProperty
+ * //           Port: Number("int"),
+ * //           Type: "HTTP" || "HTTPS",
+ * //         },
+ * //       ],
+ * //       CertificateArn: "STRING_VALUE",
+ * //       DomainName: "STRING_VALUE",
+ * //     },
+ * //     VpcEndpoint: { // VpcEndpoint
+ * //       VpcId: "STRING_VALUE", // required
+ * //       SubnetMappings: [ // required
+ * //         {
+ * //           SubnetId: "STRING_VALUE", // required
+ * //           IPAddressType: "DUALSTACK" || "IPV4" || "IPV6",
+ * //         },
+ * //       ],
+ * //     },
+ * //     TransparentFilteringNatScope: "NAT_ALL" || "NAT_NONE",
+ * //   },
+ * //   FirewallStatus: { // FirewallStatus
+ * //     Status: "PROVISIONING" || "DELETING" || "READY" || "FAILED", // required
+ * //     ConfigurationSyncStateSummary: "PENDING" || "IN_SYNC" || "CAPACITY_CONSTRAINED", // required
+ * //     SyncStates: { // SyncStates
+ * //       "<keys>": { // SyncState
+ * //         Attachment: { // Attachment
+ * //           SubnetId: "STRING_VALUE",
+ * //           EndpointId: "STRING_VALUE",
+ * //           Status: "CREATING" || "DELETING" || "FAILED" || "ERROR" || "SCALING" || "READY",
+ * //           StatusMessage: "STRING_VALUE",
+ * //           DnsName: "STRING_VALUE",
+ * //         },
+ * //         Config: { // SyncStateConfig
+ * //           "<keys>": { // PerObjectStatus
+ * //             SyncStatus: "PENDING" || "IN_SYNC" || "CAPACITY_CONSTRAINED" || "NOT_SUBSCRIBED" || "DEPRECATED",
+ * //             UpdateToken: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         NatGatewayAttachments: [ // NatGatewayAttachmentsList
+ * //           { // NatGatewayAttachment
+ * //             NatGatewayId: "STRING_VALUE", // required
+ * //             Status: "CREATING" || "READY" || "UPDATING" || "FAILED" || "DELETING", // required
+ * //             StatusMessage: "STRING_VALUE",
+ * //             DnsName: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //     CapacityUsageSummary: { // CapacityUsageSummary
+ * //       CIDRs: { // CIDRSummary
+ * //         AvailableCIDRCount: Number("int"),
+ * //         UtilizedCIDRCount: Number("int"),
+ * //         IPSetReferences: { // IPSetMetadataMap
+ * //           "<keys>": { // IPSetMetadata
+ * //             ResolvedCIDRCount: Number("int"),
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     TransitGatewayAttachmentSyncState: { // TransitGatewayAttachmentSyncState
+ * //       AttachmentId: "STRING_VALUE",
+ * //       TransitGatewayAttachmentStatus: "CREATING" || "DELETING" || "DELETED" || "FAILED" || "ERROR" || "READY" || "PENDING_ACCEPTANCE" || "REJECTING" || "REJECTED",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteFirewallCommandInput - {@link DeleteFirewallCommandInput}
+ * @returns {@link DeleteFirewallCommandOutput}
  * @see {@link DeleteFirewallCommandInput} for command's `input` shape.
  * @see {@link DeleteFirewallCommandOutput} for command's `response` shape.
- * @see {@link NetworkFirewallClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NetworkFirewallClientResolvedConfig | config} for NetworkFirewallClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Your request is valid, but Network Firewall couldn't perform the operation because of a
+ *          system problem. Retry your request. </p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The operation failed because it's not valid. For example, you might have tried to delete
+ *          a rule group or firewall policy that's in use.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The operation failed because of a problem with your request. Examples include: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified an unsupported parameter name or value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a property with a value that isn't among the available
+ *                types.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                that isn't valid in the context of the request.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Unable to locate a resource using the parameters that you provided.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Unable to process the request due to throttling limitations.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The operation you requested isn't supported by Network Firewall. </p>
+ *
+ * @throws {@link NetworkFirewallServiceException}
+ * <p>Base exception class for all service exceptions from NetworkFirewall service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFirewallCommand extends $Command<
-  DeleteFirewallCommandInput,
-  DeleteFirewallCommandOutput,
-  NetworkFirewallClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFirewallCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkFirewallClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFirewallCommandInput, DeleteFirewallCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkFirewallClient";
-    const commandName = "DeleteFirewallCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFirewallRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFirewallResponse.filterSensitiveLog,
+export class DeleteFirewallCommand extends command<DeleteFirewallCommandInput, DeleteFirewallCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFirewall",
+  DeleteFirewall$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFirewallRequest;
+      output: DeleteFirewallResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFirewallCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DeleteFirewallCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFirewallCommandOutput> {
-    return deserializeAws_json1_0DeleteFirewallCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFirewallCommandInput;
+      output: DeleteFirewallCommandOutput;
+    };
+  };
 }

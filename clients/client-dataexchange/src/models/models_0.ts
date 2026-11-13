@@ -1,2911 +1,4234 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  AcceptanceStateFilterValue,
+  AssetType,
+  Code,
+  DatabaseLFTagPolicyPermission,
+  DataGrantAcceptanceState,
+  GrantDistributionScope,
+  JobErrorLimitName,
+  JobErrorResourceTypes,
+  LakeFormationDataPermissionType,
+  LFPermission,
+  LFResourceType,
+  NotificationType,
+  Origin,
+  ProtocolType,
+  SchemaChangeType,
+  ServerSideEncryptionTypes,
+  State,
+  TableTagPolicyLFPermission,
+  Type,
+} from "./enums";
 
 /**
- * <p>Access to the resource is denied.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
+export interface AcceptDataGrantRequest {
   /**
-   * <p>Access to the resource is denied.</p>
+   * <p>The Amazon Resource Name (ARN) of the data grant to accept.</p>
+   * @public
    */
-  Message: string | undefined;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-export enum ServerSideEncryptionTypes {
-  AES256 = "AES256",
-  aws_kms = "aws:kms",
+  DataGrantArn: string | undefined;
 }
 
 /**
- * <p>Encryption configuration of the export job. Includes the encryption type in addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption. type.</p>
+ * @public
+ */
+export interface AcceptDataGrantResponse {
+  /**
+   * <p>The name of the accepted data grant.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant sender.</p>
+   * @public
+   */
+  SenderPrincipal?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
+   */
+  ReceiverPrincipal: string | undefined;
+
+  /**
+   * <p>The description of the accepted data grant.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The acceptance state of the data grant.</p>
+   * @public
+   */
+  AcceptanceState: DataGrantAcceptanceState | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was accepted.</p>
+   * @public
+   */
+  AcceptedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The distribution scope for the data grant.</p>
+   * @public
+   */
+  GrantDistributionScope: GrantDistributionScope | undefined;
+
+  /**
+   * <p>The ID of the data set associated to the data grant.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data grant.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the accepted data grant.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * <p>Encryption configuration of the export job. Includes the encryption type in addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.</p>
+ * @public
  */
 export interface ExportServerSideEncryption {
   /**
    * <p>The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>
+   * @public
    */
-  KmsKeyArn?: string;
+  KmsKeyArn?: string | undefined;
 
   /**
    * <p>The type of server side encryption used for encrypting the objects in Amazon S3.</p>
+   * @public
    */
-  Type: ServerSideEncryptionTypes | string | undefined;
-}
-
-export namespace ExportServerSideEncryption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportServerSideEncryption): any => ({
-    ...obj,
-  });
+  Type: ServerSideEncryptionTypes | undefined;
 }
 
 /**
  * <p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>
+ * @public
  */
 export interface AutoExportRevisionDestinationEntry {
   /**
-   * <p>The S3 bucket that is the destination for the event action.</p>
+   * <p>The Amazon S3 bucket that is the destination for the event action.</p>
+   * @public
    */
   Bucket: string | undefined;
 
   /**
    * <p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
+   * @public
    */
-  KeyPattern?: string;
-}
-
-export namespace AutoExportRevisionDestinationEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AutoExportRevisionDestinationEntry): any => ({
-    ...obj,
-  });
+  KeyPattern?: string | undefined;
 }
 
 /**
  * <p>Details of the operation to be performed by the job.</p>
+ * @public
  */
 export interface AutoExportRevisionToS3RequestDetails {
   /**
    * <p>Encryption configuration for the auto export job.</p>
+   * @public
    */
-  Encryption?: ExportServerSideEncryption;
+  Encryption?: ExportServerSideEncryption | undefined;
 
   /**
    * <p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>
+   * @public
    */
   RevisionDestination: AutoExportRevisionDestinationEntry | undefined;
 }
 
-export namespace AutoExportRevisionToS3RequestDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AutoExportRevisionToS3RequestDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>What occurs after a certain event.</p>
+ * @public
  */
 export interface Action {
   /**
    * <p>Details for the export revision to Amazon S3 action.</p>
+   * @public
    */
-  ExportRevisionToS3?: AutoExportRevisionToS3RequestDetails;
+  ExportRevisionToS3?: AutoExportRevisionToS3RequestDetails | undefined;
 }
 
-export namespace Action {
+/**
+ * <p>The API Gateway API that is the asset.</p>
+ * @public
+ */
+export interface ApiGatewayApiAsset {
   /**
-   * @internal
+   * <p>The API description of the API asset.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Action): any => ({
-    ...obj,
-  });
+  ApiDescription?: string | undefined;
+
+  /**
+   * <p>The API endpoint of the API asset.</p>
+   * @public
+   */
+  ApiEndpoint?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the API asset.</p>
+   * @public
+   */
+  ApiId?: string | undefined;
+
+  /**
+   * <p>The API key of the API asset.</p>
+   * @public
+   */
+  ApiKey?: string | undefined;
+
+  /**
+   * <p>The API name of the API asset.</p>
+   * @public
+   */
+  ApiName?: string | undefined;
+
+  /**
+   * <p>The download URL of the API specification of the API asset.</p>
+   * @public
+   */
+  ApiSpecificationDownloadUrl?: string | undefined;
+
+  /**
+   * <p>The date and time that the upload URL expires, in ISO 8601 format.</p>
+   * @public
+   */
+  ApiSpecificationDownloadUrlExpiresAt?: Date | undefined;
+
+  /**
+   * <p>The protocol type of the API asset.</p>
+   * @public
+   */
+  ProtocolType?: ProtocolType | undefined;
+
+  /**
+   * <p>The stage of the API asset.</p>
+   * @public
+   */
+  Stage?: string | undefined;
+}
+
+/**
+ * <p>A tag consisting of a key-value pair that can be applied to a resource.</p>
+ * @public
+ */
+export interface Tag {
+  /**
+   * <p>The key of the tag.</p>
+   * @public
+   */
+  Key: string | undefined;
+
+  /**
+   * <p>The value of the tag.</p>
+   * @public
+   */
+  Value: string | undefined;
+}
+
+/**
+ * <p>The configuration for the asset, which can include tags.</p>
+ * @public
+ */
+export interface AssetConfiguration {
+  /**
+   * <p>The tags to be applied to assets created by the job.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>The destination for the asset.</p>
+ * @public
  */
 export interface AssetDestinationEntry {
   /**
    * <p>The unique identifier for the asset.</p>
+   * @public
    */
   AssetId: string | undefined;
 
   /**
-   * <p>The S3 bucket that is the destination for the asset.</p>
+   * <p>The Amazon S3 bucket that is the destination for the asset.</p>
+   * @public
    */
   Bucket: string | undefined;
 
   /**
    * <p>The name of the object in Amazon S3 for the asset.</p>
+   * @public
    */
-  Key?: string;
-}
-
-export namespace AssetDestinationEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssetDestinationEntry): any => ({
-    ...obj,
-  });
+  Key?: string | undefined;
 }
 
 /**
- * The Amazon Redshift datashare asset.
+ * <p>A structure that allows an LF-admin to grant permissions on certain conditions.</p>
+ * @public
+ */
+export interface LFTag {
+  /**
+   * <p>The key name for the LF-tag.</p>
+   * @public
+   */
+  TagKey: string | undefined;
+
+  /**
+   * <p>A list of LF-tag values.</p>
+   * @public
+   */
+  TagValues: string[] | undefined;
+}
+
+/**
+ * <p>The LF-tag policy for database resources.</p>
+ * @public
+ */
+export interface DatabaseLFTagPolicy {
+  /**
+   * <p>A list of LF-tag conditions that apply to database resources.</p>
+   * @public
+   */
+  Expression: LFTag[] | undefined;
+}
+
+/**
+ * <p>The LF-tag policy for a table resource.</p>
+ * @public
+ */
+export interface TableLFTagPolicy {
+  /**
+   * <p>A list of LF-tag conditions that apply to table resources.</p>
+   * @public
+   */
+  Expression: LFTag[] | undefined;
+}
+
+/**
+ * <p>Details about the AWS Lake Formation resource (Table or Database) included in the AWS Lake Formation data permission.</p>
+ * @public
+ */
+export interface LFResourceDetails {
+  /**
+   * <p>Details about the database resource included in the AWS Lake Formation data permission.</p>
+   * @public
+   */
+  Database?: DatabaseLFTagPolicy | undefined;
+
+  /**
+   * <p>Details about the table resource included in the AWS Lake Formation data permission.</p>
+   * @public
+   */
+  Table?: TableLFTagPolicy | undefined;
+}
+
+/**
+ * <p>Details about the LF-tag policy.</p>
+ * @public
+ */
+export interface LFTagPolicyDetails {
+  /**
+   * <p>The identifier for the AWS Glue Data Catalog.</p>
+   * @public
+   */
+  CatalogId: string | undefined;
+
+  /**
+   * <p>The resource type for which the LF-tag policy applies.</p>
+   * @public
+   */
+  ResourceType: LFResourceType | undefined;
+
+  /**
+   * <p>Details for the Lake Formation Resources included in the LF-tag policy.</p>
+   * @public
+   */
+  ResourceDetails: LFResourceDetails | undefined;
+}
+
+/**
+ * <p>Details about the AWS Lake Formation data permission.</p>
+ * @public
+ */
+export interface LakeFormationDataPermissionDetails {
+  /**
+   * <p>Details about the LF-tag policy.</p>
+   * @public
+   */
+  LFTagPolicy?: LFTagPolicyDetails | undefined;
+}
+
+/**
+ * <p>The AWS Lake Formation data permission asset.</p>
+ * @public
+ */
+export interface LakeFormationDataPermissionAsset {
+  /**
+   * <p>Details about the AWS Lake Formation data permission.</p>
+   * @public
+   */
+  LakeFormationDataPermissionDetails: LakeFormationDataPermissionDetails | undefined;
+
+  /**
+   * <p>The data permission type.</p>
+   * @public
+   */
+  LakeFormationDataPermissionType: LakeFormationDataPermissionType | undefined;
+
+  /**
+   * <p>The permissions granted to the subscribers on the resource.</p>
+   * @public
+   */
+  Permissions: LFPermission[] | undefined;
+
+  /**
+   * <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke permissions to AWS Lake Formation data permissions.</p>
+   * @public
+   */
+  RoleArn?: string | undefined;
+}
+
+/**
+ * <p>The Amazon Redshift datashare asset.</p>
+ * @public
  */
 export interface RedshiftDataShareAsset {
   /**
-   * The Amazon Resource Name (ARN) of the datashare asset.
+   * <p>The Amazon Resource Name (ARN) of the datashare asset.</p>
+   * @public
    */
   Arn: string | undefined;
 }
 
-export namespace RedshiftDataShareAsset {
+/**
+ * <p>The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared S3 objects.</p>
+ * @public
+ */
+export interface KmsKeyToGrant {
   /**
-   * @internal
+   * <p>The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt S3 objects in the shared S3 Bucket. AWS Data exchange will create a KMS grant for each subscriber to allow them to access and decrypt their entitled data that is encrypted using this KMS key specified.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RedshiftDataShareAsset): any => ({
-    ...obj,
-  });
+  KmsKeyArn: string | undefined;
 }
 
 /**
- * <p>The S3 object that is the asset.</p>
+ * <p>The Amazon S3 data access that is the asset.</p>
+ * @public
+ */
+export interface S3DataAccessAsset {
+  /**
+   * <p>The Amazon S3 bucket hosting data to be shared in the S3 data access.</p>
+   * @public
+   */
+  Bucket: string | undefined;
+
+  /**
+   * <p>The Amazon S3 bucket used for hosting shared data in the Amazon S3 data access.</p>
+   * @public
+   */
+  KeyPrefixes?: string[] | undefined;
+
+  /**
+   * <p>S3 keys made available using this asset.</p>
+   * @public
+   */
+  Keys?: string[] | undefined;
+
+  /**
+   * <p>The automatically-generated bucket-style alias for your Amazon S3 Access Point. Customers can access their entitled data using the S3 Access Point alias.</p>
+   * @public
+   */
+  S3AccessPointAlias?: string | undefined;
+
+  /**
+   * <p>The ARN for your Amazon S3 Access Point. Customers can also access their entitled data using the S3 Access Point ARN.</p>
+   * @public
+   */
+  S3AccessPointArn?: string | undefined;
+
+  /**
+   * <p> List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to encrypt S3 objects being shared in this S3 Data Access asset. Providers must include all AWS KMS keys used to encrypt these shared S3 objects.</p>
+   * @public
+   */
+  KmsKeysToGrant?: KmsKeyToGrant[] | undefined;
+}
+
+/**
+ * <p>The Amazon S3 object that is the asset.</p>
+ * @public
  */
 export interface S3SnapshotAsset {
   /**
-   * <p>The size of the S3 object that is the object.</p>
+   * <p>The size of the Amazon S3 object that is the object.</p>
+   * @public
    */
   Size: number | undefined;
 }
 
-export namespace S3SnapshotAsset {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3SnapshotAsset): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Information about the asset.</p>
+ * <p>Details about the asset.</p>
+ * @public
  */
 export interface AssetDetails {
   /**
-   * <p>The S3 object that is the asset.</p>
+   * <p>The Amazon S3 object that is the asset.</p>
+   * @public
    */
-  S3SnapshotAsset?: S3SnapshotAsset;
+  S3SnapshotAsset?: S3SnapshotAsset | undefined;
 
   /**
    * <p>The Amazon Redshift datashare that is the asset.</p>
+   * @public
    */
-  RedshiftDataShareAsset?: RedshiftDataShareAsset;
-}
+  RedshiftDataShareAsset?: RedshiftDataShareAsset | undefined;
 
-export namespace AssetDetails {
   /**
-   * @internal
+   * <p>Information about the API Gateway API asset.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AssetDetails): any => ({
-    ...obj,
-  });
-}
+  ApiGatewayApiAsset?: ApiGatewayApiAsset | undefined;
 
-export enum AssetType {
-  REDSHIFT_DATA_SHARE = "REDSHIFT_DATA_SHARE",
-  S3_SNAPSHOT = "S3_SNAPSHOT",
+  /**
+   * <p>The Amazon S3 data access that is the asset.</p>
+   * @public
+   */
+  S3DataAccessAsset?: S3DataAccessAsset | undefined;
+
+  /**
+   * <p>The AWS Lake Formation data permission that is the asset.</p>
+   * @public
+   */
+  LakeFormationDataPermissionAsset?: LakeFormationDataPermissionAsset | undefined;
 }
 
 /**
- * <p>An asset in AWS Data Exchange is a piece of data. The asset can be a structured data file, an image file, or some other data file that can be stored as an S3 object, or an Amazon Redshift datashare (Preview). When you create an import job for your files, you create an asset in AWS Data Exchange for each of those files.</p>
+ * <p>An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a means of fulfilling data (Amazon Redshift datashare or Amazon API Gateway API, AWS Lake Formation data permission, or Amazon S3 data access). The asset can be a structured data file, an image file, or some other data file that can be stored as an Amazon S3 object, an Amazon API Gateway API, or an Amazon Redshift datashare, an AWS Lake Formation data permission, or an Amazon S3 data access. When you create an import job for your files, API Gateway APIs, Amazon Redshift datashares, AWS Lake Formation data permission, or Amazon S3 data access, you create an asset in AWS Data Exchange.</p>
+ * @public
  */
 export interface AssetEntry {
   /**
    * <p>The ARN for the asset.</p>
+   * @public
    */
   Arn: string | undefined;
 
   /**
-   * <p>Information about the asset.</p>
+   * <p>Details about the asset.</p>
+   * @public
    */
   AssetDetails: AssetDetails | undefined;
 
   /**
    * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  AssetType: AssetType | string | undefined;
+  AssetType: AssetType | undefined;
 
   /**
    * <p>The date and time that the asset was created, in ISO 8601 format.</p>
+   * @public
    */
   CreatedAt: Date | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this asset.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for the asset.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
-   * <p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>
+   * <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in LF-tag policy" or "Table(s) included in LF-tag policy" are used as the asset name.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this asset.</p>
+   * @public
    */
   RevisionId: string | undefined;
 
   /**
    * <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
+   * @public
    */
   UpdatedAt: Date | undefined;
 }
 
-export namespace AssetEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssetEntry): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The source of the assets.</p>
+ * @public
  */
 export interface AssetSourceEntry {
   /**
-   * <p>The S3 bucket that's part of the source of the asset.</p>
+   * <p>The Amazon S3 bucket that's part of the source of the asset.</p>
+   * @public
    */
   Bucket: string | undefined;
 
   /**
    * <p>The name of the object in Amazon S3 for the asset.</p>
+   * @public
    */
   Key: string | undefined;
 }
 
-export namespace AssetSourceEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssetSourceEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelJobRequest {
   /**
    * <p>The unique identifier for a job.</p>
+   * @public
    */
   JobId: string | undefined;
 }
 
-export namespace CancelJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ResourceType {
-  ASSET = "ASSET",
-  DATA_SET = "DATA_SET",
-  EVENT_ACTION = "EVENT_ACTION",
-  JOB = "JOB",
-  REVISION = "REVISION",
-}
-
 /**
- * <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
+export interface CreateDataGrantRequest {
   /**
-   * <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
+   * <p>The name of the data grant.</p>
+   * @public
    */
-  Message: string | undefined;
+  Name: string | undefined;
 
   /**
-   * <p>The unique identifier for the resource with the conflict.</p>
+   * <p>The distribution scope of the data grant.</p>
+   * @public
    */
-  ResourceId?: string;
+  GrantDistributionScope: GrantDistributionScope | undefined;
 
   /**
-   * <p>The type of the resource with the conflict.</p>
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
-}
+  ReceiverPrincipal: string | undefined;
 
-export namespace ConflictException {
   /**
-   * @internal
+   * <p>The ID of the data set used to create the data grant.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
+  SourceDataSetId: string | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The description of the data grant.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The tags to add to the data grant. A tag is a key-value pair.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * An exception occurred with the service.
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
+export interface CreateDataGrantResponse {
   /**
-   * The message identifying the service exception that occurred.
+   * <p>The name of the data grant.</p>
+   * @public
    */
-  Message: string | undefined;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The resource couldn't be found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  /**
-   * <p>The resource couldn't be found.</p>
-   */
-  Message: string | undefined;
+  Name: string | undefined;
 
   /**
-   * <p>The unique identifier for the resource that couldn't be found.</p>
+   * <p>The Amazon Web Services account ID of the data grant sender.</p>
+   * @public
    */
-  ResourceId?: string;
+  SenderPrincipal: string | undefined;
 
   /**
-   * <p>The type of resource that couldn't be found.</p>
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The limit on the number of requests per second was exceeded.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  /**
-   * <p>The limit on the number of requests per second was exceeded.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-export enum ExceptionCause {
-  InsufficientS3BucketPolicy = "InsufficientS3BucketPolicy",
-  S3AccessDenied = "S3AccessDenied",
-}
-
-/**
- * <p>The request was invalid.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  /**
-   * <p>The message that informs you about what was invalid about the request.</p>
-   */
-  Message: string | undefined;
+  ReceiverPrincipal: string | undefined;
 
   /**
-   * <p>The message that informs you about what the exception was.</p>
+   * <p>The description of the data grant.</p>
+   * @public
    */
-  ExceptionCause?: ExceptionCause | string;
-}
+  Description?: string | undefined;
 
-export namespace ValidationException {
   /**
-   * @internal
+   * <p>The acceptance state of the data grant.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
+  AcceptanceState: DataGrantAcceptanceState | undefined;
 
-export enum Code {
-  ACCESS_DENIED_EXCEPTION = "ACCESS_DENIED_EXCEPTION",
-  INTERNAL_SERVER_EXCEPTION = "INTERNAL_SERVER_EXCEPTION",
-  MALWARE_DETECTED = "MALWARE_DETECTED",
-  MALWARE_SCAN_ENCRYPTED_FILE = "MALWARE_SCAN_ENCRYPTED_FILE",
-  RESOURCE_NOT_FOUND_EXCEPTION = "RESOURCE_NOT_FOUND_EXCEPTION",
-  SERVICE_QUOTA_EXCEEDED_EXCEPTION = "SERVICE_QUOTA_EXCEEDED_EXCEPTION",
-  VALIDATION_EXCEPTION = "VALIDATION_EXCEPTION",
+  /**
+   * <p>The timestamp of when the data grant was accepted.</p>
+   * @public
+   */
+  AcceptedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The distribution scope for the data grant.</p>
+   * @public
+   */
+  GrantDistributionScope: GrantDistributionScope | undefined;
+
+  /**
+   * <p>The ID of the data set associated to the data grant.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data set used to create the data grant.</p>
+   * @public
+   */
+  SourceDataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data grant.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the data grant.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+
+  /**
+   * <p>The tags associated to the data grant. A tag is a key-value pair.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>The request body for CreateDataSet.</p>
+ * @public
  */
 export interface CreateDataSetRequest {
   /**
    * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  AssetType: AssetType | string | undefined;
+  AssetType: AssetType | undefined;
 
   /**
    * <p>A description for the data set. This value can be up to 16,348 characters long.</p>
+   * @public
    */
   Description: string | undefined;
 
   /**
    * <p>The name of the data set.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>A data set tag is an optional label that you can assign to a data set when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDataSetRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum Origin {
-  ENTITLED = "ENTITLED",
-  OWNED = "OWNED",
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>Information about the origin of the data set.</p>
+ * <p>Details about the origin of the data set.</p>
+ * @public
  */
 export interface OriginDetails {
   /**
    * <p>The product ID of the origin of the data set.</p>
+   * @public
    */
-  ProductId: string | undefined;
-}
-
-export namespace OriginDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OriginDetails): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateDataSetResponse {
-  /**
-   * <p>The ARN for the data set.</p>
-   */
-  Arn?: string;
+  ProductId?: string | undefined;
 
   /**
-   * <p>The type of asset that is added to a data set.</p>
+   * <p>The ID of the data grant.</p>
+   * @public
    */
-  AssetType?: AssetType | string;
-
-  /**
-   * <p>The date and time that the data set was created, in ISO 8601 format.</p>
-   */
-  CreatedAt?: Date;
-
-  /**
-   * <p>The description for the data set.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The unique identifier for the data set.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The name of the data set.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
-   */
-  Origin?: Origin | string;
-
-  /**
-   * <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
-   */
-  OriginDetails?: OriginDetails;
-
-  /**
-   * <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
-   */
-  SourceId?: string;
-
-  /**
-   * <p>The tags for the data set.</p>
-   */
-  Tags?: { [key: string]: string };
-
-  /**
-   * <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
-   */
-  UpdatedAt?: Date;
-}
-
-export namespace CreateDataSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDataSetResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum LimitName {
-  Amazon_Redshift_datashare_assets_per_import_job_from_Redshift = "Amazon Redshift datashare assets per import job from Redshift",
-  Amazon_Redshift_datashare_assets_per_revision = "Amazon Redshift datashare assets per revision",
-  Asset_per_export_job_from_Amazon_S3 = "Asset per export job from Amazon S3",
-  Asset_size_in_GB = "Asset size in GB",
-  Assets_per_import_job_from_Amazon_S3 = "Assets per import job from Amazon S3",
-  Assets_per_revision = "Assets per revision",
-  Auto_export_event_actions_per_data_set = "Auto export event actions per data set",
-  Concurrent_in_progress_jobs_to_export_assets_to_Amazon_S3 = "Concurrent in progress jobs to export assets to Amazon S3",
-  Concurrent_in_progress_jobs_to_export_assets_to_a_signed_URL = "Concurrent in progress jobs to export assets to a signed URL",
-  Concurrent_in_progress_jobs_to_export_revisions_to_Amazon_S3 = "Concurrent in progress jobs to export revisions to Amazon S3",
-  Concurrent_in_progress_jobs_to_import_assets_from_Amazon_Redshift_datashares = "Concurrent in progress jobs to import assets from Amazon Redshift datashares",
-  Concurrent_in_progress_jobs_to_import_assets_from_Amazon_S3 = "Concurrent in progress jobs to import assets from Amazon S3",
-  Concurrent_in_progress_jobs_to_import_assets_from_a_signed_URL = "Concurrent in progress jobs to import assets from a signed URL",
-  Data_sets_per_account = "Data sets per account",
-  Data_sets_per_product = "Data sets per product",
-  Event_actions_per_account = "Event actions per account",
-  Products_per_account = "Products per account",
-  Revisions_per_Amazon_Redshift_datashare_data_set = "Revisions per Amazon Redshift datashare data set",
-  Revisions_per_data_set = "Revisions per data set",
+  DataGrantId?: string | undefined;
 }
 
 /**
- * <p>The request has exceeded the quotas imposed by the service.</p>
+ * @public
  */
-export interface ServiceLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceLimitExceededException";
-  $fault: "client";
+export interface CreateDataSetResponse {
   /**
-   * <p>The name of the quota that was exceeded.</p>
+   * <p>The ARN for the data set.</p>
+   * @public
    */
-  LimitName?: LimitName | string;
+  Arn?: string | undefined;
 
   /**
-   * <p>The maximum value for the service-specific limit.</p>
+   * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  LimitValue?: number;
+  AssetType?: AssetType | undefined;
 
   /**
-   * <p>The request has exceeded the quotas imposed by the service.</p>
+   * <p>The date and time that the data set was created, in ISO 8601 format.</p>
+   * @public
    */
-  Message: string | undefined;
-}
+  CreatedAt?: Date | undefined;
 
-export namespace ServiceLimitExceededException {
   /**
-   * @internal
+   * <p>The description for the data set.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ServiceLimitExceededException): any => ({
-    ...obj,
-  });
+  Description?: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data set.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The name of the data set.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
+   * @public
+   */
+  Origin?: Origin | undefined;
+
+  /**
+   * <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
+   * @public
+   */
+  OriginDetails?: OriginDetails | undefined;
+
+  /**
+   * <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
+   * @public
+   */
+  SourceId?: string | undefined;
+
+  /**
+   * <p>The tags for the data set.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
 }
 
 /**
  * <p>Information about the published revision.</p>
+ * @public
  */
 export interface RevisionPublished {
   /**
    * <p>The data set ID of the published revision.</p>
+   * @public
    */
   DataSetId: string | undefined;
 }
 
-export namespace RevisionPublished {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RevisionPublished): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>What occurs to start an action.</p>
+ * @public
  */
 export interface Event {
   /**
    * <p>What occurs to start the revision publish action.</p>
+   * @public
    */
-  RevisionPublished?: RevisionPublished;
-}
-
-export namespace Event {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Event): any => ({
-    ...obj,
-  });
+  RevisionPublished?: RevisionPublished | undefined;
 }
 
 /**
- * <p>The request body for CreateEventAction.</p>
+ * @public
  */
 export interface CreateEventActionRequest {
   /**
    * <p>What occurs after a certain event.</p>
+   * @public
    */
   Action: Action | undefined;
 
   /**
    * <p>What occurs to start an action.</p>
+   * @public
    */
   Event: Event | undefined;
-}
 
-export namespace CreateEventActionRequest {
   /**
-   * @internal
+   * <p>Key-value pairs that you can associate with the event action.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateEventActionRequest): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateEventActionResponse {
   /**
    * <p>What occurs after a certain event.</p>
+   * @public
    */
-  Action?: Action;
+  Action?: Action | undefined;
 
   /**
    * <p>The ARN for the event action.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The date and time that the event action was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>What occurs to start an action.</p>
+   * @public
    */
-  Event?: Event;
+  Event?: Event | undefined;
 
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
+
+  /**
+   * <p>The tags for the event action.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
+  UpdatedAt?: Date | undefined;
 }
 
-export namespace CreateEventActionResponse {
+/**
+ * <p>Source details for an Amazon S3 data access asset.</p>
+ * @public
+ */
+export interface S3DataAccessAssetSourceEntry {
   /**
-   * @internal
+   * <p>The Amazon S3 bucket used for hosting shared data in the Amazon S3 data access.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateEventActionResponse): any => ({
-    ...obj,
-  });
+  Bucket: string | undefined;
+
+  /**
+   * <p>Organizes Amazon S3 asset key prefixes stored in an Amazon S3 bucket.</p>
+   * @public
+   */
+  KeyPrefixes?: string[] | undefined;
+
+  /**
+   * <p>The keys used to create the Amazon S3 data access.</p>
+   * @public
+   */
+  Keys?: string[] | undefined;
+
+  /**
+   * <p>List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to encrypt S3 objects being shared in this S3 Data Access asset.</p>
+   * @public
+   */
+  KmsKeysToGrant?: KmsKeyToGrant[] | undefined;
+}
+
+/**
+ * <p>Details of the operation to create an Amazon S3 data access from an S3 bucket.</p>
+ * @public
+ */
+export interface CreateS3DataAccessFromS3BucketRequestDetails {
+  /**
+   * <p>Details about the S3 data access source asset.</p>
+   * @public
+   */
+  AssetSource: S3DataAccessAssetSourceEntry | undefined;
+
+  /**
+   * <p>The unique identifier for the data set associated with the creation of this Amazon S3 data access.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The unique identifier for a revision.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
 }
 
 /**
  * <p>Details of the operation to be performed by the job.</p>
+ * @public
  */
 export interface ExportAssetsToS3RequestDetails {
   /**
    * <p>The destination for the asset.</p>
+   * @public
    */
   AssetDestinations: AssetDestinationEntry[] | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this export job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>Encryption configuration for the export job.</p>
+   * @public
    */
-  Encryption?: ExportServerSideEncryption;
+  Encryption?: ExportServerSideEncryption | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this export request.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ExportAssetsToS3RequestDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportAssetsToS3RequestDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Details of the operation to be performed by the job.</p>
+ * @public
  */
 export interface ExportAssetToSignedUrlRequestDetails {
   /**
    * <p>The unique identifier for the asset that is exported to a signed URL.</p>
+   * @public
    */
   AssetId: string | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this export job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this export request.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ExportAssetToSignedUrlRequestDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportAssetToSignedUrlRequestDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The destination where the assets in the revision will be exported.</p>
+ * @public
  */
 export interface RevisionDestinationEntry {
   /**
-   * <p>The S3 bucket that is the destination for the assets in the revision.</p>
+   * <p>The Amazon S3 bucket that is the destination for the assets in the revision.</p>
+   * @public
    */
   Bucket: string | undefined;
 
   /**
    * <p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
+   * @public
    */
-  KeyPattern?: string;
+  KeyPattern?: string | undefined;
 
   /**
    * <p>The unique identifier for the revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace RevisionDestinationEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RevisionDestinationEntry): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Details of the operation to be performed by the job.</p>
+ * @public
  */
 export interface ExportRevisionsToS3RequestDetails {
   /**
    * <p>The unique identifier for the data set associated with this export job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>Encryption configuration for the export job.</p>
+   * @public
    */
-  Encryption?: ExportServerSideEncryption;
+  Encryption?: ExportServerSideEncryption | undefined;
 
   /**
    * <p>The destination for the revision.</p>
+   * @public
    */
   RevisionDestinations: RevisionDestinationEntry[] | undefined;
 }
 
-export namespace ExportRevisionsToS3RequestDetails {
+/**
+ * <p>The request details.</p>
+ * @public
+ */
+export interface ImportAssetFromApiGatewayApiRequestDetails {
   /**
-   * @internal
+   * <p>The API description. Markdown supported.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ExportRevisionsToS3RequestDetails): any => ({
-    ...obj,
-  });
+  ApiDescription?: string | undefined;
+
+  /**
+   * <p>The API Gateway API ID.</p>
+   * @public
+   */
+  ApiId: string | undefined;
+
+  /**
+   * <p>The API Gateway API key.</p>
+   * @public
+   */
+  ApiKey?: string | undefined;
+
+  /**
+   * <p>The API name.</p>
+   * @public
+   */
+  ApiName: string | undefined;
+
+  /**
+   * <p>The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It is used to ensure the integrity of the file.</p>
+   * @public
+   */
+  ApiSpecificationMd5Hash: string | undefined;
+
+  /**
+   * <p>The data set ID.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The protocol type.</p>
+   * @public
+   */
+  ProtocolType: ProtocolType | undefined;
+
+  /**
+   * <p>The revision ID.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
+
+  /**
+   * <p>The API stage.</p>
+   * @public
+   */
+  Stage: string | undefined;
 }
 
 /**
  * <p>Details of the operation to be performed by the job.</p>
+ * @public
  */
 export interface ImportAssetFromSignedUrlRequestDetails {
   /**
-   * <p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name.</p>
+   * <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name.</p>
+   * @public
    */
   AssetName: string | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.</p>
+   * @public
    */
   Md5Hash: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this import request.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ImportAssetFromSignedUrlRequestDetails {
+/**
+ * <p>The LF-tag policy and permissions for database resources.</p>
+ * @public
+ */
+export interface DatabaseLFTagPolicyAndPermissions {
   /**
-   * @internal
+   * <p>A list of LF-tag conditions that apply to database resources.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ImportAssetFromSignedUrlRequestDetails): any => ({
-    ...obj,
-  });
+  Expression: LFTag[] | undefined;
+
+  /**
+   * <p>The permissions granted to subscribers on database resources.</p>
+   * @public
+   */
+  Permissions: DatabaseLFTagPolicyPermission[] | undefined;
 }
 
 /**
- * <p>The source of the Amazon Redshift datashare asset.</p>
+ * <p>The LF-tag policy and permissions that apply to table resources.</p>
+ * @public
  */
-export interface RedshiftDataShareAssetSourceEntry {
+export interface TableLFTagPolicyAndPermissions {
   /**
-   * The Amazon Resource Name (ARN) of the datashare asset.
+   * <p>A list of LF-tag conditions that apply to table resources.</p>
+   * @public
    */
-  DataShareArn: string | undefined;
-}
+  Expression: LFTag[] | undefined;
 
-export namespace RedshiftDataShareAssetSourceEntry {
   /**
-   * @internal
+   * <p>The permissions granted to subscribers on table resources.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RedshiftDataShareAssetSourceEntry): any => ({
-    ...obj,
-  });
+  Permissions: TableTagPolicyLFPermission[] | undefined;
 }
 
 /**
- * Details from an import from Amazon Redshift datashare request.
+ * <p>Details about the assets imported from an AWS Lake Formation tag policy request.</p>
+ * @public
  */
-export interface ImportAssetsFromRedshiftDataSharesRequestDetails {
+export interface ImportAssetsFromLakeFormationTagPolicyRequestDetails {
   /**
-   * A list of Amazon Redshift datashare assets.
+   * <p>The identifier for the AWS Glue Data Catalog.</p>
+   * @public
    */
-  AssetSources: RedshiftDataShareAssetSourceEntry[] | undefined;
+  CatalogId: string | undefined;
 
   /**
-   * The unique identifier for the data set associated with this import job.
+   * <p>A structure for the database object.</p>
+   * @public
+   */
+  Database?: DatabaseLFTagPolicyAndPermissions | undefined;
+
+  /**
+   * <p>A structure for the table object.</p>
+   * @public
+   */
+  Table?: TableLFTagPolicyAndPermissions | undefined;
+
+  /**
+   * <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke permissions of subscribers to AWS Lake Formation data permissions.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
-   * The unique identifier for the revision associated with this import job.
+   * <p>The unique identifier for the revision associated with this import job.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ImportAssetsFromRedshiftDataSharesRequestDetails {
+/**
+ * <p>The source of the Amazon Redshift datashare asset.</p>
+ * @public
+ */
+export interface RedshiftDataShareAssetSourceEntry {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the datashare asset.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ImportAssetsFromRedshiftDataSharesRequestDetails): any => ({
-    ...obj,
-  });
+  DataShareArn: string | undefined;
+}
+
+/**
+ * <p>Details from an import from Amazon Redshift datashare request.</p>
+ * @public
+ */
+export interface ImportAssetsFromRedshiftDataSharesRequestDetails {
+  /**
+   * <p>A list of Amazon Redshift datashare assets.</p>
+   * @public
+   */
+  AssetSources: RedshiftDataShareAssetSourceEntry[] | undefined;
+
+  /**
+   * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the revision associated with this import job.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
 }
 
 /**
  * <p>Details of the operation to be performed by the job.</p>
+ * @public
  */
 export interface ImportAssetsFromS3RequestDetails {
   /**
-   * <p>Is a list of S3 bucket and object key pairs.</p>
+   * <p>Is a list of Amazon S3 bucket and object key pairs.</p>
+   * @public
    */
   AssetSources: AssetSourceEntry[] | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this import request.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ImportAssetsFromS3RequestDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImportAssetsFromS3RequestDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The details for the request.</p>
+ * @public
  */
 export interface RequestDetails {
   /**
    * <p>Details about the export to signed URL request.</p>
+   * @public
    */
-  ExportAssetToSignedUrl?: ExportAssetToSignedUrlRequestDetails;
+  ExportAssetToSignedUrl?: ExportAssetToSignedUrlRequestDetails | undefined;
 
   /**
    * <p>Details about the export to Amazon S3 request.</p>
+   * @public
    */
-  ExportAssetsToS3?: ExportAssetsToS3RequestDetails;
+  ExportAssetsToS3?: ExportAssetsToS3RequestDetails | undefined;
 
   /**
    * <p>Details about the export to Amazon S3 request.</p>
+   * @public
    */
-  ExportRevisionsToS3?: ExportRevisionsToS3RequestDetails;
-
-  /**
-   * <p>Details about the import from signed URL request.</p>
-   */
-  ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlRequestDetails;
+  ExportRevisionsToS3?: ExportRevisionsToS3RequestDetails | undefined;
 
   /**
    * <p>Details about the import from Amazon S3 request.</p>
+   * @public
    */
-  ImportAssetsFromS3?: ImportAssetsFromS3RequestDetails;
+  ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlRequestDetails | undefined;
+
+  /**
+   * <p>Details about the import asset from API Gateway API request.</p>
+   * @public
+   */
+  ImportAssetsFromS3?: ImportAssetsFromS3RequestDetails | undefined;
 
   /**
    * <p>Details from an import from Amazon Redshift datashare request.</p>
+   * @public
    */
-  ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesRequestDetails;
-}
+  ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesRequestDetails | undefined;
 
-export namespace RequestDetails {
   /**
-   * @internal
+   * <p>Details about the import from signed URL request.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RequestDetails): any => ({
-    ...obj,
-  });
-}
+  ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiRequestDetails | undefined;
 
-export enum Type {
-  EXPORT_ASSETS_TO_S3 = "EXPORT_ASSETS_TO_S3",
-  EXPORT_ASSET_TO_SIGNED_URL = "EXPORT_ASSET_TO_SIGNED_URL",
-  EXPORT_REVISIONS_TO_S3 = "EXPORT_REVISIONS_TO_S3",
-  IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES = "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES",
-  IMPORT_ASSETS_FROM_S3 = "IMPORT_ASSETS_FROM_S3",
-  IMPORT_ASSET_FROM_SIGNED_URL = "IMPORT_ASSET_FROM_SIGNED_URL",
+  /**
+   * <p>Details of the request to create S3 data access from the Amazon S3 bucket.</p>
+   * @public
+   */
+  CreateS3DataAccessFromS3Bucket?: CreateS3DataAccessFromS3BucketRequestDetails | undefined;
+
+  /**
+   * <p>Request details for the ImportAssetsFromLakeFormationTagPolicy job.</p>
+   * @public
+   */
+  ImportAssetsFromLakeFormationTagPolicy?: ImportAssetsFromLakeFormationTagPolicyRequestDetails | undefined;
 }
 
 /**
- * <p>The request body for CreateJob.</p>
+ * @public
  */
 export interface CreateJobRequest {
   /**
+   * <p>The configuration for the asset, including tags to be applied to assets created by the job.</p>
+   * @public
+   */
+  AssetConfiguration?: AssetConfiguration | undefined;
+
+  /**
    * <p>The details for the CreateJob request.</p>
+   * @public
    */
   Details: RequestDetails | undefined;
 
   /**
    * <p>The type of job to be created.</p>
+   * @public
    */
-  Type: Type | string | undefined;
+  Type: Type | undefined;
 }
 
-export namespace CreateJobRequest {
+/**
+ * <p>Details about the response of the operation to create an S3 data access from an S3 bucket.</p>
+ * @public
+ */
+export interface CreateS3DataAccessFromS3BucketResponseDetails {
   /**
-   * @internal
+   * <p>Details about the asset source from an Amazon S3 bucket.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateJobRequest): any => ({
-    ...obj,
-  });
+  AssetSource: S3DataAccessAssetSourceEntry | undefined;
+
+  /**
+   * <p>The unique identifier for this data set.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the revision.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
 }
 
 /**
  * <p>Details about the export to Amazon S3 response.</p>
+ * @public
  */
 export interface ExportAssetsToS3ResponseDetails {
   /**
    * <p>The destination in Amazon S3 where the asset is exported.</p>
+   * @public
    */
   AssetDestinations: AssetDestinationEntry[] | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this export job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>Encryption configuration of the export job.</p>
+   * @public
    */
-  Encryption?: ExportServerSideEncryption;
+  Encryption?: ExportServerSideEncryption | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this export response.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ExportAssetsToS3ResponseDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportAssetsToS3ResponseDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The details of the export to signed URL response.</p>
+ * @public
  */
 export interface ExportAssetToSignedUrlResponseDetails {
   /**
    * <p>The unique identifier for the asset associated with this export job.</p>
+   * @public
    */
   AssetId: string | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this export job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this export response.</p>
+   * @public
    */
   RevisionId: string | undefined;
 
   /**
    * <p>The signed URL for the export request.</p>
+   * @public
    */
-  SignedUrl?: string;
+  SignedUrl?: string | undefined;
 
   /**
    * <p>The date and time that the signed URL expires, in ISO 8601 format.</p>
+   * @public
    */
-  SignedUrlExpiresAt?: Date;
-}
-
-export namespace ExportAssetToSignedUrlResponseDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportAssetToSignedUrlResponseDetails): any => ({
-    ...obj,
-  });
+  SignedUrlExpiresAt?: Date | undefined;
 }
 
 /**
  * <p>Details about the export revisions to Amazon S3 response.</p>
+ * @public
  */
 export interface ExportRevisionsToS3ResponseDetails {
   /**
    * <p>The unique identifier for the data set associated with this export job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>Encryption configuration of the export job.</p>
+   * @public
    */
-  Encryption?: ExportServerSideEncryption;
+  Encryption?: ExportServerSideEncryption | undefined;
 
   /**
    * <p>The destination in Amazon S3 where the revision is exported.</p>
+   * @public
    */
   RevisionDestinations: RevisionDestinationEntry[] | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the event action.</p>
+   * @public
    */
-  EventActionArn?: string;
+  EventActionArn?: string | undefined;
 }
 
-export namespace ExportRevisionsToS3ResponseDetails {
+/**
+ * <p>The response details.</p>
+ * @public
+ */
+export interface ImportAssetFromApiGatewayApiResponseDetails {
   /**
-   * @internal
+   * <p>The API description.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ExportRevisionsToS3ResponseDetails): any => ({
-    ...obj,
-  });
+  ApiDescription?: string | undefined;
+
+  /**
+   * <p>The API ID.</p>
+   * @public
+   */
+  ApiId: string | undefined;
+
+  /**
+   * <p>The API key.</p>
+   * @public
+   */
+  ApiKey?: string | undefined;
+
+  /**
+   * <p>The API name.</p>
+   * @public
+   */
+  ApiName: string | undefined;
+
+  /**
+   * <p>The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of the API at that location.</p>
+   * @public
+   */
+  ApiSpecificationMd5Hash: string | undefined;
+
+  /**
+   * <p>The upload URL of the API specification.</p>
+   * @public
+   */
+  ApiSpecificationUploadUrl: string | undefined;
+
+  /**
+   * <p>The date and time that the upload URL expires, in ISO 8601 format.</p>
+   * @public
+   */
+  ApiSpecificationUploadUrlExpiresAt: Date | undefined;
+
+  /**
+   * <p>The data set ID.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The protocol type.</p>
+   * @public
+   */
+  ProtocolType: ProtocolType | undefined;
+
+  /**
+   * <p>The revision ID.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
+
+  /**
+   * <p>The API stage.</p>
+   * @public
+   */
+  Stage: string | undefined;
 }
 
 /**
  * <p>The details in the response for an import request, including the signed URL and other information.</p>
+ * @public
  */
 export interface ImportAssetFromSignedUrlResponseDetails {
   /**
    * <p>The name for the asset associated with this import job.</p>
+   * @public
    */
   AssetName: string | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.</p>
+   * @public
    */
-  Md5Hash?: string;
+  Md5Hash?: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this import response.</p>
+   * @public
    */
   RevisionId: string | undefined;
 
   /**
    * <p>The signed URL.</p>
+   * @public
    */
-  SignedUrl?: string;
+  SignedUrl?: string | undefined;
 
   /**
    * <p>The time and date at which the signed URL expires, in ISO 8601 format.</p>
+   * @public
    */
-  SignedUrlExpiresAt?: Date;
-}
-
-export namespace ImportAssetFromSignedUrlResponseDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImportAssetFromSignedUrlResponseDetails): any => ({
-    ...obj,
-  });
+  SignedUrlExpiresAt?: Date | undefined;
 }
 
 /**
- * Details from an import from Amazon Redshift datashare response.
+ * <p>Details from an import AWS Lake Formation tag policy job response.</p>
+ * @public
  */
-export interface ImportAssetsFromRedshiftDataSharesResponseDetails {
+export interface ImportAssetsFromLakeFormationTagPolicyResponseDetails {
   /**
-   * A list of Amazon Redshift datashare asset sources.
+   * <p>The identifier for the AWS Glue Data Catalog.</p>
+   * @public
    */
-  AssetSources: RedshiftDataShareAssetSourceEntry[] | undefined;
+  CatalogId: string | undefined;
 
   /**
-   * The unique identifier for the data set associated with this import job.
+   * <p>A structure for the database object.</p>
+   * @public
+   */
+  Database?: DatabaseLFTagPolicyAndPermissions | undefined;
+
+  /**
+   * <p>A structure for the table object.</p>
+   * @public
+   */
+  Table?: TableLFTagPolicyAndPermissions | undefined;
+
+  /**
+   * <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke permissions to AWS Lake Formation data permissions.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
-   * The unique identifier for the revision associated with this import job.
+   * <p>The unique identifier for the revision associated with this import job.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ImportAssetsFromRedshiftDataSharesResponseDetails {
+/**
+ * <p>Details from an import from Amazon Redshift datashare response.</p>
+ * @public
+ */
+export interface ImportAssetsFromRedshiftDataSharesResponseDetails {
   /**
-   * @internal
+   * <p>A list of Amazon Redshift datashare asset sources.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ImportAssetsFromRedshiftDataSharesResponseDetails): any => ({
-    ...obj,
-  });
+  AssetSources: RedshiftDataShareAssetSourceEntry[] | undefined;
+
+  /**
+   * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the revision associated with this import job.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
 }
 
 /**
  * <p>Details from an import from Amazon S3 response.</p>
+ * @public
  */
 export interface ImportAssetsFromS3ResponseDetails {
   /**
    * <p>Is a list of Amazon S3 bucket and object key pairs.</p>
+   * @public
    */
   AssetSources: AssetSourceEntry[] | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this import job.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this import response.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ImportAssetsFromS3ResponseDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImportAssetsFromS3ResponseDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Details for the response.</p>
+ * @public
  */
 export interface ResponseDetails {
   /**
    * <p>Details for the export to signed URL response.</p>
+   * @public
    */
-  ExportAssetToSignedUrl?: ExportAssetToSignedUrlResponseDetails;
+  ExportAssetToSignedUrl?: ExportAssetToSignedUrlResponseDetails | undefined;
 
   /**
    * <p>Details for the export to Amazon S3 response.</p>
+   * @public
    */
-  ExportAssetsToS3?: ExportAssetsToS3ResponseDetails;
+  ExportAssetsToS3?: ExportAssetsToS3ResponseDetails | undefined;
 
   /**
    * <p>Details for the export revisions to Amazon S3 response.</p>
+   * @public
    */
-  ExportRevisionsToS3?: ExportRevisionsToS3ResponseDetails;
+  ExportRevisionsToS3?: ExportRevisionsToS3ResponseDetails | undefined;
 
   /**
    * <p>Details for the import from signed URL response.</p>
+   * @public
    */
-  ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlResponseDetails;
+  ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlResponseDetails | undefined;
 
   /**
    * <p>Details for the import from Amazon S3 response.</p>
+   * @public
    */
-  ImportAssetsFromS3?: ImportAssetsFromS3ResponseDetails;
+  ImportAssetsFromS3?: ImportAssetsFromS3ResponseDetails | undefined;
 
   /**
    * <p>Details from an import from Amazon Redshift datashare response.</p>
+   * @public
    */
-  ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesResponseDetails;
-}
+  ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesResponseDetails | undefined;
 
-export namespace ResponseDetails {
   /**
-   * @internal
+   * <p>The response details.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResponseDetails): any => ({
-    ...obj,
-  });
+  ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiResponseDetails | undefined;
+
+  /**
+   * <p>Response details from the CreateS3DataAccessFromS3Bucket job.</p>
+   * @public
+   */
+  CreateS3DataAccessFromS3Bucket?: CreateS3DataAccessFromS3BucketResponseDetails | undefined;
+
+  /**
+   * <p>Response details from the ImportAssetsFromLakeFormationTagPolicy job.</p>
+   * @public
+   */
+  ImportAssetsFromLakeFormationTagPolicy?: ImportAssetsFromLakeFormationTagPolicyResponseDetails | undefined;
 }
 
 /**
- * <p>Information about the job error.</p>
+ * <p>Details about the job error.</p>
+ * @public
  */
 export interface ImportAssetFromSignedUrlJobErrorDetails {
   /**
-   * <p>Information about the job error.</p>
+   * <p>Details about the job error.</p>
+   * @public
    */
   AssetName: string | undefined;
 }
 
-export namespace ImportAssetFromSignedUrlJobErrorDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImportAssetFromSignedUrlJobErrorDetails): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Information about the job error.</p>
+ * @public
  */
 export interface Details {
   /**
    * <p>Information about the job error.</p>
+   * @public
    */
-  ImportAssetFromSignedUrlJobErrorDetails?: ImportAssetFromSignedUrlJobErrorDetails;
+  ImportAssetFromSignedUrlJobErrorDetails?: ImportAssetFromSignedUrlJobErrorDetails | undefined;
 
   /**
-   * <p>Information about the job error.</p>
+   * <p>Details about the job error.</p>
+   * @public
    */
-  ImportAssetsFromS3JobErrorDetails?: AssetSourceEntry[];
-}
-
-export namespace Details {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Details): any => ({
-    ...obj,
-  });
-}
-
-export enum JobErrorLimitName {
-  Amazon_Redshift_datashare_assets_per_revision = "Amazon Redshift datashare assets per revision",
-  Asset_size_in_GB = "Asset size in GB",
-  Assets_per_revision = "Assets per revision",
-}
-
-export enum JobErrorResourceTypes {
-  ASSET = "ASSET",
-  DATA_SET = "DATA_SET",
-  REVISION = "REVISION",
+  ImportAssetsFromS3JobErrorDetails?: AssetSourceEntry[] | undefined;
 }
 
 /**
- * An error that occurred with the job request.
+ * <p>An error that occurred with the job request.</p>
+ * @public
  */
 export interface JobError {
   /**
-   * The code for the job error.
+   * <p>The code for the job error.</p>
+   * @public
    */
-  Code: Code | string | undefined;
+  Code: Code | undefined;
 
   /**
    * <p>The details about the job error.</p>
+   * @public
    */
-  Details?: Details;
+  Details?: Details | undefined;
 
   /**
    * <p>The name of the limit that was reached.</p>
+   * @public
    */
-  LimitName?: JobErrorLimitName | string;
+  LimitName?: JobErrorLimitName | undefined;
 
   /**
-   * The value of the exceeded limit.
+   * <p>The value of the exceeded limit.</p>
+   * @public
    */
-  LimitValue?: number;
+  LimitValue?: number | undefined;
 
   /**
-   * The message related to the job error.
+   * <p>The message related to the job error.</p>
+   * @public
    */
   Message: string | undefined;
 
   /**
-   * The unique identifier for the resource related to the error.
+   * <p>The unique identifier for the resource related to the error.</p>
+   * @public
    */
-  ResourceId?: string;
+  ResourceId?: string | undefined;
 
   /**
-   * The type of resource related to the error.
+   * <p>The type of resource related to the error.</p>
+   * @public
    */
-  ResourceType?: JobErrorResourceTypes | string;
-}
-
-export namespace JobError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JobError): any => ({
-    ...obj,
-  });
-}
-
-export enum State {
-  CANCELLED = "CANCELLED",
-  COMPLETED = "COMPLETED",
-  ERROR = "ERROR",
-  IN_PROGRESS = "IN_PROGRESS",
-  TIMED_OUT = "TIMED_OUT",
-  WAITING = "WAITING",
-}
-
-export interface CreateJobResponse {
-  /**
-   * <p>The ARN for the job.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The date and time that the job was created, in ISO 8601 format.</p>
-   */
-  CreatedAt?: Date;
-
-  /**
-   * <p>Details about the job.</p>
-   */
-  Details?: ResponseDetails;
-
-  /**
-   * <p>The errors associated with jobs.</p>
-   */
-  Errors?: JobError[];
-
-  /**
-   * <p>The unique identifier for the job.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The state of the job.</p>
-   */
-  State?: State | string;
-
-  /**
-   * <p>The job type.</p>
-   */
-  Type?: Type | string;
-
-  /**
-   * <p>The date and time that the job was last updated, in ISO 8601 format.</p>
-   */
-  UpdatedAt?: Date;
-}
-
-export namespace CreateJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateJobResponse): any => ({
-    ...obj,
-  });
+  ResourceType?: JobErrorResourceTypes | undefined;
 }
 
 /**
- * <p>The request body for CreateRevision.</p>
+ * @public
+ */
+export interface CreateJobResponse {
+  /**
+   * <p>The ARN for the job.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The configuration for the asset, including tags applied to assets created by the job.</p>
+   * @public
+   */
+  AssetConfiguration?: AssetConfiguration | undefined;
+
+  /**
+   * <p>The date and time that the job was created, in ISO 8601 format.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>Details about the job.</p>
+   * @public
+   */
+  Details?: ResponseDetails | undefined;
+
+  /**
+   * <p>The errors associated with jobs.</p>
+   * @public
+   */
+  Errors?: JobError[] | undefined;
+
+  /**
+   * <p>The unique identifier for the job.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The state of the job.</p>
+   * @public
+   */
+  State?: State | undefined;
+
+  /**
+   * <p>The job type.</p>
+   * @public
+   */
+  Type?: Type | undefined;
+
+  /**
+   * <p>The date and time that the job was last updated, in ISO 8601 format.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+}
+
+/**
+ * @public
  */
 export interface CreateRevisionRequest {
   /**
    * <p>An optional comment about the revision.</p>
+   * @public
    */
-  Comment?: string;
+  Comment?: string | undefined;
 
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>A revision tag is an optional label that you can assign to a revision when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateRevisionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRevisionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateRevisionResponse {
   /**
    * <p>The ARN for the revision.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>An optional comment about the revision.</p>
+   * @public
    */
-  Comment?: string;
+  Comment?: string | undefined;
 
   /**
    * <p>The date and time that the revision was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
-   * <p>The unique identifier for the data set associated with this revision.</p>
+   * <p>The unique identifier for the data set associated with the data set revision.</p>
+   * @public
    */
-  DataSetId?: string;
+  DataSetId?: string | undefined;
 
   /**
-   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * @public
    */
-  Finalized?: boolean;
+  Finalized?: boolean | undefined;
 
   /**
    * <p>The unique identifier for the revision.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The tags for the revision.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
-}
+  UpdatedAt?: Date | undefined;
 
-export namespace CreateRevisionResponse {
   /**
-   * @internal
+   * <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateRevisionResponse): any => ({
-    ...obj,
-  });
+  RevocationComment?: string | undefined;
+
+  /**
+   * <p>A status indicating that subscribers' access to the revision was revoked.</p>
+   * @public
+   */
+  Revoked?: boolean | undefined;
+
+  /**
+   * <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
+   * @public
+   */
+  RevokedAt?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteAssetRequest {
   /**
    * <p>The unique identifier for an asset.</p>
+   * @public
    */
   AssetId: string | undefined;
 
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace DeleteAssetRequest {
+/**
+ * @public
+ */
+export interface DeleteDataGrantRequest {
   /**
-   * @internal
+   * <p>The ID of the data grant to delete.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteAssetRequest): any => ({
-    ...obj,
-  });
+  DataGrantId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteDataSetRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 }
 
-export namespace DeleteDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDataSetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventActionRequest {
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
   EventActionId: string | undefined;
 }
 
-export namespace DeleteEventActionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventActionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRevisionRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace DeleteRevisionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRevisionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssetRequest {
   /**
    * <p>The unique identifier for an asset.</p>
+   * @public
    */
   AssetId: string | undefined;
 
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace GetAssetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssetResponse {
   /**
    * <p>The ARN for the asset.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
-   * <p>Information about the asset.</p>
+   * <p>Details about the asset.</p>
+   * @public
    */
-  AssetDetails?: AssetDetails;
+  AssetDetails?: AssetDetails | undefined;
 
   /**
    * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  AssetType?: AssetType | string;
+  AssetType?: AssetType | undefined;
 
   /**
    * <p>The date and time that the asset was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this asset.</p>
+   * @public
    */
-  DataSetId?: string;
+  DataSetId?: string | undefined;
 
   /**
    * <p>The unique identifier for the asset.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
-   * <p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>
+   * <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy" or "Table(s) included in the LF-tag policy" are used as the asset name.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this asset.</p>
+   * @public
    */
-  RevisionId?: string;
+  RevisionId?: string | undefined;
 
   /**
    * <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
+
+  /**
+   * <p>The tags for the asset.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
+  UpdatedAt?: Date | undefined;
 }
 
-export namespace GetAssetResponse {
+/**
+ * @public
+ */
+export interface GetDataGrantRequest {
   /**
-   * @internal
+   * <p>The ID of the data grant.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetAssetResponse): any => ({
-    ...obj,
-  });
+  DataGrantId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetDataGrantResponse {
+  /**
+   * <p>The name of the data grant.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant sender.</p>
+   * @public
+   */
+  SenderPrincipal: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
+   */
+  ReceiverPrincipal: string | undefined;
+
+  /**
+   * <p>The description of the data grant.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The acceptance state of the data grant.</p>
+   * @public
+   */
+  AcceptanceState: DataGrantAcceptanceState | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was accepted.</p>
+   * @public
+   */
+  AcceptedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The distribution scope for the data grant.</p>
+   * @public
+   */
+  GrantDistributionScope: GrantDistributionScope | undefined;
+
+  /**
+   * <p>The ID of the data set associated to the data grant.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data set used to create the data grant.</p>
+   * @public
+   */
+  SourceDataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data grant.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the data grant.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+
+  /**
+   * <p>The tags associated to the data grant. A tag is a key-value pair.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetDataSetRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 }
 
-export namespace GetDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDataSetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDataSetResponse {
   /**
    * <p>The ARN for the data set.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  AssetType?: AssetType | string;
+  AssetType?: AssetType | undefined;
 
   /**
    * <p>The date and time that the data set was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The description for the data set.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The unique identifier for the data set.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the data set.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
+   * @public
    */
-  Origin?: Origin | string;
+  Origin?: Origin | undefined;
 
   /**
    * <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
+   * @public
    */
-  OriginDetails?: OriginDetails;
+  OriginDetails?: OriginDetails | undefined;
 
   /**
    * <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The tags for the data set.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
+  UpdatedAt?: Date | undefined;
 }
 
-export namespace GetDataSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDataSetResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEventActionRequest {
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
   EventActionId: string | undefined;
 }
 
-export namespace GetEventActionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventActionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEventActionResponse {
   /**
    * <p>What occurs after a certain event.</p>
+   * @public
    */
-  Action?: Action;
+  Action?: Action | undefined;
 
   /**
    * <p>The ARN for the event action.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The date and time that the event action was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>What occurs to start an action.</p>
+   * @public
    */
-  Event?: Event;
+  Event?: Event | undefined;
 
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
+
+  /**
+   * <p>The tags for the event action.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
+  UpdatedAt?: Date | undefined;
 }
 
-export namespace GetEventActionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventActionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetJobRequest {
   /**
    * <p>The unique identifier for a job.</p>
+   * @public
    */
   JobId: string | undefined;
 }
 
-export namespace GetJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetJobResponse {
   /**
    * <p>The ARN for the job.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * <p>The configuration for the asset, including tags applied to assets created by the job.</p>
+   * @public
+   */
+  AssetConfiguration?: AssetConfiguration | undefined;
 
   /**
    * <p>The date and time that the job was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>Details about the job.</p>
+   * @public
    */
-  Details?: ResponseDetails;
+  Details?: ResponseDetails | undefined;
 
   /**
    * <p>The errors associated with jobs.</p>
+   * @public
    */
-  Errors?: JobError[];
+  Errors?: JobError[] | undefined;
 
   /**
    * <p>The unique identifier for the job.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The state of the job.</p>
+   * @public
    */
-  State?: State | string;
+  State?: State | undefined;
 
   /**
    * <p>The job type.</p>
+   * @public
    */
-  Type?: Type | string;
+  Type?: Type | undefined;
 
   /**
    * <p>The date and time that the job was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
+  UpdatedAt?: Date | undefined;
 }
 
-export namespace GetJobResponse {
+/**
+ * @public
+ */
+export interface GetReceivedDataGrantRequest {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the data grant.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetJobResponse): any => ({
-    ...obj,
-  });
+  DataGrantArn: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetReceivedDataGrantResponse {
+  /**
+   * <p>The name of the data grant.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant sender.</p>
+   * @public
+   */
+  SenderPrincipal?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
+   */
+  ReceiverPrincipal: string | undefined;
+
+  /**
+   * <p>The description of the data grant.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The acceptance state of the data grant.</p>
+   * @public
+   */
+  AcceptanceState: DataGrantAcceptanceState | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was accepted.</p>
+   * @public
+   */
+  AcceptedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The distribution scope for the data grant.</p>
+   * @public
+   */
+  GrantDistributionScope: GrantDistributionScope | undefined;
+
+  /**
+   * <p>The ID of the data set associated to the data grant.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data grant.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the data grant.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetRevisionRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace GetRevisionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRevisionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRevisionResponse {
   /**
    * <p>The ARN for the revision.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>An optional comment about the revision.</p>
+   * @public
    */
-  Comment?: string;
+  Comment?: string | undefined;
 
   /**
    * <p>The date and time that the revision was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
-   * <p>The unique identifier for the data set associated with this revision.</p>
+   * <p>The unique identifier for the data set associated with the data set revision.</p>
+   * @public
    */
-  DataSetId?: string;
+  DataSetId?: string | undefined;
 
   /**
-   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * @public
    */
-  Finalized?: boolean;
+  Finalized?: boolean | undefined;
 
   /**
    * <p>The unique identifier for the revision.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The tags for the revision.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
-}
+  UpdatedAt?: Date | undefined;
 
-export namespace GetRevisionResponse {
   /**
-   * @internal
+   * <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetRevisionResponse): any => ({
-    ...obj,
-  });
+  RevocationComment?: string | undefined;
+
+  /**
+   * <p>A status indicating that subscribers' access to the revision was revoked.</p>
+   * @public
+   */
+  Revoked?: boolean | undefined;
+
+  /**
+   * <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
+   * @public
+   */
+  RevokedAt?: Date | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListDataGrantsRequest {
+  /**
+   * <p>The maximum number of results to be included in the next page.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The pagination token used to retrieve the next page of results for this operation.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Information about a data grant.</p>
+ * @public
+ */
+export interface DataGrantSummaryEntry {
+  /**
+   * <p>The name of the data grant.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant sender.</p>
+   * @public
+   */
+  SenderPrincipal: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
+   */
+  ReceiverPrincipal: string | undefined;
+
+  /**
+   * <p>The acceptance state of the data grant.</p>
+   * @public
+   */
+  AcceptanceState: DataGrantAcceptanceState | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was accepted.</p>
+   * @public
+   */
+  AcceptedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The ID of the data set associated to the data grant.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data set used to create the data grant.</p>
+   * @public
+   */
+  SourceDataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data grant.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the data grant.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListDataGrantsResponse {
+  /**
+   * <p>An object that contains a list of data grant information.</p>
+   * @public
+   */
+  DataGrantSummaries?: DataGrantSummaryEntry[] | undefined;
+
+  /**
+   * <p>The pagination token used to retrieve the next page of results for this operation.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListDataSetRevisionsRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The maximum number of results returned by a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListDataSetRevisionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDataSetRevisionsRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>A revision is a container for one or more assets.</p>
+ * @public
  */
 export interface RevisionEntry {
   /**
    * <p>The ARN for the revision.</p>
+   * @public
    */
   Arn: string | undefined;
 
   /**
    * <p>An optional comment about the revision.</p>
+   * @public
    */
-  Comment?: string;
+  Comment?: string | undefined;
 
   /**
    * <p>The date and time that the revision was created, in ISO 8601 format.</p>
+   * @public
    */
   CreatedAt: Date | undefined;
 
   /**
-   * <p>The unique identifier for the data set associated with this revision.</p>
+   * <p>The unique identifier for the data set associated with the data set revision.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
-   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * @public
    */
-  Finalized?: boolean;
+  Finalized?: boolean | undefined;
 
   /**
    * <p>The unique identifier for the revision.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
+   * @public
    */
   UpdatedAt: Date | undefined;
-}
 
-export namespace RevisionEntry {
   /**
-   * @internal
+   * <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RevisionEntry): any => ({
-    ...obj,
-  });
+  RevocationComment?: string | undefined;
+
+  /**
+   * <p>A status indicating that subscribers' access to the revision was revoked.</p>
+   * @public
+   */
+  Revoked?: boolean | undefined;
+
+  /**
+   * <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
+   * @public
+   */
+  RevokedAt?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListDataSetRevisionsResponse {
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The asset objects listed by the request.</p>
+   * @public
    */
-  Revisions?: RevisionEntry[];
+  Revisions?: RevisionEntry[] | undefined;
 }
 
-export namespace ListDataSetRevisionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDataSetRevisionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDataSetsRequest {
   /**
    * <p>The maximum number of results returned by a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
+   * @public
    */
-  Origin?: string;
-}
-
-export namespace ListDataSetsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDataSetsRequest): any => ({
-    ...obj,
-  });
+  Origin?: string | undefined;
 }
 
 /**
  * <p>A data set is an AWS resource with one or more revisions.</p>
+ * @public
  */
 export interface DataSetEntry {
   /**
    * <p>The ARN for the data set.</p>
+   * @public
    */
   Arn: string | undefined;
 
   /**
    * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  AssetType: AssetType | string | undefined;
+  AssetType: AssetType | undefined;
 
   /**
    * <p>The date and time that the data set was created, in ISO 8601 format.</p>
+   * @public
    */
   CreatedAt: Date | undefined;
 
   /**
    * <p>The description for the data set.</p>
+   * @public
    */
   Description: string | undefined;
 
   /**
    * <p>The unique identifier for the data set.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The name of the data set.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
+   * @public
    */
-  Origin: Origin | string | undefined;
+  Origin: Origin | undefined;
 
   /**
    * <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
+   * @public
    */
-  OriginDetails?: OriginDetails;
+  OriginDetails?: OriginDetails | undefined;
 
   /**
    * <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
+   * @public
    */
   UpdatedAt: Date | undefined;
 }
 
-export namespace DataSetEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSetEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDataSetsResponse {
   /**
    * <p>The data set objects listed by the request.</p>
+   * @public
    */
-  DataSets?: DataSetEntry[];
+  DataSets?: DataSetEntry[] | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDataSetsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDataSetsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListEventActionsRequest {
   /**
    * <p>The unique identifier for the event source.</p>
+   * @public
    */
-  EventSourceId?: string;
+  EventSourceId?: string | undefined;
 
   /**
    * <p>The maximum number of results returned by a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListEventActionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListEventActionsRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>An event action is an object that defines the relationship between a specific event and an automated action that will be taken on behalf of the customer.</p>
+ * @public
  */
 export interface EventActionEntry {
   /**
    * <p>What occurs after a certain event.</p>
+   * @public
    */
   Action: Action | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the event action.</p>
+   * @public
    */
   Arn: string | undefined;
 
   /**
    * <p>The date and time that the event action was created, in ISO 8601 format.</p>
+   * @public
    */
   CreatedAt: Date | undefined;
 
   /**
    * <p>What occurs to start an action.</p>
+   * @public
    */
   Event: Event | undefined;
 
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
+   * @public
    */
   UpdatedAt: Date | undefined;
 }
 
-export namespace EventActionEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EventActionEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListEventActionsResponse {
   /**
    * <p>The event action objects listed by the request.</p>
+   * @public
    */
-  EventActions?: EventActionEntry[];
+  EventActions?: EventActionEntry[] | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListEventActionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListEventActionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface ListJobsRequest {
-  /**
-   * <p>The unique identifier for a data set.</p>
-   */
-  DataSetId?: string;
-
-  /**
-   * <p>The maximum number of results returned by a single call.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>The token value retrieved from a previous call to access the next page of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The unique identifier for a revision.</p>
-   */
-  RevisionId?: string;
-}
-
-export namespace ListJobsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListJobsRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * AWS Data Exchange Jobs are asynchronous import or export operations used to create or copy assets. A data set owner can both import and export as they see fit. Someone with an entitlement to a data set can only export. Jobs are deleted 90 days after they are created.
+ * @public
+ */
+export interface ListJobsRequest {
+  /**
+   * <p>The unique identifier for a data set.</p>
+   * @public
+   */
+  DataSetId?: string | undefined;
+
+  /**
+   * <p>The maximum number of results returned by a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The unique identifier for a revision.</p>
+   * @public
+   */
+  RevisionId?: string | undefined;
+}
+
+/**
+ * <p>AWS Data Exchange Jobs are asynchronous import or export operations used to create or copy assets. A data set owner can both import and export as they see fit. Someone with an entitlement to a data set can only export. Jobs are deleted 90 days after they are created.</p>
+ * @public
  */
 export interface JobEntry {
   /**
    * <p>The ARN for the job.</p>
+   * @public
    */
   Arn: string | undefined;
 
   /**
+   * <p>The configuration for the asset, including tags applied to assets created by the job.</p>
+   * @public
+   */
+  AssetConfiguration?: AssetConfiguration | undefined;
+
+  /**
    * <p>The date and time that the job was created, in ISO 8601 format.</p>
+   * @public
    */
   CreatedAt: Date | undefined;
 
   /**
    * <p>Details of the operation to be performed by the job, such as export destination details or import source details.</p>
+   * @public
    */
   Details: ResponseDetails | undefined;
 
   /**
    * <p>Errors for jobs.</p>
+   * @public
    */
-  Errors?: JobError[];
+  Errors?: JobError[] | undefined;
 
   /**
    * <p>The unique identifier for the job.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The state of the job.</p>
+   * @public
    */
-  State: State | string | undefined;
+  State: State | undefined;
 
   /**
    * <p>The job type.</p>
+   * @public
    */
-  Type: Type | string | undefined;
+  Type: Type | undefined;
 
   /**
    * <p>The date and time that the job was last updated, in ISO 8601 format.</p>
+   * @public
    */
   UpdatedAt: Date | undefined;
 }
 
-export namespace JobEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JobEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListJobsResponse {
   /**
    * <p>The jobs listed by the request.</p>
+   * @public
    */
-  Jobs?: JobEntry[];
+  Jobs?: JobEntry[] | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListJobsResponse {
+/**
+ * @public
+ */
+export interface ListReceivedDataGrantsRequest {
   /**
-   * @internal
+   * <p>The maximum number of results to be included in the next page.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListJobsResponse): any => ({
-    ...obj,
-  });
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The pagination token used to retrieve the next page of results for this operation.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The acceptance state of the data grants to list.</p>
+   * @public
+   */
+  AcceptanceState?: AcceptanceStateFilterValue[] | undefined;
 }
 
+/**
+ * <p>Information about a received data grant.</p>
+ * @public
+ */
+export interface ReceivedDataGrantSummariesEntry {
+  /**
+   * <p>The name of the data grant.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant sender.</p>
+   * @public
+   */
+  SenderPrincipal: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the data grant receiver.</p>
+   * @public
+   */
+  ReceiverPrincipal: string | undefined;
+
+  /**
+   * <p>The acceptance state of the data grant.</p>
+   * @public
+   */
+  AcceptanceState: DataGrantAcceptanceState | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was accepted.</p>
+   * @public
+   */
+  AcceptedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp of when access to the associated data set ends.</p>
+   * @public
+   */
+  EndsAt?: Date | undefined;
+
+  /**
+   * <p>The ID of the data set associated to the data grant.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The ID of the data grant.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the data grant.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp of when the data grant was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListReceivedDataGrantsResponse {
+  /**
+   * <p>An object that contains a list of received data grant information.</p>
+   * @public
+   */
+  DataGrantSummaries?: ReceivedDataGrantSummariesEntry[] | undefined;
+
+  /**
+   * <p>The pagination token used to retrieve the next page of results for this operation.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListRevisionAssetsRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The maximum number of results returned by a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace ListRevisionAssetsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRevisionAssetsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRevisionAssetsResponse {
   /**
    * <p>The asset objects listed by the request.</p>
+   * @public
    */
-  Assets?: AssetEntry[];
+  Assets?: AssetEntry[] | undefined;
 
   /**
    * <p>The token value retrieved from a previous call to access the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListRevisionAssetsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRevisionAssetsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
-   * A label that consists of a customer-defined key and an optional value.
+   * <p>A label that consists of a customer-defined key and an optional value.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
+/**
+ * @public
+ */
+export interface RevokeRevisionRequest {
   /**
-   * @internal
+   * <p>The unique identifier for a data set.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The unique identifier for a revision.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
+
+  /**
+   * <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
+   * @public
+   */
+  RevocationComment: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface RevokeRevisionResponse {
+  /**
+   * <p>The ARN for the revision.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>An optional comment about the revision.</p>
+   * @public
+   */
+  Comment?: string | undefined;
+
+  /**
+   * <p>The date and time that the revision was created, in ISO 8601 format.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The unique identifier for the data set associated with the data set revision.</p>
+   * @public
+   */
+  DataSetId?: string | undefined;
+
+  /**
+   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * @public
+   */
+  Finalized?: boolean | undefined;
+
+  /**
+   * <p>The unique identifier for the revision.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
+   * @public
+   */
+  SourceId?: string | undefined;
+
+  /**
+   * <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+
+  /**
+   * <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
+   * @public
+   */
+  RevocationComment?: string | undefined;
+
+  /**
+   * <p>A status indicating that subscribers' access to the revision was revoked.</p>
+   * @public
+   */
+  Revoked?: boolean | undefined;
+
+  /**
+   * <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
+   * @public
+   */
+  RevokedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SendApiAssetRequest {
+  /**
+   * <p>The request body.</p>
+   * @public
+   */
+  Body?: string | undefined;
+
+  /**
+   * <p>Attach query string parameters to the end of the URI (for example, /v1/examplePath?exampleParam=exampleValue).</p>
+   * @public
+   */
+  QueryStringParameters?: Record<string, string> | undefined;
+
+  /**
+   * <p>Asset ID value for the API request.</p>
+   * @public
+   */
+  AssetId: string | undefined;
+
+  /**
+   * <p>Data set ID value for the API request.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>Any header value prefixed with x-amzn-dataexchange-header- will have that stripped before sending the Asset API request. Use this when you want to override a header that AWS Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP request.</p>
+   * @public
+   */
+  RequestHeaders?: Record<string, string> | undefined;
+
+  /**
+   * <p>HTTP method value for the API request. Alternatively, you can use the appropriate verb in your request.</p>
+   * @public
+   */
+  Method?: string | undefined;
+
+  /**
+   * <p>URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/\{pathValue\}.</p>
+   * @public
+   */
+  Path?: string | undefined;
+
+  /**
+   * <p>Revision ID value for the API request.</p>
+   * @public
+   */
+  RevisionId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SendApiAssetResponse {
+  /**
+   * <p>The response body from the underlying API tracked by the API asset.</p>
+   * @public
+   */
+  Body?: string | undefined;
+
+  /**
+   * <p>The response headers from the underlying API tracked by the API asset.</p>
+   * @public
+   */
+  ResponseHeaders?: Record<string, string> | undefined;
+}
+
+/**
+ * <p>Extra details specific to a data update type notification.</p>
+ * @public
+ */
+export interface DataUpdateRequestDetails {
+  /**
+   * <p>A datetime in the past when the data was updated. This typically means that the underlying resource supporting the data set was updated.</p>
+   * @public
+   */
+  DataUpdatedAt?: Date | undefined;
+}
+
+/**
+ * <p>Extra details specific to a deprecation type notification.</p>
+ * @public
+ */
+export interface DeprecationRequestDetails {
+  /**
+   * <p>A datetime in the future when the data set will be deprecated.</p>
+   * @public
+   */
+  DeprecationAt: Date | undefined;
+}
+
+/**
+ * <p>Object encompassing information about a schema change to a single, particular field, a notification can have up to 100 of these.</p>
+ * @public
+ */
+export interface SchemaChangeDetails {
+  /**
+   * <p>Name of the changing field. This value can be up to 255 characters long.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>Is the field being added, removed, or modified?</p>
+   * @public
+   */
+  Type: SchemaChangeType | undefined;
+
+  /**
+   * <p>Description of what's changing about this field. This value can be up to 512 characters long.</p>
+   * @public
+   */
+  Description?: string | undefined;
+}
+
+/**
+ * <p>Extra details specific to this schema change type notification.</p>
+ * @public
+ */
+export interface SchemaChangeRequestDetails {
+  /**
+   * <p>List of schema changes happening in the scope of this notification. This can have up to 100 entries.</p>
+   * @public
+   */
+  Changes?: SchemaChangeDetails[] | undefined;
+
+  /**
+   * <p>A date in the future when the schema change is taking effect.</p>
+   * @public
+   */
+  SchemaChangeAt: Date | undefined;
+}
+
+/**
+ * <p>Extra details specific to this notification.</p>
+ * @public
+ */
+export interface NotificationDetails {
+  /**
+   * <p>Extra details specific to a data update type notification.</p>
+   * @public
+   */
+  DataUpdate?: DataUpdateRequestDetails | undefined;
+
+  /**
+   * <p>Extra details specific to a deprecation type notification.</p>
+   * @public
+   */
+  Deprecation?: DeprecationRequestDetails | undefined;
+
+  /**
+   * <p>Extra details specific to a schema change type notification.</p>
+   * @public
+   */
+  SchemaChange?: SchemaChangeRequestDetails | undefined;
+}
+
+/**
+ * <p>Extra details specific to the affected scope in this LF data set.</p>
+ * @public
+ */
+export interface LakeFormationTagPolicyDetails {
+  /**
+   * <p>The underlying Glue database that the notification is referring to.</p>
+   * @public
+   */
+  Database?: string | undefined;
+
+  /**
+   * <p>The underlying Glue table that the notification is referring to.</p>
+   * @public
+   */
+  Table?: string | undefined;
+}
+
+/**
+ * <p>Extra details specific to the affected scope in this Redshift data set.</p>
+ * @public
+ */
+export interface RedshiftDataShareDetails {
+  /**
+   * <p>The ARN of the underlying Redshift data share that is being affected by this notification.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The database name in the Redshift data share that is being affected by this notification.</p>
+   * @public
+   */
+  Database: string | undefined;
+
+  /**
+   * <p>A function name in the Redshift database that is being affected by this notification.</p>
+   * @public
+   */
+  Function?: string | undefined;
+
+  /**
+   * <p>A table name in the Redshift database that is being affected by this notification.</p>
+   * @public
+   */
+  Table?: string | undefined;
+
+  /**
+   * <p>A schema name in the Redshift database that is being affected by this notification.</p>
+   * @public
+   */
+  Schema?: string | undefined;
+
+  /**
+   * <p>A view name in the Redshift database that is being affected by this notification.</p>
+   * @public
+   */
+  View?: string | undefined;
+}
+
+/**
+ * <p>Extra details specific to the affected scope in this S3 Data Access data set.</p>
+ * @public
+ */
+export interface S3DataAccessDetails {
+  /**
+   * <p>A list of the key prefixes affected by this notification. This can have up to 50 entries.</p>
+   * @public
+   */
+  KeyPrefixes?: string[] | undefined;
+
+  /**
+   * <p>A list of the keys affected by this notification. This can have up to 50 entries.</p>
+   * @public
+   */
+  Keys?: string[] | undefined;
+}
+
+/**
+ * <p>Details about the scope of the notifications such as the affected resources.</p>
+ * @public
+ */
+export interface ScopeDetails {
+  /**
+   * <p>Underlying LF resources that will be affected by this notification.</p>
+   * @public
+   */
+  LakeFormationTagPolicies?: LakeFormationTagPolicyDetails[] | undefined;
+
+  /**
+   * <p>Underlying Redshift resources that will be affected by this notification.</p>
+   * @public
+   */
+  RedshiftDataShares?: RedshiftDataShareDetails[] | undefined;
+
+  /**
+   * <p>Underlying S3 resources that will be affected by this notification.</p>
+   * @public
+   */
+  S3DataAccesses?: S3DataAccessDetails[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SendDataSetNotificationRequest {
+  /**
+   * <p>Affected scope of this notification such as the underlying resources affected by the notification event.</p>
+   * @public
+   */
+  Scope?: ScopeDetails | undefined;
+
+  /**
+   * <p>Idempotency key for the notification, this key allows us to deduplicate notifications that are sent in quick succession erroneously.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>Free-form text field for providers to add information about their notifications.</p>
+   * @public
+   */
+  Comment?: string | undefined;
+
+  /**
+   * <p>Affected data set of the notification.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>Extra details specific to this notification type.</p>
+   * @public
+   */
+  Details?: NotificationDetails | undefined;
+
+  /**
+   * <p>The type of the notification. Describing the kind of event the notification is alerting you to.</p>
+   * @public
+   */
+  Type: NotificationType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SendDataSetNotificationResponse {}
+
+/**
+ * @public
+ */
 export interface StartJobRequest {
   /**
    * <p>The unique identifier for a job.</p>
+   * @public
    */
   JobId: string | undefined;
 }
 
-export namespace StartJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartJobResponse {}
 
-export namespace StartJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartJobResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The request body for TagResource.</p>
+ * @public
  */
 export interface TagResourceRequest {
   /**
    * <p>An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
-   * A label that consists of a customer-defined key and an optional value.
+   * <p>A label that consists of a customer-defined key and an optional value.</p>
+   * @public
    */
-  Tags: { [key: string]: string } | undefined;
+  Tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
-   * The key tags.
+   * <p>The key tags.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The request body for UpdateAsset.</p>
+ * @public
  */
 export interface UpdateAssetRequest {
   /**
    * <p>The unique identifier for an asset.</p>
+   * @public
    */
   AssetId: string | undefined;
 
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
-   * <p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>
+   * <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy" or "Table(s) included in LF-tag policy" are used as the name.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace UpdateAssetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssetResponse {
   /**
    * <p>The ARN for the asset.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
-   * <p>Information about the asset.</p>
+   * <p>Details about the asset.</p>
+   * @public
    */
-  AssetDetails?: AssetDetails;
+  AssetDetails?: AssetDetails | undefined;
 
   /**
    * <p>The type of asset that is added to a data set.</p>
+   * @public
    */
-  AssetType?: AssetType | string;
+  AssetType?: AssetType | undefined;
 
   /**
    * <p>The date and time that the asset was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The unique identifier for the data set associated with this asset.</p>
+   * @public
    */
-  DataSetId?: string;
+  DataSetId?: string | undefined;
 
   /**
    * <p>The unique identifier for the asset.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
-   * <p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>
+   * <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy"- or "Table(s) included in LF-tag policy" are used as the asset name.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The unique identifier for the revision associated with this asset.</p>
+   * @public
    */
-  RevisionId?: string;
+  RevisionId?: string | undefined;
 
   /**
    * <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
-}
-
-export namespace UpdateAssetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssetResponse): any => ({
-    ...obj,
-  });
+  UpdatedAt?: Date | undefined;
 }
 
 /**
- * <p>The request body for UpdateDataSet.</p>
+ * @public
  */
 export interface UpdateDataSetRequest {
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>The description for the data set.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The name of the data set.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace UpdateDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDataSetRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface UpdateDataSetResponse {
-  /**
-   * <p>The ARN for the data set.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The type of asset that is added to a data set.</p>
-   */
-  AssetType?: AssetType | string;
-
-  /**
-   * <p>The date and time that the data set was created, in ISO 8601 format.</p>
-   */
-  CreatedAt?: Date;
-
-  /**
-   * <p>The description for the data set.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The unique identifier for the data set.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The name of the data set.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
-   */
-  Origin?: Origin | string;
-
-  /**
-   * <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
-   */
-  OriginDetails?: OriginDetails;
-
-  /**
-   * <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
-   */
-  SourceId?: string;
-
-  /**
-   * <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
-   */
-  UpdatedAt?: Date;
-}
-
-export namespace UpdateDataSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDataSetResponse): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
- * <p>The request body for UpdateEventAction.</p>
+ * @public
+ */
+export interface UpdateDataSetResponse {
+  /**
+   * <p>The ARN for the data set.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The type of asset that is added to a data set.</p>
+   * @public
+   */
+  AssetType?: AssetType | undefined;
+
+  /**
+   * <p>The date and time that the data set was created, in ISO 8601 format.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The description for the data set.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data set.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The name of the data set.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
+   * @public
+   */
+  Origin?: Origin | undefined;
+
+  /**
+   * <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
+   * @public
+   */
+  OriginDetails?: OriginDetails | undefined;
+
+  /**
+   * <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
+   * @public
+   */
+  SourceId?: string | undefined;
+
+  /**
+   * <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+}
+
+/**
+ * @public
  */
 export interface UpdateEventActionRequest {
   /**
    * <p>What occurs after a certain event.</p>
+   * @public
    */
-  Action?: Action;
+  Action?: Action | undefined;
 
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
   EventActionId: string | undefined;
 }
 
-export namespace UpdateEventActionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateEventActionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateEventActionResponse {
   /**
    * <p>What occurs after a certain event.</p>
+   * @public
    */
-  Action?: Action;
+  Action?: Action | undefined;
 
   /**
    * <p>The ARN for the event action.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The date and time that the event action was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>What occurs to start an action.</p>
+   * @public
    */
-  Event?: Event;
+  Event?: Event | undefined;
 
   /**
    * <p>The unique identifier for the event action.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The date and time that the event action was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
-}
-
-export namespace UpdateEventActionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateEventActionResponse): any => ({
-    ...obj,
-  });
+  UpdatedAt?: Date | undefined;
 }
 
 /**
- * <p>The request body for UpdateRevision.</p>
+ * @public
  */
 export interface UpdateRevisionRequest {
   /**
    * <p>An optional comment about the revision.</p>
+   * @public
    */
-  Comment?: string;
+  Comment?: string | undefined;
 
   /**
    * <p>The unique identifier for a data set.</p>
+   * @public
    */
   DataSetId: string | undefined;
 
   /**
    * <p>Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p>
+   * @public
    */
-  Finalized?: boolean;
+  Finalized?: boolean | undefined;
 
   /**
    * <p>The unique identifier for a revision.</p>
+   * @public
    */
   RevisionId: string | undefined;
 }
 
-export namespace UpdateRevisionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRevisionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRevisionResponse {
   /**
    * <p>The ARN for the revision.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>An optional comment about the revision.</p>
+   * @public
    */
-  Comment?: string;
+  Comment?: string | undefined;
 
   /**
    * <p>The date and time that the revision was created, in ISO 8601 format.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
-   * <p>The unique identifier for the data set associated with this revision.</p>
+   * <p>The unique identifier for the data set associated with the data set revision.</p>
+   * @public
    */
-  DataSetId?: string;
+  DataSetId?: string | undefined;
 
   /**
-   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
+   * @public
    */
-  Finalized?: boolean;
+  Finalized?: boolean | undefined;
 
   /**
    * <p>The unique identifier for the revision.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
+   * @public
    */
-  SourceId?: string;
+  SourceId?: string | undefined;
 
   /**
    * <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
+   * @public
    */
-  UpdatedAt?: Date;
-}
+  UpdatedAt?: Date | undefined;
 
-export namespace UpdateRevisionResponse {
   /**
-   * @internal
+   * <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateRevisionResponse): any => ({
-    ...obj,
-  });
+  RevocationComment?: string | undefined;
+
+  /**
+   * <p>A status indicating that subscribers' access to the revision was revoked.</p>
+   * @public
+   */
+  Revoked?: boolean | undefined;
+
+  /**
+   * <p>The date and time that the revision was revoked, in ISO 8601 format.</p>
+   * @public
+   */
+  RevokedAt?: Date | undefined;
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppIntegrationsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppIntegrationsClient";
-import { GetEventIntegrationRequest, GetEventIntegrationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetEventIntegrationCommand,
-  serializeAws_restJson1GetEventIntegrationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEventIntegrationRequest, GetEventIntegrationResponse } from "../models/models_0";
+import { GetEventIntegration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEventIntegrationCommand}.
+ */
 export interface GetEventIntegrationCommandInput extends GetEventIntegrationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEventIntegrationCommand}.
+ */
 export interface GetEventIntegrationCommandOutput extends GetEventIntegrationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface GetEventIntegrationCommandOutput extends GetEventIntegrationRes
  * ```javascript
  * import { AppIntegrationsClient, GetEventIntegrationCommand } from "@aws-sdk/client-appintegrations"; // ES Modules import
  * // const { AppIntegrationsClient, GetEventIntegrationCommand } = require("@aws-sdk/client-appintegrations"); // CommonJS import
+ * // import type { AppIntegrationsClientConfig } from "@aws-sdk/client-appintegrations";
+ * const config = {}; // type is AppIntegrationsClientConfig
  * const client = new AppIntegrationsClient(config);
+ * const input = { // GetEventIntegrationRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetEventIntegrationCommand(input);
  * const response = await client.send(command);
+ * // { // GetEventIntegrationResponse
+ * //   Name: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   EventIntegrationArn: "STRING_VALUE",
+ * //   EventBridgeBus: "STRING_VALUE",
+ * //   EventFilter: { // EventFilter
+ * //     Source: "STRING_VALUE", // required
+ * //   },
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetEventIntegrationCommandInput - {@link GetEventIntegrationCommandInput}
+ * @returns {@link GetEventIntegrationCommandOutput}
  * @see {@link GetEventIntegrationCommandInput} for command's `input` shape.
  * @see {@link GetEventIntegrationCommandOutput} for command's `response` shape.
- * @see {@link AppIntegrationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppIntegrationsClientResolvedConfig | config} for AppIntegrationsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>Request processing failed due to an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link AppIntegrationsServiceException}
+ * <p>Base exception class for all service exceptions from AppIntegrations service.</p>
+ *
+ *
+ * @public
  */
-export class GetEventIntegrationCommand extends $Command<
-  GetEventIntegrationCommandInput,
-  GetEventIntegrationCommandOutput,
-  AppIntegrationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetEventIntegrationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppIntegrationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetEventIntegrationCommandInput, GetEventIntegrationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppIntegrationsClient";
-    const commandName = "GetEventIntegrationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetEventIntegrationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetEventIntegrationResponse.filterSensitiveLog,
+export class GetEventIntegrationCommand extends command<GetEventIntegrationCommandInput, GetEventIntegrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEventIntegration",
+  GetEventIntegration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEventIntegrationRequest;
+      output: GetEventIntegrationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetEventIntegrationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetEventIntegrationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetEventIntegrationCommandOutput> {
-    return deserializeAws_restJson1GetEventIntegrationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetEventIntegrationCommandInput;
+      output: GetEventIntegrationCommandOutput;
+    };
+  };
 }

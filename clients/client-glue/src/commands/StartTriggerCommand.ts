@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { StartTriggerRequest, StartTriggerResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1StartTriggerCommand,
-  serializeAws_json1_1StartTriggerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartTriggerRequest, StartTriggerResponse } from "../models/models_3";
+import { StartTrigger$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartTriggerCommand}.
+ */
 export interface StartTriggerCommandInput extends StartTriggerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartTriggerCommand}.
+ */
 export interface StartTriggerCommandOutput extends StartTriggerResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,65 @@ export interface StartTriggerCommandOutput extends StartTriggerResponse, __Metad
  * ```javascript
  * import { GlueClient, StartTriggerCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, StartTriggerCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // StartTriggerRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new StartTriggerCommand(input);
  * const response = await client.send(command);
+ * // { // StartTriggerResponse
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartTriggerCommandInput - {@link StartTriggerCommandInput}
+ * @returns {@link StartTriggerCommandOutput}
  * @see {@link StartTriggerCommandInput} for command's `input` shape.
  * @see {@link StartTriggerCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link ConcurrentRunsExceededException} (client fault)
+ *  <p>Too many jobs are being run concurrently.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class StartTriggerCommand extends $Command<
-  StartTriggerCommandInput,
-  StartTriggerCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartTriggerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartTriggerCommandInput, StartTriggerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "StartTriggerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartTriggerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartTriggerResponse.filterSensitiveLog,
+export class StartTriggerCommand extends command<StartTriggerCommandInput, StartTriggerCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartTrigger",
+  StartTrigger$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartTriggerRequest;
+      output: StartTriggerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartTriggerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartTriggerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartTriggerCommandOutput> {
-    return deserializeAws_json1_1StartTriggerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartTriggerCommandInput;
+      output: StartTriggerCommandOutput;
+    };
+  };
 }

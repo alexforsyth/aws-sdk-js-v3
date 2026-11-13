@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { CreateContainerInput, CreateContainerOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateContainerCommand,
-  serializeAws_json1_1CreateContainerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateContainerInput, CreateContainerOutput } from "../models/models_0";
+import { CreateContainer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateContainerCommand}.
+ */
 export interface CreateContainerCommandInput extends CreateContainerInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateContainerCommand}.
+ */
 export interface CreateContainerCommandOutput extends CreateContainerOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,70 @@ export interface CreateContainerCommandOutput extends CreateContainerOutput, __M
  * ```javascript
  * import { MediaStoreClient, CreateContainerCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, CreateContainerCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // CreateContainerInput
+ *   ContainerName: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateContainerCommand(input);
  * const response = await client.send(command);
+ * // { // CreateContainerOutput
+ * //   Container: { // Container
+ * //     Endpoint: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     ARN: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Status: "ACTIVE" || "CREATING" || "DELETING",
+ * //     AccessLoggingEnabled: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateContainerCommandInput - {@link CreateContainerCommandInput}
+ * @returns {@link CreateContainerCommandOutput}
  * @see {@link CreateContainerCommandInput} for command's `input` shape.
  * @see {@link CreateContainerCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link ContainerInUseException} (client fault)
+ *  <p>The container that you specified in the request already exists or is being
+ *          updated.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A service limit has been exceeded.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class CreateContainerCommand extends $Command<
-  CreateContainerCommandInput,
-  CreateContainerCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateContainerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateContainerCommandInput, CreateContainerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "CreateContainerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateContainerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateContainerOutput.filterSensitiveLog,
+export class CreateContainerCommand extends command<CreateContainerCommandInput, CreateContainerCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateContainer",
+  CreateContainer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateContainerInput;
+      output: CreateContainerOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateContainerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateContainerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateContainerCommandOutput> {
-    return deserializeAws_json1_1CreateContainerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateContainerCommandInput;
+      output: CreateContainerCommandOutput;
+    };
+  };
 }

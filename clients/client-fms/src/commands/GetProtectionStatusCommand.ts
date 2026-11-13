@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FMSClient";
-import { GetProtectionStatusRequest, GetProtectionStatusResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetProtectionStatusCommand,
-  serializeAws_json1_1GetProtectionStatusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetProtectionStatusRequest, GetProtectionStatusResponse } from "../models/models_0";
+import { GetProtectionStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetProtectionStatusCommand}.
+ */
 export interface GetProtectionStatusCommandInput extends GetProtectionStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetProtectionStatusCommand}.
+ */
 export interface GetProtectionStatusCommandOutput extends GetProtectionStatusResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,65 @@ export interface GetProtectionStatusCommandOutput extends GetProtectionStatusRes
  * ```javascript
  * import { FMSClient, GetProtectionStatusCommand } from "@aws-sdk/client-fms"; // ES Modules import
  * // const { FMSClient, GetProtectionStatusCommand } = require("@aws-sdk/client-fms"); // CommonJS import
+ * // import type { FMSClientConfig } from "@aws-sdk/client-fms";
+ * const config = {}; // type is FMSClientConfig
  * const client = new FMSClient(config);
+ * const input = { // GetProtectionStatusRequest
+ *   PolicyId: "STRING_VALUE", // required
+ *   MemberAccountId: "STRING_VALUE",
+ *   StartTime: new Date("TIMESTAMP"),
+ *   EndTime: new Date("TIMESTAMP"),
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new GetProtectionStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetProtectionStatusResponse
+ * //   AdminAccountId: "STRING_VALUE",
+ * //   ServiceType: "WAF" || "WAFV2" || "SHIELD_ADVANCED" || "SECURITY_GROUPS_COMMON" || "SECURITY_GROUPS_CONTENT_AUDIT" || "SECURITY_GROUPS_USAGE_AUDIT" || "NETWORK_FIREWALL" || "DNS_FIREWALL" || "THIRD_PARTY_FIREWALL" || "IMPORT_NETWORK_FIREWALL" || "NETWORK_ACL_COMMON",
+ * //   Data: "STRING_VALUE",
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetProtectionStatusCommandInput - {@link GetProtectionStatusCommandInput}
+ * @returns {@link GetProtectionStatusCommandOutput}
  * @see {@link GetProtectionStatusCommandInput} for command's `input` shape.
  * @see {@link GetProtectionStatusCommandOutput} for command's `response` shape.
- * @see {@link FMSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FMSClientResolvedConfig | config} for FMSClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (client fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry
+ *       your request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The parameters of the request were invalid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link FMSServiceException}
+ * <p>Base exception class for all service exceptions from FMS service.</p>
+ *
+ *
+ * @public
  */
-export class GetProtectionStatusCommand extends $Command<
-  GetProtectionStatusCommandInput,
-  GetProtectionStatusCommandOutput,
-  FMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetProtectionStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetProtectionStatusCommandInput, GetProtectionStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FMSClient";
-    const commandName = "GetProtectionStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetProtectionStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetProtectionStatusResponse.filterSensitiveLog,
+export class GetProtectionStatusCommand extends command<GetProtectionStatusCommandInput, GetProtectionStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetProtectionStatus",
+  GetProtectionStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetProtectionStatusRequest;
+      output: GetProtectionStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetProtectionStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetProtectionStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetProtectionStatusCommandOutput> {
-    return deserializeAws_json1_1GetProtectionStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetProtectionStatusCommandInput;
+      output: GetProtectionStatusCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeThemeRequest, DescribeThemeResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeThemeCommand,
-  serializeAws_restJson1DescribeThemeCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeThemeRequest, DescribeThemeResponse } from "../models/models_4";
+import { DescribeTheme$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeThemeCommand}.
+ */
 export interface DescribeThemeCommandInput extends DescribeThemeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeThemeCommand}.
+ */
 export interface DescribeThemeCommandOutput extends DescribeThemeResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,239 @@ export interface DescribeThemeCommandOutput extends DescribeThemeResponse, __Met
  * ```javascript
  * import { QuickSightClient, DescribeThemeCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, DescribeThemeCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // DescribeThemeRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   ThemeId: "STRING_VALUE", // required
+ *   VersionNumber: Number("long"),
+ *   AliasName: "STRING_VALUE",
+ * };
  * const command = new DescribeThemeCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeThemeResponse
+ * //   Theme: { // Theme
+ * //     Arn: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     ThemeId: "STRING_VALUE",
+ * //     Version: { // ThemeVersion
+ * //       VersionNumber: Number("long"),
+ * //       Arn: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       BaseThemeId: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       Configuration: { // ThemeConfiguration
+ * //         DataColorPalette: { // DataColorPalette
+ * //           Colors: [ // ColorList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           MinMaxGradient: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           EmptyFillColor: "STRING_VALUE",
+ * //         },
+ * //         UIColorPalette: { // UIColorPalette
+ * //           PrimaryForeground: "STRING_VALUE",
+ * //           PrimaryBackground: "STRING_VALUE",
+ * //           SecondaryForeground: "STRING_VALUE",
+ * //           SecondaryBackground: "STRING_VALUE",
+ * //           Accent: "STRING_VALUE",
+ * //           AccentForeground: "STRING_VALUE",
+ * //           Danger: "STRING_VALUE",
+ * //           DangerForeground: "STRING_VALUE",
+ * //           Warning: "STRING_VALUE",
+ * //           WarningForeground: "STRING_VALUE",
+ * //           Success: "STRING_VALUE",
+ * //           SuccessForeground: "STRING_VALUE",
+ * //           Dimension: "STRING_VALUE",
+ * //           DimensionForeground: "STRING_VALUE",
+ * //           Measure: "STRING_VALUE",
+ * //           MeasureForeground: "STRING_VALUE",
+ * //         },
+ * //         Sheet: { // SheetStyle
+ * //           Tile: { // TileStyle
+ * //             BackgroundColor: "STRING_VALUE",
+ * //             Border: { // BorderStyle
+ * //               Color: "STRING_VALUE",
+ * //               Show: true || false,
+ * //               Width: "STRING_VALUE",
+ * //             },
+ * //             BorderRadius: "STRING_VALUE",
+ * //             Padding: "STRING_VALUE",
+ * //           },
+ * //           TileLayout: { // TileLayoutStyle
+ * //             Gutter: { // GutterStyle
+ * //               Show: true || false,
+ * //             },
+ * //             Margin: { // MarginStyle
+ * //               Show: true || false,
+ * //             },
+ * //           },
+ * //           Background: { // SheetBackgroundStyle
+ * //             Color: "STRING_VALUE",
+ * //             Gradient: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         Typography: { // Typography
+ * //           FontFamilies: [ // FontList
+ * //             { // Font
+ * //               FontFamily: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //           AxisTitleFontConfiguration: { // FontConfiguration
+ * //             FontSize: { // FontSize
+ * //               Relative: "EXTRA_SMALL" || "SMALL" || "MEDIUM" || "LARGE" || "EXTRA_LARGE",
+ * //               Absolute: "STRING_VALUE",
+ * //             },
+ * //             FontDecoration: "UNDERLINE" || "NONE",
+ * //             FontColor: "STRING_VALUE",
+ * //             FontWeight: { // FontWeight
+ * //               Name: "NORMAL" || "BOLD",
+ * //             },
+ * //             FontStyle: "NORMAL" || "ITALIC",
+ * //             FontFamily: "STRING_VALUE",
+ * //           },
+ * //           AxisLabelFontConfiguration: {
+ * //             FontSize: {
+ * //               Relative: "EXTRA_SMALL" || "SMALL" || "MEDIUM" || "LARGE" || "EXTRA_LARGE",
+ * //               Absolute: "STRING_VALUE",
+ * //             },
+ * //             FontDecoration: "UNDERLINE" || "NONE",
+ * //             FontColor: "STRING_VALUE",
+ * //             FontWeight: {
+ * //               Name: "NORMAL" || "BOLD",
+ * //             },
+ * //             FontStyle: "NORMAL" || "ITALIC",
+ * //             FontFamily: "STRING_VALUE",
+ * //           },
+ * //           LegendTitleFontConfiguration: {
+ * //             FontSize: {
+ * //               Relative: "EXTRA_SMALL" || "SMALL" || "MEDIUM" || "LARGE" || "EXTRA_LARGE",
+ * //               Absolute: "STRING_VALUE",
+ * //             },
+ * //             FontDecoration: "UNDERLINE" || "NONE",
+ * //             FontColor: "STRING_VALUE",
+ * //             FontWeight: {
+ * //               Name: "NORMAL" || "BOLD",
+ * //             },
+ * //             FontStyle: "NORMAL" || "ITALIC",
+ * //             FontFamily: "STRING_VALUE",
+ * //           },
+ * //           LegendValueFontConfiguration: {
+ * //             FontSize: {
+ * //               Relative: "EXTRA_SMALL" || "SMALL" || "MEDIUM" || "LARGE" || "EXTRA_LARGE",
+ * //               Absolute: "STRING_VALUE",
+ * //             },
+ * //             FontDecoration: "UNDERLINE" || "NONE",
+ * //             FontColor: "STRING_VALUE",
+ * //             FontWeight: {
+ * //               Name: "NORMAL" || "BOLD",
+ * //             },
+ * //             FontStyle: "NORMAL" || "ITALIC",
+ * //             FontFamily: "STRING_VALUE",
+ * //           },
+ * //           DataLabelFontConfiguration: {
+ * //             FontSize: {
+ * //               Relative: "EXTRA_SMALL" || "SMALL" || "MEDIUM" || "LARGE" || "EXTRA_LARGE",
+ * //               Absolute: "STRING_VALUE",
+ * //             },
+ * //             FontDecoration: "UNDERLINE" || "NONE",
+ * //             FontColor: "STRING_VALUE",
+ * //             FontWeight: {
+ * //               Name: "NORMAL" || "BOLD",
+ * //             },
+ * //             FontStyle: "NORMAL" || "ITALIC",
+ * //             FontFamily: "STRING_VALUE",
+ * //           },
+ * //           VisualTitleFontConfiguration: { // VisualTitleFontConfiguration
+ * //             FontConfiguration: "<FontConfiguration>",
+ * //             TextAlignment: "LEFT" || "CENTER" || "RIGHT" || "AUTO",
+ * //             TextTransform: "CAPITALIZE",
+ * //           },
+ * //           VisualSubtitleFontConfiguration: { // VisualSubtitleFontConfiguration
+ * //             FontConfiguration: "<FontConfiguration>",
+ * //             TextAlignment: "LEFT" || "CENTER" || "RIGHT" || "AUTO",
+ * //             TextTransform: "CAPITALIZE",
+ * //           },
+ * //           ControlTitleFontConfiguration: { // ControlTitleFontConfiguration
+ * //             FontConfiguration: "<FontConfiguration>",
+ * //             TextAlignment: "LEFT" || "CENTER" || "RIGHT" || "AUTO",
+ * //           },
+ * //         },
+ * //       },
+ * //       Errors: [ // ThemeErrorList
+ * //         { // ThemeError
+ * //           Type: "INTERNAL_FAILURE",
+ * //           Message: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Status: "CREATION_IN_PROGRESS" || "CREATION_SUCCESSFUL" || "CREATION_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_SUCCESSFUL" || "UPDATE_FAILED" || "DELETED",
+ * //     },
+ * //     CreatedTime: new Date("TIMESTAMP"),
+ * //     LastUpdatedTime: new Date("TIMESTAMP"),
+ * //     Type: "QUICKSIGHT" || "CUSTOM" || "ALL",
+ * //   },
+ * //   Status: Number("int"),
+ * //   RequestId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeThemeCommandInput - {@link DescribeThemeCommandInput}
+ * @returns {@link DescribeThemeCommandOutput}
  * @see {@link DescribeThemeCommandInput} for command's `input` shape.
  * @see {@link DescribeThemeCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceExistsException} (client fault)
+ *  <p>The resource specified already exists. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeThemeCommand extends $Command<
-  DescribeThemeCommandInput,
-  DescribeThemeCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeThemeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeThemeCommandInput, DescribeThemeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "DescribeThemeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeThemeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeThemeResponse.filterSensitiveLog,
+export class DescribeThemeCommand extends command<DescribeThemeCommandInput, DescribeThemeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTheme",
+  DescribeTheme$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeThemeRequest;
+      output: DescribeThemeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeThemeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeThemeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeThemeCommandOutput> {
-    return deserializeAws_restJson1DescribeThemeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeThemeCommandInput;
+      output: DescribeThemeCommandOutput;
+    };
+  };
 }

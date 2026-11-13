@@ -1,112 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateRouteRequest, CreateRouteResult } from "../models/models_1";
-import { deserializeAws_ec2CreateRouteCommand, serializeAws_ec2CreateRouteCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRouteRequest, CreateRouteResult } from "../models/models_2";
+import { CreateRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRouteCommand}.
+ */
 export interface CreateRouteCommandInput extends CreateRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRouteCommand}.
+ */
 export interface CreateRouteCommandOutput extends CreateRouteResult, __MetadataBearer {}
 
 /**
  * <p>Creates a route in a route table within a VPC.</p>
- *          <p>You must specify one of the following targets: internet gateway or virtual private
- * 			gateway, NAT instance, NAT gateway, VPC peering connection, network interface, egress-only internet gateway, or transit gateway.</p>
+ *          <p>You must specify either a destination CIDR block or a prefix list ID. You must also specify
+ *          exactly one of the resources from the parameter list.</p>
  *          <p>When determining how to route traffic, we use the route with the most specific match.
  *             For example, traffic is destined for the IPv4 address <code>192.0.2.3</code>, and the
  *             route table includes the following two IPv4 routes:</p>
- * 			      <ul>
+ *          <ul>
  *             <li>
- * 					          <p>
+ *                <p>
  *                   <code>192.0.2.0/24</code> (goes to some target A)</p>
- * 				        </li>
+ *             </li>
  *             <li>
- * 					          <p>
+ *                <p>
  *                   <code>192.0.2.0/28</code> (goes to some target B)</p>
- * 				        </li>
+ *             </li>
  *          </ul>
- * 		       <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route
+ *          <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route
  * 				in the list covers a smaller number of IP addresses and is therefore more specific,
  * 				so we use that route to determine where to target the traffic.</p>
  *          <p>For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the
- *          <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+ *          <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateRouteCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateRouteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateRouteRequest
+ *   DestinationPrefixListId: "STRING_VALUE",
+ *   VpcEndpointId: "STRING_VALUE",
+ *   TransitGatewayId: "STRING_VALUE",
+ *   LocalGatewayId: "STRING_VALUE",
+ *   CarrierGatewayId: "STRING_VALUE",
+ *   CoreNetworkArn: "STRING_VALUE",
+ *   OdbNetworkArn: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   RouteTableId: "STRING_VALUE", // required
+ *   DestinationCidrBlock: "STRING_VALUE",
+ *   GatewayId: "STRING_VALUE",
+ *   DestinationIpv6CidrBlock: "STRING_VALUE",
+ *   EgressOnlyInternetGatewayId: "STRING_VALUE",
+ *   InstanceId: "STRING_VALUE",
+ *   NetworkInterfaceId: "STRING_VALUE",
+ *   VpcPeeringConnectionId: "STRING_VALUE",
+ *   NatGatewayId: "STRING_VALUE",
+ * };
  * const command = new CreateRouteCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRouteResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param CreateRouteCommandInput - {@link CreateRouteCommandInput}
+ * @returns {@link CreateRouteCommandOutput}
  * @see {@link CreateRouteCommandInput} for command's `input` shape.
  * @see {@link CreateRouteCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To create a route
+ * ```javascript
+ * // This example creates a route for the specified route table. The route matches all traffic (0.0.0.0/0) and routes it to the specified Internet gateway.
+ * const input = {
+ *   DestinationCidrBlock: "0.0.0.0/0",
+ *   GatewayId: "igw-c0a643a9",
+ *   RouteTableId: "rtb-22574640"
+ * };
+ * const command = new CreateRouteCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateRouteCommand extends $Command<
-  CreateRouteCommandInput,
-  CreateRouteCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRouteCommandInput, CreateRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRouteResult.filterSensitiveLog,
+export class CreateRouteCommand extends command<CreateRouteCommandInput, CreateRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRoute",
+  CreateRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRouteRequest;
+      output: CreateRouteResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateRouteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRouteCommandOutput> {
-    return deserializeAws_ec2CreateRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRouteCommandInput;
+      output: CreateRouteCommandOutput;
+    };
+  };
 }

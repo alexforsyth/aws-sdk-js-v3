@@ -1,0 +1,111 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetParticipantRequest, GetParticipantResponse } from "../models/models_0";
+import { GetParticipant$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetParticipantCommand}.
+ */
+export interface GetParticipantCommandInput extends GetParticipantRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetParticipantCommand}.
+ */
+export interface GetParticipantCommandOutput extends GetParticipantResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets information about the specified participant token.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { IVSRealTimeClient, GetParticipantCommand } from "@aws-sdk/client-ivs-realtime"; // ES Modules import
+ * // const { IVSRealTimeClient, GetParticipantCommand } = require("@aws-sdk/client-ivs-realtime"); // CommonJS import
+ * // import type { IVSRealTimeClientConfig } from "@aws-sdk/client-ivs-realtime";
+ * const config = {}; // type is IVSRealTimeClientConfig
+ * const client = new IVSRealTimeClient(config);
+ * const input = { // GetParticipantRequest
+ *   stageArn: "STRING_VALUE", // required
+ *   sessionId: "STRING_VALUE", // required
+ *   participantId: "STRING_VALUE", // required
+ * };
+ * const command = new GetParticipantCommand(input);
+ * const response = await client.send(command);
+ * // { // GetParticipantResponse
+ * //   participant: { // Participant
+ * //     participantId: "STRING_VALUE",
+ * //     userId: "STRING_VALUE",
+ * //     state: "STRING_VALUE",
+ * //     firstJoinTime: new Date("TIMESTAMP"),
+ * //     attributes: { // ParticipantAttributes
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     published: true || false,
+ * //     ispName: "STRING_VALUE",
+ * //     osName: "STRING_VALUE",
+ * //     osVersion: "STRING_VALUE",
+ * //     browserName: "STRING_VALUE",
+ * //     browserVersion: "STRING_VALUE",
+ * //     sdkVersion: "STRING_VALUE",
+ * //     recordingS3BucketName: "STRING_VALUE",
+ * //     recordingS3Prefix: "STRING_VALUE",
+ * //     recordingState: "STRING_VALUE",
+ * //     protocol: "UNKNOWN" || "WHIP" || "RTMP" || "RTMPS",
+ * //     replicationType: "STRING_VALUE",
+ * //     replicationState: "STRING_VALUE",
+ * //     sourceStageArn: "STRING_VALUE",
+ * //     sourceSessionId: "STRING_VALUE",
+ * //     redundantIngest: true || false,
+ * //     ingestConfigurationArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetParticipantCommandInput - {@link GetParticipantCommandInput}
+ * @returns {@link GetParticipantCommandOutput}
+ * @see {@link GetParticipantCommandInput} for command's `input` shape.
+ * @see {@link GetParticipantCommandOutput} for command's `response` shape.
+ * @see {@link IVSRealTimeClientResolvedConfig | config} for IVSRealTimeClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IVSRealTimeServiceException}
+ * <p>Base exception class for all service exceptions from IVSRealTime service.</p>
+ *
+ *
+ * @public
+ */
+export class GetParticipantCommand extends command<GetParticipantCommandInput, GetParticipantCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetParticipant",
+  GetParticipant$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetParticipantRequest;
+      output: GetParticipantResponse;
+    };
+    sdk: {
+      input: GetParticipantCommandInput;
+      output: GetParticipantCommandOutput;
+    };
+  };
+}

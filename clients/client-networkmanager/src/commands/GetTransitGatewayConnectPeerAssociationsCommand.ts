@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetTransitGatewayConnectPeerAssociationsRequest,
   GetTransitGatewayConnectPeerAssociationsResponse,
 } from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1GetTransitGatewayConnectPeerAssociationsCommand,
-  serializeAws_restJson1GetTransitGatewayConnectPeerAssociationsCommand,
-} from "../protocols/Aws_restJson1";
+import { GetTransitGatewayConnectPeerAssociations$ } from "../schemas/schemas_0";
 
-export interface GetTransitGatewayConnectPeerAssociationsCommandInput
-  extends GetTransitGatewayConnectPeerAssociationsRequest {}
-export interface GetTransitGatewayConnectPeerAssociationsCommandOutput
-  extends GetTransitGatewayConnectPeerAssociationsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTransitGatewayConnectPeerAssociationsCommand}.
+ */
+export interface GetTransitGatewayConnectPeerAssociationsCommandInput extends GetTransitGatewayConnectPeerAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTransitGatewayConnectPeerAssociationsCommand}.
+ */
+export interface GetTransitGatewayConnectPeerAssociationsCommandOutput extends GetTransitGatewayConnectPeerAssociationsResponse, __MetadataBearer {}
 
 /**
  * <p>Gets information about one or more of your transit gateway Connect peer associations in a global network.</p>
@@ -34,77 +32,80 @@ export interface GetTransitGatewayConnectPeerAssociationsCommandOutput
  * ```javascript
  * import { NetworkManagerClient, GetTransitGatewayConnectPeerAssociationsCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, GetTransitGatewayConnectPeerAssociationsCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // GetTransitGatewayConnectPeerAssociationsRequest
+ *   GlobalNetworkId: "STRING_VALUE", // required
+ *   TransitGatewayConnectPeerArns: [ // TransitGatewayConnectPeerArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetTransitGatewayConnectPeerAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetTransitGatewayConnectPeerAssociationsResponse
+ * //   TransitGatewayConnectPeerAssociations: [ // TransitGatewayConnectPeerAssociationList
+ * //     { // TransitGatewayConnectPeerAssociation
+ * //       TransitGatewayConnectPeerArn: "STRING_VALUE",
+ * //       GlobalNetworkId: "STRING_VALUE",
+ * //       DeviceId: "STRING_VALUE",
+ * //       LinkId: "STRING_VALUE",
+ * //       State: "PENDING" || "AVAILABLE" || "DELETING" || "DELETED",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetTransitGatewayConnectPeerAssociationsCommandInput - {@link GetTransitGatewayConnectPeerAssociationsCommandInput}
+ * @returns {@link GetTransitGatewayConnectPeerAssociationsCommandOutput}
  * @see {@link GetTransitGatewayConnectPeerAssociationsCommandInput} for command's `input` shape.
  * @see {@link GetTransitGatewayConnectPeerAssociationsCommandOutput} for command's `response` shape.
- * @see {@link NetworkManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict processing the request. Updating or deleting the resource can
+ *             cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class GetTransitGatewayConnectPeerAssociationsCommand extends $Command<
-  GetTransitGatewayConnectPeerAssociationsCommandInput,
-  GetTransitGatewayConnectPeerAssociationsCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTransitGatewayConnectPeerAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    GetTransitGatewayConnectPeerAssociationsCommandInput,
-    GetTransitGatewayConnectPeerAssociationsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "GetTransitGatewayConnectPeerAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTransitGatewayConnectPeerAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetTransitGatewayConnectPeerAssociationsResponse.filterSensitiveLog,
+export class GetTransitGatewayConnectPeerAssociationsCommand extends command<GetTransitGatewayConnectPeerAssociationsCommandInput, GetTransitGatewayConnectPeerAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTransitGatewayConnectPeerAssociations",
+  GetTransitGatewayConnectPeerAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayConnectPeerAssociationsRequest;
+      output: GetTransitGatewayConnectPeerAssociationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetTransitGatewayConnectPeerAssociationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetTransitGatewayConnectPeerAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetTransitGatewayConnectPeerAssociationsCommandOutput> {
-    return deserializeAws_restJson1GetTransitGatewayConnectPeerAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTransitGatewayConnectPeerAssociationsCommandInput;
+      output: GetTransitGatewayConnectPeerAssociationsCommandOutput;
+    };
+  };
 }

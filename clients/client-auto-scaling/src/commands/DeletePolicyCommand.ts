@@ -1,97 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingClient";
-import { DeletePolicyType } from "../models/models_0";
-import { deserializeAws_queryDeletePolicyCommand, serializeAws_queryDeletePolicyCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePolicyType } from "../models/models_0";
+import { DeletePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePolicyCommand}.
+ */
 export interface DeletePolicyCommandInput extends DeletePolicyType {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePolicyCommand}.
+ */
 export interface DeletePolicyCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Deletes the specified scaling policy.</p>
- *         <p>Deleting either a step scaling policy or a simple scaling policy deletes the
+ *          <p>Deleting either a step scaling policy or a simple scaling policy deletes the
  *             underlying alarm action, but does not delete the alarm, even if it no longer has an
  *             associated action.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/deleting-scaling-policy.html">Deleting a scaling
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/deleting-scaling-policy.html">Delete a scaling
  *                 policy</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AutoScalingClient, DeletePolicyCommand } from "@aws-sdk/client-auto-scaling"; // ES Modules import
  * // const { AutoScalingClient, DeletePolicyCommand } = require("@aws-sdk/client-auto-scaling"); // CommonJS import
+ * // import type { AutoScalingClientConfig } from "@aws-sdk/client-auto-scaling";
+ * const config = {}; // type is AutoScalingClientConfig
  * const client = new AutoScalingClient(config);
+ * const input = { // DeletePolicyType
+ *   AutoScalingGroupName: "STRING_VALUE",
+ *   PolicyName: "STRING_VALUE", // required
+ * };
  * const command = new DeletePolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePolicyCommandInput - {@link DeletePolicyCommandInput}
+ * @returns {@link DeletePolicyCommandOutput}
  * @see {@link DeletePolicyCommandInput} for command's `input` shape.
  * @see {@link DeletePolicyCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingClientResolvedConfig | config} for AutoScalingClient's `config` shape.
  *
+ * @throws {@link ResourceContentionFault} (server fault)
+ *  <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
+ *             instance, or load balancer).</p>
+ *
+ * @throws {@link ServiceLinkedRoleFailure} (server fault)
+ *  <p>The service-linked role is not yet ready for use.</p>
+ *
+ * @throws {@link AutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from AutoScaling service.</p>
+ *
+ *
+ * @example To delete an Auto Scaling policy
+ * ```javascript
+ * // This example deletes the specified Auto Scaling policy.
+ * const input = {
+ *   AutoScalingGroupName: "my-auto-scaling-group",
+ *   PolicyName: "my-step-scale-out-policy"
+ * };
+ * const command = new DeletePolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeletePolicyCommand extends $Command<
-  DeletePolicyCommandInput,
-  DeletePolicyCommandOutput,
-  AutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePolicyCommandInput, DeletePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingClient";
-    const commandName = "DeletePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePolicyType.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeletePolicyCommand extends command<DeletePolicyCommandInput, DeletePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePolicy",
+  DeletePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePolicyType;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeletePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePolicyCommandOutput> {
-    return deserializeAws_queryDeletePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePolicyCommandInput;
+      output: DeletePolicyCommandOutput;
+    };
+  };
 }

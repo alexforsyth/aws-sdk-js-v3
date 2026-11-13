@@ -1,0 +1,63 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type DescribeTenantDatabasesCommandInput,
+  type DescribeTenantDatabasesCommandOutput,
+  DescribeTenantDatabasesCommand,
+} from "../commands/DescribeTenantDatabasesCommand";
+import type { DBInstanceNotFoundFault } from "../models/errors";
+import type { RDSServiceException } from "../models/RDSServiceException";
+import type { RDSClient } from "../RDSClient";
+
+const checkState = async (client: RDSClient, input: DescribeTenantDatabasesCommandInput): Promise<WaiterResult<DescribeTenantDatabasesCommandOutput | RDSServiceException>> => {
+  let reason;
+  try {
+    let result: DescribeTenantDatabasesCommandOutput & any = await client.send(new DescribeTenantDatabasesCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return (result.TenantDatabases.length == 0);
+      }
+      if (returnComparator() == true) {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+    if (exception.name === "DBInstanceNotFoundFault") {
+      return { state: WaiterState.SUCCESS, reason };
+    }
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ *
+ *  @deprecated Use waitUntilTenantDatabaseDeleted instead. waitForTenantDatabaseDeleted does not throw error in non-success cases.
+ */
+export const waitForTenantDatabaseDeleted = async (
+  params: WaiterConfiguration<RDSClient>,
+  input: DescribeTenantDatabasesCommandInput
+): Promise<WaiterResult<DescribeTenantDatabasesCommandOutput | RDSServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to DescribeTenantDatabasesCommand for polling.
+ */
+export const waitUntilTenantDatabaseDeleted = async (
+  params: WaiterConfiguration<RDSClient>,
+  input: DescribeTenantDatabasesCommandInput
+): Promise<WaiterResult<DescribeTenantDatabasesCommandOutput | DBInstanceNotFoundFault>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<DescribeTenantDatabasesCommandOutput | DBInstanceNotFoundFault>;
+};

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { StopWorkflowRunRequest, StopWorkflowRunResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1StopWorkflowRunCommand,
-  serializeAws_json1_1StopWorkflowRunCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopWorkflowRunRequest, StopWorkflowRunResponse } from "../models/models_3";
+import { StopWorkflowRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopWorkflowRunCommand}.
+ */
 export interface StopWorkflowRunCommandInput extends StopWorkflowRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopWorkflowRunCommand}.
+ */
 export interface StopWorkflowRunCommandOutput extends StopWorkflowRunResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,61 @@ export interface StopWorkflowRunCommandOutput extends StopWorkflowRunResponse, _
  * ```javascript
  * import { GlueClient, StopWorkflowRunCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, StopWorkflowRunCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // StopWorkflowRunRequest
+ *   Name: "STRING_VALUE", // required
+ *   RunId: "STRING_VALUE", // required
+ * };
  * const command = new StopWorkflowRunCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopWorkflowRunCommandInput - {@link StopWorkflowRunCommandInput}
+ * @returns {@link StopWorkflowRunCommandOutput}
  * @see {@link StopWorkflowRunCommandInput} for command's `input` shape.
  * @see {@link StopWorkflowRunCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link IllegalWorkflowStateException} (client fault)
+ *  <p>The workflow is in an invalid state to perform a requested operation.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class StopWorkflowRunCommand extends $Command<
-  StopWorkflowRunCommandInput,
-  StopWorkflowRunCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopWorkflowRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopWorkflowRunCommandInput, StopWorkflowRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "StopWorkflowRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopWorkflowRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopWorkflowRunResponse.filterSensitiveLog,
+export class StopWorkflowRunCommand extends command<StopWorkflowRunCommandInput, StopWorkflowRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopWorkflowRun",
+  StopWorkflowRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopWorkflowRunRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopWorkflowRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopWorkflowRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopWorkflowRunCommandOutput> {
-    return deserializeAws_json1_1StopWorkflowRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopWorkflowRunCommandInput;
+      output: StopWorkflowRunCommandOutput;
+    };
+  };
 }

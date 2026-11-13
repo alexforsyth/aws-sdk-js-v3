@@ -1,1122 +1,891 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
-import { CreateCellCommand, CreateCellCommandInput, CreateCellCommandOutput } from "./commands/CreateCellCommand";
 import {
+  type CreateCellCommandInput,
+  type CreateCellCommandOutput,
+  CreateCellCommand,
+} from "./commands/CreateCellCommand";
+import {
+  type CreateCrossAccountAuthorizationCommandInput,
+  type CreateCrossAccountAuthorizationCommandOutput,
   CreateCrossAccountAuthorizationCommand,
-  CreateCrossAccountAuthorizationCommandInput,
-  CreateCrossAccountAuthorizationCommandOutput,
 } from "./commands/CreateCrossAccountAuthorizationCommand";
 import {
+  type CreateReadinessCheckCommandInput,
+  type CreateReadinessCheckCommandOutput,
   CreateReadinessCheckCommand,
-  CreateReadinessCheckCommandInput,
-  CreateReadinessCheckCommandOutput,
 } from "./commands/CreateReadinessCheckCommand";
 import {
+  type CreateRecoveryGroupCommandInput,
+  type CreateRecoveryGroupCommandOutput,
   CreateRecoveryGroupCommand,
-  CreateRecoveryGroupCommandInput,
-  CreateRecoveryGroupCommandOutput,
 } from "./commands/CreateRecoveryGroupCommand";
 import {
+  type CreateResourceSetCommandInput,
+  type CreateResourceSetCommandOutput,
   CreateResourceSetCommand,
-  CreateResourceSetCommandInput,
-  CreateResourceSetCommandOutput,
 } from "./commands/CreateResourceSetCommand";
-import { DeleteCellCommand, DeleteCellCommandInput, DeleteCellCommandOutput } from "./commands/DeleteCellCommand";
 import {
+  type DeleteCellCommandInput,
+  type DeleteCellCommandOutput,
+  DeleteCellCommand,
+} from "./commands/DeleteCellCommand";
+import {
+  type DeleteCrossAccountAuthorizationCommandInput,
+  type DeleteCrossAccountAuthorizationCommandOutput,
   DeleteCrossAccountAuthorizationCommand,
-  DeleteCrossAccountAuthorizationCommandInput,
-  DeleteCrossAccountAuthorizationCommandOutput,
 } from "./commands/DeleteCrossAccountAuthorizationCommand";
 import {
+  type DeleteReadinessCheckCommandInput,
+  type DeleteReadinessCheckCommandOutput,
   DeleteReadinessCheckCommand,
-  DeleteReadinessCheckCommandInput,
-  DeleteReadinessCheckCommandOutput,
 } from "./commands/DeleteReadinessCheckCommand";
 import {
+  type DeleteRecoveryGroupCommandInput,
+  type DeleteRecoveryGroupCommandOutput,
   DeleteRecoveryGroupCommand,
-  DeleteRecoveryGroupCommandInput,
-  DeleteRecoveryGroupCommandOutput,
 } from "./commands/DeleteRecoveryGroupCommand";
 import {
+  type DeleteResourceSetCommandInput,
+  type DeleteResourceSetCommandOutput,
   DeleteResourceSetCommand,
-  DeleteResourceSetCommandInput,
-  DeleteResourceSetCommandOutput,
 } from "./commands/DeleteResourceSetCommand";
 import {
+  type GetArchitectureRecommendationsCommandInput,
+  type GetArchitectureRecommendationsCommandOutput,
   GetArchitectureRecommendationsCommand,
-  GetArchitectureRecommendationsCommandInput,
-  GetArchitectureRecommendationsCommandOutput,
 } from "./commands/GetArchitectureRecommendationsCommand";
-import { GetCellCommand, GetCellCommandInput, GetCellCommandOutput } from "./commands/GetCellCommand";
+import { type GetCellCommandInput, type GetCellCommandOutput, GetCellCommand } from "./commands/GetCellCommand";
 import {
+  type GetCellReadinessSummaryCommandInput,
+  type GetCellReadinessSummaryCommandOutput,
   GetCellReadinessSummaryCommand,
-  GetCellReadinessSummaryCommandInput,
-  GetCellReadinessSummaryCommandOutput,
 } from "./commands/GetCellReadinessSummaryCommand";
 import {
+  type GetReadinessCheckCommandInput,
+  type GetReadinessCheckCommandOutput,
   GetReadinessCheckCommand,
-  GetReadinessCheckCommandInput,
-  GetReadinessCheckCommandOutput,
 } from "./commands/GetReadinessCheckCommand";
 import {
+  type GetReadinessCheckResourceStatusCommandInput,
+  type GetReadinessCheckResourceStatusCommandOutput,
   GetReadinessCheckResourceStatusCommand,
-  GetReadinessCheckResourceStatusCommandInput,
-  GetReadinessCheckResourceStatusCommandOutput,
 } from "./commands/GetReadinessCheckResourceStatusCommand";
 import {
+  type GetReadinessCheckStatusCommandInput,
+  type GetReadinessCheckStatusCommandOutput,
   GetReadinessCheckStatusCommand,
-  GetReadinessCheckStatusCommandInput,
-  GetReadinessCheckStatusCommandOutput,
 } from "./commands/GetReadinessCheckStatusCommand";
 import {
+  type GetRecoveryGroupCommandInput,
+  type GetRecoveryGroupCommandOutput,
   GetRecoveryGroupCommand,
-  GetRecoveryGroupCommandInput,
-  GetRecoveryGroupCommandOutput,
 } from "./commands/GetRecoveryGroupCommand";
 import {
+  type GetRecoveryGroupReadinessSummaryCommandInput,
+  type GetRecoveryGroupReadinessSummaryCommandOutput,
   GetRecoveryGroupReadinessSummaryCommand,
-  GetRecoveryGroupReadinessSummaryCommandInput,
-  GetRecoveryGroupReadinessSummaryCommandOutput,
 } from "./commands/GetRecoveryGroupReadinessSummaryCommand";
 import {
+  type GetResourceSetCommandInput,
+  type GetResourceSetCommandOutput,
   GetResourceSetCommand,
-  GetResourceSetCommandInput,
-  GetResourceSetCommandOutput,
 } from "./commands/GetResourceSetCommand";
-import { ListCellsCommand, ListCellsCommandInput, ListCellsCommandOutput } from "./commands/ListCellsCommand";
+import { type ListCellsCommandInput, type ListCellsCommandOutput, ListCellsCommand } from "./commands/ListCellsCommand";
 import {
+  type ListCrossAccountAuthorizationsCommandInput,
+  type ListCrossAccountAuthorizationsCommandOutput,
   ListCrossAccountAuthorizationsCommand,
-  ListCrossAccountAuthorizationsCommandInput,
-  ListCrossAccountAuthorizationsCommandOutput,
 } from "./commands/ListCrossAccountAuthorizationsCommand";
 import {
+  type ListReadinessChecksCommandInput,
+  type ListReadinessChecksCommandOutput,
   ListReadinessChecksCommand,
-  ListReadinessChecksCommandInput,
-  ListReadinessChecksCommandOutput,
 } from "./commands/ListReadinessChecksCommand";
 import {
+  type ListRecoveryGroupsCommandInput,
+  type ListRecoveryGroupsCommandOutput,
   ListRecoveryGroupsCommand,
-  ListRecoveryGroupsCommandInput,
-  ListRecoveryGroupsCommandOutput,
 } from "./commands/ListRecoveryGroupsCommand";
 import {
+  type ListResourceSetsCommandInput,
+  type ListResourceSetsCommandOutput,
   ListResourceSetsCommand,
-  ListResourceSetsCommandInput,
-  ListResourceSetsCommandOutput,
 } from "./commands/ListResourceSetsCommand";
-import { ListRulesCommand, ListRulesCommandInput, ListRulesCommandOutput } from "./commands/ListRulesCommand";
+import { type ListRulesCommandInput, type ListRulesCommandOutput, ListRulesCommand } from "./commands/ListRulesCommand";
 import {
+  type ListTagsForResourcesCommandInput,
+  type ListTagsForResourcesCommandOutput,
   ListTagsForResourcesCommand,
-  ListTagsForResourcesCommandInput,
-  ListTagsForResourcesCommandOutput,
 } from "./commands/ListTagsForResourcesCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateCellCommand, UpdateCellCommandInput, UpdateCellCommandOutput } from "./commands/UpdateCellCommand";
 import {
+  type UpdateCellCommandInput,
+  type UpdateCellCommandOutput,
+  UpdateCellCommand,
+} from "./commands/UpdateCellCommand";
+import {
+  type UpdateReadinessCheckCommandInput,
+  type UpdateReadinessCheckCommandOutput,
   UpdateReadinessCheckCommand,
-  UpdateReadinessCheckCommandInput,
-  UpdateReadinessCheckCommandOutput,
 } from "./commands/UpdateReadinessCheckCommand";
 import {
+  type UpdateRecoveryGroupCommandInput,
+  type UpdateRecoveryGroupCommandOutput,
   UpdateRecoveryGroupCommand,
-  UpdateRecoveryGroupCommandInput,
-  UpdateRecoveryGroupCommandOutput,
 } from "./commands/UpdateRecoveryGroupCommand";
 import {
+  type UpdateResourceSetCommandInput,
+  type UpdateResourceSetCommandOutput,
   UpdateResourceSetCommand,
-  UpdateResourceSetCommandInput,
-  UpdateResourceSetCommandOutput,
 } from "./commands/UpdateResourceSetCommand";
+import { paginateGetCellReadinessSummary } from "./pagination/GetCellReadinessSummaryPaginator";
+import { paginateGetReadinessCheckResourceStatus } from "./pagination/GetReadinessCheckResourceStatusPaginator";
+import { paginateGetReadinessCheckStatus } from "./pagination/GetReadinessCheckStatusPaginator";
+import { paginateGetRecoveryGroupReadinessSummary } from "./pagination/GetRecoveryGroupReadinessSummaryPaginator";
+import { paginateListCells } from "./pagination/ListCellsPaginator";
+import { paginateListCrossAccountAuthorizations } from "./pagination/ListCrossAccountAuthorizationsPaginator";
+import { paginateListReadinessChecks } from "./pagination/ListReadinessChecksPaginator";
+import { paginateListRecoveryGroups } from "./pagination/ListRecoveryGroupsPaginator";
+import { paginateListResourceSets } from "./pagination/ListResourceSetsPaginator";
+import { paginateListRules } from "./pagination/ListRulesPaginator";
 import { Route53RecoveryReadinessClient } from "./Route53RecoveryReadinessClient";
 
+const commands = {
+  CreateCellCommand,
+  CreateCrossAccountAuthorizationCommand,
+  CreateReadinessCheckCommand,
+  CreateRecoveryGroupCommand,
+  CreateResourceSetCommand,
+  DeleteCellCommand,
+  DeleteCrossAccountAuthorizationCommand,
+  DeleteReadinessCheckCommand,
+  DeleteRecoveryGroupCommand,
+  DeleteResourceSetCommand,
+  GetArchitectureRecommendationsCommand,
+  GetCellCommand,
+  GetCellReadinessSummaryCommand,
+  GetReadinessCheckCommand,
+  GetReadinessCheckResourceStatusCommand,
+  GetReadinessCheckStatusCommand,
+  GetRecoveryGroupCommand,
+  GetRecoveryGroupReadinessSummaryCommand,
+  GetResourceSetCommand,
+  ListCellsCommand,
+  ListCrossAccountAuthorizationsCommand,
+  ListReadinessChecksCommand,
+  ListRecoveryGroupsCommand,
+  ListResourceSetsCommand,
+  ListRulesCommand,
+  ListTagsForResourcesCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCellCommand,
+  UpdateReadinessCheckCommand,
+  UpdateRecoveryGroupCommand,
+  UpdateResourceSetCommand,
+};
+const paginators = {
+  paginateGetCellReadinessSummary,
+  paginateGetReadinessCheckResourceStatus,
+  paginateGetReadinessCheckStatus,
+  paginateGetRecoveryGroupReadinessSummary,
+  paginateListCells,
+  paginateListCrossAccountAuthorizations,
+  paginateListReadinessChecks,
+  paginateListRecoveryGroups,
+  paginateListResourceSets,
+  paginateListRules,
+};
+
 /**
- * AWS Route53 Recovery Readiness
+ * @public
  */
-export class Route53RecoveryReadiness extends Route53RecoveryReadinessClient {
+export interface Route53RecoveryReadinessRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Route53RecoveryReadiness {
   /**
-   * Creates a new Cell.
+   * @see {@link CreateCellCommand}
    */
-  public createCell(args: CreateCellCommandInput, options?: __HttpHandlerOptions): Promise<CreateCellCommandOutput>;
-  public createCell(args: CreateCellCommandInput, cb: (err: any, data?: CreateCellCommandOutput) => void): void;
-  public createCell(
+  createCell(
     args: CreateCellCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<CreateCellCommandOutput>;
+  createCell(
+    args: CreateCellCommandInput,
     cb: (err: any, data?: CreateCellCommandOutput) => void
   ): void;
-  public createCell(
+  createCell(
     args: CreateCellCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCellCommandOutput) => void),
-    cb?: (err: any, data?: CreateCellCommandOutput) => void
-  ): Promise<CreateCellCommandOutput> | void {
-    const command = new CreateCellCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: CreateCellCommandOutput) => void
+  ): void;
 
   /**
-   * Create a new cross account readiness authorization.
+   * @see {@link CreateCrossAccountAuthorizationCommand}
    */
-  public createCrossAccountAuthorization(
+  createCrossAccountAuthorization(
     args: CreateCrossAccountAuthorizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<CreateCrossAccountAuthorizationCommandOutput>;
-  public createCrossAccountAuthorization(
+  createCrossAccountAuthorization(
     args: CreateCrossAccountAuthorizationCommandInput,
     cb: (err: any, data?: CreateCrossAccountAuthorizationCommandOutput) => void
   ): void;
-  public createCrossAccountAuthorization(
+  createCrossAccountAuthorization(
     args: CreateCrossAccountAuthorizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: CreateCrossAccountAuthorizationCommandOutput) => void
   ): void;
-  public createCrossAccountAuthorization(
-    args: CreateCrossAccountAuthorizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCrossAccountAuthorizationCommandOutput) => void),
-    cb?: (err: any, data?: CreateCrossAccountAuthorizationCommandOutput) => void
-  ): Promise<CreateCrossAccountAuthorizationCommandOutput> | void {
-    const command = new CreateCrossAccountAuthorizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Creates a new Readiness Check.
+   * @see {@link CreateReadinessCheckCommand}
    */
-  public createReadinessCheck(
+  createReadinessCheck(
     args: CreateReadinessCheckCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<CreateReadinessCheckCommandOutput>;
-  public createReadinessCheck(
+  createReadinessCheck(
     args: CreateReadinessCheckCommandInput,
     cb: (err: any, data?: CreateReadinessCheckCommandOutput) => void
   ): void;
-  public createReadinessCheck(
+  createReadinessCheck(
     args: CreateReadinessCheckCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: CreateReadinessCheckCommandOutput) => void
   ): void;
-  public createReadinessCheck(
-    args: CreateReadinessCheckCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateReadinessCheckCommandOutput) => void),
-    cb?: (err: any, data?: CreateReadinessCheckCommandOutput) => void
-  ): Promise<CreateReadinessCheckCommandOutput> | void {
-    const command = new CreateReadinessCheckCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Creates a new Recovery Group.
+   * @see {@link CreateRecoveryGroupCommand}
    */
-  public createRecoveryGroup(
+  createRecoveryGroup(
     args: CreateRecoveryGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<CreateRecoveryGroupCommandOutput>;
-  public createRecoveryGroup(
+  createRecoveryGroup(
     args: CreateRecoveryGroupCommandInput,
     cb: (err: any, data?: CreateRecoveryGroupCommandOutput) => void
   ): void;
-  public createRecoveryGroup(
+  createRecoveryGroup(
     args: CreateRecoveryGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: CreateRecoveryGroupCommandOutput) => void
   ): void;
-  public createRecoveryGroup(
-    args: CreateRecoveryGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRecoveryGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateRecoveryGroupCommandOutput) => void
-  ): Promise<CreateRecoveryGroupCommandOutput> | void {
-    const command = new CreateRecoveryGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Creates a new Resource Set.
+   * @see {@link CreateResourceSetCommand}
    */
-  public createResourceSet(
+  createResourceSet(
     args: CreateResourceSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<CreateResourceSetCommandOutput>;
-  public createResourceSet(
+  createResourceSet(
     args: CreateResourceSetCommandInput,
     cb: (err: any, data?: CreateResourceSetCommandOutput) => void
   ): void;
-  public createResourceSet(
+  createResourceSet(
     args: CreateResourceSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: CreateResourceSetCommandOutput) => void
   ): void;
-  public createResourceSet(
-    args: CreateResourceSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateResourceSetCommandOutput) => void),
-    cb?: (err: any, data?: CreateResourceSetCommandOutput) => void
-  ): Promise<CreateResourceSetCommandOutput> | void {
-    const command = new CreateResourceSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Deletes an existing Cell.
+   * @see {@link DeleteCellCommand}
    */
-  public deleteCell(args: DeleteCellCommandInput, options?: __HttpHandlerOptions): Promise<DeleteCellCommandOutput>;
-  public deleteCell(args: DeleteCellCommandInput, cb: (err: any, data?: DeleteCellCommandOutput) => void): void;
-  public deleteCell(
+  deleteCell(
     args: DeleteCellCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<DeleteCellCommandOutput>;
+  deleteCell(
+    args: DeleteCellCommandInput,
     cb: (err: any, data?: DeleteCellCommandOutput) => void
   ): void;
-  public deleteCell(
+  deleteCell(
     args: DeleteCellCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCellCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCellCommandOutput) => void
-  ): Promise<DeleteCellCommandOutput> | void {
-    const command = new DeleteCellCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: DeleteCellCommandOutput) => void
+  ): void;
 
   /**
-   * Delete cross account readiness authorization
+   * @see {@link DeleteCrossAccountAuthorizationCommand}
    */
-  public deleteCrossAccountAuthorization(
+  deleteCrossAccountAuthorization(
     args: DeleteCrossAccountAuthorizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<DeleteCrossAccountAuthorizationCommandOutput>;
-  public deleteCrossAccountAuthorization(
+  deleteCrossAccountAuthorization(
     args: DeleteCrossAccountAuthorizationCommandInput,
     cb: (err: any, data?: DeleteCrossAccountAuthorizationCommandOutput) => void
   ): void;
-  public deleteCrossAccountAuthorization(
+  deleteCrossAccountAuthorization(
     args: DeleteCrossAccountAuthorizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: DeleteCrossAccountAuthorizationCommandOutput) => void
   ): void;
-  public deleteCrossAccountAuthorization(
-    args: DeleteCrossAccountAuthorizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCrossAccountAuthorizationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCrossAccountAuthorizationCommandOutput) => void
-  ): Promise<DeleteCrossAccountAuthorizationCommandOutput> | void {
-    const command = new DeleteCrossAccountAuthorizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Deletes an existing Readiness Check.
+   * @see {@link DeleteReadinessCheckCommand}
    */
-  public deleteReadinessCheck(
+  deleteReadinessCheck(
     args: DeleteReadinessCheckCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<DeleteReadinessCheckCommandOutput>;
-  public deleteReadinessCheck(
+  deleteReadinessCheck(
     args: DeleteReadinessCheckCommandInput,
     cb: (err: any, data?: DeleteReadinessCheckCommandOutput) => void
   ): void;
-  public deleteReadinessCheck(
+  deleteReadinessCheck(
     args: DeleteReadinessCheckCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: DeleteReadinessCheckCommandOutput) => void
   ): void;
-  public deleteReadinessCheck(
-    args: DeleteReadinessCheckCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteReadinessCheckCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReadinessCheckCommandOutput) => void
-  ): Promise<DeleteReadinessCheckCommandOutput> | void {
-    const command = new DeleteReadinessCheckCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Deletes an existing Recovery Group.
+   * @see {@link DeleteRecoveryGroupCommand}
    */
-  public deleteRecoveryGroup(
+  deleteRecoveryGroup(
     args: DeleteRecoveryGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<DeleteRecoveryGroupCommandOutput>;
-  public deleteRecoveryGroup(
+  deleteRecoveryGroup(
     args: DeleteRecoveryGroupCommandInput,
     cb: (err: any, data?: DeleteRecoveryGroupCommandOutput) => void
   ): void;
-  public deleteRecoveryGroup(
+  deleteRecoveryGroup(
     args: DeleteRecoveryGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: DeleteRecoveryGroupCommandOutput) => void
   ): void;
-  public deleteRecoveryGroup(
-    args: DeleteRecoveryGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRecoveryGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRecoveryGroupCommandOutput) => void
-  ): Promise<DeleteRecoveryGroupCommandOutput> | void {
-    const command = new DeleteRecoveryGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Deletes an existing Resource Set.
+   * @see {@link DeleteResourceSetCommand}
    */
-  public deleteResourceSet(
+  deleteResourceSet(
     args: DeleteResourceSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<DeleteResourceSetCommandOutput>;
-  public deleteResourceSet(
+  deleteResourceSet(
     args: DeleteResourceSetCommandInput,
     cb: (err: any, data?: DeleteResourceSetCommandOutput) => void
   ): void;
-  public deleteResourceSet(
+  deleteResourceSet(
     args: DeleteResourceSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: DeleteResourceSetCommandOutput) => void
   ): void;
-  public deleteResourceSet(
-    args: DeleteResourceSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourceSetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourceSetCommandOutput) => void
-  ): Promise<DeleteResourceSetCommandOutput> | void {
-    const command = new DeleteResourceSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns a collection of recommendations to improve resilliance and readiness check quality for a Recovery Group.
+   * @see {@link GetArchitectureRecommendationsCommand}
    */
-  public getArchitectureRecommendations(
+  getArchitectureRecommendations(
     args: GetArchitectureRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetArchitectureRecommendationsCommandOutput>;
-  public getArchitectureRecommendations(
+  getArchitectureRecommendations(
     args: GetArchitectureRecommendationsCommandInput,
     cb: (err: any, data?: GetArchitectureRecommendationsCommandOutput) => void
   ): void;
-  public getArchitectureRecommendations(
+  getArchitectureRecommendations(
     args: GetArchitectureRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetArchitectureRecommendationsCommandOutput) => void
   ): void;
-  public getArchitectureRecommendations(
-    args: GetArchitectureRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetArchitectureRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetArchitectureRecommendationsCommandOutput) => void
-  ): Promise<GetArchitectureRecommendationsCommandOutput> | void {
-    const command = new GetArchitectureRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns information about a Cell.
+   * @see {@link GetCellCommand}
    */
-  public getCell(args: GetCellCommandInput, options?: __HttpHandlerOptions): Promise<GetCellCommandOutput>;
-  public getCell(args: GetCellCommandInput, cb: (err: any, data?: GetCellCommandOutput) => void): void;
-  public getCell(
+  getCell(
     args: GetCellCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<GetCellCommandOutput>;
+  getCell(
+    args: GetCellCommandInput,
     cb: (err: any, data?: GetCellCommandOutput) => void
   ): void;
-  public getCell(
+  getCell(
     args: GetCellCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCellCommandOutput) => void),
-    cb?: (err: any, data?: GetCellCommandOutput) => void
-  ): Promise<GetCellCommandOutput> | void {
-    const command = new GetCellCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: GetCellCommandOutput) => void
+  ): void;
 
   /**
-   * Returns information about readiness of a Cell.
+   * @see {@link GetCellReadinessSummaryCommand}
    */
-  public getCellReadinessSummary(
+  getCellReadinessSummary(
     args: GetCellReadinessSummaryCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetCellReadinessSummaryCommandOutput>;
-  public getCellReadinessSummary(
+  getCellReadinessSummary(
     args: GetCellReadinessSummaryCommandInput,
     cb: (err: any, data?: GetCellReadinessSummaryCommandOutput) => void
   ): void;
-  public getCellReadinessSummary(
+  getCellReadinessSummary(
     args: GetCellReadinessSummaryCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetCellReadinessSummaryCommandOutput) => void
   ): void;
-  public getCellReadinessSummary(
-    args: GetCellReadinessSummaryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCellReadinessSummaryCommandOutput) => void),
-    cb?: (err: any, data?: GetCellReadinessSummaryCommandOutput) => void
-  ): Promise<GetCellReadinessSummaryCommandOutput> | void {
-    const command = new GetCellReadinessSummaryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns information about a ReadinessCheck.
+   * @see {@link GetReadinessCheckCommand}
    */
-  public getReadinessCheck(
+  getReadinessCheck(
     args: GetReadinessCheckCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetReadinessCheckCommandOutput>;
-  public getReadinessCheck(
+  getReadinessCheck(
     args: GetReadinessCheckCommandInput,
     cb: (err: any, data?: GetReadinessCheckCommandOutput) => void
   ): void;
-  public getReadinessCheck(
+  getReadinessCheck(
     args: GetReadinessCheckCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetReadinessCheckCommandOutput) => void
   ): void;
-  public getReadinessCheck(
-    args: GetReadinessCheckCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReadinessCheckCommandOutput) => void),
-    cb?: (err: any, data?: GetReadinessCheckCommandOutput) => void
-  ): Promise<GetReadinessCheckCommandOutput> | void {
-    const command = new GetReadinessCheckCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns detailed information about the status of an individual resource within a Readiness Check's Resource Set.
+   * @see {@link GetReadinessCheckResourceStatusCommand}
    */
-  public getReadinessCheckResourceStatus(
+  getReadinessCheckResourceStatus(
     args: GetReadinessCheckResourceStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetReadinessCheckResourceStatusCommandOutput>;
-  public getReadinessCheckResourceStatus(
+  getReadinessCheckResourceStatus(
     args: GetReadinessCheckResourceStatusCommandInput,
     cb: (err: any, data?: GetReadinessCheckResourceStatusCommandOutput) => void
   ): void;
-  public getReadinessCheckResourceStatus(
+  getReadinessCheckResourceStatus(
     args: GetReadinessCheckResourceStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetReadinessCheckResourceStatusCommandOutput) => void
   ): void;
-  public getReadinessCheckResourceStatus(
-    args: GetReadinessCheckResourceStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReadinessCheckResourceStatusCommandOutput) => void),
-    cb?: (err: any, data?: GetReadinessCheckResourceStatusCommandOutput) => void
-  ): Promise<GetReadinessCheckResourceStatusCommandOutput> | void {
-    const command = new GetReadinessCheckResourceStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns information about the status of a Readiness Check.
+   * @see {@link GetReadinessCheckStatusCommand}
    */
-  public getReadinessCheckStatus(
+  getReadinessCheckStatus(
     args: GetReadinessCheckStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetReadinessCheckStatusCommandOutput>;
-  public getReadinessCheckStatus(
+  getReadinessCheckStatus(
     args: GetReadinessCheckStatusCommandInput,
     cb: (err: any, data?: GetReadinessCheckStatusCommandOutput) => void
   ): void;
-  public getReadinessCheckStatus(
+  getReadinessCheckStatus(
     args: GetReadinessCheckStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetReadinessCheckStatusCommandOutput) => void
   ): void;
-  public getReadinessCheckStatus(
-    args: GetReadinessCheckStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReadinessCheckStatusCommandOutput) => void),
-    cb?: (err: any, data?: GetReadinessCheckStatusCommandOutput) => void
-  ): Promise<GetReadinessCheckStatusCommandOutput> | void {
-    const command = new GetReadinessCheckStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns information about a Recovery Group.
+   * @see {@link GetRecoveryGroupCommand}
    */
-  public getRecoveryGroup(
+  getRecoveryGroup(
     args: GetRecoveryGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetRecoveryGroupCommandOutput>;
-  public getRecoveryGroup(
+  getRecoveryGroup(
     args: GetRecoveryGroupCommandInput,
     cb: (err: any, data?: GetRecoveryGroupCommandOutput) => void
   ): void;
-  public getRecoveryGroup(
+  getRecoveryGroup(
     args: GetRecoveryGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetRecoveryGroupCommandOutput) => void
   ): void;
-  public getRecoveryGroup(
-    args: GetRecoveryGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecoveryGroupCommandOutput) => void),
-    cb?: (err: any, data?: GetRecoveryGroupCommandOutput) => void
-  ): Promise<GetRecoveryGroupCommandOutput> | void {
-    const command = new GetRecoveryGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns information about a Recovery Group.
+   * @see {@link GetRecoveryGroupReadinessSummaryCommand}
    */
-  public getRecoveryGroupReadinessSummary(
+  getRecoveryGroupReadinessSummary(
     args: GetRecoveryGroupReadinessSummaryCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetRecoveryGroupReadinessSummaryCommandOutput>;
-  public getRecoveryGroupReadinessSummary(
+  getRecoveryGroupReadinessSummary(
     args: GetRecoveryGroupReadinessSummaryCommandInput,
     cb: (err: any, data?: GetRecoveryGroupReadinessSummaryCommandOutput) => void
   ): void;
-  public getRecoveryGroupReadinessSummary(
+  getRecoveryGroupReadinessSummary(
     args: GetRecoveryGroupReadinessSummaryCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetRecoveryGroupReadinessSummaryCommandOutput) => void
   ): void;
-  public getRecoveryGroupReadinessSummary(
-    args: GetRecoveryGroupReadinessSummaryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecoveryGroupReadinessSummaryCommandOutput) => void),
-    cb?: (err: any, data?: GetRecoveryGroupReadinessSummaryCommandOutput) => void
-  ): Promise<GetRecoveryGroupReadinessSummaryCommandOutput> | void {
-    const command = new GetRecoveryGroupReadinessSummaryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns information about a Resource Set.
+   * @see {@link GetResourceSetCommand}
    */
-  public getResourceSet(
+  getResourceSet(
     args: GetResourceSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<GetResourceSetCommandOutput>;
-  public getResourceSet(
+  getResourceSet(
     args: GetResourceSetCommandInput,
     cb: (err: any, data?: GetResourceSetCommandOutput) => void
   ): void;
-  public getResourceSet(
+  getResourceSet(
     args: GetResourceSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: GetResourceSetCommandOutput) => void
   ): void;
-  public getResourceSet(
-    args: GetResourceSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceSetCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceSetCommandOutput) => void
-  ): Promise<GetResourceSetCommandOutput> | void {
-    const command = new GetResourceSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns a collection of Cells.
+   * @see {@link ListCellsCommand}
    */
-  public listCells(args: ListCellsCommandInput, options?: __HttpHandlerOptions): Promise<ListCellsCommandOutput>;
-  public listCells(args: ListCellsCommandInput, cb: (err: any, data?: ListCellsCommandOutput) => void): void;
-  public listCells(
+  listCells(): Promise<ListCellsCommandOutput>;
+  listCells(
     args: ListCellsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<ListCellsCommandOutput>;
+  listCells(
+    args: ListCellsCommandInput,
     cb: (err: any, data?: ListCellsCommandOutput) => void
   ): void;
-  public listCells(
+  listCells(
     args: ListCellsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCellsCommandOutput) => void),
-    cb?: (err: any, data?: ListCellsCommandOutput) => void
-  ): Promise<ListCellsCommandOutput> | void {
-    const command = new ListCellsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: ListCellsCommandOutput) => void
+  ): void;
 
   /**
-   * Returns a collection of cross account readiness authorizations.
+   * @see {@link ListCrossAccountAuthorizationsCommand}
    */
-  public listCrossAccountAuthorizations(
+  listCrossAccountAuthorizations(): Promise<ListCrossAccountAuthorizationsCommandOutput>;
+  listCrossAccountAuthorizations(
     args: ListCrossAccountAuthorizationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<ListCrossAccountAuthorizationsCommandOutput>;
-  public listCrossAccountAuthorizations(
+  listCrossAccountAuthorizations(
     args: ListCrossAccountAuthorizationsCommandInput,
     cb: (err: any, data?: ListCrossAccountAuthorizationsCommandOutput) => void
   ): void;
-  public listCrossAccountAuthorizations(
+  listCrossAccountAuthorizations(
     args: ListCrossAccountAuthorizationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: ListCrossAccountAuthorizationsCommandOutput) => void
   ): void;
-  public listCrossAccountAuthorizations(
-    args: ListCrossAccountAuthorizationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCrossAccountAuthorizationsCommandOutput) => void),
-    cb?: (err: any, data?: ListCrossAccountAuthorizationsCommandOutput) => void
-  ): Promise<ListCrossAccountAuthorizationsCommandOutput> | void {
-    const command = new ListCrossAccountAuthorizationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns a collection of Readiness Checks.
+   * @see {@link ListReadinessChecksCommand}
    */
-  public listReadinessChecks(
+  listReadinessChecks(): Promise<ListReadinessChecksCommandOutput>;
+  listReadinessChecks(
     args: ListReadinessChecksCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<ListReadinessChecksCommandOutput>;
-  public listReadinessChecks(
+  listReadinessChecks(
     args: ListReadinessChecksCommandInput,
     cb: (err: any, data?: ListReadinessChecksCommandOutput) => void
   ): void;
-  public listReadinessChecks(
+  listReadinessChecks(
     args: ListReadinessChecksCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: ListReadinessChecksCommandOutput) => void
   ): void;
-  public listReadinessChecks(
-    args: ListReadinessChecksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListReadinessChecksCommandOutput) => void),
-    cb?: (err: any, data?: ListReadinessChecksCommandOutput) => void
-  ): Promise<ListReadinessChecksCommandOutput> | void {
-    const command = new ListReadinessChecksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns a collection of Recovery Groups.
+   * @see {@link ListRecoveryGroupsCommand}
    */
-  public listRecoveryGroups(
+  listRecoveryGroups(): Promise<ListRecoveryGroupsCommandOutput>;
+  listRecoveryGroups(
     args: ListRecoveryGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<ListRecoveryGroupsCommandOutput>;
-  public listRecoveryGroups(
+  listRecoveryGroups(
     args: ListRecoveryGroupsCommandInput,
     cb: (err: any, data?: ListRecoveryGroupsCommandOutput) => void
   ): void;
-  public listRecoveryGroups(
+  listRecoveryGroups(
     args: ListRecoveryGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: ListRecoveryGroupsCommandOutput) => void
   ): void;
-  public listRecoveryGroups(
-    args: ListRecoveryGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRecoveryGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListRecoveryGroupsCommandOutput) => void
-  ): Promise<ListRecoveryGroupsCommandOutput> | void {
-    const command = new ListRecoveryGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns a collection of Resource Sets.
+   * @see {@link ListResourceSetsCommand}
    */
-  public listResourceSets(
+  listResourceSets(): Promise<ListResourceSetsCommandOutput>;
+  listResourceSets(
     args: ListResourceSetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<ListResourceSetsCommandOutput>;
-  public listResourceSets(
+  listResourceSets(
     args: ListResourceSetsCommandInput,
     cb: (err: any, data?: ListResourceSetsCommandOutput) => void
   ): void;
-  public listResourceSets(
+  listResourceSets(
     args: ListResourceSetsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: ListResourceSetsCommandOutput) => void
   ): void;
-  public listResourceSets(
-    args: ListResourceSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResourceSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListResourceSetsCommandOutput) => void
-  ): Promise<ListResourceSetsCommandOutput> | void {
-    const command = new ListResourceSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Returns a collection of rules that are applied as part of Readiness Checks.
+   * @see {@link ListRulesCommand}
    */
-  public listRules(args: ListRulesCommandInput, options?: __HttpHandlerOptions): Promise<ListRulesCommandOutput>;
-  public listRules(args: ListRulesCommandInput, cb: (err: any, data?: ListRulesCommandOutput) => void): void;
-  public listRules(
+  listRules(): Promise<ListRulesCommandOutput>;
+  listRules(
     args: ListRulesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<ListRulesCommandOutput>;
+  listRules(
+    args: ListRulesCommandInput,
     cb: (err: any, data?: ListRulesCommandOutput) => void
   ): void;
-  public listRules(
+  listRules(
     args: ListRulesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRulesCommandOutput) => void),
-    cb?: (err: any, data?: ListRulesCommandOutput) => void
-  ): Promise<ListRulesCommandOutput> | void {
-    const command = new ListRulesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: ListRulesCommandOutput) => void
+  ): void;
 
   /**
-   * Returns a list of the tags assigned to the specified resource.
+   * @see {@link ListTagsForResourcesCommand}
    */
-  public listTagsForResources(
+  listTagsForResources(
     args: ListTagsForResourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<ListTagsForResourcesCommandOutput>;
-  public listTagsForResources(
+  listTagsForResources(
     args: ListTagsForResourcesCommandInput,
     cb: (err: any, data?: ListTagsForResourcesCommandOutput) => void
   ): void;
-  public listTagsForResources(
+  listTagsForResources(
     args: ListTagsForResourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: ListTagsForResourcesCommandOutput) => void
   ): void;
-  public listTagsForResources(
-    args: ListTagsForResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourcesCommandOutput) => void
-  ): Promise<ListTagsForResourcesCommandOutput> | void {
-    const command = new ListTagsForResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Adds tags to the specified resource. You can specify one or more tags to add.
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * Removes tags from the specified resource. You can specify one or more tags to remove.
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates an existing Cell.
+   * @see {@link UpdateCellCommand}
    */
-  public updateCell(args: UpdateCellCommandInput, options?: __HttpHandlerOptions): Promise<UpdateCellCommandOutput>;
-  public updateCell(args: UpdateCellCommandInput, cb: (err: any, data?: UpdateCellCommandOutput) => void): void;
-  public updateCell(
+  updateCell(
     args: UpdateCellCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Route53RecoveryReadinessRequestOptions
+  ): Promise<UpdateCellCommandOutput>;
+  updateCell(
+    args: UpdateCellCommandInput,
     cb: (err: any, data?: UpdateCellCommandOutput) => void
   ): void;
-  public updateCell(
+  updateCell(
     args: UpdateCellCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCellCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCellCommandOutput) => void
-  ): Promise<UpdateCellCommandOutput> | void {
-    const command = new UpdateCellCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Route53RecoveryReadinessRequestOptions,
+    cb: (err: any, data?: UpdateCellCommandOutput) => void
+  ): void;
 
   /**
-   * Updates an exisiting Readiness Check.
+   * @see {@link UpdateReadinessCheckCommand}
    */
-  public updateReadinessCheck(
+  updateReadinessCheck(
     args: UpdateReadinessCheckCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<UpdateReadinessCheckCommandOutput>;
-  public updateReadinessCheck(
+  updateReadinessCheck(
     args: UpdateReadinessCheckCommandInput,
     cb: (err: any, data?: UpdateReadinessCheckCommandOutput) => void
   ): void;
-  public updateReadinessCheck(
+  updateReadinessCheck(
     args: UpdateReadinessCheckCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: UpdateReadinessCheckCommandOutput) => void
   ): void;
-  public updateReadinessCheck(
-    args: UpdateReadinessCheckCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateReadinessCheckCommandOutput) => void),
-    cb?: (err: any, data?: UpdateReadinessCheckCommandOutput) => void
-  ): Promise<UpdateReadinessCheckCommandOutput> | void {
-    const command = new UpdateReadinessCheckCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates an existing Recovery Group.
+   * @see {@link UpdateRecoveryGroupCommand}
    */
-  public updateRecoveryGroup(
+  updateRecoveryGroup(
     args: UpdateRecoveryGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<UpdateRecoveryGroupCommandOutput>;
-  public updateRecoveryGroup(
+  updateRecoveryGroup(
     args: UpdateRecoveryGroupCommandInput,
     cb: (err: any, data?: UpdateRecoveryGroupCommandOutput) => void
   ): void;
-  public updateRecoveryGroup(
+  updateRecoveryGroup(
     args: UpdateRecoveryGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: UpdateRecoveryGroupCommandOutput) => void
   ): void;
-  public updateRecoveryGroup(
-    args: UpdateRecoveryGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRecoveryGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRecoveryGroupCommandOutput) => void
-  ): Promise<UpdateRecoveryGroupCommandOutput> | void {
-    const command = new UpdateRecoveryGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates an existing Resource Set.
+   * @see {@link UpdateResourceSetCommand}
    */
-  public updateResourceSet(
+  updateResourceSet(
     args: UpdateResourceSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Route53RecoveryReadinessRequestOptions
   ): Promise<UpdateResourceSetCommandOutput>;
-  public updateResourceSet(
+  updateResourceSet(
     args: UpdateResourceSetCommandInput,
     cb: (err: any, data?: UpdateResourceSetCommandOutput) => void
   ): void;
-  public updateResourceSet(
+  updateResourceSet(
     args: UpdateResourceSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: Route53RecoveryReadinessRequestOptions,
     cb: (err: any, data?: UpdateResourceSetCommandOutput) => void
   ): void;
-  public updateResourceSet(
-    args: UpdateResourceSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourceSetCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourceSetCommandOutput) => void
-  ): Promise<UpdateResourceSetCommandOutput> | void {
-    const command = new UpdateResourceSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link GetCellReadinessSummaryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCellReadinessSummaryCommandOutput}.
+   */
+  paginateGetCellReadinessSummary(
+    args: GetCellReadinessSummaryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCellReadinessSummaryCommandOutput>;
+
+  /**
+   * @see {@link GetReadinessCheckResourceStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetReadinessCheckResourceStatusCommandOutput}.
+   */
+  paginateGetReadinessCheckResourceStatus(
+    args: GetReadinessCheckResourceStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetReadinessCheckResourceStatusCommandOutput>;
+
+  /**
+   * @see {@link GetReadinessCheckStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetReadinessCheckStatusCommandOutput}.
+   */
+  paginateGetReadinessCheckStatus(
+    args: GetReadinessCheckStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetReadinessCheckStatusCommandOutput>;
+
+  /**
+   * @see {@link GetRecoveryGroupReadinessSummaryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetRecoveryGroupReadinessSummaryCommandOutput}.
+   */
+  paginateGetRecoveryGroupReadinessSummary(
+    args: GetRecoveryGroupReadinessSummaryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetRecoveryGroupReadinessSummaryCommandOutput>;
+
+  /**
+   * @see {@link ListCellsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCellsCommandOutput}.
+   */
+  paginateListCells(
+    args?: ListCellsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCellsCommandOutput>;
+
+  /**
+   * @see {@link ListCrossAccountAuthorizationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCrossAccountAuthorizationsCommandOutput}.
+   */
+  paginateListCrossAccountAuthorizations(
+    args?: ListCrossAccountAuthorizationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCrossAccountAuthorizationsCommandOutput>;
+
+  /**
+   * @see {@link ListReadinessChecksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReadinessChecksCommandOutput}.
+   */
+  paginateListReadinessChecks(
+    args?: ListReadinessChecksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReadinessChecksCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryGroupsCommandOutput}.
+   */
+  paginateListRecoveryGroups(
+    args?: ListRecoveryGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListResourceSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceSetsCommandOutput}.
+   */
+  paginateListResourceSets(
+    args?: ListResourceSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceSetsCommandOutput>;
+
+  /**
+   * @see {@link ListRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRulesCommandOutput}.
+   */
+  paginateListRules(
+    args?: ListRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRulesCommandOutput>;
 }
+
+/**
+ * <p>Recovery readiness</p>
+ * @public
+ */
+export class Route53RecoveryReadiness extends Route53RecoveryReadinessClient implements Route53RecoveryReadiness {}
+createAggregatedClient(commands, Route53RecoveryReadiness, { paginators });

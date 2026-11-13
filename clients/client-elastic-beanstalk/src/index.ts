@@ -1,6 +1,35 @@
-export * from "./ElasticBeanstalk";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <fullname>Elastic Beanstalk</fullname>
+ *          <p>Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on
+ *    the Amazon Web Services Cloud.</p>
+ *          <p>For more information about this product, go to the <a href="http://aws.amazon.com/elasticbeanstalk/">Elastic Beanstalk</a> details page. The location of the
+ *       latest Elastic Beanstalk WSDL is <a href="https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl">https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>.
+ *       To install the Software Development Kits (SDKs), Integrated Development Environment (IDE)
+ *       Toolkits, and command line tools that enable you to access the API, go to <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p>
+ *          <p>
+ *             <b>Endpoints</b>
+ *          </p>
+ *          <p>For a list of region-specific endpoints that Elastic Beanstalk supports, go to
+ *         <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region">Regions and Endpoints</a> in the <i>Amazon Web Services
+ *       Glossary</i>.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./ElasticBeanstalkClient";
+export * from "./ElasticBeanstalk";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { ElasticBeanstalkExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
 export * from "./waiters";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { ElasticBeanstalkSyntheticServiceException } from "./models/ElasticBeanstalkSyntheticServiceException";

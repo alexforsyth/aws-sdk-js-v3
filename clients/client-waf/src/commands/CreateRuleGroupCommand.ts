@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateRuleGroupRequest, CreateRuleGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateRuleGroupCommand,
-  serializeAws_json1_1CreateRuleGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRuleGroupRequest, CreateRuleGroupResponse } from "../models/models_0";
+import { CreateRuleGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRuleGroupCommand}.
+ */
 export interface CreateRuleGroupCommandInput extends CreateRuleGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRuleGroupCommand}.
+ */
 export interface CreateRuleGroupCommandOutput extends CreateRuleGroupResponse, __MetadataBearer {}
 
 /**
@@ -50,68 +51,83 @@ export interface CreateRuleGroupCommandOutput extends CreateRuleGroupResponse, _
  * ```javascript
  * import { WAFClient, CreateRuleGroupCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, CreateRuleGroupCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // CreateRuleGroupRequest
+ *   Name: "STRING_VALUE", // required
+ *   MetricName: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateRuleGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRuleGroupResponse
+ * //   RuleGroup: { // RuleGroup
+ * //     RuleGroupId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     MetricName: "STRING_VALUE",
+ * //   },
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateRuleGroupCommandInput - {@link CreateRuleGroupCommandInput}
+ * @returns {@link CreateRuleGroupCommandOutput}
  * @see {@link CreateRuleGroupCommandInput} for command's `input` shape.
  * @see {@link CreateRuleGroupCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFBadRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFDisallowedNameException} (client fault)
+ *  <p>The name specified is invalid.</p>
+ *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFLimitsExceededException} (client fault)
+ *  <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create
+ * 			for an AWS account. For more information, see
+ * 			<a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFTagOperationException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFTagOperationInternalErrorException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRuleGroupCommand extends $Command<
-  CreateRuleGroupCommandInput,
-  CreateRuleGroupCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRuleGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRuleGroupCommandInput, CreateRuleGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "CreateRuleGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRuleGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRuleGroupResponse.filterSensitiveLog,
+export class CreateRuleGroupCommand extends command<CreateRuleGroupCommandInput, CreateRuleGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRuleGroup",
+  CreateRuleGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRuleGroupRequest;
+      output: CreateRuleGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRuleGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateRuleGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRuleGroupCommandOutput> {
-    return deserializeAws_json1_1CreateRuleGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRuleGroupCommandInput;
+      output: CreateRuleGroupCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateRuleGroupRequest, UpdateRuleGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateRuleGroupCommand,
-  serializeAws_json1_1UpdateRuleGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRuleGroupRequest, UpdateRuleGroupResponse } from "../models/models_0";
+import { UpdateRuleGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRuleGroupCommand}.
+ */
 export interface UpdateRuleGroupCommandInput extends UpdateRuleGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRuleGroupCommand}.
+ */
 export interface UpdateRuleGroupCommandOutput extends UpdateRuleGroupResponse, __MetadataBearer {}
 
 /**
@@ -33,8 +34,8 @@ export interface UpdateRuleGroupCommandOutput extends UpdateRuleGroupResponse, _
  *          <p>Inserts or deletes <a>ActivatedRule</a> objects in a <code>RuleGroup</code>.</p>
  * 	        <p>You can only insert <code>REGULAR</code> rules into a rule group.</p>
  *          <p>You can have a maximum of ten rules per rule group.</p>
- *
- *
+ * 	  	
+ *      	
  *          <p>To create and configure a <code>RuleGroup</code>, perform the following steps:</p>
  *          <ol>
  *             <li>
@@ -52,7 +53,7 @@ export interface UpdateRuleGroupCommandOutput extends UpdateRuleGroupResponse, _
  *             </li>
  *          </ol>
  *          <p>If you want to replace one <code>Rule</code> with another, you delete the existing one and
- *          add the new one.</p>
+ *          add the new one.</p>		
  *          <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the
  *          <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF Developer Guide</a>.</p>
  * @example
@@ -60,68 +61,164 @@ export interface UpdateRuleGroupCommandOutput extends UpdateRuleGroupResponse, _
  * ```javascript
  * import { WAFRegionalClient, UpdateRuleGroupCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, UpdateRuleGroupCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // UpdateRuleGroupRequest
+ *   RuleGroupId: "STRING_VALUE", // required
+ *   Updates: [ // RuleGroupUpdates // required
+ *     { // RuleGroupUpdate
+ *       Action: "INSERT" || "DELETE", // required
+ *       ActivatedRule: { // ActivatedRule
+ *         Priority: Number("int"), // required
+ *         RuleId: "STRING_VALUE", // required
+ *         Action: { // WafAction
+ *           Type: "BLOCK" || "ALLOW" || "COUNT", // required
+ *         },
+ *         OverrideAction: { // WafOverrideAction
+ *           Type: "NONE" || "COUNT", // required
+ *         },
+ *         Type: "REGULAR" || "RATE_BASED" || "GROUP",
+ *         ExcludedRules: [ // ExcludedRules
+ *           { // ExcludedRule
+ *             RuleId: "STRING_VALUE", // required
+ *           },
+ *         ],
+ *       },
+ *     },
+ *   ],
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new UpdateRuleGroupCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRuleGroupResponse
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateRuleGroupCommandInput - {@link UpdateRuleGroupCommandInput}
+ * @returns {@link UpdateRuleGroupCommandOutput}
  * @see {@link UpdateRuleGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateRuleGroupCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidOperationException} (client fault)
+ *  <p>The operation failed because there was nothing to do. For example:</p>
+ * 			      <ul>
+ *             <li>
+ *                <p>You tried to remove a <code>Rule</code> from a <code>WebACL</code>, but the <code>Rule</code> isn't in the specified <code>WebACL</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to remove an IP address from an <code>IPSet</code>, but the IP address isn't in the specified <code>IPSet</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to remove a <code>ByteMatchTuple</code> from a <code>ByteMatchSet</code>, but the <code>ByteMatchTuple</code>
+ * 					isn't in the specified <code>WebACL</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>Rule</code> to a <code>WebACL</code>, but the <code>Rule</code> already exists in the
+ * 					specified <code>WebACL</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>ByteMatchTuple</code> to a <code>ByteMatchSet</code>, but the <code>ByteMatchTuple</code>
+ *                already exists in the specified <code>WebACL</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because AWS WAF didn't recognize a parameter in the request. For example:</p>
+ * 			      <ul>
+ *             <li>
+ *                <p>You specified an invalid parameter name.</p>
+ *             </li>
+ *             <li>
+ *                <p>You specified an invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update an object (<code>ByteMatchSet</code>, <code>IPSet</code>, <code>Rule</code>, or <code>WebACL</code>)
+ * 					using an action other than <code>INSERT</code> or <code>DELETE</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to create a <code>WebACL</code> with a <code>DefaultAction</code>
+ *                   <code>Type</code> other than
+ * 					<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>
+ *             </li>
+ *             <li>
+ * 		 	           <p>You tried to create a <code>RateBasedRule</code> with a <code>RateKey</code> value other than <code>IP</code>.</p>
+ * 		          </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>WafAction</code>
+ *                   <code>Type</code> other than
+ * 					<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>ByteMatchSet</code> with a <code>FieldToMatch</code>
+ *                   <code>Type</code> other than
+ * 					HEADER, METHOD, QUERY_STRING, URI, or BODY.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>ByteMatchSet</code> with a <code>Field</code> of <code>HEADER</code>
+ * 					but no value for <code>Data</code>.</p>
+ *             </li>
+ *             <li>
+ * 			   		       <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL cannot be associated.</p>
+ * 			   	     </li>
+ *          </ul>
+ *
+ * @throws {@link WAFLimitsExceededException} (client fault)
+ *  <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create
+ * 			for an AWS account. For more information, see
+ * 			<a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ *
+ * @throws {@link WAFNonexistentContainerException} (client fault)
+ *  <p>The operation failed because you tried to add an object to or delete an object from another object that doesn't exist. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to add a <code>Rule</code> to or delete a <code>Rule</code> from a <code>WebACL</code> that doesn't exist.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>ByteMatchSet</code> to or delete a <code>ByteMatchSet</code> from a <code>Rule</code> that doesn't exist.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add an IP address to or delete an IP address from an <code>IPSet</code> that doesn't exist.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>ByteMatchTuple</code> to or delete a <code>ByteMatchTuple</code> from a <code>ByteMatchSet</code>
+ * 				that doesn't exist.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRuleGroupCommand extends $Command<
-  UpdateRuleGroupCommandInput,
-  UpdateRuleGroupCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRuleGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRuleGroupCommandInput, UpdateRuleGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "UpdateRuleGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRuleGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRuleGroupResponse.filterSensitiveLog,
+export class UpdateRuleGroupCommand extends command<UpdateRuleGroupCommandInput, UpdateRuleGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRuleGroup",
+  UpdateRuleGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRuleGroupRequest;
+      output: UpdateRuleGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRuleGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateRuleGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRuleGroupCommandOutput> {
-    return deserializeAws_json1_1UpdateRuleGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRuleGroupCommandInput;
+      output: UpdateRuleGroupCommandOutput;
+    };
+  };
 }

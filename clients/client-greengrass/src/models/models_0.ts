@@ -1,5881 +1,4940 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  BulkDeploymentStatus,
+  ConfigurationSyncStatus,
+  DeploymentType,
+  EncodingType,
+  FunctionIsolationMode,
+  LoggerComponent,
+  LoggerLevel,
+  LoggerType,
+  Permission,
+  SoftwareToUpdate,
+  Telemetry,
+  UpdateAgentLogLevel,
+  UpdateTargetsArchitecture,
+  UpdateTargetsOperatingSystem,
+} from "./enums";
 
 /**
  * Information about a Greengrass core's connectivity.
+ * @public
  */
 export interface ConnectivityInfo {
   /**
    * The endpoint for the Greengrass core. Can be an IP address or DNS.
+   * @public
    */
-  HostAddress?: string;
+  HostAddress?: string | undefined;
 
   /**
    * The ID of the connectivity information.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Metadata for this endpoint.
+   * @public
    */
-  Metadata?: string;
+  Metadata?: string | undefined;
 
   /**
    * The port of the Greengrass core. Usually 8883.
+   * @public
    */
-  PortNumber?: number;
-}
-
-export namespace ConnectivityInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConnectivityInfo): any => ({
-    ...obj,
-  });
+  PortNumber?: number | undefined;
 }
 
 /**
  * Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+ * @public
  */
 export interface Connector {
   /**
    * The ARN of the connector.
+   * @public
    */
   ConnectorArn: string | undefined;
 
   /**
    * A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * The parameters or configuration that the connector uses.
+   * @public
    */
-  Parameters?: { [key: string]: string };
-}
-
-export namespace Connector {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Connector): any => ({
-    ...obj,
-  });
+  Parameters?: Record<string, string> | undefined;
 }
 
 /**
  * Information about a core.
+ * @public
  */
 export interface Core {
   /**
    * The ARN of the certificate associated with the core.
+   * @public
    */
   CertificateArn: string | undefined;
 
   /**
    * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * If true, the core's local shadow is automatically synced with the cloud.
+   * @public
    */
-  SyncShadow?: boolean;
+  SyncShadow?: boolean | undefined;
 
   /**
    * The ARN of the thing which is the core.
+   * @public
    */
   ThingArn: string | undefined;
 }
 
-export namespace Core {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Core): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Information about a definition.
+ * @public
  */
 export interface DefinitionInformation {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace DefinitionInformation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DefinitionInformation): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * Information about a device.
+ * @public
  */
 export interface Device {
   /**
    * The ARN of the certificate associated with the device.
+   * @public
    */
   CertificateArn: string | undefined;
 
   /**
    * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * If true, the device's local shadow will be automatically synced with the cloud.
+   * @public
    */
-  SyncShadow?: boolean;
+  SyncShadow?: boolean | undefined;
 
   /**
    * The thing ARN of the device.
+   * @public
    */
   ThingArn: string | undefined;
 }
 
-export namespace Device {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Device): any => ({
-    ...obj,
-  });
-}
-
-export enum EncodingType {
-  binary = "binary",
-  json = "json",
-}
-
-export enum FunctionIsolationMode {
-  GreengrassContainer = "GreengrassContainer",
-  NoContainer = "NoContainer",
-}
-
 /**
  * Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
+ * @public
  */
 export interface FunctionRunAsConfig {
   /**
    * The group ID whose permissions are used to run a Lambda function.
+   * @public
    */
-  Gid?: number;
+  Gid?: number | undefined;
 
   /**
    * The user ID whose permissions are used to run a Lambda function.
+   * @public
    */
-  Uid?: number;
-}
-
-export namespace FunctionRunAsConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FunctionRunAsConfig): any => ({
-    ...obj,
-  });
+  Uid?: number | undefined;
 }
 
 /**
  * Configuration information that specifies how a Lambda function runs.
+ * @public
  */
 export interface FunctionExecutionConfig {
   /**
    * Specifies whether the Lambda function runs in a Greengrass container (default) or without containerization. Unless your scenario requires that you run without containerization, we recommend that you run in a Greengrass container. Omit this value to run the Lambda function with the default containerization for the group.
+   * @public
    */
-  IsolationMode?: FunctionIsolationMode | string;
+  IsolationMode?: FunctionIsolationMode | undefined;
 
   /**
    * Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
+   * @public
    */
-  RunAs?: FunctionRunAsConfig;
-}
-
-export namespace FunctionExecutionConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FunctionExecutionConfig): any => ({
-    ...obj,
-  });
-}
-
-export enum Permission {
-  ro = "ro",
-  rw = "rw",
+  RunAs?: FunctionRunAsConfig | undefined;
 }
 
 /**
  * A policy used by the function to access a resource.
+ * @public
  */
 export interface ResourceAccessPolicy {
   /**
    * The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only).
+   * @public
    */
-  Permission?: Permission | string;
+  Permission?: Permission | undefined;
 
   /**
    * The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
+   * @public
    */
   ResourceId: string | undefined;
 }
 
-export namespace ResourceAccessPolicy {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceAccessPolicy): any => ({
-    ...obj,
-  });
-}
-
 /**
  * The environment configuration of the function.
+ * @public
  */
 export interface FunctionConfigurationEnvironment {
   /**
    * If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.
+   * @public
    */
-  AccessSysfs?: boolean;
+  AccessSysfs?: boolean | undefined;
 
   /**
    * Configuration related to executing the Lambda function
+   * @public
    */
-  Execution?: FunctionExecutionConfig;
+  Execution?: FunctionExecutionConfig | undefined;
 
   /**
    * A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.
+   * @public
    */
-  ResourceAccessPolicies?: ResourceAccessPolicy[];
+  ResourceAccessPolicies?: ResourceAccessPolicy[] | undefined;
 
   /**
    * Environment variables for the Lambda function's configuration.
+   * @public
    */
-  Variables?: { [key: string]: string };
-}
-
-export namespace FunctionConfigurationEnvironment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FunctionConfigurationEnvironment): any => ({
-    ...obj,
-  });
+  Variables?: Record<string, string> | undefined;
 }
 
 /**
  * The configuration of the Lambda function.
+ * @public
  */
 export interface FunctionConfiguration {
   /**
    * The expected encoding type of the input payload for the function. The default is ''json''.
+   * @public
    */
-  EncodingType?: EncodingType | string;
+  EncodingType?: EncodingType | undefined;
 
   /**
    * The environment configuration of the function.
+   * @public
    */
-  Environment?: FunctionConfigurationEnvironment;
+  Environment?: FunctionConfigurationEnvironment | undefined;
 
   /**
    * The execution arguments.
+   * @public
    */
-  ExecArgs?: string;
+  ExecArgs?: string | undefined;
 
   /**
    * The name of the function executable.
+   * @public
    */
-  Executable?: string;
+  Executable?: string | undefined;
 
   /**
    * The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.
+   * @public
    */
-  MemorySize?: number;
+  MemorySize?: number | undefined;
 
   /**
    * True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
+   * @public
    */
-  Pinned?: boolean;
+  Pinned?: boolean | undefined;
 
   /**
    * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.
+   * @public
    */
-  Timeout?: number;
-}
+  Timeout?: number | undefined;
 
-export namespace FunctionConfiguration {
   /**
-   * @internal
+   * The Lambda runtime supported by Greengrass which is to be used instead of the one specified in the Lambda function.
+   * @public
    */
-  export const filterSensitiveLog = (obj: FunctionConfiguration): any => ({
-    ...obj,
-  });
+  FunctionRuntimeOverride?: string | undefined;
 }
 
 /**
  * Information about a Lambda function.
+ * @public
  */
 export interface Function {
   /**
    * The ARN of the Lambda function.
+   * @public
    */
-  FunctionArn?: string;
+  FunctionArn?: string | undefined;
 
   /**
    * The configuration of the Lambda function.
+   * @public
    */
-  FunctionConfiguration?: FunctionConfiguration;
+  FunctionConfiguration?: FunctionConfiguration | undefined;
 
   /**
    * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace Function {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Function): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Information about a certificate authority for a group.
+ * @public
  */
 export interface GroupCertificateAuthorityProperties {
   /**
    * The ARN of the certificate authority for the group.
+   * @public
    */
-  GroupCertificateAuthorityArn?: string;
+  GroupCertificateAuthorityArn?: string | undefined;
 
   /**
    * The ID of the certificate authority for the group.
+   * @public
    */
-  GroupCertificateAuthorityId?: string;
-}
-
-export namespace GroupCertificateAuthorityProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupCertificateAuthorityProperties): any => ({
-    ...obj,
-  });
+  GroupCertificateAuthorityId?: string | undefined;
 }
 
 /**
  * Information about a group.
+ * @public
  */
 export interface GroupInformation {
   /**
    * The ARN of the group.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the group was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the group.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the group was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the group.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the group.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the group.
+   * @public
    */
-  Name?: string;
-}
-
-export namespace GroupInformation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupInformation): any => ({
-    ...obj,
-  });
-}
-
-export enum LoggerComponent {
-  GreengrassSystem = "GreengrassSystem",
-  Lambda = "Lambda",
-}
-
-export enum LoggerLevel {
-  DEBUG = "DEBUG",
-  ERROR = "ERROR",
-  FATAL = "FATAL",
-  INFO = "INFO",
-  WARN = "WARN",
-}
-
-export enum LoggerType {
-  AWSCloudWatch = "AWSCloudWatch",
-  FileSystem = "FileSystem",
+  Name?: string | undefined;
 }
 
 /**
  * Information about a logger
+ * @public
  */
 export interface Logger {
   /**
    * The component that will be subject to logging.
+   * @public
    */
-  Component: LoggerComponent | string | undefined;
+  Component: LoggerComponent | undefined;
 
   /**
    * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * The level of the logs.
+   * @public
    */
-  Level: LoggerLevel | string | undefined;
+  Level: LoggerLevel | undefined;
 
   /**
    * The amount of file space, in KB, to use if the local file system is used for logging purposes.
+   * @public
    */
-  Space?: number;
+  Space?: number | undefined;
 
   /**
    * The type of log output which will be used.
+   * @public
    */
-  Type: LoggerType | string | undefined;
-}
-
-export namespace Logger {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Logger): any => ({
-    ...obj,
-  });
+  Type: LoggerType | undefined;
 }
 
 /**
  * Group owner related settings for local resources.
+ * @public
  */
 export interface GroupOwnerSetting {
   /**
    * If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.
+   * @public
    */
-  AutoAddGroupOwner?: boolean;
+  AutoAddGroupOwner?: boolean | undefined;
 
   /**
    * The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
+   * @public
    */
-  GroupOwner?: string;
-}
-
-export namespace GroupOwnerSetting {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupOwnerSetting): any => ({
-    ...obj,
-  });
+  GroupOwner?: string | undefined;
 }
 
 /**
  * Attributes that define a local device resource.
+ * @public
  */
 export interface LocalDeviceResourceData {
   /**
    * Group/owner related settings for local resources.
+   * @public
    */
-  GroupOwnerSetting?: GroupOwnerSetting;
+  GroupOwnerSetting?: GroupOwnerSetting | undefined;
 
   /**
    * The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
+   * @public
    */
-  SourcePath?: string;
-}
-
-export namespace LocalDeviceResourceData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LocalDeviceResourceData): any => ({
-    ...obj,
-  });
+  SourcePath?: string | undefined;
 }
 
 /**
  * Attributes that define a local volume resource.
+ * @public
  */
 export interface LocalVolumeResourceData {
   /**
    * The absolute local path of the resource inside the Lambda environment.
+   * @public
    */
-  DestinationPath?: string;
+  DestinationPath?: string | undefined;
 
   /**
    * Allows you to configure additional group privileges for the Lambda process. This field is optional.
+   * @public
    */
-  GroupOwnerSetting?: GroupOwnerSetting;
+  GroupOwnerSetting?: GroupOwnerSetting | undefined;
 
   /**
    * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
+   * @public
    */
-  SourcePath?: string;
-}
-
-export namespace LocalVolumeResourceData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LocalVolumeResourceData): any => ({
-    ...obj,
-  });
+  SourcePath?: string | undefined;
 }
 
 /**
  * The owner setting for downloaded machine learning resources.
+ * @public
  */
 export interface ResourceDownloadOwnerSetting {
   /**
    * The group owner of the resource. This is the name of an existing Linux OS group on the system or a GID. The group's permissions are added to the Lambda process.
+   * @public
    */
   GroupOwner: string | undefined;
 
   /**
    * The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
+   * @public
    */
-  GroupPermission: Permission | string | undefined;
-}
-
-export namespace ResourceDownloadOwnerSetting {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceDownloadOwnerSetting): any => ({
-    ...obj,
-  });
+  GroupPermission: Permission | undefined;
 }
 
 /**
  * Attributes that define an Amazon S3 machine learning resource.
+ * @public
  */
 export interface S3MachineLearningModelResourceData {
   /**
    * The absolute local path of the resource inside the Lambda environment.
+   * @public
    */
-  DestinationPath?: string;
+  DestinationPath?: string | undefined;
 
   /**
    * The owner setting for downloaded machine learning resources.
+   * @public
    */
-  OwnerSetting?: ResourceDownloadOwnerSetting;
+  OwnerSetting?: ResourceDownloadOwnerSetting | undefined;
 
   /**
    * The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
+   * @public
    */
-  S3Uri?: string;
-}
-
-export namespace S3MachineLearningModelResourceData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3MachineLearningModelResourceData): any => ({
-    ...obj,
-  });
+  S3Uri?: string | undefined;
 }
 
 /**
  * Attributes that define an Amazon SageMaker machine learning resource.
+ * @public
  */
 export interface SageMakerMachineLearningModelResourceData {
   /**
    * The absolute local path of the resource inside the Lambda environment.
+   * @public
    */
-  DestinationPath?: string;
+  DestinationPath?: string | undefined;
 
   /**
    * The owner setting for downloaded machine learning resources.
+   * @public
    */
-  OwnerSetting?: ResourceDownloadOwnerSetting;
+  OwnerSetting?: ResourceDownloadOwnerSetting | undefined;
 
   /**
    * The ARN of the Amazon SageMaker training job that represents the source model.
+   * @public
    */
-  SageMakerJobArn?: string;
-}
-
-export namespace SageMakerMachineLearningModelResourceData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SageMakerMachineLearningModelResourceData): any => ({
-    ...obj,
-  });
+  SageMakerJobArn?: string | undefined;
 }
 
 /**
  * Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.
+ * @public
  */
 export interface SecretsManagerSecretResourceData {
   /**
    * The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
+   * @public
    */
-  ARN?: string;
+  ARN?: string | undefined;
 
   /**
    * Optional. The staging labels whose values you want to make available on the core, in addition to ''AWSCURRENT''.
+   * @public
    */
-  AdditionalStagingLabelsToDownload?: string[];
-}
-
-export namespace SecretsManagerSecretResourceData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SecretsManagerSecretResourceData): any => ({
-    ...obj,
-  });
+  AdditionalStagingLabelsToDownload?: string[] | undefined;
 }
 
 /**
  * A container for resource data. The container takes only one of the following supported resource data types: ''LocalDeviceResourceData'', ''LocalVolumeResourceData'', ''SageMakerMachineLearningModelResourceData'', ''S3MachineLearningModelResourceData'', ''SecretsManagerSecretResourceData''.
+ * @public
  */
 export interface ResourceDataContainer {
   /**
    * Attributes that define the local device resource.
+   * @public
    */
-  LocalDeviceResourceData?: LocalDeviceResourceData;
+  LocalDeviceResourceData?: LocalDeviceResourceData | undefined;
 
   /**
    * Attributes that define the local volume resource.
+   * @public
    */
-  LocalVolumeResourceData?: LocalVolumeResourceData;
+  LocalVolumeResourceData?: LocalVolumeResourceData | undefined;
 
   /**
    * Attributes that define an Amazon S3 machine learning resource.
+   * @public
    */
-  S3MachineLearningModelResourceData?: S3MachineLearningModelResourceData;
+  S3MachineLearningModelResourceData?: S3MachineLearningModelResourceData | undefined;
 
   /**
    * Attributes that define an Amazon SageMaker machine learning resource.
+   * @public
    */
-  SageMakerMachineLearningModelResourceData?: SageMakerMachineLearningModelResourceData;
+  SageMakerMachineLearningModelResourceData?: SageMakerMachineLearningModelResourceData | undefined;
 
   /**
    * Attributes that define a secret resource, which references a secret from AWS Secrets Manager.
+   * @public
    */
-  SecretsManagerSecretResourceData?: SecretsManagerSecretResourceData;
-}
-
-export namespace ResourceDataContainer {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceDataContainer): any => ({
-    ...obj,
-  });
+  SecretsManagerSecretResourceData?: SecretsManagerSecretResourceData | undefined;
 }
 
 /**
  * Information about a resource.
+ * @public
  */
 export interface Resource {
   /**
    * The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
+   * @public
    */
   Name: string | undefined;
 
   /**
    * A container of data for all resource types.
+   * @public
    */
   ResourceDataContainer: ResourceDataContainer | undefined;
 }
 
-export namespace Resource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Resource): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Information about a subscription.
+ * @public
  */
 export interface Subscription {
   /**
    * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
+   * @public
    */
   Source: string | undefined;
 
   /**
    * The MQTT topic used to route the message.
+   * @public
    */
   Subject: string | undefined;
 
   /**
    * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
+   * @public
    */
   Target: string | undefined;
 }
 
-export namespace Subscription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Subscription): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Information about a version.
+ * @public
  */
 export interface VersionInformation {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace VersionInformation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VersionInformation): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateRoleToGroupRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The ARN of the role you wish to associate with this group. The existence of the role is not validated.
+   * @public
    */
   RoleArn: string | undefined;
 }
 
-export namespace AssociateRoleToGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateRoleToGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateRoleToGroupResponse {
   /**
    * The time, in milliseconds since the epoch, when the role ARN was associated with the group.
+   * @public
    */
-  AssociatedAt?: string;
-}
-
-export namespace AssociateRoleToGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateRoleToGroupResponse): any => ({
-    ...obj,
-  });
+  AssociatedAt?: string | undefined;
 }
 
 /**
  * Details about the error.
+ * @public
  */
 export interface ErrorDetail {
   /**
    * A detailed error code.
+   * @public
    */
-  DetailedErrorCode?: string;
+  DetailedErrorCode?: string | undefined;
 
   /**
    * A detailed error message.
+   * @public
    */
-  DetailedErrorMessage?: string;
-}
-
-export namespace ErrorDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ErrorDetail): any => ({
-    ...obj,
-  });
+  DetailedErrorMessage?: string | undefined;
 }
 
 /**
- * General error information.
+ * @public
  */
-export interface BadRequestException extends __SmithyException, $MetadataBearer {
-  name: "BadRequestException";
-  $fault: "client";
-  /**
-   * Details about the error.
-   */
-  ErrorDetails?: ErrorDetail[];
-
-  /**
-   * A message containing information about the error.
-   */
-  Message?: string;
-}
-
-export namespace BadRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BadRequestException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * General error information.
- */
-export interface InternalServerErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerErrorException";
-  $fault: "server";
-  /**
-   * Details about the error.
-   */
-  ErrorDetails?: ErrorDetail[];
-
-  /**
-   * A message containing information about the error.
-   */
-  Message?: string;
-}
-
-export namespace InternalServerErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerErrorException): any => ({
-    ...obj,
-  });
-}
-
 export interface AssociateServiceRoleToAccountRequest {
   /**
    * The ARN of the service role you wish to associate with your account.
+   * @public
    */
   RoleArn: string | undefined;
 }
 
-export namespace AssociateServiceRoleToAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateServiceRoleToAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateServiceRoleToAccountResponse {
   /**
    * The time when the service role was associated with the account.
+   * @public
    */
-  AssociatedAt?: string;
-}
-
-export namespace AssociateServiceRoleToAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateServiceRoleToAccountResponse): any => ({
-    ...obj,
-  });
+  AssociatedAt?: string | undefined;
 }
 
 /**
  * Information about a bulk deployment. You cannot start a new bulk deployment while another one is still running or in a non-terminal state.
+ * @public
  */
 export interface BulkDeployment {
   /**
    * The ARN of the bulk deployment.
+   * @public
    */
-  BulkDeploymentArn?: string;
+  BulkDeploymentArn?: string | undefined;
 
   /**
    * The ID of the bulk deployment.
+   * @public
    */
-  BulkDeploymentId?: string;
+  BulkDeploymentId?: string | undefined;
 
   /**
    * The time, in ISO format, when the deployment was created.
+   * @public
    */
-  CreatedAt?: string;
-}
-
-export namespace BulkDeployment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BulkDeployment): any => ({
-    ...obj,
-  });
+  CreatedAt?: string | undefined;
 }
 
 /**
  * Relevant metrics on input records processed during bulk deployment.
+ * @public
  */
 export interface BulkDeploymentMetrics {
   /**
    * The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn't grant permission to deploy a group or group version.
+   * @public
    */
-  InvalidInputRecords?: number;
+  InvalidInputRecords?: number | undefined;
 
   /**
    * The total number of group records from the input file that have been processed so far, or attempted.
+   * @public
    */
-  RecordsProcessed?: number;
+  RecordsProcessed?: number | undefined;
 
   /**
    * The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''StartBulkDeployment'' retries a group deployment up to five times.
+   * @public
    */
-  RetryAttempts?: number;
-}
-
-export namespace BulkDeploymentMetrics {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BulkDeploymentMetrics): any => ({
-    ...obj,
-  });
-}
-
-export enum DeploymentType {
-  ForceResetDeployment = "ForceResetDeployment",
-  NewDeployment = "NewDeployment",
-  Redeployment = "Redeployment",
-  ResetDeployment = "ResetDeployment",
+  RetryAttempts?: number | undefined;
 }
 
 /**
  * Information about an individual group deployment in a bulk deployment operation.
+ * @public
  */
 export interface BulkDeploymentResult {
   /**
    * The time, in ISO format, when the deployment was created.
+   * @public
    */
-  CreatedAt?: string;
+  CreatedAt?: string | undefined;
 
   /**
    * The ARN of the group deployment.
+   * @public
    */
-  DeploymentArn?: string;
+  DeploymentArn?: string | undefined;
 
   /**
    * The ID of the group deployment.
+   * @public
    */
-  DeploymentId?: string;
+  DeploymentId?: string | undefined;
 
   /**
    * The current status of the group deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
+   * @public
    */
-  DeploymentStatus?: string;
+  DeploymentStatus?: string | undefined;
 
   /**
    * The type of the deployment.
+   * @public
    */
-  DeploymentType?: DeploymentType | string;
+  DeploymentType?: DeploymentType | undefined;
 
   /**
    * Details about the error.
+   * @public
    */
-  ErrorDetails?: ErrorDetail[];
+  ErrorDetails?: ErrorDetail[] | undefined;
 
   /**
    * The error message for a failed deployment
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 
   /**
    * The ARN of the Greengrass group.
+   * @public
    */
-  GroupArn?: string;
-}
-
-export namespace BulkDeploymentResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BulkDeploymentResult): any => ({
-    ...obj,
-  });
-}
-
-export enum BulkDeploymentStatus {
-  Completed = "Completed",
-  Failed = "Failed",
-  Initializing = "Initializing",
-  Running = "Running",
-  Stopped = "Stopped",
-  Stopping = "Stopping",
-}
-
-export enum ConfigurationSyncStatus {
-  InSync = "InSync",
-  OutOfSync = "OutOfSync",
+  GroupArn?: string | undefined;
 }
 
 /**
  * Information about the connector definition version, which is a container for connectors.
+ * @public
  */
 export interface ConnectorDefinitionVersion {
   /**
    * A list of references to connectors in this version, with their corresponding configuration settings.
+   * @public
    */
-  Connectors?: Connector[];
-}
-
-export namespace ConnectorDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConnectorDefinitionVersion): any => ({
-    ...obj,
-  });
+  Connectors?: Connector[] | undefined;
 }
 
 /**
  * Information about a core definition version.
+ * @public
  */
 export interface CoreDefinitionVersion {
   /**
    * A list of cores in the core definition version.
+   * @public
    */
-  Cores?: Core[];
+  Cores?: Core[] | undefined;
 }
 
-export namespace CoreDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CoreDefinitionVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateConnectorDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the connector definition.
+   * @public
    */
-  InitialVersion?: ConnectorDefinitionVersion;
+  InitialVersion?: ConnectorDefinitionVersion | undefined;
 
   /**
    * The name of the connector definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateConnectorDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectorDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateConnectorDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateConnectorDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectorDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateConnectorDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the connector definition.
+   * @public
    */
   ConnectorDefinitionId: string | undefined;
 
   /**
    * A list of references to connectors in this version, with their corresponding configuration settings.
+   * @public
    */
-  Connectors?: Connector[];
+  Connectors?: Connector[] | undefined;
 }
 
-export namespace CreateConnectorDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectorDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateConnectorDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
-}
-
-export namespace CreateConnectorDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectorDefinitionVersionResponse): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * Information needed to create a core definition.
+ * @public
  */
 export interface CreateCoreDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the core definition.
+   * @public
    */
-  InitialVersion?: CoreDefinitionVersion;
+  InitialVersion?: CoreDefinitionVersion | undefined;
 
   /**
    * The name of the core definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateCoreDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCoreDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCoreDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateCoreDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCoreDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCoreDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the core definition.
+   * @public
    */
   CoreDefinitionId: string | undefined;
 
   /**
    * A list of cores in the core definition version.
+   * @public
    */
-  Cores?: Core[];
+  Cores?: Core[] | undefined;
 }
 
-export namespace CreateCoreDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCoreDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCoreDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace CreateCoreDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCoreDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDeploymentRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the deployment if you wish to redeploy a previous deployment.
+   * @public
    */
-  DeploymentId?: string;
+  DeploymentId?: string | undefined;
 
   /**
    * The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
+   * @public
    */
-  DeploymentType: DeploymentType | string | undefined;
+  DeploymentType: DeploymentType | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The ID of the group version to be deployed.
+   * @public
    */
-  GroupVersionId?: string;
+  GroupVersionId?: string | undefined;
 }
 
-export namespace CreateDeploymentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeploymentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDeploymentResponse {
   /**
    * The ARN of the deployment.
+   * @public
    */
-  DeploymentArn?: string;
+  DeploymentArn?: string | undefined;
 
   /**
    * The ID of the deployment.
+   * @public
    */
-  DeploymentId?: string;
-}
-
-export namespace CreateDeploymentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeploymentResponse): any => ({
-    ...obj,
-  });
+  DeploymentId?: string | undefined;
 }
 
 /**
  * Information about a device definition version.
+ * @public
  */
 export interface DeviceDefinitionVersion {
   /**
    * A list of devices in the definition version.
+   * @public
    */
-  Devices?: Device[];
+  Devices?: Device[] | undefined;
 }
 
-export namespace DeviceDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeviceDefinitionVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDeviceDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the device definition.
+   * @public
    */
-  InitialVersion?: DeviceDefinitionVersion;
+  InitialVersion?: DeviceDefinitionVersion | undefined;
 
   /**
    * The name of the device definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateDeviceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeviceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDeviceDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateDeviceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeviceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDeviceDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the device definition.
+   * @public
    */
   DeviceDefinitionId: string | undefined;
 
   /**
    * A list of devices in the definition version.
+   * @public
    */
-  Devices?: Device[];
+  Devices?: Device[] | undefined;
 }
 
-export namespace CreateDeviceDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeviceDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDeviceDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
-}
-
-export namespace CreateDeviceDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeviceDefinitionVersionResponse): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * Configuration information that specifies how a Lambda function runs.
+ * @public
  */
 export interface FunctionDefaultExecutionConfig {
   /**
    * Specifies whether the Lambda function runs in a Greengrass container (default) or without containerization. Unless your scenario requires that you run without containerization, we recommend that you run in a Greengrass container. Omit this value to run the Lambda function with the default containerization for the group.
+   * @public
    */
-  IsolationMode?: FunctionIsolationMode | string;
+  IsolationMode?: FunctionIsolationMode | undefined;
 
   /**
    * Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
+   * @public
    */
-  RunAs?: FunctionRunAsConfig;
-}
-
-export namespace FunctionDefaultExecutionConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FunctionDefaultExecutionConfig): any => ({
-    ...obj,
-  });
+  RunAs?: FunctionRunAsConfig | undefined;
 }
 
 /**
  * The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
+ * @public
  */
 export interface FunctionDefaultConfig {
   /**
    * Configuration information that specifies how a Lambda function runs.
+   * @public
    */
-  Execution?: FunctionDefaultExecutionConfig;
-}
-
-export namespace FunctionDefaultConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FunctionDefaultConfig): any => ({
-    ...obj,
-  });
+  Execution?: FunctionDefaultExecutionConfig | undefined;
 }
 
 /**
  * Information about a function definition version.
+ * @public
  */
 export interface FunctionDefinitionVersion {
   /**
    * The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+   * @public
    */
-  DefaultConfig?: FunctionDefaultConfig;
+  DefaultConfig?: FunctionDefaultConfig | undefined;
 
   /**
    * A list of Lambda functions in this function definition version.
+   * @public
    */
-  Functions?: Function[];
+  Functions?: Function[] | undefined;
 }
 
-export namespace FunctionDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FunctionDefinitionVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateFunctionDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the function definition.
+   * @public
    */
-  InitialVersion?: FunctionDefinitionVersion;
+  InitialVersion?: FunctionDefinitionVersion | undefined;
 
   /**
    * The name of the function definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateFunctionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFunctionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateFunctionDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
-}
-
-export namespace CreateFunctionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFunctionDefinitionResponse): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * Information needed to create a function definition version.
+ * @public
  */
 export interface CreateFunctionDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+   * @public
    */
-  DefaultConfig?: FunctionDefaultConfig;
+  DefaultConfig?: FunctionDefaultConfig | undefined;
 
   /**
    * The ID of the Lambda function definition.
+   * @public
    */
   FunctionDefinitionId: string | undefined;
 
   /**
    * A list of Lambda functions in this function definition version.
+   * @public
    */
-  Functions?: Function[];
+  Functions?: Function[] | undefined;
 }
 
-export namespace CreateFunctionDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFunctionDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateFunctionDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
-}
-
-export namespace CreateFunctionDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFunctionDefinitionVersionResponse): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * Information about a group version.
+ * @public
  */
 export interface GroupVersion {
   /**
    * The ARN of the connector definition version for this group.
+   * @public
    */
-  ConnectorDefinitionVersionArn?: string;
+  ConnectorDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the core definition version for this group.
+   * @public
    */
-  CoreDefinitionVersionArn?: string;
+  CoreDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the device definition version for this group.
+   * @public
    */
-  DeviceDefinitionVersionArn?: string;
+  DeviceDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the function definition version for this group.
+   * @public
    */
-  FunctionDefinitionVersionArn?: string;
+  FunctionDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the logger definition version for this group.
+   * @public
    */
-  LoggerDefinitionVersionArn?: string;
+  LoggerDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the resource definition version for this group.
+   * @public
    */
-  ResourceDefinitionVersionArn?: string;
+  ResourceDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the subscription definition version for this group.
+   * @public
    */
-  SubscriptionDefinitionVersionArn?: string;
+  SubscriptionDefinitionVersionArn?: string | undefined;
 }
 
-export namespace GroupVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGroupRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the group.
+   * @public
    */
-  InitialVersion?: GroupVersion;
+  InitialVersion?: GroupVersion | undefined;
 
   /**
    * The name of the group.
+   * @public
    */
   Name: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGroupResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGroupCertificateAuthorityRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace CreateGroupCertificateAuthorityRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupCertificateAuthorityRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGroupCertificateAuthorityResponse {
   /**
    * The ARN of the group certificate authority.
+   * @public
    */
-  GroupCertificateAuthorityArn?: string;
+  GroupCertificateAuthorityArn?: string | undefined;
 }
 
-export namespace CreateGroupCertificateAuthorityResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupCertificateAuthorityResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGroupVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ARN of the connector definition version for this group.
+   * @public
    */
-  ConnectorDefinitionVersionArn?: string;
+  ConnectorDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the core definition version for this group.
+   * @public
    */
-  CoreDefinitionVersionArn?: string;
+  CoreDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the device definition version for this group.
+   * @public
    */
-  DeviceDefinitionVersionArn?: string;
+  DeviceDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the function definition version for this group.
+   * @public
    */
-  FunctionDefinitionVersionArn?: string;
+  FunctionDefinitionVersionArn?: string | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The ARN of the logger definition version for this group.
+   * @public
    */
-  LoggerDefinitionVersionArn?: string;
+  LoggerDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the resource definition version for this group.
+   * @public
    */
-  ResourceDefinitionVersionArn?: string;
+  ResourceDefinitionVersionArn?: string | undefined;
 
   /**
    * The ARN of the subscription definition version for this group.
+   * @public
    */
-  SubscriptionDefinitionVersionArn?: string;
+  SubscriptionDefinitionVersionArn?: string | undefined;
 }
 
-export namespace CreateGroupVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGroupVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
-}
-
-export namespace CreateGroupVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupVersionResponse): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * Information about a logger definition version.
+ * @public
  */
 export interface LoggerDefinitionVersion {
   /**
    * A list of loggers.
+   * @public
    */
-  Loggers?: Logger[];
+  Loggers?: Logger[] | undefined;
 }
 
-export namespace LoggerDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LoggerDefinitionVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateLoggerDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the logger definition.
+   * @public
    */
-  InitialVersion?: LoggerDefinitionVersion;
+  InitialVersion?: LoggerDefinitionVersion | undefined;
 
   /**
    * The name of the logger definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateLoggerDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLoggerDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateLoggerDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateLoggerDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLoggerDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateLoggerDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the logger definition.
+   * @public
    */
   LoggerDefinitionId: string | undefined;
 
   /**
    * A list of loggers.
+   * @public
    */
-  Loggers?: Logger[];
+  Loggers?: Logger[] | undefined;
 }
 
-export namespace CreateLoggerDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLoggerDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateLoggerDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
-}
-
-export namespace CreateLoggerDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLoggerDefinitionVersionResponse): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * Information about a resource definition version.
+ * @public
  */
 export interface ResourceDefinitionVersion {
   /**
    * A list of resources.
+   * @public
    */
-  Resources?: Resource[];
+  Resources?: Resource[] | undefined;
 }
 
-export namespace ResourceDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceDefinitionVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateResourceDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the resource definition.
+   * @public
    */
-  InitialVersion?: ResourceDefinitionVersion;
+  InitialVersion?: ResourceDefinitionVersion | undefined;
 
   /**
    * The name of the resource definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateResourceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateResourceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateResourceDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateResourceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateResourceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateResourceDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the resource definition.
+   * @public
    */
   ResourceDefinitionId: string | undefined;
 
   /**
    * A list of resources.
+   * @public
    */
-  Resources?: Resource[];
+  Resources?: Resource[] | undefined;
 }
 
-export namespace CreateResourceDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateResourceDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateResourceDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace CreateResourceDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateResourceDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SoftwareToUpdate {
-  core = "core",
-  ota_agent = "ota_agent",
-}
-
-export enum UpdateAgentLogLevel {
-  DEBUG = "DEBUG",
-  ERROR = "ERROR",
-  FATAL = "FATAL",
-  INFO = "INFO",
-  NONE = "NONE",
-  TRACE = "TRACE",
-  VERBOSE = "VERBOSE",
-  WARN = "WARN",
-}
-
-export enum UpdateTargetsArchitecture {
-  aarch64 = "aarch64",
-  armv6l = "armv6l",
-  armv7l = "armv7l",
-  x86_64 = "x86_64",
-}
-
-export enum UpdateTargetsOperatingSystem {
-  amazon_linux = "amazon_linux",
-  openwrt = "openwrt",
-  raspbian = "raspbian",
-  ubuntu = "ubuntu",
-}
-
+/**
+ * @public
+ */
 export interface CreateSoftwareUpdateJobRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
+   * @public
    */
   S3UrlSignerRole: string | undefined;
 
   /**
    * The piece of software on the Greengrass core that will be updated.
+   * @public
    */
-  SoftwareToUpdate: SoftwareToUpdate | string | undefined;
+  SoftwareToUpdate: SoftwareToUpdate | undefined;
 
   /**
    * The minimum level of log statements that should be logged by the OTA Agent during an update.
+   * @public
    */
-  UpdateAgentLogLevel?: UpdateAgentLogLevel | string;
+  UpdateAgentLogLevel?: UpdateAgentLogLevel | undefined;
 
   /**
    * The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.
+   * @public
    */
   UpdateTargets: string[] | undefined;
 
   /**
    * The architecture of the cores which are the targets of an update.
+   * @public
    */
-  UpdateTargetsArchitecture: UpdateTargetsArchitecture | string | undefined;
+  UpdateTargetsArchitecture: UpdateTargetsArchitecture | undefined;
 
   /**
    * The operating system of the cores which are the targets of an update.
+   * @public
    */
-  UpdateTargetsOperatingSystem: UpdateTargetsOperatingSystem | string | undefined;
+  UpdateTargetsOperatingSystem: UpdateTargetsOperatingSystem | undefined;
 }
 
-export namespace CreateSoftwareUpdateJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSoftwareUpdateJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSoftwareUpdateJobResponse {
   /**
    * The IoT Job ARN corresponding to this update.
+   * @public
    */
-  IotJobArn?: string;
+  IotJobArn?: string | undefined;
 
   /**
    * The IoT Job Id corresponding to this update.
+   * @public
    */
-  IotJobId?: string;
+  IotJobId?: string | undefined;
 
   /**
    * The software version installed on the device or devices after the update.
+   * @public
    */
-  PlatformSoftwareVersion?: string;
-}
-
-export namespace CreateSoftwareUpdateJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSoftwareUpdateJobResponse): any => ({
-    ...obj,
-  });
+  PlatformSoftwareVersion?: string | undefined;
 }
 
 /**
  * Information about a subscription definition version.
+ * @public
  */
 export interface SubscriptionDefinitionVersion {
   /**
    * A list of subscriptions.
+   * @public
    */
-  Subscriptions?: Subscription[];
+  Subscriptions?: Subscription[] | undefined;
 }
 
-export namespace SubscriptionDefinitionVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubscriptionDefinitionVersion): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSubscriptionDefinitionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * Information about the initial version of the subscription definition.
+   * @public
    */
-  InitialVersion?: SubscriptionDefinitionVersion;
+  InitialVersion?: SubscriptionDefinitionVersion | undefined;
 
   /**
    * The name of the subscription definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateSubscriptionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubscriptionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSubscriptionDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace CreateSubscriptionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubscriptionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSubscriptionDefinitionVersionRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ID of the subscription definition.
+   * @public
    */
   SubscriptionDefinitionId: string | undefined;
 
   /**
    * A list of subscriptions.
+   * @public
    */
-  Subscriptions?: Subscription[];
+  Subscriptions?: Subscription[] | undefined;
 }
 
-export namespace CreateSubscriptionDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubscriptionDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSubscriptionDefinitionVersionResponse {
   /**
    * The ARN of the version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the parent definition that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace CreateSubscriptionDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubscriptionDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteConnectorDefinitionRequest {
   /**
    * The ID of the connector definition.
+   * @public
    */
   ConnectorDefinitionId: string | undefined;
 }
 
-export namespace DeleteConnectorDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConnectorDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteConnectorDefinitionResponse {}
 
-export namespace DeleteConnectorDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConnectorDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCoreDefinitionRequest {
   /**
    * The ID of the core definition.
+   * @public
    */
   CoreDefinitionId: string | undefined;
 }
 
-export namespace DeleteCoreDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCoreDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCoreDefinitionResponse {}
 
-export namespace DeleteCoreDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCoreDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDeviceDefinitionRequest {
   /**
    * The ID of the device definition.
+   * @public
    */
   DeviceDefinitionId: string | undefined;
 }
 
-export namespace DeleteDeviceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDeviceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDeviceDefinitionResponse {}
 
-export namespace DeleteDeviceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDeviceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteFunctionDefinitionRequest {
   /**
    * The ID of the Lambda function definition.
+   * @public
    */
   FunctionDefinitionId: string | undefined;
 }
 
-export namespace DeleteFunctionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFunctionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteFunctionDefinitionResponse {}
 
-export namespace DeleteFunctionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFunctionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteGroupRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace DeleteGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteGroupResponse {}
 
-export namespace DeleteGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLoggerDefinitionRequest {
   /**
    * The ID of the logger definition.
+   * @public
    */
   LoggerDefinitionId: string | undefined;
 }
 
-export namespace DeleteLoggerDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLoggerDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLoggerDefinitionResponse {}
 
-export namespace DeleteLoggerDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLoggerDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteResourceDefinitionRequest {
   /**
    * The ID of the resource definition.
+   * @public
    */
   ResourceDefinitionId: string | undefined;
 }
 
-export namespace DeleteResourceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteResourceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteResourceDefinitionResponse {}
 
-export namespace DeleteResourceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteResourceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSubscriptionDefinitionRequest {
   /**
    * The ID of the subscription definition.
+   * @public
    */
   SubscriptionDefinitionId: string | undefined;
 }
 
-export namespace DeleteSubscriptionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSubscriptionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSubscriptionDefinitionResponse {}
-
-export namespace DeleteSubscriptionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSubscriptionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
 
 /**
  * Information about a deployment.
+ * @public
  */
 export interface Deployment {
   /**
    * The time, in milliseconds since the epoch, when the deployment was created.
+   * @public
    */
-  CreatedAt?: string;
+  CreatedAt?: string | undefined;
 
   /**
    * The ARN of the deployment.
+   * @public
    */
-  DeploymentArn?: string;
+  DeploymentArn?: string | undefined;
 
   /**
    * The ID of the deployment.
+   * @public
    */
-  DeploymentId?: string;
+  DeploymentId?: string | undefined;
 
   /**
    * The type of the deployment.
+   * @public
    */
-  DeploymentType?: DeploymentType | string;
+  DeploymentType?: DeploymentType | undefined;
 
   /**
    * The ARN of the group for this deployment.
+   * @public
    */
-  GroupArn?: string;
+  GroupArn?: string | undefined;
 }
 
-export namespace Deployment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Deployment): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateRoleFromGroupRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace DisassociateRoleFromGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateRoleFromGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateRoleFromGroupResponse {
   /**
    * The time, in milliseconds since the epoch, when the role was disassociated from the group.
+   * @public
    */
-  DisassociatedAt?: string;
+  DisassociatedAt?: string | undefined;
 }
 
-export namespace DisassociateRoleFromGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateRoleFromGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateServiceRoleFromAccountRequest {}
 
-export namespace DisassociateServiceRoleFromAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateServiceRoleFromAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateServiceRoleFromAccountResponse {
   /**
    * The time when the service role was disassociated from the account.
+   * @public
    */
-  DisassociatedAt?: string;
+  DisassociatedAt?: string | undefined;
 }
 
-export namespace DisassociateServiceRoleFromAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateServiceRoleFromAccountResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssociatedRoleRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace GetAssociatedRoleRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssociatedRoleRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssociatedRoleResponse {
   /**
    * The time when the role was associated with the group.
+   * @public
    */
-  AssociatedAt?: string;
+  AssociatedAt?: string | undefined;
 
   /**
    * The ARN of the role that is associated with the group.
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 }
 
-export namespace GetAssociatedRoleResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssociatedRoleResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetBulkDeploymentStatusRequest {
   /**
    * The ID of the bulk deployment.
+   * @public
    */
   BulkDeploymentId: string | undefined;
 }
 
-export namespace GetBulkDeploymentStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBulkDeploymentStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetBulkDeploymentStatusResponse {
   /**
    * Relevant metrics on input records processed during bulk deployment.
+   * @public
    */
-  BulkDeploymentMetrics?: BulkDeploymentMetrics;
+  BulkDeploymentMetrics?: BulkDeploymentMetrics | undefined;
 
   /**
    * The status of the bulk deployment.
+   * @public
    */
-  BulkDeploymentStatus?: BulkDeploymentStatus | string;
+  BulkDeploymentStatus?: BulkDeploymentStatus | undefined;
 
   /**
    * The time, in ISO format, when the deployment was created.
+   * @public
    */
-  CreatedAt?: string;
+  CreatedAt?: string | undefined;
 
   /**
    * Error details
+   * @public
    */
-  ErrorDetails?: ErrorDetail[];
+  ErrorDetails?: ErrorDetail[] | undefined;
 
   /**
    * Error message
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetBulkDeploymentStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBulkDeploymentStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectivityInfoRequest {
   /**
    * The thing name.
+   * @public
    */
   ThingName: string | undefined;
 }
 
-export namespace GetConnectivityInfoRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectivityInfoRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectivityInfoResponse {
   /**
    * Connectivity info list.
+   * @public
    */
-  ConnectivityInfo?: ConnectivityInfo[];
+  ConnectivityInfo?: ConnectivityInfo[] | undefined;
 
   /**
    * A message about the connectivity info request.
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 }
 
-export namespace GetConnectivityInfoResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectivityInfoResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectorDefinitionRequest {
   /**
    * The ID of the connector definition.
+   * @public
    */
   ConnectorDefinitionId: string | undefined;
 }
 
-export namespace GetConnectorDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectorDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectorDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetConnectorDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectorDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectorDefinitionVersionRequest {
   /**
    * The ID of the connector definition.
+   * @public
    */
   ConnectorDefinitionId: string | undefined;
 
   /**
    * The ID of the connector definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListConnectorDefinitionVersions'' requests. If the version is the last one that was associated with a connector definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   ConnectorDefinitionVersionId: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetConnectorDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectorDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectorDefinitionVersionResponse {
   /**
    * The ARN of the connector definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the connector definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the connector definition version.
+   * @public
    */
-  Definition?: ConnectorDefinitionVersion;
+  Definition?: ConnectorDefinitionVersion | undefined;
 
   /**
    * The ID of the connector definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The version of the connector definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetConnectorDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectorDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCoreDefinitionRequest {
   /**
    * The ID of the core definition.
+   * @public
    */
   CoreDefinitionId: string | undefined;
 }
 
-export namespace GetCoreDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCoreDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCoreDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetCoreDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCoreDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCoreDefinitionVersionRequest {
   /**
    * The ID of the core definition.
+   * @public
    */
   CoreDefinitionId: string | undefined;
 
   /**
    * The ID of the core definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListCoreDefinitionVersions'' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   CoreDefinitionVersionId: string | undefined;
 }
 
-export namespace GetCoreDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCoreDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCoreDefinitionVersionResponse {
   /**
    * The ARN of the core definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the core definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the core definition version.
+   * @public
    */
-  Definition?: CoreDefinitionVersion;
+  Definition?: CoreDefinitionVersion | undefined;
 
   /**
    * The ID of the core definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The version of the core definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetCoreDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCoreDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeploymentStatusRequest {
   /**
    * The ID of the deployment.
+   * @public
    */
   DeploymentId: string | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace GetDeploymentStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeploymentStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeploymentStatusResponse {
   /**
    * The status of the deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
+   * @public
    */
-  DeploymentStatus?: string;
+  DeploymentStatus?: string | undefined;
 
   /**
    * The type of the deployment.
+   * @public
    */
-  DeploymentType?: DeploymentType | string;
+  DeploymentType?: DeploymentType | undefined;
 
   /**
    * Error details
+   * @public
    */
-  ErrorDetails?: ErrorDetail[];
+  ErrorDetails?: ErrorDetail[] | undefined;
 
   /**
    * Error message
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the deployment status was updated.
+   * @public
    */
-  UpdatedAt?: string;
+  UpdatedAt?: string | undefined;
 }
 
-export namespace GetDeploymentStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeploymentStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeviceDefinitionRequest {
   /**
    * The ID of the device definition.
+   * @public
    */
   DeviceDefinitionId: string | undefined;
 }
 
-export namespace GetDeviceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeviceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeviceDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetDeviceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeviceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeviceDefinitionVersionRequest {
   /**
    * The ID of the device definition.
+   * @public
    */
   DeviceDefinitionId: string | undefined;
 
   /**
    * The ID of the device definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListDeviceDefinitionVersions'' requests. If the version is the last one that was associated with a device definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   DeviceDefinitionVersionId: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetDeviceDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeviceDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeviceDefinitionVersionResponse {
   /**
    * The ARN of the device definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the device definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the device definition version.
+   * @public
    */
-  Definition?: DeviceDefinitionVersion;
+  Definition?: DeviceDefinitionVersion | undefined;
 
   /**
    * The ID of the device definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The version of the device definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetDeviceDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeviceDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFunctionDefinitionRequest {
   /**
    * The ID of the Lambda function definition.
+   * @public
    */
   FunctionDefinitionId: string | undefined;
 }
 
-export namespace GetFunctionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFunctionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFunctionDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetFunctionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFunctionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFunctionDefinitionVersionRequest {
   /**
    * The ID of the Lambda function definition.
+   * @public
    */
   FunctionDefinitionId: string | undefined;
 
   /**
    * The ID of the function definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListFunctionDefinitionVersions'' requests. If the version is the last one that was associated with a function definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   FunctionDefinitionVersionId: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetFunctionDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFunctionDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFunctionDefinitionVersionResponse {
   /**
    * The ARN of the function definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the function definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information on the definition.
+   * @public
    */
-  Definition?: FunctionDefinitionVersion;
+  Definition?: FunctionDefinitionVersion | undefined;
 
   /**
    * The ID of the function definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The version of the function definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetFunctionDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFunctionDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace GetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupCertificateAuthorityRequest {
   /**
    * The ID of the certificate authority.
+   * @public
    */
   CertificateAuthorityId: string | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace GetGroupCertificateAuthorityRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupCertificateAuthorityRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupCertificateAuthorityResponse {
   /**
    * The ARN of the certificate authority for the group.
+   * @public
    */
-  GroupCertificateAuthorityArn?: string;
+  GroupCertificateAuthorityArn?: string | undefined;
 
   /**
    * The ID of the certificate authority for the group.
+   * @public
    */
-  GroupCertificateAuthorityId?: string;
+  GroupCertificateAuthorityId?: string | undefined;
 
   /**
    * The PEM encoded certificate for the group.
+   * @public
    */
-  PemEncodedCertificate?: string;
+  PemEncodedCertificate?: string | undefined;
 }
 
-export namespace GetGroupCertificateAuthorityResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupCertificateAuthorityResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupCertificateConfigurationRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace GetGroupCertificateConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupCertificateConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupCertificateConfigurationResponse {
   /**
    * The amount of time remaining before the certificate authority expires, in milliseconds.
+   * @public
    */
-  CertificateAuthorityExpiryInMilliseconds?: string;
+  CertificateAuthorityExpiryInMilliseconds?: string | undefined;
 
   /**
    * The amount of time remaining before the certificate expires, in milliseconds.
+   * @public
    */
-  CertificateExpiryInMilliseconds?: string;
+  CertificateExpiryInMilliseconds?: string | undefined;
 
   /**
    * The ID of the group certificate configuration.
+   * @public
    */
-  GroupId?: string;
+  GroupId?: string | undefined;
 }
 
-export namespace GetGroupCertificateConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupCertificateConfigurationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupVersionRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.
+   * @public
    */
   GroupVersionId: string | undefined;
 }
 
-export namespace GetGroupVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetGroupVersionResponse {
   /**
    * The ARN of the group version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the group version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the group version definition.
+   * @public
    */
-  Definition?: GroupVersion;
+  Definition?: GroupVersion | undefined;
 
   /**
    * The ID of the group that the version is associated with.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the group version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetGroupVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetGroupVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLoggerDefinitionRequest {
   /**
    * The ID of the logger definition.
+   * @public
    */
   LoggerDefinitionId: string | undefined;
 }
 
-export namespace GetLoggerDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLoggerDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLoggerDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetLoggerDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLoggerDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLoggerDefinitionVersionRequest {
   /**
    * The ID of the logger definition.
+   * @public
    */
   LoggerDefinitionId: string | undefined;
 
   /**
    * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   LoggerDefinitionVersionId: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetLoggerDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLoggerDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLoggerDefinitionVersionResponse {
   /**
    * The ARN of the logger definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the logger definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the logger definition version.
+   * @public
    */
-  Definition?: LoggerDefinitionVersion;
+  Definition?: LoggerDefinitionVersion | undefined;
 
   /**
    * The ID of the logger definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The version of the logger definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetLoggerDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLoggerDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourceDefinitionRequest {
   /**
    * The ID of the resource definition.
+   * @public
    */
   ResourceDefinitionId: string | undefined;
 }
 
-export namespace GetResourceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourceDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetResourceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourceDefinitionVersionRequest {
   /**
    * The ID of the resource definition.
+   * @public
    */
   ResourceDefinitionId: string | undefined;
 
   /**
    * The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   ResourceDefinitionVersionId: string | undefined;
 }
 
-export namespace GetResourceDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourceDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourceDefinitionVersionResponse {
   /**
    * Arn of the resource definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the resource definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the definition.
+   * @public
    */
-  Definition?: ResourceDefinitionVersion;
+  Definition?: ResourceDefinitionVersion | undefined;
 
   /**
    * The ID of the resource definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The version of the resource definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetResourceDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourceDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetServiceRoleForAccountRequest {}
 
-export namespace GetServiceRoleForAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetServiceRoleForAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetServiceRoleForAccountResponse {
   /**
    * The time when the service role was associated with the account.
+   * @public
    */
-  AssociatedAt?: string;
+  AssociatedAt?: string | undefined;
 
   /**
    * The ARN of the role which is associated with the account.
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 }
 
-export namespace GetServiceRoleForAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetServiceRoleForAccountResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSubscriptionDefinitionRequest {
   /**
    * The ID of the subscription definition.
+   * @public
    */
   SubscriptionDefinitionId: string | undefined;
 }
 
-export namespace GetSubscriptionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSubscriptionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSubscriptionDefinitionResponse {
   /**
    * The ARN of the definition.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * The ID of the definition.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the definition was last updated.
+   * @public
    */
-  LastUpdatedTimestamp?: string;
+  LastUpdatedTimestamp?: string | undefined;
 
   /**
    * The ID of the latest version associated with the definition.
+   * @public
    */
-  LatestVersion?: string;
+  LatestVersion?: string | undefined;
 
   /**
    * The ARN of the latest version associated with the definition.
+   * @public
    */
-  LatestVersionArn?: string;
+  LatestVersionArn?: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Tag(s) attached to the resource arn.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetSubscriptionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSubscriptionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSubscriptionDefinitionVersionRequest {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The ID of the subscription definition.
+   * @public
    */
   SubscriptionDefinitionId: string | undefined;
 
   /**
    * The ID of the subscription definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+   * @public
    */
   SubscriptionDefinitionVersionId: string | undefined;
 }
 
-export namespace GetSubscriptionDefinitionVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSubscriptionDefinitionVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSubscriptionDefinitionVersionResponse {
   /**
    * The ARN of the subscription definition version.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The time, in milliseconds since the epoch, when the subscription definition version was created.
+   * @public
    */
-  CreationTimestamp?: string;
+  CreationTimestamp?: string | undefined;
 
   /**
    * Information about the subscription definition version.
+   * @public
    */
-  Definition?: SubscriptionDefinitionVersion;
+  Definition?: SubscriptionDefinitionVersion | undefined;
 
   /**
    * The ID of the subscription definition version.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The version of the subscription definition version.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace GetSubscriptionDefinitionVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSubscriptionDefinitionVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetThingRuntimeConfigurationRequest {
   /**
    * The thing name.
+   * @public
    */
   ThingName: string | undefined;
 }
 
-export namespace GetThingRuntimeConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetThingRuntimeConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum Telemetry {
-  Off = "Off",
-  On = "On",
-}
-
 /**
  * Configuration settings for running telemetry.
+ * @public
  */
 export interface TelemetryConfiguration {
   /**
    * Synchronization status of the device reported configuration with the desired configuration.
+   * @public
    */
-  ConfigurationSyncStatus?: ConfigurationSyncStatus | string;
+  ConfigurationSyncStatus?: ConfigurationSyncStatus | undefined;
 
   /**
    * Configure telemetry to be on or off.
+   * @public
    */
-  Telemetry: Telemetry | string | undefined;
-}
-
-export namespace TelemetryConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TelemetryConfiguration): any => ({
-    ...obj,
-  });
+  Telemetry: Telemetry | undefined;
 }
 
 /**
  * Runtime configuration for a thing.
+ * @public
  */
 export interface RuntimeConfiguration {
   /**
    * Configuration for telemetry service.
+   * @public
    */
-  TelemetryConfiguration?: TelemetryConfiguration;
+  TelemetryConfiguration?: TelemetryConfiguration | undefined;
 }
 
-export namespace RuntimeConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RuntimeConfiguration): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetThingRuntimeConfigurationResponse {
   /**
    * Runtime configuration for a thing.
+   * @public
    */
-  RuntimeConfiguration?: RuntimeConfiguration;
+  RuntimeConfiguration?: RuntimeConfiguration | undefined;
 }
 
-export namespace GetThingRuntimeConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetThingRuntimeConfigurationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListBulkDeploymentDetailedReportsRequest {
   /**
    * The ID of the bulk deployment.
+   * @public
    */
   BulkDeploymentId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListBulkDeploymentDetailedReportsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListBulkDeploymentDetailedReportsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListBulkDeploymentDetailedReportsResponse {
   /**
    * A list of the individual group deployments in the bulk deployment operation.
+   * @public
    */
-  Deployments?: BulkDeploymentResult[];
+  Deployments?: BulkDeploymentResult[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListBulkDeploymentDetailedReportsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListBulkDeploymentDetailedReportsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListBulkDeploymentsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListBulkDeploymentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListBulkDeploymentsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListBulkDeploymentsResponse {
   /**
    * A list of bulk deployments.
+   * @public
    */
-  BulkDeployments?: BulkDeployment[];
+  BulkDeployments?: BulkDeployment[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListBulkDeploymentsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListBulkDeploymentsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListConnectorDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListConnectorDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConnectorDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListConnectorDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListConnectorDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConnectorDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListConnectorDefinitionVersionsRequest {
   /**
    * The ID of the connector definition.
+   * @public
    */
   ConnectorDefinitionId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListConnectorDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConnectorDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListConnectorDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListConnectorDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConnectorDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCoreDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCoreDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCoreDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCoreDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCoreDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCoreDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCoreDefinitionVersionsRequest {
   /**
    * The ID of the core definition.
+   * @public
    */
   CoreDefinitionId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCoreDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCoreDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCoreDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListCoreDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCoreDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDeploymentsRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDeploymentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDeploymentsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDeploymentsResponse {
   /**
    * A list of deployments for the requested groups.
+   * @public
    */
-  Deployments?: Deployment[];
+  Deployments?: Deployment[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDeploymentsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDeploymentsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDeviceDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDeviceDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDeviceDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDeviceDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDeviceDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDeviceDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDeviceDefinitionVersionsRequest {
   /**
    * The ID of the device definition.
+   * @public
    */
   DeviceDefinitionId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDeviceDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDeviceDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDeviceDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListDeviceDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDeviceDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListFunctionDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListFunctionDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListFunctionDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListFunctionDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListFunctionDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListFunctionDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListFunctionDefinitionVersionsRequest {
   /**
    * The ID of the Lambda function definition.
+   * @public
    */
   FunctionDefinitionId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListFunctionDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListFunctionDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListFunctionDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListFunctionDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListFunctionDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListGroupCertificateAuthoritiesRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace ListGroupCertificateAuthoritiesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroupCertificateAuthoritiesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListGroupCertificateAuthoritiesResponse {
   /**
    * A list of certificate authorities associated with the group.
+   * @public
    */
-  GroupCertificateAuthorities?: GroupCertificateAuthorityProperties[];
+  GroupCertificateAuthorities?: GroupCertificateAuthorityProperties[] | undefined;
 }
 
-export namespace ListGroupCertificateAuthoritiesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroupCertificateAuthoritiesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListGroupsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListGroupsResponse {
   /**
    * Information about a group.
+   * @public
    */
-  Groups?: GroupInformation[];
+  Groups?: GroupInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroupsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListGroupVersionsRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListGroupVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroupVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListGroupVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListGroupVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroupVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListLoggerDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListLoggerDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListLoggerDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListLoggerDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListLoggerDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListLoggerDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListLoggerDefinitionVersionsRequest {
   /**
    * The ID of the logger definition.
+   * @public
    */
   LoggerDefinitionId: string | undefined;
 
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListLoggerDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListLoggerDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListLoggerDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListLoggerDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListLoggerDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListResourceDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListResourceDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListResourceDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListResourceDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListResourceDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListResourceDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListResourceDefinitionVersionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The ID of the resource definition.
+   * @public
    */
   ResourceDefinitionId: string | undefined;
 }
 
-export namespace ListResourceDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListResourceDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListResourceDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListResourceDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListResourceDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSubscriptionDefinitionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListSubscriptionDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSubscriptionDefinitionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSubscriptionDefinitionsResponse {
   /**
    * Information about a definition.
+   * @public
    */
-  Definitions?: DefinitionInformation[];
+  Definitions?: DefinitionInformation[] | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListSubscriptionDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSubscriptionDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSubscriptionDefinitionVersionsRequest {
   /**
    * The maximum number of results to be returned per request.
+   * @public
    */
-  MaxResults?: string;
+  MaxResults?: string | undefined;
 
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The ID of the subscription definition.
+   * @public
    */
   SubscriptionDefinitionId: string | undefined;
 }
 
-export namespace ListSubscriptionDefinitionVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSubscriptionDefinitionVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSubscriptionDefinitionVersionsResponse {
   /**
    * The token for the next set of results, or ''null'' if there are no additional results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Information about a version.
+   * @public
    */
-  Versions?: VersionInformation[];
+  Versions?: VersionInformation[] | undefined;
 }
 
-export namespace ListSubscriptionDefinitionVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSubscriptionDefinitionVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * The Amazon Resource Name (ARN) of the resource.
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * The key-value pair for the resource tag.
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
  * Information needed to reset deployments.
+ * @public
  */
 export interface ResetDeploymentsRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * If true, performs a best-effort only core reset.
+   * @public
    */
-  Force?: boolean;
+  Force?: boolean | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace ResetDeploymentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResetDeploymentsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ResetDeploymentsResponse {
   /**
    * The ARN of the deployment.
+   * @public
    */
-  DeploymentArn?: string;
+  DeploymentArn?: string | undefined;
 
   /**
    * The ID of the deployment.
+   * @public
    */
-  DeploymentId?: string;
+  DeploymentId?: string | undefined;
 }
 
-export namespace ResetDeploymentsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResetDeploymentsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartBulkDeploymentRequest {
   /**
    * A client token used to correlate requests and responses.
+   * @public
    */
-  AmznClientToken?: string;
+  AmznClientToken?: string | undefined;
 
   /**
    * The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''greengrass:CreateDeployment'' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.
+   * @public
    */
   ExecutionRoleArn: string | undefined;
 
   /**
    * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
+   * @public
    */
   InputFileUri: string | undefined;
 
   /**
    * Tag(s) to add to the new resource.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace StartBulkDeploymentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartBulkDeploymentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartBulkDeploymentResponse {
   /**
    * The ARN of the bulk deployment.
+   * @public
    */
-  BulkDeploymentArn?: string;
+  BulkDeploymentArn?: string | undefined;
 
   /**
    * The ID of the bulk deployment.
+   * @public
    */
-  BulkDeploymentId?: string;
+  BulkDeploymentId?: string | undefined;
 }
 
-export namespace StartBulkDeploymentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartBulkDeploymentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopBulkDeploymentRequest {
   /**
    * The ID of the bulk deployment.
+   * @public
    */
   BulkDeploymentId: string | undefined;
 }
 
-export namespace StopBulkDeploymentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopBulkDeploymentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopBulkDeploymentResponse {}
-
-export namespace StopBulkDeploymentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopBulkDeploymentResponse): any => ({
-    ...obj,
-  });
-}
 
 /**
  * A map of the key-value pairs for the resource tag.
+ * @public
  */
 export interface TagResourceRequest {
   /**
    * The Amazon Resource Name (ARN) of the resource.
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * The key-value pair for the resource tag.
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * The Amazon Resource Name (ARN) of the resource.
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * An array of tag keys to delete
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Connectivity information.
+ * @public
  */
 export interface UpdateConnectivityInfoRequest {
   /**
    * A list of connectivity info.
+   * @public
    */
-  ConnectivityInfo?: ConnectivityInfo[];
+  ConnectivityInfo?: ConnectivityInfo[] | undefined;
 
   /**
    * The thing name.
+   * @public
    */
   ThingName: string | undefined;
 }
 
-export namespace UpdateConnectivityInfoRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConnectivityInfoRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateConnectivityInfoResponse {
   /**
    * A message about the connectivity info update request.
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 
   /**
    * The new version of the connectivity info.
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
-export namespace UpdateConnectivityInfoResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConnectivityInfoResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateConnectorDefinitionRequest {
   /**
    * The ID of the connector definition.
+   * @public
    */
   ConnectorDefinitionId: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace UpdateConnectorDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConnectorDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateConnectorDefinitionResponse {}
 
-export namespace UpdateConnectorDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConnectorDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateCoreDefinitionRequest {
   /**
    * The ID of the core definition.
+   * @public
    */
   CoreDefinitionId: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace UpdateCoreDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateCoreDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateCoreDefinitionResponse {}
 
-export namespace UpdateCoreDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateCoreDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDeviceDefinitionRequest {
   /**
    * The ID of the device definition.
+   * @public
    */
   DeviceDefinitionId: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace UpdateDeviceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDeviceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDeviceDefinitionResponse {}
 
-export namespace UpdateDeviceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDeviceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateFunctionDefinitionRequest {
   /**
    * The ID of the Lambda function definition.
+   * @public
    */
   FunctionDefinitionId: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace UpdateFunctionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateFunctionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateFunctionDefinitionResponse {}
 
-export namespace UpdateFunctionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateFunctionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateGroupRequest {
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace UpdateGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateGroupResponse {}
 
-export namespace UpdateGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateGroupCertificateConfigurationRequest {
   /**
    * The amount of time remaining before the certificate expires, in milliseconds.
+   * @public
    */
-  CertificateExpiryInMilliseconds?: string;
+  CertificateExpiryInMilliseconds?: string | undefined;
 
   /**
    * The ID of the Greengrass group.
+   * @public
    */
   GroupId: string | undefined;
 }
 
-export namespace UpdateGroupCertificateConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGroupCertificateConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateGroupCertificateConfigurationResponse {
   /**
    * The amount of time remaining before the certificate authority expires, in milliseconds.
+   * @public
    */
-  CertificateAuthorityExpiryInMilliseconds?: string;
+  CertificateAuthorityExpiryInMilliseconds?: string | undefined;
 
   /**
    * The amount of time remaining before the certificate expires, in milliseconds.
+   * @public
    */
-  CertificateExpiryInMilliseconds?: string;
+  CertificateExpiryInMilliseconds?: string | undefined;
 
   /**
    * The ID of the group certificate configuration.
+   * @public
    */
-  GroupId?: string;
+  GroupId?: string | undefined;
 }
 
-export namespace UpdateGroupCertificateConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGroupCertificateConfigurationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateLoggerDefinitionRequest {
   /**
    * The ID of the logger definition.
+   * @public
    */
   LoggerDefinitionId: string | undefined;
 
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
-export namespace UpdateLoggerDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateLoggerDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateLoggerDefinitionResponse {}
 
-export namespace UpdateLoggerDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateLoggerDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateResourceDefinitionRequest {
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * The ID of the resource definition.
+   * @public
    */
   ResourceDefinitionId: string | undefined;
 }
 
-export namespace UpdateResourceDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateResourceDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateResourceDefinitionResponse {}
 
-export namespace UpdateResourceDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateResourceDefinitionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSubscriptionDefinitionRequest {
   /**
    * The name of the definition.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * The ID of the subscription definition.
+   * @public
    */
   SubscriptionDefinitionId: string | undefined;
 }
 
-export namespace UpdateSubscriptionDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSubscriptionDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSubscriptionDefinitionResponse {}
-
-export namespace UpdateSubscriptionDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSubscriptionDefinitionResponse): any => ({
-    ...obj,
-  });
-}
 
 /**
  * Configuration settings for running telemetry.
+ * @public
  */
 export interface TelemetryConfigurationUpdate {
   /**
    * Configure telemetry to be on or off.
+   * @public
    */
-  Telemetry: Telemetry | string | undefined;
+  Telemetry: Telemetry | undefined;
 }
 
-export namespace TelemetryConfigurationUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TelemetryConfigurationUpdate): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateThingRuntimeConfigurationRequest {
   /**
    * Configuration for telemetry service.
+   * @public
    */
-  TelemetryConfiguration?: TelemetryConfigurationUpdate;
+  TelemetryConfiguration?: TelemetryConfigurationUpdate | undefined;
 
   /**
    * The thing name.
+   * @public
    */
   ThingName: string | undefined;
 }
 
-export namespace UpdateThingRuntimeConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateThingRuntimeConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateThingRuntimeConfigurationResponse {}
-
-export namespace UpdateThingRuntimeConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateThingRuntimeConfigurationResponse): any => ({
-    ...obj,
-  });
-}

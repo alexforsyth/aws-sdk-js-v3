@@ -1,0 +1,25 @@
+// smithy-typescript generated code
+import {
+  type ServiceExceptionOptions as __ServiceExceptionOptions,
+  ServiceException as __ServiceException,
+} from "@smithy/core/client";
+
+export type { __ServiceExceptionOptions };
+
+export { __ServiceException };
+
+/**
+ * @public
+ *
+ * Base exception class for all service exceptions from RestJsonProtocol service.
+ */
+export class RestJsonProtocolServiceException extends __ServiceException {
+  public static readonly shapeId: string = "smithy.ts.sdk.synthetic.aws.protocoltests.restjson#RestJsonProtocolServiceException";
+  /**
+   * @internal
+   */
+  constructor(options: __ServiceExceptionOptions) {
+    super(options);
+    Object.setPrototypeOf(this, RestJsonProtocolServiceException.prototype);
+  }
+}

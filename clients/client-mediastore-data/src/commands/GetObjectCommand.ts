@@ -1,25 +1,28 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadOutputTypes } from "@smithy/types";
 
-import { MediaStoreDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreDataClient";
-import { GetObjectRequest, GetObjectResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetObjectCommand,
-  serializeAws_restJson1GetObjectCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetObjectRequest, GetObjectResponse } from "../models/models_0";
+import { GetObject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetObjectCommand}.
+ */
 export interface GetObjectCommandInput extends GetObjectRequest {}
-export interface GetObjectCommandOutput extends GetObjectResponse, __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetObjectCommand}.
+ */
+export interface GetObjectCommandOutput extends Omit<GetObjectResponse, "Body">, __MetadataBearer {
+  Body?: StreamingBlobPayloadOutputTypes;
+}
 
 /**
  * <p>Downloads the object at the specified path. If the object’s upload availability is set to <code>streaming</code>, AWS Elemental MediaStore downloads the object even if it’s still uploading the object.</p>
@@ -28,68 +31,72 @@ export interface GetObjectCommandOutput extends GetObjectResponse, __MetadataBea
  * ```javascript
  * import { MediaStoreDataClient, GetObjectCommand } from "@aws-sdk/client-mediastore-data"; // ES Modules import
  * // const { MediaStoreDataClient, GetObjectCommand } = require("@aws-sdk/client-mediastore-data"); // CommonJS import
+ * // import type { MediaStoreDataClientConfig } from "@aws-sdk/client-mediastore-data";
+ * const config = {}; // type is MediaStoreDataClientConfig
  * const client = new MediaStoreDataClient(config);
+ * const input = { // GetObjectRequest
+ *   Path: "STRING_VALUE", // required
+ *   Range: "STRING_VALUE",
+ * };
  * const command = new GetObjectCommand(input);
  * const response = await client.send(command);
+ * // consume or destroy the stream to free the socket.
+ * const bytes = await response.Body.transformToByteArray();
+ * // const str = await response.Body.transformToString();
+ * // response.Body.destroy(); // only applicable to Node.js Readable streams.
+ *
+ * // { // GetObjectResponse
+ * //   Body: "<SdkStream>", // see \@smithy/types -> StreamingBlobPayloadOutputTypes
+ * //   CacheControl: "STRING_VALUE",
+ * //   ContentRange: "STRING_VALUE",
+ * //   ContentLength: Number("long"),
+ * //   ContentType: "STRING_VALUE",
+ * //   ETag: "STRING_VALUE",
+ * //   LastModified: new Date("TIMESTAMP"),
+ * //   StatusCode: Number("int"), // required
+ * // };
+ *
  * ```
  *
+ * @param GetObjectCommandInput - {@link GetObjectCommandInput}
+ * @returns {@link GetObjectCommandOutput}
  * @see {@link GetObjectCommandInput} for command's `input` shape.
  * @see {@link GetObjectCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreDataClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreDataClientResolvedConfig | config} for MediaStoreDataClient's `config` shape.
  *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The specified container was not found for the specified account.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ObjectNotFoundException} (client fault)
+ *  <p>Could not perform an operation on an object that does not exist.</p>
+ *
+ * @throws {@link RequestedRangeNotSatisfiableException} (client fault)
+ *  <p>The requested content range is not valid.</p>
+ *
+ * @throws {@link MediaStoreDataServiceException}
+ * <p>Base exception class for all service exceptions from MediaStoreData service.</p>
+ *
+ *
+ * @public
  */
-export class GetObjectCommand extends $Command<
-  GetObjectCommandInput,
-  GetObjectCommandOutput,
-  MediaStoreDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetObjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetObjectCommandInput, GetObjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreDataClient";
-    const commandName = "GetObjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetObjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetObjectResponse.filterSensitiveLog,
+export class GetObjectCommand extends command<GetObjectCommandInput, GetObjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetObject",
+  GetObject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetObjectRequest;
+      output: GetObjectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetObjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetObjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetObjectCommandOutput> {
-    return deserializeAws_restJson1GetObjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetObjectCommandInput;
+      output: GetObjectCommandOutput;
+    };
+  };
 }

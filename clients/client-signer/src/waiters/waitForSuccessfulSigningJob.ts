@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeSigningJobCommand, DescribeSigningJobCommandInput } from "../commands/DescribeSigningJobCommand";
-import { SignerClient } from "../SignerClient";
+import {
+  type DescribeSigningJobCommandInput,
+  type DescribeSigningJobCommandOutput,
+  DescribeSigningJobCommand,
+} from "../commands/DescribeSigningJobCommand";
+import type { SignerServiceException } from "../models/SignerServiceException";
+import type { SignerClient } from "../SignerClient";
 
-const checkState = async (client: SignerClient, input: DescribeSigningJobCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SignerClient, input: DescribeSigningJobCommandInput): Promise<WaiterResult<DescribeSigningJobCommandOutput | SignerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeSigningJobCommand(input));
+    let result: DescribeSigningJobCommandOutput & any = await client.send(new DescribeSigningJobCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.status;
-      };
+      }
       if (returnComparator() === "Succeeded") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,14 +31,14 @@ const checkState = async (client: SignerClient, input: DescribeSigningJobCommand
     try {
       const returnComparator = () => {
         return result.status;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.FAILURE, reason };
     }
   }
@@ -39,7 +51,7 @@ const checkState = async (client: SignerClient, input: DescribeSigningJobCommand
 export const waitForSuccessfulSigningJob = async (
   params: WaiterConfiguration<SignerClient>,
   input: DescribeSigningJobCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSigningJobCommandOutput | SignerServiceException>> => {
   const serviceDefaults = { minDelay: 20, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -51,8 +63,8 @@ export const waitForSuccessfulSigningJob = async (
 export const waitUntilSuccessfulSigningJob = async (
   params: WaiterConfiguration<SignerClient>,
   input: DescribeSigningJobCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSigningJobCommandOutput>> => {
   const serviceDefaults = { minDelay: 20, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeSigningJobCommandOutput>;
 };

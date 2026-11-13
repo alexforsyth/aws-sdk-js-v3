@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListDashboardsRequest, ListDashboardsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListDashboardsCommand,
-  serializeAws_restJson1ListDashboardsCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDashboardsRequest, ListDashboardsResponse } from "../models/models_4";
+import { ListDashboards$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDashboardsCommand}.
+ */
 export interface ListDashboardsCommandInput extends ListDashboardsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDashboardsCommand}.
+ */
 export interface ListDashboardsCommandOutput extends ListDashboardsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface ListDashboardsCommandOutput extends ListDashboardsResponse, __M
  * ```javascript
  * import { QuickSightClient, ListDashboardsCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, ListDashboardsCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // ListDashboardsRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListDashboardsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDashboardsResponse
+ * //   DashboardSummaryList: [ // DashboardSummaryList
+ * //     { // DashboardSummary
+ * //       Arn: "STRING_VALUE",
+ * //       DashboardId: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastUpdatedTime: new Date("TIMESTAMP"),
+ * //       PublishedVersionNumber: Number("long"),
+ * //       LastPublishedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * //   RequestId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDashboardsCommandInput - {@link ListDashboardsCommandInput}
+ * @returns {@link ListDashboardsCommandOutput}
  * @see {@link ListDashboardsCommandInput} for command's `input` shape.
  * @see {@link ListDashboardsCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value isn't valid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class ListDashboardsCommand extends $Command<
-  ListDashboardsCommandInput,
-  ListDashboardsCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDashboardsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDashboardsCommandInput, ListDashboardsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "ListDashboardsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDashboardsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDashboardsResponse.filterSensitiveLog,
+export class ListDashboardsCommand extends command<ListDashboardsCommandInput, ListDashboardsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDashboards",
+  ListDashboards$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDashboardsRequest;
+      output: ListDashboardsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDashboardsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDashboardsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDashboardsCommandOutput> {
-    return deserializeAws_restJson1ListDashboardsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDashboardsCommandInput;
+      output: ListDashboardsCommandOutput;
+    };
+  };
 }

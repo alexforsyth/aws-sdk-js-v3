@@ -1,273 +1,234 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-export enum __AdTriggersElement {
-  BREAK = "BREAK",
-  DISTRIBUTOR_ADVERTISEMENT = "DISTRIBUTOR_ADVERTISEMENT",
-  DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-  DISTRIBUTOR_PLACEMENT_OPPORTUNITY = "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-  PROVIDER_ADVERTISEMENT = "PROVIDER_ADVERTISEMENT",
-  PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-  PROVIDER_PLACEMENT_OPPORTUNITY = "PROVIDER_PLACEMENT_OPPORTUNITY",
-  SPLICE_INSERT = "SPLICE_INSERT",
-}
-
-export enum __PeriodTriggersElement {
-  ADS = "ADS",
-}
+// smithy-typescript generated code
+import type {
+  __AdTriggersElement,
+  __PeriodTriggersElement,
+  AdMarkers,
+  AdsOnDeliveryRestrictions,
+  CmafEncryptionMethod,
+  EncryptionMethod,
+  ManifestLayout,
+  Origination,
+  PlaylistType,
+  PresetSpeke20Audio,
+  PresetSpeke20Video,
+  Profile,
+  SegmentTemplateFormat,
+  Status,
+  StreamOrder,
+  UtcTiming,
+} from "./enums";
 
 /**
  * Configure egress access logging.
+ * @public
  */
 export interface EgressAccessLogs {
   /**
    * Customize the log group name.
+   * @public
    */
-  LogGroupName?: string;
-}
-
-export namespace EgressAccessLogs {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EgressAccessLogs): any => ({
-    ...obj,
-  });
+  LogGroupName?: string | undefined;
 }
 
 /**
  * An endpoint for ingesting source content for a Channel.
+ * @public
  */
 export interface IngestEndpoint {
   /**
    * The system generated unique identifier for the IngestEndpoint
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The system generated password for ingest authentication.
+   * @public
    */
-  Password?: string;
+  Password?: string | undefined;
 
   /**
    * The ingest URL to which the source stream should be sent.
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * The system generated username for ingest authentication.
+   * @public
    */
-  Username?: string;
-}
-
-export namespace IngestEndpoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IngestEndpoint): any => ({
-    ...obj,
-  });
+  Username?: string | undefined;
 }
 
 /**
  * An HTTP Live Streaming (HLS) ingest resource configuration.
+ * @public
  */
 export interface HlsIngest {
   /**
    * A list of endpoints to which the source stream should be sent.
+   * @public
    */
-  IngestEndpoints?: IngestEndpoint[];
-}
-
-export namespace HlsIngest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HlsIngest): any => ({
-    ...obj,
-  });
+  IngestEndpoints?: IngestEndpoint[] | undefined;
 }
 
 /**
  * Configure ingress access logging.
+ * @public
  */
 export interface IngressAccessLogs {
   /**
    * Customize the log group name.
+   * @public
    */
-  LogGroupName?: string;
-}
-
-export namespace IngressAccessLogs {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IngressAccessLogs): any => ({
-    ...obj,
-  });
+  LogGroupName?: string | undefined;
 }
 
 /**
  * A Channel resource configuration.
+ * @public
  */
 export interface Channel {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace Channel {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Channel): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * Configuration parameters for where in an S3 bucket to place the harvested content
+ * @public
  */
 export interface S3Destination {
   /**
    * The name of an S3 bucket within which harvested content will be exported
+   * @public
    */
   BucketName: string | undefined;
 
   /**
    * The key in the specified S3 bucket where the harvested top-level manifest will be placed.
+   * @public
    */
   ManifestKey: string | undefined;
 
   /**
    * The IAM role used to write to the specified S3 bucket
+   * @public
    */
   RoleArn: string | undefined;
 }
 
-export namespace S3Destination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Destination): any => ({
-    ...obj,
-  });
-}
-
-export enum Status {
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  SUCCEEDED = "SUCCEEDED",
-}
-
 /**
  * A HarvestJob resource configuration
+ * @public
  */
 export interface HarvestJob {
   /**
    * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The ID of the Channel that the HarvestJob will harvest from.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
-   * The time the HarvestJob was submitted
+   * The date and time the HarvestJob was submitted.
+   * @public
    */
-  CreatedAt?: string;
+  CreatedAt?: string | undefined;
 
   /**
    * The end of the time-window which will be harvested.
+   * @public
    */
-  EndTime?: string;
+  EndTime?: string | undefined;
 
   /**
    * The ID of the HarvestJob. The ID must be unique within the region
    * and it cannot be changed after the HarvestJob is submitted.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the OriginEndpoint that the HarvestJob will harvest from.
    * This cannot be changed after the HarvestJob is submitted.
+   * @public
    */
-  OriginEndpointId?: string;
+  OriginEndpointId?: string | undefined;
 
   /**
    * Configuration parameters for where in an S3 bucket to place the harvested content
+   * @public
    */
-  S3Destination?: S3Destination;
+  S3Destination?: S3Destination | undefined;
 
   /**
    * The start of the time-window which will be harvested.
+   * @public
    */
-  StartTime?: string;
+  StartTime?: string | undefined;
 
   /**
    * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
    * HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
    * include an explanation of why the HarvestJob failed.
+   * @public
    */
-  Status?: Status | string;
-}
-
-export namespace HarvestJob {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HarvestJob): any => ({
-    ...obj,
-  });
-}
-
-export enum AdMarkers {
-  DATERANGE = "DATERANGE",
-  NONE = "NONE",
-  PASSTHROUGH = "PASSTHROUGH",
-  SCTE35_ENHANCED = "SCTE35_ENHANCED",
-}
-
-export enum PlaylistType {
-  EVENT = "EVENT",
-  NONE = "NONE",
-  VOD = "VOD",
+  Status?: Status | undefined;
 }
 
 /**
  * A HTTP Live Streaming (HLS) manifest configuration.
+ * @public
  */
 export interface HlsManifest {
   /**
@@ -280,35 +241,41 @@ export interface HlsManifest {
    * "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events
    * in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value
    * that is greater than 0.
+   * @public
    */
-  AdMarkers?: AdMarkers | string;
+  AdMarkers?: AdMarkers | undefined;
 
   /**
    * The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * When enabled, an I-Frame only stream will be included in the output.
+   * @public
    */
-  IncludeIframeOnlyStream?: boolean;
+  IncludeIframeOnlyStream?: boolean | undefined;
 
   /**
    * An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * The HTTP Live Streaming (HLS) playlist type.
    * When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
    * entry will be included in the media playlist.
+   * @public
    */
-  PlaylistType?: PlaylistType | string;
+  PlaylistType?: PlaylistType | undefined;
 
   /**
    * Time window (in seconds) contained in each parent manifest.
+   * @public
    */
-  PlaylistWindowSeconds?: number;
+  PlaylistWindowSeconds?: number | undefined;
 
   /**
    * The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
@@ -320,33 +287,41 @@ export interface HlsManifest {
    * ID3Timed Metadata messages will be generated. Note that irrespective
    * of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
    * it will be passed through to HLS output.
+   * @public
    */
-  ProgramDateTimeIntervalSeconds?: number;
+  ProgramDateTimeIntervalSeconds?: number | undefined;
 
   /**
    * The URL of the packaged OriginEndpoint for consumption.
+   * @public
    */
-  Url?: string;
-}
+  Url?: string | undefined;
 
-export namespace HlsManifest {
   /**
-   * @internal
+   * A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no
+   * ad markers are output.  Specify multiple items to create ad markers for all of the included
+   * message types.
+   * @public
    */
-  export const filterSensitiveLog = (obj: HlsManifest): any => ({
-    ...obj,
-  });
-}
+  AdTriggers?: __AdTriggersElement[] | undefined;
 
-export enum AdsOnDeliveryRestrictions {
-  BOTH = "BOTH",
-  NONE = "NONE",
-  RESTRICTED = "RESTRICTED",
-  UNRESTRICTED = "UNRESTRICTED",
+  /**
+   * This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to
+   * determine whether a message signals an ad.  Choosing "NONE" means no SCTE-35 messages become
+   * ads.  Choosing "RESTRICTED" means SCTE-35 messages of the types specified in AdTriggers that
+   * contain delivery restrictions will be treated as ads.  Choosing "UNRESTRICTED" means SCTE-35
+   * messages of the types specified in AdTriggers that do not contain delivery restrictions will
+   * be treated as ads.  Choosing "BOTH" means all SCTE-35 messages of the types specified in
+   * AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags
+   * and are always treated as ads if specified in AdTriggers.
+   * @public
+   */
+  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | undefined;
 }
 
 /**
  * A HTTP Live Streaming (HLS) manifest configuration.
+ * @public
  */
 export interface HlsManifestCreateOrUpdateParameters {
   /**
@@ -359,15 +334,17 @@ export interface HlsManifestCreateOrUpdateParameters {
    * "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events
    * in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value
    * that is greater than 0.
+   * @public
    */
-  AdMarkers?: AdMarkers | string;
+  AdMarkers?: AdMarkers | undefined;
 
   /**
    * A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no
    * ad markers are output.  Specify multiple items to create ad markers for all of the included
    * message types.
+   * @public
    */
-  AdTriggers?: (__AdTriggersElement | string)[];
+  AdTriggers?: __AdTriggersElement[] | undefined;
 
   /**
    * This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to
@@ -378,35 +355,41 @@ export interface HlsManifestCreateOrUpdateParameters {
    * be treated as ads.  Choosing "BOTH" means all SCTE-35 messages of the types specified in
    * AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags
    * and are always treated as ads if specified in AdTriggers.
+   * @public
    */
-  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | string;
+  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | undefined;
 
   /**
    * The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * When enabled, an I-Frame only stream will be included in the output.
+   * @public
    */
-  IncludeIframeOnlyStream?: boolean;
+  IncludeIframeOnlyStream?: boolean | undefined;
 
   /**
    * An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * The HTTP Live Streaming (HLS) playlist type.
    * When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
    * entry will be included in the media playlist.
+   * @public
    */
-  PlaylistType?: PlaylistType | string;
+  PlaylistType?: PlaylistType | undefined;
 
   /**
    * Time window (in seconds) contained in each parent manifest.
+   * @public
    */
-  PlaylistWindowSeconds?: number;
+  PlaylistWindowSeconds?: number | undefined;
 
   /**
    * The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
@@ -418,49 +401,27 @@ export interface HlsManifestCreateOrUpdateParameters {
    * ID3Timed Metadata messages will be generated. Note that irrespective
    * of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
    * it will be passed through to HLS output.
+   * @public
    */
-  ProgramDateTimeIntervalSeconds?: number;
-}
-
-export namespace HlsManifestCreateOrUpdateParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HlsManifestCreateOrUpdateParameters): any => ({
-    ...obj,
-  });
+  ProgramDateTimeIntervalSeconds?: number | undefined;
 }
 
 /**
  * CDN Authorization credentials
+ * @public
  */
 export interface Authorization {
   /**
    * The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
+   * @public
    */
   CdnIdentifierSecret: string | undefined;
 
   /**
    * The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+   * @public
    */
   SecretsRoleArn: string | undefined;
-}
-
-export namespace Authorization {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Authorization): any => ({
-    ...obj,
-  });
-}
-
-export enum PresetSpeke20Audio {
-  PRESET_AUDIO_1 = "PRESET-AUDIO-1",
-}
-
-export enum PresetSpeke20Video {
-  PRESET_VIDEO_1 = "PRESET-VIDEO-1",
 }
 
 /**
@@ -470,38 +431,34 @@ export enum PresetSpeke20Video {
  * Note the following considerations when using encryptionContractConfiguration:
  * encryptionContractConfiguration can be used for DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
  * You must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.
+ * @public
  */
 export interface EncryptionContractConfiguration {
   /**
    * A collection of audio encryption presets.
+   * @public
    */
-  PresetSpeke20Audio: PresetSpeke20Audio | string | undefined;
+  PresetSpeke20Audio: PresetSpeke20Audio | undefined;
 
   /**
    * A collection of video encryption presets.
+   * @public
    */
-  PresetSpeke20Video: PresetSpeke20Video | string | undefined;
-}
-
-export namespace EncryptionContractConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EncryptionContractConfiguration): any => ({
-    ...obj,
-  });
+  PresetSpeke20Video: PresetSpeke20Video | undefined;
 }
 
 /**
  * A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+ * @public
  */
 export interface SpekeKeyProvider {
   /**
    * An Amazon Resource Name (ARN) of a Certificate Manager certificate
    * that MediaPackage will use for enforcing secure end-to-end data
    * transfer with the key provider service.
+   * @public
    */
-  CertificateArn?: string;
+  CertificateArn?: string | undefined;
 
   /**
    * Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0.
@@ -510,200 +467,157 @@ export interface SpekeKeyProvider {
    * Note the following considerations when using encryptionContractConfiguration:
    * encryptionContractConfiguration can be used for DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
    * You must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.
+   * @public
    */
-  EncryptionContractConfiguration?: EncryptionContractConfiguration;
+  EncryptionContractConfiguration?: EncryptionContractConfiguration | undefined;
 
   /**
    * The resource ID to include in key requests.
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
    * MediaPackage will assume when accessing the key provider service.
+   * @public
    */
   RoleArn: string | undefined;
 
   /**
    * The system IDs to include in key requests.
+   * @public
    */
   SystemIds: string[] | undefined;
 
   /**
    * The URL of the external key provider service.
+   * @public
    */
   Url: string | undefined;
 }
 
-export namespace SpekeKeyProvider {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SpekeKeyProvider): any => ({
-    ...obj,
-  });
-}
-
 /**
  * A Common Media Application Format (CMAF) encryption configuration.
+ * @public
  */
 export interface CmafEncryption {
   /**
    * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+   * @public
    */
-  ConstantInitializationVector?: string;
+  ConstantInitializationVector?: string | undefined;
+
+  /**
+   * The encryption method to use.
+   * @public
+   */
+  EncryptionMethod?: CmafEncryptionMethod | undefined;
 
   /**
    * Time (in seconds) between each encryption key rotation.
+   * @public
    */
-  KeyRotationIntervalSeconds?: number;
+  KeyRotationIntervalSeconds?: number | undefined;
 
   /**
    * A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+   * @public
    */
   SpekeKeyProvider: SpekeKeyProvider | undefined;
-}
-
-export namespace CmafEncryption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CmafEncryption): any => ({
-    ...obj,
-  });
-}
-
-export enum StreamOrder {
-  ORIGINAL = "ORIGINAL",
-  VIDEO_BITRATE_ASCENDING = "VIDEO_BITRATE_ASCENDING",
-  VIDEO_BITRATE_DESCENDING = "VIDEO_BITRATE_DESCENDING",
 }
 
 /**
  * A StreamSelection configuration.
+ * @public
  */
 export interface StreamSelection {
   /**
    * The maximum video bitrate (bps) to include in output.
+   * @public
    */
-  MaxVideoBitsPerSecond?: number;
+  MaxVideoBitsPerSecond?: number | undefined;
 
   /**
    * The minimum video bitrate (bps) to include in output.
+   * @public
    */
-  MinVideoBitsPerSecond?: number;
+  MinVideoBitsPerSecond?: number | undefined;
 
   /**
    * A directive that determines the order of streams in the output.
+   * @public
    */
-  StreamOrder?: StreamOrder | string;
-}
-
-export namespace StreamSelection {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StreamSelection): any => ({
-    ...obj,
-  });
+  StreamOrder?: StreamOrder | undefined;
 }
 
 /**
  * A Common Media Application Format (CMAF) packaging configuration.
+ * @public
  */
 export interface CmafPackage {
   /**
    * A Common Media Application Format (CMAF) encryption configuration.
+   * @public
    */
-  Encryption?: CmafEncryption;
+  Encryption?: CmafEncryption | undefined;
 
   /**
    * A list of HLS manifest configurations
+   * @public
    */
-  HlsManifests?: HlsManifest[];
+  HlsManifests?: HlsManifest[] | undefined;
 
   /**
    * Duration (in seconds) of each segment. Actual segments will be
    * rounded to the nearest multiple of the source segment duration.
+   * @public
    */
-  SegmentDurationSeconds?: number;
+  SegmentDurationSeconds?: number | undefined;
 
   /**
    * An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.
+   * @public
    */
-  SegmentPrefix?: string;
+  SegmentPrefix?: string | undefined;
 
   /**
    * A StreamSelection configuration.
+   * @public
    */
-  StreamSelection?: StreamSelection;
-}
-
-export namespace CmafPackage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CmafPackage): any => ({
-    ...obj,
-  });
+  StreamSelection?: StreamSelection | undefined;
 }
 
 /**
  * A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+ * @public
  */
 export interface DashEncryption {
   /**
    * Time (in seconds) between each encryption key rotation.
+   * @public
    */
-  KeyRotationIntervalSeconds?: number;
+  KeyRotationIntervalSeconds?: number | undefined;
 
   /**
    * A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+   * @public
    */
   SpekeKeyProvider: SpekeKeyProvider | undefined;
 }
 
-export namespace DashEncryption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashEncryption): any => ({
-    ...obj,
-  });
-}
-
-export enum ManifestLayout {
-  COMPACT = "COMPACT",
-  FULL = "FULL",
-}
-
-export enum Profile {
-  HBBTV_1_5 = "HBBTV_1_5",
-  NONE = "NONE",
-}
-
-export enum SegmentTemplateFormat {
-  NUMBER_WITH_DURATION = "NUMBER_WITH_DURATION",
-  NUMBER_WITH_TIMELINE = "NUMBER_WITH_TIMELINE",
-  TIME_WITH_TIMELINE = "TIME_WITH_TIMELINE",
-}
-
-export enum UtcTiming {
-  HTTP_HEAD = "HTTP-HEAD",
-  HTTP_ISO = "HTTP-ISO",
-  NONE = "NONE",
-}
-
 /**
  * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+ * @public
  */
 export interface DashPackage {
   /**
    * A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no
    * ad markers are output.  Specify multiple items to create ad markers for all of the included
    * message types.
+   * @public
    */
-  AdTriggers?: (__AdTriggersElement | string)[];
+  AdTriggers?: __AdTriggersElement[] | undefined;
 
   /**
    * This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to
@@ -714,135 +628,139 @@ export interface DashPackage {
    * be treated as ads.  Choosing "BOTH" means all SCTE-35 messages of the types specified in
    * AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags
    * and are always treated as ads if specified in AdTriggers.
+   * @public
    */
-  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | string;
+  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+   * @public
    */
-  Encryption?: DashEncryption;
+  Encryption?: DashEncryption | undefined;
 
   /**
-   * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+   * When enabled, an I-Frame only stream will be included in the output.
+   * @public
    */
-  ManifestLayout?: ManifestLayout | string;
+  IncludeIframeOnlyStream?: boolean | undefined;
+
+  /**
+   * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level. When set to DRM_TOP_LEVEL_COMPACT, content protection elements are placed the MPD level and referenced at the AdaptationSet level.
+   * @public
+   */
+  ManifestLayout?: ManifestLayout | undefined;
 
   /**
    * Time window (in seconds) contained in each manifest.
+   * @public
    */
-  ManifestWindowSeconds?: number;
+  ManifestWindowSeconds?: number | undefined;
 
   /**
    * Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+   * @public
    */
-  MinBufferTimeSeconds?: number;
+  MinBufferTimeSeconds?: number | undefined;
 
   /**
    * Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).
+   * @public
    */
-  MinUpdatePeriodSeconds?: number;
+  MinUpdatePeriodSeconds?: number | undefined;
 
   /**
    * A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
    * Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
    * be partitioned into more than one period. If the list contains "ADS", new periods will be created where
    * the Channel source contains SCTE-35 ad markers.
+   * @public
    */
-  PeriodTriggers?: (__PeriodTriggersElement | string)[];
+  PeriodTriggers?: __PeriodTriggersElement[] | undefined;
 
   /**
-   * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+   * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014", DVB-DASH 2014 compliant output is enabled.
+   * @public
    */
-  Profile?: Profile | string;
+  Profile?: Profile | undefined;
 
   /**
    * Duration (in seconds) of each segment. Actual segments will be
    * rounded to the nearest multiple of the source segment duration.
+   * @public
    */
-  SegmentDurationSeconds?: number;
+  SegmentDurationSeconds?: number | undefined;
 
   /**
    * Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+   * @public
    */
-  SegmentTemplateFormat?: SegmentTemplateFormat | string;
+  SegmentTemplateFormat?: SegmentTemplateFormat | undefined;
 
   /**
    * A StreamSelection configuration.
+   * @public
    */
-  StreamSelection?: StreamSelection;
+  StreamSelection?: StreamSelection | undefined;
 
   /**
    * Duration (in seconds) to delay live content before presentation.
+   * @public
    */
-  SuggestedPresentationDelaySeconds?: number;
+  SuggestedPresentationDelaySeconds?: number | undefined;
 
   /**
    * Determines the type of UTCTiming included in the Media Presentation Description (MPD)
+   * @public
    */
-  UtcTiming?: UtcTiming | string;
+  UtcTiming?: UtcTiming | undefined;
 
   /**
-   * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+   * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
+   * @public
    */
-  UtcTimingUri?: string;
-}
-
-export namespace DashPackage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashPackage): any => ({
-    ...obj,
-  });
-}
-
-export enum EncryptionMethod {
-  AES_128 = "AES_128",
-  SAMPLE_AES = "SAMPLE_AES",
+  UtcTimingUri?: string | undefined;
 }
 
 /**
  * An HTTP Live Streaming (HLS) encryption configuration.
+ * @public
  */
 export interface HlsEncryption {
   /**
    * A constant initialization vector for encryption (optional).
    * When not specified the initialization vector will be periodically rotated.
+   * @public
    */
-  ConstantInitializationVector?: string;
+  ConstantInitializationVector?: string | undefined;
 
   /**
    * The encryption method to use.
+   * @public
    */
-  EncryptionMethod?: EncryptionMethod | string;
+  EncryptionMethod?: EncryptionMethod | undefined;
 
   /**
    * Interval (in seconds) between each encryption key rotation.
+   * @public
    */
-  KeyRotationIntervalSeconds?: number;
+  KeyRotationIntervalSeconds?: number | undefined;
 
   /**
    * When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+   * @public
    */
-  RepeatExtXKey?: boolean;
+  RepeatExtXKey?: boolean | undefined;
 
   /**
    * A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+   * @public
    */
   SpekeKeyProvider: SpekeKeyProvider | undefined;
 }
 
-export namespace HlsEncryption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HlsEncryption): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An HTTP Live Streaming (HLS) packaging configuration.
+ * @public
  */
 export interface HlsPackage {
   /**
@@ -855,15 +773,17 @@ export interface HlsPackage {
    * "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events
    * in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value
    * that is greater than 0.
+   * @public
    */
-  AdMarkers?: AdMarkers | string;
+  AdMarkers?: AdMarkers | undefined;
 
   /**
    * A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no
    * ad markers are output.  Specify multiple items to create ad markers for all of the included
    * message types.
+   * @public
    */
-  AdTriggers?: (__AdTriggersElement | string)[];
+  AdTriggers?: __AdTriggersElement[] | undefined;
 
   /**
    * This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to
@@ -874,35 +794,41 @@ export interface HlsPackage {
    * be treated as ads.  Choosing "BOTH" means all SCTE-35 messages of the types specified in
    * AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags
    * and are always treated as ads if specified in AdTriggers.
+   * @public
    */
-  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | string;
+  AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) encryption configuration.
+   * @public
    */
-  Encryption?: HlsEncryption;
+  Encryption?: HlsEncryption | undefined;
 
   /**
    * When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+   * @public
    */
-  IncludeDvbSubtitles?: boolean;
+  IncludeDvbSubtitles?: boolean | undefined;
 
   /**
    * When enabled, an I-Frame only stream will be included in the output.
+   * @public
    */
-  IncludeIframeOnlyStream?: boolean;
+  IncludeIframeOnlyStream?: boolean | undefined;
 
   /**
    * The HTTP Live Streaming (HLS) playlist type.
    * When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
    * entry will be included in the media playlist.
+   * @public
    */
-  PlaylistType?: PlaylistType | string;
+  PlaylistType?: PlaylistType | undefined;
 
   /**
    * Time window (in seconds) contained in each parent manifest.
+   * @public
    */
-  PlaylistWindowSeconds?: number;
+  PlaylistWindowSeconds?: number | undefined;
 
   /**
    * The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
@@ -914,1645 +840,1526 @@ export interface HlsPackage {
    * ID3Timed Metadata messages will be generated. Note that irrespective
    * of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
    * it will be passed through to HLS output.
+   * @public
    */
-  ProgramDateTimeIntervalSeconds?: number;
+  ProgramDateTimeIntervalSeconds?: number | undefined;
 
   /**
    * Duration (in seconds) of each fragment. Actual fragments will be
    * rounded to the nearest multiple of the source fragment duration.
+   * @public
    */
-  SegmentDurationSeconds?: number;
+  SegmentDurationSeconds?: number | undefined;
 
   /**
    * A StreamSelection configuration.
+   * @public
    */
-  StreamSelection?: StreamSelection;
+  StreamSelection?: StreamSelection | undefined;
 
   /**
    * When enabled, audio streams will be placed in rendition groups in the output.
+   * @public
    */
-  UseAudioRenditionGroup?: boolean;
-}
-
-export namespace HlsPackage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HlsPackage): any => ({
-    ...obj,
-  });
+  UseAudioRenditionGroup?: boolean | undefined;
 }
 
 /**
  * A Microsoft Smooth Streaming (MSS) encryption configuration.
+ * @public
  */
 export interface MssEncryption {
   /**
    * A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+   * @public
    */
   SpekeKeyProvider: SpekeKeyProvider | undefined;
 }
 
-export namespace MssEncryption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MssEncryption): any => ({
-    ...obj,
-  });
-}
-
 /**
  * A Microsoft Smooth Streaming (MSS) packaging configuration.
+ * @public
  */
 export interface MssPackage {
   /**
    * A Microsoft Smooth Streaming (MSS) encryption configuration.
+   * @public
    */
-  Encryption?: MssEncryption;
+  Encryption?: MssEncryption | undefined;
 
   /**
    * The time window (in seconds) contained in each manifest.
+   * @public
    */
-  ManifestWindowSeconds?: number;
+  ManifestWindowSeconds?: number | undefined;
 
   /**
    * The duration (in seconds) of each segment.
+   * @public
    */
-  SegmentDurationSeconds?: number;
+  SegmentDurationSeconds?: number | undefined;
 
   /**
    * A StreamSelection configuration.
+   * @public
    */
-  StreamSelection?: StreamSelection;
-}
-
-export namespace MssPackage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MssPackage): any => ({
-    ...obj,
-  });
-}
-
-export enum Origination {
-  ALLOW = "ALLOW",
-  DENY = "DENY",
+  StreamSelection?: StreamSelection | undefined;
 }
 
 /**
  * An OriginEndpoint resource configuration.
+ * @public
  */
 export interface OriginEndpoint {
   /**
    * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * CDN Authorization credentials
+   * @public
    */
-  Authorization?: Authorization;
+  Authorization?: Authorization | undefined;
 
   /**
    * The ID of the Channel the OriginEndpoint is associated with.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
    * A Common Media Application Format (CMAF) packaging configuration.
+   * @public
    */
-  CmafPackage?: CmafPackage;
+  CmafPackage?: CmafPackage | undefined;
+
+  /**
+   * The date and time the OriginEndpoint was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+   * @public
    */
-  DashPackage?: DashPackage;
+  DashPackage?: DashPackage | undefined;
 
   /**
    * A short text description of the OriginEndpoint.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) packaging configuration.
+   * @public
    */
-  HlsPackage?: HlsPackage;
+  HlsPackage?: HlsPackage | undefined;
 
   /**
    * The ID of the OriginEndpoint.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * A short string appended to the end of the OriginEndpoint URL.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * A Microsoft Smooth Streaming (MSS) packaging configuration.
+   * @public
    */
-  MssPackage?: MssPackage;
+  MssPackage?: MssPackage | undefined;
 
   /**
    * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
    * may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
    * requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+   * @public
    */
-  Origination?: Origination | string;
+  Origination?: Origination | undefined;
 
   /**
    * Maximum duration (seconds) of content to retain for startover playback.
    * If not specified, startover playback will be disabled for the OriginEndpoint.
+   * @public
    */
-  StartoverWindowSeconds?: number;
+  StartoverWindowSeconds?: number | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * Amount of delay (seconds) to enforce on the playback of live content.
    * If not specified, there will be no time delay in effect for the OriginEndpoint.
+   * @public
    */
-  TimeDelaySeconds?: number;
+  TimeDelaySeconds?: number | undefined;
 
   /**
    * The URL of the packaged OriginEndpoint for consumption.
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+   * @public
    */
-  Whitelist?: string[];
-}
-
-export namespace OriginEndpoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OriginEndpoint): any => ({
-    ...obj,
-  });
+  Whitelist?: string[] | undefined;
 }
 
 /**
  * A Common Media Application Format (CMAF) packaging configuration.
+ * @public
  */
 export interface CmafPackageCreateOrUpdateParameters {
   /**
    * A Common Media Application Format (CMAF) encryption configuration.
+   * @public
    */
-  Encryption?: CmafEncryption;
+  Encryption?: CmafEncryption | undefined;
 
   /**
    * A list of HLS manifest configurations
+   * @public
    */
-  HlsManifests?: HlsManifestCreateOrUpdateParameters[];
+  HlsManifests?: HlsManifestCreateOrUpdateParameters[] | undefined;
 
   /**
    * Duration (in seconds) of each segment. Actual segments will be
    * rounded to the nearest multiple of the source segment duration.
+   * @public
    */
-  SegmentDurationSeconds?: number;
+  SegmentDurationSeconds?: number | undefined;
 
   /**
    * An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.
+   * @public
    */
-  SegmentPrefix?: string;
+  SegmentPrefix?: string | undefined;
 
   /**
    * A StreamSelection configuration.
+   * @public
    */
-  StreamSelection?: StreamSelection;
-}
-
-export namespace CmafPackageCreateOrUpdateParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CmafPackageCreateOrUpdateParameters): any => ({
-    ...obj,
-  });
+  StreamSelection?: StreamSelection | undefined;
 }
 
 /**
  * the option to configure log subscription.
+ * @public
  */
 export interface ConfigureLogsRequest {
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * The ID of the channel to log subscription.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 }
 
-export namespace ConfigureLogsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigureLogsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ConfigureLogsResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace ConfigureLogsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigureLogsResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The client is not authorized to access the requested resource.
- */
-export interface ForbiddenException extends __SmithyException, $MetadataBearer {
-  name: "ForbiddenException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ForbiddenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ForbiddenException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * An unexpected error occurred.
- */
-export interface InternalServerErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerErrorException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServerErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerErrorException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The requested resource does not exist.
- */
-export interface NotFoundException extends __SmithyException, $MetadataBearer {
-  name: "NotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace NotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * An unexpected error occurred.
- */
-export interface ServiceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ServiceUnavailableException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace ServiceUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The client has exceeded their resource or throttling limits.
- */
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The parameters sent in the request are not valid.
- */
-export interface UnprocessableEntityException extends __SmithyException, $MetadataBearer {
-  name: "UnprocessableEntityException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace UnprocessableEntityException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnprocessableEntityException): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * A new Channel configuration.
+ * @public
  */
 export interface CreateChannelRequest {
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * The ID of the Channel. The ID must be unique within the region and it
    * cannot be changed after a Channel is created.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateChannelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateChannelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateChannelResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateChannelResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateChannelResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * Configuration parameters used to create a new HarvestJob.
+ * @public
  */
 export interface CreateHarvestJobRequest {
   /**
    * The end of the time-window which will be harvested
+   * @public
    */
   EndTime: string | undefined;
 
   /**
    * The ID of the HarvestJob. The ID must be unique within the region
    * and it cannot be changed after the HarvestJob is submitted
+   * @public
    */
   Id: string | undefined;
 
   /**
    * The ID of the OriginEndpoint that the HarvestJob will harvest from.
    * This cannot be changed after the HarvestJob is submitted.
+   * @public
    */
   OriginEndpointId: string | undefined;
 
   /**
    * Configuration parameters for where in an S3 bucket to place the harvested content
+   * @public
    */
   S3Destination: S3Destination | undefined;
 
   /**
    * The start of the time-window which will be harvested
+   * @public
    */
   StartTime: string | undefined;
 }
 
-export namespace CreateHarvestJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHarvestJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHarvestJobResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The ID of the Channel that the HarvestJob will harvest from.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
-   * The time the HarvestJob was submitted
+   * The date and time the HarvestJob was submitted.
+   * @public
    */
-  CreatedAt?: string;
+  CreatedAt?: string | undefined;
 
   /**
    * The end of the time-window which will be harvested.
+   * @public
    */
-  EndTime?: string;
+  EndTime?: string | undefined;
 
   /**
    * The ID of the HarvestJob. The ID must be unique within the region
    * and it cannot be changed after the HarvestJob is submitted.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the OriginEndpoint that the HarvestJob will harvest from.
    * This cannot be changed after the HarvestJob is submitted.
+   * @public
    */
-  OriginEndpointId?: string;
+  OriginEndpointId?: string | undefined;
 
   /**
    * Configuration parameters for where in an S3 bucket to place the harvested content
+   * @public
    */
-  S3Destination?: S3Destination;
+  S3Destination?: S3Destination | undefined;
 
   /**
    * The start of the time-window which will be harvested.
+   * @public
    */
-  StartTime?: string;
+  StartTime?: string | undefined;
 
   /**
    * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
    * HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
    * include an explanation of why the HarvestJob failed.
+   * @public
    */
-  Status?: Status | string;
-}
-
-export namespace CreateHarvestJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHarvestJobResponse): any => ({
-    ...obj,
-  });
+  Status?: Status | undefined;
 }
 
 /**
  * Configuration parameters used to create a new OriginEndpoint.
+ * @public
  */
 export interface CreateOriginEndpointRequest {
   /**
    * CDN Authorization credentials
+   * @public
    */
-  Authorization?: Authorization;
+  Authorization?: Authorization | undefined;
 
   /**
    * The ID of the Channel that the OriginEndpoint will be associated with.
    * This cannot be changed after the OriginEndpoint is created.
+   * @public
    */
   ChannelId: string | undefined;
 
   /**
    * A Common Media Application Format (CMAF) packaging configuration.
+   * @public
    */
-  CmafPackage?: CmafPackageCreateOrUpdateParameters;
+  CmafPackage?: CmafPackageCreateOrUpdateParameters | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+   * @public
    */
-  DashPackage?: DashPackage;
+  DashPackage?: DashPackage | undefined;
 
   /**
    * A short text description of the OriginEndpoint.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) packaging configuration.
+   * @public
    */
-  HlsPackage?: HlsPackage;
+  HlsPackage?: HlsPackage | undefined;
 
   /**
    * The ID of the OriginEndpoint.  The ID must be unique within the region
    * and it cannot be changed after the OriginEndpoint is created.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * A Microsoft Smooth Streaming (MSS) packaging configuration.
+   * @public
    */
-  MssPackage?: MssPackage;
+  MssPackage?: MssPackage | undefined;
 
   /**
    * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
    * may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
    * requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+   * @public
    */
-  Origination?: Origination | string;
+  Origination?: Origination | undefined;
 
   /**
    * Maximum duration (seconds) of content to retain for startover playback.
    * If not specified, startover playback will be disabled for the OriginEndpoint.
+   * @public
    */
-  StartoverWindowSeconds?: number;
+  StartoverWindowSeconds?: number | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * Amount of delay (seconds) to enforce on the playback of live content.
    * If not specified, there will be no time delay in effect for the OriginEndpoint.
+   * @public
    */
-  TimeDelaySeconds?: number;
+  TimeDelaySeconds?: number | undefined;
 
   /**
    * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+   * @public
    */
-  Whitelist?: string[];
+  Whitelist?: string[] | undefined;
 }
 
-export namespace CreateOriginEndpointRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateOriginEndpointRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateOriginEndpointResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * CDN Authorization credentials
+   * @public
    */
-  Authorization?: Authorization;
+  Authorization?: Authorization | undefined;
 
   /**
    * The ID of the Channel the OriginEndpoint is associated with.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
    * A Common Media Application Format (CMAF) packaging configuration.
+   * @public
    */
-  CmafPackage?: CmafPackage;
+  CmafPackage?: CmafPackage | undefined;
+
+  /**
+   * The date and time the OriginEndpoint was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+   * @public
    */
-  DashPackage?: DashPackage;
+  DashPackage?: DashPackage | undefined;
 
   /**
    * A short text description of the OriginEndpoint.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) packaging configuration.
+   * @public
    */
-  HlsPackage?: HlsPackage;
+  HlsPackage?: HlsPackage | undefined;
 
   /**
    * The ID of the OriginEndpoint.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * A short string appended to the end of the OriginEndpoint URL.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * A Microsoft Smooth Streaming (MSS) packaging configuration.
+   * @public
    */
-  MssPackage?: MssPackage;
+  MssPackage?: MssPackage | undefined;
 
   /**
    * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
    * may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
    * requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+   * @public
    */
-  Origination?: Origination | string;
+  Origination?: Origination | undefined;
 
   /**
    * Maximum duration (seconds) of content to retain for startover playback.
    * If not specified, startover playback will be disabled for the OriginEndpoint.
+   * @public
    */
-  StartoverWindowSeconds?: number;
+  StartoverWindowSeconds?: number | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * Amount of delay (seconds) to enforce on the playback of live content.
    * If not specified, there will be no time delay in effect for the OriginEndpoint.
+   * @public
    */
-  TimeDelaySeconds?: number;
+  TimeDelaySeconds?: number | undefined;
 
   /**
    * The URL of the packaged OriginEndpoint for consumption.
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+   * @public
    */
-  Whitelist?: string[];
+  Whitelist?: string[] | undefined;
 }
 
-export namespace CreateOriginEndpointResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateOriginEndpointResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteChannelRequest {
   /**
    * The ID of the Channel to delete.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace DeleteChannelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteChannelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteChannelResponse {}
 
-export namespace DeleteChannelResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteChannelResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteOriginEndpointRequest {
   /**
    * The ID of the OriginEndpoint to delete.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace DeleteOriginEndpointRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteOriginEndpointRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteOriginEndpointResponse {}
 
-export namespace DeleteOriginEndpointResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteOriginEndpointResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeChannelRequest {
   /**
    * The ID of a Channel.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace DescribeChannelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeChannelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeChannelResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace DescribeChannelResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeChannelResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeHarvestJobRequest {
   /**
    * The ID of the HarvestJob.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace DescribeHarvestJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeHarvestJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeHarvestJobResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * The ID of the Channel that the HarvestJob will harvest from.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
-   * The time the HarvestJob was submitted
+   * The date and time the HarvestJob was submitted.
+   * @public
    */
-  CreatedAt?: string;
+  CreatedAt?: string | undefined;
 
   /**
    * The end of the time-window which will be harvested.
+   * @public
    */
-  EndTime?: string;
+  EndTime?: string | undefined;
 
   /**
    * The ID of the HarvestJob. The ID must be unique within the region
    * and it cannot be changed after the HarvestJob is submitted.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * The ID of the OriginEndpoint that the HarvestJob will harvest from.
    * This cannot be changed after the HarvestJob is submitted.
+   * @public
    */
-  OriginEndpointId?: string;
+  OriginEndpointId?: string | undefined;
 
   /**
    * Configuration parameters for where in an S3 bucket to place the harvested content
+   * @public
    */
-  S3Destination?: S3Destination;
+  S3Destination?: S3Destination | undefined;
 
   /**
    * The start of the time-window which will be harvested.
+   * @public
    */
-  StartTime?: string;
+  StartTime?: string | undefined;
 
   /**
    * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
    * HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
    * include an explanation of why the HarvestJob failed.
+   * @public
    */
-  Status?: Status | string;
+  Status?: Status | undefined;
 }
 
-export namespace DescribeHarvestJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeHarvestJobResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeOriginEndpointRequest {
   /**
    * The ID of the OriginEndpoint.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace DescribeOriginEndpointRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeOriginEndpointRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeOriginEndpointResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * CDN Authorization credentials
+   * @public
    */
-  Authorization?: Authorization;
+  Authorization?: Authorization | undefined;
 
   /**
    * The ID of the Channel the OriginEndpoint is associated with.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
    * A Common Media Application Format (CMAF) packaging configuration.
+   * @public
    */
-  CmafPackage?: CmafPackage;
+  CmafPackage?: CmafPackage | undefined;
+
+  /**
+   * The date and time the OriginEndpoint was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+   * @public
    */
-  DashPackage?: DashPackage;
+  DashPackage?: DashPackage | undefined;
 
   /**
    * A short text description of the OriginEndpoint.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) packaging configuration.
+   * @public
    */
-  HlsPackage?: HlsPackage;
+  HlsPackage?: HlsPackage | undefined;
 
   /**
    * The ID of the OriginEndpoint.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * A short string appended to the end of the OriginEndpoint URL.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * A Microsoft Smooth Streaming (MSS) packaging configuration.
+   * @public
    */
-  MssPackage?: MssPackage;
+  MssPackage?: MssPackage | undefined;
 
   /**
    * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
    * may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
    * requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+   * @public
    */
-  Origination?: Origination | string;
+  Origination?: Origination | undefined;
 
   /**
    * Maximum duration (seconds) of content to retain for startover playback.
    * If not specified, startover playback will be disabled for the OriginEndpoint.
+   * @public
    */
-  StartoverWindowSeconds?: number;
+  StartoverWindowSeconds?: number | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * Amount of delay (seconds) to enforce on the playback of live content.
    * If not specified, there will be no time delay in effect for the OriginEndpoint.
+   * @public
    */
-  TimeDelaySeconds?: number;
+  TimeDelaySeconds?: number | undefined;
 
   /**
    * The URL of the packaged OriginEndpoint for consumption.
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+   * @public
    */
-  Whitelist?: string[];
+  Whitelist?: string[] | undefined;
 }
 
-export namespace DescribeOriginEndpointResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeOriginEndpointResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListChannelsRequest {
   /**
    * Upper bound on number of records to return.
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * A token used to resume pagination from the end of a previous request.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListChannelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListChannelsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListChannelsResponse {
   /**
    * A list of Channel records.
+   * @public
    */
-  Channels?: Channel[];
+  Channels?: Channel[] | undefined;
 
   /**
    * A token that can be used to resume pagination from the end of the collection.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListChannelsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListChannelsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListHarvestJobsRequest {
   /**
    * When specified, the request will return only HarvestJobs associated with the given Channel ID.
+   * @public
    */
-  IncludeChannelId?: string;
+  IncludeChannelId?: string | undefined;
 
   /**
    * When specified, the request will return only HarvestJobs in the given status.
+   * @public
    */
-  IncludeStatus?: string;
+  IncludeStatus?: string | undefined;
 
   /**
    * The upper bound on the number of records to return.
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * A token used to resume pagination from the end of a previous request.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListHarvestJobsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListHarvestJobsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListHarvestJobsResponse {
   /**
    * A list of HarvestJob records.
+   * @public
    */
-  HarvestJobs?: HarvestJob[];
+  HarvestJobs?: HarvestJob[] | undefined;
 
   /**
    * A token that can be used to resume pagination from the end of the collection.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListHarvestJobsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListHarvestJobsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListOriginEndpointsRequest {
   /**
    * When specified, the request will return only OriginEndpoints associated with the given Channel ID.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
    * The upper bound on the number of records to return.
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * A token used to resume pagination from the end of a previous request.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListOriginEndpointsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListOriginEndpointsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListOriginEndpointsResponse {
   /**
    * A token that can be used to resume pagination from the end of the collection.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * A list of OriginEndpoint records.
+   * @public
    */
-  OriginEndpoints?: OriginEndpoint[];
+  OriginEndpoints?: OriginEndpoint[] | undefined;
 }
 
-export namespace ListOriginEndpointsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListOriginEndpointsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @deprecated deprecated.
+ * @public
+ */
 export interface RotateChannelCredentialsRequest {
   /**
    * The ID of the channel to update.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace RotateChannelCredentialsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RotateChannelCredentialsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @deprecated deprecated.
+ * @public
+ */
 export interface RotateChannelCredentialsResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace RotateChannelCredentialsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RotateChannelCredentialsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RotateIngestEndpointCredentialsRequest {
   /**
    * The ID of the channel the IngestEndpoint is on.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * The id of the IngestEndpoint whose credentials should be rotated
+   * @public
    */
   IngestEndpointId: string | undefined;
 }
 
-export namespace RotateIngestEndpointCredentialsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RotateIngestEndpointCredentialsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RotateIngestEndpointCredentialsResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace RotateIngestEndpointCredentialsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RotateIngestEndpointCredentialsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   ResourceArn: string | undefined;
-  Tags: { [key: string]: string } | undefined;
+  Tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   ResourceArn: string | undefined;
   /**
    * The key(s) of tag to be deleted
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Configuration parameters used to update the Channel.
+ * @public
  */
 export interface UpdateChannelRequest {
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * The ID of the Channel to update.
+   * @public
    */
   Id: string | undefined;
 }
 
-export namespace UpdateChannelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateChannelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateChannelResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the Channel.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
+
+  /**
+   * The date and time the Channel was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A short text description of the Channel.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * Configure egress access logging.
+   * @public
    */
-  EgressAccessLogs?: EgressAccessLogs;
+  EgressAccessLogs?: EgressAccessLogs | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) ingest resource configuration.
+   * @public
    */
-  HlsIngest?: HlsIngest;
+  HlsIngest?: HlsIngest | undefined;
 
   /**
    * The ID of the Channel.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * Configure ingress access logging.
+   * @public
    */
-  IngressAccessLogs?: IngressAccessLogs;
+  IngressAccessLogs?: IngressAccessLogs | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace UpdateChannelResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateChannelResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * Configuration parameters used to update an existing OriginEndpoint.
+ * @public
  */
 export interface UpdateOriginEndpointRequest {
   /**
    * CDN Authorization credentials
+   * @public
    */
-  Authorization?: Authorization;
+  Authorization?: Authorization | undefined;
 
   /**
    * A Common Media Application Format (CMAF) packaging configuration.
+   * @public
    */
-  CmafPackage?: CmafPackageCreateOrUpdateParameters;
+  CmafPackage?: CmafPackageCreateOrUpdateParameters | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+   * @public
    */
-  DashPackage?: DashPackage;
+  DashPackage?: DashPackage | undefined;
 
   /**
    * A short text description of the OriginEndpoint.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) packaging configuration.
+   * @public
    */
-  HlsPackage?: HlsPackage;
+  HlsPackage?: HlsPackage | undefined;
 
   /**
    * The ID of the OriginEndpoint to update.
+   * @public
    */
   Id: string | undefined;
 
   /**
    * A short string that will be appended to the end of the Endpoint URL.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * A Microsoft Smooth Streaming (MSS) packaging configuration.
+   * @public
    */
-  MssPackage?: MssPackage;
+  MssPackage?: MssPackage | undefined;
 
   /**
    * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
    * may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
    * requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+   * @public
    */
-  Origination?: Origination | string;
+  Origination?: Origination | undefined;
 
   /**
    * Maximum duration (in seconds) of content to retain for startover playback.
    * If not specified, startover playback will be disabled for the OriginEndpoint.
+   * @public
    */
-  StartoverWindowSeconds?: number;
+  StartoverWindowSeconds?: number | undefined;
 
   /**
    * Amount of delay (in seconds) to enforce on the playback of live content.
    * If not specified, there will be no time delay in effect for the OriginEndpoint.
+   * @public
    */
-  TimeDelaySeconds?: number;
+  TimeDelaySeconds?: number | undefined;
 
   /**
    * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+   * @public
    */
-  Whitelist?: string[];
+  Whitelist?: string[] | undefined;
 }
 
-export namespace UpdateOriginEndpointRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateOriginEndpointRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateOriginEndpointResponse {
   /**
    * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * CDN Authorization credentials
+   * @public
    */
-  Authorization?: Authorization;
+  Authorization?: Authorization | undefined;
 
   /**
    * The ID of the Channel the OriginEndpoint is associated with.
+   * @public
    */
-  ChannelId?: string;
+  ChannelId?: string | undefined;
 
   /**
    * A Common Media Application Format (CMAF) packaging configuration.
+   * @public
    */
-  CmafPackage?: CmafPackage;
+  CmafPackage?: CmafPackage | undefined;
+
+  /**
+   * The date and time the OriginEndpoint was created.
+   * @public
+   */
+  CreatedAt?: string | undefined;
 
   /**
    * A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+   * @public
    */
-  DashPackage?: DashPackage;
+  DashPackage?: DashPackage | undefined;
 
   /**
    * A short text description of the OriginEndpoint.
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * An HTTP Live Streaming (HLS) packaging configuration.
+   * @public
    */
-  HlsPackage?: HlsPackage;
+  HlsPackage?: HlsPackage | undefined;
 
   /**
    * The ID of the OriginEndpoint.
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * A short string appended to the end of the OriginEndpoint URL.
+   * @public
    */
-  ManifestName?: string;
+  ManifestName?: string | undefined;
 
   /**
    * A Microsoft Smooth Streaming (MSS) packaging configuration.
+   * @public
    */
-  MssPackage?: MssPackage;
+  MssPackage?: MssPackage | undefined;
 
   /**
    * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
    * may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
    * requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+   * @public
    */
-  Origination?: Origination | string;
+  Origination?: Origination | undefined;
 
   /**
    * Maximum duration (seconds) of content to retain for startover playback.
    * If not specified, startover playback will be disabled for the OriginEndpoint.
+   * @public
    */
-  StartoverWindowSeconds?: number;
+  StartoverWindowSeconds?: number | undefined;
 
   /**
    * A collection of tags associated with a resource
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * Amount of delay (seconds) to enforce on the playback of live content.
    * If not specified, there will be no time delay in effect for the OriginEndpoint.
+   * @public
    */
-  TimeDelaySeconds?: number;
+  TimeDelaySeconds?: number | undefined;
 
   /**
    * The URL of the packaged OriginEndpoint for consumption.
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+   * @public
    */
-  Whitelist?: string[];
-}
-
-export namespace UpdateOriginEndpointResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateOriginEndpointResponse): any => ({
-    ...obj,
-  });
+  Whitelist?: string[] | undefined;
 }

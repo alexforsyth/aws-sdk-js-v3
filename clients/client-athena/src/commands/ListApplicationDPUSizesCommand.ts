@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationDPUSizesInput, ListApplicationDPUSizesOutput } from "../models/models_0";
+import { ListApplicationDPUSizes$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationDPUSizesCommand}.
+ */
+export interface ListApplicationDPUSizesCommandInput extends ListApplicationDPUSizesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationDPUSizesCommand}.
+ */
+export interface ListApplicationDPUSizesCommandOutput extends ListApplicationDPUSizesOutput, __MetadataBearer {}
+
+/**
+ * <p>Returns the supported DPU sizes for the supported application runtimes (for example,
+ *                 <code>Athena notebook version 1</code>). </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AthenaClient, ListApplicationDPUSizesCommand } from "@aws-sdk/client-athena"; // ES Modules import
+ * // const { AthenaClient, ListApplicationDPUSizesCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
+ * const client = new AthenaClient(config);
+ * const input = { // ListApplicationDPUSizesInput
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListApplicationDPUSizesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListApplicationDPUSizesOutput
+ * //   ApplicationDPUSizes: [ // ApplicationDPUSizesList
+ * //     { // ApplicationDPUSizes
+ * //       ApplicationRuntimeId: "STRING_VALUE",
+ * //       SupportedDPUSizes: [ // SupportedDPUSizeList
+ * //         Number("int"),
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListApplicationDPUSizesCommandInput - {@link ListApplicationDPUSizesCommandInput}
+ * @returns {@link ListApplicationDPUSizesCommandOutput}
+ * @see {@link ListApplicationDPUSizesCommandInput} for command's `input` shape.
+ * @see {@link ListApplicationDPUSizesCommandOutput} for command's `response` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Indicates that the request was throttled.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
+ */
+export class ListApplicationDPUSizesCommand extends command<ListApplicationDPUSizesCommandInput, ListApplicationDPUSizesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplicationDPUSizes",
+  ListApplicationDPUSizes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationDPUSizesInput;
+      output: ListApplicationDPUSizesOutput;
+    };
+    sdk: {
+      input: ListApplicationDPUSizesCommandInput;
+      output: ListApplicationDPUSizesCommandOutput;
+    };
+  };
+}

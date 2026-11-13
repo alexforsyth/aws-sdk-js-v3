@@ -1,0 +1,479 @@
+const _ASEE = "ActiveSessionsExceededException";
+const _ASEEc = "ActiveStatementsExceededException";
+const _AWREE = "ActiveWaitingRequestsExceededException";
+const _BES = "BatchExecuteStatement";
+const _BESE = "BatchExecuteStatementException";
+const _BESI = "BatchExecuteStatementInput";
+const _BESO = "BatchExecuteStatementOutput";
+const _CA = "CreatedAt";
+const _CD = "ConnectedDatabase";
+const _CI = "ClusterIdentifier";
+const _CL = "ColumnList";
+const _CM = "ColumnMetadata";
+const _CML = "ColumnMetadataList";
+const _CS = "CancelStatement";
+const _CSI = "CurrentStatementId";
+const _CSR = "CancelStatementRequest";
+const _CSRa = "CancelStatementResponse";
+const _CSVR = "CSVRecords";
+const _CT = "ClientToken";
+const _D = "Database";
+const _DCE = "DatabaseConnectionException";
+const _DG = "DbGroups";
+const _DS = "DescribeStatement";
+const _DSR = "DescribeStatementRequest";
+const _DSRe = "DescribeStatementResponse";
+const _DT = "DescribeTable";
+const _DTR = "DescribeTableRequest";
+const _DTRe = "DescribeTableResponse";
+const _DU = "DbUser";
+const _Da = "Databases";
+const _Du = "Duration";
+const _E = "Error";
+const _EM = "ExecutionMode";
+const _ES = "ExecuteStatement";
+const _ESE = "ExecuteStatementException";
+const _ESI = "ExecuteStatementInput";
+const _ESO = "ExecuteStatementOutput";
+const _F = "Field";
+const _FL = "FieldList";
+const _FSR = "FormattedSqlRecords";
+const _GSR = "GetStatementResult";
+const _GSRR = "GetStatementResultRequest";
+const _GSRRe = "GetStatementResultResponse";
+const _GSRV = "GetStatementResultV2";
+const _GSRVR = "GetStatementResultV2Request";
+const _GSRVRe = "GetStatementResultV2Response";
+const _HRS = "HasResultSet";
+const _I = "Id";
+const _IBS = "IsBatchStatement";
+const _ISE = "InternalServerException";
+const _LD = "ListDatabases";
+const _LDR = "ListDatabasesRequest";
+const _LDRi = "ListDatabasesResponse";
+const _LS = "ListSchemas";
+const _LSR = "ListSchemasRequest";
+const _LSRi = "ListSchemasResponse";
+const _LSRis = "ListSessionsRequest";
+const _LSRist = "ListSessionsResponse";
+const _LSRistt = "ListStatementsRequest";
+const _LSRistta = "ListStatementsResponse";
+const _LSi = "ListSessions";
+const _LSis = "ListStatements";
+const _LT = "ListTables";
+const _LTR = "ListTablesRequest";
+const _LTRi = "ListTablesResponse";
+const _M = "Message";
+const _MR = "MaxResults";
+const _NT = "NextToken";
+const _P = "Parameters";
+const _QP = "QueryParameters";
+const _QR = "QueryRecords";
+const _QS = "QueryString";
+const _QSu = "QueryStrings";
+const _QTE = "QueryTimeoutException";
+const _R = "Records";
+const _RF = "ResultFormat";
+const _RI = "ResourceId";
+const _RL = "RoleLevel";
+const _RNFE = "ResourceNotFoundException";
+const _RP = "RedshiftPid";
+const _RQI = "RedshiftQueryId";
+const _RQU = "RedshiftQueryUuid";
+const _RR = "ResultRows";
+const _RS = "ResultSize";
+const _S = "Sqls";
+const _SA = "SecretArn";
+const _SAS = "SessionAliveSeconds";
+const _SD = "SessionData";
+const _SDt = "StatementData";
+const _SI = "StatementId";
+const _SIe = "SessionId";
+const _SKAS = "SessionKeepAliveSeconds";
+const _SL = "SessionList";
+const _SLt = "StatementList";
+const _SN = "StatementName";
+const _SP = "SchemaPattern";
+const _SPL = "SqlParametersList";
+const _SPq = "SqlParameter";
+const _SR = "SqlRecords";
+const _SS = "SubStatements";
+const _SSD = "SubStatementData";
+const _SSL = "SubStatementList";
+const _ST = "SessionTtl";
+const _Sc = "Schema";
+const _Sch = "Schemas";
+const _Se = "Sessions";
+const _Sq = "Sql";
+const _St = "Status";
+const _Sta = "Statements";
+const _T = "Table";
+const _TL = "TableList";
+const _TM = "TableMember";
+const _TN = "TableName";
+const _TNR = "TotalNumRows";
+const _TP = "TablePattern";
+const _Ta = "Tables";
+const _UA = "UpdatedAt";
+const _VE = "ValidationException";
+const _WE = "WithEvent";
+const _WN = "WorkgroupName";
+const _WTS = "WaitTimeSeconds";
+const _bV = "booleanValue";
+const _bVl = "blobValue";
+const _c = "client";
+const _cD = "columnDefault";
+const _dV = "doubleValue";
+const _e = "error";
+const _hE = "httpError";
+const _iC = "isCurrency";
+const _iCS = "isCaseSensitive";
+const _iN = "isNull";
+const _iS = "isSigned";
+const _l = "label";
+const _lV = "longValue";
+const _le = "length";
+const _n = "name";
+const _nu = "nullable";
+const _p = "precision";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.redshiftdata";
+const _sN = "schemaName";
+const _sV = "stringValue";
+const _sc = "scale";
+const _sch = "schema";
+const _se = "server";
+const _t = "type";
+const _tN = "tableName";
+const _tNy = "typeName";
+const _v = "value";
+const n0 = "com.amazonaws.redshiftdata";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticOperationSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import {
+  ActiveSessionsExceededException,
+  ActiveStatementsExceededException,
+  ActiveWaitingRequestsExceededException,
+  BatchExecuteStatementException,
+  DatabaseConnectionException,
+  ExecuteStatementException,
+  InternalServerException,
+  QueryTimeoutException,
+  ResourceNotFoundException,
+  ValidationException,
+} from "../models/errors";
+import { RedshiftDataServiceException } from "../models/RedshiftDataServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var RedshiftDataServiceException$: StaticErrorSchema = [-3, _s, "RedshiftDataServiceException", 0, [], []];
+_s_registry.registerError(RedshiftDataServiceException$, RedshiftDataServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var ActiveSessionsExceededException$: StaticErrorSchema = [-3, n0, _ASEE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ActiveSessionsExceededException$, ActiveSessionsExceededException);
+export var ActiveStatementsExceededException$: StaticErrorSchema = [-3, n0, _ASEEc,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ActiveStatementsExceededException$, ActiveStatementsExceededException);
+export var ActiveWaitingRequestsExceededException$: StaticErrorSchema = [-3, n0, _AWREE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ActiveWaitingRequestsExceededException$, ActiveWaitingRequestsExceededException);
+export var BatchExecuteStatementException$: StaticErrorSchema = [-3, n0, _BESE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M, _SI],
+  [0, 0], 2
+];
+n0_registry.registerError(BatchExecuteStatementException$, BatchExecuteStatementException);
+export var DatabaseConnectionException$: StaticErrorSchema = [-3, n0, _DCE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(DatabaseConnectionException$, DatabaseConnectionException);
+export var ExecuteStatementException$: StaticErrorSchema = [-3, n0, _ESE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M, _SI],
+  [0, 0], 2
+];
+n0_registry.registerError(ExecuteStatementException$, ExecuteStatementException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var QueryTimeoutException$: StaticErrorSchema = [-3, n0, _QTE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(QueryTimeoutException$, QueryTimeoutException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_M, _RI],
+  [0, 0], 2
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+export var BatchExecuteStatementInput$: StaticStructureSchema = [3, n0, _BESI,
+  0,
+  [_S, _CI, _SA, _DU, _D, _WE, _SN, _P, _WN, _CT, _RF, _SKAS, _SIe, _EM, _WTS],
+  [64 | 0, 0, 0, 0, 0, 2, 0, () => SqlParametersList, 0, [0, 4], 0, 1, 0, 0, 1], 1
+];
+export var BatchExecuteStatementOutput$: StaticStructureSchema = [3, n0, _BESO,
+  0,
+  [_I, _CA, _CI, _DU, _DG, _D, _SA, _WN, _SIe, _St, _RP, _HRS],
+  [0, 4, 0, 0, 64 | 0, 0, 0, 0, 0, 0, 1, 2]
+];
+export var CancelStatementRequest$: StaticStructureSchema = [3, n0, _CSR,
+  0,
+  [_I],
+  [0], 1
+];
+export var CancelStatementResponse$: StaticStructureSchema = [3, n0, _CSRa,
+  0,
+  [_St],
+  [2]
+];
+export var ColumnMetadata$: StaticStructureSchema = [3, n0, _CM,
+  0,
+  [_iCS, _iC, _iS, _l, _n, _nu, _p, _sc, _sN, _tN, _tNy, _le, _cD],
+  [2, 2, 2, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0]
+];
+export var DescribeStatementRequest$: StaticStructureSchema = [3, n0, _DSR,
+  0,
+  [_I, _WTS],
+  [0, 1], 1
+];
+export var DescribeStatementResponse$: StaticStructureSchema = [3, n0, _DSRe,
+  0,
+  [_I, _SA, _DU, _D, _CI, _Du, _E, _St, _CA, _UA, _RP, _HRS, _QS, _RR, _RS, _RQI, _RQU, _QP, _SS, _WN, _RF, _SIe, _EM],
+  [0, 0, 0, 0, 0, 1, 0, 0, 4, 4, 1, 2, 0, 1, 1, 1, 0, () => SqlParametersList, () => SubStatementList, 0, 0, 0, 0], 1
+];
+export var DescribeTableRequest$: StaticStructureSchema = [3, n0, _DTR,
+  0,
+  [_D, _CI, _SA, _DU, _CD, _Sc, _T, _NT, _MR, _WN],
+  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0], 1
+];
+export var DescribeTableResponse$: StaticStructureSchema = [3, n0, _DTRe,
+  0,
+  [_TN, _CL, _NT],
+  [0, () => ColumnList, 0]
+];
+export var ExecuteStatementInput$: StaticStructureSchema = [3, n0, _ESI,
+  0,
+  [_Sq, _CI, _SA, _DU, _D, _WE, _SN, _P, _WN, _CT, _RF, _SKAS, _SIe, _WTS],
+  [0, 0, 0, 0, 0, 2, 0, () => SqlParametersList, 0, [0, 4], 0, 1, 0, 1], 1
+];
+export var ExecuteStatementOutput$: StaticStructureSchema = [3, n0, _ESO,
+  0,
+  [_I, _CA, _CI, _DU, _DG, _D, _SA, _WN, _SIe, _St, _RP, _HRS],
+  [0, 4, 0, 0, 64 | 0, 0, 0, 0, 0, 0, 1, 2]
+];
+export var GetStatementResultRequest$: StaticStructureSchema = [3, n0, _GSRR,
+  0,
+  [_I, _NT, _WTS],
+  [0, 0, 1], 1
+];
+export var GetStatementResultResponse$: StaticStructureSchema = [3, n0, _GSRRe,
+  0,
+  [_R, _CM, _TNR, _NT],
+  [() => SqlRecords, () => ColumnMetadataList, 1, 0], 1
+];
+export var GetStatementResultV2Request$: StaticStructureSchema = [3, n0, _GSRVR,
+  0,
+  [_I, _NT, _WTS],
+  [0, 0, 1], 1
+];
+export var GetStatementResultV2Response$: StaticStructureSchema = [3, n0, _GSRVRe,
+  0,
+  [_R, _CM, _TNR, _RF, _NT],
+  [() => FormattedSqlRecords, () => ColumnMetadataList, 1, 0, 0], 1
+];
+export var ListDatabasesRequest$: StaticStructureSchema = [3, n0, _LDR,
+  0,
+  [_CI, _D, _SA, _DU, _NT, _MR, _WN],
+  [0, 0, 0, 0, 0, 1, 0]
+];
+export var ListDatabasesResponse$: StaticStructureSchema = [3, n0, _LDRi,
+  0,
+  [_Da, _NT],
+  [64 | 0, 0]
+];
+export var ListSchemasRequest$: StaticStructureSchema = [3, n0, _LSR,
+  0,
+  [_D, _CI, _SA, _DU, _CD, _SP, _NT, _MR, _WN],
+  [0, 0, 0, 0, 0, 0, 0, 1, 0], 1
+];
+export var ListSchemasResponse$: StaticStructureSchema = [3, n0, _LSRi,
+  0,
+  [_Sch, _NT],
+  [64 | 0, 0]
+];
+export var ListSessionsRequest$: StaticStructureSchema = [3, n0, _LSRis,
+  0,
+  [_NT, _MR, _SIe, _St, _RL, _CI, _WN, _D],
+  [0, 1, 0, 0, 2, 0, 0, 0]
+];
+export var ListSessionsResponse$: StaticStructureSchema = [3, n0, _LSRist,
+  0,
+  [_Se, _NT],
+  [() => SessionList, 0], 1
+];
+export var ListStatementsRequest$: StaticStructureSchema = [3, n0, _LSRistt,
+  0,
+  [_NT, _MR, _SN, _St, _RL, _D, _CI, _WN],
+  [0, 1, 0, 0, 2, 0, 0, 0]
+];
+export var ListStatementsResponse$: StaticStructureSchema = [3, n0, _LSRistta,
+  0,
+  [_Sta, _NT],
+  [() => StatementList, 0], 1
+];
+export var ListTablesRequest$: StaticStructureSchema = [3, n0, _LTR,
+  0,
+  [_D, _CI, _SA, _DU, _CD, _SP, _TP, _NT, _MR, _WN],
+  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0], 1
+];
+export var ListTablesResponse$: StaticStructureSchema = [3, n0, _LTRi,
+  0,
+  [_Ta, _NT],
+  [() => TableList, 0]
+];
+export var SessionData$: StaticStructureSchema = [3, n0, _SD,
+  0,
+  [_SIe, _St, _CA, _UA, _D, _DU, _CI, _WN, _SAS, _ST, _CSI],
+  [0, 0, 4, 4, 0, 0, 0, 0, 1, 4, 0], 3
+];
+export var SqlParameter$: StaticStructureSchema = [3, n0, _SPq,
+  0,
+  [_n, _v],
+  [0, 0], 2
+];
+export var StatementData$: StaticStructureSchema = [3, n0, _SDt,
+  0,
+  [_I, _QS, _QSu, _SA, _St, _SN, _CA, _UA, _QP, _IBS, _RF, _SIe],
+  [0, 0, 64 | 0, 0, 0, 0, 4, 4, () => SqlParametersList, 2, 0, 0], 1
+];
+export var SubStatementData$: StaticStructureSchema = [3, n0, _SSD,
+  0,
+  [_I, _Du, _E, _St, _CA, _UA, _QS, _RR, _RS, _RQI, _RQU, _HRS],
+  [0, 1, 0, 0, 4, 4, 0, 1, 1, 1, 0, 2], 1
+];
+export var TableMember$: StaticStructureSchema = [3, n0, _TM,
+  0,
+  [_n, _t, _sch],
+  [0, 0, 0]
+];
+var ColumnList: StaticListSchema = [1, n0, _CL,
+  0, () => ColumnMetadata$
+];
+var ColumnMetadataList: StaticListSchema = [1, n0, _CML,
+  0, () => ColumnMetadata$
+];
+var DatabaseList = 64 | 0;
+var DbGroupList = 64 | 0;
+var FieldList: StaticListSchema = [1, n0, _FL,
+  0, () => Field$
+];
+var FormattedSqlRecords: StaticListSchema = [1, n0, _FSR,
+  0, () => QueryRecords$
+];
+var SchemaList = 64 | 0;
+var SessionList: StaticListSchema = [1, n0, _SL,
+  0, () => SessionData$
+];
+var SqlList = 64 | 0;
+var SqlParametersList: StaticListSchema = [1, n0, _SPL,
+  0, () => SqlParameter$
+];
+var SqlRecords: StaticListSchema = [1, n0, _SR,
+  0, () => FieldList
+];
+var StatementList: StaticListSchema = [1, n0, _SLt,
+  0, () => StatementData$
+];
+var StatementStringList = 64 | 0;
+var SubStatementList: StaticListSchema = [1, n0, _SSL,
+  0, () => SubStatementData$
+];
+var TableList: StaticListSchema = [1, n0, _TL,
+  0, () => TableMember$
+];
+export var Field$: StaticUnionSchema = [4, n0, _F,
+  0,
+  [_iN, _bV, _lV, _dV, _sV, _bVl],
+  [2, 2, 1, 1, 0, 21]
+];
+export var QueryRecords$: StaticUnionSchema = [4, n0, _QR,
+  0,
+  [_CSVR],
+  [0]
+];
+export var BatchExecuteStatement$: StaticOperationSchema = [9, n0, _BES,
+  0, () => BatchExecuteStatementInput$, () => BatchExecuteStatementOutput$
+];
+export var CancelStatement$: StaticOperationSchema = [9, n0, _CS,
+  0, () => CancelStatementRequest$, () => CancelStatementResponse$
+];
+export var DescribeStatement$: StaticOperationSchema = [9, n0, _DS,
+  0, () => DescribeStatementRequest$, () => DescribeStatementResponse$
+];
+export var DescribeTable$: StaticOperationSchema = [9, n0, _DT,
+  0, () => DescribeTableRequest$, () => DescribeTableResponse$
+];
+export var ExecuteStatement$: StaticOperationSchema = [9, n0, _ES,
+  0, () => ExecuteStatementInput$, () => ExecuteStatementOutput$
+];
+export var GetStatementResult$: StaticOperationSchema = [9, n0, _GSR,
+  0, () => GetStatementResultRequest$, () => GetStatementResultResponse$
+];
+export var GetStatementResultV2$: StaticOperationSchema = [9, n0, _GSRV,
+  0, () => GetStatementResultV2Request$, () => GetStatementResultV2Response$
+];
+export var ListDatabases$: StaticOperationSchema = [9, n0, _LD,
+  0, () => ListDatabasesRequest$, () => ListDatabasesResponse$
+];
+export var ListSchemas$: StaticOperationSchema = [9, n0, _LS,
+  0, () => ListSchemasRequest$, () => ListSchemasResponse$
+];
+export var ListSessions$: StaticOperationSchema = [9, n0, _LSi,
+  0, () => ListSessionsRequest$, () => ListSessionsResponse$
+];
+export var ListStatements$: StaticOperationSchema = [9, n0, _LSis,
+  0, () => ListStatementsRequest$, () => ListStatementsResponse$
+];
+export var ListTables$: StaticOperationSchema = [9, n0, _LT,
+  0, () => ListTablesRequest$, () => ListTablesResponse$
+];

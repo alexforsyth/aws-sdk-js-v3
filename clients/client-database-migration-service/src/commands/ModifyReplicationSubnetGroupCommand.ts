@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { ModifyReplicationSubnetGroupMessage, ModifyReplicationSubnetGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ModifyReplicationSubnetGroupCommand,
-  serializeAws_json1_1ModifyReplicationSubnetGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyReplicationSubnetGroupMessage, ModifyReplicationSubnetGroupResponse } from "../models/models_0";
+import { ModifyReplicationSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyReplicationSubnetGroupCommand}.
+ */
 export interface ModifyReplicationSubnetGroupCommandInput extends ModifyReplicationSubnetGroupMessage {}
-export interface ModifyReplicationSubnetGroupCommandOutput
-  extends ModifyReplicationSubnetGroupResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyReplicationSubnetGroupCommand}.
+ */
+export interface ModifyReplicationSubnetGroupCommandOutput extends ModifyReplicationSubnetGroupResponse, __MetadataBearer {}
 
 /**
  * <p>Modifies the settings for the specified replication subnet group.</p>
@@ -34,71 +29,105 @@ export interface ModifyReplicationSubnetGroupCommandOutput
  * ```javascript
  * import { DatabaseMigrationServiceClient, ModifyReplicationSubnetGroupCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, ModifyReplicationSubnetGroupCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // ModifyReplicationSubnetGroupMessage
+ *   ReplicationSubnetGroupIdentifier: "STRING_VALUE", // required
+ *   ReplicationSubnetGroupDescription: "STRING_VALUE",
+ *   SubnetIds: [ // SubnetIdentifierList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifyReplicationSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyReplicationSubnetGroupResponse
+ * //   ReplicationSubnetGroup: { // ReplicationSubnetGroup
+ * //     ReplicationSubnetGroupIdentifier: "STRING_VALUE",
+ * //     ReplicationSubnetGroupDescription: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     SubnetGroupStatus: "STRING_VALUE",
+ * //     Subnets: [ // SubnetList
+ * //       { // Subnet
+ * //         SubnetIdentifier: "STRING_VALUE",
+ * //         SubnetAvailabilityZone: { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //         SubnetStatus: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SupportedNetworkTypes: [ // StringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     IsReadOnly: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyReplicationSubnetGroupCommandInput - {@link ModifyReplicationSubnetGroupCommandInput}
+ * @returns {@link ModifyReplicationSubnetGroupCommandOutput}
  * @see {@link ModifyReplicationSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyReplicationSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link InvalidSubnet} (client fault)
+ *  <p>The subnet provided isn't valid.</p>
+ *
+ * @throws {@link ReplicationSubnetGroupDoesNotCoverEnoughAZs} (client fault)
+ *  <p>The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ResourceQuotaExceededFault} (client fault)
+ *  <p>The quota for this resource quota has been exceeded.</p>
+ *
+ * @throws {@link SubnetAlreadyInUse} (client fault)
+ *  <p>The specified subnet is already in use.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Modify replication subnet group
+ * ```javascript
+ * // Modifies the settings for the specified replication subnet group.
+ * const input = {
+ *   ReplicationSubnetGroupDescription: "",
+ *   ReplicationSubnetGroupIdentifier: "",
+ *   SubnetIds:   []
+ * };
+ * const command = new ModifyReplicationSubnetGroupCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ReplicationSubnetGroup:   { /* empty *\/ }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifyReplicationSubnetGroupCommand extends $Command<
-  ModifyReplicationSubnetGroupCommandInput,
-  ModifyReplicationSubnetGroupCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyReplicationSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyReplicationSubnetGroupCommandInput, ModifyReplicationSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "ModifyReplicationSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyReplicationSubnetGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyReplicationSubnetGroupResponse.filterSensitiveLog,
+export class ModifyReplicationSubnetGroupCommand extends command<ModifyReplicationSubnetGroupCommandInput, ModifyReplicationSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyReplicationSubnetGroup",
+  ModifyReplicationSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyReplicationSubnetGroupMessage;
+      output: ModifyReplicationSubnetGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyReplicationSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ModifyReplicationSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyReplicationSubnetGroupCommandOutput> {
-    return deserializeAws_json1_1ModifyReplicationSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyReplicationSubnetGroupCommandInput;
+      output: ModifyReplicationSubnetGroupCommandOutput;
+    };
+  };
 }

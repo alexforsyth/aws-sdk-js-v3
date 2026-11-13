@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteTapeInput, DeleteTapeOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteTapeCommand,
-  serializeAws_json1_1DeleteTapeCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTapeInput, DeleteTapeOutput } from "../models/models_0";
+import { DeleteTape$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTapeCommand}.
+ */
 export interface DeleteTapeCommandInput extends DeleteTapeInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTapeCommand}.
+ */
 export interface DeleteTapeCommandOutput extends DeleteTapeOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,73 @@ export interface DeleteTapeCommandOutput extends DeleteTapeOutput, __MetadataBea
  * ```javascript
  * import { StorageGatewayClient, DeleteTapeCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DeleteTapeCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DeleteTapeInput
+ *   GatewayARN: "STRING_VALUE", // required
+ *   TapeARN: "STRING_VALUE", // required
+ *   BypassGovernanceRetention: true || false,
+ * };
  * const command = new DeleteTapeCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTapeOutput
+ * //   TapeARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteTapeCommandInput - {@link DeleteTapeCommandInput}
+ * @returns {@link DeleteTapeCommandOutput}
  * @see {@link DeleteTapeCommandInput} for command's `input` shape.
  * @see {@link DeleteTapeCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To delete a virtual tape
+ * ```javascript
+ * // This example deletes the specified virtual tape.
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:204469490176:gateway/sgw-12A3456B",
+ *   TapeARN: "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0"
+ * };
+ * const command = new DeleteTapeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TapeARN: "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteTapeCommand extends $Command<
-  DeleteTapeCommandInput,
-  DeleteTapeCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTapeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTapeCommandInput, DeleteTapeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DeleteTapeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTapeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTapeOutput.filterSensitiveLog,
+export class DeleteTapeCommand extends command<DeleteTapeCommandInput, DeleteTapeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTape",
+  DeleteTape$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTapeInput;
+      output: DeleteTapeOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTapeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteTapeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTapeCommandOutput> {
-    return deserializeAws_json1_1DeleteTapeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTapeCommandInput;
+      output: DeleteTapeCommandOutput;
+    };
+  };
 }

@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetFunctionCommand, GetFunctionCommandInput } from "../commands/GetFunctionCommand";
-import { LambdaClient } from "../LambdaClient";
+import {
+  type GetFunctionCommandInput,
+  type GetFunctionCommandOutput,
+  GetFunctionCommand,
+} from "../commands/GetFunctionCommand";
+import type { LambdaClient } from "../LambdaClient";
+import type { LambdaServiceException } from "../models/LambdaServiceException";
 
-const checkState = async (client: LambdaClient, input: GetFunctionCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: LambdaClient, input: GetFunctionCommandInput): Promise<WaiterResult<GetFunctionCommandOutput | LambdaServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetFunctionCommand(input));
+    let result: GetFunctionCommandOutput & any = await client.send(new GetFunctionCommand(input));
     reason = result;
     return { state: WaiterState.SUCCESS, reason };
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -24,8 +36,8 @@ const checkState = async (client: LambdaClient, input: GetFunctionCommandInput):
 export const waitForFunctionExists = async (
   params: WaiterConfiguration<LambdaClient>,
   input: GetFunctionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 1, maxDelay: 120 };
+): Promise<WaiterResult<GetFunctionCommandOutput | LambdaServiceException>> => {
+  const serviceDefaults = { minDelay: 1, maxDelay: 20 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -36,8 +48,8 @@ export const waitForFunctionExists = async (
 export const waitUntilFunctionExists = async (
   params: WaiterConfiguration<LambdaClient>,
   input: GetFunctionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 1, maxDelay: 120 };
+): Promise<WaiterResult<GetFunctionCommandOutput>> => {
+  const serviceDefaults = { minDelay: 1, maxDelay: 20 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetFunctionCommandOutput>;
 };

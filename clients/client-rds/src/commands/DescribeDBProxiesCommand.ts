@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDBProxiesRequest, DescribeDBProxiesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeDBProxiesCommand,
-  serializeAws_queryDescribeDBProxiesCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDBProxiesRequest, DescribeDBProxiesResponse } from "../models/models_0";
+import { DescribeDBProxies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDBProxiesCommand}.
+ */
 export interface DescribeDBProxiesCommandInput extends DescribeDBProxiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDBProxiesCommand}.
+ */
 export interface DescribeDBProxiesCommandOutput extends DescribeDBProxiesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,95 @@ export interface DescribeDBProxiesCommandOutput extends DescribeDBProxiesRespons
  * ```javascript
  * import { RDSClient, DescribeDBProxiesCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DescribeDBProxiesCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DescribeDBProxiesRequest
+ *   DBProxyName: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ * };
  * const command = new DescribeDBProxiesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDBProxiesResponse
+ * //   DBProxies: [ // DBProxyList
+ * //     { // DBProxy
+ * //       DBProxyName: "STRING_VALUE",
+ * //       DBProxyArn: "STRING_VALUE",
+ * //       Status: "available" || "modifying" || "incompatible-network" || "insufficient-resource-limits" || "creating" || "deleting" || "suspended" || "suspending" || "reactivating",
+ * //       EngineFamily: "STRING_VALUE",
+ * //       VpcId: "STRING_VALUE",
+ * //       VpcSecurityGroupIds: [ // StringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       VpcSubnetIds: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       DefaultAuthScheme: "STRING_VALUE",
+ * //       Auth: [ // UserAuthConfigInfoList
+ * //         { // UserAuthConfigInfo
+ * //           Description: "STRING_VALUE",
+ * //           UserName: "STRING_VALUE",
+ * //           AuthScheme: "SECRETS",
+ * //           SecretArn: "STRING_VALUE",
+ * //           IAMAuth: "DISABLED" || "REQUIRED" || "ENABLED",
+ * //           ClientPasswordAuthType: "MYSQL_NATIVE_PASSWORD" || "MYSQL_CACHING_SHA2_PASSWORD" || "POSTGRES_SCRAM_SHA_256" || "POSTGRES_MD5" || "SQL_SERVER_AUTHENTICATION",
+ * //         },
+ * //       ],
+ * //       RoleArn: "STRING_VALUE",
+ * //       Endpoint: "STRING_VALUE",
+ * //       RequireTLS: true || false,
+ * //       IdleClientTimeout: Number("int"),
+ * //       DebugLogging: true || false,
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       UpdatedDate: new Date("TIMESTAMP"),
+ * //       EndpointNetworkType: "IPV4" || "IPV6" || "DUAL",
+ * //       TargetConnectionNetworkType: "IPV4" || "IPV6",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDBProxiesCommandInput - {@link DescribeDBProxiesCommandInput}
+ * @returns {@link DescribeDBProxiesCommandOutput}
  * @see {@link DescribeDBProxiesCommandInput} for command's `input` shape.
  * @see {@link DescribeDBProxiesCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBProxyNotFoundFault} (client fault)
+ *  <p>The specified proxy name doesn't correspond to a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDBProxiesCommand extends $Command<
-  DescribeDBProxiesCommandInput,
-  DescribeDBProxiesCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDBProxiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDBProxiesCommandInput, DescribeDBProxiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DescribeDBProxiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDBProxiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDBProxiesResponse.filterSensitiveLog,
+export class DescribeDBProxiesCommand extends command<DescribeDBProxiesCommandInput, DescribeDBProxiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDBProxies",
+  DescribeDBProxies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDBProxiesRequest;
+      output: DescribeDBProxiesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDBProxiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeDBProxiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDBProxiesCommandOutput> {
-    return deserializeAws_queryDescribeDBProxiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDBProxiesCommandInput;
+      output: DescribeDBProxiesCommandOutput;
+    };
+  };
 }

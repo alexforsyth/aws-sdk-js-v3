@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { DescribeDatasetGroupRequest, DescribeDatasetGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDatasetGroupCommand,
-  serializeAws_json1_1DescribeDatasetGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDatasetGroupRequest, DescribeDatasetGroupResponse } from "../models/models_0";
+import { DescribeDatasetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDatasetGroupCommand}.
+ */
 export interface DescribeDatasetGroupCommandInput extends DescribeDatasetGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDatasetGroupCommand}.
+ */
 export interface DescribeDatasetGroupCommandOutput extends DescribeDatasetGroupResponse, __MetadataBearer {}
 
 /**
- * <p>Describes a dataset group created using the <a>CreateDatasetGroup</a>
+ * <p>Describes a dataset group created using the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html">CreateDatasetGroup</a>
  *       operation.</p>
  *          <p>In addition to listing the parameters provided in the <code>CreateDatasetGroup</code>
  *       request, this operation includes the following properties:</p>
@@ -52,68 +53,63 @@ export interface DescribeDatasetGroupCommandOutput extends DescribeDatasetGroupR
  * ```javascript
  * import { ForecastClient, DescribeDatasetGroupCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DescribeDatasetGroupCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DescribeDatasetGroupRequest
+ *   DatasetGroupArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDatasetGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDatasetGroupResponse
+ * //   DatasetGroupName: "STRING_VALUE",
+ * //   DatasetGroupArn: "STRING_VALUE",
+ * //   DatasetArns: [ // ArnList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Domain: "RETAIL" || "CUSTOM" || "INVENTORY_PLANNING" || "EC2_CAPACITY" || "WORK_FORCE" || "WEB_TRAFFIC" || "METRICS",
+ * //   Status: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModificationTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeDatasetGroupCommandInput - {@link DescribeDatasetGroupCommandInput}
+ * @returns {@link DescribeDatasetGroupCommandOutput}
  * @see {@link DescribeDatasetGroupCommandInput} for command's `input` shape.
  * @see {@link DescribeDatasetGroupCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDatasetGroupCommand extends $Command<
-  DescribeDatasetGroupCommandInput,
-  DescribeDatasetGroupCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDatasetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDatasetGroupCommandInput, DescribeDatasetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DescribeDatasetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDatasetGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDatasetGroupResponse.filterSensitiveLog,
+export class DescribeDatasetGroupCommand extends command<DescribeDatasetGroupCommandInput, DescribeDatasetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDatasetGroup",
+  DescribeDatasetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDatasetGroupRequest;
+      output: DescribeDatasetGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDatasetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDatasetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDatasetGroupCommandOutput> {
-    return deserializeAws_json1_1DescribeDatasetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDatasetGroupCommandInput;
+      output: DescribeDatasetGroupCommandOutput;
+    };
+  };
 }

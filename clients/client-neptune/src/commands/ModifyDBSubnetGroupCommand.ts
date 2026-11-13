@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ModifyDBSubnetGroupMessage, ModifyDBSubnetGroupResult } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryModifyDBSubnetGroupCommand,
-  serializeAws_queryModifyDBSubnetGroupCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyDBSubnetGroupMessage, ModifyDBSubnetGroupResult } from "../models/models_0";
+import { ModifyDBSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyDBSubnetGroupCommand}.
+ */
 export interface ModifyDBSubnetGroupCommandInput extends ModifyDBSubnetGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyDBSubnetGroupCommand}.
+ */
 export interface ModifyDBSubnetGroupCommandOutput extends ModifyDBSubnetGroupResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,88 @@ export interface ModifyDBSubnetGroupCommandOutput extends ModifyDBSubnetGroupRes
  * ```javascript
  * import { NeptuneClient, ModifyDBSubnetGroupCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, ModifyDBSubnetGroupCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // ModifyDBSubnetGroupMessage
+ *   DBSubnetGroupName: "STRING_VALUE", // required
+ *   DBSubnetGroupDescription: "STRING_VALUE",
+ *   SubnetIds: [ // SubnetIdentifierList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifyDBSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyDBSubnetGroupResult
+ * //   DBSubnetGroup: { // DBSubnetGroup
+ * //     DBSubnetGroupName: "STRING_VALUE",
+ * //     DBSubnetGroupDescription: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     SubnetGroupStatus: "STRING_VALUE",
+ * //     Subnets: [ // SubnetList
+ * //       { // Subnet
+ * //         SubnetIdentifier: "STRING_VALUE",
+ * //         SubnetAvailabilityZone: { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //         SubnetStatus: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     DBSubnetGroupArn: "STRING_VALUE",
+ * //     SupportedNetworkTypes: [ // StringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyDBSubnetGroupCommandInput - {@link ModifyDBSubnetGroupCommandInput}
+ * @returns {@link ModifyDBSubnetGroupCommandOutput}
  * @see {@link ModifyDBSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyDBSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBSubnetGroupDoesNotCoverEnoughAZs} (client fault)
+ *  <p>Subnets in the DB subnet group should cover at least two Availability
+ *       Zones unless there is only one Availability Zone.</p>
+ *
+ * @throws {@link DBSubnetGroupNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBSubnetGroupName</i> does not refer to an
+ *       existing DB subnet group.</p>
+ *
+ * @throws {@link DBSubnetQuotaExceededFault} (client fault)
+ *  <p>Request would result in user exceeding the allowed number of subnets in a DB subnet groups.</p>
+ *
+ * @throws {@link InvalidSubnet} (client fault)
+ *  <p>The requested subnet is invalid, or multiple subnets were requested that are
+ *       not all in a common VPC.</p>
+ *
+ * @throws {@link SubnetAlreadyInUse} (client fault)
+ *  <p>The DB subnet is already in use in the Availability Zone.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyDBSubnetGroupCommand extends $Command<
-  ModifyDBSubnetGroupCommandInput,
-  ModifyDBSubnetGroupCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyDBSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyDBSubnetGroupCommandInput, ModifyDBSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "ModifyDBSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyDBSubnetGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyDBSubnetGroupResult.filterSensitiveLog,
+export class ModifyDBSubnetGroupCommand extends command<ModifyDBSubnetGroupCommandInput, ModifyDBSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyDBSubnetGroup",
+  ModifyDBSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyDBSubnetGroupMessage;
+      output: ModifyDBSubnetGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyDBSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyDBSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyDBSubnetGroupCommandOutput> {
-    return deserializeAws_queryModifyDBSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyDBSubnetGroupCommandInput;
+      output: ModifyDBSubnetGroupCommandOutput;
+    };
+  };
 }

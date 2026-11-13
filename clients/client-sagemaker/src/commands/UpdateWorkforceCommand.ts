@@ -1,116 +1,148 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateWorkforceRequest, UpdateWorkforceResponse } from "../models/models_3";
-import {
-  deserializeAws_json1_1UpdateWorkforceCommand,
-  serializeAws_json1_1UpdateWorkforceCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateWorkforceRequest, UpdateWorkforceResponse } from "../models/models_5";
+import { UpdateWorkforce$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateWorkforceCommand}.
+ */
 export interface UpdateWorkforceCommandInput extends UpdateWorkforceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateWorkforceCommand}.
+ */
 export interface UpdateWorkforceCommandOutput extends UpdateWorkforceResponse, __MetadataBearer {}
 
 /**
- * <p>Use this operation to update your workforce. You can use this operation to
- *         require that workers use specific IP addresses to work on tasks
- *         and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.</p>
- *
- *         <p> Use <code>SourceIpConfig</code> to restrict worker access to tasks to a specific range of IP addresses.
- *         You specify allowed IP addresses by creating a list of up to ten <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">CIDRs</a>.
- *         By default, a workforce isn't restricted to specific IP addresses. If you specify a
- *             range of IP addresses, workers who attempt to access tasks using any IP address outside
- *             the specified range are denied and get a <code>Not Found</code> error message on
- *             the worker portal.</p>
- *         <p>Use <code>OidcConfig</code> to update the configuration of a workforce created using
- *             your own OIDC IdP. </p>
- *         <important>
- *             <p>You can only update your OIDC IdP configuration when there are no work teams
- *                 associated with your workforce. You can delete work teams using the  operation.</p>
- *         </important>
- *         <p>After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you
- *         can view details about your update workforce using the
- *             operation.</p>
- *         <important>
- *             <p>This operation only applies to private workforces.</p>
- *         </important>
+ * <p>Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.</p> <p>The worker portal is now supported in VPC and public internet.</p> <p> Use <code>SourceIpConfig</code> to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">CIDRs</a>. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a <code>Not Found</code> error message on the worker portal.</p> <p>To restrict public internet access for all workers, configure the <code>SourceIpConfig</code> CIDR value. For example, when using <code>SourceIpConfig</code> with an <code>IpAddressType</code> of <code>IPv4</code>, you can restrict access to the IPv4 CIDR block "10.0.0.0/16". When using an <code>IpAddressType</code> of <code>dualstack</code>, you can specify both the IPv4 and IPv6 CIDR blocks, such as "10.0.0.0/16" for IPv4 only, "2001:db8:1234:1a00::/56" for IPv6 only, or "10.0.0.0/16" and "2001:db8:1234:1a00::/56" for dual stack.</p> <important> <p>Amazon SageMaker does not support Source Ip restriction for worker portals in VPC.</p> </important> <p>Use <code>OidcConfig</code> to update the configuration of a workforce created using your own OIDC IdP. </p> <important> <p>You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html">DeleteWorkteam</a> operation.</p> </important> <p>After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeWorkforce.html">DescribeWorkforce</a> operation.</p> <important> <p>This operation only applies to private workforces.</p> </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, UpdateWorkforceCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, UpdateWorkforceCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // UpdateWorkforceRequest
+ *   WorkforceName: "STRING_VALUE", // required
+ *   SourceIpConfig: { // SourceIpConfig
+ *     Cidrs: [ // Cidrs // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   OidcConfig: { // OidcConfig
+ *     ClientId: "STRING_VALUE", // required
+ *     ClientSecret: "STRING_VALUE", // required
+ *     Issuer: "STRING_VALUE", // required
+ *     AuthorizationEndpoint: "STRING_VALUE", // required
+ *     TokenEndpoint: "STRING_VALUE", // required
+ *     UserInfoEndpoint: "STRING_VALUE", // required
+ *     LogoutEndpoint: "STRING_VALUE", // required
+ *     JwksUri: "STRING_VALUE", // required
+ *     Scope: "STRING_VALUE",
+ *     AuthenticationRequestExtraParams: { // AuthenticationRequestExtraParams
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   WorkforceVpcConfig: { // WorkforceVpcConfigRequest
+ *     VpcId: "STRING_VALUE",
+ *     SecurityGroupIds: [ // WorkforceSecurityGroupIds
+ *       "STRING_VALUE",
+ *     ],
+ *     Subnets: [ // WorkforceSubnets
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   IpAddressType: "ipv4" || "dualstack",
+ * };
  * const command = new UpdateWorkforceCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateWorkforceResponse
+ * //   Workforce: { // Workforce
+ * //     WorkforceName: "STRING_VALUE", // required
+ * //     WorkforceArn: "STRING_VALUE", // required
+ * //     LastUpdatedDate: new Date("TIMESTAMP"),
+ * //     SourceIpConfig: { // SourceIpConfig
+ * //       Cidrs: [ // Cidrs // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     SubDomain: "STRING_VALUE",
+ * //     CognitoConfig: { // CognitoConfig
+ * //       UserPool: "STRING_VALUE", // required
+ * //       ClientId: "STRING_VALUE", // required
+ * //     },
+ * //     OidcConfig: { // OidcConfigForResponse
+ * //       ClientId: "STRING_VALUE",
+ * //       Issuer: "STRING_VALUE",
+ * //       AuthorizationEndpoint: "STRING_VALUE",
+ * //       TokenEndpoint: "STRING_VALUE",
+ * //       UserInfoEndpoint: "STRING_VALUE",
+ * //       LogoutEndpoint: "STRING_VALUE",
+ * //       JwksUri: "STRING_VALUE",
+ * //       Scope: "STRING_VALUE",
+ * //       AuthenticationRequestExtraParams: { // AuthenticationRequestExtraParams
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     CreateDate: new Date("TIMESTAMP"),
+ * //     WorkforceVpcConfig: { // WorkforceVpcConfigResponse
+ * //       VpcId: "STRING_VALUE", // required
+ * //       SecurityGroupIds: [ // WorkforceSecurityGroupIds // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Subnets: [ // WorkforceSubnets // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       VpcEndpointId: "STRING_VALUE",
+ * //     },
+ * //     Status: "Initializing" || "Updating" || "Deleting" || "Failed" || "Active",
+ * //     FailureReason: "STRING_VALUE",
+ * //     IpAddressType: "ipv4" || "dualstack",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateWorkforceCommandInput - {@link UpdateWorkforceCommandInput}
+ * @returns {@link UpdateWorkforceCommandOutput}
  * @see {@link UpdateWorkforceCommandInput} for command's `input` shape.
  * @see {@link UpdateWorkforceCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when you attempted to modify a SageMaker entity such as an <code>Experiment</code> or <code>Artifact</code>.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateWorkforceCommand extends $Command<
-  UpdateWorkforceCommandInput,
-  UpdateWorkforceCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateWorkforceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateWorkforceCommandInput, UpdateWorkforceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "UpdateWorkforceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateWorkforceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateWorkforceResponse.filterSensitiveLog,
+export class UpdateWorkforceCommand extends command<UpdateWorkforceCommandInput, UpdateWorkforceCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateWorkforce",
+  UpdateWorkforce$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWorkforceRequest;
+      output: UpdateWorkforceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateWorkforceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateWorkforceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateWorkforceCommandOutput> {
-    return deserializeAws_json1_1UpdateWorkforceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateWorkforceCommandInput;
+      output: UpdateWorkforceCommandOutput;
+    };
+  };
 }

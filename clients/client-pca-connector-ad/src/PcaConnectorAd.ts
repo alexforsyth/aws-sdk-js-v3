@@ -1,0 +1,677 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
+  CreateConnectorCommand,
+} from "./commands/CreateConnectorCommand";
+import {
+  type CreateDirectoryRegistrationCommandInput,
+  type CreateDirectoryRegistrationCommandOutput,
+  CreateDirectoryRegistrationCommand,
+} from "./commands/CreateDirectoryRegistrationCommand";
+import {
+  type CreateServicePrincipalNameCommandInput,
+  type CreateServicePrincipalNameCommandOutput,
+  CreateServicePrincipalNameCommand,
+} from "./commands/CreateServicePrincipalNameCommand";
+import {
+  type CreateTemplateCommandInput,
+  type CreateTemplateCommandOutput,
+  CreateTemplateCommand,
+} from "./commands/CreateTemplateCommand";
+import {
+  type CreateTemplateGroupAccessControlEntryCommandInput,
+  type CreateTemplateGroupAccessControlEntryCommandOutput,
+  CreateTemplateGroupAccessControlEntryCommand,
+} from "./commands/CreateTemplateGroupAccessControlEntryCommand";
+import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
+  DeleteConnectorCommand,
+} from "./commands/DeleteConnectorCommand";
+import {
+  type DeleteDirectoryRegistrationCommandInput,
+  type DeleteDirectoryRegistrationCommandOutput,
+  DeleteDirectoryRegistrationCommand,
+} from "./commands/DeleteDirectoryRegistrationCommand";
+import {
+  type DeleteServicePrincipalNameCommandInput,
+  type DeleteServicePrincipalNameCommandOutput,
+  DeleteServicePrincipalNameCommand,
+} from "./commands/DeleteServicePrincipalNameCommand";
+import {
+  type DeleteTemplateCommandInput,
+  type DeleteTemplateCommandOutput,
+  DeleteTemplateCommand,
+} from "./commands/DeleteTemplateCommand";
+import {
+  type DeleteTemplateGroupAccessControlEntryCommandInput,
+  type DeleteTemplateGroupAccessControlEntryCommandOutput,
+  DeleteTemplateGroupAccessControlEntryCommand,
+} from "./commands/DeleteTemplateGroupAccessControlEntryCommand";
+import {
+  type GetConnectorCommandInput,
+  type GetConnectorCommandOutput,
+  GetConnectorCommand,
+} from "./commands/GetConnectorCommand";
+import {
+  type GetDirectoryRegistrationCommandInput,
+  type GetDirectoryRegistrationCommandOutput,
+  GetDirectoryRegistrationCommand,
+} from "./commands/GetDirectoryRegistrationCommand";
+import {
+  type GetServicePrincipalNameCommandInput,
+  type GetServicePrincipalNameCommandOutput,
+  GetServicePrincipalNameCommand,
+} from "./commands/GetServicePrincipalNameCommand";
+import {
+  type GetTemplateCommandInput,
+  type GetTemplateCommandOutput,
+  GetTemplateCommand,
+} from "./commands/GetTemplateCommand";
+import {
+  type GetTemplateGroupAccessControlEntryCommandInput,
+  type GetTemplateGroupAccessControlEntryCommandOutput,
+  GetTemplateGroupAccessControlEntryCommand,
+} from "./commands/GetTemplateGroupAccessControlEntryCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
+  ListConnectorsCommand,
+} from "./commands/ListConnectorsCommand";
+import {
+  type ListDirectoryRegistrationsCommandInput,
+  type ListDirectoryRegistrationsCommandOutput,
+  ListDirectoryRegistrationsCommand,
+} from "./commands/ListDirectoryRegistrationsCommand";
+import {
+  type ListServicePrincipalNamesCommandInput,
+  type ListServicePrincipalNamesCommandOutput,
+  ListServicePrincipalNamesCommand,
+} from "./commands/ListServicePrincipalNamesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListTemplateGroupAccessControlEntriesCommandInput,
+  type ListTemplateGroupAccessControlEntriesCommandOutput,
+  ListTemplateGroupAccessControlEntriesCommand,
+} from "./commands/ListTemplateGroupAccessControlEntriesCommand";
+import {
+  type ListTemplatesCommandInput,
+  type ListTemplatesCommandOutput,
+  ListTemplatesCommand,
+} from "./commands/ListTemplatesCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateTemplateCommandInput,
+  type UpdateTemplateCommandOutput,
+  UpdateTemplateCommand,
+} from "./commands/UpdateTemplateCommand";
+import {
+  type UpdateTemplateGroupAccessControlEntryCommandInput,
+  type UpdateTemplateGroupAccessControlEntryCommandOutput,
+  UpdateTemplateGroupAccessControlEntryCommand,
+} from "./commands/UpdateTemplateGroupAccessControlEntryCommand";
+import { paginateListConnectors } from "./pagination/ListConnectorsPaginator";
+import { paginateListDirectoryRegistrations } from "./pagination/ListDirectoryRegistrationsPaginator";
+import { paginateListServicePrincipalNames } from "./pagination/ListServicePrincipalNamesPaginator";
+import {
+  paginateListTemplateGroupAccessControlEntries,
+} from "./pagination/ListTemplateGroupAccessControlEntriesPaginator";
+import { paginateListTemplates } from "./pagination/ListTemplatesPaginator";
+import { PcaConnectorAdClient } from "./PcaConnectorAdClient";
+
+const commands = {
+  CreateConnectorCommand,
+  CreateDirectoryRegistrationCommand,
+  CreateServicePrincipalNameCommand,
+  CreateTemplateCommand,
+  CreateTemplateGroupAccessControlEntryCommand,
+  DeleteConnectorCommand,
+  DeleteDirectoryRegistrationCommand,
+  DeleteServicePrincipalNameCommand,
+  DeleteTemplateCommand,
+  DeleteTemplateGroupAccessControlEntryCommand,
+  GetConnectorCommand,
+  GetDirectoryRegistrationCommand,
+  GetServicePrincipalNameCommand,
+  GetTemplateCommand,
+  GetTemplateGroupAccessControlEntryCommand,
+  ListConnectorsCommand,
+  ListDirectoryRegistrationsCommand,
+  ListServicePrincipalNamesCommand,
+  ListTagsForResourceCommand,
+  ListTemplateGroupAccessControlEntriesCommand,
+  ListTemplatesCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateTemplateCommand,
+  UpdateTemplateGroupAccessControlEntryCommand,
+};
+const paginators = {
+  paginateListConnectors,
+  paginateListDirectoryRegistrations,
+  paginateListServicePrincipalNames,
+  paginateListTemplateGroupAccessControlEntries,
+  paginateListTemplates,
+};
+
+/**
+ * @public
+ */
+export interface PcaConnectorAdRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface PcaConnectorAd {
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDirectoryRegistrationCommand}
+   */
+  createDirectoryRegistration(
+    args: CreateDirectoryRegistrationCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<CreateDirectoryRegistrationCommandOutput>;
+  createDirectoryRegistration(
+    args: CreateDirectoryRegistrationCommandInput,
+    cb: (err: any, data?: CreateDirectoryRegistrationCommandOutput) => void
+  ): void;
+  createDirectoryRegistration(
+    args: CreateDirectoryRegistrationCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: CreateDirectoryRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateServicePrincipalNameCommand}
+   */
+  createServicePrincipalName(
+    args: CreateServicePrincipalNameCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<CreateServicePrincipalNameCommandOutput>;
+  createServicePrincipalName(
+    args: CreateServicePrincipalNameCommandInput,
+    cb: (err: any, data?: CreateServicePrincipalNameCommandOutput) => void
+  ): void;
+  createServicePrincipalName(
+    args: CreateServicePrincipalNameCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: CreateServicePrincipalNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTemplateCommand}
+   */
+  createTemplate(
+    args: CreateTemplateCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<CreateTemplateCommandOutput>;
+  createTemplate(
+    args: CreateTemplateCommandInput,
+    cb: (err: any, data?: CreateTemplateCommandOutput) => void
+  ): void;
+  createTemplate(
+    args: CreateTemplateCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: CreateTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTemplateGroupAccessControlEntryCommand}
+   */
+  createTemplateGroupAccessControlEntry(
+    args: CreateTemplateGroupAccessControlEntryCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<CreateTemplateGroupAccessControlEntryCommandOutput>;
+  createTemplateGroupAccessControlEntry(
+    args: CreateTemplateGroupAccessControlEntryCommandInput,
+    cb: (err: any, data?: CreateTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+  createTemplateGroupAccessControlEntry(
+    args: CreateTemplateGroupAccessControlEntryCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: CreateTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDirectoryRegistrationCommand}
+   */
+  deleteDirectoryRegistration(
+    args: DeleteDirectoryRegistrationCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<DeleteDirectoryRegistrationCommandOutput>;
+  deleteDirectoryRegistration(
+    args: DeleteDirectoryRegistrationCommandInput,
+    cb: (err: any, data?: DeleteDirectoryRegistrationCommandOutput) => void
+  ): void;
+  deleteDirectoryRegistration(
+    args: DeleteDirectoryRegistrationCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: DeleteDirectoryRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteServicePrincipalNameCommand}
+   */
+  deleteServicePrincipalName(
+    args: DeleteServicePrincipalNameCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<DeleteServicePrincipalNameCommandOutput>;
+  deleteServicePrincipalName(
+    args: DeleteServicePrincipalNameCommandInput,
+    cb: (err: any, data?: DeleteServicePrincipalNameCommandOutput) => void
+  ): void;
+  deleteServicePrincipalName(
+    args: DeleteServicePrincipalNameCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: DeleteServicePrincipalNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTemplateCommand}
+   */
+  deleteTemplate(
+    args: DeleteTemplateCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<DeleteTemplateCommandOutput>;
+  deleteTemplate(
+    args: DeleteTemplateCommandInput,
+    cb: (err: any, data?: DeleteTemplateCommandOutput) => void
+  ): void;
+  deleteTemplate(
+    args: DeleteTemplateCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: DeleteTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTemplateGroupAccessControlEntryCommand}
+   */
+  deleteTemplateGroupAccessControlEntry(
+    args: DeleteTemplateGroupAccessControlEntryCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<DeleteTemplateGroupAccessControlEntryCommandOutput>;
+  deleteTemplateGroupAccessControlEntry(
+    args: DeleteTemplateGroupAccessControlEntryCommandInput,
+    cb: (err: any, data?: DeleteTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+  deleteTemplateGroupAccessControlEntry(
+    args: DeleteTemplateGroupAccessControlEntryCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: DeleteTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectorCommand}
+   */
+  getConnector(
+    args: GetConnectorCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<GetConnectorCommandOutput>;
+  getConnector(
+    args: GetConnectorCommandInput,
+    cb: (err: any, data?: GetConnectorCommandOutput) => void
+  ): void;
+  getConnector(
+    args: GetConnectorCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: GetConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDirectoryRegistrationCommand}
+   */
+  getDirectoryRegistration(
+    args: GetDirectoryRegistrationCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<GetDirectoryRegistrationCommandOutput>;
+  getDirectoryRegistration(
+    args: GetDirectoryRegistrationCommandInput,
+    cb: (err: any, data?: GetDirectoryRegistrationCommandOutput) => void
+  ): void;
+  getDirectoryRegistration(
+    args: GetDirectoryRegistrationCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: GetDirectoryRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServicePrincipalNameCommand}
+   */
+  getServicePrincipalName(
+    args: GetServicePrincipalNameCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<GetServicePrincipalNameCommandOutput>;
+  getServicePrincipalName(
+    args: GetServicePrincipalNameCommandInput,
+    cb: (err: any, data?: GetServicePrincipalNameCommandOutput) => void
+  ): void;
+  getServicePrincipalName(
+    args: GetServicePrincipalNameCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: GetServicePrincipalNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTemplateCommand}
+   */
+  getTemplate(
+    args: GetTemplateCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<GetTemplateCommandOutput>;
+  getTemplate(
+    args: GetTemplateCommandInput,
+    cb: (err: any, data?: GetTemplateCommandOutput) => void
+  ): void;
+  getTemplate(
+    args: GetTemplateCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: GetTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTemplateGroupAccessControlEntryCommand}
+   */
+  getTemplateGroupAccessControlEntry(
+    args: GetTemplateGroupAccessControlEntryCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<GetTemplateGroupAccessControlEntryCommandOutput>;
+  getTemplateGroupAccessControlEntry(
+    args: GetTemplateGroupAccessControlEntryCommandInput,
+    cb: (err: any, data?: GetTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+  getTemplateGroupAccessControlEntry(
+    args: GetTemplateGroupAccessControlEntryCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: GetTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDirectoryRegistrationsCommand}
+   */
+  listDirectoryRegistrations(): Promise<ListDirectoryRegistrationsCommandOutput>;
+  listDirectoryRegistrations(
+    args: ListDirectoryRegistrationsCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<ListDirectoryRegistrationsCommandOutput>;
+  listDirectoryRegistrations(
+    args: ListDirectoryRegistrationsCommandInput,
+    cb: (err: any, data?: ListDirectoryRegistrationsCommandOutput) => void
+  ): void;
+  listDirectoryRegistrations(
+    args: ListDirectoryRegistrationsCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: ListDirectoryRegistrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServicePrincipalNamesCommand}
+   */
+  listServicePrincipalNames(
+    args: ListServicePrincipalNamesCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<ListServicePrincipalNamesCommandOutput>;
+  listServicePrincipalNames(
+    args: ListServicePrincipalNamesCommandInput,
+    cb: (err: any, data?: ListServicePrincipalNamesCommandOutput) => void
+  ): void;
+  listServicePrincipalNames(
+    args: ListServicePrincipalNamesCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: ListServicePrincipalNamesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTemplateGroupAccessControlEntriesCommand}
+   */
+  listTemplateGroupAccessControlEntries(
+    args: ListTemplateGroupAccessControlEntriesCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<ListTemplateGroupAccessControlEntriesCommandOutput>;
+  listTemplateGroupAccessControlEntries(
+    args: ListTemplateGroupAccessControlEntriesCommandInput,
+    cb: (err: any, data?: ListTemplateGroupAccessControlEntriesCommandOutput) => void
+  ): void;
+  listTemplateGroupAccessControlEntries(
+    args: ListTemplateGroupAccessControlEntriesCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: ListTemplateGroupAccessControlEntriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTemplatesCommand}
+   */
+  listTemplates(
+    args: ListTemplatesCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<ListTemplatesCommandOutput>;
+  listTemplates(
+    args: ListTemplatesCommandInput,
+    cb: (err: any, data?: ListTemplatesCommandOutput) => void
+  ): void;
+  listTemplates(
+    args: ListTemplatesCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: ListTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTemplateCommand}
+   */
+  updateTemplate(
+    args: UpdateTemplateCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<UpdateTemplateCommandOutput>;
+  updateTemplate(
+    args: UpdateTemplateCommandInput,
+    cb: (err: any, data?: UpdateTemplateCommandOutput) => void
+  ): void;
+  updateTemplate(
+    args: UpdateTemplateCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: UpdateTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTemplateGroupAccessControlEntryCommand}
+   */
+  updateTemplateGroupAccessControlEntry(
+    args: UpdateTemplateGroupAccessControlEntryCommandInput,
+    options?: PcaConnectorAdRequestOptions
+  ): Promise<UpdateTemplateGroupAccessControlEntryCommandOutput>;
+  updateTemplateGroupAccessControlEntry(
+    args: UpdateTemplateGroupAccessControlEntryCommandInput,
+    cb: (err: any, data?: UpdateTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+  updateTemplateGroupAccessControlEntry(
+    args: UpdateTemplateGroupAccessControlEntryCommandInput,
+    options: PcaConnectorAdRequestOptions,
+    cb: (err: any, data?: UpdateTemplateGroupAccessControlEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorsCommandOutput}.
+   */
+  paginateListConnectors(
+    args?: ListConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListDirectoryRegistrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDirectoryRegistrationsCommandOutput}.
+   */
+  paginateListDirectoryRegistrations(
+    args?: ListDirectoryRegistrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDirectoryRegistrationsCommandOutput>;
+
+  /**
+   * @see {@link ListServicePrincipalNamesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServicePrincipalNamesCommandOutput}.
+   */
+  paginateListServicePrincipalNames(
+    args: ListServicePrincipalNamesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServicePrincipalNamesCommandOutput>;
+
+  /**
+   * @see {@link ListTemplateGroupAccessControlEntriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplateGroupAccessControlEntriesCommandOutput}.
+   */
+  paginateListTemplateGroupAccessControlEntries(
+    args: ListTemplateGroupAccessControlEntriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplateGroupAccessControlEntriesCommandOutput>;
+
+  /**
+   * @see {@link ListTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplatesCommandOutput}.
+   */
+  paginateListTemplates(
+    args: ListTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplatesCommandOutput>;
+}
+
+/**
+ * <p>Amazon Web Services Private CA Connector for Active Directory creates a connector between Amazon Web Services Private CA and Active Directory (AD) that enables you to
+ *          provision security certificates for AD signed by a private CA that you own. For more
+ *          information, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/ad-connector.html">Amazon Web Services Private CA Connector for Active Directory</a>.</p>
+ * @public
+ */
+export class PcaConnectorAd extends PcaConnectorAdClient implements PcaConnectorAd {}
+createAggregatedClient(commands, PcaConnectorAd, { paginators });

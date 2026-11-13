@@ -1,7 +1,6 @@
-# @aws-sdk/client-direct-connect
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-direct-connect/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-direct-connect)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-direct-connect.svg)](https://www.npmjs.com/package/@aws-sdk/client-direct-connect)
+# @aws-sdk/client-direct-connect
 
 ## Description
 
@@ -16,8 +15,7 @@ Amazon Web Services resources in the China Regions can only be accessed through 
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-direct-connect
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-direct-connect`
 - `yarn add @aws-sdk/client-direct-connect`
@@ -29,46 +27,77 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `DirectConnectClient` and
-the commands you need, for example `AcceptDirectConnectGatewayAssociationProposalCommand`:
+the commands you need, for example `ListResiliencyGroupsCommand`:
 
 ```js
 // ES5 example
-const {
-  DirectConnectClient,
-  AcceptDirectConnectGatewayAssociationProposalCommand,
-} = require("@aws-sdk/client-direct-connect");
+const { DirectConnectClient, ListResiliencyGroupsCommand } = require("@aws-sdk/client-direct-connect");
 ```
 
 ```ts
 // ES6+ example
-import {
-  DirectConnectClient,
-  AcceptDirectConnectGatewayAssociationProposalCommand,
-} from "@aws-sdk/client-direct-connect";
+import { DirectConnectClient, ListResiliencyGroupsCommand } from "@aws-sdk/client-direct-connect";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new DirectConnectClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new AcceptDirectConnectGatewayAssociationProposalCommand(params);
+const params = { /** input parameters */ };
+const command = new ListResiliencyGroupsCommand(params);
+```
+
+#### Supported Message Protocols
+
+This client supports multiple protocols.
+
+The default for this client is **AWS JSON (RPC) 1.1**.
+
+We have selected this default based on our evaluation of the
+performance characteristics of this protocol format in JavaScript. You don't need to change it,
+but you have the option to do so, for example to support existing integrations or tests.
+Selecting a non-default protocol changes the format
+of the data sent over the network, but does not affect how you interact with the
+client using JavaScript objects.
+
+Install the `@aws-sdk/config` package to access alternate protocols.
+
+See [AWS Protocols](https://smithy.io/2.0/aws/protocols/index.html) for more information.
+
+##### AWS JSON (RPC) 1.1
+
+This protocol uses JSON payloads.
+```js
+import { AwsJson1_1Protocol } from "@aws-sdk/config/protocol";
+
+const client = new DirectConnectClient({
+  protocol: AwsJson1_1Protocol
+});
+```
+
+##### Smithy RPC v2 CBOR
+
+This protocol uses CBOR payloads.
+```js
+import { AwsSmithyRpcV2CborProtocol } from "@aws-sdk/config/protocol";
+
+const client = new DirectConnectClient({
+  protocol: AwsSmithyRpcV2CborProtocol
+});
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -83,26 +112,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -118,31 +130,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`DirectConnect` extends `DirectConnectClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`DirectConnectClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-direct-connect";
-const client = new AWS.DirectConnect({ region: "REGION" });
+import { DirectConnect } from "@aws-sdk/client-direct-connect";
+
+const client = new DirectConnect({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.acceptDirectConnectGatewayAssociationProposal(params);
+  const data = await client.listResiliencyGroups(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -150,7 +156,7 @@ try {
 
 // Promises.
 client
-  .acceptDirectConnectGatewayAssociationProposal(params)
+  .listResiliencyGroups(params)
   .then((data) => {
     // process data.
   })
@@ -158,9 +164,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.acceptDirectConnectGatewayAssociationProposal(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listResiliencyGroups(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -186,12 +192,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -212,3 +220,517 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AcceptDirectConnectGatewayAssociationProposal
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AcceptDirectConnectGatewayAssociationProposalCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AcceptDirectConnectGatewayAssociationProposalCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AcceptDirectConnectGatewayAssociationProposalCommandOutput/)
+</details>
+<details>
+<summary>
+AllocateConnectionOnInterconnect
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AllocateConnectionOnInterconnectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocateConnectionOnInterconnectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocateConnectionOnInterconnectCommandOutput/)
+</details>
+<details>
+<summary>
+AllocateHostedConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AllocateHostedConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocateHostedConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocateHostedConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+AllocatePrivateVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AllocatePrivateVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocatePrivateVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocatePrivateVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+AllocatePublicVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AllocatePublicVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocatePublicVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocatePublicVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+AllocateTransitVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AllocateTransitVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocateTransitVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AllocateTransitVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateConnectionsToResiliencyGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AssociateConnectionsToResiliencyGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateConnectionsToResiliencyGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateConnectionsToResiliencyGroupCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateConnectionWithLag
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AssociateConnectionWithLagCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateConnectionWithLagCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateConnectionWithLagCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateHostedConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AssociateHostedConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateHostedConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateHostedConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateMacSecKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AssociateMacSecKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateMacSecKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateMacSecKeyCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/AssociateVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/AssociateVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+ConfirmConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ConfirmConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+ConfirmCustomerAgreement
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ConfirmCustomerAgreementCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmCustomerAgreementCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmCustomerAgreementCommandOutput/)
+</details>
+<details>
+<summary>
+ConfirmPrivateVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ConfirmPrivateVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmPrivateVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmPrivateVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+ConfirmPublicVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ConfirmPublicVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmPublicVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmPublicVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+ConfirmTransitVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ConfirmTransitVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmTransitVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ConfirmTransitVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+CreateBGPPeer
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateBGPPeerCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateBGPPeerCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateBGPPeerCommandOutput/)
+</details>
+<details>
+<summary>
+CreateConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDirectConnectGateway
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateDirectConnectGatewayCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateDirectConnectGatewayCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateDirectConnectGatewayCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDirectConnectGatewayAssociation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateDirectConnectGatewayAssociationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateDirectConnectGatewayAssociationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateDirectConnectGatewayAssociationCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDirectConnectGatewayAssociationProposal
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateDirectConnectGatewayAssociationProposalCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateDirectConnectGatewayAssociationProposalCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateDirectConnectGatewayAssociationProposalCommandOutput/)
+</details>
+<details>
+<summary>
+CreateInterconnect
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateInterconnectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateInterconnectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateInterconnectCommandOutput/)
+</details>
+<details>
+<summary>
+CreateLag
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateLagCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateLagCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateLagCommandOutput/)
+</details>
+<details>
+<summary>
+CreatePrivateVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreatePrivateVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreatePrivateVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreatePrivateVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+CreatePublicVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreatePublicVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreatePublicVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreatePublicVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+CreateResiliencyGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateResiliencyGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateResiliencyGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateResiliencyGroupCommandOutput/)
+</details>
+<details>
+<summary>
+CreateTransitVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/CreateTransitVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateTransitVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/CreateTransitVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteBGPPeer
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteBGPPeerCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteBGPPeerCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteBGPPeerCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDirectConnectGateway
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteDirectConnectGatewayCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteDirectConnectGatewayCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteDirectConnectGatewayCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDirectConnectGatewayAssociation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteDirectConnectGatewayAssociationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteDirectConnectGatewayAssociationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteDirectConnectGatewayAssociationCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDirectConnectGatewayAssociationProposal
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteDirectConnectGatewayAssociationProposalCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteDirectConnectGatewayAssociationProposalCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteDirectConnectGatewayAssociationProposalCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteInterconnect
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteInterconnectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteInterconnectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteInterconnectCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteLag
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteLagCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteLagCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteLagCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteResiliencyGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteResiliencyGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteResiliencyGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteResiliencyGroupCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteVirtualInterface
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DeleteVirtualInterfaceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteVirtualInterfaceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DeleteVirtualInterfaceCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnectionLoa
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeConnectionLoaCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeConnectionLoaCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeConnectionLoaCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnections
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeConnectionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeConnectionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeConnectionsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnectionsOnInterconnect
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeConnectionsOnInterconnectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeConnectionsOnInterconnectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeConnectionsOnInterconnectCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeCustomerMetadata
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeCustomerMetadataCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeCustomerMetadataCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeCustomerMetadataCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDirectConnectGatewayAssociationProposals
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeDirectConnectGatewayAssociationProposalsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewayAssociationProposalsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewayAssociationProposalsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDirectConnectGatewayAssociations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeDirectConnectGatewayAssociationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewayAssociationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewayAssociationsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDirectConnectGatewayAttachments
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeDirectConnectGatewayAttachmentsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewayAttachmentsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewayAttachmentsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDirectConnectGateways
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeDirectConnectGatewaysCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewaysCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeDirectConnectGatewaysCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeHostedConnections
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeHostedConnectionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeHostedConnectionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeHostedConnectionsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeInterconnectLoa
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeInterconnectLoaCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeInterconnectLoaCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeInterconnectLoaCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeInterconnects
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeInterconnectsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeInterconnectsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeInterconnectsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeLags
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeLagsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeLagsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeLagsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeLoa
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeLoaCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeLoaCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeLoaCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeLocations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeLocationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeLocationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeLocationsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeRouterConfiguration
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeRouterConfigurationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeRouterConfigurationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeRouterConfigurationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeTags
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeTagsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeTagsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeTagsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeVirtualGateways
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeVirtualGatewaysCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeVirtualGatewaysCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeVirtualGatewaysCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeVirtualInterfaces
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DescribeVirtualInterfacesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeVirtualInterfacesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DescribeVirtualInterfacesCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateConnectionFromLag
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DisassociateConnectionFromLagCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DisassociateConnectionFromLagCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DisassociateConnectionFromLagCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateConnectionsFromResiliencyGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DisassociateConnectionsFromResiliencyGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DisassociateConnectionsFromResiliencyGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DisassociateConnectionsFromResiliencyGroupCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateMacSecKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/DisassociateMacSecKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DisassociateMacSecKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/DisassociateMacSecKeyCommandOutput/)
+</details>
+<details>
+<summary>
+GetResiliencyGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/GetResiliencyGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/GetResiliencyGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/GetResiliencyGroupCommandOutput/)
+</details>
+<details>
+<summary>
+ListResiliencyGroupAssociations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ListResiliencyGroupAssociationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListResiliencyGroupAssociationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListResiliencyGroupAssociationsCommandOutput/)
+</details>
+<details>
+<summary>
+ListResiliencyGroups
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ListResiliencyGroupsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListResiliencyGroupsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListResiliencyGroupsCommandOutput/)
+</details>
+<details>
+<summary>
+ListVirtualInterfaceRoutes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ListVirtualInterfaceRoutesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListVirtualInterfaceRoutesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListVirtualInterfaceRoutesCommandOutput/)
+</details>
+<details>
+<summary>
+ListVirtualInterfaceTestHistory
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/ListVirtualInterfaceTestHistoryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListVirtualInterfaceTestHistoryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/ListVirtualInterfaceTestHistoryCommandOutput/)
+</details>
+<details>
+<summary>
+StartBgpFailoverTest
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/StartBgpFailoverTestCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/StartBgpFailoverTestCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/StartBgpFailoverTestCommandOutput/)
+</details>
+<details>
+<summary>
+StopBgpFailoverTest
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/StopBgpFailoverTestCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/StopBgpFailoverTestCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/StopBgpFailoverTestCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateConnectionsBillingMode
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateConnectionsBillingModeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateConnectionsBillingModeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateConnectionsBillingModeCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDirectConnectGateway
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateDirectConnectGatewayCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateDirectConnectGatewayCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateDirectConnectGatewayCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDirectConnectGatewayAssociation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateDirectConnectGatewayAssociationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateDirectConnectGatewayAssociationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateDirectConnectGatewayAssociationCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateLag
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateLagCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateLagCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateLagCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateResiliencyGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateResiliencyGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateResiliencyGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateResiliencyGroupCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateVirtualInterfaceAttributes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/direct-connect/command/UpdateVirtualInterfaceAttributesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateVirtualInterfaceAttributesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-direct-connect/Interface/UpdateVirtualInterfaceAttributesCommandOutput/)
+</details>

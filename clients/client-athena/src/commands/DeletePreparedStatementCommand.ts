@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { DeletePreparedStatementInput, DeletePreparedStatementOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeletePreparedStatementCommand,
-  serializeAws_json1_1DeletePreparedStatementCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePreparedStatementInput, DeletePreparedStatementOutput } from "../models/models_0";
+import { DeletePreparedStatement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePreparedStatementCommand}.
+ */
 export interface DeletePreparedStatementCommandInput extends DeletePreparedStatementInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePreparedStatementCommand}.
+ */
 export interface DeletePreparedStatementCommandOutput extends DeletePreparedStatementOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,57 @@ export interface DeletePreparedStatementCommandOutput extends DeletePreparedStat
  * ```javascript
  * import { AthenaClient, DeletePreparedStatementCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, DeletePreparedStatementCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // DeletePreparedStatementInput
+ *   StatementName: "STRING_VALUE", // required
+ *   WorkGroup: "STRING_VALUE", // required
+ * };
  * const command = new DeletePreparedStatementCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePreparedStatementCommandInput - {@link DeletePreparedStatementCommandInput}
+ * @returns {@link DeletePreparedStatementCommandOutput}
  * @see {@link DeletePreparedStatementCommandInput} for command's `input` shape.
  * @see {@link DeletePreparedStatementCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource, such as a workgroup, was not found.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePreparedStatementCommand extends $Command<
-  DeletePreparedStatementCommandInput,
-  DeletePreparedStatementCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePreparedStatementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePreparedStatementCommandInput, DeletePreparedStatementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "DeletePreparedStatementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePreparedStatementInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeletePreparedStatementOutput.filterSensitiveLog,
+export class DeletePreparedStatementCommand extends command<DeletePreparedStatementCommandInput, DeletePreparedStatementCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePreparedStatement",
+  DeletePreparedStatement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePreparedStatementInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePreparedStatementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeletePreparedStatementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePreparedStatementCommandOutput> {
-    return deserializeAws_json1_1DeletePreparedStatementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePreparedStatementCommandInput;
+      output: DeletePreparedStatementCommandOutput;
+    };
+  };
 }

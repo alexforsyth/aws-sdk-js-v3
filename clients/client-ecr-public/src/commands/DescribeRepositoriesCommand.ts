@@ -1,95 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRPUBLICClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRPUBLICClient";
-import { DescribeRepositoriesRequest, DescribeRepositoriesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeRepositoriesCommand,
-  serializeAws_json1_1DescribeRepositoriesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRepositoriesRequest, DescribeRepositoriesResponse } from "../models/models_0";
+import { DescribeRepositories$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRepositoriesCommand}.
+ */
 export interface DescribeRepositoriesCommandInput extends DescribeRepositoriesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRepositoriesCommand}.
+ */
 export interface DescribeRepositoriesCommandOutput extends DescribeRepositoriesResponse, __MetadataBearer {}
 
 /**
- * <p>Describes repositories in a public registry.</p>
+ * <p>Describes repositories that are in a public registry.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECRPUBLICClient, DescribeRepositoriesCommand } from "@aws-sdk/client-ecr-public"; // ES Modules import
  * // const { ECRPUBLICClient, DescribeRepositoriesCommand } = require("@aws-sdk/client-ecr-public"); // CommonJS import
+ * // import type { ECRPUBLICClientConfig } from "@aws-sdk/client-ecr-public";
+ * const config = {}; // type is ECRPUBLICClientConfig
  * const client = new ECRPUBLICClient(config);
+ * const input = { // DescribeRepositoriesRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryNames: [ // RepositoryNameList
+ *     "STRING_VALUE",
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new DescribeRepositoriesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRepositoriesResponse
+ * //   repositories: [ // RepositoryList
+ * //     { // Repository
+ * //       repositoryArn: "STRING_VALUE",
+ * //       registryId: "STRING_VALUE",
+ * //       repositoryName: "STRING_VALUE",
+ * //       repositoryUri: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeRepositoriesCommandInput - {@link DescribeRepositoriesCommandInput}
+ * @returns {@link DescribeRepositoriesCommandOutput}
  * @see {@link DescribeRepositoriesCommandInput} for command's `input` shape.
  * @see {@link DescribeRepositoriesCommandOutput} for command's `response` shape.
- * @see {@link ECRPUBLICClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRPUBLICClientResolvedConfig | config} for ECRPUBLICClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *          request.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository can't be found. Check the spelling of the specified repository
+ *          and ensure that you're performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link UnsupportedCommandException} (client fault)
+ *  <p>The action isn't supported in this Region.</p>
+ *
+ * @throws {@link ECRPUBLICServiceException}
+ * <p>Base exception class for all service exceptions from ECRPUBLIC service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeRepositoriesCommand extends $Command<
-  DescribeRepositoriesCommandInput,
-  DescribeRepositoriesCommandOutput,
-  ECRPUBLICClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRepositoriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRPUBLICClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRepositoriesCommandInput, DescribeRepositoriesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRPUBLICClient";
-    const commandName = "DescribeRepositoriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRepositoriesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRepositoriesResponse.filterSensitiveLog,
+export class DescribeRepositoriesCommand extends command<DescribeRepositoriesCommandInput, DescribeRepositoriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRepositories",
+  DescribeRepositories$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRepositoriesRequest;
+      output: DescribeRepositoriesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRepositoriesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeRepositoriesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRepositoriesCommandOutput> {
-    return deserializeAws_json1_1DescribeRepositoriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRepositoriesCommandInput;
+      output: DescribeRepositoriesCommandOutput;
+    };
+  };
 }

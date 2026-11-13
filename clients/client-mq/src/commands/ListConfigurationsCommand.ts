@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListConfigurationsRequest, ListConfigurationsResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1ListConfigurationsCommand,
-  serializeAws_restJson1ListConfigurationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListConfigurationsRequest, ListConfigurationsResponse } from "../models/models_0";
+import { ListConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListConfigurationsCommand}.
+ */
 export interface ListConfigurationsCommandInput extends ListConfigurationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListConfigurationsCommand}.
+ */
 export interface ListConfigurationsCommandOutput extends ListConfigurationsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface ListConfigurationsCommandOutput extends ListConfigurationsRespo
  * ```javascript
  * import { MqClient, ListConfigurationsCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, ListConfigurationsCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // ListConfigurationsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListConfigurationsResponse
+ * //   Configurations: [ // __listOfConfiguration
+ * //     { // Configuration
+ * //       Arn: "STRING_VALUE", // required
+ * //       AuthenticationStrategy: "SIMPLE" || "LDAP" || "CONFIG_MANAGED", // required
+ * //       Created: new Date("TIMESTAMP"), // required
+ * //       Description: "STRING_VALUE", // required
+ * //       EngineType: "ACTIVEMQ" || "RABBITMQ", // required
+ * //       EngineVersion: "STRING_VALUE", // required
+ * //       Id: "STRING_VALUE", // required
+ * //       LatestRevision: { // ConfigurationRevision
+ * //         Created: new Date("TIMESTAMP"), // required
+ * //         Description: "STRING_VALUE",
+ * //         Revision: Number("int"), // required
+ * //       },
+ * //       Name: "STRING_VALUE", // required
+ * //       Tags: { // __mapOf__string
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   MaxResults: Number("int"),
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListConfigurationsCommandInput - {@link ListConfigurationsCommandInput}
+ * @returns {@link ListConfigurationsCommandOutput}
  * @see {@link ListConfigurationsCommandInput} for command's `input` shape.
  * @see {@link ListConfigurationsCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class ListConfigurationsCommand extends $Command<
-  ListConfigurationsCommandInput,
-  ListConfigurationsCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListConfigurationsCommandInput, ListConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "ListConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListConfigurationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListConfigurationsResponse.filterSensitiveLog,
+export class ListConfigurationsCommand extends command<ListConfigurationsCommandInput, ListConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListConfigurations",
+  ListConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListConfigurationsRequest;
+      output: ListConfigurationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListConfigurationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListConfigurationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListConfigurationsCommandOutput> {
-    return deserializeAws_restJson1ListConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListConfigurationsCommandInput;
+      output: ListConfigurationsCommandOutput;
+    };
+  };
 }

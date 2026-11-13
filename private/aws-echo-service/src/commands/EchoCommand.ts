@@ -1,70 +1,78 @@
-import { EchoServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EchoServiceClient";
-import { EchoInput, EchoOutput } from "../models/models_0";
-import { deserializeAws_restJson1EchoCommand, serializeAws_restJson1EchoCommand } from "../protocols/Aws_restJson1";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  MiddlewareStack,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EchoInput, EchoOutput } from "../models/models_0";
+import { Echo$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EchoCommand}.
+ */
 export interface EchoCommandInput extends EchoInput {}
+/**
+ * @public
+ *
+ * The output of {@link EchoCommand}.
+ */
 export interface EchoCommandOutput extends EchoOutput, __MetadataBearer {}
 
-export class EchoCommand extends $Command<EchoCommandInput, EchoCommandOutput, EchoServiceClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EchoCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EchoServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EchoCommandInput, EchoCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EchoServiceClient";
-    const commandName = "EchoCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EchoInput.filterSensitiveLog,
-      outputFilterSensitiveLog: EchoOutput.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EchoServiceClient, EchoCommand } from "@aws-sdk/aws-echo-service"; // ES Modules import
+ * // const { EchoServiceClient, EchoCommand } = require("@aws-sdk/aws-echo-service"); // CommonJS import
+ * // import type { EchoServiceClientConfig } from "@aws-sdk/aws-echo-service";
+ * const config = {}; // type is EchoServiceClientConfig
+ * const client = new EchoServiceClient(config);
+ * const input = { // EchoInput
+ *   string: "STRING_VALUE",
+ * };
+ * const command = new EchoCommand(input);
+ * const response = await client.send(command);
+ * // { // EchoOutput
+ * //   string: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param EchoCommandInput - {@link EchoCommandInput}
+ * @returns {@link EchoCommandOutput}
+ * @see {@link EchoCommandInput} for command's `input` shape.
+ * @see {@link EchoCommandOutput} for command's `response` shape.
+ * @see {@link EchoServiceClientResolvedConfig | config} for EchoServiceClient's `config` shape.
+ *
+ * @throws {@link PalindromeException} (client fault)
+ *  For some reason, this service does not like palindromes!
+ *
+ * @throws {@link EchoServiceServiceException}
+ * <p>Base exception class for all service exceptions from EchoService service.</p>
+ *
+ *
+ */
+export class EchoCommand extends command<EchoCommandInput, EchoCommandOutput>(
+  _ep0,
+  _mw0,
+  "Echo",
+  Echo$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EchoInput;
+      output: EchoOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: EchoCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1EchoCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<EchoCommandOutput> {
-    return deserializeAws_restJson1EchoCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EchoCommandInput;
+      output: EchoCommandOutput;
+    };
+  };
 }

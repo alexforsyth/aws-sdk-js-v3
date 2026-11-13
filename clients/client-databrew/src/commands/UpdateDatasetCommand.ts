@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { UpdateDatasetRequest, UpdateDatasetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateDatasetCommand,
-  serializeAws_restJson1UpdateDatasetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDatasetRequest, UpdateDatasetResponse } from "../models/models_0";
+import { UpdateDataset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDatasetCommand}.
+ */
 export interface UpdateDatasetCommandInput extends UpdateDatasetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDatasetCommand}.
+ */
 export interface UpdateDatasetCommandOutput extends UpdateDatasetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,136 @@ export interface UpdateDatasetCommandOutput extends UpdateDatasetResponse, __Met
  * ```javascript
  * import { DataBrewClient, UpdateDatasetCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, UpdateDatasetCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // UpdateDatasetRequest
+ *   Name: "STRING_VALUE", // required
+ *   Format: "CSV" || "JSON" || "PARQUET" || "EXCEL" || "ORC",
+ *   FormatOptions: { // FormatOptions
+ *     Json: { // JsonOptions
+ *       MultiLine: true || false,
+ *     },
+ *     Excel: { // ExcelOptions
+ *       SheetNames: [ // SheetNameList
+ *         "STRING_VALUE",
+ *       ],
+ *       SheetIndexes: [ // SheetIndexList
+ *         Number("int"),
+ *       ],
+ *       HeaderRow: true || false,
+ *     },
+ *     Csv: { // CsvOptions
+ *       Delimiter: "STRING_VALUE",
+ *       HeaderRow: true || false,
+ *     },
+ *   },
+ *   Input: { // Input
+ *     S3InputDefinition: { // S3Location
+ *       Bucket: "STRING_VALUE", // required
+ *       Key: "STRING_VALUE",
+ *       BucketOwner: "STRING_VALUE",
+ *     },
+ *     DataCatalogInputDefinition: { // DataCatalogInputDefinition
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       TableName: "STRING_VALUE", // required
+ *       TempDirectory: {
+ *         Bucket: "STRING_VALUE", // required
+ *         Key: "STRING_VALUE",
+ *         BucketOwner: "STRING_VALUE",
+ *       },
+ *     },
+ *     DatabaseInputDefinition: { // DatabaseInputDefinition
+ *       GlueConnectionName: "STRING_VALUE", // required
+ *       DatabaseTableName: "STRING_VALUE",
+ *       TempDirectory: {
+ *         Bucket: "STRING_VALUE", // required
+ *         Key: "STRING_VALUE",
+ *         BucketOwner: "STRING_VALUE",
+ *       },
+ *       QueryString: "STRING_VALUE",
+ *     },
+ *     Metadata: { // Metadata
+ *       SourceArn: "STRING_VALUE",
+ *     },
+ *   },
+ *   PathOptions: { // PathOptions
+ *     LastModifiedDateCondition: { // FilterExpression
+ *       Expression: "STRING_VALUE", // required
+ *       ValuesMap: { // ValuesMap // required
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *     FilesLimit: { // FilesLimit
+ *       MaxFiles: Number("int"), // required
+ *       OrderedBy: "LAST_MODIFIED_DATE",
+ *       Order: "DESCENDING" || "ASCENDING",
+ *     },
+ *     Parameters: { // PathParametersMap
+ *       "<keys>": { // DatasetParameter
+ *         Name: "STRING_VALUE", // required
+ *         Type: "Datetime" || "Number" || "String", // required
+ *         DatetimeOptions: { // DatetimeOptions
+ *           Format: "STRING_VALUE", // required
+ *           TimezoneOffset: "STRING_VALUE",
+ *           LocaleCode: "STRING_VALUE",
+ *         },
+ *         CreateColumn: true || false,
+ *         Filter: {
+ *           Expression: "STRING_VALUE", // required
+ *           ValuesMap: { // required
+ *             "<keys>": "STRING_VALUE",
+ *           },
+ *         },
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new UpdateDatasetCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDatasetResponse
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateDatasetCommandInput - {@link UpdateDatasetCommandInput}
+ * @returns {@link UpdateDatasetCommandOutput}
  * @see {@link UpdateDatasetCommandInput} for command's `input` shape.
  * @see {@link UpdateDatasetCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to the specified resource was denied.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDatasetCommand extends $Command<
-  UpdateDatasetCommandInput,
-  UpdateDatasetCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDatasetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDatasetCommandInput, UpdateDatasetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "UpdateDatasetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDatasetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDatasetResponse.filterSensitiveLog,
+export class UpdateDatasetCommand extends command<UpdateDatasetCommandInput, UpdateDatasetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDataset",
+  UpdateDataset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDatasetRequest;
+      output: UpdateDatasetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDatasetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateDatasetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDatasetCommandOutput> {
-    return deserializeAws_restJson1UpdateDatasetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDatasetCommandInput;
+      output: UpdateDatasetCommandOutput;
+    };
+  };
 }

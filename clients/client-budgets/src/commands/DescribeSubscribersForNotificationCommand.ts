@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BudgetsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BudgetsClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeSubscribersForNotificationRequest,
   DescribeSubscribersForNotificationResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSubscribersForNotificationCommand,
-  serializeAws_json1_1DescribeSubscribersForNotificationCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeSubscribersForNotification$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSubscribersForNotificationCommand}.
+ */
 export interface DescribeSubscribersForNotificationCommandInput extends DescribeSubscribersForNotificationRequest {}
-export interface DescribeSubscribersForNotificationCommandOutput
-  extends DescribeSubscribersForNotificationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSubscribersForNotificationCommand}.
+ */
+export interface DescribeSubscribersForNotificationCommandOutput extends DescribeSubscribersForNotificationResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the subscribers that are associated with a notification.</p>
@@ -33,74 +32,85 @@ export interface DescribeSubscribersForNotificationCommandOutput
  * ```javascript
  * import { BudgetsClient, DescribeSubscribersForNotificationCommand } from "@aws-sdk/client-budgets"; // ES Modules import
  * // const { BudgetsClient, DescribeSubscribersForNotificationCommand } = require("@aws-sdk/client-budgets"); // CommonJS import
+ * // import type { BudgetsClientConfig } from "@aws-sdk/client-budgets";
+ * const config = {}; // type is BudgetsClientConfig
  * const client = new BudgetsClient(config);
+ * const input = { // DescribeSubscribersForNotificationRequest
+ *   AccountId: "STRING_VALUE", // required
+ *   BudgetName: "STRING_VALUE", // required
+ *   Notification: { // Notification
+ *     NotificationType: "ACTUAL" || "FORECASTED", // required
+ *     ComparisonOperator: "GREATER_THAN" || "LESS_THAN" || "EQUAL_TO", // required
+ *     Threshold: Number("double"), // required
+ *     ThresholdType: "PERCENTAGE" || "ABSOLUTE_VALUE",
+ *     NotificationState: "OK" || "ALARM",
+ *   },
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeSubscribersForNotificationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSubscribersForNotificationResponse
+ * //   Subscribers: [ // Subscribers
+ * //     { // Subscriber
+ * //       SubscriptionType: "SNS" || "EMAIL", // required
+ * //       Address: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeSubscribersForNotificationCommandInput - {@link DescribeSubscribersForNotificationCommandInput}
+ * @returns {@link DescribeSubscribersForNotificationCommandOutput}
  * @see {@link DescribeSubscribersForNotificationCommandInput} for command's `input` shape.
  * @see {@link DescribeSubscribersForNotificationCommandOutput} for command's `response` shape.
- * @see {@link BudgetsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BudgetsClientResolvedConfig | config} for BudgetsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to use this operation with the given parameters.</p>
+ *
+ * @throws {@link ExpiredNextTokenException} (client fault)
+ *  <p>The pagination token expired.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>An error on the server occurred during the processing of your request. Try again later.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The pagination token is invalid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>We can’t locate the resource that you specified.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of API requests has exceeded the maximum allowed API request throttling limit
+ *       for the account.</p>
+ *
+ * @throws {@link BudgetsServiceException}
+ * <p>Base exception class for all service exceptions from Budgets service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSubscribersForNotificationCommand extends $Command<
-  DescribeSubscribersForNotificationCommandInput,
-  DescribeSubscribersForNotificationCommandOutput,
-  BudgetsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSubscribersForNotificationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BudgetsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSubscribersForNotificationCommandInput, DescribeSubscribersForNotificationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BudgetsClient";
-    const commandName = "DescribeSubscribersForNotificationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSubscribersForNotificationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSubscribersForNotificationResponse.filterSensitiveLog,
+export class DescribeSubscribersForNotificationCommand extends command<DescribeSubscribersForNotificationCommandInput, DescribeSubscribersForNotificationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSubscribersForNotification",
+  DescribeSubscribersForNotification$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSubscribersForNotificationRequest;
+      output: DescribeSubscribersForNotificationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeSubscribersForNotificationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSubscribersForNotificationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSubscribersForNotificationCommandOutput> {
-    return deserializeAws_json1_1DescribeSubscribersForNotificationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSubscribersForNotificationCommandInput;
+      output: DescribeSubscribersForNotificationCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,410 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const AgreementCancellationRequestReasonCode = {
+  ALTERNATIVE_PROCUREMENT_CHANNEL: "ALTERNATIVE_PROCUREMENT_CHANNEL",
+  BUYER_DISSATISFACTION: "BUYER_DISSATISFACTION",
+  INCORRECT_TERMS_ACCEPTED: "INCORRECT_TERMS_ACCEPTED",
+  OTHER: "OTHER",
+  PRODUCT_DISCONTINUED: "PRODUCT_DISCONTINUED",
+  REPLACING_AGREEMENT: "REPLACING_AGREEMENT",
+  TEST_AGREEMENT: "TEST_AGREEMENT",
+  UNINTENDED_RENEWAL: "UNINTENDED_RENEWAL",
+} as const;
+/**
+ * @public
+ */
+export type AgreementCancellationRequestReasonCode =
+  (typeof AgreementCancellationRequestReasonCode)[keyof typeof AgreementCancellationRequestReasonCode];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgreementCancellationRequestStatus = {
+  APPROVED: "APPROVED",
+  CANCELLED: "CANCELLED",
+  PENDING_APPROVAL: "PENDING_APPROVAL",
+  REJECTED: "REJECTED",
+  VALIDATION_FAILED: "VALIDATION_FAILED",
+} as const;
+/**
+ * @public
+ */
+export type AgreementCancellationRequestStatus =
+  (typeof AgreementCancellationRequestStatus)[keyof typeof AgreementCancellationRequestStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AccessDeniedExceptionReason = {
+  DENIED_BY_PRIVATE_MARKETPLACE_POLICY: "DENIED_BY_PRIVATE_MARKETPLACE_POLICY",
+  FAILED_KYC_COMPLIANCE: "FAILED_KYC_COMPLIANCE",
+  INVALID_ACCESS: "INVALID_ACCESS",
+  INVALID_ACCOUNT_STATE: "INVALID_ACCOUNT_STATE",
+  MISSING_MFA: "MISSING_MFA",
+} as const;
+/**
+ * @public
+ */
+export type AccessDeniedExceptionReason =
+  (typeof AccessDeniedExceptionReason)[keyof typeof AccessDeniedExceptionReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const ResourceType = {
+  AGREEMENT: "Agreement",
+  AGREEMENT_CANCELLATION_REQUEST: "AgreementCancellationRequest",
+  AGREEMENT_PROPOSAL: "AgreementProposal",
+  AGREEMENT_REQUEST: "AgreementRequest",
+  BILLING_ADJUSTMENT_REQUEST: "BillingAdjustmentRequest",
+  CHARGE: "Charge",
+  INVOICE: "Invoice",
+  PAYMENT_REQUEST: "PaymentRequest",
+} as const;
+/**
+ * @public
+ */
+export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ValidationExceptionReason = {
+  BILLING_ADJUSTMENTS_LIMIT_EXCEEDED: "BILLING_ADJUSTMENTS_LIMIT_EXCEEDED",
+  DUPLICATE_AGREEMENT_IN_ORGANIZATION: "DUPLICATE_AGREEMENT_IN_ORGANIZATION",
+  DUPLICATE_CHARGES: "DUPLICATE_CHARGES",
+  EXCEEDED_MAXIMUM_ADJUSTMENT_AMOUNT: "EXCEEDED_MAXIMUM_ADJUSTMENT_AMOUNT",
+  EXPIRED_AGREEMENT_PROPOSAL: "EXPIRED_AGREEMENT_PROPOSAL",
+  INACTIVE_AGREEMENT: "INACTIVE_AGREEMENT",
+  INCOMPATIBLE_TERMS: "INCOMPATIBLE_TERMS",
+  INVALID_ADJUSTMENT_AMOUNT: "INVALID_ADJUSTMENT_AMOUNT",
+  INVALID_AGREEMENT_CANCELLATION_REQUEST_ID: "INVALID_AGREEMENT_CANCELLATION_REQUEST_ID",
+  INVALID_AGREEMENT_ID: "INVALID_AGREEMENT_ID",
+  INVALID_AGREEMENT_PROPOSAL_IDENTIFIER: "INVALID_AGREEMENT_PROPOSAL_IDENTIFIER",
+  INVALID_AGREEMENT_REQUEST_ID: "INVALID_AGREEMENT_REQUEST_ID",
+  INVALID_AGREEMENT_TYPE: "INVALID_AGREEMENT_TYPE",
+  INVALID_CATALOG: "INVALID_CATALOG",
+  INVALID_CHARGE_AMOUNT: "INVALID_CHARGE_AMOUNT",
+  INVALID_CHARGE_ID: "INVALID_CHARGE_ID",
+  INVALID_CHARGE_REVISION: "INVALID_CHARGE_REVISION",
+  INVALID_CLIENT_TOKEN: "INVALID_CLIENT_TOKEN",
+  INVALID_CURRENCY_CODE: "INVALID_CURRENCY_CODE",
+  INVALID_DESCRIPTION: "INVALID_DESCRIPTION",
+  INVALID_FILTERS: "INVALID_FILTERS",
+  INVALID_FILTER_NAME: "INVALID_FILTER_NAME",
+  INVALID_FILTER_VALUES: "INVALID_FILTER_VALUES",
+  INVALID_INCREMENTAL_CHARGE: "INVALID_INCREMENTAL_CHARGE",
+  INVALID_INTENT: "INVALID_INTENT",
+  INVALID_INVOICE_ADJUSTMENT_PERIOD: "INVALID_INVOICE_ADJUSTMENT_PERIOD",
+  INVALID_MAX_RESULTS: "INVALID_MAX_RESULTS",
+  INVALID_NAME: "INVALID_NAME",
+  INVALID_NEXT_TOKEN: "INVALID_NEXT_TOKEN",
+  INVALID_PARTY_TYPE: "INVALID_PARTY_TYPE",
+  INVALID_PAYMENT_REQUEST_ID: "INVALID_PAYMENT_REQUEST_ID",
+  INVALID_PAYMENT_REQUEST_STATUS: "INVALID_PAYMENT_REQUEST_STATUS",
+  INVALID_PURCHASE_ORDERS: "INVALID_PURCHASE_ORDERS",
+  INVALID_PURCHASE_ORDER_REFERENCE: "INVALID_PURCHASE_ORDER_REFERENCE",
+  INVALID_REASON: "INVALID_REASON",
+  INVALID_REASON_CODE: "INVALID_REASON_CODE",
+  INVALID_REJECTION_REASON: "INVALID_REJECTION_REASON",
+  INVALID_REQUESTED_TERMS: "INVALID_REQUESTED_TERMS",
+  INVALID_REQUESTED_TERM_CONFIGURATION: "INVALID_REQUESTED_TERM_CONFIGURATION",
+  INVALID_REQUESTED_TERM_ID: "INVALID_REQUESTED_TERM_ID",
+  INVALID_SORT_BY: "INVALID_SORT_BY",
+  INVALID_SORT_ORDER: "INVALID_SORT_ORDER",
+  INVALID_SOURCE_AGREEMENT_IDENTIFIER: "INVALID_SOURCE_AGREEMENT_IDENTIFIER",
+  INVALID_STATUS: "INVALID_STATUS",
+  INVALID_TERM_ID: "INVALID_TERM_ID",
+  MISSING_ACCOUNT_ADDRESS: "MISSING_ACCOUNT_ADDRESS",
+  MISSING_ADJUSTMENT_AMOUNT: "MISSING_ADJUSTMENT_AMOUNT",
+  MISSING_AGREEMENT_CANCELLATION_REQUEST_ID: "MISSING_AGREEMENT_CANCELLATION_REQUEST_ID",
+  MISSING_AGREEMENT_ID: "MISSING_AGREEMENT_ID",
+  MISSING_AGREEMENT_PROPOSAL_IDENTIFIER: "MISSING_AGREEMENT_PROPOSAL_IDENTIFIER",
+  MISSING_AGREEMENT_REQUEST_ID: "MISSING_AGREEMENT_REQUEST_ID",
+  MISSING_BILLING_ADJUSTMENTS: "MISSING_BILLING_ADJUSTMENTS",
+  MISSING_BILLING_ADJUSTMENT_REQUEST_ENTRY: "MISSING_BILLING_ADJUSTMENT_REQUEST_ENTRY",
+  MISSING_CHARGE_AMOUNT: "MISSING_CHARGE_AMOUNT",
+  MISSING_CHARGE_ID: "MISSING_CHARGE_ID",
+  MISSING_CHARGE_REVISION: "MISSING_CHARGE_REVISION",
+  MISSING_CURRENCY_CODE: "MISSING_CURRENCY_CODE",
+  MISSING_DESCRIPTION: "MISSING_DESCRIPTION",
+  MISSING_FILTER_NAME: "MISSING_FILTER_NAME",
+  MISSING_FILTER_VALUES: "MISSING_FILTER_VALUES",
+  MISSING_INTENT: "MISSING_INTENT",
+  MISSING_INVOICE_ID: "MISSING_INVOICE_ID",
+  MISSING_MANDATORY_TERMS: "MISSING_MANDATORY_TERMS",
+  MISSING_NAME: "MISSING_NAME",
+  MISSING_PARTY_TYPE: "MISSING_PARTY_TYPE",
+  MISSING_PAYMENT_REQUEST_ID: "MISSING_PAYMENT_REQUEST_ID",
+  MISSING_PURCHASE_ORDERS: "MISSING_PURCHASE_ORDERS",
+  MISSING_PURCHASE_ORDER_REFERENCE: "MISSING_PURCHASE_ORDER_REFERENCE",
+  MISSING_REASON: "MISSING_REASON",
+  MISSING_REASON_CODE: "MISSING_REASON_CODE",
+  MISSING_REQUESTED_TERMS: "MISSING_REQUESTED_TERMS",
+  MISSING_REQUESTED_TERM_CONFIGURATION: "MISSING_REQUESTED_TERM_CONFIGURATION",
+  MISSING_REQUESTED_TERM_ID: "MISSING_REQUESTED_TERM_ID",
+  MISSING_SOURCE_AGREEMENT_IDENTIFIER: "MISSING_SOURCE_AGREEMENT_IDENTIFIER",
+  MISSING_TERM_ID: "MISSING_TERM_ID",
+  MISSING_USAGE_AGREEMENT: "MISSING_USAGE_AGREEMENT",
+  MULTIPLE_AGREEMENT_IDS: "MULTIPLE_AGREEMENT_IDS",
+  OTHER: "OTHER",
+  SUPERSEDED_AGREEMENT_PROPOSAL: "SUPERSEDED_AGREEMENT_PROPOSAL",
+  UNSUPPORTED_ACCOUNT_PLAN: "UNSUPPORTED_ACCOUNT_PLAN",
+  UNSUPPORTED_ACTION: "UNSUPPORTED_ACTION",
+  UNSUPPORTED_FILTERS: "UNSUPPORTED_FILTERS",
+} as const;
+/**
+ * @public
+ */
+export type ValidationExceptionReason = (typeof ValidationExceptionReason)[keyof typeof ValidationExceptionReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentRequestStatus = {
+  APPROVED: "APPROVED",
+  CANCELLED: "CANCELLED",
+  PENDING_APPROVAL: "PENDING_APPROVAL",
+  REJECTED: "REJECTED",
+  VALIDATING: "VALIDATING",
+  VALIDATION_FAILED: "VALIDATION_FAILED",
+} as const;
+/**
+ * @public
+ */
+export type PaymentRequestStatus = (typeof PaymentRequestStatus)[keyof typeof PaymentRequestStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentRequestApprovalStrategy = {
+  AUTO_APPROVE_ON_EXPIRATION: "AUTO_APPROVE_ON_EXPIRATION",
+  WAIT_FOR_APPROVAL: "WAIT_FOR_APPROVAL",
+} as const;
+/**
+ * @public
+ */
+export type PaymentRequestApprovalStrategy =
+  (typeof PaymentRequestApprovalStrategy)[keyof typeof PaymentRequestApprovalStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgreementEntitlementStatus = {
+  DEPROVISIONED: "DEPROVISIONED",
+  FAILED: "FAILED",
+  PENDING: "PENDING",
+  PROVISIONED: "PROVISIONED",
+  SCHEDULED: "SCHEDULED",
+} as const;
+/**
+ * @public
+ */
+export type AgreementEntitlementStatus = (typeof AgreementEntitlementStatus)[keyof typeof AgreementEntitlementStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgreementEntitlementStatusReasonCode = {
+  ACCOUNT_SUSPENDED: "ACCOUNT_SUSPENDED",
+  AGREEMENT_ACTIVE: "AGREEMENT_ACTIVE",
+  AGREEMENT_INACTIVE: "AGREEMENT_INACTIVE",
+  FUTURE_START_DATE: "FUTURE_START_DATE",
+  INCOMPATIBLE_CURRENCY: "INCOMPATIBLE_CURRENCY",
+  INVALID_PAYMENT_INSTRUMENT: "INVALID_PAYMENT_INSTRUMENT",
+  PRODUCT_RESTRICTED: "PRODUCT_RESTRICTED",
+  PROVISIONING_IN_PROGRESS: "PROVISIONING_IN_PROGRESS",
+  UNSUPPORTED_OPERATION: "UNSUPPORTED_OPERATION",
+} as const;
+/**
+ * @public
+ */
+export type AgreementEntitlementStatusReasonCode =
+  (typeof AgreementEntitlementStatusReasonCode)[keyof typeof AgreementEntitlementStatusReasonCode];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvoiceType = {
+  CREDIT_MEMO: "CREDIT_MEMO",
+  INVOICE: "INVOICE",
+} as const;
+/**
+ * @public
+ */
+export type InvoiceType = (typeof InvoiceType)[keyof typeof InvoiceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgreementStatus = {
+  ACTIVE: "ACTIVE",
+  ARCHIVED: "ARCHIVED",
+  CANCELLED: "CANCELLED",
+  EXPIRED: "EXPIRED",
+  RENEWED: "RENEWED",
+  REPLACED: "REPLACED",
+  ROLLED_BACK: "ROLLED_BACK",
+  SUPERSEDED: "SUPERSEDED",
+  TERMINATED: "TERMINATED",
+} as const;
+/**
+ * @public
+ */
+export type AgreementStatus = (typeof AgreementStatus)[keyof typeof AgreementStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const EndTimeBehaviorReasonCode = {
+  ACCEPTOR_RENEW_OPTED_OUT: "ACCEPTOR_RENEW_OPTED_OUT",
+  NO_RENEWAL_TERM: "NO_RENEWAL_TERM",
+  PROPOSER_RENEW_OPTED_OUT: "PROPOSER_RENEW_OPTED_OUT",
+  RENEWAL_LIMIT_EXHAUSTED: "RENEWAL_LIMIT_EXHAUSTED",
+} as const;
+/**
+ * @public
+ */
+export type EndTimeBehaviorReasonCode = (typeof EndTimeBehaviorReasonCode)[keyof typeof EndTimeBehaviorReasonCode];
+
+/**
+ * @public
+ * @enum
+ */
+export const EndTimeBehaviorType = {
+  EXPIRE: "EXPIRE",
+  RENEW: "RENEW",
+  REPLACE: "REPLACE",
+} as const;
+/**
+ * @public
+ */
+export type EndTimeBehaviorType = (typeof EndTimeBehaviorType)[keyof typeof EndTimeBehaviorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const BillingAdjustmentReasonCode = {
+  ALTERNATIVE_PROCUREMENT_CHANNEL: "ALTERNATIVE_PROCUREMENT_CHANNEL",
+  BUYER_DISSATISFACTION: "BUYER_DISSATISFACTION",
+  INCORRECT_METERING: "INCORRECT_METERING",
+  INCORRECT_TERMS_ACCEPTED: "INCORRECT_TERMS_ACCEPTED",
+  OTHER: "OTHER",
+  TEST_ENVIRONMENT_CHARGES: "TEST_ENVIRONMENT_CHARGES",
+  UNINTENDED_RENEWAL: "UNINTENDED_RENEWAL",
+} as const;
+/**
+ * @public
+ */
+export type BillingAdjustmentReasonCode =
+  (typeof BillingAdjustmentReasonCode)[keyof typeof BillingAdjustmentReasonCode];
+
+/**
+ * @public
+ * @enum
+ */
+export const BillingAdjustmentErrorCode = {
+  CONFLICT_EXCEPTION: "CONFLICT_EXCEPTION",
+  INTERNAL_FAILURE: "INTERNAL_FAILURE",
+  RESOURCE_NOT_FOUND_EXCEPTION: "RESOURCE_NOT_FOUND_EXCEPTION",
+  VALIDATION_EXCEPTION: "VALIDATION_EXCEPTION",
+} as const;
+/**
+ * @public
+ */
+export type BillingAdjustmentErrorCode = (typeof BillingAdjustmentErrorCode)[keyof typeof BillingAdjustmentErrorCode];
+
+/**
+ * @public
+ * @enum
+ */
+export const Intent = {
+  AMEND: "AMEND",
+  NEW: "NEW",
+  REPLACE: "REPLACE",
+} as const;
+/**
+ * @public
+ */
+export type Intent = (typeof Intent)[keyof typeof Intent];
+
+/**
+ * @public
+ * @enum
+ */
+export const TaxEstimation = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type TaxEstimation = (typeof TaxEstimation)[keyof typeof TaxEstimation];
+
+/**
+ * @public
+ * @enum
+ */
+export const Timing = {
+  BILLING_PERIOD: "BILLING_PERIOD",
+  ON_ACCEPTANCE: "ON_ACCEPTANCE",
+  SCHEDULED: "SCHEDULED",
+} as const;
+/**
+ * @public
+ */
+export type Timing = (typeof Timing)[keyof typeof Timing];
+
+/**
+ * @public
+ * @enum
+ */
+export const BillingAdjustmentStatus = {
+  COMPLETED: "COMPLETED",
+  PENDING: "PENDING",
+  VALIDATION_FAILED: "VALIDATION_FAILED",
+} as const;
+/**
+ * @public
+ */
+export type BillingAdjustmentStatus = (typeof BillingAdjustmentStatus)[keyof typeof BillingAdjustmentStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const LineItemGroupBy = {
+  INVOICE_ID: "INVOICE_ID",
+} as const;
+/**
+ * @public
+ */
+export type LineItemGroupBy = (typeof LineItemGroupBy)[keyof typeof LineItemGroupBy];
+
+/**
+ * @public
+ * @enum
+ */
+export const SortOrder = {
+  ASCENDING: "ASCENDING",
+  DESCENDING: "DESCENDING",
+} as const;
+/**
+ * @public
+ */
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];

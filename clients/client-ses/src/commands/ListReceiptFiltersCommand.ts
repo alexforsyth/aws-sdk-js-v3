@@ -1,99 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListReceiptFiltersRequest, ListReceiptFiltersResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListReceiptFiltersCommand,
-  serializeAws_queryListReceiptFiltersCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListReceiptFiltersRequest, ListReceiptFiltersResponse } from "../models/models_0";
+import { ListReceiptFilters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListReceiptFiltersCommand}.
+ */
 export interface ListReceiptFiltersCommandInput extends ListReceiptFiltersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListReceiptFiltersCommand}.
+ */
 export interface ListReceiptFiltersCommandOutput extends ListReceiptFiltersResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the IP address filters associated with your AWS account in the current AWS
- *             Region.</p>
- *         <p>For information about managing IP address filters, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html">Amazon SES
+ * <p>Lists the IP address filters associated with your Amazon Web Services account in the current
+ *             Amazon Web Services Region.</p>
+ *          <p>For information about managing IP address filters, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html">Amazon SES
  *                 Developer Guide</a>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, ListReceiptFiltersCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, ListReceiptFiltersCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = {};
  * const command = new ListReceiptFiltersCommand(input);
  * const response = await client.send(command);
+ * // { // ListReceiptFiltersResponse
+ * //   Filters: [ // ReceiptFilterList
+ * //     { // ReceiptFilter
+ * //       Name: "STRING_VALUE", // required
+ * //       IpFilter: { // ReceiptIpFilter
+ * //         Policy: "Block" || "Allow", // required
+ * //         Cidr: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListReceiptFiltersCommandInput - {@link ListReceiptFiltersCommandInput}
+ * @returns {@link ListReceiptFiltersCommandOutput}
  * @see {@link ListReceiptFiltersCommandInput} for command's `input` shape.
  * @see {@link ListReceiptFiltersCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @example ListReceiptFilters
+ * ```javascript
+ * // The following example lists the IP address filters that are associated with an AWS account:
+ * const input = { /* empty *\/ };
+ * const command = new ListReceiptFiltersCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Filters: [
+ *     {
+ *       IpFilter: {
+ *         Cidr: "1.2.3.4/24",
+ *         Policy: "Block"
+ *       },
+ *       Name: "MyFilter"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListReceiptFiltersCommand extends $Command<
-  ListReceiptFiltersCommandInput,
-  ListReceiptFiltersCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListReceiptFiltersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListReceiptFiltersCommandInput, ListReceiptFiltersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "ListReceiptFiltersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListReceiptFiltersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListReceiptFiltersResponse.filterSensitiveLog,
+export class ListReceiptFiltersCommand extends command<ListReceiptFiltersCommandInput, ListReceiptFiltersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListReceiptFilters",
+  ListReceiptFilters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: ListReceiptFiltersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListReceiptFiltersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListReceiptFiltersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListReceiptFiltersCommandOutput> {
-    return deserializeAws_queryListReceiptFiltersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListReceiptFiltersCommandInput;
+      output: ListReceiptFiltersCommandOutput;
+    };
+  };
 }

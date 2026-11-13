@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { UpdateRouteRequest, UpdateRouteResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRouteCommand,
-  serializeAws_restJson1UpdateRouteCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRouteRequest, UpdateRouteResult } from "../models/models_0";
+import { UpdateRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRouteCommand}.
+ */
 export interface UpdateRouteCommandInput extends UpdateRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRouteCommand}.
+ */
 export interface UpdateRouteCommandOutput extends UpdateRouteResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,99 @@ export interface UpdateRouteCommandOutput extends UpdateRouteResult, __MetadataB
  * ```javascript
  * import { ApiGatewayV2Client, UpdateRouteCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, UpdateRouteCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // UpdateRouteRequest
+ *   ApiId: "STRING_VALUE", // required
+ *   ApiKeyRequired: true || false,
+ *   AuthorizationScopes: [ // AuthorizationScopes
+ *     "STRING_VALUE",
+ *   ],
+ *   AuthorizationType: "NONE" || "AWS_IAM" || "CUSTOM" || "JWT",
+ *   AuthorizerId: "STRING_VALUE",
+ *   ModelSelectionExpression: "STRING_VALUE",
+ *   OperationName: "STRING_VALUE",
+ *   RequestModels: { // RouteModels
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   RequestParameters: { // RouteParameters
+ *     "<keys>": { // ParameterConstraints
+ *       Required: true || false,
+ *     },
+ *   },
+ *   RouteId: "STRING_VALUE", // required
+ *   RouteKey: "STRING_VALUE",
+ *   RouteResponseSelectionExpression: "STRING_VALUE",
+ *   Target: "STRING_VALUE",
+ * };
  * const command = new UpdateRouteCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRouteResult
+ * //   ApiGatewayManaged: true || false,
+ * //   ApiKeyRequired: true || false,
+ * //   AuthorizationScopes: [ // AuthorizationScopes
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   AuthorizationType: "NONE" || "AWS_IAM" || "CUSTOM" || "JWT",
+ * //   AuthorizerId: "STRING_VALUE",
+ * //   ModelSelectionExpression: "STRING_VALUE",
+ * //   OperationName: "STRING_VALUE",
+ * //   RequestModels: { // RouteModels
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   RequestParameters: { // RouteParameters
+ * //     "<keys>": { // ParameterConstraints
+ * //       Required: true || false,
+ * //     },
+ * //   },
+ * //   RouteId: "STRING_VALUE",
+ * //   RouteKey: "STRING_VALUE",
+ * //   RouteResponseSelectionExpression: "STRING_VALUE",
+ * //   Target: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateRouteCommandInput - {@link UpdateRouteCommandInput}
+ * @returns {@link UpdateRouteCommandOutput}
  * @see {@link UpdateRouteCommandInput} for command's `input` shape.
  * @see {@link UpdateRouteCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRouteCommand extends $Command<
-  UpdateRouteCommandInput,
-  UpdateRouteCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRouteCommandInput, UpdateRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "UpdateRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRouteResult.filterSensitiveLog,
+export class UpdateRouteCommand extends command<UpdateRouteCommandInput, UpdateRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRoute",
+  UpdateRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRouteRequest;
+      output: UpdateRouteResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRouteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRouteCommandOutput> {
-    return deserializeAws_restJson1UpdateRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRouteCommandInput;
+      output: UpdateRouteCommandOutput;
+    };
+  };
 }

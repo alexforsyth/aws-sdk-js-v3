@@ -1,25 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTDataPlaneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTDataPlaneClient";
-import { GetThingShadowRequest, GetThingShadowResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetThingShadowCommand,
-  serializeAws_restJson1GetThingShadowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetThingShadowRequest, GetThingShadowResponse } from "../models/models_0";
+import { GetThingShadow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetThingShadowCommand}.
+ */
 export interface GetThingShadowCommandInput extends GetThingShadowRequest {}
-export interface GetThingShadowCommandOutput extends GetThingShadowResponse, __MetadataBearer {}
+/**
+ * @public
+ */
+export type GetThingShadowCommandOutputType = Omit<GetThingShadowResponse, "payload"> & {
+  payload?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetThingShadowCommand}.
+ */
+export interface GetThingShadowCommandOutput extends GetThingShadowCommandOutputType, __MetadataBearer {}
 
 /**
  * <p>Gets the shadow for the specified thing.</p>
@@ -31,68 +40,72 @@ export interface GetThingShadowCommandOutput extends GetThingShadowResponse, __M
  * ```javascript
  * import { IoTDataPlaneClient, GetThingShadowCommand } from "@aws-sdk/client-iot-data-plane"; // ES Modules import
  * // const { IoTDataPlaneClient, GetThingShadowCommand } = require("@aws-sdk/client-iot-data-plane"); // CommonJS import
+ * // import type { IoTDataPlaneClientConfig } from "@aws-sdk/client-iot-data-plane";
+ * const config = {}; // type is IoTDataPlaneClientConfig
  * const client = new IoTDataPlaneClient(config);
+ * const input = { // GetThingShadowRequest
+ *   thingName: "STRING_VALUE", // required
+ *   shadowName: "STRING_VALUE",
+ * };
  * const command = new GetThingShadowCommand(input);
  * const response = await client.send(command);
+ * // { // GetThingShadowResponse
+ * //   payload: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param GetThingShadowCommandInput - {@link GetThingShadowCommandInput}
+ * @returns {@link GetThingShadowCommandOutput}
  * @see {@link GetThingShadowCommandInput} for command's `input` shape.
  * @see {@link GetThingShadowCommandOutput} for command's `response` shape.
- * @see {@link IoTDataPlaneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTDataPlaneClientResolvedConfig | config} for IoTDataPlaneClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The specified combination of HTTP verb and URI is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link UnsupportedDocumentEncodingException} (client fault)
+ *  <p>The document encoding is not supported.</p>
+ *
+ * @throws {@link IoTDataPlaneServiceException}
+ * <p>Base exception class for all service exceptions from IoTDataPlane service.</p>
+ *
+ *
+ * @public
  */
-export class GetThingShadowCommand extends $Command<
-  GetThingShadowCommandInput,
-  GetThingShadowCommandOutput,
-  IoTDataPlaneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetThingShadowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTDataPlaneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetThingShadowCommandInput, GetThingShadowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTDataPlaneClient";
-    const commandName = "GetThingShadowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetThingShadowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetThingShadowResponse.filterSensitiveLog,
+export class GetThingShadowCommand extends command<GetThingShadowCommandInput, GetThingShadowCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetThingShadow",
+  GetThingShadow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetThingShadowRequest;
+      output: GetThingShadowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetThingShadowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetThingShadowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetThingShadowCommandOutput> {
-    return deserializeAws_restJson1GetThingShadowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetThingShadowCommandInput;
+      output: GetThingShadowCommandOutput;
+    };
+  };
 }

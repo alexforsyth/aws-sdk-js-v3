@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { BatchUpdatePartitionRequest, BatchUpdatePartitionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchUpdatePartitionCommand,
-  serializeAws_json1_1BatchUpdatePartitionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchUpdatePartitionRequest, BatchUpdatePartitionResponse } from "../models/models_0";
+import { BatchUpdatePartition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchUpdatePartitionCommand}.
+ */
 export interface BatchUpdatePartitionCommandInput extends BatchUpdatePartitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchUpdatePartitionCommand}.
+ */
 export interface BatchUpdatePartitionCommandOutput extends BatchUpdatePartitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,150 @@ export interface BatchUpdatePartitionCommandOutput extends BatchUpdatePartitionR
  * ```javascript
  * import { GlueClient, BatchUpdatePartitionCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, BatchUpdatePartitionCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // BatchUpdatePartitionRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   TableName: "STRING_VALUE", // required
+ *   Entries: [ // BatchUpdatePartitionRequestEntryList // required
+ *     { // BatchUpdatePartitionRequestEntry
+ *       PartitionValueList: [ // BoundedPartitionValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *       PartitionInput: { // PartitionInput
+ *         Values: [ // ValueStringList
+ *           "STRING_VALUE",
+ *         ],
+ *         LastAccessTime: new Date("TIMESTAMP"),
+ *         StorageDescriptor: { // StorageDescriptor
+ *           Columns: [ // ColumnList
+ *             { // Column
+ *               Name: "STRING_VALUE", // required
+ *               Type: "STRING_VALUE",
+ *               Comment: "STRING_VALUE",
+ *               Parameters: { // ParametersMap
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *             },
+ *           ],
+ *           Location: "STRING_VALUE",
+ *           AdditionalLocations: [ // LocationStringList
+ *             "STRING_VALUE",
+ *           ],
+ *           InputFormat: "STRING_VALUE",
+ *           OutputFormat: "STRING_VALUE",
+ *           Compressed: true || false,
+ *           NumberOfBuckets: Number("int"),
+ *           SerdeInfo: { // SerDeInfo
+ *             Name: "STRING_VALUE",
+ *             SerializationLibrary: "STRING_VALUE",
+ *             Parameters: {
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *           },
+ *           BucketColumns: [ // NameStringList
+ *             "STRING_VALUE",
+ *           ],
+ *           SortColumns: [ // OrderList
+ *             { // Order
+ *               Column: "STRING_VALUE", // required
+ *               SortOrder: Number("int"), // required
+ *             },
+ *           ],
+ *           Parameters: "<ParametersMap>",
+ *           SkewedInfo: { // SkewedInfo
+ *             SkewedColumnNames: [
+ *               "STRING_VALUE",
+ *             ],
+ *             SkewedColumnValues: [ // ColumnValueStringList
+ *               "STRING_VALUE",
+ *             ],
+ *             SkewedColumnValueLocationMaps: { // LocationMap
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *           },
+ *           StoredAsSubDirectories: true || false,
+ *           SchemaReference: { // SchemaReference
+ *             SchemaId: { // SchemaId
+ *               SchemaArn: "STRING_VALUE",
+ *               SchemaName: "STRING_VALUE",
+ *               RegistryName: "STRING_VALUE",
+ *             },
+ *             SchemaVersionId: "STRING_VALUE",
+ *             SchemaVersionNumber: Number("long"),
+ *           },
+ *         },
+ *         Parameters: "<ParametersMap>",
+ *         LastAnalyzedTime: new Date("TIMESTAMP"),
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new BatchUpdatePartitionCommand(input);
  * const response = await client.send(command);
+ * // { // BatchUpdatePartitionResponse
+ * //   Errors: [ // BatchUpdatePartitionFailureList
+ * //     { // BatchUpdatePartitionFailureEntry
+ * //       PartitionValueList: [ // BoundedPartitionValueList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ErrorDetail: { // ErrorDetail
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchUpdatePartitionCommandInput - {@link BatchUpdatePartitionCommandInput}
+ * @returns {@link BatchUpdatePartitionCommandOutput}
  * @see {@link BatchUpdatePartitionCommandInput} for command's `input` shape.
  * @see {@link BatchUpdatePartitionCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class BatchUpdatePartitionCommand extends $Command<
-  BatchUpdatePartitionCommandInput,
-  BatchUpdatePartitionCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchUpdatePartitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchUpdatePartitionCommandInput, BatchUpdatePartitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "BatchUpdatePartitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchUpdatePartitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchUpdatePartitionResponse.filterSensitiveLog,
+export class BatchUpdatePartitionCommand extends command<BatchUpdatePartitionCommandInput, BatchUpdatePartitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchUpdatePartition",
+  BatchUpdatePartition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchUpdatePartitionRequest;
+      output: BatchUpdatePartitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchUpdatePartitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchUpdatePartitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchUpdatePartitionCommandOutput> {
-    return deserializeAws_json1_1BatchUpdatePartitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchUpdatePartitionCommandInput;
+      output: BatchUpdatePartitionCommandOutput;
+    };
+  };
 }

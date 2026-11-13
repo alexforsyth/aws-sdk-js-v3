@@ -1,27 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeEnvironmentsCommand, DescribeEnvironmentsCommandInput } from "../commands/DescribeEnvironmentsCommand";
-import { ElasticBeanstalkClient } from "../ElasticBeanstalkClient";
+import {
+  type DescribeEnvironmentsCommandInput,
+  type DescribeEnvironmentsCommandOutput,
+  DescribeEnvironmentsCommand,
+} from "../commands/DescribeEnvironmentsCommand";
+import type { ElasticBeanstalkClient } from "../ElasticBeanstalkClient";
+import type { ElasticBeanstalkSyntheticServiceException } from "../models/ElasticBeanstalkSyntheticServiceException";
 
-const checkState = async (
-  client: ElasticBeanstalkClient,
-  input: DescribeEnvironmentsCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: ElasticBeanstalkClient, input: DescribeEnvironmentsCommandInput): Promise<WaiterResult<DescribeEnvironmentsCommandOutput | ElasticBeanstalkSyntheticServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeEnvironmentsCommand(input));
+    let result: DescribeEnvironmentsCommandOutput & any = await client.send(new DescribeEnvironmentsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Environments);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Environments);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "Ready";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "Ready")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -29,15 +38,15 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Environments);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Environments);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "Launching";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "Launching")
       }
       if (allStringEq_5) {
         return { state: WaiterState.RETRY, reason };
@@ -55,7 +64,7 @@ const checkState = async (
 export const waitForEnvironmentExists = async (
   params: WaiterConfiguration<ElasticBeanstalkClient>,
   input: DescribeEnvironmentsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeEnvironmentsCommandOutput | ElasticBeanstalkSyntheticServiceException>> => {
   const serviceDefaults = { minDelay: 20, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -67,8 +76,8 @@ export const waitForEnvironmentExists = async (
 export const waitUntilEnvironmentExists = async (
   params: WaiterConfiguration<ElasticBeanstalkClient>,
   input: DescribeEnvironmentsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeEnvironmentsCommandOutput>> => {
   const serviceDefaults = { minDelay: 20, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeEnvironmentsCommandOutput>;
 };

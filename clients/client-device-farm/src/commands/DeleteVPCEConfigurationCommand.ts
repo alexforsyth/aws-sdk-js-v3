@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { DeleteVPCEConfigurationRequest, DeleteVPCEConfigurationResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteVPCEConfigurationCommand,
-  serializeAws_json1_1DeleteVPCEConfigurationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteVPCEConfigurationRequest, DeleteVPCEConfigurationResult } from "../models/models_0";
+import { DeleteVPCEConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteVPCEConfigurationCommand}.
+ */
 export interface DeleteVPCEConfigurationCommandInput extends DeleteVPCEConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteVPCEConfigurationCommand}.
+ */
 export interface DeleteVPCEConfigurationCommandOutput extends DeleteVPCEConfigurationResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,58 @@ export interface DeleteVPCEConfigurationCommandOutput extends DeleteVPCEConfigur
  * ```javascript
  * import { DeviceFarmClient, DeleteVPCEConfigurationCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, DeleteVPCEConfigurationCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // DeleteVPCEConfigurationRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteVPCEConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteVPCEConfigurationCommandInput - {@link DeleteVPCEConfigurationCommandInput}
+ * @returns {@link DeleteVPCEConfigurationCommandOutput}
  * @see {@link DeleteVPCEConfigurationCommandInput} for command's `input` shape.
  * @see {@link DeleteVPCEConfigurationCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>There was an error with the update request, or you do not have sufficient permissions
+ *             to update this VPC endpoint configuration.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteVPCEConfigurationCommand extends $Command<
-  DeleteVPCEConfigurationCommandInput,
-  DeleteVPCEConfigurationCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteVPCEConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteVPCEConfigurationCommandInput, DeleteVPCEConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "DeleteVPCEConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteVPCEConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteVPCEConfigurationResult.filterSensitiveLog,
+export class DeleteVPCEConfigurationCommand extends command<DeleteVPCEConfigurationCommandInput, DeleteVPCEConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteVPCEConfiguration",
+  DeleteVPCEConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVPCEConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteVPCEConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteVPCEConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteVPCEConfigurationCommandOutput> {
-    return deserializeAws_json1_1DeleteVPCEConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteVPCEConfigurationCommandInput;
+      output: DeleteVPCEConfigurationCommandOutput;
+    };
+  };
 }

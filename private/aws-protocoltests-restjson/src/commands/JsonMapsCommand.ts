@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { JsonMapsInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1JsonMapsCommand,
-  serializeAws_restJson1JsonMapsCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { JsonMapsInputOutput } from "../models/models_0";
+import { de_JsonMapsCommand, se_JsonMapsCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link JsonMapsCommand}.
+ */
 export interface JsonMapsCommandInput extends JsonMapsInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link JsonMapsCommand}.
+ */
 export interface JsonMapsCommandOutput extends JsonMapsInputOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +37,98 @@ export interface JsonMapsCommandOutput extends JsonMapsInputOutput, __MetadataBe
  * ```javascript
  * import { RestJsonProtocolClient, JsonMapsCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, JsonMapsCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // JsonMapsInputOutput
+ *   denseStructMap: { // DenseStructMap
+ *     "<keys>": { // GreetingStruct
+ *       hi: "STRING_VALUE",
+ *     },
+ *   },
+ *   denseNumberMap: { // DenseNumberMap
+ *     "<keys>": Number("int"),
+ *   },
+ *   denseBooleanMap: { // DenseBooleanMap
+ *     "<keys>": true || false,
+ *   },
+ *   denseStringMap: { // DenseStringMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   denseSetMap: { // DenseSetMap
+ *     "<keys>": [ // StringSet
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new JsonMapsCommand(input);
  * const response = await client.send(command);
+ * // { // JsonMapsInputOutput
+ * //   denseStructMap: { // DenseStructMap
+ * //     "<keys>": { // GreetingStruct
+ * //       hi: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   denseNumberMap: { // DenseNumberMap
+ * //     "<keys>": Number("int"),
+ * //   },
+ * //   denseBooleanMap: { // DenseBooleanMap
+ * //     "<keys>": true || false,
+ * //   },
+ * //   denseStringMap: { // DenseStringMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   denseSetMap: { // DenseSetMap
+ * //     "<keys>": [ // StringSet
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param JsonMapsCommandInput - {@link JsonMapsCommandInput}
+ * @returns {@link JsonMapsCommandOutput}
  * @see {@link JsonMapsCommandInput} for command's `input` shape.
  * @see {@link JsonMapsCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class JsonMapsCommand extends $Command<
-  JsonMapsCommandInput,
-  JsonMapsCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: JsonMapsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<JsonMapsCommandInput, JsonMapsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "JsonMapsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: JsonMapsInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: JsonMapsInputOutput.filterSensitiveLog,
+export class JsonMapsCommand extends $Command
+  .classBuilder<
+    JsonMapsCommandInput,
+    JsonMapsCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "JsonMaps", {})
+  .n("RestJsonProtocolClient", "JsonMapsCommand")
+  .f(void 0, void 0)
+  .ser(se_JsonMapsCommand)
+  .de(de_JsonMapsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: JsonMapsInputOutput;
+      output: JsonMapsInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: JsonMapsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1JsonMapsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<JsonMapsCommandOutput> {
-    return deserializeAws_restJson1JsonMapsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: JsonMapsCommandInput;
+      output: JsonMapsCommandOutput;
+    };
+  };
 }

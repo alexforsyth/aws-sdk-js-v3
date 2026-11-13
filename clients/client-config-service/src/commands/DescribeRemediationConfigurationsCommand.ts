@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeRemediationConfigurationsRequest,
   DescribeRemediationConfigurationsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeRemediationConfigurationsCommand,
-  serializeAws_json1_1DescribeRemediationConfigurationsCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeRemediationConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRemediationConfigurationsCommand}.
+ */
 export interface DescribeRemediationConfigurationsCommandInput extends DescribeRemediationConfigurationsRequest {}
-export interface DescribeRemediationConfigurationsCommandOutput
-  extends DescribeRemediationConfigurationsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRemediationConfigurationsCommand}.
+ */
+export interface DescribeRemediationConfigurationsCommandOutput extends DescribeRemediationConfigurationsResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the details of one or more remediation configurations.</p>
@@ -33,74 +32,80 @@ export interface DescribeRemediationConfigurationsCommandOutput
  * ```javascript
  * import { ConfigServiceClient, DescribeRemediationConfigurationsCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DescribeRemediationConfigurationsCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DescribeRemediationConfigurationsRequest
+ *   ConfigRuleNames: [ // ConfigRuleNames // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeRemediationConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRemediationConfigurationsResponse
+ * //   RemediationConfigurations: [ // RemediationConfigurations
+ * //     { // RemediationConfiguration
+ * //       ConfigRuleName: "STRING_VALUE", // required
+ * //       TargetType: "SSM_DOCUMENT", // required
+ * //       TargetId: "STRING_VALUE", // required
+ * //       TargetVersion: "STRING_VALUE",
+ * //       Parameters: { // RemediationParameters
+ * //         "<keys>": { // RemediationParameterValue
+ * //           ResourceValue: { // ResourceValue
+ * //             Value: "RESOURCE_ID", // required
+ * //           },
+ * //           StaticValue: { // StaticValue
+ * //             Values: [ // StaticParameterValues // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //       ResourceType: "STRING_VALUE",
+ * //       Automatic: true || false,
+ * //       ExecutionControls: { // ExecutionControls
+ * //         SsmControls: { // SsmControls
+ * //           ConcurrentExecutionRatePercentage: Number("int"),
+ * //           ErrorPercentage: Number("int"),
+ * //         },
+ * //       },
+ * //       MaximumAutomaticAttempts: Number("int"),
+ * //       RetryAttemptSeconds: Number("long"),
+ * //       Arn: "STRING_VALUE",
+ * //       CreatedByService: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeRemediationConfigurationsCommandInput - {@link DescribeRemediationConfigurationsCommandInput}
+ * @returns {@link DescribeRemediationConfigurationsCommandOutput}
  * @see {@link DescribeRemediationConfigurationsCommandInput} for command's `input` shape.
  * @see {@link DescribeRemediationConfigurationsCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeRemediationConfigurationsCommand extends $Command<
-  DescribeRemediationConfigurationsCommandInput,
-  DescribeRemediationConfigurationsCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRemediationConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRemediationConfigurationsCommandInput, DescribeRemediationConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DescribeRemediationConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRemediationConfigurationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRemediationConfigurationsResponse.filterSensitiveLog,
+export class DescribeRemediationConfigurationsCommand extends command<DescribeRemediationConfigurationsCommandInput, DescribeRemediationConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRemediationConfigurations",
+  DescribeRemediationConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRemediationConfigurationsRequest;
+      output: DescribeRemediationConfigurationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeRemediationConfigurationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeRemediationConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeRemediationConfigurationsCommandOutput> {
-    return deserializeAws_json1_1DescribeRemediationConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRemediationConfigurationsCommandInput;
+      output: DescribeRemediationConfigurationsCommandOutput;
+    };
+  };
 }

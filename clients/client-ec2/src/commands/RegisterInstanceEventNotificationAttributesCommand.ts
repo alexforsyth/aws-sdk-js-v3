@@ -1,112 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   RegisterInstanceEventNotificationAttributesRequest,
   RegisterInstanceEventNotificationAttributesResult,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2RegisterInstanceEventNotificationAttributesCommand,
-  serializeAws_ec2RegisterInstanceEventNotificationAttributesCommand,
-} from "../protocols/Aws_ec2";
-
-export interface RegisterInstanceEventNotificationAttributesCommandInput
-  extends RegisterInstanceEventNotificationAttributesRequest {}
-export interface RegisterInstanceEventNotificationAttributesCommandOutput
-  extends RegisterInstanceEventNotificationAttributesResult,
-    __MetadataBearer {}
+} from "../models/models_8";
+import { RegisterInstanceEventNotificationAttributes$ } from "../schemas/schemas_0";
 
 /**
- * <p>Registers a set of tag keys to include in scheduled event notifications for your resources.
- *    		</p>
- *          <p>To remove tags, use .</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterInstanceEventNotificationAttributesCommand}.
+ */
+export interface RegisterInstanceEventNotificationAttributesCommandInput extends RegisterInstanceEventNotificationAttributesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterInstanceEventNotificationAttributesCommand}.
+ */
+export interface RegisterInstanceEventNotificationAttributesCommandOutput extends RegisterInstanceEventNotificationAttributesResult, __MetadataBearer {}
+
+/**
+ * <p>Registers a set of tag keys to include in scheduled event notifications for your
+ *          resources.
+ *          </p>
+ *          <p>To remove tags, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeregisterInstanceEventNotificationAttributes.html">DeregisterInstanceEventNotificationAttributes</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, RegisterInstanceEventNotificationAttributesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, RegisterInstanceEventNotificationAttributesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // RegisterInstanceEventNotificationAttributesRequest
+ *   DryRun: true || false,
+ *   InstanceTagAttribute: { // RegisterInstanceTagAttributeRequest
+ *     IncludeAllTagsOfInstance: true || false,
+ *     InstanceTagKeys: [ // InstanceTagKeySet
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new RegisterInstanceEventNotificationAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterInstanceEventNotificationAttributesResult
+ * //   InstanceTagAttribute: { // InstanceTagNotificationAttribute
+ * //     InstanceTagKeys: [ // InstanceTagKeySet
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     IncludeAllTagsOfInstance: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RegisterInstanceEventNotificationAttributesCommandInput - {@link RegisterInstanceEventNotificationAttributesCommandInput}
+ * @returns {@link RegisterInstanceEventNotificationAttributesCommandOutput}
  * @see {@link RegisterInstanceEventNotificationAttributesCommandInput} for command's `input` shape.
  * @see {@link RegisterInstanceEventNotificationAttributesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterInstanceEventNotificationAttributesCommand extends $Command<
-  RegisterInstanceEventNotificationAttributesCommandInput,
-  RegisterInstanceEventNotificationAttributesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterInstanceEventNotificationAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    RegisterInstanceEventNotificationAttributesCommandInput,
-    RegisterInstanceEventNotificationAttributesCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "RegisterInstanceEventNotificationAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterInstanceEventNotificationAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterInstanceEventNotificationAttributesResult.filterSensitiveLog,
+export class RegisterInstanceEventNotificationAttributesCommand extends command<RegisterInstanceEventNotificationAttributesCommandInput, RegisterInstanceEventNotificationAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterInstanceEventNotificationAttributes",
+  RegisterInstanceEventNotificationAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterInstanceEventNotificationAttributesRequest;
+      output: RegisterInstanceEventNotificationAttributesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RegisterInstanceEventNotificationAttributesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2RegisterInstanceEventNotificationAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RegisterInstanceEventNotificationAttributesCommandOutput> {
-    return deserializeAws_ec2RegisterInstanceEventNotificationAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterInstanceEventNotificationAttributesCommandInput;
+      output: RegisterInstanceEventNotificationAttributesCommandOutput;
+    };
+  };
 }

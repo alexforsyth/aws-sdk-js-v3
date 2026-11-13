@@ -1,0 +1,502 @@
+# Change Log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 3.0.71 (2026-11-10)
+### Chores
+* **codegen:** sync for 2026 retry defaults ([#8415](https://github.com/aws/aws-sdk-js-v3/issues/8415)) ([4fd26c2](https://github.com/aws/aws-sdk-js-v3/commit/4fd26c205f8b01b7755b426c7149e4038690563f))
+
+
+
+# 3.0.70 (2026-11-08)
+### Chores
+* **codegen:** Upgrade to Smithy 1.74.1 ([#8407](https://github.com/aws/aws-sdk-js-v3/issues/8407)) ([bb818ca](https://github.com/aws/aws-sdk-js-v3/commit/bb818ca944e735d449b6f061141b91d92290f161))
+
+
+
+# 3.0.69 (2026-11-06)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.68 (2026-11-04)
+### Bug Fixes
+* **snapshot-testing:** add camelCase checksumAlgorithm to customFields ([#8403](https://github.com/aws/aws-sdk-js-v3/issues/8403)) ([0bde7a7](https://github.com/aws/aws-sdk-js-v3/commit/0bde7a791084dfefae6a98ddcf7c9e8da8da3754))
+
+
+
+# 3.0.67 (2026-11-04)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.66 (2026-10-29)
+### Chores
+* **codegen:** sync to new smithy handler changes ([#8390](https://github.com/aws/aws-sdk-js-v3/issues/8390)) ([f393101](https://github.com/aws/aws-sdk-js-v3/commit/f393101c0e651bd0c9fda6ff24b7ede3b5e96869))
+
+
+
+# 3.0.65 (2026-10-29)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.64 (2026-10-28)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.63 (2026-10-26)
+### Chores
+* **codegen:** sync for service default socket timeout and RPC v2 JSON ([#8378](https://github.com/aws/aws-sdk-js-v3/issues/8378)) ([f9d9119](https://github.com/aws/aws-sdk-js-v3/commit/f9d9119f02ea9ed0e0c2ab486b308cac15139651))
+
+
+
+# 3.0.62 (2026-10-21)
+### Chores
+* **codegen:** sync for JSON string serializer buffer fix and retryMode docs link ([#8373](https://github.com/aws/aws-sdk-js-v3/issues/8373)) ([5f53137](https://github.com/aws/aws-sdk-js-v3/commit/5f53137d303161693250579a6a6dd3c501655276))
+
+
+
+# 3.0.61 (2026-10-15)
+### Chores
+* **codegen:** sync for JSON codec and schema server plugin ([#8353](https://github.com/aws/aws-sdk-js-v3/issues/8353)) ([3e350b5](https://github.com/aws/aws-sdk-js-v3/commit/3e350b59848e2bffcfe4d34a628e7adc136a6a55))
+
+
+
+# 3.0.60 (2026-10-12)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.59 (2026-10-08)
+### Chores
+* **codegen:** sync for endpoint cache fix and pre-schema error fallback ([#8341](https://github.com/aws/aws-sdk-js-v3/issues/8341)) ([5773a75](https://github.com/aws/aws-sdk-js-v3/commit/5773a7515472dbdf2760c61e4a462b71800c50e7))
+
+
+
+# 3.0.58 (2026-09-22)
+### Chores
+* **codegen:** sync for MetricsRecorder support and core error/retry fixes ([#8312](https://github.com/aws/aws-sdk-js-v3/issues/8312)) ([9a10476](https://github.com/aws/aws-sdk-js-v3/commit/9a104768684e8f22d4373fcc5d910711e62676d6))
+
+
+
+# 3.0.57 (2026-09-09)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.56 (2026-08-20)
+### Chores
+* **codegen:** update to sync with the latest smithy-ts ([#8272](https://github.com/aws/aws-sdk-js-v3/issues/8272)) ([8369ada](https://github.com/aws/aws-sdk-js-v3/commit/8369ada75d60056e24e1ee8bca20f16ce2faea93))
+
+
+
+# 3.0.55 (2026-08-14)
+### Chores
+* upgrade to typescript 7 ([#8264](https://github.com/aws/aws-sdk-js-v3/issues/8264)) ([ca81fbb](https://github.com/aws/aws-sdk-js-v3/commit/ca81fbb7398345aa31482dd7aa1971bccf278989))
+
+
+
+# 3.0.54 (2026-08-11)
+### Chores
+* upgrade to typescript 6 ([#8257](https://github.com/aws/aws-sdk-js-v3/issues/8257)) ([edabd4a](https://github.com/aws/aws-sdk-js-v3/commit/edabd4a5228e259e9f3352cd47414069db755188))
+
+
+
+# 3.0.53 (2026-08-04)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.52 (2026-08-03)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.51 (2026-07-31)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.50 (2026-07-29)
+### Chores
+* **codegen:** sync for CBOR v2 codec ([#8233](https://github.com/aws/aws-sdk-js-v3/issues/8233)) ([e40ebac](https://github.com/aws/aws-sdk-js-v3/commit/e40ebac154aa3b00115df867d7b59f0841ffc24f))
+
+
+
+# 3.0.49 (2026-07-28)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.48 (2026-07-27)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.47 (2026-07-23)
+### Chores
+* **codegen:** sync for CBOR large map deser, event-streams exceptions, endpoints features, ChecksumStream fix ([#8218](https://github.com/aws/aws-sdk-js-v3/issues/8218)) ([bb564e5](https://github.com/aws/aws-sdk-js-v3/commit/bb564e5734205dc1ba99d5c33ce49918a538cb23))
+
+
+
+# 3.0.46 (2026-07-21)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.45 (2026-07-15)
+### Chores
+* **codegen:** sync to use typesVersions entries for submodules ([#8195](https://github.com/aws/aws-sdk-js-v3/issues/8195)) ([d43e5bf](https://github.com/aws/aws-sdk-js-v3/commit/d43e5bfc231fee6cbcf6024b6ed6b69e3864068c))
+
+
+
+# 3.0.44 (2026-07-14)
+### Chores
+* **codegen:** sync for codegen and include OAuthIAM operation for signin list ([#8190](https://github.com/aws/aws-sdk-js-v3/issues/8190)) ([a20c28d](https://github.com/aws/aws-sdk-js-v3/commit/a20c28def4c915546f0579dbfa50a736bd9fae57))
+
+
+
+# 3.0.43 (2026-07-08)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.42 (2026-07-08)
+### Chores
+* **codegen:** sync for isolatedModules tsconfig and server metrics recorder ([#8174](https://github.com/aws/aws-sdk-js-v3/issues/8174)) ([f8b4987](https://github.com/aws/aws-sdk-js-v3/commit/f8b4987c1d5b52966d536b36200496ea490327b1))
+* use isolatedModules for types ([#8164](https://github.com/aws/aws-sdk-js-v3/issues/8164)) ([f274899](https://github.com/aws/aws-sdk-js-v3/commit/f274899d4ecfef189ed7f9b4d5d02c450e11d84d))
+* **deps:** bump '@smithy/core' to ^3.29.1 ([#8167](https://github.com/aws/aws-sdk-js-v3/issues/8167)) ([8f43c79](https://github.com/aws/aws-sdk-js-v3/commit/8f43c790d2d05f793e719773f74ee10e0f49f00d))
+
+
+
+# 3.0.41 (2026-07-07)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.40 (2026-07-06)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.39 (2026-07-02)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.38 (2026-07-01)
+### Chores
+* **codegen:** sync for thinner command classes, endpoint parameter type fix ([#8136](https://github.com/aws/aws-sdk-js-v3/issues/8136)) ([c39b676](https://github.com/aws/aws-sdk-js-v3/commit/c39b6765a3b49a48a9e2f4000cc6e97e82f4ae2e))
+
+
+
+# 3.0.37 (2026-06-30)
+### Chores
+* **codegen:** sync for internal checksum impls and IMDSv2 region fallback ([#8134](https://github.com/aws/aws-sdk-js-v3/issues/8134)) ([c4b42a4](https://github.com/aws/aws-sdk-js-v3/commit/c4b42a44f7f9b7eaa329fcd2c4961bec6334f111))
+
+
+
+# 3.0.36 (2026-06-29)
+### Chores
+* **codegen:** sync for checksum impls, hostLabel validation ([#8127](https://github.com/aws/aws-sdk-js-v3/issues/8127)) ([aa94fa0](https://github.com/aws/aws-sdk-js-v3/commit/aa94fa0469fa7e0933a4b36b4e6329fa88ee33ab))
+* **codegen:** sync for CBOR serde performance and retry fixes ([#8125](https://github.com/aws/aws-sdk-js-v3/issues/8125)) ([b6d6a75](https://github.com/aws/aws-sdk-js-v3/commit/b6d6a759f15f2c36745fb85905a90533998cae0e))
+
+
+
+# 3.0.35 (2026-06-22)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.34 (2026-06-17)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.33 (2026-06-13)
+### Chores
+* **scripts:** tuning the build graph ([#8095](https://github.com/aws/aws-sdk-js-v3/issues/8095)) ([67981c5](https://github.com/aws/aws-sdk-js-v3/commit/67981c5a65d6dd797a065df034a8d0fcdaa9b7bd))
+
+
+
+# 3.0.32 (2026-06-09)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.31 (2026-06-08)
+### Chores
+* **scripts:** update pkg json linting ([#8082](https://github.com/aws/aws-sdk-js-v3/issues/8082)) ([86792c5](https://github.com/aws/aws-sdk-js-v3/commit/86792c5e3b9c0b697161a5a14ef119153d1c17f5))
+
+
+
+# 3.0.30 (2026-06-05)
+### Chores
+* update author URL in package.json ([#8080](https://github.com/aws/aws-sdk-js-v3/issues/8080)) ([9bd1a86](https://github.com/aws/aws-sdk-js-v3/commit/9bd1a86b9bec0f69c58dcfdda481c9e1797dd73f))
+
+
+
+# 3.0.29 (2026-06-03)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.28 (2026-06-01)
+### Chores
+* **codegen:** sync for adaptive retry fix, EAI_AGAIN transient error ([#8067](https://github.com/aws/aws-sdk-js-v3/issues/8067)) ([6b082a6](https://github.com/aws/aws-sdk-js-v3/commit/6b082a6526a0bb0ba213bb16b4c97a0b1134bc45))
+
+
+
+# 3.0.27 (2026-05-28)
+### Chores
+* **codegen:** sync for smithy 1.71.0 and snapshot-testing fix ([#8053](https://github.com/aws/aws-sdk-js-v3/issues/8053)) ([e55a387](https://github.com/aws/aws-sdk-js-v3/commit/e55a38791745be6ed4be7009808d14a2a393adf9))
+
+
+
+# 3.0.26 (2026-05-27)
+### Chores
+* **codegen:** sync for cyclic file dependency fixes ([#8051](https://github.com/aws/aws-sdk-js-v3/issues/8051)) ([7ae617c](https://github.com/aws/aws-sdk-js-v3/commit/7ae617c43c11caf24ee171cb5f6eede64d5eeba7))
+
+
+
+# 3.0.25 (2026-05-26)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.24 (2026-05-20)
+### Chores
+* **codegen:** update @smithy dependencies ([#8038](https://github.com/aws/aws-sdk-js-v3/issues/8038)) ([0d6242d](https://github.com/aws/aws-sdk-js-v3/commit/0d6242dc938f36ac77e337d39f577e8727f87926))
+
+
+
+# 3.0.23 (2026-05-18)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.22 (2026-05-14)
+### Chores
+* **codegen:** sync for browser bundle fixes ([#8022](https://github.com/aws/aws-sdk-js-v3/issues/8022)) ([eabae7d](https://github.com/aws/aws-sdk-js-v3/commit/eabae7d848238fedb6336c2f2d13b81c6cd9d146))
+
+
+
+# 3.0.21 (2026-05-14)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.20 (2026-05-12)
+### Chores
+* **codegen:** dependency version bump ([#8008](https://github.com/aws/aws-sdk-js-v3/issues/8008)) ([9ce20f6](https://github.com/aws/aws-sdk-js-v3/commit/9ce20f6d16352cd5747d9555e2b75e9462ea8ae9))
+* update smithy/core imports ([#7979](https://github.com/aws/aws-sdk-js-v3/issues/7979)) ([acffbf9](https://github.com/aws/aws-sdk-js-v3/commit/acffbf906165501879a9e57b4f1b63deecbe63ea))
+
+
+
+# 3.0.19 (2026-05-01)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.18 (2026-04-29)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.17 (2026-04-27)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.16 (2026-04-23)
+### Chores
+* **codegen:** sync for http2 session closure, retry longpoll backoff, and fast-xml-parser version bump ([#7958](https://github.com/aws/aws-sdk-js-v3/issues/7958)) ([107aefc](https://github.com/aws/aws-sdk-js-v3/commit/107aefc4d41379a56836ade376f27eef23db8d43))
+
+
+
+# 3.0.15 (2026-04-22)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.14 (2026-04-20)
+### Chores
+* **codegen:** sync for http2 session concurrency fixes ([#7942](https://github.com/aws/aws-sdk-js-v3/issues/7942)) ([273ad5b](https://github.com/aws/aws-sdk-js-v3/commit/273ad5be3adc5288e480655de1c5887a38540fe4))
+
+
+
+# 3.0.13 (2026-04-20)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.12 (2026-04-17)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.11 (2026-04-16)
+### Chores
+* upgrade smithy to 1.69.0 ([#7932](https://github.com/aws/aws-sdk-js-v3/issues/7932)) ([560d987](https://github.com/aws/aws-sdk-js-v3/commit/560d9878471409e943a80ac2979e7fc8c2fff834))
+
+
+
+# 3.0.10 (2026-04-07)
+### Chores
+* **codegen:** update for sparse types and retry 2.1 updates ([#7916](https://github.com/aws/aws-sdk-js-v3/issues/7916)) ([b19357a](https://github.com/aws/aws-sdk-js-v3/commit/b19357a7a6cac4cbe040a6ac429102cfbc378b1e))
+
+
+
+# 3.0.9 (2026-03-30)
+### Chores
+* **codegen:** update smithy package versions ([#7903](https://github.com/aws/aws-sdk-js-v3/issues/7903)) ([c702a75](https://github.com/aws/aws-sdk-js-v3/commit/c702a7595037829166db776cffdfea785588d78a))
+
+
+
+# 3.0.8 (2026-03-26)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.7 (2026-03-23)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.6 (2026-03-20)
+### Tests
+* **snapshot-testing:** fix structure of XML errors from mock service ([#7874](https://github.com/aws/aws-sdk-js-v3/issues/7874)) ([a17511f](https://github.com/aws/aws-sdk-js-v3/commit/a17511fed4a12fd90feb6a923ea7108b53a4c987))
+
+
+
+# 3.0.5 (2026-03-19)
+### Chores
+* **snapshot-testing:** update dependencies.
+
+
+
+# 3.0.4 (2026-03-18)
+### Chores
+* **codegen:** smithy-aws-typescript-codegen 0.47.0 ([#7854](https://github.com/aws/aws-sdk-js-v3/issues/7854)) ([950b0c2](https://github.com/aws/aws-sdk-js-v3/commit/950b0c289001862971810817e57c2adab6313140))
+
+
+
+# 3.0.3 (2026-03-13)
+### Chores
+* **codegen:** sync for retry strategy lifecycle fix ([#7842](https://github.com/aws/aws-sdk-js-v3/issues/7842)) ([7bf8888](https://github.com/aws/aws-sdk-js-v3/commit/7bf8888b2423d2342ea2b689532e526715ec1d50))
+
+
+
+# 3.0.2 (2026-03-10)
+### Tests
+* **snapshot-testing:** error response snapshots ([#7836](https://github.com/aws/aws-sdk-js-v3/issues/7836)) ([0e58193](https://github.com/aws/aws-sdk-js-v3/commit/0e58193f698c5b387bf04e03a4c8721f0d7a5ea7))
+
+
+
+# 3.0.1 (2026-03-09)
+### Tests
+* **snapshot-testing:** implement response snapshots ([#7803](https://github.com/aws/aws-sdk-js-v3/issues/7803)) ([2b96330](https://github.com/aws/aws-sdk-js-v3/commit/2b96330d9048ca3df807a4775da859f76d041554))
+
+

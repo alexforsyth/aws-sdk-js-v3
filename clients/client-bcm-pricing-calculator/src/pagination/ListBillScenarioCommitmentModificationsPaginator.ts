@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import { BCMPricingCalculatorClient } from "../BCMPricingCalculatorClient";
+import {
+  ListBillScenarioCommitmentModificationsCommand,
+  ListBillScenarioCommitmentModificationsCommandInput,
+  ListBillScenarioCommitmentModificationsCommandOutput,
+} from "../commands/ListBillScenarioCommitmentModificationsCommand";
+import type { BCMPricingCalculatorPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListBillScenarioCommitmentModifications: (
+  config: BCMPricingCalculatorPaginationConfiguration,
+  input: ListBillScenarioCommitmentModificationsCommandInput,
+  ...rest: any[]
+) => Paginator<ListBillScenarioCommitmentModificationsCommandOutput> = createPaginator<
+  BCMPricingCalculatorPaginationConfiguration,
+  ListBillScenarioCommitmentModificationsCommandInput,
+  ListBillScenarioCommitmentModificationsCommandOutput
+>(BCMPricingCalculatorClient, ListBillScenarioCommitmentModificationsCommand, "nextToken", "nextToken", "maxResults");

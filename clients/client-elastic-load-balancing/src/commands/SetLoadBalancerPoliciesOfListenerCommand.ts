@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { SetLoadBalancerPoliciesOfListenerInput, SetLoadBalancerPoliciesOfListenerOutput } from "../models/models_0";
-import {
-  deserializeAws_querySetLoadBalancerPoliciesOfListenerCommand,
-  serializeAws_querySetLoadBalancerPoliciesOfListenerCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  SetLoadBalancerPoliciesOfListenerInput,
+  SetLoadBalancerPoliciesOfListenerOutput,
+} from "../models/models_0";
+import { SetLoadBalancerPoliciesOfListener$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetLoadBalancerPoliciesOfListenerCommand}.
+ */
 export interface SetLoadBalancerPoliciesOfListenerCommandInput extends SetLoadBalancerPoliciesOfListenerInput {}
-export interface SetLoadBalancerPoliciesOfListenerCommandOutput
-  extends SetLoadBalancerPoliciesOfListenerOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link SetLoadBalancerPoliciesOfListenerCommand}.
+ */
+export interface SetLoadBalancerPoliciesOfListenerCommandOutput extends SetLoadBalancerPoliciesOfListenerOutput, __MetadataBearer {}
 
 /**
  * <p>Replaces the current set of policies for the specified load balancer port with the specified set of policies.</p>
@@ -40,74 +38,78 @@ export interface SetLoadBalancerPoliciesOfListenerCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, SetLoadBalancerPoliciesOfListenerCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, SetLoadBalancerPoliciesOfListenerCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // SetLoadBalancerPoliciesOfListenerInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   LoadBalancerPort: Number("int"), // required
+ *   PolicyNames: [ // PolicyNames // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new SetLoadBalancerPoliciesOfListenerCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetLoadBalancerPoliciesOfListenerCommandInput - {@link SetLoadBalancerPoliciesOfListenerCommandInput}
+ * @returns {@link SetLoadBalancerPoliciesOfListenerCommandOutput}
  * @see {@link SetLoadBalancerPoliciesOfListenerCommandInput} for command's `input` shape.
  * @see {@link SetLoadBalancerPoliciesOfListenerCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link InvalidConfigurationRequestException} (client fault)
+ *  <p>The requested configuration change is not valid.</p>
+ *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The load balancer does not have a listener configured at the specified port.</p>
+ *
+ * @throws {@link PolicyNotFoundException} (client fault)
+ *  <p>One or more of the specified policies do not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To replace the policies associated with a listener
+ * ```javascript
+ * // This example replaces the policies that are currently associated with the specified listener.
+ * const input = {
+ *   LoadBalancerName: "my-load-balancer",
+ *   LoadBalancerPort: 80,
+ *   PolicyNames: [
+ *     "my-SSLNegotiation-policy"
+ *   ]
+ * };
+ * const command = new SetLoadBalancerPoliciesOfListenerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class SetLoadBalancerPoliciesOfListenerCommand extends $Command<
-  SetLoadBalancerPoliciesOfListenerCommandInput,
-  SetLoadBalancerPoliciesOfListenerCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetLoadBalancerPoliciesOfListenerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetLoadBalancerPoliciesOfListenerCommandInput, SetLoadBalancerPoliciesOfListenerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "SetLoadBalancerPoliciesOfListenerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetLoadBalancerPoliciesOfListenerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: SetLoadBalancerPoliciesOfListenerOutput.filterSensitiveLog,
+export class SetLoadBalancerPoliciesOfListenerCommand extends command<SetLoadBalancerPoliciesOfListenerCommandInput, SetLoadBalancerPoliciesOfListenerCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetLoadBalancerPoliciesOfListener",
+  SetLoadBalancerPoliciesOfListener$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetLoadBalancerPoliciesOfListenerInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: SetLoadBalancerPoliciesOfListenerCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_querySetLoadBalancerPoliciesOfListenerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SetLoadBalancerPoliciesOfListenerCommandOutput> {
-    return deserializeAws_querySetLoadBalancerPoliciesOfListenerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetLoadBalancerPoliciesOfListenerCommandInput;
+      output: SetLoadBalancerPoliciesOfListenerCommandOutput;
+    };
+  };
 }

@@ -1,5 +1,6 @@
-import { Hash } from "@aws-sdk/hash-node";
-import { HttpRequest } from "@aws-sdk/protocol-http";
+import { HttpRequest } from "@smithy/core/protocols";
+import { Hash } from "@smithy/core/serde";
+import { describe, expect, test as it } from "vitest";
 
 import {
   ALGORITHM_IDENTIFIER,
@@ -12,7 +13,8 @@ import {
   SIGNED_HEADERS_QUERY_PARAM,
   UNSIGNED_PAYLOAD,
 } from "./constants";
-import { S3RequestPresigner, S3RequestPresignerOptions } from "./presigner";
+import type { S3RequestPresignerOptions } from "./presigner";
+import { S3RequestPresigner } from "./presigner";
 
 describe("s3 presigner", () => {
   const s3ResolvedConfig: S3RequestPresignerOptions = {
@@ -71,7 +73,7 @@ describe("s3 presigner", () => {
       ...minimalRequest,
       headers: {
         ...minimalRequest.headers,
-        "Content-Type": "application/octet-stream",
+        "content-type": "application/octet-stream",
       },
     };
     const signed = await signer.presign(requestWithContentTypeHeader, presigningOptions);
@@ -108,12 +110,64 @@ describe("s3 presigner", () => {
     expect(signedHeaders).toContain("x-amz-server-side-encryption-customer-algorithm");
   });
 
+  it("should allow hoisting server-side-encryption headers to query when overridden", async () => {
+    const signer = new S3RequestPresigner(s3ResolvedConfig);
+    const signed = await signer.presign(
+      {
+        ...minimalRequest,
+        headers: {
+          ...minimalRequest.headers,
+          "x-amz-server-side-encryption": "kms",
+          "x-amz-server-side-encryption-customer-algorithm": "AES256",
+        },
+      },
+      {
+        hoistableHeaders: new Set(["x-amz-server-side-encryption", "x-amz-server-side-encryption-customer-algorithm"]),
+      }
+    );
+    const signedHeadersHeader = signed.query?.["X-Amz-SignedHeaders"];
+    const signedHeaders =
+      typeof signedHeadersHeader === "string" ? signedHeadersHeader.split(";") : signedHeadersHeader;
+    expect(signedHeaders).not.toContain("x-amz-server-side-encryption");
+    expect(signedHeaders).not.toContain("x-amz-server-side-encryption-customer-algorithm");
+  });
+
   it("should inject host header with port if not supplied", async () => {
     const signer = new S3RequestPresigner(s3ResolvedConfig);
     const port = 12345;
     const signed = await signer.presign({ ...minimalRequest, headers: {}, port });
     expect(signed.headers).toMatchObject({
       host: `${minimalRequest.hostname}:${port}`,
+    });
+  });
+
+  it("should inject host header with port if current host header missing port", async () => {
+    const signer = new S3RequestPresigner(s3ResolvedConfig);
+    const port = 12345;
+    const signed = await signer.presign({
+      ...minimalRequest,
+      headers: {
+        host: minimalRequest.hostname,
+      },
+      port,
+    });
+    expect(signed.headers).toMatchObject({
+      host: `${minimalRequest.hostname}:${port}`,
+    });
+  });
+
+  it("should NOT overwrite host header if different host header is already set", async () => {
+    const signer = new S3RequestPresigner(s3ResolvedConfig);
+    const port = 12345;
+    const signed = await signer.presign({
+      ...minimalRequest,
+      headers: {
+        host: "proxy." + minimalRequest.hostname,
+      },
+      port,
+    });
+    expect(signed.headers).toMatchObject({
+      host: "proxy." + minimalRequest.hostname,
     });
   });
 });

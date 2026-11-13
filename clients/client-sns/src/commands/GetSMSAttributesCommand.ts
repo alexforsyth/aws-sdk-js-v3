@@ -1,96 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetSMSAttributesInput, GetSMSAttributesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryGetSMSAttributesCommand,
-  serializeAws_queryGetSMSAttributesCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSMSAttributesInput, GetSMSAttributesResponse } from "../models/models_0";
+import { GetSMSAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSMSAttributesCommand}.
+ */
 export interface GetSMSAttributesCommandInput extends GetSMSAttributesInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetSMSAttributesCommand}.
+ */
 export interface GetSMSAttributesCommandOutput extends GetSMSAttributesResponse, __MetadataBearer {}
 
 /**
- * <p>Returns the settings for sending SMS messages from your account.</p>
- *         <p>These settings are set with the <code>SetSMSAttributes</code> action.</p>
+ * <p>Returns the settings for sending SMS messages from your Amazon Web Services account.</p>
+ *          <p>These settings are set with the <code>SetSMSAttributes</code> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SNSClient, GetSMSAttributesCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, GetSMSAttributesCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // GetSMSAttributesInput
+ *   attributes: [ // ListString
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new GetSMSAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // GetSMSAttributesResponse
+ * //   attributes: { // MapStringToString
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSMSAttributesCommandInput - {@link GetSMSAttributesCommandInput}
+ * @returns {@link GetSMSAttributesCommandOutput}
  * @see {@link GetSMSAttributesCommandInput} for command's `input` shape.
  * @see {@link GetSMSAttributesCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>Indicates that the rate at which requests have been submitted for this action exceeds the limit for your Amazon Web Services account.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class GetSMSAttributesCommand extends $Command<
-  GetSMSAttributesCommandInput,
-  GetSMSAttributesCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSMSAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSMSAttributesCommandInput, GetSMSAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "GetSMSAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSMSAttributesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSMSAttributesResponse.filterSensitiveLog,
+export class GetSMSAttributesCommand extends command<GetSMSAttributesCommandInput, GetSMSAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSMSAttributes",
+  GetSMSAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSMSAttributesInput;
+      output: GetSMSAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSMSAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetSMSAttributesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSMSAttributesCommandOutput> {
-    return deserializeAws_queryGetSMSAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSMSAttributesCommandInput;
+      output: GetSMSAttributesCommandOutput;
+    };
+  };
 }

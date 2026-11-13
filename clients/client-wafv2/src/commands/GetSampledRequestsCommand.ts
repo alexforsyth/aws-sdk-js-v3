@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetSampledRequestsRequest, GetSampledRequestsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetSampledRequestsCommand,
-  serializeAws_json1_1GetSampledRequestsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFV2ClientResolvedConfig } from "../WAFV2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSampledRequestsRequest, GetSampledRequestsResponse } from "../models/models_0";
+import { GetSampledRequests$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSampledRequestsCommand}.
+ */
 export interface GetSampledRequestsCommandInput extends GetSampledRequestsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSampledRequestsCommand}.
+ */
 export interface GetSampledRequestsCommandOutput extends GetSampledRequestsResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +38,133 @@ export interface GetSampledRequestsCommandOutput extends GetSampledRequestsRespo
  * ```javascript
  * import { WAFV2Client, GetSampledRequestsCommand } from "@aws-sdk/client-wafv2"; // ES Modules import
  * // const { WAFV2Client, GetSampledRequestsCommand } = require("@aws-sdk/client-wafv2"); // CommonJS import
+ * // import type { WAFV2ClientConfig } from "@aws-sdk/client-wafv2";
+ * const config = {}; // type is WAFV2ClientConfig
  * const client = new WAFV2Client(config);
+ * const input = { // GetSampledRequestsRequest
+ *   WebAclArn: "STRING_VALUE", // required
+ *   RuleMetricName: "STRING_VALUE", // required
+ *   Scope: "CLOUDFRONT" || "REGIONAL", // required
+ *   TimeWindow: { // TimeWindow
+ *     StartTime: new Date("TIMESTAMP"), // required
+ *     EndTime: new Date("TIMESTAMP"), // required
+ *   },
+ *   MaxItems: Number("long"), // required
+ * };
  * const command = new GetSampledRequestsCommand(input);
  * const response = await client.send(command);
+ * // { // GetSampledRequestsResponse
+ * //   SampledRequests: [ // SampledHTTPRequests
+ * //     { // SampledHTTPRequest
+ * //       Request: { // HTTPRequest
+ * //         ClientIP: "STRING_VALUE",
+ * //         Country: "STRING_VALUE",
+ * //         URI: "STRING_VALUE",
+ * //         Method: "STRING_VALUE",
+ * //         HTTPVersion: "STRING_VALUE",
+ * //         Headers: [ // HTTPHeaders
+ * //           { // HTTPHeader
+ * //             Name: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //       Weight: Number("long"), // required
+ * //       Timestamp: new Date("TIMESTAMP"),
+ * //       Action: "STRING_VALUE",
+ * //       RuleNameWithinRuleGroup: "STRING_VALUE",
+ * //       RequestHeadersInserted: [
+ * //         {
+ * //           Name: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ResponseCodeSent: Number("int"),
+ * //       Labels: [ // Labels
+ * //         { // Label
+ * //           Name: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       CaptchaResponse: { // CaptchaResponse
+ * //         ResponseCode: Number("int"),
+ * //         SolveTimestamp: Number("long"),
+ * //         FailureReason: "TOKEN_MISSING" || "TOKEN_EXPIRED" || "TOKEN_INVALID" || "TOKEN_DOMAIN_MISMATCH",
+ * //       },
+ * //       ChallengeResponse: { // ChallengeResponse
+ * //         ResponseCode: Number("int"),
+ * //         SolveTimestamp: Number("long"),
+ * //         FailureReason: "TOKEN_MISSING" || "TOKEN_EXPIRED" || "TOKEN_INVALID" || "TOKEN_DOMAIN_MISMATCH",
+ * //       },
+ * //       OverriddenAction: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   PopulationSize: Number("long"),
+ * //   TimeWindow: { // TimeWindow
+ * //     StartTime: new Date("TIMESTAMP"), // required
+ * //     EndTime: new Date("TIMESTAMP"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSampledRequestsCommandInput - {@link GetSampledRequestsCommandInput}
+ * @returns {@link GetSampledRequestsCommandOutput}
  * @see {@link GetSampledRequestsCommandInput} for command's `input` shape.
  * @see {@link GetSampledRequestsCommandOutput} for command's `response` shape.
- * @see {@link WAFV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFV2ClientResolvedConfig | config} for WAFV2Client's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>Your request is valid, but WAF couldn’t perform the operation because of a system
+ *          problem. Retry your request. </p>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because WAF didn't recognize a parameter in the request. For
+ *          example: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified a parameter name or value that isn't valid.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your nested statement isn't valid. You might have tried to nest a statement that
+ *                can’t be nested. </p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that
+ *                isn't among the types available at <a>DefaultAction</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                with which a web ACL can't be associated.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>WAF couldn’t perform the operation because your resource doesn't exist.
+ *        If you've just created a resource that you're using in this operation, you might
+ *        just need to wait a few minutes. It can take from a few seconds to a number of minutes
+ *        for changes to propagate. </p>
+ *
+ * @throws {@link WAFV2ServiceException}
+ * <p>Base exception class for all service exceptions from WAFV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetSampledRequestsCommand extends $Command<
-  GetSampledRequestsCommandInput,
-  GetSampledRequestsCommandOutput,
-  WAFV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSampledRequestsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSampledRequestsCommandInput, GetSampledRequestsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFV2Client";
-    const commandName = "GetSampledRequestsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSampledRequestsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSampledRequestsResponse.filterSensitiveLog,
+export class GetSampledRequestsCommand extends command<GetSampledRequestsCommandInput, GetSampledRequestsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSampledRequests",
+  GetSampledRequests$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSampledRequestsRequest;
+      output: GetSampledRequestsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSampledRequestsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetSampledRequestsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSampledRequestsCommandOutput> {
-    return deserializeAws_json1_1GetSampledRequestsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSampledRequestsCommandInput;
+      output: GetSampledRequestsCommandOutput;
+    };
+  };
 }

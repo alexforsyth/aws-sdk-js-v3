@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { CancelSchemaExtensionRequest, CancelSchemaExtensionResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CancelSchemaExtensionCommand,
-  serializeAws_json1_1CancelSchemaExtensionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelSchemaExtensionRequest, CancelSchemaExtensionResult } from "../models/models_0";
+import { CancelSchemaExtension$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelSchemaExtensionCommand}.
+ */
 export interface CancelSchemaExtensionCommandInput extends CancelSchemaExtensionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelSchemaExtensionCommand}.
+ */
 export interface CancelSchemaExtensionCommandOutput extends CancelSchemaExtensionResult, __MetadataBearer {}
 
 /**
@@ -32,68 +33,69 @@ export interface CancelSchemaExtensionCommandOutput extends CancelSchemaExtensio
  * ```javascript
  * import { DirectoryServiceClient, CancelSchemaExtensionCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, CancelSchemaExtensionCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // CancelSchemaExtensionRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   SchemaExtensionId: "STRING_VALUE", // required
+ * };
  * const command = new CancelSchemaExtensionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CancelSchemaExtensionCommandInput - {@link CancelSchemaExtensionCommandInput}
+ * @returns {@link CancelSchemaExtensionCommandOutput}
  * @see {@link CancelSchemaExtensionCommandInput} for command's `input` shape.
  * @see {@link CancelSchemaExtensionCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To cancel a Microsoft AD schema extension that is in progress
+ * ```javascript
+ * // The following example cancels an in-progress schema extension to a Microsoft AD directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   SchemaExtensionId: "e-926731d2a0"
+ * };
+ * const command = new CancelSchemaExtensionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CancelSchemaExtensionCommand extends $Command<
-  CancelSchemaExtensionCommandInput,
-  CancelSchemaExtensionCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelSchemaExtensionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelSchemaExtensionCommandInput, CancelSchemaExtensionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "CancelSchemaExtensionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelSchemaExtensionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelSchemaExtensionResult.filterSensitiveLog,
+export class CancelSchemaExtensionCommand extends command<CancelSchemaExtensionCommandInput, CancelSchemaExtensionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelSchemaExtension",
+  CancelSchemaExtension$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelSchemaExtensionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelSchemaExtensionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CancelSchemaExtensionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelSchemaExtensionCommandOutput> {
-    return deserializeAws_json1_1CancelSchemaExtensionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelSchemaExtensionCommandInput;
+      output: CancelSchemaExtensionCommandOutput;
+    };
+  };
 }

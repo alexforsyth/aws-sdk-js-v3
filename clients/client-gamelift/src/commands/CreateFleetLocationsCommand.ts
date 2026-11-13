@@ -1,137 +1,153 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { CreateFleetLocationsInput, CreateFleetLocationsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateFleetLocationsCommand,
-  serializeAws_json1_1CreateFleetLocationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFleetLocationsInput, CreateFleetLocationsOutput } from "../models/models_0";
+import { CreateFleetLocations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFleetLocationsCommand}.
+ */
 export interface CreateFleetLocationsCommandInput extends CreateFleetLocationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFleetLocationsCommand}.
+ */
 export interface CreateFleetLocationsCommandOutput extends CreateFleetLocationsOutput, __MetadataBearer {}
 
 /**
- * <p>Adds remote locations to a fleet and begins populating the new locations with EC2
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Adds remote locations to an EC2 fleet and begins populating the new locations with
  *             instances. The new instances conform to the fleet's instance type, auto-scaling, and
- *             other configuration settings. </p>
- *         <note>
- *             <p>This operation cannot be used with fleets that don't support remote locations. Fleets
- *                 can have multiple locations only if they reside in AWS Regions that support this
- *                 feature (see <a>CreateFleet</a> for the complete list) and were created
- *                 after the feature was released in March 2021.</p>
- *         </note>
- *         <p>To add fleet locations, specify the fleet to be updated and provide a list of one or
+ *             other configuration settings.</p>
+ *          <note>
+ *             <p>You can't add remote locations to a fleet that resides in an Amazon Web Services Region that
+ *                 doesn't support multiple locations. Fleets created prior to March 2021 can't support
+ *                 multiple locations.</p>
+ *          </note>
+ *          <p>To add fleet locations, specify the fleet to be updated and provide a list of one or
  *             more locations. </p>
- *         <p>If successful, this operation returns the list of added locations with their status set
- *             to <code>NEW</code>. GameLift initiates the process of starting an instance in each added
- *             location. You can track the status of each new location by monitoring location creation
- *             events using <a>DescribeFleetEvents</a>. Alternatively, you can poll location
- *             status by calling <a>DescribeFleetLocationAttributes</a>. After a location
- *             status becomes <code>ACTIVE</code>, you can adjust the location's capacity as needed
- *             with <a>UpdateFleetCapacity</a>.</p>
- *         <p>
+ *          <p>If successful, this operation returns the list of added locations with their status
+ *             set to <code>NEW</code>. Amazon GameLift Servers initiates the process of starting an instance in each
+ *             added location. You can track the status of each new location by monitoring location
+ *             creation events using <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html">DescribeFleetEvents</a>.</p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up fleets</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up
+ *             fleets</a>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Multi-location fleets</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-editing.html#fleets-update-locations">Update fleet locations</a>
  *          </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>CreateFleetLocations</a> |
- *                     <a>DescribeFleetLocationAttributes</a> |
- *                     <a>DescribeFleetLocationCapacity</a> |
- *                     <a>DescribeFleetLocationUtilization</a> |
- *                     <a>DescribeFleetAttributes</a> |
- *                     <a>DescribeFleetCapacity</a> |
- *                     <a>DescribeFleetUtilization</a> |
- *                     <a>UpdateFleetCapacity</a> |
- *                     <a>StopFleetActions</a> |
- *                     <a>DeleteFleetLocations</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
- *          </p>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html">
+ *                 Amazon GameLift Servers service locations</a> for managed hosting.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, CreateFleetLocationsCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, CreateFleetLocationsCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // CreateFleetLocationsInput
+ *   FleetId: "STRING_VALUE", // required
+ *   Locations: [ // LocationConfigurationList // required
+ *     { // LocationConfiguration
+ *       Location: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateFleetLocationsCommand(input);
  * const response = await client.send(command);
+ * // { // CreateFleetLocationsOutput
+ * //   FleetId: "STRING_VALUE",
+ * //   FleetArn: "STRING_VALUE",
+ * //   LocationStates: [ // LocationStateList
+ * //     { // LocationState
+ * //       Location: "STRING_VALUE",
+ * //       Status: "NEW" || "DOWNLOADING" || "VALIDATING" || "BUILDING" || "ACTIVATING" || "ACTIVE" || "DELETING" || "ERROR" || "TERMINATED" || "NOT_FOUND" || "EXPIRED",
+ * //       PlayerGatewayStatus: "DISABLED" || "ENABLED",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateFleetLocationsCommandInput - {@link CreateFleetLocationsCommandInput}
+ * @returns {@link CreateFleetLocationsCommandOutput}
  * @see {@link CreateFleetLocationsCommandInput} for command's `input` shape.
  * @see {@link CreateFleetLocationsCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service
+ *             resource associated with the request. Resolve the conflict before retrying this
+ *             request.</p>
+ *          <p></p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidFleetStatusException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a resource
+ *             associated with the request and/or the fleet. Resolve the conflict before
+ *             retrying.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The requested operation would cause the resource to exceed the allowed service limit.
+ *             Resolve the issue before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link NotReadyException} (client fault)
+ *  <p> The operation failed because Amazon GameLift Servers has not yet finished validating this compute. We
+ *             recommend attempting 8 to 10 retries over 3 to 5 minutes with <a href="http://aws.amazon.com/blogs/https:/aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/">exponential
+ *                 backoffs and jitter</a>. </p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link UnsupportedRegionException} (client fault)
+ *  <p>The requested operation is not supported in the Region specified.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateFleetLocationsCommand extends $Command<
-  CreateFleetLocationsCommandInput,
-  CreateFleetLocationsCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateFleetLocationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateFleetLocationsCommandInput, CreateFleetLocationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "CreateFleetLocationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateFleetLocationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateFleetLocationsOutput.filterSensitiveLog,
+export class CreateFleetLocationsCommand extends command<CreateFleetLocationsCommandInput, CreateFleetLocationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFleetLocations",
+  CreateFleetLocations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFleetLocationsInput;
+      output: CreateFleetLocationsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateFleetLocationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateFleetLocationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateFleetLocationsCommandOutput> {
-    return deserializeAws_json1_1CreateFleetLocationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateFleetLocationsCommandInput;
+      output: CreateFleetLocationsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { UpdateRecipeRequest, UpdateRecipeResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRecipeCommand,
-  serializeAws_restJson1UpdateRecipeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRecipeRequest, UpdateRecipeResponse } from "../models/models_0";
+import { UpdateRecipe$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRecipeCommand}.
+ */
 export interface UpdateRecipeCommandInput extends UpdateRecipeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRecipeCommand}.
+ */
 export interface UpdateRecipeCommandOutput extends UpdateRecipeResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,71 @@ export interface UpdateRecipeCommandOutput extends UpdateRecipeResponse, __Metad
  * ```javascript
  * import { DataBrewClient, UpdateRecipeCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, UpdateRecipeCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // UpdateRecipeRequest
+ *   Description: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ *   Steps: [ // RecipeStepList
+ *     { // RecipeStep
+ *       Action: { // RecipeAction
+ *         Operation: "STRING_VALUE", // required
+ *         Parameters: { // ParameterMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *       },
+ *       ConditionExpressions: [ // ConditionExpressionList
+ *         { // ConditionExpression
+ *           Condition: "STRING_VALUE", // required
+ *           Value: "STRING_VALUE",
+ *           TargetColumn: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new UpdateRecipeCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRecipeResponse
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateRecipeCommandInput - {@link UpdateRecipeCommandInput}
+ * @returns {@link UpdateRecipeCommandOutput}
  * @see {@link UpdateRecipeCommandInput} for command's `input` shape.
  * @see {@link UpdateRecipeCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRecipeCommand extends $Command<
-  UpdateRecipeCommandInput,
-  UpdateRecipeCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRecipeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRecipeCommandInput, UpdateRecipeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "UpdateRecipeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRecipeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRecipeResponse.filterSensitiveLog,
+export class UpdateRecipeCommand extends command<UpdateRecipeCommandInput, UpdateRecipeCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRecipe",
+  UpdateRecipe$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRecipeRequest;
+      output: UpdateRecipeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRecipeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRecipeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRecipeCommandOutput> {
-    return deserializeAws_restJson1UpdateRecipeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRecipeCommandInput;
+      output: UpdateRecipeCommandOutput;
+    };
+  };
 }

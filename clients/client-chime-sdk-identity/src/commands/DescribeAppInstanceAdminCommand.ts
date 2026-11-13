@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ChimeSDKIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeSDKIdentityClient";
-import { DescribeAppInstanceAdminRequest, DescribeAppInstanceAdminResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAppInstanceAdminCommand,
-  serializeAws_restJson1DescribeAppInstanceAdminCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAppInstanceAdminRequest, DescribeAppInstanceAdminResponse } from "../models/models_0";
+import { DescribeAppInstanceAdmin$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAppInstanceAdminCommand}.
+ */
 export interface DescribeAppInstanceAdminCommandInput extends DescribeAppInstanceAdminRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAppInstanceAdminCommand}.
+ */
 export interface DescribeAppInstanceAdminCommandOutput extends DescribeAppInstanceAdminResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface DescribeAppInstanceAdminCommandOutput extends DescribeAppInstan
  * ```javascript
  * import { ChimeSDKIdentityClient, DescribeAppInstanceAdminCommand } from "@aws-sdk/client-chime-sdk-identity"; // ES Modules import
  * // const { ChimeSDKIdentityClient, DescribeAppInstanceAdminCommand } = require("@aws-sdk/client-chime-sdk-identity"); // CommonJS import
+ * // import type { ChimeSDKIdentityClientConfig } from "@aws-sdk/client-chime-sdk-identity";
+ * const config = {}; // type is ChimeSDKIdentityClientConfig
  * const client = new ChimeSDKIdentityClient(config);
+ * const input = { // DescribeAppInstanceAdminRequest
+ *   AppInstanceAdminArn: "STRING_VALUE", // required
+ *   AppInstanceArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAppInstanceAdminCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAppInstanceAdminResponse
+ * //   AppInstanceAdmin: { // AppInstanceAdmin
+ * //     Admin: { // Identity
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //     },
+ * //     AppInstanceArn: "STRING_VALUE",
+ * //     CreatedTimestamp: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAppInstanceAdminCommandInput - {@link DescribeAppInstanceAdminCommandInput}
+ * @returns {@link DescribeAppInstanceAdminCommandOutput}
  * @see {@link DescribeAppInstanceAdminCommandInput} for command's `input` shape.
  * @see {@link DescribeAppInstanceAdminCommandOutput} for command's `response` shape.
- * @see {@link ChimeSDKIdentityClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ChimeSDKIdentityClientResolvedConfig | config} for ChimeSDKIdentityClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKIdentityServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKIdentity service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAppInstanceAdminCommand extends $Command<
-  DescribeAppInstanceAdminCommandInput,
-  DescribeAppInstanceAdminCommandOutput,
-  ChimeSDKIdentityClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAppInstanceAdminCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKIdentityClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAppInstanceAdminCommandInput, DescribeAppInstanceAdminCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKIdentityClient";
-    const commandName = "DescribeAppInstanceAdminCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAppInstanceAdminRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAppInstanceAdminResponse.filterSensitiveLog,
+export class DescribeAppInstanceAdminCommand extends command<DescribeAppInstanceAdminCommandInput, DescribeAppInstanceAdminCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAppInstanceAdmin",
+  DescribeAppInstanceAdmin$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAppInstanceAdminRequest;
+      output: DescribeAppInstanceAdminResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAppInstanceAdminCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAppInstanceAdminCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAppInstanceAdminCommandOutput> {
-    return deserializeAws_restJson1DescribeAppInstanceAdminCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAppInstanceAdminCommandInput;
+      output: DescribeAppInstanceAdminCommandOutput;
+    };
+  };
 }

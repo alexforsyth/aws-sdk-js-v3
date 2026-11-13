@@ -1,24 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2ProtocolClient";
-import { GreetingWithErrorsOutput } from "../models/models_0";
-import {
-  deserializeAws_ec2GreetingWithErrorsCommand,
-  serializeAws_ec2GreetingWithErrorsCommand,
-} from "../protocols/Aws_ec2";
+import type { EC2ProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2ProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { GreetingWithErrorsOutput } from "../models/models_0";
+import { de_GreetingWithErrorsCommand, se_GreetingWithErrorsCommand } from "../protocols/Aws_ec2";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GreetingWithErrorsCommand}.
+ */
 export interface GreetingWithErrorsCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link GreetingWithErrorsCommand}.
+ */
 export interface GreetingWithErrorsCommandOutput extends GreetingWithErrorsOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +37,66 @@ export interface GreetingWithErrorsCommandOutput extends GreetingWithErrorsOutpu
  * ```javascript
  * import { EC2ProtocolClient, GreetingWithErrorsCommand } from "@aws-sdk/aws-protocoltests-ec2"; // ES Modules import
  * // const { EC2ProtocolClient, GreetingWithErrorsCommand } = require("@aws-sdk/aws-protocoltests-ec2"); // CommonJS import
+ * // import type { EC2ProtocolClientConfig } from "@aws-sdk/aws-protocoltests-ec2";
+ * const config = {}; // type is EC2ProtocolClientConfig
  * const client = new EC2ProtocolClient(config);
+ * const input = {};
  * const command = new GreetingWithErrorsCommand(input);
  * const response = await client.send(command);
+ * // { // GreetingWithErrorsOutput
+ * //   greeting: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GreetingWithErrorsCommandInput - {@link GreetingWithErrorsCommandInput}
+ * @returns {@link GreetingWithErrorsCommandOutput}
  * @see {@link GreetingWithErrorsCommandInput} for command's `input` shape.
  * @see {@link GreetingWithErrorsCommandOutput} for command's `response` shape.
- * @see {@link EC2ProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ProtocolClientResolvedConfig | config} for EC2ProtocolClient's `config` shape.
  *
+ * @throws {@link InvalidGreeting} (client fault)
+ *  This error is thrown when an invalid greeting value is provided.
+ *
+ * @throws {@link ComplexError} (client fault)
+ *  This error is thrown when a request is invalid.
+ *
+ * @throws {@link EC2ProtocolServiceException}
+ * <p>Base exception class for all service exceptions from EC2Protocol service.</p>
+ *
+ *
+ * @public
  */
-export class GreetingWithErrorsCommand extends $Command<
-  GreetingWithErrorsCommandInput,
-  GreetingWithErrorsCommandOutput,
-  EC2ProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GreetingWithErrorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GreetingWithErrorsCommandInput, GreetingWithErrorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2ProtocolClient";
-    const commandName = "GreetingWithErrorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: GreetingWithErrorsOutput.filterSensitiveLog,
+export class GreetingWithErrorsCommand extends $Command
+  .classBuilder<
+    GreetingWithErrorsCommandInput,
+    GreetingWithErrorsCommandOutput,
+    EC2ProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: EC2ProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("AwsEc2", "GreetingWithErrors", {})
+  .n("EC2ProtocolClient", "GreetingWithErrorsCommand")
+  .f(void 0, void 0)
+  .ser(se_GreetingWithErrorsCommand)
+  .de(de_GreetingWithErrorsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GreetingWithErrorsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GreetingWithErrorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2GreetingWithErrorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GreetingWithErrorsCommandOutput> {
-    return deserializeAws_ec2GreetingWithErrorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GreetingWithErrorsCommandInput;
+      output: GreetingWithErrorsCommandOutput;
+    };
+  };
 }

@@ -1,109 +1,259 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { DeleteCapacityProviderRequest, DeleteCapacityProviderResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteCapacityProviderCommand,
-  serializeAws_json1_1DeleteCapacityProviderCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteCapacityProviderRequest, DeleteCapacityProviderResponse } from "../models/models_0";
+import { DeleteCapacityProvider$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCapacityProviderCommand}.
+ */
 export interface DeleteCapacityProviderCommandInput extends DeleteCapacityProviderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCapacityProviderCommand}.
+ */
 export interface DeleteCapacityProviderCommandOutput extends DeleteCapacityProviderResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes the specified capacity provider.</p>
- * 		       <note>
- * 			         <p>The <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers are
- * 				reserved and cannot be deleted. You can disassociate them from a cluster using
- * 				either the <a>PutClusterCapacityProviders</a> API or by deleting the
- * 				cluster.</p>
- * 		       </note>
- * 		       <p>Prior to a capacity provider being deleted, the capacity provider must be removed from
- * 			the capacity provider strategy from all services. The <a>UpdateService</a>
- * 			API can be used to remove a capacity provider from a service's capacity provider
- * 			strategy. When updating a service, the <code>forceNewDeployment</code> option can be
- * 			used to ensure that any tasks using the Amazon EC2 instance capacity provided by the capacity
- * 			provider are transitioned to use the capacity from the remaining capacity providers.
- * 			Only capacity providers that are not associated with a cluster can be deleted. To remove
- * 			a capacity provider from a cluster, you can either use <a>PutClusterCapacityProviders</a> or delete the cluster.</p>
+ * <p>Deletes the specified capacity provider.</p> <note> <p>The <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers are reserved and can't be deleted. You can disassociate them from a cluster using either <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> or by deleting the cluster.</p> </note> <p>Prior to a capacity provider being deleted, the capacity provider must be removed from the capacity provider strategy from all services. The <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html">UpdateService</a> API can be used to remove a capacity provider from a service's capacity provider strategy. When updating a service, the <code>forceNewDeployment</code> option can be used to ensure that any tasks using the Amazon EC2 instance capacity provided by the capacity provider are transitioned to use the capacity from the remaining capacity providers. Only capacity providers that aren't associated with a cluster can be deleted. To remove a capacity provider from a cluster, you can either use <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> or delete the cluster.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, DeleteCapacityProviderCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, DeleteCapacityProviderCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // DeleteCapacityProviderRequest
+ *   capacityProvider: "STRING_VALUE", // required
+ *   cluster: "STRING_VALUE",
+ * };
  * const command = new DeleteCapacityProviderCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteCapacityProviderResponse
+ * //   capacityProvider: { // CapacityProvider
+ * //     capacityProviderArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     cluster: "STRING_VALUE",
+ * //     status: "PROVISIONING" || "ACTIVE" || "DEPROVISIONING" || "INACTIVE",
+ * //     autoScalingGroupProvider: { // AutoScalingGroupProvider
+ * //       autoScalingGroupArn: "STRING_VALUE", // required
+ * //       managedScaling: { // ManagedScaling
+ * //         status: "ENABLED" || "DISABLED",
+ * //         targetCapacity: Number("int"),
+ * //         minimumScalingStepSize: Number("int"),
+ * //         maximumScalingStepSize: Number("int"),
+ * //         instanceWarmupPeriod: Number("int"),
+ * //       },
+ * //       managedTerminationProtection: "ENABLED" || "DISABLED",
+ * //       managedDraining: "ENABLED" || "DISABLED",
+ * //     },
+ * //     managedInstancesProvider: { // ManagedInstancesProvider
+ * //       infrastructureRoleArn: "STRING_VALUE",
+ * //       instanceLaunchTemplate: { // InstanceLaunchTemplate
+ * //         ec2InstanceProfileArn: "STRING_VALUE", // required
+ * //         networkConfiguration: { // ManagedInstancesNetworkConfiguration
+ * //           subnets: [ // StringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           securityGroups: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         storageConfiguration: { // ManagedInstancesStorageConfiguration
+ * //           storageSizeGiB: Number("int"),
+ * //         },
+ * //         localStorageConfiguration: { // ManagedInstancesLocalStorageConfiguration
+ * //           useLocalStorage: true || false,
+ * //         },
+ * //         monitoring: "BASIC" || "DETAILED",
+ * //         capacityOptionType: "ON_DEMAND" || "SPOT" || "RESERVED",
+ * //         instanceMetadataTagsPropagation: true || false,
+ * //         instanceRequirements: { // InstanceRequirementsRequest
+ * //           vCpuCount: { // VCpuCountRangeRequest
+ * //             min: Number("int"), // required
+ * //             max: Number("int"),
+ * //           },
+ * //           memoryMiB: { // MemoryMiBRequest
+ * //             min: Number("int"), // required
+ * //             max: Number("int"),
+ * //           },
+ * //           cpuManufacturers: [ // CpuManufacturerSet
+ * //             "intel" || "amd" || "amazon-web-services",
+ * //           ],
+ * //           memoryGiBPerVCpu: { // MemoryGiBPerVCpuRequest
+ * //             min: Number("double"),
+ * //             max: Number("double"),
+ * //           },
+ * //           excludedInstanceTypes: [ // ExcludedInstanceTypeSet
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           instanceGenerations: [ // InstanceGenerationSet
+ * //             "current" || "previous",
+ * //           ],
+ * //           spotMaxPricePercentageOverLowestPrice: Number("int"),
+ * //           onDemandMaxPricePercentageOverLowestPrice: Number("int"),
+ * //           bareMetal: "included" || "required" || "excluded",
+ * //           burstablePerformance: "included" || "required" || "excluded",
+ * //           requireHibernateSupport: true || false,
+ * //           networkInterfaceCount: { // NetworkInterfaceCountRequest
+ * //             min: Number("int"),
+ * //             max: Number("int"),
+ * //           },
+ * //           localStorage: "included" || "required" || "excluded",
+ * //           localStorageTypes: [ // LocalStorageTypeSet
+ * //             "hdd" || "ssd",
+ * //           ],
+ * //           totalLocalStorageGB: { // TotalLocalStorageGBRequest
+ * //             min: Number("double"),
+ * //             max: Number("double"),
+ * //           },
+ * //           baselineEbsBandwidthMbps: { // BaselineEbsBandwidthMbpsRequest
+ * //             min: Number("int"),
+ * //             max: Number("int"),
+ * //           },
+ * //           acceleratorTypes: [ // AcceleratorTypeSet
+ * //             "gpu" || "fpga" || "inference",
+ * //           ],
+ * //           acceleratorCount: { // AcceleratorCountRequest
+ * //             min: Number("int"),
+ * //             max: Number("int"),
+ * //           },
+ * //           acceleratorManufacturers: [ // AcceleratorManufacturerSet
+ * //             "amazon-web-services" || "amd" || "nvidia" || "xilinx" || "habana",
+ * //           ],
+ * //           acceleratorNames: [ // AcceleratorNameSet
+ * //             "a100" || "inferentia" || "k520" || "k80" || "m60" || "radeon-pro-v520" || "t4" || "vu9p" || "v100" || "a10g" || "h100" || "t4g" || "l40s" || "l4",
+ * //           ],
+ * //           acceleratorTotalMemoryMiB: { // AcceleratorTotalMemoryMiBRequest
+ * //             min: Number("int"),
+ * //             max: Number("int"),
+ * //           },
+ * //           networkBandwidthGbps: { // NetworkBandwidthGbpsRequest
+ * //             min: Number("double"),
+ * //             max: Number("double"),
+ * //           },
+ * //           allowedInstanceTypes: [ // AllowedInstanceTypeSet
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           maxSpotPriceAsPercentageOfOptimalOnDemandPrice: Number("int"),
+ * //         },
+ * //         fipsEnabled: true || false,
+ * //         capacityReservations: { // CapacityReservationRequest
+ * //           reservationGroupArn: "STRING_VALUE",
+ * //           reservationPreference: "RESERVATIONS_ONLY" || "RESERVATIONS_FIRST" || "RESERVATIONS_EXCLUDED",
+ * //         },
+ * //         nitroEnclavesEnabled: true || false,
+ * //       },
+ * //       propagateTags: "CAPACITY_PROVIDER" || "NONE",
+ * //       infrastructureOptimization: { // InfrastructureOptimization
+ * //         scaleInAfter: Number("int"),
+ * //       },
+ * //       autoRepairConfiguration: { // AutoRepairConfiguration
+ * //         actionsStatus: "ENABLED" || "DISABLED",
+ * //       },
+ * //     },
+ * //     updateStatus: "CREATE_IN_PROGRESS" || "CREATE_COMPLETE" || "CREATE_FAILED" || "DELETE_IN_PROGRESS" || "DELETE_COMPLETE" || "DELETE_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_COMPLETE" || "UPDATE_FAILED",
+ * //     updateStatusReason: "STRING_VALUE",
+ * //     tags: [ // Tags
+ * //       { // Tag
+ * //         key: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     type: "EC2_AUTOSCALING" || "MANAGED_INSTANCES" || "FARGATE" || "FARGATE_SPOT",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteCapacityProviderCommandInput - {@link DeleteCapacityProviderCommandInput}
+ * @returns {@link DeleteCapacityProviderCommandOutput}
  * @see {@link DeleteCapacityProviderCommandInput} for command's `input` shape.
  * @see {@link DeleteCapacityProviderCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link ClusterNotFoundException} (client fault)
+ *  <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link UnsupportedFeatureException} (client fault)
+ *  <p>The specified task isn't supported in this Region.</p>
+ *
+ * @throws {@link UpdateInProgressException} (client fault)
+ *  <p>There's already a current Amazon ECS container agent update in progress on the container instance that's specified. If the container agent becomes disconnected while it's in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it resumes where it stopped previously.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To delete a specified capacity provider
+ * ```javascript
+ * // This example deletes a specified capacity provider.
+ * const input = {
+ *   capacityProvider: "arn:aws:ecs:us-west-2:123456789012:capacity-provider/ExampleCapacityProvider"
+ * };
+ * const command = new DeleteCapacityProviderCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   capacityProvider: {
+ *     autoScalingGroupProvider: {
+ *       autoScalingGroupArn: "arn:aws:autoscaling:us-west-2:123456789012:autoScalingGroup:a1b2c3d4-5678-90ab-cdef-EXAMPLE11111:autoScalingGroupName/MyAutoScalingGroup",
+ *       managedScaling: {
+ *         maximumScalingStepSize: 10000,
+ *         minimumScalingStepSize: 1,
+ *         status: "ENABLED",
+ *         targetCapacity: 100
+ *       },
+ *       managedTerminationProtection: "DISABLED"
+ *     },
+ *     capacityProviderArn: "arn:aws:ecs:us-west-2:123456789012:capacity-provider/ExampleCapacityProvider",
+ *     name: "ExampleCapacityProvider",
+ *     status: "ACTIVE",
+ *     tags:     [],
+ *     updateStatus: "DELETE_IN_PROGRESS"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteCapacityProviderCommand extends $Command<
-  DeleteCapacityProviderCommandInput,
-  DeleteCapacityProviderCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCapacityProviderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCapacityProviderCommandInput, DeleteCapacityProviderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "DeleteCapacityProviderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCapacityProviderRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteCapacityProviderResponse.filterSensitiveLog,
+export class DeleteCapacityProviderCommand extends command<DeleteCapacityProviderCommandInput, DeleteCapacityProviderCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCapacityProvider",
+  DeleteCapacityProvider$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCapacityProviderRequest;
+      output: DeleteCapacityProviderResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteCapacityProviderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteCapacityProviderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteCapacityProviderCommandOutput> {
-    return deserializeAws_json1_1DeleteCapacityProviderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCapacityProviderCommandInput;
+      output: DeleteCapacityProviderCommandOutput;
+    };
+  };
 }

@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MgnClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MgnClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteReplicationConfigurationTemplateRequest,
   DeleteReplicationConfigurationTemplateResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteReplicationConfigurationTemplateCommand,
-  serializeAws_restJson1DeleteReplicationConfigurationTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { DeleteReplicationConfigurationTemplate$ } from "../schemas/schemas_0";
 
-export interface DeleteReplicationConfigurationTemplateCommandInput
-  extends DeleteReplicationConfigurationTemplateRequest {}
-export interface DeleteReplicationConfigurationTemplateCommandOutput
-  extends DeleteReplicationConfigurationTemplateResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteReplicationConfigurationTemplateCommand}.
+ */
+export interface DeleteReplicationConfigurationTemplateCommandInput extends DeleteReplicationConfigurationTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteReplicationConfigurationTemplateCommand}.
+ */
+export interface DeleteReplicationConfigurationTemplateCommandOutput extends DeleteReplicationConfigurationTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes a single Replication Configuration Template by ID</p>
@@ -34,74 +32,54 @@ export interface DeleteReplicationConfigurationTemplateCommandOutput
  * ```javascript
  * import { MgnClient, DeleteReplicationConfigurationTemplateCommand } from "@aws-sdk/client-mgn"; // ES Modules import
  * // const { MgnClient, DeleteReplicationConfigurationTemplateCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
  * const client = new MgnClient(config);
+ * const input = { // DeleteReplicationConfigurationTemplateRequest
+ *   replicationConfigurationTemplateID: "STRING_VALUE", // required
+ * };
  * const command = new DeleteReplicationConfigurationTemplateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteReplicationConfigurationTemplateCommandInput - {@link DeleteReplicationConfigurationTemplateCommandInput}
+ * @returns {@link DeleteReplicationConfigurationTemplateCommandOutput}
  * @see {@link DeleteReplicationConfigurationTemplateCommandInput} for command's `input` shape.
  * @see {@link DeleteReplicationConfigurationTemplateCommandOutput} for command's `response` shape.
- * @see {@link MgnClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be completed due to a conflict with the current state of the target resource.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found exception.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteReplicationConfigurationTemplateCommand extends $Command<
-  DeleteReplicationConfigurationTemplateCommandInput,
-  DeleteReplicationConfigurationTemplateCommandOutput,
-  MgnClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteReplicationConfigurationTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MgnClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteReplicationConfigurationTemplateCommandInput, DeleteReplicationConfigurationTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MgnClient";
-    const commandName = "DeleteReplicationConfigurationTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteReplicationConfigurationTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteReplicationConfigurationTemplateResponse.filterSensitiveLog,
+export class DeleteReplicationConfigurationTemplateCommand extends command<DeleteReplicationConfigurationTemplateCommandInput, DeleteReplicationConfigurationTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteReplicationConfigurationTemplate",
+  DeleteReplicationConfigurationTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReplicationConfigurationTemplateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteReplicationConfigurationTemplateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteReplicationConfigurationTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteReplicationConfigurationTemplateCommandOutput> {
-    return deserializeAws_restJson1DeleteReplicationConfigurationTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteReplicationConfigurationTemplateCommandInput;
+      output: DeleteReplicationConfigurationTemplateCommandOutput;
+    };
+  };
 }

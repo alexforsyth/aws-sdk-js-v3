@@ -1,100 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { ListKeyGroupsRequest, ListKeyGroupsResult } from "../models/models_1";
-import {
-  deserializeAws_restXmlListKeyGroupsCommand,
-  serializeAws_restXmlListKeyGroupsCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListKeyGroupsRequest, ListKeyGroupsResult } from "../models/models_1";
+import { ListKeyGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListKeyGroupsCommand}.
+ */
 export interface ListKeyGroupsCommandInput extends ListKeyGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListKeyGroupsCommand}.
+ */
 export interface ListKeyGroupsCommandOutput extends ListKeyGroupsResult, __MetadataBearer {}
 
 /**
- * <p>Gets a list of key groups.</p>
- * 		       <p>You can optionally specify the maximum number of items to receive in the response. If
- * 			the total number of items in the list exceeds the maximum that you specify, or the
- * 			default maximum, the response is paginated. To get the next page of items, send a
- * 			subsequent request that specifies the <code>NextMarker</code> value from the current
- * 			response as the <code>Marker</code> value in the subsequent request.</p>
+ * <p>Gets a list of key groups.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, ListKeyGroupsCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, ListKeyGroupsCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // ListKeyGroupsRequest
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListKeyGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListKeyGroupsResult
+ * //   KeyGroupList: { // KeyGroupList
+ * //     NextMarker: "STRING_VALUE",
+ * //     MaxItems: Number("int"), // required
+ * //     Quantity: Number("int"), // required
+ * //     Items: [ // KeyGroupSummaryList
+ * //       { // KeyGroupSummary
+ * //         KeyGroup: { // KeyGroup
+ * //           Id: "STRING_VALUE", // required
+ * //           LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //           KeyGroupConfig: { // KeyGroupConfig
+ * //             Name: "STRING_VALUE", // required
+ * //             Items: [ // PublicKeyIdList // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             Comment: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ListKeyGroupsCommandInput - {@link ListKeyGroupsCommandInput}
+ * @returns {@link ListKeyGroupsCommandOutput}
  * @see {@link ListKeyGroupsCommandInput} for command's `input` shape.
  * @see {@link ListKeyGroupsCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class ListKeyGroupsCommand extends $Command<
-  ListKeyGroupsCommandInput,
-  ListKeyGroupsCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListKeyGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListKeyGroupsCommandInput, ListKeyGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "ListKeyGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListKeyGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListKeyGroupsResult.filterSensitiveLog,
+export class ListKeyGroupsCommand extends command<ListKeyGroupsCommandInput, ListKeyGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListKeyGroups",
+  ListKeyGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListKeyGroupsRequest;
+      output: ListKeyGroupsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListKeyGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlListKeyGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListKeyGroupsCommandOutput> {
-    return deserializeAws_restXmlListKeyGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListKeyGroupsCommandInput;
+      output: ListKeyGroupsCommandOutput;
+    };
+  };
 }

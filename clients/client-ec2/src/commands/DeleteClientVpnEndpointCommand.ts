@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteClientVpnEndpointRequest, DeleteClientVpnEndpointResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteClientVpnEndpointCommand,
-  serializeAws_ec2DeleteClientVpnEndpointCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteClientVpnEndpointRequest, DeleteClientVpnEndpointResult } from "../models/models_2";
+import { DeleteClientVpnEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteClientVpnEndpointCommand}.
+ */
 export interface DeleteClientVpnEndpointCommandInput extends DeleteClientVpnEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteClientVpnEndpointCommand}.
+ */
 export interface DeleteClientVpnEndpointCommandOutput extends DeleteClientVpnEndpointResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,51 @@ export interface DeleteClientVpnEndpointCommandOutput extends DeleteClientVpnEnd
  * ```javascript
  * import { EC2Client, DeleteClientVpnEndpointCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteClientVpnEndpointCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteClientVpnEndpointRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteClientVpnEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteClientVpnEndpointResult
+ * //   Status: { // ClientVpnEndpointStatus
+ * //     Code: "pending-associate" || "available" || "deleting" || "deleted" || "pending",
+ * //     Message: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteClientVpnEndpointCommandInput - {@link DeleteClientVpnEndpointCommandInput}
+ * @returns {@link DeleteClientVpnEndpointCommandOutput}
  * @see {@link DeleteClientVpnEndpointCommandInput} for command's `input` shape.
  * @see {@link DeleteClientVpnEndpointCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteClientVpnEndpointCommand extends $Command<
-  DeleteClientVpnEndpointCommandInput,
-  DeleteClientVpnEndpointCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteClientVpnEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteClientVpnEndpointCommandInput, DeleteClientVpnEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteClientVpnEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteClientVpnEndpointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteClientVpnEndpointResult.filterSensitiveLog,
+export class DeleteClientVpnEndpointCommand extends command<DeleteClientVpnEndpointCommandInput, DeleteClientVpnEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteClientVpnEndpoint",
+  DeleteClientVpnEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteClientVpnEndpointRequest;
+      output: DeleteClientVpnEndpointResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteClientVpnEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteClientVpnEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteClientVpnEndpointCommandOutput> {
-    return deserializeAws_ec2DeleteClientVpnEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteClientVpnEndpointCommandInput;
+      output: DeleteClientVpnEndpointCommandOutput;
+    };
+  };
 }

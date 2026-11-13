@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationAutoScalingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationAutoScalingClient";
-import { DeleteScheduledActionRequest, DeleteScheduledActionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteScheduledActionCommand,
-  serializeAws_json1_1DeleteScheduledActionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteScheduledActionRequest, DeleteScheduledActionResponse } from "../models/models_0";
+import { DeleteScheduledAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteScheduledActionCommand}.
+ */
 export interface DeleteScheduledActionCommandInput extends DeleteScheduledActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteScheduledActionCommand}.
+ */
 export interface DeleteScheduledActionCommandOutput extends DeleteScheduledActionResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +30,82 @@ export interface DeleteScheduledActionCommandOutput extends DeleteScheduledActio
  * ```javascript
  * import { ApplicationAutoScalingClient, DeleteScheduledActionCommand } from "@aws-sdk/client-application-auto-scaling"; // ES Modules import
  * // const { ApplicationAutoScalingClient, DeleteScheduledActionCommand } = require("@aws-sdk/client-application-auto-scaling"); // CommonJS import
+ * // import type { ApplicationAutoScalingClientConfig } from "@aws-sdk/client-application-auto-scaling";
+ * const config = {}; // type is ApplicationAutoScalingClientConfig
  * const client = new ApplicationAutoScalingClient(config);
+ * const input = { // DeleteScheduledActionRequest
+ *   ServiceNamespace: "ecs" || "elasticmapreduce" || "ec2" || "appstream" || "dynamodb" || "rds" || "sagemaker" || "custom-resource" || "comprehend" || "lambda" || "cassandra" || "kafka" || "elasticache" || "neptune" || "workspaces", // required
+ *   ScheduledActionName: "STRING_VALUE", // required
+ *   ResourceId: "STRING_VALUE", // required
+ *   ScalableDimension: "ecs:service:DesiredCount" || "ec2:spot-fleet-request:TargetCapacity" || "elasticmapreduce:instancegroup:InstanceCount" || "appstream:fleet:DesiredCapacity" || "dynamodb:table:ReadCapacityUnits" || "dynamodb:table:WriteCapacityUnits" || "dynamodb:index:ReadCapacityUnits" || "dynamodb:index:WriteCapacityUnits" || "rds:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredInstanceCount" || "custom-resource:ResourceType:Property" || "comprehend:document-classifier-endpoint:DesiredInferenceUnits" || "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" || "lambda:function:ProvisionedConcurrency" || "cassandra:table:ReadCapacityUnits" || "cassandra:table:WriteCapacityUnits" || "kafka:broker-storage:VolumeSize" || "elasticache:cache-cluster:Nodes" || "elasticache:replication-group:NodeGroups" || "elasticache:replication-group:Replicas" || "neptune:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredProvisionedConcurrency" || "sagemaker:inference-component:DesiredCopyCount" || "workspaces:workspacespool:DesiredUserSessions", // required
+ * };
  * const command = new DeleteScheduledActionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteScheduledActionCommandInput - {@link DeleteScheduledActionCommandInput}
+ * @returns {@link DeleteScheduledActionCommandOutput}
  * @see {@link DeleteScheduledActionCommandInput} for command's `input` shape.
  * @see {@link DeleteScheduledActionCommandOutput} for command's `response` shape.
- * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for ApplicationAutoScalingClient's `config` shape.
  *
+ * @throws {@link ConcurrentUpdateException} (server fault)
+ *  <p>Concurrent updates caused an exception, for example, if you request an update to an
+ *          Application Auto Scaling resource that already has a pending update.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an internal error.</p>
+ *
+ * @throws {@link ObjectNotFoundException} (client fault)
+ *  <p>The specified object could not be found. For any operation that depends on the existence
+ *          of a scalable target, this exception is thrown if the scalable target with the specified
+ *          service namespace, resource ID, and scalable dimension does not exist. For any operation
+ *          that deletes or deregisters a resource, this exception is thrown if the resource cannot be
+ *          found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception was thrown for a validation issue. Review the available parameters for the
+ *          API request.</p>
+ *
+ * @throws {@link ApplicationAutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationAutoScaling service.</p>
+ *
+ *
+ * @example To delete a scheduled action
+ * ```javascript
+ * // This example deletes a scheduled action for the AppStream 2.0 fleet called sample-fleet.
+ * const input = {
+ *   ResourceId: "fleet/sample-fleet",
+ *   ScalableDimension: "appstream:fleet:DesiredCapacity",
+ *   ScheduledActionName: "my-recurring-action",
+ *   ServiceNamespace: "appstream"
+ * };
+ * const command = new DeleteScheduledActionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteScheduledActionCommand extends $Command<
-  DeleteScheduledActionCommandInput,
-  DeleteScheduledActionCommandOutput,
-  ApplicationAutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteScheduledActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationAutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteScheduledActionCommandInput, DeleteScheduledActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationAutoScalingClient";
-    const commandName = "DeleteScheduledActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteScheduledActionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteScheduledActionResponse.filterSensitiveLog,
+export class DeleteScheduledActionCommand extends command<DeleteScheduledActionCommandInput, DeleteScheduledActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteScheduledAction",
+  DeleteScheduledAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteScheduledActionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteScheduledActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteScheduledActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteScheduledActionCommandOutput> {
-    return deserializeAws_json1_1DeleteScheduledActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteScheduledActionCommandInput;
+      output: DeleteScheduledActionCommandOutput;
+    };
+  };
 }

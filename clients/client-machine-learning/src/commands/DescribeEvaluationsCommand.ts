@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { DescribeEvaluationsInput, DescribeEvaluationsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEvaluationsCommand,
-  serializeAws_json1_1DescribeEvaluationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEvaluationsInput, DescribeEvaluationsOutput } from "../models/models_0";
+import { DescribeEvaluations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEvaluationsCommand}.
+ */
 export interface DescribeEvaluationsCommandInput extends DescribeEvaluationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEvaluationsCommand}.
+ */
 export interface DescribeEvaluationsCommandOutput extends DescribeEvaluationsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,85 @@ export interface DescribeEvaluationsCommandOutput extends DescribeEvaluationsOut
  * ```javascript
  * import { MachineLearningClient, DescribeEvaluationsCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, DescribeEvaluationsCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // DescribeEvaluationsInput
+ *   FilterVariable: "CreatedAt" || "LastUpdatedAt" || "Status" || "Name" || "IAMUser" || "MLModelId" || "DataSourceId" || "DataURI",
+ *   EQ: "STRING_VALUE",
+ *   GT: "STRING_VALUE",
+ *   LT: "STRING_VALUE",
+ *   GE: "STRING_VALUE",
+ *   LE: "STRING_VALUE",
+ *   NE: "STRING_VALUE",
+ *   Prefix: "STRING_VALUE",
+ *   SortOrder: "asc" || "dsc",
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new DescribeEvaluationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEvaluationsOutput
+ * //   Results: [ // Evaluations
+ * //     { // Evaluation
+ * //       EvaluationId: "STRING_VALUE",
+ * //       MLModelId: "STRING_VALUE",
+ * //       EvaluationDataSourceId: "STRING_VALUE",
+ * //       InputDataLocationS3: "STRING_VALUE",
+ * //       CreatedByIamUser: "STRING_VALUE",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       LastUpdatedAt: new Date("TIMESTAMP"),
+ * //       Name: "STRING_VALUE",
+ * //       Status: "PENDING" || "INPROGRESS" || "FAILED" || "COMPLETED" || "DELETED",
+ * //       PerformanceMetrics: { // PerformanceMetrics
+ * //         Properties: { // PerformanceMetricsProperties
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Message: "STRING_VALUE",
+ * //       ComputeTime: Number("long"),
+ * //       FinishedAt: new Date("TIMESTAMP"),
+ * //       StartedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEvaluationsCommandInput - {@link DescribeEvaluationsCommandInput}
+ * @returns {@link DescribeEvaluationsCommandOutput}
  * @see {@link DescribeEvaluationsCommandInput} for command's `input` shape.
  * @see {@link DescribeEvaluationsCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEvaluationsCommand extends $Command<
-  DescribeEvaluationsCommandInput,
-  DescribeEvaluationsCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEvaluationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEvaluationsCommandInput, DescribeEvaluationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "DescribeEvaluationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEvaluationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEvaluationsOutput.filterSensitiveLog,
+export class DescribeEvaluationsCommand extends command<DescribeEvaluationsCommandInput, DescribeEvaluationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEvaluations",
+  DescribeEvaluations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEvaluationsInput;
+      output: DescribeEvaluationsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEvaluationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEvaluationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEvaluationsCommandOutput> {
-    return deserializeAws_json1_1DescribeEvaluationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEvaluationsCommandInput;
+      output: DescribeEvaluationsCommandOutput;
+    };
+  };
 }

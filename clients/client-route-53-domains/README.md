@@ -1,18 +1,17 @@
-# @aws-sdk/client-route-53-domains
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-route-53-domains/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-route-53-domains)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-route-53-domains.svg)](https://www.npmjs.com/package/@aws-sdk/client-route-53-domains)
+# @aws-sdk/client-route-53-domains
 
 ## Description
 
 AWS SDK for JavaScript Route53Domains Client for Node.js, Browser and React Native.
 
-<p>Amazon Route 53 API actions let you register domain names and perform related operations.</p>
+<p>Amazon Route 53 API actions let you register domain names and perform related
+operations.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-route-53-domains
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-route-53-domains`
 - `yarn add @aws-sdk/client-route-53-domains`
@@ -24,46 +23,77 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `Route53DomainsClient` and
-the commands you need, for example `AcceptDomainTransferFromAnotherAwsAccountCommand`:
+the commands you need, for example `ListDomainsCommand`:
 
 ```js
 // ES5 example
-const {
-  Route53DomainsClient,
-  AcceptDomainTransferFromAnotherAwsAccountCommand,
-} = require("@aws-sdk/client-route-53-domains");
+const { Route53DomainsClient, ListDomainsCommand } = require("@aws-sdk/client-route-53-domains");
 ```
 
 ```ts
 // ES6+ example
-import {
-  Route53DomainsClient,
-  AcceptDomainTransferFromAnotherAwsAccountCommand,
-} from "@aws-sdk/client-route-53-domains";
+import { Route53DomainsClient, ListDomainsCommand } from "@aws-sdk/client-route-53-domains";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new Route53DomainsClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new AcceptDomainTransferFromAnotherAwsAccountCommand(params);
+const params = { /** input parameters */ };
+const command = new ListDomainsCommand(params);
+```
+
+#### Supported Message Protocols
+
+This client supports multiple protocols.
+
+The default for this client is **AWS JSON (RPC) 1.1**.
+
+We have selected this default based on our evaluation of the
+performance characteristics of this protocol format in JavaScript. You don't need to change it,
+but you have the option to do so, for example to support existing integrations or tests.
+Selecting a non-default protocol changes the format
+of the data sent over the network, but does not affect how you interact with the
+client using JavaScript objects.
+
+Install the `@aws-sdk/config` package to access alternate protocols.
+
+See [AWS Protocols](https://smithy.io/2.0/aws/protocols/index.html) for more information.
+
+##### AWS JSON (RPC) 1.1
+
+This protocol uses JSON payloads.
+```js
+import { AwsJson1_1Protocol } from "@aws-sdk/config/protocol";
+
+const client = new Route53DomainsClient({
+  protocol: AwsJson1_1Protocol
+});
+```
+
+##### Smithy RPC v2 CBOR
+
+This protocol uses CBOR payloads.
+```js
+import { AwsSmithyRpcV2CborProtocol } from "@aws-sdk/config/protocol";
+
+const client = new Route53DomainsClient({
+  protocol: AwsSmithyRpcV2CborProtocol
+});
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -78,26 +108,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -113,31 +126,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Route53Domains` extends `Route53DomainsClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`Route53DomainsClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-route-53-domains";
-const client = new AWS.Route53Domains({ region: "REGION" });
+import { Route53Domains } from "@aws-sdk/client-route-53-domains";
+
+const client = new Route53Domains({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.acceptDomainTransferFromAnotherAwsAccount(params);
+  const data = await client.listDomains(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -145,7 +152,7 @@ try {
 
 // Promises.
 client
-  .acceptDomainTransferFromAnotherAwsAccount(params)
+  .listDomains(params)
   .then((data) => {
     // process data.
   })
@@ -153,9 +160,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.acceptDomainTransferFromAnotherAwsAccount(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listDomains(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -181,12 +188,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -207,3 +216,258 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AcceptDomainTransferFromAnotherAwsAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/AcceptDomainTransferFromAnotherAwsAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/AcceptDomainTransferFromAnotherAwsAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/AcceptDomainTransferFromAnotherAwsAccountCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateDelegationSignerToDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/AssociateDelegationSignerToDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/AssociateDelegationSignerToDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/AssociateDelegationSignerToDomainCommandOutput/)
+</details>
+<details>
+<summary>
+CancelDomainTransferToAnotherAwsAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/CancelDomainTransferToAnotherAwsAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/CancelDomainTransferToAnotherAwsAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/CancelDomainTransferToAnotherAwsAccountCommandOutput/)
+</details>
+<details>
+<summary>
+CheckDomainAvailability
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/CheckDomainAvailabilityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/CheckDomainAvailabilityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/CheckDomainAvailabilityCommandOutput/)
+</details>
+<details>
+<summary>
+CheckDomainTransferability
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/CheckDomainTransferabilityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/CheckDomainTransferabilityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/CheckDomainTransferabilityCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/DeleteDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DeleteDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DeleteDomainCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteTagsForDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/DeleteTagsForDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DeleteTagsForDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DeleteTagsForDomainCommandOutput/)
+</details>
+<details>
+<summary>
+DisableDomainAutoRenew
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/DisableDomainAutoRenewCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DisableDomainAutoRenewCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DisableDomainAutoRenewCommandOutput/)
+</details>
+<details>
+<summary>
+DisableDomainTransferLock
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/DisableDomainTransferLockCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DisableDomainTransferLockCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DisableDomainTransferLockCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateDelegationSignerFromDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/DisassociateDelegationSignerFromDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DisassociateDelegationSignerFromDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/DisassociateDelegationSignerFromDomainCommandOutput/)
+</details>
+<details>
+<summary>
+EnableDomainAutoRenew
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/EnableDomainAutoRenewCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/EnableDomainAutoRenewCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/EnableDomainAutoRenewCommandOutput/)
+</details>
+<details>
+<summary>
+EnableDomainTransferLock
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/EnableDomainTransferLockCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/EnableDomainTransferLockCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/EnableDomainTransferLockCommandOutput/)
+</details>
+<details>
+<summary>
+GetContactReachabilityStatus
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/GetContactReachabilityStatusCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetContactReachabilityStatusCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetContactReachabilityStatusCommandOutput/)
+</details>
+<details>
+<summary>
+GetDomainDetail
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/GetDomainDetailCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetDomainDetailCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetDomainDetailCommandOutput/)
+</details>
+<details>
+<summary>
+GetDomainPrices
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/GetDomainPricesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetDomainPricesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetDomainPricesCommandOutput/)
+</details>
+<details>
+<summary>
+GetDomainSuggestions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/GetDomainSuggestionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetDomainSuggestionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetDomainSuggestionsCommandOutput/)
+</details>
+<details>
+<summary>
+GetOperationDetail
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/GetOperationDetailCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetOperationDetailCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/GetOperationDetailCommandOutput/)
+</details>
+<details>
+<summary>
+ListDomains
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ListDomainsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListDomainsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListDomainsCommandOutput/)
+</details>
+<details>
+<summary>
+ListOperations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ListOperationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListOperationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListOperationsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPrices
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ListPricesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListPricesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListPricesCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ListTagsForDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListTagsForDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ListTagsForDomainCommandOutput/)
+</details>
+<details>
+<summary>
+PushDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/PushDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/PushDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/PushDomainCommandOutput/)
+</details>
+<details>
+<summary>
+RegisterDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/RegisterDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RegisterDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RegisterDomainCommandOutput/)
+</details>
+<details>
+<summary>
+RejectDomainTransferFromAnotherAwsAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/RejectDomainTransferFromAnotherAwsAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RejectDomainTransferFromAnotherAwsAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RejectDomainTransferFromAnotherAwsAccountCommandOutput/)
+</details>
+<details>
+<summary>
+RenewDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/RenewDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RenewDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RenewDomainCommandOutput/)
+</details>
+<details>
+<summary>
+ResendContactReachabilityEmail
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ResendContactReachabilityEmailCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ResendContactReachabilityEmailCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ResendContactReachabilityEmailCommandOutput/)
+</details>
+<details>
+<summary>
+ResendOperationAuthorization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ResendOperationAuthorizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ResendOperationAuthorizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ResendOperationAuthorizationCommandOutput/)
+</details>
+<details>
+<summary>
+RestoreDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/RestoreDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RestoreDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RestoreDomainCommandOutput/)
+</details>
+<details>
+<summary>
+RetrieveDomainAuthCode
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/RetrieveDomainAuthCodeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RetrieveDomainAuthCodeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/RetrieveDomainAuthCodeCommandOutput/)
+</details>
+<details>
+<summary>
+TransferDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/TransferDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/TransferDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/TransferDomainCommandOutput/)
+</details>
+<details>
+<summary>
+TransferDomainToAnotherAwsAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/TransferDomainToAnotherAwsAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/TransferDomainToAnotherAwsAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/TransferDomainToAnotherAwsAccountCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDomainContact
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/UpdateDomainContactCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateDomainContactCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateDomainContactCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDomainContactPrivacy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/UpdateDomainContactPrivacyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateDomainContactPrivacyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateDomainContactPrivacyCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDomainNameservers
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/UpdateDomainNameserversCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateDomainNameserversCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateDomainNameserversCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateTagsForDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/UpdateTagsForDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateTagsForDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/UpdateTagsForDomainCommandOutput/)
+</details>
+<details>
+<summary>
+ViewBilling
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/route-53-domains/command/ViewBillingCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ViewBillingCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-route-53-domains/Interface/ViewBillingCommandOutput/)
+</details>

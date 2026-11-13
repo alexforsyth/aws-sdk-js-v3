@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationDiscoveryServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationDiscoveryServiceClient";
-import { GetDiscoverySummaryRequest, GetDiscoverySummaryResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDiscoverySummaryCommand,
-  serializeAws_json1_1GetDiscoverySummaryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDiscoverySummaryRequest, GetDiscoverySummaryResponse } from "../models/models_0";
+import { GetDiscoverySummary$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDiscoverySummaryCommand}.
+ */
 export interface GetDiscoverySummaryCommandInput extends GetDiscoverySummaryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDiscoverySummaryCommand}.
+ */
 export interface GetDiscoverySummaryCommandOutput extends GetDiscoverySummaryResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +31,101 @@ export interface GetDiscoverySummaryCommandOutput extends GetDiscoverySummaryRes
  * ```javascript
  * import { ApplicationDiscoveryServiceClient, GetDiscoverySummaryCommand } from "@aws-sdk/client-application-discovery-service"; // ES Modules import
  * // const { ApplicationDiscoveryServiceClient, GetDiscoverySummaryCommand } = require("@aws-sdk/client-application-discovery-service"); // CommonJS import
+ * // import type { ApplicationDiscoveryServiceClientConfig } from "@aws-sdk/client-application-discovery-service";
+ * const config = {}; // type is ApplicationDiscoveryServiceClientConfig
  * const client = new ApplicationDiscoveryServiceClient(config);
+ * const input = {};
  * const command = new GetDiscoverySummaryCommand(input);
  * const response = await client.send(command);
+ * // { // GetDiscoverySummaryResponse
+ * //   servers: Number("long"),
+ * //   applications: Number("long"),
+ * //   serversMappedToApplications: Number("long"),
+ * //   serversMappedtoTags: Number("long"),
+ * //   agentSummary: { // CustomerAgentInfo
+ * //     activeAgents: Number("int"), // required
+ * //     healthyAgents: Number("int"), // required
+ * //     blackListedAgents: Number("int"), // required
+ * //     shutdownAgents: Number("int"), // required
+ * //     unhealthyAgents: Number("int"), // required
+ * //     totalAgents: Number("int"), // required
+ * //     unknownAgents: Number("int"), // required
+ * //   },
+ * //   connectorSummary: { // CustomerConnectorInfo
+ * //     activeConnectors: Number("int"), // required
+ * //     healthyConnectors: Number("int"), // required
+ * //     blackListedConnectors: Number("int"), // required
+ * //     shutdownConnectors: Number("int"), // required
+ * //     unhealthyConnectors: Number("int"), // required
+ * //     totalConnectors: Number("int"), // required
+ * //     unknownConnectors: Number("int"), // required
+ * //   },
+ * //   meCollectorSummary: { // CustomerMeCollectorInfo
+ * //     activeMeCollectors: Number("int"), // required
+ * //     healthyMeCollectors: Number("int"), // required
+ * //     denyListedMeCollectors: Number("int"), // required
+ * //     shutdownMeCollectors: Number("int"), // required
+ * //     unhealthyMeCollectors: Number("int"), // required
+ * //     totalMeCollectors: Number("int"), // required
+ * //     unknownMeCollectors: Number("int"), // required
+ * //   },
+ * //   agentlessCollectorSummary: { // CustomerAgentlessCollectorInfo
+ * //     activeAgentlessCollectors: Number("int"), // required
+ * //     healthyAgentlessCollectors: Number("int"), // required
+ * //     denyListedAgentlessCollectors: Number("int"), // required
+ * //     shutdownAgentlessCollectors: Number("int"), // required
+ * //     unhealthyAgentlessCollectors: Number("int"), // required
+ * //     totalAgentlessCollectors: Number("int"), // required
+ * //     unknownAgentlessCollectors: Number("int"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDiscoverySummaryCommandInput - {@link GetDiscoverySummaryCommandInput}
+ * @returns {@link GetDiscoverySummaryCommandOutput}
  * @see {@link GetDiscoverySummaryCommandInput} for command's `input` shape.
  * @see {@link GetDiscoverySummaryCommandOutput} for command's `response` shape.
- * @see {@link ApplicationDiscoveryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationDiscoveryServiceClientResolvedConfig | config} for ApplicationDiscoveryServiceClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>The user does not have permission to perform the action. Check the IAM
+ *       policy associated with this user.</p>
+ *
+ * @throws {@link HomeRegionNotSetException} (client fault)
+ *  <p>The home Region is not set. Set the home Region to continue.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid. Verify the parameters and try again.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of one or more parameters are either invalid or out of range. Verify the
+ *       parameter values and try again.</p>
+ *
+ * @throws {@link ServerInternalErrorException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ApplicationDiscoveryServiceServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationDiscoveryService service.</p>
+ *
+ *
+ * @public
  */
-export class GetDiscoverySummaryCommand extends $Command<
-  GetDiscoverySummaryCommandInput,
-  GetDiscoverySummaryCommandOutput,
-  ApplicationDiscoveryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDiscoverySummaryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationDiscoveryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDiscoverySummaryCommandInput, GetDiscoverySummaryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationDiscoveryServiceClient";
-    const commandName = "GetDiscoverySummaryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDiscoverySummaryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDiscoverySummaryResponse.filterSensitiveLog,
+export class GetDiscoverySummaryCommand extends command<GetDiscoverySummaryCommandInput, GetDiscoverySummaryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDiscoverySummary",
+  GetDiscoverySummary$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetDiscoverySummaryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDiscoverySummaryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDiscoverySummaryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDiscoverySummaryCommandOutput> {
-    return deserializeAws_json1_1GetDiscoverySummaryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDiscoverySummaryCommandInput;
+      output: GetDiscoverySummaryCommandOutput;
+    };
+  };
 }

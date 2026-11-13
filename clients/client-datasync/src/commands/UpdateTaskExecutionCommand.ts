@@ -1,104 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { UpdateTaskExecutionRequest, UpdateTaskExecutionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateTaskExecutionCommand,
-  serializeAws_json1_1UpdateTaskExecutionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateTaskExecutionRequest, UpdateTaskExecutionResponse } from "../models/models_0";
+import { UpdateTaskExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTaskExecutionCommand}.
+ */
 export interface UpdateTaskExecutionCommandInput extends UpdateTaskExecutionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTaskExecutionCommand}.
+ */
 export interface UpdateTaskExecutionCommandOutput extends UpdateTaskExecutionResponse, __MetadataBearer {}
 
 /**
- * <p>Updates execution of a task.</p>
- *          <p>You can modify bandwidth throttling for a task execution that is running or queued.
- *       For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling">Adjusting Bandwidth Throttling for a Task Execution</a>.</p>
- *
+ * <p>Updates the configuration of a running DataSync task execution.</p>
  *          <note>
- *             <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code>
- *         is <code>
+ *             <p>Currently, the only <code>Option</code> that you can modify with
+ *           <code>UpdateTaskExecution</code> is <code>
  *                   <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond">BytesPerSecond</a>
- *                </code>.</p>
+ *                </code>, which throttles bandwidth for a running or queued task
+ *         execution.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, UpdateTaskExecutionCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, UpdateTaskExecutionCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // UpdateTaskExecutionRequest
+ *   TaskExecutionArn: "STRING_VALUE", // required
+ *   Options: { // Options
+ *     VerifyMode: "POINT_IN_TIME_CONSISTENT" || "ONLY_FILES_TRANSFERRED" || "NONE",
+ *     OverwriteMode: "ALWAYS" || "NEVER",
+ *     Atime: "NONE" || "BEST_EFFORT",
+ *     Mtime: "NONE" || "PRESERVE",
+ *     Uid: "NONE" || "INT_VALUE" || "NAME" || "BOTH",
+ *     Gid: "NONE" || "INT_VALUE" || "NAME" || "BOTH",
+ *     PreserveDeletedFiles: "PRESERVE" || "REMOVE",
+ *     PreserveDevices: "NONE" || "PRESERVE",
+ *     PosixPermissions: "NONE" || "PRESERVE",
+ *     BytesPerSecond: Number("long"),
+ *     TaskQueueing: "ENABLED" || "DISABLED",
+ *     LogLevel: "OFF" || "BASIC" || "TRANSFER",
+ *     TransferMode: "CHANGED" || "ALL",
+ *     SecurityDescriptorCopyFlags: "NONE" || "OWNER_DACL" || "OWNER_DACL_SACL",
+ *     ObjectTags: "PRESERVE" || "NONE",
+ *     ObjectMetadata: "PRESERVE" || "NONE",
+ *   },
+ * };
  * const command = new UpdateTaskExecutionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateTaskExecutionCommandInput - {@link UpdateTaskExecutionCommandInput}
+ * @returns {@link UpdateTaskExecutionCommandOutput}
  * @see {@link UpdateTaskExecutionCommandInput} for command's `input` shape.
  * @see {@link UpdateTaskExecutionCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateTaskExecutionCommand extends $Command<
-  UpdateTaskExecutionCommandInput,
-  UpdateTaskExecutionCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateTaskExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateTaskExecutionCommandInput, UpdateTaskExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "UpdateTaskExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateTaskExecutionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateTaskExecutionResponse.filterSensitiveLog,
+export class UpdateTaskExecutionCommand extends command<UpdateTaskExecutionCommandInput, UpdateTaskExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTaskExecution",
+  UpdateTaskExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTaskExecutionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateTaskExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateTaskExecutionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateTaskExecutionCommandOutput> {
-    return deserializeAws_json1_1UpdateTaskExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateTaskExecutionCommandInput;
+      output: UpdateTaskExecutionCommandOutput;
+    };
+  };
 }

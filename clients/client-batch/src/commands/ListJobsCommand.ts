@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
-import { ListJobsRequest, ListJobsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListJobsCommand,
-  serializeAws_restJson1ListJobsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListJobsRequest, ListJobsResponse } from "../models/models_0";
+import { ListJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListJobsCommand}.
+ */
 export interface ListJobsCommandInput extends ListJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListJobsCommand}.
+ */
 export interface ListJobsCommandOutput extends ListJobsResponse, __MetadataBearer {}
 
 /**
@@ -35,71 +36,154 @@ export interface ListJobsCommandOutput extends ListJobsResponse, __MetadataBeare
  *                <p>An array job ID to return a list of the children for that job</p>
  *             </li>
  *          </ul>
- *          <p>You can filter the results by job status with the <code>jobStatus</code> parameter. If you don't specify a
- *    status, only <code>RUNNING</code> jobs are returned.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BatchClient, ListJobsCommand } from "@aws-sdk/client-batch"; // ES Modules import
  * // const { BatchClient, ListJobsCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
  * const client = new BatchClient(config);
+ * const input = { // ListJobsRequest
+ *   jobQueue: "STRING_VALUE",
+ *   arrayJobId: "STRING_VALUE",
+ *   multiNodeJobId: "STRING_VALUE",
+ *   jobStatus: "SUBMITTED" || "PENDING" || "RUNNABLE" || "STARTING" || "RUNNING" || "SUCCEEDED" || "FAILED",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   filters: [ // ListJobsFilterList
+ *     { // KeyValuesPair
+ *       name: "STRING_VALUE",
+ *       values: [ // StringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new ListJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListJobsResponse
+ * //   jobSummaryList: [ // JobSummaryList // required
+ * //     { // JobSummary
+ * //       jobArn: "STRING_VALUE",
+ * //       jobId: "STRING_VALUE", // required
+ * //       jobName: "STRING_VALUE", // required
+ * //       capacityUsage: [ // JobCapacityUsageSummaryList
+ * //         { // JobCapacityUsageSummary
+ * //           capacityUnit: "STRING_VALUE",
+ * //           quantity: Number("double"),
+ * //         },
+ * //       ],
+ * //       createdAt: Number("long"),
+ * //       scheduledAt: Number("long"),
+ * //       shareIdentifier: "STRING_VALUE",
+ * //       status: "SUBMITTED" || "PENDING" || "RUNNABLE" || "STARTING" || "RUNNING" || "SUCCEEDED" || "FAILED",
+ * //       statusReason: "STRING_VALUE",
+ * //       startedAt: Number("long"),
+ * //       stoppedAt: Number("long"),
+ * //       container: { // ContainerSummary
+ * //         exitCode: Number("int"),
+ * //         reason: "STRING_VALUE",
+ * //       },
+ * //       arrayProperties: { // ArrayPropertiesSummary
+ * //         size: Number("int"),
+ * //         index: Number("int"),
+ * //         statusSummary: { // ArrayJobStatusSummary
+ * //           "<keys>": Number("int"),
+ * //         },
+ * //         statusSummaryLastUpdatedAt: Number("long"),
+ * //       },
+ * //       nodeProperties: { // NodePropertiesSummary
+ * //         isMainNode: true || false,
+ * //         numNodes: Number("int"),
+ * //         nodeIndex: Number("int"),
+ * //       },
+ * //       jobDefinition: "STRING_VALUE",
+ * //       isCancelled: true || false,
+ * //       isTerminated: true || false,
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListJobsCommandInput - {@link ListJobsCommandInput}
+ * @returns {@link ListJobsCommandOutput}
  * @see {@link ListJobsCommandInput} for command's `input` shape.
  * @see {@link ListJobsCommandOutput} for command's `response` shape.
- * @see {@link BatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @example To list running jobs
+ * ```javascript
+ * // This example lists the running jobs in the HighPriority job queue.
+ * const input = {
+ *   jobQueue: "HighPriority"
+ * };
+ * const command = new ListJobsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobSummaryList: [
+ *     {
+ *       jobId: "e66ff5fd-a1ff-4640-b1a2-0b0a142f49bb",
+ *       jobName: "example"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example To list submitted jobs
+ * ```javascript
+ * // This example lists jobs in the HighPriority job queue that are in the SUBMITTED job status.
+ * const input = {
+ *   jobQueue: "HighPriority",
+ *   jobStatus: "SUBMITTED"
+ * };
+ * const command = new ListJobsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobSummaryList: [
+ *     {
+ *       jobId: "68f0c163-fbd4-44e6-9fd1-25b14a434786",
+ *       jobName: "example"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListJobsCommand extends $Command<ListJobsCommandInput, ListJobsCommandOutput, BatchClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListJobsCommandInput, ListJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BatchClient";
-    const commandName = "ListJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListJobsResponse.filterSensitiveLog,
+export class ListJobsCommand extends command<ListJobsCommandInput, ListJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListJobs",
+  ListJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListJobsRequest;
+      output: ListJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListJobsCommandOutput> {
-    return deserializeAws_restJson1ListJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListJobsCommandInput;
+      output: ListJobsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { DescribeEventTopicsRequest, DescribeEventTopicsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEventTopicsCommand,
-  serializeAws_json1_1DescribeEventTopicsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEventTopicsRequest, DescribeEventTopicsResult } from "../models/models_0";
+import { DescribeEventTopics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventTopicsCommand}.
+ */
 export interface DescribeEventTopicsCommandInput extends DescribeEventTopicsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventTopicsCommand}.
+ */
 export interface DescribeEventTopicsCommandOutput extends DescribeEventTopicsResult, __MetadataBearer {}
 
 /**
@@ -31,68 +32,95 @@ export interface DescribeEventTopicsCommandOutput extends DescribeEventTopicsRes
  * ```javascript
  * import { DirectoryServiceClient, DescribeEventTopicsCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, DescribeEventTopicsCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // DescribeEventTopicsRequest
+ *   DirectoryId: "STRING_VALUE",
+ *   TopicNames: [ // TopicNames
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeEventTopicsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEventTopicsResult
+ * //   EventTopics: [ // EventTopics
+ * //     { // EventTopic
+ * //       DirectoryId: "STRING_VALUE",
+ * //       TopicName: "STRING_VALUE",
+ * //       TopicArn: "STRING_VALUE",
+ * //       CreatedDateTime: new Date("TIMESTAMP"),
+ * //       Status: "Registered" || "Topic not found" || "Failed" || "Deleted",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventTopicsCommandInput - {@link DescribeEventTopicsCommandInput}
+ * @returns {@link DescribeEventTopicsCommandOutput}
  * @see {@link DescribeEventTopicsCommandInput} for command's `input` shape.
  * @see {@link DescribeEventTopicsCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To describe event topics
+ * ```javascript
+ * // The following example obtains information about which SNS topics receive status messages from the specified directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   TopicNames: [
+ *     "snstopicexample"
+ *   ]
+ * };
+ * const command = new DescribeEventTopicsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   EventTopics: [
+ *     {
+ *       DirectoryId: "d-92654abfed",
+ *       Status: "Registered",
+ *       TopicArn: "arn:aws:sns:us-east-2:123456789012:snstopicexample",
+ *       TopicName: "snstopicexample"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeEventTopicsCommand extends $Command<
-  DescribeEventTopicsCommandInput,
-  DescribeEventTopicsCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventTopicsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventTopicsCommandInput, DescribeEventTopicsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "DescribeEventTopicsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventTopicsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEventTopicsResult.filterSensitiveLog,
+export class DescribeEventTopicsCommand extends command<DescribeEventTopicsCommandInput, DescribeEventTopicsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEventTopics",
+  DescribeEventTopics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventTopicsRequest;
+      output: DescribeEventTopicsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEventTopicsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEventTopicsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEventTopicsCommandOutput> {
-    return deserializeAws_json1_1DescribeEventTopicsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventTopicsCommandInput;
+      output: DescribeEventTopicsCommandOutput;
+    };
+  };
 }

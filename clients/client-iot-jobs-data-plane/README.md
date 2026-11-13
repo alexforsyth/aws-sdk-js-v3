@@ -1,28 +1,36 @@
-# @aws-sdk/client-iot-jobs-data-plane
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-iot-jobs-data-plane/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-iot-jobs-data-plane)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-iot-jobs-data-plane.svg)](https://www.npmjs.com/package/@aws-sdk/client-iot-jobs-data-plane)
+# @aws-sdk/client-iot-jobs-data-plane
 
 ## Description
 
 AWS SDK for JavaScript IoTJobsDataPlane Client for Node.js, Browser and React Native.
 
-<p>AWS IoT Jobs is a service that allows you to define a set of jobs — remote operations that are sent to
-and executed on one or more devices connected to AWS IoT. For example, you can define a job that instructs a
-set of devices to download and install application or firmware updates, reboot, rotate certificates, or perform
-remote troubleshooting operations.</p>
-<p> To create a job, you make a job document which is a description of the remote operations to be
-performed, and you specify a list of targets that should perform the operations. The targets can be individual
-things, thing groups or both.</p>
-<p> AWS IoT Jobs sends a message to inform the targets that a job is available. The target starts the
-execution of the job by downloading the job document, performing the operations it specifies, and reporting its
-progress to AWS IoT. The Jobs service provides commands to track the progress of a job on a specific target and
-for all the targets of the job</p>
+<p>IoT Jobs is a service that allows you to define a set of jobs — remote operations
+that are sent to and executed on one or more devices connected to Amazon Web Services IoT Core. For example,
+you can define a job that instructs a set of devices to download and install application or
+firmware updates, reboot, rotate certificates, or perform remote troubleshooting
+operations.</p>
+<p>Find the endpoint address for actions in the IoT jobs data plane by running this
+CLI command:</p>
+<p>
+<code>aws iot describe-endpoint --endpoint-type iot:Jobs</code>
+</p>
+<p>The service name used by <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Amazon Web Services
+Signature Version 4</a> to sign requests is:
+<i>iot-jobs-data</i>.</p>
+<p> To create a job, you make a job document which is a description of the remote
+operations to be performed, and you specify a list of targets that should perform the
+operations. The targets can be individual things, thing groups or both.</p>
+<p> IoT Jobs sends a message to inform the targets that a job is available. The target
+starts the execution of the job by downloading the job document, performing the operations
+it specifies, and reporting its progress to Amazon Web Services IoT Core. The Jobs service provides commands
+to track the progress of a job on a specific target and for all the targets of the
+job</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-iot-jobs-data-plane
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-iot-jobs-data-plane`
 - `yarn add @aws-sdk/client-iot-jobs-data-plane`
@@ -34,40 +42,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `IoTJobsDataPlaneClient` and
-the commands you need, for example `DescribeJobExecutionCommand`:
+the commands you need, for example `GetPendingJobExecutionsCommand`:
 
 ```js
 // ES5 example
-const { IoTJobsDataPlaneClient, DescribeJobExecutionCommand } = require("@aws-sdk/client-iot-jobs-data-plane");
+const { IoTJobsDataPlaneClient, GetPendingJobExecutionsCommand } = require("@aws-sdk/client-iot-jobs-data-plane");
 ```
 
 ```ts
 // ES6+ example
-import { IoTJobsDataPlaneClient, DescribeJobExecutionCommand } from "@aws-sdk/client-iot-jobs-data-plane";
+import { IoTJobsDataPlaneClient, GetPendingJobExecutionsCommand } from "@aws-sdk/client-iot-jobs-data-plane";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new IoTJobsDataPlaneClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new DescribeJobExecutionCommand(params);
+const params = { /** input parameters */ };
+const command = new GetPendingJobExecutionsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -82,26 +88,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -117,31 +106,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`IoTJobsDataPlane` extends `IoTJobsDataPlaneClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`IoTJobsDataPlaneClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-iot-jobs-data-plane";
-const client = new AWS.IoTJobsDataPlane({ region: "REGION" });
+import { IoTJobsDataPlane } from "@aws-sdk/client-iot-jobs-data-plane";
+
+const client = new IoTJobsDataPlane({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.describeJobExecution(params);
+  const data = await client.getPendingJobExecutions(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -149,7 +132,7 @@ try {
 
 // Promises.
 client
-  .describeJobExecution(params)
+  .getPendingJobExecutions(params)
   .then((data) => {
     // process data.
   })
@@ -157,9 +140,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.describeJobExecution(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.getPendingJobExecutions(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -185,12 +168,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -211,3 +196,41 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+DescribeJobExecution
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iot-jobs-data-plane/command/DescribeJobExecutionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/DescribeJobExecutionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/DescribeJobExecutionCommandOutput/)
+</details>
+<details>
+<summary>
+GetPendingJobExecutions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iot-jobs-data-plane/command/GetPendingJobExecutionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/GetPendingJobExecutionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/GetPendingJobExecutionsCommandOutput/)
+</details>
+<details>
+<summary>
+StartCommandExecution
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iot-jobs-data-plane/command/StartCommandExecutionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/StartCommandExecutionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/StartCommandExecutionCommandOutput/)
+</details>
+<details>
+<summary>
+StartNextPendingJobExecution
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iot-jobs-data-plane/command/StartNextPendingJobExecutionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/StartNextPendingJobExecutionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/StartNextPendingJobExecutionCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateJobExecution
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iot-jobs-data-plane/command/UpdateJobExecutionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/UpdateJobExecutionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iot-jobs-data-plane/Interface/UpdateJobExecutionCommandOutput/)
+</details>

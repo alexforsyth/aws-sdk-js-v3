@@ -1,0 +1,75 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type DescribeImportCommandInput,
+  type DescribeImportCommandOutput,
+  DescribeImportCommand,
+} from "../commands/DescribeImportCommand";
+import type { DynamoDBClient } from "../DynamoDBClient";
+import type { DynamoDBServiceException } from "../models/DynamoDBServiceException";
+
+const checkState = async (client: DynamoDBClient, input: DescribeImportCommandInput): Promise<WaiterResult<DescribeImportCommandOutput | DynamoDBServiceException>> => {
+  let reason;
+  try {
+    let result: DescribeImportCommandOutput & any = await client.send(new DescribeImportCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.ImportTableDescription.ImportStatus;
+      }
+      if (returnComparator() === "COMPLETED") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.ImportTableDescription.ImportStatus;
+      }
+      if (returnComparator() === "FAILED") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.ImportTableDescription.ImportStatus;
+      }
+      if (returnComparator() === "CANCELLED") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ *
+ *  @deprecated Use waitUntilImportCompleted instead. waitForImportCompleted does not throw error in non-success cases.
+ */
+export const waitForImportCompleted = async (
+  params: WaiterConfiguration<DynamoDBClient>,
+  input: DescribeImportCommandInput
+): Promise<WaiterResult<DescribeImportCommandOutput | DynamoDBServiceException>> => {
+  const serviceDefaults = { minDelay: 20, maxDelay: 120 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to DescribeImportCommand for polling.
+ */
+export const waitUntilImportCompleted = async (
+  params: WaiterConfiguration<DynamoDBClient>,
+  input: DescribeImportCommandInput
+): Promise<WaiterResult<DescribeImportCommandOutput>> => {
+  const serviceDefaults = { minDelay: 20, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<DescribeImportCommandOutput>;
+};

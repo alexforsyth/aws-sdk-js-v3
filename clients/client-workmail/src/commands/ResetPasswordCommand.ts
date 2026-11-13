@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ResetPasswordRequest, ResetPasswordResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ResetPasswordCommand,
-  serializeAws_json1_1ResetPasswordCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ResetPasswordRequest, ResetPasswordResponse } from "../models/models_0";
+import { ResetPassword$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ResetPasswordCommand}.
+ */
 export interface ResetPasswordCommandInput extends ResetPasswordRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ResetPasswordCommand}.
+ */
 export interface ResetPasswordCommandOutput extends ResetPasswordResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,79 @@ export interface ResetPasswordCommandOutput extends ResetPasswordResponse, __Met
  * ```javascript
  * import { WorkMailClient, ResetPasswordCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, ResetPasswordCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // ResetPasswordRequest
+ *   OrganizationId: "STRING_VALUE", // required
+ *   UserId: "STRING_VALUE", // required
+ *   Password: "STRING_VALUE", // required
+ * };
  * const command = new ResetPasswordCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ResetPasswordCommandInput - {@link ResetPasswordCommandInput}
+ * @returns {@link ResetPasswordCommandOutput}
  * @see {@link ResetPasswordCommandInput} for command's `input` shape.
  * @see {@link ResetPasswordCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link DirectoryServiceAuthenticationFailedException} (client fault)
+ *  <p>The directory service doesn't recognize the credentials supplied by WorkMail.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The directory is unavailable. It might be located in another Region or deleted.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>The identifier supplied for the user, group, or resource does not exist in your
+ *          organization.</p>
+ *
+ * @throws {@link EntityStateException} (client fault)
+ *  <p>You are performing an operation on a user, group, or resource that isn't in the
+ *          expected state, such as trying to delete an active user.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link InvalidPasswordException} (client fault)
+ *  <p>The supplied password doesn't match the minimum security constraints, such as length
+ *          or use of special characters.</p>
+ *
+ * @throws {@link OrganizationNotFoundException} (client fault)
+ *  <p>An operation received a valid organization identifier that either doesn't belong or
+ *          exist in the system.</p>
+ *
+ * @throws {@link OrganizationStateException} (client fault)
+ *  <p>The organization must have a valid state to perform certain
+ *          operations on the organization or its members.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>You can't perform a write operation against a read-only directory.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class ResetPasswordCommand extends $Command<
-  ResetPasswordCommandInput,
-  ResetPasswordCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ResetPasswordCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ResetPasswordCommandInput, ResetPasswordCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "ResetPasswordCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ResetPasswordRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ResetPasswordResponse.filterSensitiveLog,
+export class ResetPasswordCommand extends command<ResetPasswordCommandInput, ResetPasswordCommandOutput>(
+  _ep0,
+  _mw0,
+  "ResetPassword",
+  ResetPassword$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResetPasswordRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ResetPasswordCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ResetPasswordCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ResetPasswordCommandOutput> {
-    return deserializeAws_json1_1ResetPasswordCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ResetPasswordCommandInput;
+      output: ResetPasswordCommandOutput;
+    };
+  };
 }

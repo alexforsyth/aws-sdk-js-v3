@@ -1,101 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { GetBuiltinIntentRequest, GetBuiltinIntentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetBuiltinIntentCommand,
-  serializeAws_restJson1GetBuiltinIntentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetBuiltinIntentRequest, GetBuiltinIntentResponse } from "../models/models_0";
+import { GetBuiltinIntent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBuiltinIntentCommand}.
+ */
 export interface GetBuiltinIntentCommandInput extends GetBuiltinIntentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBuiltinIntentCommand}.
+ */
 export interface GetBuiltinIntentCommandOutput extends GetBuiltinIntentResponse, __MetadataBearer {}
 
 /**
  * <p>Returns information about a built-in intent.</p>
  *          <p>This operation requires permission for the
  *         <code>lex:GetBuiltinIntent</code> action.</p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, GetBuiltinIntentCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, GetBuiltinIntentCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // GetBuiltinIntentRequest
+ *   signature: "STRING_VALUE", // required
+ * };
  * const command = new GetBuiltinIntentCommand(input);
  * const response = await client.send(command);
+ * // { // GetBuiltinIntentResponse
+ * //   signature: "STRING_VALUE",
+ * //   supportedLocales: [ // LocaleList
+ * //     "de-DE" || "en-AU" || "en-GB" || "en-IN" || "en-US" || "es-419" || "es-ES" || "es-US" || "fr-FR" || "fr-CA" || "it-IT" || "ja-JP" || "ko-KR",
+ * //   ],
+ * //   slots: [ // BuiltinIntentSlotList
+ * //     { // BuiltinIntentSlot
+ * //       name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetBuiltinIntentCommandInput - {@link GetBuiltinIntentCommandInput}
+ * @returns {@link GetBuiltinIntentCommandOutput}
  * @see {@link GetBuiltinIntentCommandInput} for command's `input` shape.
  * @see {@link GetBuiltinIntentCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the
+ *       resource and try again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @public
  */
-export class GetBuiltinIntentCommand extends $Command<
-  GetBuiltinIntentCommandInput,
-  GetBuiltinIntentCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBuiltinIntentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBuiltinIntentCommandInput, GetBuiltinIntentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "GetBuiltinIntentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBuiltinIntentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBuiltinIntentResponse.filterSensitiveLog,
+export class GetBuiltinIntentCommand extends command<GetBuiltinIntentCommandInput, GetBuiltinIntentCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBuiltinIntent",
+  GetBuiltinIntent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBuiltinIntentRequest;
+      output: GetBuiltinIntentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBuiltinIntentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetBuiltinIntentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBuiltinIntentCommandOutput> {
-    return deserializeAws_restJson1GetBuiltinIntentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBuiltinIntentCommandInput;
+      output: GetBuiltinIntentCommandOutput;
+    };
+  };
 }

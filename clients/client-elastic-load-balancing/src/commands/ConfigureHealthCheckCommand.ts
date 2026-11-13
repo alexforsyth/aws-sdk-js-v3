@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { ConfigureHealthCheckInput, ConfigureHealthCheckOutput } from "../models/models_0";
-import {
-  deserializeAws_queryConfigureHealthCheckCommand,
-  serializeAws_queryConfigureHealthCheckCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigureHealthCheckInput, ConfigureHealthCheckOutput } from "../models/models_0";
+import { ConfigureHealthCheck$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ConfigureHealthCheckCommand}.
+ */
 export interface ConfigureHealthCheckCommandInput extends ConfigureHealthCheckInput {}
+/**
+ * @public
+ *
+ * The output of {@link ConfigureHealthCheckCommand}.
+ */
 export interface ConfigureHealthCheckCommandOutput extends ConfigureHealthCheckOutput, __MetadataBearer {}
 
 /**
@@ -34,68 +31,91 @@ export interface ConfigureHealthCheckCommandOutput extends ConfigureHealthCheckO
  * ```javascript
  * import { ElasticLoadBalancingClient, ConfigureHealthCheckCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, ConfigureHealthCheckCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // ConfigureHealthCheckInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   HealthCheck: { // HealthCheck
+ *     Target: "STRING_VALUE", // required
+ *     Interval: Number("int"), // required
+ *     Timeout: Number("int"), // required
+ *     UnhealthyThreshold: Number("int"), // required
+ *     HealthyThreshold: Number("int"), // required
+ *   },
+ * };
  * const command = new ConfigureHealthCheckCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigureHealthCheckOutput
+ * //   HealthCheck: { // HealthCheck
+ * //     Target: "STRING_VALUE", // required
+ * //     Interval: Number("int"), // required
+ * //     Timeout: Number("int"), // required
+ * //     UnhealthyThreshold: Number("int"), // required
+ * //     HealthyThreshold: Number("int"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ConfigureHealthCheckCommandInput - {@link ConfigureHealthCheckCommandInput}
+ * @returns {@link ConfigureHealthCheckCommandOutput}
  * @see {@link ConfigureHealthCheckCommandInput} for command's `input` shape.
  * @see {@link ConfigureHealthCheckCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To specify the health check settings for your backend EC2 instances
+ * ```javascript
+ * // This example specifies the health check settings used to evaluate the health of your backend EC2 instances.
+ * const input = {
+ *   HealthCheck: {
+ *     HealthyThreshold: 2,
+ *     Interval: 30,
+ *     Target: "HTTP:80/png",
+ *     Timeout: 3,
+ *     UnhealthyThreshold: 2
+ *   },
+ *   LoadBalancerName: "my-load-balancer"
+ * };
+ * const command = new ConfigureHealthCheckCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   HealthCheck: {
+ *     HealthyThreshold: 2,
+ *     Interval: 30,
+ *     Target: "HTTP:80/png",
+ *     Timeout: 3,
+ *     UnhealthyThreshold: 2
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ConfigureHealthCheckCommand extends $Command<
-  ConfigureHealthCheckCommandInput,
-  ConfigureHealthCheckCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ConfigureHealthCheckCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ConfigureHealthCheckCommandInput, ConfigureHealthCheckCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "ConfigureHealthCheckCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ConfigureHealthCheckInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigureHealthCheckOutput.filterSensitiveLog,
+export class ConfigureHealthCheckCommand extends command<ConfigureHealthCheckCommandInput, ConfigureHealthCheckCommandOutput>(
+  _ep0,
+  _mw0,
+  "ConfigureHealthCheck",
+  ConfigureHealthCheck$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfigureHealthCheckInput;
+      output: ConfigureHealthCheckOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ConfigureHealthCheckCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryConfigureHealthCheckCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ConfigureHealthCheckCommandOutput> {
-    return deserializeAws_queryConfigureHealthCheckCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ConfigureHealthCheckCommandInput;
+      output: ConfigureHealthCheckCommandOutput;
+    };
+  };
 }

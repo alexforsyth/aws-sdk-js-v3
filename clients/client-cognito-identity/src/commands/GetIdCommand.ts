@@ -1,25 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoIdentityClient";
-import { GetIdInput, GetIdResponse } from "../models/models_0";
-import { deserializeAws_json1_1GetIdCommand, serializeAws_json1_1GetIdCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIdInput, GetIdResponse } from "../models/models_0";
+import { GetId$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIdCommand}.
+ */
 export interface GetIdCommandInput extends GetIdInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetIdCommand}.
+ */
 export interface GetIdCommandOutput extends GetIdResponse, __MetadataBearer {}
 
 /**
- * <p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an
+ * <p>Generates (or retrieves) IdentityID. Supplying multiple logins will create an
  *          implicit linked account.</p>
  *          <p>This is a public API. You do not need any credentials to call this API.</p>
  * @example
@@ -27,64 +31,78 @@ export interface GetIdCommandOutput extends GetIdResponse, __MetadataBearer {}
  * ```javascript
  * import { CognitoIdentityClient, GetIdCommand } from "@aws-sdk/client-cognito-identity"; // ES Modules import
  * // const { CognitoIdentityClient, GetIdCommand } = require("@aws-sdk/client-cognito-identity"); // CommonJS import
+ * // import type { CognitoIdentityClientConfig } from "@aws-sdk/client-cognito-identity";
+ * const config = {}; // type is CognitoIdentityClientConfig
  * const client = new CognitoIdentityClient(config);
+ * const input = { // GetIdInput
+ *   AccountId: "STRING_VALUE",
+ *   IdentityPoolId: "STRING_VALUE", // required
+ *   Logins: { // LoginsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new GetIdCommand(input);
  * const response = await client.send(command);
+ * // { // GetIdResponse
+ * //   IdentityId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetIdCommandInput - {@link GetIdCommandInput}
+ * @returns {@link GetIdCommandOutput}
  * @see {@link GetIdCommandInput} for command's `input` shape.
  * @see {@link GetIdCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityClientResolvedConfig | config} for CognitoIdentityClient's `config` shape.
  *
+ * @throws {@link ExternalServiceException} (client fault)
+ *  <p>An exception thrown when a dependent service such as Facebook or Twitter is not
+ *          responding</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Thrown when the service encounters an error during processing the request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Thrown for missing or bad input parameter(s).</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Thrown when the total number of user pools has exceeded a preset limit.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>Thrown when a user is not authorized to access the requested resource.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>Thrown when a user tries to use a login which is already linked to another
+ *          account.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Thrown when the requested resource (for example, a dataset or record) does not
+ *          exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Thrown when a request is throttled.</p>
+ *
+ * @throws {@link CognitoIdentityServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentity service.</p>
+ *
+ *
+ * @public
  */
-export class GetIdCommand extends $Command<GetIdCommandInput, GetIdCommandOutput, CognitoIdentityClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIdCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIdCommandInput, GetIdCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityClient";
-    const commandName = "GetIdCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIdInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIdResponse.filterSensitiveLog,
+export class GetIdCommand extends command<GetIdCommandInput, GetIdCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetId",
+  GetId$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIdInput;
+      output: GetIdResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIdCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetIdCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIdCommandOutput> {
-    return deserializeAws_json1_1GetIdCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIdCommandInput;
+      output: GetIdCommandOutput;
+    };
+  };
 }

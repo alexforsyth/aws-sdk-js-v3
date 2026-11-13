@@ -1,7 +1,6 @@
-# @aws-sdk/client-appflow
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-appflow/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-appflow)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-appflow.svg)](https://www.npmjs.com/package/@aws-sdk/client-appflow)
+# @aws-sdk/client-appflow
 
 ## Description
 
@@ -9,13 +8,10 @@ AWS SDK for JavaScript Appflow Client for Node.js, Browser and React Native.
 
 <p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need
 detailed information about the Amazon AppFlow API operations, data types, and errors. </p>
-
 <p>Amazon AppFlow is a fully managed integration service that enables you to securely
 transfer data between software as a service (SaaS) applications like Salesforce, Marketo,
 Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>
-
 <p>Use the following links to get started on the Amazon AppFlow API:</p>
-
 <ul>
 <li>
 <p>
@@ -36,21 +32,19 @@ types</a>: An alphabetical list of all Amazon AppFlow data types.</p>
 errors</a>: Client and server errors that all operations can return.</p>
 </li>
 </ul>
-
-<p>If you're new to Amazon AppFlow, we recommend that you review the <a href="https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html">Amazon AppFlow User
-Guide</a>.</p>
+<p>If you're new to Amazon AppFlow, we recommend that you review the <a href="https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html">Amazon AppFlow
+User Guide</a>.</p>
 <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include
 applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with
 the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector
-profile using Amazon AppFlow API operations. For example, Salesforce users can refer to the
-<a href="https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm">
+profile using Amazon AppFlow API operations. For example, Salesforce users can refer to
+the <a href="https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm">
 <i>Authorize Apps with OAuth</i>
 </a> documentation.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-appflow
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-appflow`
 - `yarn add @aws-sdk/client-appflow`
@@ -62,40 +56,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `AppflowClient` and
-the commands you need, for example `CreateConnectorProfileCommand`:
+the commands you need, for example `ListFlowsCommand`:
 
 ```js
 // ES5 example
-const { AppflowClient, CreateConnectorProfileCommand } = require("@aws-sdk/client-appflow");
+const { AppflowClient, ListFlowsCommand } = require("@aws-sdk/client-appflow");
 ```
 
 ```ts
 // ES6+ example
-import { AppflowClient, CreateConnectorProfileCommand } from "@aws-sdk/client-appflow";
+import { AppflowClient, ListFlowsCommand } from "@aws-sdk/client-appflow";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new AppflowClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CreateConnectorProfileCommand(params);
+const params = { /** input parameters */ };
+const command = new ListFlowsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -110,26 +102,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -145,31 +120,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Appflow` extends `AppflowClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`AppflowClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-appflow";
-const client = new AWS.Appflow({ region: "REGION" });
+import { Appflow } from "@aws-sdk/client-appflow";
+
+const client = new Appflow({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.createConnectorProfile(params);
+  const data = await client.listFlows(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -177,7 +146,7 @@ try {
 
 // Promises.
 client
-  .createConnectorProfile(params)
+  .listFlows(params)
   .then((data) => {
     // process data.
   })
@@ -185,9 +154,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.createConnectorProfile(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listFlows(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -213,12 +182,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -239,3 +210,181 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CancelFlowExecutions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/CancelFlowExecutionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/CancelFlowExecutionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/CancelFlowExecutionsCommandOutput/)
+</details>
+<details>
+<summary>
+CreateConnectorProfile
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/CreateConnectorProfileCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/CreateConnectorProfileCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/CreateConnectorProfileCommandOutput/)
+</details>
+<details>
+<summary>
+CreateFlow
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/CreateFlowCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/CreateFlowCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/CreateFlowCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteConnectorProfile
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DeleteConnectorProfileCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DeleteConnectorProfileCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DeleteConnectorProfileCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteFlow
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DeleteFlowCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DeleteFlowCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DeleteFlowCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnector
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DescribeConnectorCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnectorEntity
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DescribeConnectorEntityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorEntityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorEntityCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnectorProfiles
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DescribeConnectorProfilesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorProfilesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorProfilesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConnectors
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DescribeConnectorsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeConnectorsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeFlow
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DescribeFlowCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeFlowCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeFlowCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeFlowExecutionRecords
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/DescribeFlowExecutionRecordsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeFlowExecutionRecordsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/DescribeFlowExecutionRecordsCommandOutput/)
+</details>
+<details>
+<summary>
+ListConnectorEntities
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/ListConnectorEntitiesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListConnectorEntitiesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListConnectorEntitiesCommandOutput/)
+</details>
+<details>
+<summary>
+ListConnectors
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/ListConnectorsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListConnectorsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListConnectorsCommandOutput/)
+</details>
+<details>
+<summary>
+ListFlows
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/ListFlowsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListFlowsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListFlowsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+RegisterConnector
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/RegisterConnectorCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/RegisterConnectorCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/RegisterConnectorCommandOutput/)
+</details>
+<details>
+<summary>
+ResetConnectorMetadataCache
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/ResetConnectorMetadataCacheCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ResetConnectorMetadataCacheCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/ResetConnectorMetadataCacheCommandOutput/)
+</details>
+<details>
+<summary>
+StartFlow
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/StartFlowCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/StartFlowCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/StartFlowCommandOutput/)
+</details>
+<details>
+<summary>
+StopFlow
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/StopFlowCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/StopFlowCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/StopFlowCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UnregisterConnector
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/UnregisterConnectorCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UnregisterConnectorCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UnregisterConnectorCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateConnectorProfile
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/UpdateConnectorProfileCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UpdateConnectorProfileCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UpdateConnectorProfileCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateConnectorRegistration
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/UpdateConnectorRegistrationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UpdateConnectorRegistrationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UpdateConnectorRegistrationCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateFlow
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appflow/command/UpdateFlowCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UpdateFlowCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appflow/Interface/UpdateFlowCommandOutput/)
+</details>

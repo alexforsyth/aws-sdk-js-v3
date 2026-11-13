@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeLaunchTemplatesRequest, DescribeLaunchTemplatesResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeLaunchTemplatesCommand,
-  serializeAws_ec2DescribeLaunchTemplatesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeLaunchTemplatesRequest, DescribeLaunchTemplatesResult } from "../models/models_4";
+import { DescribeLaunchTemplates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLaunchTemplatesCommand}.
+ */
 export interface DescribeLaunchTemplatesCommandInput extends DescribeLaunchTemplatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLaunchTemplatesCommand}.
+ */
 export interface DescribeLaunchTemplatesCommandOutput extends DescribeLaunchTemplatesResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,111 @@ export interface DescribeLaunchTemplatesCommandOutput extends DescribeLaunchTemp
  * ```javascript
  * import { EC2Client, DescribeLaunchTemplatesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeLaunchTemplatesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeLaunchTemplatesRequest
+ *   DryRun: true || false,
+ *   LaunchTemplateIds: [ // LaunchTemplateIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   LaunchTemplateNames: [ // LaunchTemplateNameStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   IncludeManagedResources: true || false,
+ * };
  * const command = new DescribeLaunchTemplatesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeLaunchTemplatesResult
+ * //   LaunchTemplates: [ // LaunchTemplateSet
+ * //     { // LaunchTemplate
+ * //       LaunchTemplateId: "STRING_VALUE",
+ * //       LaunchTemplateName: "STRING_VALUE",
+ * //       CreateTime: new Date("TIMESTAMP"),
+ * //       CreatedBy: "STRING_VALUE",
+ * //       DefaultVersionNumber: Number("long"),
+ * //       LatestVersionNumber: Number("long"),
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Operator: { // OperatorResponse
+ * //         Managed: true || false,
+ * //         Principal: "STRING_VALUE",
+ * //         HiddenByDefault: true || false,
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeLaunchTemplatesCommandInput - {@link DescribeLaunchTemplatesCommandInput}
+ * @returns {@link DescribeLaunchTemplatesCommandOutput}
  * @see {@link DescribeLaunchTemplatesCommandInput} for command's `input` shape.
  * @see {@link DescribeLaunchTemplatesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe a launch template
+ * ```javascript
+ * // This example describes the specified launch template.
+ * const input = {
+ *   LaunchTemplateIds: [
+ *     "lt-01238c059e3466abc"
+ *   ]
+ * };
+ * const command = new DescribeLaunchTemplatesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   LaunchTemplates: [
+ *     {
+ *       CreateTime: "2018-01-16T04:32:57.000Z",
+ *       CreatedBy: "arn:aws:iam::123456789012:root",
+ *       DefaultVersionNumber: 1,
+ *       LatestVersionNumber: 1,
+ *       LaunchTemplateId: "lt-01238c059e3466abc",
+ *       LaunchTemplateName: "my-template"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeLaunchTemplatesCommand extends $Command<
-  DescribeLaunchTemplatesCommandInput,
-  DescribeLaunchTemplatesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLaunchTemplatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLaunchTemplatesCommandInput, DescribeLaunchTemplatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeLaunchTemplatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeLaunchTemplatesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeLaunchTemplatesResult.filterSensitiveLog,
+export class DescribeLaunchTemplatesCommand extends command<DescribeLaunchTemplatesCommandInput, DescribeLaunchTemplatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLaunchTemplates",
+  DescribeLaunchTemplates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLaunchTemplatesRequest;
+      output: DescribeLaunchTemplatesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeLaunchTemplatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeLaunchTemplatesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeLaunchTemplatesCommandOutput> {
-    return deserializeAws_ec2DescribeLaunchTemplatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLaunchTemplatesCommandInput;
+      output: DescribeLaunchTemplatesCommandOutput;
+    };
+  };
 }

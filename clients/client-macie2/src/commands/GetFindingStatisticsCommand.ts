@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import { GetFindingStatisticsRequest, GetFindingStatisticsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFindingStatisticsCommand,
-  serializeAws_restJson1GetFindingStatisticsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFindingStatisticsRequest, GetFindingStatisticsResponse } from "../models/models_0";
+import { GetFindingStatistics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFindingStatisticsCommand}.
+ */
 export interface GetFindingStatisticsCommandInput extends GetFindingStatisticsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFindingStatisticsCommand}.
+ */
 export interface GetFindingStatisticsCommandOutput extends GetFindingStatisticsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,97 @@ export interface GetFindingStatisticsCommandOutput extends GetFindingStatisticsR
  * ```javascript
  * import { Macie2Client, GetFindingStatisticsCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, GetFindingStatisticsCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // GetFindingStatisticsRequest
+ *   findingCriteria: { // FindingCriteria
+ *     criterion: { // Criterion
+ *       "<keys>": { // CriterionAdditionalProperties
+ *         eq: [ // __listOf__string
+ *           "STRING_VALUE",
+ *         ],
+ *         eqExactMatch: [
+ *           "STRING_VALUE",
+ *         ],
+ *         gt: Number("long"),
+ *         gte: Number("long"),
+ *         lt: Number("long"),
+ *         lte: Number("long"),
+ *         neq: [
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *   },
+ *   groupBy: "resourcesAffected.s3Bucket.name" || "type" || "classificationDetails.jobId" || "severity.description", // required
+ *   size: Number("int"),
+ *   sortCriteria: { // FindingStatisticsSortCriteria
+ *     attributeName: "groupKey" || "count",
+ *     orderBy: "ASC" || "DESC",
+ *   },
+ * };
  * const command = new GetFindingStatisticsCommand(input);
  * const response = await client.send(command);
+ * // { // GetFindingStatisticsResponse
+ * //   countsByGroup: [ // __listOfGroupCount
+ * //     { // GroupCount
+ * //       count: Number("long"),
+ * //       groupKey: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetFindingStatisticsCommandInput - {@link GetFindingStatisticsCommandInput}
+ * @returns {@link GetFindingStatisticsCommandOutput}
  * @see {@link GetFindingStatisticsCommandInput} for command's `input` shape.
  * @see {@link GetFindingStatisticsCommandOutput} for command's `response` shape.
- * @see {@link Macie2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Provides information about an error that occurred due to a versioning conflict for a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetFindingStatisticsCommand extends $Command<
-  GetFindingStatisticsCommandInput,
-  GetFindingStatisticsCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFindingStatisticsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFindingStatisticsCommandInput, GetFindingStatisticsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "GetFindingStatisticsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFindingStatisticsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFindingStatisticsResponse.filterSensitiveLog,
+export class GetFindingStatisticsCommand extends command<GetFindingStatisticsCommandInput, GetFindingStatisticsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFindingStatistics",
+  GetFindingStatistics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFindingStatisticsRequest;
+      output: GetFindingStatisticsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFindingStatisticsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFindingStatisticsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFindingStatisticsCommandOutput> {
-    return deserializeAws_restJson1GetFindingStatisticsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFindingStatisticsCommandInput;
+      output: GetFindingStatisticsCommandOutput;
+    };
+  };
 }

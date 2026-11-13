@@ -1,309 +1,460 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultSESv2HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AssociateEmailIdentityCertificateCommandInput,
+  AssociateEmailIdentityCertificateCommandOutput,
+} from "./commands/AssociateEmailIdentityCertificateCommand";
+import type {
+  BatchGetMetricDataCommandInput,
+  BatchGetMetricDataCommandOutput,
+} from "./commands/BatchGetMetricDataCommand";
+import type { CancelExportJobCommandInput, CancelExportJobCommandOutput } from "./commands/CancelExportJobCommand";
+import type {
   CreateConfigurationSetCommandInput,
   CreateConfigurationSetCommandOutput,
 } from "./commands/CreateConfigurationSetCommand";
-import {
+import type {
   CreateConfigurationSetEventDestinationCommandInput,
   CreateConfigurationSetEventDestinationCommandOutput,
 } from "./commands/CreateConfigurationSetEventDestinationCommand";
-import { CreateContactCommandInput, CreateContactCommandOutput } from "./commands/CreateContactCommand";
-import { CreateContactListCommandInput, CreateContactListCommandOutput } from "./commands/CreateContactListCommand";
-import {
+import type { CreateContactCommandInput, CreateContactCommandOutput } from "./commands/CreateContactCommand";
+import type {
+  CreateContactListCommandInput,
+  CreateContactListCommandOutput,
+} from "./commands/CreateContactListCommand";
+import type {
   CreateCustomVerificationEmailTemplateCommandInput,
   CreateCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/CreateCustomVerificationEmailTemplateCommand";
-import {
+import type {
   CreateDedicatedIpPoolCommandInput,
   CreateDedicatedIpPoolCommandOutput,
 } from "./commands/CreateDedicatedIpPoolCommand";
-import {
+import type {
   CreateDeliverabilityTestReportCommandInput,
   CreateDeliverabilityTestReportCommandOutput,
 } from "./commands/CreateDeliverabilityTestReportCommand";
-import {
+import type {
   CreateEmailIdentityCommandInput,
   CreateEmailIdentityCommandOutput,
 } from "./commands/CreateEmailIdentityCommand";
-import {
+import type {
   CreateEmailIdentityPolicyCommandInput,
   CreateEmailIdentityPolicyCommandOutput,
 } from "./commands/CreateEmailIdentityPolicyCommand";
-import {
+import type {
   CreateEmailTemplateCommandInput,
   CreateEmailTemplateCommandOutput,
 } from "./commands/CreateEmailTemplateCommand";
-import { CreateImportJobCommandInput, CreateImportJobCommandOutput } from "./commands/CreateImportJobCommand";
-import {
+import type { CreateExportJobCommandInput, CreateExportJobCommandOutput } from "./commands/CreateExportJobCommand";
+import type { CreateImportJobCommandInput, CreateImportJobCommandOutput } from "./commands/CreateImportJobCommand";
+import type {
+  CreateMultiRegionEndpointCommandInput,
+  CreateMultiRegionEndpointCommandOutput,
+} from "./commands/CreateMultiRegionEndpointCommand";
+import type { CreateTenantCommandInput, CreateTenantCommandOutput } from "./commands/CreateTenantCommand";
+import type {
+  CreateTenantResourceAssociationCommandInput,
+  CreateTenantResourceAssociationCommandOutput,
+} from "./commands/CreateTenantResourceAssociationCommand";
+import type {
   DeleteConfigurationSetCommandInput,
   DeleteConfigurationSetCommandOutput,
 } from "./commands/DeleteConfigurationSetCommand";
-import {
+import type {
   DeleteConfigurationSetEventDestinationCommandInput,
   DeleteConfigurationSetEventDestinationCommandOutput,
 } from "./commands/DeleteConfigurationSetEventDestinationCommand";
-import { DeleteContactCommandInput, DeleteContactCommandOutput } from "./commands/DeleteContactCommand";
-import { DeleteContactListCommandInput, DeleteContactListCommandOutput } from "./commands/DeleteContactListCommand";
-import {
+import type { DeleteContactCommandInput, DeleteContactCommandOutput } from "./commands/DeleteContactCommand";
+import type {
+  DeleteContactListCommandInput,
+  DeleteContactListCommandOutput,
+} from "./commands/DeleteContactListCommand";
+import type {
   DeleteCustomVerificationEmailTemplateCommandInput,
   DeleteCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/DeleteCustomVerificationEmailTemplateCommand";
-import {
+import type {
   DeleteDedicatedIpPoolCommandInput,
   DeleteDedicatedIpPoolCommandOutput,
 } from "./commands/DeleteDedicatedIpPoolCommand";
-import {
+import type {
   DeleteEmailIdentityCommandInput,
   DeleteEmailIdentityCommandOutput,
 } from "./commands/DeleteEmailIdentityCommand";
-import {
+import type {
   DeleteEmailIdentityPolicyCommandInput,
   DeleteEmailIdentityPolicyCommandOutput,
 } from "./commands/DeleteEmailIdentityPolicyCommand";
-import {
+import type {
   DeleteEmailTemplateCommandInput,
   DeleteEmailTemplateCommandOutput,
 } from "./commands/DeleteEmailTemplateCommand";
-import {
+import type {
+  DeleteMultiRegionEndpointCommandInput,
+  DeleteMultiRegionEndpointCommandOutput,
+} from "./commands/DeleteMultiRegionEndpointCommand";
+import type {
   DeleteSuppressedDestinationCommandInput,
   DeleteSuppressedDestinationCommandOutput,
 } from "./commands/DeleteSuppressedDestinationCommand";
-import { GetAccountCommandInput, GetAccountCommandOutput } from "./commands/GetAccountCommand";
-import {
+import type { DeleteTenantCommandInput, DeleteTenantCommandOutput } from "./commands/DeleteTenantCommand";
+import type {
+  DeleteTenantResourceAssociationCommandInput,
+  DeleteTenantResourceAssociationCommandOutput,
+} from "./commands/DeleteTenantResourceAssociationCommand";
+import type {
+  DisassociateEmailIdentityCertificateCommandInput,
+  DisassociateEmailIdentityCertificateCommandOutput,
+} from "./commands/DisassociateEmailIdentityCertificateCommand";
+import type { GetAccountCommandInput, GetAccountCommandOutput } from "./commands/GetAccountCommand";
+import type {
   GetBlacklistReportsCommandInput,
   GetBlacklistReportsCommandOutput,
 } from "./commands/GetBlacklistReportsCommand";
-import {
+import type {
   GetConfigurationSetCommandInput,
   GetConfigurationSetCommandOutput,
 } from "./commands/GetConfigurationSetCommand";
-import {
+import type {
   GetConfigurationSetEventDestinationsCommandInput,
   GetConfigurationSetEventDestinationsCommandOutput,
 } from "./commands/GetConfigurationSetEventDestinationsCommand";
-import { GetContactCommandInput, GetContactCommandOutput } from "./commands/GetContactCommand";
-import { GetContactListCommandInput, GetContactListCommandOutput } from "./commands/GetContactListCommand";
-import {
+import type { GetContactCommandInput, GetContactCommandOutput } from "./commands/GetContactCommand";
+import type { GetContactListCommandInput, GetContactListCommandOutput } from "./commands/GetContactListCommand";
+import type {
   GetCustomVerificationEmailTemplateCommandInput,
   GetCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/GetCustomVerificationEmailTemplateCommand";
-import { GetDedicatedIpCommandInput, GetDedicatedIpCommandOutput } from "./commands/GetDedicatedIpCommand";
-import { GetDedicatedIpsCommandInput, GetDedicatedIpsCommandOutput } from "./commands/GetDedicatedIpsCommand";
-import {
+import type { GetDedicatedIpCommandInput, GetDedicatedIpCommandOutput } from "./commands/GetDedicatedIpCommand";
+import type {
+  GetDedicatedIpPoolCommandInput,
+  GetDedicatedIpPoolCommandOutput,
+} from "./commands/GetDedicatedIpPoolCommand";
+import type { GetDedicatedIpsCommandInput, GetDedicatedIpsCommandOutput } from "./commands/GetDedicatedIpsCommand";
+import type {
   GetDeliverabilityDashboardOptionsCommandInput,
   GetDeliverabilityDashboardOptionsCommandOutput,
 } from "./commands/GetDeliverabilityDashboardOptionsCommand";
-import {
+import type {
   GetDeliverabilityTestReportCommandInput,
   GetDeliverabilityTestReportCommandOutput,
 } from "./commands/GetDeliverabilityTestReportCommand";
-import {
+import type {
   GetDomainDeliverabilityCampaignCommandInput,
   GetDomainDeliverabilityCampaignCommandOutput,
 } from "./commands/GetDomainDeliverabilityCampaignCommand";
-import {
+import type {
   GetDomainStatisticsReportCommandInput,
   GetDomainStatisticsReportCommandOutput,
 } from "./commands/GetDomainStatisticsReportCommand";
-import { GetEmailIdentityCommandInput, GetEmailIdentityCommandOutput } from "./commands/GetEmailIdentityCommand";
-import {
+import type {
+  GetEmailAddressInsightsCommandInput,
+  GetEmailAddressInsightsCommandOutput,
+} from "./commands/GetEmailAddressInsightsCommand";
+import type { GetEmailIdentityCommandInput, GetEmailIdentityCommandOutput } from "./commands/GetEmailIdentityCommand";
+import type {
   GetEmailIdentityPoliciesCommandInput,
   GetEmailIdentityPoliciesCommandOutput,
 } from "./commands/GetEmailIdentityPoliciesCommand";
-import { GetEmailTemplateCommandInput, GetEmailTemplateCommandOutput } from "./commands/GetEmailTemplateCommand";
-import { GetImportJobCommandInput, GetImportJobCommandOutput } from "./commands/GetImportJobCommand";
-import {
+import type { GetEmailTemplateCommandInput, GetEmailTemplateCommandOutput } from "./commands/GetEmailTemplateCommand";
+import type { GetExportJobCommandInput, GetExportJobCommandOutput } from "./commands/GetExportJobCommand";
+import type { GetImportJobCommandInput, GetImportJobCommandOutput } from "./commands/GetImportJobCommand";
+import type {
+  GetMessageInsightsCommandInput,
+  GetMessageInsightsCommandOutput,
+} from "./commands/GetMessageInsightsCommand";
+import type {
+  GetMultiRegionEndpointCommandInput,
+  GetMultiRegionEndpointCommandOutput,
+} from "./commands/GetMultiRegionEndpointCommand";
+import type {
+  GetReputationEntityCommandInput,
+  GetReputationEntityCommandOutput,
+} from "./commands/GetReputationEntityCommand";
+import type {
   GetSuppressedDestinationCommandInput,
   GetSuppressedDestinationCommandOutput,
 } from "./commands/GetSuppressedDestinationCommand";
-import {
+import type { GetTenantCommandInput, GetTenantCommandOutput } from "./commands/GetTenantCommand";
+import type {
   ListConfigurationSetsCommandInput,
   ListConfigurationSetsCommandOutput,
 } from "./commands/ListConfigurationSetsCommand";
-import { ListContactListsCommandInput, ListContactListsCommandOutput } from "./commands/ListContactListsCommand";
-import { ListContactsCommandInput, ListContactsCommandOutput } from "./commands/ListContactsCommand";
-import {
+import type { ListContactListsCommandInput, ListContactListsCommandOutput } from "./commands/ListContactListsCommand";
+import type { ListContactsCommandInput, ListContactsCommandOutput } from "./commands/ListContactsCommand";
+import type {
   ListCustomVerificationEmailTemplatesCommandInput,
   ListCustomVerificationEmailTemplatesCommandOutput,
 } from "./commands/ListCustomVerificationEmailTemplatesCommand";
-import {
+import type {
   ListDedicatedIpPoolsCommandInput,
   ListDedicatedIpPoolsCommandOutput,
 } from "./commands/ListDedicatedIpPoolsCommand";
-import {
+import type {
   ListDeliverabilityTestReportsCommandInput,
   ListDeliverabilityTestReportsCommandOutput,
 } from "./commands/ListDeliverabilityTestReportsCommand";
-import {
+import type {
   ListDomainDeliverabilityCampaignsCommandInput,
   ListDomainDeliverabilityCampaignsCommandOutput,
 } from "./commands/ListDomainDeliverabilityCampaignsCommand";
-import {
+import type {
   ListEmailIdentitiesCommandInput,
   ListEmailIdentitiesCommandOutput,
 } from "./commands/ListEmailIdentitiesCommand";
-import { ListEmailTemplatesCommandInput, ListEmailTemplatesCommandOutput } from "./commands/ListEmailTemplatesCommand";
-import { ListImportJobsCommandInput, ListImportJobsCommandOutput } from "./commands/ListImportJobsCommand";
-import {
+import type {
+  ListEmailIdentityCertificatesCommandInput,
+  ListEmailIdentityCertificatesCommandOutput,
+} from "./commands/ListEmailIdentityCertificatesCommand";
+import type {
+  ListEmailTemplatesCommandInput,
+  ListEmailTemplatesCommandOutput,
+} from "./commands/ListEmailTemplatesCommand";
+import type { ListExportJobsCommandInput, ListExportJobsCommandOutput } from "./commands/ListExportJobsCommand";
+import type { ListImportJobsCommandInput, ListImportJobsCommandOutput } from "./commands/ListImportJobsCommand";
+import type {
+  ListMultiRegionEndpointsCommandInput,
+  ListMultiRegionEndpointsCommandOutput,
+} from "./commands/ListMultiRegionEndpointsCommand";
+import type {
+  ListRecommendationsCommandInput,
+  ListRecommendationsCommandOutput,
+} from "./commands/ListRecommendationsCommand";
+import type {
+  ListReputationEntitiesCommandInput,
+  ListReputationEntitiesCommandOutput,
+} from "./commands/ListReputationEntitiesCommand";
+import type {
+  ListResourceTenantsCommandInput,
+  ListResourceTenantsCommandOutput,
+} from "./commands/ListResourceTenantsCommand";
+import type {
   ListSuppressedDestinationsCommandInput,
   ListSuppressedDestinationsCommandOutput,
 } from "./commands/ListSuppressedDestinationsCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
+  ListTenantResourcesCommandInput,
+  ListTenantResourcesCommandOutput,
+} from "./commands/ListTenantResourcesCommand";
+import type { ListTenantsCommandInput, ListTenantsCommandOutput } from "./commands/ListTenantsCommand";
+import type {
   PutAccountDedicatedIpWarmupAttributesCommandInput,
   PutAccountDedicatedIpWarmupAttributesCommandOutput,
 } from "./commands/PutAccountDedicatedIpWarmupAttributesCommand";
-import { PutAccountDetailsCommandInput, PutAccountDetailsCommandOutput } from "./commands/PutAccountDetailsCommand";
-import {
+import type {
+  PutAccountDetailsCommandInput,
+  PutAccountDetailsCommandOutput,
+} from "./commands/PutAccountDetailsCommand";
+import type {
+  PutAccountPricingAttributesCommandInput,
+  PutAccountPricingAttributesCommandOutput,
+} from "./commands/PutAccountPricingAttributesCommand";
+import type {
   PutAccountSendingAttributesCommandInput,
   PutAccountSendingAttributesCommandOutput,
 } from "./commands/PutAccountSendingAttributesCommand";
-import {
+import type {
   PutAccountSuppressionAttributesCommandInput,
   PutAccountSuppressionAttributesCommandOutput,
 } from "./commands/PutAccountSuppressionAttributesCommand";
-import {
+import type {
+  PutAccountVdmAttributesCommandInput,
+  PutAccountVdmAttributesCommandOutput,
+} from "./commands/PutAccountVdmAttributesCommand";
+import type {
+  PutConfigurationSetArchivingOptionsCommandInput,
+  PutConfigurationSetArchivingOptionsCommandOutput,
+} from "./commands/PutConfigurationSetArchivingOptionsCommand";
+import type {
   PutConfigurationSetDeliveryOptionsCommandInput,
   PutConfigurationSetDeliveryOptionsCommandOutput,
 } from "./commands/PutConfigurationSetDeliveryOptionsCommand";
-import {
+import type {
   PutConfigurationSetReputationOptionsCommandInput,
   PutConfigurationSetReputationOptionsCommandOutput,
 } from "./commands/PutConfigurationSetReputationOptionsCommand";
-import {
+import type {
   PutConfigurationSetSendingOptionsCommandInput,
   PutConfigurationSetSendingOptionsCommandOutput,
 } from "./commands/PutConfigurationSetSendingOptionsCommand";
-import {
+import type {
   PutConfigurationSetSuppressionOptionsCommandInput,
   PutConfigurationSetSuppressionOptionsCommandOutput,
 } from "./commands/PutConfigurationSetSuppressionOptionsCommand";
-import {
+import type {
   PutConfigurationSetTrackingOptionsCommandInput,
   PutConfigurationSetTrackingOptionsCommandOutput,
 } from "./commands/PutConfigurationSetTrackingOptionsCommand";
-import {
+import type {
+  PutConfigurationSetVdmOptionsCommandInput,
+  PutConfigurationSetVdmOptionsCommandOutput,
+} from "./commands/PutConfigurationSetVdmOptionsCommand";
+import type {
   PutDedicatedIpInPoolCommandInput,
   PutDedicatedIpInPoolCommandOutput,
 } from "./commands/PutDedicatedIpInPoolCommand";
-import {
+import type {
+  PutDedicatedIpPoolScalingAttributesCommandInput,
+  PutDedicatedIpPoolScalingAttributesCommandOutput,
+} from "./commands/PutDedicatedIpPoolScalingAttributesCommand";
+import type {
   PutDedicatedIpWarmupAttributesCommandInput,
   PutDedicatedIpWarmupAttributesCommandOutput,
 } from "./commands/PutDedicatedIpWarmupAttributesCommand";
-import {
+import type {
   PutDeliverabilityDashboardOptionCommandInput,
   PutDeliverabilityDashboardOptionCommandOutput,
 } from "./commands/PutDeliverabilityDashboardOptionCommand";
-import {
+import type {
   PutEmailIdentityConfigurationSetAttributesCommandInput,
   PutEmailIdentityConfigurationSetAttributesCommandOutput,
 } from "./commands/PutEmailIdentityConfigurationSetAttributesCommand";
-import {
+import type {
   PutEmailIdentityDkimAttributesCommandInput,
   PutEmailIdentityDkimAttributesCommandOutput,
 } from "./commands/PutEmailIdentityDkimAttributesCommand";
-import {
+import type {
   PutEmailIdentityDkimSigningAttributesCommandInput,
   PutEmailIdentityDkimSigningAttributesCommandOutput,
 } from "./commands/PutEmailIdentityDkimSigningAttributesCommand";
-import {
+import type {
   PutEmailIdentityFeedbackAttributesCommandInput,
   PutEmailIdentityFeedbackAttributesCommandOutput,
 } from "./commands/PutEmailIdentityFeedbackAttributesCommand";
-import {
+import type {
   PutEmailIdentityMailFromAttributesCommandInput,
   PutEmailIdentityMailFromAttributesCommandOutput,
 } from "./commands/PutEmailIdentityMailFromAttributesCommand";
-import {
+import type {
   PutSuppressedDestinationCommandInput,
   PutSuppressedDestinationCommandOutput,
 } from "./commands/PutSuppressedDestinationCommand";
-import { SendBulkEmailCommandInput, SendBulkEmailCommandOutput } from "./commands/SendBulkEmailCommand";
-import {
+import type {
+  PutTenantSuppressionAttributesCommandInput,
+  PutTenantSuppressionAttributesCommandOutput,
+} from "./commands/PutTenantSuppressionAttributesCommand";
+import type { SendBulkEmailCommandInput, SendBulkEmailCommandOutput } from "./commands/SendBulkEmailCommand";
+import type {
   SendCustomVerificationEmailCommandInput,
   SendCustomVerificationEmailCommandOutput,
 } from "./commands/SendCustomVerificationEmailCommand";
-import { SendEmailCommandInput, SendEmailCommandOutput } from "./commands/SendEmailCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import {
+import type { SendEmailCommandInput, SendEmailCommandOutput } from "./commands/SendEmailCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type {
   TestRenderEmailTemplateCommandInput,
   TestRenderEmailTemplateCommandOutput,
 } from "./commands/TestRenderEmailTemplateCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateConfigurationSetCommandInput,
+  UpdateConfigurationSetCommandOutput,
+} from "./commands/UpdateConfigurationSetCommand";
+import type {
   UpdateConfigurationSetEventDestinationCommandInput,
   UpdateConfigurationSetEventDestinationCommandOutput,
 } from "./commands/UpdateConfigurationSetEventDestinationCommand";
-import { UpdateContactCommandInput, UpdateContactCommandOutput } from "./commands/UpdateContactCommand";
-import { UpdateContactListCommandInput, UpdateContactListCommandOutput } from "./commands/UpdateContactListCommand";
-import {
+import type { UpdateContactCommandInput, UpdateContactCommandOutput } from "./commands/UpdateContactCommand";
+import type {
+  UpdateContactListCommandInput,
+  UpdateContactListCommandOutput,
+} from "./commands/UpdateContactListCommand";
+import type {
   UpdateCustomVerificationEmailTemplateCommandInput,
   UpdateCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/UpdateCustomVerificationEmailTemplateCommand";
-import {
+import type {
   UpdateEmailIdentityPolicyCommandInput,
   UpdateEmailIdentityPolicyCommandOutput,
 } from "./commands/UpdateEmailIdentityPolicyCommand";
-import {
+import type {
   UpdateEmailTemplateCommandInput,
   UpdateEmailTemplateCommandOutput,
 } from "./commands/UpdateEmailTemplateCommand";
+import type {
+  UpdateReputationEntityCustomerManagedStatusCommandInput,
+  UpdateReputationEntityCustomerManagedStatusCommandOutput,
+} from "./commands/UpdateReputationEntityCustomerManagedStatusCommand";
+import type {
+  UpdateReputationEntityPolicyCommandInput,
+  UpdateReputationEntityPolicyCommandOutput,
+} from "./commands/UpdateReputationEntityPolicyCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AssociateEmailIdentityCertificateCommandInput
+  | BatchGetMetricDataCommandInput
+  | CancelExportJobCommandInput
   | CreateConfigurationSetCommandInput
   | CreateConfigurationSetEventDestinationCommandInput
   | CreateContactCommandInput
@@ -314,7 +465,11 @@ export type ServiceInputTypes =
   | CreateEmailIdentityCommandInput
   | CreateEmailIdentityPolicyCommandInput
   | CreateEmailTemplateCommandInput
+  | CreateExportJobCommandInput
   | CreateImportJobCommandInput
+  | CreateMultiRegionEndpointCommandInput
+  | CreateTenantCommandInput
+  | CreateTenantResourceAssociationCommandInput
   | DeleteConfigurationSetCommandInput
   | DeleteConfigurationSetEventDestinationCommandInput
   | DeleteContactCommandInput
@@ -324,7 +479,11 @@ export type ServiceInputTypes =
   | DeleteEmailIdentityCommandInput
   | DeleteEmailIdentityPolicyCommandInput
   | DeleteEmailTemplateCommandInput
+  | DeleteMultiRegionEndpointCommandInput
   | DeleteSuppressedDestinationCommandInput
+  | DeleteTenantCommandInput
+  | DeleteTenantResourceAssociationCommandInput
+  | DisassociateEmailIdentityCertificateCommandInput
   | GetAccountCommandInput
   | GetBlacklistReportsCommandInput
   | GetConfigurationSetCommandInput
@@ -333,16 +492,23 @@ export type ServiceInputTypes =
   | GetContactListCommandInput
   | GetCustomVerificationEmailTemplateCommandInput
   | GetDedicatedIpCommandInput
+  | GetDedicatedIpPoolCommandInput
   | GetDedicatedIpsCommandInput
   | GetDeliverabilityDashboardOptionsCommandInput
   | GetDeliverabilityTestReportCommandInput
   | GetDomainDeliverabilityCampaignCommandInput
   | GetDomainStatisticsReportCommandInput
+  | GetEmailAddressInsightsCommandInput
   | GetEmailIdentityCommandInput
   | GetEmailIdentityPoliciesCommandInput
   | GetEmailTemplateCommandInput
+  | GetExportJobCommandInput
   | GetImportJobCommandInput
+  | GetMessageInsightsCommandInput
+  | GetMultiRegionEndpointCommandInput
+  | GetReputationEntityCommandInput
   | GetSuppressedDestinationCommandInput
+  | GetTenantCommandInput
   | ListConfigurationSetsCommandInput
   | ListContactListsCommandInput
   | ListContactsCommandInput
@@ -351,20 +517,33 @@ export type ServiceInputTypes =
   | ListDeliverabilityTestReportsCommandInput
   | ListDomainDeliverabilityCampaignsCommandInput
   | ListEmailIdentitiesCommandInput
+  | ListEmailIdentityCertificatesCommandInput
   | ListEmailTemplatesCommandInput
+  | ListExportJobsCommandInput
   | ListImportJobsCommandInput
+  | ListMultiRegionEndpointsCommandInput
+  | ListRecommendationsCommandInput
+  | ListReputationEntitiesCommandInput
+  | ListResourceTenantsCommandInput
   | ListSuppressedDestinationsCommandInput
   | ListTagsForResourceCommandInput
+  | ListTenantResourcesCommandInput
+  | ListTenantsCommandInput
   | PutAccountDedicatedIpWarmupAttributesCommandInput
   | PutAccountDetailsCommandInput
+  | PutAccountPricingAttributesCommandInput
   | PutAccountSendingAttributesCommandInput
   | PutAccountSuppressionAttributesCommandInput
+  | PutAccountVdmAttributesCommandInput
+  | PutConfigurationSetArchivingOptionsCommandInput
   | PutConfigurationSetDeliveryOptionsCommandInput
   | PutConfigurationSetReputationOptionsCommandInput
   | PutConfigurationSetSendingOptionsCommandInput
   | PutConfigurationSetSuppressionOptionsCommandInput
   | PutConfigurationSetTrackingOptionsCommandInput
+  | PutConfigurationSetVdmOptionsCommandInput
   | PutDedicatedIpInPoolCommandInput
+  | PutDedicatedIpPoolScalingAttributesCommandInput
   | PutDedicatedIpWarmupAttributesCommandInput
   | PutDeliverabilityDashboardOptionCommandInput
   | PutEmailIdentityConfigurationSetAttributesCommandInput
@@ -373,20 +552,30 @@ export type ServiceInputTypes =
   | PutEmailIdentityFeedbackAttributesCommandInput
   | PutEmailIdentityMailFromAttributesCommandInput
   | PutSuppressedDestinationCommandInput
+  | PutTenantSuppressionAttributesCommandInput
   | SendBulkEmailCommandInput
   | SendCustomVerificationEmailCommandInput
   | SendEmailCommandInput
   | TagResourceCommandInput
   | TestRenderEmailTemplateCommandInput
   | UntagResourceCommandInput
+  | UpdateConfigurationSetCommandInput
   | UpdateConfigurationSetEventDestinationCommandInput
   | UpdateContactCommandInput
   | UpdateContactListCommandInput
   | UpdateCustomVerificationEmailTemplateCommandInput
   | UpdateEmailIdentityPolicyCommandInput
-  | UpdateEmailTemplateCommandInput;
+  | UpdateEmailTemplateCommandInput
+  | UpdateReputationEntityCustomerManagedStatusCommandInput
+  | UpdateReputationEntityPolicyCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AssociateEmailIdentityCertificateCommandOutput
+  | BatchGetMetricDataCommandOutput
+  | CancelExportJobCommandOutput
   | CreateConfigurationSetCommandOutput
   | CreateConfigurationSetEventDestinationCommandOutput
   | CreateContactCommandOutput
@@ -397,7 +586,11 @@ export type ServiceOutputTypes =
   | CreateEmailIdentityCommandOutput
   | CreateEmailIdentityPolicyCommandOutput
   | CreateEmailTemplateCommandOutput
+  | CreateExportJobCommandOutput
   | CreateImportJobCommandOutput
+  | CreateMultiRegionEndpointCommandOutput
+  | CreateTenantCommandOutput
+  | CreateTenantResourceAssociationCommandOutput
   | DeleteConfigurationSetCommandOutput
   | DeleteConfigurationSetEventDestinationCommandOutput
   | DeleteContactCommandOutput
@@ -407,7 +600,11 @@ export type ServiceOutputTypes =
   | DeleteEmailIdentityCommandOutput
   | DeleteEmailIdentityPolicyCommandOutput
   | DeleteEmailTemplateCommandOutput
+  | DeleteMultiRegionEndpointCommandOutput
   | DeleteSuppressedDestinationCommandOutput
+  | DeleteTenantCommandOutput
+  | DeleteTenantResourceAssociationCommandOutput
+  | DisassociateEmailIdentityCertificateCommandOutput
   | GetAccountCommandOutput
   | GetBlacklistReportsCommandOutput
   | GetConfigurationSetCommandOutput
@@ -416,16 +613,23 @@ export type ServiceOutputTypes =
   | GetContactListCommandOutput
   | GetCustomVerificationEmailTemplateCommandOutput
   | GetDedicatedIpCommandOutput
+  | GetDedicatedIpPoolCommandOutput
   | GetDedicatedIpsCommandOutput
   | GetDeliverabilityDashboardOptionsCommandOutput
   | GetDeliverabilityTestReportCommandOutput
   | GetDomainDeliverabilityCampaignCommandOutput
   | GetDomainStatisticsReportCommandOutput
+  | GetEmailAddressInsightsCommandOutput
   | GetEmailIdentityCommandOutput
   | GetEmailIdentityPoliciesCommandOutput
   | GetEmailTemplateCommandOutput
+  | GetExportJobCommandOutput
   | GetImportJobCommandOutput
+  | GetMessageInsightsCommandOutput
+  | GetMultiRegionEndpointCommandOutput
+  | GetReputationEntityCommandOutput
   | GetSuppressedDestinationCommandOutput
+  | GetTenantCommandOutput
   | ListConfigurationSetsCommandOutput
   | ListContactListsCommandOutput
   | ListContactsCommandOutput
@@ -434,20 +638,33 @@ export type ServiceOutputTypes =
   | ListDeliverabilityTestReportsCommandOutput
   | ListDomainDeliverabilityCampaignsCommandOutput
   | ListEmailIdentitiesCommandOutput
+  | ListEmailIdentityCertificatesCommandOutput
   | ListEmailTemplatesCommandOutput
+  | ListExportJobsCommandOutput
   | ListImportJobsCommandOutput
+  | ListMultiRegionEndpointsCommandOutput
+  | ListRecommendationsCommandOutput
+  | ListReputationEntitiesCommandOutput
+  | ListResourceTenantsCommandOutput
   | ListSuppressedDestinationsCommandOutput
   | ListTagsForResourceCommandOutput
+  | ListTenantResourcesCommandOutput
+  | ListTenantsCommandOutput
   | PutAccountDedicatedIpWarmupAttributesCommandOutput
   | PutAccountDetailsCommandOutput
+  | PutAccountPricingAttributesCommandOutput
   | PutAccountSendingAttributesCommandOutput
   | PutAccountSuppressionAttributesCommandOutput
+  | PutAccountVdmAttributesCommandOutput
+  | PutConfigurationSetArchivingOptionsCommandOutput
   | PutConfigurationSetDeliveryOptionsCommandOutput
   | PutConfigurationSetReputationOptionsCommandOutput
   | PutConfigurationSetSendingOptionsCommandOutput
   | PutConfigurationSetSuppressionOptionsCommandOutput
   | PutConfigurationSetTrackingOptionsCommandOutput
+  | PutConfigurationSetVdmOptionsCommandOutput
   | PutDedicatedIpInPoolCommandOutput
+  | PutDedicatedIpPoolScalingAttributesCommandOutput
   | PutDedicatedIpWarmupAttributesCommandOutput
   | PutDeliverabilityDashboardOptionCommandOutput
   | PutEmailIdentityConfigurationSetAttributesCommandOutput
@@ -456,31 +673,38 @@ export type ServiceOutputTypes =
   | PutEmailIdentityFeedbackAttributesCommandOutput
   | PutEmailIdentityMailFromAttributesCommandOutput
   | PutSuppressedDestinationCommandOutput
+  | PutTenantSuppressionAttributesCommandOutput
   | SendBulkEmailCommandOutput
   | SendCustomVerificationEmailCommandOutput
   | SendEmailCommandOutput
   | TagResourceCommandOutput
   | TestRenderEmailTemplateCommandOutput
   | UntagResourceCommandOutput
+  | UpdateConfigurationSetCommandOutput
   | UpdateConfigurationSetEventDestinationCommandOutput
   | UpdateContactCommandOutput
   | UpdateContactListCommandOutput
   | UpdateCustomVerificationEmailTemplateCommandOutput
   | UpdateEmailIdentityPolicyCommandOutput
-  | UpdateEmailTemplateCommandOutput;
+  | UpdateEmailTemplateCommandOutput
+  | UpdateReputationEntityCustomerManagedStatusCommandOutput
+  | UpdateReputationEntityPolicyCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -492,7 +716,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -531,25 +755,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -562,70 +777,119 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type SESv2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of SESv2Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type SESv2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of SESv2Client class constructor that set the region, credentials and other options.
  */
 export interface SESv2ClientConfig extends SESv2ClientConfigType {}
 
-type SESv2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of SESv2Client class. This is resolved and normalized from the {@link SESv2ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type SESv2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of SESv2Client class. This is resolved and normalized from the {@link SESv2ClientConfig | constructor configuration interface}.
  */
 export interface SESv2ClientResolvedConfig extends SESv2ClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon SES API v2</fullname>
- *
- *         <p>
+ *          <p>
  *             <a href="http://aws.amazon.com/ses">Amazon SES</a> is an Amazon Web Services service that
  *             you can use to send email messages to your customers.</p>
- *         <p>If you're new to Amazon SES API v2, you might find it helpful to review the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/">Amazon Simple Email Service Developer
+ *          <p>If you're new to Amazon SES API v2, you might find it helpful to review the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/">Amazon Simple Email Service Developer
  *                 Guide</a>. The <i>Amazon SES Developer Guide</i> provides information
  *             and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p>
+ * @public
  */
 export class SESv2Client extends __Client<
   __HttpHandlerOptions,
@@ -638,22 +902,37 @@ export class SESv2Client extends __Client<
    */
   readonly config: SESv2ClientResolvedConfig;
 
-  constructor(configuration: SESv2ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<SESv2ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultSESv2HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: SESv2ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+            "aws.auth#sigv4a": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

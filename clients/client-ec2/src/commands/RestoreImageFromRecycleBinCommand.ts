@@ -1,0 +1,78 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RestoreImageFromRecycleBinRequest, RestoreImageFromRecycleBinResult } from "../models/models_8";
+import { RestoreImageFromRecycleBin$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RestoreImageFromRecycleBinCommand}.
+ */
+export interface RestoreImageFromRecycleBinCommandInput extends RestoreImageFromRecycleBinRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RestoreImageFromRecycleBinCommand}.
+ */
+export interface RestoreImageFromRecycleBinCommandOutput extends RestoreImageFromRecycleBinResult, __MetadataBearer {}
+
+/**
+ * <p>Restores an AMI from the Recycle Bin. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html">Recover deleted Amazon EBS
+ *         snapshots and EBS-back AMIs with Recycle Bin</a> in the
+ *         <i>Amazon EC2 User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, RestoreImageFromRecycleBinCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, RestoreImageFromRecycleBinCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // RestoreImageFromRecycleBinRequest
+ *   ImageId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
+ * const command = new RestoreImageFromRecycleBinCommand(input);
+ * const response = await client.send(command);
+ * // { // RestoreImageFromRecycleBinResult
+ * //   Return: true || false,
+ * // };
+ *
+ * ```
+ *
+ * @param RestoreImageFromRecycleBinCommandInput - {@link RestoreImageFromRecycleBinCommandInput}
+ * @returns {@link RestoreImageFromRecycleBinCommandOutput}
+ * @see {@link RestoreImageFromRecycleBinCommandInput} for command's `input` shape.
+ * @see {@link RestoreImageFromRecycleBinCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class RestoreImageFromRecycleBinCommand extends command<RestoreImageFromRecycleBinCommandInput, RestoreImageFromRecycleBinCommandOutput>(
+  _ep0,
+  _mw0,
+  "RestoreImageFromRecycleBin",
+  RestoreImageFromRecycleBin$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreImageFromRecycleBinRequest;
+      output: RestoreImageFromRecycleBinResult;
+    };
+    sdk: {
+      input: RestoreImageFromRecycleBinCommandInput;
+      output: RestoreImageFromRecycleBinCommandOutput;
+    };
+  };
+}

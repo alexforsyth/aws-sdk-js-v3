@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListChannelsCommand,
   ListChannelsCommandInput,
   ListChannelsCommandOutput,
 } from "../commands/ListChannelsCommand";
-import { Ivs } from "../Ivs";
 import { IvsClient } from "../IvsClient";
-import { IvsPaginationConfiguration } from "./Interfaces";
+import type { IvsPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: IvsClient,
-  input: ListChannelsCommandInput,
-  ...args: any
-): Promise<ListChannelsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListChannelsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Ivs,
-  input: ListChannelsCommandInput,
-  ...args: any
-): Promise<ListChannelsCommandOutput> => {
-  // @ts-ignore
-  return await client.listChannels(input, ...args);
-};
-export async function* paginateListChannels(
+export const paginateListChannels: (
   config: IvsPaginationConfiguration,
   input: ListChannelsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListChannelsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListChannelsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof Ivs) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof IvsClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Ivs | IvsClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListChannelsCommandOutput> = createPaginator<
+  IvsPaginationConfiguration,
+  ListChannelsCommandInput,
+  ListChannelsCommandOutput
+>(IvsClient, ListChannelsCommand, "nextToken", "nextToken", "maxResults");

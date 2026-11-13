@@ -1,0 +1,1542 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type AssociateVehicleFleetCommandInput,
+  type AssociateVehicleFleetCommandOutput,
+  AssociateVehicleFleetCommand,
+} from "./commands/AssociateVehicleFleetCommand";
+import {
+  type BatchCreateVehicleCommandInput,
+  type BatchCreateVehicleCommandOutput,
+  BatchCreateVehicleCommand,
+} from "./commands/BatchCreateVehicleCommand";
+import {
+  type BatchUpdateVehicleCommandInput,
+  type BatchUpdateVehicleCommandOutput,
+  BatchUpdateVehicleCommand,
+} from "./commands/BatchUpdateVehicleCommand";
+import {
+  type CreateCampaignCommandInput,
+  type CreateCampaignCommandOutput,
+  CreateCampaignCommand,
+} from "./commands/CreateCampaignCommand";
+import {
+  type CreateDecoderManifestCommandInput,
+  type CreateDecoderManifestCommandOutput,
+  CreateDecoderManifestCommand,
+} from "./commands/CreateDecoderManifestCommand";
+import {
+  type CreateFleetCommandInput,
+  type CreateFleetCommandOutput,
+  CreateFleetCommand,
+} from "./commands/CreateFleetCommand";
+import {
+  type CreateModelManifestCommandInput,
+  type CreateModelManifestCommandOutput,
+  CreateModelManifestCommand,
+} from "./commands/CreateModelManifestCommand";
+import {
+  type CreateSignalCatalogCommandInput,
+  type CreateSignalCatalogCommandOutput,
+  CreateSignalCatalogCommand,
+} from "./commands/CreateSignalCatalogCommand";
+import {
+  type CreateStateTemplateCommandInput,
+  type CreateStateTemplateCommandOutput,
+  CreateStateTemplateCommand,
+} from "./commands/CreateStateTemplateCommand";
+import {
+  type CreateVehicleCommandInput,
+  type CreateVehicleCommandOutput,
+  CreateVehicleCommand,
+} from "./commands/CreateVehicleCommand";
+import {
+  type DeleteCampaignCommandInput,
+  type DeleteCampaignCommandOutput,
+  DeleteCampaignCommand,
+} from "./commands/DeleteCampaignCommand";
+import {
+  type DeleteDecoderManifestCommandInput,
+  type DeleteDecoderManifestCommandOutput,
+  DeleteDecoderManifestCommand,
+} from "./commands/DeleteDecoderManifestCommand";
+import {
+  type DeleteFleetCommandInput,
+  type DeleteFleetCommandOutput,
+  DeleteFleetCommand,
+} from "./commands/DeleteFleetCommand";
+import {
+  type DeleteModelManifestCommandInput,
+  type DeleteModelManifestCommandOutput,
+  DeleteModelManifestCommand,
+} from "./commands/DeleteModelManifestCommand";
+import {
+  type DeleteSignalCatalogCommandInput,
+  type DeleteSignalCatalogCommandOutput,
+  DeleteSignalCatalogCommand,
+} from "./commands/DeleteSignalCatalogCommand";
+import {
+  type DeleteStateTemplateCommandInput,
+  type DeleteStateTemplateCommandOutput,
+  DeleteStateTemplateCommand,
+} from "./commands/DeleteStateTemplateCommand";
+import {
+  type DeleteVehicleCommandInput,
+  type DeleteVehicleCommandOutput,
+  DeleteVehicleCommand,
+} from "./commands/DeleteVehicleCommand";
+import {
+  type DisassociateVehicleFleetCommandInput,
+  type DisassociateVehicleFleetCommandOutput,
+  DisassociateVehicleFleetCommand,
+} from "./commands/DisassociateVehicleFleetCommand";
+import {
+  type GetCampaignCommandInput,
+  type GetCampaignCommandOutput,
+  GetCampaignCommand,
+} from "./commands/GetCampaignCommand";
+import {
+  type GetDecoderManifestCommandInput,
+  type GetDecoderManifestCommandOutput,
+  GetDecoderManifestCommand,
+} from "./commands/GetDecoderManifestCommand";
+import {
+  type GetEncryptionConfigurationCommandInput,
+  type GetEncryptionConfigurationCommandOutput,
+  GetEncryptionConfigurationCommand,
+} from "./commands/GetEncryptionConfigurationCommand";
+import { type GetFleetCommandInput, type GetFleetCommandOutput, GetFleetCommand } from "./commands/GetFleetCommand";
+import {
+  type GetLoggingOptionsCommandInput,
+  type GetLoggingOptionsCommandOutput,
+  GetLoggingOptionsCommand,
+} from "./commands/GetLoggingOptionsCommand";
+import {
+  type GetModelManifestCommandInput,
+  type GetModelManifestCommandOutput,
+  GetModelManifestCommand,
+} from "./commands/GetModelManifestCommand";
+import {
+  type GetRegisterAccountStatusCommandInput,
+  type GetRegisterAccountStatusCommandOutput,
+  GetRegisterAccountStatusCommand,
+} from "./commands/GetRegisterAccountStatusCommand";
+import {
+  type GetSignalCatalogCommandInput,
+  type GetSignalCatalogCommandOutput,
+  GetSignalCatalogCommand,
+} from "./commands/GetSignalCatalogCommand";
+import {
+  type GetStateTemplateCommandInput,
+  type GetStateTemplateCommandOutput,
+  GetStateTemplateCommand,
+} from "./commands/GetStateTemplateCommand";
+import {
+  type GetVehicleCommandInput,
+  type GetVehicleCommandOutput,
+  GetVehicleCommand,
+} from "./commands/GetVehicleCommand";
+import {
+  type GetVehicleStatusCommandInput,
+  type GetVehicleStatusCommandOutput,
+  GetVehicleStatusCommand,
+} from "./commands/GetVehicleStatusCommand";
+import {
+  type ImportDecoderManifestCommandInput,
+  type ImportDecoderManifestCommandOutput,
+  ImportDecoderManifestCommand,
+} from "./commands/ImportDecoderManifestCommand";
+import {
+  type ImportSignalCatalogCommandInput,
+  type ImportSignalCatalogCommandOutput,
+  ImportSignalCatalogCommand,
+} from "./commands/ImportSignalCatalogCommand";
+import {
+  type ListCampaignsCommandInput,
+  type ListCampaignsCommandOutput,
+  ListCampaignsCommand,
+} from "./commands/ListCampaignsCommand";
+import {
+  type ListDecoderManifestNetworkInterfacesCommandInput,
+  type ListDecoderManifestNetworkInterfacesCommandOutput,
+  ListDecoderManifestNetworkInterfacesCommand,
+} from "./commands/ListDecoderManifestNetworkInterfacesCommand";
+import {
+  type ListDecoderManifestsCommandInput,
+  type ListDecoderManifestsCommandOutput,
+  ListDecoderManifestsCommand,
+} from "./commands/ListDecoderManifestsCommand";
+import {
+  type ListDecoderManifestSignalsCommandInput,
+  type ListDecoderManifestSignalsCommandOutput,
+  ListDecoderManifestSignalsCommand,
+} from "./commands/ListDecoderManifestSignalsCommand";
+import {
+  type ListFleetsCommandInput,
+  type ListFleetsCommandOutput,
+  ListFleetsCommand,
+} from "./commands/ListFleetsCommand";
+import {
+  type ListFleetsForVehicleCommandInput,
+  type ListFleetsForVehicleCommandOutput,
+  ListFleetsForVehicleCommand,
+} from "./commands/ListFleetsForVehicleCommand";
+import {
+  type ListModelManifestNodesCommandInput,
+  type ListModelManifestNodesCommandOutput,
+  ListModelManifestNodesCommand,
+} from "./commands/ListModelManifestNodesCommand";
+import {
+  type ListModelManifestsCommandInput,
+  type ListModelManifestsCommandOutput,
+  ListModelManifestsCommand,
+} from "./commands/ListModelManifestsCommand";
+import {
+  type ListSignalCatalogNodesCommandInput,
+  type ListSignalCatalogNodesCommandOutput,
+  ListSignalCatalogNodesCommand,
+} from "./commands/ListSignalCatalogNodesCommand";
+import {
+  type ListSignalCatalogsCommandInput,
+  type ListSignalCatalogsCommandOutput,
+  ListSignalCatalogsCommand,
+} from "./commands/ListSignalCatalogsCommand";
+import {
+  type ListStateTemplatesCommandInput,
+  type ListStateTemplatesCommandOutput,
+  ListStateTemplatesCommand,
+} from "./commands/ListStateTemplatesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListVehiclesCommandInput,
+  type ListVehiclesCommandOutput,
+  ListVehiclesCommand,
+} from "./commands/ListVehiclesCommand";
+import {
+  type ListVehiclesInFleetCommandInput,
+  type ListVehiclesInFleetCommandOutput,
+  ListVehiclesInFleetCommand,
+} from "./commands/ListVehiclesInFleetCommand";
+import {
+  type PutEncryptionConfigurationCommandInput,
+  type PutEncryptionConfigurationCommandOutput,
+  PutEncryptionConfigurationCommand,
+} from "./commands/PutEncryptionConfigurationCommand";
+import {
+  type PutLoggingOptionsCommandInput,
+  type PutLoggingOptionsCommandOutput,
+  PutLoggingOptionsCommand,
+} from "./commands/PutLoggingOptionsCommand";
+import {
+  type RegisterAccountCommandInput,
+  type RegisterAccountCommandOutput,
+  RegisterAccountCommand,
+} from "./commands/RegisterAccountCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateCampaignCommandInput,
+  type UpdateCampaignCommandOutput,
+  UpdateCampaignCommand,
+} from "./commands/UpdateCampaignCommand";
+import {
+  type UpdateDecoderManifestCommandInput,
+  type UpdateDecoderManifestCommandOutput,
+  UpdateDecoderManifestCommand,
+} from "./commands/UpdateDecoderManifestCommand";
+import {
+  type UpdateFleetCommandInput,
+  type UpdateFleetCommandOutput,
+  UpdateFleetCommand,
+} from "./commands/UpdateFleetCommand";
+import {
+  type UpdateModelManifestCommandInput,
+  type UpdateModelManifestCommandOutput,
+  UpdateModelManifestCommand,
+} from "./commands/UpdateModelManifestCommand";
+import {
+  type UpdateSignalCatalogCommandInput,
+  type UpdateSignalCatalogCommandOutput,
+  UpdateSignalCatalogCommand,
+} from "./commands/UpdateSignalCatalogCommand";
+import {
+  type UpdateStateTemplateCommandInput,
+  type UpdateStateTemplateCommandOutput,
+  UpdateStateTemplateCommand,
+} from "./commands/UpdateStateTemplateCommand";
+import {
+  type UpdateVehicleCommandInput,
+  type UpdateVehicleCommandOutput,
+  UpdateVehicleCommand,
+} from "./commands/UpdateVehicleCommand";
+import { IoTFleetWiseClient } from "./IoTFleetWiseClient";
+import { paginateGetVehicleStatus } from "./pagination/GetVehicleStatusPaginator";
+import { paginateListCampaigns } from "./pagination/ListCampaignsPaginator";
+import {
+  paginateListDecoderManifestNetworkInterfaces,
+} from "./pagination/ListDecoderManifestNetworkInterfacesPaginator";
+import { paginateListDecoderManifestSignals } from "./pagination/ListDecoderManifestSignalsPaginator";
+import { paginateListDecoderManifests } from "./pagination/ListDecoderManifestsPaginator";
+import { paginateListFleetsForVehicle } from "./pagination/ListFleetsForVehiclePaginator";
+import { paginateListFleets } from "./pagination/ListFleetsPaginator";
+import { paginateListModelManifestNodes } from "./pagination/ListModelManifestNodesPaginator";
+import { paginateListModelManifests } from "./pagination/ListModelManifestsPaginator";
+import { paginateListSignalCatalogNodes } from "./pagination/ListSignalCatalogNodesPaginator";
+import { paginateListSignalCatalogs } from "./pagination/ListSignalCatalogsPaginator";
+import { paginateListStateTemplates } from "./pagination/ListStateTemplatesPaginator";
+import { paginateListVehiclesInFleet } from "./pagination/ListVehiclesInFleetPaginator";
+import { paginateListVehicles } from "./pagination/ListVehiclesPaginator";
+
+const commands = {
+  AssociateVehicleFleetCommand,
+  BatchCreateVehicleCommand,
+  BatchUpdateVehicleCommand,
+  CreateCampaignCommand,
+  CreateDecoderManifestCommand,
+  CreateFleetCommand,
+  CreateModelManifestCommand,
+  CreateSignalCatalogCommand,
+  CreateStateTemplateCommand,
+  CreateVehicleCommand,
+  DeleteCampaignCommand,
+  DeleteDecoderManifestCommand,
+  DeleteFleetCommand,
+  DeleteModelManifestCommand,
+  DeleteSignalCatalogCommand,
+  DeleteStateTemplateCommand,
+  DeleteVehicleCommand,
+  DisassociateVehicleFleetCommand,
+  GetCampaignCommand,
+  GetDecoderManifestCommand,
+  GetEncryptionConfigurationCommand,
+  GetFleetCommand,
+  GetLoggingOptionsCommand,
+  GetModelManifestCommand,
+  GetRegisterAccountStatusCommand,
+  GetSignalCatalogCommand,
+  GetStateTemplateCommand,
+  GetVehicleCommand,
+  GetVehicleStatusCommand,
+  ImportDecoderManifestCommand,
+  ImportSignalCatalogCommand,
+  ListCampaignsCommand,
+  ListDecoderManifestNetworkInterfacesCommand,
+  ListDecoderManifestsCommand,
+  ListDecoderManifestSignalsCommand,
+  ListFleetsCommand,
+  ListFleetsForVehicleCommand,
+  ListModelManifestNodesCommand,
+  ListModelManifestsCommand,
+  ListSignalCatalogNodesCommand,
+  ListSignalCatalogsCommand,
+  ListStateTemplatesCommand,
+  ListTagsForResourceCommand,
+  ListVehiclesCommand,
+  ListVehiclesInFleetCommand,
+  PutEncryptionConfigurationCommand,
+  PutLoggingOptionsCommand,
+  RegisterAccountCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCampaignCommand,
+  UpdateDecoderManifestCommand,
+  UpdateFleetCommand,
+  UpdateModelManifestCommand,
+  UpdateSignalCatalogCommand,
+  UpdateStateTemplateCommand,
+  UpdateVehicleCommand,
+};
+const paginators = {
+  paginateGetVehicleStatus,
+  paginateListCampaigns,
+  paginateListDecoderManifestNetworkInterfaces,
+  paginateListDecoderManifests,
+  paginateListDecoderManifestSignals,
+  paginateListFleets,
+  paginateListFleetsForVehicle,
+  paginateListModelManifestNodes,
+  paginateListModelManifests,
+  paginateListSignalCatalogNodes,
+  paginateListSignalCatalogs,
+  paginateListStateTemplates,
+  paginateListVehicles,
+  paginateListVehiclesInFleet,
+};
+
+/**
+ * @public
+ */
+export interface IoTFleetWiseRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IoTFleetWise {
+  /**
+   * @see {@link AssociateVehicleFleetCommand}
+   */
+  associateVehicleFleet(
+    args: AssociateVehicleFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<AssociateVehicleFleetCommandOutput>;
+  associateVehicleFleet(
+    args: AssociateVehicleFleetCommandInput,
+    cb: (err: any, data?: AssociateVehicleFleetCommandOutput) => void
+  ): void;
+  associateVehicleFleet(
+    args: AssociateVehicleFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: AssociateVehicleFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchCreateVehicleCommand}
+   */
+  batchCreateVehicle(
+    args: BatchCreateVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<BatchCreateVehicleCommandOutput>;
+  batchCreateVehicle(
+    args: BatchCreateVehicleCommandInput,
+    cb: (err: any, data?: BatchCreateVehicleCommandOutput) => void
+  ): void;
+  batchCreateVehicle(
+    args: BatchCreateVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: BatchCreateVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateVehicleCommand}
+   */
+  batchUpdateVehicle(
+    args: BatchUpdateVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<BatchUpdateVehicleCommandOutput>;
+  batchUpdateVehicle(
+    args: BatchUpdateVehicleCommandInput,
+    cb: (err: any, data?: BatchUpdateVehicleCommandOutput) => void
+  ): void;
+  batchUpdateVehicle(
+    args: BatchUpdateVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: BatchUpdateVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCampaignCommand}
+   */
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateCampaignCommandOutput>;
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    cb: (err: any, data?: CreateCampaignCommandOutput) => void
+  ): void;
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDecoderManifestCommand}
+   */
+  createDecoderManifest(
+    args: CreateDecoderManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateDecoderManifestCommandOutput>;
+  createDecoderManifest(
+    args: CreateDecoderManifestCommandInput,
+    cb: (err: any, data?: CreateDecoderManifestCommandOutput) => void
+  ): void;
+  createDecoderManifest(
+    args: CreateDecoderManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateDecoderManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFleetCommand}
+   */
+  createFleet(
+    args: CreateFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateFleetCommandOutput>;
+  createFleet(
+    args: CreateFleetCommandInput,
+    cb: (err: any, data?: CreateFleetCommandOutput) => void
+  ): void;
+  createFleet(
+    args: CreateFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateModelManifestCommand}
+   */
+  createModelManifest(
+    args: CreateModelManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateModelManifestCommandOutput>;
+  createModelManifest(
+    args: CreateModelManifestCommandInput,
+    cb: (err: any, data?: CreateModelManifestCommandOutput) => void
+  ): void;
+  createModelManifest(
+    args: CreateModelManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateModelManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSignalCatalogCommand}
+   */
+  createSignalCatalog(
+    args: CreateSignalCatalogCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateSignalCatalogCommandOutput>;
+  createSignalCatalog(
+    args: CreateSignalCatalogCommandInput,
+    cb: (err: any, data?: CreateSignalCatalogCommandOutput) => void
+  ): void;
+  createSignalCatalog(
+    args: CreateSignalCatalogCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateSignalCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStateTemplateCommand}
+   */
+  createStateTemplate(
+    args: CreateStateTemplateCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateStateTemplateCommandOutput>;
+  createStateTemplate(
+    args: CreateStateTemplateCommandInput,
+    cb: (err: any, data?: CreateStateTemplateCommandOutput) => void
+  ): void;
+  createStateTemplate(
+    args: CreateStateTemplateCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateStateTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVehicleCommand}
+   */
+  createVehicle(
+    args: CreateVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<CreateVehicleCommandOutput>;
+  createVehicle(
+    args: CreateVehicleCommandInput,
+    cb: (err: any, data?: CreateVehicleCommandOutput) => void
+  ): void;
+  createVehicle(
+    args: CreateVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: CreateVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignCommand}
+   */
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteCampaignCommandOutput>;
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
+  ): void;
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDecoderManifestCommand}
+   */
+  deleteDecoderManifest(
+    args: DeleteDecoderManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteDecoderManifestCommandOutput>;
+  deleteDecoderManifest(
+    args: DeleteDecoderManifestCommandInput,
+    cb: (err: any, data?: DeleteDecoderManifestCommandOutput) => void
+  ): void;
+  deleteDecoderManifest(
+    args: DeleteDecoderManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteDecoderManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFleetCommand}
+   */
+  deleteFleet(
+    args: DeleteFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteFleetCommandOutput>;
+  deleteFleet(
+    args: DeleteFleetCommandInput,
+    cb: (err: any, data?: DeleteFleetCommandOutput) => void
+  ): void;
+  deleteFleet(
+    args: DeleteFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteModelManifestCommand}
+   */
+  deleteModelManifest(
+    args: DeleteModelManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteModelManifestCommandOutput>;
+  deleteModelManifest(
+    args: DeleteModelManifestCommandInput,
+    cb: (err: any, data?: DeleteModelManifestCommandOutput) => void
+  ): void;
+  deleteModelManifest(
+    args: DeleteModelManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteModelManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSignalCatalogCommand}
+   */
+  deleteSignalCatalog(
+    args: DeleteSignalCatalogCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteSignalCatalogCommandOutput>;
+  deleteSignalCatalog(
+    args: DeleteSignalCatalogCommandInput,
+    cb: (err: any, data?: DeleteSignalCatalogCommandOutput) => void
+  ): void;
+  deleteSignalCatalog(
+    args: DeleteSignalCatalogCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteSignalCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStateTemplateCommand}
+   */
+  deleteStateTemplate(
+    args: DeleteStateTemplateCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteStateTemplateCommandOutput>;
+  deleteStateTemplate(
+    args: DeleteStateTemplateCommandInput,
+    cb: (err: any, data?: DeleteStateTemplateCommandOutput) => void
+  ): void;
+  deleteStateTemplate(
+    args: DeleteStateTemplateCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteStateTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVehicleCommand}
+   */
+  deleteVehicle(
+    args: DeleteVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DeleteVehicleCommandOutput>;
+  deleteVehicle(
+    args: DeleteVehicleCommandInput,
+    cb: (err: any, data?: DeleteVehicleCommandOutput) => void
+  ): void;
+  deleteVehicle(
+    args: DeleteVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DeleteVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateVehicleFleetCommand}
+   */
+  disassociateVehicleFleet(
+    args: DisassociateVehicleFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<DisassociateVehicleFleetCommandOutput>;
+  disassociateVehicleFleet(
+    args: DisassociateVehicleFleetCommandInput,
+    cb: (err: any, data?: DisassociateVehicleFleetCommandOutput) => void
+  ): void;
+  disassociateVehicleFleet(
+    args: DisassociateVehicleFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: DisassociateVehicleFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCampaignCommand}
+   */
+  getCampaign(
+    args: GetCampaignCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetCampaignCommandOutput>;
+  getCampaign(
+    args: GetCampaignCommandInput,
+    cb: (err: any, data?: GetCampaignCommandOutput) => void
+  ): void;
+  getCampaign(
+    args: GetCampaignCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDecoderManifestCommand}
+   */
+  getDecoderManifest(
+    args: GetDecoderManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetDecoderManifestCommandOutput>;
+  getDecoderManifest(
+    args: GetDecoderManifestCommandInput,
+    cb: (err: any, data?: GetDecoderManifestCommandOutput) => void
+  ): void;
+  getDecoderManifest(
+    args: GetDecoderManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetDecoderManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEncryptionConfigurationCommand}
+   */
+  getEncryptionConfiguration(): Promise<GetEncryptionConfigurationCommandOutput>;
+  getEncryptionConfiguration(
+    args: GetEncryptionConfigurationCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetEncryptionConfigurationCommandOutput>;
+  getEncryptionConfiguration(
+    args: GetEncryptionConfigurationCommandInput,
+    cb: (err: any, data?: GetEncryptionConfigurationCommandOutput) => void
+  ): void;
+  getEncryptionConfiguration(
+    args: GetEncryptionConfigurationCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetEncryptionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFleetCommand}
+   */
+  getFleet(
+    args: GetFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetFleetCommandOutput>;
+  getFleet(
+    args: GetFleetCommandInput,
+    cb: (err: any, data?: GetFleetCommandOutput) => void
+  ): void;
+  getFleet(
+    args: GetFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLoggingOptionsCommand}
+   */
+  getLoggingOptions(): Promise<GetLoggingOptionsCommandOutput>;
+  getLoggingOptions(
+    args: GetLoggingOptionsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetLoggingOptionsCommandOutput>;
+  getLoggingOptions(
+    args: GetLoggingOptionsCommandInput,
+    cb: (err: any, data?: GetLoggingOptionsCommandOutput) => void
+  ): void;
+  getLoggingOptions(
+    args: GetLoggingOptionsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetLoggingOptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelManifestCommand}
+   */
+  getModelManifest(
+    args: GetModelManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetModelManifestCommandOutput>;
+  getModelManifest(
+    args: GetModelManifestCommandInput,
+    cb: (err: any, data?: GetModelManifestCommandOutput) => void
+  ): void;
+  getModelManifest(
+    args: GetModelManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetModelManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRegisterAccountStatusCommand}
+   */
+  getRegisterAccountStatus(): Promise<GetRegisterAccountStatusCommandOutput>;
+  getRegisterAccountStatus(
+    args: GetRegisterAccountStatusCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetRegisterAccountStatusCommandOutput>;
+  getRegisterAccountStatus(
+    args: GetRegisterAccountStatusCommandInput,
+    cb: (err: any, data?: GetRegisterAccountStatusCommandOutput) => void
+  ): void;
+  getRegisterAccountStatus(
+    args: GetRegisterAccountStatusCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetRegisterAccountStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSignalCatalogCommand}
+   */
+  getSignalCatalog(
+    args: GetSignalCatalogCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetSignalCatalogCommandOutput>;
+  getSignalCatalog(
+    args: GetSignalCatalogCommandInput,
+    cb: (err: any, data?: GetSignalCatalogCommandOutput) => void
+  ): void;
+  getSignalCatalog(
+    args: GetSignalCatalogCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetSignalCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStateTemplateCommand}
+   */
+  getStateTemplate(
+    args: GetStateTemplateCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetStateTemplateCommandOutput>;
+  getStateTemplate(
+    args: GetStateTemplateCommandInput,
+    cb: (err: any, data?: GetStateTemplateCommandOutput) => void
+  ): void;
+  getStateTemplate(
+    args: GetStateTemplateCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetStateTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVehicleCommand}
+   */
+  getVehicle(
+    args: GetVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetVehicleCommandOutput>;
+  getVehicle(
+    args: GetVehicleCommandInput,
+    cb: (err: any, data?: GetVehicleCommandOutput) => void
+  ): void;
+  getVehicle(
+    args: GetVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVehicleStatusCommand}
+   */
+  getVehicleStatus(
+    args: GetVehicleStatusCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<GetVehicleStatusCommandOutput>;
+  getVehicleStatus(
+    args: GetVehicleStatusCommandInput,
+    cb: (err: any, data?: GetVehicleStatusCommandOutput) => void
+  ): void;
+  getVehicleStatus(
+    args: GetVehicleStatusCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: GetVehicleStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportDecoderManifestCommand}
+   */
+  importDecoderManifest(
+    args: ImportDecoderManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ImportDecoderManifestCommandOutput>;
+  importDecoderManifest(
+    args: ImportDecoderManifestCommandInput,
+    cb: (err: any, data?: ImportDecoderManifestCommandOutput) => void
+  ): void;
+  importDecoderManifest(
+    args: ImportDecoderManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ImportDecoderManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportSignalCatalogCommand}
+   */
+  importSignalCatalog(
+    args: ImportSignalCatalogCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ImportSignalCatalogCommandOutput>;
+  importSignalCatalog(
+    args: ImportSignalCatalogCommandInput,
+    cb: (err: any, data?: ImportSignalCatalogCommandOutput) => void
+  ): void;
+  importSignalCatalog(
+    args: ImportSignalCatalogCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ImportSignalCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCampaignsCommand}
+   */
+  listCampaigns(): Promise<ListCampaignsCommandOutput>;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListCampaignsCommandOutput>;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    cb: (err: any, data?: ListCampaignsCommandOutput) => void
+  ): void;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListCampaignsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDecoderManifestNetworkInterfacesCommand}
+   */
+  listDecoderManifestNetworkInterfaces(
+    args: ListDecoderManifestNetworkInterfacesCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListDecoderManifestNetworkInterfacesCommandOutput>;
+  listDecoderManifestNetworkInterfaces(
+    args: ListDecoderManifestNetworkInterfacesCommandInput,
+    cb: (err: any, data?: ListDecoderManifestNetworkInterfacesCommandOutput) => void
+  ): void;
+  listDecoderManifestNetworkInterfaces(
+    args: ListDecoderManifestNetworkInterfacesCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListDecoderManifestNetworkInterfacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDecoderManifestsCommand}
+   */
+  listDecoderManifests(): Promise<ListDecoderManifestsCommandOutput>;
+  listDecoderManifests(
+    args: ListDecoderManifestsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListDecoderManifestsCommandOutput>;
+  listDecoderManifests(
+    args: ListDecoderManifestsCommandInput,
+    cb: (err: any, data?: ListDecoderManifestsCommandOutput) => void
+  ): void;
+  listDecoderManifests(
+    args: ListDecoderManifestsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListDecoderManifestsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDecoderManifestSignalsCommand}
+   */
+  listDecoderManifestSignals(
+    args: ListDecoderManifestSignalsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListDecoderManifestSignalsCommandOutput>;
+  listDecoderManifestSignals(
+    args: ListDecoderManifestSignalsCommandInput,
+    cb: (err: any, data?: ListDecoderManifestSignalsCommandOutput) => void
+  ): void;
+  listDecoderManifestSignals(
+    args: ListDecoderManifestSignalsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListDecoderManifestSignalsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFleetsCommand}
+   */
+  listFleets(): Promise<ListFleetsCommandOutput>;
+  listFleets(
+    args: ListFleetsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListFleetsCommandOutput>;
+  listFleets(
+    args: ListFleetsCommandInput,
+    cb: (err: any, data?: ListFleetsCommandOutput) => void
+  ): void;
+  listFleets(
+    args: ListFleetsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListFleetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFleetsForVehicleCommand}
+   */
+  listFleetsForVehicle(
+    args: ListFleetsForVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListFleetsForVehicleCommandOutput>;
+  listFleetsForVehicle(
+    args: ListFleetsForVehicleCommandInput,
+    cb: (err: any, data?: ListFleetsForVehicleCommandOutput) => void
+  ): void;
+  listFleetsForVehicle(
+    args: ListFleetsForVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListFleetsForVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelManifestNodesCommand}
+   */
+  listModelManifestNodes(
+    args: ListModelManifestNodesCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListModelManifestNodesCommandOutput>;
+  listModelManifestNodes(
+    args: ListModelManifestNodesCommandInput,
+    cb: (err: any, data?: ListModelManifestNodesCommandOutput) => void
+  ): void;
+  listModelManifestNodes(
+    args: ListModelManifestNodesCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListModelManifestNodesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelManifestsCommand}
+   */
+  listModelManifests(): Promise<ListModelManifestsCommandOutput>;
+  listModelManifests(
+    args: ListModelManifestsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListModelManifestsCommandOutput>;
+  listModelManifests(
+    args: ListModelManifestsCommandInput,
+    cb: (err: any, data?: ListModelManifestsCommandOutput) => void
+  ): void;
+  listModelManifests(
+    args: ListModelManifestsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListModelManifestsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSignalCatalogNodesCommand}
+   */
+  listSignalCatalogNodes(
+    args: ListSignalCatalogNodesCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListSignalCatalogNodesCommandOutput>;
+  listSignalCatalogNodes(
+    args: ListSignalCatalogNodesCommandInput,
+    cb: (err: any, data?: ListSignalCatalogNodesCommandOutput) => void
+  ): void;
+  listSignalCatalogNodes(
+    args: ListSignalCatalogNodesCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListSignalCatalogNodesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSignalCatalogsCommand}
+   */
+  listSignalCatalogs(): Promise<ListSignalCatalogsCommandOutput>;
+  listSignalCatalogs(
+    args: ListSignalCatalogsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListSignalCatalogsCommandOutput>;
+  listSignalCatalogs(
+    args: ListSignalCatalogsCommandInput,
+    cb: (err: any, data?: ListSignalCatalogsCommandOutput) => void
+  ): void;
+  listSignalCatalogs(
+    args: ListSignalCatalogsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListSignalCatalogsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStateTemplatesCommand}
+   */
+  listStateTemplates(): Promise<ListStateTemplatesCommandOutput>;
+  listStateTemplates(
+    args: ListStateTemplatesCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListStateTemplatesCommandOutput>;
+  listStateTemplates(
+    args: ListStateTemplatesCommandInput,
+    cb: (err: any, data?: ListStateTemplatesCommandOutput) => void
+  ): void;
+  listStateTemplates(
+    args: ListStateTemplatesCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListStateTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVehiclesCommand}
+   */
+  listVehicles(): Promise<ListVehiclesCommandOutput>;
+  listVehicles(
+    args: ListVehiclesCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListVehiclesCommandOutput>;
+  listVehicles(
+    args: ListVehiclesCommandInput,
+    cb: (err: any, data?: ListVehiclesCommandOutput) => void
+  ): void;
+  listVehicles(
+    args: ListVehiclesCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListVehiclesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVehiclesInFleetCommand}
+   */
+  listVehiclesInFleet(
+    args: ListVehiclesInFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<ListVehiclesInFleetCommandOutput>;
+  listVehiclesInFleet(
+    args: ListVehiclesInFleetCommandInput,
+    cb: (err: any, data?: ListVehiclesInFleetCommandOutput) => void
+  ): void;
+  listVehiclesInFleet(
+    args: ListVehiclesInFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: ListVehiclesInFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutEncryptionConfigurationCommand}
+   */
+  putEncryptionConfiguration(
+    args: PutEncryptionConfigurationCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<PutEncryptionConfigurationCommandOutput>;
+  putEncryptionConfiguration(
+    args: PutEncryptionConfigurationCommandInput,
+    cb: (err: any, data?: PutEncryptionConfigurationCommandOutput) => void
+  ): void;
+  putEncryptionConfiguration(
+    args: PutEncryptionConfigurationCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: PutEncryptionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutLoggingOptionsCommand}
+   */
+  putLoggingOptions(
+    args: PutLoggingOptionsCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<PutLoggingOptionsCommandOutput>;
+  putLoggingOptions(
+    args: PutLoggingOptionsCommandInput,
+    cb: (err: any, data?: PutLoggingOptionsCommandOutput) => void
+  ): void;
+  putLoggingOptions(
+    args: PutLoggingOptionsCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: PutLoggingOptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterAccountCommand}
+   */
+  registerAccount(): Promise<RegisterAccountCommandOutput>;
+  registerAccount(
+    args: RegisterAccountCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<RegisterAccountCommandOutput>;
+  registerAccount(
+    args: RegisterAccountCommandInput,
+    cb: (err: any, data?: RegisterAccountCommandOutput) => void
+  ): void;
+  registerAccount(
+    args: RegisterAccountCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: RegisterAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignCommand}
+   */
+  updateCampaign(
+    args: UpdateCampaignCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateCampaignCommandOutput>;
+  updateCampaign(
+    args: UpdateCampaignCommandInput,
+    cb: (err: any, data?: UpdateCampaignCommandOutput) => void
+  ): void;
+  updateCampaign(
+    args: UpdateCampaignCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDecoderManifestCommand}
+   */
+  updateDecoderManifest(
+    args: UpdateDecoderManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateDecoderManifestCommandOutput>;
+  updateDecoderManifest(
+    args: UpdateDecoderManifestCommandInput,
+    cb: (err: any, data?: UpdateDecoderManifestCommandOutput) => void
+  ): void;
+  updateDecoderManifest(
+    args: UpdateDecoderManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateDecoderManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFleetCommand}
+   */
+  updateFleet(
+    args: UpdateFleetCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateFleetCommandOutput>;
+  updateFleet(
+    args: UpdateFleetCommandInput,
+    cb: (err: any, data?: UpdateFleetCommandOutput) => void
+  ): void;
+  updateFleet(
+    args: UpdateFleetCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateFleetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateModelManifestCommand}
+   */
+  updateModelManifest(
+    args: UpdateModelManifestCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateModelManifestCommandOutput>;
+  updateModelManifest(
+    args: UpdateModelManifestCommandInput,
+    cb: (err: any, data?: UpdateModelManifestCommandOutput) => void
+  ): void;
+  updateModelManifest(
+    args: UpdateModelManifestCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateModelManifestCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSignalCatalogCommand}
+   */
+  updateSignalCatalog(
+    args: UpdateSignalCatalogCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateSignalCatalogCommandOutput>;
+  updateSignalCatalog(
+    args: UpdateSignalCatalogCommandInput,
+    cb: (err: any, data?: UpdateSignalCatalogCommandOutput) => void
+  ): void;
+  updateSignalCatalog(
+    args: UpdateSignalCatalogCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateSignalCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStateTemplateCommand}
+   */
+  updateStateTemplate(
+    args: UpdateStateTemplateCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateStateTemplateCommandOutput>;
+  updateStateTemplate(
+    args: UpdateStateTemplateCommandInput,
+    cb: (err: any, data?: UpdateStateTemplateCommandOutput) => void
+  ): void;
+  updateStateTemplate(
+    args: UpdateStateTemplateCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateStateTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateVehicleCommand}
+   */
+  updateVehicle(
+    args: UpdateVehicleCommandInput,
+    options?: IoTFleetWiseRequestOptions
+  ): Promise<UpdateVehicleCommandOutput>;
+  updateVehicle(
+    args: UpdateVehicleCommandInput,
+    cb: (err: any, data?: UpdateVehicleCommandOutput) => void
+  ): void;
+  updateVehicle(
+    args: UpdateVehicleCommandInput,
+    options: IoTFleetWiseRequestOptions,
+    cb: (err: any, data?: UpdateVehicleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVehicleStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetVehicleStatusCommandOutput}.
+   */
+  paginateGetVehicleStatus(
+    args: GetVehicleStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetVehicleStatusCommandOutput>;
+
+  /**
+   * @see {@link ListCampaignsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCampaignsCommandOutput}.
+   */
+  paginateListCampaigns(
+    args?: ListCampaignsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCampaignsCommandOutput>;
+
+  /**
+   * @see {@link ListDecoderManifestNetworkInterfacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDecoderManifestNetworkInterfacesCommandOutput}.
+   */
+  paginateListDecoderManifestNetworkInterfaces(
+    args: ListDecoderManifestNetworkInterfacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDecoderManifestNetworkInterfacesCommandOutput>;
+
+  /**
+   * @see {@link ListDecoderManifestsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDecoderManifestsCommandOutput}.
+   */
+  paginateListDecoderManifests(
+    args?: ListDecoderManifestsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDecoderManifestsCommandOutput>;
+
+  /**
+   * @see {@link ListDecoderManifestSignalsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDecoderManifestSignalsCommandOutput}.
+   */
+  paginateListDecoderManifestSignals(
+    args: ListDecoderManifestSignalsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDecoderManifestSignalsCommandOutput>;
+
+  /**
+   * @see {@link ListFleetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFleetsCommandOutput}.
+   */
+  paginateListFleets(
+    args?: ListFleetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFleetsCommandOutput>;
+
+  /**
+   * @see {@link ListFleetsForVehicleCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFleetsForVehicleCommandOutput}.
+   */
+  paginateListFleetsForVehicle(
+    args: ListFleetsForVehicleCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFleetsForVehicleCommandOutput>;
+
+  /**
+   * @see {@link ListModelManifestNodesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelManifestNodesCommandOutput}.
+   */
+  paginateListModelManifestNodes(
+    args: ListModelManifestNodesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelManifestNodesCommandOutput>;
+
+  /**
+   * @see {@link ListModelManifestsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelManifestsCommandOutput}.
+   */
+  paginateListModelManifests(
+    args?: ListModelManifestsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelManifestsCommandOutput>;
+
+  /**
+   * @see {@link ListSignalCatalogNodesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSignalCatalogNodesCommandOutput}.
+   */
+  paginateListSignalCatalogNodes(
+    args: ListSignalCatalogNodesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSignalCatalogNodesCommandOutput>;
+
+  /**
+   * @see {@link ListSignalCatalogsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSignalCatalogsCommandOutput}.
+   */
+  paginateListSignalCatalogs(
+    args?: ListSignalCatalogsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSignalCatalogsCommandOutput>;
+
+  /**
+   * @see {@link ListStateTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStateTemplatesCommandOutput}.
+   */
+  paginateListStateTemplates(
+    args?: ListStateTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStateTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListVehiclesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVehiclesCommandOutput}.
+   */
+  paginateListVehicles(
+    args?: ListVehiclesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVehiclesCommandOutput>;
+
+  /**
+   * @see {@link ListVehiclesInFleetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVehiclesInFleetCommandOutput}.
+   */
+  paginateListVehiclesInFleet(
+    args: ListVehiclesInFleetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVehiclesInFleetCommandOutput>;
+}
+
+/**
+ * <p>Amazon Web Services IoT FleetWise is a fully managed service that you can use to collect, model, and transfer
+ *             vehicle data to the Amazon Web Services cloud at scale. With Amazon Web Services IoT FleetWise, you can standardize all of
+ *             your vehicle data models, independent of the in-vehicle communication architecture, and
+ *             define data collection rules to transfer only high-value data to the cloud.
+ *             </p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/">What is Amazon Web Services IoT FleetWise?</a> in the
+ *                 <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>
+ *          <important>
+ *             <p>Access to certain Amazon Web Services IoT FleetWise features is currently gated. For more information, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html">Amazon Web Services Region and feature availability</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>
+ *          </important>
+ * @public
+ */
+export class IoTFleetWise extends IoTFleetWiseClient implements IoTFleetWise {}
+createAggregatedClient(commands, IoTFleetWise, { paginators });

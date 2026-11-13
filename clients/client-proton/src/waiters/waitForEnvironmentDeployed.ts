@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetEnvironmentCommand, GetEnvironmentCommandInput } from "../commands/GetEnvironmentCommand";
-import { ProtonClient } from "../ProtonClient";
+import {
+  type GetEnvironmentCommandInput,
+  type GetEnvironmentCommandOutput,
+  GetEnvironmentCommand,
+} from "../commands/GetEnvironmentCommand";
+import type { ProtonServiceException } from "../models/ProtonServiceException";
+import type { ProtonClient } from "../ProtonClient";
 
-const checkState = async (client: ProtonClient, input: GetEnvironmentCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ProtonClient, input: GetEnvironmentCommandInput): Promise<WaiterResult<GetEnvironmentCommandOutput | ProtonServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetEnvironmentCommand(input));
+    let result: GetEnvironmentCommandOutput & any = await client.send(new GetEnvironmentCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.environment.deploymentStatus;
-      };
+      }
       if (returnComparator() === "SUCCEEDED") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: ProtonClient, input: GetEnvironmentCommandInpu
     try {
       const returnComparator = () => {
         return result.environment.deploymentStatus;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -36,7 +48,7 @@ const checkState = async (client: ProtonClient, input: GetEnvironmentCommandInpu
 export const waitForEnvironmentDeployed = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetEnvironmentCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetEnvironmentCommandOutput | ProtonServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 4999 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -48,8 +60,8 @@ export const waitForEnvironmentDeployed = async (
 export const waitUntilEnvironmentDeployed = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetEnvironmentCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetEnvironmentCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 4999 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetEnvironmentCommandOutput>;
 };

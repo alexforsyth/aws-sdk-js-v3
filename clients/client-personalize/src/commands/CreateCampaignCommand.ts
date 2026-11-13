@@ -1,55 +1,61 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateCampaignRequest, CreateCampaignResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1CreateCampaignCommand,
-  serializeAws_json1_1CreateCampaignCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateCampaignRequest, CreateCampaignResponse } from "../models/models_0";
+import { CreateCampaign$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateCampaignCommand}.
+ */
 export interface CreateCampaignCommandInput extends CreateCampaignRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateCampaignCommand}.
+ */
 export interface CreateCampaignCommandOutput extends CreateCampaignResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a campaign by deploying a solution version. When a client calls the
+ * <important>
+ *             <p> You incur campaign costs while it is active. To avoid unnecessary costs, make sure to delete the campaign when you are finished. For information about campaign
+ *         costs, see <a href="https://aws.amazon.com/personalize/pricing/">Amazon Personalize pricing</a>.</p>
+ *          </important>
+ *          <p>Creates a campaign that deploys a solution version. When a client calls the
  *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a>
  *       and
  *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html">GetPersonalizedRanking</a>
  *       APIs, a campaign is specified in the request.</p>
- *
  *          <p>
  *             <b>Minimum Provisioned TPS and Auto-Scaling</b>
  *          </p>
- *
- *          <p>A transaction is a single <code>GetRecommendations</code> or
- *        <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput
- *        and unit of billing for Amazon Personalize. The minimum provisioned TPS
- *        (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by
- *        Amazon Personalize, and thus, the minimum billing charge.
- *     </p>
+ *          <important>
+ *             <p> A high <code>minProvisionedTPS</code> will increase your cost. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track
+ *         your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>
+ *         as necessary.</p>
+ *          </important>
  *          <p>
- *        If your TPS increases beyond
- *        <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,
- *        but never below <code>minProvisionedTPS</code>.
- *        There's a short time delay while the capacity is increased that might cause loss of
- *        transactions.</p>
- *          <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.
- *       You pay for maximum of either the minimum provisioned TPS or the actual TPS.
+ *       When you create an Amazon Personalize campaign, you can specify the minimum provisioned transactions per second
+ *       (<code>minProvisionedTPS</code>) for the campaign. This is the baseline transaction throughput for the campaign provisioned by
+ *       Amazon Personalize. It sets the minimum billing charge for the campaign while it is active. A transaction is a single <code>GetRecommendations</code> or
+ *       <code>GetPersonalizedRanking</code> request. The default <code>minProvisionedTPS</code> is 1.</p>
+ *          <p> If your TPS increases beyond the <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up
+ *       and down, but never below <code>minProvisionedTPS</code>.
+ *       There's a short time delay while the capacity is increased
+ *       that might cause loss of transactions. When your traffic reduces, capacity returns to the <code>minProvisionedTPS</code>.
+ *     </p>
+ *          <p>You are charged for the
+ *       the minimum provisioned TPS or, if your requests exceed the <code>minProvisionedTPS</code>, the actual TPS.
+ *       The actual TPS is the total number of recommendation requests you make.
  *       We recommend starting with a low <code>minProvisionedTPS</code>, track
- *        your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>
- *        as necessary.</p>
- *
+ *       your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code> as necessary.</p>
+ *          <p>For more information about campaign costs, see <a href="https://aws.amazon.com/personalize/pricing/">Amazon Personalize pricing</a>.</p>
  *          <p>
  *             <b>Status</b>
  *          </p>
@@ -62,34 +68,33 @@ export interface CreateCampaignCommandOutput extends CreateCampaignResponse, __M
  *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
  *             </li>
  *          </ul>
- *          <p>To get the campaign status, call <a>DescribeCampaign</a>.</p>
+ *          <p>To get the campaign status, call <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html">DescribeCampaign</a>.</p>
  *          <note>
  *             <p>Wait until the <code>status</code> of the campaign
  *         is <code>ACTIVE</code> before asking the campaign for recommendations.</p>
  *          </note>
- *
  *          <p class="title">
  *             <b>Related APIs</b>
  *          </p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <a>ListCampaigns</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html">ListCampaigns</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>DescribeCampaign</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html">DescribeCampaign</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>UpdateCampaign</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html">UpdateCampaign</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>DeleteCampaign</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html">DeleteCampaign</a>
  *                </p>
  *             </li>
  *          </ul>
@@ -98,68 +103,83 @@ export interface CreateCampaignCommandOutput extends CreateCampaignResponse, __M
  * ```javascript
  * import { PersonalizeClient, CreateCampaignCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, CreateCampaignCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // CreateCampaignRequest
+ *   name: "STRING_VALUE", // required
+ *   solutionVersionArn: "STRING_VALUE", // required
+ *   minProvisionedTPS: Number("int"),
+ *   campaignConfig: { // CampaignConfig
+ *     itemExplorationConfig: { // HyperParameters
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     enableMetadataWithRecommendations: true || false,
+ *     syncWithLatestSolutionVersion: true || false,
+ *     rankingInfluence: { // RankingInfluence
+ *       "<keys>": Number("double"),
+ *     },
+ *   },
+ *   tags: [ // Tags
+ *     { // Tag
+ *       tagKey: "STRING_VALUE", // required
+ *       tagValue: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateCampaignCommand(input);
  * const response = await client.send(command);
+ * // { // CreateCampaignResponse
+ * //   campaignArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateCampaignCommandInput - {@link CreateCampaignCommandInput}
+ * @returns {@link CreateCampaignCommandOutput}
  * @see {@link CreateCampaignCommandInput} for command's `input` shape.
  * @see {@link CreateCampaignCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of requests per second has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified resource already exists.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>You have exceeded the maximum number of tags you can apply to this resource. </p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class CreateCampaignCommand extends $Command<
-  CreateCampaignCommandInput,
-  CreateCampaignCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateCampaignCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateCampaignCommandInput, CreateCampaignCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "CreateCampaignCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateCampaignRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateCampaignResponse.filterSensitiveLog,
+export class CreateCampaignCommand extends command<CreateCampaignCommandInput, CreateCampaignCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateCampaign",
+  CreateCampaign$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCampaignRequest;
+      output: CreateCampaignResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateCampaignCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateCampaignCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateCampaignCommandOutput> {
-    return deserializeAws_json1_1CreateCampaignCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateCampaignCommandInput;
+      output: CreateCampaignCommandOutput;
+    };
+  };
 }

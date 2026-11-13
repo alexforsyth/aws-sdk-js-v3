@@ -1,6 +1,23 @@
-export * from "./Route53RecoveryControlConfig";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Recovery Control Configuration API Reference for Amazon Route 53 Application Recovery Controller</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./Route53RecoveryControlConfigClient";
+export * from "./Route53RecoveryControlConfig";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { Route53RecoveryControlConfigExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
 export * from "./waiters";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { Route53RecoveryControlConfigServiceException } from "./models/Route53RecoveryControlConfigServiceException";

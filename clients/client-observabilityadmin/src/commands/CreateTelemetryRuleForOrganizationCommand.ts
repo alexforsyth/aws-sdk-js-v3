@@ -1,0 +1,196 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  CreateTelemetryRuleForOrganizationInput,
+  CreateTelemetryRuleForOrganizationOutput,
+} from "../models/models_0";
+import { CreateTelemetryRuleForOrganization$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateTelemetryRuleForOrganizationCommand}.
+ */
+export interface CreateTelemetryRuleForOrganizationCommandInput extends CreateTelemetryRuleForOrganizationInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateTelemetryRuleForOrganizationCommand}.
+ */
+export interface CreateTelemetryRuleForOrganizationCommandOutput extends CreateTelemetryRuleForOrganizationOutput, __MetadataBearer {}
+
+/**
+ * <p> Creates a telemetry rule that applies across an Amazon Web Services Organization. This operation can only be called by the organization's management account or a delegated administrator account. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ObservabilityAdminClient, CreateTelemetryRuleForOrganizationCommand } from "@aws-sdk/client-observabilityadmin"; // ES Modules import
+ * // const { ObservabilityAdminClient, CreateTelemetryRuleForOrganizationCommand } = require("@aws-sdk/client-observabilityadmin"); // CommonJS import
+ * // import type { ObservabilityAdminClientConfig } from "@aws-sdk/client-observabilityadmin";
+ * const config = {}; // type is ObservabilityAdminClientConfig
+ * const client = new ObservabilityAdminClient(config);
+ * const input = { // CreateTelemetryRuleForOrganizationInput
+ *   RuleName: "STRING_VALUE", // required
+ *   Rule: { // TelemetryRule
+ *     ResourceType: "AWS::EC2::Instance" || "AWS::EC2::VPC" || "AWS::Lambda::Function" || "AWS::CloudTrail" || "AWS::EKS::Cluster" || "AWS::WAFv2::WebACL" || "AWS::ElasticLoadBalancingV2::LoadBalancer" || "AWS::Route53Resolver::ResolverEndpoint" || "AWS::BedrockAgentCore::Runtime" || "AWS::BedrockAgentCore::Browser" || "AWS::BedrockAgentCore::CodeInterpreter" || "AWS::BedrockAgentCore::Gateway" || "AWS::BedrockAgentCore::Memory" || "AWS::BedrockAgentCore::WorkloadIdentity" || "AWS::BedrockAgentCore::PaymentManager" || "AWS::SecurityHub::Hub" || "AWS::CloudFront::Distribution" || "AWS::SecurityHub::HubV2" || "AWS::CloudWatch::OTelEnrichment" || "AWS::MSK::Cluster" || "AWS::S3::Bucket" || "AWS::Bedrock::KnowledgeBase" || "AWS::XRay::TransactionSearchConfig",
+ *     TelemetryType: "Logs" || "Metrics" || "Traces" || "Insights", // required
+ *     TelemetrySourceTypes: [ // TelemetrySourceTypes
+ *       "VPC_FLOW_LOGS" || "ROUTE53_RESOLVER_QUERY_LOGS" || "EKS_AUDIT_LOGS" || "EKS_AUTHENTICATOR_LOGS" || "EKS_CONTROLLER_MANAGER_LOGS" || "EKS_SCHEDULER_LOGS" || "EKS_API_LOGS",
+ *     ],
+ *     DestinationConfiguration: { // TelemetryDestinationConfiguration
+ *       DestinationType: "cloud-watch-logs",
+ *       DestinationPattern: "STRING_VALUE",
+ *       RetentionInDays: Number("int"),
+ *       VPCFlowLogParameters: { // VPCFlowLogParameters
+ *         LogFormat: "STRING_VALUE",
+ *         TrafficType: "STRING_VALUE",
+ *         MaxAggregationInterval: Number("int"),
+ *       },
+ *       CloudtrailParameters: { // CloudtrailParameters
+ *         AdvancedEventSelectors: [ // AdvancedEventSelectors // required
+ *           { // AdvancedEventSelector
+ *             Name: "STRING_VALUE",
+ *             FieldSelectors: [ // FieldSelectors // required
+ *               { // AdvancedFieldSelector
+ *                 Field: "STRING_VALUE", // required
+ *                 Equals: [ // StringList
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 StartsWith: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 EndsWith: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 NotEquals: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 NotStartsWith: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 NotEndsWith: "<StringList>",
+ *               },
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *       ELBLoadBalancerLoggingParameters: { // ELBLoadBalancerLoggingParameters
+ *         OutputFormat: "plain" || "json",
+ *         FieldDelimiter: "STRING_VALUE",
+ *       },
+ *       WAFLoggingParameters: { // WAFLoggingParameters
+ *         RedactedFields: [ // RedactedFields
+ *           { // FieldToMatch
+ *             SingleHeader: { // SingleHeader
+ *               Name: "STRING_VALUE",
+ *             },
+ *             UriPath: "STRING_VALUE",
+ *             QueryString: "STRING_VALUE",
+ *             Method: "STRING_VALUE",
+ *           },
+ *         ],
+ *         LoggingFilter: { // LoggingFilter
+ *           Filters: [ // Filters
+ *             { // Filter
+ *               Behavior: "KEEP" || "DROP",
+ *               Requirement: "MEETS_ALL" || "MEETS_ANY",
+ *               Conditions: [ // Conditions
+ *                 { // Condition
+ *                   ActionCondition: { // ActionCondition
+ *                     Action: "ALLOW" || "BLOCK" || "COUNT" || "CAPTCHA" || "CHALLENGE" || "EXCLUDED_AS_COUNT",
+ *                   },
+ *                   LabelNameCondition: { // LabelNameCondition
+ *                     LabelName: "STRING_VALUE",
+ *                   },
+ *                 },
+ *               ],
+ *             },
+ *           ],
+ *           DefaultBehavior: "KEEP" || "DROP",
+ *         },
+ *         LogType: "WAF_LOGS",
+ *       },
+ *       LogDeliveryParameters: { // LogDeliveryParameters
+ *         LogTypes: [ // LogTypes
+ *           "APPLICATION_LOGS" || "USAGE_LOGS" || "SECURITY_FINDING_LOGS" || "ACCESS_LOGS" || "CONNECTION_LOGS" || "S3_SERVER_ACCESS_LOGS" || "ALB_ACCESS_LOGS" || "ALB_CONNECTION_LOGS" || "ALB_HEALTH_CHECK_LOGS",
+ *         ],
+ *       },
+ *       MskMonitoringParameters: { // MskMonitoringParameters
+ *         EnhancedMonitoring: "DEFAULT" || "PER_BROKER" || "PER_TOPIC_PER_BROKER" || "PER_TOPIC_PER_PARTITION",
+ *       },
+ *       KmsKeyArn: "STRING_VALUE",
+ *     },
+ *     Scope: "STRING_VALUE",
+ *     SelectionCriteria: "STRING_VALUE",
+ *     AllowFieldUpdates: true || false,
+ *     Regions: [ // Regions
+ *       "STRING_VALUE",
+ *     ],
+ *     AllRegions: true || false,
+ *   },
+ *   Tags: { // TagMapInput
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new CreateTelemetryRuleForOrganizationCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateTelemetryRuleForOrganizationOutput
+ * //   RuleArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateTelemetryRuleForOrganizationCommandInput - {@link CreateTelemetryRuleForOrganizationCommandInput}
+ * @returns {@link CreateTelemetryRuleForOrganizationCommandOutput}
+ * @see {@link CreateTelemetryRuleForOrganizationCommandInput} for command's `input` shape.
+ * @see {@link CreateTelemetryRuleForOrganizationCommandOutput} for command's `response` shape.
+ * @see {@link ObservabilityAdminClientResolvedConfig | config} for ObservabilityAdminClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Indicates you don't have permissions to perform the requested operation. The user or role that is making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access management for Amazon Web Services resources</a> in the IAM user guide. </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> The requested operation conflicts with the current state of the specified resource or with another request. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Indicates the request has failed to process because of an unknown server error, exception, or failure. </p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p> The requested operation would exceed the allowed quota for the specified resource type. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> The request throughput limit was exceeded. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> Indicates input validation failed. Check your request parameters and retry the request. </p>
+ *
+ * @throws {@link ObservabilityAdminServiceException}
+ * <p>Base exception class for all service exceptions from ObservabilityAdmin service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateTelemetryRuleForOrganizationCommand extends command<CreateTelemetryRuleForOrganizationCommandInput, CreateTelemetryRuleForOrganizationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateTelemetryRuleForOrganization",
+  CreateTelemetryRuleForOrganization$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTelemetryRuleForOrganizationInput;
+      output: CreateTelemetryRuleForOrganizationOutput;
+    };
+    sdk: {
+      input: CreateTelemetryRuleForOrganizationCommandInput;
+      output: CreateTelemetryRuleForOrganizationCommandOutput;
+    };
+  };
+}

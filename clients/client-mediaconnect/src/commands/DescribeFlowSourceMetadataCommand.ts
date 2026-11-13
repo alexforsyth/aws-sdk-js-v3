@@ -1,0 +1,201 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFlowSourceMetadataRequest, DescribeFlowSourceMetadataResponse } from "../models/models_1";
+import { DescribeFlowSourceMetadata$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFlowSourceMetadataCommand}.
+ */
+export interface DescribeFlowSourceMetadataCommandInput extends DescribeFlowSourceMetadataRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFlowSourceMetadataCommand}.
+ */
+export interface DescribeFlowSourceMetadataCommandOutput extends DescribeFlowSourceMetadataResponse, __MetadataBearer {}
+
+/**
+ * <p> The <code>DescribeFlowSourceMetadata</code> API is used to view information about the flow's source transport stream and programs. This API displays status messages about the flow's source as well as details about the program's video, audio, and other data. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaConnectClient, DescribeFlowSourceMetadataCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
+ * // const { MediaConnectClient, DescribeFlowSourceMetadataCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
+ * const client = new MediaConnectClient(config);
+ * const input = { // DescribeFlowSourceMetadataRequest
+ *   FlowArn: "STRING_VALUE", // required
+ * };
+ * const command = new DescribeFlowSourceMetadataCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeFlowSourceMetadataResponse
+ * //   FlowArn: "STRING_VALUE",
+ * //   Messages: [ // __listOfMessageDetail
+ * //     { // MessageDetail
+ * //       Code: "STRING_VALUE", // required
+ * //       Message: "STRING_VALUE", // required
+ * //       ResourceName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Timestamp: new Date("TIMESTAMP"),
+ * //   TransportMediaInfo: { // TransportMediaInfo
+ * //     Programs: [ // __listOfTransportStreamProgram // required
+ * //       { // TransportStreamProgram
+ * //         PcrPid: Number("int"), // required
+ * //         ProgramName: "STRING_VALUE",
+ * //         ProgramNumber: Number("int"), // required
+ * //         ProgramPid: Number("int"), // required
+ * //         Streams: [ // __listOfTransportStream // required
+ * //           { // TransportStream
+ * //             Channels: Number("int"),
+ * //             Codec: "STRING_VALUE",
+ * //             Color: { // ColorInformation
+ * //               Colorimetry: "BT709" || "BT470M" || "BT470BG" || "BT601" || "SMPTE240M" || "GENERIC_FILM" || "BT2020" || "SMPTE428" || "SMPTE431" || "SMPTE432",
+ * //               TransferCharacteristics: "BT709" || "BT470M" || "BT470BG" || "BT601" || "SMPTE240M" || "LINEAR" || "LOG100" || "LOG316" || "IEC61966_2_4" || "BT1361_ECG" || "IEC61966_2_1" || "BT2020_10" || "BT2020_12" || "BT2100_PQ" || "SMPTE428" || "BT2100_HLG",
+ * //               MatrixCoefficients: "IDENTITY" || "BT709" || "FCC" || "BT470BG" || "BT601" || "SMPTE240M" || "YCGCO" || "BT2020_NCL" || "BT2020_CL" || "SMPTE2085" || "CHROMATICITY_DERIVED_NCL" || "CHROMATICITY_DERIVED_CL" || "BT2100_ICTCP" || "IPT_C2",
+ * //             },
+ * //             FrameRate: "STRING_VALUE",
+ * //             FrameResolution: { // FrameResolution
+ * //               FrameHeight: Number("int"), // required
+ * //               FrameWidth: Number("int"), // required
+ * //             },
+ * //             Pid: Number("int"), // required
+ * //             SampleRate: Number("int"),
+ * //             SampleSize: Number("int"),
+ * //             ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ * //             StreamType: "STRING_VALUE", // required
+ * //             Language: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     TsId: Number("int"),
+ * //   },
+ * //   NdiInfo: { // NdiSourceMetadataInfo
+ * //     ActiveSource: { // NdiSourceInfo
+ * //       SourceName: "STRING_VALUE", // required
+ * //     },
+ * //     DiscoveredSources: [ // __listOfNdiSourceInfo // required
+ * //       {
+ * //         SourceName: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     MediaInfo: { // NdiMediaInfo
+ * //       Streams: [ // __listOfNdiMediaStreamInfo // required
+ * //         { // NdiMediaStreamInfo
+ * //           StreamType: "STRING_VALUE", // required
+ * //           Codec: "STRING_VALUE", // required
+ * //           StreamId: Number("int"), // required
+ * //           ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ * //           Color: {
+ * //             Colorimetry: "BT709" || "BT470M" || "BT470BG" || "BT601" || "SMPTE240M" || "GENERIC_FILM" || "BT2020" || "SMPTE428" || "SMPTE431" || "SMPTE432",
+ * //             TransferCharacteristics: "BT709" || "BT470M" || "BT470BG" || "BT601" || "SMPTE240M" || "LINEAR" || "LOG100" || "LOG316" || "IEC61966_2_4" || "BT1361_ECG" || "IEC61966_2_1" || "BT2020_10" || "BT2020_12" || "BT2100_PQ" || "SMPTE428" || "BT2100_HLG",
+ * //             MatrixCoefficients: "IDENTITY" || "BT709" || "FCC" || "BT470BG" || "BT601" || "SMPTE240M" || "YCGCO" || "BT2020_NCL" || "BT2020_CL" || "SMPTE2085" || "CHROMATICITY_DERIVED_NCL" || "CHROMATICITY_DERIVED_CL" || "BT2100_ICTCP" || "IPT_C2",
+ * //           },
+ * //           FrameResolution: {
+ * //             FrameHeight: Number("int"), // required
+ * //             FrameWidth: Number("int"), // required
+ * //           },
+ * //           FrameRate: "STRING_VALUE",
+ * //           Channels: Number("int"),
+ * //           SampleRate: Number("int"),
+ * //         },
+ * //       ],
+ * //     },
+ * //     Messages: [ // required
+ * //       {
+ * //         Code: "STRING_VALUE", // required
+ * //         Message: "STRING_VALUE", // required
+ * //         ResourceName: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * //   RtmpInfo: { // RtmpSourceMetadataInfo
+ * //     ApplicationName: "STRING_VALUE",
+ * //     StreamName: "STRING_VALUE",
+ * //     MediaInfo: { // RtmpMediaInfo
+ * //       Streams: [ // RtmpMediaStreamInfoList // required
+ * //         { // RtmpMediaStreamInfo
+ * //           StreamId: Number("int"), // required
+ * //           StreamType: "VIDEO" || "AUDIO" || "DATA" || "UNKNOWN", // required
+ * //           Codec: "STRING_VALUE", // required
+ * //           FrameRate: "STRING_VALUE",
+ * //           FrameResolution: {
+ * //             FrameHeight: Number("int"), // required
+ * //             FrameWidth: Number("int"), // required
+ * //           },
+ * //           ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ * //           Color: {
+ * //             Colorimetry: "BT709" || "BT470M" || "BT470BG" || "BT601" || "SMPTE240M" || "GENERIC_FILM" || "BT2020" || "SMPTE428" || "SMPTE431" || "SMPTE432",
+ * //             TransferCharacteristics: "BT709" || "BT470M" || "BT470BG" || "BT601" || "SMPTE240M" || "LINEAR" || "LOG100" || "LOG316" || "IEC61966_2_4" || "BT1361_ECG" || "IEC61966_2_1" || "BT2020_10" || "BT2020_12" || "BT2100_PQ" || "SMPTE428" || "BT2100_HLG",
+ * //             MatrixCoefficients: "IDENTITY" || "BT709" || "FCC" || "BT470BG" || "BT601" || "SMPTE240M" || "YCGCO" || "BT2020_NCL" || "BT2020_CL" || "SMPTE2085" || "CHROMATICITY_DERIVED_NCL" || "CHROMATICITY_DERIVED_CL" || "BT2100_ICTCP" || "IPT_C2",
+ * //           },
+ * //           Channels: Number("int"),
+ * //           SampleRate: Number("int"),
+ * //           SampleSize: Number("int"),
+ * //           Language: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeFlowSourceMetadataCommandInput - {@link DescribeFlowSourceMetadataCommandInput}
+ * @returns {@link DescribeFlowSourceMetadataCommandOutput}
+ * @see {@link DescribeFlowSourceMetadataCommandInput} for command's `input` shape.
+ * @see {@link DescribeFlowSourceMetadataCommandOutput} for command's `response` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribeFlowSourceMetadataCommand extends command<DescribeFlowSourceMetadataCommandInput, DescribeFlowSourceMetadataCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFlowSourceMetadata",
+  DescribeFlowSourceMetadata$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFlowSourceMetadataRequest;
+      output: DescribeFlowSourceMetadataResponse;
+    };
+    sdk: {
+      input: DescribeFlowSourceMetadataCommandInput;
+      output: DescribeFlowSourceMetadataCommandOutput;
+    };
+  };
+}

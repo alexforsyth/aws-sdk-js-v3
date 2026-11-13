@@ -1,95 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { ModifyDBSubnetGroupMessage, ModifyDBSubnetGroupResult } from "../models/models_0";
-import {
-  deserializeAws_queryModifyDBSubnetGroupCommand,
-  serializeAws_queryModifyDBSubnetGroupCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyDBSubnetGroupMessage, ModifyDBSubnetGroupResult } from "../models/models_0";
+import { ModifyDBSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyDBSubnetGroupCommand}.
+ */
 export interface ModifyDBSubnetGroupCommandInput extends ModifyDBSubnetGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyDBSubnetGroupCommand}.
+ */
 export interface ModifyDBSubnetGroupCommandOutput extends ModifyDBSubnetGroupResult, __MetadataBearer {}
 
 /**
- * <p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.</p>
+ * <p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Amazon Web Services Region.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DocDBClient, ModifyDBSubnetGroupCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, ModifyDBSubnetGroupCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // ModifyDBSubnetGroupMessage
+ *   DBSubnetGroupName: "STRING_VALUE", // required
+ *   DBSubnetGroupDescription: "STRING_VALUE",
+ *   SubnetIds: [ // SubnetIdentifierList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifyDBSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyDBSubnetGroupResult
+ * //   DBSubnetGroup: { // DBSubnetGroup
+ * //     DBSubnetGroupName: "STRING_VALUE",
+ * //     DBSubnetGroupDescription: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     SubnetGroupStatus: "STRING_VALUE",
+ * //     Subnets: [ // SubnetList
+ * //       { // Subnet
+ * //         SubnetIdentifier: "STRING_VALUE",
+ * //         SubnetAvailabilityZone: { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //         SubnetStatus: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     DBSubnetGroupArn: "STRING_VALUE",
+ * //     SupportedNetworkTypes: [ // NetworkTypeList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyDBSubnetGroupCommandInput - {@link ModifyDBSubnetGroupCommandInput}
+ * @returns {@link ModifyDBSubnetGroupCommandOutput}
  * @see {@link ModifyDBSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyDBSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBSubnetGroupDoesNotCoverEnoughAZs} (client fault)
+ *  <p>Subnets in the subnet group should cover at least two Availability Zones unless there is only one Availability Zone.</p>
+ *
+ * @throws {@link DBSubnetGroupNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBSubnetGroupName</code> doesn't refer to an existing subnet group. </p>
+ *
+ * @throws {@link DBSubnetQuotaExceededFault} (client fault)
+ *  <p>The request would cause you to exceed the allowed number of subnets in a subnet group.</p>
+ *
+ * @throws {@link InvalidSubnet} (client fault)
+ *  <p>The requested subnet is not valid, or multiple subnets were requested that are not all
+ *             in a common virtual private cloud (VPC).</p>
+ *
+ * @throws {@link SubnetAlreadyInUse} (client fault)
+ *  <p>The subnet is already in use in the Availability Zone.</p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyDBSubnetGroupCommand extends $Command<
-  ModifyDBSubnetGroupCommandInput,
-  ModifyDBSubnetGroupCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyDBSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyDBSubnetGroupCommandInput, ModifyDBSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "ModifyDBSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyDBSubnetGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyDBSubnetGroupResult.filterSensitiveLog,
+export class ModifyDBSubnetGroupCommand extends command<ModifyDBSubnetGroupCommandInput, ModifyDBSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyDBSubnetGroup",
+  ModifyDBSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyDBSubnetGroupMessage;
+      output: ModifyDBSubnetGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyDBSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyDBSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyDBSubnetGroupCommandOutput> {
-    return deserializeAws_queryModifyDBSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyDBSubnetGroupCommandInput;
+      output: ModifyDBSubnetGroupCommandOutput;
+    };
+  };
 }

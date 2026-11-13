@@ -1,95 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { ListFlowsRequest, ListFlowsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListFlowsCommand,
-  serializeAws_restJson1ListFlowsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFlowsRequest, ListFlowsResponse } from "../models/models_1";
+import { ListFlows$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFlowsCommand}.
+ */
 export interface ListFlowsCommandInput extends ListFlowsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFlowsCommand}.
+ */
 export interface ListFlowsCommandOutput extends ListFlowsResponse, __MetadataBearer {}
 
 /**
- * Displays a list of flows that are associated with this account. This request returns a paginated result.
+ * <p> Displays a list of flows that are associated with this account. This request returns a paginated result.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, ListFlowsCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, ListFlowsCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // ListFlowsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListFlowsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFlowsResponse
+ * //   Flows: [ // __listOfListedFlow
+ * //     { // ListedFlow
+ * //       AvailabilityZone: "STRING_VALUE", // required
+ * //       Description: "STRING_VALUE", // required
+ * //       FlowArn: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //       SourceType: "OWNED" || "ENTITLED", // required
+ * //       Status: "STANDBY" || "ACTIVE" || "UPDATING" || "DELETING" || "STARTING" || "STOPPING" || "ERROR", // required
+ * //       Maintenance: { // Maintenance
+ * //         MaintenanceDay: "Monday" || "Tuesday" || "Wednesday" || "Thursday" || "Friday" || "Saturday" || "Sunday",
+ * //         MaintenanceDeadline: "STRING_VALUE",
+ * //         MaintenanceScheduledDate: "STRING_VALUE",
+ * //         MaintenanceStartHour: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFlowsCommandInput - {@link ListFlowsCommandInput}
+ * @returns {@link ListFlowsCommandOutput}
  * @see {@link ListFlowsCommandInput} for command's `input` shape.
  * @see {@link ListFlowsCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class ListFlowsCommand extends $Command<
-  ListFlowsCommandInput,
-  ListFlowsCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFlowsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFlowsCommandInput, ListFlowsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "ListFlowsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFlowsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFlowsResponse.filterSensitiveLog,
+export class ListFlowsCommand extends command<ListFlowsCommandInput, ListFlowsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFlows",
+  ListFlows$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFlowsRequest;
+      output: ListFlowsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFlowsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListFlowsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFlowsCommandOutput> {
-    return deserializeAws_restJson1ListFlowsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFlowsCommandInput;
+      output: ListFlowsCommandOutput;
+    };
+  };
 }

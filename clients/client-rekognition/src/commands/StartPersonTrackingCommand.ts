@@ -1,28 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StartPersonTrackingRequest, StartPersonTrackingResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartPersonTrackingCommand,
-  serializeAws_json1_1StartPersonTrackingCommand,
-} from "../protocols/Aws_json1_1";
-import { RekognitionClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RekognitionClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartPersonTrackingRequest, StartPersonTrackingResponse } from "../models/models_0";
+import { StartPersonTracking$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartPersonTrackingCommand}.
+ */
 export interface StartPersonTrackingCommandInput extends StartPersonTrackingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartPersonTrackingCommand}.
+ */
 export interface StartPersonTrackingCommandOutput extends StartPersonTrackingResponse, __MetadataBearer {}
 
 /**
- * <p>Starts the asynchronous tracking of a person's path in a stored video.</p>
+ * <note>
+ *             <p>
+ *                <i>End of support notice:</i> On October 31, 2025, AWS will discontinue
+ *          support for Amazon Rekognition People Pathing. After October 31, 2025, you will no
+ *          longer be able to use the Rekognition People Pathing capability. For more information,
+ *          visit this <a href="https://aws.amazon.com/blogs/machine-learning/transitioning-from-amazon-rekognition-people-pathing-exploring-other-alternatives/">blog post</a>.</p>
+ *          </note>
+ *          <p>Starts the asynchronous tracking of a person's path in a stored video.</p>
  *          <p>Amazon Rekognition Video can track the path of people in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name
  *        and the filename of the video. <code>StartPersonTracking</code>
  *        returns a job identifier (<code>JobId</code>) which you use to get the results of the operation.
@@ -36,68 +44,94 @@ export interface StartPersonTrackingCommandOutput extends StartPersonTrackingRes
  * ```javascript
  * import { RekognitionClient, StartPersonTrackingCommand } from "@aws-sdk/client-rekognition"; // ES Modules import
  * // const { RekognitionClient, StartPersonTrackingCommand } = require("@aws-sdk/client-rekognition"); // CommonJS import
+ * // import type { RekognitionClientConfig } from "@aws-sdk/client-rekognition";
+ * const config = {}; // type is RekognitionClientConfig
  * const client = new RekognitionClient(config);
+ * const input = { // StartPersonTrackingRequest
+ *   Video: { // Video
+ *     S3Object: { // S3Object
+ *       Bucket: "STRING_VALUE",
+ *       Name: "STRING_VALUE",
+ *       Version: "STRING_VALUE",
+ *     },
+ *   },
+ *   ClientRequestToken: "STRING_VALUE",
+ *   NotificationChannel: { // NotificationChannel
+ *     SNSTopicArn: "STRING_VALUE", // required
+ *     RoleArn: "STRING_VALUE", // required
+ *   },
+ *   JobTag: "STRING_VALUE",
+ * };
  * const command = new StartPersonTrackingCommand(input);
  * const response = await client.send(command);
+ * // { // StartPersonTrackingResponse
+ * //   JobId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartPersonTrackingCommandInput - {@link StartPersonTrackingCommandInput}
+ * @returns {@link StartPersonTrackingCommandOutput}
  * @see {@link StartPersonTrackingCommandInput} for command's `input` shape.
  * @see {@link StartPersonTrackingCommandOutput} for command's `response` shape.
- * @see {@link RekognitionClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RekognitionClientResolvedConfig | config} for RekognitionClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to perform the action.</p>
+ *
+ * @throws {@link IdempotentParameterMismatchException} (client fault)
+ *  <p>A <code>ClientRequestToken</code> input parameter was reused with an operation, but at least one of the other input
+ *         parameters is different from the previous call to the operation.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Amazon Rekognition experienced a service issue. Try your call again.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Input parameter violated a constraint. Validate your parameter before calling the API
+ *       operation again.</p>
+ *
+ * @throws {@link InvalidS3ObjectException} (client fault)
+ *  <p>Amazon Rekognition is unable to access the S3 object specified in the request.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>An Amazon Rekognition service limit was exceeded. For example, if you start too many jobs
+ *             concurrently, subsequent calls to start operations (ex:
+ *             <code>StartLabelDetection</code>) will raise a <code>LimitExceededException</code>
+ *             exception (HTTP status code: 400) until the number of concurrently running jobs is below
+ *             the Amazon Rekognition service limit. </p>
+ *
+ * @throws {@link ProvisionedThroughputExceededException} (client fault)
+ *  <p>The number of requests exceeded your throughput limit. If you want to increase this
+ *       limit, contact Amazon Rekognition.</p>
+ *
+ * @throws {@link ThrottlingException} (server fault)
+ *  <p>Amazon Rekognition is temporarily unable to process the request. Try your call again.</p>
+ *
+ * @throws {@link VideoTooLargeException} (client fault)
+ *  <p>The file size or duration of the supplied media is too large. The maximum file size is 10GB.
+ *         The maximum duration is 6 hours. </p>
+ *
+ * @throws {@link RekognitionServiceException}
+ * <p>Base exception class for all service exceptions from Rekognition service.</p>
+ *
+ *
+ * @public
  */
-export class StartPersonTrackingCommand extends $Command<
-  StartPersonTrackingCommandInput,
-  StartPersonTrackingCommandOutput,
-  RekognitionClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartPersonTrackingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RekognitionClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartPersonTrackingCommandInput, StartPersonTrackingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RekognitionClient";
-    const commandName = "StartPersonTrackingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartPersonTrackingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartPersonTrackingResponse.filterSensitiveLog,
+export class StartPersonTrackingCommand extends command<StartPersonTrackingCommandInput, StartPersonTrackingCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartPersonTracking",
+  StartPersonTracking$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartPersonTrackingRequest;
+      output: StartPersonTrackingResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartPersonTrackingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartPersonTrackingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartPersonTrackingCommandOutput> {
-    return deserializeAws_json1_1StartPersonTrackingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartPersonTrackingCommandInput;
+      output: StartPersonTrackingCommandOutput;
+    };
+  };
 }

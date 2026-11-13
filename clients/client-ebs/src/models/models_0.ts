@@ -1,561 +1,354 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-import { Readable } from "stream";
+// smithy-typescript generated code
+import type { StreamingBlobTypes } from "@smithy/types";
 
-export enum AccessDeniedExceptionReason {
-  DEPENDENCY_ACCESS_DENIED = "DEPENDENCY_ACCESS_DENIED",
-  UNAUTHORIZED_ACCOUNT = "UNAUTHORIZED_ACCOUNT",
-}
-
-/**
- * <p>You do not have sufficient access to perform this action.</p>
- */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The reason for the exception.</p>
-   */
-  Reason: AccessDeniedExceptionReason | string | undefined;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
+import type { ChecksumAggregationMethod, ChecksumAlgorithm, SSEType, Status } from "./enums";
 
 /**
  * <p>A block of data in an Amazon Elastic Block Store snapshot.</p>
+ * @public
  */
 export interface Block {
   /**
    * <p>The block index.</p>
+   * @public
    */
-  BlockIndex?: number;
+  BlockIndex?: number | undefined;
 
   /**
    * <p>The block token for the block index.</p>
+   * @public
    */
-  BlockToken?: string;
-}
-
-export namespace Block {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Block): any => ({
-    ...obj,
-  });
+  BlockToken?: string | undefined;
 }
 
 /**
  * <p>A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of
  *             the same volume/snapshot lineage.</p>
+ * @public
  */
 export interface ChangedBlock {
   /**
    * <p>The block index.</p>
+   * @public
    */
-  BlockIndex?: number;
+  BlockIndex?: number | undefined;
 
   /**
    * <p>The block token for the block index of the <code>FirstSnapshotId</code> specified in
    *             the <code>ListChangedBlocks</code> operation. This value is absent if the first snapshot
    *             does not have the changed block that is on the second snapshot.</p>
+   * @public
    */
-  FirstBlockToken?: string;
+  FirstBlockToken?: string | undefined;
 
   /**
    * <p>The block token for the block index of the <code>SecondSnapshotId</code> specified in
    *             the <code>ListChangedBlocks</code> operation.</p>
+   * @public
    */
-  SecondBlockToken?: string;
+  SecondBlockToken?: string | undefined;
 }
 
-export namespace ChangedBlock {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ChangedBlock): any => ({
-    ...obj,
-  });
-}
-
-export enum ChecksumAggregationMethod {
-  CHECKSUM_AGGREGATION_LINEAR = "LINEAR",
-}
-
-export enum ChecksumAlgorithm {
-  CHECKSUM_ALGORITHM_SHA256 = "SHA256",
-}
-
+/**
+ * @public
+ */
 export interface CompleteSnapshotRequest {
   /**
    * <p>The ID of the snapshot.</p>
+   * @public
    */
   SnapshotId: string | undefined;
 
   /**
    * <p>The number of blocks that were written to the snapshot.</p>
+   * @public
    */
   ChangedBlocksCount: number | undefined;
 
   /**
    * <p>An aggregated Base-64 SHA256 checksum based on the checksums of each written
    *             block.</p>
-   *         <p>To generate the aggregated checksum using the linear aggregation method, arrange the
+   *          <p>To generate the aggregated checksum using the linear aggregation method, arrange the
    *             checksums for each written block in ascending order of their block index, concatenate
    *             them to form a single string, and then generate the checksum on the entire string using
    *             the SHA256 algorithm.</p>
+   * @public
    */
-  Checksum?: string;
+  Checksum?: string | undefined;
 
   /**
    * <p>The algorithm used to generate the checksum. Currently, the only supported algorithm
    *             is <code>SHA256</code>.</p>
+   * @public
    */
-  ChecksumAlgorithm?: ChecksumAlgorithm | string;
+  ChecksumAlgorithm?: ChecksumAlgorithm | undefined;
 
   /**
    * <p>The aggregation method used to generate the checksum. Currently, the only supported
    *             aggregation method is <code>LINEAR</code>.</p>
+   * @public
    */
-  ChecksumAggregationMethod?: ChecksumAggregationMethod | string;
+  ChecksumAggregationMethod?: ChecksumAggregationMethod | undefined;
 }
 
-export namespace CompleteSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CompleteSnapshotRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum Status {
-  COMPLETED = "completed",
-  ERROR = "error",
-  PENDING = "pending",
-}
-
+/**
+ * @public
+ */
 export interface CompleteSnapshotResponse {
   /**
    * <p>The status of the snapshot.</p>
+   * @public
    */
-  Status?: Status | string;
-}
-
-export namespace CompleteSnapshotResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CompleteSnapshotResponse): any => ({
-    ...obj,
-  });
+  Status?: Status | undefined;
 }
 
 /**
- * <p>An internal error has occurred.</p>
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-export enum RequestThrottledExceptionReason {
-  ACCOUNT_THROTTLED = "ACCOUNT_THROTTLED",
-  DEPENDENCY_REQUEST_THROTTLED = "DEPENDENCY_REQUEST_THROTTLED",
-}
-
-/**
- * <p>The number of API requests has exceed the maximum allowed API request throttling
- *             limit.</p>
- */
-export interface RequestThrottledException extends __SmithyException, $MetadataBearer {
-  name: "RequestThrottledException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The reason for the exception.</p>
-   */
-  Reason?: RequestThrottledExceptionReason | string;
-}
-
-export namespace RequestThrottledException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RequestThrottledException): any => ({
-    ...obj,
-  });
-}
-
-export enum ResourceNotFoundExceptionReason {
-  DEPENDENCY_RESOURCE_NOT_FOUND = "DEPENDENCY_RESOURCE_NOT_FOUND",
-  SNAPSHOT_NOT_FOUND = "SNAPSHOT_NOT_FOUND",
-}
-
-/**
- * <p>The specified resource does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The reason for the exception.</p>
-   */
-  Reason?: ResourceNotFoundExceptionReason | string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-export enum ServiceQuotaExceededExceptionReason {
-  DEPENDENCY_SERVICE_QUOTA_EXCEEDED = "DEPENDENCY_SERVICE_QUOTA_EXCEEDED",
-}
-
-/**
- * <p>Your current service quotas do not allow you to perform this action.</p>
- */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The reason for the exception.</p>
-   */
-  Reason?: ServiceQuotaExceededExceptionReason | string;
-}
-
-export namespace ServiceQuotaExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
-}
-
-export enum ValidationExceptionReason {
-  INVALID_BLOCK = "INVALID_BLOCK",
-  INVALID_BLOCK_TOKEN = "INVALID_BLOCK_TOKEN",
-  INVALID_CONTENT_ENCODING = "INVALID_CONTENT_ENCODING",
-  INVALID_CUSTOMER_KEY = "INVALID_CUSTOMER_KEY",
-  INVALID_DEPENDENCY_REQUEST = "INVALID_DEPENDENCY_REQUEST",
-  INVALID_PAGE_TOKEN = "INVALID_PAGE_TOKEN",
-  INVALID_PARAMETER_VALUE = "INVALID_PARAMETER_VALUE",
-  INVALID_SNAPSHOT_ID = "INVALID_SNAPSHOT_ID",
-  INVALID_TAG = "INVALID_TAG",
-  INVALID_VOLUME_SIZE = "INVALID_VOLUME_SIZE",
-  UNRELATED_SNAPSHOTS = "UNRELATED_SNAPSHOTS",
-}
-
-/**
- * <p>The input fails to satisfy the constraints of the EBS direct APIs.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The reason for the validation exception.</p>
-   */
-  Reason?: ValidationExceptionReason | string;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have reached the limit for concurrent API requests. For more information, see
- *                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapi-performance">Optimizing performance of the EBS direct APIs</a> in the <i>Amazon Elastic Compute Cloud
- *                 User Guide</i>.</p>
- */
-export interface ConcurrentLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ConcurrentLimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ConcurrentLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConcurrentLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request uses the same client token as a previous, but non-identical
- *             request.</p>
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
 export interface GetSnapshotBlockRequest {
   /**
    * <p>The ID of the snapshot containing the block from which to get data.</p>
+   *          <important>
+   *             <p>If the specified snapshot is encrypted, you must have permission to use the
+   *                 KMS key that was used to encrypt the snapshot. For more information, see
+   *                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html">
+   *                     Using encryption</a> in the <i>Amazon Elastic Compute Cloud User
+   *                         Guide</i>.</p>
+   *          </important>
+   * @public
    */
   SnapshotId: string | undefined;
 
   /**
-   * <p>The block index of the block from which to get data.</p>
-   *
-   *
-   *         <p>Obtain the <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or
-   *                 <code>ListSnapshotBlocks</code> operations.</p>
+   * <p>The block index of the block in which to read the data. A block index is a logical
+   *             index in units of <code>512</code> KiB blocks. To identify the block index, divide
+   *             the logical offset of the data in the logical volume by the block size (logical offset
+   *             of data/<code>524288</code>). The logical offset of the data must be <code>512</code>
+   *             KiB aligned.</p>
+   * @public
    */
   BlockIndex: number | undefined;
 
   /**
-   * <p>The block token of the block from which to get data.</p>
-   *
-   *
-   *         <p>Obtain the <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or
-   *                 <code>ListSnapshotBlocks</code> operations.</p>
+   * <p>The block token of the block from which to get data. You can obtain the <code>BlockToken</code>
+   *             by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>
+   * @public
    */
   BlockToken: string | undefined;
 }
 
-export namespace GetSnapshotBlockRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSnapshotBlockRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSnapshotBlockResponse {
   /**
    * <p>The size of the data in the block.</p>
+   * @public
    */
-  DataLength?: number;
+  DataLength?: number | undefined;
 
   /**
    * <p>The data content of the block.</p>
+   * @public
    */
-  BlockData?: Readable | ReadableStream | Blob;
+  BlockData?: StreamingBlobTypes | undefined;
 
   /**
    * <p>The checksum generated for the block, which is Base64 encoded.</p>
+   * @public
    */
-  Checksum?: string;
+  Checksum?: string | undefined;
 
   /**
    * <p>The algorithm used to generate the checksum for the block, such as SHA256.</p>
+   * @public
    */
-  ChecksumAlgorithm?: ChecksumAlgorithm | string;
+  ChecksumAlgorithm?: ChecksumAlgorithm | undefined;
 }
 
-export namespace GetSnapshotBlockResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSnapshotBlockResponse): any => ({
-    ...obj,
-    ...(obj.BlockData && { BlockData: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListChangedBlocksRequest {
   /**
    * <p>The ID of the first snapshot to use for the comparison.</p>
-   *         <important>
+   *          <important>
    *             <p>The <code>FirstSnapshotID</code> parameter must be specified with a
    *                     <code>SecondSnapshotId</code> parameter; otherwise, an error occurs.</p>
-   *         </important>
+   *          </important>
+   * @public
    */
-  FirstSnapshotId?: string;
+  FirstSnapshotId?: string | undefined;
 
   /**
    * <p>The ID of the second snapshot to use for the comparison.</p>
-   *         <important>
+   *          <important>
    *             <p>The <code>SecondSnapshotId</code> parameter must be specified with a
    *                     <code>FirstSnapshotID</code> parameter; otherwise, an error occurs.</p>
-   *         </important>
+   *          </important>
+   * @public
    */
   SecondSnapshotId: string | undefined;
 
   /**
    * <p>The token to request the next page of results.</p>
+   *          <p>If you specify <b>NextToken</b>, then
+   *             <b>StartingBlockIndex</b> is ignored.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The number of results to return.</p>
+   * <p>The maximum number of blocks to be returned by the request.</p>
+   *          <p>Even if additional blocks can be retrieved from the snapshot, the request can
+   *             return less blocks than <b>MaxResults</b> or an empty
+   *             array of blocks.</p>
+   *          <p>To retrieve the next set of blocks from the snapshot, make another request with
+   *             the returned <b>NextToken</b> value. The value of
+   *             <b>NextToken</b> is <code>null</code> when there are no
+   *             more blocks to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The block index from which the comparison should start.</p>
-   *         <p>The list in the response will start from this block index or the next valid block
+   *          <p>The list in the response will start from this block index or the next valid block
    *             index in the snapshots.</p>
+   *          <p>If you specify <b>NextToken</b>, then
+   *             <b>StartingBlockIndex</b> is ignored.</p>
+   * @public
    */
-  StartingBlockIndex?: number;
+  StartingBlockIndex?: number | undefined;
 }
 
-export namespace ListChangedBlocksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListChangedBlocksRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListChangedBlocksResponse {
   /**
    * <p>An array of objects containing information about the changed blocks.</p>
+   * @public
    */
-  ChangedBlocks?: ChangedBlock[];
+  ChangedBlocks?: ChangedBlock[] | undefined;
 
   /**
    * <p>The time when the <code>BlockToken</code> expires.</p>
+   * @public
    */
-  ExpiryTime?: Date;
+  ExpiryTime?: Date | undefined;
 
   /**
    * <p>The size of the volume in GB.</p>
+   * @public
    */
-  VolumeSize?: number;
+  VolumeSize?: number | undefined;
 
   /**
    * <p>The size of the blocks in the snapshot, in bytes.</p>
+   * @public
    */
-  BlockSize?: number;
+  BlockSize?: number | undefined;
 
   /**
    * <p>The token to use to retrieve the next page of results. This value is null when there
    *             are no more results to return.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListChangedBlocksResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListChangedBlocksResponse): any => ({
-    ...obj,
-    ...(obj.ChangedBlocks && { ChangedBlocks: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSnapshotBlocksRequest {
   /**
    * <p>The ID of the snapshot from which to get block indexes and block tokens.</p>
+   * @public
    */
   SnapshotId: string | undefined;
 
   /**
    * <p>The token to request the next page of results.</p>
+   *          <p>If you specify <b>NextToken</b>, then
+   *             <b>StartingBlockIndex</b> is ignored.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The number of results to return.</p>
+   * <p>The maximum number of blocks to be returned by the request.</p>
+   *          <p>Even if additional blocks can be retrieved from the snapshot, the request can
+   *             return less blocks than <b>MaxResults</b> or an empty
+   *             array of blocks.</p>
+   *          <p>To retrieve the next set of blocks from the snapshot, make another request with
+   *             the returned <b>NextToken</b> value. The value of
+   *             <b>NextToken</b> is <code>null</code> when there are no
+   *             more blocks to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The block index from which the list should start. The list in the response will start
    *             from this block index or the next valid block index in the snapshot.</p>
+   *          <p>If you specify <b>NextToken</b>, then
+   *             <b>StartingBlockIndex</b> is ignored.</p>
+   * @public
    */
-  StartingBlockIndex?: number;
+  StartingBlockIndex?: number | undefined;
 }
 
-export namespace ListSnapshotBlocksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSnapshotBlocksRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSnapshotBlocksResponse {
   /**
    * <p>An array of objects containing information about the blocks.</p>
+   * @public
    */
-  Blocks?: Block[];
+  Blocks?: Block[] | undefined;
 
   /**
    * <p>The time when the <code>BlockToken</code> expires.</p>
+   * @public
    */
-  ExpiryTime?: Date;
+  ExpiryTime?: Date | undefined;
 
   /**
    * <p>The size of the volume in GB.</p>
+   * @public
    */
-  VolumeSize?: number;
+  VolumeSize?: number | undefined;
 
   /**
    * <p>The size of the blocks in the snapshot, in bytes.</p>
+   * @public
    */
-  BlockSize?: number;
+  BlockSize?: number | undefined;
 
   /**
    * <p>The token to use to retrieve the next page of results. This value is null when there
    *             are no more results to return.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListSnapshotBlocksResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSnapshotBlocksResponse): any => ({
-    ...obj,
-    ...(obj.Blocks && { Blocks: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutSnapshotBlockRequest {
   /**
    * <p>The ID of the snapshot.</p>
+   *          <important>
+   *             <p>If the specified snapshot is encrypted, you must have permission to use
+   *                 the KMS key that was used to encrypt the snapshot. For more information,
+   *                 see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html">
+   *                     Using encryption</a> in the <i>Amazon Elastic Compute Cloud User
+   *                         Guide</i>..</p>
+   *          </important>
+   * @public
    */
   SnapshotId: string | undefined;
 
@@ -565,12 +358,13 @@ export interface PutSnapshotBlockRequest {
    *         	the logical offset of the data in the logical volume by the block size (logical offset of
    *         	data/<code>524288</code>). The logical offset of the data must be <code>512</code>
    *         	KiB aligned.</p>
+   * @public
    */
   BlockIndex: number | undefined;
 
   /**
    * <p>The data to write to the block.</p>
-   *         <p>The block data is not signed as part of the Signature Version 4 signing process. As a
+   *          <p>The block data is not signed as part of the Signature Version 4 signing process. As a
    *             result, you must generate and provide a Base64-encoded SHA256 checksum for the block
    *             data using the <b>x-amz-Checksum</b> header. Also, you
    *         	must specify the checksum algorithm using the <b>x-amz-Checksum-Algorithm</b>
@@ -580,115 +374,120 @@ export interface PutSnapshotBlockRequest {
    *         	see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums">
    *                 Using checksums with the EBS direct APIs</a> in the <i>Amazon Elastic Compute Cloud User
    *                 Guide</i>.</p>
+   * @public
    */
-  BlockData: Readable | ReadableStream | Blob | undefined;
+  BlockData: StreamingBlobTypes | undefined;
 
   /**
    * <p>The size of the data to write to the block, in bytes. Currently, the only supported
    *             size is <code>524288</code> bytes.</p>
-   *         <p>Valid values: <code>524288</code>
+   *          <p>Valid values: <code>524288</code>
    *          </p>
+   * @public
    */
   DataLength: number | undefined;
 
   /**
    * <p>The progress of the write process, as a percentage.</p>
+   * @public
    */
-  Progress?: number;
+  Progress?: number | undefined;
 
   /**
    * <p>A Base64-encoded SHA256 checksum of the data. Only SHA256 checksums are
    *             supported.</p>
+   * @public
    */
   Checksum: string | undefined;
 
   /**
    * <p>The algorithm used to generate the checksum. Currently, the only supported algorithm
    *             is <code>SHA256</code>.</p>
+   * @public
    */
-  ChecksumAlgorithm: ChecksumAlgorithm | string | undefined;
+  ChecksumAlgorithm: ChecksumAlgorithm | undefined;
 }
 
-export namespace PutSnapshotBlockRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutSnapshotBlockRequest): any => ({
-    ...obj,
-    ...(obj.BlockData && { BlockData: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutSnapshotBlockResponse {
   /**
    * <p>The SHA256 checksum generated for the block data by Amazon EBS.</p>
+   * @public
    */
-  Checksum?: string;
+  Checksum?: string | undefined;
 
   /**
    * <p>The algorithm used by Amazon EBS to generate the checksum.</p>
+   * @public
    */
-  ChecksumAlgorithm?: ChecksumAlgorithm | string;
-}
-
-export namespace PutSnapshotBlockResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutSnapshotBlockResponse): any => ({
-    ...obj,
-  });
+  ChecksumAlgorithm?: ChecksumAlgorithm | undefined;
 }
 
 /**
  * <p>Describes a tag.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>The key of the tag.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The value of the tag.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartSnapshotRequest {
   /**
    * <p>The size of the volume, in GiB. The maximum size is <code>65536</code> GiB (64
    *             TiB).</p>
+   * @public
    */
   VolumeSize: number | undefined;
 
   /**
    * <p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating
    *             the first snapshot for an on-premises volume, omit this parameter.</p>
-   *         <p>If your account is enabled for encryption by default, you cannot use an unencrypted
-   *             snapshot as a parent snapshot. You must first create an encrypted copy of the parent
-   *             snapshot using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html">CopySnapshot</a>.</p>
+   *          <p>You can't specify <b>ParentSnapshotId</b> and
+   *             <b>Encrypted</b> in the same request. If you specify both
+   *             parameters, the request fails with <code>ValidationException</code>.</p>
+   *          <p>The encryption status of the snapshot depends on the values that you specify for
+   *             <b>Encrypted</b>, <b>KmsKeyArn</b>,
+   *             and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account
+   *             is enabled for <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default">
+   *                 encryption by default</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html">
+   *                     Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *          <important>
+   *             <p>If you specify an encrypted parent snapshot, you must have permission to use the
+   *                 KMS key that was used to encrypt the parent snapshot. For more information, see
+   *                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions">
+   *                     Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User
+   *                         Guide</i>.</p>
+   *          </important>
+   * @public
    */
-  ParentSnapshotId?: string;
+  ParentSnapshotId?: string | undefined;
 
   /**
    * <p>The tags to apply to the snapshot.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>A description for the snapshot.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -696,129 +495,138 @@ export interface StartSnapshotRequest {
    *             request, if the original request completes successfully. The subsequent retries with the same
    *             client token return the result from the original successful request and they have no additional
    *             effect.</p>
-   *         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html">
+   *          <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html">
    *     		Idempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   * @public
    */
-  ClientToken?: string;
+  ClientToken?: string | undefined;
 
   /**
-   * <p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify
-   *                 <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p>
-   *         <p>If you specify a value for <b>ParentSnapshotId</b>, omit
-   *             this parameter.</p>
-   *         <p>If you specify <code>true</code>, the snapshot is encrypted using the KMS key specified
-   *             using the <b>KmsKeyArn</b> parameter. If no value is specified
-   *             for <b>KmsKeyArn</b>, the default KMS key for your account is
-   *             used. If no default KMS key has been specified for your account, the Amazon Web Services managed KMS key is used.
-   *             To set a default KMS key for your account, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html">
-   *         		ModifyEbsDefaultKmsKeyId</a>.</p>
-   *         <p>If your account is enabled for encryption by default, you cannot set this parameter to
-   *                 <code>false</code>. In this case, you can omit this parameter.</p>
-   *
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption">
-   *                 Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   * <p>Indicates whether to encrypt the snapshot.</p>
+   *          <p>You can't specify <b>Encrypted</b> and <b>
+   *             ParentSnapshotId</b> in the same request. If you specify both parameters, the
+   *             request fails with <code>ValidationException</code>.</p>
+   *          <p>The encryption status of the snapshot depends on the values that you specify for
+   *             <b>Encrypted</b>, <b>KmsKeyArn</b>,
+   *             and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account
+   *             is enabled for <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default">
+   *                 encryption by default</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html">
+   *             Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *          <important>
+   *             <p>To create an encrypted snapshot, you must have permission to use the KMS key. For
+   *                 more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions">
+   *                     Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User
+   *                         Guide</i>.</p>
+   *          </important>
+   * @public
    */
-  Encrypted?: boolean;
+  Encrypted?: boolean | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the Key Management Service (KMS)
-   *         	key to be used to encrypt the snapshot. If you do not specify a
-   *             KMS key, the default Amazon Web Services managed KMS key is used.</p>
-   *         <p>If you specify a <b>ParentSnapshotId</b>, omit this
-   *             parameter; the snapshot will be encrypted using the same KMS key that was used to encrypt
-   *             the parent snapshot.</p>
-   *         <p>If <b>Encrypted</b> is set to <code>true</code>,
-   *             you must specify a KMS key ARN. </p>
+   * <p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.</p>
+   *          <p>The encryption status of the snapshot depends on the values that you specify for
+   *             <b>Encrypted</b>, <b>KmsKeyArn</b>,
+   *             and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account
+   *             is enabled for <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default">
+   *                 encryption by default</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html">
+   *                     Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *          <important>
+   *             <p>To create an encrypted snapshot, you must have permission to use the KMS key. For
+   *                 more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions">
+   *                     Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User
+   *                         Guide</i>.</p>
+   *          </important>
+   * @public
    */
-  KmsKeyArn?: string;
+  KmsKeyArn?: string | undefined;
 
   /**
    * <p>The amount of time (in minutes) after which the snapshot is automatically cancelled
    *             if:</p>
-   *         <ul>
+   *          <ul>
    *             <li>
-   *                 <p>No blocks are written to the snapshot.</p>
+   *                <p>No blocks are written to the snapshot.</p>
    *             </li>
    *             <li>
-   *                 <p>The snapshot is not completed after writing the last block of data.</p>
+   *                <p>The snapshot is not completed after writing the last block of data.</p>
    *             </li>
    *          </ul>
-   *         <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>
+   *          <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>
+   * @public
    */
-  Timeout?: number;
+  Timeout?: number | undefined;
 }
 
-export namespace StartSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSnapshotRequest): any => ({
-    ...obj,
-    ...(obj.KmsKeyArn && { KmsKeyArn: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartSnapshotResponse {
   /**
    * <p>The description of the snapshot.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ID of the snapshot.</p>
+   * @public
    */
-  SnapshotId?: string;
+  SnapshotId?: string | undefined;
 
   /**
    * <p>The Amazon Web Services account ID of the snapshot owner.</p>
+   * @public
    */
-  OwnerId?: string;
+  OwnerId?: string | undefined;
 
   /**
    * <p>The status of the snapshot.</p>
+   * @public
    */
-  Status?: Status | string;
+  Status?: Status | undefined;
 
   /**
    * <p>The timestamp when the snapshot was created.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The size of the volume, in GiB.</p>
+   * @public
    */
-  VolumeSize?: number;
+  VolumeSize?: number | undefined;
 
   /**
    * <p>The size of the blocks in the snapshot, in bytes.</p>
+   * @public
    */
-  BlockSize?: number;
+  BlockSize?: number | undefined;
 
   /**
    * <p>The tags applied to the snapshot. You can specify up to 50 tags per snapshot. For more
    *             information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html"> Tagging your Amazon EC2
    *                 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>The ID of the parent snapshot.</p>
+   * @public
    */
-  ParentSnapshotId?: string;
+  ParentSnapshotId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.</p>
+   * @public
    */
-  KmsKeyArn?: string;
-}
+  KmsKeyArn?: string | undefined;
 
-export namespace StartSnapshotResponse {
   /**
-   * @internal
+   * <p>Reserved for future use.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: StartSnapshotResponse): any => ({
-    ...obj,
-    ...(obj.KmsKeyArn && { KmsKeyArn: SENSITIVE_STRING }),
-  });
+  SseType?: SSEType | undefined;
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateDevicesRequest } from "../models/models_3";
-import {
-  deserializeAws_json1_1UpdateDevicesCommand,
-  serializeAws_json1_1UpdateDevicesCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDevicesRequest } from "../models/models_5";
+import { UpdateDevices$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDevicesCommand}.
+ */
 export interface UpdateDevicesCommandInput extends UpdateDevicesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDevicesCommand}.
+ */
 export interface UpdateDevicesCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,52 @@ export interface UpdateDevicesCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SageMakerClient, UpdateDevicesCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, UpdateDevicesCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // UpdateDevicesRequest
+ *   DeviceFleetName: "STRING_VALUE", // required
+ *   Devices: [ // Devices // required
+ *     { // Device
+ *       DeviceName: "STRING_VALUE", // required
+ *       Description: "STRING_VALUE",
+ *       IotThingName: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateDevicesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateDevicesCommandInput - {@link UpdateDevicesCommandInput}
+ * @returns {@link UpdateDevicesCommandOutput}
  * @see {@link UpdateDevicesCommandInput} for command's `input` shape.
  * @see {@link UpdateDevicesCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDevicesCommand extends $Command<
-  UpdateDevicesCommandInput,
-  UpdateDevicesCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDevicesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDevicesCommandInput, UpdateDevicesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "UpdateDevicesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDevicesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateDevicesCommand extends command<UpdateDevicesCommandInput, UpdateDevicesCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDevices",
+  UpdateDevices$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDevicesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDevicesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateDevicesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDevicesCommandOutput> {
-    return deserializeAws_json1_1UpdateDevicesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDevicesCommandInput;
+      output: UpdateDevicesCommandOutput;
+    };
+  };
 }

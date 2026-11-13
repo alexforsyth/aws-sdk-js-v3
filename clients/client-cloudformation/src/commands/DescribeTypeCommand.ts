@@ -1,95 +1,131 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DescribeTypeInput, DescribeTypeOutput } from "../models/models_0";
-import { deserializeAws_queryDescribeTypeCommand, serializeAws_queryDescribeTypeCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTypeInput, DescribeTypeOutput } from "../models/models_0";
+import { DescribeType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTypeCommand}.
+ */
 export interface DescribeTypeCommandInput extends DescribeTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTypeCommand}.
+ */
 export interface DescribeTypeCommandOutput extends DescribeTypeOutput, __MetadataBearer {}
 
 /**
- * <p>Returns detailed information about an extension that has been registered.</p>
+ * <p>Returns detailed information about an extension from the CloudFormation registry in your
+ *       current account and Region.</p>
  *          <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information
- *          about that specific extension version. Otherwise, it returns information about the default
- *          extension version.</p>
+ *       about that specific extension version. Otherwise, it returns information about the default
+ *       extension version.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html">Edit configuration
+ *         data for extensions in your account</a> in the
+ *       <i>CloudFormation User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DescribeTypeCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DescribeTypeCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DescribeTypeInput
+ *   Type: "RESOURCE" || "MODULE" || "HOOK",
+ *   TypeName: "STRING_VALUE",
+ *   Arn: "STRING_VALUE",
+ *   VersionId: "STRING_VALUE",
+ *   PublisherId: "STRING_VALUE",
+ *   PublicVersionNumber: "STRING_VALUE",
+ * };
  * const command = new DescribeTypeCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTypeOutput
+ * //   Arn: "STRING_VALUE",
+ * //   Type: "RESOURCE" || "MODULE" || "HOOK",
+ * //   TypeName: "STRING_VALUE",
+ * //   DefaultVersionId: "STRING_VALUE",
+ * //   IsDefaultVersion: true || false,
+ * //   TypeTestsStatus: "PASSED" || "FAILED" || "IN_PROGRESS" || "NOT_TESTED",
+ * //   TypeTestsStatusDescription: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   Schema: "STRING_VALUE",
+ * //   ProvisioningType: "NON_PROVISIONABLE" || "IMMUTABLE" || "FULLY_MUTABLE",
+ * //   DeprecatedStatus: "LIVE" || "DEPRECATED",
+ * //   LoggingConfig: { // LoggingConfig
+ * //     LogRoleArn: "STRING_VALUE", // required
+ * //     LogGroupName: "STRING_VALUE", // required
+ * //   },
+ * //   RequiredActivatedTypes: [ // RequiredActivatedTypes
+ * //     { // RequiredActivatedType
+ * //       TypeNameAlias: "STRING_VALUE",
+ * //       OriginalTypeName: "STRING_VALUE",
+ * //       PublisherId: "STRING_VALUE",
+ * //       SupportedMajorVersions: [ // SupportedMajorVersions
+ * //         Number("int"),
+ * //       ],
+ * //     },
+ * //   ],
+ * //   ExecutionRoleArn: "STRING_VALUE",
+ * //   Visibility: "PUBLIC" || "PRIVATE",
+ * //   SourceUrl: "STRING_VALUE",
+ * //   DocumentationUrl: "STRING_VALUE",
+ * //   LastUpdated: new Date("TIMESTAMP"),
+ * //   TimeCreated: new Date("TIMESTAMP"),
+ * //   ConfigurationSchema: "STRING_VALUE",
+ * //   PublisherId: "STRING_VALUE",
+ * //   OriginalTypeName: "STRING_VALUE",
+ * //   OriginalTypeArn: "STRING_VALUE",
+ * //   PublicVersionNumber: "STRING_VALUE",
+ * //   LatestPublicVersion: "STRING_VALUE",
+ * //   IsActivated: true || false,
+ * //   AutoUpdate: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DescribeTypeCommandInput - {@link DescribeTypeCommandInput}
+ * @returns {@link DescribeTypeCommandOutput}
  * @see {@link DescribeTypeCommandInput} for command's `input` shape.
  * @see {@link DescribeTypeCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link TypeNotFoundException} (client fault)
+ *  <p>The specified extension doesn't exist in the CloudFormation registry.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTypeCommand extends $Command<
-  DescribeTypeCommandInput,
-  DescribeTypeCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTypeCommandInput, DescribeTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DescribeTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTypeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTypeOutput.filterSensitiveLog,
+export class DescribeTypeCommand extends command<DescribeTypeCommandInput, DescribeTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeType",
+  DescribeType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTypeInput;
+      output: DescribeTypeOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTypeCommandOutput> {
-    return deserializeAws_queryDescribeTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTypeCommandInput;
+      output: DescribeTypeCommandOutput;
+    };
+  };
 }

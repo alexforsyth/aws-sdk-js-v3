@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { GetNamedQueryInput, GetNamedQueryOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetNamedQueryCommand,
-  serializeAws_json1_1GetNamedQueryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetNamedQueryInput, GetNamedQueryOutput } from "../models/models_0";
+import { GetNamedQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetNamedQueryCommand}.
+ */
 export interface GetNamedQueryCommandInput extends GetNamedQueryInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetNamedQueryCommand}.
+ */
 export interface GetNamedQueryCommandOutput extends GetNamedQueryOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,62 @@ export interface GetNamedQueryCommandOutput extends GetNamedQueryOutput, __Metad
  * ```javascript
  * import { AthenaClient, GetNamedQueryCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, GetNamedQueryCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // GetNamedQueryInput
+ *   NamedQueryId: "STRING_VALUE", // required
+ * };
  * const command = new GetNamedQueryCommand(input);
  * const response = await client.send(command);
+ * // { // GetNamedQueryOutput
+ * //   NamedQuery: { // NamedQuery
+ * //     Name: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     Database: "STRING_VALUE", // required
+ * //     QueryString: "STRING_VALUE", // required
+ * //     NamedQueryId: "STRING_VALUE",
+ * //     WorkGroup: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetNamedQueryCommandInput - {@link GetNamedQueryCommandInput}
+ * @returns {@link GetNamedQueryCommandOutput}
  * @see {@link GetNamedQueryCommandInput} for command's `input` shape.
  * @see {@link GetNamedQueryCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class GetNamedQueryCommand extends $Command<
-  GetNamedQueryCommandInput,
-  GetNamedQueryCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetNamedQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetNamedQueryCommandInput, GetNamedQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "GetNamedQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetNamedQueryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetNamedQueryOutput.filterSensitiveLog,
+export class GetNamedQueryCommand extends command<GetNamedQueryCommandInput, GetNamedQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetNamedQuery",
+  GetNamedQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetNamedQueryInput;
+      output: GetNamedQueryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetNamedQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetNamedQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetNamedQueryCommandOutput> {
-    return deserializeAws_json1_1GetNamedQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetNamedQueryCommandInput;
+      output: GetNamedQueryCommandOutput;
+    };
+  };
 }

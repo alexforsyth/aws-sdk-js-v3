@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyVpcAttributeRequest } from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyVpcAttributeCommand,
-  serializeAws_ec2ModifyVpcAttributeCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyVpcAttributeRequest } from "../models/models_7";
+import { ModifyVpcAttribute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyVpcAttributeCommand}.
+ */
 export interface ModifyVpcAttributeCommandInput extends ModifyVpcAttributeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyVpcAttributeCommand}.
+ */
 export interface ModifyVpcAttributeCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,86 @@ export interface ModifyVpcAttributeCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2Client, ModifyVpcAttributeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyVpcAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyVpcAttributeRequest
+ *   EnableDnsHostnames: { // AttributeBooleanValue
+ *     Value: true || false,
+ *   },
+ *   EnableDnsSupport: {
+ *     Value: true || false,
+ *   },
+ *   VpcId: "STRING_VALUE", // required
+ *   EnableNetworkAddressUsageMetrics: {
+ *     Value: true || false,
+ *   },
+ * };
  * const command = new ModifyVpcAttributeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ModifyVpcAttributeCommandInput - {@link ModifyVpcAttributeCommandInput}
+ * @returns {@link ModifyVpcAttributeCommandOutput}
  * @see {@link ModifyVpcAttributeCommandInput} for command's `input` shape.
  * @see {@link ModifyVpcAttributeCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To modify the enableDnsSupport attribute
+ * ```javascript
+ * // This example modifies the enableDnsSupport attribute. This attribute indicates whether DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS server resolves DNS hostnames for instances in the VPC to their corresponding IP addresses; otherwise, it does not.
+ * const input = {
+ *   EnableDnsSupport: {
+ *     Value: false
+ *   },
+ *   VpcId: "vpc-a01106c2"
+ * };
+ * const command = new ModifyVpcAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @example To modify the enableDnsHostnames attribute
+ * ```javascript
+ * // This example modifies the enableDnsHostnames attribute. This attribute indicates whether instances launched in the VPC get DNS hostnames. If this attribute is true, instances in the VPC get DNS hostnames; otherwise, they do not.
+ * const input = {
+ *   EnableDnsHostnames: {
+ *     Value: false
+ *   },
+ *   VpcId: "vpc-a01106c2"
+ * };
+ * const command = new ModifyVpcAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifyVpcAttributeCommand extends $Command<
-  ModifyVpcAttributeCommandInput,
-  ModifyVpcAttributeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyVpcAttributeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyVpcAttributeCommandInput, ModifyVpcAttributeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyVpcAttributeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyVpcAttributeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class ModifyVpcAttributeCommand extends command<ModifyVpcAttributeCommandInput, ModifyVpcAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyVpcAttribute",
+  ModifyVpcAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcAttributeRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyVpcAttributeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyVpcAttributeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyVpcAttributeCommandOutput> {
-    return deserializeAws_ec2ModifyVpcAttributeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyVpcAttributeCommandInput;
+      output: ModifyVpcAttributeCommandOutput;
+    };
+  };
 }

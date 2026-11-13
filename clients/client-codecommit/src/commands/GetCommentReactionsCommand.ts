@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { GetCommentReactionsInput, GetCommentReactionsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetCommentReactionsCommand,
-  serializeAws_json1_1GetCommentReactionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCommentReactionsInput, GetCommentReactionsOutput } from "../models/models_0";
+import { GetCommentReactions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCommentReactionsCommand}.
+ */
 export interface GetCommentReactionsCommandInput extends GetCommentReactionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetCommentReactionsCommand}.
+ */
 export interface GetCommentReactionsCommandOutput extends GetCommentReactionsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,85 @@ export interface GetCommentReactionsCommandOutput extends GetCommentReactionsOut
  * ```javascript
  * import { CodeCommitClient, GetCommentReactionsCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, GetCommentReactionsCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // GetCommentReactionsInput
+ *   commentId: "STRING_VALUE", // required
+ *   reactionUserArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new GetCommentReactionsCommand(input);
  * const response = await client.send(command);
+ * // { // GetCommentReactionsOutput
+ * //   reactionsForComment: [ // ReactionsForCommentList // required
+ * //     { // ReactionForComment
+ * //       reaction: { // ReactionValueFormats
+ * //         emoji: "STRING_VALUE",
+ * //         shortCode: "STRING_VALUE",
+ * //         unicode: "STRING_VALUE",
+ * //       },
+ * //       reactionUsers: [ // ReactionUsersList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       reactionsFromDeletedUsersCount: Number("int"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCommentReactionsCommandInput - {@link GetCommentReactionsCommandInput}
+ * @returns {@link GetCommentReactionsCommandOutput}
  * @see {@link GetCommentReactionsCommandInput} for command's `input` shape.
  * @see {@link GetCommentReactionsCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link CommentDeletedException} (client fault)
+ *  <p>This comment has already been deleted. You cannot edit or delete a deleted comment.</p>
+ *
+ * @throws {@link CommentDoesNotExistException} (client fault)
+ *  <p>No comment exists with the provided ID. Verify that you have used the correct ID, and
+ *             then try again.</p>
+ *
+ * @throws {@link CommentIdRequiredException} (client fault)
+ *  <p>The comment ID is missing or null. A comment ID is required.</p>
+ *
+ * @throws {@link InvalidCommentIdException} (client fault)
+ *  <p>The comment ID is not in a valid format. Make sure that you have provided the full comment ID.</p>
+ *
+ * @throws {@link InvalidContinuationTokenException} (client fault)
+ *  <p>The specified continuation token is not valid.</p>
+ *
+ * @throws {@link InvalidMaxResultsException} (client fault)
+ *  <p>The specified number of maximum results is not valid.</p>
+ *
+ * @throws {@link InvalidReactionUserArnException} (client fault)
+ *  <p>The Amazon Resource Name (ARN) of the user or identity is not valid.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class GetCommentReactionsCommand extends $Command<
-  GetCommentReactionsCommandInput,
-  GetCommentReactionsCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCommentReactionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCommentReactionsCommandInput, GetCommentReactionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "GetCommentReactionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCommentReactionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCommentReactionsOutput.filterSensitiveLog,
+export class GetCommentReactionsCommand extends command<GetCommentReactionsCommandInput, GetCommentReactionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCommentReactions",
+  GetCommentReactions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCommentReactionsInput;
+      output: GetCommentReactionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCommentReactionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetCommentReactionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCommentReactionsCommandOutput> {
-    return deserializeAws_json1_1GetCommentReactionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCommentReactionsCommandInput;
+      output: GetCommentReactionsCommandOutput;
+    };
+  };
 }

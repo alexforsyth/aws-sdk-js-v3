@@ -1,92 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { ListTypesInput, ListTypesOutput } from "../models/models_0";
-import { deserializeAws_queryListTypesCommand, serializeAws_queryListTypesCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTypesInput, ListTypesOutput } from "../models/models_0";
+import { ListTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTypesCommand}.
+ */
 export interface ListTypesCommandInput extends ListTypesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListTypesCommand}.
+ */
 export interface ListTypesCommandOutput extends ListTypesOutput, __MetadataBearer {}
 
 /**
- * <p>Returns summary information about extension that have been registered with CloudFormation.</p>
+ * <p>Returns summary information about all extensions, including your private resource types,
+ *       modules, and Hooks as well as all public extensions from Amazon Web Services and third-party
+ *       publishers.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, ListTypesCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, ListTypesCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // ListTypesInput
+ *   Visibility: "PUBLIC" || "PRIVATE",
+ *   ProvisioningType: "NON_PROVISIONABLE" || "IMMUTABLE" || "FULLY_MUTABLE",
+ *   DeprecatedStatus: "LIVE" || "DEPRECATED",
+ *   Type: "RESOURCE" || "MODULE" || "HOOK",
+ *   Filters: { // TypeFilters
+ *     Category: "REGISTERED" || "ACTIVATED" || "THIRD_PARTY" || "AWS_TYPES",
+ *     PublisherId: "STRING_VALUE",
+ *     TypeNamePrefix: "STRING_VALUE",
+ *   },
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListTypesCommand(input);
  * const response = await client.send(command);
+ * // { // ListTypesOutput
+ * //   TypeSummaries: [ // TypeSummaries
+ * //     { // TypeSummary
+ * //       Type: "RESOURCE" || "MODULE" || "HOOK",
+ * //       TypeName: "STRING_VALUE",
+ * //       DefaultVersionId: "STRING_VALUE",
+ * //       TypeArn: "STRING_VALUE",
+ * //       LastUpdated: new Date("TIMESTAMP"),
+ * //       Description: "STRING_VALUE",
+ * //       PublisherId: "STRING_VALUE",
+ * //       OriginalTypeName: "STRING_VALUE",
+ * //       PublicVersionNumber: "STRING_VALUE",
+ * //       LatestPublicVersion: "STRING_VALUE",
+ * //       PublisherIdentity: "AWS_Marketplace" || "GitHub" || "Bitbucket",
+ * //       PublisherName: "STRING_VALUE",
+ * //       IsActivated: true || false,
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTypesCommandInput - {@link ListTypesCommandInput}
+ * @returns {@link ListTypesCommandOutput}
  * @see {@link ListTypesCommandInput} for command's `input` shape.
  * @see {@link ListTypesCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListTypesCommand extends $Command<
-  ListTypesCommandInput,
-  ListTypesCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTypesCommandInput, ListTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "ListTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTypesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTypesOutput.filterSensitiveLog,
+export class ListTypesCommand extends command<ListTypesCommandInput, ListTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTypes",
+  ListTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTypesInput;
+      output: ListTypesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListTypesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTypesCommandOutput> {
-    return deserializeAws_queryListTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTypesCommandInput;
+      output: ListTypesCommandOutput;
+    };
+  };
 }

@@ -1,118 +1,140 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteFleetsRequest, DeleteFleetsResult } from "../models/models_2";
-import { deserializeAws_ec2DeleteFleetsCommand, serializeAws_ec2DeleteFleetsCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFleetsRequest, DeleteFleetsResult } from "../models/models_2";
+import { DeleteFleets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFleetsCommand}.
+ */
 export interface DeleteFleetsCommandInput extends DeleteFleetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFleetsCommand}.
+ */
 export interface DeleteFleetsCommandOutput extends DeleteFleetsResult, __MetadataBearer {}
 
 /**
- * <p>Deletes the specified EC2 Fleet.</p>
- *          <p>After you delete an EC2 Fleet, it launches no new instances.</p>
- *          <p>You must specify whether a deleted EC2 Fleet should also terminate its instances. If you
- *          choose to terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code>
- *          state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances
- *          continue to run until they are interrupted or you terminate them manually.</p>
- *          <p>For <code>instant</code> fleets, EC2 Fleet must terminate the instances when the fleet is
- *          deleted. A deleted <code>instant</code> fleet with running instances is not
- *          supported.</p>
+ * <p>Deletes the specified EC2 Fleet request.</p>
+ *          <p>After you delete an EC2 Fleet request, it launches no new instances.</p>
+ *          <p>You must also specify whether a deleted EC2 Fleet request should terminate its instances. If
+ *          you choose to terminate the instances, the EC2 Fleet request enters the
+ *             <code>deleted_terminating</code> state. Otherwise, it enters the
+ *             <code>deleted_running</code> state, and the instances continue to run until they are
+ *          interrupted or you terminate them manually.</p>
+ *          <p>A deleted <code>instant</code> fleet with running instances is not supported. When you
+ *          delete an <code>instant</code> fleet, Amazon EC2 automatically terminates all its instances. For
+ *          fleets with more than 1000 instances, the deletion request might fail. If your fleet has
+ *          more than 1000 instances, first terminate most of the instances manually, leaving 1000 or
+ *          fewer. Then delete the fleet, and the remaining instances will be terminated automatically.</p>
+ *          <important>
+ *             <p>
+ *                <b>Terminating an instance is permanent and irreversible.</b>
+ *             </p>
+ *             <p>After you terminate an instance, you can no longer connect to it, and it can't be recovered.
+ *             All attached Amazon EBS volumes that are configured to be deleted on termination are also permanently
+ *             deleted and can't be recovered. All data stored on instance store volumes is permanently lost.
+ *             For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ec2-instance-termination-works.html">
+ *                How instance termination works</a>.</p>
+ *             <p>Before you terminate an instance, ensure that you have backed up all data that you need to
+ *             retain after the termination to persistent storage.</p>
+ *          </important>
  *          <p class="title">
  *             <b>Restrictions</b>
  *          </p>
  *          <ul>
  *             <li>
- *                <p>You can delete up to 25 <code>instant</code> fleets in a single request. If you exceed this
- *                number, no <code>instant</code> fleets are deleted and an error is returned. There is no
- *                restriction on the number of fleets of type <code>maintain</code> or <code>request</code> that can be deleted
- *                in a single request.</p>
+ *                <p>You can delete up to 25 fleets of type <code>instant</code> in a single
+ *                request.</p>
  *             </li>
  *             <li>
- *                <p>Up to 1000 instances can be terminated in a single request to delete
- *                <code>instant</code> fleets.</p>
+ *                <p>You can delete up to 100 fleets of type <code>maintain</code> or
+ *                   <code>request</code> in a single request.</p>
+ *             </li>
+ *             <li>
+ *                <p>You can delete up to 125 fleets in a single request, provided you do not exceed
+ *                the quota for each fleet type, as specified above.</p>
+ *             </li>
+ *             <li>
+ *                <p>If you exceed the specified number of fleets to delete, no fleets are
+ *                deleted.</p>
  *             </li>
  *          </ul>
- *
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet">Deleting an EC2
- *          Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/delete-fleet.html">Delete an EC2 Fleet request and the instances
+ *             in the fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DeleteFleetsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteFleetsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteFleetsRequest
+ *   DryRun: true || false,
+ *   FleetIds: [ // FleetIdSet // required
+ *     "STRING_VALUE",
+ *   ],
+ *   TerminateInstances: true || false, // required
+ * };
  * const command = new DeleteFleetsCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFleetsResult
+ * //   SuccessfulFleetDeletions: [ // DeleteFleetSuccessSet
+ * //     { // DeleteFleetSuccessItem
+ * //       CurrentFleetState: "submitted" || "active" || "deleted" || "failed" || "deleted_running" || "deleted_terminating" || "modifying",
+ * //       PreviousFleetState: "submitted" || "active" || "deleted" || "failed" || "deleted_running" || "deleted_terminating" || "modifying",
+ * //       FleetId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   UnsuccessfulFleetDeletions: [ // DeleteFleetErrorSet
+ * //     { // DeleteFleetErrorItem
+ * //       Error: { // DeleteFleetError
+ * //         Code: "fleetIdDoesNotExist" || "fleetIdMalformed" || "fleetNotInDeletableState" || "unexpectedError",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //       FleetId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteFleetsCommandInput - {@link DeleteFleetsCommandInput}
+ * @returns {@link DeleteFleetsCommandOutput}
  * @see {@link DeleteFleetsCommandInput} for command's `input` shape.
  * @see {@link DeleteFleetsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFleetsCommand extends $Command<
-  DeleteFleetsCommandInput,
-  DeleteFleetsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFleetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFleetsCommandInput, DeleteFleetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteFleetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFleetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFleetsResult.filterSensitiveLog,
+export class DeleteFleetsCommand extends command<DeleteFleetsCommandInput, DeleteFleetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFleets",
+  DeleteFleets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFleetsRequest;
+      output: DeleteFleetsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFleetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteFleetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFleetsCommandOutput> {
-    return deserializeAws_ec2DeleteFleetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFleetsCommandInput;
+      output: DeleteFleetsCommandOutput;
+    };
+  };
 }

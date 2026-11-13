@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { CreateWebhookInput, CreateWebhookOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateWebhookCommand,
-  serializeAws_json1_1CreateWebhookCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateWebhookInput, CreateWebhookOutput } from "../models/models_0";
+import { CreateWebhook$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateWebhookCommand}.
+ */
 export interface CreateWebhookCommandInput extends CreateWebhookInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateWebhookCommand}.
+ */
 export interface CreateWebhookCommandOutput extends CreateWebhookOutput, __MetadataBearer {}
 
 /**
@@ -38,68 +39,113 @@ export interface CreateWebhookCommandOutput extends CreateWebhookOutput, __Metad
  * ```javascript
  * import { CodeBuildClient, CreateWebhookCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, CreateWebhookCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // CreateWebhookInput
+ *   projectName: "STRING_VALUE", // required
+ *   branchFilter: "STRING_VALUE",
+ *   filterGroups: [ // FilterGroups
+ *     [ // FilterGroup
+ *       { // WebhookFilter
+ *         type: "EVENT" || "BASE_REF" || "HEAD_REF" || "ACTOR_ACCOUNT_ID" || "FILE_PATH" || "COMMIT_MESSAGE" || "WORKFLOW_NAME" || "TAG_NAME" || "RELEASE_NAME" || "REPOSITORY_NAME" || "ORGANIZATION_NAME", // required
+ *         pattern: "STRING_VALUE", // required
+ *         excludeMatchedPattern: true || false,
+ *       },
+ *     ],
+ *   ],
+ *   buildType: "BUILD" || "BUILD_BATCH" || "RUNNER_BUILDKITE_BUILD",
+ *   manualCreation: true || false,
+ *   scopeConfiguration: { // ScopeConfiguration
+ *     name: "STRING_VALUE", // required
+ *     domain: "STRING_VALUE",
+ *     scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL" || "GITLAB_GROUP", // required
+ *   },
+ *   pullRequestBuildPolicy: { // PullRequestBuildPolicy
+ *     requiresCommentApproval: "DISABLED" || "ALL_PULL_REQUESTS" || "FORK_PULL_REQUESTS", // required
+ *     approverRoles: [ // PullRequestBuildApproverRoles
+ *       "GITHUB_READ" || "GITHUB_TRIAGE" || "GITHUB_WRITE" || "GITHUB_MAINTAIN" || "GITHUB_ADMIN" || "GITLAB_GUEST" || "GITLAB_PLANNER" || "GITLAB_REPORTER" || "GITLAB_DEVELOPER" || "GITLAB_MAINTAINER" || "GITLAB_OWNER" || "BITBUCKET_READ" || "BITBUCKET_WRITE" || "BITBUCKET_ADMIN",
+ *     ],
+ *   },
+ * };
  * const command = new CreateWebhookCommand(input);
  * const response = await client.send(command);
+ * // { // CreateWebhookOutput
+ * //   webhook: { // Webhook
+ * //     url: "STRING_VALUE",
+ * //     payloadUrl: "STRING_VALUE",
+ * //     secret: "STRING_VALUE",
+ * //     branchFilter: "STRING_VALUE",
+ * //     filterGroups: [ // FilterGroups
+ * //       [ // FilterGroup
+ * //         { // WebhookFilter
+ * //           type: "EVENT" || "BASE_REF" || "HEAD_REF" || "ACTOR_ACCOUNT_ID" || "FILE_PATH" || "COMMIT_MESSAGE" || "WORKFLOW_NAME" || "TAG_NAME" || "RELEASE_NAME" || "REPOSITORY_NAME" || "ORGANIZATION_NAME", // required
+ * //           pattern: "STRING_VALUE", // required
+ * //           excludeMatchedPattern: true || false,
+ * //         },
+ * //       ],
+ * //     ],
+ * //     buildType: "BUILD" || "BUILD_BATCH" || "RUNNER_BUILDKITE_BUILD",
+ * //     manualCreation: true || false,
+ * //     lastModifiedSecret: new Date("TIMESTAMP"),
+ * //     scopeConfiguration: { // ScopeConfiguration
+ * //       name: "STRING_VALUE", // required
+ * //       domain: "STRING_VALUE",
+ * //       scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL" || "GITLAB_GROUP", // required
+ * //     },
+ * //     status: "CREATING" || "CREATE_FAILED" || "ACTIVE" || "DELETING",
+ * //     statusMessage: "STRING_VALUE",
+ * //     pullRequestBuildPolicy: { // PullRequestBuildPolicy
+ * //       requiresCommentApproval: "DISABLED" || "ALL_PULL_REQUESTS" || "FORK_PULL_REQUESTS", // required
+ * //       approverRoles: [ // PullRequestBuildApproverRoles
+ * //         "GITHUB_READ" || "GITHUB_TRIAGE" || "GITHUB_WRITE" || "GITHUB_MAINTAIN" || "GITHUB_ADMIN" || "GITLAB_GUEST" || "GITLAB_PLANNER" || "GITLAB_REPORTER" || "GITLAB_DEVELOPER" || "GITLAB_MAINTAINER" || "GITLAB_OWNER" || "BITBUCKET_READ" || "BITBUCKET_WRITE" || "BITBUCKET_ADMIN",
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateWebhookCommandInput - {@link CreateWebhookCommandInput}
+ * @returns {@link CreateWebhookCommandOutput}
  * @see {@link CreateWebhookCommandInput} for command's `input` shape.
  * @see {@link CreateWebhookCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link OAuthProviderException} (client fault)
+ *  <p>There was a problem with the underlying OAuth provider.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be created, because an Amazon Web Services resource with the same
+ *             settings already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be found.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class CreateWebhookCommand extends $Command<
-  CreateWebhookCommandInput,
-  CreateWebhookCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateWebhookCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateWebhookCommandInput, CreateWebhookCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "CreateWebhookCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateWebhookInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateWebhookOutput.filterSensitiveLog,
+export class CreateWebhookCommand extends command<CreateWebhookCommandInput, CreateWebhookCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateWebhook",
+  CreateWebhook$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWebhookInput;
+      output: CreateWebhookOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateWebhookCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateWebhookCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateWebhookCommandOutput> {
-    return deserializeAws_json1_1CreateWebhookCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateWebhookCommandInput;
+      output: CreateWebhookCommandOutput;
+    };
+  };
 }

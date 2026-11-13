@@ -1,3 +1,4 @@
+// smithy-typescript generated code
 export * from "./CreateCertificateAuthorityAuditReportCommand";
 export * from "./CreateCertificateAuthorityCommand";
 export * from "./CreatePermissionCommand";

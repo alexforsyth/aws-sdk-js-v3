@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoSyncClient";
-import { DescribeIdentityPoolUsageRequest, DescribeIdentityPoolUsageResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeIdentityPoolUsageCommand,
-  serializeAws_restJson1DescribeIdentityPoolUsageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeIdentityPoolUsageRequest, DescribeIdentityPoolUsageResponse } from "../models/models_0";
+import { DescribeIdentityPoolUsage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeIdentityPoolUsageCommand}.
+ */
 export interface DescribeIdentityPoolUsageCommandInput extends DescribeIdentityPoolUsageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeIdentityPoolUsageCommand}.
+ */
 export interface DescribeIdentityPoolUsageCommandOutput extends DescribeIdentityPoolUsageResponse, __MetadataBearer {}
 
 /**
@@ -38,14 +39,14 @@ export interface DescribeIdentityPoolUsageCommandOutput extends DescribeIdentity
  * X-AMZ-DATE: 20141111T205737Z
  * AUTHORIZATION: AWS4-HMAC-SHA256 Credential=<credential>, SignedHeaders=content-type;host;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<signature>
  *
- * {
+ * \{
  *     "Operation": "com.amazonaws.cognito.sync.model#DescribeIdentityPoolUsage",
  *     "Service": "com.amazonaws.cognito.sync.model#AWSCognitoSyncService",
  *     "Input":
- *     {
+ *     \{
  *         "IdentityPoolId": "IDENTITY_POOL_ID"
- *     }
- * }
+ *     \}
+ * \}
  *                </request>
  *             <response>
  * 1.1 200 OK
@@ -54,20 +55,20 @@ export interface DescribeIdentityPoolUsageCommandOutput extends DescribeIdentity
  * content-length: 271
  * date: Tue, 11 Nov 2014 20:57:37 GMT
  *
- * {
+ * \{
  *     "Output":
- *     {
+ *     \{
  *         "__type": "com.amazonaws.cognito.sync.model#DescribeIdentityPoolUsageResponse",
  *         "IdentityPoolUsage":
- *         {
+ *         \{
  *             "DataStorage": 0,
  *             "IdentityPoolId": "IDENTITY_POOL_ID",
  *             "LastModifiedDate": 1.413231134115E9,
  *             "SyncSessionsCount": null
- *         }
- *     },
+ *         \}
+ *     \},
  *     "Version": "1.0"
- * }
+ * \}
  *                </response>
  *          </example>
  *       </examples>
@@ -76,71 +77,72 @@ export interface DescribeIdentityPoolUsageCommandOutput extends DescribeIdentity
  * ```javascript
  * import { CognitoSyncClient, DescribeIdentityPoolUsageCommand } from "@aws-sdk/client-cognito-sync"; // ES Modules import
  * // const { CognitoSyncClient, DescribeIdentityPoolUsageCommand } = require("@aws-sdk/client-cognito-sync"); // CommonJS import
+ * // import type { CognitoSyncClientConfig } from "@aws-sdk/client-cognito-sync";
+ * const config = {}; // type is CognitoSyncClientConfig
  * const client = new CognitoSyncClient(config);
+ * const input = { // DescribeIdentityPoolUsageRequest
+ *   IdentityPoolId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeIdentityPoolUsageCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeIdentityPoolUsageResponse
+ * //   IdentityPoolUsage: { // IdentityPoolUsage
+ * //     IdentityPoolId: "STRING_VALUE",
+ * //     SyncSessionsCount: Number("long"),
+ * //     DataStorage: Number("long"),
+ * //     LastModifiedDate: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeIdentityPoolUsageCommandInput - {@link DescribeIdentityPoolUsageCommandInput}
+ * @returns {@link DescribeIdentityPoolUsageCommandOutput}
  * @see {@link DescribeIdentityPoolUsageCommandInput} for command's `input` shape.
  * @see {@link DescribeIdentityPoolUsageCommandOutput} for command's `response` shape.
- * @see {@link CognitoSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoSyncClientResolvedConfig | config} for CognitoSyncClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  Indicates an internal service
+ *       error.
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  Thrown when a request parameter does not comply
+ *       with the associated constraints.
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  Thrown when a user is not authorized to access the
+ *       requested resource.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  Thrown if the resource doesn't
+ *       exist.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Thrown if the request is
+ *       throttled.
+ *
+ * @throws {@link CognitoSyncServiceException}
+ * <p>Base exception class for all service exceptions from CognitoSync service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeIdentityPoolUsageCommand extends $Command<
-  DescribeIdentityPoolUsageCommandInput,
-  DescribeIdentityPoolUsageCommandOutput,
-  CognitoSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeIdentityPoolUsageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeIdentityPoolUsageCommandInput, DescribeIdentityPoolUsageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoSyncClient";
-    const commandName = "DescribeIdentityPoolUsageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeIdentityPoolUsageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeIdentityPoolUsageResponse.filterSensitiveLog,
+export class DescribeIdentityPoolUsageCommand extends command<DescribeIdentityPoolUsageCommandInput, DescribeIdentityPoolUsageCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeIdentityPoolUsage",
+  DescribeIdentityPoolUsage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIdentityPoolUsageRequest;
+      output: DescribeIdentityPoolUsageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeIdentityPoolUsageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeIdentityPoolUsageCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeIdentityPoolUsageCommandOutput> {
-    return deserializeAws_restJson1DescribeIdentityPoolUsageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeIdentityPoolUsageCommandInput;
+      output: DescribeIdentityPoolUsageCommandOutput;
+    };
+  };
 }

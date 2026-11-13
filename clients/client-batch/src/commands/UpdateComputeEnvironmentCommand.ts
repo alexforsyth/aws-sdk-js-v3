@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
-import { UpdateComputeEnvironmentRequest, UpdateComputeEnvironmentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateComputeEnvironmentCommand,
-  serializeAws_restJson1UpdateComputeEnvironmentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateComputeEnvironmentRequest, UpdateComputeEnvironmentResponse } from "../models/models_0";
+import { UpdateComputeEnvironment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateComputeEnvironmentCommand}.
+ */
 export interface UpdateComputeEnvironmentCommandInput extends UpdateComputeEnvironmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateComputeEnvironmentCommand}.
+ */
 export interface UpdateComputeEnvironmentCommandOutput extends UpdateComputeEnvironmentResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,177 @@ export interface UpdateComputeEnvironmentCommandOutput extends UpdateComputeEnvi
  * ```javascript
  * import { BatchClient, UpdateComputeEnvironmentCommand } from "@aws-sdk/client-batch"; // ES Modules import
  * // const { BatchClient, UpdateComputeEnvironmentCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
  * const client = new BatchClient(config);
+ * const input = { // UpdateComputeEnvironmentRequest
+ *   computeEnvironment: "STRING_VALUE", // required
+ *   state: "ENABLED" || "DISABLED",
+ *   unmanagedvCpus: Number("int"),
+ *   computeResources: { // ComputeResourceUpdate
+ *     minvCpus: Number("int"),
+ *     maxvCpus: Number("int"),
+ *     desiredvCpus: Number("int"),
+ *     subnets: [ // StringList
+ *       "STRING_VALUE",
+ *     ],
+ *     securityGroupIds: [
+ *       "STRING_VALUE",
+ *     ],
+ *     allocationStrategy: "BEST_FIT_PROGRESSIVE" || "BEST_FIT_PROGRESSIVE_ORDERED" || "SPOT_CAPACITY_OPTIMIZED" || "SPOT_PRICE_CAPACITY_OPTIMIZED" || "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED",
+ *     instanceTypes: [
+ *       "STRING_VALUE",
+ *     ],
+ *     ec2KeyPair: "STRING_VALUE",
+ *     instanceRole: "STRING_VALUE",
+ *     tags: { // TagsMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     placementGroup: "STRING_VALUE",
+ *     bidPercentage: Number("int"),
+ *     launchTemplate: { // LaunchTemplateSpecification
+ *       launchTemplateId: "STRING_VALUE",
+ *       launchTemplateName: "STRING_VALUE",
+ *       version: "STRING_VALUE",
+ *       overrides: [ // LaunchTemplateSpecificationOverrideList
+ *         { // LaunchTemplateSpecificationOverride
+ *           launchTemplateId: "STRING_VALUE",
+ *           launchTemplateName: "STRING_VALUE",
+ *           version: "STRING_VALUE",
+ *           targetInstanceTypes: [
+ *             "STRING_VALUE",
+ *           ],
+ *           userdataType: "EKS_BOOTSTRAP_SH" || "EKS_NODEADM",
+ *         },
+ *       ],
+ *       userdataType: "EKS_BOOTSTRAP_SH" || "EKS_NODEADM",
+ *     },
+ *     ec2Configuration: [ // Ec2ConfigurationList
+ *       { // Ec2Configuration
+ *         imageType: "STRING_VALUE", // required
+ *         imageIdOverride: "STRING_VALUE",
+ *         batchImageStatus: "STRING_VALUE",
+ *         imageKubernetesVersion: "STRING_VALUE",
+ *       },
+ *     ],
+ *     updateToLatestImageVersion: true || false,
+ *     type: "EC2" || "SPOT" || "FARGATE" || "FARGATE_SPOT" || "ECS_MANAGED_INSTANCES",
+ *     imageId: "STRING_VALUE",
+ *     scalingPolicy: { // ComputeScalingPolicy
+ *       minScaleDownDelayMinutes: Number("int"),
+ *     },
+ *     managedInstancesProvider: { // UpdateManagedInstancesProviderConfiguration
+ *       propagateTags: "STRING_VALUE",
+ *       infrastructureRoleArn: "STRING_VALUE",
+ *       instanceLaunchTemplate: { // InstanceLaunchTemplateUpdate
+ *         ec2InstanceProfileArn: "STRING_VALUE",
+ *         networkConfiguration: { // ManagedInstancesNetworkConfiguration
+ *           subnets: [ // required
+ *             "STRING_VALUE",
+ *           ],
+ *           securityGroups: "<StringList>", // required
+ *         },
+ *         instanceRequirements: { // InstanceRequirementsRequest
+ *           allowedInstanceTypes: "<StringList>",
+ *         },
+ *         storageConfiguration: { // ManagedInstancesStorageConfiguration
+ *           storageSizeGiB: Number("int"),
+ *         },
+ *         monitoring: "STRING_VALUE",
+ *         capacityReservations: { // CapacityReservationRequest
+ *           reservationGroupArn: "STRING_VALUE",
+ *           reservationPreference: "STRING_VALUE",
+ *         },
+ *         instanceMetadataTagsPropagation: true || false,
+ *         localStorageConfiguration: { // ManagedInstancesLocalStorageConfiguration
+ *           useLocalStorage: true || false,
+ *         },
+ *       },
+ *       infrastructureOptimization: { // InfrastructureOptimization
+ *         scaleInAfter: Number("int"),
+ *       },
+ *     },
+ *     capacityTags: { // TagrisTagsMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   serviceRole: "STRING_VALUE",
+ *   updatePolicy: { // UpdatePolicy
+ *     terminateJobsOnUpdate: true || false,
+ *     jobExecutionTimeoutMinutes: Number("long"),
+ *   },
+ *   context: "STRING_VALUE",
+ *   ecsSettings: { // EcsSettings
+ *     containerInsights: "ENABLED" || "ENHANCED" || "DISABLED",
+ *   },
+ *   eksConfiguration: { // EksConfigurationUpdate
+ *     accessEntry: { // EksAccessEntry
+ *       desiredState: "ENABLED" || "DISABLED" || "INHERIT_FROM_CLUSTER", // required
+ *       status: "ACTIVE" || "INACTIVE",
+ *     },
+ *   },
+ * };
  * const command = new UpdateComputeEnvironmentCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateComputeEnvironmentResponse
+ * //   computeEnvironmentName: "STRING_VALUE",
+ * //   computeEnvironmentArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateComputeEnvironmentCommandInput - {@link UpdateComputeEnvironmentCommandInput}
+ * @returns {@link UpdateComputeEnvironmentCommandOutput}
  * @see {@link UpdateComputeEnvironmentCommandInput} for command's `input` shape.
  * @see {@link UpdateComputeEnvironmentCommandOutput} for command's `response` shape.
- * @see {@link BatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @example To update a compute environment
+ * ```javascript
+ * // This example disables the P2OnDemand compute environment so it can be deleted.
+ * const input = {
+ *   computeEnvironment: "P2OnDemand",
+ *   state: "DISABLED"
+ * };
+ * const command = new UpdateComputeEnvironmentCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   computeEnvironmentArn: "arn:aws:batch:us-east-1:012345678910:compute-environment/P2OnDemand",
+ *   computeEnvironmentName: "P2OnDemand"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateComputeEnvironmentCommand extends $Command<
-  UpdateComputeEnvironmentCommandInput,
-  UpdateComputeEnvironmentCommandOutput,
-  BatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateComputeEnvironmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateComputeEnvironmentCommandInput, UpdateComputeEnvironmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BatchClient";
-    const commandName = "UpdateComputeEnvironmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateComputeEnvironmentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateComputeEnvironmentResponse.filterSensitiveLog,
+export class UpdateComputeEnvironmentCommand extends command<UpdateComputeEnvironmentCommandInput, UpdateComputeEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateComputeEnvironment",
+  UpdateComputeEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateComputeEnvironmentRequest;
+      output: UpdateComputeEnvironmentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateComputeEnvironmentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateComputeEnvironmentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateComputeEnvironmentCommandOutput> {
-    return deserializeAws_restJson1UpdateComputeEnvironmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateComputeEnvironmentCommandInput;
+      output: UpdateComputeEnvironmentCommandOutput;
+    };
+  };
 }

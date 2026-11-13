@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListIpAccessSettingsRequest, ListIpAccessSettingsResponse } from "../models/models_0";
+import { ListIpAccessSettings$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListIpAccessSettingsCommand}.
+ */
+export interface ListIpAccessSettingsCommandInput extends ListIpAccessSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListIpAccessSettingsCommand}.
+ */
+export interface ListIpAccessSettingsCommandOutput extends ListIpAccessSettingsResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves a list of IP access settings.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { WorkSpacesWebClient, ListIpAccessSettingsCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
+ * // const { WorkSpacesWebClient, ListIpAccessSettingsCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
+ * const client = new WorkSpacesWebClient(config);
+ * const input = { // ListIpAccessSettingsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
+ * const command = new ListIpAccessSettingsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListIpAccessSettingsResponse
+ * //   ipAccessSettings: [ // IpAccessSettingsList
+ * //     { // IpAccessSettingsSummary
+ * //       ipAccessSettingsArn: "STRING_VALUE", // required
+ * //       displayName: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       creationDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListIpAccessSettingsCommandInput - {@link ListIpAccessSettingsCommandInput}
+ * @returns {@link ListIpAccessSettingsCommandOutput}
+ * @see {@link ListIpAccessSettingsCommandInput} for command's `input` shape.
+ * @see {@link ListIpAccessSettingsCommandOutput} for command's `response` shape.
+ * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
+ */
+export class ListIpAccessSettingsCommand extends command<ListIpAccessSettingsCommandInput, ListIpAccessSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListIpAccessSettings",
+  ListIpAccessSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIpAccessSettingsRequest;
+      output: ListIpAccessSettingsResponse;
+    };
+    sdk: {
+      input: ListIpAccessSettingsCommandInput;
+      output: ListIpAccessSettingsCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { BatchGetApplicationsInput, BatchGetApplicationsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetApplicationsCommand,
-  serializeAws_json1_1BatchGetApplicationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetApplicationsInput, BatchGetApplicationsOutput } from "../models/models_0";
+import { BatchGetApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetApplicationsCommand}.
+ */
 export interface BatchGetApplicationsCommandInput extends BatchGetApplicationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetApplicationsCommand}.
+ */
 export interface BatchGetApplicationsCommandOutput extends BatchGetApplicationsOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,70 @@ export interface BatchGetApplicationsCommandOutput extends BatchGetApplicationsO
  * ```javascript
  * import { CodeDeployClient, BatchGetApplicationsCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, BatchGetApplicationsCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // BatchGetApplicationsInput
+ *   applicationNames: [ // ApplicationsList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetApplicationsOutput
+ * //   applicationsInfo: [ // ApplicationsInfoList
+ * //     { // ApplicationInfo
+ * //       applicationId: "STRING_VALUE",
+ * //       applicationName: "STRING_VALUE",
+ * //       createTime: new Date("TIMESTAMP"),
+ * //       linkedToGitHub: true || false,
+ * //       gitHubAccountName: "STRING_VALUE",
+ * //       computePlatform: "Server" || "Lambda" || "ECS",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetApplicationsCommandInput - {@link BatchGetApplicationsCommandInput}
+ * @returns {@link BatchGetApplicationsCommandOutput}
  * @see {@link BatchGetApplicationsCommandInput} for command's `input` shape.
  * @see {@link BatchGetApplicationsCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link ApplicationDoesNotExistException} (client fault)
+ *  <p>The application does not exist with the user or Amazon Web Services account.</p>
+ *
+ * @throws {@link ApplicationNameRequiredException} (client fault)
+ *  <p>The minimum number of required application names was not specified.</p>
+ *
+ * @throws {@link BatchLimitExceededException} (client fault)
+ *  <p>The maximum number of names or IDs allowed for this request (100) was exceeded.</p>
+ *
+ * @throws {@link InvalidApplicationNameException} (client fault)
+ *  <p>The application name was specified in an invalid format.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetApplicationsCommand extends $Command<
-  BatchGetApplicationsCommandInput,
-  BatchGetApplicationsCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetApplicationsCommandInput, BatchGetApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "BatchGetApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetApplicationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetApplicationsOutput.filterSensitiveLog,
+export class BatchGetApplicationsCommand extends command<BatchGetApplicationsCommandInput, BatchGetApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetApplications",
+  BatchGetApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetApplicationsInput;
+      output: BatchGetApplicationsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetApplicationsCommandOutput> {
-    return deserializeAws_json1_1BatchGetApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetApplicationsCommandInput;
+      output: BatchGetApplicationsCommandOutput;
+    };
+  };
 }

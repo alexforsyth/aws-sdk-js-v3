@@ -1,105 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { AssociateAliasRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlAssociateAliasCommand,
-  serializeAws_restXmlAssociateAliasCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateAliasRequest } from "../models/models_0";
+import { AssociateAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateAliasCommand}.
+ */
 export interface AssociateAliasCommandInput extends AssociateAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateAliasCommand}.
+ */
 export interface AssociateAliasCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Associates an alias (also known as a CNAME or an alternate domain name) with a CloudFront
- * 			distribution.</p>
- * 		       <p>With this operation you can move an alias that’s already in use on a CloudFront distribution
- * 			to a different distribution in one step. This prevents the downtime that could occur if
- * 			you first remove the alias from one distribution and then separately add the alias to
- * 			another distribution.</p>
- * 		       <p>To use this operation to associate an alias with a distribution, you provide the alias
- * 			and the ID of the target distribution for the alias. For more information, including how
- * 			to set up the target distribution, prerequisites that you must complete, and other
- * 			restrictions, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move">Moving an alternate domain name to a different distribution</a>
- * 			in the <i>Amazon CloudFront Developer Guide</i>.</p>
+ * <note> <p>The <code>AssociateAlias</code> API operation only supports standard distributions. To move domains between distribution tenants and/or standard distributions, we recommend that you use the <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDomainAssociation.html">UpdateDomainAssociation</a> API operation instead.</p> </note> <p>Associates an alias with a CloudFront standard distribution. An alias is commonly known as a custom domain or vanity domain. It can also be called a CNAME or alternate domain name.</p> <p>With this operation, you can move an alias that's already used for a standard distribution to a different standard distribution. This prevents the downtime that could occur if you first remove the alias from one standard distribution and then separately add the alias to another standard distribution.</p> <p>To use this operation, specify the alias and the ID of the target standard distribution.</p> <p>For more information, including how to set up the target standard distribution, prerequisites that you must complete, and other restrictions, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move">Moving an alternate domain name to a different standard distribution or distribution tenant</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, AssociateAliasCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, AssociateAliasCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // AssociateAliasRequest
+ *   TargetDistributionId: "STRING_VALUE", // required
+ *   Alias: "STRING_VALUE", // required
+ * };
  * const command = new AssociateAliasCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateAliasCommandInput - {@link AssociateAliasCommandInput}
+ * @returns {@link AssociateAliasCommandOutput}
  * @see {@link AssociateAliasCommandInput} for command's `input` shape.
  * @see {@link AssociateAliasCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link IllegalUpdate} (client fault)
+ *  <p>The update contains modifications that are not allowed.</p>
+ *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link NoSuchDistribution} (client fault)
+ *  <p>The specified distribution does not exist.</p>
+ *
+ * @throws {@link TooManyDistributionCNAMEs} (client fault)
+ *  <p>Your request contains more CNAMEs than are allowed per distribution.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateAliasCommand extends $Command<
-  AssociateAliasCommandInput,
-  AssociateAliasCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateAliasCommandInput, AssociateAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "AssociateAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateAliasRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class AssociateAliasCommand extends command<AssociateAliasCommandInput, AssociateAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateAlias",
+  AssociateAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateAliasRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlAssociateAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateAliasCommandOutput> {
-    return deserializeAws_restXmlAssociateAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateAliasCommandInput;
+      output: AssociateAliasCommandOutput;
+    };
+  };
 }

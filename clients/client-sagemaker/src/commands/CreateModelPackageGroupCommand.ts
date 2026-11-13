@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateModelPackageGroupInput, CreateModelPackageGroupOutput } from "../models/models_1";
-import {
-  deserializeAws_json1_1CreateModelPackageGroupCommand,
-  serializeAws_json1_1CreateModelPackageGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateModelPackageGroupInput, CreateModelPackageGroupOutput } from "../models/models_2";
+import { CreateModelPackageGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateModelPackageGroupCommand}.
+ */
 export interface CreateModelPackageGroupCommandInput extends CreateModelPackageGroupInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateModelPackageGroupCommand}.
+ */
 export interface CreateModelPackageGroupCommandOutput extends CreateModelPackageGroupOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface CreateModelPackageGroupCommandOutput extends CreateModelPackage
  * ```javascript
  * import { SageMakerClient, CreateModelPackageGroupCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateModelPackageGroupCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateModelPackageGroupInput
+ *   ModelPackageGroupName: "STRING_VALUE", // required
+ *   ModelPackageGroupDescription: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   ManagedConfiguration: { // ManagedConfiguration
+ *     ManagedStorageType: "Restricted",
+ *   },
+ * };
  * const command = new CreateModelPackageGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateModelPackageGroupOutput
+ * //   ModelPackageGroupArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateModelPackageGroupCommandInput - {@link CreateModelPackageGroupCommandInput}
+ * @returns {@link CreateModelPackageGroupCommandOutput}
  * @see {@link CreateModelPackageGroupCommandInput} for command's `input` shape.
  * @see {@link CreateModelPackageGroupCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceLimitExceeded} (client fault)
+ *  <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateModelPackageGroupCommand extends $Command<
-  CreateModelPackageGroupCommandInput,
-  CreateModelPackageGroupCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateModelPackageGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateModelPackageGroupCommandInput, CreateModelPackageGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateModelPackageGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateModelPackageGroupInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateModelPackageGroupOutput.filterSensitiveLog,
+export class CreateModelPackageGroupCommand extends command<CreateModelPackageGroupCommandInput, CreateModelPackageGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateModelPackageGroup",
+  CreateModelPackageGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateModelPackageGroupInput;
+      output: CreateModelPackageGroupOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateModelPackageGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateModelPackageGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateModelPackageGroupCommandOutput> {
-    return deserializeAws_json1_1CreateModelPackageGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateModelPackageGroupCommandInput;
+      output: CreateModelPackageGroupCommandOutput;
+    };
+  };
 }

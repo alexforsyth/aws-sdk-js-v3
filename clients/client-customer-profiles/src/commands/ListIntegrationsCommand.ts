@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { ListIntegrationsRequest, ListIntegrationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListIntegrationsCommand,
-  serializeAws_restJson1ListIntegrationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListIntegrationsRequest, ListIntegrationsResponse } from "../models/models_0";
+import { ListIntegrations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListIntegrationsCommand}.
+ */
 export interface ListIntegrationsCommandInput extends ListIntegrationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListIntegrationsCommand}.
+ */
 export interface ListIntegrationsCommandOutput extends ListIntegrationsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,87 @@ export interface ListIntegrationsCommandOutput extends ListIntegrationsResponse,
  * ```javascript
  * import { CustomerProfilesClient, ListIntegrationsCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, ListIntegrationsCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // ListIntegrationsRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   IncludeHidden: true || false,
+ * };
  * const command = new ListIntegrationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListIntegrationsResponse
+ * //   Items: [ // IntegrationList
+ * //     { // ListIntegrationItem
+ * //       DomainName: "STRING_VALUE", // required
+ * //       Uri: "STRING_VALUE", // required
+ * //       ObjectTypeName: "STRING_VALUE",
+ * //       CreatedAt: new Date("TIMESTAMP"), // required
+ * //       LastUpdatedAt: new Date("TIMESTAMP"), // required
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       ObjectTypeNames: { // ObjectTypeNames
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       WorkflowId: "STRING_VALUE",
+ * //       IsUnstructured: true || false,
+ * //       RoleArn: "STRING_VALUE",
+ * //       EventTriggerNames: [ // EventTriggerNames
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Scope: "PROFILE" || "DOMAIN",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListIntegrationsCommandInput - {@link ListIntegrationsCommandInput}
+ * @returns {@link ListIntegrationsCommandOutput}
  * @see {@link ListIntegrationsCommandInput} for command's `input` shape.
  * @see {@link ListIntegrationsCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class ListIntegrationsCommand extends $Command<
-  ListIntegrationsCommandInput,
-  ListIntegrationsCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListIntegrationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListIntegrationsCommandInput, ListIntegrationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "ListIntegrationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListIntegrationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListIntegrationsResponse.filterSensitiveLog,
+export class ListIntegrationsCommand extends command<ListIntegrationsCommandInput, ListIntegrationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListIntegrations",
+  ListIntegrations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIntegrationsRequest;
+      output: ListIntegrationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListIntegrationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListIntegrationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListIntegrationsCommandOutput> {
-    return deserializeAws_restJson1ListIntegrationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListIntegrationsCommandInput;
+      output: ListIntegrationsCommandOutput;
+    };
+  };
 }

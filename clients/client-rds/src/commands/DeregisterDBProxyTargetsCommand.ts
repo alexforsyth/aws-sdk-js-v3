@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeregisterDBProxyTargetsRequest, DeregisterDBProxyTargetsResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDeregisterDBProxyTargetsCommand,
-  serializeAws_queryDeregisterDBProxyTargetsCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeregisterDBProxyTargetsRequest, DeregisterDBProxyTargetsResponse } from "../models/models_0";
+import { DeregisterDBProxyTargets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeregisterDBProxyTargetsCommand}.
+ */
 export interface DeregisterDBProxyTargetsCommandInput extends DeregisterDBProxyTargetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeregisterDBProxyTargetsCommand}.
+ */
 export interface DeregisterDBProxyTargetsCommandOutput extends DeregisterDBProxyTargetsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface DeregisterDBProxyTargetsCommandOutput extends DeregisterDBProxy
  * ```javascript
  * import { RDSClient, DeregisterDBProxyTargetsCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DeregisterDBProxyTargetsCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DeregisterDBProxyTargetsRequest
+ *   DBProxyName: "STRING_VALUE", // required
+ *   TargetGroupName: "STRING_VALUE",
+ *   DBInstanceIdentifiers: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   DBClusterIdentifiers: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DeregisterDBProxyTargetsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeregisterDBProxyTargetsCommandInput - {@link DeregisterDBProxyTargetsCommandInput}
+ * @returns {@link DeregisterDBProxyTargetsCommandOutput}
  * @see {@link DeregisterDBProxyTargetsCommandInput} for command's `input` shape.
  * @see {@link DeregisterDBProxyTargetsCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBProxyNotFoundFault} (client fault)
+ *  <p>The specified proxy name doesn't correspond to a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link DBProxyTargetGroupNotFoundFault} (client fault)
+ *  <p>The specified target group isn't available for a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link DBProxyTargetNotFoundFault} (client fault)
+ *  <p>The specified RDS DB instance or Aurora DB cluster isn't available for a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link InvalidDBProxyStateFault} (client fault)
+ *  <p>The requested operation can't be performed while the proxy is in this state.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @public
  */
-export class DeregisterDBProxyTargetsCommand extends $Command<
-  DeregisterDBProxyTargetsCommandInput,
-  DeregisterDBProxyTargetsCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeregisterDBProxyTargetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeregisterDBProxyTargetsCommandInput, DeregisterDBProxyTargetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DeregisterDBProxyTargetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeregisterDBProxyTargetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeregisterDBProxyTargetsResponse.filterSensitiveLog,
+export class DeregisterDBProxyTargetsCommand extends command<DeregisterDBProxyTargetsCommandInput, DeregisterDBProxyTargetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeregisterDBProxyTargets",
+  DeregisterDBProxyTargets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterDBProxyTargetsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeregisterDBProxyTargetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeregisterDBProxyTargetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeregisterDBProxyTargetsCommandOutput> {
-    return deserializeAws_queryDeregisterDBProxyTargetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeregisterDBProxyTargetsCommandInput;
+      output: DeregisterDBProxyTargetsCommandOutput;
+    };
+  };
 }

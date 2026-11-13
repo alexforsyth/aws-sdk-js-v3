@@ -1,21 +1,72 @@
-import { S3SignatureV4 } from "@aws-sdk/middleware-sdk-s3";
-import { Logger as __Logger } from "@aws-sdk/types";
-import { parseUrl } from "@aws-sdk/url-parser";
+// smithy-typescript generated code
+import { Sha1 } from "@aws-sdk/checksums/sha";
+import { AwsSdkSigV4ASigner, AwsSdkSigV4Signer } from "@aws-sdk/core/httpAuthSchemes";
+import { S3RestXmlProtocol } from "@aws-sdk/middleware-sdk-s3/s3";
+import { SignatureV4MultiRegion } from "@aws-sdk/signature-v4-multi-region";
+import { Md5, Sha256 } from "@smithy/core/checksum";
+import { NoOpLogger } from "@smithy/core/client";
+import { parseUrl } from "@smithy/core/protocols";
+import {
+  fromBase64,
+  fromUtf8,
+  getAwsChunkedEncodingStream,
+  sdkStreamMixin,
+  toBase64,
+  toUtf8,
+} from "@smithy/core/serde";
+import type { IdentityProviderConfig } from "@smithy/types";
 
-import { defaultRegionInfoProvider } from "./endpoints";
-import { S3ClientConfig } from "./S3Client";
+import { defaultS3HttpAuthSchemeProvider } from "./auth/httpAuthSchemeProvider";
+import { defaultEndpointResolver } from "./endpoint/endpointResolver";
+import type { S3ClientConfig } from "./S3Client";
+import { errorTypeRegistries } from "./schemas/schemas_0";
 
 /**
  * @internal
  */
-export const getRuntimeConfig = (config: S3ClientConfig) => ({
-  apiVersion: "2006-03-01",
-  disableHostPrefix: config?.disableHostPrefix ?? false,
-  logger: config?.logger ?? ({} as __Logger),
-  regionInfoProvider: config?.regionInfoProvider ?? defaultRegionInfoProvider,
-  serviceId: config?.serviceId ?? "S3",
-  signerConstructor: config?.signerConstructor ?? S3SignatureV4,
-  signingEscapePath: config?.signingEscapePath ?? false,
-  urlParser: config?.urlParser ?? parseUrl,
-  useArnRegion: config?.useArnRegion ?? false,
-});
+export const getRuntimeConfig = (config: S3ClientConfig) => {
+  return {
+    apiVersion: "2006-03-01",
+    base64Decoder: config?.base64Decoder ?? fromBase64,
+    base64Encoder: config?.base64Encoder ?? toBase64,
+    disableHostPrefix: config?.disableHostPrefix ?? false,
+    endpointProvider: config?.endpointProvider ?? defaultEndpointResolver,
+    extensions: config?.extensions ?? [],
+    getAwsChunkedEncodingStream: config?.getAwsChunkedEncodingStream ?? getAwsChunkedEncodingStream,
+    httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultS3HttpAuthSchemeProvider,
+    httpAuthSchemes: config?.httpAuthSchemes ?? [
+      {
+        schemeId: "aws.auth#sigv4",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4"),
+        signer: new AwsSdkSigV4Signer(),
+      },
+      {
+        schemeId: "aws.auth#sigv4a",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4a"),
+        signer: new AwsSdkSigV4ASigner(),
+      },
+    ],
+    logger: config?.logger ?? new NoOpLogger(),
+    md5: config?.md5 ?? Md5,
+    protocol: config?.protocol ?? S3RestXmlProtocol,
+    protocolSettings: config?.protocolSettings ?? {
+      defaultNamespace: "com.amazonaws.s3",
+      errorTypeRegistries,
+      xmlNamespace: "http://s3.amazonaws.com/doc/2006-03-01/",
+      version: "2006-03-01",
+      serviceTarget: "AmazonS3",
+    },
+    sdkStreamMixin: config?.sdkStreamMixin ?? sdkStreamMixin,
+    serviceId: config?.serviceId ?? "S3",
+    sha1: config?.sha1 ?? Sha1,
+    sha256: config?.sha256 ?? Sha256,
+    signerConstructor: config?.signerConstructor ?? SignatureV4MultiRegion,
+    signingEscapePath: config?.signingEscapePath ?? false,
+    urlParser: config?.urlParser ?? parseUrl,
+    useArnRegion: config?.useArnRegion ?? undefined,
+    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+  };
+};

@@ -1,99 +1,86 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { ListApprovalRuleTemplatesInput, ListApprovalRuleTemplatesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListApprovalRuleTemplatesCommand,
-  serializeAws_json1_1ListApprovalRuleTemplatesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApprovalRuleTemplatesInput, ListApprovalRuleTemplatesOutput } from "../models/models_0";
+import { ListApprovalRuleTemplates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApprovalRuleTemplatesCommand}.
+ */
 export interface ListApprovalRuleTemplatesCommandInput extends ListApprovalRuleTemplatesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListApprovalRuleTemplatesCommand}.
+ */
 export interface ListApprovalRuleTemplatesCommandOutput extends ListApprovalRuleTemplatesOutput, __MetadataBearer {}
 
 /**
- * <p>Lists all approval rule templates in the specified AWS Region in your AWS account. If
- *             an AWS Region is not specified, the AWS Region where you are signed in is used.</p>
+ * <p>Lists all approval rule templates in the specified Amazon Web Services Region in your Amazon Web Services account. If
+ *             an Amazon Web Services Region is not specified, the Amazon Web Services Region where you are signed in is used.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeCommitClient, ListApprovalRuleTemplatesCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, ListApprovalRuleTemplatesCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // ListApprovalRuleTemplatesInput
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListApprovalRuleTemplatesCommand(input);
  * const response = await client.send(command);
+ * // { // ListApprovalRuleTemplatesOutput
+ * //   approvalRuleTemplateNames: [ // ApprovalRuleTemplateNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListApprovalRuleTemplatesCommandInput - {@link ListApprovalRuleTemplatesCommandInput}
+ * @returns {@link ListApprovalRuleTemplatesCommandOutput}
  * @see {@link ListApprovalRuleTemplatesCommandInput} for command's `input` shape.
  * @see {@link ListApprovalRuleTemplatesCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link InvalidContinuationTokenException} (client fault)
+ *  <p>The specified continuation token is not valid.</p>
+ *
+ * @throws {@link InvalidMaxResultsException} (client fault)
+ *  <p>The specified number of maximum results is not valid.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class ListApprovalRuleTemplatesCommand extends $Command<
-  ListApprovalRuleTemplatesCommandInput,
-  ListApprovalRuleTemplatesCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListApprovalRuleTemplatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListApprovalRuleTemplatesCommandInput, ListApprovalRuleTemplatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "ListApprovalRuleTemplatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListApprovalRuleTemplatesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListApprovalRuleTemplatesOutput.filterSensitiveLog,
+export class ListApprovalRuleTemplatesCommand extends command<ListApprovalRuleTemplatesCommandInput, ListApprovalRuleTemplatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApprovalRuleTemplates",
+  ListApprovalRuleTemplates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApprovalRuleTemplatesInput;
+      output: ListApprovalRuleTemplatesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListApprovalRuleTemplatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListApprovalRuleTemplatesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListApprovalRuleTemplatesCommandOutput> {
-    return deserializeAws_json1_1ListApprovalRuleTemplatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListApprovalRuleTemplatesCommandInput;
+      output: ListApprovalRuleTemplatesCommandOutput;
+    };
+  };
 }

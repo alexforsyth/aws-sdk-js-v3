@@ -1,100 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTJobsDataPlaneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTJobsDataPlaneClient";
-import { StartNextPendingJobExecutionRequest, StartNextPendingJobExecutionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartNextPendingJobExecutionCommand,
-  serializeAws_restJson1StartNextPendingJobExecutionCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface StartNextPendingJobExecutionCommandInput extends StartNextPendingJobExecutionRequest {}
-export interface StartNextPendingJobExecutionCommandOutput
-  extends StartNextPendingJobExecutionResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartNextPendingJobExecutionRequest, StartNextPendingJobExecutionResponse } from "../models/models_0";
+import { StartNextPendingJobExecution$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartNextPendingJobExecutionCommand}.
+ */
+export interface StartNextPendingJobExecutionCommandInput extends StartNextPendingJobExecutionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartNextPendingJobExecutionCommand}.
+ */
+export interface StartNextPendingJobExecutionCommandOutput extends StartNextPendingJobExecutionResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a
+ *          thing.</p>
+ *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StartNextPendingJobExecution</a> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTJobsDataPlaneClient, StartNextPendingJobExecutionCommand } from "@aws-sdk/client-iot-jobs-data-plane"; // ES Modules import
  * // const { IoTJobsDataPlaneClient, StartNextPendingJobExecutionCommand } = require("@aws-sdk/client-iot-jobs-data-plane"); // CommonJS import
+ * // import type { IoTJobsDataPlaneClientConfig } from "@aws-sdk/client-iot-jobs-data-plane";
+ * const config = {}; // type is IoTJobsDataPlaneClientConfig
  * const client = new IoTJobsDataPlaneClient(config);
+ * const input = { // StartNextPendingJobExecutionRequest
+ *   thingName: "STRING_VALUE", // required
+ *   statusDetails: { // DetailsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   stepTimeoutInMinutes: Number("long"),
+ * };
  * const command = new StartNextPendingJobExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // StartNextPendingJobExecutionResponse
+ * //   execution: { // JobExecution
+ * //     jobId: "STRING_VALUE",
+ * //     thingName: "STRING_VALUE",
+ * //     status: "QUEUED" || "IN_PROGRESS" || "SUCCEEDED" || "FAILED" || "TIMED_OUT" || "REJECTED" || "REMOVED" || "CANCELED",
+ * //     statusDetails: { // DetailsMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     queuedAt: Number("long"),
+ * //     startedAt: Number("long"),
+ * //     lastUpdatedAt: Number("long"),
+ * //     approximateSecondsBeforeTimedOut: Number("long"),
+ * //     versionNumber: Number("long"),
+ * //     executionNumber: Number("long"),
+ * //     jobDocument: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartNextPendingJobExecutionCommandInput - {@link StartNextPendingJobExecutionCommandInput}
+ * @returns {@link StartNextPendingJobExecutionCommandOutput}
  * @see {@link StartNextPendingJobExecutionCommandInput} for command's `input` shape.
  * @see {@link StartNextPendingJobExecutionCommandOutput} for command's `response` shape.
- * @see {@link IoTJobsDataPlaneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTJobsDataPlaneClientResolvedConfig | config} for IoTJobsDataPlaneClient's `config` shape.
  *
+ * @throws {@link CertificateValidationException} (client fault)
+ *  <p>The certificate is invalid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The contents of the request were invalid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTJobsDataPlaneServiceException}
+ * <p>Base exception class for all service exceptions from IoTJobsDataPlane service.</p>
+ *
+ *
+ * @public
  */
-export class StartNextPendingJobExecutionCommand extends $Command<
-  StartNextPendingJobExecutionCommandInput,
-  StartNextPendingJobExecutionCommandOutput,
-  IoTJobsDataPlaneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartNextPendingJobExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTJobsDataPlaneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartNextPendingJobExecutionCommandInput, StartNextPendingJobExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTJobsDataPlaneClient";
-    const commandName = "StartNextPendingJobExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartNextPendingJobExecutionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartNextPendingJobExecutionResponse.filterSensitiveLog,
+export class StartNextPendingJobExecutionCommand extends command<StartNextPendingJobExecutionCommandInput, StartNextPendingJobExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartNextPendingJobExecution",
+  StartNextPendingJobExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartNextPendingJobExecutionRequest;
+      output: StartNextPendingJobExecutionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartNextPendingJobExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartNextPendingJobExecutionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartNextPendingJobExecutionCommandOutput> {
-    return deserializeAws_restJson1StartNextPendingJobExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartNextPendingJobExecutionCommandInput;
+      output: StartNextPendingJobExecutionCommandOutput;
+    };
+  };
 }

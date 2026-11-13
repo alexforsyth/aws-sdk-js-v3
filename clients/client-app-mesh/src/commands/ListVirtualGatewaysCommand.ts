@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppMeshClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppMeshClient";
-import { ListVirtualGatewaysInput, ListVirtualGatewaysOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListVirtualGatewaysCommand,
-  serializeAws_restJson1ListVirtualGatewaysCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListVirtualGatewaysInput, ListVirtualGatewaysOutput } from "../models/models_0";
+import { ListVirtualGateways$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListVirtualGatewaysCommand}.
+ */
 export interface ListVirtualGatewaysCommandInput extends ListVirtualGatewaysInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListVirtualGatewaysCommand}.
+ */
 export interface ListVirtualGatewaysCommandOutput extends ListVirtualGatewaysOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface ListVirtualGatewaysCommandOutput extends ListVirtualGatewaysOut
  * ```javascript
  * import { AppMeshClient, ListVirtualGatewaysCommand } from "@aws-sdk/client-app-mesh"; // ES Modules import
  * // const { AppMeshClient, ListVirtualGatewaysCommand } = require("@aws-sdk/client-app-mesh"); // CommonJS import
+ * // import type { AppMeshClientConfig } from "@aws-sdk/client-app-mesh";
+ * const config = {}; // type is AppMeshClientConfig
  * const client = new AppMeshClient(config);
+ * const input = { // ListVirtualGatewaysInput
+ *   meshName: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   limit: Number("int"),
+ *   meshOwner: "STRING_VALUE",
+ * };
  * const command = new ListVirtualGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // ListVirtualGatewaysOutput
+ * //   virtualGateways: [ // VirtualGatewayList // required
+ * //     { // VirtualGatewayRef
+ * //       meshName: "STRING_VALUE", // required
+ * //       virtualGatewayName: "STRING_VALUE", // required
+ * //       meshOwner: "STRING_VALUE", // required
+ * //       resourceOwner: "STRING_VALUE", // required
+ * //       arn: "STRING_VALUE", // required
+ * //       version: Number("long"), // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       lastUpdatedAt: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListVirtualGatewaysCommandInput - {@link ListVirtualGatewaysCommandInput}
+ * @returns {@link ListVirtualGatewaysCommandOutput}
  * @see {@link ListVirtualGatewaysCommandInput} for command's `input` shape.
  * @see {@link ListVirtualGatewaysCommandOutput} for command's `response` shape.
- * @see {@link AppMeshClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppMeshClientResolvedConfig | config} for AppMeshClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request syntax was malformed. Check your request syntax and try again.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You don't have permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or
+ *          failure.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist. Check your request syntax and try again.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The maximum request rate permitted by the App Mesh APIs has been exceeded for
+ *          your account. For best results, use an increasing or variable sleep interval between
+ *          requests.</p>
+ *
+ * @throws {@link AppMeshServiceException}
+ * <p>Base exception class for all service exceptions from AppMesh service.</p>
+ *
+ *
+ * @public
  */
-export class ListVirtualGatewaysCommand extends $Command<
-  ListVirtualGatewaysCommandInput,
-  ListVirtualGatewaysCommandOutput,
-  AppMeshClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListVirtualGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppMeshClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListVirtualGatewaysCommandInput, ListVirtualGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppMeshClient";
-    const commandName = "ListVirtualGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListVirtualGatewaysInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListVirtualGatewaysOutput.filterSensitiveLog,
+export class ListVirtualGatewaysCommand extends command<ListVirtualGatewaysCommandInput, ListVirtualGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListVirtualGateways",
+  ListVirtualGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVirtualGatewaysInput;
+      output: ListVirtualGatewaysOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListVirtualGatewaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListVirtualGatewaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListVirtualGatewaysCommandOutput> {
-    return deserializeAws_restJson1ListVirtualGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListVirtualGatewaysCommandInput;
+      output: ListVirtualGatewaysCommandOutput;
+    };
+  };
 }

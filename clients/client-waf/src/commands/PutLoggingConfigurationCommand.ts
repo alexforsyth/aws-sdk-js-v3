@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutLoggingConfigurationRequest, PutLoggingConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutLoggingConfigurationCommand,
-  serializeAws_json1_1PutLoggingConfigurationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutLoggingConfigurationRequest, PutLoggingConfigurationResponse } from "../models/models_0";
+import { PutLoggingConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutLoggingConfigurationCommand}.
+ */
 export interface PutLoggingConfigurationCommandInput extends PutLoggingConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutLoggingConfigurationCommand}.
+ */
 export interface PutLoggingConfigurationCommandOutput extends PutLoggingConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -46,75 +47,88 @@ export interface PutLoggingConfigurationCommandOutput extends PutLoggingConfigur
  *                <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p>
  *             </li>
  *          </ol>
- *
+ * 	
  *          <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose.  For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WAFClient, PutLoggingConfigurationCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, PutLoggingConfigurationCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // PutLoggingConfigurationRequest
+ *   LoggingConfiguration: { // LoggingConfiguration
+ *     ResourceArn: "STRING_VALUE", // required
+ *     LogDestinationConfigs: [ // LogDestinationConfigs // required
+ *       "STRING_VALUE",
+ *     ],
+ *     RedactedFields: [ // RedactedFields
+ *       { // FieldToMatch
+ *         Type: "URI" || "QUERY_STRING" || "HEADER" || "METHOD" || "BODY" || "SINGLE_QUERY_ARG" || "ALL_QUERY_ARGS", // required
+ *         Data: "STRING_VALUE",
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new PutLoggingConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // PutLoggingConfigurationResponse
+ * //   LoggingConfiguration: { // LoggingConfiguration
+ * //     ResourceArn: "STRING_VALUE", // required
+ * //     LogDestinationConfigs: [ // LogDestinationConfigs // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     RedactedFields: [ // RedactedFields
+ * //       { // FieldToMatch
+ * //         Type: "URI" || "QUERY_STRING" || "HEADER" || "METHOD" || "BODY" || "SINGLE_QUERY_ARG" || "ALL_QUERY_ARGS", // required
+ * //         Data: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutLoggingConfigurationCommandInput - {@link PutLoggingConfigurationCommandInput}
+ * @returns {@link PutLoggingConfigurationCommandOutput}
  * @see {@link PutLoggingConfigurationCommandInput} for command's `input` shape.
  * @see {@link PutLoggingConfigurationCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFServiceLinkedRoleErrorException} (client fault)
+ *  <p>AWS WAF is not able to access the service linked role. This can be caused by a previous <code>PutLoggingConfiguration</code> request, which can lock the service linked role for about 20 seconds. Please try your request again. The service linked role can also be locked by a previous <code>DeleteServiceLinkedRole</code> request, which can lock the role for 15 minutes or more. If you recently made a <code>DeleteServiceLinkedRole</code>, wait at least 15 minutes and try the request again. If you receive this same exception again, you will have to wait additional time until the role is unlocked.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class PutLoggingConfigurationCommand extends $Command<
-  PutLoggingConfigurationCommandInput,
-  PutLoggingConfigurationCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutLoggingConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutLoggingConfigurationCommandInput, PutLoggingConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "PutLoggingConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutLoggingConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutLoggingConfigurationResponse.filterSensitiveLog,
+export class PutLoggingConfigurationCommand extends command<PutLoggingConfigurationCommandInput, PutLoggingConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutLoggingConfiguration",
+  PutLoggingConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutLoggingConfigurationRequest;
+      output: PutLoggingConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutLoggingConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutLoggingConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutLoggingConfigurationCommandOutput> {
-    return deserializeAws_json1_1PutLoggingConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutLoggingConfigurationCommandInput;
+      output: PutLoggingConfigurationCommandOutput;
+    };
+  };
 }

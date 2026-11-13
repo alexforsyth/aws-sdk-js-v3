@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { DefineIndexFieldRequest, DefineIndexFieldResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDefineIndexFieldCommand,
-  serializeAws_queryDefineIndexFieldCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DefineIndexFieldRequest, DefineIndexFieldResponse } from "../models/models_0";
+import { DefineIndexField$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DefineIndexFieldCommand}.
+ */
 export interface DefineIndexFieldCommandInput extends DefineIndexFieldRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DefineIndexFieldCommand}.
+ */
 export interface DefineIndexFieldCommandOutput extends DefineIndexFieldResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,248 @@ export interface DefineIndexFieldCommandOutput extends DefineIndexFieldResponse,
  * ```javascript
  * import { CloudSearchClient, DefineIndexFieldCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, DefineIndexFieldCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // DefineIndexFieldRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   IndexField: { // IndexField
+ *     IndexFieldName: "STRING_VALUE", // required
+ *     IndexFieldType: "int" || "double" || "literal" || "text" || "date" || "latlon" || "int-array" || "double-array" || "literal-array" || "text-array" || "date-array", // required
+ *     IntOptions: { // IntOptions
+ *       DefaultValue: Number("long"),
+ *       SourceField: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *       SortEnabled: true || false,
+ *     },
+ *     DoubleOptions: { // DoubleOptions
+ *       DefaultValue: Number("double"),
+ *       SourceField: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *       SortEnabled: true || false,
+ *     },
+ *     LiteralOptions: { // LiteralOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceField: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *       SortEnabled: true || false,
+ *     },
+ *     TextOptions: { // TextOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceField: "STRING_VALUE",
+ *       ReturnEnabled: true || false,
+ *       SortEnabled: true || false,
+ *       HighlightEnabled: true || false,
+ *       AnalysisScheme: "STRING_VALUE",
+ *     },
+ *     DateOptions: { // DateOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceField: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *       SortEnabled: true || false,
+ *     },
+ *     LatLonOptions: { // LatLonOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceField: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *       SortEnabled: true || false,
+ *     },
+ *     IntArrayOptions: { // IntArrayOptions
+ *       DefaultValue: Number("long"),
+ *       SourceFields: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *     },
+ *     DoubleArrayOptions: { // DoubleArrayOptions
+ *       DefaultValue: Number("double"),
+ *       SourceFields: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *     },
+ *     LiteralArrayOptions: { // LiteralArrayOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceFields: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *     },
+ *     TextArrayOptions: { // TextArrayOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceFields: "STRING_VALUE",
+ *       ReturnEnabled: true || false,
+ *       HighlightEnabled: true || false,
+ *       AnalysisScheme: "STRING_VALUE",
+ *     },
+ *     DateArrayOptions: { // DateArrayOptions
+ *       DefaultValue: "STRING_VALUE",
+ *       SourceFields: "STRING_VALUE",
+ *       FacetEnabled: true || false,
+ *       SearchEnabled: true || false,
+ *       ReturnEnabled: true || false,
+ *     },
+ *   },
+ * };
  * const command = new DefineIndexFieldCommand(input);
  * const response = await client.send(command);
+ * // { // DefineIndexFieldResponse
+ * //   IndexField: { // IndexFieldStatus
+ * //     Options: { // IndexField
+ * //       IndexFieldName: "STRING_VALUE", // required
+ * //       IndexFieldType: "int" || "double" || "literal" || "text" || "date" || "latlon" || "int-array" || "double-array" || "literal-array" || "text-array" || "date-array", // required
+ * //       IntOptions: { // IntOptions
+ * //         DefaultValue: Number("long"),
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       DoubleOptions: { // DoubleOptions
+ * //         DefaultValue: Number("double"),
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       LiteralOptions: { // LiteralOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       TextOptions: { // TextOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //         HighlightEnabled: true || false,
+ * //         AnalysisScheme: "STRING_VALUE",
+ * //       },
+ * //       DateOptions: { // DateOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       LatLonOptions: { // LatLonOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       IntArrayOptions: { // IntArrayOptions
+ * //         DefaultValue: Number("long"),
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //       DoubleArrayOptions: { // DoubleArrayOptions
+ * //         DefaultValue: Number("double"),
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //       LiteralArrayOptions: { // LiteralArrayOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //       TextArrayOptions: { // TextArrayOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceFields: "STRING_VALUE",
+ * //         ReturnEnabled: true || false,
+ * //         HighlightEnabled: true || false,
+ * //         AnalysisScheme: "STRING_VALUE",
+ * //       },
+ * //       DateArrayOptions: { // DateArrayOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //     },
+ * //     Status: { // OptionStatus
+ * //       CreationDate: new Date("TIMESTAMP"), // required
+ * //       UpdateDate: new Date("TIMESTAMP"), // required
+ * //       UpdateVersion: Number("int"),
+ * //       State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //       PendingDeletion: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DefineIndexFieldCommandInput - {@link DefineIndexFieldCommandInput}
+ * @returns {@link DefineIndexFieldCommandOutput}
  * @see {@link DefineIndexFieldCommandInput} for command's `input` shape.
  * @see {@link DefineIndexFieldCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link InvalidTypeException} (client fault)
+ *  <p>The request was rejected because it specified an invalid type definition.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because a resource limit has already been met.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was rejected because it has invalid parameters.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DefineIndexFieldCommand extends $Command<
-  DefineIndexFieldCommandInput,
-  DefineIndexFieldCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DefineIndexFieldCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DefineIndexFieldCommandInput, DefineIndexFieldCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "DefineIndexFieldCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DefineIndexFieldRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DefineIndexFieldResponse.filterSensitiveLog,
+export class DefineIndexFieldCommand extends command<DefineIndexFieldCommandInput, DefineIndexFieldCommandOutput>(
+  _ep0,
+  _mw0,
+  "DefineIndexField",
+  DefineIndexField$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DefineIndexFieldRequest;
+      output: DefineIndexFieldResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DefineIndexFieldCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDefineIndexFieldCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DefineIndexFieldCommandOutput> {
-    return deserializeAws_queryDefineIndexFieldCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DefineIndexFieldCommandInput;
+      output: DefineIndexFieldCommandOutput;
+    };
+  };
 }

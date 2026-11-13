@@ -1,0 +1,148 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateApplicationRequest, CreateApplicationResponse } from "../models/models_0";
+import { CreateApplication$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateApplicationCommand}.
+ */
+export interface CreateApplicationCommandInput extends CreateApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateApplicationCommand}.
+ */
+export interface CreateApplicationCommandOutput extends CreateApplicationResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates an OpenSearch UI application. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html">Using the OpenSearch user interface in Amazon OpenSearch Service</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OpenSearchClient, CreateApplicationCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
+ * // const { OpenSearchClient, CreateApplicationCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
+ * const client = new OpenSearchClient(config);
+ * const input = { // CreateApplicationRequest
+ *   clientToken: "STRING_VALUE",
+ *   name: "STRING_VALUE", // required
+ *   dataSources: [ // DataSources
+ *     { // DataSource
+ *       dataSourceArn: "STRING_VALUE",
+ *       dataSourceDescription: "STRING_VALUE",
+ *       iamRoleForDataSourceArn: "STRING_VALUE",
+ *     },
+ *   ],
+ *   iamIdentityCenterOptions: { // IamIdentityCenterOptionsInput
+ *     enabled: true || false,
+ *     iamIdentityCenterInstanceArn: "STRING_VALUE",
+ *     iamRoleForIdentityCenterApplicationArn: "STRING_VALUE",
+ *   },
+ *   appConfigs: [ // AppConfigs
+ *     { // AppConfig
+ *       key: "opensearchDashboards.dashboardAdmin.users" || "opensearchDashboards.dashboardAdmin.groups",
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   tagList: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   kmsKeyArn: "STRING_VALUE",
+ * };
+ * const command = new CreateApplicationCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateApplicationResponse
+ * //   id: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   arn: "STRING_VALUE",
+ * //   dataSources: [ // DataSources
+ * //     { // DataSource
+ * //       dataSourceArn: "STRING_VALUE",
+ * //       dataSourceDescription: "STRING_VALUE",
+ * //       iamRoleForDataSourceArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   iamIdentityCenterOptions: { // IamIdentityCenterOptions
+ * //     enabled: true || false,
+ * //     iamIdentityCenterInstanceArn: "STRING_VALUE",
+ * //     iamRoleForIdentityCenterApplicationArn: "STRING_VALUE",
+ * //     iamIdentityCenterApplicationArn: "STRING_VALUE",
+ * //   },
+ * //   appConfigs: [ // AppConfigs
+ * //     { // AppConfig
+ * //       key: "opensearchDashboards.dashboardAdmin.users" || "opensearchDashboards.dashboardAdmin.groups",
+ * //       value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   tagList: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   createdAt: new Date("TIMESTAMP"),
+ * //   kmsKeyArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateApplicationCommandInput - {@link CreateApplicationCommandInput}
+ * @returns {@link CreateApplicationCommandOutput}
+ * @see {@link CreateApplicationCommandInput} for command's `input` shape.
+ * @see {@link CreateApplicationCommandOutput} for command's `response` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An error occurred because you don't have permissions to access the resource.</p>
+ *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>An error occurred because the client attempts to remove a resource that is currently in use.</p>
+ *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access an unsupported operation.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateApplicationCommand extends command<CreateApplicationCommandInput, CreateApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateApplication",
+  CreateApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateApplicationRequest;
+      output: CreateApplicationResponse;
+    };
+    sdk: {
+      input: CreateApplicationCommandInput;
+      output: CreateApplicationCommandOutput;
+    };
+  };
+}

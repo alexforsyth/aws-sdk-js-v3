@@ -1,0 +1,102 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDeleteUniqueIdInput, BatchDeleteUniqueIdOutput } from "../models/models_0";
+import { BatchDeleteUniqueId$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDeleteUniqueIdCommand}.
+ */
+export interface BatchDeleteUniqueIdCommandInput extends BatchDeleteUniqueIdInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDeleteUniqueIdCommand}.
+ */
+export interface BatchDeleteUniqueIdCommandOutput extends BatchDeleteUniqueIdOutput, __MetadataBearer {}
+
+/**
+ * <p>Deletes multiple unique IDs in a matching workflow.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EntityResolutionClient, BatchDeleteUniqueIdCommand } from "@aws-sdk/client-entityresolution"; // ES Modules import
+ * // const { EntityResolutionClient, BatchDeleteUniqueIdCommand } = require("@aws-sdk/client-entityresolution"); // CommonJS import
+ * // import type { EntityResolutionClientConfig } from "@aws-sdk/client-entityresolution";
+ * const config = {}; // type is EntityResolutionClientConfig
+ * const client = new EntityResolutionClient(config);
+ * const input = { // BatchDeleteUniqueIdInput
+ *   workflowName: "STRING_VALUE", // required
+ *   inputSource: "STRING_VALUE",
+ *   uniqueIds: [ // UniqueIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
+ * const command = new BatchDeleteUniqueIdCommand(input);
+ * const response = await client.send(command);
+ * // { // BatchDeleteUniqueIdOutput
+ * //   status: "COMPLETED" || "ACCEPTED", // required
+ * //   errors: [ // DeleteUniqueIdErrorsList // required
+ * //     { // DeleteUniqueIdError
+ * //       uniqueId: "STRING_VALUE", // required
+ * //       errorType: "SERVICE_ERROR" || "VALIDATION_ERROR", // required
+ * //     },
+ * //   ],
+ * //   deleted: [ // DeletedUniqueIdList // required
+ * //     { // DeletedUniqueId
+ * //       uniqueId: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   disconnectedUniqueIds: [ // DisconnectedUniqueIdsList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param BatchDeleteUniqueIdCommandInput - {@link BatchDeleteUniqueIdCommandInput}
+ * @returns {@link BatchDeleteUniqueIdCommandOutput}
+ * @see {@link BatchDeleteUniqueIdCommandInput} for command's `input` shape.
+ * @see {@link BatchDeleteUniqueIdCommandOutput} for command's `response` shape.
+ * @see {@link EntityResolutionClientResolvedConfig | config} for EntityResolutionClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Entity Resolution service. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by Entity Resolution. </p>
+ *
+ * @throws {@link EntityResolutionServiceException}
+ * <p>Base exception class for all service exceptions from EntityResolution service.</p>
+ *
+ *
+ * @public
+ */
+export class BatchDeleteUniqueIdCommand extends command<BatchDeleteUniqueIdCommandInput, BatchDeleteUniqueIdCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDeleteUniqueId",
+  BatchDeleteUniqueId$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDeleteUniqueIdInput;
+      output: BatchDeleteUniqueIdOutput;
+    };
+    sdk: {
+      input: BatchDeleteUniqueIdCommandInput;
+      output: BatchDeleteUniqueIdCommandOutput;
+    };
+  };
+}

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodestarNotificationsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodestarNotificationsClient";
-import { UpdateNotificationRuleRequest, UpdateNotificationRuleResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateNotificationRuleCommand,
-  serializeAws_restJson1UpdateNotificationRuleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateNotificationRuleRequest, UpdateNotificationRuleResult } from "../models/models_0";
+import { UpdateNotificationRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateNotificationRuleCommand}.
+ */
 export interface UpdateNotificationRuleCommandInput extends UpdateNotificationRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateNotificationRuleCommand}.
+ */
 export interface UpdateNotificationRuleCommandOutput extends UpdateNotificationRuleResult, __MetadataBearer {}
 
 /**
@@ -37,68 +34,67 @@ export interface UpdateNotificationRuleCommandOutput extends UpdateNotificationR
  * ```javascript
  * import { CodestarNotificationsClient, UpdateNotificationRuleCommand } from "@aws-sdk/client-codestar-notifications"; // ES Modules import
  * // const { CodestarNotificationsClient, UpdateNotificationRuleCommand } = require("@aws-sdk/client-codestar-notifications"); // CommonJS import
+ * // import type { CodestarNotificationsClientConfig } from "@aws-sdk/client-codestar-notifications";
+ * const config = {}; // type is CodestarNotificationsClientConfig
  * const client = new CodestarNotificationsClient(config);
+ * const input = { // UpdateNotificationRuleRequest
+ *   Arn: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   Status: "ENABLED" || "DISABLED",
+ *   EventTypeIds: [ // EventTypeIds
+ *     "STRING_VALUE",
+ *   ],
+ *   Targets: [ // Targets
+ *     { // Target
+ *       TargetType: "STRING_VALUE",
+ *       TargetAddress: "STRING_VALUE",
+ *     },
+ *   ],
+ *   DetailType: "BASIC" || "FULL",
+ * };
  * const command = new UpdateNotificationRuleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateNotificationRuleCommandInput - {@link UpdateNotificationRuleCommandInput}
+ * @returns {@link UpdateNotificationRuleCommandOutput}
  * @see {@link UpdateNotificationRuleCommandInput} for command's `input` shape.
  * @see {@link UpdateNotificationRuleCommandOutput} for command's `response` shape.
- * @see {@link CodestarNotificationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodestarNotificationsClientResolvedConfig | config} for CodestarNotificationsClient's `config` shape.
  *
+ * @throws {@link ConfigurationException} (client fault)
+ *  <p>Some or all of the configuration is incomplete, missing, or not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>
+ *             CodeStar Notifications can't find a resource that matches the provided ARN. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link CodestarNotificationsServiceException}
+ * <p>Base exception class for all service exceptions from CodestarNotifications service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateNotificationRuleCommand extends $Command<
-  UpdateNotificationRuleCommandInput,
-  UpdateNotificationRuleCommandOutput,
-  CodestarNotificationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateNotificationRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodestarNotificationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateNotificationRuleCommandInput, UpdateNotificationRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodestarNotificationsClient";
-    const commandName = "UpdateNotificationRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateNotificationRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateNotificationRuleResult.filterSensitiveLog,
+export class UpdateNotificationRuleCommand extends command<UpdateNotificationRuleCommandInput, UpdateNotificationRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateNotificationRule",
+  UpdateNotificationRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateNotificationRuleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateNotificationRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateNotificationRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateNotificationRuleCommandOutput> {
-    return deserializeAws_restJson1UpdateNotificationRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateNotificationRuleCommandInput;
+      output: UpdateNotificationRuleCommandOutput;
+    };
+  };
 }

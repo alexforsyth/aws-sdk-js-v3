@@ -1,104 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMClient";
-import { RemoveTagsFromCertificateRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1RemoveTagsFromCertificateCommand,
-  serializeAws_json1_1RemoveTagsFromCertificateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveTagsFromCertificateRequest } from "../models/models_0";
+import { RemoveTagsFromCertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveTagsFromCertificateCommand}.
+ */
 export interface RemoveTagsFromCertificateCommandInput extends RemoveTagsFromCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveTagsFromCertificateCommand}.
+ */
 export interface RemoveTagsFromCertificateCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Remove one or more tags from an ACM certificate. A tag consists of a key-value pair. If
- *       you do not specify the value portion of the tag when calling this function, the tag will be
- *       removed regardless of value. If you specify a value, the tag is removed only if it is
- *       associated with the specified value. </p>
- *
- *          <p>To add tags to a certificate, use the <a>AddTagsToCertificate</a> action. To
- *       view all of the tags that have been applied to a specific ACM certificate, use the <a>ListTagsForCertificate</a> action. </p>
+ * <p>Remove one or more tags from an ACM certificate. A tag consists of a key-value pair. If you do not specify the value portion of the tag when calling this function, the tag will be removed regardless of value. If you specify a value, the tag is removed only if it is associated with the specified value. </p> <note> <p>This action applies only to the <code>certificate</code> resource type. For all other ACM resource types, use <a>UntagResource</a> instead.</p> </note> <p>To add tags to a certificate, use the <a>AddTagsToCertificate</a> action. To view all of the tags that have been applied to a specific ACM certificate, use the <a>ListTagsForCertificate</a> action. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMClient, RemoveTagsFromCertificateCommand } from "@aws-sdk/client-acm"; // ES Modules import
  * // const { ACMClient, RemoveTagsFromCertificateCommand } = require("@aws-sdk/client-acm"); // CommonJS import
+ * // import type { ACMClientConfig } from "@aws-sdk/client-acm";
+ * const config = {}; // type is ACMClientConfig
  * const client = new ACMClient(config);
+ * const input = { // RemoveTagsFromCertificateRequest
+ *   CertificateArn: "STRING_VALUE", // required
+ *   Tags: [ // TagList // required
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new RemoveTagsFromCertificateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveTagsFromCertificateCommandInput - {@link RemoveTagsFromCertificateCommandInput}
+ * @returns {@link RemoveTagsFromCertificateCommandOutput}
  * @see {@link RemoveTagsFromCertificateCommandInput} for command's `input` shape.
  * @see {@link RemoveTagsFromCertificateCommandOutput} for command's `response` shape.
- * @see {@link ACMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMClientResolvedConfig | config} for ACMClient's `config` shape.
  *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An input parameter was invalid.</p>
+ *
+ * @throws {@link InvalidTagException} (client fault)
+ *  <p>One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a tag value that begins with <code>aws:</code>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified certificate cannot be found in the caller's account or the caller's account cannot be found.</p>
+ *
+ * @throws {@link TagPolicyException} (client fault)
+ *  <p>A specified tag did not comply with an existing tag policy and was rejected.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded a quota.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>
+ *
+ * @throws {@link ACMServiceException}
+ * <p>Base exception class for all service exceptions from ACM service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveTagsFromCertificateCommand extends $Command<
-  RemoveTagsFromCertificateCommandInput,
-  RemoveTagsFromCertificateCommandOutput,
-  ACMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveTagsFromCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveTagsFromCertificateCommandInput, RemoveTagsFromCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMClient";
-    const commandName = "RemoveTagsFromCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveTagsFromCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RemoveTagsFromCertificateCommand extends command<RemoveTagsFromCertificateCommandInput, RemoveTagsFromCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveTagsFromCertificate",
+  RemoveTagsFromCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveTagsFromCertificateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveTagsFromCertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RemoveTagsFromCertificateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveTagsFromCertificateCommandOutput> {
-    return deserializeAws_json1_1RemoveTagsFromCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveTagsFromCertificateCommandInput;
+      output: RemoveTagsFromCertificateCommandOutput;
+    };
+  };
 }

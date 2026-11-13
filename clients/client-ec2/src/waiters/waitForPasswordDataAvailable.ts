@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetPasswordDataCommand, GetPasswordDataCommandInput } from "../commands/GetPasswordDataCommand";
-import { EC2Client } from "../EC2Client";
+import {
+  type GetPasswordDataCommandInput,
+  type GetPasswordDataCommandOutput,
+  GetPasswordDataCommand,
+} from "../commands/GetPasswordDataCommand";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: GetPasswordDataCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: GetPasswordDataCommandInput): Promise<WaiterResult<GetPasswordDataCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetPasswordDataCommand(input));
+    let result: GetPasswordDataCommandOutput & any = await client.send(new GetPasswordDataCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        return result.PasswordData.length > 0.0;
-      };
+        return (result.PasswordData.length > 0);
+      }
       if (returnComparator() == true) {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -28,7 +40,7 @@ const checkState = async (client: EC2Client, input: GetPasswordDataCommandInput)
 export const waitForPasswordDataAvailable = async (
   params: WaiterConfiguration<EC2Client>,
   input: GetPasswordDataCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetPasswordDataCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -40,8 +52,8 @@ export const waitForPasswordDataAvailable = async (
 export const waitUntilPasswordDataAvailable = async (
   params: WaiterConfiguration<EC2Client>,
   input: GetPasswordDataCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetPasswordDataCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetPasswordDataCommandOutput>;
 };

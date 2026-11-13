@@ -1,109 +1,242 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MarketplaceMeteringClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MarketplaceMeteringClient";
-import { BatchMeterUsageRequest, BatchMeterUsageResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchMeterUsageCommand,
-  serializeAws_json1_1BatchMeterUsageCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchMeterUsageRequest, BatchMeterUsageResult } from "../models/models_0";
+import { BatchMeterUsage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchMeterUsageCommand}.
+ */
 export interface BatchMeterUsageCommandInput extends BatchMeterUsageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchMeterUsageCommand}.
+ */
 export interface BatchMeterUsageCommandOutput extends BatchMeterUsageResult, __MetadataBearer {}
 
 /**
- * <p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to
- *             post metering records for a set of customers.</p>
- *         <p>For identical requests, the API is idempotent; requests can be retried with the
- *             same records or a subset of the input records.</p>
- *         <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for
- *             multiple products, you must make multiple calls to BatchMeterUsage.</p>
- *         <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p>
- *         <p>A UsageRecord can optionally include multiple usage allocations, to provide customers
- *             with usagedata split into buckets by tags that you define (or allow the customer to
- *             define).</p>
- *         <p>BatchMeterUsage requests must be less than 1MB in size.</p>
+ * <note>
+ *             <p>The Amazon Web Services Marketplace AI Metering Agent Skill (<code>aws-marketplace-metering</code>) helps an AI
+ *                 coding agent integrate your SaaS product's usage reporting with the
+ *                 <code>BatchMeterUsage</code> API. The skill is a curated package of instructions and
+ *                 reference material that guides your AI coding agent through building, deploying, and
+ *                 testing the metering integration. To get the skill on demand without checking it out
+ *                 locally, install the <a href="https://docs.aws.amazon.com/agent-toolkit/latest/userguide/mcp-server.html">Amazon Web Services MCP Server</a> in your coding agent; the agent then discovers and loads
+ *                 the skill at runtime. The skill source is also available on <a href="https://github.com/aws/agent-toolkit-for-aws/blob/main/skills/specialized-skills/aws-marketplace-skills/aws-marketplace-metering">GitHub</a>. For more information, see <a href="https://aws.amazon.com/blogs/awsmarketplace/build-aws-marketplace-saas-metering-with-the-metering-agent-skill/">Get started with the Amazon Web Services Marketplace AI Metering Agent Skill</a> on the Amazon Web Services Marketplace blog.</p>
+ *          </note>
+ *          <important>
+ *             <p>Amazon Web Services Marketplace is introducing Concurrent Agreements, enabling buyers to make multiple purchases per Amazon Web Services account. Starting June 1, 2026, new SaaS products must use <code>CustomerAWSAccountId</code> (instead of <code>CustomerIdentifier</code>), <code>LicenseArn</code> (instead of <code>ProductCode</code>) to support this feature. <code>BatchMeterUsage</code> does not support <code>CustomerIdentifier</code> for new integrations. Existing integrations continue to work. Review the new integration for Concurrent Agreements <a href="https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements">here</a>. For additional implementation details, see <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example">BatchMeterUsage code example with LicenseArn</a> in the <i>Amazon Web Services Marketplace Seller Guide</i>.</p>
+ *          </important>
+ *          <p>To post metering records for customers, SaaS applications call
+ *         <code>BatchMeterUsage</code>, which is used for metering SaaS flexible
+ *       consumption pricing (FCP). Identical requests are idempotent and can be
+ *       retried with the same records or a subset of records. Each
+ *         <code>BatchMeterUsage</code> request is for only one product. If you
+ *       want to meter usage for multiple products, you must make multiple
+ *         <code>BatchMeterUsage</code> calls.</p>
+ *          <p>Usage records should be submitted in quick succession following a
+ *       recorded event. Usage records aren't accepted 24 hours or more after an
+ *       event. At the end of each billing cycle, a 6-hour grace period applies. We accept
+ *       usage records for the previous billing month until 06:00 UTC on the first day of the
+ *       next month. For example, you must submit March usage records before 06:00 UTC on
+ *       April 1. On April 1 at 05:00 UTC, you can still submit records for March 31 (within the 6-hour grace period). After 06:00 UTC on April 1, March records are rejected regardless of the normal 24-hour submission window. After this grace period, we return a
+ *       <code>TimestampOutOfBoundsException</code> error.</p>
+ *          <p>
+ *             <code>BatchMeterUsage</code> can process up to 25
+ *         <code>UsageRecords</code> at a time, and each request must be less than
+ *       1 MB in size.</p>
+ *          <p>
+ *             <b>Vendor-metered tagging</b>
+ *          </p>
+ *          <p>
+ *             <code>BatchMeterUsage</code> supports vendor-metered tagging. Optionally, you can
+ *       split the usage in a <code>UsageRecord</code> into buckets by including
+ *       <code>UsageAllocations</code>, where each <code>UsageAllocation</code> has a set of
+ *       <code>Tags</code> that you define. Vendor-metered tagging doesn't change the price,
+ *       dimensions, or the total usage that you report. It gives buyers a more granular view of
+ *       their usage of your product so they can perform cost allocation in the Amazon Web Services Billing and
+ *       Cost Management console. For more information, see <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging">Vendor-metered tagging</a> and <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging">BatchMeterUsage with usage allocation tagging code example</a> in the
+ *         <i>Amazon Web Services Marketplace Seller Guide</i>.</p>
+ *          <p>To report fractional usage, use <code>QuantityAsDecimal</code> instead of
+ *                 <code>Quantity</code> in each <code>UsageRecord</code>.</p>
+ *          <p>
+ *             <code>BatchMeterUsage</code> returns a list of
+ *         <code>UsageRecordResult</code> objects, which have each
+ *         <code>UsageRecord</code>. It also returns a list of
+ *         <code>UnprocessedRecords</code>, which indicate errors on the service
+ *       side that should be retried.</p>
+ *          <p>For Amazon Web Services Regions that support <code>BatchMeterUsage</code>, see <a href="https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support">BatchMeterUsage Region support</a>.
+ *       </p>
+ *          <note>
+ *             <p>For an example of <code>BatchMeterUsage</code>, see <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example"> BatchMeterUsage code example</a> in the <i>Amazon Web Services Marketplace Seller
+ *           Guide</i>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MarketplaceMeteringClient, BatchMeterUsageCommand } from "@aws-sdk/client-marketplace-metering"; // ES Modules import
  * // const { MarketplaceMeteringClient, BatchMeterUsageCommand } = require("@aws-sdk/client-marketplace-metering"); // CommonJS import
+ * // import type { MarketplaceMeteringClientConfig } from "@aws-sdk/client-marketplace-metering";
+ * const config = {}; // type is MarketplaceMeteringClientConfig
  * const client = new MarketplaceMeteringClient(config);
+ * const input = { // BatchMeterUsageRequest
+ *   UsageRecords: [ // UsageRecordList // required
+ *     { // UsageRecord
+ *       Timestamp: new Date("TIMESTAMP"), // required
+ *       CustomerIdentifier: "STRING_VALUE",
+ *       Dimension: "STRING_VALUE", // required
+ *       Quantity: Number("int"),
+ *       QuantityAsDecimal: "STRING_VALUE",
+ *       UsageAllocations: [ // UsageAllocations
+ *         { // UsageAllocation
+ *           AllocatedUsageQuantity: Number("int"),
+ *           AllocatedUsageQuantityAsDecimal: "STRING_VALUE",
+ *           Tags: [ // TagList
+ *             { // Tag
+ *               Key: "STRING_VALUE", // required
+ *               Value: "STRING_VALUE", // required
+ *             },
+ *           ],
+ *         },
+ *       ],
+ *       CustomerAWSAccountId: "STRING_VALUE",
+ *       LicenseArn: "STRING_VALUE",
+ *     },
+ *   ],
+ *   ProductCode: "STRING_VALUE",
+ * };
  * const command = new BatchMeterUsageCommand(input);
  * const response = await client.send(command);
+ * // { // BatchMeterUsageResult
+ * //   Results: [ // UsageRecordResultList
+ * //     { // UsageRecordResult
+ * //       UsageRecord: { // UsageRecord
+ * //         Timestamp: new Date("TIMESTAMP"), // required
+ * //         CustomerIdentifier: "STRING_VALUE",
+ * //         Dimension: "STRING_VALUE", // required
+ * //         Quantity: Number("int"),
+ * //         QuantityAsDecimal: "STRING_VALUE",
+ * //         UsageAllocations: [ // UsageAllocations
+ * //           { // UsageAllocation
+ * //             AllocatedUsageQuantity: Number("int"),
+ * //             AllocatedUsageQuantityAsDecimal: "STRING_VALUE",
+ * //             Tags: [ // TagList
+ * //               { // Tag
+ * //                 Key: "STRING_VALUE", // required
+ * //                 Value: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //         ],
+ * //         CustomerAWSAccountId: "STRING_VALUE",
+ * //         LicenseArn: "STRING_VALUE",
+ * //       },
+ * //       MeteringRecordId: "STRING_VALUE",
+ * //       Status: "Success" || "CustomerNotSubscribed" || "DuplicateRecord",
+ * //     },
+ * //   ],
+ * //   UnprocessedRecords: [ // UsageRecordList
+ * //     {
+ * //       Timestamp: new Date("TIMESTAMP"), // required
+ * //       CustomerIdentifier: "STRING_VALUE",
+ * //       Dimension: "STRING_VALUE", // required
+ * //       Quantity: Number("int"),
+ * //       QuantityAsDecimal: "STRING_VALUE",
+ * //       UsageAllocations: [
+ * //         {
+ * //           AllocatedUsageQuantity: Number("int"),
+ * //           AllocatedUsageQuantityAsDecimal: "STRING_VALUE",
+ * //           Tags: [
+ * //             {
+ * //               Key: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       CustomerAWSAccountId: "STRING_VALUE",
+ * //       LicenseArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchMeterUsageCommandInput - {@link BatchMeterUsageCommandInput}
+ * @returns {@link BatchMeterUsageCommandOutput}
  * @see {@link BatchMeterUsageCommandInput} for command's `input` shape.
  * @see {@link BatchMeterUsageCommandOutput} for command's `response` shape.
- * @see {@link MarketplaceMeteringClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MarketplaceMeteringClientResolvedConfig | config} for MarketplaceMeteringClient's `config` shape.
  *
+ * @throws {@link DisabledApiException} (client fault)
+ *  <p>The API is disabled in the Region.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error has occurred. Retry your request. If the problem persists, post a
+ *             message with details on the Amazon Web Services forums.</p>
+ *
+ * @throws {@link InvalidCustomerIdentifierException} (client fault)
+ *  <p>You have metered usage for a <code>CustomerIdentifier</code> that does not
+ *             exist.</p>
+ *
+ * @throws {@link InvalidLicenseException} (client fault)
+ *  <p>Ensure the <code>LicenseArn</code> is valid, matches the customer, and usage is within the license activation period.</p>
+ *
+ * @throws {@link InvalidProductCodeException} (client fault)
+ *  <p>The product code passed does not match the product code used for publishing the
+ *             product.</p>
+ *
+ * @throws {@link InvalidTagException} (client fault)
+ *  <p>The tag is invalid, or the number of tags is greater than 5.</p>
+ *
+ * @throws {@link InvalidUsageAllocationsException} (client fault)
+ *  <p>Sum of allocated usage quantities is not equal to the usage quantity, or the
+ *             allocations don't use the same type of quantity (whole number or decimal) as the usage
+ *             quantity.</p>
+ *
+ * @throws {@link InvalidUsageDimensionException} (client fault)
+ *  <p>The usage dimension does not match one of the <code>UsageDimensions</code> associated
+ *             with products.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The calls to the API are throttled.</p>
+ *
+ * @throws {@link TimestampOutOfBoundsException} (client fault)
+ *  <p>The <code>timestamp</code> value passed in the <code>UsageRecord</code> is out of
+ *             allowed range.</p>
+ *          <p>For <code>BatchMeterUsage</code>, if any of the records are outside of the allowed
+ *             range, the entire batch is not processed. You must remove invalid records and try
+ *             again.</p>
+ *
+ * @throws {@link MarketplaceMeteringServiceException}
+ * <p>Base exception class for all service exceptions from MarketplaceMetering service.</p>
+ *
+ *
+ * @public
  */
-export class BatchMeterUsageCommand extends $Command<
-  BatchMeterUsageCommandInput,
-  BatchMeterUsageCommandOutput,
-  MarketplaceMeteringClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchMeterUsageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MarketplaceMeteringClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchMeterUsageCommandInput, BatchMeterUsageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MarketplaceMeteringClient";
-    const commandName = "BatchMeterUsageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchMeterUsageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchMeterUsageResult.filterSensitiveLog,
+export class BatchMeterUsageCommand extends command<BatchMeterUsageCommandInput, BatchMeterUsageCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchMeterUsage",
+  BatchMeterUsage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchMeterUsageRequest;
+      output: BatchMeterUsageResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchMeterUsageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchMeterUsageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchMeterUsageCommandOutput> {
-    return deserializeAws_json1_1BatchMeterUsageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchMeterUsageCommandInput;
+      output: BatchMeterUsageCommandOutput;
+    };
+  };
 }

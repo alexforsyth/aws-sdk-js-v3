@@ -1,21 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { QueryMapsInput } from "../models/models_0";
-import { deserializeAws_queryQueryMapsCommand, serializeAws_queryQueryMapsCommand } from "../protocols/Aws_query";
-import { QueryProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QueryProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { QueryMapsInput } from "../models/models_0";
+import { de_QueryMapsCommand, se_QueryMapsCommand } from "../protocols/Aws_query";
+import type { QueryProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QueryProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link QueryMapsCommand}.
+ */
 export interface QueryMapsCommandInput extends QueryMapsInput {}
+/**
+ * @public
+ *
+ * The output of {@link QueryMapsCommand}.
+ */
 export interface QueryMapsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -25,68 +33,89 @@ export interface QueryMapsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { QueryProtocolClient, QueryMapsCommand } from "@aws-sdk/aws-protocoltests-query"; // ES Modules import
  * // const { QueryProtocolClient, QueryMapsCommand } = require("@aws-sdk/aws-protocoltests-query"); // CommonJS import
+ * // import type { QueryProtocolClientConfig } from "@aws-sdk/aws-protocoltests-query";
+ * const config = {}; // type is QueryProtocolClientConfig
  * const client = new QueryProtocolClient(config);
+ * const input = { // QueryMapsInput
+ *   MapArg: { // StringMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   RenamedMapArg: {
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   ComplexMapArg: { // ComplexMap
+ *     "<keys>": { // GreetingStruct
+ *       hi: "STRING_VALUE",
+ *     },
+ *   },
+ *   MapWithXmlMemberName: { // MapWithXmlName
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   FlattenedMap: {
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   FlattenedMapWithXmlName: {
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   MapOfLists: { // MapOfLists
+ *     "<keys>": [ // StringList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   NestedStructWithMap: { // NestedStructWithMap
+ *     MapArg: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ * };
  * const command = new QueryMapsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param QueryMapsCommandInput - {@link QueryMapsCommandInput}
+ * @returns {@link QueryMapsCommandOutput}
  * @see {@link QueryMapsCommandInput} for command's `input` shape.
  * @see {@link QueryMapsCommandOutput} for command's `response` shape.
- * @see {@link QueryProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QueryProtocolClientResolvedConfig | config} for QueryProtocolClient's `config` shape.
  *
+ * @throws {@link QueryProtocolServiceException}
+ * <p>Base exception class for all service exceptions from QueryProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class QueryMapsCommand extends $Command<
-  QueryMapsCommandInput,
-  QueryMapsCommandOutput,
-  QueryProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: QueryMapsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QueryProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<QueryMapsCommandInput, QueryMapsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QueryProtocolClient";
-    const commandName = "QueryMapsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: QueryMapsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class QueryMapsCommand extends $Command
+  .classBuilder<
+    QueryMapsCommandInput,
+    QueryMapsCommandOutput,
+    QueryProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: QueryProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("AwsQuery", "QueryMaps", {})
+  .n("QueryProtocolClient", "QueryMapsCommand")
+  .f(void 0, void 0)
+  .ser(se_QueryMapsCommand)
+  .de(de_QueryMapsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: QueryMapsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: QueryMapsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryQueryMapsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<QueryMapsCommandOutput> {
-    return deserializeAws_queryQueryMapsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: QueryMapsCommandInput;
+      output: QueryMapsCommandOutput;
+    };
+  };
 }

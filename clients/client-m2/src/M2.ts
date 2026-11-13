@@ -1,0 +1,1020 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CancelBatchJobExecutionCommandInput,
+  type CancelBatchJobExecutionCommandOutput,
+  CancelBatchJobExecutionCommand,
+} from "./commands/CancelBatchJobExecutionCommand";
+import {
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
+import {
+  type CreateDataSetExportTaskCommandInput,
+  type CreateDataSetExportTaskCommandOutput,
+  CreateDataSetExportTaskCommand,
+} from "./commands/CreateDataSetExportTaskCommand";
+import {
+  type CreateDataSetImportTaskCommandInput,
+  type CreateDataSetImportTaskCommandOutput,
+  CreateDataSetImportTaskCommand,
+} from "./commands/CreateDataSetImportTaskCommand";
+import {
+  type CreateDeploymentCommandInput,
+  type CreateDeploymentCommandOutput,
+  CreateDeploymentCommand,
+} from "./commands/CreateDeploymentCommand";
+import {
+  type CreateEnvironmentCommandInput,
+  type CreateEnvironmentCommandOutput,
+  CreateEnvironmentCommand,
+} from "./commands/CreateEnvironmentCommand";
+import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type DeleteApplicationFromEnvironmentCommandInput,
+  type DeleteApplicationFromEnvironmentCommandOutput,
+  DeleteApplicationFromEnvironmentCommand,
+} from "./commands/DeleteApplicationFromEnvironmentCommand";
+import {
+  type DeleteEnvironmentCommandInput,
+  type DeleteEnvironmentCommandOutput,
+  DeleteEnvironmentCommand,
+} from "./commands/DeleteEnvironmentCommand";
+import {
+  type GetApplicationCommandInput,
+  type GetApplicationCommandOutput,
+  GetApplicationCommand,
+} from "./commands/GetApplicationCommand";
+import {
+  type GetApplicationVersionCommandInput,
+  type GetApplicationVersionCommandOutput,
+  GetApplicationVersionCommand,
+} from "./commands/GetApplicationVersionCommand";
+import {
+  type GetBatchJobExecutionCommandInput,
+  type GetBatchJobExecutionCommandOutput,
+  GetBatchJobExecutionCommand,
+} from "./commands/GetBatchJobExecutionCommand";
+import {
+  type GetDataSetDetailsCommandInput,
+  type GetDataSetDetailsCommandOutput,
+  GetDataSetDetailsCommand,
+} from "./commands/GetDataSetDetailsCommand";
+import {
+  type GetDataSetExportTaskCommandInput,
+  type GetDataSetExportTaskCommandOutput,
+  GetDataSetExportTaskCommand,
+} from "./commands/GetDataSetExportTaskCommand";
+import {
+  type GetDataSetImportTaskCommandInput,
+  type GetDataSetImportTaskCommandOutput,
+  GetDataSetImportTaskCommand,
+} from "./commands/GetDataSetImportTaskCommand";
+import {
+  type GetDeploymentCommandInput,
+  type GetDeploymentCommandOutput,
+  GetDeploymentCommand,
+} from "./commands/GetDeploymentCommand";
+import {
+  type GetEnvironmentCommandInput,
+  type GetEnvironmentCommandOutput,
+  GetEnvironmentCommand,
+} from "./commands/GetEnvironmentCommand";
+import {
+  type GetSignedBluinsightsUrlCommandInput,
+  type GetSignedBluinsightsUrlCommandOutput,
+  GetSignedBluinsightsUrlCommand,
+} from "./commands/GetSignedBluinsightsUrlCommand";
+import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListApplicationVersionsCommandInput,
+  type ListApplicationVersionsCommandOutput,
+  ListApplicationVersionsCommand,
+} from "./commands/ListApplicationVersionsCommand";
+import {
+  type ListBatchJobDefinitionsCommandInput,
+  type ListBatchJobDefinitionsCommandOutput,
+  ListBatchJobDefinitionsCommand,
+} from "./commands/ListBatchJobDefinitionsCommand";
+import {
+  type ListBatchJobExecutionsCommandInput,
+  type ListBatchJobExecutionsCommandOutput,
+  ListBatchJobExecutionsCommand,
+} from "./commands/ListBatchJobExecutionsCommand";
+import {
+  type ListBatchJobRestartPointsCommandInput,
+  type ListBatchJobRestartPointsCommandOutput,
+  ListBatchJobRestartPointsCommand,
+} from "./commands/ListBatchJobRestartPointsCommand";
+import {
+  type ListDataSetExportHistoryCommandInput,
+  type ListDataSetExportHistoryCommandOutput,
+  ListDataSetExportHistoryCommand,
+} from "./commands/ListDataSetExportHistoryCommand";
+import {
+  type ListDataSetImportHistoryCommandInput,
+  type ListDataSetImportHistoryCommandOutput,
+  ListDataSetImportHistoryCommand,
+} from "./commands/ListDataSetImportHistoryCommand";
+import {
+  type ListDataSetsCommandInput,
+  type ListDataSetsCommandOutput,
+  ListDataSetsCommand,
+} from "./commands/ListDataSetsCommand";
+import {
+  type ListDeploymentsCommandInput,
+  type ListDeploymentsCommandOutput,
+  ListDeploymentsCommand,
+} from "./commands/ListDeploymentsCommand";
+import {
+  type ListEngineVersionsCommandInput,
+  type ListEngineVersionsCommandOutput,
+  ListEngineVersionsCommand,
+} from "./commands/ListEngineVersionsCommand";
+import {
+  type ListEnvironmentsCommandInput,
+  type ListEnvironmentsCommandOutput,
+  ListEnvironmentsCommand,
+} from "./commands/ListEnvironmentsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type StartApplicationCommandInput,
+  type StartApplicationCommandOutput,
+  StartApplicationCommand,
+} from "./commands/StartApplicationCommand";
+import {
+  type StartBatchJobCommandInput,
+  type StartBatchJobCommandOutput,
+  StartBatchJobCommand,
+} from "./commands/StartBatchJobCommand";
+import {
+  type StopApplicationCommandInput,
+  type StopApplicationCommandOutput,
+  StopApplicationCommand,
+} from "./commands/StopApplicationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateApplicationCommandInput,
+  type UpdateApplicationCommandOutput,
+  UpdateApplicationCommand,
+} from "./commands/UpdateApplicationCommand";
+import {
+  type UpdateEnvironmentCommandInput,
+  type UpdateEnvironmentCommandOutput,
+  UpdateEnvironmentCommand,
+} from "./commands/UpdateEnvironmentCommand";
+import { M2Client } from "./M2Client";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import { paginateListApplicationVersions } from "./pagination/ListApplicationVersionsPaginator";
+import { paginateListBatchJobDefinitions } from "./pagination/ListBatchJobDefinitionsPaginator";
+import { paginateListBatchJobExecutions } from "./pagination/ListBatchJobExecutionsPaginator";
+import { paginateListDataSetExportHistory } from "./pagination/ListDataSetExportHistoryPaginator";
+import { paginateListDataSetImportHistory } from "./pagination/ListDataSetImportHistoryPaginator";
+import { paginateListDataSets } from "./pagination/ListDataSetsPaginator";
+import { paginateListDeployments } from "./pagination/ListDeploymentsPaginator";
+import { paginateListEngineVersions } from "./pagination/ListEngineVersionsPaginator";
+import { paginateListEnvironments } from "./pagination/ListEnvironmentsPaginator";
+
+const commands = {
+  CancelBatchJobExecutionCommand,
+  CreateApplicationCommand,
+  CreateDataSetExportTaskCommand,
+  CreateDataSetImportTaskCommand,
+  CreateDeploymentCommand,
+  CreateEnvironmentCommand,
+  DeleteApplicationCommand,
+  DeleteApplicationFromEnvironmentCommand,
+  DeleteEnvironmentCommand,
+  GetApplicationCommand,
+  GetApplicationVersionCommand,
+  GetBatchJobExecutionCommand,
+  GetDataSetDetailsCommand,
+  GetDataSetExportTaskCommand,
+  GetDataSetImportTaskCommand,
+  GetDeploymentCommand,
+  GetEnvironmentCommand,
+  GetSignedBluinsightsUrlCommand,
+  ListApplicationsCommand,
+  ListApplicationVersionsCommand,
+  ListBatchJobDefinitionsCommand,
+  ListBatchJobExecutionsCommand,
+  ListBatchJobRestartPointsCommand,
+  ListDataSetExportHistoryCommand,
+  ListDataSetImportHistoryCommand,
+  ListDataSetsCommand,
+  ListDeploymentsCommand,
+  ListEngineVersionsCommand,
+  ListEnvironmentsCommand,
+  ListTagsForResourceCommand,
+  StartApplicationCommand,
+  StartBatchJobCommand,
+  StopApplicationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateApplicationCommand,
+  UpdateEnvironmentCommand,
+};
+const paginators = {
+  paginateListApplications,
+  paginateListApplicationVersions,
+  paginateListBatchJobDefinitions,
+  paginateListBatchJobExecutions,
+  paginateListDataSetExportHistory,
+  paginateListDataSetImportHistory,
+  paginateListDataSets,
+  paginateListDeployments,
+  paginateListEngineVersions,
+  paginateListEnvironments,
+};
+
+/**
+ * @public
+ */
+export interface M2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface M2 {
+  /**
+   * @see {@link CancelBatchJobExecutionCommand}
+   */
+  cancelBatchJobExecution(
+    args: CancelBatchJobExecutionCommandInput,
+    options?: M2RequestOptions
+  ): Promise<CancelBatchJobExecutionCommandOutput>;
+  cancelBatchJobExecution(
+    args: CancelBatchJobExecutionCommandInput,
+    cb: (err: any, data?: CancelBatchJobExecutionCommandOutput) => void
+  ): void;
+  cancelBatchJobExecution(
+    args: CancelBatchJobExecutionCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: CancelBatchJobExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateApplicationCommand}
+   */
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: M2RequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataSetExportTaskCommand}
+   */
+  createDataSetExportTask(
+    args: CreateDataSetExportTaskCommandInput,
+    options?: M2RequestOptions
+  ): Promise<CreateDataSetExportTaskCommandOutput>;
+  createDataSetExportTask(
+    args: CreateDataSetExportTaskCommandInput,
+    cb: (err: any, data?: CreateDataSetExportTaskCommandOutput) => void
+  ): void;
+  createDataSetExportTask(
+    args: CreateDataSetExportTaskCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: CreateDataSetExportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataSetImportTaskCommand}
+   */
+  createDataSetImportTask(
+    args: CreateDataSetImportTaskCommandInput,
+    options?: M2RequestOptions
+  ): Promise<CreateDataSetImportTaskCommandOutput>;
+  createDataSetImportTask(
+    args: CreateDataSetImportTaskCommandInput,
+    cb: (err: any, data?: CreateDataSetImportTaskCommandOutput) => void
+  ): void;
+  createDataSetImportTask(
+    args: CreateDataSetImportTaskCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: CreateDataSetImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDeploymentCommand}
+   */
+  createDeployment(
+    args: CreateDeploymentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<CreateDeploymentCommandOutput>;
+  createDeployment(
+    args: CreateDeploymentCommandInput,
+    cb: (err: any, data?: CreateDeploymentCommandOutput) => void
+  ): void;
+  createDeployment(
+    args: CreateDeploymentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: CreateDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEnvironmentCommand}
+   */
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<CreateEnvironmentCommandOutput>;
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
+  ): void;
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationCommand}
+   */
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: M2RequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationFromEnvironmentCommand}
+   */
+  deleteApplicationFromEnvironment(
+    args: DeleteApplicationFromEnvironmentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<DeleteApplicationFromEnvironmentCommandOutput>;
+  deleteApplicationFromEnvironment(
+    args: DeleteApplicationFromEnvironmentCommandInput,
+    cb: (err: any, data?: DeleteApplicationFromEnvironmentCommandOutput) => void
+  ): void;
+  deleteApplicationFromEnvironment(
+    args: DeleteApplicationFromEnvironmentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: DeleteApplicationFromEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEnvironmentCommand}
+   */
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<DeleteEnvironmentCommandOutput>;
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
+  ): void;
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationCommand}
+   */
+  getApplication(
+    args: GetApplicationCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetApplicationCommandOutput>;
+  getApplication(
+    args: GetApplicationCommandInput,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+  getApplication(
+    args: GetApplicationCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationVersionCommand}
+   */
+  getApplicationVersion(
+    args: GetApplicationVersionCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetApplicationVersionCommandOutput>;
+  getApplicationVersion(
+    args: GetApplicationVersionCommandInput,
+    cb: (err: any, data?: GetApplicationVersionCommandOutput) => void
+  ): void;
+  getApplicationVersion(
+    args: GetApplicationVersionCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetApplicationVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBatchJobExecutionCommand}
+   */
+  getBatchJobExecution(
+    args: GetBatchJobExecutionCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetBatchJobExecutionCommandOutput>;
+  getBatchJobExecution(
+    args: GetBatchJobExecutionCommandInput,
+    cb: (err: any, data?: GetBatchJobExecutionCommandOutput) => void
+  ): void;
+  getBatchJobExecution(
+    args: GetBatchJobExecutionCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetBatchJobExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataSetDetailsCommand}
+   */
+  getDataSetDetails(
+    args: GetDataSetDetailsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetDataSetDetailsCommandOutput>;
+  getDataSetDetails(
+    args: GetDataSetDetailsCommandInput,
+    cb: (err: any, data?: GetDataSetDetailsCommandOutput) => void
+  ): void;
+  getDataSetDetails(
+    args: GetDataSetDetailsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetDataSetDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataSetExportTaskCommand}
+   */
+  getDataSetExportTask(
+    args: GetDataSetExportTaskCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetDataSetExportTaskCommandOutput>;
+  getDataSetExportTask(
+    args: GetDataSetExportTaskCommandInput,
+    cb: (err: any, data?: GetDataSetExportTaskCommandOutput) => void
+  ): void;
+  getDataSetExportTask(
+    args: GetDataSetExportTaskCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetDataSetExportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataSetImportTaskCommand}
+   */
+  getDataSetImportTask(
+    args: GetDataSetImportTaskCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetDataSetImportTaskCommandOutput>;
+  getDataSetImportTask(
+    args: GetDataSetImportTaskCommandInput,
+    cb: (err: any, data?: GetDataSetImportTaskCommandOutput) => void
+  ): void;
+  getDataSetImportTask(
+    args: GetDataSetImportTaskCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetDataSetImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeploymentCommand}
+   */
+  getDeployment(
+    args: GetDeploymentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetDeploymentCommandOutput>;
+  getDeployment(
+    args: GetDeploymentCommandInput,
+    cb: (err: any, data?: GetDeploymentCommandOutput) => void
+  ): void;
+  getDeployment(
+    args: GetDeploymentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnvironmentCommand}
+   */
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetEnvironmentCommandOutput>;
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    cb: (err: any, data?: GetEnvironmentCommandOutput) => void
+  ): void;
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSignedBluinsightsUrlCommand}
+   */
+  getSignedBluinsightsUrl(): Promise<GetSignedBluinsightsUrlCommandOutput>;
+  getSignedBluinsightsUrl(
+    args: GetSignedBluinsightsUrlCommandInput,
+    options?: M2RequestOptions
+  ): Promise<GetSignedBluinsightsUrlCommandOutput>;
+  getSignedBluinsightsUrl(
+    args: GetSignedBluinsightsUrlCommandInput,
+    cb: (err: any, data?: GetSignedBluinsightsUrlCommandOutput) => void
+  ): void;
+  getSignedBluinsightsUrl(
+    args: GetSignedBluinsightsUrlCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: GetSignedBluinsightsUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   */
+  listApplications(): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationVersionsCommand}
+   */
+  listApplicationVersions(
+    args: ListApplicationVersionsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListApplicationVersionsCommandOutput>;
+  listApplicationVersions(
+    args: ListApplicationVersionsCommandInput,
+    cb: (err: any, data?: ListApplicationVersionsCommandOutput) => void
+  ): void;
+  listApplicationVersions(
+    args: ListApplicationVersionsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListApplicationVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchJobDefinitionsCommand}
+   */
+  listBatchJobDefinitions(
+    args: ListBatchJobDefinitionsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListBatchJobDefinitionsCommandOutput>;
+  listBatchJobDefinitions(
+    args: ListBatchJobDefinitionsCommandInput,
+    cb: (err: any, data?: ListBatchJobDefinitionsCommandOutput) => void
+  ): void;
+  listBatchJobDefinitions(
+    args: ListBatchJobDefinitionsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListBatchJobDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchJobExecutionsCommand}
+   */
+  listBatchJobExecutions(
+    args: ListBatchJobExecutionsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListBatchJobExecutionsCommandOutput>;
+  listBatchJobExecutions(
+    args: ListBatchJobExecutionsCommandInput,
+    cb: (err: any, data?: ListBatchJobExecutionsCommandOutput) => void
+  ): void;
+  listBatchJobExecutions(
+    args: ListBatchJobExecutionsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListBatchJobExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchJobRestartPointsCommand}
+   */
+  listBatchJobRestartPoints(
+    args: ListBatchJobRestartPointsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListBatchJobRestartPointsCommandOutput>;
+  listBatchJobRestartPoints(
+    args: ListBatchJobRestartPointsCommandInput,
+    cb: (err: any, data?: ListBatchJobRestartPointsCommandOutput) => void
+  ): void;
+  listBatchJobRestartPoints(
+    args: ListBatchJobRestartPointsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListBatchJobRestartPointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataSetExportHistoryCommand}
+   */
+  listDataSetExportHistory(
+    args: ListDataSetExportHistoryCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListDataSetExportHistoryCommandOutput>;
+  listDataSetExportHistory(
+    args: ListDataSetExportHistoryCommandInput,
+    cb: (err: any, data?: ListDataSetExportHistoryCommandOutput) => void
+  ): void;
+  listDataSetExportHistory(
+    args: ListDataSetExportHistoryCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListDataSetExportHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataSetImportHistoryCommand}
+   */
+  listDataSetImportHistory(
+    args: ListDataSetImportHistoryCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListDataSetImportHistoryCommandOutput>;
+  listDataSetImportHistory(
+    args: ListDataSetImportHistoryCommandInput,
+    cb: (err: any, data?: ListDataSetImportHistoryCommandOutput) => void
+  ): void;
+  listDataSetImportHistory(
+    args: ListDataSetImportHistoryCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListDataSetImportHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataSetsCommand}
+   */
+  listDataSets(
+    args: ListDataSetsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListDataSetsCommandOutput>;
+  listDataSets(
+    args: ListDataSetsCommandInput,
+    cb: (err: any, data?: ListDataSetsCommandOutput) => void
+  ): void;
+  listDataSets(
+    args: ListDataSetsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListDataSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDeploymentsCommand}
+   */
+  listDeployments(
+    args: ListDeploymentsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListDeploymentsCommandOutput>;
+  listDeployments(
+    args: ListDeploymentsCommandInput,
+    cb: (err: any, data?: ListDeploymentsCommandOutput) => void
+  ): void;
+  listDeployments(
+    args: ListDeploymentsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListDeploymentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEngineVersionsCommand}
+   */
+  listEngineVersions(): Promise<ListEngineVersionsCommandOutput>;
+  listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListEngineVersionsCommandOutput>;
+  listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    cb: (err: any, data?: ListEngineVersionsCommandOutput) => void
+  ): void;
+  listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListEngineVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   */
+  listEnvironments(): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
+  ): void;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: M2RequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartApplicationCommand}
+   */
+  startApplication(
+    args: StartApplicationCommandInput,
+    options?: M2RequestOptions
+  ): Promise<StartApplicationCommandOutput>;
+  startApplication(
+    args: StartApplicationCommandInput,
+    cb: (err: any, data?: StartApplicationCommandOutput) => void
+  ): void;
+  startApplication(
+    args: StartApplicationCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: StartApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBatchJobCommand}
+   */
+  startBatchJob(
+    args: StartBatchJobCommandInput,
+    options?: M2RequestOptions
+  ): Promise<StartBatchJobCommandOutput>;
+  startBatchJob(
+    args: StartBatchJobCommandInput,
+    cb: (err: any, data?: StartBatchJobCommandOutput) => void
+  ): void;
+  startBatchJob(
+    args: StartBatchJobCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: StartBatchJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopApplicationCommand}
+   */
+  stopApplication(
+    args: StopApplicationCommandInput,
+    options?: M2RequestOptions
+  ): Promise<StopApplicationCommandOutput>;
+  stopApplication(
+    args: StopApplicationCommandInput,
+    cb: (err: any, data?: StopApplicationCommandOutput) => void
+  ): void;
+  stopApplication(
+    args: StopApplicationCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: StopApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: M2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: M2RequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApplicationCommand}
+   */
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options?: M2RequestOptions
+  ): Promise<UpdateApplicationCommandOutput>;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEnvironmentCommand}
+   */
+  updateEnvironment(
+    args: UpdateEnvironmentCommandInput,
+    options?: M2RequestOptions
+  ): Promise<UpdateEnvironmentCommandOutput>;
+  updateEnvironment(
+    args: UpdateEnvironmentCommandInput,
+    cb: (err: any, data?: UpdateEnvironmentCommandOutput) => void
+  ): void;
+  updateEnvironment(
+    args: UpdateEnvironmentCommandInput,
+    options: M2RequestOptions,
+    cb: (err: any, data?: UpdateEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args?: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationVersionsCommandOutput}.
+   */
+  paginateListApplicationVersions(
+    args: ListApplicationVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListBatchJobDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBatchJobDefinitionsCommandOutput}.
+   */
+  paginateListBatchJobDefinitions(
+    args: ListBatchJobDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBatchJobDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListBatchJobExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBatchJobExecutionsCommandOutput}.
+   */
+  paginateListBatchJobExecutions(
+    args: ListBatchJobExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBatchJobExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListDataSetExportHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSetExportHistoryCommandOutput}.
+   */
+  paginateListDataSetExportHistory(
+    args: ListDataSetExportHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSetExportHistoryCommandOutput>;
+
+  /**
+   * @see {@link ListDataSetImportHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSetImportHistoryCommandOutput}.
+   */
+  paginateListDataSetImportHistory(
+    args: ListDataSetImportHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSetImportHistoryCommandOutput>;
+
+  /**
+   * @see {@link ListDataSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSetsCommandOutput}.
+   */
+  paginateListDataSets(
+    args: ListDataSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSetsCommandOutput>;
+
+  /**
+   * @see {@link ListDeploymentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDeploymentsCommandOutput}.
+   */
+  paginateListDeployments(
+    args: ListDeploymentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDeploymentsCommandOutput>;
+
+  /**
+   * @see {@link ListEngineVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEngineVersionsCommandOutput}.
+   */
+  paginateListEngineVersions(
+    args?: ListEngineVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEngineVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentsCommandOutput}.
+   */
+  paginateListEnvironments(
+    args?: ListEnvironmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentsCommandOutput>;
+}
+
+/**
+ * <p>Amazon Web Services Mainframe Modernization provides tools and resources to help you plan and implement migration and
+ *          modernization from mainframes to Amazon Web Services managed runtime environments. It provides tools for
+ *          analyzing existing mainframe applications, developing or updating mainframe applications
+ *          using COBOL or PL/I, and implementing an automated pipeline for continuous integration and
+ *          continuous delivery (CI/CD) of the applications.</p>
+ * @public
+ */
+export class M2 extends M2Client implements M2 {}
+createAggregatedClient(commands, M2, { paginators });

@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeEndpointCommand, DescribeEndpointCommandInput } from "../commands/DescribeEndpointCommand";
-import { SageMakerClient } from "../SageMakerClient";
+import {
+  type DescribeEndpointCommandInput,
+  type DescribeEndpointCommandOutput,
+  DescribeEndpointCommand,
+} from "../commands/DescribeEndpointCommand";
+import type { SageMakerServiceException } from "../models/SageMakerServiceException";
+import type { SageMakerClient } from "../SageMakerClient";
 
-const checkState = async (client: SageMakerClient, input: DescribeEndpointCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SageMakerClient, input: DescribeEndpointCommandInput): Promise<WaiterResult<DescribeEndpointCommandOutput | SageMakerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeEndpointCommand(input));
+    let result: DescribeEndpointCommandOutput & any = await client.send(new DescribeEndpointCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.EndpointStatus;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ValidationException") {
+    if (exception.name === "ValidationException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -31,8 +43,8 @@ const checkState = async (client: SageMakerClient, input: DescribeEndpointComman
 export const waitForEndpointDeleted = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeEndpointCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+): Promise<WaiterResult<DescribeEndpointCommandOutput | SageMakerServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -43,8 +55,8 @@ export const waitForEndpointDeleted = async (
 export const waitUntilEndpointDeleted = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeEndpointCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+): Promise<WaiterResult<SageMakerServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<SageMakerServiceException>;
 };

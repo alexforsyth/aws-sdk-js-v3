@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { DescribeTableStatisticsMessage, DescribeTableStatisticsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeTableStatisticsCommand,
-  serializeAws_json1_1DescribeTableStatisticsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTableStatisticsMessage, DescribeTableStatisticsResponse } from "../models/models_0";
+import { DescribeTableStatistics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTableStatisticsCommand}.
+ */
 export interface DescribeTableStatisticsCommandInput extends DescribeTableStatisticsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTableStatisticsCommand}.
+ */
 export interface DescribeTableStatisticsCommandOutput extends DescribeTableStatisticsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +33,119 @@ export interface DescribeTableStatisticsCommandOutput extends DescribeTableStati
  * ```javascript
  * import { DatabaseMigrationServiceClient, DescribeTableStatisticsCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DescribeTableStatisticsCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DescribeTableStatisticsMessage
+ *   ReplicationTaskArn: "STRING_VALUE", // required
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeTableStatisticsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTableStatisticsResponse
+ * //   ReplicationTaskArn: "STRING_VALUE",
+ * //   TableStatistics: [ // TableStatisticsList
+ * //     { // TableStatistics
+ * //       SchemaName: "STRING_VALUE",
+ * //       TableName: "STRING_VALUE",
+ * //       Inserts: Number("long"),
+ * //       Deletes: Number("long"),
+ * //       Updates: Number("long"),
+ * //       Ddls: Number("long"),
+ * //       AppliedInserts: Number("long"),
+ * //       AppliedDeletes: Number("long"),
+ * //       AppliedUpdates: Number("long"),
+ * //       AppliedDdls: Number("long"),
+ * //       FullLoadRows: Number("long"),
+ * //       FullLoadCondtnlChkFailedRows: Number("long"),
+ * //       FullLoadErrorRows: Number("long"),
+ * //       FullLoadStartTime: new Date("TIMESTAMP"),
+ * //       FullLoadEndTime: new Date("TIMESTAMP"),
+ * //       FullLoadReloaded: true || false,
+ * //       LastUpdateTime: new Date("TIMESTAMP"),
+ * //       TableState: "STRING_VALUE",
+ * //       ValidationPendingRecords: Number("long"),
+ * //       ValidationFailedRecords: Number("long"),
+ * //       ValidationSuspendedRecords: Number("long"),
+ * //       ValidationState: "STRING_VALUE",
+ * //       ValidationStateDetails: "STRING_VALUE",
+ * //       ResyncState: "STRING_VALUE",
+ * //       ResyncRowsAttempted: Number("long"),
+ * //       ResyncRowsSucceeded: Number("long"),
+ * //       ResyncRowsFailed: Number("long"),
+ * //       ResyncProgress: Number("double"),
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTableStatisticsCommandInput - {@link DescribeTableStatisticsCommandInput}
+ * @returns {@link DescribeTableStatisticsCommandOutput}
  * @see {@link DescribeTableStatisticsCommandInput} for command's `input` shape.
  * @see {@link DescribeTableStatisticsCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Describe table statistics
+ * ```javascript
+ * // Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
+ * const input = {
+ *   Marker: "",
+ *   MaxRecords: 123,
+ *   ReplicationTaskArn: ""
+ * };
+ * const command = new DescribeTableStatisticsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Marker: "",
+ *   ReplicationTaskArn: "",
+ *   TableStatistics:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeTableStatisticsCommand extends $Command<
-  DescribeTableStatisticsCommandInput,
-  DescribeTableStatisticsCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTableStatisticsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTableStatisticsCommandInput, DescribeTableStatisticsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DescribeTableStatisticsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTableStatisticsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTableStatisticsResponse.filterSensitiveLog,
+export class DescribeTableStatisticsCommand extends command<DescribeTableStatisticsCommandInput, DescribeTableStatisticsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTableStatistics",
+  DescribeTableStatistics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTableStatisticsMessage;
+      output: DescribeTableStatisticsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTableStatisticsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeTableStatisticsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTableStatisticsCommandOutput> {
-    return deserializeAws_json1_1DescribeTableStatisticsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTableStatisticsCommandInput;
+      output: DescribeTableStatisticsCommandOutput;
+    };
+  };
 }

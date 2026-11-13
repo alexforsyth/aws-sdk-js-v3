@@ -1,99 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetCellReadinessSummaryRequest, GetCellReadinessSummaryResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetCellReadinessSummaryCommand,
-  serializeAws_restJson1GetCellReadinessSummaryCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryReadinessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryReadinessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCellReadinessSummaryRequest, GetCellReadinessSummaryResponse } from "../models/models_0";
+import { GetCellReadinessSummary$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCellReadinessSummaryCommand}.
+ */
 export interface GetCellReadinessSummaryCommandInput extends GetCellReadinessSummaryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCellReadinessSummaryCommand}.
+ */
 export interface GetCellReadinessSummaryCommandOutput extends GetCellReadinessSummaryResponse, __MetadataBearer {}
 
 /**
- * Returns information about readiness of a Cell.
+ * <p>Gets readiness for a cell. Aggregates the readiness of all the resources that are associated with the cell into a single value.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53RecoveryReadinessClient, GetCellReadinessSummaryCommand } from "@aws-sdk/client-route53-recovery-readiness"; // ES Modules import
  * // const { Route53RecoveryReadinessClient, GetCellReadinessSummaryCommand } = require("@aws-sdk/client-route53-recovery-readiness"); // CommonJS import
+ * // import type { Route53RecoveryReadinessClientConfig } from "@aws-sdk/client-route53-recovery-readiness";
+ * const config = {}; // type is Route53RecoveryReadinessClientConfig
  * const client = new Route53RecoveryReadinessClient(config);
+ * const input = { // GetCellReadinessSummaryRequest
+ *   CellName: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetCellReadinessSummaryCommand(input);
  * const response = await client.send(command);
+ * // { // GetCellReadinessSummaryResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Readiness: "READY" || "NOT_READY" || "UNKNOWN" || "NOT_AUTHORIZED",
+ * //   ReadinessChecks: [ // __listOfReadinessCheckSummary
+ * //     { // ReadinessCheckSummary
+ * //       Readiness: "READY" || "NOT_READY" || "UNKNOWN" || "NOT_AUTHORIZED",
+ * //       ReadinessCheckName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetCellReadinessSummaryCommandInput - {@link GetCellReadinessSummaryCommandInput}
+ * @returns {@link GetCellReadinessSummaryCommandOutput}
  * @see {@link GetCellReadinessSummaryCommandInput} for command's `input` shape.
  * @see {@link GetCellReadinessSummaryCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for Route53RecoveryReadinessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  User does not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link Route53RecoveryReadinessServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryReadiness service.</p>
+ *
+ *
+ * @public
  */
-export class GetCellReadinessSummaryCommand extends $Command<
-  GetCellReadinessSummaryCommandInput,
-  GetCellReadinessSummaryCommandOutput,
-  Route53RecoveryReadinessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCellReadinessSummaryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryReadinessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCellReadinessSummaryCommandInput, GetCellReadinessSummaryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryReadinessClient";
-    const commandName = "GetCellReadinessSummaryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCellReadinessSummaryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCellReadinessSummaryResponse.filterSensitiveLog,
+export class GetCellReadinessSummaryCommand extends command<GetCellReadinessSummaryCommandInput, GetCellReadinessSummaryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCellReadinessSummary",
+  GetCellReadinessSummary$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCellReadinessSummaryRequest;
+      output: GetCellReadinessSummaryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCellReadinessSummaryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetCellReadinessSummaryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCellReadinessSummaryCommandOutput> {
-    return deserializeAws_restJson1GetCellReadinessSummaryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCellReadinessSummaryCommandInput;
+      output: GetCellReadinessSummaryCommandOutput;
+    };
+  };
 }

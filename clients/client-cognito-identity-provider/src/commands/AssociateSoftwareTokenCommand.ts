@@ -1,110 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { AssociateSoftwareTokenRequest, AssociateSoftwareTokenResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateSoftwareTokenCommand,
-  serializeAws_json1_1AssociateSoftwareTokenCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateSoftwareTokenRequest, AssociateSoftwareTokenResponse } from "../models/models_0";
+import { AssociateSoftwareToken$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateSoftwareTokenCommand}.
+ */
 export interface AssociateSoftwareTokenCommandInput extends AssociateSoftwareTokenRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateSoftwareTokenCommand}.
+ */
 export interface AssociateSoftwareTokenCommandOutput extends AssociateSoftwareTokenResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a unique generated shared secret key code for the user account. The request
- *             takes an access token or a session string, but not both.</p>
- *         <note>
- *             <p>Calling AssociateSoftwareToken immediately disassociates the existing software
- *                 token from the user account. If the user doesn't subsequently verify the software
- *                 token, their account is essentially set up to authenticate without MFA. If MFA
- *                 config is set to Optional at the user pool level, the user can then login without
- *                 MFA. However, if MFA is set to Required for the user pool, the user will be asked to
- *                 setup a new software token MFA during sign in.</p>
- *         </note>
+ * <p>Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA)
+ *             for a user, with a unique private key that Amazon Cognito generates and returns in the API
+ *             response. You can authorize an <code>AssociateSoftwareToken</code> request with either
+ *             the user's access token, or a session string from a challenge response that you received
+ *             from Amazon Cognito.</p>
+ *          <note>
+ *             <p>Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For
+ *     this operation, you can't use IAM credentials to authorize requests, and you can't
+ *     grant IAM permissions in policies. For more information about authorization models in
+ *     Amazon Cognito, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html">Using the Amazon Cognito user pools API and user pool endpoints</a>.</p>
+ *          </note>
+ *          <p>Authorize this action with a signed-in user's access token. It must include the scope <code>aws.cognito.signin.user.admin</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, AssociateSoftwareTokenCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, AssociateSoftwareTokenCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // AssociateSoftwareTokenRequest
+ *   AccessToken: "STRING_VALUE",
+ *   Session: "STRING_VALUE",
+ * };
  * const command = new AssociateSoftwareTokenCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateSoftwareTokenResponse
+ * //   SecretCode: "STRING_VALUE",
+ * //   Session: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AssociateSoftwareTokenCommandInput - {@link AssociateSoftwareTokenCommandInput}
+ * @returns {@link AssociateSoftwareTokenCommandOutput}
  * @see {@link AssociateSoftwareTokenCommandInput} for command's `input` shape.
  * @see {@link AssociateSoftwareTokenCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>This exception is thrown if two or more modifications are happening
+ *             concurrently.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>This exception is thrown when WAF doesn't allow your request based on a web
+ *             ACL that's associated with your user pool.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link SoftwareTokenMFANotFoundException} (client fault)
+ *  <p>This exception is thrown when the software token time-based one-time password (TOTP)
+ *             multi-factor authentication (MFA) isn't activated for the user pool.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateSoftwareTokenCommand extends $Command<
-  AssociateSoftwareTokenCommandInput,
-  AssociateSoftwareTokenCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateSoftwareTokenCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateSoftwareTokenCommandInput, AssociateSoftwareTokenCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "AssociateSoftwareTokenCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateSoftwareTokenRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateSoftwareTokenResponse.filterSensitiveLog,
+export class AssociateSoftwareTokenCommand extends command<AssociateSoftwareTokenCommandInput, AssociateSoftwareTokenCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateSoftwareToken",
+  AssociateSoftwareToken$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateSoftwareTokenRequest;
+      output: AssociateSoftwareTokenResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateSoftwareTokenCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateSoftwareTokenCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateSoftwareTokenCommandOutput> {
-    return deserializeAws_json1_1AssociateSoftwareTokenCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateSoftwareTokenCommandInput;
+      output: AssociateSoftwareTokenCommandOutput;
+    };
+  };
 }

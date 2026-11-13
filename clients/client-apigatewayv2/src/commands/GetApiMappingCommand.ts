@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { GetApiMappingRequest, GetApiMappingResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApiMappingCommand,
-  serializeAws_restJson1GetApiMappingCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApiMappingRequest, GetApiMappingResponse } from "../models/models_0";
+import { GetApiMapping$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApiMappingCommand}.
+ */
 export interface GetApiMappingCommandInput extends GetApiMappingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApiMappingCommand}.
+ */
 export interface GetApiMappingCommandOutput extends GetApiMappingResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface GetApiMappingCommandOutput extends GetApiMappingResponse, __Met
  * ```javascript
  * import { ApiGatewayV2Client, GetApiMappingCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, GetApiMappingCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // GetApiMappingRequest
+ *   ApiMappingId: "STRING_VALUE", // required
+ *   DomainName: "STRING_VALUE", // required
+ * };
  * const command = new GetApiMappingCommand(input);
  * const response = await client.send(command);
+ * // { // GetApiMappingResponse
+ * //   ApiId: "STRING_VALUE",
+ * //   ApiMappingId: "STRING_VALUE",
+ * //   ApiMappingKey: "STRING_VALUE",
+ * //   Stage: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetApiMappingCommandInput - {@link GetApiMappingCommandInput}
+ * @returns {@link GetApiMappingCommandOutput}
  * @see {@link GetApiMappingCommandInput} for command's `input` shape.
  * @see {@link GetApiMappingCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetApiMappingCommand extends $Command<
-  GetApiMappingCommandInput,
-  GetApiMappingCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApiMappingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApiMappingCommandInput, GetApiMappingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "GetApiMappingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApiMappingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetApiMappingResponse.filterSensitiveLog,
+export class GetApiMappingCommand extends command<GetApiMappingCommandInput, GetApiMappingCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApiMapping",
+  GetApiMapping$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApiMappingRequest;
+      output: GetApiMappingResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApiMappingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApiMappingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApiMappingCommandOutput> {
-    return deserializeAws_restJson1GetApiMappingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApiMappingCommandInput;
+      output: GetApiMappingCommandOutput;
+    };
+  };
 }

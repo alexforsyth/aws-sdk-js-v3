@@ -1,0 +1,132 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListVPCConnectionsRequest, ListVPCConnectionsResponse } from "../models/models_5";
+import { ListVPCConnections$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListVPCConnectionsCommand}.
+ */
+export interface ListVPCConnectionsCommandInput extends ListVPCConnectionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListVPCConnectionsCommand}.
+ */
+export interface ListVPCConnectionsCommandOutput extends ListVPCConnectionsResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists all of the VPC connections in the current set Amazon Web Services Region of an
+ * 				Amazon Web Services account.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { QuickSightClient, ListVPCConnectionsCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
+ * // const { QuickSightClient, ListVPCConnectionsCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
+ * const client = new QuickSightClient(config);
+ * const input = { // ListVPCConnectionsRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
+ * const command = new ListVPCConnectionsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListVPCConnectionsResponse
+ * //   VPCConnectionSummaries: [ // VPCConnectionSummaryList
+ * //     { // VPCConnectionSummary
+ * //       VPCConnectionId: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       VPCId: "STRING_VALUE",
+ * //       SecurityGroupIds: [ // SecurityGroupIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       DnsResolvers: [ // StringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Status: "CREATION_IN_PROGRESS" || "CREATION_SUCCESSFUL" || "CREATION_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_SUCCESSFUL" || "UPDATE_FAILED" || "DELETION_IN_PROGRESS" || "DELETION_FAILED" || "DELETED",
+ * //       AvailabilityStatus: "AVAILABLE" || "UNAVAILABLE" || "PARTIALLY_AVAILABLE",
+ * //       NetworkInterfaces: [ // NetworkInterfaceList
+ * //         { // NetworkInterface
+ * //           SubnetId: "STRING_VALUE",
+ * //           AvailabilityZone: "STRING_VALUE",
+ * //           ErrorMessage: "STRING_VALUE",
+ * //           Status: "CREATING" || "AVAILABLE" || "CREATION_FAILED" || "UPDATING" || "UPDATE_FAILED" || "DELETING" || "DELETED" || "DELETION_FAILED" || "DELETION_SCHEDULED" || "ATTACHMENT_FAILED_ROLLBACK_FAILED",
+ * //           NetworkInterfaceId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       RoleArn: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastUpdatedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
+ * ```
+ *
+ * @param ListVPCConnectionsCommandInput - {@link ListVPCConnectionsCommandInput}
+ * @returns {@link ListVPCConnectionsCommandOutput}
+ * @see {@link ListVPCConnectionsCommandInput} for command's `input` shape.
+ * @see {@link ListVPCConnectionsCommandOutput} for command's `response` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
+ */
+export class ListVPCConnectionsCommand extends command<ListVPCConnectionsCommandInput, ListVPCConnectionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListVPCConnections",
+  ListVPCConnections$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVPCConnectionsRequest;
+      output: ListVPCConnectionsResponse;
+    };
+    sdk: {
+      input: ListVPCConnectionsCommandInput;
+      output: ListVPCConnectionsCommandOutput;
+    };
+  };
+}

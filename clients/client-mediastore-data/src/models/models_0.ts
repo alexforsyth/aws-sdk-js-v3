@@ -1,143 +1,77 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-import { Readable } from "stream";
+// smithy-typescript generated code
+import type { StreamingBlobTypes } from "@smithy/types";
+
+import type { ItemType, StorageClass, UploadAvailability } from "./enums";
 
 /**
- * <p>The specified container was not found for the specified account.</p>
+ * @public
  */
-export interface ContainerNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ContainerNotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ContainerNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ContainerNotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteObjectRequest {
   /**
    * <p>The path (including the file name) where the object is stored in the container.
    *          Format: <folder name>/<folder name>/<file name></p>
+   * @public
    */
   Path: string | undefined;
 }
 
-export namespace DeleteObjectRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteObjectRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteObjectResponse {}
 
-export namespace DeleteObjectResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteObjectResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The service is temporarily unavailable.</p>
+ * @public
  */
-export interface InternalServerError extends __SmithyException, $MetadataBearer {
-  name: "InternalServerError";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServerError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Could not perform an operation on an object that does not exist.</p>
- */
-export interface ObjectNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ObjectNotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ObjectNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ObjectNotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface DescribeObjectRequest {
   /**
    * <p>The path (including the file name) where the object is stored in the container.
    *          Format: <folder name>/<folder name>/<file name></p>
+   * @public
    */
   Path: string | undefined;
 }
 
-export namespace DescribeObjectRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeObjectRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeObjectResponse {
   /**
    * <p>The ETag that represents a unique instance of the object.</p>
+   * @public
    */
-  ETag?: string;
+  ETag?: string | undefined;
 
   /**
    * <p>The content type of the object.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The length of the object in bytes.</p>
+   * @public
    */
-  ContentLength?: number;
+  ContentLength?: number | undefined;
 
   /**
    * <p>An optional <code>CacheControl</code> header that allows the caller to control the
    *          object's cache behavior. Headers can be passed in as specified in the HTTP at <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>
    *          <p>Headers with a custom user-defined value are also accepted.</p>
+   * @public
    */
-  CacheControl?: string;
+  CacheControl?: string | undefined;
 
   /**
    * <p>The date and time that the object was last modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 }
 
-export namespace DescribeObjectResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeObjectResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetObjectRequest {
   /**
    * <p>The path (including the file name) where the object is stored in the container.
@@ -158,152 +92,126 @@ export interface GetObjectRequest {
    *          <p>The file name is the name that is assigned to the file that you upload. The file can
    *          have the same name inside and outside of AWS Elemental MediaStore, or it can have the same
    *          name. The file name can include or omit an extension. </p>
+   * @public
    */
   Path: string | undefined;
 
   /**
    * <p>The range bytes of an object to retrieve. For more information about the
    *           <code>Range</code> header, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>. AWS Elemental MediaStore ignores this header for partially uploaded objects that have streaming upload availability.</p>
+   * @public
    */
-  Range?: string;
+  Range?: string | undefined;
 }
 
-export namespace GetObjectRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetObjectRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetObjectResponse {
   /**
    * <p>The bytes of the object. </p>
+   * @public
    */
-  Body?: Readable | ReadableStream | Blob;
+  Body?: StreamingBlobTypes | undefined;
 
   /**
    * <p>An optional <code>CacheControl</code> header that allows the caller to control the
    *          object's cache behavior. Headers can be passed in as specified in the HTTP spec at <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>
    *          <p>Headers with a custom user-defined value are also accepted.</p>
+   * @public
    */
-  CacheControl?: string;
+  CacheControl?: string | undefined;
 
   /**
    * <p>The range of bytes to retrieve.</p>
+   * @public
    */
-  ContentRange?: string;
+  ContentRange?: string | undefined;
 
   /**
    * <p>The length of the object in bytes.</p>
+   * @public
    */
-  ContentLength?: number;
+  ContentLength?: number | undefined;
 
   /**
    * <p>The content type of the object.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The ETag that represents a unique instance of the object.</p>
+   * @public
    */
-  ETag?: string;
+  ETag?: string | undefined;
 
   /**
    * <p>The date and time that the object was last modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The HTML status code of the request. Status codes ranging from 200 to 299 indicate
    *          success. All other status codes indicate the type of error that occurred.</p>
+   * @public
    */
   StatusCode: number | undefined;
 }
 
-export namespace GetObjectResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetObjectResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested content range is not valid.</p>
- */
-export interface RequestedRangeNotSatisfiableException extends __SmithyException, $MetadataBearer {
-  name: "RequestedRangeNotSatisfiableException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace RequestedRangeNotSatisfiableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RequestedRangeNotSatisfiableException): any => ({
-    ...obj,
-  });
-}
-
-export enum ItemType {
-  FOLDER = "FOLDER",
-  OBJECT = "OBJECT",
-}
-
 /**
  * <p>A metadata entry for a folder or object.</p>
+ * @public
  */
 export interface Item {
   /**
    * <p>The name of the item.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The item type (folder or object).</p>
+   * @public
    */
-  Type?: ItemType | string;
+  Type?: ItemType | undefined;
 
   /**
    * <p>The ETag that represents a unique instance of the item.</p>
+   * @public
    */
-  ETag?: string;
+  ETag?: string | undefined;
 
   /**
    * <p>The date and time that the item was last modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The content type of the item.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The length of the item in bytes.</p>
+   * @public
    */
-  ContentLength?: number;
+  ContentLength?: number | undefined;
 }
 
-export namespace Item {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Item): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListItemsRequest {
   /**
    * <p>The path in the container from which to retrieve items. Format: <folder
    *          name>/<folder name>/<file name></p>
+   * @public
    */
-  Path?: string;
+  Path?: string | undefined;
 
   /**
    * <p>The maximum number of results to return per API request. For example, you submit a
@@ -314,8 +222,9 @@ export interface ListItemsRequest {
    *          value.</p>
    *          <p>If <code>MaxResults</code> is not included in the request, the service defaults to
    *          pagination with a maximum of 1,000 results per page.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token that identifies which batch of results that you want to see. For example,
@@ -324,24 +233,20 @@ export interface ListItemsRequest {
    *          To see the next batch of results, you can submit the <code>ListItems</code> request a
    *          second time and specify the <code>NextToken</code> value.</p>
    *          <p>Tokens expire after 15 minutes.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListItemsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListItemsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListItemsResponse {
   /**
    * <p>The metadata entries for the folders and objects at the requested path.</p>
+   * @public
    */
-  Items?: Item[];
+  Items?: Item[] | undefined;
 
   /**
    * <p>The token that can be used in a request to view the next set of results. For example,
@@ -349,33 +254,20 @@ export interface ListItemsResponse {
    *             <code>MaxResults</code> set at 500. The service returns the first batch of results (up
    *          to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of
    *          results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListItemsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListItemsResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum StorageClass {
-  TEMPORAL = "TEMPORAL",
-}
-
-export enum UploadAvailability {
-  STANDARD = "STANDARD",
-  STREAMING = "STREAMING",
-}
-
+/**
+ * @public
+ */
 export interface PutObjectRequest {
   /**
    * <p>The bytes to be stored. </p>
+   * @public
    */
-  Body: Readable | ReadableStream | Blob | undefined;
+  Body: StreamingBlobTypes | undefined;
 
   /**
    * <p>The path (including the file name) where the object is stored in the container.
@@ -396,69 +288,62 @@ export interface PutObjectRequest {
    *          <p>The file name is the name that is assigned to the file that you upload. The file can
    *          have the same name inside and outside of AWS Elemental MediaStore, or it can have the same
    *          name. The file name can include or omit an extension. </p>
+   * @public
    */
   Path: string | undefined;
 
   /**
    * <p>The content type of the object.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>An optional <code>CacheControl</code> header that allows the caller to control the
    *          object's cache behavior. Headers can be passed in as specified in the HTTP at <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>
    *          <p>Headers with a custom user-defined value are also accepted.</p>
+   * @public
    */
-  CacheControl?: string;
+  CacheControl?: string | undefined;
 
   /**
    * <p>Indicates the storage class of a <code>Put</code> request. Defaults to
    *          high-performance temporal storage class, and objects are persisted into durable storage
    *          shortly after being received.</p>
+   * @public
    */
-  StorageClass?: StorageClass | string;
+  StorageClass?: StorageClass | undefined;
 
   /**
    * <p>Indicates the availability of an object while it is still uploading. If the value is set to <code>streaming</code>, the object is available for
    *             downloading after some initial buffering but before the object is uploaded completely. If the value is set to <code>standard</code>, the object is
    *             available for downloading only when it is uploaded completely. The default value for this header is <code>standard</code>.</p>
    *         <p>To use this header, you must also set the HTTP <code>Transfer-Encoding</code> header to <code>chunked</code>.</p>
+   * @public
    */
-  UploadAvailability?: UploadAvailability | string;
+  UploadAvailability?: UploadAvailability | undefined;
 }
 
-export namespace PutObjectRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutObjectRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutObjectResponse {
   /**
    * <p>The SHA256 digest of the object that is persisted.</p>
+   * @public
    */
-  ContentSHA256?: string;
+  ContentSHA256?: string | undefined;
 
   /**
    * <p>Unique identifier of the object in the container.</p>
+   * @public
    */
-  ETag?: string;
+  ETag?: string | undefined;
 
   /**
    * <p>The storage class where the object was persisted. The class should be
    *          “Temporal”.</p>
+   * @public
    */
-  StorageClass?: StorageClass | string;
-}
-
-export namespace PutObjectResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutObjectResponse): any => ({
-    ...obj,
-  });
+  StorageClass?: StorageClass | undefined;
 }

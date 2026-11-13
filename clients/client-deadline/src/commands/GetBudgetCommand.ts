@@ -1,0 +1,119 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetBudgetRequest, GetBudgetResponse } from "../models/models_0";
+import { GetBudget$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBudgetCommand}.
+ */
+export interface GetBudgetCommandInput extends GetBudgetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBudgetCommand}.
+ */
+export interface GetBudgetCommandOutput extends GetBudgetResponse, __MetadataBearer {}
+
+/**
+ * Get a budget.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, GetBudgetCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, GetBudgetCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // GetBudgetRequest
+ *   farmId: "STRING_VALUE", // required
+ *   budgetId: "STRING_VALUE", // required
+ * };
+ * const command = new GetBudgetCommand(input);
+ * const response = await client.send(command);
+ * // { // GetBudgetResponse
+ * //   budgetId: "STRING_VALUE", // required
+ * //   usageTrackingResource: { // UsageTrackingResource Union: only one key present
+ * //     queueId: "STRING_VALUE",
+ * //   },
+ * //   status: "ACTIVE" || "INACTIVE", // required
+ * //   displayName: "STRING_VALUE", // required
+ * //   approximateDollarLimit: Number("float"), // required
+ * //   usages: { // ConsumedUsages
+ * //     approximateDollarUsage: Number("float"), // required
+ * //   },
+ * //   createdBy: "STRING_VALUE", // required
+ * //   createdAt: new Date("TIMESTAMP"), // required
+ * //   updatedBy: "STRING_VALUE",
+ * //   updatedAt: new Date("TIMESTAMP"),
+ * //   description: "STRING_VALUE",
+ * //   actions: [ // ResponseBudgetActionList // required
+ * //     { // ResponseBudgetAction
+ * //       type: "STOP_SCHEDULING_AND_COMPLETE_TASKS" || "STOP_SCHEDULING_AND_CANCEL_TASKS", // required
+ * //       thresholdPercentage: Number("float"), // required
+ * //       description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   schedule: { // BudgetSchedule Union: only one key present
+ * //     fixed: { // FixedBudgetSchedule
+ * //       startTime: new Date("TIMESTAMP"), // required
+ * //       endTime: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   },
+ * //   queueStoppedAt: new Date("TIMESTAMP"),
+ * // };
+ *
+ * ```
+ *
+ * @param GetBudgetCommandInput - {@link GetBudgetCommandInput}
+ * @returns {@link GetBudgetCommandOutput}
+ * @see {@link GetBudgetCommandInput} for command's `input` shape.
+ * @see {@link GetBudgetCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class GetBudgetCommand extends command<GetBudgetCommandInput, GetBudgetCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBudget",
+  GetBudget$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBudgetRequest;
+      output: GetBudgetResponse;
+    };
+    sdk: {
+      input: GetBudgetCommandInput;
+      output: GetBudgetCommandOutput;
+    };
+  };
+}

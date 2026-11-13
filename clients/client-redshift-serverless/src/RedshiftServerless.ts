@@ -1,0 +1,1720 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type ConvertRecoveryPointToSnapshotCommandInput,
+  type ConvertRecoveryPointToSnapshotCommandOutput,
+  ConvertRecoveryPointToSnapshotCommand,
+} from "./commands/ConvertRecoveryPointToSnapshotCommand";
+import {
+  type CreateCustomDomainAssociationCommandInput,
+  type CreateCustomDomainAssociationCommandOutput,
+  CreateCustomDomainAssociationCommand,
+} from "./commands/CreateCustomDomainAssociationCommand";
+import {
+  type CreateEndpointAccessCommandInput,
+  type CreateEndpointAccessCommandOutput,
+  CreateEndpointAccessCommand,
+} from "./commands/CreateEndpointAccessCommand";
+import {
+  type CreateNamespaceCommandInput,
+  type CreateNamespaceCommandOutput,
+  CreateNamespaceCommand,
+} from "./commands/CreateNamespaceCommand";
+import {
+  type CreateReservationCommandInput,
+  type CreateReservationCommandOutput,
+  CreateReservationCommand,
+} from "./commands/CreateReservationCommand";
+import {
+  type CreateScheduledActionCommandInput,
+  type CreateScheduledActionCommandOutput,
+  CreateScheduledActionCommand,
+} from "./commands/CreateScheduledActionCommand";
+import {
+  type CreateSnapshotCommandInput,
+  type CreateSnapshotCommandOutput,
+  CreateSnapshotCommand,
+} from "./commands/CreateSnapshotCommand";
+import {
+  type CreateSnapshotCopyConfigurationCommandInput,
+  type CreateSnapshotCopyConfigurationCommandOutput,
+  CreateSnapshotCopyConfigurationCommand,
+} from "./commands/CreateSnapshotCopyConfigurationCommand";
+import {
+  type CreateUsageLimitCommandInput,
+  type CreateUsageLimitCommandOutput,
+  CreateUsageLimitCommand,
+} from "./commands/CreateUsageLimitCommand";
+import {
+  type CreateWorkgroupCommandInput,
+  type CreateWorkgroupCommandOutput,
+  CreateWorkgroupCommand,
+} from "./commands/CreateWorkgroupCommand";
+import {
+  type DeleteCustomDomainAssociationCommandInput,
+  type DeleteCustomDomainAssociationCommandOutput,
+  DeleteCustomDomainAssociationCommand,
+} from "./commands/DeleteCustomDomainAssociationCommand";
+import {
+  type DeleteEndpointAccessCommandInput,
+  type DeleteEndpointAccessCommandOutput,
+  DeleteEndpointAccessCommand,
+} from "./commands/DeleteEndpointAccessCommand";
+import {
+  type DeleteNamespaceCommandInput,
+  type DeleteNamespaceCommandOutput,
+  DeleteNamespaceCommand,
+} from "./commands/DeleteNamespaceCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteScheduledActionCommandInput,
+  type DeleteScheduledActionCommandOutput,
+  DeleteScheduledActionCommand,
+} from "./commands/DeleteScheduledActionCommand";
+import {
+  type DeleteSnapshotCommandInput,
+  type DeleteSnapshotCommandOutput,
+  DeleteSnapshotCommand,
+} from "./commands/DeleteSnapshotCommand";
+import {
+  type DeleteSnapshotCopyConfigurationCommandInput,
+  type DeleteSnapshotCopyConfigurationCommandOutput,
+  DeleteSnapshotCopyConfigurationCommand,
+} from "./commands/DeleteSnapshotCopyConfigurationCommand";
+import {
+  type DeleteUsageLimitCommandInput,
+  type DeleteUsageLimitCommandOutput,
+  DeleteUsageLimitCommand,
+} from "./commands/DeleteUsageLimitCommand";
+import {
+  type DeleteWorkgroupCommandInput,
+  type DeleteWorkgroupCommandOutput,
+  DeleteWorkgroupCommand,
+} from "./commands/DeleteWorkgroupCommand";
+import {
+  type GetCredentialsCommandInput,
+  type GetCredentialsCommandOutput,
+  GetCredentialsCommand,
+} from "./commands/GetCredentialsCommand";
+import {
+  type GetCustomDomainAssociationCommandInput,
+  type GetCustomDomainAssociationCommandOutput,
+  GetCustomDomainAssociationCommand,
+} from "./commands/GetCustomDomainAssociationCommand";
+import {
+  type GetEndpointAccessCommandInput,
+  type GetEndpointAccessCommandOutput,
+  GetEndpointAccessCommand,
+} from "./commands/GetEndpointAccessCommand";
+import {
+  type GetIdentityCenterAuthTokenCommandInput,
+  type GetIdentityCenterAuthTokenCommandOutput,
+  GetIdentityCenterAuthTokenCommand,
+} from "./commands/GetIdentityCenterAuthTokenCommand";
+import {
+  type GetNamespaceCommandInput,
+  type GetNamespaceCommandOutput,
+  GetNamespaceCommand,
+} from "./commands/GetNamespaceCommand";
+import {
+  type GetRecoveryPointCommandInput,
+  type GetRecoveryPointCommandOutput,
+  GetRecoveryPointCommand,
+} from "./commands/GetRecoveryPointCommand";
+import {
+  type GetReservationCommandInput,
+  type GetReservationCommandOutput,
+  GetReservationCommand,
+} from "./commands/GetReservationCommand";
+import {
+  type GetReservationOfferingCommandInput,
+  type GetReservationOfferingCommandOutput,
+  GetReservationOfferingCommand,
+} from "./commands/GetReservationOfferingCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type GetScheduledActionCommandInput,
+  type GetScheduledActionCommandOutput,
+  GetScheduledActionCommand,
+} from "./commands/GetScheduledActionCommand";
+import {
+  type GetSnapshotCommandInput,
+  type GetSnapshotCommandOutput,
+  GetSnapshotCommand,
+} from "./commands/GetSnapshotCommand";
+import {
+  type GetTableRestoreStatusCommandInput,
+  type GetTableRestoreStatusCommandOutput,
+  GetTableRestoreStatusCommand,
+} from "./commands/GetTableRestoreStatusCommand";
+import { type GetTrackCommandInput, type GetTrackCommandOutput, GetTrackCommand } from "./commands/GetTrackCommand";
+import {
+  type GetUsageLimitCommandInput,
+  type GetUsageLimitCommandOutput,
+  GetUsageLimitCommand,
+} from "./commands/GetUsageLimitCommand";
+import {
+  type GetWorkgroupCommandInput,
+  type GetWorkgroupCommandOutput,
+  GetWorkgroupCommand,
+} from "./commands/GetWorkgroupCommand";
+import {
+  type ListCustomDomainAssociationsCommandInput,
+  type ListCustomDomainAssociationsCommandOutput,
+  ListCustomDomainAssociationsCommand,
+} from "./commands/ListCustomDomainAssociationsCommand";
+import {
+  type ListEndpointAccessCommandInput,
+  type ListEndpointAccessCommandOutput,
+  ListEndpointAccessCommand,
+} from "./commands/ListEndpointAccessCommand";
+import {
+  type ListManagedWorkgroupsCommandInput,
+  type ListManagedWorkgroupsCommandOutput,
+  ListManagedWorkgroupsCommand,
+} from "./commands/ListManagedWorkgroupsCommand";
+import {
+  type ListNamespacesCommandInput,
+  type ListNamespacesCommandOutput,
+  ListNamespacesCommand,
+} from "./commands/ListNamespacesCommand";
+import {
+  type ListRecoveryPointsCommandInput,
+  type ListRecoveryPointsCommandOutput,
+  ListRecoveryPointsCommand,
+} from "./commands/ListRecoveryPointsCommand";
+import {
+  type ListReservationOfferingsCommandInput,
+  type ListReservationOfferingsCommandOutput,
+  ListReservationOfferingsCommand,
+} from "./commands/ListReservationOfferingsCommand";
+import {
+  type ListReservationsCommandInput,
+  type ListReservationsCommandOutput,
+  ListReservationsCommand,
+} from "./commands/ListReservationsCommand";
+import {
+  type ListScheduledActionsCommandInput,
+  type ListScheduledActionsCommandOutput,
+  ListScheduledActionsCommand,
+} from "./commands/ListScheduledActionsCommand";
+import {
+  type ListSnapshotCopyConfigurationsCommandInput,
+  type ListSnapshotCopyConfigurationsCommandOutput,
+  ListSnapshotCopyConfigurationsCommand,
+} from "./commands/ListSnapshotCopyConfigurationsCommand";
+import {
+  type ListSnapshotsCommandInput,
+  type ListSnapshotsCommandOutput,
+  ListSnapshotsCommand,
+} from "./commands/ListSnapshotsCommand";
+import {
+  type ListTableRestoreStatusCommandInput,
+  type ListTableRestoreStatusCommandOutput,
+  ListTableRestoreStatusCommand,
+} from "./commands/ListTableRestoreStatusCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListTracksCommandInput,
+  type ListTracksCommandOutput,
+  ListTracksCommand,
+} from "./commands/ListTracksCommand";
+import {
+  type ListUsageLimitsCommandInput,
+  type ListUsageLimitsCommandOutput,
+  ListUsageLimitsCommand,
+} from "./commands/ListUsageLimitsCommand";
+import {
+  type ListWorkgroupsCommandInput,
+  type ListWorkgroupsCommandOutput,
+  ListWorkgroupsCommand,
+} from "./commands/ListWorkgroupsCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type RestoreFromRecoveryPointCommandInput,
+  type RestoreFromRecoveryPointCommandOutput,
+  RestoreFromRecoveryPointCommand,
+} from "./commands/RestoreFromRecoveryPointCommand";
+import {
+  type RestoreFromSnapshotCommandInput,
+  type RestoreFromSnapshotCommandOutput,
+  RestoreFromSnapshotCommand,
+} from "./commands/RestoreFromSnapshotCommand";
+import {
+  type RestoreTableFromRecoveryPointCommandInput,
+  type RestoreTableFromRecoveryPointCommandOutput,
+  RestoreTableFromRecoveryPointCommand,
+} from "./commands/RestoreTableFromRecoveryPointCommand";
+import {
+  type RestoreTableFromSnapshotCommandInput,
+  type RestoreTableFromSnapshotCommandOutput,
+  RestoreTableFromSnapshotCommand,
+} from "./commands/RestoreTableFromSnapshotCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateCustomDomainAssociationCommandInput,
+  type UpdateCustomDomainAssociationCommandOutput,
+  UpdateCustomDomainAssociationCommand,
+} from "./commands/UpdateCustomDomainAssociationCommand";
+import {
+  type UpdateEndpointAccessCommandInput,
+  type UpdateEndpointAccessCommandOutput,
+  UpdateEndpointAccessCommand,
+} from "./commands/UpdateEndpointAccessCommand";
+import {
+  type UpdateLakehouseConfigurationCommandInput,
+  type UpdateLakehouseConfigurationCommandOutput,
+  UpdateLakehouseConfigurationCommand,
+} from "./commands/UpdateLakehouseConfigurationCommand";
+import {
+  type UpdateNamespaceCommandInput,
+  type UpdateNamespaceCommandOutput,
+  UpdateNamespaceCommand,
+} from "./commands/UpdateNamespaceCommand";
+import {
+  type UpdateScheduledActionCommandInput,
+  type UpdateScheduledActionCommandOutput,
+  UpdateScheduledActionCommand,
+} from "./commands/UpdateScheduledActionCommand";
+import {
+  type UpdateSnapshotCommandInput,
+  type UpdateSnapshotCommandOutput,
+  UpdateSnapshotCommand,
+} from "./commands/UpdateSnapshotCommand";
+import {
+  type UpdateSnapshotCopyConfigurationCommandInput,
+  type UpdateSnapshotCopyConfigurationCommandOutput,
+  UpdateSnapshotCopyConfigurationCommand,
+} from "./commands/UpdateSnapshotCopyConfigurationCommand";
+import {
+  type UpdateUsageLimitCommandInput,
+  type UpdateUsageLimitCommandOutput,
+  UpdateUsageLimitCommand,
+} from "./commands/UpdateUsageLimitCommand";
+import {
+  type UpdateWorkgroupCommandInput,
+  type UpdateWorkgroupCommandOutput,
+  UpdateWorkgroupCommand,
+} from "./commands/UpdateWorkgroupCommand";
+import { paginateListCustomDomainAssociations } from "./pagination/ListCustomDomainAssociationsPaginator";
+import { paginateListEndpointAccess } from "./pagination/ListEndpointAccessPaginator";
+import { paginateListManagedWorkgroups } from "./pagination/ListManagedWorkgroupsPaginator";
+import { paginateListNamespaces } from "./pagination/ListNamespacesPaginator";
+import { paginateListRecoveryPoints } from "./pagination/ListRecoveryPointsPaginator";
+import { paginateListReservationOfferings } from "./pagination/ListReservationOfferingsPaginator";
+import { paginateListReservations } from "./pagination/ListReservationsPaginator";
+import { paginateListScheduledActions } from "./pagination/ListScheduledActionsPaginator";
+import { paginateListSnapshotCopyConfigurations } from "./pagination/ListSnapshotCopyConfigurationsPaginator";
+import { paginateListSnapshots } from "./pagination/ListSnapshotsPaginator";
+import { paginateListTableRestoreStatus } from "./pagination/ListTableRestoreStatusPaginator";
+import { paginateListTracks } from "./pagination/ListTracksPaginator";
+import { paginateListUsageLimits } from "./pagination/ListUsageLimitsPaginator";
+import { paginateListWorkgroups } from "./pagination/ListWorkgroupsPaginator";
+import { RedshiftServerlessClient } from "./RedshiftServerlessClient";
+
+const commands = {
+  ConvertRecoveryPointToSnapshotCommand,
+  CreateCustomDomainAssociationCommand,
+  CreateEndpointAccessCommand,
+  CreateNamespaceCommand,
+  CreateReservationCommand,
+  CreateScheduledActionCommand,
+  CreateSnapshotCommand,
+  CreateSnapshotCopyConfigurationCommand,
+  CreateUsageLimitCommand,
+  CreateWorkgroupCommand,
+  DeleteCustomDomainAssociationCommand,
+  DeleteEndpointAccessCommand,
+  DeleteNamespaceCommand,
+  DeleteResourcePolicyCommand,
+  DeleteScheduledActionCommand,
+  DeleteSnapshotCommand,
+  DeleteSnapshotCopyConfigurationCommand,
+  DeleteUsageLimitCommand,
+  DeleteWorkgroupCommand,
+  GetCredentialsCommand,
+  GetCustomDomainAssociationCommand,
+  GetEndpointAccessCommand,
+  GetIdentityCenterAuthTokenCommand,
+  GetNamespaceCommand,
+  GetRecoveryPointCommand,
+  GetReservationCommand,
+  GetReservationOfferingCommand,
+  GetResourcePolicyCommand,
+  GetScheduledActionCommand,
+  GetSnapshotCommand,
+  GetTableRestoreStatusCommand,
+  GetTrackCommand,
+  GetUsageLimitCommand,
+  GetWorkgroupCommand,
+  ListCustomDomainAssociationsCommand,
+  ListEndpointAccessCommand,
+  ListManagedWorkgroupsCommand,
+  ListNamespacesCommand,
+  ListRecoveryPointsCommand,
+  ListReservationOfferingsCommand,
+  ListReservationsCommand,
+  ListScheduledActionsCommand,
+  ListSnapshotCopyConfigurationsCommand,
+  ListSnapshotsCommand,
+  ListTableRestoreStatusCommand,
+  ListTagsForResourceCommand,
+  ListTracksCommand,
+  ListUsageLimitsCommand,
+  ListWorkgroupsCommand,
+  PutResourcePolicyCommand,
+  RestoreFromRecoveryPointCommand,
+  RestoreFromSnapshotCommand,
+  RestoreTableFromRecoveryPointCommand,
+  RestoreTableFromSnapshotCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCustomDomainAssociationCommand,
+  UpdateEndpointAccessCommand,
+  UpdateLakehouseConfigurationCommand,
+  UpdateNamespaceCommand,
+  UpdateScheduledActionCommand,
+  UpdateSnapshotCommand,
+  UpdateSnapshotCopyConfigurationCommand,
+  UpdateUsageLimitCommand,
+  UpdateWorkgroupCommand,
+};
+const paginators = {
+  paginateListCustomDomainAssociations,
+  paginateListEndpointAccess,
+  paginateListManagedWorkgroups,
+  paginateListNamespaces,
+  paginateListRecoveryPoints,
+  paginateListReservationOfferings,
+  paginateListReservations,
+  paginateListScheduledActions,
+  paginateListSnapshotCopyConfigurations,
+  paginateListSnapshots,
+  paginateListTableRestoreStatus,
+  paginateListTracks,
+  paginateListUsageLimits,
+  paginateListWorkgroups,
+};
+
+/**
+ * @public
+ */
+export interface RedshiftServerlessRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RedshiftServerless {
+  /**
+   * @see {@link ConvertRecoveryPointToSnapshotCommand}
+   */
+  convertRecoveryPointToSnapshot(
+    args: ConvertRecoveryPointToSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ConvertRecoveryPointToSnapshotCommandOutput>;
+  convertRecoveryPointToSnapshot(
+    args: ConvertRecoveryPointToSnapshotCommandInput,
+    cb: (err: any, data?: ConvertRecoveryPointToSnapshotCommandOutput) => void
+  ): void;
+  convertRecoveryPointToSnapshot(
+    args: ConvertRecoveryPointToSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ConvertRecoveryPointToSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomDomainAssociationCommand}
+   */
+  createCustomDomainAssociation(
+    args: CreateCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateCustomDomainAssociationCommandOutput>;
+  createCustomDomainAssociation(
+    args: CreateCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: CreateCustomDomainAssociationCommandOutput) => void
+  ): void;
+  createCustomDomainAssociation(
+    args: CreateCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEndpointAccessCommand}
+   */
+  createEndpointAccess(
+    args: CreateEndpointAccessCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateEndpointAccessCommandOutput>;
+  createEndpointAccess(
+    args: CreateEndpointAccessCommandInput,
+    cb: (err: any, data?: CreateEndpointAccessCommandOutput) => void
+  ): void;
+  createEndpointAccess(
+    args: CreateEndpointAccessCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateEndpointAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNamespaceCommand}
+   */
+  createNamespace(
+    args: CreateNamespaceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateNamespaceCommandOutput>;
+  createNamespace(
+    args: CreateNamespaceCommandInput,
+    cb: (err: any, data?: CreateNamespaceCommandOutput) => void
+  ): void;
+  createNamespace(
+    args: CreateNamespaceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReservationCommand}
+   */
+  createReservation(
+    args: CreateReservationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateReservationCommandOutput>;
+  createReservation(
+    args: CreateReservationCommandInput,
+    cb: (err: any, data?: CreateReservationCommandOutput) => void
+  ): void;
+  createReservation(
+    args: CreateReservationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateReservationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateScheduledActionCommand}
+   */
+  createScheduledAction(
+    args: CreateScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateScheduledActionCommandOutput>;
+  createScheduledAction(
+    args: CreateScheduledActionCommandInput,
+    cb: (err: any, data?: CreateScheduledActionCommandOutput) => void
+  ): void;
+  createScheduledAction(
+    args: CreateScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSnapshotCommand}
+   */
+  createSnapshot(
+    args: CreateSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateSnapshotCommandOutput>;
+  createSnapshot(
+    args: CreateSnapshotCommandInput,
+    cb: (err: any, data?: CreateSnapshotCommandOutput) => void
+  ): void;
+  createSnapshot(
+    args: CreateSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSnapshotCopyConfigurationCommand}
+   */
+  createSnapshotCopyConfiguration(
+    args: CreateSnapshotCopyConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateSnapshotCopyConfigurationCommandOutput>;
+  createSnapshotCopyConfiguration(
+    args: CreateSnapshotCopyConfigurationCommandInput,
+    cb: (err: any, data?: CreateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+  createSnapshotCopyConfiguration(
+    args: CreateSnapshotCopyConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUsageLimitCommand}
+   */
+  createUsageLimit(
+    args: CreateUsageLimitCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateUsageLimitCommandOutput>;
+  createUsageLimit(
+    args: CreateUsageLimitCommandInput,
+    cb: (err: any, data?: CreateUsageLimitCommandOutput) => void
+  ): void;
+  createUsageLimit(
+    args: CreateUsageLimitCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateUsageLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkgroupCommand}
+   */
+  createWorkgroup(
+    args: CreateWorkgroupCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateWorkgroupCommandOutput>;
+  createWorkgroup(
+    args: CreateWorkgroupCommandInput,
+    cb: (err: any, data?: CreateWorkgroupCommandOutput) => void
+  ): void;
+  createWorkgroup(
+    args: CreateWorkgroupCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateWorkgroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomDomainAssociationCommand}
+   */
+  deleteCustomDomainAssociation(
+    args: DeleteCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteCustomDomainAssociationCommandOutput>;
+  deleteCustomDomainAssociation(
+    args: DeleteCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: DeleteCustomDomainAssociationCommandOutput) => void
+  ): void;
+  deleteCustomDomainAssociation(
+    args: DeleteCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEndpointAccessCommand}
+   */
+  deleteEndpointAccess(
+    args: DeleteEndpointAccessCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteEndpointAccessCommandOutput>;
+  deleteEndpointAccess(
+    args: DeleteEndpointAccessCommandInput,
+    cb: (err: any, data?: DeleteEndpointAccessCommandOutput) => void
+  ): void;
+  deleteEndpointAccess(
+    args: DeleteEndpointAccessCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteEndpointAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNamespaceCommand}
+   */
+  deleteNamespace(
+    args: DeleteNamespaceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteNamespaceCommandOutput>;
+  deleteNamespace(
+    args: DeleteNamespaceCommandInput,
+    cb: (err: any, data?: DeleteNamespaceCommandOutput) => void
+  ): void;
+  deleteNamespace(
+    args: DeleteNamespaceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteScheduledActionCommand}
+   */
+  deleteScheduledAction(
+    args: DeleteScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteScheduledActionCommandOutput>;
+  deleteScheduledAction(
+    args: DeleteScheduledActionCommandInput,
+    cb: (err: any, data?: DeleteScheduledActionCommandOutput) => void
+  ): void;
+  deleteScheduledAction(
+    args: DeleteScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSnapshotCommand}
+   */
+  deleteSnapshot(
+    args: DeleteSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteSnapshotCommandOutput>;
+  deleteSnapshot(
+    args: DeleteSnapshotCommandInput,
+    cb: (err: any, data?: DeleteSnapshotCommandOutput) => void
+  ): void;
+  deleteSnapshot(
+    args: DeleteSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSnapshotCopyConfigurationCommand}
+   */
+  deleteSnapshotCopyConfiguration(
+    args: DeleteSnapshotCopyConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteSnapshotCopyConfigurationCommandOutput>;
+  deleteSnapshotCopyConfiguration(
+    args: DeleteSnapshotCopyConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+  deleteSnapshotCopyConfiguration(
+    args: DeleteSnapshotCopyConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUsageLimitCommand}
+   */
+  deleteUsageLimit(
+    args: DeleteUsageLimitCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteUsageLimitCommandOutput>;
+  deleteUsageLimit(
+    args: DeleteUsageLimitCommandInput,
+    cb: (err: any, data?: DeleteUsageLimitCommandOutput) => void
+  ): void;
+  deleteUsageLimit(
+    args: DeleteUsageLimitCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteUsageLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkgroupCommand}
+   */
+  deleteWorkgroup(
+    args: DeleteWorkgroupCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteWorkgroupCommandOutput>;
+  deleteWorkgroup(
+    args: DeleteWorkgroupCommandInput,
+    cb: (err: any, data?: DeleteWorkgroupCommandOutput) => void
+  ): void;
+  deleteWorkgroup(
+    args: DeleteWorkgroupCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteWorkgroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCredentialsCommand}
+   */
+  getCredentials(): Promise<GetCredentialsCommandOutput>;
+  getCredentials(
+    args: GetCredentialsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetCredentialsCommandOutput>;
+  getCredentials(
+    args: GetCredentialsCommandInput,
+    cb: (err: any, data?: GetCredentialsCommandOutput) => void
+  ): void;
+  getCredentials(
+    args: GetCredentialsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCustomDomainAssociationCommand}
+   */
+  getCustomDomainAssociation(
+    args: GetCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetCustomDomainAssociationCommandOutput>;
+  getCustomDomainAssociation(
+    args: GetCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: GetCustomDomainAssociationCommandOutput) => void
+  ): void;
+  getCustomDomainAssociation(
+    args: GetCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEndpointAccessCommand}
+   */
+  getEndpointAccess(
+    args: GetEndpointAccessCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetEndpointAccessCommandOutput>;
+  getEndpointAccess(
+    args: GetEndpointAccessCommandInput,
+    cb: (err: any, data?: GetEndpointAccessCommandOutput) => void
+  ): void;
+  getEndpointAccess(
+    args: GetEndpointAccessCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetEndpointAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdentityCenterAuthTokenCommand}
+   */
+  getIdentityCenterAuthToken(
+    args: GetIdentityCenterAuthTokenCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetIdentityCenterAuthTokenCommandOutput>;
+  getIdentityCenterAuthToken(
+    args: GetIdentityCenterAuthTokenCommandInput,
+    cb: (err: any, data?: GetIdentityCenterAuthTokenCommandOutput) => void
+  ): void;
+  getIdentityCenterAuthToken(
+    args: GetIdentityCenterAuthTokenCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetIdentityCenterAuthTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNamespaceCommand}
+   */
+  getNamespace(
+    args: GetNamespaceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetNamespaceCommandOutput>;
+  getNamespace(
+    args: GetNamespaceCommandInput,
+    cb: (err: any, data?: GetNamespaceCommandOutput) => void
+  ): void;
+  getNamespace(
+    args: GetNamespaceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecoveryPointCommand}
+   */
+  getRecoveryPoint(
+    args: GetRecoveryPointCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetRecoveryPointCommandOutput>;
+  getRecoveryPoint(
+    args: GetRecoveryPointCommandInput,
+    cb: (err: any, data?: GetRecoveryPointCommandOutput) => void
+  ): void;
+  getRecoveryPoint(
+    args: GetRecoveryPointCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetRecoveryPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReservationCommand}
+   */
+  getReservation(
+    args: GetReservationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetReservationCommandOutput>;
+  getReservation(
+    args: GetReservationCommandInput,
+    cb: (err: any, data?: GetReservationCommandOutput) => void
+  ): void;
+  getReservation(
+    args: GetReservationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetReservationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReservationOfferingCommand}
+   */
+  getReservationOffering(
+    args: GetReservationOfferingCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetReservationOfferingCommandOutput>;
+  getReservationOffering(
+    args: GetReservationOfferingCommandInput,
+    cb: (err: any, data?: GetReservationOfferingCommandOutput) => void
+  ): void;
+  getReservationOffering(
+    args: GetReservationOfferingCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetReservationOfferingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetScheduledActionCommand}
+   */
+  getScheduledAction(
+    args: GetScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetScheduledActionCommandOutput>;
+  getScheduledAction(
+    args: GetScheduledActionCommandInput,
+    cb: (err: any, data?: GetScheduledActionCommandOutput) => void
+  ): void;
+  getScheduledAction(
+    args: GetScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSnapshotCommand}
+   */
+  getSnapshot(): Promise<GetSnapshotCommandOutput>;
+  getSnapshot(
+    args: GetSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetSnapshotCommandOutput>;
+  getSnapshot(
+    args: GetSnapshotCommandInput,
+    cb: (err: any, data?: GetSnapshotCommandOutput) => void
+  ): void;
+  getSnapshot(
+    args: GetSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableRestoreStatusCommand}
+   */
+  getTableRestoreStatus(
+    args: GetTableRestoreStatusCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetTableRestoreStatusCommandOutput>;
+  getTableRestoreStatus(
+    args: GetTableRestoreStatusCommandInput,
+    cb: (err: any, data?: GetTableRestoreStatusCommandOutput) => void
+  ): void;
+  getTableRestoreStatus(
+    args: GetTableRestoreStatusCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetTableRestoreStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrackCommand}
+   */
+  getTrack(
+    args: GetTrackCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetTrackCommandOutput>;
+  getTrack(
+    args: GetTrackCommandInput,
+    cb: (err: any, data?: GetTrackCommandOutput) => void
+  ): void;
+  getTrack(
+    args: GetTrackCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetTrackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUsageLimitCommand}
+   */
+  getUsageLimit(
+    args: GetUsageLimitCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetUsageLimitCommandOutput>;
+  getUsageLimit(
+    args: GetUsageLimitCommandInput,
+    cb: (err: any, data?: GetUsageLimitCommandOutput) => void
+  ): void;
+  getUsageLimit(
+    args: GetUsageLimitCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetUsageLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkgroupCommand}
+   */
+  getWorkgroup(
+    args: GetWorkgroupCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetWorkgroupCommandOutput>;
+  getWorkgroup(
+    args: GetWorkgroupCommandInput,
+    cb: (err: any, data?: GetWorkgroupCommandOutput) => void
+  ): void;
+  getWorkgroup(
+    args: GetWorkgroupCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetWorkgroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomDomainAssociationsCommand}
+   */
+  listCustomDomainAssociations(): Promise<ListCustomDomainAssociationsCommandOutput>;
+  listCustomDomainAssociations(
+    args: ListCustomDomainAssociationsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListCustomDomainAssociationsCommandOutput>;
+  listCustomDomainAssociations(
+    args: ListCustomDomainAssociationsCommandInput,
+    cb: (err: any, data?: ListCustomDomainAssociationsCommandOutput) => void
+  ): void;
+  listCustomDomainAssociations(
+    args: ListCustomDomainAssociationsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListCustomDomainAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEndpointAccessCommand}
+   */
+  listEndpointAccess(): Promise<ListEndpointAccessCommandOutput>;
+  listEndpointAccess(
+    args: ListEndpointAccessCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListEndpointAccessCommandOutput>;
+  listEndpointAccess(
+    args: ListEndpointAccessCommandInput,
+    cb: (err: any, data?: ListEndpointAccessCommandOutput) => void
+  ): void;
+  listEndpointAccess(
+    args: ListEndpointAccessCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListEndpointAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListManagedWorkgroupsCommand}
+   */
+  listManagedWorkgroups(): Promise<ListManagedWorkgroupsCommandOutput>;
+  listManagedWorkgroups(
+    args: ListManagedWorkgroupsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListManagedWorkgroupsCommandOutput>;
+  listManagedWorkgroups(
+    args: ListManagedWorkgroupsCommandInput,
+    cb: (err: any, data?: ListManagedWorkgroupsCommandOutput) => void
+  ): void;
+  listManagedWorkgroups(
+    args: ListManagedWorkgroupsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListManagedWorkgroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNamespacesCommand}
+   */
+  listNamespaces(): Promise<ListNamespacesCommandOutput>;
+  listNamespaces(
+    args: ListNamespacesCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListNamespacesCommandOutput>;
+  listNamespaces(
+    args: ListNamespacesCommandInput,
+    cb: (err: any, data?: ListNamespacesCommandOutput) => void
+  ): void;
+  listNamespaces(
+    args: ListNamespacesCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListNamespacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecoveryPointsCommand}
+   */
+  listRecoveryPoints(): Promise<ListRecoveryPointsCommandOutput>;
+  listRecoveryPoints(
+    args: ListRecoveryPointsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListRecoveryPointsCommandOutput>;
+  listRecoveryPoints(
+    args: ListRecoveryPointsCommandInput,
+    cb: (err: any, data?: ListRecoveryPointsCommandOutput) => void
+  ): void;
+  listRecoveryPoints(
+    args: ListRecoveryPointsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListRecoveryPointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReservationOfferingsCommand}
+   */
+  listReservationOfferings(): Promise<ListReservationOfferingsCommandOutput>;
+  listReservationOfferings(
+    args: ListReservationOfferingsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListReservationOfferingsCommandOutput>;
+  listReservationOfferings(
+    args: ListReservationOfferingsCommandInput,
+    cb: (err: any, data?: ListReservationOfferingsCommandOutput) => void
+  ): void;
+  listReservationOfferings(
+    args: ListReservationOfferingsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListReservationOfferingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReservationsCommand}
+   */
+  listReservations(): Promise<ListReservationsCommandOutput>;
+  listReservations(
+    args: ListReservationsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListReservationsCommandOutput>;
+  listReservations(
+    args: ListReservationsCommandInput,
+    cb: (err: any, data?: ListReservationsCommandOutput) => void
+  ): void;
+  listReservations(
+    args: ListReservationsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListReservationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScheduledActionsCommand}
+   */
+  listScheduledActions(): Promise<ListScheduledActionsCommandOutput>;
+  listScheduledActions(
+    args: ListScheduledActionsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListScheduledActionsCommandOutput>;
+  listScheduledActions(
+    args: ListScheduledActionsCommandInput,
+    cb: (err: any, data?: ListScheduledActionsCommandOutput) => void
+  ): void;
+  listScheduledActions(
+    args: ListScheduledActionsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListScheduledActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSnapshotCopyConfigurationsCommand}
+   */
+  listSnapshotCopyConfigurations(): Promise<ListSnapshotCopyConfigurationsCommandOutput>;
+  listSnapshotCopyConfigurations(
+    args: ListSnapshotCopyConfigurationsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListSnapshotCopyConfigurationsCommandOutput>;
+  listSnapshotCopyConfigurations(
+    args: ListSnapshotCopyConfigurationsCommandInput,
+    cb: (err: any, data?: ListSnapshotCopyConfigurationsCommandOutput) => void
+  ): void;
+  listSnapshotCopyConfigurations(
+    args: ListSnapshotCopyConfigurationsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListSnapshotCopyConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSnapshotsCommand}
+   */
+  listSnapshots(): Promise<ListSnapshotsCommandOutput>;
+  listSnapshots(
+    args: ListSnapshotsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListSnapshotsCommandOutput>;
+  listSnapshots(
+    args: ListSnapshotsCommandInput,
+    cb: (err: any, data?: ListSnapshotsCommandOutput) => void
+  ): void;
+  listSnapshots(
+    args: ListSnapshotsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListSnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTableRestoreStatusCommand}
+   */
+  listTableRestoreStatus(): Promise<ListTableRestoreStatusCommandOutput>;
+  listTableRestoreStatus(
+    args: ListTableRestoreStatusCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListTableRestoreStatusCommandOutput>;
+  listTableRestoreStatus(
+    args: ListTableRestoreStatusCommandInput,
+    cb: (err: any, data?: ListTableRestoreStatusCommandOutput) => void
+  ): void;
+  listTableRestoreStatus(
+    args: ListTableRestoreStatusCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListTableRestoreStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTracksCommand}
+   */
+  listTracks(): Promise<ListTracksCommandOutput>;
+  listTracks(
+    args: ListTracksCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListTracksCommandOutput>;
+  listTracks(
+    args: ListTracksCommandInput,
+    cb: (err: any, data?: ListTracksCommandOutput) => void
+  ): void;
+  listTracks(
+    args: ListTracksCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListTracksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUsageLimitsCommand}
+   */
+  listUsageLimits(): Promise<ListUsageLimitsCommandOutput>;
+  listUsageLimits(
+    args: ListUsageLimitsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListUsageLimitsCommandOutput>;
+  listUsageLimits(
+    args: ListUsageLimitsCommandInput,
+    cb: (err: any, data?: ListUsageLimitsCommandOutput) => void
+  ): void;
+  listUsageLimits(
+    args: ListUsageLimitsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListUsageLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkgroupsCommand}
+   */
+  listWorkgroups(): Promise<ListWorkgroupsCommandOutput>;
+  listWorkgroups(
+    args: ListWorkgroupsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListWorkgroupsCommandOutput>;
+  listWorkgroups(
+    args: ListWorkgroupsCommandInput,
+    cb: (err: any, data?: ListWorkgroupsCommandOutput) => void
+  ): void;
+  listWorkgroups(
+    args: ListWorkgroupsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListWorkgroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreFromRecoveryPointCommand}
+   */
+  restoreFromRecoveryPoint(
+    args: RestoreFromRecoveryPointCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<RestoreFromRecoveryPointCommandOutput>;
+  restoreFromRecoveryPoint(
+    args: RestoreFromRecoveryPointCommandInput,
+    cb: (err: any, data?: RestoreFromRecoveryPointCommandOutput) => void
+  ): void;
+  restoreFromRecoveryPoint(
+    args: RestoreFromRecoveryPointCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: RestoreFromRecoveryPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreFromSnapshotCommand}
+   */
+  restoreFromSnapshot(
+    args: RestoreFromSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<RestoreFromSnapshotCommandOutput>;
+  restoreFromSnapshot(
+    args: RestoreFromSnapshotCommandInput,
+    cb: (err: any, data?: RestoreFromSnapshotCommandOutput) => void
+  ): void;
+  restoreFromSnapshot(
+    args: RestoreFromSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: RestoreFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreTableFromRecoveryPointCommand}
+   */
+  restoreTableFromRecoveryPoint(
+    args: RestoreTableFromRecoveryPointCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<RestoreTableFromRecoveryPointCommandOutput>;
+  restoreTableFromRecoveryPoint(
+    args: RestoreTableFromRecoveryPointCommandInput,
+    cb: (err: any, data?: RestoreTableFromRecoveryPointCommandOutput) => void
+  ): void;
+  restoreTableFromRecoveryPoint(
+    args: RestoreTableFromRecoveryPointCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: RestoreTableFromRecoveryPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreTableFromSnapshotCommand}
+   */
+  restoreTableFromSnapshot(
+    args: RestoreTableFromSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<RestoreTableFromSnapshotCommandOutput>;
+  restoreTableFromSnapshot(
+    args: RestoreTableFromSnapshotCommandInput,
+    cb: (err: any, data?: RestoreTableFromSnapshotCommandOutput) => void
+  ): void;
+  restoreTableFromSnapshot(
+    args: RestoreTableFromSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: RestoreTableFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCustomDomainAssociationCommand}
+   */
+  updateCustomDomainAssociation(
+    args: UpdateCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateCustomDomainAssociationCommandOutput>;
+  updateCustomDomainAssociation(
+    args: UpdateCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: UpdateCustomDomainAssociationCommandOutput) => void
+  ): void;
+  updateCustomDomainAssociation(
+    args: UpdateCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEndpointAccessCommand}
+   */
+  updateEndpointAccess(
+    args: UpdateEndpointAccessCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateEndpointAccessCommandOutput>;
+  updateEndpointAccess(
+    args: UpdateEndpointAccessCommandInput,
+    cb: (err: any, data?: UpdateEndpointAccessCommandOutput) => void
+  ): void;
+  updateEndpointAccess(
+    args: UpdateEndpointAccessCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateEndpointAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLakehouseConfigurationCommand}
+   */
+  updateLakehouseConfiguration(
+    args: UpdateLakehouseConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateLakehouseConfigurationCommandOutput>;
+  updateLakehouseConfiguration(
+    args: UpdateLakehouseConfigurationCommandInput,
+    cb: (err: any, data?: UpdateLakehouseConfigurationCommandOutput) => void
+  ): void;
+  updateLakehouseConfiguration(
+    args: UpdateLakehouseConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateLakehouseConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNamespaceCommand}
+   */
+  updateNamespace(
+    args: UpdateNamespaceCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateNamespaceCommandOutput>;
+  updateNamespace(
+    args: UpdateNamespaceCommandInput,
+    cb: (err: any, data?: UpdateNamespaceCommandOutput) => void
+  ): void;
+  updateNamespace(
+    args: UpdateNamespaceCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateScheduledActionCommand}
+   */
+  updateScheduledAction(
+    args: UpdateScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateScheduledActionCommandOutput>;
+  updateScheduledAction(
+    args: UpdateScheduledActionCommandInput,
+    cb: (err: any, data?: UpdateScheduledActionCommandOutput) => void
+  ): void;
+  updateScheduledAction(
+    args: UpdateScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSnapshotCommand}
+   */
+  updateSnapshot(
+    args: UpdateSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateSnapshotCommandOutput>;
+  updateSnapshot(
+    args: UpdateSnapshotCommandInput,
+    cb: (err: any, data?: UpdateSnapshotCommandOutput) => void
+  ): void;
+  updateSnapshot(
+    args: UpdateSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSnapshotCopyConfigurationCommand}
+   */
+  updateSnapshotCopyConfiguration(
+    args: UpdateSnapshotCopyConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateSnapshotCopyConfigurationCommandOutput>;
+  updateSnapshotCopyConfiguration(
+    args: UpdateSnapshotCopyConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+  updateSnapshotCopyConfiguration(
+    args: UpdateSnapshotCopyConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUsageLimitCommand}
+   */
+  updateUsageLimit(
+    args: UpdateUsageLimitCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateUsageLimitCommandOutput>;
+  updateUsageLimit(
+    args: UpdateUsageLimitCommandInput,
+    cb: (err: any, data?: UpdateUsageLimitCommandOutput) => void
+  ): void;
+  updateUsageLimit(
+    args: UpdateUsageLimitCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateUsageLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkgroupCommand}
+   */
+  updateWorkgroup(
+    args: UpdateWorkgroupCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateWorkgroupCommandOutput>;
+  updateWorkgroup(
+    args: UpdateWorkgroupCommandInput,
+    cb: (err: any, data?: UpdateWorkgroupCommandOutput) => void
+  ): void;
+  updateWorkgroup(
+    args: UpdateWorkgroupCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateWorkgroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomDomainAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomDomainAssociationsCommandOutput}.
+   */
+  paginateListCustomDomainAssociations(
+    args?: ListCustomDomainAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomDomainAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListEndpointAccessCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEndpointAccessCommandOutput}.
+   */
+  paginateListEndpointAccess(
+    args?: ListEndpointAccessCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEndpointAccessCommandOutput>;
+
+  /**
+   * @see {@link ListManagedWorkgroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListManagedWorkgroupsCommandOutput}.
+   */
+  paginateListManagedWorkgroups(
+    args?: ListManagedWorkgroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListManagedWorkgroupsCommandOutput>;
+
+  /**
+   * @see {@link ListNamespacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNamespacesCommandOutput}.
+   */
+  paginateListNamespaces(
+    args?: ListNamespacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNamespacesCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryPointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryPointsCommandOutput}.
+   */
+  paginateListRecoveryPoints(
+    args?: ListRecoveryPointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryPointsCommandOutput>;
+
+  /**
+   * @see {@link ListReservationOfferingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReservationOfferingsCommandOutput}.
+   */
+  paginateListReservationOfferings(
+    args?: ListReservationOfferingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReservationOfferingsCommandOutput>;
+
+  /**
+   * @see {@link ListReservationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReservationsCommandOutput}.
+   */
+  paginateListReservations(
+    args?: ListReservationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReservationsCommandOutput>;
+
+  /**
+   * @see {@link ListScheduledActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScheduledActionsCommandOutput}.
+   */
+  paginateListScheduledActions(
+    args?: ListScheduledActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScheduledActionsCommandOutput>;
+
+  /**
+   * @see {@link ListSnapshotCopyConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSnapshotCopyConfigurationsCommandOutput}.
+   */
+  paginateListSnapshotCopyConfigurations(
+    args?: ListSnapshotCopyConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSnapshotCopyConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListSnapshotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSnapshotsCommandOutput}.
+   */
+  paginateListSnapshots(
+    args?: ListSnapshotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSnapshotsCommandOutput>;
+
+  /**
+   * @see {@link ListTableRestoreStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTableRestoreStatusCommandOutput}.
+   */
+  paginateListTableRestoreStatus(
+    args?: ListTableRestoreStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTableRestoreStatusCommandOutput>;
+
+  /**
+   * @see {@link ListTracksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTracksCommandOutput}.
+   */
+  paginateListTracks(
+    args?: ListTracksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTracksCommandOutput>;
+
+  /**
+   * @see {@link ListUsageLimitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsageLimitsCommandOutput}.
+   */
+  paginateListUsageLimits(
+    args?: ListUsageLimitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsageLimitsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkgroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkgroupsCommandOutput}.
+   */
+  paginateListWorkgroups(
+    args?: ListWorkgroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkgroupsCommandOutput>;
+}
+
+/**
+ * <p>This is an interface reference for Amazon Redshift Serverless. It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless. </p> <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you focus on using your data to acquire new insights for your business and customers. </p> <p> To learn more about Amazon Redshift Serverless, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html">What is Amazon Redshift Serverless?</a>.</p>
+ * @public
+ */
+export class RedshiftServerless extends RedshiftServerlessClient implements RedshiftServerless {}
+createAggregatedClient(commands, RedshiftServerless, { paginators });

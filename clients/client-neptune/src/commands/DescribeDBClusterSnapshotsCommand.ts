@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DBClusterSnapshotMessage, DescribeDBClusterSnapshotsMessage } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryDescribeDBClusterSnapshotsCommand,
-  serializeAws_queryDescribeDBClusterSnapshotsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DBClusterSnapshotMessage, DescribeDBClusterSnapshotsMessage } from "../models/models_0";
+import { DescribeDBClusterSnapshots$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDBClusterSnapshotsCommand}.
+ */
 export interface DescribeDBClusterSnapshotsCommandInput extends DescribeDBClusterSnapshotsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDBClusterSnapshotsCommand}.
+ */
 export interface DescribeDBClusterSnapshotsCommandOutput extends DBClusterSnapshotMessage, __MetadataBearer {}
 
 /**
@@ -29,71 +30,93 @@ export interface DescribeDBClusterSnapshotsCommandOutput extends DBClusterSnapsh
  * ```javascript
  * import { NeptuneClient, DescribeDBClusterSnapshotsCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, DescribeDBClusterSnapshotsCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // DescribeDBClusterSnapshotsMessage
+ *   DBClusterIdentifier: "STRING_VALUE",
+ *   DBClusterSnapshotIdentifier: "STRING_VALUE",
+ *   SnapshotType: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ *   IncludeShared: true || false,
+ *   IncludePublic: true || false,
+ * };
  * const command = new DescribeDBClusterSnapshotsCommand(input);
  * const response = await client.send(command);
+ * // { // DBClusterSnapshotMessage
+ * //   Marker: "STRING_VALUE",
+ * //   DBClusterSnapshots: [ // DBClusterSnapshotList
+ * //     { // DBClusterSnapshot
+ * //       AvailabilityZones: [ // AvailabilityZones
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       DBClusterSnapshotIdentifier: "STRING_VALUE",
+ * //       DBClusterIdentifier: "STRING_VALUE",
+ * //       SnapshotCreateTime: new Date("TIMESTAMP"),
+ * //       Engine: "STRING_VALUE",
+ * //       AllocatedStorage: Number("int"),
+ * //       Status: "STRING_VALUE",
+ * //       Port: Number("int"),
+ * //       VpcId: "STRING_VALUE",
+ * //       ClusterCreateTime: new Date("TIMESTAMP"),
+ * //       MasterUsername: "STRING_VALUE",
+ * //       EngineVersion: "STRING_VALUE",
+ * //       LicenseModel: "STRING_VALUE",
+ * //       SnapshotType: "STRING_VALUE",
+ * //       PercentProgress: Number("int"),
+ * //       StorageEncrypted: true || false,
+ * //       KmsKeyId: "STRING_VALUE",
+ * //       DBClusterSnapshotArn: "STRING_VALUE",
+ * //       SourceDBClusterSnapshotArn: "STRING_VALUE",
+ * //       IAMDatabaseAuthenticationEnabled: true || false,
+ * //       StorageType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeDBClusterSnapshotsCommandInput - {@link DescribeDBClusterSnapshotsCommandInput}
+ * @returns {@link DescribeDBClusterSnapshotsCommandOutput}
  * @see {@link DescribeDBClusterSnapshotsCommandInput} for command's `input` shape.
  * @see {@link DescribeDBClusterSnapshotsCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBClusterSnapshotNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBClusterSnapshotIdentifier</i> does not refer to an existing
+ *       DB cluster snapshot.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDBClusterSnapshotsCommand extends $Command<
-  DescribeDBClusterSnapshotsCommandInput,
-  DescribeDBClusterSnapshotsCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDBClusterSnapshotsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDBClusterSnapshotsCommandInput, DescribeDBClusterSnapshotsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "DescribeDBClusterSnapshotsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDBClusterSnapshotsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DBClusterSnapshotMessage.filterSensitiveLog,
+export class DescribeDBClusterSnapshotsCommand extends command<DescribeDBClusterSnapshotsCommandInput, DescribeDBClusterSnapshotsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDBClusterSnapshots",
+  DescribeDBClusterSnapshots$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDBClusterSnapshotsMessage;
+      output: DBClusterSnapshotMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDBClusterSnapshotsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeDBClusterSnapshotsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDBClusterSnapshotsCommandOutput> {
-    return deserializeAws_queryDescribeDBClusterSnapshotsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDBClusterSnapshotsCommandInput;
+      output: DescribeDBClusterSnapshotsCommandOutput;
+    };
+  };
 }

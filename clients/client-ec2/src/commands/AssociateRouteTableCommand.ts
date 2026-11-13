@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AssociateRouteTableRequest, AssociateRouteTableResult } from "../models/models_0";
-import {
-  deserializeAws_ec2AssociateRouteTableCommand,
-  serializeAws_ec2AssociateRouteTableCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateRouteTableRequest, AssociateRouteTableResult } from "../models/models_0";
+import { AssociateRouteTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateRouteTableCommand}.
+ */
 export interface AssociateRouteTableCommandInput extends AssociateRouteTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateRouteTableCommand}.
+ */
 export interface AssociateRouteTableCommandOutput extends AssociateRouteTableResult, __MetadataBearer {}
 
 /**
@@ -27,75 +28,78 @@ export interface AssociateRouteTableCommandOutput extends AssociateRouteTableRes
  *             from the subnet or gateway to be routed according to the routes in the route table. The
  *             action returns an association ID, which you need in order to disassociate the route
  *             table later. A route table can be associated with multiple subnets.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the
- *                 <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route tables</a> in the
+ *                 <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, AssociateRouteTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AssociateRouteTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AssociateRouteTableRequest
+ *   GatewayId: "STRING_VALUE",
+ *   PublicIpv4Pool: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   SubnetId: "STRING_VALUE",
+ *   RouteTableId: "STRING_VALUE", // required
+ * };
  * const command = new AssociateRouteTableCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateRouteTableResult
+ * //   AssociationId: "STRING_VALUE",
+ * //   AssociationState: { // RouteTableAssociationState
+ * //     State: "associating" || "associated" || "disassociating" || "disassociated" || "failed",
+ * //     StatusMessage: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AssociateRouteTableCommandInput - {@link AssociateRouteTableCommandInput}
+ * @returns {@link AssociateRouteTableCommandOutput}
  * @see {@link AssociateRouteTableCommandInput} for command's `input` shape.
  * @see {@link AssociateRouteTableCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To associate a route table with a subnet
+ * ```javascript
+ * // This example associates the specified route table with the specified subnet.
+ * const input = {
+ *   RouteTableId: "rtb-22574640",
+ *   SubnetId: "subnet-9d4a7b6"
+ * };
+ * const command = new AssociateRouteTableCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AssociationId: "rtbassoc-781d0d1a"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class AssociateRouteTableCommand extends $Command<
-  AssociateRouteTableCommandInput,
-  AssociateRouteTableCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateRouteTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateRouteTableCommandInput, AssociateRouteTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AssociateRouteTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateRouteTableRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateRouteTableResult.filterSensitiveLog,
+export class AssociateRouteTableCommand extends command<AssociateRouteTableCommandInput, AssociateRouteTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateRouteTable",
+  AssociateRouteTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateRouteTableRequest;
+      output: AssociateRouteTableResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateRouteTableCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2AssociateRouteTableCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateRouteTableCommandOutput> {
-    return deserializeAws_ec2AssociateRouteTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateRouteTableCommandInput;
+      output: AssociateRouteTableCommandOutput;
+    };
+  };
 }

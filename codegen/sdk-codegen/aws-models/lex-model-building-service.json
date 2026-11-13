@@ -1,5 +1,5 @@
 {
-  "smithy": "1.0",
+  "smithy": "2.0",
   "metadata": {
     "suppressions": [
       {
@@ -166,6 +166,7 @@
           "arnNamespace": "lex",
           "cloudFormationName": "LexModelBuildingService",
           "cloudTrailEventSource": "lexmodelbuildingservice.amazonaws.com",
+          "docId": "lex-models-2017-04-19",
           "endpointPrefix": "models.lex"
         },
         "aws.auth#sigv4": {
@@ -173,7 +174,1057 @@
         },
         "aws.protocols#restJson1": {},
         "smithy.api#documentation": "<fullname>Amazon Lex Build-Time Actions</fullname>\n         <p> Amazon Lex is an AWS service for building conversational voice and text\n      interfaces. Use these actions to create, update, and delete conversational\n      bots for new and existing client applications. </p>",
-        "smithy.api#title": "Amazon Lex Model Building Service"
+        "smithy.api#title": "Amazon Lex Model Building Service",
+        "smithy.rules#endpointBdd": {
+          "version": "1.1",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Endpoint"
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ]
+            },
+            {
+              "fn": "aws.partition",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ],
+              "assign": "PartitionResult"
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseFIPS"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseDualStack"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsDualStack"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsFIPS"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "stringEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "name"
+                  ]
+                },
+                "aws"
+              ]
+            },
+            {
+              "fn": "stringEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "name"
+                  ]
+                },
+                "aws-us-gov"
+              ]
+            }
+          ],
+          "results": [
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": {
+                  "ref": "Endpoint"
+                },
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://models.lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://models-fips.lex.{Region}.amazonaws.com",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://models.lex-fips.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS is enabled but this partition does not support FIPS",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://models.lex.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "DualStack is enabled but this partition does not support DualStack",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://models.lex.{Region}.amazonaws.com",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://models.lex.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ],
+          "root": 2,
+          "nodeCount": 17,
+          "nodes": "/////wAAAAH/////AAAAAAAAABAAAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAoAAAAGAAAABAAAAAkAAAAHAAAABwX14QsAAAAIAAAACAX14QsF9eEMAAAABQX14QkF9eEKAAAABAAAAA4AAAALAAAABgAAAAwF9eEIAAAABwX14QYAAAANAAAACAX14QYF9eEHAAAABQAAAA8F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAARAAAABAX14QIF9eED"
+        },
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseDualStack"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Region"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "aws.partition",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ],
+                      "assign": "PartitionResult"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        },
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://models.lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                      ]
+                                    },
+                                    "aws"
+                                  ]
+                                }
+                              ],
+                              "endpoint": {
+                                "url": "https://models-fips.lex.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            },
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                      ]
+                                    },
+                                    "aws-us-gov"
+                                  ]
+                                }
+                              ],
+                              "endpoint": {
+                                "url": "https://models-fips.lex.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            },
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://models.lex-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS is enabled but this partition does not support FIPS",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://models.lex.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "DualStack is enabled but this partition does not support DualStack",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "stringEquals",
+                          "argv": [
+                            "aws",
+                            {
+                              "fn": "getAttr",
+                              "argv": [
+                                {
+                                  "ref": "PartitionResult"
+                                },
+                                "name"
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "endpoint": {
+                        "url": "https://models.lex.{Region}.amazonaws.com",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "stringEquals",
+                          "argv": [
+                            "aws-us-gov",
+                            {
+                              "fn": "getAttr",
+                              "argv": [
+                                {
+                                  "ref": "PartitionResult"
+                                },
+                                "name"
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "endpoint": {
+                        "url": "https://models.lex.{Region}.amazonaws.com",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": "https://models.lex.{Region}.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.ap-southeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.eu-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.eu-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models-fips.lex.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models-fips.lex.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex-fips.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex-fips.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-gov-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models-fips.lex.us-gov-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex-fips.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models-fips.lex.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://models.lex.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#AccessDeniedException": {
@@ -235,10 +1286,7 @@
       "type": "blob"
     },
     "com.amazonaws.lexmodelbuildingservice#Boolean": {
-      "type": "boolean",
-      "traits": {
-        "smithy.api#box": {}
-      }
+      "type": "boolean"
     },
     "com.amazonaws.lexmodelbuildingservice#BotAliasMetadata": {
       "type": "structure",
@@ -326,7 +1374,7 @@
         "botName": {
           "target": "com.amazonaws.lexmodelbuildingservice#BotName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the Amazon Lex bot to which this association is being made. </p>\n         <note>\n            <p>Currently, Amazon Lex supports associations with Facebook and Slack,\n        and Twilio.</p>\n\n         </note>"
+            "smithy.api#documentation": "<p>The name of the Amazon Lex bot to which this association is being made. </p>\n         <note>\n            <p>Currently, Amazon Lex supports associations with Facebook and Slack,\n        and Twilio.</p>\n         </note>"
           }
         },
         "createdDate": {
@@ -547,45 +1595,55 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ChannelStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "CREATED",
-            "name": "CREATED"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
+      "type": "enum",
+      "members": {
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
           }
-        ]
+        },
+        "CREATED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CREATED"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ChannelType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "Facebook",
-            "name": "FACEBOOK"
-          },
-          {
-            "value": "Slack",
-            "name": "SLACK"
-          },
-          {
-            "value": "Twilio-Sms",
-            "name": "TWILIO_SMS"
-          },
-          {
-            "value": "Kik",
-            "name": "KIK"
+      "type": "enum",
+      "members": {
+        "FACEBOOK": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Facebook"
           }
-        ]
+        },
+        "SLACK": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Slack"
+          }
+        },
+        "TWILIO_SMS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Twilio-Sms"
+          }
+        },
+        "KIK": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Kik"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CodeHook": {
@@ -613,7 +1671,6 @@
     "com.amazonaws.lexmodelbuildingservice#ConfidenceThreshold": {
       "type": "double",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0,
           "max": 1
@@ -643,28 +1700,31 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ContentType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "PlainText",
-            "name": "PLAIN_TEXT"
-          },
-          {
-            "value": "SSML",
-            "name": "SSML"
-          },
-          {
-            "value": "CustomPayload",
-            "name": "CUSTOM_PAYLOAD"
+      "type": "enum",
+      "members": {
+        "PLAIN_TEXT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PlainText"
           }
-        ]
+        },
+        "SSML": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SSML"
+          }
+        },
+        "CUSTOM_PAYLOAD": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CustomPayload"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ContextTimeToLiveInSeconds": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 5,
           "max": 86400
@@ -674,7 +1734,6 @@
     "com.amazonaws.lexmodelbuildingservice#ContextTurnsToLive": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 20
@@ -724,10 +1783,7 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Count": {
-      "type": "integer",
-      "traits": {
-        "smithy.api#box": {}
-      }
+      "type": "integer"
     },
     "com.amazonaws.lexmodelbuildingservice#CreateBotVersion": {
       "type": "operation",
@@ -758,6 +1814,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Creates a new version of the bot based on the <code>$LATEST</code>\n      version. If the <code>$LATEST</code> version of this resource hasn't\n      changed since you created the last version, Amazon Lex doesn't create a new\n      version. It returns the last created version.</p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of the bot.\n        You can't update the numbered versions that you create with the\n          <code>CreateBotVersion</code> operation.</p>\n         </note>\n         <p> When you create the first version of a bot, Amazon Lex sets the version\n      to 1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n         <p> This operation requires permission for the\n        <code>lex:CreateBotVersion</code> action. </p>",
         "smithy.api#http": {
           "method": "POST",
@@ -783,6 +1843,13 @@
             "smithy.api#documentation": "<p>Identifies a specific revision of the <code>$LATEST</code> version\n      of the bot. If you specify a checksum and the <code>$LATEST</code> version\n      of the bot has a different checksum, a\n        <code>PreconditionFailedException</code> exception is returned and Amazon Lex\n      doesn't publish a new version. If you don't specify a checksum, Amazon Lex\n      publishes the <code>$LATEST</code> version.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CreateBotVersionResponse": {
@@ -890,6 +1957,13 @@
             "smithy.api#documentation": "<p>Indicates whether utterances entered by the user should be sent to\n      Amazon Comprehend for sentiment analysis.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CreateIntentVersion": {
@@ -921,6 +1995,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Creates a new version of an intent based on the\n        <code>$LATEST</code> version of the intent. If the <code>$LATEST</code>\n      version of this intent hasn't changed since you last updated it, Amazon Lex\n      doesn't create a new version. It returns the last version you\n      created.</p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of the\n        intent. You can't update the numbered versions that you create with the\n          <code>CreateIntentVersion</code> operation.</p>\n         </note>\n         <p> When you create a version of an intent, Amazon Lex sets the version to\n      1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n         <p>This operation requires permissions to perform the\n        <code>lex:CreateIntentVersion</code> action. </p>",
         "smithy.api#http": {
           "method": "POST",
@@ -946,6 +2024,13 @@
             "smithy.api#documentation": "<p>Checksum of the <code>$LATEST</code> version of the intent that\n      should be used to create the new version. If you specify a checksum and\n      the <code>$LATEST</code> version of the intent has a different checksum,\n      Amazon Lex returns a <code>PreconditionFailedException</code> exception and\n      doesn't publish a new version. If you don't specify a checksum, Amazon Lex\n      publishes the <code>$LATEST</code> version.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CreateIntentVersionResponse": {
@@ -1059,6 +2144,13 @@
             "smithy.api#documentation": "<p>An array of <code>OutputContext</code> objects that lists the contexts\n      that the intent activates when the intent is fulfilled.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersion": {
@@ -1090,7 +2182,11 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a new version of a slot type based on the\n        <code>$LATEST</code> version of the specified slot type. If the\n        <code>$LATEST</code> version of this resource has not changed since the\n      last version that you created, Amazon Lex doesn't create a new version. It\n      returns the last version that you created. </p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of a slot\n        type. You can't update the numbered versions that you create with the\n          <code>CreateSlotTypeVersion</code> operation.</p>\n         </note>\n\n         <p>When you create a version of a slot type, Amazon Lex sets the version to\n      1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n\n         <p>This operation requires permissions for the\n        <code>lex:CreateSlotTypeVersion</code> action.</p>",
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Creates a new version of a slot type based on the\n        <code>$LATEST</code> version of the specified slot type. If the\n        <code>$LATEST</code> version of this resource has not changed since the\n      last version that you created, Amazon Lex doesn't create a new version. It\n      returns the last version that you created. </p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of a slot\n        type. You can't update the numbered versions that you create with the\n          <code>CreateSlotTypeVersion</code> operation.</p>\n         </note>\n         <p>When you create a version of a slot type, Amazon Lex sets the version to\n      1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n         <p>This operation requires permissions for the\n        <code>lex:CreateSlotTypeVersion</code> action.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/slottypes/{name}/versions",
@@ -1115,6 +2211,13 @@
             "smithy.api#documentation": "<p>Checksum for the <code>$LATEST</code> version of the slot type that\n      you want to publish. If you specify a checksum and the\n        <code>$LATEST</code> version of the slot type has a different checksum,\n      Amazon Lex returns a <code>PreconditionFailedException</code> exception and\n      doesn't publish the new version. If you don't specify a checksum, Amazon Lex\n      publishes the <code>$LATEST</code> version.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersionResponse": {
@@ -1180,6 +2283,13 @@
             "smithy.api#documentation": "<p>Configuration information that extends the parent built-in slot\n      type.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#CustomOrBuiltinSlotTypeName": {
@@ -1197,39 +2307,8 @@
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteBotRequest"
       },
-      "errors": [
-        {
-          "target": "com.amazonaws.lexmodelbuildingservice#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.lexmodelbuildingservice#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.lexmodelbuildingservice#InternalFailureException"
-        },
-        {
-          "target": "com.amazonaws.lexmodelbuildingservice#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.lexmodelbuildingservice#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.lexmodelbuildingservice#ResourceInUseException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Deletes all versions of the bot, including the <code>$LATEST</code>\n      version. To delete a specific version of the bot, use the <a>DeleteBotVersion</a> operation. The <code>DeleteBot</code>\n      operation doesn't immediately remove the bot schema. Instead, it is marked\n      for deletion and removed later.</p>\n         <p>Amazon Lex stores utterances indefinitely for improving the ability of\n      your bot to respond to user inputs. These utterances are not removed when\n      the bot is deleted. To remove the utterances, use the <a>DeleteUtterances</a> operation.</p>\n         <p>If a bot has an alias, you can't delete it. Instead, the\n        <code>DeleteBot</code> operation returns a\n        <code>ResourceInUseException</code> exception that includes a reference\n      to the alias that refers to the bot. To remove the reference to the bot,\n      delete the alias. If you get the same exception again, delete the\n      referring alias until the <code>DeleteBot</code> operation is\n      successful.</p>\n\n         <p>This operation requires permissions for the\n        <code>lex:DeleteBot</code> action.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/bots/{name}",
-          "code": 204
-        }
-      }
-    },
-    "com.amazonaws.lexmodelbuildingservice#DeleteBotAlias": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.lexmodelbuildingservice#DeleteBotAliasRequest"
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1252,6 +2331,51 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Deletes all versions of the bot, including the <code>$LATEST</code>\n      version. To delete a specific version of the bot, use the <a>DeleteBotVersion</a> operation. The <code>DeleteBot</code>\n      operation doesn't immediately remove the bot schema. Instead, it is marked\n      for deletion and removed later.</p>\n         <p>Amazon Lex stores utterances indefinitely for improving the ability of\n      your bot to respond to user inputs. These utterances are not removed when\n      the bot is deleted. To remove the utterances, use the <a>DeleteUtterances</a> operation.</p>\n         <p>If a bot has an alias, you can't delete it. Instead, the\n        <code>DeleteBot</code> operation returns a\n        <code>ResourceInUseException</code> exception that includes a reference\n      to the alias that refers to the bot. To remove the reference to the bot,\n      delete the alias. If you get the same exception again, delete the\n      referring alias until the <code>DeleteBot</code> operation is\n      successful.</p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteBot</code> action.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/bots/{name}",
+          "code": 204
+        }
+      }
+    },
+    "com.amazonaws.lexmodelbuildingservice#DeleteBotAlias": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lexmodelbuildingservice#DeleteBotAliasRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lexmodelbuildingservice#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.lexmodelbuildingservice#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.lexmodelbuildingservice#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.lexmodelbuildingservice#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.lexmodelbuildingservice#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lexmodelbuildingservice#ResourceInUseException"
+        }
+      ],
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes an alias for the specified bot. </p>\n         <p>You can't delete an alias that is used in the association between a\n      bot and a messaging channel. If an alias is used in a channel association,\n      the <code>DeleteBot</code> operation returns a\n        <code>ResourceInUseException</code> exception that includes a reference\n      to the channel association that refers to the bot. You can remove the\n      reference to the alias by deleting the channel association. If you get the\n      same exception again, delete the referring association until the\n        <code>DeleteBotAlias</code> operation is successful.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1279,12 +2403,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteBotChannelAssociation": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteBotChannelAssociationRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1304,6 +2438,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes the association between an Amazon Lex bot and a messaging\n      platform.</p>\n         <p>This operation requires permission for the\n        <code>lex:DeleteBotChannelAssociation</code> action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1339,6 +2477,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteBotRequest": {
@@ -1352,12 +2497,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteBotVersion": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteBotVersionRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1380,6 +2535,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes a specific version of a bot. To delete all versions of a\n      bot, use the <a>DeleteBot</a> operation. </p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteBotVersion</code> action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1407,12 +2566,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteIntent": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteIntentRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1435,7 +2604,11 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Deletes all versions of the intent, including the\n        <code>$LATEST</code> version. To delete a specific version of the\n      intent, use the <a>DeleteIntentVersion</a> operation.</p>\n         <p> You can delete a version of an intent only if it is not\n      referenced. To delete an intent that is referred to in one or more bots\n      (see <a>how-it-works</a>), you must remove those references\n      first. </p>\n         <note>\n            <p> If you get the <code>ResourceInUseException</code> exception, it\n        provides an example reference that shows where the intent is referenced.\n        To remove the reference to the intent, either update the bot or delete\n        it. If you get the same exception when you attempt to delete the intent\n        again, repeat until the intent has no references and the call to\n          <code>DeleteIntent</code> is successful. </p>\n         </note>\n\n         <p> This operation requires permission for the\n        <code>lex:DeleteIntent</code> action. </p>",
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Deletes all versions of the intent, including the\n        <code>$LATEST</code> version. To delete a specific version of the\n      intent, use the <a>DeleteIntentVersion</a> operation.</p>\n         <p> You can delete a version of an intent only if it is not\n      referenced. To delete an intent that is referred to in one or more bots\n      (see <a>how-it-works</a>), you must remove those references\n      first. </p>\n         <note>\n            <p> If you get the <code>ResourceInUseException</code> exception, it\n        provides an example reference that shows where the intent is referenced.\n        To remove the reference to the intent, either update the bot or delete\n        it. If you get the same exception when you attempt to delete the intent\n        again, repeat until the intent has no references and the call to\n          <code>DeleteIntent</code> is successful. </p>\n         </note>\n         <p> This operation requires permission for the\n        <code>lex:DeleteIntent</code> action. </p>",
         "smithy.api#http": {
           "method": "DELETE",
           "uri": "/intents/{name}",
@@ -1454,12 +2627,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteIntentVersion": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteIntentVersionRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1482,6 +2665,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes a specific version of an intent. To delete all versions of\n      a intent, use the <a>DeleteIntent</a> operation. </p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteIntentVersion</code> action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1509,12 +2696,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteSlotType": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1537,6 +2734,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes all versions of the slot type, including the\n        <code>$LATEST</code> version. To delete a specific version of the slot\n      type, use the <a>DeleteSlotTypeVersion</a> operation.</p>\n         <p> You can delete a version of a slot type only if it is not\n      referenced. To delete a slot type that is referred to in one or more\n      intents, you must remove those references first. </p>\n         <note>\n            <p> If you get the <code>ResourceInUseException</code> exception,\n        the exception provides an example reference that shows the intent where\n        the slot type is referenced. To remove the reference to the slot type,\n        either update the intent or delete it. If you get the same exception\n        when you attempt to delete the slot type again, repeat until the slot\n        type has no references and the <code>DeleteSlotType</code> call is\n        successful. </p>\n         </note>\n         <p>This operation requires permission for the\n        <code>lex:DeleteSlotType</code> action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1556,12 +2757,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeVersion": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeVersionRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1584,6 +2795,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes a specific version of a slot type. To delete all versions\n      of a slot type, use the <a>DeleteSlotType</a> operation. </p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteSlotTypeVersion</code> action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1611,12 +2826,22 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#DeleteUtterances": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.lexmodelbuildingservice#DeleteUtterancesRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1633,6 +2858,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n      are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinitely for use in improving the\n      ability of your bot to respond to user input.</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n      stored utterances for a specific user. When you use the\n        <code>DeleteUtterances</code> operation, utterances stored for improving\n      your bot's ability to respond to user input are deleted immediately.\n      Utterances stored for use with the <code>GetUtterancesView</code>\n      operation are deleted after 15 days.</p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteUtterances</code> action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -1660,6 +2889,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Description": {
@@ -1672,18 +2908,20 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Destination": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "CLOUDWATCH_LOGS",
-            "name": "CLOUDWATCH_LOGS"
-          },
-          {
-            "value": "S3",
-            "name": "S3"
+      "type": "enum",
+      "members": {
+        "CLOUDWATCH_LOGS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CLOUDWATCH_LOGS"
           }
-        ]
+        },
+        "S3": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "S3"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#EnumerationValue": {
@@ -1720,37 +2958,43 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ExportStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "READY",
-            "name": "READY"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
+      "type": "enum",
+      "members": {
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
           }
-        ]
+        },
+        "READY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "READY"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ExportType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "ALEXA_SKILLS_KIT",
-            "name": "ALEXA_SKILLS_KIT"
-          },
-          {
-            "value": "LEX",
-            "name": "LEX"
+      "type": "enum",
+      "members": {
+        "ALEXA_SKILLS_KIT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ALEXA_SKILLS_KIT"
           }
-        ]
+        },
+        "LEX": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "LEX"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#FollowUpPrompt": {
@@ -1793,22 +3037,24 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p> Describes how the intent is fulfilled after the user provides all\n      of the information required for the intent. You can provide a Lambda\n      function to process the intent, or you can return the intent information\n      to the client application. We recommend that you use a Lambda function so\n      that the relevant logic lives in the Cloud and limit the client-side code\n      primarily to presentation. If you need to update the logic, you only\n      update the Lambda function; you don't need to upgrade your client\n      application. </p>\n\n\n         <p>Consider the following examples:</p>\n         <ul>\n            <li>\n               <p>In a pizza ordering application, after the user provides all of\n          the information for placing an order, you use a Lambda function to\n          place an order with a pizzeria. </p>\n            </li>\n            <li>\n               <p>In a gaming application, when a user says \"pick up a rock,\"\n          this information must go back to the client application so that it can\n          perform the operation and update the graphics. In this case, you want\n          Amazon Lex to return the intent data to the client. </p>\n            </li>\n         </ul>"
+        "smithy.api#documentation": "<p> Describes how the intent is fulfilled after the user provides all\n      of the information required for the intent. You can provide a Lambda\n      function to process the intent, or you can return the intent information\n      to the client application. We recommend that you use a Lambda function so\n      that the relevant logic lives in the Cloud and limit the client-side code\n      primarily to presentation. If you need to update the logic, you only\n      update the Lambda function; you don't need to upgrade your client\n      application. </p>\n         <p>Consider the following examples:</p>\n         <ul>\n            <li>\n               <p>In a pizza ordering application, after the user provides all of\n          the information for placing an order, you use a Lambda function to\n          place an order with a pizzeria. </p>\n            </li>\n            <li>\n               <p>In a gaming application, when a user says \"pick up a rock,\"\n          this information must go back to the client application so that it can\n          perform the operation and update the graphics. In this case, you want\n          Amazon Lex to return the intent data to the client. </p>\n            </li>\n         </ul>"
       }
     },
     "com.amazonaws.lexmodelbuildingservice#FulfillmentActivityType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "ReturnIntent",
-            "name": "RETURN_INTENT"
-          },
-          {
-            "value": "CodeHook",
-            "name": "CODE_HOOK"
+      "type": "enum",
+      "members": {
+        "RETURN_INTENT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ReturnIntent"
           }
-        ]
+        },
+        "CODE_HOOK": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CodeHook"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBot": {
@@ -1834,7 +3080,64 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns metadata information for a specific bot. You must provide\n      the bot name and the bot version or alias. </p>\n         <p> This operation requires permissions for the\n        <code>lex:GetBot</code> action. </p>",
+        "smithy.api#examples": [
+          {
+            "title": "To get information about a bot",
+            "documentation": "This example shows how to get configuration information for a bot.",
+            "input": {
+              "name": "DocOrderPizza",
+              "versionOrAlias": "$LATEST"
+            },
+            "output": {
+              "status": "NOT_BUILT",
+              "intents": [
+                {
+                  "intentVersion": "$LATEST",
+                  "intentName": "DocOrderPizza"
+                }
+              ],
+              "name": "DocOrderPizzaBot",
+              "locale": "en-US",
+              "checksum": "20172ee3-fa06-49b2-bbc5-667c090303e9",
+              "abortStatement": {
+                "messages": [
+                  {
+                    "content": "I don't understand. Can you try again?",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "I'm sorry, I don't understand.",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "version": "$LATEST",
+              "lastUpdatedDate": 1.494360160133e9,
+              "createdDate": 1.494360160133e9,
+              "clarificationPrompt": {
+                "maxAttempts": 1,
+                "messages": [
+                  {
+                    "content": "I'm sorry, I didn't hear that. Can you repeate what you just said?",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "Can you say that again?",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "childDirected": true,
+              "idleSessionTTLInSeconds": 300,
+              "description": "Orders a pizza from a local pizzeria."
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "GET",
           "uri": "/bots/{name}/versions/{versionOrAlias}",
@@ -1865,6 +3168,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns information about an Amazon Lex bot alias. For more information\n      about aliases, see <a>versioning-aliases</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotAlias</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -1892,6 +3199,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotAliasResponse": {
@@ -1945,6 +3259,13 @@
             "smithy.api#documentation": "<p>The settings that determine how Amazon Lex uses conversation logs for the\n      alias.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotAliases": {
@@ -1967,6 +3288,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns a list of aliases for a specified Amazon Lex bot.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotAliases</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2012,6 +3337,13 @@
             "smithy.api#httpQuery": "nameContains"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotAliasesResponse": {
@@ -2029,6 +3361,13 @@
             "smithy.api#documentation": "<p>A pagination token for fetching next page of aliases. If the\n      response to this call is truncated, Amazon Lex returns a pagination token in\n      the response. To fetch the next page of aliases, specify the pagination\n      token in the next request. </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociation": {
@@ -2054,6 +3393,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns information about the association between an Amazon Lex bot and\n      a messaging platform.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotChannelAssociation</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2089,6 +3432,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationResponse": {
@@ -2148,6 +3498,13 @@
             "smithy.api#documentation": "<p>If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the\n      reason that it failed to create the association.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociations": {
@@ -2170,6 +3527,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p> Returns a list of all of the channels associated with the\n      specified bot. </p>\n         <p>The <code>GetBotChannelAssociations</code> operation requires\n      permissions for the <code>lex:GetBotChannelAssociations</code>\n      action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2223,6 +3584,13 @@
             "smithy.api#httpQuery": "nameContains"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationsResponse": {
@@ -2240,6 +3608,13 @@
             "smithy.api#documentation": "<p>A pagination token that fetches the next page of associations. If\n      the response to this call is truncated, Amazon Lex returns a pagination token\n      in the response. To fetch the next page of associations, specify the\n      pagination token in the next request. </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotRequest": {
@@ -2261,6 +3636,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotResponse": {
@@ -2374,6 +3756,13 @@
             "smithy.api#documentation": "<p>Indicates whether user utterances should be sent to Amazon Comprehend\n      for sentiment analysis.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotVersions": {
@@ -2399,6 +3788,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets information about all of the versions of a bot.</p>\n         <p>The <code>GetBotVersions</code> operation returns a\n        <code>BotMetadata</code> object for each version of a bot. For example,\n      if a bot has three numbered versions, the <code>GetBotVersions</code>\n      operation returns four <code>BotMetadata</code> objects in the response,\n      one for each numbered version and one for the <code>$LATEST</code>\n      version. </p>\n         <p>The <code>GetBotVersions</code> operation always returns at least\n      one version, the <code>$LATEST</code> version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotVersions</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2437,6 +3830,13 @@
             "smithy.api#httpQuery": "maxResults"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotVersionsResponse": {
@@ -2454,6 +3854,13 @@
             "smithy.api#documentation": "<p>A pagination token for fetching the next page of bot versions. If\n      the response to this call is truncated, Amazon Lex returns a pagination token\n      in the response. To fetch the next page of versions, specify the\n      pagination token in the next request. </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBots": {
@@ -2479,7 +3886,33 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns bot information as follows: </p>\n         <ul>\n            <li>\n               <p>If you provide the <code>nameContains</code> field, the\n          response includes information for the <code>$LATEST</code> version of\n          all bots whose name contains the specified string.</p>\n            </li>\n            <li>\n               <p>If you don't specify the <code>nameContains</code> field, the\n          operation returns information about the <code>$LATEST</code> version\n          of all of your bots.</p>\n            </li>\n         </ul>\n         <p>This operation requires permission for the <code>lex:GetBots</code>\n      action.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To get a list of bots",
+            "documentation": "This example shows how to get a list of all of the bots in your account.",
+            "input": {
+              "nextToken": "",
+              "maxResults": 5
+            },
+            "output": {
+              "bots": [
+                {
+                  "status": "NOT_BUILT",
+                  "name": "DocOrderPizzaBot",
+                  "version": "$LATEST",
+                  "lastUpdatedDate": 1.494360160133e9,
+                  "createdDate": 1.494360160133e9,
+                  "description": "Orders a pizza from a local pizzeria."
+                }
+              ]
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "GET",
           "uri": "/bots",
@@ -2516,6 +3949,13 @@
             "smithy.api#httpQuery": "nameContains"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBotsResponse": {
@@ -2533,6 +3973,13 @@
             "smithy.api#documentation": "<p>If the response is truncated, it includes a pagination token that\n      you can specify in your next request to fetch the next page of bots.\n    </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntent": {
@@ -2558,6 +4005,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns information about a built-in intent.</p>\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltinIntent</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2577,6 +4028,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentResponse": {
@@ -2600,6 +4058,13 @@
             "smithy.api#documentation": "<p>An array of <code>BuiltinIntentSlot</code> objects, one entry for\n      each slot type in the intent.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntents": {
@@ -2622,6 +4087,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets a list of built-in intents that meet the specified\n      criteria.</p>\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltinIntents</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2666,6 +4135,13 @@
             "smithy.api#httpQuery": "maxResults"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentsResponse": {
@@ -2683,6 +4159,13 @@
             "smithy.api#documentation": "<p>A pagination token that fetches the next page of intents. If the\n      response to this API call is truncated, Amazon Lex returns a pagination token\n      in the response. To fetch the next page of intents, specify the pagination\n      token in the next request.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypes": {
@@ -2705,7 +4188,11 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Gets a list of built-in slot types that meet the specified\n      criteria.</p>\n         <p>For a list of built-in slot types, see <a href=\"https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference\">Slot Type Reference</a> in the <i>Alexa Skills\n        Kit</i>.</p>\n\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltInSlotTypes</code> action.</p>",
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Gets a list of built-in slot types that meet the specified\n      criteria.</p>\n         <p>For a list of built-in slot types, see <a href=\"https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference\">Slot Type Reference</a> in the <i>Alexa Skills\n        Kit</i>.</p>\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltInSlotTypes</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/builtins/slottypes",
@@ -2749,6 +4236,13 @@
             "smithy.api#httpQuery": "maxResults"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypesResponse": {
@@ -2766,6 +4260,13 @@
             "smithy.api#documentation": "<p>If the response is truncated, the response includes a pagination\n      token that you can use in your next request to fetch the next page of slot\n      types.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetExport": {
@@ -2791,6 +4292,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Exports the contents of a Amazon Lex resource in a specified format.\n    </p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2834,6 +4339,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetExportResponse": {
@@ -2881,6 +4393,13 @@
             "smithy.api#documentation": "<p>An S3 pre-signed URL that provides the location of the exported\n      resource. The exported resource is a ZIP archive that contains the\n      exported resource in JSON format. The structure of the archive may change.\n      Your code should not rely on the archive structure.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetImport": {
@@ -2906,6 +4425,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets information about an import job started with the\n        <code>StartImport</code> operation.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -2925,6 +4448,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetImportResponse": {
@@ -2972,6 +4502,13 @@
             "smithy.api#documentation": "<p>A timestamp for the date and time that the import job was\n      created.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetIntent": {
@@ -2997,7 +4534,144 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p> Returns information about an intent. In addition to the intent\n      name, you must specify the intent version. </p>\n         <p> This operation requires permissions to perform the\n        <code>lex:GetIntent</code> action. </p>",
+        "smithy.api#examples": [
+          {
+            "title": "To get a information about an intent",
+            "documentation": "This example shows how to get information about an intent.",
+            "input": {
+              "name": "DocOrderPizza",
+              "version": "$LATEST"
+            },
+            "output": {
+              "confirmationPrompt": {
+                "maxAttempts": 1,
+                "messages": [
+                  {
+                    "content": "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "name": "DocOrderPizza",
+              "checksum": "ca9bc13d-afc8-4706-bbaf-091f7a5935d6",
+              "conclusionStatement": {
+                "messages": [
+                  {
+                    "content": "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.",
+                    "contentType": "PlainText"
+                  }
+                ],
+                "responseCard": "foo"
+              },
+              "version": "$LATEST",
+              "rejectionStatement": {
+                "messages": [
+                  {
+                    "content": "Ok, I'll cancel your order.",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "I cancelled your order.",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "createdDate": 1.494359783453e9,
+              "lastUpdatedDate": 1.494359783453e9,
+              "sampleUtterances": [
+                "Order me a pizza.",
+                "Order me a {Type} pizza.",
+                "I want a {Crust} crust {Type} pizza",
+                "I want a {Crust} crust {Type} pizza with {Sauce} sauce."
+              ],
+              "slots": [
+                {
+                  "slotType": "DocPizzaType",
+                  "name": "Type",
+                  "slotConstraint": "Required",
+                  "valueElicitationPrompt": {
+                    "maxAttempts": 1,
+                    "messages": [
+                      {
+                        "content": "What type of pizza would you like?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "Vegie or cheese pizza?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "I can get you a vegie or a cheese pizza.",
+                        "contentType": "PlainText"
+                      }
+                    ]
+                  },
+                  "priority": 1,
+                  "slotTypeVersion": "$LATEST",
+                  "sampleUtterances": ["Get me a {Type} pizza.", "A {Type} pizza please.", "I'd like a {Type} pizza."],
+                  "description": "The type of pizza to order."
+                },
+                {
+                  "slotType": "DocPizzaCrustType",
+                  "name": "Crust",
+                  "slotConstraint": "Required",
+                  "valueElicitationPrompt": {
+                    "maxAttempts": 1,
+                    "messages": [
+                      {
+                        "content": "What type of crust would you like?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "Thick or thin crust?",
+                        "contentType": "PlainText"
+                      }
+                    ]
+                  },
+                  "priority": 2,
+                  "slotTypeVersion": "$LATEST",
+                  "sampleUtterances": ["Make it a {Crust} crust.", "I'd like a {Crust} crust."],
+                  "description": "The type of pizza crust to order."
+                },
+                {
+                  "slotType": "DocPizzaSauceType",
+                  "name": "Sauce",
+                  "slotConstraint": "Required",
+                  "valueElicitationPrompt": {
+                    "maxAttempts": 1,
+                    "messages": [
+                      {
+                        "content": "White or red sauce?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "Garlic or tomato sauce?",
+                        "contentType": "PlainText"
+                      }
+                    ]
+                  },
+                  "priority": 3,
+                  "slotTypeVersion": "$LATEST",
+                  "sampleUtterances": ["Make it {Sauce} sauce.", "I'd like {Sauce} sauce."],
+                  "description": "The type of sauce to use on the pizza."
+                }
+              ],
+              "fulfillmentActivity": {
+                "type": "ReturnIntent"
+              },
+              "description": "Order a pizza from a local pizzeria."
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "GET",
           "uri": "/intents/{name}/versions/{version}",
@@ -3024,6 +4698,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetIntentResponse": {
@@ -3137,6 +4818,13 @@
             "smithy.api#documentation": "<p>An array of <code>OutputContext</code> objects that lists the contexts\n      that the intent activates when the intent is fulfilled.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetIntentVersions": {
@@ -3162,6 +4850,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets information about all of the versions of an intent.</p>\n         <p>The <code>GetIntentVersions</code> operation returns an\n        <code>IntentMetadata</code> object for each version of an intent. For\n      example, if an intent has three numbered versions, the\n        <code>GetIntentVersions</code> operation returns four\n        <code>IntentMetadata</code> objects in the response, one for each\n      numbered version and one for the <code>$LATEST</code> version. </p>\n         <p>The <code>GetIntentVersions</code> operation always returns at\n      least one version, the <code>$LATEST</code> version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetIntentVersions</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -3200,6 +4892,13 @@
             "smithy.api#httpQuery": "maxResults"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetIntentVersionsResponse": {
@@ -3217,6 +4916,13 @@
             "smithy.api#documentation": "<p>A pagination token for fetching the next page of intent versions.\n      If the response to this call is truncated, Amazon Lex returns a pagination\n      token in the response. To fetch the next page of versions, specify the\n      pagination token in the next request. </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetIntents": {
@@ -3242,7 +4948,32 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns intent information as follows: </p>\n         <ul>\n            <li>\n               <p>If you specify the <code>nameContains</code> field, returns the\n            <code>$LATEST</code> version of all intents that contain the\n          specified string.</p>\n            </li>\n            <li>\n               <p> If you don't specify the <code>nameContains</code> field,\n          returns information about the <code>$LATEST</code> version of all\n          intents. </p>\n            </li>\n         </ul>\n         <p> The operation requires permission for the\n        <code>lex:GetIntents</code> action. </p>",
+        "smithy.api#examples": [
+          {
+            "title": "To get a list of intents",
+            "documentation": "This example shows how to get a list of all of the intents in your account.",
+            "input": {
+              "nextToken": "",
+              "maxResults": 10
+            },
+            "output": {
+              "intents": [
+                {
+                  "version": "$LATEST",
+                  "createdDate": 1.494359783453e9,
+                  "name": "DocOrderPizza",
+                  "lastUpdatedDate": 1.494359783453e9,
+                  "description": "Order a pizza from a local pizzeria."
+                }
+              ]
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "GET",
           "uri": "/intents",
@@ -3279,6 +5010,13 @@
             "smithy.api#httpQuery": "nameContains"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetIntentsResponse": {
@@ -3296,6 +5034,13 @@
             "smithy.api#documentation": "<p>If the response is truncated, the response includes a pagination\n      token that you can specify in your next request to fetch the next page of\n      intents. </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetMigration": {
@@ -3321,6 +5066,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Provides details about an ongoing or complete migration from an\n      Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration\n      alerts and warnings related to the migration.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -3340,6 +5089,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetMigrationResponse": {
@@ -3405,6 +5161,13 @@
             "smithy.api#documentation": "<p>A list of alerts and warnings that indicate issues with the migration\n      for the Amazon Lex V1 bot to Amazon Lex V2. You receive a warning when an Amazon Lex V1\n      feature has a different implementation if Amazon Lex V2.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/migrate.html\">Migrating a bot</a> in the <i>Amazon Lex V2\n        developer guide</i>.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetMigrations": {
@@ -3427,6 +5190,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -3485,6 +5252,13 @@
             "smithy.api#httpQuery": "nextToken"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetMigrationsResponse": {
@@ -3502,6 +5276,13 @@
             "smithy.api#documentation": "<p>If the response is truncated, it includes a pagination token that you\n      can specify in your next request to fetch the next page of\n      migrations.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetSlotType": {
@@ -3527,7 +5308,37 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns information about a specific version of a slot type. In\n      addition to specifying the slot type name, you must specify the slot type\n      version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetSlotType</code> action.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To get information about a slot type",
+            "documentation": "This example shows how to get information about a slot type.",
+            "input": {
+              "name": "DocPizzaCrustType",
+              "version": "$LATEST"
+            },
+            "output": {
+              "enumerationValues": [
+                {
+                  "value": "thick"
+                },
+                {
+                  "value": "thin"
+                }
+              ],
+              "name": "DocPizzaCrustType",
+              "checksum": "210b3d5a-90a3-4b22-ac7e-f50c2c71095f",
+              "version": "$LATEST",
+              "lastUpdatedDate": 1.494359274403e9,
+              "createdDate": 1.494359274403e9,
+              "description": "Available crust types"
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "GET",
           "uri": "/slottypes/{name}/versions/{version}",
@@ -3554,6 +5365,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetSlotTypeResponse": {
@@ -3619,6 +5437,13 @@
             "smithy.api#documentation": "<p>Configuration information that extends the parent built-in slot\n      type.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersions": {
@@ -3644,6 +5469,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets information about all versions of a slot type.</p>\n         <p>The <code>GetSlotTypeVersions</code> operation returns a\n        <code>SlotTypeMetadata</code> object for each version of a slot type.\n      For example, if a slot type has three numbered versions, the\n        <code>GetSlotTypeVersions</code> operation returns four\n        <code>SlotTypeMetadata</code> objects in the response, one for each\n      numbered version and one for the <code>$LATEST</code> version. </p>\n         <p>The <code>GetSlotTypeVersions</code> operation always returns at\n      least one version, the <code>$LATEST</code> version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetSlotTypeVersions</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -3682,6 +5511,13 @@
             "smithy.api#httpQuery": "maxResults"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersionsResponse": {
@@ -3699,6 +5535,13 @@
             "smithy.api#documentation": "<p>A pagination token for fetching the next page of slot type\n      versions. If the response to this call is truncated, Amazon Lex returns a\n      pagination token in the response. To fetch the next page of versions,\n      specify the pagination token in the next request. </p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetSlotTypes": {
@@ -3724,7 +5567,46 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Returns slot type information as follows: </p>\n         <ul>\n            <li>\n               <p>If you specify the <code>nameContains</code> field, returns the\n            <code>$LATEST</code> version of all slot types that contain the\n          specified string.</p>\n            </li>\n            <li>\n               <p> If you don't specify the <code>nameContains</code> field,\n          returns information about the <code>$LATEST</code> version of all slot\n          types. </p>\n            </li>\n         </ul>\n         <p> The operation requires permission for the\n        <code>lex:GetSlotTypes</code> action. </p>",
+        "smithy.api#examples": [
+          {
+            "title": "To get a list of slot types",
+            "documentation": "This example shows how to get a list of all of the slot types in your account.",
+            "input": {
+              "nextToken": "",
+              "maxResults": 10
+            },
+            "output": {
+              "slotTypes": [
+                {
+                  "version": "$LATEST",
+                  "createdDate": 1.494359274403e9,
+                  "name": "DocPizzaCrustType",
+                  "lastUpdatedDate": 1.494359274403e9,
+                  "description": "Available crust types"
+                },
+                {
+                  "version": "$LATEST",
+                  "createdDate": 1.49435644223e9,
+                  "name": "DocPizzaSauceType",
+                  "lastUpdatedDate": 1.49435644223e9,
+                  "description": "Available pizza sauces"
+                },
+                {
+                  "version": "$LATEST",
+                  "createdDate": 1.494359198656e9,
+                  "name": "DocPizzaType",
+                  "lastUpdatedDate": 1.494359198656e9,
+                  "description": "Available pizzas"
+                }
+              ]
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "GET",
           "uri": "/slottypes",
@@ -3761,6 +5643,13 @@
             "smithy.api#httpQuery": "nameContains"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetSlotTypesResponse": {
@@ -3778,6 +5667,13 @@
             "smithy.api#documentation": "<p>If the response is truncated, it includes a pagination token that\n      you can specify in your next request to fetch the next page of slot\n      types.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetUtterancesView": {
@@ -3800,6 +5696,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Use the <code>GetUtterancesView</code> operation to get information\n      about the utterances that your users have made to your bot. You can use\n      this list to tune the utterances that your bot responds to.</p>\n         <p>For example, say that you have created a bot to order flowers.\n      After your users have used your bot for a while, use the\n        <code>GetUtterancesView</code> operation to see the requests that they\n      have made and whether they have been successful. You might find that the\n      utterance \"I want flowers\" is not being recognized. You could add this\n      utterance to the <code>OrderFlowers</code> intent so that your bot\n      recognizes that utterance.</p>\n         <p>After you publish a new version of a bot, you can get information\n      about the old version and the new so that you can compare the performance\n      across the two versions. </p>\n         <p>Utterance statistics are generated once a day. Data is available\n      for the last 15 days. You can request information for up to 5 versions of\n      your bot in each request. Amazon Lex returns the most frequent utterances\n      received by the bot in the last 15 days. The response contains information\n      about a maximum of 100 utterances for each version.</p>\n         <p>If you set <code>childDirected</code> field to true when you\n      created your bot, if you are using slot obfuscation with one or more\n      slots, or if you opted out of participating in improving Amazon Lex, utterances\n      are not available.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetUtterancesView</code> action.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -3835,6 +5735,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GetUtterancesViewResponse": {
@@ -3852,12 +5759,18 @@
             "smithy.api#documentation": "<p>An array of <a>UtteranceList</a> objects, each\n      containing a list of <a>UtteranceData</a> objects describing\n      the utterances that were processed by your bot. The response contains a\n      maximum of 100 <code>UtteranceData</code> objects for each version. Amazon Lex\n      returns the most frequent utterances received by the bot in the last 15\n      days.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#GroupNumber": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 5
@@ -3875,22 +5788,26 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ImportStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "COMPLETE",
-            "name": "COMPLETE"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
+      "type": "enum",
+      "members": {
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
           }
-        ]
+        },
+        "COMPLETE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "COMPLETE"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#InputContext": {
@@ -4143,6 +6060,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Gets a list of tags associated with the specified resource. Only bots,\n      bot aliases, and bot channels can have tags associated with them.</p>",
         "smithy.api#http": {
           "method": "GET",
@@ -4162,6 +6083,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ListTagsForResourceResponse": {
@@ -4173,6 +6101,13 @@
             "smithy.api#documentation": "<p>The tags associated with a resource.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ListsOfUtterances": {
@@ -4182,62 +6117,86 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Locale": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "de-DE",
-            "name": "DE_DE"
-          },
-          {
-            "value": "en-AU",
-            "name": "EN_AU"
-          },
-          {
-            "value": "en-GB",
-            "name": "EN_GB"
-          },
-          {
-            "value": "en-IN",
-            "name": "EN_IN"
-          },
-          {
-            "value": "en-US",
-            "name": "EN_US"
-          },
-          {
-            "value": "es-419",
-            "name": "ES_419"
-          },
-          {
-            "value": "es-ES",
-            "name": "ES_ES"
-          },
-          {
-            "value": "es-US",
-            "name": "ES_US"
-          },
-          {
-            "value": "fr-FR",
-            "name": "FR_FR"
-          },
-          {
-            "value": "fr-CA",
-            "name": "FR_CA"
-          },
-          {
-            "value": "it-IT",
-            "name": "IT_IT"
-          },
-          {
-            "value": "ja-JP",
-            "name": "JA_JP"
-          },
-          {
-            "value": "ko-KR",
-            "name": "KO_KR"
+      "type": "enum",
+      "members": {
+        "DE_DE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "de-DE"
           }
-        ]
+        },
+        "EN_AU": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "en-AU"
+          }
+        },
+        "EN_GB": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "en-GB"
+          }
+        },
+        "EN_IN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "en-IN"
+          }
+        },
+        "EN_US": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "en-US"
+          }
+        },
+        "ES_419": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "es-419"
+          }
+        },
+        "ES_ES": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "es-ES"
+          }
+        },
+        "ES_US": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "es-US"
+          }
+        },
+        "FR_FR": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "fr-FR"
+          }
+        },
+        "FR_CA": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "fr-CA"
+          }
+        },
+        "IT_IT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "it-IT"
+          }
+        },
+        "JA_JP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ja-JP"
+          }
+        },
+        "KO_KR": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ko-KR"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#LocaleList": {
@@ -4332,24 +6291,25 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#LogType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "AUDIO",
-            "name": "AUDIO"
-          },
-          {
-            "value": "TEXT",
-            "name": "TEXT"
+      "type": "enum",
+      "members": {
+        "AUDIO": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "AUDIO"
           }
-        ]
+        },
+        "TEXT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "TEXT"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MaxResults": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 50
@@ -4357,18 +6317,20 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MergeStrategy": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "OVERWRITE_LATEST",
-            "name": "OVERWRITE_LATEST"
-          },
-          {
-            "value": "FAIL_ON_CONFLICT",
-            "name": "FAIL_ON_CONFLICT"
+      "type": "enum",
+      "members": {
+        "OVERWRITE_LATEST": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "OVERWRITE_LATEST"
           }
-        ]
+        },
+        "FAIL_ON_CONFLICT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAIL_ON_CONFLICT"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Message": {
@@ -4474,18 +6436,20 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MigrationAlertType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "ERROR",
-            "name": "ERROR"
-          },
-          {
-            "value": "WARN",
-            "name": "WARN"
+      "type": "enum",
+      "members": {
+        "ERROR": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ERROR"
           }
-        ]
+        },
+        "WARN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "WARN"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MigrationAlerts": {
@@ -4505,52 +6469,60 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MigrationSortAttribute": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "V1_BOT_NAME",
-            "name": "V1_BOT_NAME"
-          },
-          {
-            "value": "MIGRATION_DATE_TIME",
-            "name": "MIGRATION_DATE_TIME"
+      "type": "enum",
+      "members": {
+        "V1_BOT_NAME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "V1_BOT_NAME"
           }
-        ]
+        },
+        "MIGRATION_DATE_TIME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MIGRATION_DATE_TIME"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MigrationStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "COMPLETED",
-            "name": "COMPLETED"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
+      "type": "enum",
+      "members": {
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
           }
-        ]
+        },
+        "COMPLETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "COMPLETED"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MigrationStrategy": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "CREATE_NEW",
-            "name": "CREATE_NEW"
-          },
-          {
-            "value": "UPDATE_EXISTING",
-            "name": "UPDATE_EXISTING"
+      "type": "enum",
+      "members": {
+        "CREATE_NEW": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CREATE_NEW"
           }
-        ]
+        },
+        "UPDATE_EXISTING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "UPDATE_EXISTING"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#MigrationSummary": {
@@ -4658,18 +6630,20 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ObfuscationSetting": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "NONE",
-            "name": "NONE"
-          },
-          {
-            "value": "DEFAULT_OBFUSCATION",
-            "name": "DEFAULT_OBFUSCATION"
+      "type": "enum",
+      "members": {
+        "NONE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NONE"
           }
-        ]
+        },
+        "DEFAULT_OBFUSCATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DEFAULT_OBFUSCATION"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#OutputContext": {
@@ -4739,7 +6713,6 @@
     "com.amazonaws.lexmodelbuildingservice#Priority": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0,
           "max": 100
@@ -4747,18 +6720,20 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ProcessBehavior": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "SAVE",
-            "name": "SAVE"
-          },
-          {
-            "value": "BUILD",
-            "name": "BUILD"
+      "type": "enum",
+      "members": {
+        "SAVE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SAVE"
           }
-        ]
+        },
+        "BUILD": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BUILD"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Prompt": {
@@ -4792,7 +6767,6 @@
     "com.amazonaws.lexmodelbuildingservice#PromptMaxAttempts": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 5
@@ -4825,7 +6799,99 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates an Amazon Lex conversational bot or replaces an existing bot.\n      When you create or update a bot you are only required to specify a name, a\n      locale, and whether the bot is directed toward children under age 13. You\n      can use this to add intents later, or to remove intents from an existing\n      bot. When you create a bot with the minimum information, the bot is\n      created or updated but Amazon Lex returns the <code></code> response\n        <code>FAILED</code>. You can build the bot after you add one or more\n      intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p>\n         <p>If you specify the name of an existing bot, the fields in the\n      request replace the existing values in the <code>$LATEST</code> version of\n      the bot. Amazon Lex removes any fields that you don't provide values for in the\n      request, except for the <code>idleTTLInSeconds</code> and\n        <code>privacySettings</code> fields, which are set to their default\n      values. If you don't specify values for required fields, Amazon Lex throws an\n      exception.</p>\n\n         <p>This operation requires permissions for the <code>lex:PutBot</code>\n      action. For more information, see <a>security-iam</a>.</p>",
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Creates an Amazon Lex conversational bot or replaces an existing bot.\n      When you create or update a bot you are only required to specify a name, a\n      locale, and whether the bot is directed toward children under age 13. You\n      can use this to add intents later, or to remove intents from an existing\n      bot. When you create a bot with the minimum information, the bot is\n      created or updated but Amazon Lex returns the <code></code> response\n        <code>FAILED</code>. You can build the bot after you add one or more\n      intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p>\n         <p>If you specify the name of an existing bot, the fields in the\n      request replace the existing values in the <code>$LATEST</code> version of\n      the bot. Amazon Lex removes any fields that you don't provide values for in the\n      request, except for the <code>idleTTLInSeconds</code> and\n        <code>privacySettings</code> fields, which are set to their default\n      values. If you don't specify values for required fields, Amazon Lex throws an\n      exception.</p>\n         <p>This operation requires permissions for the <code>lex:PutBot</code>\n      action. For more information, see <a>security-iam</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To create a bot",
+            "documentation": "This example shows how to create a bot for ordering pizzas.",
+            "input": {
+              "name": "DocOrderPizzaBot",
+              "description": "Orders a pizza from a local pizzeria.",
+              "intents": [
+                {
+                  "intentName": "DocOrderPizza",
+                  "intentVersion": "$LATEST"
+                }
+              ],
+              "clarificationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "I'm sorry, I didn't hear that. Can you repeat what you just said?"
+                  },
+                  {
+                    "contentType": "PlainText",
+                    "content": "Can you say that again?"
+                  }
+                ],
+                "maxAttempts": 1
+              },
+              "abortStatement": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "I don't understand. Can you try again?"
+                  },
+                  {
+                    "contentType": "PlainText",
+                    "content": "I'm sorry, I don't understand."
+                  }
+                ]
+              },
+              "idleSessionTTLInSeconds": 300,
+              "processBehavior": "SAVE",
+              "locale": "en-US",
+              "childDirected": true
+            },
+            "output": {
+              "status": "NOT_BUILT",
+              "intents": [
+                {
+                  "intentVersion": "$LATEST",
+                  "intentName": "DocOrderPizza"
+                }
+              ],
+              "name": "DocOrderPizzaBot",
+              "locale": "en-US",
+              "checksum": "20172ee3-fa06-49b2-bbc5-667c090303e9",
+              "abortStatement": {
+                "messages": [
+                  {
+                    "content": "I don't understand. Can you try again?",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "I'm sorry, I don't understand.",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "version": "$LATEST",
+              "lastUpdatedDate": 1.494360160133e9,
+              "createdDate": 1.494360160133e9,
+              "clarificationPrompt": {
+                "maxAttempts": 1,
+                "messages": [
+                  {
+                    "content": "I'm sorry, I didn't hear that. Can you repeate what you just said?",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "Can you say that again?",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "childDirected": true,
+              "idleSessionTTLInSeconds": 300,
+              "description": "Orders a pizza from a local pizzeria."
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/bots/{name}/versions/$LATEST",
@@ -4859,6 +6925,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Creates an alias for the specified version of the bot or replaces\n      an alias for the specified bot. To change the version of the bot that the\n      alias points to, replace the alias. For more information about aliases,\n      see <a>versioning-aliases</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutBotAlias</code> action. </p>",
         "smithy.api#http": {
           "method": "PUT",
@@ -4917,6 +6987,13 @@
             "smithy.api#documentation": "<p>A list of tags to add to the bot alias. You can only add tags when you\n      create an alias, you can't use the <code>PutBotAlias</code> operation to\n      update the tags on a bot alias. To update tags, use the\n        <code>TagResource</code> operation.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutBotAliasResponse": {
@@ -4976,6 +7053,13 @@
             "smithy.api#documentation": "<p>A list of tags associated with a bot.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutBotRequest": {
@@ -5052,7 +7136,7 @@
         "locale": {
           "target": "com.amazonaws.lexmodelbuildingservice#Locale",
           "traits": {
-            "smithy.api#documentation": "<p> Specifies the target locale for the bot. Any intent used in the\n      bot must be compatible with the locale of the bot. </p>\n\n         <p>The default is <code>en-US</code>.</p>",
+            "smithy.api#documentation": "<p> Specifies the target locale for the bot. Any intent used in the\n      bot must be compatible with the locale of the bot. </p>\n         <p>The default is <code>en-US</code>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -5081,6 +7165,13 @@
             "smithy.api#documentation": "<p>A list of tags to add to the bot. You can only add tags when you\n      create a bot, you can't use the <code>PutBot</code> operation to update\n      the tags on a bot. To update tags, use the <code>TagResource</code>\n      operation.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutBotResponse": {
@@ -5206,6 +7297,13 @@
             "smithy.api#documentation": "<p>A list of tags associated with the bot.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutIntent": {
@@ -5234,7 +7332,259 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates an intent or replaces an existing intent.</p>\n         <p>To define the interaction between the user and your bot, you use\n      one or more intents. For a pizza ordering bot, for example, you would\n      create an <code>OrderPizza</code> intent. </p>\n         <p>To create an intent or replace an existing intent, you must provide\n      the following:</p>\n         <ul>\n            <li>\n               <p>Intent name. For example, <code>OrderPizza</code>.</p>\n            </li>\n            <li>\n               <p>Sample utterances. For example, \"Can I order a pizza, please.\"\n          and \"I want to order a pizza.\"</p>\n            </li>\n            <li>\n               <p>Information to be gathered. You specify slot types for the\n          information that your bot will request from the user. You can specify\n          standard slot types, such as a date or a time, or custom slot types\n          such as the size and crust of a pizza.</p>\n            </li>\n            <li>\n               <p>How the intent will be fulfilled. You can provide a Lambda\n          function or configure the intent to return the intent information to\n          the client application. If you use a Lambda function, when all of the\n          intent information is available, Amazon Lex invokes your Lambda function.\n          If you configure your intent to return the intent information to the\n          client application. </p>\n            </li>\n         </ul>\n         <p>You can specify other optional information in the request, such\n      as:</p>\n\n         <ul>\n            <li>\n               <p>A confirmation prompt to ask the user to confirm an intent. For\n          example, \"Shall I order your pizza?\"</p>\n            </li>\n            <li>\n               <p>A conclusion statement to send to the user after the intent has\n          been fulfilled. For example, \"I placed your pizza order.\"</p>\n            </li>\n            <li>\n               <p>A follow-up prompt that asks the user for additional activity.\n          For example, asking \"Do you want to order a drink with your\n          pizza?\"</p>\n            </li>\n         </ul>\n         <p>If you specify an existing intent name to update the intent, Amazon Lex\n      replaces the values in the <code>$LATEST</code> version of the intent with\n      the values in the request. Amazon Lex removes fields that you don't provide in\n      the request. If you don't specify the required fields, Amazon Lex throws an\n      exception. When you update the <code>$LATEST</code> version of an intent,\n      the <code>status</code> field of any bot that uses the\n        <code>$LATEST</code> version of the intent is set to\n        <code>NOT_BUILT</code>.</p>\n         <p>For more information, see <a>how-it-works</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutIntent</code> action.</p>",
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Creates an intent or replaces an existing intent.</p>\n         <p>To define the interaction between the user and your bot, you use\n      one or more intents. For a pizza ordering bot, for example, you would\n      create an <code>OrderPizza</code> intent. </p>\n         <p>To create an intent or replace an existing intent, you must provide\n      the following:</p>\n         <ul>\n            <li>\n               <p>Intent name. For example, <code>OrderPizza</code>.</p>\n            </li>\n            <li>\n               <p>Sample utterances. For example, \"Can I order a pizza, please.\"\n          and \"I want to order a pizza.\"</p>\n            </li>\n            <li>\n               <p>Information to be gathered. You specify slot types for the\n          information that your bot will request from the user. You can specify\n          standard slot types, such as a date or a time, or custom slot types\n          such as the size and crust of a pizza.</p>\n            </li>\n            <li>\n               <p>How the intent will be fulfilled. You can provide a Lambda\n          function or configure the intent to return the intent information to\n          the client application. If you use a Lambda function, when all of the\n          intent information is available, Amazon Lex invokes your Lambda function.\n          If you configure your intent to return the intent information to the\n          client application. </p>\n            </li>\n         </ul>\n         <p>You can specify other optional information in the request, such\n      as:</p>\n         <ul>\n            <li>\n               <p>A confirmation prompt to ask the user to confirm an intent. For\n          example, \"Shall I order your pizza?\"</p>\n            </li>\n            <li>\n               <p>A conclusion statement to send to the user after the intent has\n          been fulfilled. For example, \"I placed your pizza order.\"</p>\n            </li>\n            <li>\n               <p>A follow-up prompt that asks the user for additional activity.\n          For example, asking \"Do you want to order a drink with your\n          pizza?\"</p>\n            </li>\n         </ul>\n         <p>If you specify an existing intent name to update the intent, Amazon Lex\n      replaces the values in the <code>$LATEST</code> version of the intent with\n      the values in the request. Amazon Lex removes fields that you don't provide in\n      the request. If you don't specify the required fields, Amazon Lex throws an\n      exception. When you update the <code>$LATEST</code> version of an intent,\n      the <code>status</code> field of any bot that uses the\n        <code>$LATEST</code> version of the intent is set to\n        <code>NOT_BUILT</code>.</p>\n         <p>For more information, see <a>how-it-works</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutIntent</code> action.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To create an intent",
+            "documentation": "This example shows how to create an intent for ordering pizzas.",
+            "input": {
+              "name": "DocOrderPizza",
+              "description": "Order a pizza from a local pizzeria.",
+              "slots": [
+                {
+                  "name": "Type",
+                  "description": "The type of pizza to order.",
+                  "slotConstraint": "Required",
+                  "slotType": "DocPizzaType",
+                  "slotTypeVersion": "$LATEST",
+                  "valueElicitationPrompt": {
+                    "messages": [
+                      {
+                        "contentType": "PlainText",
+                        "content": "What type of pizza would you like?"
+                      },
+                      {
+                        "contentType": "PlainText",
+                        "content": "Vegie or cheese pizza?"
+                      },
+                      {
+                        "contentType": "PlainText",
+                        "content": "I can get you a vegie or a cheese pizza."
+                      }
+                    ],
+                    "maxAttempts": 1
+                  },
+                  "priority": 1,
+                  "sampleUtterances": ["Get me a {Type} pizza.", "A {Type} pizza please.", "I'd like a {Type} pizza."]
+                },
+                {
+                  "name": "Crust",
+                  "description": "The type of pizza crust to order.",
+                  "slotConstraint": "Required",
+                  "slotType": "DocPizzaCrustType",
+                  "slotTypeVersion": "$LATEST",
+                  "valueElicitationPrompt": {
+                    "messages": [
+                      {
+                        "contentType": "PlainText",
+                        "content": "What type of crust would you like?"
+                      },
+                      {
+                        "contentType": "PlainText",
+                        "content": "Thick or thin crust?"
+                      }
+                    ],
+                    "maxAttempts": 1
+                  },
+                  "priority": 2,
+                  "sampleUtterances": ["Make it a {Crust} crust.", "I'd like a {Crust} crust."]
+                },
+                {
+                  "name": "Sauce",
+                  "description": "The type of sauce to use on the pizza.",
+                  "slotConstraint": "Required",
+                  "slotType": "DocPizzaSauceType",
+                  "slotTypeVersion": "$LATEST",
+                  "valueElicitationPrompt": {
+                    "messages": [
+                      {
+                        "contentType": "PlainText",
+                        "content": "White or red sauce?"
+                      },
+                      {
+                        "contentType": "PlainText",
+                        "content": "Garlic or tomato sauce?"
+                      }
+                    ],
+                    "maxAttempts": 1
+                  },
+                  "priority": 3,
+                  "sampleUtterances": ["Make it {Sauce} sauce.", "I'd like {Sauce} sauce."]
+                }
+              ],
+              "sampleUtterances": [
+                "Order me a pizza.",
+                "Order me a {Type} pizza.",
+                "I want a {Crust} crust {Type} pizza",
+                "I want a {Crust} crust {Type} pizza with {Sauce} sauce."
+              ],
+              "confirmationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?"
+                  }
+                ],
+                "maxAttempts": 1
+              },
+              "rejectionStatement": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Ok, I'll cancel your order."
+                  },
+                  {
+                    "contentType": "PlainText",
+                    "content": "I cancelled your order."
+                  }
+                ]
+              },
+              "conclusionStatement": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce."
+                  },
+                  {
+                    "contentType": "PlainText",
+                    "content": "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way."
+                  }
+                ],
+                "responseCard": "foo"
+              },
+              "fulfillmentActivity": {
+                "type": "ReturnIntent"
+              }
+            },
+            "output": {
+              "confirmationPrompt": {
+                "maxAttempts": 1,
+                "messages": [
+                  {
+                    "content": "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "name": "DocOrderPizza",
+              "checksum": "ca9bc13d-afc8-4706-bbaf-091f7a5935d6",
+              "conclusionStatement": {
+                "messages": [
+                  {
+                    "content": "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.",
+                    "contentType": "PlainText"
+                  }
+                ],
+                "responseCard": "foo"
+              },
+              "version": "$LATEST",
+              "rejectionStatement": {
+                "messages": [
+                  {
+                    "content": "Ok, I'll cancel your order.",
+                    "contentType": "PlainText"
+                  },
+                  {
+                    "content": "I cancelled your order.",
+                    "contentType": "PlainText"
+                  }
+                ]
+              },
+              "createdDate": 1.494359783453e9,
+              "lastUpdatedDate": 1.494359783453e9,
+              "sampleUtterances": [
+                "Order me a pizza.",
+                "Order me a {Type} pizza.",
+                "I want a {Crust} crust {Type} pizza",
+                "I want a {Crust} crust {Type} pizza with {Sauce} sauce."
+              ],
+              "slots": [
+                {
+                  "slotType": "DocPizzaSauceType",
+                  "name": "Sauce",
+                  "slotConstraint": "Required",
+                  "valueElicitationPrompt": {
+                    "maxAttempts": 1,
+                    "messages": [
+                      {
+                        "content": "White or red sauce?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "Garlic or tomato sauce?",
+                        "contentType": "PlainText"
+                      }
+                    ]
+                  },
+                  "priority": 3,
+                  "slotTypeVersion": "$LATEST",
+                  "sampleUtterances": ["Make it {Sauce} sauce.", "I'd like {Sauce} sauce."],
+                  "description": "The type of sauce to use on the pizza."
+                },
+                {
+                  "slotType": "DocPizzaType",
+                  "name": "Type",
+                  "slotConstraint": "Required",
+                  "valueElicitationPrompt": {
+                    "maxAttempts": 1,
+                    "messages": [
+                      {
+                        "content": "What type of pizza would you like?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "Vegie or cheese pizza?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "I can get you a vegie or a cheese pizza.",
+                        "contentType": "PlainText"
+                      }
+                    ]
+                  },
+                  "priority": 1,
+                  "slotTypeVersion": "$LATEST",
+                  "sampleUtterances": ["Get me a {Type} pizza.", "A {Type} pizza please.", "I'd like a {Type} pizza."],
+                  "description": "The type of pizza to order."
+                },
+                {
+                  "slotType": "DocPizzaCrustType",
+                  "name": "Crust",
+                  "slotConstraint": "Required",
+                  "valueElicitationPrompt": {
+                    "maxAttempts": 1,
+                    "messages": [
+                      {
+                        "content": "What type of crust would you like?",
+                        "contentType": "PlainText"
+                      },
+                      {
+                        "content": "Thick or thin crust?",
+                        "contentType": "PlainText"
+                      }
+                    ]
+                  },
+                  "priority": 2,
+                  "slotTypeVersion": "$LATEST",
+                  "sampleUtterances": ["Make it a {Crust} crust.", "I'd like a {Crust} crust."],
+                  "description": "The type of pizza crust to order."
+                }
+              ],
+              "fulfillmentActivity": {
+                "type": "ReturnIntent"
+              },
+              "description": "Order a pizza from a local pizzeria."
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/intents/{name}/versions/$LATEST",
@@ -5268,7 +7618,7 @@
         "sampleUtterances": {
           "target": "com.amazonaws.lexmodelbuildingservice#IntentUtteranceList",
           "traits": {
-            "smithy.api#documentation": "<p>An array of utterances (strings) that a user might say to signal\n      the intent. For example, \"I want {PizzaSize} pizza\", \"Order {Quantity}\n      {PizzaSize} pizzas\". </p>\n\n         <p>In each utterance, a slot name is enclosed in curly braces.\n    </p>"
+            "smithy.api#documentation": "<p>An array of utterances (strings) that a user might say to signal\n      the intent. For example, \"I want {PizzaSize} pizza\", \"Order {Quantity}\n      {PizzaSize} pizzas\". </p>\n         <p>In each utterance, a slot name is enclosed in curly braces.\n    </p>"
           }
         },
         "confirmationPrompt": {
@@ -5286,7 +7636,7 @@
         "followUpPrompt": {
           "target": "com.amazonaws.lexmodelbuildingservice#FollowUpPrompt",
           "traits": {
-            "smithy.api#documentation": "<p>Amazon Lex uses this prompt to solicit additional activity after\n      fulfilling an intent. For example, after the <code>OrderPizza</code>\n      intent is fulfilled, you might prompt the user to order a drink.</p>\n         <p>The action that Amazon Lex takes depends on the user's response, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>If the user says \"Yes\" it responds with the clarification\n          prompt that is configured for the bot.</p>\n            </li>\n            <li>\n               <p>if the user says \"Yes\" and continues with an utterance that\n          triggers an intent it starts a conversation for the intent.</p>\n            </li>\n            <li>\n               <p>If the user says \"No\" it responds with the rejection statement\n          configured for the the follow-up prompt.</p>\n            </li>\n            <li>\n               <p>If it doesn't recognize the utterance it repeats the follow-up\n          prompt again.</p>\n            </li>\n         </ul>\n\n         <p>The <code>followUpPrompt</code> field and the\n        <code>conclusionStatement</code> field are mutually exclusive. You can\n      specify only one. </p>"
+            "smithy.api#documentation": "<p>Amazon Lex uses this prompt to solicit additional activity after\n      fulfilling an intent. For example, after the <code>OrderPizza</code>\n      intent is fulfilled, you might prompt the user to order a drink.</p>\n         <p>The action that Amazon Lex takes depends on the user's response, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>If the user says \"Yes\" it responds with the clarification\n          prompt that is configured for the bot.</p>\n            </li>\n            <li>\n               <p>if the user says \"Yes\" and continues with an utterance that\n          triggers an intent it starts a conversation for the intent.</p>\n            </li>\n            <li>\n               <p>If the user says \"No\" it responds with the rejection statement\n          configured for the the follow-up prompt.</p>\n            </li>\n            <li>\n               <p>If it doesn't recognize the utterance it repeats the follow-up\n          prompt again.</p>\n            </li>\n         </ul>\n         <p>The <code>followUpPrompt</code> field and the\n        <code>conclusionStatement</code> field are mutually exclusive. You can\n      specify only one. </p>"
           }
         },
         "conclusionStatement": {
@@ -5343,6 +7693,13 @@
             "smithy.api#documentation": "<p>An array of <code>OutputContext</code> objects that lists the contexts\n      that the intent activates when the intent is fulfilled.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutIntentResponse": {
@@ -5462,6 +7819,13 @@
             "smithy.api#documentation": "<p>An array of <code>OutputContext</code> objects that lists the contexts\n      that the intent activates when the intent is fulfilled.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutSlotType": {
@@ -5490,7 +7854,45 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a custom slot type or replaces an existing custom slot\n      type.</p>\n         <p>To create a custom slot type, specify a name for the slot type and\n      a set of enumeration values, which are the values that a slot of this type\n      can assume. For more information, see <a>how-it-works</a>.</p>\n         <p>If you specify the name of an existing slot type, the fields in the\n      request replace the existing values in the <code>$LATEST</code> version of\n      the slot type. Amazon Lex removes the fields that you don't provide in the\n      request. If you don't specify required fields, Amazon Lex throws an exception.\n      When you update the <code>$LATEST</code> version of a slot type, if a bot\n      uses the <code>$LATEST</code> version of an intent that contains the slot\n      type, the bot's <code>status</code> field is set to\n      <code>NOT_BUILT</code>.</p>\n\n         <p>This operation requires permissions for the\n        <code>lex:PutSlotType</code> action.</p>",
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#documentation": "<p>Creates a custom slot type or replaces an existing custom slot\n      type.</p>\n         <p>To create a custom slot type, specify a name for the slot type and\n      a set of enumeration values, which are the values that a slot of this type\n      can assume. For more information, see <a>how-it-works</a>.</p>\n         <p>If you specify the name of an existing slot type, the fields in the\n      request replace the existing values in the <code>$LATEST</code> version of\n      the slot type. Amazon Lex removes the fields that you don't provide in the\n      request. If you don't specify required fields, Amazon Lex throws an exception.\n      When you update the <code>$LATEST</code> version of a slot type, if a bot\n      uses the <code>$LATEST</code> version of an intent that contains the slot\n      type, the bot's <code>status</code> field is set to\n      <code>NOT_BUILT</code>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutSlotType</code> action.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To Create a Slot Type",
+            "documentation": "This example shows how to create a slot type that describes pizza sauces.",
+            "input": {
+              "name": "PizzaSauceType",
+              "description": "Available pizza sauces",
+              "enumerationValues": [
+                {
+                  "value": "red"
+                },
+                {
+                  "value": "white"
+                }
+              ]
+            },
+            "output": {
+              "enumerationValues": [
+                {
+                  "value": "red"
+                },
+                {
+                  "value": "white"
+                }
+              ],
+              "name": "DocPizzaSauceType",
+              "checksum": "cfd00ed1-775d-4357-947c-aca7e73b44ba",
+              "version": "$LATEST",
+              "lastUpdatedDate": 1.49435644223e9,
+              "createdDate": 1.49435644223e9,
+              "description": "Available pizza sauces"
+            }
+          }
+        ],
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/slottypes/{name}/versions/$LATEST",
@@ -5551,6 +7953,13 @@
             "smithy.api#documentation": "<p>Configuration information that extends the parent built-in slot type.\n      The configuration is added to the settings for the parent slot\n      type.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#PutSlotTypeResponse": {
@@ -5622,6 +8031,13 @@
             "smithy.api#documentation": "<p>Configuration information that extends the parent built-in slot\n      type.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#QueryFilterString": {
@@ -5633,26 +8049,32 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ReferenceType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "Intent",
-            "name": "INTENT"
-          },
-          {
-            "value": "Bot",
-            "name": "BOT"
-          },
-          {
-            "value": "BotAlias",
-            "name": "BOTALIAS"
-          },
-          {
-            "value": "BotChannel",
-            "name": "BOTCHANNEL"
+      "type": "enum",
+      "members": {
+        "INTENT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Intent"
           }
-        ]
+        },
+        "BOT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Bot"
+          }
+        },
+        "BOTALIAS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BotAlias"
+          }
+        },
+        "BOTCHANNEL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BotChannel"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#RegexPattern": {
@@ -5720,22 +8142,26 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ResourceType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "BOT",
-            "name": "BOT"
-          },
-          {
-            "value": "INTENT",
-            "name": "INTENT"
-          },
-          {
-            "value": "SLOT_TYPE",
-            "name": "SLOT_TYPE"
+      "type": "enum",
+      "members": {
+        "BOT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BOT"
           }
-        ]
+        },
+        "INTENT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INTENT"
+          }
+        },
+        "SLOT_TYPE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SLOT_TYPE"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#ResponseCard": {
@@ -5750,7 +8176,6 @@
     "com.amazonaws.lexmodelbuildingservice#SessionTTL": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 60,
           "max": 86400
@@ -5834,18 +8259,20 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#SlotConstraint": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "Required",
-            "name": "REQUIRED"
-          },
-          {
-            "value": "Optional",
-            "name": "OPTIONAL"
+      "type": "enum",
+      "members": {
+        "REQUIRED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Required"
           }
-        ]
+        },
+        "OPTIONAL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Optional"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#SlotDefaultValue": {
@@ -6029,33 +8456,37 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#SlotValueSelectionStrategy": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "ORIGINAL_VALUE",
-            "name": "ORIGINAL_VALUE"
-          },
-          {
-            "value": "TOP_RESOLUTION",
-            "name": "TOP_RESOLUTION"
+      "type": "enum",
+      "members": {
+        "ORIGINAL_VALUE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ORIGINAL_VALUE"
           }
-        ]
+        },
+        "TOP_RESOLUTION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "TOP_RESOLUTION"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#SortOrder": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "ASCENDING",
-            "name": "ASCENDING"
-          },
-          {
-            "value": "DESCENDING",
-            "name": "DESCENDING"
+      "type": "enum",
+      "members": {
+        "ASCENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ASCENDING"
           }
-        ]
+        },
+        "DESCENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DESCENDING"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#StartImport": {
@@ -6078,6 +8509,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Starts a job to import a resource to Amazon Lex.</p>",
         "smithy.api#http": {
           "method": "POST",
@@ -6116,6 +8551,13 @@
             "smithy.api#documentation": "<p>A list of tags to add to the imported bot. You can only add tags when\n      you import a bot, you can't add tags to an intent or slot type.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#StartImportResponse": {
@@ -6163,6 +8605,13 @@
             "smithy.api#documentation": "<p>A timestamp for the date and time that the import job was\n      requested.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#StartMigration": {
@@ -6191,6 +8640,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when\n      you want to take advantage of the new features of Amazon Lex V2.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/migrate.html\">Migrating a bot</a> in the <i>Amazon Lex\n        developer guide</i>.</p>",
         "smithy.api#http": {
           "method": "POST",
@@ -6237,6 +8690,13 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#StartMigrationResponse": {
@@ -6290,6 +8750,13 @@
             "smithy.api#documentation": "<p>The date and time that the migration started.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Statement": {
@@ -6314,45 +8781,55 @@
       }
     },
     "com.amazonaws.lexmodelbuildingservice#Status": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "BUILDING",
-            "name": "BUILDING"
-          },
-          {
-            "value": "READY",
-            "name": "READY"
-          },
-          {
-            "value": "READY_BASIC_TESTING",
-            "name": "READY_BASIC_TESTING"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
-          },
-          {
-            "value": "NOT_BUILT",
-            "name": "NOT_BUILT"
+      "type": "enum",
+      "members": {
+        "BUILDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BUILDING"
           }
-        ]
+        },
+        "READY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "READY"
+          }
+        },
+        "READY_BASIC_TESTING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "READY_BASIC_TESTING"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "NOT_BUILT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NOT_BUILT"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#StatusType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "Detected",
-            "name": "DETECTED"
-          },
-          {
-            "value": "Missed",
-            "name": "MISSED"
+      "type": "enum",
+      "members": {
+        "DETECTED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Detected"
           }
-        ]
+        },
+        "MISSED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Missed"
+          }
+        }
       }
     },
     "com.amazonaws.lexmodelbuildingservice#String": {
@@ -6451,6 +8928,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Adds the specified tags to the specified resource. If a tag key\n      already exists, the existing value is replaced with the new value.</p>",
         "smithy.api#http": {
           "method": "POST",
@@ -6477,11 +8958,25 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#TagResourceResponse": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.lexmodelbuildingservice#TagValue": {
       "type": "string",
@@ -6521,6 +9016,10 @@
         }
       ],
       "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
         "smithy.api#documentation": "<p>Removes tags from a bot, bot alias or bot channel.</p>",
         "smithy.api#http": {
           "method": "DELETE",
@@ -6548,11 +9047,25 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.lexmodelbuildingservice#UntagResourceResponse": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#deprecated": {
+          "since": "2025-09-08",
+          "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+        },
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.lexmodelbuildingservice#UserId": {
       "type": "string",

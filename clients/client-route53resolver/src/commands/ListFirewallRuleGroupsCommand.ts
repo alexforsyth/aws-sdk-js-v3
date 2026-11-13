@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListFirewallRuleGroupsRequest, ListFirewallRuleGroupsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListFirewallRuleGroupsCommand,
-  serializeAws_json1_1ListFirewallRuleGroupsCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFirewallRuleGroupsRequest, ListFirewallRuleGroupsResponse } from "../models/models_0";
+import { ListFirewallRuleGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFirewallRuleGroupsCommand}.
+ */
 export interface ListFirewallRuleGroupsCommandInput extends ListFirewallRuleGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFirewallRuleGroupsCommand}.
+ */
 export interface ListFirewallRuleGroupsCommandOutput extends ListFirewallRuleGroupsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,73 @@ export interface ListFirewallRuleGroupsCommandOutput extends ListFirewallRuleGro
  * ```javascript
  * import { Route53ResolverClient, ListFirewallRuleGroupsCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, ListFirewallRuleGroupsCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // ListFirewallRuleGroupsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListFirewallRuleGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFirewallRuleGroupsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   FirewallRuleGroups: [ // FirewallRuleGroupMetadataList
+ * //     { // FirewallRuleGroupMetadata
+ * //       Id: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       CreatorRequestId: "STRING_VALUE",
+ * //       ShareStatus: "NOT_SHARED" || "SHARED_WITH_ME" || "SHARED_BY_ME",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListFirewallRuleGroupsCommandInput - {@link ListFirewallRuleGroupsCommandInput}
+ * @returns {@link ListFirewallRuleGroupsCommandOutput}
  * @see {@link ListFirewallRuleGroupsCommandInput} for command's `input` shape.
  * @see {@link ListFirewallRuleGroupsCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The current account doesn't have the IAM permissions required to perform the specified Resolver operation.</p>
+ *          <p>This error can also be thrown when a customer has reached the 5120 character limit for a
+ * 			resource policy for CloudWatch Logs.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>You have provided an invalid command. If you ran the <code>UpdateFirewallDomains</code> request. supported values are <code>ADD</code>,
+ * 			<code>REMOVE</code>, or <code>REPLACE</code> a domain.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class ListFirewallRuleGroupsCommand extends $Command<
-  ListFirewallRuleGroupsCommandInput,
-  ListFirewallRuleGroupsCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFirewallRuleGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFirewallRuleGroupsCommandInput, ListFirewallRuleGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "ListFirewallRuleGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFirewallRuleGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFirewallRuleGroupsResponse.filterSensitiveLog,
+export class ListFirewallRuleGroupsCommand extends command<ListFirewallRuleGroupsCommandInput, ListFirewallRuleGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFirewallRuleGroups",
+  ListFirewallRuleGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFirewallRuleGroupsRequest;
+      output: ListFirewallRuleGroupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFirewallRuleGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListFirewallRuleGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFirewallRuleGroupsCommandOutput> {
-    return deserializeAws_json1_1ListFirewallRuleGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFirewallRuleGroupsCommandInput;
+      output: ListFirewallRuleGroupsCommandOutput;
+    };
+  };
 }

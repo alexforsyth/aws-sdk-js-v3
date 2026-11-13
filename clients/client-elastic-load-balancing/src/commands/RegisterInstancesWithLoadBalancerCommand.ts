@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { RegisterEndPointsInput, RegisterEndPointsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryRegisterInstancesWithLoadBalancerCommand,
-  serializeAws_queryRegisterInstancesWithLoadBalancerCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterEndPointsInput, RegisterEndPointsOutput } from "../models/models_0";
+import { RegisterInstancesWithLoadBalancer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterInstancesWithLoadBalancerCommand}.
+ */
 export interface RegisterInstancesWithLoadBalancerCommandInput extends RegisterEndPointsInput {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterInstancesWithLoadBalancerCommand}.
+ */
 export interface RegisterInstancesWithLoadBalancerCommandOutput extends RegisterEndPointsOutput, __MetadataBearer {}
 
 /**
@@ -50,74 +47,92 @@ export interface RegisterInstancesWithLoadBalancerCommandOutput extends Register
  * ```javascript
  * import { ElasticLoadBalancingClient, RegisterInstancesWithLoadBalancerCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, RegisterInstancesWithLoadBalancerCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // RegisterEndPointsInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   Instances: [ // Instances // required
+ *     { // Instance
+ *       InstanceId: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new RegisterInstancesWithLoadBalancerCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterEndPointsOutput
+ * //   Instances: [ // Instances
+ * //     { // Instance
+ * //       InstanceId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param RegisterInstancesWithLoadBalancerCommandInput - {@link RegisterInstancesWithLoadBalancerCommandInput}
+ * @returns {@link RegisterInstancesWithLoadBalancerCommandOutput}
  * @see {@link RegisterInstancesWithLoadBalancerCommandInput} for command's `input` shape.
  * @see {@link RegisterInstancesWithLoadBalancerCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link InvalidEndPointException} (client fault)
+ *  <p>The specified endpoint is not valid.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To register instances with a load balancer
+ * ```javascript
+ * // This example registers the specified instance with the specified load balancer.
+ * const input = {
+ *   Instances: [
+ *     {
+ *       InstanceId: "i-d6f6fae3"
+ *     }
+ *   ],
+ *   LoadBalancerName: "my-load-balancer"
+ * };
+ * const command = new RegisterInstancesWithLoadBalancerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Instances: [
+ *     {
+ *       InstanceId: "i-d6f6fae3"
+ *     },
+ *     {
+ *       InstanceId: "i-207d9717"
+ *     },
+ *     {
+ *       InstanceId: "i-afefb49b"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class RegisterInstancesWithLoadBalancerCommand extends $Command<
-  RegisterInstancesWithLoadBalancerCommandInput,
-  RegisterInstancesWithLoadBalancerCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterInstancesWithLoadBalancerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterInstancesWithLoadBalancerCommandInput, RegisterInstancesWithLoadBalancerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "RegisterInstancesWithLoadBalancerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterEndPointsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterEndPointsOutput.filterSensitiveLog,
+export class RegisterInstancesWithLoadBalancerCommand extends command<RegisterInstancesWithLoadBalancerCommandInput, RegisterInstancesWithLoadBalancerCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterInstancesWithLoadBalancer",
+  RegisterInstancesWithLoadBalancer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterEndPointsInput;
+      output: RegisterEndPointsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RegisterInstancesWithLoadBalancerCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryRegisterInstancesWithLoadBalancerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RegisterInstancesWithLoadBalancerCommandOutput> {
-    return deserializeAws_queryRegisterInstancesWithLoadBalancerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterInstancesWithLoadBalancerCommandInput;
+      output: RegisterInstancesWithLoadBalancerCommandOutput;
+    };
+  };
 }

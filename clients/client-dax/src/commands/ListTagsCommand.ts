@@ -1,89 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DAXClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DAXClient";
-import { ListTagsRequest, ListTagsResponse } from "../models/models_0";
-import { deserializeAws_json1_1ListTagsCommand, serializeAws_json1_1ListTagsCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTagsRequest, ListTagsResponse } from "../models/models_0";
+import { ListTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTagsCommand}.
+ */
 export interface ListTagsCommandInput extends ListTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTagsCommand}.
+ */
 export interface ListTagsCommandOutput extends ListTagsResponse, __MetadataBearer {}
 
 /**
- * <p>List all of the tags for a DAX cluster. You can call <code>ListTags</code> up to
- *             10 times per second, per account.</p>
+ * <p>List all of the tags for a DAX cluster. You can call
+ *                 <code>ListTags</code> up to 10 times per second, per account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DAXClient, ListTagsCommand } from "@aws-sdk/client-dax"; // ES Modules import
  * // const { DAXClient, ListTagsCommand } = require("@aws-sdk/client-dax"); // CommonJS import
+ * // import type { DAXClientConfig } from "@aws-sdk/client-dax";
+ * const config = {}; // type is DAXClientConfig
  * const client = new DAXClient(config);
+ * const input = { // ListTagsRequest
+ *   ResourceName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListTagsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTagsResponse
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTagsCommandInput - {@link ListTagsCommandInput}
+ * @returns {@link ListTagsCommandOutput}
  * @see {@link ListTagsCommandInput} for command's `input` shape.
  * @see {@link ListTagsCommandOutput} for command's `response` shape.
- * @see {@link DAXClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DAXClientResolvedConfig | config} for DAXClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The requested cluster ID does not refer to an existing DAX
+ *             cluster.</p>
+ *
+ * @throws {@link InvalidARNFault} (client fault)
+ *  <p>The Amazon Resource Name (ARN) supplied in the request is not valid.</p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The requested DAX cluster is not in the
+ *                 <i>available</i> state.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Two or more incompatible parameters were specified.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value for a parameter is invalid.</p>
+ *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The specified service linked role (SLR) was not found.</p>
+ *
+ * @throws {@link DAXServiceException}
+ * <p>Base exception class for all service exceptions from DAX service.</p>
+ *
+ *
+ * @public
  */
-export class ListTagsCommand extends $Command<ListTagsCommandInput, ListTagsCommandOutput, DAXClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DAXClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTagsCommandInput, ListTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DAXClient";
-    const commandName = "ListTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTagsResponse.filterSensitiveLog,
+export class ListTagsCommand extends command<ListTagsCommandInput, ListTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTags",
+  ListTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsRequest;
+      output: ListTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTagsCommandOutput> {
-    return deserializeAws_json1_1ListTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTagsCommandInput;
+      output: ListTagsCommandOutput;
+    };
+  };
 }

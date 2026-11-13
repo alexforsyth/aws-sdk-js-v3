@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaPackageVodClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaPackageVodClient";
-import { UpdatePackagingGroupRequest, UpdatePackagingGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdatePackagingGroupCommand,
-  serializeAws_restJson1UpdatePackagingGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdatePackagingGroupRequest, UpdatePackagingGroupResponse } from "../models/models_0";
+import { UpdatePackagingGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdatePackagingGroupCommand}.
+ */
 export interface UpdatePackagingGroupCommandInput extends UpdatePackagingGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdatePackagingGroupCommand}.
+ */
 export interface UpdatePackagingGroupCommandOutput extends UpdatePackagingGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface UpdatePackagingGroupCommandOutput extends UpdatePackagingGroupR
  * ```javascript
  * import { MediaPackageVodClient, UpdatePackagingGroupCommand } from "@aws-sdk/client-mediapackage-vod"; // ES Modules import
  * // const { MediaPackageVodClient, UpdatePackagingGroupCommand } = require("@aws-sdk/client-mediapackage-vod"); // CommonJS import
+ * // import type { MediaPackageVodClientConfig } from "@aws-sdk/client-mediapackage-vod";
+ * const config = {}; // type is MediaPackageVodClientConfig
  * const client = new MediaPackageVodClient(config);
+ * const input = { // UpdatePackagingGroupRequest
+ *   Authorization: { // Authorization
+ *     CdnIdentifierSecret: "STRING_VALUE", // required
+ *     SecretsRoleArn: "STRING_VALUE", // required
+ *   },
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new UpdatePackagingGroupCommand(input);
  * const response = await client.send(command);
+ * // { // UpdatePackagingGroupResponse
+ * //   ApproximateAssetCount: Number("int"),
+ * //   Arn: "STRING_VALUE",
+ * //   Authorization: { // Authorization
+ * //     CdnIdentifierSecret: "STRING_VALUE", // required
+ * //     SecretsRoleArn: "STRING_VALUE", // required
+ * //   },
+ * //   CreatedAt: "STRING_VALUE",
+ * //   DomainName: "STRING_VALUE",
+ * //   EgressAccessLogs: { // EgressAccessLogs
+ * //     LogGroupName: "STRING_VALUE",
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdatePackagingGroupCommandInput - {@link UpdatePackagingGroupCommandInput}
+ * @returns {@link UpdatePackagingGroupCommandOutput}
  * @see {@link UpdatePackagingGroupCommandInput} for command's `input` shape.
  * @see {@link UpdatePackagingGroupCommandOutput} for command's `response` shape.
- * @see {@link MediaPackageVodClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaPackageVodClientResolvedConfig | config} for MediaPackageVodClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  The client is not authorized to access the requested resource.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  The client has exceeded their resource or throttling limits.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The parameters sent in the request are not valid.
+ *
+ * @throws {@link MediaPackageVodServiceException}
+ * <p>Base exception class for all service exceptions from MediaPackageVod service.</p>
+ *
+ *
+ * @public
  */
-export class UpdatePackagingGroupCommand extends $Command<
-  UpdatePackagingGroupCommandInput,
-  UpdatePackagingGroupCommandOutput,
-  MediaPackageVodClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdatePackagingGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaPackageVodClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdatePackagingGroupCommandInput, UpdatePackagingGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaPackageVodClient";
-    const commandName = "UpdatePackagingGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdatePackagingGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdatePackagingGroupResponse.filterSensitiveLog,
+export class UpdatePackagingGroupCommand extends command<UpdatePackagingGroupCommandInput, UpdatePackagingGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdatePackagingGroup",
+  UpdatePackagingGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePackagingGroupRequest;
+      output: UpdatePackagingGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdatePackagingGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdatePackagingGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdatePackagingGroupCommandOutput> {
-    return deserializeAws_restJson1UpdatePackagingGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdatePackagingGroupCommandInput;
+      output: UpdatePackagingGroupCommandOutput;
+    };
+  };
 }

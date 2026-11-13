@@ -1,98 +1,109 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeSecurityPolicyRequest, DescribeSecurityPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSecurityPolicyCommand,
-  serializeAws_json1_1DescribeSecurityPolicyCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TransferClientResolvedConfig } from "../TransferClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSecurityPolicyRequest, DescribeSecurityPolicyResponse } from "../models/models_0";
+import { DescribeSecurityPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSecurityPolicyCommand}.
+ */
 export interface DescribeSecurityPolicyCommandInput extends DescribeSecurityPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSecurityPolicyCommand}.
+ */
 export interface DescribeSecurityPolicyCommandOutput extends DescribeSecurityPolicyResponse, __MetadataBearer {}
 
 /**
- * <p>Describes the security policy that is attached to your file transfer protocol-enabled
- *       server. The response contains a description of the security policy's properties. For more
- *       information about security policies, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html">Working with security
- *         policies</a>.</p>
+ * <p>Describes the security policy that is attached to your server or SFTP connector. The response contains a description of the security policy's properties. For more information about security policies, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html">Working with security policies for servers</a> or <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html">Working with security policies for SFTP connectors</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TransferClient, DescribeSecurityPolicyCommand } from "@aws-sdk/client-transfer"; // ES Modules import
  * // const { TransferClient, DescribeSecurityPolicyCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
  * const client = new TransferClient(config);
+ * const input = { // DescribeSecurityPolicyRequest
+ *   SecurityPolicyName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeSecurityPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSecurityPolicyResponse
+ * //   SecurityPolicy: { // DescribedSecurityPolicy
+ * //     Fips: true || false,
+ * //     SecurityPolicyName: "STRING_VALUE", // required
+ * //     SshCiphers: [ // SecurityPolicyOptions
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SshKexs: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SshMacs: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     TlsCiphers: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SshHostKeyAlgorithms: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Type: "SERVER" || "CONNECTOR",
+ * //     Protocols: [ // SecurityPolicyProtocols
+ * //       "SFTP" || "FTPS",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeSecurityPolicyCommandInput - {@link DescribeSecurityPolicyCommandInput}
+ * @returns {@link DescribeSecurityPolicyCommandOutput}
  * @see {@link DescribeSecurityPolicyCommandInput} for command's `input` shape.
  * @see {@link DescribeSecurityPolicyCommandOutput} for command's `response` shape.
- * @see {@link TransferClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSecurityPolicyCommand extends $Command<
-  DescribeSecurityPolicyCommandInput,
-  DescribeSecurityPolicyCommandOutput,
-  TransferClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSecurityPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TransferClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSecurityPolicyCommandInput, DescribeSecurityPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TransferClient";
-    const commandName = "DescribeSecurityPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSecurityPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSecurityPolicyResponse.filterSensitiveLog,
+export class DescribeSecurityPolicyCommand extends command<DescribeSecurityPolicyCommandInput, DescribeSecurityPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSecurityPolicy",
+  DescribeSecurityPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSecurityPolicyRequest;
+      output: DescribeSecurityPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSecurityPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSecurityPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSecurityPolicyCommandOutput> {
-    return deserializeAws_json1_1DescribeSecurityPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSecurityPolicyCommandInput;
+      output: DescribeSecurityPolicyCommandOutput;
+    };
+  };
 }

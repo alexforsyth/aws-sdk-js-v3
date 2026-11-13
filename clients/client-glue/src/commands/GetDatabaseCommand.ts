@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetDatabaseRequest } from "../models/models_0";
-import { GetDatabaseResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetDatabaseCommand,
-  serializeAws_json1_1GetDatabaseCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDatabaseRequest, GetDatabaseResponse } from "../models/models_2";
+import { GetDatabase$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDatabaseCommand}.
+ */
 export interface GetDatabaseCommandInput extends GetDatabaseRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDatabaseCommand}.
+ */
 export interface GetDatabaseCommandOutput extends GetDatabaseResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +29,98 @@ export interface GetDatabaseCommandOutput extends GetDatabaseResponse, __Metadat
  * ```javascript
  * import { GlueClient, GetDatabaseCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetDatabaseCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetDatabaseRequest
+ *   CatalogId: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetDatabaseCommand(input);
  * const response = await client.send(command);
+ * // { // GetDatabaseResponse
+ * //   Database: { // Database
+ * //     Name: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     LocationUri: "STRING_VALUE",
+ * //     Parameters: { // ParametersMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     CreateTime: new Date("TIMESTAMP"),
+ * //     CreateTableDefaultPermissions: [ // PrincipalPermissionsList
+ * //       { // PrincipalPermissions
+ * //         Principal: { // DataLakePrincipal
+ * //           DataLakePrincipalIdentifier: "STRING_VALUE",
+ * //         },
+ * //         Permissions: [ // PermissionList
+ * //           "ALL" || "SELECT" || "ALTER" || "DROP" || "DELETE" || "INSERT" || "CREATE_DATABASE" || "CREATE_TABLE" || "DATA_LOCATION_ACCESS",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     TargetDatabase: { // DatabaseIdentifier
+ * //       CatalogId: "STRING_VALUE",
+ * //       DatabaseName: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     CatalogId: "STRING_VALUE",
+ * //     FederatedDatabase: { // FederatedDatabase
+ * //       Identifier: "STRING_VALUE",
+ * //       ConnectionName: "STRING_VALUE",
+ * //       ConnectionType: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDatabaseCommandInput - {@link GetDatabaseCommandInput}
+ * @returns {@link GetDatabaseCommandOutput}
  * @see {@link GetDatabaseCommandInput} for command's `input` shape.
  * @see {@link GetDatabaseCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link FederationSourceException} (client fault)
+ *  <p>A federation source failed.</p>
+ *
+ * @throws {@link FederationSourceRetryableException} (client fault)
+ *  <p>A federation source failed, but the operation may be retried.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetDatabaseCommand extends $Command<
-  GetDatabaseCommandInput,
-  GetDatabaseCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDatabaseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDatabaseCommandInput, GetDatabaseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetDatabaseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDatabaseRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDatabaseResponse.filterSensitiveLog,
+export class GetDatabaseCommand extends command<GetDatabaseCommandInput, GetDatabaseCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDatabase",
+  GetDatabase$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDatabaseRequest;
+      output: GetDatabaseResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDatabaseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDatabaseCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDatabaseCommandOutput> {
-    return deserializeAws_json1_1GetDatabaseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDatabaseCommandInput;
+      output: GetDatabaseCommandOutput;
+    };
+  };
 }

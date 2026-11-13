@@ -1,6038 +1,7966 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateGlossaryTermsCommandInput,
+  type AssociateGlossaryTermsCommandOutput,
+  AssociateGlossaryTermsCommand,
+} from "./commands/AssociateGlossaryTermsCommand";
+import {
+  type BatchCreatePartitionCommandInput,
+  type BatchCreatePartitionCommandOutput,
   BatchCreatePartitionCommand,
-  BatchCreatePartitionCommandInput,
-  BatchCreatePartitionCommandOutput,
 } from "./commands/BatchCreatePartitionCommand";
 import {
+  type BatchDeleteConnectionCommandInput,
+  type BatchDeleteConnectionCommandOutput,
   BatchDeleteConnectionCommand,
-  BatchDeleteConnectionCommandInput,
-  BatchDeleteConnectionCommandOutput,
 } from "./commands/BatchDeleteConnectionCommand";
 import {
+  type BatchDeletePartitionCommandInput,
+  type BatchDeletePartitionCommandOutput,
   BatchDeletePartitionCommand,
-  BatchDeletePartitionCommandInput,
-  BatchDeletePartitionCommandOutput,
 } from "./commands/BatchDeletePartitionCommand";
 import {
+  type BatchDeleteTableCommandInput,
+  type BatchDeleteTableCommandOutput,
   BatchDeleteTableCommand,
-  BatchDeleteTableCommandInput,
-  BatchDeleteTableCommandOutput,
 } from "./commands/BatchDeleteTableCommand";
 import {
+  type BatchDeleteTableVersionCommandInput,
+  type BatchDeleteTableVersionCommandOutput,
   BatchDeleteTableVersionCommand,
-  BatchDeleteTableVersionCommandInput,
-  BatchDeleteTableVersionCommandOutput,
 } from "./commands/BatchDeleteTableVersionCommand";
 import {
+  type BatchGetBlueprintsCommandInput,
+  type BatchGetBlueprintsCommandOutput,
   BatchGetBlueprintsCommand,
-  BatchGetBlueprintsCommandInput,
-  BatchGetBlueprintsCommandOutput,
 } from "./commands/BatchGetBlueprintsCommand";
 import {
+  type BatchGetCrawlersCommandInput,
+  type BatchGetCrawlersCommandOutput,
   BatchGetCrawlersCommand,
-  BatchGetCrawlersCommandInput,
-  BatchGetCrawlersCommandOutput,
 } from "./commands/BatchGetCrawlersCommand";
 import {
+  type BatchGetCustomEntityTypesCommandInput,
+  type BatchGetCustomEntityTypesCommandOutput,
+  BatchGetCustomEntityTypesCommand,
+} from "./commands/BatchGetCustomEntityTypesCommand";
+import {
+  type BatchGetDataQualityResultCommandInput,
+  type BatchGetDataQualityResultCommandOutput,
+  BatchGetDataQualityResultCommand,
+} from "./commands/BatchGetDataQualityResultCommand";
+import {
+  type BatchGetDataQualityResultV2CommandInput,
+  type BatchGetDataQualityResultV2CommandOutput,
+  BatchGetDataQualityResultV2Command,
+} from "./commands/BatchGetDataQualityResultV2Command";
+import {
+  type BatchGetDataQualityRulesetEvaluationRunCommandInput,
+  type BatchGetDataQualityRulesetEvaluationRunCommandOutput,
+  BatchGetDataQualityRulesetEvaluationRunCommand,
+} from "./commands/BatchGetDataQualityRulesetEvaluationRunCommand";
+import {
+  type BatchGetDevEndpointsCommandInput,
+  type BatchGetDevEndpointsCommandOutput,
   BatchGetDevEndpointsCommand,
-  BatchGetDevEndpointsCommandInput,
-  BatchGetDevEndpointsCommandOutput,
 } from "./commands/BatchGetDevEndpointsCommand";
 import {
+  type BatchGetIterableFormsCommandInput,
+  type BatchGetIterableFormsCommandOutput,
+  BatchGetIterableFormsCommand,
+} from "./commands/BatchGetIterableFormsCommand";
+import {
+  type BatchGetJobsCommandInput,
+  type BatchGetJobsCommandOutput,
   BatchGetJobsCommand,
-  BatchGetJobsCommandInput,
-  BatchGetJobsCommandOutput,
 } from "./commands/BatchGetJobsCommand";
 import {
+  type BatchGetPartitionCommandInput,
+  type BatchGetPartitionCommandOutput,
   BatchGetPartitionCommand,
-  BatchGetPartitionCommandInput,
-  BatchGetPartitionCommandOutput,
 } from "./commands/BatchGetPartitionCommand";
 import {
+  type BatchGetTableOptimizerCommandInput,
+  type BatchGetTableOptimizerCommandOutput,
+  BatchGetTableOptimizerCommand,
+} from "./commands/BatchGetTableOptimizerCommand";
+import {
+  type BatchGetTriggersCommandInput,
+  type BatchGetTriggersCommandOutput,
   BatchGetTriggersCommand,
-  BatchGetTriggersCommandInput,
-  BatchGetTriggersCommandOutput,
 } from "./commands/BatchGetTriggersCommand";
 import {
+  type BatchGetWorkflowsCommandInput,
+  type BatchGetWorkflowsCommandOutput,
   BatchGetWorkflowsCommand,
-  BatchGetWorkflowsCommandInput,
-  BatchGetWorkflowsCommandOutput,
 } from "./commands/BatchGetWorkflowsCommand";
 import {
+  type BatchPutDataQualityStatisticAnnotationCommandInput,
+  type BatchPutDataQualityStatisticAnnotationCommandOutput,
+  BatchPutDataQualityStatisticAnnotationCommand,
+} from "./commands/BatchPutDataQualityStatisticAnnotationCommand";
+import {
+  type BatchStopJobRunCommandInput,
+  type BatchStopJobRunCommandOutput,
   BatchStopJobRunCommand,
-  BatchStopJobRunCommandInput,
-  BatchStopJobRunCommandOutput,
 } from "./commands/BatchStopJobRunCommand";
 import {
+  type BatchUpdatePartitionCommandInput,
+  type BatchUpdatePartitionCommandOutput,
   BatchUpdatePartitionCommand,
-  BatchUpdatePartitionCommandInput,
-  BatchUpdatePartitionCommandOutput,
 } from "./commands/BatchUpdatePartitionCommand";
 import {
+  type CancelDataQualityRuleRecommendationRunCommandInput,
+  type CancelDataQualityRuleRecommendationRunCommandOutput,
+  CancelDataQualityRuleRecommendationRunCommand,
+} from "./commands/CancelDataQualityRuleRecommendationRunCommand";
+import {
+  type CancelDataQualityRulesetEvaluationRunCommandInput,
+  type CancelDataQualityRulesetEvaluationRunCommandOutput,
+  CancelDataQualityRulesetEvaluationRunCommand,
+} from "./commands/CancelDataQualityRulesetEvaluationRunCommand";
+import {
+  type CancelMLTaskRunCommandInput,
+  type CancelMLTaskRunCommandOutput,
   CancelMLTaskRunCommand,
-  CancelMLTaskRunCommandInput,
-  CancelMLTaskRunCommandOutput,
 } from "./commands/CancelMLTaskRunCommand";
 import {
+  type CancelStatementCommandInput,
+  type CancelStatementCommandOutput,
+  CancelStatementCommand,
+} from "./commands/CancelStatementCommand";
+import {
+  type CheckSchemaVersionValidityCommandInput,
+  type CheckSchemaVersionValidityCommandOutput,
   CheckSchemaVersionValidityCommand,
-  CheckSchemaVersionValidityCommandInput,
-  CheckSchemaVersionValidityCommandOutput,
 } from "./commands/CheckSchemaVersionValidityCommand";
 import {
+  type CreateBlueprintCommandInput,
+  type CreateBlueprintCommandOutput,
   CreateBlueprintCommand,
-  CreateBlueprintCommandInput,
-  CreateBlueprintCommandOutput,
 } from "./commands/CreateBlueprintCommand";
 import {
+  type CreateCatalogCommandInput,
+  type CreateCatalogCommandOutput,
+  CreateCatalogCommand,
+} from "./commands/CreateCatalogCommand";
+import {
+  type CreateClassifierCommandInput,
+  type CreateClassifierCommandOutput,
   CreateClassifierCommand,
-  CreateClassifierCommandInput,
-  CreateClassifierCommandOutput,
 } from "./commands/CreateClassifierCommand";
 import {
+  type CreateColumnStatisticsTaskSettingsCommandInput,
+  type CreateColumnStatisticsTaskSettingsCommandOutput,
+  CreateColumnStatisticsTaskSettingsCommand,
+} from "./commands/CreateColumnStatisticsTaskSettingsCommand";
+import {
+  type CreateConnectionCommandInput,
+  type CreateConnectionCommandOutput,
   CreateConnectionCommand,
-  CreateConnectionCommandInput,
-  CreateConnectionCommandOutput,
 } from "./commands/CreateConnectionCommand";
 import {
+  type CreateCrawlerCommandInput,
+  type CreateCrawlerCommandOutput,
   CreateCrawlerCommand,
-  CreateCrawlerCommandInput,
-  CreateCrawlerCommandOutput,
 } from "./commands/CreateCrawlerCommand";
 import {
+  type CreateCustomEntityTypeCommandInput,
+  type CreateCustomEntityTypeCommandOutput,
+  CreateCustomEntityTypeCommand,
+} from "./commands/CreateCustomEntityTypeCommand";
+import {
+  type CreateDatabaseCommandInput,
+  type CreateDatabaseCommandOutput,
   CreateDatabaseCommand,
-  CreateDatabaseCommandInput,
-  CreateDatabaseCommandOutput,
 } from "./commands/CreateDatabaseCommand";
 import {
-  CreateDevEndpointCommand,
-  CreateDevEndpointCommandInput,
-  CreateDevEndpointCommandOutput,
-} from "./commands/CreateDevEndpointCommand";
-import { CreateJobCommand, CreateJobCommandInput, CreateJobCommandOutput } from "./commands/CreateJobCommand";
+  type CreateDataQualityEvaluationConfigCommandInput,
+  type CreateDataQualityEvaluationConfigCommandOutput,
+  CreateDataQualityEvaluationConfigCommand,
+} from "./commands/CreateDataQualityEvaluationConfigCommand";
 import {
+  type CreateDataQualityRulesetCommandInput,
+  type CreateDataQualityRulesetCommandOutput,
+  CreateDataQualityRulesetCommand,
+} from "./commands/CreateDataQualityRulesetCommand";
+import {
+  type CreateDevEndpointCommandInput,
+  type CreateDevEndpointCommandOutput,
+  CreateDevEndpointCommand,
+} from "./commands/CreateDevEndpointCommand";
+import {
+  type CreateGlossaryCommandInput,
+  type CreateGlossaryCommandOutput,
+  CreateGlossaryCommand,
+} from "./commands/CreateGlossaryCommand";
+import {
+  type CreateGlossaryTermCommandInput,
+  type CreateGlossaryTermCommandOutput,
+  CreateGlossaryTermCommand,
+} from "./commands/CreateGlossaryTermCommand";
+import {
+  type CreateGlueIdentityCenterConfigurationCommandInput,
+  type CreateGlueIdentityCenterConfigurationCommandOutput,
+  CreateGlueIdentityCenterConfigurationCommand,
+} from "./commands/CreateGlueIdentityCenterConfigurationCommand";
+import {
+  type CreateIntegrationCommandInput,
+  type CreateIntegrationCommandOutput,
+  CreateIntegrationCommand,
+} from "./commands/CreateIntegrationCommand";
+import {
+  type CreateIntegrationResourcePropertyCommandInput,
+  type CreateIntegrationResourcePropertyCommandOutput,
+  CreateIntegrationResourcePropertyCommand,
+} from "./commands/CreateIntegrationResourcePropertyCommand";
+import {
+  type CreateIntegrationTablePropertiesCommandInput,
+  type CreateIntegrationTablePropertiesCommandOutput,
+  CreateIntegrationTablePropertiesCommand,
+} from "./commands/CreateIntegrationTablePropertiesCommand";
+import { type CreateJobCommandInput, type CreateJobCommandOutput, CreateJobCommand } from "./commands/CreateJobCommand";
+import {
+  type CreateMLTransformCommandInput,
+  type CreateMLTransformCommandOutput,
   CreateMLTransformCommand,
-  CreateMLTransformCommandInput,
-  CreateMLTransformCommandOutput,
 } from "./commands/CreateMLTransformCommand";
 import {
+  type CreatePartitionCommandInput,
+  type CreatePartitionCommandOutput,
   CreatePartitionCommand,
-  CreatePartitionCommandInput,
-  CreatePartitionCommandOutput,
 } from "./commands/CreatePartitionCommand";
 import {
+  type CreatePartitionIndexCommandInput,
+  type CreatePartitionIndexCommandOutput,
   CreatePartitionIndexCommand,
-  CreatePartitionIndexCommandInput,
-  CreatePartitionIndexCommandOutput,
 } from "./commands/CreatePartitionIndexCommand";
 import {
+  type CreateRegistryCommandInput,
+  type CreateRegistryCommandOutput,
   CreateRegistryCommand,
-  CreateRegistryCommandInput,
-  CreateRegistryCommandOutput,
 } from "./commands/CreateRegistryCommand";
 import {
+  type CreateSchemaCommandInput,
+  type CreateSchemaCommandOutput,
   CreateSchemaCommand,
-  CreateSchemaCommandInput,
-  CreateSchemaCommandOutput,
 } from "./commands/CreateSchemaCommand";
 import {
+  type CreateScriptCommandInput,
+  type CreateScriptCommandOutput,
   CreateScriptCommand,
-  CreateScriptCommandInput,
-  CreateScriptCommandOutput,
 } from "./commands/CreateScriptCommand";
 import {
+  type CreateSecurityConfigurationCommandInput,
+  type CreateSecurityConfigurationCommandOutput,
   CreateSecurityConfigurationCommand,
-  CreateSecurityConfigurationCommandInput,
-  CreateSecurityConfigurationCommandOutput,
 } from "./commands/CreateSecurityConfigurationCommand";
-import { CreateTableCommand, CreateTableCommandInput, CreateTableCommandOutput } from "./commands/CreateTableCommand";
 import {
+  type CreateSessionCommandInput,
+  type CreateSessionCommandOutput,
+  CreateSessionCommand,
+} from "./commands/CreateSessionCommand";
+import {
+  type CreateTableCommandInput,
+  type CreateTableCommandOutput,
+  CreateTableCommand,
+} from "./commands/CreateTableCommand";
+import {
+  type CreateTableOptimizerCommandInput,
+  type CreateTableOptimizerCommandOutput,
+  CreateTableOptimizerCommand,
+} from "./commands/CreateTableOptimizerCommand";
+import {
+  type CreateTriggerCommandInput,
+  type CreateTriggerCommandOutput,
   CreateTriggerCommand,
-  CreateTriggerCommandInput,
-  CreateTriggerCommandOutput,
 } from "./commands/CreateTriggerCommand";
 import {
+  type CreateUsageProfileCommandInput,
+  type CreateUsageProfileCommandOutput,
+  CreateUsageProfileCommand,
+} from "./commands/CreateUsageProfileCommand";
+import {
+  type CreateUserDefinedFunctionCommandInput,
+  type CreateUserDefinedFunctionCommandOutput,
   CreateUserDefinedFunctionCommand,
-  CreateUserDefinedFunctionCommandInput,
-  CreateUserDefinedFunctionCommandOutput,
 } from "./commands/CreateUserDefinedFunctionCommand";
 import {
+  type CreateWorkflowCommandInput,
+  type CreateWorkflowCommandOutput,
   CreateWorkflowCommand,
-  CreateWorkflowCommandInput,
-  CreateWorkflowCommandOutput,
 } from "./commands/CreateWorkflowCommand";
 import {
+  type DeleteAssetCommandInput,
+  type DeleteAssetCommandOutput,
+  DeleteAssetCommand,
+} from "./commands/DeleteAssetCommand";
+import {
+  type DeleteAssetTypeCommandInput,
+  type DeleteAssetTypeCommandOutput,
+  DeleteAssetTypeCommand,
+} from "./commands/DeleteAssetTypeCommand";
+import {
+  type DeleteAttachmentCommandInput,
+  type DeleteAttachmentCommandOutput,
+  DeleteAttachmentCommand,
+} from "./commands/DeleteAttachmentCommand";
+import {
+  type DeleteBlueprintCommandInput,
+  type DeleteBlueprintCommandOutput,
   DeleteBlueprintCommand,
-  DeleteBlueprintCommandInput,
-  DeleteBlueprintCommandOutput,
 } from "./commands/DeleteBlueprintCommand";
 import {
+  type DeleteCatalogCommandInput,
+  type DeleteCatalogCommandOutput,
+  DeleteCatalogCommand,
+} from "./commands/DeleteCatalogCommand";
+import {
+  type DeleteClassifierCommandInput,
+  type DeleteClassifierCommandOutput,
   DeleteClassifierCommand,
-  DeleteClassifierCommandInput,
-  DeleteClassifierCommandOutput,
 } from "./commands/DeleteClassifierCommand";
 import {
+  type DeleteColumnStatisticsForPartitionCommandInput,
+  type DeleteColumnStatisticsForPartitionCommandOutput,
   DeleteColumnStatisticsForPartitionCommand,
-  DeleteColumnStatisticsForPartitionCommandInput,
-  DeleteColumnStatisticsForPartitionCommandOutput,
 } from "./commands/DeleteColumnStatisticsForPartitionCommand";
 import {
+  type DeleteColumnStatisticsForTableCommandInput,
+  type DeleteColumnStatisticsForTableCommandOutput,
   DeleteColumnStatisticsForTableCommand,
-  DeleteColumnStatisticsForTableCommandInput,
-  DeleteColumnStatisticsForTableCommandOutput,
 } from "./commands/DeleteColumnStatisticsForTableCommand";
 import {
+  type DeleteColumnStatisticsTaskSettingsCommandInput,
+  type DeleteColumnStatisticsTaskSettingsCommandOutput,
+  DeleteColumnStatisticsTaskSettingsCommand,
+} from "./commands/DeleteColumnStatisticsTaskSettingsCommand";
+import {
+  type DeleteConnectionCommandInput,
+  type DeleteConnectionCommandOutput,
   DeleteConnectionCommand,
-  DeleteConnectionCommandInput,
-  DeleteConnectionCommandOutput,
 } from "./commands/DeleteConnectionCommand";
 import {
+  type DeleteConnectionTypeCommandInput,
+  type DeleteConnectionTypeCommandOutput,
+  DeleteConnectionTypeCommand,
+} from "./commands/DeleteConnectionTypeCommand";
+import {
+  type DeleteCrawlerCommandInput,
+  type DeleteCrawlerCommandOutput,
   DeleteCrawlerCommand,
-  DeleteCrawlerCommandInput,
-  DeleteCrawlerCommandOutput,
 } from "./commands/DeleteCrawlerCommand";
 import {
+  type DeleteCustomEntityTypeCommandInput,
+  type DeleteCustomEntityTypeCommandOutput,
+  DeleteCustomEntityTypeCommand,
+} from "./commands/DeleteCustomEntityTypeCommand";
+import {
+  type DeleteDatabaseCommandInput,
+  type DeleteDatabaseCommandOutput,
   DeleteDatabaseCommand,
-  DeleteDatabaseCommandInput,
-  DeleteDatabaseCommandOutput,
 } from "./commands/DeleteDatabaseCommand";
 import {
-  DeleteDevEndpointCommand,
-  DeleteDevEndpointCommandInput,
-  DeleteDevEndpointCommandOutput,
-} from "./commands/DeleteDevEndpointCommand";
-import { DeleteJobCommand, DeleteJobCommandInput, DeleteJobCommandOutput } from "./commands/DeleteJobCommand";
+  type DeleteDataQualityEvaluationConfigCommandInput,
+  type DeleteDataQualityEvaluationConfigCommandOutput,
+  DeleteDataQualityEvaluationConfigCommand,
+} from "./commands/DeleteDataQualityEvaluationConfigCommand";
 import {
+  type DeleteDataQualityRulesetCommandInput,
+  type DeleteDataQualityRulesetCommandOutput,
+  DeleteDataQualityRulesetCommand,
+} from "./commands/DeleteDataQualityRulesetCommand";
+import {
+  type DeleteDevEndpointCommandInput,
+  type DeleteDevEndpointCommandOutput,
+  DeleteDevEndpointCommand,
+} from "./commands/DeleteDevEndpointCommand";
+import {
+  type DeleteFormTypeCommandInput,
+  type DeleteFormTypeCommandOutput,
+  DeleteFormTypeCommand,
+} from "./commands/DeleteFormTypeCommand";
+import {
+  type DeleteGlossaryCommandInput,
+  type DeleteGlossaryCommandOutput,
+  DeleteGlossaryCommand,
+} from "./commands/DeleteGlossaryCommand";
+import {
+  type DeleteGlossaryTermCommandInput,
+  type DeleteGlossaryTermCommandOutput,
+  DeleteGlossaryTermCommand,
+} from "./commands/DeleteGlossaryTermCommand";
+import {
+  type DeleteGlueIdentityCenterConfigurationCommandInput,
+  type DeleteGlueIdentityCenterConfigurationCommandOutput,
+  DeleteGlueIdentityCenterConfigurationCommand,
+} from "./commands/DeleteGlueIdentityCenterConfigurationCommand";
+import {
+  type DeleteIntegrationCommandInput,
+  type DeleteIntegrationCommandOutput,
+  DeleteIntegrationCommand,
+} from "./commands/DeleteIntegrationCommand";
+import {
+  type DeleteIntegrationResourcePropertyCommandInput,
+  type DeleteIntegrationResourcePropertyCommandOutput,
+  DeleteIntegrationResourcePropertyCommand,
+} from "./commands/DeleteIntegrationResourcePropertyCommand";
+import {
+  type DeleteIntegrationTablePropertiesCommandInput,
+  type DeleteIntegrationTablePropertiesCommandOutput,
+  DeleteIntegrationTablePropertiesCommand,
+} from "./commands/DeleteIntegrationTablePropertiesCommand";
+import { type DeleteJobCommandInput, type DeleteJobCommandOutput, DeleteJobCommand } from "./commands/DeleteJobCommand";
+import {
+  type DeleteMLTransformCommandInput,
+  type DeleteMLTransformCommandOutput,
   DeleteMLTransformCommand,
-  DeleteMLTransformCommandInput,
-  DeleteMLTransformCommandOutput,
 } from "./commands/DeleteMLTransformCommand";
 import {
+  type DeletePartitionCommandInput,
+  type DeletePartitionCommandOutput,
   DeletePartitionCommand,
-  DeletePartitionCommandInput,
-  DeletePartitionCommandOutput,
 } from "./commands/DeletePartitionCommand";
 import {
+  type DeletePartitionIndexCommandInput,
+  type DeletePartitionIndexCommandOutput,
   DeletePartitionIndexCommand,
-  DeletePartitionIndexCommandInput,
-  DeletePartitionIndexCommandOutput,
 } from "./commands/DeletePartitionIndexCommand";
 import {
+  type DeleteRegistryCommandInput,
+  type DeleteRegistryCommandOutput,
   DeleteRegistryCommand,
-  DeleteRegistryCommandInput,
-  DeleteRegistryCommandOutput,
 } from "./commands/DeleteRegistryCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
   DeleteResourcePolicyCommand,
-  DeleteResourcePolicyCommandInput,
-  DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
 import {
+  type DeleteSchemaCommandInput,
+  type DeleteSchemaCommandOutput,
   DeleteSchemaCommand,
-  DeleteSchemaCommandInput,
-  DeleteSchemaCommandOutput,
 } from "./commands/DeleteSchemaCommand";
 import {
+  type DeleteSchemaVersionsCommandInput,
+  type DeleteSchemaVersionsCommandOutput,
   DeleteSchemaVersionsCommand,
-  DeleteSchemaVersionsCommandInput,
-  DeleteSchemaVersionsCommandOutput,
 } from "./commands/DeleteSchemaVersionsCommand";
 import {
+  type DeleteSecurityConfigurationCommandInput,
+  type DeleteSecurityConfigurationCommandOutput,
   DeleteSecurityConfigurationCommand,
-  DeleteSecurityConfigurationCommandInput,
-  DeleteSecurityConfigurationCommandOutput,
 } from "./commands/DeleteSecurityConfigurationCommand";
-import { DeleteTableCommand, DeleteTableCommandInput, DeleteTableCommandOutput } from "./commands/DeleteTableCommand";
 import {
+  type DeleteSessionCommandInput,
+  type DeleteSessionCommandOutput,
+  DeleteSessionCommand,
+} from "./commands/DeleteSessionCommand";
+import {
+  type DeleteTableCommandInput,
+  type DeleteTableCommandOutput,
+  DeleteTableCommand,
+} from "./commands/DeleteTableCommand";
+import {
+  type DeleteTableOptimizerCommandInput,
+  type DeleteTableOptimizerCommandOutput,
+  DeleteTableOptimizerCommand,
+} from "./commands/DeleteTableOptimizerCommand";
+import {
+  type DeleteTableVersionCommandInput,
+  type DeleteTableVersionCommandOutput,
   DeleteTableVersionCommand,
-  DeleteTableVersionCommandInput,
-  DeleteTableVersionCommandOutput,
 } from "./commands/DeleteTableVersionCommand";
 import {
+  type DeleteTriggerCommandInput,
+  type DeleteTriggerCommandOutput,
   DeleteTriggerCommand,
-  DeleteTriggerCommandInput,
-  DeleteTriggerCommandOutput,
 } from "./commands/DeleteTriggerCommand";
 import {
+  type DeleteUsageProfileCommandInput,
+  type DeleteUsageProfileCommandOutput,
+  DeleteUsageProfileCommand,
+} from "./commands/DeleteUsageProfileCommand";
+import {
+  type DeleteUserDefinedFunctionCommandInput,
+  type DeleteUserDefinedFunctionCommandOutput,
   DeleteUserDefinedFunctionCommand,
-  DeleteUserDefinedFunctionCommandInput,
-  DeleteUserDefinedFunctionCommandOutput,
 } from "./commands/DeleteUserDefinedFunctionCommand";
 import {
+  type DeleteWorkflowCommandInput,
+  type DeleteWorkflowCommandOutput,
   DeleteWorkflowCommand,
-  DeleteWorkflowCommandInput,
-  DeleteWorkflowCommandOutput,
 } from "./commands/DeleteWorkflowCommand";
 import {
+  type DescribeConnectionTypeCommandInput,
+  type DescribeConnectionTypeCommandOutput,
+  DescribeConnectionTypeCommand,
+} from "./commands/DescribeConnectionTypeCommand";
+import {
+  type DescribeEntityCommandInput,
+  type DescribeEntityCommandOutput,
+  DescribeEntityCommand,
+} from "./commands/DescribeEntityCommand";
+import {
+  type DescribeInboundIntegrationsCommandInput,
+  type DescribeInboundIntegrationsCommandOutput,
+  DescribeInboundIntegrationsCommand,
+} from "./commands/DescribeInboundIntegrationsCommand";
+import {
+  type DescribeIntegrationsCommandInput,
+  type DescribeIntegrationsCommandOutput,
+  DescribeIntegrationsCommand,
+} from "./commands/DescribeIntegrationsCommand";
+import {
+  type DisassociateGlossaryTermsCommandInput,
+  type DisassociateGlossaryTermsCommandOutput,
+  DisassociateGlossaryTermsCommand,
+} from "./commands/DisassociateGlossaryTermsCommand";
+import { type GetAssetCommandInput, type GetAssetCommandOutput, GetAssetCommand } from "./commands/GetAssetCommand";
+import {
+  type GetAssetTypeCommandInput,
+  type GetAssetTypeCommandOutput,
+  GetAssetTypeCommand,
+} from "./commands/GetAssetTypeCommand";
+import {
+  type GetBlueprintCommandInput,
+  type GetBlueprintCommandOutput,
   GetBlueprintCommand,
-  GetBlueprintCommandInput,
-  GetBlueprintCommandOutput,
 } from "./commands/GetBlueprintCommand";
 import {
+  type GetBlueprintRunCommandInput,
+  type GetBlueprintRunCommandOutput,
   GetBlueprintRunCommand,
-  GetBlueprintRunCommandInput,
-  GetBlueprintRunCommandOutput,
 } from "./commands/GetBlueprintRunCommand";
 import {
+  type GetBlueprintRunsCommandInput,
+  type GetBlueprintRunsCommandOutput,
   GetBlueprintRunsCommand,
-  GetBlueprintRunsCommandInput,
-  GetBlueprintRunsCommandOutput,
 } from "./commands/GetBlueprintRunsCommand";
 import {
+  type GetCatalogCommandInput,
+  type GetCatalogCommandOutput,
+  GetCatalogCommand,
+} from "./commands/GetCatalogCommand";
+import {
+  type GetCatalogImportStatusCommandInput,
+  type GetCatalogImportStatusCommandOutput,
   GetCatalogImportStatusCommand,
-  GetCatalogImportStatusCommandInput,
-  GetCatalogImportStatusCommandOutput,
 } from "./commands/GetCatalogImportStatusCommand";
 import {
+  type GetCatalogsCommandInput,
+  type GetCatalogsCommandOutput,
+  GetCatalogsCommand,
+} from "./commands/GetCatalogsCommand";
+import {
+  type GetClassifierCommandInput,
+  type GetClassifierCommandOutput,
   GetClassifierCommand,
-  GetClassifierCommandInput,
-  GetClassifierCommandOutput,
 } from "./commands/GetClassifierCommand";
 import {
+  type GetClassifiersCommandInput,
+  type GetClassifiersCommandOutput,
   GetClassifiersCommand,
-  GetClassifiersCommandInput,
-  GetClassifiersCommandOutput,
 } from "./commands/GetClassifiersCommand";
 import {
+  type GetColumnStatisticsForPartitionCommandInput,
+  type GetColumnStatisticsForPartitionCommandOutput,
   GetColumnStatisticsForPartitionCommand,
-  GetColumnStatisticsForPartitionCommandInput,
-  GetColumnStatisticsForPartitionCommandOutput,
 } from "./commands/GetColumnStatisticsForPartitionCommand";
 import {
+  type GetColumnStatisticsForTableCommandInput,
+  type GetColumnStatisticsForTableCommandOutput,
   GetColumnStatisticsForTableCommand,
-  GetColumnStatisticsForTableCommandInput,
-  GetColumnStatisticsForTableCommandOutput,
 } from "./commands/GetColumnStatisticsForTableCommand";
 import {
+  type GetColumnStatisticsTaskRunCommandInput,
+  type GetColumnStatisticsTaskRunCommandOutput,
+  GetColumnStatisticsTaskRunCommand,
+} from "./commands/GetColumnStatisticsTaskRunCommand";
+import {
+  type GetColumnStatisticsTaskRunsCommandInput,
+  type GetColumnStatisticsTaskRunsCommandOutput,
+  GetColumnStatisticsTaskRunsCommand,
+} from "./commands/GetColumnStatisticsTaskRunsCommand";
+import {
+  type GetColumnStatisticsTaskSettingsCommandInput,
+  type GetColumnStatisticsTaskSettingsCommandOutput,
+  GetColumnStatisticsTaskSettingsCommand,
+} from "./commands/GetColumnStatisticsTaskSettingsCommand";
+import {
+  type GetConnectionCommandInput,
+  type GetConnectionCommandOutput,
   GetConnectionCommand,
-  GetConnectionCommandInput,
-  GetConnectionCommandOutput,
 } from "./commands/GetConnectionCommand";
 import {
+  type GetConnectionsCommandInput,
+  type GetConnectionsCommandOutput,
   GetConnectionsCommand,
-  GetConnectionsCommandInput,
-  GetConnectionsCommandOutput,
 } from "./commands/GetConnectionsCommand";
-import { GetCrawlerCommand, GetCrawlerCommandInput, GetCrawlerCommandOutput } from "./commands/GetCrawlerCommand";
 import {
+  type GetCrawlerCommandInput,
+  type GetCrawlerCommandOutput,
+  GetCrawlerCommand,
+} from "./commands/GetCrawlerCommand";
+import {
+  type GetCrawlerMetricsCommandInput,
+  type GetCrawlerMetricsCommandOutput,
   GetCrawlerMetricsCommand,
-  GetCrawlerMetricsCommandInput,
-  GetCrawlerMetricsCommandOutput,
 } from "./commands/GetCrawlerMetricsCommand";
-import { GetCrawlersCommand, GetCrawlersCommandInput, GetCrawlersCommandOutput } from "./commands/GetCrawlersCommand";
-import { GetDatabaseCommand, GetDatabaseCommandInput, GetDatabaseCommandOutput } from "./commands/GetDatabaseCommand";
 import {
+  type GetCrawlersCommandInput,
+  type GetCrawlersCommandOutput,
+  GetCrawlersCommand,
+} from "./commands/GetCrawlersCommand";
+import {
+  type GetCustomEntityTypeCommandInput,
+  type GetCustomEntityTypeCommandOutput,
+  GetCustomEntityTypeCommand,
+} from "./commands/GetCustomEntityTypeCommand";
+import {
+  type GetDashboardUrlCommandInput,
+  type GetDashboardUrlCommandOutput,
+  GetDashboardUrlCommand,
+} from "./commands/GetDashboardUrlCommand";
+import {
+  type GetDatabaseCommandInput,
+  type GetDatabaseCommandOutput,
+  GetDatabaseCommand,
+} from "./commands/GetDatabaseCommand";
+import {
+  type GetDatabasesCommandInput,
+  type GetDatabasesCommandOutput,
   GetDatabasesCommand,
-  GetDatabasesCommandInput,
-  GetDatabasesCommandOutput,
 } from "./commands/GetDatabasesCommand";
 import {
+  type GetDataCatalogEncryptionSettingsCommandInput,
+  type GetDataCatalogEncryptionSettingsCommandOutput,
   GetDataCatalogEncryptionSettingsCommand,
-  GetDataCatalogEncryptionSettingsCommandInput,
-  GetDataCatalogEncryptionSettingsCommandOutput,
 } from "./commands/GetDataCatalogEncryptionSettingsCommand";
 import {
+  type GetDataCatalogExportConfigurationCommandInput,
+  type GetDataCatalogExportConfigurationCommandOutput,
+  GetDataCatalogExportConfigurationCommand,
+} from "./commands/GetDataCatalogExportConfigurationCommand";
+import {
+  type GetDataflowGraphCommandInput,
+  type GetDataflowGraphCommandOutput,
   GetDataflowGraphCommand,
-  GetDataflowGraphCommandInput,
-  GetDataflowGraphCommandOutput,
 } from "./commands/GetDataflowGraphCommand";
 import {
+  type GetDataQualityEvaluationConfigCommandInput,
+  type GetDataQualityEvaluationConfigCommandOutput,
+  GetDataQualityEvaluationConfigCommand,
+} from "./commands/GetDataQualityEvaluationConfigCommand";
+import {
+  type GetDataQualityModelCommandInput,
+  type GetDataQualityModelCommandOutput,
+  GetDataQualityModelCommand,
+} from "./commands/GetDataQualityModelCommand";
+import {
+  type GetDataQualityModelResultCommandInput,
+  type GetDataQualityModelResultCommandOutput,
+  GetDataQualityModelResultCommand,
+} from "./commands/GetDataQualityModelResultCommand";
+import {
+  type GetDataQualityResultCommandInput,
+  type GetDataQualityResultCommandOutput,
+  GetDataQualityResultCommand,
+} from "./commands/GetDataQualityResultCommand";
+import {
+  type GetDataQualityResultV2CommandInput,
+  type GetDataQualityResultV2CommandOutput,
+  GetDataQualityResultV2Command,
+} from "./commands/GetDataQualityResultV2Command";
+import {
+  type GetDataQualityRuleRecommendationRunCommandInput,
+  type GetDataQualityRuleRecommendationRunCommandOutput,
+  GetDataQualityRuleRecommendationRunCommand,
+} from "./commands/GetDataQualityRuleRecommendationRunCommand";
+import {
+  type GetDataQualityRulesetCommandInput,
+  type GetDataQualityRulesetCommandOutput,
+  GetDataQualityRulesetCommand,
+} from "./commands/GetDataQualityRulesetCommand";
+import {
+  type GetDataQualityRulesetEvaluationRunCommandInput,
+  type GetDataQualityRulesetEvaluationRunCommandOutput,
+  GetDataQualityRulesetEvaluationRunCommand,
+} from "./commands/GetDataQualityRulesetEvaluationRunCommand";
+import {
+  type GetDevEndpointCommandInput,
+  type GetDevEndpointCommandOutput,
   GetDevEndpointCommand,
-  GetDevEndpointCommandInput,
-  GetDevEndpointCommandOutput,
 } from "./commands/GetDevEndpointCommand";
 import {
+  type GetDevEndpointsCommandInput,
+  type GetDevEndpointsCommandOutput,
   GetDevEndpointsCommand,
-  GetDevEndpointsCommandInput,
-  GetDevEndpointsCommandOutput,
 } from "./commands/GetDevEndpointsCommand";
 import {
-  GetJobBookmarkCommand,
-  GetJobBookmarkCommandInput,
-  GetJobBookmarkCommandOutput,
-} from "./commands/GetJobBookmarkCommand";
-import { GetJobCommand, GetJobCommandInput, GetJobCommandOutput } from "./commands/GetJobCommand";
-import { GetJobRunCommand, GetJobRunCommandInput, GetJobRunCommandOutput } from "./commands/GetJobRunCommand";
-import { GetJobRunsCommand, GetJobRunsCommandInput, GetJobRunsCommandOutput } from "./commands/GetJobRunsCommand";
-import { GetJobsCommand, GetJobsCommandInput, GetJobsCommandOutput } from "./commands/GetJobsCommand";
-import { GetMappingCommand, GetMappingCommandInput, GetMappingCommandOutput } from "./commands/GetMappingCommand";
+  type GetEntityRecordsCommandInput,
+  type GetEntityRecordsCommandOutput,
+  GetEntityRecordsCommand,
+} from "./commands/GetEntityRecordsCommand";
 import {
+  type GetFormTypeCommandInput,
+  type GetFormTypeCommandOutput,
+  GetFormTypeCommand,
+} from "./commands/GetFormTypeCommand";
+import {
+  type GetGlossaryCommandInput,
+  type GetGlossaryCommandOutput,
+  GetGlossaryCommand,
+} from "./commands/GetGlossaryCommand";
+import {
+  type GetGlossaryTermCommandInput,
+  type GetGlossaryTermCommandOutput,
+  GetGlossaryTermCommand,
+} from "./commands/GetGlossaryTermCommand";
+import {
+  type GetGlueIdentityCenterConfigurationCommandInput,
+  type GetGlueIdentityCenterConfigurationCommandOutput,
+  GetGlueIdentityCenterConfigurationCommand,
+} from "./commands/GetGlueIdentityCenterConfigurationCommand";
+import {
+  type GetIntegrationResourcePropertyCommandInput,
+  type GetIntegrationResourcePropertyCommandOutput,
+  GetIntegrationResourcePropertyCommand,
+} from "./commands/GetIntegrationResourcePropertyCommand";
+import {
+  type GetIntegrationTablePropertiesCommandInput,
+  type GetIntegrationTablePropertiesCommandOutput,
+  GetIntegrationTablePropertiesCommand,
+} from "./commands/GetIntegrationTablePropertiesCommand";
+import {
+  type GetJobBookmarkCommandInput,
+  type GetJobBookmarkCommandOutput,
+  GetJobBookmarkCommand,
+} from "./commands/GetJobBookmarkCommand";
+import { type GetJobCommandInput, type GetJobCommandOutput, GetJobCommand } from "./commands/GetJobCommand";
+import { type GetJobRunCommandInput, type GetJobRunCommandOutput, GetJobRunCommand } from "./commands/GetJobRunCommand";
+import {
+  type GetJobRunsCommandInput,
+  type GetJobRunsCommandOutput,
+  GetJobRunsCommand,
+} from "./commands/GetJobRunsCommand";
+import { type GetJobsCommandInput, type GetJobsCommandOutput, GetJobsCommand } from "./commands/GetJobsCommand";
+import {
+  type GetJobUpgradeAnalysisCommandInput,
+  type GetJobUpgradeAnalysisCommandOutput,
+  GetJobUpgradeAnalysisCommand,
+} from "./commands/GetJobUpgradeAnalysisCommand";
+import {
+  type GetMappingCommandInput,
+  type GetMappingCommandOutput,
+  GetMappingCommand,
+} from "./commands/GetMappingCommand";
+import {
+  type GetMaterializedViewRefreshTaskRunCommandInput,
+  type GetMaterializedViewRefreshTaskRunCommandOutput,
+  GetMaterializedViewRefreshTaskRunCommand,
+} from "./commands/GetMaterializedViewRefreshTaskRunCommand";
+import {
+  type GetMLTaskRunCommandInput,
+  type GetMLTaskRunCommandOutput,
   GetMLTaskRunCommand,
-  GetMLTaskRunCommandInput,
-  GetMLTaskRunCommandOutput,
 } from "./commands/GetMLTaskRunCommand";
 import {
+  type GetMLTaskRunsCommandInput,
+  type GetMLTaskRunsCommandOutput,
   GetMLTaskRunsCommand,
-  GetMLTaskRunsCommandInput,
-  GetMLTaskRunsCommandOutput,
 } from "./commands/GetMLTaskRunsCommand";
 import {
+  type GetMLTransformCommandInput,
+  type GetMLTransformCommandOutput,
   GetMLTransformCommand,
-  GetMLTransformCommandInput,
-  GetMLTransformCommandOutput,
 } from "./commands/GetMLTransformCommand";
 import {
+  type GetMLTransformsCommandInput,
+  type GetMLTransformsCommandOutput,
   GetMLTransformsCommand,
-  GetMLTransformsCommandInput,
-  GetMLTransformsCommandOutput,
 } from "./commands/GetMLTransformsCommand";
 import {
+  type GetPartitionCommandInput,
+  type GetPartitionCommandOutput,
   GetPartitionCommand,
-  GetPartitionCommandInput,
-  GetPartitionCommandOutput,
 } from "./commands/GetPartitionCommand";
 import {
+  type GetPartitionIndexesCommandInput,
+  type GetPartitionIndexesCommandOutput,
   GetPartitionIndexesCommand,
-  GetPartitionIndexesCommandInput,
-  GetPartitionIndexesCommandOutput,
 } from "./commands/GetPartitionIndexesCommand";
 import {
+  type GetPartitionsCommandInput,
+  type GetPartitionsCommandOutput,
   GetPartitionsCommand,
-  GetPartitionsCommandInput,
-  GetPartitionsCommandOutput,
 } from "./commands/GetPartitionsCommand";
-import { GetPlanCommand, GetPlanCommandInput, GetPlanCommandOutput } from "./commands/GetPlanCommand";
-import { GetRegistryCommand, GetRegistryCommandInput, GetRegistryCommandOutput } from "./commands/GetRegistryCommand";
+import { type GetPlanCommandInput, type GetPlanCommandOutput, GetPlanCommand } from "./commands/GetPlanCommand";
 import {
+  type GetRegistryCommandInput,
+  type GetRegistryCommandOutput,
+  GetRegistryCommand,
+} from "./commands/GetRegistryCommand";
+import {
+  type GetResourcePoliciesCommandInput,
+  type GetResourcePoliciesCommandOutput,
   GetResourcePoliciesCommand,
-  GetResourcePoliciesCommandInput,
-  GetResourcePoliciesCommandOutput,
 } from "./commands/GetResourcePoliciesCommand";
 import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
   GetResourcePolicyCommand,
-  GetResourcePolicyCommandInput,
-  GetResourcePolicyCommandOutput,
 } from "./commands/GetResourcePolicyCommand";
 import {
+  type GetSchemaByDefinitionCommandInput,
+  type GetSchemaByDefinitionCommandOutput,
   GetSchemaByDefinitionCommand,
-  GetSchemaByDefinitionCommandInput,
-  GetSchemaByDefinitionCommandOutput,
 } from "./commands/GetSchemaByDefinitionCommand";
-import { GetSchemaCommand, GetSchemaCommandInput, GetSchemaCommandOutput } from "./commands/GetSchemaCommand";
+import { type GetSchemaCommandInput, type GetSchemaCommandOutput, GetSchemaCommand } from "./commands/GetSchemaCommand";
 import {
+  type GetSchemaVersionCommandInput,
+  type GetSchemaVersionCommandOutput,
   GetSchemaVersionCommand,
-  GetSchemaVersionCommandInput,
-  GetSchemaVersionCommandOutput,
 } from "./commands/GetSchemaVersionCommand";
 import {
+  type GetSchemaVersionsDiffCommandInput,
+  type GetSchemaVersionsDiffCommandOutput,
   GetSchemaVersionsDiffCommand,
-  GetSchemaVersionsDiffCommandInput,
-  GetSchemaVersionsDiffCommandOutput,
 } from "./commands/GetSchemaVersionsDiffCommand";
 import {
+  type GetSecurityConfigurationCommandInput,
+  type GetSecurityConfigurationCommandOutput,
   GetSecurityConfigurationCommand,
-  GetSecurityConfigurationCommandInput,
-  GetSecurityConfigurationCommandOutput,
 } from "./commands/GetSecurityConfigurationCommand";
 import {
+  type GetSecurityConfigurationsCommandInput,
+  type GetSecurityConfigurationsCommandOutput,
   GetSecurityConfigurationsCommand,
-  GetSecurityConfigurationsCommandInput,
-  GetSecurityConfigurationsCommandOutput,
 } from "./commands/GetSecurityConfigurationsCommand";
-import { GetTableCommand, GetTableCommandInput, GetTableCommandOutput } from "./commands/GetTableCommand";
-import { GetTablesCommand, GetTablesCommandInput, GetTablesCommandOutput } from "./commands/GetTablesCommand";
 import {
+  type GetSessionCommandInput,
+  type GetSessionCommandOutput,
+  GetSessionCommand,
+} from "./commands/GetSessionCommand";
+import {
+  type GetSessionEndpointCommandInput,
+  type GetSessionEndpointCommandOutput,
+  GetSessionEndpointCommand,
+} from "./commands/GetSessionEndpointCommand";
+import {
+  type GetStatementCommandInput,
+  type GetStatementCommandOutput,
+  GetStatementCommand,
+} from "./commands/GetStatementCommand";
+import {
+  type GetSystemLogsForJobRunCommandInput,
+  type GetSystemLogsForJobRunCommandOutput,
+  GetSystemLogsForJobRunCommand,
+} from "./commands/GetSystemLogsForJobRunCommand";
+import {
+  type GetSystemLogsForSessionCommandInput,
+  type GetSystemLogsForSessionCommandOutput,
+  GetSystemLogsForSessionCommand,
+} from "./commands/GetSystemLogsForSessionCommand";
+import { type GetTableCommandInput, type GetTableCommandOutput, GetTableCommand } from "./commands/GetTableCommand";
+import {
+  type GetTableOptimizerCommandInput,
+  type GetTableOptimizerCommandOutput,
+  GetTableOptimizerCommand,
+} from "./commands/GetTableOptimizerCommand";
+import { type GetTablesCommandInput, type GetTablesCommandOutput, GetTablesCommand } from "./commands/GetTablesCommand";
+import {
+  type GetTableVersionCommandInput,
+  type GetTableVersionCommandOutput,
   GetTableVersionCommand,
-  GetTableVersionCommandInput,
-  GetTableVersionCommandOutput,
 } from "./commands/GetTableVersionCommand";
 import {
+  type GetTableVersionsCommandInput,
+  type GetTableVersionsCommandOutput,
   GetTableVersionsCommand,
-  GetTableVersionsCommandInput,
-  GetTableVersionsCommandOutput,
 } from "./commands/GetTableVersionsCommand";
-import { GetTagsCommand, GetTagsCommandInput, GetTagsCommandOutput } from "./commands/GetTagsCommand";
-import { GetTriggerCommand, GetTriggerCommandInput, GetTriggerCommandOutput } from "./commands/GetTriggerCommand";
-import { GetTriggersCommand, GetTriggersCommandInput, GetTriggersCommandOutput } from "./commands/GetTriggersCommand";
+import { type GetTagsCommandInput, type GetTagsCommandOutput, GetTagsCommand } from "./commands/GetTagsCommand";
 import {
+  type GetTriggerCommandInput,
+  type GetTriggerCommandOutput,
+  GetTriggerCommand,
+} from "./commands/GetTriggerCommand";
+import {
+  type GetTriggersCommandInput,
+  type GetTriggersCommandOutput,
+  GetTriggersCommand,
+} from "./commands/GetTriggersCommand";
+import {
+  type GetUnfilteredPartitionMetadataCommandInput,
+  type GetUnfilteredPartitionMetadataCommandOutput,
+  GetUnfilteredPartitionMetadataCommand,
+} from "./commands/GetUnfilteredPartitionMetadataCommand";
+import {
+  type GetUnfilteredPartitionsMetadataCommandInput,
+  type GetUnfilteredPartitionsMetadataCommandOutput,
+  GetUnfilteredPartitionsMetadataCommand,
+} from "./commands/GetUnfilteredPartitionsMetadataCommand";
+import {
+  type GetUnfilteredTableMetadataCommandInput,
+  type GetUnfilteredTableMetadataCommandOutput,
+  GetUnfilteredTableMetadataCommand,
+} from "./commands/GetUnfilteredTableMetadataCommand";
+import {
+  type GetUsageProfileCommandInput,
+  type GetUsageProfileCommandOutput,
+  GetUsageProfileCommand,
+} from "./commands/GetUsageProfileCommand";
+import {
+  type GetUserDefinedFunctionCommandInput,
+  type GetUserDefinedFunctionCommandOutput,
   GetUserDefinedFunctionCommand,
-  GetUserDefinedFunctionCommandInput,
-  GetUserDefinedFunctionCommandOutput,
 } from "./commands/GetUserDefinedFunctionCommand";
 import {
+  type GetUserDefinedFunctionsCommandInput,
+  type GetUserDefinedFunctionsCommandOutput,
   GetUserDefinedFunctionsCommand,
-  GetUserDefinedFunctionsCommandInput,
-  GetUserDefinedFunctionsCommandOutput,
 } from "./commands/GetUserDefinedFunctionsCommand";
-import { GetWorkflowCommand, GetWorkflowCommandInput, GetWorkflowCommandOutput } from "./commands/GetWorkflowCommand";
 import {
+  type GetWorkflowCommandInput,
+  type GetWorkflowCommandOutput,
+  GetWorkflowCommand,
+} from "./commands/GetWorkflowCommand";
+import {
+  type GetWorkflowRunCommandInput,
+  type GetWorkflowRunCommandOutput,
   GetWorkflowRunCommand,
-  GetWorkflowRunCommandInput,
-  GetWorkflowRunCommandOutput,
 } from "./commands/GetWorkflowRunCommand";
 import {
+  type GetWorkflowRunPropertiesCommandInput,
+  type GetWorkflowRunPropertiesCommandOutput,
   GetWorkflowRunPropertiesCommand,
-  GetWorkflowRunPropertiesCommandInput,
-  GetWorkflowRunPropertiesCommandOutput,
 } from "./commands/GetWorkflowRunPropertiesCommand";
 import {
+  type GetWorkflowRunsCommandInput,
+  type GetWorkflowRunsCommandOutput,
   GetWorkflowRunsCommand,
-  GetWorkflowRunsCommandInput,
-  GetWorkflowRunsCommandOutput,
 } from "./commands/GetWorkflowRunsCommand";
 import {
+  type ImportCatalogToGlueCommandInput,
+  type ImportCatalogToGlueCommandOutput,
   ImportCatalogToGlueCommand,
-  ImportCatalogToGlueCommandInput,
-  ImportCatalogToGlueCommandOutput,
 } from "./commands/ImportCatalogToGlueCommand";
 import {
+  type ListAssetTypesCommandInput,
+  type ListAssetTypesCommandOutput,
+  ListAssetTypesCommand,
+} from "./commands/ListAssetTypesCommand";
+import {
+  type ListBlueprintsCommandInput,
+  type ListBlueprintsCommandOutput,
   ListBlueprintsCommand,
-  ListBlueprintsCommandInput,
-  ListBlueprintsCommandOutput,
 } from "./commands/ListBlueprintsCommand";
 import {
+  type ListColumnStatisticsTaskRunsCommandInput,
+  type ListColumnStatisticsTaskRunsCommandOutput,
+  ListColumnStatisticsTaskRunsCommand,
+} from "./commands/ListColumnStatisticsTaskRunsCommand";
+import {
+  type ListConnectionTypesCommandInput,
+  type ListConnectionTypesCommandOutput,
+  ListConnectionTypesCommand,
+} from "./commands/ListConnectionTypesCommand";
+import {
+  type ListCrawlersCommandInput,
+  type ListCrawlersCommandOutput,
   ListCrawlersCommand,
-  ListCrawlersCommandInput,
-  ListCrawlersCommandOutput,
 } from "./commands/ListCrawlersCommand";
 import {
-  ListDevEndpointsCommand,
-  ListDevEndpointsCommandInput,
-  ListDevEndpointsCommandOutput,
-} from "./commands/ListDevEndpointsCommand";
-import { ListJobsCommand, ListJobsCommandInput, ListJobsCommandOutput } from "./commands/ListJobsCommand";
+  type ListCrawlsCommandInput,
+  type ListCrawlsCommandOutput,
+  ListCrawlsCommand,
+} from "./commands/ListCrawlsCommand";
 import {
+  type ListCustomEntityTypesCommandInput,
+  type ListCustomEntityTypesCommandOutput,
+  ListCustomEntityTypesCommand,
+} from "./commands/ListCustomEntityTypesCommand";
+import {
+  type ListDataQualityEvaluationConfigsCommandInput,
+  type ListDataQualityEvaluationConfigsCommandOutput,
+  ListDataQualityEvaluationConfigsCommand,
+} from "./commands/ListDataQualityEvaluationConfigsCommand";
+import {
+  type ListDataQualityResultsCommandInput,
+  type ListDataQualityResultsCommandOutput,
+  ListDataQualityResultsCommand,
+} from "./commands/ListDataQualityResultsCommand";
+import {
+  type ListDataQualityResultsV2CommandInput,
+  type ListDataQualityResultsV2CommandOutput,
+  ListDataQualityResultsV2Command,
+} from "./commands/ListDataQualityResultsV2Command";
+import {
+  type ListDataQualityRuleRecommendationRunsCommandInput,
+  type ListDataQualityRuleRecommendationRunsCommandOutput,
+  ListDataQualityRuleRecommendationRunsCommand,
+} from "./commands/ListDataQualityRuleRecommendationRunsCommand";
+import {
+  type ListDataQualityRulesetEvaluationRunsCommandInput,
+  type ListDataQualityRulesetEvaluationRunsCommandOutput,
+  ListDataQualityRulesetEvaluationRunsCommand,
+} from "./commands/ListDataQualityRulesetEvaluationRunsCommand";
+import {
+  type ListDataQualityRulesetsCommandInput,
+  type ListDataQualityRulesetsCommandOutput,
+  ListDataQualityRulesetsCommand,
+} from "./commands/ListDataQualityRulesetsCommand";
+import {
+  type ListDataQualityStatisticAnnotationsCommandInput,
+  type ListDataQualityStatisticAnnotationsCommandOutput,
+  ListDataQualityStatisticAnnotationsCommand,
+} from "./commands/ListDataQualityStatisticAnnotationsCommand";
+import {
+  type ListDataQualityStatisticsCommandInput,
+  type ListDataQualityStatisticsCommandOutput,
+  ListDataQualityStatisticsCommand,
+} from "./commands/ListDataQualityStatisticsCommand";
+import {
+  type ListDevEndpointsCommandInput,
+  type ListDevEndpointsCommandOutput,
+  ListDevEndpointsCommand,
+} from "./commands/ListDevEndpointsCommand";
+import {
+  type ListEntitiesCommandInput,
+  type ListEntitiesCommandOutput,
+  ListEntitiesCommand,
+} from "./commands/ListEntitiesCommand";
+import {
+  type ListFormTypesCommandInput,
+  type ListFormTypesCommandOutput,
+  ListFormTypesCommand,
+} from "./commands/ListFormTypesCommand";
+import {
+  type ListGlossariesCommandInput,
+  type ListGlossariesCommandOutput,
+  ListGlossariesCommand,
+} from "./commands/ListGlossariesCommand";
+import {
+  type ListGlossaryTermsCommandInput,
+  type ListGlossaryTermsCommandOutput,
+  ListGlossaryTermsCommand,
+} from "./commands/ListGlossaryTermsCommand";
+import {
+  type ListIntegrationResourcePropertiesCommandInput,
+  type ListIntegrationResourcePropertiesCommandOutput,
+  ListIntegrationResourcePropertiesCommand,
+} from "./commands/ListIntegrationResourcePropertiesCommand";
+import {
+  type ListIntegrationTablePropertiesCommandInput,
+  type ListIntegrationTablePropertiesCommandOutput,
+  ListIntegrationTablePropertiesCommand,
+} from "./commands/ListIntegrationTablePropertiesCommand";
+import {
+  type ListIterableFormsCommandInput,
+  type ListIterableFormsCommandOutput,
+  ListIterableFormsCommand,
+} from "./commands/ListIterableFormsCommand";
+import { type ListJobsCommandInput, type ListJobsCommandOutput, ListJobsCommand } from "./commands/ListJobsCommand";
+import {
+  type ListMaterializedViewRefreshTaskRunsCommandInput,
+  type ListMaterializedViewRefreshTaskRunsCommandOutput,
+  ListMaterializedViewRefreshTaskRunsCommand,
+} from "./commands/ListMaterializedViewRefreshTaskRunsCommand";
+import {
+  type ListMLTransformsCommandInput,
+  type ListMLTransformsCommandOutput,
   ListMLTransformsCommand,
-  ListMLTransformsCommandInput,
-  ListMLTransformsCommandOutput,
 } from "./commands/ListMLTransformsCommand";
 import {
+  type ListRegistriesCommandInput,
+  type ListRegistriesCommandOutput,
   ListRegistriesCommand,
-  ListRegistriesCommandInput,
-  ListRegistriesCommandOutput,
 } from "./commands/ListRegistriesCommand";
-import { ListSchemasCommand, ListSchemasCommandInput, ListSchemasCommandOutput } from "./commands/ListSchemasCommand";
 import {
+  type ListSchemasCommandInput,
+  type ListSchemasCommandOutput,
+  ListSchemasCommand,
+} from "./commands/ListSchemasCommand";
+import {
+  type ListSchemaVersionsCommandInput,
+  type ListSchemaVersionsCommandOutput,
   ListSchemaVersionsCommand,
-  ListSchemaVersionsCommandInput,
-  ListSchemaVersionsCommandOutput,
 } from "./commands/ListSchemaVersionsCommand";
 import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ListStatementsCommandInput,
+  type ListStatementsCommandOutput,
+  ListStatementsCommand,
+} from "./commands/ListStatementsCommand";
+import {
+  type ListTableOptimizerRunsCommandInput,
+  type ListTableOptimizerRunsCommandOutput,
+  ListTableOptimizerRunsCommand,
+} from "./commands/ListTableOptimizerRunsCommand";
+import {
+  type ListTriggersCommandInput,
+  type ListTriggersCommandOutput,
   ListTriggersCommand,
-  ListTriggersCommandInput,
-  ListTriggersCommandOutput,
 } from "./commands/ListTriggersCommand";
 import {
+  type ListUsageProfilesCommandInput,
+  type ListUsageProfilesCommandOutput,
+  ListUsageProfilesCommand,
+} from "./commands/ListUsageProfilesCommand";
+import {
+  type ListWorkflowsCommandInput,
+  type ListWorkflowsCommandOutput,
   ListWorkflowsCommand,
-  ListWorkflowsCommandInput,
-  ListWorkflowsCommandOutput,
 } from "./commands/ListWorkflowsCommand";
 import {
+  type ModifyIntegrationCommandInput,
+  type ModifyIntegrationCommandOutput,
+  ModifyIntegrationCommand,
+} from "./commands/ModifyIntegrationCommand";
+import {
+  type PublishDataQualityResultV2CommandInput,
+  type PublishDataQualityResultV2CommandOutput,
+  PublishDataQualityResultV2Command,
+} from "./commands/PublishDataQualityResultV2Command";
+import { type PutAssetCommandInput, type PutAssetCommandOutput, PutAssetCommand } from "./commands/PutAssetCommand";
+import {
+  type PutAssetTypeCommandInput,
+  type PutAssetTypeCommandOutput,
+  PutAssetTypeCommand,
+} from "./commands/PutAssetTypeCommand";
+import {
+  type PutAttachmentCommandInput,
+  type PutAttachmentCommandOutput,
+  PutAttachmentCommand,
+} from "./commands/PutAttachmentCommand";
+import {
+  type PutDataCatalogEncryptionSettingsCommandInput,
+  type PutDataCatalogEncryptionSettingsCommandOutput,
   PutDataCatalogEncryptionSettingsCommand,
-  PutDataCatalogEncryptionSettingsCommandInput,
-  PutDataCatalogEncryptionSettingsCommandOutput,
 } from "./commands/PutDataCatalogEncryptionSettingsCommand";
 import {
+  type PutDataCatalogExportConfigurationCommandInput,
+  type PutDataCatalogExportConfigurationCommandOutput,
+  PutDataCatalogExportConfigurationCommand,
+} from "./commands/PutDataCatalogExportConfigurationCommand";
+import {
+  type PutDataQualityProfileAnnotationCommandInput,
+  type PutDataQualityProfileAnnotationCommandOutput,
+  PutDataQualityProfileAnnotationCommand,
+} from "./commands/PutDataQualityProfileAnnotationCommand";
+import {
+  type PutFormTypeCommandInput,
+  type PutFormTypeCommandOutput,
+  PutFormTypeCommand,
+} from "./commands/PutFormTypeCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
   PutResourcePolicyCommand,
-  PutResourcePolicyCommandInput,
-  PutResourcePolicyCommandOutput,
 } from "./commands/PutResourcePolicyCommand";
 import {
+  type PutSchemaVersionMetadataCommandInput,
+  type PutSchemaVersionMetadataCommandOutput,
   PutSchemaVersionMetadataCommand,
-  PutSchemaVersionMetadataCommandInput,
-  PutSchemaVersionMetadataCommandOutput,
 } from "./commands/PutSchemaVersionMetadataCommand";
 import {
+  type PutWorkflowRunPropertiesCommandInput,
+  type PutWorkflowRunPropertiesCommandOutput,
   PutWorkflowRunPropertiesCommand,
-  PutWorkflowRunPropertiesCommandInput,
-  PutWorkflowRunPropertiesCommandOutput,
 } from "./commands/PutWorkflowRunPropertiesCommand";
 import {
+  type QuerySchemaVersionMetadataCommandInput,
+  type QuerySchemaVersionMetadataCommandOutput,
   QuerySchemaVersionMetadataCommand,
-  QuerySchemaVersionMetadataCommandInput,
-  QuerySchemaVersionMetadataCommandOutput,
 } from "./commands/QuerySchemaVersionMetadataCommand";
 import {
+  type RegisterConnectionTypeCommandInput,
+  type RegisterConnectionTypeCommandOutput,
+  RegisterConnectionTypeCommand,
+} from "./commands/RegisterConnectionTypeCommand";
+import {
+  type RegisterSchemaVersionCommandInput,
+  type RegisterSchemaVersionCommandOutput,
   RegisterSchemaVersionCommand,
-  RegisterSchemaVersionCommandInput,
-  RegisterSchemaVersionCommandOutput,
 } from "./commands/RegisterSchemaVersionCommand";
 import {
+  type RemoveSchemaVersionMetadataCommandInput,
+  type RemoveSchemaVersionMetadataCommandOutput,
   RemoveSchemaVersionMetadataCommand,
-  RemoveSchemaVersionMetadataCommandInput,
-  RemoveSchemaVersionMetadataCommandOutput,
 } from "./commands/RemoveSchemaVersionMetadataCommand";
 import {
+  type ResetJobBookmarkCommandInput,
+  type ResetJobBookmarkCommandOutput,
   ResetJobBookmarkCommand,
-  ResetJobBookmarkCommandInput,
-  ResetJobBookmarkCommandOutput,
 } from "./commands/ResetJobBookmarkCommand";
 import {
+  type ResumeWorkflowRunCommandInput,
+  type ResumeWorkflowRunCommandOutput,
   ResumeWorkflowRunCommand,
-  ResumeWorkflowRunCommandInput,
-  ResumeWorkflowRunCommandOutput,
 } from "./commands/ResumeWorkflowRunCommand";
 import {
+  type RunStatementCommandInput,
+  type RunStatementCommandOutput,
+  RunStatementCommand,
+} from "./commands/RunStatementCommand";
+import {
+  type SearchAssetsCommandInput,
+  type SearchAssetsCommandOutput,
+  SearchAssetsCommand,
+} from "./commands/SearchAssetsCommand";
+import {
+  type SearchTablesCommandInput,
+  type SearchTablesCommandOutput,
   SearchTablesCommand,
-  SearchTablesCommandInput,
-  SearchTablesCommandOutput,
 } from "./commands/SearchTablesCommand";
 import {
+  type StartBlueprintRunCommandInput,
+  type StartBlueprintRunCommandOutput,
   StartBlueprintRunCommand,
-  StartBlueprintRunCommandInput,
-  StartBlueprintRunCommandOutput,
 } from "./commands/StartBlueprintRunCommand";
 import {
+  type StartColumnStatisticsTaskRunCommandInput,
+  type StartColumnStatisticsTaskRunCommandOutput,
+  StartColumnStatisticsTaskRunCommand,
+} from "./commands/StartColumnStatisticsTaskRunCommand";
+import {
+  type StartColumnStatisticsTaskRunScheduleCommandInput,
+  type StartColumnStatisticsTaskRunScheduleCommandOutput,
+  StartColumnStatisticsTaskRunScheduleCommand,
+} from "./commands/StartColumnStatisticsTaskRunScheduleCommand";
+import {
+  type StartCrawlerCommandInput,
+  type StartCrawlerCommandOutput,
   StartCrawlerCommand,
-  StartCrawlerCommandInput,
-  StartCrawlerCommandOutput,
 } from "./commands/StartCrawlerCommand";
 import {
+  type StartCrawlerScheduleCommandInput,
+  type StartCrawlerScheduleCommandOutput,
   StartCrawlerScheduleCommand,
-  StartCrawlerScheduleCommandInput,
-  StartCrawlerScheduleCommandOutput,
 } from "./commands/StartCrawlerScheduleCommand";
 import {
+  type StartDataQualityRuleRecommendationRunCommandInput,
+  type StartDataQualityRuleRecommendationRunCommandOutput,
+  StartDataQualityRuleRecommendationRunCommand,
+} from "./commands/StartDataQualityRuleRecommendationRunCommand";
+import {
+  type StartDataQualityRulesetEvaluationRunCommandInput,
+  type StartDataQualityRulesetEvaluationRunCommandOutput,
+  StartDataQualityRulesetEvaluationRunCommand,
+} from "./commands/StartDataQualityRulesetEvaluationRunCommand";
+import {
+  type StartExportLabelsTaskRunCommandInput,
+  type StartExportLabelsTaskRunCommandOutput,
   StartExportLabelsTaskRunCommand,
-  StartExportLabelsTaskRunCommandInput,
-  StartExportLabelsTaskRunCommandOutput,
 } from "./commands/StartExportLabelsTaskRunCommand";
 import {
+  type StartImportLabelsTaskRunCommandInput,
+  type StartImportLabelsTaskRunCommandOutput,
   StartImportLabelsTaskRunCommand,
-  StartImportLabelsTaskRunCommandInput,
-  StartImportLabelsTaskRunCommandOutput,
 } from "./commands/StartImportLabelsTaskRunCommand";
-import { StartJobRunCommand, StartJobRunCommandInput, StartJobRunCommandOutput } from "./commands/StartJobRunCommand";
 import {
+  type StartJobRunCommandInput,
+  type StartJobRunCommandOutput,
+  StartJobRunCommand,
+} from "./commands/StartJobRunCommand";
+import {
+  type StartJobUpgradeAnalysisCommandInput,
+  type StartJobUpgradeAnalysisCommandOutput,
+  StartJobUpgradeAnalysisCommand,
+} from "./commands/StartJobUpgradeAnalysisCommand";
+import {
+  type StartMaterializedViewRefreshTaskRunCommandInput,
+  type StartMaterializedViewRefreshTaskRunCommandOutput,
+  StartMaterializedViewRefreshTaskRunCommand,
+} from "./commands/StartMaterializedViewRefreshTaskRunCommand";
+import {
+  type StartMLEvaluationTaskRunCommandInput,
+  type StartMLEvaluationTaskRunCommandOutput,
   StartMLEvaluationTaskRunCommand,
-  StartMLEvaluationTaskRunCommandInput,
-  StartMLEvaluationTaskRunCommandOutput,
 } from "./commands/StartMLEvaluationTaskRunCommand";
 import {
+  type StartMLLabelingSetGenerationTaskRunCommandInput,
+  type StartMLLabelingSetGenerationTaskRunCommandOutput,
   StartMLLabelingSetGenerationTaskRunCommand,
-  StartMLLabelingSetGenerationTaskRunCommandInput,
-  StartMLLabelingSetGenerationTaskRunCommandOutput,
 } from "./commands/StartMLLabelingSetGenerationTaskRunCommand";
 import {
+  type StartTriggerCommandInput,
+  type StartTriggerCommandOutput,
   StartTriggerCommand,
-  StartTriggerCommandInput,
-  StartTriggerCommandOutput,
 } from "./commands/StartTriggerCommand";
 import {
+  type StartWorkflowRunCommandInput,
+  type StartWorkflowRunCommandOutput,
   StartWorkflowRunCommand,
-  StartWorkflowRunCommandInput,
-  StartWorkflowRunCommandOutput,
 } from "./commands/StartWorkflowRunCommand";
-import { StopCrawlerCommand, StopCrawlerCommandInput, StopCrawlerCommandOutput } from "./commands/StopCrawlerCommand";
 import {
+  type StopColumnStatisticsTaskRunCommandInput,
+  type StopColumnStatisticsTaskRunCommandOutput,
+  StopColumnStatisticsTaskRunCommand,
+} from "./commands/StopColumnStatisticsTaskRunCommand";
+import {
+  type StopColumnStatisticsTaskRunScheduleCommandInput,
+  type StopColumnStatisticsTaskRunScheduleCommandOutput,
+  StopColumnStatisticsTaskRunScheduleCommand,
+} from "./commands/StopColumnStatisticsTaskRunScheduleCommand";
+import {
+  type StopCrawlerCommandInput,
+  type StopCrawlerCommandOutput,
+  StopCrawlerCommand,
+} from "./commands/StopCrawlerCommand";
+import {
+  type StopCrawlerScheduleCommandInput,
+  type StopCrawlerScheduleCommandOutput,
   StopCrawlerScheduleCommand,
-  StopCrawlerScheduleCommandInput,
-  StopCrawlerScheduleCommandOutput,
 } from "./commands/StopCrawlerScheduleCommand";
-import { StopTriggerCommand, StopTriggerCommandInput, StopTriggerCommandOutput } from "./commands/StopTriggerCommand";
 import {
+  type StopJobUpgradeAnalysisCommandInput,
+  type StopJobUpgradeAnalysisCommandOutput,
+  StopJobUpgradeAnalysisCommand,
+} from "./commands/StopJobUpgradeAnalysisCommand";
+import {
+  type StopMaterializedViewRefreshTaskRunCommandInput,
+  type StopMaterializedViewRefreshTaskRunCommandOutput,
+  StopMaterializedViewRefreshTaskRunCommand,
+} from "./commands/StopMaterializedViewRefreshTaskRunCommand";
+import {
+  type StopSessionCommandInput,
+  type StopSessionCommandOutput,
+  StopSessionCommand,
+} from "./commands/StopSessionCommand";
+import {
+  type StopTriggerCommandInput,
+  type StopTriggerCommandOutput,
+  StopTriggerCommand,
+} from "./commands/StopTriggerCommand";
+import {
+  type StopWorkflowRunCommandInput,
+  type StopWorkflowRunCommandOutput,
   StopWorkflowRunCommand,
-  StopWorkflowRunCommandInput,
-  StopWorkflowRunCommandOutput,
 } from "./commands/StopWorkflowRunCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TestConnectionCommandInput,
+  type TestConnectionCommandOutput,
+  TestConnectionCommand,
+} from "./commands/TestConnectionCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAssetCommandInput,
+  type UpdateAssetCommandOutput,
+  UpdateAssetCommand,
+} from "./commands/UpdateAssetCommand";
+import {
+  type UpdateBlueprintCommandInput,
+  type UpdateBlueprintCommandOutput,
   UpdateBlueprintCommand,
-  UpdateBlueprintCommandInput,
-  UpdateBlueprintCommandOutput,
 } from "./commands/UpdateBlueprintCommand";
 import {
+  type UpdateCatalogCommandInput,
+  type UpdateCatalogCommandOutput,
+  UpdateCatalogCommand,
+} from "./commands/UpdateCatalogCommand";
+import {
+  type UpdateClassifierCommandInput,
+  type UpdateClassifierCommandOutput,
   UpdateClassifierCommand,
-  UpdateClassifierCommandInput,
-  UpdateClassifierCommandOutput,
 } from "./commands/UpdateClassifierCommand";
 import {
+  type UpdateColumnStatisticsForPartitionCommandInput,
+  type UpdateColumnStatisticsForPartitionCommandOutput,
   UpdateColumnStatisticsForPartitionCommand,
-  UpdateColumnStatisticsForPartitionCommandInput,
-  UpdateColumnStatisticsForPartitionCommandOutput,
 } from "./commands/UpdateColumnStatisticsForPartitionCommand";
 import {
+  type UpdateColumnStatisticsForTableCommandInput,
+  type UpdateColumnStatisticsForTableCommandOutput,
   UpdateColumnStatisticsForTableCommand,
-  UpdateColumnStatisticsForTableCommandInput,
-  UpdateColumnStatisticsForTableCommandOutput,
 } from "./commands/UpdateColumnStatisticsForTableCommand";
 import {
+  type UpdateColumnStatisticsTaskSettingsCommandInput,
+  type UpdateColumnStatisticsTaskSettingsCommandOutput,
+  UpdateColumnStatisticsTaskSettingsCommand,
+} from "./commands/UpdateColumnStatisticsTaskSettingsCommand";
+import {
+  type UpdateConnectionCommandInput,
+  type UpdateConnectionCommandOutput,
   UpdateConnectionCommand,
-  UpdateConnectionCommandInput,
-  UpdateConnectionCommandOutput,
 } from "./commands/UpdateConnectionCommand";
 import {
+  type UpdateCrawlerCommandInput,
+  type UpdateCrawlerCommandOutput,
   UpdateCrawlerCommand,
-  UpdateCrawlerCommandInput,
-  UpdateCrawlerCommandOutput,
 } from "./commands/UpdateCrawlerCommand";
 import {
+  type UpdateCrawlerScheduleCommandInput,
+  type UpdateCrawlerScheduleCommandOutput,
   UpdateCrawlerScheduleCommand,
-  UpdateCrawlerScheduleCommandInput,
-  UpdateCrawlerScheduleCommandOutput,
 } from "./commands/UpdateCrawlerScheduleCommand";
 import {
+  type UpdateDatabaseCommandInput,
+  type UpdateDatabaseCommandOutput,
   UpdateDatabaseCommand,
-  UpdateDatabaseCommandInput,
-  UpdateDatabaseCommandOutput,
 } from "./commands/UpdateDatabaseCommand";
 import {
-  UpdateDevEndpointCommand,
-  UpdateDevEndpointCommandInput,
-  UpdateDevEndpointCommandOutput,
-} from "./commands/UpdateDevEndpointCommand";
-import { UpdateJobCommand, UpdateJobCommandInput, UpdateJobCommandOutput } from "./commands/UpdateJobCommand";
+  type UpdateDataQualityEvaluationConfigCommandInput,
+  type UpdateDataQualityEvaluationConfigCommandOutput,
+  UpdateDataQualityEvaluationConfigCommand,
+} from "./commands/UpdateDataQualityEvaluationConfigCommand";
 import {
+  type UpdateDataQualityRulesetCommandInput,
+  type UpdateDataQualityRulesetCommandOutput,
+  UpdateDataQualityRulesetCommand,
+} from "./commands/UpdateDataQualityRulesetCommand";
+import {
+  type UpdateDevEndpointCommandInput,
+  type UpdateDevEndpointCommandOutput,
+  UpdateDevEndpointCommand,
+} from "./commands/UpdateDevEndpointCommand";
+import {
+  type UpdateGlossaryCommandInput,
+  type UpdateGlossaryCommandOutput,
+  UpdateGlossaryCommand,
+} from "./commands/UpdateGlossaryCommand";
+import {
+  type UpdateGlossaryTermCommandInput,
+  type UpdateGlossaryTermCommandOutput,
+  UpdateGlossaryTermCommand,
+} from "./commands/UpdateGlossaryTermCommand";
+import {
+  type UpdateGlueIdentityCenterConfigurationCommandInput,
+  type UpdateGlueIdentityCenterConfigurationCommandOutput,
+  UpdateGlueIdentityCenterConfigurationCommand,
+} from "./commands/UpdateGlueIdentityCenterConfigurationCommand";
+import {
+  type UpdateIntegrationResourcePropertyCommandInput,
+  type UpdateIntegrationResourcePropertyCommandOutput,
+  UpdateIntegrationResourcePropertyCommand,
+} from "./commands/UpdateIntegrationResourcePropertyCommand";
+import {
+  type UpdateIntegrationTablePropertiesCommandInput,
+  type UpdateIntegrationTablePropertiesCommandOutput,
+  UpdateIntegrationTablePropertiesCommand,
+} from "./commands/UpdateIntegrationTablePropertiesCommand";
+import { type UpdateJobCommandInput, type UpdateJobCommandOutput, UpdateJobCommand } from "./commands/UpdateJobCommand";
+import {
+  type UpdateJobFromSourceControlCommandInput,
+  type UpdateJobFromSourceControlCommandOutput,
+  UpdateJobFromSourceControlCommand,
+} from "./commands/UpdateJobFromSourceControlCommand";
+import {
+  type UpdateMLTransformCommandInput,
+  type UpdateMLTransformCommandOutput,
   UpdateMLTransformCommand,
-  UpdateMLTransformCommandInput,
-  UpdateMLTransformCommandOutput,
 } from "./commands/UpdateMLTransformCommand";
 import {
+  type UpdatePartitionCommandInput,
+  type UpdatePartitionCommandOutput,
   UpdatePartitionCommand,
-  UpdatePartitionCommandInput,
-  UpdatePartitionCommandOutput,
 } from "./commands/UpdatePartitionCommand";
 import {
+  type UpdateRegistryCommandInput,
+  type UpdateRegistryCommandOutput,
   UpdateRegistryCommand,
-  UpdateRegistryCommandInput,
-  UpdateRegistryCommandOutput,
 } from "./commands/UpdateRegistryCommand";
 import {
+  type UpdateSchemaCommandInput,
+  type UpdateSchemaCommandOutput,
   UpdateSchemaCommand,
-  UpdateSchemaCommandInput,
-  UpdateSchemaCommandOutput,
 } from "./commands/UpdateSchemaCommand";
-import { UpdateTableCommand, UpdateTableCommandInput, UpdateTableCommandOutput } from "./commands/UpdateTableCommand";
 import {
+  type UpdateSourceControlFromJobCommandInput,
+  type UpdateSourceControlFromJobCommandOutput,
+  UpdateSourceControlFromJobCommand,
+} from "./commands/UpdateSourceControlFromJobCommand";
+import {
+  type UpdateTableCommandInput,
+  type UpdateTableCommandOutput,
+  UpdateTableCommand,
+} from "./commands/UpdateTableCommand";
+import {
+  type UpdateTableOptimizerCommandInput,
+  type UpdateTableOptimizerCommandOutput,
+  UpdateTableOptimizerCommand,
+} from "./commands/UpdateTableOptimizerCommand";
+import {
+  type UpdateTriggerCommandInput,
+  type UpdateTriggerCommandOutput,
   UpdateTriggerCommand,
-  UpdateTriggerCommandInput,
-  UpdateTriggerCommandOutput,
 } from "./commands/UpdateTriggerCommand";
 import {
+  type UpdateUsageProfileCommandInput,
+  type UpdateUsageProfileCommandOutput,
+  UpdateUsageProfileCommand,
+} from "./commands/UpdateUsageProfileCommand";
+import {
+  type UpdateUserDefinedFunctionCommandInput,
+  type UpdateUserDefinedFunctionCommandOutput,
   UpdateUserDefinedFunctionCommand,
-  UpdateUserDefinedFunctionCommandInput,
-  UpdateUserDefinedFunctionCommandOutput,
 } from "./commands/UpdateUserDefinedFunctionCommand";
 import {
+  type UpdateWorkflowCommandInput,
+  type UpdateWorkflowCommandOutput,
   UpdateWorkflowCommand,
-  UpdateWorkflowCommandInput,
-  UpdateWorkflowCommandOutput,
 } from "./commands/UpdateWorkflowCommand";
 import { GlueClient } from "./GlueClient";
+import { paginateDescribeEntity } from "./pagination/DescribeEntityPaginator";
+import { paginateGetBlueprintRuns } from "./pagination/GetBlueprintRunsPaginator";
+import { paginateGetClassifiers } from "./pagination/GetClassifiersPaginator";
+import { paginateGetColumnStatisticsTaskRuns } from "./pagination/GetColumnStatisticsTaskRunsPaginator";
+import { paginateGetConnections } from "./pagination/GetConnectionsPaginator";
+import { paginateGetCrawlerMetrics } from "./pagination/GetCrawlerMetricsPaginator";
+import { paginateGetCrawlers } from "./pagination/GetCrawlersPaginator";
+import { paginateGetDatabases } from "./pagination/GetDatabasesPaginator";
+import { paginateGetDevEndpoints } from "./pagination/GetDevEndpointsPaginator";
+import { paginateGetJobRuns } from "./pagination/GetJobRunsPaginator";
+import { paginateGetJobs } from "./pagination/GetJobsPaginator";
+import { paginateGetMLTaskRuns } from "./pagination/GetMLTaskRunsPaginator";
+import { paginateGetMLTransforms } from "./pagination/GetMLTransformsPaginator";
+import { paginateGetPartitionIndexes } from "./pagination/GetPartitionIndexesPaginator";
+import { paginateGetPartitions } from "./pagination/GetPartitionsPaginator";
+import { paginateGetResourcePolicies } from "./pagination/GetResourcePoliciesPaginator";
+import { paginateGetSecurityConfigurations } from "./pagination/GetSecurityConfigurationsPaginator";
+import { paginateGetTables } from "./pagination/GetTablesPaginator";
+import { paginateGetTableVersions } from "./pagination/GetTableVersionsPaginator";
+import { paginateGetTriggers } from "./pagination/GetTriggersPaginator";
+import { paginateGetUnfilteredPartitionsMetadata } from "./pagination/GetUnfilteredPartitionsMetadataPaginator";
+import { paginateGetUserDefinedFunctions } from "./pagination/GetUserDefinedFunctionsPaginator";
+import { paginateGetWorkflowRuns } from "./pagination/GetWorkflowRunsPaginator";
+import { paginateListAssetTypes } from "./pagination/ListAssetTypesPaginator";
+import { paginateListBlueprints } from "./pagination/ListBlueprintsPaginator";
+import { paginateListColumnStatisticsTaskRuns } from "./pagination/ListColumnStatisticsTaskRunsPaginator";
+import { paginateListConnectionTypes } from "./pagination/ListConnectionTypesPaginator";
+import { paginateListCrawlers } from "./pagination/ListCrawlersPaginator";
+import { paginateListCustomEntityTypes } from "./pagination/ListCustomEntityTypesPaginator";
+import { paginateListDataQualityEvaluationConfigs } from "./pagination/ListDataQualityEvaluationConfigsPaginator";
+import { paginateListDataQualityResults } from "./pagination/ListDataQualityResultsPaginator";
+import { paginateListDataQualityResultsV2 } from "./pagination/ListDataQualityResultsV2Paginator";
+import {
+  paginateListDataQualityRuleRecommendationRuns,
+} from "./pagination/ListDataQualityRuleRecommendationRunsPaginator";
+import {
+  paginateListDataQualityRulesetEvaluationRuns,
+} from "./pagination/ListDataQualityRulesetEvaluationRunsPaginator";
+import { paginateListDataQualityRulesets } from "./pagination/ListDataQualityRulesetsPaginator";
+import { paginateListDevEndpoints } from "./pagination/ListDevEndpointsPaginator";
+import { paginateListEntities } from "./pagination/ListEntitiesPaginator";
+import { paginateListFormTypes } from "./pagination/ListFormTypesPaginator";
+import { paginateListGlossaries } from "./pagination/ListGlossariesPaginator";
+import { paginateListGlossaryTerms } from "./pagination/ListGlossaryTermsPaginator";
+import { paginateListIterableForms } from "./pagination/ListIterableFormsPaginator";
+import { paginateListJobs } from "./pagination/ListJobsPaginator";
+import { paginateListMaterializedViewRefreshTaskRuns } from "./pagination/ListMaterializedViewRefreshTaskRunsPaginator";
+import { paginateListMLTransforms } from "./pagination/ListMLTransformsPaginator";
+import { paginateListRegistries } from "./pagination/ListRegistriesPaginator";
+import { paginateListSchemas } from "./pagination/ListSchemasPaginator";
+import { paginateListSchemaVersions } from "./pagination/ListSchemaVersionsPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+import { paginateListTableOptimizerRuns } from "./pagination/ListTableOptimizerRunsPaginator";
+import { paginateListTriggers } from "./pagination/ListTriggersPaginator";
+import { paginateListUsageProfiles } from "./pagination/ListUsageProfilesPaginator";
+import { paginateListWorkflows } from "./pagination/ListWorkflowsPaginator";
+import { paginateSearchAssets } from "./pagination/SearchAssetsPaginator";
+import { paginateSearchTables } from "./pagination/SearchTablesPaginator";
+
+const commands = {
+  AssociateGlossaryTermsCommand,
+  BatchCreatePartitionCommand,
+  BatchDeleteConnectionCommand,
+  BatchDeletePartitionCommand,
+  BatchDeleteTableCommand,
+  BatchDeleteTableVersionCommand,
+  BatchGetBlueprintsCommand,
+  BatchGetCrawlersCommand,
+  BatchGetCustomEntityTypesCommand,
+  BatchGetDataQualityResultCommand,
+  BatchGetDataQualityResultV2Command,
+  BatchGetDataQualityRulesetEvaluationRunCommand,
+  BatchGetDevEndpointsCommand,
+  BatchGetIterableFormsCommand,
+  BatchGetJobsCommand,
+  BatchGetPartitionCommand,
+  BatchGetTableOptimizerCommand,
+  BatchGetTriggersCommand,
+  BatchGetWorkflowsCommand,
+  BatchPutDataQualityStatisticAnnotationCommand,
+  BatchStopJobRunCommand,
+  BatchUpdatePartitionCommand,
+  CancelDataQualityRuleRecommendationRunCommand,
+  CancelDataQualityRulesetEvaluationRunCommand,
+  CancelMLTaskRunCommand,
+  CancelStatementCommand,
+  CheckSchemaVersionValidityCommand,
+  CreateBlueprintCommand,
+  CreateCatalogCommand,
+  CreateClassifierCommand,
+  CreateColumnStatisticsTaskSettingsCommand,
+  CreateConnectionCommand,
+  CreateCrawlerCommand,
+  CreateCustomEntityTypeCommand,
+  CreateDatabaseCommand,
+  CreateDataQualityEvaluationConfigCommand,
+  CreateDataQualityRulesetCommand,
+  CreateDevEndpointCommand,
+  CreateGlossaryCommand,
+  CreateGlossaryTermCommand,
+  CreateGlueIdentityCenterConfigurationCommand,
+  CreateIntegrationCommand,
+  CreateIntegrationResourcePropertyCommand,
+  CreateIntegrationTablePropertiesCommand,
+  CreateJobCommand,
+  CreateMLTransformCommand,
+  CreatePartitionCommand,
+  CreatePartitionIndexCommand,
+  CreateRegistryCommand,
+  CreateSchemaCommand,
+  CreateScriptCommand,
+  CreateSecurityConfigurationCommand,
+  CreateSessionCommand,
+  CreateTableCommand,
+  CreateTableOptimizerCommand,
+  CreateTriggerCommand,
+  CreateUsageProfileCommand,
+  CreateUserDefinedFunctionCommand,
+  CreateWorkflowCommand,
+  DeleteAssetCommand,
+  DeleteAssetTypeCommand,
+  DeleteAttachmentCommand,
+  DeleteBlueprintCommand,
+  DeleteCatalogCommand,
+  DeleteClassifierCommand,
+  DeleteColumnStatisticsForPartitionCommand,
+  DeleteColumnStatisticsForTableCommand,
+  DeleteColumnStatisticsTaskSettingsCommand,
+  DeleteConnectionCommand,
+  DeleteConnectionTypeCommand,
+  DeleteCrawlerCommand,
+  DeleteCustomEntityTypeCommand,
+  DeleteDatabaseCommand,
+  DeleteDataQualityEvaluationConfigCommand,
+  DeleteDataQualityRulesetCommand,
+  DeleteDevEndpointCommand,
+  DeleteFormTypeCommand,
+  DeleteGlossaryCommand,
+  DeleteGlossaryTermCommand,
+  DeleteGlueIdentityCenterConfigurationCommand,
+  DeleteIntegrationCommand,
+  DeleteIntegrationResourcePropertyCommand,
+  DeleteIntegrationTablePropertiesCommand,
+  DeleteJobCommand,
+  DeleteMLTransformCommand,
+  DeletePartitionCommand,
+  DeletePartitionIndexCommand,
+  DeleteRegistryCommand,
+  DeleteResourcePolicyCommand,
+  DeleteSchemaCommand,
+  DeleteSchemaVersionsCommand,
+  DeleteSecurityConfigurationCommand,
+  DeleteSessionCommand,
+  DeleteTableCommand,
+  DeleteTableOptimizerCommand,
+  DeleteTableVersionCommand,
+  DeleteTriggerCommand,
+  DeleteUsageProfileCommand,
+  DeleteUserDefinedFunctionCommand,
+  DeleteWorkflowCommand,
+  DescribeConnectionTypeCommand,
+  DescribeEntityCommand,
+  DescribeInboundIntegrationsCommand,
+  DescribeIntegrationsCommand,
+  DisassociateGlossaryTermsCommand,
+  GetAssetCommand,
+  GetAssetTypeCommand,
+  GetBlueprintCommand,
+  GetBlueprintRunCommand,
+  GetBlueprintRunsCommand,
+  GetCatalogCommand,
+  GetCatalogImportStatusCommand,
+  GetCatalogsCommand,
+  GetClassifierCommand,
+  GetClassifiersCommand,
+  GetColumnStatisticsForPartitionCommand,
+  GetColumnStatisticsForTableCommand,
+  GetColumnStatisticsTaskRunCommand,
+  GetColumnStatisticsTaskRunsCommand,
+  GetColumnStatisticsTaskSettingsCommand,
+  GetConnectionCommand,
+  GetConnectionsCommand,
+  GetCrawlerCommand,
+  GetCrawlerMetricsCommand,
+  GetCrawlersCommand,
+  GetCustomEntityTypeCommand,
+  GetDashboardUrlCommand,
+  GetDatabaseCommand,
+  GetDatabasesCommand,
+  GetDataCatalogEncryptionSettingsCommand,
+  GetDataCatalogExportConfigurationCommand,
+  GetDataflowGraphCommand,
+  GetDataQualityEvaluationConfigCommand,
+  GetDataQualityModelCommand,
+  GetDataQualityModelResultCommand,
+  GetDataQualityResultCommand,
+  GetDataQualityResultV2Command,
+  GetDataQualityRuleRecommendationRunCommand,
+  GetDataQualityRulesetCommand,
+  GetDataQualityRulesetEvaluationRunCommand,
+  GetDevEndpointCommand,
+  GetDevEndpointsCommand,
+  GetEntityRecordsCommand,
+  GetFormTypeCommand,
+  GetGlossaryCommand,
+  GetGlossaryTermCommand,
+  GetGlueIdentityCenterConfigurationCommand,
+  GetIntegrationResourcePropertyCommand,
+  GetIntegrationTablePropertiesCommand,
+  GetJobCommand,
+  GetJobBookmarkCommand,
+  GetJobRunCommand,
+  GetJobRunsCommand,
+  GetJobsCommand,
+  GetJobUpgradeAnalysisCommand,
+  GetMappingCommand,
+  GetMaterializedViewRefreshTaskRunCommand,
+  GetMLTaskRunCommand,
+  GetMLTaskRunsCommand,
+  GetMLTransformCommand,
+  GetMLTransformsCommand,
+  GetPartitionCommand,
+  GetPartitionIndexesCommand,
+  GetPartitionsCommand,
+  GetPlanCommand,
+  GetRegistryCommand,
+  GetResourcePoliciesCommand,
+  GetResourcePolicyCommand,
+  GetSchemaCommand,
+  GetSchemaByDefinitionCommand,
+  GetSchemaVersionCommand,
+  GetSchemaVersionsDiffCommand,
+  GetSecurityConfigurationCommand,
+  GetSecurityConfigurationsCommand,
+  GetSessionCommand,
+  GetSessionEndpointCommand,
+  GetStatementCommand,
+  GetSystemLogsForJobRunCommand,
+  GetSystemLogsForSessionCommand,
+  GetTableCommand,
+  GetTableOptimizerCommand,
+  GetTablesCommand,
+  GetTableVersionCommand,
+  GetTableVersionsCommand,
+  GetTagsCommand,
+  GetTriggerCommand,
+  GetTriggersCommand,
+  GetUnfilteredPartitionMetadataCommand,
+  GetUnfilteredPartitionsMetadataCommand,
+  GetUnfilteredTableMetadataCommand,
+  GetUsageProfileCommand,
+  GetUserDefinedFunctionCommand,
+  GetUserDefinedFunctionsCommand,
+  GetWorkflowCommand,
+  GetWorkflowRunCommand,
+  GetWorkflowRunPropertiesCommand,
+  GetWorkflowRunsCommand,
+  ImportCatalogToGlueCommand,
+  ListAssetTypesCommand,
+  ListBlueprintsCommand,
+  ListColumnStatisticsTaskRunsCommand,
+  ListConnectionTypesCommand,
+  ListCrawlersCommand,
+  ListCrawlsCommand,
+  ListCustomEntityTypesCommand,
+  ListDataQualityEvaluationConfigsCommand,
+  ListDataQualityResultsCommand,
+  ListDataQualityResultsV2Command,
+  ListDataQualityRuleRecommendationRunsCommand,
+  ListDataQualityRulesetEvaluationRunsCommand,
+  ListDataQualityRulesetsCommand,
+  ListDataQualityStatisticAnnotationsCommand,
+  ListDataQualityStatisticsCommand,
+  ListDevEndpointsCommand,
+  ListEntitiesCommand,
+  ListFormTypesCommand,
+  ListGlossariesCommand,
+  ListGlossaryTermsCommand,
+  ListIntegrationResourcePropertiesCommand,
+  ListIntegrationTablePropertiesCommand,
+  ListIterableFormsCommand,
+  ListJobsCommand,
+  ListMaterializedViewRefreshTaskRunsCommand,
+  ListMLTransformsCommand,
+  ListRegistriesCommand,
+  ListSchemasCommand,
+  ListSchemaVersionsCommand,
+  ListSessionsCommand,
+  ListStatementsCommand,
+  ListTableOptimizerRunsCommand,
+  ListTriggersCommand,
+  ListUsageProfilesCommand,
+  ListWorkflowsCommand,
+  ModifyIntegrationCommand,
+  PublishDataQualityResultV2Command,
+  PutAssetCommand,
+  PutAssetTypeCommand,
+  PutAttachmentCommand,
+  PutDataCatalogEncryptionSettingsCommand,
+  PutDataCatalogExportConfigurationCommand,
+  PutDataQualityProfileAnnotationCommand,
+  PutFormTypeCommand,
+  PutResourcePolicyCommand,
+  PutSchemaVersionMetadataCommand,
+  PutWorkflowRunPropertiesCommand,
+  QuerySchemaVersionMetadataCommand,
+  RegisterConnectionTypeCommand,
+  RegisterSchemaVersionCommand,
+  RemoveSchemaVersionMetadataCommand,
+  ResetJobBookmarkCommand,
+  ResumeWorkflowRunCommand,
+  RunStatementCommand,
+  SearchAssetsCommand,
+  SearchTablesCommand,
+  StartBlueprintRunCommand,
+  StartColumnStatisticsTaskRunCommand,
+  StartColumnStatisticsTaskRunScheduleCommand,
+  StartCrawlerCommand,
+  StartCrawlerScheduleCommand,
+  StartDataQualityRuleRecommendationRunCommand,
+  StartDataQualityRulesetEvaluationRunCommand,
+  StartExportLabelsTaskRunCommand,
+  StartImportLabelsTaskRunCommand,
+  StartJobRunCommand,
+  StartJobUpgradeAnalysisCommand,
+  StartMaterializedViewRefreshTaskRunCommand,
+  StartMLEvaluationTaskRunCommand,
+  StartMLLabelingSetGenerationTaskRunCommand,
+  StartTriggerCommand,
+  StartWorkflowRunCommand,
+  StopColumnStatisticsTaskRunCommand,
+  StopColumnStatisticsTaskRunScheduleCommand,
+  StopCrawlerCommand,
+  StopCrawlerScheduleCommand,
+  StopJobUpgradeAnalysisCommand,
+  StopMaterializedViewRefreshTaskRunCommand,
+  StopSessionCommand,
+  StopTriggerCommand,
+  StopWorkflowRunCommand,
+  TagResourceCommand,
+  TestConnectionCommand,
+  UntagResourceCommand,
+  UpdateAssetCommand,
+  UpdateBlueprintCommand,
+  UpdateCatalogCommand,
+  UpdateClassifierCommand,
+  UpdateColumnStatisticsForPartitionCommand,
+  UpdateColumnStatisticsForTableCommand,
+  UpdateColumnStatisticsTaskSettingsCommand,
+  UpdateConnectionCommand,
+  UpdateCrawlerCommand,
+  UpdateCrawlerScheduleCommand,
+  UpdateDatabaseCommand,
+  UpdateDataQualityEvaluationConfigCommand,
+  UpdateDataQualityRulesetCommand,
+  UpdateDevEndpointCommand,
+  UpdateGlossaryCommand,
+  UpdateGlossaryTermCommand,
+  UpdateGlueIdentityCenterConfigurationCommand,
+  UpdateIntegrationResourcePropertyCommand,
+  UpdateIntegrationTablePropertiesCommand,
+  UpdateJobCommand,
+  UpdateJobFromSourceControlCommand,
+  UpdateMLTransformCommand,
+  UpdatePartitionCommand,
+  UpdateRegistryCommand,
+  UpdateSchemaCommand,
+  UpdateSourceControlFromJobCommand,
+  UpdateTableCommand,
+  UpdateTableOptimizerCommand,
+  UpdateTriggerCommand,
+  UpdateUsageProfileCommand,
+  UpdateUserDefinedFunctionCommand,
+  UpdateWorkflowCommand,
+};
+const paginators = {
+  paginateDescribeEntity,
+  paginateGetBlueprintRuns,
+  paginateGetClassifiers,
+  paginateGetColumnStatisticsTaskRuns,
+  paginateGetConnections,
+  paginateGetCrawlerMetrics,
+  paginateGetCrawlers,
+  paginateGetDatabases,
+  paginateGetDevEndpoints,
+  paginateGetJobRuns,
+  paginateGetJobs,
+  paginateGetMLTaskRuns,
+  paginateGetMLTransforms,
+  paginateGetPartitionIndexes,
+  paginateGetPartitions,
+  paginateGetResourcePolicies,
+  paginateGetSecurityConfigurations,
+  paginateGetTables,
+  paginateGetTableVersions,
+  paginateGetTriggers,
+  paginateGetUnfilteredPartitionsMetadata,
+  paginateGetUserDefinedFunctions,
+  paginateGetWorkflowRuns,
+  paginateListAssetTypes,
+  paginateListBlueprints,
+  paginateListColumnStatisticsTaskRuns,
+  paginateListConnectionTypes,
+  paginateListCrawlers,
+  paginateListCustomEntityTypes,
+  paginateListDataQualityEvaluationConfigs,
+  paginateListDataQualityResults,
+  paginateListDataQualityResultsV2,
+  paginateListDataQualityRuleRecommendationRuns,
+  paginateListDataQualityRulesetEvaluationRuns,
+  paginateListDataQualityRulesets,
+  paginateListDevEndpoints,
+  paginateListEntities,
+  paginateListFormTypes,
+  paginateListGlossaries,
+  paginateListGlossaryTerms,
+  paginateListIterableForms,
+  paginateListJobs,
+  paginateListMaterializedViewRefreshTaskRuns,
+  paginateListMLTransforms,
+  paginateListRegistries,
+  paginateListSchemas,
+  paginateListSchemaVersions,
+  paginateListSessions,
+  paginateListTableOptimizerRuns,
+  paginateListTriggers,
+  paginateListUsageProfiles,
+  paginateListWorkflows,
+  paginateSearchAssets,
+  paginateSearchTables,
+};
+
+/**
+ * @public
+ */
+export interface GlueRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Glue {
+  /**
+   * @see {@link AssociateGlossaryTermsCommand}
+   */
+  associateGlossaryTerms(
+    args: AssociateGlossaryTermsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<AssociateGlossaryTermsCommandOutput>;
+  associateGlossaryTerms(
+    args: AssociateGlossaryTermsCommandInput,
+    cb: (err: any, data?: AssociateGlossaryTermsCommandOutput) => void
+  ): void;
+  associateGlossaryTerms(
+    args: AssociateGlossaryTermsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: AssociateGlossaryTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchCreatePartitionCommand}
+   */
+  batchCreatePartition(
+    args: BatchCreatePartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchCreatePartitionCommandOutput>;
+  batchCreatePartition(
+    args: BatchCreatePartitionCommandInput,
+    cb: (err: any, data?: BatchCreatePartitionCommandOutput) => void
+  ): void;
+  batchCreatePartition(
+    args: BatchCreatePartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchCreatePartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteConnectionCommand}
+   */
+  batchDeleteConnection(
+    args: BatchDeleteConnectionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchDeleteConnectionCommandOutput>;
+  batchDeleteConnection(
+    args: BatchDeleteConnectionCommandInput,
+    cb: (err: any, data?: BatchDeleteConnectionCommandOutput) => void
+  ): void;
+  batchDeleteConnection(
+    args: BatchDeleteConnectionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchDeleteConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeletePartitionCommand}
+   */
+  batchDeletePartition(
+    args: BatchDeletePartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchDeletePartitionCommandOutput>;
+  batchDeletePartition(
+    args: BatchDeletePartitionCommandInput,
+    cb: (err: any, data?: BatchDeletePartitionCommandOutput) => void
+  ): void;
+  batchDeletePartition(
+    args: BatchDeletePartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchDeletePartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteTableCommand}
+   */
+  batchDeleteTable(
+    args: BatchDeleteTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchDeleteTableCommandOutput>;
+  batchDeleteTable(
+    args: BatchDeleteTableCommandInput,
+    cb: (err: any, data?: BatchDeleteTableCommandOutput) => void
+  ): void;
+  batchDeleteTable(
+    args: BatchDeleteTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchDeleteTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteTableVersionCommand}
+   */
+  batchDeleteTableVersion(
+    args: BatchDeleteTableVersionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchDeleteTableVersionCommandOutput>;
+  batchDeleteTableVersion(
+    args: BatchDeleteTableVersionCommandInput,
+    cb: (err: any, data?: BatchDeleteTableVersionCommandOutput) => void
+  ): void;
+  batchDeleteTableVersion(
+    args: BatchDeleteTableVersionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchDeleteTableVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetBlueprintsCommand}
+   */
+  batchGetBlueprints(
+    args: BatchGetBlueprintsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetBlueprintsCommandOutput>;
+  batchGetBlueprints(
+    args: BatchGetBlueprintsCommandInput,
+    cb: (err: any, data?: BatchGetBlueprintsCommandOutput) => void
+  ): void;
+  batchGetBlueprints(
+    args: BatchGetBlueprintsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetBlueprintsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetCrawlersCommand}
+   */
+  batchGetCrawlers(
+    args: BatchGetCrawlersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetCrawlersCommandOutput>;
+  batchGetCrawlers(
+    args: BatchGetCrawlersCommandInput,
+    cb: (err: any, data?: BatchGetCrawlersCommandOutput) => void
+  ): void;
+  batchGetCrawlers(
+    args: BatchGetCrawlersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetCrawlersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetCustomEntityTypesCommand}
+   */
+  batchGetCustomEntityTypes(
+    args: BatchGetCustomEntityTypesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetCustomEntityTypesCommandOutput>;
+  batchGetCustomEntityTypes(
+    args: BatchGetCustomEntityTypesCommandInput,
+    cb: (err: any, data?: BatchGetCustomEntityTypesCommandOutput) => void
+  ): void;
+  batchGetCustomEntityTypes(
+    args: BatchGetCustomEntityTypesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetCustomEntityTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetDataQualityResultCommand}
+   */
+  batchGetDataQualityResult(
+    args: BatchGetDataQualityResultCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetDataQualityResultCommandOutput>;
+  batchGetDataQualityResult(
+    args: BatchGetDataQualityResultCommandInput,
+    cb: (err: any, data?: BatchGetDataQualityResultCommandOutput) => void
+  ): void;
+  batchGetDataQualityResult(
+    args: BatchGetDataQualityResultCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetDataQualityResultCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetDataQualityResultV2Command}
+   */
+  batchGetDataQualityResultV2(
+    args: BatchGetDataQualityResultV2CommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetDataQualityResultV2CommandOutput>;
+  batchGetDataQualityResultV2(
+    args: BatchGetDataQualityResultV2CommandInput,
+    cb: (err: any, data?: BatchGetDataQualityResultV2CommandOutput) => void
+  ): void;
+  batchGetDataQualityResultV2(
+    args: BatchGetDataQualityResultV2CommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetDataQualityResultV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetDataQualityRulesetEvaluationRunCommand}
+   */
+  batchGetDataQualityRulesetEvaluationRun(
+    args: BatchGetDataQualityRulesetEvaluationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetDataQualityRulesetEvaluationRunCommandOutput>;
+  batchGetDataQualityRulesetEvaluationRun(
+    args: BatchGetDataQualityRulesetEvaluationRunCommandInput,
+    cb: (err: any, data?: BatchGetDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+  batchGetDataQualityRulesetEvaluationRun(
+    args: BatchGetDataQualityRulesetEvaluationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetDevEndpointsCommand}
+   */
+  batchGetDevEndpoints(
+    args: BatchGetDevEndpointsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetDevEndpointsCommandOutput>;
+  batchGetDevEndpoints(
+    args: BatchGetDevEndpointsCommandInput,
+    cb: (err: any, data?: BatchGetDevEndpointsCommandOutput) => void
+  ): void;
+  batchGetDevEndpoints(
+    args: BatchGetDevEndpointsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetDevEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetIterableFormsCommand}
+   */
+  batchGetIterableForms(
+    args: BatchGetIterableFormsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetIterableFormsCommandOutput>;
+  batchGetIterableForms(
+    args: BatchGetIterableFormsCommandInput,
+    cb: (err: any, data?: BatchGetIterableFormsCommandOutput) => void
+  ): void;
+  batchGetIterableForms(
+    args: BatchGetIterableFormsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetIterableFormsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetJobsCommand}
+   */
+  batchGetJobs(
+    args: BatchGetJobsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetJobsCommandOutput>;
+  batchGetJobs(
+    args: BatchGetJobsCommandInput,
+    cb: (err: any, data?: BatchGetJobsCommandOutput) => void
+  ): void;
+  batchGetJobs(
+    args: BatchGetJobsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetPartitionCommand}
+   */
+  batchGetPartition(
+    args: BatchGetPartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetPartitionCommandOutput>;
+  batchGetPartition(
+    args: BatchGetPartitionCommandInput,
+    cb: (err: any, data?: BatchGetPartitionCommandOutput) => void
+  ): void;
+  batchGetPartition(
+    args: BatchGetPartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetPartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetTableOptimizerCommand}
+   */
+  batchGetTableOptimizer(
+    args: BatchGetTableOptimizerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetTableOptimizerCommandOutput>;
+  batchGetTableOptimizer(
+    args: BatchGetTableOptimizerCommandInput,
+    cb: (err: any, data?: BatchGetTableOptimizerCommandOutput) => void
+  ): void;
+  batchGetTableOptimizer(
+    args: BatchGetTableOptimizerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetTableOptimizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetTriggersCommand}
+   */
+  batchGetTriggers(
+    args: BatchGetTriggersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetTriggersCommandOutput>;
+  batchGetTriggers(
+    args: BatchGetTriggersCommandInput,
+    cb: (err: any, data?: BatchGetTriggersCommandOutput) => void
+  ): void;
+  batchGetTriggers(
+    args: BatchGetTriggersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetTriggersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetWorkflowsCommand}
+   */
+  batchGetWorkflows(
+    args: BatchGetWorkflowsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchGetWorkflowsCommandOutput>;
+  batchGetWorkflows(
+    args: BatchGetWorkflowsCommandInput,
+    cb: (err: any, data?: BatchGetWorkflowsCommandOutput) => void
+  ): void;
+  batchGetWorkflows(
+    args: BatchGetWorkflowsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchGetWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchPutDataQualityStatisticAnnotationCommand}
+   */
+  batchPutDataQualityStatisticAnnotation(
+    args: BatchPutDataQualityStatisticAnnotationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchPutDataQualityStatisticAnnotationCommandOutput>;
+  batchPutDataQualityStatisticAnnotation(
+    args: BatchPutDataQualityStatisticAnnotationCommandInput,
+    cb: (err: any, data?: BatchPutDataQualityStatisticAnnotationCommandOutput) => void
+  ): void;
+  batchPutDataQualityStatisticAnnotation(
+    args: BatchPutDataQualityStatisticAnnotationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchPutDataQualityStatisticAnnotationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchStopJobRunCommand}
+   */
+  batchStopJobRun(
+    args: BatchStopJobRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchStopJobRunCommandOutput>;
+  batchStopJobRun(
+    args: BatchStopJobRunCommandInput,
+    cb: (err: any, data?: BatchStopJobRunCommandOutput) => void
+  ): void;
+  batchStopJobRun(
+    args: BatchStopJobRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchStopJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdatePartitionCommand}
+   */
+  batchUpdatePartition(
+    args: BatchUpdatePartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<BatchUpdatePartitionCommandOutput>;
+  batchUpdatePartition(
+    args: BatchUpdatePartitionCommandInput,
+    cb: (err: any, data?: BatchUpdatePartitionCommandOutput) => void
+  ): void;
+  batchUpdatePartition(
+    args: BatchUpdatePartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: BatchUpdatePartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelDataQualityRuleRecommendationRunCommand}
+   */
+  cancelDataQualityRuleRecommendationRun(
+    args: CancelDataQualityRuleRecommendationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CancelDataQualityRuleRecommendationRunCommandOutput>;
+  cancelDataQualityRuleRecommendationRun(
+    args: CancelDataQualityRuleRecommendationRunCommandInput,
+    cb: (err: any, data?: CancelDataQualityRuleRecommendationRunCommandOutput) => void
+  ): void;
+  cancelDataQualityRuleRecommendationRun(
+    args: CancelDataQualityRuleRecommendationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CancelDataQualityRuleRecommendationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelDataQualityRulesetEvaluationRunCommand}
+   */
+  cancelDataQualityRulesetEvaluationRun(
+    args: CancelDataQualityRulesetEvaluationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CancelDataQualityRulesetEvaluationRunCommandOutput>;
+  cancelDataQualityRulesetEvaluationRun(
+    args: CancelDataQualityRulesetEvaluationRunCommandInput,
+    cb: (err: any, data?: CancelDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+  cancelDataQualityRulesetEvaluationRun(
+    args: CancelDataQualityRulesetEvaluationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CancelDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelMLTaskRunCommand}
+   */
+  cancelMLTaskRun(
+    args: CancelMLTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CancelMLTaskRunCommandOutput>;
+  cancelMLTaskRun(
+    args: CancelMLTaskRunCommandInput,
+    cb: (err: any, data?: CancelMLTaskRunCommandOutput) => void
+  ): void;
+  cancelMLTaskRun(
+    args: CancelMLTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CancelMLTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelStatementCommand}
+   */
+  cancelStatement(
+    args: CancelStatementCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CancelStatementCommandOutput>;
+  cancelStatement(
+    args: CancelStatementCommandInput,
+    cb: (err: any, data?: CancelStatementCommandOutput) => void
+  ): void;
+  cancelStatement(
+    args: CancelStatementCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CancelStatementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CheckSchemaVersionValidityCommand}
+   */
+  checkSchemaVersionValidity(
+    args: CheckSchemaVersionValidityCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CheckSchemaVersionValidityCommandOutput>;
+  checkSchemaVersionValidity(
+    args: CheckSchemaVersionValidityCommandInput,
+    cb: (err: any, data?: CheckSchemaVersionValidityCommandOutput) => void
+  ): void;
+  checkSchemaVersionValidity(
+    args: CheckSchemaVersionValidityCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CheckSchemaVersionValidityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBlueprintCommand}
+   */
+  createBlueprint(
+    args: CreateBlueprintCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateBlueprintCommandOutput>;
+  createBlueprint(
+    args: CreateBlueprintCommandInput,
+    cb: (err: any, data?: CreateBlueprintCommandOutput) => void
+  ): void;
+  createBlueprint(
+    args: CreateBlueprintCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateBlueprintCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCatalogCommand}
+   */
+  createCatalog(
+    args: CreateCatalogCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateCatalogCommandOutput>;
+  createCatalog(
+    args: CreateCatalogCommandInput,
+    cb: (err: any, data?: CreateCatalogCommandOutput) => void
+  ): void;
+  createCatalog(
+    args: CreateCatalogCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateClassifierCommand}
+   */
+  createClassifier(): Promise<CreateClassifierCommandOutput>;
+  createClassifier(
+    args: CreateClassifierCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateClassifierCommandOutput>;
+  createClassifier(
+    args: CreateClassifierCommandInput,
+    cb: (err: any, data?: CreateClassifierCommandOutput) => void
+  ): void;
+  createClassifier(
+    args: CreateClassifierCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateClassifierCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateColumnStatisticsTaskSettingsCommand}
+   */
+  createColumnStatisticsTaskSettings(
+    args: CreateColumnStatisticsTaskSettingsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateColumnStatisticsTaskSettingsCommandOutput>;
+  createColumnStatisticsTaskSettings(
+    args: CreateColumnStatisticsTaskSettingsCommandInput,
+    cb: (err: any, data?: CreateColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+  createColumnStatisticsTaskSettings(
+    args: CreateColumnStatisticsTaskSettingsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectionCommand}
+   */
+  createConnection(
+    args: CreateConnectionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateConnectionCommandOutput>;
+  createConnection(
+    args: CreateConnectionCommandInput,
+    cb: (err: any, data?: CreateConnectionCommandOutput) => void
+  ): void;
+  createConnection(
+    args: CreateConnectionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCrawlerCommand}
+   */
+  createCrawler(
+    args: CreateCrawlerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateCrawlerCommandOutput>;
+  createCrawler(
+    args: CreateCrawlerCommandInput,
+    cb: (err: any, data?: CreateCrawlerCommandOutput) => void
+  ): void;
+  createCrawler(
+    args: CreateCrawlerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateCrawlerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomEntityTypeCommand}
+   */
+  createCustomEntityType(
+    args: CreateCustomEntityTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateCustomEntityTypeCommandOutput>;
+  createCustomEntityType(
+    args: CreateCustomEntityTypeCommandInput,
+    cb: (err: any, data?: CreateCustomEntityTypeCommandOutput) => void
+  ): void;
+  createCustomEntityType(
+    args: CreateCustomEntityTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateCustomEntityTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDatabaseCommand}
+   */
+  createDatabase(
+    args: CreateDatabaseCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateDatabaseCommandOutput>;
+  createDatabase(
+    args: CreateDatabaseCommandInput,
+    cb: (err: any, data?: CreateDatabaseCommandOutput) => void
+  ): void;
+  createDatabase(
+    args: CreateDatabaseCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataQualityEvaluationConfigCommand}
+   */
+  createDataQualityEvaluationConfig(
+    args: CreateDataQualityEvaluationConfigCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateDataQualityEvaluationConfigCommandOutput>;
+  createDataQualityEvaluationConfig(
+    args: CreateDataQualityEvaluationConfigCommandInput,
+    cb: (err: any, data?: CreateDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+  createDataQualityEvaluationConfig(
+    args: CreateDataQualityEvaluationConfigCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataQualityRulesetCommand}
+   */
+  createDataQualityRuleset(
+    args: CreateDataQualityRulesetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateDataQualityRulesetCommandOutput>;
+  createDataQualityRuleset(
+    args: CreateDataQualityRulesetCommandInput,
+    cb: (err: any, data?: CreateDataQualityRulesetCommandOutput) => void
+  ): void;
+  createDataQualityRuleset(
+    args: CreateDataQualityRulesetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateDataQualityRulesetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDevEndpointCommand}
+   */
+  createDevEndpoint(
+    args: CreateDevEndpointCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateDevEndpointCommandOutput>;
+  createDevEndpoint(
+    args: CreateDevEndpointCommandInput,
+    cb: (err: any, data?: CreateDevEndpointCommandOutput) => void
+  ): void;
+  createDevEndpoint(
+    args: CreateDevEndpointCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateDevEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGlossaryCommand}
+   */
+  createGlossary(
+    args: CreateGlossaryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateGlossaryCommandOutput>;
+  createGlossary(
+    args: CreateGlossaryCommandInput,
+    cb: (err: any, data?: CreateGlossaryCommandOutput) => void
+  ): void;
+  createGlossary(
+    args: CreateGlossaryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateGlossaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGlossaryTermCommand}
+   */
+  createGlossaryTerm(
+    args: CreateGlossaryTermCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateGlossaryTermCommandOutput>;
+  createGlossaryTerm(
+    args: CreateGlossaryTermCommandInput,
+    cb: (err: any, data?: CreateGlossaryTermCommandOutput) => void
+  ): void;
+  createGlossaryTerm(
+    args: CreateGlossaryTermCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateGlossaryTermCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGlueIdentityCenterConfigurationCommand}
+   */
+  createGlueIdentityCenterConfiguration(
+    args: CreateGlueIdentityCenterConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateGlueIdentityCenterConfigurationCommandOutput>;
+  createGlueIdentityCenterConfiguration(
+    args: CreateGlueIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: CreateGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  createGlueIdentityCenterConfiguration(
+    args: CreateGlueIdentityCenterConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIntegrationCommand}
+   */
+  createIntegration(
+    args: CreateIntegrationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateIntegrationCommandOutput>;
+  createIntegration(
+    args: CreateIntegrationCommandInput,
+    cb: (err: any, data?: CreateIntegrationCommandOutput) => void
+  ): void;
+  createIntegration(
+    args: CreateIntegrationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIntegrationResourcePropertyCommand}
+   */
+  createIntegrationResourceProperty(
+    args: CreateIntegrationResourcePropertyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateIntegrationResourcePropertyCommandOutput>;
+  createIntegrationResourceProperty(
+    args: CreateIntegrationResourcePropertyCommandInput,
+    cb: (err: any, data?: CreateIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+  createIntegrationResourceProperty(
+    args: CreateIntegrationResourcePropertyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIntegrationTablePropertiesCommand}
+   */
+  createIntegrationTableProperties(
+    args: CreateIntegrationTablePropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateIntegrationTablePropertiesCommandOutput>;
+  createIntegrationTableProperties(
+    args: CreateIntegrationTablePropertiesCommandInput,
+    cb: (err: any, data?: CreateIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+  createIntegrationTableProperties(
+    args: CreateIntegrationTablePropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateJobCommand}
+   */
+  createJob(
+    args: CreateJobCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateJobCommandOutput>;
+  createJob(
+    args: CreateJobCommandInput,
+    cb: (err: any, data?: CreateJobCommandOutput) => void
+  ): void;
+  createJob(
+    args: CreateJobCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMLTransformCommand}
+   */
+  createMLTransform(
+    args: CreateMLTransformCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateMLTransformCommandOutput>;
+  createMLTransform(
+    args: CreateMLTransformCommandInput,
+    cb: (err: any, data?: CreateMLTransformCommandOutput) => void
+  ): void;
+  createMLTransform(
+    args: CreateMLTransformCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateMLTransformCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePartitionCommand}
+   */
+  createPartition(
+    args: CreatePartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreatePartitionCommandOutput>;
+  createPartition(
+    args: CreatePartitionCommandInput,
+    cb: (err: any, data?: CreatePartitionCommandOutput) => void
+  ): void;
+  createPartition(
+    args: CreatePartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreatePartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePartitionIndexCommand}
+   */
+  createPartitionIndex(
+    args: CreatePartitionIndexCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreatePartitionIndexCommandOutput>;
+  createPartitionIndex(
+    args: CreatePartitionIndexCommandInput,
+    cb: (err: any, data?: CreatePartitionIndexCommandOutput) => void
+  ): void;
+  createPartitionIndex(
+    args: CreatePartitionIndexCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreatePartitionIndexCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRegistryCommand}
+   */
+  createRegistry(
+    args: CreateRegistryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateRegistryCommandOutput>;
+  createRegistry(
+    args: CreateRegistryCommandInput,
+    cb: (err: any, data?: CreateRegistryCommandOutput) => void
+  ): void;
+  createRegistry(
+    args: CreateRegistryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateRegistryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSchemaCommand}
+   */
+  createSchema(
+    args: CreateSchemaCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateSchemaCommandOutput>;
+  createSchema(
+    args: CreateSchemaCommandInput,
+    cb: (err: any, data?: CreateSchemaCommandOutput) => void
+  ): void;
+  createSchema(
+    args: CreateSchemaCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateScriptCommand}
+   */
+  createScript(): Promise<CreateScriptCommandOutput>;
+  createScript(
+    args: CreateScriptCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateScriptCommandOutput>;
+  createScript(
+    args: CreateScriptCommandInput,
+    cb: (err: any, data?: CreateScriptCommandOutput) => void
+  ): void;
+  createScript(
+    args: CreateScriptCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateScriptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSecurityConfigurationCommand}
+   */
+  createSecurityConfiguration(
+    args: CreateSecurityConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateSecurityConfigurationCommandOutput>;
+  createSecurityConfiguration(
+    args: CreateSecurityConfigurationCommandInput,
+    cb: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
+  ): void;
+  createSecurityConfiguration(
+    args: CreateSecurityConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSessionCommand}
+   */
+  createSession(
+    args: CreateSessionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateSessionCommandOutput>;
+  createSession(
+    args: CreateSessionCommandInput,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+  createSession(
+    args: CreateSessionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTableCommand}
+   */
+  createTable(
+    args: CreateTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateTableCommandOutput>;
+  createTable(
+    args: CreateTableCommandInput,
+    cb: (err: any, data?: CreateTableCommandOutput) => void
+  ): void;
+  createTable(
+    args: CreateTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTableOptimizerCommand}
+   */
+  createTableOptimizer(
+    args: CreateTableOptimizerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateTableOptimizerCommandOutput>;
+  createTableOptimizer(
+    args: CreateTableOptimizerCommandInput,
+    cb: (err: any, data?: CreateTableOptimizerCommandOutput) => void
+  ): void;
+  createTableOptimizer(
+    args: CreateTableOptimizerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateTableOptimizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTriggerCommand}
+   */
+  createTrigger(
+    args: CreateTriggerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateTriggerCommandOutput>;
+  createTrigger(
+    args: CreateTriggerCommandInput,
+    cb: (err: any, data?: CreateTriggerCommandOutput) => void
+  ): void;
+  createTrigger(
+    args: CreateTriggerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUsageProfileCommand}
+   */
+  createUsageProfile(
+    args: CreateUsageProfileCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateUsageProfileCommandOutput>;
+  createUsageProfile(
+    args: CreateUsageProfileCommandInput,
+    cb: (err: any, data?: CreateUsageProfileCommandOutput) => void
+  ): void;
+  createUsageProfile(
+    args: CreateUsageProfileCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateUsageProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUserDefinedFunctionCommand}
+   */
+  createUserDefinedFunction(
+    args: CreateUserDefinedFunctionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateUserDefinedFunctionCommandOutput>;
+  createUserDefinedFunction(
+    args: CreateUserDefinedFunctionCommandInput,
+    cb: (err: any, data?: CreateUserDefinedFunctionCommandOutput) => void
+  ): void;
+  createUserDefinedFunction(
+    args: CreateUserDefinedFunctionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateUserDefinedFunctionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkflowCommand}
+   */
+  createWorkflow(
+    args: CreateWorkflowCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<CreateWorkflowCommandOutput>;
+  createWorkflow(
+    args: CreateWorkflowCommandInput,
+    cb: (err: any, data?: CreateWorkflowCommandOutput) => void
+  ): void;
+  createWorkflow(
+    args: CreateWorkflowCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: CreateWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAssetCommand}
+   */
+  deleteAsset(
+    args: DeleteAssetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteAssetCommandOutput>;
+  deleteAsset(
+    args: DeleteAssetCommandInput,
+    cb: (err: any, data?: DeleteAssetCommandOutput) => void
+  ): void;
+  deleteAsset(
+    args: DeleteAssetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteAssetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAssetTypeCommand}
+   */
+  deleteAssetType(
+    args: DeleteAssetTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteAssetTypeCommandOutput>;
+  deleteAssetType(
+    args: DeleteAssetTypeCommandInput,
+    cb: (err: any, data?: DeleteAssetTypeCommandOutput) => void
+  ): void;
+  deleteAssetType(
+    args: DeleteAssetTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteAssetTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAttachmentCommand}
+   */
+  deleteAttachment(
+    args: DeleteAttachmentCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteAttachmentCommandOutput>;
+  deleteAttachment(
+    args: DeleteAttachmentCommandInput,
+    cb: (err: any, data?: DeleteAttachmentCommandOutput) => void
+  ): void;
+  deleteAttachment(
+    args: DeleteAttachmentCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBlueprintCommand}
+   */
+  deleteBlueprint(
+    args: DeleteBlueprintCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteBlueprintCommandOutput>;
+  deleteBlueprint(
+    args: DeleteBlueprintCommandInput,
+    cb: (err: any, data?: DeleteBlueprintCommandOutput) => void
+  ): void;
+  deleteBlueprint(
+    args: DeleteBlueprintCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteBlueprintCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCatalogCommand}
+   */
+  deleteCatalog(
+    args: DeleteCatalogCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteCatalogCommandOutput>;
+  deleteCatalog(
+    args: DeleteCatalogCommandInput,
+    cb: (err: any, data?: DeleteCatalogCommandOutput) => void
+  ): void;
+  deleteCatalog(
+    args: DeleteCatalogCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClassifierCommand}
+   */
+  deleteClassifier(
+    args: DeleteClassifierCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteClassifierCommandOutput>;
+  deleteClassifier(
+    args: DeleteClassifierCommandInput,
+    cb: (err: any, data?: DeleteClassifierCommandOutput) => void
+  ): void;
+  deleteClassifier(
+    args: DeleteClassifierCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteClassifierCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteColumnStatisticsForPartitionCommand}
+   */
+  deleteColumnStatisticsForPartition(
+    args: DeleteColumnStatisticsForPartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteColumnStatisticsForPartitionCommandOutput>;
+  deleteColumnStatisticsForPartition(
+    args: DeleteColumnStatisticsForPartitionCommandInput,
+    cb: (err: any, data?: DeleteColumnStatisticsForPartitionCommandOutput) => void
+  ): void;
+  deleteColumnStatisticsForPartition(
+    args: DeleteColumnStatisticsForPartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteColumnStatisticsForPartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteColumnStatisticsForTableCommand}
+   */
+  deleteColumnStatisticsForTable(
+    args: DeleteColumnStatisticsForTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteColumnStatisticsForTableCommandOutput>;
+  deleteColumnStatisticsForTable(
+    args: DeleteColumnStatisticsForTableCommandInput,
+    cb: (err: any, data?: DeleteColumnStatisticsForTableCommandOutput) => void
+  ): void;
+  deleteColumnStatisticsForTable(
+    args: DeleteColumnStatisticsForTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteColumnStatisticsForTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteColumnStatisticsTaskSettingsCommand}
+   */
+  deleteColumnStatisticsTaskSettings(
+    args: DeleteColumnStatisticsTaskSettingsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteColumnStatisticsTaskSettingsCommandOutput>;
+  deleteColumnStatisticsTaskSettings(
+    args: DeleteColumnStatisticsTaskSettingsCommandInput,
+    cb: (err: any, data?: DeleteColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+  deleteColumnStatisticsTaskSettings(
+    args: DeleteColumnStatisticsTaskSettingsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectionCommand}
+   */
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteConnectionCommandOutput>;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectionTypeCommand}
+   */
+  deleteConnectionType(
+    args: DeleteConnectionTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteConnectionTypeCommandOutput>;
+  deleteConnectionType(
+    args: DeleteConnectionTypeCommandInput,
+    cb: (err: any, data?: DeleteConnectionTypeCommandOutput) => void
+  ): void;
+  deleteConnectionType(
+    args: DeleteConnectionTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteConnectionTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCrawlerCommand}
+   */
+  deleteCrawler(
+    args: DeleteCrawlerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteCrawlerCommandOutput>;
+  deleteCrawler(
+    args: DeleteCrawlerCommandInput,
+    cb: (err: any, data?: DeleteCrawlerCommandOutput) => void
+  ): void;
+  deleteCrawler(
+    args: DeleteCrawlerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteCrawlerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomEntityTypeCommand}
+   */
+  deleteCustomEntityType(
+    args: DeleteCustomEntityTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteCustomEntityTypeCommandOutput>;
+  deleteCustomEntityType(
+    args: DeleteCustomEntityTypeCommandInput,
+    cb: (err: any, data?: DeleteCustomEntityTypeCommandOutput) => void
+  ): void;
+  deleteCustomEntityType(
+    args: DeleteCustomEntityTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteCustomEntityTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDatabaseCommand}
+   */
+  deleteDatabase(
+    args: DeleteDatabaseCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteDatabaseCommandOutput>;
+  deleteDatabase(
+    args: DeleteDatabaseCommandInput,
+    cb: (err: any, data?: DeleteDatabaseCommandOutput) => void
+  ): void;
+  deleteDatabase(
+    args: DeleteDatabaseCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataQualityEvaluationConfigCommand}
+   */
+  deleteDataQualityEvaluationConfig(
+    args: DeleteDataQualityEvaluationConfigCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteDataQualityEvaluationConfigCommandOutput>;
+  deleteDataQualityEvaluationConfig(
+    args: DeleteDataQualityEvaluationConfigCommandInput,
+    cb: (err: any, data?: DeleteDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+  deleteDataQualityEvaluationConfig(
+    args: DeleteDataQualityEvaluationConfigCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataQualityRulesetCommand}
+   */
+  deleteDataQualityRuleset(
+    args: DeleteDataQualityRulesetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteDataQualityRulesetCommandOutput>;
+  deleteDataQualityRuleset(
+    args: DeleteDataQualityRulesetCommandInput,
+    cb: (err: any, data?: DeleteDataQualityRulesetCommandOutput) => void
+  ): void;
+  deleteDataQualityRuleset(
+    args: DeleteDataQualityRulesetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteDataQualityRulesetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDevEndpointCommand}
+   */
+  deleteDevEndpoint(
+    args: DeleteDevEndpointCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteDevEndpointCommandOutput>;
+  deleteDevEndpoint(
+    args: DeleteDevEndpointCommandInput,
+    cb: (err: any, data?: DeleteDevEndpointCommandOutput) => void
+  ): void;
+  deleteDevEndpoint(
+    args: DeleteDevEndpointCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteDevEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFormTypeCommand}
+   */
+  deleteFormType(
+    args: DeleteFormTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteFormTypeCommandOutput>;
+  deleteFormType(
+    args: DeleteFormTypeCommandInput,
+    cb: (err: any, data?: DeleteFormTypeCommandOutput) => void
+  ): void;
+  deleteFormType(
+    args: DeleteFormTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteFormTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteGlossaryCommand}
+   */
+  deleteGlossary(
+    args: DeleteGlossaryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteGlossaryCommandOutput>;
+  deleteGlossary(
+    args: DeleteGlossaryCommandInput,
+    cb: (err: any, data?: DeleteGlossaryCommandOutput) => void
+  ): void;
+  deleteGlossary(
+    args: DeleteGlossaryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteGlossaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteGlossaryTermCommand}
+   */
+  deleteGlossaryTerm(
+    args: DeleteGlossaryTermCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteGlossaryTermCommandOutput>;
+  deleteGlossaryTerm(
+    args: DeleteGlossaryTermCommandInput,
+    cb: (err: any, data?: DeleteGlossaryTermCommandOutput) => void
+  ): void;
+  deleteGlossaryTerm(
+    args: DeleteGlossaryTermCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteGlossaryTermCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteGlueIdentityCenterConfigurationCommand}
+   */
+  deleteGlueIdentityCenterConfiguration(): Promise<DeleteGlueIdentityCenterConfigurationCommandOutput>;
+  deleteGlueIdentityCenterConfiguration(
+    args: DeleteGlueIdentityCenterConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteGlueIdentityCenterConfigurationCommandOutput>;
+  deleteGlueIdentityCenterConfiguration(
+    args: DeleteGlueIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: DeleteGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  deleteGlueIdentityCenterConfiguration(
+    args: DeleteGlueIdentityCenterConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationCommand}
+   */
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteIntegrationCommandOutput>;
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
+  ): void;
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationResourcePropertyCommand}
+   */
+  deleteIntegrationResourceProperty(
+    args: DeleteIntegrationResourcePropertyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteIntegrationResourcePropertyCommandOutput>;
+  deleteIntegrationResourceProperty(
+    args: DeleteIntegrationResourcePropertyCommandInput,
+    cb: (err: any, data?: DeleteIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+  deleteIntegrationResourceProperty(
+    args: DeleteIntegrationResourcePropertyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationTablePropertiesCommand}
+   */
+  deleteIntegrationTableProperties(
+    args: DeleteIntegrationTablePropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteIntegrationTablePropertiesCommandOutput>;
+  deleteIntegrationTableProperties(
+    args: DeleteIntegrationTablePropertiesCommandInput,
+    cb: (err: any, data?: DeleteIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+  deleteIntegrationTableProperties(
+    args: DeleteIntegrationTablePropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteJobCommand}
+   */
+  deleteJob(
+    args: DeleteJobCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteJobCommandOutput>;
+  deleteJob(
+    args: DeleteJobCommandInput,
+    cb: (err: any, data?: DeleteJobCommandOutput) => void
+  ): void;
+  deleteJob(
+    args: DeleteJobCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMLTransformCommand}
+   */
+  deleteMLTransform(
+    args: DeleteMLTransformCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteMLTransformCommandOutput>;
+  deleteMLTransform(
+    args: DeleteMLTransformCommandInput,
+    cb: (err: any, data?: DeleteMLTransformCommandOutput) => void
+  ): void;
+  deleteMLTransform(
+    args: DeleteMLTransformCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteMLTransformCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePartitionCommand}
+   */
+  deletePartition(
+    args: DeletePartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeletePartitionCommandOutput>;
+  deletePartition(
+    args: DeletePartitionCommandInput,
+    cb: (err: any, data?: DeletePartitionCommandOutput) => void
+  ): void;
+  deletePartition(
+    args: DeletePartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeletePartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePartitionIndexCommand}
+   */
+  deletePartitionIndex(
+    args: DeletePartitionIndexCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeletePartitionIndexCommandOutput>;
+  deletePartitionIndex(
+    args: DeletePartitionIndexCommandInput,
+    cb: (err: any, data?: DeletePartitionIndexCommandOutput) => void
+  ): void;
+  deletePartitionIndex(
+    args: DeletePartitionIndexCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeletePartitionIndexCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRegistryCommand}
+   */
+  deleteRegistry(
+    args: DeleteRegistryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteRegistryCommandOutput>;
+  deleteRegistry(
+    args: DeleteRegistryCommandInput,
+    cb: (err: any, data?: DeleteRegistryCommandOutput) => void
+  ): void;
+  deleteRegistry(
+    args: DeleteRegistryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteRegistryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSchemaCommand}
+   */
+  deleteSchema(
+    args: DeleteSchemaCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteSchemaCommandOutput>;
+  deleteSchema(
+    args: DeleteSchemaCommandInput,
+    cb: (err: any, data?: DeleteSchemaCommandOutput) => void
+  ): void;
+  deleteSchema(
+    args: DeleteSchemaCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSchemaVersionsCommand}
+   */
+  deleteSchemaVersions(
+    args: DeleteSchemaVersionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteSchemaVersionsCommandOutput>;
+  deleteSchemaVersions(
+    args: DeleteSchemaVersionsCommandInput,
+    cb: (err: any, data?: DeleteSchemaVersionsCommandOutput) => void
+  ): void;
+  deleteSchemaVersions(
+    args: DeleteSchemaVersionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteSchemaVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSecurityConfigurationCommand}
+   */
+  deleteSecurityConfiguration(
+    args: DeleteSecurityConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteSecurityConfigurationCommandOutput>;
+  deleteSecurityConfiguration(
+    args: DeleteSecurityConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
+  ): void;
+  deleteSecurityConfiguration(
+    args: DeleteSecurityConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSessionCommand}
+   */
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteSessionCommandOutput>;
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    cb: (err: any, data?: DeleteSessionCommandOutput) => void
+  ): void;
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTableCommand}
+   */
+  deleteTable(
+    args: DeleteTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteTableCommandOutput>;
+  deleteTable(
+    args: DeleteTableCommandInput,
+    cb: (err: any, data?: DeleteTableCommandOutput) => void
+  ): void;
+  deleteTable(
+    args: DeleteTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTableOptimizerCommand}
+   */
+  deleteTableOptimizer(
+    args: DeleteTableOptimizerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteTableOptimizerCommandOutput>;
+  deleteTableOptimizer(
+    args: DeleteTableOptimizerCommandInput,
+    cb: (err: any, data?: DeleteTableOptimizerCommandOutput) => void
+  ): void;
+  deleteTableOptimizer(
+    args: DeleteTableOptimizerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteTableOptimizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTableVersionCommand}
+   */
+  deleteTableVersion(
+    args: DeleteTableVersionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteTableVersionCommandOutput>;
+  deleteTableVersion(
+    args: DeleteTableVersionCommandInput,
+    cb: (err: any, data?: DeleteTableVersionCommandOutput) => void
+  ): void;
+  deleteTableVersion(
+    args: DeleteTableVersionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteTableVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTriggerCommand}
+   */
+  deleteTrigger(
+    args: DeleteTriggerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteTriggerCommandOutput>;
+  deleteTrigger(
+    args: DeleteTriggerCommandInput,
+    cb: (err: any, data?: DeleteTriggerCommandOutput) => void
+  ): void;
+  deleteTrigger(
+    args: DeleteTriggerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUsageProfileCommand}
+   */
+  deleteUsageProfile(
+    args: DeleteUsageProfileCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteUsageProfileCommandOutput>;
+  deleteUsageProfile(
+    args: DeleteUsageProfileCommandInput,
+    cb: (err: any, data?: DeleteUsageProfileCommandOutput) => void
+  ): void;
+  deleteUsageProfile(
+    args: DeleteUsageProfileCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteUsageProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUserDefinedFunctionCommand}
+   */
+  deleteUserDefinedFunction(
+    args: DeleteUserDefinedFunctionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteUserDefinedFunctionCommandOutput>;
+  deleteUserDefinedFunction(
+    args: DeleteUserDefinedFunctionCommandInput,
+    cb: (err: any, data?: DeleteUserDefinedFunctionCommandOutput) => void
+  ): void;
+  deleteUserDefinedFunction(
+    args: DeleteUserDefinedFunctionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteUserDefinedFunctionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkflowCommand}
+   */
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DeleteWorkflowCommandOutput>;
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
+  ): void;
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConnectionTypeCommand}
+   */
+  describeConnectionType(
+    args: DescribeConnectionTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DescribeConnectionTypeCommandOutput>;
+  describeConnectionType(
+    args: DescribeConnectionTypeCommandInput,
+    cb: (err: any, data?: DescribeConnectionTypeCommandOutput) => void
+  ): void;
+  describeConnectionType(
+    args: DescribeConnectionTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DescribeConnectionTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEntityCommand}
+   */
+  describeEntity(
+    args: DescribeEntityCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DescribeEntityCommandOutput>;
+  describeEntity(
+    args: DescribeEntityCommandInput,
+    cb: (err: any, data?: DescribeEntityCommandOutput) => void
+  ): void;
+  describeEntity(
+    args: DescribeEntityCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DescribeEntityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInboundIntegrationsCommand}
+   */
+  describeInboundIntegrations(): Promise<DescribeInboundIntegrationsCommandOutput>;
+  describeInboundIntegrations(
+    args: DescribeInboundIntegrationsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DescribeInboundIntegrationsCommandOutput>;
+  describeInboundIntegrations(
+    args: DescribeInboundIntegrationsCommandInput,
+    cb: (err: any, data?: DescribeInboundIntegrationsCommandOutput) => void
+  ): void;
+  describeInboundIntegrations(
+    args: DescribeInboundIntegrationsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DescribeInboundIntegrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeIntegrationsCommand}
+   */
+  describeIntegrations(): Promise<DescribeIntegrationsCommandOutput>;
+  describeIntegrations(
+    args: DescribeIntegrationsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DescribeIntegrationsCommandOutput>;
+  describeIntegrations(
+    args: DescribeIntegrationsCommandInput,
+    cb: (err: any, data?: DescribeIntegrationsCommandOutput) => void
+  ): void;
+  describeIntegrations(
+    args: DescribeIntegrationsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DescribeIntegrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateGlossaryTermsCommand}
+   */
+  disassociateGlossaryTerms(
+    args: DisassociateGlossaryTermsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<DisassociateGlossaryTermsCommandOutput>;
+  disassociateGlossaryTerms(
+    args: DisassociateGlossaryTermsCommandInput,
+    cb: (err: any, data?: DisassociateGlossaryTermsCommandOutput) => void
+  ): void;
+  disassociateGlossaryTerms(
+    args: DisassociateGlossaryTermsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: DisassociateGlossaryTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssetCommand}
+   */
+  getAsset(
+    args: GetAssetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetAssetCommandOutput>;
+  getAsset(
+    args: GetAssetCommandInput,
+    cb: (err: any, data?: GetAssetCommandOutput) => void
+  ): void;
+  getAsset(
+    args: GetAssetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetAssetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssetTypeCommand}
+   */
+  getAssetType(
+    args: GetAssetTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetAssetTypeCommandOutput>;
+  getAssetType(
+    args: GetAssetTypeCommandInput,
+    cb: (err: any, data?: GetAssetTypeCommandOutput) => void
+  ): void;
+  getAssetType(
+    args: GetAssetTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetAssetTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBlueprintCommand}
+   */
+  getBlueprint(
+    args: GetBlueprintCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetBlueprintCommandOutput>;
+  getBlueprint(
+    args: GetBlueprintCommandInput,
+    cb: (err: any, data?: GetBlueprintCommandOutput) => void
+  ): void;
+  getBlueprint(
+    args: GetBlueprintCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetBlueprintCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBlueprintRunCommand}
+   */
+  getBlueprintRun(
+    args: GetBlueprintRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetBlueprintRunCommandOutput>;
+  getBlueprintRun(
+    args: GetBlueprintRunCommandInput,
+    cb: (err: any, data?: GetBlueprintRunCommandOutput) => void
+  ): void;
+  getBlueprintRun(
+    args: GetBlueprintRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetBlueprintRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBlueprintRunsCommand}
+   */
+  getBlueprintRuns(
+    args: GetBlueprintRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetBlueprintRunsCommandOutput>;
+  getBlueprintRuns(
+    args: GetBlueprintRunsCommandInput,
+    cb: (err: any, data?: GetBlueprintRunsCommandOutput) => void
+  ): void;
+  getBlueprintRuns(
+    args: GetBlueprintRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetBlueprintRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCatalogCommand}
+   */
+  getCatalog(
+    args: GetCatalogCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCatalogCommandOutput>;
+  getCatalog(
+    args: GetCatalogCommandInput,
+    cb: (err: any, data?: GetCatalogCommandOutput) => void
+  ): void;
+  getCatalog(
+    args: GetCatalogCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCatalogImportStatusCommand}
+   */
+  getCatalogImportStatus(): Promise<GetCatalogImportStatusCommandOutput>;
+  getCatalogImportStatus(
+    args: GetCatalogImportStatusCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCatalogImportStatusCommandOutput>;
+  getCatalogImportStatus(
+    args: GetCatalogImportStatusCommandInput,
+    cb: (err: any, data?: GetCatalogImportStatusCommandOutput) => void
+  ): void;
+  getCatalogImportStatus(
+    args: GetCatalogImportStatusCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCatalogImportStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCatalogsCommand}
+   */
+  getCatalogs(): Promise<GetCatalogsCommandOutput>;
+  getCatalogs(
+    args: GetCatalogsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCatalogsCommandOutput>;
+  getCatalogs(
+    args: GetCatalogsCommandInput,
+    cb: (err: any, data?: GetCatalogsCommandOutput) => void
+  ): void;
+  getCatalogs(
+    args: GetCatalogsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCatalogsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClassifierCommand}
+   */
+  getClassifier(
+    args: GetClassifierCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetClassifierCommandOutput>;
+  getClassifier(
+    args: GetClassifierCommandInput,
+    cb: (err: any, data?: GetClassifierCommandOutput) => void
+  ): void;
+  getClassifier(
+    args: GetClassifierCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetClassifierCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClassifiersCommand}
+   */
+  getClassifiers(): Promise<GetClassifiersCommandOutput>;
+  getClassifiers(
+    args: GetClassifiersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetClassifiersCommandOutput>;
+  getClassifiers(
+    args: GetClassifiersCommandInput,
+    cb: (err: any, data?: GetClassifiersCommandOutput) => void
+  ): void;
+  getClassifiers(
+    args: GetClassifiersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetClassifiersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetColumnStatisticsForPartitionCommand}
+   */
+  getColumnStatisticsForPartition(
+    args: GetColumnStatisticsForPartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetColumnStatisticsForPartitionCommandOutput>;
+  getColumnStatisticsForPartition(
+    args: GetColumnStatisticsForPartitionCommandInput,
+    cb: (err: any, data?: GetColumnStatisticsForPartitionCommandOutput) => void
+  ): void;
+  getColumnStatisticsForPartition(
+    args: GetColumnStatisticsForPartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetColumnStatisticsForPartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetColumnStatisticsForTableCommand}
+   */
+  getColumnStatisticsForTable(
+    args: GetColumnStatisticsForTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetColumnStatisticsForTableCommandOutput>;
+  getColumnStatisticsForTable(
+    args: GetColumnStatisticsForTableCommandInput,
+    cb: (err: any, data?: GetColumnStatisticsForTableCommandOutput) => void
+  ): void;
+  getColumnStatisticsForTable(
+    args: GetColumnStatisticsForTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetColumnStatisticsForTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetColumnStatisticsTaskRunCommand}
+   */
+  getColumnStatisticsTaskRun(
+    args: GetColumnStatisticsTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetColumnStatisticsTaskRunCommandOutput>;
+  getColumnStatisticsTaskRun(
+    args: GetColumnStatisticsTaskRunCommandInput,
+    cb: (err: any, data?: GetColumnStatisticsTaskRunCommandOutput) => void
+  ): void;
+  getColumnStatisticsTaskRun(
+    args: GetColumnStatisticsTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetColumnStatisticsTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetColumnStatisticsTaskRunsCommand}
+   */
+  getColumnStatisticsTaskRuns(
+    args: GetColumnStatisticsTaskRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetColumnStatisticsTaskRunsCommandOutput>;
+  getColumnStatisticsTaskRuns(
+    args: GetColumnStatisticsTaskRunsCommandInput,
+    cb: (err: any, data?: GetColumnStatisticsTaskRunsCommandOutput) => void
+  ): void;
+  getColumnStatisticsTaskRuns(
+    args: GetColumnStatisticsTaskRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetColumnStatisticsTaskRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetColumnStatisticsTaskSettingsCommand}
+   */
+  getColumnStatisticsTaskSettings(
+    args: GetColumnStatisticsTaskSettingsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetColumnStatisticsTaskSettingsCommandOutput>;
+  getColumnStatisticsTaskSettings(
+    args: GetColumnStatisticsTaskSettingsCommandInput,
+    cb: (err: any, data?: GetColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+  getColumnStatisticsTaskSettings(
+    args: GetColumnStatisticsTaskSettingsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionCommand}
+   */
+  getConnection(
+    args: GetConnectionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetConnectionCommandOutput>;
+  getConnection(
+    args: GetConnectionCommandInput,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+  getConnection(
+    args: GetConnectionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionsCommand}
+   */
+  getConnections(): Promise<GetConnectionsCommandOutput>;
+  getConnections(
+    args: GetConnectionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetConnectionsCommandOutput>;
+  getConnections(
+    args: GetConnectionsCommandInput,
+    cb: (err: any, data?: GetConnectionsCommandOutput) => void
+  ): void;
+  getConnections(
+    args: GetConnectionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetConnectionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCrawlerCommand}
+   */
+  getCrawler(
+    args: GetCrawlerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCrawlerCommandOutput>;
+  getCrawler(
+    args: GetCrawlerCommandInput,
+    cb: (err: any, data?: GetCrawlerCommandOutput) => void
+  ): void;
+  getCrawler(
+    args: GetCrawlerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCrawlerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCrawlerMetricsCommand}
+   */
+  getCrawlerMetrics(): Promise<GetCrawlerMetricsCommandOutput>;
+  getCrawlerMetrics(
+    args: GetCrawlerMetricsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCrawlerMetricsCommandOutput>;
+  getCrawlerMetrics(
+    args: GetCrawlerMetricsCommandInput,
+    cb: (err: any, data?: GetCrawlerMetricsCommandOutput) => void
+  ): void;
+  getCrawlerMetrics(
+    args: GetCrawlerMetricsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCrawlerMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCrawlersCommand}
+   */
+  getCrawlers(): Promise<GetCrawlersCommandOutput>;
+  getCrawlers(
+    args: GetCrawlersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCrawlersCommandOutput>;
+  getCrawlers(
+    args: GetCrawlersCommandInput,
+    cb: (err: any, data?: GetCrawlersCommandOutput) => void
+  ): void;
+  getCrawlers(
+    args: GetCrawlersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCrawlersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCustomEntityTypeCommand}
+   */
+  getCustomEntityType(
+    args: GetCustomEntityTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetCustomEntityTypeCommandOutput>;
+  getCustomEntityType(
+    args: GetCustomEntityTypeCommandInput,
+    cb: (err: any, data?: GetCustomEntityTypeCommandOutput) => void
+  ): void;
+  getCustomEntityType(
+    args: GetCustomEntityTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetCustomEntityTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDashboardUrlCommand}
+   */
+  getDashboardUrl(
+    args: GetDashboardUrlCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDashboardUrlCommandOutput>;
+  getDashboardUrl(
+    args: GetDashboardUrlCommandInput,
+    cb: (err: any, data?: GetDashboardUrlCommandOutput) => void
+  ): void;
+  getDashboardUrl(
+    args: GetDashboardUrlCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDashboardUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDatabaseCommand}
+   */
+  getDatabase(
+    args: GetDatabaseCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDatabaseCommandOutput>;
+  getDatabase(
+    args: GetDatabaseCommandInput,
+    cb: (err: any, data?: GetDatabaseCommandOutput) => void
+  ): void;
+  getDatabase(
+    args: GetDatabaseCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDatabasesCommand}
+   */
+  getDatabases(): Promise<GetDatabasesCommandOutput>;
+  getDatabases(
+    args: GetDatabasesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDatabasesCommandOutput>;
+  getDatabases(
+    args: GetDatabasesCommandInput,
+    cb: (err: any, data?: GetDatabasesCommandOutput) => void
+  ): void;
+  getDatabases(
+    args: GetDatabasesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDatabasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataCatalogEncryptionSettingsCommand}
+   */
+  getDataCatalogEncryptionSettings(): Promise<GetDataCatalogEncryptionSettingsCommandOutput>;
+  getDataCatalogEncryptionSettings(
+    args: GetDataCatalogEncryptionSettingsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataCatalogEncryptionSettingsCommandOutput>;
+  getDataCatalogEncryptionSettings(
+    args: GetDataCatalogEncryptionSettingsCommandInput,
+    cb: (err: any, data?: GetDataCatalogEncryptionSettingsCommandOutput) => void
+  ): void;
+  getDataCatalogEncryptionSettings(
+    args: GetDataCatalogEncryptionSettingsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataCatalogEncryptionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataCatalogExportConfigurationCommand}
+   */
+  getDataCatalogExportConfiguration(): Promise<GetDataCatalogExportConfigurationCommandOutput>;
+  getDataCatalogExportConfiguration(
+    args: GetDataCatalogExportConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataCatalogExportConfigurationCommandOutput>;
+  getDataCatalogExportConfiguration(
+    args: GetDataCatalogExportConfigurationCommandInput,
+    cb: (err: any, data?: GetDataCatalogExportConfigurationCommandOutput) => void
+  ): void;
+  getDataCatalogExportConfiguration(
+    args: GetDataCatalogExportConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataCatalogExportConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataflowGraphCommand}
+   */
+  getDataflowGraph(): Promise<GetDataflowGraphCommandOutput>;
+  getDataflowGraph(
+    args: GetDataflowGraphCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataflowGraphCommandOutput>;
+  getDataflowGraph(
+    args: GetDataflowGraphCommandInput,
+    cb: (err: any, data?: GetDataflowGraphCommandOutput) => void
+  ): void;
+  getDataflowGraph(
+    args: GetDataflowGraphCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataflowGraphCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityEvaluationConfigCommand}
+   */
+  getDataQualityEvaluationConfig(
+    args: GetDataQualityEvaluationConfigCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityEvaluationConfigCommandOutput>;
+  getDataQualityEvaluationConfig(
+    args: GetDataQualityEvaluationConfigCommandInput,
+    cb: (err: any, data?: GetDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+  getDataQualityEvaluationConfig(
+    args: GetDataQualityEvaluationConfigCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityModelCommand}
+   */
+  getDataQualityModel(
+    args: GetDataQualityModelCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityModelCommandOutput>;
+  getDataQualityModel(
+    args: GetDataQualityModelCommandInput,
+    cb: (err: any, data?: GetDataQualityModelCommandOutput) => void
+  ): void;
+  getDataQualityModel(
+    args: GetDataQualityModelCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityModelResultCommand}
+   */
+  getDataQualityModelResult(
+    args: GetDataQualityModelResultCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityModelResultCommandOutput>;
+  getDataQualityModelResult(
+    args: GetDataQualityModelResultCommandInput,
+    cb: (err: any, data?: GetDataQualityModelResultCommandOutput) => void
+  ): void;
+  getDataQualityModelResult(
+    args: GetDataQualityModelResultCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityModelResultCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityResultCommand}
+   */
+  getDataQualityResult(
+    args: GetDataQualityResultCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityResultCommandOutput>;
+  getDataQualityResult(
+    args: GetDataQualityResultCommandInput,
+    cb: (err: any, data?: GetDataQualityResultCommandOutput) => void
+  ): void;
+  getDataQualityResult(
+    args: GetDataQualityResultCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityResultCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityResultV2Command}
+   */
+  getDataQualityResultV2(
+    args: GetDataQualityResultV2CommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityResultV2CommandOutput>;
+  getDataQualityResultV2(
+    args: GetDataQualityResultV2CommandInput,
+    cb: (err: any, data?: GetDataQualityResultV2CommandOutput) => void
+  ): void;
+  getDataQualityResultV2(
+    args: GetDataQualityResultV2CommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityResultV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityRuleRecommendationRunCommand}
+   */
+  getDataQualityRuleRecommendationRun(
+    args: GetDataQualityRuleRecommendationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityRuleRecommendationRunCommandOutput>;
+  getDataQualityRuleRecommendationRun(
+    args: GetDataQualityRuleRecommendationRunCommandInput,
+    cb: (err: any, data?: GetDataQualityRuleRecommendationRunCommandOutput) => void
+  ): void;
+  getDataQualityRuleRecommendationRun(
+    args: GetDataQualityRuleRecommendationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityRuleRecommendationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityRulesetCommand}
+   */
+  getDataQualityRuleset(
+    args: GetDataQualityRulesetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityRulesetCommandOutput>;
+  getDataQualityRuleset(
+    args: GetDataQualityRulesetCommandInput,
+    cb: (err: any, data?: GetDataQualityRulesetCommandOutput) => void
+  ): void;
+  getDataQualityRuleset(
+    args: GetDataQualityRulesetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityRulesetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataQualityRulesetEvaluationRunCommand}
+   */
+  getDataQualityRulesetEvaluationRun(
+    args: GetDataQualityRulesetEvaluationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDataQualityRulesetEvaluationRunCommandOutput>;
+  getDataQualityRulesetEvaluationRun(
+    args: GetDataQualityRulesetEvaluationRunCommandInput,
+    cb: (err: any, data?: GetDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+  getDataQualityRulesetEvaluationRun(
+    args: GetDataQualityRulesetEvaluationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDevEndpointCommand}
+   */
+  getDevEndpoint(
+    args: GetDevEndpointCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDevEndpointCommandOutput>;
+  getDevEndpoint(
+    args: GetDevEndpointCommandInput,
+    cb: (err: any, data?: GetDevEndpointCommandOutput) => void
+  ): void;
+  getDevEndpoint(
+    args: GetDevEndpointCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDevEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDevEndpointsCommand}
+   */
+  getDevEndpoints(): Promise<GetDevEndpointsCommandOutput>;
+  getDevEndpoints(
+    args: GetDevEndpointsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetDevEndpointsCommandOutput>;
+  getDevEndpoints(
+    args: GetDevEndpointsCommandInput,
+    cb: (err: any, data?: GetDevEndpointsCommandOutput) => void
+  ): void;
+  getDevEndpoints(
+    args: GetDevEndpointsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetDevEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEntityRecordsCommand}
+   */
+  getEntityRecords(
+    args: GetEntityRecordsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetEntityRecordsCommandOutput>;
+  getEntityRecords(
+    args: GetEntityRecordsCommandInput,
+    cb: (err: any, data?: GetEntityRecordsCommandOutput) => void
+  ): void;
+  getEntityRecords(
+    args: GetEntityRecordsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetEntityRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFormTypeCommand}
+   */
+  getFormType(
+    args: GetFormTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetFormTypeCommandOutput>;
+  getFormType(
+    args: GetFormTypeCommandInput,
+    cb: (err: any, data?: GetFormTypeCommandOutput) => void
+  ): void;
+  getFormType(
+    args: GetFormTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetFormTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGlossaryCommand}
+   */
+  getGlossary(
+    args: GetGlossaryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetGlossaryCommandOutput>;
+  getGlossary(
+    args: GetGlossaryCommandInput,
+    cb: (err: any, data?: GetGlossaryCommandOutput) => void
+  ): void;
+  getGlossary(
+    args: GetGlossaryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetGlossaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGlossaryTermCommand}
+   */
+  getGlossaryTerm(
+    args: GetGlossaryTermCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetGlossaryTermCommandOutput>;
+  getGlossaryTerm(
+    args: GetGlossaryTermCommandInput,
+    cb: (err: any, data?: GetGlossaryTermCommandOutput) => void
+  ): void;
+  getGlossaryTerm(
+    args: GetGlossaryTermCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetGlossaryTermCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGlueIdentityCenterConfigurationCommand}
+   */
+  getGlueIdentityCenterConfiguration(): Promise<GetGlueIdentityCenterConfigurationCommandOutput>;
+  getGlueIdentityCenterConfiguration(
+    args: GetGlueIdentityCenterConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetGlueIdentityCenterConfigurationCommandOutput>;
+  getGlueIdentityCenterConfiguration(
+    args: GetGlueIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: GetGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  getGlueIdentityCenterConfiguration(
+    args: GetGlueIdentityCenterConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationResourcePropertyCommand}
+   */
+  getIntegrationResourceProperty(
+    args: GetIntegrationResourcePropertyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetIntegrationResourcePropertyCommandOutput>;
+  getIntegrationResourceProperty(
+    args: GetIntegrationResourcePropertyCommandInput,
+    cb: (err: any, data?: GetIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+  getIntegrationResourceProperty(
+    args: GetIntegrationResourcePropertyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationTablePropertiesCommand}
+   */
+  getIntegrationTableProperties(
+    args: GetIntegrationTablePropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetIntegrationTablePropertiesCommandOutput>;
+  getIntegrationTableProperties(
+    args: GetIntegrationTablePropertiesCommandInput,
+    cb: (err: any, data?: GetIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+  getIntegrationTableProperties(
+    args: GetIntegrationTablePropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobCommand}
+   */
+  getJob(
+    args: GetJobCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetJobCommandOutput>;
+  getJob(
+    args: GetJobCommandInput,
+    cb: (err: any, data?: GetJobCommandOutput) => void
+  ): void;
+  getJob(
+    args: GetJobCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobBookmarkCommand}
+   */
+  getJobBookmark(
+    args: GetJobBookmarkCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetJobBookmarkCommandOutput>;
+  getJobBookmark(
+    args: GetJobBookmarkCommandInput,
+    cb: (err: any, data?: GetJobBookmarkCommandOutput) => void
+  ): void;
+  getJobBookmark(
+    args: GetJobBookmarkCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetJobBookmarkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobRunCommand}
+   */
+  getJobRun(
+    args: GetJobRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetJobRunCommandOutput>;
+  getJobRun(
+    args: GetJobRunCommandInput,
+    cb: (err: any, data?: GetJobRunCommandOutput) => void
+  ): void;
+  getJobRun(
+    args: GetJobRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobRunsCommand}
+   */
+  getJobRuns(
+    args: GetJobRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetJobRunsCommandOutput>;
+  getJobRuns(
+    args: GetJobRunsCommandInput,
+    cb: (err: any, data?: GetJobRunsCommandOutput) => void
+  ): void;
+  getJobRuns(
+    args: GetJobRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetJobRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobsCommand}
+   */
+  getJobs(): Promise<GetJobsCommandOutput>;
+  getJobs(
+    args: GetJobsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetJobsCommandOutput>;
+  getJobs(
+    args: GetJobsCommandInput,
+    cb: (err: any, data?: GetJobsCommandOutput) => void
+  ): void;
+  getJobs(
+    args: GetJobsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobUpgradeAnalysisCommand}
+   */
+  getJobUpgradeAnalysis(
+    args: GetJobUpgradeAnalysisCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetJobUpgradeAnalysisCommandOutput>;
+  getJobUpgradeAnalysis(
+    args: GetJobUpgradeAnalysisCommandInput,
+    cb: (err: any, data?: GetJobUpgradeAnalysisCommandOutput) => void
+  ): void;
+  getJobUpgradeAnalysis(
+    args: GetJobUpgradeAnalysisCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetJobUpgradeAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMappingCommand}
+   */
+  getMapping(
+    args: GetMappingCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetMappingCommandOutput>;
+  getMapping(
+    args: GetMappingCommandInput,
+    cb: (err: any, data?: GetMappingCommandOutput) => void
+  ): void;
+  getMapping(
+    args: GetMappingCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMaterializedViewRefreshTaskRunCommand}
+   */
+  getMaterializedViewRefreshTaskRun(
+    args: GetMaterializedViewRefreshTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetMaterializedViewRefreshTaskRunCommandOutput>;
+  getMaterializedViewRefreshTaskRun(
+    args: GetMaterializedViewRefreshTaskRunCommandInput,
+    cb: (err: any, data?: GetMaterializedViewRefreshTaskRunCommandOutput) => void
+  ): void;
+  getMaterializedViewRefreshTaskRun(
+    args: GetMaterializedViewRefreshTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetMaterializedViewRefreshTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMLTaskRunCommand}
+   */
+  getMLTaskRun(
+    args: GetMLTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetMLTaskRunCommandOutput>;
+  getMLTaskRun(
+    args: GetMLTaskRunCommandInput,
+    cb: (err: any, data?: GetMLTaskRunCommandOutput) => void
+  ): void;
+  getMLTaskRun(
+    args: GetMLTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetMLTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMLTaskRunsCommand}
+   */
+  getMLTaskRuns(
+    args: GetMLTaskRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetMLTaskRunsCommandOutput>;
+  getMLTaskRuns(
+    args: GetMLTaskRunsCommandInput,
+    cb: (err: any, data?: GetMLTaskRunsCommandOutput) => void
+  ): void;
+  getMLTaskRuns(
+    args: GetMLTaskRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetMLTaskRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMLTransformCommand}
+   */
+  getMLTransform(
+    args: GetMLTransformCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetMLTransformCommandOutput>;
+  getMLTransform(
+    args: GetMLTransformCommandInput,
+    cb: (err: any, data?: GetMLTransformCommandOutput) => void
+  ): void;
+  getMLTransform(
+    args: GetMLTransformCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetMLTransformCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMLTransformsCommand}
+   */
+  getMLTransforms(): Promise<GetMLTransformsCommandOutput>;
+  getMLTransforms(
+    args: GetMLTransformsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetMLTransformsCommandOutput>;
+  getMLTransforms(
+    args: GetMLTransformsCommandInput,
+    cb: (err: any, data?: GetMLTransformsCommandOutput) => void
+  ): void;
+  getMLTransforms(
+    args: GetMLTransformsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetMLTransformsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPartitionCommand}
+   */
+  getPartition(
+    args: GetPartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetPartitionCommandOutput>;
+  getPartition(
+    args: GetPartitionCommandInput,
+    cb: (err: any, data?: GetPartitionCommandOutput) => void
+  ): void;
+  getPartition(
+    args: GetPartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetPartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPartitionIndexesCommand}
+   */
+  getPartitionIndexes(
+    args: GetPartitionIndexesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetPartitionIndexesCommandOutput>;
+  getPartitionIndexes(
+    args: GetPartitionIndexesCommandInput,
+    cb: (err: any, data?: GetPartitionIndexesCommandOutput) => void
+  ): void;
+  getPartitionIndexes(
+    args: GetPartitionIndexesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetPartitionIndexesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPartitionsCommand}
+   */
+  getPartitions(
+    args: GetPartitionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetPartitionsCommandOutput>;
+  getPartitions(
+    args: GetPartitionsCommandInput,
+    cb: (err: any, data?: GetPartitionsCommandOutput) => void
+  ): void;
+  getPartitions(
+    args: GetPartitionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetPartitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlanCommand}
+   */
+  getPlan(
+    args: GetPlanCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetPlanCommandOutput>;
+  getPlan(
+    args: GetPlanCommandInput,
+    cb: (err: any, data?: GetPlanCommandOutput) => void
+  ): void;
+  getPlan(
+    args: GetPlanCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRegistryCommand}
+   */
+  getRegistry(
+    args: GetRegistryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetRegistryCommandOutput>;
+  getRegistry(
+    args: GetRegistryCommandInput,
+    cb: (err: any, data?: GetRegistryCommandOutput) => void
+  ): void;
+  getRegistry(
+    args: GetRegistryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetRegistryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePoliciesCommand}
+   */
+  getResourcePolicies(): Promise<GetResourcePoliciesCommandOutput>;
+  getResourcePolicies(
+    args: GetResourcePoliciesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetResourcePoliciesCommandOutput>;
+  getResourcePolicies(
+    args: GetResourcePoliciesCommandInput,
+    cb: (err: any, data?: GetResourcePoliciesCommandOutput) => void
+  ): void;
+  getResourcePolicies(
+    args: GetResourcePoliciesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetResourcePoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSchemaCommand}
+   */
+  getSchema(
+    args: GetSchemaCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSchemaCommandOutput>;
+  getSchema(
+    args: GetSchemaCommandInput,
+    cb: (err: any, data?: GetSchemaCommandOutput) => void
+  ): void;
+  getSchema(
+    args: GetSchemaCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSchemaByDefinitionCommand}
+   */
+  getSchemaByDefinition(
+    args: GetSchemaByDefinitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSchemaByDefinitionCommandOutput>;
+  getSchemaByDefinition(
+    args: GetSchemaByDefinitionCommandInput,
+    cb: (err: any, data?: GetSchemaByDefinitionCommandOutput) => void
+  ): void;
+  getSchemaByDefinition(
+    args: GetSchemaByDefinitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSchemaByDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSchemaVersionCommand}
+   */
+  getSchemaVersion(): Promise<GetSchemaVersionCommandOutput>;
+  getSchemaVersion(
+    args: GetSchemaVersionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSchemaVersionCommandOutput>;
+  getSchemaVersion(
+    args: GetSchemaVersionCommandInput,
+    cb: (err: any, data?: GetSchemaVersionCommandOutput) => void
+  ): void;
+  getSchemaVersion(
+    args: GetSchemaVersionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSchemaVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSchemaVersionsDiffCommand}
+   */
+  getSchemaVersionsDiff(
+    args: GetSchemaVersionsDiffCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSchemaVersionsDiffCommandOutput>;
+  getSchemaVersionsDiff(
+    args: GetSchemaVersionsDiffCommandInput,
+    cb: (err: any, data?: GetSchemaVersionsDiffCommandOutput) => void
+  ): void;
+  getSchemaVersionsDiff(
+    args: GetSchemaVersionsDiffCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSchemaVersionsDiffCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSecurityConfigurationCommand}
+   */
+  getSecurityConfiguration(
+    args: GetSecurityConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSecurityConfigurationCommandOutput>;
+  getSecurityConfiguration(
+    args: GetSecurityConfigurationCommandInput,
+    cb: (err: any, data?: GetSecurityConfigurationCommandOutput) => void
+  ): void;
+  getSecurityConfiguration(
+    args: GetSecurityConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSecurityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSecurityConfigurationsCommand}
+   */
+  getSecurityConfigurations(): Promise<GetSecurityConfigurationsCommandOutput>;
+  getSecurityConfigurations(
+    args: GetSecurityConfigurationsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSecurityConfigurationsCommandOutput>;
+  getSecurityConfigurations(
+    args: GetSecurityConfigurationsCommandInput,
+    cb: (err: any, data?: GetSecurityConfigurationsCommandOutput) => void
+  ): void;
+  getSecurityConfigurations(
+    args: GetSecurityConfigurationsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSecurityConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionCommand}
+   */
+  getSession(
+    args: GetSessionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSessionCommandOutput>;
+  getSession(
+    args: GetSessionCommandInput,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+  getSession(
+    args: GetSessionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionEndpointCommand}
+   */
+  getSessionEndpoint(
+    args: GetSessionEndpointCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSessionEndpointCommandOutput>;
+  getSessionEndpoint(
+    args: GetSessionEndpointCommandInput,
+    cb: (err: any, data?: GetSessionEndpointCommandOutput) => void
+  ): void;
+  getSessionEndpoint(
+    args: GetSessionEndpointCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSessionEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStatementCommand}
+   */
+  getStatement(
+    args: GetStatementCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetStatementCommandOutput>;
+  getStatement(
+    args: GetStatementCommandInput,
+    cb: (err: any, data?: GetStatementCommandOutput) => void
+  ): void;
+  getStatement(
+    args: GetStatementCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetStatementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSystemLogsForJobRunCommand}
+   */
+  getSystemLogsForJobRun(
+    args: GetSystemLogsForJobRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSystemLogsForJobRunCommandOutput>;
+  getSystemLogsForJobRun(
+    args: GetSystemLogsForJobRunCommandInput,
+    cb: (err: any, data?: GetSystemLogsForJobRunCommandOutput) => void
+  ): void;
+  getSystemLogsForJobRun(
+    args: GetSystemLogsForJobRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSystemLogsForJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSystemLogsForSessionCommand}
+   */
+  getSystemLogsForSession(
+    args: GetSystemLogsForSessionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetSystemLogsForSessionCommandOutput>;
+  getSystemLogsForSession(
+    args: GetSystemLogsForSessionCommandInput,
+    cb: (err: any, data?: GetSystemLogsForSessionCommandOutput) => void
+  ): void;
+  getSystemLogsForSession(
+    args: GetSystemLogsForSessionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetSystemLogsForSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableCommand}
+   */
+  getTable(
+    args: GetTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTableCommandOutput>;
+  getTable(
+    args: GetTableCommandInput,
+    cb: (err: any, data?: GetTableCommandOutput) => void
+  ): void;
+  getTable(
+    args: GetTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableOptimizerCommand}
+   */
+  getTableOptimizer(
+    args: GetTableOptimizerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTableOptimizerCommandOutput>;
+  getTableOptimizer(
+    args: GetTableOptimizerCommandInput,
+    cb: (err: any, data?: GetTableOptimizerCommandOutput) => void
+  ): void;
+  getTableOptimizer(
+    args: GetTableOptimizerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTableOptimizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTablesCommand}
+   */
+  getTables(
+    args: GetTablesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTablesCommandOutput>;
+  getTables(
+    args: GetTablesCommandInput,
+    cb: (err: any, data?: GetTablesCommandOutput) => void
+  ): void;
+  getTables(
+    args: GetTablesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableVersionCommand}
+   */
+  getTableVersion(
+    args: GetTableVersionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTableVersionCommandOutput>;
+  getTableVersion(
+    args: GetTableVersionCommandInput,
+    cb: (err: any, data?: GetTableVersionCommandOutput) => void
+  ): void;
+  getTableVersion(
+    args: GetTableVersionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTableVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableVersionsCommand}
+   */
+  getTableVersions(
+    args: GetTableVersionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTableVersionsCommandOutput>;
+  getTableVersions(
+    args: GetTableVersionsCommandInput,
+    cb: (err: any, data?: GetTableVersionsCommandOutput) => void
+  ): void;
+  getTableVersions(
+    args: GetTableVersionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTableVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTagsCommand}
+   */
+  getTags(
+    args: GetTagsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTagsCommandOutput>;
+  getTags(
+    args: GetTagsCommandInput,
+    cb: (err: any, data?: GetTagsCommandOutput) => void
+  ): void;
+  getTags(
+    args: GetTagsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTagsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTriggerCommand}
+   */
+  getTrigger(
+    args: GetTriggerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTriggerCommandOutput>;
+  getTrigger(
+    args: GetTriggerCommandInput,
+    cb: (err: any, data?: GetTriggerCommandOutput) => void
+  ): void;
+  getTrigger(
+    args: GetTriggerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTriggersCommand}
+   */
+  getTriggers(): Promise<GetTriggersCommandOutput>;
+  getTriggers(
+    args: GetTriggersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetTriggersCommandOutput>;
+  getTriggers(
+    args: GetTriggersCommandInput,
+    cb: (err: any, data?: GetTriggersCommandOutput) => void
+  ): void;
+  getTriggers(
+    args: GetTriggersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetTriggersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUnfilteredPartitionMetadataCommand}
+   */
+  getUnfilteredPartitionMetadata(
+    args: GetUnfilteredPartitionMetadataCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetUnfilteredPartitionMetadataCommandOutput>;
+  getUnfilteredPartitionMetadata(
+    args: GetUnfilteredPartitionMetadataCommandInput,
+    cb: (err: any, data?: GetUnfilteredPartitionMetadataCommandOutput) => void
+  ): void;
+  getUnfilteredPartitionMetadata(
+    args: GetUnfilteredPartitionMetadataCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetUnfilteredPartitionMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUnfilteredPartitionsMetadataCommand}
+   */
+  getUnfilteredPartitionsMetadata(
+    args: GetUnfilteredPartitionsMetadataCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetUnfilteredPartitionsMetadataCommandOutput>;
+  getUnfilteredPartitionsMetadata(
+    args: GetUnfilteredPartitionsMetadataCommandInput,
+    cb: (err: any, data?: GetUnfilteredPartitionsMetadataCommandOutput) => void
+  ): void;
+  getUnfilteredPartitionsMetadata(
+    args: GetUnfilteredPartitionsMetadataCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetUnfilteredPartitionsMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUnfilteredTableMetadataCommand}
+   */
+  getUnfilteredTableMetadata(
+    args: GetUnfilteredTableMetadataCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetUnfilteredTableMetadataCommandOutput>;
+  getUnfilteredTableMetadata(
+    args: GetUnfilteredTableMetadataCommandInput,
+    cb: (err: any, data?: GetUnfilteredTableMetadataCommandOutput) => void
+  ): void;
+  getUnfilteredTableMetadata(
+    args: GetUnfilteredTableMetadataCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetUnfilteredTableMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUsageProfileCommand}
+   */
+  getUsageProfile(
+    args: GetUsageProfileCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetUsageProfileCommandOutput>;
+  getUsageProfile(
+    args: GetUsageProfileCommandInput,
+    cb: (err: any, data?: GetUsageProfileCommandOutput) => void
+  ): void;
+  getUsageProfile(
+    args: GetUsageProfileCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetUsageProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUserDefinedFunctionCommand}
+   */
+  getUserDefinedFunction(
+    args: GetUserDefinedFunctionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetUserDefinedFunctionCommandOutput>;
+  getUserDefinedFunction(
+    args: GetUserDefinedFunctionCommandInput,
+    cb: (err: any, data?: GetUserDefinedFunctionCommandOutput) => void
+  ): void;
+  getUserDefinedFunction(
+    args: GetUserDefinedFunctionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetUserDefinedFunctionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUserDefinedFunctionsCommand}
+   */
+  getUserDefinedFunctions(
+    args: GetUserDefinedFunctionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetUserDefinedFunctionsCommandOutput>;
+  getUserDefinedFunctions(
+    args: GetUserDefinedFunctionsCommandInput,
+    cb: (err: any, data?: GetUserDefinedFunctionsCommandOutput) => void
+  ): void;
+  getUserDefinedFunctions(
+    args: GetUserDefinedFunctionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetUserDefinedFunctionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowCommand}
+   */
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetWorkflowCommandOutput>;
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    cb: (err: any, data?: GetWorkflowCommandOutput) => void
+  ): void;
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowRunCommand}
+   */
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetWorkflowRunCommandOutput>;
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
+  ): void;
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowRunPropertiesCommand}
+   */
+  getWorkflowRunProperties(
+    args: GetWorkflowRunPropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetWorkflowRunPropertiesCommandOutput>;
+  getWorkflowRunProperties(
+    args: GetWorkflowRunPropertiesCommandInput,
+    cb: (err: any, data?: GetWorkflowRunPropertiesCommandOutput) => void
+  ): void;
+  getWorkflowRunProperties(
+    args: GetWorkflowRunPropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetWorkflowRunPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowRunsCommand}
+   */
+  getWorkflowRuns(
+    args: GetWorkflowRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<GetWorkflowRunsCommandOutput>;
+  getWorkflowRuns(
+    args: GetWorkflowRunsCommandInput,
+    cb: (err: any, data?: GetWorkflowRunsCommandOutput) => void
+  ): void;
+  getWorkflowRuns(
+    args: GetWorkflowRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: GetWorkflowRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportCatalogToGlueCommand}
+   */
+  importCatalogToGlue(): Promise<ImportCatalogToGlueCommandOutput>;
+  importCatalogToGlue(
+    args: ImportCatalogToGlueCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ImportCatalogToGlueCommandOutput>;
+  importCatalogToGlue(
+    args: ImportCatalogToGlueCommandInput,
+    cb: (err: any, data?: ImportCatalogToGlueCommandOutput) => void
+  ): void;
+  importCatalogToGlue(
+    args: ImportCatalogToGlueCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ImportCatalogToGlueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssetTypesCommand}
+   */
+  listAssetTypes(): Promise<ListAssetTypesCommandOutput>;
+  listAssetTypes(
+    args: ListAssetTypesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListAssetTypesCommandOutput>;
+  listAssetTypes(
+    args: ListAssetTypesCommandInput,
+    cb: (err: any, data?: ListAssetTypesCommandOutput) => void
+  ): void;
+  listAssetTypes(
+    args: ListAssetTypesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListAssetTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBlueprintsCommand}
+   */
+  listBlueprints(): Promise<ListBlueprintsCommandOutput>;
+  listBlueprints(
+    args: ListBlueprintsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListBlueprintsCommandOutput>;
+  listBlueprints(
+    args: ListBlueprintsCommandInput,
+    cb: (err: any, data?: ListBlueprintsCommandOutput) => void
+  ): void;
+  listBlueprints(
+    args: ListBlueprintsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListBlueprintsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListColumnStatisticsTaskRunsCommand}
+   */
+  listColumnStatisticsTaskRuns(): Promise<ListColumnStatisticsTaskRunsCommandOutput>;
+  listColumnStatisticsTaskRuns(
+    args: ListColumnStatisticsTaskRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListColumnStatisticsTaskRunsCommandOutput>;
+  listColumnStatisticsTaskRuns(
+    args: ListColumnStatisticsTaskRunsCommandInput,
+    cb: (err: any, data?: ListColumnStatisticsTaskRunsCommandOutput) => void
+  ): void;
+  listColumnStatisticsTaskRuns(
+    args: ListColumnStatisticsTaskRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListColumnStatisticsTaskRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectionTypesCommand}
+   */
+  listConnectionTypes(): Promise<ListConnectionTypesCommandOutput>;
+  listConnectionTypes(
+    args: ListConnectionTypesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListConnectionTypesCommandOutput>;
+  listConnectionTypes(
+    args: ListConnectionTypesCommandInput,
+    cb: (err: any, data?: ListConnectionTypesCommandOutput) => void
+  ): void;
+  listConnectionTypes(
+    args: ListConnectionTypesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListConnectionTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCrawlersCommand}
+   */
+  listCrawlers(): Promise<ListCrawlersCommandOutput>;
+  listCrawlers(
+    args: ListCrawlersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListCrawlersCommandOutput>;
+  listCrawlers(
+    args: ListCrawlersCommandInput,
+    cb: (err: any, data?: ListCrawlersCommandOutput) => void
+  ): void;
+  listCrawlers(
+    args: ListCrawlersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListCrawlersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCrawlsCommand}
+   */
+  listCrawls(
+    args: ListCrawlsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListCrawlsCommandOutput>;
+  listCrawls(
+    args: ListCrawlsCommandInput,
+    cb: (err: any, data?: ListCrawlsCommandOutput) => void
+  ): void;
+  listCrawls(
+    args: ListCrawlsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListCrawlsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomEntityTypesCommand}
+   */
+  listCustomEntityTypes(): Promise<ListCustomEntityTypesCommandOutput>;
+  listCustomEntityTypes(
+    args: ListCustomEntityTypesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListCustomEntityTypesCommandOutput>;
+  listCustomEntityTypes(
+    args: ListCustomEntityTypesCommandInput,
+    cb: (err: any, data?: ListCustomEntityTypesCommandOutput) => void
+  ): void;
+  listCustomEntityTypes(
+    args: ListCustomEntityTypesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListCustomEntityTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityEvaluationConfigsCommand}
+   */
+  listDataQualityEvaluationConfigs(): Promise<ListDataQualityEvaluationConfigsCommandOutput>;
+  listDataQualityEvaluationConfigs(
+    args: ListDataQualityEvaluationConfigsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityEvaluationConfigsCommandOutput>;
+  listDataQualityEvaluationConfigs(
+    args: ListDataQualityEvaluationConfigsCommandInput,
+    cb: (err: any, data?: ListDataQualityEvaluationConfigsCommandOutput) => void
+  ): void;
+  listDataQualityEvaluationConfigs(
+    args: ListDataQualityEvaluationConfigsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityEvaluationConfigsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityResultsCommand}
+   */
+  listDataQualityResults(): Promise<ListDataQualityResultsCommandOutput>;
+  listDataQualityResults(
+    args: ListDataQualityResultsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityResultsCommandOutput>;
+  listDataQualityResults(
+    args: ListDataQualityResultsCommandInput,
+    cb: (err: any, data?: ListDataQualityResultsCommandOutput) => void
+  ): void;
+  listDataQualityResults(
+    args: ListDataQualityResultsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityResultsV2Command}
+   */
+  listDataQualityResultsV2(): Promise<ListDataQualityResultsV2CommandOutput>;
+  listDataQualityResultsV2(
+    args: ListDataQualityResultsV2CommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityResultsV2CommandOutput>;
+  listDataQualityResultsV2(
+    args: ListDataQualityResultsV2CommandInput,
+    cb: (err: any, data?: ListDataQualityResultsV2CommandOutput) => void
+  ): void;
+  listDataQualityResultsV2(
+    args: ListDataQualityResultsV2CommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityResultsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityRuleRecommendationRunsCommand}
+   */
+  listDataQualityRuleRecommendationRuns(): Promise<ListDataQualityRuleRecommendationRunsCommandOutput>;
+  listDataQualityRuleRecommendationRuns(
+    args: ListDataQualityRuleRecommendationRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityRuleRecommendationRunsCommandOutput>;
+  listDataQualityRuleRecommendationRuns(
+    args: ListDataQualityRuleRecommendationRunsCommandInput,
+    cb: (err: any, data?: ListDataQualityRuleRecommendationRunsCommandOutput) => void
+  ): void;
+  listDataQualityRuleRecommendationRuns(
+    args: ListDataQualityRuleRecommendationRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityRuleRecommendationRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityRulesetEvaluationRunsCommand}
+   */
+  listDataQualityRulesetEvaluationRuns(): Promise<ListDataQualityRulesetEvaluationRunsCommandOutput>;
+  listDataQualityRulesetEvaluationRuns(
+    args: ListDataQualityRulesetEvaluationRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityRulesetEvaluationRunsCommandOutput>;
+  listDataQualityRulesetEvaluationRuns(
+    args: ListDataQualityRulesetEvaluationRunsCommandInput,
+    cb: (err: any, data?: ListDataQualityRulesetEvaluationRunsCommandOutput) => void
+  ): void;
+  listDataQualityRulesetEvaluationRuns(
+    args: ListDataQualityRulesetEvaluationRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityRulesetEvaluationRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityRulesetsCommand}
+   */
+  listDataQualityRulesets(): Promise<ListDataQualityRulesetsCommandOutput>;
+  listDataQualityRulesets(
+    args: ListDataQualityRulesetsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityRulesetsCommandOutput>;
+  listDataQualityRulesets(
+    args: ListDataQualityRulesetsCommandInput,
+    cb: (err: any, data?: ListDataQualityRulesetsCommandOutput) => void
+  ): void;
+  listDataQualityRulesets(
+    args: ListDataQualityRulesetsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityRulesetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityStatisticAnnotationsCommand}
+   */
+  listDataQualityStatisticAnnotations(): Promise<ListDataQualityStatisticAnnotationsCommandOutput>;
+  listDataQualityStatisticAnnotations(
+    args: ListDataQualityStatisticAnnotationsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityStatisticAnnotationsCommandOutput>;
+  listDataQualityStatisticAnnotations(
+    args: ListDataQualityStatisticAnnotationsCommandInput,
+    cb: (err: any, data?: ListDataQualityStatisticAnnotationsCommandOutput) => void
+  ): void;
+  listDataQualityStatisticAnnotations(
+    args: ListDataQualityStatisticAnnotationsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityStatisticAnnotationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataQualityStatisticsCommand}
+   */
+  listDataQualityStatistics(): Promise<ListDataQualityStatisticsCommandOutput>;
+  listDataQualityStatistics(
+    args: ListDataQualityStatisticsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDataQualityStatisticsCommandOutput>;
+  listDataQualityStatistics(
+    args: ListDataQualityStatisticsCommandInput,
+    cb: (err: any, data?: ListDataQualityStatisticsCommandOutput) => void
+  ): void;
+  listDataQualityStatistics(
+    args: ListDataQualityStatisticsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDataQualityStatisticsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDevEndpointsCommand}
+   */
+  listDevEndpoints(): Promise<ListDevEndpointsCommandOutput>;
+  listDevEndpoints(
+    args: ListDevEndpointsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListDevEndpointsCommandOutput>;
+  listDevEndpoints(
+    args: ListDevEndpointsCommandInput,
+    cb: (err: any, data?: ListDevEndpointsCommandOutput) => void
+  ): void;
+  listDevEndpoints(
+    args: ListDevEndpointsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListDevEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEntitiesCommand}
+   */
+  listEntities(): Promise<ListEntitiesCommandOutput>;
+  listEntities(
+    args: ListEntitiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListEntitiesCommandOutput>;
+  listEntities(
+    args: ListEntitiesCommandInput,
+    cb: (err: any, data?: ListEntitiesCommandOutput) => void
+  ): void;
+  listEntities(
+    args: ListEntitiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListEntitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFormTypesCommand}
+   */
+  listFormTypes(): Promise<ListFormTypesCommandOutput>;
+  listFormTypes(
+    args: ListFormTypesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListFormTypesCommandOutput>;
+  listFormTypes(
+    args: ListFormTypesCommandInput,
+    cb: (err: any, data?: ListFormTypesCommandOutput) => void
+  ): void;
+  listFormTypes(
+    args: ListFormTypesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListFormTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListGlossariesCommand}
+   */
+  listGlossaries(): Promise<ListGlossariesCommandOutput>;
+  listGlossaries(
+    args: ListGlossariesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListGlossariesCommandOutput>;
+  listGlossaries(
+    args: ListGlossariesCommandInput,
+    cb: (err: any, data?: ListGlossariesCommandOutput) => void
+  ): void;
+  listGlossaries(
+    args: ListGlossariesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListGlossariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListGlossaryTermsCommand}
+   */
+  listGlossaryTerms(
+    args: ListGlossaryTermsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListGlossaryTermsCommandOutput>;
+  listGlossaryTerms(
+    args: ListGlossaryTermsCommandInput,
+    cb: (err: any, data?: ListGlossaryTermsCommandOutput) => void
+  ): void;
+  listGlossaryTerms(
+    args: ListGlossaryTermsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListGlossaryTermsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIntegrationResourcePropertiesCommand}
+   */
+  listIntegrationResourceProperties(): Promise<ListIntegrationResourcePropertiesCommandOutput>;
+  listIntegrationResourceProperties(
+    args: ListIntegrationResourcePropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListIntegrationResourcePropertiesCommandOutput>;
+  listIntegrationResourceProperties(
+    args: ListIntegrationResourcePropertiesCommandInput,
+    cb: (err: any, data?: ListIntegrationResourcePropertiesCommandOutput) => void
+  ): void;
+  listIntegrationResourceProperties(
+    args: ListIntegrationResourcePropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListIntegrationResourcePropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIntegrationTablePropertiesCommand}
+   */
+  listIntegrationTableProperties(): Promise<ListIntegrationTablePropertiesCommandOutput>;
+  listIntegrationTableProperties(
+    args: ListIntegrationTablePropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListIntegrationTablePropertiesCommandOutput>;
+  listIntegrationTableProperties(
+    args: ListIntegrationTablePropertiesCommandInput,
+    cb: (err: any, data?: ListIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+  listIntegrationTableProperties(
+    args: ListIntegrationTablePropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIterableFormsCommand}
+   */
+  listIterableForms(
+    args: ListIterableFormsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListIterableFormsCommandOutput>;
+  listIterableForms(
+    args: ListIterableFormsCommandInput,
+    cb: (err: any, data?: ListIterableFormsCommandOutput) => void
+  ): void;
+  listIterableForms(
+    args: ListIterableFormsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListIterableFormsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListJobsCommand}
+   */
+  listJobs(): Promise<ListJobsCommandOutput>;
+  listJobs(
+    args: ListJobsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListJobsCommandOutput>;
+  listJobs(
+    args: ListJobsCommandInput,
+    cb: (err: any, data?: ListJobsCommandOutput) => void
+  ): void;
+  listJobs(
+    args: ListJobsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMaterializedViewRefreshTaskRunsCommand}
+   */
+  listMaterializedViewRefreshTaskRuns(
+    args: ListMaterializedViewRefreshTaskRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListMaterializedViewRefreshTaskRunsCommandOutput>;
+  listMaterializedViewRefreshTaskRuns(
+    args: ListMaterializedViewRefreshTaskRunsCommandInput,
+    cb: (err: any, data?: ListMaterializedViewRefreshTaskRunsCommandOutput) => void
+  ): void;
+  listMaterializedViewRefreshTaskRuns(
+    args: ListMaterializedViewRefreshTaskRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListMaterializedViewRefreshTaskRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMLTransformsCommand}
+   */
+  listMLTransforms(): Promise<ListMLTransformsCommandOutput>;
+  listMLTransforms(
+    args: ListMLTransformsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListMLTransformsCommandOutput>;
+  listMLTransforms(
+    args: ListMLTransformsCommandInput,
+    cb: (err: any, data?: ListMLTransformsCommandOutput) => void
+  ): void;
+  listMLTransforms(
+    args: ListMLTransformsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListMLTransformsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRegistriesCommand}
+   */
+  listRegistries(): Promise<ListRegistriesCommandOutput>;
+  listRegistries(
+    args: ListRegistriesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListRegistriesCommandOutput>;
+  listRegistries(
+    args: ListRegistriesCommandInput,
+    cb: (err: any, data?: ListRegistriesCommandOutput) => void
+  ): void;
+  listRegistries(
+    args: ListRegistriesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListRegistriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSchemasCommand}
+   */
+  listSchemas(): Promise<ListSchemasCommandOutput>;
+  listSchemas(
+    args: ListSchemasCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListSchemasCommandOutput>;
+  listSchemas(
+    args: ListSchemasCommandInput,
+    cb: (err: any, data?: ListSchemasCommandOutput) => void
+  ): void;
+  listSchemas(
+    args: ListSchemasCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListSchemasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSchemaVersionsCommand}
+   */
+  listSchemaVersions(
+    args: ListSchemaVersionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListSchemaVersionsCommandOutput>;
+  listSchemaVersions(
+    args: ListSchemaVersionsCommandInput,
+    cb: (err: any, data?: ListSchemaVersionsCommandOutput) => void
+  ): void;
+  listSchemaVersions(
+    args: ListSchemaVersionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListSchemaVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   */
+  listSessions(): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStatementsCommand}
+   */
+  listStatements(
+    args: ListStatementsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListStatementsCommandOutput>;
+  listStatements(
+    args: ListStatementsCommandInput,
+    cb: (err: any, data?: ListStatementsCommandOutput) => void
+  ): void;
+  listStatements(
+    args: ListStatementsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListStatementsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTableOptimizerRunsCommand}
+   */
+  listTableOptimizerRuns(
+    args: ListTableOptimizerRunsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListTableOptimizerRunsCommandOutput>;
+  listTableOptimizerRuns(
+    args: ListTableOptimizerRunsCommandInput,
+    cb: (err: any, data?: ListTableOptimizerRunsCommandOutput) => void
+  ): void;
+  listTableOptimizerRuns(
+    args: ListTableOptimizerRunsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListTableOptimizerRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTriggersCommand}
+   */
+  listTriggers(): Promise<ListTriggersCommandOutput>;
+  listTriggers(
+    args: ListTriggersCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListTriggersCommandOutput>;
+  listTriggers(
+    args: ListTriggersCommandInput,
+    cb: (err: any, data?: ListTriggersCommandOutput) => void
+  ): void;
+  listTriggers(
+    args: ListTriggersCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListTriggersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUsageProfilesCommand}
+   */
+  listUsageProfiles(): Promise<ListUsageProfilesCommandOutput>;
+  listUsageProfiles(
+    args: ListUsageProfilesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListUsageProfilesCommandOutput>;
+  listUsageProfiles(
+    args: ListUsageProfilesCommandInput,
+    cb: (err: any, data?: ListUsageProfilesCommandOutput) => void
+  ): void;
+  listUsageProfiles(
+    args: ListUsageProfilesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListUsageProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   */
+  listWorkflows(): Promise<ListWorkflowsCommandOutput>;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ListWorkflowsCommandOutput>;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
+  ): void;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyIntegrationCommand}
+   */
+  modifyIntegration(
+    args: ModifyIntegrationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ModifyIntegrationCommandOutput>;
+  modifyIntegration(
+    args: ModifyIntegrationCommandInput,
+    cb: (err: any, data?: ModifyIntegrationCommandOutput) => void
+  ): void;
+  modifyIntegration(
+    args: ModifyIntegrationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ModifyIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PublishDataQualityResultV2Command}
+   */
+  publishDataQualityResultV2(
+    args: PublishDataQualityResultV2CommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PublishDataQualityResultV2CommandOutput>;
+  publishDataQualityResultV2(
+    args: PublishDataQualityResultV2CommandInput,
+    cb: (err: any, data?: PublishDataQualityResultV2CommandOutput) => void
+  ): void;
+  publishDataQualityResultV2(
+    args: PublishDataQualityResultV2CommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PublishDataQualityResultV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAssetCommand}
+   */
+  putAsset(
+    args: PutAssetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutAssetCommandOutput>;
+  putAsset(
+    args: PutAssetCommandInput,
+    cb: (err: any, data?: PutAssetCommandOutput) => void
+  ): void;
+  putAsset(
+    args: PutAssetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutAssetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAssetTypeCommand}
+   */
+  putAssetType(
+    args: PutAssetTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutAssetTypeCommandOutput>;
+  putAssetType(
+    args: PutAssetTypeCommandInput,
+    cb: (err: any, data?: PutAssetTypeCommandOutput) => void
+  ): void;
+  putAssetType(
+    args: PutAssetTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutAssetTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAttachmentCommand}
+   */
+  putAttachment(
+    args: PutAttachmentCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutAttachmentCommandOutput>;
+  putAttachment(
+    args: PutAttachmentCommandInput,
+    cb: (err: any, data?: PutAttachmentCommandOutput) => void
+  ): void;
+  putAttachment(
+    args: PutAttachmentCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDataCatalogEncryptionSettingsCommand}
+   */
+  putDataCatalogEncryptionSettings(
+    args: PutDataCatalogEncryptionSettingsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutDataCatalogEncryptionSettingsCommandOutput>;
+  putDataCatalogEncryptionSettings(
+    args: PutDataCatalogEncryptionSettingsCommandInput,
+    cb: (err: any, data?: PutDataCatalogEncryptionSettingsCommandOutput) => void
+  ): void;
+  putDataCatalogEncryptionSettings(
+    args: PutDataCatalogEncryptionSettingsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutDataCatalogEncryptionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDataCatalogExportConfigurationCommand}
+   */
+  putDataCatalogExportConfiguration(
+    args: PutDataCatalogExportConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutDataCatalogExportConfigurationCommandOutput>;
+  putDataCatalogExportConfiguration(
+    args: PutDataCatalogExportConfigurationCommandInput,
+    cb: (err: any, data?: PutDataCatalogExportConfigurationCommandOutput) => void
+  ): void;
+  putDataCatalogExportConfiguration(
+    args: PutDataCatalogExportConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutDataCatalogExportConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDataQualityProfileAnnotationCommand}
+   */
+  putDataQualityProfileAnnotation(
+    args: PutDataQualityProfileAnnotationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutDataQualityProfileAnnotationCommandOutput>;
+  putDataQualityProfileAnnotation(
+    args: PutDataQualityProfileAnnotationCommandInput,
+    cb: (err: any, data?: PutDataQualityProfileAnnotationCommandOutput) => void
+  ): void;
+  putDataQualityProfileAnnotation(
+    args: PutDataQualityProfileAnnotationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutDataQualityProfileAnnotationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutFormTypeCommand}
+   */
+  putFormType(
+    args: PutFormTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutFormTypeCommandOutput>;
+  putFormType(
+    args: PutFormTypeCommandInput,
+    cb: (err: any, data?: PutFormTypeCommandOutput) => void
+  ): void;
+  putFormType(
+    args: PutFormTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutFormTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutSchemaVersionMetadataCommand}
+   */
+  putSchemaVersionMetadata(
+    args: PutSchemaVersionMetadataCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutSchemaVersionMetadataCommandOutput>;
+  putSchemaVersionMetadata(
+    args: PutSchemaVersionMetadataCommandInput,
+    cb: (err: any, data?: PutSchemaVersionMetadataCommandOutput) => void
+  ): void;
+  putSchemaVersionMetadata(
+    args: PutSchemaVersionMetadataCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutSchemaVersionMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutWorkflowRunPropertiesCommand}
+   */
+  putWorkflowRunProperties(
+    args: PutWorkflowRunPropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<PutWorkflowRunPropertiesCommandOutput>;
+  putWorkflowRunProperties(
+    args: PutWorkflowRunPropertiesCommandInput,
+    cb: (err: any, data?: PutWorkflowRunPropertiesCommandOutput) => void
+  ): void;
+  putWorkflowRunProperties(
+    args: PutWorkflowRunPropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: PutWorkflowRunPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QuerySchemaVersionMetadataCommand}
+   */
+  querySchemaVersionMetadata(): Promise<QuerySchemaVersionMetadataCommandOutput>;
+  querySchemaVersionMetadata(
+    args: QuerySchemaVersionMetadataCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<QuerySchemaVersionMetadataCommandOutput>;
+  querySchemaVersionMetadata(
+    args: QuerySchemaVersionMetadataCommandInput,
+    cb: (err: any, data?: QuerySchemaVersionMetadataCommandOutput) => void
+  ): void;
+  querySchemaVersionMetadata(
+    args: QuerySchemaVersionMetadataCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: QuerySchemaVersionMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterConnectionTypeCommand}
+   */
+  registerConnectionType(
+    args: RegisterConnectionTypeCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<RegisterConnectionTypeCommandOutput>;
+  registerConnectionType(
+    args: RegisterConnectionTypeCommandInput,
+    cb: (err: any, data?: RegisterConnectionTypeCommandOutput) => void
+  ): void;
+  registerConnectionType(
+    args: RegisterConnectionTypeCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: RegisterConnectionTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterSchemaVersionCommand}
+   */
+  registerSchemaVersion(
+    args: RegisterSchemaVersionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<RegisterSchemaVersionCommandOutput>;
+  registerSchemaVersion(
+    args: RegisterSchemaVersionCommandInput,
+    cb: (err: any, data?: RegisterSchemaVersionCommandOutput) => void
+  ): void;
+  registerSchemaVersion(
+    args: RegisterSchemaVersionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: RegisterSchemaVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveSchemaVersionMetadataCommand}
+   */
+  removeSchemaVersionMetadata(
+    args: RemoveSchemaVersionMetadataCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<RemoveSchemaVersionMetadataCommandOutput>;
+  removeSchemaVersionMetadata(
+    args: RemoveSchemaVersionMetadataCommandInput,
+    cb: (err: any, data?: RemoveSchemaVersionMetadataCommandOutput) => void
+  ): void;
+  removeSchemaVersionMetadata(
+    args: RemoveSchemaVersionMetadataCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: RemoveSchemaVersionMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResetJobBookmarkCommand}
+   */
+  resetJobBookmark(
+    args: ResetJobBookmarkCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ResetJobBookmarkCommandOutput>;
+  resetJobBookmark(
+    args: ResetJobBookmarkCommandInput,
+    cb: (err: any, data?: ResetJobBookmarkCommandOutput) => void
+  ): void;
+  resetJobBookmark(
+    args: ResetJobBookmarkCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ResetJobBookmarkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResumeWorkflowRunCommand}
+   */
+  resumeWorkflowRun(
+    args: ResumeWorkflowRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<ResumeWorkflowRunCommandOutput>;
+  resumeWorkflowRun(
+    args: ResumeWorkflowRunCommandInput,
+    cb: (err: any, data?: ResumeWorkflowRunCommandOutput) => void
+  ): void;
+  resumeWorkflowRun(
+    args: ResumeWorkflowRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: ResumeWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RunStatementCommand}
+   */
+  runStatement(
+    args: RunStatementCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<RunStatementCommandOutput>;
+  runStatement(
+    args: RunStatementCommandInput,
+    cb: (err: any, data?: RunStatementCommandOutput) => void
+  ): void;
+  runStatement(
+    args: RunStatementCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: RunStatementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchAssetsCommand}
+   */
+  searchAssets(): Promise<SearchAssetsCommandOutput>;
+  searchAssets(
+    args: SearchAssetsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<SearchAssetsCommandOutput>;
+  searchAssets(
+    args: SearchAssetsCommandInput,
+    cb: (err: any, data?: SearchAssetsCommandOutput) => void
+  ): void;
+  searchAssets(
+    args: SearchAssetsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: SearchAssetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchTablesCommand}
+   */
+  searchTables(): Promise<SearchTablesCommandOutput>;
+  searchTables(
+    args: SearchTablesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<SearchTablesCommandOutput>;
+  searchTables(
+    args: SearchTablesCommandInput,
+    cb: (err: any, data?: SearchTablesCommandOutput) => void
+  ): void;
+  searchTables(
+    args: SearchTablesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: SearchTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBlueprintRunCommand}
+   */
+  startBlueprintRun(
+    args: StartBlueprintRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartBlueprintRunCommandOutput>;
+  startBlueprintRun(
+    args: StartBlueprintRunCommandInput,
+    cb: (err: any, data?: StartBlueprintRunCommandOutput) => void
+  ): void;
+  startBlueprintRun(
+    args: StartBlueprintRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartBlueprintRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartColumnStatisticsTaskRunCommand}
+   */
+  startColumnStatisticsTaskRun(
+    args: StartColumnStatisticsTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartColumnStatisticsTaskRunCommandOutput>;
+  startColumnStatisticsTaskRun(
+    args: StartColumnStatisticsTaskRunCommandInput,
+    cb: (err: any, data?: StartColumnStatisticsTaskRunCommandOutput) => void
+  ): void;
+  startColumnStatisticsTaskRun(
+    args: StartColumnStatisticsTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartColumnStatisticsTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartColumnStatisticsTaskRunScheduleCommand}
+   */
+  startColumnStatisticsTaskRunSchedule(
+    args: StartColumnStatisticsTaskRunScheduleCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartColumnStatisticsTaskRunScheduleCommandOutput>;
+  startColumnStatisticsTaskRunSchedule(
+    args: StartColumnStatisticsTaskRunScheduleCommandInput,
+    cb: (err: any, data?: StartColumnStatisticsTaskRunScheduleCommandOutput) => void
+  ): void;
+  startColumnStatisticsTaskRunSchedule(
+    args: StartColumnStatisticsTaskRunScheduleCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartColumnStatisticsTaskRunScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCrawlerCommand}
+   */
+  startCrawler(
+    args: StartCrawlerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartCrawlerCommandOutput>;
+  startCrawler(
+    args: StartCrawlerCommandInput,
+    cb: (err: any, data?: StartCrawlerCommandOutput) => void
+  ): void;
+  startCrawler(
+    args: StartCrawlerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartCrawlerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCrawlerScheduleCommand}
+   */
+  startCrawlerSchedule(
+    args: StartCrawlerScheduleCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartCrawlerScheduleCommandOutput>;
+  startCrawlerSchedule(
+    args: StartCrawlerScheduleCommandInput,
+    cb: (err: any, data?: StartCrawlerScheduleCommandOutput) => void
+  ): void;
+  startCrawlerSchedule(
+    args: StartCrawlerScheduleCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartCrawlerScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDataQualityRuleRecommendationRunCommand}
+   */
+  startDataQualityRuleRecommendationRun(
+    args: StartDataQualityRuleRecommendationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartDataQualityRuleRecommendationRunCommandOutput>;
+  startDataQualityRuleRecommendationRun(
+    args: StartDataQualityRuleRecommendationRunCommandInput,
+    cb: (err: any, data?: StartDataQualityRuleRecommendationRunCommandOutput) => void
+  ): void;
+  startDataQualityRuleRecommendationRun(
+    args: StartDataQualityRuleRecommendationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartDataQualityRuleRecommendationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDataQualityRulesetEvaluationRunCommand}
+   */
+  startDataQualityRulesetEvaluationRun(
+    args: StartDataQualityRulesetEvaluationRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartDataQualityRulesetEvaluationRunCommandOutput>;
+  startDataQualityRulesetEvaluationRun(
+    args: StartDataQualityRulesetEvaluationRunCommandInput,
+    cb: (err: any, data?: StartDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+  startDataQualityRulesetEvaluationRun(
+    args: StartDataQualityRulesetEvaluationRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartDataQualityRulesetEvaluationRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartExportLabelsTaskRunCommand}
+   */
+  startExportLabelsTaskRun(
+    args: StartExportLabelsTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartExportLabelsTaskRunCommandOutput>;
+  startExportLabelsTaskRun(
+    args: StartExportLabelsTaskRunCommandInput,
+    cb: (err: any, data?: StartExportLabelsTaskRunCommandOutput) => void
+  ): void;
+  startExportLabelsTaskRun(
+    args: StartExportLabelsTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartExportLabelsTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartImportLabelsTaskRunCommand}
+   */
+  startImportLabelsTaskRun(
+    args: StartImportLabelsTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartImportLabelsTaskRunCommandOutput>;
+  startImportLabelsTaskRun(
+    args: StartImportLabelsTaskRunCommandInput,
+    cb: (err: any, data?: StartImportLabelsTaskRunCommandOutput) => void
+  ): void;
+  startImportLabelsTaskRun(
+    args: StartImportLabelsTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartImportLabelsTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartJobRunCommand}
+   */
+  startJobRun(
+    args: StartJobRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartJobRunCommandOutput>;
+  startJobRun(
+    args: StartJobRunCommandInput,
+    cb: (err: any, data?: StartJobRunCommandOutput) => void
+  ): void;
+  startJobRun(
+    args: StartJobRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartJobUpgradeAnalysisCommand}
+   */
+  startJobUpgradeAnalysis(
+    args: StartJobUpgradeAnalysisCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartJobUpgradeAnalysisCommandOutput>;
+  startJobUpgradeAnalysis(
+    args: StartJobUpgradeAnalysisCommandInput,
+    cb: (err: any, data?: StartJobUpgradeAnalysisCommandOutput) => void
+  ): void;
+  startJobUpgradeAnalysis(
+    args: StartJobUpgradeAnalysisCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartJobUpgradeAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMaterializedViewRefreshTaskRunCommand}
+   */
+  startMaterializedViewRefreshTaskRun(
+    args: StartMaterializedViewRefreshTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartMaterializedViewRefreshTaskRunCommandOutput>;
+  startMaterializedViewRefreshTaskRun(
+    args: StartMaterializedViewRefreshTaskRunCommandInput,
+    cb: (err: any, data?: StartMaterializedViewRefreshTaskRunCommandOutput) => void
+  ): void;
+  startMaterializedViewRefreshTaskRun(
+    args: StartMaterializedViewRefreshTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartMaterializedViewRefreshTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMLEvaluationTaskRunCommand}
+   */
+  startMLEvaluationTaskRun(
+    args: StartMLEvaluationTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartMLEvaluationTaskRunCommandOutput>;
+  startMLEvaluationTaskRun(
+    args: StartMLEvaluationTaskRunCommandInput,
+    cb: (err: any, data?: StartMLEvaluationTaskRunCommandOutput) => void
+  ): void;
+  startMLEvaluationTaskRun(
+    args: StartMLEvaluationTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartMLEvaluationTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMLLabelingSetGenerationTaskRunCommand}
+   */
+  startMLLabelingSetGenerationTaskRun(
+    args: StartMLLabelingSetGenerationTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartMLLabelingSetGenerationTaskRunCommandOutput>;
+  startMLLabelingSetGenerationTaskRun(
+    args: StartMLLabelingSetGenerationTaskRunCommandInput,
+    cb: (err: any, data?: StartMLLabelingSetGenerationTaskRunCommandOutput) => void
+  ): void;
+  startMLLabelingSetGenerationTaskRun(
+    args: StartMLLabelingSetGenerationTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartMLLabelingSetGenerationTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTriggerCommand}
+   */
+  startTrigger(
+    args: StartTriggerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartTriggerCommandOutput>;
+  startTrigger(
+    args: StartTriggerCommandInput,
+    cb: (err: any, data?: StartTriggerCommandOutput) => void
+  ): void;
+  startTrigger(
+    args: StartTriggerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartWorkflowRunCommand}
+   */
+  startWorkflowRun(
+    args: StartWorkflowRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StartWorkflowRunCommandOutput>;
+  startWorkflowRun(
+    args: StartWorkflowRunCommandInput,
+    cb: (err: any, data?: StartWorkflowRunCommandOutput) => void
+  ): void;
+  startWorkflowRun(
+    args: StartWorkflowRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StartWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopColumnStatisticsTaskRunCommand}
+   */
+  stopColumnStatisticsTaskRun(
+    args: StopColumnStatisticsTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopColumnStatisticsTaskRunCommandOutput>;
+  stopColumnStatisticsTaskRun(
+    args: StopColumnStatisticsTaskRunCommandInput,
+    cb: (err: any, data?: StopColumnStatisticsTaskRunCommandOutput) => void
+  ): void;
+  stopColumnStatisticsTaskRun(
+    args: StopColumnStatisticsTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopColumnStatisticsTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopColumnStatisticsTaskRunScheduleCommand}
+   */
+  stopColumnStatisticsTaskRunSchedule(
+    args: StopColumnStatisticsTaskRunScheduleCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopColumnStatisticsTaskRunScheduleCommandOutput>;
+  stopColumnStatisticsTaskRunSchedule(
+    args: StopColumnStatisticsTaskRunScheduleCommandInput,
+    cb: (err: any, data?: StopColumnStatisticsTaskRunScheduleCommandOutput) => void
+  ): void;
+  stopColumnStatisticsTaskRunSchedule(
+    args: StopColumnStatisticsTaskRunScheduleCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopColumnStatisticsTaskRunScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopCrawlerCommand}
+   */
+  stopCrawler(
+    args: StopCrawlerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopCrawlerCommandOutput>;
+  stopCrawler(
+    args: StopCrawlerCommandInput,
+    cb: (err: any, data?: StopCrawlerCommandOutput) => void
+  ): void;
+  stopCrawler(
+    args: StopCrawlerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopCrawlerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopCrawlerScheduleCommand}
+   */
+  stopCrawlerSchedule(
+    args: StopCrawlerScheduleCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopCrawlerScheduleCommandOutput>;
+  stopCrawlerSchedule(
+    args: StopCrawlerScheduleCommandInput,
+    cb: (err: any, data?: StopCrawlerScheduleCommandOutput) => void
+  ): void;
+  stopCrawlerSchedule(
+    args: StopCrawlerScheduleCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopCrawlerScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopJobUpgradeAnalysisCommand}
+   */
+  stopJobUpgradeAnalysis(
+    args: StopJobUpgradeAnalysisCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopJobUpgradeAnalysisCommandOutput>;
+  stopJobUpgradeAnalysis(
+    args: StopJobUpgradeAnalysisCommandInput,
+    cb: (err: any, data?: StopJobUpgradeAnalysisCommandOutput) => void
+  ): void;
+  stopJobUpgradeAnalysis(
+    args: StopJobUpgradeAnalysisCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopJobUpgradeAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopMaterializedViewRefreshTaskRunCommand}
+   */
+  stopMaterializedViewRefreshTaskRun(
+    args: StopMaterializedViewRefreshTaskRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopMaterializedViewRefreshTaskRunCommandOutput>;
+  stopMaterializedViewRefreshTaskRun(
+    args: StopMaterializedViewRefreshTaskRunCommandInput,
+    cb: (err: any, data?: StopMaterializedViewRefreshTaskRunCommandOutput) => void
+  ): void;
+  stopMaterializedViewRefreshTaskRun(
+    args: StopMaterializedViewRefreshTaskRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopMaterializedViewRefreshTaskRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopSessionCommand}
+   */
+  stopSession(
+    args: StopSessionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopSessionCommandOutput>;
+  stopSession(
+    args: StopSessionCommandInput,
+    cb: (err: any, data?: StopSessionCommandOutput) => void
+  ): void;
+  stopSession(
+    args: StopSessionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopTriggerCommand}
+   */
+  stopTrigger(
+    args: StopTriggerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopTriggerCommandOutput>;
+  stopTrigger(
+    args: StopTriggerCommandInput,
+    cb: (err: any, data?: StopTriggerCommandOutput) => void
+  ): void;
+  stopTrigger(
+    args: StopTriggerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopWorkflowRunCommand}
+   */
+  stopWorkflowRun(
+    args: StopWorkflowRunCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<StopWorkflowRunCommandOutput>;
+  stopWorkflowRun(
+    args: StopWorkflowRunCommandInput,
+    cb: (err: any, data?: StopWorkflowRunCommandOutput) => void
+  ): void;
+  stopWorkflowRun(
+    args: StopWorkflowRunCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: StopWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestConnectionCommand}
+   */
+  testConnection(): Promise<TestConnectionCommandOutput>;
+  testConnection(
+    args: TestConnectionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<TestConnectionCommandOutput>;
+  testConnection(
+    args: TestConnectionCommandInput,
+    cb: (err: any, data?: TestConnectionCommandOutput) => void
+  ): void;
+  testConnection(
+    args: TestConnectionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: TestConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAssetCommand}
+   */
+  updateAsset(
+    args: UpdateAssetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateAssetCommandOutput>;
+  updateAsset(
+    args: UpdateAssetCommandInput,
+    cb: (err: any, data?: UpdateAssetCommandOutput) => void
+  ): void;
+  updateAsset(
+    args: UpdateAssetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateAssetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBlueprintCommand}
+   */
+  updateBlueprint(
+    args: UpdateBlueprintCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateBlueprintCommandOutput>;
+  updateBlueprint(
+    args: UpdateBlueprintCommandInput,
+    cb: (err: any, data?: UpdateBlueprintCommandOutput) => void
+  ): void;
+  updateBlueprint(
+    args: UpdateBlueprintCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateBlueprintCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCatalogCommand}
+   */
+  updateCatalog(
+    args: UpdateCatalogCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateCatalogCommandOutput>;
+  updateCatalog(
+    args: UpdateCatalogCommandInput,
+    cb: (err: any, data?: UpdateCatalogCommandOutput) => void
+  ): void;
+  updateCatalog(
+    args: UpdateCatalogCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateCatalogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClassifierCommand}
+   */
+  updateClassifier(): Promise<UpdateClassifierCommandOutput>;
+  updateClassifier(
+    args: UpdateClassifierCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateClassifierCommandOutput>;
+  updateClassifier(
+    args: UpdateClassifierCommandInput,
+    cb: (err: any, data?: UpdateClassifierCommandOutput) => void
+  ): void;
+  updateClassifier(
+    args: UpdateClassifierCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateClassifierCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateColumnStatisticsForPartitionCommand}
+   */
+  updateColumnStatisticsForPartition(
+    args: UpdateColumnStatisticsForPartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateColumnStatisticsForPartitionCommandOutput>;
+  updateColumnStatisticsForPartition(
+    args: UpdateColumnStatisticsForPartitionCommandInput,
+    cb: (err: any, data?: UpdateColumnStatisticsForPartitionCommandOutput) => void
+  ): void;
+  updateColumnStatisticsForPartition(
+    args: UpdateColumnStatisticsForPartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateColumnStatisticsForPartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateColumnStatisticsForTableCommand}
+   */
+  updateColumnStatisticsForTable(
+    args: UpdateColumnStatisticsForTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateColumnStatisticsForTableCommandOutput>;
+  updateColumnStatisticsForTable(
+    args: UpdateColumnStatisticsForTableCommandInput,
+    cb: (err: any, data?: UpdateColumnStatisticsForTableCommandOutput) => void
+  ): void;
+  updateColumnStatisticsForTable(
+    args: UpdateColumnStatisticsForTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateColumnStatisticsForTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateColumnStatisticsTaskSettingsCommand}
+   */
+  updateColumnStatisticsTaskSettings(
+    args: UpdateColumnStatisticsTaskSettingsCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateColumnStatisticsTaskSettingsCommandOutput>;
+  updateColumnStatisticsTaskSettings(
+    args: UpdateColumnStatisticsTaskSettingsCommandInput,
+    cb: (err: any, data?: UpdateColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+  updateColumnStatisticsTaskSettings(
+    args: UpdateColumnStatisticsTaskSettingsCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateColumnStatisticsTaskSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectionCommand}
+   */
+  updateConnection(
+    args: UpdateConnectionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateConnectionCommandOutput>;
+  updateConnection(
+    args: UpdateConnectionCommandInput,
+    cb: (err: any, data?: UpdateConnectionCommandOutput) => void
+  ): void;
+  updateConnection(
+    args: UpdateConnectionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCrawlerCommand}
+   */
+  updateCrawler(
+    args: UpdateCrawlerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateCrawlerCommandOutput>;
+  updateCrawler(
+    args: UpdateCrawlerCommandInput,
+    cb: (err: any, data?: UpdateCrawlerCommandOutput) => void
+  ): void;
+  updateCrawler(
+    args: UpdateCrawlerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateCrawlerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCrawlerScheduleCommand}
+   */
+  updateCrawlerSchedule(
+    args: UpdateCrawlerScheduleCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateCrawlerScheduleCommandOutput>;
+  updateCrawlerSchedule(
+    args: UpdateCrawlerScheduleCommandInput,
+    cb: (err: any, data?: UpdateCrawlerScheduleCommandOutput) => void
+  ): void;
+  updateCrawlerSchedule(
+    args: UpdateCrawlerScheduleCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateCrawlerScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDatabaseCommand}
+   */
+  updateDatabase(
+    args: UpdateDatabaseCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateDatabaseCommandOutput>;
+  updateDatabase(
+    args: UpdateDatabaseCommandInput,
+    cb: (err: any, data?: UpdateDatabaseCommandOutput) => void
+  ): void;
+  updateDatabase(
+    args: UpdateDatabaseCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataQualityEvaluationConfigCommand}
+   */
+  updateDataQualityEvaluationConfig(
+    args: UpdateDataQualityEvaluationConfigCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateDataQualityEvaluationConfigCommandOutput>;
+  updateDataQualityEvaluationConfig(
+    args: UpdateDataQualityEvaluationConfigCommandInput,
+    cb: (err: any, data?: UpdateDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+  updateDataQualityEvaluationConfig(
+    args: UpdateDataQualityEvaluationConfigCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateDataQualityEvaluationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataQualityRulesetCommand}
+   */
+  updateDataQualityRuleset(
+    args: UpdateDataQualityRulesetCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateDataQualityRulesetCommandOutput>;
+  updateDataQualityRuleset(
+    args: UpdateDataQualityRulesetCommandInput,
+    cb: (err: any, data?: UpdateDataQualityRulesetCommandOutput) => void
+  ): void;
+  updateDataQualityRuleset(
+    args: UpdateDataQualityRulesetCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateDataQualityRulesetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDevEndpointCommand}
+   */
+  updateDevEndpoint(
+    args: UpdateDevEndpointCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateDevEndpointCommandOutput>;
+  updateDevEndpoint(
+    args: UpdateDevEndpointCommandInput,
+    cb: (err: any, data?: UpdateDevEndpointCommandOutput) => void
+  ): void;
+  updateDevEndpoint(
+    args: UpdateDevEndpointCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateDevEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateGlossaryCommand}
+   */
+  updateGlossary(
+    args: UpdateGlossaryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateGlossaryCommandOutput>;
+  updateGlossary(
+    args: UpdateGlossaryCommandInput,
+    cb: (err: any, data?: UpdateGlossaryCommandOutput) => void
+  ): void;
+  updateGlossary(
+    args: UpdateGlossaryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateGlossaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateGlossaryTermCommand}
+   */
+  updateGlossaryTerm(
+    args: UpdateGlossaryTermCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateGlossaryTermCommandOutput>;
+  updateGlossaryTerm(
+    args: UpdateGlossaryTermCommandInput,
+    cb: (err: any, data?: UpdateGlossaryTermCommandOutput) => void
+  ): void;
+  updateGlossaryTerm(
+    args: UpdateGlossaryTermCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateGlossaryTermCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateGlueIdentityCenterConfigurationCommand}
+   */
+  updateGlueIdentityCenterConfiguration(): Promise<UpdateGlueIdentityCenterConfigurationCommandOutput>;
+  updateGlueIdentityCenterConfiguration(
+    args: UpdateGlueIdentityCenterConfigurationCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateGlueIdentityCenterConfigurationCommandOutput>;
+  updateGlueIdentityCenterConfiguration(
+    args: UpdateGlueIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: UpdateGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  updateGlueIdentityCenterConfiguration(
+    args: UpdateGlueIdentityCenterConfigurationCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateGlueIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIntegrationResourcePropertyCommand}
+   */
+  updateIntegrationResourceProperty(
+    args: UpdateIntegrationResourcePropertyCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateIntegrationResourcePropertyCommandOutput>;
+  updateIntegrationResourceProperty(
+    args: UpdateIntegrationResourcePropertyCommandInput,
+    cb: (err: any, data?: UpdateIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+  updateIntegrationResourceProperty(
+    args: UpdateIntegrationResourcePropertyCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateIntegrationResourcePropertyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIntegrationTablePropertiesCommand}
+   */
+  updateIntegrationTableProperties(
+    args: UpdateIntegrationTablePropertiesCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateIntegrationTablePropertiesCommandOutput>;
+  updateIntegrationTableProperties(
+    args: UpdateIntegrationTablePropertiesCommandInput,
+    cb: (err: any, data?: UpdateIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+  updateIntegrationTableProperties(
+    args: UpdateIntegrationTablePropertiesCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateIntegrationTablePropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateJobCommand}
+   */
+  updateJob(
+    args: UpdateJobCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateJobCommandOutput>;
+  updateJob(
+    args: UpdateJobCommandInput,
+    cb: (err: any, data?: UpdateJobCommandOutput) => void
+  ): void;
+  updateJob(
+    args: UpdateJobCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateJobFromSourceControlCommand}
+   */
+  updateJobFromSourceControl(): Promise<UpdateJobFromSourceControlCommandOutput>;
+  updateJobFromSourceControl(
+    args: UpdateJobFromSourceControlCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateJobFromSourceControlCommandOutput>;
+  updateJobFromSourceControl(
+    args: UpdateJobFromSourceControlCommandInput,
+    cb: (err: any, data?: UpdateJobFromSourceControlCommandOutput) => void
+  ): void;
+  updateJobFromSourceControl(
+    args: UpdateJobFromSourceControlCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateJobFromSourceControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMLTransformCommand}
+   */
+  updateMLTransform(
+    args: UpdateMLTransformCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateMLTransformCommandOutput>;
+  updateMLTransform(
+    args: UpdateMLTransformCommandInput,
+    cb: (err: any, data?: UpdateMLTransformCommandOutput) => void
+  ): void;
+  updateMLTransform(
+    args: UpdateMLTransformCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateMLTransformCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePartitionCommand}
+   */
+  updatePartition(
+    args: UpdatePartitionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdatePartitionCommandOutput>;
+  updatePartition(
+    args: UpdatePartitionCommandInput,
+    cb: (err: any, data?: UpdatePartitionCommandOutput) => void
+  ): void;
+  updatePartition(
+    args: UpdatePartitionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdatePartitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRegistryCommand}
+   */
+  updateRegistry(
+    args: UpdateRegistryCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateRegistryCommandOutput>;
+  updateRegistry(
+    args: UpdateRegistryCommandInput,
+    cb: (err: any, data?: UpdateRegistryCommandOutput) => void
+  ): void;
+  updateRegistry(
+    args: UpdateRegistryCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateRegistryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSchemaCommand}
+   */
+  updateSchema(
+    args: UpdateSchemaCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateSchemaCommandOutput>;
+  updateSchema(
+    args: UpdateSchemaCommandInput,
+    cb: (err: any, data?: UpdateSchemaCommandOutput) => void
+  ): void;
+  updateSchema(
+    args: UpdateSchemaCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSourceControlFromJobCommand}
+   */
+  updateSourceControlFromJob(): Promise<UpdateSourceControlFromJobCommandOutput>;
+  updateSourceControlFromJob(
+    args: UpdateSourceControlFromJobCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateSourceControlFromJobCommandOutput>;
+  updateSourceControlFromJob(
+    args: UpdateSourceControlFromJobCommandInput,
+    cb: (err: any, data?: UpdateSourceControlFromJobCommandOutput) => void
+  ): void;
+  updateSourceControlFromJob(
+    args: UpdateSourceControlFromJobCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateSourceControlFromJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTableCommand}
+   */
+  updateTable(
+    args: UpdateTableCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateTableCommandOutput>;
+  updateTable(
+    args: UpdateTableCommandInput,
+    cb: (err: any, data?: UpdateTableCommandOutput) => void
+  ): void;
+  updateTable(
+    args: UpdateTableCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTableOptimizerCommand}
+   */
+  updateTableOptimizer(
+    args: UpdateTableOptimizerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateTableOptimizerCommandOutput>;
+  updateTableOptimizer(
+    args: UpdateTableOptimizerCommandInput,
+    cb: (err: any, data?: UpdateTableOptimizerCommandOutput) => void
+  ): void;
+  updateTableOptimizer(
+    args: UpdateTableOptimizerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateTableOptimizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTriggerCommand}
+   */
+  updateTrigger(
+    args: UpdateTriggerCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateTriggerCommandOutput>;
+  updateTrigger(
+    args: UpdateTriggerCommandInput,
+    cb: (err: any, data?: UpdateTriggerCommandOutput) => void
+  ): void;
+  updateTrigger(
+    args: UpdateTriggerCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUsageProfileCommand}
+   */
+  updateUsageProfile(
+    args: UpdateUsageProfileCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateUsageProfileCommandOutput>;
+  updateUsageProfile(
+    args: UpdateUsageProfileCommandInput,
+    cb: (err: any, data?: UpdateUsageProfileCommandOutput) => void
+  ): void;
+  updateUsageProfile(
+    args: UpdateUsageProfileCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateUsageProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserDefinedFunctionCommand}
+   */
+  updateUserDefinedFunction(
+    args: UpdateUserDefinedFunctionCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateUserDefinedFunctionCommandOutput>;
+  updateUserDefinedFunction(
+    args: UpdateUserDefinedFunctionCommandInput,
+    cb: (err: any, data?: UpdateUserDefinedFunctionCommandOutput) => void
+  ): void;
+  updateUserDefinedFunction(
+    args: UpdateUserDefinedFunctionCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateUserDefinedFunctionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkflowCommand}
+   */
+  updateWorkflow(
+    args: UpdateWorkflowCommandInput,
+    options?: GlueRequestOptions
+  ): Promise<UpdateWorkflowCommandOutput>;
+  updateWorkflow(
+    args: UpdateWorkflowCommandInput,
+    cb: (err: any, data?: UpdateWorkflowCommandOutput) => void
+  ): void;
+  updateWorkflow(
+    args: UpdateWorkflowCommandInput,
+    options: GlueRequestOptions,
+    cb: (err: any, data?: UpdateWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEntityCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEntityCommandOutput}.
+   */
+  paginateDescribeEntity(
+    args: DescribeEntityCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEntityCommandOutput>;
+
+  /**
+   * @see {@link GetBlueprintRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetBlueprintRunsCommandOutput}.
+   */
+  paginateGetBlueprintRuns(
+    args: GetBlueprintRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetBlueprintRunsCommandOutput>;
+
+  /**
+   * @see {@link GetClassifiersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetClassifiersCommandOutput}.
+   */
+  paginateGetClassifiers(
+    args?: GetClassifiersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetClassifiersCommandOutput>;
+
+  /**
+   * @see {@link GetColumnStatisticsTaskRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetColumnStatisticsTaskRunsCommandOutput}.
+   */
+  paginateGetColumnStatisticsTaskRuns(
+    args: GetColumnStatisticsTaskRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetColumnStatisticsTaskRunsCommandOutput>;
+
+  /**
+   * @see {@link GetConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetConnectionsCommandOutput}.
+   */
+  paginateGetConnections(
+    args?: GetConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetConnectionsCommandOutput>;
+
+  /**
+   * @see {@link GetCrawlerMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCrawlerMetricsCommandOutput}.
+   */
+  paginateGetCrawlerMetrics(
+    args?: GetCrawlerMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCrawlerMetricsCommandOutput>;
+
+  /**
+   * @see {@link GetCrawlersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCrawlersCommandOutput}.
+   */
+  paginateGetCrawlers(
+    args?: GetCrawlersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCrawlersCommandOutput>;
+
+  /**
+   * @see {@link GetDatabasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetDatabasesCommandOutput}.
+   */
+  paginateGetDatabases(
+    args?: GetDatabasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetDatabasesCommandOutput>;
+
+  /**
+   * @see {@link GetDevEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetDevEndpointsCommandOutput}.
+   */
+  paginateGetDevEndpoints(
+    args?: GetDevEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetDevEndpointsCommandOutput>;
+
+  /**
+   * @see {@link GetJobRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetJobRunsCommandOutput}.
+   */
+  paginateGetJobRuns(
+    args: GetJobRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetJobRunsCommandOutput>;
+
+  /**
+   * @see {@link GetJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetJobsCommandOutput}.
+   */
+  paginateGetJobs(
+    args?: GetJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetJobsCommandOutput>;
+
+  /**
+   * @see {@link GetMLTaskRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetMLTaskRunsCommandOutput}.
+   */
+  paginateGetMLTaskRuns(
+    args: GetMLTaskRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetMLTaskRunsCommandOutput>;
+
+  /**
+   * @see {@link GetMLTransformsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetMLTransformsCommandOutput}.
+   */
+  paginateGetMLTransforms(
+    args?: GetMLTransformsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetMLTransformsCommandOutput>;
+
+  /**
+   * @see {@link GetPartitionIndexesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetPartitionIndexesCommandOutput}.
+   */
+  paginateGetPartitionIndexes(
+    args: GetPartitionIndexesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetPartitionIndexesCommandOutput>;
+
+  /**
+   * @see {@link GetPartitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetPartitionsCommandOutput}.
+   */
+  paginateGetPartitions(
+    args: GetPartitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetPartitionsCommandOutput>;
+
+  /**
+   * @see {@link GetResourcePoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetResourcePoliciesCommandOutput}.
+   */
+  paginateGetResourcePolicies(
+    args?: GetResourcePoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetResourcePoliciesCommandOutput>;
+
+  /**
+   * @see {@link GetSecurityConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSecurityConfigurationsCommandOutput}.
+   */
+  paginateGetSecurityConfigurations(
+    args?: GetSecurityConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSecurityConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link GetTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTablesCommandOutput}.
+   */
+  paginateGetTables(
+    args: GetTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTablesCommandOutput>;
+
+  /**
+   * @see {@link GetTableVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTableVersionsCommandOutput}.
+   */
+  paginateGetTableVersions(
+    args: GetTableVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTableVersionsCommandOutput>;
+
+  /**
+   * @see {@link GetTriggersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTriggersCommandOutput}.
+   */
+  paginateGetTriggers(
+    args?: GetTriggersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTriggersCommandOutput>;
+
+  /**
+   * @see {@link GetUnfilteredPartitionsMetadataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetUnfilteredPartitionsMetadataCommandOutput}.
+   */
+  paginateGetUnfilteredPartitionsMetadata(
+    args: GetUnfilteredPartitionsMetadataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetUnfilteredPartitionsMetadataCommandOutput>;
+
+  /**
+   * @see {@link GetUserDefinedFunctionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetUserDefinedFunctionsCommandOutput}.
+   */
+  paginateGetUserDefinedFunctions(
+    args: GetUserDefinedFunctionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetUserDefinedFunctionsCommandOutput>;
+
+  /**
+   * @see {@link GetWorkflowRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetWorkflowRunsCommandOutput}.
+   */
+  paginateGetWorkflowRuns(
+    args: GetWorkflowRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetWorkflowRunsCommandOutput>;
+
+  /**
+   * @see {@link ListAssetTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssetTypesCommandOutput}.
+   */
+  paginateListAssetTypes(
+    args?: ListAssetTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssetTypesCommandOutput>;
+
+  /**
+   * @see {@link ListBlueprintsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBlueprintsCommandOutput}.
+   */
+  paginateListBlueprints(
+    args?: ListBlueprintsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBlueprintsCommandOutput>;
+
+  /**
+   * @see {@link ListColumnStatisticsTaskRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListColumnStatisticsTaskRunsCommandOutput}.
+   */
+  paginateListColumnStatisticsTaskRuns(
+    args?: ListColumnStatisticsTaskRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListColumnStatisticsTaskRunsCommandOutput>;
+
+  /**
+   * @see {@link ListConnectionTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectionTypesCommandOutput}.
+   */
+  paginateListConnectionTypes(
+    args?: ListConnectionTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectionTypesCommandOutput>;
+
+  /**
+   * @see {@link ListCrawlersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCrawlersCommandOutput}.
+   */
+  paginateListCrawlers(
+    args?: ListCrawlersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCrawlersCommandOutput>;
+
+  /**
+   * @see {@link ListCustomEntityTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomEntityTypesCommandOutput}.
+   */
+  paginateListCustomEntityTypes(
+    args?: ListCustomEntityTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomEntityTypesCommandOutput>;
+
+  /**
+   * @see {@link ListDataQualityEvaluationConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataQualityEvaluationConfigsCommandOutput}.
+   */
+  paginateListDataQualityEvaluationConfigs(
+    args?: ListDataQualityEvaluationConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataQualityEvaluationConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListDataQualityResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataQualityResultsCommandOutput}.
+   */
+  paginateListDataQualityResults(
+    args?: ListDataQualityResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataQualityResultsCommandOutput>;
+
+  /**
+   * @see {@link ListDataQualityResultsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataQualityResultsV2CommandOutput}.
+   */
+  paginateListDataQualityResultsV2(
+    args?: ListDataQualityResultsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataQualityResultsV2CommandOutput>;
+
+  /**
+   * @see {@link ListDataQualityRuleRecommendationRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataQualityRuleRecommendationRunsCommandOutput}.
+   */
+  paginateListDataQualityRuleRecommendationRuns(
+    args?: ListDataQualityRuleRecommendationRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataQualityRuleRecommendationRunsCommandOutput>;
+
+  /**
+   * @see {@link ListDataQualityRulesetEvaluationRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataQualityRulesetEvaluationRunsCommandOutput}.
+   */
+  paginateListDataQualityRulesetEvaluationRuns(
+    args?: ListDataQualityRulesetEvaluationRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataQualityRulesetEvaluationRunsCommandOutput>;
+
+  /**
+   * @see {@link ListDataQualityRulesetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataQualityRulesetsCommandOutput}.
+   */
+  paginateListDataQualityRulesets(
+    args?: ListDataQualityRulesetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataQualityRulesetsCommandOutput>;
+
+  /**
+   * @see {@link ListDevEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDevEndpointsCommandOutput}.
+   */
+  paginateListDevEndpoints(
+    args?: ListDevEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDevEndpointsCommandOutput>;
+
+  /**
+   * @see {@link ListEntitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEntitiesCommandOutput}.
+   */
+  paginateListEntities(
+    args?: ListEntitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEntitiesCommandOutput>;
+
+  /**
+   * @see {@link ListFormTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFormTypesCommandOutput}.
+   */
+  paginateListFormTypes(
+    args?: ListFormTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFormTypesCommandOutput>;
+
+  /**
+   * @see {@link ListGlossariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGlossariesCommandOutput}.
+   */
+  paginateListGlossaries(
+    args?: ListGlossariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGlossariesCommandOutput>;
+
+  /**
+   * @see {@link ListGlossaryTermsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGlossaryTermsCommandOutput}.
+   */
+  paginateListGlossaryTerms(
+    args: ListGlossaryTermsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGlossaryTermsCommandOutput>;
+
+  /**
+   * @see {@link ListIterableFormsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIterableFormsCommandOutput}.
+   */
+  paginateListIterableForms(
+    args: ListIterableFormsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIterableFormsCommandOutput>;
+
+  /**
+   * @see {@link ListJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListJobsCommandOutput}.
+   */
+  paginateListJobs(
+    args?: ListJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListJobsCommandOutput>;
+
+  /**
+   * @see {@link ListMaterializedViewRefreshTaskRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMaterializedViewRefreshTaskRunsCommandOutput}.
+   */
+  paginateListMaterializedViewRefreshTaskRuns(
+    args: ListMaterializedViewRefreshTaskRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMaterializedViewRefreshTaskRunsCommandOutput>;
+
+  /**
+   * @see {@link ListMLTransformsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMLTransformsCommandOutput}.
+   */
+  paginateListMLTransforms(
+    args?: ListMLTransformsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMLTransformsCommandOutput>;
+
+  /**
+   * @see {@link ListRegistriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRegistriesCommandOutput}.
+   */
+  paginateListRegistries(
+    args?: ListRegistriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRegistriesCommandOutput>;
+
+  /**
+   * @see {@link ListSchemasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSchemasCommandOutput}.
+   */
+  paginateListSchemas(
+    args?: ListSchemasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSchemasCommandOutput>;
+
+  /**
+   * @see {@link ListSchemaVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSchemaVersionsCommandOutput}.
+   */
+  paginateListSchemaVersions(
+    args: ListSchemaVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSchemaVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args?: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListTableOptimizerRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTableOptimizerRunsCommandOutput}.
+   */
+  paginateListTableOptimizerRuns(
+    args: ListTableOptimizerRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTableOptimizerRunsCommandOutput>;
+
+  /**
+   * @see {@link ListTriggersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTriggersCommandOutput}.
+   */
+  paginateListTriggers(
+    args?: ListTriggersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTriggersCommandOutput>;
+
+  /**
+   * @see {@link ListUsageProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsageProfilesCommandOutput}.
+   */
+  paginateListUsageProfiles(
+    args?: ListUsageProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsageProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowsCommandOutput}.
+   */
+  paginateListWorkflows(
+    args?: ListWorkflowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowsCommandOutput>;
+
+  /**
+   * @see {@link SearchAssetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchAssetsCommandOutput}.
+   */
+  paginateSearchAssets(
+    args?: SearchAssetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchAssetsCommandOutput>;
+
+  /**
+   * @see {@link SearchTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchTablesCommandOutput}.
+   */
+  paginateSearchTables(
+    args?: SearchTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchTablesCommandOutput>;
+}
 
 /**
  * <fullname>Glue</fullname>
  *          <p>Defines the public endpoint for the Glue service.</p>
+ * @public
  */
-export class Glue extends GlueClient {
-  /**
-   * <p>Creates one or more partitions in a batch operation.</p>
-   */
-  public batchCreatePartition(
-    args: BatchCreatePartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchCreatePartitionCommandOutput>;
-  public batchCreatePartition(
-    args: BatchCreatePartitionCommandInput,
-    cb: (err: any, data?: BatchCreatePartitionCommandOutput) => void
-  ): void;
-  public batchCreatePartition(
-    args: BatchCreatePartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchCreatePartitionCommandOutput) => void
-  ): void;
-  public batchCreatePartition(
-    args: BatchCreatePartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchCreatePartitionCommandOutput) => void),
-    cb?: (err: any, data?: BatchCreatePartitionCommandOutput) => void
-  ): Promise<BatchCreatePartitionCommandOutput> | void {
-    const command = new BatchCreatePartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a list of connection definitions from the Data Catalog.</p>
-   */
-  public batchDeleteConnection(
-    args: BatchDeleteConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchDeleteConnectionCommandOutput>;
-  public batchDeleteConnection(
-    args: BatchDeleteConnectionCommandInput,
-    cb: (err: any, data?: BatchDeleteConnectionCommandOutput) => void
-  ): void;
-  public batchDeleteConnection(
-    args: BatchDeleteConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchDeleteConnectionCommandOutput) => void
-  ): void;
-  public batchDeleteConnection(
-    args: BatchDeleteConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDeleteConnectionCommandOutput) => void),
-    cb?: (err: any, data?: BatchDeleteConnectionCommandOutput) => void
-  ): Promise<BatchDeleteConnectionCommandOutput> | void {
-    const command = new BatchDeleteConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes one or more partitions in a batch operation.</p>
-   */
-  public batchDeletePartition(
-    args: BatchDeletePartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchDeletePartitionCommandOutput>;
-  public batchDeletePartition(
-    args: BatchDeletePartitionCommandInput,
-    cb: (err: any, data?: BatchDeletePartitionCommandOutput) => void
-  ): void;
-  public batchDeletePartition(
-    args: BatchDeletePartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchDeletePartitionCommandOutput) => void
-  ): void;
-  public batchDeletePartition(
-    args: BatchDeletePartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDeletePartitionCommandOutput) => void),
-    cb?: (err: any, data?: BatchDeletePartitionCommandOutput) => void
-  ): Promise<BatchDeletePartitionCommandOutput> | void {
-    const command = new BatchDeletePartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes multiple tables at once.</p>
-   *          <note>
-   *             <p>After completing this operation, you no longer have access to the table versions and
-   *         partitions that belong to the deleted table. Glue deletes these "orphaned" resources
-   *         asynchronously in a timely manner, at the discretion of the service.</p>
-   *             <p>To ensure the immediate deletion of all related resources, before calling
-   *           <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or
-   *           <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or
-   *           <code>BatchDeletePartition</code>, to delete any resources that belong to the
-   *         table.</p>
-   *          </note>
-   */
-  public batchDeleteTable(
-    args: BatchDeleteTableCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchDeleteTableCommandOutput>;
-  public batchDeleteTable(
-    args: BatchDeleteTableCommandInput,
-    cb: (err: any, data?: BatchDeleteTableCommandOutput) => void
-  ): void;
-  public batchDeleteTable(
-    args: BatchDeleteTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchDeleteTableCommandOutput) => void
-  ): void;
-  public batchDeleteTable(
-    args: BatchDeleteTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDeleteTableCommandOutput) => void),
-    cb?: (err: any, data?: BatchDeleteTableCommandOutput) => void
-  ): Promise<BatchDeleteTableCommandOutput> | void {
-    const command = new BatchDeleteTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified batch of versions of a table.</p>
-   */
-  public batchDeleteTableVersion(
-    args: BatchDeleteTableVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchDeleteTableVersionCommandOutput>;
-  public batchDeleteTableVersion(
-    args: BatchDeleteTableVersionCommandInput,
-    cb: (err: any, data?: BatchDeleteTableVersionCommandOutput) => void
-  ): void;
-  public batchDeleteTableVersion(
-    args: BatchDeleteTableVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchDeleteTableVersionCommandOutput) => void
-  ): void;
-  public batchDeleteTableVersion(
-    args: BatchDeleteTableVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDeleteTableVersionCommandOutput) => void),
-    cb?: (err: any, data?: BatchDeleteTableVersionCommandOutput) => void
-  ): Promise<BatchDeleteTableVersionCommandOutput> | void {
-    const command = new BatchDeleteTableVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves information about a list of blueprints.</p>
-   */
-  public batchGetBlueprints(
-    args: BatchGetBlueprintsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetBlueprintsCommandOutput>;
-  public batchGetBlueprints(
-    args: BatchGetBlueprintsCommandInput,
-    cb: (err: any, data?: BatchGetBlueprintsCommandOutput) => void
-  ): void;
-  public batchGetBlueprints(
-    args: BatchGetBlueprintsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetBlueprintsCommandOutput) => void
-  ): void;
-  public batchGetBlueprints(
-    args: BatchGetBlueprintsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetBlueprintsCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetBlueprintsCommandOutput) => void
-  ): Promise<BatchGetBlueprintsCommandOutput> | void {
-    const command = new BatchGetBlueprintsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>
-   */
-  public batchGetCrawlers(
-    args: BatchGetCrawlersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetCrawlersCommandOutput>;
-  public batchGetCrawlers(
-    args: BatchGetCrawlersCommandInput,
-    cb: (err: any, data?: BatchGetCrawlersCommandOutput) => void
-  ): void;
-  public batchGetCrawlers(
-    args: BatchGetCrawlersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetCrawlersCommandOutput) => void
-  ): void;
-  public batchGetCrawlers(
-    args: BatchGetCrawlersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetCrawlersCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetCrawlersCommandOutput) => void
-  ): Promise<BatchGetCrawlersCommandOutput> | void {
-    const command = new BatchGetCrawlersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of resource metadata for a given list of development endpoint names. After
-   *       calling the <code>ListDevEndpoints</code> operation, you can call this operation to access the
-   *       data to which you have been granted permissions. This operation supports all IAM permissions,
-   *       including permission conditions that uses tags.</p>
-   */
-  public batchGetDevEndpoints(
-    args: BatchGetDevEndpointsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetDevEndpointsCommandOutput>;
-  public batchGetDevEndpoints(
-    args: BatchGetDevEndpointsCommandInput,
-    cb: (err: any, data?: BatchGetDevEndpointsCommandOutput) => void
-  ): void;
-  public batchGetDevEndpoints(
-    args: BatchGetDevEndpointsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetDevEndpointsCommandOutput) => void
-  ): void;
-  public batchGetDevEndpoints(
-    args: BatchGetDevEndpointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetDevEndpointsCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetDevEndpointsCommandOutput) => void
-  ): Promise<BatchGetDevEndpointsCommandOutput> | void {
-    const command = new BatchGetDevEndpointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
-   * </p>
-   */
-  public batchGetJobs(
-    args: BatchGetJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetJobsCommandOutput>;
-  public batchGetJobs(args: BatchGetJobsCommandInput, cb: (err: any, data?: BatchGetJobsCommandOutput) => void): void;
-  public batchGetJobs(
-    args: BatchGetJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetJobsCommandOutput) => void
-  ): void;
-  public batchGetJobs(
-    args: BatchGetJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetJobsCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetJobsCommandOutput) => void
-  ): Promise<BatchGetJobsCommandOutput> | void {
-    const command = new BatchGetJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves partitions in a batch request.</p>
-   */
-  public batchGetPartition(
-    args: BatchGetPartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetPartitionCommandOutput>;
-  public batchGetPartition(
-    args: BatchGetPartitionCommandInput,
-    cb: (err: any, data?: BatchGetPartitionCommandOutput) => void
-  ): void;
-  public batchGetPartition(
-    args: BatchGetPartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetPartitionCommandOutput) => void
-  ): void;
-  public batchGetPartition(
-    args: BatchGetPartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetPartitionCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetPartitionCommandOutput) => void
-  ): Promise<BatchGetPartitionCommandOutput> | void {
-    const command = new BatchGetPartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of resource metadata for a given list of trigger names. After calling the <code>ListTriggers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>
-   */
-  public batchGetTriggers(
-    args: BatchGetTriggersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetTriggersCommandOutput>;
-  public batchGetTriggers(
-    args: BatchGetTriggersCommandInput,
-    cb: (err: any, data?: BatchGetTriggersCommandOutput) => void
-  ): void;
-  public batchGetTriggers(
-    args: BatchGetTriggersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetTriggersCommandOutput) => void
-  ): void;
-  public batchGetTriggers(
-    args: BatchGetTriggersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetTriggersCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetTriggersCommandOutput) => void
-  ): Promise<BatchGetTriggersCommandOutput> | void {
-    const command = new BatchGetTriggersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of resource metadata for a given list of workflow names. After calling the <code>ListWorkflows</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>
-   */
-  public batchGetWorkflows(
-    args: BatchGetWorkflowsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchGetWorkflowsCommandOutput>;
-  public batchGetWorkflows(
-    args: BatchGetWorkflowsCommandInput,
-    cb: (err: any, data?: BatchGetWorkflowsCommandOutput) => void
-  ): void;
-  public batchGetWorkflows(
-    args: BatchGetWorkflowsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchGetWorkflowsCommandOutput) => void
-  ): void;
-  public batchGetWorkflows(
-    args: BatchGetWorkflowsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetWorkflowsCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetWorkflowsCommandOutput) => void
-  ): Promise<BatchGetWorkflowsCommandOutput> | void {
-    const command = new BatchGetWorkflowsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops one or more job runs for a specified job definition.</p>
-   */
-  public batchStopJobRun(
-    args: BatchStopJobRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchStopJobRunCommandOutput>;
-  public batchStopJobRun(
-    args: BatchStopJobRunCommandInput,
-    cb: (err: any, data?: BatchStopJobRunCommandOutput) => void
-  ): void;
-  public batchStopJobRun(
-    args: BatchStopJobRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchStopJobRunCommandOutput) => void
-  ): void;
-  public batchStopJobRun(
-    args: BatchStopJobRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchStopJobRunCommandOutput) => void),
-    cb?: (err: any, data?: BatchStopJobRunCommandOutput) => void
-  ): Promise<BatchStopJobRunCommandOutput> | void {
-    const command = new BatchStopJobRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates one or more partitions in a batch operation.</p>
-   */
-  public batchUpdatePartition(
-    args: BatchUpdatePartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchUpdatePartitionCommandOutput>;
-  public batchUpdatePartition(
-    args: BatchUpdatePartitionCommandInput,
-    cb: (err: any, data?: BatchUpdatePartitionCommandOutput) => void
-  ): void;
-  public batchUpdatePartition(
-    args: BatchUpdatePartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchUpdatePartitionCommandOutput) => void
-  ): void;
-  public batchUpdatePartition(
-    args: BatchUpdatePartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchUpdatePartitionCommandOutput) => void),
-    cb?: (err: any, data?: BatchUpdatePartitionCommandOutput) => void
-  ): Promise<BatchUpdatePartitionCommandOutput> | void {
-    const command = new BatchUpdatePartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can cancel a
-   *       machine learning task run at any time by calling <code>CancelMLTaskRun</code> with a task
-   *       run's parent transform's <code>TransformID</code> and the task run's <code>TaskRunId</code>. </p>
-   */
-  public cancelMLTaskRun(
-    args: CancelMLTaskRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CancelMLTaskRunCommandOutput>;
-  public cancelMLTaskRun(
-    args: CancelMLTaskRunCommandInput,
-    cb: (err: any, data?: CancelMLTaskRunCommandOutput) => void
-  ): void;
-  public cancelMLTaskRun(
-    args: CancelMLTaskRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CancelMLTaskRunCommandOutput) => void
-  ): void;
-  public cancelMLTaskRun(
-    args: CancelMLTaskRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelMLTaskRunCommandOutput) => void),
-    cb?: (err: any, data?: CancelMLTaskRunCommandOutput) => void
-  ): Promise<CancelMLTaskRunCommandOutput> | void {
-    const command = new CancelMLTaskRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using <code>DataFormat</code> as the format. Since it does not take a schema set name, no compatibility checks are performed.</p>
-   */
-  public checkSchemaVersionValidity(
-    args: CheckSchemaVersionValidityCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CheckSchemaVersionValidityCommandOutput>;
-  public checkSchemaVersionValidity(
-    args: CheckSchemaVersionValidityCommandInput,
-    cb: (err: any, data?: CheckSchemaVersionValidityCommandOutput) => void
-  ): void;
-  public checkSchemaVersionValidity(
-    args: CheckSchemaVersionValidityCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CheckSchemaVersionValidityCommandOutput) => void
-  ): void;
-  public checkSchemaVersionValidity(
-    args: CheckSchemaVersionValidityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CheckSchemaVersionValidityCommandOutput) => void),
-    cb?: (err: any, data?: CheckSchemaVersionValidityCommandOutput) => void
-  ): Promise<CheckSchemaVersionValidityCommandOutput> | void {
-    const command = new CheckSchemaVersionValidityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Registers a blueprint with Glue.</p>
-   */
-  public createBlueprint(
-    args: CreateBlueprintCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBlueprintCommandOutput>;
-  public createBlueprint(
-    args: CreateBlueprintCommandInput,
-    cb: (err: any, data?: CreateBlueprintCommandOutput) => void
-  ): void;
-  public createBlueprint(
-    args: CreateBlueprintCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBlueprintCommandOutput) => void
-  ): void;
-  public createBlueprint(
-    args: CreateBlueprintCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBlueprintCommandOutput) => void),
-    cb?: (err: any, data?: CreateBlueprintCommandOutput) => void
-  ): Promise<CreateBlueprintCommandOutput> | void {
-    const command = new CreateBlueprintCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a classifier in the user's account. This can be a <code>GrokClassifier</code>, an
-   *         <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>,
-   *       depending on which field of the request is present.</p>
-   */
-  public createClassifier(
-    args: CreateClassifierCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateClassifierCommandOutput>;
-  public createClassifier(
-    args: CreateClassifierCommandInput,
-    cb: (err: any, data?: CreateClassifierCommandOutput) => void
-  ): void;
-  public createClassifier(
-    args: CreateClassifierCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateClassifierCommandOutput) => void
-  ): void;
-  public createClassifier(
-    args: CreateClassifierCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateClassifierCommandOutput) => void),
-    cb?: (err: any, data?: CreateClassifierCommandOutput) => void
-  ): Promise<CreateClassifierCommandOutput> | void {
-    const command = new CreateClassifierCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a connection definition in the Data Catalog.</p>
-   */
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateConnectionCommandOutput>;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    cb: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): void;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): void;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateConnectionCommandOutput) => void),
-    cb?: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): Promise<CreateConnectionCommandOutput> | void {
-    const command = new CreateConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new crawler with specified targets, role, configuration, and optional schedule.
-   *       At least one crawl target must be specified, in the <code>s3Targets</code> field, the
-   *         <code>jdbcTargets</code> field, or the <code>DynamoDBTargets</code> field.</p>
-   */
-  public createCrawler(
-    args: CreateCrawlerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateCrawlerCommandOutput>;
-  public createCrawler(
-    args: CreateCrawlerCommandInput,
-    cb: (err: any, data?: CreateCrawlerCommandOutput) => void
-  ): void;
-  public createCrawler(
-    args: CreateCrawlerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateCrawlerCommandOutput) => void
-  ): void;
-  public createCrawler(
-    args: CreateCrawlerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCrawlerCommandOutput) => void),
-    cb?: (err: any, data?: CreateCrawlerCommandOutput) => void
-  ): Promise<CreateCrawlerCommandOutput> | void {
-    const command = new CreateCrawlerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new database in a Data Catalog.</p>
-   */
-  public createDatabase(
-    args: CreateDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDatabaseCommandOutput>;
-  public createDatabase(
-    args: CreateDatabaseCommandInput,
-    cb: (err: any, data?: CreateDatabaseCommandOutput) => void
-  ): void;
-  public createDatabase(
-    args: CreateDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDatabaseCommandOutput) => void
-  ): void;
-  public createDatabase(
-    args: CreateDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: CreateDatabaseCommandOutput) => void
-  ): Promise<CreateDatabaseCommandOutput> | void {
-    const command = new CreateDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new development endpoint.</p>
-   */
-  public createDevEndpoint(
-    args: CreateDevEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDevEndpointCommandOutput>;
-  public createDevEndpoint(
-    args: CreateDevEndpointCommandInput,
-    cb: (err: any, data?: CreateDevEndpointCommandOutput) => void
-  ): void;
-  public createDevEndpoint(
-    args: CreateDevEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDevEndpointCommandOutput) => void
-  ): void;
-  public createDevEndpoint(
-    args: CreateDevEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDevEndpointCommandOutput) => void),
-    cb?: (err: any, data?: CreateDevEndpointCommandOutput) => void
-  ): Promise<CreateDevEndpointCommandOutput> | void {
-    const command = new CreateDevEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new job definition.</p>
-   */
-  public createJob(args: CreateJobCommandInput, options?: __HttpHandlerOptions): Promise<CreateJobCommandOutput>;
-  public createJob(args: CreateJobCommandInput, cb: (err: any, data?: CreateJobCommandOutput) => void): void;
-  public createJob(
-    args: CreateJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateJobCommandOutput) => void
-  ): void;
-  public createJob(
-    args: CreateJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateJobCommandOutput) => void
-  ): Promise<CreateJobCommandOutput> | void {
-    const command = new CreateJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Glue machine learning transform. This operation creates the transform and
-   *       all the necessary parameters to train it.</p>
-   *
-   * 	        <p>Call this operation as the first step in the process of using a machine learning transform
-   *       (such as the <code>FindMatches</code> transform) for deduplicating data. You can provide an
-   *       optional <code>Description</code>, in addition to the parameters that you want to use for your
-   *       algorithm.</p>
-   *
-   *          <p>You must also specify certain parameters for the tasks that Glue runs on your
-   *       behalf as part of learning from your data and creating a high-quality machine learning
-   *       transform. These parameters include <code>Role</code>, and optionally,
-   *         <code>AllocatedCapacity</code>, <code>Timeout</code>, and <code>MaxRetries</code>. For more
-   *       information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html">Jobs</a>.</p>
-   */
-  public createMLTransform(
-    args: CreateMLTransformCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateMLTransformCommandOutput>;
-  public createMLTransform(
-    args: CreateMLTransformCommandInput,
-    cb: (err: any, data?: CreateMLTransformCommandOutput) => void
-  ): void;
-  public createMLTransform(
-    args: CreateMLTransformCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateMLTransformCommandOutput) => void
-  ): void;
-  public createMLTransform(
-    args: CreateMLTransformCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateMLTransformCommandOutput) => void),
-    cb?: (err: any, data?: CreateMLTransformCommandOutput) => void
-  ): Promise<CreateMLTransformCommandOutput> | void {
-    const command = new CreateMLTransformCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new partition.</p>
-   */
-  public createPartition(
-    args: CreatePartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreatePartitionCommandOutput>;
-  public createPartition(
-    args: CreatePartitionCommandInput,
-    cb: (err: any, data?: CreatePartitionCommandOutput) => void
-  ): void;
-  public createPartition(
-    args: CreatePartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreatePartitionCommandOutput) => void
-  ): void;
-  public createPartition(
-    args: CreatePartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreatePartitionCommandOutput) => void),
-    cb?: (err: any, data?: CreatePartitionCommandOutput) => void
-  ): Promise<CreatePartitionCommandOutput> | void {
-    const command = new CreatePartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a specified partition index in an existing table.</p>
-   */
-  public createPartitionIndex(
-    args: CreatePartitionIndexCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreatePartitionIndexCommandOutput>;
-  public createPartitionIndex(
-    args: CreatePartitionIndexCommandInput,
-    cb: (err: any, data?: CreatePartitionIndexCommandOutput) => void
-  ): void;
-  public createPartitionIndex(
-    args: CreatePartitionIndexCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreatePartitionIndexCommandOutput) => void
-  ): void;
-  public createPartitionIndex(
-    args: CreatePartitionIndexCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreatePartitionIndexCommandOutput) => void),
-    cb?: (err: any, data?: CreatePartitionIndexCommandOutput) => void
-  ): Promise<CreatePartitionIndexCommandOutput> | void {
-    const command = new CreatePartitionIndexCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new registry which may be used to hold a collection of schemas.</p>
-   */
-  public createRegistry(
-    args: CreateRegistryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRegistryCommandOutput>;
-  public createRegistry(
-    args: CreateRegistryCommandInput,
-    cb: (err: any, data?: CreateRegistryCommandOutput) => void
-  ): void;
-  public createRegistry(
-    args: CreateRegistryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRegistryCommandOutput) => void
-  ): void;
-  public createRegistry(
-    args: CreateRegistryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRegistryCommandOutput) => void),
-    cb?: (err: any, data?: CreateRegistryCommandOutput) => void
-  ): Promise<CreateRegistryCommandOutput> | void {
-    const command = new CreateRegistryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new schema set and registers the schema definition. Returns an error if the schema set already exists without actually registering the version.</p>
-   *          <p>When the schema set is created, a version checkpoint will be set to the first version. Compatibility mode "DISABLED" restricts any additional schema versions from being added after the first schema version. For all other compatibility modes, validation of compatibility settings will be applied only from the second version onwards when the <code>RegisterSchemaVersion</code> API is used.</p>
-   *          <p>When this API is called without a <code>RegistryId</code>, this will create an entry for a "default-registry" in the registry database tables, if it is not already present.</p>
-   */
-  public createSchema(
-    args: CreateSchemaCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSchemaCommandOutput>;
-  public createSchema(args: CreateSchemaCommandInput, cb: (err: any, data?: CreateSchemaCommandOutput) => void): void;
-  public createSchema(
-    args: CreateSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSchemaCommandOutput) => void
-  ): void;
-  public createSchema(
-    args: CreateSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSchemaCommandOutput) => void),
-    cb?: (err: any, data?: CreateSchemaCommandOutput) => void
-  ): Promise<CreateSchemaCommandOutput> | void {
-    const command = new CreateSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Transforms a directed acyclic graph (DAG) into code.</p>
-   */
-  public createScript(
-    args: CreateScriptCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateScriptCommandOutput>;
-  public createScript(args: CreateScriptCommandInput, cb: (err: any, data?: CreateScriptCommandOutput) => void): void;
-  public createScript(
-    args: CreateScriptCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateScriptCommandOutput) => void
-  ): void;
-  public createScript(
-    args: CreateScriptCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateScriptCommandOutput) => void),
-    cb?: (err: any, data?: CreateScriptCommandOutput) => void
-  ): Promise<CreateScriptCommandOutput> | void {
-    const command = new CreateScriptCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new security configuration. A security configuration is a set of security properties that can be used by Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html">Encrypting Data Written by Crawlers, Jobs, and Development Endpoints</a>.</p>
-   */
-  public createSecurityConfiguration(
-    args: CreateSecurityConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSecurityConfigurationCommandOutput>;
-  public createSecurityConfiguration(
-    args: CreateSecurityConfigurationCommandInput,
-    cb: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
-  ): void;
-  public createSecurityConfiguration(
-    args: CreateSecurityConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
-  ): void;
-  public createSecurityConfiguration(
-    args: CreateSecurityConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSecurityConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
-  ): Promise<CreateSecurityConfigurationCommandOutput> | void {
-    const command = new CreateSecurityConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new table definition in the Data Catalog.</p>
-   */
-  public createTable(args: CreateTableCommandInput, options?: __HttpHandlerOptions): Promise<CreateTableCommandOutput>;
-  public createTable(args: CreateTableCommandInput, cb: (err: any, data?: CreateTableCommandOutput) => void): void;
-  public createTable(
-    args: CreateTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateTableCommandOutput) => void
-  ): void;
-  public createTable(
-    args: CreateTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTableCommandOutput) => void),
-    cb?: (err: any, data?: CreateTableCommandOutput) => void
-  ): Promise<CreateTableCommandOutput> | void {
-    const command = new CreateTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new trigger.</p>
-   */
-  public createTrigger(
-    args: CreateTriggerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateTriggerCommandOutput>;
-  public createTrigger(
-    args: CreateTriggerCommandInput,
-    cb: (err: any, data?: CreateTriggerCommandOutput) => void
-  ): void;
-  public createTrigger(
-    args: CreateTriggerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateTriggerCommandOutput) => void
-  ): void;
-  public createTrigger(
-    args: CreateTriggerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTriggerCommandOutput) => void),
-    cb?: (err: any, data?: CreateTriggerCommandOutput) => void
-  ): Promise<CreateTriggerCommandOutput> | void {
-    const command = new CreateTriggerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new function definition in the Data Catalog.</p>
-   */
-  public createUserDefinedFunction(
-    args: CreateUserDefinedFunctionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateUserDefinedFunctionCommandOutput>;
-  public createUserDefinedFunction(
-    args: CreateUserDefinedFunctionCommandInput,
-    cb: (err: any, data?: CreateUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public createUserDefinedFunction(
-    args: CreateUserDefinedFunctionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public createUserDefinedFunction(
-    args: CreateUserDefinedFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserDefinedFunctionCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserDefinedFunctionCommandOutput) => void
-  ): Promise<CreateUserDefinedFunctionCommandOutput> | void {
-    const command = new CreateUserDefinedFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new workflow.</p>
-   */
-  public createWorkflow(
-    args: CreateWorkflowCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateWorkflowCommandOutput>;
-  public createWorkflow(
-    args: CreateWorkflowCommandInput,
-    cb: (err: any, data?: CreateWorkflowCommandOutput) => void
-  ): void;
-  public createWorkflow(
-    args: CreateWorkflowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateWorkflowCommandOutput) => void
-  ): void;
-  public createWorkflow(
-    args: CreateWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkflowCommandOutput) => void
-  ): Promise<CreateWorkflowCommandOutput> | void {
-    const command = new CreateWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an existing blueprint.</p>
-   */
-  public deleteBlueprint(
-    args: DeleteBlueprintCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteBlueprintCommandOutput>;
-  public deleteBlueprint(
-    args: DeleteBlueprintCommandInput,
-    cb: (err: any, data?: DeleteBlueprintCommandOutput) => void
-  ): void;
-  public deleteBlueprint(
-    args: DeleteBlueprintCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteBlueprintCommandOutput) => void
-  ): void;
-  public deleteBlueprint(
-    args: DeleteBlueprintCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBlueprintCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBlueprintCommandOutput) => void
-  ): Promise<DeleteBlueprintCommandOutput> | void {
-    const command = new DeleteBlueprintCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes a classifier from the Data Catalog.</p>
-   */
-  public deleteClassifier(
-    args: DeleteClassifierCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteClassifierCommandOutput>;
-  public deleteClassifier(
-    args: DeleteClassifierCommandInput,
-    cb: (err: any, data?: DeleteClassifierCommandOutput) => void
-  ): void;
-  public deleteClassifier(
-    args: DeleteClassifierCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteClassifierCommandOutput) => void
-  ): void;
-  public deleteClassifier(
-    args: DeleteClassifierCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteClassifierCommandOutput) => void),
-    cb?: (err: any, data?: DeleteClassifierCommandOutput) => void
-  ): Promise<DeleteClassifierCommandOutput> | void {
-    const command = new DeleteClassifierCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Delete the partition column statistics of a column.</p>
-   *
-   * 	        <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeletePartition</code>.</p>
-   */
-  public deleteColumnStatisticsForPartition(
-    args: DeleteColumnStatisticsForPartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteColumnStatisticsForPartitionCommandOutput>;
-  public deleteColumnStatisticsForPartition(
-    args: DeleteColumnStatisticsForPartitionCommandInput,
-    cb: (err: any, data?: DeleteColumnStatisticsForPartitionCommandOutput) => void
-  ): void;
-  public deleteColumnStatisticsForPartition(
-    args: DeleteColumnStatisticsForPartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteColumnStatisticsForPartitionCommandOutput) => void
-  ): void;
-  public deleteColumnStatisticsForPartition(
-    args: DeleteColumnStatisticsForPartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteColumnStatisticsForPartitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteColumnStatisticsForPartitionCommandOutput) => void
-  ): Promise<DeleteColumnStatisticsForPartitionCommandOutput> | void {
-    const command = new DeleteColumnStatisticsForPartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves table statistics of columns.</p>
-   *
-   * 	        <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeleteTable</code>.</p>
-   */
-  public deleteColumnStatisticsForTable(
-    args: DeleteColumnStatisticsForTableCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteColumnStatisticsForTableCommandOutput>;
-  public deleteColumnStatisticsForTable(
-    args: DeleteColumnStatisticsForTableCommandInput,
-    cb: (err: any, data?: DeleteColumnStatisticsForTableCommandOutput) => void
-  ): void;
-  public deleteColumnStatisticsForTable(
-    args: DeleteColumnStatisticsForTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteColumnStatisticsForTableCommandOutput) => void
-  ): void;
-  public deleteColumnStatisticsForTable(
-    args: DeleteColumnStatisticsForTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteColumnStatisticsForTableCommandOutput) => void),
-    cb?: (err: any, data?: DeleteColumnStatisticsForTableCommandOutput) => void
-  ): Promise<DeleteColumnStatisticsForTableCommandOutput> | void {
-    const command = new DeleteColumnStatisticsForTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a connection from the Data Catalog.</p>
-   */
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteConnectionCommandOutput>;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConnectionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): Promise<DeleteConnectionCommandOutput> | void {
-    const command = new DeleteConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes a specified crawler from the Glue Data Catalog, unless the crawler state is
-   *         <code>RUNNING</code>.</p>
-   */
-  public deleteCrawler(
-    args: DeleteCrawlerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCrawlerCommandOutput>;
-  public deleteCrawler(
-    args: DeleteCrawlerCommandInput,
-    cb: (err: any, data?: DeleteCrawlerCommandOutput) => void
-  ): void;
-  public deleteCrawler(
-    args: DeleteCrawlerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCrawlerCommandOutput) => void
-  ): void;
-  public deleteCrawler(
-    args: DeleteCrawlerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCrawlerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCrawlerCommandOutput) => void
-  ): Promise<DeleteCrawlerCommandOutput> | void {
-    const command = new DeleteCrawlerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes a specified database from a Data Catalog.</p>
-   *          <note>
-   *             <p>After completing this operation, you no longer have access to the tables (and all table
-   *         versions and partitions that might belong to the tables) and the user-defined functions in
-   *         the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely
-   *         manner, at the discretion of the service.</p>
-   *             <p>To ensure the immediate deletion of all related resources, before calling
-   *           <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or
-   *           <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or
-   *           <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and
-   *           <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that
-   *         belong to the database.</p>
-   *          </note>
-   */
-  public deleteDatabase(
-    args: DeleteDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDatabaseCommandOutput>;
-  public deleteDatabase(
-    args: DeleteDatabaseCommandInput,
-    cb: (err: any, data?: DeleteDatabaseCommandOutput) => void
-  ): void;
-  public deleteDatabase(
-    args: DeleteDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDatabaseCommandOutput) => void
-  ): void;
-  public deleteDatabase(
-    args: DeleteDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDatabaseCommandOutput) => void
-  ): Promise<DeleteDatabaseCommandOutput> | void {
-    const command = new DeleteDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified development endpoint.</p>
-   */
-  public deleteDevEndpoint(
-    args: DeleteDevEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDevEndpointCommandOutput>;
-  public deleteDevEndpoint(
-    args: DeleteDevEndpointCommandInput,
-    cb: (err: any, data?: DeleteDevEndpointCommandOutput) => void
-  ): void;
-  public deleteDevEndpoint(
-    args: DeleteDevEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDevEndpointCommandOutput) => void
-  ): void;
-  public deleteDevEndpoint(
-    args: DeleteDevEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDevEndpointCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDevEndpointCommandOutput) => void
-  ): Promise<DeleteDevEndpointCommandOutput> | void {
-    const command = new DeleteDevEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified job definition. If the job definition
-   *       is not found, no exception is thrown.</p>
-   */
-  public deleteJob(args: DeleteJobCommandInput, options?: __HttpHandlerOptions): Promise<DeleteJobCommandOutput>;
-  public deleteJob(args: DeleteJobCommandInput, cb: (err: any, data?: DeleteJobCommandOutput) => void): void;
-  public deleteJob(
-    args: DeleteJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteJobCommandOutput) => void
-  ): void;
-  public deleteJob(
-    args: DeleteJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteJobCommandOutput) => void),
-    cb?: (err: any, data?: DeleteJobCommandOutput) => void
-  ): Promise<DeleteJobCommandOutput> | void {
-    const command = new DeleteJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Glue machine learning transform. Machine learning transforms are a special
-   *       type of transform that use machine learning to learn the details of the transformation to be
-   *       performed by learning from examples provided by humans. These transformations are then saved
-   *       by Glue. If you no longer need a transform, you can delete it by calling
-   *         <code>DeleteMLTransforms</code>. However, any Glue jobs that still reference the deleted
-   *       transform will no longer succeed.</p>
-   */
-  public deleteMLTransform(
-    args: DeleteMLTransformCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteMLTransformCommandOutput>;
-  public deleteMLTransform(
-    args: DeleteMLTransformCommandInput,
-    cb: (err: any, data?: DeleteMLTransformCommandOutput) => void
-  ): void;
-  public deleteMLTransform(
-    args: DeleteMLTransformCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteMLTransformCommandOutput) => void
-  ): void;
-  public deleteMLTransform(
-    args: DeleteMLTransformCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteMLTransformCommandOutput) => void),
-    cb?: (err: any, data?: DeleteMLTransformCommandOutput) => void
-  ): Promise<DeleteMLTransformCommandOutput> | void {
-    const command = new DeleteMLTransformCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified partition.</p>
-   */
-  public deletePartition(
-    args: DeletePartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeletePartitionCommandOutput>;
-  public deletePartition(
-    args: DeletePartitionCommandInput,
-    cb: (err: any, data?: DeletePartitionCommandOutput) => void
-  ): void;
-  public deletePartition(
-    args: DeletePartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeletePartitionCommandOutput) => void
-  ): void;
-  public deletePartition(
-    args: DeletePartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePartitionCommandOutput) => void),
-    cb?: (err: any, data?: DeletePartitionCommandOutput) => void
-  ): Promise<DeletePartitionCommandOutput> | void {
-    const command = new DeletePartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified partition index from an existing table.</p>
-   */
-  public deletePartitionIndex(
-    args: DeletePartitionIndexCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeletePartitionIndexCommandOutput>;
-  public deletePartitionIndex(
-    args: DeletePartitionIndexCommandInput,
-    cb: (err: any, data?: DeletePartitionIndexCommandOutput) => void
-  ): void;
-  public deletePartitionIndex(
-    args: DeletePartitionIndexCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeletePartitionIndexCommandOutput) => void
-  ): void;
-  public deletePartitionIndex(
-    args: DeletePartitionIndexCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePartitionIndexCommandOutput) => void),
-    cb?: (err: any, data?: DeletePartitionIndexCommandOutput) => void
-  ): Promise<DeletePartitionIndexCommandOutput> | void {
-    const command = new DeletePartitionIndexCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the <code>GetRegistry</code> API after the asynchronous call. Deleting a registry will deactivate all online operations for the registry such as the <code>UpdateRegistry</code>, <code>CreateSchema</code>, <code>UpdateSchema</code>, and <code>RegisterSchemaVersion</code> APIs. </p>
-   */
-  public deleteRegistry(
-    args: DeleteRegistryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRegistryCommandOutput>;
-  public deleteRegistry(
-    args: DeleteRegistryCommandInput,
-    cb: (err: any, data?: DeleteRegistryCommandOutput) => void
-  ): void;
-  public deleteRegistry(
-    args: DeleteRegistryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRegistryCommandOutput) => void
-  ): void;
-  public deleteRegistry(
-    args: DeleteRegistryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRegistryCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRegistryCommandOutput) => void
-  ): Promise<DeleteRegistryCommandOutput> | void {
-    const command = new DeleteRegistryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified policy.</p>
-   */
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteResourcePolicyCommandOutput>;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): Promise<DeleteResourcePolicyCommandOutput> | void {
-    const command = new DeleteResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call <code>GetSchema</code> API after the asynchronous call. Deleting a registry will deactivate all online operations for the schema, such as the <code>GetSchemaByDefinition</code>, and <code>RegisterSchemaVersion</code> APIs.</p>
-   */
-  public deleteSchema(
-    args: DeleteSchemaCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSchemaCommandOutput>;
-  public deleteSchema(args: DeleteSchemaCommandInput, cb: (err: any, data?: DeleteSchemaCommandOutput) => void): void;
-  public deleteSchema(
-    args: DeleteSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSchemaCommandOutput) => void
-  ): void;
-  public deleteSchema(
-    args: DeleteSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSchemaCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSchemaCommandOutput) => void
-  ): Promise<DeleteSchemaCommandOutput> | void {
-    const command = new DeleteSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Remove versions from the specified schema. A version number or range may be supplied. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned.  Calling the <code>GetSchemaVersions</code> API after this call will list the status of the deleted versions.</p>
-   *          <p>When the range of version numbers contain check pointed version, the API will return a 409 conflict and will not proceed with the deletion. You have to remove the checkpoint first using the <code>DeleteSchemaCheckpoint</code> API before using this API.</p>
-   *          <p>You cannot use the <code>DeleteSchemaVersions</code> API to delete the first schema version in the schema set. The first schema version can only be deleted by the <code>DeleteSchema</code> API. This operation will also delete the attached <code>SchemaVersionMetadata</code> under the schema versions. Hard deletes will be enforced on the database.</p>
-   *          <p>If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned.</p>
-   */
-  public deleteSchemaVersions(
-    args: DeleteSchemaVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSchemaVersionsCommandOutput>;
-  public deleteSchemaVersions(
-    args: DeleteSchemaVersionsCommandInput,
-    cb: (err: any, data?: DeleteSchemaVersionsCommandOutput) => void
-  ): void;
-  public deleteSchemaVersions(
-    args: DeleteSchemaVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSchemaVersionsCommandOutput) => void
-  ): void;
-  public deleteSchemaVersions(
-    args: DeleteSchemaVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSchemaVersionsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSchemaVersionsCommandOutput) => void
-  ): Promise<DeleteSchemaVersionsCommandOutput> | void {
-    const command = new DeleteSchemaVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified security configuration.</p>
-   */
-  public deleteSecurityConfiguration(
-    args: DeleteSecurityConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSecurityConfigurationCommandOutput>;
-  public deleteSecurityConfiguration(
-    args: DeleteSecurityConfigurationCommandInput,
-    cb: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
-  ): void;
-  public deleteSecurityConfiguration(
-    args: DeleteSecurityConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
-  ): void;
-  public deleteSecurityConfiguration(
-    args: DeleteSecurityConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSecurityConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
-  ): Promise<DeleteSecurityConfigurationCommandOutput> | void {
-    const command = new DeleteSecurityConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes a table definition from the Data Catalog.</p>
-   *          <note>
-   *             <p>After completing this operation, you no longer have access to the table versions and
-   *         partitions that belong to the deleted table. Glue deletes these "orphaned" resources
-   *         asynchronously in a timely manner, at the discretion of the service.</p>
-   *             <p>To ensure the immediate deletion of all related resources, before calling
-   *           <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or
-   *           <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or
-   *           <code>BatchDeletePartition</code>, to delete any resources that belong to the
-   *         table.</p>
-   *          </note>
-   */
-  public deleteTable(args: DeleteTableCommandInput, options?: __HttpHandlerOptions): Promise<DeleteTableCommandOutput>;
-  public deleteTable(args: DeleteTableCommandInput, cb: (err: any, data?: DeleteTableCommandOutput) => void): void;
-  public deleteTable(
-    args: DeleteTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteTableCommandOutput) => void
-  ): void;
-  public deleteTable(
-    args: DeleteTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTableCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTableCommandOutput) => void
-  ): Promise<DeleteTableCommandOutput> | void {
-    const command = new DeleteTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified version of a table.</p>
-   */
-  public deleteTableVersion(
-    args: DeleteTableVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteTableVersionCommandOutput>;
-  public deleteTableVersion(
-    args: DeleteTableVersionCommandInput,
-    cb: (err: any, data?: DeleteTableVersionCommandOutput) => void
-  ): void;
-  public deleteTableVersion(
-    args: DeleteTableVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteTableVersionCommandOutput) => void
-  ): void;
-  public deleteTableVersion(
-    args: DeleteTableVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTableVersionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTableVersionCommandOutput) => void
-  ): Promise<DeleteTableVersionCommandOutput> | void {
-    const command = new DeleteTableVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified trigger. If the trigger is not found, no
-   *       exception is thrown.</p>
-   */
-  public deleteTrigger(
-    args: DeleteTriggerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteTriggerCommandOutput>;
-  public deleteTrigger(
-    args: DeleteTriggerCommandInput,
-    cb: (err: any, data?: DeleteTriggerCommandOutput) => void
-  ): void;
-  public deleteTrigger(
-    args: DeleteTriggerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteTriggerCommandOutput) => void
-  ): void;
-  public deleteTrigger(
-    args: DeleteTriggerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTriggerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTriggerCommandOutput) => void
-  ): Promise<DeleteTriggerCommandOutput> | void {
-    const command = new DeleteTriggerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an existing function definition from the Data Catalog.</p>
-   */
-  public deleteUserDefinedFunction(
-    args: DeleteUserDefinedFunctionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteUserDefinedFunctionCommandOutput>;
-  public deleteUserDefinedFunction(
-    args: DeleteUserDefinedFunctionCommandInput,
-    cb: (err: any, data?: DeleteUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public deleteUserDefinedFunction(
-    args: DeleteUserDefinedFunctionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public deleteUserDefinedFunction(
-    args: DeleteUserDefinedFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserDefinedFunctionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserDefinedFunctionCommandOutput) => void
-  ): Promise<DeleteUserDefinedFunctionCommandOutput> | void {
-    const command = new DeleteUserDefinedFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a workflow.</p>
-   */
-  public deleteWorkflow(
-    args: DeleteWorkflowCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteWorkflowCommandOutput>;
-  public deleteWorkflow(
-    args: DeleteWorkflowCommandInput,
-    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
-  ): void;
-  public deleteWorkflow(
-    args: DeleteWorkflowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
-  ): void;
-  public deleteWorkflow(
-    args: DeleteWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkflowCommandOutput) => void
-  ): Promise<DeleteWorkflowCommandOutput> | void {
-    const command = new DeleteWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the details of a blueprint.</p>
-   */
-  public getBlueprint(
-    args: GetBlueprintCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBlueprintCommandOutput>;
-  public getBlueprint(args: GetBlueprintCommandInput, cb: (err: any, data?: GetBlueprintCommandOutput) => void): void;
-  public getBlueprint(
-    args: GetBlueprintCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBlueprintCommandOutput) => void
-  ): void;
-  public getBlueprint(
-    args: GetBlueprintCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBlueprintCommandOutput) => void),
-    cb?: (err: any, data?: GetBlueprintCommandOutput) => void
-  ): Promise<GetBlueprintCommandOutput> | void {
-    const command = new GetBlueprintCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the details of a blueprint run.</p>
-   */
-  public getBlueprintRun(
-    args: GetBlueprintRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBlueprintRunCommandOutput>;
-  public getBlueprintRun(
-    args: GetBlueprintRunCommandInput,
-    cb: (err: any, data?: GetBlueprintRunCommandOutput) => void
-  ): void;
-  public getBlueprintRun(
-    args: GetBlueprintRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBlueprintRunCommandOutput) => void
-  ): void;
-  public getBlueprintRun(
-    args: GetBlueprintRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBlueprintRunCommandOutput) => void),
-    cb?: (err: any, data?: GetBlueprintRunCommandOutput) => void
-  ): Promise<GetBlueprintRunCommandOutput> | void {
-    const command = new GetBlueprintRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the details of blueprint runs for a specified blueprint.</p>
-   */
-  public getBlueprintRuns(
-    args: GetBlueprintRunsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBlueprintRunsCommandOutput>;
-  public getBlueprintRuns(
-    args: GetBlueprintRunsCommandInput,
-    cb: (err: any, data?: GetBlueprintRunsCommandOutput) => void
-  ): void;
-  public getBlueprintRuns(
-    args: GetBlueprintRunsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBlueprintRunsCommandOutput) => void
-  ): void;
-  public getBlueprintRuns(
-    args: GetBlueprintRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBlueprintRunsCommandOutput) => void),
-    cb?: (err: any, data?: GetBlueprintRunsCommandOutput) => void
-  ): Promise<GetBlueprintRunsCommandOutput> | void {
-    const command = new GetBlueprintRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the status of a migration operation.</p>
-   */
-  public getCatalogImportStatus(
-    args: GetCatalogImportStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCatalogImportStatusCommandOutput>;
-  public getCatalogImportStatus(
-    args: GetCatalogImportStatusCommandInput,
-    cb: (err: any, data?: GetCatalogImportStatusCommandOutput) => void
-  ): void;
-  public getCatalogImportStatus(
-    args: GetCatalogImportStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCatalogImportStatusCommandOutput) => void
-  ): void;
-  public getCatalogImportStatus(
-    args: GetCatalogImportStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCatalogImportStatusCommandOutput) => void),
-    cb?: (err: any, data?: GetCatalogImportStatusCommandOutput) => void
-  ): Promise<GetCatalogImportStatusCommandOutput> | void {
-    const command = new GetCatalogImportStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieve a classifier by name.</p>
-   */
-  public getClassifier(
-    args: GetClassifierCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetClassifierCommandOutput>;
-  public getClassifier(
-    args: GetClassifierCommandInput,
-    cb: (err: any, data?: GetClassifierCommandOutput) => void
-  ): void;
-  public getClassifier(
-    args: GetClassifierCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetClassifierCommandOutput) => void
-  ): void;
-  public getClassifier(
-    args: GetClassifierCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetClassifierCommandOutput) => void),
-    cb?: (err: any, data?: GetClassifierCommandOutput) => void
-  ): Promise<GetClassifierCommandOutput> | void {
-    const command = new GetClassifierCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all classifier objects in the Data Catalog.</p>
-   */
-  public getClassifiers(
-    args: GetClassifiersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetClassifiersCommandOutput>;
-  public getClassifiers(
-    args: GetClassifiersCommandInput,
-    cb: (err: any, data?: GetClassifiersCommandOutput) => void
-  ): void;
-  public getClassifiers(
-    args: GetClassifiersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetClassifiersCommandOutput) => void
-  ): void;
-  public getClassifiers(
-    args: GetClassifiersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetClassifiersCommandOutput) => void),
-    cb?: (err: any, data?: GetClassifiersCommandOutput) => void
-  ): Promise<GetClassifiersCommandOutput> | void {
-    const command = new GetClassifiersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves partition statistics of columns.</p>
-   *
-   * 	        <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetPartition</code>.</p>
-   */
-  public getColumnStatisticsForPartition(
-    args: GetColumnStatisticsForPartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetColumnStatisticsForPartitionCommandOutput>;
-  public getColumnStatisticsForPartition(
-    args: GetColumnStatisticsForPartitionCommandInput,
-    cb: (err: any, data?: GetColumnStatisticsForPartitionCommandOutput) => void
-  ): void;
-  public getColumnStatisticsForPartition(
-    args: GetColumnStatisticsForPartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetColumnStatisticsForPartitionCommandOutput) => void
-  ): void;
-  public getColumnStatisticsForPartition(
-    args: GetColumnStatisticsForPartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetColumnStatisticsForPartitionCommandOutput) => void),
-    cb?: (err: any, data?: GetColumnStatisticsForPartitionCommandOutput) => void
-  ): Promise<GetColumnStatisticsForPartitionCommandOutput> | void {
-    const command = new GetColumnStatisticsForPartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves table statistics of columns.</p>
-   *
-   *          <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetTable</code>.</p>
-   */
-  public getColumnStatisticsForTable(
-    args: GetColumnStatisticsForTableCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetColumnStatisticsForTableCommandOutput>;
-  public getColumnStatisticsForTable(
-    args: GetColumnStatisticsForTableCommandInput,
-    cb: (err: any, data?: GetColumnStatisticsForTableCommandOutput) => void
-  ): void;
-  public getColumnStatisticsForTable(
-    args: GetColumnStatisticsForTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetColumnStatisticsForTableCommandOutput) => void
-  ): void;
-  public getColumnStatisticsForTable(
-    args: GetColumnStatisticsForTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetColumnStatisticsForTableCommandOutput) => void),
-    cb?: (err: any, data?: GetColumnStatisticsForTableCommandOutput) => void
-  ): Promise<GetColumnStatisticsForTableCommandOutput> | void {
-    const command = new GetColumnStatisticsForTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a connection definition from the Data Catalog.</p>
-   */
-  public getConnection(
-    args: GetConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetConnectionCommandOutput>;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    cb: (err: any, data?: GetConnectionCommandOutput) => void
-  ): void;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetConnectionCommandOutput) => void
-  ): void;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetConnectionCommandOutput) => void),
-    cb?: (err: any, data?: GetConnectionCommandOutput) => void
-  ): Promise<GetConnectionCommandOutput> | void {
-    const command = new GetConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a list of connection definitions from the Data Catalog.</p>
-   */
-  public getConnections(
-    args: GetConnectionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetConnectionsCommandOutput>;
-  public getConnections(
-    args: GetConnectionsCommandInput,
-    cb: (err: any, data?: GetConnectionsCommandOutput) => void
-  ): void;
-  public getConnections(
-    args: GetConnectionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetConnectionsCommandOutput) => void
-  ): void;
-  public getConnections(
-    args: GetConnectionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetConnectionsCommandOutput) => void),
-    cb?: (err: any, data?: GetConnectionsCommandOutput) => void
-  ): Promise<GetConnectionsCommandOutput> | void {
-    const command = new GetConnectionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves metadata for a specified crawler.</p>
-   */
-  public getCrawler(args: GetCrawlerCommandInput, options?: __HttpHandlerOptions): Promise<GetCrawlerCommandOutput>;
-  public getCrawler(args: GetCrawlerCommandInput, cb: (err: any, data?: GetCrawlerCommandOutput) => void): void;
-  public getCrawler(
-    args: GetCrawlerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCrawlerCommandOutput) => void
-  ): void;
-  public getCrawler(
-    args: GetCrawlerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCrawlerCommandOutput) => void),
-    cb?: (err: any, data?: GetCrawlerCommandOutput) => void
-  ): Promise<GetCrawlerCommandOutput> | void {
-    const command = new GetCrawlerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves metrics about specified crawlers.</p>
-   */
-  public getCrawlerMetrics(
-    args: GetCrawlerMetricsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCrawlerMetricsCommandOutput>;
-  public getCrawlerMetrics(
-    args: GetCrawlerMetricsCommandInput,
-    cb: (err: any, data?: GetCrawlerMetricsCommandOutput) => void
-  ): void;
-  public getCrawlerMetrics(
-    args: GetCrawlerMetricsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCrawlerMetricsCommandOutput) => void
-  ): void;
-  public getCrawlerMetrics(
-    args: GetCrawlerMetricsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCrawlerMetricsCommandOutput) => void),
-    cb?: (err: any, data?: GetCrawlerMetricsCommandOutput) => void
-  ): Promise<GetCrawlerMetricsCommandOutput> | void {
-    const command = new GetCrawlerMetricsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves metadata for all crawlers defined in the customer
-   *       account.</p>
-   */
-  public getCrawlers(args: GetCrawlersCommandInput, options?: __HttpHandlerOptions): Promise<GetCrawlersCommandOutput>;
-  public getCrawlers(args: GetCrawlersCommandInput, cb: (err: any, data?: GetCrawlersCommandOutput) => void): void;
-  public getCrawlers(
-    args: GetCrawlersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCrawlersCommandOutput) => void
-  ): void;
-  public getCrawlers(
-    args: GetCrawlersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCrawlersCommandOutput) => void),
-    cb?: (err: any, data?: GetCrawlersCommandOutput) => void
-  ): Promise<GetCrawlersCommandOutput> | void {
-    const command = new GetCrawlersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the definition of a specified database.</p>
-   */
-  public getDatabase(args: GetDatabaseCommandInput, options?: __HttpHandlerOptions): Promise<GetDatabaseCommandOutput>;
-  public getDatabase(args: GetDatabaseCommandInput, cb: (err: any, data?: GetDatabaseCommandOutput) => void): void;
-  public getDatabase(
-    args: GetDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDatabaseCommandOutput) => void
-  ): void;
-  public getDatabase(
-    args: GetDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: GetDatabaseCommandOutput) => void
-  ): Promise<GetDatabaseCommandOutput> | void {
-    const command = new GetDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves all databases defined in a given Data Catalog.</p>
-   */
-  public getDatabases(
-    args: GetDatabasesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDatabasesCommandOutput>;
-  public getDatabases(args: GetDatabasesCommandInput, cb: (err: any, data?: GetDatabasesCommandOutput) => void): void;
-  public getDatabases(
-    args: GetDatabasesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDatabasesCommandOutput) => void
-  ): void;
-  public getDatabases(
-    args: GetDatabasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDatabasesCommandOutput) => void),
-    cb?: (err: any, data?: GetDatabasesCommandOutput) => void
-  ): Promise<GetDatabasesCommandOutput> | void {
-    const command = new GetDatabasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the security configuration for a specified catalog.</p>
-   */
-  public getDataCatalogEncryptionSettings(
-    args: GetDataCatalogEncryptionSettingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDataCatalogEncryptionSettingsCommandOutput>;
-  public getDataCatalogEncryptionSettings(
-    args: GetDataCatalogEncryptionSettingsCommandInput,
-    cb: (err: any, data?: GetDataCatalogEncryptionSettingsCommandOutput) => void
-  ): void;
-  public getDataCatalogEncryptionSettings(
-    args: GetDataCatalogEncryptionSettingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDataCatalogEncryptionSettingsCommandOutput) => void
-  ): void;
-  public getDataCatalogEncryptionSettings(
-    args: GetDataCatalogEncryptionSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDataCatalogEncryptionSettingsCommandOutput) => void),
-    cb?: (err: any, data?: GetDataCatalogEncryptionSettingsCommandOutput) => void
-  ): Promise<GetDataCatalogEncryptionSettingsCommandOutput> | void {
-    const command = new GetDataCatalogEncryptionSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Transforms a Python script into a directed acyclic graph (DAG). </p>
-   */
-  public getDataflowGraph(
-    args: GetDataflowGraphCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDataflowGraphCommandOutput>;
-  public getDataflowGraph(
-    args: GetDataflowGraphCommandInput,
-    cb: (err: any, data?: GetDataflowGraphCommandOutput) => void
-  ): void;
-  public getDataflowGraph(
-    args: GetDataflowGraphCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDataflowGraphCommandOutput) => void
-  ): void;
-  public getDataflowGraph(
-    args: GetDataflowGraphCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDataflowGraphCommandOutput) => void),
-    cb?: (err: any, data?: GetDataflowGraphCommandOutput) => void
-  ): Promise<GetDataflowGraphCommandOutput> | void {
-    const command = new GetDataflowGraphCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves information about a specified development endpoint.</p>
-   *          <note>
-   *             <p>When you create a development endpoint in a virtual private cloud (VPC), Glue returns only
-   *         a private IP address, and the public IP address field is not populated. When you create a
-   *         non-VPC development endpoint, Glue returns only a public IP address.</p>
-   *          </note>
-   */
-  public getDevEndpoint(
-    args: GetDevEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDevEndpointCommandOutput>;
-  public getDevEndpoint(
-    args: GetDevEndpointCommandInput,
-    cb: (err: any, data?: GetDevEndpointCommandOutput) => void
-  ): void;
-  public getDevEndpoint(
-    args: GetDevEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDevEndpointCommandOutput) => void
-  ): void;
-  public getDevEndpoint(
-    args: GetDevEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDevEndpointCommandOutput) => void),
-    cb?: (err: any, data?: GetDevEndpointCommandOutput) => void
-  ): Promise<GetDevEndpointCommandOutput> | void {
-    const command = new GetDevEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves all the development endpoints in this AWS account.</p>
-   *          <note>
-   *             <p>When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address
-   *       and the public IP address field is not populated. When you create a non-VPC development
-   *       endpoint, Glue returns only a public IP address.</p>
-   *          </note>
-   */
-  public getDevEndpoints(
-    args: GetDevEndpointsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDevEndpointsCommandOutput>;
-  public getDevEndpoints(
-    args: GetDevEndpointsCommandInput,
-    cb: (err: any, data?: GetDevEndpointsCommandOutput) => void
-  ): void;
-  public getDevEndpoints(
-    args: GetDevEndpointsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDevEndpointsCommandOutput) => void
-  ): void;
-  public getDevEndpoints(
-    args: GetDevEndpointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDevEndpointsCommandOutput) => void),
-    cb?: (err: any, data?: GetDevEndpointsCommandOutput) => void
-  ): Promise<GetDevEndpointsCommandOutput> | void {
-    const command = new GetDevEndpointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves an existing job definition.</p>
-   */
-  public getJob(args: GetJobCommandInput, options?: __HttpHandlerOptions): Promise<GetJobCommandOutput>;
-  public getJob(args: GetJobCommandInput, cb: (err: any, data?: GetJobCommandOutput) => void): void;
-  public getJob(
-    args: GetJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetJobCommandOutput) => void
-  ): void;
-  public getJob(
-    args: GetJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobCommandOutput) => void),
-    cb?: (err: any, data?: GetJobCommandOutput) => void
-  ): Promise<GetJobCommandOutput> | void {
-    const command = new GetJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information on a job bookmark entry.</p>
-   */
-  public getJobBookmark(
-    args: GetJobBookmarkCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetJobBookmarkCommandOutput>;
-  public getJobBookmark(
-    args: GetJobBookmarkCommandInput,
-    cb: (err: any, data?: GetJobBookmarkCommandOutput) => void
-  ): void;
-  public getJobBookmark(
-    args: GetJobBookmarkCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetJobBookmarkCommandOutput) => void
-  ): void;
-  public getJobBookmark(
-    args: GetJobBookmarkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobBookmarkCommandOutput) => void),
-    cb?: (err: any, data?: GetJobBookmarkCommandOutput) => void
-  ): Promise<GetJobBookmarkCommandOutput> | void {
-    const command = new GetJobBookmarkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the metadata for a given job run.</p>
-   */
-  public getJobRun(args: GetJobRunCommandInput, options?: __HttpHandlerOptions): Promise<GetJobRunCommandOutput>;
-  public getJobRun(args: GetJobRunCommandInput, cb: (err: any, data?: GetJobRunCommandOutput) => void): void;
-  public getJobRun(
-    args: GetJobRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetJobRunCommandOutput) => void
-  ): void;
-  public getJobRun(
-    args: GetJobRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobRunCommandOutput) => void),
-    cb?: (err: any, data?: GetJobRunCommandOutput) => void
-  ): Promise<GetJobRunCommandOutput> | void {
-    const command = new GetJobRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves metadata for all runs of a given job definition.</p>
-   */
-  public getJobRuns(args: GetJobRunsCommandInput, options?: __HttpHandlerOptions): Promise<GetJobRunsCommandOutput>;
-  public getJobRuns(args: GetJobRunsCommandInput, cb: (err: any, data?: GetJobRunsCommandOutput) => void): void;
-  public getJobRuns(
-    args: GetJobRunsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetJobRunsCommandOutput) => void
-  ): void;
-  public getJobRuns(
-    args: GetJobRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobRunsCommandOutput) => void),
-    cb?: (err: any, data?: GetJobRunsCommandOutput) => void
-  ): Promise<GetJobRunsCommandOutput> | void {
-    const command = new GetJobRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves all current job definitions.</p>
-   */
-  public getJobs(args: GetJobsCommandInput, options?: __HttpHandlerOptions): Promise<GetJobsCommandOutput>;
-  public getJobs(args: GetJobsCommandInput, cb: (err: any, data?: GetJobsCommandOutput) => void): void;
-  public getJobs(
-    args: GetJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetJobsCommandOutput) => void
-  ): void;
-  public getJobs(
-    args: GetJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobsCommandOutput) => void),
-    cb?: (err: any, data?: GetJobsCommandOutput) => void
-  ): Promise<GetJobsCommandOutput> | void {
-    const command = new GetJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates mappings.</p>
-   */
-  public getMapping(args: GetMappingCommandInput, options?: __HttpHandlerOptions): Promise<GetMappingCommandOutput>;
-  public getMapping(args: GetMappingCommandInput, cb: (err: any, data?: GetMappingCommandOutput) => void): void;
-  public getMapping(
-    args: GetMappingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMappingCommandOutput) => void
-  ): void;
-  public getMapping(
-    args: GetMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMappingCommandOutput) => void),
-    cb?: (err: any, data?: GetMappingCommandOutput) => void
-  ): Promise<GetMappingCommandOutput> | void {
-    const command = new GetMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets details for a specific task run on a machine learning transform. Machine learning
-   *       task runs are asynchronous tasks that Glue runs on your behalf as part of various machine
-   *       learning workflows. You can check the stats of any task run by calling
-   *         <code>GetMLTaskRun</code> with the <code>TaskRunID</code> and its parent transform's
-   *         <code>TransformID</code>.</p>
-   */
-  public getMLTaskRun(
-    args: GetMLTaskRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMLTaskRunCommandOutput>;
-  public getMLTaskRun(args: GetMLTaskRunCommandInput, cb: (err: any, data?: GetMLTaskRunCommandOutput) => void): void;
-  public getMLTaskRun(
-    args: GetMLTaskRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMLTaskRunCommandOutput) => void
-  ): void;
-  public getMLTaskRun(
-    args: GetMLTaskRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMLTaskRunCommandOutput) => void),
-    cb?: (err: any, data?: GetMLTaskRunCommandOutput) => void
-  ): Promise<GetMLTaskRunCommandOutput> | void {
-    const command = new GetMLTaskRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a list of runs for a machine learning transform. Machine learning task runs are
-   *       asynchronous tasks that Glue runs on your behalf as part of various machine learning
-   *       workflows. You can get a sortable, filterable list of machine learning task runs by calling
-   *         <code>GetMLTaskRuns</code> with their parent transform's <code>TransformID</code> and other
-   *       optional parameters as documented in this section.</p>
-   *
-   * 	        <p>This operation returns a list of historic runs and must be paginated.</p>
-   */
-  public getMLTaskRuns(
-    args: GetMLTaskRunsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMLTaskRunsCommandOutput>;
-  public getMLTaskRuns(
-    args: GetMLTaskRunsCommandInput,
-    cb: (err: any, data?: GetMLTaskRunsCommandOutput) => void
-  ): void;
-  public getMLTaskRuns(
-    args: GetMLTaskRunsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMLTaskRunsCommandOutput) => void
-  ): void;
-  public getMLTaskRuns(
-    args: GetMLTaskRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMLTaskRunsCommandOutput) => void),
-    cb?: (err: any, data?: GetMLTaskRunsCommandOutput) => void
-  ): Promise<GetMLTaskRunsCommandOutput> | void {
-    const command = new GetMLTaskRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an Glue machine learning transform artifact and all its corresponding metadata.
-   *       Machine learning transforms are a special type of transform that use machine learning to learn
-   *       the details of the transformation to be performed by learning from examples provided by
-   *       humans. These transformations are then saved by Glue. You can retrieve their metadata by
-   *       calling <code>GetMLTransform</code>.</p>
-   */
-  public getMLTransform(
-    args: GetMLTransformCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMLTransformCommandOutput>;
-  public getMLTransform(
-    args: GetMLTransformCommandInput,
-    cb: (err: any, data?: GetMLTransformCommandOutput) => void
-  ): void;
-  public getMLTransform(
-    args: GetMLTransformCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMLTransformCommandOutput) => void
-  ): void;
-  public getMLTransform(
-    args: GetMLTransformCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMLTransformCommandOutput) => void),
-    cb?: (err: any, data?: GetMLTransformCommandOutput) => void
-  ): Promise<GetMLTransformCommandOutput> | void {
-    const command = new GetMLTransformCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a sortable, filterable list of existing Glue machine learning transforms. Machine
-   *       learning transforms are a special type of transform that use machine learning to learn the
-   *       details of the transformation to be performed by learning from examples provided by humans.
-   *       These transformations are then saved by Glue, and you can retrieve their metadata by
-   *       calling <code>GetMLTransforms</code>.</p>
-   */
-  public getMLTransforms(
-    args: GetMLTransformsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMLTransformsCommandOutput>;
-  public getMLTransforms(
-    args: GetMLTransformsCommandInput,
-    cb: (err: any, data?: GetMLTransformsCommandOutput) => void
-  ): void;
-  public getMLTransforms(
-    args: GetMLTransformsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMLTransformsCommandOutput) => void
-  ): void;
-  public getMLTransforms(
-    args: GetMLTransformsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMLTransformsCommandOutput) => void),
-    cb?: (err: any, data?: GetMLTransformsCommandOutput) => void
-  ): Promise<GetMLTransformsCommandOutput> | void {
-    const command = new GetMLTransformsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves information about a specified partition.</p>
-   */
-  public getPartition(
-    args: GetPartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetPartitionCommandOutput>;
-  public getPartition(args: GetPartitionCommandInput, cb: (err: any, data?: GetPartitionCommandOutput) => void): void;
-  public getPartition(
-    args: GetPartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPartitionCommandOutput) => void
-  ): void;
-  public getPartition(
-    args: GetPartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPartitionCommandOutput) => void),
-    cb?: (err: any, data?: GetPartitionCommandOutput) => void
-  ): Promise<GetPartitionCommandOutput> | void {
-    const command = new GetPartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the partition indexes associated with a table.</p>
-   */
-  public getPartitionIndexes(
-    args: GetPartitionIndexesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetPartitionIndexesCommandOutput>;
-  public getPartitionIndexes(
-    args: GetPartitionIndexesCommandInput,
-    cb: (err: any, data?: GetPartitionIndexesCommandOutput) => void
-  ): void;
-  public getPartitionIndexes(
-    args: GetPartitionIndexesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPartitionIndexesCommandOutput) => void
-  ): void;
-  public getPartitionIndexes(
-    args: GetPartitionIndexesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPartitionIndexesCommandOutput) => void),
-    cb?: (err: any, data?: GetPartitionIndexesCommandOutput) => void
-  ): Promise<GetPartitionIndexesCommandOutput> | void {
-    const command = new GetPartitionIndexesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves information about the partitions in a table.</p>
-   */
-  public getPartitions(
-    args: GetPartitionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetPartitionsCommandOutput>;
-  public getPartitions(
-    args: GetPartitionsCommandInput,
-    cb: (err: any, data?: GetPartitionsCommandOutput) => void
-  ): void;
-  public getPartitions(
-    args: GetPartitionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPartitionsCommandOutput) => void
-  ): void;
-  public getPartitions(
-    args: GetPartitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPartitionsCommandOutput) => void),
-    cb?: (err: any, data?: GetPartitionsCommandOutput) => void
-  ): Promise<GetPartitionsCommandOutput> | void {
-    const command = new GetPartitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets code to perform a specified mapping.</p>
-   */
-  public getPlan(args: GetPlanCommandInput, options?: __HttpHandlerOptions): Promise<GetPlanCommandOutput>;
-  public getPlan(args: GetPlanCommandInput, cb: (err: any, data?: GetPlanCommandOutput) => void): void;
-  public getPlan(
-    args: GetPlanCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPlanCommandOutput) => void
-  ): void;
-  public getPlan(
-    args: GetPlanCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPlanCommandOutput) => void),
-    cb?: (err: any, data?: GetPlanCommandOutput) => void
-  ): Promise<GetPlanCommandOutput> | void {
-    const command = new GetPlanCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the specified registry in detail.</p>
-   */
-  public getRegistry(args: GetRegistryCommandInput, options?: __HttpHandlerOptions): Promise<GetRegistryCommandOutput>;
-  public getRegistry(args: GetRegistryCommandInput, cb: (err: any, data?: GetRegistryCommandOutput) => void): void;
-  public getRegistry(
-    args: GetRegistryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRegistryCommandOutput) => void
-  ): void;
-  public getRegistry(
-    args: GetRegistryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRegistryCommandOutput) => void),
-    cb?: (err: any, data?: GetRegistryCommandOutput) => void
-  ): Promise<GetRegistryCommandOutput> | void {
-    const command = new GetRegistryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the resource policies set on individual resources by Resource Access Manager
-   *       during cross-account permission grants. Also retrieves the Data Catalog resource
-   *       policy.</p>
-   *          <p>If you enabled metadata encryption in Data Catalog settings, and you do not have
-   *       permission on the KMS key, the operation can't return the Data Catalog resource
-   *       policy.</p>
-   */
-  public getResourcePolicies(
-    args: GetResourcePoliciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetResourcePoliciesCommandOutput>;
-  public getResourcePolicies(
-    args: GetResourcePoliciesCommandInput,
-    cb: (err: any, data?: GetResourcePoliciesCommandOutput) => void
-  ): void;
-  public getResourcePolicies(
-    args: GetResourcePoliciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetResourcePoliciesCommandOutput) => void
-  ): void;
-  public getResourcePolicies(
-    args: GetResourcePoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourcePoliciesCommandOutput) => void),
-    cb?: (err: any, data?: GetResourcePoliciesCommandOutput) => void
-  ): Promise<GetResourcePoliciesCommandOutput> | void {
-    const command = new GetResourcePoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a specified resource policy.</p>
-   */
-  public getResourcePolicy(
-    args: GetResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetResourcePolicyCommandOutput>;
-  public getResourcePolicy(
-    args: GetResourcePolicyCommandInput,
-    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
-  ): void;
-  public getResourcePolicy(
-    args: GetResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
-  ): void;
-  public getResourcePolicy(
-    args: GetResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetResourcePolicyCommandOutput) => void
-  ): Promise<GetResourcePolicyCommandOutput> | void {
-    const command = new GetResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the specified schema in detail.</p>
-   */
-  public getSchema(args: GetSchemaCommandInput, options?: __HttpHandlerOptions): Promise<GetSchemaCommandOutput>;
-  public getSchema(args: GetSchemaCommandInput, cb: (err: any, data?: GetSchemaCommandOutput) => void): void;
-  public getSchema(
-    args: GetSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSchemaCommandOutput) => void
-  ): void;
-  public getSchema(
-    args: GetSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSchemaCommandOutput) => void),
-    cb?: (err: any, data?: GetSchemaCommandOutput) => void
-  ): Promise<GetSchemaCommandOutput> | void {
-    const command = new GetSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a schema by the <code>SchemaDefinition</code>. The schema definition is sent to the Schema Registry, canonicalized, and hashed. If the hash is matched within the scope of the <code>SchemaName</code> or ARN (or the default registry, if none is supplied), that schema’s metadata is returned. Otherwise, a 404 or NotFound error is returned. Schema versions in <code>Deleted</code> statuses will not be included in the results.</p>
-   */
-  public getSchemaByDefinition(
-    args: GetSchemaByDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSchemaByDefinitionCommandOutput>;
-  public getSchemaByDefinition(
-    args: GetSchemaByDefinitionCommandInput,
-    cb: (err: any, data?: GetSchemaByDefinitionCommandOutput) => void
-  ): void;
-  public getSchemaByDefinition(
-    args: GetSchemaByDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSchemaByDefinitionCommandOutput) => void
-  ): void;
-  public getSchemaByDefinition(
-    args: GetSchemaByDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSchemaByDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: GetSchemaByDefinitionCommandOutput) => void
-  ): Promise<GetSchemaByDefinitionCommandOutput> | void {
-    const command = new GetSchemaByDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Get the specified schema by its unique ID assigned when a version of the schema is created or registered. Schema versions in Deleted status will not be included in the results.</p>
-   */
-  public getSchemaVersion(
-    args: GetSchemaVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSchemaVersionCommandOutput>;
-  public getSchemaVersion(
-    args: GetSchemaVersionCommandInput,
-    cb: (err: any, data?: GetSchemaVersionCommandOutput) => void
-  ): void;
-  public getSchemaVersion(
-    args: GetSchemaVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSchemaVersionCommandOutput) => void
-  ): void;
-  public getSchemaVersion(
-    args: GetSchemaVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSchemaVersionCommandOutput) => void),
-    cb?: (err: any, data?: GetSchemaVersionCommandOutput) => void
-  ): Promise<GetSchemaVersionCommandOutput> | void {
-    const command = new GetSchemaVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Fetches the schema version difference in the specified difference type between two stored schema versions in the Schema Registry.</p>
-   *          <p>This API allows you to compare two schema versions between two schema definitions under the same schema.</p>
-   */
-  public getSchemaVersionsDiff(
-    args: GetSchemaVersionsDiffCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSchemaVersionsDiffCommandOutput>;
-  public getSchemaVersionsDiff(
-    args: GetSchemaVersionsDiffCommandInput,
-    cb: (err: any, data?: GetSchemaVersionsDiffCommandOutput) => void
-  ): void;
-  public getSchemaVersionsDiff(
-    args: GetSchemaVersionsDiffCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSchemaVersionsDiffCommandOutput) => void
-  ): void;
-  public getSchemaVersionsDiff(
-    args: GetSchemaVersionsDiffCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSchemaVersionsDiffCommandOutput) => void),
-    cb?: (err: any, data?: GetSchemaVersionsDiffCommandOutput) => void
-  ): Promise<GetSchemaVersionsDiffCommandOutput> | void {
-    const command = new GetSchemaVersionsDiffCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a specified security configuration.</p>
-   */
-  public getSecurityConfiguration(
-    args: GetSecurityConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSecurityConfigurationCommandOutput>;
-  public getSecurityConfiguration(
-    args: GetSecurityConfigurationCommandInput,
-    cb: (err: any, data?: GetSecurityConfigurationCommandOutput) => void
-  ): void;
-  public getSecurityConfiguration(
-    args: GetSecurityConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSecurityConfigurationCommandOutput) => void
-  ): void;
-  public getSecurityConfiguration(
-    args: GetSecurityConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSecurityConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetSecurityConfigurationCommandOutput) => void
-  ): Promise<GetSecurityConfigurationCommandOutput> | void {
-    const command = new GetSecurityConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a list of all security configurations.</p>
-   */
-  public getSecurityConfigurations(
-    args: GetSecurityConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSecurityConfigurationsCommandOutput>;
-  public getSecurityConfigurations(
-    args: GetSecurityConfigurationsCommandInput,
-    cb: (err: any, data?: GetSecurityConfigurationsCommandOutput) => void
-  ): void;
-  public getSecurityConfigurations(
-    args: GetSecurityConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSecurityConfigurationsCommandOutput) => void
-  ): void;
-  public getSecurityConfigurations(
-    args: GetSecurityConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSecurityConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: GetSecurityConfigurationsCommandOutput) => void
-  ): Promise<GetSecurityConfigurationsCommandOutput> | void {
-    const command = new GetSecurityConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the <code>Table</code> definition in a Data Catalog for
-   *       a specified table.</p>
-   */
-  public getTable(args: GetTableCommandInput, options?: __HttpHandlerOptions): Promise<GetTableCommandOutput>;
-  public getTable(args: GetTableCommandInput, cb: (err: any, data?: GetTableCommandOutput) => void): void;
-  public getTable(
-    args: GetTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTableCommandOutput) => void
-  ): void;
-  public getTable(
-    args: GetTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTableCommandOutput) => void),
-    cb?: (err: any, data?: GetTableCommandOutput) => void
-  ): Promise<GetTableCommandOutput> | void {
-    const command = new GetTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the definitions of some or all of the tables in a given
-   *       <code>Database</code>.</p>
-   */
-  public getTables(args: GetTablesCommandInput, options?: __HttpHandlerOptions): Promise<GetTablesCommandOutput>;
-  public getTables(args: GetTablesCommandInput, cb: (err: any, data?: GetTablesCommandOutput) => void): void;
-  public getTables(
-    args: GetTablesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTablesCommandOutput) => void
-  ): void;
-  public getTables(
-    args: GetTablesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTablesCommandOutput) => void),
-    cb?: (err: any, data?: GetTablesCommandOutput) => void
-  ): Promise<GetTablesCommandOutput> | void {
-    const command = new GetTablesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a specified version of a table.</p>
-   */
-  public getTableVersion(
-    args: GetTableVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetTableVersionCommandOutput>;
-  public getTableVersion(
-    args: GetTableVersionCommandInput,
-    cb: (err: any, data?: GetTableVersionCommandOutput) => void
-  ): void;
-  public getTableVersion(
-    args: GetTableVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTableVersionCommandOutput) => void
-  ): void;
-  public getTableVersion(
-    args: GetTableVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTableVersionCommandOutput) => void),
-    cb?: (err: any, data?: GetTableVersionCommandOutput) => void
-  ): Promise<GetTableVersionCommandOutput> | void {
-    const command = new GetTableVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a list of strings that identify available versions of
-   *       a specified table.</p>
-   */
-  public getTableVersions(
-    args: GetTableVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetTableVersionsCommandOutput>;
-  public getTableVersions(
-    args: GetTableVersionsCommandInput,
-    cb: (err: any, data?: GetTableVersionsCommandOutput) => void
-  ): void;
-  public getTableVersions(
-    args: GetTableVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTableVersionsCommandOutput) => void
-  ): void;
-  public getTableVersions(
-    args: GetTableVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTableVersionsCommandOutput) => void),
-    cb?: (err: any, data?: GetTableVersionsCommandOutput) => void
-  ): Promise<GetTableVersionsCommandOutput> | void {
-    const command = new GetTableVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a list of tags associated with a resource.</p>
-   */
-  public getTags(args: GetTagsCommandInput, options?: __HttpHandlerOptions): Promise<GetTagsCommandOutput>;
-  public getTags(args: GetTagsCommandInput, cb: (err: any, data?: GetTagsCommandOutput) => void): void;
-  public getTags(
-    args: GetTagsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTagsCommandOutput) => void
-  ): void;
-  public getTags(
-    args: GetTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTagsCommandOutput) => void),
-    cb?: (err: any, data?: GetTagsCommandOutput) => void
-  ): Promise<GetTagsCommandOutput> | void {
-    const command = new GetTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the definition of a trigger.</p>
-   */
-  public getTrigger(args: GetTriggerCommandInput, options?: __HttpHandlerOptions): Promise<GetTriggerCommandOutput>;
-  public getTrigger(args: GetTriggerCommandInput, cb: (err: any, data?: GetTriggerCommandOutput) => void): void;
-  public getTrigger(
-    args: GetTriggerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTriggerCommandOutput) => void
-  ): void;
-  public getTrigger(
-    args: GetTriggerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTriggerCommandOutput) => void),
-    cb?: (err: any, data?: GetTriggerCommandOutput) => void
-  ): Promise<GetTriggerCommandOutput> | void {
-    const command = new GetTriggerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets all the triggers associated with a job.</p>
-   */
-  public getTriggers(args: GetTriggersCommandInput, options?: __HttpHandlerOptions): Promise<GetTriggersCommandOutput>;
-  public getTriggers(args: GetTriggersCommandInput, cb: (err: any, data?: GetTriggersCommandOutput) => void): void;
-  public getTriggers(
-    args: GetTriggersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTriggersCommandOutput) => void
-  ): void;
-  public getTriggers(
-    args: GetTriggersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTriggersCommandOutput) => void),
-    cb?: (err: any, data?: GetTriggersCommandOutput) => void
-  ): Promise<GetTriggersCommandOutput> | void {
-    const command = new GetTriggersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a specified function definition from the Data Catalog.</p>
-   */
-  public getUserDefinedFunction(
-    args: GetUserDefinedFunctionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetUserDefinedFunctionCommandOutput>;
-  public getUserDefinedFunction(
-    args: GetUserDefinedFunctionCommandInput,
-    cb: (err: any, data?: GetUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public getUserDefinedFunction(
-    args: GetUserDefinedFunctionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public getUserDefinedFunction(
-    args: GetUserDefinedFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUserDefinedFunctionCommandOutput) => void),
-    cb?: (err: any, data?: GetUserDefinedFunctionCommandOutput) => void
-  ): Promise<GetUserDefinedFunctionCommandOutput> | void {
-    const command = new GetUserDefinedFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves multiple function definitions from the Data Catalog.</p>
-   */
-  public getUserDefinedFunctions(
-    args: GetUserDefinedFunctionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetUserDefinedFunctionsCommandOutput>;
-  public getUserDefinedFunctions(
-    args: GetUserDefinedFunctionsCommandInput,
-    cb: (err: any, data?: GetUserDefinedFunctionsCommandOutput) => void
-  ): void;
-  public getUserDefinedFunctions(
-    args: GetUserDefinedFunctionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetUserDefinedFunctionsCommandOutput) => void
-  ): void;
-  public getUserDefinedFunctions(
-    args: GetUserDefinedFunctionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUserDefinedFunctionsCommandOutput) => void),
-    cb?: (err: any, data?: GetUserDefinedFunctionsCommandOutput) => void
-  ): Promise<GetUserDefinedFunctionsCommandOutput> | void {
-    const command = new GetUserDefinedFunctionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves resource metadata for a workflow.</p>
-   */
-  public getWorkflow(args: GetWorkflowCommandInput, options?: __HttpHandlerOptions): Promise<GetWorkflowCommandOutput>;
-  public getWorkflow(args: GetWorkflowCommandInput, cb: (err: any, data?: GetWorkflowCommandOutput) => void): void;
-  public getWorkflow(
-    args: GetWorkflowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetWorkflowCommandOutput) => void
-  ): void;
-  public getWorkflow(
-    args: GetWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkflowCommandOutput) => void
-  ): Promise<GetWorkflowCommandOutput> | void {
-    const command = new GetWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the metadata for a given workflow run. </p>
-   */
-  public getWorkflowRun(
-    args: GetWorkflowRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetWorkflowRunCommandOutput>;
-  public getWorkflowRun(
-    args: GetWorkflowRunCommandInput,
-    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
-  ): void;
-  public getWorkflowRun(
-    args: GetWorkflowRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
-  ): void;
-  public getWorkflowRun(
-    args: GetWorkflowRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkflowRunCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkflowRunCommandOutput) => void
-  ): Promise<GetWorkflowRunCommandOutput> | void {
-    const command = new GetWorkflowRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the workflow run properties which were set during the run.</p>
-   */
-  public getWorkflowRunProperties(
-    args: GetWorkflowRunPropertiesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetWorkflowRunPropertiesCommandOutput>;
-  public getWorkflowRunProperties(
-    args: GetWorkflowRunPropertiesCommandInput,
-    cb: (err: any, data?: GetWorkflowRunPropertiesCommandOutput) => void
-  ): void;
-  public getWorkflowRunProperties(
-    args: GetWorkflowRunPropertiesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetWorkflowRunPropertiesCommandOutput) => void
-  ): void;
-  public getWorkflowRunProperties(
-    args: GetWorkflowRunPropertiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkflowRunPropertiesCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkflowRunPropertiesCommandOutput) => void
-  ): Promise<GetWorkflowRunPropertiesCommandOutput> | void {
-    const command = new GetWorkflowRunPropertiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves metadata for all runs of a given workflow.</p>
-   */
-  public getWorkflowRuns(
-    args: GetWorkflowRunsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetWorkflowRunsCommandOutput>;
-  public getWorkflowRuns(
-    args: GetWorkflowRunsCommandInput,
-    cb: (err: any, data?: GetWorkflowRunsCommandOutput) => void
-  ): void;
-  public getWorkflowRuns(
-    args: GetWorkflowRunsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetWorkflowRunsCommandOutput) => void
-  ): void;
-  public getWorkflowRuns(
-    args: GetWorkflowRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkflowRunsCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkflowRunsCommandOutput) => void
-  ): Promise<GetWorkflowRunsCommandOutput> | void {
-    const command = new GetWorkflowRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Imports an existing Amazon Athena Data Catalog to Glue.</p>
-   */
-  public importCatalogToGlue(
-    args: ImportCatalogToGlueCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ImportCatalogToGlueCommandOutput>;
-  public importCatalogToGlue(
-    args: ImportCatalogToGlueCommandInput,
-    cb: (err: any, data?: ImportCatalogToGlueCommandOutput) => void
-  ): void;
-  public importCatalogToGlue(
-    args: ImportCatalogToGlueCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ImportCatalogToGlueCommandOutput) => void
-  ): void;
-  public importCatalogToGlue(
-    args: ImportCatalogToGlueCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportCatalogToGlueCommandOutput) => void),
-    cb?: (err: any, data?: ImportCatalogToGlueCommandOutput) => void
-  ): Promise<ImportCatalogToGlueCommandOutput> | void {
-    const command = new ImportCatalogToGlueCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all the blueprint names in an account.</p>
-   */
-  public listBlueprints(
-    args: ListBlueprintsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListBlueprintsCommandOutput>;
-  public listBlueprints(
-    args: ListBlueprintsCommandInput,
-    cb: (err: any, data?: ListBlueprintsCommandOutput) => void
-  ): void;
-  public listBlueprints(
-    args: ListBlueprintsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListBlueprintsCommandOutput) => void
-  ): void;
-  public listBlueprints(
-    args: ListBlueprintsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBlueprintsCommandOutput) => void),
-    cb?: (err: any, data?: ListBlueprintsCommandOutput) => void
-  ): Promise<ListBlueprintsCommandOutput> | void {
-    const command = new ListBlueprintsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the names of all crawler resources in this Amazon Web Services account, or the
-   *       resources with the specified tag. This operation allows you to see which
-   *       resources are available in your account, and their names.</p>
-   *
-   *          <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on
-   *       the response so that tagged resources can be retrieved as a group. If you choose to use tags
-   *       filtering, only resources with the tag are retrieved.</p>
-   */
-  public listCrawlers(
-    args: ListCrawlersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListCrawlersCommandOutput>;
-  public listCrawlers(args: ListCrawlersCommandInput, cb: (err: any, data?: ListCrawlersCommandOutput) => void): void;
-  public listCrawlers(
-    args: ListCrawlersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListCrawlersCommandOutput) => void
-  ): void;
-  public listCrawlers(
-    args: ListCrawlersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCrawlersCommandOutput) => void),
-    cb?: (err: any, data?: ListCrawlersCommandOutput) => void
-  ): Promise<ListCrawlersCommandOutput> | void {
-    const command = new ListCrawlersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the names of all <code>DevEndpoint</code> resources in this Amazon Web Services account, or the
-   *       resources with the specified tag. This operation allows you to see which resources are
-   *       available in your account, and their names.</p>
-   *
-   *          <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on
-   *       the response so that tagged resources can be retrieved as a group. If you choose to use tags
-   *       filtering, only resources with the tag are retrieved.</p>
-   */
-  public listDevEndpoints(
-    args: ListDevEndpointsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListDevEndpointsCommandOutput>;
-  public listDevEndpoints(
-    args: ListDevEndpointsCommandInput,
-    cb: (err: any, data?: ListDevEndpointsCommandOutput) => void
-  ): void;
-  public listDevEndpoints(
-    args: ListDevEndpointsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListDevEndpointsCommandOutput) => void
-  ): void;
-  public listDevEndpoints(
-    args: ListDevEndpointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDevEndpointsCommandOutput) => void),
-    cb?: (err: any, data?: ListDevEndpointsCommandOutput) => void
-  ): Promise<ListDevEndpointsCommandOutput> | void {
-    const command = new ListDevEndpointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p>
-   *
-   * 	        <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on
-   *       the response so that tagged resources can be retrieved as a group. If you choose to use tags
-   *       filtering, only resources with the tag are retrieved.</p>
-   */
-  public listJobs(args: ListJobsCommandInput, options?: __HttpHandlerOptions): Promise<ListJobsCommandOutput>;
-  public listJobs(args: ListJobsCommandInput, cb: (err: any, data?: ListJobsCommandOutput) => void): void;
-  public listJobs(
-    args: ListJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListJobsCommandOutput) => void
-  ): void;
-  public listJobs(
-    args: ListJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListJobsCommandOutput) => void
-  ): Promise<ListJobsCommandOutput> | void {
-    const command = new ListJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Retrieves a sortable, filterable list of existing Glue machine learning transforms in this Amazon Web Services account,
-   *        or the resources with the specified tag. This operation takes the optional <code>Tags</code> field, which you can use as
-   *        a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag
-   *        filtering, only resources with the tags are retrieved.
-   *      </p>
-   */
-  public listMLTransforms(
-    args: ListMLTransformsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListMLTransformsCommandOutput>;
-  public listMLTransforms(
-    args: ListMLTransformsCommandInput,
-    cb: (err: any, data?: ListMLTransformsCommandOutput) => void
-  ): void;
-  public listMLTransforms(
-    args: ListMLTransformsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListMLTransformsCommandOutput) => void
-  ): void;
-  public listMLTransforms(
-    args: ListMLTransformsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMLTransformsCommandOutput) => void),
-    cb?: (err: any, data?: ListMLTransformsCommandOutput) => void
-  ): Promise<ListMLTransformsCommandOutput> | void {
-    const command = new ListMLTransformsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of registries that you have created, with minimal registry information. Registries in the <code>Deleting</code> status will not be included in the results. Empty results will be returned if there are no registries available.</p>
-   */
-  public listRegistries(
-    args: ListRegistriesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRegistriesCommandOutput>;
-  public listRegistries(
-    args: ListRegistriesCommandInput,
-    cb: (err: any, data?: ListRegistriesCommandOutput) => void
-  ): void;
-  public listRegistries(
-    args: ListRegistriesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRegistriesCommandOutput) => void
-  ): void;
-  public listRegistries(
-    args: ListRegistriesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRegistriesCommandOutput) => void),
-    cb?: (err: any, data?: ListRegistriesCommandOutput) => void
-  ): Promise<ListRegistriesCommandOutput> | void {
-    const command = new ListRegistriesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of schemas with minimal details. Schemas in Deleting status will not be included in the results. Empty results will be returned if there are no schemas available.</p>
-   *          <p>When the <code>RegistryId</code> is not provided, all the schemas across registries will be part of the API response.</p>
-   */
-  public listSchemas(args: ListSchemasCommandInput, options?: __HttpHandlerOptions): Promise<ListSchemasCommandOutput>;
-  public listSchemas(args: ListSchemasCommandInput, cb: (err: any, data?: ListSchemasCommandOutput) => void): void;
-  public listSchemas(
-    args: ListSchemasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSchemasCommandOutput) => void
-  ): void;
-  public listSchemas(
-    args: ListSchemasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSchemasCommandOutput) => void),
-    cb?: (err: any, data?: ListSchemasCommandOutput) => void
-  ): Promise<ListSchemasCommandOutput> | void {
-    const command = new ListSchemasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of schema versions that you have created, with minimal information. Schema versions in Deleted status will not be included in the results. Empty results will be returned if there are no schema versions available.</p>
-   */
-  public listSchemaVersions(
-    args: ListSchemaVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSchemaVersionsCommandOutput>;
-  public listSchemaVersions(
-    args: ListSchemaVersionsCommandInput,
-    cb: (err: any, data?: ListSchemaVersionsCommandOutput) => void
-  ): void;
-  public listSchemaVersions(
-    args: ListSchemaVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSchemaVersionsCommandOutput) => void
-  ): void;
-  public listSchemaVersions(
-    args: ListSchemaVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSchemaVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListSchemaVersionsCommandOutput) => void
-  ): Promise<ListSchemaVersionsCommandOutput> | void {
-    const command = new ListSchemaVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p>
-   *
-   *          <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on
-   *       the response so that tagged resources can be retrieved as a group. If you choose to use tags
-   *       filtering, only resources with the tag are retrieved.</p>
-   */
-  public listTriggers(
-    args: ListTriggersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTriggersCommandOutput>;
-  public listTriggers(args: ListTriggersCommandInput, cb: (err: any, data?: ListTriggersCommandOutput) => void): void;
-  public listTriggers(
-    args: ListTriggersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTriggersCommandOutput) => void
-  ): void;
-  public listTriggers(
-    args: ListTriggersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTriggersCommandOutput) => void),
-    cb?: (err: any, data?: ListTriggersCommandOutput) => void
-  ): Promise<ListTriggersCommandOutput> | void {
-    const command = new ListTriggersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists names of workflows created in the account.</p>
-   */
-  public listWorkflows(
-    args: ListWorkflowsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListWorkflowsCommandOutput>;
-  public listWorkflows(
-    args: ListWorkflowsCommandInput,
-    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
-  ): void;
-  public listWorkflows(
-    args: ListWorkflowsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
-  ): void;
-  public listWorkflows(
-    args: ListWorkflowsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkflowsCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkflowsCommandOutput) => void
-  ): Promise<ListWorkflowsCommandOutput> | void {
-    const command = new ListWorkflowsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the security configuration for a specified catalog. After the configuration has been
-   *       set, the specified encryption is applied to every catalog write thereafter.</p>
-   */
-  public putDataCatalogEncryptionSettings(
-    args: PutDataCatalogEncryptionSettingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutDataCatalogEncryptionSettingsCommandOutput>;
-  public putDataCatalogEncryptionSettings(
-    args: PutDataCatalogEncryptionSettingsCommandInput,
-    cb: (err: any, data?: PutDataCatalogEncryptionSettingsCommandOutput) => void
-  ): void;
-  public putDataCatalogEncryptionSettings(
-    args: PutDataCatalogEncryptionSettingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutDataCatalogEncryptionSettingsCommandOutput) => void
-  ): void;
-  public putDataCatalogEncryptionSettings(
-    args: PutDataCatalogEncryptionSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutDataCatalogEncryptionSettingsCommandOutput) => void),
-    cb?: (err: any, data?: PutDataCatalogEncryptionSettingsCommandOutput) => void
-  ): Promise<PutDataCatalogEncryptionSettingsCommandOutput> | void {
-    const command = new PutDataCatalogEncryptionSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the Data Catalog resource policy for access control.</p>
-   */
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutResourcePolicyCommandOutput>;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): Promise<PutResourcePolicyCommandOutput> | void {
-    const command = new PutResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Puts the metadata key value pair for a specified schema version ID. A maximum of 10 key value pairs will be allowed per schema version. They can be added over one or more calls.</p>
-   */
-  public putSchemaVersionMetadata(
-    args: PutSchemaVersionMetadataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutSchemaVersionMetadataCommandOutput>;
-  public putSchemaVersionMetadata(
-    args: PutSchemaVersionMetadataCommandInput,
-    cb: (err: any, data?: PutSchemaVersionMetadataCommandOutput) => void
-  ): void;
-  public putSchemaVersionMetadata(
-    args: PutSchemaVersionMetadataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutSchemaVersionMetadataCommandOutput) => void
-  ): void;
-  public putSchemaVersionMetadata(
-    args: PutSchemaVersionMetadataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutSchemaVersionMetadataCommandOutput) => void),
-    cb?: (err: any, data?: PutSchemaVersionMetadataCommandOutput) => void
-  ): Promise<PutSchemaVersionMetadataCommandOutput> | void {
-    const command = new PutSchemaVersionMetadataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.</p>
-   */
-  public putWorkflowRunProperties(
-    args: PutWorkflowRunPropertiesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutWorkflowRunPropertiesCommandOutput>;
-  public putWorkflowRunProperties(
-    args: PutWorkflowRunPropertiesCommandInput,
-    cb: (err: any, data?: PutWorkflowRunPropertiesCommandOutput) => void
-  ): void;
-  public putWorkflowRunProperties(
-    args: PutWorkflowRunPropertiesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutWorkflowRunPropertiesCommandOutput) => void
-  ): void;
-  public putWorkflowRunProperties(
-    args: PutWorkflowRunPropertiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutWorkflowRunPropertiesCommandOutput) => void),
-    cb?: (err: any, data?: PutWorkflowRunPropertiesCommandOutput) => void
-  ): Promise<PutWorkflowRunPropertiesCommandOutput> | void {
-    const command = new PutWorkflowRunPropertiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Queries for the schema version metadata information. </p>
-   */
-  public querySchemaVersionMetadata(
-    args: QuerySchemaVersionMetadataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<QuerySchemaVersionMetadataCommandOutput>;
-  public querySchemaVersionMetadata(
-    args: QuerySchemaVersionMetadataCommandInput,
-    cb: (err: any, data?: QuerySchemaVersionMetadataCommandOutput) => void
-  ): void;
-  public querySchemaVersionMetadata(
-    args: QuerySchemaVersionMetadataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: QuerySchemaVersionMetadataCommandOutput) => void
-  ): void;
-  public querySchemaVersionMetadata(
-    args: QuerySchemaVersionMetadataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QuerySchemaVersionMetadataCommandOutput) => void),
-    cb?: (err: any, data?: QuerySchemaVersionMetadataCommandOutput) => void
-  ): Promise<QuerySchemaVersionMetadataCommandOutput> | void {
-    const command = new QuerySchemaVersionMetadataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds a new version to the existing schema. Returns an error if new version of schema does not meet the compatibility requirements of the schema set. This API will not create a new schema set and will return a 404 error if the schema set is not already present in the Schema Registry.</p>
-   *          <p>If this is the first schema definition to be registered in the Schema Registry, this API will store the schema version and return immediately. Otherwise, this call has the potential to run longer than other operations due to compatibility modes. You can call the <code>GetSchemaVersion</code> API with the <code>SchemaVersionId</code> to check compatibility modes.</p>
-   * 	        <p>If the same schema definition is already stored in Schema Registry as a version, the schema ID of the existing schema is returned to the caller.</p>
-   */
-  public registerSchemaVersion(
-    args: RegisterSchemaVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RegisterSchemaVersionCommandOutput>;
-  public registerSchemaVersion(
-    args: RegisterSchemaVersionCommandInput,
-    cb: (err: any, data?: RegisterSchemaVersionCommandOutput) => void
-  ): void;
-  public registerSchemaVersion(
-    args: RegisterSchemaVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RegisterSchemaVersionCommandOutput) => void
-  ): void;
-  public registerSchemaVersion(
-    args: RegisterSchemaVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterSchemaVersionCommandOutput) => void),
-    cb?: (err: any, data?: RegisterSchemaVersionCommandOutput) => void
-  ): Promise<RegisterSchemaVersionCommandOutput> | void {
-    const command = new RegisterSchemaVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes a key value pair from the schema version metadata for the specified schema version ID.</p>
-   */
-  public removeSchemaVersionMetadata(
-    args: RemoveSchemaVersionMetadataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RemoveSchemaVersionMetadataCommandOutput>;
-  public removeSchemaVersionMetadata(
-    args: RemoveSchemaVersionMetadataCommandInput,
-    cb: (err: any, data?: RemoveSchemaVersionMetadataCommandOutput) => void
-  ): void;
-  public removeSchemaVersionMetadata(
-    args: RemoveSchemaVersionMetadataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RemoveSchemaVersionMetadataCommandOutput) => void
-  ): void;
-  public removeSchemaVersionMetadata(
-    args: RemoveSchemaVersionMetadataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveSchemaVersionMetadataCommandOutput) => void),
-    cb?: (err: any, data?: RemoveSchemaVersionMetadataCommandOutput) => void
-  ): Promise<RemoveSchemaVersionMetadataCommandOutput> | void {
-    const command = new RemoveSchemaVersionMetadataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Resets a bookmark entry.</p>
-   */
-  public resetJobBookmark(
-    args: ResetJobBookmarkCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ResetJobBookmarkCommandOutput>;
-  public resetJobBookmark(
-    args: ResetJobBookmarkCommandInput,
-    cb: (err: any, data?: ResetJobBookmarkCommandOutput) => void
-  ): void;
-  public resetJobBookmark(
-    args: ResetJobBookmarkCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ResetJobBookmarkCommandOutput) => void
-  ): void;
-  public resetJobBookmark(
-    args: ResetJobBookmarkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResetJobBookmarkCommandOutput) => void),
-    cb?: (err: any, data?: ResetJobBookmarkCommandOutput) => void
-  ): Promise<ResetJobBookmarkCommandOutput> | void {
-    const command = new ResetJobBookmarkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Restarts selected nodes of a previous partially completed workflow run and resumes the workflow run. The selected nodes and all nodes that are downstream from the selected nodes are run.</p>
-   */
-  public resumeWorkflowRun(
-    args: ResumeWorkflowRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ResumeWorkflowRunCommandOutput>;
-  public resumeWorkflowRun(
-    args: ResumeWorkflowRunCommandInput,
-    cb: (err: any, data?: ResumeWorkflowRunCommandOutput) => void
-  ): void;
-  public resumeWorkflowRun(
-    args: ResumeWorkflowRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ResumeWorkflowRunCommandOutput) => void
-  ): void;
-  public resumeWorkflowRun(
-    args: ResumeWorkflowRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResumeWorkflowRunCommandOutput) => void),
-    cb?: (err: any, data?: ResumeWorkflowRunCommandOutput) => void
-  ): Promise<ResumeWorkflowRunCommandOutput> | void {
-    const command = new ResumeWorkflowRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions. </p>
-   *          <p>You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. </p>
-   */
-  public searchTables(
-    args: SearchTablesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<SearchTablesCommandOutput>;
-  public searchTables(args: SearchTablesCommandInput, cb: (err: any, data?: SearchTablesCommandOutput) => void): void;
-  public searchTables(
-    args: SearchTablesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: SearchTablesCommandOutput) => void
-  ): void;
-  public searchTables(
-    args: SearchTablesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchTablesCommandOutput) => void),
-    cb?: (err: any, data?: SearchTablesCommandOutput) => void
-  ): Promise<SearchTablesCommandOutput> | void {
-    const command = new SearchTablesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a new run of the specified blueprint.</p>
-   */
-  public startBlueprintRun(
-    args: StartBlueprintRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartBlueprintRunCommandOutput>;
-  public startBlueprintRun(
-    args: StartBlueprintRunCommandInput,
-    cb: (err: any, data?: StartBlueprintRunCommandOutput) => void
-  ): void;
-  public startBlueprintRun(
-    args: StartBlueprintRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartBlueprintRunCommandOutput) => void
-  ): void;
-  public startBlueprintRun(
-    args: StartBlueprintRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartBlueprintRunCommandOutput) => void),
-    cb?: (err: any, data?: StartBlueprintRunCommandOutput) => void
-  ): Promise<StartBlueprintRunCommandOutput> | void {
-    const command = new StartBlueprintRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a crawl using the specified crawler, regardless
-   *       of what is scheduled. If the crawler is already running, returns a
-   *       <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException">CrawlerRunningException</a>.</p>
-   */
-  public startCrawler(
-    args: StartCrawlerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartCrawlerCommandOutput>;
-  public startCrawler(args: StartCrawlerCommandInput, cb: (err: any, data?: StartCrawlerCommandOutput) => void): void;
-  public startCrawler(
-    args: StartCrawlerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartCrawlerCommandOutput) => void
-  ): void;
-  public startCrawler(
-    args: StartCrawlerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartCrawlerCommandOutput) => void),
-    cb?: (err: any, data?: StartCrawlerCommandOutput) => void
-  ): Promise<StartCrawlerCommandOutput> | void {
-    const command = new StartCrawlerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Changes the schedule state of the specified crawler to
-   *       <code>SCHEDULED</code>, unless the crawler is already running or the
-   *       schedule state is already <code>SCHEDULED</code>.</p>
-   */
-  public startCrawlerSchedule(
-    args: StartCrawlerScheduleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartCrawlerScheduleCommandOutput>;
-  public startCrawlerSchedule(
-    args: StartCrawlerScheduleCommandInput,
-    cb: (err: any, data?: StartCrawlerScheduleCommandOutput) => void
-  ): void;
-  public startCrawlerSchedule(
-    args: StartCrawlerScheduleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartCrawlerScheduleCommandOutput) => void
-  ): void;
-  public startCrawlerSchedule(
-    args: StartCrawlerScheduleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartCrawlerScheduleCommandOutput) => void),
-    cb?: (err: any, data?: StartCrawlerScheduleCommandOutput) => void
-  ): Promise<StartCrawlerScheduleCommandOutput> | void {
-    const command = new StartCrawlerScheduleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Begins an asynchronous task to export all labeled data for a particular transform. This
-   *       task is the only label-related API call that is not part of the typical active learning
-   *       workflow. You typically use <code>StartExportLabelsTaskRun</code> when you want to work with
-   *       all of your existing labels at the same time, such as when you want to remove or change labels
-   *       that were previously submitted as truth. This API operation accepts the
-   *         <code>TransformId</code> whose labels you want to export and an Amazon Simple Storage
-   *       Service (Amazon S3) path to export the labels to. The operation returns a
-   *         <code>TaskRunId</code>. You can check on the status of your task run by calling the
-   *         <code>GetMLTaskRun</code> API.</p>
-   */
-  public startExportLabelsTaskRun(
-    args: StartExportLabelsTaskRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartExportLabelsTaskRunCommandOutput>;
-  public startExportLabelsTaskRun(
-    args: StartExportLabelsTaskRunCommandInput,
-    cb: (err: any, data?: StartExportLabelsTaskRunCommandOutput) => void
-  ): void;
-  public startExportLabelsTaskRun(
-    args: StartExportLabelsTaskRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartExportLabelsTaskRunCommandOutput) => void
-  ): void;
-  public startExportLabelsTaskRun(
-    args: StartExportLabelsTaskRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartExportLabelsTaskRunCommandOutput) => void),
-    cb?: (err: any, data?: StartExportLabelsTaskRunCommandOutput) => void
-  ): Promise<StartExportLabelsTaskRunCommandOutput> | void {
-    const command = new StartExportLabelsTaskRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Enables you to provide additional labels (examples of truth) to be used to teach the
-   *       machine learning transform and improve its quality. This API operation is generally used as
-   *       part of the active learning workflow that starts with the
-   *         <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in
-   *       improving the quality of your machine learning transform. </p>
-   *
-   *          <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue machine learning
-   *       will have generated a series of questions for humans to answer. (Answering these questions is
-   *       often called 'labeling' in the machine learning workflows). In the case of the
-   *         <code>FindMatches</code> transform, these questions are of the form, “What is the correct
-   *       way to group these rows together into groups composed entirely of matching records?” After the
-   *       labeling process is finished, users upload their answers/labels with a call to
-   *         <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes,
-   *       all future runs of the machine learning transform use the new and improved labels and perform
-   *       a higher-quality transformation.</p>
-   *
-   *          <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and
-   *       combines all labels that you upload unless you set <code>Replace</code> to true. If you set
-   *         <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all
-   *       previously uploaded labels and learns only from the exact set that you upload. Replacing
-   *       labels can be helpful if you realize that you previously uploaded incorrect labels, and you
-   *       believe that they are having a negative effect on your transform quality.</p>
-   *
-   *          <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code>
-   *       operation. </p>
-   */
-  public startImportLabelsTaskRun(
-    args: StartImportLabelsTaskRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartImportLabelsTaskRunCommandOutput>;
-  public startImportLabelsTaskRun(
-    args: StartImportLabelsTaskRunCommandInput,
-    cb: (err: any, data?: StartImportLabelsTaskRunCommandOutput) => void
-  ): void;
-  public startImportLabelsTaskRun(
-    args: StartImportLabelsTaskRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartImportLabelsTaskRunCommandOutput) => void
-  ): void;
-  public startImportLabelsTaskRun(
-    args: StartImportLabelsTaskRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartImportLabelsTaskRunCommandOutput) => void),
-    cb?: (err: any, data?: StartImportLabelsTaskRunCommandOutput) => void
-  ): Promise<StartImportLabelsTaskRunCommandOutput> | void {
-    const command = new StartImportLabelsTaskRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a job run using a job definition.</p>
-   */
-  public startJobRun(args: StartJobRunCommandInput, options?: __HttpHandlerOptions): Promise<StartJobRunCommandOutput>;
-  public startJobRun(args: StartJobRunCommandInput, cb: (err: any, data?: StartJobRunCommandOutput) => void): void;
-  public startJobRun(
-    args: StartJobRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartJobRunCommandOutput) => void
-  ): void;
-  public startJobRun(
-    args: StartJobRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartJobRunCommandOutput) => void),
-    cb?: (err: any, data?: StartJobRunCommandOutput) => void
-  ): Promise<StartJobRunCommandOutput> | void {
-    const command = new StartJobRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a task to estimate the quality of the transform. </p>
-   *
-   * 	        <p>When you provide label sets as examples of truth, Glue machine learning uses some of
-   *       those examples to learn from them. The rest of the labels are used as a test to estimate
-   *       quality.</p>
-   *
-   * 	        <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more
-   *       information about the stats of the <code>EvaluationTaskRun</code>.</p>
-   */
-  public startMLEvaluationTaskRun(
-    args: StartMLEvaluationTaskRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartMLEvaluationTaskRunCommandOutput>;
-  public startMLEvaluationTaskRun(
-    args: StartMLEvaluationTaskRunCommandInput,
-    cb: (err: any, data?: StartMLEvaluationTaskRunCommandOutput) => void
-  ): void;
-  public startMLEvaluationTaskRun(
-    args: StartMLEvaluationTaskRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartMLEvaluationTaskRunCommandOutput) => void
-  ): void;
-  public startMLEvaluationTaskRun(
-    args: StartMLEvaluationTaskRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartMLEvaluationTaskRunCommandOutput) => void),
-    cb?: (err: any, data?: StartMLEvaluationTaskRunCommandOutput) => void
-  ): Promise<StartMLEvaluationTaskRunCommandOutput> | void {
-    const command = new StartMLEvaluationTaskRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts the active learning workflow for your machine learning transform to improve the
-   *       transform's quality by generating label sets and adding labels.</p>
-   *
-   * 	        <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have
-   *       generated a "labeling set" or a set of questions for humans to answer.</p>
-   *
-   *          <p>In the case of the <code>FindMatches</code> transform, these questions are of the form,
-   *       “What is the correct way to group these rows together into groups composed entirely of
-   *       matching records?” </p>
-   *
-   *          <p>After the labeling process is finished, you can upload your labels with a call to
-   *         <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes,
-   *       all future runs of the machine learning transform will use the new and improved labels and
-   *       perform a higher-quality transformation.</p>
-   */
-  public startMLLabelingSetGenerationTaskRun(
-    args: StartMLLabelingSetGenerationTaskRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartMLLabelingSetGenerationTaskRunCommandOutput>;
-  public startMLLabelingSetGenerationTaskRun(
-    args: StartMLLabelingSetGenerationTaskRunCommandInput,
-    cb: (err: any, data?: StartMLLabelingSetGenerationTaskRunCommandOutput) => void
-  ): void;
-  public startMLLabelingSetGenerationTaskRun(
-    args: StartMLLabelingSetGenerationTaskRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartMLLabelingSetGenerationTaskRunCommandOutput) => void
-  ): void;
-  public startMLLabelingSetGenerationTaskRun(
-    args: StartMLLabelingSetGenerationTaskRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartMLLabelingSetGenerationTaskRunCommandOutput) => void),
-    cb?: (err: any, data?: StartMLLabelingSetGenerationTaskRunCommandOutput) => void
-  ): Promise<StartMLLabelingSetGenerationTaskRunCommandOutput> | void {
-    const command = new StartMLLabelingSetGenerationTaskRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts an existing trigger. See <a href="https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html">Triggering
-   *       Jobs</a> for information about how different types of trigger are
-   *       started.</p>
-   */
-  public startTrigger(
-    args: StartTriggerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartTriggerCommandOutput>;
-  public startTrigger(args: StartTriggerCommandInput, cb: (err: any, data?: StartTriggerCommandOutput) => void): void;
-  public startTrigger(
-    args: StartTriggerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartTriggerCommandOutput) => void
-  ): void;
-  public startTrigger(
-    args: StartTriggerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartTriggerCommandOutput) => void),
-    cb?: (err: any, data?: StartTriggerCommandOutput) => void
-  ): Promise<StartTriggerCommandOutput> | void {
-    const command = new StartTriggerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a new run of the specified workflow.</p>
-   */
-  public startWorkflowRun(
-    args: StartWorkflowRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartWorkflowRunCommandOutput>;
-  public startWorkflowRun(
-    args: StartWorkflowRunCommandInput,
-    cb: (err: any, data?: StartWorkflowRunCommandOutput) => void
-  ): void;
-  public startWorkflowRun(
-    args: StartWorkflowRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartWorkflowRunCommandOutput) => void
-  ): void;
-  public startWorkflowRun(
-    args: StartWorkflowRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartWorkflowRunCommandOutput) => void),
-    cb?: (err: any, data?: StartWorkflowRunCommandOutput) => void
-  ): Promise<StartWorkflowRunCommandOutput> | void {
-    const command = new StartWorkflowRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>If the specified crawler is running, stops the crawl.</p>
-   */
-  public stopCrawler(args: StopCrawlerCommandInput, options?: __HttpHandlerOptions): Promise<StopCrawlerCommandOutput>;
-  public stopCrawler(args: StopCrawlerCommandInput, cb: (err: any, data?: StopCrawlerCommandOutput) => void): void;
-  public stopCrawler(
-    args: StopCrawlerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopCrawlerCommandOutput) => void
-  ): void;
-  public stopCrawler(
-    args: StopCrawlerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopCrawlerCommandOutput) => void),
-    cb?: (err: any, data?: StopCrawlerCommandOutput) => void
-  ): Promise<StopCrawlerCommandOutput> | void {
-    const command = new StopCrawlerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the schedule state of the specified crawler to
-   *       <code>NOT_SCHEDULED</code>, but does not stop the crawler if it is
-   *       already running.</p>
-   */
-  public stopCrawlerSchedule(
-    args: StopCrawlerScheduleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopCrawlerScheduleCommandOutput>;
-  public stopCrawlerSchedule(
-    args: StopCrawlerScheduleCommandInput,
-    cb: (err: any, data?: StopCrawlerScheduleCommandOutput) => void
-  ): void;
-  public stopCrawlerSchedule(
-    args: StopCrawlerScheduleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopCrawlerScheduleCommandOutput) => void
-  ): void;
-  public stopCrawlerSchedule(
-    args: StopCrawlerScheduleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopCrawlerScheduleCommandOutput) => void),
-    cb?: (err: any, data?: StopCrawlerScheduleCommandOutput) => void
-  ): Promise<StopCrawlerScheduleCommandOutput> | void {
-    const command = new StopCrawlerScheduleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops a specified trigger.</p>
-   */
-  public stopTrigger(args: StopTriggerCommandInput, options?: __HttpHandlerOptions): Promise<StopTriggerCommandOutput>;
-  public stopTrigger(args: StopTriggerCommandInput, cb: (err: any, data?: StopTriggerCommandOutput) => void): void;
-  public stopTrigger(
-    args: StopTriggerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopTriggerCommandOutput) => void
-  ): void;
-  public stopTrigger(
-    args: StopTriggerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopTriggerCommandOutput) => void),
-    cb?: (err: any, data?: StopTriggerCommandOutput) => void
-  ): Promise<StopTriggerCommandOutput> | void {
-    const command = new StopTriggerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops the execution of the specified workflow run.</p>
-   */
-  public stopWorkflowRun(
-    args: StopWorkflowRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopWorkflowRunCommandOutput>;
-  public stopWorkflowRun(
-    args: StopWorkflowRunCommandInput,
-    cb: (err: any, data?: StopWorkflowRunCommandOutput) => void
-  ): void;
-  public stopWorkflowRun(
-    args: StopWorkflowRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopWorkflowRunCommandOutput) => void
-  ): void;
-  public stopWorkflowRun(
-    args: StopWorkflowRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopWorkflowRunCommandOutput) => void),
-    cb?: (err: any, data?: StopWorkflowRunCommandOutput) => void
-  ): Promise<StopWorkflowRunCommandOutput> | void {
-    const command = new StopWorkflowRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds tags to a resource. A tag is a label you can assign to an Amazon Web Services resource.
-   *       In Glue, you can tag only certain resources. For information about what
-   *       resources you can tag, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a>.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes tags from a resource.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a registered blueprint.</p>
-   */
-  public updateBlueprint(
-    args: UpdateBlueprintCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBlueprintCommandOutput>;
-  public updateBlueprint(
-    args: UpdateBlueprintCommandInput,
-    cb: (err: any, data?: UpdateBlueprintCommandOutput) => void
-  ): void;
-  public updateBlueprint(
-    args: UpdateBlueprintCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBlueprintCommandOutput) => void
-  ): void;
-  public updateBlueprint(
-    args: UpdateBlueprintCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBlueprintCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBlueprintCommandOutput) => void
-  ): Promise<UpdateBlueprintCommandOutput> | void {
-    const command = new UpdateBlueprintCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies an existing classifier (a <code>GrokClassifier</code>,
-   *       an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on
-   *       which field is present).</p>
-   */
-  public updateClassifier(
-    args: UpdateClassifierCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateClassifierCommandOutput>;
-  public updateClassifier(
-    args: UpdateClassifierCommandInput,
-    cb: (err: any, data?: UpdateClassifierCommandOutput) => void
-  ): void;
-  public updateClassifier(
-    args: UpdateClassifierCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateClassifierCommandOutput) => void
-  ): void;
-  public updateClassifier(
-    args: UpdateClassifierCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateClassifierCommandOutput) => void),
-    cb?: (err: any, data?: UpdateClassifierCommandOutput) => void
-  ): Promise<UpdateClassifierCommandOutput> | void {
-    const command = new UpdateClassifierCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates partition statistics of columns.</p>
-   *
-   *          <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdatePartition</code>.</p>
-   */
-  public updateColumnStatisticsForPartition(
-    args: UpdateColumnStatisticsForPartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateColumnStatisticsForPartitionCommandOutput>;
-  public updateColumnStatisticsForPartition(
-    args: UpdateColumnStatisticsForPartitionCommandInput,
-    cb: (err: any, data?: UpdateColumnStatisticsForPartitionCommandOutput) => void
-  ): void;
-  public updateColumnStatisticsForPartition(
-    args: UpdateColumnStatisticsForPartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateColumnStatisticsForPartitionCommandOutput) => void
-  ): void;
-  public updateColumnStatisticsForPartition(
-    args: UpdateColumnStatisticsForPartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateColumnStatisticsForPartitionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateColumnStatisticsForPartitionCommandOutput) => void
-  ): Promise<UpdateColumnStatisticsForPartitionCommandOutput> | void {
-    const command = new UpdateColumnStatisticsForPartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates table statistics of columns.</p>
-   *
-   * 	        <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdateTable</code>.</p>
-   */
-  public updateColumnStatisticsForTable(
-    args: UpdateColumnStatisticsForTableCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateColumnStatisticsForTableCommandOutput>;
-  public updateColumnStatisticsForTable(
-    args: UpdateColumnStatisticsForTableCommandInput,
-    cb: (err: any, data?: UpdateColumnStatisticsForTableCommandOutput) => void
-  ): void;
-  public updateColumnStatisticsForTable(
-    args: UpdateColumnStatisticsForTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateColumnStatisticsForTableCommandOutput) => void
-  ): void;
-  public updateColumnStatisticsForTable(
-    args: UpdateColumnStatisticsForTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateColumnStatisticsForTableCommandOutput) => void),
-    cb?: (err: any, data?: UpdateColumnStatisticsForTableCommandOutput) => void
-  ): Promise<UpdateColumnStatisticsForTableCommandOutput> | void {
-    const command = new UpdateColumnStatisticsForTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a connection definition in the Data Catalog.</p>
-   */
-  public updateConnection(
-    args: UpdateConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateConnectionCommandOutput>;
-  public updateConnection(
-    args: UpdateConnectionCommandInput,
-    cb: (err: any, data?: UpdateConnectionCommandOutput) => void
-  ): void;
-  public updateConnection(
-    args: UpdateConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateConnectionCommandOutput) => void
-  ): void;
-  public updateConnection(
-    args: UpdateConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateConnectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateConnectionCommandOutput) => void
-  ): Promise<UpdateConnectionCommandOutput> | void {
-    const command = new UpdateConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a crawler. If a crawler is
-   *       running, you must stop it using <code>StopCrawler</code> before updating
-   *       it.</p>
-   */
-  public updateCrawler(
-    args: UpdateCrawlerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateCrawlerCommandOutput>;
-  public updateCrawler(
-    args: UpdateCrawlerCommandInput,
-    cb: (err: any, data?: UpdateCrawlerCommandOutput) => void
-  ): void;
-  public updateCrawler(
-    args: UpdateCrawlerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateCrawlerCommandOutput) => void
-  ): void;
-  public updateCrawler(
-    args: UpdateCrawlerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCrawlerCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCrawlerCommandOutput) => void
-  ): Promise<UpdateCrawlerCommandOutput> | void {
-    const command = new UpdateCrawlerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the schedule of a crawler using a <code>cron</code> expression. </p>
-   */
-  public updateCrawlerSchedule(
-    args: UpdateCrawlerScheduleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateCrawlerScheduleCommandOutput>;
-  public updateCrawlerSchedule(
-    args: UpdateCrawlerScheduleCommandInput,
-    cb: (err: any, data?: UpdateCrawlerScheduleCommandOutput) => void
-  ): void;
-  public updateCrawlerSchedule(
-    args: UpdateCrawlerScheduleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateCrawlerScheduleCommandOutput) => void
-  ): void;
-  public updateCrawlerSchedule(
-    args: UpdateCrawlerScheduleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCrawlerScheduleCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCrawlerScheduleCommandOutput) => void
-  ): Promise<UpdateCrawlerScheduleCommandOutput> | void {
-    const command = new UpdateCrawlerScheduleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing database definition in a Data Catalog.</p>
-   */
-  public updateDatabase(
-    args: UpdateDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDatabaseCommandOutput>;
-  public updateDatabase(
-    args: UpdateDatabaseCommandInput,
-    cb: (err: any, data?: UpdateDatabaseCommandOutput) => void
-  ): void;
-  public updateDatabase(
-    args: UpdateDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDatabaseCommandOutput) => void
-  ): void;
-  public updateDatabase(
-    args: UpdateDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDatabaseCommandOutput) => void
-  ): Promise<UpdateDatabaseCommandOutput> | void {
-    const command = new UpdateDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a specified development endpoint.</p>
-   */
-  public updateDevEndpoint(
-    args: UpdateDevEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDevEndpointCommandOutput>;
-  public updateDevEndpoint(
-    args: UpdateDevEndpointCommandInput,
-    cb: (err: any, data?: UpdateDevEndpointCommandOutput) => void
-  ): void;
-  public updateDevEndpoint(
-    args: UpdateDevEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDevEndpointCommandOutput) => void
-  ): void;
-  public updateDevEndpoint(
-    args: UpdateDevEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDevEndpointCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDevEndpointCommandOutput) => void
-  ): Promise<UpdateDevEndpointCommandOutput> | void {
-    const command = new UpdateDevEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing job definition.</p>
-   */
-  public updateJob(args: UpdateJobCommandInput, options?: __HttpHandlerOptions): Promise<UpdateJobCommandOutput>;
-  public updateJob(args: UpdateJobCommandInput, cb: (err: any, data?: UpdateJobCommandOutput) => void): void;
-  public updateJob(
-    args: UpdateJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateJobCommandOutput) => void
-  ): void;
-  public updateJob(
-    args: UpdateJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateJobCommandOutput) => void),
-    cb?: (err: any, data?: UpdateJobCommandOutput) => void
-  ): Promise<UpdateJobCommandOutput> | void {
-    const command = new UpdateJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing machine learning transform. Call this operation to tune the algorithm parameters to achieve better results.</p>
-   *
-   *          <p>After calling this operation, you can call the <code>StartMLEvaluationTaskRun</code>
-   *       operation to assess how well your new parameters achieved your goals (such as improving the
-   *       quality of your machine learning transform, or making it more cost-effective).</p>
-   */
-  public updateMLTransform(
-    args: UpdateMLTransformCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateMLTransformCommandOutput>;
-  public updateMLTransform(
-    args: UpdateMLTransformCommandInput,
-    cb: (err: any, data?: UpdateMLTransformCommandOutput) => void
-  ): void;
-  public updateMLTransform(
-    args: UpdateMLTransformCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateMLTransformCommandOutput) => void
-  ): void;
-  public updateMLTransform(
-    args: UpdateMLTransformCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateMLTransformCommandOutput) => void),
-    cb?: (err: any, data?: UpdateMLTransformCommandOutput) => void
-  ): Promise<UpdateMLTransformCommandOutput> | void {
-    const command = new UpdateMLTransformCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a partition.</p>
-   */
-  public updatePartition(
-    args: UpdatePartitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdatePartitionCommandOutput>;
-  public updatePartition(
-    args: UpdatePartitionCommandInput,
-    cb: (err: any, data?: UpdatePartitionCommandOutput) => void
-  ): void;
-  public updatePartition(
-    args: UpdatePartitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdatePartitionCommandOutput) => void
-  ): void;
-  public updatePartition(
-    args: UpdatePartitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePartitionCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePartitionCommandOutput) => void
-  ): Promise<UpdatePartitionCommandOutput> | void {
-    const command = new UpdatePartitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing registry which is used to hold a collection of schemas. The updated properties relate to the registry, and do not modify any of the schemas within the registry. </p>
-   */
-  public updateRegistry(
-    args: UpdateRegistryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRegistryCommandOutput>;
-  public updateRegistry(
-    args: UpdateRegistryCommandInput,
-    cb: (err: any, data?: UpdateRegistryCommandOutput) => void
-  ): void;
-  public updateRegistry(
-    args: UpdateRegistryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRegistryCommandOutput) => void
-  ): void;
-  public updateRegistry(
-    args: UpdateRegistryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRegistryCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRegistryCommandOutput) => void
-  ): Promise<UpdateRegistryCommandOutput> | void {
-    const command = new UpdateRegistryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the description, compatibility setting, or version checkpoint for a schema set.</p>
-   * 	        <p>For updating the compatibility setting, the call will not validate compatibility for the entire set of schema versions with the new compatibility setting. If the value for <code>Compatibility</code> is provided, the <code>VersionNumber</code> (a checkpoint) is also required. The API will validate the checkpoint version number for consistency.</p>
-   *          <p>If the value for the <code>VersionNumber</code> (checkpoint) is provided, <code>Compatibility</code> is optional and this can be used to set/reset a checkpoint for the schema.</p>
-   * 	        <p>This update will happen only if the schema is in the AVAILABLE state.</p>
-   */
-  public updateSchema(
-    args: UpdateSchemaCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSchemaCommandOutput>;
-  public updateSchema(args: UpdateSchemaCommandInput, cb: (err: any, data?: UpdateSchemaCommandOutput) => void): void;
-  public updateSchema(
-    args: UpdateSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSchemaCommandOutput) => void
-  ): void;
-  public updateSchema(
-    args: UpdateSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSchemaCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSchemaCommandOutput) => void
-  ): Promise<UpdateSchemaCommandOutput> | void {
-    const command = new UpdateSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a metadata table in the Data Catalog.</p>
-   */
-  public updateTable(args: UpdateTableCommandInput, options?: __HttpHandlerOptions): Promise<UpdateTableCommandOutput>;
-  public updateTable(args: UpdateTableCommandInput, cb: (err: any, data?: UpdateTableCommandOutput) => void): void;
-  public updateTable(
-    args: UpdateTableCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateTableCommandOutput) => void
-  ): void;
-  public updateTable(
-    args: UpdateTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTableCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTableCommandOutput) => void
-  ): Promise<UpdateTableCommandOutput> | void {
-    const command = new UpdateTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a trigger definition.</p>
-   */
-  public updateTrigger(
-    args: UpdateTriggerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateTriggerCommandOutput>;
-  public updateTrigger(
-    args: UpdateTriggerCommandInput,
-    cb: (err: any, data?: UpdateTriggerCommandOutput) => void
-  ): void;
-  public updateTrigger(
-    args: UpdateTriggerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateTriggerCommandOutput) => void
-  ): void;
-  public updateTrigger(
-    args: UpdateTriggerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTriggerCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTriggerCommandOutput) => void
-  ): Promise<UpdateTriggerCommandOutput> | void {
-    const command = new UpdateTriggerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing function definition in the Data Catalog.</p>
-   */
-  public updateUserDefinedFunction(
-    args: UpdateUserDefinedFunctionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateUserDefinedFunctionCommandOutput>;
-  public updateUserDefinedFunction(
-    args: UpdateUserDefinedFunctionCommandInput,
-    cb: (err: any, data?: UpdateUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public updateUserDefinedFunction(
-    args: UpdateUserDefinedFunctionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateUserDefinedFunctionCommandOutput) => void
-  ): void;
-  public updateUserDefinedFunction(
-    args: UpdateUserDefinedFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserDefinedFunctionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserDefinedFunctionCommandOutput) => void
-  ): Promise<UpdateUserDefinedFunctionCommandOutput> | void {
-    const command = new UpdateUserDefinedFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing workflow.</p>
-   */
-  public updateWorkflow(
-    args: UpdateWorkflowCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateWorkflowCommandOutput>;
-  public updateWorkflow(
-    args: UpdateWorkflowCommandInput,
-    cb: (err: any, data?: UpdateWorkflowCommandOutput) => void
-  ): void;
-  public updateWorkflow(
-    args: UpdateWorkflowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateWorkflowCommandOutput) => void
-  ): void;
-  public updateWorkflow(
-    args: UpdateWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkflowCommandOutput) => void
-  ): Promise<UpdateWorkflowCommandOutput> | void {
-    const command = new UpdateWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Glue extends GlueClient implements Glue {}
+createAggregatedClient(commands, Glue, { paginators });

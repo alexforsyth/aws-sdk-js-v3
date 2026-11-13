@@ -1,277 +1,315 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultCodeCommitHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AssociateApprovalRuleTemplateWithRepositoryCommandInput,
   AssociateApprovalRuleTemplateWithRepositoryCommandOutput,
 } from "./commands/AssociateApprovalRuleTemplateWithRepositoryCommand";
-import {
+import type {
   BatchAssociateApprovalRuleTemplateWithRepositoriesCommandInput,
   BatchAssociateApprovalRuleTemplateWithRepositoriesCommandOutput,
 } from "./commands/BatchAssociateApprovalRuleTemplateWithRepositoriesCommand";
-import {
+import type {
   BatchDescribeMergeConflictsCommandInput,
   BatchDescribeMergeConflictsCommandOutput,
 } from "./commands/BatchDescribeMergeConflictsCommand";
-import {
+import type {
   BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput,
   BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput,
 } from "./commands/BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand";
-import { BatchGetCommitsCommandInput, BatchGetCommitsCommandOutput } from "./commands/BatchGetCommitsCommand";
-import {
+import type { BatchGetCommitsCommandInput, BatchGetCommitsCommandOutput } from "./commands/BatchGetCommitsCommand";
+import type {
   BatchGetRepositoriesCommandInput,
   BatchGetRepositoriesCommandOutput,
 } from "./commands/BatchGetRepositoriesCommand";
-import {
+import type {
   CreateApprovalRuleTemplateCommandInput,
   CreateApprovalRuleTemplateCommandOutput,
 } from "./commands/CreateApprovalRuleTemplateCommand";
-import { CreateBranchCommandInput, CreateBranchCommandOutput } from "./commands/CreateBranchCommand";
-import { CreateCommitCommandInput, CreateCommitCommandOutput } from "./commands/CreateCommitCommand";
-import {
+import type { CreateBranchCommandInput, CreateBranchCommandOutput } from "./commands/CreateBranchCommand";
+import type { CreateCommitCommandInput, CreateCommitCommandOutput } from "./commands/CreateCommitCommand";
+import type {
   CreatePullRequestApprovalRuleCommandInput,
   CreatePullRequestApprovalRuleCommandOutput,
 } from "./commands/CreatePullRequestApprovalRuleCommand";
-import { CreatePullRequestCommandInput, CreatePullRequestCommandOutput } from "./commands/CreatePullRequestCommand";
-import { CreateRepositoryCommandInput, CreateRepositoryCommandOutput } from "./commands/CreateRepositoryCommand";
-import {
+import type {
+  CreatePullRequestCommandInput,
+  CreatePullRequestCommandOutput,
+} from "./commands/CreatePullRequestCommand";
+import type { CreateRepositoryCommandInput, CreateRepositoryCommandOutput } from "./commands/CreateRepositoryCommand";
+import type {
   CreateUnreferencedMergeCommitCommandInput,
   CreateUnreferencedMergeCommitCommandOutput,
 } from "./commands/CreateUnreferencedMergeCommitCommand";
-import {
+import type {
   DeleteApprovalRuleTemplateCommandInput,
   DeleteApprovalRuleTemplateCommandOutput,
 } from "./commands/DeleteApprovalRuleTemplateCommand";
-import { DeleteBranchCommandInput, DeleteBranchCommandOutput } from "./commands/DeleteBranchCommand";
-import {
+import type { DeleteBranchCommandInput, DeleteBranchCommandOutput } from "./commands/DeleteBranchCommand";
+import type {
   DeleteCommentContentCommandInput,
   DeleteCommentContentCommandOutput,
 } from "./commands/DeleteCommentContentCommand";
-import { DeleteFileCommandInput, DeleteFileCommandOutput } from "./commands/DeleteFileCommand";
-import {
+import type { DeleteFileCommandInput, DeleteFileCommandOutput } from "./commands/DeleteFileCommand";
+import type {
   DeletePullRequestApprovalRuleCommandInput,
   DeletePullRequestApprovalRuleCommandOutput,
 } from "./commands/DeletePullRequestApprovalRuleCommand";
-import { DeleteRepositoryCommandInput, DeleteRepositoryCommandOutput } from "./commands/DeleteRepositoryCommand";
-import {
+import type { DeleteRepositoryCommandInput, DeleteRepositoryCommandOutput } from "./commands/DeleteRepositoryCommand";
+import type {
   DescribeMergeConflictsCommandInput,
   DescribeMergeConflictsCommandOutput,
 } from "./commands/DescribeMergeConflictsCommand";
-import {
+import type {
   DescribePullRequestEventsCommandInput,
   DescribePullRequestEventsCommandOutput,
 } from "./commands/DescribePullRequestEventsCommand";
-import {
+import type {
   DisassociateApprovalRuleTemplateFromRepositoryCommandInput,
   DisassociateApprovalRuleTemplateFromRepositoryCommandOutput,
 } from "./commands/DisassociateApprovalRuleTemplateFromRepositoryCommand";
-import {
+import type {
   EvaluatePullRequestApprovalRulesCommandInput,
   EvaluatePullRequestApprovalRulesCommandOutput,
 } from "./commands/EvaluatePullRequestApprovalRulesCommand";
-import {
+import type {
   GetApprovalRuleTemplateCommandInput,
   GetApprovalRuleTemplateCommandOutput,
 } from "./commands/GetApprovalRuleTemplateCommand";
-import { GetBlobCommandInput, GetBlobCommandOutput } from "./commands/GetBlobCommand";
-import { GetBranchCommandInput, GetBranchCommandOutput } from "./commands/GetBranchCommand";
-import { GetCommentCommandInput, GetCommentCommandOutput } from "./commands/GetCommentCommand";
-import {
+import type { GetBlobCommandInput, GetBlobCommandOutput } from "./commands/GetBlobCommand";
+import type {
+  GetBlobDifferencesCommandInput,
+  GetBlobDifferencesCommandOutput,
+} from "./commands/GetBlobDifferencesCommand";
+import type { GetBranchCommandInput, GetBranchCommandOutput } from "./commands/GetBranchCommand";
+import type { GetCommentCommandInput, GetCommentCommandOutput } from "./commands/GetCommentCommand";
+import type {
   GetCommentReactionsCommandInput,
   GetCommentReactionsCommandOutput,
 } from "./commands/GetCommentReactionsCommand";
-import {
+import type {
   GetCommentsForComparedCommitCommandInput,
   GetCommentsForComparedCommitCommandOutput,
 } from "./commands/GetCommentsForComparedCommitCommand";
-import {
+import type {
   GetCommentsForPullRequestCommandInput,
   GetCommentsForPullRequestCommandOutput,
 } from "./commands/GetCommentsForPullRequestCommand";
-import { GetCommitCommandInput, GetCommitCommandOutput } from "./commands/GetCommitCommand";
-import { GetDifferencesCommandInput, GetDifferencesCommandOutput } from "./commands/GetDifferencesCommand";
-import { GetFileCommandInput, GetFileCommandOutput } from "./commands/GetFileCommand";
-import { GetFolderCommandInput, GetFolderCommandOutput } from "./commands/GetFolderCommand";
-import { GetMergeCommitCommandInput, GetMergeCommitCommandOutput } from "./commands/GetMergeCommitCommand";
-import { GetMergeConflictsCommandInput, GetMergeConflictsCommandOutput } from "./commands/GetMergeConflictsCommand";
-import { GetMergeOptionsCommandInput, GetMergeOptionsCommandOutput } from "./commands/GetMergeOptionsCommand";
-import {
+import type { GetCommitCommandInput, GetCommitCommandOutput } from "./commands/GetCommitCommand";
+import type { GetDifferencesCommandInput, GetDifferencesCommandOutput } from "./commands/GetDifferencesCommand";
+import type { GetFileCommandInput, GetFileCommandOutput } from "./commands/GetFileCommand";
+import type { GetFolderCommandInput, GetFolderCommandOutput } from "./commands/GetFolderCommand";
+import type { GetMergeCommitCommandInput, GetMergeCommitCommandOutput } from "./commands/GetMergeCommitCommand";
+import type {
+  GetMergeConflictsCommandInput,
+  GetMergeConflictsCommandOutput,
+} from "./commands/GetMergeConflictsCommand";
+import type { GetMergeOptionsCommandInput, GetMergeOptionsCommandOutput } from "./commands/GetMergeOptionsCommand";
+import type {
   GetPullRequestApprovalStatesCommandInput,
   GetPullRequestApprovalStatesCommandOutput,
 } from "./commands/GetPullRequestApprovalStatesCommand";
-import { GetPullRequestCommandInput, GetPullRequestCommandOutput } from "./commands/GetPullRequestCommand";
-import {
+import type { GetPullRequestCommandInput, GetPullRequestCommandOutput } from "./commands/GetPullRequestCommand";
+import type {
   GetPullRequestOverrideStateCommandInput,
   GetPullRequestOverrideStateCommandOutput,
 } from "./commands/GetPullRequestOverrideStateCommand";
-import { GetRepositoryCommandInput, GetRepositoryCommandOutput } from "./commands/GetRepositoryCommand";
-import {
+import type { GetRepositoryCommandInput, GetRepositoryCommandOutput } from "./commands/GetRepositoryCommand";
+import type {
   GetRepositoryTriggersCommandInput,
   GetRepositoryTriggersCommandOutput,
 } from "./commands/GetRepositoryTriggersCommand";
-import {
+import type {
   ListApprovalRuleTemplatesCommandInput,
   ListApprovalRuleTemplatesCommandOutput,
 } from "./commands/ListApprovalRuleTemplatesCommand";
-import {
+import type {
   ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput,
   ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput,
 } from "./commands/ListAssociatedApprovalRuleTemplatesForRepositoryCommand";
-import { ListBranchesCommandInput, ListBranchesCommandOutput } from "./commands/ListBranchesCommand";
-import { ListPullRequestsCommandInput, ListPullRequestsCommandOutput } from "./commands/ListPullRequestsCommand";
-import { ListRepositoriesCommandInput, ListRepositoriesCommandOutput } from "./commands/ListRepositoriesCommand";
-import {
+import type { ListBranchesCommandInput, ListBranchesCommandOutput } from "./commands/ListBranchesCommand";
+import type {
+  ListFileCommitHistoryCommandInput,
+  ListFileCommitHistoryCommandOutput,
+} from "./commands/ListFileCommitHistoryCommand";
+import type { ListPullRequestsCommandInput, ListPullRequestsCommandOutput } from "./commands/ListPullRequestsCommand";
+import type { ListRepositoriesCommandInput, ListRepositoriesCommandOutput } from "./commands/ListRepositoriesCommand";
+import type {
   ListRepositoriesForApprovalRuleTemplateCommandInput,
   ListRepositoriesForApprovalRuleTemplateCommandOutput,
 } from "./commands/ListRepositoriesForApprovalRuleTemplateCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   MergeBranchesByFastForwardCommandInput,
   MergeBranchesByFastForwardCommandOutput,
 } from "./commands/MergeBranchesByFastForwardCommand";
-import {
+import type {
   MergeBranchesBySquashCommandInput,
   MergeBranchesBySquashCommandOutput,
 } from "./commands/MergeBranchesBySquashCommand";
-import {
+import type {
   MergeBranchesByThreeWayCommandInput,
   MergeBranchesByThreeWayCommandOutput,
 } from "./commands/MergeBranchesByThreeWayCommand";
-import {
+import type {
   MergePullRequestByFastForwardCommandInput,
   MergePullRequestByFastForwardCommandOutput,
 } from "./commands/MergePullRequestByFastForwardCommand";
-import {
+import type {
   MergePullRequestBySquashCommandInput,
   MergePullRequestBySquashCommandOutput,
 } from "./commands/MergePullRequestBySquashCommand";
-import {
+import type {
   MergePullRequestByThreeWayCommandInput,
   MergePullRequestByThreeWayCommandOutput,
 } from "./commands/MergePullRequestByThreeWayCommand";
-import {
+import type {
   OverridePullRequestApprovalRulesCommandInput,
   OverridePullRequestApprovalRulesCommandOutput,
 } from "./commands/OverridePullRequestApprovalRulesCommand";
-import {
+import type {
   PostCommentForComparedCommitCommandInput,
   PostCommentForComparedCommitCommandOutput,
 } from "./commands/PostCommentForComparedCommitCommand";
-import {
+import type {
   PostCommentForPullRequestCommandInput,
   PostCommentForPullRequestCommandOutput,
 } from "./commands/PostCommentForPullRequestCommand";
-import { PostCommentReplyCommandInput, PostCommentReplyCommandOutput } from "./commands/PostCommentReplyCommand";
-import { PutCommentReactionCommandInput, PutCommentReactionCommandOutput } from "./commands/PutCommentReactionCommand";
-import { PutFileCommandInput, PutFileCommandOutput } from "./commands/PutFileCommand";
-import {
+import type { PostCommentReplyCommandInput, PostCommentReplyCommandOutput } from "./commands/PostCommentReplyCommand";
+import type {
+  PutCommentReactionCommandInput,
+  PutCommentReactionCommandOutput,
+} from "./commands/PutCommentReactionCommand";
+import type { PutFileCommandInput, PutFileCommandOutput } from "./commands/PutFileCommand";
+import type {
   PutRepositoryTriggersCommandInput,
   PutRepositoryTriggersCommandOutput,
 } from "./commands/PutRepositoryTriggersCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type {
   TestRepositoryTriggersCommandInput,
   TestRepositoryTriggersCommandOutput,
 } from "./commands/TestRepositoryTriggersCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateApprovalRuleTemplateContentCommandInput,
   UpdateApprovalRuleTemplateContentCommandOutput,
 } from "./commands/UpdateApprovalRuleTemplateContentCommand";
-import {
+import type {
   UpdateApprovalRuleTemplateDescriptionCommandInput,
   UpdateApprovalRuleTemplateDescriptionCommandOutput,
 } from "./commands/UpdateApprovalRuleTemplateDescriptionCommand";
-import {
+import type {
   UpdateApprovalRuleTemplateNameCommandInput,
   UpdateApprovalRuleTemplateNameCommandOutput,
 } from "./commands/UpdateApprovalRuleTemplateNameCommand";
-import { UpdateCommentCommandInput, UpdateCommentCommandOutput } from "./commands/UpdateCommentCommand";
-import {
+import type { UpdateCommentCommandInput, UpdateCommentCommandOutput } from "./commands/UpdateCommentCommand";
+import type {
   UpdateDefaultBranchCommandInput,
   UpdateDefaultBranchCommandOutput,
 } from "./commands/UpdateDefaultBranchCommand";
-import {
+import type {
   UpdatePullRequestApprovalRuleContentCommandInput,
   UpdatePullRequestApprovalRuleContentCommandOutput,
 } from "./commands/UpdatePullRequestApprovalRuleContentCommand";
-import {
+import type {
   UpdatePullRequestApprovalStateCommandInput,
   UpdatePullRequestApprovalStateCommandOutput,
 } from "./commands/UpdatePullRequestApprovalStateCommand";
-import {
+import type {
   UpdatePullRequestDescriptionCommandInput,
   UpdatePullRequestDescriptionCommandOutput,
 } from "./commands/UpdatePullRequestDescriptionCommand";
-import {
+import type {
   UpdatePullRequestStatusCommandInput,
   UpdatePullRequestStatusCommandOutput,
 } from "./commands/UpdatePullRequestStatusCommand";
-import {
+import type {
   UpdatePullRequestTitleCommandInput,
   UpdatePullRequestTitleCommandOutput,
 } from "./commands/UpdatePullRequestTitleCommand";
-import {
+import type {
   UpdateRepositoryDescriptionCommandInput,
   UpdateRepositoryDescriptionCommandOutput,
 } from "./commands/UpdateRepositoryDescriptionCommand";
-import {
+import type {
+  UpdateRepositoryEncryptionKeyCommandInput,
+  UpdateRepositoryEncryptionKeyCommandOutput,
+} from "./commands/UpdateRepositoryEncryptionKeyCommand";
+import type {
   UpdateRepositoryNameCommandInput,
   UpdateRepositoryNameCommandOutput,
 } from "./commands/UpdateRepositoryNameCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AssociateApprovalRuleTemplateWithRepositoryCommandInput
   | BatchAssociateApprovalRuleTemplateWithRepositoriesCommandInput
@@ -298,6 +336,7 @@ export type ServiceInputTypes =
   | EvaluatePullRequestApprovalRulesCommandInput
   | GetApprovalRuleTemplateCommandInput
   | GetBlobCommandInput
+  | GetBlobDifferencesCommandInput
   | GetBranchCommandInput
   | GetCommentCommandInput
   | GetCommentReactionsCommandInput
@@ -318,6 +357,7 @@ export type ServiceInputTypes =
   | ListApprovalRuleTemplatesCommandInput
   | ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput
   | ListBranchesCommandInput
+  | ListFileCommitHistoryCommandInput
   | ListPullRequestsCommandInput
   | ListRepositoriesCommandInput
   | ListRepositoriesForApprovalRuleTemplateCommandInput
@@ -349,8 +389,12 @@ export type ServiceInputTypes =
   | UpdatePullRequestStatusCommandInput
   | UpdatePullRequestTitleCommandInput
   | UpdateRepositoryDescriptionCommandInput
+  | UpdateRepositoryEncryptionKeyCommandInput
   | UpdateRepositoryNameCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AssociateApprovalRuleTemplateWithRepositoryCommandOutput
   | BatchAssociateApprovalRuleTemplateWithRepositoriesCommandOutput
@@ -377,6 +421,7 @@ export type ServiceOutputTypes =
   | EvaluatePullRequestApprovalRulesCommandOutput
   | GetApprovalRuleTemplateCommandOutput
   | GetBlobCommandOutput
+  | GetBlobDifferencesCommandOutput
   | GetBranchCommandOutput
   | GetCommentCommandOutput
   | GetCommentReactionsCommandOutput
@@ -397,6 +442,7 @@ export type ServiceOutputTypes =
   | ListApprovalRuleTemplatesCommandOutput
   | ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput
   | ListBranchesCommandOutput
+  | ListFileCommitHistoryCommandOutput
   | ListPullRequestsCommandOutput
   | ListRepositoriesCommandOutput
   | ListRepositoriesForApprovalRuleTemplateCommandOutput
@@ -428,20 +474,24 @@ export type ServiceOutputTypes =
   | UpdatePullRequestStatusCommandOutput
   | UpdatePullRequestTitleCommandOutput
   | UpdateRepositoryDescriptionCommandOutput
+  | UpdateRepositoryEncryptionKeyCommandOutput
   | UpdateRepositoryNameCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -453,7 +503,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -492,25 +542,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -523,137 +564,197 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type CodeCommitClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of CodeCommitClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type CodeCommitClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of CodeCommitClient class constructor that set the region, credentials and other options.
  */
 export interface CodeCommitClientConfig extends CodeCommitClientConfigType {}
 
-type CodeCommitClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of CodeCommitClient class. This is resolved and normalized from the {@link CodeCommitClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type CodeCommitClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of CodeCommitClient class. This is resolved and normalized from the {@link CodeCommitClientConfig | constructor configuration interface}.
  */
 export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolvedConfigType {}
 
 /**
- * <fullname>AWS CodeCommit</fullname>
- *         <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for
- *             AWS CodeCommit API along with usage examples.</p>
- *         <p>You can use the AWS CodeCommit API to work with the following objects:</p>
- *
- *             <p>Repositories, by calling the following:</p>
- *           <ul>
+ * <fullname>
+ *             CodeCommit
+ *          </fullname>
+ *          <p>This is the <i>
+ *                CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for
+ *             CodeCommit API along with usage examples.</p>
+ *          <p>You can use the CodeCommit API to work with the following objects:</p>
+ *          <p>Repositories, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                   <p>
- *                   <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p>
+ *                <p>
+ *                   <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your Amazon Web Services account.</p>
  *             </li>
  *             <li>
- *                   <p>
- *                   <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p>
+ *                <p>
+ *                   <a>CreateRepository</a>, which creates an CodeCommit repository.</p>
  *             </li>
  *             <li>
- *                   <p>
- *                   <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p>
+ *                <p>
+ *                   <a>DeleteRepository</a>, which deletes an CodeCommit repository.</p>
  *             </li>
  *             <li>
- *                   <p>
+ *                <p>
  *                   <a>GetRepository</a>, which returns information about a specified repository.</p>
  *             </li>
  *             <li>
- *                   <p>
- *                   <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p>
+ *                <p>
+ *                   <a>ListRepositories</a>, which lists all CodeCommit repositories associated with your Amazon Web Services account.</p>
  *             </li>
  *             <li>
- *                   <p>
+ *                <p>
  *                   <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p>
- *               </li>
+ *             </li>
  *             <li>
- *                   <p>
+ *                <p>
+ *                   <a>UpdateRepositoryEncryptionKey</a>, which updates the Key Management Service encryption key used
+ *               to encrypt and decrypt a repository.</p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <a>UpdateRepositoryName</a>, which changes the name of the
  *                     repository. If you change the name of a repository, no other users of that
  *                     repository can access it until you send them the new HTTPS or SSH URL to
  *                     use.</p>
  *             </li>
  *          </ul>
- *
- *             <p>Branches, by calling the following:</p>
- *             <ul>
+ *          <p>Branches, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                     <p>
+ *                <p>
  *                   <a>CreateBranch</a>, which creates a branch in a specified
  *                     repository.</p>
  *             </li>
  *             <li>
- *                     <p>
+ *                <p>
  *                   <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p>
- *                 </li>
+ *             </li>
  *             <li>
- *                     <p>
+ *                <p>
  *                   <a>GetBranch</a>, which returns information about a specified branch.</p>
  *             </li>
  *             <li>
- *                     <p>
+ *                <p>
  *                   <a>ListBranches</a>, which lists all branches for a specified repository.</p>
  *             </li>
  *             <li>
- *                     <p>
+ *                <p>
  *                   <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p>
  *             </li>
  *          </ul>
- *
- *         <p>Files, by calling the following:</p>
- *         <ul>
+ *          <p>Files, by calling the following:</p>
+ *          <ul>
  *             <li>
  *                <p>
  *                   <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetBlob</a>, which returns the base-64 encoded content of an
  *                     individual Git blob object in a repository.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a>GetBlobDifferences</a>, which returns a structured, line-level
+ *                     diff between two blob versions in a repository, with optional surrounding
+ *                     context lines.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -665,85 +766,81 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *             </li>
  *             <li>
  *                <p>
+ *                   <a>ListFileCommitHistory</a>, which retrieves a list of commits and changes to a specified file. </p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <a>PutFile</a>, which adds or modifies a single file in a specified repository and branch.</p>
  *             </li>
  *          </ul>
- *
- *
- *             <p>Commits, by calling the following:</p>
- *               <ul>
+ *          <p>Commits, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                       <p>
+ *                <p>
  *                   <a>BatchGetCommits</a>, which returns information about one or more commits in a repository.</p>
- *                   </li>
+ *             </li>
  *             <li>
  *                <p>
  *                   <a>CreateCommit</a>, which creates a commit for changes to a repository.</p>
  *             </li>
  *             <li>
- *                       <p>
+ *                <p>
  *                   <a>GetCommit</a>, which returns information about  a commit, including commit
  *                           messages and author and committer information.</p>
- *                   </li>
+ *             </li>
  *             <li>
- *                       <p>
+ *                <p>
  *                   <a>GetDifferences</a>, which returns information about the
  *                     differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID,
  *                     or other fully qualified reference).</p>
- *                   </li>
+ *             </li>
  *          </ul>
- *
- *
- *         <p>Merges, by calling the following:</p>
- *         <ul>
+ *          <p>Merges, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>BatchDescribeMergeConflicts</a>, which returns information about conflicts in a merge between commits in a repository.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>CreateUnreferencedMergeCommit</a>, which creates an unreferenced commit between two branches or commits for the
  *                     purpose of comparing them and identifying any potential conflicts.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>DescribeMergeConflicts</a>, which returns information about merge conflicts between the base, source, and destination versions
  *                     of a file in a potential merge.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetMergeCommit</a>, which returns information about the merge between a source and destination commit. </p>
- *
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetMergeConflicts</a>, which returns information about merge conflicts
  *                     between the source and destination branch in a pull request.</p>
  *             </li>
  *             <li>
- *
- *                 <p>
+ *                <p>
  *                   <a>GetMergeOptions</a>, which returns information about the available merge options between two branches or commit specifiers.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>MergeBranchesByFastForward</a>, which merges two branches using the fast-forward merge option.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>MergeBranchesBySquash</a>, which merges two branches using the squash merge option.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>MergeBranchesByThreeWay</a>, which merges two branches using the three-way merge option.</p>
  *             </li>
  *          </ul>
- *
- *
- *         <p>Pull requests, by calling the following:</p>
- *         <ul>
+ *          <p>Pull requests, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p>
  *             </li>
  *             <li>
@@ -755,7 +852,7 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *                   <a>DeletePullRequestApprovalRule</a>, which deletes an approval rule for a specified pull request.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p>
  *             </li>
  *             <li>
@@ -763,12 +860,11 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *                   <a>EvaluatePullRequestApprovalRules</a>, which evaluates whether a pull request has met all the conditions specified in its associated approval rules.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p>
  *             </li>
  *             <li>
- *
- *                 <p>
+ *                <p>
  *                   <a>GetPullRequest</a>, which returns information about a specified pull request.</p>
  *             </li>
  *             <li>
@@ -781,22 +877,22 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *             pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>ListPullRequests</a>, which lists all pull requests for a repository.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination
  *                     branch for that pull request using the fast-forward merge option.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>MergePullRequestBySquash</a>, which merges the source destination branch of a pull request into the specified destination
  *                 branch for that pull request using the squash merge option.</p>
  *             </li>
  *             <li>
- *                 <p>
- *                   <a>MergePullRequestByThreeWay</a>. which merges the source destination branch of a pull request into the specified destination
+ *                <p>
+ *                   <a>MergePullRequestByThreeWay</a>, which merges the source destination branch of a pull request into the specified destination
  *                 branch for that pull request using the three-way merge option.</p>
  *             </li>
  *             <li>
@@ -804,7 +900,7 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *                   <a>OverridePullRequestApprovalRules</a>, which sets aside all approval rule requirements for a pull request.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p>
  *             </li>
  *             <li>
@@ -816,33 +912,32 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *                   <a>UpdatePullRequestApprovalState</a>, which updates the state of an approval on a pull request.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p>
  *             </li>
  *          </ul>
- *
- *         <p>Approval rule templates, by calling the following:</p>
- *         <ul>
+ *          <p>Approval rule templates, by calling the following:</p>
+ *          <ul>
  *             <li>
  *                <p>
  *                   <a>AssociateApprovalRuleTemplateWithRepository</a>, which associates a template
  *                     with a specified repository. After the template is associated with a repository,
- *                     AWS CodeCommit creates approval rules that match the template conditions on
+ *                     CodeCommit creates approval rules that match the template conditions on
  *                     every pull request created in the specified repository.</p>
  *             </li>
  *             <li>
  *                <p>
  *                   <a>BatchAssociateApprovalRuleTemplateWithRepositories</a>, which associates a
  *                     template with one or more specified repositories. After the template is
- *                     associated with a repository, AWS CodeCommit creates approval rules that match
+ *                     associated with a repository, CodeCommit creates approval rules that match
  *                     the template conditions on every pull request created in the specified
  *                     repositories.</p>
  *             </li>
@@ -856,7 +951,7 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *             <li>
  *                <p>
  *                   <a>CreateApprovalRuleTemplate</a>, which creates a template for approval rules that can then be associated with one or more repositories
- *              in your AWS account.</p>
+ *              in your Amazon Web Services account.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -875,7 +970,7 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *             </li>
  *             <li>
  *                <p>
- *                   <a>ListApprovalRuleTemplates</a>, which lists all approval rule templates in the AWS Region in your AWS account.</p>
+ *                   <a>ListApprovalRuleTemplates</a>, which lists all approval rule templates in the Amazon Web Services Region in your Amazon Web Services account.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -899,32 +994,31 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *                   <a>UpdateApprovalRuleTemplateContent</a>, which updates the content of an approval rule template.</p>
  *             </li>
  *          </ul>
- *
- *         <p>Comments in a repository, by calling the following:</p>
- *         <ul>
+ *          <p>Comments in a repository, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetComment</a>, which returns information about a comment on a commit.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetCommentReactions</a>, which returns information about emoji reactions to comments.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers
  *                     in a repository.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>PostCommentReply</a>, which creates a reply to a comment.</p>
  *             </li>
  *             <li>
@@ -932,50 +1026,46 @@ export interface CodeCommitClientResolvedConfig extends CodeCommitClientResolved
  *                   <a>PutCommentReaction</a>, which creates or updates an emoji reaction to a comment.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p>
  *             </li>
  *          </ul>
- *
- *         <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p>
- *         <ul>
+ *          <p>Tags used to tag resources in CodeCommit (not Git tags), by calling the following:</p>
+ *          <ul>
  *             <li>
  *                <p>
- *                   <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p>
+ *                   <a>ListTagsForResource</a>, which gets information about Amazon Web Servicestags for a specified Amazon Resource Name (ARN) in CodeCommit.</p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p>
+ *                   <a>TagResource</a>, which adds or updates tags for a resource in CodeCommit.</p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p>
+ *                   <a>UntagResource</a>, which removes tags for a resource in CodeCommit.</p>
  *             </li>
  *          </ul>
- *
- *             <p>Triggers, by calling the following:</p>
- *                 <ul>
+ *          <p>Triggers, by calling the following:</p>
+ *          <ul>
  *             <li>
- *                         <p>
+ *                <p>
  *                   <a>GetRepositoryTriggers</a>, which returns information about triggers configured
  *                             for a repository.</p>
  *             </li>
  *             <li>
- *                         <p>
+ *                <p>
  *                   <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can
  *                             be used to create or delete triggers.</p>
  *             </li>
  *             <li>
- *                         <p>
+ *                <p>
  *                   <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger
  *                             by sending data to the trigger target.</p>
  *             </li>
  *          </ul>
- *
- *
- *
- *
- *         <p>For information about how to use AWS CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>
+ *          <p>For information about how to use CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">
+ *                CodeCommit User Guide</a>.</p>
+ * @public
  */
 export class CodeCommitClient extends __Client<
   __HttpHandlerOptions,
@@ -988,22 +1078,36 @@ export class CodeCommitClient extends __Client<
    */
   readonly config: CodeCommitClientResolvedConfig;
 
-  constructor(configuration: CodeCommitClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<CodeCommitClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultCodeCommitHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: CodeCommitClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

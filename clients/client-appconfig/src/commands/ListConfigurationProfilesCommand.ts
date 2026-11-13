@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
-import { ConfigurationProfiles, ListConfigurationProfilesRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListConfigurationProfilesCommand,
-  serializeAws_restJson1ListConfigurationProfilesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigurationProfiles, ListConfigurationProfilesRequest } from "../models/models_0";
+import { ListConfigurationProfiles$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListConfigurationProfilesCommand}.
+ */
 export interface ListConfigurationProfilesCommandInput extends ListConfigurationProfilesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListConfigurationProfilesCommand}.
+ */
 export interface ListConfigurationProfilesCommandOutput extends ConfigurationProfiles, __MetadataBearer {}
 
 /**
@@ -28,71 +29,93 @@ export interface ListConfigurationProfilesCommandOutput extends ConfigurationPro
  * ```javascript
  * import { AppConfigClient, ListConfigurationProfilesCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
  * // const { AppConfigClient, ListConfigurationProfilesCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * // import type { AppConfigClientConfig } from "@aws-sdk/client-appconfig";
+ * const config = {}; // type is AppConfigClientConfig
  * const client = new AppConfigClient(config);
+ * const input = { // ListConfigurationProfilesRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Type: "STRING_VALUE",
+ * };
  * const command = new ListConfigurationProfilesCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigurationProfiles
+ * //   Items: [ // ConfigurationProfileSummaryList
+ * //     { // ConfigurationProfileSummary
+ * //       ApplicationId: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       LocationUri: "STRING_VALUE",
+ * //       ValidatorTypes: [ // ValidatorTypeList
+ * //         "JSON_SCHEMA" || "LAMBDA",
+ * //       ],
+ * //       Type: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListConfigurationProfilesCommandInput - {@link ListConfigurationProfilesCommandInput}
+ * @returns {@link ListConfigurationProfilesCommandOutput}
  * @see {@link ListConfigurationProfilesCommandInput} for command's `input` shape.
  * @see {@link ListConfigurationProfilesCommandOutput} for command's `response` shape.
- * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for AppConfigClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the AppConfig service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link AppConfigServiceException}
+ * <p>Base exception class for all service exceptions from AppConfig service.</p>
+ *
+ *
+ * @example To list the available configuration profiles
+ * ```javascript
+ * // The following list-configuration-profiles example lists the available configuration profiles for the specified application.
+ * const input = {
+ *   ApplicationId: "339ohji"
+ * };
+ * const command = new ListConfigurationProfilesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Items: [
+ *     {
+ *       ApplicationId: "339ohji",
+ *       Id: "ur8hx2f",
+ *       LocationUri: "ssm-parameter://Example-Parameter",
+ *       Name: "Example-Configuration-Profile"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListConfigurationProfilesCommand extends $Command<
-  ListConfigurationProfilesCommandInput,
-  ListConfigurationProfilesCommandOutput,
-  AppConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListConfigurationProfilesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListConfigurationProfilesCommandInput, ListConfigurationProfilesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigClient";
-    const commandName = "ListConfigurationProfilesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListConfigurationProfilesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigurationProfiles.filterSensitiveLog,
+export class ListConfigurationProfilesCommand extends command<ListConfigurationProfilesCommandInput, ListConfigurationProfilesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListConfigurationProfiles",
+  ListConfigurationProfiles$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListConfigurationProfilesRequest;
+      output: ConfigurationProfiles;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListConfigurationProfilesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListConfigurationProfilesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListConfigurationProfilesCommandOutput> {
-    return deserializeAws_restJson1ListConfigurationProfilesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListConfigurationProfilesCommandInput;
+      output: ListConfigurationProfilesCommandOutput;
+    };
+  };
 }

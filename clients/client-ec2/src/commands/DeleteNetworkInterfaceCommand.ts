@@ -1,95 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteNetworkInterfaceRequest } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteNetworkInterfaceCommand,
-  serializeAws_ec2DeleteNetworkInterfaceCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteNetworkInterfaceRequest } from "../models/models_3";
+import { DeleteNetworkInterface$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteNetworkInterfaceCommand}.
+ */
 export interface DeleteNetworkInterfaceCommandInput extends DeleteNetworkInterfaceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteNetworkInterfaceCommand}.
+ */
 export interface DeleteNetworkInterfaceCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes the specified network interface. You must detach the network interface before you can delete it.</p>
+ * <p>Deletes the specified network interface. You must detach the network interface before
+ *             you can delete it.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DeleteNetworkInterfaceCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteNetworkInterfaceCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteNetworkInterfaceRequest
+ *   DryRun: true || false,
+ *   NetworkInterfaceId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteNetworkInterfaceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteNetworkInterfaceCommandInput - {@link DeleteNetworkInterfaceCommandInput}
+ * @returns {@link DeleteNetworkInterfaceCommandOutput}
  * @see {@link DeleteNetworkInterfaceCommandInput} for command's `input` shape.
  * @see {@link DeleteNetworkInterfaceCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To delete a network interface
+ * ```javascript
+ * // This example deletes the specified network interface.
+ * const input = {
+ *   NetworkInterfaceId: "eni-e5aa89a3"
+ * };
+ * const command = new DeleteNetworkInterfaceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteNetworkInterfaceCommand extends $Command<
-  DeleteNetworkInterfaceCommandInput,
-  DeleteNetworkInterfaceCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteNetworkInterfaceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteNetworkInterfaceCommandInput, DeleteNetworkInterfaceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteNetworkInterfaceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteNetworkInterfaceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteNetworkInterfaceCommand extends command<DeleteNetworkInterfaceCommandInput, DeleteNetworkInterfaceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteNetworkInterface",
+  DeleteNetworkInterface$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNetworkInterfaceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteNetworkInterfaceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteNetworkInterfaceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteNetworkInterfaceCommandOutput> {
-    return deserializeAws_ec2DeleteNetworkInterfaceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteNetworkInterfaceCommandInput;
+      output: DeleteNetworkInterfaceCommandOutput;
+    };
+  };
 }

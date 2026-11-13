@@ -1,99 +1,130 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetApplicationRequest, GetApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApplicationCommand,
-  serializeAws_restJson1GetApplicationCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceCatalogAppRegistryClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ServiceCatalogAppRegistryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApplicationRequest, GetApplicationResponse } from "../models/models_0";
+import { GetApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApplicationCommand}.
+ */
 export interface GetApplicationCommandInput extends GetApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApplicationCommand}.
+ */
 export interface GetApplicationCommandOutput extends GetApplicationResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.</p>
+ * <p>
+ *        Retrieves metadata information
+ *        about one
+ *        of your applications.
+ *        The application can be specified
+ *        by its ARN, ID, or name
+ *        (which is unique
+ *        within one account
+ *        in one region
+ *        at a given point
+ *        in time).
+ *        Specify
+ *        by ARN or ID
+ *        in automated workflows
+ *        if you want
+ *        to make sure
+ *        that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown,
+ *        avoiding the ABA addressing problem.
+ *      </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceCatalogAppRegistryClient, GetApplicationCommand } from "@aws-sdk/client-service-catalog-appregistry"; // ES Modules import
  * // const { ServiceCatalogAppRegistryClient, GetApplicationCommand } = require("@aws-sdk/client-service-catalog-appregistry"); // CommonJS import
+ * // import type { ServiceCatalogAppRegistryClientConfig } from "@aws-sdk/client-service-catalog-appregistry";
+ * const config = {}; // type is ServiceCatalogAppRegistryClientConfig
  * const client = new ServiceCatalogAppRegistryClient(config);
+ * const input = { // GetApplicationRequest
+ *   application: "STRING_VALUE", // required
+ * };
  * const command = new GetApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // GetApplicationResponse
+ * //   id: "STRING_VALUE",
+ * //   arn: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   creationTime: new Date("TIMESTAMP"),
+ * //   lastUpdateTime: new Date("TIMESTAMP"),
+ * //   associatedResourceCount: Number("int"),
+ * //   tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   integrations: { // Integrations
+ * //     resourceGroup: { // ResourceGroup
+ * //       state: "CREATING" || "CREATE_COMPLETE" || "CREATE_FAILED" || "UPDATING" || "UPDATE_COMPLETE" || "UPDATE_FAILED",
+ * //       arn: "STRING_VALUE",
+ * //       errorMessage: "STRING_VALUE",
+ * //     },
+ * //     applicationTagResourceGroup: {
+ * //       state: "CREATING" || "CREATE_COMPLETE" || "CREATE_FAILED" || "UPDATING" || "UPDATE_COMPLETE" || "UPDATE_FAILED",
+ * //       arn: "STRING_VALUE",
+ * //       errorMessage: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   applicationTag: { // ApplicationTagDefinition
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetApplicationCommandInput - {@link GetApplicationCommandInput}
+ * @returns {@link GetApplicationCommandOutput}
  * @see {@link GetApplicationCommandInput} for command's `input` shape.
  * @see {@link GetApplicationCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for ServiceCatalogAppRegistryClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when processing the request (for example, a resource with the given
+ *       name already exists within the account).</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service is experiencing internal problems.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has invalid or missing parameters.</p>
+ *
+ * @throws {@link ServiceCatalogAppRegistryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalogAppRegistry service.</p>
+ *
+ *
+ * @public
  */
-export class GetApplicationCommand extends $Command<
-  GetApplicationCommandInput,
-  GetApplicationCommandOutput,
-  ServiceCatalogAppRegistryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogAppRegistryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApplicationCommandInput, GetApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogAppRegistryClient";
-    const commandName = "GetApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetApplicationResponse.filterSensitiveLog,
+export class GetApplicationCommand extends command<GetApplicationCommandInput, GetApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApplication",
+  GetApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApplicationRequest;
+      output: GetApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApplicationCommandOutput> {
-    return deserializeAws_restJson1GetApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApplicationCommandInput;
+      output: GetApplicationCommandOutput;
+    };
+  };
 }

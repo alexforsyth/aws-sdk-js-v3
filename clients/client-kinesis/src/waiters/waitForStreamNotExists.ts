@@ -1,16 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeStreamCommand, DescribeStreamCommandInput } from "../commands/DescribeStreamCommand";
-import { KinesisClient } from "../KinesisClient";
+import {
+  type DescribeStreamCommandInput,
+  type DescribeStreamCommandOutput,
+  DescribeStreamCommand,
+} from "../commands/DescribeStreamCommand";
+import type { KinesisClient } from "../KinesisClient";
+import type { ResourceNotFoundException } from "../models/errors";
+import type { KinesisServiceException } from "../models/KinesisServiceException";
 
-const checkState = async (client: KinesisClient, input: DescribeStreamCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: KinesisClient, input: DescribeStreamCommandInput): Promise<WaiterResult<DescribeStreamCommandOutput | KinesisServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeStreamCommand(input));
+    let result: DescribeStreamCommandOutput & any = await client.send(new DescribeStreamCommand(input));
     reason = result;
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -23,7 +36,7 @@ const checkState = async (client: KinesisClient, input: DescribeStreamCommandInp
 export const waitForStreamNotExists = async (
   params: WaiterConfiguration<KinesisClient>,
   input: DescribeStreamCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeStreamCommandOutput | KinesisServiceException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -35,8 +48,8 @@ export const waitForStreamNotExists = async (
 export const waitUntilStreamNotExists = async (
   params: WaiterConfiguration<KinesisClient>,
   input: DescribeStreamCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundException>;
 };

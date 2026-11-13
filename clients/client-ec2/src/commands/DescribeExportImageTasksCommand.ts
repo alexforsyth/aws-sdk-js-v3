@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeExportImageTasksRequest, DescribeExportImageTasksResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeExportImageTasksCommand,
-  serializeAws_ec2DescribeExportImageTasksCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeExportImageTasksRequest, DescribeExportImageTasksResult } from "../models/models_4";
+import { DescribeExportImageTasks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeExportImageTasksCommand}.
+ */
 export interface DescribeExportImageTasksCommandInput extends DescribeExportImageTasksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeExportImageTasksCommand}.
+ */
 export interface DescribeExportImageTasksCommandOutput extends DescribeExportImageTasksResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,80 @@ export interface DescribeExportImageTasksCommandOutput extends DescribeExportIma
  * ```javascript
  * import { EC2Client, DescribeExportImageTasksCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeExportImageTasksCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeExportImageTasksRequest
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   ExportImageTaskIds: [ // ExportImageTaskIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeExportImageTasksCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeExportImageTasksResult
+ * //   ExportImageTasks: [ // ExportImageTaskList
+ * //     { // ExportImageTask
+ * //       Description: "STRING_VALUE",
+ * //       ExportImageTaskId: "STRING_VALUE",
+ * //       ImageId: "STRING_VALUE",
+ * //       Progress: "STRING_VALUE",
+ * //       S3ExportLocation: { // ExportTaskS3Location
+ * //         S3Bucket: "STRING_VALUE",
+ * //         S3Prefix: "STRING_VALUE",
+ * //       },
+ * //       Status: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeExportImageTasksCommandInput - {@link DescribeExportImageTasksCommandInput}
+ * @returns {@link DescribeExportImageTasksCommandOutput}
  * @see {@link DescribeExportImageTasksCommandInput} for command's `input` shape.
  * @see {@link DescribeExportImageTasksCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeExportImageTasksCommand extends $Command<
-  DescribeExportImageTasksCommandInput,
-  DescribeExportImageTasksCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeExportImageTasksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeExportImageTasksCommandInput, DescribeExportImageTasksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeExportImageTasksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeExportImageTasksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeExportImageTasksResult.filterSensitiveLog,
+export class DescribeExportImageTasksCommand extends command<DescribeExportImageTasksCommandInput, DescribeExportImageTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeExportImageTasks",
+  DescribeExportImageTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeExportImageTasksRequest;
+      output: DescribeExportImageTasksResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeExportImageTasksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeExportImageTasksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeExportImageTasksCommandOutput> {
-    return deserializeAws_ec2DescribeExportImageTasksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeExportImageTasksCommandInput;
+      output: DescribeExportImageTasksCommandOutput;
+    };
+  };
 }

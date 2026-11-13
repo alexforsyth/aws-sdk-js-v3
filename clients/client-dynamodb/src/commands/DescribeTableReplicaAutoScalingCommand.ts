@@ -1,106 +1,165 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBClient";
-import { DescribeTableReplicaAutoScalingInput, DescribeTableReplicaAutoScalingOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeTableReplicaAutoScalingCommand,
-  serializeAws_json1_0DescribeTableReplicaAutoScalingCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep3, _mw0, command } from "../commandBuilder";
+import type { DescribeTableReplicaAutoScalingInput, DescribeTableReplicaAutoScalingOutput } from "../models/models_0";
+import { DescribeTableReplicaAutoScaling$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTableReplicaAutoScalingCommand}.
+ */
 export interface DescribeTableReplicaAutoScalingCommandInput extends DescribeTableReplicaAutoScalingInput {}
-export interface DescribeTableReplicaAutoScalingCommandOutput
-  extends DescribeTableReplicaAutoScalingOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTableReplicaAutoScalingCommand}.
+ */
+export interface DescribeTableReplicaAutoScalingCommandOutput extends DescribeTableReplicaAutoScalingOutput, __MetadataBearer {}
 
 /**
  * <p>Describes auto scaling settings across replicas of the global table at once.</p>
- *          <note>
- *             <p>This operation only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> of global tables.</p>
- *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DynamoDBClient, DescribeTableReplicaAutoScalingCommand } from "@aws-sdk/client-dynamodb"; // ES Modules import
  * // const { DynamoDBClient, DescribeTableReplicaAutoScalingCommand } = require("@aws-sdk/client-dynamodb"); // CommonJS import
+ * // import type { DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
+ * const config = {}; // type is DynamoDBClientConfig
  * const client = new DynamoDBClient(config);
+ * const input = { // DescribeTableReplicaAutoScalingInput
+ *   TableName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeTableReplicaAutoScalingCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTableReplicaAutoScalingOutput
+ * //   TableAutoScalingDescription: { // TableAutoScalingDescription
+ * //     TableName: "STRING_VALUE",
+ * //     TableStatus: "CREATING" || "UPDATING" || "DELETING" || "ACTIVE" || "INACCESSIBLE_ENCRYPTION_CREDENTIALS" || "ARCHIVING" || "ARCHIVED" || "REPLICATION_NOT_AUTHORIZED",
+ * //     Replicas: [ // ReplicaAutoScalingDescriptionList
+ * //       { // ReplicaAutoScalingDescription
+ * //         RegionName: "STRING_VALUE",
+ * //         GlobalSecondaryIndexes: [ // ReplicaGlobalSecondaryIndexAutoScalingDescriptionList
+ * //           { // ReplicaGlobalSecondaryIndexAutoScalingDescription
+ * //             IndexName: "STRING_VALUE",
+ * //             IndexStatus: "CREATING" || "UPDATING" || "DELETING" || "ACTIVE",
+ * //             ProvisionedReadCapacityAutoScalingSettings: { // AutoScalingSettingsDescription
+ * //               MinimumUnits: Number("long"),
+ * //               MaximumUnits: Number("long"),
+ * //               AutoScalingDisabled: true || false,
+ * //               AutoScalingRoleArn: "STRING_VALUE",
+ * //               ScalingPolicies: [ // AutoScalingPolicyDescriptionList
+ * //                 { // AutoScalingPolicyDescription
+ * //                   PolicyName: "STRING_VALUE",
+ * //                   TargetTrackingScalingPolicyConfiguration: { // AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+ * //                     DisableScaleIn: true || false,
+ * //                     ScaleInCooldown: Number("int"),
+ * //                     ScaleOutCooldown: Number("int"),
+ * //                     TargetValue: Number("double"), // required
+ * //                   },
+ * //                 },
+ * //               ],
+ * //             },
+ * //             ProvisionedWriteCapacityAutoScalingSettings: {
+ * //               MinimumUnits: Number("long"),
+ * //               MaximumUnits: Number("long"),
+ * //               AutoScalingDisabled: true || false,
+ * //               AutoScalingRoleArn: "STRING_VALUE",
+ * //               ScalingPolicies: [
+ * //                 {
+ * //                   PolicyName: "STRING_VALUE",
+ * //                   TargetTrackingScalingPolicyConfiguration: {
+ * //                     DisableScaleIn: true || false,
+ * //                     ScaleInCooldown: Number("int"),
+ * //                     ScaleOutCooldown: Number("int"),
+ * //                     TargetValue: Number("double"), // required
+ * //                   },
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //         ],
+ * //         ReplicaProvisionedReadCapacityAutoScalingSettings: {
+ * //           MinimumUnits: Number("long"),
+ * //           MaximumUnits: Number("long"),
+ * //           AutoScalingDisabled: true || false,
+ * //           AutoScalingRoleArn: "STRING_VALUE",
+ * //           ScalingPolicies: [
+ * //             {
+ * //               PolicyName: "STRING_VALUE",
+ * //               TargetTrackingScalingPolicyConfiguration: {
+ * //                 DisableScaleIn: true || false,
+ * //                 ScaleInCooldown: Number("int"),
+ * //                 ScaleOutCooldown: Number("int"),
+ * //                 TargetValue: Number("double"), // required
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //         ReplicaProvisionedWriteCapacityAutoScalingSettings: {
+ * //           MinimumUnits: Number("long"),
+ * //           MaximumUnits: Number("long"),
+ * //           AutoScalingDisabled: true || false,
+ * //           AutoScalingRoleArn: "STRING_VALUE",
+ * //           ScalingPolicies: [
+ * //             {
+ * //               PolicyName: "STRING_VALUE",
+ * //               TargetTrackingScalingPolicyConfiguration: {
+ * //                 DisableScaleIn: true || false,
+ * //                 ScaleInCooldown: Number("int"),
+ * //                 ScaleOutCooldown: Number("int"),
+ * //                 TargetValue: Number("double"), // required
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //         ReplicaStatus: "CREATING" || "CREATION_FAILED" || "UPDATING" || "DELETING" || "ACTIVE" || "REGION_DISABLED" || "INACCESSIBLE_ENCRYPTION_CREDENTIALS" || "ARCHIVING" || "ARCHIVED" || "REPLICATION_NOT_AUTHORIZED",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeTableReplicaAutoScalingCommandInput - {@link DescribeTableReplicaAutoScalingCommandInput}
+ * @returns {@link DescribeTableReplicaAutoScalingCommandOutput}
  * @see {@link DescribeTableReplicaAutoScalingCommandInput} for command's `input` shape.
  * @see {@link DescribeTableReplicaAutoScalingCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBClientResolvedConfig | config} for DynamoDBClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access a nonexistent table or index. The resource might not
+ *             be specified correctly, or its status might not be <code>ACTIVE</code>.</p>
+ *
+ * @throws {@link DynamoDBServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTableReplicaAutoScalingCommand extends $Command<
-  DescribeTableReplicaAutoScalingCommandInput,
-  DescribeTableReplicaAutoScalingCommandOutput,
-  DynamoDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTableReplicaAutoScalingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTableReplicaAutoScalingCommandInput, DescribeTableReplicaAutoScalingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBClient";
-    const commandName = "DescribeTableReplicaAutoScalingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTableReplicaAutoScalingInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTableReplicaAutoScalingOutput.filterSensitiveLog,
+export class DescribeTableReplicaAutoScalingCommand extends command<DescribeTableReplicaAutoScalingCommandInput, DescribeTableReplicaAutoScalingCommandOutput>(
+  _ep3,
+  _mw0,
+  "DescribeTableReplicaAutoScaling",
+  DescribeTableReplicaAutoScaling$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTableReplicaAutoScalingInput;
+      output: DescribeTableReplicaAutoScalingOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeTableReplicaAutoScalingCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeTableReplicaAutoScalingCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeTableReplicaAutoScalingCommandOutput> {
-    return deserializeAws_json1_0DescribeTableReplicaAutoScalingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTableReplicaAutoScalingCommandInput;
+      output: DescribeTableReplicaAutoScalingCommandOutput;
+    };
+  };
 }

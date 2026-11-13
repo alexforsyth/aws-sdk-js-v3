@@ -1,95 +1,159 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeImageAttributeRequest, ImageAttribute } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeImageAttributeCommand,
-  serializeAws_ec2DescribeImageAttributeCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeImageAttributeRequest, ImageAttribute } from "../models/models_4";
+import { DescribeImageAttribute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeImageAttributeCommand}.
+ */
 export interface DescribeImageAttributeCommandInput extends DescribeImageAttributeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeImageAttributeCommand}.
+ */
 export interface DescribeImageAttributeCommandOutput extends ImageAttribute, __MetadataBearer {}
 
 /**
- * <p>Describes the specified attribute of the specified AMI. You can specify only one attribute at a time.</p>
+ * <p>Describes the specified attribute of the specified AMI. You can specify only one attribute
+ *       at a time.</p>
+ *          <note>
+ *             <p>The order of the elements in the response, including those within nested structures,
+ *         might vary. Applications should not assume the elements appear in a particular order.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeImageAttributeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeImageAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeImageAttributeRequest
+ *   Attribute: "description" || "kernel" || "ramdisk" || "launchPermission" || "productCodes" || "blockDeviceMapping" || "sriovNetSupport" || "bootMode" || "tpmSupport" || "uefiData" || "lastLaunchedTime" || "imdsSupport" || "deregistrationProtection", // required
+ *   ImageId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeImageAttributeCommand(input);
  * const response = await client.send(command);
+ * // { // ImageAttribute
+ * //   Description: { // AttributeValue
+ * //     Value: "STRING_VALUE",
+ * //   },
+ * //   KernelId: {
+ * //     Value: "STRING_VALUE",
+ * //   },
+ * //   RamdiskId: {
+ * //     Value: "STRING_VALUE",
+ * //   },
+ * //   SriovNetSupport: {
+ * //     Value: "STRING_VALUE",
+ * //   },
+ * //   BootMode: {
+ * //     Value: "STRING_VALUE",
+ * //   },
+ * //   TpmSupport: "<AttributeValue>",
+ * //   UefiData: "<AttributeValue>",
+ * //   LastLaunchedTime: "<AttributeValue>",
+ * //   ImdsSupport: "<AttributeValue>",
+ * //   DeregistrationProtection: "<AttributeValue>",
+ * //   ImageId: "STRING_VALUE",
+ * //   LaunchPermissions: [ // LaunchPermissionList
+ * //     { // LaunchPermission
+ * //       OrganizationArn: "STRING_VALUE",
+ * //       OrganizationalUnitArn: "STRING_VALUE",
+ * //       UserId: "STRING_VALUE",
+ * //       Group: "all",
+ * //     },
+ * //   ],
+ * //   ProductCodes: [ // ProductCodeList
+ * //     { // ProductCode
+ * //       ProductCodeId: "STRING_VALUE",
+ * //       ProductCodeType: "devpay" || "marketplace",
+ * //     },
+ * //   ],
+ * //   BlockDeviceMappings: [ // BlockDeviceMappingList
+ * //     { // BlockDeviceMapping
+ * //       Ebs: { // EbsBlockDevice
+ * //         DeleteOnTermination: true || false,
+ * //         Iops: Number("int"),
+ * //         SnapshotId: "STRING_VALUE",
+ * //         VolumeSize: Number("int"),
+ * //         VolumeType: "standard" || "io1" || "io2" || "gp2" || "sc1" || "st1" || "gp3",
+ * //         KmsKeyId: "STRING_VALUE",
+ * //         Throughput: Number("int"),
+ * //         OutpostArn: "STRING_VALUE",
+ * //         AvailabilityZone: "STRING_VALUE",
+ * //         Encrypted: true || false,
+ * //         VolumeInitializationRate: Number("int"),
+ * //         AvailabilityZoneId: "STRING_VALUE",
+ * //         EbsCardIndex: Number("int"),
+ * //       },
+ * //       NoDevice: "STRING_VALUE",
+ * //       DeviceName: "STRING_VALUE",
+ * //       VirtualName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeImageAttributeCommandInput - {@link DescribeImageAttributeCommandInput}
+ * @returns {@link DescribeImageAttributeCommandOutput}
  * @see {@link DescribeImageAttributeCommandInput} for command's `input` shape.
  * @see {@link DescribeImageAttributeCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe the launch permissions for an AMI
+ * ```javascript
+ * // This example describes the launch permissions for the specified AMI.
+ * const input = {
+ *   Attribute: "launchPermission",
+ *   ImageId: "ami-5731123e"
+ * };
+ * const command = new DescribeImageAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ImageId: "ami-5731123e",
+ *   LaunchPermissions: [
+ *     {
+ *       UserId: "123456789012"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeImageAttributeCommand extends $Command<
-  DescribeImageAttributeCommandInput,
-  DescribeImageAttributeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeImageAttributeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeImageAttributeCommandInput, DescribeImageAttributeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeImageAttributeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeImageAttributeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ImageAttribute.filterSensitiveLog,
+export class DescribeImageAttributeCommand extends command<DescribeImageAttributeCommandInput, DescribeImageAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeImageAttribute",
+  DescribeImageAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeImageAttributeRequest;
+      output: ImageAttribute;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeImageAttributeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeImageAttributeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeImageAttributeCommandOutput> {
-    return deserializeAws_ec2DescribeImageAttributeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeImageAttributeCommandInput;
+      output: DescribeImageAttributeCommandOutput;
+    };
+  };
 }

@@ -1,5 +1,25 @@
-export * from "./Wisdom";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Amazon Connect Wisdom delivers agents the information they need to solve customer issues as they're
+ *       actively speaking with customers. Agents can search across connected repositories from within
+ *       their agent desktop to find answers quickly. Use Amazon Connect Wisdom to create an assistant and a
+ *       knowledge base, for example, or manage content by uploading custom files.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./WisdomClient";
+export * from "./Wisdom";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { WisdomExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { WisdomServiceException } from "./models/WisdomServiceException";

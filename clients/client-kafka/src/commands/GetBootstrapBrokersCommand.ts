@@ -1,95 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import { GetBootstrapBrokersRequest, GetBootstrapBrokersResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetBootstrapBrokersCommand,
-  serializeAws_restJson1GetBootstrapBrokersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetBootstrapBrokersRequest, GetBootstrapBrokersResponse } from "../models/models_0";
+import { GetBootstrapBrokers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBootstrapBrokersCommand}.
+ */
 export interface GetBootstrapBrokersCommandInput extends GetBootstrapBrokersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBootstrapBrokersCommand}.
+ */
 export interface GetBootstrapBrokersCommandOutput extends GetBootstrapBrokersResponse, __MetadataBearer {}
 
 /**
- * <p>A list of brokers that a client application can use to bootstrap.</p>
+ * <p>A list of brokers that a client application can use to bootstrap. This list doesn't necessarily include all of the brokers in the cluster. The following Python 3.6 example shows how you can use the Amazon Resource Name (ARN) of a cluster to get its bootstrap brokers. If you don't know the ARN of your cluster, you can use the <code>ListClusters</code> operation to get the ARNs of all the clusters in this account and Region.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KafkaClient, GetBootstrapBrokersCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, GetBootstrapBrokersCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // GetBootstrapBrokersRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ * };
  * const command = new GetBootstrapBrokersCommand(input);
  * const response = await client.send(command);
+ * // { // GetBootstrapBrokersResponse
+ * //   BootstrapBrokerString: "STRING_VALUE",
+ * //   BootstrapBrokerStringTls: "STRING_VALUE",
+ * //   BootstrapBrokerStringSaslScram: "STRING_VALUE",
+ * //   BootstrapBrokerStringSaslIam: "STRING_VALUE",
+ * //   BootstrapBrokerStringPublicTls: "STRING_VALUE",
+ * //   BootstrapBrokerStringPublicSaslScram: "STRING_VALUE",
+ * //   BootstrapBrokerStringPublicSaslIam: "STRING_VALUE",
+ * //   BootstrapBrokerStringVpcConnectivityTls: "STRING_VALUE",
+ * //   BootstrapBrokerStringVpcConnectivitySaslScram: "STRING_VALUE",
+ * //   BootstrapBrokerStringVpcConnectivitySaslIam: "STRING_VALUE",
+ * //   BootstrapBrokerStringIpv6: "STRING_VALUE",
+ * //   BootstrapBrokerStringTlsIpv6: "STRING_VALUE",
+ * //   BootstrapBrokerStringSaslScramIpv6: "STRING_VALUE",
+ * //   BootstrapBrokerStringSaslIamIpv6: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetBootstrapBrokersCommandInput - {@link GetBootstrapBrokersCommandInput}
+ * @returns {@link GetBootstrapBrokersCommandOutput}
  * @see {@link GetBootstrapBrokersCommandInput} for command's `input` shape.
  * @see {@link GetBootstrapBrokersCommandOutput} for command's `response` shape.
- * @see {@link KafkaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class GetBootstrapBrokersCommand extends $Command<
-  GetBootstrapBrokersCommandInput,
-  GetBootstrapBrokersCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBootstrapBrokersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBootstrapBrokersCommandInput, GetBootstrapBrokersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "GetBootstrapBrokersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBootstrapBrokersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBootstrapBrokersResponse.filterSensitiveLog,
+export class GetBootstrapBrokersCommand extends command<GetBootstrapBrokersCommandInput, GetBootstrapBrokersCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBootstrapBrokers",
+  GetBootstrapBrokers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBootstrapBrokersRequest;
+      output: GetBootstrapBrokersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBootstrapBrokersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetBootstrapBrokersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBootstrapBrokersCommandOutput> {
-    return deserializeAws_restJson1GetBootstrapBrokersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBootstrapBrokersCommandInput;
+      output: GetBootstrapBrokersCommandOutput;
+    };
+  };
 }

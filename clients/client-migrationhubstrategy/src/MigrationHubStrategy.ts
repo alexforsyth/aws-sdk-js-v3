@@ -1,0 +1,631 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type GetApplicationComponentDetailsCommandInput,
+  type GetApplicationComponentDetailsCommandOutput,
+  GetApplicationComponentDetailsCommand,
+} from "./commands/GetApplicationComponentDetailsCommand";
+import {
+  type GetApplicationComponentStrategiesCommandInput,
+  type GetApplicationComponentStrategiesCommandOutput,
+  GetApplicationComponentStrategiesCommand,
+} from "./commands/GetApplicationComponentStrategiesCommand";
+import {
+  type GetAssessmentCommandInput,
+  type GetAssessmentCommandOutput,
+  GetAssessmentCommand,
+} from "./commands/GetAssessmentCommand";
+import {
+  type GetImportFileTaskCommandInput,
+  type GetImportFileTaskCommandOutput,
+  GetImportFileTaskCommand,
+} from "./commands/GetImportFileTaskCommand";
+import {
+  type GetLatestAssessmentIdCommandInput,
+  type GetLatestAssessmentIdCommandOutput,
+  GetLatestAssessmentIdCommand,
+} from "./commands/GetLatestAssessmentIdCommand";
+import {
+  type GetPortfolioPreferencesCommandInput,
+  type GetPortfolioPreferencesCommandOutput,
+  GetPortfolioPreferencesCommand,
+} from "./commands/GetPortfolioPreferencesCommand";
+import {
+  type GetPortfolioSummaryCommandInput,
+  type GetPortfolioSummaryCommandOutput,
+  GetPortfolioSummaryCommand,
+} from "./commands/GetPortfolioSummaryCommand";
+import {
+  type GetRecommendationReportDetailsCommandInput,
+  type GetRecommendationReportDetailsCommandOutput,
+  GetRecommendationReportDetailsCommand,
+} from "./commands/GetRecommendationReportDetailsCommand";
+import {
+  type GetServerDetailsCommandInput,
+  type GetServerDetailsCommandOutput,
+  GetServerDetailsCommand,
+} from "./commands/GetServerDetailsCommand";
+import {
+  type GetServerStrategiesCommandInput,
+  type GetServerStrategiesCommandOutput,
+  GetServerStrategiesCommand,
+} from "./commands/GetServerStrategiesCommand";
+import {
+  type ListAnalyzableServersCommandInput,
+  type ListAnalyzableServersCommandOutput,
+  ListAnalyzableServersCommand,
+} from "./commands/ListAnalyzableServersCommand";
+import {
+  type ListApplicationComponentsCommandInput,
+  type ListApplicationComponentsCommandOutput,
+  ListApplicationComponentsCommand,
+} from "./commands/ListApplicationComponentsCommand";
+import {
+  type ListCollectorsCommandInput,
+  type ListCollectorsCommandOutput,
+  ListCollectorsCommand,
+} from "./commands/ListCollectorsCommand";
+import {
+  type ListImportFileTaskCommandInput,
+  type ListImportFileTaskCommandOutput,
+  ListImportFileTaskCommand,
+} from "./commands/ListImportFileTaskCommand";
+import {
+  type ListServersCommandInput,
+  type ListServersCommandOutput,
+  ListServersCommand,
+} from "./commands/ListServersCommand";
+import {
+  type PutPortfolioPreferencesCommandInput,
+  type PutPortfolioPreferencesCommandOutput,
+  PutPortfolioPreferencesCommand,
+} from "./commands/PutPortfolioPreferencesCommand";
+import {
+  type StartAssessmentCommandInput,
+  type StartAssessmentCommandOutput,
+  StartAssessmentCommand,
+} from "./commands/StartAssessmentCommand";
+import {
+  type StartImportFileTaskCommandInput,
+  type StartImportFileTaskCommandOutput,
+  StartImportFileTaskCommand,
+} from "./commands/StartImportFileTaskCommand";
+import {
+  type StartRecommendationReportGenerationCommandInput,
+  type StartRecommendationReportGenerationCommandOutput,
+  StartRecommendationReportGenerationCommand,
+} from "./commands/StartRecommendationReportGenerationCommand";
+import {
+  type StopAssessmentCommandInput,
+  type StopAssessmentCommandOutput,
+  StopAssessmentCommand,
+} from "./commands/StopAssessmentCommand";
+import {
+  type UpdateApplicationComponentConfigCommandInput,
+  type UpdateApplicationComponentConfigCommandOutput,
+  UpdateApplicationComponentConfigCommand,
+} from "./commands/UpdateApplicationComponentConfigCommand";
+import {
+  type UpdateServerConfigCommandInput,
+  type UpdateServerConfigCommandOutput,
+  UpdateServerConfigCommand,
+} from "./commands/UpdateServerConfigCommand";
+import { MigrationHubStrategyClient } from "./MigrationHubStrategyClient";
+import { paginateGetServerDetails } from "./pagination/GetServerDetailsPaginator";
+import { paginateListAnalyzableServers } from "./pagination/ListAnalyzableServersPaginator";
+import { paginateListApplicationComponents } from "./pagination/ListApplicationComponentsPaginator";
+import { paginateListCollectors } from "./pagination/ListCollectorsPaginator";
+import { paginateListImportFileTask } from "./pagination/ListImportFileTaskPaginator";
+import { paginateListServers } from "./pagination/ListServersPaginator";
+
+const commands = {
+  GetApplicationComponentDetailsCommand,
+  GetApplicationComponentStrategiesCommand,
+  GetAssessmentCommand,
+  GetImportFileTaskCommand,
+  GetLatestAssessmentIdCommand,
+  GetPortfolioPreferencesCommand,
+  GetPortfolioSummaryCommand,
+  GetRecommendationReportDetailsCommand,
+  GetServerDetailsCommand,
+  GetServerStrategiesCommand,
+  ListAnalyzableServersCommand,
+  ListApplicationComponentsCommand,
+  ListCollectorsCommand,
+  ListImportFileTaskCommand,
+  ListServersCommand,
+  PutPortfolioPreferencesCommand,
+  StartAssessmentCommand,
+  StartImportFileTaskCommand,
+  StartRecommendationReportGenerationCommand,
+  StopAssessmentCommand,
+  UpdateApplicationComponentConfigCommand,
+  UpdateServerConfigCommand,
+};
+const paginators = {
+  paginateGetServerDetails,
+  paginateListAnalyzableServers,
+  paginateListApplicationComponents,
+  paginateListCollectors,
+  paginateListImportFileTask,
+  paginateListServers,
+};
+
+/**
+ * @public
+ */
+export interface MigrationHubStrategyRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MigrationHubStrategy {
+  /**
+   * @see {@link GetApplicationComponentDetailsCommand}
+   */
+  getApplicationComponentDetails(
+    args: GetApplicationComponentDetailsCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetApplicationComponentDetailsCommandOutput>;
+  getApplicationComponentDetails(
+    args: GetApplicationComponentDetailsCommandInput,
+    cb: (err: any, data?: GetApplicationComponentDetailsCommandOutput) => void
+  ): void;
+  getApplicationComponentDetails(
+    args: GetApplicationComponentDetailsCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetApplicationComponentDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationComponentStrategiesCommand}
+   */
+  getApplicationComponentStrategies(
+    args: GetApplicationComponentStrategiesCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetApplicationComponentStrategiesCommandOutput>;
+  getApplicationComponentStrategies(
+    args: GetApplicationComponentStrategiesCommandInput,
+    cb: (err: any, data?: GetApplicationComponentStrategiesCommandOutput) => void
+  ): void;
+  getApplicationComponentStrategies(
+    args: GetApplicationComponentStrategiesCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetApplicationComponentStrategiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssessmentCommand}
+   */
+  getAssessment(
+    args: GetAssessmentCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetAssessmentCommandOutput>;
+  getAssessment(
+    args: GetAssessmentCommandInput,
+    cb: (err: any, data?: GetAssessmentCommandOutput) => void
+  ): void;
+  getAssessment(
+    args: GetAssessmentCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetImportFileTaskCommand}
+   */
+  getImportFileTask(
+    args: GetImportFileTaskCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetImportFileTaskCommandOutput>;
+  getImportFileTask(
+    args: GetImportFileTaskCommandInput,
+    cb: (err: any, data?: GetImportFileTaskCommandOutput) => void
+  ): void;
+  getImportFileTask(
+    args: GetImportFileTaskCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetImportFileTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLatestAssessmentIdCommand}
+   */
+  getLatestAssessmentId(): Promise<GetLatestAssessmentIdCommandOutput>;
+  getLatestAssessmentId(
+    args: GetLatestAssessmentIdCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetLatestAssessmentIdCommandOutput>;
+  getLatestAssessmentId(
+    args: GetLatestAssessmentIdCommandInput,
+    cb: (err: any, data?: GetLatestAssessmentIdCommandOutput) => void
+  ): void;
+  getLatestAssessmentId(
+    args: GetLatestAssessmentIdCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetLatestAssessmentIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPortfolioPreferencesCommand}
+   */
+  getPortfolioPreferences(): Promise<GetPortfolioPreferencesCommandOutput>;
+  getPortfolioPreferences(
+    args: GetPortfolioPreferencesCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetPortfolioPreferencesCommandOutput>;
+  getPortfolioPreferences(
+    args: GetPortfolioPreferencesCommandInput,
+    cb: (err: any, data?: GetPortfolioPreferencesCommandOutput) => void
+  ): void;
+  getPortfolioPreferences(
+    args: GetPortfolioPreferencesCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetPortfolioPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPortfolioSummaryCommand}
+   */
+  getPortfolioSummary(): Promise<GetPortfolioSummaryCommandOutput>;
+  getPortfolioSummary(
+    args: GetPortfolioSummaryCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetPortfolioSummaryCommandOutput>;
+  getPortfolioSummary(
+    args: GetPortfolioSummaryCommandInput,
+    cb: (err: any, data?: GetPortfolioSummaryCommandOutput) => void
+  ): void;
+  getPortfolioSummary(
+    args: GetPortfolioSummaryCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetPortfolioSummaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationReportDetailsCommand}
+   */
+  getRecommendationReportDetails(
+    args: GetRecommendationReportDetailsCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetRecommendationReportDetailsCommandOutput>;
+  getRecommendationReportDetails(
+    args: GetRecommendationReportDetailsCommandInput,
+    cb: (err: any, data?: GetRecommendationReportDetailsCommandOutput) => void
+  ): void;
+  getRecommendationReportDetails(
+    args: GetRecommendationReportDetailsCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetRecommendationReportDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServerDetailsCommand}
+   */
+  getServerDetails(
+    args: GetServerDetailsCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetServerDetailsCommandOutput>;
+  getServerDetails(
+    args: GetServerDetailsCommandInput,
+    cb: (err: any, data?: GetServerDetailsCommandOutput) => void
+  ): void;
+  getServerDetails(
+    args: GetServerDetailsCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetServerDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServerStrategiesCommand}
+   */
+  getServerStrategies(
+    args: GetServerStrategiesCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<GetServerStrategiesCommandOutput>;
+  getServerStrategies(
+    args: GetServerStrategiesCommandInput,
+    cb: (err: any, data?: GetServerStrategiesCommandOutput) => void
+  ): void;
+  getServerStrategies(
+    args: GetServerStrategiesCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: GetServerStrategiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnalyzableServersCommand}
+   */
+  listAnalyzableServers(): Promise<ListAnalyzableServersCommandOutput>;
+  listAnalyzableServers(
+    args: ListAnalyzableServersCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<ListAnalyzableServersCommandOutput>;
+  listAnalyzableServers(
+    args: ListAnalyzableServersCommandInput,
+    cb: (err: any, data?: ListAnalyzableServersCommandOutput) => void
+  ): void;
+  listAnalyzableServers(
+    args: ListAnalyzableServersCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: ListAnalyzableServersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationComponentsCommand}
+   */
+  listApplicationComponents(): Promise<ListApplicationComponentsCommandOutput>;
+  listApplicationComponents(
+    args: ListApplicationComponentsCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<ListApplicationComponentsCommandOutput>;
+  listApplicationComponents(
+    args: ListApplicationComponentsCommandInput,
+    cb: (err: any, data?: ListApplicationComponentsCommandOutput) => void
+  ): void;
+  listApplicationComponents(
+    args: ListApplicationComponentsCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: ListApplicationComponentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCollectorsCommand}
+   */
+  listCollectors(): Promise<ListCollectorsCommandOutput>;
+  listCollectors(
+    args: ListCollectorsCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<ListCollectorsCommandOutput>;
+  listCollectors(
+    args: ListCollectorsCommandInput,
+    cb: (err: any, data?: ListCollectorsCommandOutput) => void
+  ): void;
+  listCollectors(
+    args: ListCollectorsCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: ListCollectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportFileTaskCommand}
+   */
+  listImportFileTask(): Promise<ListImportFileTaskCommandOutput>;
+  listImportFileTask(
+    args: ListImportFileTaskCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<ListImportFileTaskCommandOutput>;
+  listImportFileTask(
+    args: ListImportFileTaskCommandInput,
+    cb: (err: any, data?: ListImportFileTaskCommandOutput) => void
+  ): void;
+  listImportFileTask(
+    args: ListImportFileTaskCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: ListImportFileTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServersCommand}
+   */
+  listServers(): Promise<ListServersCommandOutput>;
+  listServers(
+    args: ListServersCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<ListServersCommandOutput>;
+  listServers(
+    args: ListServersCommandInput,
+    cb: (err: any, data?: ListServersCommandOutput) => void
+  ): void;
+  listServers(
+    args: ListServersCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: ListServersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutPortfolioPreferencesCommand}
+   */
+  putPortfolioPreferences(): Promise<PutPortfolioPreferencesCommandOutput>;
+  putPortfolioPreferences(
+    args: PutPortfolioPreferencesCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<PutPortfolioPreferencesCommandOutput>;
+  putPortfolioPreferences(
+    args: PutPortfolioPreferencesCommandInput,
+    cb: (err: any, data?: PutPortfolioPreferencesCommandOutput) => void
+  ): void;
+  putPortfolioPreferences(
+    args: PutPortfolioPreferencesCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: PutPortfolioPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAssessmentCommand}
+   */
+  startAssessment(): Promise<StartAssessmentCommandOutput>;
+  startAssessment(
+    args: StartAssessmentCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<StartAssessmentCommandOutput>;
+  startAssessment(
+    args: StartAssessmentCommandInput,
+    cb: (err: any, data?: StartAssessmentCommandOutput) => void
+  ): void;
+  startAssessment(
+    args: StartAssessmentCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: StartAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartImportFileTaskCommand}
+   */
+  startImportFileTask(
+    args: StartImportFileTaskCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<StartImportFileTaskCommandOutput>;
+  startImportFileTask(
+    args: StartImportFileTaskCommandInput,
+    cb: (err: any, data?: StartImportFileTaskCommandOutput) => void
+  ): void;
+  startImportFileTask(
+    args: StartImportFileTaskCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: StartImportFileTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecommendationReportGenerationCommand}
+   */
+  startRecommendationReportGeneration(): Promise<StartRecommendationReportGenerationCommandOutput>;
+  startRecommendationReportGeneration(
+    args: StartRecommendationReportGenerationCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<StartRecommendationReportGenerationCommandOutput>;
+  startRecommendationReportGeneration(
+    args: StartRecommendationReportGenerationCommandInput,
+    cb: (err: any, data?: StartRecommendationReportGenerationCommandOutput) => void
+  ): void;
+  startRecommendationReportGeneration(
+    args: StartRecommendationReportGenerationCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: StartRecommendationReportGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopAssessmentCommand}
+   */
+  stopAssessment(
+    args: StopAssessmentCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<StopAssessmentCommandOutput>;
+  stopAssessment(
+    args: StopAssessmentCommandInput,
+    cb: (err: any, data?: StopAssessmentCommandOutput) => void
+  ): void;
+  stopAssessment(
+    args: StopAssessmentCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: StopAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApplicationComponentConfigCommand}
+   */
+  updateApplicationComponentConfig(
+    args: UpdateApplicationComponentConfigCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<UpdateApplicationComponentConfigCommandOutput>;
+  updateApplicationComponentConfig(
+    args: UpdateApplicationComponentConfigCommandInput,
+    cb: (err: any, data?: UpdateApplicationComponentConfigCommandOutput) => void
+  ): void;
+  updateApplicationComponentConfig(
+    args: UpdateApplicationComponentConfigCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: UpdateApplicationComponentConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateServerConfigCommand}
+   */
+  updateServerConfig(
+    args: UpdateServerConfigCommandInput,
+    options?: MigrationHubStrategyRequestOptions
+  ): Promise<UpdateServerConfigCommandOutput>;
+  updateServerConfig(
+    args: UpdateServerConfigCommandInput,
+    cb: (err: any, data?: UpdateServerConfigCommandOutput) => void
+  ): void;
+  updateServerConfig(
+    args: UpdateServerConfigCommandInput,
+    options: MigrationHubStrategyRequestOptions,
+    cb: (err: any, data?: UpdateServerConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServerDetailsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetServerDetailsCommandOutput}.
+   */
+  paginateGetServerDetails(
+    args: GetServerDetailsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetServerDetailsCommandOutput>;
+
+  /**
+   * @see {@link ListAnalyzableServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnalyzableServersCommandOutput}.
+   */
+  paginateListAnalyzableServers(
+    args?: ListAnalyzableServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnalyzableServersCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationComponentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationComponentsCommandOutput}.
+   */
+  paginateListApplicationComponents(
+    args?: ListApplicationComponentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationComponentsCommandOutput>;
+
+  /**
+   * @see {@link ListCollectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCollectorsCommandOutput}.
+   */
+  paginateListCollectors(
+    args?: ListCollectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCollectorsCommandOutput>;
+
+  /**
+   * @see {@link ListImportFileTaskCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportFileTaskCommandOutput}.
+   */
+  paginateListImportFileTask(
+    args?: ListImportFileTaskCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportFileTaskCommandOutput>;
+
+  /**
+   * @see {@link ListServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServersCommandOutput}.
+   */
+  paginateListServers(
+    args?: ListServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServersCommandOutput>;
+}
+
+/**
+ * <fullname>Migration Hub Strategy Recommendations</fullname>
+ *          <p>This API reference provides descriptions, syntax, and other details about each of the
+ *       actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API
+ *       request parameters and the response. Alternatively, you can use one of the AWS SDKs to
+ *       access an API that is tailored to the programming language or platform that you're using. For
+ *       more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p>
+ * @public
+ */
+export class MigrationHubStrategy extends MigrationHubStrategyClient implements MigrationHubStrategy {}
+createAggregatedClient(commands, MigrationHubStrategy, { paginators });

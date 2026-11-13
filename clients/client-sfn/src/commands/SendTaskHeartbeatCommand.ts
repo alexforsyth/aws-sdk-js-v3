@@ -1,35 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SendTaskHeartbeatInput, SendTaskHeartbeatOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0SendTaskHeartbeatCommand,
-  serializeAws_json1_0SendTaskHeartbeatCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendTaskHeartbeatInput, SendTaskHeartbeatOutput } from "../models/models_0";
+import { SendTaskHeartbeat$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendTaskHeartbeatCommand}.
+ */
 export interface SendTaskHeartbeatCommandInput extends SendTaskHeartbeatInput {}
+/**
+ * @public
+ *
+ * The output of {@link SendTaskHeartbeatCommand}.
+ */
 export interface SendTaskHeartbeatCommandOutput extends SendTaskHeartbeatOutput, __MetadataBearer {}
 
 /**
- * <p>Used by activity workers and task states using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token">callback</a>
- *       pattern to report to Step Functions that the task represented by the specified
+ * <p>Used by activity workers and Task states using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token">callback</a>
+ *       pattern, and optionally Task states using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync">job run</a> pattern to report to Step Functions that the task represented by the specified
  *         <code>taskToken</code> is still making progress. This action resets the
  *         <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state
  *       machine's Amazon States Language definition (<code>HeartbeatSeconds</code>). This action does not in itself
  *       create an event in the execution history. However, if the task times out, the execution
  *       history contains an <code>ActivityTimedOut</code> entry for activities, or a
- *         <code>TaskTimedOut</code> entry for for tasks using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync">job run</a> or
+ *         <code>TaskTimedOut</code> entry for tasks using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync">job run</a> or
  *         <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token">callback</a>
  *       pattern.</p>
  *          <note>
@@ -42,68 +43,54 @@ export interface SendTaskHeartbeatCommandOutput extends SendTaskHeartbeatOutput,
  * ```javascript
  * import { SFNClient, SendTaskHeartbeatCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, SendTaskHeartbeatCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // SendTaskHeartbeatInput
+ *   taskToken: "STRING_VALUE", // required
+ * };
  * const command = new SendTaskHeartbeatCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SendTaskHeartbeatCommandInput - {@link SendTaskHeartbeatCommandInput}
+ * @returns {@link SendTaskHeartbeatCommandOutput}
  * @see {@link SendTaskHeartbeatCommandInput} for command's `input` shape.
  * @see {@link SendTaskHeartbeatCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link InvalidToken} (client fault)
+ *  <p>The provided token is not valid.</p>
+ *
+ * @throws {@link TaskDoesNotExist} (client fault)
+ *  <p>The activity does not exist.</p>
+ *
+ * @throws {@link TaskTimedOut} (client fault)
+ *  <p>The task token has either expired or the task associated with the token has already been closed.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class SendTaskHeartbeatCommand extends $Command<
-  SendTaskHeartbeatCommandInput,
-  SendTaskHeartbeatCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendTaskHeartbeatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendTaskHeartbeatCommandInput, SendTaskHeartbeatCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "SendTaskHeartbeatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendTaskHeartbeatInput.filterSensitiveLog,
-      outputFilterSensitiveLog: SendTaskHeartbeatOutput.filterSensitiveLog,
+export class SendTaskHeartbeatCommand extends command<SendTaskHeartbeatCommandInput, SendTaskHeartbeatCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendTaskHeartbeat",
+  SendTaskHeartbeat$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendTaskHeartbeatInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendTaskHeartbeatCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0SendTaskHeartbeatCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SendTaskHeartbeatCommandOutput> {
-    return deserializeAws_json1_0SendTaskHeartbeatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendTaskHeartbeatCommandInput;
+      output: SendTaskHeartbeatCommandOutput;
+    };
+  };
 }

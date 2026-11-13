@@ -1,219 +1,443 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultEKSHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  ActivateCertificateAuthorityCommandInput,
+  ActivateCertificateAuthorityCommandOutput,
+} from "./commands/ActivateCertificateAuthorityCommand";
+import type {
+  AssociateAccessPolicyCommandInput,
+  AssociateAccessPolicyCommandOutput,
+} from "./commands/AssociateAccessPolicyCommand";
+import type {
   AssociateEncryptionConfigCommandInput,
   AssociateEncryptionConfigCommandOutput,
 } from "./commands/AssociateEncryptionConfigCommand";
-import {
+import type {
   AssociateIdentityProviderConfigCommandInput,
   AssociateIdentityProviderConfigCommandOutput,
 } from "./commands/AssociateIdentityProviderConfigCommand";
-import { CreateAddonCommandInput, CreateAddonCommandOutput } from "./commands/CreateAddonCommand";
-import { CreateClusterCommandInput, CreateClusterCommandOutput } from "./commands/CreateClusterCommand";
-import {
+import type { CancelUpdateCommandInput, CancelUpdateCommandOutput } from "./commands/CancelUpdateCommand";
+import type {
+  CreateAccessEntryCommandInput,
+  CreateAccessEntryCommandOutput,
+} from "./commands/CreateAccessEntryCommand";
+import type { CreateAddonCommandInput, CreateAddonCommandOutput } from "./commands/CreateAddonCommand";
+import type { CreateCapabilityCommandInput, CreateCapabilityCommandOutput } from "./commands/CreateCapabilityCommand";
+import type {
+  CreateCertificateAuthorityCommandInput,
+  CreateCertificateAuthorityCommandOutput,
+} from "./commands/CreateCertificateAuthorityCommand";
+import type { CreateClusterCommandInput, CreateClusterCommandOutput } from "./commands/CreateClusterCommand";
+import type {
+  CreateEksAnywhereSubscriptionCommandInput,
+  CreateEksAnywhereSubscriptionCommandOutput,
+} from "./commands/CreateEksAnywhereSubscriptionCommand";
+import type {
   CreateFargateProfileCommandInput,
   CreateFargateProfileCommandOutput,
 } from "./commands/CreateFargateProfileCommand";
-import { CreateNodegroupCommandInput, CreateNodegroupCommandOutput } from "./commands/CreateNodegroupCommand";
-import { DeleteAddonCommandInput, DeleteAddonCommandOutput } from "./commands/DeleteAddonCommand";
-import { DeleteClusterCommandInput, DeleteClusterCommandOutput } from "./commands/DeleteClusterCommand";
-import {
+import type { CreateNodegroupCommandInput, CreateNodegroupCommandOutput } from "./commands/CreateNodegroupCommand";
+import type {
+  CreatePodIdentityAssociationCommandInput,
+  CreatePodIdentityAssociationCommandOutput,
+} from "./commands/CreatePodIdentityAssociationCommand";
+import type {
+  DeleteAccessEntryCommandInput,
+  DeleteAccessEntryCommandOutput,
+} from "./commands/DeleteAccessEntryCommand";
+import type { DeleteAddonCommandInput, DeleteAddonCommandOutput } from "./commands/DeleteAddonCommand";
+import type { DeleteCapabilityCommandInput, DeleteCapabilityCommandOutput } from "./commands/DeleteCapabilityCommand";
+import type {
+  DeleteCertificateAuthorityCommandInput,
+  DeleteCertificateAuthorityCommandOutput,
+} from "./commands/DeleteCertificateAuthorityCommand";
+import type { DeleteClusterCommandInput, DeleteClusterCommandOutput } from "./commands/DeleteClusterCommand";
+import type {
+  DeleteEksAnywhereSubscriptionCommandInput,
+  DeleteEksAnywhereSubscriptionCommandOutput,
+} from "./commands/DeleteEksAnywhereSubscriptionCommand";
+import type {
   DeleteFargateProfileCommandInput,
   DeleteFargateProfileCommandOutput,
 } from "./commands/DeleteFargateProfileCommand";
-import { DeleteNodegroupCommandInput, DeleteNodegroupCommandOutput } from "./commands/DeleteNodegroupCommand";
-import { DeregisterClusterCommandInput, DeregisterClusterCommandOutput } from "./commands/DeregisterClusterCommand";
-import { DescribeAddonCommandInput, DescribeAddonCommandOutput } from "./commands/DescribeAddonCommand";
-import {
+import type { DeleteNodegroupCommandInput, DeleteNodegroupCommandOutput } from "./commands/DeleteNodegroupCommand";
+import type {
+  DeletePodIdentityAssociationCommandInput,
+  DeletePodIdentityAssociationCommandOutput,
+} from "./commands/DeletePodIdentityAssociationCommand";
+import type {
+  DeregisterClusterCommandInput,
+  DeregisterClusterCommandOutput,
+} from "./commands/DeregisterClusterCommand";
+import type {
+  DescribeAccessEntryCommandInput,
+  DescribeAccessEntryCommandOutput,
+} from "./commands/DescribeAccessEntryCommand";
+import type { DescribeAddonCommandInput, DescribeAddonCommandOutput } from "./commands/DescribeAddonCommand";
+import type {
+  DescribeAddonConfigurationCommandInput,
+  DescribeAddonConfigurationCommandOutput,
+} from "./commands/DescribeAddonConfigurationCommand";
+import type {
   DescribeAddonVersionsCommandInput,
   DescribeAddonVersionsCommandOutput,
 } from "./commands/DescribeAddonVersionsCommand";
-import { DescribeClusterCommandInput, DescribeClusterCommandOutput } from "./commands/DescribeClusterCommand";
-import {
+import type {
+  DescribeCapabilityCommandInput,
+  DescribeCapabilityCommandOutput,
+} from "./commands/DescribeCapabilityCommand";
+import type {
+  DescribeCertificateAuthorityCommandInput,
+  DescribeCertificateAuthorityCommandOutput,
+} from "./commands/DescribeCertificateAuthorityCommand";
+import type { DescribeClusterCommandInput, DescribeClusterCommandOutput } from "./commands/DescribeClusterCommand";
+import type {
+  DescribeClusterVersionsCommandInput,
+  DescribeClusterVersionsCommandOutput,
+} from "./commands/DescribeClusterVersionsCommand";
+import type {
+  DescribeEksAnywhereSubscriptionCommandInput,
+  DescribeEksAnywhereSubscriptionCommandOutput,
+} from "./commands/DescribeEksAnywhereSubscriptionCommand";
+import type {
   DescribeFargateProfileCommandInput,
   DescribeFargateProfileCommandOutput,
 } from "./commands/DescribeFargateProfileCommand";
-import {
+import type {
   DescribeIdentityProviderConfigCommandInput,
   DescribeIdentityProviderConfigCommandOutput,
 } from "./commands/DescribeIdentityProviderConfigCommand";
-import { DescribeNodegroupCommandInput, DescribeNodegroupCommandOutput } from "./commands/DescribeNodegroupCommand";
-import { DescribeUpdateCommandInput, DescribeUpdateCommandOutput } from "./commands/DescribeUpdateCommand";
-import {
+import type { DescribeInsightCommandInput, DescribeInsightCommandOutput } from "./commands/DescribeInsightCommand";
+import type {
+  DescribeInsightsRefreshCommandInput,
+  DescribeInsightsRefreshCommandOutput,
+} from "./commands/DescribeInsightsRefreshCommand";
+import type {
+  DescribeNodegroupCommandInput,
+  DescribeNodegroupCommandOutput,
+} from "./commands/DescribeNodegroupCommand";
+import type {
+  DescribePodIdentityAssociationCommandInput,
+  DescribePodIdentityAssociationCommandOutput,
+} from "./commands/DescribePodIdentityAssociationCommand";
+import type { DescribeUpdateCommandInput, DescribeUpdateCommandOutput } from "./commands/DescribeUpdateCommand";
+import type {
+  DisassociateAccessPolicyCommandInput,
+  DisassociateAccessPolicyCommandOutput,
+} from "./commands/DisassociateAccessPolicyCommand";
+import type {
   DisassociateIdentityProviderConfigCommandInput,
   DisassociateIdentityProviderConfigCommandOutput,
 } from "./commands/DisassociateIdentityProviderConfigCommand";
-import { ListAddonsCommandInput, ListAddonsCommandOutput } from "./commands/ListAddonsCommand";
-import { ListClustersCommandInput, ListClustersCommandOutput } from "./commands/ListClustersCommand";
-import {
+import type {
+  ListAccessEntriesCommandInput,
+  ListAccessEntriesCommandOutput,
+} from "./commands/ListAccessEntriesCommand";
+import type {
+  ListAccessPoliciesCommandInput,
+  ListAccessPoliciesCommandOutput,
+} from "./commands/ListAccessPoliciesCommand";
+import type { ListAddonsCommandInput, ListAddonsCommandOutput } from "./commands/ListAddonsCommand";
+import type {
+  ListAssociatedAccessPoliciesCommandInput,
+  ListAssociatedAccessPoliciesCommandOutput,
+} from "./commands/ListAssociatedAccessPoliciesCommand";
+import type { ListCapabilitiesCommandInput, ListCapabilitiesCommandOutput } from "./commands/ListCapabilitiesCommand";
+import type {
+  ListCertificateAuthoritiesCommandInput,
+  ListCertificateAuthoritiesCommandOutput,
+} from "./commands/ListCertificateAuthoritiesCommand";
+import type { ListClustersCommandInput, ListClustersCommandOutput } from "./commands/ListClustersCommand";
+import type {
+  ListEksAnywhereSubscriptionsCommandInput,
+  ListEksAnywhereSubscriptionsCommandOutput,
+} from "./commands/ListEksAnywhereSubscriptionsCommand";
+import type {
   ListFargateProfilesCommandInput,
   ListFargateProfilesCommandOutput,
 } from "./commands/ListFargateProfilesCommand";
-import {
+import type {
   ListIdentityProviderConfigsCommandInput,
   ListIdentityProviderConfigsCommandOutput,
 } from "./commands/ListIdentityProviderConfigsCommand";
-import { ListNodegroupsCommandInput, ListNodegroupsCommandOutput } from "./commands/ListNodegroupsCommand";
-import {
+import type { ListInsightsCommandInput, ListInsightsCommandOutput } from "./commands/ListInsightsCommand";
+import type { ListNodegroupsCommandInput, ListNodegroupsCommandOutput } from "./commands/ListNodegroupsCommand";
+import type {
+  ListPodIdentityAssociationsCommandInput,
+  ListPodIdentityAssociationsCommandOutput,
+} from "./commands/ListPodIdentityAssociationsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListUpdatesCommandInput, ListUpdatesCommandOutput } from "./commands/ListUpdatesCommand";
-import { RegisterClusterCommandInput, RegisterClusterCommandOutput } from "./commands/RegisterClusterCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateAddonCommandInput, UpdateAddonCommandOutput } from "./commands/UpdateAddonCommand";
-import {
+import type { ListUpdatesCommandInput, ListUpdatesCommandOutput } from "./commands/ListUpdatesCommand";
+import type { RegisterClusterCommandInput, RegisterClusterCommandOutput } from "./commands/RegisterClusterCommand";
+import type {
+  StartInsightsRefreshCommandInput,
+  StartInsightsRefreshCommandOutput,
+} from "./commands/StartInsightsRefreshCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateAccessEntryCommandInput,
+  UpdateAccessEntryCommandOutput,
+} from "./commands/UpdateAccessEntryCommand";
+import type { UpdateAddonCommandInput, UpdateAddonCommandOutput } from "./commands/UpdateAddonCommand";
+import type { UpdateCapabilityCommandInput, UpdateCapabilityCommandOutput } from "./commands/UpdateCapabilityCommand";
+import type {
   UpdateClusterConfigCommandInput,
   UpdateClusterConfigCommandOutput,
 } from "./commands/UpdateClusterConfigCommand";
-import {
+import type {
   UpdateClusterVersionCommandInput,
   UpdateClusterVersionCommandOutput,
 } from "./commands/UpdateClusterVersionCommand";
-import {
+import type {
+  UpdateEksAnywhereSubscriptionCommandInput,
+  UpdateEksAnywhereSubscriptionCommandOutput,
+} from "./commands/UpdateEksAnywhereSubscriptionCommand";
+import type {
   UpdateNodegroupConfigCommandInput,
   UpdateNodegroupConfigCommandOutput,
 } from "./commands/UpdateNodegroupConfigCommand";
-import {
+import type {
   UpdateNodegroupVersionCommandInput,
   UpdateNodegroupVersionCommandOutput,
 } from "./commands/UpdateNodegroupVersionCommand";
+import type {
+  UpdatePodIdentityAssociationCommandInput,
+  UpdatePodIdentityAssociationCommandOutput,
+} from "./commands/UpdatePodIdentityAssociationCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | ActivateCertificateAuthorityCommandInput
+  | AssociateAccessPolicyCommandInput
   | AssociateEncryptionConfigCommandInput
   | AssociateIdentityProviderConfigCommandInput
+  | CancelUpdateCommandInput
+  | CreateAccessEntryCommandInput
   | CreateAddonCommandInput
+  | CreateCapabilityCommandInput
+  | CreateCertificateAuthorityCommandInput
   | CreateClusterCommandInput
+  | CreateEksAnywhereSubscriptionCommandInput
   | CreateFargateProfileCommandInput
   | CreateNodegroupCommandInput
+  | CreatePodIdentityAssociationCommandInput
+  | DeleteAccessEntryCommandInput
   | DeleteAddonCommandInput
+  | DeleteCapabilityCommandInput
+  | DeleteCertificateAuthorityCommandInput
   | DeleteClusterCommandInput
+  | DeleteEksAnywhereSubscriptionCommandInput
   | DeleteFargateProfileCommandInput
   | DeleteNodegroupCommandInput
+  | DeletePodIdentityAssociationCommandInput
   | DeregisterClusterCommandInput
+  | DescribeAccessEntryCommandInput
   | DescribeAddonCommandInput
+  | DescribeAddonConfigurationCommandInput
   | DescribeAddonVersionsCommandInput
+  | DescribeCapabilityCommandInput
+  | DescribeCertificateAuthorityCommandInput
   | DescribeClusterCommandInput
+  | DescribeClusterVersionsCommandInput
+  | DescribeEksAnywhereSubscriptionCommandInput
   | DescribeFargateProfileCommandInput
   | DescribeIdentityProviderConfigCommandInput
+  | DescribeInsightCommandInput
+  | DescribeInsightsRefreshCommandInput
   | DescribeNodegroupCommandInput
+  | DescribePodIdentityAssociationCommandInput
   | DescribeUpdateCommandInput
+  | DisassociateAccessPolicyCommandInput
   | DisassociateIdentityProviderConfigCommandInput
+  | ListAccessEntriesCommandInput
+  | ListAccessPoliciesCommandInput
   | ListAddonsCommandInput
+  | ListAssociatedAccessPoliciesCommandInput
+  | ListCapabilitiesCommandInput
+  | ListCertificateAuthoritiesCommandInput
   | ListClustersCommandInput
+  | ListEksAnywhereSubscriptionsCommandInput
   | ListFargateProfilesCommandInput
   | ListIdentityProviderConfigsCommandInput
+  | ListInsightsCommandInput
   | ListNodegroupsCommandInput
+  | ListPodIdentityAssociationsCommandInput
   | ListTagsForResourceCommandInput
   | ListUpdatesCommandInput
   | RegisterClusterCommandInput
+  | StartInsightsRefreshCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateAccessEntryCommandInput
   | UpdateAddonCommandInput
+  | UpdateCapabilityCommandInput
   | UpdateClusterConfigCommandInput
   | UpdateClusterVersionCommandInput
+  | UpdateEksAnywhereSubscriptionCommandInput
   | UpdateNodegroupConfigCommandInput
-  | UpdateNodegroupVersionCommandInput;
+  | UpdateNodegroupVersionCommandInput
+  | UpdatePodIdentityAssociationCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | ActivateCertificateAuthorityCommandOutput
+  | AssociateAccessPolicyCommandOutput
   | AssociateEncryptionConfigCommandOutput
   | AssociateIdentityProviderConfigCommandOutput
+  | CancelUpdateCommandOutput
+  | CreateAccessEntryCommandOutput
   | CreateAddonCommandOutput
+  | CreateCapabilityCommandOutput
+  | CreateCertificateAuthorityCommandOutput
   | CreateClusterCommandOutput
+  | CreateEksAnywhereSubscriptionCommandOutput
   | CreateFargateProfileCommandOutput
   | CreateNodegroupCommandOutput
+  | CreatePodIdentityAssociationCommandOutput
+  | DeleteAccessEntryCommandOutput
   | DeleteAddonCommandOutput
+  | DeleteCapabilityCommandOutput
+  | DeleteCertificateAuthorityCommandOutput
   | DeleteClusterCommandOutput
+  | DeleteEksAnywhereSubscriptionCommandOutput
   | DeleteFargateProfileCommandOutput
   | DeleteNodegroupCommandOutput
+  | DeletePodIdentityAssociationCommandOutput
   | DeregisterClusterCommandOutput
+  | DescribeAccessEntryCommandOutput
   | DescribeAddonCommandOutput
+  | DescribeAddonConfigurationCommandOutput
   | DescribeAddonVersionsCommandOutput
+  | DescribeCapabilityCommandOutput
+  | DescribeCertificateAuthorityCommandOutput
   | DescribeClusterCommandOutput
+  | DescribeClusterVersionsCommandOutput
+  | DescribeEksAnywhereSubscriptionCommandOutput
   | DescribeFargateProfileCommandOutput
   | DescribeIdentityProviderConfigCommandOutput
+  | DescribeInsightCommandOutput
+  | DescribeInsightsRefreshCommandOutput
   | DescribeNodegroupCommandOutput
+  | DescribePodIdentityAssociationCommandOutput
   | DescribeUpdateCommandOutput
+  | DisassociateAccessPolicyCommandOutput
   | DisassociateIdentityProviderConfigCommandOutput
+  | ListAccessEntriesCommandOutput
+  | ListAccessPoliciesCommandOutput
   | ListAddonsCommandOutput
+  | ListAssociatedAccessPoliciesCommandOutput
+  | ListCapabilitiesCommandOutput
+  | ListCertificateAuthoritiesCommandOutput
   | ListClustersCommandOutput
+  | ListEksAnywhereSubscriptionsCommandOutput
   | ListFargateProfilesCommandOutput
   | ListIdentityProviderConfigsCommandOutput
+  | ListInsightsCommandOutput
   | ListNodegroupsCommandOutput
+  | ListPodIdentityAssociationsCommandOutput
   | ListTagsForResourceCommandOutput
   | ListUpdatesCommandOutput
   | RegisterClusterCommandOutput
+  | StartInsightsRefreshCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateAccessEntryCommandOutput
   | UpdateAddonCommandOutput
+  | UpdateCapabilityCommandOutput
   | UpdateClusterConfigCommandOutput
   | UpdateClusterVersionCommandOutput
+  | UpdateEksAnywhereSubscriptionCommandOutput
   | UpdateNodegroupConfigCommandOutput
-  | UpdateNodegroupVersionCommandOutput;
+  | UpdateNodegroupVersionCommandOutput
+  | UpdatePodIdentityAssociationCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -225,7 +449,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -264,25 +488,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -295,72 +510,122 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type EKSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of EKSClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type EKSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of EKSClient class constructor that set the region, credentials and other options.
  */
 export interface EKSClientConfig extends EKSClientConfigType {}
 
-type EKSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of EKSClient class. This is resolved and normalized from the {@link EKSClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type EKSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of EKSClient class. This is resolved and normalized from the {@link EKSClientConfig | constructor configuration interface}.
  */
 export interface EKSClientResolvedConfig extends EKSClientResolvedConfigType {}
 
 /**
  * <p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on
- *             Amazon Web Services without needing to stand up or maintain your own Kubernetes control plane.
- *             Kubernetes is an open-source system for automating the deployment, scaling, and
- *             management of containerized applications. </p>
- *         <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use
- *             all the existing plugins and tooling from the Kubernetes community. Applications running
- *             on Amazon EKS are fully compatible with applications running on any standard Kubernetes
- *             environment, whether running in on-premises data centers or public clouds. This means
- *             that you can easily migrate any standard Kubernetes application to Amazon EKS without any
- *             code modification required.</p>
+ *             Amazon Web Services without needing to setup or maintain your own Kubernetes control plane. Kubernetes is an
+ *             open-source system for automating the deployment, scaling, and management of
+ *             containerized applications.</p>
+ *          <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all
+ *             the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS
+ *             are fully compatible with applications running on any standard Kubernetes environment,
+ *             whether running in on-premises data centers or public clouds. This means that you can
+ *             easily migrate any standard Kubernetes application to Amazon EKS without any code modification
+ *             required.</p>
+ * @public
  */
 export class EKSClient extends __Client<
   __HttpHandlerOptions,
@@ -373,22 +638,36 @@ export class EKSClient extends __Client<
    */
   readonly config: EKSClientResolvedConfig;
 
-  constructor(configuration: EKSClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<EKSClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultEKSHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: EKSClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

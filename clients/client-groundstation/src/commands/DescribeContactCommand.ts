@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { DescribeContactRequest, DescribeContactResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeContactCommand,
-  serializeAws_restJson1DescribeContactCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeContactRequest, DescribeContactResponse } from "../models/models_0";
+import { DescribeContact$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeContactCommand}.
+ */
 export interface DescribeContactCommandInput extends DescribeContactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeContactCommand}.
+ */
 export interface DescribeContactCommandOutput extends DescribeContactResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,303 @@ export interface DescribeContactCommandOutput extends DescribeContactResponse, _
  * ```javascript
  * import { GroundStationClient, DescribeContactCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, DescribeContactCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // DescribeContactRequest
+ *   contactId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeContactCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeContactResponse
+ * //   contactId: "STRING_VALUE",
+ * //   missionProfileArn: "STRING_VALUE",
+ * //   satelliteArn: "STRING_VALUE",
+ * //   startTime: new Date("TIMESTAMP"),
+ * //   endTime: new Date("TIMESTAMP"),
+ * //   prePassStartTime: new Date("TIMESTAMP"),
+ * //   postPassEndTime: new Date("TIMESTAMP"),
+ * //   groundStation: "STRING_VALUE",
+ * //   contactStatus: "SCHEDULING" || "FAILED_TO_SCHEDULE" || "SCHEDULED" || "CANCELLED" || "AWS_CANCELLED" || "PREPASS" || "PASS" || "POSTPASS" || "COMPLETED" || "FAILED" || "AVAILABLE" || "CANCELLING" || "AWS_FAILED",
+ * //   errorMessage: "STRING_VALUE",
+ * //   maximumElevation: { // Elevation
+ * //     value: Number("double"), // required
+ * //     unit: "DEGREE_ANGLE" || "RADIAN", // required
+ * //   },
+ * //   tags: { // TagsMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   region: "STRING_VALUE",
+ * //   dataflowList: [ // DataflowList
+ * //     { // DataflowDetail
+ * //       source: { // Source
+ * //         configType: "antenna-downlink" || "antenna-downlink-demod-decode" || "tracking" || "dataflow-endpoint" || "antenna-uplink" || "uplink-echo" || "s3-recording" || "telemetry-sink",
+ * //         configId: "STRING_VALUE",
+ * //         configDetails: { // ConfigDetails Union: only one key present
+ * //           endpointDetails: { // EndpointDetails
+ * //             securityDetails: { // SecurityDetails
+ * //               subnetIds: [ // SubnetList // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               securityGroupIds: [ // SecurityGroupIdList // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               roleArn: "STRING_VALUE", // required
+ * //             },
+ * //             endpoint: { // DataflowEndpoint
+ * //               name: "STRING_VALUE",
+ * //               address: { // SocketAddress
+ * //                 name: "STRING_VALUE", // required
+ * //                 port: Number("int"), // required
+ * //               },
+ * //               status: "created" || "creating" || "deleted" || "deleting" || "failed",
+ * //               mtu: Number("int"),
+ * //             },
+ * //             awsGroundStationAgentEndpoint: { // AwsGroundStationAgentEndpoint
+ * //               name: "STRING_VALUE", // required
+ * //               egressAddress: { // ConnectionDetails
+ * //                 socketAddress: {
+ * //                   name: "STRING_VALUE", // required
+ * //                   port: Number("int"), // required
+ * //                 },
+ * //                 mtu: Number("int"),
+ * //               },
+ * //               ingressAddress: { // RangedConnectionDetails
+ * //                 socketAddress: { // RangedSocketAddress
+ * //                   name: "STRING_VALUE", // required
+ * //                   portRange: { // IntegerRange
+ * //                     minimum: Number("int"), // required
+ * //                     maximum: Number("int"), // required
+ * //                   },
+ * //                 },
+ * //                 mtu: Number("int"),
+ * //               },
+ * //               agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //               auditResults: "HEALTHY" || "UNHEALTHY",
+ * //             },
+ * //             uplinkAwsGroundStationAgentEndpoint: { // UplinkAwsGroundStationAgentEndpointDetails
+ * //               name: "STRING_VALUE", // required
+ * //               dataflowDetails: { // UplinkDataflowDetails Union: only one key present
+ * //                 agentConnectionDetails: { // UplinkConnectionDetails
+ * //                   ingressAddressAndPort: {
+ * //                     socketAddress: "<SocketAddress>", // required
+ * //                     mtu: Number("int"),
+ * //                   },
+ * //                   agentIpAndPortAddress: {
+ * //                     socketAddress: {
+ * //                       name: "STRING_VALUE", // required
+ * //                       portRange: {
+ * //                         minimum: Number("int"), // required
+ * //                         maximum: Number("int"), // required
+ * //                       },
+ * //                     },
+ * //                     mtu: Number("int"),
+ * //                   },
+ * //                 },
+ * //               },
+ * //               agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //               auditResults: "HEALTHY" || "UNHEALTHY",
+ * //             },
+ * //             downlinkAwsGroundStationAgentEndpoint: { // DownlinkAwsGroundStationAgentEndpointDetails
+ * //               name: "STRING_VALUE", // required
+ * //               dataflowDetails: { // DownlinkDataflowDetails Union: only one key present
+ * //                 agentConnectionDetails: { // DownlinkConnectionDetails
+ * //                   agentIpAndPortAddress: {
+ * //                     socketAddress: {
+ * //                       name: "STRING_VALUE", // required
+ * //                       portRange: {
+ * //                         minimum: Number("int"), // required
+ * //                         maximum: Number("int"), // required
+ * //                       },
+ * //                     },
+ * //                     mtu: Number("int"),
+ * //                   },
+ * //                   egressAddressAndPort: {
+ * //                     socketAddress: "<SocketAddress>", // required
+ * //                     mtu: Number("int"),
+ * //                   },
+ * //                 },
+ * //               },
+ * //               agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //               auditResults: "HEALTHY" || "UNHEALTHY",
+ * //             },
+ * //             healthStatus: "HEALTHY" || "UNHEALTHY",
+ * //             healthReasons: [ // CapabilityHealthReasonList
+ * //               "NO_REGISTERED_AGENT" || "INVALID_IP_OWNERSHIP" || "NOT_AUTHORIZED_TO_CREATE_SLR" || "UNVERIFIED_IP_OWNERSHIP" || "INITIALIZING_DATAPLANE" || "DATAPLANE_FAILURE" || "HEALTHY",
+ * //             ],
+ * //           },
+ * //           antennaDemodDecodeDetails: { // AntennaDemodDecodeDetails
+ * //             outputNode: "STRING_VALUE",
+ * //           },
+ * //           s3RecordingDetails: { // S3RecordingDetails
+ * //             bucketArn: "STRING_VALUE",
+ * //             keyTemplate: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         dataflowSourceRegion: "STRING_VALUE",
+ * //       },
+ * //       destination: { // Destination
+ * //         configType: "antenna-downlink" || "antenna-downlink-demod-decode" || "tracking" || "dataflow-endpoint" || "antenna-uplink" || "uplink-echo" || "s3-recording" || "telemetry-sink",
+ * //         configId: "STRING_VALUE",
+ * //         configDetails: {//  Union: only one key present
+ * //           endpointDetails: {
+ * //             securityDetails: {
+ * //               subnetIds: [ // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               securityGroupIds: [ // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               roleArn: "STRING_VALUE", // required
+ * //             },
+ * //             endpoint: {
+ * //               name: "STRING_VALUE",
+ * //               address: "<SocketAddress>",
+ * //               status: "created" || "creating" || "deleted" || "deleting" || "failed",
+ * //               mtu: Number("int"),
+ * //             },
+ * //             awsGroundStationAgentEndpoint: {
+ * //               name: "STRING_VALUE", // required
+ * //               egressAddress: {
+ * //                 socketAddress: "<SocketAddress>", // required
+ * //                 mtu: Number("int"),
+ * //               },
+ * //               ingressAddress: {
+ * //                 socketAddress: {
+ * //                   name: "STRING_VALUE", // required
+ * //                   portRange: {
+ * //                     minimum: Number("int"), // required
+ * //                     maximum: Number("int"), // required
+ * //                   },
+ * //                 },
+ * //                 mtu: Number("int"),
+ * //               },
+ * //               agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //               auditResults: "HEALTHY" || "UNHEALTHY",
+ * //             },
+ * //             uplinkAwsGroundStationAgentEndpoint: {
+ * //               name: "STRING_VALUE", // required
+ * //               dataflowDetails: {//  Union: only one key present
+ * //                 agentConnectionDetails: {
+ * //                   ingressAddressAndPort: {
+ * //                     socketAddress: "<SocketAddress>", // required
+ * //                     mtu: Number("int"),
+ * //                   },
+ * //                   agentIpAndPortAddress: {
+ * //                     socketAddress: {
+ * //                       name: "STRING_VALUE", // required
+ * //                       portRange: {
+ * //                         minimum: Number("int"), // required
+ * //                         maximum: Number("int"), // required
+ * //                       },
+ * //                     },
+ * //                     mtu: Number("int"),
+ * //                   },
+ * //                 },
+ * //               },
+ * //               agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //               auditResults: "HEALTHY" || "UNHEALTHY",
+ * //             },
+ * //             downlinkAwsGroundStationAgentEndpoint: {
+ * //               name: "STRING_VALUE", // required
+ * //               dataflowDetails: {//  Union: only one key present
+ * //                 agentConnectionDetails: {
+ * //                   agentIpAndPortAddress: "<RangedConnectionDetails>", // required
+ * //                   egressAddressAndPort: "<ConnectionDetails>", // required
+ * //                 },
+ * //               },
+ * //               agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //               auditResults: "HEALTHY" || "UNHEALTHY",
+ * //             },
+ * //             healthStatus: "HEALTHY" || "UNHEALTHY",
+ * //             healthReasons: [
+ * //               "NO_REGISTERED_AGENT" || "INVALID_IP_OWNERSHIP" || "NOT_AUTHORIZED_TO_CREATE_SLR" || "UNVERIFIED_IP_OWNERSHIP" || "INITIALIZING_DATAPLANE" || "DATAPLANE_FAILURE" || "HEALTHY",
+ * //             ],
+ * //           },
+ * //           antennaDemodDecodeDetails: {
+ * //             outputNode: "STRING_VALUE",
+ * //           },
+ * //           s3RecordingDetails: {
+ * //             bucketArn: "STRING_VALUE",
+ * //             keyTemplate: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         dataflowDestinationRegion: "STRING_VALUE",
+ * //       },
+ * //       errorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   visibilityStartTime: new Date("TIMESTAMP"),
+ * //   visibilityEndTime: new Date("TIMESTAMP"),
+ * //   trackingOverrides: { // TrackingOverrides
+ * //     programTrackSettings: { // ProgramTrackSettings Union: only one key present
+ * //       azEl: { // AzElProgramTrackSettings
+ * //         ephemerisId: "STRING_VALUE", // required
+ * //       },
+ * //       oem: { // OemProgramTrackSettings
+ * //         ephemerisId: "STRING_VALUE", // required
+ * //       },
+ * //       tle: { // TleProgramTrackSettings
+ * //         ephemerisId: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   },
+ * //   ephemeris: { // EphemerisResponseData
+ * //     ephemerisId: "STRING_VALUE",
+ * //     ephemerisType: "TLE" || "OEM" || "AZ_EL" || "SERVICE_MANAGED", // required
+ * //   },
+ * //   version: { // ContactVersion
+ * //     versionId: Number("int"),
+ * //     created: new Date("TIMESTAMP"),
+ * //     activated: new Date("TIMESTAMP"),
+ * //     superseded: new Date("TIMESTAMP"),
+ * //     lastUpdated: new Date("TIMESTAMP"),
+ * //     status: "UPDATING" || "ACTIVE" || "SUPERSEDED" || "FAILED_TO_UPDATE",
+ * //     failureCodes: [ // VersionFailureReasonCodes
+ * //       "INTERNAL_ERROR" || "INVALID_SATELLITE_ARN" || "INVALID_UPDATE_CONTACT_REQUEST" || "EPHEMERIS_NOT_FOUND" || "EPHEMERIS_TIME_RANGE_INVALID" || "EPHEMERIS_NOT_ENABLED" || "SATELLITE_DOES_NOT_MATCH_EPHEMERIS" || "NOT_ONBOARDED_TO_AZEL_EPHEMERIS" || "AZEL_EPHEMERIS_NOT_FOUND" || "AZEL_EPHEMERIS_WRONG_GROUND_STATION" || "AZEL_EPHEMERIS_INVALID_STATUS" || "AZEL_EPHEMERIS_TIME_RANGE_INVALID",
+ * //     ],
+ * //     failureMessage: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeContactCommandInput - {@link DescribeContactCommandInput}
+ * @returns {@link DescribeContactCommandOutput}
  * @see {@link DescribeContactCommandInput} for command's `input` shape.
  * @see {@link DescribeContactCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeContactCommand extends $Command<
-  DescribeContactCommandInput,
-  DescribeContactCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeContactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeContactCommandInput, DescribeContactCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "DescribeContactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeContactRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeContactResponse.filterSensitiveLog,
+export class DescribeContactCommand extends command<DescribeContactCommandInput, DescribeContactCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeContact",
+  DescribeContact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContactRequest;
+      output: DescribeContactResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeContactCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeContactCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeContactCommandOutput> {
-    return deserializeAws_restJson1DescribeContactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeContactCommandInput;
+      output: DescribeContactCommandOutput;
+    };
+  };
 }

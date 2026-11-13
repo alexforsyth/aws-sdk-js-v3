@@ -1,1383 +1,1976 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type ActivateCertificateAuthorityCommandInput,
+  type ActivateCertificateAuthorityCommandOutput,
+  ActivateCertificateAuthorityCommand,
+} from "./commands/ActivateCertificateAuthorityCommand";
+import {
+  type AssociateAccessPolicyCommandInput,
+  type AssociateAccessPolicyCommandOutput,
+  AssociateAccessPolicyCommand,
+} from "./commands/AssociateAccessPolicyCommand";
+import {
+  type AssociateEncryptionConfigCommandInput,
+  type AssociateEncryptionConfigCommandOutput,
   AssociateEncryptionConfigCommand,
-  AssociateEncryptionConfigCommandInput,
-  AssociateEncryptionConfigCommandOutput,
 } from "./commands/AssociateEncryptionConfigCommand";
 import {
+  type AssociateIdentityProviderConfigCommandInput,
+  type AssociateIdentityProviderConfigCommandOutput,
   AssociateIdentityProviderConfigCommand,
-  AssociateIdentityProviderConfigCommandInput,
-  AssociateIdentityProviderConfigCommandOutput,
 } from "./commands/AssociateIdentityProviderConfigCommand";
-import { CreateAddonCommand, CreateAddonCommandInput, CreateAddonCommandOutput } from "./commands/CreateAddonCommand";
 import {
+  type CancelUpdateCommandInput,
+  type CancelUpdateCommandOutput,
+  CancelUpdateCommand,
+} from "./commands/CancelUpdateCommand";
+import {
+  type CreateAccessEntryCommandInput,
+  type CreateAccessEntryCommandOutput,
+  CreateAccessEntryCommand,
+} from "./commands/CreateAccessEntryCommand";
+import {
+  type CreateAddonCommandInput,
+  type CreateAddonCommandOutput,
+  CreateAddonCommand,
+} from "./commands/CreateAddonCommand";
+import {
+  type CreateCapabilityCommandInput,
+  type CreateCapabilityCommandOutput,
+  CreateCapabilityCommand,
+} from "./commands/CreateCapabilityCommand";
+import {
+  type CreateCertificateAuthorityCommandInput,
+  type CreateCertificateAuthorityCommandOutput,
+  CreateCertificateAuthorityCommand,
+} from "./commands/CreateCertificateAuthorityCommand";
+import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
   CreateClusterCommand,
-  CreateClusterCommandInput,
-  CreateClusterCommandOutput,
 } from "./commands/CreateClusterCommand";
 import {
+  type CreateEksAnywhereSubscriptionCommandInput,
+  type CreateEksAnywhereSubscriptionCommandOutput,
+  CreateEksAnywhereSubscriptionCommand,
+} from "./commands/CreateEksAnywhereSubscriptionCommand";
+import {
+  type CreateFargateProfileCommandInput,
+  type CreateFargateProfileCommandOutput,
   CreateFargateProfileCommand,
-  CreateFargateProfileCommandInput,
-  CreateFargateProfileCommandOutput,
 } from "./commands/CreateFargateProfileCommand";
 import {
+  type CreateNodegroupCommandInput,
+  type CreateNodegroupCommandOutput,
   CreateNodegroupCommand,
-  CreateNodegroupCommandInput,
-  CreateNodegroupCommandOutput,
 } from "./commands/CreateNodegroupCommand";
-import { DeleteAddonCommand, DeleteAddonCommandInput, DeleteAddonCommandOutput } from "./commands/DeleteAddonCommand";
 import {
+  type CreatePodIdentityAssociationCommandInput,
+  type CreatePodIdentityAssociationCommandOutput,
+  CreatePodIdentityAssociationCommand,
+} from "./commands/CreatePodIdentityAssociationCommand";
+import {
+  type DeleteAccessEntryCommandInput,
+  type DeleteAccessEntryCommandOutput,
+  DeleteAccessEntryCommand,
+} from "./commands/DeleteAccessEntryCommand";
+import {
+  type DeleteAddonCommandInput,
+  type DeleteAddonCommandOutput,
+  DeleteAddonCommand,
+} from "./commands/DeleteAddonCommand";
+import {
+  type DeleteCapabilityCommandInput,
+  type DeleteCapabilityCommandOutput,
+  DeleteCapabilityCommand,
+} from "./commands/DeleteCapabilityCommand";
+import {
+  type DeleteCertificateAuthorityCommandInput,
+  type DeleteCertificateAuthorityCommandOutput,
+  DeleteCertificateAuthorityCommand,
+} from "./commands/DeleteCertificateAuthorityCommand";
+import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
   DeleteClusterCommand,
-  DeleteClusterCommandInput,
-  DeleteClusterCommandOutput,
 } from "./commands/DeleteClusterCommand";
 import {
+  type DeleteEksAnywhereSubscriptionCommandInput,
+  type DeleteEksAnywhereSubscriptionCommandOutput,
+  DeleteEksAnywhereSubscriptionCommand,
+} from "./commands/DeleteEksAnywhereSubscriptionCommand";
+import {
+  type DeleteFargateProfileCommandInput,
+  type DeleteFargateProfileCommandOutput,
   DeleteFargateProfileCommand,
-  DeleteFargateProfileCommandInput,
-  DeleteFargateProfileCommandOutput,
 } from "./commands/DeleteFargateProfileCommand";
 import {
+  type DeleteNodegroupCommandInput,
+  type DeleteNodegroupCommandOutput,
   DeleteNodegroupCommand,
-  DeleteNodegroupCommandInput,
-  DeleteNodegroupCommandOutput,
 } from "./commands/DeleteNodegroupCommand";
 import {
+  type DeletePodIdentityAssociationCommandInput,
+  type DeletePodIdentityAssociationCommandOutput,
+  DeletePodIdentityAssociationCommand,
+} from "./commands/DeletePodIdentityAssociationCommand";
+import {
+  type DeregisterClusterCommandInput,
+  type DeregisterClusterCommandOutput,
   DeregisterClusterCommand,
-  DeregisterClusterCommandInput,
-  DeregisterClusterCommandOutput,
 } from "./commands/DeregisterClusterCommand";
 import {
+  type DescribeAccessEntryCommandInput,
+  type DescribeAccessEntryCommandOutput,
+  DescribeAccessEntryCommand,
+} from "./commands/DescribeAccessEntryCommand";
+import {
+  type DescribeAddonCommandInput,
+  type DescribeAddonCommandOutput,
   DescribeAddonCommand,
-  DescribeAddonCommandInput,
-  DescribeAddonCommandOutput,
 } from "./commands/DescribeAddonCommand";
 import {
+  type DescribeAddonConfigurationCommandInput,
+  type DescribeAddonConfigurationCommandOutput,
+  DescribeAddonConfigurationCommand,
+} from "./commands/DescribeAddonConfigurationCommand";
+import {
+  type DescribeAddonVersionsCommandInput,
+  type DescribeAddonVersionsCommandOutput,
   DescribeAddonVersionsCommand,
-  DescribeAddonVersionsCommandInput,
-  DescribeAddonVersionsCommandOutput,
 } from "./commands/DescribeAddonVersionsCommand";
 import {
+  type DescribeCapabilityCommandInput,
+  type DescribeCapabilityCommandOutput,
+  DescribeCapabilityCommand,
+} from "./commands/DescribeCapabilityCommand";
+import {
+  type DescribeCertificateAuthorityCommandInput,
+  type DescribeCertificateAuthorityCommandOutput,
+  DescribeCertificateAuthorityCommand,
+} from "./commands/DescribeCertificateAuthorityCommand";
+import {
+  type DescribeClusterCommandInput,
+  type DescribeClusterCommandOutput,
   DescribeClusterCommand,
-  DescribeClusterCommandInput,
-  DescribeClusterCommandOutput,
 } from "./commands/DescribeClusterCommand";
 import {
+  type DescribeClusterVersionsCommandInput,
+  type DescribeClusterVersionsCommandOutput,
+  DescribeClusterVersionsCommand,
+} from "./commands/DescribeClusterVersionsCommand";
+import {
+  type DescribeEksAnywhereSubscriptionCommandInput,
+  type DescribeEksAnywhereSubscriptionCommandOutput,
+  DescribeEksAnywhereSubscriptionCommand,
+} from "./commands/DescribeEksAnywhereSubscriptionCommand";
+import {
+  type DescribeFargateProfileCommandInput,
+  type DescribeFargateProfileCommandOutput,
   DescribeFargateProfileCommand,
-  DescribeFargateProfileCommandInput,
-  DescribeFargateProfileCommandOutput,
 } from "./commands/DescribeFargateProfileCommand";
 import {
+  type DescribeIdentityProviderConfigCommandInput,
+  type DescribeIdentityProviderConfigCommandOutput,
   DescribeIdentityProviderConfigCommand,
-  DescribeIdentityProviderConfigCommandInput,
-  DescribeIdentityProviderConfigCommandOutput,
 } from "./commands/DescribeIdentityProviderConfigCommand";
 import {
+  type DescribeInsightCommandInput,
+  type DescribeInsightCommandOutput,
+  DescribeInsightCommand,
+} from "./commands/DescribeInsightCommand";
+import {
+  type DescribeInsightsRefreshCommandInput,
+  type DescribeInsightsRefreshCommandOutput,
+  DescribeInsightsRefreshCommand,
+} from "./commands/DescribeInsightsRefreshCommand";
+import {
+  type DescribeNodegroupCommandInput,
+  type DescribeNodegroupCommandOutput,
   DescribeNodegroupCommand,
-  DescribeNodegroupCommandInput,
-  DescribeNodegroupCommandOutput,
 } from "./commands/DescribeNodegroupCommand";
 import {
+  type DescribePodIdentityAssociationCommandInput,
+  type DescribePodIdentityAssociationCommandOutput,
+  DescribePodIdentityAssociationCommand,
+} from "./commands/DescribePodIdentityAssociationCommand";
+import {
+  type DescribeUpdateCommandInput,
+  type DescribeUpdateCommandOutput,
   DescribeUpdateCommand,
-  DescribeUpdateCommandInput,
-  DescribeUpdateCommandOutput,
 } from "./commands/DescribeUpdateCommand";
 import {
-  DisassociateIdentityProviderConfigCommand,
-  DisassociateIdentityProviderConfigCommandInput,
-  DisassociateIdentityProviderConfigCommandOutput,
-} from "./commands/DisassociateIdentityProviderConfigCommand";
-import { ListAddonsCommand, ListAddonsCommandInput, ListAddonsCommandOutput } from "./commands/ListAddonsCommand";
+  type DisassociateAccessPolicyCommandInput,
+  type DisassociateAccessPolicyCommandOutput,
+  DisassociateAccessPolicyCommand,
+} from "./commands/DisassociateAccessPolicyCommand";
 import {
+  type DisassociateIdentityProviderConfigCommandInput,
+  type DisassociateIdentityProviderConfigCommandOutput,
+  DisassociateIdentityProviderConfigCommand,
+} from "./commands/DisassociateIdentityProviderConfigCommand";
+import {
+  type ListAccessEntriesCommandInput,
+  type ListAccessEntriesCommandOutput,
+  ListAccessEntriesCommand,
+} from "./commands/ListAccessEntriesCommand";
+import {
+  type ListAccessPoliciesCommandInput,
+  type ListAccessPoliciesCommandOutput,
+  ListAccessPoliciesCommand,
+} from "./commands/ListAccessPoliciesCommand";
+import {
+  type ListAddonsCommandInput,
+  type ListAddonsCommandOutput,
+  ListAddonsCommand,
+} from "./commands/ListAddonsCommand";
+import {
+  type ListAssociatedAccessPoliciesCommandInput,
+  type ListAssociatedAccessPoliciesCommandOutput,
+  ListAssociatedAccessPoliciesCommand,
+} from "./commands/ListAssociatedAccessPoliciesCommand";
+import {
+  type ListCapabilitiesCommandInput,
+  type ListCapabilitiesCommandOutput,
+  ListCapabilitiesCommand,
+} from "./commands/ListCapabilitiesCommand";
+import {
+  type ListCertificateAuthoritiesCommandInput,
+  type ListCertificateAuthoritiesCommandOutput,
+  ListCertificateAuthoritiesCommand,
+} from "./commands/ListCertificateAuthoritiesCommand";
+import {
+  type ListClustersCommandInput,
+  type ListClustersCommandOutput,
   ListClustersCommand,
-  ListClustersCommandInput,
-  ListClustersCommandOutput,
 } from "./commands/ListClustersCommand";
 import {
+  type ListEksAnywhereSubscriptionsCommandInput,
+  type ListEksAnywhereSubscriptionsCommandOutput,
+  ListEksAnywhereSubscriptionsCommand,
+} from "./commands/ListEksAnywhereSubscriptionsCommand";
+import {
+  type ListFargateProfilesCommandInput,
+  type ListFargateProfilesCommandOutput,
   ListFargateProfilesCommand,
-  ListFargateProfilesCommandInput,
-  ListFargateProfilesCommandOutput,
 } from "./commands/ListFargateProfilesCommand";
 import {
+  type ListIdentityProviderConfigsCommandInput,
+  type ListIdentityProviderConfigsCommandOutput,
   ListIdentityProviderConfigsCommand,
-  ListIdentityProviderConfigsCommandInput,
-  ListIdentityProviderConfigsCommandOutput,
 } from "./commands/ListIdentityProviderConfigsCommand";
 import {
+  type ListInsightsCommandInput,
+  type ListInsightsCommandOutput,
+  ListInsightsCommand,
+} from "./commands/ListInsightsCommand";
+import {
+  type ListNodegroupsCommandInput,
+  type ListNodegroupsCommandOutput,
   ListNodegroupsCommand,
-  ListNodegroupsCommandInput,
-  ListNodegroupsCommandOutput,
 } from "./commands/ListNodegroupsCommand";
 import {
+  type ListPodIdentityAssociationsCommandInput,
+  type ListPodIdentityAssociationsCommandOutput,
+  ListPodIdentityAssociationsCommand,
+} from "./commands/ListPodIdentityAssociationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListUpdatesCommand, ListUpdatesCommandInput, ListUpdatesCommandOutput } from "./commands/ListUpdatesCommand";
 import {
+  type ListUpdatesCommandInput,
+  type ListUpdatesCommandOutput,
+  ListUpdatesCommand,
+} from "./commands/ListUpdatesCommand";
+import {
+  type RegisterClusterCommandInput,
+  type RegisterClusterCommandOutput,
   RegisterClusterCommand,
-  RegisterClusterCommandInput,
-  RegisterClusterCommandOutput,
 } from "./commands/RegisterClusterCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartInsightsRefreshCommandInput,
+  type StartInsightsRefreshCommandOutput,
+  StartInsightsRefreshCommand,
+} from "./commands/StartInsightsRefreshCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateAddonCommand, UpdateAddonCommandInput, UpdateAddonCommandOutput } from "./commands/UpdateAddonCommand";
 import {
+  type UpdateAccessEntryCommandInput,
+  type UpdateAccessEntryCommandOutput,
+  UpdateAccessEntryCommand,
+} from "./commands/UpdateAccessEntryCommand";
+import {
+  type UpdateAddonCommandInput,
+  type UpdateAddonCommandOutput,
+  UpdateAddonCommand,
+} from "./commands/UpdateAddonCommand";
+import {
+  type UpdateCapabilityCommandInput,
+  type UpdateCapabilityCommandOutput,
+  UpdateCapabilityCommand,
+} from "./commands/UpdateCapabilityCommand";
+import {
+  type UpdateClusterConfigCommandInput,
+  type UpdateClusterConfigCommandOutput,
   UpdateClusterConfigCommand,
-  UpdateClusterConfigCommandInput,
-  UpdateClusterConfigCommandOutput,
 } from "./commands/UpdateClusterConfigCommand";
 import {
+  type UpdateClusterVersionCommandInput,
+  type UpdateClusterVersionCommandOutput,
   UpdateClusterVersionCommand,
-  UpdateClusterVersionCommandInput,
-  UpdateClusterVersionCommandOutput,
 } from "./commands/UpdateClusterVersionCommand";
 import {
+  type UpdateEksAnywhereSubscriptionCommandInput,
+  type UpdateEksAnywhereSubscriptionCommandOutput,
+  UpdateEksAnywhereSubscriptionCommand,
+} from "./commands/UpdateEksAnywhereSubscriptionCommand";
+import {
+  type UpdateNodegroupConfigCommandInput,
+  type UpdateNodegroupConfigCommandOutput,
   UpdateNodegroupConfigCommand,
-  UpdateNodegroupConfigCommandInput,
-  UpdateNodegroupConfigCommandOutput,
 } from "./commands/UpdateNodegroupConfigCommand";
 import {
+  type UpdateNodegroupVersionCommandInput,
+  type UpdateNodegroupVersionCommandOutput,
   UpdateNodegroupVersionCommand,
-  UpdateNodegroupVersionCommandInput,
-  UpdateNodegroupVersionCommandOutput,
 } from "./commands/UpdateNodegroupVersionCommand";
+import {
+  type UpdatePodIdentityAssociationCommandInput,
+  type UpdatePodIdentityAssociationCommandOutput,
+  UpdatePodIdentityAssociationCommand,
+} from "./commands/UpdatePodIdentityAssociationCommand";
 import { EKSClient } from "./EKSClient";
+import type { EKSServiceException } from "./models/EKSServiceException";
+import type { ResourceNotFoundException } from "./models/errors";
+import { paginateDescribeAddonVersions } from "./pagination/DescribeAddonVersionsPaginator";
+import { paginateDescribeClusterVersions } from "./pagination/DescribeClusterVersionsPaginator";
+import { paginateListAccessEntries } from "./pagination/ListAccessEntriesPaginator";
+import { paginateListAccessPolicies } from "./pagination/ListAccessPoliciesPaginator";
+import { paginateListAddons } from "./pagination/ListAddonsPaginator";
+import { paginateListAssociatedAccessPolicies } from "./pagination/ListAssociatedAccessPoliciesPaginator";
+import { paginateListCapabilities } from "./pagination/ListCapabilitiesPaginator";
+import { paginateListCertificateAuthorities } from "./pagination/ListCertificateAuthoritiesPaginator";
+import { paginateListClusters } from "./pagination/ListClustersPaginator";
+import { paginateListEksAnywhereSubscriptions } from "./pagination/ListEksAnywhereSubscriptionsPaginator";
+import { paginateListFargateProfiles } from "./pagination/ListFargateProfilesPaginator";
+import { paginateListIdentityProviderConfigs } from "./pagination/ListIdentityProviderConfigsPaginator";
+import { paginateListInsights } from "./pagination/ListInsightsPaginator";
+import { paginateListNodegroups } from "./pagination/ListNodegroupsPaginator";
+import { paginateListPodIdentityAssociations } from "./pagination/ListPodIdentityAssociationsPaginator";
+import { paginateListUpdates } from "./pagination/ListUpdatesPaginator";
+import { waitUntilAddonActive } from "./waiters/waitForAddonActive";
+import { waitUntilAddonDeleted } from "./waiters/waitForAddonDeleted";
+import { waitUntilCertificateAuthorityUpdateComplete } from "./waiters/waitForCertificateAuthorityUpdateComplete";
+import { waitUntilClusterActive } from "./waiters/waitForClusterActive";
+import { waitUntilClusterDeleted } from "./waiters/waitForClusterDeleted";
+import { waitUntilFargateProfileActive } from "./waiters/waitForFargateProfileActive";
+import { waitUntilFargateProfileDeleted } from "./waiters/waitForFargateProfileDeleted";
+import { waitUntilNodegroupActive } from "./waiters/waitForNodegroupActive";
+import { waitUntilNodegroupDeleted } from "./waiters/waitForNodegroupDeleted";
+
+const commands = {
+  ActivateCertificateAuthorityCommand,
+  AssociateAccessPolicyCommand,
+  AssociateEncryptionConfigCommand,
+  AssociateIdentityProviderConfigCommand,
+  CancelUpdateCommand,
+  CreateAccessEntryCommand,
+  CreateAddonCommand,
+  CreateCapabilityCommand,
+  CreateCertificateAuthorityCommand,
+  CreateClusterCommand,
+  CreateEksAnywhereSubscriptionCommand,
+  CreateFargateProfileCommand,
+  CreateNodegroupCommand,
+  CreatePodIdentityAssociationCommand,
+  DeleteAccessEntryCommand,
+  DeleteAddonCommand,
+  DeleteCapabilityCommand,
+  DeleteCertificateAuthorityCommand,
+  DeleteClusterCommand,
+  DeleteEksAnywhereSubscriptionCommand,
+  DeleteFargateProfileCommand,
+  DeleteNodegroupCommand,
+  DeletePodIdentityAssociationCommand,
+  DeregisterClusterCommand,
+  DescribeAccessEntryCommand,
+  DescribeAddonCommand,
+  DescribeAddonConfigurationCommand,
+  DescribeAddonVersionsCommand,
+  DescribeCapabilityCommand,
+  DescribeCertificateAuthorityCommand,
+  DescribeClusterCommand,
+  DescribeClusterVersionsCommand,
+  DescribeEksAnywhereSubscriptionCommand,
+  DescribeFargateProfileCommand,
+  DescribeIdentityProviderConfigCommand,
+  DescribeInsightCommand,
+  DescribeInsightsRefreshCommand,
+  DescribeNodegroupCommand,
+  DescribePodIdentityAssociationCommand,
+  DescribeUpdateCommand,
+  DisassociateAccessPolicyCommand,
+  DisassociateIdentityProviderConfigCommand,
+  ListAccessEntriesCommand,
+  ListAccessPoliciesCommand,
+  ListAddonsCommand,
+  ListAssociatedAccessPoliciesCommand,
+  ListCapabilitiesCommand,
+  ListCertificateAuthoritiesCommand,
+  ListClustersCommand,
+  ListEksAnywhereSubscriptionsCommand,
+  ListFargateProfilesCommand,
+  ListIdentityProviderConfigsCommand,
+  ListInsightsCommand,
+  ListNodegroupsCommand,
+  ListPodIdentityAssociationsCommand,
+  ListTagsForResourceCommand,
+  ListUpdatesCommand,
+  RegisterClusterCommand,
+  StartInsightsRefreshCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAccessEntryCommand,
+  UpdateAddonCommand,
+  UpdateCapabilityCommand,
+  UpdateClusterConfigCommand,
+  UpdateClusterVersionCommand,
+  UpdateEksAnywhereSubscriptionCommand,
+  UpdateNodegroupConfigCommand,
+  UpdateNodegroupVersionCommand,
+  UpdatePodIdentityAssociationCommand,
+};
+const paginators = {
+  paginateDescribeAddonVersions,
+  paginateDescribeClusterVersions,
+  paginateListAccessEntries,
+  paginateListAccessPolicies,
+  paginateListAddons,
+  paginateListAssociatedAccessPolicies,
+  paginateListCapabilities,
+  paginateListCertificateAuthorities,
+  paginateListClusters,
+  paginateListEksAnywhereSubscriptions,
+  paginateListFargateProfiles,
+  paginateListIdentityProviderConfigs,
+  paginateListInsights,
+  paginateListNodegroups,
+  paginateListPodIdentityAssociations,
+  paginateListUpdates,
+};
+const waiters = {
+  waitUntilAddonActive,
+  waitUntilAddonDeleted,
+  waitUntilClusterActive,
+  waitUntilClusterDeleted,
+  waitUntilFargateProfileActive,
+  waitUntilFargateProfileDeleted,
+  waitUntilNodegroupActive,
+  waitUntilNodegroupDeleted,
+  waitUntilCertificateAuthorityUpdateComplete,
+};
+
+/**
+ * @public
+ */
+export interface EKSRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface EKS {
+  /**
+   * @see {@link ActivateCertificateAuthorityCommand}
+   */
+  activateCertificateAuthority(
+    args: ActivateCertificateAuthorityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ActivateCertificateAuthorityCommandOutput>;
+  activateCertificateAuthority(
+    args: ActivateCertificateAuthorityCommandInput,
+    cb: (err: any, data?: ActivateCertificateAuthorityCommandOutput) => void
+  ): void;
+  activateCertificateAuthority(
+    args: ActivateCertificateAuthorityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ActivateCertificateAuthorityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateAccessPolicyCommand}
+   */
+  associateAccessPolicy(
+    args: AssociateAccessPolicyCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<AssociateAccessPolicyCommandOutput>;
+  associateAccessPolicy(
+    args: AssociateAccessPolicyCommandInput,
+    cb: (err: any, data?: AssociateAccessPolicyCommandOutput) => void
+  ): void;
+  associateAccessPolicy(
+    args: AssociateAccessPolicyCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: AssociateAccessPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateEncryptionConfigCommand}
+   */
+  associateEncryptionConfig(
+    args: AssociateEncryptionConfigCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<AssociateEncryptionConfigCommandOutput>;
+  associateEncryptionConfig(
+    args: AssociateEncryptionConfigCommandInput,
+    cb: (err: any, data?: AssociateEncryptionConfigCommandOutput) => void
+  ): void;
+  associateEncryptionConfig(
+    args: AssociateEncryptionConfigCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: AssociateEncryptionConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateIdentityProviderConfigCommand}
+   */
+  associateIdentityProviderConfig(
+    args: AssociateIdentityProviderConfigCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<AssociateIdentityProviderConfigCommandOutput>;
+  associateIdentityProviderConfig(
+    args: AssociateIdentityProviderConfigCommandInput,
+    cb: (err: any, data?: AssociateIdentityProviderConfigCommandOutput) => void
+  ): void;
+  associateIdentityProviderConfig(
+    args: AssociateIdentityProviderConfigCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: AssociateIdentityProviderConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelUpdateCommand}
+   */
+  cancelUpdate(
+    args: CancelUpdateCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CancelUpdateCommandOutput>;
+  cancelUpdate(
+    args: CancelUpdateCommandInput,
+    cb: (err: any, data?: CancelUpdateCommandOutput) => void
+  ): void;
+  cancelUpdate(
+    args: CancelUpdateCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CancelUpdateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAccessEntryCommand}
+   */
+  createAccessEntry(
+    args: CreateAccessEntryCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateAccessEntryCommandOutput>;
+  createAccessEntry(
+    args: CreateAccessEntryCommandInput,
+    cb: (err: any, data?: CreateAccessEntryCommandOutput) => void
+  ): void;
+  createAccessEntry(
+    args: CreateAccessEntryCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateAccessEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAddonCommand}
+   */
+  createAddon(
+    args: CreateAddonCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateAddonCommandOutput>;
+  createAddon(
+    args: CreateAddonCommandInput,
+    cb: (err: any, data?: CreateAddonCommandOutput) => void
+  ): void;
+  createAddon(
+    args: CreateAddonCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateAddonCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCapabilityCommand}
+   */
+  createCapability(
+    args: CreateCapabilityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateCapabilityCommandOutput>;
+  createCapability(
+    args: CreateCapabilityCommandInput,
+    cb: (err: any, data?: CreateCapabilityCommandOutput) => void
+  ): void;
+  createCapability(
+    args: CreateCapabilityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateCapabilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCertificateAuthorityCommand}
+   */
+  createCertificateAuthority(
+    args: CreateCertificateAuthorityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateCertificateAuthorityCommandOutput>;
+  createCertificateAuthority(
+    args: CreateCertificateAuthorityCommandInput,
+    cb: (err: any, data?: CreateCertificateAuthorityCommandOutput) => void
+  ): void;
+  createCertificateAuthority(
+    args: CreateCertificateAuthorityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateCertificateAuthorityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateClusterCommand}
+   */
+  createCluster(
+    args: CreateClusterCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEksAnywhereSubscriptionCommand}
+   */
+  createEksAnywhereSubscription(
+    args: CreateEksAnywhereSubscriptionCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateEksAnywhereSubscriptionCommandOutput>;
+  createEksAnywhereSubscription(
+    args: CreateEksAnywhereSubscriptionCommandInput,
+    cb: (err: any, data?: CreateEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+  createEksAnywhereSubscription(
+    args: CreateEksAnywhereSubscriptionCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFargateProfileCommand}
+   */
+  createFargateProfile(
+    args: CreateFargateProfileCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateFargateProfileCommandOutput>;
+  createFargateProfile(
+    args: CreateFargateProfileCommandInput,
+    cb: (err: any, data?: CreateFargateProfileCommandOutput) => void
+  ): void;
+  createFargateProfile(
+    args: CreateFargateProfileCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateFargateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNodegroupCommand}
+   */
+  createNodegroup(
+    args: CreateNodegroupCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreateNodegroupCommandOutput>;
+  createNodegroup(
+    args: CreateNodegroupCommandInput,
+    cb: (err: any, data?: CreateNodegroupCommandOutput) => void
+  ): void;
+  createNodegroup(
+    args: CreateNodegroupCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreateNodegroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePodIdentityAssociationCommand}
+   */
+  createPodIdentityAssociation(
+    args: CreatePodIdentityAssociationCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<CreatePodIdentityAssociationCommandOutput>;
+  createPodIdentityAssociation(
+    args: CreatePodIdentityAssociationCommandInput,
+    cb: (err: any, data?: CreatePodIdentityAssociationCommandOutput) => void
+  ): void;
+  createPodIdentityAssociation(
+    args: CreatePodIdentityAssociationCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: CreatePodIdentityAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccessEntryCommand}
+   */
+  deleteAccessEntry(
+    args: DeleteAccessEntryCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteAccessEntryCommandOutput>;
+  deleteAccessEntry(
+    args: DeleteAccessEntryCommandInput,
+    cb: (err: any, data?: DeleteAccessEntryCommandOutput) => void
+  ): void;
+  deleteAccessEntry(
+    args: DeleteAccessEntryCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteAccessEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAddonCommand}
+   */
+  deleteAddon(
+    args: DeleteAddonCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteAddonCommandOutput>;
+  deleteAddon(
+    args: DeleteAddonCommandInput,
+    cb: (err: any, data?: DeleteAddonCommandOutput) => void
+  ): void;
+  deleteAddon(
+    args: DeleteAddonCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteAddonCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCapabilityCommand}
+   */
+  deleteCapability(
+    args: DeleteCapabilityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteCapabilityCommandOutput>;
+  deleteCapability(
+    args: DeleteCapabilityCommandInput,
+    cb: (err: any, data?: DeleteCapabilityCommandOutput) => void
+  ): void;
+  deleteCapability(
+    args: DeleteCapabilityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteCapabilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCertificateAuthorityCommand}
+   */
+  deleteCertificateAuthority(
+    args: DeleteCertificateAuthorityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteCertificateAuthorityCommandOutput>;
+  deleteCertificateAuthority(
+    args: DeleteCertificateAuthorityCommandInput,
+    cb: (err: any, data?: DeleteCertificateAuthorityCommandOutput) => void
+  ): void;
+  deleteCertificateAuthority(
+    args: DeleteCertificateAuthorityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteCertificateAuthorityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterCommand}
+   */
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteClusterCommandOutput>;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEksAnywhereSubscriptionCommand}
+   */
+  deleteEksAnywhereSubscription(
+    args: DeleteEksAnywhereSubscriptionCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteEksAnywhereSubscriptionCommandOutput>;
+  deleteEksAnywhereSubscription(
+    args: DeleteEksAnywhereSubscriptionCommandInput,
+    cb: (err: any, data?: DeleteEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+  deleteEksAnywhereSubscription(
+    args: DeleteEksAnywhereSubscriptionCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFargateProfileCommand}
+   */
+  deleteFargateProfile(
+    args: DeleteFargateProfileCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteFargateProfileCommandOutput>;
+  deleteFargateProfile(
+    args: DeleteFargateProfileCommandInput,
+    cb: (err: any, data?: DeleteFargateProfileCommandOutput) => void
+  ): void;
+  deleteFargateProfile(
+    args: DeleteFargateProfileCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteFargateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNodegroupCommand}
+   */
+  deleteNodegroup(
+    args: DeleteNodegroupCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeleteNodegroupCommandOutput>;
+  deleteNodegroup(
+    args: DeleteNodegroupCommandInput,
+    cb: (err: any, data?: DeleteNodegroupCommandOutput) => void
+  ): void;
+  deleteNodegroup(
+    args: DeleteNodegroupCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeleteNodegroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePodIdentityAssociationCommand}
+   */
+  deletePodIdentityAssociation(
+    args: DeletePodIdentityAssociationCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeletePodIdentityAssociationCommandOutput>;
+  deletePodIdentityAssociation(
+    args: DeletePodIdentityAssociationCommandInput,
+    cb: (err: any, data?: DeletePodIdentityAssociationCommandOutput) => void
+  ): void;
+  deletePodIdentityAssociation(
+    args: DeletePodIdentityAssociationCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeletePodIdentityAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterClusterCommand}
+   */
+  deregisterCluster(
+    args: DeregisterClusterCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DeregisterClusterCommandOutput>;
+  deregisterCluster(
+    args: DeregisterClusterCommandInput,
+    cb: (err: any, data?: DeregisterClusterCommandOutput) => void
+  ): void;
+  deregisterCluster(
+    args: DeregisterClusterCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DeregisterClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccessEntryCommand}
+   */
+  describeAccessEntry(
+    args: DescribeAccessEntryCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeAccessEntryCommandOutput>;
+  describeAccessEntry(
+    args: DescribeAccessEntryCommandInput,
+    cb: (err: any, data?: DescribeAccessEntryCommandOutput) => void
+  ): void;
+  describeAccessEntry(
+    args: DescribeAccessEntryCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeAccessEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAddonCommand}
+   */
+  describeAddon(
+    args: DescribeAddonCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeAddonCommandOutput>;
+  describeAddon(
+    args: DescribeAddonCommandInput,
+    cb: (err: any, data?: DescribeAddonCommandOutput) => void
+  ): void;
+  describeAddon(
+    args: DescribeAddonCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeAddonCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAddonConfigurationCommand}
+   */
+  describeAddonConfiguration(
+    args: DescribeAddonConfigurationCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeAddonConfigurationCommandOutput>;
+  describeAddonConfiguration(
+    args: DescribeAddonConfigurationCommandInput,
+    cb: (err: any, data?: DescribeAddonConfigurationCommandOutput) => void
+  ): void;
+  describeAddonConfiguration(
+    args: DescribeAddonConfigurationCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeAddonConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAddonVersionsCommand}
+   */
+  describeAddonVersions(): Promise<DescribeAddonVersionsCommandOutput>;
+  describeAddonVersions(
+    args: DescribeAddonVersionsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeAddonVersionsCommandOutput>;
+  describeAddonVersions(
+    args: DescribeAddonVersionsCommandInput,
+    cb: (err: any, data?: DescribeAddonVersionsCommandOutput) => void
+  ): void;
+  describeAddonVersions(
+    args: DescribeAddonVersionsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeAddonVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCapabilityCommand}
+   */
+  describeCapability(
+    args: DescribeCapabilityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeCapabilityCommandOutput>;
+  describeCapability(
+    args: DescribeCapabilityCommandInput,
+    cb: (err: any, data?: DescribeCapabilityCommandOutput) => void
+  ): void;
+  describeCapability(
+    args: DescribeCapabilityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeCapabilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCertificateAuthorityCommand}
+   */
+  describeCertificateAuthority(
+    args: DescribeCertificateAuthorityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeCertificateAuthorityCommandOutput>;
+  describeCertificateAuthority(
+    args: DescribeCertificateAuthorityCommandInput,
+    cb: (err: any, data?: DescribeCertificateAuthorityCommandOutput) => void
+  ): void;
+  describeCertificateAuthority(
+    args: DescribeCertificateAuthorityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeCertificateAuthorityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   */
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeClusterCommandOutput>;
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    cb: (err: any, data?: DescribeClusterCommandOutput) => void
+  ): void;
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterVersionsCommand}
+   */
+  describeClusterVersions(): Promise<DescribeClusterVersionsCommandOutput>;
+  describeClusterVersions(
+    args: DescribeClusterVersionsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeClusterVersionsCommandOutput>;
+  describeClusterVersions(
+    args: DescribeClusterVersionsCommandInput,
+    cb: (err: any, data?: DescribeClusterVersionsCommandOutput) => void
+  ): void;
+  describeClusterVersions(
+    args: DescribeClusterVersionsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeClusterVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEksAnywhereSubscriptionCommand}
+   */
+  describeEksAnywhereSubscription(
+    args: DescribeEksAnywhereSubscriptionCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeEksAnywhereSubscriptionCommandOutput>;
+  describeEksAnywhereSubscription(
+    args: DescribeEksAnywhereSubscriptionCommandInput,
+    cb: (err: any, data?: DescribeEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+  describeEksAnywhereSubscription(
+    args: DescribeEksAnywhereSubscriptionCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFargateProfileCommand}
+   */
+  describeFargateProfile(
+    args: DescribeFargateProfileCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeFargateProfileCommandOutput>;
+  describeFargateProfile(
+    args: DescribeFargateProfileCommandInput,
+    cb: (err: any, data?: DescribeFargateProfileCommandOutput) => void
+  ): void;
+  describeFargateProfile(
+    args: DescribeFargateProfileCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeFargateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeIdentityProviderConfigCommand}
+   */
+  describeIdentityProviderConfig(
+    args: DescribeIdentityProviderConfigCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeIdentityProviderConfigCommandOutput>;
+  describeIdentityProviderConfig(
+    args: DescribeIdentityProviderConfigCommandInput,
+    cb: (err: any, data?: DescribeIdentityProviderConfigCommandOutput) => void
+  ): void;
+  describeIdentityProviderConfig(
+    args: DescribeIdentityProviderConfigCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeIdentityProviderConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInsightCommand}
+   */
+  describeInsight(
+    args: DescribeInsightCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeInsightCommandOutput>;
+  describeInsight(
+    args: DescribeInsightCommandInput,
+    cb: (err: any, data?: DescribeInsightCommandOutput) => void
+  ): void;
+  describeInsight(
+    args: DescribeInsightCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeInsightCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInsightsRefreshCommand}
+   */
+  describeInsightsRefresh(
+    args: DescribeInsightsRefreshCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeInsightsRefreshCommandOutput>;
+  describeInsightsRefresh(
+    args: DescribeInsightsRefreshCommandInput,
+    cb: (err: any, data?: DescribeInsightsRefreshCommandOutput) => void
+  ): void;
+  describeInsightsRefresh(
+    args: DescribeInsightsRefreshCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeInsightsRefreshCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeNodegroupCommand}
+   */
+  describeNodegroup(
+    args: DescribeNodegroupCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeNodegroupCommandOutput>;
+  describeNodegroup(
+    args: DescribeNodegroupCommandInput,
+    cb: (err: any, data?: DescribeNodegroupCommandOutput) => void
+  ): void;
+  describeNodegroup(
+    args: DescribeNodegroupCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeNodegroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePodIdentityAssociationCommand}
+   */
+  describePodIdentityAssociation(
+    args: DescribePodIdentityAssociationCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribePodIdentityAssociationCommandOutput>;
+  describePodIdentityAssociation(
+    args: DescribePodIdentityAssociationCommandInput,
+    cb: (err: any, data?: DescribePodIdentityAssociationCommandOutput) => void
+  ): void;
+  describePodIdentityAssociation(
+    args: DescribePodIdentityAssociationCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribePodIdentityAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeUpdateCommand}
+   */
+  describeUpdate(
+    args: DescribeUpdateCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DescribeUpdateCommandOutput>;
+  describeUpdate(
+    args: DescribeUpdateCommandInput,
+    cb: (err: any, data?: DescribeUpdateCommandOutput) => void
+  ): void;
+  describeUpdate(
+    args: DescribeUpdateCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DescribeUpdateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAccessPolicyCommand}
+   */
+  disassociateAccessPolicy(
+    args: DisassociateAccessPolicyCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DisassociateAccessPolicyCommandOutput>;
+  disassociateAccessPolicy(
+    args: DisassociateAccessPolicyCommandInput,
+    cb: (err: any, data?: DisassociateAccessPolicyCommandOutput) => void
+  ): void;
+  disassociateAccessPolicy(
+    args: DisassociateAccessPolicyCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DisassociateAccessPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateIdentityProviderConfigCommand}
+   */
+  disassociateIdentityProviderConfig(
+    args: DisassociateIdentityProviderConfigCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<DisassociateIdentityProviderConfigCommandOutput>;
+  disassociateIdentityProviderConfig(
+    args: DisassociateIdentityProviderConfigCommandInput,
+    cb: (err: any, data?: DisassociateIdentityProviderConfigCommandOutput) => void
+  ): void;
+  disassociateIdentityProviderConfig(
+    args: DisassociateIdentityProviderConfigCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: DisassociateIdentityProviderConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccessEntriesCommand}
+   */
+  listAccessEntries(
+    args: ListAccessEntriesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListAccessEntriesCommandOutput>;
+  listAccessEntries(
+    args: ListAccessEntriesCommandInput,
+    cb: (err: any, data?: ListAccessEntriesCommandOutput) => void
+  ): void;
+  listAccessEntries(
+    args: ListAccessEntriesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListAccessEntriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccessPoliciesCommand}
+   */
+  listAccessPolicies(): Promise<ListAccessPoliciesCommandOutput>;
+  listAccessPolicies(
+    args: ListAccessPoliciesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListAccessPoliciesCommandOutput>;
+  listAccessPolicies(
+    args: ListAccessPoliciesCommandInput,
+    cb: (err: any, data?: ListAccessPoliciesCommandOutput) => void
+  ): void;
+  listAccessPolicies(
+    args: ListAccessPoliciesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListAccessPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAddonsCommand}
+   */
+  listAddons(
+    args: ListAddonsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListAddonsCommandOutput>;
+  listAddons(
+    args: ListAddonsCommandInput,
+    cb: (err: any, data?: ListAddonsCommandOutput) => void
+  ): void;
+  listAddons(
+    args: ListAddonsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListAddonsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssociatedAccessPoliciesCommand}
+   */
+  listAssociatedAccessPolicies(
+    args: ListAssociatedAccessPoliciesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListAssociatedAccessPoliciesCommandOutput>;
+  listAssociatedAccessPolicies(
+    args: ListAssociatedAccessPoliciesCommandInput,
+    cb: (err: any, data?: ListAssociatedAccessPoliciesCommandOutput) => void
+  ): void;
+  listAssociatedAccessPolicies(
+    args: ListAssociatedAccessPoliciesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListAssociatedAccessPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCapabilitiesCommand}
+   */
+  listCapabilities(
+    args: ListCapabilitiesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListCapabilitiesCommandOutput>;
+  listCapabilities(
+    args: ListCapabilitiesCommandInput,
+    cb: (err: any, data?: ListCapabilitiesCommandOutput) => void
+  ): void;
+  listCapabilities(
+    args: ListCapabilitiesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListCapabilitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCertificateAuthoritiesCommand}
+   */
+  listCertificateAuthorities(
+    args: ListCertificateAuthoritiesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListCertificateAuthoritiesCommandOutput>;
+  listCertificateAuthorities(
+    args: ListCertificateAuthoritiesCommandInput,
+    cb: (err: any, data?: ListCertificateAuthoritiesCommandOutput) => void
+  ): void;
+  listCertificateAuthorities(
+    args: ListCertificateAuthoritiesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListCertificateAuthoritiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   */
+  listClusters(): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+  listClusters(
+    args: ListClustersCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEksAnywhereSubscriptionsCommand}
+   */
+  listEksAnywhereSubscriptions(): Promise<ListEksAnywhereSubscriptionsCommandOutput>;
+  listEksAnywhereSubscriptions(
+    args: ListEksAnywhereSubscriptionsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListEksAnywhereSubscriptionsCommandOutput>;
+  listEksAnywhereSubscriptions(
+    args: ListEksAnywhereSubscriptionsCommandInput,
+    cb: (err: any, data?: ListEksAnywhereSubscriptionsCommandOutput) => void
+  ): void;
+  listEksAnywhereSubscriptions(
+    args: ListEksAnywhereSubscriptionsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListEksAnywhereSubscriptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFargateProfilesCommand}
+   */
+  listFargateProfiles(
+    args: ListFargateProfilesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListFargateProfilesCommandOutput>;
+  listFargateProfiles(
+    args: ListFargateProfilesCommandInput,
+    cb: (err: any, data?: ListFargateProfilesCommandOutput) => void
+  ): void;
+  listFargateProfiles(
+    args: ListFargateProfilesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListFargateProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdentityProviderConfigsCommand}
+   */
+  listIdentityProviderConfigs(
+    args: ListIdentityProviderConfigsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListIdentityProviderConfigsCommandOutput>;
+  listIdentityProviderConfigs(
+    args: ListIdentityProviderConfigsCommandInput,
+    cb: (err: any, data?: ListIdentityProviderConfigsCommandOutput) => void
+  ): void;
+  listIdentityProviderConfigs(
+    args: ListIdentityProviderConfigsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListIdentityProviderConfigsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInsightsCommand}
+   */
+  listInsights(
+    args: ListInsightsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListInsightsCommandOutput>;
+  listInsights(
+    args: ListInsightsCommandInput,
+    cb: (err: any, data?: ListInsightsCommandOutput) => void
+  ): void;
+  listInsights(
+    args: ListInsightsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListInsightsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNodegroupsCommand}
+   */
+  listNodegroups(
+    args: ListNodegroupsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListNodegroupsCommandOutput>;
+  listNodegroups(
+    args: ListNodegroupsCommandInput,
+    cb: (err: any, data?: ListNodegroupsCommandOutput) => void
+  ): void;
+  listNodegroups(
+    args: ListNodegroupsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListNodegroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPodIdentityAssociationsCommand}
+   */
+  listPodIdentityAssociations(
+    args: ListPodIdentityAssociationsCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListPodIdentityAssociationsCommandOutput>;
+  listPodIdentityAssociations(
+    args: ListPodIdentityAssociationsCommandInput,
+    cb: (err: any, data?: ListPodIdentityAssociationsCommandOutput) => void
+  ): void;
+  listPodIdentityAssociations(
+    args: ListPodIdentityAssociationsCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListPodIdentityAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUpdatesCommand}
+   */
+  listUpdates(
+    args: ListUpdatesCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<ListUpdatesCommandOutput>;
+  listUpdates(
+    args: ListUpdatesCommandInput,
+    cb: (err: any, data?: ListUpdatesCommandOutput) => void
+  ): void;
+  listUpdates(
+    args: ListUpdatesCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: ListUpdatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterClusterCommand}
+   */
+  registerCluster(
+    args: RegisterClusterCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<RegisterClusterCommandOutput>;
+  registerCluster(
+    args: RegisterClusterCommandInput,
+    cb: (err: any, data?: RegisterClusterCommandOutput) => void
+  ): void;
+  registerCluster(
+    args: RegisterClusterCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: RegisterClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartInsightsRefreshCommand}
+   */
+  startInsightsRefresh(
+    args: StartInsightsRefreshCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<StartInsightsRefreshCommandOutput>;
+  startInsightsRefresh(
+    args: StartInsightsRefreshCommandInput,
+    cb: (err: any, data?: StartInsightsRefreshCommandOutput) => void
+  ): void;
+  startInsightsRefresh(
+    args: StartInsightsRefreshCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: StartInsightsRefreshCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAccessEntryCommand}
+   */
+  updateAccessEntry(
+    args: UpdateAccessEntryCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateAccessEntryCommandOutput>;
+  updateAccessEntry(
+    args: UpdateAccessEntryCommandInput,
+    cb: (err: any, data?: UpdateAccessEntryCommandOutput) => void
+  ): void;
+  updateAccessEntry(
+    args: UpdateAccessEntryCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateAccessEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAddonCommand}
+   */
+  updateAddon(
+    args: UpdateAddonCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateAddonCommandOutput>;
+  updateAddon(
+    args: UpdateAddonCommandInput,
+    cb: (err: any, data?: UpdateAddonCommandOutput) => void
+  ): void;
+  updateAddon(
+    args: UpdateAddonCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateAddonCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCapabilityCommand}
+   */
+  updateCapability(
+    args: UpdateCapabilityCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateCapabilityCommandOutput>;
+  updateCapability(
+    args: UpdateCapabilityCommandInput,
+    cb: (err: any, data?: UpdateCapabilityCommandOutput) => void
+  ): void;
+  updateCapability(
+    args: UpdateCapabilityCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateCapabilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterConfigCommand}
+   */
+  updateClusterConfig(
+    args: UpdateClusterConfigCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateClusterConfigCommandOutput>;
+  updateClusterConfig(
+    args: UpdateClusterConfigCommandInput,
+    cb: (err: any, data?: UpdateClusterConfigCommandOutput) => void
+  ): void;
+  updateClusterConfig(
+    args: UpdateClusterConfigCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateClusterConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterVersionCommand}
+   */
+  updateClusterVersion(
+    args: UpdateClusterVersionCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateClusterVersionCommandOutput>;
+  updateClusterVersion(
+    args: UpdateClusterVersionCommandInput,
+    cb: (err: any, data?: UpdateClusterVersionCommandOutput) => void
+  ): void;
+  updateClusterVersion(
+    args: UpdateClusterVersionCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateClusterVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEksAnywhereSubscriptionCommand}
+   */
+  updateEksAnywhereSubscription(
+    args: UpdateEksAnywhereSubscriptionCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateEksAnywhereSubscriptionCommandOutput>;
+  updateEksAnywhereSubscription(
+    args: UpdateEksAnywhereSubscriptionCommandInput,
+    cb: (err: any, data?: UpdateEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+  updateEksAnywhereSubscription(
+    args: UpdateEksAnywhereSubscriptionCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateEksAnywhereSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNodegroupConfigCommand}
+   */
+  updateNodegroupConfig(
+    args: UpdateNodegroupConfigCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateNodegroupConfigCommandOutput>;
+  updateNodegroupConfig(
+    args: UpdateNodegroupConfigCommandInput,
+    cb: (err: any, data?: UpdateNodegroupConfigCommandOutput) => void
+  ): void;
+  updateNodegroupConfig(
+    args: UpdateNodegroupConfigCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateNodegroupConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNodegroupVersionCommand}
+   */
+  updateNodegroupVersion(
+    args: UpdateNodegroupVersionCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdateNodegroupVersionCommandOutput>;
+  updateNodegroupVersion(
+    args: UpdateNodegroupVersionCommandInput,
+    cb: (err: any, data?: UpdateNodegroupVersionCommandOutput) => void
+  ): void;
+  updateNodegroupVersion(
+    args: UpdateNodegroupVersionCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdateNodegroupVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePodIdentityAssociationCommand}
+   */
+  updatePodIdentityAssociation(
+    args: UpdatePodIdentityAssociationCommandInput,
+    options?: EKSRequestOptions
+  ): Promise<UpdatePodIdentityAssociationCommandOutput>;
+  updatePodIdentityAssociation(
+    args: UpdatePodIdentityAssociationCommandInput,
+    cb: (err: any, data?: UpdatePodIdentityAssociationCommandOutput) => void
+  ): void;
+  updatePodIdentityAssociation(
+    args: UpdatePodIdentityAssociationCommandInput,
+    options: EKSRequestOptions,
+    cb: (err: any, data?: UpdatePodIdentityAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAddonVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAddonVersionsCommandOutput}.
+   */
+  paginateDescribeAddonVersions(
+    args?: DescribeAddonVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAddonVersionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeClusterVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeClusterVersionsCommandOutput}.
+   */
+  paginateDescribeClusterVersions(
+    args?: DescribeClusterVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeClusterVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListAccessEntriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccessEntriesCommandOutput}.
+   */
+  paginateListAccessEntries(
+    args: ListAccessEntriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccessEntriesCommandOutput>;
+
+  /**
+   * @see {@link ListAccessPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccessPoliciesCommandOutput}.
+   */
+  paginateListAccessPolicies(
+    args?: ListAccessPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccessPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListAddonsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAddonsCommandOutput}.
+   */
+  paginateListAddons(
+    args: ListAddonsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAddonsCommandOutput>;
+
+  /**
+   * @see {@link ListAssociatedAccessPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssociatedAccessPoliciesCommandOutput}.
+   */
+  paginateListAssociatedAccessPolicies(
+    args: ListAssociatedAccessPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssociatedAccessPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListCapabilitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCapabilitiesCommandOutput}.
+   */
+  paginateListCapabilities(
+    args: ListCapabilitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCapabilitiesCommandOutput>;
+
+  /**
+   * @see {@link ListCertificateAuthoritiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCertificateAuthoritiesCommandOutput}.
+   */
+  paginateListCertificateAuthorities(
+    args: ListCertificateAuthoritiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCertificateAuthoritiesCommandOutput>;
+
+  /**
+   * @see {@link ListClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersCommandOutput}.
+   */
+  paginateListClusters(
+    args?: ListClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersCommandOutput>;
+
+  /**
+   * @see {@link ListEksAnywhereSubscriptionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEksAnywhereSubscriptionsCommandOutput}.
+   */
+  paginateListEksAnywhereSubscriptions(
+    args?: ListEksAnywhereSubscriptionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEksAnywhereSubscriptionsCommandOutput>;
+
+  /**
+   * @see {@link ListFargateProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFargateProfilesCommandOutput}.
+   */
+  paginateListFargateProfiles(
+    args: ListFargateProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFargateProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListIdentityProviderConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIdentityProviderConfigsCommandOutput}.
+   */
+  paginateListIdentityProviderConfigs(
+    args: ListIdentityProviderConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIdentityProviderConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListInsightsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInsightsCommandOutput}.
+   */
+  paginateListInsights(
+    args: ListInsightsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInsightsCommandOutput>;
+
+  /**
+   * @see {@link ListNodegroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNodegroupsCommandOutput}.
+   */
+  paginateListNodegroups(
+    args: ListNodegroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNodegroupsCommandOutput>;
+
+  /**
+   * @see {@link ListPodIdentityAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPodIdentityAssociationsCommandOutput}.
+   */
+  paginateListPodIdentityAssociations(
+    args: ListPodIdentityAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPodIdentityAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListUpdatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUpdatesCommandOutput}.
+   */
+  paginateListUpdates(
+    args: ListUpdatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUpdatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeAddonCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilAddonActive(
+    args: DescribeAddonCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<DescribeAddonCommandOutput>>;
+
+  /**
+   * @see {@link DescribeAddonCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilAddonDeleted(
+    args: DescribeAddonCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilClusterActive(
+    args: DescribeClusterCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<DescribeClusterCommandOutput>>;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilClusterDeleted(
+    args: DescribeClusterCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeFargateProfileCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFargateProfileActive(
+    args: DescribeFargateProfileCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<DescribeFargateProfileCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFargateProfileCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFargateProfileDeleted(
+    args: DescribeFargateProfileCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeNodegroupCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilNodegroupActive(
+    args: DescribeNodegroupCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<DescribeNodegroupCommandOutput>>;
+
+  /**
+   * @see {@link DescribeNodegroupCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilNodegroupDeleted(
+    args: DescribeNodegroupCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeUpdateCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilCertificateAuthorityUpdateComplete(
+    args: DescribeUpdateCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<EKS>, "client">
+  ): Promise<WaiterResult<DescribeUpdateCommandOutput>>;
+}
 
 /**
  * <p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on
- *             Amazon Web Services without needing to stand up or maintain your own Kubernetes control plane.
- *             Kubernetes is an open-source system for automating the deployment, scaling, and
- *             management of containerized applications. </p>
- *         <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use
- *             all the existing plugins and tooling from the Kubernetes community. Applications running
- *             on Amazon EKS are fully compatible with applications running on any standard Kubernetes
- *             environment, whether running in on-premises data centers or public clouds. This means
- *             that you can easily migrate any standard Kubernetes application to Amazon EKS without any
- *             code modification required.</p>
+ *             Amazon Web Services without needing to setup or maintain your own Kubernetes control plane. Kubernetes is an
+ *             open-source system for automating the deployment, scaling, and management of
+ *             containerized applications.</p>
+ *          <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all
+ *             the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS
+ *             are fully compatible with applications running on any standard Kubernetes environment,
+ *             whether running in on-premises data centers or public clouds. This means that you can
+ *             easily migrate any standard Kubernetes application to Amazon EKS without any code modification
+ *             required.</p>
+ * @public
  */
-export class EKS extends EKSClient {
-  /**
-   * <p>Associate encryption configuration to an existing cluster.</p>
-   *         <p>You can use this API to enable encryption on existing clusters which do not have
-   *             encryption already enabled. This allows you to implement a defense-in-depth security
-   *             strategy without migrating applications to new Amazon EKS clusters.</p>
-   */
-  public associateEncryptionConfig(
-    args: AssociateEncryptionConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateEncryptionConfigCommandOutput>;
-  public associateEncryptionConfig(
-    args: AssociateEncryptionConfigCommandInput,
-    cb: (err: any, data?: AssociateEncryptionConfigCommandOutput) => void
-  ): void;
-  public associateEncryptionConfig(
-    args: AssociateEncryptionConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateEncryptionConfigCommandOutput) => void
-  ): void;
-  public associateEncryptionConfig(
-    args: AssociateEncryptionConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateEncryptionConfigCommandOutput) => void),
-    cb?: (err: any, data?: AssociateEncryptionConfigCommandOutput) => void
-  ): Promise<AssociateEncryptionConfigCommandOutput> | void {
-    const command = new AssociateEncryptionConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Associate an identity provider configuration to a cluster.</p>
-   *         <p>If you want to authenticate identities using an identity provider, you can create an
-   *             identity provider configuration and associate it to your cluster. After configuring
-   *             authentication to your cluster you can create Kubernetes <code>roles</code> and
-   *                 <code>clusterroles</code> to assign permissions to the roles, and then bind the
-   *             roles to the identities using Kubernetes <code>rolebindings</code> and
-   *                 <code>clusterrolebindings</code>. For more information see <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">Using RBAC
-   *                 Authorization</a> in the Kubernetes documentation.</p>
-   */
-  public associateIdentityProviderConfig(
-    args: AssociateIdentityProviderConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateIdentityProviderConfigCommandOutput>;
-  public associateIdentityProviderConfig(
-    args: AssociateIdentityProviderConfigCommandInput,
-    cb: (err: any, data?: AssociateIdentityProviderConfigCommandOutput) => void
-  ): void;
-  public associateIdentityProviderConfig(
-    args: AssociateIdentityProviderConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateIdentityProviderConfigCommandOutput) => void
-  ): void;
-  public associateIdentityProviderConfig(
-    args: AssociateIdentityProviderConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateIdentityProviderConfigCommandOutput) => void),
-    cb?: (err: any, data?: AssociateIdentityProviderConfigCommandOutput) => void
-  ): Promise<AssociateIdentityProviderConfigCommandOutput> | void {
-    const command = new AssociateIdentityProviderConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Amazon EKS add-on.</p>
-   *         <p>Amazon EKS add-ons help to automate the provisioning and lifecycle management of common
-   *             operational software for Amazon EKS clusters. Amazon EKS add-ons can only be used with Amazon EKS
-   *             clusters running version 1.18 with platform version <code>eks.3</code> or later because
-   *             add-ons rely on the Server-side Apply Kubernetes feature, which is only available in
-   *             Kubernetes 1.18 and later.</p>
-   */
-  public createAddon(args: CreateAddonCommandInput, options?: __HttpHandlerOptions): Promise<CreateAddonCommandOutput>;
-  public createAddon(args: CreateAddonCommandInput, cb: (err: any, data?: CreateAddonCommandOutput) => void): void;
-  public createAddon(
-    args: CreateAddonCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateAddonCommandOutput) => void
-  ): void;
-  public createAddon(
-    args: CreateAddonCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAddonCommandOutput) => void),
-    cb?: (err: any, data?: CreateAddonCommandOutput) => void
-  ): Promise<CreateAddonCommandOutput> | void {
-    const command = new CreateAddonCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Amazon EKS control plane. </p>
-   *         <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes
-   *             software, such as <code>etcd</code> and the API server. The control plane runs in an
-   *             account managed by Amazon Web Services, and the Kubernetes API is exposed via the Amazon EKS API server
-   *             endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its
-   *             own set of Amazon EC2 instances.</p>
-   *         <p>The cluster control plane is provisioned across multiple Availability Zones and
-   *             fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC
-   *             subnets to provide connectivity from the control plane instances to the nodes (for
-   *             example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code>
-   *             data flows).</p>
-   *         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane via
-   *             the Kubernetes API server endpoint and a certificate file that is created for your
-   *             cluster.</p>
-   *
-   *         <p>Cluster creation typically takes several minutes. After you create an Amazon EKS cluster,
-   *             you must configure your Kubernetes tooling to communicate with the API server and launch
-   *             nodes into your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html">Managing Cluster
-   *                 Authentication</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html">Launching Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>
-   */
-  public createCluster(
-    args: CreateClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateClusterCommandOutput>;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    cb: (err: any, data?: CreateClusterCommandOutput) => void
-  ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateClusterCommandOutput) => void
-  ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateClusterCommandOutput) => void),
-    cb?: (err: any, data?: CreateClusterCommandOutput) => void
-  ): Promise<CreateClusterCommandOutput> | void {
-    const command = new CreateClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate
-   *             profile in a cluster to be able to run pods on Fargate.</p>
-   *         <p>The Fargate profile allows an administrator to declare which pods run on Fargate and specify
-   *             which pods run on which Fargate profile. This declaration is done through the profile’s
-   *             selectors. Each profile can have up to five selectors that contain a namespace and
-   *             labels. A namespace is required for every selector. The label field consists of multiple
-   *             optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a
-   *             to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is
-   *             run on Fargate.</p>
-   *         <p>When you create a Fargate profile, you must specify a pod execution role to use with the
-   *             pods that are scheduled with the profile. This role is added to the cluster's Kubernetes
-   *                 <a href="https://kubernetes.io/docs/admin/authorization/rbac/">Role Based Access
-   *                 Control</a> (RBAC) for authorization so that the <code>kubelet</code> that is
-   *             running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can
-   *             appear in your cluster as a node. The pod execution role also provides IAM permissions
-   *             to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more
-   *             information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>
-   *         <p>Fargate profiles are immutable. However, you can create a new updated profile to replace
-   *             an existing profile and then delete the original after the updated profile has finished
-   *             creating.</p>
-   *         <p>If any Fargate profiles in a cluster are in the <code>DELETING</code> status, you must
-   *             wait for that Fargate profile to finish deleting before you can create any other profiles
-   *             in that cluster.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html">Fargate Profile</a> in the <i>Amazon EKS User Guide</i>.</p>
-   */
-  public createFargateProfile(
-    args: CreateFargateProfileCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateFargateProfileCommandOutput>;
-  public createFargateProfile(
-    args: CreateFargateProfileCommandInput,
-    cb: (err: any, data?: CreateFargateProfileCommandOutput) => void
-  ): void;
-  public createFargateProfile(
-    args: CreateFargateProfileCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateFargateProfileCommandOutput) => void
-  ): void;
-  public createFargateProfile(
-    args: CreateFargateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFargateProfileCommandOutput) => void),
-    cb?: (err: any, data?: CreateFargateProfileCommandOutput) => void
-  ): Promise<CreateFargateProfileCommandOutput> | void {
-    const command = new CreateFargateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a managed node group for an Amazon EKS cluster. You can only create a node group
-   *             for your cluster that is equal to the current Kubernetes version for the cluster. All
-   *             node groups are created with the latest AMI release version for the respective minor
-   *             Kubernetes version of the cluster, unless you deploy a custom AMI using a launch
-   *             template. For more information about using launch templates, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch
-   *                 template support</a>.</p>
-   *         <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that
-   *             are managed by Amazon Web Services for an Amazon EKS cluster. Each node group uses a version of the Amazon EKS
-   *             optimized Amazon Linux 2 AMI. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">Managed
-   *                 Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>
-   */
-  public createNodegroup(
-    args: CreateNodegroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateNodegroupCommandOutput>;
-  public createNodegroup(
-    args: CreateNodegroupCommandInput,
-    cb: (err: any, data?: CreateNodegroupCommandOutput) => void
-  ): void;
-  public createNodegroup(
-    args: CreateNodegroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateNodegroupCommandOutput) => void
-  ): void;
-  public createNodegroup(
-    args: CreateNodegroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateNodegroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateNodegroupCommandOutput) => void
-  ): Promise<CreateNodegroupCommandOutput> | void {
-    const command = new CreateNodegroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Delete an Amazon EKS add-on.</p>
-   *         <p>When you remove the add-on, it will also be deleted from the cluster. You can always
-   *             manually start an add-on on the cluster using the Kubernetes API.</p>
-   */
-  public deleteAddon(args: DeleteAddonCommandInput, options?: __HttpHandlerOptions): Promise<DeleteAddonCommandOutput>;
-  public deleteAddon(args: DeleteAddonCommandInput, cb: (err: any, data?: DeleteAddonCommandOutput) => void): void;
-  public deleteAddon(
-    args: DeleteAddonCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAddonCommandOutput) => void
-  ): void;
-  public deleteAddon(
-    args: DeleteAddonCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAddonCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAddonCommandOutput) => void
-  ): Promise<DeleteAddonCommandOutput> | void {
-    const command = new DeleteAddonCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the Amazon EKS cluster control plane.</p>
-   *         <p>If you have active services in your cluster that are associated with a load balancer,
-   *             you must delete those services before deleting the cluster so that the load balancers
-   *             are deleted properly. Otherwise, you can have orphaned resources in your VPC that
-   *             prevent you from being able to delete the VPC. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html">Deleting a
-   *                 Cluster</a> in the <i>Amazon EKS User Guide</i>.</p>
-   *         <p>If you have managed node groups or Fargate profiles attached to the cluster, you must
-   *             delete them first. For more information, see <a>DeleteNodegroup</a> and <a>DeleteFargateProfile</a>.</p>
-   */
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteClusterCommandOutput>;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    cb: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): Promise<DeleteClusterCommandOutput> | void {
-    const command = new DeleteClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Fargate profile.</p>
-   *         <p>When you delete a Fargate profile, any pods running on Fargate that were created with the
-   *             profile are deleted. If those pods match another Fargate profile, then they are scheduled
-   *             on Fargate with that profile. If they no longer match any Fargate profiles, then they are not
-   *             scheduled on Fargate and they may remain in a pending state.</p>
-   *         <p>Only one Fargate profile in a cluster can be in the <code>DELETING</code> status at a
-   *             time. You must wait for a Fargate profile to finish deleting before you can delete any
-   *             other profiles in that cluster.</p>
-   */
-  public deleteFargateProfile(
-    args: DeleteFargateProfileCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteFargateProfileCommandOutput>;
-  public deleteFargateProfile(
-    args: DeleteFargateProfileCommandInput,
-    cb: (err: any, data?: DeleteFargateProfileCommandOutput) => void
-  ): void;
-  public deleteFargateProfile(
-    args: DeleteFargateProfileCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteFargateProfileCommandOutput) => void
-  ): void;
-  public deleteFargateProfile(
-    args: DeleteFargateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFargateProfileCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFargateProfileCommandOutput) => void
-  ): Promise<DeleteFargateProfileCommandOutput> | void {
-    const command = new DeleteFargateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Amazon EKS node group for a cluster.</p>
-   */
-  public deleteNodegroup(
-    args: DeleteNodegroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteNodegroupCommandOutput>;
-  public deleteNodegroup(
-    args: DeleteNodegroupCommandInput,
-    cb: (err: any, data?: DeleteNodegroupCommandOutput) => void
-  ): void;
-  public deleteNodegroup(
-    args: DeleteNodegroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteNodegroupCommandOutput) => void
-  ): void;
-  public deleteNodegroup(
-    args: DeleteNodegroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteNodegroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteNodegroupCommandOutput) => void
-  ): Promise<DeleteNodegroupCommandOutput> | void {
-    const command = new DeleteNodegroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deregisters a connected cluster to remove it from the Amazon EKS control plane.</p>
-   */
-  public deregisterCluster(
-    args: DeregisterClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeregisterClusterCommandOutput>;
-  public deregisterCluster(
-    args: DeregisterClusterCommandInput,
-    cb: (err: any, data?: DeregisterClusterCommandOutput) => void
-  ): void;
-  public deregisterCluster(
-    args: DeregisterClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeregisterClusterCommandOutput) => void
-  ): void;
-  public deregisterCluster(
-    args: DeregisterClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeregisterClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeregisterClusterCommandOutput) => void
-  ): Promise<DeregisterClusterCommandOutput> | void {
-    const command = new DeregisterClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes an Amazon EKS add-on.</p>
-   */
-  public describeAddon(
-    args: DescribeAddonCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAddonCommandOutput>;
-  public describeAddon(
-    args: DescribeAddonCommandInput,
-    cb: (err: any, data?: DescribeAddonCommandOutput) => void
-  ): void;
-  public describeAddon(
-    args: DescribeAddonCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAddonCommandOutput) => void
-  ): void;
-  public describeAddon(
-    args: DescribeAddonCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAddonCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAddonCommandOutput) => void
-  ): Promise<DescribeAddonCommandOutput> | void {
-    const command = new DescribeAddonCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the Kubernetes versions that the add-on can be used with.</p>
-   */
-  public describeAddonVersions(
-    args: DescribeAddonVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAddonVersionsCommandOutput>;
-  public describeAddonVersions(
-    args: DescribeAddonVersionsCommandInput,
-    cb: (err: any, data?: DescribeAddonVersionsCommandOutput) => void
-  ): void;
-  public describeAddonVersions(
-    args: DescribeAddonVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAddonVersionsCommandOutput) => void
-  ): void;
-  public describeAddonVersions(
-    args: DescribeAddonVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAddonVersionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAddonVersionsCommandOutput) => void
-  ): Promise<DescribeAddonVersionsCommandOutput> | void {
-    const command = new DescribeAddonVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns descriptive information about an Amazon EKS cluster.</p>
-   *         <p>The API server endpoint and certificate authority data returned by this operation are
-   *             required for <code>kubelet</code> and <code>kubectl</code> to communicate with your
-   *             Kubernetes API server. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html">Create a
-   *                 kubeconfig for Amazon EKS</a>.</p>
-   *         <note>
-   *             <p>The API server endpoint and certificate authority data aren't available until the
-   *                 cluster reaches the <code>ACTIVE</code> state.</p>
-   *         </note>
-   */
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeClusterCommandOutput>;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    cb: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): void;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): void;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeClusterCommandOutput) => void),
-    cb?: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): Promise<DescribeClusterCommandOutput> | void {
-    const command = new DescribeClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns descriptive information about an Fargate profile.</p>
-   */
-  public describeFargateProfile(
-    args: DescribeFargateProfileCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeFargateProfileCommandOutput>;
-  public describeFargateProfile(
-    args: DescribeFargateProfileCommandInput,
-    cb: (err: any, data?: DescribeFargateProfileCommandOutput) => void
-  ): void;
-  public describeFargateProfile(
-    args: DescribeFargateProfileCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeFargateProfileCommandOutput) => void
-  ): void;
-  public describeFargateProfile(
-    args: DescribeFargateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFargateProfileCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFargateProfileCommandOutput) => void
-  ): Promise<DescribeFargateProfileCommandOutput> | void {
-    const command = new DescribeFargateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns descriptive information about an identity provider configuration.</p>
-   */
-  public describeIdentityProviderConfig(
-    args: DescribeIdentityProviderConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeIdentityProviderConfigCommandOutput>;
-  public describeIdentityProviderConfig(
-    args: DescribeIdentityProviderConfigCommandInput,
-    cb: (err: any, data?: DescribeIdentityProviderConfigCommandOutput) => void
-  ): void;
-  public describeIdentityProviderConfig(
-    args: DescribeIdentityProviderConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeIdentityProviderConfigCommandOutput) => void
-  ): void;
-  public describeIdentityProviderConfig(
-    args: DescribeIdentityProviderConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeIdentityProviderConfigCommandOutput) => void),
-    cb?: (err: any, data?: DescribeIdentityProviderConfigCommandOutput) => void
-  ): Promise<DescribeIdentityProviderConfigCommandOutput> | void {
-    const command = new DescribeIdentityProviderConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns descriptive information about an Amazon EKS node group.</p>
-   */
-  public describeNodegroup(
-    args: DescribeNodegroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeNodegroupCommandOutput>;
-  public describeNodegroup(
-    args: DescribeNodegroupCommandInput,
-    cb: (err: any, data?: DescribeNodegroupCommandOutput) => void
-  ): void;
-  public describeNodegroup(
-    args: DescribeNodegroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeNodegroupCommandOutput) => void
-  ): void;
-  public describeNodegroup(
-    args: DescribeNodegroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeNodegroupCommandOutput) => void),
-    cb?: (err: any, data?: DescribeNodegroupCommandOutput) => void
-  ): Promise<DescribeNodegroupCommandOutput> | void {
-    const command = new DescribeNodegroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns descriptive information about an update against your Amazon EKS cluster or
-   *             associated managed node group.</p>
-   *         <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an
-   *             update fails, the status is <code>Failed</code>, and an error detail explains the reason
-   *             for the failure.</p>
-   */
-  public describeUpdate(
-    args: DescribeUpdateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeUpdateCommandOutput>;
-  public describeUpdate(
-    args: DescribeUpdateCommandInput,
-    cb: (err: any, data?: DescribeUpdateCommandOutput) => void
-  ): void;
-  public describeUpdate(
-    args: DescribeUpdateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeUpdateCommandOutput) => void
-  ): void;
-  public describeUpdate(
-    args: DescribeUpdateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUpdateCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUpdateCommandOutput) => void
-  ): Promise<DescribeUpdateCommandOutput> | void {
-    const command = new DescribeUpdateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disassociates an identity provider configuration from a cluster. If you disassociate
-   *             an identity provider from your cluster, users included in the provider can no longer
-   *             access the cluster. However, you can still access the cluster with Amazon Web Services IAM
-   *             users.</p>
-   */
-  public disassociateIdentityProviderConfig(
-    args: DisassociateIdentityProviderConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateIdentityProviderConfigCommandOutput>;
-  public disassociateIdentityProviderConfig(
-    args: DisassociateIdentityProviderConfigCommandInput,
-    cb: (err: any, data?: DisassociateIdentityProviderConfigCommandOutput) => void
-  ): void;
-  public disassociateIdentityProviderConfig(
-    args: DisassociateIdentityProviderConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateIdentityProviderConfigCommandOutput) => void
-  ): void;
-  public disassociateIdentityProviderConfig(
-    args: DisassociateIdentityProviderConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateIdentityProviderConfigCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateIdentityProviderConfigCommandOutput) => void
-  ): Promise<DisassociateIdentityProviderConfigCommandOutput> | void {
-    const command = new DisassociateIdentityProviderConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the available add-ons.</p>
-   */
-  public listAddons(args: ListAddonsCommandInput, options?: __HttpHandlerOptions): Promise<ListAddonsCommandOutput>;
-  public listAddons(args: ListAddonsCommandInput, cb: (err: any, data?: ListAddonsCommandOutput) => void): void;
-  public listAddons(
-    args: ListAddonsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAddonsCommandOutput) => void
-  ): void;
-  public listAddons(
-    args: ListAddonsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAddonsCommandOutput) => void),
-    cb?: (err: any, data?: ListAddonsCommandOutput) => void
-  ): Promise<ListAddonsCommandOutput> | void {
-    const command = new ListAddonsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Region.</p>
-   */
-  public listClusters(
-    args: ListClustersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListClustersCommandOutput>;
-  public listClusters(args: ListClustersCommandInput, cb: (err: any, data?: ListClustersCommandOutput) => void): void;
-  public listClusters(
-    args: ListClustersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListClustersCommandOutput) => void
-  ): void;
-  public listClusters(
-    args: ListClustersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListClustersCommandOutput) => void),
-    cb?: (err: any, data?: ListClustersCommandOutput) => void
-  ): Promise<ListClustersCommandOutput> | void {
-    const command = new ListClustersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services
-   *             account in the specified Region.</p>
-   */
-  public listFargateProfiles(
-    args: ListFargateProfilesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListFargateProfilesCommandOutput>;
-  public listFargateProfiles(
-    args: ListFargateProfilesCommandInput,
-    cb: (err: any, data?: ListFargateProfilesCommandOutput) => void
-  ): void;
-  public listFargateProfiles(
-    args: ListFargateProfilesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListFargateProfilesCommandOutput) => void
-  ): void;
-  public listFargateProfiles(
-    args: ListFargateProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFargateProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListFargateProfilesCommandOutput) => void
-  ): Promise<ListFargateProfilesCommandOutput> | void {
-    const command = new ListFargateProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>A list of identity provider configurations.</p>
-   */
-  public listIdentityProviderConfigs(
-    args: ListIdentityProviderConfigsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListIdentityProviderConfigsCommandOutput>;
-  public listIdentityProviderConfigs(
-    args: ListIdentityProviderConfigsCommandInput,
-    cb: (err: any, data?: ListIdentityProviderConfigsCommandOutput) => void
-  ): void;
-  public listIdentityProviderConfigs(
-    args: ListIdentityProviderConfigsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListIdentityProviderConfigsCommandOutput) => void
-  ): void;
-  public listIdentityProviderConfigs(
-    args: ListIdentityProviderConfigsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIdentityProviderConfigsCommandOutput) => void),
-    cb?: (err: any, data?: ListIdentityProviderConfigsCommandOutput) => void
-  ): Promise<ListIdentityProviderConfigsCommandOutput> | void {
-    const command = new ListIdentityProviderConfigsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Amazon EKS managed node groups associated with the specified cluster in your
-   *             Amazon Web Services account in the specified Region. Self-managed node groups are not listed.</p>
-   */
-  public listNodegroups(
-    args: ListNodegroupsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListNodegroupsCommandOutput>;
-  public listNodegroups(
-    args: ListNodegroupsCommandInput,
-    cb: (err: any, data?: ListNodegroupsCommandOutput) => void
-  ): void;
-  public listNodegroups(
-    args: ListNodegroupsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListNodegroupsCommandOutput) => void
-  ): void;
-  public listNodegroups(
-    args: ListNodegroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNodegroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListNodegroupsCommandOutput) => void
-  ): Promise<ListNodegroupsCommandOutput> | void {
-    const command = new ListNodegroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>List the tags for an Amazon EKS resource.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the updates associated with an Amazon EKS cluster or managed node group in your Amazon Web Services
-   *             account, in the specified Region.</p>
-   */
-  public listUpdates(args: ListUpdatesCommandInput, options?: __HttpHandlerOptions): Promise<ListUpdatesCommandOutput>;
-  public listUpdates(args: ListUpdatesCommandInput, cb: (err: any, data?: ListUpdatesCommandOutput) => void): void;
-  public listUpdates(
-    args: ListUpdatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListUpdatesCommandOutput) => void
-  ): void;
-  public listUpdates(
-    args: ListUpdatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUpdatesCommandOutput) => void),
-    cb?: (err: any, data?: ListUpdatesCommandOutput) => void
-  ): Promise<ListUpdatesCommandOutput> | void {
-    const command = new ListUpdatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p>
-   *         <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.
-   *          </p>
-   *         <p>Cluster connection requires two steps. First, send a <code>
-   *                <a>RegisterClusterRequest</a>
-   *             </code> to add it to the Amazon EKS control plane.</p>
-   *         <p>Second, a <a href="https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml">Manifest</a> containing the <code>activationID</code> and <code>activationCode</code> must be applied to the Kubernetes cluster through it's native provider to provide visibility.</p>
-   *
-   *         <p>After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within a set amount of time,
-   *             then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>
-   */
-  public registerCluster(
-    args: RegisterClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RegisterClusterCommandOutput>;
-  public registerCluster(
-    args: RegisterClusterCommandInput,
-    cb: (err: any, data?: RegisterClusterCommandOutput) => void
-  ): void;
-  public registerCluster(
-    args: RegisterClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RegisterClusterCommandOutput) => void
-  ): void;
-  public registerCluster(
-    args: RegisterClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterClusterCommandOutput) => void),
-    cb?: (err: any, data?: RegisterClusterCommandOutput) => void
-  ): Promise<RegisterClusterCommandOutput> | void {
-    const command = new RegisterClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Associates the specified tags to a resource with the specified
-   *                 <code>resourceArn</code>. If existing tags on a resource are not specified in the
-   *             request parameters, they are not changed. When a resource is deleted, the tags
-   *             associated with that resource are deleted as well. Tags that you create for Amazon EKS
-   *             resources do not propagate to any other resources associated with the cluster. For
-   *             example, if you tag a cluster with this operation, that tag does not automatically
-   *             propagate to the subnets and nodes associated with the cluster.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes specified tags from a resource.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Amazon EKS add-on.</p>
-   */
-  public updateAddon(args: UpdateAddonCommandInput, options?: __HttpHandlerOptions): Promise<UpdateAddonCommandOutput>;
-  public updateAddon(args: UpdateAddonCommandInput, cb: (err: any, data?: UpdateAddonCommandOutput) => void): void;
-  public updateAddon(
-    args: UpdateAddonCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateAddonCommandOutput) => void
-  ): void;
-  public updateAddon(
-    args: UpdateAddonCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAddonCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAddonCommandOutput) => void
-  ): Promise<UpdateAddonCommandOutput> | void {
-    const command = new UpdateAddonCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Amazon EKS cluster configuration. Your cluster continues to function during the
-   *             update. The response output includes an update ID that you can use to track the status
-   *             of your cluster update with the <a>DescribeUpdate</a> API operation.</p>
-   *         <p>You can use this API operation to enable or disable exporting the Kubernetes control
-   *             plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't
-   *             exported to CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon EKS
-   *                 Cluster Control Plane Logs</a> in the
-   *             <i>
-   *                <i>Amazon EKS User Guide</i>
-   *             </i>.</p>
-   *         <note>
-   *             <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported
-   *                 control plane logs. For more information, see <a href="http://aws.amazon.com/cloudwatch/pricing/">CloudWatch Pricing</a>.</p>
-   *         </note>
-   *         <p>You can also use this API operation to enable or disable public and private access to
-   *             your cluster's Kubernetes API server endpoint. By default, public access is enabled, and
-   *             private access is disabled. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster
-   *                 endpoint access control</a> in the <i>
-   *                <i>Amazon EKS User Guide</i>
-   *             </i>. </p>
-   *         <important>
-   *             <p>You can't update the subnets or security group IDs for an existing cluster.</p>
-   *         </important>
-   *         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During
-   *             an update, the cluster status moves to <code>UPDATING</code> (this status transition is
-   *             eventually consistent). When the update is complete (either <code>Failed</code> or
-   *                 <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>
-   */
-  public updateClusterConfig(
-    args: UpdateClusterConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateClusterConfigCommandOutput>;
-  public updateClusterConfig(
-    args: UpdateClusterConfigCommandInput,
-    cb: (err: any, data?: UpdateClusterConfigCommandOutput) => void
-  ): void;
-  public updateClusterConfig(
-    args: UpdateClusterConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateClusterConfigCommandOutput) => void
-  ): void;
-  public updateClusterConfig(
-    args: UpdateClusterConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateClusterConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateClusterConfigCommandOutput) => void
-  ): Promise<UpdateClusterConfigCommandOutput> | void {
-    const command = new UpdateClusterConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster continues
-   *             to function during the update. The response output includes an update ID that you can
-   *             use to track the status of your cluster update with the <a>DescribeUpdate</a>
-   *             API operation.</p>
-   *         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During
-   *             an update, the cluster status moves to <code>UPDATING</code> (this status transition is
-   *             eventually consistent). When the update is complete (either <code>Failed</code> or
-   *                 <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>
-   *         <p>If your cluster has managed node groups attached to it, all of your node groups’
-   *             Kubernetes versions must match the cluster’s Kubernetes version in order to update the
-   *             cluster to a new Kubernetes version.</p>
-   */
-  public updateClusterVersion(
-    args: UpdateClusterVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateClusterVersionCommandOutput>;
-  public updateClusterVersion(
-    args: UpdateClusterVersionCommandInput,
-    cb: (err: any, data?: UpdateClusterVersionCommandOutput) => void
-  ): void;
-  public updateClusterVersion(
-    args: UpdateClusterVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateClusterVersionCommandOutput) => void
-  ): void;
-  public updateClusterVersion(
-    args: UpdateClusterVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateClusterVersionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateClusterVersionCommandOutput) => void
-  ): Promise<UpdateClusterVersionCommandOutput> | void {
-    const command = new UpdateClusterVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Amazon EKS managed node group configuration. Your node group continues to
-   *             function during the update. The response output includes an update ID that you can use
-   *             to track the status of your node group update with the <a>DescribeUpdate</a>
-   *             API operation. Currently you can update the Kubernetes labels for a node group or the
-   *             scaling configuration.</p>
-   */
-  public updateNodegroupConfig(
-    args: UpdateNodegroupConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateNodegroupConfigCommandOutput>;
-  public updateNodegroupConfig(
-    args: UpdateNodegroupConfigCommandInput,
-    cb: (err: any, data?: UpdateNodegroupConfigCommandOutput) => void
-  ): void;
-  public updateNodegroupConfig(
-    args: UpdateNodegroupConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateNodegroupConfigCommandOutput) => void
-  ): void;
-  public updateNodegroupConfig(
-    args: UpdateNodegroupConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateNodegroupConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateNodegroupConfigCommandOutput) => void
-  ): Promise<UpdateNodegroupConfigCommandOutput> | void {
-    const command = new UpdateNodegroupConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node group.</p>
-   *         <p>You can update a node group using a launch template only if the node group was
-   *             originally deployed with a launch template. If you need to update a custom AMI in a node
-   *             group that was deployed with a launch template, then update your custom AMI, specify the
-   *             new ID in a new version of the launch template, and then update the node group to the
-   *             new version of the launch template.</p>
-   *         <p>If you update without a launch template, then you can update to the latest available
-   *             AMI version of a node group's current Kubernetes version by not specifying a Kubernetes
-   *             version in the request. You can update to the latest AMI version of your cluster's
-   *             current Kubernetes version by specifying your cluster's Kubernetes version in the
-   *             request. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS
-   *                 optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-   *         <p>You cannot roll back a node group to an earlier Kubernetes version or AMI
-   *             version.</p>
-   *         <p>When a node in a managed node group is terminated due to a scaling action or update,
-   *             the pods in that node are drained first. Amazon EKS attempts to drain the nodes gracefully
-   *             and will fail if it is unable to do so. You can <code>force</code> the update if Amazon EKS
-   *             is unable to drain the nodes as a result of a pod disruption budget issue.</p>
-   */
-  public updateNodegroupVersion(
-    args: UpdateNodegroupVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateNodegroupVersionCommandOutput>;
-  public updateNodegroupVersion(
-    args: UpdateNodegroupVersionCommandInput,
-    cb: (err: any, data?: UpdateNodegroupVersionCommandOutput) => void
-  ): void;
-  public updateNodegroupVersion(
-    args: UpdateNodegroupVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateNodegroupVersionCommandOutput) => void
-  ): void;
-  public updateNodegroupVersion(
-    args: UpdateNodegroupVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateNodegroupVersionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateNodegroupVersionCommandOutput) => void
-  ): Promise<UpdateNodegroupVersionCommandOutput> | void {
-    const command = new UpdateNodegroupVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class EKS extends EKSClient implements EKS {}
+createAggregatedClient(commands, EKS, { paginators, waiters });

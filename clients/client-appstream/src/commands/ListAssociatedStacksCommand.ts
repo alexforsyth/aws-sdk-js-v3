@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { ListAssociatedStacksRequest, ListAssociatedStacksResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAssociatedStacksCommand,
-  serializeAws_json1_1ListAssociatedStacksCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAssociatedStacksRequest, ListAssociatedStacksResult } from "../models/models_0";
+import { ListAssociatedStacks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssociatedStacksCommand}.
+ */
 export interface ListAssociatedStacksCommandInput extends ListAssociatedStacksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssociatedStacksCommand}.
+ */
 export interface ListAssociatedStacksCommandOutput extends ListAssociatedStacksResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,51 @@ export interface ListAssociatedStacksCommandOutput extends ListAssociatedStacksR
  * ```javascript
  * import { AppStreamClient, ListAssociatedStacksCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, ListAssociatedStacksCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // ListAssociatedStacksRequest
+ *   FleetName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAssociatedStacksCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssociatedStacksResult
+ * //   Names: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAssociatedStacksCommandInput - {@link ListAssociatedStacksCommandInput}
+ * @returns {@link ListAssociatedStacksCommandOutput}
  * @see {@link ListAssociatedStacksCommandInput} for command's `input` shape.
  * @see {@link ListAssociatedStacksCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class ListAssociatedStacksCommand extends $Command<
-  ListAssociatedStacksCommandInput,
-  ListAssociatedStacksCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssociatedStacksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAssociatedStacksCommandInput, ListAssociatedStacksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "ListAssociatedStacksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssociatedStacksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAssociatedStacksResult.filterSensitiveLog,
+export class ListAssociatedStacksCommand extends command<ListAssociatedStacksCommandInput, ListAssociatedStacksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssociatedStacks",
+  ListAssociatedStacks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssociatedStacksRequest;
+      output: ListAssociatedStacksResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAssociatedStacksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAssociatedStacksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAssociatedStacksCommandOutput> {
-    return deserializeAws_json1_1ListAssociatedStacksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssociatedStacksCommandInput;
+      output: ListAssociatedStacksCommandOutput;
+    };
+  };
 }

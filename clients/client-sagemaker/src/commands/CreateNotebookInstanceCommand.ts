@@ -1,131 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateNotebookInstanceInput, CreateNotebookInstanceOutput } from "../models/models_1";
-import {
-  deserializeAws_json1_1CreateNotebookInstanceCommand,
-  serializeAws_json1_1CreateNotebookInstanceCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateNotebookInstanceInput, CreateNotebookInstanceOutput } from "../models/models_2";
+import { CreateNotebookInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateNotebookInstanceCommand}.
+ */
 export interface CreateNotebookInstanceCommandInput extends CreateNotebookInstanceInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateNotebookInstanceCommand}.
+ */
 export interface CreateNotebookInstanceCommandOutput extends CreateNotebookInstanceOutput, __MetadataBearer {}
 
 /**
- * <p>Creates an Amazon SageMaker notebook instance. A notebook instance is a machine learning (ML)
- *             compute instance running on a Jupyter notebook. </p>
- *         <p>In a <code>CreateNotebookInstance</code> request, specify the type of ML compute
- *             instance that you want to run. Amazon SageMaker launches the instance, installs common libraries
- *             that you can use to explore datasets for model training, and attaches an ML storage
- *             volume to the notebook instance. </p>
- *         <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to
- *             use Amazon SageMaker with a specific algorithm or with a machine learning framework. </p>
- *         <p>After receiving the request, Amazon SageMaker does the following:</p>
- *         <ol>
- *             <li>
- *                 <p>Creates a network interface in the Amazon SageMaker VPC.</p>
- *             </li>
- *             <li>
- *                 <p>(Option) If you specified <code>SubnetId</code>, Amazon SageMaker creates a network
- *                     interface in your own VPC, which is inferred from the subnet ID that you provide
- *                     in the input. When creating this network interface, Amazon SageMaker attaches the security
- *                     group that you specified in the request to the network interface that it creates
- *                     in your VPC.</p>
- *
- *             </li>
- *             <li>
- *                 <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker
- *                     VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both
- *                     network interfaces when launching this instance. This enables inbound traffic
- *                     from your own VPC to the notebook instance, assuming that the security groups
- *                     allow it.</p>
- *             </li>
- *          </ol>
- *
- *         <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).
- *             You can't change the name of a notebook instance after you create it.</p>
- *         <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and
- *             work in Jupyter notebooks. For example, you can write code to explore a dataset that you
- *             can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and
- *             validate hosted models. </p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>
+ * <p>Creates an SageMaker AI notebook instance. A notebook instance is a machine learning (ML) compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, specify the type of ML compute instance that you want to run. SageMaker AI launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>SageMaker AI also provides a set of example notebooks. Each notebook demonstrates how to use SageMaker AI with a specific algorithm or with a machine learning framework. </p> <p>After receiving the request, SageMaker AI does the following:</p> <ol> <li> <p>Creates a network interface in the SageMaker AI VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, SageMaker AI creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, SageMaker AI attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the SageMaker AI VPC. If you specified <code>SubnetId</code> of your VPC, SageMaker AI specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, SageMaker AI returns its Amazon Resource Name (ARN). You can't change the name of a notebook instance after you create it.</p> <p>After SageMaker AI creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating SageMaker AI endpoints, and validate hosted models. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It Works</a>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, CreateNotebookInstanceCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateNotebookInstanceCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateNotebookInstanceInput
+ *   NotebookInstanceName: "STRING_VALUE", // required
+ *   InstanceType: "ml.t2.medium" || "ml.t2.large" || "ml.t2.xlarge" || "ml.t2.2xlarge" || "ml.t3.medium" || "ml.t3.large" || "ml.t3.xlarge" || "ml.t3.2xlarge" || "ml.m4.xlarge" || "ml.m4.2xlarge" || "ml.m4.4xlarge" || "ml.m4.10xlarge" || "ml.m4.16xlarge" || "ml.m5.xlarge" || "ml.m5.2xlarge" || "ml.m5.4xlarge" || "ml.m5.12xlarge" || "ml.m5.24xlarge" || "ml.m5d.large" || "ml.m5d.xlarge" || "ml.m5d.2xlarge" || "ml.m5d.4xlarge" || "ml.m5d.8xlarge" || "ml.m5d.12xlarge" || "ml.m5d.16xlarge" || "ml.m5d.24xlarge" || "ml.c4.xlarge" || "ml.c4.2xlarge" || "ml.c4.4xlarge" || "ml.c4.8xlarge" || "ml.c5.xlarge" || "ml.c5.2xlarge" || "ml.c5.4xlarge" || "ml.c5.9xlarge" || "ml.c5.18xlarge" || "ml.c5d.xlarge" || "ml.c5d.2xlarge" || "ml.c5d.4xlarge" || "ml.c5d.9xlarge" || "ml.c5d.18xlarge" || "ml.p2.xlarge" || "ml.p2.8xlarge" || "ml.p2.16xlarge" || "ml.p3.2xlarge" || "ml.p3.8xlarge" || "ml.p3.16xlarge" || "ml.p3dn.24xlarge" || "ml.g4dn.xlarge" || "ml.g4dn.2xlarge" || "ml.g4dn.4xlarge" || "ml.g4dn.8xlarge" || "ml.g4dn.12xlarge" || "ml.g4dn.16xlarge" || "ml.r5.large" || "ml.r5.xlarge" || "ml.r5.2xlarge" || "ml.r5.4xlarge" || "ml.r5.8xlarge" || "ml.r5.12xlarge" || "ml.r5.16xlarge" || "ml.r5.24xlarge" || "ml.g5.xlarge" || "ml.g5.2xlarge" || "ml.g5.4xlarge" || "ml.g5.8xlarge" || "ml.g5.16xlarge" || "ml.g5.12xlarge" || "ml.g5.24xlarge" || "ml.g5.48xlarge" || "ml.inf1.xlarge" || "ml.inf1.2xlarge" || "ml.inf1.6xlarge" || "ml.inf1.24xlarge" || "ml.trn1.2xlarge" || "ml.trn1.32xlarge" || "ml.trn1n.32xlarge" || "ml.inf2.xlarge" || "ml.inf2.8xlarge" || "ml.inf2.24xlarge" || "ml.inf2.48xlarge" || "ml.p4d.24xlarge" || "ml.p4de.24xlarge" || "ml.p5.48xlarge" || "ml.p6-b200.48xlarge" || "ml.m6i.large" || "ml.m6i.xlarge" || "ml.m6i.2xlarge" || "ml.m6i.4xlarge" || "ml.m6i.8xlarge" || "ml.m6i.12xlarge" || "ml.m6i.16xlarge" || "ml.m6i.24xlarge" || "ml.m6i.32xlarge" || "ml.m7i.large" || "ml.m7i.xlarge" || "ml.m7i.2xlarge" || "ml.m7i.4xlarge" || "ml.m7i.8xlarge" || "ml.m7i.12xlarge" || "ml.m7i.16xlarge" || "ml.m7i.24xlarge" || "ml.m7i.48xlarge" || "ml.c6i.large" || "ml.c6i.xlarge" || "ml.c6i.2xlarge" || "ml.c6i.4xlarge" || "ml.c6i.8xlarge" || "ml.c6i.12xlarge" || "ml.c6i.16xlarge" || "ml.c6i.24xlarge" || "ml.c6i.32xlarge" || "ml.c7i.large" || "ml.c7i.xlarge" || "ml.c7i.2xlarge" || "ml.c7i.4xlarge" || "ml.c7i.8xlarge" || "ml.c7i.12xlarge" || "ml.c7i.16xlarge" || "ml.c7i.24xlarge" || "ml.c7i.48xlarge" || "ml.r6i.large" || "ml.r6i.xlarge" || "ml.r6i.2xlarge" || "ml.r6i.4xlarge" || "ml.r6i.8xlarge" || "ml.r6i.12xlarge" || "ml.r6i.16xlarge" || "ml.r6i.24xlarge" || "ml.r6i.32xlarge" || "ml.r7i.large" || "ml.r7i.xlarge" || "ml.r7i.2xlarge" || "ml.r7i.4xlarge" || "ml.r7i.8xlarge" || "ml.r7i.12xlarge" || "ml.r7i.16xlarge" || "ml.r7i.24xlarge" || "ml.r7i.48xlarge" || "ml.m6id.large" || "ml.m6id.xlarge" || "ml.m6id.2xlarge" || "ml.m6id.4xlarge" || "ml.m6id.8xlarge" || "ml.m6id.12xlarge" || "ml.m6id.16xlarge" || "ml.m6id.24xlarge" || "ml.m6id.32xlarge" || "ml.c6id.large" || "ml.c6id.xlarge" || "ml.c6id.2xlarge" || "ml.c6id.4xlarge" || "ml.c6id.8xlarge" || "ml.c6id.12xlarge" || "ml.c6id.16xlarge" || "ml.c6id.24xlarge" || "ml.c6id.32xlarge" || "ml.r6id.large" || "ml.r6id.xlarge" || "ml.r6id.2xlarge" || "ml.r6id.4xlarge" || "ml.r6id.8xlarge" || "ml.r6id.12xlarge" || "ml.r6id.16xlarge" || "ml.r6id.24xlarge" || "ml.r6id.32xlarge" || "ml.g6.xlarge" || "ml.g6.2xlarge" || "ml.g6.4xlarge" || "ml.g6.8xlarge" || "ml.g6.12xlarge" || "ml.g6.16xlarge" || "ml.g6.24xlarge" || "ml.g6.48xlarge" || "ml.g7e.2xlarge" || "ml.g7e.4xlarge" || "ml.g7e.8xlarge" || "ml.g7e.12xlarge" || "ml.g7e.24xlarge" || "ml.g7e.48xlarge" || "ml.p5.4xlarge" || "ml.p5en.48xlarge" || "ml.g6e.xlarge" || "ml.g6e.2xlarge" || "ml.g6e.4xlarge" || "ml.g6e.8xlarge" || "ml.g6e.12xlarge" || "ml.g6e.16xlarge" || "ml.g6e.24xlarge" || "ml.g6e.48xlarge", // required
+ *   SubnetId: "STRING_VALUE",
+ *   SecurityGroupIds: [ // SecurityGroupIds
+ *     "STRING_VALUE",
+ *   ],
+ *   IpAddressType: "ipv4" || "dualstack",
+ *   RoleArn: "STRING_VALUE", // required
+ *   KmsKeyId: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   LifecycleConfigName: "STRING_VALUE",
+ *   DirectInternetAccess: "Enabled" || "Disabled",
+ *   VolumeSizeInGB: Number("int"),
+ *   AcceleratorTypes: [ // NotebookInstanceAcceleratorTypes
+ *     "ml.eia1.medium" || "ml.eia1.large" || "ml.eia1.xlarge" || "ml.eia2.medium" || "ml.eia2.large" || "ml.eia2.xlarge",
+ *   ],
+ *   DefaultCodeRepository: "STRING_VALUE",
+ *   AdditionalCodeRepositories: [ // AdditionalCodeRepositoryNamesOrUrls
+ *     "STRING_VALUE",
+ *   ],
+ *   RootAccess: "Enabled" || "Disabled",
+ *   PlatformIdentifier: "STRING_VALUE",
+ *   InstanceMetadataServiceConfiguration: { // InstanceMetadataServiceConfiguration
+ *     MinimumInstanceMetadataServiceVersion: "STRING_VALUE", // required
+ *   },
+ * };
  * const command = new CreateNotebookInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // CreateNotebookInstanceOutput
+ * //   NotebookInstanceArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateNotebookInstanceCommandInput - {@link CreateNotebookInstanceCommandInput}
+ * @returns {@link CreateNotebookInstanceCommandOutput}
  * @see {@link CreateNotebookInstanceCommandInput} for command's `input` shape.
  * @see {@link CreateNotebookInstanceCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceLimitExceeded} (client fault)
+ *  <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateNotebookInstanceCommand extends $Command<
-  CreateNotebookInstanceCommandInput,
-  CreateNotebookInstanceCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateNotebookInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateNotebookInstanceCommandInput, CreateNotebookInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateNotebookInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateNotebookInstanceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateNotebookInstanceOutput.filterSensitiveLog,
+export class CreateNotebookInstanceCommand extends command<CreateNotebookInstanceCommandInput, CreateNotebookInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateNotebookInstance",
+  CreateNotebookInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNotebookInstanceInput;
+      output: CreateNotebookInstanceOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateNotebookInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateNotebookInstanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateNotebookInstanceCommandOutput> {
-    return deserializeAws_json1_1CreateNotebookInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateNotebookInstanceCommandInput;
+      output: CreateNotebookInstanceCommandOutput;
+    };
+  };
 }

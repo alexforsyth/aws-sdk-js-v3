@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { GetDataflowEndpointGroupRequest, GetDataflowEndpointGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDataflowEndpointGroupCommand,
-  serializeAws_restJson1GetDataflowEndpointGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDataflowEndpointGroupRequest, GetDataflowEndpointGroupResponse } from "../models/models_0";
+import { GetDataflowEndpointGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDataflowEndpointGroupCommand}.
+ */
 export interface GetDataflowEndpointGroupCommandInput extends GetDataflowEndpointGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDataflowEndpointGroupCommand}.
+ */
 export interface GetDataflowEndpointGroupCommandOutput extends GetDataflowEndpointGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,156 @@ export interface GetDataflowEndpointGroupCommandOutput extends GetDataflowEndpoi
  * ```javascript
  * import { GroundStationClient, GetDataflowEndpointGroupCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, GetDataflowEndpointGroupCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // GetDataflowEndpointGroupRequest
+ *   dataflowEndpointGroupId: "STRING_VALUE", // required
+ * };
  * const command = new GetDataflowEndpointGroupCommand(input);
  * const response = await client.send(command);
+ * // { // GetDataflowEndpointGroupResponse
+ * //   dataflowEndpointGroupId: "STRING_VALUE",
+ * //   dataflowEndpointGroupArn: "STRING_VALUE",
+ * //   endpointsDetails: [ // EndpointDetailsList
+ * //     { // EndpointDetails
+ * //       securityDetails: { // SecurityDetails
+ * //         subnetIds: [ // SubnetList // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         securityGroupIds: [ // SecurityGroupIdList // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         roleArn: "STRING_VALUE", // required
+ * //       },
+ * //       endpoint: { // DataflowEndpoint
+ * //         name: "STRING_VALUE",
+ * //         address: { // SocketAddress
+ * //           name: "STRING_VALUE", // required
+ * //           port: Number("int"), // required
+ * //         },
+ * //         status: "created" || "creating" || "deleted" || "deleting" || "failed",
+ * //         mtu: Number("int"),
+ * //       },
+ * //       awsGroundStationAgentEndpoint: { // AwsGroundStationAgentEndpoint
+ * //         name: "STRING_VALUE", // required
+ * //         egressAddress: { // ConnectionDetails
+ * //           socketAddress: {
+ * //             name: "STRING_VALUE", // required
+ * //             port: Number("int"), // required
+ * //           },
+ * //           mtu: Number("int"),
+ * //         },
+ * //         ingressAddress: { // RangedConnectionDetails
+ * //           socketAddress: { // RangedSocketAddress
+ * //             name: "STRING_VALUE", // required
+ * //             portRange: { // IntegerRange
+ * //               minimum: Number("int"), // required
+ * //               maximum: Number("int"), // required
+ * //             },
+ * //           },
+ * //           mtu: Number("int"),
+ * //         },
+ * //         agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //         auditResults: "HEALTHY" || "UNHEALTHY",
+ * //       },
+ * //       uplinkAwsGroundStationAgentEndpoint: { // UplinkAwsGroundStationAgentEndpointDetails
+ * //         name: "STRING_VALUE", // required
+ * //         dataflowDetails: { // UplinkDataflowDetails Union: only one key present
+ * //           agentConnectionDetails: { // UplinkConnectionDetails
+ * //             ingressAddressAndPort: {
+ * //               socketAddress: "<SocketAddress>", // required
+ * //               mtu: Number("int"),
+ * //             },
+ * //             agentIpAndPortAddress: {
+ * //               socketAddress: {
+ * //                 name: "STRING_VALUE", // required
+ * //                 portRange: {
+ * //                   minimum: Number("int"), // required
+ * //                   maximum: Number("int"), // required
+ * //                 },
+ * //               },
+ * //               mtu: Number("int"),
+ * //             },
+ * //           },
+ * //         },
+ * //         agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //         auditResults: "HEALTHY" || "UNHEALTHY",
+ * //       },
+ * //       downlinkAwsGroundStationAgentEndpoint: { // DownlinkAwsGroundStationAgentEndpointDetails
+ * //         name: "STRING_VALUE", // required
+ * //         dataflowDetails: { // DownlinkDataflowDetails Union: only one key present
+ * //           agentConnectionDetails: { // DownlinkConnectionDetails
+ * //             agentIpAndPortAddress: {
+ * //               socketAddress: {
+ * //                 name: "STRING_VALUE", // required
+ * //                 portRange: {
+ * //                   minimum: Number("int"), // required
+ * //                   maximum: Number("int"), // required
+ * //                 },
+ * //               },
+ * //               mtu: Number("int"),
+ * //             },
+ * //             egressAddressAndPort: {
+ * //               socketAddress: "<SocketAddress>", // required
+ * //               mtu: Number("int"),
+ * //             },
+ * //           },
+ * //         },
+ * //         agentStatus: "SUCCESS" || "FAILED" || "ACTIVE" || "INACTIVE",
+ * //         auditResults: "HEALTHY" || "UNHEALTHY",
+ * //       },
+ * //       healthStatus: "HEALTHY" || "UNHEALTHY",
+ * //       healthReasons: [ // CapabilityHealthReasonList
+ * //         "NO_REGISTERED_AGENT" || "INVALID_IP_OWNERSHIP" || "NOT_AUTHORIZED_TO_CREATE_SLR" || "UNVERIFIED_IP_OWNERSHIP" || "INITIALIZING_DATAPLANE" || "DATAPLANE_FAILURE" || "HEALTHY",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   tags: { // TagsMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   contactPrePassDurationSeconds: Number("int"),
+ * //   contactPostPassDurationSeconds: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param GetDataflowEndpointGroupCommandInput - {@link GetDataflowEndpointGroupCommandInput}
+ * @returns {@link GetDataflowEndpointGroupCommandOutput}
  * @see {@link GetDataflowEndpointGroupCommandInput} for command's `input` shape.
  * @see {@link GetDataflowEndpointGroupCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class GetDataflowEndpointGroupCommand extends $Command<
-  GetDataflowEndpointGroupCommandInput,
-  GetDataflowEndpointGroupCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDataflowEndpointGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDataflowEndpointGroupCommandInput, GetDataflowEndpointGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "GetDataflowEndpointGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDataflowEndpointGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDataflowEndpointGroupResponse.filterSensitiveLog,
+export class GetDataflowEndpointGroupCommand extends command<GetDataflowEndpointGroupCommandInput, GetDataflowEndpointGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDataflowEndpointGroup",
+  GetDataflowEndpointGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataflowEndpointGroupRequest;
+      output: GetDataflowEndpointGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDataflowEndpointGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDataflowEndpointGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDataflowEndpointGroupCommandOutput> {
-    return deserializeAws_restJson1GetDataflowEndpointGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDataflowEndpointGroupCommandInput;
+      output: GetDataflowEndpointGroupCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { GetRegistryPolicyRequest, GetRegistryPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetRegistryPolicyCommand,
-  serializeAws_json1_1GetRegistryPolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRegistryPolicyRequest, GetRegistryPolicyResponse } from "../models/models_0";
+import { GetRegistryPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRegistryPolicyCommand}.
+ */
 export interface GetRegistryPolicyCommandInput extends GetRegistryPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRegistryPolicyCommand}.
+ */
 export interface GetRegistryPolicyCommandOutput extends GetRegistryPolicyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface GetRegistryPolicyCommandOutput extends GetRegistryPolicyRespons
  * ```javascript
  * import { ECRClient, GetRegistryPolicyCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, GetRegistryPolicyCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = {};
  * const command = new GetRegistryPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetRegistryPolicyResponse
+ * //   registryId: "STRING_VALUE",
+ * //   policyText: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetRegistryPolicyCommandInput - {@link GetRegistryPolicyCommandInput}
+ * @returns {@link GetRegistryPolicyCommandOutput}
  * @see {@link GetRegistryPolicyCommandInput} for command's `input` shape.
  * @see {@link GetRegistryPolicyCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link RegistryPolicyNotFoundException} (client fault)
+ *  <p>The registry doesn't have an associated registry policy.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There was an exception validating this request.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class GetRegistryPolicyCommand extends $Command<
-  GetRegistryPolicyCommandInput,
-  GetRegistryPolicyCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRegistryPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRegistryPolicyCommandInput, GetRegistryPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "GetRegistryPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRegistryPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRegistryPolicyResponse.filterSensitiveLog,
+export class GetRegistryPolicyCommand extends command<GetRegistryPolicyCommandInput, GetRegistryPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRegistryPolicy",
+  GetRegistryPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetRegistryPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRegistryPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetRegistryPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRegistryPolicyCommandOutput> {
-    return deserializeAws_json1_1GetRegistryPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRegistryPolicyCommandInput;
+      output: GetRegistryPolicyCommandOutput;
+    };
+  };
 }

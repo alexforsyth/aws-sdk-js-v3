@@ -1,33 +1,43 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeDBClusterSnapshotsCommandInput,
+  type DescribeDBClusterSnapshotsCommandOutput,
   DescribeDBClusterSnapshotsCommand,
-  DescribeDBClusterSnapshotsCommandInput,
 } from "../commands/DescribeDBClusterSnapshotsCommand";
-import { RDSClient } from "../RDSClient";
+import type { DBClusterSnapshotNotFoundFault } from "../models/errors";
+import type { RDSServiceException } from "../models/RDSServiceException";
+import type { RDSClient } from "../RDSClient";
 
-const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCommandInput): Promise<WaiterResult<DescribeDBClusterSnapshotsCommandOutput | RDSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeDBClusterSnapshotsCommand(input));
+    let result: DescribeDBClusterSnapshotsCommandOutput & any = await client.send(new DescribeDBClusterSnapshotsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        return result.DBClusterSnapshots.length == 0.0;
-      };
+        return (result.DBClusterSnapshots.length == 0);
+      }
       if (returnComparator() == true) {
         return { state: WaiterState.SUCCESS, reason };
       }
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBClusterSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBClusterSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "creating") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -35,13 +45,13 @@ const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCo
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBClusterSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBClusterSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "modifying") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -49,13 +59,13 @@ const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCo
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBClusterSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBClusterSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "rebooting") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -63,13 +73,13 @@ const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCo
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBClusterSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBClusterSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "resetting-master-credentials") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -77,7 +87,7 @@ const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCo
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "DBClusterSnapshotNotFoundFault") {
+    if (exception.name === "DBClusterSnapshotNotFoundFault") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -90,8 +100,8 @@ const checkState = async (client: RDSClient, input: DescribeDBClusterSnapshotsCo
 export const waitForDBClusterSnapshotDeleted = async (
   params: WaiterConfiguration<RDSClient>,
   input: DescribeDBClusterSnapshotsCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+): Promise<WaiterResult<DescribeDBClusterSnapshotsCommandOutput | RDSServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -102,8 +112,8 @@ export const waitForDBClusterSnapshotDeleted = async (
 export const waitUntilDBClusterSnapshotDeleted = async (
   params: WaiterConfiguration<RDSClient>,
   input: DescribeDBClusterSnapshotsCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+): Promise<WaiterResult<DescribeDBClusterSnapshotsCommandOutput | DBClusterSnapshotNotFoundFault>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeDBClusterSnapshotsCommandOutput | DBClusterSnapshotNotFoundFault>;
 };

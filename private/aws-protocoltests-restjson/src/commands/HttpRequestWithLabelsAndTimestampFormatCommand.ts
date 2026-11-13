@@ -1,25 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HttpRequestWithLabelsAndTimestampFormatInput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { HttpRequestWithLabelsAndTimestampFormatInput } from "../models/models_0";
 import {
-  deserializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand,
-  serializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand,
+  de_HttpRequestWithLabelsAndTimestampFormatCommand,
+  se_HttpRequestWithLabelsAndTimestampFormatCommand,
 } from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
-export interface HttpRequestWithLabelsAndTimestampFormatCommandInput
-  extends HttpRequestWithLabelsAndTimestampFormatInput {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link HttpRequestWithLabelsAndTimestampFormatCommand}.
+ */
+export interface HttpRequestWithLabelsAndTimestampFormatCommandInput extends HttpRequestWithLabelsAndTimestampFormatInput {}
+/**
+ * @public
+ *
+ * The output of {@link HttpRequestWithLabelsAndTimestampFormatCommand}.
+ */
 export interface HttpRequestWithLabelsAndTimestampFormatCommandOutput extends __MetadataBearer {}
 
 /**
@@ -30,77 +41,66 @@ export interface HttpRequestWithLabelsAndTimestampFormatCommandOutput extends __
  * ```javascript
  * import { RestJsonProtocolClient, HttpRequestWithLabelsAndTimestampFormatCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, HttpRequestWithLabelsAndTimestampFormatCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // HttpRequestWithLabelsAndTimestampFormatInput
+ *   memberEpochSeconds: new Date("TIMESTAMP"), // required
+ *   memberHttpDate: new Date("TIMESTAMP"), // required
+ *   memberDateTime: new Date("TIMESTAMP"), // required
+ *   defaultFormat: new Date("TIMESTAMP"), // required
+ *   targetEpochSeconds: new Date("TIMESTAMP"), // required
+ *   targetHttpDate: new Date("TIMESTAMP"), // required
+ *   targetDateTime: new Date("TIMESTAMP"), // required
+ * };
  * const command = new HttpRequestWithLabelsAndTimestampFormatCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param HttpRequestWithLabelsAndTimestampFormatCommandInput - {@link HttpRequestWithLabelsAndTimestampFormatCommandInput}
+ * @returns {@link HttpRequestWithLabelsAndTimestampFormatCommandOutput}
  * @see {@link HttpRequestWithLabelsAndTimestampFormatCommandInput} for command's `input` shape.
  * @see {@link HttpRequestWithLabelsAndTimestampFormatCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class HttpRequestWithLabelsAndTimestampFormatCommand extends $Command<
-  HttpRequestWithLabelsAndTimestampFormatCommandInput,
-  HttpRequestWithLabelsAndTimestampFormatCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HttpRequestWithLabelsAndTimestampFormatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
+export class HttpRequestWithLabelsAndTimestampFormatCommand extends $Command
+  .classBuilder<
     HttpRequestWithLabelsAndTimestampFormatCommandInput,
-    HttpRequestWithLabelsAndTimestampFormatCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "HttpRequestWithLabelsAndTimestampFormatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: HttpRequestWithLabelsAndTimestampFormatInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+    HttpRequestWithLabelsAndTimestampFormatCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "HttpRequestWithLabelsAndTimestampFormat", {})
+  .n("RestJsonProtocolClient", "HttpRequestWithLabelsAndTimestampFormatCommand")
+  .f(void 0, void 0)
+  .ser(se_HttpRequestWithLabelsAndTimestampFormatCommand)
+  .de(de_HttpRequestWithLabelsAndTimestampFormatCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: HttpRequestWithLabelsAndTimestampFormatInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: HttpRequestWithLabelsAndTimestampFormatCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> {
-    return deserializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HttpRequestWithLabelsAndTimestampFormatCommandInput;
+      output: HttpRequestWithLabelsAndTimestampFormatCommandOutput;
+    };
+  };
 }

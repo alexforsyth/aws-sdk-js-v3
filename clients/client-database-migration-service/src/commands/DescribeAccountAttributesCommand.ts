@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { DescribeAccountAttributesMessage, DescribeAccountAttributesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAccountAttributesCommand,
-  serializeAws_json1_1DescribeAccountAttributesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAccountAttributesMessage, DescribeAccountAttributesResponse } from "../models/models_0";
+import { DescribeAccountAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccountAttributesCommand}.
+ */
 export interface DescribeAccountAttributesCommandInput extends DescribeAccountAttributesMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccountAttributesCommand}.
+ */
 export interface DescribeAccountAttributesCommandOutput extends DescribeAccountAttributesResponse, __MetadataBearer {}
 
 /**
@@ -38,71 +35,81 @@ export interface DescribeAccountAttributesCommandOutput extends DescribeAccountA
  * ```javascript
  * import { DatabaseMigrationServiceClient, DescribeAccountAttributesCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DescribeAccountAttributesCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = {};
  * const command = new DescribeAccountAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccountAttributesResponse
+ * //   AccountQuotas: [ // AccountQuotaList
+ * //     { // AccountQuota
+ * //       AccountQuotaName: "STRING_VALUE",
+ * //       Used: Number("long"),
+ * //       Max: Number("long"),
+ * //     },
+ * //   ],
+ * //   UniqueAccountIdentifier: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccountAttributesCommandInput - {@link DescribeAccountAttributesCommandInput}
+ * @returns {@link DescribeAccountAttributesCommandOutput}
  * @see {@link DescribeAccountAttributesCommandInput} for command's `input` shape.
  * @see {@link DescribeAccountAttributesCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Describe acount attributes
+ * ```javascript
+ * // Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This operation does not take any parameters.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeAccountAttributesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AccountQuotas: [
+ *     {
+ *       AccountQuotaName: "ReplicationInstances",
+ *       Max: 20,
+ *       Used: 0
+ *     },
+ *     {
+ *       AccountQuotaName: "AllocatedStorage",
+ *       Max: 20,
+ *       Used: 0
+ *     },
+ *     {
+ *       AccountQuotaName: "Endpoints",
+ *       Max: 20,
+ *       Used: 0
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeAccountAttributesCommand extends $Command<
-  DescribeAccountAttributesCommandInput,
-  DescribeAccountAttributesCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccountAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccountAttributesCommandInput, DescribeAccountAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DescribeAccountAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccountAttributesMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccountAttributesResponse.filterSensitiveLog,
+export class DescribeAccountAttributesCommand extends command<DescribeAccountAttributesCommandInput, DescribeAccountAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccountAttributes",
+  DescribeAccountAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeAccountAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAccountAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAccountAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAccountAttributesCommandOutput> {
-    return deserializeAws_json1_1DescribeAccountAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccountAttributesCommandInput;
+      output: DescribeAccountAttributesCommandOutput;
+    };
+  };
 }

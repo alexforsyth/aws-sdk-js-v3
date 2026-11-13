@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { ApplySecurityGroupsToLoadBalancerInput, ApplySecurityGroupsToLoadBalancerOutput } from "../models/models_0";
-import {
-  deserializeAws_queryApplySecurityGroupsToLoadBalancerCommand,
-  serializeAws_queryApplySecurityGroupsToLoadBalancerCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ApplySecurityGroupsToLoadBalancerInput,
+  ApplySecurityGroupsToLoadBalancerOutput,
+} from "../models/models_0";
+import { ApplySecurityGroupsToLoadBalancer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ApplySecurityGroupsToLoadBalancerCommand}.
+ */
 export interface ApplySecurityGroupsToLoadBalancerCommandInput extends ApplySecurityGroupsToLoadBalancerInput {}
-export interface ApplySecurityGroupsToLoadBalancerCommandOutput
-  extends ApplySecurityGroupsToLoadBalancerOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ApplySecurityGroupsToLoadBalancerCommand}.
+ */
+export interface ApplySecurityGroupsToLoadBalancerCommandOutput extends ApplySecurityGroupsToLoadBalancerOutput, __MetadataBearer {}
 
 /**
  * <p>Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.</p>
@@ -36,74 +34,81 @@ export interface ApplySecurityGroupsToLoadBalancerCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, ApplySecurityGroupsToLoadBalancerCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, ApplySecurityGroupsToLoadBalancerCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // ApplySecurityGroupsToLoadBalancerInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   SecurityGroups: [ // SecurityGroups // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ApplySecurityGroupsToLoadBalancerCommand(input);
  * const response = await client.send(command);
+ * // { // ApplySecurityGroupsToLoadBalancerOutput
+ * //   SecurityGroups: [ // SecurityGroups
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ApplySecurityGroupsToLoadBalancerCommandInput - {@link ApplySecurityGroupsToLoadBalancerCommandInput}
+ * @returns {@link ApplySecurityGroupsToLoadBalancerCommandOutput}
  * @see {@link ApplySecurityGroupsToLoadBalancerCommandInput} for command's `input` shape.
  * @see {@link ApplySecurityGroupsToLoadBalancerCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link InvalidConfigurationRequestException} (client fault)
+ *  <p>The requested configuration change is not valid.</p>
+ *
+ * @throws {@link InvalidSecurityGroupException} (client fault)
+ *  <p>One or more of the specified security groups do not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To associate a security group with a load balancer in a VPC
+ * ```javascript
+ * // This example associates a security group with the specified load balancer in a VPC.
+ * const input = {
+ *   LoadBalancerName: "my-load-balancer",
+ *   SecurityGroups: [
+ *     "sg-fc448899"
+ *   ]
+ * };
+ * const command = new ApplySecurityGroupsToLoadBalancerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SecurityGroups: [
+ *     "sg-fc448899"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ApplySecurityGroupsToLoadBalancerCommand extends $Command<
-  ApplySecurityGroupsToLoadBalancerCommandInput,
-  ApplySecurityGroupsToLoadBalancerCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ApplySecurityGroupsToLoadBalancerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ApplySecurityGroupsToLoadBalancerCommandInput, ApplySecurityGroupsToLoadBalancerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "ApplySecurityGroupsToLoadBalancerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ApplySecurityGroupsToLoadBalancerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ApplySecurityGroupsToLoadBalancerOutput.filterSensitiveLog,
+export class ApplySecurityGroupsToLoadBalancerCommand extends command<ApplySecurityGroupsToLoadBalancerCommandInput, ApplySecurityGroupsToLoadBalancerCommandOutput>(
+  _ep0,
+  _mw0,
+  "ApplySecurityGroupsToLoadBalancer",
+  ApplySecurityGroupsToLoadBalancer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ApplySecurityGroupsToLoadBalancerInput;
+      output: ApplySecurityGroupsToLoadBalancerOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ApplySecurityGroupsToLoadBalancerCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryApplySecurityGroupsToLoadBalancerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ApplySecurityGroupsToLoadBalancerCommandOutput> {
-    return deserializeAws_queryApplySecurityGroupsToLoadBalancerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ApplySecurityGroupsToLoadBalancerCommandInput;
+      output: ApplySecurityGroupsToLoadBalancerCommandOutput;
+    };
+  };
 }

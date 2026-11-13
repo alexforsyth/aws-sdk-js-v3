@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetImportJobsRequest, GetImportJobsResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetImportJobsCommand,
-  serializeAws_restJson1GetImportJobsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetImportJobsRequest, GetImportJobsResponse } from "../models/models_0";
+import { GetImportJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetImportJobsCommand}.
+ */
 export interface GetImportJobsCommandInput extends GetImportJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetImportJobsCommand}.
+ */
 export interface GetImportJobsCommandOutput extends GetImportJobsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,100 @@ export interface GetImportJobsCommandOutput extends GetImportJobsResponse, __Met
  * ```javascript
  * import { PinpointClient, GetImportJobsCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetImportJobsCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetImportJobsRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   PageSize: "STRING_VALUE",
+ *   Token: "STRING_VALUE",
+ * };
  * const command = new GetImportJobsCommand(input);
  * const response = await client.send(command);
+ * // { // GetImportJobsResponse
+ * //   ImportJobsResponse: { // ImportJobsResponse
+ * //     Item: [ // ListOfImportJobResponse // required
+ * //       { // ImportJobResponse
+ * //         ApplicationId: "STRING_VALUE", // required
+ * //         CompletedPieces: Number("int"),
+ * //         CompletionDate: "STRING_VALUE",
+ * //         CreationDate: "STRING_VALUE", // required
+ * //         Definition: { // ImportJobResource
+ * //           DefineSegment: true || false,
+ * //           ExternalId: "STRING_VALUE",
+ * //           Format: "CSV" || "JSON", // required
+ * //           RegisterEndpoints: true || false,
+ * //           RoleArn: "STRING_VALUE", // required
+ * //           S3Url: "STRING_VALUE", // required
+ * //           SegmentId: "STRING_VALUE",
+ * //           SegmentName: "STRING_VALUE",
+ * //         },
+ * //         FailedPieces: Number("int"),
+ * //         Failures: [ // ListOf__string
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Id: "STRING_VALUE", // required
+ * //         JobStatus: "CREATED" || "PREPARING_FOR_INITIALIZATION" || "INITIALIZING" || "PROCESSING" || "PENDING_JOB" || "COMPLETING" || "COMPLETED" || "FAILING" || "FAILED", // required
+ * //         TotalFailures: Number("int"),
+ * //         TotalPieces: Number("int"),
+ * //         TotalProcessed: Number("int"),
+ * //         Type: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     NextToken: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetImportJobsCommandInput - {@link GetImportJobsCommandInput}
+ * @returns {@link GetImportJobsCommandOutput}
  * @see {@link GetImportJobsCommandInput} for command's `input` shape.
  * @see {@link GetImportJobsCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetImportJobsCommand extends $Command<
-  GetImportJobsCommandInput,
-  GetImportJobsCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetImportJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetImportJobsCommandInput, GetImportJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetImportJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetImportJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetImportJobsResponse.filterSensitiveLog,
+export class GetImportJobsCommand extends command<GetImportJobsCommandInput, GetImportJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetImportJobs",
+  GetImportJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetImportJobsRequest;
+      output: GetImportJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetImportJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetImportJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetImportJobsCommandOutput> {
-    return deserializeAws_restJson1GetImportJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetImportJobsCommandInput;
+      output: GetImportJobsCommandOutput;
+    };
+  };
 }

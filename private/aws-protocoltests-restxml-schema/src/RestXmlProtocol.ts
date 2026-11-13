@@ -1,0 +1,1557 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
+
+import {
+  type AllQueryStringTypesCommandInput,
+  type AllQueryStringTypesCommandOutput,
+  AllQueryStringTypesCommand,
+} from "./commands/AllQueryStringTypesCommand";
+import {
+  type BodyWithXmlNameCommandInput,
+  type BodyWithXmlNameCommandOutput,
+  BodyWithXmlNameCommand,
+} from "./commands/BodyWithXmlNameCommand";
+import {
+  type ConstantAndVariableQueryStringCommandInput,
+  type ConstantAndVariableQueryStringCommandOutput,
+  ConstantAndVariableQueryStringCommand,
+} from "./commands/ConstantAndVariableQueryStringCommand";
+import {
+  type ConstantQueryStringCommandInput,
+  type ConstantQueryStringCommandOutput,
+  ConstantQueryStringCommand,
+} from "./commands/ConstantQueryStringCommand";
+import {
+  type ContentTypeParametersCommandInput,
+  type ContentTypeParametersCommandOutput,
+  ContentTypeParametersCommand,
+} from "./commands/ContentTypeParametersCommand";
+import {
+  type DatetimeOffsetsCommandInput,
+  type DatetimeOffsetsCommandOutput,
+  DatetimeOffsetsCommand,
+} from "./commands/DatetimeOffsetsCommand";
+import {
+  type EmptyInputAndEmptyOutputCommandInput,
+  type EmptyInputAndEmptyOutputCommandOutput,
+  EmptyInputAndEmptyOutputCommand,
+} from "./commands/EmptyInputAndEmptyOutputCommand";
+import {
+  type EndpointOperationCommandInput,
+  type EndpointOperationCommandOutput,
+  EndpointOperationCommand,
+} from "./commands/EndpointOperationCommand";
+import {
+  type EndpointWithHostLabelHeaderOperationCommandInput,
+  type EndpointWithHostLabelHeaderOperationCommandOutput,
+  EndpointWithHostLabelHeaderOperationCommand,
+} from "./commands/EndpointWithHostLabelHeaderOperationCommand";
+import {
+  type EndpointWithHostLabelOperationCommandInput,
+  type EndpointWithHostLabelOperationCommandOutput,
+  EndpointWithHostLabelOperationCommand,
+} from "./commands/EndpointWithHostLabelOperationCommand";
+import {
+  type FlattenedXmlMapCommandInput,
+  type FlattenedXmlMapCommandOutput,
+  FlattenedXmlMapCommand,
+} from "./commands/FlattenedXmlMapCommand";
+import {
+  type FlattenedXmlMapWithXmlNameCommandInput,
+  type FlattenedXmlMapWithXmlNameCommandOutput,
+  FlattenedXmlMapWithXmlNameCommand,
+} from "./commands/FlattenedXmlMapWithXmlNameCommand";
+import {
+  type FlattenedXmlMapWithXmlNamespaceCommandInput,
+  type FlattenedXmlMapWithXmlNamespaceCommandOutput,
+  FlattenedXmlMapWithXmlNamespaceCommand,
+} from "./commands/FlattenedXmlMapWithXmlNamespaceCommand";
+import {
+  type FractionalSecondsCommandInput,
+  type FractionalSecondsCommandOutput,
+  FractionalSecondsCommand,
+} from "./commands/FractionalSecondsCommand";
+import {
+  type GreetingWithErrorsCommandInput,
+  type GreetingWithErrorsCommandOutput,
+  GreetingWithErrorsCommand,
+} from "./commands/GreetingWithErrorsCommand";
+import {
+  type HttpEmptyPrefixHeadersCommandInput,
+  type HttpEmptyPrefixHeadersCommandOutput,
+  HttpEmptyPrefixHeadersCommand,
+} from "./commands/HttpEmptyPrefixHeadersCommand";
+import {
+  type HttpEnumPayloadCommandInput,
+  type HttpEnumPayloadCommandOutput,
+  HttpEnumPayloadCommand,
+} from "./commands/HttpEnumPayloadCommand";
+import {
+  type HttpPayloadTraitsCommandInput,
+  type HttpPayloadTraitsCommandOutput,
+  HttpPayloadTraitsCommand,
+} from "./commands/HttpPayloadTraitsCommand";
+import {
+  type HttpPayloadTraitsWithMediaTypeCommandInput,
+  type HttpPayloadTraitsWithMediaTypeCommandOutput,
+  HttpPayloadTraitsWithMediaTypeCommand,
+} from "./commands/HttpPayloadTraitsWithMediaTypeCommand";
+import {
+  type HttpPayloadWithMemberXmlNameCommandInput,
+  type HttpPayloadWithMemberXmlNameCommandOutput,
+  HttpPayloadWithMemberXmlNameCommand,
+} from "./commands/HttpPayloadWithMemberXmlNameCommand";
+import {
+  type HttpPayloadWithStructureCommandInput,
+  type HttpPayloadWithStructureCommandOutput,
+  HttpPayloadWithStructureCommand,
+} from "./commands/HttpPayloadWithStructureCommand";
+import {
+  type HttpPayloadWithUnionCommandInput,
+  type HttpPayloadWithUnionCommandOutput,
+  HttpPayloadWithUnionCommand,
+} from "./commands/HttpPayloadWithUnionCommand";
+import {
+  type HttpPayloadWithXmlNameCommandInput,
+  type HttpPayloadWithXmlNameCommandOutput,
+  HttpPayloadWithXmlNameCommand,
+} from "./commands/HttpPayloadWithXmlNameCommand";
+import {
+  type HttpPayloadWithXmlNamespaceAndPrefixCommandInput,
+  type HttpPayloadWithXmlNamespaceAndPrefixCommandOutput,
+  HttpPayloadWithXmlNamespaceAndPrefixCommand,
+} from "./commands/HttpPayloadWithXmlNamespaceAndPrefixCommand";
+import {
+  type HttpPayloadWithXmlNamespaceCommandInput,
+  type HttpPayloadWithXmlNamespaceCommandOutput,
+  HttpPayloadWithXmlNamespaceCommand,
+} from "./commands/HttpPayloadWithXmlNamespaceCommand";
+import {
+  type HttpPrefixHeadersCommandInput,
+  type HttpPrefixHeadersCommandOutput,
+  HttpPrefixHeadersCommand,
+} from "./commands/HttpPrefixHeadersCommand";
+import {
+  type HttpRequestWithFloatLabelsCommandInput,
+  type HttpRequestWithFloatLabelsCommandOutput,
+  HttpRequestWithFloatLabelsCommand,
+} from "./commands/HttpRequestWithFloatLabelsCommand";
+import {
+  type HttpRequestWithGreedyLabelInPathCommandInput,
+  type HttpRequestWithGreedyLabelInPathCommandOutput,
+  HttpRequestWithGreedyLabelInPathCommand,
+} from "./commands/HttpRequestWithGreedyLabelInPathCommand";
+import {
+  type HttpRequestWithLabelsAndTimestampFormatCommandInput,
+  type HttpRequestWithLabelsAndTimestampFormatCommandOutput,
+  HttpRequestWithLabelsAndTimestampFormatCommand,
+} from "./commands/HttpRequestWithLabelsAndTimestampFormatCommand";
+import {
+  type HttpRequestWithLabelsCommandInput,
+  type HttpRequestWithLabelsCommandOutput,
+  HttpRequestWithLabelsCommand,
+} from "./commands/HttpRequestWithLabelsCommand";
+import {
+  type HttpResponseCodeCommandInput,
+  type HttpResponseCodeCommandOutput,
+  HttpResponseCodeCommand,
+} from "./commands/HttpResponseCodeCommand";
+import {
+  type HttpStringPayloadCommandInput,
+  type HttpStringPayloadCommandOutput,
+  HttpStringPayloadCommand,
+} from "./commands/HttpStringPayloadCommand";
+import {
+  type IgnoreQueryParamsInResponseCommandInput,
+  type IgnoreQueryParamsInResponseCommandOutput,
+  IgnoreQueryParamsInResponseCommand,
+} from "./commands/IgnoreQueryParamsInResponseCommand";
+import {
+  type InputAndOutputWithHeadersCommandInput,
+  type InputAndOutputWithHeadersCommandOutput,
+  InputAndOutputWithHeadersCommand,
+} from "./commands/InputAndOutputWithHeadersCommand";
+import {
+  type NestedXmlMapsCommandInput,
+  type NestedXmlMapsCommandOutput,
+  NestedXmlMapsCommand,
+} from "./commands/NestedXmlMapsCommand";
+import {
+  type NestedXmlMapWithXmlNameCommandInput,
+  type NestedXmlMapWithXmlNameCommandOutput,
+  NestedXmlMapWithXmlNameCommand,
+} from "./commands/NestedXmlMapWithXmlNameCommand";
+import {
+  type NoInputAndNoOutputCommandInput,
+  type NoInputAndNoOutputCommandOutput,
+  NoInputAndNoOutputCommand,
+} from "./commands/NoInputAndNoOutputCommand";
+import {
+  type NoInputAndOutputCommandInput,
+  type NoInputAndOutputCommandOutput,
+  NoInputAndOutputCommand,
+} from "./commands/NoInputAndOutputCommand";
+import {
+  type NullAndEmptyHeadersClientCommandInput,
+  type NullAndEmptyHeadersClientCommandOutput,
+  NullAndEmptyHeadersClientCommand,
+} from "./commands/NullAndEmptyHeadersClientCommand";
+import {
+  type NullAndEmptyHeadersServerCommandInput,
+  type NullAndEmptyHeadersServerCommandOutput,
+  NullAndEmptyHeadersServerCommand,
+} from "./commands/NullAndEmptyHeadersServerCommand";
+import {
+  type OmitsNullSerializesEmptyStringCommandInput,
+  type OmitsNullSerializesEmptyStringCommandOutput,
+  OmitsNullSerializesEmptyStringCommand,
+} from "./commands/OmitsNullSerializesEmptyStringCommand";
+import {
+  type PutWithContentEncodingCommandInput,
+  type PutWithContentEncodingCommandOutput,
+  PutWithContentEncodingCommand,
+} from "./commands/PutWithContentEncodingCommand";
+import {
+  type QueryIdempotencyTokenAutoFillCommandInput,
+  type QueryIdempotencyTokenAutoFillCommandOutput,
+  QueryIdempotencyTokenAutoFillCommand,
+} from "./commands/QueryIdempotencyTokenAutoFillCommand";
+import {
+  type QueryParamsAsStringListMapCommandInput,
+  type QueryParamsAsStringListMapCommandOutput,
+  QueryParamsAsStringListMapCommand,
+} from "./commands/QueryParamsAsStringListMapCommand";
+import {
+  type QueryPrecedenceCommandInput,
+  type QueryPrecedenceCommandOutput,
+  QueryPrecedenceCommand,
+} from "./commands/QueryPrecedenceCommand";
+import {
+  type RecursiveShapesCommandInput,
+  type RecursiveShapesCommandOutput,
+  RecursiveShapesCommand,
+} from "./commands/RecursiveShapesCommand";
+import {
+  type SimpleScalarPropertiesCommandInput,
+  type SimpleScalarPropertiesCommandOutput,
+  SimpleScalarPropertiesCommand,
+} from "./commands/SimpleScalarPropertiesCommand";
+import {
+  type TimestampFormatHeadersCommandInput,
+  type TimestampFormatHeadersCommandOutput,
+  TimestampFormatHeadersCommand,
+} from "./commands/TimestampFormatHeadersCommand";
+import {
+  type XmlAttributesCommandInput,
+  type XmlAttributesCommandOutput,
+  XmlAttributesCommand,
+} from "./commands/XmlAttributesCommand";
+import {
+  type XmlAttributesInMiddleCommandInput,
+  type XmlAttributesInMiddleCommandOutput,
+  XmlAttributesInMiddleCommand,
+} from "./commands/XmlAttributesInMiddleCommand";
+import {
+  type XmlAttributesOnPayloadCommandInput,
+  type XmlAttributesOnPayloadCommandOutput,
+  XmlAttributesOnPayloadCommand,
+} from "./commands/XmlAttributesOnPayloadCommand";
+import { type XmlBlobsCommandInput, type XmlBlobsCommandOutput, XmlBlobsCommand } from "./commands/XmlBlobsCommand";
+import {
+  type XmlEmptyBlobsCommandInput,
+  type XmlEmptyBlobsCommandOutput,
+  XmlEmptyBlobsCommand,
+} from "./commands/XmlEmptyBlobsCommand";
+import {
+  type XmlEmptyListsCommandInput,
+  type XmlEmptyListsCommandOutput,
+  XmlEmptyListsCommand,
+} from "./commands/XmlEmptyListsCommand";
+import {
+  type XmlEmptyMapsCommandInput,
+  type XmlEmptyMapsCommandOutput,
+  XmlEmptyMapsCommand,
+} from "./commands/XmlEmptyMapsCommand";
+import {
+  type XmlEmptyStringsCommandInput,
+  type XmlEmptyStringsCommandOutput,
+  XmlEmptyStringsCommand,
+} from "./commands/XmlEmptyStringsCommand";
+import { type XmlEnumsCommandInput, type XmlEnumsCommandOutput, XmlEnumsCommand } from "./commands/XmlEnumsCommand";
+import {
+  type XmlIntEnumsCommandInput,
+  type XmlIntEnumsCommandOutput,
+  XmlIntEnumsCommand,
+} from "./commands/XmlIntEnumsCommand";
+import { type XmlListsCommandInput, type XmlListsCommandOutput, XmlListsCommand } from "./commands/XmlListsCommand";
+import { type XmlMapsCommandInput, type XmlMapsCommandOutput, XmlMapsCommand } from "./commands/XmlMapsCommand";
+import {
+  type XmlMapsXmlNameCommandInput,
+  type XmlMapsXmlNameCommandOutput,
+  XmlMapsXmlNameCommand,
+} from "./commands/XmlMapsXmlNameCommand";
+import {
+  type XmlMapWithXmlNamespaceCommandInput,
+  type XmlMapWithXmlNamespaceCommandOutput,
+  XmlMapWithXmlNamespaceCommand,
+} from "./commands/XmlMapWithXmlNamespaceCommand";
+import {
+  type XmlNamespacesCommandInput,
+  type XmlNamespacesCommandOutput,
+  XmlNamespacesCommand,
+} from "./commands/XmlNamespacesCommand";
+import {
+  type XmlTimestampsCommandInput,
+  type XmlTimestampsCommandOutput,
+  XmlTimestampsCommand,
+} from "./commands/XmlTimestampsCommand";
+import { type XmlUnionsCommandInput, type XmlUnionsCommandOutput, XmlUnionsCommand } from "./commands/XmlUnionsCommand";
+import { RestXmlProtocolClient } from "./RestXmlProtocolClient";
+
+const commands = {
+  AllQueryStringTypesCommand,
+  BodyWithXmlNameCommand,
+  ConstantAndVariableQueryStringCommand,
+  ConstantQueryStringCommand,
+  ContentTypeParametersCommand,
+  DatetimeOffsetsCommand,
+  EmptyInputAndEmptyOutputCommand,
+  EndpointOperationCommand,
+  EndpointWithHostLabelHeaderOperationCommand,
+  EndpointWithHostLabelOperationCommand,
+  FlattenedXmlMapCommand,
+  FlattenedXmlMapWithXmlNameCommand,
+  FlattenedXmlMapWithXmlNamespaceCommand,
+  FractionalSecondsCommand,
+  GreetingWithErrorsCommand,
+  HttpEmptyPrefixHeadersCommand,
+  HttpEnumPayloadCommand,
+  HttpPayloadTraitsCommand,
+  HttpPayloadTraitsWithMediaTypeCommand,
+  HttpPayloadWithMemberXmlNameCommand,
+  HttpPayloadWithStructureCommand,
+  HttpPayloadWithUnionCommand,
+  HttpPayloadWithXmlNameCommand,
+  HttpPayloadWithXmlNamespaceCommand,
+  HttpPayloadWithXmlNamespaceAndPrefixCommand,
+  HttpPrefixHeadersCommand,
+  HttpRequestWithFloatLabelsCommand,
+  HttpRequestWithGreedyLabelInPathCommand,
+  HttpRequestWithLabelsCommand,
+  HttpRequestWithLabelsAndTimestampFormatCommand,
+  HttpResponseCodeCommand,
+  HttpStringPayloadCommand,
+  IgnoreQueryParamsInResponseCommand,
+  InputAndOutputWithHeadersCommand,
+  NestedXmlMapsCommand,
+  NestedXmlMapWithXmlNameCommand,
+  NoInputAndNoOutputCommand,
+  NoInputAndOutputCommand,
+  NullAndEmptyHeadersClientCommand,
+  NullAndEmptyHeadersServerCommand,
+  OmitsNullSerializesEmptyStringCommand,
+  PutWithContentEncodingCommand,
+  QueryIdempotencyTokenAutoFillCommand,
+  QueryParamsAsStringListMapCommand,
+  QueryPrecedenceCommand,
+  RecursiveShapesCommand,
+  SimpleScalarPropertiesCommand,
+  TimestampFormatHeadersCommand,
+  XmlAttributesCommand,
+  XmlAttributesInMiddleCommand,
+  XmlAttributesOnPayloadCommand,
+  XmlBlobsCommand,
+  XmlEmptyBlobsCommand,
+  XmlEmptyListsCommand,
+  XmlEmptyMapsCommand,
+  XmlEmptyStringsCommand,
+  XmlEnumsCommand,
+  XmlIntEnumsCommand,
+  XmlListsCommand,
+  XmlMapsCommand,
+  XmlMapsXmlNameCommand,
+  XmlMapWithXmlNamespaceCommand,
+  XmlNamespacesCommand,
+  XmlTimestampsCommand,
+  XmlUnionsCommand,
+};
+
+/**
+ * @public
+ */
+export interface RestXmlProtocolRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RestXmlProtocol {
+  /**
+   * @see {@link AllQueryStringTypesCommand}
+   */
+  allQueryStringTypes(): Promise<AllQueryStringTypesCommandOutput>;
+  allQueryStringTypes(
+    args: AllQueryStringTypesCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<AllQueryStringTypesCommandOutput>;
+  allQueryStringTypes(
+    args: AllQueryStringTypesCommandInput,
+    cb: (err: any, data?: AllQueryStringTypesCommandOutput) => void
+  ): void;
+  allQueryStringTypes(
+    args: AllQueryStringTypesCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: AllQueryStringTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BodyWithXmlNameCommand}
+   */
+  bodyWithXmlName(): Promise<BodyWithXmlNameCommandOutput>;
+  bodyWithXmlName(
+    args: BodyWithXmlNameCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<BodyWithXmlNameCommandOutput>;
+  bodyWithXmlName(
+    args: BodyWithXmlNameCommandInput,
+    cb: (err: any, data?: BodyWithXmlNameCommandOutput) => void
+  ): void;
+  bodyWithXmlName(
+    args: BodyWithXmlNameCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: BodyWithXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ConstantAndVariableQueryStringCommand}
+   */
+  constantAndVariableQueryString(): Promise<ConstantAndVariableQueryStringCommandOutput>;
+  constantAndVariableQueryString(
+    args: ConstantAndVariableQueryStringCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<ConstantAndVariableQueryStringCommandOutput>;
+  constantAndVariableQueryString(
+    args: ConstantAndVariableQueryStringCommandInput,
+    cb: (err: any, data?: ConstantAndVariableQueryStringCommandOutput) => void
+  ): void;
+  constantAndVariableQueryString(
+    args: ConstantAndVariableQueryStringCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: ConstantAndVariableQueryStringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ConstantQueryStringCommand}
+   */
+  constantQueryString(
+    args: ConstantQueryStringCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<ConstantQueryStringCommandOutput>;
+  constantQueryString(
+    args: ConstantQueryStringCommandInput,
+    cb: (err: any, data?: ConstantQueryStringCommandOutput) => void
+  ): void;
+  constantQueryString(
+    args: ConstantQueryStringCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: ConstantQueryStringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ContentTypeParametersCommand}
+   */
+  contentTypeParameters(): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DatetimeOffsetsCommand}
+   */
+  datetimeOffsets(): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EmptyInputAndEmptyOutputCommand}
+   */
+  emptyInputAndEmptyOutput(): Promise<EmptyInputAndEmptyOutputCommandOutput>;
+  emptyInputAndEmptyOutput(
+    args: EmptyInputAndEmptyOutputCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<EmptyInputAndEmptyOutputCommandOutput>;
+  emptyInputAndEmptyOutput(
+    args: EmptyInputAndEmptyOutputCommandInput,
+    cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
+  ): void;
+  emptyInputAndEmptyOutput(
+    args: EmptyInputAndEmptyOutputCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EndpointOperationCommand}
+   */
+  endpointOperation(): Promise<EndpointOperationCommandOutput>;
+  endpointOperation(
+    args: EndpointOperationCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<EndpointOperationCommandOutput>;
+  endpointOperation(
+    args: EndpointOperationCommandInput,
+    cb: (err: any, data?: EndpointOperationCommandOutput) => void
+  ): void;
+  endpointOperation(
+    args: EndpointOperationCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: EndpointOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EndpointWithHostLabelHeaderOperationCommand}
+   */
+  endpointWithHostLabelHeaderOperation(
+    args: EndpointWithHostLabelHeaderOperationCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<EndpointWithHostLabelHeaderOperationCommandOutput>;
+  endpointWithHostLabelHeaderOperation(
+    args: EndpointWithHostLabelHeaderOperationCommandInput,
+    cb: (err: any, data?: EndpointWithHostLabelHeaderOperationCommandOutput) => void
+  ): void;
+  endpointWithHostLabelHeaderOperation(
+    args: EndpointWithHostLabelHeaderOperationCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: EndpointWithHostLabelHeaderOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EndpointWithHostLabelOperationCommand}
+   */
+  endpointWithHostLabelOperation(
+    args: EndpointWithHostLabelOperationCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<EndpointWithHostLabelOperationCommandOutput>;
+  endpointWithHostLabelOperation(
+    args: EndpointWithHostLabelOperationCommandInput,
+    cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
+  ): void;
+  endpointWithHostLabelOperation(
+    args: EndpointWithHostLabelOperationCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link FlattenedXmlMapCommand}
+   */
+  flattenedXmlMap(): Promise<FlattenedXmlMapCommandOutput>;
+  flattenedXmlMap(
+    args: FlattenedXmlMapCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<FlattenedXmlMapCommandOutput>;
+  flattenedXmlMap(
+    args: FlattenedXmlMapCommandInput,
+    cb: (err: any, data?: FlattenedXmlMapCommandOutput) => void
+  ): void;
+  flattenedXmlMap(
+    args: FlattenedXmlMapCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: FlattenedXmlMapCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link FlattenedXmlMapWithXmlNameCommand}
+   */
+  flattenedXmlMapWithXmlName(): Promise<FlattenedXmlMapWithXmlNameCommandOutput>;
+  flattenedXmlMapWithXmlName(
+    args: FlattenedXmlMapWithXmlNameCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<FlattenedXmlMapWithXmlNameCommandOutput>;
+  flattenedXmlMapWithXmlName(
+    args: FlattenedXmlMapWithXmlNameCommandInput,
+    cb: (err: any, data?: FlattenedXmlMapWithXmlNameCommandOutput) => void
+  ): void;
+  flattenedXmlMapWithXmlName(
+    args: FlattenedXmlMapWithXmlNameCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: FlattenedXmlMapWithXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link FlattenedXmlMapWithXmlNamespaceCommand}
+   */
+  flattenedXmlMapWithXmlNamespace(): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput>;
+  flattenedXmlMapWithXmlNamespace(
+    args: FlattenedXmlMapWithXmlNamespaceCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput>;
+  flattenedXmlMapWithXmlNamespace(
+    args: FlattenedXmlMapWithXmlNamespaceCommandInput,
+    cb: (err: any, data?: FlattenedXmlMapWithXmlNamespaceCommandOutput) => void
+  ): void;
+  flattenedXmlMapWithXmlNamespace(
+    args: FlattenedXmlMapWithXmlNamespaceCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: FlattenedXmlMapWithXmlNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link FractionalSecondsCommand}
+   */
+  fractionalSeconds(): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GreetingWithErrorsCommand}
+   */
+  greetingWithErrors(): Promise<GreetingWithErrorsCommandOutput>;
+  greetingWithErrors(
+    args: GreetingWithErrorsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<GreetingWithErrorsCommandOutput>;
+  greetingWithErrors(
+    args: GreetingWithErrorsCommandInput,
+    cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
+  ): void;
+  greetingWithErrors(
+    args: GreetingWithErrorsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpEmptyPrefixHeadersCommand}
+   */
+  httpEmptyPrefixHeaders(): Promise<HttpEmptyPrefixHeadersCommandOutput>;
+  httpEmptyPrefixHeaders(
+    args: HttpEmptyPrefixHeadersCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpEmptyPrefixHeadersCommandOutput>;
+  httpEmptyPrefixHeaders(
+    args: HttpEmptyPrefixHeadersCommandInput,
+    cb: (err: any, data?: HttpEmptyPrefixHeadersCommandOutput) => void
+  ): void;
+  httpEmptyPrefixHeaders(
+    args: HttpEmptyPrefixHeadersCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpEmptyPrefixHeadersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpEnumPayloadCommand}
+   */
+  httpEnumPayload(): Promise<HttpEnumPayloadCommandOutput>;
+  httpEnumPayload(
+    args: HttpEnumPayloadCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpEnumPayloadCommandOutput>;
+  httpEnumPayload(
+    args: HttpEnumPayloadCommandInput,
+    cb: (err: any, data?: HttpEnumPayloadCommandOutput) => void
+  ): void;
+  httpEnumPayload(
+    args: HttpEnumPayloadCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpEnumPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadTraitsCommand}
+   */
+  httpPayloadTraits(): Promise<HttpPayloadTraitsCommandOutput>;
+  httpPayloadTraits(
+    args: HttpPayloadTraitsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadTraitsCommandOutput>;
+  httpPayloadTraits(
+    args: HttpPayloadTraitsCommandInput,
+    cb: (err: any, data?: HttpPayloadTraitsCommandOutput) => void
+  ): void;
+  httpPayloadTraits(
+    args: HttpPayloadTraitsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadTraitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadTraitsWithMediaTypeCommand}
+   */
+  httpPayloadTraitsWithMediaType(): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput>;
+  httpPayloadTraitsWithMediaType(
+    args: HttpPayloadTraitsWithMediaTypeCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput>;
+  httpPayloadTraitsWithMediaType(
+    args: HttpPayloadTraitsWithMediaTypeCommandInput,
+    cb: (err: any, data?: HttpPayloadTraitsWithMediaTypeCommandOutput) => void
+  ): void;
+  httpPayloadTraitsWithMediaType(
+    args: HttpPayloadTraitsWithMediaTypeCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadTraitsWithMediaTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadWithMemberXmlNameCommand}
+   */
+  httpPayloadWithMemberXmlName(): Promise<HttpPayloadWithMemberXmlNameCommandOutput>;
+  httpPayloadWithMemberXmlName(
+    args: HttpPayloadWithMemberXmlNameCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadWithMemberXmlNameCommandOutput>;
+  httpPayloadWithMemberXmlName(
+    args: HttpPayloadWithMemberXmlNameCommandInput,
+    cb: (err: any, data?: HttpPayloadWithMemberXmlNameCommandOutput) => void
+  ): void;
+  httpPayloadWithMemberXmlName(
+    args: HttpPayloadWithMemberXmlNameCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithMemberXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadWithStructureCommand}
+   */
+  httpPayloadWithStructure(): Promise<HttpPayloadWithStructureCommandOutput>;
+  httpPayloadWithStructure(
+    args: HttpPayloadWithStructureCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadWithStructureCommandOutput>;
+  httpPayloadWithStructure(
+    args: HttpPayloadWithStructureCommandInput,
+    cb: (err: any, data?: HttpPayloadWithStructureCommandOutput) => void
+  ): void;
+  httpPayloadWithStructure(
+    args: HttpPayloadWithStructureCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithStructureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadWithUnionCommand}
+   */
+  httpPayloadWithUnion(): Promise<HttpPayloadWithUnionCommandOutput>;
+  httpPayloadWithUnion(
+    args: HttpPayloadWithUnionCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadWithUnionCommandOutput>;
+  httpPayloadWithUnion(
+    args: HttpPayloadWithUnionCommandInput,
+    cb: (err: any, data?: HttpPayloadWithUnionCommandOutput) => void
+  ): void;
+  httpPayloadWithUnion(
+    args: HttpPayloadWithUnionCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithUnionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadWithXmlNameCommand}
+   */
+  httpPayloadWithXmlName(): Promise<HttpPayloadWithXmlNameCommandOutput>;
+  httpPayloadWithXmlName(
+    args: HttpPayloadWithXmlNameCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadWithXmlNameCommandOutput>;
+  httpPayloadWithXmlName(
+    args: HttpPayloadWithXmlNameCommandInput,
+    cb: (err: any, data?: HttpPayloadWithXmlNameCommandOutput) => void
+  ): void;
+  httpPayloadWithXmlName(
+    args: HttpPayloadWithXmlNameCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadWithXmlNamespaceCommand}
+   */
+  httpPayloadWithXmlNamespace(): Promise<HttpPayloadWithXmlNamespaceCommandOutput>;
+  httpPayloadWithXmlNamespace(
+    args: HttpPayloadWithXmlNamespaceCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadWithXmlNamespaceCommandOutput>;
+  httpPayloadWithXmlNamespace(
+    args: HttpPayloadWithXmlNamespaceCommandInput,
+    cb: (err: any, data?: HttpPayloadWithXmlNamespaceCommandOutput) => void
+  ): void;
+  httpPayloadWithXmlNamespace(
+    args: HttpPayloadWithXmlNamespaceCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithXmlNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPayloadWithXmlNamespaceAndPrefixCommand}
+   */
+  httpPayloadWithXmlNamespaceAndPrefix(): Promise<HttpPayloadWithXmlNamespaceAndPrefixCommandOutput>;
+  httpPayloadWithXmlNamespaceAndPrefix(
+    args: HttpPayloadWithXmlNamespaceAndPrefixCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPayloadWithXmlNamespaceAndPrefixCommandOutput>;
+  httpPayloadWithXmlNamespaceAndPrefix(
+    args: HttpPayloadWithXmlNamespaceAndPrefixCommandInput,
+    cb: (err: any, data?: HttpPayloadWithXmlNamespaceAndPrefixCommandOutput) => void
+  ): void;
+  httpPayloadWithXmlNamespaceAndPrefix(
+    args: HttpPayloadWithXmlNamespaceAndPrefixCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPayloadWithXmlNamespaceAndPrefixCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpPrefixHeadersCommand}
+   */
+  httpPrefixHeaders(): Promise<HttpPrefixHeadersCommandOutput>;
+  httpPrefixHeaders(
+    args: HttpPrefixHeadersCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpPrefixHeadersCommandOutput>;
+  httpPrefixHeaders(
+    args: HttpPrefixHeadersCommandInput,
+    cb: (err: any, data?: HttpPrefixHeadersCommandOutput) => void
+  ): void;
+  httpPrefixHeaders(
+    args: HttpPrefixHeadersCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpPrefixHeadersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpRequestWithFloatLabelsCommand}
+   */
+  httpRequestWithFloatLabels(
+    args: HttpRequestWithFloatLabelsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpRequestWithFloatLabelsCommandOutput>;
+  httpRequestWithFloatLabels(
+    args: HttpRequestWithFloatLabelsCommandInput,
+    cb: (err: any, data?: HttpRequestWithFloatLabelsCommandOutput) => void
+  ): void;
+  httpRequestWithFloatLabels(
+    args: HttpRequestWithFloatLabelsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpRequestWithFloatLabelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpRequestWithGreedyLabelInPathCommand}
+   */
+  httpRequestWithGreedyLabelInPath(
+    args: HttpRequestWithGreedyLabelInPathCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpRequestWithGreedyLabelInPathCommandOutput>;
+  httpRequestWithGreedyLabelInPath(
+    args: HttpRequestWithGreedyLabelInPathCommandInput,
+    cb: (err: any, data?: HttpRequestWithGreedyLabelInPathCommandOutput) => void
+  ): void;
+  httpRequestWithGreedyLabelInPath(
+    args: HttpRequestWithGreedyLabelInPathCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpRequestWithGreedyLabelInPathCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpRequestWithLabelsCommand}
+   */
+  httpRequestWithLabels(
+    args: HttpRequestWithLabelsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpRequestWithLabelsCommandOutput>;
+  httpRequestWithLabels(
+    args: HttpRequestWithLabelsCommandInput,
+    cb: (err: any, data?: HttpRequestWithLabelsCommandOutput) => void
+  ): void;
+  httpRequestWithLabels(
+    args: HttpRequestWithLabelsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpRequestWithLabelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpRequestWithLabelsAndTimestampFormatCommand}
+   */
+  httpRequestWithLabelsAndTimestampFormat(
+    args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput>;
+  httpRequestWithLabelsAndTimestampFormat(
+    args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
+    cb: (err: any, data?: HttpRequestWithLabelsAndTimestampFormatCommandOutput) => void
+  ): void;
+  httpRequestWithLabelsAndTimestampFormat(
+    args: HttpRequestWithLabelsAndTimestampFormatCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpRequestWithLabelsAndTimestampFormatCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpResponseCodeCommand}
+   */
+  httpResponseCode(): Promise<HttpResponseCodeCommandOutput>;
+  httpResponseCode(
+    args: HttpResponseCodeCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpResponseCodeCommandOutput>;
+  httpResponseCode(
+    args: HttpResponseCodeCommandInput,
+    cb: (err: any, data?: HttpResponseCodeCommandOutput) => void
+  ): void;
+  httpResponseCode(
+    args: HttpResponseCodeCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpResponseCodeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link HttpStringPayloadCommand}
+   */
+  httpStringPayload(): Promise<HttpStringPayloadCommandOutput>;
+  httpStringPayload(
+    args: HttpStringPayloadCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<HttpStringPayloadCommandOutput>;
+  httpStringPayload(
+    args: HttpStringPayloadCommandInput,
+    cb: (err: any, data?: HttpStringPayloadCommandOutput) => void
+  ): void;
+  httpStringPayload(
+    args: HttpStringPayloadCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: HttpStringPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link IgnoreQueryParamsInResponseCommand}
+   */
+  ignoreQueryParamsInResponse(): Promise<IgnoreQueryParamsInResponseCommandOutput>;
+  ignoreQueryParamsInResponse(
+    args: IgnoreQueryParamsInResponseCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<IgnoreQueryParamsInResponseCommandOutput>;
+  ignoreQueryParamsInResponse(
+    args: IgnoreQueryParamsInResponseCommandInput,
+    cb: (err: any, data?: IgnoreQueryParamsInResponseCommandOutput) => void
+  ): void;
+  ignoreQueryParamsInResponse(
+    args: IgnoreQueryParamsInResponseCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: IgnoreQueryParamsInResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InputAndOutputWithHeadersCommand}
+   */
+  inputAndOutputWithHeaders(): Promise<InputAndOutputWithHeadersCommandOutput>;
+  inputAndOutputWithHeaders(
+    args: InputAndOutputWithHeadersCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<InputAndOutputWithHeadersCommandOutput>;
+  inputAndOutputWithHeaders(
+    args: InputAndOutputWithHeadersCommandInput,
+    cb: (err: any, data?: InputAndOutputWithHeadersCommandOutput) => void
+  ): void;
+  inputAndOutputWithHeaders(
+    args: InputAndOutputWithHeadersCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: InputAndOutputWithHeadersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NestedXmlMapsCommand}
+   */
+  nestedXmlMaps(): Promise<NestedXmlMapsCommandOutput>;
+  nestedXmlMaps(
+    args: NestedXmlMapsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<NestedXmlMapsCommandOutput>;
+  nestedXmlMaps(
+    args: NestedXmlMapsCommandInput,
+    cb: (err: any, data?: NestedXmlMapsCommandOutput) => void
+  ): void;
+  nestedXmlMaps(
+    args: NestedXmlMapsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: NestedXmlMapsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NestedXmlMapWithXmlNameCommand}
+   */
+  nestedXmlMapWithXmlName(): Promise<NestedXmlMapWithXmlNameCommandOutput>;
+  nestedXmlMapWithXmlName(
+    args: NestedXmlMapWithXmlNameCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<NestedXmlMapWithXmlNameCommandOutput>;
+  nestedXmlMapWithXmlName(
+    args: NestedXmlMapWithXmlNameCommandInput,
+    cb: (err: any, data?: NestedXmlMapWithXmlNameCommandOutput) => void
+  ): void;
+  nestedXmlMapWithXmlName(
+    args: NestedXmlMapWithXmlNameCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: NestedXmlMapWithXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NoInputAndNoOutputCommand}
+   */
+  noInputAndNoOutput(): Promise<NoInputAndNoOutputCommandOutput>;
+  noInputAndNoOutput(
+    args: NoInputAndNoOutputCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<NoInputAndNoOutputCommandOutput>;
+  noInputAndNoOutput(
+    args: NoInputAndNoOutputCommandInput,
+    cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
+  ): void;
+  noInputAndNoOutput(
+    args: NoInputAndNoOutputCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NoInputAndOutputCommand}
+   */
+  noInputAndOutput(): Promise<NoInputAndOutputCommandOutput>;
+  noInputAndOutput(
+    args: NoInputAndOutputCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<NoInputAndOutputCommandOutput>;
+  noInputAndOutput(
+    args: NoInputAndOutputCommandInput,
+    cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
+  ): void;
+  noInputAndOutput(
+    args: NoInputAndOutputCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NullAndEmptyHeadersClientCommand}
+   */
+  nullAndEmptyHeadersClient(): Promise<NullAndEmptyHeadersClientCommandOutput>;
+  nullAndEmptyHeadersClient(
+    args: NullAndEmptyHeadersClientCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<NullAndEmptyHeadersClientCommandOutput>;
+  nullAndEmptyHeadersClient(
+    args: NullAndEmptyHeadersClientCommandInput,
+    cb: (err: any, data?: NullAndEmptyHeadersClientCommandOutput) => void
+  ): void;
+  nullAndEmptyHeadersClient(
+    args: NullAndEmptyHeadersClientCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: NullAndEmptyHeadersClientCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NullAndEmptyHeadersServerCommand}
+   */
+  nullAndEmptyHeadersServer(): Promise<NullAndEmptyHeadersServerCommandOutput>;
+  nullAndEmptyHeadersServer(
+    args: NullAndEmptyHeadersServerCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<NullAndEmptyHeadersServerCommandOutput>;
+  nullAndEmptyHeadersServer(
+    args: NullAndEmptyHeadersServerCommandInput,
+    cb: (err: any, data?: NullAndEmptyHeadersServerCommandOutput) => void
+  ): void;
+  nullAndEmptyHeadersServer(
+    args: NullAndEmptyHeadersServerCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: NullAndEmptyHeadersServerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OmitsNullSerializesEmptyStringCommand}
+   */
+  omitsNullSerializesEmptyString(): Promise<OmitsNullSerializesEmptyStringCommandOutput>;
+  omitsNullSerializesEmptyString(
+    args: OmitsNullSerializesEmptyStringCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<OmitsNullSerializesEmptyStringCommandOutput>;
+  omitsNullSerializesEmptyString(
+    args: OmitsNullSerializesEmptyStringCommandInput,
+    cb: (err: any, data?: OmitsNullSerializesEmptyStringCommandOutput) => void
+  ): void;
+  omitsNullSerializesEmptyString(
+    args: OmitsNullSerializesEmptyStringCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: OmitsNullSerializesEmptyStringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutWithContentEncodingCommand}
+   */
+  putWithContentEncoding(): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryIdempotencyTokenAutoFillCommand}
+   */
+  queryIdempotencyTokenAutoFill(): Promise<QueryIdempotencyTokenAutoFillCommandOutput>;
+  queryIdempotencyTokenAutoFill(
+    args: QueryIdempotencyTokenAutoFillCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<QueryIdempotencyTokenAutoFillCommandOutput>;
+  queryIdempotencyTokenAutoFill(
+    args: QueryIdempotencyTokenAutoFillCommandInput,
+    cb: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
+  ): void;
+  queryIdempotencyTokenAutoFill(
+    args: QueryIdempotencyTokenAutoFillCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryParamsAsStringListMapCommand}
+   */
+  queryParamsAsStringListMap(): Promise<QueryParamsAsStringListMapCommandOutput>;
+  queryParamsAsStringListMap(
+    args: QueryParamsAsStringListMapCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<QueryParamsAsStringListMapCommandOutput>;
+  queryParamsAsStringListMap(
+    args: QueryParamsAsStringListMapCommandInput,
+    cb: (err: any, data?: QueryParamsAsStringListMapCommandOutput) => void
+  ): void;
+  queryParamsAsStringListMap(
+    args: QueryParamsAsStringListMapCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: QueryParamsAsStringListMapCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryPrecedenceCommand}
+   */
+  queryPrecedence(): Promise<QueryPrecedenceCommandOutput>;
+  queryPrecedence(
+    args: QueryPrecedenceCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<QueryPrecedenceCommandOutput>;
+  queryPrecedence(
+    args: QueryPrecedenceCommandInput,
+    cb: (err: any, data?: QueryPrecedenceCommandOutput) => void
+  ): void;
+  queryPrecedence(
+    args: QueryPrecedenceCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: QueryPrecedenceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RecursiveShapesCommand}
+   */
+  recursiveShapes(): Promise<RecursiveShapesCommandOutput>;
+  recursiveShapes(
+    args: RecursiveShapesCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<RecursiveShapesCommandOutput>;
+  recursiveShapes(
+    args: RecursiveShapesCommandInput,
+    cb: (err: any, data?: RecursiveShapesCommandOutput) => void
+  ): void;
+  recursiveShapes(
+    args: RecursiveShapesCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: RecursiveShapesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SimpleScalarPropertiesCommand}
+   */
+  simpleScalarProperties(): Promise<SimpleScalarPropertiesCommandOutput>;
+  simpleScalarProperties(
+    args: SimpleScalarPropertiesCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<SimpleScalarPropertiesCommandOutput>;
+  simpleScalarProperties(
+    args: SimpleScalarPropertiesCommandInput,
+    cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
+  ): void;
+  simpleScalarProperties(
+    args: SimpleScalarPropertiesCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TimestampFormatHeadersCommand}
+   */
+  timestampFormatHeaders(): Promise<TimestampFormatHeadersCommandOutput>;
+  timestampFormatHeaders(
+    args: TimestampFormatHeadersCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<TimestampFormatHeadersCommandOutput>;
+  timestampFormatHeaders(
+    args: TimestampFormatHeadersCommandInput,
+    cb: (err: any, data?: TimestampFormatHeadersCommandOutput) => void
+  ): void;
+  timestampFormatHeaders(
+    args: TimestampFormatHeadersCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: TimestampFormatHeadersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlAttributesCommand}
+   */
+  xmlAttributes(): Promise<XmlAttributesCommandOutput>;
+  xmlAttributes(
+    args: XmlAttributesCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlAttributesCommandOutput>;
+  xmlAttributes(
+    args: XmlAttributesCommandInput,
+    cb: (err: any, data?: XmlAttributesCommandOutput) => void
+  ): void;
+  xmlAttributes(
+    args: XmlAttributesCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlAttributesInMiddleCommand}
+   */
+  xmlAttributesInMiddle(): Promise<XmlAttributesInMiddleCommandOutput>;
+  xmlAttributesInMiddle(
+    args: XmlAttributesInMiddleCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlAttributesInMiddleCommandOutput>;
+  xmlAttributesInMiddle(
+    args: XmlAttributesInMiddleCommandInput,
+    cb: (err: any, data?: XmlAttributesInMiddleCommandOutput) => void
+  ): void;
+  xmlAttributesInMiddle(
+    args: XmlAttributesInMiddleCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlAttributesInMiddleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlAttributesOnPayloadCommand}
+   */
+  xmlAttributesOnPayload(): Promise<XmlAttributesOnPayloadCommandOutput>;
+  xmlAttributesOnPayload(
+    args: XmlAttributesOnPayloadCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlAttributesOnPayloadCommandOutput>;
+  xmlAttributesOnPayload(
+    args: XmlAttributesOnPayloadCommandInput,
+    cb: (err: any, data?: XmlAttributesOnPayloadCommandOutput) => void
+  ): void;
+  xmlAttributesOnPayload(
+    args: XmlAttributesOnPayloadCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlAttributesOnPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlBlobsCommand}
+   */
+  xmlBlobs(): Promise<XmlBlobsCommandOutput>;
+  xmlBlobs(
+    args: XmlBlobsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlBlobsCommandOutput>;
+  xmlBlobs(
+    args: XmlBlobsCommandInput,
+    cb: (err: any, data?: XmlBlobsCommandOutput) => void
+  ): void;
+  xmlBlobs(
+    args: XmlBlobsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlBlobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlEmptyBlobsCommand}
+   */
+  xmlEmptyBlobs(): Promise<XmlEmptyBlobsCommandOutput>;
+  xmlEmptyBlobs(
+    args: XmlEmptyBlobsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlEmptyBlobsCommandOutput>;
+  xmlEmptyBlobs(
+    args: XmlEmptyBlobsCommandInput,
+    cb: (err: any, data?: XmlEmptyBlobsCommandOutput) => void
+  ): void;
+  xmlEmptyBlobs(
+    args: XmlEmptyBlobsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlEmptyBlobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlEmptyListsCommand}
+   */
+  xmlEmptyLists(): Promise<XmlEmptyListsCommandOutput>;
+  xmlEmptyLists(
+    args: XmlEmptyListsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlEmptyListsCommandOutput>;
+  xmlEmptyLists(
+    args: XmlEmptyListsCommandInput,
+    cb: (err: any, data?: XmlEmptyListsCommandOutput) => void
+  ): void;
+  xmlEmptyLists(
+    args: XmlEmptyListsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlEmptyListsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlEmptyMapsCommand}
+   */
+  xmlEmptyMaps(): Promise<XmlEmptyMapsCommandOutput>;
+  xmlEmptyMaps(
+    args: XmlEmptyMapsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlEmptyMapsCommandOutput>;
+  xmlEmptyMaps(
+    args: XmlEmptyMapsCommandInput,
+    cb: (err: any, data?: XmlEmptyMapsCommandOutput) => void
+  ): void;
+  xmlEmptyMaps(
+    args: XmlEmptyMapsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlEmptyMapsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlEmptyStringsCommand}
+   */
+  xmlEmptyStrings(): Promise<XmlEmptyStringsCommandOutput>;
+  xmlEmptyStrings(
+    args: XmlEmptyStringsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlEmptyStringsCommandOutput>;
+  xmlEmptyStrings(
+    args: XmlEmptyStringsCommandInput,
+    cb: (err: any, data?: XmlEmptyStringsCommandOutput) => void
+  ): void;
+  xmlEmptyStrings(
+    args: XmlEmptyStringsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlEmptyStringsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlEnumsCommand}
+   */
+  xmlEnums(): Promise<XmlEnumsCommandOutput>;
+  xmlEnums(
+    args: XmlEnumsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlEnumsCommandOutput>;
+  xmlEnums(
+    args: XmlEnumsCommandInput,
+    cb: (err: any, data?: XmlEnumsCommandOutput) => void
+  ): void;
+  xmlEnums(
+    args: XmlEnumsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlEnumsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlIntEnumsCommand}
+   */
+  xmlIntEnums(): Promise<XmlIntEnumsCommandOutput>;
+  xmlIntEnums(
+    args: XmlIntEnumsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlIntEnumsCommandOutput>;
+  xmlIntEnums(
+    args: XmlIntEnumsCommandInput,
+    cb: (err: any, data?: XmlIntEnumsCommandOutput) => void
+  ): void;
+  xmlIntEnums(
+    args: XmlIntEnumsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlIntEnumsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlListsCommand}
+   */
+  xmlLists(): Promise<XmlListsCommandOutput>;
+  xmlLists(
+    args: XmlListsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlListsCommandOutput>;
+  xmlLists(
+    args: XmlListsCommandInput,
+    cb: (err: any, data?: XmlListsCommandOutput) => void
+  ): void;
+  xmlLists(
+    args: XmlListsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlListsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlMapsCommand}
+   */
+  xmlMaps(): Promise<XmlMapsCommandOutput>;
+  xmlMaps(
+    args: XmlMapsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlMapsCommandOutput>;
+  xmlMaps(
+    args: XmlMapsCommandInput,
+    cb: (err: any, data?: XmlMapsCommandOutput) => void
+  ): void;
+  xmlMaps(
+    args: XmlMapsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlMapsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlMapsXmlNameCommand}
+   */
+  xmlMapsXmlName(): Promise<XmlMapsXmlNameCommandOutput>;
+  xmlMapsXmlName(
+    args: XmlMapsXmlNameCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlMapsXmlNameCommandOutput>;
+  xmlMapsXmlName(
+    args: XmlMapsXmlNameCommandInput,
+    cb: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
+  ): void;
+  xmlMapsXmlName(
+    args: XmlMapsXmlNameCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlMapWithXmlNamespaceCommand}
+   */
+  xmlMapWithXmlNamespace(): Promise<XmlMapWithXmlNamespaceCommandOutput>;
+  xmlMapWithXmlNamespace(
+    args: XmlMapWithXmlNamespaceCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlMapWithXmlNamespaceCommandOutput>;
+  xmlMapWithXmlNamespace(
+    args: XmlMapWithXmlNamespaceCommandInput,
+    cb: (err: any, data?: XmlMapWithXmlNamespaceCommandOutput) => void
+  ): void;
+  xmlMapWithXmlNamespace(
+    args: XmlMapWithXmlNamespaceCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlMapWithXmlNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlNamespacesCommand}
+   */
+  xmlNamespaces(): Promise<XmlNamespacesCommandOutput>;
+  xmlNamespaces(
+    args: XmlNamespacesCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlNamespacesCommandOutput>;
+  xmlNamespaces(
+    args: XmlNamespacesCommandInput,
+    cb: (err: any, data?: XmlNamespacesCommandOutput) => void
+  ): void;
+  xmlNamespaces(
+    args: XmlNamespacesCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlNamespacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlTimestampsCommand}
+   */
+  xmlTimestamps(): Promise<XmlTimestampsCommandOutput>;
+  xmlTimestamps(
+    args: XmlTimestampsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlTimestampsCommandOutput>;
+  xmlTimestamps(
+    args: XmlTimestampsCommandInput,
+    cb: (err: any, data?: XmlTimestampsCommandOutput) => void
+  ): void;
+  xmlTimestamps(
+    args: XmlTimestampsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlTimestampsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlUnionsCommand}
+   */
+  xmlUnions(): Promise<XmlUnionsCommandOutput>;
+  xmlUnions(
+    args: XmlUnionsCommandInput,
+    options?: RestXmlProtocolRequestOptions
+  ): Promise<XmlUnionsCommandOutput>;
+  xmlUnions(
+    args: XmlUnionsCommandInput,
+    cb: (err: any, data?: XmlUnionsCommandOutput) => void
+  ): void;
+  xmlUnions(
+    args: XmlUnionsCommandInput,
+    options: RestXmlProtocolRequestOptions,
+    cb: (err: any, data?: XmlUnionsCommandOutput) => void
+  ): void;
+}
+
+/**
+ * A REST XML service that sends XML requests and responses.
+ * @public
+ */
+export class RestXmlProtocol extends RestXmlProtocolClient implements RestXmlProtocol {}
+createAggregatedClient(commands, RestXmlProtocol);

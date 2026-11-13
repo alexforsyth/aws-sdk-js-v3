@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { DescribeAssetRequest, DescribeAssetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAssetCommand,
-  serializeAws_restJson1DescribeAssetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAssetRequest, DescribeAssetResponse } from "../models/models_0";
+import { DescribeAsset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAssetCommand}.
+ */
 export interface DescribeAssetCommandInput extends DescribeAssetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAssetCommand}.
+ */
 export interface DescribeAssetCommandOutput extends DescribeAssetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,157 @@ export interface DescribeAssetCommandOutput extends DescribeAssetResponse, __Met
  * ```javascript
  * import { IoTSiteWiseClient, DescribeAssetCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, DescribeAssetCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // DescribeAssetRequest
+ *   assetId: "STRING_VALUE", // required
+ *   excludeProperties: true || false,
+ * };
  * const command = new DescribeAssetCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAssetResponse
+ * //   assetId: "STRING_VALUE", // required
+ * //   assetExternalId: "STRING_VALUE",
+ * //   assetArn: "STRING_VALUE", // required
+ * //   assetName: "STRING_VALUE", // required
+ * //   assetModelId: "STRING_VALUE", // required
+ * //   assetProperties: [ // AssetProperties // required
+ * //     { // AssetProperty
+ * //       id: "STRING_VALUE", // required
+ * //       externalId: "STRING_VALUE",
+ * //       name: "STRING_VALUE", // required
+ * //       alias: "STRING_VALUE",
+ * //       notification: { // PropertyNotification
+ * //         topic: "STRING_VALUE", // required
+ * //         state: "ENABLED" || "DISABLED", // required
+ * //       },
+ * //       dataType: "STRING" || "INTEGER" || "DOUBLE" || "BOOLEAN" || "STRUCT" || "VIDEO" || "ANNOTATION" || "JSON", // required
+ * //       dataTypeSpec: "STRING_VALUE",
+ * //       unit: "STRING_VALUE",
+ * //       path: [ // AssetPropertyPath
+ * //         { // AssetPropertyPathSegment
+ * //           id: "STRING_VALUE",
+ * //           name: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   assetHierarchies: [ // AssetHierarchies // required
+ * //     { // AssetHierarchy
+ * //       id: "STRING_VALUE",
+ * //       externalId: "STRING_VALUE",
+ * //       name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   assetCompositeModels: [ // AssetCompositeModels
+ * //     { // AssetCompositeModel
+ * //       name: "STRING_VALUE", // required
+ * //       description: "STRING_VALUE",
+ * //       type: "STRING_VALUE", // required
+ * //       properties: [ // required
+ * //         {
+ * //           id: "STRING_VALUE", // required
+ * //           externalId: "STRING_VALUE",
+ * //           name: "STRING_VALUE", // required
+ * //           alias: "STRING_VALUE",
+ * //           notification: {
+ * //             topic: "STRING_VALUE", // required
+ * //             state: "ENABLED" || "DISABLED", // required
+ * //           },
+ * //           dataType: "STRING" || "INTEGER" || "DOUBLE" || "BOOLEAN" || "STRUCT" || "VIDEO" || "ANNOTATION" || "JSON", // required
+ * //           dataTypeSpec: "STRING_VALUE",
+ * //           unit: "STRING_VALUE",
+ * //           path: [
+ * //             {
+ * //               id: "STRING_VALUE",
+ * //               name: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       id: "STRING_VALUE",
+ * //       externalId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   assetCreationDate: new Date("TIMESTAMP"), // required
+ * //   assetLastUpdateDate: new Date("TIMESTAMP"), // required
+ * //   assetStatus: { // AssetStatus
+ * //     state: "CREATING" || "ACTIVE" || "UPDATING" || "DELETING" || "FAILED", // required
+ * //     error: { // ErrorDetails
+ * //       code: "VALIDATION_ERROR" || "INTERNAL_FAILURE", // required
+ * //       message: "STRING_VALUE", // required
+ * //       details: [ // DetailedErrors
+ * //         { // DetailedError
+ * //           code: "INCOMPATIBLE_COMPUTE_LOCATION" || "INCOMPATIBLE_FORWARDING_CONFIGURATION", // required
+ * //           message: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * //   assetDescription: "STRING_VALUE",
+ * //   assetCompositeModelSummaries: [ // AssetCompositeModelSummaries
+ * //     { // AssetCompositeModelSummary
+ * //       id: "STRING_VALUE", // required
+ * //       externalId: "STRING_VALUE",
+ * //       name: "STRING_VALUE", // required
+ * //       type: "STRING_VALUE", // required
+ * //       description: "STRING_VALUE", // required
+ * //       path: [ // AssetCompositeModelPath // required
+ * //         { // AssetCompositeModelPathSegment
+ * //           id: "STRING_VALUE",
+ * //           name: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeAssetCommandInput - {@link DescribeAssetCommandInput}
+ * @returns {@link DescribeAssetCommandOutput}
  * @see {@link DescribeAssetCommandInput} for command's `input` shape.
  * @see {@link DescribeAssetCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAssetCommand extends $Command<
-  DescribeAssetCommandInput,
-  DescribeAssetCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAssetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAssetCommandInput, DescribeAssetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "DescribeAssetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAssetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAssetResponse.filterSensitiveLog,
+export class DescribeAssetCommand extends command<DescribeAssetCommandInput, DescribeAssetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAsset",
+  DescribeAsset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAssetRequest;
+      output: DescribeAssetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAssetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAssetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAssetCommandOutput> {
-    return deserializeAws_restJson1DescribeAssetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAssetCommandInput;
+      output: DescribeAssetCommandOutput;
+    };
+  };
 }

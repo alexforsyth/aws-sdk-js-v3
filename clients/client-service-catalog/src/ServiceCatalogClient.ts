@@ -1,329 +1,373 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultServiceCatalogHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AcceptPortfolioShareCommandInput,
   AcceptPortfolioShareCommandOutput,
 } from "./commands/AcceptPortfolioShareCommand";
-import {
+import type {
   AssociateBudgetWithResourceCommandInput,
   AssociateBudgetWithResourceCommandOutput,
 } from "./commands/AssociateBudgetWithResourceCommand";
-import {
+import type {
   AssociatePrincipalWithPortfolioCommandInput,
   AssociatePrincipalWithPortfolioCommandOutput,
 } from "./commands/AssociatePrincipalWithPortfolioCommand";
-import {
+import type {
   AssociateProductWithPortfolioCommandInput,
   AssociateProductWithPortfolioCommandOutput,
 } from "./commands/AssociateProductWithPortfolioCommand";
-import {
+import type {
   AssociateServiceActionWithProvisioningArtifactCommandInput,
   AssociateServiceActionWithProvisioningArtifactCommandOutput,
 } from "./commands/AssociateServiceActionWithProvisioningArtifactCommand";
-import {
+import type {
   AssociateTagOptionWithResourceCommandInput,
   AssociateTagOptionWithResourceCommandOutput,
 } from "./commands/AssociateTagOptionWithResourceCommand";
-import {
+import type {
   BatchAssociateServiceActionWithProvisioningArtifactCommandInput,
   BatchAssociateServiceActionWithProvisioningArtifactCommandOutput,
 } from "./commands/BatchAssociateServiceActionWithProvisioningArtifactCommand";
-import {
+import type {
   BatchDisassociateServiceActionFromProvisioningArtifactCommandInput,
   BatchDisassociateServiceActionFromProvisioningArtifactCommandOutput,
 } from "./commands/BatchDisassociateServiceActionFromProvisioningArtifactCommand";
-import { CopyProductCommandInput, CopyProductCommandOutput } from "./commands/CopyProductCommand";
-import { CreateConstraintCommandInput, CreateConstraintCommandOutput } from "./commands/CreateConstraintCommand";
-import { CreatePortfolioCommandInput, CreatePortfolioCommandOutput } from "./commands/CreatePortfolioCommand";
-import {
+import type { CopyProductCommandInput, CopyProductCommandOutput } from "./commands/CopyProductCommand";
+import type { CreateConstraintCommandInput, CreateConstraintCommandOutput } from "./commands/CreateConstraintCommand";
+import type { CreatePortfolioCommandInput, CreatePortfolioCommandOutput } from "./commands/CreatePortfolioCommand";
+import type {
   CreatePortfolioShareCommandInput,
   CreatePortfolioShareCommandOutput,
 } from "./commands/CreatePortfolioShareCommand";
-import { CreateProductCommandInput, CreateProductCommandOutput } from "./commands/CreateProductCommand";
-import {
+import type { CreateProductCommandInput, CreateProductCommandOutput } from "./commands/CreateProductCommand";
+import type {
   CreateProvisionedProductPlanCommandInput,
   CreateProvisionedProductPlanCommandOutput,
 } from "./commands/CreateProvisionedProductPlanCommand";
-import {
+import type {
   CreateProvisioningArtifactCommandInput,
   CreateProvisioningArtifactCommandOutput,
 } from "./commands/CreateProvisioningArtifactCommand";
-import {
+import type {
   CreateServiceActionCommandInput,
   CreateServiceActionCommandOutput,
 } from "./commands/CreateServiceActionCommand";
-import { CreateTagOptionCommandInput, CreateTagOptionCommandOutput } from "./commands/CreateTagOptionCommand";
-import { DeleteConstraintCommandInput, DeleteConstraintCommandOutput } from "./commands/DeleteConstraintCommand";
-import { DeletePortfolioCommandInput, DeletePortfolioCommandOutput } from "./commands/DeletePortfolioCommand";
-import {
+import type { CreateTagOptionCommandInput, CreateTagOptionCommandOutput } from "./commands/CreateTagOptionCommand";
+import type { DeleteConstraintCommandInput, DeleteConstraintCommandOutput } from "./commands/DeleteConstraintCommand";
+import type { DeletePortfolioCommandInput, DeletePortfolioCommandOutput } from "./commands/DeletePortfolioCommand";
+import type {
   DeletePortfolioShareCommandInput,
   DeletePortfolioShareCommandOutput,
 } from "./commands/DeletePortfolioShareCommand";
-import { DeleteProductCommandInput, DeleteProductCommandOutput } from "./commands/DeleteProductCommand";
-import {
+import type { DeleteProductCommandInput, DeleteProductCommandOutput } from "./commands/DeleteProductCommand";
+import type {
   DeleteProvisionedProductPlanCommandInput,
   DeleteProvisionedProductPlanCommandOutput,
 } from "./commands/DeleteProvisionedProductPlanCommand";
-import {
+import type {
   DeleteProvisioningArtifactCommandInput,
   DeleteProvisioningArtifactCommandOutput,
 } from "./commands/DeleteProvisioningArtifactCommand";
-import {
+import type {
   DeleteServiceActionCommandInput,
   DeleteServiceActionCommandOutput,
 } from "./commands/DeleteServiceActionCommand";
-import { DeleteTagOptionCommandInput, DeleteTagOptionCommandOutput } from "./commands/DeleteTagOptionCommand";
-import { DescribeConstraintCommandInput, DescribeConstraintCommandOutput } from "./commands/DescribeConstraintCommand";
-import {
+import type { DeleteTagOptionCommandInput, DeleteTagOptionCommandOutput } from "./commands/DeleteTagOptionCommand";
+import type {
+  DescribeConstraintCommandInput,
+  DescribeConstraintCommandOutput,
+} from "./commands/DescribeConstraintCommand";
+import type {
   DescribeCopyProductStatusCommandInput,
   DescribeCopyProductStatusCommandOutput,
 } from "./commands/DescribeCopyProductStatusCommand";
-import { DescribePortfolioCommandInput, DescribePortfolioCommandOutput } from "./commands/DescribePortfolioCommand";
-import {
+import type {
+  DescribePortfolioCommandInput,
+  DescribePortfolioCommandOutput,
+} from "./commands/DescribePortfolioCommand";
+import type {
   DescribePortfolioSharesCommandInput,
   DescribePortfolioSharesCommandOutput,
 } from "./commands/DescribePortfolioSharesCommand";
-import {
+import type {
   DescribePortfolioShareStatusCommandInput,
   DescribePortfolioShareStatusCommandOutput,
 } from "./commands/DescribePortfolioShareStatusCommand";
-import {
+import type {
   DescribeProductAsAdminCommandInput,
   DescribeProductAsAdminCommandOutput,
 } from "./commands/DescribeProductAsAdminCommand";
-import { DescribeProductCommandInput, DescribeProductCommandOutput } from "./commands/DescribeProductCommand";
-import {
+import type { DescribeProductCommandInput, DescribeProductCommandOutput } from "./commands/DescribeProductCommand";
+import type {
   DescribeProductViewCommandInput,
   DescribeProductViewCommandOutput,
 } from "./commands/DescribeProductViewCommand";
-import {
+import type {
   DescribeProvisionedProductCommandInput,
   DescribeProvisionedProductCommandOutput,
 } from "./commands/DescribeProvisionedProductCommand";
-import {
+import type {
   DescribeProvisionedProductPlanCommandInput,
   DescribeProvisionedProductPlanCommandOutput,
 } from "./commands/DescribeProvisionedProductPlanCommand";
-import {
+import type {
   DescribeProvisioningArtifactCommandInput,
   DescribeProvisioningArtifactCommandOutput,
 } from "./commands/DescribeProvisioningArtifactCommand";
-import {
+import type {
   DescribeProvisioningParametersCommandInput,
   DescribeProvisioningParametersCommandOutput,
 } from "./commands/DescribeProvisioningParametersCommand";
-import { DescribeRecordCommandInput, DescribeRecordCommandOutput } from "./commands/DescribeRecordCommand";
-import {
+import type { DescribeRecordCommandInput, DescribeRecordCommandOutput } from "./commands/DescribeRecordCommand";
+import type {
   DescribeServiceActionCommandInput,
   DescribeServiceActionCommandOutput,
 } from "./commands/DescribeServiceActionCommand";
-import {
+import type {
   DescribeServiceActionExecutionParametersCommandInput,
   DescribeServiceActionExecutionParametersCommandOutput,
 } from "./commands/DescribeServiceActionExecutionParametersCommand";
-import { DescribeTagOptionCommandInput, DescribeTagOptionCommandOutput } from "./commands/DescribeTagOptionCommand";
-import {
+import type {
+  DescribeTagOptionCommandInput,
+  DescribeTagOptionCommandOutput,
+} from "./commands/DescribeTagOptionCommand";
+import type {
   DisableAWSOrganizationsAccessCommandInput,
   DisableAWSOrganizationsAccessCommandOutput,
 } from "./commands/DisableAWSOrganizationsAccessCommand";
-import {
+import type {
   DisassociateBudgetFromResourceCommandInput,
   DisassociateBudgetFromResourceCommandOutput,
 } from "./commands/DisassociateBudgetFromResourceCommand";
-import {
+import type {
   DisassociatePrincipalFromPortfolioCommandInput,
   DisassociatePrincipalFromPortfolioCommandOutput,
 } from "./commands/DisassociatePrincipalFromPortfolioCommand";
-import {
+import type {
   DisassociateProductFromPortfolioCommandInput,
   DisassociateProductFromPortfolioCommandOutput,
 } from "./commands/DisassociateProductFromPortfolioCommand";
-import {
+import type {
   DisassociateServiceActionFromProvisioningArtifactCommandInput,
   DisassociateServiceActionFromProvisioningArtifactCommandOutput,
 } from "./commands/DisassociateServiceActionFromProvisioningArtifactCommand";
-import {
+import type {
   DisassociateTagOptionFromResourceCommandInput,
   DisassociateTagOptionFromResourceCommandOutput,
 } from "./commands/DisassociateTagOptionFromResourceCommand";
-import {
+import type {
   EnableAWSOrganizationsAccessCommandInput,
   EnableAWSOrganizationsAccessCommandOutput,
 } from "./commands/EnableAWSOrganizationsAccessCommand";
-import {
+import type {
   ExecuteProvisionedProductPlanCommandInput,
   ExecuteProvisionedProductPlanCommandOutput,
 } from "./commands/ExecuteProvisionedProductPlanCommand";
-import {
+import type {
   ExecuteProvisionedProductServiceActionCommandInput,
   ExecuteProvisionedProductServiceActionCommandOutput,
 } from "./commands/ExecuteProvisionedProductServiceActionCommand";
-import {
+import type {
   GetAWSOrganizationsAccessStatusCommandInput,
   GetAWSOrganizationsAccessStatusCommandOutput,
 } from "./commands/GetAWSOrganizationsAccessStatusCommand";
-import {
+import type {
   GetProvisionedProductOutputsCommandInput,
   GetProvisionedProductOutputsCommandOutput,
 } from "./commands/GetProvisionedProductOutputsCommand";
-import {
+import type {
   ImportAsProvisionedProductCommandInput,
   ImportAsProvisionedProductCommandOutput,
 } from "./commands/ImportAsProvisionedProductCommand";
-import {
+import type {
   ListAcceptedPortfolioSharesCommandInput,
   ListAcceptedPortfolioSharesCommandOutput,
 } from "./commands/ListAcceptedPortfolioSharesCommand";
-import {
+import type {
   ListBudgetsForResourceCommandInput,
   ListBudgetsForResourceCommandOutput,
 } from "./commands/ListBudgetsForResourceCommand";
-import {
+import type {
   ListConstraintsForPortfolioCommandInput,
   ListConstraintsForPortfolioCommandOutput,
 } from "./commands/ListConstraintsForPortfolioCommand";
-import { ListLaunchPathsCommandInput, ListLaunchPathsCommandOutput } from "./commands/ListLaunchPathsCommand";
-import {
+import type { ListLaunchPathsCommandInput, ListLaunchPathsCommandOutput } from "./commands/ListLaunchPathsCommand";
+import type {
   ListOrganizationPortfolioAccessCommandInput,
   ListOrganizationPortfolioAccessCommandOutput,
 } from "./commands/ListOrganizationPortfolioAccessCommand";
-import {
+import type {
   ListPortfolioAccessCommandInput,
   ListPortfolioAccessCommandOutput,
 } from "./commands/ListPortfolioAccessCommand";
-import { ListPortfoliosCommandInput, ListPortfoliosCommandOutput } from "./commands/ListPortfoliosCommand";
-import {
+import type { ListPortfoliosCommandInput, ListPortfoliosCommandOutput } from "./commands/ListPortfoliosCommand";
+import type {
   ListPortfoliosForProductCommandInput,
   ListPortfoliosForProductCommandOutput,
 } from "./commands/ListPortfoliosForProductCommand";
-import {
+import type {
   ListPrincipalsForPortfolioCommandInput,
   ListPrincipalsForPortfolioCommandOutput,
 } from "./commands/ListPrincipalsForPortfolioCommand";
-import {
+import type {
   ListProvisionedProductPlansCommandInput,
   ListProvisionedProductPlansCommandOutput,
 } from "./commands/ListProvisionedProductPlansCommand";
-import {
+import type {
   ListProvisioningArtifactsCommandInput,
   ListProvisioningArtifactsCommandOutput,
 } from "./commands/ListProvisioningArtifactsCommand";
-import {
+import type {
   ListProvisioningArtifactsForServiceActionCommandInput,
   ListProvisioningArtifactsForServiceActionCommandOutput,
 } from "./commands/ListProvisioningArtifactsForServiceActionCommand";
-import { ListRecordHistoryCommandInput, ListRecordHistoryCommandOutput } from "./commands/ListRecordHistoryCommand";
-import {
+import type {
+  ListRecordHistoryCommandInput,
+  ListRecordHistoryCommandOutput,
+} from "./commands/ListRecordHistoryCommand";
+import type {
   ListResourcesForTagOptionCommandInput,
   ListResourcesForTagOptionCommandOutput,
 } from "./commands/ListResourcesForTagOptionCommand";
-import { ListServiceActionsCommandInput, ListServiceActionsCommandOutput } from "./commands/ListServiceActionsCommand";
-import {
+import type {
+  ListServiceActionsCommandInput,
+  ListServiceActionsCommandOutput,
+} from "./commands/ListServiceActionsCommand";
+import type {
   ListServiceActionsForProvisioningArtifactCommandInput,
   ListServiceActionsForProvisioningArtifactCommandOutput,
 } from "./commands/ListServiceActionsForProvisioningArtifactCommand";
-import {
+import type {
   ListStackInstancesForProvisionedProductCommandInput,
   ListStackInstancesForProvisionedProductCommandOutput,
 } from "./commands/ListStackInstancesForProvisionedProductCommand";
-import { ListTagOptionsCommandInput, ListTagOptionsCommandOutput } from "./commands/ListTagOptionsCommand";
-import { ProvisionProductCommandInput, ProvisionProductCommandOutput } from "./commands/ProvisionProductCommand";
-import {
+import type { ListTagOptionsCommandInput, ListTagOptionsCommandOutput } from "./commands/ListTagOptionsCommand";
+import type {
+  NotifyProvisionProductEngineWorkflowResultCommandInput,
+  NotifyProvisionProductEngineWorkflowResultCommandOutput,
+} from "./commands/NotifyProvisionProductEngineWorkflowResultCommand";
+import type {
+  NotifyTerminateProvisionedProductEngineWorkflowResultCommandInput,
+  NotifyTerminateProvisionedProductEngineWorkflowResultCommandOutput,
+} from "./commands/NotifyTerminateProvisionedProductEngineWorkflowResultCommand";
+import type {
+  NotifyUpdateProvisionedProductEngineWorkflowResultCommandInput,
+  NotifyUpdateProvisionedProductEngineWorkflowResultCommandOutput,
+} from "./commands/NotifyUpdateProvisionedProductEngineWorkflowResultCommand";
+import type { ProvisionProductCommandInput, ProvisionProductCommandOutput } from "./commands/ProvisionProductCommand";
+import type {
   RejectPortfolioShareCommandInput,
   RejectPortfolioShareCommandOutput,
 } from "./commands/RejectPortfolioShareCommand";
-import {
+import type {
   ScanProvisionedProductsCommandInput,
   ScanProvisionedProductsCommandOutput,
 } from "./commands/ScanProvisionedProductsCommand";
-import {
+import type {
   SearchProductsAsAdminCommandInput,
   SearchProductsAsAdminCommandOutput,
 } from "./commands/SearchProductsAsAdminCommand";
-import { SearchProductsCommandInput, SearchProductsCommandOutput } from "./commands/SearchProductsCommand";
-import {
+import type { SearchProductsCommandInput, SearchProductsCommandOutput } from "./commands/SearchProductsCommand";
+import type {
   SearchProvisionedProductsCommandInput,
   SearchProvisionedProductsCommandOutput,
 } from "./commands/SearchProvisionedProductsCommand";
-import {
+import type {
   TerminateProvisionedProductCommandInput,
   TerminateProvisionedProductCommandOutput,
 } from "./commands/TerminateProvisionedProductCommand";
-import { UpdateConstraintCommandInput, UpdateConstraintCommandOutput } from "./commands/UpdateConstraintCommand";
-import { UpdatePortfolioCommandInput, UpdatePortfolioCommandOutput } from "./commands/UpdatePortfolioCommand";
-import {
+import type { UpdateConstraintCommandInput, UpdateConstraintCommandOutput } from "./commands/UpdateConstraintCommand";
+import type { UpdatePortfolioCommandInput, UpdatePortfolioCommandOutput } from "./commands/UpdatePortfolioCommand";
+import type {
   UpdatePortfolioShareCommandInput,
   UpdatePortfolioShareCommandOutput,
 } from "./commands/UpdatePortfolioShareCommand";
-import { UpdateProductCommandInput, UpdateProductCommandOutput } from "./commands/UpdateProductCommand";
-import {
+import type { UpdateProductCommandInput, UpdateProductCommandOutput } from "./commands/UpdateProductCommand";
+import type {
   UpdateProvisionedProductCommandInput,
   UpdateProvisionedProductCommandOutput,
 } from "./commands/UpdateProvisionedProductCommand";
-import {
+import type {
   UpdateProvisionedProductPropertiesCommandInput,
   UpdateProvisionedProductPropertiesCommandOutput,
 } from "./commands/UpdateProvisionedProductPropertiesCommand";
-import {
+import type {
   UpdateProvisioningArtifactCommandInput,
   UpdateProvisioningArtifactCommandOutput,
 } from "./commands/UpdateProvisioningArtifactCommand";
-import {
+import type {
   UpdateServiceActionCommandInput,
   UpdateServiceActionCommandOutput,
 } from "./commands/UpdateServiceActionCommand";
-import { UpdateTagOptionCommandInput, UpdateTagOptionCommandOutput } from "./commands/UpdateTagOptionCommand";
+import type { UpdateTagOptionCommandInput, UpdateTagOptionCommandOutput } from "./commands/UpdateTagOptionCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AcceptPortfolioShareCommandInput
   | AssociateBudgetWithResourceCommandInput
@@ -396,6 +440,9 @@ export type ServiceInputTypes =
   | ListServiceActionsForProvisioningArtifactCommandInput
   | ListStackInstancesForProvisionedProductCommandInput
   | ListTagOptionsCommandInput
+  | NotifyProvisionProductEngineWorkflowResultCommandInput
+  | NotifyTerminateProvisionedProductEngineWorkflowResultCommandInput
+  | NotifyUpdateProvisionedProductEngineWorkflowResultCommandInput
   | ProvisionProductCommandInput
   | RejectPortfolioShareCommandInput
   | ScanProvisionedProductsCommandInput
@@ -413,6 +460,9 @@ export type ServiceInputTypes =
   | UpdateServiceActionCommandInput
   | UpdateTagOptionCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AcceptPortfolioShareCommandOutput
   | AssociateBudgetWithResourceCommandOutput
@@ -485,6 +535,9 @@ export type ServiceOutputTypes =
   | ListServiceActionsForProvisioningArtifactCommandOutput
   | ListStackInstancesForProvisionedProductCommandOutput
   | ListTagOptionsCommandOutput
+  | NotifyProvisionProductEngineWorkflowResultCommandOutput
+  | NotifyTerminateProvisionedProductEngineWorkflowResultCommandOutput
+  | NotifyUpdateProvisionedProductEngineWorkflowResultCommandOutput
   | ProvisionProductCommandOutput
   | RejectPortfolioShareCommandOutput
   | ScanProvisionedProductsCommandOutput
@@ -502,18 +555,21 @@ export type ServiceOutputTypes =
   | UpdateServiceActionCommandOutput
   | UpdateTagOptionCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -525,7 +581,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -564,25 +620,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -595,69 +642,119 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ServiceCatalogClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ServiceCatalogClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ServiceCatalogClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ServiceCatalogClient class constructor that set the region, credentials and other options.
  */
 export interface ServiceCatalogClientConfig extends ServiceCatalogClientConfigType {}
 
-type ServiceCatalogClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ServiceCatalogClient class. This is resolved and normalized from the {@link ServiceCatalogClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ServiceCatalogClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ServiceCatalogClient class. This is resolved and normalized from the {@link ServiceCatalogClientConfig | constructor configuration interface}.
  */
 export interface ServiceCatalogClientResolvedConfig extends ServiceCatalogClientResolvedConfigType {}
 
 /**
- * <fullname>AWS Service Catalog</fullname>
+ * <fullname>Service Catalog</fullname>
  *          <p>
- *             <a href="https://aws.amazon.com/servicecatalog/">AWS Service Catalog</a> enables
- *          organizations to create and manage catalogs of IT services that are approved for AWS. To
+ *             <a href="http://aws.amazon.com/servicecatalog">Service Catalog</a> enables
+ *          organizations to create and manage catalogs of IT services that are approved for Amazon Web Services. To
  *          get the most out of this documentation, you should be familiar with the terminology
- *          discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html">AWS Service Catalog
+ *          discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html">Service Catalog
  *          Concepts</a>.</p>
+ * @public
  */
 export class ServiceCatalogClient extends __Client<
   __HttpHandlerOptions,
@@ -670,22 +767,36 @@ export class ServiceCatalogClient extends __Client<
    */
   readonly config: ServiceCatalogClientResolvedConfig;
 
-  constructor(configuration: ServiceCatalogClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ServiceCatalogClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultServiceCatalogHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ServiceCatalogClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

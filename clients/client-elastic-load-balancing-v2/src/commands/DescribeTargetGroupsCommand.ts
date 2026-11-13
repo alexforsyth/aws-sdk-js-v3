@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingV2Client";
-import { DescribeTargetGroupsInput, DescribeTargetGroupsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeTargetGroupsCommand,
-  serializeAws_queryDescribeTargetGroupsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTargetGroupsInput, DescribeTargetGroupsOutput } from "../models/models_0";
+import { DescribeTargetGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTargetGroupsCommand}.
+ */
 export interface DescribeTargetGroupsCommandInput extends DescribeTargetGroupsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTargetGroupsCommand}.
+ */
 export interface DescribeTargetGroupsCommandOutput extends DescribeTargetGroupsOutput, __MetadataBearer {}
 
 /**
@@ -35,68 +32,127 @@ export interface DescribeTargetGroupsCommandOutput extends DescribeTargetGroupsO
  * ```javascript
  * import { ElasticLoadBalancingV2Client, DescribeTargetGroupsCommand } from "@aws-sdk/client-elastic-load-balancing-v2"; // ES Modules import
  * // const { ElasticLoadBalancingV2Client, DescribeTargetGroupsCommand } = require("@aws-sdk/client-elastic-load-balancing-v2"); // CommonJS import
+ * // import type { ElasticLoadBalancingV2ClientConfig } from "@aws-sdk/client-elastic-load-balancing-v2";
+ * const config = {}; // type is ElasticLoadBalancingV2ClientConfig
  * const client = new ElasticLoadBalancingV2Client(config);
+ * const input = { // DescribeTargetGroupsInput
+ *   LoadBalancerArn: "STRING_VALUE",
+ *   TargetGroupArns: [ // TargetGroupArns
+ *     "STRING_VALUE",
+ *   ],
+ *   Names: [ // TargetGroupNames
+ *     "STRING_VALUE",
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ * };
  * const command = new DescribeTargetGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTargetGroupsOutput
+ * //   TargetGroups: [ // TargetGroups
+ * //     { // TargetGroup
+ * //       TargetGroupArn: "STRING_VALUE",
+ * //       TargetGroupName: "STRING_VALUE",
+ * //       Protocol: "HTTP" || "HTTPS" || "TCP" || "TLS" || "UDP" || "TCP_UDP" || "GENEVE" || "QUIC" || "TCP_QUIC",
+ * //       Port: Number("int"),
+ * //       VpcId: "STRING_VALUE",
+ * //       HealthCheckProtocol: "HTTP" || "HTTPS" || "TCP" || "TLS" || "UDP" || "TCP_UDP" || "GENEVE" || "QUIC" || "TCP_QUIC",
+ * //       HealthCheckPort: "STRING_VALUE",
+ * //       HealthCheckEnabled: true || false,
+ * //       HealthCheckIntervalSeconds: Number("int"),
+ * //       HealthCheckTimeoutSeconds: Number("int"),
+ * //       HealthyThresholdCount: Number("int"),
+ * //       UnhealthyThresholdCount: Number("int"),
+ * //       HealthCheckPath: "STRING_VALUE",
+ * //       Matcher: { // Matcher
+ * //         HttpCode: "STRING_VALUE",
+ * //         GrpcCode: "STRING_VALUE",
+ * //       },
+ * //       LoadBalancerArns: [ // LoadBalancerArns
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       TargetType: "instance" || "ip" || "lambda" || "alb",
+ * //       ProtocolVersion: "STRING_VALUE",
+ * //       IpAddressType: "ipv4" || "ipv6",
+ * //       TargetControlPort: Number("int"),
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTargetGroupsCommandInput - {@link DescribeTargetGroupsCommandInput}
+ * @returns {@link DescribeTargetGroupsCommandOutput}
  * @see {@link DescribeTargetGroupsCommandInput} for command's `input` shape.
  * @see {@link DescribeTargetGroupsCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for ElasticLoadBalancingV2Client's `config` shape.
  *
+ * @throws {@link LoadBalancerNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link TargetGroupNotFoundException} (client fault)
+ *  <p>The specified target group does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingV2ServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancingV2 service.</p>
+ *
+ *
+ * @example To describe a target group
+ * ```javascript
+ * // This example describes the specified target group.
+ * const input = {
+ *   TargetGroupArns: [
+ *     "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"
+ *   ]
+ * };
+ * const command = new DescribeTargetGroupsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TargetGroups: [
+ *     {
+ *       HealthCheckIntervalSeconds: 30,
+ *       HealthCheckPath: "/",
+ *       HealthCheckPort: "traffic-port",
+ *       HealthCheckProtocol: "HTTP",
+ *       HealthCheckTimeoutSeconds: 5,
+ *       HealthyThresholdCount: 5,
+ *       LoadBalancerArns: [
+ *         "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"
+ *       ],
+ *       Matcher: {
+ *         HttpCode: "200"
+ *       },
+ *       Port: 80,
+ *       Protocol: "HTTP",
+ *       TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+ *       TargetGroupName: "my-targets",
+ *       UnhealthyThresholdCount: 2,
+ *       VpcId: "vpc-3ac0fb5f"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeTargetGroupsCommand extends $Command<
-  DescribeTargetGroupsCommandInput,
-  DescribeTargetGroupsCommandOutput,
-  ElasticLoadBalancingV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTargetGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTargetGroupsCommandInput, DescribeTargetGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingV2Client";
-    const commandName = "DescribeTargetGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTargetGroupsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTargetGroupsOutput.filterSensitiveLog,
+export class DescribeTargetGroupsCommand extends command<DescribeTargetGroupsCommandInput, DescribeTargetGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTargetGroups",
+  DescribeTargetGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTargetGroupsInput;
+      output: DescribeTargetGroupsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTargetGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeTargetGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTargetGroupsCommandOutput> {
-    return deserializeAws_queryDescribeTargetGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTargetGroupsCommandInput;
+      output: DescribeTargetGroupsCommandOutput;
+    };
+  };
 }

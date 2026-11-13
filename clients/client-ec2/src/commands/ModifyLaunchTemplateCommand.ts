@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyLaunchTemplateRequest, ModifyLaunchTemplateResult } from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyLaunchTemplateCommand,
-  serializeAws_ec2ModifyLaunchTemplateCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyLaunchTemplateRequest, ModifyLaunchTemplateResult } from "../models/models_7";
+import { ModifyLaunchTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyLaunchTemplateCommand}.
+ */
 export interface ModifyLaunchTemplateCommandInput extends ModifyLaunchTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyLaunchTemplateCommand}.
+ */
 export interface ModifyLaunchTemplateCommandOutput extends ModifyLaunchTemplateResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,92 @@ export interface ModifyLaunchTemplateCommandOutput extends ModifyLaunchTemplateR
  * ```javascript
  * import { EC2Client, ModifyLaunchTemplateCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyLaunchTemplateCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyLaunchTemplateRequest
+ *   DryRun: true || false,
+ *   ClientToken: "STRING_VALUE",
+ *   LaunchTemplateId: "STRING_VALUE",
+ *   LaunchTemplateName: "STRING_VALUE",
+ *   DefaultVersion: "STRING_VALUE",
+ * };
  * const command = new ModifyLaunchTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyLaunchTemplateResult
+ * //   LaunchTemplate: { // LaunchTemplate
+ * //     LaunchTemplateId: "STRING_VALUE",
+ * //     LaunchTemplateName: "STRING_VALUE",
+ * //     CreateTime: new Date("TIMESTAMP"),
+ * //     CreatedBy: "STRING_VALUE",
+ * //     DefaultVersionNumber: Number("long"),
+ * //     LatestVersionNumber: Number("long"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Operator: { // OperatorResponse
+ * //       Managed: true || false,
+ * //       Principal: "STRING_VALUE",
+ * //       HiddenByDefault: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyLaunchTemplateCommandInput - {@link ModifyLaunchTemplateCommandInput}
+ * @returns {@link ModifyLaunchTemplateCommandOutput}
  * @see {@link ModifyLaunchTemplateCommandInput} for command's `input` shape.
  * @see {@link ModifyLaunchTemplateCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To change the default version of a launch template
+ * ```javascript
+ * // This example specifies version 2 as the default version of the specified launch template.
+ * const input = {
+ *   DefaultVersion: "2",
+ *   LaunchTemplateId: "lt-0abcd290751193123"
+ * };
+ * const command = new ModifyLaunchTemplateCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   LaunchTemplate: {
+ *     CreateTime: "2017-12-01T13:35:46.000Z",
+ *     CreatedBy: "arn:aws:iam::123456789012:root",
+ *     DefaultVersionNumber: 2,
+ *     LatestVersionNumber: 2,
+ *     LaunchTemplateId: "lt-0abcd290751193123",
+ *     LaunchTemplateName: "WebServers"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifyLaunchTemplateCommand extends $Command<
-  ModifyLaunchTemplateCommandInput,
-  ModifyLaunchTemplateCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyLaunchTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyLaunchTemplateCommandInput, ModifyLaunchTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyLaunchTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyLaunchTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyLaunchTemplateResult.filterSensitiveLog,
+export class ModifyLaunchTemplateCommand extends command<ModifyLaunchTemplateCommandInput, ModifyLaunchTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyLaunchTemplate",
+  ModifyLaunchTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyLaunchTemplateRequest;
+      output: ModifyLaunchTemplateResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyLaunchTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyLaunchTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyLaunchTemplateCommandOutput> {
-    return deserializeAws_ec2ModifyLaunchTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyLaunchTemplateCommandInput;
+      output: ModifyLaunchTemplateCommandOutput;
+    };
+  };
 }

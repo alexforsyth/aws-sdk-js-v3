@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeResourcePermissionsRequest, DescribeResourcePermissionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeResourcePermissionsCommand,
-  serializeAws_restJson1DescribeResourcePermissionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeResourcePermissionsRequest, DescribeResourcePermissionsResponse } from "../models/models_0";
+import { DescribeResourcePermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeResourcePermissionsCommand}.
+ */
 export interface DescribeResourcePermissionsCommandInput extends DescribeResourcePermissionsRequest {}
-export interface DescribeResourcePermissionsCommandOutput
-  extends DescribeResourcePermissionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeResourcePermissionsCommand}.
+ */
+export interface DescribeResourcePermissionsCommandOutput extends DescribeResourcePermissionsResponse, __MetadataBearer {}
 
 /**
  * <p>Describes the permissions of a specified resource.</p>
@@ -30,71 +29,80 @@ export interface DescribeResourcePermissionsCommandOutput
  * ```javascript
  * import { WorkDocsClient, DescribeResourcePermissionsCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, DescribeResourcePermissionsCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // DescribeResourcePermissionsRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   ResourceId: "STRING_VALUE", // required
+ *   PrincipalId: "STRING_VALUE",
+ *   Limit: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeResourcePermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeResourcePermissionsResponse
+ * //   Principals: [ // PrincipalList
+ * //     { // Principal
+ * //       Id: "STRING_VALUE",
+ * //       Type: "USER" || "GROUP" || "INVITE" || "ANONYMOUS" || "ORGANIZATION",
+ * //       Roles: [ // PermissionInfoList
+ * //         { // PermissionInfo
+ * //           Role: "VIEWER" || "CONTRIBUTOR" || "OWNER" || "COOWNER",
+ * //           Type: "DIRECT" || "INHERITED",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeResourcePermissionsCommandInput - {@link DescribeResourcePermissionsCommandInput}
+ * @returns {@link DescribeResourcePermissionsCommandOutput}
  * @see {@link DescribeResourcePermissionsCommandInput} for command's `input` shape.
  * @see {@link DescribeResourcePermissionsCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The pagination marker or limit fields are not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeResourcePermissionsCommand extends $Command<
-  DescribeResourcePermissionsCommandInput,
-  DescribeResourcePermissionsCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeResourcePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeResourcePermissionsCommandInput, DescribeResourcePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "DescribeResourcePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeResourcePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeResourcePermissionsResponse.filterSensitiveLog,
+export class DescribeResourcePermissionsCommand extends command<DescribeResourcePermissionsCommandInput, DescribeResourcePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeResourcePermissions",
+  DescribeResourcePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeResourcePermissionsRequest;
+      output: DescribeResourcePermissionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeResourcePermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeResourcePermissionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeResourcePermissionsCommandOutput> {
-    return deserializeAws_restJson1DescribeResourcePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeResourcePermissionsCommandInput;
+      output: DescribeResourcePermissionsCommandOutput;
+    };
+  };
 }

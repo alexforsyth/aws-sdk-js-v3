@@ -1,0 +1,137 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMedicalScribeStreamRequest, GetMedicalScribeStreamResponse } from "../models/models_0";
+import { GetMedicalScribeStream$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMedicalScribeStreamCommand}.
+ */
+export interface GetMedicalScribeStreamCommandInput extends GetMedicalScribeStreamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMedicalScribeStreamCommand}.
+ */
+export interface GetMedicalScribeStreamCommandOutput extends GetMedicalScribeStreamResponse, __MetadataBearer {}
+
+/**
+ * <p>Provides details about the specified Amazon Web Services HealthScribe streaming session.
+ *       To view the status of the streaming session, check the <code>StreamStatus</code> field in the response. To get the
+ *       details of post-stream analytics, including its status, check the <code>PostStreamAnalyticsResult</code> field in the response.
+ *     </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { TranscribeStreamingClient, GetMedicalScribeStreamCommand } from "@aws-sdk/client-transcribe-streaming"; // ES Modules import
+ * // const { TranscribeStreamingClient, GetMedicalScribeStreamCommand } = require("@aws-sdk/client-transcribe-streaming"); // CommonJS import
+ * // import type { TranscribeStreamingClientConfig } from "@aws-sdk/client-transcribe-streaming";
+ * const config = {}; // type is TranscribeStreamingClientConfig
+ * const client = new TranscribeStreamingClient(config);
+ * const input = { // GetMedicalScribeStreamRequest
+ *   SessionId: "STRING_VALUE", // required
+ * };
+ * const command = new GetMedicalScribeStreamCommand(input);
+ * const response = await client.send(command);
+ * // { // GetMedicalScribeStreamResponse
+ * //   MedicalScribeStreamDetails: { // MedicalScribeStreamDetails
+ * //     SessionId: "STRING_VALUE",
+ * //     StreamCreatedAt: new Date("TIMESTAMP"),
+ * //     StreamEndedAt: new Date("TIMESTAMP"),
+ * //     LanguageCode: "en-US",
+ * //     MediaSampleRateHertz: Number("int"),
+ * //     MediaEncoding: "pcm" || "ogg-opus" || "flac",
+ * //     VocabularyName: "STRING_VALUE",
+ * //     VocabularyFilterName: "STRING_VALUE",
+ * //     VocabularyFilterMethod: "remove" || "mask" || "tag",
+ * //     ResourceAccessRoleArn: "STRING_VALUE",
+ * //     ChannelDefinitions: [ // MedicalScribeChannelDefinitions
+ * //       { // MedicalScribeChannelDefinition
+ * //         ChannelId: Number("int"), // required
+ * //         ParticipantRole: "PATIENT" || "CLINICIAN", // required
+ * //       },
+ * //     ],
+ * //     EncryptionSettings: { // MedicalScribeEncryptionSettings
+ * //       KmsEncryptionContext: { // KMSEncryptionContextMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       KmsKeyId: "STRING_VALUE", // required
+ * //     },
+ * //     StreamStatus: "IN_PROGRESS" || "PAUSED" || "FAILED" || "COMPLETED",
+ * //     PostStreamAnalyticsSettings: { // MedicalScribePostStreamAnalyticsSettings
+ * //       ClinicalNoteGenerationSettings: { // ClinicalNoteGenerationSettings
+ * //         OutputBucketName: "STRING_VALUE", // required
+ * //         NoteTemplate: "HISTORY_AND_PHYSICAL" || "GIRPP" || "DAP" || "SIRP" || "BIRP" || "BEHAVIORAL_SOAP" || "PHYSICAL_SOAP",
+ * //       },
+ * //     },
+ * //     PostStreamAnalyticsResult: { // MedicalScribePostStreamAnalyticsResult
+ * //       ClinicalNoteGenerationResult: { // ClinicalNoteGenerationResult
+ * //         ClinicalNoteOutputLocation: "STRING_VALUE",
+ * //         TranscriptOutputLocation: "STRING_VALUE",
+ * //         Status: "IN_PROGRESS" || "FAILED" || "COMPLETED",
+ * //         FailureReason: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     MedicalScribeContextProvided: true || false,
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetMedicalScribeStreamCommandInput - {@link GetMedicalScribeStreamCommandInput}
+ * @returns {@link GetMedicalScribeStreamCommandOutput}
+ * @see {@link GetMedicalScribeStreamCommandInput} for command's `input` shape.
+ * @see {@link GetMedicalScribeStreamCommandOutput} for command's `response` shape.
+ * @see {@link TranscribeStreamingClientResolvedConfig | config} for TranscribeStreamingClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>One or more arguments to the <code>StartStreamTranscription</code>,
+ *       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
+ *       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
+ *       used unsupported values. Check the specified parameters and try your request again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>A problem occurred while processing the audio. Amazon Transcribe terminated
+ *       processing.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+ *       service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+ *       cases, this error can also occur if you increase your number of concurrent streams too quickly.
+ *       Reduce your number of concurrent streams and try your request again using an exponential backoff
+ *       strategy.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource which doesn't exist.</p>
+ *
+ * @throws {@link TranscribeStreamingServiceException}
+ * <p>Base exception class for all service exceptions from TranscribeStreaming service.</p>
+ *
+ *
+ * @public
+ */
+export class GetMedicalScribeStreamCommand extends command<GetMedicalScribeStreamCommandInput, GetMedicalScribeStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMedicalScribeStream",
+  GetMedicalScribeStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMedicalScribeStreamRequest;
+      output: GetMedicalScribeStreamResponse;
+    };
+    sdk: {
+      input: GetMedicalScribeStreamCommandInput;
+      output: GetMedicalScribeStreamCommandOutput;
+    };
+  };
+}

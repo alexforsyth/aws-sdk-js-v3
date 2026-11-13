@@ -1,105 +1,83 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectConnectClient";
-import { ConfirmTransitVirtualInterfaceRequest, ConfirmTransitVirtualInterfaceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ConfirmTransitVirtualInterfaceCommand,
-  serializeAws_json1_1ConfirmTransitVirtualInterfaceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfirmTransitVirtualInterfaceRequest, ConfirmTransitVirtualInterfaceResponse } from "../models/models_0";
+import { ConfirmTransitVirtualInterface$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ConfirmTransitVirtualInterfaceCommand}.
+ */
 export interface ConfirmTransitVirtualInterfaceCommandInput extends ConfirmTransitVirtualInterfaceRequest {}
-export interface ConfirmTransitVirtualInterfaceCommandOutput
-  extends ConfirmTransitVirtualInterfaceResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ConfirmTransitVirtualInterfaceCommand}.
+ */
+export interface ConfirmTransitVirtualInterfaceCommandOutput extends ConfirmTransitVirtualInterfaceResponse, __MetadataBearer {}
 
 /**
  * <p>Accepts ownership of a transit virtual interface created by another Amazon Web Services account.</p>
- *
  *          <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DirectConnectClient, ConfirmTransitVirtualInterfaceCommand } from "@aws-sdk/client-direct-connect"; // ES Modules import
  * // const { DirectConnectClient, ConfirmTransitVirtualInterfaceCommand } = require("@aws-sdk/client-direct-connect"); // CommonJS import
+ * // import type { DirectConnectClientConfig } from "@aws-sdk/client-direct-connect";
+ * const config = {}; // type is DirectConnectClientConfig
  * const client = new DirectConnectClient(config);
+ * const input = { // ConfirmTransitVirtualInterfaceRequest
+ *   virtualInterfaceId: "STRING_VALUE", // required
+ *   directConnectGatewayId: "STRING_VALUE", // required
+ * };
  * const command = new ConfirmTransitVirtualInterfaceCommand(input);
  * const response = await client.send(command);
+ * // { // ConfirmTransitVirtualInterfaceResponse
+ * //   virtualInterfaceState: "confirming" || "verifying" || "pending" || "available" || "down" || "testing" || "deleting" || "deleted" || "rejected" || "unknown",
+ * // };
+ *
  * ```
  *
+ * @param ConfirmTransitVirtualInterfaceCommandInput - {@link ConfirmTransitVirtualInterfaceCommandInput}
+ * @returns {@link ConfirmTransitVirtualInterfaceCommandOutput}
  * @see {@link ConfirmTransitVirtualInterfaceCommandInput} for command's `input` shape.
  * @see {@link ConfirmTransitVirtualInterfaceCommandOutput} for command's `response` shape.
- * @see {@link DirectConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectConnectClientResolvedConfig | config} for DirectConnectClient's `config` shape.
  *
+ * @throws {@link DirectConnectClientException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link DirectConnectServerException} (server fault)
+ *  <p>A server-side error occurred.</p>
+ *
+ * @throws {@link DirectConnectServiceException}
+ * <p>Base exception class for all service exceptions from DirectConnect service.</p>
+ *
+ *
+ * @public
  */
-export class ConfirmTransitVirtualInterfaceCommand extends $Command<
-  ConfirmTransitVirtualInterfaceCommandInput,
-  ConfirmTransitVirtualInterfaceCommandOutput,
-  DirectConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ConfirmTransitVirtualInterfaceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ConfirmTransitVirtualInterfaceCommandInput, ConfirmTransitVirtualInterfaceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectConnectClient";
-    const commandName = "ConfirmTransitVirtualInterfaceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ConfirmTransitVirtualInterfaceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfirmTransitVirtualInterfaceResponse.filterSensitiveLog,
+export class ConfirmTransitVirtualInterfaceCommand extends command<ConfirmTransitVirtualInterfaceCommandInput, ConfirmTransitVirtualInterfaceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ConfirmTransitVirtualInterface",
+  ConfirmTransitVirtualInterface$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfirmTransitVirtualInterfaceRequest;
+      output: ConfirmTransitVirtualInterfaceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ConfirmTransitVirtualInterfaceCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ConfirmTransitVirtualInterfaceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ConfirmTransitVirtualInterfaceCommandOutput> {
-    return deserializeAws_json1_1ConfirmTransitVirtualInterfaceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ConfirmTransitVirtualInterfaceCommandInput;
+      output: ConfirmTransitVirtualInterfaceCommandOutput;
+    };
+  };
 }

@@ -1,31 +1,40 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeSecurityGroupsCommandInput,
+  type DescribeSecurityGroupsCommandOutput,
   DescribeSecurityGroupsCommand,
-  DescribeSecurityGroupsCommandInput,
 } from "../commands/DescribeSecurityGroupsCommand";
-import { EC2Client } from "../EC2Client";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeSecurityGroupsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeSecurityGroupsCommandInput): Promise<WaiterResult<DescribeSecurityGroupsCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeSecurityGroupsCommand(input));
+    let result: DescribeSecurityGroupsCommandOutput & any = await client.send(new DescribeSecurityGroupsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.SecurityGroups);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.SecurityGroups);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.GroupId;
         });
-        return projection_3.length > 0.0;
-      };
+        return (projection_3.length > 0);
+      }
       if (returnComparator() == true) {
         return { state: WaiterState.SUCCESS, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InvalidGroup.NotFound") {
+    if (exception.name === "InvalidGroup.NotFound") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -38,7 +47,7 @@ const checkState = async (client: EC2Client, input: DescribeSecurityGroupsComman
 export const waitForSecurityGroupExists = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeSecurityGroupsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSecurityGroupsCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -50,8 +59,8 @@ export const waitForSecurityGroupExists = async (
 export const waitUntilSecurityGroupExists = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeSecurityGroupsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSecurityGroupsCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeSecurityGroupsCommandOutput>;
 };

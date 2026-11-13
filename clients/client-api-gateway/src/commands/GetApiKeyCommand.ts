@@ -1,95 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { APIGatewayClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../APIGatewayClient";
-import { ApiKey, GetApiKeyRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApiKeyCommand,
-  serializeAws_restJson1GetApiKeyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ApiKey, GetApiKeyRequest } from "../models/models_0";
+import { GetApiKey$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApiKeyCommand}.
+ */
 export interface GetApiKeyCommandInput extends GetApiKeyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApiKeyCommand}.
+ */
 export interface GetApiKeyCommandOutput extends ApiKey, __MetadataBearer {}
 
 /**
- * <p>Gets information about the current <a>ApiKey</a> resource.</p>
+ * <p>Gets information about the current ApiKey resource.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { APIGatewayClient, GetApiKeyCommand } from "@aws-sdk/client-api-gateway"; // ES Modules import
  * // const { APIGatewayClient, GetApiKeyCommand } = require("@aws-sdk/client-api-gateway"); // CommonJS import
+ * // import type { APIGatewayClientConfig } from "@aws-sdk/client-api-gateway";
+ * const config = {}; // type is APIGatewayClientConfig
  * const client = new APIGatewayClient(config);
+ * const input = { // GetApiKeyRequest
+ *   apiKey: "STRING_VALUE", // required
+ *   includeValue: true || false,
+ * };
  * const command = new GetApiKeyCommand(input);
  * const response = await client.send(command);
+ * // { // ApiKey
+ * //   id: "STRING_VALUE",
+ * //   value: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   customerId: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   enabled: true || false,
+ * //   createdDate: new Date("TIMESTAMP"),
+ * //   lastUpdatedDate: new Date("TIMESTAMP"),
+ * //   stageKeys: [ // ListOfString
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   tags: { // MapOfStringToString
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetApiKeyCommandInput - {@link GetApiKeyCommandInput}
+ * @returns {@link GetApiKeyCommandOutput}
  * @see {@link GetApiKeyCommandInput} for command's `input` shape.
  * @see {@link GetApiKeyCommandOutput} for command's `response` shape.
- * @see {@link APIGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link APIGatewayClientResolvedConfig | config} for APIGatewayClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource is not found. Make sure that the request URI is correct.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request has reached its throttling limit. Retry after the specified time period.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The request is denied because the caller has insufficient permissions.</p>
+ *
+ * @throws {@link APIGatewayServiceException}
+ * <p>Base exception class for all service exceptions from APIGateway service.</p>
+ *
+ *
+ * @public
  */
-export class GetApiKeyCommand extends $Command<
-  GetApiKeyCommandInput,
-  GetApiKeyCommandOutput,
-  APIGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApiKeyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: APIGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApiKeyCommandInput, GetApiKeyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "APIGatewayClient";
-    const commandName = "GetApiKeyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApiKeyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ApiKey.filterSensitiveLog,
+export class GetApiKeyCommand extends command<GetApiKeyCommandInput, GetApiKeyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApiKey",
+  GetApiKey$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApiKeyRequest;
+      output: ApiKey;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApiKeyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApiKeyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApiKeyCommandOutput> {
-    return deserializeAws_restJson1GetApiKeyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApiKeyCommandInput;
+      output: GetApiKeyCommandOutput;
+    };
+  };
 }

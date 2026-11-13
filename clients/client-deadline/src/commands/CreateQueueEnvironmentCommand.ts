@@ -1,0 +1,98 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateQueueEnvironmentRequest, CreateQueueEnvironmentResponse } from "../models/models_0";
+import { CreateQueueEnvironment$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateQueueEnvironmentCommand}.
+ */
+export interface CreateQueueEnvironmentCommandInput extends CreateQueueEnvironmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateQueueEnvironmentCommand}.
+ */
+export interface CreateQueueEnvironmentCommandOutput extends CreateQueueEnvironmentResponse, __MetadataBearer {}
+
+/**
+ * Creates an environment for a queue that defines how jobs in the queue run.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, CreateQueueEnvironmentCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, CreateQueueEnvironmentCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // CreateQueueEnvironmentRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   priority: Number("int"), // required
+ *   templateType: "JSON" || "YAML", // required
+ *   template: "STRING_VALUE", // required
+ * };
+ * const command = new CreateQueueEnvironmentCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateQueueEnvironmentResponse
+ * //   queueEnvironmentId: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateQueueEnvironmentCommandInput - {@link CreateQueueEnvironmentCommandInput}
+ * @returns {@link CreateQueueEnvironmentCommandOutput}
+ * @see {@link CreateQueueEnvironmentCommandInput} for command's `input` shape.
+ * @see {@link CreateQueueEnvironmentCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateQueueEnvironmentCommand extends command<CreateQueueEnvironmentCommandInput, CreateQueueEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateQueueEnvironment",
+  CreateQueueEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateQueueEnvironmentRequest;
+      output: CreateQueueEnvironmentResponse;
+    };
+    sdk: {
+      input: CreateQueueEnvironmentCommandInput;
+      output: CreateQueueEnvironmentCommandOutput;
+    };
+  };
+}

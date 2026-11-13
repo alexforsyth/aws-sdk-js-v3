@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingV2Client";
-import { ModifyTargetGroupAttributesInput, ModifyTargetGroupAttributesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryModifyTargetGroupAttributesCommand,
-  serializeAws_queryModifyTargetGroupAttributesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyTargetGroupAttributesInput, ModifyTargetGroupAttributesOutput } from "../models/models_0";
+import { ModifyTargetGroupAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyTargetGroupAttributesCommand}.
+ */
 export interface ModifyTargetGroupAttributesCommandInput extends ModifyTargetGroupAttributesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyTargetGroupAttributesCommand}.
+ */
 export interface ModifyTargetGroupAttributesCommandOutput extends ModifyTargetGroupAttributesOutput, __MetadataBearer {}
 
 /**
@@ -32,71 +29,102 @@ export interface ModifyTargetGroupAttributesCommandOutput extends ModifyTargetGr
  * ```javascript
  * import { ElasticLoadBalancingV2Client, ModifyTargetGroupAttributesCommand } from "@aws-sdk/client-elastic-load-balancing-v2"; // ES Modules import
  * // const { ElasticLoadBalancingV2Client, ModifyTargetGroupAttributesCommand } = require("@aws-sdk/client-elastic-load-balancing-v2"); // CommonJS import
+ * // import type { ElasticLoadBalancingV2ClientConfig } from "@aws-sdk/client-elastic-load-balancing-v2";
+ * const config = {}; // type is ElasticLoadBalancingV2ClientConfig
  * const client = new ElasticLoadBalancingV2Client(config);
+ * const input = { // ModifyTargetGroupAttributesInput
+ *   TargetGroupArn: "STRING_VALUE", // required
+ *   Attributes: [ // TargetGroupAttributes // required
+ *     { // TargetGroupAttribute
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new ModifyTargetGroupAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyTargetGroupAttributesOutput
+ * //   Attributes: [ // TargetGroupAttributes
+ * //     { // TargetGroupAttribute
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ModifyTargetGroupAttributesCommandInput - {@link ModifyTargetGroupAttributesCommandInput}
+ * @returns {@link ModifyTargetGroupAttributesCommandOutput}
  * @see {@link ModifyTargetGroupAttributesCommandInput} for command's `input` shape.
  * @see {@link ModifyTargetGroupAttributesCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for ElasticLoadBalancingV2Client's `config` shape.
  *
+ * @throws {@link InvalidConfigurationRequestException} (client fault)
+ *  <p>The requested configuration is not valid.</p>
+ *
+ * @throws {@link TargetGroupNotFoundException} (client fault)
+ *  <p>The specified target group does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingV2ServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancingV2 service.</p>
+ *
+ *
+ * @example To modify the deregistration delay timeout
+ * ```javascript
+ * // This example sets the deregistration delay timeout to the specified value for the specified target group.
+ * const input = {
+ *   Attributes: [
+ *     {
+ *       Key: "deregistration_delay.timeout_seconds",
+ *       Value: "600"
+ *     }
+ *   ],
+ *   TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"
+ * };
+ * const command = new ModifyTargetGroupAttributesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Attributes: [
+ *     {
+ *       Key: "stickiness.enabled",
+ *       Value: "false"
+ *     },
+ *     {
+ *       Key: "deregistration_delay.timeout_seconds",
+ *       Value: "600"
+ *     },
+ *     {
+ *       Key: "stickiness.type",
+ *       Value: "lb_cookie"
+ *     },
+ *     {
+ *       Key: "stickiness.lb_cookie.duration_seconds",
+ *       Value: "86400"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifyTargetGroupAttributesCommand extends $Command<
-  ModifyTargetGroupAttributesCommandInput,
-  ModifyTargetGroupAttributesCommandOutput,
-  ElasticLoadBalancingV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyTargetGroupAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyTargetGroupAttributesCommandInput, ModifyTargetGroupAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingV2Client";
-    const commandName = "ModifyTargetGroupAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyTargetGroupAttributesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyTargetGroupAttributesOutput.filterSensitiveLog,
+export class ModifyTargetGroupAttributesCommand extends command<ModifyTargetGroupAttributesCommandInput, ModifyTargetGroupAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyTargetGroupAttributes",
+  ModifyTargetGroupAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyTargetGroupAttributesInput;
+      output: ModifyTargetGroupAttributesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyTargetGroupAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyTargetGroupAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyTargetGroupAttributesCommandOutput> {
-    return deserializeAws_queryModifyTargetGroupAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyTargetGroupAttributesCommandInput;
+      output: ModifyTargetGroupAttributesCommandOutput;
+    };
+  };
 }

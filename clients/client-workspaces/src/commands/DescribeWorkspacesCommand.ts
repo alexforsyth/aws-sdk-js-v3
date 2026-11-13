@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeWorkspacesRequest, DescribeWorkspacesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeWorkspacesCommand,
-  serializeAws_json1_1DescribeWorkspacesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeWorkspacesRequest, DescribeWorkspacesResult } from "../models/models_0";
+import { DescribeWorkspaces$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeWorkspacesCommand}.
+ */
 export interface DescribeWorkspacesCommandInput extends DescribeWorkspacesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeWorkspacesCommand}.
+ */
 export interface DescribeWorkspacesCommandOutput extends DescribeWorkspacesResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,121 @@ export interface DescribeWorkspacesCommandOutput extends DescribeWorkspacesResul
  * ```javascript
  * import { WorkSpacesClient, DescribeWorkspacesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, DescribeWorkspacesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeWorkspacesRequest
+ *   WorkspaceIds: [ // WorkspaceIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   DirectoryId: "STRING_VALUE",
+ *   UserName: "STRING_VALUE",
+ *   BundleId: "STRING_VALUE",
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   WorkspaceName: "STRING_VALUE",
+ * };
  * const command = new DescribeWorkspacesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeWorkspacesResult
+ * //   Workspaces: [ // WorkspaceList
+ * //     { // Workspace
+ * //       WorkspaceId: "STRING_VALUE",
+ * //       DirectoryId: "STRING_VALUE",
+ * //       UserName: "STRING_VALUE",
+ * //       IpAddress: "STRING_VALUE",
+ * //       Ipv6Address: "STRING_VALUE",
+ * //       State: "PENDING" || "AVAILABLE" || "IMPAIRED" || "UNHEALTHY" || "REBOOTING" || "STARTING" || "REBUILDING" || "RESTORING" || "MAINTENANCE" || "ADMIN_MAINTENANCE" || "TERMINATING" || "TERMINATED" || "SUSPENDED" || "UPDATING" || "STOPPING" || "STOPPED" || "ERROR",
+ * //       BundleId: "STRING_VALUE",
+ * //       SubnetId: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ComputerName: "STRING_VALUE",
+ * //       VolumeEncryptionKey: "STRING_VALUE",
+ * //       UserVolumeEncryptionEnabled: true || false,
+ * //       RootVolumeEncryptionEnabled: true || false,
+ * //       WorkspaceName: "STRING_VALUE",
+ * //       WorkspaceProperties: { // WorkspaceProperties
+ * //         RunningMode: "AUTO_STOP" || "ALWAYS_ON" || "MANUAL",
+ * //         RunningModeAutoStopTimeoutInMinutes: Number("int"),
+ * //         RootVolumeSizeGib: Number("int"),
+ * //         UserVolumeSizeGib: Number("int"),
+ * //         ComputeTypeName: "VALUE" || "STANDARD" || "PERFORMANCE" || "POWER" || "GRAPHICS" || "POWERPRO" || "GENERALPURPOSE_4XLARGE" || "GENERALPURPOSE_8XLARGE" || "GRAPHICSPRO" || "GRAPHICS_G4DN" || "GRAPHICSPRO_G4DN" || "GRAPHICS_G6_XLARGE" || "GRAPHICS_G6_2XLARGE" || "GRAPHICS_G6_4XLARGE" || "GRAPHICS_G6_8XLARGE" || "GRAPHICS_G6_16XLARGE" || "GRAPHICS_GR6_4XLARGE" || "GRAPHICS_GR6_8XLARGE" || "GRAPHICS_G6F_LARGE" || "GRAPHICS_G6F_XLARGE" || "GRAPHICS_G6F_2XLARGE" || "GRAPHICS_G6F_4XLARGE" || "GRAPHICS_GR6F_4XLARGE" || "GRAPHICS_G7_2XLARGE" || "GRAPHICS_G7_4XLARGE" || "GRAPHICS_G7_8XLARGE" || "GRAPHICS_G7_12XLARGE",
+ * //         Protocols: [ // ProtocolList
+ * //           "PCOIP" || "WSP",
+ * //         ],
+ * //         OperatingSystemName: "AMAZON_LINUX_2" || "UBUNTU_18_04" || "UBUNTU_20_04" || "UBUNTU_22_04" || "UNKNOWN" || "WINDOWS_10" || "WINDOWS_11" || "WINDOWS_7" || "WINDOWS_SERVER_2016" || "WINDOWS_SERVER_2019" || "WINDOWS_SERVER_2022" || "WINDOWS_SERVER_2025" || "RHEL_8" || "ROCKY_8" || "UBUNTU_24_04" || "RHEL_9" || "ROCKY_9" || "UBUNTU_26_04" || "RHEL_10" || "ROCKY_10",
+ * //         GlobalAccelerator: { // GlobalAcceleratorForWorkSpace
+ * //           Mode: "ENABLED_AUTO" || "DISABLED" || "INHERITED", // required
+ * //           PreferredProtocol: "TCP" || "NONE" || "INHERITED",
+ * //         },
+ * //         NestedVirtualizationEnabled: true || false,
+ * //       },
+ * //       ModificationStates: [ // ModificationStateList
+ * //         { // ModificationState
+ * //           Resource: "ROOT_VOLUME" || "USER_VOLUME" || "COMPUTE_TYPE" || "PROTOCOL" || "NESTED_VIRTUALIZATION",
+ * //           State: "UPDATE_INITIATED" || "UPDATE_IN_PROGRESS" || "UPDATE_FAILED",
+ * //         },
+ * //       ],
+ * //       RelatedWorkspaces: [ // RelatedWorkspaces
+ * //         { // RelatedWorkspaceProperties
+ * //           WorkspaceId: "STRING_VALUE",
+ * //           Region: "STRING_VALUE",
+ * //           State: "PENDING" || "AVAILABLE" || "IMPAIRED" || "UNHEALTHY" || "REBOOTING" || "STARTING" || "REBUILDING" || "RESTORING" || "MAINTENANCE" || "ADMIN_MAINTENANCE" || "TERMINATING" || "TERMINATED" || "SUSPENDED" || "UPDATING" || "STOPPING" || "STOPPED" || "ERROR",
+ * //           Type: "PRIMARY" || "STANDBY",
+ * //         },
+ * //       ],
+ * //       DataReplicationSettings: { // DataReplicationSettings
+ * //         DataReplication: "NO_REPLICATION" || "PRIMARY_AS_SOURCE",
+ * //         RecoverySnapshotTime: new Date("TIMESTAMP"),
+ * //       },
+ * //       StandbyWorkspacesProperties: [ // StandbyWorkspacesPropertiesList
+ * //         { // StandbyWorkspacesProperties
+ * //           StandbyWorkspaceId: "STRING_VALUE",
+ * //           DataReplication: "NO_REPLICATION" || "PRIMARY_AS_SOURCE",
+ * //           RecoverySnapshotTime: new Date("TIMESTAMP"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeWorkspacesCommandInput - {@link DescribeWorkspacesCommandInput}
+ * @returns {@link DescribeWorkspacesCommandOutput}
  * @see {@link DescribeWorkspacesCommandInput} for command's `input` shape.
  * @see {@link DescribeWorkspacesCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>The specified resource is not available.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeWorkspacesCommand extends $Command<
-  DescribeWorkspacesCommandInput,
-  DescribeWorkspacesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeWorkspacesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeWorkspacesCommandInput, DescribeWorkspacesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "DescribeWorkspacesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeWorkspacesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeWorkspacesResult.filterSensitiveLog,
+export class DescribeWorkspacesCommand extends command<DescribeWorkspacesCommandInput, DescribeWorkspacesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeWorkspaces",
+  DescribeWorkspaces$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWorkspacesRequest;
+      output: DescribeWorkspacesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeWorkspacesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeWorkspacesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeWorkspacesCommandOutput> {
-    return deserializeAws_json1_1DescribeWorkspacesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeWorkspacesCommandInput;
+      output: DescribeWorkspacesCommandOutput;
+    };
+  };
 }

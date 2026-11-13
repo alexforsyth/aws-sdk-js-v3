@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeVolumeStatusRequest, DescribeVolumeStatusResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeVolumeStatusCommand,
-  serializeAws_ec2DescribeVolumeStatusCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeVolumeStatusRequest, DescribeVolumeStatusResult } from "../models/models_5";
+import { DescribeVolumeStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeVolumeStatusCommand}.
+ */
 export interface DescribeVolumeStatusCommandInput extends DescribeVolumeStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeVolumeStatusCommand}.
+ */
 export interface DescribeVolumeStatusCommandOutput extends DescribeVolumeStatusResult, __MetadataBearer {}
 
 /**
@@ -38,8 +39,7 @@ export interface DescribeVolumeStatusCommandOutput extends DescribeVolumeStatusR
  *         <code>ok</code>. If the check fails, the overall status is <code>impaired</code>. If the
  *       status is <code>insufficient-data</code>, then the checks might still be taking place on your
  *       volume at the time. We recommend that you retry the request. For more information about volume
- *       status, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html">Monitor the status of your volumes</a> in the
- *       <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ *       status, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-status.html">Monitor the status of your volumes</a> in the <i>Amazon EBS User Guide</i>.</p>
  *          <p>
  *             <i>Events</i>: Reflect the cause of a volume status and might require you to
  *       take action. For example, if your volume returns an <code>impaired</code> status, then the
@@ -51,78 +51,187 @@ export interface DescribeVolumeStatusCommandOutput extends DescribeVolumeStatusR
  *       event. For example, if the status of the volume is <code>impaired</code> and the volume event
  *       shows <code>potential-data-inconsistency</code>, then the action shows
  *         <code>enable-volume-io</code>. This means that you may want to enable the I/O operations for
- *       the volume by calling the <a>EnableVolumeIO</a> action and then check the volume
- *       for data consistency.</p>
+ *       the volume and then check the volume for data consistency. For more information, see
+ *       <a href="https://docs.aws.amazon.com/ebs/latest/userguide/work_volumes_impaired.html">Work with an
+ *         impaired EBS volume</a>.</p>
  *          <p>Volume status is based on the volume status checks, and does not reflect the volume state.
  *       Therefore, volume status does not indicate volumes in the <code>error</code> state (for
  *       example, when a volume is incapable of accepting I/O.)</p>
+ *          <note>
+ *             <p>The order of the elements in the response, including those within nested
+ *         structures, might vary. Applications should not assume the elements appear in a
+ *         particular order.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeVolumeStatusCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeVolumeStatusCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeVolumeStatusRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   VolumeIds: [ // VolumeIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   IncludeManagedResources: true || false,
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeVolumeStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeVolumeStatusResult
+ * //   NextToken: "STRING_VALUE",
+ * //   VolumeStatuses: [ // VolumeStatusList
+ * //     { // VolumeStatusItem
+ * //       Actions: [ // VolumeStatusActionsList
+ * //         { // VolumeStatusAction
+ * //           Code: "STRING_VALUE",
+ * //           Description: "STRING_VALUE",
+ * //           EventId: "STRING_VALUE",
+ * //           EventType: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       AvailabilityZone: "STRING_VALUE",
+ * //       OutpostArn: "STRING_VALUE",
+ * //       Events: [ // VolumeStatusEventsList
+ * //         { // VolumeStatusEvent
+ * //           Description: "STRING_VALUE",
+ * //           EventId: "STRING_VALUE",
+ * //           EventType: "STRING_VALUE",
+ * //           NotAfter: new Date("TIMESTAMP"),
+ * //           NotBefore: new Date("TIMESTAMP"),
+ * //           InstanceId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       VolumeId: "STRING_VALUE",
+ * //       VolumeStatus: { // VolumeStatusInfo
+ * //         Details: [ // VolumeStatusDetailsList
+ * //           { // VolumeStatusDetails
+ * //             Name: "io-enabled" || "io-performance" || "initialization-state",
+ * //             Status: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         Status: "ok" || "impaired" || "insufficient-data" || "warning",
+ * //       },
+ * //       AttachmentStatuses: [ // VolumeStatusAttachmentStatusList
+ * //         { // VolumeStatusAttachmentStatus
+ * //           IoPerformance: "STRING_VALUE",
+ * //           InstanceId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       InitializationStatusDetails: { // InitializationStatusDetails
+ * //         InitializationType: "default" || "provisioned-rate" || "volume-copy",
+ * //         Progress: Number("long"),
+ * //         EstimatedTimeToCompleteInSeconds: Number("long"),
+ * //       },
+ * //       AvailabilityZoneId: "STRING_VALUE",
+ * //       Operator: { // OperatorResponse
+ * //         Managed: true || false,
+ * //         Principal: "STRING_VALUE",
+ * //         HiddenByDefault: true || false,
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeVolumeStatusCommandInput - {@link DescribeVolumeStatusCommandInput}
+ * @returns {@link DescribeVolumeStatusCommandOutput}
  * @see {@link DescribeVolumeStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeVolumeStatusCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe the status of a single volume
+ * ```javascript
+ * // This example describes the status for the volume ``vol-1234567890abcdef0``.
+ * const input = {
+ *   VolumeIds: [
+ *     "vol-1234567890abcdef0"
+ *   ]
+ * };
+ * const command = new DescribeVolumeStatusCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   VolumeStatuses: [
+ *     {
+ *       Actions:       [],
+ *       AvailabilityZone: "us-east-1a",
+ *       Events:       [],
+ *       VolumeId: "vol-1234567890abcdef0",
+ *       VolumeStatus: {
+ *         Details: [
+ *           {
+ *             Name: "io-enabled",
+ *             Status: "passed"
+ *           },
+ *           {
+ *             Name: "io-performance",
+ *             Status: "not-applicable"
+ *           }
+ *         ],
+ *         Status: "ok"
+ *       }
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example To describe the status of impaired volumes
+ * ```javascript
+ * // This example describes the status for all volumes that are impaired. In this example output, there are no impaired volumes.
+ * const input = {
+ *   Filters: [
+ *     {
+ *       Name: "volume-status.status",
+ *       Values: [
+ *         "impaired"
+ *       ]
+ *     }
+ *   ]
+ * };
+ * const command = new DescribeVolumeStatusCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   VolumeStatuses:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeVolumeStatusCommand extends $Command<
-  DescribeVolumeStatusCommandInput,
-  DescribeVolumeStatusCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeVolumeStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeVolumeStatusCommandInput, DescribeVolumeStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeVolumeStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeVolumeStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeVolumeStatusResult.filterSensitiveLog,
+export class DescribeVolumeStatusCommand extends command<DescribeVolumeStatusCommandInput, DescribeVolumeStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeVolumeStatus",
+  DescribeVolumeStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVolumeStatusRequest;
+      output: DescribeVolumeStatusResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeVolumeStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeVolumeStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeVolumeStatusCommandOutput> {
-    return deserializeAws_ec2DescribeVolumeStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeVolumeStatusCommandInput;
+      output: DescribeVolumeStatusCommandOutput;
+    };
+  };
 }

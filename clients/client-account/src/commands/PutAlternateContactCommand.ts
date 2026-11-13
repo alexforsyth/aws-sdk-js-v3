@@ -1,97 +1,90 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccountClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccountClient";
-import { PutAlternateContactRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutAlternateContactCommand,
-  serializeAws_restJson1PutAlternateContactCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAlternateContactRequest } from "../models/models_0";
+import { PutAlternateContact$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAlternateContactCommand}.
+ */
 export interface PutAlternateContactCommandInput extends PutAlternateContactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutAlternateContactCommand}.
+ */
 export interface PutAlternateContactCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Modifies the specified alternate contact attached to an Amazon Web Services account.</p>
- *         <p>For complete details about how to use the alternate contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html">Access or
- *             updating the alternate contacts</a>.</p>
+ * <p>Modifies the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html">Update the alternate contacts for your Amazon Web Services account</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html">Enable trusted access for Amazon Web Services Account Management</a>.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AccountClient, PutAlternateContactCommand } from "@aws-sdk/client-account"; // ES Modules import
  * // const { AccountClient, PutAlternateContactCommand } = require("@aws-sdk/client-account"); // CommonJS import
+ * // import type { AccountClientConfig } from "@aws-sdk/client-account";
+ * const config = {}; // type is AccountClientConfig
  * const client = new AccountClient(config);
+ * const input = { // PutAlternateContactRequest
+ *   Name: "STRING_VALUE", // required
+ *   Title: "STRING_VALUE", // required
+ *   EmailAddress: "STRING_VALUE", // required
+ *   PhoneNumber: "STRING_VALUE", // required
+ *   AlternateContactType: "STRING_VALUE", // required
+ *   AccountId: "STRING_VALUE",
+ * };
  * const command = new PutAlternateContactCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutAlternateContactCommandInput - {@link PutAlternateContactCommandInput}
+ * @returns {@link PutAlternateContactCommandOutput}
  * @see {@link PutAlternateContactCommandInput} for command's `input` shape.
  * @see {@link PutAlternateContactCommandOutput} for command's `response` shape.
- * @see {@link AccountClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccountClientResolvedConfig | config} for AccountClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The operation failed because the calling identity doesn't have the minimum required permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The operation failed because of an error internal to Amazon Web Services. Try your operation again later.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The operation failed because it was called too frequently and exceeded a throttle limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The operation failed because one of the input parameters was invalid.</p>
+ *
+ * @throws {@link AccountServiceException}
+ * <p>Base exception class for all service exceptions from Account service.</p>
+ *
+ *
+ * @public
  */
-export class PutAlternateContactCommand extends $Command<
-  PutAlternateContactCommandInput,
-  PutAlternateContactCommandOutput,
-  AccountClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutAlternateContactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccountClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutAlternateContactCommandInput, PutAlternateContactCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccountClient";
-    const commandName = "PutAlternateContactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutAlternateContactRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutAlternateContactCommand extends command<PutAlternateContactCommandInput, PutAlternateContactCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAlternateContact",
+  PutAlternateContact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAlternateContactRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutAlternateContactCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutAlternateContactCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutAlternateContactCommandOutput> {
-    return deserializeAws_restJson1PutAlternateContactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutAlternateContactCommandInput;
+      output: PutAlternateContactCommandOutput;
+    };
+  };
 }

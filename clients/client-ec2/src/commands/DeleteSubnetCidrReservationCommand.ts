@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteSubnetCidrReservationRequest, DeleteSubnetCidrReservationResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteSubnetCidrReservationCommand,
-  serializeAws_ec2DeleteSubnetCidrReservationCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSubnetCidrReservationRequest, DeleteSubnetCidrReservationResult } from "../models/models_3";
+import { DeleteSubnetCidrReservation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSubnetCidrReservationCommand}.
+ */
 export interface DeleteSubnetCidrReservationCommandInput extends DeleteSubnetCidrReservationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSubnetCidrReservationCommand}.
+ */
 export interface DeleteSubnetCidrReservationCommandOutput extends DeleteSubnetCidrReservationResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,61 @@ export interface DeleteSubnetCidrReservationCommandOutput extends DeleteSubnetCi
  * ```javascript
  * import { EC2Client, DeleteSubnetCidrReservationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteSubnetCidrReservationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteSubnetCidrReservationRequest
+ *   SubnetCidrReservationId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteSubnetCidrReservationCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteSubnetCidrReservationResult
+ * //   DeletedSubnetCidrReservation: { // SubnetCidrReservation
+ * //     SubnetCidrReservationId: "STRING_VALUE",
+ * //     SubnetId: "STRING_VALUE",
+ * //     Cidr: "STRING_VALUE",
+ * //     ReservationType: "prefix" || "explicit",
+ * //     OwnerId: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteSubnetCidrReservationCommandInput - {@link DeleteSubnetCidrReservationCommandInput}
+ * @returns {@link DeleteSubnetCidrReservationCommandOutput}
  * @see {@link DeleteSubnetCidrReservationCommandInput} for command's `input` shape.
  * @see {@link DeleteSubnetCidrReservationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSubnetCidrReservationCommand extends $Command<
-  DeleteSubnetCidrReservationCommandInput,
-  DeleteSubnetCidrReservationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSubnetCidrReservationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSubnetCidrReservationCommandInput, DeleteSubnetCidrReservationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteSubnetCidrReservationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSubnetCidrReservationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSubnetCidrReservationResult.filterSensitiveLog,
+export class DeleteSubnetCidrReservationCommand extends command<DeleteSubnetCidrReservationCommandInput, DeleteSubnetCidrReservationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSubnetCidrReservation",
+  DeleteSubnetCidrReservation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSubnetCidrReservationRequest;
+      output: DeleteSubnetCidrReservationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSubnetCidrReservationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteSubnetCidrReservationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteSubnetCidrReservationCommandOutput> {
-    return deserializeAws_ec2DeleteSubnetCidrReservationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSubnetCidrReservationCommandInput;
+      output: DeleteSubnetCidrReservationCommandOutput;
+    };
+  };
 }

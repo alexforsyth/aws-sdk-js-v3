@@ -1,0 +1,106 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteKeyValueStoreRequest } from "../models/models_0";
+import { DeleteKeyValueStore$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteKeyValueStoreCommand}.
+ */
+export interface DeleteKeyValueStoreCommandInput extends DeleteKeyValueStoreRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteKeyValueStoreCommand}.
+ */
+export interface DeleteKeyValueStoreCommandOutput extends __MetadataBearer {}
+
+/**
+ * <p>Specifies the key value store to delete.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudFrontClient, DeleteKeyValueStoreCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
+ * // const { CloudFrontClient, DeleteKeyValueStoreCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
+ * const client = new CloudFrontClient(config);
+ * const input = { // DeleteKeyValueStoreRequest
+ *   Name: "STRING_VALUE", // required
+ *   IfMatch: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteKeyValueStoreCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteKeyValueStoreCommandInput - {@link DeleteKeyValueStoreCommandInput}
+ * @returns {@link DeleteKeyValueStoreCommandOutput}
+ * @see {@link DeleteKeyValueStoreCommandInput} for command's `input` shape.
+ * @see {@link DeleteKeyValueStoreCommandOutput} for command's `response` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
+ *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link CannotDeleteEntityWhileInUse} (client fault)
+ *  <p>The entity cannot be deleted while it is in use.</p>
+ *
+ * @throws {@link EntityNotFound} (client fault)
+ *  <p>The entity was not found.</p>
+ *
+ * @throws {@link InvalidIfMatchVersion} (client fault)
+ *  <p>The <code>If-Match</code> version is missing or not valid.</p>
+ *
+ * @throws {@link PreconditionFailed} (client fault)
+ *  <p>The precondition in one or more of the request fields evaluated to <code>false</code>.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>This operation is not supported in this Amazon Web Services Region.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @example To delete a KeyValueStore
+ * ```javascript
+ * // Use the following command to delete a KeyValueStore.
+ * const input = {
+ *   IfMatch: "ETVPDKIKX0DER",
+ *   Name: "my-keyvaluestore-name"
+ * };
+ * const command = new DeleteKeyValueStoreCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class DeleteKeyValueStoreCommand extends command<DeleteKeyValueStoreCommandInput, DeleteKeyValueStoreCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteKeyValueStore",
+  DeleteKeyValueStore$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteKeyValueStoreRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteKeyValueStoreCommandInput;
+      output: DeleteKeyValueStoreCommandOutput;
+    };
+  };
+}

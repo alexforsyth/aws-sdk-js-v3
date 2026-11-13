@@ -1,92 +1,124 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { UpdateJobRequest } from "../models/models_2";
-import {
-  deserializeAws_restJson1UpdateJobCommand,
-  serializeAws_restJson1UpdateJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateJobRequest } from "../models/models_2";
+import { UpdateJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateJobCommand}.
+ */
 export interface UpdateJobCommandInput extends UpdateJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateJobCommand}.
+ */
 export interface UpdateJobCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Updates supported fields of the specified job.</p>
- *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateJob</a> action.</p>
+ *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateJob</a> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTClient, UpdateJobCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, UpdateJobCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // UpdateJobRequest
+ *   jobId: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   presignedUrlConfig: { // PresignedUrlConfig
+ *     roleArn: "STRING_VALUE",
+ *     expiresInSec: Number("long"),
+ *   },
+ *   jobExecutionsRolloutConfig: { // JobExecutionsRolloutConfig
+ *     maximumPerMinute: Number("int"),
+ *     exponentialRate: { // ExponentialRolloutRate
+ *       baseRatePerMinute: Number("int"), // required
+ *       incrementFactor: Number("double"), // required
+ *       rateIncreaseCriteria: { // RateIncreaseCriteria
+ *         numberOfNotifiedThings: Number("int"),
+ *         numberOfSucceededThings: Number("int"),
+ *       },
+ *     },
+ *   },
+ *   abortConfig: { // AbortConfig
+ *     criteriaList: [ // AbortCriteriaList // required
+ *       { // AbortCriteria
+ *         failureType: "FAILED" || "REJECTED" || "TIMED_OUT" || "ALL", // required
+ *         action: "CANCEL", // required
+ *         thresholdPercentage: Number("double"), // required
+ *         minNumberOfExecutedThings: Number("int"), // required
+ *       },
+ *     ],
+ *   },
+ *   timeoutConfig: { // TimeoutConfig
+ *     inProgressTimeoutInMinutes: Number("long"),
+ *   },
+ *   namespaceId: "STRING_VALUE",
+ *   jobExecutionsRetryConfig: { // JobExecutionsRetryConfig
+ *     criteriaList: [ // RetryCriteriaList // required
+ *       { // RetryCriteria
+ *         failureType: "FAILED" || "TIMED_OUT" || "ALL", // required
+ *         numberOfRetries: Number("int"), // required
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new UpdateJobCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateJobCommandInput - {@link UpdateJobCommandInput}
+ * @returns {@link UpdateJobCommandOutput}
  * @see {@link UpdateJobCommandInput} for command's `input` shape.
  * @see {@link UpdateJobCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateJobCommand extends $Command<UpdateJobCommandInput, UpdateJobCommandOutput, IoTClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateJobCommandInput, UpdateJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "UpdateJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateJobCommand extends command<UpdateJobCommandInput, UpdateJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateJob",
+  UpdateJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateJobRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateJobCommandOutput> {
-    return deserializeAws_restJson1UpdateJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateJobCommandInput;
+      output: UpdateJobCommandOutput;
+    };
+  };
 }

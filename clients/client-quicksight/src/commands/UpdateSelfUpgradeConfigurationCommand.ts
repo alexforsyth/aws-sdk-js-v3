@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateSelfUpgradeConfigurationRequest, UpdateSelfUpgradeConfigurationResponse } from "../models/models_5";
+import { UpdateSelfUpgradeConfiguration$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateSelfUpgradeConfigurationCommand}.
+ */
+export interface UpdateSelfUpgradeConfigurationCommandInput extends UpdateSelfUpgradeConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateSelfUpgradeConfigurationCommand}.
+ */
+export interface UpdateSelfUpgradeConfigurationCommandOutput extends UpdateSelfUpgradeConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the self-upgrade configuration for a Quick account.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { QuickSightClient, UpdateSelfUpgradeConfigurationCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
+ * // const { QuickSightClient, UpdateSelfUpgradeConfigurationCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
+ * const client = new QuickSightClient(config);
+ * const input = { // UpdateSelfUpgradeConfigurationRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   Namespace: "STRING_VALUE", // required
+ *   SelfUpgradeStatus: "AUTO_APPROVAL" || "ADMIN_APPROVAL", // required
+ * };
+ * const command = new UpdateSelfUpgradeConfigurationCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateSelfUpgradeConfigurationResponse
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateSelfUpgradeConfigurationCommandInput - {@link UpdateSelfUpgradeConfigurationCommandInput}
+ * @returns {@link UpdateSelfUpgradeConfigurationCommandOutput}
+ * @see {@link UpdateSelfUpgradeConfigurationCommandInput} for command's `input` shape.
+ * @see {@link UpdateSelfUpgradeConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameter has a value that isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link PreconditionNotMetException} (client fault)
+ *  <p>One or more preconditions aren't met.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (server fault)
+ *  <p>This resource is currently unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateSelfUpgradeConfigurationCommand extends command<UpdateSelfUpgradeConfigurationCommandInput, UpdateSelfUpgradeConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateSelfUpgradeConfiguration",
+  UpdateSelfUpgradeConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSelfUpgradeConfigurationRequest;
+      output: UpdateSelfUpgradeConfigurationResponse;
+    };
+    sdk: {
+      input: UpdateSelfUpgradeConfigurationCommandInput;
+      output: UpdateSelfUpgradeConfigurationCommandOutput;
+    };
+  };
+}

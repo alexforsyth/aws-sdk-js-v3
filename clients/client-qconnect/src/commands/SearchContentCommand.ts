@@ -1,0 +1,120 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchContentRequest, SearchContentResponse } from "../models/models_1";
+import { SearchContent$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchContentCommand}.
+ */
+export interface SearchContentCommandInput extends SearchContentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchContentCommand}.
+ */
+export interface SearchContentCommandOutput extends SearchContentResponse, __MetadataBearer {}
+
+/**
+ * <p>Searches for content in a specified knowledge base. Can be used to get a specific content resource by its name.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { QConnectClient, SearchContentCommand } from "@aws-sdk/client-qconnect"; // ES Modules import
+ * // const { QConnectClient, SearchContentCommand } = require("@aws-sdk/client-qconnect"); // CommonJS import
+ * // import type { QConnectClientConfig } from "@aws-sdk/client-qconnect";
+ * const config = {}; // type is QConnectClientConfig
+ * const client = new QConnectClient(config);
+ * const input = { // SearchContentRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   knowledgeBaseId: "STRING_VALUE", // required
+ *   searchExpression: { // SearchExpression
+ *     filters: [ // FilterList // required
+ *       { // Filter
+ *         field: "STRING_VALUE", // required
+ *         operator: "STRING_VALUE", // required
+ *         value: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ * };
+ * const command = new SearchContentCommand(input);
+ * const response = await client.send(command);
+ * // { // SearchContentResponse
+ * //   contentSummaries: [ // ContentSummaryList // required
+ * //     { // ContentSummary
+ * //       contentArn: "STRING_VALUE", // required
+ * //       contentId: "STRING_VALUE", // required
+ * //       knowledgeBaseArn: "STRING_VALUE", // required
+ * //       knowledgeBaseId: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       revisionId: "STRING_VALUE", // required
+ * //       title: "STRING_VALUE", // required
+ * //       contentType: "STRING_VALUE", // required
+ * //       status: "STRING_VALUE", // required
+ * //       metadata: { // ContentMetadata // required
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       lastModifiedTime: new Date("TIMESTAMP"),
+ * //       lastModifiedRegion: "STRING_VALUE",
+ * //       fileHash: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param SearchContentCommandInput - {@link SearchContentCommandInput}
+ * @returns {@link SearchContentCommandOutput}
+ * @see {@link SearchContentCommandInput} for command's `input` shape.
+ * @see {@link SearchContentCommandOutput} for command's `response` shape.
+ * @see {@link QConnectClientResolvedConfig | config} for QConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You do not have permission to perform this action.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by a service.</p>
+ *
+ * @throws {@link QConnectServiceException}
+ * <p>Base exception class for all service exceptions from QConnect service.</p>
+ *
+ *
+ * @public
+ */
+export class SearchContentCommand extends command<SearchContentCommandInput, SearchContentCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchContent",
+  SearchContent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchContentRequest;
+      output: SearchContentResponse;
+    };
+    sdk: {
+      input: SearchContentCommandInput;
+      output: SearchContentCommandOutput;
+    };
+  };
+}

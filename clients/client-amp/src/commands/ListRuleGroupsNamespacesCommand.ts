@@ -1,95 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmpClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmpClient";
-import { ListRuleGroupsNamespacesRequest, ListRuleGroupsNamespacesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListRuleGroupsNamespacesCommand,
-  serializeAws_restJson1ListRuleGroupsNamespacesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRuleGroupsNamespacesRequest, ListRuleGroupsNamespacesResponse } from "../models/models_0";
+import { ListRuleGroupsNamespaces$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRuleGroupsNamespacesCommand}.
+ */
 export interface ListRuleGroupsNamespacesCommandInput extends ListRuleGroupsNamespacesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRuleGroupsNamespacesCommand}.
+ */
 export interface ListRuleGroupsNamespacesCommandOutput extends ListRuleGroupsNamespacesResponse, __MetadataBearer {}
 
 /**
- * Lists rule groups namespaces.
+ * <p>Returns a list of rule groups namespaces in a workspace.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AmpClient, ListRuleGroupsNamespacesCommand } from "@aws-sdk/client-amp"; // ES Modules import
  * // const { AmpClient, ListRuleGroupsNamespacesCommand } = require("@aws-sdk/client-amp"); // CommonJS import
+ * // import type { AmpClientConfig } from "@aws-sdk/client-amp";
+ * const config = {}; // type is AmpClientConfig
  * const client = new AmpClient(config);
+ * const input = { // ListRuleGroupsNamespacesRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListRuleGroupsNamespacesCommand(input);
  * const response = await client.send(command);
+ * // { // ListRuleGroupsNamespacesResponse
+ * //   ruleGroupsNamespaces: [ // RuleGroupsNamespaceSummaryList // required
+ * //     { // RuleGroupsNamespaceSummary
+ * //       arn: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       status: { // RuleGroupsNamespaceStatus
+ * //         statusCode: "STRING_VALUE", // required
+ * //         statusReason: "STRING_VALUE",
+ * //       },
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       modifiedAt: new Date("TIMESTAMP"), // required
+ * //       tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRuleGroupsNamespacesCommandInput - {@link ListRuleGroupsNamespacesCommandInput}
+ * @returns {@link ListRuleGroupsNamespacesCommandOutput}
  * @see {@link ListRuleGroupsNamespacesCommandInput} for command's `input` shape.
  * @see {@link ListRuleGroupsNamespacesCommandOutput} for command's `response` shape.
- * @see {@link AmpClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmpClientResolvedConfig | config} for AmpClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resources that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link AmpServiceException}
+ * <p>Base exception class for all service exceptions from Amp service.</p>
+ *
+ *
+ * @public
  */
-export class ListRuleGroupsNamespacesCommand extends $Command<
-  ListRuleGroupsNamespacesCommandInput,
-  ListRuleGroupsNamespacesCommandOutput,
-  AmpClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRuleGroupsNamespacesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmpClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRuleGroupsNamespacesCommandInput, ListRuleGroupsNamespacesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmpClient";
-    const commandName = "ListRuleGroupsNamespacesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRuleGroupsNamespacesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRuleGroupsNamespacesResponse.filterSensitiveLog,
+export class ListRuleGroupsNamespacesCommand extends command<ListRuleGroupsNamespacesCommandInput, ListRuleGroupsNamespacesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRuleGroupsNamespaces",
+  ListRuleGroupsNamespaces$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRuleGroupsNamespacesRequest;
+      output: ListRuleGroupsNamespacesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRuleGroupsNamespacesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListRuleGroupsNamespacesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRuleGroupsNamespacesCommandOutput> {
-    return deserializeAws_restJson1ListRuleGroupsNamespacesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRuleGroupsNamespacesCommandInput;
+      output: ListRuleGroupsNamespacesCommandOutput;
+    };
+  };
 }

@@ -1,45 +1,46 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingClient";
-import { DescribeAdjustmentTypesAnswer } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeAdjustmentTypesCommand,
-  serializeAws_queryDescribeAdjustmentTypesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAdjustmentTypesAnswer } from "../models/models_0";
+import { DescribeAdjustmentTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAdjustmentTypesCommand}.
+ */
 export interface DescribeAdjustmentTypesCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAdjustmentTypesCommand}.
+ */
 export interface DescribeAdjustmentTypesCommandOutput extends DescribeAdjustmentTypesAnswer, __MetadataBearer {}
 
 /**
  * <p>Describes the available adjustment types for step scaling and simple scaling
  *             policies.</p>
- *         <p>The following adjustment types are supported:</p>
- *         <ul>
+ *          <p>The following adjustment types are supported:</p>
+ *          <ul>
  *             <li>
- *                 <p>
- *                     <code>ChangeInCapacity</code>
- *                 </p>
+ *                <p>
+ *                   <code>ChangeInCapacity</code>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
- *                     <code>ExactCapacity</code>
- *                 </p>
+ *                <p>
+ *                   <code>ExactCapacity</code>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
- *                     <code>PercentChangeInCapacity</code>
- *                 </p>
+ *                <p>
+ *                   <code>PercentChangeInCapacity</code>
+ *                </p>
  *             </li>
  *          </ul>
  * @example
@@ -47,68 +48,76 @@ export interface DescribeAdjustmentTypesCommandOutput extends DescribeAdjustment
  * ```javascript
  * import { AutoScalingClient, DescribeAdjustmentTypesCommand } from "@aws-sdk/client-auto-scaling"; // ES Modules import
  * // const { AutoScalingClient, DescribeAdjustmentTypesCommand } = require("@aws-sdk/client-auto-scaling"); // CommonJS import
+ * // import type { AutoScalingClientConfig } from "@aws-sdk/client-auto-scaling";
+ * const config = {}; // type is AutoScalingClientConfig
  * const client = new AutoScalingClient(config);
+ * const input = {};
  * const command = new DescribeAdjustmentTypesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAdjustmentTypesAnswer
+ * //   AdjustmentTypes: [ // AdjustmentTypes
+ * //     { // AdjustmentType
+ * //       AdjustmentType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeAdjustmentTypesCommandInput - {@link DescribeAdjustmentTypesCommandInput}
+ * @returns {@link DescribeAdjustmentTypesCommandOutput}
  * @see {@link DescribeAdjustmentTypesCommandInput} for command's `input` shape.
  * @see {@link DescribeAdjustmentTypesCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingClientResolvedConfig | config} for AutoScalingClient's `config` shape.
  *
+ * @throws {@link ResourceContentionFault} (server fault)
+ *  <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
+ *             instance, or load balancer).</p>
+ *
+ * @throws {@link AutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from AutoScaling service.</p>
+ *
+ *
+ * @example To describe the Amazon EC2 Auto Scaling adjustment types
+ * ```javascript
+ * // This example describes the available adjustment types.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeAdjustmentTypesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AdjustmentTypes: [
+ *     {
+ *       AdjustmentType: "ChangeInCapacity"
+ *     },
+ *     {
+ *       AdjustmentType: "ExactCapcity"
+ *     },
+ *     {
+ *       AdjustmentType: "PercentChangeInCapacity"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeAdjustmentTypesCommand extends $Command<
-  DescribeAdjustmentTypesCommandInput,
-  DescribeAdjustmentTypesCommandOutput,
-  AutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAdjustmentTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAdjustmentTypesCommandInput, DescribeAdjustmentTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingClient";
-    const commandName = "DescribeAdjustmentTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: DescribeAdjustmentTypesAnswer.filterSensitiveLog,
+export class DescribeAdjustmentTypesCommand extends command<DescribeAdjustmentTypesCommandInput, DescribeAdjustmentTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAdjustmentTypes",
+  DescribeAdjustmentTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeAdjustmentTypesAnswer;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAdjustmentTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeAdjustmentTypesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAdjustmentTypesCommandOutput> {
-    return deserializeAws_queryDescribeAdjustmentTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAdjustmentTypesCommandInput;
+      output: DescribeAdjustmentTypesCommandOutput;
+    };
+  };
 }

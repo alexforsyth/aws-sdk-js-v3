@@ -1,97 +1,87 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StartWorkspacesRequest, StartWorkspacesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartWorkspacesCommand,
-  serializeAws_json1_1StartWorkspacesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartWorkspacesRequest, StartWorkspacesResult } from "../models/models_0";
+import { StartWorkspaces$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartWorkspacesCommand}.
+ */
 export interface StartWorkspacesCommandInput extends StartWorkspacesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartWorkspacesCommand}.
+ */
 export interface StartWorkspacesCommandOutput extends StartWorkspacesResult, __MetadataBearer {}
 
 /**
  * <p>Starts the specified WorkSpaces.</p>
- *          <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> and a
- *          state of <code>STOPPED</code>.</p>
+ *          <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> or
+ *          <code>Manual</code> and a state of <code>STOPPED</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkSpacesClient, StartWorkspacesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, StartWorkspacesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // StartWorkspacesRequest
+ *   StartWorkspaceRequests: [ // StartWorkspaceRequests // required
+ *     { // StartRequest
+ *       WorkspaceId: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new StartWorkspacesCommand(input);
  * const response = await client.send(command);
+ * // { // StartWorkspacesResult
+ * //   FailedRequests: [ // FailedStartWorkspaceRequests
+ * //     { // FailedWorkspaceChangeRequest
+ * //       WorkspaceId: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param StartWorkspacesCommandInput - {@link StartWorkspacesCommandInput}
+ * @returns {@link StartWorkspacesCommandOutput}
  * @see {@link StartWorkspacesCommandInput} for command's `input` shape.
  * @see {@link StartWorkspacesCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class StartWorkspacesCommand extends $Command<
-  StartWorkspacesCommandInput,
-  StartWorkspacesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartWorkspacesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartWorkspacesCommandInput, StartWorkspacesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "StartWorkspacesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartWorkspacesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartWorkspacesResult.filterSensitiveLog,
+export class StartWorkspacesCommand extends command<StartWorkspacesCommandInput, StartWorkspacesCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartWorkspaces",
+  StartWorkspaces$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartWorkspacesRequest;
+      output: StartWorkspacesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartWorkspacesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartWorkspacesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartWorkspacesCommandOutput> {
-    return deserializeAws_json1_1StartWorkspacesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartWorkspacesCommandInput;
+      output: StartWorkspacesCommandOutput;
+    };
+  };
 }

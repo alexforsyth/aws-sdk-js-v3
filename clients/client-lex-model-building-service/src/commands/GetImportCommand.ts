@@ -1,100 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { GetImportRequest, GetImportResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetImportCommand,
-  serializeAws_restJson1GetImportCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetImportRequest, GetImportResponse } from "../models/models_0";
+import { GetImport$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetImportCommand}.
+ */
 export interface GetImportCommandInput extends GetImportRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetImportCommand}.
+ */
 export interface GetImportCommandOutput extends GetImportResponse, __MetadataBearer {}
 
 /**
  * <p>Gets information about an import job started with the
  *         <code>StartImport</code> operation.</p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, GetImportCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, GetImportCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // GetImportRequest
+ *   importId: "STRING_VALUE", // required
+ * };
  * const command = new GetImportCommand(input);
  * const response = await client.send(command);
+ * // { // GetImportResponse
+ * //   name: "STRING_VALUE",
+ * //   resourceType: "BOT" || "INTENT" || "SLOT_TYPE",
+ * //   mergeStrategy: "OVERWRITE_LATEST" || "FAIL_ON_CONFLICT",
+ * //   importId: "STRING_VALUE",
+ * //   importStatus: "IN_PROGRESS" || "COMPLETE" || "FAILED",
+ * //   failureReason: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   createdDate: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetImportCommandInput - {@link GetImportCommandInput}
+ * @returns {@link GetImportCommandOutput}
  * @see {@link GetImportCommandInput} for command's `input` shape.
  * @see {@link GetImportCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the
+ *       resource and try again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @public
  */
-export class GetImportCommand extends $Command<
-  GetImportCommandInput,
-  GetImportCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetImportCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetImportCommandInput, GetImportCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "GetImportCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetImportRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetImportResponse.filterSensitiveLog,
+export class GetImportCommand extends command<GetImportCommandInput, GetImportCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetImport",
+  GetImport$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetImportRequest;
+      output: GetImportResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetImportCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetImportCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetImportCommandOutput> {
-    return deserializeAws_restJson1GetImportCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetImportCommandInput;
+      output: GetImportCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { GetMissionProfileRequest, GetMissionProfileResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetMissionProfileCommand,
-  serializeAws_restJson1GetMissionProfileCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMissionProfileRequest, GetMissionProfileResponse } from "../models/models_0";
+import { GetMissionProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMissionProfileCommand}.
+ */
 export interface GetMissionProfileCommandInput extends GetMissionProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMissionProfileCommand}.
+ */
 export interface GetMissionProfileCommandOutput extends GetMissionProfileResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface GetMissionProfileCommandOutput extends GetMissionProfileRespons
  * ```javascript
  * import { GroundStationClient, GetMissionProfileCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, GetMissionProfileCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // GetMissionProfileRequest
+ *   missionProfileId: "STRING_VALUE", // required
+ * };
  * const command = new GetMissionProfileCommand(input);
  * const response = await client.send(command);
+ * // { // GetMissionProfileResponse
+ * //   missionProfileId: "STRING_VALUE",
+ * //   missionProfileArn: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   region: "STRING_VALUE",
+ * //   contactPrePassDurationSeconds: Number("int"),
+ * //   contactPostPassDurationSeconds: Number("int"),
+ * //   minimumViableContactDurationSeconds: Number("int"),
+ * //   dataflowEdges: [ // DataflowEdgeList
+ * //     [ // DataflowEdge
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   ],
+ * //   trackingConfigArn: "STRING_VALUE",
+ * //   telemetrySinkConfigArn: "STRING_VALUE",
+ * //   tags: { // TagsMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   streamsKmsKey: { // KmsKey Union: only one key present
+ * //     kmsKeyArn: "STRING_VALUE",
+ * //     kmsAliasArn: "STRING_VALUE",
+ * //     kmsAliasName: "STRING_VALUE",
+ * //   },
+ * //   streamsKmsRole: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetMissionProfileCommandInput - {@link GetMissionProfileCommandInput}
+ * @returns {@link GetMissionProfileCommandOutput}
  * @see {@link GetMissionProfileCommandInput} for command's `input` shape.
  * @see {@link GetMissionProfileCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class GetMissionProfileCommand extends $Command<
-  GetMissionProfileCommandInput,
-  GetMissionProfileCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMissionProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMissionProfileCommandInput, GetMissionProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "GetMissionProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMissionProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMissionProfileResponse.filterSensitiveLog,
+export class GetMissionProfileCommand extends command<GetMissionProfileCommandInput, GetMissionProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMissionProfile",
+  GetMissionProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMissionProfileRequest;
+      output: GetMissionProfileResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMissionProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetMissionProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMissionProfileCommandOutput> {
-    return deserializeAws_restJson1GetMissionProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMissionProfileCommandInput;
+      output: GetMissionProfileCommandOutput;
+    };
+  };
 }

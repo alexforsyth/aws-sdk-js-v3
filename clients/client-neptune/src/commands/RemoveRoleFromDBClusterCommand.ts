@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RemoveRoleFromDBClusterMessage } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryRemoveRoleFromDBClusterCommand,
-  serializeAws_queryRemoveRoleFromDBClusterCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveRoleFromDBClusterMessage } from "../models/models_0";
+import { RemoveRoleFromDBCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveRoleFromDBClusterCommand}.
+ */
 export interface RemoveRoleFromDBClusterCommandInput extends RemoveRoleFromDBClusterMessage {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveRoleFromDBClusterCommand}.
+ */
 export interface RemoveRoleFromDBClusterCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,57 @@ export interface RemoveRoleFromDBClusterCommandOutput extends __MetadataBearer {
  * ```javascript
  * import { NeptuneClient, RemoveRoleFromDBClusterCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, RemoveRoleFromDBClusterCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // RemoveRoleFromDBClusterMessage
+ *   DBClusterIdentifier: "STRING_VALUE", // required
+ *   RoleArn: "STRING_VALUE", // required
+ *   FeatureName: "STRING_VALUE",
+ * };
  * const command = new RemoveRoleFromDBClusterCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveRoleFromDBClusterCommandInput - {@link RemoveRoleFromDBClusterCommandInput}
+ * @returns {@link RemoveRoleFromDBClusterCommandOutput}
  * @see {@link RemoveRoleFromDBClusterCommandInput} for command's `input` shape.
  * @see {@link RemoveRoleFromDBClusterCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBClusterNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBClusterIdentifier</i> does not refer to an existing DB cluster.</p>
+ *
+ * @throws {@link DBClusterRoleNotFoundFault} (client fault)
+ *  <p>The specified IAM role Amazon Resource Name (ARN) is not associated with the specified DB cluster.</p>
+ *
+ * @throws {@link InvalidDBClusterStateFault} (client fault)
+ *  <p>The DB cluster is not in a valid state.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveRoleFromDBClusterCommand extends $Command<
-  RemoveRoleFromDBClusterCommandInput,
-  RemoveRoleFromDBClusterCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveRoleFromDBClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveRoleFromDBClusterCommandInput, RemoveRoleFromDBClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "RemoveRoleFromDBClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveRoleFromDBClusterMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RemoveRoleFromDBClusterCommand extends command<RemoveRoleFromDBClusterCommandInput, RemoveRoleFromDBClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveRoleFromDBCluster",
+  RemoveRoleFromDBCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveRoleFromDBClusterMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveRoleFromDBClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryRemoveRoleFromDBClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveRoleFromDBClusterCommandOutput> {
-    return deserializeAws_queryRemoveRoleFromDBClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveRoleFromDBClusterCommandInput;
+      output: RemoveRoleFromDBClusterCommandOutput;
+    };
+  };
 }

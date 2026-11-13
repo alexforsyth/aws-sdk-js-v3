@@ -1,99 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { DeleteProvisioningTemplateRequest, DeleteProvisioningTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteProvisioningTemplateCommand,
-  serializeAws_restJson1DeleteProvisioningTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteProvisioningTemplateRequest, DeleteProvisioningTemplateResponse } from "../models/models_0";
+import { DeleteProvisioningTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteProvisioningTemplateCommand}.
+ */
 export interface DeleteProvisioningTemplateCommandInput extends DeleteProvisioningTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteProvisioningTemplateCommand}.
+ */
 export interface DeleteProvisioningTemplateCommandOutput extends DeleteProvisioningTemplateResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a fleet provisioning template.</p>
+ * <p>Deletes a provisioning template.</p>
  *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteProvisioningTemplate</a> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTClient, DeleteProvisioningTemplateCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DeleteProvisioningTemplateCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // DeleteProvisioningTemplateRequest
+ *   templateName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteProvisioningTemplateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteProvisioningTemplateCommandInput - {@link DeleteProvisioningTemplateCommandInput}
+ * @returns {@link DeleteProvisioningTemplateCommandOutput}
  * @see {@link DeleteProvisioningTemplateCommandInput} for command's `input` shape.
  * @see {@link DeleteProvisioningTemplateCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link ConflictingResourceUpdateException} (client fault)
+ *  <p>A conflicting resource update exception. This exception is thrown when two pending
+ *          updates cause a conflict.</p>
+ *
+ * @throws {@link DeleteConflictException} (client fault)
+ *  <p>You can't delete the resource because it is attached to one or more
+ *          resources.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteProvisioningTemplateCommand extends $Command<
-  DeleteProvisioningTemplateCommandInput,
-  DeleteProvisioningTemplateCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteProvisioningTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteProvisioningTemplateCommandInput, DeleteProvisioningTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DeleteProvisioningTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteProvisioningTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteProvisioningTemplateResponse.filterSensitiveLog,
+export class DeleteProvisioningTemplateCommand extends command<DeleteProvisioningTemplateCommandInput, DeleteProvisioningTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteProvisioningTemplate",
+  DeleteProvisioningTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProvisioningTemplateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteProvisioningTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteProvisioningTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteProvisioningTemplateCommandOutput> {
-    return deserializeAws_restJson1DeleteProvisioningTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteProvisioningTemplateCommandInput;
+      output: DeleteProvisioningTemplateCommandOutput;
+    };
+  };
 }

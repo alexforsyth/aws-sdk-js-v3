@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeTrialComponentRequest, DescribeTrialComponentResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1DescribeTrialComponentCommand,
-  serializeAws_json1_1DescribeTrialComponentCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTrialComponentRequest, DescribeTrialComponentResponse } from "../models/models_3";
+import { DescribeTrialComponent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTrialComponentCommand}.
+ */
 export interface DescribeTrialComponentCommandInput extends DescribeTrialComponentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTrialComponentCommand}.
+ */
 export interface DescribeTrialComponentCommandOutput extends DescribeTrialComponentResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,128 @@ export interface DescribeTrialComponentCommandOutput extends DescribeTrialCompon
  * ```javascript
  * import { SageMakerClient, DescribeTrialComponentCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeTrialComponentCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeTrialComponentRequest
+ *   TrialComponentName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeTrialComponentCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTrialComponentResponse
+ * //   TrialComponentName: "STRING_VALUE",
+ * //   TrialComponentArn: "STRING_VALUE",
+ * //   DisplayName: "STRING_VALUE",
+ * //   Source: { // TrialComponentSource
+ * //     SourceArn: "STRING_VALUE", // required
+ * //     SourceType: "STRING_VALUE",
+ * //   },
+ * //   Status: { // TrialComponentStatus
+ * //     PrimaryStatus: "InProgress" || "Completed" || "Failed" || "Stopping" || "Stopped",
+ * //     Message: "STRING_VALUE",
+ * //   },
+ * //   StartTime: new Date("TIMESTAMP"),
+ * //   EndTime: new Date("TIMESTAMP"),
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   Parameters: { // TrialComponentParameters
+ * //     "<keys>": { // TrialComponentParameterValue Union: only one key present
+ * //       StringValue: "STRING_VALUE",
+ * //       NumberValue: Number("double"),
+ * //     },
+ * //   },
+ * //   InputArtifacts: { // TrialComponentArtifacts
+ * //     "<keys>": { // TrialComponentArtifact
+ * //       MediaType: "STRING_VALUE",
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   OutputArtifacts: {
+ * //     "<keys>": {
+ * //       MediaType: "STRING_VALUE",
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   MetadataProperties: { // MetadataProperties
+ * //     CommitId: "STRING_VALUE",
+ * //     Repository: "STRING_VALUE",
+ * //     GeneratedBy: "STRING_VALUE",
+ * //     ProjectId: "STRING_VALUE",
+ * //   },
+ * //   Metrics: [ // TrialComponentMetricSummaries
+ * //     { // TrialComponentMetricSummary
+ * //       MetricName: "STRING_VALUE",
+ * //       SourceArn: "STRING_VALUE",
+ * //       TimeStamp: new Date("TIMESTAMP"),
+ * //       Max: Number("double"),
+ * //       Min: Number("double"),
+ * //       Last: Number("double"),
+ * //       Count: Number("int"),
+ * //       Avg: Number("double"),
+ * //       StdDev: Number("double"),
+ * //     },
+ * //   ],
+ * //   LineageGroupArn: "STRING_VALUE",
+ * //   Sources: [ // TrialComponentSources
+ * //     {
+ * //       SourceArn: "STRING_VALUE", // required
+ * //       SourceType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeTrialComponentCommandInput - {@link DescribeTrialComponentCommandInput}
+ * @returns {@link DescribeTrialComponentCommandOutput}
  * @see {@link DescribeTrialComponentCommandInput} for command's `input` shape.
  * @see {@link DescribeTrialComponentCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTrialComponentCommand extends $Command<
-  DescribeTrialComponentCommandInput,
-  DescribeTrialComponentCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTrialComponentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTrialComponentCommandInput, DescribeTrialComponentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeTrialComponentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTrialComponentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTrialComponentResponse.filterSensitiveLog,
+export class DescribeTrialComponentCommand extends command<DescribeTrialComponentCommandInput, DescribeTrialComponentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTrialComponent",
+  DescribeTrialComponent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTrialComponentRequest;
+      output: DescribeTrialComponentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTrialComponentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeTrialComponentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTrialComponentCommandOutput> {
-    return deserializeAws_json1_1DescribeTrialComponentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTrialComponentCommandInput;
+      output: DescribeTrialComponentCommandOutput;
+    };
+  };
 }

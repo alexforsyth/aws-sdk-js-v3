@@ -1,0 +1,95 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateServiceEnvironmentRequest, CreateServiceEnvironmentResponse } from "../models/models_0";
+import { CreateServiceEnvironment$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateServiceEnvironmentCommand}.
+ */
+export interface CreateServiceEnvironmentCommandInput extends CreateServiceEnvironmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateServiceEnvironmentCommand}.
+ */
+export interface CreateServiceEnvironmentCommandOutput extends CreateServiceEnvironmentResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a service environment for running service jobs. Service environments define capacity limits for specific service types such as SageMaker Training jobs.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BatchClient, CreateServiceEnvironmentCommand } from "@aws-sdk/client-batch"; // ES Modules import
+ * // const { BatchClient, CreateServiceEnvironmentCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
+ * const client = new BatchClient(config);
+ * const input = { // CreateServiceEnvironmentRequest
+ *   serviceEnvironmentName: "STRING_VALUE", // required
+ *   serviceEnvironmentType: "SAGEMAKER_TRAINING", // required
+ *   state: "ENABLED" || "DISABLED",
+ *   capacityLimits: [ // CapacityLimits // required
+ *     { // CapacityLimit
+ *       maxCapacity: Number("int"),
+ *       capacityUnit: "STRING_VALUE",
+ *     },
+ *   ],
+ *   tags: { // TagrisTagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new CreateServiceEnvironmentCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateServiceEnvironmentResponse
+ * //   serviceEnvironmentName: "STRING_VALUE", // required
+ * //   serviceEnvironmentArn: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateServiceEnvironmentCommandInput - {@link CreateServiceEnvironmentCommandInput}
+ * @returns {@link CreateServiceEnvironmentCommandOutput}
+ * @see {@link CreateServiceEnvironmentCommandInput} for command's `input` shape.
+ * @see {@link CreateServiceEnvironmentCommandOutput} for command's `response` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateServiceEnvironmentCommand extends command<CreateServiceEnvironmentCommandInput, CreateServiceEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateServiceEnvironment",
+  CreateServiceEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateServiceEnvironmentRequest;
+      output: CreateServiceEnvironmentResponse;
+    };
+    sdk: {
+      input: CreateServiceEnvironmentCommandInput;
+      output: CreateServiceEnvironmentCommandOutput;
+    };
+  };
+}

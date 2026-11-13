@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { UpdateThreatIntelSetRequest, UpdateThreatIntelSetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateThreatIntelSetCommand,
-  serializeAws_restJson1UpdateThreatIntelSetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateThreatIntelSetRequest, UpdateThreatIntelSetResponse } from "../models/models_1";
+import { UpdateThreatIntelSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateThreatIntelSetCommand}.
+ */
 export interface UpdateThreatIntelSetCommandInput extends UpdateThreatIntelSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateThreatIntelSetCommand}.
+ */
 export interface UpdateThreatIntelSetCommandOutput extends UpdateThreatIntelSetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface UpdateThreatIntelSetCommandOutput extends UpdateThreatIntelSetR
  * ```javascript
  * import { GuardDutyClient, UpdateThreatIntelSetCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, UpdateThreatIntelSetCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // UpdateThreatIntelSetRequest
+ *   DetectorId: "STRING_VALUE", // required
+ *   ThreatIntelSetId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   Location: "STRING_VALUE",
+ *   Activate: true || false,
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new UpdateThreatIntelSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateThreatIntelSetCommandInput - {@link UpdateThreatIntelSetCommandInput}
+ * @returns {@link UpdateThreatIntelSetCommandOutput}
  * @see {@link UpdateThreatIntelSetCommandInput} for command's `input` shape.
  * @see {@link UpdateThreatIntelSetCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An access denied exception object.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateThreatIntelSetCommand extends $Command<
-  UpdateThreatIntelSetCommandInput,
-  UpdateThreatIntelSetCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateThreatIntelSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateThreatIntelSetCommandInput, UpdateThreatIntelSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "UpdateThreatIntelSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateThreatIntelSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateThreatIntelSetResponse.filterSensitiveLog,
+export class UpdateThreatIntelSetCommand extends command<UpdateThreatIntelSetCommandInput, UpdateThreatIntelSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateThreatIntelSet",
+  UpdateThreatIntelSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateThreatIntelSetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateThreatIntelSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateThreatIntelSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateThreatIntelSetCommandOutput> {
-    return deserializeAws_restJson1UpdateThreatIntelSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateThreatIntelSetCommandInput;
+      output: UpdateThreatIntelSetCommandOutput;
+    };
+  };
 }

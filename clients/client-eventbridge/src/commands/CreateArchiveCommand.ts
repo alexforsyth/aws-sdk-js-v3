@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { CreateArchiveRequest, CreateArchiveResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateArchiveCommand,
-  serializeAws_json1_1CreateArchiveCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateArchiveRequest, CreateArchiveResponse } from "../models/models_0";
+import { CreateArchive$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateArchiveCommand}.
+ */
 export interface CreateArchiveCommandInput extends CreateArchiveRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateArchiveCommand}.
+ */
 export interface CreateArchiveCommandOutput extends CreateArchiveResponse, __MetadataBearer {}
 
 /**
@@ -27,73 +28,84 @@ export interface CreateArchiveCommandOutput extends CreateArchiveResponse, __Met
  *       time for changes to take effect. If you do not specify a pattern to filter events sent to the
  *       archive, all events are sent to the archive except replayed events. Replayed events are not
  *       sent to an archive.</p>
+ *          <important>
+ *             <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
+ *         customer managed key for any archives for the event bus as well. </p>
+ *             <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EventBridgeClient, CreateArchiveCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, CreateArchiveCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // CreateArchiveRequest
+ *   ArchiveName: "STRING_VALUE", // required
+ *   EventSourceArn: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   EventPattern: "STRING_VALUE",
+ *   RetentionDays: Number("int"),
+ *   KmsKeyIdentifier: "STRING_VALUE",
+ * };
  * const command = new CreateArchiveCommand(input);
  * const response = await client.send(command);
+ * // { // CreateArchiveResponse
+ * //   ArchiveArn: "STRING_VALUE",
+ * //   State: "ENABLED" || "DISABLED" || "CREATING" || "UPDATING" || "CREATE_FAILED" || "UPDATE_FAILED",
+ * //   StateReason: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param CreateArchiveCommandInput - {@link CreateArchiveCommandInput}
+ * @returns {@link CreateArchiveCommandOutput}
  * @see {@link CreateArchiveCommandInput} for command's `input` shape.
  * @see {@link CreateArchiveCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link InvalidEventPatternException} (client fault)
+ *  <p>The event pattern is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request failed because it attempted to create resource beyond the allowed service
+ *       quota.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource you are trying to create already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class CreateArchiveCommand extends $Command<
-  CreateArchiveCommandInput,
-  CreateArchiveCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateArchiveCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateArchiveCommandInput, CreateArchiveCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "CreateArchiveCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateArchiveRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateArchiveResponse.filterSensitiveLog,
+export class CreateArchiveCommand extends command<CreateArchiveCommandInput, CreateArchiveCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateArchive",
+  CreateArchive$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateArchiveRequest;
+      output: CreateArchiveResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateArchiveCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateArchiveCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateArchiveCommandOutput> {
-    return deserializeAws_json1_1CreateArchiveCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateArchiveCommandInput;
+      output: CreateArchiveCommandOutput;
+    };
+  };
 }

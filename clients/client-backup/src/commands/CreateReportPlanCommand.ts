@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { CreateReportPlanInput, CreateReportPlanOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateReportPlanCommand,
-  serializeAws_restJson1CreateReportPlanCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateReportPlanInput, CreateReportPlanOutput } from "../models/models_0";
+import { CreateReportPlan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateReportPlanCommand}.
+ */
 export interface CreateReportPlanCommandInput extends CreateReportPlanInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateReportPlanCommand}.
+ */
 export interface CreateReportPlanCommandOutput extends CreateReportPlanOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +32,94 @@ export interface CreateReportPlanCommandOutput extends CreateReportPlanOutput, _
  * ```javascript
  * import { BackupClient, CreateReportPlanCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, CreateReportPlanCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // CreateReportPlanInput
+ *   ReportPlanName: "STRING_VALUE", // required
+ *   ReportPlanDescription: "STRING_VALUE",
+ *   ReportDeliveryChannel: { // ReportDeliveryChannel
+ *     S3BucketName: "STRING_VALUE", // required
+ *     S3KeyPrefix: "STRING_VALUE",
+ *     Formats: [ // FormatList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   ReportSetting: { // ReportSetting
+ *     ReportTemplate: "STRING_VALUE", // required
+ *     FrameworkArns: [ // stringList
+ *       "STRING_VALUE",
+ *     ],
+ *     NumberOfFrameworks: Number("int"),
+ *     Accounts: [
+ *       "STRING_VALUE",
+ *     ],
+ *     OrganizationUnits: [
+ *       "STRING_VALUE",
+ *     ],
+ *     Regions: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   ReportPlanTags: { // stringMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   IdempotencyToken: "STRING_VALUE",
+ * };
  * const command = new CreateReportPlanCommand(input);
  * const response = await client.send(command);
+ * // { // CreateReportPlanOutput
+ * //   ReportPlanName: "STRING_VALUE",
+ * //   ReportPlanArn: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param CreateReportPlanCommandInput - {@link CreateReportPlanCommandInput}
+ * @returns {@link CreateReportPlanCommandOutput}
  * @see {@link CreateReportPlanCommandInput} for command's `input` shape.
  * @see {@link CreateReportPlanCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>The required resource already exists.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit in the request has been exceeded; for example, a maximum number of items allowed
+ *          in a request.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Indicates that a required parameter is missing.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class CreateReportPlanCommand extends $Command<
-  CreateReportPlanCommandInput,
-  CreateReportPlanCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateReportPlanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateReportPlanCommandInput, CreateReportPlanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "CreateReportPlanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateReportPlanInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateReportPlanOutput.filterSensitiveLog,
+export class CreateReportPlanCommand extends command<CreateReportPlanCommandInput, CreateReportPlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateReportPlan",
+  CreateReportPlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateReportPlanInput;
+      output: CreateReportPlanOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateReportPlanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateReportPlanCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateReportPlanCommandOutput> {
-    return deserializeAws_restJson1CreateReportPlanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateReportPlanCommandInput;
+      output: CreateReportPlanCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { ListProfileObjectTypesRequest, ListProfileObjectTypesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListProfileObjectTypesCommand,
-  serializeAws_restJson1ListProfileObjectTypesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProfileObjectTypesRequest, ListProfileObjectTypesResponse } from "../models/models_0";
+import { ListProfileObjectTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProfileObjectTypesCommand}.
+ */
 export interface ListProfileObjectTypesCommandInput extends ListProfileObjectTypesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListProfileObjectTypesCommand}.
+ */
 export interface ListProfileObjectTypesCommandOutput extends ListProfileObjectTypesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface ListProfileObjectTypesCommandOutput extends ListProfileObjectTy
  * ```javascript
  * import { CustomerProfilesClient, ListProfileObjectTypesCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, ListProfileObjectTypesCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // ListProfileObjectTypesRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListProfileObjectTypesCommand(input);
  * const response = await client.send(command);
+ * // { // ListProfileObjectTypesResponse
+ * //   Items: [ // ProfileObjectTypeList
+ * //     { // ListProfileObjectTypeItem
+ * //       ObjectTypeName: "STRING_VALUE", // required
+ * //       Description: "STRING_VALUE", // required
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       LastUpdatedAt: new Date("TIMESTAMP"),
+ * //       MaxProfileObjectCount: Number("int"),
+ * //       MaxAvailableProfileObjectCount: Number("int"),
+ * //       SourcePriority: Number("int"),
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProfileObjectTypesCommandInput - {@link ListProfileObjectTypesCommandInput}
+ * @returns {@link ListProfileObjectTypesCommandOutput}
  * @see {@link ListProfileObjectTypesCommandInput} for command's `input` shape.
  * @see {@link ListProfileObjectTypesCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class ListProfileObjectTypesCommand extends $Command<
-  ListProfileObjectTypesCommandInput,
-  ListProfileObjectTypesCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProfileObjectTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProfileObjectTypesCommandInput, ListProfileObjectTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "ListProfileObjectTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProfileObjectTypesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProfileObjectTypesResponse.filterSensitiveLog,
+export class ListProfileObjectTypesCommand extends command<ListProfileObjectTypesCommandInput, ListProfileObjectTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProfileObjectTypes",
+  ListProfileObjectTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProfileObjectTypesRequest;
+      output: ListProfileObjectTypesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProfileObjectTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListProfileObjectTypesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProfileObjectTypesCommandOutput> {
-    return deserializeAws_restJson1ListProfileObjectTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProfileObjectTypesCommandInput;
+      output: ListProfileObjectTypesCommandOutput;
+    };
+  };
 }

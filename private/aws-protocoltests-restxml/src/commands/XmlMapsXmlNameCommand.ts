@@ -1,78 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { XmlMapsXmlNameInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restXmlXmlMapsXmlNameCommand,
-  serializeAws_restXmlXmlMapsXmlNameCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { XmlMapsXmlNameRequest, XmlMapsXmlNameResponse } from "../models/models_0";
+import { de_XmlMapsXmlNameCommand, se_XmlMapsXmlNameCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
-export interface XmlMapsXmlNameCommandInput extends XmlMapsXmlNameInputOutput {}
-export interface XmlMapsXmlNameCommandOutput extends XmlMapsXmlNameInputOutput, __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link XmlMapsXmlNameCommand}.
+ */
+export interface XmlMapsXmlNameCommandInput extends XmlMapsXmlNameRequest {}
+/**
+ * @public
+ *
+ * The output of {@link XmlMapsXmlNameCommand}.
+ */
+export interface XmlMapsXmlNameCommandOutput extends XmlMapsXmlNameResponse, __MetadataBearer {}
 
-export class XmlMapsXmlNameCommand extends $Command<
-  XmlMapsXmlNameCommandInput,
-  XmlMapsXmlNameCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: XmlMapsXmlNameCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<XmlMapsXmlNameCommandInput, XmlMapsXmlNameCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "XmlMapsXmlNameCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: XmlMapsXmlNameInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: XmlMapsXmlNameInputOutput.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestXmlProtocolClient, XmlMapsXmlNameCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
+ * // const { RestXmlProtocolClient, XmlMapsXmlNameCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
+ * const client = new RestXmlProtocolClient(config);
+ * const input = { // XmlMapsXmlNameRequest
+ *   myMap: { // XmlMapsXmlNameInputOutputMap
+ *     "<keys>": { // GreetingStruct
+ *       hi: "STRING_VALUE",
+ *     },
+ *   },
+ * };
+ * const command = new XmlMapsXmlNameCommand(input);
+ * const response = await client.send(command);
+ * // { // XmlMapsXmlNameResponse
+ * //   myMap: { // XmlMapsXmlNameInputOutputMap
+ * //     "<keys>": { // GreetingStruct
+ * //       hi: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param XmlMapsXmlNameCommandInput - {@link XmlMapsXmlNameCommandInput}
+ * @returns {@link XmlMapsXmlNameCommandOutput}
+ * @see {@link XmlMapsXmlNameCommandInput} for command's `input` shape.
+ * @see {@link XmlMapsXmlNameCommandOutput} for command's `response` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
+ *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ */
+export class XmlMapsXmlNameCommand extends $Command
+  .classBuilder<
+    XmlMapsXmlNameCommandInput,
+    XmlMapsXmlNameCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "XmlMapsXmlName", {})
+  .n("RestXmlProtocolClient", "XmlMapsXmlNameCommand")
+  .f(void 0, void 0)
+  .ser(se_XmlMapsXmlNameCommand)
+  .de(de_XmlMapsXmlNameCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: XmlMapsXmlNameRequest;
+      output: XmlMapsXmlNameResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: XmlMapsXmlNameCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlXmlMapsXmlNameCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<XmlMapsXmlNameCommandOutput> {
-    return deserializeAws_restXmlXmlMapsXmlNameCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: XmlMapsXmlNameCommandInput;
+      output: XmlMapsXmlNameCommandOutput;
+    };
+  };
 }

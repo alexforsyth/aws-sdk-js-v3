@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeTransitGatewayConnectPeersRequest,
   DescribeTransitGatewayConnectPeersResult,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeTransitGatewayConnectPeersCommand,
-  serializeAws_ec2DescribeTransitGatewayConnectPeersCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_5";
+import { DescribeTransitGatewayConnectPeers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTransitGatewayConnectPeersCommand}.
+ */
 export interface DescribeTransitGatewayConnectPeersCommandInput extends DescribeTransitGatewayConnectPeersRequest {}
-export interface DescribeTransitGatewayConnectPeersCommandOutput
-  extends DescribeTransitGatewayConnectPeersResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTransitGatewayConnectPeersCommand}.
+ */
+export interface DescribeTransitGatewayConnectPeersCommandOutput extends DescribeTransitGatewayConnectPeersResult, __MetadataBearer {}
 
 /**
  * <p>Describes one or more Connect peers.</p>
@@ -33,74 +32,91 @@ export interface DescribeTransitGatewayConnectPeersCommandOutput
  * ```javascript
  * import { EC2Client, DescribeTransitGatewayConnectPeersCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeTransitGatewayConnectPeersCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeTransitGatewayConnectPeersRequest
+ *   TransitGatewayConnectPeerIds: [ // TransitGatewayConnectPeerIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeTransitGatewayConnectPeersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTransitGatewayConnectPeersResult
+ * //   TransitGatewayConnectPeers: [ // TransitGatewayConnectPeerList
+ * //     { // TransitGatewayConnectPeer
+ * //       TransitGatewayAttachmentId: "STRING_VALUE",
+ * //       TransitGatewayConnectPeerId: "STRING_VALUE",
+ * //       State: "pending" || "available" || "deleting" || "deleted",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       ConnectPeerConfiguration: { // TransitGatewayConnectPeerConfiguration
+ * //         TransitGatewayAddress: "STRING_VALUE",
+ * //         PeerAddress: "STRING_VALUE",
+ * //         InsideCidrBlocks: [ // InsideCidrBlocksStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Protocol: "gre",
+ * //         BgpConfigurations: [ // TransitGatewayAttachmentBgpConfigurationList
+ * //           { // TransitGatewayAttachmentBgpConfiguration
+ * //             TransitGatewayAsn: Number("long"),
+ * //             PeerAsn: Number("long"),
+ * //             TransitGatewayAddress: "STRING_VALUE",
+ * //             PeerAddress: "STRING_VALUE",
+ * //             BgpStatus: "up" || "down",
+ * //           },
+ * //         ],
+ * //       },
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTransitGatewayConnectPeersCommandInput - {@link DescribeTransitGatewayConnectPeersCommandInput}
+ * @returns {@link DescribeTransitGatewayConnectPeersCommandOutput}
  * @see {@link DescribeTransitGatewayConnectPeersCommandInput} for command's `input` shape.
  * @see {@link DescribeTransitGatewayConnectPeersCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTransitGatewayConnectPeersCommand extends $Command<
-  DescribeTransitGatewayConnectPeersCommandInput,
-  DescribeTransitGatewayConnectPeersCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTransitGatewayConnectPeersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTransitGatewayConnectPeersCommandInput, DescribeTransitGatewayConnectPeersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeTransitGatewayConnectPeersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTransitGatewayConnectPeersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTransitGatewayConnectPeersResult.filterSensitiveLog,
+export class DescribeTransitGatewayConnectPeersCommand extends command<DescribeTransitGatewayConnectPeersCommandInput, DescribeTransitGatewayConnectPeersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTransitGatewayConnectPeers",
+  DescribeTransitGatewayConnectPeers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTransitGatewayConnectPeersRequest;
+      output: DescribeTransitGatewayConnectPeersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeTransitGatewayConnectPeersCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeTransitGatewayConnectPeersCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeTransitGatewayConnectPeersCommandOutput> {
-    return deserializeAws_ec2DescribeTransitGatewayConnectPeersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTransitGatewayConnectPeersCommandInput;
+      output: DescribeTransitGatewayConnectPeersCommandOutput;
+    };
+  };
 }

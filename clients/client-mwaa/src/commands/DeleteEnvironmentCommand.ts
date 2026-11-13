@@ -1,95 +1,85 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteEnvironmentInput, DeleteEnvironmentOutput } from "../models/models_0";
-import { MWAAClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MWAAClient";
-import {
-  deserializeAws_restJson1DeleteEnvironmentCommand,
-  serializeAws_restJson1DeleteEnvironmentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteEnvironmentInput, DeleteEnvironmentOutput } from "../models/models_0";
+import { DeleteEnvironment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteEnvironmentCommand}.
+ */
 export interface DeleteEnvironmentCommandInput extends DeleteEnvironmentInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteEnvironmentCommand}.
+ */
 export interface DeleteEnvironmentCommandOutput extends DeleteEnvironmentOutput, __MetadataBearer {}
 
 /**
- * <p>Deletes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>
+ * <p>Deletes an Amazon Managed Workflows for Apache Airflow (Amazon MWAA) environment.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MWAAClient, DeleteEnvironmentCommand } from "@aws-sdk/client-mwaa"; // ES Modules import
  * // const { MWAAClient, DeleteEnvironmentCommand } = require("@aws-sdk/client-mwaa"); // CommonJS import
+ * // import type { MWAAClientConfig } from "@aws-sdk/client-mwaa";
+ * const config = {}; // type is MWAAClientConfig
  * const client = new MWAAClient(config);
+ * const input = { // DeleteEnvironmentInput
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteEnvironmentCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteEnvironmentCommandInput - {@link DeleteEnvironmentCommandInput}
+ * @returns {@link DeleteEnvironmentCommandOutput}
  * @see {@link DeleteEnvironmentCommandInput} for command's `input` shape.
  * @see {@link DeleteEnvironmentCommandOutput} for command's `response` shape.
- * @see {@link MWAAClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MWAAClientResolvedConfig | config} for MWAAClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>InternalServerException: An internal error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>ResourceNotFoundException: The resource is not available.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>ServiceUnavailableException: The service is currently unavailable.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>ValidationException: The provided input is not valid.</p>
+ *
+ * @throws {@link MWAAServiceException}
+ * <p>Base exception class for all service exceptions from MWAA service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteEnvironmentCommand extends $Command<
-  DeleteEnvironmentCommandInput,
-  DeleteEnvironmentCommandOutput,
-  MWAAClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteEnvironmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MWAAClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteEnvironmentCommandInput, DeleteEnvironmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MWAAClient";
-    const commandName = "DeleteEnvironmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteEnvironmentInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteEnvironmentOutput.filterSensitiveLog,
+export class DeleteEnvironmentCommand extends command<DeleteEnvironmentCommandInput, DeleteEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteEnvironment",
+  DeleteEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteEnvironmentInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteEnvironmentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteEnvironmentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteEnvironmentCommandOutput> {
-    return deserializeAws_restJson1DeleteEnvironmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteEnvironmentCommandInput;
+      output: DeleteEnvironmentCommandOutput;
+    };
+  };
 }

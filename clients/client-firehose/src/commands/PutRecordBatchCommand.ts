@@ -1,40 +1,47 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FirehoseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FirehoseClient";
-import { PutRecordBatchInput, PutRecordBatchOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutRecordBatchCommand,
-  serializeAws_json1_1PutRecordBatchCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutRecordBatchInput, PutRecordBatchOutput } from "../models/models_0";
+import { PutRecordBatch$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutRecordBatchCommand}.
+ */
 export interface PutRecordBatchCommandInput extends PutRecordBatchInput {}
+/**
+ * @public
+ *
+ * The output of {@link PutRecordBatchCommand}.
+ */
 export interface PutRecordBatchCommandOutput extends PutRecordBatchOutput, __MetadataBearer {}
 
 /**
- * <p>Writes multiple data records into a delivery stream in a single call, which can
+ * <p>Writes multiple data records into a Firehose stream in a single call, which can
  *          achieve higher throughput per producer than when writing single records. To write single
- *          data records into a delivery stream, use <a>PutRecord</a>. Applications using
+ *          data records into a Firehose stream, use <a>PutRecord</a>. Applications using
  *          these operations are referred to as producers.</p>
- *          <p>For information about service quota, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose
+ *          <p>Firehose accumulates and publishes a particular metric for a customer account in one minute intervals. It is possible that the bursts of incoming bytes/records ingested to a Firehose stream last only for a few seconds. Due to this, the actual spikes in the traffic might not be fully visible in the customer's 1 minute CloudWatch metrics.</p>
+ *          <p>For information about service quota, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Firehose
  *          Quota</a>.</p>
  *          <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record
  *          in the request can be as large as 1,000 KB (before base64 encoding), up to a limit of 4 MB
  *          for the entire request. These limits cannot be changed.</p>
- *          <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000
+ *          <p>You must specify the name of the Firehose stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000
  *          KB in size, and any kind of data. For example, it could be a segment from a log file,
  *          geographic location data, website clickstream data, and so on.</p>
- *          <p>Kinesis Data Firehose buffers records before delivering them to the destination. To
+ *          <p>For multi record de-aggregation, you can not put more than 500 records even if the
+ *          data blob length is less than 1000 KiB. If you include more than 500 records, the request
+ *          succeeds but the record de-aggregation doesn't work as expected and transformation lambda
+ *          is invoked with the complete base64 encoded data blob instead of de-aggregated base64
+ *          decoded records.</p>
+ *          <p>Firehose buffers records before delivering them to the destination. To
  *          disambiguate the data blobs at the destination, a common solution is to use delimiters in
  *          the data, such as a newline (<code>\n</code>) or some other character unique within the
  *          data. This allows the consumer application to parse individual data items when reading the
@@ -48,7 +55,7 @@ export interface PutRecordBatchCommandOutput extends PutRecordBatchOutput, __Met
  *          record in the request array using the same ordering, from the top to the bottom. The
  *          response array always includes the same number of records as the request array.
  *             <code>RequestResponses</code> includes both successfully and unsuccessfully processed
- *          records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing
+ *          records. Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing
  *          of subsequent records. </p>
  *          <p>A successfully processed record includes a <code>RecordId</code> value, which is
  *          unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code>
@@ -62,11 +69,13 @@ export interface PutRecordBatchCommandOutput extends PutRecordBatchOutput, __Met
  *          duplicate records and also reduces the total bytes sent (and corresponding charges). We
  *          recommend that you handle any duplicates at the destination.</p>
  *          <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>,
- *          back off and retry. If the exception persists, it is possible that the throughput limits
- *          have been exceeded for the delivery stream.</p>
- *
- *          <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they
- *          are added to a delivery stream as it attempts to send the records to the destination. If
+ *          the API is automatically reinvoked (retried) 3 times. If the exception persists, it is
+ *          possible that the throughput limits have been exceeded for the Firehose stream.</p>
+ *          <p>Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch) can
+ *          result in data duplicates. For larger data assets, allow for a longer time out before
+ *          retrying Put API operations.</p>
+ *          <p>Data records sent to Firehose are stored for 24 hours from the time they
+ *          are added to a Firehose stream as it attempts to send the records to the destination. If
  *          the destination is unreachable for more than 24 hours, the data is no longer
  *          available.</p>
  *          <important>
@@ -78,68 +87,82 @@ export interface PutRecordBatchCommandOutput extends PutRecordBatchOutput, __Met
  * ```javascript
  * import { FirehoseClient, PutRecordBatchCommand } from "@aws-sdk/client-firehose"; // ES Modules import
  * // const { FirehoseClient, PutRecordBatchCommand } = require("@aws-sdk/client-firehose"); // CommonJS import
+ * // import type { FirehoseClientConfig } from "@aws-sdk/client-firehose";
+ * const config = {}; // type is FirehoseClientConfig
  * const client = new FirehoseClient(config);
+ * const input = { // PutRecordBatchInput
+ *   DeliveryStreamName: "STRING_VALUE", // required
+ *   Records: [ // PutRecordBatchRequestEntryList // required
+ *     { // Record
+ *       Data: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")       // required
+ *     },
+ *   ],
+ * };
  * const command = new PutRecordBatchCommand(input);
  * const response = await client.send(command);
+ * // { // PutRecordBatchOutput
+ * //   FailedPutCount: Number("int"), // required
+ * //   Encrypted: true || false,
+ * //   RequestResponses: [ // PutRecordBatchResponseEntryList // required
+ * //     { // PutRecordBatchResponseEntry
+ * //       RecordId: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PutRecordBatchCommandInput - {@link PutRecordBatchCommandInput}
+ * @returns {@link PutRecordBatchCommandOutput}
  * @see {@link PutRecordBatchCommandInput} for command's `input` shape.
  * @see {@link PutRecordBatchCommandOutput} for command's `response` shape.
- * @see {@link FirehoseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FirehoseClientResolvedConfig | config} for FirehoseClient's `config` shape.
  *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The specified input parameter has a value that is not valid.</p>
+ *
+ * @throws {@link InvalidKMSResourceException} (client fault)
+ *  <p>Firehose throws this exception when an attempt to put records or to start
+ *          or stop Firehose stream encryption fails. This happens when the KMS service throws one of
+ *          the following exception types: <code>AccessDeniedException</code>,
+ *             <code>InvalidStateException</code>, <code>DisabledException</code>, or
+ *             <code>NotFoundException</code>.</p>
+ *
+ * @throws {@link InvalidSourceException} (client fault)
+ *  <p>Only requests from CloudWatch Logs are supported when CloudWatch Logs decompression is enabled.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is unavailable. Back off and retry the operation. If you continue to see
+ *          the exception, throughput limits for the Firehose stream may have been exceeded. For more
+ *          information about limits and how to request an increase, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Firehose
+ *          Limits</a>.</p>
+ *
+ * @throws {@link FirehoseServiceException}
+ * <p>Base exception class for all service exceptions from Firehose service.</p>
+ *
+ *
+ * @public
  */
-export class PutRecordBatchCommand extends $Command<
-  PutRecordBatchCommandInput,
-  PutRecordBatchCommandOutput,
-  FirehoseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutRecordBatchCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FirehoseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutRecordBatchCommandInput, PutRecordBatchCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FirehoseClient";
-    const commandName = "PutRecordBatchCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutRecordBatchInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PutRecordBatchOutput.filterSensitiveLog,
+export class PutRecordBatchCommand extends command<PutRecordBatchCommandInput, PutRecordBatchCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutRecordBatch",
+  PutRecordBatch$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutRecordBatchInput;
+      output: PutRecordBatchOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutRecordBatchCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutRecordBatchCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutRecordBatchCommandOutput> {
-    return deserializeAws_json1_1PutRecordBatchCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutRecordBatchCommandInput;
+      output: PutRecordBatchCommandOutput;
+    };
+  };
 }

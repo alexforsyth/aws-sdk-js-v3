@@ -1,97 +1,121 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeclineInvitationsRequest, DeclineInvitationsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeclineInvitationsCommand,
-  serializeAws_restJson1DeclineInvitationsCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeclineInvitationsRequest, DeclineInvitationsResponse } from "../models/models_2";
+import { DeclineInvitations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeclineInvitationsCommand}.
+ */
 export interface DeclineInvitationsCommandInput extends DeclineInvitationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeclineInvitationsCommand}.
+ */
 export interface DeclineInvitationsCommandOutput extends DeclineInvitationsResponse, __MetadataBearer {}
 
 /**
- * <p>Declines invitations to become a member account.</p>
- *          <p>This operation is only used by accounts that are not part of an organization.
- *          Organization accounts do not receive invitations.</p>
+ * <note>
+ *             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+ *            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+ *            in the <i>Security Hub CSPM User Guide</i>.</p>
+ *          </note>
+ *          <p>Declines invitations to become a Security Hub CSPM member account.</p>
+ *          <p>A prospective member account uses this operation to decline an invitation to become a member.</p>
+ *          <p>Only member accounts that aren't part of an Amazon Web Services organization should use this operation.
+ *          Organization accounts don't receive invitations.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, DeclineInvitationsCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, DeclineInvitationsCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // DeclineInvitationsRequest
+ *   AccountIds: [ // AccountIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DeclineInvitationsCommand(input);
  * const response = await client.send(command);
+ * // { // DeclineInvitationsResponse
+ * //   UnprocessedAccounts: [ // ResultList
+ * //     { // Result
+ * //       AccountId: "STRING_VALUE",
+ * //       ProcessingResult: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeclineInvitationsCommandInput - {@link DeclineInvitationsCommandInput}
+ * @returns {@link DeclineInvitationsCommandOutput}
  * @see {@link DeclineInvitationsCommandInput} for command's `input` shape.
  * @see {@link DeclineInvitationsCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To decline invitation to become a member account
+ * ```javascript
+ * // The following example declines an invitation from the Security Hub administrator account to become a member account. The invited account makes the request.
+ * const input = {
+ *   AccountIds: [
+ *     "123456789012",
+ *     "111122223333"
+ *   ]
+ * };
+ * const command = new DeclineInvitationsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   UnprocessedAccounts:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeclineInvitationsCommand extends $Command<
-  DeclineInvitationsCommandInput,
-  DeclineInvitationsCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeclineInvitationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeclineInvitationsCommandInput, DeclineInvitationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "DeclineInvitationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeclineInvitationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeclineInvitationsResponse.filterSensitiveLog,
+export class DeclineInvitationsCommand extends command<DeclineInvitationsCommandInput, DeclineInvitationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeclineInvitations",
+  DeclineInvitations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeclineInvitationsRequest;
+      output: DeclineInvitationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeclineInvitationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeclineInvitationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeclineInvitationsCommandOutput> {
-    return deserializeAws_restJson1DeclineInvitationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeclineInvitationsCommandInput;
+      output: DeclineInvitationsCommandOutput;
+    };
+  };
 }

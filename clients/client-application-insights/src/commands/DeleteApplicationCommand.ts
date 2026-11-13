@@ -1,99 +1,86 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationInsightsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationInsightsClient";
-import { DeleteApplicationRequest, DeleteApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteApplicationCommand,
-  serializeAws_json1_1DeleteApplicationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteApplicationRequest, DeleteApplicationResponse } from "../models/models_0";
+import { DeleteApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteApplicationCommand}.
+ */
 export interface DeleteApplicationCommandInput extends DeleteApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteApplicationCommand}.
+ */
 export interface DeleteApplicationCommandOutput extends DeleteApplicationResponse, __MetadataBearer {}
 
 /**
- * <p>Removes the specified application from monitoring. Does not delete the application.</p>
+ * <p>Removes the specified application from monitoring. Does not delete the
+ *          application.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ApplicationInsightsClient, DeleteApplicationCommand } from "@aws-sdk/client-application-insights"; // ES Modules import
  * // const { ApplicationInsightsClient, DeleteApplicationCommand } = require("@aws-sdk/client-application-insights"); // CommonJS import
+ * // import type { ApplicationInsightsClientConfig } from "@aws-sdk/client-application-insights";
+ * const config = {}; // type is ApplicationInsightsClientConfig
  * const client = new ApplicationInsightsClient(config);
+ * const input = { // DeleteApplicationRequest
+ *   ResourceGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteApplicationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteApplicationCommandInput - {@link DeleteApplicationCommandInput}
+ * @returns {@link DeleteApplicationCommandOutput}
  * @see {@link DeleteApplicationCommandInput} for command's `input` shape.
  * @see {@link DeleteApplicationCommandOutput} for command's `response` shape.
- * @see {@link ApplicationInsightsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationInsightsClientResolvedConfig | config} for ApplicationInsightsClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not understood by the server.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource does not exist in the customer account.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The parameter is not valid.</p>
+ *
+ * @throws {@link ApplicationInsightsServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationInsights service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteApplicationCommand extends $Command<
-  DeleteApplicationCommandInput,
-  DeleteApplicationCommandOutput,
-  ApplicationInsightsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationInsightsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteApplicationCommandInput, DeleteApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationInsightsClient";
-    const commandName = "DeleteApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteApplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteApplicationResponse.filterSensitiveLog,
+export class DeleteApplicationCommand extends command<DeleteApplicationCommandInput, DeleteApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteApplication",
+  DeleteApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteApplicationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteApplicationCommandOutput> {
-    return deserializeAws_json1_1DeleteApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteApplicationCommandInput;
+      output: DeleteApplicationCommandOutput;
+    };
+  };
 }

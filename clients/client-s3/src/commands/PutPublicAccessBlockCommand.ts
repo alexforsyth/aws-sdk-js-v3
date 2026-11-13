@@ -1,51 +1,46 @@
-import { getApplyMd5BodyChecksumPlugin } from "@aws-sdk/middleware-apply-body-checksum";
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutPublicAccessBlockRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlPutPublicAccessBlockCommand,
-  serializeAws_restXmlPutPublicAccessBlockCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw3, command } from "../commandBuilder";
+import type { PutPublicAccessBlockRequest } from "../models/models_1";
+import { PutPublicAccessBlock$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutPublicAccessBlockCommand}.
+ */
 export interface PutPublicAccessBlockCommandInput extends PutPublicAccessBlockRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutPublicAccessBlockCommand}.
+ */
 export interface PutPublicAccessBlockCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket.
- *          To use this operation, you must have the <code>s3:PutBucketPublicAccessBlock</code>
- *          permission. For more information about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying Permissions in a
- *          Policy</a>.</p>
- *
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket. To use this
+ *       operation, you must have the <code>s3:PutBucketPublicAccessBlock</code> permission. For more information
+ *       about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying Permissions in a
+ *       Policy</a>.</p>
  *          <important>
- *             <p>When Amazon S3 evaluates the <code>PublicAccessBlock</code> configuration for a bucket or
- *             an object, it checks the <code>PublicAccessBlock</code> configuration for both the
- *             bucket (or the bucket that contains the object) and the bucket owner's account. If the
- *                <code>PublicAccessBlock</code> configurations are different between the bucket and
- *             the account, Amazon S3 uses the most restrictive combination of the bucket-level and
- *             account-level settings.</p>
+ *             <p>When Amazon S3 evaluates the <code>PublicAccessBlock</code> configuration for a bucket or an
+ *         object, it checks the <code>PublicAccessBlock</code> configuration for both the bucket (or
+ *         the bucket that contains the object) and the bucket owner's account. Account-level settings
+ *         automatically inherit from organization-level policies when present. If the
+ *           <code>PublicAccessBlock</code> configurations are different between the bucket and the
+ *         account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level
+ *         settings.</p>
  *          </important>
- *
- *
  *          <p>For more information about when Amazon S3 considers a bucket or an object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a>.</p>
- *
- *
- *
- *          <p class="title">
- *             <b>Related Resources</b>
- *          </p>
+ *          <p>The following operations are related to <code>PutPublicAccessBlock</code>:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -64,80 +59,66 @@ export interface PutPublicAccessBlockCommandOutput extends __MetadataBearer {}
  *             </li>
  *             <li>
  *                <p>
- *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using Amazon S3 Block
- *                   Public Access</a>
+ *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using Amazon S3 Block Public Access</a>
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, PutPublicAccessBlockCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, PutPublicAccessBlockCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // PutPublicAccessBlockRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ContentMD5: "STRING_VALUE",
+ *   ChecksumAlgorithm: "CRC32" || "CRC32C" || "SHA1" || "SHA256" || "CRC64NVME" || "SHA512" || "MD5" || "XXHASH64" || "XXHASH3" || "XXHASH128",
+ *   PublicAccessBlockConfiguration: { // PublicAccessBlockConfiguration
+ *     BlockPublicAcls: true || false,
+ *     IgnorePublicAcls: true || false,
+ *     BlockPublicPolicy: true || false,
+ *     RestrictPublicBuckets: true || false,
+ *   },
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new PutPublicAccessBlockCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutPublicAccessBlockCommandInput - {@link PutPublicAccessBlockCommandInput}
+ * @returns {@link PutPublicAccessBlockCommandOutput}
  * @see {@link PutPublicAccessBlockCommandInput} for command's `input` shape.
  * @see {@link PutPublicAccessBlockCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @public
  */
-export class PutPublicAccessBlockCommand extends $Command<
-  PutPublicAccessBlockCommandInput,
-  PutPublicAccessBlockCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutPublicAccessBlockCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutPublicAccessBlockCommandInput, PutPublicAccessBlockCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-    this.middlewareStack.use(getApplyMd5BodyChecksumPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "PutPublicAccessBlockCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutPublicAccessBlockRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutPublicAccessBlockCommand extends command<PutPublicAccessBlockCommandInput, PutPublicAccessBlockCommandOutput>(
+  _ep3,
+  _mw3,
+  "PutPublicAccessBlock",
+  PutPublicAccessBlock$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutPublicAccessBlockRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutPublicAccessBlockCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlPutPublicAccessBlockCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutPublicAccessBlockCommandOutput> {
-    return deserializeAws_restXmlPutPublicAccessBlockCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutPublicAccessBlockCommandInput;
+      output: PutPublicAccessBlockCommandOutput;
+    };
+  };
 }

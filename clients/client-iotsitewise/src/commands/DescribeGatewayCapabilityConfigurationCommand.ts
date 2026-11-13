@@ -1,111 +1,115 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeGatewayCapabilityConfigurationRequest,
   DescribeGatewayCapabilityConfigurationResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeGatewayCapabilityConfigurationCommand,
-  serializeAws_restJson1DescribeGatewayCapabilityConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface DescribeGatewayCapabilityConfigurationCommandInput
-  extends DescribeGatewayCapabilityConfigurationRequest {}
-export interface DescribeGatewayCapabilityConfigurationCommandOutput
-  extends DescribeGatewayCapabilityConfigurationResponse,
-    __MetadataBearer {}
+import { DescribeGatewayCapabilityConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Retrieves information about a gateway capability configuration.
- *       Each gateway capability defines data sources for a gateway. A capability configuration
- *       can contain multiple data source configurations. If you define OPC-UA sources for a gateway in
- *       the IoT SiteWise console, all of your OPC-UA sources are stored in one capability configuration. To
- *       list all capability configurations for a gateway, use <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html">DescribeGateway</a>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGatewayCapabilityConfigurationCommand}.
+ */
+export interface DescribeGatewayCapabilityConfigurationCommandInput extends DescribeGatewayCapabilityConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGatewayCapabilityConfigurationCommand}.
+ */
+export interface DescribeGatewayCapabilityConfigurationCommandOutput extends DescribeGatewayCapabilityConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Each gateway capability defines data sources for a gateway. This is the namespace of the gateway capability.</p>
+ *          <p>. The namespace follows the format <code>service:capability:version</code>, where:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <code>service</code> - The service providing the capability, or <code>iotsitewise</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>capability</code> - The specific capability type. Options include: <code>opcuacollector</code> for the OPC UA data source collector, or <code>publisher</code> for data publisher capability.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>version</code> - The version number of the capability. Option include <code>2</code> for Classic streams, V2 gateways, and <code>3</code> for MQTT-enabled, V3 gateways.</p>
+ *             </li>
+ *          </ul>
+ *          <p>After updating a capability configuration, the sync status becomes <code>OUT_OF_SYNC</code> until the gateway processes the configuration.Use <code>DescribeGatewayCapabilityConfiguration</code> to check the sync status and verify the configuration was applied.</p>
+ *          <p>A gateway can have multiple capability configurations with different namespaces.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTSiteWiseClient, DescribeGatewayCapabilityConfigurationCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, DescribeGatewayCapabilityConfigurationCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // DescribeGatewayCapabilityConfigurationRequest
+ *   gatewayId: "STRING_VALUE", // required
+ *   capabilityNamespace: "STRING_VALUE", // required
+ * };
  * const command = new DescribeGatewayCapabilityConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeGatewayCapabilityConfigurationResponse
+ * //   gatewayId: "STRING_VALUE", // required
+ * //   capabilityNamespace: "STRING_VALUE", // required
+ * //   capabilityConfiguration: "STRING_VALUE", // required
+ * //   capabilitySyncStatus: "IN_SYNC" || "OUT_OF_SYNC" || "SYNC_FAILED" || "UNKNOWN" || "NOT_APPLICABLE", // required
+ * // };
+ *
  * ```
  *
+ * @param DescribeGatewayCapabilityConfigurationCommandInput - {@link DescribeGatewayCapabilityConfigurationCommandInput}
+ * @returns {@link DescribeGatewayCapabilityConfigurationCommandOutput}
  * @see {@link DescribeGatewayCapabilityConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeGatewayCapabilityConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeGatewayCapabilityConfigurationCommand extends $Command<
-  DescribeGatewayCapabilityConfigurationCommandInput,
-  DescribeGatewayCapabilityConfigurationCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGatewayCapabilityConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGatewayCapabilityConfigurationCommandInput, DescribeGatewayCapabilityConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "DescribeGatewayCapabilityConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGatewayCapabilityConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeGatewayCapabilityConfigurationResponse.filterSensitiveLog,
+export class DescribeGatewayCapabilityConfigurationCommand extends command<DescribeGatewayCapabilityConfigurationCommandInput, DescribeGatewayCapabilityConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGatewayCapabilityConfiguration",
+  DescribeGatewayCapabilityConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGatewayCapabilityConfigurationRequest;
+      output: DescribeGatewayCapabilityConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeGatewayCapabilityConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeGatewayCapabilityConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeGatewayCapabilityConfigurationCommandOutput> {
-    return deserializeAws_restJson1DescribeGatewayCapabilityConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGatewayCapabilityConfigurationCommandInput;
+      output: DescribeGatewayCapabilityConfigurationCommandOutput;
+    };
+  };
 }

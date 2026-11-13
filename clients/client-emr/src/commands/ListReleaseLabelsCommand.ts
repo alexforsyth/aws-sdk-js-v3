@@ -1,95 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRClient";
-import { ListReleaseLabelsInput, ListReleaseLabelsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListReleaseLabelsCommand,
-  serializeAws_json1_1ListReleaseLabelsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListReleaseLabelsInput, ListReleaseLabelsOutput } from "../models/models_0";
+import { ListReleaseLabels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListReleaseLabelsCommand}.
+ */
 export interface ListReleaseLabelsCommandInput extends ListReleaseLabelsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListReleaseLabelsCommand}.
+ */
 export interface ListReleaseLabelsCommandOutput extends ListReleaseLabelsOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves release labels of EMR services in the region where the API is called.</p>
+ * <p>Retrieves release labels of Amazon EMR services in the Region where the API is
+ *          called.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EMRClient, ListReleaseLabelsCommand } from "@aws-sdk/client-emr"; // ES Modules import
  * // const { EMRClient, ListReleaseLabelsCommand } = require("@aws-sdk/client-emr"); // CommonJS import
+ * // import type { EMRClientConfig } from "@aws-sdk/client-emr";
+ * const config = {}; // type is EMRClientConfig
  * const client = new EMRClient(config);
+ * const input = { // ListReleaseLabelsInput
+ *   Filters: { // ReleaseLabelFilter
+ *     Prefix: "STRING_VALUE",
+ *     Application: "STRING_VALUE",
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListReleaseLabelsCommand(input);
  * const response = await client.send(command);
+ * // { // ListReleaseLabelsOutput
+ * //   ReleaseLabels: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListReleaseLabelsCommandInput - {@link ListReleaseLabelsCommandInput}
+ * @returns {@link ListReleaseLabelsCommandOutput}
  * @see {@link ListReleaseLabelsCommandInput} for command's `input` shape.
  * @see {@link ListReleaseLabelsCommandOutput} for command's `response` shape.
- * @see {@link EMRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRClientResolvedConfig | config} for EMRClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Amazon EMR
+ *          service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception occurs when there is something wrong with user input.</p>
+ *
+ * @throws {@link EMRServiceException}
+ * <p>Base exception class for all service exceptions from EMR service.</p>
+ *
+ *
+ * @public
  */
-export class ListReleaseLabelsCommand extends $Command<
-  ListReleaseLabelsCommandInput,
-  ListReleaseLabelsCommandOutput,
-  EMRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListReleaseLabelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListReleaseLabelsCommandInput, ListReleaseLabelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRClient";
-    const commandName = "ListReleaseLabelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListReleaseLabelsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListReleaseLabelsOutput.filterSensitiveLog,
+export class ListReleaseLabelsCommand extends command<ListReleaseLabelsCommandInput, ListReleaseLabelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListReleaseLabels",
+  ListReleaseLabels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListReleaseLabelsInput;
+      output: ListReleaseLabelsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListReleaseLabelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListReleaseLabelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListReleaseLabelsCommandOutput> {
-    return deserializeAws_json1_1ListReleaseLabelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListReleaseLabelsCommandInput;
+      output: ListReleaseLabelsCommandOutput;
+    };
+  };
 }

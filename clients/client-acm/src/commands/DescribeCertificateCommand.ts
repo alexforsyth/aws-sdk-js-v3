@@ -1,95 +1,185 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMClient";
-import { DescribeCertificateRequest, DescribeCertificateResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeCertificateCommand,
-  serializeAws_json1_1DescribeCertificateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeCertificateRequest, DescribeCertificateResponse } from "../models/models_0";
+import { DescribeCertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeCertificateCommand}.
+ */
 export interface DescribeCertificateCommandInput extends DescribeCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeCertificateCommand}.
+ */
 export interface DescribeCertificateCommandOutput extends DescribeCertificateResponse, __MetadataBearer {}
 
 /**
- * <p>Returns detailed metadata about the specified ACM certificate.</p>
+ * <p>Returns detailed metadata about the specified ACM certificate.</p> <p>If you have just created a certificate using the <code>RequestCertificate</code> action, there is a delay of several seconds before you can retrieve information about it.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMClient, DescribeCertificateCommand } from "@aws-sdk/client-acm"; // ES Modules import
  * // const { ACMClient, DescribeCertificateCommand } = require("@aws-sdk/client-acm"); // CommonJS import
+ * // import type { ACMClientConfig } from "@aws-sdk/client-acm";
+ * const config = {}; // type is ACMClientConfig
  * const client = new ACMClient(config);
+ * const input = { // DescribeCertificateRequest
+ *   CertificateArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeCertificateCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeCertificateResponse
+ * //   Certificate: { // CertificateDetail
+ * //     CertificateArn: "STRING_VALUE",
+ * //     DomainName: "STRING_VALUE",
+ * //     SubjectAlternativeNames: [ // DomainList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ManagedBy: "CLOUDFRONT",
+ * //     DomainValidationOptions: [ // DomainValidationList
+ * //       { // DomainValidation
+ * //         DomainName: "STRING_VALUE", // required
+ * //         ValidationEmails: [ // ValidationEmailList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         ValidationDomain: "STRING_VALUE",
+ * //         ValidationStatus: "PENDING_VALIDATION" || "SUCCESS" || "FAILED",
+ * //         ResourceRecord: { // ResourceRecord
+ * //           Name: "STRING_VALUE", // required
+ * //           Type: "CNAME", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //         HttpRedirect: { // HttpRedirect
+ * //           RedirectFrom: "STRING_VALUE",
+ * //           RedirectTo: "STRING_VALUE",
+ * //         },
+ * //         ValidationMethod: "EMAIL" || "DNS" || "HTTP",
+ * //       },
+ * //     ],
+ * //     Serial: "STRING_VALUE",
+ * //     Subject: "STRING_VALUE",
+ * //     Issuer: "STRING_VALUE",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     IssuedAt: new Date("TIMESTAMP"),
+ * //     ImportedAt: new Date("TIMESTAMP"),
+ * //     Status: "PENDING_VALIDATION" || "ISSUED" || "INACTIVE" || "EXPIRED" || "VALIDATION_TIMED_OUT" || "REVOKED" || "FAILED",
+ * //     RevokedAt: new Date("TIMESTAMP"),
+ * //     RevocationReason: "UNSPECIFIED" || "KEY_COMPROMISE" || "CA_COMPROMISE" || "AFFILIATION_CHANGED" || "SUPERCEDED" || "SUPERSEDED" || "CESSATION_OF_OPERATION" || "CERTIFICATE_HOLD" || "REMOVE_FROM_CRL" || "PRIVILEGE_WITHDRAWN" || "A_A_COMPROMISE",
+ * //     NotBefore: new Date("TIMESTAMP"),
+ * //     NotAfter: new Date("TIMESTAMP"),
+ * //     KeyAlgorithm: "RSA_1024" || "RSA_2048" || "RSA_3072" || "RSA_4096" || "EC_prime256v1" || "EC_secp384r1" || "EC_secp521r1",
+ * //     SignatureAlgorithm: "STRING_VALUE",
+ * //     InUseBy: [ // InUseList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     FailureReason: "NO_AVAILABLE_CONTACTS" || "ADDITIONAL_VERIFICATION_REQUIRED" || "DOMAIN_NOT_ALLOWED" || "INVALID_PUBLIC_DOMAIN" || "DOMAIN_VALIDATION_DENIED" || "CAA_ERROR" || "PCA_LIMIT_EXCEEDED" || "PCA_INVALID_ARN" || "PCA_INVALID_STATE" || "PCA_REQUEST_FAILED" || "PCA_NAME_CONSTRAINTS_VALIDATION" || "PCA_RESOURCE_NOT_FOUND" || "PCA_INVALID_ARGS" || "PCA_INVALID_DURATION" || "PCA_ACCESS_DENIED" || "SLR_NOT_FOUND" || "OTHER",
+ * //     Type: "IMPORTED" || "AMAZON_ISSUED" || "PRIVATE",
+ * //     RenewalSummary: { // RenewalSummary
+ * //       RenewalStatus: "PENDING_AUTO_RENEWAL" || "PENDING_VALIDATION" || "SUCCESS" || "FAILED", // required
+ * //       DomainValidationOptions: [ // required
+ * //         {
+ * //           DomainName: "STRING_VALUE", // required
+ * //           ValidationEmails: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ValidationDomain: "STRING_VALUE",
+ * //           ValidationStatus: "PENDING_VALIDATION" || "SUCCESS" || "FAILED",
+ * //           ResourceRecord: {
+ * //             Name: "STRING_VALUE", // required
+ * //             Type: "CNAME", // required
+ * //             Value: "STRING_VALUE", // required
+ * //           },
+ * //           HttpRedirect: {
+ * //             RedirectFrom: "STRING_VALUE",
+ * //             RedirectTo: "STRING_VALUE",
+ * //           },
+ * //           ValidationMethod: "EMAIL" || "DNS" || "HTTP",
+ * //         },
+ * //       ],
+ * //       RenewalStatusReason: "NO_AVAILABLE_CONTACTS" || "ADDITIONAL_VERIFICATION_REQUIRED" || "DOMAIN_NOT_ALLOWED" || "INVALID_PUBLIC_DOMAIN" || "DOMAIN_VALIDATION_DENIED" || "CAA_ERROR" || "PCA_LIMIT_EXCEEDED" || "PCA_INVALID_ARN" || "PCA_INVALID_STATE" || "PCA_REQUEST_FAILED" || "PCA_NAME_CONSTRAINTS_VALIDATION" || "PCA_RESOURCE_NOT_FOUND" || "PCA_INVALID_ARGS" || "PCA_INVALID_DURATION" || "PCA_ACCESS_DENIED" || "SLR_NOT_FOUND" || "OTHER",
+ * //       UpdatedAt: new Date("TIMESTAMP"), // required
+ * //     },
+ * //     KeyUsages: [ // KeyUsageList
+ * //       { // KeyUsage
+ * //         Name: "DIGITAL_SIGNATURE" || "NON_REPUDIATION" || "KEY_ENCIPHERMENT" || "DATA_ENCIPHERMENT" || "KEY_AGREEMENT" || "CERTIFICATE_SIGNING" || "CRL_SIGNING" || "ENCIPHER_ONLY" || "DECIPHER_ONLY" || "ANY" || "CUSTOM",
+ * //       },
+ * //     ],
+ * //     ExtendedKeyUsages: [ // ExtendedKeyUsageList
+ * //       { // ExtendedKeyUsage
+ * //         Name: "TLS_WEB_SERVER_AUTHENTICATION" || "TLS_WEB_CLIENT_AUTHENTICATION" || "CODE_SIGNING" || "EMAIL_PROTECTION" || "TIME_STAMPING" || "OCSP_SIGNING" || "IPSEC_END_SYSTEM" || "IPSEC_TUNNEL" || "IPSEC_USER" || "ANY" || "NONE" || "CUSTOM",
+ * //         OID: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     CertificateAuthorityArn: "STRING_VALUE",
+ * //     RenewalEligibility: "ELIGIBLE" || "INELIGIBLE",
+ * //     Options: { // CertificateOptions
+ * //       CertificateTransparencyLoggingPreference: "ENABLED" || "DISABLED",
+ * //       Export: "ENABLED" || "DISABLED",
+ * //       ValidationMethod: "EMAIL" || "DNS" || "HTTP",
+ * //     },
+ * //     UpdateSummary: { // UpdateSummary
+ * //       Status: "PENDING_DOMAIN_VALIDATION" || "SUCCESS" || "FAILED",
+ * //       Type: "DOMAIN_VALIDATION_METHOD",
+ * //       DomainValidationMethodUpdateSummary: { // DomainValidationMethodUpdateSummary
+ * //         From: "EMAIL" || "DNS" || "HTTP",
+ * //         To: "EMAIL" || "DNS" || "HTTP",
+ * //       },
+ * //       RequestedAt: new Date("TIMESTAMP"),
+ * //       UpdatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //     CertificateKeyPairOrigin: "AWS_MANAGED" || "ACME" || "CUSTOMER_PROVIDED",
+ * //     AcmeEndpointArn: "STRING_VALUE",
+ * //     AcmeAccountId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeCertificateCommandInput - {@link DescribeCertificateCommandInput}
+ * @returns {@link DescribeCertificateCommandOutput}
  * @see {@link DescribeCertificateCommandInput} for command's `input` shape.
  * @see {@link DescribeCertificateCommandOutput} for command's `response` shape.
- * @see {@link ACMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMClientResolvedConfig | config} for ACMClient's `config` shape.
  *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified certificate cannot be found in the caller's account or the caller's account cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>
+ *
+ * @throws {@link ACMServiceException}
+ * <p>Base exception class for all service exceptions from ACM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeCertificateCommand extends $Command<
-  DescribeCertificateCommandInput,
-  DescribeCertificateCommandOutput,
-  ACMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeCertificateCommandInput, DescribeCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMClient";
-    const commandName = "DescribeCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeCertificateResponse.filterSensitiveLog,
+export class DescribeCertificateCommand extends command<DescribeCertificateCommandInput, DescribeCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCertificate",
+  DescribeCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCertificateRequest;
+      output: DescribeCertificateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeCertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeCertificateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeCertificateCommandOutput> {
-    return deserializeAws_json1_1DescribeCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeCertificateCommandInput;
+      output: DescribeCertificateCommandOutput;
+    };
+  };
 }

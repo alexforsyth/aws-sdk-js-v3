@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { DescribeRefreshSchemasStatusMessage, DescribeRefreshSchemasStatusResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeRefreshSchemasStatusCommand,
-  serializeAws_json1_1DescribeRefreshSchemasStatusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRefreshSchemasStatusMessage, DescribeRefreshSchemasStatusResponse } from "../models/models_0";
+import { DescribeRefreshSchemasStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRefreshSchemasStatusCommand}.
+ */
 export interface DescribeRefreshSchemasStatusCommandInput extends DescribeRefreshSchemasStatusMessage {}
-export interface DescribeRefreshSchemasStatusCommandOutput
-  extends DescribeRefreshSchemasStatusResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRefreshSchemasStatusCommand}.
+ */
+export interface DescribeRefreshSchemasStatusCommandOutput extends DescribeRefreshSchemasStatusResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the status of the RefreshSchemas operation.</p>
@@ -34,71 +29,74 @@ export interface DescribeRefreshSchemasStatusCommandOutput
  * ```javascript
  * import { DatabaseMigrationServiceClient, DescribeRefreshSchemasStatusCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DescribeRefreshSchemasStatusCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DescribeRefreshSchemasStatusMessage
+ *   EndpointArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeRefreshSchemasStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRefreshSchemasStatusResponse
+ * //   RefreshSchemasStatus: { // RefreshSchemasStatus
+ * //     EndpointArn: "STRING_VALUE",
+ * //     ReplicationInstanceArn: "STRING_VALUE",
+ * //     Status: "successful" || "failed" || "refreshing",
+ * //     LastRefreshDate: new Date("TIMESTAMP"),
+ * //     LastFailureMessage: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeRefreshSchemasStatusCommandInput - {@link DescribeRefreshSchemasStatusCommandInput}
+ * @returns {@link DescribeRefreshSchemasStatusCommandOutput}
  * @see {@link DescribeRefreshSchemasStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeRefreshSchemasStatusCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Describe refresh schema status
+ * ```javascript
+ * // Returns the status of the refresh-schemas operation.
+ * const input = {
+ *   EndpointArn: ""
+ * };
+ * const command = new DescribeRefreshSchemasStatusCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   RefreshSchemasStatus:   { /* empty *\/ }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeRefreshSchemasStatusCommand extends $Command<
-  DescribeRefreshSchemasStatusCommandInput,
-  DescribeRefreshSchemasStatusCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRefreshSchemasStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRefreshSchemasStatusCommandInput, DescribeRefreshSchemasStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DescribeRefreshSchemasStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRefreshSchemasStatusMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRefreshSchemasStatusResponse.filterSensitiveLog,
+export class DescribeRefreshSchemasStatusCommand extends command<DescribeRefreshSchemasStatusCommandInput, DescribeRefreshSchemasStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRefreshSchemasStatus",
+  DescribeRefreshSchemasStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRefreshSchemasStatusMessage;
+      output: DescribeRefreshSchemasStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRefreshSchemasStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeRefreshSchemasStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeRefreshSchemasStatusCommandOutput> {
-    return deserializeAws_json1_1DescribeRefreshSchemasStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRefreshSchemasStatusCommandInput;
+      output: DescribeRefreshSchemasStatusCommandOutput;
+    };
+  };
 }

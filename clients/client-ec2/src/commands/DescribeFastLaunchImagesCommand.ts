@@ -1,0 +1,107 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFastLaunchImagesRequest, DescribeFastLaunchImagesResult } from "../models/models_4";
+import { DescribeFastLaunchImages$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFastLaunchImagesCommand}.
+ */
+export interface DescribeFastLaunchImagesCommandInput extends DescribeFastLaunchImagesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFastLaunchImagesCommand}.
+ */
+export interface DescribeFastLaunchImagesCommandOutput extends DescribeFastLaunchImagesResult, __MetadataBearer {}
+
+/**
+ * <p>Describe details for Windows AMIs that are configured for Windows fast launch.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, DescribeFastLaunchImagesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, DescribeFastLaunchImagesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // DescribeFastLaunchImagesRequest
+ *   ImageIds: [ // FastLaunchImageIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
+ * const command = new DescribeFastLaunchImagesCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeFastLaunchImagesResult
+ * //   FastLaunchImages: [ // DescribeFastLaunchImagesSuccessSet
+ * //     { // DescribeFastLaunchImagesSuccessItem
+ * //       ImageId: "STRING_VALUE",
+ * //       ResourceType: "snapshot",
+ * //       SnapshotConfiguration: { // FastLaunchSnapshotConfigurationResponse
+ * //         TargetResourceCount: Number("int"),
+ * //       },
+ * //       LaunchTemplate: { // FastLaunchLaunchTemplateSpecificationResponse
+ * //         LaunchTemplateId: "STRING_VALUE",
+ * //         LaunchTemplateName: "STRING_VALUE",
+ * //         Version: "STRING_VALUE",
+ * //       },
+ * //       MaxParallelLaunches: Number("int"),
+ * //       OwnerId: "STRING_VALUE",
+ * //       State: "enabling" || "enabling-failed" || "enabled" || "enabled-failed" || "disabling" || "disabling-failed",
+ * //       StateTransitionReason: "STRING_VALUE",
+ * //       StateTransitionTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeFastLaunchImagesCommandInput - {@link DescribeFastLaunchImagesCommandInput}
+ * @returns {@link DescribeFastLaunchImagesCommandOutput}
+ * @see {@link DescribeFastLaunchImagesCommandInput} for command's `input` shape.
+ * @see {@link DescribeFastLaunchImagesCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribeFastLaunchImagesCommand extends command<DescribeFastLaunchImagesCommandInput, DescribeFastLaunchImagesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFastLaunchImages",
+  DescribeFastLaunchImages$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFastLaunchImagesRequest;
+      output: DescribeFastLaunchImagesResult;
+    };
+    sdk: {
+      input: DescribeFastLaunchImagesCommandInput;
+      output: DescribeFastLaunchImagesCommandOutput;
+    };
+  };
+}

@@ -1,113 +1,524 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type DescribeAffectedAccountsForOrganizationCommandInput,
+  type DescribeAffectedAccountsForOrganizationCommandOutput,
   DescribeAffectedAccountsForOrganizationCommand,
-  DescribeAffectedAccountsForOrganizationCommandInput,
-  DescribeAffectedAccountsForOrganizationCommandOutput,
 } from "./commands/DescribeAffectedAccountsForOrganizationCommand";
 import {
+  type DescribeAffectedEntitiesCommandInput,
+  type DescribeAffectedEntitiesCommandOutput,
   DescribeAffectedEntitiesCommand,
-  DescribeAffectedEntitiesCommandInput,
-  DescribeAffectedEntitiesCommandOutput,
 } from "./commands/DescribeAffectedEntitiesCommand";
 import {
+  type DescribeAffectedEntitiesForOrganizationCommandInput,
+  type DescribeAffectedEntitiesForOrganizationCommandOutput,
   DescribeAffectedEntitiesForOrganizationCommand,
-  DescribeAffectedEntitiesForOrganizationCommandInput,
-  DescribeAffectedEntitiesForOrganizationCommandOutput,
 } from "./commands/DescribeAffectedEntitiesForOrganizationCommand";
 import {
+  type DescribeEntityAggregatesCommandInput,
+  type DescribeEntityAggregatesCommandOutput,
   DescribeEntityAggregatesCommand,
-  DescribeEntityAggregatesCommandInput,
-  DescribeEntityAggregatesCommandOutput,
 } from "./commands/DescribeEntityAggregatesCommand";
 import {
+  type DescribeEntityAggregatesForOrganizationCommandInput,
+  type DescribeEntityAggregatesForOrganizationCommandOutput,
+  DescribeEntityAggregatesForOrganizationCommand,
+} from "./commands/DescribeEntityAggregatesForOrganizationCommand";
+import {
+  type DescribeEventAggregatesCommandInput,
+  type DescribeEventAggregatesCommandOutput,
   DescribeEventAggregatesCommand,
-  DescribeEventAggregatesCommandInput,
-  DescribeEventAggregatesCommandOutput,
 } from "./commands/DescribeEventAggregatesCommand";
 import {
+  type DescribeEventDetailsCommandInput,
+  type DescribeEventDetailsCommandOutput,
   DescribeEventDetailsCommand,
-  DescribeEventDetailsCommandInput,
-  DescribeEventDetailsCommandOutput,
 } from "./commands/DescribeEventDetailsCommand";
 import {
+  type DescribeEventDetailsForOrganizationCommandInput,
+  type DescribeEventDetailsForOrganizationCommandOutput,
   DescribeEventDetailsForOrganizationCommand,
-  DescribeEventDetailsForOrganizationCommandInput,
-  DescribeEventDetailsForOrganizationCommandOutput,
 } from "./commands/DescribeEventDetailsForOrganizationCommand";
 import {
+  type DescribeEventsCommandInput,
+  type DescribeEventsCommandOutput,
   DescribeEventsCommand,
-  DescribeEventsCommandInput,
-  DescribeEventsCommandOutput,
 } from "./commands/DescribeEventsCommand";
 import {
+  type DescribeEventsForOrganizationCommandInput,
+  type DescribeEventsForOrganizationCommandOutput,
   DescribeEventsForOrganizationCommand,
-  DescribeEventsForOrganizationCommandInput,
-  DescribeEventsForOrganizationCommandOutput,
 } from "./commands/DescribeEventsForOrganizationCommand";
 import {
+  type DescribeEventTypesCommandInput,
+  type DescribeEventTypesCommandOutput,
   DescribeEventTypesCommand,
-  DescribeEventTypesCommandInput,
-  DescribeEventTypesCommandOutput,
 } from "./commands/DescribeEventTypesCommand";
 import {
+  type DescribeHealthServiceStatusForOrganizationCommandInput,
+  type DescribeHealthServiceStatusForOrganizationCommandOutput,
   DescribeHealthServiceStatusForOrganizationCommand,
-  DescribeHealthServiceStatusForOrganizationCommandInput,
-  DescribeHealthServiceStatusForOrganizationCommandOutput,
 } from "./commands/DescribeHealthServiceStatusForOrganizationCommand";
 import {
+  type DescribeServiceLifecycleCommandInput,
+  type DescribeServiceLifecycleCommandOutput,
+  DescribeServiceLifecycleCommand,
+} from "./commands/DescribeServiceLifecycleCommand";
+import {
+  type DisableHealthServiceAccessForOrganizationCommandInput,
+  type DisableHealthServiceAccessForOrganizationCommandOutput,
   DisableHealthServiceAccessForOrganizationCommand,
-  DisableHealthServiceAccessForOrganizationCommandInput,
-  DisableHealthServiceAccessForOrganizationCommandOutput,
 } from "./commands/DisableHealthServiceAccessForOrganizationCommand";
 import {
+  type EnableHealthServiceAccessForOrganizationCommandInput,
+  type EnableHealthServiceAccessForOrganizationCommandOutput,
   EnableHealthServiceAccessForOrganizationCommand,
-  EnableHealthServiceAccessForOrganizationCommandInput,
-  EnableHealthServiceAccessForOrganizationCommandOutput,
 } from "./commands/EnableHealthServiceAccessForOrganizationCommand";
 import { HealthClient } from "./HealthClient";
+import {
+  paginateDescribeAffectedAccountsForOrganization,
+} from "./pagination/DescribeAffectedAccountsForOrganizationPaginator";
+import {
+  paginateDescribeAffectedEntitiesForOrganization,
+} from "./pagination/DescribeAffectedEntitiesForOrganizationPaginator";
+import { paginateDescribeAffectedEntities } from "./pagination/DescribeAffectedEntitiesPaginator";
+import { paginateDescribeEventAggregates } from "./pagination/DescribeEventAggregatesPaginator";
+import { paginateDescribeEventsForOrganization } from "./pagination/DescribeEventsForOrganizationPaginator";
+import { paginateDescribeEvents } from "./pagination/DescribeEventsPaginator";
+import { paginateDescribeEventTypes } from "./pagination/DescribeEventTypesPaginator";
+import { paginateDescribeServiceLifecycle } from "./pagination/DescribeServiceLifecyclePaginator";
+
+const commands = {
+  DescribeAffectedAccountsForOrganizationCommand,
+  DescribeAffectedEntitiesCommand,
+  DescribeAffectedEntitiesForOrganizationCommand,
+  DescribeEntityAggregatesCommand,
+  DescribeEntityAggregatesForOrganizationCommand,
+  DescribeEventAggregatesCommand,
+  DescribeEventDetailsCommand,
+  DescribeEventDetailsForOrganizationCommand,
+  DescribeEventsCommand,
+  DescribeEventsForOrganizationCommand,
+  DescribeEventTypesCommand,
+  DescribeHealthServiceStatusForOrganizationCommand,
+  DescribeServiceLifecycleCommand,
+  DisableHealthServiceAccessForOrganizationCommand,
+  EnableHealthServiceAccessForOrganizationCommand,
+};
+const paginators = {
+  paginateDescribeAffectedAccountsForOrganization,
+  paginateDescribeAffectedEntities,
+  paginateDescribeAffectedEntitiesForOrganization,
+  paginateDescribeEventAggregates,
+  paginateDescribeEvents,
+  paginateDescribeEventsForOrganization,
+  paginateDescribeEventTypes,
+  paginateDescribeServiceLifecycle,
+};
 
 /**
- * <fullname>AWS Health</fullname>
- *
- *          <p>The AWS Health API provides programmatic access to the AWS Health information that
- *          appears in the <a href="https://phd.aws.amazon.com/phd/home#/">AWS Personal Health Dashboard</a>. You
- *          can use the API operations to get information about AWS Health events that affect your
- *          AWS services and resources.</p>
- *          <note>
- *             <ul>
- *                <li>
- *                   <p>You must have a Business or Enterprise Support plan from <a href="http://aws.amazon.com/premiumsupport/">AWS Support</a> to use the
- *                   AWS Health API. If you call the AWS Health API from an AWS account that
- *                   doesn't have a Business or Enterprise Support plan, you receive a
- *                      <code>SubscriptionRequiredException</code> error.</p>
- *                </li>
- *                <li>
- *                   <p>You can use the AWS Health endpoint health.us-east-1.amazonaws.com (HTTPS) to
- *                   call the AWS Health API operations. AWS Health supports a multi-Region
- *                   application architecture and has two regional endpoints in an active-passive
- *                   configuration. You can use the high availability endpoint example to determine
- *                   which AWS Region is active, so that you can get the latest information from the
- *                   API. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/health-api.html">Accessing the AWS Health API</a> in the
- *                      <i>AWS Health User Guide</i>.</p>
- *                </li>
- *             </ul>
- *          </note>
- *          <p>For authentication of requests, AWS Health uses the <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing
+ * @public
+ */
+export interface HealthRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Health {
+  /**
+   * @see {@link DescribeAffectedAccountsForOrganizationCommand}
+   */
+  describeAffectedAccountsForOrganization(
+    args: DescribeAffectedAccountsForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeAffectedAccountsForOrganizationCommandOutput>;
+  describeAffectedAccountsForOrganization(
+    args: DescribeAffectedAccountsForOrganizationCommandInput,
+    cb: (err: any, data?: DescribeAffectedAccountsForOrganizationCommandOutput) => void
+  ): void;
+  describeAffectedAccountsForOrganization(
+    args: DescribeAffectedAccountsForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeAffectedAccountsForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAffectedEntitiesCommand}
+   */
+  describeAffectedEntities(
+    args: DescribeAffectedEntitiesCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeAffectedEntitiesCommandOutput>;
+  describeAffectedEntities(
+    args: DescribeAffectedEntitiesCommandInput,
+    cb: (err: any, data?: DescribeAffectedEntitiesCommandOutput) => void
+  ): void;
+  describeAffectedEntities(
+    args: DescribeAffectedEntitiesCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeAffectedEntitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAffectedEntitiesForOrganizationCommand}
+   */
+  describeAffectedEntitiesForOrganization(): Promise<DescribeAffectedEntitiesForOrganizationCommandOutput>;
+  describeAffectedEntitiesForOrganization(
+    args: DescribeAffectedEntitiesForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeAffectedEntitiesForOrganizationCommandOutput>;
+  describeAffectedEntitiesForOrganization(
+    args: DescribeAffectedEntitiesForOrganizationCommandInput,
+    cb: (err: any, data?: DescribeAffectedEntitiesForOrganizationCommandOutput) => void
+  ): void;
+  describeAffectedEntitiesForOrganization(
+    args: DescribeAffectedEntitiesForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeAffectedEntitiesForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEntityAggregatesCommand}
+   */
+  describeEntityAggregates(): Promise<DescribeEntityAggregatesCommandOutput>;
+  describeEntityAggregates(
+    args: DescribeEntityAggregatesCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEntityAggregatesCommandOutput>;
+  describeEntityAggregates(
+    args: DescribeEntityAggregatesCommandInput,
+    cb: (err: any, data?: DescribeEntityAggregatesCommandOutput) => void
+  ): void;
+  describeEntityAggregates(
+    args: DescribeEntityAggregatesCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEntityAggregatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEntityAggregatesForOrganizationCommand}
+   */
+  describeEntityAggregatesForOrganization(
+    args: DescribeEntityAggregatesForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEntityAggregatesForOrganizationCommandOutput>;
+  describeEntityAggregatesForOrganization(
+    args: DescribeEntityAggregatesForOrganizationCommandInput,
+    cb: (err: any, data?: DescribeEntityAggregatesForOrganizationCommandOutput) => void
+  ): void;
+  describeEntityAggregatesForOrganization(
+    args: DescribeEntityAggregatesForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEntityAggregatesForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventAggregatesCommand}
+   */
+  describeEventAggregates(
+    args: DescribeEventAggregatesCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEventAggregatesCommandOutput>;
+  describeEventAggregates(
+    args: DescribeEventAggregatesCommandInput,
+    cb: (err: any, data?: DescribeEventAggregatesCommandOutput) => void
+  ): void;
+  describeEventAggregates(
+    args: DescribeEventAggregatesCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEventAggregatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventDetailsCommand}
+   */
+  describeEventDetails(
+    args: DescribeEventDetailsCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEventDetailsCommandOutput>;
+  describeEventDetails(
+    args: DescribeEventDetailsCommandInput,
+    cb: (err: any, data?: DescribeEventDetailsCommandOutput) => void
+  ): void;
+  describeEventDetails(
+    args: DescribeEventDetailsCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEventDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventDetailsForOrganizationCommand}
+   */
+  describeEventDetailsForOrganization(
+    args: DescribeEventDetailsForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEventDetailsForOrganizationCommandOutput>;
+  describeEventDetailsForOrganization(
+    args: DescribeEventDetailsForOrganizationCommandInput,
+    cb: (err: any, data?: DescribeEventDetailsForOrganizationCommandOutput) => void
+  ): void;
+  describeEventDetailsForOrganization(
+    args: DescribeEventDetailsForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEventDetailsForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventsCommand}
+   */
+  describeEvents(): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    cb: (err: any, data?: DescribeEventsCommandOutput) => void
+  ): void;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventsForOrganizationCommand}
+   */
+  describeEventsForOrganization(): Promise<DescribeEventsForOrganizationCommandOutput>;
+  describeEventsForOrganization(
+    args: DescribeEventsForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEventsForOrganizationCommandOutput>;
+  describeEventsForOrganization(
+    args: DescribeEventsForOrganizationCommandInput,
+    cb: (err: any, data?: DescribeEventsForOrganizationCommandOutput) => void
+  ): void;
+  describeEventsForOrganization(
+    args: DescribeEventsForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEventsForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventTypesCommand}
+   */
+  describeEventTypes(): Promise<DescribeEventTypesCommandOutput>;
+  describeEventTypes(
+    args: DescribeEventTypesCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeEventTypesCommandOutput>;
+  describeEventTypes(
+    args: DescribeEventTypesCommandInput,
+    cb: (err: any, data?: DescribeEventTypesCommandOutput) => void
+  ): void;
+  describeEventTypes(
+    args: DescribeEventTypesCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeEventTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeHealthServiceStatusForOrganizationCommand}
+   */
+  describeHealthServiceStatusForOrganization(): Promise<DescribeHealthServiceStatusForOrganizationCommandOutput>;
+  describeHealthServiceStatusForOrganization(
+    args: DescribeHealthServiceStatusForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeHealthServiceStatusForOrganizationCommandOutput>;
+  describeHealthServiceStatusForOrganization(
+    args: DescribeHealthServiceStatusForOrganizationCommandInput,
+    cb: (err: any, data?: DescribeHealthServiceStatusForOrganizationCommandOutput) => void
+  ): void;
+  describeHealthServiceStatusForOrganization(
+    args: DescribeHealthServiceStatusForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeHealthServiceStatusForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeServiceLifecycleCommand}
+   */
+  describeServiceLifecycle(): Promise<DescribeServiceLifecycleCommandOutput>;
+  describeServiceLifecycle(
+    args: DescribeServiceLifecycleCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DescribeServiceLifecycleCommandOutput>;
+  describeServiceLifecycle(
+    args: DescribeServiceLifecycleCommandInput,
+    cb: (err: any, data?: DescribeServiceLifecycleCommandOutput) => void
+  ): void;
+  describeServiceLifecycle(
+    args: DescribeServiceLifecycleCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DescribeServiceLifecycleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableHealthServiceAccessForOrganizationCommand}
+   */
+  disableHealthServiceAccessForOrganization(): Promise<DisableHealthServiceAccessForOrganizationCommandOutput>;
+  disableHealthServiceAccessForOrganization(
+    args: DisableHealthServiceAccessForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<DisableHealthServiceAccessForOrganizationCommandOutput>;
+  disableHealthServiceAccessForOrganization(
+    args: DisableHealthServiceAccessForOrganizationCommandInput,
+    cb: (err: any, data?: DisableHealthServiceAccessForOrganizationCommandOutput) => void
+  ): void;
+  disableHealthServiceAccessForOrganization(
+    args: DisableHealthServiceAccessForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: DisableHealthServiceAccessForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableHealthServiceAccessForOrganizationCommand}
+   */
+  enableHealthServiceAccessForOrganization(): Promise<EnableHealthServiceAccessForOrganizationCommandOutput>;
+  enableHealthServiceAccessForOrganization(
+    args: EnableHealthServiceAccessForOrganizationCommandInput,
+    options?: HealthRequestOptions
+  ): Promise<EnableHealthServiceAccessForOrganizationCommandOutput>;
+  enableHealthServiceAccessForOrganization(
+    args: EnableHealthServiceAccessForOrganizationCommandInput,
+    cb: (err: any, data?: EnableHealthServiceAccessForOrganizationCommandOutput) => void
+  ): void;
+  enableHealthServiceAccessForOrganization(
+    args: EnableHealthServiceAccessForOrganizationCommandInput,
+    options: HealthRequestOptions,
+    cb: (err: any, data?: EnableHealthServiceAccessForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAffectedAccountsForOrganizationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAffectedAccountsForOrganizationCommandOutput}.
+   */
+  paginateDescribeAffectedAccountsForOrganization(
+    args: DescribeAffectedAccountsForOrganizationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAffectedAccountsForOrganizationCommandOutput>;
+
+  /**
+   * @see {@link DescribeAffectedEntitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAffectedEntitiesCommandOutput}.
+   */
+  paginateDescribeAffectedEntities(
+    args: DescribeAffectedEntitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAffectedEntitiesCommandOutput>;
+
+  /**
+   * @see {@link DescribeAffectedEntitiesForOrganizationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAffectedEntitiesForOrganizationCommandOutput}.
+   */
+  paginateDescribeAffectedEntitiesForOrganization(
+    args?: DescribeAffectedEntitiesForOrganizationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAffectedEntitiesForOrganizationCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventAggregatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventAggregatesCommandOutput}.
+   */
+  paginateDescribeEventAggregates(
+    args: DescribeEventAggregatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventAggregatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventsCommandOutput}.
+   */
+  paginateDescribeEvents(
+    args?: DescribeEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventsCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventsForOrganizationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventsForOrganizationCommandOutput}.
+   */
+  paginateDescribeEventsForOrganization(
+    args?: DescribeEventsForOrganizationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventsForOrganizationCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventTypesCommandOutput}.
+   */
+  paginateDescribeEventTypes(
+    args?: DescribeEventTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventTypesCommandOutput>;
+
+  /**
+   * @see {@link DescribeServiceLifecycleCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeServiceLifecycleCommandOutput}.
+   */
+  paginateDescribeServiceLifecycle(
+    args?: DescribeServiceLifecycleCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeServiceLifecycleCommandOutput>;
+}
+
+/**
+ * <fullname>Health</fullname>
+ *          <p>The Health API provides access to the Health information that appears in the
+ *             <a href="https://health.aws.amazon.com/health/home">Health Dashboard</a>. You can use
+ *          the API operations to get information about events that might affect your Amazon Web Services services and resources.</p>
+ *          <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan from <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a> to use the Health API. If you call the Health API from an
+ *             Amazon Web Services account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, you receive a
+ *             <code>SubscriptionRequiredException</code> error.</p>
+ *          <p>For API access, you need an access key ID and a secret access key. Use temporary
+ *          credentials instead of long-term access keys when possible. Temporary credentials include
+ *          an access key ID, a secret access key, and a security token that indicates when the
+ *          credentials expire. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html">Best practices for managing
+ *             Amazon Web Services access keys</a> in the <i>Amazon Web Services General Reference</i>.</p>
+ *          <p>You can use the Health endpoint health.us-east-1.amazonaws.com (HTTPS) to call the
+ *          Health API operations. Health supports a multi-Region application architecture
+ *          and has two regional endpoints in an active-passive configuration. You can use the high
+ *          availability endpoint example to determine which Amazon Web Services Region is active, so that you can
+ *          get the latest information from the API. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/health-api.html">Accessing the Health
+ *             API</a> in the <i>Health User Guide</i>.</p>
+ *          <p>For authentication of requests, Health uses the <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing
  *             Process</a>.</p>
- *          <p>If your AWS account is part of AWS Organizations, you can use the AWS Health organizational
- *          view feature. This feature provides a centralized view of AWS Health events across all
- *          accounts in your organization. You can aggregate AWS Health events in real time to
+ *          <p>If your Amazon Web Services account is part of Organizations, you can use the Health organizational
+ *          view feature. This feature provides a centralized view of Health events across all
+ *          accounts in your organization. You can aggregate Health events in real time to
  *          identify accounts in your organization that are affected by an operational event or get
  *          notified of security vulnerabilities. Use the organizational view API operations to enable
  *          this feature and return event information. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html">Aggregating
- *             AWS Health events</a> in the <i>AWS Health User Guide</i>.</p>
+ *             Health events</a> in the <i>Health User Guide</i>.</p>
  *          <note>
- *             <p>When you use the AWS Health API operations to return AWS Health events, see the
+ *             <p>When you use the Health API operations to return Health events, see the
  *             following recommendations:</p>
  *             <ul>
  *                <li>
- *                   <p>Use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode">eventScopeCode</a> parameter to specify whether to return AWS Health
+ *                   <p>Use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode">eventScopeCode</a> parameter to specify whether to return Health
  *                   events that are public or account-specific.</p>
  *                </li>
  *                <li>
@@ -118,624 +529,7 @@ import { HealthClient } from "./HealthClient";
  *                </li>
  *             </ul>
  *          </note>
+ * @public
  */
-export class Health extends HealthClient {
-  /**
-   * <p>Returns a list of accounts in the organization from AWS Organizations that are affected by the
-   *          provided event. For more information about the different types of AWS Health events, see
-   *             <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a>. </p>
-   *          <p>Before you can call this operation, you must first enable AWS Health to work with
-   *          AWS Organizations. To do this, call the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html">EnableHealthServiceAccessForOrganization</a> operation from your organization's
-   *          management account.</p>
-   *          <note>
-   *             <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *          </note>
-   */
-  public describeAffectedAccountsForOrganization(
-    args: DescribeAffectedAccountsForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAffectedAccountsForOrganizationCommandOutput>;
-  public describeAffectedAccountsForOrganization(
-    args: DescribeAffectedAccountsForOrganizationCommandInput,
-    cb: (err: any, data?: DescribeAffectedAccountsForOrganizationCommandOutput) => void
-  ): void;
-  public describeAffectedAccountsForOrganization(
-    args: DescribeAffectedAccountsForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAffectedAccountsForOrganizationCommandOutput) => void
-  ): void;
-  public describeAffectedAccountsForOrganization(
-    args: DescribeAffectedAccountsForOrganizationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeAffectedAccountsForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAffectedAccountsForOrganizationCommandOutput) => void
-  ): Promise<DescribeAffectedAccountsForOrganizationCommandOutput> | void {
-    const command = new DescribeAffectedAccountsForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of entities that have been affected by the specified events, based on the
-   *          specified filter criteria. Entities can refer to individual customer resources, groups of
-   *          customer resources, or any other construct, depending on the AWS service. Events that
-   *          have impact beyond that of the affected entities, or where the extent of impact is unknown,
-   *          include at least one entity indicating this.</p>
-   *          <p>At least one event ARN is required. Results are sorted by the
-   *             <code>lastUpdatedTime</code> of the entity, starting with the most recent.</p>
-   *
-   *          <note>
-   *             <ul>
-   *                <li>
-   *                   <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *                </li>
-   *                <li>
-   *                   <p>This operation supports resource-level permissions. You can use this operation to allow or deny access to specific AWS Health events. For more
-   *                   information, see <a href="https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions">Resource- and action-based conditions</a> in the <i>AWS Health User Guide</i>.</p>
-   *                </li>
-   *             </ul>
-   *          </note>
-   */
-  public describeAffectedEntities(
-    args: DescribeAffectedEntitiesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAffectedEntitiesCommandOutput>;
-  public describeAffectedEntities(
-    args: DescribeAffectedEntitiesCommandInput,
-    cb: (err: any, data?: DescribeAffectedEntitiesCommandOutput) => void
-  ): void;
-  public describeAffectedEntities(
-    args: DescribeAffectedEntitiesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAffectedEntitiesCommandOutput) => void
-  ): void;
-  public describeAffectedEntities(
-    args: DescribeAffectedEntitiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAffectedEntitiesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAffectedEntitiesCommandOutput) => void
-  ): Promise<DescribeAffectedEntitiesCommandOutput> | void {
-    const command = new DescribeAffectedEntitiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of entities that have been affected by one or more events for one or more
-   *          accounts in your organization in AWS Organizations, based on the filter criteria. Entities can refer
-   *          to individual customer resources, groups of customer resources, or any other construct,
-   *          depending on the AWS service.</p>
-   *          <p>At least one event Amazon Resource Name (ARN) and account ID are required. Results are
-   *          sorted by the <code>lastUpdatedTime</code> of the entity, starting with the most
-   *          recent.</p>
-   *          <p>Before you can call this operation, you must first enable AWS Health to work with
-   *          AWS Organizations. To do this, call the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html">EnableHealthServiceAccessForOrganization</a>
-   *          operation from your organization's management account.</p>
-   *          <note>
-   *             <ul>
-   *                <li>
-   *                   <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *                </li>
-   *                <li>
-   *                   <p>This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific AWS Health events. For more
-   *                   information, see <a href="https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions">Resource- and action-based conditions</a> in the <i>AWS Health User Guide</i>.</p>
-   *                </li>
-   *             </ul>
-   *
-   *          </note>
-   */
-  public describeAffectedEntitiesForOrganization(
-    args: DescribeAffectedEntitiesForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAffectedEntitiesForOrganizationCommandOutput>;
-  public describeAffectedEntitiesForOrganization(
-    args: DescribeAffectedEntitiesForOrganizationCommandInput,
-    cb: (err: any, data?: DescribeAffectedEntitiesForOrganizationCommandOutput) => void
-  ): void;
-  public describeAffectedEntitiesForOrganization(
-    args: DescribeAffectedEntitiesForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAffectedEntitiesForOrganizationCommandOutput) => void
-  ): void;
-  public describeAffectedEntitiesForOrganization(
-    args: DescribeAffectedEntitiesForOrganizationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeAffectedEntitiesForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAffectedEntitiesForOrganizationCommandOutput) => void
-  ): Promise<DescribeAffectedEntitiesForOrganizationCommandOutput> | void {
-    const command = new DescribeAffectedEntitiesForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the number of entities that are affected by each of the specified events. If no
-   *          events are specified, the counts of all affected entities are returned.</p>
-   */
-  public describeEntityAggregates(
-    args: DescribeEntityAggregatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEntityAggregatesCommandOutput>;
-  public describeEntityAggregates(
-    args: DescribeEntityAggregatesCommandInput,
-    cb: (err: any, data?: DescribeEntityAggregatesCommandOutput) => void
-  ): void;
-  public describeEntityAggregates(
-    args: DescribeEntityAggregatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEntityAggregatesCommandOutput) => void
-  ): void;
-  public describeEntityAggregates(
-    args: DescribeEntityAggregatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEntityAggregatesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEntityAggregatesCommandOutput) => void
-  ): Promise<DescribeEntityAggregatesCommandOutput> | void {
-    const command = new DescribeEntityAggregatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the number of events of each event type (issue, scheduled change, and account
-   *          notification). If no filter is specified, the counts of all events in each category are
-   *          returned.</p>
-   *          <note>
-   *             <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *          </note>
-   */
-  public describeEventAggregates(
-    args: DescribeEventAggregatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventAggregatesCommandOutput>;
-  public describeEventAggregates(
-    args: DescribeEventAggregatesCommandInput,
-    cb: (err: any, data?: DescribeEventAggregatesCommandOutput) => void
-  ): void;
-  public describeEventAggregates(
-    args: DescribeEventAggregatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventAggregatesCommandOutput) => void
-  ): void;
-  public describeEventAggregates(
-    args: DescribeEventAggregatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventAggregatesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventAggregatesCommandOutput) => void
-  ): Promise<DescribeEventAggregatesCommandOutput> | void {
-    const command = new DescribeEventAggregatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns detailed information about one or more specified events. Information includes
-   *          standard event data (AWS Region, service, and so on, as returned by <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a>), a detailed event description, and possible additional metadata
-   *          that depends upon the nature of the event. Affected entities are not included. To retrieve
-   *          the entities, use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html">DescribeAffectedEntities</a> operation.</p>
-   *          <p>If a specified event can't be retrieved, an error message is returned for that
-   *          event.</p>
-   *          <note>
-   *             <p>This operation supports resource-level permissions. You can use this operation to allow or deny access to specific AWS Health events. For more
-   *                   information, see <a href="https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions">Resource- and action-based conditions</a> in the <i>AWS Health User Guide</i>.</p>
-   *          </note>
-   */
-  public describeEventDetails(
-    args: DescribeEventDetailsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventDetailsCommandOutput>;
-  public describeEventDetails(
-    args: DescribeEventDetailsCommandInput,
-    cb: (err: any, data?: DescribeEventDetailsCommandOutput) => void
-  ): void;
-  public describeEventDetails(
-    args: DescribeEventDetailsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventDetailsCommandOutput) => void
-  ): void;
-  public describeEventDetails(
-    args: DescribeEventDetailsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventDetailsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventDetailsCommandOutput) => void
-  ): Promise<DescribeEventDetailsCommandOutput> | void {
-    const command = new DescribeEventDetailsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns detailed information about one or more specified events for one or more AWS
-   *          accounts in your organization. This information includes standard event data (such as the
-   *          AWS Region and service), an event description, and (depending on the event) possible
-   *          metadata. This operation doesn't return affected entities, such as the resources related to
-   *          the event. To return affected entities, use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html">DescribeAffectedEntitiesForOrganization</a> operation.</p>
-   *          <note>
-   *             <p>Before you can call this operation, you must first enable AWS Health to work with
-   *             AWS Organizations. To do this, call the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html">EnableHealthServiceAccessForOrganization</a> operation from your organization's
-   *             management account.</p>
-   *          </note>
-   *          <p>When you call the <code>DescribeEventDetailsForOrganization</code> operation, specify
-   *          the <code>organizationEventDetailFilters</code> object in the request. Depending on the
-   *          AWS Health event type, note the following differences:</p>
-   *          <ul>
-   *             <li>
-   *                <p>To return event details for a public event, you must specify a null value for the
-   *                   <code>awsAccountId</code> parameter. If you specify an account ID for a public
-   *                event, AWS Health returns an error message because public events aren't specific to
-   *                an account.</p>
-   *             </li>
-   *             <li>
-   *                <p>To return event details for an event that is specific to an account in your
-   *                organization,  you must specify the <code>awsAccountId</code> parameter in the
-   *                request. If you don't specify an account ID, AWS Health returns an error message
-   *                because the event is specific to an account in your organization. </p>
-   *             </li>
-   *          </ul>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a>.</p>
-   *
-   *          <note>
-   *             <p>This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific AWS Health events. For more
-   *                   information, see <a href="https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions">Resource- and action-based conditions</a> in the <i>AWS Health User Guide</i>.</p>
-   *          </note>
-   */
-  public describeEventDetailsForOrganization(
-    args: DescribeEventDetailsForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventDetailsForOrganizationCommandOutput>;
-  public describeEventDetailsForOrganization(
-    args: DescribeEventDetailsForOrganizationCommandInput,
-    cb: (err: any, data?: DescribeEventDetailsForOrganizationCommandOutput) => void
-  ): void;
-  public describeEventDetailsForOrganization(
-    args: DescribeEventDetailsForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventDetailsForOrganizationCommandOutput) => void
-  ): void;
-  public describeEventDetailsForOrganization(
-    args: DescribeEventDetailsForOrganizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventDetailsForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventDetailsForOrganizationCommandOutput) => void
-  ): Promise<DescribeEventDetailsForOrganizationCommandOutput> | void {
-    const command = new DescribeEventDetailsForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Returns information about events that meet the specified filter criteria. Events are
-   *          returned in a summary form and do not include the detailed description, any additional
-   *          metadata that depends on the event type, or any affected resources. To retrieve that
-   *          information, use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html">DescribeEventDetails</a> and <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html">DescribeAffectedEntities</a> operations.</p>
-   *          <p>If no filter criteria are specified, all events are returned. Results are sorted by
-   *             <code>lastModifiedTime</code>, starting with the most recent event.</p>
-   *          <note>
-   *             <ul>
-   *                <li>
-   *                   <p>When you call the <code>DescribeEvents</code> operation and specify an entity
-   *                   for the <code>entityValues</code> parameter, AWS Health might return public
-   *                   events that aren't specific to that resource. For example, if you call
-   *                      <code>DescribeEvents</code> and specify an ID for an Amazon Elastic Compute Cloud (Amazon EC2)
-   *                   instance, AWS Health might return events that aren't specific to that resource or
-   *                   service. To get events that are specific to a service, use the
-   *                      <code>services</code> parameter in the <code>filter</code> object. For more
-   *                   information, see <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a>.</p>
-   *                </li>
-   *                <li>
-   *                   <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *                </li>
-   *             </ul>
-   *          </note>
-   */
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventsCommandOutput>;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    cb: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): void;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): void;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): Promise<DescribeEventsCommandOutput> | void {
-    const command = new DescribeEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about events across your organization in AWS Organizations. You can use
-   *             the<code>filters</code> parameter to specify the events that you want to return. Events
-   *          are returned in a summary form and don't include the affected accounts, detailed
-   *          description, any additional metadata that depends on the event type, or any affected
-   *          resources. To retrieve that information, use the following operations:</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html">DescribeAffectedAccountsForOrganization</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html">DescribeAffectedEntitiesForOrganization</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <p>If you don't specify a <code>filter</code>, the
-   *             <code>DescribeEventsForOrganizations</code> returns all events across your organization.
-   *          Results are sorted by <code>lastModifiedTime</code>, starting with the most recent event. </p>
-   *          <p>For more information about the different types of AWS Health events, see <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a>.</p>
-   *          <p>Before you can call this operation, you must first enable AWS Health to work with
-   *          AWS Organizations. To do this, call the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html">EnableHealthServiceAccessForOrganization</a> operation from your organization's
-   *          management account.</p>
-   *          <note>
-   *             <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *          </note>
-   */
-  public describeEventsForOrganization(
-    args: DescribeEventsForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventsForOrganizationCommandOutput>;
-  public describeEventsForOrganization(
-    args: DescribeEventsForOrganizationCommandInput,
-    cb: (err: any, data?: DescribeEventsForOrganizationCommandOutput) => void
-  ): void;
-  public describeEventsForOrganization(
-    args: DescribeEventsForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventsForOrganizationCommandOutput) => void
-  ): void;
-  public describeEventsForOrganization(
-    args: DescribeEventsForOrganizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventsForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventsForOrganizationCommandOutput) => void
-  ): Promise<DescribeEventsForOrganizationCommandOutput> | void {
-    const command = new DescribeEventsForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the event types that meet the specified filter criteria. You can use this API
-   *          operation to find information about the AWS Health event, such as the category, AWS
-   *          service, and event code. The metadata for each event appears in the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html">EventType</a> object. </p>
-   *          <p>If you don't specify a filter criteria, the API operation returns all event types, in no
-   *          particular order.  </p>
-   *          <note>
-   *             <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>
-   *          </note>
-   */
-  public describeEventTypes(
-    args: DescribeEventTypesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventTypesCommandOutput>;
-  public describeEventTypes(
-    args: DescribeEventTypesCommandInput,
-    cb: (err: any, data?: DescribeEventTypesCommandOutput) => void
-  ): void;
-  public describeEventTypes(
-    args: DescribeEventTypesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventTypesCommandOutput) => void
-  ): void;
-  public describeEventTypes(
-    args: DescribeEventTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventTypesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventTypesCommandOutput) => void
-  ): Promise<DescribeEventTypesCommandOutput> | void {
-    const command = new DescribeEventTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>This operation provides status information on enabling or disabling AWS Health to work
-   *          with your organization. To call this operation, you must sign in as an IAM user, assume
-   *          an IAM role, or sign in as the root user (not recommended) in the organization's
-   *          management account.</p>
-   */
-  public describeHealthServiceStatusForOrganization(
-    args: DescribeHealthServiceStatusForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeHealthServiceStatusForOrganizationCommandOutput>;
-  public describeHealthServiceStatusForOrganization(
-    args: DescribeHealthServiceStatusForOrganizationCommandInput,
-    cb: (err: any, data?: DescribeHealthServiceStatusForOrganizationCommandOutput) => void
-  ): void;
-  public describeHealthServiceStatusForOrganization(
-    args: DescribeHealthServiceStatusForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeHealthServiceStatusForOrganizationCommandOutput) => void
-  ): void;
-  public describeHealthServiceStatusForOrganization(
-    args: DescribeHealthServiceStatusForOrganizationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeHealthServiceStatusForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeHealthServiceStatusForOrganizationCommandOutput) => void
-  ): Promise<DescribeHealthServiceStatusForOrganizationCommandOutput> | void {
-    const command = new DescribeHealthServiceStatusForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disables AWS Health from working with AWS Organizations. To call this operation, you must sign
-   *          in as an AWS Identity and Access Management (IAM) user, assume an IAM role, or sign in as the root user (not
-   *          recommended) in the organization's management account. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html">Aggregating
-   *             AWS Health events</a> in the
-   *             <i>AWS Health User Guide</i>.</p>
-   *          <p>This operation doesn't remove the service-linked role from the management account in your organization. You must use the IAM console, API, or AWS Command Line Interface (AWS CLI) to
-   *          remove the service-linked role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role">Deleting a Service-Linked Role</a> in the
-   *          <i>IAM User Guide</i>.</p>
-   *          <note>
-   *             <p>You can also disable the organizational feature by using the Organizations <a href="https://docs.aws.amazon.com/organizations/latest/APIReference/API_DisableAWSServiceAccess.html">DisableAWSServiceAccess</a> API operation. After you call this operation,
-   *             AWS Health stops aggregating events for all other AWS accounts in your organization.
-   *             If you call the AWS Health API operations for organizational view, AWS Health returns
-   *             an error. AWS Health continues to aggregate health events for your AWS
-   *             account.</p>
-   *          </note>
-   */
-  public disableHealthServiceAccessForOrganization(
-    args: DisableHealthServiceAccessForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisableHealthServiceAccessForOrganizationCommandOutput>;
-  public disableHealthServiceAccessForOrganization(
-    args: DisableHealthServiceAccessForOrganizationCommandInput,
-    cb: (err: any, data?: DisableHealthServiceAccessForOrganizationCommandOutput) => void
-  ): void;
-  public disableHealthServiceAccessForOrganization(
-    args: DisableHealthServiceAccessForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisableHealthServiceAccessForOrganizationCommandOutput) => void
-  ): void;
-  public disableHealthServiceAccessForOrganization(
-    args: DisableHealthServiceAccessForOrganizationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisableHealthServiceAccessForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: DisableHealthServiceAccessForOrganizationCommandOutput) => void
-  ): Promise<DisableHealthServiceAccessForOrganizationCommandOutput> | void {
-    const command = new DisableHealthServiceAccessForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Enables AWS Health to work with AWS Organizations. You can use the organizational view feature
-   *          to aggregate events from all AWS accounts in your organization in a centralized location. </p>
-   *          <p>This operation also creates a service-linked role for the management account in the
-   *          organization. </p>
-   *          <note>
-   *             <p>To call this operation, you must meet the following requirements:</p>
-   *             <ul>
-   *                <li>
-   *                   <p>You must have a Business or Enterprise Support plan from <a href="http://aws.amazon.com/premiumsupport/">AWS Support</a> to use the AWS Health
-   *                   API. If you call the AWS Health API from an AWS account that doesn't have a
-   *                   Business or Enterprise Support plan, you receive a
-   *                      <code>SubscriptionRequiredException</code> error.</p>
-   *                </li>
-   *                <li>
-   *                   <p>You must have permission to call this operation from the organization's
-   *                   management account. For example IAM policies, see <a href="https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html">AWS Health
-   *                      identity-based policy examples</a>.</p>
-   *                </li>
-   *             </ul>
-   *          </note>
-   *          <p>If you don't have the required support plan, you can instead use the AWS Health console
-   *          to enable the organizational view feature. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html">Aggregating
-   *             AWS Health events</a> in the <i>AWS Health User Guide</i>.</p>
-   */
-  public enableHealthServiceAccessForOrganization(
-    args: EnableHealthServiceAccessForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<EnableHealthServiceAccessForOrganizationCommandOutput>;
-  public enableHealthServiceAccessForOrganization(
-    args: EnableHealthServiceAccessForOrganizationCommandInput,
-    cb: (err: any, data?: EnableHealthServiceAccessForOrganizationCommandOutput) => void
-  ): void;
-  public enableHealthServiceAccessForOrganization(
-    args: EnableHealthServiceAccessForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: EnableHealthServiceAccessForOrganizationCommandOutput) => void
-  ): void;
-  public enableHealthServiceAccessForOrganization(
-    args: EnableHealthServiceAccessForOrganizationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: EnableHealthServiceAccessForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: EnableHealthServiceAccessForOrganizationCommandOutput) => void
-  ): Promise<EnableHealthServiceAccessForOrganizationCommandOutput> | void {
-    const command = new EnableHealthServiceAccessForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Health extends HealthClient implements Health {}
+createAggregatedClient(commands, Health, { paginators });

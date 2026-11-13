@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeProjectInput } from "../models/models_1";
-import { DescribeProjectOutput } from "../models/models_2";
-import {
-  deserializeAws_json1_1DescribeProjectCommand,
-  serializeAws_json1_1DescribeProjectCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeProjectInput, DescribeProjectOutput } from "../models/models_3";
+import { DescribeProject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeProjectCommand}.
+ */
 export interface DescribeProjectCommandInput extends DescribeProjectInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeProjectCommand}.
+ */
 export interface DescribeProjectCommandOutput extends DescribeProjectOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +29,108 @@ export interface DescribeProjectCommandOutput extends DescribeProjectOutput, __M
  * ```javascript
  * import { SageMakerClient, DescribeProjectCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeProjectCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeProjectInput
+ *   ProjectName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeProjectCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeProjectOutput
+ * //   ProjectArn: "STRING_VALUE", // required
+ * //   ProjectName: "STRING_VALUE", // required
+ * //   ProjectId: "STRING_VALUE", // required
+ * //   ProjectDescription: "STRING_VALUE",
+ * //   ServiceCatalogProvisioningDetails: { // ServiceCatalogProvisioningDetails
+ * //     ProductId: "STRING_VALUE", // required
+ * //     ProvisioningArtifactId: "STRING_VALUE",
+ * //     PathId: "STRING_VALUE",
+ * //     ProvisioningParameters: [ // ProvisioningParameters
+ * //       { // ProvisioningParameter
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * //   ServiceCatalogProvisionedProductDetails: { // ServiceCatalogProvisionedProductDetails
+ * //     ProvisionedProductId: "STRING_VALUE",
+ * //     ProvisionedProductStatusMessage: "STRING_VALUE",
+ * //   },
+ * //   ProjectStatus: "Pending" || "CreateInProgress" || "CreateCompleted" || "CreateFailed" || "DeleteInProgress" || "DeleteFailed" || "DeleteCompleted" || "UpdateInProgress" || "UpdateCompleted" || "UpdateFailed", // required
+ * //   TemplateProviderDetails: [ // TemplateProviderDetailList
+ * //     { // TemplateProviderDetail
+ * //       CfnTemplateProviderDetail: { // CfnTemplateProviderDetail
+ * //         TemplateName: "STRING_VALUE", // required
+ * //         TemplateURL: "STRING_VALUE", // required
+ * //         RoleARN: "STRING_VALUE",
+ * //         Parameters: [ // CfnStackParameters
+ * //           { // CfnStackParameter
+ * //             Key: "STRING_VALUE", // required
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         StackDetail: { // CfnStackDetail
+ * //           Name: "STRING_VALUE",
+ * //           Id: "STRING_VALUE",
+ * //           StatusMessage: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   CreationTime: new Date("TIMESTAMP"), // required
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeProjectCommandInput - {@link DescribeProjectCommandInput}
+ * @returns {@link DescribeProjectCommandOutput}
  * @see {@link DescribeProjectCommandInput} for command's `input` shape.
  * @see {@link DescribeProjectCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeProjectCommand extends $Command<
-  DescribeProjectCommandInput,
-  DescribeProjectCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeProjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeProjectCommandInput, DescribeProjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeProjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeProjectInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeProjectOutput.filterSensitiveLog,
+export class DescribeProjectCommand extends command<DescribeProjectCommandInput, DescribeProjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeProject",
+  DescribeProject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProjectInput;
+      output: DescribeProjectOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeProjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeProjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeProjectCommandOutput> {
-    return deserializeAws_json1_1DescribeProjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeProjectCommandInput;
+      output: DescribeProjectCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaConnectClient";
-import { ListWorkerConfigurationsRequest, ListWorkerConfigurationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListWorkerConfigurationsCommand,
-  serializeAws_restJson1ListWorkerConfigurationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListWorkerConfigurationsRequest, ListWorkerConfigurationsResponse } from "../models/models_0";
+import { ListWorkerConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListWorkerConfigurationsCommand}.
+ */
 export interface ListWorkerConfigurationsCommandInput extends ListWorkerConfigurationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListWorkerConfigurationsCommand}.
+ */
 export interface ListWorkerConfigurationsCommandOutput extends ListWorkerConfigurationsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,84 @@ export interface ListWorkerConfigurationsCommandOutput extends ListWorkerConfigu
  * ```javascript
  * import { KafkaConnectClient, ListWorkerConfigurationsCommand } from "@aws-sdk/client-kafkaconnect"; // ES Modules import
  * // const { KafkaConnectClient, ListWorkerConfigurationsCommand } = require("@aws-sdk/client-kafkaconnect"); // CommonJS import
+ * // import type { KafkaConnectClientConfig } from "@aws-sdk/client-kafkaconnect";
+ * const config = {}; // type is KafkaConnectClientConfig
  * const client = new KafkaConnectClient(config);
+ * const input = { // ListWorkerConfigurationsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   namePrefix: "STRING_VALUE",
+ * };
  * const command = new ListWorkerConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListWorkerConfigurationsResponse
+ * //   nextToken: "STRING_VALUE",
+ * //   workerConfigurations: [ // __listOfWorkerConfigurationSummary
+ * //     { // WorkerConfigurationSummary
+ * //       creationTime: new Date("TIMESTAMP"),
+ * //       description: "STRING_VALUE",
+ * //       latestRevision: { // WorkerConfigurationRevisionSummary
+ * //         creationTime: new Date("TIMESTAMP"),
+ * //         description: "STRING_VALUE",
+ * //         revision: Number("long"),
+ * //       },
+ * //       name: "STRING_VALUE",
+ * //       workerConfigurationArn: "STRING_VALUE",
+ * //       workerConfigurationState: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListWorkerConfigurationsCommandInput - {@link ListWorkerConfigurationsCommandInput}
+ * @returns {@link ListWorkerConfigurationsCommandOutput}
  * @see {@link ListWorkerConfigurationsCommandInput} for command's `input` shape.
  * @see {@link ListWorkerConfigurationsCommandOutput} for command's `response` shape.
- * @see {@link KafkaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaConnectClientResolvedConfig | config} for KafkaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might resolve the issue.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>HTTP Status Code 429: Limit exceeded. Resource limit reached.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated.</p>
+ *
+ * @throws {@link KafkaConnectServiceException}
+ * <p>Base exception class for all service exceptions from KafkaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class ListWorkerConfigurationsCommand extends $Command<
-  ListWorkerConfigurationsCommandInput,
-  ListWorkerConfigurationsCommandOutput,
-  KafkaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListWorkerConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListWorkerConfigurationsCommandInput, ListWorkerConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaConnectClient";
-    const commandName = "ListWorkerConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListWorkerConfigurationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListWorkerConfigurationsResponse.filterSensitiveLog,
+export class ListWorkerConfigurationsCommand extends command<ListWorkerConfigurationsCommandInput, ListWorkerConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListWorkerConfigurations",
+  ListWorkerConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWorkerConfigurationsRequest;
+      output: ListWorkerConfigurationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListWorkerConfigurationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListWorkerConfigurationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListWorkerConfigurationsCommandOutput> {
-    return deserializeAws_restJson1ListWorkerConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListWorkerConfigurationsCommandInput;
+      output: ListWorkerConfigurationsCommandOutput;
+    };
+  };
 }

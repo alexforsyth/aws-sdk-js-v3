@@ -1,22 +1,25 @@
-import { getPredictEndpointPlugin } from "@aws-sdk/middleware-sdk-machinelearning";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { PredictInput, PredictOutput } from "../models/models_0";
-import { deserializeAws_json1_1PredictCommand, serializeAws_json1_1PredictCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { PredictInput, PredictOutput } from "../models/models_0";
+import { Predict$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PredictCommand}.
+ */
 export interface PredictCommandInput extends PredictInput {}
+/**
+ * @public
+ *
+ * The output of {@link PredictCommand}.
+ */
 export interface PredictCommandOutput extends PredictOutput, __MetadataBearer {}
 
 /**
@@ -29,69 +32,75 @@ export interface PredictCommandOutput extends PredictOutput, __MetadataBearer {}
  * ```javascript
  * import { MachineLearningClient, PredictCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, PredictCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // PredictInput
+ *   MLModelId: "STRING_VALUE", // required
+ *   Record: { // Record // required
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   PredictEndpoint: "STRING_VALUE", // required
+ * };
  * const command = new PredictCommand(input);
  * const response = await client.send(command);
+ * // { // PredictOutput
+ * //   Prediction: { // Prediction
+ * //     predictedLabel: "STRING_VALUE",
+ * //     predictedValue: Number("float"),
+ * //     predictedScores: { // ScoreValuePerLabelMap
+ * //       "<keys>": Number("float"),
+ * //     },
+ * //     details: { // DetailsMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PredictCommandInput - {@link PredictCommandInput}
+ * @returns {@link PredictCommandOutput}
  * @see {@link PredictCommandInput} for command's `input` shape.
  * @see {@link PredictCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The subscriber exceeded the maximum number of operations. This exception can occur when listing objects such as <code>DataSource</code>.</p>
+ *
+ * @throws {@link PredictorNotMountedException} (client fault)
+ *  <p>The exception is thrown when a predict request is made to an unmounted <code>MLModel</code>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource cannot be located.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class PredictCommand extends $Command<
-  PredictCommandInput,
-  PredictCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PredictCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PredictCommandInput, PredictCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getPredictEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "PredictCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PredictInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PredictOutput.filterSensitiveLog,
+export class PredictCommand extends command<PredictCommandInput, PredictCommandOutput>(
+  _ep0,
+  _mw1,
+  "Predict",
+  Predict$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PredictInput;
+      output: PredictOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PredictCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PredictCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PredictCommandOutput> {
-    return deserializeAws_json1_1PredictCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PredictCommandInput;
+      output: PredictCommandOutput;
+    };
+  };
 }

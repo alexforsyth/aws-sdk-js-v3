@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteGeoMatchSetRequest, DeleteGeoMatchSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteGeoMatchSetCommand,
-  serializeAws_json1_1DeleteGeoMatchSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGeoMatchSetRequest, DeleteGeoMatchSetResponse } from "../models/models_0";
+import { DeleteGeoMatchSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGeoMatchSetCommand}.
+ */
 export interface DeleteGeoMatchSetCommandInput extends DeleteGeoMatchSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGeoMatchSetCommand}.
+ */
 export interface DeleteGeoMatchSetCommandOutput extends DeleteGeoMatchSetResponse, __MetadataBearer {}
 
 /**
@@ -51,68 +52,89 @@ export interface DeleteGeoMatchSetCommandOutput extends DeleteGeoMatchSetRespons
  * ```javascript
  * import { WAFRegionalClient, DeleteGeoMatchSetCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, DeleteGeoMatchSetCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // DeleteGeoMatchSetRequest
+ *   GeoMatchSetId: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new DeleteGeoMatchSetCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteGeoMatchSetResponse
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteGeoMatchSetCommandInput - {@link DeleteGeoMatchSetCommandInput}
+ * @returns {@link DeleteGeoMatchSetCommandOutput}
  * @see {@link DeleteGeoMatchSetCommandInput} for command's `input` shape.
  * @see {@link DeleteGeoMatchSetCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonEmptyEntityException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that isn't empty. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>WebACL</code> that still contains one or more <code>Rule</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that still contains one or more <code>ByteMatchSet</code> objects
+ * 				or other predicates.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that contains one or more <code>ByteMatchTuple</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete an <code>IPSet</code> that references one or more IP addresses.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFReferencedItemException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that is still in use. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that is still referenced by a <code>Rule</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that is still referenced by a <code>WebACL</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteGeoMatchSetCommand extends $Command<
-  DeleteGeoMatchSetCommandInput,
-  DeleteGeoMatchSetCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteGeoMatchSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteGeoMatchSetCommandInput, DeleteGeoMatchSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "DeleteGeoMatchSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteGeoMatchSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteGeoMatchSetResponse.filterSensitiveLog,
+export class DeleteGeoMatchSetCommand extends command<DeleteGeoMatchSetCommandInput, DeleteGeoMatchSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGeoMatchSet",
+  DeleteGeoMatchSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGeoMatchSetRequest;
+      output: DeleteGeoMatchSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteGeoMatchSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteGeoMatchSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteGeoMatchSetCommandOutput> {
-    return deserializeAws_json1_1DeleteGeoMatchSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteGeoMatchSetCommandInput;
+      output: DeleteGeoMatchSetCommandOutput;
+    };
+  };
 }

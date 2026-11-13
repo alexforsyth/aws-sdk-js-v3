@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { GetLoggingOptionsRequest, GetLoggingOptionsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1GetLoggingOptionsCommand,
-  serializeAws_restJson1GetLoggingOptionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLoggingOptionsRequest, GetLoggingOptionsResponse } from "../models/models_1";
+import { GetLoggingOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLoggingOptionsCommand}.
+ */
 export interface GetLoggingOptionsCommandInput extends GetLoggingOptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLoggingOptionsCommand}.
+ */
 export interface GetLoggingOptionsCommandOutput extends GetLoggingOptionsResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,55 @@ export interface GetLoggingOptionsCommandOutput extends GetLoggingOptionsRespons
  * ```javascript
  * import { IoTClient, GetLoggingOptionsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, GetLoggingOptionsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = {};
  * const command = new GetLoggingOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // GetLoggingOptionsResponse
+ * //   roleArn: "STRING_VALUE",
+ * //   logLevel: "DEBUG" || "INFO" || "ERROR" || "WARN" || "DISABLED",
+ * // };
+ *
  * ```
  *
+ * @param GetLoggingOptionsCommandInput - {@link GetLoggingOptionsCommandInput}
+ * @returns {@link GetLoggingOptionsCommandOutput}
  * @see {@link GetLoggingOptionsCommandInput} for command's `input` shape.
  * @see {@link GetLoggingOptionsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class GetLoggingOptionsCommand extends $Command<
-  GetLoggingOptionsCommandInput,
-  GetLoggingOptionsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLoggingOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLoggingOptionsCommandInput, GetLoggingOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "GetLoggingOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLoggingOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLoggingOptionsResponse.filterSensitiveLog,
+export class GetLoggingOptionsCommand extends command<GetLoggingOptionsCommandInput, GetLoggingOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLoggingOptions",
+  GetLoggingOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetLoggingOptionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLoggingOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetLoggingOptionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLoggingOptionsCommandOutput> {
-    return deserializeAws_restJson1GetLoggingOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLoggingOptionsCommandInput;
+      output: GetLoggingOptionsCommandOutput;
+    };
+  };
 }

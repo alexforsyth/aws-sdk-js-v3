@@ -1,0 +1,92 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAuthPolicyRequest, PutAuthPolicyResponse } from "../models/models_0";
+import { PutAuthPolicy$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAuthPolicyCommand}.
+ */
+export interface PutAuthPolicyCommandInput extends PutAuthPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutAuthPolicyCommand}.
+ */
+export interface PutAuthPolicyCommandOutput extends PutAuthPolicyResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates or updates the auth policy. The policy string in JSON must not contain newlines or blank lines.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html">Auth policies</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { VPCLatticeClient, PutAuthPolicyCommand } from "@aws-sdk/client-vpc-lattice"; // ES Modules import
+ * // const { VPCLatticeClient, PutAuthPolicyCommand } = require("@aws-sdk/client-vpc-lattice"); // CommonJS import
+ * // import type { VPCLatticeClientConfig } from "@aws-sdk/client-vpc-lattice";
+ * const config = {}; // type is VPCLatticeClientConfig
+ * const client = new VPCLatticeClient(config);
+ * const input = { // PutAuthPolicyRequest
+ *   resourceIdentifier: "STRING_VALUE", // required
+ *   policy: "STRING_VALUE", // required
+ * };
+ * const command = new PutAuthPolicyCommand(input);
+ * const response = await client.send(command);
+ * // { // PutAuthPolicyResponse
+ * //   policy: "STRING_VALUE",
+ * //   state: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param PutAuthPolicyCommandInput - {@link PutAuthPolicyCommandInput}
+ * @returns {@link PutAuthPolicyCommandOutput}
+ * @see {@link PutAuthPolicyCommandInput} for command's `input` shape.
+ * @see {@link PutAuthPolicyCommandOutput} for command's `response` shape.
+ * @see {@link VPCLatticeClientResolvedConfig | config} for VPCLatticeClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link VPCLatticeServiceException}
+ * <p>Base exception class for all service exceptions from VPCLattice service.</p>
+ *
+ *
+ * @public
+ */
+export class PutAuthPolicyCommand extends command<PutAuthPolicyCommandInput, PutAuthPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAuthPolicy",
+  PutAuthPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAuthPolicyRequest;
+      output: PutAuthPolicyResponse;
+    };
+    sdk: {
+      input: PutAuthPolicyCommandInput;
+      output: PutAuthPolicyCommandOutput;
+    };
+  };
+}

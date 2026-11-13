@@ -1,95 +1,121 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { GetFindingRequest, GetFindingResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFindingCommand,
-  serializeAws_restJson1GetFindingCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFindingRequest, GetFindingResponse } from "../models/models_0";
+import { GetFinding$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFindingCommand}.
+ */
 export interface GetFindingCommandInput extends GetFindingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFindingCommand}.
+ */
 export interface GetFindingCommandOutput extends GetFindingResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves information about the specified finding.</p>
+ * <p>Retrieves information about the specified finding. GetFinding and GetFindingV2 both use <code>access-analyzer:GetFinding</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:GetFinding</code> action.</p> <note> <p>GetFinding is supported only for external access analyzers. You must use GetFindingV2 for internal and unused access analyzers.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AccessAnalyzerClient, GetFindingCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, GetFindingCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // GetFindingRequest
+ *   analyzerArn: "STRING_VALUE", // required
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new GetFindingCommand(input);
  * const response = await client.send(command);
+ * // { // GetFindingResponse
+ * //   finding: { // Finding
+ * //     id: "STRING_VALUE", // required
+ * //     principal: { // PrincipalMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     action: [ // ActionList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     resource: "STRING_VALUE",
+ * //     isPublic: true || false,
+ * //     resourceType: "STRING_VALUE", // required
+ * //     condition: { // ConditionKeyMap // required
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     analyzedAt: new Date("TIMESTAMP"), // required
+ * //     updatedAt: new Date("TIMESTAMP"), // required
+ * //     status: "STRING_VALUE", // required
+ * //     resourceOwnerAccount: "STRING_VALUE", // required
+ * //     error: "STRING_VALUE",
+ * //     sources: [ // FindingSourceList
+ * //       { // FindingSource
+ * //         type: "STRING_VALUE", // required
+ * //         detail: { // FindingSourceDetail
+ * //           accessPointArn: "STRING_VALUE",
+ * //           accessPointAccount: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //     resourceControlPolicyRestriction: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetFindingCommandInput - {@link GetFindingCommandInput}
+ * @returns {@link GetFindingCommandOutput}
  * @see {@link GetFindingCommandInput} for command's `input` shape.
  * @see {@link GetFindingCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class GetFindingCommand extends $Command<
-  GetFindingCommandInput,
-  GetFindingCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFindingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFindingCommandInput, GetFindingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "GetFindingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFindingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFindingResponse.filterSensitiveLog,
+export class GetFindingCommand extends command<GetFindingCommandInput, GetFindingCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFinding",
+  GetFinding$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFindingRequest;
+      output: GetFindingResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFindingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFindingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFindingCommandOutput> {
-    return deserializeAws_restJson1GetFindingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFindingCommandInput;
+      output: GetFindingCommandOutput;
+    };
+  };
 }

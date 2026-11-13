@@ -1,201 +1,274 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddInstanceFleetCommandInput, AddInstanceFleetCommandOutput } from "./commands/AddInstanceFleetCommand";
-import { AddInstanceGroupsCommandInput, AddInstanceGroupsCommandOutput } from "./commands/AddInstanceGroupsCommand";
-import { AddJobFlowStepsCommandInput, AddJobFlowStepsCommandOutput } from "./commands/AddJobFlowStepsCommand";
-import { AddTagsCommandInput, AddTagsCommandOutput } from "./commands/AddTagsCommand";
-import { CancelStepsCommandInput, CancelStepsCommandOutput } from "./commands/CancelStepsCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultEMRHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AddInstanceFleetCommandInput, AddInstanceFleetCommandOutput } from "./commands/AddInstanceFleetCommand";
+import type {
+  AddInstanceGroupsCommandInput,
+  AddInstanceGroupsCommandOutput,
+} from "./commands/AddInstanceGroupsCommand";
+import type { AddJobFlowStepsCommandInput, AddJobFlowStepsCommandOutput } from "./commands/AddJobFlowStepsCommand";
+import type { AddTagsCommandInput, AddTagsCommandOutput } from "./commands/AddTagsCommand";
+import type { CancelStepsCommandInput, CancelStepsCommandOutput } from "./commands/CancelStepsCommand";
+import type {
+  CreatePersistentAppUICommandInput,
+  CreatePersistentAppUICommandOutput,
+} from "./commands/CreatePersistentAppUICommand";
+import type {
   CreateSecurityConfigurationCommandInput,
   CreateSecurityConfigurationCommandOutput,
 } from "./commands/CreateSecurityConfigurationCommand";
-import { CreateStudioCommandInput, CreateStudioCommandOutput } from "./commands/CreateStudioCommand";
-import {
+import type { CreateStudioCommandInput, CreateStudioCommandOutput } from "./commands/CreateStudioCommand";
+import type {
   CreateStudioSessionMappingCommandInput,
   CreateStudioSessionMappingCommandOutput,
 } from "./commands/CreateStudioSessionMappingCommand";
-import {
+import type {
   DeleteSecurityConfigurationCommandInput,
   DeleteSecurityConfigurationCommandOutput,
 } from "./commands/DeleteSecurityConfigurationCommand";
-import { DeleteStudioCommandInput, DeleteStudioCommandOutput } from "./commands/DeleteStudioCommand";
-import {
+import type { DeleteStudioCommandInput, DeleteStudioCommandOutput } from "./commands/DeleteStudioCommand";
+import type {
   DeleteStudioSessionMappingCommandInput,
   DeleteStudioSessionMappingCommandOutput,
 } from "./commands/DeleteStudioSessionMappingCommand";
-import { DescribeClusterCommandInput, DescribeClusterCommandOutput } from "./commands/DescribeClusterCommand";
-import { DescribeJobFlowsCommandInput, DescribeJobFlowsCommandOutput } from "./commands/DescribeJobFlowsCommand";
-import {
+import type { DescribeClusterCommandInput, DescribeClusterCommandOutput } from "./commands/DescribeClusterCommand";
+import type { DescribeJobFlowsCommandInput, DescribeJobFlowsCommandOutput } from "./commands/DescribeJobFlowsCommand";
+import type {
   DescribeNotebookExecutionCommandInput,
   DescribeNotebookExecutionCommandOutput,
 } from "./commands/DescribeNotebookExecutionCommand";
-import {
+import type {
+  DescribePersistentAppUICommandInput,
+  DescribePersistentAppUICommandOutput,
+} from "./commands/DescribePersistentAppUICommand";
+import type {
   DescribeReleaseLabelCommandInput,
   DescribeReleaseLabelCommandOutput,
 } from "./commands/DescribeReleaseLabelCommand";
-import {
+import type {
   DescribeSecurityConfigurationCommandInput,
   DescribeSecurityConfigurationCommandOutput,
 } from "./commands/DescribeSecurityConfigurationCommand";
-import { DescribeStepCommandInput, DescribeStepCommandOutput } from "./commands/DescribeStepCommand";
-import { DescribeStudioCommandInput, DescribeStudioCommandOutput } from "./commands/DescribeStudioCommand";
-import {
+import type { DescribeStepCommandInput, DescribeStepCommandOutput } from "./commands/DescribeStepCommand";
+import type { DescribeStudioCommandInput, DescribeStudioCommandOutput } from "./commands/DescribeStudioCommand";
+import type {
   GetAutoTerminationPolicyCommandInput,
   GetAutoTerminationPolicyCommandOutput,
 } from "./commands/GetAutoTerminationPolicyCommand";
-import {
+import type {
   GetBlockPublicAccessConfigurationCommandInput,
   GetBlockPublicAccessConfigurationCommandOutput,
 } from "./commands/GetBlockPublicAccessConfigurationCommand";
-import {
+import type {
+  GetClusterSessionCredentialsCommandInput,
+  GetClusterSessionCredentialsCommandOutput,
+} from "./commands/GetClusterSessionCredentialsCommand";
+import type {
   GetManagedScalingPolicyCommandInput,
   GetManagedScalingPolicyCommandOutput,
 } from "./commands/GetManagedScalingPolicyCommand";
-import {
+import type {
+  GetOnClusterAppUIPresignedURLCommandInput,
+  GetOnClusterAppUIPresignedURLCommandOutput,
+} from "./commands/GetOnClusterAppUIPresignedURLCommand";
+import type {
+  GetPersistentAppUIPresignedURLCommandInput,
+  GetPersistentAppUIPresignedURLCommandOutput,
+} from "./commands/GetPersistentAppUIPresignedURLCommand";
+import type { GetSessionCommandInput, GetSessionCommandOutput } from "./commands/GetSessionCommand";
+import type {
+  GetSessionEndpointCommandInput,
+  GetSessionEndpointCommandOutput,
+} from "./commands/GetSessionEndpointCommand";
+import type {
   GetStudioSessionMappingCommandInput,
   GetStudioSessionMappingCommandOutput,
 } from "./commands/GetStudioSessionMappingCommand";
-import {
+import type {
   ListBootstrapActionsCommandInput,
   ListBootstrapActionsCommandOutput,
 } from "./commands/ListBootstrapActionsCommand";
-import { ListClustersCommandInput, ListClustersCommandOutput } from "./commands/ListClustersCommand";
-import { ListInstanceFleetsCommandInput, ListInstanceFleetsCommandOutput } from "./commands/ListInstanceFleetsCommand";
-import { ListInstanceGroupsCommandInput, ListInstanceGroupsCommandOutput } from "./commands/ListInstanceGroupsCommand";
-import { ListInstancesCommandInput, ListInstancesCommandOutput } from "./commands/ListInstancesCommand";
-import {
+import type { ListClustersCommandInput, ListClustersCommandOutput } from "./commands/ListClustersCommand";
+import type {
+  ListInstanceFleetsCommandInput,
+  ListInstanceFleetsCommandOutput,
+} from "./commands/ListInstanceFleetsCommand";
+import type {
+  ListInstanceGroupsCommandInput,
+  ListInstanceGroupsCommandOutput,
+} from "./commands/ListInstanceGroupsCommand";
+import type { ListInstancesCommandInput, ListInstancesCommandOutput } from "./commands/ListInstancesCommand";
+import type {
   ListNotebookExecutionsCommandInput,
   ListNotebookExecutionsCommandOutput,
 } from "./commands/ListNotebookExecutionsCommand";
-import { ListReleaseLabelsCommandInput, ListReleaseLabelsCommandOutput } from "./commands/ListReleaseLabelsCommand";
-import {
+import type {
+  ListReleaseLabelsCommandInput,
+  ListReleaseLabelsCommandOutput,
+} from "./commands/ListReleaseLabelsCommand";
+import type {
   ListSecurityConfigurationsCommandInput,
   ListSecurityConfigurationsCommandOutput,
 } from "./commands/ListSecurityConfigurationsCommand";
-import { ListStepsCommandInput, ListStepsCommandOutput } from "./commands/ListStepsCommand";
-import { ListStudiosCommandInput, ListStudiosCommandOutput } from "./commands/ListStudiosCommand";
-import {
+import type { ListSessionsCommandInput, ListSessionsCommandOutput } from "./commands/ListSessionsCommand";
+import type { ListStepsCommandInput, ListStepsCommandOutput } from "./commands/ListStepsCommand";
+import type { ListStudiosCommandInput, ListStudiosCommandOutput } from "./commands/ListStudiosCommand";
+import type {
   ListStudioSessionMappingsCommandInput,
   ListStudioSessionMappingsCommandOutput,
 } from "./commands/ListStudioSessionMappingsCommand";
-import { ModifyClusterCommandInput, ModifyClusterCommandOutput } from "./commands/ModifyClusterCommand";
-import {
+import type {
+  ListSupportedInstanceTypesCommandInput,
+  ListSupportedInstanceTypesCommandOutput,
+} from "./commands/ListSupportedInstanceTypesCommand";
+import type { ModifyClusterCommandInput, ModifyClusterCommandOutput } from "./commands/ModifyClusterCommand";
+import type {
   ModifyInstanceFleetCommandInput,
   ModifyInstanceFleetCommandOutput,
 } from "./commands/ModifyInstanceFleetCommand";
-import {
+import type {
   ModifyInstanceGroupsCommandInput,
   ModifyInstanceGroupsCommandOutput,
 } from "./commands/ModifyInstanceGroupsCommand";
-import {
+import type {
   PutAutoScalingPolicyCommandInput,
   PutAutoScalingPolicyCommandOutput,
 } from "./commands/PutAutoScalingPolicyCommand";
-import {
+import type {
   PutAutoTerminationPolicyCommandInput,
   PutAutoTerminationPolicyCommandOutput,
 } from "./commands/PutAutoTerminationPolicyCommand";
-import {
+import type {
   PutBlockPublicAccessConfigurationCommandInput,
   PutBlockPublicAccessConfigurationCommandOutput,
 } from "./commands/PutBlockPublicAccessConfigurationCommand";
-import {
+import type {
   PutManagedScalingPolicyCommandInput,
   PutManagedScalingPolicyCommandOutput,
 } from "./commands/PutManagedScalingPolicyCommand";
-import {
+import type {
   RemoveAutoScalingPolicyCommandInput,
   RemoveAutoScalingPolicyCommandOutput,
 } from "./commands/RemoveAutoScalingPolicyCommand";
-import {
+import type {
   RemoveAutoTerminationPolicyCommandInput,
   RemoveAutoTerminationPolicyCommandOutput,
 } from "./commands/RemoveAutoTerminationPolicyCommand";
-import {
+import type {
   RemoveManagedScalingPolicyCommandInput,
   RemoveManagedScalingPolicyCommandOutput,
 } from "./commands/RemoveManagedScalingPolicyCommand";
-import { RemoveTagsCommandInput, RemoveTagsCommandOutput } from "./commands/RemoveTagsCommand";
-import { RunJobFlowCommandInput, RunJobFlowCommandOutput } from "./commands/RunJobFlowCommand";
-import {
+import type { RemoveTagsCommandInput, RemoveTagsCommandOutput } from "./commands/RemoveTagsCommand";
+import type { RunJobFlowCommandInput, RunJobFlowCommandOutput } from "./commands/RunJobFlowCommand";
+import type {
+  SetKeepJobFlowAliveWhenNoStepsCommandInput,
+  SetKeepJobFlowAliveWhenNoStepsCommandOutput,
+} from "./commands/SetKeepJobFlowAliveWhenNoStepsCommand";
+import type {
   SetTerminationProtectionCommandInput,
   SetTerminationProtectionCommandOutput,
 } from "./commands/SetTerminationProtectionCommand";
-import {
+import type {
+  SetUnhealthyNodeReplacementCommandInput,
+  SetUnhealthyNodeReplacementCommandOutput,
+} from "./commands/SetUnhealthyNodeReplacementCommand";
+import type {
   SetVisibleToAllUsersCommandInput,
   SetVisibleToAllUsersCommandOutput,
 } from "./commands/SetVisibleToAllUsersCommand";
-import {
+import type {
   StartNotebookExecutionCommandInput,
   StartNotebookExecutionCommandOutput,
 } from "./commands/StartNotebookExecutionCommand";
-import {
+import type { StartSessionCommandInput, StartSessionCommandOutput } from "./commands/StartSessionCommand";
+import type {
   StopNotebookExecutionCommandInput,
   StopNotebookExecutionCommandOutput,
 } from "./commands/StopNotebookExecutionCommand";
-import { TerminateJobFlowsCommandInput, TerminateJobFlowsCommandOutput } from "./commands/TerminateJobFlowsCommand";
-import { UpdateStudioCommandInput, UpdateStudioCommandOutput } from "./commands/UpdateStudioCommand";
-import {
+import type {
+  TerminateJobFlowsCommandInput,
+  TerminateJobFlowsCommandOutput,
+} from "./commands/TerminateJobFlowsCommand";
+import type { TerminateSessionCommandInput, TerminateSessionCommandOutput } from "./commands/TerminateSessionCommand";
+import type { UpdateStudioCommandInput, UpdateStudioCommandOutput } from "./commands/UpdateStudioCommand";
+import type {
   UpdateStudioSessionMappingCommandInput,
   UpdateStudioSessionMappingCommandOutput,
 } from "./commands/UpdateStudioSessionMappingCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddInstanceFleetCommandInput
   | AddInstanceGroupsCommandInput
   | AddJobFlowStepsCommandInput
   | AddTagsCommandInput
   | CancelStepsCommandInput
+  | CreatePersistentAppUICommandInput
   | CreateSecurityConfigurationCommandInput
   | CreateStudioCommandInput
   | CreateStudioSessionMappingCommandInput
@@ -205,13 +278,19 @@ export type ServiceInputTypes =
   | DescribeClusterCommandInput
   | DescribeJobFlowsCommandInput
   | DescribeNotebookExecutionCommandInput
+  | DescribePersistentAppUICommandInput
   | DescribeReleaseLabelCommandInput
   | DescribeSecurityConfigurationCommandInput
   | DescribeStepCommandInput
   | DescribeStudioCommandInput
   | GetAutoTerminationPolicyCommandInput
   | GetBlockPublicAccessConfigurationCommandInput
+  | GetClusterSessionCredentialsCommandInput
   | GetManagedScalingPolicyCommandInput
+  | GetOnClusterAppUIPresignedURLCommandInput
+  | GetPersistentAppUIPresignedURLCommandInput
+  | GetSessionCommandInput
+  | GetSessionEndpointCommandInput
   | GetStudioSessionMappingCommandInput
   | ListBootstrapActionsCommandInput
   | ListClustersCommandInput
@@ -221,9 +300,11 @@ export type ServiceInputTypes =
   | ListNotebookExecutionsCommandInput
   | ListReleaseLabelsCommandInput
   | ListSecurityConfigurationsCommandInput
+  | ListSessionsCommandInput
   | ListStepsCommandInput
   | ListStudioSessionMappingsCommandInput
   | ListStudiosCommandInput
+  | ListSupportedInstanceTypesCommandInput
   | ModifyClusterCommandInput
   | ModifyInstanceFleetCommandInput
   | ModifyInstanceGroupsCommandInput
@@ -236,20 +317,28 @@ export type ServiceInputTypes =
   | RemoveManagedScalingPolicyCommandInput
   | RemoveTagsCommandInput
   | RunJobFlowCommandInput
+  | SetKeepJobFlowAliveWhenNoStepsCommandInput
   | SetTerminationProtectionCommandInput
+  | SetUnhealthyNodeReplacementCommandInput
   | SetVisibleToAllUsersCommandInput
   | StartNotebookExecutionCommandInput
+  | StartSessionCommandInput
   | StopNotebookExecutionCommandInput
   | TerminateJobFlowsCommandInput
+  | TerminateSessionCommandInput
   | UpdateStudioCommandInput
   | UpdateStudioSessionMappingCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddInstanceFleetCommandOutput
   | AddInstanceGroupsCommandOutput
   | AddJobFlowStepsCommandOutput
   | AddTagsCommandOutput
   | CancelStepsCommandOutput
+  | CreatePersistentAppUICommandOutput
   | CreateSecurityConfigurationCommandOutput
   | CreateStudioCommandOutput
   | CreateStudioSessionMappingCommandOutput
@@ -259,13 +348,19 @@ export type ServiceOutputTypes =
   | DescribeClusterCommandOutput
   | DescribeJobFlowsCommandOutput
   | DescribeNotebookExecutionCommandOutput
+  | DescribePersistentAppUICommandOutput
   | DescribeReleaseLabelCommandOutput
   | DescribeSecurityConfigurationCommandOutput
   | DescribeStepCommandOutput
   | DescribeStudioCommandOutput
   | GetAutoTerminationPolicyCommandOutput
   | GetBlockPublicAccessConfigurationCommandOutput
+  | GetClusterSessionCredentialsCommandOutput
   | GetManagedScalingPolicyCommandOutput
+  | GetOnClusterAppUIPresignedURLCommandOutput
+  | GetPersistentAppUIPresignedURLCommandOutput
+  | GetSessionCommandOutput
+  | GetSessionEndpointCommandOutput
   | GetStudioSessionMappingCommandOutput
   | ListBootstrapActionsCommandOutput
   | ListClustersCommandOutput
@@ -275,9 +370,11 @@ export type ServiceOutputTypes =
   | ListNotebookExecutionsCommandOutput
   | ListReleaseLabelsCommandOutput
   | ListSecurityConfigurationsCommandOutput
+  | ListSessionsCommandOutput
   | ListStepsCommandOutput
   | ListStudioSessionMappingsCommandOutput
   | ListStudiosCommandOutput
+  | ListSupportedInstanceTypesCommandOutput
   | ModifyClusterCommandOutput
   | ModifyInstanceFleetCommandOutput
   | ModifyInstanceGroupsCommandOutput
@@ -290,26 +387,33 @@ export type ServiceOutputTypes =
   | RemoveManagedScalingPolicyCommandOutput
   | RemoveTagsCommandOutput
   | RunJobFlowCommandOutput
+  | SetKeepJobFlowAliveWhenNoStepsCommandOutput
   | SetTerminationProtectionCommandOutput
+  | SetUnhealthyNodeReplacementCommandOutput
   | SetVisibleToAllUsersCommandOutput
   | StartNotebookExecutionCommandOutput
+  | StartSessionCommandOutput
   | StopNotebookExecutionCommandOutput
   | TerminateJobFlowsCommandOutput
+  | TerminateSessionCommandOutput
   | UpdateStudioCommandOutput
   | UpdateStudioSessionMappingCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -321,7 +425,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -360,25 +464,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -391,66 +486,115 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type EMRClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of EMRClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type EMRClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of EMRClient class constructor that set the region, credentials and other options.
  */
 export interface EMRClientConfig extends EMRClientConfigType {}
 
-type EMRClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of EMRClient class. This is resolved and normalized from the {@link EMRClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type EMRClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of EMRClient class. This is resolved and normalized from the {@link EMRClientConfig | constructor configuration interface}.
  */
 export interface EMRClientResolvedConfig extends EMRClientResolvedConfigType {}
 
 /**
- * <p>Amazon EMR is a web service that makes it easier to process large amounts of data
- *          efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do
- *          tasks such as web indexing, data mining, log file analysis, machine learning, scientific
- *          simulation, and data warehouse management.</p>
+ * <p>Amazon EMR is a web service that makes it easier to process large amounts of
+ *          data efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do tasks such as web indexing, data mining, log file analysis,
+ *          machine learning, scientific simulation, and data warehouse management.</p>
+ * @public
  */
 export class EMRClient extends __Client<
   __HttpHandlerOptions,
@@ -463,22 +607,36 @@ export class EMRClient extends __Client<
    */
   readonly config: EMRClientResolvedConfig;
 
-  constructor(configuration: EMRClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<EMRClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultEMRHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: EMRClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

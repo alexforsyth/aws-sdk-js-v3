@@ -1,28 +1,40 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeInstancesCommand, DescribeInstancesCommandInput } from "../commands/DescribeInstancesCommand";
-import { EC2Client } from "../EC2Client";
+import {
+  type DescribeInstancesCommandInput,
+  type DescribeInstancesCommandOutput,
+  DescribeInstancesCommand,
+} from "../commands/DescribeInstancesCommand";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeInstancesCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeInstancesCommandInput): Promise<WaiterResult<DescribeInstancesCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeInstancesCommand(input));
+    let result: DescribeInstancesCommandOutput & any = await client.send(new DescribeInstancesCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Reservations);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Reservations);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Instances;
         });
-        const flat_4: any[] = [].concat(...projection_3);
-        const projection_6 = flat_4.map((element_5: any) => {
+        let flat_4: any[] = [].concat(...projection_3);
+        let projection_6 = flat_4.map((element_5: any) => {
           return element_5.State.Name;
         });
         return projection_6;
-      };
-      let allStringEq_8 = returnComparator().length > 0;
-      for (const element_7 of returnComparator()) {
-        allStringEq_8 = allStringEq_8 && element_7 == "running";
+      }
+      let allStringEq_8 = (returnComparator().length > 0);
+      for (let element_7 of returnComparator()) {
+        allStringEq_8 = allStringEq_8 && (element_7 == "running")
       }
       if (allStringEq_8) {
         return { state: WaiterState.SUCCESS, reason };
@@ -30,17 +42,17 @@ const checkState = async (client: EC2Client, input: DescribeInstancesCommandInpu
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Reservations);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Reservations);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Instances;
         });
-        const flat_4: any[] = [].concat(...projection_3);
-        const projection_6 = flat_4.map((element_5: any) => {
+        let flat_4: any[] = [].concat(...projection_3);
+        let projection_6 = flat_4.map((element_5: any) => {
           return element_5.State.Name;
         });
         return projection_6;
-      };
-      for (const anyStringEq_7 of returnComparator()) {
+      }
+      for (let anyStringEq_7 of returnComparator()) {
         if (anyStringEq_7 == "shutting-down") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -48,17 +60,17 @@ const checkState = async (client: EC2Client, input: DescribeInstancesCommandInpu
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Reservations);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Reservations);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Instances;
         });
-        const flat_4: any[] = [].concat(...projection_3);
-        const projection_6 = flat_4.map((element_5: any) => {
+        let flat_4: any[] = [].concat(...projection_3);
+        let projection_6 = flat_4.map((element_5: any) => {
           return element_5.State.Name;
         });
         return projection_6;
-      };
-      for (const anyStringEq_7 of returnComparator()) {
+      }
+      for (let anyStringEq_7 of returnComparator()) {
         if (anyStringEq_7 == "terminated") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -66,17 +78,17 @@ const checkState = async (client: EC2Client, input: DescribeInstancesCommandInpu
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Reservations);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Reservations);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Instances;
         });
-        const flat_4: any[] = [].concat(...projection_3);
-        const projection_6 = flat_4.map((element_5: any) => {
+        let flat_4: any[] = [].concat(...projection_3);
+        let projection_6 = flat_4.map((element_5: any) => {
           return element_5.State.Name;
         });
         return projection_6;
-      };
-      for (const anyStringEq_7 of returnComparator()) {
+      }
+      for (let anyStringEq_7 of returnComparator()) {
         if (anyStringEq_7 == "stopping") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -84,7 +96,7 @@ const checkState = async (client: EC2Client, input: DescribeInstancesCommandInpu
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InvalidInstanceID.NotFound") {
+    if (exception.name === "InvalidInstanceID.NotFound") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -97,7 +109,7 @@ const checkState = async (client: EC2Client, input: DescribeInstancesCommandInpu
 export const waitForInstanceRunning = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeInstancesCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeInstancesCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -109,8 +121,8 @@ export const waitForInstanceRunning = async (
 export const waitUntilInstanceRunning = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeInstancesCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeInstancesCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeInstancesCommandOutput>;
 };

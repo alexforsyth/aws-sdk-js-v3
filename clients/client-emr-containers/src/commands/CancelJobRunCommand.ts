@@ -1,95 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRContainersClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRContainersClient";
-import { CancelJobRunRequest, CancelJobRunResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CancelJobRunCommand,
-  serializeAws_restJson1CancelJobRunCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelJobRunRequest, CancelJobRunResponse } from "../models/models_0";
+import { CancelJobRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelJobRunCommand}.
+ */
 export interface CancelJobRunCommandInput extends CancelJobRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelJobRunCommand}.
+ */
 export interface CancelJobRunCommandOutput extends CancelJobRunResponse, __MetadataBearer {}
 
 /**
- * <p>Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>
+ * <p>Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or
+ *          SparkSQL query, that you submit to Amazon EMR on EKS.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EMRContainersClient, CancelJobRunCommand } from "@aws-sdk/client-emr-containers"; // ES Modules import
  * // const { EMRContainersClient, CancelJobRunCommand } = require("@aws-sdk/client-emr-containers"); // CommonJS import
+ * // import type { EMRContainersClientConfig } from "@aws-sdk/client-emr-containers";
+ * const config = {}; // type is EMRContainersClientConfig
  * const client = new EMRContainersClient(config);
+ * const input = { // CancelJobRunRequest
+ *   id: "STRING_VALUE", // required
+ *   virtualClusterId: "STRING_VALUE", // required
+ * };
  * const command = new CancelJobRunCommand(input);
  * const response = await client.send(command);
+ * // { // CancelJobRunResponse
+ * //   id: "STRING_VALUE",
+ * //   virtualClusterId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CancelJobRunCommandInput - {@link CancelJobRunCommandInput}
+ * @returns {@link CancelJobRunCommandOutput}
  * @see {@link CancelJobRunCommandInput} for command's `input` shape.
  * @see {@link CancelJobRunCommandOutput} for command's `response` shape.
- * @see {@link EMRContainersClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRContainersClientResolvedConfig | config} for EMRContainersClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This is an internal server exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There are invalid parameters in the client request.</p>
+ *
+ * @throws {@link EMRContainersServiceException}
+ * <p>Base exception class for all service exceptions from EMRContainers service.</p>
+ *
+ *
+ * @public
  */
-export class CancelJobRunCommand extends $Command<
-  CancelJobRunCommandInput,
-  CancelJobRunCommandOutput,
-  EMRContainersClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelJobRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRContainersClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelJobRunCommandInput, CancelJobRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRContainersClient";
-    const commandName = "CancelJobRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelJobRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelJobRunResponse.filterSensitiveLog,
+export class CancelJobRunCommand extends command<CancelJobRunCommandInput, CancelJobRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelJobRun",
+  CancelJobRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelJobRunRequest;
+      output: CancelJobRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelJobRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CancelJobRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelJobRunCommandOutput> {
-    return deserializeAws_restJson1CancelJobRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelJobRunCommandInput;
+      output: CancelJobRunCommandOutput;
+    };
+  };
 }

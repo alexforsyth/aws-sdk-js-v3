@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { PutImageTagMutabilityRequest, PutImageTagMutabilityResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutImageTagMutabilityCommand,
-  serializeAws_json1_1PutImageTagMutabilityCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutImageTagMutabilityRequest, PutImageTagMutabilityResponse } from "../models/models_0";
+import { PutImageTagMutability$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutImageTagMutabilityCommand}.
+ */
 export interface PutImageTagMutabilityCommandInput extends PutImageTagMutabilityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutImageTagMutabilityCommand}.
+ */
 export interface PutImageTagMutabilityCommandOutput extends PutImageTagMutabilityResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,74 @@ export interface PutImageTagMutabilityCommandOutput extends PutImageTagMutabilit
  * ```javascript
  * import { ECRClient, PutImageTagMutabilityCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, PutImageTagMutabilityCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // PutImageTagMutabilityRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   imageTagMutability: "MUTABLE" || "IMMUTABLE" || "IMMUTABLE_WITH_EXCLUSION" || "MUTABLE_WITH_EXCLUSION", // required
+ *   imageTagMutabilityExclusionFilters: [ // ImageTagMutabilityExclusionFilters
+ *     { // ImageTagMutabilityExclusionFilter
+ *       filterType: "WILDCARD", // required
+ *       filter: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new PutImageTagMutabilityCommand(input);
  * const response = await client.send(command);
+ * // { // PutImageTagMutabilityResponse
+ * //   registryId: "STRING_VALUE",
+ * //   repositoryName: "STRING_VALUE",
+ * //   imageTagMutability: "MUTABLE" || "IMMUTABLE" || "IMMUTABLE_WITH_EXCLUSION" || "MUTABLE_WITH_EXCLUSION",
+ * //   imageTagMutabilityExclusionFilters: [ // ImageTagMutabilityExclusionFilters
+ * //     { // ImageTagMutabilityExclusionFilter
+ * //       filterType: "WILDCARD", // required
+ * //       filter: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PutImageTagMutabilityCommandInput - {@link PutImageTagMutabilityCommandInput}
+ * @returns {@link PutImageTagMutabilityCommandOutput}
  * @see {@link PutImageTagMutabilityCommandInput} for command's `input` shape.
  * @see {@link PutImageTagMutabilityCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class PutImageTagMutabilityCommand extends $Command<
-  PutImageTagMutabilityCommandInput,
-  PutImageTagMutabilityCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutImageTagMutabilityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutImageTagMutabilityCommandInput, PutImageTagMutabilityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "PutImageTagMutabilityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutImageTagMutabilityRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutImageTagMutabilityResponse.filterSensitiveLog,
+export class PutImageTagMutabilityCommand extends command<PutImageTagMutabilityCommandInput, PutImageTagMutabilityCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutImageTagMutability",
+  PutImageTagMutability$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutImageTagMutabilityRequest;
+      output: PutImageTagMutabilityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutImageTagMutabilityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutImageTagMutabilityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutImageTagMutabilityCommandOutput> {
-    return deserializeAws_json1_1PutImageTagMutabilityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutImageTagMutabilityCommandInput;
+      output: PutImageTagMutabilityCommandOutput;
+    };
+  };
 }

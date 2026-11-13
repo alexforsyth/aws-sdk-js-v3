@@ -1,97 +1,111 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudHSMV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudHSMV2Client";
-import { ListTagsRequest, ListTagsResponse } from "../models/models_0";
-import { deserializeAws_json1_1ListTagsCommand, serializeAws_json1_1ListTagsCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTagsRequest, ListTagsResponse } from "../models/models_0";
+import { ListTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTagsCommand}.
+ */
 export interface ListTagsCommandInput extends ListTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTagsCommand}.
+ */
 export interface ListTagsCommandOutput extends ListTagsResponse, __MetadataBearer {}
 
 /**
- * <p>Gets a list of tags for the specified AWS CloudHSM cluster.</p>
+ * <p>Gets a list of tags for the specified CloudHSM cluster.</p>
  *          <p>This is a paginated operation, which means that each response might contain only a
  *       subset of all the tags. When the response contains only a subset of tags, it includes a
  *       <code>NextToken</code> value. Use this value in a subsequent <code>ListTags</code> request to
  *       get more tags. When you receive a response with no <code>NextToken</code> (or an empty or null
  *       value), that means there are no more tags to get.</p>
+ *          <p>
+ *             <b>Cross-account use:</b> No. You cannot perform this operation on an CloudHSM resource in a different Amazon Web Services account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudHSMV2Client, ListTagsCommand } from "@aws-sdk/client-cloudhsm-v2"; // ES Modules import
  * // const { CloudHSMV2Client, ListTagsCommand } = require("@aws-sdk/client-cloudhsm-v2"); // CommonJS import
+ * // import type { CloudHSMV2ClientConfig } from "@aws-sdk/client-cloudhsm-v2";
+ * const config = {}; // type is CloudHSMV2ClientConfig
  * const client = new CloudHSMV2Client(config);
+ * const input = { // ListTagsRequest
+ *   ResourceId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListTagsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTagsResponse
+ * //   TagList: [ // TagList // required
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTagsCommandInput - {@link ListTagsCommandInput}
+ * @returns {@link ListTagsCommandOutput}
  * @see {@link ListTagsCommandInput} for command's `input` shape.
  * @see {@link ListTagsCommandOutput} for command's `response` shape.
- * @see {@link CloudHSMV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudHSMV2ClientResolvedConfig | config} for CloudHSMV2Client's `config` shape.
  *
+ * @throws {@link CloudHsmAccessDeniedException} (client fault)
+ *  <p>The request was rejected because the requester does not have permission to perform the
+ *       requested operation.</p>
+ *
+ * @throws {@link CloudHsmInternalFailureException} (server fault)
+ *  <p>The request was rejected because of an CloudHSM internal failure. The request can
+ *       be retried.</p>
+ *
+ * @throws {@link CloudHsmInvalidRequestException} (client fault)
+ *  <p>The request was rejected because it is not a valid request.</p>
+ *
+ * @throws {@link CloudHsmResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it refers to a resource that cannot be
+ *       found.</p>
+ *
+ * @throws {@link CloudHsmServiceException} (client fault)
+ *  <p>The request was rejected because an error occurred.</p>
+ *
+ * @throws {@link CloudHsmTagException} (client fault)
+ *  <p>The request was rejected because of a tagging failure. Verify the tag conditions in all applicable policies, and then retry the request.</p>
+ *
+ * @throws {@link CloudHSMV2ServiceException}
+ * <p>Base exception class for all service exceptions from CloudHSMV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListTagsCommand extends $Command<
-  ListTagsCommandInput,
-  ListTagsCommandOutput,
-  CloudHSMV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudHSMV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTagsCommandInput, ListTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudHSMV2Client";
-    const commandName = "ListTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTagsResponse.filterSensitiveLog,
+export class ListTagsCommand extends command<ListTagsCommandInput, ListTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTags",
+  ListTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsRequest;
+      output: ListTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTagsCommandOutput> {
-    return deserializeAws_json1_1ListTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTagsCommandInput;
+      output: ListTagsCommandOutput;
+    };
+  };
 }

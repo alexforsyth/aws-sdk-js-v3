@@ -1,196 +1,1286 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { CodeartifactClient } from "./CodeartifactClient";
 import {
+  type AssociateExternalConnectionCommandInput,
+  type AssociateExternalConnectionCommandOutput,
   AssociateExternalConnectionCommand,
-  AssociateExternalConnectionCommandInput,
-  AssociateExternalConnectionCommandOutput,
 } from "./commands/AssociateExternalConnectionCommand";
 import {
+  type CopyPackageVersionsCommandInput,
+  type CopyPackageVersionsCommandOutput,
   CopyPackageVersionsCommand,
-  CopyPackageVersionsCommandInput,
-  CopyPackageVersionsCommandOutput,
 } from "./commands/CopyPackageVersionsCommand";
 import {
+  type CreateDomainCommandInput,
+  type CreateDomainCommandOutput,
   CreateDomainCommand,
-  CreateDomainCommandInput,
-  CreateDomainCommandOutput,
 } from "./commands/CreateDomainCommand";
 import {
+  type CreatePackageGroupCommandInput,
+  type CreatePackageGroupCommandOutput,
+  CreatePackageGroupCommand,
+} from "./commands/CreatePackageGroupCommand";
+import {
+  type CreateRepositoryCommandInput,
+  type CreateRepositoryCommandOutput,
   CreateRepositoryCommand,
-  CreateRepositoryCommandInput,
-  CreateRepositoryCommandOutput,
 } from "./commands/CreateRepositoryCommand";
 import {
+  type DeleteDomainCommandInput,
+  type DeleteDomainCommandOutput,
   DeleteDomainCommand,
-  DeleteDomainCommandInput,
-  DeleteDomainCommandOutput,
 } from "./commands/DeleteDomainCommand";
 import {
+  type DeleteDomainPermissionsPolicyCommandInput,
+  type DeleteDomainPermissionsPolicyCommandOutput,
   DeleteDomainPermissionsPolicyCommand,
-  DeleteDomainPermissionsPolicyCommandInput,
-  DeleteDomainPermissionsPolicyCommandOutput,
 } from "./commands/DeleteDomainPermissionsPolicyCommand";
 import {
+  type DeletePackageCommandInput,
+  type DeletePackageCommandOutput,
+  DeletePackageCommand,
+} from "./commands/DeletePackageCommand";
+import {
+  type DeletePackageGroupCommandInput,
+  type DeletePackageGroupCommandOutput,
+  DeletePackageGroupCommand,
+} from "./commands/DeletePackageGroupCommand";
+import {
+  type DeletePackageVersionsCommandInput,
+  type DeletePackageVersionsCommandOutput,
   DeletePackageVersionsCommand,
-  DeletePackageVersionsCommandInput,
-  DeletePackageVersionsCommandOutput,
 } from "./commands/DeletePackageVersionsCommand";
 import {
+  type DeleteRepositoryCommandInput,
+  type DeleteRepositoryCommandOutput,
   DeleteRepositoryCommand,
-  DeleteRepositoryCommandInput,
-  DeleteRepositoryCommandOutput,
 } from "./commands/DeleteRepositoryCommand";
 import {
+  type DeleteRepositoryPermissionsPolicyCommandInput,
+  type DeleteRepositoryPermissionsPolicyCommandOutput,
   DeleteRepositoryPermissionsPolicyCommand,
-  DeleteRepositoryPermissionsPolicyCommandInput,
-  DeleteRepositoryPermissionsPolicyCommandOutput,
 } from "./commands/DeleteRepositoryPermissionsPolicyCommand";
 import {
+  type DescribeDomainCommandInput,
+  type DescribeDomainCommandOutput,
   DescribeDomainCommand,
-  DescribeDomainCommandInput,
-  DescribeDomainCommandOutput,
 } from "./commands/DescribeDomainCommand";
 import {
+  type DescribePackageCommandInput,
+  type DescribePackageCommandOutput,
+  DescribePackageCommand,
+} from "./commands/DescribePackageCommand";
+import {
+  type DescribePackageGroupCommandInput,
+  type DescribePackageGroupCommandOutput,
+  DescribePackageGroupCommand,
+} from "./commands/DescribePackageGroupCommand";
+import {
+  type DescribePackageVersionCommandInput,
+  type DescribePackageVersionCommandOutput,
   DescribePackageVersionCommand,
-  DescribePackageVersionCommandInput,
-  DescribePackageVersionCommandOutput,
 } from "./commands/DescribePackageVersionCommand";
 import {
+  type DescribeRepositoryCommandInput,
+  type DescribeRepositoryCommandOutput,
   DescribeRepositoryCommand,
-  DescribeRepositoryCommandInput,
-  DescribeRepositoryCommandOutput,
 } from "./commands/DescribeRepositoryCommand";
 import {
+  type DisassociateExternalConnectionCommandInput,
+  type DisassociateExternalConnectionCommandOutput,
   DisassociateExternalConnectionCommand,
-  DisassociateExternalConnectionCommandInput,
-  DisassociateExternalConnectionCommandOutput,
 } from "./commands/DisassociateExternalConnectionCommand";
 import {
+  type DisposePackageVersionsCommandInput,
+  type DisposePackageVersionsCommandOutput,
   DisposePackageVersionsCommand,
-  DisposePackageVersionsCommandInput,
-  DisposePackageVersionsCommandOutput,
 } from "./commands/DisposePackageVersionsCommand";
 import {
+  type GetAssociatedPackageGroupCommandInput,
+  type GetAssociatedPackageGroupCommandOutput,
+  GetAssociatedPackageGroupCommand,
+} from "./commands/GetAssociatedPackageGroupCommand";
+import {
+  type GetAuthorizationTokenCommandInput,
+  type GetAuthorizationTokenCommandOutput,
   GetAuthorizationTokenCommand,
-  GetAuthorizationTokenCommandInput,
-  GetAuthorizationTokenCommandOutput,
 } from "./commands/GetAuthorizationTokenCommand";
 import {
+  type GetDomainPermissionsPolicyCommandInput,
+  type GetDomainPermissionsPolicyCommandOutput,
   GetDomainPermissionsPolicyCommand,
-  GetDomainPermissionsPolicyCommandInput,
-  GetDomainPermissionsPolicyCommandOutput,
 } from "./commands/GetDomainPermissionsPolicyCommand";
 import {
+  type GetPackageVersionAssetCommandInput,
+  type GetPackageVersionAssetCommandOutput,
   GetPackageVersionAssetCommand,
-  GetPackageVersionAssetCommandInput,
-  GetPackageVersionAssetCommandOutput,
 } from "./commands/GetPackageVersionAssetCommand";
 import {
+  type GetPackageVersionReadmeCommandInput,
+  type GetPackageVersionReadmeCommandOutput,
   GetPackageVersionReadmeCommand,
-  GetPackageVersionReadmeCommandInput,
-  GetPackageVersionReadmeCommandOutput,
 } from "./commands/GetPackageVersionReadmeCommand";
 import {
+  type GetRepositoryEndpointCommandInput,
+  type GetRepositoryEndpointCommandOutput,
   GetRepositoryEndpointCommand,
-  GetRepositoryEndpointCommandInput,
-  GetRepositoryEndpointCommandOutput,
 } from "./commands/GetRepositoryEndpointCommand";
 import {
+  type GetRepositoryPermissionsPolicyCommandInput,
+  type GetRepositoryPermissionsPolicyCommandOutput,
   GetRepositoryPermissionsPolicyCommand,
-  GetRepositoryPermissionsPolicyCommandInput,
-  GetRepositoryPermissionsPolicyCommandOutput,
 } from "./commands/GetRepositoryPermissionsPolicyCommand";
-import { ListDomainsCommand, ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
 import {
+  type ListAllowedRepositoriesForGroupCommandInput,
+  type ListAllowedRepositoriesForGroupCommandOutput,
+  ListAllowedRepositoriesForGroupCommand,
+} from "./commands/ListAllowedRepositoriesForGroupCommand";
+import {
+  type ListAssociatedPackagesCommandInput,
+  type ListAssociatedPackagesCommandOutput,
+  ListAssociatedPackagesCommand,
+} from "./commands/ListAssociatedPackagesCommand";
+import {
+  type ListDomainsCommandInput,
+  type ListDomainsCommandOutput,
+  ListDomainsCommand,
+} from "./commands/ListDomainsCommand";
+import {
+  type ListPackageGroupsCommandInput,
+  type ListPackageGroupsCommandOutput,
+  ListPackageGroupsCommand,
+} from "./commands/ListPackageGroupsCommand";
+import {
+  type ListPackagesCommandInput,
+  type ListPackagesCommandOutput,
   ListPackagesCommand,
-  ListPackagesCommandInput,
-  ListPackagesCommandOutput,
 } from "./commands/ListPackagesCommand";
 import {
+  type ListPackageVersionAssetsCommandInput,
+  type ListPackageVersionAssetsCommandOutput,
   ListPackageVersionAssetsCommand,
-  ListPackageVersionAssetsCommandInput,
-  ListPackageVersionAssetsCommandOutput,
 } from "./commands/ListPackageVersionAssetsCommand";
 import {
+  type ListPackageVersionDependenciesCommandInput,
+  type ListPackageVersionDependenciesCommandOutput,
   ListPackageVersionDependenciesCommand,
-  ListPackageVersionDependenciesCommandInput,
-  ListPackageVersionDependenciesCommandOutput,
 } from "./commands/ListPackageVersionDependenciesCommand";
 import {
+  type ListPackageVersionsCommandInput,
+  type ListPackageVersionsCommandOutput,
   ListPackageVersionsCommand,
-  ListPackageVersionsCommandInput,
-  ListPackageVersionsCommandOutput,
 } from "./commands/ListPackageVersionsCommand";
 import {
+  type ListRepositoriesCommandInput,
+  type ListRepositoriesCommandOutput,
   ListRepositoriesCommand,
-  ListRepositoriesCommandInput,
-  ListRepositoriesCommandOutput,
 } from "./commands/ListRepositoriesCommand";
 import {
+  type ListRepositoriesInDomainCommandInput,
+  type ListRepositoriesInDomainCommandOutput,
   ListRepositoriesInDomainCommand,
-  ListRepositoriesInDomainCommandInput,
-  ListRepositoriesInDomainCommandOutput,
 } from "./commands/ListRepositoriesInDomainCommand";
 import {
+  type ListSubPackageGroupsCommandInput,
+  type ListSubPackageGroupsCommandOutput,
+  ListSubPackageGroupsCommand,
+} from "./commands/ListSubPackageGroupsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type PublishPackageVersionCommandInput,
+  type PublishPackageVersionCommandOutput,
+  PublishPackageVersionCommand,
+} from "./commands/PublishPackageVersionCommand";
+import {
+  type PutDomainPermissionsPolicyCommandInput,
+  type PutDomainPermissionsPolicyCommandOutput,
   PutDomainPermissionsPolicyCommand,
-  PutDomainPermissionsPolicyCommandInput,
-  PutDomainPermissionsPolicyCommandOutput,
 } from "./commands/PutDomainPermissionsPolicyCommand";
 import {
-  PutRepositoryPermissionsPolicyCommand,
-  PutRepositoryPermissionsPolicyCommandInput,
-  PutRepositoryPermissionsPolicyCommandOutput,
-} from "./commands/PutRepositoryPermissionsPolicyCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutPackageOriginConfigurationCommandInput,
+  type PutPackageOriginConfigurationCommandOutput,
+  PutPackageOriginConfigurationCommand,
+} from "./commands/PutPackageOriginConfigurationCommand";
 import {
+  type PutRepositoryPermissionsPolicyCommandInput,
+  type PutRepositoryPermissionsPolicyCommandOutput,
+  PutRepositoryPermissionsPolicyCommand,
+} from "./commands/PutRepositoryPermissionsPolicyCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdatePackageGroupCommandInput,
+  type UpdatePackageGroupCommandOutput,
+  UpdatePackageGroupCommand,
+} from "./commands/UpdatePackageGroupCommand";
+import {
+  type UpdatePackageGroupOriginConfigurationCommandInput,
+  type UpdatePackageGroupOriginConfigurationCommandOutput,
+  UpdatePackageGroupOriginConfigurationCommand,
+} from "./commands/UpdatePackageGroupOriginConfigurationCommand";
+import {
+  type UpdatePackageVersionsStatusCommandInput,
+  type UpdatePackageVersionsStatusCommandOutput,
   UpdatePackageVersionsStatusCommand,
-  UpdatePackageVersionsStatusCommandInput,
-  UpdatePackageVersionsStatusCommandOutput,
 } from "./commands/UpdatePackageVersionsStatusCommand";
 import {
+  type UpdateRepositoryCommandInput,
+  type UpdateRepositoryCommandOutput,
   UpdateRepositoryCommand,
-  UpdateRepositoryCommandInput,
-  UpdateRepositoryCommandOutput,
 } from "./commands/UpdateRepositoryCommand";
+import { paginateListAllowedRepositoriesForGroup } from "./pagination/ListAllowedRepositoriesForGroupPaginator";
+import { paginateListAssociatedPackages } from "./pagination/ListAssociatedPackagesPaginator";
+import { paginateListDomains } from "./pagination/ListDomainsPaginator";
+import { paginateListPackageGroups } from "./pagination/ListPackageGroupsPaginator";
+import { paginateListPackages } from "./pagination/ListPackagesPaginator";
+import { paginateListPackageVersionAssets } from "./pagination/ListPackageVersionAssetsPaginator";
+import { paginateListPackageVersions } from "./pagination/ListPackageVersionsPaginator";
+import { paginateListRepositoriesInDomain } from "./pagination/ListRepositoriesInDomainPaginator";
+import { paginateListRepositories } from "./pagination/ListRepositoriesPaginator";
+import { paginateListSubPackageGroups } from "./pagination/ListSubPackageGroupsPaginator";
+
+const commands = {
+  AssociateExternalConnectionCommand,
+  CopyPackageVersionsCommand,
+  CreateDomainCommand,
+  CreatePackageGroupCommand,
+  CreateRepositoryCommand,
+  DeleteDomainCommand,
+  DeleteDomainPermissionsPolicyCommand,
+  DeletePackageCommand,
+  DeletePackageGroupCommand,
+  DeletePackageVersionsCommand,
+  DeleteRepositoryCommand,
+  DeleteRepositoryPermissionsPolicyCommand,
+  DescribeDomainCommand,
+  DescribePackageCommand,
+  DescribePackageGroupCommand,
+  DescribePackageVersionCommand,
+  DescribeRepositoryCommand,
+  DisassociateExternalConnectionCommand,
+  DisposePackageVersionsCommand,
+  GetAssociatedPackageGroupCommand,
+  GetAuthorizationTokenCommand,
+  GetDomainPermissionsPolicyCommand,
+  GetPackageVersionAssetCommand,
+  GetPackageVersionReadmeCommand,
+  GetRepositoryEndpointCommand,
+  GetRepositoryPermissionsPolicyCommand,
+  ListAllowedRepositoriesForGroupCommand,
+  ListAssociatedPackagesCommand,
+  ListDomainsCommand,
+  ListPackageGroupsCommand,
+  ListPackagesCommand,
+  ListPackageVersionAssetsCommand,
+  ListPackageVersionDependenciesCommand,
+  ListPackageVersionsCommand,
+  ListRepositoriesCommand,
+  ListRepositoriesInDomainCommand,
+  ListSubPackageGroupsCommand,
+  ListTagsForResourceCommand,
+  PublishPackageVersionCommand,
+  PutDomainPermissionsPolicyCommand,
+  PutPackageOriginConfigurationCommand,
+  PutRepositoryPermissionsPolicyCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdatePackageGroupCommand,
+  UpdatePackageGroupOriginConfigurationCommand,
+  UpdatePackageVersionsStatusCommand,
+  UpdateRepositoryCommand,
+};
+const paginators = {
+  paginateListAllowedRepositoriesForGroup,
+  paginateListAssociatedPackages,
+  paginateListDomains,
+  paginateListPackageGroups,
+  paginateListPackages,
+  paginateListPackageVersionAssets,
+  paginateListPackageVersions,
+  paginateListRepositories,
+  paginateListRepositoriesInDomain,
+  paginateListSubPackageGroups,
+};
 
 /**
- * <p> AWS CodeArtifact is a fully managed artifact repository compatible with language-native
- *       package managers and build tools such as npm, Apache Maven, and pip. You can use CodeArtifact to
+ * @public
+ */
+export interface CodeartifactRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Codeartifact {
+  /**
+   * @see {@link AssociateExternalConnectionCommand}
+   */
+  associateExternalConnection(
+    args: AssociateExternalConnectionCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<AssociateExternalConnectionCommandOutput>;
+  associateExternalConnection(
+    args: AssociateExternalConnectionCommandInput,
+    cb: (err: any, data?: AssociateExternalConnectionCommandOutput) => void
+  ): void;
+  associateExternalConnection(
+    args: AssociateExternalConnectionCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: AssociateExternalConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CopyPackageVersionsCommand}
+   */
+  copyPackageVersions(
+    args: CopyPackageVersionsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<CopyPackageVersionsCommandOutput>;
+  copyPackageVersions(
+    args: CopyPackageVersionsCommandInput,
+    cb: (err: any, data?: CopyPackageVersionsCommandOutput) => void
+  ): void;
+  copyPackageVersions(
+    args: CopyPackageVersionsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: CopyPackageVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDomainCommand}
+   */
+  createDomain(
+    args: CreateDomainCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<CreateDomainCommandOutput>;
+  createDomain(
+    args: CreateDomainCommandInput,
+    cb: (err: any, data?: CreateDomainCommandOutput) => void
+  ): void;
+  createDomain(
+    args: CreateDomainCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: CreateDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePackageGroupCommand}
+   */
+  createPackageGroup(
+    args: CreatePackageGroupCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<CreatePackageGroupCommandOutput>;
+  createPackageGroup(
+    args: CreatePackageGroupCommandInput,
+    cb: (err: any, data?: CreatePackageGroupCommandOutput) => void
+  ): void;
+  createPackageGroup(
+    args: CreatePackageGroupCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: CreatePackageGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRepositoryCommand}
+   */
+  createRepository(
+    args: CreateRepositoryCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<CreateRepositoryCommandOutput>;
+  createRepository(
+    args: CreateRepositoryCommandInput,
+    cb: (err: any, data?: CreateRepositoryCommandOutput) => void
+  ): void;
+  createRepository(
+    args: CreateRepositoryCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: CreateRepositoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainCommand}
+   */
+  deleteDomain(
+    args: DeleteDomainCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeleteDomainCommandOutput>;
+  deleteDomain(
+    args: DeleteDomainCommandInput,
+    cb: (err: any, data?: DeleteDomainCommandOutput) => void
+  ): void;
+  deleteDomain(
+    args: DeleteDomainCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeleteDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainPermissionsPolicyCommand}
+   */
+  deleteDomainPermissionsPolicy(
+    args: DeleteDomainPermissionsPolicyCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeleteDomainPermissionsPolicyCommandOutput>;
+  deleteDomainPermissionsPolicy(
+    args: DeleteDomainPermissionsPolicyCommandInput,
+    cb: (err: any, data?: DeleteDomainPermissionsPolicyCommandOutput) => void
+  ): void;
+  deleteDomainPermissionsPolicy(
+    args: DeleteDomainPermissionsPolicyCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeleteDomainPermissionsPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePackageCommand}
+   */
+  deletePackage(
+    args: DeletePackageCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeletePackageCommandOutput>;
+  deletePackage(
+    args: DeletePackageCommandInput,
+    cb: (err: any, data?: DeletePackageCommandOutput) => void
+  ): void;
+  deletePackage(
+    args: DeletePackageCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeletePackageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePackageGroupCommand}
+   */
+  deletePackageGroup(
+    args: DeletePackageGroupCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeletePackageGroupCommandOutput>;
+  deletePackageGroup(
+    args: DeletePackageGroupCommandInput,
+    cb: (err: any, data?: DeletePackageGroupCommandOutput) => void
+  ): void;
+  deletePackageGroup(
+    args: DeletePackageGroupCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeletePackageGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePackageVersionsCommand}
+   */
+  deletePackageVersions(
+    args: DeletePackageVersionsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeletePackageVersionsCommandOutput>;
+  deletePackageVersions(
+    args: DeletePackageVersionsCommandInput,
+    cb: (err: any, data?: DeletePackageVersionsCommandOutput) => void
+  ): void;
+  deletePackageVersions(
+    args: DeletePackageVersionsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeletePackageVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRepositoryCommand}
+   */
+  deleteRepository(
+    args: DeleteRepositoryCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeleteRepositoryCommandOutput>;
+  deleteRepository(
+    args: DeleteRepositoryCommandInput,
+    cb: (err: any, data?: DeleteRepositoryCommandOutput) => void
+  ): void;
+  deleteRepository(
+    args: DeleteRepositoryCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeleteRepositoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRepositoryPermissionsPolicyCommand}
+   */
+  deleteRepositoryPermissionsPolicy(
+    args: DeleteRepositoryPermissionsPolicyCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DeleteRepositoryPermissionsPolicyCommandOutput>;
+  deleteRepositoryPermissionsPolicy(
+    args: DeleteRepositoryPermissionsPolicyCommandInput,
+    cb: (err: any, data?: DeleteRepositoryPermissionsPolicyCommandOutput) => void
+  ): void;
+  deleteRepositoryPermissionsPolicy(
+    args: DeleteRepositoryPermissionsPolicyCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DeleteRepositoryPermissionsPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDomainCommand}
+   */
+  describeDomain(
+    args: DescribeDomainCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DescribeDomainCommandOutput>;
+  describeDomain(
+    args: DescribeDomainCommandInput,
+    cb: (err: any, data?: DescribeDomainCommandOutput) => void
+  ): void;
+  describeDomain(
+    args: DescribeDomainCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DescribeDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePackageCommand}
+   */
+  describePackage(
+    args: DescribePackageCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DescribePackageCommandOutput>;
+  describePackage(
+    args: DescribePackageCommandInput,
+    cb: (err: any, data?: DescribePackageCommandOutput) => void
+  ): void;
+  describePackage(
+    args: DescribePackageCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DescribePackageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePackageGroupCommand}
+   */
+  describePackageGroup(
+    args: DescribePackageGroupCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DescribePackageGroupCommandOutput>;
+  describePackageGroup(
+    args: DescribePackageGroupCommandInput,
+    cb: (err: any, data?: DescribePackageGroupCommandOutput) => void
+  ): void;
+  describePackageGroup(
+    args: DescribePackageGroupCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DescribePackageGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePackageVersionCommand}
+   */
+  describePackageVersion(
+    args: DescribePackageVersionCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DescribePackageVersionCommandOutput>;
+  describePackageVersion(
+    args: DescribePackageVersionCommandInput,
+    cb: (err: any, data?: DescribePackageVersionCommandOutput) => void
+  ): void;
+  describePackageVersion(
+    args: DescribePackageVersionCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DescribePackageVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRepositoryCommand}
+   */
+  describeRepository(
+    args: DescribeRepositoryCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DescribeRepositoryCommandOutput>;
+  describeRepository(
+    args: DescribeRepositoryCommandInput,
+    cb: (err: any, data?: DescribeRepositoryCommandOutput) => void
+  ): void;
+  describeRepository(
+    args: DescribeRepositoryCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DescribeRepositoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateExternalConnectionCommand}
+   */
+  disassociateExternalConnection(
+    args: DisassociateExternalConnectionCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DisassociateExternalConnectionCommandOutput>;
+  disassociateExternalConnection(
+    args: DisassociateExternalConnectionCommandInput,
+    cb: (err: any, data?: DisassociateExternalConnectionCommandOutput) => void
+  ): void;
+  disassociateExternalConnection(
+    args: DisassociateExternalConnectionCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DisassociateExternalConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisposePackageVersionsCommand}
+   */
+  disposePackageVersions(
+    args: DisposePackageVersionsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<DisposePackageVersionsCommandOutput>;
+  disposePackageVersions(
+    args: DisposePackageVersionsCommandInput,
+    cb: (err: any, data?: DisposePackageVersionsCommandOutput) => void
+  ): void;
+  disposePackageVersions(
+    args: DisposePackageVersionsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: DisposePackageVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssociatedPackageGroupCommand}
+   */
+  getAssociatedPackageGroup(
+    args: GetAssociatedPackageGroupCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetAssociatedPackageGroupCommandOutput>;
+  getAssociatedPackageGroup(
+    args: GetAssociatedPackageGroupCommandInput,
+    cb: (err: any, data?: GetAssociatedPackageGroupCommandOutput) => void
+  ): void;
+  getAssociatedPackageGroup(
+    args: GetAssociatedPackageGroupCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetAssociatedPackageGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAuthorizationTokenCommand}
+   */
+  getAuthorizationToken(
+    args: GetAuthorizationTokenCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetAuthorizationTokenCommandOutput>;
+  getAuthorizationToken(
+    args: GetAuthorizationTokenCommandInput,
+    cb: (err: any, data?: GetAuthorizationTokenCommandOutput) => void
+  ): void;
+  getAuthorizationToken(
+    args: GetAuthorizationTokenCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetAuthorizationTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainPermissionsPolicyCommand}
+   */
+  getDomainPermissionsPolicy(
+    args: GetDomainPermissionsPolicyCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetDomainPermissionsPolicyCommandOutput>;
+  getDomainPermissionsPolicy(
+    args: GetDomainPermissionsPolicyCommandInput,
+    cb: (err: any, data?: GetDomainPermissionsPolicyCommandOutput) => void
+  ): void;
+  getDomainPermissionsPolicy(
+    args: GetDomainPermissionsPolicyCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetDomainPermissionsPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPackageVersionAssetCommand}
+   */
+  getPackageVersionAsset(
+    args: GetPackageVersionAssetCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetPackageVersionAssetCommandOutput>;
+  getPackageVersionAsset(
+    args: GetPackageVersionAssetCommandInput,
+    cb: (err: any, data?: GetPackageVersionAssetCommandOutput) => void
+  ): void;
+  getPackageVersionAsset(
+    args: GetPackageVersionAssetCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetPackageVersionAssetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPackageVersionReadmeCommand}
+   */
+  getPackageVersionReadme(
+    args: GetPackageVersionReadmeCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetPackageVersionReadmeCommandOutput>;
+  getPackageVersionReadme(
+    args: GetPackageVersionReadmeCommandInput,
+    cb: (err: any, data?: GetPackageVersionReadmeCommandOutput) => void
+  ): void;
+  getPackageVersionReadme(
+    args: GetPackageVersionReadmeCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetPackageVersionReadmeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRepositoryEndpointCommand}
+   */
+  getRepositoryEndpoint(
+    args: GetRepositoryEndpointCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetRepositoryEndpointCommandOutput>;
+  getRepositoryEndpoint(
+    args: GetRepositoryEndpointCommandInput,
+    cb: (err: any, data?: GetRepositoryEndpointCommandOutput) => void
+  ): void;
+  getRepositoryEndpoint(
+    args: GetRepositoryEndpointCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetRepositoryEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRepositoryPermissionsPolicyCommand}
+   */
+  getRepositoryPermissionsPolicy(
+    args: GetRepositoryPermissionsPolicyCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<GetRepositoryPermissionsPolicyCommandOutput>;
+  getRepositoryPermissionsPolicy(
+    args: GetRepositoryPermissionsPolicyCommandInput,
+    cb: (err: any, data?: GetRepositoryPermissionsPolicyCommandOutput) => void
+  ): void;
+  getRepositoryPermissionsPolicy(
+    args: GetRepositoryPermissionsPolicyCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: GetRepositoryPermissionsPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAllowedRepositoriesForGroupCommand}
+   */
+  listAllowedRepositoriesForGroup(
+    args: ListAllowedRepositoriesForGroupCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListAllowedRepositoriesForGroupCommandOutput>;
+  listAllowedRepositoriesForGroup(
+    args: ListAllowedRepositoriesForGroupCommandInput,
+    cb: (err: any, data?: ListAllowedRepositoriesForGroupCommandOutput) => void
+  ): void;
+  listAllowedRepositoriesForGroup(
+    args: ListAllowedRepositoriesForGroupCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListAllowedRepositoriesForGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssociatedPackagesCommand}
+   */
+  listAssociatedPackages(
+    args: ListAssociatedPackagesCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListAssociatedPackagesCommandOutput>;
+  listAssociatedPackages(
+    args: ListAssociatedPackagesCommandInput,
+    cb: (err: any, data?: ListAssociatedPackagesCommandOutput) => void
+  ): void;
+  listAssociatedPackages(
+    args: ListAssociatedPackagesCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListAssociatedPackagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDomainsCommand}
+   */
+  listDomains(): Promise<ListDomainsCommandOutput>;
+  listDomains(
+    args: ListDomainsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListDomainsCommandOutput>;
+  listDomains(
+    args: ListDomainsCommandInput,
+    cb: (err: any, data?: ListDomainsCommandOutput) => void
+  ): void;
+  listDomains(
+    args: ListDomainsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListDomainsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPackageGroupsCommand}
+   */
+  listPackageGroups(
+    args: ListPackageGroupsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListPackageGroupsCommandOutput>;
+  listPackageGroups(
+    args: ListPackageGroupsCommandInput,
+    cb: (err: any, data?: ListPackageGroupsCommandOutput) => void
+  ): void;
+  listPackageGroups(
+    args: ListPackageGroupsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListPackageGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPackagesCommand}
+   */
+  listPackages(
+    args: ListPackagesCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListPackagesCommandOutput>;
+  listPackages(
+    args: ListPackagesCommandInput,
+    cb: (err: any, data?: ListPackagesCommandOutput) => void
+  ): void;
+  listPackages(
+    args: ListPackagesCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListPackagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPackageVersionAssetsCommand}
+   */
+  listPackageVersionAssets(
+    args: ListPackageVersionAssetsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListPackageVersionAssetsCommandOutput>;
+  listPackageVersionAssets(
+    args: ListPackageVersionAssetsCommandInput,
+    cb: (err: any, data?: ListPackageVersionAssetsCommandOutput) => void
+  ): void;
+  listPackageVersionAssets(
+    args: ListPackageVersionAssetsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListPackageVersionAssetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPackageVersionDependenciesCommand}
+   */
+  listPackageVersionDependencies(
+    args: ListPackageVersionDependenciesCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListPackageVersionDependenciesCommandOutput>;
+  listPackageVersionDependencies(
+    args: ListPackageVersionDependenciesCommandInput,
+    cb: (err: any, data?: ListPackageVersionDependenciesCommandOutput) => void
+  ): void;
+  listPackageVersionDependencies(
+    args: ListPackageVersionDependenciesCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListPackageVersionDependenciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPackageVersionsCommand}
+   */
+  listPackageVersions(
+    args: ListPackageVersionsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListPackageVersionsCommandOutput>;
+  listPackageVersions(
+    args: ListPackageVersionsCommandInput,
+    cb: (err: any, data?: ListPackageVersionsCommandOutput) => void
+  ): void;
+  listPackageVersions(
+    args: ListPackageVersionsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListPackageVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRepositoriesCommand}
+   */
+  listRepositories(): Promise<ListRepositoriesCommandOutput>;
+  listRepositories(
+    args: ListRepositoriesCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListRepositoriesCommandOutput>;
+  listRepositories(
+    args: ListRepositoriesCommandInput,
+    cb: (err: any, data?: ListRepositoriesCommandOutput) => void
+  ): void;
+  listRepositories(
+    args: ListRepositoriesCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListRepositoriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRepositoriesInDomainCommand}
+   */
+  listRepositoriesInDomain(
+    args: ListRepositoriesInDomainCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListRepositoriesInDomainCommandOutput>;
+  listRepositoriesInDomain(
+    args: ListRepositoriesInDomainCommandInput,
+    cb: (err: any, data?: ListRepositoriesInDomainCommandOutput) => void
+  ): void;
+  listRepositoriesInDomain(
+    args: ListRepositoriesInDomainCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListRepositoriesInDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSubPackageGroupsCommand}
+   */
+  listSubPackageGroups(
+    args: ListSubPackageGroupsCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListSubPackageGroupsCommandOutput>;
+  listSubPackageGroups(
+    args: ListSubPackageGroupsCommandInput,
+    cb: (err: any, data?: ListSubPackageGroupsCommandOutput) => void
+  ): void;
+  listSubPackageGroups(
+    args: ListSubPackageGroupsCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListSubPackageGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PublishPackageVersionCommand}
+   */
+  publishPackageVersion(
+    args: PublishPackageVersionCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<PublishPackageVersionCommandOutput>;
+  publishPackageVersion(
+    args: PublishPackageVersionCommandInput,
+    cb: (err: any, data?: PublishPackageVersionCommandOutput) => void
+  ): void;
+  publishPackageVersion(
+    args: PublishPackageVersionCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: PublishPackageVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDomainPermissionsPolicyCommand}
+   */
+  putDomainPermissionsPolicy(
+    args: PutDomainPermissionsPolicyCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<PutDomainPermissionsPolicyCommandOutput>;
+  putDomainPermissionsPolicy(
+    args: PutDomainPermissionsPolicyCommandInput,
+    cb: (err: any, data?: PutDomainPermissionsPolicyCommandOutput) => void
+  ): void;
+  putDomainPermissionsPolicy(
+    args: PutDomainPermissionsPolicyCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: PutDomainPermissionsPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutPackageOriginConfigurationCommand}
+   */
+  putPackageOriginConfiguration(
+    args: PutPackageOriginConfigurationCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<PutPackageOriginConfigurationCommandOutput>;
+  putPackageOriginConfiguration(
+    args: PutPackageOriginConfigurationCommandInput,
+    cb: (err: any, data?: PutPackageOriginConfigurationCommandOutput) => void
+  ): void;
+  putPackageOriginConfiguration(
+    args: PutPackageOriginConfigurationCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: PutPackageOriginConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRepositoryPermissionsPolicyCommand}
+   */
+  putRepositoryPermissionsPolicy(
+    args: PutRepositoryPermissionsPolicyCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<PutRepositoryPermissionsPolicyCommandOutput>;
+  putRepositoryPermissionsPolicy(
+    args: PutRepositoryPermissionsPolicyCommandInput,
+    cb: (err: any, data?: PutRepositoryPermissionsPolicyCommandOutput) => void
+  ): void;
+  putRepositoryPermissionsPolicy(
+    args: PutRepositoryPermissionsPolicyCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: PutRepositoryPermissionsPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePackageGroupCommand}
+   */
+  updatePackageGroup(
+    args: UpdatePackageGroupCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<UpdatePackageGroupCommandOutput>;
+  updatePackageGroup(
+    args: UpdatePackageGroupCommandInput,
+    cb: (err: any, data?: UpdatePackageGroupCommandOutput) => void
+  ): void;
+  updatePackageGroup(
+    args: UpdatePackageGroupCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: UpdatePackageGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePackageGroupOriginConfigurationCommand}
+   */
+  updatePackageGroupOriginConfiguration(
+    args: UpdatePackageGroupOriginConfigurationCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<UpdatePackageGroupOriginConfigurationCommandOutput>;
+  updatePackageGroupOriginConfiguration(
+    args: UpdatePackageGroupOriginConfigurationCommandInput,
+    cb: (err: any, data?: UpdatePackageGroupOriginConfigurationCommandOutput) => void
+  ): void;
+  updatePackageGroupOriginConfiguration(
+    args: UpdatePackageGroupOriginConfigurationCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: UpdatePackageGroupOriginConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePackageVersionsStatusCommand}
+   */
+  updatePackageVersionsStatus(
+    args: UpdatePackageVersionsStatusCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<UpdatePackageVersionsStatusCommandOutput>;
+  updatePackageVersionsStatus(
+    args: UpdatePackageVersionsStatusCommandInput,
+    cb: (err: any, data?: UpdatePackageVersionsStatusCommandOutput) => void
+  ): void;
+  updatePackageVersionsStatus(
+    args: UpdatePackageVersionsStatusCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: UpdatePackageVersionsStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRepositoryCommand}
+   */
+  updateRepository(
+    args: UpdateRepositoryCommandInput,
+    options?: CodeartifactRequestOptions
+  ): Promise<UpdateRepositoryCommandOutput>;
+  updateRepository(
+    args: UpdateRepositoryCommandInput,
+    cb: (err: any, data?: UpdateRepositoryCommandOutput) => void
+  ): void;
+  updateRepository(
+    args: UpdateRepositoryCommandInput,
+    options: CodeartifactRequestOptions,
+    cb: (err: any, data?: UpdateRepositoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAllowedRepositoriesForGroupCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAllowedRepositoriesForGroupCommandOutput}.
+   */
+  paginateListAllowedRepositoriesForGroup(
+    args: ListAllowedRepositoriesForGroupCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAllowedRepositoriesForGroupCommandOutput>;
+
+  /**
+   * @see {@link ListAssociatedPackagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssociatedPackagesCommandOutput}.
+   */
+  paginateListAssociatedPackages(
+    args: ListAssociatedPackagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssociatedPackagesCommandOutput>;
+
+  /**
+   * @see {@link ListDomainsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDomainsCommandOutput}.
+   */
+  paginateListDomains(
+    args?: ListDomainsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDomainsCommandOutput>;
+
+  /**
+   * @see {@link ListPackageGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPackageGroupsCommandOutput}.
+   */
+  paginateListPackageGroups(
+    args: ListPackageGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPackageGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListPackagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPackagesCommandOutput}.
+   */
+  paginateListPackages(
+    args: ListPackagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPackagesCommandOutput>;
+
+  /**
+   * @see {@link ListPackageVersionAssetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPackageVersionAssetsCommandOutput}.
+   */
+  paginateListPackageVersionAssets(
+    args: ListPackageVersionAssetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPackageVersionAssetsCommandOutput>;
+
+  /**
+   * @see {@link ListPackageVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPackageVersionsCommandOutput}.
+   */
+  paginateListPackageVersions(
+    args: ListPackageVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPackageVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListRepositoriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRepositoriesCommandOutput}.
+   */
+  paginateListRepositories(
+    args?: ListRepositoriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRepositoriesCommandOutput>;
+
+  /**
+   * @see {@link ListRepositoriesInDomainCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRepositoriesInDomainCommandOutput}.
+   */
+  paginateListRepositoriesInDomain(
+    args: ListRepositoriesInDomainCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRepositoriesInDomainCommandOutput>;
+
+  /**
+   * @see {@link ListSubPackageGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSubPackageGroupsCommandOutput}.
+   */
+  paginateListSubPackageGroups(
+    args: ListSubPackageGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSubPackageGroupsCommandOutput>;
+}
+
+/**
+ * <p> CodeArtifact is a fully managed artifact repository compatible with language-native
+ *       package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to
  *       share packages with development teams and pull packages. Packages can be pulled from both
  *       public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact
  *       repository and another repository, which effectively merges their contents from the point of
  *       view of a package manager client. </p>
- *
  *          <p>
- *             <b>AWS CodeArtifact Components</b>
+ *             <b>CodeArtifact concepts</b>
  *          </p>
- *          <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>
- *
  *          <ul>
  *             <li>
  *                <p>
  *                   <b>Repository</b>: A CodeArtifact repository contains a set of <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version">package
  *             versions</a>, each of which maps to a set of assets, or files. Repositories are
  *           polyglot, so a single repository can contain packages of any supported type. Each
- *           repository exposes endpoints for fetching and publishing packages using tools like the
- *             <b>
+ *           repository exposes endpoints for fetching and publishing packages using tools such as the <b>
  *                      <code>npm</code>
- *                   </b> CLI, the Maven CLI (<b>
+ *                   </b> CLI or the Maven CLI (<b>
  *                      <code>mvn</code>
- *                   </b>), and <b>
- *                      <code>pip</code>
- *                   </b>.</p>
+ *                   </b>). For a list of supported package managers, see the
+ *           <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html">CodeArtifact User Guide</a>.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -199,7 +1289,7 @@ import {
  *             but are consumed through repositories. A given package asset, such as a Maven JAR file, is
  *             stored once per domain, no matter how many repositories it's present in. All of the assets
  *             and metadata in a domain are encrypted with the same customer master key (CMK) stored in
- *             AWS Key Management Service (AWS KMS).</p>
+ *             Key Management Service (KMS).</p>
  *                <p>Each repository is a member of a single domain and can't be moved to a
  *             different domain.</p>
  *                <p>The domain allows organizational policy to be applied across multiple
@@ -212,7 +1302,9 @@ import {
  *             <li>
  *                <p>
  *                   <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to
- *           resolve dependencies and install the software. CodeArtifact supports <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html">npm</a>, <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html">PyPI</a>, and <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven">Maven</a> package formats.</p>
+ *           resolve dependencies and install the software. CodeArtifact supports npm, PyPI, Maven, NuGet, Swift, Ruby, Cargo, and generic package formats.
+ *         For more information about the supported package formats and how to use CodeArtifact with them, see the
+ *           <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html">CodeArtifact User Guide</a>.</p>
  *                <p>In CodeArtifact, a package consists of:</p>
  *                <ul>
  *                   <li>
@@ -230,6 +1322,14 @@ import {
  *                      <p> Package-level metadata (for example, npm tags)</p>
  *                   </li>
  *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <b>Package group</b>: A group of packages that match a specified definition. Package
+ *           groups can be used to apply configuration to multiple packages that match a defined pattern using
+ *           package format, package namespace, and package name. You can use package groups to more conveniently
+ *           configure package origin controls for multiple packages. Package origin controls are used to block or allow ingestion or publishing
+ *           of new package versions, which protects users from malicious actions known as dependency substitution attacks.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -252,8 +1352,9 @@ import {
  *             <code>.tgz</code> file or Maven POM and JAR files.</p>
  *             </li>
  *          </ul>
- *
- *          <p>CodeArtifact supports these operations:</p>
+ *          <p>
+ *             <b>CodeArtifact supported API operations</b>
+ *          </p>
  *          <ul>
  *             <li>
  *                <p>
@@ -268,7 +1369,11 @@ import {
  *             </li>
  *             <li>
  *                <p>
- *                   <code>CreateDomain</code>: Creates a domain</p>
+ *                   <code>CreateDomain</code>: Creates a domain.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>CreatePackageGroup</code>: Creates a package group.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -282,6 +1387,14 @@ import {
  *             <li>
  *                <p>
  *                   <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>DeletePackage</code>: Deletes a package and all associated package versions.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>DeletePackageGroup</code>: Deletes a package group. Does not delete packages or package versions that are associated with a package group.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -305,6 +1418,16 @@ import {
  *             </li>
  *             <li>
  *                <p>
+ *                   <code>DescribePackage</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html">PackageDescription</a>
+ *           object that contains details about a package. </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>DescribePackageGroup</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroup.html">PackageGroup</a>
+ *           object that contains details about a package group. </p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <code>DescribePackageVersion</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a>
  *           object that contains details about a package version. </p>
  *             </li>
@@ -323,6 +1446,10 @@ import {
  *                <p>
  *                   <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.
  *         </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>GetAssociatedPackageGroup</code>: Returns the most closely associated package group to the specified package.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -350,7 +1477,27 @@ import {
  *                <ul>
  *                   <li>
  *                      <p>
+ *                         <code>cargo</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>generic</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>maven</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
  *                         <code>npm</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>nuget</code>
  *                      </p>
  *                   </li>
  *                   <li>
@@ -360,7 +1507,12 @@ import {
  *                   </li>
  *                   <li>
  *                      <p>
- *                         <code>maven</code>
+ *                         <code>ruby</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>swift</code>
  *                      </p>
  *                   </li>
  *                </ul>
@@ -372,12 +1524,24 @@ import {
  *             </li>
  *             <li>
  *                <p>
+ *                   <code>ListAllowedRepositoriesForGroup</code>: Lists the allowed repositories for a package group that has origin configuration set to <code>ALLOW_SPECIFIC_REPOSITORIES</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>ListAssociatedPackages</code>: Returns a list of packages associated with the requested package group.</p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each
  *           returned <code>DomainSummary</code> object contains information about a domain.</p>
  *             </li>
  *             <li>
  *                <p>
  *                   <code>ListPackages</code>: Lists the packages in a repository.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>ListPackageGroups</code>: Returns a list of package groups in the requested domain.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -395,7 +1559,7 @@ import {
  *             </li>
  *             <li>
  *                <p>
- *                   <code>ListRepositories</code>: Returns a list of repositories owned by the AWS account that called this method.</p>
+ *                   <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -403,12 +1567,33 @@ import {
  *             </li>
  *             <li>
  *                <p>
+ *                   <code>ListSubPackageGroups</code>: Returns a list of direct children of the specified package group.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>PublishPackageVersion</code>: Creates a new package version containing one or more assets.</p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine
+ *         how new versions of the package can be added to a specific repository.</p>
  *             </li>
  *             <li>
  *                <p>
  *                   <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository
  *           that specifies permissions to access it. </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>UpdatePackageGroup</code>: Updates a package group. This API cannot be used to update a package group's origin configuration or pattern.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>UpdatePackageGroupOriginConfiguration</code>: Updates the package origin configuration for a package group.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -419,1251 +1604,7 @@ import {
  *                   <code>UpdateRepository</code>: Updates the properties of a repository.</p>
  *             </li>
  *          </ul>
+ * @public
  */
-export class Codeartifact extends CodeartifactClient {
-  /**
-   * <p>Adds an existing external connection to a repository. One external connection is allowed
-   *       per repository.</p>
-   *          <note>
-   *             <p>A repository can have one or more upstream repositories, or an external connection.</p>
-   *          </note>
-   */
-  public associateExternalConnection(
-    args: AssociateExternalConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateExternalConnectionCommandOutput>;
-  public associateExternalConnection(
-    args: AssociateExternalConnectionCommandInput,
-    cb: (err: any, data?: AssociateExternalConnectionCommandOutput) => void
-  ): void;
-  public associateExternalConnection(
-    args: AssociateExternalConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateExternalConnectionCommandOutput) => void
-  ): void;
-  public associateExternalConnection(
-    args: AssociateExternalConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateExternalConnectionCommandOutput) => void),
-    cb?: (err: any, data?: AssociateExternalConnectionCommandOutput) => void
-  ): Promise<AssociateExternalConnectionCommandOutput> | void {
-    const command = new AssociateExternalConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Copies package versions from one repository to another repository in the same domain.
-   *       </p>
-   *          <note>
-   *             <p>
-   *         You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both.
-   *       </p>
-   *          </note>
-   */
-  public copyPackageVersions(
-    args: CopyPackageVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CopyPackageVersionsCommandOutput>;
-  public copyPackageVersions(
-    args: CopyPackageVersionsCommandInput,
-    cb: (err: any, data?: CopyPackageVersionsCommandOutput) => void
-  ): void;
-  public copyPackageVersions(
-    args: CopyPackageVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CopyPackageVersionsCommandOutput) => void
-  ): void;
-  public copyPackageVersions(
-    args: CopyPackageVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CopyPackageVersionsCommandOutput) => void),
-    cb?: (err: any, data?: CopyPackageVersionsCommandOutput) => void
-  ): Promise<CopyPackageVersionsCommandOutput> | void {
-    const command = new CopyPackageVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Creates a domain. CodeArtifact <i>domains</i> make it easier to manage multiple repositories across an
-   *         organization. You can use a domain to apply permissions across many
-   *         repositories owned by different AWS accounts. An asset is stored only once
-   *         in a domain, even if it's in multiple repositories.
-   *     </p>
-   *
-   *          <p>Although you can have multiple domains, we recommend a single production domain that contains all
-   *         published artifacts so that your development teams can find and share packages. You can use a second
-   *         pre-production domain to test changes to the production domain configuration.
-   *       </p>
-   */
-  public createDomain(
-    args: CreateDomainCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDomainCommandOutput>;
-  public createDomain(args: CreateDomainCommandInput, cb: (err: any, data?: CreateDomainCommandOutput) => void): void;
-  public createDomain(
-    args: CreateDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDomainCommandOutput) => void
-  ): void;
-  public createDomain(
-    args: CreateDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDomainCommandOutput) => void),
-    cb?: (err: any, data?: CreateDomainCommandOutput) => void
-  ): Promise<CreateDomainCommandOutput> | void {
-    const command = new CreateDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Creates a repository.
-   *       </p>
-   */
-  public createRepository(
-    args: CreateRepositoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRepositoryCommandOutput>;
-  public createRepository(
-    args: CreateRepositoryCommandInput,
-    cb: (err: any, data?: CreateRepositoryCommandOutput) => void
-  ): void;
-  public createRepository(
-    args: CreateRepositoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRepositoryCommandOutput) => void
-  ): void;
-  public createRepository(
-    args: CreateRepositoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRepositoryCommandOutput) => void),
-    cb?: (err: any, data?: CreateRepositoryCommandOutput) => void
-  ): Promise<CreateRepositoryCommandOutput> | void {
-    const command = new CreateRepositoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Deletes a domain. You cannot delete a domain that contains repositories. If you want to delete a domain
-   *          with repositories, first delete its repositories.
-   *       </p>
-   */
-  public deleteDomain(
-    args: DeleteDomainCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDomainCommandOutput>;
-  public deleteDomain(args: DeleteDomainCommandInput, cb: (err: any, data?: DeleteDomainCommandOutput) => void): void;
-  public deleteDomain(
-    args: DeleteDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDomainCommandOutput) => void
-  ): void;
-  public deleteDomain(
-    args: DeleteDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainCommandOutput) => void
-  ): Promise<DeleteDomainCommandOutput> | void {
-    const command = new DeleteDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Deletes the resource policy set on a domain.
-   *       </p>
-   */
-  public deleteDomainPermissionsPolicy(
-    args: DeleteDomainPermissionsPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDomainPermissionsPolicyCommandOutput>;
-  public deleteDomainPermissionsPolicy(
-    args: DeleteDomainPermissionsPolicyCommandInput,
-    cb: (err: any, data?: DeleteDomainPermissionsPolicyCommandOutput) => void
-  ): void;
-  public deleteDomainPermissionsPolicy(
-    args: DeleteDomainPermissionsPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDomainPermissionsPolicyCommandOutput) => void
-  ): void;
-  public deleteDomainPermissionsPolicy(
-    args: DeleteDomainPermissionsPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainPermissionsPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainPermissionsPolicyCommandOutput) => void
-  ): Promise<DeleteDomainPermissionsPolicyCommandOutput> | void {
-    const command = new DeleteDomainPermissionsPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Deletes one or more versions of a package. A deleted package version cannot be restored
-   *       in your repository. If you want to remove a package version from your repository and be able
-   *       to restore it later, set its status to <code>Archived</code>. Archived packages cannot be
-   *       downloaded from a repository and don't show up with list package APIs (for example,
-   *           <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListackageVersions</a>), but you can restore them using <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html">UpdatePackageVersionsStatus</a>. </p>
-   */
-  public deletePackageVersions(
-    args: DeletePackageVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeletePackageVersionsCommandOutput>;
-  public deletePackageVersions(
-    args: DeletePackageVersionsCommandInput,
-    cb: (err: any, data?: DeletePackageVersionsCommandOutput) => void
-  ): void;
-  public deletePackageVersions(
-    args: DeletePackageVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeletePackageVersionsCommandOutput) => void
-  ): void;
-  public deletePackageVersions(
-    args: DeletePackageVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePackageVersionsCommandOutput) => void),
-    cb?: (err: any, data?: DeletePackageVersionsCommandOutput) => void
-  ): Promise<DeletePackageVersionsCommandOutput> | void {
-    const command = new DeletePackageVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Deletes a repository.
-   *        </p>
-   */
-  public deleteRepository(
-    args: DeleteRepositoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRepositoryCommandOutput>;
-  public deleteRepository(
-    args: DeleteRepositoryCommandInput,
-    cb: (err: any, data?: DeleteRepositoryCommandOutput) => void
-  ): void;
-  public deleteRepository(
-    args: DeleteRepositoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRepositoryCommandOutput) => void
-  ): void;
-  public deleteRepository(
-    args: DeleteRepositoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRepositoryCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRepositoryCommandOutput) => void
-  ): Promise<DeleteRepositoryCommandOutput> | void {
-    const command = new DeleteRepositoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Deletes the resource policy that is set on a repository. After a resource policy is deleted, the
-   *         permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.
-   *       </p>
-   *          <important>
-   *             <p>
-   *          Use <code>DeleteRepositoryPermissionsPolicy</code> with caution. After a policy is deleted, AWS users, roles, and accounts lose permissions to perform
-   *          the repository actions granted by the deleted policy.
-   *        </p>
-   *          </important>
-   */
-  public deleteRepositoryPermissionsPolicy(
-    args: DeleteRepositoryPermissionsPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRepositoryPermissionsPolicyCommandOutput>;
-  public deleteRepositoryPermissionsPolicy(
-    args: DeleteRepositoryPermissionsPolicyCommandInput,
-    cb: (err: any, data?: DeleteRepositoryPermissionsPolicyCommandOutput) => void
-  ): void;
-  public deleteRepositoryPermissionsPolicy(
-    args: DeleteRepositoryPermissionsPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRepositoryPermissionsPolicyCommandOutput) => void
-  ): void;
-  public deleteRepositoryPermissionsPolicy(
-    args: DeleteRepositoryPermissionsPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRepositoryPermissionsPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRepositoryPermissionsPolicyCommandOutput) => void
-  ): Promise<DeleteRepositoryPermissionsPolicyCommandOutput> | void {
-    const command = new DeleteRepositoryPermissionsPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Returns a
-   *       <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html">DomainDescription</a>
-   *       object that contains information about the requested domain.
-   *      </p>
-   */
-  public describeDomain(
-    args: DescribeDomainCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDomainCommandOutput>;
-  public describeDomain(
-    args: DescribeDomainCommandInput,
-    cb: (err: any, data?: DescribeDomainCommandOutput) => void
-  ): void;
-  public describeDomain(
-    args: DescribeDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDomainCommandOutput) => void
-  ): void;
-  public describeDomain(
-    args: DescribeDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDomainCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDomainCommandOutput) => void
-  ): Promise<DescribeDomainCommandOutput> | void {
-    const command = new DescribeDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *        Returns a
-   *        <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a>
-   *        object that contains information about the requested package version.
-   *      </p>
-   */
-  public describePackageVersion(
-    args: DescribePackageVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribePackageVersionCommandOutput>;
-  public describePackageVersion(
-    args: DescribePackageVersionCommandInput,
-    cb: (err: any, data?: DescribePackageVersionCommandOutput) => void
-  ): void;
-  public describePackageVersion(
-    args: DescribePackageVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribePackageVersionCommandOutput) => void
-  ): void;
-  public describePackageVersion(
-    args: DescribePackageVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribePackageVersionCommandOutput) => void),
-    cb?: (err: any, data?: DescribePackageVersionCommandOutput) => void
-  ): Promise<DescribePackageVersionCommandOutput> | void {
-    const command = new DescribePackageVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Returns a <code>RepositoryDescription</code> object that contains detailed information
-   *         about the requested repository.
-   *        </p>
-   */
-  public describeRepository(
-    args: DescribeRepositoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRepositoryCommandOutput>;
-  public describeRepository(
-    args: DescribeRepositoryCommandInput,
-    cb: (err: any, data?: DescribeRepositoryCommandOutput) => void
-  ): void;
-  public describeRepository(
-    args: DescribeRepositoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRepositoryCommandOutput) => void
-  ): void;
-  public describeRepository(
-    args: DescribeRepositoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRepositoryCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRepositoryCommandOutput) => void
-  ): Promise<DescribeRepositoryCommandOutput> | void {
-    const command = new DescribeRepositoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Removes an existing external connection from a repository.
-   *     </p>
-   */
-  public disassociateExternalConnection(
-    args: DisassociateExternalConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateExternalConnectionCommandOutput>;
-  public disassociateExternalConnection(
-    args: DisassociateExternalConnectionCommandInput,
-    cb: (err: any, data?: DisassociateExternalConnectionCommandOutput) => void
-  ): void;
-  public disassociateExternalConnection(
-    args: DisassociateExternalConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateExternalConnectionCommandOutput) => void
-  ): void;
-  public disassociateExternalConnection(
-    args: DisassociateExternalConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateExternalConnectionCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateExternalConnectionCommandOutput) => void
-  ): Promise<DisassociateExternalConnectionCommandOutput> | void {
-    const command = new DisassociateExternalConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Deletes the assets in package versions and sets the package versions' status to <code>Disposed</code>.
-   *       A disposed package version cannot be restored in your repository because its assets are deleted.
-   *     </p>
-   *
-   *          <p>
-   *       To view all disposed package versions in a repository, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListPackageVersions</a> and set the
-   *       <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax">status</a> parameter
-   *       to <code>Disposed</code>.
-   *     </p>
-   *
-   *          <p>
-   *       To view information about a disposed package version, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html">DescribePackageVersion</a>.
-   *     </p>
-   */
-  public disposePackageVersions(
-    args: DisposePackageVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisposePackageVersionsCommandOutput>;
-  public disposePackageVersions(
-    args: DisposePackageVersionsCommandInput,
-    cb: (err: any, data?: DisposePackageVersionsCommandOutput) => void
-  ): void;
-  public disposePackageVersions(
-    args: DisposePackageVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisposePackageVersionsCommandOutput) => void
-  ): void;
-  public disposePackageVersions(
-    args: DisposePackageVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisposePackageVersionsCommandOutput) => void),
-    cb?: (err: any, data?: DisposePackageVersionsCommandOutput) => void
-  ): Promise<DisposePackageVersionsCommandOutput> | void {
-    const command = new DisposePackageVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Generates a temporary authorization token for accessing repositories in the domain.
-   *         This API requires the <code>codeartifact:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions.
-   *         For more information about authorization tokens, see
-   *         <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html">AWS CodeArtifact authentication and tokens</a>.
-   *       </p>
-   *          <note>
-   *             <p>CodeArtifact authorization tokens are valid for a period of 12 hours when created with the <code>login</code> command.
-   *          You can call <code>login</code> periodically to refresh the token. When
-   *          you create an authorization token with the <code>GetAuthorizationToken</code> API, you can set a custom authorization period,
-   *          up to a maximum of 12 hours, with the <code>durationSeconds</code> parameter.</p>
-   *             <p>The authorization period begins after <code>login</code>
-   *          or <code>GetAuthorizationToken</code> is called. If <code>login</code> or <code>GetAuthorizationToken</code> is called while
-   *          assuming a role, the token lifetime is independent of the maximum session duration
-   *          of the role. For example, if you call <code>sts assume-role</code> and specify a session duration of 15 minutes, then
-   *          generate a CodeArtifact authorization token, the token will be valid for the full authorization period
-   *          even though this is longer than the 15-minute session duration.</p>
-   *             <p>See
-   *          <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM Roles</a>
-   *          for more information on controlling session duration. </p>
-   *          </note>
-   */
-  public getAuthorizationToken(
-    args: GetAuthorizationTokenCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAuthorizationTokenCommandOutput>;
-  public getAuthorizationToken(
-    args: GetAuthorizationTokenCommandInput,
-    cb: (err: any, data?: GetAuthorizationTokenCommandOutput) => void
-  ): void;
-  public getAuthorizationToken(
-    args: GetAuthorizationTokenCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAuthorizationTokenCommandOutput) => void
-  ): void;
-  public getAuthorizationToken(
-    args: GetAuthorizationTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAuthorizationTokenCommandOutput) => void),
-    cb?: (err: any, data?: GetAuthorizationTokenCommandOutput) => void
-  ): Promise<GetAuthorizationTokenCommandOutput> | void {
-    const command = new GetAuthorizationTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Returns the resource policy attached to the specified domain.
-   *       </p>
-   *          <note>
-   *             <p>
-   *          The policy is a resource-based policy, not an identity-based policy. For more information, see
-   *          <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html">Identity-based policies
-   *            and resource-based policies </a> in the <i>AWS Identity and Access Management User Guide</i>.
-   *        </p>
-   *          </note>
-   */
-  public getDomainPermissionsPolicy(
-    args: GetDomainPermissionsPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDomainPermissionsPolicyCommandOutput>;
-  public getDomainPermissionsPolicy(
-    args: GetDomainPermissionsPolicyCommandInput,
-    cb: (err: any, data?: GetDomainPermissionsPolicyCommandOutput) => void
-  ): void;
-  public getDomainPermissionsPolicy(
-    args: GetDomainPermissionsPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDomainPermissionsPolicyCommandOutput) => void
-  ): void;
-  public getDomainPermissionsPolicy(
-    args: GetDomainPermissionsPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDomainPermissionsPolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetDomainPermissionsPolicyCommandOutput) => void
-  ): Promise<GetDomainPermissionsPolicyCommandOutput> | void {
-    const command = new GetDomainPermissionsPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Returns an asset (or file) that is in a package. For example, for a Maven package version, use
-   *       <code>GetPackageVersionAsset</code> to download a <code>JAR</code> file, a <code>POM</code> file,
-   *       or any other assets in the package version.
-   *     </p>
-   */
-  public getPackageVersionAsset(
-    args: GetPackageVersionAssetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetPackageVersionAssetCommandOutput>;
-  public getPackageVersionAsset(
-    args: GetPackageVersionAssetCommandInput,
-    cb: (err: any, data?: GetPackageVersionAssetCommandOutput) => void
-  ): void;
-  public getPackageVersionAsset(
-    args: GetPackageVersionAssetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPackageVersionAssetCommandOutput) => void
-  ): void;
-  public getPackageVersionAsset(
-    args: GetPackageVersionAssetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPackageVersionAssetCommandOutput) => void),
-    cb?: (err: any, data?: GetPackageVersionAssetCommandOutput) => void
-  ): Promise<GetPackageVersionAssetCommandOutput> | void {
-    const command = new GetPackageVersionAssetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Gets the readme file or descriptive text for a package version. For packages that do not contain a readme file, CodeArtifact
-   *          extracts a description from a metadata file. For example, from the <code><description></code> element in the
-   *         <code>pom.xml</code> file of a Maven package.
-   *       </p>
-   *          <p>
-   *        The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText.
-   *      </p>
-   */
-  public getPackageVersionReadme(
-    args: GetPackageVersionReadmeCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetPackageVersionReadmeCommandOutput>;
-  public getPackageVersionReadme(
-    args: GetPackageVersionReadmeCommandInput,
-    cb: (err: any, data?: GetPackageVersionReadmeCommandOutput) => void
-  ): void;
-  public getPackageVersionReadme(
-    args: GetPackageVersionReadmeCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPackageVersionReadmeCommandOutput) => void
-  ): void;
-  public getPackageVersionReadme(
-    args: GetPackageVersionReadmeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPackageVersionReadmeCommandOutput) => void),
-    cb?: (err: any, data?: GetPackageVersionReadmeCommandOutput) => void
-  ): Promise<GetPackageVersionReadmeCommandOutput> | void {
-    const command = new GetPackageVersionReadmeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each
-   *       package format:
-   *     </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>npm</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>pypi</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>maven</code>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public getRepositoryEndpoint(
-    args: GetRepositoryEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRepositoryEndpointCommandOutput>;
-  public getRepositoryEndpoint(
-    args: GetRepositoryEndpointCommandInput,
-    cb: (err: any, data?: GetRepositoryEndpointCommandOutput) => void
-  ): void;
-  public getRepositoryEndpoint(
-    args: GetRepositoryEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRepositoryEndpointCommandOutput) => void
-  ): void;
-  public getRepositoryEndpoint(
-    args: GetRepositoryEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRepositoryEndpointCommandOutput) => void),
-    cb?: (err: any, data?: GetRepositoryEndpointCommandOutput) => void
-  ): Promise<GetRepositoryEndpointCommandOutput> | void {
-    const command = new GetRepositoryEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Returns the resource policy that is set on a repository.
-   *       </p>
-   */
-  public getRepositoryPermissionsPolicy(
-    args: GetRepositoryPermissionsPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRepositoryPermissionsPolicyCommandOutput>;
-  public getRepositoryPermissionsPolicy(
-    args: GetRepositoryPermissionsPolicyCommandInput,
-    cb: (err: any, data?: GetRepositoryPermissionsPolicyCommandOutput) => void
-  ): void;
-  public getRepositoryPermissionsPolicy(
-    args: GetRepositoryPermissionsPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRepositoryPermissionsPolicyCommandOutput) => void
-  ): void;
-  public getRepositoryPermissionsPolicy(
-    args: GetRepositoryPermissionsPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRepositoryPermissionsPolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetRepositoryPermissionsPolicyCommandOutput) => void
-  ): Promise<GetRepositoryPermissionsPolicyCommandOutput> | void {
-    const command = new GetRepositoryPermissionsPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">DomainSummary</a> objects for all domains owned by the AWS account that makes
-   *       this call. Each returned <code>DomainSummary</code> object contains information about a
-   *       domain. </p>
-   */
-  public listDomains(args: ListDomainsCommandInput, options?: __HttpHandlerOptions): Promise<ListDomainsCommandOutput>;
-  public listDomains(args: ListDomainsCommandInput, cb: (err: any, data?: ListDomainsCommandOutput) => void): void;
-  public listDomains(
-    args: ListDomainsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListDomainsCommandOutput) => void
-  ): void;
-  public listDomains(
-    args: ListDomainsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDomainsCommandOutput) => void),
-    cb?: (err: any, data?: ListDomainsCommandOutput) => void
-  ): Promise<ListDomainsCommandOutput> | void {
-    const command = new ListDomainsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Returns a list of
-   *         <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html">PackageSummary</a>
-   *         objects for packages in a repository that match the request parameters.
-   *       </p>
-   */
-  public listPackages(
-    args: ListPackagesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListPackagesCommandOutput>;
-  public listPackages(args: ListPackagesCommandInput, cb: (err: any, data?: ListPackagesCommandOutput) => void): void;
-  public listPackages(
-    args: ListPackagesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListPackagesCommandOutput) => void
-  ): void;
-  public listPackages(
-    args: ListPackagesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPackagesCommandOutput) => void),
-    cb?: (err: any, data?: ListPackagesCommandOutput) => void
-  ): Promise<ListPackagesCommandOutput> | void {
-    const command = new ListPackagesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *        Returns a list of
-   *        <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html">AssetSummary</a>
-   *        objects for assets in a package version.
-   *      </p>
-   */
-  public listPackageVersionAssets(
-    args: ListPackageVersionAssetsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListPackageVersionAssetsCommandOutput>;
-  public listPackageVersionAssets(
-    args: ListPackageVersionAssetsCommandInput,
-    cb: (err: any, data?: ListPackageVersionAssetsCommandOutput) => void
-  ): void;
-  public listPackageVersionAssets(
-    args: ListPackageVersionAssetsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListPackageVersionAssetsCommandOutput) => void
-  ): void;
-  public listPackageVersionAssets(
-    args: ListPackageVersionAssetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPackageVersionAssetsCommandOutput) => void),
-    cb?: (err: any, data?: ListPackageVersionAssetsCommandOutput) => void
-  ): Promise<ListPackageVersionAssetsCommandOutput> | void {
-    const command = new ListPackageVersionAssetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Returns the direct dependencies for a package version. The dependencies are returned as
-   *         <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html">PackageDependency</a>
-   *           objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package
-   *           format (for example, the <code>package.json</code> file for npm packages and the <code>pom.xml</code> file
-   *         for Maven). Any package version dependencies that are not listed in the configuration file are not returned.
-   *       </p>
-   */
-  public listPackageVersionDependencies(
-    args: ListPackageVersionDependenciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListPackageVersionDependenciesCommandOutput>;
-  public listPackageVersionDependencies(
-    args: ListPackageVersionDependenciesCommandInput,
-    cb: (err: any, data?: ListPackageVersionDependenciesCommandOutput) => void
-  ): void;
-  public listPackageVersionDependencies(
-    args: ListPackageVersionDependenciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListPackageVersionDependenciesCommandOutput) => void
-  ): void;
-  public listPackageVersionDependencies(
-    args: ListPackageVersionDependenciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPackageVersionDependenciesCommandOutput) => void),
-    cb?: (err: any, data?: ListPackageVersionDependenciesCommandOutput) => void
-  ): Promise<ListPackageVersionDependenciesCommandOutput> | void {
-    const command = new ListPackageVersionDependenciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Returns a list of
-   *         <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html">PackageVersionSummary</a>
-   *         objects for package versions in a repository that match the request parameters.
-   *       </p>
-   */
-  public listPackageVersions(
-    args: ListPackageVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListPackageVersionsCommandOutput>;
-  public listPackageVersions(
-    args: ListPackageVersionsCommandInput,
-    cb: (err: any, data?: ListPackageVersionsCommandOutput) => void
-  ): void;
-  public listPackageVersions(
-    args: ListPackageVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListPackageVersionsCommandOutput) => void
-  ): void;
-  public listPackageVersions(
-    args: ListPackageVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPackageVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListPackageVersionsCommandOutput) => void
-  ): Promise<ListPackageVersionsCommandOutput> | void {
-    const command = new ListPackageVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *        Returns a list of
-   *        <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a>
-   *        objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input
-   *        parameters.
-   *      </p>
-   */
-  public listRepositories(
-    args: ListRepositoriesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRepositoriesCommandOutput>;
-  public listRepositories(
-    args: ListRepositoriesCommandInput,
-    cb: (err: any, data?: ListRepositoriesCommandOutput) => void
-  ): void;
-  public listRepositories(
-    args: ListRepositoriesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRepositoriesCommandOutput) => void
-  ): void;
-  public listRepositories(
-    args: ListRepositoriesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRepositoriesCommandOutput) => void),
-    cb?: (err: any, data?: ListRepositoriesCommandOutput) => void
-  ): Promise<ListRepositoriesCommandOutput> | void {
-    const command = new ListRepositoriesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *        Returns a list of
-   *        <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a>
-   *        objects. Each <code>RepositorySummary</code> contains information about a repository in the specified domain and that matches the input
-   *        parameters.
-   *      </p>
-   */
-  public listRepositoriesInDomain(
-    args: ListRepositoriesInDomainCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRepositoriesInDomainCommandOutput>;
-  public listRepositoriesInDomain(
-    args: ListRepositoriesInDomainCommandInput,
-    cb: (err: any, data?: ListRepositoriesInDomainCommandOutput) => void
-  ): void;
-  public listRepositoriesInDomain(
-    args: ListRepositoriesInDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRepositoriesInDomainCommandOutput) => void
-  ): void;
-  public listRepositoriesInDomain(
-    args: ListRepositoriesInDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRepositoriesInDomainCommandOutput) => void),
-    cb?: (err: any, data?: ListRepositoriesInDomainCommandOutput) => void
-  ): Promise<ListRepositoriesInDomainCommandOutput> | void {
-    const command = new ListRepositoriesInDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Sets a resource policy on a domain that specifies permissions to access it.
-   *       </p>
-   *          <p>
-   *        When you call <code>PutDomainPermissionsPolicy</code>, the resource policy on the domain is ignored when evaluting permissions.
-   *        This ensures that the owner of a domain cannot lock themselves out of the domain, which would prevent them from being
-   *        able to update the resource policy.
-   *      </p>
-   */
-  public putDomainPermissionsPolicy(
-    args: PutDomainPermissionsPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutDomainPermissionsPolicyCommandOutput>;
-  public putDomainPermissionsPolicy(
-    args: PutDomainPermissionsPolicyCommandInput,
-    cb: (err: any, data?: PutDomainPermissionsPolicyCommandOutput) => void
-  ): void;
-  public putDomainPermissionsPolicy(
-    args: PutDomainPermissionsPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutDomainPermissionsPolicyCommandOutput) => void
-  ): void;
-  public putDomainPermissionsPolicy(
-    args: PutDomainPermissionsPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutDomainPermissionsPolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutDomainPermissionsPolicyCommandOutput) => void
-  ): Promise<PutDomainPermissionsPolicyCommandOutput> | void {
-    const command = new PutDomainPermissionsPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *         Sets the resource policy on a repository that specifies permissions to access it.
-   *       </p>
-   *          <p>
-   *        When you call <code>PutRepositoryPermissionsPolicy</code>, the resource policy on the repository is ignored when evaluting permissions.
-   *        This ensures that the owner of a repository cannot lock themselves out of the repository, which would prevent them from being
-   *        able to update the resource policy.
-   *      </p>
-   */
-  public putRepositoryPermissionsPolicy(
-    args: PutRepositoryPermissionsPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutRepositoryPermissionsPolicyCommandOutput>;
-  public putRepositoryPermissionsPolicy(
-    args: PutRepositoryPermissionsPolicyCommandInput,
-    cb: (err: any, data?: PutRepositoryPermissionsPolicyCommandOutput) => void
-  ): void;
-  public putRepositoryPermissionsPolicy(
-    args: PutRepositoryPermissionsPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutRepositoryPermissionsPolicyCommandOutput) => void
-  ): void;
-  public putRepositoryPermissionsPolicy(
-    args: PutRepositoryPermissionsPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutRepositoryPermissionsPolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutRepositoryPermissionsPolicyCommandOutput) => void
-  ): Promise<PutRepositoryPermissionsPolicyCommandOutput> | void {
-    const command = new PutRepositoryPermissionsPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds or updates tags for a resource in AWS CodeArtifact.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes tags from a resource in AWS CodeArtifact.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Updates the status of one or more versions of a package.
-   *     </p>
-   */
-  public updatePackageVersionsStatus(
-    args: UpdatePackageVersionsStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdatePackageVersionsStatusCommandOutput>;
-  public updatePackageVersionsStatus(
-    args: UpdatePackageVersionsStatusCommandInput,
-    cb: (err: any, data?: UpdatePackageVersionsStatusCommandOutput) => void
-  ): void;
-  public updatePackageVersionsStatus(
-    args: UpdatePackageVersionsStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdatePackageVersionsStatusCommandOutput) => void
-  ): void;
-  public updatePackageVersionsStatus(
-    args: UpdatePackageVersionsStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePackageVersionsStatusCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePackageVersionsStatusCommandOutput) => void
-  ): Promise<UpdatePackageVersionsStatusCommandOutput> | void {
-    const command = new UpdatePackageVersionsStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *          Update the properties of a repository.
-   *        </p>
-   */
-  public updateRepository(
-    args: UpdateRepositoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRepositoryCommandOutput>;
-  public updateRepository(
-    args: UpdateRepositoryCommandInput,
-    cb: (err: any, data?: UpdateRepositoryCommandOutput) => void
-  ): void;
-  public updateRepository(
-    args: UpdateRepositoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRepositoryCommandOutput) => void
-  ): void;
-  public updateRepository(
-    args: UpdateRepositoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRepositoryCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRepositoryCommandOutput) => void
-  ): Promise<UpdateRepositoryCommandOutput> | void {
-    const command = new UpdateRepositoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Codeartifact extends CodeartifactClient implements Codeartifact {}
+createAggregatedClient(commands, Codeartifact, { paginators });

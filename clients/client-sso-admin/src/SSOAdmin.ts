@@ -1,1223 +1,2130 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
+import { type AddRegionCommandInput, type AddRegionCommandOutput, AddRegionCommand } from "./commands/AddRegionCommand";
 import {
+  type AttachCustomerManagedPolicyReferenceToPermissionSetCommandInput,
+  type AttachCustomerManagedPolicyReferenceToPermissionSetCommandOutput,
+  AttachCustomerManagedPolicyReferenceToPermissionSetCommand,
+} from "./commands/AttachCustomerManagedPolicyReferenceToPermissionSetCommand";
+import {
+  type AttachManagedPolicyToPermissionSetCommandInput,
+  type AttachManagedPolicyToPermissionSetCommandOutput,
   AttachManagedPolicyToPermissionSetCommand,
-  AttachManagedPolicyToPermissionSetCommandInput,
-  AttachManagedPolicyToPermissionSetCommandOutput,
 } from "./commands/AttachManagedPolicyToPermissionSetCommand";
 import {
+  type CreateAccountAssignmentCommandInput,
+  type CreateAccountAssignmentCommandOutput,
   CreateAccountAssignmentCommand,
-  CreateAccountAssignmentCommandInput,
-  CreateAccountAssignmentCommandOutput,
 } from "./commands/CreateAccountAssignmentCommand";
 import {
+  type CreateApplicationAssignmentCommandInput,
+  type CreateApplicationAssignmentCommandOutput,
+  CreateApplicationAssignmentCommand,
+} from "./commands/CreateApplicationAssignmentCommand";
+import {
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
+import {
+  type CreateInstanceAccessControlAttributeConfigurationCommandInput,
+  type CreateInstanceAccessControlAttributeConfigurationCommandOutput,
   CreateInstanceAccessControlAttributeConfigurationCommand,
-  CreateInstanceAccessControlAttributeConfigurationCommandInput,
-  CreateInstanceAccessControlAttributeConfigurationCommandOutput,
 } from "./commands/CreateInstanceAccessControlAttributeConfigurationCommand";
 import {
+  type CreateInstanceCommandInput,
+  type CreateInstanceCommandOutput,
+  CreateInstanceCommand,
+} from "./commands/CreateInstanceCommand";
+import {
+  type CreatePermissionSetCommandInput,
+  type CreatePermissionSetCommandOutput,
   CreatePermissionSetCommand,
-  CreatePermissionSetCommandInput,
-  CreatePermissionSetCommandOutput,
 } from "./commands/CreatePermissionSetCommand";
 import {
+  type CreateTrustedTokenIssuerCommandInput,
+  type CreateTrustedTokenIssuerCommandOutput,
+  CreateTrustedTokenIssuerCommand,
+} from "./commands/CreateTrustedTokenIssuerCommand";
+import {
+  type DeleteAccountAssignmentCommandInput,
+  type DeleteAccountAssignmentCommandOutput,
   DeleteAccountAssignmentCommand,
-  DeleteAccountAssignmentCommandInput,
-  DeleteAccountAssignmentCommandOutput,
 } from "./commands/DeleteAccountAssignmentCommand";
 import {
+  type DeleteApplicationAccessScopeCommandInput,
+  type DeleteApplicationAccessScopeCommandOutput,
+  DeleteApplicationAccessScopeCommand,
+} from "./commands/DeleteApplicationAccessScopeCommand";
+import {
+  type DeleteApplicationAssignmentCommandInput,
+  type DeleteApplicationAssignmentCommandOutput,
+  DeleteApplicationAssignmentCommand,
+} from "./commands/DeleteApplicationAssignmentCommand";
+import {
+  type DeleteApplicationAuthenticationMethodCommandInput,
+  type DeleteApplicationAuthenticationMethodCommandOutput,
+  DeleteApplicationAuthenticationMethodCommand,
+} from "./commands/DeleteApplicationAuthenticationMethodCommand";
+import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type DeleteApplicationGrantCommandInput,
+  type DeleteApplicationGrantCommandOutput,
+  DeleteApplicationGrantCommand,
+} from "./commands/DeleteApplicationGrantCommand";
+import {
+  type DeleteInlinePolicyFromPermissionSetCommandInput,
+  type DeleteInlinePolicyFromPermissionSetCommandOutput,
   DeleteInlinePolicyFromPermissionSetCommand,
-  DeleteInlinePolicyFromPermissionSetCommandInput,
-  DeleteInlinePolicyFromPermissionSetCommandOutput,
 } from "./commands/DeleteInlinePolicyFromPermissionSetCommand";
 import {
+  type DeleteInstanceAccessControlAttributeConfigurationCommandInput,
+  type DeleteInstanceAccessControlAttributeConfigurationCommandOutput,
   DeleteInstanceAccessControlAttributeConfigurationCommand,
-  DeleteInstanceAccessControlAttributeConfigurationCommandInput,
-  DeleteInstanceAccessControlAttributeConfigurationCommandOutput,
 } from "./commands/DeleteInstanceAccessControlAttributeConfigurationCommand";
 import {
+  type DeleteInstanceCommandInput,
+  type DeleteInstanceCommandOutput,
+  DeleteInstanceCommand,
+} from "./commands/DeleteInstanceCommand";
+import {
+  type DeletePermissionsBoundaryFromPermissionSetCommandInput,
+  type DeletePermissionsBoundaryFromPermissionSetCommandOutput,
+  DeletePermissionsBoundaryFromPermissionSetCommand,
+} from "./commands/DeletePermissionsBoundaryFromPermissionSetCommand";
+import {
+  type DeletePermissionSetCommandInput,
+  type DeletePermissionSetCommandOutput,
   DeletePermissionSetCommand,
-  DeletePermissionSetCommandInput,
-  DeletePermissionSetCommandOutput,
 } from "./commands/DeletePermissionSetCommand";
 import {
+  type DeleteTrustedTokenIssuerCommandInput,
+  type DeleteTrustedTokenIssuerCommandOutput,
+  DeleteTrustedTokenIssuerCommand,
+} from "./commands/DeleteTrustedTokenIssuerCommand";
+import {
+  type DescribeAccountAssignmentCreationStatusCommandInput,
+  type DescribeAccountAssignmentCreationStatusCommandOutput,
   DescribeAccountAssignmentCreationStatusCommand,
-  DescribeAccountAssignmentCreationStatusCommandInput,
-  DescribeAccountAssignmentCreationStatusCommandOutput,
 } from "./commands/DescribeAccountAssignmentCreationStatusCommand";
 import {
+  type DescribeAccountAssignmentDeletionStatusCommandInput,
+  type DescribeAccountAssignmentDeletionStatusCommandOutput,
   DescribeAccountAssignmentDeletionStatusCommand,
-  DescribeAccountAssignmentDeletionStatusCommandInput,
-  DescribeAccountAssignmentDeletionStatusCommandOutput,
 } from "./commands/DescribeAccountAssignmentDeletionStatusCommand";
 import {
+  type DescribeApplicationAssignmentCommandInput,
+  type DescribeApplicationAssignmentCommandOutput,
+  DescribeApplicationAssignmentCommand,
+} from "./commands/DescribeApplicationAssignmentCommand";
+import {
+  type DescribeApplicationCommandInput,
+  type DescribeApplicationCommandOutput,
+  DescribeApplicationCommand,
+} from "./commands/DescribeApplicationCommand";
+import {
+  type DescribeApplicationProviderCommandInput,
+  type DescribeApplicationProviderCommandOutput,
+  DescribeApplicationProviderCommand,
+} from "./commands/DescribeApplicationProviderCommand";
+import {
+  type DescribeInstanceAccessControlAttributeConfigurationCommandInput,
+  type DescribeInstanceAccessControlAttributeConfigurationCommandOutput,
   DescribeInstanceAccessControlAttributeConfigurationCommand,
-  DescribeInstanceAccessControlAttributeConfigurationCommandInput,
-  DescribeInstanceAccessControlAttributeConfigurationCommandOutput,
 } from "./commands/DescribeInstanceAccessControlAttributeConfigurationCommand";
 import {
+  type DescribeInstanceCommandInput,
+  type DescribeInstanceCommandOutput,
+  DescribeInstanceCommand,
+} from "./commands/DescribeInstanceCommand";
+import {
+  type DescribePermissionSetCommandInput,
+  type DescribePermissionSetCommandOutput,
   DescribePermissionSetCommand,
-  DescribePermissionSetCommandInput,
-  DescribePermissionSetCommandOutput,
 } from "./commands/DescribePermissionSetCommand";
 import {
+  type DescribePermissionSetProvisioningStatusCommandInput,
+  type DescribePermissionSetProvisioningStatusCommandOutput,
   DescribePermissionSetProvisioningStatusCommand,
-  DescribePermissionSetProvisioningStatusCommandInput,
-  DescribePermissionSetProvisioningStatusCommandOutput,
 } from "./commands/DescribePermissionSetProvisioningStatusCommand";
 import {
+  type DescribeRegionCommandInput,
+  type DescribeRegionCommandOutput,
+  DescribeRegionCommand,
+} from "./commands/DescribeRegionCommand";
+import {
+  type DescribeTrustedTokenIssuerCommandInput,
+  type DescribeTrustedTokenIssuerCommandOutput,
+  DescribeTrustedTokenIssuerCommand,
+} from "./commands/DescribeTrustedTokenIssuerCommand";
+import {
+  type DetachCustomerManagedPolicyReferenceFromPermissionSetCommandInput,
+  type DetachCustomerManagedPolicyReferenceFromPermissionSetCommandOutput,
+  DetachCustomerManagedPolicyReferenceFromPermissionSetCommand,
+} from "./commands/DetachCustomerManagedPolicyReferenceFromPermissionSetCommand";
+import {
+  type DetachManagedPolicyFromPermissionSetCommandInput,
+  type DetachManagedPolicyFromPermissionSetCommandOutput,
   DetachManagedPolicyFromPermissionSetCommand,
-  DetachManagedPolicyFromPermissionSetCommandInput,
-  DetachManagedPolicyFromPermissionSetCommandOutput,
 } from "./commands/DetachManagedPolicyFromPermissionSetCommand";
 import {
+  type GetApplicationAccessScopeCommandInput,
+  type GetApplicationAccessScopeCommandOutput,
+  GetApplicationAccessScopeCommand,
+} from "./commands/GetApplicationAccessScopeCommand";
+import {
+  type GetApplicationAssignmentConfigurationCommandInput,
+  type GetApplicationAssignmentConfigurationCommandOutput,
+  GetApplicationAssignmentConfigurationCommand,
+} from "./commands/GetApplicationAssignmentConfigurationCommand";
+import {
+  type GetApplicationAuthenticationMethodCommandInput,
+  type GetApplicationAuthenticationMethodCommandOutput,
+  GetApplicationAuthenticationMethodCommand,
+} from "./commands/GetApplicationAuthenticationMethodCommand";
+import {
+  type GetApplicationGrantCommandInput,
+  type GetApplicationGrantCommandOutput,
+  GetApplicationGrantCommand,
+} from "./commands/GetApplicationGrantCommand";
+import {
+  type GetApplicationSessionConfigurationCommandInput,
+  type GetApplicationSessionConfigurationCommandOutput,
+  GetApplicationSessionConfigurationCommand,
+} from "./commands/GetApplicationSessionConfigurationCommand";
+import {
+  type GetInlinePolicyForPermissionSetCommandInput,
+  type GetInlinePolicyForPermissionSetCommandOutput,
   GetInlinePolicyForPermissionSetCommand,
-  GetInlinePolicyForPermissionSetCommandInput,
-  GetInlinePolicyForPermissionSetCommandOutput,
 } from "./commands/GetInlinePolicyForPermissionSetCommand";
 import {
+  type GetPermissionsBoundaryForPermissionSetCommandInput,
+  type GetPermissionsBoundaryForPermissionSetCommandOutput,
+  GetPermissionsBoundaryForPermissionSetCommand,
+} from "./commands/GetPermissionsBoundaryForPermissionSetCommand";
+import {
+  type ListAccountAssignmentCreationStatusCommandInput,
+  type ListAccountAssignmentCreationStatusCommandOutput,
   ListAccountAssignmentCreationStatusCommand,
-  ListAccountAssignmentCreationStatusCommandInput,
-  ListAccountAssignmentCreationStatusCommandOutput,
 } from "./commands/ListAccountAssignmentCreationStatusCommand";
 import {
+  type ListAccountAssignmentDeletionStatusCommandInput,
+  type ListAccountAssignmentDeletionStatusCommandOutput,
   ListAccountAssignmentDeletionStatusCommand,
-  ListAccountAssignmentDeletionStatusCommandInput,
-  ListAccountAssignmentDeletionStatusCommandOutput,
 } from "./commands/ListAccountAssignmentDeletionStatusCommand";
 import {
+  type ListAccountAssignmentsCommandInput,
+  type ListAccountAssignmentsCommandOutput,
   ListAccountAssignmentsCommand,
-  ListAccountAssignmentsCommandInput,
-  ListAccountAssignmentsCommandOutput,
 } from "./commands/ListAccountAssignmentsCommand";
 import {
+  type ListAccountAssignmentsForPrincipalCommandInput,
+  type ListAccountAssignmentsForPrincipalCommandOutput,
+  ListAccountAssignmentsForPrincipalCommand,
+} from "./commands/ListAccountAssignmentsForPrincipalCommand";
+import {
+  type ListAccountsForProvisionedPermissionSetCommandInput,
+  type ListAccountsForProvisionedPermissionSetCommandOutput,
   ListAccountsForProvisionedPermissionSetCommand,
-  ListAccountsForProvisionedPermissionSetCommandInput,
-  ListAccountsForProvisionedPermissionSetCommandOutput,
 } from "./commands/ListAccountsForProvisionedPermissionSetCommand";
 import {
+  type ListApplicationAccessScopesCommandInput,
+  type ListApplicationAccessScopesCommandOutput,
+  ListApplicationAccessScopesCommand,
+} from "./commands/ListApplicationAccessScopesCommand";
+import {
+  type ListApplicationAssignmentsCommandInput,
+  type ListApplicationAssignmentsCommandOutput,
+  ListApplicationAssignmentsCommand,
+} from "./commands/ListApplicationAssignmentsCommand";
+import {
+  type ListApplicationAssignmentsForPrincipalCommandInput,
+  type ListApplicationAssignmentsForPrincipalCommandOutput,
+  ListApplicationAssignmentsForPrincipalCommand,
+} from "./commands/ListApplicationAssignmentsForPrincipalCommand";
+import {
+  type ListApplicationAuthenticationMethodsCommandInput,
+  type ListApplicationAuthenticationMethodsCommandOutput,
+  ListApplicationAuthenticationMethodsCommand,
+} from "./commands/ListApplicationAuthenticationMethodsCommand";
+import {
+  type ListApplicationGrantsCommandInput,
+  type ListApplicationGrantsCommandOutput,
+  ListApplicationGrantsCommand,
+} from "./commands/ListApplicationGrantsCommand";
+import {
+  type ListApplicationProvidersCommandInput,
+  type ListApplicationProvidersCommandOutput,
+  ListApplicationProvidersCommand,
+} from "./commands/ListApplicationProvidersCommand";
+import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListCustomerManagedPolicyReferencesInPermissionSetCommandInput,
+  type ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput,
+  ListCustomerManagedPolicyReferencesInPermissionSetCommand,
+} from "./commands/ListCustomerManagedPolicyReferencesInPermissionSetCommand";
+import {
+  type ListInstancesCommandInput,
+  type ListInstancesCommandOutput,
   ListInstancesCommand,
-  ListInstancesCommandInput,
-  ListInstancesCommandOutput,
 } from "./commands/ListInstancesCommand";
 import {
+  type ListManagedPoliciesInPermissionSetCommandInput,
+  type ListManagedPoliciesInPermissionSetCommandOutput,
   ListManagedPoliciesInPermissionSetCommand,
-  ListManagedPoliciesInPermissionSetCommandInput,
-  ListManagedPoliciesInPermissionSetCommandOutput,
 } from "./commands/ListManagedPoliciesInPermissionSetCommand";
 import {
+  type ListPermissionSetProvisioningStatusCommandInput,
+  type ListPermissionSetProvisioningStatusCommandOutput,
   ListPermissionSetProvisioningStatusCommand,
-  ListPermissionSetProvisioningStatusCommandInput,
-  ListPermissionSetProvisioningStatusCommandOutput,
 } from "./commands/ListPermissionSetProvisioningStatusCommand";
 import {
+  type ListPermissionSetsCommandInput,
+  type ListPermissionSetsCommandOutput,
   ListPermissionSetsCommand,
-  ListPermissionSetsCommandInput,
-  ListPermissionSetsCommandOutput,
 } from "./commands/ListPermissionSetsCommand";
 import {
+  type ListPermissionSetsProvisionedToAccountCommandInput,
+  type ListPermissionSetsProvisionedToAccountCommandOutput,
   ListPermissionSetsProvisionedToAccountCommand,
-  ListPermissionSetsProvisionedToAccountCommandInput,
-  ListPermissionSetsProvisionedToAccountCommandOutput,
 } from "./commands/ListPermissionSetsProvisionedToAccountCommand";
 import {
+  type ListRegionsCommandInput,
+  type ListRegionsCommandOutput,
+  ListRegionsCommand,
+} from "./commands/ListRegionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTrustedTokenIssuersCommandInput,
+  type ListTrustedTokenIssuersCommandOutput,
+  ListTrustedTokenIssuersCommand,
+} from "./commands/ListTrustedTokenIssuersCommand";
+import {
+  type ProvisionPermissionSetCommandInput,
+  type ProvisionPermissionSetCommandOutput,
   ProvisionPermissionSetCommand,
-  ProvisionPermissionSetCommandInput,
-  ProvisionPermissionSetCommandOutput,
 } from "./commands/ProvisionPermissionSetCommand";
 import {
-  PutInlinePolicyToPermissionSetCommand,
-  PutInlinePolicyToPermissionSetCommandInput,
-  PutInlinePolicyToPermissionSetCommandOutput,
-} from "./commands/PutInlinePolicyToPermissionSetCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutApplicationAccessScopeCommandInput,
+  type PutApplicationAccessScopeCommandOutput,
+  PutApplicationAccessScopeCommand,
+} from "./commands/PutApplicationAccessScopeCommand";
 import {
+  type PutApplicationAssignmentConfigurationCommandInput,
+  type PutApplicationAssignmentConfigurationCommandOutput,
+  PutApplicationAssignmentConfigurationCommand,
+} from "./commands/PutApplicationAssignmentConfigurationCommand";
+import {
+  type PutApplicationAuthenticationMethodCommandInput,
+  type PutApplicationAuthenticationMethodCommandOutput,
+  PutApplicationAuthenticationMethodCommand,
+} from "./commands/PutApplicationAuthenticationMethodCommand";
+import {
+  type PutApplicationGrantCommandInput,
+  type PutApplicationGrantCommandOutput,
+  PutApplicationGrantCommand,
+} from "./commands/PutApplicationGrantCommand";
+import {
+  type PutApplicationSessionConfigurationCommandInput,
+  type PutApplicationSessionConfigurationCommandOutput,
+  PutApplicationSessionConfigurationCommand,
+} from "./commands/PutApplicationSessionConfigurationCommand";
+import {
+  type PutInlinePolicyToPermissionSetCommandInput,
+  type PutInlinePolicyToPermissionSetCommandOutput,
+  PutInlinePolicyToPermissionSetCommand,
+} from "./commands/PutInlinePolicyToPermissionSetCommand";
+import {
+  type PutPermissionsBoundaryToPermissionSetCommandInput,
+  type PutPermissionsBoundaryToPermissionSetCommandOutput,
+  PutPermissionsBoundaryToPermissionSetCommand,
+} from "./commands/PutPermissionsBoundaryToPermissionSetCommand";
+import {
+  type RemoveRegionCommandInput,
+  type RemoveRegionCommandOutput,
+  RemoveRegionCommand,
+} from "./commands/RemoveRegionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateApplicationCommandInput,
+  type UpdateApplicationCommandOutput,
+  UpdateApplicationCommand,
+} from "./commands/UpdateApplicationCommand";
+import {
+  type UpdateInstanceAccessControlAttributeConfigurationCommandInput,
+  type UpdateInstanceAccessControlAttributeConfigurationCommandOutput,
   UpdateInstanceAccessControlAttributeConfigurationCommand,
-  UpdateInstanceAccessControlAttributeConfigurationCommandInput,
-  UpdateInstanceAccessControlAttributeConfigurationCommandOutput,
 } from "./commands/UpdateInstanceAccessControlAttributeConfigurationCommand";
 import {
+  type UpdateInstanceCommandInput,
+  type UpdateInstanceCommandOutput,
+  UpdateInstanceCommand,
+} from "./commands/UpdateInstanceCommand";
+import {
+  type UpdatePermissionSetCommandInput,
+  type UpdatePermissionSetCommandOutput,
   UpdatePermissionSetCommand,
-  UpdatePermissionSetCommandInput,
-  UpdatePermissionSetCommandOutput,
 } from "./commands/UpdatePermissionSetCommand";
+import {
+  type UpdateTrustedTokenIssuerCommandInput,
+  type UpdateTrustedTokenIssuerCommandOutput,
+  UpdateTrustedTokenIssuerCommand,
+} from "./commands/UpdateTrustedTokenIssuerCommand";
+import { paginateListAccountAssignmentCreationStatus } from "./pagination/ListAccountAssignmentCreationStatusPaginator";
+import { paginateListAccountAssignmentDeletionStatus } from "./pagination/ListAccountAssignmentDeletionStatusPaginator";
+import { paginateListAccountAssignmentsForPrincipal } from "./pagination/ListAccountAssignmentsForPrincipalPaginator";
+import { paginateListAccountAssignments } from "./pagination/ListAccountAssignmentsPaginator";
+import {
+  paginateListAccountsForProvisionedPermissionSet,
+} from "./pagination/ListAccountsForProvisionedPermissionSetPaginator";
+import { paginateListApplicationAccessScopes } from "./pagination/ListApplicationAccessScopesPaginator";
+import {
+  paginateListApplicationAssignmentsForPrincipal,
+} from "./pagination/ListApplicationAssignmentsForPrincipalPaginator";
+import { paginateListApplicationAssignments } from "./pagination/ListApplicationAssignmentsPaginator";
+import {
+  paginateListApplicationAuthenticationMethods,
+} from "./pagination/ListApplicationAuthenticationMethodsPaginator";
+import { paginateListApplicationGrants } from "./pagination/ListApplicationGrantsPaginator";
+import { paginateListApplicationProviders } from "./pagination/ListApplicationProvidersPaginator";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import {
+  paginateListCustomerManagedPolicyReferencesInPermissionSet,
+} from "./pagination/ListCustomerManagedPolicyReferencesInPermissionSetPaginator";
+import { paginateListInstances } from "./pagination/ListInstancesPaginator";
+import { paginateListManagedPoliciesInPermissionSet } from "./pagination/ListManagedPoliciesInPermissionSetPaginator";
+import { paginateListPermissionSetProvisioningStatus } from "./pagination/ListPermissionSetProvisioningStatusPaginator";
+import { paginateListPermissionSets } from "./pagination/ListPermissionSetsPaginator";
+import {
+  paginateListPermissionSetsProvisionedToAccount,
+} from "./pagination/ListPermissionSetsProvisionedToAccountPaginator";
+import { paginateListRegions } from "./pagination/ListRegionsPaginator";
+import { paginateListTagsForResource } from "./pagination/ListTagsForResourcePaginator";
+import { paginateListTrustedTokenIssuers } from "./pagination/ListTrustedTokenIssuersPaginator";
 import { SSOAdminClient } from "./SSOAdminClient";
 
+const commands = {
+  AddRegionCommand,
+  AttachCustomerManagedPolicyReferenceToPermissionSetCommand,
+  AttachManagedPolicyToPermissionSetCommand,
+  CreateAccountAssignmentCommand,
+  CreateApplicationCommand,
+  CreateApplicationAssignmentCommand,
+  CreateInstanceCommand,
+  CreateInstanceAccessControlAttributeConfigurationCommand,
+  CreatePermissionSetCommand,
+  CreateTrustedTokenIssuerCommand,
+  DeleteAccountAssignmentCommand,
+  DeleteApplicationCommand,
+  DeleteApplicationAccessScopeCommand,
+  DeleteApplicationAssignmentCommand,
+  DeleteApplicationAuthenticationMethodCommand,
+  DeleteApplicationGrantCommand,
+  DeleteInlinePolicyFromPermissionSetCommand,
+  DeleteInstanceCommand,
+  DeleteInstanceAccessControlAttributeConfigurationCommand,
+  DeletePermissionsBoundaryFromPermissionSetCommand,
+  DeletePermissionSetCommand,
+  DeleteTrustedTokenIssuerCommand,
+  DescribeAccountAssignmentCreationStatusCommand,
+  DescribeAccountAssignmentDeletionStatusCommand,
+  DescribeApplicationCommand,
+  DescribeApplicationAssignmentCommand,
+  DescribeApplicationProviderCommand,
+  DescribeInstanceCommand,
+  DescribeInstanceAccessControlAttributeConfigurationCommand,
+  DescribePermissionSetCommand,
+  DescribePermissionSetProvisioningStatusCommand,
+  DescribeRegionCommand,
+  DescribeTrustedTokenIssuerCommand,
+  DetachCustomerManagedPolicyReferenceFromPermissionSetCommand,
+  DetachManagedPolicyFromPermissionSetCommand,
+  GetApplicationAccessScopeCommand,
+  GetApplicationAssignmentConfigurationCommand,
+  GetApplicationAuthenticationMethodCommand,
+  GetApplicationGrantCommand,
+  GetApplicationSessionConfigurationCommand,
+  GetInlinePolicyForPermissionSetCommand,
+  GetPermissionsBoundaryForPermissionSetCommand,
+  ListAccountAssignmentCreationStatusCommand,
+  ListAccountAssignmentDeletionStatusCommand,
+  ListAccountAssignmentsCommand,
+  ListAccountAssignmentsForPrincipalCommand,
+  ListAccountsForProvisionedPermissionSetCommand,
+  ListApplicationAccessScopesCommand,
+  ListApplicationAssignmentsCommand,
+  ListApplicationAssignmentsForPrincipalCommand,
+  ListApplicationAuthenticationMethodsCommand,
+  ListApplicationGrantsCommand,
+  ListApplicationProvidersCommand,
+  ListApplicationsCommand,
+  ListCustomerManagedPolicyReferencesInPermissionSetCommand,
+  ListInstancesCommand,
+  ListManagedPoliciesInPermissionSetCommand,
+  ListPermissionSetProvisioningStatusCommand,
+  ListPermissionSetsCommand,
+  ListPermissionSetsProvisionedToAccountCommand,
+  ListRegionsCommand,
+  ListTagsForResourceCommand,
+  ListTrustedTokenIssuersCommand,
+  ProvisionPermissionSetCommand,
+  PutApplicationAccessScopeCommand,
+  PutApplicationAssignmentConfigurationCommand,
+  PutApplicationAuthenticationMethodCommand,
+  PutApplicationGrantCommand,
+  PutApplicationSessionConfigurationCommand,
+  PutInlinePolicyToPermissionSetCommand,
+  PutPermissionsBoundaryToPermissionSetCommand,
+  RemoveRegionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateApplicationCommand,
+  UpdateInstanceCommand,
+  UpdateInstanceAccessControlAttributeConfigurationCommand,
+  UpdatePermissionSetCommand,
+  UpdateTrustedTokenIssuerCommand,
+};
+const paginators = {
+  paginateListAccountAssignmentCreationStatus,
+  paginateListAccountAssignmentDeletionStatus,
+  paginateListAccountAssignments,
+  paginateListAccountAssignmentsForPrincipal,
+  paginateListAccountsForProvisionedPermissionSet,
+  paginateListApplicationAccessScopes,
+  paginateListApplicationAssignments,
+  paginateListApplicationAssignmentsForPrincipal,
+  paginateListApplicationAuthenticationMethods,
+  paginateListApplicationGrants,
+  paginateListApplicationProviders,
+  paginateListApplications,
+  paginateListCustomerManagedPolicyReferencesInPermissionSet,
+  paginateListInstances,
+  paginateListManagedPoliciesInPermissionSet,
+  paginateListPermissionSetProvisioningStatus,
+  paginateListPermissionSets,
+  paginateListPermissionSetsProvisionedToAccount,
+  paginateListRegions,
+  paginateListTagsForResource,
+  paginateListTrustedTokenIssuers,
+};
+
 /**
- * <p>Amazon Web Services Single Sign On (SSO) is a cloud SSO service that makes it easy to centrally manage SSO
- *       access to multiple Amazon Web Services accounts and business applications. This guide provides information on
- *       SSO operations which could be used for access management of Amazon Web Services accounts. For information about
- *       Amazon Web Services SSO features, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">Amazon Web Services Single Sign-On User Guide</a>.</p>
- *          <p>Many operations in the SSO APIs rely on identifiers for users and groups, known as
- *       principals. For more information about how to work with principals and principal IDs in Amazon Web Services SSO,
- *       see the <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API
- *         Reference</a>.</p>
+ * @public
  */
-export class SSOAdmin extends SSOAdminClient {
+export interface SSOAdminRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface SSOAdmin {
   /**
-   * <p>Attaches an IAM managed policy ARN to a permission set.</p>
-   *          <note>
-   *             <p>If the permission set is already referenced by one or more account assignments, you will
-   *         need to call <code>
-   *                   <a>ProvisionPermissionSet</a>
-   *                </code> after this operation.
-   *         Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates to
-   *         all assigned accounts.</p>
-   *          </note>
+   * @see {@link AddRegionCommand}
    */
-  public attachManagedPolicyToPermissionSet(
+  addRegion(
+    args: AddRegionCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<AddRegionCommandOutput>;
+  addRegion(
+    args: AddRegionCommandInput,
+    cb: (err: any, data?: AddRegionCommandOutput) => void
+  ): void;
+  addRegion(
+    args: AddRegionCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: AddRegionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachCustomerManagedPolicyReferenceToPermissionSetCommand}
+   */
+  attachCustomerManagedPolicyReferenceToPermissionSet(
+    args: AttachCustomerManagedPolicyReferenceToPermissionSetCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<AttachCustomerManagedPolicyReferenceToPermissionSetCommandOutput>;
+  attachCustomerManagedPolicyReferenceToPermissionSet(
+    args: AttachCustomerManagedPolicyReferenceToPermissionSetCommandInput,
+    cb: (err: any, data?: AttachCustomerManagedPolicyReferenceToPermissionSetCommandOutput) => void
+  ): void;
+  attachCustomerManagedPolicyReferenceToPermissionSet(
+    args: AttachCustomerManagedPolicyReferenceToPermissionSetCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: AttachCustomerManagedPolicyReferenceToPermissionSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachManagedPolicyToPermissionSetCommand}
+   */
+  attachManagedPolicyToPermissionSet(
     args: AttachManagedPolicyToPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<AttachManagedPolicyToPermissionSetCommandOutput>;
-  public attachManagedPolicyToPermissionSet(
+  attachManagedPolicyToPermissionSet(
     args: AttachManagedPolicyToPermissionSetCommandInput,
     cb: (err: any, data?: AttachManagedPolicyToPermissionSetCommandOutput) => void
   ): void;
-  public attachManagedPolicyToPermissionSet(
+  attachManagedPolicyToPermissionSet(
     args: AttachManagedPolicyToPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: AttachManagedPolicyToPermissionSetCommandOutput) => void
   ): void;
-  public attachManagedPolicyToPermissionSet(
-    args: AttachManagedPolicyToPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AttachManagedPolicyToPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: AttachManagedPolicyToPermissionSetCommandOutput) => void
-  ): Promise<AttachManagedPolicyToPermissionSetCommandOutput> | void {
-    const command = new AttachManagedPolicyToPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns access to a principal for a specified Amazon Web Services account using a specified permission
-   *       set.</p>
-   *          <note>
-   *             <p>The term <i>principal</i> here refers to a user or group that is defined
-   *         in Amazon Web Services SSO.</p>
-   *          </note>
-   *          <note>
-   *             <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified
-   *         permission set will automatically be provisioned to the account in the form of an IAM
-   *         policy. That policy is attached to the SSO-created IAM role. If the permission set is
-   *         subsequently updated, the corresponding IAM policies attached to roles in your accounts will
-   *         not be updated automatically. In this case, you must call <code>
-   *                   <a>ProvisionPermissionSet</a>
-   *                </code> to make these updates.</p>
-   *          </note>
+   * @see {@link CreateAccountAssignmentCommand}
    */
-  public createAccountAssignment(
+  createAccountAssignment(
     args: CreateAccountAssignmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<CreateAccountAssignmentCommandOutput>;
-  public createAccountAssignment(
+  createAccountAssignment(
     args: CreateAccountAssignmentCommandInput,
     cb: (err: any, data?: CreateAccountAssignmentCommandOutput) => void
   ): void;
-  public createAccountAssignment(
+  createAccountAssignment(
     args: CreateAccountAssignmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: CreateAccountAssignmentCommandOutput) => void
   ): void;
-  public createAccountAssignment(
-    args: CreateAccountAssignmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAccountAssignmentCommandOutput) => void),
-    cb?: (err: any, data?: CreateAccountAssignmentCommandOutput) => void
-  ): Promise<CreateAccountAssignmentCommandOutput> | void {
-    const command = new CreateAccountAssignmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO
-   *       instance. You can also specify new attributes to add to your ABAC configuration during the
-   *       enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>
+   * @see {@link CreateApplicationCommand}
    */
-  public createInstanceAccessControlAttributeConfiguration(
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateApplicationAssignmentCommand}
+   */
+  createApplicationAssignment(
+    args: CreateApplicationAssignmentCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<CreateApplicationAssignmentCommandOutput>;
+  createApplicationAssignment(
+    args: CreateApplicationAssignmentCommandInput,
+    cb: (err: any, data?: CreateApplicationAssignmentCommandOutput) => void
+  ): void;
+  createApplicationAssignment(
+    args: CreateApplicationAssignmentCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: CreateApplicationAssignmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstanceCommand}
+   */
+  createInstance(): Promise<CreateInstanceCommandOutput>;
+  createInstance(
+    args: CreateInstanceCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<CreateInstanceCommandOutput>;
+  createInstance(
+    args: CreateInstanceCommandInput,
+    cb: (err: any, data?: CreateInstanceCommandOutput) => void
+  ): void;
+  createInstance(
+    args: CreateInstanceCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: CreateInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstanceAccessControlAttributeConfigurationCommand}
+   */
+  createInstanceAccessControlAttributeConfiguration(
     args: CreateInstanceAccessControlAttributeConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<CreateInstanceAccessControlAttributeConfigurationCommandOutput>;
-  public createInstanceAccessControlAttributeConfiguration(
+  createInstanceAccessControlAttributeConfiguration(
     args: CreateInstanceAccessControlAttributeConfigurationCommandInput,
     cb: (err: any, data?: CreateInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public createInstanceAccessControlAttributeConfiguration(
+  createInstanceAccessControlAttributeConfiguration(
     args: CreateInstanceAccessControlAttributeConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: CreateInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public createInstanceAccessControlAttributeConfiguration(
-    args: CreateInstanceAccessControlAttributeConfigurationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: CreateInstanceAccessControlAttributeConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateInstanceAccessControlAttributeConfigurationCommandOutput) => void
-  ): Promise<CreateInstanceAccessControlAttributeConfigurationCommandOutput> | void {
-    const command = new CreateInstanceAccessControlAttributeConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a permission set within a specified SSO instance.</p>
-   *          <note>
-   *             <p>To grant users and groups access to Amazon Web Services account resources, use <code>
-   *                   <a>CreateAccountAssignment</a>
-   *                </code>.</p>
-   *          </note>
+   * @see {@link CreatePermissionSetCommand}
    */
-  public createPermissionSet(
+  createPermissionSet(
     args: CreatePermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<CreatePermissionSetCommandOutput>;
-  public createPermissionSet(
+  createPermissionSet(
     args: CreatePermissionSetCommandInput,
     cb: (err: any, data?: CreatePermissionSetCommandOutput) => void
   ): void;
-  public createPermissionSet(
+  createPermissionSet(
     args: CreatePermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: CreatePermissionSetCommandOutput) => void
   ): void;
-  public createPermissionSet(
-    args: CreatePermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreatePermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: CreatePermissionSetCommandOutput) => void
-  ): Promise<CreatePermissionSetCommandOutput> | void {
-    const command = new CreatePermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a principal's access from a specified Amazon Web Services account using a specified permission
-   *       set.</p>
+   * @see {@link CreateTrustedTokenIssuerCommand}
    */
-  public deleteAccountAssignment(
+  createTrustedTokenIssuer(
+    args: CreateTrustedTokenIssuerCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<CreateTrustedTokenIssuerCommandOutput>;
+  createTrustedTokenIssuer(
+    args: CreateTrustedTokenIssuerCommandInput,
+    cb: (err: any, data?: CreateTrustedTokenIssuerCommandOutput) => void
+  ): void;
+  createTrustedTokenIssuer(
+    args: CreateTrustedTokenIssuerCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: CreateTrustedTokenIssuerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccountAssignmentCommand}
+   */
+  deleteAccountAssignment(
     args: DeleteAccountAssignmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DeleteAccountAssignmentCommandOutput>;
-  public deleteAccountAssignment(
+  deleteAccountAssignment(
     args: DeleteAccountAssignmentCommandInput,
     cb: (err: any, data?: DeleteAccountAssignmentCommandOutput) => void
   ): void;
-  public deleteAccountAssignment(
+  deleteAccountAssignment(
     args: DeleteAccountAssignmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DeleteAccountAssignmentCommandOutput) => void
   ): void;
-  public deleteAccountAssignment(
-    args: DeleteAccountAssignmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAccountAssignmentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAccountAssignmentCommandOutput) => void
-  ): Promise<DeleteAccountAssignmentCommandOutput> | void {
-    const command = new DeleteAccountAssignmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the inline policy from a specified permission set.</p>
+   * @see {@link DeleteApplicationCommand}
    */
-  public deleteInlinePolicyFromPermissionSet(
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationAccessScopeCommand}
+   */
+  deleteApplicationAccessScope(
+    args: DeleteApplicationAccessScopeCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteApplicationAccessScopeCommandOutput>;
+  deleteApplicationAccessScope(
+    args: DeleteApplicationAccessScopeCommandInput,
+    cb: (err: any, data?: DeleteApplicationAccessScopeCommandOutput) => void
+  ): void;
+  deleteApplicationAccessScope(
+    args: DeleteApplicationAccessScopeCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteApplicationAccessScopeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationAssignmentCommand}
+   */
+  deleteApplicationAssignment(
+    args: DeleteApplicationAssignmentCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteApplicationAssignmentCommandOutput>;
+  deleteApplicationAssignment(
+    args: DeleteApplicationAssignmentCommandInput,
+    cb: (err: any, data?: DeleteApplicationAssignmentCommandOutput) => void
+  ): void;
+  deleteApplicationAssignment(
+    args: DeleteApplicationAssignmentCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteApplicationAssignmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationAuthenticationMethodCommand}
+   */
+  deleteApplicationAuthenticationMethod(
+    args: DeleteApplicationAuthenticationMethodCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteApplicationAuthenticationMethodCommandOutput>;
+  deleteApplicationAuthenticationMethod(
+    args: DeleteApplicationAuthenticationMethodCommandInput,
+    cb: (err: any, data?: DeleteApplicationAuthenticationMethodCommandOutput) => void
+  ): void;
+  deleteApplicationAuthenticationMethod(
+    args: DeleteApplicationAuthenticationMethodCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteApplicationAuthenticationMethodCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationGrantCommand}
+   */
+  deleteApplicationGrant(
+    args: DeleteApplicationGrantCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteApplicationGrantCommandOutput>;
+  deleteApplicationGrant(
+    args: DeleteApplicationGrantCommandInput,
+    cb: (err: any, data?: DeleteApplicationGrantCommandOutput) => void
+  ): void;
+  deleteApplicationGrant(
+    args: DeleteApplicationGrantCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteApplicationGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInlinePolicyFromPermissionSetCommand}
+   */
+  deleteInlinePolicyFromPermissionSet(
     args: DeleteInlinePolicyFromPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DeleteInlinePolicyFromPermissionSetCommandOutput>;
-  public deleteInlinePolicyFromPermissionSet(
+  deleteInlinePolicyFromPermissionSet(
     args: DeleteInlinePolicyFromPermissionSetCommandInput,
     cb: (err: any, data?: DeleteInlinePolicyFromPermissionSetCommandOutput) => void
   ): void;
-  public deleteInlinePolicyFromPermissionSet(
+  deleteInlinePolicyFromPermissionSet(
     args: DeleteInlinePolicyFromPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DeleteInlinePolicyFromPermissionSetCommandOutput) => void
   ): void;
-  public deleteInlinePolicyFromPermissionSet(
-    args: DeleteInlinePolicyFromPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteInlinePolicyFromPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInlinePolicyFromPermissionSetCommandOutput) => void
-  ): Promise<DeleteInlinePolicyFromPermissionSetCommandOutput> | void {
-    const command = new DeleteInlinePolicyFromPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO
-   *       instance and deletes all of the attribute mappings that have been configured. Once deleted,
-   *       any attributes that are received from an identity source and any custom attributes you have
-   *       previously configured will not be passed. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>
+   * @see {@link DeleteInstanceCommand}
    */
-  public deleteInstanceAccessControlAttributeConfiguration(
+  deleteInstance(
+    args: DeleteInstanceCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteInstanceCommandOutput>;
+  deleteInstance(
+    args: DeleteInstanceCommandInput,
+    cb: (err: any, data?: DeleteInstanceCommandOutput) => void
+  ): void;
+  deleteInstance(
+    args: DeleteInstanceCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstanceAccessControlAttributeConfigurationCommand}
+   */
+  deleteInstanceAccessControlAttributeConfiguration(
     args: DeleteInstanceAccessControlAttributeConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DeleteInstanceAccessControlAttributeConfigurationCommandOutput>;
-  public deleteInstanceAccessControlAttributeConfiguration(
+  deleteInstanceAccessControlAttributeConfiguration(
     args: DeleteInstanceAccessControlAttributeConfigurationCommandInput,
     cb: (err: any, data?: DeleteInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public deleteInstanceAccessControlAttributeConfiguration(
+  deleteInstanceAccessControlAttributeConfiguration(
     args: DeleteInstanceAccessControlAttributeConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DeleteInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public deleteInstanceAccessControlAttributeConfiguration(
-    args: DeleteInstanceAccessControlAttributeConfigurationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DeleteInstanceAccessControlAttributeConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInstanceAccessControlAttributeConfigurationCommandOutput) => void
-  ): Promise<DeleteInstanceAccessControlAttributeConfigurationCommandOutput> | void {
-    const command = new DeleteInstanceAccessControlAttributeConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified permission set.</p>
+   * @see {@link DeletePermissionsBoundaryFromPermissionSetCommand}
    */
-  public deletePermissionSet(
+  deletePermissionsBoundaryFromPermissionSet(
+    args: DeletePermissionsBoundaryFromPermissionSetCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeletePermissionsBoundaryFromPermissionSetCommandOutput>;
+  deletePermissionsBoundaryFromPermissionSet(
+    args: DeletePermissionsBoundaryFromPermissionSetCommandInput,
+    cb: (err: any, data?: DeletePermissionsBoundaryFromPermissionSetCommandOutput) => void
+  ): void;
+  deletePermissionsBoundaryFromPermissionSet(
+    args: DeletePermissionsBoundaryFromPermissionSetCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeletePermissionsBoundaryFromPermissionSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePermissionSetCommand}
+   */
+  deletePermissionSet(
     args: DeletePermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DeletePermissionSetCommandOutput>;
-  public deletePermissionSet(
+  deletePermissionSet(
     args: DeletePermissionSetCommandInput,
     cb: (err: any, data?: DeletePermissionSetCommandOutput) => void
   ): void;
-  public deletePermissionSet(
+  deletePermissionSet(
     args: DeletePermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DeletePermissionSetCommandOutput) => void
   ): void;
-  public deletePermissionSet(
-    args: DeletePermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: DeletePermissionSetCommandOutput) => void
-  ): Promise<DeletePermissionSetCommandOutput> | void {
-    const command = new DeletePermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the status of the assignment creation request.</p>
+   * @see {@link DeleteTrustedTokenIssuerCommand}
    */
-  public describeAccountAssignmentCreationStatus(
+  deleteTrustedTokenIssuer(
+    args: DeleteTrustedTokenIssuerCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DeleteTrustedTokenIssuerCommandOutput>;
+  deleteTrustedTokenIssuer(
+    args: DeleteTrustedTokenIssuerCommandInput,
+    cb: (err: any, data?: DeleteTrustedTokenIssuerCommandOutput) => void
+  ): void;
+  deleteTrustedTokenIssuer(
+    args: DeleteTrustedTokenIssuerCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DeleteTrustedTokenIssuerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountAssignmentCreationStatusCommand}
+   */
+  describeAccountAssignmentCreationStatus(
     args: DescribeAccountAssignmentCreationStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DescribeAccountAssignmentCreationStatusCommandOutput>;
-  public describeAccountAssignmentCreationStatus(
+  describeAccountAssignmentCreationStatus(
     args: DescribeAccountAssignmentCreationStatusCommandInput,
     cb: (err: any, data?: DescribeAccountAssignmentCreationStatusCommandOutput) => void
   ): void;
-  public describeAccountAssignmentCreationStatus(
+  describeAccountAssignmentCreationStatus(
     args: DescribeAccountAssignmentCreationStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DescribeAccountAssignmentCreationStatusCommandOutput) => void
   ): void;
-  public describeAccountAssignmentCreationStatus(
-    args: DescribeAccountAssignmentCreationStatusCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeAccountAssignmentCreationStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountAssignmentCreationStatusCommandOutput) => void
-  ): Promise<DescribeAccountAssignmentCreationStatusCommandOutput> | void {
-    const command = new DescribeAccountAssignmentCreationStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the status of the assignment deletion request.</p>
+   * @see {@link DescribeAccountAssignmentDeletionStatusCommand}
    */
-  public describeAccountAssignmentDeletionStatus(
+  describeAccountAssignmentDeletionStatus(
     args: DescribeAccountAssignmentDeletionStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DescribeAccountAssignmentDeletionStatusCommandOutput>;
-  public describeAccountAssignmentDeletionStatus(
+  describeAccountAssignmentDeletionStatus(
     args: DescribeAccountAssignmentDeletionStatusCommandInput,
     cb: (err: any, data?: DescribeAccountAssignmentDeletionStatusCommandOutput) => void
   ): void;
-  public describeAccountAssignmentDeletionStatus(
+  describeAccountAssignmentDeletionStatus(
     args: DescribeAccountAssignmentDeletionStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DescribeAccountAssignmentDeletionStatusCommandOutput) => void
   ): void;
-  public describeAccountAssignmentDeletionStatus(
-    args: DescribeAccountAssignmentDeletionStatusCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeAccountAssignmentDeletionStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountAssignmentDeletionStatusCommandOutput) => void
-  ): Promise<DescribeAccountAssignmentDeletionStatusCommandOutput> | void {
-    const command = new DescribeAccountAssignmentDeletionStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the list of Amazon Web Services SSO identity store attributes that have been configured to
-   *       work with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This
-   *       will not return attributes configured and sent by an external identity provider.
-   *       For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>
+   * @see {@link DescribeApplicationCommand}
    */
-  public describeInstanceAccessControlAttributeConfiguration(
+  describeApplication(
+    args: DescribeApplicationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DescribeApplicationCommandOutput>;
+  describeApplication(
+    args: DescribeApplicationCommandInput,
+    cb: (err: any, data?: DescribeApplicationCommandOutput) => void
+  ): void;
+  describeApplication(
+    args: DescribeApplicationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DescribeApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeApplicationAssignmentCommand}
+   */
+  describeApplicationAssignment(
+    args: DescribeApplicationAssignmentCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DescribeApplicationAssignmentCommandOutput>;
+  describeApplicationAssignment(
+    args: DescribeApplicationAssignmentCommandInput,
+    cb: (err: any, data?: DescribeApplicationAssignmentCommandOutput) => void
+  ): void;
+  describeApplicationAssignment(
+    args: DescribeApplicationAssignmentCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DescribeApplicationAssignmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeApplicationProviderCommand}
+   */
+  describeApplicationProvider(
+    args: DescribeApplicationProviderCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DescribeApplicationProviderCommandOutput>;
+  describeApplicationProvider(
+    args: DescribeApplicationProviderCommandInput,
+    cb: (err: any, data?: DescribeApplicationProviderCommandOutput) => void
+  ): void;
+  describeApplicationProvider(
+    args: DescribeApplicationProviderCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DescribeApplicationProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInstanceCommand}
+   */
+  describeInstance(
+    args: DescribeInstanceCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DescribeInstanceCommandOutput>;
+  describeInstance(
+    args: DescribeInstanceCommandInput,
+    cb: (err: any, data?: DescribeInstanceCommandOutput) => void
+  ): void;
+  describeInstance(
+    args: DescribeInstanceCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DescribeInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInstanceAccessControlAttributeConfigurationCommand}
+   */
+  describeInstanceAccessControlAttributeConfiguration(
     args: DescribeInstanceAccessControlAttributeConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DescribeInstanceAccessControlAttributeConfigurationCommandOutput>;
-  public describeInstanceAccessControlAttributeConfiguration(
+  describeInstanceAccessControlAttributeConfiguration(
     args: DescribeInstanceAccessControlAttributeConfigurationCommandInput,
     cb: (err: any, data?: DescribeInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public describeInstanceAccessControlAttributeConfiguration(
+  describeInstanceAccessControlAttributeConfiguration(
     args: DescribeInstanceAccessControlAttributeConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DescribeInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public describeInstanceAccessControlAttributeConfiguration(
-    args: DescribeInstanceAccessControlAttributeConfigurationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeInstanceAccessControlAttributeConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeInstanceAccessControlAttributeConfigurationCommandOutput) => void
-  ): Promise<DescribeInstanceAccessControlAttributeConfigurationCommandOutput> | void {
-    const command = new DescribeInstanceAccessControlAttributeConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the details of the permission set.</p>
+   * @see {@link DescribePermissionSetCommand}
    */
-  public describePermissionSet(
+  describePermissionSet(
     args: DescribePermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DescribePermissionSetCommandOutput>;
-  public describePermissionSet(
+  describePermissionSet(
     args: DescribePermissionSetCommandInput,
     cb: (err: any, data?: DescribePermissionSetCommandOutput) => void
   ): void;
-  public describePermissionSet(
+  describePermissionSet(
     args: DescribePermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DescribePermissionSetCommandOutput) => void
   ): void;
-  public describePermissionSet(
-    args: DescribePermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribePermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: DescribePermissionSetCommandOutput) => void
-  ): Promise<DescribePermissionSetCommandOutput> | void {
-    const command = new DescribePermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the status for the given permission set provisioning request.</p>
+   * @see {@link DescribePermissionSetProvisioningStatusCommand}
    */
-  public describePermissionSetProvisioningStatus(
+  describePermissionSetProvisioningStatus(
     args: DescribePermissionSetProvisioningStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DescribePermissionSetProvisioningStatusCommandOutput>;
-  public describePermissionSetProvisioningStatus(
+  describePermissionSetProvisioningStatus(
     args: DescribePermissionSetProvisioningStatusCommandInput,
     cb: (err: any, data?: DescribePermissionSetProvisioningStatusCommandOutput) => void
   ): void;
-  public describePermissionSetProvisioningStatus(
+  describePermissionSetProvisioningStatus(
     args: DescribePermissionSetProvisioningStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DescribePermissionSetProvisioningStatusCommandOutput) => void
   ): void;
-  public describePermissionSetProvisioningStatus(
-    args: DescribePermissionSetProvisioningStatusCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribePermissionSetProvisioningStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribePermissionSetProvisioningStatusCommandOutput) => void
-  ): Promise<DescribePermissionSetProvisioningStatusCommandOutput> | void {
-    const command = new DescribePermissionSetProvisioningStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Detaches the attached IAM managed policy ARN from the specified permission set.</p>
+   * @see {@link DescribeRegionCommand}
    */
-  public detachManagedPolicyFromPermissionSet(
+  describeRegion(
+    args: DescribeRegionCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DescribeRegionCommandOutput>;
+  describeRegion(
+    args: DescribeRegionCommandInput,
+    cb: (err: any, data?: DescribeRegionCommandOutput) => void
+  ): void;
+  describeRegion(
+    args: DescribeRegionCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DescribeRegionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTrustedTokenIssuerCommand}
+   */
+  describeTrustedTokenIssuer(
+    args: DescribeTrustedTokenIssuerCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DescribeTrustedTokenIssuerCommandOutput>;
+  describeTrustedTokenIssuer(
+    args: DescribeTrustedTokenIssuerCommandInput,
+    cb: (err: any, data?: DescribeTrustedTokenIssuerCommandOutput) => void
+  ): void;
+  describeTrustedTokenIssuer(
+    args: DescribeTrustedTokenIssuerCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DescribeTrustedTokenIssuerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachCustomerManagedPolicyReferenceFromPermissionSetCommand}
+   */
+  detachCustomerManagedPolicyReferenceFromPermissionSet(
+    args: DetachCustomerManagedPolicyReferenceFromPermissionSetCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<DetachCustomerManagedPolicyReferenceFromPermissionSetCommandOutput>;
+  detachCustomerManagedPolicyReferenceFromPermissionSet(
+    args: DetachCustomerManagedPolicyReferenceFromPermissionSetCommandInput,
+    cb: (err: any, data?: DetachCustomerManagedPolicyReferenceFromPermissionSetCommandOutput) => void
+  ): void;
+  detachCustomerManagedPolicyReferenceFromPermissionSet(
+    args: DetachCustomerManagedPolicyReferenceFromPermissionSetCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: DetachCustomerManagedPolicyReferenceFromPermissionSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachManagedPolicyFromPermissionSetCommand}
+   */
+  detachManagedPolicyFromPermissionSet(
     args: DetachManagedPolicyFromPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<DetachManagedPolicyFromPermissionSetCommandOutput>;
-  public detachManagedPolicyFromPermissionSet(
+  detachManagedPolicyFromPermissionSet(
     args: DetachManagedPolicyFromPermissionSetCommandInput,
     cb: (err: any, data?: DetachManagedPolicyFromPermissionSetCommandOutput) => void
   ): void;
-  public detachManagedPolicyFromPermissionSet(
+  detachManagedPolicyFromPermissionSet(
     args: DetachManagedPolicyFromPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: DetachManagedPolicyFromPermissionSetCommandOutput) => void
   ): void;
-  public detachManagedPolicyFromPermissionSet(
-    args: DetachManagedPolicyFromPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetachManagedPolicyFromPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: DetachManagedPolicyFromPermissionSetCommandOutput) => void
-  ): Promise<DetachManagedPolicyFromPermissionSetCommandOutput> | void {
-    const command = new DetachManagedPolicyFromPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Obtains the inline policy assigned to the permission set.</p>
+   * @see {@link GetApplicationAccessScopeCommand}
    */
-  public getInlinePolicyForPermissionSet(
+  getApplicationAccessScope(
+    args: GetApplicationAccessScopeCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<GetApplicationAccessScopeCommandOutput>;
+  getApplicationAccessScope(
+    args: GetApplicationAccessScopeCommandInput,
+    cb: (err: any, data?: GetApplicationAccessScopeCommandOutput) => void
+  ): void;
+  getApplicationAccessScope(
+    args: GetApplicationAccessScopeCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: GetApplicationAccessScopeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationAssignmentConfigurationCommand}
+   */
+  getApplicationAssignmentConfiguration(
+    args: GetApplicationAssignmentConfigurationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<GetApplicationAssignmentConfigurationCommandOutput>;
+  getApplicationAssignmentConfiguration(
+    args: GetApplicationAssignmentConfigurationCommandInput,
+    cb: (err: any, data?: GetApplicationAssignmentConfigurationCommandOutput) => void
+  ): void;
+  getApplicationAssignmentConfiguration(
+    args: GetApplicationAssignmentConfigurationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: GetApplicationAssignmentConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationAuthenticationMethodCommand}
+   */
+  getApplicationAuthenticationMethod(
+    args: GetApplicationAuthenticationMethodCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<GetApplicationAuthenticationMethodCommandOutput>;
+  getApplicationAuthenticationMethod(
+    args: GetApplicationAuthenticationMethodCommandInput,
+    cb: (err: any, data?: GetApplicationAuthenticationMethodCommandOutput) => void
+  ): void;
+  getApplicationAuthenticationMethod(
+    args: GetApplicationAuthenticationMethodCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: GetApplicationAuthenticationMethodCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationGrantCommand}
+   */
+  getApplicationGrant(
+    args: GetApplicationGrantCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<GetApplicationGrantCommandOutput>;
+  getApplicationGrant(
+    args: GetApplicationGrantCommandInput,
+    cb: (err: any, data?: GetApplicationGrantCommandOutput) => void
+  ): void;
+  getApplicationGrant(
+    args: GetApplicationGrantCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: GetApplicationGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationSessionConfigurationCommand}
+   */
+  getApplicationSessionConfiguration(
+    args: GetApplicationSessionConfigurationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<GetApplicationSessionConfigurationCommandOutput>;
+  getApplicationSessionConfiguration(
+    args: GetApplicationSessionConfigurationCommandInput,
+    cb: (err: any, data?: GetApplicationSessionConfigurationCommandOutput) => void
+  ): void;
+  getApplicationSessionConfiguration(
+    args: GetApplicationSessionConfigurationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: GetApplicationSessionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInlinePolicyForPermissionSetCommand}
+   */
+  getInlinePolicyForPermissionSet(
     args: GetInlinePolicyForPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<GetInlinePolicyForPermissionSetCommandOutput>;
-  public getInlinePolicyForPermissionSet(
+  getInlinePolicyForPermissionSet(
     args: GetInlinePolicyForPermissionSetCommandInput,
     cb: (err: any, data?: GetInlinePolicyForPermissionSetCommandOutput) => void
   ): void;
-  public getInlinePolicyForPermissionSet(
+  getInlinePolicyForPermissionSet(
     args: GetInlinePolicyForPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: GetInlinePolicyForPermissionSetCommandOutput) => void
   ): void;
-  public getInlinePolicyForPermissionSet(
-    args: GetInlinePolicyForPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInlinePolicyForPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: GetInlinePolicyForPermissionSetCommandOutput) => void
-  ): Promise<GetInlinePolicyForPermissionSetCommandOutput> | void {
-    const command = new GetInlinePolicyForPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the status of the Amazon Web Services account assignment creation requests for a specified SSO
-   *       instance.</p>
+   * @see {@link GetPermissionsBoundaryForPermissionSetCommand}
    */
-  public listAccountAssignmentCreationStatus(
+  getPermissionsBoundaryForPermissionSet(
+    args: GetPermissionsBoundaryForPermissionSetCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<GetPermissionsBoundaryForPermissionSetCommandOutput>;
+  getPermissionsBoundaryForPermissionSet(
+    args: GetPermissionsBoundaryForPermissionSetCommandInput,
+    cb: (err: any, data?: GetPermissionsBoundaryForPermissionSetCommandOutput) => void
+  ): void;
+  getPermissionsBoundaryForPermissionSet(
+    args: GetPermissionsBoundaryForPermissionSetCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: GetPermissionsBoundaryForPermissionSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountAssignmentCreationStatusCommand}
+   */
+  listAccountAssignmentCreationStatus(
     args: ListAccountAssignmentCreationStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListAccountAssignmentCreationStatusCommandOutput>;
-  public listAccountAssignmentCreationStatus(
+  listAccountAssignmentCreationStatus(
     args: ListAccountAssignmentCreationStatusCommandInput,
     cb: (err: any, data?: ListAccountAssignmentCreationStatusCommandOutput) => void
   ): void;
-  public listAccountAssignmentCreationStatus(
+  listAccountAssignmentCreationStatus(
     args: ListAccountAssignmentCreationStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListAccountAssignmentCreationStatusCommandOutput) => void
   ): void;
-  public listAccountAssignmentCreationStatus(
-    args: ListAccountAssignmentCreationStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccountAssignmentCreationStatusCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountAssignmentCreationStatusCommandOutput) => void
-  ): Promise<ListAccountAssignmentCreationStatusCommandOutput> | void {
-    const command = new ListAccountAssignmentCreationStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the status of the Amazon Web Services account assignment deletion requests for a specified SSO
-   *       instance.</p>
+   * @see {@link ListAccountAssignmentDeletionStatusCommand}
    */
-  public listAccountAssignmentDeletionStatus(
+  listAccountAssignmentDeletionStatus(
     args: ListAccountAssignmentDeletionStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListAccountAssignmentDeletionStatusCommandOutput>;
-  public listAccountAssignmentDeletionStatus(
+  listAccountAssignmentDeletionStatus(
     args: ListAccountAssignmentDeletionStatusCommandInput,
     cb: (err: any, data?: ListAccountAssignmentDeletionStatusCommandOutput) => void
   ): void;
-  public listAccountAssignmentDeletionStatus(
+  listAccountAssignmentDeletionStatus(
     args: ListAccountAssignmentDeletionStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListAccountAssignmentDeletionStatusCommandOutput) => void
   ): void;
-  public listAccountAssignmentDeletionStatus(
-    args: ListAccountAssignmentDeletionStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccountAssignmentDeletionStatusCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountAssignmentDeletionStatusCommandOutput) => void
-  ): Promise<ListAccountAssignmentDeletionStatusCommandOutput> | void {
-    const command = new ListAccountAssignmentDeletionStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the assignee of the specified Amazon Web Services account with the specified permission
-   *       set.</p>
+   * @see {@link ListAccountAssignmentsCommand}
    */
-  public listAccountAssignments(
+  listAccountAssignments(
     args: ListAccountAssignmentsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListAccountAssignmentsCommandOutput>;
-  public listAccountAssignments(
+  listAccountAssignments(
     args: ListAccountAssignmentsCommandInput,
     cb: (err: any, data?: ListAccountAssignmentsCommandOutput) => void
   ): void;
-  public listAccountAssignments(
+  listAccountAssignments(
     args: ListAccountAssignmentsCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListAccountAssignmentsCommandOutput) => void
   ): void;
-  public listAccountAssignments(
-    args: ListAccountAssignmentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccountAssignmentsCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountAssignmentsCommandOutput) => void
-  ): Promise<ListAccountAssignmentsCommandOutput> | void {
-    const command = new ListAccountAssignmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the Amazon Web Services accounts where the specified permission set is provisioned.</p>
+   * @see {@link ListAccountAssignmentsForPrincipalCommand}
    */
-  public listAccountsForProvisionedPermissionSet(
+  listAccountAssignmentsForPrincipal(
+    args: ListAccountAssignmentsForPrincipalCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListAccountAssignmentsForPrincipalCommandOutput>;
+  listAccountAssignmentsForPrincipal(
+    args: ListAccountAssignmentsForPrincipalCommandInput,
+    cb: (err: any, data?: ListAccountAssignmentsForPrincipalCommandOutput) => void
+  ): void;
+  listAccountAssignmentsForPrincipal(
+    args: ListAccountAssignmentsForPrincipalCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListAccountAssignmentsForPrincipalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountsForProvisionedPermissionSetCommand}
+   */
+  listAccountsForProvisionedPermissionSet(
     args: ListAccountsForProvisionedPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListAccountsForProvisionedPermissionSetCommandOutput>;
-  public listAccountsForProvisionedPermissionSet(
+  listAccountsForProvisionedPermissionSet(
     args: ListAccountsForProvisionedPermissionSetCommandInput,
     cb: (err: any, data?: ListAccountsForProvisionedPermissionSetCommandOutput) => void
   ): void;
-  public listAccountsForProvisionedPermissionSet(
+  listAccountsForProvisionedPermissionSet(
     args: ListAccountsForProvisionedPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListAccountsForProvisionedPermissionSetCommandOutput) => void
   ): void;
-  public listAccountsForProvisionedPermissionSet(
-    args: ListAccountsForProvisionedPermissionSetCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: ListAccountsForProvisionedPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountsForProvisionedPermissionSetCommandOutput) => void
-  ): Promise<ListAccountsForProvisionedPermissionSetCommandOutput> | void {
-    const command = new ListAccountsForProvisionedPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the SSO instances that the caller has access to.</p>
+   * @see {@link ListApplicationAccessScopesCommand}
    */
-  public listInstances(
+  listApplicationAccessScopes(
+    args: ListApplicationAccessScopesCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationAccessScopesCommandOutput>;
+  listApplicationAccessScopes(
+    args: ListApplicationAccessScopesCommandInput,
+    cb: (err: any, data?: ListApplicationAccessScopesCommandOutput) => void
+  ): void;
+  listApplicationAccessScopes(
+    args: ListApplicationAccessScopesCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationAccessScopesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationAssignmentsCommand}
+   */
+  listApplicationAssignments(
+    args: ListApplicationAssignmentsCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationAssignmentsCommandOutput>;
+  listApplicationAssignments(
+    args: ListApplicationAssignmentsCommandInput,
+    cb: (err: any, data?: ListApplicationAssignmentsCommandOutput) => void
+  ): void;
+  listApplicationAssignments(
+    args: ListApplicationAssignmentsCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationAssignmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationAssignmentsForPrincipalCommand}
+   */
+  listApplicationAssignmentsForPrincipal(
+    args: ListApplicationAssignmentsForPrincipalCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationAssignmentsForPrincipalCommandOutput>;
+  listApplicationAssignmentsForPrincipal(
+    args: ListApplicationAssignmentsForPrincipalCommandInput,
+    cb: (err: any, data?: ListApplicationAssignmentsForPrincipalCommandOutput) => void
+  ): void;
+  listApplicationAssignmentsForPrincipal(
+    args: ListApplicationAssignmentsForPrincipalCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationAssignmentsForPrincipalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationAuthenticationMethodsCommand}
+   */
+  listApplicationAuthenticationMethods(
+    args: ListApplicationAuthenticationMethodsCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationAuthenticationMethodsCommandOutput>;
+  listApplicationAuthenticationMethods(
+    args: ListApplicationAuthenticationMethodsCommandInput,
+    cb: (err: any, data?: ListApplicationAuthenticationMethodsCommandOutput) => void
+  ): void;
+  listApplicationAuthenticationMethods(
+    args: ListApplicationAuthenticationMethodsCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationAuthenticationMethodsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationGrantsCommand}
+   */
+  listApplicationGrants(
+    args: ListApplicationGrantsCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationGrantsCommandOutput>;
+  listApplicationGrants(
+    args: ListApplicationGrantsCommandInput,
+    cb: (err: any, data?: ListApplicationGrantsCommandOutput) => void
+  ): void;
+  listApplicationGrants(
+    args: ListApplicationGrantsCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationGrantsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationProvidersCommand}
+   */
+  listApplicationProviders(): Promise<ListApplicationProvidersCommandOutput>;
+  listApplicationProviders(
+    args: ListApplicationProvidersCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationProvidersCommandOutput>;
+  listApplicationProviders(
+    args: ListApplicationProvidersCommandInput,
+    cb: (err: any, data?: ListApplicationProvidersCommandOutput) => void
+  ): void;
+  listApplicationProviders(
+    args: ListApplicationProvidersCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationProvidersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   */
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomerManagedPolicyReferencesInPermissionSetCommand}
+   */
+  listCustomerManagedPolicyReferencesInPermissionSet(
+    args: ListCustomerManagedPolicyReferencesInPermissionSetCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput>;
+  listCustomerManagedPolicyReferencesInPermissionSet(
+    args: ListCustomerManagedPolicyReferencesInPermissionSetCommandInput,
+    cb: (err: any, data?: ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput) => void
+  ): void;
+  listCustomerManagedPolicyReferencesInPermissionSet(
+    args: ListCustomerManagedPolicyReferencesInPermissionSetCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInstancesCommand}
+   */
+  listInstances(): Promise<ListInstancesCommandOutput>;
+  listInstances(
     args: ListInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListInstancesCommandOutput>;
-  public listInstances(
+  listInstances(
     args: ListInstancesCommandInput,
     cb: (err: any, data?: ListInstancesCommandOutput) => void
   ): void;
-  public listInstances(
+  listInstances(
     args: ListInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListInstancesCommandOutput) => void
   ): void;
-  public listInstances(
-    args: ListInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListInstancesCommandOutput) => void),
-    cb?: (err: any, data?: ListInstancesCommandOutput) => void
-  ): Promise<ListInstancesCommandOutput> | void {
-    const command = new ListInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the IAM managed policy that is attached to a specified permission set.</p>
+   * @see {@link ListManagedPoliciesInPermissionSetCommand}
    */
-  public listManagedPoliciesInPermissionSet(
+  listManagedPoliciesInPermissionSet(
     args: ListManagedPoliciesInPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListManagedPoliciesInPermissionSetCommandOutput>;
-  public listManagedPoliciesInPermissionSet(
+  listManagedPoliciesInPermissionSet(
     args: ListManagedPoliciesInPermissionSetCommandInput,
     cb: (err: any, data?: ListManagedPoliciesInPermissionSetCommandOutput) => void
   ): void;
-  public listManagedPoliciesInPermissionSet(
+  listManagedPoliciesInPermissionSet(
     args: ListManagedPoliciesInPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListManagedPoliciesInPermissionSetCommandOutput) => void
   ): void;
-  public listManagedPoliciesInPermissionSet(
-    args: ListManagedPoliciesInPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListManagedPoliciesInPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: ListManagedPoliciesInPermissionSetCommandOutput) => void
-  ): Promise<ListManagedPoliciesInPermissionSetCommandOutput> | void {
-    const command = new ListManagedPoliciesInPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the status of the permission set provisioning requests for a specified SSO
-   *       instance.</p>
+   * @see {@link ListPermissionSetProvisioningStatusCommand}
    */
-  public listPermissionSetProvisioningStatus(
+  listPermissionSetProvisioningStatus(
     args: ListPermissionSetProvisioningStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListPermissionSetProvisioningStatusCommandOutput>;
-  public listPermissionSetProvisioningStatus(
+  listPermissionSetProvisioningStatus(
     args: ListPermissionSetProvisioningStatusCommandInput,
     cb: (err: any, data?: ListPermissionSetProvisioningStatusCommandOutput) => void
   ): void;
-  public listPermissionSetProvisioningStatus(
+  listPermissionSetProvisioningStatus(
     args: ListPermissionSetProvisioningStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListPermissionSetProvisioningStatusCommandOutput) => void
   ): void;
-  public listPermissionSetProvisioningStatus(
-    args: ListPermissionSetProvisioningStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPermissionSetProvisioningStatusCommandOutput) => void),
-    cb?: (err: any, data?: ListPermissionSetProvisioningStatusCommandOutput) => void
-  ): Promise<ListPermissionSetProvisioningStatusCommandOutput> | void {
-    const command = new ListPermissionSetProvisioningStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the <a>PermissionSet</a>s in an SSO instance.</p>
+   * @see {@link ListPermissionSetsCommand}
    */
-  public listPermissionSets(
+  listPermissionSets(
     args: ListPermissionSetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListPermissionSetsCommandOutput>;
-  public listPermissionSets(
+  listPermissionSets(
     args: ListPermissionSetsCommandInput,
     cb: (err: any, data?: ListPermissionSetsCommandOutput) => void
   ): void;
-  public listPermissionSets(
+  listPermissionSets(
     args: ListPermissionSetsCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListPermissionSetsCommandOutput) => void
   ): void;
-  public listPermissionSets(
-    args: ListPermissionSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPermissionSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListPermissionSetsCommandOutput) => void
-  ): Promise<ListPermissionSetsCommandOutput> | void {
-    const command = new ListPermissionSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the permission sets that are provisioned to a specified Amazon Web Services account.</p>
+   * @see {@link ListPermissionSetsProvisionedToAccountCommand}
    */
-  public listPermissionSetsProvisionedToAccount(
+  listPermissionSetsProvisionedToAccount(
     args: ListPermissionSetsProvisionedToAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListPermissionSetsProvisionedToAccountCommandOutput>;
-  public listPermissionSetsProvisionedToAccount(
+  listPermissionSetsProvisionedToAccount(
     args: ListPermissionSetsProvisionedToAccountCommandInput,
     cb: (err: any, data?: ListPermissionSetsProvisionedToAccountCommandOutput) => void
   ): void;
-  public listPermissionSetsProvisionedToAccount(
+  listPermissionSetsProvisionedToAccount(
     args: ListPermissionSetsProvisionedToAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListPermissionSetsProvisionedToAccountCommandOutput) => void
   ): void;
-  public listPermissionSetsProvisionedToAccount(
-    args: ListPermissionSetsProvisionedToAccountCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: ListPermissionSetsProvisionedToAccountCommandOutput) => void),
-    cb?: (err: any, data?: ListPermissionSetsProvisionedToAccountCommandOutput) => void
-  ): Promise<ListPermissionSetsProvisionedToAccountCommandOutput> | void {
-    const command = new ListPermissionSetsProvisionedToAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags that are attached to a specified resource.</p>
+   * @see {@link ListRegionsCommand}
    */
-  public listTagsForResource(
+  listRegions(
+    args: ListRegionsCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListRegionsCommandOutput>;
+  listRegions(
+    args: ListRegionsCommandInput,
+    cb: (err: any, data?: ListRegionsCommandOutput) => void
+  ): void;
+  listRegions(
+    args: ListRegionsCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListRegionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>The process by which a specified permission set is provisioned to the specified
-   *       target.</p>
+   * @see {@link ListTrustedTokenIssuersCommand}
    */
-  public provisionPermissionSet(
+  listTrustedTokenIssuers(
+    args: ListTrustedTokenIssuersCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<ListTrustedTokenIssuersCommandOutput>;
+  listTrustedTokenIssuers(
+    args: ListTrustedTokenIssuersCommandInput,
+    cb: (err: any, data?: ListTrustedTokenIssuersCommandOutput) => void
+  ): void;
+  listTrustedTokenIssuers(
+    args: ListTrustedTokenIssuersCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: ListTrustedTokenIssuersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ProvisionPermissionSetCommand}
+   */
+  provisionPermissionSet(
     args: ProvisionPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<ProvisionPermissionSetCommandOutput>;
-  public provisionPermissionSet(
+  provisionPermissionSet(
     args: ProvisionPermissionSetCommandInput,
     cb: (err: any, data?: ProvisionPermissionSetCommandOutput) => void
   ): void;
-  public provisionPermissionSet(
+  provisionPermissionSet(
     args: ProvisionPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: ProvisionPermissionSetCommandOutput) => void
   ): void;
-  public provisionPermissionSet(
-    args: ProvisionPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ProvisionPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: ProvisionPermissionSetCommandOutput) => void
-  ): Promise<ProvisionPermissionSetCommandOutput> | void {
-    const command = new ProvisionPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Attaches an IAM inline policy to a permission set.</p>
-   *          <note>
-   *             <p>If the permission set is already referenced by one or more account assignments, you will
-   *         need to call <code>
-   *                   <a>ProvisionPermissionSet</a>
-   *                </code> after this action to
-   *         apply the corresponding IAM policy updates to all assigned accounts.</p>
-   *          </note>
+   * @see {@link PutApplicationAccessScopeCommand}
    */
-  public putInlinePolicyToPermissionSet(
+  putApplicationAccessScope(
+    args: PutApplicationAccessScopeCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<PutApplicationAccessScopeCommandOutput>;
+  putApplicationAccessScope(
+    args: PutApplicationAccessScopeCommandInput,
+    cb: (err: any, data?: PutApplicationAccessScopeCommandOutput) => void
+  ): void;
+  putApplicationAccessScope(
+    args: PutApplicationAccessScopeCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: PutApplicationAccessScopeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutApplicationAssignmentConfigurationCommand}
+   */
+  putApplicationAssignmentConfiguration(
+    args: PutApplicationAssignmentConfigurationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<PutApplicationAssignmentConfigurationCommandOutput>;
+  putApplicationAssignmentConfiguration(
+    args: PutApplicationAssignmentConfigurationCommandInput,
+    cb: (err: any, data?: PutApplicationAssignmentConfigurationCommandOutput) => void
+  ): void;
+  putApplicationAssignmentConfiguration(
+    args: PutApplicationAssignmentConfigurationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: PutApplicationAssignmentConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutApplicationAuthenticationMethodCommand}
+   */
+  putApplicationAuthenticationMethod(
+    args: PutApplicationAuthenticationMethodCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<PutApplicationAuthenticationMethodCommandOutput>;
+  putApplicationAuthenticationMethod(
+    args: PutApplicationAuthenticationMethodCommandInput,
+    cb: (err: any, data?: PutApplicationAuthenticationMethodCommandOutput) => void
+  ): void;
+  putApplicationAuthenticationMethod(
+    args: PutApplicationAuthenticationMethodCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: PutApplicationAuthenticationMethodCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutApplicationGrantCommand}
+   */
+  putApplicationGrant(
+    args: PutApplicationGrantCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<PutApplicationGrantCommandOutput>;
+  putApplicationGrant(
+    args: PutApplicationGrantCommandInput,
+    cb: (err: any, data?: PutApplicationGrantCommandOutput) => void
+  ): void;
+  putApplicationGrant(
+    args: PutApplicationGrantCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: PutApplicationGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutApplicationSessionConfigurationCommand}
+   */
+  putApplicationSessionConfiguration(
+    args: PutApplicationSessionConfigurationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<PutApplicationSessionConfigurationCommandOutput>;
+  putApplicationSessionConfiguration(
+    args: PutApplicationSessionConfigurationCommandInput,
+    cb: (err: any, data?: PutApplicationSessionConfigurationCommandOutput) => void
+  ): void;
+  putApplicationSessionConfiguration(
+    args: PutApplicationSessionConfigurationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: PutApplicationSessionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutInlinePolicyToPermissionSetCommand}
+   */
+  putInlinePolicyToPermissionSet(
     args: PutInlinePolicyToPermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<PutInlinePolicyToPermissionSetCommandOutput>;
-  public putInlinePolicyToPermissionSet(
+  putInlinePolicyToPermissionSet(
     args: PutInlinePolicyToPermissionSetCommandInput,
     cb: (err: any, data?: PutInlinePolicyToPermissionSetCommandOutput) => void
   ): void;
-  public putInlinePolicyToPermissionSet(
+  putInlinePolicyToPermissionSet(
     args: PutInlinePolicyToPermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: PutInlinePolicyToPermissionSetCommandOutput) => void
   ): void;
-  public putInlinePolicyToPermissionSet(
-    args: PutInlinePolicyToPermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutInlinePolicyToPermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: PutInlinePolicyToPermissionSetCommandOutput) => void
-  ): Promise<PutInlinePolicyToPermissionSetCommandOutput> | void {
-    const command = new PutInlinePolicyToPermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a set of tags with a specified resource.</p>
+   * @see {@link PutPermissionsBoundaryToPermissionSetCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  putPermissionsBoundaryToPermissionSet(
+    args: PutPermissionsBoundaryToPermissionSetCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<PutPermissionsBoundaryToPermissionSetCommandOutput>;
+  putPermissionsBoundaryToPermissionSet(
+    args: PutPermissionsBoundaryToPermissionSetCommandInput,
+    cb: (err: any, data?: PutPermissionsBoundaryToPermissionSetCommandOutput) => void
+  ): void;
+  putPermissionsBoundaryToPermissionSet(
+    args: PutPermissionsBoundaryToPermissionSetCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: PutPermissionsBoundaryToPermissionSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveRegionCommand}
+   */
+  removeRegion(
+    args: RemoveRegionCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<RemoveRegionCommandOutput>;
+  removeRegion(
+    args: RemoveRegionCommandInput,
+    cb: (err: any, data?: RemoveRegionCommandOutput) => void
+  ): void;
+  removeRegion(
+    args: RemoveRegionCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: RemoveRegionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: SSOAdminRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Disassociates a set of tags from a specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO
-   *       instance for attributes-based access control (ABAC). When using an external identity provider
-   *       as an identity source, you can pass attributes through the SAML assertion as an alternative to
-   *       configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of
-   *       these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO
-   *       identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>
+   * @see {@link UpdateApplicationCommand}
    */
-  public updateInstanceAccessControlAttributeConfiguration(
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<UpdateApplicationCommandOutput>;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateInstanceCommand}
+   */
+  updateInstance(
+    args: UpdateInstanceCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<UpdateInstanceCommandOutput>;
+  updateInstance(
+    args: UpdateInstanceCommandInput,
+    cb: (err: any, data?: UpdateInstanceCommandOutput) => void
+  ): void;
+  updateInstance(
+    args: UpdateInstanceCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: UpdateInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateInstanceAccessControlAttributeConfigurationCommand}
+   */
+  updateInstanceAccessControlAttributeConfiguration(
     args: UpdateInstanceAccessControlAttributeConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<UpdateInstanceAccessControlAttributeConfigurationCommandOutput>;
-  public updateInstanceAccessControlAttributeConfiguration(
+  updateInstanceAccessControlAttributeConfiguration(
     args: UpdateInstanceAccessControlAttributeConfigurationCommandInput,
     cb: (err: any, data?: UpdateInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public updateInstanceAccessControlAttributeConfiguration(
+  updateInstanceAccessControlAttributeConfiguration(
     args: UpdateInstanceAccessControlAttributeConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: UpdateInstanceAccessControlAttributeConfigurationCommandOutput) => void
   ): void;
-  public updateInstanceAccessControlAttributeConfiguration(
-    args: UpdateInstanceAccessControlAttributeConfigurationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: UpdateInstanceAccessControlAttributeConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateInstanceAccessControlAttributeConfigurationCommandOutput) => void
-  ): Promise<UpdateInstanceAccessControlAttributeConfigurationCommandOutput> | void {
-    const command = new UpdateInstanceAccessControlAttributeConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an existing permission set.</p>
+   * @see {@link UpdatePermissionSetCommand}
    */
-  public updatePermissionSet(
+  updatePermissionSet(
     args: UpdatePermissionSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOAdminRequestOptions
   ): Promise<UpdatePermissionSetCommandOutput>;
-  public updatePermissionSet(
+  updatePermissionSet(
     args: UpdatePermissionSetCommandInput,
     cb: (err: any, data?: UpdatePermissionSetCommandOutput) => void
   ): void;
-  public updatePermissionSet(
+  updatePermissionSet(
     args: UpdatePermissionSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOAdminRequestOptions,
     cb: (err: any, data?: UpdatePermissionSetCommandOutput) => void
   ): void;
-  public updatePermissionSet(
-    args: UpdatePermissionSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePermissionSetCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePermissionSetCommandOutput) => void
-  ): Promise<UpdatePermissionSetCommandOutput> | void {
-    const command = new UpdatePermissionSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateTrustedTokenIssuerCommand}
+   */
+  updateTrustedTokenIssuer(
+    args: UpdateTrustedTokenIssuerCommandInput,
+    options?: SSOAdminRequestOptions
+  ): Promise<UpdateTrustedTokenIssuerCommandOutput>;
+  updateTrustedTokenIssuer(
+    args: UpdateTrustedTokenIssuerCommandInput,
+    cb: (err: any, data?: UpdateTrustedTokenIssuerCommandOutput) => void
+  ): void;
+  updateTrustedTokenIssuer(
+    args: UpdateTrustedTokenIssuerCommandInput,
+    options: SSOAdminRequestOptions,
+    cb: (err: any, data?: UpdateTrustedTokenIssuerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountAssignmentCreationStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountAssignmentCreationStatusCommandOutput}.
+   */
+  paginateListAccountAssignmentCreationStatus(
+    args: ListAccountAssignmentCreationStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountAssignmentCreationStatusCommandOutput>;
+
+  /**
+   * @see {@link ListAccountAssignmentDeletionStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountAssignmentDeletionStatusCommandOutput}.
+   */
+  paginateListAccountAssignmentDeletionStatus(
+    args: ListAccountAssignmentDeletionStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountAssignmentDeletionStatusCommandOutput>;
+
+  /**
+   * @see {@link ListAccountAssignmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountAssignmentsCommandOutput}.
+   */
+  paginateListAccountAssignments(
+    args: ListAccountAssignmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountAssignmentsCommandOutput>;
+
+  /**
+   * @see {@link ListAccountAssignmentsForPrincipalCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountAssignmentsForPrincipalCommandOutput}.
+   */
+  paginateListAccountAssignmentsForPrincipal(
+    args: ListAccountAssignmentsForPrincipalCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountAssignmentsForPrincipalCommandOutput>;
+
+  /**
+   * @see {@link ListAccountsForProvisionedPermissionSetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountsForProvisionedPermissionSetCommandOutput}.
+   */
+  paginateListAccountsForProvisionedPermissionSet(
+    args: ListAccountsForProvisionedPermissionSetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountsForProvisionedPermissionSetCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationAccessScopesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationAccessScopesCommandOutput}.
+   */
+  paginateListApplicationAccessScopes(
+    args: ListApplicationAccessScopesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationAccessScopesCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationAssignmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationAssignmentsCommandOutput}.
+   */
+  paginateListApplicationAssignments(
+    args: ListApplicationAssignmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationAssignmentsCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationAssignmentsForPrincipalCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationAssignmentsForPrincipalCommandOutput}.
+   */
+  paginateListApplicationAssignmentsForPrincipal(
+    args: ListApplicationAssignmentsForPrincipalCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationAssignmentsForPrincipalCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationAuthenticationMethodsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationAuthenticationMethodsCommandOutput}.
+   */
+  paginateListApplicationAuthenticationMethods(
+    args: ListApplicationAuthenticationMethodsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationAuthenticationMethodsCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationGrantsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationGrantsCommandOutput}.
+   */
+  paginateListApplicationGrants(
+    args: ListApplicationGrantsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationGrantsCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationProvidersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationProvidersCommandOutput}.
+   */
+  paginateListApplicationProviders(
+    args?: ListApplicationProvidersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationProvidersCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomerManagedPolicyReferencesInPermissionSetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput}.
+   */
+  paginateListCustomerManagedPolicyReferencesInPermissionSet(
+    args: ListCustomerManagedPolicyReferencesInPermissionSetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomerManagedPolicyReferencesInPermissionSetCommandOutput>;
+
+  /**
+   * @see {@link ListInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInstancesCommandOutput}.
+   */
+  paginateListInstances(
+    args?: ListInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListManagedPoliciesInPermissionSetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListManagedPoliciesInPermissionSetCommandOutput}.
+   */
+  paginateListManagedPoliciesInPermissionSet(
+    args: ListManagedPoliciesInPermissionSetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListManagedPoliciesInPermissionSetCommandOutput>;
+
+  /**
+   * @see {@link ListPermissionSetProvisioningStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPermissionSetProvisioningStatusCommandOutput}.
+   */
+  paginateListPermissionSetProvisioningStatus(
+    args: ListPermissionSetProvisioningStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPermissionSetProvisioningStatusCommandOutput>;
+
+  /**
+   * @see {@link ListPermissionSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPermissionSetsCommandOutput}.
+   */
+  paginateListPermissionSets(
+    args: ListPermissionSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPermissionSetsCommandOutput>;
+
+  /**
+   * @see {@link ListPermissionSetsProvisionedToAccountCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPermissionSetsProvisionedToAccountCommandOutput}.
+   */
+  paginateListPermissionSetsProvisionedToAccount(
+    args: ListPermissionSetsProvisionedToAccountCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPermissionSetsProvisionedToAccountCommandOutput>;
+
+  /**
+   * @see {@link ListRegionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRegionsCommandOutput}.
+   */
+  paginateListRegions(
+    args: ListRegionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRegionsCommandOutput>;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTagsForResourceCommandOutput}.
+   */
+  paginateListTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTagsForResourceCommandOutput>;
+
+  /**
+   * @see {@link ListTrustedTokenIssuersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrustedTokenIssuersCommandOutput}.
+   */
+  paginateListTrustedTokenIssuers(
+    args: ListTrustedTokenIssuersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrustedTokenIssuersCommandOutput>;
 }
+
+/**
+ * <p>IAM Identity Center is the Amazon Web Services solution for connecting your workforce users to Amazon Web Services managed applications and other Amazon Web Services resources. You can connect your existing identity provider and synchronize users and groups from your directory, or create and manage your users directly in IAM Identity Center. You can then use IAM Identity Center for either or both of the following:</p> <ul> <li> <p>User access to applications</p> </li> <li> <p>User access to Amazon Web Services accounts</p> </li> </ul> <p>This guide provides information about single sign-on operations that you can use for access to applications and Amazon Web Services accounts. For information about IAM Identity Center features, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">IAM Identity Center User Guide</a>.</p> <note> <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API namespaces.</p> </note> <p>Many API operations for IAM Identity Center rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in IAM Identity Center, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Identity Store API Reference</a>.</p> <note> <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a convenient way to create programmatic access to IAM Identity Center and other Amazon Web Services services. For more information about the Amazon Web Services SDKs, including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> </note>
+ * @public
+ */
+export class SSOAdmin extends SSOAdminClient implements SSOAdmin {}
+createAggregatedClient(commands, SSOAdmin, { paginators });

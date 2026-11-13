@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { PutTargetsRequest, PutTargetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutTargetsCommand,
-  serializeAws_json1_1PutTargetsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutTargetsRequest, PutTargetsResponse } from "../models/models_0";
+import { PutTargets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutTargetsCommand}.
+ */
 export interface PutTargetsCommandInput extends PutTargetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutTargetsCommand}.
+ */
 export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataBearer {}
 
 /**
@@ -26,7 +27,6 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  *       already associated with the rule.</p>
  *          <p>Targets are the resources that are invoked when a rule is triggered.</p>
  *          <p>You can configure the following as targets for Events:</p>
- *
  *          <ul>
  *             <li>
  *                <p>
@@ -73,7 +73,7 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  *           us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.</p>
  *             </li>
  *             <li>
- *                <p>Firehose delivery stream (Kinesis Data Firehose)</p>
+ *                <p>Firehose delivery stream (Firehose)</p>
  *             </li>
  *             <li>
  *                <p>Inspector assessment template (Amazon Inspector)</p>
@@ -106,17 +106,14 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  *                <p>Step Functions state machines</p>
  *             </li>
  *          </ul>
- *
- *          <p>Creating rules with built-in targets is supported only in the Management Console. The
+ *          <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The
  *       built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API
  *         call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API
  *         call</code>. </p>
- *
  *          <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the
  *       target is a Kinesis data stream, you can optionally specify which shard the event goes to by
  *       using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2
  *       instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>
- *
  *          <p>To be able to make API calls against the resources that you own, Amazon EventBridge
  *       needs the appropriate permissions. For Lambda and Amazon SNS
  *       resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams,
@@ -124,7 +121,6 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  *       IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.
  *       For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html">Authentication
  *         and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>
- *
  *          <p>If another Amazon Web Services account is in the same region and has granted you permission (using
  *         <code>PutPermission</code>), you can send events to that account. Set that account's event
  *       bus as a target of the rules in your account. To send the matched events to the other account,
@@ -133,28 +129,23 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  *       charged for each sent event. Each event sent to another account is charged as a custom event.
  *       The account receiving the event is not charged. For more information, see <a href="http://aws.amazon.com/eventbridge/pricing/">Amazon EventBridge
  *         Pricing</a>.</p>
- *
  *          <note>
  *             <p>
  *                <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not
  *         available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services
  *         account.</p>
  *          </note>
- *
  *          <p>If you are setting the event bus of another account as the target, and that account
  *       granted permission to your account through an organization instead of directly by the account
  *       ID, then you must specify a <code>RoleArn</code> with proper permissions in the
  *         <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and
  *           Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User
  *         Guide</i>.</p>
- *
  *          <p>For more information about enabling cross-account events, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html">PutPermission</a>.</p>
- *
  *          <p>
  *             <b>Input</b>, <b>InputPath</b>, and
  *         <b>InputTransformer</b> are mutually exclusive and optional
  *       parameters of a target. When a rule is triggered due to a matched event:</p>
- *
  *          <ul>
  *             <li>
  *                <p>If none of the following arguments are specified for a target, then the entire event
@@ -177,14 +168,11 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  *           specify as the input to the target.</p>
  *             </li>
  *          </ul>
- *
  *          <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use
  *       JSON dot notation, not bracket notation.</p>
- *
  *          <p>When you add targets to a rule and the associated rule triggers soon after, new or updated
  *       targets might not be immediately invoked. Allow a short period of time for changes to take
  *       effect.</p>
- *
  *          <p>This action can partially fail if too many requests are made at the same time. If that
  *       happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in
  *         <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>
@@ -193,68 +181,198 @@ export interface PutTargetsCommandOutput extends PutTargetsResponse, __MetadataB
  * ```javascript
  * import { CloudWatchEventsClient, PutTargetsCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, PutTargetsCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // PutTargetsRequest
+ *   Rule: "STRING_VALUE", // required
+ *   EventBusName: "STRING_VALUE",
+ *   Targets: [ // TargetList // required
+ *     { // Target
+ *       Id: "STRING_VALUE", // required
+ *       Arn: "STRING_VALUE", // required
+ *       RoleArn: "STRING_VALUE",
+ *       Input: "STRING_VALUE",
+ *       InputPath: "STRING_VALUE",
+ *       InputTransformer: { // InputTransformer
+ *         InputPathsMap: { // TransformerPaths
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         InputTemplate: "STRING_VALUE", // required
+ *       },
+ *       KinesisParameters: { // KinesisParameters
+ *         PartitionKeyPath: "STRING_VALUE", // required
+ *       },
+ *       RunCommandParameters: { // RunCommandParameters
+ *         RunCommandTargets: [ // RunCommandTargets // required
+ *           { // RunCommandTarget
+ *             Key: "STRING_VALUE", // required
+ *             Values: [ // RunCommandTargetValues // required
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *       EcsParameters: { // EcsParameters
+ *         TaskDefinitionArn: "STRING_VALUE", // required
+ *         TaskCount: Number("int"),
+ *         LaunchType: "EC2" || "FARGATE" || "EXTERNAL",
+ *         NetworkConfiguration: { // NetworkConfiguration
+ *           awsvpcConfiguration: { // AwsVpcConfiguration
+ *             Subnets: [ // StringList // required
+ *               "STRING_VALUE",
+ *             ],
+ *             SecurityGroups: [
+ *               "STRING_VALUE",
+ *             ],
+ *             AssignPublicIp: "ENABLED" || "DISABLED",
+ *           },
+ *         },
+ *         PlatformVersion: "STRING_VALUE",
+ *         Group: "STRING_VALUE",
+ *         CapacityProviderStrategy: [ // CapacityProviderStrategy
+ *           { // CapacityProviderStrategyItem
+ *             capacityProvider: "STRING_VALUE", // required
+ *             weight: Number("int"),
+ *             base: Number("int"),
+ *           },
+ *         ],
+ *         EnableECSManagedTags: true || false,
+ *         EnableExecuteCommand: true || false,
+ *         PlacementConstraints: [ // PlacementConstraints
+ *           { // PlacementConstraint
+ *             type: "distinctInstance" || "memberOf",
+ *             expression: "STRING_VALUE",
+ *           },
+ *         ],
+ *         PlacementStrategy: [ // PlacementStrategies
+ *           { // PlacementStrategy
+ *             type: "random" || "spread" || "binpack",
+ *             field: "STRING_VALUE",
+ *           },
+ *         ],
+ *         PropagateTags: "TASK_DEFINITION",
+ *         ReferenceId: "STRING_VALUE",
+ *         Tags: [ // TagList
+ *           { // Tag
+ *             Key: "STRING_VALUE", // required
+ *             Value: "STRING_VALUE", // required
+ *           },
+ *         ],
+ *       },
+ *       BatchParameters: { // BatchParameters
+ *         JobDefinition: "STRING_VALUE", // required
+ *         JobName: "STRING_VALUE", // required
+ *         ArrayProperties: { // BatchArrayProperties
+ *           Size: Number("int"),
+ *         },
+ *         RetryStrategy: { // BatchRetryStrategy
+ *           Attempts: Number("int"),
+ *         },
+ *       },
+ *       SqsParameters: { // SqsParameters
+ *         MessageGroupId: "STRING_VALUE",
+ *       },
+ *       HttpParameters: { // HttpParameters
+ *         PathParameterValues: [ // PathParameterList
+ *           "STRING_VALUE",
+ *         ],
+ *         HeaderParameters: { // HeaderParametersMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         QueryStringParameters: { // QueryStringParametersMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *       },
+ *       RedshiftDataParameters: { // RedshiftDataParameters
+ *         SecretManagerArn: "STRING_VALUE",
+ *         Database: "STRING_VALUE", // required
+ *         DbUser: "STRING_VALUE",
+ *         Sql: "STRING_VALUE", // required
+ *         StatementName: "STRING_VALUE",
+ *         WithEvent: true || false,
+ *       },
+ *       SageMakerPipelineParameters: { // SageMakerPipelineParameters
+ *         PipelineParameterList: [ // SageMakerPipelineParameterList
+ *           { // SageMakerPipelineParameter
+ *             Name: "STRING_VALUE", // required
+ *             Value: "STRING_VALUE", // required
+ *           },
+ *         ],
+ *       },
+ *       DeadLetterConfig: { // DeadLetterConfig
+ *         Arn: "STRING_VALUE",
+ *       },
+ *       RetryPolicy: { // RetryPolicy
+ *         MaximumRetryAttempts: Number("int"),
+ *         MaximumEventAgeInSeconds: Number("int"),
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new PutTargetsCommand(input);
  * const response = await client.send(command);
+ * // { // PutTargetsResponse
+ * //   FailedEntryCount: Number("int"),
+ * //   FailedEntries: [ // PutTargetsResultEntryList
+ * //     { // PutTargetsResultEntry
+ * //       TargetId: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PutTargetsCommandInput - {@link PutTargetsCommandInput}
+ * @returns {@link PutTargetsCommandOutput}
  * @see {@link PutTargetsCommandInput} for command's `input` shape.
  * @see {@link PutTargetsCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request failed because it attempted to create resource beyond the allowed service
+ *       quota.</p>
+ *
+ * @throws {@link ManagedRuleException} (client fault)
+ *  <p>This rule was created by an Amazon Web Services service on behalf of your account. It is managed by that
+ *       service. If you see this error in response to <code>DeleteRule</code> or
+ *         <code>RemoveTargets</code>, you can use the <code>Force</code> parameter in those calls to
+ *       delete the rule or remove targets from the rule. You cannot modify these managed rules by
+ *       using <code>DisableRule</code>, <code>EnableRule</code>, <code>PutTargets</code>,
+ *         <code>PutRule</code>, <code>TagResource</code>, or <code>UntagResource</code>. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class PutTargetsCommand extends $Command<
-  PutTargetsCommandInput,
-  PutTargetsCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutTargetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutTargetsCommandInput, PutTargetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "PutTargetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutTargetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutTargetsResponse.filterSensitiveLog,
+export class PutTargetsCommand extends command<PutTargetsCommandInput, PutTargetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutTargets",
+  PutTargets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutTargetsRequest;
+      output: PutTargetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutTargetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutTargetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutTargetsCommandOutput> {
-    return deserializeAws_json1_1PutTargetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutTargetsCommandInput;
+      output: PutTargetsCommandOutput;
+    };
+  };
 }

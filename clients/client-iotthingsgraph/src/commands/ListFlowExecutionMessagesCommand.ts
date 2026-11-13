@@ -1,98 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { ListFlowExecutionMessagesRequest, ListFlowExecutionMessagesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListFlowExecutionMessagesCommand,
-  serializeAws_json1_1ListFlowExecutionMessagesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFlowExecutionMessagesRequest, ListFlowExecutionMessagesResponse } from "../models/models_0";
+import { ListFlowExecutionMessages$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFlowExecutionMessagesCommand}.
+ */
 export interface ListFlowExecutionMessagesCommandInput extends ListFlowExecutionMessagesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFlowExecutionMessagesCommand}.
+ */
 export interface ListFlowExecutionMessagesCommandOutput extends ListFlowExecutionMessagesResponse, __MetadataBearer {}
 
 /**
  * <p>Returns a list of objects that contain information about events in a flow execution.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, ListFlowExecutionMessagesCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, ListFlowExecutionMessagesCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // ListFlowExecutionMessagesRequest
+ *   flowExecutionId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListFlowExecutionMessagesCommand(input);
  * const response = await client.send(command);
+ * // { // ListFlowExecutionMessagesResponse
+ * //   messages: [ // FlowExecutionMessages
+ * //     { // FlowExecutionMessage
+ * //       messageId: "STRING_VALUE",
+ * //       eventType: "EXECUTION_STARTED" || "EXECUTION_FAILED" || "EXECUTION_ABORTED" || "EXECUTION_SUCCEEDED" || "STEP_STARTED" || "STEP_FAILED" || "STEP_SUCCEEDED" || "ACTIVITY_SCHEDULED" || "ACTIVITY_STARTED" || "ACTIVITY_FAILED" || "ACTIVITY_SUCCEEDED" || "START_FLOW_EXECUTION_TASK" || "SCHEDULE_NEXT_READY_STEPS_TASK" || "THING_ACTION_TASK" || "THING_ACTION_TASK_FAILED" || "THING_ACTION_TASK_SUCCEEDED" || "ACKNOWLEDGE_TASK_MESSAGE",
+ * //       timestamp: new Date("TIMESTAMP"),
+ * //       payload: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFlowExecutionMessagesCommandInput - {@link ListFlowExecutionMessagesCommandInput}
+ * @returns {@link ListFlowExecutionMessagesCommandOutput}
  * @see {@link ListFlowExecutionMessagesCommandInput} for command's `input` shape.
  * @see {@link ListFlowExecutionMessagesCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class ListFlowExecutionMessagesCommand extends $Command<
-  ListFlowExecutionMessagesCommandInput,
-  ListFlowExecutionMessagesCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFlowExecutionMessagesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFlowExecutionMessagesCommandInput, ListFlowExecutionMessagesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "ListFlowExecutionMessagesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFlowExecutionMessagesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFlowExecutionMessagesResponse.filterSensitiveLog,
+export class ListFlowExecutionMessagesCommand extends command<ListFlowExecutionMessagesCommandInput, ListFlowExecutionMessagesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFlowExecutionMessages",
+  ListFlowExecutionMessages$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFlowExecutionMessagesRequest;
+      output: ListFlowExecutionMessagesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFlowExecutionMessagesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListFlowExecutionMessagesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListFlowExecutionMessagesCommandOutput> {
-    return deserializeAws_json1_1ListFlowExecutionMessagesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFlowExecutionMessagesCommandInput;
+      output: ListFlowExecutionMessagesCommandOutput;
+    };
+  };
 }

@@ -1,240 +1,345 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
+  SdkStreamMixinInjector as __SdkStreamMixinInjector,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultCodeartifactHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AssociateExternalConnectionCommandInput,
   AssociateExternalConnectionCommandOutput,
 } from "./commands/AssociateExternalConnectionCommand";
-import {
+import type {
   CopyPackageVersionsCommandInput,
   CopyPackageVersionsCommandOutput,
 } from "./commands/CopyPackageVersionsCommand";
-import { CreateDomainCommandInput, CreateDomainCommandOutput } from "./commands/CreateDomainCommand";
-import { CreateRepositoryCommandInput, CreateRepositoryCommandOutput } from "./commands/CreateRepositoryCommand";
-import { DeleteDomainCommandInput, DeleteDomainCommandOutput } from "./commands/DeleteDomainCommand";
-import {
+import type { CreateDomainCommandInput, CreateDomainCommandOutput } from "./commands/CreateDomainCommand";
+import type {
+  CreatePackageGroupCommandInput,
+  CreatePackageGroupCommandOutput,
+} from "./commands/CreatePackageGroupCommand";
+import type { CreateRepositoryCommandInput, CreateRepositoryCommandOutput } from "./commands/CreateRepositoryCommand";
+import type { DeleteDomainCommandInput, DeleteDomainCommandOutput } from "./commands/DeleteDomainCommand";
+import type {
   DeleteDomainPermissionsPolicyCommandInput,
   DeleteDomainPermissionsPolicyCommandOutput,
 } from "./commands/DeleteDomainPermissionsPolicyCommand";
-import {
+import type { DeletePackageCommandInput, DeletePackageCommandOutput } from "./commands/DeletePackageCommand";
+import type {
+  DeletePackageGroupCommandInput,
+  DeletePackageGroupCommandOutput,
+} from "./commands/DeletePackageGroupCommand";
+import type {
   DeletePackageVersionsCommandInput,
   DeletePackageVersionsCommandOutput,
 } from "./commands/DeletePackageVersionsCommand";
-import { DeleteRepositoryCommandInput, DeleteRepositoryCommandOutput } from "./commands/DeleteRepositoryCommand";
-import {
+import type { DeleteRepositoryCommandInput, DeleteRepositoryCommandOutput } from "./commands/DeleteRepositoryCommand";
+import type {
   DeleteRepositoryPermissionsPolicyCommandInput,
   DeleteRepositoryPermissionsPolicyCommandOutput,
 } from "./commands/DeleteRepositoryPermissionsPolicyCommand";
-import { DescribeDomainCommandInput, DescribeDomainCommandOutput } from "./commands/DescribeDomainCommand";
-import {
+import type { DescribeDomainCommandInput, DescribeDomainCommandOutput } from "./commands/DescribeDomainCommand";
+import type { DescribePackageCommandInput, DescribePackageCommandOutput } from "./commands/DescribePackageCommand";
+import type {
+  DescribePackageGroupCommandInput,
+  DescribePackageGroupCommandOutput,
+} from "./commands/DescribePackageGroupCommand";
+import type {
   DescribePackageVersionCommandInput,
   DescribePackageVersionCommandOutput,
 } from "./commands/DescribePackageVersionCommand";
-import { DescribeRepositoryCommandInput, DescribeRepositoryCommandOutput } from "./commands/DescribeRepositoryCommand";
-import {
+import type {
+  DescribeRepositoryCommandInput,
+  DescribeRepositoryCommandOutput,
+} from "./commands/DescribeRepositoryCommand";
+import type {
   DisassociateExternalConnectionCommandInput,
   DisassociateExternalConnectionCommandOutput,
 } from "./commands/DisassociateExternalConnectionCommand";
-import {
+import type {
   DisposePackageVersionsCommandInput,
   DisposePackageVersionsCommandOutput,
 } from "./commands/DisposePackageVersionsCommand";
-import {
+import type {
+  GetAssociatedPackageGroupCommandInput,
+  GetAssociatedPackageGroupCommandOutput,
+} from "./commands/GetAssociatedPackageGroupCommand";
+import type {
   GetAuthorizationTokenCommandInput,
   GetAuthorizationTokenCommandOutput,
 } from "./commands/GetAuthorizationTokenCommand";
-import {
+import type {
   GetDomainPermissionsPolicyCommandInput,
   GetDomainPermissionsPolicyCommandOutput,
 } from "./commands/GetDomainPermissionsPolicyCommand";
-import {
+import type {
   GetPackageVersionAssetCommandInput,
   GetPackageVersionAssetCommandOutput,
 } from "./commands/GetPackageVersionAssetCommand";
-import {
+import type {
   GetPackageVersionReadmeCommandInput,
   GetPackageVersionReadmeCommandOutput,
 } from "./commands/GetPackageVersionReadmeCommand";
-import {
+import type {
   GetRepositoryEndpointCommandInput,
   GetRepositoryEndpointCommandOutput,
 } from "./commands/GetRepositoryEndpointCommand";
-import {
+import type {
   GetRepositoryPermissionsPolicyCommandInput,
   GetRepositoryPermissionsPolicyCommandOutput,
 } from "./commands/GetRepositoryPermissionsPolicyCommand";
-import { ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
-import { ListPackagesCommandInput, ListPackagesCommandOutput } from "./commands/ListPackagesCommand";
-import {
+import type {
+  ListAllowedRepositoriesForGroupCommandInput,
+  ListAllowedRepositoriesForGroupCommandOutput,
+} from "./commands/ListAllowedRepositoriesForGroupCommand";
+import type {
+  ListAssociatedPackagesCommandInput,
+  ListAssociatedPackagesCommandOutput,
+} from "./commands/ListAssociatedPackagesCommand";
+import type { ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
+import type {
+  ListPackageGroupsCommandInput,
+  ListPackageGroupsCommandOutput,
+} from "./commands/ListPackageGroupsCommand";
+import type { ListPackagesCommandInput, ListPackagesCommandOutput } from "./commands/ListPackagesCommand";
+import type {
   ListPackageVersionAssetsCommandInput,
   ListPackageVersionAssetsCommandOutput,
 } from "./commands/ListPackageVersionAssetsCommand";
-import {
+import type {
   ListPackageVersionDependenciesCommandInput,
   ListPackageVersionDependenciesCommandOutput,
 } from "./commands/ListPackageVersionDependenciesCommand";
-import {
+import type {
   ListPackageVersionsCommandInput,
   ListPackageVersionsCommandOutput,
 } from "./commands/ListPackageVersionsCommand";
-import { ListRepositoriesCommandInput, ListRepositoriesCommandOutput } from "./commands/ListRepositoriesCommand";
-import {
+import type { ListRepositoriesCommandInput, ListRepositoriesCommandOutput } from "./commands/ListRepositoriesCommand";
+import type {
   ListRepositoriesInDomainCommandInput,
   ListRepositoriesInDomainCommandOutput,
 } from "./commands/ListRepositoriesInDomainCommand";
-import {
+import type {
+  ListSubPackageGroupsCommandInput,
+  ListSubPackageGroupsCommandOutput,
+} from "./commands/ListSubPackageGroupsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
+  PublishPackageVersionCommandInput,
+  PublishPackageVersionCommandOutput,
+} from "./commands/PublishPackageVersionCommand";
+import type {
   PutDomainPermissionsPolicyCommandInput,
   PutDomainPermissionsPolicyCommandOutput,
 } from "./commands/PutDomainPermissionsPolicyCommand";
-import {
+import type {
+  PutPackageOriginConfigurationCommandInput,
+  PutPackageOriginConfigurationCommandOutput,
+} from "./commands/PutPackageOriginConfigurationCommand";
+import type {
   PutRepositoryPermissionsPolicyCommandInput,
   PutRepositoryPermissionsPolicyCommandOutput,
 } from "./commands/PutRepositoryPermissionsPolicyCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdatePackageGroupCommandInput,
+  UpdatePackageGroupCommandOutput,
+} from "./commands/UpdatePackageGroupCommand";
+import type {
+  UpdatePackageGroupOriginConfigurationCommandInput,
+  UpdatePackageGroupOriginConfigurationCommandOutput,
+} from "./commands/UpdatePackageGroupOriginConfigurationCommand";
+import type {
   UpdatePackageVersionsStatusCommandInput,
   UpdatePackageVersionsStatusCommandOutput,
 } from "./commands/UpdatePackageVersionsStatusCommand";
-import { UpdateRepositoryCommandInput, UpdateRepositoryCommandOutput } from "./commands/UpdateRepositoryCommand";
+import type { UpdateRepositoryCommandInput, UpdateRepositoryCommandOutput } from "./commands/UpdateRepositoryCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AssociateExternalConnectionCommandInput
   | CopyPackageVersionsCommandInput
   | CreateDomainCommandInput
+  | CreatePackageGroupCommandInput
   | CreateRepositoryCommandInput
   | DeleteDomainCommandInput
   | DeleteDomainPermissionsPolicyCommandInput
+  | DeletePackageCommandInput
+  | DeletePackageGroupCommandInput
   | DeletePackageVersionsCommandInput
   | DeleteRepositoryCommandInput
   | DeleteRepositoryPermissionsPolicyCommandInput
   | DescribeDomainCommandInput
+  | DescribePackageCommandInput
+  | DescribePackageGroupCommandInput
   | DescribePackageVersionCommandInput
   | DescribeRepositoryCommandInput
   | DisassociateExternalConnectionCommandInput
   | DisposePackageVersionsCommandInput
+  | GetAssociatedPackageGroupCommandInput
   | GetAuthorizationTokenCommandInput
   | GetDomainPermissionsPolicyCommandInput
   | GetPackageVersionAssetCommandInput
   | GetPackageVersionReadmeCommandInput
   | GetRepositoryEndpointCommandInput
   | GetRepositoryPermissionsPolicyCommandInput
+  | ListAllowedRepositoriesForGroupCommandInput
+  | ListAssociatedPackagesCommandInput
   | ListDomainsCommandInput
+  | ListPackageGroupsCommandInput
   | ListPackageVersionAssetsCommandInput
   | ListPackageVersionDependenciesCommandInput
   | ListPackageVersionsCommandInput
   | ListPackagesCommandInput
   | ListRepositoriesCommandInput
   | ListRepositoriesInDomainCommandInput
+  | ListSubPackageGroupsCommandInput
   | ListTagsForResourceCommandInput
+  | PublishPackageVersionCommandInput
   | PutDomainPermissionsPolicyCommandInput
+  | PutPackageOriginConfigurationCommandInput
   | PutRepositoryPermissionsPolicyCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdatePackageGroupCommandInput
+  | UpdatePackageGroupOriginConfigurationCommandInput
   | UpdatePackageVersionsStatusCommandInput
   | UpdateRepositoryCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AssociateExternalConnectionCommandOutput
   | CopyPackageVersionsCommandOutput
   | CreateDomainCommandOutput
+  | CreatePackageGroupCommandOutput
   | CreateRepositoryCommandOutput
   | DeleteDomainCommandOutput
   | DeleteDomainPermissionsPolicyCommandOutput
+  | DeletePackageCommandOutput
+  | DeletePackageGroupCommandOutput
   | DeletePackageVersionsCommandOutput
   | DeleteRepositoryCommandOutput
   | DeleteRepositoryPermissionsPolicyCommandOutput
   | DescribeDomainCommandOutput
+  | DescribePackageCommandOutput
+  | DescribePackageGroupCommandOutput
   | DescribePackageVersionCommandOutput
   | DescribeRepositoryCommandOutput
   | DisassociateExternalConnectionCommandOutput
   | DisposePackageVersionsCommandOutput
+  | GetAssociatedPackageGroupCommandOutput
   | GetAuthorizationTokenCommandOutput
   | GetDomainPermissionsPolicyCommandOutput
   | GetPackageVersionAssetCommandOutput
   | GetPackageVersionReadmeCommandOutput
   | GetRepositoryEndpointCommandOutput
   | GetRepositoryPermissionsPolicyCommandOutput
+  | ListAllowedRepositoriesForGroupCommandOutput
+  | ListAssociatedPackagesCommandOutput
   | ListDomainsCommandOutput
+  | ListPackageGroupsCommandOutput
   | ListPackageVersionAssetsCommandOutput
   | ListPackageVersionDependenciesCommandOutput
   | ListPackageVersionsCommandOutput
   | ListPackagesCommandOutput
   | ListRepositoriesCommandOutput
   | ListRepositoriesInDomainCommandOutput
+  | ListSubPackageGroupsCommandOutput
   | ListTagsForResourceCommandOutput
+  | PublishPackageVersionCommandOutput
   | PutDomainPermissionsPolicyCommandOutput
+  | PutPackageOriginConfigurationCommandOutput
   | PutRepositoryPermissionsPolicyCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdatePackageGroupCommandOutput
+  | UpdatePackageGroupOriginConfigurationCommandOutput
   | UpdatePackageVersionsStatusCommandOutput
   | UpdateRepositoryCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -246,7 +351,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -285,25 +390,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -316,88 +412,138 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+  /**
+   * The internal function that inject utilities to runtime-specific stream to help users consume the data
+   * @internal
+   */
+  sdkStreamMixin?: __SdkStreamMixinInjector;
+
 }
 
-type CodeartifactClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of CodeartifactClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type CodeartifactClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of CodeartifactClient class constructor that set the region, credentials and other options.
  */
 export interface CodeartifactClientConfig extends CodeartifactClientConfigType {}
 
-type CodeartifactClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of CodeartifactClient class. This is resolved and normalized from the {@link CodeartifactClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type CodeartifactClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of CodeartifactClient class. This is resolved and normalized from the {@link CodeartifactClientConfig | constructor configuration interface}.
  */
 export interface CodeartifactClientResolvedConfig extends CodeartifactClientResolvedConfigType {}
 
 /**
- * <p> AWS CodeArtifact is a fully managed artifact repository compatible with language-native
- *       package managers and build tools such as npm, Apache Maven, and pip. You can use CodeArtifact to
+ * <p> CodeArtifact is a fully managed artifact repository compatible with language-native
+ *       package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to
  *       share packages with development teams and pull packages. Packages can be pulled from both
  *       public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact
  *       repository and another repository, which effectively merges their contents from the point of
  *       view of a package manager client. </p>
- *
  *          <p>
- *             <b>AWS CodeArtifact Components</b>
+ *             <b>CodeArtifact concepts</b>
  *          </p>
- *          <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>
- *
  *          <ul>
  *             <li>
  *                <p>
  *                   <b>Repository</b>: A CodeArtifact repository contains a set of <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version">package
  *             versions</a>, each of which maps to a set of assets, or files. Repositories are
  *           polyglot, so a single repository can contain packages of any supported type. Each
- *           repository exposes endpoints for fetching and publishing packages using tools like the
- *             <b>
+ *           repository exposes endpoints for fetching and publishing packages using tools such as the <b>
  *                      <code>npm</code>
- *                   </b> CLI, the Maven CLI (<b>
+ *                   </b> CLI or the Maven CLI (<b>
  *                      <code>mvn</code>
- *                   </b>), and <b>
- *                      <code>pip</code>
- *                   </b>.</p>
+ *                   </b>). For a list of supported package managers, see the
+ *           <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html">CodeArtifact User Guide</a>.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -406,7 +552,7 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             but are consumed through repositories. A given package asset, such as a Maven JAR file, is
  *             stored once per domain, no matter how many repositories it's present in. All of the assets
  *             and metadata in a domain are encrypted with the same customer master key (CMK) stored in
- *             AWS Key Management Service (AWS KMS).</p>
+ *             Key Management Service (KMS).</p>
  *                <p>Each repository is a member of a single domain and can't be moved to a
  *             different domain.</p>
  *                <p>The domain allows organizational policy to be applied across multiple
@@ -419,7 +565,9 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             <li>
  *                <p>
  *                   <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to
- *           resolve dependencies and install the software. CodeArtifact supports <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html">npm</a>, <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html">PyPI</a>, and <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven">Maven</a> package formats.</p>
+ *           resolve dependencies and install the software. CodeArtifact supports npm, PyPI, Maven, NuGet, Swift, Ruby, Cargo, and generic package formats.
+ *         For more information about the supported package formats and how to use CodeArtifact with them, see the
+ *           <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html">CodeArtifact User Guide</a>.</p>
  *                <p>In CodeArtifact, a package consists of:</p>
  *                <ul>
  *                   <li>
@@ -437,6 +585,14 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *                      <p> Package-level metadata (for example, npm tags)</p>
  *                   </li>
  *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <b>Package group</b>: A group of packages that match a specified definition. Package
+ *           groups can be used to apply configuration to multiple packages that match a defined pattern using
+ *           package format, package namespace, and package name. You can use package groups to more conveniently
+ *           configure package origin controls for multiple packages. Package origin controls are used to block or allow ingestion or publishing
+ *           of new package versions, which protects users from malicious actions known as dependency substitution attacks.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -459,8 +615,9 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             <code>.tgz</code> file or Maven POM and JAR files.</p>
  *             </li>
  *          </ul>
- *
- *          <p>CodeArtifact supports these operations:</p>
+ *          <p>
+ *             <b>CodeArtifact supported API operations</b>
+ *          </p>
  *          <ul>
  *             <li>
  *                <p>
@@ -475,7 +632,11 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             </li>
  *             <li>
  *                <p>
- *                   <code>CreateDomain</code>: Creates a domain</p>
+ *                   <code>CreateDomain</code>: Creates a domain.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>CreatePackageGroup</code>: Creates a package group.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -489,6 +650,14 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             <li>
  *                <p>
  *                   <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>DeletePackage</code>: Deletes a package and all associated package versions.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>DeletePackageGroup</code>: Deletes a package group. Does not delete packages or package versions that are associated with a package group.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -512,6 +681,16 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             </li>
  *             <li>
  *                <p>
+ *                   <code>DescribePackage</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html">PackageDescription</a>
+ *           object that contains details about a package. </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>DescribePackageGroup</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroup.html">PackageGroup</a>
+ *           object that contains details about a package group. </p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <code>DescribePackageVersion</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a>
  *           object that contains details about a package version. </p>
  *             </li>
@@ -530,6 +709,10 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *                <p>
  *                   <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.
  *         </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>GetAssociatedPackageGroup</code>: Returns the most closely associated package group to the specified package.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -557,7 +740,27 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *                <ul>
  *                   <li>
  *                      <p>
+ *                         <code>cargo</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>generic</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>maven</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
  *                         <code>npm</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>nuget</code>
  *                      </p>
  *                   </li>
  *                   <li>
@@ -567,7 +770,12 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *                   </li>
  *                   <li>
  *                      <p>
- *                         <code>maven</code>
+ *                         <code>ruby</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>swift</code>
  *                      </p>
  *                   </li>
  *                </ul>
@@ -579,12 +787,24 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             </li>
  *             <li>
  *                <p>
+ *                   <code>ListAllowedRepositoriesForGroup</code>: Lists the allowed repositories for a package group that has origin configuration set to <code>ALLOW_SPECIFIC_REPOSITORIES</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>ListAssociatedPackages</code>: Returns a list of packages associated with the requested package group.</p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each
  *           returned <code>DomainSummary</code> object contains information about a domain.</p>
  *             </li>
  *             <li>
  *                <p>
  *                   <code>ListPackages</code>: Lists the packages in a repository.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>ListPackageGroups</code>: Returns a list of package groups in the requested domain.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -602,7 +822,7 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             </li>
  *             <li>
  *                <p>
- *                   <code>ListRepositories</code>: Returns a list of repositories owned by the AWS account that called this method.</p>
+ *                   <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -610,12 +830,33 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *             </li>
  *             <li>
  *                <p>
+ *                   <code>ListSubPackageGroups</code>: Returns a list of direct children of the specified package group.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>PublishPackageVersion</code>: Creates a new package version containing one or more assets.</p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine
+ *         how new versions of the package can be added to a specific repository.</p>
  *             </li>
  *             <li>
  *                <p>
  *                   <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository
  *           that specifies permissions to access it. </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>UpdatePackageGroup</code>: Updates a package group. This API cannot be used to update a package group's origin configuration or pattern.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>UpdatePackageGroupOriginConfiguration</code>: Updates the package origin configuration for a package group.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -626,6 +867,7 @@ export interface CodeartifactClientResolvedConfig extends CodeartifactClientReso
  *                   <code>UpdateRepository</code>: Updates the properties of a repository.</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export class CodeartifactClient extends __Client<
   __HttpHandlerOptions,
@@ -638,22 +880,36 @@ export class CodeartifactClient extends __Client<
    */
   readonly config: CodeartifactClientResolvedConfig;
 
-  constructor(configuration: CodeartifactClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<CodeartifactClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultCodeartifactHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: CodeartifactClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeActionRequest, DescribeActionResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeActionCommand,
-  serializeAws_json1_1DescribeActionCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeActionRequest, DescribeActionResponse } from "../models/models_2";
+import { DescribeAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeActionCommand}.
+ */
 export interface DescribeActionCommandInput extends DescribeActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeActionCommand}.
+ */
 export interface DescribeActionCommandOutput extends DescribeActionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,91 @@ export interface DescribeActionCommandOutput extends DescribeActionResponse, __M
  * ```javascript
  * import { SageMakerClient, DescribeActionCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeActionCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeActionRequest
+ *   ActionName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeActionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeActionResponse
+ * //   ActionName: "STRING_VALUE",
+ * //   ActionArn: "STRING_VALUE",
+ * //   Source: { // ActionSource
+ * //     SourceUri: "STRING_VALUE", // required
+ * //     SourceType: "STRING_VALUE",
+ * //     SourceId: "STRING_VALUE",
+ * //   },
+ * //   ActionType: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   Status: "Unknown" || "InProgress" || "Completed" || "Failed" || "Stopping" || "Stopped",
+ * //   Properties: { // LineageEntityParameters
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   MetadataProperties: { // MetadataProperties
+ * //     CommitId: "STRING_VALUE",
+ * //     Repository: "STRING_VALUE",
+ * //     GeneratedBy: "STRING_VALUE",
+ * //     ProjectId: "STRING_VALUE",
+ * //   },
+ * //   LineageGroupArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeActionCommandInput - {@link DescribeActionCommandInput}
+ * @returns {@link DescribeActionCommandOutput}
  * @see {@link DescribeActionCommandInput} for command's `input` shape.
  * @see {@link DescribeActionCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeActionCommand extends $Command<
-  DescribeActionCommandInput,
-  DescribeActionCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeActionCommandInput, DescribeActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeActionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeActionResponse.filterSensitiveLog,
+export class DescribeActionCommand extends command<DescribeActionCommandInput, DescribeActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAction",
+  DescribeAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeActionRequest;
+      output: DescribeActionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeActionCommandOutput> {
-    return deserializeAws_json1_1DescribeActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeActionCommandInput;
+      output: DescribeActionCommandOutput;
+    };
+  };
 }

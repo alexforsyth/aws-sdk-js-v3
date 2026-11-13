@@ -1,109 +1,124 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { PutGroupPolicyRequest } from "../models/models_0";
-import {
-  deserializeAws_queryPutGroupPolicyCommand,
-  serializeAws_queryPutGroupPolicyCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutGroupPolicyRequest } from "../models/models_0";
+import { PutGroupPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutGroupPolicyCommand}.
+ */
 export interface PutGroupPolicyCommandInput extends PutGroupPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutGroupPolicyCommand}.
+ */
 export interface PutGroupPolicyCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Adds or updates an inline policy document that is embedded in the specified IAM
  *             group.</p>
- *         <p>A user can also have managed policies attached to it. To attach a managed policy to a
- *             group, use <a>AttachGroupPolicy</a>. To create a new managed policy, use
- *                 <a>CreatePolicy</a>. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
+ *          <p>A user can also have managed policies attached to it. To attach a managed policy to a
+ *             group, use <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachGroupPolicy.html">
+ *                <code>AttachGroupPolicy</code>
+ *             </a>. To create a new managed policy, use
+ *                 <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">
+ *                <code>CreatePolicy</code>
+ *             </a>. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
  *                 policies and inline policies</a> in the
  *             <i>IAM User Guide</i>.</p>
- *         <p>For information about the maximum number of inline policies that you can embed in a
+ *          <p>For information about the maximum number of inline policies that you can embed in a
  *             group, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>
- *         <note>
+ *          <note>
  *             <p>Because policy documents can be large, you should use POST rather than GET when
  *                 calling <code>PutGroupPolicy</code>. For general information about using the Query
  *                 API with IAM, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making query requests</a> in the
  *                     <i>IAM User Guide</i>.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, PutGroupPolicyCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, PutGroupPolicyCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // PutGroupPolicyRequest
+ *   GroupName: "STRING_VALUE", // required
+ *   PolicyName: "STRING_VALUE", // required
+ *   PolicyDocument: "STRING_VALUE", // required
+ * };
  * const command = new PutGroupPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutGroupPolicyCommandInput - {@link PutGroupPolicyCommandInput}
+ * @returns {@link PutGroupPolicyCommandOutput}
  * @see {@link PutGroupPolicyCommandInput} for command's `input` shape.
  * @see {@link PutGroupPolicyCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *       Amazon Web Services account limits. The error message describes the limit exceeded.</p>
+ *
+ * @throws {@link MalformedPolicyDocumentException} (client fault)
+ *  <p>The request was rejected because the policy document was malformed. The error message
+ *       describes the specific error.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To add a policy to a group
+ * ```javascript
+ * // The following command adds a policy named IAMReadAccess to the IAM group named PowerUsers.
+ * const input = {
+ *   GroupName: "PowerUsers",
+ *   PolicyDocument: `{"Version":"2012-10-17","Statement":{"Effect":"Allow","Action":["iam:Get*","iam:List*","iam:Generate*"],"Resource":"*"}}`,
+ *   PolicyName: "IAMReadAccess"
+ * };
+ * const command = new PutGroupPolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class PutGroupPolicyCommand extends $Command<
-  PutGroupPolicyCommandInput,
-  PutGroupPolicyCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutGroupPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutGroupPolicyCommandInput, PutGroupPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "PutGroupPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutGroupPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutGroupPolicyCommand extends command<PutGroupPolicyCommandInput, PutGroupPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutGroupPolicy",
+  PutGroupPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutGroupPolicyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutGroupPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryPutGroupPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutGroupPolicyCommandOutput> {
-    return deserializeAws_queryPutGroupPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutGroupPolicyCommandInput;
+      output: PutGroupPolicyCommandOutput;
+    };
+  };
 }

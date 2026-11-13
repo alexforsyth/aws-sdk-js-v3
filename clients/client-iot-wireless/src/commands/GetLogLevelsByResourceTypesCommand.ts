@@ -1,101 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { GetLogLevelsByResourceTypesRequest, GetLogLevelsByResourceTypesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetLogLevelsByResourceTypesCommand,
-  serializeAws_restJson1GetLogLevelsByResourceTypesCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetLogLevelsByResourceTypesCommandInput extends GetLogLevelsByResourceTypesRequest {}
-export interface GetLogLevelsByResourceTypesCommandOutput
-  extends GetLogLevelsByResourceTypesResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLogLevelsByResourceTypesRequest, GetLogLevelsByResourceTypesResponse } from "../models/models_0";
+import { GetLogLevelsByResourceTypes$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns current default log levels or log levels by resource types. Based on resource types, log levels can be
- *             for wireless device log options or wireless gateway log options.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLogLevelsByResourceTypesCommand}.
+ */
+export interface GetLogLevelsByResourceTypesCommandInput extends GetLogLevelsByResourceTypesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLogLevelsByResourceTypesCommand}.
+ */
+export interface GetLogLevelsByResourceTypesCommandOutput extends GetLogLevelsByResourceTypesResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns current default log levels or log levels by resource types. Based on the
+ *             resource type, log levels can be returned for wireless device, wireless gateway, or
+ *             FUOTA task log options.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTWirelessClient, GetLogLevelsByResourceTypesCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, GetLogLevelsByResourceTypesCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = {};
  * const command = new GetLogLevelsByResourceTypesCommand(input);
  * const response = await client.send(command);
+ * // { // GetLogLevelsByResourceTypesResponse
+ * //   DefaultLogLevel: "INFO" || "ERROR" || "DISABLED",
+ * //   WirelessGatewayLogOptions: [ // WirelessGatewayLogOptionList
+ * //     { // WirelessGatewayLogOption
+ * //       Type: "LoRaWAN", // required
+ * //       LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ * //       Events: [ // WirelessGatewayEventLogOptionList
+ * //         { // WirelessGatewayEventLogOption
+ * //           Event: "CUPS_Request" || "Certificate", // required
+ * //           LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   WirelessDeviceLogOptions: [ // WirelessDeviceLogOptionList
+ * //     { // WirelessDeviceLogOption
+ * //       Type: "Sidewalk" || "LoRaWAN", // required
+ * //       LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ * //       Events: [ // WirelessDeviceEventLogOptionList
+ * //         { // WirelessDeviceEventLogOption
+ * //           Event: "Join" || "Rejoin" || "Uplink_Data" || "Downlink_Data" || "Registration", // required
+ * //           LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   FuotaTaskLogOptions: [ // FuotaTaskLogOptionList
+ * //     { // FuotaTaskLogOption
+ * //       Type: "LoRaWAN", // required
+ * //       LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ * //       Events: [ // FuotaTaskEventLogOptionList
+ * //         { // FuotaTaskEventLogOption
+ * //           Event: "Fuota", // required
+ * //           LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetLogLevelsByResourceTypesCommandInput - {@link GetLogLevelsByResourceTypesCommandInput}
+ * @returns {@link GetLogLevelsByResourceTypesCommandOutput}
  * @see {@link GetLogLevelsByResourceTypesCommandInput} for command's `input` shape.
  * @see {@link GetLogLevelsByResourceTypesCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class GetLogLevelsByResourceTypesCommand extends $Command<
-  GetLogLevelsByResourceTypesCommandInput,
-  GetLogLevelsByResourceTypesCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLogLevelsByResourceTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLogLevelsByResourceTypesCommandInput, GetLogLevelsByResourceTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "GetLogLevelsByResourceTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLogLevelsByResourceTypesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLogLevelsByResourceTypesResponse.filterSensitiveLog,
+export class GetLogLevelsByResourceTypesCommand extends command<GetLogLevelsByResourceTypesCommandInput, GetLogLevelsByResourceTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLogLevelsByResourceTypes",
+  GetLogLevelsByResourceTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetLogLevelsByResourceTypesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLogLevelsByResourceTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetLogLevelsByResourceTypesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetLogLevelsByResourceTypesCommandOutput> {
-    return deserializeAws_restJson1GetLogLevelsByResourceTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLogLevelsByResourceTypesCommandInput;
+      output: GetLogLevelsByResourceTypesCommandOutput;
+    };
+  };
 }

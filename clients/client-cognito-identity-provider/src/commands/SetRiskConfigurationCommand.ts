@@ -1,105 +1,244 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { SetRiskConfigurationRequest, SetRiskConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SetRiskConfigurationCommand,
-  serializeAws_json1_1SetRiskConfigurationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetRiskConfigurationRequest, SetRiskConfigurationResponse } from "../models/models_1";
+import { SetRiskConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetRiskConfigurationCommand}.
+ */
 export interface SetRiskConfigurationCommandInput extends SetRiskConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SetRiskConfigurationCommand}.
+ */
 export interface SetRiskConfigurationCommandOutput extends SetRiskConfigurationResponse, __MetadataBearer {}
 
 /**
- * <p>Configures actions on detected risks. To delete the risk configuration for
- *                 <code>UserPoolId</code> or <code>ClientId</code>, pass null values for all four
- *             configuration types.</p>
- *         <p>To enable Amazon Cognito advanced security features, update the user pool to include
- *             the <code>UserPoolAddOns</code> key<code>AdvancedSecurityMode</code>.</p>
+ * <p>Configures threat protection for a user pool or app client. Sets configuration for the
+ *             following.</p>
+ *          <ul>
+ *             <li>
+ *                <p>Responses to risks with adaptive authentication</p>
+ *             </li>
+ *             <li>
+ *                <p>Responses to vulnerable passwords with compromised-credentials
+ *                     detection</p>
+ *             </li>
+ *             <li>
+ *                <p>Notifications to users who have had risky activity detected</p>
+ *             </li>
+ *             <li>
+ *                <p>IP-address denylist and allowlist</p>
+ *             </li>
+ *          </ul>
+ *          <p>To set the risk configuration for the user pool to defaults, send this request with
+ *             only the <code>UserPoolId</code> parameter. To reset the threat protection settings of
+ *             an app client to be inherited from the user pool, send <code>UserPoolId</code> and
+ *                 <code>ClientId</code> parameters only. To change threat protection to audit-only or
+ *             off, update the value of <code>UserPoolAddOns</code> in an <code>UpdateUserPool</code>
+ *             request. To activate this setting, your user pool must be on the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html">
+ *                      Plus tier</a>.</p>
+ *          <p>In secondary regions for user pools with multi-region replication, only the
+ *                 <code>SourceARN</code> and <code>From</code> attributes of
+ *                 <code>NotifyConfiguration</code> can be modified to configure region-specific SES
+ *             integration. All other risk configuration settings must match the existing values to
+ *             maintain consistency across replicas.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, SetRiskConfigurationCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, SetRiskConfigurationCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // SetRiskConfigurationRequest
+ *   UserPoolId: "STRING_VALUE", // required
+ *   ClientId: "STRING_VALUE",
+ *   CompromisedCredentialsRiskConfiguration: { // CompromisedCredentialsRiskConfigurationType
+ *     EventFilter: [ // EventFiltersType
+ *       "SIGN_IN" || "PASSWORD_CHANGE" || "SIGN_UP",
+ *     ],
+ *     Actions: { // CompromisedCredentialsActionsType
+ *       EventAction: "BLOCK" || "NO_ACTION", // required
+ *     },
+ *   },
+ *   AccountTakeoverRiskConfiguration: { // AccountTakeoverRiskConfigurationType
+ *     NotifyConfiguration: { // NotifyConfigurationType
+ *       From: "STRING_VALUE",
+ *       ReplyTo: "STRING_VALUE",
+ *       SourceArn: "STRING_VALUE", // required
+ *       BlockEmail: { // NotifyEmailType
+ *         Subject: "STRING_VALUE", // required
+ *         HtmlBody: "STRING_VALUE",
+ *         TextBody: "STRING_VALUE",
+ *       },
+ *       NoActionEmail: {
+ *         Subject: "STRING_VALUE", // required
+ *         HtmlBody: "STRING_VALUE",
+ *         TextBody: "STRING_VALUE",
+ *       },
+ *       MfaEmail: {
+ *         Subject: "STRING_VALUE", // required
+ *         HtmlBody: "STRING_VALUE",
+ *         TextBody: "STRING_VALUE",
+ *       },
+ *     },
+ *     Actions: { // AccountTakeoverActionsType
+ *       LowAction: { // AccountTakeoverActionType
+ *         Notify: true || false, // required
+ *         EventAction: "BLOCK" || "MFA_IF_CONFIGURED" || "MFA_REQUIRED" || "NO_ACTION", // required
+ *       },
+ *       MediumAction: {
+ *         Notify: true || false, // required
+ *         EventAction: "BLOCK" || "MFA_IF_CONFIGURED" || "MFA_REQUIRED" || "NO_ACTION", // required
+ *       },
+ *       HighAction: {
+ *         Notify: true || false, // required
+ *         EventAction: "BLOCK" || "MFA_IF_CONFIGURED" || "MFA_REQUIRED" || "NO_ACTION", // required
+ *       },
+ *     },
+ *   },
+ *   RiskExceptionConfiguration: { // RiskExceptionConfigurationType
+ *     BlockedIPRangeList: [ // BlockedIPRangeListType
+ *       "STRING_VALUE",
+ *     ],
+ *     SkippedIPRangeList: [ // SkippedIPRangeListType
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new SetRiskConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // SetRiskConfigurationResponse
+ * //   RiskConfiguration: { // RiskConfigurationType
+ * //     UserPoolId: "STRING_VALUE",
+ * //     ClientId: "STRING_VALUE",
+ * //     CompromisedCredentialsRiskConfiguration: { // CompromisedCredentialsRiskConfigurationType
+ * //       EventFilter: [ // EventFiltersType
+ * //         "SIGN_IN" || "PASSWORD_CHANGE" || "SIGN_UP",
+ * //       ],
+ * //       Actions: { // CompromisedCredentialsActionsType
+ * //         EventAction: "BLOCK" || "NO_ACTION", // required
+ * //       },
+ * //     },
+ * //     AccountTakeoverRiskConfiguration: { // AccountTakeoverRiskConfigurationType
+ * //       NotifyConfiguration: { // NotifyConfigurationType
+ * //         From: "STRING_VALUE",
+ * //         ReplyTo: "STRING_VALUE",
+ * //         SourceArn: "STRING_VALUE", // required
+ * //         BlockEmail: { // NotifyEmailType
+ * //           Subject: "STRING_VALUE", // required
+ * //           HtmlBody: "STRING_VALUE",
+ * //           TextBody: "STRING_VALUE",
+ * //         },
+ * //         NoActionEmail: {
+ * //           Subject: "STRING_VALUE", // required
+ * //           HtmlBody: "STRING_VALUE",
+ * //           TextBody: "STRING_VALUE",
+ * //         },
+ * //         MfaEmail: {
+ * //           Subject: "STRING_VALUE", // required
+ * //           HtmlBody: "STRING_VALUE",
+ * //           TextBody: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Actions: { // AccountTakeoverActionsType
+ * //         LowAction: { // AccountTakeoverActionType
+ * //           Notify: true || false, // required
+ * //           EventAction: "BLOCK" || "MFA_IF_CONFIGURED" || "MFA_REQUIRED" || "NO_ACTION", // required
+ * //         },
+ * //         MediumAction: {
+ * //           Notify: true || false, // required
+ * //           EventAction: "BLOCK" || "MFA_IF_CONFIGURED" || "MFA_REQUIRED" || "NO_ACTION", // required
+ * //         },
+ * //         HighAction: {
+ * //           Notify: true || false, // required
+ * //           EventAction: "BLOCK" || "MFA_IF_CONFIGURED" || "MFA_REQUIRED" || "NO_ACTION", // required
+ * //         },
+ * //       },
+ * //     },
+ * //     RiskExceptionConfiguration: { // RiskExceptionConfigurationType
+ * //       BlockedIPRangeList: [ // BlockedIPRangeListType
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SkippedIPRangeList: [ // SkippedIPRangeListType
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     LastModifiedDate: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param SetRiskConfigurationCommandInput - {@link SetRiskConfigurationCommandInput}
+ * @returns {@link SetRiskConfigurationCommandOutput}
  * @see {@link SetRiskConfigurationCommandInput} for command's `input` shape.
  * @see {@link SetRiskConfigurationCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link CodeDeliveryFailureException} (client fault)
+ *  <p>This exception is thrown when a verification code fails to deliver
+ *             successfully.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidEmailRoleAccessPolicyException} (client fault)
+ *  <p>This exception is thrown when Amazon Cognito isn't allowed to use your email identity. HTTP
+ *             status code: 400.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>This exception is thrown when the user has made too many requests for a given
+ *             operation.</p>
+ *
+ * @throws {@link UserPoolAddOnNotEnabledException} (client fault)
+ *  <p>This exception is thrown when user pool add-ons aren't enabled.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class SetRiskConfigurationCommand extends $Command<
-  SetRiskConfigurationCommandInput,
-  SetRiskConfigurationCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetRiskConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetRiskConfigurationCommandInput, SetRiskConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "SetRiskConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetRiskConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SetRiskConfigurationResponse.filterSensitiveLog,
+export class SetRiskConfigurationCommand extends command<SetRiskConfigurationCommandInput, SetRiskConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetRiskConfiguration",
+  SetRiskConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetRiskConfigurationRequest;
+      output: SetRiskConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetRiskConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SetRiskConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetRiskConfigurationCommandOutput> {
-    return deserializeAws_json1_1SetRiskConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetRiskConfigurationCommandInput;
+      output: SetRiskConfigurationCommandOutput;
+    };
+  };
 }

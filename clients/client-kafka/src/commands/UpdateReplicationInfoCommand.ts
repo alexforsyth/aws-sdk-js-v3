@@ -1,0 +1,140 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateReplicationInfoRequest, UpdateReplicationInfoResponse } from "../models/models_0";
+import { UpdateReplicationInfo$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateReplicationInfoCommand}.
+ */
+export interface UpdateReplicationInfoCommandInput extends UpdateReplicationInfoRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateReplicationInfoCommand}.
+ */
+export interface UpdateReplicationInfoCommandOutput extends UpdateReplicationInfoResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates replication info of a replicator.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { KafkaClient, UpdateReplicationInfoCommand } from "@aws-sdk/client-kafka"; // ES Modules import
+ * // const { KafkaClient, UpdateReplicationInfoCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
+ * const client = new KafkaClient(config);
+ * const input = { // UpdateReplicationInfoRequest
+ *   ConsumerGroupReplication: { // ConsumerGroupReplicationUpdate
+ *     ConsumerGroupsToExclude: [ // __listOf__stringMax256 // required
+ *       "STRING_VALUE",
+ *     ],
+ *     ConsumerGroupsToReplicate: [ // required
+ *       "STRING_VALUE",
+ *     ],
+ *     DetectAndCopyNewConsumerGroups: true || false, // required
+ *     SynchroniseConsumerGroupOffsets: true || false, // required
+ *   },
+ *   CurrentVersion: "STRING_VALUE", // required
+ *   ReplicatorArn: "STRING_VALUE", // required
+ *   SourceKafkaClusterArn: "STRING_VALUE",
+ *   SourceKafkaClusterId: "STRING_VALUE",
+ *   TargetKafkaClusterArn: "STRING_VALUE",
+ *   TargetKafkaClusterId: "STRING_VALUE",
+ *   TopicReplication: { // TopicReplicationUpdate
+ *     CopyAccessControlListsForTopics: true || false, // required
+ *     CopyTopicConfigurations: true || false, // required
+ *     DetectAndCopyNewTopics: true || false, // required
+ *     TopicsToExclude: [ // __listOf__stringMax249 // required
+ *       "STRING_VALUE",
+ *     ],
+ *     TopicsToReplicate: [ // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   LogDelivery: { // LogDelivery
+ *     ReplicatorLogDelivery: { // ReplicatorLogDelivery
+ *       CloudWatchLogs: { // ReplicatorCloudWatchLogs
+ *         Enabled: true || false, // required
+ *         LogGroup: "STRING_VALUE",
+ *       },
+ *       Firehose: { // ReplicatorFirehose
+ *         Enabled: true || false, // required
+ *         DeliveryStream: "STRING_VALUE",
+ *       },
+ *       S3: { // ReplicatorS3
+ *         Enabled: true || false, // required
+ *         Bucket: "STRING_VALUE",
+ *         Prefix: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ * };
+ * const command = new UpdateReplicationInfoCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateReplicationInfoResponse
+ * //   ReplicatorArn: "STRING_VALUE",
+ * //   ReplicatorState: "RUNNING" || "CREATING" || "UPDATING" || "DELETING" || "FAILED",
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateReplicationInfoCommandInput - {@link UpdateReplicationInfoCommandInput}
+ * @returns {@link UpdateReplicationInfoCommandOutput}
+ * @see {@link UpdateReplicationInfoCommandInput} for command's `input` shape.
+ * @see {@link UpdateReplicationInfoCommandOutput} for command's `response` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateReplicationInfoCommand extends command<UpdateReplicationInfoCommandInput, UpdateReplicationInfoCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateReplicationInfo",
+  UpdateReplicationInfo$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateReplicationInfoRequest;
+      output: UpdateReplicationInfoResponse;
+    };
+    sdk: {
+      input: UpdateReplicationInfoCommandInput;
+      output: UpdateReplicationInfoCommandOutput;
+    };
+  };
+}

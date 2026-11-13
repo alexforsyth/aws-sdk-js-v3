@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListTrialComponentsCommand,
   ListTrialComponentsCommandInput,
   ListTrialComponentsCommandOutput,
 } from "../commands/ListTrialComponentsCommand";
-import { SageMaker } from "../SageMaker";
 import { SageMakerClient } from "../SageMakerClient";
-import { SageMakerPaginationConfiguration } from "./Interfaces";
+import type { SageMakerPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: SageMakerClient,
-  input: ListTrialComponentsCommandInput,
-  ...args: any
-): Promise<ListTrialComponentsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListTrialComponentsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: SageMaker,
-  input: ListTrialComponentsCommandInput,
-  ...args: any
-): Promise<ListTrialComponentsCommandOutput> => {
-  // @ts-ignore
-  return await client.listTrialComponents(input, ...args);
-};
-export async function* paginateListTrialComponents(
+export const paginateListTrialComponents: (
   config: SageMakerPaginationConfiguration,
   input: ListTrialComponentsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListTrialComponentsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListTrialComponentsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof SageMaker) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof SageMakerClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected SageMaker | SageMakerClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListTrialComponentsCommandOutput> = createPaginator<
+  SageMakerPaginationConfiguration,
+  ListTrialComponentsCommandInput,
+  ListTrialComponentsCommandOutput
+>(SageMakerClient, ListTrialComponentsCommand, "NextToken", "NextToken", "MaxResults");

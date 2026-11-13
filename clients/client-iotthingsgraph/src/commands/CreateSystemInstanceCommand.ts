@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { CreateSystemInstanceRequest, CreateSystemInstanceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateSystemInstanceCommand,
-  serializeAws_json1_1CreateSystemInstanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSystemInstanceRequest, CreateSystemInstanceResponse } from "../models/models_0";
+import { CreateSystemInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSystemInstanceCommand}.
+ */
 export interface CreateSystemInstanceCommandInput extends CreateSystemInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSystemInstanceCommand}.
+ */
 export interface CreateSystemInstanceCommandOutput extends CreateSystemInstanceResponse, __MetadataBearer {}
 
 /**
@@ -31,73 +32,96 @@ export interface CreateSystemInstanceCommandOutput extends CreateSystemInstanceR
  *          <p>For cloud deployments, this action requires a <code>flowActionsRoleArn</code> value. This is an IAM role
  *       that has permissions to access AWS services, such as AWS Lambda and AWS IoT, that the flow uses when it executes.</p>
  *          <p>If the definition document doesn't specify a version of the user's namespace, the latest version will be used by default.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, CreateSystemInstanceCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, CreateSystemInstanceCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // CreateSystemInstanceRequest
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   definition: { // DefinitionDocument
+ *     language: "GRAPHQL", // required
+ *     text: "STRING_VALUE", // required
+ *   },
+ *   target: "GREENGRASS" || "CLOUD", // required
+ *   greengrassGroupName: "STRING_VALUE",
+ *   s3BucketName: "STRING_VALUE",
+ *   metricsConfiguration: { // MetricsConfiguration
+ *     cloudMetricEnabled: true || false,
+ *     metricRuleRoleArn: "STRING_VALUE",
+ *   },
+ *   flowActionsRoleArn: "STRING_VALUE",
+ * };
  * const command = new CreateSystemInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSystemInstanceResponse
+ * //   summary: { // SystemInstanceSummary
+ * //     id: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     status: "NOT_DEPLOYED" || "BOOTSTRAP" || "DEPLOY_IN_PROGRESS" || "DEPLOYED_IN_TARGET" || "UNDEPLOY_IN_PROGRESS" || "FAILED" || "PENDING_DELETE" || "DELETED_IN_TARGET",
+ * //     target: "GREENGRASS" || "CLOUD",
+ * //     greengrassGroupName: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     greengrassGroupId: "STRING_VALUE",
+ * //     greengrassGroupVersionId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateSystemInstanceCommandInput - {@link CreateSystemInstanceCommandInput}
+ * @returns {@link CreateSystemInstanceCommandOutput}
  * @see {@link CreateSystemInstanceCommandInput} for command's `input` shape.
  * @see {@link CreateSystemInstanceCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSystemInstanceCommand extends $Command<
-  CreateSystemInstanceCommandInput,
-  CreateSystemInstanceCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSystemInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSystemInstanceCommandInput, CreateSystemInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "CreateSystemInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSystemInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSystemInstanceResponse.filterSensitiveLog,
+export class CreateSystemInstanceCommand extends command<CreateSystemInstanceCommandInput, CreateSystemInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSystemInstance",
+  CreateSystemInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSystemInstanceRequest;
+      output: CreateSystemInstanceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSystemInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateSystemInstanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSystemInstanceCommandOutput> {
-    return deserializeAws_json1_1CreateSystemInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSystemInstanceCommandInput;
+      output: CreateSystemInstanceCommandOutput;
+    };
+  };
 }

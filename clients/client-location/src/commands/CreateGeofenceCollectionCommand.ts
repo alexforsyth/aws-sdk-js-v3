@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { CreateGeofenceCollectionRequest, CreateGeofenceCollectionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateGeofenceCollectionCommand,
-  serializeAws_restJson1CreateGeofenceCollectionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGeofenceCollectionRequest, CreateGeofenceCollectionResponse } from "../models/models_0";
+import { CreateGeofenceCollection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGeofenceCollectionCommand}.
+ */
 export interface CreateGeofenceCollectionCommandInput extends CreateGeofenceCollectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGeofenceCollectionCommand}.
+ */
 export interface CreateGeofenceCollectionCommandOutput extends CreateGeofenceCollectionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,74 @@ export interface CreateGeofenceCollectionCommandOutput extends CreateGeofenceCol
  * ```javascript
  * import { LocationClient, CreateGeofenceCollectionCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, CreateGeofenceCollectionCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // CreateGeofenceCollectionRequest
+ *   CollectionName: "STRING_VALUE", // required
+ *   PricingPlan: "STRING_VALUE",
+ *   PricingPlanDataSource: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   KmsKeyId: "STRING_VALUE",
+ * };
  * const command = new CreateGeofenceCollectionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGeofenceCollectionResponse
+ * //   CollectionName: "STRING_VALUE", // required
+ * //   CollectionArn: "STRING_VALUE", // required
+ * //   CreateTime: new Date("TIMESTAMP"), // required
+ * // };
+ *
  * ```
  *
+ * @param CreateGeofenceCollectionCommandInput - {@link CreateGeofenceCollectionCommandInput}
+ * @returns {@link CreateGeofenceCollectionCommandOutput}
  * @see {@link CreateGeofenceCollectionCommandInput} for command's `input` shape.
  * @see {@link CreateGeofenceCollectionCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request was unsuccessful because of a conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The operation was denied because the request would exceed the maximum <a href="https://docs.aws.amazon.com/location/previous/developerguide/location-quotas.html">quota</a> set for Amazon Location Service.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class CreateGeofenceCollectionCommand extends $Command<
-  CreateGeofenceCollectionCommandInput,
-  CreateGeofenceCollectionCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGeofenceCollectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGeofenceCollectionCommandInput, CreateGeofenceCollectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "CreateGeofenceCollectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGeofenceCollectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateGeofenceCollectionResponse.filterSensitiveLog,
+export class CreateGeofenceCollectionCommand extends command<CreateGeofenceCollectionCommandInput, CreateGeofenceCollectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGeofenceCollection",
+  CreateGeofenceCollection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGeofenceCollectionRequest;
+      output: CreateGeofenceCollectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGeofenceCollectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateGeofenceCollectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGeofenceCollectionCommandOutput> {
-    return deserializeAws_restJson1CreateGeofenceCollectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGeofenceCollectionCommandInput;
+      output: CreateGeofenceCollectionCommandOutput;
+    };
+  };
 }

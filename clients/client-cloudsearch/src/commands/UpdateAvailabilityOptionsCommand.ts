@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { UpdateAvailabilityOptionsRequest, UpdateAvailabilityOptionsResponse } from "../models/models_0";
-import {
-  deserializeAws_queryUpdateAvailabilityOptionsCommand,
-  serializeAws_queryUpdateAvailabilityOptionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAvailabilityOptionsRequest, UpdateAvailabilityOptionsResponse } from "../models/models_0";
+import { UpdateAvailabilityOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAvailabilityOptionsCommand}.
+ */
 export interface UpdateAvailabilityOptionsCommandInput extends UpdateAvailabilityOptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAvailabilityOptionsCommand}.
+ */
 export interface UpdateAvailabilityOptionsCommandOutput extends UpdateAvailabilityOptionsResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,79 @@ export interface UpdateAvailabilityOptionsCommandOutput extends UpdateAvailabili
  * ```javascript
  * import { CloudSearchClient, UpdateAvailabilityOptionsCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, UpdateAvailabilityOptionsCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // UpdateAvailabilityOptionsRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   MultiAZ: true || false, // required
+ * };
  * const command = new UpdateAvailabilityOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateAvailabilityOptionsResponse
+ * //   AvailabilityOptions: { // AvailabilityOptionsStatus
+ * //     Options: true || false, // required
+ * //     Status: { // OptionStatus
+ * //       CreationDate: new Date("TIMESTAMP"), // required
+ * //       UpdateDate: new Date("TIMESTAMP"), // required
+ * //       UpdateVersion: Number("int"),
+ * //       State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //       PendingDeletion: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateAvailabilityOptionsCommandInput - {@link UpdateAvailabilityOptionsCommandInput}
+ * @returns {@link UpdateAvailabilityOptionsCommandOutput}
  * @see {@link UpdateAvailabilityOptionsCommandInput} for command's `input` shape.
  * @see {@link UpdateAvailabilityOptionsCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>The request was rejected because it attempted an operation which is not enabled.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link InvalidTypeException} (client fault)
+ *  <p>The request was rejected because it specified an invalid type definition.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because a resource limit has already been met.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was rejected because it has invalid parameters.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAvailabilityOptionsCommand extends $Command<
-  UpdateAvailabilityOptionsCommandInput,
-  UpdateAvailabilityOptionsCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAvailabilityOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAvailabilityOptionsCommandInput, UpdateAvailabilityOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "UpdateAvailabilityOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAvailabilityOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateAvailabilityOptionsResponse.filterSensitiveLog,
+export class UpdateAvailabilityOptionsCommand extends command<UpdateAvailabilityOptionsCommandInput, UpdateAvailabilityOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAvailabilityOptions",
+  UpdateAvailabilityOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAvailabilityOptionsRequest;
+      output: UpdateAvailabilityOptionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAvailabilityOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryUpdateAvailabilityOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateAvailabilityOptionsCommandOutput> {
-    return deserializeAws_queryUpdateAvailabilityOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAvailabilityOptionsCommandInput;
+      output: UpdateAvailabilityOptionsCommandOutput;
+    };
+  };
 }

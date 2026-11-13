@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CloudSearchDomainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CloudSearchDomainClient";
-import { SuggestRequest, SuggestResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SuggestCommand,
-  serializeAws_restJson1SuggestCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SuggestRequest, SuggestResponse } from "../models/models_0";
+import { Suggest$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SuggestCommand}.
+ */
 export interface SuggestCommandInput extends SuggestRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SuggestCommand}.
+ */
 export interface SuggestCommandOutput extends SuggestResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +32,66 @@ export interface SuggestCommandOutput extends SuggestResponse, __MetadataBearer 
  * ```javascript
  * import { CloudSearchDomainClient, SuggestCommand } from "@aws-sdk/client-cloudsearch-domain"; // ES Modules import
  * // const { CloudSearchDomainClient, SuggestCommand } = require("@aws-sdk/client-cloudsearch-domain"); // CommonJS import
+ * // import type { CloudSearchDomainClientConfig } from "@aws-sdk/client-cloudsearch-domain";
+ * const config = {}; // type is CloudSearchDomainClientConfig
  * const client = new CloudSearchDomainClient(config);
+ * const input = { // SuggestRequest
+ *   query: "STRING_VALUE", // required
+ *   suggester: "STRING_VALUE", // required
+ *   size: Number("long"),
+ * };
  * const command = new SuggestCommand(input);
  * const response = await client.send(command);
+ * // { // SuggestResponse
+ * //   status: { // SuggestStatus
+ * //     timems: Number("long"),
+ * //     rid: "STRING_VALUE",
+ * //   },
+ * //   suggest: { // SuggestModel
+ * //     query: "STRING_VALUE",
+ * //     found: Number("long"),
+ * //     suggestions: [ // Suggestions
+ * //       { // SuggestionMatch
+ * //         suggestion: "STRING_VALUE",
+ * //         score: Number("long"),
+ * //         id: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param SuggestCommandInput - {@link SuggestCommandInput}
+ * @returns {@link SuggestCommandOutput}
  * @see {@link SuggestCommandInput} for command's `input` shape.
  * @see {@link SuggestCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchDomainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchDomainClientResolvedConfig | config} for CloudSearchDomainClient's `config` shape.
  *
+ * @throws {@link SearchException} (client fault)
+ *  <p>Information about any problems encountered while processing a search request.</p>
+ *
+ * @throws {@link CloudSearchDomainServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearchDomain service.</p>
+ *
+ *
+ * @public
  */
-export class SuggestCommand extends $Command<
-  SuggestCommandInput,
-  SuggestCommandOutput,
-  CloudSearchDomainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SuggestCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchDomainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SuggestCommandInput, SuggestCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchDomainClient";
-    const commandName = "SuggestCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SuggestRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SuggestResponse.filterSensitiveLog,
+export class SuggestCommand extends command<SuggestCommandInput, SuggestCommandOutput>(
+  _ep0,
+  _mw0,
+  "Suggest",
+  Suggest$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SuggestRequest;
+      output: SuggestResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SuggestCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SuggestCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SuggestCommandOutput> {
-    return deserializeAws_restJson1SuggestCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SuggestCommandInput;
+      output: SuggestCommandOutput;
+    };
+  };
 }

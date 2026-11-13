@@ -1,0 +1,124 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartAttachedFileUploadRequest, StartAttachedFileUploadResponse } from "../models/models_3";
+import { StartAttachedFileUpload$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartAttachedFileUploadCommand}.
+ */
+export interface StartAttachedFileUploadCommandInput extends StartAttachedFileUploadRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartAttachedFileUploadCommand}.
+ */
+export interface StartAttachedFileUploadCommandOutput extends StartAttachedFileUploadResponse, __MetadataBearer {}
+
+/**
+ * <p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>
+ *          <important>
+ *             <p>You may only use this API to upload attachments to a <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html">Connect Customer Case</a>, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html">Connect Customer Email</a>, or
+ *      <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html">Connect Customer Task</a>. </p>
+ *          </important>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, StartAttachedFileUploadCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, StartAttachedFileUploadCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // StartAttachedFileUploadRequest
+ *   ClientToken: "STRING_VALUE",
+ *   InstanceId: "STRING_VALUE", // required
+ *   FileName: "STRING_VALUE", // required
+ *   FileSizeInBytes: Number("long"), // required
+ *   UrlExpiryInSeconds: Number("int"),
+ *   FileUseCaseType: "CONTACT_ANALYSIS" || "EMAIL_MESSAGE" || "EMAIL_MESSAGE_PLAIN_TEXT" || "EMAIL_MESSAGE_REDACTED" || "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" || "ATTACHMENT" || "VOICE_RECORDING", // required
+ *   AssociatedResourceArn: "STRING_VALUE", // required
+ *   CreatedBy: { // CreatedByInfo Union: only one key present
+ *     ConnectUserArn: "STRING_VALUE",
+ *     AWSIdentityArn: "STRING_VALUE",
+ *   },
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new StartAttachedFileUploadCommand(input);
+ * const response = await client.send(command);
+ * // { // StartAttachedFileUploadResponse
+ * //   FileArn: "STRING_VALUE",
+ * //   FileId: "STRING_VALUE",
+ * //   CreationTime: "STRING_VALUE",
+ * //   FileStatus: "APPROVED" || "REJECTED" || "PROCESSING" || "FAILED" || "DRAFTING",
+ * //   CreatedBy: { // CreatedByInfo Union: only one key present
+ * //     ConnectUserArn: "STRING_VALUE",
+ * //     AWSIdentityArn: "STRING_VALUE",
+ * //   },
+ * //   UploadUrlMetadata: { // UploadUrlMetadata
+ * //     Url: "STRING_VALUE",
+ * //     UrlExpiry: "STRING_VALUE",
+ * //     HeadersToInclude: { // UrlMetadataSignedHeaders
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param StartAttachedFileUploadCommandInput - {@link StartAttachedFileUploadCommandInput}
+ * @returns {@link StartAttachedFileUploadCommandOutput}
+ * @see {@link StartAttachedFileUploadCommandInput} for command's `input` shape.
+ * @see {@link StartAttachedFileUploadCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>A resource already has that name.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class StartAttachedFileUploadCommand extends command<StartAttachedFileUploadCommandInput, StartAttachedFileUploadCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartAttachedFileUpload",
+  StartAttachedFileUpload$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartAttachedFileUploadRequest;
+      output: StartAttachedFileUploadResponse;
+    };
+    sdk: {
+      input: StartAttachedFileUploadCommandInput;
+      output: StartAttachedFileUploadCommandOutput;
+    };
+  };
+}

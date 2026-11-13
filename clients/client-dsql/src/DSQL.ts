@@ -1,0 +1,476 @@
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
+
+import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
+  CreateClusterCommand,
+} from "./commands/CreateClusterCommand";
+import {
+  type CreateStreamCommandInput,
+  type CreateStreamCommandOutput,
+  CreateStreamCommand,
+} from "./commands/CreateStreamCommand";
+import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
+  DeleteClusterCommand,
+} from "./commands/DeleteClusterCommand";
+import {
+  type DeleteClusterPolicyCommandInput,
+  type DeleteClusterPolicyCommandOutput,
+  DeleteClusterPolicyCommand,
+} from "./commands/DeleteClusterPolicyCommand";
+import {
+  type DeleteStreamCommandInput,
+  type DeleteStreamCommandOutput,
+  DeleteStreamCommand,
+} from "./commands/DeleteStreamCommand";
+import {
+  type GetClusterCommandInput,
+  type GetClusterCommandOutput,
+  GetClusterCommand,
+} from "./commands/GetClusterCommand";
+import {
+  type GetClusterPolicyCommandInput,
+  type GetClusterPolicyCommandOutput,
+  GetClusterPolicyCommand,
+} from "./commands/GetClusterPolicyCommand";
+import { type GetStreamCommandInput, type GetStreamCommandOutput, GetStreamCommand } from "./commands/GetStreamCommand";
+import {
+  type GetVpcEndpointServiceNameCommandInput,
+  type GetVpcEndpointServiceNameCommandOutput,
+  GetVpcEndpointServiceNameCommand,
+} from "./commands/GetVpcEndpointServiceNameCommand";
+import {
+  type ListClustersCommandInput,
+  type ListClustersCommandOutput,
+  ListClustersCommand,
+} from "./commands/ListClustersCommand";
+import {
+  type ListStreamsCommandInput,
+  type ListStreamsCommandOutput,
+  ListStreamsCommand,
+} from "./commands/ListStreamsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutClusterPolicyCommandInput,
+  type PutClusterPolicyCommandOutput,
+  PutClusterPolicyCommand,
+} from "./commands/PutClusterPolicyCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateClusterCommandInput,
+  type UpdateClusterCommandOutput,
+  UpdateClusterCommand,
+} from "./commands/UpdateClusterCommand";
+import { DSQLClient } from "./DSQLClient";
+import type { DSQLServiceException } from "./models/DSQLServiceException";
+import type { ResourceNotFoundException } from "./models/errors";
+import { paginateListClusters } from "./pagination/ListClustersPaginator";
+import { paginateListStreams } from "./pagination/ListStreamsPaginator";
+import { waitUntilClusterActive } from "./waiters/waitForClusterActive";
+import { waitUntilClusterNotExists } from "./waiters/waitForClusterNotExists";
+import { waitUntilStreamActive } from "./waiters/waitForStreamActive";
+import { waitUntilStreamNotExists } from "./waiters/waitForStreamNotExists";
+
+const commands = {
+  CreateClusterCommand,
+  CreateStreamCommand,
+  DeleteClusterCommand,
+  DeleteClusterPolicyCommand,
+  DeleteStreamCommand,
+  GetClusterCommand,
+  GetClusterPolicyCommand,
+  GetStreamCommand,
+  GetVpcEndpointServiceNameCommand,
+  ListClustersCommand,
+  ListStreamsCommand,
+  ListTagsForResourceCommand,
+  PutClusterPolicyCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateClusterCommand,
+};
+const paginators = {
+  paginateListClusters,
+  paginateListStreams,
+};
+const waiters = {
+  waitUntilClusterActive,
+  waitUntilClusterNotExists,
+  waitUntilStreamActive,
+  waitUntilStreamNotExists,
+};
+
+/**
+ * @public
+ */
+export interface DSQLRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface DSQL {
+  /**
+   * @see {@link CreateClusterCommand}
+   */
+  createCluster(): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStreamCommand}
+   */
+  createStream(
+    args: CreateStreamCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<CreateStreamCommandOutput>;
+  createStream(
+    args: CreateStreamCommandInput,
+    cb: (err: any, data?: CreateStreamCommandOutput) => void
+  ): void;
+  createStream(
+    args: CreateStreamCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: CreateStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterCommand}
+   */
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<DeleteClusterCommandOutput>;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterPolicyCommand}
+   */
+  deleteClusterPolicy(
+    args: DeleteClusterPolicyCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<DeleteClusterPolicyCommandOutput>;
+  deleteClusterPolicy(
+    args: DeleteClusterPolicyCommandInput,
+    cb: (err: any, data?: DeleteClusterPolicyCommandOutput) => void
+  ): void;
+  deleteClusterPolicy(
+    args: DeleteClusterPolicyCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: DeleteClusterPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStreamCommand}
+   */
+  deleteStream(
+    args: DeleteStreamCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<DeleteStreamCommandOutput>;
+  deleteStream(
+    args: DeleteStreamCommandInput,
+    cb: (err: any, data?: DeleteStreamCommandOutput) => void
+  ): void;
+  deleteStream(
+    args: DeleteStreamCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: DeleteStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClusterCommand}
+   */
+  getCluster(
+    args: GetClusterCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<GetClusterCommandOutput>;
+  getCluster(
+    args: GetClusterCommandInput,
+    cb: (err: any, data?: GetClusterCommandOutput) => void
+  ): void;
+  getCluster(
+    args: GetClusterCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: GetClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClusterPolicyCommand}
+   */
+  getClusterPolicy(
+    args: GetClusterPolicyCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<GetClusterPolicyCommandOutput>;
+  getClusterPolicy(
+    args: GetClusterPolicyCommandInput,
+    cb: (err: any, data?: GetClusterPolicyCommandOutput) => void
+  ): void;
+  getClusterPolicy(
+    args: GetClusterPolicyCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: GetClusterPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStreamCommand}
+   */
+  getStream(
+    args: GetStreamCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<GetStreamCommandOutput>;
+  getStream(
+    args: GetStreamCommandInput,
+    cb: (err: any, data?: GetStreamCommandOutput) => void
+  ): void;
+  getStream(
+    args: GetStreamCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: GetStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVpcEndpointServiceNameCommand}
+   */
+  getVpcEndpointServiceName(
+    args: GetVpcEndpointServiceNameCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<GetVpcEndpointServiceNameCommandOutput>;
+  getVpcEndpointServiceName(
+    args: GetVpcEndpointServiceNameCommandInput,
+    cb: (err: any, data?: GetVpcEndpointServiceNameCommandOutput) => void
+  ): void;
+  getVpcEndpointServiceName(
+    args: GetVpcEndpointServiceNameCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: GetVpcEndpointServiceNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   */
+  listClusters(): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+  listClusters(
+    args: ListClustersCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamsCommand}
+   */
+  listStreams(
+    args: ListStreamsCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<ListStreamsCommandOutput>;
+  listStreams(
+    args: ListStreamsCommandInput,
+    cb: (err: any, data?: ListStreamsCommandOutput) => void
+  ): void;
+  listStreams(
+    args: ListStreamsCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: ListStreamsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutClusterPolicyCommand}
+   */
+  putClusterPolicy(
+    args: PutClusterPolicyCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<PutClusterPolicyCommandOutput>;
+  putClusterPolicy(
+    args: PutClusterPolicyCommandInput,
+    cb: (err: any, data?: PutClusterPolicyCommandOutput) => void
+  ): void;
+  putClusterPolicy(
+    args: PutClusterPolicyCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: PutClusterPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterCommand}
+   */
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options?: DSQLRequestOptions
+  ): Promise<UpdateClusterCommandOutput>;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options: DSQLRequestOptions,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersCommandOutput}.
+   */
+  paginateListClusters(
+    args?: ListClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersCommandOutput>;
+
+  /**
+   * @see {@link ListStreamsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamsCommandOutput}.
+   */
+  paginateListStreams(
+    args: ListStreamsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamsCommandOutput>;
+
+  /**
+   * @see {@link GetClusterCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilClusterActive(
+    args: GetClusterCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DSQL>, "client">
+  ): Promise<WaiterResult<GetClusterCommandOutput>>;
+
+  /**
+   * @see {@link GetClusterCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilClusterNotExists(
+    args: GetClusterCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DSQL>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link GetStreamCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStreamActive(
+    args: GetStreamCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DSQL>, "client">
+  ): Promise<WaiterResult<GetStreamCommandOutput>>;
+
+  /**
+   * @see {@link GetStreamCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStreamNotExists(
+    args: GetStreamCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DSQL>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+}
+
+/**
+ * <p>This is an interface reference for Amazon Aurora DSQL. It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Aurora DSQL.</p> <p>Amazon Aurora DSQL is a serverless, distributed SQL database suitable for workloads of any size. is available in both single-Region and multi-Region configurations, so your clusters and databases are always available even if an Availability Zone or an Amazon Web Services Region are unavailable. lets you focus on using your data to acquire new insights for your business and customers.</p>
+ * @public
+ */
+export class DSQL extends DSQLClient implements DSQL {}
+createAggregatedClient(commands, DSQL, { paginators, waiters });

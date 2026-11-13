@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LabelParameterVersionRequest, LabelParameterVersionResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1LabelParameterVersionCommand,
-  serializeAws_json1_1LabelParameterVersionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { LabelParameterVersionRequest, LabelParameterVersionResult } from "../models/models_1";
+import { LabelParameterVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link LabelParameterVersionCommand}.
+ */
 export interface LabelParameterVersionCommandInput extends LabelParameterVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link LabelParameterVersionCommand}.
+ */
 export interface LabelParameterVersionCommandOutput extends LabelParameterVersionResult, __MetadataBearer {}
 
 /**
@@ -58,74 +59,86 @@ export interface LabelParameterVersionCommandOutput extends LabelParameterVersio
  *      sensitive). If a label fails to meet these requirements, then the label isn't associated with a
  *      parameter and the system displays it in the list of InvalidLabels.</p>
  *             </li>
+ *             <li>
+ *                <p>Parameter names can't contain spaces. The service removes any spaces specified for
+ *      the beginning or end of a parameter name. If the specified name for a parameter contains spaces
+ *      between characters, the request fails with a <code>ValidationException</code> error.</p>
+ *             </li>
  *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, LabelParameterVersionCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, LabelParameterVersionCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // LabelParameterVersionRequest
+ *   Name: "STRING_VALUE", // required
+ *   ParameterVersion: Number("long"),
+ *   Labels: [ // ParameterLabelList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new LabelParameterVersionCommand(input);
  * const response = await client.send(command);
+ * // { // LabelParameterVersionResult
+ * //   InvalidLabels: [ // ParameterLabelList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ParameterVersion: Number("long"),
+ * // };
+ *
  * ```
  *
+ * @param LabelParameterVersionCommandInput - {@link LabelParameterVersionCommandInput}
+ * @returns {@link LabelParameterVersionCommandOutput}
  * @see {@link LabelParameterVersionCommandInput} for command's `input` shape.
  * @see {@link LabelParameterVersionCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ParameterNotFound} (client fault)
+ *  <p>The parameter couldn't be found. Verify the name and try again.</p>
+ *          <note>
+ *             <p>For the <code>DeleteParameter</code> and <code>GetParameter</code> actions, if the
+ *     specified parameter doesn't exist, the <code>ParameterNotFound</code> exception is
+ *      <i>not</i> recorded in CloudTrail event logs.</p>
+ *          </note>
+ *
+ * @throws {@link ParameterVersionLabelLimitExceeded} (client fault)
+ *  <p>A parameter version can have a maximum of ten labels.</p>
+ *
+ * @throws {@link ParameterVersionNotFound} (client fault)
+ *  <p>The specified parameter version wasn't found. Verify the parameter name and version, and try
+ *    again.</p>
+ *
+ * @throws {@link TooManyUpdates} (client fault)
+ *  <p>There are concurrent updates for a resource that supports one update at a time.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class LabelParameterVersionCommand extends $Command<
-  LabelParameterVersionCommandInput,
-  LabelParameterVersionCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: LabelParameterVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<LabelParameterVersionCommandInput, LabelParameterVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "LabelParameterVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: LabelParameterVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: LabelParameterVersionResult.filterSensitiveLog,
+export class LabelParameterVersionCommand extends command<LabelParameterVersionCommandInput, LabelParameterVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "LabelParameterVersion",
+  LabelParameterVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: LabelParameterVersionRequest;
+      output: LabelParameterVersionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: LabelParameterVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1LabelParameterVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<LabelParameterVersionCommandOutput> {
-    return deserializeAws_json1_1LabelParameterVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: LabelParameterVersionCommandInput;
+      output: LabelParameterVersionCommandOutput;
+    };
+  };
 }

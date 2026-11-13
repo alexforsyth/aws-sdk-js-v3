@@ -1,101 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { CreateLocationS3Request, CreateLocationS3Response } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateLocationS3Command,
-  serializeAws_json1_1CreateLocationS3Command,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateLocationS3Request, CreateLocationS3Response } from "../models/models_0";
+import { CreateLocationS3$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateLocationS3Command}.
+ */
 export interface CreateLocationS3CommandInput extends CreateLocationS3Request {}
+/**
+ * @public
+ *
+ * The output of {@link CreateLocationS3Command}.
+ */
 export interface CreateLocationS3CommandOutput extends CreateLocationS3Response, __MetadataBearer {}
 
 /**
- * <p>Creates an endpoint for an Amazon S3 bucket.</p>
- *
- *
- *          <p>For
- *       more information, see
- *       <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli">Create an Amazon S3 location</a>
- *       in the <i>DataSync User Guide</i>.</p>
+ * <p>Creates a transfer <i>location</i> for an Amazon S3 bucket.
+ *         DataSync can use this location as a source or destination for transferring
+ *       data.</p>
+ *          <important>
+ *             <p>Before you begin, make sure that you read the following topics:</p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes">Storage
+ *               class considerations with Amazon S3 locations</a>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests">Evaluating S3 request costs when using DataSync</a>
+ *                   </p>
+ *                </li>
+ *             </ul>
+ *          </important>
+ *          <p> For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html">Configuring
+ *         transfers with Amazon S3</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, CreateLocationS3Command } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, CreateLocationS3Command } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // CreateLocationS3Request
+ *   Subdirectory: "STRING_VALUE",
+ *   S3BucketArn: "STRING_VALUE", // required
+ *   S3StorageClass: "STANDARD" || "STANDARD_IA" || "ONEZONE_IA" || "INTELLIGENT_TIERING" || "GLACIER" || "DEEP_ARCHIVE" || "OUTPOSTS" || "GLACIER_INSTANT_RETRIEVAL",
+ *   S3Config: { // S3Config
+ *     BucketAccessRoleArn: "STRING_VALUE", // required
+ *   },
+ *   AgentArns: [ // AgentArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   Tags: [ // InputTagList
+ *     { // TagListEntry
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateLocationS3Command(input);
  * const response = await client.send(command);
+ * // { // CreateLocationS3Response
+ * //   LocationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateLocationS3CommandInput - {@link CreateLocationS3CommandInput}
+ * @returns {@link CreateLocationS3CommandOutput}
  * @see {@link CreateLocationS3CommandInput} for command's `input` shape.
  * @see {@link CreateLocationS3CommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class CreateLocationS3Command extends $Command<
-  CreateLocationS3CommandInput,
-  CreateLocationS3CommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateLocationS3CommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateLocationS3CommandInput, CreateLocationS3CommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "CreateLocationS3Command";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateLocationS3Request.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateLocationS3Response.filterSensitiveLog,
+export class CreateLocationS3Command extends command<CreateLocationS3CommandInput, CreateLocationS3CommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateLocationS3",
+  CreateLocationS3$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLocationS3Request;
+      output: CreateLocationS3Response;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateLocationS3CommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateLocationS3Command(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateLocationS3CommandOutput> {
-    return deserializeAws_json1_1CreateLocationS3Command(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateLocationS3CommandInput;
+      output: CreateLocationS3CommandOutput;
+    };
+  };
 }

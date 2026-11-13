@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListAssociatedApprovalRuleTemplatesForRepositoryInput,
   ListAssociatedApprovalRuleTemplatesForRepositoryOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAssociatedApprovalRuleTemplatesForRepositoryCommand,
-  serializeAws_json1_1ListAssociatedApprovalRuleTemplatesForRepositoryCommand,
-} from "../protocols/Aws_json1_1";
+import { ListAssociatedApprovalRuleTemplatesForRepository$ } from "../schemas/schemas_0";
 
-export interface ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput
-  extends ListAssociatedApprovalRuleTemplatesForRepositoryInput {}
-export interface ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput
-  extends ListAssociatedApprovalRuleTemplatesForRepositoryOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssociatedApprovalRuleTemplatesForRepositoryCommand}.
+ */
+export interface ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput extends ListAssociatedApprovalRuleTemplatesForRepositoryInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssociatedApprovalRuleTemplatesForRepositoryCommand}.
+ */
+export interface ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput extends ListAssociatedApprovalRuleTemplatesForRepositoryOutput, __MetadataBearer {}
 
 /**
  * <p>Lists all approval rule templates that are associated with a specified repository.</p>
@@ -34,77 +32,87 @@ export interface ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput
  * ```javascript
  * import { CodeCommitClient, ListAssociatedApprovalRuleTemplatesForRepositoryCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, ListAssociatedApprovalRuleTemplatesForRepositoryCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // ListAssociatedApprovalRuleTemplatesForRepositoryInput
+ *   repositoryName: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListAssociatedApprovalRuleTemplatesForRepositoryCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssociatedApprovalRuleTemplatesForRepositoryOutput
+ * //   approvalRuleTemplateNames: [ // ApprovalRuleTemplateNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput - {@link ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput}
+ * @returns {@link ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput}
  * @see {@link ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput} for command's `input` shape.
  * @see {@link ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link EncryptionIntegrityChecksFailedException} (server fault)
+ *  <p>An encryption integrity check failed.</p>
+ *
+ * @throws {@link EncryptionKeyAccessDeniedException} (client fault)
+ *  <p>An encryption key could not be accessed.</p>
+ *
+ * @throws {@link EncryptionKeyDisabledException} (client fault)
+ *  <p>The encryption key is disabled.</p>
+ *
+ * @throws {@link EncryptionKeyNotFoundException} (client fault)
+ *  <p>No encryption key was found.</p>
+ *
+ * @throws {@link EncryptionKeyUnavailableException} (client fault)
+ *  <p>The encryption key is not available.</p>
+ *
+ * @throws {@link InvalidContinuationTokenException} (client fault)
+ *  <p>The specified continuation token is not valid.</p>
+ *
+ * @throws {@link InvalidMaxResultsException} (client fault)
+ *  <p>The specified number of maximum results is not valid.</p>
+ *
+ * @throws {@link InvalidRepositoryNameException} (client fault)
+ *  <p>A specified repository name is not valid.</p>
+ *          <note>
+ *             <p>This exception occurs only when a specified repository name is not valid. Other
+ *                 exceptions occur when a required repository parameter is missing, or when a
+ *                 specified repository does not exist.</p>
+ *          </note>
+ *
+ * @throws {@link RepositoryDoesNotExistException} (client fault)
+ *  <p>The specified repository does not exist.</p>
+ *
+ * @throws {@link RepositoryNameRequiredException} (client fault)
+ *  <p>A repository name is required, but was not specified.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class ListAssociatedApprovalRuleTemplatesForRepositoryCommand extends $Command<
-  ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput,
-  ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput,
-    ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "ListAssociatedApprovalRuleTemplatesForRepositoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssociatedApprovalRuleTemplatesForRepositoryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAssociatedApprovalRuleTemplatesForRepositoryOutput.filterSensitiveLog,
+export class ListAssociatedApprovalRuleTemplatesForRepositoryCommand extends command<ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput, ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssociatedApprovalRuleTemplatesForRepository",
+  ListAssociatedApprovalRuleTemplatesForRepository$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssociatedApprovalRuleTemplatesForRepositoryInput;
+      output: ListAssociatedApprovalRuleTemplatesForRepositoryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAssociatedApprovalRuleTemplatesForRepositoryCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput> {
-    return deserializeAws_json1_1ListAssociatedApprovalRuleTemplatesForRepositoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssociatedApprovalRuleTemplatesForRepositoryCommandInput;
+      output: ListAssociatedApprovalRuleTemplatesForRepositoryCommandOutput;
+    };
+  };
 }

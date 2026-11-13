@@ -1,70 +1,78 @@
-import { EchoServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EchoServiceClient";
-import { LengthInput, LengthOutput } from "../models/models_0";
-import { deserializeAws_restJson1LengthCommand, serializeAws_restJson1LengthCommand } from "../protocols/Aws_restJson1";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  MiddlewareStack,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { LengthInput, LengthOutput } from "../models/models_0";
+import { Length$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link LengthCommand}.
+ */
 export interface LengthCommandInput extends LengthInput {}
+/**
+ * @public
+ *
+ * The output of {@link LengthCommand}.
+ */
 export interface LengthCommandOutput extends LengthOutput, __MetadataBearer {}
 
-export class LengthCommand extends $Command<LengthCommandInput, LengthCommandOutput, EchoServiceClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: LengthCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EchoServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<LengthCommandInput, LengthCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EchoServiceClient";
-    const commandName = "LengthCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: LengthInput.filterSensitiveLog,
-      outputFilterSensitiveLog: LengthOutput.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EchoServiceClient, LengthCommand } from "@aws-sdk/aws-echo-service"; // ES Modules import
+ * // const { EchoServiceClient, LengthCommand } = require("@aws-sdk/aws-echo-service"); // CommonJS import
+ * // import type { EchoServiceClientConfig } from "@aws-sdk/aws-echo-service";
+ * const config = {}; // type is EchoServiceClientConfig
+ * const client = new EchoServiceClient(config);
+ * const input = { // LengthInput
+ *   string: "STRING_VALUE", // required
+ * };
+ * const command = new LengthCommand(input);
+ * const response = await client.send(command);
+ * // { // LengthOutput
+ * //   length: Number("int"),
+ * // };
+ *
+ * ```
+ *
+ * @param LengthCommandInput - {@link LengthCommandInput}
+ * @returns {@link LengthCommandOutput}
+ * @see {@link LengthCommandInput} for command's `input` shape.
+ * @see {@link LengthCommandOutput} for command's `response` shape.
+ * @see {@link EchoServiceClientResolvedConfig | config} for EchoServiceClient's `config` shape.
+ *
+ * @throws {@link PalindromeException} (client fault)
+ *  For some reason, this service does not like palindromes!
+ *
+ * @throws {@link EchoServiceServiceException}
+ * <p>Base exception class for all service exceptions from EchoService service.</p>
+ *
+ *
+ */
+export class LengthCommand extends command<LengthCommandInput, LengthCommandOutput>(
+  _ep0,
+  _mw0,
+  "Length",
+  Length$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: LengthInput;
+      output: LengthOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: LengthCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1LengthCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<LengthCommandOutput> {
-    return deserializeAws_restJson1LengthCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: LengthCommandInput;
+      output: LengthCommandOutput;
+    };
+  };
 }

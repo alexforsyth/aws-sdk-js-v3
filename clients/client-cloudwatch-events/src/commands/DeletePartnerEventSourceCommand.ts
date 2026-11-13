@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { DeletePartnerEventSourceRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeletePartnerEventSourceCommand,
-  serializeAws_json1_1DeletePartnerEventSourceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePartnerEventSourceRequest } from "../models/models_0";
+import { DeletePartnerEventSource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePartnerEventSourceCommand}.
+ */
 export interface DeletePartnerEventSourceCommandInput extends DeletePartnerEventSourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePartnerEventSourceCommand}.
+ */
 export interface DeletePartnerEventSourceCommandOutput extends __MetadataBearer {}
 
 /**
@@ -32,68 +33,55 @@ export interface DeletePartnerEventSourceCommandOutput extends __MetadataBearer 
  * ```javascript
  * import { CloudWatchEventsClient, DeletePartnerEventSourceCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, DeletePartnerEventSourceCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // DeletePartnerEventSourceRequest
+ *   Name: "STRING_VALUE", // required
+ *   Account: "STRING_VALUE", // required
+ * };
  * const command = new DeletePartnerEventSourceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePartnerEventSourceCommandInput - {@link DeletePartnerEventSourceCommandInput}
+ * @returns {@link DeletePartnerEventSourceCommandOutput}
  * @see {@link DeletePartnerEventSourceCommandInput} for command's `input` shape.
  * @see {@link DeletePartnerEventSourceCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link OperationDisabledException} (client fault)
+ *  <p>The operation you are attempting is not available in this region.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePartnerEventSourceCommand extends $Command<
-  DeletePartnerEventSourceCommandInput,
-  DeletePartnerEventSourceCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePartnerEventSourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePartnerEventSourceCommandInput, DeletePartnerEventSourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "DeletePartnerEventSourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePartnerEventSourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeletePartnerEventSourceCommand extends command<DeletePartnerEventSourceCommandInput, DeletePartnerEventSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePartnerEventSource",
+  DeletePartnerEventSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePartnerEventSourceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePartnerEventSourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeletePartnerEventSourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePartnerEventSourceCommandOutput> {
-    return deserializeAws_json1_1DeletePartnerEventSourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePartnerEventSourceCommandInput;
+      output: DeletePartnerEventSourceCommandOutput;
+    };
+  };
 }

@@ -1,3 +1,4 @@
+// smithy-typescript generated code
 export * from "./AddPermissionCommand";
 export * from "./CheckIfPhoneNumberIsOptedOutCommand";
 export * from "./ConfirmSubscriptionCommand";
@@ -9,6 +10,7 @@ export * from "./DeleteEndpointCommand";
 export * from "./DeletePlatformApplicationCommand";
 export * from "./DeleteSMSSandboxPhoneNumberCommand";
 export * from "./DeleteTopicCommand";
+export * from "./GetDataProtectionPolicyCommand";
 export * from "./GetEndpointAttributesCommand";
 export * from "./GetPlatformApplicationAttributesCommand";
 export * from "./GetSMSAttributesCommand";
@@ -25,7 +27,9 @@ export * from "./ListSubscriptionsCommand";
 export * from "./ListTagsForResourceCommand";
 export * from "./ListTopicsCommand";
 export * from "./OptInPhoneNumberCommand";
+export * from "./PublishBatchCommand";
 export * from "./PublishCommand";
+export * from "./PutDataProtectionPolicyCommand";
 export * from "./RemovePermissionCommand";
 export * from "./SetEndpointAttributesCommand";
 export * from "./SetPlatformApplicationAttributesCommand";

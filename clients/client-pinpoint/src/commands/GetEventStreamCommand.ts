@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetEventStreamRequest, GetEventStreamResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetEventStreamCommand,
-  serializeAws_restJson1GetEventStreamCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEventStreamRequest, GetEventStreamResponse } from "../models/models_0";
+import { GetEventStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEventStreamCommand}.
+ */
 export interface GetEventStreamCommandInput extends GetEventStreamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEventStreamCommand}.
+ */
 export interface GetEventStreamCommandOutput extends GetEventStreamResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface GetEventStreamCommandOutput extends GetEventStreamResponse, __M
  * ```javascript
  * import { PinpointClient, GetEventStreamCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetEventStreamCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetEventStreamRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ * };
  * const command = new GetEventStreamCommand(input);
  * const response = await client.send(command);
+ * // { // GetEventStreamResponse
+ * //   EventStream: { // EventStream
+ * //     ApplicationId: "STRING_VALUE", // required
+ * //     DestinationStreamArn: "STRING_VALUE", // required
+ * //     ExternalId: "STRING_VALUE",
+ * //     LastModifiedDate: "STRING_VALUE",
+ * //     LastUpdatedBy: "STRING_VALUE",
+ * //     RoleArn: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetEventStreamCommandInput - {@link GetEventStreamCommandInput}
+ * @returns {@link GetEventStreamCommandOutput}
  * @see {@link GetEventStreamCommandInput} for command's `input` shape.
  * @see {@link GetEventStreamCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetEventStreamCommand extends $Command<
-  GetEventStreamCommandInput,
-  GetEventStreamCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetEventStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetEventStreamCommandInput, GetEventStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetEventStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetEventStreamRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetEventStreamResponse.filterSensitiveLog,
+export class GetEventStreamCommand extends command<GetEventStreamCommandInput, GetEventStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEventStream",
+  GetEventStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEventStreamRequest;
+      output: GetEventStreamResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetEventStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetEventStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetEventStreamCommandOutput> {
-    return deserializeAws_restJson1GetEventStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetEventStreamCommandInput;
+      output: GetEventStreamCommandOutput;
+    };
+  };
 }

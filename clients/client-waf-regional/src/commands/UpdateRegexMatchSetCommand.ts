@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateRegexMatchSetRequest, UpdateRegexMatchSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateRegexMatchSetCommand,
-  serializeAws_json1_1UpdateRegexMatchSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRegexMatchSetRequest, UpdateRegexMatchSetResponse } from "../models/models_0";
+import { UpdateRegexMatchSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRegexMatchSetCommand}.
+ */
 export interface UpdateRegexMatchSetCommandInput extends UpdateRegexMatchSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRegexMatchSetCommand}.
+ */
 export interface UpdateRegexMatchSetCommandOutput extends UpdateRegexMatchSetResponse, __MetadataBearer {}
 
 /**
@@ -48,7 +49,7 @@ export interface UpdateRegexMatchSetCommandOutput extends UpdateRegexMatchSetRes
  *             </li>
  *          </ul>
  * 		       <p> For example, you can create a <code>RegexPatternSet</code> that matches any requests with <code>User-Agent</code> headers
- *          that contain the string <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.</p>
+ *          that contain the string <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.</p>		
  * 		       <p>To create and configure a <code>RegexMatchSet</code>, perform the following steps:</p>
  * 		       <ol>
  *             <li>
@@ -70,68 +71,122 @@ export interface UpdateRegexMatchSetCommandOutput extends UpdateRegexMatchSetRes
  * ```javascript
  * import { WAFRegionalClient, UpdateRegexMatchSetCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, UpdateRegexMatchSetCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // UpdateRegexMatchSetRequest
+ *   RegexMatchSetId: "STRING_VALUE", // required
+ *   Updates: [ // RegexMatchSetUpdates // required
+ *     { // RegexMatchSetUpdate
+ *       Action: "INSERT" || "DELETE", // required
+ *       RegexMatchTuple: { // RegexMatchTuple
+ *         FieldToMatch: { // FieldToMatch
+ *           Type: "URI" || "QUERY_STRING" || "HEADER" || "METHOD" || "BODY" || "SINGLE_QUERY_ARG" || "ALL_QUERY_ARGS", // required
+ *           Data: "STRING_VALUE",
+ *         },
+ *         TextTransformation: "NONE" || "COMPRESS_WHITE_SPACE" || "HTML_ENTITY_DECODE" || "LOWERCASE" || "CMD_LINE" || "URL_DECODE", // required
+ *         RegexPatternSetId: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   ],
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new UpdateRegexMatchSetCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRegexMatchSetResponse
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateRegexMatchSetCommandInput - {@link UpdateRegexMatchSetCommandInput}
+ * @returns {@link UpdateRegexMatchSetCommandOutput}
  * @see {@link UpdateRegexMatchSetCommandInput} for command's `input` shape.
  * @see {@link UpdateRegexMatchSetCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFDisallowedNameException} (client fault)
+ *  <p>The name specified is invalid.</p>
+ *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFInvalidOperationException} (client fault)
+ *  <p>The operation failed because there was nothing to do. For example:</p>
+ * 			      <ul>
+ *             <li>
+ *                <p>You tried to remove a <code>Rule</code> from a <code>WebACL</code>, but the <code>Rule</code> isn't in the specified <code>WebACL</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to remove an IP address from an <code>IPSet</code>, but the IP address isn't in the specified <code>IPSet</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to remove a <code>ByteMatchTuple</code> from a <code>ByteMatchSet</code>, but the <code>ByteMatchTuple</code>
+ * 					isn't in the specified <code>WebACL</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>Rule</code> to a <code>WebACL</code>, but the <code>Rule</code> already exists in the
+ * 					specified <code>WebACL</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>ByteMatchTuple</code> to a <code>ByteMatchSet</code>, but the <code>ByteMatchTuple</code>
+ *                already exists in the specified <code>WebACL</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFLimitsExceededException} (client fault)
+ *  <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create
+ * 			for an AWS account. For more information, see
+ * 			<a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ *
+ * @throws {@link WAFNonexistentContainerException} (client fault)
+ *  <p>The operation failed because you tried to add an object to or delete an object from another object that doesn't exist. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to add a <code>Rule</code> to or delete a <code>Rule</code> from a <code>WebACL</code> that doesn't exist.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>ByteMatchSet</code> to or delete a <code>ByteMatchSet</code> from a <code>Rule</code> that doesn't exist.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add an IP address to or delete an IP address from an <code>IPSet</code> that doesn't exist.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to add a <code>ByteMatchTuple</code> to or delete a <code>ByteMatchTuple</code> from a <code>ByteMatchSet</code>
+ * 				that doesn't exist.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRegexMatchSetCommand extends $Command<
-  UpdateRegexMatchSetCommandInput,
-  UpdateRegexMatchSetCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRegexMatchSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRegexMatchSetCommandInput, UpdateRegexMatchSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "UpdateRegexMatchSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRegexMatchSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRegexMatchSetResponse.filterSensitiveLog,
+export class UpdateRegexMatchSetCommand extends command<UpdateRegexMatchSetCommandInput, UpdateRegexMatchSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRegexMatchSet",
+  UpdateRegexMatchSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRegexMatchSetRequest;
+      output: UpdateRegexMatchSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRegexMatchSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateRegexMatchSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRegexMatchSetCommandOutput> {
-    return deserializeAws_json1_1UpdateRegexMatchSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRegexMatchSetCommandInput;
+      output: UpdateRegexMatchSetCommandOutput;
+    };
+  };
 }

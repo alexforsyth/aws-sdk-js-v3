@@ -1,236 +1,426 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultWorkSpacesHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AcceptAccountLinkInvitationCommandInput,
+  AcceptAccountLinkInvitationCommandOutput,
+} from "./commands/AcceptAccountLinkInvitationCommand";
+import type {
   AssociateConnectionAliasCommandInput,
   AssociateConnectionAliasCommandOutput,
 } from "./commands/AssociateConnectionAliasCommand";
-import { AssociateIpGroupsCommandInput, AssociateIpGroupsCommandOutput } from "./commands/AssociateIpGroupsCommand";
-import { AuthorizeIpRulesCommandInput, AuthorizeIpRulesCommandOutput } from "./commands/AuthorizeIpRulesCommand";
-import { CopyWorkspaceImageCommandInput, CopyWorkspaceImageCommandOutput } from "./commands/CopyWorkspaceImageCommand";
-import {
+import type {
+  AssociateIpGroupsCommandInput,
+  AssociateIpGroupsCommandOutput,
+} from "./commands/AssociateIpGroupsCommand";
+import type {
+  AssociateWorkspaceApplicationCommandInput,
+  AssociateWorkspaceApplicationCommandOutput,
+} from "./commands/AssociateWorkspaceApplicationCommand";
+import type { AuthorizeIpRulesCommandInput, AuthorizeIpRulesCommandOutput } from "./commands/AuthorizeIpRulesCommand";
+import type {
+  CopyWorkspaceImageCommandInput,
+  CopyWorkspaceImageCommandOutput,
+} from "./commands/CopyWorkspaceImageCommand";
+import type {
+  CreateAccountLinkInvitationCommandInput,
+  CreateAccountLinkInvitationCommandOutput,
+} from "./commands/CreateAccountLinkInvitationCommand";
+import type {
+  CreateConnectClientAddInCommandInput,
+  CreateConnectClientAddInCommandOutput,
+} from "./commands/CreateConnectClientAddInCommand";
+import type {
   CreateConnectionAliasCommandInput,
   CreateConnectionAliasCommandOutput,
 } from "./commands/CreateConnectionAliasCommand";
-import { CreateIpGroupCommandInput, CreateIpGroupCommandOutput } from "./commands/CreateIpGroupCommand";
-import { CreateTagsCommandInput, CreateTagsCommandOutput } from "./commands/CreateTagsCommand";
-import {
+import type { CreateIpGroupCommandInput, CreateIpGroupCommandOutput } from "./commands/CreateIpGroupCommand";
+import type {
+  CreateStandbyWorkspacesCommandInput,
+  CreateStandbyWorkspacesCommandOutput,
+} from "./commands/CreateStandbyWorkspacesCommand";
+import type { CreateTagsCommandInput, CreateTagsCommandOutput } from "./commands/CreateTagsCommand";
+import type {
   CreateUpdatedWorkspaceImageCommandInput,
   CreateUpdatedWorkspaceImageCommandOutput,
 } from "./commands/CreateUpdatedWorkspaceImageCommand";
-import {
+import type {
   CreateWorkspaceBundleCommandInput,
   CreateWorkspaceBundleCommandOutput,
 } from "./commands/CreateWorkspaceBundleCommand";
-import { CreateWorkspacesCommandInput, CreateWorkspacesCommandOutput } from "./commands/CreateWorkspacesCommand";
-import {
+import type {
+  CreateWorkspaceImageCommandInput,
+  CreateWorkspaceImageCommandOutput,
+} from "./commands/CreateWorkspaceImageCommand";
+import type { CreateWorkspacesCommandInput, CreateWorkspacesCommandOutput } from "./commands/CreateWorkspacesCommand";
+import type {
+  CreateWorkspacesPoolCommandInput,
+  CreateWorkspacesPoolCommandOutput,
+} from "./commands/CreateWorkspacesPoolCommand";
+import type {
+  DeleteAccountLinkInvitationCommandInput,
+  DeleteAccountLinkInvitationCommandOutput,
+} from "./commands/DeleteAccountLinkInvitationCommand";
+import type {
+  DeleteClientBrandingCommandInput,
+  DeleteClientBrandingCommandOutput,
+} from "./commands/DeleteClientBrandingCommand";
+import type {
+  DeleteConnectClientAddInCommandInput,
+  DeleteConnectClientAddInCommandOutput,
+} from "./commands/DeleteConnectClientAddInCommand";
+import type {
   DeleteConnectionAliasCommandInput,
   DeleteConnectionAliasCommandOutput,
 } from "./commands/DeleteConnectionAliasCommand";
-import { DeleteIpGroupCommandInput, DeleteIpGroupCommandOutput } from "./commands/DeleteIpGroupCommand";
-import { DeleteTagsCommandInput, DeleteTagsCommandOutput } from "./commands/DeleteTagsCommand";
-import {
+import type { DeleteIpGroupCommandInput, DeleteIpGroupCommandOutput } from "./commands/DeleteIpGroupCommand";
+import type { DeleteTagsCommandInput, DeleteTagsCommandOutput } from "./commands/DeleteTagsCommand";
+import type {
   DeleteWorkspaceBundleCommandInput,
   DeleteWorkspaceBundleCommandOutput,
 } from "./commands/DeleteWorkspaceBundleCommand";
-import {
+import type {
   DeleteWorkspaceImageCommandInput,
   DeleteWorkspaceImageCommandOutput,
 } from "./commands/DeleteWorkspaceImageCommand";
-import {
+import type {
+  DeployWorkspaceApplicationsCommandInput,
+  DeployWorkspaceApplicationsCommandOutput,
+} from "./commands/DeployWorkspaceApplicationsCommand";
+import type {
   DeregisterWorkspaceDirectoryCommandInput,
   DeregisterWorkspaceDirectoryCommandOutput,
 } from "./commands/DeregisterWorkspaceDirectoryCommand";
-import { DescribeAccountCommandInput, DescribeAccountCommandOutput } from "./commands/DescribeAccountCommand";
-import {
+import type { DescribeAccountCommandInput, DescribeAccountCommandOutput } from "./commands/DescribeAccountCommand";
+import type {
   DescribeAccountModificationsCommandInput,
   DescribeAccountModificationsCommandOutput,
 } from "./commands/DescribeAccountModificationsCommand";
-import {
+import type {
+  DescribeApplicationAssociationsCommandInput,
+  DescribeApplicationAssociationsCommandOutput,
+} from "./commands/DescribeApplicationAssociationsCommand";
+import type {
+  DescribeApplicationsCommandInput,
+  DescribeApplicationsCommandOutput,
+} from "./commands/DescribeApplicationsCommand";
+import type {
+  DescribeBundleAssociationsCommandInput,
+  DescribeBundleAssociationsCommandOutput,
+} from "./commands/DescribeBundleAssociationsCommand";
+import type {
+  DescribeClientBrandingCommandInput,
+  DescribeClientBrandingCommandOutput,
+} from "./commands/DescribeClientBrandingCommand";
+import type {
   DescribeClientPropertiesCommandInput,
   DescribeClientPropertiesCommandOutput,
 } from "./commands/DescribeClientPropertiesCommand";
-import {
+import type {
+  DescribeConnectClientAddInsCommandInput,
+  DescribeConnectClientAddInsCommandOutput,
+} from "./commands/DescribeConnectClientAddInsCommand";
+import type {
   DescribeConnectionAliasesCommandInput,
   DescribeConnectionAliasesCommandOutput,
 } from "./commands/DescribeConnectionAliasesCommand";
-import {
+import type {
   DescribeConnectionAliasPermissionsCommandInput,
   DescribeConnectionAliasPermissionsCommandOutput,
 } from "./commands/DescribeConnectionAliasPermissionsCommand";
-import { DescribeIpGroupsCommandInput, DescribeIpGroupsCommandOutput } from "./commands/DescribeIpGroupsCommand";
-import { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
-import {
+import type {
+  DescribeCustomWorkspaceImageImportCommandInput,
+  DescribeCustomWorkspaceImageImportCommandOutput,
+} from "./commands/DescribeCustomWorkspaceImageImportCommand";
+import type {
+  DescribeImageAssociationsCommandInput,
+  DescribeImageAssociationsCommandOutput,
+} from "./commands/DescribeImageAssociationsCommand";
+import type { DescribeIpGroupsCommandInput, DescribeIpGroupsCommandOutput } from "./commands/DescribeIpGroupsCommand";
+import type { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
+import type {
+  DescribeWorkspaceAssociationsCommandInput,
+  DescribeWorkspaceAssociationsCommandOutput,
+} from "./commands/DescribeWorkspaceAssociationsCommand";
+import type {
   DescribeWorkspaceBundlesCommandInput,
   DescribeWorkspaceBundlesCommandOutput,
 } from "./commands/DescribeWorkspaceBundlesCommand";
-import {
+import type {
   DescribeWorkspaceDirectoriesCommandInput,
   DescribeWorkspaceDirectoriesCommandOutput,
 } from "./commands/DescribeWorkspaceDirectoriesCommand";
-import {
+import type {
   DescribeWorkspaceImagePermissionsCommandInput,
   DescribeWorkspaceImagePermissionsCommandOutput,
 } from "./commands/DescribeWorkspaceImagePermissionsCommand";
-import {
+import type {
   DescribeWorkspaceImagesCommandInput,
   DescribeWorkspaceImagesCommandOutput,
 } from "./commands/DescribeWorkspaceImagesCommand";
-import { DescribeWorkspacesCommandInput, DescribeWorkspacesCommandOutput } from "./commands/DescribeWorkspacesCommand";
-import {
+import type {
+  DescribeWorkspacesCommandInput,
+  DescribeWorkspacesCommandOutput,
+} from "./commands/DescribeWorkspacesCommand";
+import type {
   DescribeWorkspacesConnectionStatusCommandInput,
   DescribeWorkspacesConnectionStatusCommandOutput,
 } from "./commands/DescribeWorkspacesConnectionStatusCommand";
-import {
+import type {
   DescribeWorkspaceSnapshotsCommandInput,
   DescribeWorkspaceSnapshotsCommandOutput,
 } from "./commands/DescribeWorkspaceSnapshotsCommand";
-import {
+import type {
+  DescribeWorkspacesPoolsCommandInput,
+  DescribeWorkspacesPoolsCommandOutput,
+} from "./commands/DescribeWorkspacesPoolsCommand";
+import type {
+  DescribeWorkspacesPoolSessionsCommandInput,
+  DescribeWorkspacesPoolSessionsCommandOutput,
+} from "./commands/DescribeWorkspacesPoolSessionsCommand";
+import type {
   DisassociateConnectionAliasCommandInput,
   DisassociateConnectionAliasCommandOutput,
 } from "./commands/DisassociateConnectionAliasCommand";
-import {
+import type {
   DisassociateIpGroupsCommandInput,
   DisassociateIpGroupsCommandOutput,
 } from "./commands/DisassociateIpGroupsCommand";
-import {
+import type {
+  DisassociateWorkspaceApplicationCommandInput,
+  DisassociateWorkspaceApplicationCommandOutput,
+} from "./commands/DisassociateWorkspaceApplicationCommand";
+import type { GetAccountLinkCommandInput, GetAccountLinkCommandOutput } from "./commands/GetAccountLinkCommand";
+import type {
+  ImportClientBrandingCommandInput,
+  ImportClientBrandingCommandOutput,
+} from "./commands/ImportClientBrandingCommand";
+import type {
+  ImportCustomWorkspaceImageCommandInput,
+  ImportCustomWorkspaceImageCommandOutput,
+} from "./commands/ImportCustomWorkspaceImageCommand";
+import type {
   ImportWorkspaceImageCommandInput,
   ImportWorkspaceImageCommandOutput,
 } from "./commands/ImportWorkspaceImageCommand";
-import {
+import type { ListAccountLinksCommandInput, ListAccountLinksCommandOutput } from "./commands/ListAccountLinksCommand";
+import type {
   ListAvailableManagementCidrRangesCommandInput,
   ListAvailableManagementCidrRangesCommandOutput,
 } from "./commands/ListAvailableManagementCidrRangesCommand";
-import { MigrateWorkspaceCommandInput, MigrateWorkspaceCommandOutput } from "./commands/MigrateWorkspaceCommand";
-import { ModifyAccountCommandInput, ModifyAccountCommandOutput } from "./commands/ModifyAccountCommand";
-import {
+import type { MigrateWorkspaceCommandInput, MigrateWorkspaceCommandOutput } from "./commands/MigrateWorkspaceCommand";
+import type { ModifyAccountCommandInput, ModifyAccountCommandOutput } from "./commands/ModifyAccountCommand";
+import type {
+  ModifyCertificateBasedAuthPropertiesCommandInput,
+  ModifyCertificateBasedAuthPropertiesCommandOutput,
+} from "./commands/ModifyCertificateBasedAuthPropertiesCommand";
+import type {
   ModifyClientPropertiesCommandInput,
   ModifyClientPropertiesCommandOutput,
 } from "./commands/ModifyClientPropertiesCommand";
-import {
+import type {
+  ModifyEndpointEncryptionModeCommandInput,
+  ModifyEndpointEncryptionModeCommandOutput,
+} from "./commands/ModifyEndpointEncryptionModeCommand";
+import type {
+  ModifySamlPropertiesCommandInput,
+  ModifySamlPropertiesCommandOutput,
+} from "./commands/ModifySamlPropertiesCommand";
+import type {
   ModifySelfservicePermissionsCommandInput,
   ModifySelfservicePermissionsCommandOutput,
 } from "./commands/ModifySelfservicePermissionsCommand";
-import {
+import type {
+  ModifyStreamingPropertiesCommandInput,
+  ModifyStreamingPropertiesCommandOutput,
+} from "./commands/ModifyStreamingPropertiesCommand";
+import type {
   ModifyWorkspaceAccessPropertiesCommandInput,
   ModifyWorkspaceAccessPropertiesCommandOutput,
 } from "./commands/ModifyWorkspaceAccessPropertiesCommand";
-import {
+import type {
   ModifyWorkspaceCreationPropertiesCommandInput,
   ModifyWorkspaceCreationPropertiesCommandOutput,
 } from "./commands/ModifyWorkspaceCreationPropertiesCommand";
-import {
+import type {
   ModifyWorkspacePropertiesCommandInput,
   ModifyWorkspacePropertiesCommandOutput,
 } from "./commands/ModifyWorkspacePropertiesCommand";
-import {
+import type {
   ModifyWorkspaceStateCommandInput,
   ModifyWorkspaceStateCommandOutput,
 } from "./commands/ModifyWorkspaceStateCommand";
-import { RebootWorkspacesCommandInput, RebootWorkspacesCommandOutput } from "./commands/RebootWorkspacesCommand";
-import { RebuildWorkspacesCommandInput, RebuildWorkspacesCommandOutput } from "./commands/RebuildWorkspacesCommand";
-import {
+import type { RebootWorkspacesCommandInput, RebootWorkspacesCommandOutput } from "./commands/RebootWorkspacesCommand";
+import type {
+  RebuildWorkspacesCommandInput,
+  RebuildWorkspacesCommandOutput,
+} from "./commands/RebuildWorkspacesCommand";
+import type {
   RegisterWorkspaceDirectoryCommandInput,
   RegisterWorkspaceDirectoryCommandOutput,
 } from "./commands/RegisterWorkspaceDirectoryCommand";
-import { RestoreWorkspaceCommandInput, RestoreWorkspaceCommandOutput } from "./commands/RestoreWorkspaceCommand";
-import { RevokeIpRulesCommandInput, RevokeIpRulesCommandOutput } from "./commands/RevokeIpRulesCommand";
-import { StartWorkspacesCommandInput, StartWorkspacesCommandOutput } from "./commands/StartWorkspacesCommand";
-import { StopWorkspacesCommandInput, StopWorkspacesCommandOutput } from "./commands/StopWorkspacesCommand";
-import {
+import type {
+  RejectAccountLinkInvitationCommandInput,
+  RejectAccountLinkInvitationCommandOutput,
+} from "./commands/RejectAccountLinkInvitationCommand";
+import type { RestoreWorkspaceCommandInput, RestoreWorkspaceCommandOutput } from "./commands/RestoreWorkspaceCommand";
+import type { RevokeIpRulesCommandInput, RevokeIpRulesCommandOutput } from "./commands/RevokeIpRulesCommand";
+import type { StartWorkspacesCommandInput, StartWorkspacesCommandOutput } from "./commands/StartWorkspacesCommand";
+import type {
+  StartWorkspacesPoolCommandInput,
+  StartWorkspacesPoolCommandOutput,
+} from "./commands/StartWorkspacesPoolCommand";
+import type { StopWorkspacesCommandInput, StopWorkspacesCommandOutput } from "./commands/StopWorkspacesCommand";
+import type {
+  StopWorkspacesPoolCommandInput,
+  StopWorkspacesPoolCommandOutput,
+} from "./commands/StopWorkspacesPoolCommand";
+import type {
   TerminateWorkspacesCommandInput,
   TerminateWorkspacesCommandOutput,
 } from "./commands/TerminateWorkspacesCommand";
-import {
+import type {
+  TerminateWorkspacesPoolCommandInput,
+  TerminateWorkspacesPoolCommandOutput,
+} from "./commands/TerminateWorkspacesPoolCommand";
+import type {
+  TerminateWorkspacesPoolSessionCommandInput,
+  TerminateWorkspacesPoolSessionCommandOutput,
+} from "./commands/TerminateWorkspacesPoolSessionCommand";
+import type {
+  UpdateConnectClientAddInCommandInput,
+  UpdateConnectClientAddInCommandOutput,
+} from "./commands/UpdateConnectClientAddInCommand";
+import type {
   UpdateConnectionAliasPermissionCommandInput,
   UpdateConnectionAliasPermissionCommandOutput,
 } from "./commands/UpdateConnectionAliasPermissionCommand";
-import {
+import type {
   UpdateRulesOfIpGroupCommandInput,
   UpdateRulesOfIpGroupCommandOutput,
 } from "./commands/UpdateRulesOfIpGroupCommand";
-import {
+import type {
   UpdateWorkspaceBundleCommandInput,
   UpdateWorkspaceBundleCommandOutput,
 } from "./commands/UpdateWorkspaceBundleCommand";
-import {
+import type {
   UpdateWorkspaceImagePermissionCommandInput,
   UpdateWorkspaceImagePermissionCommandOutput,
 } from "./commands/UpdateWorkspaceImagePermissionCommand";
+import type {
+  UpdateWorkspacesPoolCommandInput,
+  UpdateWorkspacesPoolCommandOutput,
+} from "./commands/UpdateWorkspacesPoolCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AcceptAccountLinkInvitationCommandInput
   | AssociateConnectionAliasCommandInput
   | AssociateIpGroupsCommandInput
+  | AssociateWorkspaceApplicationCommandInput
   | AuthorizeIpRulesCommandInput
   | CopyWorkspaceImageCommandInput
+  | CreateAccountLinkInvitationCommandInput
+  | CreateConnectClientAddInCommandInput
   | CreateConnectionAliasCommandInput
   | CreateIpGroupCommandInput
+  | CreateStandbyWorkspacesCommandInput
   | CreateTagsCommandInput
   | CreateUpdatedWorkspaceImageCommandInput
   | CreateWorkspaceBundleCommandInput
+  | CreateWorkspaceImageCommandInput
   | CreateWorkspacesCommandInput
+  | CreateWorkspacesPoolCommandInput
+  | DeleteAccountLinkInvitationCommandInput
+  | DeleteClientBrandingCommandInput
+  | DeleteConnectClientAddInCommandInput
   | DeleteConnectionAliasCommandInput
   | DeleteIpGroupCommandInput
   | DeleteTagsCommandInput
   | DeleteWorkspaceBundleCommandInput
   | DeleteWorkspaceImageCommandInput
+  | DeployWorkspaceApplicationsCommandInput
   | DeregisterWorkspaceDirectoryCommandInput
   | DescribeAccountCommandInput
   | DescribeAccountModificationsCommandInput
+  | DescribeApplicationAssociationsCommandInput
+  | DescribeApplicationsCommandInput
+  | DescribeBundleAssociationsCommandInput
+  | DescribeClientBrandingCommandInput
   | DescribeClientPropertiesCommandInput
+  | DescribeConnectClientAddInsCommandInput
   | DescribeConnectionAliasPermissionsCommandInput
   | DescribeConnectionAliasesCommandInput
+  | DescribeCustomWorkspaceImageImportCommandInput
+  | DescribeImageAssociationsCommandInput
   | DescribeIpGroupsCommandInput
   | DescribeTagsCommandInput
+  | DescribeWorkspaceAssociationsCommandInput
   | DescribeWorkspaceBundlesCommandInput
   | DescribeWorkspaceDirectoriesCommandInput
   | DescribeWorkspaceImagePermissionsCommandInput
@@ -238,14 +428,25 @@ export type ServiceInputTypes =
   | DescribeWorkspaceSnapshotsCommandInput
   | DescribeWorkspacesCommandInput
   | DescribeWorkspacesConnectionStatusCommandInput
+  | DescribeWorkspacesPoolSessionsCommandInput
+  | DescribeWorkspacesPoolsCommandInput
   | DisassociateConnectionAliasCommandInput
   | DisassociateIpGroupsCommandInput
+  | DisassociateWorkspaceApplicationCommandInput
+  | GetAccountLinkCommandInput
+  | ImportClientBrandingCommandInput
+  | ImportCustomWorkspaceImageCommandInput
   | ImportWorkspaceImageCommandInput
+  | ListAccountLinksCommandInput
   | ListAvailableManagementCidrRangesCommandInput
   | MigrateWorkspaceCommandInput
   | ModifyAccountCommandInput
+  | ModifyCertificateBasedAuthPropertiesCommandInput
   | ModifyClientPropertiesCommandInput
+  | ModifyEndpointEncryptionModeCommandInput
+  | ModifySamlPropertiesCommandInput
   | ModifySelfservicePermissionsCommandInput
+  | ModifyStreamingPropertiesCommandInput
   | ModifyWorkspaceAccessPropertiesCommandInput
   | ModifyWorkspaceCreationPropertiesCommandInput
   | ModifyWorkspacePropertiesCommandInput
@@ -253,40 +454,69 @@ export type ServiceInputTypes =
   | RebootWorkspacesCommandInput
   | RebuildWorkspacesCommandInput
   | RegisterWorkspaceDirectoryCommandInput
+  | RejectAccountLinkInvitationCommandInput
   | RestoreWorkspaceCommandInput
   | RevokeIpRulesCommandInput
   | StartWorkspacesCommandInput
+  | StartWorkspacesPoolCommandInput
   | StopWorkspacesCommandInput
+  | StopWorkspacesPoolCommandInput
   | TerminateWorkspacesCommandInput
+  | TerminateWorkspacesPoolCommandInput
+  | TerminateWorkspacesPoolSessionCommandInput
+  | UpdateConnectClientAddInCommandInput
   | UpdateConnectionAliasPermissionCommandInput
   | UpdateRulesOfIpGroupCommandInput
   | UpdateWorkspaceBundleCommandInput
-  | UpdateWorkspaceImagePermissionCommandInput;
+  | UpdateWorkspaceImagePermissionCommandInput
+  | UpdateWorkspacesPoolCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AcceptAccountLinkInvitationCommandOutput
   | AssociateConnectionAliasCommandOutput
   | AssociateIpGroupsCommandOutput
+  | AssociateWorkspaceApplicationCommandOutput
   | AuthorizeIpRulesCommandOutput
   | CopyWorkspaceImageCommandOutput
+  | CreateAccountLinkInvitationCommandOutput
+  | CreateConnectClientAddInCommandOutput
   | CreateConnectionAliasCommandOutput
   | CreateIpGroupCommandOutput
+  | CreateStandbyWorkspacesCommandOutput
   | CreateTagsCommandOutput
   | CreateUpdatedWorkspaceImageCommandOutput
   | CreateWorkspaceBundleCommandOutput
+  | CreateWorkspaceImageCommandOutput
   | CreateWorkspacesCommandOutput
+  | CreateWorkspacesPoolCommandOutput
+  | DeleteAccountLinkInvitationCommandOutput
+  | DeleteClientBrandingCommandOutput
+  | DeleteConnectClientAddInCommandOutput
   | DeleteConnectionAliasCommandOutput
   | DeleteIpGroupCommandOutput
   | DeleteTagsCommandOutput
   | DeleteWorkspaceBundleCommandOutput
   | DeleteWorkspaceImageCommandOutput
+  | DeployWorkspaceApplicationsCommandOutput
   | DeregisterWorkspaceDirectoryCommandOutput
   | DescribeAccountCommandOutput
   | DescribeAccountModificationsCommandOutput
+  | DescribeApplicationAssociationsCommandOutput
+  | DescribeApplicationsCommandOutput
+  | DescribeBundleAssociationsCommandOutput
+  | DescribeClientBrandingCommandOutput
   | DescribeClientPropertiesCommandOutput
+  | DescribeConnectClientAddInsCommandOutput
   | DescribeConnectionAliasPermissionsCommandOutput
   | DescribeConnectionAliasesCommandOutput
+  | DescribeCustomWorkspaceImageImportCommandOutput
+  | DescribeImageAssociationsCommandOutput
   | DescribeIpGroupsCommandOutput
   | DescribeTagsCommandOutput
+  | DescribeWorkspaceAssociationsCommandOutput
   | DescribeWorkspaceBundlesCommandOutput
   | DescribeWorkspaceDirectoriesCommandOutput
   | DescribeWorkspaceImagePermissionsCommandOutput
@@ -294,14 +524,25 @@ export type ServiceOutputTypes =
   | DescribeWorkspaceSnapshotsCommandOutput
   | DescribeWorkspacesCommandOutput
   | DescribeWorkspacesConnectionStatusCommandOutput
+  | DescribeWorkspacesPoolSessionsCommandOutput
+  | DescribeWorkspacesPoolsCommandOutput
   | DisassociateConnectionAliasCommandOutput
   | DisassociateIpGroupsCommandOutput
+  | DisassociateWorkspaceApplicationCommandOutput
+  | GetAccountLinkCommandOutput
+  | ImportClientBrandingCommandOutput
+  | ImportCustomWorkspaceImageCommandOutput
   | ImportWorkspaceImageCommandOutput
+  | ListAccountLinksCommandOutput
   | ListAvailableManagementCidrRangesCommandOutput
   | MigrateWorkspaceCommandOutput
   | ModifyAccountCommandOutput
+  | ModifyCertificateBasedAuthPropertiesCommandOutput
   | ModifyClientPropertiesCommandOutput
+  | ModifyEndpointEncryptionModeCommandOutput
+  | ModifySamlPropertiesCommandOutput
   | ModifySelfservicePermissionsCommandOutput
+  | ModifyStreamingPropertiesCommandOutput
   | ModifyWorkspaceAccessPropertiesCommandOutput
   | ModifyWorkspaceCreationPropertiesCommandOutput
   | ModifyWorkspacePropertiesCommandOutput
@@ -309,28 +550,38 @@ export type ServiceOutputTypes =
   | RebootWorkspacesCommandOutput
   | RebuildWorkspacesCommandOutput
   | RegisterWorkspaceDirectoryCommandOutput
+  | RejectAccountLinkInvitationCommandOutput
   | RestoreWorkspaceCommandOutput
   | RevokeIpRulesCommandOutput
   | StartWorkspacesCommandOutput
+  | StartWorkspacesPoolCommandOutput
   | StopWorkspacesCommandOutput
+  | StopWorkspacesPoolCommandOutput
   | TerminateWorkspacesCommandOutput
+  | TerminateWorkspacesPoolCommandOutput
+  | TerminateWorkspacesPoolSessionCommandOutput
+  | UpdateConnectClientAddInCommandOutput
   | UpdateConnectionAliasPermissionCommandOutput
   | UpdateRulesOfIpGroupCommandOutput
   | UpdateWorkspaceBundleCommandOutput
-  | UpdateWorkspaceImagePermissionCommandOutput;
+  | UpdateWorkspaceImagePermissionCommandOutput
+  | UpdateWorkspacesPoolCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -342,7 +593,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -381,25 +632,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -412,65 +654,129 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type WorkSpacesClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of WorkSpacesClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type WorkSpacesClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of WorkSpacesClient class constructor that set the region, credentials and other options.
  */
 export interface WorkSpacesClientConfig extends WorkSpacesClientConfigType {}
 
-type WorkSpacesClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of WorkSpacesClient class. This is resolved and normalized from the {@link WorkSpacesClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type WorkSpacesClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of WorkSpacesClient class. This is resolved and normalized from the {@link WorkSpacesClientConfig | constructor configuration interface}.
  */
 export interface WorkSpacesClientResolvedConfig extends WorkSpacesClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon WorkSpaces Service</fullname>
- *          <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows and
- *          Amazon Linux desktops for your users.</p>
+ *          <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows
+ *          or Amazon Linux desktops for your users, known as <i>WorkSpaces</i>.
+ *             WorkSpaces eliminates the need to procure and deploy hardware or install complex
+ *          software. You can quickly add or remove users as your needs change. Users can access their
+ *          virtual desktops from multiple devices or web browsers.</p>
+ *          <p>This API Reference provides detailed information about the actions, data types,
+ *          parameters, and errors of the WorkSpaces service. For more information about the
+ *          supported Amazon Web Services Regions, endpoints, and service quotas of the Amazon WorkSpaces service, see <a href="https://docs.aws.amazon.com/general/latest/gr/wsp.html">WorkSpaces endpoints and quotas</a> in the <i>Amazon Web Services
+ *             General Reference</i>.</p>
+ *          <p>You can also manage your WorkSpaces resources using the WorkSpaces
+ *          console, Command Line Interface (CLI), and SDKs. For more information about
+ *          administering WorkSpaces, see the <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>.
+ *          For more information about using the Amazon WorkSpaces client application or web
+ *          browser to access provisioned WorkSpaces, see the <a href="https://docs.aws.amazon.com/workspaces/latest/userguide/">Amazon WorkSpaces User Guide</a>. For more
+ *          information about using the CLI to manage your WorkSpaces resources,
+ *          see the <a href="https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html">WorkSpaces section of the CLI Reference</a>.</p>
+ * @public
  */
 export class WorkSpacesClient extends __Client<
   __HttpHandlerOptions,
@@ -483,22 +789,36 @@ export class WorkSpacesClient extends __Client<
    */
   readonly config: WorkSpacesClientResolvedConfig;
 
-  constructor(configuration: WorkSpacesClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<WorkSpacesClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultWorkSpacesHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: WorkSpacesClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

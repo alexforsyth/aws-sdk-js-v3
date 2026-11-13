@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyClientVpnEndpointRequest, ModifyClientVpnEndpointResult } from "../models/models_4";
-import {
-  deserializeAws_ec2ModifyClientVpnEndpointCommand,
-  serializeAws_ec2ModifyClientVpnEndpointCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyClientVpnEndpointRequest, ModifyClientVpnEndpointResult } from "../models/models_7";
+import { ModifyClientVpnEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyClientVpnEndpointCommand}.
+ */
 export interface ModifyClientVpnEndpointCommandInput extends ModifyClientVpnEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyClientVpnEndpointCommand}.
+ */
 export interface ModifyClientVpnEndpointCommandOutput extends ModifyClientVpnEndpointResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,101 @@ export interface ModifyClientVpnEndpointCommandOutput extends ModifyClientVpnEnd
  * ```javascript
  * import { EC2Client, ModifyClientVpnEndpointCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyClientVpnEndpointCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyClientVpnEndpointRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   ServerCertificateArn: "STRING_VALUE",
+ *   ConnectionLogOptions: { // ConnectionLogOptions
+ *     Enabled: true || false,
+ *     CloudwatchLogGroup: "STRING_VALUE",
+ *     CloudwatchLogStream: "STRING_VALUE",
+ *     IncludeAuthorizationPolicyContext: true || false,
+ *   },
+ *   DnsServers: { // DnsServersOptionsModifyStructure
+ *     CustomDnsServers: [ // ValueStringList
+ *       "STRING_VALUE",
+ *     ],
+ *     Enabled: true || false,
+ *   },
+ *   VpnPort: Number("int"),
+ *   Description: "STRING_VALUE",
+ *   SplitTunnel: true || false,
+ *   DryRun: true || false,
+ *   SecurityGroupIds: [ // ClientVpnSecurityGroupIdSet
+ *     "STRING_VALUE",
+ *   ],
+ *   VpcId: "STRING_VALUE",
+ *   SelfServicePortal: "enabled" || "disabled",
+ *   ClientConnectOptions: { // ClientConnectOptions
+ *     Enabled: true || false,
+ *     LambdaFunctionArn: "STRING_VALUE",
+ *   },
+ *   SessionTimeoutHours: Number("int"),
+ *   ClientLoginBannerOptions: { // ClientLoginBannerOptions
+ *     Enabled: true || false,
+ *     BannerText: "STRING_VALUE",
+ *   },
+ *   ClientRouteEnforcementOptions: { // ClientRouteEnforcementOptions
+ *     Enforced: true || false,
+ *   },
+ *   DisconnectOnSessionTimeout: true || false,
+ *   TransitGatewayConfiguration: { // TransitGatewayConfigurationInputStructure
+ *     TransitGatewayId: "STRING_VALUE",
+ *     AvailabilityZones: [ // ClientVpnAvailabilityZoneSet
+ *       "STRING_VALUE",
+ *     ],
+ *     AvailabilityZoneIds: [ // ClientVpnAvailabilityZoneIdSet
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   DevicePostureOptions: { // DevicePostureOptions
+ *     TrustProviders: [ // ClientVpnTrustProviderRequestList
+ *       { // ClientVpnTrustProviderRequest
+ *         TrustProviderType: "crowdstrike" || "jamf" || "jumpcloud",
+ *         TenantId: "STRING_VALUE",
+ *         PublicSigningKeyUrl: "STRING_VALUE",
+ *       },
+ *     ],
+ *     Enabled: true || false,
+ *   },
+ * };
  * const command = new ModifyClientVpnEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyClientVpnEndpointResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ModifyClientVpnEndpointCommandInput - {@link ModifyClientVpnEndpointCommandInput}
+ * @returns {@link ModifyClientVpnEndpointCommandOutput}
  * @see {@link ModifyClientVpnEndpointCommandInput} for command's `input` shape.
  * @see {@link ModifyClientVpnEndpointCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyClientVpnEndpointCommand extends $Command<
-  ModifyClientVpnEndpointCommandInput,
-  ModifyClientVpnEndpointCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyClientVpnEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyClientVpnEndpointCommandInput, ModifyClientVpnEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyClientVpnEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyClientVpnEndpointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyClientVpnEndpointResult.filterSensitiveLog,
+export class ModifyClientVpnEndpointCommand extends command<ModifyClientVpnEndpointCommandInput, ModifyClientVpnEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyClientVpnEndpoint",
+  ModifyClientVpnEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyClientVpnEndpointRequest;
+      output: ModifyClientVpnEndpointResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyClientVpnEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyClientVpnEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyClientVpnEndpointCommandOutput> {
-    return deserializeAws_ec2ModifyClientVpnEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyClientVpnEndpointCommandInput;
+      output: ModifyClientVpnEndpointCommandOutput;
+    };
+  };
 }

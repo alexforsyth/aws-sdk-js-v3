@@ -1,107 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { GetHostReservationPurchasePreviewRequest, GetHostReservationPurchasePreviewResult } from "../models/models_4";
-import {
-  deserializeAws_ec2GetHostReservationPurchasePreviewCommand,
-  serializeAws_ec2GetHostReservationPurchasePreviewCommand,
-} from "../protocols/Aws_ec2";
-
-export interface GetHostReservationPurchasePreviewCommandInput extends GetHostReservationPurchasePreviewRequest {}
-export interface GetHostReservationPurchasePreviewCommandOutput
-  extends GetHostReservationPurchasePreviewResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetHostReservationPurchasePreviewRequest,
+  GetHostReservationPurchasePreviewResult,
+} from "../models/models_6";
+import { GetHostReservationPurchasePreview$ } from "../schemas/schemas_0";
 
 /**
- * <p>Preview a reservation purchase with configurations that match those of your
- *             Dedicated Host. You must have active Dedicated Hosts in your account before you purchase
- *             a reservation.</p>
- *         <p>This is a preview of the <a>PurchaseHostReservation</a> action and does
- *             not result in the offering being purchased.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetHostReservationPurchasePreviewCommand}.
+ */
+export interface GetHostReservationPurchasePreviewCommandInput extends GetHostReservationPurchasePreviewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetHostReservationPurchasePreviewCommand}.
+ */
+export interface GetHostReservationPurchasePreviewCommandOutput extends GetHostReservationPurchasePreviewResult, __MetadataBearer {}
+
+/**
+ * <p>Preview a reservation purchase with configurations that match those of your Dedicated
+ *             Host. You must have active Dedicated Hosts in your account before you purchase a
+ *             reservation.</p>
+ *          <p>This is a preview of the <a>PurchaseHostReservation</a> action and does not
+ *             result in the offering being purchased.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, GetHostReservationPurchasePreviewCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetHostReservationPurchasePreviewCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetHostReservationPurchasePreviewRequest
+ *   HostIdSet: [ // RequestHostIdSet // required
+ *     "STRING_VALUE",
+ *   ],
+ *   OfferingId: "STRING_VALUE", // required
+ * };
  * const command = new GetHostReservationPurchasePreviewCommand(input);
  * const response = await client.send(command);
+ * // { // GetHostReservationPurchasePreviewResult
+ * //   CurrencyCode: "USD",
+ * //   Purchase: [ // PurchaseSet
+ * //     { // Purchase
+ * //       CurrencyCode: "USD",
+ * //       Duration: Number("int"),
+ * //       HostIdSet: [ // ResponseHostIdSet
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       HostReservationId: "STRING_VALUE",
+ * //       HourlyPrice: "STRING_VALUE",
+ * //       InstanceFamily: "STRING_VALUE",
+ * //       PaymentOption: "AllUpfront" || "PartialUpfront" || "NoUpfront",
+ * //       UpfrontPrice: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   TotalHourlyPrice: "STRING_VALUE",
+ * //   TotalUpfrontPrice: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetHostReservationPurchasePreviewCommandInput - {@link GetHostReservationPurchasePreviewCommandInput}
+ * @returns {@link GetHostReservationPurchasePreviewCommandOutput}
  * @see {@link GetHostReservationPurchasePreviewCommandInput} for command's `input` shape.
  * @see {@link GetHostReservationPurchasePreviewCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetHostReservationPurchasePreviewCommand extends $Command<
-  GetHostReservationPurchasePreviewCommandInput,
-  GetHostReservationPurchasePreviewCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetHostReservationPurchasePreviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetHostReservationPurchasePreviewCommandInput, GetHostReservationPurchasePreviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetHostReservationPurchasePreviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetHostReservationPurchasePreviewRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetHostReservationPurchasePreviewResult.filterSensitiveLog,
+export class GetHostReservationPurchasePreviewCommand extends command<GetHostReservationPurchasePreviewCommandInput, GetHostReservationPurchasePreviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetHostReservationPurchasePreview",
+  GetHostReservationPurchasePreview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetHostReservationPurchasePreviewRequest;
+      output: GetHostReservationPurchasePreviewResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetHostReservationPurchasePreviewCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2GetHostReservationPurchasePreviewCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetHostReservationPurchasePreviewCommandOutput> {
-    return deserializeAws_ec2GetHostReservationPurchasePreviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetHostReservationPurchasePreviewCommandInput;
+      output: GetHostReservationPurchasePreviewCommandOutput;
+    };
+  };
 }

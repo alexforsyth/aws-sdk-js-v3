@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeMultiplexCommand, DescribeMultiplexCommandInput } from "../commands/DescribeMultiplexCommand";
-import { MediaLiveClient } from "../MediaLiveClient";
+import {
+  type DescribeMultiplexCommandInput,
+  type DescribeMultiplexCommandOutput,
+  DescribeMultiplexCommand,
+} from "../commands/DescribeMultiplexCommand";
+import type { MediaLiveClient } from "../MediaLiveClient";
+import type { MediaLiveServiceException } from "../models/MediaLiveServiceException";
 
-const checkState = async (client: MediaLiveClient, input: DescribeMultiplexCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: MediaLiveClient, input: DescribeMultiplexCommandInput): Promise<WaiterResult<DescribeMultiplexCommandOutput | MediaLiveServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeMultiplexCommand(input));
+    let result: DescribeMultiplexCommandOutput & any = await client.send(new DescribeMultiplexCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "IDLE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: MediaLiveClient, input: DescribeMultiplexComma
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "CREATING") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -27,14 +39,14 @@ const checkState = async (client: MediaLiveClient, input: DescribeMultiplexComma
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "CREATE_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InternalServerErrorException") {
+    if (exception.name === "InternalServerErrorException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -47,7 +59,7 @@ const checkState = async (client: MediaLiveClient, input: DescribeMultiplexComma
 export const waitForMultiplexCreated = async (
   params: WaiterConfiguration<MediaLiveClient>,
   input: DescribeMultiplexCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeMultiplexCommandOutput | MediaLiveServiceException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -59,8 +71,8 @@ export const waitForMultiplexCreated = async (
 export const waitUntilMultiplexCreated = async (
   params: WaiterConfiguration<MediaLiveClient>,
   input: DescribeMultiplexCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeMultiplexCommandOutput>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeMultiplexCommandOutput>;
 };

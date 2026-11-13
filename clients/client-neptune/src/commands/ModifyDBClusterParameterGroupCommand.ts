@@ -1,34 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DBClusterParameterGroupNameMessage, ModifyDBClusterParameterGroupMessage } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryModifyDBClusterParameterGroupCommand,
-  serializeAws_queryModifyDBClusterParameterGroupCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DBClusterParameterGroupNameMessage, ModifyDBClusterParameterGroupMessage } from "../models/models_0";
+import { ModifyDBClusterParameterGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyDBClusterParameterGroupCommand}.
+ */
 export interface ModifyDBClusterParameterGroupCommandInput extends ModifyDBClusterParameterGroupMessage {}
-export interface ModifyDBClusterParameterGroupCommandOutput
-  extends DBClusterParameterGroupNameMessage,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyDBClusterParameterGroupCommand}.
+ */
+export interface ModifyDBClusterParameterGroupCommandOutput extends DBClusterParameterGroupNameMessage, __MetadataBearer {}
 
 /**
  * <p> Modifies the parameters of a DB cluster parameter group. To modify more than one
  *       parameter, submit a list of the following: <code>ParameterName</code>,
  *       <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be
  *       modified in a single request.</p>
- *
  *          <note>
  *             <p>Changes to dynamic parameters are applied immediately. Changes to static parameters
  *         require a reboot without failover to the DB cluster associated with the parameter group
@@ -50,71 +48,70 @@ export interface ModifyDBClusterParameterGroupCommandOutput
  * ```javascript
  * import { NeptuneClient, ModifyDBClusterParameterGroupCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, ModifyDBClusterParameterGroupCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // ModifyDBClusterParameterGroupMessage
+ *   DBClusterParameterGroupName: "STRING_VALUE", // required
+ *   Parameters: [ // ParametersList // required
+ *     { // Parameter
+ *       ParameterName: "STRING_VALUE",
+ *       ParameterValue: "STRING_VALUE",
+ *       Description: "STRING_VALUE",
+ *       Source: "STRING_VALUE",
+ *       ApplyType: "STRING_VALUE",
+ *       DataType: "STRING_VALUE",
+ *       AllowedValues: "STRING_VALUE",
+ *       IsModifiable: true || false,
+ *       MinimumEngineVersion: "STRING_VALUE",
+ *       ApplyMethod: "immediate" || "pending-reboot",
+ *     },
+ *   ],
+ * };
  * const command = new ModifyDBClusterParameterGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DBClusterParameterGroupNameMessage
+ * //   DBClusterParameterGroupName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ModifyDBClusterParameterGroupCommandInput - {@link ModifyDBClusterParameterGroupCommandInput}
+ * @returns {@link ModifyDBClusterParameterGroupCommandOutput}
  * @see {@link ModifyDBClusterParameterGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyDBClusterParameterGroupCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBParameterGroupNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBParameterGroupName</i> does not refer to an
+ *       existing DB parameter group.</p>
+ *
+ * @throws {@link InvalidDBParameterGroupStateFault} (client fault)
+ *  <p>The DB parameter group is in use or is in an invalid state. If you are attempting to
+ *       delete the parameter group, you cannot delete it when the parameter group is in this state.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyDBClusterParameterGroupCommand extends $Command<
-  ModifyDBClusterParameterGroupCommandInput,
-  ModifyDBClusterParameterGroupCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyDBClusterParameterGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyDBClusterParameterGroupCommandInput, ModifyDBClusterParameterGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "ModifyDBClusterParameterGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyDBClusterParameterGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DBClusterParameterGroupNameMessage.filterSensitiveLog,
+export class ModifyDBClusterParameterGroupCommand extends command<ModifyDBClusterParameterGroupCommandInput, ModifyDBClusterParameterGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyDBClusterParameterGroup",
+  ModifyDBClusterParameterGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyDBClusterParameterGroupMessage;
+      output: DBClusterParameterGroupNameMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyDBClusterParameterGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyDBClusterParameterGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyDBClusterParameterGroupCommandOutput> {
-    return deserializeAws_queryModifyDBClusterParameterGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyDBClusterParameterGroupCommandInput;
+      output: ModifyDBClusterParameterGroupCommandOutput;
+    };
+  };
 }

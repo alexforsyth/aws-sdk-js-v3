@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { Appflow } from "../Appflow";
 import { AppflowClient } from "../AppflowClient";
 import {
   DescribeConnectorProfilesCommand,
   DescribeConnectorProfilesCommandInput,
   DescribeConnectorProfilesCommandOutput,
 } from "../commands/DescribeConnectorProfilesCommand";
-import { AppflowPaginationConfiguration } from "./Interfaces";
+import type { AppflowPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: AppflowClient,
-  input: DescribeConnectorProfilesCommandInput,
-  ...args: any
-): Promise<DescribeConnectorProfilesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeConnectorProfilesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Appflow,
-  input: DescribeConnectorProfilesCommandInput,
-  ...args: any
-): Promise<DescribeConnectorProfilesCommandOutput> => {
-  // @ts-ignore
-  return await client.describeConnectorProfiles(input, ...args);
-};
-export async function* paginateDescribeConnectorProfiles(
+export const paginateDescribeConnectorProfiles: (
   config: AppflowPaginationConfiguration,
   input: DescribeConnectorProfilesCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeConnectorProfilesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeConnectorProfilesCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof Appflow) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof AppflowClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Appflow | AppflowClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeConnectorProfilesCommandOutput> = createPaginator<
+  AppflowPaginationConfiguration,
+  DescribeConnectorProfilesCommandInput,
+  DescribeConnectorProfilesCommandOutput
+>(AppflowClient, DescribeConnectorProfilesCommand, "nextToken", "nextToken", "maxResults");

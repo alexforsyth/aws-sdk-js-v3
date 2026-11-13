@@ -1,0 +1,13948 @@
+// smithy-typescript generated code
+import type {
+  ActionConnectorType,
+  AgentLifecycle,
+  AgentStatus,
+  AggType,
+  AnalysisFilterAttribute,
+  AnchorType,
+  AnonymousUserDashboardEmbeddingConfigurationDisabledFeature,
+  AnonymousUserDashboardEmbeddingConfigurationEnabledFeature,
+  ApplicableToType,
+  AppVisibility,
+  AssetBundleExportFormat,
+  AssetBundleExportJobAnalysisPropertyToOverride,
+  AssetBundleExportJobDashboardPropertyToOverride,
+  AssetBundleExportJobDataSetPropertyToOverride,
+  AssetBundleExportJobDataSourcePropertyToOverride,
+  AssetBundleExportJobFolderPropertyToOverride,
+  AssetBundleExportJobRefreshSchedulePropertyToOverride,
+  AssetBundleExportJobStatus,
+  AssetBundleExportJobThemePropertyToOverride,
+  AssetBundleExportJobTopicV2PropertyToOverride,
+  AssetBundleExportJobVPCConnectionPropertyToOverride,
+  AssetBundleImportFailureAction,
+  AssetBundleImportJobStatus,
+  AssetType,
+  AudioExtractionStatus,
+  AuthenticationMethodOption,
+  AuthenticationType,
+  AuthorizationCodeGrantCredentialsSource,
+  AuthType,
+  BrandStatus,
+  BrandVersionStatus,
+  CapabilityState,
+  ClientCredentialsSource,
+  ColumnDataSubType,
+  ColumnDataType,
+  ColumnOrderingType,
+  ComparisonMethodType,
+  ConnectionAuthType,
+  ConstantType,
+  ContributionAnalysisDirection,
+  ContributionAnalysisSortType,
+  DashboardBehavior,
+  DashboardUIState,
+  DefaultCategoryEffect,
+  DisplayFormat,
+  Edition,
+  FilterClass,
+  FilterOperator,
+  GeoSpatialCountryCode,
+  GeoSpatialDataRole,
+  GovernedAction,
+  HorizontalTextAlignment,
+  LimitSource,
+  LimitUnit,
+  LookbackWindowSizeUnit,
+  NullFilterOption,
+  NumberScale,
+  RefreshFailureAlertStatus,
+  ResourceStatus,
+  ResourceType,
+  ReviewedAnswerErrorCode,
+  ServiceType,
+  SheetContentType,
+  SnapshotFileFormatType,
+  SnapshotFileSheetSelectionScope,
+  StarburstProductType,
+  TimeGranularity,
+  TopicIRFilterFunction,
+  TopicIRFilterType,
+  TopicNumericSeparatorSymbol,
+  TopicSortDirection,
+  TopicTimeGranularity,
+  UndefinedSpecifiedValueType,
+  ValidationStrategyMode,
+  WebCrawlerAuthType,
+  WordCloudCloudLayout,
+  WordCloudWordCasing,
+  WordCloudWordOrientation,
+  WordCloudWordPadding,
+  WordCloudWordScaling,
+} from "./enums";
+import type {
+  AccountCustomization,
+  AdditionalNotes,
+  AdHocFilteringOption,
+  AggFunction,
+  AggregationPartitionBy,
+  AmazonElasticsearchParameters,
+  AmazonOpenSearchParameters,
+  AxisDisplayOptions,
+  ChartAxisLabelOptions,
+  DataLabelOptions,
+  DimensionField,
+  FilterControl,
+  FontConfiguration,
+  Layout,
+  LegendOptions,
+  MeasureField,
+  ParameterControl,
+  SheetControlLayout,
+  SheetImage,
+  SheetTextBox,
+  TransformOperationSource,
+  VisualCustomAction,
+  VisualCustomActionDefaults,
+  VisualInteractionOptions,
+  VisualMenuOption,
+} from "./models_0";
+import type {
+  BarChartVisual,
+  BoxPlotVisual,
+  ColorScale,
+  ColumnHierarchy,
+  ComboChartVisual,
+  ConditionalFormattingColor,
+  CustomContentVisual,
+  EmptyVisual,
+  FieldSortOptions,
+  FilledMapVisual,
+  FunnelChartVisual,
+  GaugeChartVisual,
+  GeospatialMapVisual,
+  HeatMapVisual,
+  HistogramVisual,
+  InsightVisual,
+  ItemsLimitConfiguration,
+  KPIVisual,
+  LayerMapVisual,
+  LineChartVisual,
+  PieChartVisual,
+  PivotTableVisual,
+  PluginVisual,
+  RadarChartVisual,
+  SankeyDiagramVisual,
+  ScatterPlotVisual,
+  TableCellConditionalFormatting,
+  TableConfiguration,
+  TooltipOptions,
+  VisualPalette,
+  VisualSubtitleLabelOptions,
+  VisualTitleLabelOptions,
+} from "./models_1";
+
+/**
+ * <p>The conditional formatting of a table row.</p>
+ * @public
+ */
+export interface TableRowConditionalFormatting {
+  /**
+   * <p>The conditional formatting color (solid, gradient) of the background for a table row.</p>
+   * @public
+   */
+  BackgroundColor?: ConditionalFormattingColor | undefined;
+
+  /**
+   * <p>The conditional formatting color (solid, gradient) of the text for a table row.</p>
+   * @public
+   */
+  TextColor?: ConditionalFormattingColor | undefined;
+}
+
+/**
+ * <p>Conditional formatting options for a <code>PivotTableVisual</code>.</p>
+ * @public
+ */
+export interface TableConditionalFormattingOption {
+  /**
+   * <p>The cell conditional formatting option for a table.</p>
+   * @public
+   */
+  Cell?: TableCellConditionalFormatting | undefined;
+
+  /**
+   * <p>The row conditional formatting option for a table.</p>
+   * @public
+   */
+  Row?: TableRowConditionalFormatting | undefined;
+}
+
+/**
+ * <p>The conditional formatting for a <code>PivotTableVisual</code>.</p>
+ * @public
+ */
+export interface TableConditionalFormatting {
+  /**
+   * <p>Conditional formatting options for a <code>PivotTableVisual</code>.</p>
+   * @public
+   */
+  ConditionalFormattingOptions?: TableConditionalFormattingOption[] | undefined;
+}
+
+/**
+ * <p>A table visual.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tabular.html">Using tables as visuals</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ * @public
+ */
+export interface TableVisual {
+  /**
+   * <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
+   * @public
+   */
+  VisualId: string | undefined;
+
+  /**
+   * <p>The title that is displayed on the visual.</p>
+   * @public
+   */
+  Title?: VisualTitleLabelOptions | undefined;
+
+  /**
+   * <p>The subtitle that is displayed on the visual.</p>
+   * @public
+   */
+  Subtitle?: VisualSubtitleLabelOptions | undefined;
+
+  /**
+   * <p>The configuration settings of the visual.</p>
+   * @public
+   */
+  ChartConfiguration?: TableConfiguration | undefined;
+
+  /**
+   * <p>The conditional formatting for a <code>PivotTableVisual</code>.</p>
+   * @public
+   */
+  ConditionalFormatting?: TableConditionalFormatting | undefined;
+
+  /**
+   * <p>The list of custom actions that are configured for a visual.</p>
+   * @public
+   */
+  Actions?: VisualCustomAction[] | undefined;
+
+  /**
+   * <p>The alt text for the visual.</p>
+   * @public
+   */
+  VisualContentAltText?: string | undefined;
+}
+
+/**
+ * <p>Aggregated field wells of a tree map.</p>
+ * @public
+ */
+export interface TreeMapAggregatedFieldWells {
+  /**
+   * <p>The group by field well of a tree map. Values are grouped based on group by fields.</p>
+   * @public
+   */
+  Groups?: DimensionField[] | undefined;
+
+  /**
+   * <p>The size field well of a tree map. Values are aggregated based on group by fields.</p>
+   * @public
+   */
+  Sizes?: MeasureField[] | undefined;
+
+  /**
+   * <p>The color field well of a tree map. Values are grouped by aggregations based on group by fields.</p>
+   * @public
+   */
+  Colors?: MeasureField[] | undefined;
+}
+
+/**
+ * <p>The field wells of a tree map.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface TreeMapFieldWells {
+  /**
+   * <p>The aggregated field wells of a tree map.</p>
+   * @public
+   */
+  TreeMapAggregatedFieldWells?: TreeMapAggregatedFieldWells | undefined;
+}
+
+/**
+ * <p>The sort configuration of a tree map.</p>
+ * @public
+ */
+export interface TreeMapSortConfiguration {
+  /**
+   * <p>The sort configuration of group by fields.</p>
+   * @public
+   */
+  TreeMapSort?: FieldSortOptions[] | undefined;
+
+  /**
+   * <p>The limit on the number of groups that are displayed.</p>
+   * @public
+   */
+  TreeMapGroupItemsLimitConfiguration?: ItemsLimitConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration of a tree map.</p>
+ * @public
+ */
+export interface TreeMapConfiguration {
+  /**
+   * <p>The field wells of the visual.</p>
+   * @public
+   */
+  FieldWells?: TreeMapFieldWells | undefined;
+
+  /**
+   * <p>The sort configuration of a tree map.</p>
+   * @public
+   */
+  SortConfiguration?: TreeMapSortConfiguration | undefined;
+
+  /**
+   * <p>The label options (label text, label visibility) of the groups that are displayed in a tree map.</p>
+   * @public
+   */
+  GroupLabelOptions?: ChartAxisLabelOptions | undefined;
+
+  /**
+   * <p>The label options (label text, label visibility) of the sizes that are displayed in a tree map.</p>
+   * @public
+   */
+  SizeLabelOptions?: ChartAxisLabelOptions | undefined;
+
+  /**
+   * <p>The label options (label text, label visibility) for the colors displayed in a tree map.</p>
+   * @public
+   */
+  ColorLabelOptions?: ChartAxisLabelOptions | undefined;
+
+  /**
+   * <p>The color options (gradient color, point of divergence) of a tree map.</p>
+   * @public
+   */
+  ColorScale?: ColorScale | undefined;
+
+  /**
+   * <p>The legend display setup of the visual.</p>
+   * @public
+   */
+  Legend?: LegendOptions | undefined;
+
+  /**
+   * <p>The options that determine if visual data labels are displayed.</p>
+   * @public
+   */
+  DataLabels?: DataLabelOptions | undefined;
+
+  /**
+   * <p>The tooltip display setup of the visual.</p>
+   * @public
+   */
+  Tooltip?: TooltipOptions | undefined;
+
+  /**
+   * <p>The general visual interactions setup for a visual.</p>
+   * @public
+   */
+  Interactions?: VisualInteractionOptions | undefined;
+}
+
+/**
+ * <p>A tree map.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html">Using tree maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ * @public
+ */
+export interface TreeMapVisual {
+  /**
+   * <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
+   * @public
+   */
+  VisualId: string | undefined;
+
+  /**
+   * <p>The title that is displayed on the visual.</p>
+   * @public
+   */
+  Title?: VisualTitleLabelOptions | undefined;
+
+  /**
+   * <p>The subtitle that is displayed on the visual.</p>
+   * @public
+   */
+  Subtitle?: VisualSubtitleLabelOptions | undefined;
+
+  /**
+   * <p>The configuration settings of the visual.</p>
+   * @public
+   */
+  ChartConfiguration?: TreeMapConfiguration | undefined;
+
+  /**
+   * <p>The list of custom actions that are configured for a visual.</p>
+   * @public
+   */
+  Actions?: VisualCustomAction[] | undefined;
+
+  /**
+   * <p>The column hierarchy that is used during drill-downs and drill-ups.</p>
+   * @public
+   */
+  ColumnHierarchies?: ColumnHierarchy[] | undefined;
+
+  /**
+   * <p>The alt text for the visual.</p>
+   * @public
+   */
+  VisualContentAltText?: string | undefined;
+}
+
+/**
+ * <p>The color configuration for individual groups within a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartGroupColorConfiguration {
+  /**
+   * <p>Defines the color for the positive bars of a waterfall chart.</p>
+   * @public
+   */
+  PositiveBarColor?: string | undefined;
+
+  /**
+   * <p>Defines the color for the negative bars of a waterfall chart.</p>
+   * @public
+   */
+  NegativeBarColor?: string | undefined;
+
+  /**
+   * <p>Defines the color for the total bars of a waterfall chart.</p>
+   * @public
+   */
+  TotalBarColor?: string | undefined;
+}
+
+/**
+ * <p>The color configuration of a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartColorConfiguration {
+  /**
+   * <p>The color configuration for individual groups within a waterfall visual.</p>
+   * @public
+   */
+  GroupColorConfiguration?: WaterfallChartGroupColorConfiguration | undefined;
+}
+
+/**
+ * <p>The field well configuration of a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartAggregatedFieldWells {
+  /**
+   * <p>The category field wells of a waterfall visual.</p>
+   * @public
+   */
+  Categories?: DimensionField[] | undefined;
+
+  /**
+   * <p>The value field wells of a waterfall visual.</p>
+   * @public
+   */
+  Values?: MeasureField[] | undefined;
+
+  /**
+   * <p>The breakdown field wells of a waterfall visual.</p>
+   * @public
+   */
+  Breakdowns?: DimensionField[] | undefined;
+}
+
+/**
+ * <p>The field well configuration of a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartFieldWells {
+  /**
+   * <p>The field well configuration of a waterfall visual.</p>
+   * @public
+   */
+  WaterfallChartAggregatedFieldWells?: WaterfallChartAggregatedFieldWells | undefined;
+}
+
+/**
+ * <p>The sort configuration of a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartSortConfiguration {
+  /**
+   * <p>The sort configuration of the category fields.</p>
+   * @public
+   */
+  CategorySort?: FieldSortOptions[] | undefined;
+
+  /**
+   * <p>The limit on the number of bar groups that are displayed.</p>
+   * @public
+   */
+  BreakdownItemsLimit?: ItemsLimitConfiguration | undefined;
+}
+
+/**
+ * <p>The options that determine the presentation of a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartOptions {
+  /**
+   * <p>This option determines the total bar label of a waterfall visual.</p>
+   * @public
+   */
+  TotalBarLabel?: string | undefined;
+}
+
+/**
+ * <p>The configuration for a waterfall visual.</p>
+ * @public
+ */
+export interface WaterfallChartConfiguration {
+  /**
+   * <p>The field well configuration of a waterfall visual.</p>
+   * @public
+   */
+  FieldWells?: WaterfallChartFieldWells | undefined;
+
+  /**
+   * <p>The sort configuration of a waterfall visual.</p>
+   * @public
+   */
+  SortConfiguration?: WaterfallChartSortConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the presentation of a waterfall visual.</p>
+   * @public
+   */
+  WaterfallChartOptions?: WaterfallChartOptions | undefined;
+
+  /**
+   * <p>The options that determine the presentation of the category axis label.</p>
+   * @public
+   */
+  CategoryAxisLabelOptions?: ChartAxisLabelOptions | undefined;
+
+  /**
+   * <p>The options that determine the presentation of the category axis.</p>
+   * @public
+   */
+  CategoryAxisDisplayOptions?: AxisDisplayOptions | undefined;
+
+  /**
+   * <p>The options that determine the presentation of the y-axis label.</p>
+   * @public
+   */
+  PrimaryYAxisLabelOptions?: ChartAxisLabelOptions | undefined;
+
+  /**
+   * <p>The options that determine the presentation of the y-axis.</p>
+   * @public
+   */
+  PrimaryYAxisDisplayOptions?: AxisDisplayOptions | undefined;
+
+  /**
+   * <p>The legend configuration of a waterfall visual.</p>
+   * @public
+   */
+  Legend?: LegendOptions | undefined;
+
+  /**
+   * <p>The data label configuration of a waterfall visual.</p>
+   * @public
+   */
+  DataLabels?: DataLabelOptions | undefined;
+
+  /**
+   * <p>The visual palette configuration of a waterfall visual.</p>
+   * @public
+   */
+  VisualPalette?: VisualPalette | undefined;
+
+  /**
+   * <p>The color configuration of a waterfall visual.</p>
+   * @public
+   */
+  ColorConfiguration?: WaterfallChartColorConfiguration | undefined;
+
+  /**
+   * <p>The general visual interactions setup for a visual.</p>
+   * @public
+   */
+  Interactions?: VisualInteractionOptions | undefined;
+}
+
+/**
+ * <p>A waterfall chart.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html">Using waterfall charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ * @public
+ */
+export interface WaterfallVisual {
+  /**
+   * <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
+   * @public
+   */
+  VisualId: string | undefined;
+
+  /**
+   * <p>The title that is displayed on the visual.</p>
+   * @public
+   */
+  Title?: VisualTitleLabelOptions | undefined;
+
+  /**
+   * <p>The subtitle that is displayed on the visual.</p>
+   * @public
+   */
+  Subtitle?: VisualSubtitleLabelOptions | undefined;
+
+  /**
+   * <p>The configuration for a waterfall visual.</p>
+   * @public
+   */
+  ChartConfiguration?: WaterfallChartConfiguration | undefined;
+
+  /**
+   * <p>The list of custom actions that are configured for a visual.</p>
+   * @public
+   */
+  Actions?: VisualCustomAction[] | undefined;
+
+  /**
+   * <p>The column hierarchy that is used during drill-downs and drill-ups.</p>
+   * @public
+   */
+  ColumnHierarchies?: ColumnHierarchy[] | undefined;
+
+  /**
+   * <p>The alt text for the visual.</p>
+   * @public
+   */
+  VisualContentAltText?: string | undefined;
+}
+
+/**
+ * <p>The aggregated field wells of a word cloud.</p>
+ * @public
+ */
+export interface WordCloudAggregatedFieldWells {
+  /**
+   * <p>The group by field well of a word cloud. Values are grouped by group by fields.</p>
+   * @public
+   */
+  GroupBy?: DimensionField[] | undefined;
+
+  /**
+   * <p>The size field well of a word cloud. Values are aggregated based on group by fields.</p>
+   * @public
+   */
+  Size?: MeasureField[] | undefined;
+}
+
+/**
+ * <p>The field wells of a word cloud visual.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface WordCloudFieldWells {
+  /**
+   * <p>The aggregated field wells of a word cloud.</p>
+   * @public
+   */
+  WordCloudAggregatedFieldWells?: WordCloudAggregatedFieldWells | undefined;
+}
+
+/**
+ * <p>The sort configuration of a word cloud visual.</p>
+ * @public
+ */
+export interface WordCloudSortConfiguration {
+  /**
+   * <p>The limit on the number of groups that are displayed in a word cloud.</p>
+   * @public
+   */
+  CategoryItemsLimit?: ItemsLimitConfiguration | undefined;
+
+  /**
+   * <p>The sort configuration of group by fields.</p>
+   * @public
+   */
+  CategorySort?: FieldSortOptions[] | undefined;
+}
+
+/**
+ * <p>The word cloud options for a word cloud visual.</p>
+ * @public
+ */
+export interface WordCloudOptions {
+  /**
+   * <p>The word orientation options (horizontal, horizontal_and_vertical) for the words in a word cloud.</p>
+   * @public
+   */
+  WordOrientation?: WordCloudWordOrientation | undefined;
+
+  /**
+   * <p>The word scaling options (emphasize, normal) for the words in a word cloud.</p>
+   * @public
+   */
+  WordScaling?: WordCloudWordScaling | undefined;
+
+  /**
+   * <p>The cloud layout options (fluid, normal) of a word cloud.</p>
+   * @public
+   */
+  CloudLayout?: WordCloudCloudLayout | undefined;
+
+  /**
+   * <p>The word casing options (lower_case, existing_case) for the words in a word cloud.</p>
+   * @public
+   */
+  WordCasing?: WordCloudWordCasing | undefined;
+
+  /**
+   * <p>The word padding options (none, small, medium, large) for the words in a word cloud.</p>
+   * @public
+   */
+  WordPadding?: WordCloudWordPadding | undefined;
+
+  /**
+   * <p>The length limit of each word from 1-100.</p>
+   * @public
+   */
+  MaximumStringLength?: number | undefined;
+}
+
+/**
+ * <p>The configuration of a word cloud visual.</p>
+ * @public
+ */
+export interface WordCloudChartConfiguration {
+  /**
+   * <p>The field wells of the visual.</p>
+   * @public
+   */
+  FieldWells?: WordCloudFieldWells | undefined;
+
+  /**
+   * <p>The sort configuration of a word cloud visual.</p>
+   * @public
+   */
+  SortConfiguration?: WordCloudSortConfiguration | undefined;
+
+  /**
+   * <p>The label options (label text, label visibility, and sort icon visibility) for the word cloud category.</p>
+   * @public
+   */
+  CategoryLabelOptions?: ChartAxisLabelOptions | undefined;
+
+  /**
+   * <p>The options for a word cloud visual.</p>
+   * @public
+   */
+  WordCloudOptions?: WordCloudOptions | undefined;
+
+  /**
+   * <p>The general visual interactions setup for a visual.</p>
+   * @public
+   */
+  Interactions?: VisualInteractionOptions | undefined;
+}
+
+/**
+ * <p>A word cloud.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html">Using word clouds</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ * @public
+ */
+export interface WordCloudVisual {
+  /**
+   * <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
+   * @public
+   */
+  VisualId: string | undefined;
+
+  /**
+   * <p>The title that is displayed on the visual.</p>
+   * @public
+   */
+  Title?: VisualTitleLabelOptions | undefined;
+
+  /**
+   * <p>The subtitle that is displayed on the visual.</p>
+   * @public
+   */
+  Subtitle?: VisualSubtitleLabelOptions | undefined;
+
+  /**
+   * <p>The configuration settings of the visual.</p>
+   * @public
+   */
+  ChartConfiguration?: WordCloudChartConfiguration | undefined;
+
+  /**
+   * <p>The list of custom actions that are configured for a visual.</p>
+   * @public
+   */
+  Actions?: VisualCustomAction[] | undefined;
+
+  /**
+   * <p>The column hierarchy that is used during drill-downs and drill-ups.</p>
+   * @public
+   */
+  ColumnHierarchies?: ColumnHierarchy[] | undefined;
+
+  /**
+   * <p>The alt text for the visual.</p>
+   * @public
+   */
+  VisualContentAltText?: string | undefined;
+}
+
+/**
+ * <p>A visual displayed on a sheet in an analysis, dashboard, or template.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface Visual {
+  /**
+   * <p>A table visual.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tabular.html">Using tables as visuals</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  TableVisual?: TableVisual | undefined;
+
+  /**
+   * <p>A pivot table.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html">Using pivot tables</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  PivotTableVisual?: PivotTableVisual | undefined;
+
+  /**
+   * <p>A bar chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/bar-charts.html">Using bar charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  BarChartVisual?: BarChartVisual | undefined;
+
+  /**
+   * <p>A key performance indicator (KPI).</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/kpi.html">Using KPIs</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  KPIVisual?: KPIVisual | undefined;
+
+  /**
+   * <p>A pie or donut chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html">Using pie charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  PieChartVisual?: PieChartVisual | undefined;
+
+  /**
+   * <p>A gauge chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/gauge-chart.html">Using gauge charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  GaugeChartVisual?: GaugeChartVisual | undefined;
+
+  /**
+   * <p>A line chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/line-charts.html">Using line charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  LineChartVisual?: LineChartVisual | undefined;
+
+  /**
+   * <p>A heat map.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/heat-map.html">Using heat maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  HeatMapVisual?: HeatMapVisual | undefined;
+
+  /**
+   * <p>A tree map.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html">Using tree maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  TreeMapVisual?: TreeMapVisual | undefined;
+
+  /**
+   * <p>A geospatial map or a points on map visual.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html">Creating point maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  GeospatialMapVisual?: GeospatialMapVisual | undefined;
+
+  /**
+   * <p>A filled map.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html">Creating filled maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  FilledMapVisual?: FilledMapVisual | undefined;
+
+  /**
+   * <p>The properties for a layer map visual</p>
+   * @public
+   */
+  LayerMapVisual?: LayerMapVisual | undefined;
+
+  /**
+   * <p>A funnel chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/funnel-visual-content.html">Using funnel charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  FunnelChartVisual?: FunnelChartVisual | undefined;
+
+  /**
+   * <p>A scatter plot.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html">Using scatter plots</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  ScatterPlotVisual?: ScatterPlotVisual | undefined;
+
+  /**
+   * <p>A combo chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html">Using combo charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  ComboChartVisual?: ComboChartVisual | undefined;
+
+  /**
+   * <p>A box plot.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html">Using box plots</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  BoxPlotVisual?: BoxPlotVisual | undefined;
+
+  /**
+   * <p>A waterfall chart.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html">Using waterfall charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  WaterfallVisual?: WaterfallVisual | undefined;
+
+  /**
+   * <p>A histogram.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html">Using histograms</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  HistogramVisual?: HistogramVisual | undefined;
+
+  /**
+   * <p>A word cloud.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html">Using word clouds</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  WordCloudVisual?: WordCloudVisual | undefined;
+
+  /**
+   * <p>An insight visual.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html">Working with insights</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  InsightVisual?: InsightVisual | undefined;
+
+  /**
+   * <p>A sankey diagram.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html">Using Sankey diagrams</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  SankeyDiagramVisual?: SankeyDiagramVisual | undefined;
+
+  /**
+   * <p>A visual that contains custom content.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html">Using custom visual content</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  CustomContentVisual?: CustomContentVisual | undefined;
+
+  /**
+   * <p>An empty visual.</p>
+   * @public
+   */
+  EmptyVisual?: EmptyVisual | undefined;
+
+  /**
+   * <p>A radar chart visual.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html">Using radar charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  RadarChartVisual?: RadarChartVisual | undefined;
+
+  /**
+   * <p>The custom plugin visual type.</p>
+   * @public
+   */
+  PluginVisual?: PluginVisual | undefined;
+}
+
+/**
+ * <p>A sheet is an object that contains a set of visuals that
+ *             are viewed together on one page in a paginated report. Every analysis and dashboard must contain at least one sheet.</p>
+ * @public
+ */
+export interface SheetDefinition {
+  /**
+   * <p>The unique identifier of a sheet.</p>
+   * @public
+   */
+  SheetId: string | undefined;
+
+  /**
+   * <p>The title of the sheet.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>A description of the sheet.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The name of the sheet. This name is displayed on the sheet's tab in the Quick
+   *             console.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The list of parameter controls that are on a sheet.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-controls.html">Using a Control with a Parameter in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  ParameterControls?: ParameterControl[] | undefined;
+
+  /**
+   * <p>The list of filter controls that are on a sheet.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filter-controls.html">Adding filter controls to analysis sheets</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  FilterControls?: FilterControl[] | undefined;
+
+  /**
+   * <p>A list of the visuals that are on a sheet. Visual placement is determined by the layout of the sheet.</p>
+   * @public
+   */
+  Visuals?: Visual[] | undefined;
+
+  /**
+   * <p>The text boxes that are on a sheet.</p>
+   * @public
+   */
+  TextBoxes?: SheetTextBox[] | undefined;
+
+  /**
+   * <p>A list of images on a sheet.</p>
+   * @public
+   */
+  Images?: SheetImage[] | undefined;
+
+  /**
+   * <p>Layouts define how the components of a sheet are arranged.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  Layouts?: Layout[] | undefined;
+
+  /**
+   * <p>The control layouts of the sheet.</p>
+   * @public
+   */
+  SheetControlLayouts?: SheetControlLayout[] | undefined;
+
+  /**
+   * <p>The layout content type of the sheet. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PAGINATED</code>: Creates a sheet for a paginated report.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INTERACTIVE</code>: Creates a sheet for an interactive dashboard.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ContentType?: SheetContentType | undefined;
+
+  /**
+   * <p>A list of visual custom actions for the sheet.</p>
+   * @public
+   */
+  CustomActionDefaults?: VisualCustomActionDefaults | undefined;
+}
+
+/**
+ * <p>The structure that contains the Amazon S3 location to download the static file from.</p>
+ * @public
+ */
+export interface StaticFileS3SourceOptions {
+  /**
+   * <p>The name of the Amazon S3 bucket.</p>
+   * @public
+   */
+  BucketName: string | undefined;
+
+  /**
+   * <p>The identifier of the static file in the Amazon S3 bucket.</p>
+   * @public
+   */
+  ObjectKey: string | undefined;
+
+  /**
+   * <p>The Region of the Amazon S3 account that contains the bucket.</p>
+   * @public
+   */
+  Region: string | undefined;
+}
+
+/**
+ * <p>The structure that contains the URL to download the static file from.</p>
+ * @public
+ */
+export interface StaticFileUrlSourceOptions {
+  /**
+   * <p>The URL to download the static file from.</p>
+   * @public
+   */
+  Url: string | undefined;
+}
+
+/**
+ * <p>The source of the static file.</p>
+ * @public
+ */
+export interface StaticFileSource {
+  /**
+   * <p>The structure that contains the URL to download the static file from.</p>
+   * @public
+   */
+  UrlOptions?: StaticFileUrlSourceOptions | undefined;
+
+  /**
+   * <p>The structure that contains the Amazon S3 location to download the static file from.</p>
+   * @public
+   */
+  S3Options?: StaticFileS3SourceOptions | undefined;
+}
+
+/**
+ * <p>A static file that contains an image.</p>
+ * @public
+ */
+export interface ImageStaticFile {
+  /**
+   * <p>The ID of the static file that contains an image.</p>
+   * @public
+   */
+  StaticFileId: string | undefined;
+
+  /**
+   * <p>The source of the image static file.</p>
+   * @public
+   */
+  Source?: StaticFileSource | undefined;
+}
+
+/**
+ * <p>A static file that contains the geospatial data.</p>
+ * @public
+ */
+export interface SpatialStaticFile {
+  /**
+   * <p>The ID of the spatial static file.</p>
+   * @public
+   */
+  StaticFileId: string | undefined;
+
+  /**
+   * <p>The source of the spatial static file.</p>
+   * @public
+   */
+  Source?: StaticFileSource | undefined;
+}
+
+/**
+ * <p>The static file.</p>
+ * @public
+ */
+export interface StaticFile {
+  /**
+   * <p>The image static file.</p>
+   * @public
+   */
+  ImageStaticFile?: ImageStaticFile | undefined;
+
+  /**
+   * <p>The spacial static file.</p>
+   * @public
+   */
+  SpatialStaticFile?: SpatialStaticFile | undefined;
+}
+
+/**
+ * <p>A tooltip sheet is an object that contains a set of visuals that
+ *             are used as a tooltip. Every analysis and dashboard must contain at least one non-tooltip sheet.</p>
+ * @public
+ */
+export interface TooltipSheetDefinition {
+  /**
+   * <p>The unique identifier of a tooltip sheet.</p>
+   * @public
+   */
+  SheetId: string | undefined;
+
+  /**
+   * <p>The name of the tooltip sheet. This name is displayed on the sheet's tab in the Quick
+   *             console.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A list of the visuals that are on a tooltip sheet.</p>
+   * @public
+   */
+  Visuals?: Visual[] | undefined;
+
+  /**
+   * <p>The text boxes that are on a tooltip sheet.</p>
+   * @public
+   */
+  TextBoxes?: SheetTextBox[] | undefined;
+
+  /**
+   * <p>A list of images on a tooltip sheet.</p>
+   * @public
+   */
+  Images?: SheetImage[] | undefined;
+
+  /**
+   * <p>Layouts define how the components of a tooltip sheet are arranged.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+   * @public
+   */
+  Layouts?: Layout[] | undefined;
+}
+
+/**
+ * <p>A topic.</p>
+ * @public
+ */
+export interface TopicIdentifierDeclaration {
+  /**
+   * <p>The identifier of the topic, typically the topic's name.</p>
+   * @public
+   */
+  Identifier: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the topic.</p>
+   * @public
+   */
+  TopicArn: string | undefined;
+}
+
+/**
+ * <p>A filter that you apply when searching for one or more analyses.</p>
+ * @public
+ */
+export interface AnalysisSearchFilter {
+  /**
+   * <p>The comparison operator that you want to use as a filter, for example  <code>"Operator": "StringEquals"</code>. Valid values are  <code>"StringEquals"</code>  and  <code>"StringLike"</code>.</p>
+   *          <p>If you set the operator value to <code>"StringEquals"</code>, you need to provide an ownership related filter in the <code>"NAME"</code> field and the arn of the user or group whose folders you want to search in the <code>"Value"</code> field. For example,  <code>"Name":"DIRECT_QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
+   *          <p>If you set the value to <code>"StringLike"</code>, you need to provide the name of the folders you are searching for. For example, <code>"Name":"ANALYSIS_NAME", "Operator": "StringLike", "Value": "Test"</code>. The <code>"StringLike"</code> operator only supports the <code>NAME</code> value <code>ANALYSIS_NAME</code>.</p>
+   * @public
+   */
+  Operator?: FilterOperator | undefined;
+
+  /**
+   * <p>The name of the value that you want to use as a filter, for example <code>"Name":
+   *                 "QUICKSIGHT_OWNER"</code>.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the analysis' owners or viewers are returned. Implicit permissions from folders or groups are considered. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners of the analyses are returned. Implicit permissions from folders or groups are considered.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as the only owner of the analysis are returned. Implicit permissions from folders or groups are not considered.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners of the analyses are returned. Implicit permissions from folders or groups are not considered.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners or viewers of the analyses are returned. Implicit permissions from folders or groups are not considered. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ANALYSIS_NAME</code>: Any analyses whose names have a substring match to this value will be returned.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Name?: AnalysisFilterAttribute | undefined;
+
+  /**
+   * <p>The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want
+   *             to use as a filter, for example <code>"Value"</code>. An example is
+   *                 <code>"arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * <p>Dataset reference.</p>
+ * @public
+ */
+export interface DataSetReference {
+  /**
+   * <p>Dataset placeholder.</p>
+   * @public
+   */
+  DataSetPlaceholder: string | undefined;
+
+  /**
+   * <p>Dataset Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  DataSetArn: string | undefined;
+}
+
+/**
+ * <p>Topic reference.</p>
+ * @public
+ */
+export interface TopicReference {
+  /**
+   * <p>Topic placeholder.</p>
+   * @public
+   */
+  TopicPlaceholder: string | undefined;
+
+  /**
+   * <p>Topic Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  TopicArn: string | undefined;
+}
+
+/**
+ * <p>The source template of an analysis.</p>
+ * @public
+ */
+export interface AnalysisSourceTemplate {
+  /**
+   * <p>The dataset references of the source template of an analysis.</p>
+   * @public
+   */
+  DataSetReferences: DataSetReference[] | undefined;
+
+  /**
+   * <p>The topic references of the source template of an analysis.</p>
+   * @public
+   */
+  TopicReferences?: TopicReference[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
+   * @public
+   */
+  Arn: string | undefined;
+}
+
+/**
+ * <p>The source entity of an analysis.</p>
+ * @public
+ */
+export interface AnalysisSourceEntity {
+  /**
+   * <p>The source template for the source entity of the analysis.</p>
+   * @public
+   */
+  SourceTemplate?: AnalysisSourceTemplate | undefined;
+}
+
+/**
+ * <p>The summary metadata that describes an analysis.</p>
+ * @public
+ */
+export interface AnalysisSummary {
+  /**
+   * <p>The Amazon Resource Name (ARN) for the analysis.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The ID of the analysis. This ID displays in the URL.</p>
+   * @public
+   */
+  AnalysisId?: string | undefined;
+
+  /**
+   * <p>The name of the analysis. This name is displayed in the Quick Sight console.
+   *             </p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The last known status for the analysis.</p>
+   * @public
+   */
+  Status?: ResourceStatus | undefined;
+
+  /**
+   * <p>The time that the analysis was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The time that the analysis was last updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
+}
+
+/**
+ * <p>The definition of the Anchor.</p>
+ * @public
+ */
+export interface Anchor {
+  /**
+   * <p>The <code>AnchorType</code> for the Anchor.</p>
+   * @public
+   */
+  AnchorType?: AnchorType | undefined;
+
+  /**
+   * <p>The <code>TimeGranularity</code> of the Anchor.</p>
+   * @public
+   */
+  TimeGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The offset of the Anchor.</p>
+   * @public
+   */
+  Offset?: number | undefined;
+}
+
+/**
+ * <p>The shared view settings of an embedded dashboard.</p>
+ * @public
+ */
+export interface SharedViewConfigurations {
+  /**
+   * <p>The shared view settings of an embedded dashboard.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>The feature configuration for an embedded dashboard.</p>
+ * @public
+ */
+export interface AnonymousUserDashboardFeatureConfigurations {
+  /**
+   * <p>The shared view settings of an embedded dashboard.</p>
+   * @public
+   */
+  SharedView?: SharedViewConfigurations | undefined;
+}
+
+/**
+ * <p>Information about the dashboard that you want to embed.</p>
+ * @public
+ */
+export interface AnonymousUserDashboardEmbeddingConfiguration {
+  /**
+   * <p>The dashboard ID for the dashboard that you want the user to see first. This ID is
+   *             included in the output URL. When the URL in response is accessed, Amazon Quick Sight
+   *             renders this dashboard.</p>
+   *          <p>The Amazon Resource Name (ARN) of this dashboard must be included in the
+   *                 <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with
+   *                 <code>InvalidParameterValueException</code>.</p>
+   * @public
+   */
+  InitialDashboardId: string | undefined;
+
+  /**
+   * <p>A list of all enabled features of a specified anonymous dashboard.</p>
+   * @public
+   */
+  EnabledFeatures?: AnonymousUserDashboardEmbeddingConfigurationEnabledFeature[] | undefined;
+
+  /**
+   * <p>A list of all disabled features of a specified anonymous dashboard.</p>
+   * @public
+   */
+  DisabledFeatures?: AnonymousUserDashboardEmbeddingConfigurationDisabledFeature[] | undefined;
+
+  /**
+   * <p>The feature configuration for an embedded dashboard.</p>
+   * @public
+   */
+  FeatureConfigurations?: AnonymousUserDashboardFeatureConfigurations | undefined;
+}
+
+/**
+ * <p>A structure that contains the following elements:</p>
+ *          <ul>
+ *             <li>
+ *                <p>The <code>DashboardId</code> of the dashboard that has the visual that you
+ *                     want to embed.</p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>SheetId</code> of the sheet that has the visual that you want to
+ *                     embed.</p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>VisualId</code> of the visual that you want to embed.</p>
+ *             </li>
+ *          </ul>
+ *          <p>The <code>DashboardId</code>, <code>SheetId</code>, and <code>VisualId</code> can be
+ *             found in the <code>IDs for developers</code> section of the <code>Embed visual</code>
+ *             pane of the visual's on-visual menu of the Amazon Quick Sight console. You can also get
+ *             the <code>DashboardId</code> with a <code>ListDashboards</code> API operation.</p>
+ * @public
+ */
+export interface DashboardVisualId {
+  /**
+   * <p>The ID of the dashboard that has the visual that you want to embed. The
+   *                 <code>DashboardId</code> can be found in the <code>IDs for developers</code> section
+   *             of the <code>Embed visual</code> pane of the visual's on-visual menu of the Quick console. You can also get the <code>DashboardId</code> with a
+   *                 <code>ListDashboards</code> API operation.</p>
+   * @public
+   */
+  DashboardId: string | undefined;
+
+  /**
+   * <p>The ID of the sheet that the has visual that you want to embed. The
+   *                 <code>SheetId</code> can be found in the <code>IDs for developers</code> section of
+   *             the <code>Embed visual</code> pane of the visual's on-visual menu of the Quick console.</p>
+   * @public
+   */
+  SheetId: string | undefined;
+
+  /**
+   * <p>The ID of the visual that you want to embed. The <code>VisualID</code> can be found in
+   *             the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the
+   *             visual's on-visual menu of the Amazon Quick Sight console.</p>
+   * @public
+   */
+  VisualId: string | undefined;
+}
+
+/**
+ * <p>The experience that you are embedding. You can use this object to generate a url that
+ *             embeds a visual into your application.</p>
+ * @public
+ */
+export interface AnonymousUserDashboardVisualEmbeddingConfiguration {
+  /**
+   * <p>The visual ID for the visual that you want the user to see. This ID is included in the
+   *             output URL. When the URL in response is accessed, Amazon Quick Sight renders this
+   *             visual.</p>
+   *          <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be
+   *             included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request
+   *             will fail with <code>InvalidParameterValueException</code>.</p>
+   * @public
+   */
+  InitialDashboardVisualId: DashboardVisualId | undefined;
+}
+
+/**
+ * <p>The settings that you want to use for the Generative Q&A experience.</p>
+ * @public
+ */
+export interface AnonymousUserGenerativeQnAEmbeddingConfiguration {
+  /**
+   * <p>The Quick Sight Q topic ID of the new reader experience topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Quick Sight renders the Generative Q&A experience with this new reader experience topic pre selected.</p>
+   *          <p>The Amazon Resource Name (ARN) of this Q new reader experience topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>
+   * @public
+   */
+  InitialTopicId: string | undefined;
+}
+
+/**
+ * <p>The settings that you want to use with the Q search bar.</p>
+ * @public
+ */
+export interface AnonymousUserQSearchBarEmbeddingConfiguration {
+  /**
+   * <p>The Quick Sight Q topic ID of the legacy topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Quick Sight renders the Q search bar with this legacy topic pre-selected.</p>
+   *          <p>The Amazon Resource Name (ARN) of this Q legacy topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>
+   * @public
+   */
+  InitialTopicId: string | undefined;
+}
+
+/**
+ * <p>The type of experience you want to embed. For anonymous users, you can embed Quick dashboards.</p>
+ * @public
+ */
+export interface AnonymousUserEmbeddingExperienceConfiguration {
+  /**
+   * <p>The type of embedding experience. In this case, Amazon Quick Sight dashboards.</p>
+   * @public
+   */
+  Dashboard?: AnonymousUserDashboardEmbeddingConfiguration | undefined;
+
+  /**
+   * <p>The type of embedding experience. In this case, Amazon Quick Sight visuals.</p>
+   * @public
+   */
+  DashboardVisual?: AnonymousUserDashboardVisualEmbeddingConfiguration | undefined;
+
+  /**
+   * <p>The Q search bar that you want to use for anonymous user embedding.</p>
+   * @public
+   */
+  QSearchBar?: AnonymousUserQSearchBarEmbeddingConfiguration | undefined;
+
+  /**
+   * <p>The Generative Q&A experience that you want to use for anonymous user embedding.</p>
+   * @public
+   */
+  GenerativeQnA?: AnonymousUserGenerativeQnAEmbeddingConfiguration | undefined;
+}
+
+/**
+ * <p>A structure that contains information that identifies the snapshot that needs to be generated.</p>
+ * @public
+ */
+export interface SnapshotFileSheetSelection {
+  /**
+   * <p>The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV, Excel, and PDF format types.</p>
+   * @public
+   */
+  SheetId: string | undefined;
+
+  /**
+   * <p>The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VISUALS</code> - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SELECTED_VISUALS</code> - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV or Excel workbook.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectionScope: SnapshotFileSheetSelectionScope | undefined;
+
+  /**
+   * <p>
+   *             A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV or Excel workbook. This value supports a maximum of 1 visual ID for CSV and 5 visual IDs across up to 5 sheet selections for Excel. If you are generating an Excel workbook, the order of the visual IDs provided in this structure determines the order of the worksheets in the Excel file.
+   *         </p>
+   * @public
+   */
+  VisualIds?: string[] | undefined;
+}
+
+/**
+ * <p>A structure that contains the information for the snapshot that you want to generate. This information is provided by you when you start a new snapshot job.</p>
+ * @public
+ */
+export interface SnapshotFile {
+  /**
+   * <p>A list of <code>SnapshotFileSheetSelection</code> objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations, 5 Excel configurations, or 1 configuration for PDF.</p>
+   * @public
+   */
+  SheetSelections: SnapshotFileSheetSelection[] | undefined;
+
+  /**
+   * <p>The format of the snapshot file to be generated. You can choose between <code>CSV</code>, <code>Excel</code>, or <code>PDF</code>.</p>
+   * @public
+   */
+  FormatType: SnapshotFileFormatType | undefined;
+}
+
+/**
+ * <p>Information on the error that caused the snapshot job to fail.</p>
+ * @public
+ */
+export interface SnapshotJobResultErrorInfo {
+  /**
+   * <p>The error message.</p>
+   * @public
+   */
+  ErrorMessage?: string | undefined;
+
+  /**
+   * <p>The error type.</p>
+   * @public
+   */
+  ErrorType?: string | undefined;
+}
+
+/**
+ * <p>An optional structure that contains the Amazon S3 bucket configuration that the generated snapshots are stored in. If you don't provide this information, generated snapshots are stored in the default Amazon Quick Sight bucket.</p>
+ * @public
+ */
+export interface S3BucketConfiguration {
+  /**
+   * <p>The name of an existing Amazon S3 bucket where the generated snapshot artifacts are sent.</p>
+   * @public
+   */
+  BucketName: string | undefined;
+
+  /**
+   * <p>The prefix of the Amazon S3 bucket that the generated snapshots are stored in.</p>
+   * @public
+   */
+  BucketPrefix: string | undefined;
+
+  /**
+   * <p>The region that the Amazon S3 bucket is located in. The bucket must be located in the same region that the <code>StartDashboardSnapshotJob</code> API call is made.</p>
+   * @public
+   */
+  BucketRegion: string | undefined;
+}
+
+/**
+ * <p>A structure that describes the Amazon S3 settings to use to save the generated dashboard snapshot.</p>
+ * @public
+ */
+export interface SnapshotS3DestinationConfiguration {
+  /**
+   * <p>A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.</p>
+   * @public
+   */
+  BucketConfiguration: S3BucketConfiguration | undefined;
+}
+
+/**
+ * <p>The Amazon S3 result from the snapshot job. The result includes the <code>DestinationConfiguration</code> and the Amazon S3 Uri. If an error occured during the job, the result returns information on the error.</p>
+ * @public
+ */
+export interface SnapshotJobS3Result {
+  /**
+   * <p>A list of Amazon S3 bucket configurations that are provided when you make a <code>StartDashboardSnapshotJob</code> API call.
+   *         </p>
+   * @public
+   */
+  S3DestinationConfiguration?: SnapshotS3DestinationConfiguration | undefined;
+
+  /**
+   * <p>The Amazon S3 Uri.</p>
+   * @public
+   */
+  S3Uri?: string | undefined;
+
+  /**
+   * <p>An array of error records that describe any failures that occur while the dashboard snapshot job runs.</p>
+   * @public
+   */
+  ErrorInfo?: SnapshotJobResultErrorInfo[] | undefined;
+}
+
+/**
+ * <p>A structure that contains information on the generated snapshot file groups.</p>
+ * @public
+ */
+export interface SnapshotJobResultFileGroup {
+  /**
+   * <p> A list of <code>SnapshotFile</code> objects.</p>
+   * @public
+   */
+  Files?: SnapshotFile[] | undefined;
+
+  /**
+   * <p> A list of <code>SnapshotJobS3Result</code> objects.</p>
+   * @public
+   */
+  S3Results?: SnapshotJobS3Result[] | undefined;
+}
+
+/**
+ * <p>A structure that contains the file groups that are requested for the artifact generation in a <code>StartDashboardSnapshotJob</code> API call.
+ *         </p>
+ * @public
+ */
+export interface AnonymousUserSnapshotJobResult {
+  /**
+   * <p>A list of <code>SnapshotJobResultFileGroup</code> objects that contain information on the files that are requested during a <code>StartDashboardSnapshotJob</code> API call. If the job succeeds, these objects contain the location where the snapshot artifacts are stored. If the job fails, the objects contain information about the error that caused the job to fail.</p>
+   * @public
+   */
+  FileGroups?: SnapshotJobResultFileGroup[] | undefined;
+}
+
+/**
+ * <p>Configuration for API key-based authentication to external services.</p>
+ * @public
+ */
+export interface APIKeyConnectionMetadata {
+  /**
+   * <p>The base URL endpoint for the external service.</p>
+   * @public
+   */
+  BaseEndpoint: string | undefined;
+
+  /**
+   * <p>The API key used for authentication.</p>
+   * @public
+   */
+  ApiKey: string | undefined;
+
+  /**
+   * <p>The email address associated with the API key, if required.</p>
+   * @public
+   */
+  Email?: string | undefined;
+}
+
+/**
+ * <p>Represents a column that will be included in the result of an append operation, combining data from multiple sources.</p>
+ * @public
+ */
+export interface AppendedColumn {
+  /**
+   * <p>The name of the column to include in the appended result.</p>
+   * @public
+   */
+  ColumnName: string | undefined;
+
+  /**
+   * <p>A unique identifier for the column in the appended result.</p>
+   * @public
+   */
+  NewColumnId: string | undefined;
+}
+
+/**
+ * <p>A transform operation that combines rows from two data sources by stacking them vertically (union operation).</p>
+ * @public
+ */
+export interface AppendOperation {
+  /**
+   * <p>Alias for this operation.</p>
+   * @public
+   */
+  Alias: string | undefined;
+
+  /**
+   * <p>The first data source to be included in the append operation.</p>
+   * @public
+   */
+  FirstSource?: TransformOperationSource | undefined;
+
+  /**
+   * <p>The second data source to be appended to the first source.</p>
+   * @public
+   */
+  SecondSource?: TransformOperationSource | undefined;
+
+  /**
+   * <p>The list of columns to include in the appended result, mapping columns from both sources.</p>
+   * @public
+   */
+  AppendedColumns: AppendedColumn[] | undefined;
+}
+
+/**
+ * <p>The scoping configuration that determines which principals an approval policy applies to.</p>
+ * @public
+ */
+export interface ApplicableTo {
+  /**
+   * <p>The type of scoping that determines which principals the approval policy applies to. Valid values
+   *          are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>GROUP</code>: The policy applies only to principals in the groups specified by
+   *                <code>GroupArns</code>. When you use <code>GROUP</code>, you must also provide a value for
+   *                <code>GroupArns</code>.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type: ApplicableToType | undefined;
+
+  /**
+   * <p>The list of group ARNs that the policy applies to. Required when type is GROUP.</p>
+   * @public
+   */
+  GroupArns?: string[] | undefined;
+}
+
+/**
+ * <p>The color palette.</p>
+ * @public
+ */
+export interface Palette {
+  /**
+   * <p>The foreground color.</p>
+   * @public
+   */
+  Foreground?: string | undefined;
+
+  /**
+   * <p>The background color.</p>
+   * @public
+   */
+  Background?: string | undefined;
+}
+
+/**
+ * <p>The color palette.</p>
+ * @public
+ */
+export interface BrandColorPalette {
+  /**
+   * <p>The primary color.</p>
+   * @public
+   */
+  Primary?: Palette | undefined;
+
+  /**
+   * <p>The secondary color.</p>
+   * @public
+   */
+  Secondary?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for accent elements.</p>
+   * @public
+   */
+  Accent?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for measure elements.</p>
+   * @public
+   */
+  Measure?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for dimension elements.</p>
+   * @public
+   */
+  Dimension?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for success elements.</p>
+   * @public
+   */
+  Success?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for info elements.</p>
+   * @public
+   */
+  Info?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for warning elements.</p>
+   * @public
+   */
+  Warning?: Palette | undefined;
+
+  /**
+   * <p>The color that is used for danger elements.</p>
+   * @public
+   */
+  Danger?: Palette | undefined;
+}
+
+/**
+ * <p>The navigation bar style.</p>
+ * @public
+ */
+export interface NavbarStyle {
+  /**
+   * <p>The global navigation bar style.</p>
+   * @public
+   */
+  GlobalNavbar?: Palette | undefined;
+
+  /**
+   * <p>The contextual navigation bar style.</p>
+   * @public
+   */
+  ContextualNavbar?: Palette | undefined;
+}
+
+/**
+ * <p>The element style.</p>
+ * @public
+ */
+export interface BrandElementStyle {
+  /**
+   * <p>The navigation bar style.</p>
+   * @public
+   */
+  NavbarStyle?: NavbarStyle | undefined;
+}
+
+/**
+ * <p>The contextual accent palette.</p>
+ * @public
+ */
+export interface ContextualAccentPalette {
+  /**
+   * <p>The color palette.</p>
+   * @public
+   */
+  Connection?: Palette | undefined;
+
+  /**
+   * <p>The color palette.</p>
+   * @public
+   */
+  Visualization?: Palette | undefined;
+
+  /**
+   * <p>The color palette.</p>
+   * @public
+   */
+  Insight?: Palette | undefined;
+
+  /**
+   * <p>The color palette.</p>
+   * @public
+   */
+  Automation?: Palette | undefined;
+}
+
+/**
+ * <p>The application theme.</p>
+ * @public
+ */
+export interface ApplicationTheme {
+  /**
+   * <p>The color palette.</p>
+   * @public
+   */
+  BrandColorPalette?: BrandColorPalette | undefined;
+
+  /**
+   * <p>The contextual accent palette.</p>
+   * @public
+   */
+  ContextualAccentPalette?: ContextualAccentPalette | undefined;
+
+  /**
+   * <p>The element style.</p>
+   * @public
+   */
+  BrandElementStyle?: BrandElementStyle | undefined;
+}
+
+/**
+ * <p>A governance approval policy that specifies which principals and governed actions require
+ *          approval, and which assets the policy applies to.</p>
+ * @public
+ */
+export interface ApprovalPolicy {
+  /**
+   * <p>The unique identifier of the approval policy.</p>
+   * @public
+   */
+  PolicyId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the approval policy.</p>
+   * @public
+   */
+  PolicyArn: string | undefined;
+
+  /**
+   * <p>The name of the approval policy.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>A description of the approval policy.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The list of governed actions that trigger the approval workflow.</p>
+   * @public
+   */
+  Actions: GovernedAction[] | undefined;
+
+  /**
+   * <p>The list of asset types that the approval policy applies to.</p>
+   * @public
+   */
+  AssetTypes: AssetType[] | undefined;
+
+  /**
+   * <p>The scoping configuration that determines who the approval policy applies to.</p>
+   * @public
+   */
+  ApplicableTo: ApplicableTo | undefined;
+
+  /**
+   * <p>The list of group ARNs whose members can approve requests.</p>
+   * @public
+   */
+  ApprovalGroups: string[] | undefined;
+
+  /**
+   * <p>The date and time that the approval policy was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The date and time that the approval policy was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * <p>A summary of an app, including its identifier, name, and metadata.</p>
+ * @public
+ */
+export interface AppSummary {
+  /**
+   * <p>The ID of the app.</p>
+   * @public
+   */
+  AppId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the app.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The display name of the app.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The time that the app was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The time that the app was last updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
+
+  /**
+   * <p>The sharing status of the app: <code>PUBLIC</code> if the app is shared publicly, or <code>PRIVATE</code> if it is private.</p>
+   * @public
+   */
+  Visibility?: AppVisibility | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>Analysis</code> resource is parameterized in the returned
+ *             CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobAnalysisOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>Analysis</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>Analysis</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobAnalysisPropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>Dashboard</code> resource is parameterized in the returned
+ *             CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobDashboardOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>Dashboard</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>Dashboard</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobDashboardPropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>DataSet</code> resource is parameterized in the returned
+ *             CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobDataSetOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>DataSet</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>DataSet</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobDataSetPropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>DataSource</code> resource is parameterized in the
+ *          returned CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobDataSourceOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>DataSource</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>DataSource</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobDataSourcePropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>Folder</code> resource is parameterized in the returned
+ *             CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobFolderOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>Folder</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>Folder</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobFolderPropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>RefreshSchedule</code> resource is parameterized in the
+ *          returned CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobRefreshScheduleOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>RefreshSchedule</code> resource whose override properties
+   *          are configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>RefreshSchedule</code> resource properties to generate variables for in
+   *          the returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobRefreshSchedulePropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>An optional structure that configures resource ID overrides for the export job.</p>
+ * @public
+ */
+export interface AssetBundleExportJobResourceIdOverrideConfiguration {
+  /**
+   * <p>An option to request a CloudFormation variable for a prefix to be prepended to each
+   *          resource's ID before import. The prefix is only added to the asset IDs and does not
+   *          change the name of the asset.</p>
+   * @public
+   */
+  PrefixForAllResources?: boolean | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>Theme</code> resource is parameterized in the returned
+ *             CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobThemeOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>Theme</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>Theme</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobThemePropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>Topic</code> resource is parameterized in the returned
+ *             CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobTopicV2OverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>Topic</code> resource whose override properties are
+   *          configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>Topic</code> resource properties to generate variables for in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobTopicV2PropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>Controls how a specific <code>VPCConnection</code> resource is parameterized in the
+ *          outputted CloudFormation template.</p>
+ * @public
+ */
+export interface AssetBundleExportJobVPCConnectionOverrideProperties {
+  /**
+   * <p>The ARN of the specific <code>VPCConnection</code> resource whose override properties
+   *          are configured in this structure.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>A list of <code>VPCConnection</code> resource properties to generate variables for in
+   *          the returned CloudFormation template.</p>
+   * @public
+   */
+  Properties: AssetBundleExportJobVPCConnectionPropertyToOverride[] | undefined;
+}
+
+/**
+ * <p>An optional collection of CloudFormation property configurations that control how
+ *          the export job is generated.</p>
+ * @public
+ */
+export interface AssetBundleCloudFormationOverridePropertyConfiguration {
+  /**
+   * <p>An optional list of structures that control how resource IDs are parameterized in the
+   *          returned CloudFormation template.</p>
+   * @public
+   */
+  ResourceIdOverrideConfiguration?: AssetBundleExportJobResourceIdOverrideConfiguration | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>VPCConnection</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  VPCConnections?: AssetBundleExportJobVPCConnectionOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>RefreshSchedule</code> resources
+   *          are parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  RefreshSchedules?: AssetBundleExportJobRefreshScheduleOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>DataSource</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  DataSources?: AssetBundleExportJobDataSourceOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>DataSet</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  DataSets?: AssetBundleExportJobDataSetOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>Theme</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  Themes?: AssetBundleExportJobThemeOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>Analysis</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  Analyses?: AssetBundleExportJobAnalysisOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that control how <code>Dashboard</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  Dashboards?: AssetBundleExportJobDashboardOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that controls how <code>Folder</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  Folders?: AssetBundleExportJobFolderOverrideProperties[] | undefined;
+
+  /**
+   * <p>An optional list of structures that controls how <code>Topic</code> resources are
+   *          parameterized in the returned CloudFormation template.</p>
+   * @public
+   */
+  TopicsV2?: AssetBundleExportJobTopicV2OverrideProperties[] | undefined;
+}
+
+/**
+ * <p>Describes an error that occurred during an Asset Bundle export job.</p>
+ * @public
+ */
+export interface AssetBundleExportJobError {
+  /**
+   * <p>The ARN of the resource whose processing caused an error.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The specific error type of the error that occurred.</p>
+   * @public
+   */
+  Type?: string | undefined;
+
+  /**
+   * <p>A description of the error.</p>
+   * @public
+   */
+  Message?: string | undefined;
+}
+
+/**
+ * <p>A summary of the export job that includes details of the job's configuration and
+ *          its current status.</p>
+ * @public
+ */
+export interface AssetBundleExportJobSummary {
+  /**
+   * <p>The current status of the export job.</p>
+   * @public
+   */
+  JobStatus?: AssetBundleExportJobStatus | undefined;
+
+  /**
+   * <p>The ARN of the export job.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The time that the export job was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The ID of the export job.</p>
+   * @public
+   */
+  AssetBundleExportJobId?: string | undefined;
+
+  /**
+   * <p>The flag that determines the inclusion of resource dependencies in the returned asset
+   *          bundle.</p>
+   * @public
+   */
+  IncludeAllDependencies?: boolean | undefined;
+
+  /**
+   * <p>The format for the export job.</p>
+   * @public
+   */
+  ExportFormat?: AssetBundleExportFormat | undefined;
+
+  /**
+   * <p>The flag that determines the inclusion of permissions associated with each resource
+   *          ARN.</p>
+   * @public
+   */
+  IncludePermissions?: boolean | undefined;
+
+  /**
+   * <p>The flag that determines the inclusion of tags associated with each resource ARN.</p>
+   * @public
+   */
+  IncludeTags?: boolean | undefined;
+}
+
+/**
+ * <p>The option to relax the validation that is required to export each asset. When
+ *             <code>StrictModeForAllResource</code> is set to <code>false</code>, validation is
+ *          skipped for specific UI errors.</p>
+ * @public
+ */
+export interface AssetBundleExportJobValidationStrategy {
+  /**
+   * <p>A Boolean value that indicates whether to export resources under strict or lenient
+   *          mode.</p>
+   * @public
+   */
+  StrictModeForAllResources?: boolean | undefined;
+}
+
+/**
+ * <p>Describes a warning that occurred during an Asset Bundle export job.</p>
+ * @public
+ */
+export interface AssetBundleExportJobWarning {
+  /**
+   * <p>The ARN of the resource whose processing caused a warning.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>A description of the warning.</p>
+   * @public
+   */
+  Message?: string | undefined;
+}
+
+/**
+ * <p>The override parameters for a single analysis that is being imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobAnalysisOverrideParameters {
+  /**
+   * <p>The ID of the analysis that you ant to apply overrides to.</p>
+   * @public
+   */
+  AnalysisId: string | undefined;
+
+  /**
+   * <p>A new name for the analysis.</p>
+   * @public
+   */
+  Name?: string | undefined;
+}
+
+/**
+ * <p>A structure that contains the permissions for the resource that you want to override in
+ *          an asset bundle import job.</p>
+ * @public
+ */
+export interface AssetBundleResourcePermissions {
+  /**
+   * <p>A list of principals to grant permissions on.</p>
+   * @public
+   */
+  Principals: string[] | undefined;
+
+  /**
+   * <p>A list of IAM actions to grant permissions on.</p>
+   * @public
+   */
+  Actions: string[] | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of analysis
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobAnalysisOverridePermissions {
+  /**
+   * <p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code>
+   *          to override all analyses in this asset bundle.</p>
+   * @public
+   */
+  AnalysisIds: string[] | undefined;
+
+  /**
+   * <p>A list of permissions for the analyses that you want to apply overrides to.</p>
+   * @public
+   */
+  Permissions: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>The key or keys of the key-value pairs for the resource tag or tags assigned to the
+ *             resource.</p>
+ * @public
+ */
+export interface Tag {
+  /**
+   * <p>Tag key.</p>
+   * @public
+   */
+  Key: string | undefined;
+
+  /**
+   * <p>Tag value.</p>
+   * @public
+   */
+  Value: string | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of analysis IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobAnalysisOverrideTags {
+  /**
+   * <p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code>
+   *          to override all analyses in this asset bundle.</p>
+   * @public
+   */
+  AnalysisIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the analyses that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>The override parameters for a single dashboard that is being imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDashboardOverrideParameters {
+  /**
+   * <p>The ID of the dashboard that you want to apply overrides to.</p>
+   * @public
+   */
+  DashboardId: string | undefined;
+
+  /**
+   * <p>A new name for the dashboard.</p>
+   * @public
+   */
+  Name?: string | undefined;
+}
+
+/**
+ * <p>A structure that contains the configuration of a shared link to an Amazon Quick Sight
+ *          dashboard.</p>
+ * @public
+ */
+export interface AssetBundleResourceLinkSharingConfiguration {
+  /**
+   * <p>A list of link sharing permissions for the dashboards that you want to apply overrides
+   *          to.</p>
+   * @public
+   */
+  Permissions?: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of dashboard
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDashboardOverridePermissions {
+  /**
+   * <p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code>
+   *          to override all dashboards in this asset bundle.</p>
+   * @public
+   */
+  DashboardIds: string[] | undefined;
+
+  /**
+   * <p>A list of permissions for the dashboards that you want to apply overrides to.</p>
+   * @public
+   */
+  Permissions?: AssetBundleResourcePermissions | undefined;
+
+  /**
+   * <p>A structure that contains the link sharing configurations that you want to apply
+   *          overrides to.</p>
+   * @public
+   */
+  LinkSharingConfiguration?: AssetBundleResourceLinkSharingConfiguration | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of dashboard IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDashboardOverrideTags {
+  /**
+   * <p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code>
+   *          to override all dashboards in this asset bundle.</p>
+   * @public
+   */
+  DashboardIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the dashboards that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>The configuration settings for the email alerts that are sent when a dataset refresh fails.</p>
+ * @public
+ */
+export interface RefreshFailureEmailAlert {
+  /**
+   * <p>The status value that determines if email alerts are sent.</p>
+   * @public
+   */
+  AlertStatus?: RefreshFailureAlertStatus | undefined;
+}
+
+/**
+ * <p>The failure configuration of a dataset.</p>
+ * @public
+ */
+export interface RefreshFailureConfiguration {
+  /**
+   * <p>The email alert configuration for a dataset refresh failure.</p>
+   * @public
+   */
+  EmailAlert?: RefreshFailureEmailAlert | undefined;
+}
+
+/**
+ * <p>The lookback window setup of an incremental refresh configuration.</p>
+ * @public
+ */
+export interface LookbackWindow {
+  /**
+   * <p>The name of the lookback window column.</p>
+   * @public
+   */
+  ColumnName: string | undefined;
+
+  /**
+   * <p>The lookback window column size.</p>
+   * @public
+   */
+  Size: number | undefined;
+
+  /**
+   * <p>The size unit that is used for the lookback window column. Valid values for this structure are <code>HOUR</code>, <code>DAY</code>, and <code>WEEK</code>.</p>
+   * @public
+   */
+  SizeUnit: LookbackWindowSizeUnit | undefined;
+}
+
+/**
+ * <p>The incremental refresh configuration for a dataset.</p>
+ * @public
+ */
+export interface IncrementalRefresh {
+  /**
+   * <p>The lookback window setup for an incremental refresh configuration.</p>
+   * @public
+   */
+  LookbackWindow: LookbackWindow | undefined;
+}
+
+/**
+ * <p>The refresh configuration of a dataset.</p>
+ * @public
+ */
+export interface RefreshConfiguration {
+  /**
+   * <p>The incremental refresh for the dataset.</p>
+   * @public
+   */
+  IncrementalRefresh: IncrementalRefresh | undefined;
+}
+
+/**
+ * <p>The refresh properties of a dataset.</p>
+ * @public
+ */
+export interface DataSetRefreshProperties {
+  /**
+   * <p>The refresh configuration for a dataset.</p>
+   * @public
+   */
+  RefreshConfiguration?: RefreshConfiguration | undefined;
+
+  /**
+   * <p>The failure configuration for a dataset.</p>
+   * @public
+   */
+  FailureConfiguration?: RefreshFailureConfiguration | undefined;
+}
+
+/**
+ * <p>The override parameters for a single dataset that is being imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSetOverrideParameters {
+  /**
+   * <p>The ID of the dataset to apply overrides to.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>A new name for the dataset.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The refresh properties of a dataset.</p>
+   * @public
+   */
+  DataSetRefreshProperties?: DataSetRefreshProperties | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of dataset
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSetOverridePermissions {
+  /**
+   * <p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all datasets in this asset bundle.</p>
+   * @public
+   */
+  DataSetIds: string[] | undefined;
+
+  /**
+   * <p>A list of permissions for the datasets that you want to apply overrides to.</p>
+   * @public
+   */
+  Permissions: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of dataset IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSetOverrideTags {
+  /**
+   * <p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all datasets in this asset bundle.</p>
+   * @public
+   */
+  DataSetIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the datasets that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>A username and password credential pair to use to import a data source resource.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSourceCredentialPair {
+  /**
+   * <p>The username for the data source connection.</p>
+   * @public
+   */
+  Username: string | undefined;
+
+  /**
+   * <p>The password for the data source connection.</p>
+   * @public
+   */
+  Password: string | undefined;
+}
+
+/**
+ * <p>The login credentials to use to import a data source resource.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSourceCredentials {
+  /**
+   * <p>A username and password credential pair to be used to create the imported data source.
+   *          Keep this field blank if you are using a Secrets Manager secret to provide
+   *          credentials.</p>
+   * @public
+   */
+  CredentialPair?: AssetBundleImportJobDataSourceCredentialPair | undefined;
+
+  /**
+   * <p>The ARN of the Secrets Manager secret that's used to create the imported data source.
+   *          Keep this field blank, unless you are using a secret in place of a credential pair.</p>
+   * @public
+   */
+  SecretArn?: string | undefined;
+}
+
+/**
+ * <p>The parameters for an IAM Identity Center configuration.</p>
+ * @public
+ */
+export interface IdentityCenterConfiguration {
+  /**
+   * <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+   * @public
+   */
+  EnableIdentityPropagation?: boolean | undefined;
+}
+
+/**
+ * <p>Parameters for Amazon Athena.</p>
+ * @public
+ */
+export interface AthenaParameters {
+  /**
+   * <p>The workgroup that Amazon Athena uses.</p>
+   * @public
+   */
+  WorkGroup?: string | undefined;
+
+  /**
+   * <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
+   * @public
+   */
+  RoleArn?: string | undefined;
+
+  /**
+   * <p>Use <code>ConsumerAccountRoleArn</code> to perform cross-account Athena access. This is an IAM role ARN in the same AWS account as the Athena resources you want to access. Provide this along with <code>RoleArn</code> to enable role-chaining, where Amazon Quick Sight first assumes the <code>RoleArn</code> and then assumes the <code>ConsumerAccountRoleArn</code> to access Athena resources.</p>
+   * @public
+   */
+  ConsumerAccountRoleArn?: string | undefined;
+
+  /**
+   * <p>An optional parameter that configures IAM Identity Center authentication to grant Quick Sight access to your workgroup.</p>
+   *          <p>This parameter can only be specified if your Quick Sight account is configured with IAM Identity Center.</p>
+   * @public
+   */
+  IdentityCenterConfiguration?: IdentityCenterConfiguration | undefined;
+}
+
+/**
+ * <p>Parameters for Amazon Aurora.</p>
+ * @public
+ */
+export interface AuroraParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>
+ * @public
+ */
+export interface AuroraPostgreSqlParameters {
+  /**
+   * <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>The Amazon Aurora PostgreSQL database to connect to.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>The parameters for IoT Analytics.</p>
+ * @public
+ */
+export interface AwsIotAnalyticsParameters {
+  /**
+   * <p>Dataset name.</p>
+   * @public
+   */
+  DataSetName: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a Google BigQuery data source.</p>
+ * @public
+ */
+export interface BigQueryParameters {
+  /**
+   * <p>The Google Cloud Platform project ID where your datasource was created.</p>
+   * @public
+   */
+  ProjectId: string | undefined;
+
+  /**
+   * <p>The storage location where you create a Google BigQuery data source.</p>
+   * @public
+   */
+  DataSetRegion?: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a Confluence data source</p>
+ * @public
+ */
+export interface ConfluenceParameters {
+  /**
+   * <p>The URL of the Confluence site to connect to.</p>
+   * @public
+   */
+  ConfluenceUrl: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a custom connection data source.</p>
+ * @public
+ */
+export interface CustomConnectionParameters {
+  /**
+   * <p>The type of custom connector.</p>
+   * @public
+   */
+  ConnectionType?: string | undefined;
+}
+
+/**
+ * <p>VPC connection properties.</p>
+ * @public
+ */
+export interface VpcConnectionProperties {
+  /**
+   * <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+   * @public
+   */
+  VpcConnectionArn: string | undefined;
+}
+
+/**
+ * <p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake, Starburst, and Databricks.</p>
+ * @public
+ */
+export interface OAuthParameters {
+  /**
+   * <p>The token endpoint URL of the identity provider.</p>
+   * @public
+   */
+  TokenProviderUrl: string | undefined;
+
+  /**
+   * <p>The OAuth scope.</p>
+   * @public
+   */
+  OAuthScope?: string | undefined;
+
+  /**
+   * <p>VPC connection properties.</p>
+   * @public
+   */
+  IdentityProviderVpcConnectionProperties?: VpcConnectionProperties | undefined;
+
+  /**
+   * <p>The resource uri of the identity provider.</p>
+   * @public
+   */
+  IdentityProviderResourceUri?: string | undefined;
+
+  /**
+   * <p>The S3 URI of the identity provider's CA certificates bundle in PEM format. Use this parameter to provide a custom CA certificate bundle for the identity provider when the default trust store does not include the required certificates.</p>
+   * @public
+   */
+  IdentityProviderCACertificatesBundleS3Uri?: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a Databricks data source.</p>
+ * @public
+ */
+export interface DatabricksParameters {
+  /**
+   * <p>The host name of the Databricks data source.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port for the Databricks data source.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>The HTTP path of the Databricks data source.</p>
+   * @public
+   */
+  SqlEndpointPath: string | undefined;
+
+  /**
+   * <p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>
+   * @public
+   */
+  AuthenticationType?: AuthenticationType | undefined;
+
+  /**
+   * <p>An object that contains information needed to create a data source connection between an Quick Sight account and Databricks.</p>
+   * @public
+   */
+  OAuthParameters?: OAuthParameters | undefined;
+}
+
+/**
+ * <p>The required parameters for connecting to an Exasol data source.</p>
+ * @public
+ */
+export interface ExasolParameters {
+  /**
+   * <p>The hostname or IP address of the Exasol data source.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port for the Exasol data source.</p>
+   * @public
+   */
+  Port: number | undefined;
+}
+
+/**
+ * <p>The connection parameters for a fully managed knowledge base data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses a fully managed knowledge base.</p>
+ * @public
+ */
+export interface FMKBParameters {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Bedrock knowledge base.</p>
+   * @public
+   */
+  KnowledgeBaseArn: string | undefined;
+
+  /**
+   * <p>The IDs of the linked data sources.</p>
+   * @public
+   */
+  LinkedDataSourceIds?: string[] | undefined;
+}
+
+/**
+ * <p>The connection parameters for a Google Drive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses Google Drive.</p>
+ * @public
+ */
+export interface GoogleDriveParameters {
+  /**
+   * <p>The authentication type for the Google Drive data source. Valid values include:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SERVICE_ACCOUNT</code> – Server-to-server authentication using a Google service account key.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AuthType?: AuthType | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a Impala data source.</p>
+ * @public
+ */
+export interface ImpalaParameters {
+  /**
+   * <p>The host name of the Impala data source.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port of the Impala data source.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>The database of the Impala data source.</p>
+   * @public
+   */
+  Database?: string | undefined;
+
+  /**
+   * <p>The HTTP path of the Impala data source.</p>
+   * @public
+   */
+  SqlEndpointPath: string | undefined;
+}
+
+/**
+ * <p>The parameters for Jira.</p>
+ * @public
+ */
+export interface JiraParameters {
+  /**
+   * <p>The base URL of the Jira site.</p>
+   * @public
+   */
+  SiteBaseUrl: string | undefined;
+}
+
+/**
+ * <p>The parameters for MariaDB.</p>
+ * @public
+ */
+export interface MariaDbParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>The parameters for MySQL.</p>
+ * @public
+ */
+export interface MySqlParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>The connection parameters for an OneDrive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses OneDrive.</p>
+ * @public
+ */
+export interface OneDriveParameters {
+  /**
+   * <p>The tenant ID for the OneDrive data source.</p>
+   * @public
+   */
+  TenantId?: string | undefined;
+
+  /**
+   * <p>The client ID for the OneDrive data source.</p>
+   * @public
+   */
+  ClientId?: string | undefined;
+
+  /**
+   * <p>The authentication type for the OneDrive data source. Valid values include:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>TWO_LEGGED_OAUTH</code> – Server-to-server authentication using client credentials that do not require user interaction.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AuthType?: AuthType | undefined;
+}
+
+/**
+ * <p>The parameters for Oracle.</p>
+ * @public
+ */
+export interface OracleParameters {
+  /**
+   * <p>An Oracle host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>The database.</p>
+   * @public
+   */
+  Database: string | undefined;
+
+  /**
+   * <p>A Boolean value that indicates whether the <code>Database</code> uses a service name or an SID. If this value is left blank, the default value is <code>SID</code>. If this value is set to <code>false</code>, the value is <code>SID</code>.</p>
+   * @public
+   */
+  UseServiceName?: boolean | undefined;
+}
+
+/**
+ * <p>The parameters for PostgreSQL.</p>
+ * @public
+ */
+export interface PostgreSqlParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>The parameters for Presto.</p>
+ * @public
+ */
+export interface PrestoParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Catalog.</p>
+   * @public
+   */
+  Catalog: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to an Amazon Q Business data source.</p>
+ * @public
+ */
+export interface QBusinessParameters {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Q Business application.</p>
+   * @public
+   */
+  ApplicationArn: string | undefined;
+}
+
+/**
+ * <p>The parameters for Amazon RDS.</p>
+ * @public
+ */
+export interface RdsParameters {
+  /**
+   * <p>Instance ID.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>A structure that grants Quick Sight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+ *                <code>GetClusterCredentials</code>
+ *             </a>.</p>
+ * @public
+ */
+export interface RedshiftIAMParameters {
+  /**
+   * <p>Use the <code>RoleArn</code> structure to allow Quick Sight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Sight. The role's trust policy must allow the Quick Sight service principal to assume the role.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>The user whose permissions and group memberships will be used by Quick Sight to access the cluster. If this user already exists in your database, Amazon Quick Sight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+   * @public
+   */
+  DatabaseUser?: string | undefined;
+
+  /**
+   * <p>A list of groups whose permissions will be granted to Quick Sight to access the cluster. These permissions are combined with the permissions granted to Quick Sight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+   * @public
+   */
+  DatabaseGroups?: string[] | undefined;
+
+  /**
+   * <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Quick Sight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+   * @public
+   */
+  AutoCreateDatabaseUser?: boolean | undefined;
+}
+
+/**
+ * <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
+ *             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>
+ * @public
+ */
+export interface RedshiftParameters {
+  /**
+   * <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+   * @public
+   */
+  Host?: string | undefined;
+
+  /**
+   * <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
+   * @public
+   */
+  Port?: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+
+  /**
+   * <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
+   *             provided.</p>
+   * @public
+   */
+  ClusterId?: string | undefined;
+
+  /**
+   * <p>An optional parameter that uses IAM authentication to grant Quick Sight access to your cluster. This parameter can be used instead of <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html">DataSourceCredentials</a>.</p>
+   * @public
+   */
+  IAMParameters?: RedshiftIAMParameters | undefined;
+
+  /**
+   * <p>An optional parameter that configures IAM Identity Center authentication to grant Quick Sight access to your cluster.</p>
+   *          <p>This parameter can only be specified if your Quick Sight account is configured with IAM Identity Center.</p>
+   * @public
+   */
+  IdentityCenterConfiguration?: IdentityCenterConfiguration | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to an S3 knowledge base data source.</p>
+ *          <p>
+ *             <b>Prerequisites: Amazon S3 bucket access</b>
+ *          </p>
+ *          <p>Before you call <code>CreateKnowledgeBase</code> for an Amazon S3 knowledge base, an administrator must grant Amazon QuickSight access to the source S3 bucket. If access has not been granted for the bucket, knowledge base creation fails.</p>
+ *          <p>To grant access, an administrator adds the bucket in the Amazon QuickSight admin console, under Permissions, Amazon Web Services resources, Amazon S3, Select S3 buckets. This authorizes the Amazon QuickSight service role to read the bucket. The bucket can be in the same Amazon Web Services account or, when the bucket owner has authorized your account, in a different account.</p>
+ *          <p>The service role requires at least the following permissions on the bucket:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <code>s3:GetObject</code>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>s3:ListBucket</code>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>s3:GetBucketLocation</code>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>s3:GetObjectVersion</code>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>s3:ListBucketVersions</code>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>For the full procedure, including cross-account buckets and KMS-encrypted buckets, see the Amazon S3 knowledge base administrator setup guide.</p>
+ *          <note>
+ *             <p>To grant access for a specific S3 knowledge base data source without granting account-wide S3 access, provide a custom IAM role on the data source by using <code>RoleArn</code>.</p>
+ *          </note>
+ * @public
+ */
+export interface S3KnowledgeBaseParameters {
+  /**
+   * <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 Knowledge Base data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 Knowledge Base data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
+   * @public
+   */
+  RoleArn?: string | undefined;
+
+  /**
+   * <p>The URL of the S3 bucket that contains the knowledge base data.</p>
+   * @public
+   */
+  BucketUrl: string | undefined;
+
+  /**
+   * <p>The Amazon S3 location (prefix) of per-document metadata files. Each metadata file describes a single source document and its indexable attributes, such as title, category, and version. This is not the global ACL configuration file. To apply a single global ACL file to the entire knowledge base, use the access control configuration instead.</p>
+   * @public
+   */
+  MetadataFilesLocation?: string | undefined;
+}
+
+/**
+ * <p>Amazon S3 manifest file location.</p>
+ * @public
+ */
+export interface ManifestFileLocation {
+  /**
+   * <p>Amazon S3 bucket.</p>
+   * @public
+   */
+  Bucket: string | undefined;
+
+  /**
+   * <p>Amazon S3 key that identifies an object.</p>
+   * @public
+   */
+  Key: string | undefined;
+}
+
+/**
+ * <p>The parameters for S3.</p>
+ * @public
+ */
+export interface S3Parameters {
+  /**
+   * <p>Location of the Amazon S3 manifest file. This is NULL if the manifest file was
+   *             uploaded into Quick Sight.</p>
+   * @public
+   */
+  ManifestFileLocation: ManifestFileLocation | undefined;
+
+  /**
+   * <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
+   * @public
+   */
+  RoleArn?: string | undefined;
+}
+
+/**
+ * <p>The parameters for S3 Tables.</p>
+ * @public
+ */
+export interface S3TablesParameters {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the S3 Tables bucket.</p>
+   * @public
+   */
+  TableBucketArn?: string | undefined;
+}
+
+/**
+ * <p>The parameters for ServiceNow.</p>
+ * @public
+ */
+export interface ServiceNowParameters {
+  /**
+   * <p>URL of the base site.</p>
+   * @public
+   */
+  SiteBaseUrl: string | undefined;
+}
+
+/**
+ * <p>The connection parameters for a SharePoint data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses SharePoint.</p>
+ * @public
+ */
+export interface SharePointParameters {
+  /**
+   * <p>The SharePoint domain for the data source.</p>
+   * @public
+   */
+  SharePointDomain: string | undefined;
+
+  /**
+   * <p>The tenant ID for the SharePoint data source.</p>
+   * @public
+   */
+  TenantId?: string | undefined;
+
+  /**
+   * <p>The client ID for the SharePoint data source.</p>
+   * @public
+   */
+  ClientId?: string | undefined;
+
+  /**
+   * <p>The authentication type for the SharePoint data source. Valid values include:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>TWO_LEGGED_OAUTH</code> – Server-to-server authentication using client credentials that do not require user interaction.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AuthType?: AuthType | undefined;
+}
+
+/**
+ * <p>The parameters for Snowflake.</p>
+ * @public
+ */
+export interface SnowflakeParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+
+  /**
+   * <p>Warehouse.</p>
+   * @public
+   */
+  Warehouse: string | undefined;
+
+  /**
+   * <p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>
+   * @public
+   */
+  AuthenticationType?: AuthenticationType | undefined;
+
+  /**
+   * <p>The database access control role.</p>
+   * @public
+   */
+  DatabaseAccessControlRole?: string | undefined;
+
+  /**
+   * <p>An object that contains information needed to create a data source connection between an Quick Sight account and Snowflake.</p>
+   * @public
+   */
+  OAuthParameters?: OAuthParameters | undefined;
+}
+
+/**
+ * <p>The parameters for Spark.</p>
+ * @public
+ */
+export interface SparkParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+}
+
+/**
+ * <p>The parameters for SQL Server.</p>
+ * @public
+ */
+export interface SqlServerParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a Starburst data source.</p>
+ * @public
+ */
+export interface StarburstParameters {
+  /**
+   * <p>The host name of the Starburst data source.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port for the Starburst data source.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>The catalog name for the Starburst data source.</p>
+   * @public
+   */
+  Catalog: string | undefined;
+
+  /**
+   * <p>The product type for the Starburst data source.</p>
+   * @public
+   */
+  ProductType?: StarburstProductType | undefined;
+
+  /**
+   * <p>The database access control role.</p>
+   * @public
+   */
+  DatabaseAccessControlRole?: string | undefined;
+
+  /**
+   * <p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>
+   * @public
+   */
+  AuthenticationType?: AuthenticationType | undefined;
+
+  /**
+   * <p>An object that contains information needed to create a data source connection between an Quick Sight account and Starburst.</p>
+   * @public
+   */
+  OAuthParameters?: OAuthParameters | undefined;
+}
+
+/**
+ * <p>The parameters for Teradata.</p>
+ * @public
+ */
+export interface TeradataParameters {
+  /**
+   * <p>Host.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>Port.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>Database.</p>
+   * @public
+   */
+  Database: string | undefined;
+}
+
+/**
+ * <p>The parameters that are required to connect to a Trino data source.</p>
+ * @public
+ */
+export interface TrinoParameters {
+  /**
+   * <p>The host name of the Trino data source.</p>
+   * @public
+   */
+  Host: string | undefined;
+
+  /**
+   * <p>The port for the Trino data source.</p>
+   * @public
+   */
+  Port: number | undefined;
+
+  /**
+   * <p>The catalog name for the Trino data source.</p>
+   * @public
+   */
+  Catalog: string | undefined;
+}
+
+/**
+ * <p>The parameters for Twitter.</p>
+ * @public
+ */
+export interface TwitterParameters {
+  /**
+   * <p>Twitter query string.</p>
+   * @public
+   */
+  Query: string | undefined;
+
+  /**
+   * <p>Maximum number of rows to query Twitter.</p>
+   * @public
+   */
+  MaxRows: number | undefined;
+}
+
+/**
+ * <p>The parameters for a web crawler data source.</p>
+ * @public
+ */
+export interface WebCrawlerParameters {
+  /**
+   * <p>The authentication type for the web crawler. The type can be one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NO_AUTH</code>: No authentication required.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>BASIC_AUTH</code>: Basic authentication using username and password.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SAML</code>: SAML-based authentication.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FORM</code>: Form-based authentication.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  WebCrawlerAuthType: WebCrawlerAuthType | undefined;
+
+  /**
+   * <p>The XPath expression for locating the username field on the login page.</p>
+   * @public
+   */
+  UsernameFieldXpath?: string | undefined;
+
+  /**
+   * <p>The XPath expression for locating the password field on the login page.</p>
+   * @public
+   */
+  PasswordFieldXpath?: string | undefined;
+
+  /**
+   * <p>The XPath expression for locating the username submit button on the login page.</p>
+   * @public
+   */
+  UsernameButtonXpath?: string | undefined;
+
+  /**
+   * <p>The XPath expression for locating the password submit button on the login page.</p>
+   * @public
+   */
+  PasswordButtonXpath?: string | undefined;
+
+  /**
+   * <p>The URL of the login page for the web crawler to authenticate.</p>
+   * @public
+   */
+  LoginPageUrl?: string | undefined;
+
+  /**
+   * <p>The hostname of the web proxy server for the web crawler.</p>
+   * @public
+   */
+  WebProxyHostName?: string | undefined;
+
+  /**
+   * <p>The port number of the web proxy server for the web crawler.</p>
+   * @public
+   */
+  WebProxyPortNumber?: number | undefined;
+}
+
+/**
+ * <p>The parameters that Quick Sight uses to connect to your underlying data source.
+ *             This is a variant type structure. For this structure to be valid, only one of the
+ *             attributes can be non-null.</p>
+ * @public
+ */
+export type DataSourceParameters =
+  | DataSourceParameters.AmazonElasticsearchParametersMember
+  | DataSourceParameters.AmazonOpenSearchParametersMember
+  | DataSourceParameters.AthenaParametersMember
+  | DataSourceParameters.AuroraParametersMember
+  | DataSourceParameters.AuroraPostgreSqlParametersMember
+  | DataSourceParameters.AwsIotAnalyticsParametersMember
+  | DataSourceParameters.BigQueryParametersMember
+  | DataSourceParameters.ConfluenceParametersMember
+  | DataSourceParameters.CustomConnectionParametersMember
+  | DataSourceParameters.DatabricksParametersMember
+  | DataSourceParameters.ExasolParametersMember
+  | DataSourceParameters.FMKBParametersMember
+  | DataSourceParameters.GoogleDriveParametersMember
+  | DataSourceParameters.ImpalaParametersMember
+  | DataSourceParameters.JiraParametersMember
+  | DataSourceParameters.MariaDbParametersMember
+  | DataSourceParameters.MySqlParametersMember
+  | DataSourceParameters.OneDriveParametersMember
+  | DataSourceParameters.OracleParametersMember
+  | DataSourceParameters.PostgreSqlParametersMember
+  | DataSourceParameters.PrestoParametersMember
+  | DataSourceParameters.QBusinessParametersMember
+  | DataSourceParameters.RdsParametersMember
+  | DataSourceParameters.RedshiftParametersMember
+  | DataSourceParameters.S3KnowledgeBaseParametersMember
+  | DataSourceParameters.S3ParametersMember
+  | DataSourceParameters.S3TablesParametersMember
+  | DataSourceParameters.ServiceNowParametersMember
+  | DataSourceParameters.SharePointParametersMember
+  | DataSourceParameters.SnowflakeParametersMember
+  | DataSourceParameters.SparkParametersMember
+  | DataSourceParameters.SqlServerParametersMember
+  | DataSourceParameters.StarburstParametersMember
+  | DataSourceParameters.TeradataParametersMember
+  | DataSourceParameters.TrinoParametersMember
+  | DataSourceParameters.TwitterParametersMember
+  | DataSourceParameters.WebCrawlerParametersMember
+  | DataSourceParameters.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace DataSourceParameters {
+  /**
+   * <p>The parameters for OpenSearch.</p>
+   * @public
+   */
+  export interface AmazonElasticsearchParametersMember {
+    AmazonElasticsearchParameters: AmazonElasticsearchParameters;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Amazon Athena.</p>
+   * @public
+   */
+  export interface AthenaParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters: AthenaParameters;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Amazon Aurora MySQL.</p>
+   * @public
+   */
+  export interface AuroraParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters: AuroraParameters;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Amazon Aurora.</p>
+   * @public
+   */
+  export interface AuroraPostgreSqlParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters: AuroraPostgreSqlParameters;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for IoT Analytics.</p>
+   * @public
+   */
+  export interface AwsIotAnalyticsParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters: AwsIotAnalyticsParameters;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Jira.</p>
+   * @public
+   */
+  export interface JiraParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters: JiraParameters;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for MariaDB.</p>
+   * @public
+   */
+  export interface MariaDbParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters: MariaDbParameters;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for MySQL.</p>
+   * @public
+   */
+  export interface MySqlParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters: MySqlParameters;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Oracle.</p>
+   * @public
+   */
+  export interface OracleParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters: OracleParameters;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for PostgreSQL.</p>
+   * @public
+   */
+  export interface PostgreSqlParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters: PostgreSqlParameters;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Presto.</p>
+   * @public
+   */
+  export interface PrestoParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters: PrestoParameters;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Amazon RDS.</p>
+   * @public
+   */
+  export interface RdsParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters: RdsParameters;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Amazon Redshift.</p>
+   * @public
+   */
+  export interface RedshiftParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters: RedshiftParameters;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for S3.</p>
+   * @public
+   */
+  export interface S3ParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters: S3Parameters;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for S3 Tables.</p>
+   * @public
+   */
+  export interface S3TablesParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters: S3TablesParameters;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for S3 Knowledge Base.</p>
+   * @public
+   */
+  export interface S3KnowledgeBaseParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters: S3KnowledgeBaseParameters;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for ServiceNow.</p>
+   * @public
+   */
+  export interface ServiceNowParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters: ServiceNowParameters;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Snowflake.</p>
+   * @public
+   */
+  export interface SnowflakeParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters: SnowflakeParameters;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Spark.</p>
+   * @public
+   */
+  export interface SparkParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters: SparkParameters;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for SQL Server.</p>
+   * @public
+   */
+  export interface SqlServerParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters: SqlServerParameters;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Teradata.</p>
+   * @public
+   */
+  export interface TeradataParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters: TeradataParameters;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Twitter.</p>
+   * @public
+   */
+  export interface TwitterParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters: TwitterParameters;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for OpenSearch.</p>
+   * @public
+   */
+  export interface AmazonOpenSearchParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters: AmazonOpenSearchParameters;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Exasol.</p>
+   * @public
+   */
+  export interface ExasolParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters: ExasolParameters;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters that are required to connect to a Databricks data source.</p>
+   * @public
+   */
+  export interface DatabricksParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters: DatabricksParameters;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters that are required to connect to a Starburst data source.</p>
+   * @public
+   */
+  export interface StarburstParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters: StarburstParameters;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters that are required to connect to a Trino data source.</p>
+   * @public
+   */
+  export interface TrinoParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters: TrinoParameters;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters that are required to connect to a Google BigQuery data source.</p>
+   * @public
+   */
+  export interface BigQueryParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters: BigQueryParameters;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Impala.</p>
+   * @public
+   */
+  export interface ImpalaParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters: ImpalaParameters;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for custom connectors.</p>
+   * @public
+   */
+  export interface CustomConnectionParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters: CustomConnectionParameters;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Web Crawler.</p>
+   * @public
+   */
+  export interface WebCrawlerParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters: WebCrawlerParameters;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Confluence.</p>
+   * @public
+   */
+  export interface ConfluenceParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters: ConfluenceParameters;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for Amazon Q Business.</p>
+   * @public
+   */
+  export interface QBusinessParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters: QBusinessParameters;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for a SharePoint data source.</p>
+   * @public
+   */
+  export interface SharePointParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters: SharePointParameters;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for a Google Drive data source.</p>
+   * @public
+   */
+  export interface GoogleDriveParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters: GoogleDriveParameters;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for an OneDrive data source.</p>
+   * @public
+   */
+  export interface OneDriveParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters: OneDriveParameters;
+    FMKBParameters?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameters for a fully managed knowledge base data source.</p>
+   * @public
+   */
+  export interface FMKBParametersMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters: FMKBParameters;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AmazonElasticsearchParameters?: never;
+    AthenaParameters?: never;
+    AuroraParameters?: never;
+    AuroraPostgreSqlParameters?: never;
+    AwsIotAnalyticsParameters?: never;
+    JiraParameters?: never;
+    MariaDbParameters?: never;
+    MySqlParameters?: never;
+    OracleParameters?: never;
+    PostgreSqlParameters?: never;
+    PrestoParameters?: never;
+    RdsParameters?: never;
+    RedshiftParameters?: never;
+    S3Parameters?: never;
+    S3TablesParameters?: never;
+    S3KnowledgeBaseParameters?: never;
+    ServiceNowParameters?: never;
+    SnowflakeParameters?: never;
+    SparkParameters?: never;
+    SqlServerParameters?: never;
+    TeradataParameters?: never;
+    TwitterParameters?: never;
+    AmazonOpenSearchParameters?: never;
+    ExasolParameters?: never;
+    DatabricksParameters?: never;
+    StarburstParameters?: never;
+    TrinoParameters?: never;
+    BigQueryParameters?: never;
+    ImpalaParameters?: never;
+    CustomConnectionParameters?: never;
+    WebCrawlerParameters?: never;
+    ConfluenceParameters?: never;
+    QBusinessParameters?: never;
+    SharePointParameters?: never;
+    GoogleDriveParameters?: never;
+    OneDriveParameters?: never;
+    FMKBParameters?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AmazonElasticsearchParameters: (value: AmazonElasticsearchParameters) => T;
+    AthenaParameters: (value: AthenaParameters) => T;
+    AuroraParameters: (value: AuroraParameters) => T;
+    AuroraPostgreSqlParameters: (value: AuroraPostgreSqlParameters) => T;
+    AwsIotAnalyticsParameters: (value: AwsIotAnalyticsParameters) => T;
+    JiraParameters: (value: JiraParameters) => T;
+    MariaDbParameters: (value: MariaDbParameters) => T;
+    MySqlParameters: (value: MySqlParameters) => T;
+    OracleParameters: (value: OracleParameters) => T;
+    PostgreSqlParameters: (value: PostgreSqlParameters) => T;
+    PrestoParameters: (value: PrestoParameters) => T;
+    RdsParameters: (value: RdsParameters) => T;
+    RedshiftParameters: (value: RedshiftParameters) => T;
+    S3Parameters: (value: S3Parameters) => T;
+    S3TablesParameters: (value: S3TablesParameters) => T;
+    S3KnowledgeBaseParameters: (value: S3KnowledgeBaseParameters) => T;
+    ServiceNowParameters: (value: ServiceNowParameters) => T;
+    SnowflakeParameters: (value: SnowflakeParameters) => T;
+    SparkParameters: (value: SparkParameters) => T;
+    SqlServerParameters: (value: SqlServerParameters) => T;
+    TeradataParameters: (value: TeradataParameters) => T;
+    TwitterParameters: (value: TwitterParameters) => T;
+    AmazonOpenSearchParameters: (value: AmazonOpenSearchParameters) => T;
+    ExasolParameters: (value: ExasolParameters) => T;
+    DatabricksParameters: (value: DatabricksParameters) => T;
+    StarburstParameters: (value: StarburstParameters) => T;
+    TrinoParameters: (value: TrinoParameters) => T;
+    BigQueryParameters: (value: BigQueryParameters) => T;
+    ImpalaParameters: (value: ImpalaParameters) => T;
+    CustomConnectionParameters: (value: CustomConnectionParameters) => T;
+    WebCrawlerParameters: (value: WebCrawlerParameters) => T;
+    ConfluenceParameters: (value: ConfluenceParameters) => T;
+    QBusinessParameters: (value: QBusinessParameters) => T;
+    SharePointParameters: (value: SharePointParameters) => T;
+    GoogleDriveParameters: (value: GoogleDriveParameters) => T;
+    OneDriveParameters: (value: OneDriveParameters) => T;
+    FMKBParameters: (value: FMKBParameters) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Secure Socket Layer (SSL) properties that apply when Quick Sight connects to your
+ *             underlying data source.</p>
+ * @public
+ */
+export interface SslProperties {
+  /**
+   * <p>A Boolean option to control whether SSL should be disabled.</p>
+   * @public
+   */
+  DisableSsl?: boolean | undefined;
+}
+
+/**
+ * <p>The override parameters for a single data source that is being imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSourceOverrideParameters {
+  /**
+   * <p>The ID of the data source to apply overrides to.</p>
+   * @public
+   */
+  DataSourceId: string | undefined;
+
+  /**
+   * <p>A new name for the data source.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The parameters that Quick Sight uses to connect to your underlying data source.
+   *             This is a variant type structure. For this structure to be valid, only one of the
+   *             attributes can be non-null.</p>
+   * @public
+   */
+  DataSourceParameters?: DataSourceParameters | undefined;
+
+  /**
+   * <p>VPC connection properties.</p>
+   * @public
+   */
+  VpcConnectionProperties?: VpcConnectionProperties | undefined;
+
+  /**
+   * <p>Secure Socket Layer (SSL) properties that apply when Quick Sight connects to your
+   *             underlying data source.</p>
+   * @public
+   */
+  SslProperties?: SslProperties | undefined;
+
+  /**
+   * <p>An optional structure that provides the credentials to be used to create the imported
+   *          data source.</p>
+   * @public
+   */
+  Credentials?: AssetBundleImportJobDataSourceCredentials | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of data source
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSourceOverridePermissions {
+  /**
+   * <p>A list of data source IDs that you want to apply overrides to. You can use
+   *             <code>*</code> to override all data sources in this asset bundle.</p>
+   * @public
+   */
+  DataSourceIds: string[] | undefined;
+
+  /**
+   * <p>A list of permissions for the data source that you want to apply overrides to.</p>
+   * @public
+   */
+  Permissions: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of data source
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobDataSourceOverrideTags {
+  /**
+   * <p>A list of data source IDs that you want to apply overrides to. You can use
+   *             <code>*</code> to override all data sources in this asset bundle.</p>
+   * @public
+   */
+  DataSourceIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the data source that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>Describes an error that occurred within an Asset Bundle import execution.</p>
+ * @public
+ */
+export interface AssetBundleImportJobError {
+  /**
+   * <p>The ARN of the resource whose processing caused an error.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The specific error type or the error that occurred.</p>
+   * @public
+   */
+  Type?: string | undefined;
+
+  /**
+   * <p>A description of the error.</p>
+   * @public
+   */
+  Message?: string | undefined;
+}
+
+/**
+ * <p>The override parameters for a single folder that is being imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobFolderOverrideParameters {
+  /**
+   * <p>The ID of the folder that you want to apply overrides to.</p>
+   * @public
+   */
+  FolderId: string | undefined;
+
+  /**
+   * <p>A new name for the folder.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A new parent folder arn. This change can only be applied if the import creates a brand
+   *          new folder. Existing folders cannot be moved.</p>
+   * @public
+   */
+  ParentFolderArn?: string | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of folder
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobFolderOverridePermissions {
+  /**
+   * <p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all folders in this asset bundle.</p>
+   * @public
+   */
+  FolderIds: string[] | undefined;
+
+  /**
+   * <p>A structure that contains the permissions for the resource that you want to override in
+   *          an asset bundle import job.</p>
+   * @public
+   */
+  Permissions?: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of folder IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobFolderOverrideTags {
+  /**
+   * <p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all folders in this asset bundle.</p>
+   * @public
+   */
+  FolderIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the folders that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>A list of overrides for a specific <code>RefreshsSchedule</code> resource that is
+ *          present in the asset bundle that is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobRefreshScheduleOverrideParameters {
+  /**
+   * <p>A partial identifier for the specific <code>RefreshSchedule</code> resource that is
+   *          being overridden. This structure is used together with the <code>ScheduleID</code>
+   *          structure.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>A partial identifier for the specific <code>RefreshSchedule</code> resource being
+   *          overridden. This structure is used together with the <code>DataSetId</code>
+   *          structure.</p>
+   * @public
+   */
+  ScheduleId: string | undefined;
+
+  /**
+   * <p>An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code>.
+   *          Make sure that the <code>StartAfterDateTime</code> is set to a time that takes place in the
+   *          future.</p>
+   * @public
+   */
+  StartAfterDateTime?: Date | undefined;
+}
+
+/**
+ * <p>An optional structure that configures resource ID overrides for the import job.</p>
+ * @public
+ */
+export interface AssetBundleImportJobResourceIdOverrideConfiguration {
+  /**
+   * <p>An option to request a CloudFormation variable for a prefix to be prepended to each
+   *          resource's ID before import. The prefix is only added to the asset IDs and does not
+   *          change the name of the asset.</p>
+   * @public
+   */
+  PrefixForAllResources?: string | undefined;
+}
+
+/**
+ * <p>The override parameters for a single theme that is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobThemeOverrideParameters {
+  /**
+   * <p>The ID of the theme to apply overrides to.</p>
+   * @public
+   */
+  ThemeId: string | undefined;
+
+  /**
+   * <p>A new name for the theme.</p>
+   * @public
+   */
+  Name?: string | undefined;
+}
+
+/**
+ * <p>The override parameters for a single topic that is being imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobTopicV2OverrideParameters {
+  /**
+   * <p>The ID of the topic that you want to apply overrides to.</p>
+   * @public
+   */
+  TopicId: string | undefined;
+
+  /**
+   * <p>A new name for the topic.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A new description for the topic.</p>
+   * @public
+   */
+  Description?: string | undefined;
+}
+
+/**
+ * <p>The override parameters for a single VPC connection that is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobVPCConnectionOverrideParameters {
+  /**
+   * <p>The ID of the VPC Connection to apply overrides to.</p>
+   * @public
+   */
+  VPCConnectionId: string | undefined;
+
+  /**
+   * <p>A new name for the VPC connection.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A list of new subnet IDs for the VPC connection you are importing. This field is
+   *          required if you are importing the VPC connection from another Amazon Web Services account or
+   *          Region.</p>
+   * @public
+   */
+  SubnetIds?: string[] | undefined;
+
+  /**
+   * <p>A new security group ID for the VPC connection you are importing. This field is required
+   *          if you are importing the VPC connection from another Amazon Web Services account or
+   *          Region.</p>
+   * @public
+   */
+  SecurityGroupIds?: string[] | undefined;
+
+  /**
+   * <p>An optional override of DNS resolvers to be used by the VPC connection.</p>
+   * @public
+   */
+  DnsResolvers?: string[] | undefined;
+
+  /**
+   * <p>An optional override of the role ARN to be used by the VPC connection.</p>
+   * @public
+   */
+  RoleArn?: string | undefined;
+}
+
+/**
+ * <p>A list of overrides that modify the asset bundle resource configuration before the
+ *          resource is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobOverrideParameters {
+  /**
+   * <p>An optional structure that configures resource ID overrides to be applied within the
+   *          import job.</p>
+   * @public
+   */
+  ResourceIdOverrideConfiguration?: AssetBundleImportJobResourceIdOverrideConfiguration | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>VPCConnection</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  VPCConnections?: AssetBundleImportJobVPCConnectionOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>RefreshSchedule</code> resources that are present in
+   *          the asset bundle that is imported.</p>
+   * @public
+   */
+  RefreshSchedules?: AssetBundleImportJobRefreshScheduleOverrideParameters[] | undefined;
+
+  /**
+   * <p> A list of overrides for any <code>DataSource</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  DataSources?: AssetBundleImportJobDataSourceOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>DataSet</code> resources that are present in the asset
+   *          bundle that is imported.</p>
+   * @public
+   */
+  DataSets?: AssetBundleImportJobDataSetOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>Theme</code> resources that are present in the asset
+   *          bundle that is imported.</p>
+   * @public
+   */
+  Themes?: AssetBundleImportJobThemeOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>Analysis</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  Analyses?: AssetBundleImportJobAnalysisOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>Dashboard</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  Dashboards?: AssetBundleImportJobDashboardOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>Folder</code> resources that are present in the asset
+   *          bundle that is imported.</p>
+   * @public
+   */
+  Folders?: AssetBundleImportJobFolderOverrideParameters[] | undefined;
+
+  /**
+   * <p>A list of overrides for any <code>Topic</code> resources that are present in the asset
+   *          bundle that is imported.</p>
+   * @public
+   */
+  TopicsV2?: AssetBundleImportJobTopicV2OverrideParameters[] | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of theme
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobThemeOverridePermissions {
+  /**
+   * <p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all themes in this asset bundle.</p>
+   * @public
+   */
+  ThemeIds: string[] | undefined;
+
+  /**
+   * <p>A list of permissions for the themes that you want to apply overrides to.</p>
+   * @public
+   */
+  Permissions: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>An object that contains a list of permissions to be applied to a list of topic
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobTopicV2OverridePermissions {
+  /**
+   * <p>A list of topic IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all topics in this asset bundle.</p>
+   * @public
+   */
+  TopicIds: string[] | undefined;
+
+  /**
+   * <p>A list of permissions for the topics that you want to apply overrides to.</p>
+   * @public
+   */
+  Permissions: AssetBundleResourcePermissions | undefined;
+}
+
+/**
+ * <p>A structure that contains the override permission configurations that modify the
+ *          permissions for specified resources before the resource is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobOverridePermissions {
+  /**
+   * <p>A list of permissions overrides for any <code>DataSource</code> resources that are
+   *          present in the asset bundle that is imported.</p>
+   * @public
+   */
+  DataSources?: AssetBundleImportJobDataSourceOverridePermissions[] | undefined;
+
+  /**
+   * <p>A list of permissions overrides for any <code>DataSet</code> resources that are present
+   *          in the asset bundle that is imported.</p>
+   * @public
+   */
+  DataSets?: AssetBundleImportJobDataSetOverridePermissions[] | undefined;
+
+  /**
+   * <p>A list of permissions overrides for any <code>Theme</code> resources that are present in
+   *          the asset bundle that is imported.</p>
+   * @public
+   */
+  Themes?: AssetBundleImportJobThemeOverridePermissions[] | undefined;
+
+  /**
+   * <p>A list of permissions overrides for any <code>Analysis</code> resources that are present
+   *          in the asset bundle that is imported.</p>
+   * @public
+   */
+  Analyses?: AssetBundleImportJobAnalysisOverridePermissions[] | undefined;
+
+  /**
+   * <p>A list of permissions overrides for any <code>Dashboard</code> resources that are
+   *          present in the asset bundle that is imported.</p>
+   * @public
+   */
+  Dashboards?: AssetBundleImportJobDashboardOverridePermissions[] | undefined;
+
+  /**
+   * <p>A list of permissions for the folders that you want to apply overrides to.</p>
+   * @public
+   */
+  Folders?: AssetBundleImportJobFolderOverridePermissions[] | undefined;
+
+  /**
+   * <p>A list of permissions for the topics that you want to apply overrides to.</p>
+   * @public
+   */
+  TopicsV2?: AssetBundleImportJobTopicV2OverridePermissions[] | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of theme IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobThemeOverrideTags {
+  /**
+   * <p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all themes in this asset bundle.</p>
+   * @public
+   */
+  ThemeIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the themes that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of topic IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobTopicV2OverrideTags {
+  /**
+   * <p>A list of topic IDs that you want to apply overrides to. You can use <code>*</code> to
+   *          override all topics in this asset bundle.</p>
+   * @public
+   */
+  TopicIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the topics that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>An object that contains a list of tags to be assigned to a list of VPC connection
+ *          IDs.</p>
+ * @public
+ */
+export interface AssetBundleImportJobVPCConnectionOverrideTags {
+  /**
+   * <p>A list of VPC connection IDs that you want to apply overrides to. You can use
+   *             <code>*</code> to override all VPC connections in this asset bundle.</p>
+   * @public
+   */
+  VPCConnectionIds: string[] | undefined;
+
+  /**
+   * <p>A list of tags for the VPC connections that you want to apply overrides to.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * <p>A structure that contains the override tag configuration that modify the tags that are
+ *          assigned to specified resources before the resource is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobOverrideTags {
+  /**
+   * <p>A list of tag overrides for any <code>VPCConnection</code> resources that are present in
+   *          the asset bundle that is imported.</p>
+   * @public
+   */
+  VPCConnections?: AssetBundleImportJobVPCConnectionOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>DataSource</code> resources that are present in
+   *          the asset bundle that is imported.</p>
+   * @public
+   */
+  DataSources?: AssetBundleImportJobDataSourceOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>DataSet</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  DataSets?: AssetBundleImportJobDataSetOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>Theme</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  Themes?: AssetBundleImportJobThemeOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>Analysis</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  Analyses?: AssetBundleImportJobAnalysisOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>Dashboard</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  Dashboards?: AssetBundleImportJobDashboardOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>Folder</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  Folders?: AssetBundleImportJobFolderOverrideTags[] | undefined;
+
+  /**
+   * <p>A list of tag overrides for any <code>Topic</code> resources that are present in the
+   *          asset bundle that is imported.</p>
+   * @public
+   */
+  TopicsV2?: AssetBundleImportJobTopicV2OverrideTags[] | undefined;
+}
+
+/**
+ * <p>An optional parameter that overrides the validation strategy for all analyses and
+ *          dashboards before the resource is imported.</p>
+ * @public
+ */
+export interface AssetBundleImportJobOverrideValidationStrategy {
+  /**
+   * <p>A Boolean value that indicates whether to import all analyses and dashboards under
+   *          strict or lenient mode.</p>
+   * @public
+   */
+  StrictModeForAllResources?: boolean | undefined;
+}
+
+/**
+ * <p>A summary of the import job that includes details of the requested job's
+ *          configuration and its current status.</p>
+ * @public
+ */
+export interface AssetBundleImportJobSummary {
+  /**
+   * <p>The current status of the import job.</p>
+   * @public
+   */
+  JobStatus?: AssetBundleImportJobStatus | undefined;
+
+  /**
+   * <p>The ARN of the import job.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The time that the import job was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The ID of the job. This ID is unique while the job is running. After the job is
+   *          completed, you can reuse this ID for another job.</p>
+   * @public
+   */
+  AssetBundleImportJobId?: string | undefined;
+
+  /**
+   * <p>The failure action for the import job.</p>
+   * @public
+   */
+  FailureAction?: AssetBundleImportFailureAction | undefined;
+}
+
+/**
+ * <p>Describes a warning that occurred during an Asset Bundle import job.</p>
+ * @public
+ */
+export interface AssetBundleImportJobWarning {
+  /**
+   * <p>The ARN of the resource that the warning occurred for.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>A description of the warning that occurred during an Asset Bundle import job.</p>
+   * @public
+   */
+  Message?: string | undefined;
+}
+
+/**
+ * <p>The source of the asset bundle zip file that contains the data that you want to import.
+ *          The file must be in <code>QUICKSIGHT_JSON</code> format.</p>
+ * @public
+ */
+export interface AssetBundleImportSource {
+  /**
+   * <p>The bytes of the base64 encoded asset bundle import zip file. This file can't
+   *          exceed 20 MB. If the size of the file that you want to upload is more than 20 MB, add the
+   *          file to your Amazon S3 bucket and use <code>S3Uri</code> of the file for this
+   *          operation.</p>
+   *          <p>If you are calling the API operations from the Amazon Web Services SDK for Java,
+   *          JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct
+   *          setting of the zip file's bytes. If you are using an SDK for a different language or
+   *          receiving related errors, try to base64 encode your data.</p>
+   * @public
+   */
+  Body?: Uint8Array | undefined;
+
+  /**
+   * <p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file
+   *          and can't exceed 1 GB.</p>
+   * @public
+   */
+  S3Uri?: string | undefined;
+}
+
+/**
+ * <p>A description of the import source that you provide at the start of an import job. This
+ *          value is set to either <code>Body</code> or <code>S3Uri</code>, depending on how the
+ *             <code>StartAssetBundleImportJobRequest</code> is configured.</p>
+ * @public
+ */
+export interface AssetBundleImportSourceDescription {
+  /**
+   * <p>An HTTPS download URL for the provided asset bundle that you optionally provided at the
+   *          start of the import job. This URL is valid for five minutes after issuance. Call
+   *             <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The
+   *          downloaded asset bundle is a <code>.qs</code> zip file.</p>
+   * @public
+   */
+  Body?: string | undefined;
+
+  /**
+   * <p>The Amazon S3 URI that you provided at the start of the import job.</p>
+   * @public
+   */
+  S3Uri?: string | undefined;
+}
+
+/**
+ * <p>The configuration for audio extraction from knowledge base documents.</p>
+ * @public
+ */
+export interface AudioExtractionConfiguration {
+  /**
+   * <p>The status of audio extraction. Valid values are ENABLED and DISABLED.</p>
+   * @public
+   */
+  audioExtractionStatus: AudioExtractionStatus | undefined;
+}
+
+/**
+ * <p>Configuration details for OAuth 2.0 authorization code grant flow.</p>
+ * @public
+ */
+export interface AuthorizationCodeGrantDetails {
+  /**
+   * <p>The client ID for the OAuth application.</p>
+   * @public
+   */
+  ClientId: string | undefined;
+
+  /**
+   * <p>The client secret for the OAuth application.</p>
+   * @public
+   */
+  ClientSecret: string | undefined;
+
+  /**
+   * <p>The token endpoint URL for obtaining access tokens.</p>
+   * @public
+   */
+  TokenEndpoint: string | undefined;
+
+  /**
+   * <p>The authorization endpoint URL for the OAuth flow.</p>
+   * @public
+   */
+  AuthorizationEndpoint: string | undefined;
+}
+
+/**
+ * <p>Details for OAuth 2.0 authorization code grant credentials.</p>
+ * @public
+ */
+export type AuthorizationCodeGrantCredentialsDetails =
+  | AuthorizationCodeGrantCredentialsDetails.AuthorizationCodeGrantDetailsMember
+  | AuthorizationCodeGrantCredentialsDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace AuthorizationCodeGrantCredentialsDetails {
+  /**
+   * <p>The authorization code grant configuration details.</p>
+   * @public
+   */
+  export interface AuthorizationCodeGrantDetailsMember {
+    AuthorizationCodeGrantDetails: AuthorizationCodeGrantDetails;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AuthorizationCodeGrantDetails?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AuthorizationCodeGrantDetails: (value: AuthorizationCodeGrantDetails) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Metadata for OAuth 2.0 authorization code grant authentication.</p>
+ * @public
+ */
+export interface AuthorizationCodeGrantMetadata {
+  /**
+   * <p>The base URL endpoint for the external service.</p>
+   * @public
+   */
+  BaseEndpoint: string | undefined;
+
+  /**
+   * <p>The redirect URL for the OAuth authorization flow.</p>
+   * @public
+   */
+  RedirectUrl: string | undefined;
+
+  /**
+   * <p>The source of the authorization code grant credentials.</p>
+   * @public
+   */
+  AuthorizationCodeGrantCredentialsSource?: AuthorizationCodeGrantCredentialsSource | undefined;
+
+  /**
+   * <p>The detailed credentials configuration for authorization code grant.</p>
+   * @public
+   */
+  AuthorizationCodeGrantCredentialsDetails?: AuthorizationCodeGrantCredentialsDetails | undefined;
+}
+
+/**
+ * <p>Metadata for basic authentication using username and password.</p>
+ * @public
+ */
+export interface BasicAuthConnectionMetadata {
+  /**
+   * <p>The base URL endpoint for the external service.</p>
+   * @public
+   */
+  BaseEndpoint: string | undefined;
+
+  /**
+   * <p>The username for basic authentication.</p>
+   * @public
+   */
+  Username: string | undefined;
+
+  /**
+   * <p>The password for basic authentication.</p>
+   * @public
+   */
+  Password: string | undefined;
+}
+
+/**
+ * <p>Configuration details for OAuth2 client credentials grant flow, including client ID, client secret, token endpoint, and optional scopes.</p>
+ * @public
+ */
+export interface ClientCredentialsGrantDetails {
+  /**
+   * <p>The client identifier issued to the client during the registration process with the authorization server.</p>
+   * @public
+   */
+  ClientId: string | undefined;
+
+  /**
+   * <p>The client secret issued to the client during the registration process with the authorization server.</p>
+   * @public
+   */
+  ClientSecret: string | undefined;
+
+  /**
+   * <p>The authorization server endpoint used to obtain access tokens via the client credentials grant flow.</p>
+   * @public
+   */
+  TokenEndpoint: string | undefined;
+}
+
+/**
+ * <p>Details for OAuth 2.0 client credentials grant authentication.</p>
+ * @public
+ */
+export type ClientCredentialsDetails =
+  | ClientCredentialsDetails.ClientCredentialsGrantDetailsMember
+  | ClientCredentialsDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ClientCredentialsDetails {
+  /**
+   * <p>The OAuth2 client credentials grant configuration details for authentication.</p>
+   * @public
+   */
+  export interface ClientCredentialsGrantDetailsMember {
+    ClientCredentialsGrantDetails: ClientCredentialsGrantDetails;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    ClientCredentialsGrantDetails?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    ClientCredentialsGrantDetails: (value: ClientCredentialsGrantDetails) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Configuration for OAuth 2.0 client credentials grant authentication, including client ID, client secret, token endpoint, and optional scopes.</p>
+ * @public
+ */
+export interface ClientCredentialsGrantMetadata {
+  /**
+   * <p>The base endpoint URL for the external service.</p>
+   * @public
+   */
+  BaseEndpoint: string | undefined;
+
+  /**
+   * <p>The source of the client credentials configuration.</p>
+   * @public
+   */
+  ClientCredentialsSource?: ClientCredentialsSource | undefined;
+
+  /**
+   * <p>The detailed client credentials configuration including client ID, client secret, and token endpoint.</p>
+   * @public
+   */
+  ClientCredentialsDetails?: ClientCredentialsDetails | undefined;
+}
+
+/**
+ * <p>Authentication metadata for IAM-based connections, used for first-party Amazon Web Services service integrations.</p>
+ * @public
+ */
+export interface IAMConnectionMetadata {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role to assume for authentication with Amazon Web Services services. This IAM role should be in the same account as Quick Sight.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+}
+
+/**
+ * <p>Authentication metadata for connections that do not require authentication credentials.</p>
+ * @public
+ */
+export interface NoneConnectionMetadata {
+  /**
+   * <p>The base endpoint URL for connections that do not require authentication.</p>
+   * @public
+   */
+  BaseEndpoint: string | undefined;
+}
+
+/**
+ * <p>Union type containing authentication metadata for different authentication methods.</p>
+ * @public
+ */
+export type AuthenticationMetadata =
+  | AuthenticationMetadata.ApiKeyConnectionMetadataMember
+  | AuthenticationMetadata.AuthorizationCodeGrantMetadataMember
+  | AuthenticationMetadata.BasicAuthConnectionMetadataMember
+  | AuthenticationMetadata.ClientCredentialsGrantMetadataMember
+  | AuthenticationMetadata.IamConnectionMetadataMember
+  | AuthenticationMetadata.NoneConnectionMetadataMember
+  | AuthenticationMetadata.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace AuthenticationMetadata {
+  /**
+   * <p>OAuth 2.0 authorization code grant authentication metadata.</p>
+   * @public
+   */
+  export interface AuthorizationCodeGrantMetadataMember {
+    AuthorizationCodeGrantMetadata: AuthorizationCodeGrantMetadata;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>OAuth 2.0 client credentials grant authentication metadata.</p>
+   * @public
+   */
+  export interface ClientCredentialsGrantMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata: ClientCredentialsGrantMetadata;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Basic authentication metadata using username and password.</p>
+   * @public
+   */
+  export interface BasicAuthConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata: BasicAuthConnectionMetadata;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>API key authentication metadata.</p>
+   * @public
+   */
+  export interface ApiKeyConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata: APIKeyConnectionMetadata;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>No authentication metadata for services that don't require authentication.</p>
+   * @public
+   */
+  export interface NoneConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata: NoneConnectionMetadata;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>IAM role-based authentication metadata for Amazon Web Services services.</p>
+   * @public
+   */
+  export interface IamConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata: IAMConnectionMetadata;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AuthorizationCodeGrantMetadata: (value: AuthorizationCodeGrantMetadata) => T;
+    ClientCredentialsGrantMetadata: (value: ClientCredentialsGrantMetadata) => T;
+    BasicAuthConnectionMetadata: (value: BasicAuthConnectionMetadata) => T;
+    ApiKeyConnectionMetadata: (value: APIKeyConnectionMetadata) => T;
+    NoneConnectionMetadata: (value: NoneConnectionMetadata) => T;
+    IamConnectionMetadata: (value: IAMConnectionMetadata) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Authentication configuration for connecting to external services.</p>
+ * @public
+ */
+export interface AuthConfig {
+  /**
+   * <p>The type of authentication method.</p>
+   * @public
+   */
+  AuthenticationType: ConnectionAuthType | undefined;
+
+  /**
+   * <p>The authentication metadata containing the specific configuration for the chosen authentication type.</p>
+   * @public
+   */
+  AuthenticationMetadata: AuthenticationMetadata | undefined;
+}
+
+/**
+ * <p>The authorized targets that are associated with a service.</p>
+ * @public
+ */
+export interface AuthorizedTargetsByService {
+  /**
+   * <p>The name of the Amazon Web Services service.</p>
+   * @public
+   */
+  Service?: ServiceType | undefined;
+
+  /**
+   * <p>Aist of authorized targets that are represented by IAM Identity Center application ARNs.</p>
+   * @public
+   */
+  AuthorizedTargets?: string[] | undefined;
+}
+
+/**
+ * <p>The definition for the <code>ContributionAnalysisFactor</code>.</p>
+ * @public
+ */
+export interface ContributionAnalysisFactor {
+  /**
+   * <p>The field name of the <code>ContributionAnalysisFactor</code>.</p>
+   * @public
+   */
+  FieldName?: string | undefined;
+}
+
+/**
+ * <p>The definition for the identifier.</p>
+ * @public
+ */
+export interface Identifier {
+  /**
+   * <p>The identity of the identifier.</p>
+   * @public
+   */
+  Identity: string | undefined;
+}
+
+/**
+ * <p>The definition for the <code>FilterAggMetrics</code>.</p>
+ * @public
+ */
+export interface FilterAggMetrics {
+  /**
+   * <p>The metric operand of the <code>FilterAggMetrics</code>.</p>
+   * @public
+   */
+  MetricOperand?: Identifier | undefined;
+
+  /**
+   * <p>The function for the <code>FilterAggMetrics</code>.</p>
+   * @public
+   */
+  Function?: AggType | undefined;
+
+  /**
+   * <p>The sort direction for <code>FilterAggMetrics</code>.</p>
+   * @public
+   */
+  SortDirection?: TopicSortDirection | undefined;
+}
+
+/**
+ * <p>The definition for a <code>CollectiveConstantEntry</code>.</p>
+ * @public
+ */
+export interface CollectiveConstantEntry {
+  /**
+   * <p>The <code>ConstantType</code> of a <code>CollectiveConstantEntry</code>.</p>
+   * @public
+   */
+  ConstantType?: ConstantType | undefined;
+
+  /**
+   * <p>The value of a <code>CollectiveConstantEntry</code>.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicConstantValue</code>.</p>
+ * @public
+ */
+export interface TopicConstantValue {
+  /**
+   * <p>The constant type of a <code>TopicConstantValue</code>.</p>
+   * @public
+   */
+  ConstantType?: ConstantType | undefined;
+
+  /**
+   * <p>The value of the <code>TopicConstantValue</code>.</p>
+   * @public
+   */
+  Value?: string | undefined;
+
+  /**
+   * <p>The minimum for the <code>TopicConstantValue</code>.</p>
+   * @public
+   */
+  Minimum?: string | undefined;
+
+  /**
+   * <p>The maximum for the <code>TopicConstantValue</code>.</p>
+   * @public
+   */
+  Maximum?: string | undefined;
+
+  /**
+   * <p>The value list of the <code>TopicConstantValue</code>.</p>
+   * @public
+   */
+  ValueList?: CollectiveConstantEntry[] | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicIRFilterOption</code>.</p>
+ * @public
+ */
+export interface TopicIRFilterOption {
+  /**
+   * <p>The filter type for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  FilterType?: TopicIRFilterType | undefined;
+
+  /**
+   * <p>The filter class for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  FilterClass?: FilterClass | undefined;
+
+  /**
+   * <p>The operand field for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  OperandField?: Identifier | undefined;
+
+  /**
+   * <p>The function for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Function?: TopicIRFilterFunction | undefined;
+
+  /**
+   * <p>The constant for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Constant?: TopicConstantValue | undefined;
+
+  /**
+   * <p>The inverse for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Inverse?: boolean | undefined;
+
+  /**
+   * <p>The null filter for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  NullFilter?: NullFilterOption | undefined;
+
+  /**
+   * <p>The aggregation for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Aggregation?: AggType | undefined;
+
+  /**
+   * <p>The aggregation function parameters for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  AggregationFunctionParameters?: Record<string, string> | undefined;
+
+  /**
+   * <p>The <code>AggregationPartitionBy</code> for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  AggregationPartitionBy?: AggregationPartitionBy[] | undefined;
+
+  /**
+   * <p>The range for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Range?: TopicConstantValue | undefined;
+
+  /**
+   * <p>The inclusive for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Inclusive?: boolean | undefined;
+
+  /**
+   * <p>The time granularity for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  TimeGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The last next offset for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  LastNextOffset?: TopicConstantValue | undefined;
+
+  /**
+   * <p>The agg metrics for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  AggMetrics?: FilterAggMetrics[] | undefined;
+
+  /**
+   * <p>The <code>TopBottomLimit</code> for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  TopBottomLimit?: TopicConstantValue | undefined;
+
+  /**
+   * <p>The sort direction for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  SortDirection?: TopicSortDirection | undefined;
+
+  /**
+   * <p>The anchor for the <code>TopicIRFilterOption</code>.</p>
+   * @public
+   */
+  Anchor?: Anchor | undefined;
+}
+
+/**
+ * <p>The definition for the <code>ContributionAnalysisTimeRanges</code>.</p>
+ * @public
+ */
+export interface ContributionAnalysisTimeRanges {
+  /**
+   * <p>The start range for the <code>ContributionAnalysisTimeRanges</code>.</p>
+   * @public
+   */
+  StartRange?: TopicIRFilterOption | undefined;
+
+  /**
+   * <p>The end range for the <code>ContributionAnalysisTimeRanges</code>.</p>
+   * @public
+   */
+  EndRange?: TopicIRFilterOption | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicIRContributionAnalysis</code>.</p>
+ * @public
+ */
+export interface TopicIRContributionAnalysis {
+  /**
+   * <p>The factors for a <code>TopicIRContributionAnalysis</code>.</p>
+   * @public
+   */
+  Factors?: ContributionAnalysisFactor[] | undefined;
+
+  /**
+   * <p>The time ranges for the <code>TopicIRContributionAnalysis</code>.</p>
+   * @public
+   */
+  TimeRanges?: ContributionAnalysisTimeRanges | undefined;
+
+  /**
+   * <p>The direction for the <code>TopicIRContributionAnalysis</code>.</p>
+   * @public
+   */
+  Direction?: ContributionAnalysisDirection | undefined;
+
+  /**
+   * <p>The sort type for the <code>TopicIRContributionAnalysis</code>.</p>
+   * @public
+   */
+  SortType?: ContributionAnalysisSortType | undefined;
+}
+
+/**
+ * <p>A structure that represents a negative format.</p>
+ * @public
+ */
+export interface NegativeFormat {
+  /**
+   * <p>The prefix for a negative format.</p>
+   * @public
+   */
+  Prefix?: string | undefined;
+
+  /**
+   * <p>The suffix for a negative format.</p>
+   * @public
+   */
+  Suffix?: string | undefined;
+}
+
+/**
+ * <p>A structure that represents additional options for display formatting.</p>
+ * @public
+ */
+export interface DisplayFormatOptions {
+  /**
+   * <p>A Boolean value that indicates whether to use blank cell format.</p>
+   * @public
+   */
+  UseBlankCellFormat?: boolean | undefined;
+
+  /**
+   * <p>Determines the blank cell format.</p>
+   * @public
+   */
+  BlankCellFormat?: string | undefined;
+
+  /**
+   * <p>Determines the <code>DateTime</code> format.</p>
+   * @public
+   */
+  DateFormat?: string | undefined;
+
+  /**
+   * <p>Determines the decimal separator.</p>
+   * @public
+   */
+  DecimalSeparator?: TopicNumericSeparatorSymbol | undefined;
+
+  /**
+   * <p>Determines the grouping separator.</p>
+   * @public
+   */
+  GroupingSeparator?: string | undefined;
+
+  /**
+   * <p>A Boolean value that indicates whether to use grouping.</p>
+   * @public
+   */
+  UseGrouping?: boolean | undefined;
+
+  /**
+   * <p>Determines the number of fraction digits.</p>
+   * @public
+   */
+  FractionDigits?: number | undefined;
+
+  /**
+   * <p>The prefix value for a display format.</p>
+   * @public
+   */
+  Prefix?: string | undefined;
+
+  /**
+   * <p>The suffix value for a display format.</p>
+   * @public
+   */
+  Suffix?: string | undefined;
+
+  /**
+   * <p>The unit scaler. Valid values for this structure are: <code>NONE</code>,
+   *             <code>AUTO</code>, <code>THOUSANDS</code>, <code>MILLIONS</code>,
+   *          <code>BILLIONS</code>,
+   *          and <code>TRILLIONS</code>.</p>
+   * @public
+   */
+  UnitScaler?: NumberScale | undefined;
+
+  /**
+   * <p>The negative format.</p>
+   * @public
+   */
+  NegativeFormat?: NegativeFormat | undefined;
+
+  /**
+   * <p>The currency symbol, such as <code>USD</code>.</p>
+   * @public
+   */
+  CurrencySymbol?: string | undefined;
+}
+
+/**
+ * <p>The definition for a <code>NamedEntityRef</code>.</p>
+ * @public
+ */
+export interface NamedEntityRef {
+  /**
+   * <p>The <code>NamedEntityName</code> for the <code>NamedEntityRef</code>.</p>
+   * @public
+   */
+  NamedEntityName?: string | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicSortClause</code>.</p>
+ * @public
+ */
+export interface TopicSortClause {
+  /**
+   * <p>The operand for a <code>TopicSortClause</code>.</p>
+   * @public
+   */
+  Operand?: Identifier | undefined;
+
+  /**
+   * <p>The sort direction for the <code>TopicSortClause</code>.</p>
+   * @public
+   */
+  SortDirection?: TopicSortDirection | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicIRGroupBy</code>.</p>
+ * @public
+ */
+export interface TopicIRGroupBy {
+  /**
+   * <p>The field name for the <code>TopicIRGroupBy</code>.</p>
+   * @public
+   */
+  FieldName?: Identifier | undefined;
+
+  /**
+   * <p>The time granularity for the <code>TopicIRGroupBy</code>.</p>
+   * @public
+   */
+  TimeGranularity?: TopicTimeGranularity | undefined;
+
+  /**
+   * <p>The sort for the <code>TopicIRGroupBy</code>.</p>
+   * @public
+   */
+  Sort?: TopicSortClause | undefined;
+
+  /**
+   * <p>The display format for the <code>TopicIRGroupBy</code>.</p>
+   * @public
+   */
+  DisplayFormat?: DisplayFormat | undefined;
+
+  /**
+   * <p>A structure that represents additional options for display formatting.</p>
+   * @public
+   */
+  DisplayFormatOptions?: DisplayFormatOptions | undefined;
+
+  /**
+   * <p>The named entity for the <code>TopicIRGroupBy</code>.</p>
+   * @public
+   */
+  NamedEntity?: NamedEntityRef | undefined;
+}
+
+/**
+ * <p>The definition of a <code>TopicIRComparisonMethod</code>.</p>
+ * @public
+ */
+export interface TopicIRComparisonMethod {
+  /**
+   * <p>The type for the <code>TopicIRComparisonMethod</code>.</p>
+   * @public
+   */
+  Type?: ComparisonMethodType | undefined;
+
+  /**
+   * <p>The period for the <code>TopicIRComparisonMethod</code>.</p>
+   * @public
+   */
+  Period?: TopicTimeGranularity | undefined;
+
+  /**
+   * <p>The window size for the <code>TopicIRComparisonMethod</code>.</p>
+   * @public
+   */
+  WindowSize?: number | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicIRMetric</code>.</p>
+ * @public
+ */
+export interface TopicIRMetric {
+  /**
+   * <p>The metric ID for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  MetricId?: Identifier | undefined;
+
+  /**
+   * <p>The function for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  Function?: AggFunction | undefined;
+
+  /**
+   * <p>The operands for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  Operands?: Identifier[] | undefined;
+
+  /**
+   * <p>The comparison method for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  ComparisonMethod?: TopicIRComparisonMethod | undefined;
+
+  /**
+   * <p>The expression for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  Expression?: string | undefined;
+
+  /**
+   * <p>The calculated field references for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  CalculatedFieldReferences?: Identifier[] | undefined;
+
+  /**
+   * <p>The display format for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  DisplayFormat?: DisplayFormat | undefined;
+
+  /**
+   * <p>A structure that represents additional options for display formatting.</p>
+   * @public
+   */
+  DisplayFormatOptions?: DisplayFormatOptions | undefined;
+
+  /**
+   * <p>The named entity for the <code>TopicIRMetric</code>.</p>
+   * @public
+   */
+  NamedEntity?: NamedEntityRef | undefined;
+}
+
+/**
+ * <p>The definition for a <code>VisualOptions</code>.</p>
+ * @public
+ */
+export interface VisualOptions {
+  /**
+   * <p>The type for a <code>VisualOptions</code>.</p>
+   * @public
+   */
+  type?: string | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicIR</code>.</p>
+ * @public
+ */
+export interface TopicIR {
+  /**
+   * <p>The metrics for the <code>TopicIR</code>.</p>
+   * @public
+   */
+  Metrics?: TopicIRMetric[] | undefined;
+
+  /**
+   * <p>The GroupBy list for the <code>TopicIR</code>.</p>
+   * @public
+   */
+  GroupByList?: TopicIRGroupBy[] | undefined;
+
+  /**
+   * <p>The filters for the <code>TopicIR</code>.</p>
+   * @public
+   */
+  Filters?: TopicIRFilterOption[][] | undefined;
+
+  /**
+   * <p>The sort for the <code>TopicIR</code>.</p>
+   * @public
+   */
+  Sort?: TopicSortClause | undefined;
+
+  /**
+   * <p>The contribution analysis for the <code>TopicIR</code>.</p>
+   * @public
+   */
+  ContributionAnalysis?: TopicIRContributionAnalysis | undefined;
+
+  /**
+   * <p>The visual for the <code>TopicIR</code>.</p>
+   * @public
+   */
+  Visual?: VisualOptions | undefined;
+}
+
+/**
+ * <p>The definition for the slot.</p>
+ * @public
+ */
+export interface Slot {
+  /**
+   * <p>The slot ID of the slot.</p>
+   * @public
+   */
+  SlotId?: string | undefined;
+
+  /**
+   * <p>The visual ID for the slot.</p>
+   * @public
+   */
+  VisualId?: string | undefined;
+}
+
+/**
+ * <p>The definition for a <code>TopicTemplate</code>.</p>
+ * @public
+ */
+export interface TopicTemplate {
+  /**
+   * <p>The template type for the <code>TopicTemplate</code>.</p>
+   * @public
+   */
+  TemplateType?: string | undefined;
+
+  /**
+   * <p>The slots for the <code>TopicTemplate</code>.</p>
+   * @public
+   */
+  Slots?: Slot[] | undefined;
+}
+
+/**
+ * <p>The definition for a <code>InvalidTopicReviewedAnswer</code>.</p>
+ * @public
+ */
+export interface InvalidTopicReviewedAnswer {
+  /**
+   * <p>The answer ID for the <code>InvalidTopicReviewedAnswer</code>.</p>
+   * @public
+   */
+  AnswerId?: string | undefined;
+
+  /**
+   * <p>The error that is returned for the <code>InvalidTopicReviewedAnswer</code>.</p>
+   * @public
+   */
+  Error?: ReviewedAnswerErrorCode | undefined;
+}
+
+/**
+ * <p>The definition for a <code>SucceededTopicReviewedAnswer</code>.</p>
+ * @public
+ */
+export interface SucceededTopicReviewedAnswer {
+  /**
+   * <p>The answer ID for the <code>SucceededTopicReviewedAnswer</code>.</p>
+   * @public
+   */
+  AnswerId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchCreateTopicReviewedAnswerResponse {
+  /**
+   * <p>The ID for the topic reviewed answer that you want to create. This ID is unique per Amazon Web Services Region
+   *          for each Amazon Web Services account.</p>
+   * @public
+   */
+  TopicId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the topic.</p>
+   * @public
+   */
+  TopicArn?: string | undefined;
+
+  /**
+   * <p>The definition of Answers that are successfully created.</p>
+   * @public
+   */
+  SucceededAnswers?: SucceededTopicReviewedAnswer[] | undefined;
+
+  /**
+   * <p>The definition of Answers that are invalid and not created.</p>
+   * @public
+   */
+  InvalidAnswers?: InvalidTopicReviewedAnswer[] | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDeleteKnowledgeBaseRequest {
+  /**
+   * <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>A list of knowledge base identifiers to delete.</p>
+   * @public
+   */
+  KnowledgeBaseIds: string[] | undefined;
+}
+
+/**
+ * <p>Information about a knowledge base that was successfully deleted in a batch operation.</p>
+ * @public
+ */
+export interface BatchDeleteKnowledgeBaseSuccess {
+  /**
+   * <p>The unique identifier of the successfully deleted knowledge base.</p>
+   * @public
+   */
+  KnowledgeBaseId: string | undefined;
+
+  /**
+   * <p>The ARN of the successfully deleted knowledge base.</p>
+   * @public
+   */
+  KnowledgeBaseArn: string | undefined;
+}
+
+/**
+ * <p>Information about a knowledge base that failed to be deleted in a batch operation.</p>
+ * @public
+ */
+export interface BatchDeleteKnowledgeBaseFailure {
+  /**
+   * <p>The unique identifier of the knowledge base that failed to be deleted.</p>
+   * @public
+   */
+  KnowledgeBaseId: string | undefined;
+
+  /**
+   * <p>The error code for the deletion failure.</p>
+   * @public
+   */
+  ErrorCode: string | undefined;
+
+  /**
+   * <p>The error message for the deletion failure.</p>
+   * @public
+   */
+  ErrorMessage: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDeleteKnowledgeBaseResponse {
+  /**
+   * <p>A list of knowledge bases that were successfully deleted.</p>
+   * @public
+   */
+  Deleted: BatchDeleteKnowledgeBaseSuccess[] | undefined;
+
+  /**
+   * <p>A list of knowledge bases that failed to be deleted.</p>
+   * @public
+   */
+  Errors: BatchDeleteKnowledgeBaseFailure[] | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDeleteTopicReviewedAnswerRequest {
+  /**
+   * <p>The ID of the Amazon Web Services account that you want to delete a reviewed answers in.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>The ID for the topic reviewed answer that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+   * @public
+   */
+  TopicId: string | undefined;
+
+  /**
+   * <p>The Answer IDs of the Answers to be deleted.</p>
+   * @public
+   */
+  AnswerIds?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDeleteTopicReviewedAnswerResponse {
+  /**
+   * <p>The ID of the topic reviewed answer that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+   * @public
+   */
+  TopicId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the topic.</p>
+   * @public
+   */
+  TopicArn?: string | undefined;
+
+  /**
+   * <p>The definition of Answers that are successfully deleted.</p>
+   * @public
+   */
+  SucceededAnswers?: SucceededTopicReviewedAnswer[] | undefined;
+
+  /**
+   * <p>The definition of Answers that are invalid and not deleted.</p>
+   * @public
+   */
+  InvalidAnswers?: InvalidTopicReviewedAnswer[] | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+}
+
+/**
+ * <p>Identifies a user for the <code>BatchDescribeUserLimits</code> operation.</p>
+ * @public
+ */
+export interface UserLimitsEntry {
+  /**
+   * <p>The name of the user.</p>
+   * @public
+   */
+  userName: string | undefined;
+
+  /**
+   * <p>The namespace of the user.</p>
+   * @public
+   */
+  namespace: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDescribeUserLimitsRequest {
+  /**
+   * <p>The ID of the Amazon Web Services account that contains the users.</p>
+   * @public
+   */
+  accountId: string | undefined;
+
+  /**
+   * <p>A list of users to describe limits for. Each entry contains a user name and namespace.</p>
+   * @public
+   */
+  users?: UserLimitsEntry[] | undefined;
+
+  /**
+   * <p>An optional filter that limits the results to specific resource types. If you don't specify a value, the operation returns limits for all resource types.</p>
+   * @public
+   */
+  resourceTypes?: ResourceType[] | undefined;
+}
+
+/**
+ * <p>Information about a user whose limits could not be described in a batch operation.</p>
+ * @public
+ */
+export interface BatchDescribeUserLimitsError {
+  /**
+   * <p>The name of the user that failed.</p>
+   * @public
+   */
+  userName?: string | undefined;
+
+  /**
+   * <p>The namespace of the user that failed.</p>
+   * @public
+   */
+  namespace?: string | undefined;
+
+  /**
+   * <p>The ARN of the user that failed.</p>
+   * @public
+   */
+  userArn?: string | undefined;
+
+  /**
+   * <p>The error code for the failure.</p>
+   * @public
+   */
+  errorCode: string | undefined;
+
+  /**
+   * <p>The error message for the failure.</p>
+   * @public
+   */
+  message: string | undefined;
+}
+
+/**
+ * <p>The effective limit for a resource type that applies to a user, considering all applicable profile assignments and inheritance rules.</p>
+ * @public
+ */
+export interface EffectiveLimit {
+  /**
+   * <p>The type of resource that the limit applies to.</p>
+   * @public
+   */
+  resourceType: ResourceType | undefined;
+
+  /**
+   * <p>The maximum allowed value for the resource.</p>
+   * @public
+   */
+  limitValue: number | undefined;
+
+  /**
+   * <p>The unit of measurement for the limit.</p>
+   * @public
+   */
+  limitUnit: LimitUnit | undefined;
+
+  /**
+   * <p>The source from which this limit was inherited. Possible values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DIRECT_USER</code> – The limit comes from a profile directly assigned to the user.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>GROUP</code> – The limit comes from a profile assigned to a group the user belongs to.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ROLE</code> – The limit comes from a profile assigned to a role the user has.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ACCOUNT</code> – The limit comes from the account-level default profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SYSTEM_DEFAULT</code> – The limit comes from the built-in system default.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  source: LimitSource | undefined;
+
+  /**
+   * <p>The identifier of the limits profile that defines this limit.</p>
+   * @public
+   */
+  profileId: string | undefined;
+}
+
+/**
+ * <p>The effective limits for an Amazon Quick Sight user.</p>
+ * @public
+ */
+export interface UserLimits {
+  /**
+   * <p>The name of the user.</p>
+   * @public
+   */
+  userName: string | undefined;
+
+  /**
+   * <p>The namespace of the user.</p>
+   * @public
+   */
+  namespace: string | undefined;
+
+  /**
+   * <p>A list of effective limits for the user.</p>
+   * @public
+   */
+  effectiveLimits: EffectiveLimit[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDescribeUserLimitsResponse {
+  /**
+   * <p>A list of user limits results. Each entry contains the effective limits for a user.</p>
+   * @public
+   */
+  userLimits: UserLimits[] | undefined;
+
+  /**
+   * <p>A list of errors for users whose limits could not be described.</p>
+   * @public
+   */
+  errors: BatchDescribeUserLimitsError[] | undefined;
+}
+
+/**
+ * <p>The bookmarks configuration of an embedded dashboard.</p>
+ * @public
+ */
+export interface BookmarksConfigurations {
+  /**
+   * <p>A Boolean value that determines whether a user
+   *             can bookmark an embedded dashboard.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>The display options for tile borders for visuals.</p>
+ * @public
+ */
+export interface BorderStyle {
+  /**
+   * <p>The option to add color for tile borders for visuals.</p>
+   * @public
+   */
+  Color?: string | undefined;
+
+  /**
+   * <p>The option to enable display of borders for visuals.</p>
+   * @public
+   */
+  Show?: boolean | undefined;
+
+  /**
+   * <p>The option to set the width of tile borders for visuals.</p>
+   * @public
+   */
+  Width?: string | undefined;
+}
+
+/**
+ * <p>The source of the image.</p>
+ * @public
+ */
+export type ImageSource =
+  | ImageSource.PublicUrlMember
+  | ImageSource.S3UriMember
+  | ImageSource.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ImageSource {
+  /**
+   * <p>The public URL that points to the source image.</p>
+   * @public
+   */
+  export interface PublicUrlMember {
+    PublicUrl: string;
+    S3Uri?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The Amazon S3 URI that points to the source image.</p>
+   * @public
+   */
+  export interface S3UriMember {
+    PublicUrl?: never;
+    S3Uri: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    PublicUrl?: never;
+    S3Uri?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    PublicUrl: (value: string) => T;
+    S3Uri: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>The logo image configuration.</p>
+ * @public
+ */
+export interface ImageConfiguration {
+  /**
+   * <p>The source of the image.</p>
+   * @public
+   */
+  Source?: ImageSource | undefined;
+}
+
+/**
+ * <p>The image set configuration.</p>
+ * @public
+ */
+export interface ImageSetConfiguration {
+  /**
+   * <p>The original image.</p>
+   * @public
+   */
+  Original: ImageConfiguration | undefined;
+}
+
+/**
+ * <p>The logo set configuration.</p>
+ * @public
+ */
+export interface LogoSetConfiguration {
+  /**
+   * <p>The primary logo.</p>
+   * @public
+   */
+  Primary: ImageSetConfiguration | undefined;
+
+  /**
+   * <p>The favicon logo.</p>
+   * @public
+   */
+  Favicon?: ImageSetConfiguration | undefined;
+}
+
+/**
+ * <p>The logo configuration.</p>
+ * @public
+ */
+export interface LogoConfiguration {
+  /**
+   * <p>The alt text for the logo.</p>
+   * @public
+   */
+  AltText: string | undefined;
+
+  /**
+   * <p>A set of configured logos.</p>
+   * @public
+   */
+  LogoSet: LogoSetConfiguration | undefined;
+}
+
+/**
+ * <p>The definition of the brand.</p>
+ * @public
+ */
+export interface BrandDefinition {
+  /**
+   * <p>The name of the brand.</p>
+   * @public
+   */
+  BrandName: string | undefined;
+
+  /**
+   * <p>The description of the brand.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The application theme of the brand.</p>
+   * @public
+   */
+  ApplicationTheme?: ApplicationTheme | undefined;
+
+  /**
+   * <p>The logo configuration of the brand.</p>
+   * @public
+   */
+  LogoConfiguration?: LogoConfiguration | undefined;
+}
+
+/**
+ * <p>The logo image.</p>
+ * @public
+ */
+export interface Image {
+  /**
+   * <p>The source of the logo image.</p>
+   * @public
+   */
+  Source?: ImageSource | undefined;
+
+  /**
+   * <p>The URL that points to the generated logo image.</p>
+   * @public
+   */
+  GeneratedImageUrl?: string | undefined;
+}
+
+/**
+ * <p>The image set.</p>
+ * @public
+ */
+export interface ImageSet {
+  /**
+   * <p>The original image.</p>
+   * @public
+   */
+  Original: Image | undefined;
+
+  /**
+   * <p>The image with the height set to 64 pixels.</p>
+   * @public
+   */
+  Height64?: Image | undefined;
+
+  /**
+   * <p>The image with the height set to 32 pixels.</p>
+   * @public
+   */
+  Height32?: Image | undefined;
+}
+
+/**
+ * <p>A set of logos.</p>
+ * @public
+ */
+export interface LogoSet {
+  /**
+   * <p>The primary logo.</p>
+   * @public
+   */
+  Primary: ImageSet | undefined;
+
+  /**
+   * <p>The favicon logo.</p>
+   * @public
+   */
+  Favicon?: ImageSet | undefined;
+}
+
+/**
+ * <p>The logo configuration.</p>
+ * @public
+ */
+export interface Logo {
+  /**
+   * <p>The alt text for the logo.</p>
+   * @public
+   */
+  AltText: string | undefined;
+
+  /**
+   * <p>A set of configured logos.</p>
+   * @public
+   */
+  LogoSet: LogoSet | undefined;
+}
+
+/**
+ * <p>The details of the brand.</p>
+ * @public
+ */
+export interface BrandDetail {
+  /**
+   * <p>The ID of the Quick brand.</p>
+   * @public
+   */
+  BrandId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the brand.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The status of the brand.</p>
+   * @public
+   */
+  BrandStatus?: BrandStatus | undefined;
+
+  /**
+   * <p>The time that the brand was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The last time the brand was updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
+
+  /**
+   * <p>The ID of the version.</p>
+   * @public
+   */
+  VersionId?: string | undefined;
+
+  /**
+   * <p>The status of the version.</p>
+   * @public
+   */
+  VersionStatus?: BrandVersionStatus | undefined;
+
+  /**
+   * <p>A list of errors that occurred during the most recent brand operation.</p>
+   * @public
+   */
+  Errors?: string[] | undefined;
+
+  /**
+   * <p>The logo details.</p>
+   * @public
+   */
+  Logo?: Logo | undefined;
+}
+
+/**
+ * <p>A summary of the brand.</p>
+ * @public
+ */
+export interface BrandSummary {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the brand.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The ID of the Quick brand.</p>
+   * @public
+   */
+  BrandId?: string | undefined;
+
+  /**
+   * <p>The name of the brand.</p>
+   * @public
+   */
+  BrandName?: string | undefined;
+
+  /**
+   * <p>The description of the brand.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The status of the brand.</p>
+   * @public
+   */
+  BrandStatus?: BrandStatus | undefined;
+
+  /**
+   * <p>The time that the brand was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The time when the brand was last updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
+}
+
+/**
+ * <p>A calculated column for a dataset.</p>
+ * @public
+ */
+export interface CalculatedColumn {
+  /**
+   * <p>Column name.</p>
+   * @public
+   */
+  ColumnName: string | undefined;
+
+  /**
+   * <p>A unique ID to identify a calculated column. During a dataset update, if the column ID
+   *             of a calculated column matches that of an existing calculated column, Quick Sight
+   *             preserves the existing calculated column.</p>
+   * @public
+   */
+  ColumnId: string | undefined;
+
+  /**
+   * <p>An expression that defines the calculated column.</p>
+   * @public
+   */
+  Expression: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CancelIngestionRequest {
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the dataset used in the ingestion.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>An ID for the ingestion.</p>
+   * @public
+   */
+  IngestionId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CancelIngestionResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) for the data ingestion.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>An ID for the ingestion.</p>
+   * @public
+   */
+  IngestionId?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+}
+
+/**
+ * <p>A set of actions that correspond to Amazon Quick Sight permissions.</p>
+ * @public
+ */
+export interface Capabilities {
+  /**
+   * <p>The ability to export to CSV files from the UI.</p>
+   * @public
+   */
+  ExportToCsv?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to export to Excel files from the UI.</p>
+   * @public
+   */
+  ExportToExcel?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to export to PDF files from the UI.</p>
+   * @public
+   */
+  ExportToPdf?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to print reports.</p>
+   * @public
+   */
+  PrintReports?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to export to Create and Update themes.</p>
+   * @public
+   */
+  CreateAndUpdateThemes?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to add or run anomaly detection.</p>
+   * @public
+   */
+  AddOrRunAnomalyDetectionForAnalyses?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share analyses.</p>
+   * @public
+   */
+  ShareAnalyses?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update datasets.</p>
+   * @public
+   */
+  CreateAndUpdateDatasets?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share datasets.</p>
+   * @public
+   */
+  ShareDatasets?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to subscribe to email reports.</p>
+   * @public
+   */
+  SubscribeDashboardEmailReports?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update email reports.</p>
+   * @public
+   */
+  CreateAndUpdateDashboardEmailReports?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share dashboards.</p>
+   * @public
+   */
+  ShareDashboards?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update threshold alerts.</p>
+   * @public
+   */
+  CreateAndUpdateThresholdAlerts?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to rename shared folders.</p>
+   * @public
+   */
+  RenameSharedFolders?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create shared folders.</p>
+   * @public
+   */
+  CreateSharedFolders?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update data sources.</p>
+   * @public
+   */
+  CreateAndUpdateDataSources?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share data sources.</p>
+   * @public
+   */
+  ShareDataSources?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to view account SPICE capacity.</p>
+   * @public
+   */
+  ViewAccountSPICECapacity?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create a SPICE dataset.</p>
+   * @public
+   */
+  CreateSPICEDataset?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to export to PDF files in scheduled email reports.</p>
+   * @public
+   */
+  ExportToPdfInScheduledReports?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to export to CSV files in scheduled email reports.</p>
+   * @public
+   */
+  ExportToCsvInScheduledReports?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to export to Excel files in scheduled email reports.</p>
+   * @public
+   */
+  ExportToExcelInScheduledReports?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to include content in scheduled email reports.</p>
+   * @public
+   */
+  IncludeContentInScheduledReportsEmail?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform dashboard-related actions.</p>
+   * @public
+   */
+  Dashboard?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform analysis-related actions.</p>
+   * @public
+   */
+  Analysis?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform automate-related actions.</p>
+   * @public
+   */
+  Automate?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform flow-related actions.</p>
+   * @public
+   */
+  Flow?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform apps-related actions.</p>
+   * @public
+   */
+  Apps?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create or update apps.</p>
+   * @public
+   */
+  CreateAndUpdateApps?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share apps with other users.</p>
+   * @public
+   */
+  ShareApps?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to add and invoke AI inference in new and existing apps.</p>
+   * @public
+   */
+  InvokeAppsAIInference?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to access the native data store for new and existing apps.</p>
+   * @public
+   */
+  AccessAppsNativeDataStore?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to enable approvals for flow share.</p>
+   * @public
+   */
+  PublishWithoutApproval?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Bedrock models for general knowledge step in flows.</p>
+   * @public
+   */
+  UseBedrockModels?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use UI Agent step to perform tasks on public websites.</p>
+   * @public
+   */
+  PerformFlowUiTask?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to review and approve sharing requests of Flows.</p>
+   * @public
+   */
+  ApproveFlowShareRequests?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use internet to enhance results in Chat Agents, Flows, and Quick Research.
+   * 	          Web search queries will be processed securely in an Amazon Web Services region <code>us-east-1</code>.</p>
+   * @public
+   */
+  UseAgentWebSearch?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use knowledge bases to specify content from external applications.</p>
+   * @public
+   */
+  KnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateKnowledgeBases?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareKnowledgeBases?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SharePointKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateSharePointKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareSharePointKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseSharePointKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  GoogleDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateGoogleDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareGoogleDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseGoogleDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  WebCrawlerKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateWebCrawlerKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareWebCrawlerKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseWebCrawlerKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  S3KnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateS3KnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareS3KnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseS3KnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ConfluenceKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateConfluenceKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareConfluenceKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseConfluenceKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  OneDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateOneDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareOneDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseOneDriveKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  QBusinessKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateQBusinessKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareQBusinessKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseQBusinessKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  BedrockManagedKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateBedrockManagedKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareBedrockManagedKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseBedrockManagedKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  BoxKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateBoxKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareBoxKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseBoxKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  IDCKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CreateAndUpdateIDCKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ShareIDCKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  UseIDCKnowledgeBase?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions in external services through Action connectors. Actions allow users to interact with third-party systems.</p>
+   * @public
+   */
+  Action?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using REST API connection connectors.</p>
+   * @public
+   */
+  GenericHTTPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update REST API connection actions.</p>
+   * @public
+   */
+  CreateAndUpdateGenericHTTPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share REST API connection actions.</p>
+   * @public
+   */
+  ShareGenericHTTPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use REST API connection actions.</p>
+   * @public
+   */
+  UseGenericHTTPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Asana connectors.</p>
+   * @public
+   */
+  AsanaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Asana actions.</p>
+   * @public
+   */
+  CreateAndUpdateAsanaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Asana actions.</p>
+   * @public
+   */
+  ShareAsanaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Asana actions.</p>
+   * @public
+   */
+  UseAsanaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Slack connectors.</p>
+   * @public
+   */
+  SlackAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Slack actions.</p>
+   * @public
+   */
+  CreateAndUpdateSlackAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Slack actions.</p>
+   * @public
+   */
+  ShareSlackAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Slack actions.</p>
+   * @public
+   */
+  UseSlackAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using ServiceNow connectors.</p>
+   * @public
+   */
+  ServiceNowAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update ServiceNow actions.</p>
+   * @public
+   */
+  CreateAndUpdateServiceNowAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share ServiceNow actions.</p>
+   * @public
+   */
+  ShareServiceNowAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use ServiceNow actions.</p>
+   * @public
+   */
+  UseServiceNowAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Salesforce connectors.</p>
+   * @public
+   */
+  SalesforceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Salesforce actions.</p>
+   * @public
+   */
+  CreateAndUpdateSalesforceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Salesforce actions.</p>
+   * @public
+   */
+  ShareSalesforceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Salesforce actions.</p>
+   * @public
+   */
+  UseSalesforceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Microsoft Outlook connectors.</p>
+   * @public
+   */
+  MSExchangeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Microsoft Outlook actions.</p>
+   * @public
+   */
+  CreateAndUpdateMSExchangeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Microsoft Outlook actions.</p>
+   * @public
+   */
+  ShareMSExchangeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Microsoft Outlook actions.</p>
+   * @public
+   */
+  UseMSExchangeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using PagerDuty Advance connectors.</p>
+   * @public
+   */
+  PagerDutyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update PagerDuty Advance actions.</p>
+   * @public
+   */
+  CreateAndUpdatePagerDutyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share PagerDuty Advance actions.</p>
+   * @public
+   */
+  SharePagerDutyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use PagerDuty Advance actions.</p>
+   * @public
+   */
+  UsePagerDutyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Jira connectors.</p>
+   * @public
+   */
+  JiraAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Jira actions.</p>
+   * @public
+   */
+  CreateAndUpdateJiraAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Jira actions.</p>
+   * @public
+   */
+  ShareJiraAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Jira actions.</p>
+   * @public
+   */
+  UseJiraAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Atlassian Confluence Cloud connectors.</p>
+   * @public
+   */
+  ConfluenceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Atlassian Confluence Cloud actions.</p>
+   * @public
+   */
+  CreateAndUpdateConfluenceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Atlassian Confluence Cloud actions.</p>
+   * @public
+   */
+  ShareConfluenceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Atlassian Confluence Cloud actions.</p>
+   * @public
+   */
+  UseConfluenceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Microsoft OneDrive connectors.</p>
+   * @public
+   */
+  OneDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Microsoft OneDrive actions.</p>
+   * @public
+   */
+  CreateAndUpdateOneDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Microsoft OneDrive actions.</p>
+   * @public
+   */
+  ShareOneDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Microsoft OneDrive actions.</p>
+   * @public
+   */
+  UseOneDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Microsoft SharePoint Online connectors.</p>
+   * @public
+   */
+  SharePointAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Microsoft SharePoint Online actions.</p>
+   * @public
+   */
+  CreateAndUpdateSharePointAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Microsoft SharePoint Online actions.</p>
+   * @public
+   */
+  ShareSharePointAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Microsoft SharePoint Online actions.</p>
+   * @public
+   */
+  UseSharePointAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Microsoft Teams connectors.</p>
+   * @public
+   */
+  MSTeamsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Microsoft Teams actions.</p>
+   * @public
+   */
+  CreateAndUpdateMSTeamsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Microsoft Teams actions.</p>
+   * @public
+   */
+  ShareMSTeamsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Microsoft Teams actions.</p>
+   * @public
+   */
+  UseMSTeamsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Calendar connectors.</p>
+   * @public
+   */
+  GoogleCalendarAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Calendar actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleCalendarAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Calendar actions.</p>
+   * @public
+   */
+  ShareGoogleCalendarAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Calendar actions.</p>
+   * @public
+   */
+  UseGoogleCalendarAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Zendesk connectors.</p>
+   * @public
+   */
+  ZendeskAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Zendesk actions.</p>
+   * @public
+   */
+  CreateAndUpdateZendeskAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Zendesk actions.</p>
+   * @public
+   */
+  ShareZendeskAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Zendesk actions.</p>
+   * @public
+   */
+  UseZendeskAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Smartsheet connectors.</p>
+   * @public
+   */
+  SmartsheetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Smartsheet actions.</p>
+   * @public
+   */
+  CreateAndUpdateSmartsheetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Smartsheet actions.</p>
+   * @public
+   */
+  ShareSmartsheetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Smartsheet actions.</p>
+   * @public
+   */
+  UseSmartsheetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using SAP Business Partner connectors.</p>
+   * @public
+   */
+  SAPBusinessPartnerAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update SAP Business Partner actions.</p>
+   * @public
+   */
+  CreateAndUpdateSAPBusinessPartnerAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SAP Business Partner actions.</p>
+   * @public
+   */
+  ShareSAPBusinessPartnerAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use SAP Business Partner actions.</p>
+   * @public
+   */
+  UseSAPBusinessPartnerAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using SAP Product Master connectors.</p>
+   * @public
+   */
+  SAPProductMasterDataAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update SAP Product Master actions.</p>
+   * @public
+   */
+  CreateAndUpdateSAPProductMasterDataAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SAP Product Master actions.</p>
+   * @public
+   */
+  ShareSAPProductMasterDataAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use SAP Product Master actions.</p>
+   * @public
+   */
+  UseSAPProductMasterDataAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using SAP Physical Inventory connectors.</p>
+   * @public
+   */
+  SAPPhysicalInventoryAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update SAP Physical Inventory actions.</p>
+   * @public
+   */
+  CreateAndUpdateSAPPhysicalInventoryAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SAP Physical Inventory actions.</p>
+   * @public
+   */
+  ShareSAPPhysicalInventoryAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use SAP Physical Inventory actions.</p>
+   * @public
+   */
+  UseSAPPhysicalInventoryAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using SAP Bill of Materials connectors.</p>
+   * @public
+   */
+  SAPBillOfMaterialAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update SAP Bill of Materials actions.</p>
+   * @public
+   */
+  CreateAndUpdateSAPBillOfMaterialAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SAP Bill of Materials actions.</p>
+   * @public
+   */
+  ShareSAPBillOfMaterialAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use SAP Bill of Materials actions.</p>
+   * @public
+   */
+  UseSAPBillOfMaterialAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using SAP Material Stock connectors.</p>
+   * @public
+   */
+  SAPMaterialStockAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update SAP Material Stock actions.</p>
+   * @public
+   */
+  CreateAndUpdateSAPMaterialStockAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SAP Material Stock actions.</p>
+   * @public
+   */
+  ShareSAPMaterialStockAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use SAP Material Stock actions.</p>
+   * @public
+   */
+  UseSAPMaterialStockAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using FactSet connectors.</p>
+   * @public
+   */
+  FactSetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update FactSet actions.</p>
+   * @public
+   */
+  CreateAndUpdateFactSetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share FactSet actions.</p>
+   * @public
+   */
+  ShareFactSetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use FactSet actions.</p>
+   * @public
+   */
+  UseFactSetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Amazon S3 connectors.</p>
+   * @public
+   */
+  AmazonSThreeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Amazon S3 actions.</p>
+   * @public
+   */
+  CreateAndUpdateAmazonSThreeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon S3 actions.</p>
+   * @public
+   */
+  ShareAmazonSThreeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Amazon S3 actions.</p>
+   * @public
+   */
+  UseAmazonSThreeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Textract connectors.</p>
+   * @public
+   */
+  TextractAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Textract actions.</p>
+   * @public
+   */
+  CreateAndUpdateTextractAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Textract actions.</p>
+   * @public
+   */
+  ShareTextractAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Textract actions.</p>
+   * @public
+   */
+  UseTextractAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Comprehend connectors.</p>
+   * @public
+   */
+  ComprehendAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Comprehend actions.</p>
+   * @public
+   */
+  CreateAndUpdateComprehendAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Comprehend actions.</p>
+   * @public
+   */
+  ShareComprehendAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Comprehend actions.</p>
+   * @public
+   */
+  UseComprehendAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Comprehend Medical connectors.</p>
+   * @public
+   */
+  ComprehendMedicalAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Comprehend Medical actions.</p>
+   * @public
+   */
+  CreateAndUpdateComprehendMedicalAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Comprehend Medical actions.</p>
+   * @public
+   */
+  ShareComprehendMedicalAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Comprehend Medical actions.</p>
+   * @public
+   */
+  UseComprehendMedicalAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Bedrock Agent connectors.</p>
+   * @public
+   */
+  AmazonBedrockARSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Bedrock Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateAmazonBedrockARSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Bedrock Agent actions.</p>
+   * @public
+   */
+  ShareAmazonBedrockARSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Bedrock Agent actions.</p>
+   * @public
+   */
+  UseAmazonBedrockARSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Bedrock Runtime connectors.</p>
+   * @public
+   */
+  AmazonBedrockFSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Bedrock Runtime actions.</p>
+   * @public
+   */
+  CreateAndUpdateAmazonBedrockFSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Bedrock Runtime actions.</p>
+   * @public
+   */
+  ShareAmazonBedrockFSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Bedrock Runtime actions.</p>
+   * @public
+   */
+  UseAmazonBedrockFSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Bedrock Data Automation Runtime connectors.</p>
+   * @public
+   */
+  AmazonBedrockKRSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Bedrock Data Automation Runtime actions.</p>
+   * @public
+   */
+  CreateAndUpdateAmazonBedrockKRSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Bedrock Data Automation Runtime actions.</p>
+   * @public
+   */
+  ShareAmazonBedrockKRSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Bedrock Data Automation Runtime actions.</p>
+   * @public
+   */
+  UseAmazonBedrockKRSAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Model Context Protocol connectors.</p>
+   * @public
+   */
+  MCPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Model Context Protocol actions.</p>
+   * @public
+   */
+  CreateAndUpdateMCPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Model Context Protocol actions.</p>
+   * @public
+   */
+  ShareMCPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Model Context Protocol actions.</p>
+   * @public
+   */
+  UseMCPAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using OpenAPI Specification connectors.</p>
+   * @public
+   */
+  OpenAPIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update OpenAPI Specification actions.</p>
+   * @public
+   */
+  CreateAndUpdateOpenAPIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share OpenAPI Specification actions.</p>
+   * @public
+   */
+  ShareOpenAPIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use OpenAPI Specification actions.</p>
+   * @public
+   */
+  UseOpenAPIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using S&P Global Market Intelligence connectors.</p>
+   * @public
+   */
+  SandPGMIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update S&P Global Market Intelligence actions.</p>
+   * @public
+   */
+  CreateAndUpdateSandPGMIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share S&P Global Market Intelligence actions.</p>
+   * @public
+   */
+  ShareSandPGMIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use S&P Global Market Intelligence actions.</p>
+   * @public
+   */
+  UseSandPGMIAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using S&P Global Energy connectors.</p>
+   * @public
+   */
+  SandPGlobalEnergyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update S&P Global Energy actions.</p>
+   * @public
+   */
+  CreateAndUpdateSandPGlobalEnergyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share S&P Global Energy actions.</p>
+   * @public
+   */
+  ShareSandPGlobalEnergyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use S&P Global Energy actions.</p>
+   * @public
+   */
+  UseSandPGlobalEnergyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using BambooHR connectors.</p>
+   * @public
+   */
+  BambooHRAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update BambooHR actions.</p>
+   * @public
+   */
+  CreateAndUpdateBambooHRAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share BambooHR actions.</p>
+   * @public
+   */
+  ShareBambooHRAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use BambooHR actions.</p>
+   * @public
+   */
+  UseBambooHRAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Box Agent connectors.</p>
+   * @public
+   */
+  BoxAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Box Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateBoxAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Box Agent actions.</p>
+   * @public
+   */
+  ShareBoxAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Box Agent actions.</p>
+   * @public
+   */
+  UseBoxAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Canva Agent connectors.</p>
+   * @public
+   */
+  CanvaAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Canva Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateCanvaAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Canva Agent actions.</p>
+   * @public
+   */
+  ShareCanvaAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Canva Agent actions.</p>
+   * @public
+   */
+  UseCanvaAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using GitHub connectors.</p>
+   * @public
+   */
+  GithubAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update GitHub actions.</p>
+   * @public
+   */
+  CreateAndUpdateGithubAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share GitHub actions.</p>
+   * @public
+   */
+  ShareGithubAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use GitHub actions.</p>
+   * @public
+   */
+  UseGithubAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Notion connectors.</p>
+   * @public
+   */
+  NotionAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Notion actions.</p>
+   * @public
+   */
+  CreateAndUpdateNotionAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Notion actions.</p>
+   * @public
+   */
+  ShareNotionAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Notion actions.</p>
+   * @public
+   */
+  UseNotionAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Linear connectors.</p>
+   * @public
+   */
+  LinearAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Linear actions.</p>
+   * @public
+   */
+  CreateAndUpdateLinearAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Linear actions.</p>
+   * @public
+   */
+  ShareLinearAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Linear actions.</p>
+   * @public
+   */
+  UseLinearAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using HuggingFace connectors.</p>
+   * @public
+   */
+  HuggingFaceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update HuggingFace actions.</p>
+   * @public
+   */
+  CreateAndUpdateHuggingFaceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share HuggingFace actions.</p>
+   * @public
+   */
+  ShareHuggingFaceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use HuggingFace actions.</p>
+   * @public
+   */
+  UseHuggingFaceAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Monday connectors.</p>
+   * @public
+   */
+  MondayAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Monday actions.</p>
+   * @public
+   */
+  CreateAndUpdateMondayAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Monday actions.</p>
+   * @public
+   */
+  ShareMondayAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Monday actions.</p>
+   * @public
+   */
+  UseMondayAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Hubspot connectors.</p>
+   * @public
+   */
+  HubspotAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Hubspot actions.</p>
+   * @public
+   */
+  CreateAndUpdateHubspotAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Hubspot actions.</p>
+   * @public
+   */
+  ShareHubspotAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Hubspot actions.</p>
+   * @public
+   */
+  UseHubspotAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Intercom connectors.</p>
+   * @public
+   */
+  IntercomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Intercom actions.</p>
+   * @public
+   */
+  CreateAndUpdateIntercomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Intercom actions.</p>
+   * @public
+   */
+  ShareIntercomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Intercom actions.</p>
+   * @public
+   */
+  UseIntercomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using New Relic connectors.</p>
+   * @public
+   */
+  NewRelicAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update New Relic actions.</p>
+   * @public
+   */
+  CreateAndUpdateNewRelicAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share New Relic actions.</p>
+   * @public
+   */
+  ShareNewRelicAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use New Relic actions.</p>
+   * @public
+   */
+  UseNewRelicAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using PagerDuty Agent connectors.</p>
+   * @public
+   */
+  PagerDutyAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update PagerDuty Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdatePagerDutyAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share PagerDuty Agent actions.</p>
+   * @public
+   */
+  SharePagerDutyAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use PagerDuty Agent actions.</p>
+   * @public
+   */
+  UsePagerDutyAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Visier Agent connectors.</p>
+   * @public
+   */
+  VisierAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Visier Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateVisierAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Visier Agent actions.</p>
+   * @public
+   */
+  ShareVisierAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Visier Agent actions.</p>
+   * @public
+   */
+  UseVisierAgentAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Zoom connectors.</p>
+   * @public
+   */
+  ZoomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Zoom actions.</p>
+   * @public
+   */
+  CreateAndUpdateZoomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Zoom actions.</p>
+   * @public
+   */
+  ShareZoomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Zoom actions.</p>
+   * @public
+   */
+  UseZoomAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Snowflake Cortex Agent connectors.</p>
+   * @public
+   */
+  SnowFlakeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Snowflake Cortex Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateSnowFlakeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Snowflake Cortex Agent actions.</p>
+   * @public
+   */
+  ShareSnowFlakeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Snowflake Cortex Agent actions.</p>
+   * @public
+   */
+  UseSnowFlakeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Zapier Agent connectors.</p>
+   * @public
+   */
+  ZapierAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Zapier Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateZapierAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Zapier Agent actions.</p>
+   * @public
+   */
+  ShareZapierAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Zapier Agent actions.</p>
+   * @public
+   */
+  UseZapierAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Airtable connectors.</p>
+   * @public
+   */
+  AirtableAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Airtable actions.</p>
+   * @public
+   */
+  CreateAndUpdateAirtableAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Airtable actions.</p>
+   * @public
+   */
+  ShareAirtableAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Airtable actions.</p>
+   * @public
+   */
+  UseAirtableAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Dropbox connectors.</p>
+   * @public
+   */
+  DropboxAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Dropbox actions.</p>
+   * @public
+   */
+  CreateAndUpdateDropboxAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Dropbox actions.</p>
+   * @public
+   */
+  ShareDropboxAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Dropbox actions.</p>
+   * @public
+   */
+  UseDropboxAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Gmail connectors.</p>
+   * @public
+   */
+  GmailAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Gmail actions.</p>
+   * @public
+   */
+  CreateAndUpdateGmailAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Gmail actions.</p>
+   * @public
+   */
+  ShareGmailAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Gmail actions.</p>
+   * @public
+   */
+  UseGmailAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Analytics connectors.</p>
+   * @public
+   */
+  GoogleAnalyticsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Analytics actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleAnalyticsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Analytics actions.</p>
+   * @public
+   */
+  ShareGoogleAnalyticsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Analytics actions.</p>
+   * @public
+   */
+  UseGoogleAnalyticsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Docs connectors.</p>
+   * @public
+   */
+  GoogleDocsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Docs actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleDocsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Docs actions.</p>
+   * @public
+   */
+  ShareGoogleDocsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Docs actions.</p>
+   * @public
+   */
+  UseGoogleDocsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Drive connectors.</p>
+   * @public
+   */
+  GoogleDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Drive actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Drive actions.</p>
+   * @public
+   */
+  ShareGoogleDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Drive actions.</p>
+   * @public
+   */
+  UseGoogleDriveAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Meet connectors.</p>
+   * @public
+   */
+  GoogleMeetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Meet actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleMeetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Meet actions.</p>
+   * @public
+   */
+  ShareGoogleMeetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Meet actions.</p>
+   * @public
+   */
+  UseGoogleMeetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Sheets connectors.</p>
+   * @public
+   */
+  GoogleSheetsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Sheets actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleSheetsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Sheets actions.</p>
+   * @public
+   */
+  ShareGoogleSheetsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Sheets actions.</p>
+   * @public
+   */
+  UseGoogleSheetsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Slides connectors.</p>
+   * @public
+   */
+  GoogleSlidesAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Slides actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleSlidesAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Slides actions.</p>
+   * @public
+   */
+  ShareGoogleSlidesAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Slides actions.</p>
+   * @public
+   */
+  UseGoogleSlidesAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using QuickBooks connectors.</p>
+   * @public
+   */
+  QuickBooksAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update QuickBooks actions.</p>
+   * @public
+   */
+  CreateAndUpdateQuickBooksAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share QuickBooks actions.</p>
+   * @public
+   */
+  ShareQuickBooksAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use QuickBooks actions.</p>
+   * @public
+   */
+  UseQuickBooksAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Figma connectors.</p>
+   * @public
+   */
+  FigmaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Figma actions.</p>
+   * @public
+   */
+  CreateAndUpdateFigmaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Figma actions.</p>
+   * @public
+   */
+  ShareFigmaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Figma actions.</p>
+   * @public
+   */
+  UseFigmaAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using WhatsApp connectors.</p>
+   * @public
+   */
+  WhatsAppAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update WhatsApp actions.</p>
+   * @public
+   */
+  CreateAndUpdateWhatsAppAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share WhatsApp actions.</p>
+   * @public
+   */
+  ShareWhatsAppAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use WhatsApp actions.</p>
+   * @public
+   */
+  UseWhatsAppAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Google Chat connectors.</p>
+   * @public
+   */
+  GoogleChatAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Google Chat actions.</p>
+   * @public
+   */
+  CreateAndUpdateGoogleChatAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Chat actions.</p>
+   * @public
+   */
+  ShareGoogleChatAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Google Chat actions.</p>
+   * @public
+   */
+  UseGoogleChatAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Microsoft OneNote connectors.</p>
+   * @public
+   */
+  OneNoteAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Microsoft OneNote actions.</p>
+   * @public
+   */
+  CreateAndUpdateOneNoteAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Microsoft OneNote actions.</p>
+   * @public
+   */
+  ShareOneNoteAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Microsoft OneNote actions.</p>
+   * @public
+   */
+  UseOneNoteAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Shopify connectors.</p>
+   * @public
+   */
+  ShopifyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Shopify actions.</p>
+   * @public
+   */
+  CreateAndUpdateShopifyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Shopify actions.</p>
+   * @public
+   */
+  ShareShopifyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Shopify actions.</p>
+   * @public
+   */
+  UseShopifyAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Adobe Marketing Agent connectors.</p>
+   * @public
+   */
+  AdobeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Adobe Marketing Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateAdobeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Adobe Marketing Agent actions.</p>
+   * @public
+   */
+  ShareAdobeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Adobe Marketing Agent actions.</p>
+   * @public
+   */
+  UseAdobeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Cisco Webex Video Messaging Agent connectors.</p>
+   * @public
+   */
+  CiscoWebexVidcastAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Cisco Webex Video Messaging Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateCiscoWebexVidcastAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Cisco Webex Video Messaging Agent actions.</p>
+   * @public
+   */
+  ShareCiscoWebexVidcastAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Cisco Webex Video Messaging Agent actions.</p>
+   * @public
+   */
+  UseCiscoWebexVidcastAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Cisco Webex Meetings connectors.</p>
+   * @public
+   */
+  CiscoWebexMeetingsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Cisco Webex Meetings actions.</p>
+   * @public
+   */
+  CreateAndUpdateCiscoWebexMeetingsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Cisco Webex Meetings actions.</p>
+   * @public
+   */
+  ShareCiscoWebexMeetingsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Cisco Webex Meetings actions.</p>
+   * @public
+   */
+  UseCiscoWebexMeetingsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Dun and Bradstreet connectors.</p>
+   * @public
+   */
+  DunAndBradstreetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Dun and Bradstreet actions.</p>
+   * @public
+   */
+  CreateAndUpdateDunAndBradstreetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Dun and Bradstreet actions.</p>
+   * @public
+   */
+  ShareDunAndBradstreetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Dun and Bradstreet actions.</p>
+   * @public
+   */
+  UseDunAndBradstreetAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using HG Insights Agent connectors.</p>
+   * @public
+   */
+  HGInsightsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update HG Insights Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateHGInsightsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share HG Insights Agent actions.</p>
+   * @public
+   */
+  ShareHGInsightsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use HG Insights Agent actions.</p>
+   * @public
+   */
+  UseHGInsightsAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using ZoomInfo Agent connectors.</p>
+   * @public
+   */
+  ZoomInfoAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update ZoomInfo Agent actions.</p>
+   * @public
+   */
+  CreateAndUpdateZoomInfoAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share ZoomInfo Agent actions.</p>
+   * @public
+   */
+  ShareZoomInfoAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use ZoomInfo Agent actions.</p>
+   * @public
+   */
+  UseZoomInfoAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Moody's GenAI Ready Data connectors.</p>
+   * @public
+   */
+  MoodysAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Moody's GenAI Ready Data actions.</p>
+   * @public
+   */
+  CreateAndUpdateMoodysAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Moody's GenAI Ready Data actions.</p>
+   * @public
+   */
+  ShareMoodysAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Moody's GenAI Ready Data actions.</p>
+   * @public
+   */
+  UseMoodysAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Bee connectors.</p>
+   * @public
+   */
+  BeeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Bee actions.</p>
+   * @public
+   */
+  CreateAndUpdateBeeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Bee actions.</p>
+   * @public
+   */
+  ShareBeeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Bee actions.</p>
+   * @public
+   */
+  UseBeeAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform actions using Gong connectors.</p>
+   * @public
+   */
+  GongAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create and update Gong actions.</p>
+   * @public
+   */
+  CreateAndUpdateGongAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Gong actions.</p>
+   * @public
+   */
+  ShareGongAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Gong actions.</p>
+   * @public
+   */
+  UseGongAction?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform Topic-related actions.</p>
+   * @public
+   */
+  Topic?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to Edit Visual with AI</p>
+   * @public
+   */
+  EditVisualWithQ?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to Build Calculation with AI</p>
+   * @public
+   */
+  BuildCalculatedFieldWithQ?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to Create Executive Summary</p>
+   * @public
+   */
+  CreateDashboardExecutiveSummaryWithQ?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform space-related actions.</p>
+   * @public
+   */
+  Space?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create spaces.</p>
+   * @public
+   */
+  CreateSpaces?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share spaces with other users and groups.</p>
+   * @public
+   */
+  ShareSpaces?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform chat-related actions.</p>
+   * @public
+   */
+  ChatAgent?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create chat agents.</p>
+   * @public
+   */
+  CreateChatAgents?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share chat agents with other users and groups.</p>
+   * @public
+   */
+  ShareChatAgents?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform research-related actions.</p>
+   * @public
+   */
+  Research?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to enable users to upgrade their user role.</p>
+   * @public
+   */
+  SelfUpgradeUserRole?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform Extension-related actions.</p>
+   * @public
+   */
+  Extension?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Amazon Quick through the browser extension for Chrome, Firefox, and Edge.</p>
+   * @public
+   */
+  UseBrowserExtension?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Amazon Quick through the Microsoft Word add-in.</p>
+   * @public
+   */
+  UseWordAddInExtension?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Amazon Quick through the Microsoft Outlook add-in.</p>
+   * @public
+   */
+  UseOutlookAddInExtension?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Amazon Quick through the Microsoft Excel add-in.</p>
+   * @public
+   */
+  UseExcelAddInExtension?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to use Amazon Quick through the Microsoft PowerPoint add-in.</p>
+   * @public
+   */
+  UsePowerpointAddInExtension?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, delete and view shared folders (both restricted and unrestricted), ability to add any asset to shared folders, and ability to share the folders.</p>
+   *          <p>
+   *             <b>Note:</b> This does <i>not</i> prevent inheriting access to assets that others share with them through folder membership.</p>
+   * @public
+   */
+  ManageSharedFolders?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to generate analysis using AI</p>
+   * @public
+   */
+  GenerateAnalyses?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform Story-related actions.</p>
+   * @public
+   */
+  Story?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to perform Scenario-related actions.</p>
+   * @public
+   */
+  Scenario?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to manage trigger-related settings for flows and automations.</p>
+   * @public
+   */
+  Trigger?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, view, edit, delete, and run schedule triggers for flows and automations.</p>
+   * @public
+   */
+  ScheduleTrigger?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, view, edit, delete, and run inbound email triggers for flows and automations.</p>
+   * @public
+   */
+  InboundEmailTrigger?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, view, edit, delete, and run Quick event triggers for flows and automations.</p>
+   * @public
+   */
+  QuickEventTrigger?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share file data sources.</p>
+   * @public
+   */
+  FileDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create file data sources.</p>
+   * @public
+   */
+  CreateFileDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update file data sources.</p>
+   * @public
+   */
+  UpdateFileDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share file data sources.</p>
+   * @public
+   */
+  ShareFileDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon S3 data sources.</p>
+   * @public
+   */
+  S3DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon S3 data sources.</p>
+   * @public
+   */
+  CreateS3DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon S3 data sources.</p>
+   * @public
+   */
+  UpdateS3DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon S3 data sources.</p>
+   * @public
+   */
+  ShareS3DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon S3 Analytics data sources.</p>
+   * @public
+   */
+  S3AnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon S3 Analytics data sources.</p>
+   * @public
+   */
+  CreateS3AnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon S3 Analytics data sources.</p>
+   * @public
+   */
+  UpdateS3AnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon S3 Analytics data sources.</p>
+   * @public
+   */
+  ShareS3AnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon S3 Tables data sources.</p>
+   * @public
+   */
+  S3TablesDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon S3 Tables data sources.</p>
+   * @public
+   */
+  CreateS3TablesDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon S3 Tables data sources.</p>
+   * @public
+   */
+  UpdateS3TablesDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon S3 Tables data sources.</p>
+   * @public
+   */
+  ShareS3TablesDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon Athena data sources.</p>
+   * @public
+   */
+  AthenaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon Athena data sources.</p>
+   * @public
+   */
+  CreateAthenaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon Athena data sources.</p>
+   * @public
+   */
+  UpdateAthenaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon Athena data sources.</p>
+   * @public
+   */
+  ShareAthenaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share auto-discovered Amazon RDS data sources.</p>
+   * @public
+   */
+  RdsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create auto-discovered Amazon RDS data sources.</p>
+   * @public
+   */
+  CreateRdsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update auto-discovered Amazon RDS data sources.</p>
+   * @public
+   */
+  UpdateRdsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share auto-discovered Amazon RDS data sources.</p>
+   * @public
+   */
+  ShareRdsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share auto-discovered Amazon Redshift data sources.</p>
+   * @public
+   */
+  RedshiftAutoDiscoveredDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create auto-discovered Amazon Redshift data sources.</p>
+   * @public
+   */
+  CreateRedshiftAutoDiscoveredDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update auto-discovered Amazon Redshift data sources.</p>
+   * @public
+   */
+  UpdateRedshiftAutoDiscoveredDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share auto-discovered Amazon Redshift data sources.</p>
+   * @public
+   */
+  ShareRedshiftAutoDiscoveredDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share manually configured Amazon Redshift data sources.</p>
+   * @public
+   */
+  RedshiftManualDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create manually configured Amazon Redshift data sources.</p>
+   * @public
+   */
+  CreateRedshiftManualDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update manually configured Amazon Redshift data sources.</p>
+   * @public
+   */
+  UpdateRedshiftManualDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share manually configured Amazon Redshift data sources.</p>
+   * @public
+   */
+  ShareRedshiftManualDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon OpenSearch Service data sources.</p>
+   * @public
+   */
+  OpenSearchDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon OpenSearch Service data sources.</p>
+   * @public
+   */
+  CreateOpenSearchDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon OpenSearch Service data sources.</p>
+   * @public
+   */
+  UpdateOpenSearchDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon OpenSearch Service data sources.</p>
+   * @public
+   */
+  ShareOpenSearchDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon Timestream data sources.</p>
+   * @public
+   */
+  TimestreamDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon Timestream data sources.</p>
+   * @public
+   */
+  CreateTimestreamDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon Timestream data sources.</p>
+   * @public
+   */
+  UpdateTimestreamDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon Timestream data sources.</p>
+   * @public
+   */
+  ShareTimestreamDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon Aurora data sources.</p>
+   * @public
+   */
+  AuroraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon Aurora data sources.</p>
+   * @public
+   */
+  CreateAuroraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon Aurora data sources.</p>
+   * @public
+   */
+  UpdateAuroraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon Aurora data sources.</p>
+   * @public
+   */
+  ShareAuroraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share MySQL data sources.</p>
+   * @public
+   */
+  MySqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create MySQL data sources.</p>
+   * @public
+   */
+  CreateMySqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update MySQL data sources.</p>
+   * @public
+   */
+  UpdateMySqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share MySQL data sources.</p>
+   * @public
+   */
+  ShareMySqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share PostgreSQL data sources.</p>
+   * @public
+   */
+  PostgreSqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create PostgreSQL data sources.</p>
+   * @public
+   */
+  CreatePostgreSqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update PostgreSQL data sources.</p>
+   * @public
+   */
+  UpdatePostgreSqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share PostgreSQL data sources.</p>
+   * @public
+   */
+  SharePostgreSqlDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Oracle data sources.</p>
+   * @public
+   */
+  OracleDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Oracle data sources.</p>
+   * @public
+   */
+  CreateOracleDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Oracle data sources.</p>
+   * @public
+   */
+  UpdateOracleDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Oracle data sources.</p>
+   * @public
+   */
+  ShareOracleDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share SQL Server data sources.</p>
+   * @public
+   */
+  SqlServerDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create SQL Server data sources.</p>
+   * @public
+   */
+  CreateSqlServerDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update SQL Server data sources.</p>
+   * @public
+   */
+  UpdateSqlServerDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SQL Server data sources.</p>
+   * @public
+   */
+  ShareSqlServerDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share MariaDB data sources.</p>
+   * @public
+   */
+  MariaDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create MariaDB data sources.</p>
+   * @public
+   */
+  CreateMariaDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update MariaDB data sources.</p>
+   * @public
+   */
+  UpdateMariaDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share MariaDB data sources.</p>
+   * @public
+   */
+  ShareMariaDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Snowflake data sources.</p>
+   * @public
+   */
+  SnowflakeDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Snowflake data sources.</p>
+   * @public
+   */
+  CreateSnowflakeDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Snowflake data sources.</p>
+   * @public
+   */
+  UpdateSnowflakeDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Snowflake data sources.</p>
+   * @public
+   */
+  ShareSnowflakeDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Google BigQuery data sources.</p>
+   * @public
+   */
+  GoogleBigQueryDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Google BigQuery data sources.</p>
+   * @public
+   */
+  CreateGoogleBigQueryDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Google BigQuery data sources.</p>
+   * @public
+   */
+  UpdateGoogleBigQueryDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google BigQuery data sources.</p>
+   * @public
+   */
+  ShareGoogleBigQueryDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Databricks data sources.</p>
+   * @public
+   */
+  DatabricksDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Databricks data sources.</p>
+   * @public
+   */
+  CreateDatabricksDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Databricks data sources.</p>
+   * @public
+   */
+  UpdateDatabricksDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Databricks data sources.</p>
+   * @public
+   */
+  ShareDatabricksDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Starburst data sources.</p>
+   * @public
+   */
+  StarburstDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Starburst data sources.</p>
+   * @public
+   */
+  CreateStarburstDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Starburst data sources.</p>
+   * @public
+   */
+  UpdateStarburstDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Starburst data sources.</p>
+   * @public
+   */
+  ShareStarburstDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Trino data sources.</p>
+   * @public
+   */
+  TrinoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Trino data sources.</p>
+   * @public
+   */
+  CreateTrinoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Trino data sources.</p>
+   * @public
+   */
+  UpdateTrinoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Trino data sources.</p>
+   * @public
+   */
+  ShareTrinoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Impala data sources.</p>
+   * @public
+   */
+  ImpalaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Impala data sources.</p>
+   * @public
+   */
+  CreateImpalaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Impala data sources.</p>
+   * @public
+   */
+  UpdateImpalaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Impala data sources.</p>
+   * @public
+   */
+  ShareImpalaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Teradata data sources.</p>
+   * @public
+   */
+  TeradataDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Teradata data sources.</p>
+   * @public
+   */
+  CreateTeradataDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Teradata data sources.</p>
+   * @public
+   */
+  UpdateTeradataDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Teradata data sources.</p>
+   * @public
+   */
+  ShareTeradataDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Presto data sources.</p>
+   * @public
+   */
+  PrestoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Presto data sources.</p>
+   * @public
+   */
+  CreatePrestoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Presto data sources.</p>
+   * @public
+   */
+  UpdatePrestoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Presto data sources.</p>
+   * @public
+   */
+  SharePrestoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Spark data sources.</p>
+   * @public
+   */
+  SparkDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Spark data sources.</p>
+   * @public
+   */
+  CreateSparkDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Spark data sources.</p>
+   * @public
+   */
+  UpdateSparkDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Spark data sources.</p>
+   * @public
+   */
+  ShareSparkDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Exasol data sources.</p>
+   * @public
+   */
+  ExasolDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Exasol data sources.</p>
+   * @public
+   */
+  CreateExasolDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Exasol data sources.</p>
+   * @public
+   */
+  UpdateExasolDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Exasol data sources.</p>
+   * @public
+   */
+  ShareExasolDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Db2 data sources.</p>
+   * @public
+   */
+  Db2DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Db2 data sources.</p>
+   * @public
+   */
+  CreateDb2DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Db2 data sources.</p>
+   * @public
+   */
+  UpdateDb2DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Db2 data sources.</p>
+   * @public
+   */
+  ShareDb2DataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share SAP HANA data sources.</p>
+   * @public
+   */
+  SapHanaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create SAP HANA data sources.</p>
+   * @public
+   */
+  CreateSapHanaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update SAP HANA data sources.</p>
+   * @public
+   */
+  UpdateSapHanaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share SAP HANA data sources.</p>
+   * @public
+   */
+  ShareSapHanaDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Denodo data sources.</p>
+   * @public
+   */
+  DenodoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Denodo data sources.</p>
+   * @public
+   */
+  CreateDenodoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Denodo data sources.</p>
+   * @public
+   */
+  UpdateDenodoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Denodo data sources.</p>
+   * @public
+   */
+  ShareDenodoDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Dremio data sources.</p>
+   * @public
+   */
+  DremioDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Dremio data sources.</p>
+   * @public
+   */
+  CreateDremioDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Dremio data sources.</p>
+   * @public
+   */
+  UpdateDremioDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Dremio data sources.</p>
+   * @public
+   */
+  ShareDremioDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Salesforce data sources.</p>
+   * @public
+   */
+  SalesforceDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Salesforce data sources.</p>
+   * @public
+   */
+  CreateSalesforceDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Salesforce data sources.</p>
+   * @public
+   */
+  UpdateSalesforceDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Salesforce data sources.</p>
+   * @public
+   */
+  ShareSalesforceDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon QuickSight data sources.</p>
+   * @public
+   */
+  RadiantDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon QuickSight data sources.</p>
+   * @public
+   */
+  CreateRadiantDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon QuickSight data sources.</p>
+   * @public
+   */
+  UpdateRadiantDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon QuickSight data sources.</p>
+   * @public
+   */
+  ShareRadiantDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share PayPal data sources.</p>
+   * @public
+   */
+  PayPalDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create PayPal data sources.</p>
+   * @public
+   */
+  CreatePayPalDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update PayPal data sources.</p>
+   * @public
+   */
+  UpdatePayPalDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share PayPal data sources.</p>
+   * @public
+   */
+  SharePayPalDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Square data sources.</p>
+   * @public
+   */
+  SquareDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Square data sources.</p>
+   * @public
+   */
+  CreateSquareDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Square data sources.</p>
+   * @public
+   */
+  UpdateSquareDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Square data sources.</p>
+   * @public
+   */
+  ShareSquareDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share GitHub data sources.</p>
+   * @public
+   */
+  GitHubDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create GitHub data sources.</p>
+   * @public
+   */
+  CreateGitHubDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update GitHub data sources.</p>
+   * @public
+   */
+  UpdateGitHubDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share GitHub data sources.</p>
+   * @public
+   */
+  ShareGitHubDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Twitter data sources.</p>
+   * @public
+   */
+  TwitterDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Twitter data sources.</p>
+   * @public
+   */
+  CreateTwitterDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Twitter data sources.</p>
+   * @public
+   */
+  UpdateTwitterDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Twitter data sources.</p>
+   * @public
+   */
+  ShareTwitterDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Jira data sources.</p>
+   * @public
+   */
+  JiraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Jira data sources.</p>
+   * @public
+   */
+  CreateJiraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Jira data sources.</p>
+   * @public
+   */
+  UpdateJiraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Jira data sources.</p>
+   * @public
+   */
+  ShareJiraDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share ServiceNow data sources.</p>
+   * @public
+   */
+  ServiceNowDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create ServiceNow data sources.</p>
+   * @public
+   */
+  CreateServiceNowDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update ServiceNow data sources.</p>
+   * @public
+   */
+  UpdateServiceNowDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share ServiceNow data sources.</p>
+   * @public
+   */
+  ShareServiceNowDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Adobe Analytics data sources.</p>
+   * @public
+   */
+  AdobeAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Adobe Analytics data sources.</p>
+   * @public
+   */
+  CreateAdobeAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Adobe Analytics data sources.</p>
+   * @public
+   */
+  UpdateAdobeAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Adobe Analytics data sources.</p>
+   * @public
+   */
+  ShareAdobeAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Google Analytics data sources.</p>
+   * @public
+   */
+  GoogleAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Google Analytics data sources.</p>
+   * @public
+   */
+  CreateGoogleAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Google Analytics data sources.</p>
+   * @public
+   */
+  UpdateGoogleAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Analytics data sources.</p>
+   * @public
+   */
+  ShareGoogleAnalyticsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Google Sheets data sources.</p>
+   * @public
+   */
+  GoogleSheetsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Google Sheets data sources.</p>
+   * @public
+   */
+  CreateGoogleSheetsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Google Sheets data sources.</p>
+   * @public
+   */
+  UpdateGoogleSheetsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Google Sheets data sources.</p>
+   * @public
+   */
+  ShareGoogleSheetsDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon DocumentDB data sources.</p>
+   * @public
+   */
+  DocumentDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon DocumentDB data sources.</p>
+   * @public
+   */
+  CreateDocumentDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon DocumentDB data sources.</p>
+   * @public
+   */
+  UpdateDocumentDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon DocumentDB data sources.</p>
+   * @public
+   */
+  ShareDocumentDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share MongoDB data sources.</p>
+   * @public
+   */
+  MongoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create MongoDB data sources.</p>
+   * @public
+   */
+  CreateMongoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update MongoDB data sources.</p>
+   * @public
+   */
+  UpdateMongoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share MongoDB data sources.</p>
+   * @public
+   */
+  ShareMongoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share MongoDB Atlas data sources.</p>
+   * @public
+   */
+  MongoAtlasDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create MongoDB Atlas data sources.</p>
+   * @public
+   */
+  CreateMongoAtlasDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update MongoDB Atlas data sources.</p>
+   * @public
+   */
+  UpdateMongoAtlasDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share MongoDB Atlas data sources.</p>
+   * @public
+   */
+  ShareMongoAtlasDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create, update, and share Amazon DynamoDB data sources.</p>
+   * @public
+   */
+  DynamoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to create Amazon DynamoDB data sources.</p>
+   * @public
+   */
+  CreateDynamoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to update Amazon DynamoDB data sources.</p>
+   * @public
+   */
+  UpdateDynamoDbDataSource?: CapabilityState | undefined;
+
+  /**
+   * <p>The ability to share Amazon DynamoDB data sources.</p>
+   * @public
+   */
+  ShareDynamoDbDataSource?: CapabilityState | undefined;
+}
+
+/**
+ * <p>A filter that matches users by total capacity range in bytes.</p>
+ * @public
+ */
+export interface CapacityBytesRangeFilter {
+  /**
+   * <p>The minimum capacity in bytes (inclusive). At least one of minBytes or maxBytes is required.</p>
+   * @public
+   */
+  minBytes?: number | undefined;
+
+  /**
+   * <p>The maximum capacity in bytes (inclusive). At least one of minBytes or maxBytes is required.</p>
+   * @public
+   */
+  maxBytes?: number | undefined;
+}
+
+/**
+ * <p>A transform operation that casts a column to a different type.</p>
+ * @public
+ */
+export interface CastColumnTypeOperation {
+  /**
+   * <p>Column name.</p>
+   * @public
+   */
+  ColumnName: string | undefined;
+
+  /**
+   * <p>New column data type.</p>
+   * @public
+   */
+  NewColumnType: ColumnDataType | undefined;
+
+  /**
+   * <p>The sub data type of the new column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>
+   * @public
+   */
+  SubType?: ColumnDataSubType | undefined;
+
+  /**
+   * <p>When casting a column from string to datetime type, you can supply a string in a
+   *             format supported by Quick Sight to denote the source data format.</p>
+   * @public
+   */
+  Format?: string | undefined;
+}
+
+/**
+ * <p>A transform operation that changes the data types of one or more columns in the dataset.</p>
+ * @public
+ */
+export interface CastColumnTypesOperation {
+  /**
+   * <p>Alias for this operation.</p>
+   * @public
+   */
+  Alias: string | undefined;
+
+  /**
+   * <p>The source transform operation that provides input data for the type casting.</p>
+   * @public
+   */
+  Source: TransformOperationSource | undefined;
+
+  /**
+   * <p>The list of column type casting operations to perform.</p>
+   * @public
+   */
+  CastColumnTypeOperations: CastColumnTypeOperation[] | undefined;
+}
+
+/**
+ * <p>A structure that represents the cell value synonym.</p>
+ * @public
+ */
+export interface CellValueSynonym {
+  /**
+   * <p>The cell value.</p>
+   * @public
+   */
+  CellValue?: string | undefined;
+
+  /**
+   * <p>Other names or aliases for the cell value.</p>
+   * @public
+   */
+  Synonyms?: string[] | undefined;
+}
+
+/**
+ * <p>A structure that represents a collective constant.</p>
+ * @public
+ */
+export interface CollectiveConstant {
+  /**
+   * <p>A list of values for the collective constant.</p>
+   * @public
+   */
+  ValueList?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata that contains a description for a column.</p>
+ * @public
+ */
+export interface ColumnDescription {
+  /**
+   * <p>The text of a description for a column.</p>
+   * @public
+   */
+  Text?: string | undefined;
+}
+
+/**
+ * <p>Geospatial column group that denotes a hierarchy.</p>
+ * @public
+ */
+export interface GeoSpatialColumnGroup {
+  /**
+   * <p>A display name for the hierarchy.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>Country code.</p>
+   * @public
+   */
+  CountryCode?: GeoSpatialCountryCode | undefined;
+
+  /**
+   * <p>Columns in this hierarchy.</p>
+   * @public
+   */
+  Columns: string[] | undefined;
+}
+
+/**
+ * <p>Groupings of columns that work together in certain Quick Sight features. This is
+ *             a variant type structure. For this structure to be valid, only one of the attributes can
+ *             be non-null.</p>
+ * @public
+ */
+export interface ColumnGroup {
+  /**
+   * <p>Geospatial column group that denotes a hierarchy.</p>
+   * @public
+   */
+  GeoSpatialColumnGroup?: GeoSpatialColumnGroup | undefined;
+}
+
+/**
+ * <p>A structure describing the name, data type, and geographic role of the columns.</p>
+ * @public
+ */
+export interface ColumnGroupColumnSchema {
+  /**
+   * <p>The name of the column group's column schema.</p>
+   * @public
+   */
+  Name?: string | undefined;
+}
+
+/**
+ * <p>The column group schema.</p>
+ * @public
+ */
+export interface ColumnGroupSchema {
+  /**
+   * <p>The name of the column group schema.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>A structure containing the list of schemas for column group columns.</p>
+   * @public
+   */
+  ColumnGroupColumnSchemaList?: ColumnGroupColumnSchema[] | undefined;
+}
+
+/**
+ * <p>A rule defined to grant access on one or more restricted columns.
+ *             Each dataset can have multiple rules.
+ *             To create a restricted column, you add it to one or more rules.
+ *             Each rule must contain at least one column and at least one user or group.
+ *             To be able to see a restricted column, a user or group needs to be added
+ *             to a rule for that column.</p>
+ * @public
+ */
+export interface ColumnLevelPermissionRule {
+  /**
+   * <p>An array of Amazon Resource Names (ARNs) for Quick Sight users or groups.</p>
+   * @public
+   */
+  Principals?: string[] | undefined;
+
+  /**
+   * <p>An array of column names.</p>
+   * @public
+   */
+  ColumnNames?: string[] | undefined;
+}
+
+/**
+ * <p>The column schema.</p>
+ * @public
+ */
+export interface ColumnSchema {
+  /**
+   * <p>The name of the column schema.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The data type of the column schema.</p>
+   * @public
+   */
+  DataType?: string | undefined;
+
+  /**
+   * <p>The geographic role of the column schema.</p>
+   * @public
+   */
+  GeographicRole?: string | undefined;
+}
+
+/**
+ * <p>The semantic type information for a column in the new data preparation experience.</p>
+ * @public
+ */
+export interface ColumnSemanticType {
+  /**
+   * <p>The geographical role of the column in the new data preparation experience.</p>
+   * @public
+   */
+  GeographicalRole?: GeoSpatialDataRole | undefined;
+}
+
+/**
+ * <p>A semantic property for a column.</p>
+ * @public
+ */
+export interface ColumnSemanticProperty {
+  /**
+   * <p>A description of the column.</p>
+   * @public
+   */
+  Description?: ColumnDescription | undefined;
+
+  /**
+   * <p>Additional notes for the column.</p>
+   * @public
+   */
+  AdditionalNotes?: AdditionalNotes | undefined;
+
+  /**
+   * <p>The semantic type of the column.</p>
+   * @public
+   */
+  SemanticType?: ColumnSemanticType | undefined;
+}
+
+/**
+ * <p>A tag for a column in a
+ *             <code>
+ *                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_TagColumnOperation.html">TagColumnOperation</a>
+ *             </code>
+ *             structure. This is a
+ *             variant type structure. For this structure to be valid, only one of the attributes can
+ *             be non-null.</p>
+ * @public
+ */
+export interface ColumnTag {
+  /**
+   * <p>A geospatial role for a column.</p>
+   * @public
+   */
+  ColumnGeographicRole?: GeoSpatialDataRole | undefined;
+
+  /**
+   * <p>A description for a column.</p>
+   * @public
+   */
+  ColumnDescription?: ColumnDescription | undefined;
+}
+
+/**
+ * <p>Specifies a column to be unpivoted, transforming it from a column into rows with associated values.</p>
+ * @public
+ */
+export interface ColumnToUnpivot {
+  /**
+   * <p>The name of the column to unpivot from the source data.</p>
+   * @public
+   */
+  ColumnName?: string | undefined;
+
+  /**
+   * <p>The value to assign to this column in the unpivoted result, typically the column name or a descriptive label.</p>
+   * @public
+   */
+  NewValue?: string | undefined;
+}
+
+/**
+ * <p>A structure that represents a comparative order.</p>
+ * @public
+ */
+export interface ComparativeOrder {
+  /**
+   * <p>The ordering type for a column. Valid values for this structure are <code>GREATER_IS_BETTER</code>, <code>LESSER_IS_BETTER</code> and <code>SPECIFIED</code>.</p>
+   * @public
+   */
+  UseOrdering?: ColumnOrderingType | undefined;
+
+  /**
+   * <p>The list of columns to be used in the ordering.</p>
+   * @public
+   */
+  SpecifedOrder?: string[] | undefined;
+
+  /**
+   * <p>The treat of undefined specified values. Valid values for this structure are <code>LEAST</code> and <code>MOST</code>.</p>
+   * @public
+   */
+  TreatUndefinedSpecifiedValues?: UndefinedSpecifiedValueType | undefined;
+}
+
+/**
+ * <p>Configures the display properties of the control title.</p>
+ * @public
+ */
+export interface ControlTitleFontConfiguration {
+  /**
+   * <p>Configures the font settings for the control title.</p>
+   * @public
+   */
+  FontConfiguration?: FontConfiguration | undefined;
+
+  /**
+   * <p>Determines the alignment of the control title.</p>
+   * @public
+   */
+  TextAlignment?: HorizontalTextAlignment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAccountCustomizationRequest {
+  /**
+   * <p>The ID for the Amazon Web Services account that you want to customize Quick Sight for.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>The Quick Sight namespace that you want to add customizations to.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The Quick Sight customizations you're adding. You can add
+   *             these to an Amazon Web Services account and a QuickSight namespace. </p>
+   *          <p>For example, you can add a default theme by setting <code>AccountCustomization</code>
+   *             to the midnight theme: <code>"AccountCustomization": \{ "DefaultTheme":
+   *                 "arn:aws:quicksight::aws:theme/MIDNIGHT" \}</code>. Or, you can add a custom theme by
+   *             specifying <code>"AccountCustomization": \{ "DefaultTheme":
+   *                 "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
+   *                 \}</code>. </p>
+   * @public
+   */
+  AccountCustomization: AccountCustomization | undefined;
+
+  /**
+   * <p>A list of the tags that you want to attach to this resource.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAccountCustomizationResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) for the customization that you created for this Amazon Web Services account.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The ID for the Amazon Web Services account that you want to customize Quick Sight for.</p>
+   * @public
+   */
+  AwsAccountId?: string | undefined;
+
+  /**
+   * <p>The namespace associated with the customization you're creating. </p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The Quick Sight customizations you're adding. </p>
+   * @public
+   */
+  AccountCustomization?: AccountCustomization | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAccountSubscriptionRequest {
+  /**
+   * <p>The edition of Amazon Quick Sight that you want your account to have. Currently, you can
+   *             choose from <code>ENTERPRISE</code> or
+   *                 <code>ENTERPRISE_AND_Q</code>.</p>
+   *          <p>If you choose <code>ENTERPRISE_AND_Q</code>, the following parameters are
+   *             required:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FirstName</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LastName</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>EmailAddress</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ContactNumber</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Edition?: Edition | undefined;
+
+  /**
+   * <p>The method that you want to use to authenticate your Quick Sight account.</p>
+   *          <p>If you choose <code>ACTIVE_DIRECTORY</code>, provide an <code>ActiveDirectoryName</code>
+   *             and an <code>AdminGroup</code> associated with your Active Directory.</p>
+   *          <p>If you choose <code>IAM_IDENTITY_CENTER</code>, provide an <code>AdminGroup</code> associated with your IAM Identity Center account.</p>
+   * @public
+   */
+  AuthenticationMethod: AuthenticationMethodOption | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID of the account that you're using to create your Quick Sight account.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>The name of your Amazon Quick Sight account. This name is unique over all of Amazon Web Services, and it appears only when users sign in. You can't change
+   *                 <code>AccountName</code> value after the Amazon Quick Sight account is
+   *             created.</p>
+   * @public
+   */
+  AccountName: string | undefined;
+
+  /**
+   * <p>The email address that you want Quick Sight to send notifications to regarding your Quick Sight account or Quick Sight subscription.</p>
+   * @public
+   */
+  NotificationEmail: string | undefined;
+
+  /**
+   * <p>The name of your Active Directory. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Quick Sight account.</p>
+   * @public
+   */
+  ActiveDirectoryName?: string | undefined;
+
+  /**
+   * <p>The realm of the Active Directory that is associated with your Quick Sight account. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Quick Sight account.</p>
+   * @public
+   */
+  Realm?: string | undefined;
+
+  /**
+   * <p>The ID of the Active Directory that is associated with your Quick Sight account.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The admin group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminProGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Quick Sight account.</p>
+   *          <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
+   * @public
+   */
+  AdminGroup?: string[] | undefined;
+
+  /**
+   * <p>The author group associated with your Active Directory or IAM Identity Center account.</p>
+   *          <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
+   * @public
+   */
+  AuthorGroup?: string[] | undefined;
+
+  /**
+   * <p>The reader group associated with your Active Directory or IAM Identity Center account.</p>
+   *          <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
+   * @public
+   */
+  ReaderGroup?: string[] | undefined;
+
+  /**
+   * <p>The admin pro group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Quick Sight account.</p>
+   *          <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
+   * @public
+   */
+  AdminProGroup?: string[] | undefined;
+
+  /**
+   * <p>The author pro group associated with your Active Directory or IAM Identity Center account.</p>
+   *          <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
+   * @public
+   */
+  AuthorProGroup?: string[] | undefined;
+
+  /**
+   * <p>The reader pro group associated with your Active Directory or IAM Identity Center account.</p>
+   *          <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
+   * @public
+   */
+  ReaderProGroup?: string[] | undefined;
+
+  /**
+   * <p>The first name of the author of the Amazon Quick Sight account to use for future
+   *             communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected
+   *             edition of the new Amazon Quick Sight account.</p>
+   * @public
+   */
+  FirstName?: string | undefined;
+
+  /**
+   * <p>The last name of the author of the Amazon Quick Sight account to use for future
+   *             communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected
+   *             edition of the new Amazon Quick Sight account.</p>
+   * @public
+   */
+  LastName?: string | undefined;
+
+  /**
+   * <p>The email address of the author of the Amazon Quick Sight account to use for future
+   *             communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected
+   *             edition of the new Amazon Quick Sight account.</p>
+   * @public
+   */
+  EmailAddress?: string | undefined;
+
+  /**
+   * <p>A 10-digit phone number for the author of the Amazon Quick Sight account to use for
+   *             future communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the
+   *             selected edition of the new Amazon Quick Sight account.</p>
+   * @public
+   */
+  ContactNumber?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>
+   * @public
+   */
+  IAMIdentityCenterInstanceArn?: string | undefined;
+}
+
+/**
+ * <p>A <code>SignupResponse</code> object that contains a summary of a newly created account.</p>
+ * @public
+ */
+export interface SignupResponse {
+  /**
+   * <p>A Boolean that is <code>TRUE</code> if the Amazon Quick Sight uses IAM as an
+   *             authentication method.</p>
+   * @public
+   */
+  IAMUser?: boolean | undefined;
+
+  /**
+   * <p>The user login name for your Amazon Quick Sight account.</p>
+   * @public
+   */
+  userLoginName?: string | undefined;
+
+  /**
+   * <p>The name of your Quick Sight account.</p>
+   * @public
+   */
+  accountName?: string | undefined;
+
+  /**
+   * <p>The type of Active Directory that is being used to authenticate the Amazon Quick Sight
+   *             account. Valid values are <code>SIMPLE_AD</code>, <code>AD_CONNECTOR</code>, and
+   *                 <code>MICROSOFT_AD</code>.</p>
+   * @public
+   */
+  directoryType?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAccountSubscriptionResponse {
+  /**
+   * <p>A <code>SignupResponse</code> object that returns information about a newly created Quick Sight account.</p>
+   * @public
+   */
+  SignupResponse?: SignupResponse | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}
+
+/**
+ * <p>Permission for the resource.</p>
+ * @public
+ */
+export interface ResourcePermission {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+   *             following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>The ARN of an Quick Sight user or group associated with a data source or dataset. (This is common.)</p>
+   *             </li>
+   *             <li>
+   *                <p>The ARN of an Quick Sight user, group, or namespace associated with an analysis, dashboard, template, or theme. Namespace sharing is not supported for action connectors. (This is common.)</p>
+   *             </li>
+   *             <li>
+   *                <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a Quick Sight
+   *                     ARN. Use this option only to share resources (templates) across Amazon Web Services accounts. Account root sharing is not supported for action connectors.
+   *                     (This is less common.) </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Principal: string | undefined;
+
+  /**
+   * <p>The IAM action to grant or revoke permissions on.</p>
+   * @public
+   */
+  Actions: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateActionConnectorRequest {
+  /**
+   * <p>The Amazon Web Services account ID associated with the action connector.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>A unique identifier for the action connector. This ID must be unique within the Amazon Web Services account. The <code>ActionConnectorId</code> must not
+   * 	          start with the prefix <code>quicksuite-</code>
+   *          </p>
+   * @public
+   */
+  ActionConnectorId: string | undefined;
+
+  /**
+   * <p>A descriptive name for the action connector.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The type of action connector.</p>
+   * @public
+   */
+  Type: ActionConnectorType | undefined;
+
+  /**
+   * <p>The authentication configuration for connecting to the external service. This includes the authentication type, base URL, and authentication metadata such as client credentials or API keys.</p>
+   * @public
+   */
+  AuthenticationConfig: AuthConfig | undefined;
+
+  /**
+   * <p>An optional description of the action connector.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The permissions configuration that defines which users, groups, or namespaces can access this action connector and what operations they can perform.</p>
+   * @public
+   */
+  Permissions?: ResourcePermission[] | undefined;
+
+  /**
+   * <p>The ARN of the VPC connection to use for secure connectivity to the external service.</p>
+   * @public
+   */
+  VpcConnectionArn?: string | undefined;
+
+  /**
+   * <p>A list of tags to apply to the action connector for resource management and organization.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateActionConnectorResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the created action connector.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The creation status of the action connector.</p>
+   * @public
+   */
+  CreationStatus?: ResourceStatus | undefined;
+
+  /**
+   * <p>The unique identifier of the created action connector.</p>
+   * @public
+   */
+  ActionConnectorId?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>The HTTP status code of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+}
+
+/**
+ * <p>A reference to an existing custom prompt profile.</p>
+ * @public
+ */
+export interface CustomPromptProfile {
+  /**
+   * <p>The identifier of the model profile.</p>
+   * @public
+   */
+  ModelProfileId: string | undefined;
+
+  /**
+   * <p>The subscription identifier.</p>
+   * @public
+   */
+  SubscriptionId: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID for the Q Business service.</p>
+   * @public
+   */
+  QbsAwsAccountId: string | undefined;
+}
+
+/**
+ * <p>The parameters for configuring a custom prompt for an agent.</p>
+ * @public
+ */
+export interface CustomPromptInputParameters {
+  /**
+   * <p>Instructions for the desired response length.</p>
+   * @public
+   */
+  ResponseLength?: string | undefined;
+
+  /**
+   * <p>Instructions for the desired output style.</p>
+   * @public
+   */
+  OutputStyle?: string | undefined;
+
+  /**
+   * <p>Instructions that define the agent's identity and persona.</p>
+   * @public
+   */
+  Identity?: string | undefined;
+
+  /**
+   * <p>Instructions for the desired tone of responses.</p>
+   * @public
+   */
+  Tone?: string | undefined;
+
+  /**
+   * <p>Custom instructions for the agent's behavior.</p>
+   * @public
+   */
+  CustomInstructions?: string | undefined;
+}
+
+/**
+ * <p>The custom prompt input for an agent. This is a union type that can be either an existing prompt profile or new prompt parameters.</p>
+ * @public
+ */
+export type CustomPromptInput =
+  | CustomPromptInput.ExistingPromptMember
+  | CustomPromptInput.NewPromptMember
+  | CustomPromptInput.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CustomPromptInput {
+  /**
+   * <p>An existing custom prompt profile to use for the agent.</p>
+   * @public
+   */
+  export interface ExistingPromptMember {
+    ExistingPrompt: CustomPromptProfile;
+    NewPrompt?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>New custom prompt parameters to configure for the agent.</p>
+   * @public
+   */
+  export interface NewPromptMember {
+    ExistingPrompt?: never;
+    NewPrompt: CustomPromptInputParameters;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    ExistingPrompt?: never;
+    NewPrompt?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    ExistingPrompt: (value: CustomPromptProfile) => T;
+    NewPrompt: (value: CustomPromptInputParameters) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface CreateAgentRequest {
+  /**
+   * <p>The Amazon Resource Names (ARNs) of the spaces to attach to the agent.</p>
+   * @public
+   */
+  Spaces?: string[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Names (ARNs) of the action connectors to attach to the agent.</p>
+   * @public
+   */
+  ActionConnectors?: string[] | undefined;
+
+  /**
+   * <p>The ID of the Amazon Web Services account that contains the agent.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>A unique identifier for the agent.</p>
+   * @public
+   */
+  AgentId: string | undefined;
+
+  /**
+   * <p>The name of the agent.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>A description of the agent.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The icon identifier for the agent.</p>
+   * @public
+   */
+  IconId?: string | undefined;
+
+  /**
+   * <p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>
+   * @public
+   */
+  StarterPrompts?: string[] | undefined;
+
+  /**
+   * <p>The welcome message that is displayed when a user starts a conversation with the agent.</p>
+   * @public
+   */
+  WelcomeMessage?: string | undefined;
+
+  /**
+   * <p>The lifecycle state of the agent. Valid values are <code>PREVIEW</code> and <code>PUBLISHED</code>.</p>
+   * @public
+   */
+  AgentLifecycle?: AgentLifecycle | undefined;
+
+  /**
+   * <p>The custom prompt configuration for the agent.</p>
+   * @public
+   */
+  CustomPromptInput?: CustomPromptInput | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAgentResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the agent.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The unique identifier for the agent.</p>
+   * @public
+   */
+  AgentId: string | undefined;
+
+  /**
+   * <p>The status of the agent.</p>
+   * @public
+   */
+  AgentStatus: AgentStatus | undefined;
+
+  /**
+   * <p>The name of the agent.</p>
+   * @public
+   */
+  AgentName: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}
+
+/**
+ * <p>A date-time parameter.</p>
+ * @public
+ */
+export interface DateTimeParameter {
+  /**
+   * <p>A display name for the date-time parameter.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The values for the date-time parameter.</p>
+   * @public
+   */
+  Values: Date[] | undefined;
+}
+
+/**
+ * <p>A decimal parameter.</p>
+ * @public
+ */
+export interface DecimalParameter {
+  /**
+   * <p>A display name for the decimal parameter.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The values for the decimal parameter.</p>
+   * @public
+   */
+  Values: number[] | undefined;
+}
+
+/**
+ * <p>An integer parameter.</p>
+ * @public
+ */
+export interface IntegerParameter {
+  /**
+   * <p>The name of the integer parameter.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The values for the integer parameter.</p>
+   * @public
+   */
+  Values: number[] | undefined;
+}
+
+/**
+ * <p>A string parameter.</p>
+ * @public
+ */
+export interface StringParameter {
+  /**
+   * <p>A display name for a string parameter.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The values of a string parameter.</p>
+   * @public
+   */
+  Values: string[] | undefined;
+}
+
+/**
+ * <p>A list of Quick Sight parameters and the list's override values.</p>
+ * @public
+ */
+export interface _Parameters {
+  /**
+   * <p>The parameters that have a data type of string.</p>
+   * @public
+   */
+  StringParameters?: StringParameter[] | undefined;
+
+  /**
+   * <p>The parameters that have a data type of integer.</p>
+   * @public
+   */
+  IntegerParameters?: IntegerParameter[] | undefined;
+
+  /**
+   * <p>The parameters that have a data type of decimal.</p>
+   * @public
+   */
+  DecimalParameters?: DecimalParameter[] | undefined;
+
+  /**
+   * <p>The parameters that have a data type of date-time.</p>
+   * @public
+   */
+  DateTimeParameters?: DateTimeParameter[] | undefined;
+}
+
+/**
+ * <p>The option to relax the validation that is required to create and update analyses, dashboards, and templates with definition objects. When you set this value to <code>LENIENT</code>, validation is skipped for specific errors.</p>
+ * @public
+ */
+export interface ValidationStrategy {
+  /**
+   * <p>The mode of validation for the asset to be created or updated. When you set this value to <code>STRICT</code>, strict validation for every error is enforced. When you set this value to <code>LENIENT</code>, validation is skipped for specific UI errors.</p>
+   * @public
+   */
+  Mode: ValidationStrategyMode | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAnalysisResponse {
+  /**
+   * <p>The ARN for the analysis.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The ID of the analysis.</p>
+   * @public
+   */
+  AnalysisId?: string | undefined;
+
+  /**
+   * <p>The status of the creation of the analysis. </p>
+   * @public
+   */
+  CreationStatus?: ResourceStatus | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateApprovalPolicyRequest {
+  /**
+   * <p>The unique identifier to assign to the approval policy. You cannot change this value after you create the policy.</p>
+   * @public
+   */
+  PolicyId: string | undefined;
+
+  /**
+   * <p>The name of the approval policy.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>A description of the approval policy.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The list of governed actions that trigger the approval workflow.</p>
+   * @public
+   */
+  Actions: GovernedAction[] | undefined;
+
+  /**
+   * <p>The list of asset types that the approval policy applies to.</p>
+   * @public
+   */
+  AssetTypes: AssetType[] | undefined;
+
+  /**
+   * <p>The scoping configuration that determines who the approval policy applies to.</p>
+   * @public
+   */
+  ApplicableTo: ApplicableTo | undefined;
+
+  /**
+   * <p>The list of group ARNs whose members can approve requests.</p>
+   * @public
+   */
+  ApprovalGroups: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateApprovalPolicyResponse {
+  /**
+   * <p>The approval policy that was created.</p>
+   * @public
+   */
+  Policy: ApprovalPolicy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateBrandRequest {
+  /**
+   * <p>The ID of the Amazon Web Services account that owns the brand.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the Quick brand.</p>
+   * @public
+   */
+  BrandId: string | undefined;
+
+  /**
+   * <p>The definition of the brand.</p>
+   * @public
+   */
+  BrandDefinition?: BrandDefinition | undefined;
+
+  /**
+   * <p>A map of the key-value pairs that are assigned to the brand.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateBrandResponse {
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>The details of the brand.</p>
+   * @public
+   */
+  BrandDetail?: BrandDetail | undefined;
+
+  /**
+   * <p>The definition of the brand.</p>
+   * @public
+   */
+  BrandDefinition?: BrandDefinition | undefined;
+}
+
+/**
+ * <p>A transform operation that creates calculated columns. Columns created in one such
+ *             operation form a lexical closure.</p>
+ * @public
+ */
+export interface CreateColumnsOperation {
+  /**
+   * <p>Alias for this operation.</p>
+   * @public
+   */
+  Alias?: string | undefined;
+
+  /**
+   * <p>The source transform operation that provides input data for creating new calculated columns.</p>
+   * @public
+   */
+  Source?: TransformOperationSource | undefined;
+
+  /**
+   * <p>Calculated columns to create.</p>
+   * @public
+   */
+  Columns: CalculatedColumn[] | undefined;
+}
+
+/**
+ * <p>Contains the governance configuration for a custom permissions profile. When governance controls are defined for a category, any capabilities in that category not explicitly set to <code>ALLOW</code> in <code>Capabilities</code> are denied. Even newly added capabilities in the category are implicitly disabled when Amazon Quick releases them.</p>
+ * @public
+ */
+export interface Governance {
+  /**
+   * <p>A map of <code>DefaultCategoryEffects</code>.</p>
+   * @public
+   */
+  DefaultCategoryEffects?: Record<string, DefaultCategoryEffect> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCustomPermissionsRequest {
+  /**
+   * <p>The ID of the Amazon Web Services account that you want to create the custom permissions profile in.</p>
+   * @public
+   */
+  AwsAccountId: string | undefined;
+
+  /**
+   * <p>The name of the custom permissions profile that you want to create.</p>
+   * @public
+   */
+  CustomPermissionsName: string | undefined;
+
+  /**
+   * <p>A set of actions to include in the custom permissions profile.</p>
+   * @public
+   */
+  Capabilities?: Capabilities | undefined;
+
+  /**
+   * <p>The governance configuration for the custom permissions profile. When governance controls are defined for a category, any capabilities in that category not explicitly set to <code>ALLOW</code> in <code>Capabilities</code> are denied. Even newly added capabilities in the category are implicitly disabled when Amazon Quick releases them.</p>
+   * @public
+   */
+  Governance?: Governance | undefined;
+
+  /**
+   * <p>The tags to associate with the custom permissions profile.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCustomPermissionsResponse {
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the custom permissions profile.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}
+
+/**
+ * <p>The drill down options for data points in a dashbaord.</p>
+ * @public
+ */
+export interface DataPointDrillUpDownOption {
+  /**
+   * <p>The status of the drill down options of data points.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The data point menu options of a dashboard.</p>
+ * @public
+ */
+export interface DataPointMenuLabelOption {
+  /**
+   * <p>The status of the data point menu options.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The data point tooltip options.</p>
+ * @public
+ */
+export interface DataPointTooltipOption {
+  /**
+   * <p>The status of the data point tool tip options.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Adds Q&A capabilities to a dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is enabled.</p>
+ * @public
+ */
+export interface DataQAEnabledOption {
+  /**
+   * <p>The status of the Data Q&A option on the dashboard.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Executive summary option.</p>
+ * @public
+ */
+export interface DataStoriesSharingOption {
+  /**
+   * <p>Availability status.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Data stories sharing option.</p>
+ * @public
+ */
+export interface ExecutiveSummaryOption {
+  /**
+   * <p>Availability status.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Export to .csv option.</p>
+ * @public
+ */
+export interface ExportToCSVOption {
+  /**
+   * <p>Availability status.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Determines whether or not hidden fields are visible on exported dashbaords.</p>
+ * @public
+ */
+export interface ExportWithHiddenFieldsOption {
+  /**
+   * <p>The status of the export with hidden fields options.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Determines if Actions in Amazon Quick Suite are enabled in a dashboard..</p>
+ * @public
+ */
+export interface QuickSuiteActionsOption {
+  /**
+   * <p>Availability status.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Sheet controls option.</p>
+ * @public
+ */
+export interface SheetControlsOption {
+  /**
+   * <p>Visibility state.</p>
+   * @public
+   */
+  VisibilityState?: DashboardUIState | undefined;
+}
+
+/**
+ * <p>The sheet layout maximization options of a dashbaord.</p>
+ * @public
+ */
+export interface SheetLayoutElementMaximizationOption {
+  /**
+   * <p>The status of the sheet layout maximization options of a dashbaord.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The axis sort options for a visual.</p>
+ * @public
+ */
+export interface VisualAxisSortOption {
+  /**
+   * <p>The availaiblity status of a visual's axis sort options.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>Determines if hidden fields are included in an exported dashboard.</p>
+ * @public
+ */
+export interface ExportHiddenFieldsOption {
+  /**
+   * <p>The status of the export hidden fields options of a dashbaord.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The visual publish options of a visual in a dashboard</p>
+ * @public
+ */
+export interface DashboardVisualPublishOptions {
+  /**
+   * <p>Determines if hidden fields are included in an exported dashboard.</p>
+   * @public
+   */
+  ExportHiddenFieldsOption?: ExportHiddenFieldsOption | undefined;
+}
+
+/**
+ * <p>Dashboard publish options.</p>
+ * @public
+ */
+export interface DashboardPublishOptions {
+  /**
+   * <p>Ad hoc (one-time) filtering option.</p>
+   * @public
+   */
+  AdHocFilteringOption?: AdHocFilteringOption | undefined;
+
+  /**
+   * <p>Export to .csv option.</p>
+   * @public
+   */
+  ExportToCSVOption?: ExportToCSVOption | undefined;
+
+  /**
+   * <p>Sheet controls option.</p>
+   * @public
+   */
+  SheetControlsOption?: SheetControlsOption | undefined;
+
+  /**
+   * <p>The visual publish options of a visual in a dashboard.</p>
+   *
+   * @deprecated VisualPublishOptions property will reach its end of standard support in a future release. To perform this action, use ExportWithHiddenFields.
+   * @public
+   */
+  VisualPublishOptions?: DashboardVisualPublishOptions | undefined;
+
+  /**
+   * <p>The sheet layout maximization options of a dashbaord.</p>
+   * @public
+   */
+  SheetLayoutElementMaximizationOption?: SheetLayoutElementMaximizationOption | undefined;
+
+  /**
+   * <p>The menu options of a visual in a dashboard.</p>
+   * @public
+   */
+  VisualMenuOption?: VisualMenuOption | undefined;
+
+  /**
+   * <p>The axis sort options of a dashboard.</p>
+   * @public
+   */
+  VisualAxisSortOption?: VisualAxisSortOption | undefined;
+
+  /**
+   * <p>Determines if hidden fields are exported with a dashboard.</p>
+   * @public
+   */
+  ExportWithHiddenFieldsOption?: ExportWithHiddenFieldsOption | undefined;
+
+  /**
+   * <p>The drill-down options of data points in a dashboard.</p>
+   * @public
+   */
+  DataPointDrillUpDownOption?: DataPointDrillUpDownOption | undefined;
+
+  /**
+   * <p>The data point menu label options of a dashboard.</p>
+   * @public
+   */
+  DataPointMenuLabelOption?: DataPointMenuLabelOption | undefined;
+
+  /**
+   * <p>The data point tool tip options of a dashboard.</p>
+   * @public
+   */
+  DataPointTooltipOption?: DataPointTooltipOption | undefined;
+
+  /**
+   * <p>Adds Q&A capabilities to an Quick Sight dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is used.</p>
+   * @public
+   */
+  DataQAEnabledOption?: DataQAEnabledOption | undefined;
+
+  /**
+   * <p>Determines if Actions in Amazon Quick Suite are enabled in a dashboard.</p>
+   * @public
+   */
+  QuickSuiteActionsOption?: QuickSuiteActionsOption | undefined;
+
+  /**
+   * <p>Executive summary option.</p>
+   * @public
+   */
+  ExecutiveSummaryOption?: ExecutiveSummaryOption | undefined;
+
+  /**
+   * <p>Data stories sharing option.</p>
+   * @public
+   */
+  DataStoriesSharingOption?: DataStoriesSharingOption | undefined;
+}
+
+/**
+ * <p>A structure that contains the configuration of a shareable link to the
+ *             dashboard.</p>
+ * @public
+ */
+export interface LinkSharingConfiguration {
+  /**
+   * <p>A structure that contains the permissions of a shareable link.</p>
+   * @public
+   */
+  Permissions?: ResourcePermission[] | undefined;
+}
+
+/**
+ * <p>Dashboard source template.</p>
+ * @public
+ */
+export interface DashboardSourceTemplate {
+  /**
+   * <p>Dataset references.</p>
+   * @public
+   */
+  DataSetReferences: DataSetReference[] | undefined;
+
+  /**
+   * <p>The topic references for the source template of a dashboard.</p>
+   * @public
+   */
+  TopicReferences?: TopicReference[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
+   */
+  Arn: string | undefined;
+}
+
+/**
+ * <p>Dashboard source entity.</p>
+ * @public
+ */
+export interface DashboardSourceEntity {
+  /**
+   * <p>Source template.</p>
+   * @public
+   */
+  SourceTemplate?: DashboardSourceTemplate | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDashboardResponse {
+  /**
+   * <p>The ARN of the dashboard.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The ARN of the dashboard, including the version number of the first version that is
+   *             created.</p>
+   * @public
+   */
+  VersionArn?: string | undefined;
+
+  /**
+   * <p>The ID for the dashboard.</p>
+   * @public
+   */
+  DashboardId?: string | undefined;
+
+  /**
+   * <p>The status of the dashboard creation request.</p>
+   * @public
+   */
+  CreationStatus?: ResourceStatus | undefined;
+
+  /**
+   * <p>The HTTP status of the request.</p>
+   * @public
+   */
+  Status?: number | undefined;
+
+  /**
+   * <p>The Amazon Web Services request ID for this operation.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}

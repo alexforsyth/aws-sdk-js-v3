@@ -1,102 +1,112 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { UpdateLocationObjectStorageRequest, UpdateLocationObjectStorageResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateLocationObjectStorageCommand,
-  serializeAws_json1_1UpdateLocationObjectStorageCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface UpdateLocationObjectStorageCommandInput extends UpdateLocationObjectStorageRequest {}
-export interface UpdateLocationObjectStorageCommandOutput
-  extends UpdateLocationObjectStorageResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateLocationObjectStorageRequest, UpdateLocationObjectStorageResponse } from "../models/models_0";
+import { UpdateLocationObjectStorage$ } from "../schemas/schemas_0";
 
 /**
- * <p>Updates some of the parameters of a previously created location for self-managed object
- *       storage server access. For information about creating a self-managed object storage location,
- *       see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html">Creating a location for object storage</a>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateLocationObjectStorageCommand}.
+ */
+export interface UpdateLocationObjectStorageCommandInput extends UpdateLocationObjectStorageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateLocationObjectStorageCommand}.
+ */
+export interface UpdateLocationObjectStorageCommandOutput extends UpdateLocationObjectStorageResponse, __MetadataBearer {}
+
+/**
+ * <p>Modifies the following configuration parameters of the object storage transfer location
+ *       that you're using with DataSync.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html">Configuring DataSync
+ *         transfers with an object storage system</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, UpdateLocationObjectStorageCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, UpdateLocationObjectStorageCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // UpdateLocationObjectStorageRequest
+ *   LocationArn: "STRING_VALUE", // required
+ *   ServerPort: Number("int"),
+ *   ServerProtocol: "HTTPS" || "HTTP",
+ *   Subdirectory: "STRING_VALUE",
+ *   ServerHostname: "STRING_VALUE",
+ *   AccessKey: "STRING_VALUE",
+ *   SecretKey: "STRING_VALUE",
+ *   FederatedIdentity: { // ObjectStorageFederatedIdentityConfig
+ *     AwsIamRole: "STRING_VALUE",
+ *     ExternalIdentity: { // ObjectStorageExternalIdentityConfig
+ *       GoogleOidc: { // GoogleOidcConfig
+ *         ProjectName: "STRING_VALUE", // required
+ *         ProjectNumber: "STRING_VALUE", // required
+ *         IdentityPoolName: "STRING_VALUE", // required
+ *         IdentityProviderName: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   },
+ *   AgentArns: [ // AgentArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   ServerCertificate: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *   CmkSecretConfig: { // CmkSecretConfig
+ *     SecretArn: "STRING_VALUE",
+ *     KmsKeyArn: "STRING_VALUE",
+ *   },
+ *   CustomSecretConfig: { // CustomSecretConfig
+ *     SecretArn: "STRING_VALUE",
+ *     SecretAccessRoleArn: "STRING_VALUE",
+ *   },
+ * };
  * const command = new UpdateLocationObjectStorageCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateLocationObjectStorageCommandInput - {@link UpdateLocationObjectStorageCommandInput}
+ * @returns {@link UpdateLocationObjectStorageCommandOutput}
  * @see {@link UpdateLocationObjectStorageCommandInput} for command's `input` shape.
  * @see {@link UpdateLocationObjectStorageCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateLocationObjectStorageCommand extends $Command<
-  UpdateLocationObjectStorageCommandInput,
-  UpdateLocationObjectStorageCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateLocationObjectStorageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateLocationObjectStorageCommandInput, UpdateLocationObjectStorageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "UpdateLocationObjectStorageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateLocationObjectStorageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateLocationObjectStorageResponse.filterSensitiveLog,
+export class UpdateLocationObjectStorageCommand extends command<UpdateLocationObjectStorageCommandInput, UpdateLocationObjectStorageCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateLocationObjectStorage",
+  UpdateLocationObjectStorage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLocationObjectStorageRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateLocationObjectStorageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateLocationObjectStorageCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateLocationObjectStorageCommandOutput> {
-    return deserializeAws_json1_1UpdateLocationObjectStorageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateLocationObjectStorageCommandInput;
+      output: UpdateLocationObjectStorageCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMediaCapturePipelinesRequest, ListMediaCapturePipelinesResponse } from "../models/models_0";
+import { ListMediaCapturePipelines$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMediaCapturePipelinesCommand}.
+ */
+export interface ListMediaCapturePipelinesCommandInput extends ListMediaCapturePipelinesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListMediaCapturePipelinesCommand}.
+ */
+export interface ListMediaCapturePipelinesCommandOutput extends ListMediaCapturePipelinesResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of media pipelines.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ChimeSDKMediaPipelinesClient, ListMediaCapturePipelinesCommand } from "@aws-sdk/client-chime-sdk-media-pipelines"; // ES Modules import
+ * // const { ChimeSDKMediaPipelinesClient, ListMediaCapturePipelinesCommand } = require("@aws-sdk/client-chime-sdk-media-pipelines"); // CommonJS import
+ * // import type { ChimeSDKMediaPipelinesClientConfig } from "@aws-sdk/client-chime-sdk-media-pipelines";
+ * const config = {}; // type is ChimeSDKMediaPipelinesClientConfig
+ * const client = new ChimeSDKMediaPipelinesClient(config);
+ * const input = { // ListMediaCapturePipelinesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
+ * const command = new ListMediaCapturePipelinesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListMediaCapturePipelinesResponse
+ * //   MediaCapturePipelines: [ // MediaCapturePipelineSummaryList
+ * //     { // MediaCapturePipelineSummary
+ * //       MediaPipelineId: "STRING_VALUE",
+ * //       MediaPipelineArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListMediaCapturePipelinesCommandInput - {@link ListMediaCapturePipelinesCommandInput}
+ * @returns {@link ListMediaCapturePipelinesCommandOutput}
+ * @see {@link ListMediaCapturePipelinesCommandInput} for command's `input` shape.
+ * @see {@link ListMediaCapturePipelinesCommandOutput} for command's `response` shape.
+ * @see {@link ChimeSDKMediaPipelinesClientResolvedConfig | config} for ChimeSDKMediaPipelinesClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>The request exceeds the resource limit.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKMediaPipelinesServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKMediaPipelines service.</p>
+ *
+ *
+ * @public
+ */
+export class ListMediaCapturePipelinesCommand extends command<ListMediaCapturePipelinesCommandInput, ListMediaCapturePipelinesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMediaCapturePipelines",
+  ListMediaCapturePipelines$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMediaCapturePipelinesRequest;
+      output: ListMediaCapturePipelinesResponse;
+    };
+    sdk: {
+      input: ListMediaCapturePipelinesCommandInput;
+      output: ListMediaCapturePipelinesCommandOutput;
+    };
+  };
+}

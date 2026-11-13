@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListV2LoggingLevelsCommand,
   ListV2LoggingLevelsCommandInput,
   ListV2LoggingLevelsCommandOutput,
 } from "../commands/ListV2LoggingLevelsCommand";
-import { IoT } from "../IoT";
 import { IoTClient } from "../IoTClient";
-import { IoTPaginationConfiguration } from "./Interfaces";
+import type { IoTPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: IoTClient,
-  input: ListV2LoggingLevelsCommandInput,
-  ...args: any
-): Promise<ListV2LoggingLevelsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListV2LoggingLevelsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: IoT,
-  input: ListV2LoggingLevelsCommandInput,
-  ...args: any
-): Promise<ListV2LoggingLevelsCommandOutput> => {
-  // @ts-ignore
-  return await client.listV2LoggingLevels(input, ...args);
-};
-export async function* paginateListV2LoggingLevels(
+export const paginateListV2LoggingLevels: (
   config: IoTPaginationConfiguration,
   input: ListV2LoggingLevelsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListV2LoggingLevelsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListV2LoggingLevelsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof IoT) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof IoTClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected IoT | IoTClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListV2LoggingLevelsCommandOutput> = createPaginator<
+  IoTPaginationConfiguration,
+  ListV2LoggingLevelsCommandInput,
+  ListV2LoggingLevelsCommandOutput
+>(IoTClient, ListV2LoggingLevelsCommand, "nextToken", "nextToken", "maxResults");

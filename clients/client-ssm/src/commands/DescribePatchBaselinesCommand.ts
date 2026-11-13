@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribePatchBaselinesRequest, DescribePatchBaselinesResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribePatchBaselinesCommand,
-  serializeAws_json1_1DescribePatchBaselinesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePatchBaselinesRequest, DescribePatchBaselinesResult } from "../models/models_0";
+import { DescribePatchBaselines$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePatchBaselinesCommand}.
+ */
 export interface DescribePatchBaselinesCommandInput extends DescribePatchBaselinesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePatchBaselinesCommand}.
+ */
 export interface DescribePatchBaselinesCommandOutput extends DescribePatchBaselinesResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,68 @@ export interface DescribePatchBaselinesCommandOutput extends DescribePatchBaseli
  * ```javascript
  * import { SSMClient, DescribePatchBaselinesCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DescribePatchBaselinesCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DescribePatchBaselinesRequest
+ *   Filters: [ // PatchOrchestratorFilterList
+ *     { // PatchOrchestratorFilter
+ *       Key: "STRING_VALUE",
+ *       Values: [ // PatchOrchestratorFilterValues
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribePatchBaselinesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePatchBaselinesResult
+ * //   BaselineIdentities: [ // PatchBaselineIdentityList
+ * //     { // PatchBaselineIdentity
+ * //       BaselineId: "STRING_VALUE",
+ * //       BaselineName: "STRING_VALUE",
+ * //       OperatingSystem: "WINDOWS" || "AMAZON_LINUX" || "AMAZON_LINUX_2" || "AMAZON_LINUX_2022" || "UBUNTU" || "REDHAT_ENTERPRISE_LINUX" || "SUSE" || "CENTOS" || "ORACLE_LINUX" || "DEBIAN" || "MACOS" || "RASPBIAN" || "ROCKY_LINUX" || "ALMA_LINUX" || "AMAZON_LINUX_2023",
+ * //       BaselineDescription: "STRING_VALUE",
+ * //       DefaultBaseline: true || false,
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePatchBaselinesCommandInput - {@link DescribePatchBaselinesCommandInput}
+ * @returns {@link DescribePatchBaselinesCommandOutput}
  * @see {@link DescribePatchBaselinesCommandInput} for command's `input` shape.
  * @see {@link DescribePatchBaselinesCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePatchBaselinesCommand extends $Command<
-  DescribePatchBaselinesCommandInput,
-  DescribePatchBaselinesCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePatchBaselinesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePatchBaselinesCommandInput, DescribePatchBaselinesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DescribePatchBaselinesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePatchBaselinesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePatchBaselinesResult.filterSensitiveLog,
+export class DescribePatchBaselinesCommand extends command<DescribePatchBaselinesCommandInput, DescribePatchBaselinesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePatchBaselines",
+  DescribePatchBaselines$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePatchBaselinesRequest;
+      output: DescribePatchBaselinesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePatchBaselinesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribePatchBaselinesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribePatchBaselinesCommandOutput> {
-    return deserializeAws_json1_1DescribePatchBaselinesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePatchBaselinesCommandInput;
+      output: DescribePatchBaselinesCommandOutput;
+    };
+  };
 }

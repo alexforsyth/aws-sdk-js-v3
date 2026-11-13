@@ -1,0 +1,135 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateInvoiceUnitRequest, CreateInvoiceUnitResponse } from "../models/models_0";
+import { CreateInvoiceUnit$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateInvoiceUnitCommand}.
+ */
+export interface CreateInvoiceUnitCommandInput extends CreateInvoiceUnitRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateInvoiceUnitCommand}.
+ */
+export interface CreateInvoiceUnitCommandOutput extends CreateInvoiceUnitResponse, __MetadataBearer {}
+
+/**
+ * <p>This creates a new invoice unit with the provided definition.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { InvoicingClient, CreateInvoiceUnitCommand } from "@aws-sdk/client-invoicing"; // ES Modules import
+ * // const { InvoicingClient, CreateInvoiceUnitCommand } = require("@aws-sdk/client-invoicing"); // CommonJS import
+ * // import type { InvoicingClientConfig } from "@aws-sdk/client-invoicing";
+ * const config = {}; // type is InvoicingClientConfig
+ * const client = new InvoicingClient(config);
+ * const input = { // CreateInvoiceUnitRequest
+ *   Name: "STRING_VALUE", // required
+ *   InvoiceReceiver: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   TaxInheritanceDisabled: true || false,
+ *   Rule: { // InvoiceUnitRule
+ *     LinkedAccounts: [ // RuleAccountIdList
+ *       "STRING_VALUE",
+ *     ],
+ *     BillSourceAccounts: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   ResourceTags: [ // ResourceTagList
+ *     { // ResourceTag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   ClientToken: "STRING_VALUE",
+ * };
+ * const command = new CreateInvoiceUnitCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateInvoiceUnitResponse
+ * //   InvoiceUnitArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateInvoiceUnitCommandInput - {@link CreateInvoiceUnitCommandInput}
+ * @returns {@link CreateInvoiceUnitCommandOutput}
+ * @see {@link CreateInvoiceUnitCommandInput} for command's `input` shape.
+ * @see {@link CreateInvoiceUnitCommandOutput} for command's `response` shape.
+ * @see {@link InvoicingClientResolvedConfig | config} for InvoicingClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The processing request failed because of an unknown error, exception, or failure. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
+ *
+ * @throws {@link InvoicingServiceException}
+ * <p>Base exception class for all service exceptions from Invoicing service.</p>
+ *
+ *
+ * @example CreateInvoiceUnit
+ * ```javascript
+ * //
+ * const input = {
+ *   ClientToken: "e362c68e-4e74-48d7-9228-0bc5aa447b42",
+ *   Description: "Example Invoice Unit Description",
+ *   InvoiceReceiver: "111111111111",
+ *   Name: "Example Invoice Unit",
+ *   ResourceTags: [
+ *     {
+ *       Key: "TagKey",
+ *       Value: "TagValue"
+ *     }
+ *   ],
+ *   Rule: {
+ *     LinkedAccounts: [
+ *       "222222222222"
+ *     ]
+ *   },
+ *   TaxInheritanceDisabled: false
+ * };
+ * const command = new CreateInvoiceUnitCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   InvoiceUnitArn: "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class CreateInvoiceUnitCommand extends command<CreateInvoiceUnitCommandInput, CreateInvoiceUnitCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateInvoiceUnit",
+  CreateInvoiceUnit$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateInvoiceUnitRequest;
+      output: CreateInvoiceUnitResponse;
+    };
+    sdk: {
+      input: CreateInvoiceUnitCommandInput;
+      output: CreateInvoiceUnitCommandOutput;
+    };
+  };
+}

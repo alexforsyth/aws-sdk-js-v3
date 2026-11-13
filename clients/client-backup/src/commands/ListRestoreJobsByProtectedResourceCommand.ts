@@ -1,0 +1,129 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListRestoreJobsByProtectedResourceInput,
+  ListRestoreJobsByProtectedResourceOutput,
+} from "../models/models_0";
+import { ListRestoreJobsByProtectedResource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRestoreJobsByProtectedResourceCommand}.
+ */
+export interface ListRestoreJobsByProtectedResourceCommandInput extends ListRestoreJobsByProtectedResourceInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListRestoreJobsByProtectedResourceCommand}.
+ */
+export interface ListRestoreJobsByProtectedResourceCommandOutput extends ListRestoreJobsByProtectedResourceOutput, __MetadataBearer {}
+
+/**
+ * <p>This returns restore jobs that contain the specified protected resource.</p>
+ *          <p>You must include <code>ResourceArn</code>. You can optionally include
+ *             <code>NextToken</code>, <code>ByStatus</code>, <code>MaxResults</code>,
+ *             <code>ByRecoveryPointCreationDateAfter</code> , and
+ *             <code>ByRecoveryPointCreationDateBefore</code>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BackupClient, ListRestoreJobsByProtectedResourceCommand } from "@aws-sdk/client-backup"; // ES Modules import
+ * // const { BackupClient, ListRestoreJobsByProtectedResourceCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
+ * const client = new BackupClient(config);
+ * const input = { // ListRestoreJobsByProtectedResourceInput
+ *   ResourceArn: "STRING_VALUE", // required
+ *   ByStatus: "PENDING" || "RUNNING" || "COMPLETED" || "ABORTED" || "FAILED",
+ *   ByRecoveryPointCreationDateAfter: new Date("TIMESTAMP"),
+ *   ByRecoveryPointCreationDateBefore: new Date("TIMESTAMP"),
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
+ * const command = new ListRestoreJobsByProtectedResourceCommand(input);
+ * const response = await client.send(command);
+ * // { // ListRestoreJobsByProtectedResourceOutput
+ * //   RestoreJobs: [ // RestoreJobsList
+ * //     { // RestoreJobsListMember
+ * //       AccountId: "STRING_VALUE",
+ * //       RestoreJobId: "STRING_VALUE",
+ * //       RecoveryPointArn: "STRING_VALUE",
+ * //       SourceResourceArn: "STRING_VALUE",
+ * //       BackupVaultArn: "STRING_VALUE",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       CompletionDate: new Date("TIMESTAMP"),
+ * //       Status: "PENDING" || "RUNNING" || "COMPLETED" || "ABORTED" || "FAILED",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       PercentDone: "STRING_VALUE",
+ * //       BackupSizeInBytes: Number("long"),
+ * //       IamRoleArn: "STRING_VALUE",
+ * //       ExpectedCompletionTimeMinutes: Number("long"),
+ * //       CreatedResourceArn: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE",
+ * //       RecoveryPointCreationDate: new Date("TIMESTAMP"),
+ * //       IsParent: true || false,
+ * //       ParentJobId: "STRING_VALUE",
+ * //       CreatedBy: { // RestoreJobCreator
+ * //         RestoreTestingPlanArn: "STRING_VALUE",
+ * //       },
+ * //       ValidationStatus: "FAILED" || "SUCCESSFUL" || "TIMED_OUT" || "VALIDATING",
+ * //       ValidationStatusMessage: "STRING_VALUE",
+ * //       DeletionStatus: "DELETING" || "FAILED" || "SUCCESSFUL",
+ * //       DeletionStatusMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListRestoreJobsByProtectedResourceCommandInput - {@link ListRestoreJobsByProtectedResourceCommandInput}
+ * @returns {@link ListRestoreJobsByProtectedResourceCommandOutput}
+ * @see {@link ListRestoreJobsByProtectedResourceCommandInput} for command's `input` shape.
+ * @see {@link ListRestoreJobsByProtectedResourceCommandOutput} for command's `response` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Indicates that a required parameter is missing.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action doesn't exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
+ */
+export class ListRestoreJobsByProtectedResourceCommand extends command<ListRestoreJobsByProtectedResourceCommandInput, ListRestoreJobsByProtectedResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRestoreJobsByProtectedResource",
+  ListRestoreJobsByProtectedResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRestoreJobsByProtectedResourceInput;
+      output: ListRestoreJobsByProtectedResourceOutput;
+    };
+    sdk: {
+      input: ListRestoreJobsByProtectedResourceCommandInput;
+      output: ListRestoreJobsByProtectedResourceCommandOutput;
+    };
+  };
+}

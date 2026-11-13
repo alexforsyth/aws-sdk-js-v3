@@ -1,98 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeConfigurationSetRequest, DescribeConfigurationSetResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeConfigurationSetCommand,
-  serializeAws_queryDescribeConfigurationSetCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeConfigurationSetRequest, DescribeConfigurationSetResponse } from "../models/models_0";
+import { DescribeConfigurationSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConfigurationSetCommand}.
+ */
 export interface DescribeConfigurationSetCommandInput extends DescribeConfigurationSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConfigurationSetCommand}.
+ */
 export interface DescribeConfigurationSetCommandOutput extends DescribeConfigurationSetResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the details of the specified configuration set. For information about using
- *             configuration sets, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer
- *                 Guide</a>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *             configuration sets, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html">Amazon SES Developer
+ *             Guide</a>.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, DescribeConfigurationSetCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, DescribeConfigurationSetCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // DescribeConfigurationSetRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   ConfigurationSetAttributeNames: [ // ConfigurationSetAttributeList
+ *     "eventDestinations" || "trackingOptions" || "deliveryOptions" || "reputationOptions",
+ *   ],
+ * };
  * const command = new DescribeConfigurationSetCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConfigurationSetResponse
+ * //   ConfigurationSet: { // ConfigurationSet
+ * //     Name: "STRING_VALUE", // required
+ * //   },
+ * //   EventDestinations: [ // EventDestinations
+ * //     { // EventDestination
+ * //       Name: "STRING_VALUE", // required
+ * //       Enabled: true || false,
+ * //       MatchingEventTypes: [ // EventTypes // required
+ * //         "send" || "reject" || "bounce" || "complaint" || "delivery" || "open" || "click" || "renderingFailure",
+ * //       ],
+ * //       KinesisFirehoseDestination: { // KinesisFirehoseDestination
+ * //         IAMRoleARN: "STRING_VALUE", // required
+ * //         DeliveryStreamARN: "STRING_VALUE", // required
+ * //       },
+ * //       CloudWatchDestination: { // CloudWatchDestination
+ * //         DimensionConfigurations: [ // CloudWatchDimensionConfigurations // required
+ * //           { // CloudWatchDimensionConfiguration
+ * //             DimensionName: "STRING_VALUE", // required
+ * //             DimensionValueSource: "messageTag" || "emailHeader" || "linkTag", // required
+ * //             DefaultDimensionValue: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //       SNSDestination: { // SNSDestination
+ * //         TopicARN: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   TrackingOptions: { // TrackingOptions
+ * //     CustomRedirectDomain: "STRING_VALUE",
+ * //   },
+ * //   DeliveryOptions: { // DeliveryOptions
+ * //     TlsPolicy: "Require" || "Optional",
+ * //   },
+ * //   ReputationOptions: { // ReputationOptions
+ * //     SendingEnabled: true || false,
+ * //     ReputationMetricsEnabled: true || false,
+ * //     LastFreshStart: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeConfigurationSetCommandInput - {@link DescribeConfigurationSetCommandInput}
+ * @returns {@link DescribeConfigurationSetCommandOutput}
  * @see {@link DescribeConfigurationSetCommandInput} for command's `input` shape.
  * @see {@link DescribeConfigurationSetCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link ConfigurationSetDoesNotExistException} (client fault)
+ *  <p>Indicates that the configuration set does not exist.</p>
+ *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeConfigurationSetCommand extends $Command<
-  DescribeConfigurationSetCommandInput,
-  DescribeConfigurationSetCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConfigurationSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConfigurationSetCommandInput, DescribeConfigurationSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "DescribeConfigurationSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConfigurationSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConfigurationSetResponse.filterSensitiveLog,
+export class DescribeConfigurationSetCommand extends command<DescribeConfigurationSetCommandInput, DescribeConfigurationSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConfigurationSet",
+  DescribeConfigurationSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConfigurationSetRequest;
+      output: DescribeConfigurationSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeConfigurationSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeConfigurationSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeConfigurationSetCommandOutput> {
-    return deserializeAws_queryDescribeConfigurationSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConfigurationSetCommandInput;
+      output: DescribeConfigurationSetCommandOutput;
+    };
+  };
 }

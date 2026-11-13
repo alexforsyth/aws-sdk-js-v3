@@ -1,20 +1,54 @@
-import { HttpRequest } from "@aws-sdk/protocol-http";
-import { Client, Command } from "@aws-sdk/smithy-client";
-import { BuildMiddleware, MetadataBearer, RequestPresigningArguments } from "@aws-sdk/types";
-import { formatUrl } from "@aws-sdk/util-format-url";
+import { formatUrl } from "@aws-sdk/core/util";
+import type { Client, Command } from "@smithy/core/client";
+import type { EndpointParameterInstructionsSupplier } from "@smithy/core/endpoints";
+import { getEndpointFromInstructions } from "@smithy/core/endpoints";
+import { HttpRequest } from "@smithy/core/protocols";
+import type {
+  BuildMiddleware,
+  EndpointV2,
+  HttpRequest as IHttpRequest,
+  MetadataBearer,
+  RequestPresigningArguments,
+} from "@smithy/types";
 
 import { S3RequestPresigner } from "./presigner";
 
+/**
+ * @public
+ */
 export const getSignedUrl = async <
   InputTypesUnion extends object,
   InputType extends InputTypesUnion,
-  OutputType extends MetadataBearer = MetadataBearer
+  OutputType extends MetadataBearer = MetadataBearer,
 >(
   client: Client<any, InputTypesUnion, MetadataBearer, any>,
   command: Command<InputType, OutputType, any, InputTypesUnion, MetadataBearer>,
   options: RequestPresigningArguments = {}
 ): Promise<string> => {
-  const s3Presigner = new S3RequestPresigner({ ...client.config });
+  let s3Presigner: S3RequestPresigner;
+
+  let region: string | undefined;
+  if (typeof client.config.endpointProvider === "function") {
+    const endpointV2: EndpointV2 = await getEndpointFromInstructions(
+      command.input as Record<string, unknown>,
+      command.constructor as EndpointParameterInstructionsSupplier,
+      client.config
+    );
+    const authScheme = endpointV2.properties?.authSchemes?.[0];
+    if (authScheme?.name === "sigv4a") {
+      region = authScheme?.signingRegionSet?.join(",");
+    } else {
+      region = authScheme?.signingRegion;
+    }
+    s3Presigner = new S3RequestPresigner({
+      ...client.config,
+      signingName: authScheme?.signingName,
+      region: async () => region,
+    });
+  } else {
+    s3Presigner = new S3RequestPresigner(client.config);
+  }
+
   const presignInterceptMiddleware: BuildMiddleware<InputTypesUnion, MetadataBearer> =
     (next, context) => async (args) => {
       const { request } = args;
@@ -27,11 +61,19 @@ export const getSignedUrl = async <
       // User agent header would leak sensitive information
       delete request.headers["x-amz-user-agent"];
 
-      const presigned = await s3Presigner.presign(request, {
+      let presigned: IHttpRequest;
+      const presignerOptions = {
         ...options,
-        signingRegion: options.signingRegion ?? context["signing_region"],
+        signingRegion: options.signingRegion ?? context["signing_region"] ?? region,
         signingService: options.signingService ?? context["signing_service"],
-      });
+      };
+
+      if (context.s3ExpressIdentity) {
+        presigned = await s3Presigner.presignWithCredentials(request, context.s3ExpressIdentity, presignerOptions);
+      } else {
+        presigned = await s3Presigner.presign(request, presignerOptions);
+      }
+
       return {
         // Intercept the middleware stack by returning fake response
         response: {},
@@ -42,21 +84,18 @@ export const getSignedUrl = async <
       } as any;
     };
   const middlewareName = "presignInterceptMiddleware";
-  client.middlewareStack.addRelativeTo(presignInterceptMiddleware, {
+  const clientStack = client.middlewareStack.clone();
+  clientStack.addRelativeTo(presignInterceptMiddleware, {
     name: middlewareName,
     relation: "before",
     toMiddleware: "awsAuthMiddleware",
     override: true,
   });
 
-  let presigned: HttpRequest;
-  try {
-    const output = await client.send(command);
-    //@ts-ignore the output is faked, so it's not actually OutputType
-    presigned = output.presigned;
-  } finally {
-    client.middlewareStack.remove(middlewareName);
-  }
+  const handler = command.resolveMiddleware(clientStack, client.config, {});
+  const { output } = await handler({ input: command.input });
+  //@ts-ignore the output is faked, so it's not actually OutputType
+  const { presigned } = output;
 
   return formatUrl(presigned);
 };

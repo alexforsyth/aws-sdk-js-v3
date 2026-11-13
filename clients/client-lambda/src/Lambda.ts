@@ -1,2335 +1,2331 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type AddLayerVersionPermissionCommandInput,
+  type AddLayerVersionPermissionCommandOutput,
   AddLayerVersionPermissionCommand,
-  AddLayerVersionPermissionCommandInput,
-  AddLayerVersionPermissionCommandOutput,
 } from "./commands/AddLayerVersionPermissionCommand";
 import {
+  type AddPermissionCommandInput,
+  type AddPermissionCommandOutput,
   AddPermissionCommand,
-  AddPermissionCommandInput,
-  AddPermissionCommandOutput,
 } from "./commands/AddPermissionCommand";
-import { CreateAliasCommand, CreateAliasCommandInput, CreateAliasCommandOutput } from "./commands/CreateAliasCommand";
 import {
+  type CheckpointDurableExecutionCommandInput,
+  type CheckpointDurableExecutionCommandOutput,
+  CheckpointDurableExecutionCommand,
+} from "./commands/CheckpointDurableExecutionCommand";
+import {
+  type CreateAliasCommandInput,
+  type CreateAliasCommandOutput,
+  CreateAliasCommand,
+} from "./commands/CreateAliasCommand";
+import {
+  type CreateCapacityProviderCommandInput,
+  type CreateCapacityProviderCommandOutput,
+  CreateCapacityProviderCommand,
+} from "./commands/CreateCapacityProviderCommand";
+import {
+  type CreateCodeSigningConfigCommandInput,
+  type CreateCodeSigningConfigCommandOutput,
   CreateCodeSigningConfigCommand,
-  CreateCodeSigningConfigCommandInput,
-  CreateCodeSigningConfigCommandOutput,
 } from "./commands/CreateCodeSigningConfigCommand";
 import {
+  type CreateEventSourceMappingCommandInput,
+  type CreateEventSourceMappingCommandOutput,
   CreateEventSourceMappingCommand,
-  CreateEventSourceMappingCommandInput,
-  CreateEventSourceMappingCommandOutput,
 } from "./commands/CreateEventSourceMappingCommand";
 import {
+  type CreateFunctionCommandInput,
+  type CreateFunctionCommandOutput,
   CreateFunctionCommand,
-  CreateFunctionCommandInput,
-  CreateFunctionCommandOutput,
 } from "./commands/CreateFunctionCommand";
-import { DeleteAliasCommand, DeleteAliasCommandInput, DeleteAliasCommandOutput } from "./commands/DeleteAliasCommand";
 import {
+  type CreateFunctionUrlConfigCommandInput,
+  type CreateFunctionUrlConfigCommandOutput,
+  CreateFunctionUrlConfigCommand,
+} from "./commands/CreateFunctionUrlConfigCommand";
+import {
+  type DeleteAliasCommandInput,
+  type DeleteAliasCommandOutput,
+  DeleteAliasCommand,
+} from "./commands/DeleteAliasCommand";
+import {
+  type DeleteCapacityProviderCommandInput,
+  type DeleteCapacityProviderCommandOutput,
+  DeleteCapacityProviderCommand,
+} from "./commands/DeleteCapacityProviderCommand";
+import {
+  type DeleteCodeSigningConfigCommandInput,
+  type DeleteCodeSigningConfigCommandOutput,
   DeleteCodeSigningConfigCommand,
-  DeleteCodeSigningConfigCommandInput,
-  DeleteCodeSigningConfigCommandOutput,
 } from "./commands/DeleteCodeSigningConfigCommand";
 import {
+  type DeleteEventSourceMappingCommandInput,
+  type DeleteEventSourceMappingCommandOutput,
   DeleteEventSourceMappingCommand,
-  DeleteEventSourceMappingCommandInput,
-  DeleteEventSourceMappingCommandOutput,
 } from "./commands/DeleteEventSourceMappingCommand";
 import {
+  type DeleteFunctionCodeSigningConfigCommandInput,
+  type DeleteFunctionCodeSigningConfigCommandOutput,
   DeleteFunctionCodeSigningConfigCommand,
-  DeleteFunctionCodeSigningConfigCommandInput,
-  DeleteFunctionCodeSigningConfigCommandOutput,
 } from "./commands/DeleteFunctionCodeSigningConfigCommand";
 import {
+  type DeleteFunctionCommandInput,
+  type DeleteFunctionCommandOutput,
   DeleteFunctionCommand,
-  DeleteFunctionCommandInput,
-  DeleteFunctionCommandOutput,
 } from "./commands/DeleteFunctionCommand";
 import {
+  type DeleteFunctionConcurrencyCommandInput,
+  type DeleteFunctionConcurrencyCommandOutput,
   DeleteFunctionConcurrencyCommand,
-  DeleteFunctionConcurrencyCommandInput,
-  DeleteFunctionConcurrencyCommandOutput,
 } from "./commands/DeleteFunctionConcurrencyCommand";
 import {
+  type DeleteFunctionEventInvokeConfigCommandInput,
+  type DeleteFunctionEventInvokeConfigCommandOutput,
   DeleteFunctionEventInvokeConfigCommand,
-  DeleteFunctionEventInvokeConfigCommandInput,
-  DeleteFunctionEventInvokeConfigCommandOutput,
 } from "./commands/DeleteFunctionEventInvokeConfigCommand";
 import {
+  type DeleteFunctionUrlConfigCommandInput,
+  type DeleteFunctionUrlConfigCommandOutput,
+  DeleteFunctionUrlConfigCommand,
+} from "./commands/DeleteFunctionUrlConfigCommand";
+import {
+  type DeleteLayerVersionCommandInput,
+  type DeleteLayerVersionCommandOutput,
   DeleteLayerVersionCommand,
-  DeleteLayerVersionCommandInput,
-  DeleteLayerVersionCommandOutput,
 } from "./commands/DeleteLayerVersionCommand";
 import {
+  type DeleteProvisionedConcurrencyConfigCommandInput,
+  type DeleteProvisionedConcurrencyConfigCommandOutput,
   DeleteProvisionedConcurrencyConfigCommand,
-  DeleteProvisionedConcurrencyConfigCommandInput,
-  DeleteProvisionedConcurrencyConfigCommandOutput,
 } from "./commands/DeleteProvisionedConcurrencyConfigCommand";
 import {
-  GetAccountSettingsCommand,
-  GetAccountSettingsCommandInput,
-  GetAccountSettingsCommandOutput,
-} from "./commands/GetAccountSettingsCommand";
-import { GetAliasCommand, GetAliasCommandInput, GetAliasCommandOutput } from "./commands/GetAliasCommand";
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
 import {
+  type GetAccountSettingsCommandInput,
+  type GetAccountSettingsCommandOutput,
+  GetAccountSettingsCommand,
+} from "./commands/GetAccountSettingsCommand";
+import { type GetAliasCommandInput, type GetAliasCommandOutput, GetAliasCommand } from "./commands/GetAliasCommand";
+import {
+  type GetCapacityProviderCommandInput,
+  type GetCapacityProviderCommandOutput,
+  GetCapacityProviderCommand,
+} from "./commands/GetCapacityProviderCommand";
+import {
+  type GetCodeSigningConfigCommandInput,
+  type GetCodeSigningConfigCommandOutput,
   GetCodeSigningConfigCommand,
-  GetCodeSigningConfigCommandInput,
-  GetCodeSigningConfigCommandOutput,
 } from "./commands/GetCodeSigningConfigCommand";
 import {
+  type GetDurableExecutionCommandInput,
+  type GetDurableExecutionCommandOutput,
+  GetDurableExecutionCommand,
+} from "./commands/GetDurableExecutionCommand";
+import {
+  type GetDurableExecutionHistoryCommandInput,
+  type GetDurableExecutionHistoryCommandOutput,
+  GetDurableExecutionHistoryCommand,
+} from "./commands/GetDurableExecutionHistoryCommand";
+import {
+  type GetDurableExecutionStateCommandInput,
+  type GetDurableExecutionStateCommandOutput,
+  GetDurableExecutionStateCommand,
+} from "./commands/GetDurableExecutionStateCommand";
+import {
+  type GetEventSourceMappingCommandInput,
+  type GetEventSourceMappingCommandOutput,
   GetEventSourceMappingCommand,
-  GetEventSourceMappingCommandInput,
-  GetEventSourceMappingCommandOutput,
 } from "./commands/GetEventSourceMappingCommand";
 import {
+  type GetFunctionCodeSigningConfigCommandInput,
+  type GetFunctionCodeSigningConfigCommandOutput,
   GetFunctionCodeSigningConfigCommand,
-  GetFunctionCodeSigningConfigCommandInput,
-  GetFunctionCodeSigningConfigCommandOutput,
 } from "./commands/GetFunctionCodeSigningConfigCommand";
-import { GetFunctionCommand, GetFunctionCommandInput, GetFunctionCommandOutput } from "./commands/GetFunctionCommand";
 import {
+  type GetFunctionCommandInput,
+  type GetFunctionCommandOutput,
+  GetFunctionCommand,
+} from "./commands/GetFunctionCommand";
+import {
+  type GetFunctionConcurrencyCommandInput,
+  type GetFunctionConcurrencyCommandOutput,
   GetFunctionConcurrencyCommand,
-  GetFunctionConcurrencyCommandInput,
-  GetFunctionConcurrencyCommandOutput,
 } from "./commands/GetFunctionConcurrencyCommand";
 import {
+  type GetFunctionConfigurationCommandInput,
+  type GetFunctionConfigurationCommandOutput,
   GetFunctionConfigurationCommand,
-  GetFunctionConfigurationCommandInput,
-  GetFunctionConfigurationCommandOutput,
 } from "./commands/GetFunctionConfigurationCommand";
 import {
+  type GetFunctionEventInvokeConfigCommandInput,
+  type GetFunctionEventInvokeConfigCommandOutput,
   GetFunctionEventInvokeConfigCommand,
-  GetFunctionEventInvokeConfigCommandInput,
-  GetFunctionEventInvokeConfigCommandOutput,
 } from "./commands/GetFunctionEventInvokeConfigCommand";
 import {
+  type GetFunctionRecursionConfigCommandInput,
+  type GetFunctionRecursionConfigCommandOutput,
+  GetFunctionRecursionConfigCommand,
+} from "./commands/GetFunctionRecursionConfigCommand";
+import {
+  type GetFunctionScalingConfigCommandInput,
+  type GetFunctionScalingConfigCommandOutput,
+  GetFunctionScalingConfigCommand,
+} from "./commands/GetFunctionScalingConfigCommand";
+import {
+  type GetFunctionUrlConfigCommandInput,
+  type GetFunctionUrlConfigCommandOutput,
+  GetFunctionUrlConfigCommand,
+} from "./commands/GetFunctionUrlConfigCommand";
+import {
+  type GetLayerVersionByArnCommandInput,
+  type GetLayerVersionByArnCommandOutput,
   GetLayerVersionByArnCommand,
-  GetLayerVersionByArnCommandInput,
-  GetLayerVersionByArnCommandOutput,
 } from "./commands/GetLayerVersionByArnCommand";
 import {
+  type GetLayerVersionCommandInput,
+  type GetLayerVersionCommandOutput,
   GetLayerVersionCommand,
-  GetLayerVersionCommandInput,
-  GetLayerVersionCommandOutput,
 } from "./commands/GetLayerVersionCommand";
 import {
+  type GetLayerVersionPolicyCommandInput,
+  type GetLayerVersionPolicyCommandOutput,
   GetLayerVersionPolicyCommand,
-  GetLayerVersionPolicyCommandInput,
-  GetLayerVersionPolicyCommandOutput,
 } from "./commands/GetLayerVersionPolicyCommand";
-import { GetPolicyCommand, GetPolicyCommandInput, GetPolicyCommandOutput } from "./commands/GetPolicyCommand";
+import { type GetPolicyCommandInput, type GetPolicyCommandOutput, GetPolicyCommand } from "./commands/GetPolicyCommand";
 import {
+  type GetProvisionedConcurrencyConfigCommandInput,
+  type GetProvisionedConcurrencyConfigCommandOutput,
   GetProvisionedConcurrencyConfigCommand,
-  GetProvisionedConcurrencyConfigCommandInput,
-  GetProvisionedConcurrencyConfigCommandOutput,
 } from "./commands/GetProvisionedConcurrencyConfigCommand";
-import { InvokeAsyncCommand, InvokeAsyncCommandInput, InvokeAsyncCommandOutput } from "./commands/InvokeAsyncCommand";
-import { InvokeCommand, InvokeCommandInput, InvokeCommandOutput } from "./commands/InvokeCommand";
-import { ListAliasesCommand, ListAliasesCommandInput, ListAliasesCommandOutput } from "./commands/ListAliasesCommand";
 import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type GetRuntimeManagementConfigCommandInput,
+  type GetRuntimeManagementConfigCommandOutput,
+  GetRuntimeManagementConfigCommand,
+} from "./commands/GetRuntimeManagementConfigCommand";
+import {
+  type InvokeAsyncCommandInput,
+  type InvokeAsyncCommandOutput,
+  InvokeAsyncCommand,
+} from "./commands/InvokeAsyncCommand";
+import { type InvokeCommandInput, type InvokeCommandOutput, InvokeCommand } from "./commands/InvokeCommand";
+import {
+  type InvokeWithResponseStreamCommandInput,
+  type InvokeWithResponseStreamCommandOutput,
+  InvokeWithResponseStreamCommand,
+} from "./commands/InvokeWithResponseStreamCommand";
+import {
+  type ListAliasesCommandInput,
+  type ListAliasesCommandOutput,
+  ListAliasesCommand,
+} from "./commands/ListAliasesCommand";
+import {
+  type ListCapacityProvidersCommandInput,
+  type ListCapacityProvidersCommandOutput,
+  ListCapacityProvidersCommand,
+} from "./commands/ListCapacityProvidersCommand";
+import {
+  type ListCodeSigningConfigsCommandInput,
+  type ListCodeSigningConfigsCommandOutput,
   ListCodeSigningConfigsCommand,
-  ListCodeSigningConfigsCommandInput,
-  ListCodeSigningConfigsCommandOutput,
 } from "./commands/ListCodeSigningConfigsCommand";
 import {
+  type ListDurableExecutionsByFunctionCommandInput,
+  type ListDurableExecutionsByFunctionCommandOutput,
+  ListDurableExecutionsByFunctionCommand,
+} from "./commands/ListDurableExecutionsByFunctionCommand";
+import {
+  type ListEventSourceMappingsCommandInput,
+  type ListEventSourceMappingsCommandOutput,
   ListEventSourceMappingsCommand,
-  ListEventSourceMappingsCommandInput,
-  ListEventSourceMappingsCommandOutput,
 } from "./commands/ListEventSourceMappingsCommand";
 import {
+  type ListFunctionEventInvokeConfigsCommandInput,
+  type ListFunctionEventInvokeConfigsCommandOutput,
   ListFunctionEventInvokeConfigsCommand,
-  ListFunctionEventInvokeConfigsCommandInput,
-  ListFunctionEventInvokeConfigsCommandOutput,
 } from "./commands/ListFunctionEventInvokeConfigsCommand";
 import {
+  type ListFunctionsByCodeSigningConfigCommandInput,
+  type ListFunctionsByCodeSigningConfigCommandOutput,
   ListFunctionsByCodeSigningConfigCommand,
-  ListFunctionsByCodeSigningConfigCommandInput,
-  ListFunctionsByCodeSigningConfigCommandOutput,
 } from "./commands/ListFunctionsByCodeSigningConfigCommand";
 import {
+  type ListFunctionsCommandInput,
+  type ListFunctionsCommandOutput,
   ListFunctionsCommand,
-  ListFunctionsCommandInput,
-  ListFunctionsCommandOutput,
 } from "./commands/ListFunctionsCommand";
-import { ListLayersCommand, ListLayersCommandInput, ListLayersCommandOutput } from "./commands/ListLayersCommand";
 import {
+  type ListFunctionUrlConfigsCommandInput,
+  type ListFunctionUrlConfigsCommandOutput,
+  ListFunctionUrlConfigsCommand,
+} from "./commands/ListFunctionUrlConfigsCommand";
+import {
+  type ListFunctionVersionsByCapacityProviderCommandInput,
+  type ListFunctionVersionsByCapacityProviderCommandOutput,
+  ListFunctionVersionsByCapacityProviderCommand,
+} from "./commands/ListFunctionVersionsByCapacityProviderCommand";
+import {
+  type ListLayersCommandInput,
+  type ListLayersCommandOutput,
+  ListLayersCommand,
+} from "./commands/ListLayersCommand";
+import {
+  type ListLayerVersionsCommandInput,
+  type ListLayerVersionsCommandOutput,
   ListLayerVersionsCommand,
-  ListLayerVersionsCommandInput,
-  ListLayerVersionsCommandOutput,
 } from "./commands/ListLayerVersionsCommand";
 import {
+  type ListProvisionedConcurrencyConfigsCommandInput,
+  type ListProvisionedConcurrencyConfigsCommandOutput,
   ListProvisionedConcurrencyConfigsCommand,
-  ListProvisionedConcurrencyConfigsCommandInput,
-  ListProvisionedConcurrencyConfigsCommandOutput,
 } from "./commands/ListProvisionedConcurrencyConfigsCommand";
-import { ListTagsCommand, ListTagsCommandInput, ListTagsCommandOutput } from "./commands/ListTagsCommand";
+import { type ListTagsCommandInput, type ListTagsCommandOutput, ListTagsCommand } from "./commands/ListTagsCommand";
 import {
+  type ListVersionsByFunctionCommandInput,
+  type ListVersionsByFunctionCommandOutput,
   ListVersionsByFunctionCommand,
-  ListVersionsByFunctionCommandInput,
-  ListVersionsByFunctionCommandOutput,
 } from "./commands/ListVersionsByFunctionCommand";
 import {
+  type PublishLayerVersionCommandInput,
+  type PublishLayerVersionCommandOutput,
   PublishLayerVersionCommand,
-  PublishLayerVersionCommandInput,
-  PublishLayerVersionCommandOutput,
 } from "./commands/PublishLayerVersionCommand";
 import {
+  type PublishVersionCommandInput,
+  type PublishVersionCommandOutput,
   PublishVersionCommand,
-  PublishVersionCommandInput,
-  PublishVersionCommandOutput,
 } from "./commands/PublishVersionCommand";
 import {
+  type PutFunctionCodeSigningConfigCommandInput,
+  type PutFunctionCodeSigningConfigCommandOutput,
   PutFunctionCodeSigningConfigCommand,
-  PutFunctionCodeSigningConfigCommandInput,
-  PutFunctionCodeSigningConfigCommandOutput,
 } from "./commands/PutFunctionCodeSigningConfigCommand";
 import {
+  type PutFunctionConcurrencyCommandInput,
+  type PutFunctionConcurrencyCommandOutput,
   PutFunctionConcurrencyCommand,
-  PutFunctionConcurrencyCommandInput,
-  PutFunctionConcurrencyCommandOutput,
 } from "./commands/PutFunctionConcurrencyCommand";
 import {
+  type PutFunctionEventInvokeConfigCommandInput,
+  type PutFunctionEventInvokeConfigCommandOutput,
   PutFunctionEventInvokeConfigCommand,
-  PutFunctionEventInvokeConfigCommandInput,
-  PutFunctionEventInvokeConfigCommandOutput,
 } from "./commands/PutFunctionEventInvokeConfigCommand";
 import {
+  type PutFunctionRecursionConfigCommandInput,
+  type PutFunctionRecursionConfigCommandOutput,
+  PutFunctionRecursionConfigCommand,
+} from "./commands/PutFunctionRecursionConfigCommand";
+import {
+  type PutFunctionScalingConfigCommandInput,
+  type PutFunctionScalingConfigCommandOutput,
+  PutFunctionScalingConfigCommand,
+} from "./commands/PutFunctionScalingConfigCommand";
+import {
+  type PutProvisionedConcurrencyConfigCommandInput,
+  type PutProvisionedConcurrencyConfigCommandOutput,
   PutProvisionedConcurrencyConfigCommand,
-  PutProvisionedConcurrencyConfigCommandInput,
-  PutProvisionedConcurrencyConfigCommandOutput,
 } from "./commands/PutProvisionedConcurrencyConfigCommand";
 import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type PutRuntimeManagementConfigCommandInput,
+  type PutRuntimeManagementConfigCommandOutput,
+  PutRuntimeManagementConfigCommand,
+} from "./commands/PutRuntimeManagementConfigCommand";
+import {
+  type RemoveLayerVersionPermissionCommandInput,
+  type RemoveLayerVersionPermissionCommandOutput,
   RemoveLayerVersionPermissionCommand,
-  RemoveLayerVersionPermissionCommandInput,
-  RemoveLayerVersionPermissionCommandOutput,
 } from "./commands/RemoveLayerVersionPermissionCommand";
 import {
+  type RemovePermissionCommandInput,
+  type RemovePermissionCommandOutput,
   RemovePermissionCommand,
-  RemovePermissionCommandInput,
-  RemovePermissionCommandOutput,
 } from "./commands/RemovePermissionCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type SendDurableExecutionCallbackFailureCommandInput,
+  type SendDurableExecutionCallbackFailureCommandOutput,
+  SendDurableExecutionCallbackFailureCommand,
+} from "./commands/SendDurableExecutionCallbackFailureCommand";
+import {
+  type SendDurableExecutionCallbackHeartbeatCommandInput,
+  type SendDurableExecutionCallbackHeartbeatCommandOutput,
+  SendDurableExecutionCallbackHeartbeatCommand,
+} from "./commands/SendDurableExecutionCallbackHeartbeatCommand";
+import {
+  type SendDurableExecutionCallbackSuccessCommandInput,
+  type SendDurableExecutionCallbackSuccessCommandOutput,
+  SendDurableExecutionCallbackSuccessCommand,
+} from "./commands/SendDurableExecutionCallbackSuccessCommand";
+import {
+  type StopDurableExecutionCommandInput,
+  type StopDurableExecutionCommandOutput,
+  StopDurableExecutionCommand,
+} from "./commands/StopDurableExecutionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateAliasCommand, UpdateAliasCommandInput, UpdateAliasCommandOutput } from "./commands/UpdateAliasCommand";
 import {
+  type UpdateAliasCommandInput,
+  type UpdateAliasCommandOutput,
+  UpdateAliasCommand,
+} from "./commands/UpdateAliasCommand";
+import {
+  type UpdateCapacityProviderCommandInput,
+  type UpdateCapacityProviderCommandOutput,
+  UpdateCapacityProviderCommand,
+} from "./commands/UpdateCapacityProviderCommand";
+import {
+  type UpdateCodeSigningConfigCommandInput,
+  type UpdateCodeSigningConfigCommandOutput,
   UpdateCodeSigningConfigCommand,
-  UpdateCodeSigningConfigCommandInput,
-  UpdateCodeSigningConfigCommandOutput,
 } from "./commands/UpdateCodeSigningConfigCommand";
 import {
+  type UpdateEventSourceMappingCommandInput,
+  type UpdateEventSourceMappingCommandOutput,
   UpdateEventSourceMappingCommand,
-  UpdateEventSourceMappingCommandInput,
-  UpdateEventSourceMappingCommandOutput,
 } from "./commands/UpdateEventSourceMappingCommand";
 import {
+  type UpdateFunctionCodeCommandInput,
+  type UpdateFunctionCodeCommandOutput,
   UpdateFunctionCodeCommand,
-  UpdateFunctionCodeCommandInput,
-  UpdateFunctionCodeCommandOutput,
 } from "./commands/UpdateFunctionCodeCommand";
 import {
+  type UpdateFunctionConfigurationCommandInput,
+  type UpdateFunctionConfigurationCommandOutput,
   UpdateFunctionConfigurationCommand,
-  UpdateFunctionConfigurationCommandInput,
-  UpdateFunctionConfigurationCommandOutput,
 } from "./commands/UpdateFunctionConfigurationCommand";
 import {
+  type UpdateFunctionEventInvokeConfigCommandInput,
+  type UpdateFunctionEventInvokeConfigCommandOutput,
   UpdateFunctionEventInvokeConfigCommand,
-  UpdateFunctionEventInvokeConfigCommandInput,
-  UpdateFunctionEventInvokeConfigCommandOutput,
 } from "./commands/UpdateFunctionEventInvokeConfigCommand";
+import {
+  type UpdateFunctionUrlConfigCommandInput,
+  type UpdateFunctionUrlConfigCommandOutput,
+  UpdateFunctionUrlConfigCommand,
+} from "./commands/UpdateFunctionUrlConfigCommand";
 import { LambdaClient } from "./LambdaClient";
+import type { LambdaServiceException } from "./models/LambdaServiceException";
+import { paginateGetDurableExecutionHistory } from "./pagination/GetDurableExecutionHistoryPaginator";
+import { paginateGetDurableExecutionState } from "./pagination/GetDurableExecutionStatePaginator";
+import { paginateListAliases } from "./pagination/ListAliasesPaginator";
+import { paginateListCapacityProviders } from "./pagination/ListCapacityProvidersPaginator";
+import { paginateListCodeSigningConfigs } from "./pagination/ListCodeSigningConfigsPaginator";
+import { paginateListDurableExecutionsByFunction } from "./pagination/ListDurableExecutionsByFunctionPaginator";
+import { paginateListEventSourceMappings } from "./pagination/ListEventSourceMappingsPaginator";
+import { paginateListFunctionEventInvokeConfigs } from "./pagination/ListFunctionEventInvokeConfigsPaginator";
+import { paginateListFunctionsByCodeSigningConfig } from "./pagination/ListFunctionsByCodeSigningConfigPaginator";
+import { paginateListFunctions } from "./pagination/ListFunctionsPaginator";
+import { paginateListFunctionUrlConfigs } from "./pagination/ListFunctionUrlConfigsPaginator";
+import {
+  paginateListFunctionVersionsByCapacityProvider,
+} from "./pagination/ListFunctionVersionsByCapacityProviderPaginator";
+import { paginateListLayers } from "./pagination/ListLayersPaginator";
+import { paginateListLayerVersions } from "./pagination/ListLayerVersionsPaginator";
+import { paginateListProvisionedConcurrencyConfigs } from "./pagination/ListProvisionedConcurrencyConfigsPaginator";
+import { paginateListVersionsByFunction } from "./pagination/ListVersionsByFunctionPaginator";
+import { waitUntilFunctionActive } from "./waiters/waitForFunctionActive";
+import { waitUntilFunctionActiveV2 } from "./waiters/waitForFunctionActiveV2";
+import { waitUntilFunctionExists } from "./waiters/waitForFunctionExists";
+import { waitUntilFunctionUpdated } from "./waiters/waitForFunctionUpdated";
+import { waitUntilFunctionUpdatedV2 } from "./waiters/waitForFunctionUpdatedV2";
+import { waitUntilPublishedVersionActive } from "./waiters/waitForPublishedVersionActive";
+
+const commands = {
+  AddLayerVersionPermissionCommand,
+  AddPermissionCommand,
+  CheckpointDurableExecutionCommand,
+  CreateAliasCommand,
+  CreateCapacityProviderCommand,
+  CreateCodeSigningConfigCommand,
+  CreateEventSourceMappingCommand,
+  CreateFunctionCommand,
+  CreateFunctionUrlConfigCommand,
+  DeleteAliasCommand,
+  DeleteCapacityProviderCommand,
+  DeleteCodeSigningConfigCommand,
+  DeleteEventSourceMappingCommand,
+  DeleteFunctionCommand,
+  DeleteFunctionCodeSigningConfigCommand,
+  DeleteFunctionConcurrencyCommand,
+  DeleteFunctionEventInvokeConfigCommand,
+  DeleteFunctionUrlConfigCommand,
+  DeleteLayerVersionCommand,
+  DeleteProvisionedConcurrencyConfigCommand,
+  DeleteResourcePolicyCommand,
+  GetAccountSettingsCommand,
+  GetAliasCommand,
+  GetCapacityProviderCommand,
+  GetCodeSigningConfigCommand,
+  GetDurableExecutionCommand,
+  GetDurableExecutionHistoryCommand,
+  GetDurableExecutionStateCommand,
+  GetEventSourceMappingCommand,
+  GetFunctionCommand,
+  GetFunctionCodeSigningConfigCommand,
+  GetFunctionConcurrencyCommand,
+  GetFunctionConfigurationCommand,
+  GetFunctionEventInvokeConfigCommand,
+  GetFunctionRecursionConfigCommand,
+  GetFunctionScalingConfigCommand,
+  GetFunctionUrlConfigCommand,
+  GetLayerVersionCommand,
+  GetLayerVersionByArnCommand,
+  GetLayerVersionPolicyCommand,
+  GetPolicyCommand,
+  GetProvisionedConcurrencyConfigCommand,
+  GetResourcePolicyCommand,
+  GetRuntimeManagementConfigCommand,
+  InvokeCommand,
+  InvokeAsyncCommand,
+  InvokeWithResponseStreamCommand,
+  ListAliasesCommand,
+  ListCapacityProvidersCommand,
+  ListCodeSigningConfigsCommand,
+  ListDurableExecutionsByFunctionCommand,
+  ListEventSourceMappingsCommand,
+  ListFunctionEventInvokeConfigsCommand,
+  ListFunctionsCommand,
+  ListFunctionsByCodeSigningConfigCommand,
+  ListFunctionUrlConfigsCommand,
+  ListFunctionVersionsByCapacityProviderCommand,
+  ListLayersCommand,
+  ListLayerVersionsCommand,
+  ListProvisionedConcurrencyConfigsCommand,
+  ListTagsCommand,
+  ListVersionsByFunctionCommand,
+  PublishLayerVersionCommand,
+  PublishVersionCommand,
+  PutFunctionCodeSigningConfigCommand,
+  PutFunctionConcurrencyCommand,
+  PutFunctionEventInvokeConfigCommand,
+  PutFunctionRecursionConfigCommand,
+  PutFunctionScalingConfigCommand,
+  PutProvisionedConcurrencyConfigCommand,
+  PutResourcePolicyCommand,
+  PutRuntimeManagementConfigCommand,
+  RemoveLayerVersionPermissionCommand,
+  RemovePermissionCommand,
+  SendDurableExecutionCallbackFailureCommand,
+  SendDurableExecutionCallbackHeartbeatCommand,
+  SendDurableExecutionCallbackSuccessCommand,
+  StopDurableExecutionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAliasCommand,
+  UpdateCapacityProviderCommand,
+  UpdateCodeSigningConfigCommand,
+  UpdateEventSourceMappingCommand,
+  UpdateFunctionCodeCommand,
+  UpdateFunctionConfigurationCommand,
+  UpdateFunctionEventInvokeConfigCommand,
+  UpdateFunctionUrlConfigCommand,
+};
+const paginators = {
+  paginateGetDurableExecutionHistory,
+  paginateGetDurableExecutionState,
+  paginateListAliases,
+  paginateListCapacityProviders,
+  paginateListCodeSigningConfigs,
+  paginateListDurableExecutionsByFunction,
+  paginateListEventSourceMappings,
+  paginateListFunctionEventInvokeConfigs,
+  paginateListFunctions,
+  paginateListFunctionsByCodeSigningConfig,
+  paginateListFunctionUrlConfigs,
+  paginateListFunctionVersionsByCapacityProvider,
+  paginateListLayers,
+  paginateListLayerVersions,
+  paginateListProvisionedConcurrencyConfigs,
+  paginateListVersionsByFunction,
+};
+const waiters = {
+  waitUntilFunctionActiveV2,
+  waitUntilFunctionExists,
+  waitUntilFunctionUpdatedV2,
+  waitUntilFunctionActive,
+  waitUntilFunctionUpdated,
+  waitUntilPublishedVersionActive,
+};
 
 /**
- * <fullname>Lambda</fullname>
- *          <p>
- *             <b>Overview</b>
- *          </p>
- *          <p>This is the <i>Lambda API Reference</i>. The Lambda Developer Guide provides additional
- *       information. For the service overview, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What is
- *         Lambda</a>, and for information about how the service works, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">Lambda: How it Works</a> in the <b>Lambda Developer Guide</b>.</p>
+ * @public
  */
-export class Lambda extends LambdaClient {
+export interface LambdaRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Lambda {
   /**
-   * <p>Adds permissions to the resource-based policy of a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>. Use this action to grant layer
-   *       usage permission to other accounts. You can grant permission to a single account, all accounts in an organization,
-   *       or all Amazon Web Services accounts.  </p>
-   *          <p>To revoke permission, call <a>RemoveLayerVersionPermission</a> with the statement ID that you
-   *       specified when you added it.</p>
+   * @see {@link AddLayerVersionPermissionCommand}
    */
-  public addLayerVersionPermission(
+  addLayerVersionPermission(
     args: AddLayerVersionPermissionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<AddLayerVersionPermissionCommandOutput>;
-  public addLayerVersionPermission(
+  addLayerVersionPermission(
     args: AddLayerVersionPermissionCommandInput,
     cb: (err: any, data?: AddLayerVersionPermissionCommandOutput) => void
   ): void;
-  public addLayerVersionPermission(
+  addLayerVersionPermission(
     args: AddLayerVersionPermissionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: AddLayerVersionPermissionCommandOutput) => void
   ): void;
-  public addLayerVersionPermission(
-    args: AddLayerVersionPermissionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddLayerVersionPermissionCommandOutput) => void),
-    cb?: (err: any, data?: AddLayerVersionPermissionCommandOutput) => void
-  ): Promise<AddLayerVersionPermissionCommandOutput> | void {
-    const command = new AddLayerVersionPermissionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Grants an Amazon Web Services service or another account permission to use a function. You can apply the policy at the
-   *       function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier,
-   *       the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.
-   *       Note: Lambda does not support adding policies to version $LATEST.</p>
-   *
-   *          <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For Amazon Web Services
-   *       services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or
-   *         <code>sns.amazonaws.com</code>. For Amazon Web Services services, you can also specify the ARN of the associated resource as the
-   *         <code>SourceArn</code>. If you grant permission to a service principal without specifying the source, other
-   *       accounts could potentially configure resources in their account to invoke your Lambda function.</p>
-   *
-   *          <p>This action adds a statement to a resource-based permissions policy for the function. For more information
-   *       about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>
+   * @see {@link AddPermissionCommand}
    */
-  public addPermission(
+  addPermission(
     args: AddPermissionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<AddPermissionCommandOutput>;
-  public addPermission(
+  addPermission(
     args: AddPermissionCommandInput,
     cb: (err: any, data?: AddPermissionCommandOutput) => void
   ): void;
-  public addPermission(
+  addPermission(
     args: AddPermissionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: AddPermissionCommandOutput) => void
   ): void;
-  public addPermission(
-    args: AddPermissionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddPermissionCommandOutput) => void),
-    cb?: (err: any, data?: AddPermissionCommandOutput) => void
-  ): Promise<AddPermissionCommandOutput> | void {
-    const command = new AddPermissionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a> for a
-   *       Lambda function version. Use aliases to provide clients with a function identifier that you can update to invoke a
-   *       different version.</p>
-   *          <p>You can also map an alias to split invocation requests between two versions. Use the
-   *         <code>RoutingConfig</code> parameter to specify a second version and the percentage of invocation requests that
-   *       it receives.</p>
+   * @see {@link CheckpointDurableExecutionCommand}
    */
-  public createAlias(args: CreateAliasCommandInput, options?: __HttpHandlerOptions): Promise<CreateAliasCommandOutput>;
-  public createAlias(args: CreateAliasCommandInput, cb: (err: any, data?: CreateAliasCommandOutput) => void): void;
-  public createAlias(
+  checkpointDurableExecution(
+    args: CheckpointDurableExecutionCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<CheckpointDurableExecutionCommandOutput>;
+  checkpointDurableExecution(
+    args: CheckpointDurableExecutionCommandInput,
+    cb: (err: any, data?: CheckpointDurableExecutionCommandOutput) => void
+  ): void;
+  checkpointDurableExecution(
+    args: CheckpointDurableExecutionCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: CheckpointDurableExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAliasCommand}
+   */
+  createAlias(
     args: CreateAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<CreateAliasCommandOutput>;
+  createAlias(
+    args: CreateAliasCommandInput,
     cb: (err: any, data?: CreateAliasCommandOutput) => void
   ): void;
-  public createAlias(
+  createAlias(
     args: CreateAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAliasCommandOutput) => void),
-    cb?: (err: any, data?: CreateAliasCommandOutput) => void
-  ): Promise<CreateAliasCommandOutput> | void {
-    const command = new CreateAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: CreateAliasCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a code signing configuration. A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html">code signing configuration</a> defines a list of
-   *       allowed signing profiles and defines the code-signing validation policy (action to be taken if deployment
-   *       validation checks fail). </p>
+   * @see {@link CreateCapacityProviderCommand}
    */
-  public createCodeSigningConfig(
+  createCapacityProvider(
+    args: CreateCapacityProviderCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<CreateCapacityProviderCommandOutput>;
+  createCapacityProvider(
+    args: CreateCapacityProviderCommandInput,
+    cb: (err: any, data?: CreateCapacityProviderCommandOutput) => void
+  ): void;
+  createCapacityProvider(
+    args: CreateCapacityProviderCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: CreateCapacityProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCodeSigningConfigCommand}
+   */
+  createCodeSigningConfig(
     args: CreateCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<CreateCodeSigningConfigCommandOutput>;
-  public createCodeSigningConfig(
+  createCodeSigningConfig(
     args: CreateCodeSigningConfigCommandInput,
     cb: (err: any, data?: CreateCodeSigningConfigCommandOutput) => void
   ): void;
-  public createCodeSigningConfig(
+  createCodeSigningConfig(
     args: CreateCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: CreateCodeSigningConfigCommandOutput) => void
   ): void;
-  public createCodeSigningConfig(
-    args: CreateCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: CreateCodeSigningConfigCommandOutput) => void
-  ): Promise<CreateCodeSigningConfigCommandOutput> | void {
-    const command = new CreateCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the
-   *       event source and triggers the function.</p>
-   *          <p>For details about each event source type, see the following topics. </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping">
-   *             Configuring a Dynamo DB stream as an event source</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping">
-   *             Configuring a Kinesis stream as an event source</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource"> Configuring an
-   *               Amazon SQS queue as an event source</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping">
-   *             Configuring an MQ broker as an event source</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html"> Configuring MSK as an event
-   *             source</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html"> Configuring Self-Managed Apache Kafka
-   *             as an event source</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *
-   *          <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p>
-   *             </li>
-   *          </ul>
+   * @see {@link CreateEventSourceMappingCommand}
    */
-  public createEventSourceMapping(
+  createEventSourceMapping(
     args: CreateEventSourceMappingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<CreateEventSourceMappingCommandOutput>;
-  public createEventSourceMapping(
+  createEventSourceMapping(
     args: CreateEventSourceMappingCommandInput,
     cb: (err: any, data?: CreateEventSourceMappingCommandOutput) => void
   ): void;
-  public createEventSourceMapping(
+  createEventSourceMapping(
     args: CreateEventSourceMappingCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: CreateEventSourceMappingCommandOutput) => void
   ): void;
-  public createEventSourceMapping(
-    args: CreateEventSourceMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEventSourceMappingCommandOutput) => void),
-    cb?: (err: any, data?: CreateEventSourceMappingCommandOutput) => void
-  ): Promise<CreateEventSourceMappingCommandOutput> | void {
-    const command = new CreateEventSourceMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The
-   *       deployment package is a .zip file  archive or container image that contains your function code. The execution role grants the function permission to use Amazon Web Services
-   *       services, such as Amazon CloudWatch Logs for log streaming and X-Ray for request tracing.</p>
-   *
-   *          <p>You set the package type to <code>Image</code> if the deployment package is a
-   *       <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a>. For a container image,
-   *       the code property must include the URI of a container image in the Amazon ECR registry.
-   *       You do not need to specify the handler and runtime properties. </p>
-   *
-   *          <p>You set the package type to <code>Zip</code> if the deployment package is a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip">.zip file
-   *         archive</a>. For a .zip file archive, the code property specifies the location of the
-   *       .zip file. You must also specify the handler and runtime properties. The code in the
-   *       deployment package must be compatible with the target instruction set architecture of the
-   *       function (<code>x86-64</code> or <code>arm64</code>). If you do not specify the architecture, the default value is
-   *       <code>x86-64</code>.</p>
-   *
-   *          <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If
-   *       your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or
-   *       modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in
-   *       the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For
-   *       more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function
-   *         States</a>.</p>
-   *
-   *          <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version
-   *       changes when you update your function's code and configuration. A published version is a snapshot of your function
-   *       code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be
-   *       changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of
-   *       your function from its initial configuration.</p>
-   *
-   *          <p>The other parameters let you configure version-specific and function-level settings. You can modify
-   *       version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply
-   *       to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>)
-   *       and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p>
-   *
-   *          <p>You can use code signing if your deployment package is a .zip file archive. To enable code signing for this function,
-   *       specify the ARN of a code-signing configuration. When a user
-   *       attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code
-   *       package has a valid signature from a trusted publisher. The code-signing configuration
-   *       includes set set of signing profiles, which define the trusted publishers for this function.</p>
-   *
-   *          <p>If another account or an Amazon Web Services service invokes your function, use <a>AddPermission</a> to grant
-   *       permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version,
-   *       or on an alias.</p>
-   *
-   *          <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events
-   *       in other Amazon Web Services services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a
-   *       function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>
+   * @see {@link CreateFunctionCommand}
    */
-  public createFunction(
+  createFunction(
     args: CreateFunctionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<CreateFunctionCommandOutput>;
-  public createFunction(
+  createFunction(
     args: CreateFunctionCommandInput,
     cb: (err: any, data?: CreateFunctionCommandOutput) => void
   ): void;
-  public createFunction(
+  createFunction(
     args: CreateFunctionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: CreateFunctionCommandOutput) => void
   ): void;
-  public createFunction(
-    args: CreateFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFunctionCommandOutput) => void),
-    cb?: (err: any, data?: CreateFunctionCommandOutput) => void
-  ): Promise<CreateFunctionCommandOutput> | void {
-    const command = new CreateFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.</p>
+   * @see {@link CreateFunctionUrlConfigCommand}
    */
-  public deleteAlias(args: DeleteAliasCommandInput, options?: __HttpHandlerOptions): Promise<DeleteAliasCommandOutput>;
-  public deleteAlias(args: DeleteAliasCommandInput, cb: (err: any, data?: DeleteAliasCommandOutput) => void): void;
-  public deleteAlias(
+  createFunctionUrlConfig(
+    args: CreateFunctionUrlConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<CreateFunctionUrlConfigCommandOutput>;
+  createFunctionUrlConfig(
+    args: CreateFunctionUrlConfigCommandInput,
+    cb: (err: any, data?: CreateFunctionUrlConfigCommandOutput) => void
+  ): void;
+  createFunctionUrlConfig(
+    args: CreateFunctionUrlConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: CreateFunctionUrlConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAliasCommand}
+   */
+  deleteAlias(
     args: DeleteAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<DeleteAliasCommandOutput>;
+  deleteAlias(
+    args: DeleteAliasCommandInput,
     cb: (err: any, data?: DeleteAliasCommandOutput) => void
   ): void;
-  public deleteAlias(
+  deleteAlias(
     args: DeleteAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAliasCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAliasCommandOutput) => void
-  ): Promise<DeleteAliasCommandOutput> | void {
-    const command = new DeleteAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: DeleteAliasCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the code signing configuration. You can delete the code signing configuration only if no function is
-   *       using it. </p>
+   * @see {@link DeleteCapacityProviderCommand}
    */
-  public deleteCodeSigningConfig(
+  deleteCapacityProvider(
+    args: DeleteCapacityProviderCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<DeleteCapacityProviderCommandOutput>;
+  deleteCapacityProvider(
+    args: DeleteCapacityProviderCommandInput,
+    cb: (err: any, data?: DeleteCapacityProviderCommandOutput) => void
+  ): void;
+  deleteCapacityProvider(
+    args: DeleteCapacityProviderCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: DeleteCapacityProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCodeSigningConfigCommand}
+   */
+  deleteCodeSigningConfig(
     args: DeleteCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteCodeSigningConfigCommandOutput>;
-  public deleteCodeSigningConfig(
+  deleteCodeSigningConfig(
     args: DeleteCodeSigningConfigCommandInput,
     cb: (err: any, data?: DeleteCodeSigningConfigCommandOutput) => void
   ): void;
-  public deleteCodeSigningConfig(
+  deleteCodeSigningConfig(
     args: DeleteCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteCodeSigningConfigCommandOutput) => void
   ): void;
-  public deleteCodeSigningConfig(
-    args: DeleteCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCodeSigningConfigCommandOutput) => void
-  ): Promise<DeleteCodeSigningConfigCommandOutput> | void {
-    const command = new DeleteCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html">event source
-   *         mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p>
-   *          <p>When you delete an event source mapping, it enters a <code>Deleting</code> state and might not be completely
-   *       deleted for several seconds.</p>
+   * @see {@link DeleteEventSourceMappingCommand}
    */
-  public deleteEventSourceMapping(
+  deleteEventSourceMapping(
     args: DeleteEventSourceMappingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteEventSourceMappingCommandOutput>;
-  public deleteEventSourceMapping(
+  deleteEventSourceMapping(
     args: DeleteEventSourceMappingCommandInput,
     cb: (err: any, data?: DeleteEventSourceMappingCommandOutput) => void
   ): void;
-  public deleteEventSourceMapping(
+  deleteEventSourceMapping(
     args: DeleteEventSourceMappingCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteEventSourceMappingCommandOutput) => void
   ): void;
-  public deleteEventSourceMapping(
-    args: DeleteEventSourceMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEventSourceMappingCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEventSourceMappingCommandOutput) => void
-  ): Promise<DeleteEventSourceMappingCommandOutput> | void {
-    const command = new DeleteEventSourceMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.
-   *       Otherwise, all versions and aliases are deleted.</p>
-   *
-   *          <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>.
-   *       For Amazon Web Services services and resources that invoke your function directly, delete the trigger in the service where you
-   *       originally configured it.</p>
+   * @see {@link DeleteFunctionCommand}
    */
-  public deleteFunction(
+  deleteFunction(
     args: DeleteFunctionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteFunctionCommandOutput>;
-  public deleteFunction(
+  deleteFunction(
     args: DeleteFunctionCommandInput,
     cb: (err: any, data?: DeleteFunctionCommandOutput) => void
   ): void;
-  public deleteFunction(
+  deleteFunction(
     args: DeleteFunctionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteFunctionCommandOutput) => void
   ): void;
-  public deleteFunction(
-    args: DeleteFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFunctionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFunctionCommandOutput) => void
-  ): Promise<DeleteFunctionCommandOutput> | void {
-    const command = new DeleteFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the code signing configuration from the function.</p>
+   * @see {@link DeleteFunctionCodeSigningConfigCommand}
    */
-  public deleteFunctionCodeSigningConfig(
+  deleteFunctionCodeSigningConfig(
     args: DeleteFunctionCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteFunctionCodeSigningConfigCommandOutput>;
-  public deleteFunctionCodeSigningConfig(
+  deleteFunctionCodeSigningConfig(
     args: DeleteFunctionCodeSigningConfigCommandInput,
     cb: (err: any, data?: DeleteFunctionCodeSigningConfigCommandOutput) => void
   ): void;
-  public deleteFunctionCodeSigningConfig(
+  deleteFunctionCodeSigningConfig(
     args: DeleteFunctionCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteFunctionCodeSigningConfigCommandOutput) => void
   ): void;
-  public deleteFunctionCodeSigningConfig(
-    args: DeleteFunctionCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFunctionCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFunctionCodeSigningConfigCommandOutput) => void
-  ): Promise<DeleteFunctionCodeSigningConfigCommandOutput> | void {
-    const command = new DeleteFunctionCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a concurrent execution limit from a function.</p>
+   * @see {@link DeleteFunctionConcurrencyCommand}
    */
-  public deleteFunctionConcurrency(
+  deleteFunctionConcurrency(
     args: DeleteFunctionConcurrencyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteFunctionConcurrencyCommandOutput>;
-  public deleteFunctionConcurrency(
+  deleteFunctionConcurrency(
     args: DeleteFunctionConcurrencyCommandInput,
     cb: (err: any, data?: DeleteFunctionConcurrencyCommandOutput) => void
   ): void;
-  public deleteFunctionConcurrency(
+  deleteFunctionConcurrency(
     args: DeleteFunctionConcurrencyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteFunctionConcurrencyCommandOutput) => void
   ): void;
-  public deleteFunctionConcurrency(
-    args: DeleteFunctionConcurrencyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFunctionConcurrencyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFunctionConcurrencyCommandOutput) => void
-  ): Promise<DeleteFunctionConcurrencyCommandOutput> | void {
-    const command = new DeleteFunctionConcurrencyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the configuration for asynchronous invocation for a function, version, or alias.</p>
-   *          <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>
+   * @see {@link DeleteFunctionEventInvokeConfigCommand}
    */
-  public deleteFunctionEventInvokeConfig(
+  deleteFunctionEventInvokeConfig(
     args: DeleteFunctionEventInvokeConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteFunctionEventInvokeConfigCommandOutput>;
-  public deleteFunctionEventInvokeConfig(
+  deleteFunctionEventInvokeConfig(
     args: DeleteFunctionEventInvokeConfigCommandInput,
     cb: (err: any, data?: DeleteFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public deleteFunctionEventInvokeConfig(
+  deleteFunctionEventInvokeConfig(
     args: DeleteFunctionEventInvokeConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public deleteFunctionEventInvokeConfig(
-    args: DeleteFunctionEventInvokeConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFunctionEventInvokeConfigCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFunctionEventInvokeConfigCommandOutput) => void
-  ): Promise<DeleteFunctionEventInvokeConfigCommandOutput> | void {
-    const command = new DeleteFunctionEventInvokeConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>. Deleted versions can no longer be viewed or added to functions. To avoid
-   *       breaking functions, a copy of the version remains in Lambda until no functions refer to it.</p>
+   * @see {@link DeleteFunctionUrlConfigCommand}
    */
-  public deleteLayerVersion(
+  deleteFunctionUrlConfig(
+    args: DeleteFunctionUrlConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<DeleteFunctionUrlConfigCommandOutput>;
+  deleteFunctionUrlConfig(
+    args: DeleteFunctionUrlConfigCommandInput,
+    cb: (err: any, data?: DeleteFunctionUrlConfigCommandOutput) => void
+  ): void;
+  deleteFunctionUrlConfig(
+    args: DeleteFunctionUrlConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: DeleteFunctionUrlConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLayerVersionCommand}
+   */
+  deleteLayerVersion(
     args: DeleteLayerVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteLayerVersionCommandOutput>;
-  public deleteLayerVersion(
+  deleteLayerVersion(
     args: DeleteLayerVersionCommandInput,
     cb: (err: any, data?: DeleteLayerVersionCommandOutput) => void
   ): void;
-  public deleteLayerVersion(
+  deleteLayerVersion(
     args: DeleteLayerVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteLayerVersionCommandOutput) => void
   ): void;
-  public deleteLayerVersion(
-    args: DeleteLayerVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLayerVersionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLayerVersionCommandOutput) => void
-  ): Promise<DeleteLayerVersionCommandOutput> | void {
-    const command = new DeleteLayerVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the provisioned concurrency configuration for a function.</p>
+   * @see {@link DeleteProvisionedConcurrencyConfigCommand}
    */
-  public deleteProvisionedConcurrencyConfig(
+  deleteProvisionedConcurrencyConfig(
     args: DeleteProvisionedConcurrencyConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<DeleteProvisionedConcurrencyConfigCommandOutput>;
-  public deleteProvisionedConcurrencyConfig(
+  deleteProvisionedConcurrencyConfig(
     args: DeleteProvisionedConcurrencyConfigCommandInput,
     cb: (err: any, data?: DeleteProvisionedConcurrencyConfigCommandOutput) => void
   ): void;
-  public deleteProvisionedConcurrencyConfig(
+  deleteProvisionedConcurrencyConfig(
     args: DeleteProvisionedConcurrencyConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: DeleteProvisionedConcurrencyConfigCommandOutput) => void
   ): void;
-  public deleteProvisionedConcurrencyConfig(
-    args: DeleteProvisionedConcurrencyConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteProvisionedConcurrencyConfigCommandOutput) => void),
-    cb?: (err: any, data?: DeleteProvisionedConcurrencyConfigCommandOutput) => void
-  ): Promise<DeleteProvisionedConcurrencyConfigCommandOutput> | void {
-    const command = new DeleteProvisionedConcurrencyConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves details about your account's <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limits</a> and usage in an Amazon Web Services Region.</p>
+   * @see {@link DeleteResourcePolicyCommand}
    */
-  public getAccountSettings(
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAccountSettingsCommand}
+   */
+  getAccountSettings(): Promise<GetAccountSettingsCommandOutput>;
+  getAccountSettings(
     args: GetAccountSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetAccountSettingsCommandOutput>;
-  public getAccountSettings(
+  getAccountSettings(
     args: GetAccountSettingsCommandInput,
     cb: (err: any, data?: GetAccountSettingsCommandOutput) => void
   ): void;
-  public getAccountSettings(
+  getAccountSettings(
     args: GetAccountSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetAccountSettingsCommandOutput) => void
   ): void;
-  public getAccountSettings(
-    args: GetAccountSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAccountSettingsCommandOutput) => void),
-    cb?: (err: any, data?: GetAccountSettingsCommandOutput) => void
-  ): Promise<GetAccountSettingsCommandOutput> | void {
-    const command = new GetAccountSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns details about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.</p>
+   * @see {@link GetAliasCommand}
    */
-  public getAlias(args: GetAliasCommandInput, options?: __HttpHandlerOptions): Promise<GetAliasCommandOutput>;
-  public getAlias(args: GetAliasCommandInput, cb: (err: any, data?: GetAliasCommandOutput) => void): void;
-  public getAlias(
+  getAlias(
     args: GetAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<GetAliasCommandOutput>;
+  getAlias(
+    args: GetAliasCommandInput,
     cb: (err: any, data?: GetAliasCommandOutput) => void
   ): void;
-  public getAlias(
+  getAlias(
     args: GetAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAliasCommandOutput) => void),
-    cb?: (err: any, data?: GetAliasCommandOutput) => void
-  ): Promise<GetAliasCommandOutput> | void {
-    const command = new GetAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetAliasCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns information about the specified code signing configuration.</p>
+   * @see {@link GetCapacityProviderCommand}
    */
-  public getCodeSigningConfig(
+  getCapacityProvider(
+    args: GetCapacityProviderCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetCapacityProviderCommandOutput>;
+  getCapacityProvider(
+    args: GetCapacityProviderCommandInput,
+    cb: (err: any, data?: GetCapacityProviderCommandOutput) => void
+  ): void;
+  getCapacityProvider(
+    args: GetCapacityProviderCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetCapacityProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCodeSigningConfigCommand}
+   */
+  getCodeSigningConfig(
     args: GetCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetCodeSigningConfigCommandOutput>;
-  public getCodeSigningConfig(
+  getCodeSigningConfig(
     args: GetCodeSigningConfigCommandInput,
     cb: (err: any, data?: GetCodeSigningConfigCommandOutput) => void
   ): void;
-  public getCodeSigningConfig(
+  getCodeSigningConfig(
     args: GetCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetCodeSigningConfigCommandOutput) => void
   ): void;
-  public getCodeSigningConfig(
-    args: GetCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: GetCodeSigningConfigCommandOutput) => void
-  ): Promise<GetCodeSigningConfigCommandOutput> | void {
-    const command = new GetCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns details about an event source mapping. You can get the identifier of a mapping from the output of
-   *         <a>ListEventSourceMappings</a>.</p>
+   * @see {@link GetDurableExecutionCommand}
    */
-  public getEventSourceMapping(
+  getDurableExecution(
+    args: GetDurableExecutionCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetDurableExecutionCommandOutput>;
+  getDurableExecution(
+    args: GetDurableExecutionCommandInput,
+    cb: (err: any, data?: GetDurableExecutionCommandOutput) => void
+  ): void;
+  getDurableExecution(
+    args: GetDurableExecutionCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetDurableExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDurableExecutionHistoryCommand}
+   */
+  getDurableExecutionHistory(
+    args: GetDurableExecutionHistoryCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetDurableExecutionHistoryCommandOutput>;
+  getDurableExecutionHistory(
+    args: GetDurableExecutionHistoryCommandInput,
+    cb: (err: any, data?: GetDurableExecutionHistoryCommandOutput) => void
+  ): void;
+  getDurableExecutionHistory(
+    args: GetDurableExecutionHistoryCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetDurableExecutionHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDurableExecutionStateCommand}
+   */
+  getDurableExecutionState(
+    args: GetDurableExecutionStateCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetDurableExecutionStateCommandOutput>;
+  getDurableExecutionState(
+    args: GetDurableExecutionStateCommandInput,
+    cb: (err: any, data?: GetDurableExecutionStateCommandOutput) => void
+  ): void;
+  getDurableExecutionState(
+    args: GetDurableExecutionStateCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetDurableExecutionStateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEventSourceMappingCommand}
+   */
+  getEventSourceMapping(
     args: GetEventSourceMappingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetEventSourceMappingCommandOutput>;
-  public getEventSourceMapping(
+  getEventSourceMapping(
     args: GetEventSourceMappingCommandInput,
     cb: (err: any, data?: GetEventSourceMappingCommandOutput) => void
   ): void;
-  public getEventSourceMapping(
+  getEventSourceMapping(
     args: GetEventSourceMappingCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetEventSourceMappingCommandOutput) => void
   ): void;
-  public getEventSourceMapping(
-    args: GetEventSourceMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEventSourceMappingCommandOutput) => void),
-    cb?: (err: any, data?: GetEventSourceMappingCommandOutput) => void
-  ): Promise<GetEventSourceMappingCommandOutput> | void {
-    const command = new GetEventSourceMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about the function or function version, with a link to download the deployment package
-   *       that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are
-   *       returned.</p>
+   * @see {@link GetFunctionCommand}
    */
-  public getFunction(args: GetFunctionCommandInput, options?: __HttpHandlerOptions): Promise<GetFunctionCommandOutput>;
-  public getFunction(args: GetFunctionCommandInput, cb: (err: any, data?: GetFunctionCommandOutput) => void): void;
-  public getFunction(
+  getFunction(
     args: GetFunctionCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<GetFunctionCommandOutput>;
+  getFunction(
+    args: GetFunctionCommandInput,
     cb: (err: any, data?: GetFunctionCommandOutput) => void
   ): void;
-  public getFunction(
+  getFunction(
     args: GetFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFunctionCommandOutput) => void),
-    cb?: (err: any, data?: GetFunctionCommandOutput) => void
-  ): Promise<GetFunctionCommandOutput> | void {
-    const command = new GetFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetFunctionCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns the code signing configuration for the specified function.</p>
+   * @see {@link GetFunctionCodeSigningConfigCommand}
    */
-  public getFunctionCodeSigningConfig(
+  getFunctionCodeSigningConfig(
     args: GetFunctionCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetFunctionCodeSigningConfigCommandOutput>;
-  public getFunctionCodeSigningConfig(
+  getFunctionCodeSigningConfig(
     args: GetFunctionCodeSigningConfigCommandInput,
     cb: (err: any, data?: GetFunctionCodeSigningConfigCommandOutput) => void
   ): void;
-  public getFunctionCodeSigningConfig(
+  getFunctionCodeSigningConfig(
     args: GetFunctionCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetFunctionCodeSigningConfigCommandOutput) => void
   ): void;
-  public getFunctionCodeSigningConfig(
-    args: GetFunctionCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFunctionCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: GetFunctionCodeSigningConfigCommandOutput) => void
-  ): Promise<GetFunctionCodeSigningConfigCommandOutput> | void {
-    const command = new GetFunctionCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a
-   *       function, use <a>PutFunctionConcurrency</a>.</p>
+   * @see {@link GetFunctionConcurrencyCommand}
    */
-  public getFunctionConcurrency(
+  getFunctionConcurrency(
     args: GetFunctionConcurrencyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetFunctionConcurrencyCommandOutput>;
-  public getFunctionConcurrency(
+  getFunctionConcurrency(
     args: GetFunctionConcurrencyCommandInput,
     cb: (err: any, data?: GetFunctionConcurrencyCommandOutput) => void
   ): void;
-  public getFunctionConcurrency(
+  getFunctionConcurrency(
     args: GetFunctionConcurrencyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetFunctionConcurrencyCommandOutput) => void
   ): void;
-  public getFunctionConcurrency(
-    args: GetFunctionConcurrencyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFunctionConcurrencyCommandOutput) => void),
-    cb?: (err: any, data?: GetFunctionConcurrencyCommandOutput) => void
-  ): Promise<GetFunctionConcurrencyCommandOutput> | void {
-    const command = new GetFunctionConcurrencyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the version-specific settings of a Lambda function or version. The output includes only options that
-   *       can vary between versions of a function. To modify these settings, use <a>UpdateFunctionConfiguration</a>.</p>
-   *          <p>To get all of a function's details, including function-level settings, use <a>GetFunction</a>.</p>
+   * @see {@link GetFunctionConfigurationCommand}
    */
-  public getFunctionConfiguration(
+  getFunctionConfiguration(
     args: GetFunctionConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetFunctionConfigurationCommandOutput>;
-  public getFunctionConfiguration(
+  getFunctionConfiguration(
     args: GetFunctionConfigurationCommandInput,
     cb: (err: any, data?: GetFunctionConfigurationCommandOutput) => void
   ): void;
-  public getFunctionConfiguration(
+  getFunctionConfiguration(
     args: GetFunctionConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetFunctionConfigurationCommandOutput) => void
   ): void;
-  public getFunctionConfiguration(
-    args: GetFunctionConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFunctionConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetFunctionConfigurationCommandOutput) => void
-  ): Promise<GetFunctionConfigurationCommandOutput> | void {
-    const command = new GetFunctionConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the configuration for asynchronous invocation for a function, version, or alias.</p>
-   *          <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>
+   * @see {@link GetFunctionEventInvokeConfigCommand}
    */
-  public getFunctionEventInvokeConfig(
+  getFunctionEventInvokeConfig(
     args: GetFunctionEventInvokeConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetFunctionEventInvokeConfigCommandOutput>;
-  public getFunctionEventInvokeConfig(
+  getFunctionEventInvokeConfig(
     args: GetFunctionEventInvokeConfigCommandInput,
     cb: (err: any, data?: GetFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public getFunctionEventInvokeConfig(
+  getFunctionEventInvokeConfig(
     args: GetFunctionEventInvokeConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public getFunctionEventInvokeConfig(
-    args: GetFunctionEventInvokeConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFunctionEventInvokeConfigCommandOutput) => void),
-    cb?: (err: any, data?: GetFunctionEventInvokeConfigCommandOutput) => void
-  ): Promise<GetFunctionEventInvokeConfigCommandOutput> | void {
-    const command = new GetFunctionEventInvokeConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>, with a link to download the layer archive
-   *         that's valid for 10 minutes.</p>
+   * @see {@link GetFunctionRecursionConfigCommand}
    */
-  public getLayerVersion(
+  getFunctionRecursionConfig(
+    args: GetFunctionRecursionConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetFunctionRecursionConfigCommandOutput>;
+  getFunctionRecursionConfig(
+    args: GetFunctionRecursionConfigCommandInput,
+    cb: (err: any, data?: GetFunctionRecursionConfigCommandOutput) => void
+  ): void;
+  getFunctionRecursionConfig(
+    args: GetFunctionRecursionConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetFunctionRecursionConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFunctionScalingConfigCommand}
+   */
+  getFunctionScalingConfig(
+    args: GetFunctionScalingConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetFunctionScalingConfigCommandOutput>;
+  getFunctionScalingConfig(
+    args: GetFunctionScalingConfigCommandInput,
+    cb: (err: any, data?: GetFunctionScalingConfigCommandOutput) => void
+  ): void;
+  getFunctionScalingConfig(
+    args: GetFunctionScalingConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetFunctionScalingConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFunctionUrlConfigCommand}
+   */
+  getFunctionUrlConfig(
+    args: GetFunctionUrlConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetFunctionUrlConfigCommandOutput>;
+  getFunctionUrlConfig(
+    args: GetFunctionUrlConfigCommandInput,
+    cb: (err: any, data?: GetFunctionUrlConfigCommandOutput) => void
+  ): void;
+  getFunctionUrlConfig(
+    args: GetFunctionUrlConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetFunctionUrlConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLayerVersionCommand}
+   */
+  getLayerVersion(
     args: GetLayerVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetLayerVersionCommandOutput>;
-  public getLayerVersion(
+  getLayerVersion(
     args: GetLayerVersionCommandInput,
     cb: (err: any, data?: GetLayerVersionCommandOutput) => void
   ): void;
-  public getLayerVersion(
+  getLayerVersion(
     args: GetLayerVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetLayerVersionCommandOutput) => void
   ): void;
-  public getLayerVersion(
-    args: GetLayerVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLayerVersionCommandOutput) => void),
-    cb?: (err: any, data?: GetLayerVersionCommandOutput) => void
-  ): Promise<GetLayerVersionCommandOutput> | void {
-    const command = new GetLayerVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>, with a link to download the layer archive
-   *         that's valid for 10 minutes.</p>
+   * @see {@link GetLayerVersionByArnCommand}
    */
-  public getLayerVersionByArn(
+  getLayerVersionByArn(
     args: GetLayerVersionByArnCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetLayerVersionByArnCommandOutput>;
-  public getLayerVersionByArn(
+  getLayerVersionByArn(
     args: GetLayerVersionByArnCommandInput,
     cb: (err: any, data?: GetLayerVersionByArnCommandOutput) => void
   ): void;
-  public getLayerVersionByArn(
+  getLayerVersionByArn(
     args: GetLayerVersionByArnCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetLayerVersionByArnCommandOutput) => void
   ): void;
-  public getLayerVersionByArn(
-    args: GetLayerVersionByArnCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLayerVersionByArnCommandOutput) => void),
-    cb?: (err: any, data?: GetLayerVersionByArnCommandOutput) => void
-  ): Promise<GetLayerVersionByArnCommandOutput> | void {
-    const command = new GetLayerVersionByArnCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the permission policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>. For more information, see <a>AddLayerVersionPermission</a>.</p>
+   * @see {@link GetLayerVersionPolicyCommand}
    */
-  public getLayerVersionPolicy(
+  getLayerVersionPolicy(
     args: GetLayerVersionPolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetLayerVersionPolicyCommandOutput>;
-  public getLayerVersionPolicy(
+  getLayerVersionPolicy(
     args: GetLayerVersionPolicyCommandInput,
     cb: (err: any, data?: GetLayerVersionPolicyCommandOutput) => void
   ): void;
-  public getLayerVersionPolicy(
+  getLayerVersionPolicy(
     args: GetLayerVersionPolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetLayerVersionPolicyCommandOutput) => void
   ): void;
-  public getLayerVersionPolicy(
-    args: GetLayerVersionPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLayerVersionPolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetLayerVersionPolicyCommandOutput) => void
-  ): Promise<GetLayerVersionPolicyCommandOutput> | void {
-    const command = new GetLayerVersionPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">resource-based IAM policy</a> for a function, version, or alias.</p>
+   * @see {@link GetPolicyCommand}
    */
-  public getPolicy(args: GetPolicyCommandInput, options?: __HttpHandlerOptions): Promise<GetPolicyCommandOutput>;
-  public getPolicy(args: GetPolicyCommandInput, cb: (err: any, data?: GetPolicyCommandOutput) => void): void;
-  public getPolicy(
+  getPolicy(
     args: GetPolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<GetPolicyCommandOutput>;
+  getPolicy(
+    args: GetPolicyCommandInput,
     cb: (err: any, data?: GetPolicyCommandOutput) => void
   ): void;
-  public getPolicy(
+  getPolicy(
     args: GetPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetPolicyCommandOutput) => void
-  ): Promise<GetPolicyCommandOutput> | void {
-    const command = new GetPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetPolicyCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>
+   * @see {@link GetProvisionedConcurrencyConfigCommand}
    */
-  public getProvisionedConcurrencyConfig(
+  getProvisionedConcurrencyConfig(
     args: GetProvisionedConcurrencyConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<GetProvisionedConcurrencyConfigCommandOutput>;
-  public getProvisionedConcurrencyConfig(
+  getProvisionedConcurrencyConfig(
     args: GetProvisionedConcurrencyConfigCommandInput,
     cb: (err: any, data?: GetProvisionedConcurrencyConfigCommandOutput) => void
   ): void;
-  public getProvisionedConcurrencyConfig(
+  getProvisionedConcurrencyConfig(
     args: GetProvisionedConcurrencyConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: GetProvisionedConcurrencyConfigCommandOutput) => void
   ): void;
-  public getProvisionedConcurrencyConfig(
-    args: GetProvisionedConcurrencyConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetProvisionedConcurrencyConfigCommandOutput) => void),
-    cb?: (err: any, data?: GetProvisionedConcurrencyConfigCommandOutput) => void
-  ): Promise<GetProvisionedConcurrencyConfigCommandOutput> | void {
-    const command = new GetProvisionedConcurrencyConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or
-   *       asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p>
-   *
-   *          <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html">synchronous invocation</a>,
-   *       details about the function response, including errors, are included in the response body and headers. For either
-   *       invocation type, you can find more information in the <a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html">execution log</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html">trace</a>.</p>
-   *
-   *          <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type,
-   *       client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an
-   *       error, Lambda executes the function up to two more times. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html">Retry Behavior</a>.</p>
-   *
-   *          <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a>,
-   *       Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity
-   *       to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple
-   *       times, even if no error occurs. To retain events that were not processed, configure your function with a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a>.</p>
-   *
-   *          <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that
-   *       prevent your function from executing, such as permissions errors, <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limit errors</a>, or issues with your function's code and configuration.
-   *       For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to
-   *       exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or
-   *       function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p>
-   *
-   *          <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it
-   *       waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long
-   *       connections with timeout or keep-alive settings.</p>
-   *
-   *          <p>This operation requires permission for the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html">lambda:InvokeFunction</a> action.</p>
+   * @see {@link GetResourcePolicyCommand}
    */
-  public invoke(args: InvokeCommandInput, options?: __HttpHandlerOptions): Promise<InvokeCommandOutput>;
-  public invoke(args: InvokeCommandInput, cb: (err: any, data?: InvokeCommandOutput) => void): void;
-  public invoke(
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRuntimeManagementConfigCommand}
+   */
+  getRuntimeManagementConfig(
+    args: GetRuntimeManagementConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<GetRuntimeManagementConfigCommandOutput>;
+  getRuntimeManagementConfig(
+    args: GetRuntimeManagementConfigCommandInput,
+    cb: (err: any, data?: GetRuntimeManagementConfigCommandOutput) => void
+  ): void;
+  getRuntimeManagementConfig(
+    args: GetRuntimeManagementConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: GetRuntimeManagementConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeCommand}
+   */
+  invoke(
     args: InvokeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<InvokeCommandOutput>;
+  invoke(
+    args: InvokeCommandInput,
     cb: (err: any, data?: InvokeCommandOutput) => void
   ): void;
-  public invoke(
+  invoke(
     args: InvokeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InvokeCommandOutput) => void),
-    cb?: (err: any, data?: InvokeCommandOutput) => void
-  ): Promise<InvokeCommandOutput> | void {
-    const command = new InvokeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: InvokeCommandOutput) => void
+  ): void;
 
   /**
-   * @deprecated
-   *
-   * <important>
-   *             <p>For asynchronous function invocation, use <a>Invoke</a>.</p>
-   *          </important>
-   *          <p>Invokes a function asynchronously.</p>
+   * @see {@link InvokeAsyncCommand}
    */
-  public invokeAsync(args: InvokeAsyncCommandInput, options?: __HttpHandlerOptions): Promise<InvokeAsyncCommandOutput>;
-  public invokeAsync(args: InvokeAsyncCommandInput, cb: (err: any, data?: InvokeAsyncCommandOutput) => void): void;
-  public invokeAsync(
+  invokeAsync(
     args: InvokeAsyncCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<InvokeAsyncCommandOutput>;
+  invokeAsync(
+    args: InvokeAsyncCommandInput,
     cb: (err: any, data?: InvokeAsyncCommandOutput) => void
   ): void;
-  public invokeAsync(
+  invokeAsync(
     args: InvokeAsyncCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InvokeAsyncCommandOutput) => void),
-    cb?: (err: any, data?: InvokeAsyncCommandOutput) => void
-  ): Promise<InvokeAsyncCommandOutput> | void {
-    const command = new InvokeAsyncCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: InvokeAsyncCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">aliases</a>
-   *       for a Lambda function.</p>
+   * @see {@link InvokeWithResponseStreamCommand}
    */
-  public listAliases(args: ListAliasesCommandInput, options?: __HttpHandlerOptions): Promise<ListAliasesCommandOutput>;
-  public listAliases(args: ListAliasesCommandInput, cb: (err: any, data?: ListAliasesCommandOutput) => void): void;
-  public listAliases(
+  invokeWithResponseStream(
+    args: InvokeWithResponseStreamCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<InvokeWithResponseStreamCommandOutput>;
+  invokeWithResponseStream(
+    args: InvokeWithResponseStreamCommandInput,
+    cb: (err: any, data?: InvokeWithResponseStreamCommandOutput) => void
+  ): void;
+  invokeWithResponseStream(
+    args: InvokeWithResponseStreamCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: InvokeWithResponseStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAliasesCommand}
+   */
+  listAliases(
     args: ListAliasesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<ListAliasesCommandOutput>;
+  listAliases(
+    args: ListAliasesCommandInput,
     cb: (err: any, data?: ListAliasesCommandOutput) => void
   ): void;
-  public listAliases(
+  listAliases(
     args: ListAliasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAliasesCommandOutput) => void),
-    cb?: (err: any, data?: ListAliasesCommandOutput) => void
-  ): Promise<ListAliasesCommandOutput> | void {
-    const command = new ListAliasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListAliasesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html">code
-   *         signing configurations</a>. A request returns up to 10,000 configurations per
-   *       call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. </p>
+   * @see {@link ListCapacityProvidersCommand}
    */
-  public listCodeSigningConfigs(
+  listCapacityProviders(): Promise<ListCapacityProvidersCommandOutput>;
+  listCapacityProviders(
+    args: ListCapacityProvidersCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<ListCapacityProvidersCommandOutput>;
+  listCapacityProviders(
+    args: ListCapacityProvidersCommandInput,
+    cb: (err: any, data?: ListCapacityProvidersCommandOutput) => void
+  ): void;
+  listCapacityProviders(
+    args: ListCapacityProvidersCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListCapacityProvidersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCodeSigningConfigsCommand}
+   */
+  listCodeSigningConfigs(): Promise<ListCodeSigningConfigsCommandOutput>;
+  listCodeSigningConfigs(
     args: ListCodeSigningConfigsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListCodeSigningConfigsCommandOutput>;
-  public listCodeSigningConfigs(
+  listCodeSigningConfigs(
     args: ListCodeSigningConfigsCommandInput,
     cb: (err: any, data?: ListCodeSigningConfigsCommandOutput) => void
   ): void;
-  public listCodeSigningConfigs(
+  listCodeSigningConfigs(
     args: ListCodeSigningConfigsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListCodeSigningConfigsCommandOutput) => void
   ): void;
-  public listCodeSigningConfigs(
-    args: ListCodeSigningConfigsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCodeSigningConfigsCommandOutput) => void),
-    cb?: (err: any, data?: ListCodeSigningConfigsCommandOutput) => void
-  ): Promise<ListCodeSigningConfigsCommandOutput> | void {
-    const command = new ListCodeSigningConfigsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists event source mappings. Specify an <code>EventSourceArn</code> to only show event source mappings for a
-   *       single event source.</p>
+   * @see {@link ListDurableExecutionsByFunctionCommand}
    */
-  public listEventSourceMappings(
+  listDurableExecutionsByFunction(
+    args: ListDurableExecutionsByFunctionCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<ListDurableExecutionsByFunctionCommandOutput>;
+  listDurableExecutionsByFunction(
+    args: ListDurableExecutionsByFunctionCommandInput,
+    cb: (err: any, data?: ListDurableExecutionsByFunctionCommandOutput) => void
+  ): void;
+  listDurableExecutionsByFunction(
+    args: ListDurableExecutionsByFunctionCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListDurableExecutionsByFunctionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEventSourceMappingsCommand}
+   */
+  listEventSourceMappings(): Promise<ListEventSourceMappingsCommandOutput>;
+  listEventSourceMappings(
     args: ListEventSourceMappingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListEventSourceMappingsCommandOutput>;
-  public listEventSourceMappings(
+  listEventSourceMappings(
     args: ListEventSourceMappingsCommandInput,
     cb: (err: any, data?: ListEventSourceMappingsCommandOutput) => void
   ): void;
-  public listEventSourceMappings(
+  listEventSourceMappings(
     args: ListEventSourceMappingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListEventSourceMappingsCommandOutput) => void
   ): void;
-  public listEventSourceMappings(
-    args: ListEventSourceMappingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventSourceMappingsCommandOutput) => void),
-    cb?: (err: any, data?: ListEventSourceMappingsCommandOutput) => void
-  ): Promise<ListEventSourceMappingsCommandOutput> | void {
-    const command = new ListEventSourceMappingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of configurations for asynchronous invocation for a function.</p>
-   *          <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>
+   * @see {@link ListFunctionEventInvokeConfigsCommand}
    */
-  public listFunctionEventInvokeConfigs(
+  listFunctionEventInvokeConfigs(
     args: ListFunctionEventInvokeConfigsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListFunctionEventInvokeConfigsCommandOutput>;
-  public listFunctionEventInvokeConfigs(
+  listFunctionEventInvokeConfigs(
     args: ListFunctionEventInvokeConfigsCommandInput,
     cb: (err: any, data?: ListFunctionEventInvokeConfigsCommandOutput) => void
   ): void;
-  public listFunctionEventInvokeConfigs(
+  listFunctionEventInvokeConfigs(
     args: ListFunctionEventInvokeConfigsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListFunctionEventInvokeConfigsCommandOutput) => void
   ): void;
-  public listFunctionEventInvokeConfigs(
-    args: ListFunctionEventInvokeConfigsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFunctionEventInvokeConfigsCommandOutput) => void),
-    cb?: (err: any, data?: ListFunctionEventInvokeConfigsCommandOutput) => void
-  ): Promise<ListFunctionEventInvokeConfigsCommandOutput> | void {
-    const command = new ListFunctionEventInvokeConfigsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50
-   *       functions per call.</p>
-   *          <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in
-   *       addition to the unpublished version. </p>
-   *          <note>
-   *             <p>The <code>ListFunctions</code> action returns a subset of the <a>FunctionConfiguration</a> fields.
-   *       To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode)
-   *       for a function or version, use <a>GetFunction</a>.</p>
-   *          </note>
+   * @see {@link ListFunctionsCommand}
    */
-  public listFunctions(
+  listFunctions(): Promise<ListFunctionsCommandOutput>;
+  listFunctions(
     args: ListFunctionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListFunctionsCommandOutput>;
-  public listFunctions(
+  listFunctions(
     args: ListFunctionsCommandInput,
     cb: (err: any, data?: ListFunctionsCommandOutput) => void
   ): void;
-  public listFunctions(
+  listFunctions(
     args: ListFunctionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListFunctionsCommandOutput) => void
   ): void;
-  public listFunctions(
-    args: ListFunctionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFunctionsCommandOutput) => void),
-    cb?: (err: any, data?: ListFunctionsCommandOutput) => void
-  ): Promise<ListFunctionsCommandOutput> | void {
-    const command = new ListFunctionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List the functions that use the specified code signing configuration. You can use this method prior to deleting a
-   *       code signing configuration, to verify that no functions are using it.</p>
+   * @see {@link ListFunctionsByCodeSigningConfigCommand}
    */
-  public listFunctionsByCodeSigningConfig(
+  listFunctionsByCodeSigningConfig(
     args: ListFunctionsByCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListFunctionsByCodeSigningConfigCommandOutput>;
-  public listFunctionsByCodeSigningConfig(
+  listFunctionsByCodeSigningConfig(
     args: ListFunctionsByCodeSigningConfigCommandInput,
     cb: (err: any, data?: ListFunctionsByCodeSigningConfigCommandOutput) => void
   ): void;
-  public listFunctionsByCodeSigningConfig(
+  listFunctionsByCodeSigningConfig(
     args: ListFunctionsByCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListFunctionsByCodeSigningConfigCommandOutput) => void
   ): void;
-  public listFunctionsByCodeSigningConfig(
-    args: ListFunctionsByCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFunctionsByCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: ListFunctionsByCodeSigningConfigCommandOutput) => void
-  ): Promise<ListFunctionsByCodeSigningConfigCommandOutput> | void {
-    const command = new ListFunctionsByCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html">Lambda
-   *         layers</a> and shows information about the latest version of each. Specify a
-   *         <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime
-   *         identifier</a> to list only layers that indicate that they're compatible with that
-   *       runtime. Specify a compatible architecture to include only layers that are compatible with
-   *       that  <a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">instruction set architecture</a>.</p>
+   * @see {@link ListFunctionUrlConfigsCommand}
    */
-  public listLayers(args: ListLayersCommandInput, options?: __HttpHandlerOptions): Promise<ListLayersCommandOutput>;
-  public listLayers(args: ListLayersCommandInput, cb: (err: any, data?: ListLayersCommandOutput) => void): void;
-  public listLayers(
+  listFunctionUrlConfigs(
+    args: ListFunctionUrlConfigsCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<ListFunctionUrlConfigsCommandOutput>;
+  listFunctionUrlConfigs(
+    args: ListFunctionUrlConfigsCommandInput,
+    cb: (err: any, data?: ListFunctionUrlConfigsCommandOutput) => void
+  ): void;
+  listFunctionUrlConfigs(
+    args: ListFunctionUrlConfigsCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListFunctionUrlConfigsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFunctionVersionsByCapacityProviderCommand}
+   */
+  listFunctionVersionsByCapacityProvider(
+    args: ListFunctionVersionsByCapacityProviderCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<ListFunctionVersionsByCapacityProviderCommandOutput>;
+  listFunctionVersionsByCapacityProvider(
+    args: ListFunctionVersionsByCapacityProviderCommandInput,
+    cb: (err: any, data?: ListFunctionVersionsByCapacityProviderCommandOutput) => void
+  ): void;
+  listFunctionVersionsByCapacityProvider(
+    args: ListFunctionVersionsByCapacityProviderCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListFunctionVersionsByCapacityProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLayersCommand}
+   */
+  listLayers(): Promise<ListLayersCommandOutput>;
+  listLayers(
     args: ListLayersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<ListLayersCommandOutput>;
+  listLayers(
+    args: ListLayersCommandInput,
     cb: (err: any, data?: ListLayersCommandOutput) => void
   ): void;
-  public listLayers(
+  listLayers(
     args: ListLayersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLayersCommandOutput) => void),
-    cb?: (err: any, data?: ListLayersCommandOutput) => void
-  ): Promise<ListLayersCommandOutput> | void {
-    const command = new ListLayersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListLayersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the versions of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>. Versions that have been deleted aren't listed. Specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only
-   *       versions that indicate that they're compatible with that runtime. Specify a compatible architecture to include only
-   *       layer versions that are compatible with that architecture.</p>
+   * @see {@link ListLayerVersionsCommand}
    */
-  public listLayerVersions(
+  listLayerVersions(
     args: ListLayerVersionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListLayerVersionsCommandOutput>;
-  public listLayerVersions(
+  listLayerVersions(
     args: ListLayerVersionsCommandInput,
     cb: (err: any, data?: ListLayerVersionsCommandOutput) => void
   ): void;
-  public listLayerVersions(
+  listLayerVersions(
     args: ListLayerVersionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListLayerVersionsCommandOutput) => void
   ): void;
-  public listLayerVersions(
-    args: ListLayerVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLayerVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListLayerVersionsCommandOutput) => void
-  ): Promise<ListLayerVersionsCommandOutput> | void {
-    const command = new ListLayerVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of provisioned concurrency configurations for a function.</p>
+   * @see {@link ListProvisionedConcurrencyConfigsCommand}
    */
-  public listProvisionedConcurrencyConfigs(
+  listProvisionedConcurrencyConfigs(
     args: ListProvisionedConcurrencyConfigsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListProvisionedConcurrencyConfigsCommandOutput>;
-  public listProvisionedConcurrencyConfigs(
+  listProvisionedConcurrencyConfigs(
     args: ListProvisionedConcurrencyConfigsCommandInput,
     cb: (err: any, data?: ListProvisionedConcurrencyConfigsCommandOutput) => void
   ): void;
-  public listProvisionedConcurrencyConfigs(
+  listProvisionedConcurrencyConfigs(
     args: ListProvisionedConcurrencyConfigsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListProvisionedConcurrencyConfigsCommandOutput) => void
   ): void;
-  public listProvisionedConcurrencyConfigs(
-    args: ListProvisionedConcurrencyConfigsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListProvisionedConcurrencyConfigsCommandOutput) => void),
-    cb?: (err: any, data?: ListProvisionedConcurrencyConfigsCommandOutput) => void
-  ): Promise<ListProvisionedConcurrencyConfigsCommandOutput> | void {
-    const command = new ListProvisionedConcurrencyConfigsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>. You can
-   *       also view tags with <a>GetFunction</a>.</p>
+   * @see {@link ListTagsCommand}
    */
-  public listTags(args: ListTagsCommandInput, options?: __HttpHandlerOptions): Promise<ListTagsCommandOutput>;
-  public listTags(args: ListTagsCommandInput, cb: (err: any, data?: ListTagsCommandOutput) => void): void;
-  public listTags(
+  listTags(
     args: ListTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<ListTagsCommandOutput>;
+  listTags(
+    args: ListTagsCommandInput,
     cb: (err: any, data?: ListTagsCommandOutput) => void
   ): void;
-  public listTags(
+  listTags(
     args: ListTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsCommandOutput) => void
-  ): Promise<ListTagsCommandOutput> | void {
-    const command = new ListTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: ListTagsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">versions</a>,
-   *       with the version-specific configuration of each. Lambda returns up to 50 versions per call.</p>
+   * @see {@link ListVersionsByFunctionCommand}
    */
-  public listVersionsByFunction(
+  listVersionsByFunction(
     args: ListVersionsByFunctionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<ListVersionsByFunctionCommandOutput>;
-  public listVersionsByFunction(
+  listVersionsByFunction(
     args: ListVersionsByFunctionCommandInput,
     cb: (err: any, data?: ListVersionsByFunctionCommandOutput) => void
   ): void;
-  public listVersionsByFunction(
+  listVersionsByFunction(
     args: ListVersionsByFunctionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: ListVersionsByFunctionCommandOutput) => void
   ): void;
-  public listVersionsByFunction(
-    args: ListVersionsByFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListVersionsByFunctionCommandOutput) => void),
-    cb?: (err: any, data?: ListVersionsByFunctionCommandOutput) => void
-  ): Promise<ListVersionsByFunctionCommandOutput> | void {
-    const command = new ListVersionsByFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same
-   *       layer name, a new version is created.</p>
-   *          <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>
+   * @see {@link PublishLayerVersionCommand}
    */
-  public publishLayerVersion(
+  publishLayerVersion(
     args: PublishLayerVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<PublishLayerVersionCommandOutput>;
-  public publishLayerVersion(
+  publishLayerVersion(
     args: PublishLayerVersionCommandInput,
     cb: (err: any, data?: PublishLayerVersionCommandOutput) => void
   ): void;
-  public publishLayerVersion(
+  publishLayerVersion(
     args: PublishLayerVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: PublishLayerVersionCommandOutput) => void
   ): void;
-  public publishLayerVersion(
-    args: PublishLayerVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PublishLayerVersionCommandOutput) => void),
-    cb?: (err: any, data?: PublishLayerVersionCommandOutput) => void
-  ): Promise<PublishLayerVersionCommandOutput> | void {
-    const command = new PublishLayerVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">version</a> from the
-   *       current code and configuration of a function. Use versions to create a snapshot of your function code and
-   *       configuration that doesn't change.</p>
-   *
-   *          <p>Lambda doesn't publish a version if the function's configuration and code haven't changed since the last
-   *       version. Use <a>UpdateFunctionCode</a> or <a>UpdateFunctionConfiguration</a> to update the
-   *       function before publishing a version.</p>
-   *
-   *          <p>Clients can invoke versions directly or with an alias. To create an alias, use <a>CreateAlias</a>.</p>
+   * @see {@link PublishVersionCommand}
    */
-  public publishVersion(
+  publishVersion(
     args: PublishVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<PublishVersionCommandOutput>;
-  public publishVersion(
+  publishVersion(
     args: PublishVersionCommandInput,
     cb: (err: any, data?: PublishVersionCommandOutput) => void
   ): void;
-  public publishVersion(
+  publishVersion(
     args: PublishVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: PublishVersionCommandOutput) => void
   ): void;
-  public publishVersion(
-    args: PublishVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PublishVersionCommandOutput) => void),
-    cb?: (err: any, data?: PublishVersionCommandOutput) => void
-  ): Promise<PublishVersionCommandOutput> | void {
-    const command = new PublishVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update the code signing configuration for the function. Changes to the code signing configuration take effect the
-   *       next time a user tries to deploy a code package to the function. </p>
+   * @see {@link PutFunctionCodeSigningConfigCommand}
    */
-  public putFunctionCodeSigningConfig(
+  putFunctionCodeSigningConfig(
     args: PutFunctionCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<PutFunctionCodeSigningConfigCommandOutput>;
-  public putFunctionCodeSigningConfig(
+  putFunctionCodeSigningConfig(
     args: PutFunctionCodeSigningConfigCommandInput,
     cb: (err: any, data?: PutFunctionCodeSigningConfigCommandOutput) => void
   ): void;
-  public putFunctionCodeSigningConfig(
+  putFunctionCodeSigningConfig(
     args: PutFunctionCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: PutFunctionCodeSigningConfigCommandOutput) => void
   ): void;
-  public putFunctionCodeSigningConfig(
-    args: PutFunctionCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutFunctionCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: PutFunctionCodeSigningConfigCommandOutput) => void
-  ): Promise<PutFunctionCodeSigningConfigCommandOutput> | void {
-    const command = new PutFunctionCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency
-   *       level.</p>
-   *          <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished
-   *       version. Reserving concurrency both ensures that your function has capacity to process the specified number of
-   *       events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see
-   *       the current setting for a function.</p>
-   *          <p>Use <a>GetAccountSettings</a> to see your Regional concurrency limit. You can reserve concurrency
-   *       for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for
-   *       functions that aren't configured with a per-function limit. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.</p>
+   * @see {@link PutFunctionConcurrencyCommand}
    */
-  public putFunctionConcurrency(
+  putFunctionConcurrency(
     args: PutFunctionConcurrencyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<PutFunctionConcurrencyCommandOutput>;
-  public putFunctionConcurrency(
+  putFunctionConcurrency(
     args: PutFunctionConcurrencyCommandInput,
     cb: (err: any, data?: PutFunctionConcurrencyCommandOutput) => void
   ): void;
-  public putFunctionConcurrency(
+  putFunctionConcurrency(
     args: PutFunctionConcurrencyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: PutFunctionConcurrencyCommandOutput) => void
   ): void;
-  public putFunctionConcurrency(
-    args: PutFunctionConcurrencyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutFunctionConcurrencyCommandOutput) => void),
-    cb?: (err: any, data?: PutFunctionConcurrencyCommandOutput) => void
-  ): Promise<PutFunctionConcurrencyCommandOutput> | void {
-    const command = new PutFunctionConcurrencyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous
-   *         invocation</a> on a function, version, or alias. If a configuration already exists for a function, version,
-   *       or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without
-   *       affecting existing settings for other options, use <a>UpdateFunctionEventInvokeConfig</a>.</p>
-   *          <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains
-   *       events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous
-   *       invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with
-   *         <a>UpdateFunctionConfiguration</a>.</p>
-   *          <p>To send an invocation record to a queue, topic, function, or event bus, specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations">destination</a>. You can configure separate destinations for successful invocations (on-success) and events
-   *       that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a
-   *       dead-letter queue.</p>
+   * @see {@link PutFunctionEventInvokeConfigCommand}
    */
-  public putFunctionEventInvokeConfig(
+  putFunctionEventInvokeConfig(
     args: PutFunctionEventInvokeConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<PutFunctionEventInvokeConfigCommandOutput>;
-  public putFunctionEventInvokeConfig(
+  putFunctionEventInvokeConfig(
     args: PutFunctionEventInvokeConfigCommandInput,
     cb: (err: any, data?: PutFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public putFunctionEventInvokeConfig(
+  putFunctionEventInvokeConfig(
     args: PutFunctionEventInvokeConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: PutFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public putFunctionEventInvokeConfig(
-    args: PutFunctionEventInvokeConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutFunctionEventInvokeConfigCommandOutput) => void),
-    cb?: (err: any, data?: PutFunctionEventInvokeConfigCommandOutput) => void
-  ): Promise<PutFunctionEventInvokeConfigCommandOutput> | void {
-    const command = new PutFunctionEventInvokeConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds a provisioned concurrency configuration to a function's alias or version.</p>
+   * @see {@link PutFunctionRecursionConfigCommand}
    */
-  public putProvisionedConcurrencyConfig(
+  putFunctionRecursionConfig(
+    args: PutFunctionRecursionConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<PutFunctionRecursionConfigCommandOutput>;
+  putFunctionRecursionConfig(
+    args: PutFunctionRecursionConfigCommandInput,
+    cb: (err: any, data?: PutFunctionRecursionConfigCommandOutput) => void
+  ): void;
+  putFunctionRecursionConfig(
+    args: PutFunctionRecursionConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: PutFunctionRecursionConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutFunctionScalingConfigCommand}
+   */
+  putFunctionScalingConfig(
+    args: PutFunctionScalingConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<PutFunctionScalingConfigCommandOutput>;
+  putFunctionScalingConfig(
+    args: PutFunctionScalingConfigCommandInput,
+    cb: (err: any, data?: PutFunctionScalingConfigCommandOutput) => void
+  ): void;
+  putFunctionScalingConfig(
+    args: PutFunctionScalingConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: PutFunctionScalingConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutProvisionedConcurrencyConfigCommand}
+   */
+  putProvisionedConcurrencyConfig(
     args: PutProvisionedConcurrencyConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<PutProvisionedConcurrencyConfigCommandOutput>;
-  public putProvisionedConcurrencyConfig(
+  putProvisionedConcurrencyConfig(
     args: PutProvisionedConcurrencyConfigCommandInput,
     cb: (err: any, data?: PutProvisionedConcurrencyConfigCommandOutput) => void
   ): void;
-  public putProvisionedConcurrencyConfig(
+  putProvisionedConcurrencyConfig(
     args: PutProvisionedConcurrencyConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: PutProvisionedConcurrencyConfigCommandOutput) => void
   ): void;
-  public putProvisionedConcurrencyConfig(
-    args: PutProvisionedConcurrencyConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutProvisionedConcurrencyConfigCommandOutput) => void),
-    cb?: (err: any, data?: PutProvisionedConcurrencyConfigCommandOutput) => void
-  ): Promise<PutProvisionedConcurrencyConfigCommandOutput> | void {
-    const command = new PutProvisionedConcurrencyConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a statement from the permissions policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
-   *         layer</a>. For more information, see
-   *         <a>AddLayerVersionPermission</a>.</p>
+   * @see {@link PutResourcePolicyCommand}
    */
-  public removeLayerVersionPermission(
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRuntimeManagementConfigCommand}
+   */
+  putRuntimeManagementConfig(
+    args: PutRuntimeManagementConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<PutRuntimeManagementConfigCommandOutput>;
+  putRuntimeManagementConfig(
+    args: PutRuntimeManagementConfigCommandInput,
+    cb: (err: any, data?: PutRuntimeManagementConfigCommandOutput) => void
+  ): void;
+  putRuntimeManagementConfig(
+    args: PutRuntimeManagementConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: PutRuntimeManagementConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveLayerVersionPermissionCommand}
+   */
+  removeLayerVersionPermission(
     args: RemoveLayerVersionPermissionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<RemoveLayerVersionPermissionCommandOutput>;
-  public removeLayerVersionPermission(
+  removeLayerVersionPermission(
     args: RemoveLayerVersionPermissionCommandInput,
     cb: (err: any, data?: RemoveLayerVersionPermissionCommandOutput) => void
   ): void;
-  public removeLayerVersionPermission(
+  removeLayerVersionPermission(
     args: RemoveLayerVersionPermissionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: RemoveLayerVersionPermissionCommandOutput) => void
   ): void;
-  public removeLayerVersionPermission(
-    args: RemoveLayerVersionPermissionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveLayerVersionPermissionCommandOutput) => void),
-    cb?: (err: any, data?: RemoveLayerVersionPermissionCommandOutput) => void
-  ): Promise<RemoveLayerVersionPermissionCommandOutput> | void {
-    const command = new RemoveLayerVersionPermissionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Revokes function-use permission from an Amazon Web Services service or another account. You can get the ID of the statement
-   *       from the output of <a>GetPolicy</a>.</p>
+   * @see {@link RemovePermissionCommand}
    */
-  public removePermission(
+  removePermission(
     args: RemovePermissionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<RemovePermissionCommandOutput>;
-  public removePermission(
+  removePermission(
     args: RemovePermissionCommandInput,
     cb: (err: any, data?: RemovePermissionCommandOutput) => void
   ): void;
-  public removePermission(
+  removePermission(
     args: RemovePermissionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: RemovePermissionCommandOutput) => void
   ): void;
-  public removePermission(
-    args: RemovePermissionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemovePermissionCommandOutput) => void),
-    cb?: (err: any, data?: RemovePermissionCommandOutput) => void
-  ): Promise<RemovePermissionCommandOutput> | void {
-    const command = new RemovePermissionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to a function.</p>
+   * @see {@link SendDurableExecutionCallbackFailureCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  sendDurableExecutionCallbackFailure(
+    args: SendDurableExecutionCallbackFailureCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<SendDurableExecutionCallbackFailureCommandOutput>;
+  sendDurableExecutionCallbackFailure(
+    args: SendDurableExecutionCallbackFailureCommandInput,
+    cb: (err: any, data?: SendDurableExecutionCallbackFailureCommandOutput) => void
+  ): void;
+  sendDurableExecutionCallbackFailure(
+    args: SendDurableExecutionCallbackFailureCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: SendDurableExecutionCallbackFailureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendDurableExecutionCallbackHeartbeatCommand}
+   */
+  sendDurableExecutionCallbackHeartbeat(
+    args: SendDurableExecutionCallbackHeartbeatCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<SendDurableExecutionCallbackHeartbeatCommandOutput>;
+  sendDurableExecutionCallbackHeartbeat(
+    args: SendDurableExecutionCallbackHeartbeatCommandInput,
+    cb: (err: any, data?: SendDurableExecutionCallbackHeartbeatCommandOutput) => void
+  ): void;
+  sendDurableExecutionCallbackHeartbeat(
+    args: SendDurableExecutionCallbackHeartbeatCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: SendDurableExecutionCallbackHeartbeatCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendDurableExecutionCallbackSuccessCommand}
+   */
+  sendDurableExecutionCallbackSuccess(
+    args: SendDurableExecutionCallbackSuccessCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<SendDurableExecutionCallbackSuccessCommandOutput>;
+  sendDurableExecutionCallbackSuccess(
+    args: SendDurableExecutionCallbackSuccessCommandInput,
+    cb: (err: any, data?: SendDurableExecutionCallbackSuccessCommandOutput) => void
+  ): void;
+  sendDurableExecutionCallbackSuccess(
+    args: SendDurableExecutionCallbackSuccessCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: SendDurableExecutionCallbackSuccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopDurableExecutionCommand}
+   */
+  stopDurableExecution(
+    args: StopDurableExecutionCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<StopDurableExecutionCommandOutput>;
+  stopDurableExecution(
+    args: StopDurableExecutionCommandInput,
+    cb: (err: any, data?: StopDurableExecutionCommandOutput) => void
+  ): void;
+  stopDurableExecution(
+    args: StopDurableExecutionCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: StopDurableExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> from a function.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the configuration of a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.</p>
+   * @see {@link UpdateAliasCommand}
    */
-  public updateAlias(args: UpdateAliasCommandInput, options?: __HttpHandlerOptions): Promise<UpdateAliasCommandOutput>;
-  public updateAlias(args: UpdateAliasCommandInput, cb: (err: any, data?: UpdateAliasCommandOutput) => void): void;
-  public updateAlias(
+  updateAlias(
     args: UpdateAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LambdaRequestOptions
+  ): Promise<UpdateAliasCommandOutput>;
+  updateAlias(
+    args: UpdateAliasCommandInput,
     cb: (err: any, data?: UpdateAliasCommandOutput) => void
   ): void;
-  public updateAlias(
+  updateAlias(
     args: UpdateAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAliasCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAliasCommandOutput) => void
-  ): Promise<UpdateAliasCommandOutput> | void {
-    const command = new UpdateAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: UpdateAliasCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Update the code signing configuration. Changes to the code signing configuration take effect the next time a
-   *       user tries to deploy a code package to the function. </p>
+   * @see {@link UpdateCapacityProviderCommand}
    */
-  public updateCodeSigningConfig(
+  updateCapacityProvider(
+    args: UpdateCapacityProviderCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<UpdateCapacityProviderCommandOutput>;
+  updateCapacityProvider(
+    args: UpdateCapacityProviderCommandInput,
+    cb: (err: any, data?: UpdateCapacityProviderCommandOutput) => void
+  ): void;
+  updateCapacityProvider(
+    args: UpdateCapacityProviderCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: UpdateCapacityProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCodeSigningConfigCommand}
+   */
+  updateCodeSigningConfig(
     args: UpdateCodeSigningConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<UpdateCodeSigningConfigCommandOutput>;
-  public updateCodeSigningConfig(
+  updateCodeSigningConfig(
     args: UpdateCodeSigningConfigCommandInput,
     cb: (err: any, data?: UpdateCodeSigningConfigCommandOutput) => void
   ): void;
-  public updateCodeSigningConfig(
+  updateCodeSigningConfig(
     args: UpdateCodeSigningConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: UpdateCodeSigningConfigCommandOutput) => void
   ): void;
-  public updateCodeSigningConfig(
-    args: UpdateCodeSigningConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCodeSigningConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCodeSigningConfigCommandOutput) => void
-  ): Promise<UpdateCodeSigningConfigCommandOutput> | void {
-    const command = new UpdateCodeSigningConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an event source mapping. You can change the function that Lambda invokes, or pause
-   *       invocation and resume later from the same location.</p>
-   *
-   *          <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p>
-   *             </li>
-   *          </ul>
+   * @see {@link UpdateEventSourceMappingCommand}
    */
-  public updateEventSourceMapping(
+  updateEventSourceMapping(
     args: UpdateEventSourceMappingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<UpdateEventSourceMappingCommandOutput>;
-  public updateEventSourceMapping(
+  updateEventSourceMapping(
     args: UpdateEventSourceMappingCommandInput,
     cb: (err: any, data?: UpdateEventSourceMappingCommandOutput) => void
   ): void;
-  public updateEventSourceMapping(
+  updateEventSourceMapping(
     args: UpdateEventSourceMappingCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: UpdateEventSourceMappingCommandOutput) => void
   ): void;
-  public updateEventSourceMapping(
-    args: UpdateEventSourceMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEventSourceMappingCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEventSourceMappingCommandOutput) => void
-  ): Promise<UpdateEventSourceMappingCommandOutput> | void {
-    const command = new UpdateEventSourceMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed
-   *       by a trusted publisher. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html">Configuring code signing</a>.</p>
-   *
-   *          <p>The function's code is locked when you publish a version. You can't modify the code of a published version,
-   *       only the unpublished version.</p>
-   *          <note>
-   *             <p>For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if
-   *         you update the image tag to a new image, Lambda does not automatically update the function.</p>
-   *          </note>
+   * @see {@link UpdateFunctionCodeCommand}
    */
-  public updateFunctionCode(
+  updateFunctionCode(
     args: UpdateFunctionCodeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<UpdateFunctionCodeCommandOutput>;
-  public updateFunctionCode(
+  updateFunctionCode(
     args: UpdateFunctionCodeCommandInput,
     cb: (err: any, data?: UpdateFunctionCodeCommandOutput) => void
   ): void;
-  public updateFunctionCode(
+  updateFunctionCode(
     args: UpdateFunctionCodeCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: UpdateFunctionCodeCommandOutput) => void
   ): void;
-  public updateFunctionCode(
-    args: UpdateFunctionCodeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFunctionCodeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFunctionCodeCommandOutput) => void
-  ): Promise<UpdateFunctionCodeCommandOutput> | void {
-    const command = new UpdateFunctionCodeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modify the version-specific settings of a Lambda function.</p>
-   *
-   *          <p>When you update a function, Lambda provisions an instance of the function and its supporting resources. If
-   *       your function connects to a VPC, this process can take a minute. During this time, you can't modify the function,
-   *       but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>, and
-   *         <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a>
-   *       indicate when the update is complete and the function is processing events with the new configuration. For more
-   *       information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function
-   *       States</a>.</p>
-   *
-   *          <p>These settings can vary between versions of a function and are locked when you publish a version. You can't
-   *       modify the configuration of a published version, only the unpublished version.</p>
-   *
-   *          <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions
-   *       to an account or Amazon Web Services service, use <a>AddPermission</a>.</p>
+   * @see {@link UpdateFunctionConfigurationCommand}
    */
-  public updateFunctionConfiguration(
+  updateFunctionConfiguration(
     args: UpdateFunctionConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<UpdateFunctionConfigurationCommandOutput>;
-  public updateFunctionConfiguration(
+  updateFunctionConfiguration(
     args: UpdateFunctionConfigurationCommandInput,
     cb: (err: any, data?: UpdateFunctionConfigurationCommandOutput) => void
   ): void;
-  public updateFunctionConfiguration(
+  updateFunctionConfiguration(
     args: UpdateFunctionConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: UpdateFunctionConfigurationCommandOutput) => void
   ): void;
-  public updateFunctionConfiguration(
-    args: UpdateFunctionConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFunctionConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFunctionConfigurationCommandOutput) => void
-  ): Promise<UpdateFunctionConfigurationCommandOutput> | void {
-    const command = new UpdateFunctionConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p>
-   *          <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>
+   * @see {@link UpdateFunctionEventInvokeConfigCommand}
    */
-  public updateFunctionEventInvokeConfig(
+  updateFunctionEventInvokeConfig(
     args: UpdateFunctionEventInvokeConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LambdaRequestOptions
   ): Promise<UpdateFunctionEventInvokeConfigCommandOutput>;
-  public updateFunctionEventInvokeConfig(
+  updateFunctionEventInvokeConfig(
     args: UpdateFunctionEventInvokeConfigCommandInput,
     cb: (err: any, data?: UpdateFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public updateFunctionEventInvokeConfig(
+  updateFunctionEventInvokeConfig(
     args: UpdateFunctionEventInvokeConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: LambdaRequestOptions,
     cb: (err: any, data?: UpdateFunctionEventInvokeConfigCommandOutput) => void
   ): void;
-  public updateFunctionEventInvokeConfig(
-    args: UpdateFunctionEventInvokeConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFunctionEventInvokeConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFunctionEventInvokeConfigCommandOutput) => void
-  ): Promise<UpdateFunctionEventInvokeConfigCommandOutput> | void {
-    const command = new UpdateFunctionEventInvokeConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateFunctionUrlConfigCommand}
+   */
+  updateFunctionUrlConfig(
+    args: UpdateFunctionUrlConfigCommandInput,
+    options?: LambdaRequestOptions
+  ): Promise<UpdateFunctionUrlConfigCommandOutput>;
+  updateFunctionUrlConfig(
+    args: UpdateFunctionUrlConfigCommandInput,
+    cb: (err: any, data?: UpdateFunctionUrlConfigCommandOutput) => void
+  ): void;
+  updateFunctionUrlConfig(
+    args: UpdateFunctionUrlConfigCommandInput,
+    options: LambdaRequestOptions,
+    cb: (err: any, data?: UpdateFunctionUrlConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDurableExecutionHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetDurableExecutionHistoryCommandOutput}.
+   */
+  paginateGetDurableExecutionHistory(
+    args: GetDurableExecutionHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetDurableExecutionHistoryCommandOutput>;
+
+  /**
+   * @see {@link GetDurableExecutionStateCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetDurableExecutionStateCommandOutput}.
+   */
+  paginateGetDurableExecutionState(
+    args: GetDurableExecutionStateCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetDurableExecutionStateCommandOutput>;
+
+  /**
+   * @see {@link ListAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAliasesCommandOutput}.
+   */
+  paginateListAliases(
+    args: ListAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListCapacityProvidersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCapacityProvidersCommandOutput}.
+   */
+  paginateListCapacityProviders(
+    args?: ListCapacityProvidersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCapacityProvidersCommandOutput>;
+
+  /**
+   * @see {@link ListCodeSigningConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCodeSigningConfigsCommandOutput}.
+   */
+  paginateListCodeSigningConfigs(
+    args?: ListCodeSigningConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCodeSigningConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListDurableExecutionsByFunctionCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDurableExecutionsByFunctionCommandOutput}.
+   */
+  paginateListDurableExecutionsByFunction(
+    args: ListDurableExecutionsByFunctionCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDurableExecutionsByFunctionCommandOutput>;
+
+  /**
+   * @see {@link ListEventSourceMappingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventSourceMappingsCommandOutput}.
+   */
+  paginateListEventSourceMappings(
+    args?: ListEventSourceMappingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventSourceMappingsCommandOutput>;
+
+  /**
+   * @see {@link ListFunctionEventInvokeConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFunctionEventInvokeConfigsCommandOutput}.
+   */
+  paginateListFunctionEventInvokeConfigs(
+    args: ListFunctionEventInvokeConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFunctionEventInvokeConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListFunctionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFunctionsCommandOutput}.
+   */
+  paginateListFunctions(
+    args?: ListFunctionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFunctionsCommandOutput>;
+
+  /**
+   * @see {@link ListFunctionsByCodeSigningConfigCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFunctionsByCodeSigningConfigCommandOutput}.
+   */
+  paginateListFunctionsByCodeSigningConfig(
+    args: ListFunctionsByCodeSigningConfigCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFunctionsByCodeSigningConfigCommandOutput>;
+
+  /**
+   * @see {@link ListFunctionUrlConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFunctionUrlConfigsCommandOutput}.
+   */
+  paginateListFunctionUrlConfigs(
+    args: ListFunctionUrlConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFunctionUrlConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListFunctionVersionsByCapacityProviderCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFunctionVersionsByCapacityProviderCommandOutput}.
+   */
+  paginateListFunctionVersionsByCapacityProvider(
+    args: ListFunctionVersionsByCapacityProviderCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFunctionVersionsByCapacityProviderCommandOutput>;
+
+  /**
+   * @see {@link ListLayersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLayersCommandOutput}.
+   */
+  paginateListLayers(
+    args?: ListLayersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLayersCommandOutput>;
+
+  /**
+   * @see {@link ListLayerVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLayerVersionsCommandOutput}.
+   */
+  paginateListLayerVersions(
+    args: ListLayerVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLayerVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListProvisionedConcurrencyConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProvisionedConcurrencyConfigsCommandOutput}.
+   */
+  paginateListProvisionedConcurrencyConfigs(
+    args: ListProvisionedConcurrencyConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProvisionedConcurrencyConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListVersionsByFunctionCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVersionsByFunctionCommandOutput}.
+   */
+  paginateListVersionsByFunction(
+    args: ListVersionsByFunctionCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVersionsByFunctionCommandOutput>;
+
+  /**
+   * @see {@link GetFunctionCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFunctionActiveV2(
+    args: GetFunctionCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Lambda>, "client">
+  ): Promise<WaiterResult<GetFunctionCommandOutput>>;
+
+  /**
+   * @see {@link GetFunctionCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFunctionExists(
+    args: GetFunctionCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Lambda>, "client">
+  ): Promise<WaiterResult<GetFunctionCommandOutput>>;
+
+  /**
+   * @see {@link GetFunctionCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFunctionUpdatedV2(
+    args: GetFunctionCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Lambda>, "client">
+  ): Promise<WaiterResult<GetFunctionCommandOutput>>;
+
+  /**
+   * @see {@link GetFunctionConfigurationCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFunctionActive(
+    args: GetFunctionConfigurationCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Lambda>, "client">
+  ): Promise<WaiterResult<GetFunctionConfigurationCommandOutput>>;
+
+  /**
+   * @see {@link GetFunctionConfigurationCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFunctionUpdated(
+    args: GetFunctionConfigurationCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Lambda>, "client">
+  ): Promise<WaiterResult<GetFunctionConfigurationCommandOutput>>;
+
+  /**
+   * @see {@link GetFunctionConfigurationCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilPublishedVersionActive(
+    args: GetFunctionConfigurationCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Lambda>, "client">
+  ): Promise<WaiterResult<GetFunctionConfigurationCommandOutput>>;
 }
+
+/**
+ * <fullname>Lambda</fullname> <p> <b>Overview</b> </p> <p>Lambda is a compute service that lets you run code without provisioning or managing servers. Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging. With Lambda, you can run code for virtually any type of application or backend service. For more information about the Lambda service, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What is Lambda</a> in the <b>Lambda Developer Guide</b>.</p> <p>Lambda Event Functions, previously known as Lambda functions, run your code in response to events and API calls. In the Lambda API, the Amazon Web Services SDKs, and the CLI, Event Functions are still called <i>functions</i>, for example in <code>CreateFunction</code> and <code>Invoke</code>. You don't need to change any existing code.</p> <p>The <i>Lambda API Reference</i> provides information about each of the API methods for Lambda Event Functions, including details about the parameters in each API request and response.</p> <p/> <p>You can use Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools to access the API. For installation instructions, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>. </p> <p>For a list of Region-specific endpoints that Lambda supports, see <a href="https://docs.aws.amazon.com/general/latest/gr/lambda-service.html">Lambda endpoints and quotas </a> in the <i>Amazon Web Services General Reference.</i>. </p> <p>When making the API calls, you will need to authenticate your request by providing a signature. Lambda supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 signing process</a> in the <i>Amazon Web Services General Reference.</i>. </p> <p> <b>CA certificates</b> </p> <p>Because Amazon Web Services SDKs use the CA certificates from your computer, changes to the certificates on the Amazon Web Services servers can cause connection failures when you attempt to use an SDK. You can prevent these failures by keeping your computer's CA certificates and operating system up-to-date. If you encounter this issue in a corporate environment and do not manage your own computer, you might need to ask an administrator to assist with the update process. The following list shows minimum operating system and Java versions:</p> <ul> <li> <p>Microsoft Windows versions that have updates from January 2005 or later installed contain at least one of the required CAs in their trust list. </p> </li> <li> <p>Mac OS X 10.4 with Java for Mac OS X 10.4 Release 5 (February 2007), Mac OS X 10.5 (October 2007), and later versions contain at least one of the required CAs in their trust list. </p> </li> <li> <p>Red Hat Enterprise Linux 5 (March 2007), 6, and 7 and CentOS 5, 6, and 7 all contain at least one of the required CAs in their default trusted CA list. </p> </li> <li> <p>Java 1.4.2_12 (May 2006), 5 Update 2 (March 2005), and all later versions, including Java 6 (December 2006), 7, and 8, contain at least one of the required CAs in their default trusted CA list. </p> </li> </ul> <p>When accessing the Lambda management console or Lambda API endpoints, whether through browsers or programmatically, you will need to ensure your client machines support any of the following CAs: </p> <ul> <li> <p>Amazon Root CA 1</p> </li> <li> <p>Starfield Services Root Certificate Authority - G2</p> </li> <li> <p>Starfield Class 2 Certification Authority</p> </li> </ul> <p>Root certificates from the first two authorities are available from <a href="https://www.amazontrust.com/repository/">Amazon trust services</a>, but keeping your computer up-to-date is the more straightforward solution. To learn more about ACM-provided certificates, see <a href="http://aws.amazon.com/certificate-manager/faqs/#certificates">Amazon Web Services Certificate Manager FAQs.</a> </p>
+ * @public
+ */
+export class Lambda extends LambdaClient implements Lambda {}
+createAggregatedClient(commands, Lambda, { paginators, waiters });

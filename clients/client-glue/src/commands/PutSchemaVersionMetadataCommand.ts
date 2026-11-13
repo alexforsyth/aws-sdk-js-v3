@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { PutSchemaVersionMetadataInput, PutSchemaVersionMetadataResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1PutSchemaVersionMetadataCommand,
-  serializeAws_json1_1PutSchemaVersionMetadataCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutSchemaVersionMetadataInput, PutSchemaVersionMetadataResponse } from "../models/models_3";
+import { PutSchemaVersionMetadata$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutSchemaVersionMetadataCommand}.
+ */
 export interface PutSchemaVersionMetadataCommandInput extends PutSchemaVersionMetadataInput {}
+/**
+ * @public
+ *
+ * The output of {@link PutSchemaVersionMetadataCommand}.
+ */
 export interface PutSchemaVersionMetadataCommandOutput extends PutSchemaVersionMetadataResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface PutSchemaVersionMetadataCommandOutput extends PutSchemaVersionM
  * ```javascript
  * import { GlueClient, PutSchemaVersionMetadataCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, PutSchemaVersionMetadataCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // PutSchemaVersionMetadataInput
+ *   SchemaId: { // SchemaId
+ *     SchemaArn: "STRING_VALUE",
+ *     SchemaName: "STRING_VALUE",
+ *     RegistryName: "STRING_VALUE",
+ *   },
+ *   SchemaVersionNumber: { // SchemaVersionNumber
+ *     LatestVersion: true || false,
+ *     VersionNumber: Number("long"),
+ *   },
+ *   SchemaVersionId: "STRING_VALUE",
+ *   MetadataKeyValue: { // MetadataKeyValuePair
+ *     MetadataKey: "STRING_VALUE",
+ *     MetadataValue: "STRING_VALUE",
+ *   },
+ * };
  * const command = new PutSchemaVersionMetadataCommand(input);
  * const response = await client.send(command);
+ * // { // PutSchemaVersionMetadataResponse
+ * //   SchemaArn: "STRING_VALUE",
+ * //   SchemaName: "STRING_VALUE",
+ * //   RegistryName: "STRING_VALUE",
+ * //   LatestVersion: true || false,
+ * //   VersionNumber: Number("long"),
+ * //   SchemaVersionId: "STRING_VALUE",
+ * //   MetadataKey: "STRING_VALUE",
+ * //   MetadataValue: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param PutSchemaVersionMetadataCommandInput - {@link PutSchemaVersionMetadataCommandInput}
+ * @returns {@link PutSchemaVersionMetadataCommandOutput}
  * @see {@link PutSchemaVersionMetadataCommandInput} for command's `input` shape.
  * @see {@link PutSchemaVersionMetadataCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>A resource to be created or added already exists.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class PutSchemaVersionMetadataCommand extends $Command<
-  PutSchemaVersionMetadataCommandInput,
-  PutSchemaVersionMetadataCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutSchemaVersionMetadataCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutSchemaVersionMetadataCommandInput, PutSchemaVersionMetadataCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "PutSchemaVersionMetadataCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutSchemaVersionMetadataInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PutSchemaVersionMetadataResponse.filterSensitiveLog,
+export class PutSchemaVersionMetadataCommand extends command<PutSchemaVersionMetadataCommandInput, PutSchemaVersionMetadataCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutSchemaVersionMetadata",
+  PutSchemaVersionMetadata$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutSchemaVersionMetadataInput;
+      output: PutSchemaVersionMetadataResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutSchemaVersionMetadataCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutSchemaVersionMetadataCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutSchemaVersionMetadataCommandOutput> {
-    return deserializeAws_json1_1PutSchemaVersionMetadataCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutSchemaVersionMetadataCommandInput;
+      output: PutSchemaVersionMetadataCommandOutput;
+    };
+  };
 }

@@ -1,58 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListInstanceFleetsCommand,
   ListInstanceFleetsCommandInput,
   ListInstanceFleetsCommandOutput,
 } from "../commands/ListInstanceFleetsCommand";
-import { EMR } from "../EMR";
 import { EMRClient } from "../EMRClient";
-import { EMRPaginationConfiguration } from "./Interfaces";
+import type { EMRPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: EMRClient,
-  input: ListInstanceFleetsCommandInput,
-  ...args: any
-): Promise<ListInstanceFleetsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListInstanceFleetsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: EMR,
-  input: ListInstanceFleetsCommandInput,
-  ...args: any
-): Promise<ListInstanceFleetsCommandOutput> => {
-  // @ts-ignore
-  return await client.listInstanceFleets(input, ...args);
-};
-export async function* paginateListInstanceFleets(
+export const paginateListInstanceFleets: (
   config: EMRPaginationConfiguration,
   input: ListInstanceFleetsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListInstanceFleetsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListInstanceFleetsCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    if (config.client instanceof EMR) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof EMRClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected EMR | EMRClient");
-    }
-    yield page;
-    token = page.Marker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListInstanceFleetsCommandOutput> = createPaginator<
+  EMRPaginationConfiguration,
+  ListInstanceFleetsCommandInput,
+  ListInstanceFleetsCommandOutput
+>(EMRClient, ListInstanceFleetsCommand, "Marker", "Marker", "");

@@ -1,23 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeVpcPeeringConnectionsCommandInput,
+  type DescribeVpcPeeringConnectionsCommandOutput,
   DescribeVpcPeeringConnectionsCommand,
-  DescribeVpcPeeringConnectionsCommandInput,
 } from "../commands/DescribeVpcPeeringConnectionsCommand";
-import { EC2Client } from "../EC2Client";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (
-  client: EC2Client,
-  input: DescribeVpcPeeringConnectionsCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeVpcPeeringConnectionsCommandInput): Promise<WaiterResult<DescribeVpcPeeringConnectionsCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeVpcPeeringConnectionsCommand(input));
+    let result: DescribeVpcPeeringConnectionsCommandOutput & any = await client.send(new DescribeVpcPeeringConnectionsCommand(input));
     reason = result;
     return { state: WaiterState.SUCCESS, reason };
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InvalidVpcPeeringConnectionID.NotFound") {
+    if (exception.name === "InvalidVpcPeeringConnectionID.NotFound") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -30,7 +36,7 @@ const checkState = async (
 export const waitForVpcPeeringConnectionExists = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeVpcPeeringConnectionsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeVpcPeeringConnectionsCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -42,8 +48,8 @@ export const waitForVpcPeeringConnectionExists = async (
 export const waitUntilVpcPeeringConnectionExists = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeVpcPeeringConnectionsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeVpcPeeringConnectionsCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeVpcPeeringConnectionsCommandOutput>;
 };

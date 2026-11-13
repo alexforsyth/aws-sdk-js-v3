@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { UploadEntityDefinitionsRequest, UploadEntityDefinitionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UploadEntityDefinitionsCommand,
-  serializeAws_json1_1UploadEntityDefinitionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UploadEntityDefinitionsRequest, UploadEntityDefinitionsResponse } from "../models/models_0";
+import { UploadEntityDefinitions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UploadEntityDefinitionsCommand}.
+ */
 export interface UploadEntityDefinitionsCommandInput extends UploadEntityDefinitionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UploadEntityDefinitionsCommand}.
+ */
 export interface UploadEntityDefinitionsCommandOutput extends UploadEntityDefinitionsResponse, __MetadataBearer {}
 
 /**
@@ -33,73 +34,68 @@ export interface UploadEntityDefinitionsCommandOutput extends UploadEntityDefini
  *          <p>Valid entities are <code>Device</code>, <code>DeviceModel</code>, <code>Service</code>, <code>Capability</code>, <code>State</code>, <code>Action</code>, <code>Event</code>, <code>Property</code>,
  *          <code>Mapping</code>, <code>Enum</code>.
  *          </p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, UploadEntityDefinitionsCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, UploadEntityDefinitionsCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // UploadEntityDefinitionsRequest
+ *   document: { // DefinitionDocument
+ *     language: "GRAPHQL", // required
+ *     text: "STRING_VALUE", // required
+ *   },
+ *   syncWithPublicNamespace: true || false,
+ *   deprecateExistingEntities: true || false,
+ * };
  * const command = new UploadEntityDefinitionsCommand(input);
  * const response = await client.send(command);
+ * // { // UploadEntityDefinitionsResponse
+ * //   uploadId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UploadEntityDefinitionsCommandInput - {@link UploadEntityDefinitionsCommandInput}
+ * @returns {@link UploadEntityDefinitionsCommandOutput}
  * @see {@link UploadEntityDefinitionsCommandInput} for command's `input` shape.
  * @see {@link UploadEntityDefinitionsCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class UploadEntityDefinitionsCommand extends $Command<
-  UploadEntityDefinitionsCommandInput,
-  UploadEntityDefinitionsCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UploadEntityDefinitionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UploadEntityDefinitionsCommandInput, UploadEntityDefinitionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "UploadEntityDefinitionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UploadEntityDefinitionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UploadEntityDefinitionsResponse.filterSensitiveLog,
+export class UploadEntityDefinitionsCommand extends command<UploadEntityDefinitionsCommandInput, UploadEntityDefinitionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UploadEntityDefinitions",
+  UploadEntityDefinitions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadEntityDefinitionsRequest;
+      output: UploadEntityDefinitionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UploadEntityDefinitionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UploadEntityDefinitionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UploadEntityDefinitionsCommandOutput> {
-    return deserializeAws_json1_1UploadEntityDefinitionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UploadEntityDefinitionsCommandInput;
+      output: UploadEntityDefinitionsCommandOutput;
+    };
+  };
 }

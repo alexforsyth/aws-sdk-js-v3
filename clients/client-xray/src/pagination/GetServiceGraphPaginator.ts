@@ -1,58 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   GetServiceGraphCommand,
   GetServiceGraphCommandInput,
   GetServiceGraphCommandOutput,
 } from "../commands/GetServiceGraphCommand";
-import { XRay } from "../XRay";
 import { XRayClient } from "../XRayClient";
-import { XRayPaginationConfiguration } from "./Interfaces";
+import type { XRayPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: XRayClient,
-  input: GetServiceGraphCommandInput,
-  ...args: any
-): Promise<GetServiceGraphCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new GetServiceGraphCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: XRay,
-  input: GetServiceGraphCommandInput,
-  ...args: any
-): Promise<GetServiceGraphCommandOutput> => {
-  // @ts-ignore
-  return await client.getServiceGraph(input, ...args);
-};
-export async function* paginateGetServiceGraph(
+export const paginateGetServiceGraph: (
   config: XRayPaginationConfiguration,
   input: GetServiceGraphCommandInput,
-  ...additionalArguments: any
-): Paginator<GetServiceGraphCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: GetServiceGraphCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    if (config.client instanceof XRay) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof XRayClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected XRay | XRayClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<GetServiceGraphCommandOutput> = createPaginator<
+  XRayPaginationConfiguration,
+  GetServiceGraphCommandInput,
+  GetServiceGraphCommandOutput
+>(XRayClient, GetServiceGraphCommand, "NextToken", "NextToken", "");

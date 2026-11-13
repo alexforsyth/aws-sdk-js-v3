@@ -1,100 +1,146 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeGatewayInformationInput, DescribeGatewayInformationOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeGatewayInformationCommand,
-  serializeAws_json1_1DescribeGatewayInformationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeGatewayInformationInput, DescribeGatewayInformationOutput } from "../models/models_0";
+import { DescribeGatewayInformation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGatewayInformationCommand}.
+ */
 export interface DescribeGatewayInformationCommandInput extends DescribeGatewayInformationInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGatewayInformationCommand}.
+ */
 export interface DescribeGatewayInformationCommandOutput extends DescribeGatewayInformationOutput, __MetadataBearer {}
 
 /**
- * <p>Returns metadata about a gateway such as its name, network interfaces, configured time
- *          zone, and the state (whether the gateway is running or not). To specify which gateway to
- *          describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>
+ * <p>Returns metadata about a gateway such as its name, network interfaces, time zone,
+ *          status, and software version. To specify which gateway to describe, use the Amazon Resource
+ *          Name (ARN) of the gateway in your request.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { StorageGatewayClient, DescribeGatewayInformationCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DescribeGatewayInformationCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DescribeGatewayInformationInput
+ *   GatewayARN: "STRING_VALUE", // required
+ * };
  * const command = new DescribeGatewayInformationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeGatewayInformationOutput
+ * //   GatewayARN: "STRING_VALUE",
+ * //   GatewayId: "STRING_VALUE",
+ * //   GatewayName: "STRING_VALUE",
+ * //   GatewayTimezone: "STRING_VALUE",
+ * //   GatewayState: "STRING_VALUE",
+ * //   GatewayNetworkInterfaces: [ // GatewayNetworkInterfaces
+ * //     { // NetworkInterface
+ * //       Ipv4Address: "STRING_VALUE",
+ * //       MacAddress: "STRING_VALUE",
+ * //       Ipv6Address: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   GatewayType: "STRING_VALUE",
+ * //   NextUpdateAvailabilityDate: "STRING_VALUE",
+ * //   LastSoftwareUpdate: "STRING_VALUE",
+ * //   Ec2InstanceId: "STRING_VALUE",
+ * //   Ec2InstanceRegion: "STRING_VALUE",
+ * //   Tags: [ // Tags
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   VPCEndpoint: "STRING_VALUE",
+ * //   CloudWatchLogGroupARN: "STRING_VALUE",
+ * //   HostEnvironment: "VMWARE" || "HYPER-V" || "EC2" || "KVM" || "OTHER" || "SNOWBALL",
+ * //   EndpointType: "STRING_VALUE",
+ * //   SoftwareUpdatesEndDate: "STRING_VALUE",
+ * //   DeprecationDate: "STRING_VALUE",
+ * //   GatewayCapacity: "Small" || "Medium" || "Large",
+ * //   SupportedGatewayCapacities: [ // SupportedGatewayCapacities
+ * //     "Small" || "Medium" || "Large",
+ * //   ],
+ * //   HostEnvironmentId: "STRING_VALUE",
+ * //   SoftwareVersion: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeGatewayInformationCommandInput - {@link DescribeGatewayInformationCommandInput}
+ * @returns {@link DescribeGatewayInformationCommandOutput}
  * @see {@link DescribeGatewayInformationCommandInput} for command's `input` shape.
  * @see {@link DescribeGatewayInformationCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To describe metadata about the gateway
+ * ```javascript
+ * // Returns metadata about a gateway such as its name, network interfaces, configured time zone, and the state (whether the gateway is running or not).
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+ * };
+ * const command = new DescribeGatewayInformationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
+ *   GatewayId: "sgw-AABB1122",
+ *   GatewayName: "My_Gateway",
+ *   GatewayNetworkInterfaces: [
+ *     {
+ *       Ipv4Address: "10.35.69.216"
+ *     }
+ *   ],
+ *   GatewayState: "STATE_RUNNING",
+ *   GatewayTimezone: "GMT-8:00",
+ *   GatewayType: "STORED",
+ *   LastSoftwareUpdate: "2016-01-02T16:00:00",
+ *   NextUpdateAvailabilityDate: "2017-01-02T16:00:00"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeGatewayInformationCommand extends $Command<
-  DescribeGatewayInformationCommandInput,
-  DescribeGatewayInformationCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGatewayInformationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGatewayInformationCommandInput, DescribeGatewayInformationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DescribeGatewayInformationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGatewayInformationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeGatewayInformationOutput.filterSensitiveLog,
+export class DescribeGatewayInformationCommand extends command<DescribeGatewayInformationCommandInput, DescribeGatewayInformationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGatewayInformation",
+  DescribeGatewayInformation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGatewayInformationInput;
+      output: DescribeGatewayInformationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGatewayInformationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeGatewayInformationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeGatewayInformationCommandOutput> {
-    return deserializeAws_json1_1DescribeGatewayInformationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGatewayInformationCommandInput;
+      output: DescribeGatewayInformationCommandOutput;
+    };
+  };
 }

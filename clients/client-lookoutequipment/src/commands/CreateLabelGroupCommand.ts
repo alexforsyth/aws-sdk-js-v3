@@ -1,0 +1,110 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateLabelGroupRequest, CreateLabelGroupResponse } from "../models/models_0";
+import { CreateLabelGroup$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateLabelGroupCommand}.
+ */
+export interface CreateLabelGroupCommandInput extends CreateLabelGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateLabelGroupCommand}.
+ */
+export interface CreateLabelGroupCommandOutput extends CreateLabelGroupResponse, __MetadataBearer {}
+
+/**
+ * <p> Creates a group of labels. </p>
+ *
+ * @deprecated (since 2026-10-07) End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LookoutEquipmentClient, CreateLabelGroupCommand } from "@aws-sdk/client-lookoutequipment"; // ES Modules import
+ * // const { LookoutEquipmentClient, CreateLabelGroupCommand } = require("@aws-sdk/client-lookoutequipment"); // CommonJS import
+ * // import type { LookoutEquipmentClientConfig } from "@aws-sdk/client-lookoutequipment";
+ * const config = {}; // type is LookoutEquipmentClientConfig
+ * const client = new LookoutEquipmentClient(config);
+ * const input = { // CreateLabelGroupRequest
+ *   LabelGroupName: "STRING_VALUE", // required
+ *   FaultCodes: [ // FaultCodes
+ *     "STRING_VALUE",
+ *   ],
+ *   ClientToken: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
+ * const command = new CreateLabelGroupCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateLabelGroupResponse
+ * //   LabelGroupName: "STRING_VALUE",
+ * //   LabelGroupArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateLabelGroupCommandInput - {@link CreateLabelGroupCommandInput}
+ * @returns {@link CreateLabelGroupCommandOutput}
+ * @see {@link CreateLabelGroupCommandInput} for command's `input` shape.
+ * @see {@link CreateLabelGroupCommandOutput} for command's `response` shape.
+ * @see {@link LookoutEquipmentClientResolvedConfig | config} for LookoutEquipmentClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request could not be completed because you do not have access to the resource.
+ *       </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> The request could not be completed due to a conflict with the current state of the
+ *          target resource. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Processing of the request has failed because of an unknown error, exception or failure.
+ *       </p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p> Resource limitations have been exceeded. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services
+ *          service that's being utilized. </p>
+ *
+ * @throws {@link LookoutEquipmentServiceException}
+ * <p>Base exception class for all service exceptions from LookoutEquipment service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateLabelGroupCommand extends command<CreateLabelGroupCommandInput, CreateLabelGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateLabelGroup",
+  CreateLabelGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLabelGroupRequest;
+      output: CreateLabelGroupResponse;
+    };
+    sdk: {
+      input: CreateLabelGroupCommandInput;
+      output: CreateLabelGroupCommandOutput;
+    };
+  };
+}

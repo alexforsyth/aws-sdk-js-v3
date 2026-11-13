@@ -1,0 +1,137 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSessionActionRequest, GetSessionActionResponse } from "../models/models_0";
+import { GetSessionAction$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSessionActionCommand}.
+ */
+export interface GetSessionActionCommandInput extends GetSessionActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSessionActionCommand}.
+ */
+export interface GetSessionActionCommandOutput extends GetSessionActionResponse, __MetadataBearer {}
+
+/**
+ * Gets a session action for the job.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, GetSessionActionCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, GetSessionActionCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // GetSessionActionRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   jobId: "STRING_VALUE", // required
+ *   sessionActionId: "STRING_VALUE", // required
+ * };
+ * const command = new GetSessionActionCommand(input);
+ * const response = await client.send(command);
+ * // { // GetSessionActionResponse
+ * //   sessionActionId: "STRING_VALUE", // required
+ * //   status: "ASSIGNED" || "RUNNING" || "CANCELING" || "SUCCEEDED" || "FAILED" || "INTERRUPTED" || "CANCELED" || "NEVER_ATTEMPTED" || "SCHEDULED" || "RECLAIMING" || "RECLAIMED", // required
+ * //   startedAt: new Date("TIMESTAMP"),
+ * //   endedAt: new Date("TIMESTAMP"),
+ * //   workerUpdatedAt: new Date("TIMESTAMP"),
+ * //   progressPercent: Number("float"),
+ * //   manifests: [ // TaskRunManifestPropertiesListResponse
+ * //     { // TaskRunManifestPropertiesResponse
+ * //       outputManifestPath: "STRING_VALUE",
+ * //       outputManifestHash: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   sessionId: "STRING_VALUE", // required
+ * //   processExitCode: Number("int"),
+ * //   progressMessage: "STRING_VALUE",
+ * //   acquiredLimits: [ // AcquiredLimits
+ * //     { // AcquiredLimit
+ * //       limitId: "STRING_VALUE", // required
+ * //       count: Number("int"), // required
+ * //     },
+ * //   ],
+ * //   definition: { // SessionActionDefinition Union: only one key present
+ * //     envEnter: { // EnvironmentEnterSessionActionDefinition
+ * //       environmentId: "STRING_VALUE", // required
+ * //     },
+ * //     envExit: { // EnvironmentExitSessionActionDefinition
+ * //       environmentId: "STRING_VALUE", // required
+ * //     },
+ * //     taskRun: { // TaskRunSessionActionDefinition
+ * //       taskId: "STRING_VALUE",
+ * //       stepId: "STRING_VALUE", // required
+ * //       parameters: { // TaskParameters // required
+ * //         "<keys>": { // TaskParameterValue Union: only one key present
+ * //           int: "STRING_VALUE",
+ * //           float: "STRING_VALUE",
+ * //           string: "STRING_VALUE",
+ * //           path: "STRING_VALUE",
+ * //           chunkInt: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     syncInputJobAttachments: { // SyncInputJobAttachmentsSessionActionDefinition
+ * //       stepId: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetSessionActionCommandInput - {@link GetSessionActionCommandInput}
+ * @returns {@link GetSessionActionCommandOutput}
+ * @see {@link GetSessionActionCommandInput} for command's `input` shape.
+ * @see {@link GetSessionActionCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class GetSessionActionCommand extends command<GetSessionActionCommandInput, GetSessionActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSessionAction",
+  GetSessionAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSessionActionRequest;
+      output: GetSessionActionResponse;
+    };
+    sdk: {
+      input: GetSessionActionCommandInput;
+      output: GetSessionActionCommandOutput;
+    };
+  };
+}

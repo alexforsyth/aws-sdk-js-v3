@@ -1,101 +1,294 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateFirewallRequest, CreateFirewallResponse } from "../models/models_0";
-import { NetworkFirewallClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkFirewallClient";
-import {
-  deserializeAws_json1_0CreateFirewallCommand,
-  serializeAws_json1_0CreateFirewallCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFirewallRequest, CreateFirewallResponse } from "../models/models_0";
+import { CreateFirewall$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFirewallCommand}.
+ */
 export interface CreateFirewallCommandInput extends CreateFirewallRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFirewallCommand}.
+ */
 export interface CreateFirewallCommandOutput extends CreateFirewallResponse, __MetadataBearer {}
 
 /**
- * <p>Creates an AWS Network Firewall <a>Firewall</a> and accompanying <a>FirewallStatus</a> for a VPC. </p>
- *          <p>The firewall defines the configuration settings for an AWS Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall AWS resource. </p>
+ * <p>Creates an Network Firewall <a>Firewall</a> and accompanying <a>FirewallStatus</a> for a VPC. </p>
+ *          <p>The firewall defines the configuration settings for an Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall Amazon Web Services resource. </p>
  *          <p>After you create a firewall, you can provide additional settings, like the logging configuration. </p>
  *          <p>To update the settings for a firewall, you use the operations that apply to the settings
  *          themselves, for example <a>UpdateLoggingConfiguration</a>, <a>AssociateSubnets</a>, and <a>UpdateFirewallDeleteProtection</a>. </p>
- *          <p>To manage a firewall's tags, use the standard AWS resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>
+ *          <p>To manage a firewall's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>
  *          <p>To retrieve information about firewalls, use <a>ListFirewalls</a> and <a>DescribeFirewall</a>.</p>
+ *          <p>To generate a report on the last 30 days of traffic monitored by a firewall, use <a>StartAnalysisReport</a>.</p>
+ *          <p>To create a proxy mode firewall, specify <code>VpcEndpoint</code> and <code>NatGatewayCreateMappings</code> instead of <code>VpcId</code> and <code>SubnetMappings</code>. A proxy mode firewall is an explicit forward proxy. Your clients send HTTP and HTTPS proxy requests to the firewall's proxy DNS name, which <code>DescribeFirewall</code> returns in each Availability Zone's <code>Attachment</code>. The firewall evaluates proxy traffic with the stateful rules in its firewall policy, and sends allowed traffic out through the NAT gateway in the same Availability Zone. Your clients don't need route table changes. In each Availability Zone, the firewall has one endpoint and one NAT gateway, which Network Firewall creates for you. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { NetworkFirewallClient, CreateFirewallCommand } from "@aws-sdk/client-network-firewall"; // ES Modules import
  * // const { NetworkFirewallClient, CreateFirewallCommand } = require("@aws-sdk/client-network-firewall"); // CommonJS import
+ * // import type { NetworkFirewallClientConfig } from "@aws-sdk/client-network-firewall";
+ * const config = {}; // type is NetworkFirewallClientConfig
  * const client = new NetworkFirewallClient(config);
+ * const input = { // CreateFirewallRequest
+ *   FirewallName: "STRING_VALUE", // required
+ *   FirewallPolicyArn: "STRING_VALUE", // required
+ *   VpcId: "STRING_VALUE",
+ *   SubnetMappings: [ // SubnetMappings
+ *     { // SubnetMapping
+ *       SubnetId: "STRING_VALUE", // required
+ *       IPAddressType: "DUALSTACK" || "IPV4" || "IPV6",
+ *     },
+ *   ],
+ *   DeleteProtection: true || false,
+ *   SubnetChangeProtection: true || false,
+ *   FirewallPolicyChangeProtection: true || false,
+ *   Description: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   EncryptionConfiguration: { // EncryptionConfiguration
+ *     KeyId: "STRING_VALUE",
+ *     Type: "CUSTOMER_KMS" || "AWS_OWNED_KMS_KEY", // required
+ *   },
+ *   EnabledAnalysisTypes: [ // EnabledAnalysisTypes
+ *     "TLS_SNI" || "HTTP_HOST",
+ *   ],
+ *   TransitGatewayId: "STRING_VALUE",
+ *   AvailabilityZoneMappings: [ // AvailabilityZoneMappings
+ *     { // AvailabilityZoneMapping
+ *       AvailabilityZone: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   AvailabilityZoneChangeProtection: true || false,
+ *   NatGatewayCreateMappings: [ // NatGatewayCreateMappingsList
+ *     { // NatGatewayCreateMapping
+ *       SubnetId: "STRING_VALUE", // required
+ *       AllocationIds: [ // NatGatewayAllocationIdList
+ *         "STRING_VALUE",
+ *       ],
+ *       PrivateIps: [ // NatGatewayPrivateIpList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   ProxySettings: { // ProxySettings
+ *     ListenerProperties: [ // ListenerProperties // required
+ *       { // ListenerProperty
+ *         Port: Number("int"),
+ *         Type: "HTTP" || "HTTPS",
+ *       },
+ *     ],
+ *     CertificateArn: "STRING_VALUE",
+ *     DomainName: "STRING_VALUE",
+ *   },
+ *   VpcEndpoint: { // VpcEndpoint
+ *     VpcId: "STRING_VALUE", // required
+ *     SubnetMappings: [ // required
+ *       {
+ *         SubnetId: "STRING_VALUE", // required
+ *         IPAddressType: "DUALSTACK" || "IPV4" || "IPV6",
+ *       },
+ *     ],
+ *   },
+ *   TransparentFilteringNatScope: "NAT_ALL" || "NAT_NONE",
+ * };
  * const command = new CreateFirewallCommand(input);
  * const response = await client.send(command);
+ * // { // CreateFirewallResponse
+ * //   Firewall: { // Firewall
+ * //     FirewallName: "STRING_VALUE",
+ * //     FirewallArn: "STRING_VALUE",
+ * //     FirewallPolicyArn: "STRING_VALUE", // required
+ * //     VpcId: "STRING_VALUE", // required
+ * //     SubnetMappings: [ // SubnetMappings // required
+ * //       { // SubnetMapping
+ * //         SubnetId: "STRING_VALUE", // required
+ * //         IPAddressType: "DUALSTACK" || "IPV4" || "IPV6",
+ * //       },
+ * //     ],
+ * //     DeleteProtection: true || false,
+ * //     SubnetChangeProtection: true || false,
+ * //     FirewallPolicyChangeProtection: true || false,
+ * //     Description: "STRING_VALUE",
+ * //     FirewallId: "STRING_VALUE", // required
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     EncryptionConfiguration: { // EncryptionConfiguration
+ * //       KeyId: "STRING_VALUE",
+ * //       Type: "CUSTOMER_KMS" || "AWS_OWNED_KMS_KEY", // required
+ * //     },
+ * //     NumberOfAssociations: Number("int"),
+ * //     EnabledAnalysisTypes: [ // EnabledAnalysisTypes
+ * //       "TLS_SNI" || "HTTP_HOST",
+ * //     ],
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     TransitGatewayOwnerAccountId: "STRING_VALUE",
+ * //     AvailabilityZoneMappings: [ // AvailabilityZoneMappings
+ * //       { // AvailabilityZoneMapping
+ * //         AvailabilityZone: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     AvailabilityZoneChangeProtection: true || false,
+ * //     NatGatewayCreateMappings: [ // NatGatewayCreateMappingsList
+ * //       { // NatGatewayCreateMapping
+ * //         SubnetId: "STRING_VALUE", // required
+ * //         AllocationIds: [ // NatGatewayAllocationIdList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         PrivateIps: [ // NatGatewayPrivateIpList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     ProxySettings: { // ProxySettings
+ * //       ListenerProperties: [ // ListenerProperties // required
+ * //         { // ListenerProperty
+ * //           Port: Number("int"),
+ * //           Type: "HTTP" || "HTTPS",
+ * //         },
+ * //       ],
+ * //       CertificateArn: "STRING_VALUE",
+ * //       DomainName: "STRING_VALUE",
+ * //     },
+ * //     VpcEndpoint: { // VpcEndpoint
+ * //       VpcId: "STRING_VALUE", // required
+ * //       SubnetMappings: [ // required
+ * //         {
+ * //           SubnetId: "STRING_VALUE", // required
+ * //           IPAddressType: "DUALSTACK" || "IPV4" || "IPV6",
+ * //         },
+ * //       ],
+ * //     },
+ * //     TransparentFilteringNatScope: "NAT_ALL" || "NAT_NONE",
+ * //   },
+ * //   FirewallStatus: { // FirewallStatus
+ * //     Status: "PROVISIONING" || "DELETING" || "READY" || "FAILED", // required
+ * //     ConfigurationSyncStateSummary: "PENDING" || "IN_SYNC" || "CAPACITY_CONSTRAINED", // required
+ * //     SyncStates: { // SyncStates
+ * //       "<keys>": { // SyncState
+ * //         Attachment: { // Attachment
+ * //           SubnetId: "STRING_VALUE",
+ * //           EndpointId: "STRING_VALUE",
+ * //           Status: "CREATING" || "DELETING" || "FAILED" || "ERROR" || "SCALING" || "READY",
+ * //           StatusMessage: "STRING_VALUE",
+ * //           DnsName: "STRING_VALUE",
+ * //         },
+ * //         Config: { // SyncStateConfig
+ * //           "<keys>": { // PerObjectStatus
+ * //             SyncStatus: "PENDING" || "IN_SYNC" || "CAPACITY_CONSTRAINED" || "NOT_SUBSCRIBED" || "DEPRECATED",
+ * //             UpdateToken: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         NatGatewayAttachments: [ // NatGatewayAttachmentsList
+ * //           { // NatGatewayAttachment
+ * //             NatGatewayId: "STRING_VALUE", // required
+ * //             Status: "CREATING" || "READY" || "UPDATING" || "FAILED" || "DELETING", // required
+ * //             StatusMessage: "STRING_VALUE",
+ * //             DnsName: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //     CapacityUsageSummary: { // CapacityUsageSummary
+ * //       CIDRs: { // CIDRSummary
+ * //         AvailableCIDRCount: Number("int"),
+ * //         UtilizedCIDRCount: Number("int"),
+ * //         IPSetReferences: { // IPSetMetadataMap
+ * //           "<keys>": { // IPSetMetadata
+ * //             ResolvedCIDRCount: Number("int"),
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     TransitGatewayAttachmentSyncState: { // TransitGatewayAttachmentSyncState
+ * //       AttachmentId: "STRING_VALUE",
+ * //       TransitGatewayAttachmentStatus: "CREATING" || "DELETING" || "DELETED" || "FAILED" || "ERROR" || "READY" || "PENDING_ACCEPTANCE" || "REJECTING" || "REJECTED",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateFirewallCommandInput - {@link CreateFirewallCommandInput}
+ * @returns {@link CreateFirewallCommandOutput}
  * @see {@link CreateFirewallCommandInput} for command's `input` shape.
  * @see {@link CreateFirewallCommandOutput} for command's `response` shape.
- * @see {@link NetworkFirewallClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NetworkFirewallClientResolvedConfig | config} for NetworkFirewallClient's `config` shape.
  *
+ * @throws {@link InsufficientCapacityException} (server fault)
+ *  <p>Amazon Web Services doesn't currently have enough available capacity to fulfill your request. Try your
+ *          request later. </p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Your request is valid, but Network Firewall couldn't perform the operation because of a
+ *          system problem. Retry your request. </p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The operation failed because it's not valid. For example, you might have tried to delete
+ *          a rule group or firewall policy that's in use.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The operation failed because of a problem with your request. Examples include: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified an unsupported parameter name or value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a property with a value that isn't among the available
+ *                types.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                that isn't valid in the context of the request.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Unable to perform the operation because doing so would violate a limit setting. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Unable to process the request due to throttling limitations.</p>
+ *
+ * @throws {@link NetworkFirewallServiceException}
+ * <p>Base exception class for all service exceptions from NetworkFirewall service.</p>
+ *
+ *
+ * @public
  */
-export class CreateFirewallCommand extends $Command<
-  CreateFirewallCommandInput,
-  CreateFirewallCommandOutput,
-  NetworkFirewallClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateFirewallCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkFirewallClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateFirewallCommandInput, CreateFirewallCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkFirewallClient";
-    const commandName = "CreateFirewallCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateFirewallRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateFirewallResponse.filterSensitiveLog,
+export class CreateFirewallCommand extends command<CreateFirewallCommandInput, CreateFirewallCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFirewall",
+  CreateFirewall$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFirewallRequest;
+      output: CreateFirewallResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateFirewallCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CreateFirewallCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateFirewallCommandOutput> {
-    return deserializeAws_json1_0CreateFirewallCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateFirewallCommandInput;
+      output: CreateFirewallCommandOutput;
+    };
+  };
 }

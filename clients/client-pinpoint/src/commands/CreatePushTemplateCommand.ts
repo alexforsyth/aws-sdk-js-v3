@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreatePushTemplateRequest, CreatePushTemplateResponse } from "../models/models_0";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1CreatePushTemplateCommand,
-  serializeAws_restJson1CreatePushTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePushTemplateRequest, CreatePushTemplateResponse } from "../models/models_0";
+import { CreatePushTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePushTemplateCommand}.
+ */
 export interface CreatePushTemplateCommandInput extends CreatePushTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePushTemplateCommand}.
+ */
 export interface CreatePushTemplateCommandOutput extends CreatePushTemplateResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,123 @@ export interface CreatePushTemplateCommandOutput extends CreatePushTemplateRespo
  * ```javascript
  * import { PinpointClient, CreatePushTemplateCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, CreatePushTemplateCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // CreatePushTemplateRequest
+ *   PushNotificationTemplateRequest: { // PushNotificationTemplateRequest
+ *     ADM: { // AndroidPushNotificationTemplate
+ *       Action: "OPEN_APP" || "DEEP_LINK" || "URL",
+ *       Body: "STRING_VALUE",
+ *       ImageIconUrl: "STRING_VALUE",
+ *       ImageUrl: "STRING_VALUE",
+ *       RawContent: "STRING_VALUE",
+ *       SmallImageIconUrl: "STRING_VALUE",
+ *       Sound: "STRING_VALUE",
+ *       Title: "STRING_VALUE",
+ *       Url: "STRING_VALUE",
+ *     },
+ *     APNS: { // APNSPushNotificationTemplate
+ *       Action: "OPEN_APP" || "DEEP_LINK" || "URL",
+ *       Body: "STRING_VALUE",
+ *       MediaUrl: "STRING_VALUE",
+ *       RawContent: "STRING_VALUE",
+ *       Sound: "STRING_VALUE",
+ *       Title: "STRING_VALUE",
+ *       Url: "STRING_VALUE",
+ *     },
+ *     Baidu: {
+ *       Action: "OPEN_APP" || "DEEP_LINK" || "URL",
+ *       Body: "STRING_VALUE",
+ *       ImageIconUrl: "STRING_VALUE",
+ *       ImageUrl: "STRING_VALUE",
+ *       RawContent: "STRING_VALUE",
+ *       SmallImageIconUrl: "STRING_VALUE",
+ *       Sound: "STRING_VALUE",
+ *       Title: "STRING_VALUE",
+ *       Url: "STRING_VALUE",
+ *     },
+ *     Default: { // DefaultPushNotificationTemplate
+ *       Action: "OPEN_APP" || "DEEP_LINK" || "URL",
+ *       Body: "STRING_VALUE",
+ *       Sound: "STRING_VALUE",
+ *       Title: "STRING_VALUE",
+ *       Url: "STRING_VALUE",
+ *     },
+ *     DefaultSubstitutions: "STRING_VALUE",
+ *     GCM: {
+ *       Action: "OPEN_APP" || "DEEP_LINK" || "URL",
+ *       Body: "STRING_VALUE",
+ *       ImageIconUrl: "STRING_VALUE",
+ *       ImageUrl: "STRING_VALUE",
+ *       RawContent: "STRING_VALUE",
+ *       SmallImageIconUrl: "STRING_VALUE",
+ *       Sound: "STRING_VALUE",
+ *       Title: "STRING_VALUE",
+ *       Url: "STRING_VALUE",
+ *     },
+ *     RecommenderId: "STRING_VALUE",
+ *     tags: { // MapOf__string
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     TemplateDescription: "STRING_VALUE",
+ *   },
+ *   TemplateName: "STRING_VALUE", // required
+ * };
  * const command = new CreatePushTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePushTemplateResponse
+ * //   CreateTemplateMessageBody: { // CreateTemplateMessageBody
+ * //     Arn: "STRING_VALUE",
+ * //     Message: "STRING_VALUE",
+ * //     RequestID: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreatePushTemplateCommandInput - {@link CreatePushTemplateCommandInput}
+ * @returns {@link CreatePushTemplateCommandOutput}
  * @see {@link CreatePushTemplateCommandInput} for command's `input` shape.
  * @see {@link CreatePushTemplateCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePushTemplateCommand extends $Command<
-  CreatePushTemplateCommandInput,
-  CreatePushTemplateCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePushTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePushTemplateCommandInput, CreatePushTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "CreatePushTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePushTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePushTemplateResponse.filterSensitiveLog,
+export class CreatePushTemplateCommand extends command<CreatePushTemplateCommandInput, CreatePushTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePushTemplate",
+  CreatePushTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePushTemplateRequest;
+      output: CreatePushTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePushTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreatePushTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePushTemplateCommandOutput> {
-    return deserializeAws_restJson1CreatePushTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePushTemplateCommandInput;
+      output: CreatePushTemplateCommandOutput;
+    };
+  };
 }

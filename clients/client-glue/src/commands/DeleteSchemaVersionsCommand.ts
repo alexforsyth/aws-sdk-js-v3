@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { DeleteSchemaVersionsInput, DeleteSchemaVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteSchemaVersionsCommand,
-  serializeAws_json1_1DeleteSchemaVersionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSchemaVersionsInput, DeleteSchemaVersionsResponse } from "../models/models_1";
+import { DeleteSchemaVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSchemaVersionsCommand}.
+ */
 export interface DeleteSchemaVersionsCommandInput extends DeleteSchemaVersionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSchemaVersionsCommand}.
+ */
 export interface DeleteSchemaVersionsCommandOutput extends DeleteSchemaVersionsResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,72 @@ export interface DeleteSchemaVersionsCommandOutput extends DeleteSchemaVersionsR
  * ```javascript
  * import { GlueClient, DeleteSchemaVersionsCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, DeleteSchemaVersionsCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // DeleteSchemaVersionsInput
+ *   SchemaId: { // SchemaId
+ *     SchemaArn: "STRING_VALUE",
+ *     SchemaName: "STRING_VALUE",
+ *     RegistryName: "STRING_VALUE",
+ *   },
+ *   Versions: "STRING_VALUE", // required
+ * };
  * const command = new DeleteSchemaVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteSchemaVersionsResponse
+ * //   SchemaVersionErrors: [ // SchemaVersionErrorList
+ * //     { // SchemaVersionErrorItem
+ * //       VersionNumber: Number("long"),
+ * //       ErrorDetails: { // ErrorDetails
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteSchemaVersionsCommandInput - {@link DeleteSchemaVersionsCommandInput}
+ * @returns {@link DeleteSchemaVersionsCommandOutput}
  * @see {@link DeleteSchemaVersionsCommandInput} for command's `input` shape.
  * @see {@link DeleteSchemaVersionsCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSchemaVersionsCommand extends $Command<
-  DeleteSchemaVersionsCommandInput,
-  DeleteSchemaVersionsCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSchemaVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSchemaVersionsCommandInput, DeleteSchemaVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "DeleteSchemaVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSchemaVersionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSchemaVersionsResponse.filterSensitiveLog,
+export class DeleteSchemaVersionsCommand extends command<DeleteSchemaVersionsCommandInput, DeleteSchemaVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSchemaVersions",
+  DeleteSchemaVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSchemaVersionsInput;
+      output: DeleteSchemaVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSchemaVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteSchemaVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSchemaVersionsCommandOutput> {
-    return deserializeAws_json1_1DeleteSchemaVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSchemaVersionsCommandInput;
+      output: DeleteSchemaVersionsCommandOutput;
+    };
+  };
 }

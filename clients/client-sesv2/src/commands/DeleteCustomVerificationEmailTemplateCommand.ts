@@ -1,110 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteCustomVerificationEmailTemplateRequest,
   DeleteCustomVerificationEmailTemplateResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteCustomVerificationEmailTemplateCommand,
-  serializeAws_restJson1DeleteCustomVerificationEmailTemplateCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+import { DeleteCustomVerificationEmailTemplate$ } from "../schemas/schemas_0";
 
-export interface DeleteCustomVerificationEmailTemplateCommandInput
-  extends DeleteCustomVerificationEmailTemplateRequest {}
-export interface DeleteCustomVerificationEmailTemplateCommandOutput
-  extends DeleteCustomVerificationEmailTemplateResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCustomVerificationEmailTemplateCommand}.
+ */
+export interface DeleteCustomVerificationEmailTemplateCommandInput extends DeleteCustomVerificationEmailTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCustomVerificationEmailTemplateCommand}.
+ */
+export interface DeleteCustomVerificationEmailTemplateCommandOutput extends DeleteCustomVerificationEmailTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes an existing custom verification email template.</p>
- *         <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer
+ *          <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom">Using
+ *                 custom verification email templates</a> in the <i>Amazon SES Developer
  *                 Guide</i>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESv2Client, DeleteCustomVerificationEmailTemplateCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, DeleteCustomVerificationEmailTemplateCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // DeleteCustomVerificationEmailTemplateRequest
+ *   TemplateName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCustomVerificationEmailTemplateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteCustomVerificationEmailTemplateCommandInput - {@link DeleteCustomVerificationEmailTemplateCommandInput}
+ * @returns {@link DeleteCustomVerificationEmailTemplateCommandOutput}
  * @see {@link DeleteCustomVerificationEmailTemplateCommandInput} for command's `input` shape.
  * @see {@link DeleteCustomVerificationEmailTemplateCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCustomVerificationEmailTemplateCommand extends $Command<
-  DeleteCustomVerificationEmailTemplateCommandInput,
-  DeleteCustomVerificationEmailTemplateCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCustomVerificationEmailTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCustomVerificationEmailTemplateCommandInput, DeleteCustomVerificationEmailTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "DeleteCustomVerificationEmailTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCustomVerificationEmailTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteCustomVerificationEmailTemplateResponse.filterSensitiveLog,
+export class DeleteCustomVerificationEmailTemplateCommand extends command<DeleteCustomVerificationEmailTemplateCommandInput, DeleteCustomVerificationEmailTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCustomVerificationEmailTemplate",
+  DeleteCustomVerificationEmailTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCustomVerificationEmailTemplateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteCustomVerificationEmailTemplateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteCustomVerificationEmailTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteCustomVerificationEmailTemplateCommandOutput> {
-    return deserializeAws_restJson1DeleteCustomVerificationEmailTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCustomVerificationEmailTemplateCommandInput;
+      output: DeleteCustomVerificationEmailTemplateCommandOutput;
+    };
+  };
 }

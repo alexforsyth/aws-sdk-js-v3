@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { GetWorkGroupInput, GetWorkGroupOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetWorkGroupCommand,
-  serializeAws_json1_1GetWorkGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetWorkGroupInput, GetWorkGroupOutput } from "../models/models_0";
+import { GetWorkGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetWorkGroupCommand}.
+ */
 export interface GetWorkGroupCommandInput extends GetWorkGroupInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetWorkGroupCommand}.
+ */
 export interface GetWorkGroupCommandOutput extends GetWorkGroupOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,149 @@ export interface GetWorkGroupCommandOutput extends GetWorkGroupOutput, __Metadat
  * ```javascript
  * import { AthenaClient, GetWorkGroupCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, GetWorkGroupCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // GetWorkGroupInput
+ *   WorkGroup: "STRING_VALUE", // required
+ * };
  * const command = new GetWorkGroupCommand(input);
  * const response = await client.send(command);
+ * // { // GetWorkGroupOutput
+ * //   WorkGroup: { // WorkGroup
+ * //     Name: "STRING_VALUE", // required
+ * //     State: "ENABLED" || "DISABLED",
+ * //     Configuration: { // WorkGroupConfiguration
+ * //       ResultConfiguration: { // ResultConfiguration
+ * //         OutputLocation: "STRING_VALUE",
+ * //         EncryptionConfiguration: { // EncryptionConfiguration
+ * //           EncryptionOption: "SSE_S3" || "SSE_KMS" || "CSE_KMS", // required
+ * //           KmsKey: "STRING_VALUE",
+ * //         },
+ * //         ExpectedBucketOwner: "STRING_VALUE",
+ * //         AclConfiguration: { // AclConfiguration
+ * //           S3AclOption: "BUCKET_OWNER_FULL_CONTROL", // required
+ * //         },
+ * //       },
+ * //       ManagedQueryResultsConfiguration: { // ManagedQueryResultsConfiguration
+ * //         Enabled: true || false, // required
+ * //         EncryptionConfiguration: { // ManagedQueryResultsEncryptionConfiguration
+ * //           KmsKey: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //       EnforceWorkGroupConfiguration: true || false,
+ * //       PublishCloudWatchMetricsEnabled: true || false,
+ * //       BytesScannedCutoffPerQuery: Number("long"),
+ * //       RequesterPaysEnabled: true || false,
+ * //       EngineVersion: { // EngineVersion
+ * //         SelectedEngineVersion: "STRING_VALUE",
+ * //         EffectiveEngineVersion: "STRING_VALUE",
+ * //       },
+ * //       AdditionalConfiguration: "STRING_VALUE",
+ * //       ExecutionRole: "STRING_VALUE",
+ * //       MonitoringConfiguration: { // MonitoringConfiguration
+ * //         CloudWatchLoggingConfiguration: { // CloudWatchLoggingConfiguration
+ * //           Enabled: true || false, // required
+ * //           LogGroup: "STRING_VALUE",
+ * //           LogStreamNamePrefix: "STRING_VALUE",
+ * //           LogTypes: { // LogTypesMap
+ * //             "<keys>": [ // LogTypeValuesList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //         ManagedLoggingConfiguration: { // ManagedLoggingConfiguration
+ * //           Enabled: true || false, // required
+ * //           KmsKey: "STRING_VALUE",
+ * //         },
+ * //         S3LoggingConfiguration: { // S3LoggingConfiguration
+ * //           Enabled: true || false, // required
+ * //           KmsKey: "STRING_VALUE",
+ * //           LogLocation: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       EngineConfiguration: { // EngineConfiguration
+ * //         CoordinatorDpuSize: Number("int"),
+ * //         MaxConcurrentDpus: Number("int"),
+ * //         DefaultExecutorDpuSize: Number("int"),
+ * //         AdditionalConfigs: { // ParametersMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         SparkProperties: {
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         Classifications: [ // ClassificationList
+ * //           { // Classification
+ * //             Name: "STRING_VALUE",
+ * //             Properties: {
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //       },
+ * //       CustomerContentEncryptionConfiguration: { // CustomerContentEncryptionConfiguration
+ * //         KmsKey: "STRING_VALUE", // required
+ * //       },
+ * //       EnableMinimumEncryptionConfiguration: true || false,
+ * //       IdentityCenterConfiguration: { // IdentityCenterConfiguration
+ * //         EnableIdentityCenter: true || false,
+ * //         IdentityCenterInstanceArn: "STRING_VALUE",
+ * //       },
+ * //       QueryResultsS3AccessGrantsConfiguration: { // QueryResultsS3AccessGrantsConfiguration
+ * //         EnableS3AccessGrants: true || false, // required
+ * //         CreateUserLevelPrefix: true || false,
+ * //         AuthenticationType: "DIRECTORY_IDENTITY", // required
+ * //       },
+ * //       SystemTableStatuses: [ // SystemTableStatusList
+ * //         { // SystemTableStatus
+ * //           TableName: "QUERY_EXECUTIONS", // required
+ * //           Enabled: true || false, // required
+ * //         },
+ * //       ],
+ * //     },
+ * //     Description: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     IdentityCenterApplicationArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetWorkGroupCommandInput - {@link GetWorkGroupCommandInput}
+ * @returns {@link GetWorkGroupCommandOutput}
  * @see {@link GetWorkGroupCommandInput} for command's `input` shape.
  * @see {@link GetWorkGroupCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class GetWorkGroupCommand extends $Command<
-  GetWorkGroupCommandInput,
-  GetWorkGroupCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetWorkGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetWorkGroupCommandInput, GetWorkGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "GetWorkGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetWorkGroupInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetWorkGroupOutput.filterSensitiveLog,
+export class GetWorkGroupCommand extends command<GetWorkGroupCommandInput, GetWorkGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetWorkGroup",
+  GetWorkGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkGroupInput;
+      output: GetWorkGroupOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetWorkGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetWorkGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetWorkGroupCommandOutput> {
-    return deserializeAws_json1_1GetWorkGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetWorkGroupCommandInput;
+      output: GetWorkGroupCommandOutput;
+    };
+  };
 }

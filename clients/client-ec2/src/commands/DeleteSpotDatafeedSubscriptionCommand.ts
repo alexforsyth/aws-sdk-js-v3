@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteSpotDatafeedSubscriptionRequest } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteSpotDatafeedSubscriptionCommand,
-  serializeAws_ec2DeleteSpotDatafeedSubscriptionCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSpotDatafeedSubscriptionRequest } from "../models/models_3";
+import { DeleteSpotDatafeedSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSpotDatafeedSubscriptionCommand}.
+ */
 export interface DeleteSpotDatafeedSubscriptionCommandInput extends DeleteSpotDatafeedSubscriptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSpotDatafeedSubscriptionCommand}.
+ */
 export interface DeleteSpotDatafeedSubscriptionCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,74 +29,56 @@ export interface DeleteSpotDatafeedSubscriptionCommandOutput extends __MetadataB
  * ```javascript
  * import { EC2Client, DeleteSpotDatafeedSubscriptionCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteSpotDatafeedSubscriptionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteSpotDatafeedSubscriptionRequest
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteSpotDatafeedSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteSpotDatafeedSubscriptionCommandInput - {@link DeleteSpotDatafeedSubscriptionCommandInput}
+ * @returns {@link DeleteSpotDatafeedSubscriptionCommandOutput}
  * @see {@link DeleteSpotDatafeedSubscriptionCommandInput} for command's `input` shape.
  * @see {@link DeleteSpotDatafeedSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To cancel a Spot Instance data feed subscription
+ * ```javascript
+ * // This example deletes a Spot data feed subscription for the account.
+ * const input = { /* empty *\/ };
+ * const command = new DeleteSpotDatafeedSubscriptionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteSpotDatafeedSubscriptionCommand extends $Command<
-  DeleteSpotDatafeedSubscriptionCommandInput,
-  DeleteSpotDatafeedSubscriptionCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSpotDatafeedSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSpotDatafeedSubscriptionCommandInput, DeleteSpotDatafeedSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteSpotDatafeedSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSpotDatafeedSubscriptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteSpotDatafeedSubscriptionCommand extends command<DeleteSpotDatafeedSubscriptionCommandInput, DeleteSpotDatafeedSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSpotDatafeedSubscription",
+  DeleteSpotDatafeedSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSpotDatafeedSubscriptionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteSpotDatafeedSubscriptionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteSpotDatafeedSubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteSpotDatafeedSubscriptionCommandOutput> {
-    return deserializeAws_ec2DeleteSpotDatafeedSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSpotDatafeedSubscriptionCommandInput;
+      output: DeleteSpotDatafeedSubscriptionCommandOutput;
+    };
+  };
 }

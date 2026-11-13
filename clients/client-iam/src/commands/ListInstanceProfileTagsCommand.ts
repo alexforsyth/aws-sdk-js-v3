@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { ListInstanceProfileTagsRequest, ListInstanceProfileTagsResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListInstanceProfileTagsCommand,
-  serializeAws_queryListInstanceProfileTagsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInstanceProfileTagsRequest, ListInstanceProfileTagsResponse } from "../models/models_0";
+import { ListInstanceProfileTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInstanceProfileTagsCommand}.
+ */
 export interface ListInstanceProfileTagsCommandInput extends ListInstanceProfileTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListInstanceProfileTagsCommand}.
+ */
 export interface ListInstanceProfileTagsCommandOutput extends ListInstanceProfileTagsResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,64 @@ export interface ListInstanceProfileTagsCommandOutput extends ListInstanceProfil
  * ```javascript
  * import { IAMClient, ListInstanceProfileTagsCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, ListInstanceProfileTagsCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // ListInstanceProfileTagsRequest
+ *   InstanceProfileName: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListInstanceProfileTagsCommand(input);
  * const response = await client.send(command);
+ * // { // ListInstanceProfileTagsResponse
+ * //   Tags: [ // tagListType // required
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListInstanceProfileTagsCommandInput - {@link ListInstanceProfileTagsCommandInput}
+ * @returns {@link ListInstanceProfileTagsCommandOutput}
  * @see {@link ListInstanceProfileTagsCommandInput} for command's `input` shape.
  * @see {@link ListInstanceProfileTagsCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @public
  */
-export class ListInstanceProfileTagsCommand extends $Command<
-  ListInstanceProfileTagsCommandInput,
-  ListInstanceProfileTagsCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInstanceProfileTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInstanceProfileTagsCommandInput, ListInstanceProfileTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "ListInstanceProfileTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInstanceProfileTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListInstanceProfileTagsResponse.filterSensitiveLog,
+export class ListInstanceProfileTagsCommand extends command<ListInstanceProfileTagsCommandInput, ListInstanceProfileTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInstanceProfileTags",
+  ListInstanceProfileTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInstanceProfileTagsRequest;
+      output: ListInstanceProfileTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInstanceProfileTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListInstanceProfileTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListInstanceProfileTagsCommandOutput> {
-    return deserializeAws_queryListInstanceProfileTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInstanceProfileTagsCommandInput;
+      output: ListInstanceProfileTagsCommandOutput;
+    };
+  };
 }

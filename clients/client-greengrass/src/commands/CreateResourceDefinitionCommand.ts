@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { CreateResourceDefinitionRequest, CreateResourceDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateResourceDefinitionCommand,
-  serializeAws_restJson1CreateResourceDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateResourceDefinitionRequest, CreateResourceDefinitionResponse } from "../models/models_0";
+import { CreateResourceDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateResourceDefinitionCommand}.
+ */
 export interface CreateResourceDefinitionCommandInput extends CreateResourceDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateResourceDefinitionCommand}.
+ */
 export interface CreateResourceDefinitionCommandOutput extends CreateResourceDefinitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,107 @@ export interface CreateResourceDefinitionCommandOutput extends CreateResourceDef
  * ```javascript
  * import { GreengrassClient, CreateResourceDefinitionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, CreateResourceDefinitionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // CreateResourceDefinitionRequest
+ *   AmznClientToken: "STRING_VALUE",
+ *   InitialVersion: { // ResourceDefinitionVersion
+ *     Resources: [ // __listOfResource
+ *       { // Resource
+ *         Id: "STRING_VALUE", // required
+ *         Name: "STRING_VALUE", // required
+ *         ResourceDataContainer: { // ResourceDataContainer
+ *           LocalDeviceResourceData: { // LocalDeviceResourceData
+ *             GroupOwnerSetting: { // GroupOwnerSetting
+ *               AutoAddGroupOwner: true || false,
+ *               GroupOwner: "STRING_VALUE",
+ *             },
+ *             SourcePath: "STRING_VALUE",
+ *           },
+ *           LocalVolumeResourceData: { // LocalVolumeResourceData
+ *             DestinationPath: "STRING_VALUE",
+ *             GroupOwnerSetting: {
+ *               AutoAddGroupOwner: true || false,
+ *               GroupOwner: "STRING_VALUE",
+ *             },
+ *             SourcePath: "STRING_VALUE",
+ *           },
+ *           S3MachineLearningModelResourceData: { // S3MachineLearningModelResourceData
+ *             DestinationPath: "STRING_VALUE",
+ *             OwnerSetting: { // ResourceDownloadOwnerSetting
+ *               GroupOwner: "STRING_VALUE", // required
+ *               GroupPermission: "ro" || "rw", // required
+ *             },
+ *             S3Uri: "STRING_VALUE",
+ *           },
+ *           SageMakerMachineLearningModelResourceData: { // SageMakerMachineLearningModelResourceData
+ *             DestinationPath: "STRING_VALUE",
+ *             OwnerSetting: {
+ *               GroupOwner: "STRING_VALUE", // required
+ *               GroupPermission: "ro" || "rw", // required
+ *             },
+ *             SageMakerJobArn: "STRING_VALUE",
+ *           },
+ *           SecretsManagerSecretResourceData: { // SecretsManagerSecretResourceData
+ *             ARN: "STRING_VALUE",
+ *             AdditionalStagingLabelsToDownload: [ // __listOf__string
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         },
+ *       },
+ *     ],
+ *   },
+ *   Name: "STRING_VALUE",
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateResourceDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateResourceDefinitionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   LastUpdatedTimestamp: "STRING_VALUE",
+ * //   LatestVersion: "STRING_VALUE",
+ * //   LatestVersionArn: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateResourceDefinitionCommandInput - {@link CreateResourceDefinitionCommandInput}
+ * @returns {@link CreateResourceDefinitionCommandOutput}
  * @see {@link CreateResourceDefinitionCommandInput} for command's `input` shape.
  * @see {@link CreateResourceDefinitionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class CreateResourceDefinitionCommand extends $Command<
-  CreateResourceDefinitionCommandInput,
-  CreateResourceDefinitionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateResourceDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateResourceDefinitionCommandInput, CreateResourceDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "CreateResourceDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateResourceDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateResourceDefinitionResponse.filterSensitiveLog,
+export class CreateResourceDefinitionCommand extends command<CreateResourceDefinitionCommandInput, CreateResourceDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateResourceDefinition",
+  CreateResourceDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateResourceDefinitionRequest;
+      output: CreateResourceDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateResourceDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateResourceDefinitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateResourceDefinitionCommandOutput> {
-    return deserializeAws_restJson1CreateResourceDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateResourceDefinitionCommandInput;
+      output: CreateResourceDefinitionCommandOutput;
+    };
+  };
 }

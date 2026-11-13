@@ -1,0 +1,2882 @@
+// smithy-typescript generated code
+import type {
+  AgentAction,
+  CampaignDeletionPolicy,
+  CampaignState,
+  ChannelSubtype,
+  CommunicationLimitsConfigType,
+  CommunicationLimitTimeUnit,
+  CommunicationTimeConfigType,
+  ConnectionStartPoint,
+  DayOfWeek,
+  EncryptionType,
+  EventType,
+  ExternalCampaignType,
+  FailureCode,
+  GetCampaignStateBatchFailureCode,
+  InstanceIdFilterOperator,
+  InstanceLimitsHandling,
+  InstanceOnboardingJobFailureCode,
+  InstanceOnboardingJobStatusCode,
+  LocalTimeZoneDetectionScope,
+  LocalTimeZoneDetectionType,
+  ProfileOutboundRequestFailureCode,
+} from "./enums";
+
+/**
+ * Configuration for abandonment-rate-based dialer throttling.
+ * @public
+ */
+export interface AbandonmentRatePacingConfig {
+  /**
+   * Target abandonment rate.
+   * @public
+   */
+  targetRate: number | undefined;
+
+  /**
+   * Event from which connectionThresholdSeconds is measured.
+   * @public
+   */
+  connectionStartPoint: ConnectionStartPoint | undefined;
+
+  /**
+   * Seconds after connectionStartPoint before a contact counts as abandoned.
+   * @public
+   */
+  connectionThresholdSeconds: number | undefined;
+
+  /**
+   * Rolling window over which abandonmentRate is computed.
+   * @public
+   */
+  evaluationWindow: string | undefined;
+}
+
+/**
+ * Agentless config
+ * @public
+ */
+export interface AgentlessConfig {}
+
+/**
+ * Default Email Outbound config
+ * @public
+ */
+export interface EmailOutboundConfig {
+  /**
+   * Source/Destination Email address used for Email messages
+   * @public
+   */
+  connectSourceEmailAddress: string | undefined;
+
+  /**
+   * Display name for Email Address
+   * @public
+   */
+  sourceEmailAddressDisplayName?: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  wisdomTemplateArn: string | undefined;
+}
+
+/**
+ * Email Outbound Mode
+ * @public
+ */
+export type EmailOutboundMode =
+  | EmailOutboundMode.AgentlessMember
+  | EmailOutboundMode.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EmailOutboundMode {
+  /**
+   * Agentless config
+   * @public
+   */
+  export interface AgentlessMember {
+    agentless: AgentlessConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    agentless?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    agentless: (value: AgentlessConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * Email Channel Subtype config
+ * @public
+ */
+export interface EmailChannelSubtypeConfig {
+  /**
+   * Allocates outbound capacity for the specific channel subtype of this campaign between multiple active campaigns
+   * @public
+   */
+  capacity?: number | undefined;
+
+  /**
+   * Email Outbound Mode
+   * @public
+   */
+  outboundMode: EmailOutboundMode | undefined;
+
+  /**
+   * Default Email Outbound config
+   * @public
+   */
+  defaultOutboundConfig: EmailOutboundConfig | undefined;
+}
+
+/**
+ * Default SMS Outbound config
+ * @public
+ */
+export interface SmsOutboundConfig {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectSourcePhoneNumberArn: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  wisdomTemplateArn: string | undefined;
+}
+
+/**
+ * SMS Outbound Mode
+ * @public
+ */
+export type SmsOutboundMode =
+  | SmsOutboundMode.AgentlessMember
+  | SmsOutboundMode.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace SmsOutboundMode {
+  /**
+   * Agentless config
+   * @public
+   */
+  export interface AgentlessMember {
+    agentless: AgentlessConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    agentless?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    agentless: (value: AgentlessConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * SMS Channel Subtype config
+ * @public
+ */
+export interface SmsChannelSubtypeConfig {
+  /**
+   * Allocates outbound capacity for the specific channel subtype of this campaign between multiple active campaigns
+   * @public
+   */
+  capacity?: number | undefined;
+
+  /**
+   * SMS Outbound Mode
+   * @public
+   */
+  outboundMode: SmsOutboundMode | undefined;
+
+  /**
+   * Default SMS Outbound config
+   * @public
+   */
+  defaultOutboundConfig: SmsOutboundConfig | undefined;
+}
+
+/**
+ * Answering Machine Detection config
+ * @public
+ */
+export interface AnswerMachineDetectionConfig {
+  /**
+   * Enable or disable answering machine detection
+   * @public
+   */
+  enableAnswerMachineDetection: boolean | undefined;
+
+  /**
+   * Enable or disable await answer machine prompt
+   * @public
+   */
+  awaitAnswerMachinePrompt?: boolean | undefined;
+}
+
+/**
+ * Default Telephony Outbound config
+ * @public
+ */
+export interface TelephonyOutboundConfig {
+  /**
+   * The identifier of the contact flow for the outbound call.
+   * @public
+   */
+  connectContactFlowId: string | undefined;
+
+  /**
+   * The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
+   * @public
+   */
+  connectSourcePhoneNumber?: string | undefined;
+
+  /**
+   * Answering Machine Detection config
+   * @public
+   */
+  answerMachineDetectionConfig?: AnswerMachineDetectionConfig | undefined;
+
+  /**
+   * Ring timeout for outbound calls
+   * @public
+   */
+  ringTimeout?: number | undefined;
+}
+
+/**
+ * Pacing constraint the dialer may enforce.
+ * @public
+ */
+export type PacingStrategy =
+  | PacingStrategy.AbandonmentRateMember
+  | PacingStrategy.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PacingStrategy {
+  /**
+   * Configuration for abandonment-rate-based dialer throttling.
+   * @public
+   */
+  export interface AbandonmentRateMember {
+    abandonmentRate: AbandonmentRatePacingConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    abandonmentRate?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    abandonmentRate: (value: AbandonmentRatePacingConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * Predictive config
+ * @public
+ */
+export interface PredictiveConfig {
+  /**
+   * The bandwidth allocation of a queue resource.
+   * @public
+   */
+  bandwidthAllocation: number | undefined;
+
+  /**
+   * Pacing strategies the dialer enforces simultaneously.
+   * @public
+   */
+  pacingStrategies?: PacingStrategy[] | undefined;
+}
+
+/**
+ * Timeout Config for preview contacts.
+ * @public
+ */
+export interface TimeoutConfig {
+  /**
+   * Timeout duration for a preview contact in seconds.
+   * @public
+   */
+  durationInSeconds: number | undefined;
+}
+
+/**
+ * Preview config
+ * @public
+ */
+export interface PreviewConfig {
+  /**
+   * The bandwidth allocation of a queue resource.
+   * @public
+   */
+  bandwidthAllocation: number | undefined;
+
+  /**
+   * Timeout Config for preview contacts.
+   * @public
+   */
+  timeoutConfig: TimeoutConfig | undefined;
+
+  /**
+   * Actions that can be performed by agent during preview phase.
+   * @public
+   */
+  agentActions?: AgentAction[] | undefined;
+}
+
+/**
+ * Progressive config
+ * @public
+ */
+export interface ProgressiveConfig {
+  /**
+   * The bandwidth allocation of a queue resource.
+   * @public
+   */
+  bandwidthAllocation: number | undefined;
+}
+
+/**
+ * Telephony Outbound Mode
+ * @public
+ */
+export type TelephonyOutboundMode =
+  | TelephonyOutboundMode.AgentlessMember
+  | TelephonyOutboundMode.PredictiveMember
+  | TelephonyOutboundMode.PreviewMember
+  | TelephonyOutboundMode.ProgressiveMember
+  | TelephonyOutboundMode.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TelephonyOutboundMode {
+  /**
+   * Progressive config
+   * @public
+   */
+  export interface ProgressiveMember {
+    progressive: ProgressiveConfig;
+    predictive?: never;
+    agentless?: never;
+    preview?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Predictive config
+   * @public
+   */
+  export interface PredictiveMember {
+    progressive?: never;
+    predictive: PredictiveConfig;
+    agentless?: never;
+    preview?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Agentless config
+   * @public
+   */
+  export interface AgentlessMember {
+    progressive?: never;
+    predictive?: never;
+    agentless: AgentlessConfig;
+    preview?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Preview config
+   * @public
+   */
+  export interface PreviewMember {
+    progressive?: never;
+    predictive?: never;
+    agentless?: never;
+    preview: PreviewConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    progressive?: never;
+    predictive?: never;
+    agentless?: never;
+    preview?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    progressive: (value: ProgressiveConfig) => T;
+    predictive: (value: PredictiveConfig) => T;
+    agentless: (value: AgentlessConfig) => T;
+    preview: (value: PreviewConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * Telephony Channel Subtype config
+ * @public
+ */
+export interface TelephonyChannelSubtypeConfig {
+  /**
+   * Allocates outbound capacity for the specific channel subtype of this campaign between multiple active campaigns
+   * @public
+   */
+  capacity?: number | undefined;
+
+  /**
+   * The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.
+   * @public
+   */
+  connectQueueId?: string | undefined;
+
+  /**
+   * Telephony Outbound Mode
+   * @public
+   */
+  outboundMode: TelephonyOutboundMode | undefined;
+
+  /**
+   * Default Telephony Outbound config
+   * @public
+   */
+  defaultOutboundConfig: TelephonyOutboundConfig | undefined;
+}
+
+/**
+ * Default WhatsApp Outbound config
+ * @public
+ */
+export interface WhatsAppOutboundConfig {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectSourcePhoneNumberArn: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  wisdomTemplateArn: string | undefined;
+}
+
+/**
+ * WhatsApp Outbound Mode
+ * @public
+ */
+export type WhatsAppOutboundMode =
+  | WhatsAppOutboundMode.AgentlessMember
+  | WhatsAppOutboundMode.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace WhatsAppOutboundMode {
+  /**
+   * Agentless config
+   * @public
+   */
+  export interface AgentlessMember {
+    agentless: AgentlessConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    agentless?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    agentless: (value: AgentlessConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * WhatsApp Channel Subtype config
+ * @public
+ */
+export interface WhatsAppChannelSubtypeConfig {
+  /**
+   * Allocates outbound capacity for the specific channel subtype of this campaign between multiple active campaigns
+   * @public
+   */
+  capacity?: number | undefined;
+
+  /**
+   * WhatsApp Outbound Mode
+   * @public
+   */
+  outboundMode: WhatsAppOutboundMode | undefined;
+
+  /**
+   * Default WhatsApp Outbound config
+   * @public
+   */
+  defaultOutboundConfig: WhatsAppOutboundConfig | undefined;
+}
+
+/**
+ * Campaign Channel Subtype config
+ * @public
+ */
+export interface ChannelSubtypeConfig {
+  /**
+   * Telephony Channel Subtype config
+   * @public
+   */
+  telephony?: TelephonyChannelSubtypeConfig | undefined;
+
+  /**
+   * SMS Channel Subtype config
+   * @public
+   */
+  sms?: SmsChannelSubtypeConfig | undefined;
+
+  /**
+   * Email Channel Subtype config
+   * @public
+   */
+  email?: EmailChannelSubtypeConfig | undefined;
+
+  /**
+   * WhatsApp Channel Subtype config
+   * @public
+   */
+  whatsApp?: WhatsAppChannelSubtypeConfig | undefined;
+}
+
+/**
+ * Communication Limit
+ * @public
+ */
+export interface CommunicationLimit {
+  /**
+   * Maximum number of contacts allowed for a given target within the given frequency.
+   * @public
+   */
+  maxCountPerRecipient: number | undefined;
+
+  /**
+   * The number of days to consider with regards to this limit.
+   * @public
+   */
+  frequency: number | undefined;
+
+  /**
+   * The communication limit time unit.
+   * @public
+   */
+  unit: CommunicationLimitTimeUnit | undefined;
+}
+
+/**
+ * Communication limits
+ * @public
+ */
+export type CommunicationLimits =
+  | CommunicationLimits.CommunicationLimitsListMember
+  | CommunicationLimits.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CommunicationLimits {
+  /**
+   * List of communication limit
+   * @public
+   */
+  export interface CommunicationLimitsListMember {
+    communicationLimitsList: CommunicationLimit[];
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    communicationLimitsList?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    communicationLimitsList: (value: CommunicationLimit[]) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * Communication limits config
+ * @public
+ */
+export interface CommunicationLimitsConfig {
+  /**
+   * Communication limits
+   * @public
+   */
+  allChannelSubtypes?: CommunicationLimits | undefined;
+
+  /**
+   * Instance limits handling
+   * @public
+   */
+  instanceLimitsHandling?: InstanceLimitsHandling | undefined;
+}
+
+/**
+ * Time range in 24 hour format
+ * @public
+ */
+export interface TimeRange {
+  /**
+   * Time in ISO 8601 format, e.g. T23:11
+   * @public
+   */
+  startTime: string | undefined;
+
+  /**
+   * Time in ISO 8601 format, e.g. T23:11
+   * @public
+   */
+  endTime: string | undefined;
+}
+
+/**
+ * Open Hours config
+ * @public
+ */
+export type OpenHours =
+  | OpenHours.DailyHoursMember
+  | OpenHours.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace OpenHours {
+  /**
+   * Daily Hours map
+   * @public
+   */
+  export interface DailyHoursMember {
+    dailyHours: Partial<Record<DayOfWeek, TimeRange[]>>;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    dailyHours?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    dailyHours: (value: Partial<Record<DayOfWeek, TimeRange[]>>) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * Restricted period
+ * @public
+ */
+export interface RestrictedPeriod {
+  /**
+   * The name of a restricted period.
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * Date in ISO 8601 format, e.g. 2024-01-01
+   * @public
+   */
+  startDate: string | undefined;
+
+  /**
+   * Date in ISO 8601 format, e.g. 2024-01-01
+   * @public
+   */
+  endDate: string | undefined;
+}
+
+/**
+ * Restricted period config
+ * @public
+ */
+export type RestrictedPeriods =
+  | RestrictedPeriods.RestrictedPeriodListMember
+  | RestrictedPeriods.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace RestrictedPeriods {
+  /**
+   * List of restricted period
+   * @public
+   */
+  export interface RestrictedPeriodListMember {
+    restrictedPeriodList: RestrictedPeriod[];
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    restrictedPeriodList?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    restrictedPeriodList: (value: RestrictedPeriod[]) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * Time window config
+ * @public
+ */
+export interface TimeWindow {
+  /**
+   * Open Hours config
+   * @public
+   */
+  openHours: OpenHours | undefined;
+
+  /**
+   * Restricted period config
+   * @public
+   */
+  restrictedPeriods?: RestrictedPeriods | undefined;
+}
+
+/**
+ * Local time zone config
+ * @public
+ */
+export interface LocalTimeZoneConfig {
+  /**
+   * Time Zone Id in the IANA format
+   * @public
+   */
+  defaultTimeZone?: string | undefined;
+
+  /**
+   * Local TimeZone Detection method list
+   * @public
+   */
+  localTimeZoneDetection?: LocalTimeZoneDetectionType[] | undefined;
+
+  /**
+   * Local TimeZone Detection scope.
+   * @public
+   */
+  localTimeZoneDetectionScope?: LocalTimeZoneDetectionScope | undefined;
+}
+
+/**
+ * Campaign communication time config
+ * @public
+ */
+export interface CommunicationTimeConfig {
+  /**
+   * Local time zone config
+   * @public
+   */
+  localTimeZoneConfig: LocalTimeZoneConfig | undefined;
+
+  /**
+   * Time window config
+   * @public
+   */
+  telephony?: TimeWindow | undefined;
+
+  /**
+   * Time window config
+   * @public
+   */
+  sms?: TimeWindow | undefined;
+
+  /**
+   * Time window config
+   * @public
+   */
+  email?: TimeWindow | undefined;
+
+  /**
+   * Time window config
+   * @public
+   */
+  whatsApp?: TimeWindow | undefined;
+}
+
+/**
+ * Campaign entry limits config
+ * @public
+ */
+export interface EntryLimitsConfig {
+  /**
+   * Maximum number of times a participant can enter the campaign. A value of 0 indicates unlimited entries. Values of 1 or greater specify the exact number of entries allowed.
+   * @public
+   */
+  maxEntryCount: number | undefined;
+
+  /**
+   * Minimum time interval that must pass before a participant can enter the campaign again.
+   * @public
+   */
+  minEntryInterval: string | undefined;
+}
+
+/**
+ * Campaign schedule
+ * @public
+ */
+export interface Schedule {
+  /**
+   * Timestamp with no UTC offset or timezone
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * Timestamp with no UTC offset or timezone
+   * @public
+   */
+  endTime: Date | undefined;
+
+  /**
+   * Time duration in ISO 8601 format
+   * @public
+   */
+  refreshFrequency?: string | undefined;
+}
+
+/**
+ * Event trigger of the campaign
+ * @public
+ */
+export interface EventTrigger {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  customerProfilesDomainArn?: string | undefined;
+}
+
+/**
+ * Source of the campaign
+ * @public
+ */
+export type Source =
+  | Source.CustomerProfilesSegmentArnMember
+  | Source.EventTriggerMember
+  | Source.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace Source {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  export interface CustomerProfilesSegmentArnMember {
+    customerProfilesSegmentArn: string;
+    eventTrigger?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Event trigger of the campaign
+   * @public
+   */
+  export interface EventTriggerMember {
+    customerProfilesSegmentArn?: never;
+    eventTrigger: EventTrigger;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    customerProfilesSegmentArn?: never;
+    eventTrigger?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    customerProfilesSegmentArn: (value: string) => T;
+    eventTrigger: (value: EventTrigger) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * The request for CreateCampaign API.
+ * @public
+ */
+export interface CreateCampaignRequest {
+  /**
+   * The name of an Amazon Connect Campaign name.
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Campaign Channel Subtype config
+   * @public
+   */
+  channelSubtypeConfig?: ChannelSubtypeConfig | undefined;
+
+  /**
+   * The type of campaign externally exposed in APIs.
+   * @public
+   */
+  type?: ExternalCampaignType | undefined;
+
+  /**
+   * Source of the campaign
+   * @public
+   */
+  source?: Source | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectCampaignFlowArn?: string | undefined;
+
+  /**
+   * Campaign schedule
+   * @public
+   */
+  schedule?: Schedule | undefined;
+
+  /**
+   * Campaign entry limits config
+   * @public
+   */
+  entryLimitsConfig?: EntryLimitsConfig | undefined;
+
+  /**
+   * Campaign communication time config
+   * @public
+   */
+  communicationTimeConfig?: CommunicationTimeConfig | undefined;
+
+  /**
+   * Communication limits config
+   * @public
+   */
+  communicationLimitsOverride?: CommunicationLimitsConfig | undefined;
+
+  /**
+   * Tag map with key and value.
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * The response for Create Campaign API
+ * @public
+ */
+export interface CreateCampaignResponse {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * The resource name of an Amazon Connect campaign.
+   * @public
+   */
+  arn?: string | undefined;
+
+  /**
+   * Tag map with key and value.
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * The request for DeleteCampaign API.
+ * @public
+ */
+export interface DeleteCampaignRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * The request for DeleteCampaignChannelSubtypeConfig API.
+ * @public
+ */
+export interface DeleteCampaignChannelSubtypeConfigRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * The type of campaign channel subtype.
+   * @public
+   */
+  channelSubtype: ChannelSubtype | undefined;
+}
+
+/**
+ * The request for DeleteCampaignCommunicationLimits API.
+ * @public
+ */
+export interface DeleteCampaignCommunicationLimitsRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * The type of campaign communication limits config.
+   * @public
+   */
+  config: CommunicationLimitsConfigType | undefined;
+}
+
+/**
+ * The request for DeleteCampaignCommunicationTime API.
+ * @public
+ */
+export interface DeleteCampaignCommunicationTimeRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * The type of campaign communication time config
+   * @public
+   */
+  config: CommunicationTimeConfigType | undefined;
+}
+
+/**
+ * The request for DeleteCampaignEntryLimits API.
+ * @public
+ */
+export interface DeleteCampaignEntryLimitsRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * The request for DeleteConnectInstanceConfig API.
+ * @public
+ */
+export interface DeleteConnectInstanceConfigRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Enumeration of the policies to enact on existing campaigns during instance config deletion
+   * @public
+   */
+  campaignDeletionPolicy?: CampaignDeletionPolicy | undefined;
+}
+
+/**
+ * Customer Profiles integration identifier
+ * @public
+ */
+export interface CustomerProfilesIntegrationIdentifier {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  domainArn: string | undefined;
+}
+
+/**
+ * Lambda integration identifier
+ * @public
+ */
+export interface LambdaIntegrationIdentifier {
+  /**
+   * Lambda ARN for integration with Connect instances
+   * @public
+   */
+  functionArn: string | undefined;
+}
+
+/**
+ * Q Connect integration identifier
+ * @public
+ */
+export interface QConnectIntegrationIdentifier {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  knowledgeBaseArn: string | undefined;
+}
+
+/**
+ * Integration identifier for Connect instance
+ * @public
+ */
+export type IntegrationIdentifier =
+  | IntegrationIdentifier.CustomerProfilesMember
+  | IntegrationIdentifier.LambdaMember
+  | IntegrationIdentifier.QConnectMember
+  | IntegrationIdentifier.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace IntegrationIdentifier {
+  /**
+   * Customer Profiles integration identifier
+   * @public
+   */
+  export interface CustomerProfilesMember {
+    customerProfiles: CustomerProfilesIntegrationIdentifier;
+    qConnect?: never;
+    lambda?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Q Connect integration identifier
+   * @public
+   */
+  export interface QConnectMember {
+    customerProfiles?: never;
+    qConnect: QConnectIntegrationIdentifier;
+    lambda?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Lambda integration identifier
+   * @public
+   */
+  export interface LambdaMember {
+    customerProfiles?: never;
+    qConnect?: never;
+    lambda: LambdaIntegrationIdentifier;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    customerProfiles?: never;
+    qConnect?: never;
+    lambda?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    customerProfiles: (value: CustomerProfilesIntegrationIdentifier) => T;
+    qConnect: (value: QConnectIntegrationIdentifier) => T;
+    lambda: (value: LambdaIntegrationIdentifier) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * The request for DeleteConnectInstanceIntegration API.
+ * @public
+ */
+export interface DeleteConnectInstanceIntegrationRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Integration identifier for Connect instance
+   * @public
+   */
+  integrationIdentifier: IntegrationIdentifier | undefined;
+}
+
+/**
+ * The request for DeleteInstanceOnboardingJob API.
+ * @public
+ */
+export interface DeleteInstanceOnboardingJobRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+}
+
+/**
+ * The request for DescribeCampaign API.
+ * @public
+ */
+export interface DescribeCampaignRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * An Amazon Connect campaign.
+ * @public
+ */
+export interface Campaign {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * The resource name of an Amazon Connect campaign.
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * The name of an Amazon Connect Campaign name.
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Campaign Channel Subtype config
+   * @public
+   */
+  channelSubtypeConfig?: ChannelSubtypeConfig | undefined;
+
+  /**
+   * The type of campaign externally exposed in APIs.
+   * @public
+   */
+  type?: ExternalCampaignType | undefined;
+
+  /**
+   * Source of the campaign
+   * @public
+   */
+  source?: Source | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectCampaignFlowArn?: string | undefined;
+
+  /**
+   * Campaign schedule
+   * @public
+   */
+  schedule?: Schedule | undefined;
+
+  /**
+   * Campaign entry limits config
+   * @public
+   */
+  entryLimitsConfig?: EntryLimitsConfig | undefined;
+
+  /**
+   * Campaign communication time config
+   * @public
+   */
+  communicationTimeConfig?: CommunicationTimeConfig | undefined;
+
+  /**
+   * Communication limits config
+   * @public
+   */
+  communicationLimitsOverride?: CommunicationLimitsConfig | undefined;
+
+  /**
+   * The timestamp of the most recent modification to the campaign or its configuration. Null for campaigns created before this field was introduced.
+   * @public
+   */
+  lastModifiedTime?: Date | undefined;
+
+  /**
+   * Tag map with key and value.
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * The response for DescribeCampaign API.
+ * @public
+ */
+export interface DescribeCampaignResponse {
+  /**
+   * An Amazon Connect campaign.
+   * @public
+   */
+  campaign?: Campaign | undefined;
+}
+
+/**
+ * The request for GetCampaignState API.
+ * @public
+ */
+export interface GetCampaignStateRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * The response for GetCampaignState API.
+ * @public
+ */
+export interface GetCampaignStateResponse {
+  /**
+   * State of a campaign
+   * @public
+   */
+  state?: CampaignState | undefined;
+}
+
+/**
+ * The request for GetCampaignStateBatch API.
+ * @public
+ */
+export interface GetCampaignStateBatchRequest {
+  /**
+   * List of CampaignId
+   * @public
+   */
+  campaignIds: string[] | undefined;
+}
+
+/**
+ * Failed response of campaign state
+ * @public
+ */
+export interface FailedCampaignStateResponse {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  campaignId?: string | undefined;
+
+  /**
+   * A predefined code indicating the error that caused the failure in getting state of campaigns
+   * @public
+   */
+  failureCode?: GetCampaignStateBatchFailureCode | undefined;
+}
+
+/**
+ * Successful response of campaign state
+ * @public
+ */
+export interface SuccessfulCampaignStateResponse {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  campaignId?: string | undefined;
+
+  /**
+   * State of a campaign
+   * @public
+   */
+  state?: CampaignState | undefined;
+}
+
+/**
+ * The response for GetCampaignStateBatch API.
+ * @public
+ */
+export interface GetCampaignStateBatchResponse {
+  /**
+   * List of successful response of campaign state
+   * @public
+   */
+  successfulRequests?: SuccessfulCampaignStateResponse[] | undefined;
+
+  /**
+   * List of failed requests of campaign state
+   * @public
+   */
+  failedRequests?: FailedCampaignStateResponse[] | undefined;
+}
+
+/**
+ * The request for GetConnectInstanceConfig API.
+ * @public
+ */
+export interface GetConnectInstanceConfigRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+}
+
+/**
+ * Encryption config for Connect Instance. Note that sensitive data will always be encrypted.
+ * If disabled, service will perform encryption with its own key.
+ * If enabled, a KMS key id needs to be provided and KMS charges will apply.
+ * KMS is only type supported
+ * @public
+ */
+export interface EncryptionConfig {
+  /**
+   * Boolean to indicate if custom encryption has been enabled.
+   * @public
+   */
+  enabled: boolean | undefined;
+
+  /**
+   * Server-side encryption type.
+   * @public
+   */
+  encryptionType?: EncryptionType | undefined;
+
+  /**
+   * KMS key id/arn for encryption config.
+   * @public
+   */
+  keyArn?: string | undefined;
+}
+
+/**
+ * Instance config object
+ * @public
+ */
+export interface InstanceConfig {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Service linked role arn
+   * @public
+   */
+  serviceLinkedRoleArn: string | undefined;
+
+  /**
+   * Encryption config for Connect Instance. Note that sensitive data will always be encrypted.
+   * If disabled, service will perform encryption with its own key.
+   * If enabled, a KMS key id needs to be provided and KMS charges will apply.
+   * KMS is only type supported
+   * @public
+   */
+  encryptionConfig: EncryptionConfig | undefined;
+}
+
+/**
+ * The response for GetConnectInstanceConfig API.
+ * @public
+ */
+export interface GetConnectInstanceConfigResponse {
+  /**
+   * Instance config object
+   * @public
+   */
+  connectInstanceConfig?: InstanceConfig | undefined;
+}
+
+/**
+ * The request for GetInstanceCommunicationLimits API.
+ * @public
+ */
+export interface GetInstanceCommunicationLimitsRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+}
+
+/**
+ * Instance Communication limits config
+ * @public
+ */
+export interface InstanceCommunicationLimitsConfig {
+  /**
+   * Communication limits
+   * @public
+   */
+  allChannelSubtypes?: CommunicationLimits | undefined;
+}
+
+/**
+ * The response for GetInstanceCommunicationLimits API.
+ * @public
+ */
+export interface GetInstanceCommunicationLimitsResponse {
+  /**
+   * Instance Communication limits config
+   * @public
+   */
+  communicationLimitsConfig?: InstanceCommunicationLimitsConfig | undefined;
+}
+
+/**
+ * The request for GetInstanceOnboardingJobStatus API.
+ * @public
+ */
+export interface GetInstanceOnboardingJobStatusRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+}
+
+/**
+ * Instance onboarding job status object
+ * @public
+ */
+export interface InstanceOnboardingJobStatus {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Enumeration of the possible states for instance onboarding job
+   * @public
+   */
+  status: InstanceOnboardingJobStatusCode | undefined;
+
+  /**
+   * Enumeration of the possible failure codes for instance onboarding job
+   * @public
+   */
+  failureCode?: InstanceOnboardingJobFailureCode | undefined;
+}
+
+/**
+ * The response for GetInstanceOnboardingJobStatus API.
+ * @public
+ */
+export interface GetInstanceOnboardingJobStatusResponse {
+  /**
+   * Instance onboarding job status object
+   * @public
+   */
+  connectInstanceOnboardingJobStatus?: InstanceOnboardingJobStatus | undefined;
+}
+
+/**
+ * Connect instance identifier filter
+ * @public
+ */
+export interface InstanceIdFilter {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  value: string | undefined;
+
+  /**
+   * Operators for Connect instance identifier filter
+   * @public
+   */
+  operator: InstanceIdFilterOperator | undefined;
+}
+
+/**
+ * Filter model by type
+ * @public
+ */
+export interface CampaignFilters {
+  /**
+   * Connect instance identifier filter
+   * @public
+   */
+  instanceIdFilter?: InstanceIdFilter | undefined;
+}
+
+/**
+ * The request for ListCampaigns API.
+ * @public
+ */
+export interface ListCampaignsRequest {
+  /**
+   * The maximum number of results to return per page.
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * The token for the next set of results.
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * Filter model by type
+   * @public
+   */
+  filters?: CampaignFilters | undefined;
+}
+
+/**
+ * An Amazon Connect campaign summary.
+ * @public
+ */
+export interface CampaignSummary {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * The resource name of an Amazon Connect campaign.
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * The name of an Amazon Connect Campaign name.
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Channel subtype list
+   * @public
+   */
+  channelSubtypes: ChannelSubtype[] | undefined;
+
+  /**
+   * The type of campaign externally exposed in APIs.
+   * @public
+   */
+  type?: ExternalCampaignType | undefined;
+
+  /**
+   * Campaign schedule
+   * @public
+   */
+  schedule?: Schedule | undefined;
+
+  /**
+   * Campaign entry limits config
+   * @public
+   */
+  entryLimitsConfig?: EntryLimitsConfig | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectCampaignFlowArn?: string | undefined;
+
+  /**
+   * The timestamp of the most recent modification to the campaign or its configuration. Null for campaigns created before this field was introduced.
+   * @public
+   */
+  lastModifiedTime?: Date | undefined;
+}
+
+/**
+ * The response for ListCampaigns API.
+ * @public
+ */
+export interface ListCampaignsResponse {
+  /**
+   * The token for the next set of results.
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * A list of Amazon Connect campaigns.
+   * @public
+   */
+  campaignSummaryList?: CampaignSummary[] | undefined;
+}
+
+/**
+ * The request for ListConnectInstanceIntegrations API.
+ * @public
+ */
+export interface ListConnectInstanceIntegrationsRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * The maximum number of results to return per page.
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * The token for the next set of results.
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * Customer Profiles integration summary
+ * @public
+ */
+export interface CustomerProfilesIntegrationSummary {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  domainArn: string | undefined;
+
+  /**
+   * Object type names map.
+   * @public
+   */
+  objectTypeNames: Partial<Record<EventType, string>> | undefined;
+}
+
+/**
+ * Lambda integration summary
+ * @public
+ */
+export interface LambdaIntegrationSummary {
+  /**
+   * Lambda ARN for integration with Connect instances
+   * @public
+   */
+  functionArn: string | undefined;
+}
+
+/**
+ * Q Connect integration summary
+ * @public
+ */
+export interface QConnectIntegrationSummary {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  knowledgeBaseArn: string | undefined;
+}
+
+/**
+ * Integration summary for Connect instance.
+ * @public
+ */
+export type IntegrationSummary =
+  | IntegrationSummary.CustomerProfilesMember
+  | IntegrationSummary.LambdaMember
+  | IntegrationSummary.QConnectMember
+  | IntegrationSummary.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace IntegrationSummary {
+  /**
+   * Customer Profiles integration summary
+   * @public
+   */
+  export interface CustomerProfilesMember {
+    customerProfiles: CustomerProfilesIntegrationSummary;
+    qConnect?: never;
+    lambda?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Q Connect integration summary
+   * @public
+   */
+  export interface QConnectMember {
+    customerProfiles?: never;
+    qConnect: QConnectIntegrationSummary;
+    lambda?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Lambda integration summary
+   * @public
+   */
+  export interface LambdaMember {
+    customerProfiles?: never;
+    qConnect?: never;
+    lambda: LambdaIntegrationSummary;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    customerProfiles?: never;
+    qConnect?: never;
+    lambda?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    customerProfiles: (value: CustomerProfilesIntegrationSummary) => T;
+    qConnect: (value: QConnectIntegrationSummary) => T;
+    lambda: (value: LambdaIntegrationSummary) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * The response for ListConnectInstanceIntegrations API.
+ * @public
+ */
+export interface ListConnectInstanceIntegrationsResponse {
+  /**
+   * The token for the next set of results.
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * A list of Amazon Connect Instance Integrations.
+   * @public
+   */
+  integrationSummaryList?: IntegrationSummary[] | undefined;
+}
+
+/**
+ * The request for ListTagsForResource API.
+ * @public
+ */
+export interface ListTagsForResourceRequest {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  arn: string | undefined;
+}
+
+/**
+ * The request for ListTagsForResource API.
+ * @public
+ */
+export interface ListTagsForResourceResponse {
+  /**
+   * Tag map with key and value.
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * The request for PauseCampaign API.
+ * @public
+ */
+export interface PauseCampaignRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * Customer Profiles integration config
+ * @public
+ */
+export interface CustomerProfilesIntegrationConfig {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  domainArn: string | undefined;
+
+  /**
+   * Object type names map.
+   * @public
+   */
+  objectTypeNames: Partial<Record<EventType, string>> | undefined;
+}
+
+/**
+ * Lambda integration config
+ * @public
+ */
+export interface LambdaIntegrationConfig {
+  /**
+   * Lambda ARN for integration with Connect instances
+   * @public
+   */
+  functionArn: string | undefined;
+}
+
+/**
+ * Q Connect integration config
+ * @public
+ */
+export interface QConnectIntegrationConfig {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  knowledgeBaseArn: string | undefined;
+}
+
+/**
+ * Integration config for Connect Instance
+ * @public
+ */
+export type IntegrationConfig =
+  | IntegrationConfig.CustomerProfilesMember
+  | IntegrationConfig.LambdaMember
+  | IntegrationConfig.QConnectMember
+  | IntegrationConfig.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace IntegrationConfig {
+  /**
+   * Customer Profiles integration config
+   * @public
+   */
+  export interface CustomerProfilesMember {
+    customerProfiles: CustomerProfilesIntegrationConfig;
+    qConnect?: never;
+    lambda?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Q Connect integration config
+   * @public
+   */
+  export interface QConnectMember {
+    customerProfiles?: never;
+    qConnect: QConnectIntegrationConfig;
+    lambda?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Lambda integration config
+   * @public
+   */
+  export interface LambdaMember {
+    customerProfiles?: never;
+    qConnect?: never;
+    lambda: LambdaIntegrationConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    customerProfiles?: never;
+    qConnect?: never;
+    lambda?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    customerProfiles: (value: CustomerProfilesIntegrationConfig) => T;
+    qConnect: (value: QConnectIntegrationConfig) => T;
+    lambda: (value: LambdaIntegrationConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * The request for PutConnectInstanceIntegration API.
+ * @public
+ */
+export interface PutConnectInstanceIntegrationRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Integration config for Connect Instance
+   * @public
+   */
+  integrationConfig: IntegrationConfig | undefined;
+}
+
+/**
+ * The request for PutInstanceCommunicationLimits API.
+ * @public
+ */
+export interface PutInstanceCommunicationLimitsRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Instance Communication limits config
+   * @public
+   */
+  communicationLimitsConfig: InstanceCommunicationLimitsConfig | undefined;
+}
+
+/**
+ * Parameters for the Email Channel Subtype
+ * @public
+ */
+export interface EmailChannelSubtypeParameters {
+  /**
+   * Source/Destination Email address used for Email messages
+   * @public
+   */
+  destinationEmailAddress: string | undefined;
+
+  /**
+   * Source/Destination Email address used for Email messages
+   * @public
+   */
+  connectSourceEmailAddress?: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  templateArn?: string | undefined;
+
+  /**
+   * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
+   * @public
+   */
+  templateParameters: Record<string, string> | undefined;
+}
+
+/**
+ * Parameters for the SMS Channel Subtype
+ * @public
+ */
+export interface SmsChannelSubtypeParameters {
+  /**
+   * The phone number of the customer, in E.164 format.
+   * @public
+   */
+  destinationPhoneNumber: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectSourcePhoneNumberArn?: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  templateArn?: string | undefined;
+
+  /**
+   * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
+   * @public
+   */
+  templateParameters: Record<string, string> | undefined;
+}
+
+/**
+ * Parameters for the Telephony Channel Subtype
+ * @public
+ */
+export interface TelephonyChannelSubtypeParameters {
+  /**
+   * The phone number of the customer, in E.164 format.
+   * @public
+   */
+  destinationPhoneNumber: string | undefined;
+
+  /**
+   * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
+   * @public
+   */
+  attributes: Record<string, string> | undefined;
+
+  /**
+   * The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
+   * @public
+   */
+  connectSourcePhoneNumber?: string | undefined;
+
+  /**
+   * Answering Machine Detection config
+   * @public
+   */
+  answerMachineDetectionConfig?: AnswerMachineDetectionConfig | undefined;
+
+  /**
+   * Ring timeout for outbound calls
+   * @public
+   */
+  ringTimeout?: number | undefined;
+}
+
+/**
+ * Parameters for the WhatsApp Channel Subtype
+ * @public
+ */
+export interface WhatsAppChannelSubtypeParameters {
+  /**
+   * The phone number of the customer, in E.164 format.
+   * @public
+   */
+  destinationPhoneNumber: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectSourcePhoneNumberArn?: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  templateArn?: string | undefined;
+
+  /**
+   * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
+   * @public
+   */
+  templateParameters: Record<string, string> | undefined;
+}
+
+/**
+ * ChannelSubtypeParameters for an outbound request
+ * @public
+ */
+export type ChannelSubtypeParameters =
+  | ChannelSubtypeParameters.EmailMember
+  | ChannelSubtypeParameters.SmsMember
+  | ChannelSubtypeParameters.TelephonyMember
+  | ChannelSubtypeParameters.WhatsAppMember
+  | ChannelSubtypeParameters.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ChannelSubtypeParameters {
+  /**
+   * Parameters for the Telephony Channel Subtype
+   * @public
+   */
+  export interface TelephonyMember {
+    telephony: TelephonyChannelSubtypeParameters;
+    sms?: never;
+    email?: never;
+    whatsApp?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Parameters for the SMS Channel Subtype
+   * @public
+   */
+  export interface SmsMember {
+    telephony?: never;
+    sms: SmsChannelSubtypeParameters;
+    email?: never;
+    whatsApp?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Parameters for the Email Channel Subtype
+   * @public
+   */
+  export interface EmailMember {
+    telephony?: never;
+    sms?: never;
+    email: EmailChannelSubtypeParameters;
+    whatsApp?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * Parameters for the WhatsApp Channel Subtype
+   * @public
+   */
+  export interface WhatsAppMember {
+    telephony?: never;
+    sms?: never;
+    email?: never;
+    whatsApp: WhatsAppChannelSubtypeParameters;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    telephony?: never;
+    sms?: never;
+    email?: never;
+    whatsApp?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    telephony: (value: TelephonyChannelSubtypeParameters) => T;
+    sms: (value: SmsChannelSubtypeParameters) => T;
+    email: (value: EmailChannelSubtypeParameters) => T;
+    whatsApp: (value: WhatsAppChannelSubtypeParameters) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * An outbound request for a campaign.
+ * @public
+ */
+export interface OutboundRequest {
+  /**
+   * Client provided parameter used for idempotency. Its value must be unique for each request.
+   * @public
+   */
+  clientToken: string | undefined;
+
+  /**
+   * Timestamp with no UTC offset or timezone
+   * @public
+   */
+  expirationTime: Date | undefined;
+
+  /**
+   * ChannelSubtypeParameters for an outbound request
+   * @public
+   */
+  channelSubtypeParameters: ChannelSubtypeParameters | undefined;
+}
+
+/**
+ * The request for PutOutboundRequestBatch API.
+ * @public
+ */
+export interface PutOutboundRequestBatchRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * A list of outbound requests.
+   * @public
+   */
+  outboundRequests: OutboundRequest[] | undefined;
+}
+
+/**
+ * A failed request identified by the unique client token.
+ * @public
+ */
+export interface FailedRequest {
+  /**
+   * Client provided parameter used for idempotency. Its value must be unique for each request.
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * Identifier representing a Dial request
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * A predefined code indicating the error that caused the failure.
+   * @public
+   */
+  failureCode?: FailureCode | undefined;
+}
+
+/**
+ * A successful request identified by the unique client token.
+ * @public
+ */
+export interface SuccessfulRequest {
+  /**
+   * Client provided parameter used for idempotency. Its value must be unique for each request.
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * Identifier representing a Dial request
+   * @public
+   */
+  id?: string | undefined;
+}
+
+/**
+ * The response for PutOutboundRequestBatch API.
+ * @public
+ */
+export interface PutOutboundRequestBatchResponse {
+  /**
+   * A list of successful requests identified by the unique client token.
+   * @public
+   */
+  successfulRequests?: SuccessfulRequest[] | undefined;
+
+  /**
+   * A list of failed requests.
+   * @public
+   */
+  failedRequests?: FailedRequest[] | undefined;
+}
+
+/**
+ * Context metadata for the web notification type channel
+ * @public
+ */
+export interface WebNotificationContext {
+  /**
+   * Session Id for web notification event trigger
+   * @public
+   */
+  sessionId?: string | undefined;
+
+  /**
+   * Browser Id for web notification event trigger
+   * @public
+   */
+  browserId?: string | undefined;
+}
+
+/**
+ * Additional metadata related to the event trigger context
+ * @public
+ */
+export interface ChannelContext {
+  /**
+   * Context metadata for the web notification type channel
+   * @public
+   */
+  webNotificationContext?: WebNotificationContext | undefined;
+}
+
+/**
+ * Event trigger context data
+ * @public
+ */
+export interface EventTriggerContext {
+  /**
+   * Source event object for event triggers
+   * @public
+   */
+  sourceEvent?: string | undefined;
+
+  /**
+   * Additional metadata related to the event trigger context
+   * @public
+   */
+  channelContext?: ChannelContext | undefined;
+}
+
+/**
+ * Information about a profile outbound request
+ * @public
+ */
+export interface ProfileOutboundRequest {
+  /**
+   * Client provided parameter used for idempotency. Its value must be unique for each request.
+   * @public
+   */
+  clientToken: string | undefined;
+
+  /**
+   * Identifier of the customer profile
+   * @public
+   */
+  profileId: string | undefined;
+
+  /**
+   * Timestamp with no UTC offset or timezone
+   * @public
+   */
+  expirationTime?: Date | undefined;
+
+  /**
+   * Event trigger context data
+   * @public
+   */
+  eventTriggerContext?: EventTriggerContext | undefined;
+}
+
+/**
+ * The request for PutProfileOutboundRequestBatch API
+ * @public
+ */
+export interface PutProfileOutboundRequestBatchRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * List of profile outbound requests
+   * @public
+   */
+  profileOutboundRequests: ProfileOutboundRequest[] | undefined;
+}
+
+/**
+ * Failure details for a profile outbound request
+ * @public
+ */
+export interface FailedProfileOutboundRequest {
+  /**
+   * Client provided parameter used for idempotency. Its value must be unique for each request.
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * Identifier of the profile outbound request
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * Predefined code indicating the error that caused the failure
+   * @public
+   */
+  failureCode?: ProfileOutboundRequestFailureCode | undefined;
+}
+
+/**
+ * Success details for a profile outbound request
+ * @public
+ */
+export interface SuccessfulProfileOutboundRequest {
+  /**
+   * Client provided parameter used for idempotency. Its value must be unique for each request.
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * Identifier of the profile outbound request
+   * @public
+   */
+  id?: string | undefined;
+}
+
+/**
+ * The response for PutProfileOutboundRequestBatch API
+ * @public
+ */
+export interface PutProfileOutboundRequestBatchResponse {
+  /**
+   * List of successful profile outbound requests
+   * @public
+   */
+  successfulRequests?: SuccessfulProfileOutboundRequest[] | undefined;
+
+  /**
+   * List of failed profile outbound requests
+   * @public
+   */
+  failedRequests?: FailedProfileOutboundRequest[] | undefined;
+}
+
+/**
+ * The request for ResumeCampaign API.
+ * @public
+ */
+export interface ResumeCampaignRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * The request for StartCampaign API.
+ * @public
+ */
+export interface StartCampaignRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * The request for StartInstanceOnboardingJob API.
+ * @public
+ */
+export interface StartInstanceOnboardingJobRequest {
+  /**
+   * Amazon Connect Instance Id
+   * @public
+   */
+  connectInstanceId: string | undefined;
+
+  /**
+   * Encryption config for Connect Instance. Note that sensitive data will always be encrypted.
+   * If disabled, service will perform encryption with its own key.
+   * If enabled, a KMS key id needs to be provided and KMS charges will apply.
+   * KMS is only type supported
+   * @public
+   */
+  encryptionConfig: EncryptionConfig | undefined;
+}
+
+/**
+ * The response for StartInstanceOnboardingJob API.
+ * @public
+ */
+export interface StartInstanceOnboardingJobResponse {
+  /**
+   * Instance onboarding job status object
+   * @public
+   */
+  connectInstanceOnboardingJobStatus?: InstanceOnboardingJobStatus | undefined;
+}
+
+/**
+ * The request for StopCampaign API.
+ * @public
+ */
+export interface StopCampaignRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * The request for TagResource API.
+ * @public
+ */
+export interface TagResourceRequest {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * Tag map with key and value.
+   * @public
+   */
+  tags: Record<string, string> | undefined;
+}
+
+/**
+ * The request for UntagResource API.
+ * @public
+ */
+export interface UntagResourceRequest {
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  arn: string | undefined;
+
+  /**
+   * List of tag keys.
+   * @public
+   */
+  tagKeys: string[] | undefined;
+}
+
+/**
+ * The request for UpdateCampaignChannelSubtypeConfig API.
+ * @public
+ */
+export interface UpdateCampaignChannelSubtypeConfigRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Campaign Channel Subtype config
+   * @public
+   */
+  channelSubtypeConfig: ChannelSubtypeConfig | undefined;
+}
+
+/**
+ * The request for UpdateCampaignCommunicationLimits API.
+ * @public
+ */
+export interface UpdateCampaignCommunicationLimitsRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Communication limits config
+   * @public
+   */
+  communicationLimitsOverride: CommunicationLimitsConfig | undefined;
+}
+
+/**
+ * The request for UpdateCampaignCommunicationTime API.
+ * @public
+ */
+export interface UpdateCampaignCommunicationTimeRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Campaign communication time config
+   * @public
+   */
+  communicationTimeConfig: CommunicationTimeConfig | undefined;
+}
+
+/**
+ * The request for UpdateCampaignEntryLimits API.
+ * @public
+ */
+export interface UpdateCampaignEntryLimitsRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Campaign entry limits config
+   * @public
+   */
+  entryLimitsConfig: EntryLimitsConfig | undefined;
+}
+
+/**
+ * The request for UpdateCampaignFlowAssociation API.
+ * @public
+ */
+export interface UpdateCampaignFlowAssociationRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Amazon Resource Names(ARN)
+   * @public
+   */
+  connectCampaignFlowArn: string | undefined;
+}
+
+/**
+ * The request for UpdateCampaignName API.
+ * @public
+ */
+export interface UpdateCampaignNameRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * The name of an Amazon Connect Campaign name.
+   * @public
+   */
+  name: string | undefined;
+}
+
+/**
+ * The request for UpdateCampaignSchedule API.
+ * @public
+ */
+export interface UpdateCampaignScheduleRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Campaign schedule
+   * @public
+   */
+  schedule: Schedule | undefined;
+}
+
+/**
+ * The request for UpdateCampaignSource API.
+ * @public
+ */
+export interface UpdateCampaignSourceRequest {
+  /**
+   * Identifier representing a Campaign
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * Source of the campaign
+   * @public
+   */
+  source: Source | undefined;
+}

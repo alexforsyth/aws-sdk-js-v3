@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListSafetyRulesCommand,
   ListSafetyRulesCommandInput,
   ListSafetyRulesCommandOutput,
 } from "../commands/ListSafetyRulesCommand";
-import { Route53RecoveryControlConfig } from "../Route53RecoveryControlConfig";
 import { Route53RecoveryControlConfigClient } from "../Route53RecoveryControlConfigClient";
-import { Route53RecoveryControlConfigPaginationConfiguration } from "./Interfaces";
+import type { Route53RecoveryControlConfigPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: Route53RecoveryControlConfigClient,
-  input: ListSafetyRulesCommandInput,
-  ...args: any
-): Promise<ListSafetyRulesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListSafetyRulesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Route53RecoveryControlConfig,
-  input: ListSafetyRulesCommandInput,
-  ...args: any
-): Promise<ListSafetyRulesCommandOutput> => {
-  // @ts-ignore
-  return await client.listSafetyRules(input, ...args);
-};
-export async function* paginateListSafetyRules(
+export const paginateListSafetyRules: (
   config: Route53RecoveryControlConfigPaginationConfiguration,
   input: ListSafetyRulesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListSafetyRulesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListSafetyRulesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof Route53RecoveryControlConfig) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof Route53RecoveryControlConfigClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Route53RecoveryControlConfig | Route53RecoveryControlConfigClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListSafetyRulesCommandOutput> = createPaginator<
+  Route53RecoveryControlConfigPaginationConfiguration,
+  ListSafetyRulesCommandInput,
+  ListSafetyRulesCommandOutput
+>(Route53RecoveryControlConfigClient, ListSafetyRulesCommand, "NextToken", "NextToken", "MaxResults");

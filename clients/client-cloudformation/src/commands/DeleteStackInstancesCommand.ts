@@ -1,95 +1,139 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DeleteStackInstancesInput, DeleteStackInstancesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteStackInstancesCommand,
-  serializeAws_queryDeleteStackInstancesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteStackInstancesInput, DeleteStackInstancesOutput } from "../models/models_0";
+import { DeleteStackInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteStackInstancesCommand}.
+ */
 export interface DeleteStackInstancesCommandInput extends DeleteStackInstancesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteStackInstancesCommand}.
+ */
 export interface DeleteStackInstancesCommandOutput extends DeleteStackInstancesOutput, __MetadataBearer {}
 
 /**
- * <p>Deletes stack instances for the specified accounts, in the specified Regions.</p>
+ * <p>Deletes stack instances for the specified accounts, in the specified Amazon Web Services Regions.</p>
+ *          <note>
+ *             <p>The maximum number of organizational unit (OUs) supported by a
+ *           <code>DeleteStackInstances</code> operation is 50.</p>
+ *             <p>If you need more than 50, consider the following options:</p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <i>Batch processing:</i> If you don't want to expose your OU
+ *             hierarchy, split up the operations into multiple calls with less than 50 OUs
+ *             each.</p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <i>Parent OU strategy:</i> If you don't mind exposing the OU
+ *             hierarchy, target a parent OU that contains all desired child OUs.</p>
+ *                </li>
+ *             </ul>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DeleteStackInstancesCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DeleteStackInstancesCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DeleteStackInstancesInput
+ *   StackSetName: "STRING_VALUE", // required
+ *   Accounts: [ // AccountList
+ *     "STRING_VALUE",
+ *   ],
+ *   DeploymentTargets: { // DeploymentTargets
+ *     Accounts: [
+ *       "STRING_VALUE",
+ *     ],
+ *     AccountsUrl: "STRING_VALUE",
+ *     OrganizationalUnitIds: [ // OrganizationalUnitIdList
+ *       "STRING_VALUE",
+ *     ],
+ *     AccountFilterType: "NONE" || "INTERSECTION" || "DIFFERENCE" || "UNION",
+ *   },
+ *   Regions: [ // RegionList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   OperationPreferences: { // StackSetOperationPreferences
+ *     RegionConcurrencyType: "SEQUENTIAL" || "PARALLEL",
+ *     RegionOrder: [
+ *       "STRING_VALUE",
+ *     ],
+ *     FailureToleranceCount: Number("int"),
+ *     FailureTolerancePercentage: Number("int"),
+ *     MaxConcurrentCount: Number("int"),
+ *     MaxConcurrentPercentage: Number("int"),
+ *     ConcurrencyMode: "STRICT_FAILURE_TOLERANCE" || "SOFT_FAILURE_TOLERANCE",
+ *   },
+ *   RetainStacks: true || false, // required
+ *   OperationId: "STRING_VALUE",
+ *   CallAs: "SELF" || "DELEGATED_ADMIN",
+ * };
  * const command = new DeleteStackInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteStackInstancesOutput
+ * //   OperationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteStackInstancesCommandInput - {@link DeleteStackInstancesCommandInput}
+ * @returns {@link DeleteStackInstancesCommandOutput}
  * @see {@link DeleteStackInstancesCommandInput} for command's `input` shape.
  * @see {@link DeleteStackInstancesCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The specified operation isn't valid.</p>
+ *
+ * @throws {@link OperationIdAlreadyExistsException} (client fault)
+ *  <p>The specified operation ID already exists.</p>
+ *
+ * @throws {@link OperationInProgressException} (client fault)
+ *  <p>Another operation is currently in progress for this StackSet. Only one operation can be performed for a stack
+ *    set at a given time.</p>
+ *
+ * @throws {@link StackSetNotFoundException} (client fault)
+ *  <p>The specified StackSet doesn't exist.</p>
+ *
+ * @throws {@link StaleRequestException} (client fault)
+ *  <p>Another operation has been performed on this StackSet since the specified operation was performed.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteStackInstancesCommand extends $Command<
-  DeleteStackInstancesCommandInput,
-  DeleteStackInstancesCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteStackInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteStackInstancesCommandInput, DeleteStackInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DeleteStackInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteStackInstancesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteStackInstancesOutput.filterSensitiveLog,
+export class DeleteStackInstancesCommand extends command<DeleteStackInstancesCommandInput, DeleteStackInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteStackInstances",
+  DeleteStackInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteStackInstancesInput;
+      output: DeleteStackInstancesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteStackInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteStackInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteStackInstancesCommandOutput> {
-    return deserializeAws_queryDeleteStackInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteStackInstancesCommandInput;
+      output: DeleteStackInstancesCommandOutput;
+    };
+  };
 }

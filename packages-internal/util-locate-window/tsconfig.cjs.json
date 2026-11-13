@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "outDir": "dist-cjs",
+    "rootDir": "src",
+    "strict": false,
+    "strictNullChecks": true,
+    "noCheck": true
+  },
+  "extends": "../../tsconfig.cjs.json",
+  "include": ["src/"]
+}

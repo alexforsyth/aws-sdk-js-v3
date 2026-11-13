@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { DescribeAccountLimitsInput, DescribeAccountLimitsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeAccountLimitsCommand,
-  serializeAws_queryDescribeAccountLimitsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAccountLimitsInput, DescribeAccountLimitsOutput } from "../models/models_0";
+import { DescribeAccountLimits$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccountLimitsCommand}.
+ */
 export interface DescribeAccountLimitsCommandInput extends DescribeAccountLimitsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccountLimitsCommand}.
+ */
 export interface DescribeAccountLimitsCommandOutput extends DescribeAccountLimitsOutput, __MetadataBearer {}
 
 /**
@@ -34,68 +31,54 @@ export interface DescribeAccountLimitsCommandOutput extends DescribeAccountLimit
  * ```javascript
  * import { ElasticLoadBalancingClient, DescribeAccountLimitsCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, DescribeAccountLimitsCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // DescribeAccountLimitsInput
+ *   Marker: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ * };
  * const command = new DescribeAccountLimitsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccountLimitsOutput
+ * //   Limits: [ // Limits
+ * //     { // Limit
+ * //       Name: "STRING_VALUE",
+ * //       Max: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccountLimitsCommandInput - {@link DescribeAccountLimitsCommandInput}
+ * @returns {@link DescribeAccountLimitsCommandOutput}
  * @see {@link DescribeAccountLimitsCommandInput} for command's `input` shape.
  * @see {@link DescribeAccountLimitsCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAccountLimitsCommand extends $Command<
-  DescribeAccountLimitsCommandInput,
-  DescribeAccountLimitsCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccountLimitsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccountLimitsCommandInput, DescribeAccountLimitsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "DescribeAccountLimitsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccountLimitsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccountLimitsOutput.filterSensitiveLog,
+export class DescribeAccountLimitsCommand extends command<DescribeAccountLimitsCommandInput, DescribeAccountLimitsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccountLimits",
+  DescribeAccountLimits$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccountLimitsInput;
+      output: DescribeAccountLimitsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAccountLimitsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeAccountLimitsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAccountLimitsCommandOutput> {
-    return deserializeAws_queryDescribeAccountLimitsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccountLimitsCommandInput;
+      output: DescribeAccountLimitsCommandOutput;
+    };
+  };
 }

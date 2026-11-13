@@ -1,0 +1,85 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagResourceRequest, TagResourceResponse } from "../models/models_0";
+import { TagResource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagResourceCommand}.
+ */
+export interface TagResourceCommandInput extends TagResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TagResourceCommand}.
+ */
+export interface TagResourceCommandOutput extends TagResourceResponse, __MetadataBearer {}
+
+/**
+ * <p>Adds or updates tags for a Route 53 Global Resolver resource. Tags are key-value pairs that help you organize and identify your resources.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { Route53GlobalResolverClient, TagResourceCommand } from "@aws-sdk/client-route53globalresolver"; // ES Modules import
+ * // const { Route53GlobalResolverClient, TagResourceCommand } = require("@aws-sdk/client-route53globalresolver"); // CommonJS import
+ * // import type { Route53GlobalResolverClientConfig } from "@aws-sdk/client-route53globalresolver";
+ * const config = {}; // type is Route53GlobalResolverClientConfig
+ * const client = new Route53GlobalResolverClient(config);
+ * const input = { // TagResourceRequest
+ *   resourceArn: "STRING_VALUE", // required
+ *   tags: { // Tags // required
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new TagResourceCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param TagResourceCommandInput - {@link TagResourceCommandInput}
+ * @returns {@link TagResourceCommandOutput}
+ * @see {@link TagResourceCommandInput} for command's `input` shape.
+ * @see {@link TagResourceCommandOutput} for command's `response` shape.
+ * @see {@link Route53GlobalResolverClientResolvedConfig | config} for Route53GlobalResolverClient's `config` shape.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found. Verify the resource ID and try again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request would exceed one or more service quotas. Check your current usage and quotas, then try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters are invalid. Check the parameter values and try again.</p>
+ *
+ * @throws {@link Route53GlobalResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53GlobalResolver service.</p>
+ *
+ *
+ * @public
+ */
+export class TagResourceCommand extends command<TagResourceCommandInput, TagResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagResource",
+  TagResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagResourceRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagResourceCommandInput;
+      output: TagResourceCommandOutput;
+    };
+  };
+}

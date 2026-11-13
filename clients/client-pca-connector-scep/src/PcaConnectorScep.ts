@@ -1,0 +1,334 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateChallengeCommandInput,
+  type CreateChallengeCommandOutput,
+  CreateChallengeCommand,
+} from "./commands/CreateChallengeCommand";
+import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
+  CreateConnectorCommand,
+} from "./commands/CreateConnectorCommand";
+import {
+  type DeleteChallengeCommandInput,
+  type DeleteChallengeCommandOutput,
+  DeleteChallengeCommand,
+} from "./commands/DeleteChallengeCommand";
+import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
+  DeleteConnectorCommand,
+} from "./commands/DeleteConnectorCommand";
+import {
+  type GetChallengeMetadataCommandInput,
+  type GetChallengeMetadataCommandOutput,
+  GetChallengeMetadataCommand,
+} from "./commands/GetChallengeMetadataCommand";
+import {
+  type GetChallengePasswordCommandInput,
+  type GetChallengePasswordCommandOutput,
+  GetChallengePasswordCommand,
+} from "./commands/GetChallengePasswordCommand";
+import {
+  type GetConnectorCommandInput,
+  type GetConnectorCommandOutput,
+  GetConnectorCommand,
+} from "./commands/GetConnectorCommand";
+import {
+  type ListChallengeMetadataCommandInput,
+  type ListChallengeMetadataCommandOutput,
+  ListChallengeMetadataCommand,
+} from "./commands/ListChallengeMetadataCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
+  ListConnectorsCommand,
+} from "./commands/ListConnectorsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import { paginateListChallengeMetadata } from "./pagination/ListChallengeMetadataPaginator";
+import { paginateListConnectors } from "./pagination/ListConnectorsPaginator";
+import { PcaConnectorScepClient } from "./PcaConnectorScepClient";
+
+const commands = {
+  CreateChallengeCommand,
+  CreateConnectorCommand,
+  DeleteChallengeCommand,
+  DeleteConnectorCommand,
+  GetChallengeMetadataCommand,
+  GetChallengePasswordCommand,
+  GetConnectorCommand,
+  ListChallengeMetadataCommand,
+  ListConnectorsCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateListChallengeMetadata,
+  paginateListConnectors,
+};
+
+/**
+ * @public
+ */
+export interface PcaConnectorScepRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface PcaConnectorScep {
+  /**
+   * @see {@link CreateChallengeCommand}
+   */
+  createChallenge(
+    args: CreateChallengeCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<CreateChallengeCommandOutput>;
+  createChallenge(
+    args: CreateChallengeCommandInput,
+    cb: (err: any, data?: CreateChallengeCommandOutput) => void
+  ): void;
+  createChallenge(
+    args: CreateChallengeCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: CreateChallengeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteChallengeCommand}
+   */
+  deleteChallenge(
+    args: DeleteChallengeCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<DeleteChallengeCommandOutput>;
+  deleteChallenge(
+    args: DeleteChallengeCommandInput,
+    cb: (err: any, data?: DeleteChallengeCommandOutput) => void
+  ): void;
+  deleteChallenge(
+    args: DeleteChallengeCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: DeleteChallengeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetChallengeMetadataCommand}
+   */
+  getChallengeMetadata(
+    args: GetChallengeMetadataCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<GetChallengeMetadataCommandOutput>;
+  getChallengeMetadata(
+    args: GetChallengeMetadataCommandInput,
+    cb: (err: any, data?: GetChallengeMetadataCommandOutput) => void
+  ): void;
+  getChallengeMetadata(
+    args: GetChallengeMetadataCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: GetChallengeMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetChallengePasswordCommand}
+   */
+  getChallengePassword(
+    args: GetChallengePasswordCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<GetChallengePasswordCommandOutput>;
+  getChallengePassword(
+    args: GetChallengePasswordCommandInput,
+    cb: (err: any, data?: GetChallengePasswordCommandOutput) => void
+  ): void;
+  getChallengePassword(
+    args: GetChallengePasswordCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: GetChallengePasswordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectorCommand}
+   */
+  getConnector(
+    args: GetConnectorCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<GetConnectorCommandOutput>;
+  getConnector(
+    args: GetConnectorCommandInput,
+    cb: (err: any, data?: GetConnectorCommandOutput) => void
+  ): void;
+  getConnector(
+    args: GetConnectorCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: GetConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChallengeMetadataCommand}
+   */
+  listChallengeMetadata(
+    args: ListChallengeMetadataCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<ListChallengeMetadataCommandOutput>;
+  listChallengeMetadata(
+    args: ListChallengeMetadataCommandInput,
+    cb: (err: any, data?: ListChallengeMetadataCommandOutput) => void
+  ): void;
+  listChallengeMetadata(
+    args: ListChallengeMetadataCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: ListChallengeMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: PcaConnectorScepRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: PcaConnectorScepRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChallengeMetadataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListChallengeMetadataCommandOutput}.
+   */
+  paginateListChallengeMetadata(
+    args: ListChallengeMetadataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListChallengeMetadataCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorsCommandOutput}.
+   */
+  paginateListConnectors(
+    args?: ListConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorsCommandOutput>;
+}
+
+/**
+ * <p>Connector for SCEP creates a connector between Amazon Web Services Private CA and your SCEP-enabled clients and devices. For more information, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlconnector-for-scep.html">Connector for SCEP</a> in the <i>Amazon Web Services Private CA User Guide</i>.</p>
+ * @public
+ */
+export class PcaConnectorScep extends PcaConnectorScepClient implements PcaConnectorScep {}
+createAggregatedClient(commands, PcaConnectorScep, { paginators });

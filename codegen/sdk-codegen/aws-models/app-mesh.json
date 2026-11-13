@@ -1,5 +1,5 @@
 {
-  "smithy": "1.0",
+  "smithy": "2.0",
   "shapes": {
     "com.amazonaws.appmesh#AccessLog": {
       "type": "union",
@@ -48,16 +48,1307 @@
           "sdkId": "App Mesh",
           "arnNamespace": "appmesh",
           "cloudFormationName": "AppMesh",
-          "cloudTrailEventSource": "appmesh.amazonaws.com",
-          "endpointPrefix": "appmesh"
+          "cloudTrailEventSource": "appmesh.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "appmesh"
         },
         "aws.protocols#restJson1": {},
         "smithy.api#cors": {},
-        "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS,\n         Kubernetes on Amazon Web Services, and Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
-        "smithy.api#title": "AWS App Mesh"
+        "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to\n         monitor and control microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for\n         every microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS, Kubernetes on Amazon Web Services, and\n            Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery\n            naming for their components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n               Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+        "smithy.api#title": "AWS App Mesh",
+        "smithy.rules#endpointBdd": {
+          "version": "1.1",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Endpoint"
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ]
+            },
+            {
+              "fn": "aws.partition",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ],
+              "assign": "PartitionResult"
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseFIPS"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseDualStack"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsDualStack"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsFIPS"
+                  ]
+                },
+                true
+              ]
+            }
+          ],
+          "results": [
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": {
+                  "ref": "Endpoint"
+                },
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://appmesh-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://appmesh-fips.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS is enabled but this partition does not support FIPS",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://appmesh.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "DualStack is enabled but this partition does not support DualStack",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://appmesh.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ],
+          "root": 2,
+          "nodeCount": 13,
+          "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+        },
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseDualStack"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Region"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "aws.partition",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ],
+                      "assign": "PartitionResult"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        },
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://appmesh-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://appmesh-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS is enabled but this partition does not support FIPS",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://appmesh.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "DualStack is enabled but this partition does not support DualStack",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": "https://appmesh.{Region}.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.af-south-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.af-south-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "af-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ap-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-northeast-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-northeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-northeast-2.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-south-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-south-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ap-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-southeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-southeast-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ap-southeast-2.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ca-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ca-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.ca-central-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "ca-central-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-central-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-north-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-north-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "eu-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-south-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-south-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "eu-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-west-2.api.aws"
+                }
+              },
+              "params": {
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-west-3.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-3",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.eu-west-3.api.aws"
+                }
+              },
+              "params": {
+                "Region": "eu-west-3",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.me-south-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "me-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.me-south-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "me-south-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.sa-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "sa-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.sa-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "sa-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-east-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-east-2.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-west-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-west-2.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.cn-northwest-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://appmesh.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
       }
     },
     "com.amazonaws.appmesh#Arn": {
@@ -69,20 +1360,20 @@
         "key": {
           "target": "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeKey",
           "traits": {
-            "smithy.api#documentation": "<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
+            "smithy.api#documentation": "<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is\n         returned.</p>",
             "smithy.api#required": {}
           }
         },
         "value": {
           "target": "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeValue",
           "traits": {
-            "smithy.api#documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
+            "smithy.api#documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is\n         returned.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object that represents the Cloud Map attribute information for your virtual\n         node.</p>\n         <note>\n            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
+        "smithy.api#documentation": "<p>An object that represents the Cloud Map attribute information for your\n         virtual node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
       }
     },
     "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeKey": {
@@ -142,10 +1433,16 @@
           "traits": {
             "smithy.api#documentation": "<p>A string map that contains attributes with values that you can use to filter instances\n         by any custom attribute that you specified when you registered the instance. Only instances\n         that match all of the specified key/value pairs will be returned.</p>"
           }
+        },
+        "ipPreference": {
+          "target": "com.amazonaws.appmesh#IpPreference",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred IP version that this virtual node uses. Setting the IP preference on the\n         virtual node only overrides the IP preference set for the mesh on this specific\n         node.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object that represents the Cloud Map service discovery information for your virtual\n         node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
+        "smithy.api#documentation": "<p>An object that represents the Cloud Map service discovery information for\n         your virtual node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
       }
     },
     "com.amazonaws.appmesh#Backend": {
@@ -227,7 +1524,7 @@
         "enforce": {
           "target": "smithy.api#Boolean",
           "traits": {
-            "smithy.api#box": {},
+            "smithy.api#default": null,
             "smithy.api#documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>"
           }
         },
@@ -325,9 +1622,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Creates a gateway route.</p>\n         <p>A gateway route is attached to a virtual gateway and routes traffic to an existing\n         virtual service. If a route matches a request, it can distribute traffic to a target\n         virtual service.</p>\n         <p>For more information about gateway routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html\">Gateway routes</a>.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -381,7 +1677,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -437,9 +1733,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Creates a service mesh.</p>\n         <p> A service mesh is a logical boundary for network traffic between services that are\n         represented by resources within the mesh. After you create your service mesh, you can\n         create virtual services, virtual nodes, virtual routers, and routes to distribute traffic\n         between the applications in your mesh.</p>\n         <p>For more information about service meshes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html\">Service meshes</a>.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -532,9 +1827,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p> You can route several different protocols and define a retry policy for a route.\n         Traffic can be routed to one or more virtual nodes.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -589,7 +1883,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -649,11 +1943,10 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a virtual gateway.</p>\n         <p>A virtual gateway allows resources outside your mesh to communicate to resources that\n         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS\n         task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which\n         represents an Envoy running with an application, a virtual gateway represents Envoy\n         deployed by itself.</p>\n         <p>For more information about virtual gateways, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html\">Virtual gateways</a>. </p>",
+        "smithy.api#documentation": "<p>Creates a virtual gateway.</p>\n         <p>A virtual gateway allows resources outside your mesh to communicate to resources that\n         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a\n         virtual node, which represents an Envoy running with an application, a virtual gateway\n         represents Envoy deployed by itself.</p>\n         <p>For more information about virtual gateways, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html\">Virtual gateways</a>. </p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualGateways",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -699,7 +1992,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -753,11 +2046,10 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group, and whether the proxy running in a task\n         group will communicate with other proxies using Transport Layer Security (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in\n         the AWS App Mesh User Guide.</p>",
+        "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can\n         specify the service discovery information for your task group, and whether the proxy\n         running in a task group will communicate with other proxies using Transport Layer Security\n         (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information aboutApp Mesh Envoy variables, see\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy\n            image</a> in the App Mesh User Guide.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualNodes",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -804,7 +2096,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -866,9 +2158,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Specify a <code>listener</code> for any inbound traffic that your virtual router\n         receives. Create a virtual router for each protocol and port that you need to route.\n         Virtual routers handle traffic for one or more virtual services within your mesh. After you\n         create your virtual router, create and associate routes for your virtual router that direct\n         incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html\">Virtual routers</a>.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualRouters",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -915,7 +2206,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -977,9 +2268,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html\">Virtual services</a>.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualServices",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -1026,7 +2316,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1100,9 +2390,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing gateway route.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1137,7 +2426,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1190,9 +2479,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing service mesh.</p>\n         <p>You must delete all resources (virtual services, routes, virtual routers, and virtual\n         nodes) in the service mesh before you can delete the mesh itself.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1263,9 +2551,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing route.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1300,7 +2587,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1359,9 +2646,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway\n         routes are associated to it.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1388,7 +2674,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1441,9 +2727,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing virtual node.</p>\n         <p>You must delete any virtual services that list a virtual node as a service provider\n         before you can delete the virtual node itself.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1470,7 +2755,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1529,9 +2814,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing virtual router.</p>\n         <p>You must delete any routes associated with the virtual router before you can delete the\n         router itself.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1558,7 +2842,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1617,9 +2901,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes an existing virtual service.</p>",
         "smithy.api#http": {
-          "method": "DELETE",
           "uri": "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-          "code": 200
+          "method": "DELETE"
         },
         "smithy.api#idempotent": {}
       }
@@ -1646,7 +2929,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1702,9 +2985,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing gateway route.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -1739,7 +3021,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1789,9 +3071,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing service mesh.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -1810,7 +3091,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -1866,9 +3147,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing route.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -1895,7 +3175,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         },
@@ -1959,9 +3239,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing virtual gateway.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -1988,7 +3267,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -2038,9 +3317,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing virtual node.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -2067,7 +3345,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -2123,9 +3401,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing virtual router.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -2152,7 +3429,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -2208,9 +3485,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Describes an existing virtual service.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#readonly": {}
       }
@@ -2237,7 +3513,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -2292,6 +3568,12 @@
           "traits": {
             "smithy.api#documentation": "<p>Specifies the DNS response type for the virtual node.</p>"
           }
+        },
+        "ipPreference": {
+          "target": "com.amazonaws.appmesh#IpPreference",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred IP version that this virtual node uses. Setting the IP preference on the\n         virtual node only overrides the IP preference set for the mesh on this specific\n         node.</p>"
+          }
         }
       },
       "traits": {
@@ -2336,7 +3618,6 @@
     "com.amazonaws.appmesh#DurationValue": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0
         }
@@ -2348,7 +3629,7 @@
         "type": {
           "target": "com.amazonaws.appmesh#EgressFilterType",
           "traits": {
-            "smithy.api#documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any\n         traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter\n         type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the\n         service mesh.</p>",
+            "smithy.api#documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any\n         traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the\n         egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or\n         outside of the service mesh.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2387,8 +3668,14 @@
         "path": {
           "target": "com.amazonaws.appmesh#FilePath",
           "traits": {
-            "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p> \n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
+            "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>\n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
             "smithy.api#required": {}
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.appmesh#LoggingFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The specified format for the logs. The format is either <code>json_format</code> or\n            <code>text_format</code>.</p>"
           }
         }
       },
@@ -2448,10 +3735,7 @@
       },
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoute/{gatewayRouteName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoute/{gatewayRouteName}"
         }
       }
     },
@@ -2552,7 +3836,6 @@
     "com.amazonaws.appmesh#GatewayRoutePriority": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0,
           "max": 1000
@@ -2586,14 +3869,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2705,6 +3988,12 @@
             "smithy.api#documentation": "<p>An object that represents a virtual service gateway route target.</p>",
             "smithy.api#required": {}
           }
+        },
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The port number of the gateway route target.</p>"
+          }
         }
       },
       "traits": {
@@ -2789,6 +4078,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The gateway route metadata to be matched on.</p>"
           }
+        },
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The gateway route port to be matched on.</p>"
+          }
         }
       },
       "traits": {
@@ -2808,7 +4103,7 @@
         "invert": {
           "target": "smithy.api#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+            "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value\n         is <code>False</code>.</p>"
           }
         },
         "match": {
@@ -2903,7 +4198,7 @@
         "httpRetryEvents": {
           "target": "com.amazonaws.appmesh#HttpRetryPolicyEvents",
           "traits": {
-            "smithy.api#documentation": "<p>Specify at least one of the following values.</p> \n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
           }
         },
         "tcpRetryEvents": {
@@ -3030,6 +4325,12 @@
           "target": "com.amazonaws.appmesh#GrpcRouteMetadataList",
           "traits": {
             "smithy.api#documentation": "<p>An object that represents the data to match from the request.</p>"
+          }
+        },
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The port number to match on.</p>"
           }
         }
       },
@@ -3193,7 +4494,6 @@
     "com.amazonaws.appmesh#HealthCheckIntervalMillis": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 5000,
           "max": 300000
@@ -3267,7 +4567,6 @@
     "com.amazonaws.appmesh#HealthCheckTimeoutMillis": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 2000,
           "max": 60000
@@ -3333,11 +4632,14 @@
         "invert": {
           "target": "smithy.api#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+            "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value\n         is <code>False</code>.</p>"
           }
         },
         "match": {
-          "target": "com.amazonaws.appmesh#HeaderMatchMethod"
+          "target": "com.amazonaws.appmesh#HeaderMatchMethod",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that represents the method and value to match with the header value sent in a\n         request. Specify one match method.</p>"
+          }
         }
       },
       "traits": {
@@ -3393,6 +4695,12 @@
           "target": "com.amazonaws.appmesh#HttpGatewayRouteHeaders",
           "traits": {
             "smithy.api#documentation": "<p>The client request headers to match on.</p>"
+          }
+        },
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The port number to match on.</p>"
           }
         }
       },
@@ -3603,7 +4911,7 @@
         "httpRetryEvents": {
           "target": "com.amazonaws.appmesh#HttpRetryPolicyEvents",
           "traits": {
-            "smithy.api#documentation": "<p>Specify at least one of the following values.</p> \n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
           }
         },
         "tcpRetryEvents": {
@@ -3764,6 +5072,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The client request headers to match on.</p>"
           }
+        },
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The port number to match on.</p>"
+          }
         }
       },
       "traits": {
@@ -3819,6 +5133,75 @@
         "smithy.api#retryable": {}
       }
     },
+    "com.amazonaws.appmesh#IpPreference": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "IPv6_PREFERRED",
+            "name": "IPv6_PREFERRED"
+          },
+          {
+            "value": "IPv4_PREFERRED",
+            "name": "IPv4_PREFERRED"
+          },
+          {
+            "value": "IPv4_ONLY",
+            "name": "IPv4_ONLY"
+          },
+          {
+            "value": "IPv6_ONLY",
+            "name": "IPv6_ONLY"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appmesh#JsonFormat": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appmesh#JsonFormatRef"
+      }
+    },
+    "com.amazonaws.appmesh#JsonFormatRef": {
+      "type": "structure",
+      "members": {
+        "key": {
+          "target": "com.amazonaws.appmesh#JsonKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The specified key for the JSON.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.appmesh#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The specified value for the JSON.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that represents the key value pairs for the JSON.</p>"
+      }
+    },
+    "com.amazonaws.appmesh#JsonKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.appmesh#JsonValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
     "com.amazonaws.appmesh#LimitExceededException": {
       "type": "structure",
       "members": {
@@ -3827,7 +5210,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>You have exceeded a service limit for your account. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html\">Service\n            Limits</a> in the <i>AWS App Mesh User Guide</i>.</p>",
+        "smithy.api#documentation": "<p>You have exceeded a service limit for your account. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html\">Service\n            Limits</a> in the <i>App Mesh User Guide</i>.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -3863,15 +5246,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing gateway routes that are associated to a virtual\n         gateway.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "gatewayRoutes",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "gatewayRoutes"
         },
         "smithy.api#readonly": {}
       }
@@ -3912,7 +5294,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -3921,7 +5303,6 @@
     "com.amazonaws.appmesh#ListGatewayRoutesLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -3977,15 +5358,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing service meshes.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "meshes",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "meshes"
         },
         "smithy.api#readonly": {}
       }
@@ -3996,7 +5376,7 @@
         "nextToken": {
           "target": "smithy.api#String",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p> \n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
             "smithy.api#httpQuery": "nextToken"
           }
         },
@@ -4015,7 +5395,6 @@
     "com.amazonaws.appmesh#ListMeshesLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4074,15 +5453,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing routes in a service mesh.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "routes",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "routes"
         },
         "smithy.api#readonly": {}
       }
@@ -4123,7 +5501,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -4135,7 +5513,6 @@
     "com.amazonaws.appmesh#ListRoutesLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4194,15 +5571,14 @@
       "traits": {
         "smithy.api#documentation": "<p>List the tags for an App Mesh resource.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/tags",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "tags",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "tags"
         },
         "smithy.api#readonly": {},
         "smithy.api#tags": ["not-preview"]
@@ -4290,15 +5666,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing virtual gateways in a service mesh.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualGateways",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "virtualGateways",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "virtualGateways"
         },
         "smithy.api#readonly": {}
       }
@@ -4331,7 +5706,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -4340,7 +5715,6 @@
     "com.amazonaws.appmesh#ListVirtualGatewaysLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4396,15 +5770,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing virtual nodes.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualNodes",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "virtualNodes",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "virtualNodes"
         },
         "smithy.api#readonly": {}
       }
@@ -4437,7 +5810,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -4449,7 +5822,6 @@
     "com.amazonaws.appmesh#ListVirtualNodesLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4508,15 +5880,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing virtual routers in a service mesh.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualRouters",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "virtualRouters",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "virtualRouters"
         },
         "smithy.api#readonly": {}
       }
@@ -4549,7 +5920,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -4561,7 +5932,6 @@
     "com.amazonaws.appmesh#ListVirtualRoutersLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4620,15 +5990,14 @@
       "traits": {
         "smithy.api#documentation": "<p>Returns a list of existing virtual services in a service mesh.</p>",
         "smithy.api#http": {
-          "method": "GET",
           "uri": "/v20190125/meshes/{meshName}/virtualServices",
-          "code": 200
+          "method": "GET"
         },
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
-          "items": "virtualServices",
-          "pageSize": "limit"
+          "pageSize": "limit",
+          "items": "virtualServices"
         },
         "smithy.api#readonly": {}
       }
@@ -4661,7 +6030,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -4673,7 +6042,6 @@
     "com.amazonaws.appmesh#ListVirtualServicesLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -4744,6 +6112,15 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>An object that represents a listener for a virtual node.</p>"
+      }
+    },
+    "com.amazonaws.appmesh#ListenerPort": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 65535
+        }
       }
     },
     "com.amazonaws.appmesh#ListenerTimeout": {
@@ -4818,7 +6195,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+        "smithy.api#documentation": "<p>An object that represents an Certificate Manager certificate.</p>"
       }
     },
     "com.amazonaws.appmesh#ListenerTlsCertificate": {
@@ -4827,7 +6204,7 @@
         "acm": {
           "target": "com.amazonaws.appmesh#ListenerTlsAcmCertificate",
           "traits": {
-            "smithy.api#documentation": "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+            "smithy.api#documentation": "<p>A reference to an object that represents an Certificate Manager certificate.</p>"
           }
         },
         "file": {
@@ -4900,7 +6277,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy\n         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a>\n         for more info.</p>"
+        "smithy.api#documentation": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy\n         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh\n         <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
       }
     },
     "com.amazonaws.appmesh#ListenerTlsValidationContext": {
@@ -4948,12 +6325,6 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.appmesh#Listener"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 1
-        }
       }
     },
     "com.amazonaws.appmesh#Logging": {
@@ -4968,6 +6339,26 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>An object that represents the logging information for a virtual node.</p>"
+      }
+    },
+    "com.amazonaws.appmesh#LoggingFormat": {
+      "type": "union",
+      "members": {
+        "text": {
+          "target": "com.amazonaws.appmesh#TextFormat",
+          "traits": {
+            "smithy.api#documentation": "<p/>"
+          }
+        },
+        "json": {
+          "target": "com.amazonaws.appmesh#JsonFormat",
+          "traits": {
+            "smithy.api#documentation": "<p/>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that represents the format for the logs.</p>"
       }
     },
     "com.amazonaws.appmesh#MatchRange": {
@@ -5019,7 +6410,6 @@
     "com.amazonaws.appmesh#MaxRetries": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0
         }
@@ -5063,10 +6453,7 @@
       ],
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}"
         }
       }
     },
@@ -5130,14 +6517,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -5174,6 +6561,20 @@
         "smithy.api#documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
       }
     },
+    "com.amazonaws.appmesh#MeshServiceDiscovery": {
+      "type": "structure",
+      "members": {
+        "ipPreference": {
+          "target": "com.amazonaws.appmesh#IpPreference",
+          "traits": {
+            "smithy.api#documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that represents the service discovery information for a service mesh.</p>"
+      }
+    },
     "com.amazonaws.appmesh#MeshSpec": {
       "type": "structure",
       "members": {
@@ -5182,6 +6583,9 @@
           "traits": {
             "smithy.api#documentation": "<p>The egress filter rules for the service mesh.</p>"
           }
+        },
+        "serviceDiscovery": {
+          "target": "com.amazonaws.appmesh#MeshServiceDiscovery"
         }
       },
       "traits": {
@@ -5282,7 +6686,6 @@
     "com.amazonaws.appmesh#OutlierDetectionMaxEjectionPercent": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0,
           "max": 100
@@ -5292,7 +6695,6 @@
     "com.amazonaws.appmesh#OutlierDetectionMaxServerErrors": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1
         }
@@ -5301,6 +6703,7 @@
     "com.amazonaws.appmesh#PercentInt": {
       "type": "integer",
       "traits": {
+        "smithy.api#default": 0,
         "smithy.api#range": {
           "min": 0,
           "max": 100
@@ -5362,9 +6765,12 @@
       }
     },
     "com.amazonaws.appmesh#PortSet": {
-      "type": "set",
+      "type": "list",
       "member": {
         "target": "com.amazonaws.appmesh#PortNumber"
+      },
+      "traits": {
+        "smithy.api#uniqueItems": {}
       }
     },
     "com.amazonaws.appmesh#QueryParameterMatch": {
@@ -5438,14 +6844,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -5493,10 +6899,7 @@
       },
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}/route/{routeName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}/route/{routeName}"
         }
       }
     },
@@ -5564,7 +6967,6 @@
     "com.amazonaws.appmesh#RoutePriority": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0,
           "max": 1000
@@ -5598,14 +7000,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -5897,9 +7299,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource aren't specified in the request parameters, they aren't\n         changed. When a resource is deleted, the tags associated with that resource are also\n         deleted.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/tag",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {},
         "smithy.api#tags": ["not-preview"]
@@ -5947,7 +7348,6 @@
     "com.amazonaws.appmesh#TagsLimit": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 50
@@ -5992,6 +7392,12 @@
           "traits": {
             "smithy.api#documentation": "<p>An object that represents types of timeouts. </p>"
           }
+        },
+        "match": {
+          "target": "com.amazonaws.appmesh#TcpRouteMatch",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that represents the criteria for determining a request match.</p>"
+          }
         }
       },
       "traits": {
@@ -6013,6 +7419,20 @@
         "smithy.api#documentation": "<p>An object that represents the action to take if a match is determined.</p>"
       }
     },
+    "com.amazonaws.appmesh#TcpRouteMatch": {
+      "type": "structure",
+      "members": {
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The port number to match on.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object representing the TCP route to match.</p>"
+      }
+    },
     "com.amazonaws.appmesh#TcpTimeout": {
       "type": "structure",
       "members": {
@@ -6025,6 +7445,15 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>An object that represents types of timeouts. </p>"
+      }
+    },
+    "com.amazonaws.appmesh#TextFormat": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1000
+        }
       }
     },
     "com.amazonaws.appmesh#TlsValidationContext": {
@@ -6040,7 +7469,7 @@
         "subjectAlternativeNames": {
           "target": "com.amazonaws.appmesh#SubjectAlternativeNames",
           "traits": {
-            "smithy.api#documentation": "<p>A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.</p>"
+            "smithy.api#documentation": "<p>A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context. If you\n         don't specify SANs on the <i>terminating</i> mesh endpoint, the Envoy proxy\n         for that node doesn't verify the SAN on a peer client certificate. If you don't specify\n         SANs on the <i>originating</i> mesh endpoint, the SAN on the certificate\n         provided by the terminating endpoint must match the mesh endpoint service discovery\n         configuration. Since SPIRE vended certificates have a SPIFFE ID as a name, you must set the\n         SAN since the name doesn't match the service discovery name.</p>"
           }
         }
       },
@@ -6090,7 +7519,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The\n         proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
+        "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The\n         proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh\n         <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
       }
     },
     "com.amazonaws.appmesh#TlsValidationContextTrust": {
@@ -6099,7 +7528,7 @@
         "acm": {
           "target": "com.amazonaws.appmesh#TlsValidationContextAcmTrust",
           "traits": {
-            "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         Certificate Manager certificate.</p>"
+            "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
           }
         },
         "file": {
@@ -6127,7 +7556,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The maximum request rate permitted by the App Mesh APIs has been exceeded for your\n         account. For best results, use an increasing or variable sleep interval between\n         requests.</p>",
+        "smithy.api#documentation": "<p>The maximum request rate permitted by the App Mesh APIs has been exceeded for\n         your account. For best results, use an increasing or variable sleep interval between\n         requests.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 429,
         "smithy.api#retryable": {
@@ -6179,9 +7608,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/untag",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {},
         "smithy.api#tags": ["not-preview"]
@@ -6254,9 +7682,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing gateway route that is associated to a specified virtual gateway in a\n         service mesh.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6305,7 +7732,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -6358,9 +7785,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing service mesh.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6446,9 +7872,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing route for a specified service mesh and virtual router.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6497,7 +7922,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -6559,9 +7984,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing virtual gateway in a specified service mesh.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6602,7 +8026,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -6658,9 +8082,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing virtual node in a specified service mesh.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6701,7 +8124,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -6763,9 +8186,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing virtual router in a specified service mesh.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6806,7 +8228,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -6868,9 +8290,8 @@
       "traits": {
         "smithy.api#documentation": "<p>Updates an existing virtual service in a specified service mesh.</p>",
         "smithy.api#http": {
-          "method": "PUT",
           "uri": "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-          "code": 200
+          "method": "PUT"
         },
         "smithy.api#idempotent": {}
       }
@@ -6911,7 +8332,7 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#httpQuery": "meshOwner"
           }
         }
@@ -6968,10 +8389,7 @@
       ],
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}"
         }
       }
     },
@@ -7035,7 +8453,7 @@
         "enforce": {
           "target": "smithy.api#Boolean",
           "traits": {
-            "smithy.api#box": {},
+            "smithy.api#default": null,
             "smithy.api#documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't\n         specified.</p>"
           }
         },
@@ -7165,6 +8583,12 @@
             "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>",
             "smithy.api#required": {}
           }
+        },
+        "format": {
+          "target": "com.amazonaws.appmesh#LoggingFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The specified format for the virtual gateway access logs. It can be either\n            <code>json_format</code> or <code>text_format</code>.</p>"
+          }
         }
       },
       "traits": {
@@ -7189,7 +8613,6 @@
     "com.amazonaws.appmesh#VirtualGatewayHealthCheckIntervalMillis": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 5000,
           "max": 300000
@@ -7263,7 +8686,6 @@
     "com.amazonaws.appmesh#VirtualGatewayHealthCheckTimeoutMillis": {
       "type": "long",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 2000,
           "max": 60000
@@ -7298,7 +8720,7 @@
         "maxPendingRequests": {
           "target": "com.amazonaws.appmesh#MaxPendingRequests",
           "traits": {
-            "smithy.api#box": {},
+            "smithy.api#default": null,
             "smithy.api#documentation": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to\n         upstream cluster.</p>"
           }
         }
@@ -7516,12 +8938,6 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.appmesh#VirtualGatewayListener"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 1
-        }
       }
     },
     "com.amazonaws.appmesh#VirtualGatewayLogging": {
@@ -7599,14 +9015,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -7767,7 +9183,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service\n         validation context trust. The proxy must be configured with a local SDS provider via a Unix\n         Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>"
+        "smithy.api#documentation": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service\n         validation context trust. The proxy must be configured with a local SDS provider via a Unix\n         Domain Socket. See App Mesh\n         <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
       }
     },
     "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextTrust": {
@@ -7776,7 +9192,7 @@
         "acm": {
           "target": "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextAcmTrust",
           "traits": {
-            "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         Certificate Manager certificate.</p>"
+            "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
           }
         },
         "file": {
@@ -7823,10 +9239,7 @@
       },
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}/virtualNode/{virtualNodeName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}/virtualNode/{virtualNodeName}"
         }
       }
     },
@@ -7953,7 +9366,7 @@
         "maxPendingRequests": {
           "target": "com.amazonaws.appmesh#MaxPendingRequests",
           "traits": {
-            "smithy.api#box": {},
+            "smithy.api#default": null,
             "smithy.api#documentation": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to\n         upstream cluster.</p>"
           }
         }
@@ -7988,14 +9401,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -8166,10 +9579,7 @@
       ],
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}"
         }
       }
     },
@@ -8245,12 +9655,6 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.appmesh#VirtualRouterListener"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 1
-        }
       }
     },
     "com.amazonaws.appmesh#VirtualRouterRef": {
@@ -8273,14 +9677,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -8407,10 +9811,7 @@
       },
       "traits": {
         "aws.api#arn": {
-          "template": "mesh/{meshName}/virtualService/{virtualServiceName}",
-          "absolute": false,
-          "noAccount": false,
-          "noRegion": false
+          "template": "mesh/{meshName}/virtualService/{virtualServiceName}"
         }
       }
     },
@@ -8528,14 +9929,14 @@
         "meshOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
         "resourceOwner": {
           "target": "com.amazonaws.appmesh#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+            "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -8578,7 +9979,7 @@
         "provider": {
           "target": "com.amazonaws.appmesh#VirtualServiceProvider",
           "traits": {
-            "smithy.api#documentation": "<p>The App Mesh object that is acting as the provider for a virtual service. You can specify\n         a single virtual node or virtual router.</p>"
+            "smithy.api#documentation": "<p>The App Mesh object that is acting as the provider for a virtual service. You\n         can specify a single virtual node or virtual router.</p>"
           }
         }
       },
@@ -8633,8 +10034,15 @@
         "weight": {
           "target": "com.amazonaws.appmesh#PercentInt",
           "traits": {
+            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The relative weight of the weighted target.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "port": {
+          "target": "com.amazonaws.appmesh#ListenerPort",
+          "traits": {
+            "smithy.api#documentation": "<p>The targeted port of the weighted object.</p>"
           }
         }
       },

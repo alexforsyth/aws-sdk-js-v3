@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRecordRequest, GetRecordResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRecordCommand,
-  serializeAws_restJson1GetRecordCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  SageMakerFeatureStoreRuntimeClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../SageMakerFeatureStoreRuntimeClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRecordRequest, GetRecordResponse } from "../models/models_0";
+import { GetRecord$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRecordCommand}.
+ */
 export interface GetRecordCommandInput extends GetRecordRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRecordCommand}.
+ */
 export interface GetRecordCommandOutput extends GetRecordResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +31,77 @@ export interface GetRecordCommandOutput extends GetRecordResponse, __MetadataBea
  * ```javascript
  * import { SageMakerFeatureStoreRuntimeClient, GetRecordCommand } from "@aws-sdk/client-sagemaker-featurestore-runtime"; // ES Modules import
  * // const { SageMakerFeatureStoreRuntimeClient, GetRecordCommand } = require("@aws-sdk/client-sagemaker-featurestore-runtime"); // CommonJS import
+ * // import type { SageMakerFeatureStoreRuntimeClientConfig } from "@aws-sdk/client-sagemaker-featurestore-runtime";
+ * const config = {}; // type is SageMakerFeatureStoreRuntimeClientConfig
  * const client = new SageMakerFeatureStoreRuntimeClient(config);
+ * const input = { // GetRecordRequest
+ *   FeatureGroupName: "STRING_VALUE", // required
+ *   RecordIdentifierValueAsString: "STRING_VALUE", // required
+ *   FeatureNames: [ // FeatureNames
+ *     "STRING_VALUE",
+ *   ],
+ *   ExpirationTimeResponse: "Enabled" || "Disabled",
+ * };
  * const command = new GetRecordCommand(input);
  * const response = await client.send(command);
+ * // { // GetRecordResponse
+ * //   Record: [ // Record
+ * //     { // FeatureValue
+ * //       FeatureName: "STRING_VALUE", // required
+ * //       ValueAsString: "STRING_VALUE",
+ * //       ValueAsStringList: [ // ValueAsStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   ExpiresAt: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetRecordCommandInput - {@link GetRecordCommandInput}
+ * @returns {@link GetRecordCommandOutput}
  * @see {@link GetRecordCommandInput} for command's `input` shape.
  * @see {@link GetRecordCommandOutput} for command's `response` shape.
- * @see {@link SageMakerFeatureStoreRuntimeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerFeatureStoreRuntimeClientResolvedConfig | config} for SageMakerFeatureStoreRuntimeClient's `config` shape.
  *
+ * @throws {@link AccessForbidden} (client fault)
+ *  <p>You do not have permission to perform an action.</p>
+ *
+ * @throws {@link InternalFailure} (server fault)
+ *  <p>An internal failure occurred. Try your request again. If the problem persists, contact
+ *             Amazon Web Services customer support.</p>
+ *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>A resource that is required to perform an action was not found.</p>
+ *
+ * @throws {@link ServiceUnavailable} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ValidationError} (client fault)
+ *  <p>There was an error validating your request.</p>
+ *
+ * @throws {@link SageMakerFeatureStoreRuntimeServiceException}
+ * <p>Base exception class for all service exceptions from SageMakerFeatureStoreRuntime service.</p>
+ *
+ *
+ * @public
  */
-export class GetRecordCommand extends $Command<
-  GetRecordCommandInput,
-  GetRecordCommandOutput,
-  SageMakerFeatureStoreRuntimeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRecordCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerFeatureStoreRuntimeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRecordCommandInput, GetRecordCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerFeatureStoreRuntimeClient";
-    const commandName = "GetRecordCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRecordRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRecordResponse.filterSensitiveLog,
+export class GetRecordCommand extends command<GetRecordCommandInput, GetRecordCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRecord",
+  GetRecord$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRecordRequest;
+      output: GetRecordResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRecordCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRecordCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRecordCommandOutput> {
-    return deserializeAws_restJson1GetRecordCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRecordCommandInput;
+      output: GetRecordCommandOutput;
+    };
+  };
 }

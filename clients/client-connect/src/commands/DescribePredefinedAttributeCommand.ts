@@ -1,0 +1,123 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePredefinedAttributeRequest, DescribePredefinedAttributeResponse } from "../models/models_1";
+import { DescribePredefinedAttribute$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePredefinedAttributeCommand}.
+ */
+export interface DescribePredefinedAttributeCommandInput extends DescribePredefinedAttributeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePredefinedAttributeCommand}.
+ */
+export interface DescribePredefinedAttributeCommandOutput extends DescribePredefinedAttributeResponse, __MetadataBearer {}
+
+/**
+ * <p>Describes a predefined attribute for the specified Connect Customer instance. A <i>predefined attribute</i>
+ *    is made up of a name and a value. You can use predefined attributes for:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Routing proficiency (for example, agent certification) that has predefined values (for example, a list of
+ *      possible certifications). For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create predefined attributes for routing contacts to
+ *       agents</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Contact information that varies between transfers or conferences, such as the name of the business unit
+ *      handling the contact. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html">Use contact segment attributes</a>.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For the predefined attributes per instance quota, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas">Connect Customer
+ *    quotas</a>.</p>
+ *          <p>
+ *             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Connect Customer endpoints and quotas</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, DescribePredefinedAttributeCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, DescribePredefinedAttributeCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // DescribePredefinedAttributeRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ * };
+ * const command = new DescribePredefinedAttributeCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribePredefinedAttributeResponse
+ * //   PredefinedAttribute: { // PredefinedAttribute
+ * //     Name: "STRING_VALUE",
+ * //     Values: { // PredefinedAttributeValues Union: only one key present
+ * //       StringList: [ // PredefinedAttributeStringValuesList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     Purposes: [ // PredefinedAttributePurposeNameList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     AttributeConfiguration: { // PredefinedAttributeConfiguration
+ * //       EnableValueValidationOnAssociation: true || false,
+ * //       IsReadOnly: true || false,
+ * //     },
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //     LastModifiedRegion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DescribePredefinedAttributeCommandInput - {@link DescribePredefinedAttributeCommandInput}
+ * @returns {@link DescribePredefinedAttributeCommandOutput}
+ * @see {@link DescribePredefinedAttributeCommandInput} for command's `input` shape.
+ * @see {@link DescribePredefinedAttributeCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribePredefinedAttributeCommand extends command<DescribePredefinedAttributeCommandInput, DescribePredefinedAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePredefinedAttribute",
+  DescribePredefinedAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePredefinedAttributeRequest;
+      output: DescribePredefinedAttributeResponse;
+    };
+    sdk: {
+      input: DescribePredefinedAttributeCommandInput;
+      output: DescribePredefinedAttributeCommandOutput;
+    };
+  };
+}

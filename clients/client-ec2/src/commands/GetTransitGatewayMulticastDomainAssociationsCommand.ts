@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetTransitGatewayMulticastDomainAssociationsRequest,
   GetTransitGatewayMulticastDomainAssociationsResult,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2GetTransitGatewayMulticastDomainAssociationsCommand,
-  serializeAws_ec2GetTransitGatewayMulticastDomainAssociationsCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_7";
+import { GetTransitGatewayMulticastDomainAssociations$ } from "../schemas/schemas_0";
 
-export interface GetTransitGatewayMulticastDomainAssociationsCommandInput
-  extends GetTransitGatewayMulticastDomainAssociationsRequest {}
-export interface GetTransitGatewayMulticastDomainAssociationsCommandOutput
-  extends GetTransitGatewayMulticastDomainAssociationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTransitGatewayMulticastDomainAssociationsCommand}.
+ */
+export interface GetTransitGatewayMulticastDomainAssociationsCommandInput extends GetTransitGatewayMulticastDomainAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTransitGatewayMulticastDomainAssociationsCommand}.
+ */
+export interface GetTransitGatewayMulticastDomainAssociationsCommandOutput extends GetTransitGatewayMulticastDomainAssociationsResult, __MetadataBearer {}
 
 /**
  * <p>Gets information about the associations for the transit gateway multicast domain.</p>
@@ -34,77 +32,70 @@ export interface GetTransitGatewayMulticastDomainAssociationsCommandOutput
  * ```javascript
  * import { EC2Client, GetTransitGatewayMulticastDomainAssociationsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetTransitGatewayMulticastDomainAssociationsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetTransitGatewayMulticastDomainAssociationsRequest
+ *   TransitGatewayMulticastDomainId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new GetTransitGatewayMulticastDomainAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetTransitGatewayMulticastDomainAssociationsResult
+ * //   MulticastDomainAssociations: [ // TransitGatewayMulticastDomainAssociationList
+ * //     { // TransitGatewayMulticastDomainAssociation
+ * //       TransitGatewayAttachmentId: "STRING_VALUE",
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //       ResourceOwnerId: "STRING_VALUE",
+ * //       Subnet: { // SubnetAssociation
+ * //         SubnetId: "STRING_VALUE",
+ * //         State: "pendingAcceptance" || "associating" || "associated" || "disassociating" || "disassociated" || "rejected" || "failed",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetTransitGatewayMulticastDomainAssociationsCommandInput - {@link GetTransitGatewayMulticastDomainAssociationsCommandInput}
+ * @returns {@link GetTransitGatewayMulticastDomainAssociationsCommandOutput}
  * @see {@link GetTransitGatewayMulticastDomainAssociationsCommandInput} for command's `input` shape.
  * @see {@link GetTransitGatewayMulticastDomainAssociationsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetTransitGatewayMulticastDomainAssociationsCommand extends $Command<
-  GetTransitGatewayMulticastDomainAssociationsCommandInput,
-  GetTransitGatewayMulticastDomainAssociationsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTransitGatewayMulticastDomainAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    GetTransitGatewayMulticastDomainAssociationsCommandInput,
-    GetTransitGatewayMulticastDomainAssociationsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetTransitGatewayMulticastDomainAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTransitGatewayMulticastDomainAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetTransitGatewayMulticastDomainAssociationsResult.filterSensitiveLog,
+export class GetTransitGatewayMulticastDomainAssociationsCommand extends command<GetTransitGatewayMulticastDomainAssociationsCommandInput, GetTransitGatewayMulticastDomainAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTransitGatewayMulticastDomainAssociations",
+  GetTransitGatewayMulticastDomainAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayMulticastDomainAssociationsRequest;
+      output: GetTransitGatewayMulticastDomainAssociationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetTransitGatewayMulticastDomainAssociationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2GetTransitGatewayMulticastDomainAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetTransitGatewayMulticastDomainAssociationsCommandOutput> {
-    return deserializeAws_ec2GetTransitGatewayMulticastDomainAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTransitGatewayMulticastDomainAssociationsCommandInput;
+      output: GetTransitGatewayMulticastDomainAssociationsCommandOutput;
+    };
+  };
 }

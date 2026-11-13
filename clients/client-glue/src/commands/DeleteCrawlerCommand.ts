@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { DeleteCrawlerRequest, DeleteCrawlerResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteCrawlerCommand,
-  serializeAws_json1_1DeleteCrawlerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteCrawlerRequest, DeleteCrawlerResponse } from "../models/models_1";
+import { DeleteCrawler$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCrawlerCommand}.
+ */
 export interface DeleteCrawlerCommandInput extends DeleteCrawlerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCrawlerCommand}.
+ */
 export interface DeleteCrawlerCommandOutput extends DeleteCrawlerResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,57 @@ export interface DeleteCrawlerCommandOutput extends DeleteCrawlerResponse, __Met
  * ```javascript
  * import { GlueClient, DeleteCrawlerCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, DeleteCrawlerCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // DeleteCrawlerRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCrawlerCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteCrawlerCommandInput - {@link DeleteCrawlerCommandInput}
+ * @returns {@link DeleteCrawlerCommandOutput}
  * @see {@link DeleteCrawlerCommandInput} for command's `input` shape.
  * @see {@link DeleteCrawlerCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link CrawlerRunningException} (client fault)
+ *  <p>The operation cannot be performed because the crawler is already running.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link SchedulerTransitioningException} (client fault)
+ *  <p>The specified scheduler is transitioning.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCrawlerCommand extends $Command<
-  DeleteCrawlerCommandInput,
-  DeleteCrawlerCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCrawlerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCrawlerCommandInput, DeleteCrawlerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "DeleteCrawlerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCrawlerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteCrawlerResponse.filterSensitiveLog,
+export class DeleteCrawlerCommand extends command<DeleteCrawlerCommandInput, DeleteCrawlerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCrawler",
+  DeleteCrawler$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCrawlerRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteCrawlerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteCrawlerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteCrawlerCommandOutput> {
-    return deserializeAws_json1_1DeleteCrawlerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCrawlerCommandInput;
+      output: DeleteCrawlerCommandOutput;
+    };
+  };
 }

@@ -1,102 +1,112 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListHyperParameterTuningJobsRequest, ListHyperParameterTuningJobsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListHyperParameterTuningJobsCommand,
-  serializeAws_json1_1ListHyperParameterTuningJobsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
-
-export interface ListHyperParameterTuningJobsCommandInput extends ListHyperParameterTuningJobsRequest {}
-export interface ListHyperParameterTuningJobsCommandOutput
-  extends ListHyperParameterTuningJobsResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListHyperParameterTuningJobsRequest, ListHyperParameterTuningJobsResponse } from "../models/models_4";
+import { ListHyperParameterTuningJobs$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets a list of <a>HyperParameterTuningJobSummary</a> objects that
- *             describe
- *             the hyperparameter tuning jobs launched in your account.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListHyperParameterTuningJobsCommand}.
+ */
+export interface ListHyperParameterTuningJobsCommandInput extends ListHyperParameterTuningJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListHyperParameterTuningJobsCommand}.
+ */
+export interface ListHyperParameterTuningJobsCommandOutput extends ListHyperParameterTuningJobsResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets a list of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html">HyperParameterTuningJobSummary</a> objects that describe the hyperparameter tuning jobs launched in your account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, ListHyperParameterTuningJobsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListHyperParameterTuningJobsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListHyperParameterTuningJobsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   SortBy: "Name" || "Status" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ *   NameContains: "STRING_VALUE",
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   LastModifiedTimeAfter: new Date("TIMESTAMP"),
+ *   LastModifiedTimeBefore: new Date("TIMESTAMP"),
+ *   StatusEquals: "Completed" || "InProgress" || "Failed" || "Stopped" || "Stopping" || "Deleting" || "DeleteFailed",
+ * };
  * const command = new ListHyperParameterTuningJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListHyperParameterTuningJobsResponse
+ * //   HyperParameterTuningJobSummaries: [ // HyperParameterTuningJobSummaries // required
+ * //     { // HyperParameterTuningJobSummary
+ * //       HyperParameterTuningJobName: "STRING_VALUE", // required
+ * //       HyperParameterTuningJobArn: "STRING_VALUE", // required
+ * //       HyperParameterTuningJobStatus: "Completed" || "InProgress" || "Failed" || "Stopped" || "Stopping" || "Deleting" || "DeleteFailed", // required
+ * //       Strategy: "Bayesian" || "Random" || "Hyperband" || "Grid", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       HyperParameterTuningEndTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       TrainingJobStatusCounters: { // TrainingJobStatusCounters
+ * //         Completed: Number("int"),
+ * //         InProgress: Number("int"),
+ * //         RetryableError: Number("int"),
+ * //         NonRetryableError: Number("int"),
+ * //         Stopped: Number("int"),
+ * //       },
+ * //       ObjectiveStatusCounters: { // ObjectiveStatusCounters
+ * //         Succeeded: Number("int"),
+ * //         Pending: Number("int"),
+ * //         Failed: Number("int"),
+ * //       },
+ * //       ResourceLimits: { // ResourceLimits
+ * //         MaxNumberOfTrainingJobs: Number("int"),
+ * //         MaxParallelTrainingJobs: Number("int"), // required
+ * //         MaxRuntimeInSeconds: Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListHyperParameterTuningJobsCommandInput - {@link ListHyperParameterTuningJobsCommandInput}
+ * @returns {@link ListHyperParameterTuningJobsCommandOutput}
  * @see {@link ListHyperParameterTuningJobsCommandInput} for command's `input` shape.
  * @see {@link ListHyperParameterTuningJobsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListHyperParameterTuningJobsCommand extends $Command<
-  ListHyperParameterTuningJobsCommandInput,
-  ListHyperParameterTuningJobsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListHyperParameterTuningJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListHyperParameterTuningJobsCommandInput, ListHyperParameterTuningJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListHyperParameterTuningJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListHyperParameterTuningJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListHyperParameterTuningJobsResponse.filterSensitiveLog,
+export class ListHyperParameterTuningJobsCommand extends command<ListHyperParameterTuningJobsCommandInput, ListHyperParameterTuningJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListHyperParameterTuningJobs",
+  ListHyperParameterTuningJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListHyperParameterTuningJobsRequest;
+      output: ListHyperParameterTuningJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListHyperParameterTuningJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListHyperParameterTuningJobsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListHyperParameterTuningJobsCommandOutput> {
-    return deserializeAws_json1_1ListHyperParameterTuningJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListHyperParameterTuningJobsCommandInput;
+      output: ListHyperParameterTuningJobsCommandOutput;
+    };
+  };
 }

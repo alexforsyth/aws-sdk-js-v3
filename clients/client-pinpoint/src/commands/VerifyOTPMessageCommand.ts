@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { VerifyOTPMessageRequest, VerifyOTPMessageResponse } from "../models/models_1";
+import { VerifyOTPMessage$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link VerifyOTPMessageCommand}.
+ */
+export interface VerifyOTPMessageCommandInput extends VerifyOTPMessageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link VerifyOTPMessageCommand}.
+ */
+export interface VerifyOTPMessageCommandOutput extends VerifyOTPMessageResponse, __MetadataBearer {}
+
+/**
+ * <p>Verify an OTP</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { PinpointClient, VerifyOTPMessageCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
+ * // const { PinpointClient, VerifyOTPMessageCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
+ * const client = new PinpointClient(config);
+ * const input = { // VerifyOTPMessageRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   VerifyOTPMessageRequestParameters: { // VerifyOTPMessageRequestParameters
+ *     DestinationIdentity: "STRING_VALUE", // required
+ *     Otp: "STRING_VALUE", // required
+ *     ReferenceId: "STRING_VALUE", // required
+ *   },
+ * };
+ * const command = new VerifyOTPMessageCommand(input);
+ * const response = await client.send(command);
+ * // { // VerifyOTPMessageResponse
+ * //   VerificationResponse: { // VerificationResponse
+ * //     Valid: true || false,
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param VerifyOTPMessageCommandInput - {@link VerifyOTPMessageCommandInput}
+ * @returns {@link VerifyOTPMessageCommandOutput}
+ * @see {@link VerifyOTPMessageCommandInput} for command's `input` shape.
+ * @see {@link VerifyOTPMessageCommandOutput} for command's `response` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
+ */
+export class VerifyOTPMessageCommand extends command<VerifyOTPMessageCommandInput, VerifyOTPMessageCommandOutput>(
+  _ep0,
+  _mw0,
+  "VerifyOTPMessage",
+  VerifyOTPMessage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifyOTPMessageRequest;
+      output: VerifyOTPMessageResponse;
+    };
+    sdk: {
+      input: VerifyOTPMessageCommandInput;
+      output: VerifyOTPMessageCommandOutput;
+    };
+  };
+}

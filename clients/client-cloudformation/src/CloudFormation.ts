@@ -1,2767 +1,2614 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import { CloudFormationClient } from "./CloudFormationClient";
 import {
+  type ActivateOrganizationsAccessCommandInput,
+  type ActivateOrganizationsAccessCommandOutput,
+  ActivateOrganizationsAccessCommand,
+} from "./commands/ActivateOrganizationsAccessCommand";
+import {
+  type ActivateTypeCommandInput,
+  type ActivateTypeCommandOutput,
   ActivateTypeCommand,
-  ActivateTypeCommandInput,
-  ActivateTypeCommandOutput,
 } from "./commands/ActivateTypeCommand";
 import {
+  type BatchDescribeTypeConfigurationsCommandInput,
+  type BatchDescribeTypeConfigurationsCommandOutput,
   BatchDescribeTypeConfigurationsCommand,
-  BatchDescribeTypeConfigurationsCommandInput,
-  BatchDescribeTypeConfigurationsCommandOutput,
 } from "./commands/BatchDescribeTypeConfigurationsCommand";
 import {
+  type CancelUpdateStackCommandInput,
+  type CancelUpdateStackCommandOutput,
   CancelUpdateStackCommand,
-  CancelUpdateStackCommandInput,
-  CancelUpdateStackCommandOutput,
 } from "./commands/CancelUpdateStackCommand";
 import {
+  type ContinueUpdateRollbackCommandInput,
+  type ContinueUpdateRollbackCommandOutput,
   ContinueUpdateRollbackCommand,
-  ContinueUpdateRollbackCommandInput,
-  ContinueUpdateRollbackCommandOutput,
 } from "./commands/ContinueUpdateRollbackCommand";
 import {
+  type CreateChangeSetCommandInput,
+  type CreateChangeSetCommandOutput,
   CreateChangeSetCommand,
-  CreateChangeSetCommandInput,
-  CreateChangeSetCommandOutput,
 } from "./commands/CreateChangeSetCommand";
-import { CreateStackCommand, CreateStackCommandInput, CreateStackCommandOutput } from "./commands/CreateStackCommand";
 import {
+  type CreateGeneratedTemplateCommandInput,
+  type CreateGeneratedTemplateCommandOutput,
+  CreateGeneratedTemplateCommand,
+} from "./commands/CreateGeneratedTemplateCommand";
+import {
+  type CreateStackCommandInput,
+  type CreateStackCommandOutput,
+  CreateStackCommand,
+} from "./commands/CreateStackCommand";
+import {
+  type CreateStackInstancesCommandInput,
+  type CreateStackInstancesCommandOutput,
   CreateStackInstancesCommand,
-  CreateStackInstancesCommandInput,
-  CreateStackInstancesCommandOutput,
 } from "./commands/CreateStackInstancesCommand";
 import {
+  type CreateStackRefactorCommandInput,
+  type CreateStackRefactorCommandOutput,
+  CreateStackRefactorCommand,
+} from "./commands/CreateStackRefactorCommand";
+import {
+  type CreateStackSetCommandInput,
+  type CreateStackSetCommandOutput,
   CreateStackSetCommand,
-  CreateStackSetCommandInput,
-  CreateStackSetCommandOutput,
 } from "./commands/CreateStackSetCommand";
 import {
+  type DeactivateOrganizationsAccessCommandInput,
+  type DeactivateOrganizationsAccessCommandOutput,
+  DeactivateOrganizationsAccessCommand,
+} from "./commands/DeactivateOrganizationsAccessCommand";
+import {
+  type DeactivateTypeCommandInput,
+  type DeactivateTypeCommandOutput,
   DeactivateTypeCommand,
-  DeactivateTypeCommandInput,
-  DeactivateTypeCommandOutput,
 } from "./commands/DeactivateTypeCommand";
 import {
+  type DeleteChangeSetCommandInput,
+  type DeleteChangeSetCommandOutput,
   DeleteChangeSetCommand,
-  DeleteChangeSetCommandInput,
-  DeleteChangeSetCommandOutput,
 } from "./commands/DeleteChangeSetCommand";
-import { DeleteStackCommand, DeleteStackCommandInput, DeleteStackCommandOutput } from "./commands/DeleteStackCommand";
 import {
+  type DeleteGeneratedTemplateCommandInput,
+  type DeleteGeneratedTemplateCommandOutput,
+  DeleteGeneratedTemplateCommand,
+} from "./commands/DeleteGeneratedTemplateCommand";
+import {
+  type DeleteStackCommandInput,
+  type DeleteStackCommandOutput,
+  DeleteStackCommand,
+} from "./commands/DeleteStackCommand";
+import {
+  type DeleteStackInstancesCommandInput,
+  type DeleteStackInstancesCommandOutput,
   DeleteStackInstancesCommand,
-  DeleteStackInstancesCommandInput,
-  DeleteStackInstancesCommandOutput,
 } from "./commands/DeleteStackInstancesCommand";
 import {
+  type DeleteStackSetCommandInput,
+  type DeleteStackSetCommandOutput,
   DeleteStackSetCommand,
-  DeleteStackSetCommandInput,
-  DeleteStackSetCommandOutput,
 } from "./commands/DeleteStackSetCommand";
 import {
+  type DeregisterTypeCommandInput,
+  type DeregisterTypeCommandOutput,
   DeregisterTypeCommand,
-  DeregisterTypeCommandInput,
-  DeregisterTypeCommandOutput,
 } from "./commands/DeregisterTypeCommand";
 import {
+  type DescribeAccountLimitsCommandInput,
+  type DescribeAccountLimitsCommandOutput,
   DescribeAccountLimitsCommand,
-  DescribeAccountLimitsCommandInput,
-  DescribeAccountLimitsCommandOutput,
 } from "./commands/DescribeAccountLimitsCommand";
 import {
+  type DescribeChangeSetCommandInput,
+  type DescribeChangeSetCommandOutput,
   DescribeChangeSetCommand,
-  DescribeChangeSetCommandInput,
-  DescribeChangeSetCommandOutput,
 } from "./commands/DescribeChangeSetCommand";
 import {
+  type DescribeChangeSetHooksCommandInput,
+  type DescribeChangeSetHooksCommandOutput,
+  DescribeChangeSetHooksCommand,
+} from "./commands/DescribeChangeSetHooksCommand";
+import {
+  type DescribeEventsCommandInput,
+  type DescribeEventsCommandOutput,
+  DescribeEventsCommand,
+} from "./commands/DescribeEventsCommand";
+import {
+  type DescribeGeneratedTemplateCommandInput,
+  type DescribeGeneratedTemplateCommandOutput,
+  DescribeGeneratedTemplateCommand,
+} from "./commands/DescribeGeneratedTemplateCommand";
+import {
+  type DescribeOrganizationsAccessCommandInput,
+  type DescribeOrganizationsAccessCommandOutput,
+  DescribeOrganizationsAccessCommand,
+} from "./commands/DescribeOrganizationsAccessCommand";
+import {
+  type DescribePublisherCommandInput,
+  type DescribePublisherCommandOutput,
   DescribePublisherCommand,
-  DescribePublisherCommandInput,
-  DescribePublisherCommandOutput,
 } from "./commands/DescribePublisherCommand";
 import {
+  type DescribeResourceScanCommandInput,
+  type DescribeResourceScanCommandOutput,
+  DescribeResourceScanCommand,
+} from "./commands/DescribeResourceScanCommand";
+import {
+  type DescribeStackDriftDetectionStatusCommandInput,
+  type DescribeStackDriftDetectionStatusCommandOutput,
   DescribeStackDriftDetectionStatusCommand,
-  DescribeStackDriftDetectionStatusCommandInput,
-  DescribeStackDriftDetectionStatusCommandOutput,
 } from "./commands/DescribeStackDriftDetectionStatusCommand";
 import {
+  type DescribeStackEventsCommandInput,
+  type DescribeStackEventsCommandOutput,
   DescribeStackEventsCommand,
-  DescribeStackEventsCommandInput,
-  DescribeStackEventsCommandOutput,
 } from "./commands/DescribeStackEventsCommand";
 import {
+  type DescribeStackInstanceCommandInput,
+  type DescribeStackInstanceCommandOutput,
   DescribeStackInstanceCommand,
-  DescribeStackInstanceCommandInput,
-  DescribeStackInstanceCommandOutput,
 } from "./commands/DescribeStackInstanceCommand";
 import {
+  type DescribeStackRefactorCommandInput,
+  type DescribeStackRefactorCommandOutput,
+  DescribeStackRefactorCommand,
+} from "./commands/DescribeStackRefactorCommand";
+import {
+  type DescribeStackResourceCommandInput,
+  type DescribeStackResourceCommandOutput,
   DescribeStackResourceCommand,
-  DescribeStackResourceCommandInput,
-  DescribeStackResourceCommandOutput,
 } from "./commands/DescribeStackResourceCommand";
 import {
+  type DescribeStackResourceDriftsCommandInput,
+  type DescribeStackResourceDriftsCommandOutput,
   DescribeStackResourceDriftsCommand,
-  DescribeStackResourceDriftsCommandInput,
-  DescribeStackResourceDriftsCommandOutput,
 } from "./commands/DescribeStackResourceDriftsCommand";
 import {
+  type DescribeStackResourcesCommandInput,
+  type DescribeStackResourcesCommandOutput,
   DescribeStackResourcesCommand,
-  DescribeStackResourcesCommandInput,
-  DescribeStackResourcesCommandOutput,
 } from "./commands/DescribeStackResourcesCommand";
 import {
+  type DescribeStacksCommandInput,
+  type DescribeStacksCommandOutput,
   DescribeStacksCommand,
-  DescribeStacksCommandInput,
-  DescribeStacksCommandOutput,
 } from "./commands/DescribeStacksCommand";
 import {
+  type DescribeStackSetCommandInput,
+  type DescribeStackSetCommandOutput,
   DescribeStackSetCommand,
-  DescribeStackSetCommandInput,
-  DescribeStackSetCommandOutput,
 } from "./commands/DescribeStackSetCommand";
 import {
+  type DescribeStackSetOperationCommandInput,
+  type DescribeStackSetOperationCommandOutput,
   DescribeStackSetOperationCommand,
-  DescribeStackSetOperationCommandInput,
-  DescribeStackSetOperationCommandOutput,
 } from "./commands/DescribeStackSetOperationCommand";
 import {
+  type DescribeTypeCommandInput,
+  type DescribeTypeCommandOutput,
   DescribeTypeCommand,
-  DescribeTypeCommandInput,
-  DescribeTypeCommandOutput,
 } from "./commands/DescribeTypeCommand";
 import {
+  type DescribeTypeRegistrationCommandInput,
+  type DescribeTypeRegistrationCommandOutput,
   DescribeTypeRegistrationCommand,
-  DescribeTypeRegistrationCommandInput,
-  DescribeTypeRegistrationCommandOutput,
 } from "./commands/DescribeTypeRegistrationCommand";
 import {
+  type DetectStackDriftCommandInput,
+  type DetectStackDriftCommandOutput,
   DetectStackDriftCommand,
-  DetectStackDriftCommandInput,
-  DetectStackDriftCommandOutput,
 } from "./commands/DetectStackDriftCommand";
 import {
+  type DetectStackResourceDriftCommandInput,
+  type DetectStackResourceDriftCommandOutput,
   DetectStackResourceDriftCommand,
-  DetectStackResourceDriftCommandInput,
-  DetectStackResourceDriftCommandOutput,
 } from "./commands/DetectStackResourceDriftCommand";
 import {
+  type DetectStackSetDriftCommandInput,
+  type DetectStackSetDriftCommandOutput,
   DetectStackSetDriftCommand,
-  DetectStackSetDriftCommandInput,
-  DetectStackSetDriftCommandOutput,
 } from "./commands/DetectStackSetDriftCommand";
 import {
+  type EstimateTemplateCostCommandInput,
+  type EstimateTemplateCostCommandOutput,
   EstimateTemplateCostCommand,
-  EstimateTemplateCostCommandInput,
-  EstimateTemplateCostCommandOutput,
 } from "./commands/EstimateTemplateCostCommand";
 import {
+  type ExecuteChangeSetCommandInput,
+  type ExecuteChangeSetCommandOutput,
   ExecuteChangeSetCommand,
-  ExecuteChangeSetCommandInput,
-  ExecuteChangeSetCommandOutput,
 } from "./commands/ExecuteChangeSetCommand";
 import {
-  GetStackPolicyCommand,
-  GetStackPolicyCommandInput,
-  GetStackPolicyCommandOutput,
-} from "./commands/GetStackPolicyCommand";
-import { GetTemplateCommand, GetTemplateCommandInput, GetTemplateCommandOutput } from "./commands/GetTemplateCommand";
+  type ExecuteStackRefactorCommandInput,
+  type ExecuteStackRefactorCommandOutput,
+  ExecuteStackRefactorCommand,
+} from "./commands/ExecuteStackRefactorCommand";
 import {
+  type GetGeneratedTemplateCommandInput,
+  type GetGeneratedTemplateCommandOutput,
+  GetGeneratedTemplateCommand,
+} from "./commands/GetGeneratedTemplateCommand";
+import {
+  type GetHookResultCommandInput,
+  type GetHookResultCommandOutput,
+  GetHookResultCommand,
+} from "./commands/GetHookResultCommand";
+import {
+  type GetStackPolicyCommandInput,
+  type GetStackPolicyCommandOutput,
+  GetStackPolicyCommand,
+} from "./commands/GetStackPolicyCommand";
+import {
+  type GetTemplateCommandInput,
+  type GetTemplateCommandOutput,
+  GetTemplateCommand,
+} from "./commands/GetTemplateCommand";
+import {
+  type GetTemplateSummaryCommandInput,
+  type GetTemplateSummaryCommandOutput,
   GetTemplateSummaryCommand,
-  GetTemplateSummaryCommandInput,
-  GetTemplateSummaryCommandOutput,
 } from "./commands/GetTemplateSummaryCommand";
 import {
+  type ImportStacksToStackSetCommandInput,
+  type ImportStacksToStackSetCommandOutput,
   ImportStacksToStackSetCommand,
-  ImportStacksToStackSetCommandInput,
-  ImportStacksToStackSetCommandOutput,
 } from "./commands/ImportStacksToStackSetCommand";
 import {
+  type ListChangeSetsCommandInput,
+  type ListChangeSetsCommandOutput,
   ListChangeSetsCommand,
-  ListChangeSetsCommandInput,
-  ListChangeSetsCommandOutput,
 } from "./commands/ListChangeSetsCommand";
-import { ListExportsCommand, ListExportsCommandInput, ListExportsCommandOutput } from "./commands/ListExportsCommand";
-import { ListImportsCommand, ListImportsCommandInput, ListImportsCommandOutput } from "./commands/ListImportsCommand";
 import {
+  type ListExportsCommandInput,
+  type ListExportsCommandOutput,
+  ListExportsCommand,
+} from "./commands/ListExportsCommand";
+import {
+  type ListGeneratedTemplatesCommandInput,
+  type ListGeneratedTemplatesCommandOutput,
+  ListGeneratedTemplatesCommand,
+} from "./commands/ListGeneratedTemplatesCommand";
+import {
+  type ListHookResultsCommandInput,
+  type ListHookResultsCommandOutput,
+  ListHookResultsCommand,
+} from "./commands/ListHookResultsCommand";
+import {
+  type ListImportsCommandInput,
+  type ListImportsCommandOutput,
+  ListImportsCommand,
+} from "./commands/ListImportsCommand";
+import {
+  type ListResourceScanRelatedResourcesCommandInput,
+  type ListResourceScanRelatedResourcesCommandOutput,
+  ListResourceScanRelatedResourcesCommand,
+} from "./commands/ListResourceScanRelatedResourcesCommand";
+import {
+  type ListResourceScanResourcesCommandInput,
+  type ListResourceScanResourcesCommandOutput,
+  ListResourceScanResourcesCommand,
+} from "./commands/ListResourceScanResourcesCommand";
+import {
+  type ListResourceScansCommandInput,
+  type ListResourceScansCommandOutput,
+  ListResourceScansCommand,
+} from "./commands/ListResourceScansCommand";
+import {
+  type ListStackInstanceResourceDriftsCommandInput,
+  type ListStackInstanceResourceDriftsCommandOutput,
+  ListStackInstanceResourceDriftsCommand,
+} from "./commands/ListStackInstanceResourceDriftsCommand";
+import {
+  type ListStackInstancesCommandInput,
+  type ListStackInstancesCommandOutput,
   ListStackInstancesCommand,
-  ListStackInstancesCommandInput,
-  ListStackInstancesCommandOutput,
 } from "./commands/ListStackInstancesCommand";
 import {
-  ListStackResourcesCommand,
-  ListStackResourcesCommandInput,
-  ListStackResourcesCommandOutput,
-} from "./commands/ListStackResourcesCommand";
-import { ListStacksCommand, ListStacksCommandInput, ListStacksCommandOutput } from "./commands/ListStacksCommand";
+  type ListStackRefactorActionsCommandInput,
+  type ListStackRefactorActionsCommandOutput,
+  ListStackRefactorActionsCommand,
+} from "./commands/ListStackRefactorActionsCommand";
 import {
+  type ListStackRefactorsCommandInput,
+  type ListStackRefactorsCommandOutput,
+  ListStackRefactorsCommand,
+} from "./commands/ListStackRefactorsCommand";
+import {
+  type ListStackResourcesCommandInput,
+  type ListStackResourcesCommandOutput,
+  ListStackResourcesCommand,
+} from "./commands/ListStackResourcesCommand";
+import {
+  type ListStacksCommandInput,
+  type ListStacksCommandOutput,
+  ListStacksCommand,
+} from "./commands/ListStacksCommand";
+import {
+  type ListStackSetAutoDeploymentTargetsCommandInput,
+  type ListStackSetAutoDeploymentTargetsCommandOutput,
+  ListStackSetAutoDeploymentTargetsCommand,
+} from "./commands/ListStackSetAutoDeploymentTargetsCommand";
+import {
+  type ListStackSetOperationResultsCommandInput,
+  type ListStackSetOperationResultsCommandOutput,
   ListStackSetOperationResultsCommand,
-  ListStackSetOperationResultsCommandInput,
-  ListStackSetOperationResultsCommandOutput,
 } from "./commands/ListStackSetOperationResultsCommand";
 import {
+  type ListStackSetOperationsCommandInput,
+  type ListStackSetOperationsCommandOutput,
   ListStackSetOperationsCommand,
-  ListStackSetOperationsCommandInput,
-  ListStackSetOperationsCommandOutput,
 } from "./commands/ListStackSetOperationsCommand";
 import {
+  type ListStackSetsCommandInput,
+  type ListStackSetsCommandOutput,
   ListStackSetsCommand,
-  ListStackSetsCommandInput,
-  ListStackSetsCommandOutput,
 } from "./commands/ListStackSetsCommand";
 import {
+  type ListTypeRegistrationsCommandInput,
+  type ListTypeRegistrationsCommandOutput,
   ListTypeRegistrationsCommand,
-  ListTypeRegistrationsCommandInput,
-  ListTypeRegistrationsCommandOutput,
 } from "./commands/ListTypeRegistrationsCommand";
-import { ListTypesCommand, ListTypesCommandInput, ListTypesCommandOutput } from "./commands/ListTypesCommand";
+import { type ListTypesCommandInput, type ListTypesCommandOutput, ListTypesCommand } from "./commands/ListTypesCommand";
 import {
+  type ListTypeVersionsCommandInput,
+  type ListTypeVersionsCommandOutput,
   ListTypeVersionsCommand,
-  ListTypeVersionsCommandInput,
-  ListTypeVersionsCommandOutput,
 } from "./commands/ListTypeVersionsCommand";
-import { PublishTypeCommand, PublishTypeCommandInput, PublishTypeCommandOutput } from "./commands/PublishTypeCommand";
 import {
+  type PublishTypeCommandInput,
+  type PublishTypeCommandOutput,
+  PublishTypeCommand,
+} from "./commands/PublishTypeCommand";
+import {
+  type RecordHandlerProgressCommandInput,
+  type RecordHandlerProgressCommandOutput,
   RecordHandlerProgressCommand,
-  RecordHandlerProgressCommandInput,
-  RecordHandlerProgressCommandOutput,
 } from "./commands/RecordHandlerProgressCommand";
 import {
+  type RegisterPublisherCommandInput,
+  type RegisterPublisherCommandOutput,
   RegisterPublisherCommand,
-  RegisterPublisherCommandInput,
-  RegisterPublisherCommandOutput,
 } from "./commands/RegisterPublisherCommand";
 import {
+  type RegisterTypeCommandInput,
+  type RegisterTypeCommandOutput,
   RegisterTypeCommand,
-  RegisterTypeCommandInput,
-  RegisterTypeCommandOutput,
 } from "./commands/RegisterTypeCommand";
 import {
-  RollbackStackCommand,
-  RollbackStackCommandInput,
-  RollbackStackCommandOutput,
-} from "./commands/RollbackStackCommand";
+  type RemoveAliasCommandInput,
+  type RemoveAliasCommandOutput,
+  RemoveAliasCommand,
+} from "./commands/RemoveAliasCommand";
 import {
+  type RollbackStackCommandInput,
+  type RollbackStackCommandOutput,
+  RollbackStackCommand,
+} from "./commands/RollbackStackCommand";
+import { type SetAliasCommandInput, type SetAliasCommandOutput, SetAliasCommand } from "./commands/SetAliasCommand";
+import {
+  type SetStackPolicyCommandInput,
+  type SetStackPolicyCommandOutput,
   SetStackPolicyCommand,
-  SetStackPolicyCommandInput,
-  SetStackPolicyCommandOutput,
 } from "./commands/SetStackPolicyCommand";
 import {
+  type SetTypeConfigurationCommandInput,
+  type SetTypeConfigurationCommandOutput,
   SetTypeConfigurationCommand,
-  SetTypeConfigurationCommandInput,
-  SetTypeConfigurationCommandOutput,
 } from "./commands/SetTypeConfigurationCommand";
 import {
+  type SetTypeDefaultVersionCommandInput,
+  type SetTypeDefaultVersionCommandOutput,
   SetTypeDefaultVersionCommand,
-  SetTypeDefaultVersionCommandInput,
-  SetTypeDefaultVersionCommandOutput,
 } from "./commands/SetTypeDefaultVersionCommand";
 import {
+  type SignalResourceCommandInput,
+  type SignalResourceCommandOutput,
   SignalResourceCommand,
-  SignalResourceCommandInput,
-  SignalResourceCommandOutput,
 } from "./commands/SignalResourceCommand";
 import {
-  StopStackSetOperationCommand,
-  StopStackSetOperationCommandInput,
-  StopStackSetOperationCommandOutput,
-} from "./commands/StopStackSetOperationCommand";
-import { TestTypeCommand, TestTypeCommandInput, TestTypeCommandOutput } from "./commands/TestTypeCommand";
-import { UpdateStackCommand, UpdateStackCommandInput, UpdateStackCommandOutput } from "./commands/UpdateStackCommand";
+  type StartResourceScanCommandInput,
+  type StartResourceScanCommandOutput,
+  StartResourceScanCommand,
+} from "./commands/StartResourceScanCommand";
 import {
+  type StopStackSetOperationCommandInput,
+  type StopStackSetOperationCommandOutput,
+  StopStackSetOperationCommand,
+} from "./commands/StopStackSetOperationCommand";
+import { type TestTypeCommandInput, type TestTypeCommandOutput, TestTypeCommand } from "./commands/TestTypeCommand";
+import {
+  type UpdateGeneratedTemplateCommandInput,
+  type UpdateGeneratedTemplateCommandOutput,
+  UpdateGeneratedTemplateCommand,
+} from "./commands/UpdateGeneratedTemplateCommand";
+import {
+  type UpdateStackCommandInput,
+  type UpdateStackCommandOutput,
+  UpdateStackCommand,
+} from "./commands/UpdateStackCommand";
+import {
+  type UpdateStackInstancesCommandInput,
+  type UpdateStackInstancesCommandOutput,
   UpdateStackInstancesCommand,
-  UpdateStackInstancesCommandInput,
-  UpdateStackInstancesCommandOutput,
 } from "./commands/UpdateStackInstancesCommand";
 import {
+  type UpdateStackSetCommandInput,
+  type UpdateStackSetCommandOutput,
   UpdateStackSetCommand,
-  UpdateStackSetCommandInput,
-  UpdateStackSetCommandOutput,
 } from "./commands/UpdateStackSetCommand";
 import {
+  type UpdateTerminationProtectionCommandInput,
+  type UpdateTerminationProtectionCommandOutput,
   UpdateTerminationProtectionCommand,
-  UpdateTerminationProtectionCommandInput,
-  UpdateTerminationProtectionCommandOutput,
 } from "./commands/UpdateTerminationProtectionCommand";
 import {
+  type ValidateTemplateCommandInput,
+  type ValidateTemplateCommandOutput,
   ValidateTemplateCommand,
-  ValidateTemplateCommandInput,
-  ValidateTemplateCommandOutput,
 } from "./commands/ValidateTemplateCommand";
+import type { CloudFormationServiceException } from "./models/CloudFormationServiceException";
+import { paginateDescribeAccountLimits } from "./pagination/DescribeAccountLimitsPaginator";
+import { paginateDescribeChangeSet } from "./pagination/DescribeChangeSetPaginator";
+import { paginateDescribeEvents } from "./pagination/DescribeEventsPaginator";
+import { paginateDescribeStackEvents } from "./pagination/DescribeStackEventsPaginator";
+import { paginateDescribeStackResourceDrifts } from "./pagination/DescribeStackResourceDriftsPaginator";
+import { paginateDescribeStacks } from "./pagination/DescribeStacksPaginator";
+import { paginateListChangeSets } from "./pagination/ListChangeSetsPaginator";
+import { paginateListExports } from "./pagination/ListExportsPaginator";
+import { paginateListGeneratedTemplates } from "./pagination/ListGeneratedTemplatesPaginator";
+import { paginateListImports } from "./pagination/ListImportsPaginator";
+import { paginateListResourceScanRelatedResources } from "./pagination/ListResourceScanRelatedResourcesPaginator";
+import { paginateListResourceScanResources } from "./pagination/ListResourceScanResourcesPaginator";
+import { paginateListResourceScans } from "./pagination/ListResourceScansPaginator";
+import { paginateListStackInstances } from "./pagination/ListStackInstancesPaginator";
+import { paginateListStackRefactorActions } from "./pagination/ListStackRefactorActionsPaginator";
+import { paginateListStackRefactors } from "./pagination/ListStackRefactorsPaginator";
+import { paginateListStackResources } from "./pagination/ListStackResourcesPaginator";
+import { paginateListStackSetOperationResults } from "./pagination/ListStackSetOperationResultsPaginator";
+import { paginateListStackSetOperations } from "./pagination/ListStackSetOperationsPaginator";
+import { paginateListStackSets } from "./pagination/ListStackSetsPaginator";
+import { paginateListStacks } from "./pagination/ListStacksPaginator";
+import { paginateListTypeRegistrations } from "./pagination/ListTypeRegistrationsPaginator";
+import { paginateListTypes } from "./pagination/ListTypesPaginator";
+import { paginateListTypeVersions } from "./pagination/ListTypeVersionsPaginator";
+import { waitUntilChangeSetCreateComplete } from "./waiters/waitForChangeSetCreateComplete";
+import { waitUntilStackCreateComplete } from "./waiters/waitForStackCreateComplete";
+import { waitUntilStackDeleteComplete } from "./waiters/waitForStackDeleteComplete";
+import { waitUntilStackExists } from "./waiters/waitForStackExists";
+import { waitUntilStackImportComplete } from "./waiters/waitForStackImportComplete";
+import { waitUntilStackRefactorCreateComplete } from "./waiters/waitForStackRefactorCreateComplete";
+import { waitUntilStackRefactorExecuteComplete } from "./waiters/waitForStackRefactorExecuteComplete";
+import { waitUntilStackRollbackComplete } from "./waiters/waitForStackRollbackComplete";
+import { waitUntilStackUpdateComplete } from "./waiters/waitForStackUpdateComplete";
+import { waitUntilTypeRegistrationComplete } from "./waiters/waitForTypeRegistrationComplete";
+
+const commands = {
+  ActivateOrganizationsAccessCommand,
+  ActivateTypeCommand,
+  BatchDescribeTypeConfigurationsCommand,
+  CancelUpdateStackCommand,
+  ContinueUpdateRollbackCommand,
+  CreateChangeSetCommand,
+  CreateGeneratedTemplateCommand,
+  CreateStackCommand,
+  CreateStackInstancesCommand,
+  CreateStackRefactorCommand,
+  CreateStackSetCommand,
+  DeactivateOrganizationsAccessCommand,
+  DeactivateTypeCommand,
+  DeleteChangeSetCommand,
+  DeleteGeneratedTemplateCommand,
+  DeleteStackCommand,
+  DeleteStackInstancesCommand,
+  DeleteStackSetCommand,
+  DeregisterTypeCommand,
+  DescribeAccountLimitsCommand,
+  DescribeChangeSetCommand,
+  DescribeChangeSetHooksCommand,
+  DescribeEventsCommand,
+  DescribeGeneratedTemplateCommand,
+  DescribeOrganizationsAccessCommand,
+  DescribePublisherCommand,
+  DescribeResourceScanCommand,
+  DescribeStackDriftDetectionStatusCommand,
+  DescribeStackEventsCommand,
+  DescribeStackInstanceCommand,
+  DescribeStackRefactorCommand,
+  DescribeStackResourceCommand,
+  DescribeStackResourceDriftsCommand,
+  DescribeStackResourcesCommand,
+  DescribeStacksCommand,
+  DescribeStackSetCommand,
+  DescribeStackSetOperationCommand,
+  DescribeTypeCommand,
+  DescribeTypeRegistrationCommand,
+  DetectStackDriftCommand,
+  DetectStackResourceDriftCommand,
+  DetectStackSetDriftCommand,
+  EstimateTemplateCostCommand,
+  ExecuteChangeSetCommand,
+  ExecuteStackRefactorCommand,
+  GetGeneratedTemplateCommand,
+  GetHookResultCommand,
+  GetStackPolicyCommand,
+  GetTemplateCommand,
+  GetTemplateSummaryCommand,
+  ImportStacksToStackSetCommand,
+  ListChangeSetsCommand,
+  ListExportsCommand,
+  ListGeneratedTemplatesCommand,
+  ListHookResultsCommand,
+  ListImportsCommand,
+  ListResourceScanRelatedResourcesCommand,
+  ListResourceScanResourcesCommand,
+  ListResourceScansCommand,
+  ListStackInstanceResourceDriftsCommand,
+  ListStackInstancesCommand,
+  ListStackRefactorActionsCommand,
+  ListStackRefactorsCommand,
+  ListStackResourcesCommand,
+  ListStacksCommand,
+  ListStackSetAutoDeploymentTargetsCommand,
+  ListStackSetOperationResultsCommand,
+  ListStackSetOperationsCommand,
+  ListStackSetsCommand,
+  ListTypeRegistrationsCommand,
+  ListTypesCommand,
+  ListTypeVersionsCommand,
+  PublishTypeCommand,
+  RecordHandlerProgressCommand,
+  RegisterPublisherCommand,
+  RegisterTypeCommand,
+  RemoveAliasCommand,
+  RollbackStackCommand,
+  SetAliasCommand,
+  SetStackPolicyCommand,
+  SetTypeConfigurationCommand,
+  SetTypeDefaultVersionCommand,
+  SignalResourceCommand,
+  StartResourceScanCommand,
+  StopStackSetOperationCommand,
+  TestTypeCommand,
+  UpdateGeneratedTemplateCommand,
+  UpdateStackCommand,
+  UpdateStackInstancesCommand,
+  UpdateStackSetCommand,
+  UpdateTerminationProtectionCommand,
+  ValidateTemplateCommand,
+};
+const paginators = {
+  paginateDescribeAccountLimits,
+  paginateDescribeChangeSet,
+  paginateDescribeEvents,
+  paginateDescribeStackEvents,
+  paginateDescribeStackResourceDrifts,
+  paginateDescribeStacks,
+  paginateListChangeSets,
+  paginateListExports,
+  paginateListGeneratedTemplates,
+  paginateListImports,
+  paginateListResourceScanRelatedResources,
+  paginateListResourceScanResources,
+  paginateListResourceScans,
+  paginateListStackInstances,
+  paginateListStackRefactorActions,
+  paginateListStackRefactors,
+  paginateListStackResources,
+  paginateListStacks,
+  paginateListStackSetOperationResults,
+  paginateListStackSetOperations,
+  paginateListStackSets,
+  paginateListTypeRegistrations,
+  paginateListTypes,
+  paginateListTypeVersions,
+};
+const waiters = {
+  waitUntilChangeSetCreateComplete,
+  waitUntilStackRefactorCreateComplete,
+  waitUntilStackRefactorExecuteComplete,
+  waitUntilStackCreateComplete,
+  waitUntilStackDeleteComplete,
+  waitUntilStackExists,
+  waitUntilStackImportComplete,
+  waitUntilStackRollbackComplete,
+  waitUntilStackUpdateComplete,
+  waitUntilTypeRegistrationComplete,
+};
 
 /**
- * <fullname>AWS CloudFormation</fullname>
- *          <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments
- *          predictably and repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such
- *          as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification
- *          Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly
- *          scalable, cost-effective applications without creating or configuring the underlying Amazon Web Services
- *          infrastructure.</p>
- *          <p>With CloudFormation, you declare all of your resources and dependencies in a
- *          template file. The template defines a collection of resources as a single unit called a
- *          stack. CloudFormation creates and deletes all member resources of the stack together
- *          and manages all dependencies between the resources for you.</p>
- *          <p>For more information about CloudFormation, see the <a href="http://aws.amazon.com/cloudformation/">CloudFormation Product Page</a>.</p>
- *          <p>CloudFormation makes use of other Amazon Web Services products. If you need additional
- *          technical information about a specific Amazon Web Services product, you can find the product's technical
- *          documentation at <a href="https://docs.aws.amazon.com/">
- *                <code>docs.aws.amazon.com</code>
- *             </a>.</p>
+ * @public
  */
-export class CloudFormation extends CloudFormationClient {
+export interface CloudFormationRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CloudFormation {
   /**
-   * <p>Activates a public third-party extension, making it available for use in stack
-   *          templates. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html">Using
-   *             public extensions</a> in the <i>CloudFormation User Guide</i>.</p>
-   *          <p>Once you have activated a public third-party extension in your account and region, use
-   *             <a href="AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a> to specify configuration properties for the extension. For
-   *          more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration">Configuring extensions at the account level</a> in the <i>CloudFormation
-   *             User Guide</i>.</p>
+   * @see {@link ActivateOrganizationsAccessCommand}
    */
-  public activateType(
+  activateOrganizationsAccess(): Promise<ActivateOrganizationsAccessCommandOutput>;
+  activateOrganizationsAccess(
+    args: ActivateOrganizationsAccessCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ActivateOrganizationsAccessCommandOutput>;
+  activateOrganizationsAccess(
+    args: ActivateOrganizationsAccessCommandInput,
+    cb: (err: any, data?: ActivateOrganizationsAccessCommandOutput) => void
+  ): void;
+  activateOrganizationsAccess(
+    args: ActivateOrganizationsAccessCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ActivateOrganizationsAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ActivateTypeCommand}
+   */
+  activateType(): Promise<ActivateTypeCommandOutput>;
+  activateType(
     args: ActivateTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ActivateTypeCommandOutput>;
-  public activateType(args: ActivateTypeCommandInput, cb: (err: any, data?: ActivateTypeCommandOutput) => void): void;
-  public activateType(
+  activateType(
     args: ActivateTypeCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ActivateTypeCommandOutput) => void
   ): void;
-  public activateType(
+  activateType(
     args: ActivateTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ActivateTypeCommandOutput) => void),
-    cb?: (err: any, data?: ActivateTypeCommandOutput) => void
-  ): Promise<ActivateTypeCommandOutput> | void {
-    const command = new ActivateTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ActivateTypeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns configuration data for the specified CloudFormation extensions, from the
-   *          CloudFormation registry for the account and region.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration">Configuring extensions at the account level</a> in the
-   *             <i>CloudFormation User Guide</i>.</p>
+   * @see {@link BatchDescribeTypeConfigurationsCommand}
    */
-  public batchDescribeTypeConfigurations(
+  batchDescribeTypeConfigurations(
     args: BatchDescribeTypeConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<BatchDescribeTypeConfigurationsCommandOutput>;
-  public batchDescribeTypeConfigurations(
+  batchDescribeTypeConfigurations(
     args: BatchDescribeTypeConfigurationsCommandInput,
     cb: (err: any, data?: BatchDescribeTypeConfigurationsCommandOutput) => void
   ): void;
-  public batchDescribeTypeConfigurations(
+  batchDescribeTypeConfigurations(
     args: BatchDescribeTypeConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: BatchDescribeTypeConfigurationsCommandOutput) => void
   ): void;
-  public batchDescribeTypeConfigurations(
-    args: BatchDescribeTypeConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDescribeTypeConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: BatchDescribeTypeConfigurationsCommandOutput) => void
-  ): Promise<BatchDescribeTypeConfigurationsCommandOutput> | void {
-    const command = new BatchDescribeTypeConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Cancels an update on the specified stack. If the call completes successfully, the
-   *          stack rolls back the update and reverts to the previous stack configuration.</p>
-   *          <note>
-   *             <p>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</p>
-   *          </note>
+   * @see {@link CancelUpdateStackCommand}
    */
-  public cancelUpdateStack(
+  cancelUpdateStack(
     args: CancelUpdateStackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<CancelUpdateStackCommandOutput>;
-  public cancelUpdateStack(
+  cancelUpdateStack(
     args: CancelUpdateStackCommandInput,
     cb: (err: any, data?: CancelUpdateStackCommandOutput) => void
   ): void;
-  public cancelUpdateStack(
+  cancelUpdateStack(
     args: CancelUpdateStackCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: CancelUpdateStackCommandOutput) => void
   ): void;
-  public cancelUpdateStack(
-    args: CancelUpdateStackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelUpdateStackCommandOutput) => void),
-    cb?: (err: any, data?: CancelUpdateStackCommandOutput) => void
-  ): Promise<CancelUpdateStackCommandOutput> | void {
-    const command = new CancelUpdateStackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>For a specified stack that is in the <code>UPDATE_ROLLBACK_FAILED</code> state,
-   *          continues rolling it back to the <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on
-   *          the cause of the failure, you can manually <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed"> fix the error</a> and continue the rollback. By continuing the rollback, you can
-   *          return your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state), and
-   *          then try to update the stack again.</p>
-   *          <p>A stack goes into the <code>UPDATE_ROLLBACK_FAILED</code> state when
-   *          CloudFormation cannot roll back all changes after a failed stack update. For example, you
-   *          might have a stack that is rolling back to an old database instance that was deleted
-   *          outside of CloudFormation. Because CloudFormation doesn't know the database was
-   *          deleted, it assumes that the database instance still exists and attempts to roll back to
-   *          it, causing the update rollback to fail.</p>
+   * @see {@link ContinueUpdateRollbackCommand}
    */
-  public continueUpdateRollback(
+  continueUpdateRollback(
     args: ContinueUpdateRollbackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ContinueUpdateRollbackCommandOutput>;
-  public continueUpdateRollback(
+  continueUpdateRollback(
     args: ContinueUpdateRollbackCommandInput,
     cb: (err: any, data?: ContinueUpdateRollbackCommandOutput) => void
   ): void;
-  public continueUpdateRollback(
+  continueUpdateRollback(
     args: ContinueUpdateRollbackCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ContinueUpdateRollbackCommandOutput) => void
   ): void;
-  public continueUpdateRollback(
-    args: ContinueUpdateRollbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ContinueUpdateRollbackCommandOutput) => void),
-    cb?: (err: any, data?: ContinueUpdateRollbackCommandOutput) => void
-  ): Promise<ContinueUpdateRollbackCommandOutput> | void {
-    const command = new ContinueUpdateRollbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a list of changes that will be applied to a stack so that you can review the
-   *          changes before executing them. You can create a change set for a stack that doesn't exist
-   *          or an existing stack. If you create a change set for a stack that doesn't exist, the change
-   *          set shows all of the resources that CloudFormation will create. If you create a change
-   *          set for an existing stack, CloudFormation compares the stack's information with the
-   *          information that you submit in the change set and lists the differences. Use change sets to
-   *          understand which resources CloudFormation will create or change, and how it will change
-   *          resources in an existing stack, before you create or update a stack.</p>
-   *          <p>To create a change set for a stack that doesn't exist, for the
-   *             <code>ChangeSetType</code> parameter, specify <code>CREATE</code>. To create a change
-   *          set for an existing stack, specify <code>UPDATE</code> for the <code>ChangeSetType</code>
-   *          parameter. To create a change set for an import operation, specify <code>IMPORT</code> for
-   *          the <code>ChangeSetType</code> parameter. After the <code>CreateChangeSet</code> call
-   *          successfully completes, CloudFormation starts creating the change set. To check the
-   *          status of the change set or to review it, use the <a>DescribeChangeSet</a>
-   *          action.</p>
-   *          <p>When you are satisfied with the changes the change set will make, execute the change
-   *          set by using the <a>ExecuteChangeSet</a> action. CloudFormation doesn't make
-   *          changes until you execute the change set.</p>
-   *          <p>To create a change set for the entire stack hierachy, set
-   *             <code>IncludeNestedStacks</code> to <code>True</code>.</p>
+   * @see {@link CreateChangeSetCommand}
    */
-  public createChangeSet(
+  createChangeSet(
     args: CreateChangeSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<CreateChangeSetCommandOutput>;
-  public createChangeSet(
+  createChangeSet(
     args: CreateChangeSetCommandInput,
     cb: (err: any, data?: CreateChangeSetCommandOutput) => void
   ): void;
-  public createChangeSet(
+  createChangeSet(
     args: CreateChangeSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: CreateChangeSetCommandOutput) => void
   ): void;
-  public createChangeSet(
-    args: CreateChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: CreateChangeSetCommandOutput) => void
-  ): Promise<CreateChangeSetCommandOutput> | void {
-    const command = new CreateChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a stack as specified in the template. After the call completes successfully,
-   *          the stack creation starts. You can check the status of the stack via the <a>DescribeStacks</a> API.</p>
+   * @see {@link CreateGeneratedTemplateCommand}
    */
-  public createStack(args: CreateStackCommandInput, options?: __HttpHandlerOptions): Promise<CreateStackCommandOutput>;
-  public createStack(args: CreateStackCommandInput, cb: (err: any, data?: CreateStackCommandOutput) => void): void;
-  public createStack(
+  createGeneratedTemplate(
+    args: CreateGeneratedTemplateCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<CreateGeneratedTemplateCommandOutput>;
+  createGeneratedTemplate(
+    args: CreateGeneratedTemplateCommandInput,
+    cb: (err: any, data?: CreateGeneratedTemplateCommandOutput) => void
+  ): void;
+  createGeneratedTemplate(
+    args: CreateGeneratedTemplateCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: CreateGeneratedTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStackCommand}
+   */
+  createStack(
     args: CreateStackCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<CreateStackCommandOutput>;
+  createStack(
+    args: CreateStackCommandInput,
     cb: (err: any, data?: CreateStackCommandOutput) => void
   ): void;
-  public createStack(
+  createStack(
     args: CreateStackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateStackCommandOutput) => void),
-    cb?: (err: any, data?: CreateStackCommandOutput) => void
-  ): Promise<CreateStackCommandOutput> | void {
-    const command = new CreateStackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: CreateStackCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates stack instances for the specified accounts, within the specified Regions. A
-   *          stack instance refers to a stack in a specific account and Region. You must specify at least one value for either <code>Accounts</code> or <code>DeploymentTargets</code>, and you must specify at least one value for <code>Regions</code>.</p>
+   * @see {@link CreateStackInstancesCommand}
    */
-  public createStackInstances(
+  createStackInstances(
     args: CreateStackInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<CreateStackInstancesCommandOutput>;
-  public createStackInstances(
+  createStackInstances(
     args: CreateStackInstancesCommandInput,
     cb: (err: any, data?: CreateStackInstancesCommandOutput) => void
   ): void;
-  public createStackInstances(
+  createStackInstances(
     args: CreateStackInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: CreateStackInstancesCommandOutput) => void
   ): void;
-  public createStackInstances(
-    args: CreateStackInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateStackInstancesCommandOutput) => void),
-    cb?: (err: any, data?: CreateStackInstancesCommandOutput) => void
-  ): Promise<CreateStackInstancesCommandOutput> | void {
-    const command = new CreateStackInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a stack set.</p>
+   * @see {@link CreateStackRefactorCommand}
    */
-  public createStackSet(
+  createStackRefactor(
+    args: CreateStackRefactorCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<CreateStackRefactorCommandOutput>;
+  createStackRefactor(
+    args: CreateStackRefactorCommandInput,
+    cb: (err: any, data?: CreateStackRefactorCommandOutput) => void
+  ): void;
+  createStackRefactor(
+    args: CreateStackRefactorCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: CreateStackRefactorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStackSetCommand}
+   */
+  createStackSet(
     args: CreateStackSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<CreateStackSetCommandOutput>;
-  public createStackSet(
+  createStackSet(
     args: CreateStackSetCommandInput,
     cb: (err: any, data?: CreateStackSetCommandOutput) => void
   ): void;
-  public createStackSet(
+  createStackSet(
     args: CreateStackSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: CreateStackSetCommandOutput) => void
   ): void;
-  public createStackSet(
-    args: CreateStackSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateStackSetCommandOutput) => void),
-    cb?: (err: any, data?: CreateStackSetCommandOutput) => void
-  ): Promise<CreateStackSetCommandOutput> | void {
-    const command = new CreateStackSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deactivates a public extension that was previously activated in this account and
-   *          region.</p>
-   *          <p>Once deactivated, an extension cannot be used in any CloudFormation operation. This
-   *          includes stack update operations where the stack template includes the extension, even if
-   *          no updates are being made to the extension. In addition, deactivated extensions are not
-   *          automatically updated if a new version of the extension is released.</p>
+   * @see {@link DeactivateOrganizationsAccessCommand}
    */
-  public deactivateType(
+  deactivateOrganizationsAccess(): Promise<DeactivateOrganizationsAccessCommandOutput>;
+  deactivateOrganizationsAccess(
+    args: DeactivateOrganizationsAccessCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DeactivateOrganizationsAccessCommandOutput>;
+  deactivateOrganizationsAccess(
+    args: DeactivateOrganizationsAccessCommandInput,
+    cb: (err: any, data?: DeactivateOrganizationsAccessCommandOutput) => void
+  ): void;
+  deactivateOrganizationsAccess(
+    args: DeactivateOrganizationsAccessCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DeactivateOrganizationsAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeactivateTypeCommand}
+   */
+  deactivateType(): Promise<DeactivateTypeCommandOutput>;
+  deactivateType(
     args: DeactivateTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DeactivateTypeCommandOutput>;
-  public deactivateType(
+  deactivateType(
     args: DeactivateTypeCommandInput,
     cb: (err: any, data?: DeactivateTypeCommandOutput) => void
   ): void;
-  public deactivateType(
+  deactivateType(
     args: DeactivateTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DeactivateTypeCommandOutput) => void
   ): void;
-  public deactivateType(
-    args: DeactivateTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeactivateTypeCommandOutput) => void),
-    cb?: (err: any, data?: DeactivateTypeCommandOutput) => void
-  ): Promise<DeactivateTypeCommandOutput> | void {
-    const command = new DeactivateTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified change set. Deleting change sets ensures that no one executes
-   *          the wrong change set.</p>
-   *          <p>If the call successfully completes, CloudFormation successfully deleted the
-   *          change set.</p>
-   *          <p>If <code>IncludeNestedStacks</code> specifies <code>True</code> during the creation of
-   *          the nested change set, then <code>DeleteChangeSet</code> will delete all change sets that
-   *          belong to the stacks hierarchy and will also delete all change sets for nested stacks with
-   *          the status of <code>REVIEW_IN_PROGRESS</code>.</p>
+   * @see {@link DeleteChangeSetCommand}
    */
-  public deleteChangeSet(
+  deleteChangeSet(
     args: DeleteChangeSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DeleteChangeSetCommandOutput>;
-  public deleteChangeSet(
+  deleteChangeSet(
     args: DeleteChangeSetCommandInput,
     cb: (err: any, data?: DeleteChangeSetCommandOutput) => void
   ): void;
-  public deleteChangeSet(
+  deleteChangeSet(
     args: DeleteChangeSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DeleteChangeSetCommandOutput) => void
   ): void;
-  public deleteChangeSet(
-    args: DeleteChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteChangeSetCommandOutput) => void
-  ): Promise<DeleteChangeSetCommandOutput> | void {
-    const command = new DeleteChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a specified stack. Once the call completes successfully, stack deletion
-   *          starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the
-   *          deletion has been completed successfully.</p>
+   * @see {@link DeleteGeneratedTemplateCommand}
    */
-  public deleteStack(args: DeleteStackCommandInput, options?: __HttpHandlerOptions): Promise<DeleteStackCommandOutput>;
-  public deleteStack(args: DeleteStackCommandInput, cb: (err: any, data?: DeleteStackCommandOutput) => void): void;
-  public deleteStack(
+  deleteGeneratedTemplate(
+    args: DeleteGeneratedTemplateCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DeleteGeneratedTemplateCommandOutput>;
+  deleteGeneratedTemplate(
+    args: DeleteGeneratedTemplateCommandInput,
+    cb: (err: any, data?: DeleteGeneratedTemplateCommandOutput) => void
+  ): void;
+  deleteGeneratedTemplate(
+    args: DeleteGeneratedTemplateCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DeleteGeneratedTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStackCommand}
+   */
+  deleteStack(
     args: DeleteStackCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<DeleteStackCommandOutput>;
+  deleteStack(
+    args: DeleteStackCommandInput,
     cb: (err: any, data?: DeleteStackCommandOutput) => void
   ): void;
-  public deleteStack(
+  deleteStack(
     args: DeleteStackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteStackCommandOutput) => void),
-    cb?: (err: any, data?: DeleteStackCommandOutput) => void
-  ): Promise<DeleteStackCommandOutput> | void {
-    const command = new DeleteStackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DeleteStackCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes stack instances for the specified accounts, in the specified Regions.</p>
+   * @see {@link DeleteStackInstancesCommand}
    */
-  public deleteStackInstances(
+  deleteStackInstances(
     args: DeleteStackInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DeleteStackInstancesCommandOutput>;
-  public deleteStackInstances(
+  deleteStackInstances(
     args: DeleteStackInstancesCommandInput,
     cb: (err: any, data?: DeleteStackInstancesCommandOutput) => void
   ): void;
-  public deleteStackInstances(
+  deleteStackInstances(
     args: DeleteStackInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DeleteStackInstancesCommandOutput) => void
   ): void;
-  public deleteStackInstances(
-    args: DeleteStackInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteStackInstancesCommandOutput) => void),
-    cb?: (err: any, data?: DeleteStackInstancesCommandOutput) => void
-  ): Promise<DeleteStackInstancesCommandOutput> | void {
-    const command = new DeleteStackInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a stack set. Before you can delete a stack set, all of its member stack
-   *          instances must be deleted. For more information about how to do this, see <a>DeleteStackInstances</a>.</p>
+   * @see {@link DeleteStackSetCommand}
    */
-  public deleteStackSet(
+  deleteStackSet(
     args: DeleteStackSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DeleteStackSetCommandOutput>;
-  public deleteStackSet(
+  deleteStackSet(
     args: DeleteStackSetCommandInput,
     cb: (err: any, data?: DeleteStackSetCommandOutput) => void
   ): void;
-  public deleteStackSet(
+  deleteStackSet(
     args: DeleteStackSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DeleteStackSetCommandOutput) => void
   ): void;
-  public deleteStackSet(
-    args: DeleteStackSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteStackSetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteStackSetCommandOutput) => void
-  ): Promise<DeleteStackSetCommandOutput> | void {
-    const command = new DeleteStackSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Marks an extension or extension version as <code>DEPRECATED</code> in the CloudFormation registry, removing it from active use. Deprecated extensions or
-   *          extension versions cannot be used in CloudFormation operations.</p>
-   *          <p>To deregister an entire extension, you must individually deregister all active versions
-   *          of that extension. If an extension has only a single active version, deregistering that
-   *          version results in the extension itself being deregistered and marked as deprecated in the
-   *          registry. </p>
-   *          <p>You cannot deregister the default version of an extension if there are other active
-   *          version of that extension. If you do deregister the default version of an extension, the
-   *          textensionype itself is deregistered as well and marked as deprecated. </p>
-   *          <p>To view the deprecation status of an extension or extension version, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.</p>
+   * @see {@link DeregisterTypeCommand}
    */
-  public deregisterType(
+  deregisterType(): Promise<DeregisterTypeCommandOutput>;
+  deregisterType(
     args: DeregisterTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DeregisterTypeCommandOutput>;
-  public deregisterType(
+  deregisterType(
     args: DeregisterTypeCommandInput,
     cb: (err: any, data?: DeregisterTypeCommandOutput) => void
   ): void;
-  public deregisterType(
+  deregisterType(
     args: DeregisterTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DeregisterTypeCommandOutput) => void
   ): void;
-  public deregisterType(
-    args: DeregisterTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeregisterTypeCommandOutput) => void),
-    cb?: (err: any, data?: DeregisterTypeCommandOutput) => void
-  ): Promise<DeregisterTypeCommandOutput> | void {
-    const command = new DeregisterTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves your account's CloudFormation limits, such as the maximum number of
-   *          stacks that you can create in your account. For more information about account limits, see
-   *             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">CloudFormation
-   *             Limits</a> in the <i>CloudFormation User Guide</i>.</p>
+   * @see {@link DescribeAccountLimitsCommand}
    */
-  public describeAccountLimits(
+  describeAccountLimits(): Promise<DescribeAccountLimitsCommandOutput>;
+  describeAccountLimits(
     args: DescribeAccountLimitsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeAccountLimitsCommandOutput>;
-  public describeAccountLimits(
+  describeAccountLimits(
     args: DescribeAccountLimitsCommandInput,
     cb: (err: any, data?: DescribeAccountLimitsCommandOutput) => void
   ): void;
-  public describeAccountLimits(
+  describeAccountLimits(
     args: DescribeAccountLimitsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeAccountLimitsCommandOutput) => void
   ): void;
-  public describeAccountLimits(
-    args: DescribeAccountLimitsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccountLimitsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountLimitsCommandOutput) => void
-  ): Promise<DescribeAccountLimitsCommandOutput> | void {
-    const command = new DescribeAccountLimitsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the inputs for the change set and a list of changes that CloudFormation
-   *          will make if you execute the change set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html">Updating Stacks Using Change Sets</a> in the CloudFormation User
-   *          Guide.</p>
+   * @see {@link DescribeChangeSetCommand}
    */
-  public describeChangeSet(
+  describeChangeSet(
     args: DescribeChangeSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeChangeSetCommandOutput>;
-  public describeChangeSet(
+  describeChangeSet(
     args: DescribeChangeSetCommandInput,
     cb: (err: any, data?: DescribeChangeSetCommandOutput) => void
   ): void;
-  public describeChangeSet(
+  describeChangeSet(
     args: DescribeChangeSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeChangeSetCommandOutput) => void
   ): void;
-  public describeChangeSet(
-    args: DescribeChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: DescribeChangeSetCommandOutput) => void
-  ): Promise<DescribeChangeSetCommandOutput> | void {
-    const command = new DescribeChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a CloudFormation extension publisher.</p>
-   *          <p>If you do not supply a <code>PublisherId</code>, and you have registered as an extension
-   *          publisher, <code>DescribePublisher</code> returns information about your own publisher
-   *          account. </p>
-   *          <p>For more information on registering as a publisher, see:</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html">RegisterPublisher</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html">Publishing
-   *                   extensions to make them available for public use</a> in the
-   *                   <i>CloudFormation CLI User Guide</i>
-   *                </p>
-   *             </li>
-   *          </ul>
+   * @see {@link DescribeChangeSetHooksCommand}
    */
-  public describePublisher(
+  describeChangeSetHooks(
+    args: DescribeChangeSetHooksCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DescribeChangeSetHooksCommandOutput>;
+  describeChangeSetHooks(
+    args: DescribeChangeSetHooksCommandInput,
+    cb: (err: any, data?: DescribeChangeSetHooksCommandOutput) => void
+  ): void;
+  describeChangeSetHooks(
+    args: DescribeChangeSetHooksCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeChangeSetHooksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventsCommand}
+   */
+  describeEvents(): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    cb: (err: any, data?: DescribeEventsCommandOutput) => void
+  ): void;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeGeneratedTemplateCommand}
+   */
+  describeGeneratedTemplate(
+    args: DescribeGeneratedTemplateCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DescribeGeneratedTemplateCommandOutput>;
+  describeGeneratedTemplate(
+    args: DescribeGeneratedTemplateCommandInput,
+    cb: (err: any, data?: DescribeGeneratedTemplateCommandOutput) => void
+  ): void;
+  describeGeneratedTemplate(
+    args: DescribeGeneratedTemplateCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeGeneratedTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOrganizationsAccessCommand}
+   */
+  describeOrganizationsAccess(): Promise<DescribeOrganizationsAccessCommandOutput>;
+  describeOrganizationsAccess(
+    args: DescribeOrganizationsAccessCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DescribeOrganizationsAccessCommandOutput>;
+  describeOrganizationsAccess(
+    args: DescribeOrganizationsAccessCommandInput,
+    cb: (err: any, data?: DescribeOrganizationsAccessCommandOutput) => void
+  ): void;
+  describeOrganizationsAccess(
+    args: DescribeOrganizationsAccessCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeOrganizationsAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePublisherCommand}
+   */
+  describePublisher(): Promise<DescribePublisherCommandOutput>;
+  describePublisher(
     args: DescribePublisherCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribePublisherCommandOutput>;
-  public describePublisher(
+  describePublisher(
     args: DescribePublisherCommandInput,
     cb: (err: any, data?: DescribePublisherCommandOutput) => void
   ): void;
-  public describePublisher(
+  describePublisher(
     args: DescribePublisherCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribePublisherCommandOutput) => void
   ): void;
-  public describePublisher(
-    args: DescribePublisherCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribePublisherCommandOutput) => void),
-    cb?: (err: any, data?: DescribePublisherCommandOutput) => void
-  ): Promise<DescribePublisherCommandOutput> | void {
-    const command = new DescribePublisherCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a stack drift detection operation. A stack drift detection
-   *          operation detects whether a stack's actual configuration differs, or has
-   *             <i>drifted</i>, from it's expected configuration, as defined in the stack
-   *          template and any values specified as template parameters. A stack is considered to have
-   *          drifted if one or more of its resources have drifted. For more information on stack and
-   *          resource drift, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting
-   *             Unregulated Configuration Changes to Stacks and Resources</a>.</p>
-   *          <p>Use <a>DetectStackDrift</a> to initiate a stack drift detection operation.
-   *             <code>DetectStackDrift</code> returns a <code>StackDriftDetectionId</code> you can use
-   *          to monitor the progress of the operation using
-   *             <code>DescribeStackDriftDetectionStatus</code>. Once the drift detection operation has
-   *          completed, use <a>DescribeStackResourceDrifts</a> to return drift information
-   *          about the stack and its resources.</p>
+   * @see {@link DescribeResourceScanCommand}
    */
-  public describeStackDriftDetectionStatus(
+  describeResourceScan(
+    args: DescribeResourceScanCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DescribeResourceScanCommandOutput>;
+  describeResourceScan(
+    args: DescribeResourceScanCommandInput,
+    cb: (err: any, data?: DescribeResourceScanCommandOutput) => void
+  ): void;
+  describeResourceScan(
+    args: DescribeResourceScanCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeResourceScanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeStackDriftDetectionStatusCommand}
+   */
+  describeStackDriftDetectionStatus(
     args: DescribeStackDriftDetectionStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackDriftDetectionStatusCommandOutput>;
-  public describeStackDriftDetectionStatus(
+  describeStackDriftDetectionStatus(
     args: DescribeStackDriftDetectionStatusCommandInput,
     cb: (err: any, data?: DescribeStackDriftDetectionStatusCommandOutput) => void
   ): void;
-  public describeStackDriftDetectionStatus(
+  describeStackDriftDetectionStatus(
     args: DescribeStackDriftDetectionStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackDriftDetectionStatusCommandOutput) => void
   ): void;
-  public describeStackDriftDetectionStatus(
-    args: DescribeStackDriftDetectionStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackDriftDetectionStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackDriftDetectionStatusCommandOutput) => void
-  ): Promise<DescribeStackDriftDetectionStatusCommandOutput> | void {
-    const command = new DescribeStackDriftDetectionStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns all stack related events for a specified stack in reverse chronological
-   *          order. For more information about a stack's event history, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html">Stacks</a> in the CloudFormation User Guide.</p>
-   *          <note>
-   *             <p>You can list events for stacks that have failed to create or have been deleted by
-   *             specifying the unique stack identifier (stack ID).</p>
-   *          </note>
+   * @see {@link DescribeStackEventsCommand}
    */
-  public describeStackEvents(
+  describeStackEvents(
     args: DescribeStackEventsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackEventsCommandOutput>;
-  public describeStackEvents(
+  describeStackEvents(
     args: DescribeStackEventsCommandInput,
     cb: (err: any, data?: DescribeStackEventsCommandOutput) => void
   ): void;
-  public describeStackEvents(
+  describeStackEvents(
     args: DescribeStackEventsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackEventsCommandOutput) => void
   ): void;
-  public describeStackEvents(
-    args: DescribeStackEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackEventsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackEventsCommandOutput) => void
-  ): Promise<DescribeStackEventsCommandOutput> | void {
-    const command = new DescribeStackEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the stack instance that's associated with the specified stack set, Amazon Web Services account, and Region.</p>
-   *          <p>For a list of stack instances that are associated with a specific stack set, use
-   *             <a>ListStackInstances</a>.</p>
+   * @see {@link DescribeStackInstanceCommand}
    */
-  public describeStackInstance(
+  describeStackInstance(
     args: DescribeStackInstanceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackInstanceCommandOutput>;
-  public describeStackInstance(
+  describeStackInstance(
     args: DescribeStackInstanceCommandInput,
     cb: (err: any, data?: DescribeStackInstanceCommandOutput) => void
   ): void;
-  public describeStackInstance(
+  describeStackInstance(
     args: DescribeStackInstanceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackInstanceCommandOutput) => void
   ): void;
-  public describeStackInstance(
-    args: DescribeStackInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackInstanceCommandOutput) => void
-  ): Promise<DescribeStackInstanceCommandOutput> | void {
-    const command = new DescribeStackInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a description of the specified resource in the specified stack.</p>
-   *          <p>For deleted stacks, DescribeStackResource returns resource information for up to 90
-   *          days after the stack has been deleted.</p>
+   * @see {@link DescribeStackRefactorCommand}
    */
-  public describeStackResource(
+  describeStackRefactor(
+    args: DescribeStackRefactorCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<DescribeStackRefactorCommandOutput>;
+  describeStackRefactor(
+    args: DescribeStackRefactorCommandInput,
+    cb: (err: any, data?: DescribeStackRefactorCommandOutput) => void
+  ): void;
+  describeStackRefactor(
+    args: DescribeStackRefactorCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeStackRefactorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeStackResourceCommand}
+   */
+  describeStackResource(
     args: DescribeStackResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackResourceCommandOutput>;
-  public describeStackResource(
+  describeStackResource(
     args: DescribeStackResourceCommandInput,
     cb: (err: any, data?: DescribeStackResourceCommandOutput) => void
   ): void;
-  public describeStackResource(
+  describeStackResource(
     args: DescribeStackResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackResourceCommandOutput) => void
   ): void;
-  public describeStackResource(
-    args: DescribeStackResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackResourceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackResourceCommandOutput) => void
-  ): Promise<DescribeStackResourceCommandOutput> | void {
-    const command = new DescribeStackResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns drift information for the resources that have been checked for drift in the
-   *          specified stack. This includes actual and expected configuration values for resources where
-   *          CloudFormation detects configuration drift.</p>
-   *          <p>For a given stack, there will be one <code>StackResourceDrift</code> for each stack
-   *          resource that has been checked for drift. Resources that haven't yet been checked for drift
-   *          are not included. Resources that do not currently support drift detection are not checked,
-   *          and so not included. For a list of resources that support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p>
-   *          <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual
-   *          resources, or <a>DetectStackDrift</a> to detect drift on all supported resources
-   *          for a given stack.</p>
+   * @see {@link DescribeStackResourceDriftsCommand}
    */
-  public describeStackResourceDrifts(
+  describeStackResourceDrifts(
     args: DescribeStackResourceDriftsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackResourceDriftsCommandOutput>;
-  public describeStackResourceDrifts(
+  describeStackResourceDrifts(
     args: DescribeStackResourceDriftsCommandInput,
     cb: (err: any, data?: DescribeStackResourceDriftsCommandOutput) => void
   ): void;
-  public describeStackResourceDrifts(
+  describeStackResourceDrifts(
     args: DescribeStackResourceDriftsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackResourceDriftsCommandOutput) => void
   ): void;
-  public describeStackResourceDrifts(
-    args: DescribeStackResourceDriftsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackResourceDriftsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackResourceDriftsCommandOutput) => void
-  ): Promise<DescribeStackResourceDriftsCommandOutput> | void {
-    const command = new DescribeStackResourceDriftsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns Amazon Web Services resource descriptions for running and deleted stacks. If
-   *             <code>StackName</code> is specified, all the associated resources that are part of the
-   *          stack are returned. If <code>PhysicalResourceId</code> is specified, the associated
-   *          resources of the stack that the resource belongs to are returned.</p>
-   *          <note>
-   *             <p>Only the first 100 resources will be returned. If your stack has more resources
-   *             than this, you should use <code>ListStackResources</code> instead.</p>
-   *          </note>
-   *          <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information
-   *          for up to 90 days after the stack has been deleted.</p>
-   *          <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>,
-   *          but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the
-   *          returned result. For more information about resources, the <code>LogicalResourceId</code>
-   *          and <code>PhysicalResourceId</code>, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">CloudFormation User
-   *          Guide</a>.</p>
-   *          <note>
-   *             <p>A <code>ValidationError</code> is returned if you specify both
-   *                <code>StackName</code> and <code>PhysicalResourceId</code> in the same
-   *             request.</p>
-   *          </note>
+   * @see {@link DescribeStackResourcesCommand}
    */
-  public describeStackResources(
+  describeStackResources(): Promise<DescribeStackResourcesCommandOutput>;
+  describeStackResources(
     args: DescribeStackResourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackResourcesCommandOutput>;
-  public describeStackResources(
+  describeStackResources(
     args: DescribeStackResourcesCommandInput,
     cb: (err: any, data?: DescribeStackResourcesCommandOutput) => void
   ): void;
-  public describeStackResources(
+  describeStackResources(
     args: DescribeStackResourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackResourcesCommandOutput) => void
   ): void;
-  public describeStackResources(
-    args: DescribeStackResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackResourcesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackResourcesCommandOutput) => void
-  ): Promise<DescribeStackResourcesCommandOutput> | void {
-    const command = new DescribeStackResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the description for the specified stack; if no stack name was specified, then
-   *          it returns the description for all the stacks created.</p>
-   *          <note>
-   *             <p>If the stack does not exist, an <code>ValidationError</code> is
-   *             returned.</p>
-   *          </note>
+   * @see {@link DescribeStacksCommand}
    */
-  public describeStacks(
+  describeStacks(): Promise<DescribeStacksCommandOutput>;
+  describeStacks(
     args: DescribeStacksCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStacksCommandOutput>;
-  public describeStacks(
+  describeStacks(
     args: DescribeStacksCommandInput,
     cb: (err: any, data?: DescribeStacksCommandOutput) => void
   ): void;
-  public describeStacks(
+  describeStacks(
     args: DescribeStacksCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStacksCommandOutput) => void
   ): void;
-  public describeStacks(
-    args: DescribeStacksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStacksCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStacksCommandOutput) => void
-  ): Promise<DescribeStacksCommandOutput> | void {
-    const command = new DescribeStacksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the description of the specified stack set. </p>
+   * @see {@link DescribeStackSetCommand}
    */
-  public describeStackSet(
+  describeStackSet(
     args: DescribeStackSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackSetCommandOutput>;
-  public describeStackSet(
+  describeStackSet(
     args: DescribeStackSetCommandInput,
     cb: (err: any, data?: DescribeStackSetCommandOutput) => void
   ): void;
-  public describeStackSet(
+  describeStackSet(
     args: DescribeStackSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackSetCommandOutput) => void
   ): void;
-  public describeStackSet(
-    args: DescribeStackSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackSetCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackSetCommandOutput) => void
-  ): Promise<DescribeStackSetCommandOutput> | void {
-    const command = new DescribeStackSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the description of the specified stack set operation. </p>
+   * @see {@link DescribeStackSetOperationCommand}
    */
-  public describeStackSetOperation(
+  describeStackSetOperation(
     args: DescribeStackSetOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeStackSetOperationCommandOutput>;
-  public describeStackSetOperation(
+  describeStackSetOperation(
     args: DescribeStackSetOperationCommandInput,
     cb: (err: any, data?: DescribeStackSetOperationCommandOutput) => void
   ): void;
-  public describeStackSetOperation(
+  describeStackSetOperation(
     args: DescribeStackSetOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeStackSetOperationCommandOutput) => void
   ): void;
-  public describeStackSetOperation(
-    args: DescribeStackSetOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStackSetOperationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStackSetOperationCommandOutput) => void
-  ): Promise<DescribeStackSetOperationCommandOutput> | void {
-    const command = new DescribeStackSetOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns detailed information about an extension that has been registered.</p>
-   *          <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information
-   *          about that specific extension version. Otherwise, it returns information about the default
-   *          extension version.</p>
+   * @see {@link DescribeTypeCommand}
    */
-  public describeType(
+  describeType(): Promise<DescribeTypeCommandOutput>;
+  describeType(
     args: DescribeTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeTypeCommandOutput>;
-  public describeType(args: DescribeTypeCommandInput, cb: (err: any, data?: DescribeTypeCommandOutput) => void): void;
-  public describeType(
+  describeType(
     args: DescribeTypeCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeTypeCommandOutput) => void
   ): void;
-  public describeType(
+  describeType(
     args: DescribeTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTypeCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTypeCommandOutput) => void
-  ): Promise<DescribeTypeCommandOutput> | void {
-    const command = new DescribeTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: DescribeTypeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns information about an extension's registration, including its current status and
-   *          type and version identifiers.</p>
-   *          <p>When you initiate a registration request using <code>
-   *                <a>RegisterType</a>
-   *             </code>, you can then use <code>
-   *                <a>DescribeTypeRegistration</a>
-   *             </code> to
-   *          monitor the progress of that registration request.</p>
-   *          <p>Once the registration request has completed, use <code>
-   *                <a>DescribeType</a>
-   *             </code> to return detailed information about an extension.</p>
+   * @see {@link DescribeTypeRegistrationCommand}
    */
-  public describeTypeRegistration(
+  describeTypeRegistration(
     args: DescribeTypeRegistrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DescribeTypeRegistrationCommandOutput>;
-  public describeTypeRegistration(
+  describeTypeRegistration(
     args: DescribeTypeRegistrationCommandInput,
     cb: (err: any, data?: DescribeTypeRegistrationCommandOutput) => void
   ): void;
-  public describeTypeRegistration(
+  describeTypeRegistration(
     args: DescribeTypeRegistrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DescribeTypeRegistrationCommandOutput) => void
   ): void;
-  public describeTypeRegistration(
-    args: DescribeTypeRegistrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTypeRegistrationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTypeRegistrationCommandOutput) => void
-  ): Promise<DescribeTypeRegistrationCommandOutput> | void {
-    const command = new DescribeTypeRegistrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Detects whether a stack's actual configuration differs, or has
-   *             <i>drifted</i>, from it's expected configuration, as defined in the stack
-   *          template and any values specified as template parameters. For each resource in the stack
-   *          that supports drift detection, CloudFormation compares the actual configuration of the resource with
-   *          its expected template configuration. Only resource properties explicitly defined in the
-   *          stack template are checked for drift. A stack is considered to have drifted if one or more
-   *          of its resources differ from their expected template configurations. For more information,
-   *          see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting
-   *             Unregulated Configuration Changes to Stacks and Resources</a>.</p>
-   *          <p>Use <code>DetectStackDrift</code> to detect drift on all supported resources for a
-   *          given stack, or <a>DetectStackResourceDrift</a> to detect drift on individual
-   *          resources.</p>
-   *          <p>For a list of stack resources that currently support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p>
-   *          <p>
-   *             <code>DetectStackDrift</code> can take up to several minutes, depending on the number
-   *          of resources contained within the stack. Use <a>DescribeStackDriftDetectionStatus</a> to monitor the progress of a detect stack
-   *          drift operation. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and
-   *          its resources.</p>
-   *          <p>When detecting drift on a stack, CloudFormation does not detect drift on any nested stacks
-   *          belonging to that stack. Perform <code>DetectStackDrift</code> directly on the nested stack
-   *          itself.</p>
+   * @see {@link DetectStackDriftCommand}
    */
-  public detectStackDrift(
+  detectStackDrift(
     args: DetectStackDriftCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DetectStackDriftCommandOutput>;
-  public detectStackDrift(
+  detectStackDrift(
     args: DetectStackDriftCommandInput,
     cb: (err: any, data?: DetectStackDriftCommandOutput) => void
   ): void;
-  public detectStackDrift(
+  detectStackDrift(
     args: DetectStackDriftCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DetectStackDriftCommandOutput) => void
   ): void;
-  public detectStackDrift(
-    args: DetectStackDriftCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetectStackDriftCommandOutput) => void),
-    cb?: (err: any, data?: DetectStackDriftCommandOutput) => void
-  ): Promise<DetectStackDriftCommandOutput> | void {
-    const command = new DetectStackDriftCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about whether a resource's actual configuration differs, or has
-   *             <i>drifted</i>, from it's expected configuration, as defined in the stack
-   *          template and any values specified as template parameters. This information includes actual
-   *          and expected property values for resources in which CloudFormation detects drift. Only resource
-   *          properties explicitly defined in the stack template are checked for drift. For more
-   *          information about stack and resource drift, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting
-   *             Unregulated Configuration Changes to Stacks and Resources</a>.</p>
-   *          <p>Use <code>DetectStackResourceDrift</code> to detect drift on individual resources, or
-   *             <a>DetectStackDrift</a> to detect drift on all resources in a given stack
-   *          that support drift detection.</p>
-   *          <p>Resources that do not currently support drift detection cannot be checked. For a list
-   *          of resources that support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p>
+   * @see {@link DetectStackResourceDriftCommand}
    */
-  public detectStackResourceDrift(
+  detectStackResourceDrift(
     args: DetectStackResourceDriftCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DetectStackResourceDriftCommandOutput>;
-  public detectStackResourceDrift(
+  detectStackResourceDrift(
     args: DetectStackResourceDriftCommandInput,
     cb: (err: any, data?: DetectStackResourceDriftCommandOutput) => void
   ): void;
-  public detectStackResourceDrift(
+  detectStackResourceDrift(
     args: DetectStackResourceDriftCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DetectStackResourceDriftCommandOutput) => void
   ): void;
-  public detectStackResourceDrift(
-    args: DetectStackResourceDriftCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetectStackResourceDriftCommandOutput) => void),
-    cb?: (err: any, data?: DetectStackResourceDriftCommandOutput) => void
-  ): Promise<DetectStackResourceDriftCommandOutput> | void {
-    const command = new DetectStackResourceDriftCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Detect drift on a stack set. When CloudFormation performs drift detection on a
-   *          stack set, it performs drift detection on the stack associated with each stack instance in
-   *          the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p>
-   *          <p>
-   *             <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set
-   *          drift detection operation. Use this operation id with <code>
-   *                <a>DescribeStackSetOperation</a>
-   *             </code> to monitor the progress of the drift
-   *          detection operation. The drift detection operation may take some time, depending on the
-   *          number of stack instances included in the stack set, as well as the number of resources
-   *          included in each stack.</p>
-   *          <p>Once the operation has completed, use the following actions to return drift
-   *          information:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Use <code>
-   *                      <a>DescribeStackSet</a>
-   *                   </code> to return detailed information
-   *                about the stack set, including detailed information about the last
-   *                   <i>completed</i> drift operation performed on the stack set.
-   *                (Information about drift operations that are in progress is not included.)</p>
-   *             </li>
-   *             <li>
-   *                <p>Use <code>
-   *                      <a>ListStackInstances</a>
-   *                   </code> to return a list of stack
-   *                instances belonging to the stack set, including the drift status and last drift time
-   *                checked of each instance.</p>
-   *             </li>
-   *             <li>
-   *                <p>Use <code>
-   *                      <a>DescribeStackInstance</a>
-   *                   </code> to return detailed
-   *                information about a specific stack instance, including its drift status and last
-   *                drift time checked.</p>
-   *             </li>
-   *          </ul>
-   *          <p>For more information on performing a drift detection operation on a stack set, see
-   *             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged
-   *             Changes in Stack Sets</a>. </p>
-   *          <p>You can only run a single drift detection operation on a given stack set at one time. </p>
-   *          <p>To stop a drift detection stack set operation, use <code>
-   *                <a>StopStackSetOperation</a>
-   *             </code>.</p>
+   * @see {@link DetectStackSetDriftCommand}
    */
-  public detectStackSetDrift(
+  detectStackSetDrift(
     args: DetectStackSetDriftCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<DetectStackSetDriftCommandOutput>;
-  public detectStackSetDrift(
+  detectStackSetDrift(
     args: DetectStackSetDriftCommandInput,
     cb: (err: any, data?: DetectStackSetDriftCommandOutput) => void
   ): void;
-  public detectStackSetDrift(
+  detectStackSetDrift(
     args: DetectStackSetDriftCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: DetectStackSetDriftCommandOutput) => void
   ): void;
-  public detectStackSetDrift(
-    args: DetectStackSetDriftCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetectStackSetDriftCommandOutput) => void),
-    cb?: (err: any, data?: DetectStackSetDriftCommandOutput) => void
-  ): Promise<DetectStackSetDriftCommandOutput> | void {
-    const command = new DetectStackSetDriftCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the estimated monthly cost of a template. The return value is an Amazon Web Services Simple
-   *          Monthly Calculator URL with a query string that describes the resources required to run the
-   *          template.</p>
+   * @see {@link EstimateTemplateCostCommand}
    */
-  public estimateTemplateCost(
+  estimateTemplateCost(): Promise<EstimateTemplateCostCommandOutput>;
+  estimateTemplateCost(
     args: EstimateTemplateCostCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<EstimateTemplateCostCommandOutput>;
-  public estimateTemplateCost(
+  estimateTemplateCost(
     args: EstimateTemplateCostCommandInput,
     cb: (err: any, data?: EstimateTemplateCostCommandOutput) => void
   ): void;
-  public estimateTemplateCost(
+  estimateTemplateCost(
     args: EstimateTemplateCostCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: EstimateTemplateCostCommandOutput) => void
   ): void;
-  public estimateTemplateCost(
-    args: EstimateTemplateCostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EstimateTemplateCostCommandOutput) => void),
-    cb?: (err: any, data?: EstimateTemplateCostCommandOutput) => void
-  ): Promise<EstimateTemplateCostCommandOutput> | void {
-    const command = new EstimateTemplateCostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a stack using the input information that was provided when the specified
-   *          change set was created. After the call successfully completes, CloudFormation starts
-   *          updating the stack. Use the <a>DescribeStacks</a> action to view the status of
-   *          the update.</p>
-   *          <p>When you execute a change set, CloudFormation deletes all other change sets
-   *          associated with the stack because they aren't valid for the updated stack.</p>
-   *          <p>If a stack policy is associated with the stack, CloudFormation enforces the
-   *          policy during the update. You can't specify a temporary stack policy that overrides the
-   *          current policy.</p>
-   *          <p>To create a change set for the entire stack hierachy, <code>IncludeNestedStacks</code>
-   *          must have been set to <code>True</code>.</p>
+   * @see {@link ExecuteChangeSetCommand}
    */
-  public executeChangeSet(
+  executeChangeSet(
     args: ExecuteChangeSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ExecuteChangeSetCommandOutput>;
-  public executeChangeSet(
+  executeChangeSet(
     args: ExecuteChangeSetCommandInput,
     cb: (err: any, data?: ExecuteChangeSetCommandOutput) => void
   ): void;
-  public executeChangeSet(
+  executeChangeSet(
     args: ExecuteChangeSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ExecuteChangeSetCommandOutput) => void
   ): void;
-  public executeChangeSet(
-    args: ExecuteChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExecuteChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: ExecuteChangeSetCommandOutput) => void
-  ): Promise<ExecuteChangeSetCommandOutput> | void {
-    const command = new ExecuteChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the stack policy for a specified stack. If a stack doesn't have a policy, a
-   *          null value is returned.</p>
+   * @see {@link ExecuteStackRefactorCommand}
    */
-  public getStackPolicy(
+  executeStackRefactor(
+    args: ExecuteStackRefactorCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ExecuteStackRefactorCommandOutput>;
+  executeStackRefactor(
+    args: ExecuteStackRefactorCommandInput,
+    cb: (err: any, data?: ExecuteStackRefactorCommandOutput) => void
+  ): void;
+  executeStackRefactor(
+    args: ExecuteStackRefactorCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ExecuteStackRefactorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGeneratedTemplateCommand}
+   */
+  getGeneratedTemplate(
+    args: GetGeneratedTemplateCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<GetGeneratedTemplateCommandOutput>;
+  getGeneratedTemplate(
+    args: GetGeneratedTemplateCommandInput,
+    cb: (err: any, data?: GetGeneratedTemplateCommandOutput) => void
+  ): void;
+  getGeneratedTemplate(
+    args: GetGeneratedTemplateCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: GetGeneratedTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetHookResultCommand}
+   */
+  getHookResult(): Promise<GetHookResultCommandOutput>;
+  getHookResult(
+    args: GetHookResultCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<GetHookResultCommandOutput>;
+  getHookResult(
+    args: GetHookResultCommandInput,
+    cb: (err: any, data?: GetHookResultCommandOutput) => void
+  ): void;
+  getHookResult(
+    args: GetHookResultCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: GetHookResultCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStackPolicyCommand}
+   */
+  getStackPolicy(
     args: GetStackPolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<GetStackPolicyCommandOutput>;
-  public getStackPolicy(
+  getStackPolicy(
     args: GetStackPolicyCommandInput,
     cb: (err: any, data?: GetStackPolicyCommandOutput) => void
   ): void;
-  public getStackPolicy(
+  getStackPolicy(
     args: GetStackPolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: GetStackPolicyCommandOutput) => void
   ): void;
-  public getStackPolicy(
-    args: GetStackPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStackPolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetStackPolicyCommandOutput) => void
-  ): Promise<GetStackPolicyCommandOutput> | void {
-    const command = new GetStackPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the template body for a specified stack. You can get the template for running
-   *          or deleted stacks.</p>
-   *          <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the
-   *          stack has been deleted.</p>
-   *          <note>
-   *             <p>If the template does not exist, a <code>ValidationError</code> is returned.</p>
-   *          </note>
+   * @see {@link GetTemplateCommand}
    */
-  public getTemplate(args: GetTemplateCommandInput, options?: __HttpHandlerOptions): Promise<GetTemplateCommandOutput>;
-  public getTemplate(args: GetTemplateCommandInput, cb: (err: any, data?: GetTemplateCommandOutput) => void): void;
-  public getTemplate(
+  getTemplate(): Promise<GetTemplateCommandOutput>;
+  getTemplate(
     args: GetTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<GetTemplateCommandOutput>;
+  getTemplate(
+    args: GetTemplateCommandInput,
     cb: (err: any, data?: GetTemplateCommandOutput) => void
   ): void;
-  public getTemplate(
+  getTemplate(
     args: GetTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTemplateCommandOutput) => void),
-    cb?: (err: any, data?: GetTemplateCommandOutput) => void
-  ): Promise<GetTemplateCommandOutput> | void {
-    const command = new GetTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: GetTemplateCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns information about a new or existing template. The
-   *             <code>GetTemplateSummary</code> action is useful for viewing parameter information, such
-   *          as default parameter values and parameter types, before you create or update a stack or
-   *          stack set.</p>
-   *          <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or
-   *          you can get template information for a stack set, or a running or deleted stack.</p>
-   *          <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information
-   *          for up to 90 days after the stack has been deleted. If the template does not exist, a
-   *             <code>ValidationError</code> is returned.</p>
+   * @see {@link GetTemplateSummaryCommand}
    */
-  public getTemplateSummary(
+  getTemplateSummary(): Promise<GetTemplateSummaryCommandOutput>;
+  getTemplateSummary(
     args: GetTemplateSummaryCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<GetTemplateSummaryCommandOutput>;
-  public getTemplateSummary(
+  getTemplateSummary(
     args: GetTemplateSummaryCommandInput,
     cb: (err: any, data?: GetTemplateSummaryCommandOutput) => void
   ): void;
-  public getTemplateSummary(
+  getTemplateSummary(
     args: GetTemplateSummaryCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: GetTemplateSummaryCommandOutput) => void
   ): void;
-  public getTemplateSummary(
-    args: GetTemplateSummaryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTemplateSummaryCommandOutput) => void),
-    cb?: (err: any, data?: GetTemplateSummaryCommandOutput) => void
-  ): Promise<GetTemplateSummaryCommandOutput> | void {
-    const command = new GetTemplateSummaryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Import existing stacks into a new stack sets. Use the stack import operation to import
-   *          up to 10 stacks into a new stack set in the same account as the source stack or in a
-   *          different administrator account and Region, by specifying the stack ID of the stack you
-   *          intend to import.</p>
-   *          <note>
-   *             <p>
-   *                <code>ImportStacksToStackSet</code> is only supported by self-managed permissions.</p>
-   *          </note>
+   * @see {@link ImportStacksToStackSetCommand}
    */
-  public importStacksToStackSet(
+  importStacksToStackSet(
     args: ImportStacksToStackSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ImportStacksToStackSetCommandOutput>;
-  public importStacksToStackSet(
+  importStacksToStackSet(
     args: ImportStacksToStackSetCommandInput,
     cb: (err: any, data?: ImportStacksToStackSetCommandOutput) => void
   ): void;
-  public importStacksToStackSet(
+  importStacksToStackSet(
     args: ImportStacksToStackSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ImportStacksToStackSetCommandOutput) => void
   ): void;
-  public importStacksToStackSet(
-    args: ImportStacksToStackSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportStacksToStackSetCommandOutput) => void),
-    cb?: (err: any, data?: ImportStacksToStackSetCommandOutput) => void
-  ): Promise<ImportStacksToStackSetCommandOutput> | void {
-    const command = new ImportStacksToStackSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the ID and status of each active change set for a stack. For example,
-   *          CloudFormation lists change sets that are in the <code>CREATE_IN_PROGRESS</code> or
-   *             <code>CREATE_PENDING</code> state.</p>
+   * @see {@link ListChangeSetsCommand}
    */
-  public listChangeSets(
+  listChangeSets(
     args: ListChangeSetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListChangeSetsCommandOutput>;
-  public listChangeSets(
+  listChangeSets(
     args: ListChangeSetsCommandInput,
     cb: (err: any, data?: ListChangeSetsCommandOutput) => void
   ): void;
-  public listChangeSets(
+  listChangeSets(
     args: ListChangeSetsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListChangeSetsCommandOutput) => void
   ): void;
-  public listChangeSets(
-    args: ListChangeSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListChangeSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListChangeSetsCommandOutput) => void
-  ): Promise<ListChangeSetsCommandOutput> | void {
-    const command = new ListChangeSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all exported output values in the account and Region in which you call this
-   *          action. Use this action to see the exported output values that you can import into other
-   *          stacks. To import values, use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html">
-   *                <code>Fn::ImportValue</code>
-   *             </a> function.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html">
-   *             CloudFormation Export Stack Output Values</a>.</p>
+   * @see {@link ListExportsCommand}
    */
-  public listExports(args: ListExportsCommandInput, options?: __HttpHandlerOptions): Promise<ListExportsCommandOutput>;
-  public listExports(args: ListExportsCommandInput, cb: (err: any, data?: ListExportsCommandOutput) => void): void;
-  public listExports(
+  listExports(): Promise<ListExportsCommandOutput>;
+  listExports(
     args: ListExportsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListExportsCommandOutput>;
+  listExports(
+    args: ListExportsCommandInput,
     cb: (err: any, data?: ListExportsCommandOutput) => void
   ): void;
-  public listExports(
+  listExports(
     args: ListExportsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListExportsCommandOutput) => void),
-    cb?: (err: any, data?: ListExportsCommandOutput) => void
-  ): Promise<ListExportsCommandOutput> | void {
-    const command = new ListExportsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListExportsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all stacks that are importing an exported output value. To modify or remove an
-   *          exported output value, first use this action to see which stacks are using it. To see the
-   *          exported output values in your account, see <a>ListExports</a>.</p>
-   *          <p>For more information about importing an exported output value, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html">
-   *                <code>Fn::ImportValue</code>
-   *             </a> function.</p>
+   * @see {@link ListGeneratedTemplatesCommand}
    */
-  public listImports(args: ListImportsCommandInput, options?: __HttpHandlerOptions): Promise<ListImportsCommandOutput>;
-  public listImports(args: ListImportsCommandInput, cb: (err: any, data?: ListImportsCommandOutput) => void): void;
-  public listImports(
+  listGeneratedTemplates(): Promise<ListGeneratedTemplatesCommandOutput>;
+  listGeneratedTemplates(
+    args: ListGeneratedTemplatesCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListGeneratedTemplatesCommandOutput>;
+  listGeneratedTemplates(
+    args: ListGeneratedTemplatesCommandInput,
+    cb: (err: any, data?: ListGeneratedTemplatesCommandOutput) => void
+  ): void;
+  listGeneratedTemplates(
+    args: ListGeneratedTemplatesCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListGeneratedTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListHookResultsCommand}
+   */
+  listHookResults(): Promise<ListHookResultsCommandOutput>;
+  listHookResults(
+    args: ListHookResultsCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListHookResultsCommandOutput>;
+  listHookResults(
+    args: ListHookResultsCommandInput,
+    cb: (err: any, data?: ListHookResultsCommandOutput) => void
+  ): void;
+  listHookResults(
+    args: ListHookResultsCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListHookResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportsCommand}
+   */
+  listImports(
     args: ListImportsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListImportsCommandOutput>;
+  listImports(
+    args: ListImportsCommandInput,
     cb: (err: any, data?: ListImportsCommandOutput) => void
   ): void;
-  public listImports(
+  listImports(
     args: ListImportsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListImportsCommandOutput) => void),
-    cb?: (err: any, data?: ListImportsCommandOutput) => void
-  ): Promise<ListImportsCommandOutput> | void {
-    const command = new ListImportsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListImportsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns summary information about stack instances that are associated with the
-   *          specified stack set. You can filter for stack instances that are associated with a specific
-   *          Amazon Web Services account name or Region, or that have a specific status.</p>
+   * @see {@link ListResourceScanRelatedResourcesCommand}
    */
-  public listStackInstances(
+  listResourceScanRelatedResources(
+    args: ListResourceScanRelatedResourcesCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListResourceScanRelatedResourcesCommandOutput>;
+  listResourceScanRelatedResources(
+    args: ListResourceScanRelatedResourcesCommandInput,
+    cb: (err: any, data?: ListResourceScanRelatedResourcesCommandOutput) => void
+  ): void;
+  listResourceScanRelatedResources(
+    args: ListResourceScanRelatedResourcesCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListResourceScanRelatedResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListResourceScanResourcesCommand}
+   */
+  listResourceScanResources(
+    args: ListResourceScanResourcesCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListResourceScanResourcesCommandOutput>;
+  listResourceScanResources(
+    args: ListResourceScanResourcesCommandInput,
+    cb: (err: any, data?: ListResourceScanResourcesCommandOutput) => void
+  ): void;
+  listResourceScanResources(
+    args: ListResourceScanResourcesCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListResourceScanResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListResourceScansCommand}
+   */
+  listResourceScans(): Promise<ListResourceScansCommandOutput>;
+  listResourceScans(
+    args: ListResourceScansCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListResourceScansCommandOutput>;
+  listResourceScans(
+    args: ListResourceScansCommandInput,
+    cb: (err: any, data?: ListResourceScansCommandOutput) => void
+  ): void;
+  listResourceScans(
+    args: ListResourceScansCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListResourceScansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStackInstanceResourceDriftsCommand}
+   */
+  listStackInstanceResourceDrifts(
+    args: ListStackInstanceResourceDriftsCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListStackInstanceResourceDriftsCommandOutput>;
+  listStackInstanceResourceDrifts(
+    args: ListStackInstanceResourceDriftsCommandInput,
+    cb: (err: any, data?: ListStackInstanceResourceDriftsCommandOutput) => void
+  ): void;
+  listStackInstanceResourceDrifts(
+    args: ListStackInstanceResourceDriftsCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListStackInstanceResourceDriftsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStackInstancesCommand}
+   */
+  listStackInstances(
     args: ListStackInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListStackInstancesCommandOutput>;
-  public listStackInstances(
+  listStackInstances(
     args: ListStackInstancesCommandInput,
     cb: (err: any, data?: ListStackInstancesCommandOutput) => void
   ): void;
-  public listStackInstances(
+  listStackInstances(
     args: ListStackInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListStackInstancesCommandOutput) => void
   ): void;
-  public listStackInstances(
-    args: ListStackInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStackInstancesCommandOutput) => void),
-    cb?: (err: any, data?: ListStackInstancesCommandOutput) => void
-  ): Promise<ListStackInstancesCommandOutput> | void {
-    const command = new ListStackInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns descriptions of all resources of the specified stack.</p>
-   *          <p>For deleted stacks, ListStackResources returns resource information for up to 90 days
-   *          after the stack has been deleted.</p>
+   * @see {@link ListStackRefactorActionsCommand}
    */
-  public listStackResources(
+  listStackRefactorActions(
+    args: ListStackRefactorActionsCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListStackRefactorActionsCommandOutput>;
+  listStackRefactorActions(
+    args: ListStackRefactorActionsCommandInput,
+    cb: (err: any, data?: ListStackRefactorActionsCommandOutput) => void
+  ): void;
+  listStackRefactorActions(
+    args: ListStackRefactorActionsCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListStackRefactorActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStackRefactorsCommand}
+   */
+  listStackRefactors(): Promise<ListStackRefactorsCommandOutput>;
+  listStackRefactors(
+    args: ListStackRefactorsCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListStackRefactorsCommandOutput>;
+  listStackRefactors(
+    args: ListStackRefactorsCommandInput,
+    cb: (err: any, data?: ListStackRefactorsCommandOutput) => void
+  ): void;
+  listStackRefactors(
+    args: ListStackRefactorsCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListStackRefactorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStackResourcesCommand}
+   */
+  listStackResources(
     args: ListStackResourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListStackResourcesCommandOutput>;
-  public listStackResources(
+  listStackResources(
     args: ListStackResourcesCommandInput,
     cb: (err: any, data?: ListStackResourcesCommandOutput) => void
   ): void;
-  public listStackResources(
+  listStackResources(
     args: ListStackResourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListStackResourcesCommandOutput) => void
   ): void;
-  public listStackResources(
-    args: ListStackResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStackResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListStackResourcesCommandOutput) => void
-  ): Promise<ListStackResourcesCommandOutput> | void {
-    const command = new ListStackResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the summary information for stacks whose status matches the specified
-   *          StackStatusFilter. Summary information for stacks that have been deleted is kept for 90
-   *          days after the stack is deleted. If no StackStatusFilter is specified, summary information
-   *          for all stacks is returned (including existing stacks and stacks that have been
-   *          deleted).</p>
+   * @see {@link ListStacksCommand}
    */
-  public listStacks(args: ListStacksCommandInput, options?: __HttpHandlerOptions): Promise<ListStacksCommandOutput>;
-  public listStacks(args: ListStacksCommandInput, cb: (err: any, data?: ListStacksCommandOutput) => void): void;
-  public listStacks(
+  listStacks(): Promise<ListStacksCommandOutput>;
+  listStacks(
     args: ListStacksCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListStacksCommandOutput>;
+  listStacks(
+    args: ListStacksCommandInput,
     cb: (err: any, data?: ListStacksCommandOutput) => void
   ): void;
-  public listStacks(
+  listStacks(
     args: ListStacksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStacksCommandOutput) => void),
-    cb?: (err: any, data?: ListStacksCommandOutput) => void
-  ): Promise<ListStacksCommandOutput> | void {
-    const command = new ListStacksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListStacksCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns summary information about the results of a stack set operation. </p>
+   * @see {@link ListStackSetAutoDeploymentTargetsCommand}
    */
-  public listStackSetOperationResults(
+  listStackSetAutoDeploymentTargets(
+    args: ListStackSetAutoDeploymentTargetsCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListStackSetAutoDeploymentTargetsCommandOutput>;
+  listStackSetAutoDeploymentTargets(
+    args: ListStackSetAutoDeploymentTargetsCommandInput,
+    cb: (err: any, data?: ListStackSetAutoDeploymentTargetsCommandOutput) => void
+  ): void;
+  listStackSetAutoDeploymentTargets(
+    args: ListStackSetAutoDeploymentTargetsCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListStackSetAutoDeploymentTargetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStackSetOperationResultsCommand}
+   */
+  listStackSetOperationResults(
     args: ListStackSetOperationResultsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListStackSetOperationResultsCommandOutput>;
-  public listStackSetOperationResults(
+  listStackSetOperationResults(
     args: ListStackSetOperationResultsCommandInput,
     cb: (err: any, data?: ListStackSetOperationResultsCommandOutput) => void
   ): void;
-  public listStackSetOperationResults(
+  listStackSetOperationResults(
     args: ListStackSetOperationResultsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListStackSetOperationResultsCommandOutput) => void
   ): void;
-  public listStackSetOperationResults(
-    args: ListStackSetOperationResultsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStackSetOperationResultsCommandOutput) => void),
-    cb?: (err: any, data?: ListStackSetOperationResultsCommandOutput) => void
-  ): Promise<ListStackSetOperationResultsCommandOutput> | void {
-    const command = new ListStackSetOperationResultsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns summary information about operations performed on a stack set. </p>
+   * @see {@link ListStackSetOperationsCommand}
    */
-  public listStackSetOperations(
+  listStackSetOperations(
     args: ListStackSetOperationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListStackSetOperationsCommandOutput>;
-  public listStackSetOperations(
+  listStackSetOperations(
     args: ListStackSetOperationsCommandInput,
     cb: (err: any, data?: ListStackSetOperationsCommandOutput) => void
   ): void;
-  public listStackSetOperations(
+  listStackSetOperations(
     args: ListStackSetOperationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListStackSetOperationsCommandOutput) => void
   ): void;
-  public listStackSetOperations(
-    args: ListStackSetOperationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStackSetOperationsCommandOutput) => void),
-    cb?: (err: any, data?: ListStackSetOperationsCommandOutput) => void
-  ): Promise<ListStackSetOperationsCommandOutput> | void {
-    const command = new ListStackSetOperationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns summary information about stack sets that are associated with the
-   *          user.</p>
-   *          <ul>
-   *             <li>
-   *                <p>[Self-managed permissions] If you set the <code>CallAs</code> parameter to
-   *                   <code>SELF</code> while signed in to your Amazon Web Services account,
-   *                   <code>ListStackSets</code> returns all self-managed stack sets in your Amazon Web Services account.</p>
-   *             </li>
-   *             <li>
-   *                <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to
-   *                   <code>SELF</code> while signed in to the organization's management account,
-   *                   <code>ListStackSets</code> returns all stack sets in the management
-   *                account.</p>
-   *             </li>
-   *             <li>
-   *                <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to
-   *                   <code>DELEGATED_ADMIN</code> while signed in to your member account,
-   *                   <code>ListStackSets</code> returns all stack sets with service-managed permissions
-   *                in the management account.</p>
-   *             </li>
-   *          </ul>
+   * @see {@link ListStackSetsCommand}
    */
-  public listStackSets(
+  listStackSets(): Promise<ListStackSetsCommandOutput>;
+  listStackSets(
     args: ListStackSetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListStackSetsCommandOutput>;
-  public listStackSets(
+  listStackSets(
     args: ListStackSetsCommandInput,
     cb: (err: any, data?: ListStackSetsCommandOutput) => void
   ): void;
-  public listStackSets(
+  listStackSets(
     args: ListStackSetsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListStackSetsCommandOutput) => void
   ): void;
-  public listStackSets(
-    args: ListStackSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStackSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListStackSetsCommandOutput) => void
-  ): Promise<ListStackSetsCommandOutput> | void {
-    const command = new ListStackSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of registration tokens for the specified extension(s).</p>
+   * @see {@link ListTypeRegistrationsCommand}
    */
-  public listTypeRegistrations(
+  listTypeRegistrations(): Promise<ListTypeRegistrationsCommandOutput>;
+  listTypeRegistrations(
     args: ListTypeRegistrationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListTypeRegistrationsCommandOutput>;
-  public listTypeRegistrations(
+  listTypeRegistrations(
     args: ListTypeRegistrationsCommandInput,
     cb: (err: any, data?: ListTypeRegistrationsCommandOutput) => void
   ): void;
-  public listTypeRegistrations(
+  listTypeRegistrations(
     args: ListTypeRegistrationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListTypeRegistrationsCommandOutput) => void
   ): void;
-  public listTypeRegistrations(
-    args: ListTypeRegistrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTypeRegistrationsCommandOutput) => void),
-    cb?: (err: any, data?: ListTypeRegistrationsCommandOutput) => void
-  ): Promise<ListTypeRegistrationsCommandOutput> | void {
-    const command = new ListTypeRegistrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns summary information about extension that have been registered with CloudFormation.</p>
+   * @see {@link ListTypesCommand}
    */
-  public listTypes(args: ListTypesCommandInput, options?: __HttpHandlerOptions): Promise<ListTypesCommandOutput>;
-  public listTypes(args: ListTypesCommandInput, cb: (err: any, data?: ListTypesCommandOutput) => void): void;
-  public listTypes(
+  listTypes(): Promise<ListTypesCommandOutput>;
+  listTypes(
     args: ListTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<ListTypesCommandOutput>;
+  listTypes(
+    args: ListTypesCommandInput,
     cb: (err: any, data?: ListTypesCommandOutput) => void
   ): void;
-  public listTypes(
+  listTypes(
     args: ListTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTypesCommandOutput) => void),
-    cb?: (err: any, data?: ListTypesCommandOutput) => void
-  ): Promise<ListTypesCommandOutput> | void {
-    const command = new ListTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: ListTypesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns summary information about the versions of an extension.</p>
+   * @see {@link ListTypeVersionsCommand}
    */
-  public listTypeVersions(
+  listTypeVersions(): Promise<ListTypeVersionsCommandOutput>;
+  listTypeVersions(
     args: ListTypeVersionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ListTypeVersionsCommandOutput>;
-  public listTypeVersions(
+  listTypeVersions(
     args: ListTypeVersionsCommandInput,
     cb: (err: any, data?: ListTypeVersionsCommandOutput) => void
   ): void;
-  public listTypeVersions(
+  listTypeVersions(
     args: ListTypeVersionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ListTypeVersionsCommandOutput) => void
   ): void;
-  public listTypeVersions(
-    args: ListTypeVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTypeVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListTypeVersionsCommandOutput) => void
-  ): Promise<ListTypeVersionsCommandOutput> | void {
-    const command = new ListTypeVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Publishes the specified extension to the CloudFormation registry as a public extension
-   *          in this region. Public extensions are available for use by all CloudFormation users. For
-   *          more information on publishing extensions, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html">Publishing extensions to make them available for public use</a> in the
-   *             <i>CloudFormation CLI User Guide</i>.</p>
-   *          <p>To publish an extension, you must be registered as a publisher with CloudFormation. For
-   *          more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html">RegisterPublisher</a>.</p>
+   * @see {@link PublishTypeCommand}
    */
-  public publishType(args: PublishTypeCommandInput, options?: __HttpHandlerOptions): Promise<PublishTypeCommandOutput>;
-  public publishType(args: PublishTypeCommandInput, cb: (err: any, data?: PublishTypeCommandOutput) => void): void;
-  public publishType(
+  publishType(): Promise<PublishTypeCommandOutput>;
+  publishType(
     args: PublishTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<PublishTypeCommandOutput>;
+  publishType(
+    args: PublishTypeCommandInput,
     cb: (err: any, data?: PublishTypeCommandOutput) => void
   ): void;
-  public publishType(
+  publishType(
     args: PublishTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PublishTypeCommandOutput) => void),
-    cb?: (err: any, data?: PublishTypeCommandOutput) => void
-  ): Promise<PublishTypeCommandOutput> | void {
-    const command = new PublishTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: PublishTypeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Reports progress of a resource handler to CloudFormation.</p>
-   *          <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. Do not use this API in your code.</p>
+   * @see {@link RecordHandlerProgressCommand}
    */
-  public recordHandlerProgress(
+  recordHandlerProgress(
     args: RecordHandlerProgressCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<RecordHandlerProgressCommandOutput>;
-  public recordHandlerProgress(
+  recordHandlerProgress(
     args: RecordHandlerProgressCommandInput,
     cb: (err: any, data?: RecordHandlerProgressCommandOutput) => void
   ): void;
-  public recordHandlerProgress(
+  recordHandlerProgress(
     args: RecordHandlerProgressCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: RecordHandlerProgressCommandOutput) => void
   ): void;
-  public recordHandlerProgress(
-    args: RecordHandlerProgressCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RecordHandlerProgressCommandOutput) => void),
-    cb?: (err: any, data?: RecordHandlerProgressCommandOutput) => void
-  ): Promise<RecordHandlerProgressCommandOutput> | void {
-    const command = new RecordHandlerProgressCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Registers your account as a publisher of public extensions in the CloudFormation
-   *          registry. Public extensions are available for use by all CloudFormation users. This
-   *          publisher ID applies to your account in all Amazon Web Services Regions.</p>
-   *          <p>For information on requirements for registering as a public extension publisher, see
-   *             <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs">Registering your account to publish CloudFormation
-   *             extensions</a> in the <i>CloudFormation CLI User Guide</i>.</p>
-   *          <p></p>
+   * @see {@link RegisterPublisherCommand}
    */
-  public registerPublisher(
+  registerPublisher(): Promise<RegisterPublisherCommandOutput>;
+  registerPublisher(
     args: RegisterPublisherCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<RegisterPublisherCommandOutput>;
-  public registerPublisher(
+  registerPublisher(
     args: RegisterPublisherCommandInput,
     cb: (err: any, data?: RegisterPublisherCommandOutput) => void
   ): void;
-  public registerPublisher(
+  registerPublisher(
     args: RegisterPublisherCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: RegisterPublisherCommandOutput) => void
   ): void;
-  public registerPublisher(
-    args: RegisterPublisherCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterPublisherCommandOutput) => void),
-    cb?: (err: any, data?: RegisterPublisherCommandOutput) => void
-  ): Promise<RegisterPublisherCommandOutput> | void {
-    const command = new RegisterPublisherCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Registers an extension with the CloudFormation service. Registering an
-   *          extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Validating the extension schema</p>
-   *             </li>
-   *             <li>
-   *                <p>Determining which handlers, if any, have been specified for the extension</p>
-   *             </li>
-   *             <li>
-   *                <p>Making the extension available for use in your account</p>
-   *             </li>
-   *          </ul>
-   *          <p>For more information on how to develop extensions and ready them for registeration, see
-   *             <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource
-   *             Providers</a> in the <i>CloudFormation CLI User
-   *          Guide</i>.</p>
-   *          <p>You can have a maximum of 50 resource extension versions registered at a time. This
-   *          maximum is per account and per region. Use <a href="AWSCloudFormation/latest/APIReference/API_DeregisterType.html">DeregisterType</a> to deregister specific extension versions if necessary.</p>
-   *          <p>Once you have initiated a registration request using <code>
-   *                <a>RegisterType</a>
-   *             </code>, you can use <code>
-   *                <a>DescribeTypeRegistration</a>
-   *             </code> to
-   *          monitor the progress of the registration request.</p>
-   *          <p>Once you have registered a private extension in your account and region, use <a href="AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a> to specify configuration properties for the extension. For
-   *          more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration">Configuring extensions at the account level</a> in the <i>CloudFormation
-   *             User Guide</i>.</p>
+   * @see {@link RegisterTypeCommand}
    */
-  public registerType(
+  registerType(
     args: RegisterTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<RegisterTypeCommandOutput>;
-  public registerType(args: RegisterTypeCommandInput, cb: (err: any, data?: RegisterTypeCommandOutput) => void): void;
-  public registerType(
+  registerType(
     args: RegisterTypeCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: RegisterTypeCommandOutput) => void
   ): void;
-  public registerType(
+  registerType(
     args: RegisterTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterTypeCommandOutput) => void),
-    cb?: (err: any, data?: RegisterTypeCommandOutput) => void
-  ): Promise<RegisterTypeCommandOutput> | void {
-    const command = new RegisterTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: RegisterTypeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>When specifying <code>RollbackStack</code>, you preserve the state of previously provisioned resources when an operation fails. You can check the status of the stack through the <a>DescribeStacks</a> API.</p>
-   *          <p>Rolls back the specified stack to the last known stable state from <code>CREATE_FAILED</code> or <code>UPDATE_FAILED</code> stack statuses.</p>
-   *          <p>This operation will delete a stack if it doesn't contain a last known stable state. A last known stable state includes any status in a <code>*_COMPLETE</code>. This includes the following stack statuses.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>CREATE_COMPLETE</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>UPDATE_COMPLETE</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>UPDATE_ROLLBACK_COMPLETE</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>IMPORT_COMPLETE</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>IMPORT_ROLLBACK_COMPLETE</code>
-   *                </p>
-   *             </li>
-   *          </ul>
+   * @see {@link RemoveAliasCommand}
    */
-  public rollbackStack(
+  removeAlias(
+    args: RemoveAliasCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<RemoveAliasCommandOutput>;
+  removeAlias(
+    args: RemoveAliasCommandInput,
+    cb: (err: any, data?: RemoveAliasCommandOutput) => void
+  ): void;
+  removeAlias(
+    args: RemoveAliasCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: RemoveAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RollbackStackCommand}
+   */
+  rollbackStack(
     args: RollbackStackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<RollbackStackCommandOutput>;
-  public rollbackStack(
+  rollbackStack(
     args: RollbackStackCommandInput,
     cb: (err: any, data?: RollbackStackCommandOutput) => void
   ): void;
-  public rollbackStack(
+  rollbackStack(
     args: RollbackStackCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: RollbackStackCommandOutput) => void
   ): void;
-  public rollbackStack(
-    args: RollbackStackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RollbackStackCommandOutput) => void),
-    cb?: (err: any, data?: RollbackStackCommandOutput) => void
-  ): Promise<RollbackStackCommandOutput> | void {
-    const command = new RollbackStackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets a stack policy for a specified stack.</p>
+   * @see {@link SetAliasCommand}
    */
-  public setStackPolicy(
+  setAlias(
+    args: SetAliasCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<SetAliasCommandOutput>;
+  setAlias(
+    args: SetAliasCommandInput,
+    cb: (err: any, data?: SetAliasCommandOutput) => void
+  ): void;
+  setAlias(
+    args: SetAliasCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: SetAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetStackPolicyCommand}
+   */
+  setStackPolicy(
     args: SetStackPolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<SetStackPolicyCommandOutput>;
-  public setStackPolicy(
+  setStackPolicy(
     args: SetStackPolicyCommandInput,
     cb: (err: any, data?: SetStackPolicyCommandOutput) => void
   ): void;
-  public setStackPolicy(
+  setStackPolicy(
     args: SetStackPolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: SetStackPolicyCommandOutput) => void
   ): void;
-  public setStackPolicy(
-    args: SetStackPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetStackPolicyCommandOutput) => void),
-    cb?: (err: any, data?: SetStackPolicyCommandOutput) => void
-  ): Promise<SetStackPolicyCommandOutput> | void {
-    const command = new SetStackPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Specifies the configuration data for a registered CloudFormation extension, in the given
-   *          account and region.</p>
-   *          <p>To view the current configuration data for an extension, refer to the
-   *             <code>ConfigurationSchema</code> element of <a href="AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.
-   *          For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration">Configuring extensions at the account level</a> in the
-   *             <i>CloudFormation User Guide</i>.</p>
-   *          <important>
-   *             <p>It is strongly recommended that you use dynamic references to restrict sensitive
-   *             configuration definitions, such as third-party credentials. For more details on dynamic
-   *             references, see <a href="https://docs.aws.amazon.com/">Using dynamic references to specify
-   *                template values</a> in the <i>CloudFormation User
-   *             Guide</i>.</p>
-   *          </important>
+   * @see {@link SetTypeConfigurationCommand}
    */
-  public setTypeConfiguration(
+  setTypeConfiguration(
     args: SetTypeConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<SetTypeConfigurationCommandOutput>;
-  public setTypeConfiguration(
+  setTypeConfiguration(
     args: SetTypeConfigurationCommandInput,
     cb: (err: any, data?: SetTypeConfigurationCommandOutput) => void
   ): void;
-  public setTypeConfiguration(
+  setTypeConfiguration(
     args: SetTypeConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: SetTypeConfigurationCommandOutput) => void
   ): void;
-  public setTypeConfiguration(
-    args: SetTypeConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetTypeConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: SetTypeConfigurationCommandOutput) => void
-  ): Promise<SetTypeConfigurationCommandOutput> | void {
-    const command = new SetTypeConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Specify the default version of an extension. The default version of an extension will be
-   *          used in CloudFormation operations.</p>
+   * @see {@link SetTypeDefaultVersionCommand}
    */
-  public setTypeDefaultVersion(
+  setTypeDefaultVersion(): Promise<SetTypeDefaultVersionCommandOutput>;
+  setTypeDefaultVersion(
     args: SetTypeDefaultVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<SetTypeDefaultVersionCommandOutput>;
-  public setTypeDefaultVersion(
+  setTypeDefaultVersion(
     args: SetTypeDefaultVersionCommandInput,
     cb: (err: any, data?: SetTypeDefaultVersionCommandOutput) => void
   ): void;
-  public setTypeDefaultVersion(
+  setTypeDefaultVersion(
     args: SetTypeDefaultVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: SetTypeDefaultVersionCommandOutput) => void
   ): void;
-  public setTypeDefaultVersion(
-    args: SetTypeDefaultVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetTypeDefaultVersionCommandOutput) => void),
-    cb?: (err: any, data?: SetTypeDefaultVersionCommandOutput) => void
-  ): Promise<SetTypeDefaultVersionCommandOutput> | void {
-    const command = new SetTypeDefaultVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sends a signal to the specified resource with a success or failure status. You can
-   *          use the SignalResource API in conjunction with a creation policy or update policy.
-   *          CloudFormation doesn't proceed with a stack creation or update until resources receive the
-   *          required number of signals or the timeout period is exceeded. The SignalResource API is
-   *          useful in cases where you want to send signals from anywhere other than an Amazon EC2
-   *          instance.</p>
+   * @see {@link SignalResourceCommand}
    */
-  public signalResource(
+  signalResource(
     args: SignalResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<SignalResourceCommandOutput>;
-  public signalResource(
+  signalResource(
     args: SignalResourceCommandInput,
     cb: (err: any, data?: SignalResourceCommandOutput) => void
   ): void;
-  public signalResource(
+  signalResource(
     args: SignalResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: SignalResourceCommandOutput) => void
   ): void;
-  public signalResource(
-    args: SignalResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SignalResourceCommandOutput) => void),
-    cb?: (err: any, data?: SignalResourceCommandOutput) => void
-  ): Promise<SignalResourceCommandOutput> | void {
-    const command = new SignalResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops an in-progress operation on a stack set and its associated stack instances. </p>
+   * @see {@link StartResourceScanCommand}
    */
-  public stopStackSetOperation(
+  startResourceScan(): Promise<StartResourceScanCommandOutput>;
+  startResourceScan(
+    args: StartResourceScanCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<StartResourceScanCommandOutput>;
+  startResourceScan(
+    args: StartResourceScanCommandInput,
+    cb: (err: any, data?: StartResourceScanCommandOutput) => void
+  ): void;
+  startResourceScan(
+    args: StartResourceScanCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: StartResourceScanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopStackSetOperationCommand}
+   */
+  stopStackSetOperation(
     args: StopStackSetOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<StopStackSetOperationCommandOutput>;
-  public stopStackSetOperation(
+  stopStackSetOperation(
     args: StopStackSetOperationCommandInput,
     cb: (err: any, data?: StopStackSetOperationCommandOutput) => void
   ): void;
-  public stopStackSetOperation(
+  stopStackSetOperation(
     args: StopStackSetOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: StopStackSetOperationCommandOutput) => void
   ): void;
-  public stopStackSetOperation(
-    args: StopStackSetOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopStackSetOperationCommandOutput) => void),
-    cb?: (err: any, data?: StopStackSetOperationCommandOutput) => void
-  ): Promise<StopStackSetOperationCommandOutput> | void {
-    const command = new StopStackSetOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Tests a registered extension to make sure it meets all necessary requirements for being
-   *          published in the CloudFormation registry.</p>
-   *          <ul>
-   *             <li>
-   *                <p>For resource types, this includes passing all contracts tests defined for the
-   *                type.</p>
-   *             </li>
-   *             <li>
-   *                <p>For modules, this includes determining if the module's model meets all necessary
-   *                requirements.</p>
-   *             </li>
-   *          </ul>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing">Testing your public extension prior to publishing</a> in the
-   *             <i>CloudFormation CLI User Guide</i>.</p>
-   *          <p>If you do not specify a version, CloudFormation uses the default version of the
-   *          extension in your account and region for testing.</p>
-   *          <p>To perform testing, CloudFormation assumes the execution role specified when the type
-   *          was registered. For more information, see <a href="AWSCloudFormation/latest/APIReference/API_RegisterType.html">RegisterType</a>.</p>
-   *          <p>Once you've initiated testing on an extension using <code>TestType</code>, you can use
-   *             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a> to monitor the current test status and test
-   *          status description for the extension.</p>
-   *          <p>An extension must have a test status of <code>PASSED</code> before it can be published.
-   *          For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html">Publishing extensions to make them available for public use</a>
-   *          in the <i>CloudFormation CLI User Guide</i>.</p>
+   * @see {@link TestTypeCommand}
    */
-  public testType(args: TestTypeCommandInput, options?: __HttpHandlerOptions): Promise<TestTypeCommandOutput>;
-  public testType(args: TestTypeCommandInput, cb: (err: any, data?: TestTypeCommandOutput) => void): void;
-  public testType(
+  testType(): Promise<TestTypeCommandOutput>;
+  testType(
     args: TestTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<TestTypeCommandOutput>;
+  testType(
+    args: TestTypeCommandInput,
     cb: (err: any, data?: TestTypeCommandOutput) => void
   ): void;
-  public testType(
+  testType(
     args: TestTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestTypeCommandOutput) => void),
-    cb?: (err: any, data?: TestTypeCommandOutput) => void
-  ): Promise<TestTypeCommandOutput> | void {
-    const command = new TestTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: TestTypeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates a stack as specified in the template. After the call completes successfully,
-   *          the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p>
-   *          <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p>
-   *          <p>For more information about creating an update template, updating a stack, and
-   *          monitoring the progress of the update, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">Updating a
-   *             Stack</a>.</p>
+   * @see {@link UpdateGeneratedTemplateCommand}
    */
-  public updateStack(args: UpdateStackCommandInput, options?: __HttpHandlerOptions): Promise<UpdateStackCommandOutput>;
-  public updateStack(args: UpdateStackCommandInput, cb: (err: any, data?: UpdateStackCommandOutput) => void): void;
-  public updateStack(
+  updateGeneratedTemplate(
+    args: UpdateGeneratedTemplateCommandInput,
+    options?: CloudFormationRequestOptions
+  ): Promise<UpdateGeneratedTemplateCommandOutput>;
+  updateGeneratedTemplate(
+    args: UpdateGeneratedTemplateCommandInput,
+    cb: (err: any, data?: UpdateGeneratedTemplateCommandOutput) => void
+  ): void;
+  updateGeneratedTemplate(
+    args: UpdateGeneratedTemplateCommandInput,
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: UpdateGeneratedTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStackCommand}
+   */
+  updateStack(
     args: UpdateStackCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudFormationRequestOptions
+  ): Promise<UpdateStackCommandOutput>;
+  updateStack(
+    args: UpdateStackCommandInput,
     cb: (err: any, data?: UpdateStackCommandOutput) => void
   ): void;
-  public updateStack(
+  updateStack(
     args: UpdateStackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateStackCommandOutput) => void),
-    cb?: (err: any, data?: UpdateStackCommandOutput) => void
-  ): Promise<UpdateStackCommandOutput> | void {
-    const command = new UpdateStackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudFormationRequestOptions,
+    cb: (err: any, data?: UpdateStackCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the parameter values for stack instances for the specified accounts, within
-   *          the specified Regions. A stack instance refers to a stack in a specific account and Region. </p>
-   *          <p>You can only update stack instances in Regions and accounts where they already exist;
-   *          to create additional stack instances, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a>. </p>
-   *          <p>During stack set updates, any parameters overridden for a stack instance are not
-   *          updated, but retain their overridden value.</p>
-   *          <p>You can only update the parameter <i>values</i> that are specified in
-   *          the stack set; to add or delete a parameter itself, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update the stack set template. If you add a parameter to a
-   *          template, before you can override the parameter value specified in the stack set you must
-   *          first use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update all stack instances with the updated template and
-   *          parameter value specified in the stack set. Once a stack instance has been updated with the
-   *          new parameter, you can then override the parameter value using
-   *             <code>UpdateStackInstances</code>.</p>
+   * @see {@link UpdateStackInstancesCommand}
    */
-  public updateStackInstances(
+  updateStackInstances(
     args: UpdateStackInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<UpdateStackInstancesCommandOutput>;
-  public updateStackInstances(
+  updateStackInstances(
     args: UpdateStackInstancesCommandInput,
     cb: (err: any, data?: UpdateStackInstancesCommandOutput) => void
   ): void;
-  public updateStackInstances(
+  updateStackInstances(
     args: UpdateStackInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: UpdateStackInstancesCommandOutput) => void
   ): void;
-  public updateStackInstances(
-    args: UpdateStackInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateStackInstancesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateStackInstancesCommandOutput) => void
-  ): Promise<UpdateStackInstancesCommandOutput> | void {
-    const command = new UpdateStackInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the stack set, and associated stack instances in the specified accounts and
-   *          Regions.</p>
-   *          <p>Even if the stack set operation created by updating the stack set fails (completely
-   *          or partially, below or above a specified failure tolerance), the stack set is updated with
-   *          your changes. Subsequent <a>CreateStackInstances</a> calls on the specified
-   *          stack set use the updated stack set.</p>
+   * @see {@link UpdateStackSetCommand}
    */
-  public updateStackSet(
+  updateStackSet(
     args: UpdateStackSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<UpdateStackSetCommandOutput>;
-  public updateStackSet(
+  updateStackSet(
     args: UpdateStackSetCommandInput,
     cb: (err: any, data?: UpdateStackSetCommandOutput) => void
   ): void;
-  public updateStackSet(
+  updateStackSet(
     args: UpdateStackSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: UpdateStackSetCommandOutput) => void
   ): void;
-  public updateStackSet(
-    args: UpdateStackSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateStackSetCommandOutput) => void),
-    cb?: (err: any, data?: UpdateStackSetCommandOutput) => void
-  ): Promise<UpdateStackSetCommandOutput> | void {
-    const command = new UpdateStackSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates termination protection for the specified stack. If a user attempts to delete
-   *          a stack with termination protection enabled, the operation fails and the stack remains
-   *          unchanged. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html">Protecting a
-   *             Stack From Being Deleted</a> in the <i>CloudFormation User Guide</i>.</p>
-   *          <p>For <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">nested
-   *             stacks</a>, termination protection is set on the root stack and cannot be changed
-   *          directly on the nested stack.</p>
+   * @see {@link UpdateTerminationProtectionCommand}
    */
-  public updateTerminationProtection(
+  updateTerminationProtection(
     args: UpdateTerminationProtectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<UpdateTerminationProtectionCommandOutput>;
-  public updateTerminationProtection(
+  updateTerminationProtection(
     args: UpdateTerminationProtectionCommandInput,
     cb: (err: any, data?: UpdateTerminationProtectionCommandOutput) => void
   ): void;
-  public updateTerminationProtection(
+  updateTerminationProtection(
     args: UpdateTerminationProtectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: UpdateTerminationProtectionCommandOutput) => void
   ): void;
-  public updateTerminationProtection(
-    args: UpdateTerminationProtectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTerminationProtectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTerminationProtectionCommandOutput) => void
-  ): Promise<UpdateTerminationProtectionCommandOutput> | void {
-    const command = new UpdateTerminationProtectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Validates a specified template. CloudFormation first checks if the template is
-   *          valid JSON. If it isn't, CloudFormation checks if the template is valid YAML. If both
-   *          these checks fail, CloudFormation returns a template validation error.</p>
+   * @see {@link ValidateTemplateCommand}
    */
-  public validateTemplate(
+  validateTemplate(): Promise<ValidateTemplateCommandOutput>;
+  validateTemplate(
     args: ValidateTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudFormationRequestOptions
   ): Promise<ValidateTemplateCommandOutput>;
-  public validateTemplate(
+  validateTemplate(
     args: ValidateTemplateCommandInput,
     cb: (err: any, data?: ValidateTemplateCommandOutput) => void
   ): void;
-  public validateTemplate(
+  validateTemplate(
     args: ValidateTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudFormationRequestOptions,
     cb: (err: any, data?: ValidateTemplateCommandOutput) => void
   ): void;
-  public validateTemplate(
-    args: ValidateTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ValidateTemplateCommandOutput) => void),
-    cb?: (err: any, data?: ValidateTemplateCommandOutput) => void
-  ): Promise<ValidateTemplateCommandOutput> | void {
-    const command = new ValidateTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link DescribeAccountLimitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAccountLimitsCommandOutput}.
+   */
+  paginateDescribeAccountLimits(
+    args?: DescribeAccountLimitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAccountLimitsCommandOutput>;
+
+  /**
+   * @see {@link DescribeChangeSetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeChangeSetCommandOutput}.
+   */
+  paginateDescribeChangeSet(
+    args: DescribeChangeSetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeChangeSetCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventsCommandOutput}.
+   */
+  paginateDescribeEvents(
+    args?: DescribeEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventsCommandOutput>;
+
+  /**
+   * @see {@link DescribeStackEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeStackEventsCommandOutput}.
+   */
+  paginateDescribeStackEvents(
+    args: DescribeStackEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeStackEventsCommandOutput>;
+
+  /**
+   * @see {@link DescribeStackResourceDriftsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeStackResourceDriftsCommandOutput}.
+   */
+  paginateDescribeStackResourceDrifts(
+    args: DescribeStackResourceDriftsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeStackResourceDriftsCommandOutput>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeStacksCommandOutput}.
+   */
+  paginateDescribeStacks(
+    args?: DescribeStacksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeStacksCommandOutput>;
+
+  /**
+   * @see {@link ListChangeSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListChangeSetsCommandOutput}.
+   */
+  paginateListChangeSets(
+    args: ListChangeSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListChangeSetsCommandOutput>;
+
+  /**
+   * @see {@link ListExportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExportsCommandOutput}.
+   */
+  paginateListExports(
+    args?: ListExportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExportsCommandOutput>;
+
+  /**
+   * @see {@link ListGeneratedTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGeneratedTemplatesCommandOutput}.
+   */
+  paginateListGeneratedTemplates(
+    args?: ListGeneratedTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGeneratedTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListImportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportsCommandOutput}.
+   */
+  paginateListImports(
+    args: ListImportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportsCommandOutput>;
+
+  /**
+   * @see {@link ListResourceScanRelatedResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceScanRelatedResourcesCommandOutput}.
+   */
+  paginateListResourceScanRelatedResources(
+    args: ListResourceScanRelatedResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceScanRelatedResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListResourceScanResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceScanResourcesCommandOutput}.
+   */
+  paginateListResourceScanResources(
+    args: ListResourceScanResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceScanResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListResourceScansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceScansCommandOutput}.
+   */
+  paginateListResourceScans(
+    args?: ListResourceScansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceScansCommandOutput>;
+
+  /**
+   * @see {@link ListStackInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackInstancesCommandOutput}.
+   */
+  paginateListStackInstances(
+    args: ListStackInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListStackRefactorActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackRefactorActionsCommandOutput}.
+   */
+  paginateListStackRefactorActions(
+    args: ListStackRefactorActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackRefactorActionsCommandOutput>;
+
+  /**
+   * @see {@link ListStackRefactorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackRefactorsCommandOutput}.
+   */
+  paginateListStackRefactors(
+    args?: ListStackRefactorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackRefactorsCommandOutput>;
+
+  /**
+   * @see {@link ListStackResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackResourcesCommandOutput}.
+   */
+  paginateListStackResources(
+    args: ListStackResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListStacksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStacksCommandOutput}.
+   */
+  paginateListStacks(
+    args?: ListStacksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStacksCommandOutput>;
+
+  /**
+   * @see {@link ListStackSetOperationResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackSetOperationResultsCommandOutput}.
+   */
+  paginateListStackSetOperationResults(
+    args: ListStackSetOperationResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackSetOperationResultsCommandOutput>;
+
+  /**
+   * @see {@link ListStackSetOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackSetOperationsCommandOutput}.
+   */
+  paginateListStackSetOperations(
+    args: ListStackSetOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackSetOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListStackSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStackSetsCommandOutput}.
+   */
+  paginateListStackSets(
+    args?: ListStackSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStackSetsCommandOutput>;
+
+  /**
+   * @see {@link ListTypeRegistrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTypeRegistrationsCommandOutput}.
+   */
+  paginateListTypeRegistrations(
+    args?: ListTypeRegistrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTypeRegistrationsCommandOutput>;
+
+  /**
+   * @see {@link ListTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTypesCommandOutput}.
+   */
+  paginateListTypes(
+    args?: ListTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTypesCommandOutput>;
+
+  /**
+   * @see {@link ListTypeVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTypeVersionsCommandOutput}.
+   */
+  paginateListTypeVersions(
+    args?: ListTypeVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTypeVersionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeChangeSetCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilChangeSetCreateComplete(
+    args: DescribeChangeSetCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeChangeSetCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStackRefactorCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackRefactorCreateComplete(
+    args: DescribeStackRefactorCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStackRefactorCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStackRefactorCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackRefactorExecuteComplete(
+    args: DescribeStackRefactorCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStackRefactorCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackCreateComplete(
+    args: DescribeStacksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStacksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackDeleteComplete(
+    args: DescribeStacksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStacksCommandOutput | CloudFormationServiceException>>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackExists(
+    args: DescribeStacksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStacksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackImportComplete(
+    args: DescribeStacksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStacksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackRollbackComplete(
+    args: DescribeStacksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStacksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeStacksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStackUpdateComplete(
+    args: DescribeStacksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeStacksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeTypeRegistrationCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilTypeRegistrationComplete(
+    args: DescribeTypeRegistrationCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudFormation>, "client">
+  ): Promise<WaiterResult<DescribeTypeRegistrationCommandOutput>>;
 }
+
+/**
+ * <fullname>CloudFormation</fullname>
+ *          <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments predictably and
+ *       repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store,
+ *       Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective
+ *       applications without creating or configuring the underlying Amazon Web Services infrastructure.</p>
+ *          <p>With CloudFormation, you declare all your resources and dependencies in a template file. The
+ *       template defines a collection of resources as a single unit called a stack. CloudFormation creates
+ *       and deletes all member resources of the stack together and manages all dependencies between
+ *       the resources for you.</p>
+ *          <p>For more information about CloudFormation, see the <a href="http://aws.amazon.com/cloudformation/">CloudFormation product page</a>.</p>
+ *          <p>CloudFormation makes use of other Amazon Web Services products. If you need additional technical information
+ *       about a specific Amazon Web Services product, you can find the product's technical documentation at <a href="https://docs.aws.amazon.com/">docs.aws.amazon.com</a>.</p>
+ * @public
+ */
+export class CloudFormation extends CloudFormationClient implements CloudFormation {}
+createAggregatedClient(commands, CloudFormation, { paginators, waiters });

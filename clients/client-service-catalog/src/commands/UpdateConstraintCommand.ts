@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateConstraintInput, UpdateConstraintOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateConstraintCommand,
-  serializeAws_json1_1UpdateConstraintCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateConstraintInput, UpdateConstraintOutput } from "../models/models_0";
+import { UpdateConstraint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConstraintCommand}.
+ */
 export interface UpdateConstraintCommandInput extends UpdateConstraintInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConstraintCommand}.
+ */
 export interface UpdateConstraintCommandOutput extends UpdateConstraintOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,65 @@ export interface UpdateConstraintCommandOutput extends UpdateConstraintOutput, _
  * ```javascript
  * import { ServiceCatalogClient, UpdateConstraintCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, UpdateConstraintCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // UpdateConstraintInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   Id: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   Parameters: "STRING_VALUE",
+ * };
  * const command = new UpdateConstraintCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateConstraintOutput
+ * //   ConstraintDetail: { // ConstraintDetail
+ * //     ConstraintId: "STRING_VALUE",
+ * //     Type: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Owner: "STRING_VALUE",
+ * //     ProductId: "STRING_VALUE",
+ * //     PortfolioId: "STRING_VALUE",
+ * //   },
+ * //   ConstraintParameters: "STRING_VALUE",
+ * //   Status: "AVAILABLE" || "CREATING" || "FAILED",
+ * // };
+ *
  * ```
  *
+ * @param UpdateConstraintCommandInput - {@link UpdateConstraintCommandInput}
+ * @returns {@link UpdateConstraintCommandOutput}
  * @see {@link UpdateConstraintCommandInput} for command's `input` shape.
  * @see {@link UpdateConstraintCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateConstraintCommand extends $Command<
-  UpdateConstraintCommandInput,
-  UpdateConstraintCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateConstraintCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateConstraintCommandInput, UpdateConstraintCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "UpdateConstraintCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateConstraintInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateConstraintOutput.filterSensitiveLog,
+export class UpdateConstraintCommand extends command<UpdateConstraintCommandInput, UpdateConstraintCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConstraint",
+  UpdateConstraint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConstraintInput;
+      output: UpdateConstraintOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateConstraintCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateConstraintCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateConstraintCommandOutput> {
-    return deserializeAws_json1_1UpdateConstraintCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateConstraintCommandInput;
+      output: UpdateConstraintCommandOutput;
+    };
+  };
 }

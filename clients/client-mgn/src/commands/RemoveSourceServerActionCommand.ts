@@ -1,0 +1,84 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveSourceServerActionRequest, RemoveSourceServerActionResponse } from "../models/models_0";
+import { RemoveSourceServerAction$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveSourceServerActionCommand}.
+ */
+export interface RemoveSourceServerActionCommandInput extends RemoveSourceServerActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveSourceServerActionCommand}.
+ */
+export interface RemoveSourceServerActionCommandOutput extends RemoveSourceServerActionResponse, __MetadataBearer {}
+
+/**
+ * <p>Remove source server post migration custom action.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MgnClient, RemoveSourceServerActionCommand } from "@aws-sdk/client-mgn"; // ES Modules import
+ * // const { MgnClient, RemoveSourceServerActionCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
+ * const client = new MgnClient(config);
+ * const input = { // RemoveSourceServerActionRequest
+ *   sourceServerID: "STRING_VALUE", // required
+ *   actionID: "STRING_VALUE", // required
+ *   accountID: "STRING_VALUE",
+ * };
+ * const command = new RemoveSourceServerActionCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param RemoveSourceServerActionCommandInput - {@link RemoveSourceServerActionCommandInput}
+ * @returns {@link RemoveSourceServerActionCommandOutput}
+ * @see {@link RemoveSourceServerActionCommandInput} for command's `input` shape.
+ * @see {@link RemoveSourceServerActionCommandOutput} for command's `response` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found exception.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validate exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
+ */
+export class RemoveSourceServerActionCommand extends command<RemoveSourceServerActionCommandInput, RemoveSourceServerActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveSourceServerAction",
+  RemoveSourceServerAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveSourceServerActionRequest;
+      output: {};
+    };
+    sdk: {
+      input: RemoveSourceServerActionCommandInput;
+      output: RemoveSourceServerActionCommandOutput;
+    };
+  };
+}

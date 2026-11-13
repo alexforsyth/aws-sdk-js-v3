@@ -1,65 +1,64 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { BatchDeleteRecipeVersionRequest, BatchDeleteRecipeVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchDeleteRecipeVersionCommand,
-  serializeAws_restJson1BatchDeleteRecipeVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDeleteRecipeVersionRequest, BatchDeleteRecipeVersionResponse } from "../models/models_0";
+import { BatchDeleteRecipeVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDeleteRecipeVersionCommand}.
+ */
 export interface BatchDeleteRecipeVersionCommandInput extends BatchDeleteRecipeVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDeleteRecipeVersionCommand}.
+ */
 export interface BatchDeleteRecipeVersionCommandOutput extends BatchDeleteRecipeVersionResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes one or more versions of a recipe at a time.</p>
- *
- *         <p>The entire request will be rejected if:</p>
- *         <ul>
+ *          <p>The entire request will be rejected if:</p>
+ *          <ul>
  *             <li>
- *                 <p>The recipe does not exist.</p>
+ *                <p>The recipe does not exist.</p>
  *             </li>
  *             <li>
- *                 <p>There is an invalid version identifier in the list of versions.</p>
+ *                <p>There is an invalid version identifier in the list of versions.</p>
  *             </li>
  *             <li>
- *                 <p>The version list is empty.</p>
+ *                <p>The version list is empty.</p>
  *             </li>
  *             <li>
- *                 <p>The version list size exceeds 50.</p>
+ *                <p>The version list size exceeds 50.</p>
  *             </li>
  *             <li>
- *                 <p>The version list contains duplicate entries.</p>
+ *                <p>The version list contains duplicate entries.</p>
  *             </li>
  *          </ul>
- *
- *         <p>The request will complete successfully, but with partial failures, if:</p>
- *         <ul>
+ *          <p>The request will complete successfully, but with partial failures, if:</p>
+ *          <ul>
  *             <li>
- *                 <p>A version does not exist.</p>
+ *                <p>A version does not exist.</p>
  *             </li>
  *             <li>
- *                 <p>A version is being used by a job.</p>
+ *                <p>A version is being used by a job.</p>
  *             </li>
  *             <li>
- *                 <p>You specify <code>LATEST_WORKING</code>, but it's being used by a
+ *                <p>You specify <code>LATEST_WORKING</code>, but it's being used by a
  *                     project.</p>
  *             </li>
  *             <li>
- *                 <p>The version fails to be deleted.</p>
+ *                <p>The version fails to be deleted.</p>
  *             </li>
  *          </ul>
- *         <p>The <code>LATEST_WORKING</code> version will only be deleted if the recipe has no
+ *          <p>The <code>LATEST_WORKING</code> version will only be deleted if the recipe has no
  *             other versions. If you try to delete <code>LATEST_WORKING</code> while other versions
  *             exist (or if they can't be deleted), then <code>LATEST_WORKING</code> will be listed as
  *             partial failure in the response.</p>
@@ -68,68 +67,66 @@ export interface BatchDeleteRecipeVersionCommandOutput extends BatchDeleteRecipe
  * ```javascript
  * import { DataBrewClient, BatchDeleteRecipeVersionCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, BatchDeleteRecipeVersionCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // BatchDeleteRecipeVersionRequest
+ *   Name: "STRING_VALUE", // required
+ *   RecipeVersions: [ // RecipeVersionList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchDeleteRecipeVersionCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDeleteRecipeVersionResponse
+ * //   Name: "STRING_VALUE", // required
+ * //   Errors: [ // RecipeErrorList
+ * //     { // RecipeVersionErrorDetail
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //       RecipeVersion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDeleteRecipeVersionCommandInput - {@link BatchDeleteRecipeVersionCommandInput}
+ * @returns {@link BatchDeleteRecipeVersionCommandOutput}
  * @see {@link BatchDeleteRecipeVersionCommandInput} for command's `input` shape.
  * @see {@link BatchDeleteRecipeVersionCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDeleteRecipeVersionCommand extends $Command<
-  BatchDeleteRecipeVersionCommandInput,
-  BatchDeleteRecipeVersionCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDeleteRecipeVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDeleteRecipeVersionCommandInput, BatchDeleteRecipeVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "BatchDeleteRecipeVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDeleteRecipeVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDeleteRecipeVersionResponse.filterSensitiveLog,
+export class BatchDeleteRecipeVersionCommand extends command<BatchDeleteRecipeVersionCommandInput, BatchDeleteRecipeVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDeleteRecipeVersion",
+  BatchDeleteRecipeVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDeleteRecipeVersionRequest;
+      output: BatchDeleteRecipeVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDeleteRecipeVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchDeleteRecipeVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchDeleteRecipeVersionCommandOutput> {
-    return deserializeAws_restJson1BatchDeleteRecipeVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDeleteRecipeVersionCommandInput;
+      output: BatchDeleteRecipeVersionCommandOutput;
+    };
+  };
 }

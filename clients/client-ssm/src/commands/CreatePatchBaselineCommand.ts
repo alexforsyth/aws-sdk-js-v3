@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreatePatchBaselineRequest, CreatePatchBaselineResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreatePatchBaselineCommand,
-  serializeAws_json1_1CreatePatchBaselineCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePatchBaselineRequest, CreatePatchBaselineResult } from "../models/models_0";
+import { CreatePatchBaseline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePatchBaselineCommand}.
+ */
 export interface CreatePatchBaselineCommandInput extends CreatePatchBaselineRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePatchBaselineCommand}.
+ */
 export interface CreatePatchBaselineCommandOutput extends CreatePatchBaselineResult, __MetadataBearer {}
 
 /**
@@ -32,68 +33,118 @@ export interface CreatePatchBaselineCommandOutput extends CreatePatchBaselineRes
  * ```javascript
  * import { SSMClient, CreatePatchBaselineCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, CreatePatchBaselineCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // CreatePatchBaselineRequest
+ *   OperatingSystem: "WINDOWS" || "AMAZON_LINUX" || "AMAZON_LINUX_2" || "AMAZON_LINUX_2022" || "UBUNTU" || "REDHAT_ENTERPRISE_LINUX" || "SUSE" || "CENTOS" || "ORACLE_LINUX" || "DEBIAN" || "MACOS" || "RASPBIAN" || "ROCKY_LINUX" || "ALMA_LINUX" || "AMAZON_LINUX_2023",
+ *   Name: "STRING_VALUE", // required
+ *   GlobalFilters: { // PatchFilterGroup
+ *     PatchFilters: [ // PatchFilterList // required
+ *       { // PatchFilter
+ *         Key: "ARCH" || "ADVISORY_ID" || "BUGZILLA_ID" || "PATCH_SET" || "PRODUCT" || "PRODUCT_FAMILY" || "CLASSIFICATION" || "CVE_ID" || "EPOCH" || "MSRC_SEVERITY" || "NAME" || "PATCH_ID" || "SECTION" || "PRIORITY" || "REPOSITORY" || "RELEASE" || "SEVERITY" || "SECURITY" || "VERSION", // required
+ *         Values: [ // PatchFilterValueList // required
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     ],
+ *   },
+ *   ApprovalRules: { // PatchRuleGroup
+ *     PatchRules: [ // PatchRuleList // required
+ *       { // PatchRule
+ *         PatchFilterGroup: {
+ *           PatchFilters: [ // required
+ *             {
+ *               Key: "ARCH" || "ADVISORY_ID" || "BUGZILLA_ID" || "PATCH_SET" || "PRODUCT" || "PRODUCT_FAMILY" || "CLASSIFICATION" || "CVE_ID" || "EPOCH" || "MSRC_SEVERITY" || "NAME" || "PATCH_ID" || "SECTION" || "PRIORITY" || "REPOSITORY" || "RELEASE" || "SEVERITY" || "SECURITY" || "VERSION", // required
+ *               Values: [ // required
+ *                 "STRING_VALUE",
+ *               ],
+ *             },
+ *           ],
+ *         },
+ *         ComplianceLevel: "CRITICAL" || "HIGH" || "MEDIUM" || "LOW" || "INFORMATIONAL" || "UNSPECIFIED",
+ *         ApproveAfterDays: Number("int"),
+ *         ApproveUntilDate: "STRING_VALUE",
+ *         EnableNonSecurity: true || false,
+ *       },
+ *     ],
+ *   },
+ *   ApprovedPatches: [ // PatchIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   ApprovedPatchesComplianceLevel: "CRITICAL" || "HIGH" || "MEDIUM" || "LOW" || "INFORMATIONAL" || "UNSPECIFIED",
+ *   ApprovedPatchesEnableNonSecurity: true || false,
+ *   RejectedPatches: [
+ *     "STRING_VALUE",
+ *   ],
+ *   RejectedPatchesAction: "ALLOW_AS_DEPENDENCY" || "BLOCK",
+ *   Description: "STRING_VALUE",
+ *   Sources: [ // PatchSourceList
+ *     { // PatchSource
+ *       Name: "STRING_VALUE", // required
+ *       Products: [ // PatchSourceProductList // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Configuration: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   AvailableSecurityUpdatesComplianceStatus: "COMPLIANT" || "NON_COMPLIANT",
+ *   ClientToken: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreatePatchBaselineCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePatchBaselineResult
+ * //   BaselineId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePatchBaselineCommandInput - {@link CreatePatchBaselineCommandInput}
+ * @returns {@link CreatePatchBaselineCommandOutput}
  * @see {@link CreatePatchBaselineCommandInput} for command's `input` shape.
  * @see {@link CreatePatchBaselineCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link IdempotentParameterMismatch} (client fault)
+ *  <p>Error returned when an idempotent operation is retried and the parameters don't match the
+ *    original call to the API with the same idempotency token. </p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Error returned when the caller has exceeded the default resource quotas. For example, too
+ *    many maintenance windows or patch baselines have been created.</p>
+ *          <p>For information about resource quotas in Systems Manager, see <a href="https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm">Systems Manager service quotas</a> in the
+ *     <i>Amazon Web Services General Reference</i>.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePatchBaselineCommand extends $Command<
-  CreatePatchBaselineCommandInput,
-  CreatePatchBaselineCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePatchBaselineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePatchBaselineCommandInput, CreatePatchBaselineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "CreatePatchBaselineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePatchBaselineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePatchBaselineResult.filterSensitiveLog,
+export class CreatePatchBaselineCommand extends command<CreatePatchBaselineCommandInput, CreatePatchBaselineCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePatchBaseline",
+  CreatePatchBaseline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePatchBaselineRequest;
+      output: CreatePatchBaselineResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePatchBaselineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreatePatchBaselineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePatchBaselineCommandOutput> {
-    return deserializeAws_json1_1CreatePatchBaselineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePatchBaselineCommandInput;
+      output: CreatePatchBaselineCommandOutput;
+    };
+  };
 }

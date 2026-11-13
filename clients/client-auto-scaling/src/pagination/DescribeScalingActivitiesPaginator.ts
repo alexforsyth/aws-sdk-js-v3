@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { AutoScaling } from "../AutoScaling";
 import { AutoScalingClient } from "../AutoScalingClient";
 import {
   DescribeScalingActivitiesCommand,
   DescribeScalingActivitiesCommandInput,
   DescribeScalingActivitiesCommandOutput,
 } from "../commands/DescribeScalingActivitiesCommand";
-import { AutoScalingPaginationConfiguration } from "./Interfaces";
+import type { AutoScalingPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: AutoScalingClient,
-  input: DescribeScalingActivitiesCommandInput,
-  ...args: any
-): Promise<DescribeScalingActivitiesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeScalingActivitiesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: AutoScaling,
-  input: DescribeScalingActivitiesCommandInput,
-  ...args: any
-): Promise<DescribeScalingActivitiesCommandOutput> => {
-  // @ts-ignore
-  return await client.describeScalingActivities(input, ...args);
-};
-export async function* paginateDescribeScalingActivities(
+export const paginateDescribeScalingActivities: (
   config: AutoScalingPaginationConfiguration,
   input: DescribeScalingActivitiesCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeScalingActivitiesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeScalingActivitiesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxRecords"] = config.pageSize;
-    if (config.client instanceof AutoScaling) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof AutoScalingClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected AutoScaling | AutoScalingClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeScalingActivitiesCommandOutput> = createPaginator<
+  AutoScalingPaginationConfiguration,
+  DescribeScalingActivitiesCommandInput,
+  DescribeScalingActivitiesCommandOutput
+>(AutoScalingClient, DescribeScalingActivitiesCommand, "NextToken", "NextToken", "MaxRecords");

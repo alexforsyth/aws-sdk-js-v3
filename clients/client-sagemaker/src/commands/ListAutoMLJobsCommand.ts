@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAutoMLJobsRequest, ListAutoMLJobsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListAutoMLJobsCommand,
-  serializeAws_json1_1ListAutoMLJobsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAutoMLJobsRequest, ListAutoMLJobsResponse } from "../models/models_3";
+import { ListAutoMLJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAutoMLJobsCommand}.
+ */
 export interface ListAutoMLJobsCommandInput extends ListAutoMLJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAutoMLJobsCommand}.
+ */
 export interface ListAutoMLJobsCommandOutput extends ListAutoMLJobsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface ListAutoMLJobsCommandOutput extends ListAutoMLJobsResponse, __M
  * ```javascript
  * import { SageMakerClient, ListAutoMLJobsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListAutoMLJobsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListAutoMLJobsRequest
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   LastModifiedTimeAfter: new Date("TIMESTAMP"),
+ *   LastModifiedTimeBefore: new Date("TIMESTAMP"),
+ *   NameContains: "STRING_VALUE",
+ *   StatusEquals: "Completed" || "InProgress" || "Failed" || "Stopped" || "Stopping",
+ *   SortOrder: "Ascending" || "Descending",
+ *   SortBy: "Name" || "CreationTime" || "Status",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAutoMLJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAutoMLJobsResponse
+ * //   AutoMLJobSummaries: [ // AutoMLJobSummaries // required
+ * //     { // AutoMLJobSummary
+ * //       AutoMLJobName: "STRING_VALUE", // required
+ * //       AutoMLJobArn: "STRING_VALUE", // required
+ * //       AutoMLJobStatus: "Completed" || "InProgress" || "Failed" || "Stopped" || "Stopping", // required
+ * //       AutoMLJobSecondaryStatus: "Starting" || "MaxCandidatesReached" || "Failed" || "Stopped" || "MaxAutoMLJobRuntimeReached" || "Stopping" || "CandidateDefinitionsGenerated" || "Completed" || "ExplainabilityError" || "DeployingModel" || "ModelDeploymentError" || "GeneratingModelInsightsReport" || "ModelInsightsError" || "AnalyzingData" || "FeatureEngineering" || "ModelTuning" || "GeneratingExplainabilityReport" || "TrainingModels" || "PreTraining", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //       FailureReason: "STRING_VALUE",
+ * //       PartialFailureReasons: [ // AutoMLPartialFailureReasons
+ * //         { // AutoMLPartialFailureReason
+ * //           PartialFailureMessage: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAutoMLJobsCommandInput - {@link ListAutoMLJobsCommandInput}
+ * @returns {@link ListAutoMLJobsCommandOutput}
  * @see {@link ListAutoMLJobsCommandInput} for command's `input` shape.
  * @see {@link ListAutoMLJobsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListAutoMLJobsCommand extends $Command<
-  ListAutoMLJobsCommandInput,
-  ListAutoMLJobsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAutoMLJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAutoMLJobsCommandInput, ListAutoMLJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListAutoMLJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAutoMLJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAutoMLJobsResponse.filterSensitiveLog,
+export class ListAutoMLJobsCommand extends command<ListAutoMLJobsCommandInput, ListAutoMLJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAutoMLJobs",
+  ListAutoMLJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAutoMLJobsRequest;
+      output: ListAutoMLJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAutoMLJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAutoMLJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAutoMLJobsCommandOutput> {
-    return deserializeAws_json1_1ListAutoMLJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAutoMLJobsCommandInput;
+      output: ListAutoMLJobsCommandOutput;
+    };
+  };
 }

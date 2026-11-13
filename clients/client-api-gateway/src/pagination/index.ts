@@ -1,3 +1,5 @@
+// smithy-typescript generated code
+export * from "./Interfaces";
 export * from "./GetApiKeysPaginator";
 export * from "./GetBasePathMappingsPaginator";
 export * from "./GetClientCertificatesPaginator";
@@ -8,6 +10,5 @@ export * from "./GetResourcesPaginator";
 export * from "./GetRestApisPaginator";
 export * from "./GetUsagePaginator";
 export * from "./GetUsagePlanKeysPaginator";
-export * from "./Interfaces";
 export * from "./GetUsagePlansPaginator";
 export * from "./GetVpcLinksPaginator";

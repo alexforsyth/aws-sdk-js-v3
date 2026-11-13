@@ -1,334 +1,214 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
+// smithy-typescript generated code
 /**
  * <p>Provides information about your AWS account.</p>
+ * @public
  */
 export interface AccountInfo {
   /**
    * <p>The identifier of the AWS account that is assigned to the user.</p>
+   * @public
    */
-  accountId?: string;
+  accountId?: string | undefined;
 
   /**
    * <p>The display name of the AWS account that is assigned to the user.</p>
+   * @public
    */
-  accountName?: string;
+  accountName?: string | undefined;
 
   /**
    * <p>The email address of the AWS account that is assigned to the user.</p>
+   * @public
    */
-  emailAddress?: string;
+  emailAddress?: string | undefined;
 }
 
-export namespace AccountInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccountInfo): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRoleCredentialsRequest {
   /**
    * <p>The friendly name of the role that is assigned to the user.</p>
+   * @public
    */
   roleName: string | undefined;
 
   /**
    * <p>The identifier for the AWS account that is assigned to the user.</p>
+   * @public
    */
   accountId: string | undefined;
 
   /**
    * <p>The token issued by the <code>CreateToken</code> API call. For more information, see
-   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>AWS SSO OIDC API Reference Guide</i>.</p>
+   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
+   * @public
    */
   accessToken: string | undefined;
 }
 
-export namespace GetRoleCredentialsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRoleCredentialsRequest): any => ({
-    ...obj,
-    ...(obj.accessToken && { accessToken: SENSITIVE_STRING }),
-  });
-}
-
 /**
  * <p>Provides information about the role credentials that are assigned to the user.</p>
+ * @public
  */
 export interface RoleCredentials {
   /**
    * <p>The identifier used for the temporary security credentials. For more information, see
    *         <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the
    *         <i>AWS IAM User Guide</i>.</p>
+   * @public
    */
-  accessKeyId?: string;
+  accessKeyId?: string | undefined;
 
   /**
    * <p>The key that is used to sign the request. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the
    *         <i>AWS IAM User Guide</i>.</p>
+   * @public
    */
-  secretAccessKey?: string;
+  secretAccessKey?: string | undefined;
 
   /**
    * <p>The token used for temporary credentials. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the
    *         <i>AWS IAM User Guide</i>.</p>
+   * @public
    */
-  sessionToken?: string;
+  sessionToken?: string | undefined;
 
   /**
    * <p>The date on which temporary security credentials expire.</p>
+   * @public
    */
-  expiration?: number;
+  expiration?: number | undefined;
 }
 
-export namespace RoleCredentials {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RoleCredentials): any => ({
-    ...obj,
-    ...(obj.secretAccessKey && { secretAccessKey: SENSITIVE_STRING }),
-    ...(obj.sessionToken && { sessionToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRoleCredentialsResponse {
   /**
    * <p>The credentials for the role that is assigned to the user.</p>
+   * @public
    */
-  roleCredentials?: RoleCredentials;
-}
-
-export namespace GetRoleCredentialsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRoleCredentialsResponse): any => ({
-    ...obj,
-    ...(obj.roleCredentials && { roleCredentials: RoleCredentials.filterSensitiveLog(obj.roleCredentials) }),
-  });
+  roleCredentials?: RoleCredentials | undefined;
 }
 
 /**
- * <p>Indicates that a problem occurred with the input to the request. For example, a required
- *       parameter might be missing or out of range.</p>
+ * @public
  */
-export interface InvalidRequestException extends __SmithyException, $MetadataBearer {
-  name: "InvalidRequestException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidRequestException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified resource doesn't exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the request is being made too frequently and is more than what the server can handle.</p>
- */
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Indicates that the request is not authorized. This can happen due to an invalid access token in the request.</p>
- */
-export interface UnauthorizedException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace UnauthorizedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedException): any => ({
-    ...obj,
-  });
-}
-
 export interface ListAccountRolesRequest {
   /**
    * <p>The page token from the previous response output when you request subsequent pages.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The number of items that clients can request per page.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>The token issued by the <code>CreateToken</code> API call. For more information, see
-   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>AWS SSO OIDC API Reference Guide</i>.</p>
+   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
+   * @public
    */
   accessToken: string | undefined;
 
   /**
    * <p>The identifier for the AWS account that is assigned to the user.</p>
+   * @public
    */
   accountId: string | undefined;
 }
 
-export namespace ListAccountRolesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAccountRolesRequest): any => ({
-    ...obj,
-    ...(obj.accessToken && { accessToken: SENSITIVE_STRING }),
-  });
-}
-
 /**
  * <p>Provides information about the role that is assigned to the user.</p>
+ * @public
  */
 export interface RoleInfo {
   /**
    * <p>The friendly name of the role that is assigned to the user.</p>
+   * @public
    */
-  roleName?: string;
+  roleName?: string | undefined;
 
   /**
    * <p>The identifier of the AWS account assigned to the user.</p>
+   * @public
    */
-  accountId?: string;
+  accountId?: string | undefined;
 }
 
-export namespace RoleInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RoleInfo): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAccountRolesResponse {
   /**
    * <p>The page token client that is used to retrieve the list of accounts.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p>A paginated response with the list of roles and the next token if more results are available.</p>
+   * <p>A paginated response with the list of roles and the next token if more results are
+   *       available.</p>
+   * @public
    */
-  roleList?: RoleInfo[];
+  roleList?: RoleInfo[] | undefined;
 }
 
-export namespace ListAccountRolesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAccountRolesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAccountsRequest {
   /**
-   * <p>(Optional) When requesting subsequent pages, this is the page token from the previous response output.</p>
+   * <p>(Optional) When requesting subsequent pages, this is the page token from the previous
+   *       response output.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>This is the number of items clients can request per page.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>The token issued by the <code>CreateToken</code> API call. For more information, see
-   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>AWS SSO OIDC API Reference Guide</i>.</p>
+   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
+   * @public
    */
   accessToken: string | undefined;
 }
 
-export namespace ListAccountsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAccountsRequest): any => ({
-    ...obj,
-    ...(obj.accessToken && { accessToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAccountsResponse {
   /**
    * <p>The page token client that is used to retrieve the list of accounts.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p>A paginated response with the list of account information and the next token if more results are available.</p>
+   * <p>A paginated response with the list of account information and the next token if more
+   *       results are available.</p>
+   * @public
    */
-  accountList?: AccountInfo[];
+  accountList?: AccountInfo[] | undefined;
 }
 
-export namespace ListAccountsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAccountsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface LogoutRequest {
   /**
    * <p>The token issued by the <code>CreateToken</code> API call. For more information, see
-   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>AWS SSO OIDC API Reference Guide</i>.</p>
+   *         <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html">CreateToken</a> in the <i>IAM Identity Center OIDC API Reference Guide</i>.</p>
+   * @public
    */
   accessToken: string | undefined;
-}
-
-export namespace LogoutRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LogoutRequest): any => ({
-    ...obj,
-    ...(obj.accessToken && { accessToken: SENSITIVE_STRING }),
-  });
 }

@@ -1,95 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeIpRestrictionRequest, DescribeIpRestrictionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeIpRestrictionCommand,
-  serializeAws_restJson1DescribeIpRestrictionCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeIpRestrictionRequest, DescribeIpRestrictionResponse } from "../models/models_4";
+import { DescribeIpRestriction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeIpRestrictionCommand}.
+ */
 export interface DescribeIpRestrictionCommandInput extends DescribeIpRestrictionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeIpRestrictionCommand}.
+ */
 export interface DescribeIpRestrictionCommandOutput extends DescribeIpRestrictionResponse, __MetadataBearer {}
 
 /**
- * <p>Provides a summary and status of IP Rules.</p>
+ * <p>Provides a summary and status of IP rules.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { QuickSightClient, DescribeIpRestrictionCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, DescribeIpRestrictionCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // DescribeIpRestrictionRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeIpRestrictionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeIpRestrictionResponse
+ * //   AwsAccountId: "STRING_VALUE",
+ * //   IpRestrictionRuleMap: { // IpRestrictionRuleMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   VpcIdRestrictionRuleMap: { // VpcIdRestrictionRuleMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   VpcEndpointIdRestrictionRuleMap: { // VpcEndpointIdRestrictionRuleMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   Enabled: true || false,
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeIpRestrictionCommandInput - {@link DescribeIpRestrictionCommandInput}
+ * @returns {@link DescribeIpRestrictionCommandOutput}
  * @see {@link DescribeIpRestrictionCommandInput} for command's `input` shape.
  * @see {@link DescribeIpRestrictionCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeIpRestrictionCommand extends $Command<
-  DescribeIpRestrictionCommandInput,
-  DescribeIpRestrictionCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeIpRestrictionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeIpRestrictionCommandInput, DescribeIpRestrictionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "DescribeIpRestrictionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeIpRestrictionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeIpRestrictionResponse.filterSensitiveLog,
+export class DescribeIpRestrictionCommand extends command<DescribeIpRestrictionCommandInput, DescribeIpRestrictionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeIpRestriction",
+  DescribeIpRestriction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIpRestrictionRequest;
+      output: DescribeIpRestrictionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeIpRestrictionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeIpRestrictionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeIpRestrictionCommandOutput> {
-    return deserializeAws_restJson1DescribeIpRestrictionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeIpRestrictionCommandInput;
+      output: DescribeIpRestrictionCommandOutput;
+    };
+  };
 }

@@ -1,145 +1,177 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultWorkDocsHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AbortDocumentVersionUploadCommandInput,
   AbortDocumentVersionUploadCommandOutput,
 } from "./commands/AbortDocumentVersionUploadCommand";
-import { ActivateUserCommandInput, ActivateUserCommandOutput } from "./commands/ActivateUserCommand";
-import {
+import type { ActivateUserCommandInput, ActivateUserCommandOutput } from "./commands/ActivateUserCommand";
+import type {
   AddResourcePermissionsCommandInput,
   AddResourcePermissionsCommandOutput,
 } from "./commands/AddResourcePermissionsCommand";
-import { CreateCommentCommandInput, CreateCommentCommandOutput } from "./commands/CreateCommentCommand";
-import {
+import type { CreateCommentCommandInput, CreateCommentCommandOutput } from "./commands/CreateCommentCommand";
+import type {
   CreateCustomMetadataCommandInput,
   CreateCustomMetadataCommandOutput,
 } from "./commands/CreateCustomMetadataCommand";
-import { CreateFolderCommandInput, CreateFolderCommandOutput } from "./commands/CreateFolderCommand";
-import { CreateLabelsCommandInput, CreateLabelsCommandOutput } from "./commands/CreateLabelsCommand";
-import {
+import type { CreateFolderCommandInput, CreateFolderCommandOutput } from "./commands/CreateFolderCommand";
+import type { CreateLabelsCommandInput, CreateLabelsCommandOutput } from "./commands/CreateLabelsCommand";
+import type {
   CreateNotificationSubscriptionCommandInput,
   CreateNotificationSubscriptionCommandOutput,
 } from "./commands/CreateNotificationSubscriptionCommand";
-import { CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
-import { DeactivateUserCommandInput, DeactivateUserCommandOutput } from "./commands/DeactivateUserCommand";
-import { DeleteCommentCommandInput, DeleteCommentCommandOutput } from "./commands/DeleteCommentCommand";
-import {
+import type { CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
+import type { DeactivateUserCommandInput, DeactivateUserCommandOutput } from "./commands/DeactivateUserCommand";
+import type { DeleteCommentCommandInput, DeleteCommentCommandOutput } from "./commands/DeleteCommentCommand";
+import type {
   DeleteCustomMetadataCommandInput,
   DeleteCustomMetadataCommandOutput,
 } from "./commands/DeleteCustomMetadataCommand";
-import { DeleteDocumentCommandInput, DeleteDocumentCommandOutput } from "./commands/DeleteDocumentCommand";
-import { DeleteFolderCommandInput, DeleteFolderCommandOutput } from "./commands/DeleteFolderCommand";
-import {
+import type { DeleteDocumentCommandInput, DeleteDocumentCommandOutput } from "./commands/DeleteDocumentCommand";
+import type {
+  DeleteDocumentVersionCommandInput,
+  DeleteDocumentVersionCommandOutput,
+} from "./commands/DeleteDocumentVersionCommand";
+import type { DeleteFolderCommandInput, DeleteFolderCommandOutput } from "./commands/DeleteFolderCommand";
+import type {
   DeleteFolderContentsCommandInput,
   DeleteFolderContentsCommandOutput,
 } from "./commands/DeleteFolderContentsCommand";
-import { DeleteLabelsCommandInput, DeleteLabelsCommandOutput } from "./commands/DeleteLabelsCommand";
-import {
+import type { DeleteLabelsCommandInput, DeleteLabelsCommandOutput } from "./commands/DeleteLabelsCommand";
+import type {
   DeleteNotificationSubscriptionCommandInput,
   DeleteNotificationSubscriptionCommandOutput,
 } from "./commands/DeleteNotificationSubscriptionCommand";
-import { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
-import { DescribeActivitiesCommandInput, DescribeActivitiesCommandOutput } from "./commands/DescribeActivitiesCommand";
-import { DescribeCommentsCommandInput, DescribeCommentsCommandOutput } from "./commands/DescribeCommentsCommand";
-import {
+import type { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+import type {
+  DescribeActivitiesCommandInput,
+  DescribeActivitiesCommandOutput,
+} from "./commands/DescribeActivitiesCommand";
+import type { DescribeCommentsCommandInput, DescribeCommentsCommandOutput } from "./commands/DescribeCommentsCommand";
+import type {
   DescribeDocumentVersionsCommandInput,
   DescribeDocumentVersionsCommandOutput,
 } from "./commands/DescribeDocumentVersionsCommand";
-import {
+import type {
   DescribeFolderContentsCommandInput,
   DescribeFolderContentsCommandOutput,
 } from "./commands/DescribeFolderContentsCommand";
-import { DescribeGroupsCommandInput, DescribeGroupsCommandOutput } from "./commands/DescribeGroupsCommand";
-import {
+import type { DescribeGroupsCommandInput, DescribeGroupsCommandOutput } from "./commands/DescribeGroupsCommand";
+import type {
   DescribeNotificationSubscriptionsCommandInput,
   DescribeNotificationSubscriptionsCommandOutput,
 } from "./commands/DescribeNotificationSubscriptionsCommand";
-import {
+import type {
   DescribeResourcePermissionsCommandInput,
   DescribeResourcePermissionsCommandOutput,
 } from "./commands/DescribeResourcePermissionsCommand";
-import {
+import type {
   DescribeRootFoldersCommandInput,
   DescribeRootFoldersCommandOutput,
 } from "./commands/DescribeRootFoldersCommand";
-import { DescribeUsersCommandInput, DescribeUsersCommandOutput } from "./commands/DescribeUsersCommand";
-import { GetCurrentUserCommandInput, GetCurrentUserCommandOutput } from "./commands/GetCurrentUserCommand";
-import { GetDocumentCommandInput, GetDocumentCommandOutput } from "./commands/GetDocumentCommand";
-import { GetDocumentPathCommandInput, GetDocumentPathCommandOutput } from "./commands/GetDocumentPathCommand";
-import { GetDocumentVersionCommandInput, GetDocumentVersionCommandOutput } from "./commands/GetDocumentVersionCommand";
-import { GetFolderCommandInput, GetFolderCommandOutput } from "./commands/GetFolderCommand";
-import { GetFolderPathCommandInput, GetFolderPathCommandOutput } from "./commands/GetFolderPathCommand";
-import { GetResourcesCommandInput, GetResourcesCommandOutput } from "./commands/GetResourcesCommand";
-import {
+import type { DescribeUsersCommandInput, DescribeUsersCommandOutput } from "./commands/DescribeUsersCommand";
+import type { GetCurrentUserCommandInput, GetCurrentUserCommandOutput } from "./commands/GetCurrentUserCommand";
+import type { GetDocumentCommandInput, GetDocumentCommandOutput } from "./commands/GetDocumentCommand";
+import type { GetDocumentPathCommandInput, GetDocumentPathCommandOutput } from "./commands/GetDocumentPathCommand";
+import type {
+  GetDocumentVersionCommandInput,
+  GetDocumentVersionCommandOutput,
+} from "./commands/GetDocumentVersionCommand";
+import type { GetFolderCommandInput, GetFolderCommandOutput } from "./commands/GetFolderCommand";
+import type { GetFolderPathCommandInput, GetFolderPathCommandOutput } from "./commands/GetFolderPathCommand";
+import type { GetResourcesCommandInput, GetResourcesCommandOutput } from "./commands/GetResourcesCommand";
+import type {
   InitiateDocumentVersionUploadCommandInput,
   InitiateDocumentVersionUploadCommandOutput,
 } from "./commands/InitiateDocumentVersionUploadCommand";
-import {
+import type {
   RemoveAllResourcePermissionsCommandInput,
   RemoveAllResourcePermissionsCommandOutput,
 } from "./commands/RemoveAllResourcePermissionsCommand";
-import {
+import type {
   RemoveResourcePermissionCommandInput,
   RemoveResourcePermissionCommandOutput,
 } from "./commands/RemoveResourcePermissionCommand";
-import { UpdateDocumentCommandInput, UpdateDocumentCommandOutput } from "./commands/UpdateDocumentCommand";
-import {
+import type {
+  RestoreDocumentVersionsCommandInput,
+  RestoreDocumentVersionsCommandOutput,
+} from "./commands/RestoreDocumentVersionsCommand";
+import type { SearchResourcesCommandInput, SearchResourcesCommandOutput } from "./commands/SearchResourcesCommand";
+import type { UpdateDocumentCommandInput, UpdateDocumentCommandOutput } from "./commands/UpdateDocumentCommand";
+import type {
   UpdateDocumentVersionCommandInput,
   UpdateDocumentVersionCommandOutput,
 } from "./commands/UpdateDocumentVersionCommand";
-import { UpdateFolderCommandInput, UpdateFolderCommandOutput } from "./commands/UpdateFolderCommand";
-import { UpdateUserCommandInput, UpdateUserCommandOutput } from "./commands/UpdateUserCommand";
+import type { UpdateFolderCommandInput, UpdateFolderCommandOutput } from "./commands/UpdateFolderCommand";
+import type { UpdateUserCommandInput, UpdateUserCommandOutput } from "./commands/UpdateUserCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AbortDocumentVersionUploadCommandInput
   | ActivateUserCommandInput
@@ -154,6 +186,7 @@ export type ServiceInputTypes =
   | DeleteCommentCommandInput
   | DeleteCustomMetadataCommandInput
   | DeleteDocumentCommandInput
+  | DeleteDocumentVersionCommandInput
   | DeleteFolderCommandInput
   | DeleteFolderContentsCommandInput
   | DeleteLabelsCommandInput
@@ -178,11 +211,16 @@ export type ServiceInputTypes =
   | InitiateDocumentVersionUploadCommandInput
   | RemoveAllResourcePermissionsCommandInput
   | RemoveResourcePermissionCommandInput
+  | RestoreDocumentVersionsCommandInput
+  | SearchResourcesCommandInput
   | UpdateDocumentCommandInput
   | UpdateDocumentVersionCommandInput
   | UpdateFolderCommandInput
   | UpdateUserCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AbortDocumentVersionUploadCommandOutput
   | ActivateUserCommandOutput
@@ -197,6 +235,7 @@ export type ServiceOutputTypes =
   | DeleteCommentCommandOutput
   | DeleteCustomMetadataCommandOutput
   | DeleteDocumentCommandOutput
+  | DeleteDocumentVersionCommandOutput
   | DeleteFolderCommandOutput
   | DeleteFolderContentsCommandOutput
   | DeleteLabelsCommandOutput
@@ -221,23 +260,28 @@ export type ServiceOutputTypes =
   | InitiateDocumentVersionUploadCommandOutput
   | RemoveAllResourcePermissionsCommandOutput
   | RemoveResourcePermissionCommandOutput
+  | RestoreDocumentVersionsCommandOutput
+  | SearchResourcesCommandOutput
   | UpdateDocumentCommandOutput
   | UpdateDocumentVersionCommandOutput
   | UpdateFolderCommandOutput
   | UpdateUserCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -249,7 +293,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -288,25 +332,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -319,95 +354,171 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type WorkDocsClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of WorkDocsClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type WorkDocsClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of WorkDocsClient class constructor that set the region, credentials and other options.
  */
 export interface WorkDocsClientConfig extends WorkDocsClientConfigType {}
 
-type WorkDocsClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of WorkDocsClient class. This is resolved and normalized from the {@link WorkDocsClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type WorkDocsClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of WorkDocsClient class. This is resolved and normalized from the {@link WorkDocsClientConfig | constructor configuration interface}.
  */
 export interface WorkDocsClientResolvedConfig extends WorkDocsClientResolvedConfigType {}
 
 /**
- * <p>The WorkDocs API is designed for the following use cases:</p>
- *         <ul>
+ * <p>The Amazon WorkDocs API is designed for the following use cases:</p>
+ *          <ul>
  *             <li>
- *                 <p>File Migration: File migration applications are supported for users who
+ *                <p>File Migration: File migration applications are supported for users who
  *                     want to migrate their files from an on-premises or off-premises file system or
  *                     service. Users can insert files into a user directory structure, as well as
  *                     allow for basic metadata changes, such as modifications to the permissions of
  *                     files.</p>
  *             </li>
  *             <li>
- *                 <p>Security: Support security applications are supported for users who have
+ *                <p>Security: Support security applications are supported for users who have
  *                     additional security needs, such as antivirus or data loss prevention. The API
- *                     actions, along with AWS CloudTrail, allow these applications to detect when
+ *                     actions, along with CloudTrail, allow these applications to detect when
  *                     changes occur in Amazon WorkDocs. Then, the application can take the necessary
  *                     actions and replace the target file. If the target file violates the policy, the
  *                     application can also choose to email the user.</p>
  *             </li>
  *             <li>
- *                 <p>eDiscovery/Analytics: General administrative applications are supported,
+ *                <p>eDiscovery/Analytics: General administrative applications are supported,
  *                     such as eDiscovery and analytics. These applications can choose to mimic or
- *                     record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to
+ *                     record the actions in an Amazon WorkDocs site, along with CloudTrail, to
  *                     replicate data for eDiscovery, backup, or analytical applications.</p>
  *             </li>
  *          </ul>
- *         <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed.
- *             They not only require the use of the AWS SDK, but also allow for the exclusive use of
+ *          <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed.
+ *             They not only require the use of the Amazon Web Services SDK, but also allow for the exclusive use of
  *             IAM users and roles to help facilitate access, trust, and permission policies. By
- *             creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM
- *             user gains full administrative visibility into the entire Amazon WorkDocs site (or as
+ *             creating a role and allowing an IAM user to access the Amazon WorkDocs site, the
+ *             IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as
  *             set in the IAM policy). This includes, but is not limited to, the ability to modify file
  *             permissions and upload any file to any user. This allows developers to perform the three
  *             use cases above, as well as give users the ability to grant access on a selective basis
  *             using the IAM model.</p>
+ *          <note>
+ *             <p>The pricing for Amazon WorkDocs APIs varies depending on the API call type for these actions:</p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <code>READ  (Get*)</code>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <code>WRITE (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)</code>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <code>LIST (Describe*)</code>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <code>DELETE*, CANCEL</code>
+ *                   </p>
+ *                </li>
+ *             </ul>
+ *             <p>For information about Amazon WorkDocs API pricing, see <a href="https://aws.amazon.com/workdocs/pricing/">Amazon WorkDocs Pricing</a>.</p>
+ *          </note>
+ * @public
  */
 export class WorkDocsClient extends __Client<
   __HttpHandlerOptions,
@@ -420,22 +531,36 @@ export class WorkDocsClient extends __Client<
    */
   readonly config: WorkDocsClientResolvedConfig;
 
-  constructor(configuration: WorkDocsClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<WorkDocsClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultWorkDocsHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: WorkDocsClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

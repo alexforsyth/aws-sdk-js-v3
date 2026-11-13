@@ -1,95 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { DescribeFargateProfileRequest, DescribeFargateProfileResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeFargateProfileCommand,
-  serializeAws_restJson1DescribeFargateProfileCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFargateProfileRequest, DescribeFargateProfileResponse } from "../models/models_0";
+import { DescribeFargateProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFargateProfileCommand}.
+ */
 export interface DescribeFargateProfileCommandInput extends DescribeFargateProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFargateProfileCommand}.
+ */
 export interface DescribeFargateProfileCommandOutput extends DescribeFargateProfileResponse, __MetadataBearer {}
 
 /**
- * <p>Returns descriptive information about an Fargate profile.</p>
+ * <p>Describes an Fargate profile.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EKSClient, DescribeFargateProfileCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, DescribeFargateProfileCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // DescribeFargateProfileRequest
+ *   clusterName: "STRING_VALUE", // required
+ *   fargateProfileName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeFargateProfileCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFargateProfileResponse
+ * //   fargateProfile: { // FargateProfile
+ * //     fargateProfileName: "STRING_VALUE",
+ * //     fargateProfileArn: "STRING_VALUE",
+ * //     clusterName: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     podExecutionRoleArn: "STRING_VALUE",
+ * //     subnets: [ // StringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     selectors: [ // FargateProfileSelectors
+ * //       { // FargateProfileSelector
+ * //         namespace: "STRING_VALUE",
+ * //         labels: { // FargateProfileLabel
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //     status: "CREATING" || "ACTIVE" || "DELETING" || "CREATE_FAILED" || "DELETE_FAILED",
+ * //     tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     health: { // FargateProfileHealth
+ * //       issues: [ // FargateProfileIssueList
+ * //         { // FargateProfileIssue
+ * //           code: "PodExecutionRoleAlreadyInUse" || "AccessDenied" || "ClusterUnreachable" || "InternalFailure",
+ * //           message: "STRING_VALUE",
+ * //           resourceIds: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeFargateProfileCommandInput - {@link DescribeFargateProfileCommandInput}
+ * @returns {@link DescribeFargateProfileCommandOutput}
  * @see {@link DescribeFargateProfileCommandInput} for command's `input` shape.
  * @see {@link DescribeFargateProfileCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFargateProfileCommand extends $Command<
-  DescribeFargateProfileCommandInput,
-  DescribeFargateProfileCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFargateProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFargateProfileCommandInput, DescribeFargateProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "DescribeFargateProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFargateProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFargateProfileResponse.filterSensitiveLog,
+export class DescribeFargateProfileCommand extends command<DescribeFargateProfileCommandInput, DescribeFargateProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFargateProfile",
+  DescribeFargateProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFargateProfileRequest;
+      output: DescribeFargateProfileResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFargateProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeFargateProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFargateProfileCommandOutput> {
-    return deserializeAws_restJson1DescribeFargateProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFargateProfileCommandInput;
+      output: DescribeFargateProfileCommandOutput;
+    };
+  };
 }

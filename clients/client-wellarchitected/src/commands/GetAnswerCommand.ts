@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetAnswerInput, GetAnswerOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetAnswerCommand,
-  serializeAws_restJson1GetAnswerCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WellArchitectedClientResolvedConfig } from "../WellArchitectedClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAnswerInput, GetAnswerOutput } from "../models/models_0";
+import { GetAnswer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAnswerCommand}.
+ */
 export interface GetAnswerCommandInput extends GetAnswerInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetAnswerCommand}.
+ */
 export interface GetAnswerCommandOutput extends GetAnswerOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,122 @@ export interface GetAnswerCommandOutput extends GetAnswerOutput, __MetadataBeare
  * ```javascript
  * import { WellArchitectedClient, GetAnswerCommand } from "@aws-sdk/client-wellarchitected"; // ES Modules import
  * // const { WellArchitectedClient, GetAnswerCommand } = require("@aws-sdk/client-wellarchitected"); // CommonJS import
+ * // import type { WellArchitectedClientConfig } from "@aws-sdk/client-wellarchitected";
+ * const config = {}; // type is WellArchitectedClientConfig
  * const client = new WellArchitectedClient(config);
+ * const input = { // GetAnswerInput
+ *   WorkloadId: "STRING_VALUE", // required
+ *   LensAlias: "STRING_VALUE", // required
+ *   QuestionId: "STRING_VALUE", // required
+ *   MilestoneNumber: Number("int"),
+ * };
  * const command = new GetAnswerCommand(input);
  * const response = await client.send(command);
+ * // { // GetAnswerOutput
+ * //   WorkloadId: "STRING_VALUE",
+ * //   MilestoneNumber: Number("int"),
+ * //   LensAlias: "STRING_VALUE",
+ * //   LensArn: "STRING_VALUE",
+ * //   Answer: { // Answer
+ * //     QuestionId: "STRING_VALUE",
+ * //     PillarId: "STRING_VALUE",
+ * //     QuestionTitle: "STRING_VALUE",
+ * //     QuestionDescription: "STRING_VALUE",
+ * //     ImprovementPlanUrl: "STRING_VALUE",
+ * //     HelpfulResourceUrl: "STRING_VALUE",
+ * //     HelpfulResourceDisplayText: "STRING_VALUE",
+ * //     Choices: [ // Choices
+ * //       { // Choice
+ * //         ChoiceId: "STRING_VALUE",
+ * //         Title: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //         HelpfulResource: { // ChoiceContent
+ * //           DisplayText: "STRING_VALUE",
+ * //           Url: "STRING_VALUE",
+ * //         },
+ * //         ImprovementPlan: {
+ * //           DisplayText: "STRING_VALUE",
+ * //           Url: "STRING_VALUE",
+ * //         },
+ * //         AdditionalResources: [ // AdditionalResourcesList
+ * //           { // AdditionalResources
+ * //             Type: "HELPFUL_RESOURCE" || "IMPROVEMENT_PLAN",
+ * //             Content: [ // Urls
+ * //               {
+ * //                 DisplayText: "STRING_VALUE",
+ * //                 Url: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     SelectedChoices: [ // SelectedChoices
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ChoiceAnswers: [ // ChoiceAnswers
+ * //       { // ChoiceAnswer
+ * //         ChoiceId: "STRING_VALUE",
+ * //         Status: "SELECTED" || "NOT_APPLICABLE" || "UNSELECTED",
+ * //         Reason: "OUT_OF_SCOPE" || "BUSINESS_PRIORITIES" || "ARCHITECTURE_CONSTRAINTS" || "OTHER" || "NONE",
+ * //         Notes: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     IsApplicable: true || false,
+ * //     Risk: "UNANSWERED" || "HIGH" || "MEDIUM" || "NONE" || "NOT_APPLICABLE",
+ * //     Notes: "STRING_VALUE",
+ * //     Reason: "OUT_OF_SCOPE" || "BUSINESS_PRIORITIES" || "ARCHITECTURE_CONSTRAINTS" || "OTHER" || "NONE",
+ * //     JiraConfiguration: { // JiraConfiguration
+ * //       JiraIssueUrl: "STRING_VALUE",
+ * //       LastSyncedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetAnswerCommandInput - {@link GetAnswerCommandInput}
+ * @returns {@link GetAnswerCommandOutput}
  * @see {@link GetAnswerCommandInput} for command's `input` shape.
  * @see {@link GetAnswerCommandOutput} for command's `response` shape.
- * @see {@link WellArchitectedClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WellArchitectedClientResolvedConfig | config} for WellArchitectedClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is a problem with the Well-Architected Tool API service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input is not valid.</p>
+ *
+ * @throws {@link WellArchitectedServiceException}
+ * <p>Base exception class for all service exceptions from WellArchitected service.</p>
+ *
+ *
+ * @public
  */
-export class GetAnswerCommand extends $Command<
-  GetAnswerCommandInput,
-  GetAnswerCommandOutput,
-  WellArchitectedClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAnswerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WellArchitectedClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAnswerCommandInput, GetAnswerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WellArchitectedClient";
-    const commandName = "GetAnswerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAnswerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAnswerOutput.filterSensitiveLog,
+export class GetAnswerCommand extends command<GetAnswerCommandInput, GetAnswerCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAnswer",
+  GetAnswer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAnswerInput;
+      output: GetAnswerOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAnswerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAnswerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAnswerCommandOutput> {
-    return deserializeAws_restJson1GetAnswerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAnswerCommandInput;
+      output: GetAnswerCommandOutput;
+    };
+  };
 }

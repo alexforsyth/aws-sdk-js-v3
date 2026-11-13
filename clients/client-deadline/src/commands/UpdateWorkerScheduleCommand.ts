@@ -1,0 +1,166 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateWorkerScheduleRequest, UpdateWorkerScheduleResponse } from "../models/models_0";
+import { UpdateWorkerSchedule$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateWorkerScheduleCommand}.
+ */
+export interface UpdateWorkerScheduleCommandInput extends UpdateWorkerScheduleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateWorkerScheduleCommand}.
+ */
+export interface UpdateWorkerScheduleCommandOutput extends UpdateWorkerScheduleResponse, __MetadataBearer {}
+
+/**
+ * Updates the schedule for a worker.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, UpdateWorkerScheduleCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, UpdateWorkerScheduleCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // UpdateWorkerScheduleRequest
+ *   farmId: "STRING_VALUE", // required
+ *   fleetId: "STRING_VALUE", // required
+ *   workerId: "STRING_VALUE", // required
+ *   updatedSessionActions: { // UpdatedSessionActions
+ *     "<keys>": { // UpdatedSessionActionInfo
+ *       completedStatus: "SUCCEEDED" || "FAILED" || "INTERRUPTED" || "CANCELED" || "NEVER_ATTEMPTED",
+ *       processExitCode: Number("int"),
+ *       progressMessage: "STRING_VALUE",
+ *       startedAt: new Date("TIMESTAMP"),
+ *       endedAt: new Date("TIMESTAMP"),
+ *       updatedAt: new Date("TIMESTAMP"),
+ *       progressPercent: Number("float"),
+ *       manifests: [ // TaskRunManifestPropertiesListRequest
+ *         { // TaskRunManifestPropertiesRequest
+ *           outputManifestPath: "STRING_VALUE",
+ *           outputManifestHash: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   },
+ * };
+ * const command = new UpdateWorkerScheduleCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateWorkerScheduleResponse
+ * //   assignedSessions: { // AssignedSessions // required
+ * //     "<keys>": { // AssignedSession
+ * //       queueId: "STRING_VALUE", // required
+ * //       jobId: "STRING_VALUE", // required
+ * //       sessionActions: [ // AssignedSessionActions // required
+ * //         { // AssignedSessionAction
+ * //           sessionActionId: "STRING_VALUE", // required
+ * //           definition: { // AssignedSessionActionDefinition Union: only one key present
+ * //             envEnter: { // AssignedEnvironmentEnterSessionActionDefinition
+ * //               environmentId: "STRING_VALUE", // required
+ * //             },
+ * //             envExit: { // AssignedEnvironmentExitSessionActionDefinition
+ * //               environmentId: "STRING_VALUE", // required
+ * //             },
+ * //             taskRun: { // AssignedTaskRunSessionActionDefinition
+ * //               taskId: "STRING_VALUE",
+ * //               stepId: "STRING_VALUE", // required
+ * //               parameters: { // TaskParameters // required
+ * //                 "<keys>": { // TaskParameterValue Union: only one key present
+ * //                   int: "STRING_VALUE",
+ * //                   float: "STRING_VALUE",
+ * //                   string: "STRING_VALUE",
+ * //                   path: "STRING_VALUE",
+ * //                   chunkInt: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //             syncInputJobAttachments: { // AssignedSyncInputJobAttachmentsSessionActionDefinition
+ * //               stepId: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         },
+ * //       ],
+ * //       logConfiguration: { // LogConfiguration
+ * //         logDriver: "STRING_VALUE", // required
+ * //         options: { // LogOptions
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         parameters: { // LogParameters
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         error: "STRING_VALUE",
+ * //       },
+ * //       metadata: { // SessionMetadata
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * //   cancelSessionActions: { // CancelSessionActions // required
+ * //     "<keys>": [ // SessionActionIdList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   desiredWorkerStatus: "STOPPED",
+ * //   updateIntervalSeconds: Number("int"), // required
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateWorkerScheduleCommandInput - {@link UpdateWorkerScheduleCommandInput}
+ * @returns {@link UpdateWorkerScheduleCommandOutput}
+ * @see {@link UpdateWorkerScheduleCommandInput} for command's `input` shape.
+ * @see {@link UpdateWorkerScheduleCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateWorkerScheduleCommand extends command<UpdateWorkerScheduleCommandInput, UpdateWorkerScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateWorkerSchedule",
+  UpdateWorkerSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWorkerScheduleRequest;
+      output: UpdateWorkerScheduleResponse;
+    };
+    sdk: {
+      input: UpdateWorkerScheduleCommandInput;
+      output: UpdateWorkerScheduleCommandOutput;
+    };
+  };
+}

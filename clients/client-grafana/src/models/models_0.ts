@@ -1,619 +1,468 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { AutomaticJsonStringConversion as __AutomaticJsonStringConversion } from "@smithy/core/serde";
+
+import type {
+  AccountAccessType,
+  AuthenticationProviderTypes,
+  DataSourceType,
+  IPAddressType,
+  LicenseType,
+  NotificationDestinationType,
+  PermissionType,
+  Role,
+  SamlConfigurationStatus,
+  UpdateAction,
+  UserType,
+  WorkspaceStatus,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient permissions to perform this action. </p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace AccessDeniedException {
+export interface CreateWorkspaceApiKeyRequest {
   /**
-   * @internal
+   * <p>Specifies the name of the key. Keynames must be unique to the workspace.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-export enum AccountAccessType {
-  /**
-   * Indicates that the customer is using Grafana to monitor resources in their current account.
-   */
-  CURRENT_ACCOUNT = "CURRENT_ACCOUNT",
-  /**
-   * Indicates that the customer is using Grafana to monitor resources in organizational units.
-   */
-  ORGANIZATION = "ORGANIZATION",
-}
-
-/**
- * <p>A structure that defines which attributes in the IdP assertion are to be used to define
- *          information about the users authenticated by the IdP to use the workspace.</p>
- */
-export interface AssertionAttributes {
-  /**
-   * <p>The name of the attribute within the SAML assertion to use as the user full "friendly" names for SAML users.</p>
-   */
-  name?: string;
+  keyName: string | undefined;
 
   /**
-   * <p>The name of the attribute within the SAML assertion to use as the login names for SAML users.</p>
+   * <p>Specifies the permission level of the key.</p> <p> Valid values: <code>ADMIN</code>|<code>EDITOR</code>|<code>VIEWER</code> </p>
+   * @public
    */
-  login?: string;
+  keyRole: string | undefined;
 
   /**
-   * <p>The name of the attribute within the SAML assertion to use as the email names for SAML users.</p>
+   * <p>Specifies the time in seconds until the key expires. Keys can be valid for up to 30 days.</p>
+   * @public
    */
-  email?: string;
+  secondsToLive: number | undefined;
 
   /**
-   * <p>The name of the attribute within the SAML assertion to use as the user full "friendly" names for user groups.</p>
-   */
-  groups?: string;
-
-  /**
-   * <p>The name of the attribute within the SAML assertion to use as the user roles.</p>
-   */
-  role?: string;
-
-  /**
-   * <p>The name of the attribute within the SAML assertion to use as the user full "friendly" names for the users' organizations.</p>
-   */
-  org?: string;
-}
-
-export namespace AssertionAttributes {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssertionAttributes): any => ({
-    ...obj,
-  });
-}
-
-export enum LicenseType {
-  /**
-   * Grafana Enterprise License.
-   */
-  ENTERPRISE = "ENTERPRISE",
-  /**
-   * Grafana Enterprise Free Trial License.
-   */
-  ENTERPRISE_FREE_TRIAL = "ENTERPRISE_FREE_TRIAL",
-}
-
-export interface AssociateLicenseRequest {
-  /**
-   * <p>The ID of the workspace to associate the license with.</p>
+   * <p>The ID of the workspace to create an API key.</p>
+   * @public
    */
   workspaceId: string | undefined;
-
-  /**
-   * <p>The type of license to associate with the workspace.</p>
-   */
-  licenseType: LicenseType | string | undefined;
-}
-
-export namespace AssociateLicenseRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateLicenseRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum AuthenticationProviderTypes {
-  /**
-   * Indicates that AMG workspace has AWS SSO enabled as its authentication provider.
-   */
-  AWS_SSO = "AWS_SSO",
-  /**
-   * Indicates that the AMG workspace has SAML enabled as its authentication provider.
-   */
-  SAML = "SAML",
-}
-
-export enum SamlConfigurationStatus {
-  /**
-   * Indicates that SAML on an AMG workspace is enabled and has been configured.
-   */
-  CONFIGURED = "CONFIGURED",
-  /**
-   * Indicates that SAML on an AMG workspace is enabled but has not been configured.
-   */
-  NOT_CONFIGURED = "NOT_CONFIGURED",
 }
 
 /**
- * <p>A structure that describes whether the workspace uses SAML, Amazon Web Services SSO, or both methods
- *          for user authentication, and whether that authentication is fully configured.</p>
+ * @public
  */
-export interface AuthenticationSummary {
+export interface CreateWorkspaceApiKeyResponse {
   /**
-   * <p>Specifies whether the workspace uses SAML, Amazon Web Services SSO, or both methods for user
-   *          authentication.</p>
+   * <p>The name of the key that was created.</p>
+   * @public
    */
-  providers: (AuthenticationProviderTypes | string)[] | undefined;
+  keyName: string | undefined;
 
   /**
-   * <p>Specifies whether the workplace's user authentication method is fully configured.</p>
+   * <p>The key token. Use this value as a bearer token to authenticate HTTP requests to the workspace.</p>
+   * @public
    */
-  samlConfigurationStatus?: SamlConfigurationStatus | string;
-}
-
-export namespace AuthenticationSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthenticationSummary): any => ({
-    ...obj,
-  });
-}
-
-export enum DataSourceType {
-  /**
-   * Amazon OpenSearch Service
-   */
-  AMAZON_OPENSEARCH_SERVICE = "AMAZON_OPENSEARCH_SERVICE",
-  /**
-   * CloudWatch Logs
-   */
-  CLOUDWATCH = "CLOUDWATCH",
-  /**
-   * Managed Prometheus
-   */
-  PROMETHEUS = "PROMETHEUS",
-  /**
-   * IoT SiteWise
-   */
-  SITEWISE = "SITEWISE",
-  /**
-   * Timestream
-   */
-  TIMESTREAM = "TIMESTREAM",
-  /**
-   * X-Ray
-   */
-  XRAY = "XRAY",
-}
-
-export enum NotificationDestinationType {
-  /**
-   * AWS Simple Notification Service
-   */
-  SNS = "SNS",
-}
-
-export enum PermissionType {
-  /**
-   * Customer Managed
-   */
-  CUSTOMER_MANAGED = "CUSTOMER_MANAGED",
-  /**
-   * Service Managed
-   */
-  SERVICE_MANAGED = "SERVICE_MANAGED",
-}
-
-export enum WorkspaceStatus {
-  /**
-   * Workspace is active.
-   */
-  ACTIVE = "ACTIVE",
-  /**
-   * Workspace is being created.
-   */
-  CREATING = "CREATING",
-  /**
-   * Workspace creation failed.
-   */
-  CREATION_FAILED = "CREATION_FAILED",
-  /**
-   * Workspace is being deleted.
-   */
-  DELETING = "DELETING",
-  /**
-   * Workspace deletion failed.
-   */
-  DELETION_FAILED = "DELETION_FAILED",
-  /**
-   * Workspace is in an invalid state, it can only and should be deleted.
-   */
-  FAILED = "FAILED",
-  /**
-   * Failed to remove enterprise license from workspace.
-   */
-  LICENSE_REMOVAL_FAILED = "LICENSE_REMOVAL_FAILED",
-  /**
-   * Workspace update failed.
-   */
-  UPDATE_FAILED = "UPDATE_FAILED",
-  /**
-   * Workspace is being updated.
-   */
-  UPDATING = "UPDATING",
-  /**
-   * Workspace upgrade failed.
-   */
-  UPGRADE_FAILED = "UPGRADE_FAILED",
-  /**
-   * Workspace is being upgraded to enterprise.
-   */
-  UPGRADING = "UPGRADING",
-}
-
-/**
- * <p>A structure containing information about an Amazon Managed Grafana workspace in your account.</p>
- */
-export interface WorkspaceDescription {
-  /**
-   * <p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in
-   *          other accounts in the same organization. If this is <code>ORGANIZATION</code>, the
-   *             <code>workspaceOrganizationalUnits</code> parameter specifies which organizational units
-   *          the workspace can access.</p>
-   */
-  accountAccessType?: AccountAccessType | string;
+  key: string | undefined;
 
   /**
-   * <p>The date that the workspace was created.</p>
+   * <p>The ID of the workspace that the key is valid for.</p>
+   * @public
    */
-  created: Date | undefined;
-
-  /**
-   * <p>Specifies the Amazon Web Services data sources that have been configured to have IAM
-   *          roles and permissions created to allow
-   *          Amazon Managed Grafana to read data from these sources.</p>
-   */
-  dataSources: (DataSourceType | string)[] | undefined;
-
-  /**
-   * <p>The user-defined description of the workspace.</p>
-   */
-  description?: string;
-
-  /**
-   * <p>The URL that users can use to access the Grafana console in the workspace.</p>
-   */
-  endpoint: string | undefined;
-
-  /**
-   * <p>The version of Grafana supported in this workspace.</p>
-   */
-  grafanaVersion: string | undefined;
-
-  /**
-   * <p>The unique ID of this workspace.</p>
-   */
-  id: string | undefined;
-
-  /**
-   * <p>The most recent date that the workspace was modified.</p>
-   */
-  modified: Date | undefined;
-
-  /**
-   * <p>The name of the workspace.</p>
-   */
-  name?: string;
-
-  /**
-   * <p>The name of the IAM role that is used to access resources through Organizations.</p>
-   */
-  organizationRoleName?: string;
-
-  /**
-   * <p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM
-   *          roles and permissions for, to allow
-   *          Amazon Managed Grafana to use these channels.</p>
-   */
-  notificationDestinations?: (NotificationDestinationType | string)[];
-
-  /**
-   * <p>Specifies the organizational units that this workspace is allowed to use data sources
-   *          from, if this workspace is in an account that is part of an organization.</p>
-   */
-  organizationalUnits?: string[];
-
-  /**
-   * <p>If this is <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles
-   *          and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p>
-   *          <p>If this is <code>CUSTOMER_MANAGED</code>, you manage those roles and permissions
-   *          yourself. If you are creating this workspace in a member account of an organization and that account is not a
-   *          delegated administrator account, and
-   *          you want the workspace to access data sources in other Amazon Web Services accounts in the
-   *          organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for
-   *          Amazon Web Services data sources and notification channels</a>
-   *          </p>
-   */
-  permissionType?: PermissionType | string;
-
-  /**
-   * <p>The name of the CloudFormation stack set that is used to generate IAM roles
-   *          to be used for this workspace.</p>
-   */
-  stackSetName?: string;
-
-  /**
-   * <p>The current status of the workspace.</p>
-   */
-  status: WorkspaceStatus | string | undefined;
-
-  /**
-   * <p>The IAM role that grants permissions to the Amazon Web Services resources that the
-   *          workspace will view data from. This role must already exist.</p>
-   */
-  workspaceRoleArn?: string;
-
-  /**
-   * <p>Specifies whether this workspace has a full Grafana Enterprise license or a free trial license.</p>
-   */
-  licenseType?: LicenseType | string;
-
-  /**
-   * <p>Specifies whether this workspace has already fully used its free trial for Grafana Enterprise.</p>
-   */
-  freeTrialConsumed?: boolean;
-
-  /**
-   * <p>If this workspace has a full Grafana Enterprise license, this specifies when the license ends and
-   *       will need to be renewed.</p>
-   */
-  licenseExpiration?: Date;
-
-  /**
-   * <p>If this workspace is currently in the free trial period for Grafana Enterprise, this value specifies
-   *       when that free trial ends.</p>
-   */
-  freeTrialExpiration?: Date;
-
-  /**
-   * <p>A structure that describes whether the workspace uses SAML, Amazon Web Services SSO, or both methods
-   *       for user authentication.</p>
-   */
-  authentication: AuthenticationSummary | undefined;
-}
-
-export namespace WorkspaceDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkspaceDescription): any => ({
-    ...obj,
-    ...(obj.description && { description: SENSITIVE_STRING }),
-    ...(obj.name && { name: SENSITIVE_STRING }),
-    ...(obj.organizationRoleName && { organizationRoleName: SENSITIVE_STRING }),
-    ...(obj.organizationalUnits && { organizationalUnits: SENSITIVE_STRING }),
-    ...(obj.workspaceRoleArn && { workspaceRoleArn: SENSITIVE_STRING }),
-  });
-}
-
-export interface AssociateLicenseResponse {
-  /**
-   * <p>A structure containing data about the workspace.</p>
-   */
-  workspace: WorkspaceDescription | undefined;
-}
-
-export namespace AssociateLicenseResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateLicenseResponse): any => ({
-    ...obj,
-    ...(obj.workspace && { workspace: WorkspaceDescription.filterSensitiveLog(obj.workspace) }),
-  });
-}
-
-/**
- * <p>Unexpected error while processing the request. Retry the request.</p>
- */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  $retryable: {};
-  /**
-   * <p>A description of the error.</p>
-   */
-  message: string | undefined;
-
-  /**
-   * <p>How long to wait before you retry this operation.</p>
-   */
-  retryAfterSeconds?: number;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request references a resource that does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  /**
-   * <p>The value of a parameter in the request caused an error.</p>
-   */
-  message: string | undefined;
-
-  /**
-   * <p>The ID of the resource that is associated with the error.</p>
-   */
-  resourceId: string | undefined;
-
-  /**
-   * <p>The type of the resource that is associated with the error.</p>
-   */
-  resourceType: string | undefined;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was denied because of request throttling. Retry the request.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  $retryable: {};
-  /**
-   * <p>A description of the error.</p>
-   */
-  message: string | undefined;
-
-  /**
-   * <p>The ID of the service that is associated with the error.</p>
-   */
-  serviceCode?: string;
-
-  /**
-   * <p>The ID of the service quota that was exceeded.</p>
-   */
-  quotaCode?: string;
-
-  /**
-   * <p>The value of a parameter in the request caused an error.</p>
-   */
-  retryAfterSeconds?: number;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
+  workspaceId: string | undefined;
 }
 
 /**
  * <p>A structure that contains information about a request parameter that caused an error.</p>
+ * @public
  */
 export interface ValidationExceptionField {
   /**
    * <p>The name of the field that caused the validation error.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>A message describing why this field couldn't be validated.</p>
+   * @public
    */
   message: string | undefined;
-}
-
-export namespace ValidationExceptionField {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationExceptionField): any => ({
-    ...obj,
-  });
-}
-
-export enum ValidationExceptionReason {
-  CANNOT_PARSE = "CANNOT_PARSE",
-  FIELD_VALIDATION_FAILED = "FIELD_VALIDATION_FAILED",
-  OTHER = "OTHER",
-  UNKNOWN_OPERATION = "UNKNOWN_OPERATION",
 }
 
 /**
- * <p>The value of a parameter in the request caused an error.</p>
+ * @public
  */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
+export interface DeleteWorkspaceApiKeyRequest {
   /**
-   * <p>A description of the error.</p>
+   * <p>The name of the API key to delete.</p>
+   * @public
    */
-  message: string | undefined;
+  keyName: string | undefined;
 
   /**
-   * <p>The reason that the operation failed.</p>
-   */
-  reason: ValidationExceptionReason | string | undefined;
-
-  /**
-   * <p>A list of fields that might be associated with the error.</p>
-   */
-  fieldList?: ValidationExceptionField[];
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeWorkspaceAuthenticationRequest {
-  /**
-   * <p>The ID of the workspace to return authentication information about.</p>
+   * <p>The ID of the workspace to delete.</p>
+   * @public
    */
   workspaceId: string | undefined;
 }
 
-export namespace DescribeWorkspaceAuthenticationRequest {
+/**
+ * @public
+ */
+export interface DeleteWorkspaceApiKeyResponse {
   /**
-   * @internal
+   * <p>The name of the key that was deleted.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeWorkspaceAuthenticationRequest): any => ({
-    ...obj,
-  });
+  keyName: string | undefined;
+
+  /**
+   * <p>The ID of the workspace where the key was deleted.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
 }
 
 /**
- * <p>A structure containing information about how this workspace works with
- *       Amazon Web Services SSO. </p>
+ * <p>A structure that defines which attributes in the IdP assertion are to be used to define information about the users authenticated by the IdP to use the workspace.</p>
+ * @public
+ */
+export interface AssertionAttributes {
+  /**
+   * <p>The name of the attribute within the SAML assertion to use as the user full "friendly" names for SAML users.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The name of the attribute within the SAML assertion to use as the login names for SAML users.</p>
+   * @public
+   */
+  login?: string | undefined;
+
+  /**
+   * <p>The name of the attribute within the SAML assertion to use as the email names for SAML users.</p>
+   * @public
+   */
+  email?: string | undefined;
+
+  /**
+   * <p>The name of the attribute within the SAML assertion to use as the user full "friendly" names for user groups.</p>
+   * @public
+   */
+  groups?: string | undefined;
+
+  /**
+   * <p>The name of the attribute within the SAML assertion to use as the user roles.</p>
+   * @public
+   */
+  role?: string | undefined;
+
+  /**
+   * <p>The name of the attribute within the SAML assertion to use as the user full "friendly" names for the users' organizations.</p>
+   * @public
+   */
+  org?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateLicenseRequest {
+  /**
+   * <p>The ID of the workspace to associate the license with.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+
+  /**
+   * <p>The type of license to associate with the workspace.</p> <note> <p> Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>
+   * @public
+   */
+  licenseType: LicenseType | undefined;
+
+  /**
+   * <p>A token from Grafana Labs that ties your Amazon Web Services account with a Grafana Labs account. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise">Link your account with Grafana Labs</a>.</p>
+   * @public
+   */
+  grafanaToken?: string | undefined;
+}
+
+/**
+ * <p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication, and whether that authentication is fully configured.</p>
+ * @public
+ */
+export interface AuthenticationSummary {
+  /**
+   * <p>Specifies whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication.</p>
+   * @public
+   */
+  providers: AuthenticationProviderTypes[] | undefined;
+
+  /**
+   * <p>Specifies whether the workplace's user authentication method is fully configured.</p>
+   * @public
+   */
+  samlConfigurationStatus?: SamlConfigurationStatus | undefined;
+}
+
+/**
+ * <p>The configuration settings for in-bound network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization are still required.</p> <p>Access is granted to a caller that is in either the IP address list or the VPC endpoint list - they do not need to be in both.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints are allowed. Standard Grafana authentication and authorization are still required.</p> <note> <p>While both <code>prefixListIds</code> and <code>vpceIds</code> are required, you can pass in an empty array of strings for either parameter if you do not want to allow any of that type.</p> <p>If both are passed as empty arrays, no traffic is allowed to the workspace, because only <i>explicitly</i> allowed connections are accepted.</p> </note>
+ * @public
+ */
+export interface NetworkAccessConfiguration {
+  /**
+   * <p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration (passed an empty array) then no IP addresses are allowed to access the workspace. You create a prefix list using the Amazon VPC console.</p> <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i> </code>.</p> <p>For more information about prefix lists, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html">Group CIDR blocks using managed prefix lists</a>in the <i> Amazon Virtual Private Cloud User Guide</i>.</p>
+   * @public
+   */
+  prefixListIds: string[] | undefined;
+
+  /**
+   * <p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints specified here are allowed to access the workspace. If you pass in an empty array of strings, then no VPCs are allowed to access the workspace.</p> <p>VPC endpoint IDs have the format <code>vpce-<i>1a2b3c4d</i> </code>.</p> <p>For more information about creating an interface VPC endpoint, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints">Interface VPC endpoints</a> in the <i> Amazon Managed Grafana User Guide</i>.</p> <note> <p>The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code> service endpoint). Other VPC endpoints are ignored.</p> </note>
+   * @public
+   */
+  vpceIds: string[] | undefined;
+}
+
+/**
+ * <p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of the same VPC.</p> <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) Region (ap-northeast-2).</p> </note>
+ * @public
+ */
+export interface VpcConfiguration {
+  /**
+   * <p>The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.</p>
+   * @public
+   */
+  securityGroupIds: string[] | undefined;
+
+  /**
+   * <p>The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.</p>
+   * @public
+   */
+  subnetIds: string[] | undefined;
+}
+
+/**
+ * <p>A structure containing information about an Amazon Managed Grafana workspace in your account.</p>
+ * @public
+ */
+export interface WorkspaceDescription {
+  /**
+   * <p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If this is <code>ORGANIZATION</code>, the <code>workspaceOrganizationalUnits</code> parameter specifies which organizational units the workspace can access.</p>
+   * @public
+   */
+  accountAccessType?: AccountAccessType | undefined;
+
+  /**
+   * <p>The date that the workspace was created.</p>
+   * @public
+   */
+  created: Date | undefined;
+
+  /**
+   * <p>Specifies the Amazon Web Services data sources that have been configured to have IAM roles and permissions created to allow Amazon Managed Grafana to read data from these sources.</p> <p>This list is only used when the workspace was created through the Amazon Web Services console, and the <code>permissionType</code> is <code>SERVICE_MANAGED</code>.</p>
+   * @public
+   */
+  dataSources: DataSourceType[] | undefined;
+
+  /**
+   * <p>The user-defined description of the workspace.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The URL that users can use to access the Grafana console in the workspace.</p>
+   * @public
+   */
+  endpoint: string | undefined;
+
+  /**
+   * <p>The version of Grafana supported in this workspace.</p>
+   * @public
+   */
+  grafanaVersion: string | undefined;
+
+  /**
+   * <p>The unique ID of this workspace.</p>
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * <p>The most recent date that the workspace was modified.</p>
+   * @public
+   */
+  modified: Date | undefined;
+
+  /**
+   * <p>The name of the workspace.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The name of the IAM role that is used to access resources through Organizations.</p>
+   * @public
+   */
+  organizationRoleName?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, to allow Amazon Managed Grafana to use these channels.</p>
+   * @public
+   */
+  notificationDestinations?: NotificationDestinationType[] | undefined;
+
+  /**
+   * <p>Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.</p>
+   * @public
+   */
+  organizationalUnits?: string[] | undefined;
+
+  /**
+   * <p>If this is <code>SERVICE_MANAGED</code>, and the workplace was created through the Amazon Managed Grafana console, then Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If this is <code>CUSTOMER_MANAGED</code>, you must manage those roles and permissions yourself.</p> <p>If you are working with a workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, this parameter must be set to <code>CUSTOMER_MANAGED</code>.</p> <p>For more information about converting between customer and service managed, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html">Managing permissions for data sources and notification channels</a>. For more information about the roles and permissions that must be managed for customer managed workspaces, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html"> Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>
+   * @public
+   */
+  permissionType?: PermissionType | undefined;
+
+  /**
+   * <p>The name of the CloudFormation stack set that is used to generate IAM roles to be used for this workspace.</p>
+   * @public
+   */
+  stackSetName?: string | undefined;
+
+  /**
+   * <p>The current status of the workspace.</p>
+   * @public
+   */
+  status: WorkspaceStatus | undefined;
+
+  /**
+   * <p>The IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. This role must already exist.</p>
+   * @public
+   */
+  workspaceRoleArn?: string | undefined;
+
+  /**
+   * <p>Specifies whether this workspace has a full Grafana Enterprise license.</p> <note> <p> Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>
+   * @public
+   */
+  licenseType?: LicenseType | undefined;
+
+  /**
+   * <p>Specifies whether this workspace has already fully used its free trial for Grafana Enterprise.</p> <note> <p> Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>
+   * @public
+   */
+  freeTrialConsumed?: boolean | undefined;
+
+  /**
+   * <p>If this workspace has a full Grafana Enterprise license purchased through Amazon Web Services Marketplace, this specifies when the license ends and will need to be renewed. Purchasing the Enterprise plugins option through Amazon Managed Grafana does not have an expiration. It is valid until the license is removed.</p>
+   * @public
+   */
+  licenseExpiration?: Date | undefined;
+
+  /**
+   * <p>If this workspace is currently in the free trial period for Grafana Enterprise, this value specifies when that free trial ends.</p> <note> <p> Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>
+   * @public
+   */
+  freeTrialExpiration?: Date | undefined;
+
+  /**
+   * <p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication.</p>
+   * @public
+   */
+  authentication: AuthenticationSummary | undefined;
+
+  /**
+   * <p>The list of tags associated with the workspace.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The configuration for connecting to data sources in a private VPC (Amazon Virtual Private Cloud).</p>
+   * @public
+   */
+  vpcConfiguration?: VpcConfiguration | undefined;
+
+  /**
+   * <p>The configuration settings for network access to your workspace.</p>
+   * @public
+   */
+  networkAccessControl?: NetworkAccessConfiguration | undefined;
+
+  /**
+   * <p>The token that ties this workspace to a Grafana Labs account. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise">Link your account with Grafana Labs</a>.</p>
+   * @public
+   */
+  grafanaToken?: string | undefined;
+
+  /**
+   * <p>The type of IP addresses supported for connection to the workspace. Valid values are <code>IPv4</code> and <code>DualStack</code>.</p>
+   * @public
+   */
+  ipAddressType?: IPAddressType | undefined;
+
+  /**
+   * <p>The ID or ARN of the Key Management Service key used for encrypting workspace data.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>If the workspace is in the <code>DEGRADED</code> status, this field describes the reason the workspace is degraded.</p>
+   * @public
+   */
+  degradedWorkspaceReason?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateLicenseResponse {
+  /**
+   * <p>A structure containing data about the workspace.</p>
+   * @public
+   */
+  workspace: WorkspaceDescription | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeWorkspaceAuthenticationRequest {
+  /**
+   * <p>The ID of the workspace to return authentication information about.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * <p>A structure containing information about how this workspace works with IAM Identity Center. </p>
+ * @public
  */
 export interface AwsSsoAuthentication {
   /**
-   * <p>The ID of the Amazon Web Services SSO-managed application that is created by Amazon Managed Grafana.</p>
+   * <p>The ID of the IAM Identity Center-managed application that is created by Amazon Managed Grafana.</p>
+   * @public
    */
-  ssoClientId?: string;
-}
-
-export namespace AwsSsoAuthentication {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsSsoAuthentication): any => ({
-    ...obj,
-  });
+  ssoClientId?: string | undefined;
 }
 
 /**
- * <p>A structure containing the identity provider (IdP) metadata used to integrate the
- *          identity provider with this workspace. You can specify the metadata either by providing a
- *          URL to its location in the <code>url</code> parameter, or by specifying the full metadata
- *          in XML format in the <code>xml</code> parameter.</p>
+ * <p>A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace. You can specify the metadata either by providing a URL to its location in the <code>url</code> parameter, or by specifying the full metadata in XML format in the <code>xml</code> parameter. Specifying both will cause an error.</p>
+ * @public
  */
-export type IdpMetadata = IdpMetadata.UrlMember | IdpMetadata.XmlMember | IdpMetadata.$UnknownMember;
+export type IdpMetadata =
+  | IdpMetadata.UrlMember
+  | IdpMetadata.XmlMember
+  | IdpMetadata.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace IdpMetadata {
   /**
-   * <p>The URL of the location containing the metadata.</p>
+   * <p>The URL of the location containing the IdP metadata.</p>
+   * @public
    */
   export interface UrlMember {
     url: string;
@@ -622,7 +471,8 @@ export namespace IdpMetadata {
   }
 
   /**
-   * <p>The actual full metadata file, in XML format.</p>
+   * <p>The full IdP metadata, in XML format.</p>
+   * @public
    */
   export interface XmlMember {
     url?: never;
@@ -630,1003 +480,1305 @@ export namespace IdpMetadata {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     url?: never;
     xml?: never;
     $unknown: [string, any];
   }
 
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
   export interface Visitor<T> {
     url: (value: string) => T;
     xml: (value: string) => T;
     _: (name: string, value: any) => T;
   }
-
-  export const visit = <T>(value: IdpMetadata, visitor: Visitor<T>): T => {
-    if (value.url !== undefined) return visitor.url(value.url);
-    if (value.xml !== undefined) return visitor.xml(value.xml);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IdpMetadata): any => {
-    if (obj.url !== undefined) return { url: obj.url };
-    if (obj.xml !== undefined) return { xml: obj.xml };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
 }
 
 /**
- * <p>This structure defines which groups defined in the SAML assertion attribute are to be mapped
- *       to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>
+ * <p>This structure defines which groups defined in the SAML assertion attribute are to be mapped to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace. SAML authenticated users not part of <code>Admin</code> or <code>Editor</code> role groups have <code>Viewer</code> permission over the workspace.</p>
+ * @public
  */
 export interface RoleValues {
   /**
-   * <p>A list of groups from the SAML assertion attribute to grant the Grafana
-   *             <code>Editor</code> role to.</p>
+   * <p>A list of groups from the SAML assertion attribute to grant the Grafana <code>Editor</code> role to.</p>
+   * @public
    */
-  editor?: string[];
+  editor?: string[] | undefined;
 
   /**
-   * <p>A list of groups from the SAML assertion attribute to grant the Grafana
-   *             <code>Admin</code> role to.</p>
+   * <p>A list of groups from the SAML assertion attribute to grant the Grafana <code>Admin</code> role to.</p>
+   * @public
    */
-  admin?: string[];
-}
-
-export namespace RoleValues {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RoleValues): any => ({
-    ...obj,
-  });
+  admin?: string[] | undefined;
 }
 
 /**
- * <p>A structure containing information about how this workspace works with
- *          SAML. </p>
+ * <p>A structure containing information about how this workspace works with SAML. </p>
+ * @public
  */
 export interface SamlConfiguration {
   /**
-   * <p>A structure containing the identity provider (IdP) metadata used to integrate the
-   *          identity provider with this workspace.</p>
+   * <p>A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace.</p>
+   * @public
    */
   idpMetadata: IdpMetadata | undefined;
 
   /**
-   * <p>A structure that defines which attributes in the SAML assertion are to be used to define information about
-   *       the users authenticated by that IdP to use the workspace.</p>
+   * <p>A structure that defines which attributes in the SAML assertion are to be used to define information about the users authenticated by that IdP to use the workspace.</p>
+   * @public
    */
-  assertionAttributes?: AssertionAttributes;
+  assertionAttributes?: AssertionAttributes | undefined;
 
   /**
-   * <p>A structure containing arrays that map group names in the SAML assertion to the
-   *       Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>
+   * <p>A structure containing arrays that map group names in the SAML assertion to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>
+   * @public
    */
-  roleValues?: RoleValues;
+  roleValues?: RoleValues | undefined;
 
   /**
-   * <p>Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace.
-   *       If this is empty, all organizations in the assertion attribute have access.</p>
+   * <p>Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace. If this is empty, all organizations in the assertion attribute have access.</p>
+   * @public
    */
-  allowedOrganizations?: string[];
+  allowedOrganizations?: string[] | undefined;
 
   /**
-   * <p>How long a sign-on session by a SAML user is valid, before the user has to sign on
-   *          again.</p>
+   * <p>How long a sign-on session by a SAML user is valid, before the user has to sign on again.</p>
+   * @public
    */
-  loginValidityDuration?: number;
-}
-
-export namespace SamlConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SamlConfiguration): any => ({
-    ...obj,
-    ...(obj.idpMetadata && { idpMetadata: IdpMetadata.filterSensitiveLog(obj.idpMetadata) }),
-  });
+  loginValidityDuration?: number | undefined;
 }
 
 /**
- * <p>A structure containing information about how this workspace works with
- *          SAML. </p>
+ * <p>A structure containing information about how this workspace works with SAML. </p>
+ * @public
  */
 export interface SamlAuthentication {
   /**
    * <p>Specifies whether the workspace's SAML configuration is complete.</p>
+   * @public
    */
-  status: SamlConfigurationStatus | string | undefined;
+  status: SamlConfigurationStatus | undefined;
 
   /**
-   * <p>A structure containing details about how this workspace works with
-   *          SAML. </p>
+   * <p>A structure containing details about how this workspace works with SAML. </p>
+   * @public
    */
-  configuration?: SamlConfiguration;
-}
-
-export namespace SamlAuthentication {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SamlAuthentication): any => ({
-    ...obj,
-    ...(obj.configuration && { configuration: SamlConfiguration.filterSensitiveLog(obj.configuration) }),
-  });
+  configuration?: SamlConfiguration | undefined;
 }
 
 /**
  * <p>A structure containing information about the user authentication methods used by the workspace.</p>
+ * @public
  */
 export interface AuthenticationDescription {
   /**
-   * <p>Specifies whether this workspace uses Amazon Web Services SSO, SAML, or both methods to authenticate
-   *          users to use the Grafana console in the Amazon Managed Grafana workspace.</p>
+   * <p>Specifies whether this workspace uses IAM Identity Center, SAML, or both methods to authenticate users to use the Grafana console in the Amazon Managed Grafana workspace.</p>
+   * @public
    */
-  providers: (AuthenticationProviderTypes | string)[] | undefined;
+  providers: AuthenticationProviderTypes[] | undefined;
 
   /**
-   * <p>A structure containing information about how this workspace works with
-   *         SAML, including what attributes within the assertion are to be mapped to user information in the workspace. </p>
+   * <p>A structure containing information about how this workspace works with SAML, including what attributes within the assertion are to be mapped to user information in the workspace. </p>
+   * @public
    */
-  saml?: SamlAuthentication;
+  saml?: SamlAuthentication | undefined;
 
   /**
-   * <p>A structure containing information about how this workspace works with
-   *          Amazon Web Services SSO. </p>
+   * <p>A structure containing information about how this workspace works with IAM Identity Center. </p>
+   * @public
    */
-  awsSso?: AwsSsoAuthentication;
+  awsSso?: AwsSsoAuthentication | undefined;
 }
 
-export namespace AuthenticationDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthenticationDescription): any => ({
-    ...obj,
-    ...(obj.saml && { saml: SamlAuthentication.filterSensitiveLog(obj.saml) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeWorkspaceAuthenticationResponse {
   /**
-   * <p>A structure containing information about the authentication methods used in
-   *       the workspace.</p>
+   * <p>A structure containing information about the authentication methods used in the workspace.</p>
+   * @public
    */
   authentication: AuthenticationDescription | undefined;
 }
 
-export namespace DescribeWorkspaceAuthenticationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeWorkspaceAuthenticationResponse): any => ({
-    ...obj,
-    ...(obj.authentication && { authentication: AuthenticationDescription.filterSensitiveLog(obj.authentication) }),
-  });
-}
-
 /**
- * <p>A resource was in an inconsistent state during an update or a deletion.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  /**
-   * <p>A description of the error.</p>
-   */
-  message: string | undefined;
-
-  /**
-   * <p>The ID of the resource that is associated with the error.</p>
-   */
-  resourceId: string | undefined;
-
-  /**
-   * <p>The type of the resource that is associated with the error.</p>
-   */
-  resourceType: string | undefined;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
 export interface UpdateWorkspaceAuthenticationRequest {
   /**
    * <p>The ID of the workspace to update the authentication for.</p>
+   * @public
    */
   workspaceId: string | undefined;
 
   /**
-   * <p>Specifies whether this workspace uses SAML 2.0, Amazon Web Services Single Sign On, or both to authenticate
-   *          users for using the Grafana console within a workspace. For more information,
-   *          see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in
-   *             Amazon Managed Grafana</a>.</p>
+   * <p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in Amazon Managed Grafana </a>.</p>
+   * @public
    */
-  authenticationProviders: (AuthenticationProviderTypes | string)[] | undefined;
+  authenticationProviders: AuthenticationProviderTypes[] | undefined;
 
   /**
-   * <p>If the workspace uses SAML, use this structure to
-   *          map SAML assertion attributes to workspace user information and
-   *          define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles
-   *          in the workspace.</p>
+   * <p>If the workspace uses SAML, use this structure to map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>
+   * @public
    */
-  samlConfiguration?: SamlConfiguration;
+  samlConfiguration?: SamlConfiguration | undefined;
 }
 
-export namespace UpdateWorkspaceAuthenticationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateWorkspaceAuthenticationRequest): any => ({
-    ...obj,
-    ...(obj.samlConfiguration && { samlConfiguration: SamlConfiguration.filterSensitiveLog(obj.samlConfiguration) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateWorkspaceAuthenticationResponse {
   /**
    * <p>A structure that describes the user authentication for this workspace after the update is made.</p>
+   * @public
    */
   authentication: AuthenticationDescription | undefined;
 }
 
-export namespace UpdateWorkspaceAuthenticationResponse {
+/**
+ * @public
+ */
+export interface DescribeWorkspaceConfigurationRequest {
   /**
-   * @internal
+   * <p>The ID of the workspace to get configuration information for.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateWorkspaceAuthenticationResponse): any => ({
-    ...obj,
-    ...(obj.authentication && { authentication: AuthenticationDescription.filterSensitiveLog(obj.authentication) }),
-  });
+  workspaceId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DescribeWorkspaceConfigurationResponse {
+  /**
+   * <p>The configuration string for the workspace that you requested. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.</p>
+   * @public
+   */
+  configuration: __AutomaticJsonStringConversion | string | undefined;
+
+  /**
+   * <p>The supported Grafana version for the workspace.</p>
+   * @public
+   */
+  grafanaVersion?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateWorkspaceConfigurationRequest {
+  /**
+   * <p>The new configuration string for the workspace. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.</p>
+   * @public
+   */
+  configuration: __AutomaticJsonStringConversion | string | undefined;
+
+  /**
+   * <p>The ID of the workspace to update.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+
+  /**
+   * <p>Specifies the version of Grafana to support in the workspace. If not specified, keeps the current version of the workspace.</p> <p>Can only be used to upgrade (for example, from 8.4 to 9.4), not downgrade (for example, from 9.4 to 8.4).</p> <p>To know what versions are available to upgrade to for a specific workspace, see the <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html">ListVersions</a> operation.</p>
+   * @public
+   */
+  grafanaVersion?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateWorkspaceConfigurationResponse {}
+
+/**
+ * @public
+ */
 export interface DisassociateLicenseRequest {
   /**
    * <p>The ID of the workspace to remove the Grafana Enterprise license from.</p>
+   * @public
    */
   workspaceId: string | undefined;
 
   /**
    * <p>The type of license to remove from the workspace.</p>
+   * @public
    */
-  licenseType: LicenseType | string | undefined;
+  licenseType: LicenseType | undefined;
 }
 
-export namespace DisassociateLicenseRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateLicenseRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateLicenseResponse {
   /**
    * <p>A structure containing information about the workspace.</p>
+   * @public
    */
   workspace: WorkspaceDescription | undefined;
 }
 
-export namespace DisassociateLicenseResponse {
+/**
+ * @public
+ */
+export interface ListTagsForResourceRequest {
   /**
-   * @internal
+   * <p>The ARN of the resource the list of tags are associated with.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DisassociateLicenseResponse): any => ({
-    ...obj,
-    ...(obj.workspace && { workspace: WorkspaceDescription.filterSensitiveLog(obj.workspace) }),
-  });
+  resourceArn: string | undefined;
 }
 
-export enum UserType {
+/**
+ * @public
+ */
+export interface ListTagsForResourceResponse {
   /**
-   * SSO group.
+   * <p>The list of tags that are associated with the resource.</p>
+   * @public
    */
-  SSO_GROUP = "SSO_GROUP",
-  /**
-   * SSO user.
-   */
-  SSO_USER = "SSO_USER",
+  tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListVersionsRequest {
+  /**
+   * <p>The maximum number of results to include in the response.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>The token to use when requesting the next set of results. You receive this token from a previous <code>ListVersions</code> operation.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>The ID of the workspace to list the available upgrade versions. If not included, lists all versions of Grafana that are supported for <code>CreateWorkspace</code>.</p>
+   * @public
+   */
+  workspaceId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVersionsResponse {
+  /**
+   * <p>The token to use in a subsequent <code>ListVersions</code> operation to return the next set of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>The Grafana versions available to create. If a workspace ID is included in the request, the Grafana versions to which this workspace can be upgraded.</p>
+   * @public
+   */
+  grafanaVersions?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListPermissionsRequest {
   /**
    * <p>The maximum number of results to include in the response.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
-   * <p>The token to use when requesting the next set of results. You received this token from a previous
-   *          <code>ListPermissions</code> operation.</p>
+   * <p>The token to use when requesting the next set of results. You received this token from a previous <code>ListPermissions</code> operation.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p>(Optional) If you specify <code>SSO_USER</code>, then only the permissions of Amazon Web Services SSO users
-   *          are returned. If you specify <code>SSO_GROUP</code>, only the permissions of Amazon Web Services SSO groups
-   *             are returned.</p>
+   * <p>(Optional) If you specify <code>SSO_USER</code>, then only the permissions of IAM Identity Center users are returned. If you specify <code>SSO_GROUP</code>, only the permissions of IAM Identity Center groups are returned.</p>
+   * @public
    */
-  userType?: UserType | string;
+  userType?: UserType | undefined;
 
   /**
    * <p>(Optional) Limits the results to only the user that matches this ID.</p>
+   * @public
    */
-  userId?: string;
+  userId?: string | undefined;
 
   /**
    * <p>(Optional) Limits the results to only the group that matches this ID.</p>
+   * @public
    */
-  groupId?: string;
+  groupId?: string | undefined;
 
   /**
    * <p>The ID of the workspace to list permissions for. This parameter is required.</p>
+   * @public
    */
   workspaceId: string | undefined;
 }
 
-export namespace ListPermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListPermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum Role {
-  /**
-   * Role Admin.
-   */
-  ADMIN = "ADMIN",
-  /**
-   * Role Editor.
-   */
-  EDITOR = "EDITOR",
-}
-
 /**
  * <p>A structure that specifies one user or group in the workspace.</p>
+ * @public
  */
 export interface User {
   /**
-   * <p>The ID of the user or group.</p>
+   * <p>The ID of the user or group.</p> <p>Pattern: <code>^([0-9a-fA-F]\{10\}-|)[A-Fa-f0-9]\{8\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{12\}$</code> </p>
+   * @public
    */
   id: string | undefined;
 
   /**
    * <p>Specifies whether this is a single user or a group.</p>
+   * @public
    */
-  type: UserType | string | undefined;
-}
-
-export namespace User {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: User): any => ({
-    ...obj,
-  });
+  type: UserType | undefined;
 }
 
 /**
- * <p>A structure containing the identity of one user or group and the <code>Admin</code>
- *       or <code>Editor</code> role that they have.</p>
+ * <p>A structure containing the identity of one user or group and the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role that they have.</p>
+ * @public
  */
 export interface PermissionEntry {
   /**
    * <p>A structure with the ID of the user or group with this role.</p>
+   * @public
    */
   user: User | undefined;
 
   /**
-   * <p>Specifies whether the user or group has the <code>Admin</code>
-   *          or <code>Editor</code> role.</p>
+   * <p>Specifies whether the user or group has the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role.</p>
+   * @public
    */
-  role: Role | string | undefined;
+  role: Role | undefined;
 }
 
-export namespace PermissionEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PermissionEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListPermissionsResponse {
   /**
-   * <p>The token to use in a subsequent <code>ListPermissions</code> operation to return
-   *          the next set of results.</p>
+   * <p>The token to use in a subsequent <code>ListPermissions</code> operation to return the next set of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The permissions returned by the operation.</p>
+   * @public
    */
   permissions: PermissionEntry[] | undefined;
 }
 
-export namespace ListPermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListPermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum UpdateAction {
-  /**
-   * Add permissions.
-   */
-  ADD = "ADD",
-  /**
-   * Revoke permissions.
-   */
-  REVOKE = "REVOKE",
-}
-
 /**
- * <p>Contains the instructions for one Grafana role permission update in a
- *          <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.</p>
+ * <p>Contains the instructions for one Grafana role permission update in a <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.</p>
+ * @public
  */
 export interface UpdateInstruction {
   /**
    * <p>Specifies whether this update is to add or revoke role permissions.</p>
+   * @public
    */
-  action: UpdateAction | string | undefined;
+  action: UpdateAction | undefined;
 
   /**
    * <p>The role to add or revoke for the user or the group specified in <code>users</code>.</p>
+   * @public
    */
-  role: Role | string | undefined;
+  role: Role | undefined;
 
   /**
    * <p>A structure that specifies the user or group to add or revoke the role for.</p>
+   * @public
    */
   users: User[] | undefined;
 }
 
-export namespace UpdateInstruction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateInstruction): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdatePermissionsRequest {
   /**
    * <p>An array of structures that contain the permission updates to make.</p>
+   * @public
    */
   updateInstructionBatch: UpdateInstruction[] | undefined;
 
   /**
    * <p>The ID of the workspace to update.</p>
+   * @public
    */
   workspaceId: string | undefined;
 }
 
-export namespace UpdatePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdatePermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>A structure containing information about one error encountered while performing an
- *             <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.</p>
+ * <p>A structure containing information about one error encountered while performing an <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.</p>
+ * @public
  */
 export interface UpdateError {
   /**
    * <p>The error code.</p>
+   * @public
    */
   code: number | undefined;
 
   /**
    * <p>The message for this error.</p>
+   * @public
    */
   message: string | undefined;
 
   /**
    * <p>Specifies which permission update caused the error.</p>
+   * @public
    */
   causedBy: UpdateInstruction | undefined;
 }
 
-export namespace UpdateError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateError): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdatePermissionsResponse {
   /**
    * <p>An array of structures that contain the errors from the operation, if any.</p>
+   * @public
    */
   errors: UpdateError[] | undefined;
 }
 
-export namespace UpdatePermissionsResponse {
+/**
+ * @public
+ */
+export interface CreateWorkspaceServiceAccountRequest {
   /**
-   * @internal
+   * <p>A name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdatePermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateWorkspaceRequest {
-  /**
-   * <p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in
-   *          other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must
-   *          specify which organizational units the workspace can access in the
-   *             <code>workspaceOrganizationalUnits</code> parameter.</p>
-   */
-  accountAccessType: AccountAccessType | string | undefined;
+  name: string | undefined;
 
   /**
-   * <p>A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.</p>
+   * <p>The permission level to use for this service account.</p> <note> <p>For more information about the roles and the permissions each has, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html">User roles</a> in the <i> Amazon Managed Grafana User Guide</i>.</p> </note>
+   * @public
    */
-  clientToken?: string;
+  grafanaRole: Role | undefined;
 
   /**
-   * <p>The name of an IAM role that already exists to use with Organizations to access Amazon Web Services
-   *          data sources and notification channels in other accounts in an organization.</p>
+   * <p>The ID of the workspace within which to create the service account.</p>
+   * @public
    */
-  organizationRoleName?: string;
-
-  /**
-   * <p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates
-   *          the IAM roles and provisions the permissions that the workspace needs to use
-   *             Amazon Web Services data sources and notification channels.</p>
-   *          <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and
-   *          permissions yourself. If you are creating this workspace in a member account of an
-   *          organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services
-   *          accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for
-   *          Amazon Web Services data sources and notification channels</a>
-   *          </p>
-   */
-  permissionType: PermissionType | string | undefined;
-
-  /**
-   * <p>The name of the CloudFormation stack set to use to generate IAM roles
-   *       to be used for this workspace.</p>
-   */
-  stackSetName?: string;
-
-  /**
-   * <p>Specify the Amazon Web Services data sources that you want to be queried in this
-   *          workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these
-   *          sources. You must still add them as data sources in the Grafana console in the
-   *          workspace.</p>
-   *          <p>If you don't specify a data source here, you can still add it as a data source in the
-   *          workspace console later. However, you will then have to manually configure permissions for
-   *          it.</p>
-   */
-  workspaceDataSources?: (DataSourceType | string)[];
-
-  /**
-   * <p>A description for the workspace. This is used only to help you identify this workspace.</p>
-   */
-  workspaceDescription?: string;
-
-  /**
-   * <p>The name for the workspace. It does not have to be unique.</p>
-   */
-  workspaceName?: string;
-
-  /**
-   * <p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these
-   *          data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow
-   *          Amazon Managed Grafana to use these channels.</p>
-   */
-  workspaceNotificationDestinations?: (NotificationDestinationType | string)[];
-
-  /**
-   * <p>Specifies the organizational units that this workspace is allowed to use data sources
-   *          from, if this workspace is in an account that is part of an organization.</p>
-   */
-  workspaceOrganizationalUnits?: string[];
-
-  /**
-   * <p>The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the
-   *       workspace will view data from. If you already have a role that you want to use, specify it here. If you omit
-   *       this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or
-   *          <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is
-   *       automatically created.</p>
-   */
-  workspaceRoleArn?: string;
-
-  /**
-   * <p>Specifies whether this workspace uses SAML 2.0, Amazon Web Services Single Sign On, or both to authenticate
-   *          users for using the Grafana console within a workspace. For more information,
-   *          see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in
-   *             Amazon Managed Grafana</a>.</p>
-   */
-  authenticationProviders: (AuthenticationProviderTypes | string)[] | undefined;
-}
-
-export namespace CreateWorkspaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateWorkspaceRequest): any => ({
-    ...obj,
-    ...(obj.organizationRoleName && { organizationRoleName: SENSITIVE_STRING }),
-    ...(obj.workspaceDescription && { workspaceDescription: SENSITIVE_STRING }),
-    ...(obj.workspaceName && { workspaceName: SENSITIVE_STRING }),
-    ...(obj.workspaceOrganizationalUnits && { workspaceOrganizationalUnits: SENSITIVE_STRING }),
-    ...(obj.workspaceRoleArn && { workspaceRoleArn: SENSITIVE_STRING }),
-  });
-}
-
-export interface CreateWorkspaceResponse {
-  /**
-   * <p>A structure containing data about the workspace that was created.</p>
-   */
-  workspace: WorkspaceDescription | undefined;
-}
-
-export namespace CreateWorkspaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateWorkspaceResponse): any => ({
-    ...obj,
-    ...(obj.workspace && { workspace: WorkspaceDescription.filterSensitiveLog(obj.workspace) }),
-  });
+  workspaceId: string | undefined;
 }
 
 /**
- * <p>The request would cause a service quota to be exceeded.</p>
+ * @public
  */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
+export interface CreateWorkspaceServiceAccountResponse {
   /**
-   * <p>A description of the error.</p>
+   * <p>The ID of the service account.</p>
+   * @public
    */
-  message: string | undefined;
+  id: string | undefined;
 
   /**
-   * <p>The ID of the resource that is associated with the error.</p>
+   * <p>The name of the service account.</p>
+   * @public
    */
-  resourceId: string | undefined;
+  name: string | undefined;
 
   /**
-   * <p>The type of the resource that is associated with the error.</p>
+   * <p>The permission level given to the service account.</p>
+   * @public
    */
-  resourceType: string | undefined;
+  grafanaRole: Role | undefined;
 
   /**
-   * <p>The value of a parameter in the request caused an error.</p>
+   * <p>The workspace with which the service account is associated.</p>
+   * @public
    */
-  serviceCode: string | undefined;
-
-  /**
-   * <p>The ID of the service quota that was exceeded.</p>
-   */
-  quotaCode: string | undefined;
+  workspaceId: string | undefined;
 }
 
-export namespace ServiceQuotaExceededException {
+/**
+ * @public
+ */
+export interface DeleteWorkspaceServiceAccountRequest {
   /**
-   * @internal
+   * <p>The ID of the service account to delete.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace where the service account resides.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteWorkspaceServiceAccountResponse {
+  /**
+   * <p>The ID of the service account deleted.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace where the service account was deleted.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListWorkspaceServiceAccountsRequest {
+  /**
+   * <p>The maximum number of service accounts to include in the results.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next set of service accounts to return. (You receive this token from a previous <code>ListWorkspaceServiceAccounts</code> operation.)</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>The workspace for which to list service accounts.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * <p>A structure that contains the information about one service account.</p>
+ * @public
+ */
+export interface ServiceAccountSummary {
+  /**
+   * <p>The unique ID of the service account.</p>
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * <p>The name of the service account.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Returns true if the service account is disabled. Service accounts can be disabled and enabled in the Amazon Managed Grafana console.</p>
+   * @public
+   */
+  isDisabled: string | undefined;
+
+  /**
+   * <p>The role of the service account, which sets the permission level used when calling Grafana APIs.</p>
+   * @public
+   */
+  grafanaRole: Role | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListWorkspaceServiceAccountsResponse {
+  /**
+   * <p>The token to use when requesting the next set of service accounts.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>An array of structures containing information about the service accounts.</p>
+   * @public
+   */
+  serviceAccounts: ServiceAccountSummary[] | undefined;
+
+  /**
+   * <p>The workspace to which the service accounts are associated.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateWorkspaceServiceAccountTokenRequest {
+  /**
+   * <p>A name for the token to create.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Sets how long the token will be valid, in seconds. You can set the time up to 30 days in the future.</p>
+   * @public
+   */
+  secondsToLive: number | undefined;
+
+  /**
+   * <p>The ID of the service account for which to create a token.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace the service account resides within.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * <p>A structure that contains the information about a service account token.</p> <p>This structure is returned when creating the token. It is important to store the <code>key</code> that is returned, as it is not retrievable at a later time.</p> <p>If you lose the key, you can delete and recreate the token, which will create a new key.</p>
+ * @public
+ */
+export interface ServiceAccountTokenSummaryWithKey {
+  /**
+   * <p>The unique ID of the service account token.</p>
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * <p>The name of the service account token.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The key for the service account token. Used when making calls to the Grafana HTTP APIs to authenticate and authorize the requests.</p>
+   * @public
+   */
+  key: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateWorkspaceServiceAccountTokenResponse {
+  /**
+   * <p>Information about the created token, including the key. Be sure to store the key securely.</p>
+   * @public
+   */
+  serviceAccountToken: ServiceAccountTokenSummaryWithKey | undefined;
+
+  /**
+   * <p>The ID of the service account where the token was created.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace where the token was created.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteWorkspaceServiceAccountTokenRequest {
+  /**
+   * <p>The ID of the token to delete.</p>
+   * @public
+   */
+  tokenId: string | undefined;
+
+  /**
+   * <p>The ID of the service account from which to delete the token.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace from which to delete the token.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteWorkspaceServiceAccountTokenResponse {
+  /**
+   * <p>The ID of the token that was deleted.</p>
+   * @public
+   */
+  tokenId: string | undefined;
+
+  /**
+   * <p>The ID of the service account where the token was deleted.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace where the token was deleted.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListWorkspaceServiceAccountTokensRequest {
+  /**
+   * <p>The maximum number of tokens to include in the results.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next set of service accounts to return. (You receive this token from a previous <code>ListWorkspaceServiceAccountTokens</code> operation.)</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>The ID of the service account for which to return tokens.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace for which to return tokens.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * <p>A structure that contains the information about a service account token.</p>
+ * @public
+ */
+export interface ServiceAccountTokenSummary {
+  /**
+   * <p>The unique ID of the service account token.</p>
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * <p>The name of the service account token.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>When the service account token was created.</p>
+   * @public
+   */
+  createdAt: Date | undefined;
+
+  /**
+   * <p>When the service account token will expire.</p>
+   * @public
+   */
+  expiresAt: Date | undefined;
+
+  /**
+   * <p>The last time the token was used to authorize a Grafana HTTP API.</p>
+   * @public
+   */
+  lastUsedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListWorkspaceServiceAccountTokensResponse {
+  /**
+   * <p>The token to use when requesting the next set of service accounts.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>An array of structures containing information about the tokens.</p>
+   * @public
+   */
+  serviceAccountTokens: ServiceAccountTokenSummary[] | undefined;
+
+  /**
+   * <p>The ID of the service account where the tokens reside.</p>
+   * @public
+   */
+  serviceAccountId: string | undefined;
+
+  /**
+   * <p>The ID of the workspace where the tokens reside.</p>
+   * @public
+   */
+  workspaceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagResourceRequest {
+  /**
+   * <p>The ARN of the resource the tag is associated with.</p>
+   * @public
+   */
+  resourceArn: string | undefined;
+
+  /**
+   * <p>The list of tag keys and values to associate with the resource. You can associate tag keys only, tags (key and values) only or a combination of tag keys and tags.</p>
+   * @public
+   */
+  tags: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagResourceResponse {}
+
+/**
+ * @public
+ */
+export interface UntagResourceRequest {
+  /**
+   * <p>The ARN of the resource the tag association is removed from. </p>
+   * @public
+   */
+  resourceArn: string | undefined;
+
+  /**
+   * <p>The key values of the tag to be removed from the resource.</p>
+   * @public
+   */
+  tagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UntagResourceResponse {}
+
+/**
+ * @public
+ */
+export interface CreateWorkspaceRequest {
+  /**
+   * <p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>
+   * @public
+   */
+  accountAccessType: AccountAccessType | undefined;
+
+  /**
+   * <p>A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * <p>The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.</p>
+   * @public
+   */
+  organizationRoleName?: string | undefined;
+
+  /**
+   * <p>When creating a workspace through the Amazon Web Services API, CLI or Amazon Web Services CloudFormation, you must manage IAM roles and provision the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>You must also specify a <code>workspaceRoleArn</code> for a role that you will manage for the workspace to use when accessing those datasources and notification channels.</p> <p>The ability for Amazon Managed Grafana to create and update IAM roles on behalf of the user is supported only in the Amazon Managed Grafana console, where this value may be set to <code>SERVICE_MANAGED</code>.</p> <note> <p>Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a workspace with the API, CLI or Amazon Web Services CloudFormation. </p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html"> Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a>.</p>
+   * @public
+   */
+  permissionType: PermissionType | undefined;
+
+  /**
+   * <p>The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.</p>
+   * @public
+   */
+  stackSetName?: string | undefined;
+
+  /**
+   * <p>This parameter is for internal use only, and should not be used.</p>
+   * @public
+   */
+  workspaceDataSources?: DataSourceType[] | undefined;
+
+  /**
+   * <p>A description for the workspace. This is used only to help you identify this workspace.</p> <p>Pattern: <code>^[\\p\{L\}\\p\{Z\}\\p\{N\}\\p\{P\}]\{0,2048\}$</code> </p>
+   * @public
+   */
+  workspaceDescription?: string | undefined;
+
+  /**
+   * <p>The name for the workspace. It does not have to be unique.</p>
+   * @public
+   */
+  workspaceName?: string | undefined;
+
+  /**
+   * <p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.</p>
+   * @public
+   */
+  workspaceNotificationDestinations?: NotificationDestinationType[] | undefined;
+
+  /**
+   * <p>Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.</p>
+   * @public
+   */
+  workspaceOrganizationalUnits?: string[] | undefined;
+
+  /**
+   * <p>Specified the IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from, including both data sources and notification channels. You are responsible for managing the permissions for this role as new data sources or notification channels are added. </p>
+   * @public
+   */
+  workspaceRoleArn?: string | undefined;
+
+  /**
+   * <p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in Amazon Managed Grafana </a>.</p>
+   * @public
+   */
+  authenticationProviders: AuthenticationProviderTypes[] | undefined;
+
+  /**
+   * <p>The list of tags associated with the workspace.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) Region (ap-northeast-2).</p> </note>
+   * @public
+   */
+  vpcConfiguration?: VpcConfiguration | undefined;
+
+  /**
+   * <p>The configuration string for the workspace that you create. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.</p>
+   * @public
+   */
+  configuration?: __AutomaticJsonStringConversion | string | undefined;
+
+  /**
+   * <p>Configuration for network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>
+   * @public
+   */
+  networkAccessControl?: NetworkAccessConfiguration | undefined;
+
+  /**
+   * <p>Specifies the version of Grafana to support in the new workspace. If not specified, defaults to the latest version (for example, 10.4).</p> <p>To get a list of supported versions, use the <code>ListVersions</code> operation.</p>
+   * @public
+   */
+  grafanaVersion?: string | undefined;
+
+  /**
+   * <p>Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid values are <code>IPv4</code> and <code>DualStack</code>. For more information about IP address types, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html">Network access control</a>.</p>
+   * @public
+   */
+  ipAddressType?: IPAddressType | undefined;
+
+  /**
+   * <p>The ID or ARN of the Key Management Service key to use for encrypting workspace data.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateWorkspaceResponse {
+  /**
+   * <p>A structure containing data about the workspace that was created.</p>
+   * @public
+   */
+  workspace: WorkspaceDescription | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DeleteWorkspaceRequest {
   /**
    * <p>The ID of the workspace to delete.</p>
+   * @public
    */
   workspaceId: string | undefined;
 }
 
-export namespace DeleteWorkspaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteWorkspaceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteWorkspaceResponse {
   /**
    * <p>A structure containing information about the workspace that was deleted.</p>
+   * @public
    */
   workspace: WorkspaceDescription | undefined;
 }
 
-export namespace DeleteWorkspaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteWorkspaceResponse): any => ({
-    ...obj,
-    ...(obj.workspace && { workspace: WorkspaceDescription.filterSensitiveLog(obj.workspace) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeWorkspaceRequest {
   /**
    * <p>The ID of the workspace to display information about.</p>
+   * @public
    */
   workspaceId: string | undefined;
 }
 
-export namespace DescribeWorkspaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeWorkspaceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeWorkspaceResponse {
   /**
    * <p>A structure containing information about the workspace.</p>
+   * @public
    */
   workspace: WorkspaceDescription | undefined;
 }
 
-export namespace DescribeWorkspaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeWorkspaceResponse): any => ({
-    ...obj,
-    ...(obj.workspace && { workspace: WorkspaceDescription.filterSensitiveLog(obj.workspace) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListWorkspacesRequest {
   /**
    * <p>The maximum number of workspaces to include in the results.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
-   * <p>The token for the next set of workspaces to return. (You receive this token from a
-   *          previous <code>ListWorkspaces</code> operation.)</p>
+   * <p>The token for the next set of workspaces to return. (You receive this token from a previous <code>ListWorkspaces</code> operation.)</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListWorkspacesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListWorkspacesRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>A structure that contains some information about one workspace in the account.</p>
+ * @public
  */
 export interface WorkspaceSummary {
   /**
    * <p>The date that the workspace was created.</p>
+   * @public
    */
   created: Date | undefined;
 
   /**
    * <p>The customer-entered description of the workspace.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The URL endpoint to use to access the Grafana console in the workspace.</p>
+   * @public
    */
   endpoint: string | undefined;
 
   /**
    * <p>The Grafana version that the workspace is running.</p>
+   * @public
    */
   grafanaVersion: string | undefined;
 
   /**
    * <p>The unique ID of the workspace.</p>
+   * @public
    */
   id: string | undefined;
 
   /**
    * <p>The most recent date that the workspace was modified.</p>
+   * @public
    */
   modified: Date | undefined;
 
   /**
    * <p>The name of the workspace.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
-   * <p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically
-   *          create IAM roles and permissions for, which allows Amazon Managed Grafana to use
-   *          these channels.</p>
+   * <p>The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, which allows Amazon Managed Grafana to use these channels.</p>
+   * @public
    */
-  notificationDestinations?: (NotificationDestinationType | string)[];
+  notificationDestinations?: NotificationDestinationType[] | undefined;
 
   /**
    * <p>The current status of the workspace.</p>
+   * @public
    */
-  status: WorkspaceStatus | string | undefined;
+  status: WorkspaceStatus | undefined;
 
   /**
-   * <p>A structure containing information about the authentication methods used in
-   *          the workspace.</p>
+   * <p>A structure containing information about the authentication methods used in the workspace.</p>
+   * @public
    */
   authentication: AuthenticationSummary | undefined;
-}
 
-export namespace WorkspaceSummary {
   /**
-   * @internal
+   * <p>The list of tags associated with the workspace.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: WorkspaceSummary): any => ({
-    ...obj,
-    ...(obj.description && { description: SENSITIVE_STRING }),
-    ...(obj.name && { name: SENSITIVE_STRING }),
-  });
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Specifies whether this workspace has a full Grafana Enterprise license.</p> <note> <p> Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p> </note>
+   * @public
+   */
+  licenseType?: LicenseType | undefined;
+
+  /**
+   * <p>The token that ties this workspace to a Grafana Labs account. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise">Link your account with Grafana Labs</a>.</p>
+   * @public
+   */
+  grafanaToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListWorkspacesResponse {
   /**
    * <p>An array of structures that contain some information about the workspaces in the account.</p>
+   * @public
    */
   workspaces: WorkspaceSummary[] | undefined;
 
   /**
    * <p>The token to use when requesting the next set of workspaces.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListWorkspacesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListWorkspacesResponse): any => ({
-    ...obj,
-    ...(obj.workspaces && { workspaces: obj.workspaces.map((item) => WorkspaceSummary.filterSensitiveLog(item)) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateWorkspaceRequest {
   /**
-   * <p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in
-   *          other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must
-   *          specify which organizational units the workspace can access in the
-   *             <code>workspaceOrganizationalUnits</code> parameter.</p>
+   * <p>Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.</p>
+   * @public
    */
-  accountAccessType?: AccountAccessType | string;
+  accountAccessType?: AccountAccessType | undefined;
 
   /**
-   * <p>The name of an IAM role that already exists to use to access resources through Organizations.</p>
+   * <p>The name of an IAM role that already exists to use to access resources through Organizations. This can only be used with a workspace that has the <code>permissionType</code> set to <code>CUSTOMER_MANAGED</code>.</p>
+   * @public
    */
-  organizationRoleName?: string;
+  organizationRoleName?: string | undefined;
 
   /**
-   * <p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates
-   *          the IAM roles and provisions the permissions that the workspace needs to use
-   *             Amazon Web Services data sources and notification channels.</p>
-   *          <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and
-   *          permissions yourself. If you are creating this workspace in a member account of an
-   *          organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services
-   *          accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for
-   *          Amazon Web Services data sources and notification channels</a>
-   *          </p>
+   * <p>Use this parameter if you want to change a workspace from <code>SERVICE_MANAGED</code> to <code>CUSTOMER_MANAGED</code>. This allows you to manage the permissions that the workspace uses to access datasources and notification channels. If the workspace is in a member Amazon Web Services account of an organization, and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>If you specify this as <code>CUSTOMER_MANAGED</code>, you must also specify a <code>workspaceRoleArn</code> that the workspace will use for accessing Amazon Web Services resources.</p> <p>For more information on the role and permissions needed, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html"> Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p> <note> <p>Do not use this to convert a <code>CUSTOMER_MANAGED</code> workspace to <code>SERVICE_MANAGED</code>. Do not include this parameter if you want to leave the workspace as <code>SERVICE_MANAGED</code>.</p> <p>You can convert a <code>CUSTOMER_MANAGED</code> workspace to <code>SERVICE_MANAGED</code> using the Amazon Managed Grafana console. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html">Managing permissions for data sources and notification channels</a>.</p> </note>
+   * @public
    */
-  permissionType?: PermissionType | string;
+  permissionType?: PermissionType | undefined;
 
   /**
-   * <p>The name of the CloudFormation stack set to use to generate IAM roles
-   *          to be used for this workspace.</p>
+   * <p>The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.</p>
+   * @public
    */
-  stackSetName?: string;
+  stackSetName?: string | undefined;
 
   /**
-   * <p>Specify the Amazon Web Services data sources that you want to be queried in this
-   *          workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these
-   *          sources. You must still add them as data sources in the Grafana console in the
-   *          workspace.</p>
-   *          <p>If you don't specify a data source here, you can still add it as a data source later in
-   *          the workspace console. However, you will then have to manually configure permissions for
-   *          it.</p>
+   * <p>This parameter is for internal use only, and should not be used.</p>
+   * @public
    */
-  workspaceDataSources?: (DataSourceType | string)[];
+  workspaceDataSources?: DataSourceType[] | undefined;
 
   /**
    * <p>A description for the workspace. This is used only to help you identify this workspace.</p>
+   * @public
    */
-  workspaceDescription?: string;
+  workspaceDescription?: string | undefined;
 
   /**
    * <p>The ID of the workspace to update.</p>
+   * @public
    */
   workspaceId: string | undefined;
 
   /**
    * <p>A new name for the workspace to update.</p>
+   * @public
    */
-  workspaceName?: string;
+  workspaceName?: string | undefined;
 
   /**
-   * <p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these
-   *          data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow
-   *          Amazon Managed Grafana to use these channels.</p>
+   * <p>Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.</p>
+   * @public
    */
-  workspaceNotificationDestinations?: (NotificationDestinationType | string)[];
+  workspaceNotificationDestinations?: NotificationDestinationType[] | undefined;
 
   /**
-   * <p>Specifies the organizational units that this workspace is allowed to use data sources
-   *          from, if this workspace is in an account that is part of an organization.</p>
+   * <p>Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.</p>
+   * @public
    */
-  workspaceOrganizationalUnits?: string[];
+  workspaceOrganizationalUnits?: string[] | undefined;
 
   /**
-   * <p>The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the
-   *          workspace will view data from. If you already have a role that you want to use, specify it here. If you omit
-   *          this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or
-   *          <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is
-   *          automatically created.</p>
+   * <p>Specifies an IAM role that grants permissions to Amazon Web Services resources that the workspace accesses, such as data sources and notification channels. If this workspace has <code>permissionType</code> <code>CUSTOMER_MANAGED</code>, then this role is required.</p>
+   * @public
    */
-  workspaceRoleArn?: string;
+  workspaceRoleArn?: string | undefined;
+
+  /**
+   * <p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p>
+   * @public
+   */
+  vpcConfiguration?: VpcConfiguration | undefined;
+
+  /**
+   * <p>Whether to remove the VPC configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set will return an error.</p>
+   * @public
+   */
+  removeVpcConfiguration?: boolean | undefined;
+
+  /**
+   * <p>The configuration settings for network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>
+   * @public
+   */
+  networkAccessControl?: NetworkAccessConfiguration | undefined;
+
+  /**
+   * <p>Whether to remove the network access configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to set will return an error.</p> <p>If you remove this configuration by setting this to <code>true</code>, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>
+   * @public
+   */
+  removeNetworkAccessConfiguration?: boolean | undefined;
+
+  /**
+   * <p>Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid values are <code>IPv4</code> and <code>DualStack</code>. For more information about IP address types, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html">Network access control</a>.</p>
+   * @public
+   */
+  ipAddressType?: IPAddressType | undefined;
 }
 
-export namespace UpdateWorkspaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateWorkspaceRequest): any => ({
-    ...obj,
-    ...(obj.organizationRoleName && { organizationRoleName: SENSITIVE_STRING }),
-    ...(obj.workspaceDescription && { workspaceDescription: SENSITIVE_STRING }),
-    ...(obj.workspaceName && { workspaceName: SENSITIVE_STRING }),
-    ...(obj.workspaceOrganizationalUnits && { workspaceOrganizationalUnits: SENSITIVE_STRING }),
-    ...(obj.workspaceRoleArn && { workspaceRoleArn: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateWorkspaceResponse {
   /**
    * <p>A structure containing data about the workspace that was created.</p>
+   * @public
    */
   workspace: WorkspaceDescription | undefined;
-}
-
-export namespace UpdateWorkspaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateWorkspaceResponse): any => ({
-    ...obj,
-    ...(obj.workspace && { workspace: WorkspaceDescription.filterSensitiveLog(obj.workspace) }),
-  });
 }

@@ -1,34 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  KinesisAnalyticsV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../KinesisAnalyticsV2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AddApplicationReferenceDataSourceRequest,
   AddApplicationReferenceDataSourceResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1AddApplicationReferenceDataSourceCommand,
-  serializeAws_json1_1AddApplicationReferenceDataSourceCommand,
-} from "../protocols/Aws_json1_1";
+import { AddApplicationReferenceDataSource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddApplicationReferenceDataSourceCommand}.
+ */
 export interface AddApplicationReferenceDataSourceCommandInput extends AddApplicationReferenceDataSourceRequest {}
-export interface AddApplicationReferenceDataSourceCommandOutput
-  extends AddApplicationReferenceDataSourceResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AddApplicationReferenceDataSourceCommand}.
+ */
+export interface AddApplicationReferenceDataSourceCommandOutput extends AddApplicationReferenceDataSourceResponse, __MetadataBearer {}
 
 /**
  * <p>Adds a reference data source to an existing SQL-based Kinesis Data Analytics application.</p>
@@ -42,74 +37,128 @@ export interface AddApplicationReferenceDataSourceCommandOutput
  * ```javascript
  * import { KinesisAnalyticsV2Client, AddApplicationReferenceDataSourceCommand } from "@aws-sdk/client-kinesis-analytics-v2"; // ES Modules import
  * // const { KinesisAnalyticsV2Client, AddApplicationReferenceDataSourceCommand } = require("@aws-sdk/client-kinesis-analytics-v2"); // CommonJS import
+ * // import type { KinesisAnalyticsV2ClientConfig } from "@aws-sdk/client-kinesis-analytics-v2";
+ * const config = {}; // type is KinesisAnalyticsV2ClientConfig
  * const client = new KinesisAnalyticsV2Client(config);
+ * const input = { // AddApplicationReferenceDataSourceRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   CurrentApplicationVersionId: Number("long"), // required
+ *   ReferenceDataSource: { // ReferenceDataSource
+ *     TableName: "STRING_VALUE", // required
+ *     S3ReferenceDataSource: { // S3ReferenceDataSource
+ *       BucketARN: "STRING_VALUE",
+ *       FileKey: "STRING_VALUE",
+ *     },
+ *     ReferenceSchema: { // SourceSchema
+ *       RecordFormat: { // RecordFormat
+ *         RecordFormatType: "JSON" || "CSV", // required
+ *         MappingParameters: { // MappingParameters
+ *           JSONMappingParameters: { // JSONMappingParameters
+ *             RecordRowPath: "STRING_VALUE", // required
+ *           },
+ *           CSVMappingParameters: { // CSVMappingParameters
+ *             RecordRowDelimiter: "STRING_VALUE", // required
+ *             RecordColumnDelimiter: "STRING_VALUE", // required
+ *           },
+ *         },
+ *       },
+ *       RecordEncoding: "STRING_VALUE",
+ *       RecordColumns: [ // RecordColumns // required
+ *         { // RecordColumn
+ *           Name: "STRING_VALUE", // required
+ *           Mapping: "STRING_VALUE",
+ *           SqlType: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   },
+ * };
  * const command = new AddApplicationReferenceDataSourceCommand(input);
  * const response = await client.send(command);
+ * // { // AddApplicationReferenceDataSourceResponse
+ * //   ApplicationARN: "STRING_VALUE",
+ * //   ApplicationVersionId: Number("long"),
+ * //   ReferenceDataSourceDescriptions: [ // ReferenceDataSourceDescriptions
+ * //     { // ReferenceDataSourceDescription
+ * //       ReferenceId: "STRING_VALUE", // required
+ * //       TableName: "STRING_VALUE", // required
+ * //       S3ReferenceDataSourceDescription: { // S3ReferenceDataSourceDescription
+ * //         BucketARN: "STRING_VALUE", // required
+ * //         FileKey: "STRING_VALUE", // required
+ * //         ReferenceRoleARN: "STRING_VALUE",
+ * //       },
+ * //       ReferenceSchema: { // SourceSchema
+ * //         RecordFormat: { // RecordFormat
+ * //           RecordFormatType: "JSON" || "CSV", // required
+ * //           MappingParameters: { // MappingParameters
+ * //             JSONMappingParameters: { // JSONMappingParameters
+ * //               RecordRowPath: "STRING_VALUE", // required
+ * //             },
+ * //             CSVMappingParameters: { // CSVMappingParameters
+ * //               RecordRowDelimiter: "STRING_VALUE", // required
+ * //               RecordColumnDelimiter: "STRING_VALUE", // required
+ * //             },
+ * //           },
+ * //         },
+ * //         RecordEncoding: "STRING_VALUE",
+ * //         RecordColumns: [ // RecordColumns // required
+ * //           { // RecordColumn
+ * //             Name: "STRING_VALUE", // required
+ * //             Mapping: "STRING_VALUE",
+ * //             SqlType: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param AddApplicationReferenceDataSourceCommandInput - {@link AddApplicationReferenceDataSourceCommandInput}
+ * @returns {@link AddApplicationReferenceDataSourceCommandOutput}
  * @see {@link AddApplicationReferenceDataSourceCommandInput} for command's `input` shape.
  * @see {@link AddApplicationReferenceDataSourceCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsV2ClientResolvedConfig | config} for KinesisAnalyticsV2Client's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Exception thrown as a result of concurrent modifications to an application or snapshot. This error can
+ *       be the result of attempting to modify an application without using the current application
+ *       ID.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The specified input parameter value is not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request JSON is not valid for the operation.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The application or snapshot is not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified application, snapshot, or snapshot operation can't be found.</p>
+ *
+ * @throws {@link KinesisAnalyticsV2ServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalyticsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class AddApplicationReferenceDataSourceCommand extends $Command<
-  AddApplicationReferenceDataSourceCommandInput,
-  AddApplicationReferenceDataSourceCommandOutput,
-  KinesisAnalyticsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddApplicationReferenceDataSourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddApplicationReferenceDataSourceCommandInput, AddApplicationReferenceDataSourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsV2Client";
-    const commandName = "AddApplicationReferenceDataSourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddApplicationReferenceDataSourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddApplicationReferenceDataSourceResponse.filterSensitiveLog,
+export class AddApplicationReferenceDataSourceCommand extends command<AddApplicationReferenceDataSourceCommandInput, AddApplicationReferenceDataSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddApplicationReferenceDataSource",
+  AddApplicationReferenceDataSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddApplicationReferenceDataSourceRequest;
+      output: AddApplicationReferenceDataSourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AddApplicationReferenceDataSourceCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddApplicationReferenceDataSourceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AddApplicationReferenceDataSourceCommandOutput> {
-    return deserializeAws_json1_1AddApplicationReferenceDataSourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddApplicationReferenceDataSourceCommandInput;
+      output: AddApplicationReferenceDataSourceCommandOutput;
+    };
+  };
 }

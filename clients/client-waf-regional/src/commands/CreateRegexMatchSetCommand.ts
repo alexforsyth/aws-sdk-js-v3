@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateRegexMatchSetRequest, CreateRegexMatchSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateRegexMatchSetCommand,
-  serializeAws_json1_1CreateRegexMatchSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRegexMatchSetRequest, CreateRegexMatchSetResponse } from "../models/models_0";
+import { CreateRegexMatchSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRegexMatchSetCommand}.
+ */
 export interface CreateRegexMatchSetCommandInput extends CreateRegexMatchSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRegexMatchSetCommand}.
+ */
 export interface CreateRegexMatchSetCommandOutput extends CreateRegexMatchSetResponse, __MetadataBearer {}
 
 /**
@@ -59,68 +60,76 @@ export interface CreateRegexMatchSetCommandOutput extends CreateRegexMatchSetRes
  * ```javascript
  * import { WAFRegionalClient, CreateRegexMatchSetCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, CreateRegexMatchSetCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // CreateRegexMatchSetRequest
+ *   Name: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new CreateRegexMatchSetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRegexMatchSetResponse
+ * //   RegexMatchSet: { // RegexMatchSet
+ * //     RegexMatchSetId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     RegexMatchTuples: [ // RegexMatchTuples
+ * //       { // RegexMatchTuple
+ * //         FieldToMatch: { // FieldToMatch
+ * //           Type: "URI" || "QUERY_STRING" || "HEADER" || "METHOD" || "BODY" || "SINGLE_QUERY_ARG" || "ALL_QUERY_ARGS", // required
+ * //           Data: "STRING_VALUE",
+ * //         },
+ * //         TextTransformation: "NONE" || "COMPRESS_WHITE_SPACE" || "HTML_ENTITY_DECODE" || "LOWERCASE" || "CMD_LINE" || "URL_DECODE", // required
+ * //         RegexPatternSetId: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateRegexMatchSetCommandInput - {@link CreateRegexMatchSetCommandInput}
+ * @returns {@link CreateRegexMatchSetCommandOutput}
  * @see {@link CreateRegexMatchSetCommandInput} for command's `input` shape.
  * @see {@link CreateRegexMatchSetCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFDisallowedNameException} (client fault)
+ *  <p>The name specified is invalid.</p>
+ *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFLimitsExceededException} (client fault)
+ *  <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create
+ * 			for an AWS account. For more information, see
+ * 			<a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRegexMatchSetCommand extends $Command<
-  CreateRegexMatchSetCommandInput,
-  CreateRegexMatchSetCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRegexMatchSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRegexMatchSetCommandInput, CreateRegexMatchSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "CreateRegexMatchSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRegexMatchSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRegexMatchSetResponse.filterSensitiveLog,
+export class CreateRegexMatchSetCommand extends command<CreateRegexMatchSetCommandInput, CreateRegexMatchSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRegexMatchSet",
+  CreateRegexMatchSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRegexMatchSetRequest;
+      output: CreateRegexMatchSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRegexMatchSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateRegexMatchSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRegexMatchSetCommandOutput> {
-    return deserializeAws_json1_1CreateRegexMatchSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRegexMatchSetCommandInput;
+      output: CreateRegexMatchSetCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { DeleteGitHubAccountTokenInput, DeleteGitHubAccountTokenOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteGitHubAccountTokenCommand,
-  serializeAws_json1_1DeleteGitHubAccountTokenCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGitHubAccountTokenInput, DeleteGitHubAccountTokenOutput } from "../models/models_0";
+import { DeleteGitHubAccountToken$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGitHubAccountTokenCommand}.
+ */
 export interface DeleteGitHubAccountTokenCommandInput extends DeleteGitHubAccountTokenInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGitHubAccountTokenCommand}.
+ */
 export interface DeleteGitHubAccountTokenCommandOutput extends DeleteGitHubAccountTokenOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface DeleteGitHubAccountTokenCommandOutput extends DeleteGitHubAccou
  * ```javascript
  * import { CodeDeployClient, DeleteGitHubAccountTokenCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, DeleteGitHubAccountTokenCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // DeleteGitHubAccountTokenInput
+ *   tokenName: "STRING_VALUE",
+ * };
  * const command = new DeleteGitHubAccountTokenCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteGitHubAccountTokenOutput
+ * //   tokenName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteGitHubAccountTokenCommandInput - {@link DeleteGitHubAccountTokenCommandInput}
+ * @returns {@link DeleteGitHubAccountTokenCommandOutput}
  * @see {@link DeleteGitHubAccountTokenCommandInput} for command's `input` shape.
  * @see {@link DeleteGitHubAccountTokenCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link GitHubAccountTokenDoesNotExistException} (client fault)
+ *  <p>No GitHub account connection exists with the named specified in the call.</p>
+ *
+ * @throws {@link GitHubAccountTokenNameRequiredException} (client fault)
+ *  <p>The call is missing a required GitHub account connection name.</p>
+ *
+ * @throws {@link InvalidGitHubAccountTokenNameException} (client fault)
+ *  <p>The format of the specified GitHub account connection name is invalid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>The API used does not support the deployment.</p>
+ *
+ * @throws {@link ResourceValidationException} (client fault)
+ *  <p>The specified resource could not be validated.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteGitHubAccountTokenCommand extends $Command<
-  DeleteGitHubAccountTokenCommandInput,
-  DeleteGitHubAccountTokenCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteGitHubAccountTokenCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteGitHubAccountTokenCommandInput, DeleteGitHubAccountTokenCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "DeleteGitHubAccountTokenCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteGitHubAccountTokenInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteGitHubAccountTokenOutput.filterSensitiveLog,
+export class DeleteGitHubAccountTokenCommand extends command<DeleteGitHubAccountTokenCommandInput, DeleteGitHubAccountTokenCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGitHubAccountToken",
+  DeleteGitHubAccountToken$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGitHubAccountTokenInput;
+      output: DeleteGitHubAccountTokenOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteGitHubAccountTokenCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteGitHubAccountTokenCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteGitHubAccountTokenCommandOutput> {
-    return deserializeAws_json1_1DeleteGitHubAccountTokenCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteGitHubAccountTokenCommandInput;
+      output: DeleteGitHubAccountTokenCommandOutput;
+    };
+  };
 }

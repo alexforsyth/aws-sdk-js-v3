@@ -1,0 +1,2647 @@
+import {
+  A2aDescriptor$,
+  AccessDeniedException,
+  AccessDeniedException$,
+  Action$,
+  ActorTokenContentType,
+  AddDatasetExamples$,
+  AddDatasetExamplesCommand,
+  AddDatasetExamplesRequest$,
+  AddDatasetExamplesResponse$,
+  AgentCardDefinition$,
+  AgentManagedRuntimeType,
+  AgentRuntime$,
+  AgentRuntimeArtifact$,
+  AgentRuntimeEndpoint$,
+  AgentRuntimeEndpointStatus,
+  AgentRuntimeStatus,
+  AgentRuntimeVersionSummary$,
+  AgentSkillsDescriptor$,
+  AllowedPort$,
+  AllowedWorkloadConfiguration$,
+  ApiGatewayTargetConfiguration$,
+  ApiGatewayToolConfiguration$,
+  ApiGatewayToolFilter$,
+  ApiGatewayToolOverride$,
+  ApiKeyCredentialLocation,
+  ApiKeyCredentialProviderItem$,
+  ApiSchemaConfiguration$,
+  ApprovalConfiguration$,
+  AtlassianOauth2ProviderConfigInput$,
+  AtlassianOauth2ProviderConfigOutput$,
+  AuthorizationData$,
+  AuthorizerConfiguration$,
+  AuthorizerType,
+  AuthorizingClaimMatchValueType$,
+  BatchPutGatewayRateLimits$,
+  BatchPutGatewayRateLimitsCommand,
+  BatchPutGatewayRateLimitsRequest$,
+  BatchPutGatewayRateLimitsResponse$,
+  BatchPutLimitEntry$,
+  BedrockAgentCoreControl,
+  BedrockAgentCoreControlClient,
+  BedrockAgentCoreControlServiceException,
+  BedrockEvaluatorModelConfig$,
+  BrowserEnterprisePolicy$,
+  BrowserEnterprisePolicyType,
+  BrowserNetworkConfiguration$,
+  BrowserNetworkMode,
+  BrowserProfileStatus,
+  BrowserProfileSummary$,
+  BrowserSigningConfigInput$,
+  BrowserSigningConfigOutput$,
+  BrowserStatus,
+  BrowserSummary$,
+  BuildLifecycleHooks$,
+  CapacityProviderConfiguration$,
+  CapacityProviderStatus,
+  CapacityProviderStatusCode,
+  CapacityProviderSummary$,
+  CapacityProviderVolumeConfiguration$,
+  CapacityReservationPreference,
+  CapacityReservationSpecification$,
+  CapacityReservationTarget$,
+  CategoricalScaleDefinition$,
+  CedarPolicy$,
+  Certificate$,
+  CertificateConfiguration$,
+  CertificateLocation$,
+  CircuitBreakerConfiguration$,
+  CircuitBreakerMode,
+  ClaimMatchOperatorType,
+  ClaimMatchValueType$,
+  ClientAuthenticationMethodType,
+  CloudWatchLogsInputConfig$,
+  CloudWatchOutputConfig$,
+  ClusteringConfig$,
+  ClusteringFrequency,
+  Code$,
+  CodeBasedEvaluatorConfig$,
+  CodeConfiguration$,
+  CodeInterpreterNetworkConfiguration$,
+  CodeInterpreterNetworkMode,
+  CodeInterpreterStatus,
+  CodeInterpreterSummary$,
+  CoinbaseCdpConfigurationInput$,
+  CoinbaseCdpConfigurationOutput$,
+  CoinbaseCdpRotationTargets$,
+  CoinbaseCdpSecret,
+  ComponentConfiguration$,
+  ComputeConfiguration$,
+  ConcurrentModificationException,
+  ConcurrentModificationException$,
+  Condition$,
+  ConfigurationBundleAction$,
+  ConfigurationBundleReference$,
+  ConfigurationBundleStatus,
+  ConfigurationBundleSummary$,
+  ConfigurationBundleVersionSummary$,
+  ConflictException,
+  ConflictException$,
+  ConnectorConfiguration$,
+  ConnectorParameterOverride$,
+  ConnectorSource$,
+  ConnectorTargetConfiguration$,
+  ConsentPortalIdpConfig$,
+  ConsentPortalSource$,
+  ConsentPortalSourceType,
+  ConsentPortalStatus,
+  ConsentPortalSummary$,
+  ConsolidationConfiguration$,
+  ContainerConfiguration$,
+  Content$,
+  ContentConfiguration$,
+  ContentLevel,
+  ContentType,
+  CreateAgentRuntime$,
+  CreateAgentRuntimeCommand,
+  CreateAgentRuntimeEndpoint$,
+  CreateAgentRuntimeEndpointCommand,
+  CreateAgentRuntimeEndpointRequest$,
+  CreateAgentRuntimeEndpointResponse$,
+  CreateAgentRuntimeRequest$,
+  CreateAgentRuntimeResponse$,
+  CreateApiKeyCredentialProvider$,
+  CreateApiKeyCredentialProviderCommand,
+  CreateApiKeyCredentialProviderRequest$,
+  CreateApiKeyCredentialProviderResponse$,
+  CreateBrowser$,
+  CreateBrowserCommand,
+  CreateBrowserProfile$,
+  CreateBrowserProfileCommand,
+  CreateBrowserProfileRequest$,
+  CreateBrowserProfileResponse$,
+  CreateBrowserRequest$,
+  CreateBrowserResponse$,
+  CreateCapacityProvider$,
+  CreateCapacityProviderCommand,
+  CreateCapacityProviderInput$,
+  CreateCapacityProviderOutput$,
+  CreateCodeInterpreter$,
+  CreateCodeInterpreterCommand,
+  CreateCodeInterpreterRequest$,
+  CreateCodeInterpreterResponse$,
+  CreateConfigurationBundle$,
+  CreateConfigurationBundleCommand,
+  CreateConfigurationBundleRequest$,
+  CreateConfigurationBundleResponse$,
+  CreateConsentPortal$,
+  CreateConsentPortalCommand,
+  CreateConsentPortalRequest$,
+  CreateConsentPortalResponse$,
+  CreateDataset$,
+  CreateDatasetCommand,
+  CreateDatasetRequest$,
+  CreateDatasetResponse$,
+  CreateDatasetVersion$,
+  CreateDatasetVersionCommand,
+  CreateDatasetVersionRequest$,
+  CreateDatasetVersionResponse$,
+  CreateEvaluator$,
+  CreateEvaluatorCommand,
+  CreateEvaluatorRequest$,
+  CreateEvaluatorResponse$,
+  CreateGateway$,
+  CreateGatewayCommand,
+  CreateGatewayRateLimit$,
+  CreateGatewayRateLimitCommand,
+  CreateGatewayRateLimitRequest$,
+  CreateGatewayRateLimitResponse$,
+  CreateGatewayRequest$,
+  CreateGatewayResponse$,
+  CreateGatewayRule$,
+  CreateGatewayRuleCommand,
+  CreateGatewayRuleRequest$,
+  CreateGatewayRuleResponse$,
+  CreateGatewayTarget$,
+  CreateGatewayTargetCommand,
+  CreateGatewayTargetRequest$,
+  CreateGatewayTargetResponse$,
+  CreateHarness$,
+  CreateHarnessCommand,
+  CreateHarnessEndpoint$,
+  CreateHarnessEndpointCommand,
+  CreateHarnessEndpointRequest$,
+  CreateHarnessEndpointResponse$,
+  CreateHarnessRequest$,
+  CreateHarnessResponse$,
+  CreateMemory$,
+  CreateMemoryCommand,
+  CreateMemoryInput$,
+  CreateMemoryOutput$,
+  CreateOauth2CredentialProvider$,
+  CreateOauth2CredentialProviderCommand,
+  CreateOauth2CredentialProviderRequest$,
+  CreateOauth2CredentialProviderResponse$,
+  CreateOnlineEvaluationConfig$,
+  CreateOnlineEvaluationConfigCommand,
+  CreateOnlineEvaluationConfigRequest$,
+  CreateOnlineEvaluationConfigResponse$,
+  CreatePaymentConnector$,
+  CreatePaymentConnectorCommand,
+  CreatePaymentConnectorRequest$,
+  CreatePaymentConnectorResponse$,
+  CreatePaymentCredentialProvider$,
+  CreatePaymentCredentialProviderCommand,
+  CreatePaymentCredentialProviderRequest$,
+  CreatePaymentCredentialProviderResponse$,
+  CreatePaymentManager$,
+  CreatePaymentManagerCommand,
+  CreatePaymentManagerRequest$,
+  CreatePaymentManagerResponse$,
+  CreatePolicy$,
+  CreatePolicyCommand,
+  CreatePolicyEngine$,
+  CreatePolicyEngineCommand,
+  CreatePolicyEngineRequest$,
+  CreatePolicyEngineResponse$,
+  CreatePolicyRequest$,
+  CreatePolicyResponse$,
+  CreateRegistry$,
+  CreateRegistryCommand,
+  CreateRegistryRecord$,
+  CreateRegistryRecordCommand,
+  CreateRegistryRecordRequest$,
+  CreateRegistryRecordResponse$,
+  CreateRegistryRequest$,
+  CreateRegistryResponse$,
+  CreateWorkloadIdentity$,
+  CreateWorkloadIdentityCommand,
+  CreateWorkloadIdentityRequest$,
+  CreateWorkloadIdentityResponse$,
+  CredentialProvider$,
+  CredentialProviderConfiguration$,
+  CredentialProviderType,
+  CredentialProviderVendorType,
+  CredentialRotationConfig$,
+  CredentialsProviderConfiguration$,
+  CustomClaimValidationType$,
+  CustomConfigurationInput$,
+  CustomConsolidationConfiguration$,
+  CustomConsolidationConfigurationInput$,
+  CustomDescriptor$,
+  CustomExtractionConfiguration$,
+  CustomExtractionConfigurationInput$,
+  CustomJWTAuthorizerConfiguration$,
+  CustomMemoryStrategyInput$,
+  CustomOauth2ProviderConfigInput$,
+  CustomOauth2ProviderConfigOutput$,
+  CustomReflectionConfiguration$,
+  CustomReflectionConfigurationInput$,
+  CustomTransformConfiguration$,
+  DatasetSchemaType,
+  DatasetStatus,
+  DatasetSummary$,
+  DatasetVersionSummary$,
+  DataSourceConfig$,
+  DataSourceType$,
+  DecryptionFailure,
+  DecryptionFailure$,
+  DeleteAgentRuntime$,
+  DeleteAgentRuntimeCommand,
+  DeleteAgentRuntimeEndpoint$,
+  DeleteAgentRuntimeEndpointCommand,
+  DeleteAgentRuntimeEndpointRequest$,
+  DeleteAgentRuntimeEndpointResponse$,
+  DeleteAgentRuntimeRequest$,
+  DeleteAgentRuntimeResponse$,
+  DeleteApiKeyCredentialProvider$,
+  DeleteApiKeyCredentialProviderCommand,
+  DeleteApiKeyCredentialProviderRequest$,
+  DeleteApiKeyCredentialProviderResponse$,
+  DeleteBrowser$,
+  DeleteBrowserCommand,
+  DeleteBrowserProfile$,
+  DeleteBrowserProfileCommand,
+  DeleteBrowserProfileRequest$,
+  DeleteBrowserProfileResponse$,
+  DeleteBrowserRequest$,
+  DeleteBrowserResponse$,
+  DeleteCapacityProvider$,
+  DeleteCapacityProviderCommand,
+  DeleteCapacityProviderInput$,
+  DeleteCapacityProviderOutput$,
+  DeleteCodeInterpreter$,
+  DeleteCodeInterpreterCommand,
+  DeleteCodeInterpreterRequest$,
+  DeleteCodeInterpreterResponse$,
+  DeleteConfigurationBundle$,
+  DeleteConfigurationBundleCommand,
+  DeleteConfigurationBundleRequest$,
+  DeleteConfigurationBundleResponse$,
+  DeleteConsentPortal$,
+  DeleteConsentPortalCommand,
+  DeleteConsentPortalRequest$,
+  DeleteConsentPortalResponse$,
+  DeleteDataset$,
+  DeleteDatasetCommand,
+  DeleteDatasetExamples$,
+  DeleteDatasetExamplesCommand,
+  DeleteDatasetExamplesRequest$,
+  DeleteDatasetExamplesResponse$,
+  DeleteDatasetRequest$,
+  DeleteDatasetResponse$,
+  DeleteEvaluator$,
+  DeleteEvaluatorCommand,
+  DeleteEvaluatorRequest$,
+  DeleteEvaluatorResponse$,
+  DeleteGateway$,
+  DeleteGatewayCommand,
+  DeleteGatewayRateLimit$,
+  DeleteGatewayRateLimitCommand,
+  DeleteGatewayRateLimitRequest$,
+  DeleteGatewayRateLimitResponse$,
+  DeleteGatewayRequest$,
+  DeleteGatewayResponse$,
+  DeleteGatewayRule$,
+  DeleteGatewayRuleCommand,
+  DeleteGatewayRuleRequest$,
+  DeleteGatewayRuleResponse$,
+  DeleteGatewayTarget$,
+  DeleteGatewayTargetCommand,
+  DeleteGatewayTargetRequest$,
+  DeleteGatewayTargetResponse$,
+  DeleteHarness$,
+  DeleteHarnessCommand,
+  DeleteHarnessEndpoint$,
+  DeleteHarnessEndpointCommand,
+  DeleteHarnessEndpointRequest$,
+  DeleteHarnessEndpointResponse$,
+  DeleteHarnessRequest$,
+  DeleteHarnessResponse$,
+  DeleteMemory$,
+  DeleteMemoryCommand,
+  DeleteMemoryInput$,
+  DeleteMemoryOutput$,
+  DeleteMemoryStrategyInput$,
+  DeleteOauth2CredentialProvider$,
+  DeleteOauth2CredentialProviderCommand,
+  DeleteOauth2CredentialProviderRequest$,
+  DeleteOauth2CredentialProviderResponse$,
+  DeleteOnlineEvaluationConfig$,
+  DeleteOnlineEvaluationConfigCommand,
+  DeleteOnlineEvaluationConfigRequest$,
+  DeleteOnlineEvaluationConfigResponse$,
+  DeletePaymentConnector$,
+  DeletePaymentConnectorCommand,
+  DeletePaymentConnectorRequest$,
+  DeletePaymentConnectorResponse$,
+  DeletePaymentCredentialProvider$,
+  DeletePaymentCredentialProviderCommand,
+  DeletePaymentCredentialProviderRequest$,
+  DeletePaymentCredentialProviderResponse$,
+  DeletePaymentManager$,
+  DeletePaymentManagerCommand,
+  DeletePaymentManagerRequest$,
+  DeletePaymentManagerResponse$,
+  DeletePolicy$,
+  DeletePolicyCommand,
+  DeletePolicyEngine$,
+  DeletePolicyEngineCommand,
+  DeletePolicyEngineRequest$,
+  DeletePolicyEngineResponse$,
+  DeletePolicyRequest$,
+  DeletePolicyResponse$,
+  DeleteRegistry$,
+  DeleteRegistryCommand,
+  DeleteRegistryRecord$,
+  DeleteRegistryRecordCommand,
+  DeleteRegistryRecordRequest$,
+  DeleteRegistryRecordResponse$,
+  DeleteRegistryRequest$,
+  DeleteRegistryResponse$,
+  DeleteResourcePolicy$,
+  DeleteResourcePolicyCommand,
+  DeleteResourcePolicyRequest$,
+  DeleteResourcePolicyResponse$,
+  DeleteWorkloadIdentity$,
+  DeleteWorkloadIdentityCommand,
+  DeleteWorkloadIdentityRequest$,
+  DeleteWorkloadIdentityResponse$,
+  DerivedEvaluatorConfig$,
+  Descriptors$,
+  DescriptorType,
+  DimensionRatingScale$,
+  DomainOverride$,
+  DraftStatus,
+  EbsVolumeConfiguration$,
+  EbsVolumeType,
+  Ec2Configuration$,
+  EfsAccessPointConfiguration$,
+  EfsConfiguration$,
+  EncryptionFailure,
+  EncryptionFailure$,
+  EndpointIpAddressType,
+  EnforcementMode,
+  EphemeralBlockDeviceMapping$,
+  EphemeralEBSVolumeConfiguration$,
+  EpisodicConsolidationOverride$,
+  EpisodicExtractionOverride$,
+  EpisodicMemoryStrategyInput$,
+  EpisodicOverrideConfigurationInput$,
+  EpisodicOverrideConsolidationConfigurationInput$,
+  EpisodicOverrideExtractionConfigurationInput$,
+  EpisodicOverrideReflectionConfigurationInput$,
+  EpisodicReflectionConfiguration$,
+  EpisodicReflectionConfigurationInput$,
+  EpisodicReflectionOverride$,
+  EvaluationDimension$,
+  EvaluatorConfig$,
+  EvaluatorLevel,
+  EvaluatorModelConfig$,
+  EvaluatorReference$,
+  EvaluatorStatus,
+  EvaluatorSummary$,
+  EvaluatorType,
+  ExceptionLevel,
+  ExtractionConfig$,
+  ExtractionConfiguration$,
+  ExtractionType,
+  Fallback$,
+  FallbackError,
+  FallbackTarget$,
+  FallbackTriggers$,
+  FilesystemConfiguration$,
+  Filter$,
+  FilterOperator,
+  FilterValue$,
+  Finding$,
+  FindingType,
+  FromUrlSynchronizationConfiguration$,
+  GatewayApiKeyCredentialProvider$,
+  GatewayInterceptionPoint,
+  GatewayInterceptorConfiguration$,
+  GatewayPolicyEngineConfiguration$,
+  GatewayPolicyEngineMode,
+  GatewayProtocolConfiguration$,
+  GatewayProtocolType,
+  GatewayRateLimitDetail$,
+  GatewayRateLimitStatus,
+  GatewayRuleDetail$,
+  GatewayRuleStatus,
+  GatewayStatus,
+  GatewaySummary$,
+  GatewayTarget$,
+  GetAgentRuntime$,
+  GetAgentRuntimeCommand,
+  GetAgentRuntimeEndpoint$,
+  GetAgentRuntimeEndpointCommand,
+  GetAgentRuntimeEndpointRequest$,
+  GetAgentRuntimeEndpointResponse$,
+  GetAgentRuntimeRequest$,
+  GetAgentRuntimeResponse$,
+  GetApiKeyCredentialProvider$,
+  GetApiKeyCredentialProviderCommand,
+  GetApiKeyCredentialProviderRequest$,
+  GetApiKeyCredentialProviderResponse$,
+  GetBrowser$,
+  GetBrowserCommand,
+  GetBrowserProfile$,
+  GetBrowserProfileCommand,
+  GetBrowserProfileRequest$,
+  GetBrowserProfileResponse$,
+  GetBrowserRequest$,
+  GetBrowserResponse$,
+  GetCapacityProvider$,
+  GetCapacityProviderCommand,
+  GetCapacityProviderInput$,
+  GetCapacityProviderOutput$,
+  GetCodeInterpreter$,
+  GetCodeInterpreterCommand,
+  GetCodeInterpreterRequest$,
+  GetCodeInterpreterResponse$,
+  GetConfigurationBundle$,
+  GetConfigurationBundleCommand,
+  GetConfigurationBundleRequest$,
+  GetConfigurationBundleResponse$,
+  GetConfigurationBundleVersion$,
+  GetConfigurationBundleVersionCommand,
+  GetConfigurationBundleVersionRequest$,
+  GetConfigurationBundleVersionResponse$,
+  GetConsentPortal$,
+  GetConsentPortalCommand,
+  GetConsentPortalRequest$,
+  GetConsentPortalResponse$,
+  GetDataset$,
+  GetDatasetCommand,
+  GetDatasetRequest$,
+  GetDatasetResponse$,
+  GetEvaluator$,
+  GetEvaluatorCommand,
+  GetEvaluatorRequest$,
+  GetEvaluatorResponse$,
+  GetGateway$,
+  GetGatewayCommand,
+  GetGatewayRateLimit$,
+  GetGatewayRateLimitCommand,
+  GetGatewayRateLimitRequest$,
+  GetGatewayRateLimitResponse$,
+  GetGatewayRequest$,
+  GetGatewayResponse$,
+  GetGatewayRule$,
+  GetGatewayRuleCommand,
+  GetGatewayRuleRequest$,
+  GetGatewayRuleResponse$,
+  GetGatewayTarget$,
+  GetGatewayTargetCommand,
+  GetGatewayTargetRequest$,
+  GetGatewayTargetResponse$,
+  GetHarness$,
+  GetHarnessCommand,
+  GetHarnessEndpoint$,
+  GetHarnessEndpointCommand,
+  GetHarnessEndpointRequest$,
+  GetHarnessEndpointResponse$,
+  GetHarnessRequest$,
+  GetHarnessResponse$,
+  GetMemory$,
+  GetMemoryCommand,
+  GetMemoryInput$,
+  GetMemoryOutput$,
+  GetOauth2CredentialProvider$,
+  GetOauth2CredentialProviderCommand,
+  GetOauth2CredentialProviderRequest$,
+  GetOauth2CredentialProviderResponse$,
+  GetOnlineEvaluationConfig$,
+  GetOnlineEvaluationConfigCommand,
+  GetOnlineEvaluationConfigRequest$,
+  GetOnlineEvaluationConfigResponse$,
+  GetPaymentConnector$,
+  GetPaymentConnectorCommand,
+  GetPaymentConnectorRequest$,
+  GetPaymentConnectorResponse$,
+  GetPaymentCredentialProvider$,
+  GetPaymentCredentialProviderCommand,
+  GetPaymentCredentialProviderRequest$,
+  GetPaymentCredentialProviderResponse$,
+  GetPaymentManager$,
+  GetPaymentManagerCommand,
+  GetPaymentManagerRequest$,
+  GetPaymentManagerResponse$,
+  GetPolicy$,
+  GetPolicyCommand,
+  GetPolicyEngine$,
+  GetPolicyEngineCommand,
+  GetPolicyEngineRequest$,
+  GetPolicyEngineResponse$,
+  GetPolicyEngineSummary$,
+  GetPolicyEngineSummaryCommand,
+  GetPolicyEngineSummaryRequest$,
+  GetPolicyEngineSummaryResponse$,
+  GetPolicyGeneration$,
+  GetPolicyGenerationCommand,
+  GetPolicyGenerationRequest$,
+  GetPolicyGenerationResponse$,
+  GetPolicyGenerationSummary$,
+  GetPolicyGenerationSummaryCommand,
+  GetPolicyGenerationSummaryRequest$,
+  GetPolicyGenerationSummaryResponse$,
+  GetPolicyRequest$,
+  GetPolicyResponse$,
+  GetPolicySummary$,
+  GetPolicySummaryCommand,
+  GetPolicySummaryRequest$,
+  GetPolicySummaryResponse$,
+  GetRegistry$,
+  GetRegistryCommand,
+  GetRegistryRecord$,
+  GetRegistryRecordCommand,
+  GetRegistryRecordRequest$,
+  GetRegistryRecordResponse$,
+  GetRegistryRequest$,
+  GetRegistryResponse$,
+  GetResourcePolicy$,
+  GetResourcePolicyCommand,
+  GetResourcePolicyRequest$,
+  GetResourcePolicyResponse$,
+  GetTokenVault$,
+  GetTokenVaultCommand,
+  GetTokenVaultRequest$,
+  GetTokenVaultResponse$,
+  GetWorkloadIdentity$,
+  GetWorkloadIdentityCommand,
+  GetWorkloadIdentityRequest$,
+  GetWorkloadIdentityResponse$,
+  GithubOauth2ProviderConfigInput$,
+  GithubOauth2ProviderConfigOutput$,
+  GoogleOauth2ProviderConfigInput$,
+  GoogleOauth2ProviderConfigOutput$,
+  Harness$,
+  HarnessAfterInvocationHook$,
+  HarnessAfterToolCallHook$,
+  HarnessAgentCoreBrowserConfig$,
+  HarnessAgentCoreCodeInterpreterConfig$,
+  HarnessAgentCoreGatewayConfig$,
+  HarnessAgentCoreMemoryConfiguration$,
+  HarnessAgentCoreMemoryRetrievalConfig$,
+  HarnessAgentCoreRuntimeEnvironment$,
+  HarnessAgentCoreRuntimeEnvironmentRequest$,
+  HarnessBedrockApiFormat,
+  HarnessBedrockModelConfig$,
+  HarnessBeforeInvocationHook$,
+  HarnessBeforeToolCallHook$,
+  HarnessDisabledMemoryConfiguration$,
+  HarnessEndpoint$,
+  HarnessEndpointStatus,
+  HarnessEnvironmentArtifact$,
+  HarnessEnvironmentProvider$,
+  HarnessEnvironmentProviderRequest$,
+  HarnessGatewayOutboundAuth$,
+  HarnessGeminiModelConfig$,
+  HarnessHook$,
+  HarnessHookEventBridgeTarget$,
+  HarnessHookFailureMode,
+  HarnessHookLambdaTarget$,
+  HarnessHookSnsTarget$,
+  HarnessHookTarget$,
+  HarnessInlineFunctionConfig$,
+  HarnessLiteLlmModelConfig$,
+  HarnessManagedMemoryConfiguration$,
+  HarnessManagedMemoryStrategyType,
+  HarnessMemoryConfiguration$,
+  HarnessModelConfiguration$,
+  HarnessOpenAiApiFormat,
+  HarnessOpenAiModelConfig$,
+  HarnessRemoteMcpConfig$,
+  HarnessRemoteMcpOutboundAuth$,
+  HarnessSkill$,
+  HarnessSkillAwsSkillsSource$,
+  HarnessSkillGitAuth$,
+  HarnessSkillGitSource$,
+  HarnessSkillS3Source$,
+  HarnessSlidingWindowConfiguration$,
+  HarnessStatus,
+  HarnessSummarizationConfiguration$,
+  HarnessSummary$,
+  HarnessSystemContentBlock$,
+  HarnessTool$,
+  HarnessToolConfiguration$,
+  HarnessToolType,
+  HarnessTruncationConfiguration$,
+  HarnessTruncationStrategy,
+  HarnessTruncationStrategyConfiguration$,
+  HarnessVersionSummary$,
+  HostingEnvironment$,
+  HttpApiSchemaConfiguration$,
+  HttpConnectorSource$,
+  HttpConnectorTargetConfiguration$,
+  HttpPostLifecycleHookAction$,
+  HttpTargetConfiguration$,
+  IamCredentialProvider$,
+  IamPrincipal$,
+  InboundTokenClaimValueType,
+  IncludedData,
+  IncludedOauth2ProviderConfigInput$,
+  IncludedOauth2ProviderConfigOutput$,
+  IndexedKey$,
+  InferenceConfiguration$,
+  InferenceConnectorSource$,
+  InferenceConnectorTargetConfiguration$,
+  InferenceOperationConfiguration$,
+  InferenceProviderTargetConfiguration$,
+  InferenceTargetConfiguration$,
+  InlineExamplesSource$,
+  Insight$,
+  InstanceLifecycleConfiguration$,
+  InstanceRequirements$,
+  InterceptorConfiguration$,
+  InterceptorInputConfiguration$,
+  InterceptorPayloadExclusion,
+  InterceptorPayloadExclusionSelector$,
+  InterceptorPayloadFilter$,
+  InternalServerException,
+  InternalServerException$,
+  InvocationConfiguration$,
+  InvocationConfigurationInput$,
+  KeyType,
+  KinesisResource$,
+  KmsConfiguration$,
+  KmsKeySourceType$,
+  LambdaEvaluatorConfig$,
+  LambdaInterceptorConfiguration$,
+  LambdaTransformConfiguration$,
+  LaunchParameters$,
+  LaunchTemplateSource$,
+  LicenseSpecification$,
+  LifecycleConfiguration$,
+  LifecycleHook$,
+  LifecycleHookAction$,
+  LimitEntry$,
+  LinkedinOauth2ProviderConfigInput$,
+  LinkedinOauth2ProviderConfigOutput$,
+  ListAgentRuntimeEndpoints$,
+  ListAgentRuntimeEndpointsCommand,
+  ListAgentRuntimeEndpointsRequest$,
+  ListAgentRuntimeEndpointsResponse$,
+  ListAgentRuntimes$,
+  ListAgentRuntimesCommand,
+  ListAgentRuntimesRequest$,
+  ListAgentRuntimesResponse$,
+  ListAgentRuntimeVersions$,
+  ListAgentRuntimeVersionsByCapacityProvider$,
+  ListAgentRuntimeVersionsByCapacityProviderCommand,
+  ListAgentRuntimeVersionsByCapacityProviderInput$,
+  ListAgentRuntimeVersionsByCapacityProviderOutput$,
+  ListAgentRuntimeVersionsCommand,
+  ListAgentRuntimeVersionsRequest$,
+  ListAgentRuntimeVersionsResponse$,
+  ListApiKeyCredentialProviders$,
+  ListApiKeyCredentialProvidersCommand,
+  ListApiKeyCredentialProvidersRequest$,
+  ListApiKeyCredentialProvidersResponse$,
+  ListBrowserProfiles$,
+  ListBrowserProfilesCommand,
+  ListBrowserProfilesRequest$,
+  ListBrowserProfilesResponse$,
+  ListBrowsers$,
+  ListBrowsersCommand,
+  ListBrowsersRequest$,
+  ListBrowsersResponse$,
+  ListCapacityProviders$,
+  ListCapacityProvidersCommand,
+  ListCapacityProvidersInput$,
+  ListCapacityProvidersOutput$,
+  ListCodeInterpreters$,
+  ListCodeInterpretersCommand,
+  ListCodeInterpretersRequest$,
+  ListCodeInterpretersResponse$,
+  ListConfigurationBundles$,
+  ListConfigurationBundlesCommand,
+  ListConfigurationBundlesRequest$,
+  ListConfigurationBundlesResponse$,
+  ListConfigurationBundleVersions$,
+  ListConfigurationBundleVersionsCommand,
+  ListConfigurationBundleVersionsRequest$,
+  ListConfigurationBundleVersionsResponse$,
+  ListConsentPortals$,
+  ListConsentPortalsCommand,
+  ListConsentPortalsRequest$,
+  ListConsentPortalsResponse$,
+  ListDatasetExamples$,
+  ListDatasetExamplesCommand,
+  ListDatasetExamplesRequest$,
+  ListDatasetExamplesResponse$,
+  ListDatasets$,
+  ListDatasetsCommand,
+  ListDatasetsRequest$,
+  ListDatasetsResponse$,
+  ListDatasetVersions$,
+  ListDatasetVersionsCommand,
+  ListDatasetVersionsRequest$,
+  ListDatasetVersionsResponse$,
+  ListEvaluators$,
+  ListEvaluatorsCommand,
+  ListEvaluatorsRequest$,
+  ListEvaluatorsResponse$,
+  ListGatewayRateLimits$,
+  ListGatewayRateLimitsCommand,
+  ListGatewayRateLimitsRequest$,
+  ListGatewayRateLimitsResponse$,
+  ListGatewayRules$,
+  ListGatewayRulesCommand,
+  ListGatewayRulesRequest$,
+  ListGatewayRulesResponse$,
+  ListGateways$,
+  ListGatewaysCommand,
+  ListGatewaysRequest$,
+  ListGatewaysResponse$,
+  ListGatewayTargets$,
+  ListGatewayTargetsCommand,
+  ListGatewayTargetsRequest$,
+  ListGatewayTargetsResponse$,
+  ListHarnessEndpoints$,
+  ListHarnessEndpointsCommand,
+  ListHarnessEndpointsRequest$,
+  ListHarnessEndpointsResponse$,
+  ListHarnesses$,
+  ListHarnessesCommand,
+  ListHarnessesRequest$,
+  ListHarnessesResponse$,
+  ListHarnessVersions$,
+  ListHarnessVersionsCommand,
+  ListHarnessVersionsRequest$,
+  ListHarnessVersionsResponse$,
+  ListingMode,
+  ListMemories$,
+  ListMemoriesCommand,
+  ListMemoriesInput$,
+  ListMemoriesOutput$,
+  ListOauth2CredentialProviders$,
+  ListOauth2CredentialProvidersCommand,
+  ListOauth2CredentialProvidersRequest$,
+  ListOauth2CredentialProvidersResponse$,
+  ListOnlineEvaluationConfigs$,
+  ListOnlineEvaluationConfigsCommand,
+  ListOnlineEvaluationConfigsRequest$,
+  ListOnlineEvaluationConfigsResponse$,
+  ListPaymentConnectors$,
+  ListPaymentConnectorsCommand,
+  ListPaymentConnectorsRequest$,
+  ListPaymentConnectorsResponse$,
+  ListPaymentCredentialProviders$,
+  ListPaymentCredentialProvidersCommand,
+  ListPaymentCredentialProvidersRequest$,
+  ListPaymentCredentialProvidersResponse$,
+  ListPaymentManagers$,
+  ListPaymentManagersCommand,
+  ListPaymentManagersRequest$,
+  ListPaymentManagersResponse$,
+  ListPolicies$,
+  ListPoliciesCommand,
+  ListPoliciesRequest$,
+  ListPoliciesResponse$,
+  ListPolicyEngines$,
+  ListPolicyEnginesCommand,
+  ListPolicyEnginesRequest$,
+  ListPolicyEnginesResponse$,
+  ListPolicyEngineSummaries$,
+  ListPolicyEngineSummariesCommand,
+  ListPolicyEngineSummariesRequest$,
+  ListPolicyEngineSummariesResponse$,
+  ListPolicyGenerationAssets$,
+  ListPolicyGenerationAssetsCommand,
+  ListPolicyGenerationAssetsRequest$,
+  ListPolicyGenerationAssetsResponse$,
+  ListPolicyGenerations$,
+  ListPolicyGenerationsCommand,
+  ListPolicyGenerationsRequest$,
+  ListPolicyGenerationsResponse$,
+  ListPolicyGenerationSummaries$,
+  ListPolicyGenerationSummariesCommand,
+  ListPolicyGenerationSummariesRequest$,
+  ListPolicyGenerationSummariesResponse$,
+  ListPolicySummaries$,
+  ListPolicySummariesCommand,
+  ListPolicySummariesRequest$,
+  ListPolicySummariesResponse$,
+  ListRegistries$,
+  ListRegistriesCommand,
+  ListRegistriesRequest$,
+  ListRegistriesResponse$,
+  ListRegistryRecords$,
+  ListRegistryRecordsCommand,
+  ListRegistryRecordsRequest$,
+  ListRegistryRecordsResponse$,
+  ListTagsForResource$,
+  ListTagsForResourceCommand,
+  ListTagsForResourceRequest$,
+  ListTagsForResourceResponse$,
+  ListWorkloadIdentities$,
+  ListWorkloadIdentitiesCommand,
+  ListWorkloadIdentitiesRequest$,
+  ListWorkloadIdentitiesResponse$,
+  LlmAsAJudgeEvaluatorConfig$,
+  LlmExtractionConfig$,
+  ManagedResourceDetails$,
+  ManagedVpcResource$,
+  MatchModelEntry$,
+  MatchModels$,
+  MatchOperator,
+  MatchPaths$,
+  MatchPrincipalEntry$,
+  MatchPrincipals$,
+  McpDescriptor$,
+  MCPGatewayConfiguration$,
+  McpLambdaTargetConfiguration$,
+  McpServerTargetConfiguration$,
+  McpTargetConfiguration$,
+  McpToolSchemaConfiguration$,
+  Memory$,
+  MemoryRecordSchema$,
+  MemoryStatus,
+  MemoryStrategy$,
+  MemoryStrategyInput$,
+  MemoryStrategyStatus,
+  MemoryStrategyType,
+  MemorySummary$,
+  MemoryView,
+  MessageBasedTrigger$,
+  MessageBasedTriggerInput$,
+  MetadataConfiguration$,
+  MetadataSchemaEntry$,
+  MetadataValueType,
+  MicrosoftOauth2ProviderConfigInput$,
+  MicrosoftOauth2ProviderConfigOutput$,
+  ModelEntry$,
+  ModelMapping$,
+  ModifyConsolidationConfiguration$,
+  ModifyExtractionConfiguration$,
+  ModifyInvocationConfigurationInput$,
+  ModifyMemoryStrategies$,
+  ModifyMemoryStrategyInput$,
+  ModifyReflectionConfiguration$,
+  ModifySelfManagedConfiguration$,
+  ModifyStrategyConfiguration$,
+  Monitoring,
+  NamespaceKeyEntry$,
+  NamespaceKeyValidation$,
+  NetworkConfiguration$,
+  NetworkMode,
+  NumberValidation$,
+  NumericalScaleDefinition$,
+  OAuth2AuthorizationData$,
+  Oauth2AuthorizationServerMetadata$,
+  Oauth2CredentialProviderItem$,
+  Oauth2Discovery$,
+  Oauth2ProviderConfigInput$,
+  Oauth2ProviderConfigOutput$,
+  OAuthCredentialProvider$,
+  OAuthGrantType,
+  OnBehalfOfAuthenticationConfig$,
+  OnBehalfOfClientAuthenticationMethod,
+  OnBehalfOfTokenExchangeConfigType$,
+  OnBehalfOfTokenExchangeGrantTypeType,
+  OnlineEvaluationConfigStatus,
+  OnlineEvaluationConfigSummary$,
+  OnlineEvaluationExecutionStatus,
+  OpenResponsesEvaluatorModelConfig$,
+  OperatingSystem,
+  OutputConfig$,
+  OverrideType,
+  paginateListAgentRuntimeEndpoints,
+  paginateListAgentRuntimes,
+  paginateListAgentRuntimeVersions,
+  paginateListAgentRuntimeVersionsByCapacityProvider,
+  paginateListApiKeyCredentialProviders,
+  paginateListBrowserProfiles,
+  paginateListBrowsers,
+  paginateListCapacityProviders,
+  paginateListCodeInterpreters,
+  paginateListConfigurationBundles,
+  paginateListConfigurationBundleVersions,
+  paginateListConsentPortals,
+  paginateListDatasetExamples,
+  paginateListDatasets,
+  paginateListDatasetVersions,
+  paginateListEvaluators,
+  paginateListGatewayRateLimits,
+  paginateListGatewayRules,
+  paginateListGateways,
+  paginateListGatewayTargets,
+  paginateListHarnessEndpoints,
+  paginateListHarnesses,
+  paginateListHarnessVersions,
+  paginateListMemories,
+  paginateListOauth2CredentialProviders,
+  paginateListOnlineEvaluationConfigs,
+  paginateListPaymentConnectors,
+  paginateListPaymentCredentialProviders,
+  paginateListPaymentManagers,
+  paginateListPolicies,
+  paginateListPolicyEngines,
+  paginateListPolicyEngineSummaries,
+  paginateListPolicyGenerationAssets,
+  paginateListPolicyGenerations,
+  paginateListPolicyGenerationSummaries,
+  paginateListPolicySummaries,
+  paginateListRegistries,
+  paginateListRegistryRecords,
+  paginateListWorkloadIdentities,
+  PassthroughProtocolType,
+  PassthroughTargetConfiguration$,
+  PaymentConnectorProvisionMode,
+  PaymentConnectorStatus,
+  PaymentConnectorSummary$,
+  PaymentConnectorType,
+  PaymentCredentialProviderConfiguration$,
+  PaymentCredentialProviderItem$,
+  PaymentCredentialProviderVendorType,
+  PaymentManagerStatus,
+  PaymentManagerSummary$,
+  PaymentProviderConfigurationInput$,
+  PaymentProviderConfigurationOutput$,
+  PaymentsAuthorizerType,
+  Period,
+  PermissionsConfiguration$,
+  Policy$,
+  PolicyDefinition$,
+  PolicyEngine$,
+  PolicyEngineStatus,
+  PolicyEngineSummary$,
+  PolicyGeneration$,
+  PolicyGenerationAsset$,
+  PolicyGenerationDetails$,
+  PolicyGenerationStatus,
+  PolicyGenerationSummary$,
+  PolicyStatement$,
+  PolicyStatus,
+  PolicySummary$,
+  PolicyValidationMode,
+  PortRange$,
+  PrincipalMatchOperator,
+  PrivateEndpoint$,
+  PrivateEndpointOverride$,
+  PrivateKeyJwtConfig$,
+  PrivateKeySource$,
+  ProtocolConfiguration$,
+  Provider,
+  ProviderPrefix$,
+  PutResourcePolicy$,
+  PutResourcePolicyCommand,
+  PutResourcePolicyRequest$,
+  PutResourcePolicyResponse$,
+  RateConfig$,
+  RatingScale$,
+  ReasoningConfiguration$,
+  RecordExpiryAction,
+  RecordExpirySpecification$,
+  RecordingConfig$,
+  ReflectionConfiguration$,
+  RegistryAuthorizerType,
+  RegistryRecordCredentialProviderConfiguration$,
+  RegistryRecordCredentialProviderType,
+  RegistryRecordCredentialProviderUnion$,
+  RegistryRecordIamCredentialProvider$,
+  RegistryRecordOAuthCredentialProvider$,
+  RegistryRecordOAuthGrantType,
+  RegistryRecordStatus,
+  RegistryRecordSummary$,
+  RegistryStatus,
+  RegistrySummary$,
+  RequestHeaderConfiguration$,
+  ResetTokenVaultKeyMaterial$,
+  ResetTokenVaultKeyMaterialCommand,
+  ResetTokenVaultKeyMaterialRequest$,
+  ResetTokenVaultKeyMaterialResponse$,
+  Resource$,
+  ResourceConfiguration$,
+  ResourceLimitExceededException,
+  ResourceLimitExceededException$,
+  ResourceLocation$,
+  ResourceNotFoundException,
+  ResourceNotFoundException$,
+  ResourceType,
+  RestApiMethod,
+  ResultDestination,
+  RetryableConflictException,
+  RetryableConflictException$,
+  RootVolumeConfiguration$,
+  RotatePaymentConnectorCredentials$,
+  RotatePaymentConnectorCredentialsCommand,
+  RotatePaymentConnectorCredentialsRequest$,
+  RotatePaymentConnectorCredentialsResponse$,
+  RouteToTargetAction$,
+  Rule$,
+  RuntimeHooksConfiguration$,
+  RuntimeMetadataConfiguration$,
+  RuntimeTargetConfiguration$,
+  S3CertificateConfiguration$,
+  S3Configuration$,
+  S3FilesAccessPointConfiguration$,
+  S3FilesConfiguration$,
+  S3Location$,
+  S3Source$,
+  SalesforceOauth2ProviderConfigInput$,
+  SalesforceOauth2ProviderConfigOutput$,
+  SamplingConfig$,
+  SchemaDefinition$,
+  SchemaType,
+  SearchType,
+  Secret$,
+  SecretReference$,
+  SecretsManagerCertificateConfiguration$,
+  SecretsManagerLocation$,
+  SecretSourceType,
+  SelfManagedConfiguration$,
+  SelfManagedConfigurationInput$,
+  SelfManagedLatticeResource$,
+  SemanticConsolidationOverride$,
+  SemanticExtractionOverride$,
+  SemanticMemoryStrategyInput$,
+  SemanticOverrideConfigurationInput$,
+  SemanticOverrideConsolidationConfigurationInput$,
+  SemanticOverrideExtractionConfigurationInput$,
+  ServerDefinition$,
+  ServerProtocol,
+  ServiceException,
+  ServiceException$,
+  ServiceQuotaExceededException,
+  ServiceQuotaExceededException$,
+  SessionConfig$,
+  SessionConfiguration$,
+  SessionStorageConfiguration$,
+  SetTokenVaultCMK$,
+  SetTokenVaultCMKCommand,
+  SetTokenVaultCMKRequest$,
+  SetTokenVaultCMKResponse$,
+  SigningAlgorithm,
+  SkillDefinition$,
+  SkillMdDefinition$,
+  SlackOauth2ProviderConfigInput$,
+  SlackOauth2ProviderConfigOutput$,
+  StartPolicyGeneration$,
+  StartPolicyGenerationCommand,
+  StartPolicyGenerationRequest$,
+  StartPolicyGenerationResponse$,
+  StaticOverride$,
+  StaticQueryParameterConflictResolution,
+  StaticRoute$,
+  Status,
+  StickinessConfiguration$,
+  StrategyConfiguration$,
+  StreamDeliveryResource$,
+  StreamDeliveryResources$,
+  StreamingConfiguration$,
+  StringListValidation$,
+  StringValidation$,
+  StripePrivyConfigurationInput$,
+  StripePrivyConfigurationOutput$,
+  SubmitRegistryRecordForApproval$,
+  SubmitRegistryRecordForApprovalCommand,
+  SubmitRegistryRecordForApprovalRequest$,
+  SubmitRegistryRecordForApprovalResponse$,
+  SubscriptionRequiredException,
+  SubscriptionRequiredException$,
+  SummaryConsolidationOverride$,
+  SummaryMemoryStrategyInput$,
+  SummaryOverrideConfigurationInput$,
+  SummaryOverrideConsolidationConfigurationInput$,
+  SynchronizationConfiguration$,
+  SynchronizationType,
+  SynchronizeGatewayTargets$,
+  SynchronizeGatewayTargetsCommand,
+  SynchronizeGatewayTargetsRequest$,
+  SynchronizeGatewayTargetsResponse$,
+  SystemManagedBlock$,
+  TagResource$,
+  TagResourceCommand,
+  TagResourceRequest$,
+  TagResourceResponse$,
+  TargetConfiguration$,
+  TargetProtocolType,
+  TargetStatus,
+  TargetSummary$,
+  TargetTrafficSplitEntry$,
+  TargetType,
+  ThrottledException,
+  ThrottledException$,
+  ThrottlingException,
+  ThrottlingException$,
+  TimeBasedTrigger$,
+  TimeBasedTriggerInput$,
+  TokenBasedTrigger$,
+  TokenBasedTriggerInput$,
+  TokenExchangeGrantTypeConfigType$,
+  ToolDefinition$,
+  ToolSchema$,
+  ToolsDefinition$,
+  ToolsFileSystemConfiguration$,
+  TrafficSplitEntry$,
+  TriggerCondition$,
+  TriggerConditionInput$,
+  UnauthorizedException,
+  UnauthorizedException$,
+  UntagResource$,
+  UntagResourceCommand,
+  UntagResourceRequest$,
+  UntagResourceResponse$,
+  UpdateAgentRuntime$,
+  UpdateAgentRuntimeCommand,
+  UpdateAgentRuntimeEndpoint$,
+  UpdateAgentRuntimeEndpointCommand,
+  UpdateAgentRuntimeEndpointRequest$,
+  UpdateAgentRuntimeEndpointResponse$,
+  UpdateAgentRuntimeRequest$,
+  UpdateAgentRuntimeResponse$,
+  UpdateApiKeyCredentialProvider$,
+  UpdateApiKeyCredentialProviderCommand,
+  UpdateApiKeyCredentialProviderRequest$,
+  UpdateApiKeyCredentialProviderResponse$,
+  UpdateCapacityProvider$,
+  UpdateCapacityProviderCommand,
+  UpdateCapacityProviderInput$,
+  UpdateCapacityProviderOutput$,
+  UpdateConfigurationBundle$,
+  UpdateConfigurationBundleCommand,
+  UpdateConfigurationBundleRequest$,
+  UpdateConfigurationBundleResponse$,
+  UpdateConsentPortal$,
+  UpdateConsentPortalCommand,
+  UpdateConsentPortalRequest$,
+  UpdateConsentPortalResponse$,
+  UpdatedA2aDescriptor$,
+  UpdatedAgentSkillsDescriptor$,
+  UpdatedAgentSkillsDescriptorFields$,
+  UpdatedApprovalConfiguration$,
+  UpdateDataset$,
+  UpdateDatasetCommand,
+  UpdateDatasetExamples$,
+  UpdateDatasetExamplesCommand,
+  UpdateDatasetExamplesRequest$,
+  UpdateDatasetExamplesResponse$,
+  UpdateDatasetRequest$,
+  UpdateDatasetResponse$,
+  UpdatedAuthorizerConfiguration$,
+  UpdatedCustomDescriptor$,
+  UpdatedDescription$,
+  UpdatedDescriptors$,
+  UpdatedDescriptorsUnion$,
+  UpdatedHarnessEnvironmentArtifact$,
+  UpdatedHarnessMemoryConfiguration$,
+  UpdatedMcpDescriptor$,
+  UpdatedMcpDescriptorFields$,
+  UpdatedServerDefinition$,
+  UpdatedSkillDefinition$,
+  UpdatedSkillMdDefinition$,
+  UpdatedSynchronizationConfiguration$,
+  UpdatedSynchronizationType$,
+  UpdatedToolsDefinition$,
+  UpdateEvaluator$,
+  UpdateEvaluatorCommand,
+  UpdateEvaluatorRequest$,
+  UpdateEvaluatorResponse$,
+  UpdateGateway$,
+  UpdateGatewayCommand,
+  UpdateGatewayRateLimit$,
+  UpdateGatewayRateLimitCommand,
+  UpdateGatewayRateLimitRequest$,
+  UpdateGatewayRateLimitResponse$,
+  UpdateGatewayRequest$,
+  UpdateGatewayResponse$,
+  UpdateGatewayRule$,
+  UpdateGatewayRuleCommand,
+  UpdateGatewayRuleRequest$,
+  UpdateGatewayRuleResponse$,
+  UpdateGatewayTarget$,
+  UpdateGatewayTargetCommand,
+  UpdateGatewayTargetRequest$,
+  UpdateGatewayTargetResponse$,
+  UpdateHarness$,
+  UpdateHarnessCommand,
+  UpdateHarnessEndpoint$,
+  UpdateHarnessEndpointCommand,
+  UpdateHarnessEndpointRequest$,
+  UpdateHarnessEndpointResponse$,
+  UpdateHarnessRequest$,
+  UpdateHarnessResponse$,
+  UpdateMemory$,
+  UpdateMemoryCommand,
+  UpdateMemoryInput$,
+  UpdateMemoryOutput$,
+  UpdateOauth2CredentialProvider$,
+  UpdateOauth2CredentialProviderCommand,
+  UpdateOauth2CredentialProviderRequest$,
+  UpdateOauth2CredentialProviderResponse$,
+  UpdateOnlineEvaluationConfig$,
+  UpdateOnlineEvaluationConfigCommand,
+  UpdateOnlineEvaluationConfigRequest$,
+  UpdateOnlineEvaluationConfigResponse$,
+  UpdatePaymentConnector$,
+  UpdatePaymentConnectorCommand,
+  UpdatePaymentConnectorRequest$,
+  UpdatePaymentConnectorResponse$,
+  UpdatePaymentCredentialProvider$,
+  UpdatePaymentCredentialProviderCommand,
+  UpdatePaymentCredentialProviderRequest$,
+  UpdatePaymentCredentialProviderResponse$,
+  UpdatePaymentManager$,
+  UpdatePaymentManagerCommand,
+  UpdatePaymentManagerRequest$,
+  UpdatePaymentManagerResponse$,
+  UpdatePolicy$,
+  UpdatePolicyCommand,
+  UpdatePolicyEngine$,
+  UpdatePolicyEngineCommand,
+  UpdatePolicyEngineRequest$,
+  UpdatePolicyEngineResponse$,
+  UpdatePolicyRequest$,
+  UpdatePolicyResponse$,
+  UpdateRegistry$,
+  UpdateRegistryCommand,
+  UpdateRegistryRecord$,
+  UpdateRegistryRecordCommand,
+  UpdateRegistryRecordRequest$,
+  UpdateRegistryRecordResponse$,
+  UpdateRegistryRecordStatus$,
+  UpdateRegistryRecordStatusCommand,
+  UpdateRegistryRecordStatusRequest$,
+  UpdateRegistryRecordStatusResponse$,
+  UpdateRegistryRequest$,
+  UpdateRegistryResponse$,
+  UpdateWorkloadIdentity$,
+  UpdateWorkloadIdentityCommand,
+  UpdateWorkloadIdentityRequest$,
+  UpdateWorkloadIdentityResponse$,
+  UserPreferenceConsolidationOverride$,
+  UserPreferenceExtractionOverride$,
+  UserPreferenceMemoryStrategyInput$,
+  UserPreferenceOverrideConfigurationInput$,
+  UserPreferenceOverrideConsolidationConfigurationInput$,
+  UserPreferenceOverrideExtractionConfigurationInput$,
+  Validation$,
+  ValidationException,
+  ValidationException$,
+  ValidationExceptionField$,
+  ValidationExceptionReason,
+  VersionCreatedBySource$,
+  VersionFilter$,
+  VersionLineageMetadata$,
+  VolumeConfiguration$,
+  VpcConfig$,
+  VpcConfiguration$,
+  WafConfiguration$,
+  WafFailureMode,
+  waitForMemoryCreated,
+  waitForPolicyActive,
+  waitForPolicyDeleted,
+  waitForPolicyEngineActive,
+  waitForPolicyEngineDeleted,
+  waitForPolicyGenerationCompleted,
+  waitUntilMemoryCreated,
+  waitUntilPolicyActive,
+  waitUntilPolicyDeleted,
+  waitUntilPolicyEngineActive,
+  waitUntilPolicyEngineDeleted,
+  waitUntilPolicyGenerationCompleted,
+  WeightedOverride$,
+  WeightedRoute$,
+  WorkloadIdentityDetails$,
+  WorkloadIdentityType$,
+} from "../dist-cjs/index.js";
+import assert from "node:assert";
+// clients
+assert(typeof BedrockAgentCoreControlClient === "function");
+assert(typeof BedrockAgentCoreControl === "function");
+// commands
+assert(typeof AddDatasetExamplesCommand === "function");
+assert(typeof AddDatasetExamples$ === "object");
+assert(typeof BatchPutGatewayRateLimitsCommand === "function");
+assert(typeof BatchPutGatewayRateLimits$ === "object");
+assert(typeof CreateAgentRuntimeCommand === "function");
+assert(typeof CreateAgentRuntime$ === "object");
+assert(typeof CreateAgentRuntimeEndpointCommand === "function");
+assert(typeof CreateAgentRuntimeEndpoint$ === "object");
+assert(typeof CreateApiKeyCredentialProviderCommand === "function");
+assert(typeof CreateApiKeyCredentialProvider$ === "object");
+assert(typeof CreateBrowserCommand === "function");
+assert(typeof CreateBrowser$ === "object");
+assert(typeof CreateBrowserProfileCommand === "function");
+assert(typeof CreateBrowserProfile$ === "object");
+assert(typeof CreateCapacityProviderCommand === "function");
+assert(typeof CreateCapacityProvider$ === "object");
+assert(typeof CreateCodeInterpreterCommand === "function");
+assert(typeof CreateCodeInterpreter$ === "object");
+assert(typeof CreateConfigurationBundleCommand === "function");
+assert(typeof CreateConfigurationBundle$ === "object");
+assert(typeof CreateConsentPortalCommand === "function");
+assert(typeof CreateConsentPortal$ === "object");
+assert(typeof CreateDatasetCommand === "function");
+assert(typeof CreateDataset$ === "object");
+assert(typeof CreateDatasetVersionCommand === "function");
+assert(typeof CreateDatasetVersion$ === "object");
+assert(typeof CreateEvaluatorCommand === "function");
+assert(typeof CreateEvaluator$ === "object");
+assert(typeof CreateGatewayCommand === "function");
+assert(typeof CreateGateway$ === "object");
+assert(typeof CreateGatewayRateLimitCommand === "function");
+assert(typeof CreateGatewayRateLimit$ === "object");
+assert(typeof CreateGatewayRuleCommand === "function");
+assert(typeof CreateGatewayRule$ === "object");
+assert(typeof CreateGatewayTargetCommand === "function");
+assert(typeof CreateGatewayTarget$ === "object");
+assert(typeof CreateHarnessCommand === "function");
+assert(typeof CreateHarness$ === "object");
+assert(typeof CreateHarnessEndpointCommand === "function");
+assert(typeof CreateHarnessEndpoint$ === "object");
+assert(typeof CreateMemoryCommand === "function");
+assert(typeof CreateMemory$ === "object");
+assert(typeof CreateOauth2CredentialProviderCommand === "function");
+assert(typeof CreateOauth2CredentialProvider$ === "object");
+assert(typeof CreateOnlineEvaluationConfigCommand === "function");
+assert(typeof CreateOnlineEvaluationConfig$ === "object");
+assert(typeof CreatePaymentConnectorCommand === "function");
+assert(typeof CreatePaymentConnector$ === "object");
+assert(typeof CreatePaymentCredentialProviderCommand === "function");
+assert(typeof CreatePaymentCredentialProvider$ === "object");
+assert(typeof CreatePaymentManagerCommand === "function");
+assert(typeof CreatePaymentManager$ === "object");
+assert(typeof CreatePolicyCommand === "function");
+assert(typeof CreatePolicy$ === "object");
+assert(typeof CreatePolicyEngineCommand === "function");
+assert(typeof CreatePolicyEngine$ === "object");
+assert(typeof CreateRegistryCommand === "function");
+assert(typeof CreateRegistry$ === "object");
+assert(typeof CreateRegistryRecordCommand === "function");
+assert(typeof CreateRegistryRecord$ === "object");
+assert(typeof CreateWorkloadIdentityCommand === "function");
+assert(typeof CreateWorkloadIdentity$ === "object");
+assert(typeof DeleteAgentRuntimeCommand === "function");
+assert(typeof DeleteAgentRuntime$ === "object");
+assert(typeof DeleteAgentRuntimeEndpointCommand === "function");
+assert(typeof DeleteAgentRuntimeEndpoint$ === "object");
+assert(typeof DeleteApiKeyCredentialProviderCommand === "function");
+assert(typeof DeleteApiKeyCredentialProvider$ === "object");
+assert(typeof DeleteBrowserCommand === "function");
+assert(typeof DeleteBrowser$ === "object");
+assert(typeof DeleteBrowserProfileCommand === "function");
+assert(typeof DeleteBrowserProfile$ === "object");
+assert(typeof DeleteCapacityProviderCommand === "function");
+assert(typeof DeleteCapacityProvider$ === "object");
+assert(typeof DeleteCodeInterpreterCommand === "function");
+assert(typeof DeleteCodeInterpreter$ === "object");
+assert(typeof DeleteConfigurationBundleCommand === "function");
+assert(typeof DeleteConfigurationBundle$ === "object");
+assert(typeof DeleteConsentPortalCommand === "function");
+assert(typeof DeleteConsentPortal$ === "object");
+assert(typeof DeleteDatasetCommand === "function");
+assert(typeof DeleteDataset$ === "object");
+assert(typeof DeleteDatasetExamplesCommand === "function");
+assert(typeof DeleteDatasetExamples$ === "object");
+assert(typeof DeleteEvaluatorCommand === "function");
+assert(typeof DeleteEvaluator$ === "object");
+assert(typeof DeleteGatewayCommand === "function");
+assert(typeof DeleteGateway$ === "object");
+assert(typeof DeleteGatewayRateLimitCommand === "function");
+assert(typeof DeleteGatewayRateLimit$ === "object");
+assert(typeof DeleteGatewayRuleCommand === "function");
+assert(typeof DeleteGatewayRule$ === "object");
+assert(typeof DeleteGatewayTargetCommand === "function");
+assert(typeof DeleteGatewayTarget$ === "object");
+assert(typeof DeleteHarnessCommand === "function");
+assert(typeof DeleteHarness$ === "object");
+assert(typeof DeleteHarnessEndpointCommand === "function");
+assert(typeof DeleteHarnessEndpoint$ === "object");
+assert(typeof DeleteMemoryCommand === "function");
+assert(typeof DeleteMemory$ === "object");
+assert(typeof DeleteOauth2CredentialProviderCommand === "function");
+assert(typeof DeleteOauth2CredentialProvider$ === "object");
+assert(typeof DeleteOnlineEvaluationConfigCommand === "function");
+assert(typeof DeleteOnlineEvaluationConfig$ === "object");
+assert(typeof DeletePaymentConnectorCommand === "function");
+assert(typeof DeletePaymentConnector$ === "object");
+assert(typeof DeletePaymentCredentialProviderCommand === "function");
+assert(typeof DeletePaymentCredentialProvider$ === "object");
+assert(typeof DeletePaymentManagerCommand === "function");
+assert(typeof DeletePaymentManager$ === "object");
+assert(typeof DeletePolicyCommand === "function");
+assert(typeof DeletePolicy$ === "object");
+assert(typeof DeletePolicyEngineCommand === "function");
+assert(typeof DeletePolicyEngine$ === "object");
+assert(typeof DeleteRegistryCommand === "function");
+assert(typeof DeleteRegistry$ === "object");
+assert(typeof DeleteRegistryRecordCommand === "function");
+assert(typeof DeleteRegistryRecord$ === "object");
+assert(typeof DeleteResourcePolicyCommand === "function");
+assert(typeof DeleteResourcePolicy$ === "object");
+assert(typeof DeleteWorkloadIdentityCommand === "function");
+assert(typeof DeleteWorkloadIdentity$ === "object");
+assert(typeof GetAgentRuntimeCommand === "function");
+assert(typeof GetAgentRuntime$ === "object");
+assert(typeof GetAgentRuntimeEndpointCommand === "function");
+assert(typeof GetAgentRuntimeEndpoint$ === "object");
+assert(typeof GetApiKeyCredentialProviderCommand === "function");
+assert(typeof GetApiKeyCredentialProvider$ === "object");
+assert(typeof GetBrowserCommand === "function");
+assert(typeof GetBrowser$ === "object");
+assert(typeof GetBrowserProfileCommand === "function");
+assert(typeof GetBrowserProfile$ === "object");
+assert(typeof GetCapacityProviderCommand === "function");
+assert(typeof GetCapacityProvider$ === "object");
+assert(typeof GetCodeInterpreterCommand === "function");
+assert(typeof GetCodeInterpreter$ === "object");
+assert(typeof GetConfigurationBundleCommand === "function");
+assert(typeof GetConfigurationBundle$ === "object");
+assert(typeof GetConfigurationBundleVersionCommand === "function");
+assert(typeof GetConfigurationBundleVersion$ === "object");
+assert(typeof GetConsentPortalCommand === "function");
+assert(typeof GetConsentPortal$ === "object");
+assert(typeof GetDatasetCommand === "function");
+assert(typeof GetDataset$ === "object");
+assert(typeof GetEvaluatorCommand === "function");
+assert(typeof GetEvaluator$ === "object");
+assert(typeof GetGatewayCommand === "function");
+assert(typeof GetGateway$ === "object");
+assert(typeof GetGatewayRateLimitCommand === "function");
+assert(typeof GetGatewayRateLimit$ === "object");
+assert(typeof GetGatewayRuleCommand === "function");
+assert(typeof GetGatewayRule$ === "object");
+assert(typeof GetGatewayTargetCommand === "function");
+assert(typeof GetGatewayTarget$ === "object");
+assert(typeof GetHarnessCommand === "function");
+assert(typeof GetHarness$ === "object");
+assert(typeof GetHarnessEndpointCommand === "function");
+assert(typeof GetHarnessEndpoint$ === "object");
+assert(typeof GetMemoryCommand === "function");
+assert(typeof GetMemory$ === "object");
+assert(typeof GetOauth2CredentialProviderCommand === "function");
+assert(typeof GetOauth2CredentialProvider$ === "object");
+assert(typeof GetOnlineEvaluationConfigCommand === "function");
+assert(typeof GetOnlineEvaluationConfig$ === "object");
+assert(typeof GetPaymentConnectorCommand === "function");
+assert(typeof GetPaymentConnector$ === "object");
+assert(typeof GetPaymentCredentialProviderCommand === "function");
+assert(typeof GetPaymentCredentialProvider$ === "object");
+assert(typeof GetPaymentManagerCommand === "function");
+assert(typeof GetPaymentManager$ === "object");
+assert(typeof GetPolicyCommand === "function");
+assert(typeof GetPolicy$ === "object");
+assert(typeof GetPolicyEngineCommand === "function");
+assert(typeof GetPolicyEngine$ === "object");
+assert(typeof GetPolicyEngineSummaryCommand === "function");
+assert(typeof GetPolicyEngineSummary$ === "object");
+assert(typeof GetPolicyGenerationCommand === "function");
+assert(typeof GetPolicyGeneration$ === "object");
+assert(typeof GetPolicyGenerationSummaryCommand === "function");
+assert(typeof GetPolicyGenerationSummary$ === "object");
+assert(typeof GetPolicySummaryCommand === "function");
+assert(typeof GetPolicySummary$ === "object");
+assert(typeof GetRegistryCommand === "function");
+assert(typeof GetRegistry$ === "object");
+assert(typeof GetRegistryRecordCommand === "function");
+assert(typeof GetRegistryRecord$ === "object");
+assert(typeof GetResourcePolicyCommand === "function");
+assert(typeof GetResourcePolicy$ === "object");
+assert(typeof GetTokenVaultCommand === "function");
+assert(typeof GetTokenVault$ === "object");
+assert(typeof GetWorkloadIdentityCommand === "function");
+assert(typeof GetWorkloadIdentity$ === "object");
+assert(typeof ListAgentRuntimeEndpointsCommand === "function");
+assert(typeof ListAgentRuntimeEndpoints$ === "object");
+assert(typeof ListAgentRuntimesCommand === "function");
+assert(typeof ListAgentRuntimes$ === "object");
+assert(typeof ListAgentRuntimeVersionsCommand === "function");
+assert(typeof ListAgentRuntimeVersions$ === "object");
+assert(typeof ListAgentRuntimeVersionsByCapacityProviderCommand === "function");
+assert(typeof ListAgentRuntimeVersionsByCapacityProvider$ === "object");
+assert(typeof ListApiKeyCredentialProvidersCommand === "function");
+assert(typeof ListApiKeyCredentialProviders$ === "object");
+assert(typeof ListBrowserProfilesCommand === "function");
+assert(typeof ListBrowserProfiles$ === "object");
+assert(typeof ListBrowsersCommand === "function");
+assert(typeof ListBrowsers$ === "object");
+assert(typeof ListCapacityProvidersCommand === "function");
+assert(typeof ListCapacityProviders$ === "object");
+assert(typeof ListCodeInterpretersCommand === "function");
+assert(typeof ListCodeInterpreters$ === "object");
+assert(typeof ListConfigurationBundlesCommand === "function");
+assert(typeof ListConfigurationBundles$ === "object");
+assert(typeof ListConfigurationBundleVersionsCommand === "function");
+assert(typeof ListConfigurationBundleVersions$ === "object");
+assert(typeof ListConsentPortalsCommand === "function");
+assert(typeof ListConsentPortals$ === "object");
+assert(typeof ListDatasetExamplesCommand === "function");
+assert(typeof ListDatasetExamples$ === "object");
+assert(typeof ListDatasetsCommand === "function");
+assert(typeof ListDatasets$ === "object");
+assert(typeof ListDatasetVersionsCommand === "function");
+assert(typeof ListDatasetVersions$ === "object");
+assert(typeof ListEvaluatorsCommand === "function");
+assert(typeof ListEvaluators$ === "object");
+assert(typeof ListGatewayRateLimitsCommand === "function");
+assert(typeof ListGatewayRateLimits$ === "object");
+assert(typeof ListGatewayRulesCommand === "function");
+assert(typeof ListGatewayRules$ === "object");
+assert(typeof ListGatewaysCommand === "function");
+assert(typeof ListGateways$ === "object");
+assert(typeof ListGatewayTargetsCommand === "function");
+assert(typeof ListGatewayTargets$ === "object");
+assert(typeof ListHarnessEndpointsCommand === "function");
+assert(typeof ListHarnessEndpoints$ === "object");
+assert(typeof ListHarnessesCommand === "function");
+assert(typeof ListHarnesses$ === "object");
+assert(typeof ListHarnessVersionsCommand === "function");
+assert(typeof ListHarnessVersions$ === "object");
+assert(typeof ListMemoriesCommand === "function");
+assert(typeof ListMemories$ === "object");
+assert(typeof ListOauth2CredentialProvidersCommand === "function");
+assert(typeof ListOauth2CredentialProviders$ === "object");
+assert(typeof ListOnlineEvaluationConfigsCommand === "function");
+assert(typeof ListOnlineEvaluationConfigs$ === "object");
+assert(typeof ListPaymentConnectorsCommand === "function");
+assert(typeof ListPaymentConnectors$ === "object");
+assert(typeof ListPaymentCredentialProvidersCommand === "function");
+assert(typeof ListPaymentCredentialProviders$ === "object");
+assert(typeof ListPaymentManagersCommand === "function");
+assert(typeof ListPaymentManagers$ === "object");
+assert(typeof ListPoliciesCommand === "function");
+assert(typeof ListPolicies$ === "object");
+assert(typeof ListPolicyEnginesCommand === "function");
+assert(typeof ListPolicyEngines$ === "object");
+assert(typeof ListPolicyEngineSummariesCommand === "function");
+assert(typeof ListPolicyEngineSummaries$ === "object");
+assert(typeof ListPolicyGenerationAssetsCommand === "function");
+assert(typeof ListPolicyGenerationAssets$ === "object");
+assert(typeof ListPolicyGenerationsCommand === "function");
+assert(typeof ListPolicyGenerations$ === "object");
+assert(typeof ListPolicyGenerationSummariesCommand === "function");
+assert(typeof ListPolicyGenerationSummaries$ === "object");
+assert(typeof ListPolicySummariesCommand === "function");
+assert(typeof ListPolicySummaries$ === "object");
+assert(typeof ListRegistriesCommand === "function");
+assert(typeof ListRegistries$ === "object");
+assert(typeof ListRegistryRecordsCommand === "function");
+assert(typeof ListRegistryRecords$ === "object");
+assert(typeof ListTagsForResourceCommand === "function");
+assert(typeof ListTagsForResource$ === "object");
+assert(typeof ListWorkloadIdentitiesCommand === "function");
+assert(typeof ListWorkloadIdentities$ === "object");
+assert(typeof PutResourcePolicyCommand === "function");
+assert(typeof PutResourcePolicy$ === "object");
+assert(typeof ResetTokenVaultKeyMaterialCommand === "function");
+assert(typeof ResetTokenVaultKeyMaterial$ === "object");
+assert(typeof RotatePaymentConnectorCredentialsCommand === "function");
+assert(typeof RotatePaymentConnectorCredentials$ === "object");
+assert(typeof SetTokenVaultCMKCommand === "function");
+assert(typeof SetTokenVaultCMK$ === "object");
+assert(typeof StartPolicyGenerationCommand === "function");
+assert(typeof StartPolicyGeneration$ === "object");
+assert(typeof SubmitRegistryRecordForApprovalCommand === "function");
+assert(typeof SubmitRegistryRecordForApproval$ === "object");
+assert(typeof SynchronizeGatewayTargetsCommand === "function");
+assert(typeof SynchronizeGatewayTargets$ === "object");
+assert(typeof TagResourceCommand === "function");
+assert(typeof TagResource$ === "object");
+assert(typeof UntagResourceCommand === "function");
+assert(typeof UntagResource$ === "object");
+assert(typeof UpdateAgentRuntimeCommand === "function");
+assert(typeof UpdateAgentRuntime$ === "object");
+assert(typeof UpdateAgentRuntimeEndpointCommand === "function");
+assert(typeof UpdateAgentRuntimeEndpoint$ === "object");
+assert(typeof UpdateApiKeyCredentialProviderCommand === "function");
+assert(typeof UpdateApiKeyCredentialProvider$ === "object");
+assert(typeof UpdateCapacityProviderCommand === "function");
+assert(typeof UpdateCapacityProvider$ === "object");
+assert(typeof UpdateConfigurationBundleCommand === "function");
+assert(typeof UpdateConfigurationBundle$ === "object");
+assert(typeof UpdateConsentPortalCommand === "function");
+assert(typeof UpdateConsentPortal$ === "object");
+assert(typeof UpdateDatasetCommand === "function");
+assert(typeof UpdateDataset$ === "object");
+assert(typeof UpdateDatasetExamplesCommand === "function");
+assert(typeof UpdateDatasetExamples$ === "object");
+assert(typeof UpdateEvaluatorCommand === "function");
+assert(typeof UpdateEvaluator$ === "object");
+assert(typeof UpdateGatewayCommand === "function");
+assert(typeof UpdateGateway$ === "object");
+assert(typeof UpdateGatewayRateLimitCommand === "function");
+assert(typeof UpdateGatewayRateLimit$ === "object");
+assert(typeof UpdateGatewayRuleCommand === "function");
+assert(typeof UpdateGatewayRule$ === "object");
+assert(typeof UpdateGatewayTargetCommand === "function");
+assert(typeof UpdateGatewayTarget$ === "object");
+assert(typeof UpdateHarnessCommand === "function");
+assert(typeof UpdateHarness$ === "object");
+assert(typeof UpdateHarnessEndpointCommand === "function");
+assert(typeof UpdateHarnessEndpoint$ === "object");
+assert(typeof UpdateMemoryCommand === "function");
+assert(typeof UpdateMemory$ === "object");
+assert(typeof UpdateOauth2CredentialProviderCommand === "function");
+assert(typeof UpdateOauth2CredentialProvider$ === "object");
+assert(typeof UpdateOnlineEvaluationConfigCommand === "function");
+assert(typeof UpdateOnlineEvaluationConfig$ === "object");
+assert(typeof UpdatePaymentConnectorCommand === "function");
+assert(typeof UpdatePaymentConnector$ === "object");
+assert(typeof UpdatePaymentCredentialProviderCommand === "function");
+assert(typeof UpdatePaymentCredentialProvider$ === "object");
+assert(typeof UpdatePaymentManagerCommand === "function");
+assert(typeof UpdatePaymentManager$ === "object");
+assert(typeof UpdatePolicyCommand === "function");
+assert(typeof UpdatePolicy$ === "object");
+assert(typeof UpdatePolicyEngineCommand === "function");
+assert(typeof UpdatePolicyEngine$ === "object");
+assert(typeof UpdateRegistryCommand === "function");
+assert(typeof UpdateRegistry$ === "object");
+assert(typeof UpdateRegistryRecordCommand === "function");
+assert(typeof UpdateRegistryRecord$ === "object");
+assert(typeof UpdateRegistryRecordStatusCommand === "function");
+assert(typeof UpdateRegistryRecordStatus$ === "object");
+assert(typeof UpdateWorkloadIdentityCommand === "function");
+assert(typeof UpdateWorkloadIdentity$ === "object");
+// structural schemas
+assert(typeof A2aDescriptor$ === "object");
+assert(typeof Action$ === "object");
+assert(typeof AddDatasetExamplesRequest$ === "object");
+assert(typeof AddDatasetExamplesResponse$ === "object");
+assert(typeof AgentCardDefinition$ === "object");
+assert(typeof AgentRuntime$ === "object");
+assert(typeof AgentRuntimeArtifact$ === "object");
+assert(typeof AgentRuntimeEndpoint$ === "object");
+assert(typeof AgentRuntimeVersionSummary$ === "object");
+assert(typeof AgentSkillsDescriptor$ === "object");
+assert(typeof AllowedPort$ === "object");
+assert(typeof AllowedWorkloadConfiguration$ === "object");
+assert(typeof ApiGatewayTargetConfiguration$ === "object");
+assert(typeof ApiGatewayToolConfiguration$ === "object");
+assert(typeof ApiGatewayToolFilter$ === "object");
+assert(typeof ApiGatewayToolOverride$ === "object");
+assert(typeof ApiKeyCredentialProviderItem$ === "object");
+assert(typeof ApiSchemaConfiguration$ === "object");
+assert(typeof ApprovalConfiguration$ === "object");
+assert(typeof AtlassianOauth2ProviderConfigInput$ === "object");
+assert(typeof AtlassianOauth2ProviderConfigOutput$ === "object");
+assert(typeof AuthorizationData$ === "object");
+assert(typeof AuthorizerConfiguration$ === "object");
+assert(typeof AuthorizingClaimMatchValueType$ === "object");
+assert(typeof BatchPutGatewayRateLimitsRequest$ === "object");
+assert(typeof BatchPutGatewayRateLimitsResponse$ === "object");
+assert(typeof BatchPutLimitEntry$ === "object");
+assert(typeof BedrockEvaluatorModelConfig$ === "object");
+assert(typeof BrowserEnterprisePolicy$ === "object");
+assert(typeof BrowserNetworkConfiguration$ === "object");
+assert(typeof BrowserProfileSummary$ === "object");
+assert(typeof BrowserSigningConfigInput$ === "object");
+assert(typeof BrowserSigningConfigOutput$ === "object");
+assert(typeof BrowserSummary$ === "object");
+assert(typeof BuildLifecycleHooks$ === "object");
+assert(typeof CapacityProviderConfiguration$ === "object");
+assert(typeof CapacityProviderSummary$ === "object");
+assert(typeof CapacityProviderVolumeConfiguration$ === "object");
+assert(typeof CapacityReservationSpecification$ === "object");
+assert(typeof CapacityReservationTarget$ === "object");
+assert(typeof CategoricalScaleDefinition$ === "object");
+assert(typeof CedarPolicy$ === "object");
+assert(typeof Certificate$ === "object");
+assert(typeof CertificateConfiguration$ === "object");
+assert(typeof CertificateLocation$ === "object");
+assert(typeof CircuitBreakerConfiguration$ === "object");
+assert(typeof ClaimMatchValueType$ === "object");
+assert(typeof CloudWatchLogsInputConfig$ === "object");
+assert(typeof CloudWatchOutputConfig$ === "object");
+assert(typeof ClusteringConfig$ === "object");
+assert(typeof Code$ === "object");
+assert(typeof CodeBasedEvaluatorConfig$ === "object");
+assert(typeof CodeConfiguration$ === "object");
+assert(typeof CodeInterpreterNetworkConfiguration$ === "object");
+assert(typeof CodeInterpreterSummary$ === "object");
+assert(typeof CoinbaseCdpConfigurationInput$ === "object");
+assert(typeof CoinbaseCdpConfigurationOutput$ === "object");
+assert(typeof CoinbaseCdpRotationTargets$ === "object");
+assert(typeof ComponentConfiguration$ === "object");
+assert(typeof ComputeConfiguration$ === "object");
+assert(typeof Condition$ === "object");
+assert(typeof ConfigurationBundleAction$ === "object");
+assert(typeof ConfigurationBundleReference$ === "object");
+assert(typeof ConfigurationBundleSummary$ === "object");
+assert(typeof ConfigurationBundleVersionSummary$ === "object");
+assert(typeof ConnectorConfiguration$ === "object");
+assert(typeof ConnectorParameterOverride$ === "object");
+assert(typeof ConnectorSource$ === "object");
+assert(typeof ConnectorTargetConfiguration$ === "object");
+assert(typeof ConsentPortalIdpConfig$ === "object");
+assert(typeof ConsentPortalSource$ === "object");
+assert(typeof ConsentPortalSummary$ === "object");
+assert(typeof ConsolidationConfiguration$ === "object");
+assert(typeof ContainerConfiguration$ === "object");
+assert(typeof Content$ === "object");
+assert(typeof ContentConfiguration$ === "object");
+assert(typeof CreateAgentRuntimeEndpointRequest$ === "object");
+assert(typeof CreateAgentRuntimeEndpointResponse$ === "object");
+assert(typeof CreateAgentRuntimeRequest$ === "object");
+assert(typeof CreateAgentRuntimeResponse$ === "object");
+assert(typeof CreateApiKeyCredentialProviderRequest$ === "object");
+assert(typeof CreateApiKeyCredentialProviderResponse$ === "object");
+assert(typeof CreateBrowserProfileRequest$ === "object");
+assert(typeof CreateBrowserProfileResponse$ === "object");
+assert(typeof CreateBrowserRequest$ === "object");
+assert(typeof CreateBrowserResponse$ === "object");
+assert(typeof CreateCapacityProviderInput$ === "object");
+assert(typeof CreateCapacityProviderOutput$ === "object");
+assert(typeof CreateCodeInterpreterRequest$ === "object");
+assert(typeof CreateCodeInterpreterResponse$ === "object");
+assert(typeof CreateConfigurationBundleRequest$ === "object");
+assert(typeof CreateConfigurationBundleResponse$ === "object");
+assert(typeof CreateConsentPortalRequest$ === "object");
+assert(typeof CreateConsentPortalResponse$ === "object");
+assert(typeof CreateDatasetRequest$ === "object");
+assert(typeof CreateDatasetResponse$ === "object");
+assert(typeof CreateDatasetVersionRequest$ === "object");
+assert(typeof CreateDatasetVersionResponse$ === "object");
+assert(typeof CreateEvaluatorRequest$ === "object");
+assert(typeof CreateEvaluatorResponse$ === "object");
+assert(typeof CreateGatewayRateLimitRequest$ === "object");
+assert(typeof CreateGatewayRateLimitResponse$ === "object");
+assert(typeof CreateGatewayRequest$ === "object");
+assert(typeof CreateGatewayResponse$ === "object");
+assert(typeof CreateGatewayRuleRequest$ === "object");
+assert(typeof CreateGatewayRuleResponse$ === "object");
+assert(typeof CreateGatewayTargetRequest$ === "object");
+assert(typeof CreateGatewayTargetResponse$ === "object");
+assert(typeof CreateHarnessEndpointRequest$ === "object");
+assert(typeof CreateHarnessEndpointResponse$ === "object");
+assert(typeof CreateHarnessRequest$ === "object");
+assert(typeof CreateHarnessResponse$ === "object");
+assert(typeof CreateMemoryInput$ === "object");
+assert(typeof CreateMemoryOutput$ === "object");
+assert(typeof CreateOauth2CredentialProviderRequest$ === "object");
+assert(typeof CreateOauth2CredentialProviderResponse$ === "object");
+assert(typeof CreateOnlineEvaluationConfigRequest$ === "object");
+assert(typeof CreateOnlineEvaluationConfigResponse$ === "object");
+assert(typeof CreatePaymentConnectorRequest$ === "object");
+assert(typeof CreatePaymentConnectorResponse$ === "object");
+assert(typeof CreatePaymentCredentialProviderRequest$ === "object");
+assert(typeof CreatePaymentCredentialProviderResponse$ === "object");
+assert(typeof CreatePaymentManagerRequest$ === "object");
+assert(typeof CreatePaymentManagerResponse$ === "object");
+assert(typeof CreatePolicyEngineRequest$ === "object");
+assert(typeof CreatePolicyEngineResponse$ === "object");
+assert(typeof CreatePolicyRequest$ === "object");
+assert(typeof CreatePolicyResponse$ === "object");
+assert(typeof CreateRegistryRecordRequest$ === "object");
+assert(typeof CreateRegistryRecordResponse$ === "object");
+assert(typeof CreateRegistryRequest$ === "object");
+assert(typeof CreateRegistryResponse$ === "object");
+assert(typeof CreateWorkloadIdentityRequest$ === "object");
+assert(typeof CreateWorkloadIdentityResponse$ === "object");
+assert(typeof CredentialProvider$ === "object");
+assert(typeof CredentialProviderConfiguration$ === "object");
+assert(typeof CredentialRotationConfig$ === "object");
+assert(typeof CredentialsProviderConfiguration$ === "object");
+assert(typeof CustomClaimValidationType$ === "object");
+assert(typeof CustomConfigurationInput$ === "object");
+assert(typeof CustomConsolidationConfiguration$ === "object");
+assert(typeof CustomConsolidationConfigurationInput$ === "object");
+assert(typeof CustomDescriptor$ === "object");
+assert(typeof CustomExtractionConfiguration$ === "object");
+assert(typeof CustomExtractionConfigurationInput$ === "object");
+assert(typeof CustomJWTAuthorizerConfiguration$ === "object");
+assert(typeof CustomMemoryStrategyInput$ === "object");
+assert(typeof CustomOauth2ProviderConfigInput$ === "object");
+assert(typeof CustomOauth2ProviderConfigOutput$ === "object");
+assert(typeof CustomReflectionConfiguration$ === "object");
+assert(typeof CustomReflectionConfigurationInput$ === "object");
+assert(typeof CustomTransformConfiguration$ === "object");
+assert(typeof DatasetSummary$ === "object");
+assert(typeof DatasetVersionSummary$ === "object");
+assert(typeof DataSourceConfig$ === "object");
+assert(typeof DataSourceType$ === "object");
+assert(typeof DeleteAgentRuntimeEndpointRequest$ === "object");
+assert(typeof DeleteAgentRuntimeEndpointResponse$ === "object");
+assert(typeof DeleteAgentRuntimeRequest$ === "object");
+assert(typeof DeleteAgentRuntimeResponse$ === "object");
+assert(typeof DeleteApiKeyCredentialProviderRequest$ === "object");
+assert(typeof DeleteApiKeyCredentialProviderResponse$ === "object");
+assert(typeof DeleteBrowserProfileRequest$ === "object");
+assert(typeof DeleteBrowserProfileResponse$ === "object");
+assert(typeof DeleteBrowserRequest$ === "object");
+assert(typeof DeleteBrowserResponse$ === "object");
+assert(typeof DeleteCapacityProviderInput$ === "object");
+assert(typeof DeleteCapacityProviderOutput$ === "object");
+assert(typeof DeleteCodeInterpreterRequest$ === "object");
+assert(typeof DeleteCodeInterpreterResponse$ === "object");
+assert(typeof DeleteConfigurationBundleRequest$ === "object");
+assert(typeof DeleteConfigurationBundleResponse$ === "object");
+assert(typeof DeleteConsentPortalRequest$ === "object");
+assert(typeof DeleteConsentPortalResponse$ === "object");
+assert(typeof DeleteDatasetExamplesRequest$ === "object");
+assert(typeof DeleteDatasetExamplesResponse$ === "object");
+assert(typeof DeleteDatasetRequest$ === "object");
+assert(typeof DeleteDatasetResponse$ === "object");
+assert(typeof DeleteEvaluatorRequest$ === "object");
+assert(typeof DeleteEvaluatorResponse$ === "object");
+assert(typeof DeleteGatewayRateLimitRequest$ === "object");
+assert(typeof DeleteGatewayRateLimitResponse$ === "object");
+assert(typeof DeleteGatewayRequest$ === "object");
+assert(typeof DeleteGatewayResponse$ === "object");
+assert(typeof DeleteGatewayRuleRequest$ === "object");
+assert(typeof DeleteGatewayRuleResponse$ === "object");
+assert(typeof DeleteGatewayTargetRequest$ === "object");
+assert(typeof DeleteGatewayTargetResponse$ === "object");
+assert(typeof DeleteHarnessEndpointRequest$ === "object");
+assert(typeof DeleteHarnessEndpointResponse$ === "object");
+assert(typeof DeleteHarnessRequest$ === "object");
+assert(typeof DeleteHarnessResponse$ === "object");
+assert(typeof DeleteMemoryInput$ === "object");
+assert(typeof DeleteMemoryOutput$ === "object");
+assert(typeof DeleteMemoryStrategyInput$ === "object");
+assert(typeof DeleteOauth2CredentialProviderRequest$ === "object");
+assert(typeof DeleteOauth2CredentialProviderResponse$ === "object");
+assert(typeof DeleteOnlineEvaluationConfigRequest$ === "object");
+assert(typeof DeleteOnlineEvaluationConfigResponse$ === "object");
+assert(typeof DeletePaymentConnectorRequest$ === "object");
+assert(typeof DeletePaymentConnectorResponse$ === "object");
+assert(typeof DeletePaymentCredentialProviderRequest$ === "object");
+assert(typeof DeletePaymentCredentialProviderResponse$ === "object");
+assert(typeof DeletePaymentManagerRequest$ === "object");
+assert(typeof DeletePaymentManagerResponse$ === "object");
+assert(typeof DeletePolicyEngineRequest$ === "object");
+assert(typeof DeletePolicyEngineResponse$ === "object");
+assert(typeof DeletePolicyRequest$ === "object");
+assert(typeof DeletePolicyResponse$ === "object");
+assert(typeof DeleteRegistryRecordRequest$ === "object");
+assert(typeof DeleteRegistryRecordResponse$ === "object");
+assert(typeof DeleteRegistryRequest$ === "object");
+assert(typeof DeleteRegistryResponse$ === "object");
+assert(typeof DeleteResourcePolicyRequest$ === "object");
+assert(typeof DeleteResourcePolicyResponse$ === "object");
+assert(typeof DeleteWorkloadIdentityRequest$ === "object");
+assert(typeof DeleteWorkloadIdentityResponse$ === "object");
+assert(typeof DerivedEvaluatorConfig$ === "object");
+assert(typeof Descriptors$ === "object");
+assert(typeof DimensionRatingScale$ === "object");
+assert(typeof DomainOverride$ === "object");
+assert(typeof EbsVolumeConfiguration$ === "object");
+assert(typeof Ec2Configuration$ === "object");
+assert(typeof EfsAccessPointConfiguration$ === "object");
+assert(typeof EfsConfiguration$ === "object");
+assert(typeof EphemeralBlockDeviceMapping$ === "object");
+assert(typeof EphemeralEBSVolumeConfiguration$ === "object");
+assert(typeof EpisodicConsolidationOverride$ === "object");
+assert(typeof EpisodicExtractionOverride$ === "object");
+assert(typeof EpisodicMemoryStrategyInput$ === "object");
+assert(typeof EpisodicOverrideConfigurationInput$ === "object");
+assert(typeof EpisodicOverrideConsolidationConfigurationInput$ === "object");
+assert(typeof EpisodicOverrideExtractionConfigurationInput$ === "object");
+assert(typeof EpisodicOverrideReflectionConfigurationInput$ === "object");
+assert(typeof EpisodicReflectionConfiguration$ === "object");
+assert(typeof EpisodicReflectionConfigurationInput$ === "object");
+assert(typeof EpisodicReflectionOverride$ === "object");
+assert(typeof EvaluationDimension$ === "object");
+assert(typeof EvaluatorConfig$ === "object");
+assert(typeof EvaluatorModelConfig$ === "object");
+assert(typeof EvaluatorReference$ === "object");
+assert(typeof EvaluatorSummary$ === "object");
+assert(typeof ExtractionConfig$ === "object");
+assert(typeof ExtractionConfiguration$ === "object");
+assert(typeof Fallback$ === "object");
+assert(typeof FallbackTarget$ === "object");
+assert(typeof FallbackTriggers$ === "object");
+assert(typeof FilesystemConfiguration$ === "object");
+assert(typeof Filter$ === "object");
+assert(typeof FilterValue$ === "object");
+assert(typeof Finding$ === "object");
+assert(typeof FromUrlSynchronizationConfiguration$ === "object");
+assert(typeof GatewayApiKeyCredentialProvider$ === "object");
+assert(typeof GatewayInterceptorConfiguration$ === "object");
+assert(typeof GatewayPolicyEngineConfiguration$ === "object");
+assert(typeof GatewayProtocolConfiguration$ === "object");
+assert(typeof GatewayRateLimitDetail$ === "object");
+assert(typeof GatewayRuleDetail$ === "object");
+assert(typeof GatewaySummary$ === "object");
+assert(typeof GatewayTarget$ === "object");
+assert(typeof GetAgentRuntimeEndpointRequest$ === "object");
+assert(typeof GetAgentRuntimeEndpointResponse$ === "object");
+assert(typeof GetAgentRuntimeRequest$ === "object");
+assert(typeof GetAgentRuntimeResponse$ === "object");
+assert(typeof GetApiKeyCredentialProviderRequest$ === "object");
+assert(typeof GetApiKeyCredentialProviderResponse$ === "object");
+assert(typeof GetBrowserProfileRequest$ === "object");
+assert(typeof GetBrowserProfileResponse$ === "object");
+assert(typeof GetBrowserRequest$ === "object");
+assert(typeof GetBrowserResponse$ === "object");
+assert(typeof GetCapacityProviderInput$ === "object");
+assert(typeof GetCapacityProviderOutput$ === "object");
+assert(typeof GetCodeInterpreterRequest$ === "object");
+assert(typeof GetCodeInterpreterResponse$ === "object");
+assert(typeof GetConfigurationBundleRequest$ === "object");
+assert(typeof GetConfigurationBundleResponse$ === "object");
+assert(typeof GetConfigurationBundleVersionRequest$ === "object");
+assert(typeof GetConfigurationBundleVersionResponse$ === "object");
+assert(typeof GetConsentPortalRequest$ === "object");
+assert(typeof GetConsentPortalResponse$ === "object");
+assert(typeof GetDatasetRequest$ === "object");
+assert(typeof GetDatasetResponse$ === "object");
+assert(typeof GetEvaluatorRequest$ === "object");
+assert(typeof GetEvaluatorResponse$ === "object");
+assert(typeof GetGatewayRateLimitRequest$ === "object");
+assert(typeof GetGatewayRateLimitResponse$ === "object");
+assert(typeof GetGatewayRequest$ === "object");
+assert(typeof GetGatewayResponse$ === "object");
+assert(typeof GetGatewayRuleRequest$ === "object");
+assert(typeof GetGatewayRuleResponse$ === "object");
+assert(typeof GetGatewayTargetRequest$ === "object");
+assert(typeof GetGatewayTargetResponse$ === "object");
+assert(typeof GetHarnessEndpointRequest$ === "object");
+assert(typeof GetHarnessEndpointResponse$ === "object");
+assert(typeof GetHarnessRequest$ === "object");
+assert(typeof GetHarnessResponse$ === "object");
+assert(typeof GetMemoryInput$ === "object");
+assert(typeof GetMemoryOutput$ === "object");
+assert(typeof GetOauth2CredentialProviderRequest$ === "object");
+assert(typeof GetOauth2CredentialProviderResponse$ === "object");
+assert(typeof GetOnlineEvaluationConfigRequest$ === "object");
+assert(typeof GetOnlineEvaluationConfigResponse$ === "object");
+assert(typeof GetPaymentConnectorRequest$ === "object");
+assert(typeof GetPaymentConnectorResponse$ === "object");
+assert(typeof GetPaymentCredentialProviderRequest$ === "object");
+assert(typeof GetPaymentCredentialProviderResponse$ === "object");
+assert(typeof GetPaymentManagerRequest$ === "object");
+assert(typeof GetPaymentManagerResponse$ === "object");
+assert(typeof GetPolicyEngineRequest$ === "object");
+assert(typeof GetPolicyEngineResponse$ === "object");
+assert(typeof GetPolicyEngineSummaryRequest$ === "object");
+assert(typeof GetPolicyEngineSummaryResponse$ === "object");
+assert(typeof GetPolicyGenerationRequest$ === "object");
+assert(typeof GetPolicyGenerationResponse$ === "object");
+assert(typeof GetPolicyGenerationSummaryRequest$ === "object");
+assert(typeof GetPolicyGenerationSummaryResponse$ === "object");
+assert(typeof GetPolicyRequest$ === "object");
+assert(typeof GetPolicyResponse$ === "object");
+assert(typeof GetPolicySummaryRequest$ === "object");
+assert(typeof GetPolicySummaryResponse$ === "object");
+assert(typeof GetRegistryRecordRequest$ === "object");
+assert(typeof GetRegistryRecordResponse$ === "object");
+assert(typeof GetRegistryRequest$ === "object");
+assert(typeof GetRegistryResponse$ === "object");
+assert(typeof GetResourcePolicyRequest$ === "object");
+assert(typeof GetResourcePolicyResponse$ === "object");
+assert(typeof GetTokenVaultRequest$ === "object");
+assert(typeof GetTokenVaultResponse$ === "object");
+assert(typeof GetWorkloadIdentityRequest$ === "object");
+assert(typeof GetWorkloadIdentityResponse$ === "object");
+assert(typeof GithubOauth2ProviderConfigInput$ === "object");
+assert(typeof GithubOauth2ProviderConfigOutput$ === "object");
+assert(typeof GoogleOauth2ProviderConfigInput$ === "object");
+assert(typeof GoogleOauth2ProviderConfigOutput$ === "object");
+assert(typeof Harness$ === "object");
+assert(typeof HarnessAfterInvocationHook$ === "object");
+assert(typeof HarnessAfterToolCallHook$ === "object");
+assert(typeof HarnessAgentCoreBrowserConfig$ === "object");
+assert(typeof HarnessAgentCoreCodeInterpreterConfig$ === "object");
+assert(typeof HarnessAgentCoreGatewayConfig$ === "object");
+assert(typeof HarnessAgentCoreMemoryConfiguration$ === "object");
+assert(typeof HarnessAgentCoreMemoryRetrievalConfig$ === "object");
+assert(typeof HarnessAgentCoreRuntimeEnvironment$ === "object");
+assert(typeof HarnessAgentCoreRuntimeEnvironmentRequest$ === "object");
+assert(typeof HarnessBedrockModelConfig$ === "object");
+assert(typeof HarnessBeforeInvocationHook$ === "object");
+assert(typeof HarnessBeforeToolCallHook$ === "object");
+assert(typeof HarnessDisabledMemoryConfiguration$ === "object");
+assert(typeof HarnessEndpoint$ === "object");
+assert(typeof HarnessEnvironmentArtifact$ === "object");
+assert(typeof HarnessEnvironmentProvider$ === "object");
+assert(typeof HarnessEnvironmentProviderRequest$ === "object");
+assert(typeof HarnessGatewayOutboundAuth$ === "object");
+assert(typeof HarnessGeminiModelConfig$ === "object");
+assert(typeof HarnessHook$ === "object");
+assert(typeof HarnessHookEventBridgeTarget$ === "object");
+assert(typeof HarnessHookLambdaTarget$ === "object");
+assert(typeof HarnessHookSnsTarget$ === "object");
+assert(typeof HarnessHookTarget$ === "object");
+assert(typeof HarnessInlineFunctionConfig$ === "object");
+assert(typeof HarnessLiteLlmModelConfig$ === "object");
+assert(typeof HarnessManagedMemoryConfiguration$ === "object");
+assert(typeof HarnessMemoryConfiguration$ === "object");
+assert(typeof HarnessModelConfiguration$ === "object");
+assert(typeof HarnessOpenAiModelConfig$ === "object");
+assert(typeof HarnessRemoteMcpConfig$ === "object");
+assert(typeof HarnessRemoteMcpOutboundAuth$ === "object");
+assert(typeof HarnessSkill$ === "object");
+assert(typeof HarnessSkillAwsSkillsSource$ === "object");
+assert(typeof HarnessSkillGitAuth$ === "object");
+assert(typeof HarnessSkillGitSource$ === "object");
+assert(typeof HarnessSkillS3Source$ === "object");
+assert(typeof HarnessSlidingWindowConfiguration$ === "object");
+assert(typeof HarnessSummarizationConfiguration$ === "object");
+assert(typeof HarnessSummary$ === "object");
+assert(typeof HarnessSystemContentBlock$ === "object");
+assert(typeof HarnessTool$ === "object");
+assert(typeof HarnessToolConfiguration$ === "object");
+assert(typeof HarnessTruncationConfiguration$ === "object");
+assert(typeof HarnessTruncationStrategyConfiguration$ === "object");
+assert(typeof HarnessVersionSummary$ === "object");
+assert(typeof HostingEnvironment$ === "object");
+assert(typeof HttpApiSchemaConfiguration$ === "object");
+assert(typeof HttpConnectorSource$ === "object");
+assert(typeof HttpConnectorTargetConfiguration$ === "object");
+assert(typeof HttpPostLifecycleHookAction$ === "object");
+assert(typeof HttpTargetConfiguration$ === "object");
+assert(typeof IamCredentialProvider$ === "object");
+assert(typeof IamPrincipal$ === "object");
+assert(typeof IncludedOauth2ProviderConfigInput$ === "object");
+assert(typeof IncludedOauth2ProviderConfigOutput$ === "object");
+assert(typeof IndexedKey$ === "object");
+assert(typeof InferenceConfiguration$ === "object");
+assert(typeof InferenceConnectorSource$ === "object");
+assert(typeof InferenceConnectorTargetConfiguration$ === "object");
+assert(typeof InferenceOperationConfiguration$ === "object");
+assert(typeof InferenceProviderTargetConfiguration$ === "object");
+assert(typeof InferenceTargetConfiguration$ === "object");
+assert(typeof InlineExamplesSource$ === "object");
+assert(typeof Insight$ === "object");
+assert(typeof InstanceLifecycleConfiguration$ === "object");
+assert(typeof InstanceRequirements$ === "object");
+assert(typeof InterceptorConfiguration$ === "object");
+assert(typeof InterceptorInputConfiguration$ === "object");
+assert(typeof InterceptorPayloadExclusionSelector$ === "object");
+assert(typeof InterceptorPayloadFilter$ === "object");
+assert(typeof InvocationConfiguration$ === "object");
+assert(typeof InvocationConfigurationInput$ === "object");
+assert(typeof KinesisResource$ === "object");
+assert(typeof KmsConfiguration$ === "object");
+assert(typeof KmsKeySourceType$ === "object");
+assert(typeof LambdaEvaluatorConfig$ === "object");
+assert(typeof LambdaInterceptorConfiguration$ === "object");
+assert(typeof LambdaTransformConfiguration$ === "object");
+assert(typeof LaunchParameters$ === "object");
+assert(typeof LaunchTemplateSource$ === "object");
+assert(typeof LicenseSpecification$ === "object");
+assert(typeof LifecycleConfiguration$ === "object");
+assert(typeof LifecycleHook$ === "object");
+assert(typeof LifecycleHookAction$ === "object");
+assert(typeof LimitEntry$ === "object");
+assert(typeof LinkedinOauth2ProviderConfigInput$ === "object");
+assert(typeof LinkedinOauth2ProviderConfigOutput$ === "object");
+assert(typeof ListAgentRuntimeEndpointsRequest$ === "object");
+assert(typeof ListAgentRuntimeEndpointsResponse$ === "object");
+assert(typeof ListAgentRuntimesRequest$ === "object");
+assert(typeof ListAgentRuntimesResponse$ === "object");
+assert(typeof ListAgentRuntimeVersionsByCapacityProviderInput$ === "object");
+assert(typeof ListAgentRuntimeVersionsByCapacityProviderOutput$ === "object");
+assert(typeof ListAgentRuntimeVersionsRequest$ === "object");
+assert(typeof ListAgentRuntimeVersionsResponse$ === "object");
+assert(typeof ListApiKeyCredentialProvidersRequest$ === "object");
+assert(typeof ListApiKeyCredentialProvidersResponse$ === "object");
+assert(typeof ListBrowserProfilesRequest$ === "object");
+assert(typeof ListBrowserProfilesResponse$ === "object");
+assert(typeof ListBrowsersRequest$ === "object");
+assert(typeof ListBrowsersResponse$ === "object");
+assert(typeof ListCapacityProvidersInput$ === "object");
+assert(typeof ListCapacityProvidersOutput$ === "object");
+assert(typeof ListCodeInterpretersRequest$ === "object");
+assert(typeof ListCodeInterpretersResponse$ === "object");
+assert(typeof ListConfigurationBundlesRequest$ === "object");
+assert(typeof ListConfigurationBundlesResponse$ === "object");
+assert(typeof ListConfigurationBundleVersionsRequest$ === "object");
+assert(typeof ListConfigurationBundleVersionsResponse$ === "object");
+assert(typeof ListConsentPortalsRequest$ === "object");
+assert(typeof ListConsentPortalsResponse$ === "object");
+assert(typeof ListDatasetExamplesRequest$ === "object");
+assert(typeof ListDatasetExamplesResponse$ === "object");
+assert(typeof ListDatasetsRequest$ === "object");
+assert(typeof ListDatasetsResponse$ === "object");
+assert(typeof ListDatasetVersionsRequest$ === "object");
+assert(typeof ListDatasetVersionsResponse$ === "object");
+assert(typeof ListEvaluatorsRequest$ === "object");
+assert(typeof ListEvaluatorsResponse$ === "object");
+assert(typeof ListGatewayRateLimitsRequest$ === "object");
+assert(typeof ListGatewayRateLimitsResponse$ === "object");
+assert(typeof ListGatewayRulesRequest$ === "object");
+assert(typeof ListGatewayRulesResponse$ === "object");
+assert(typeof ListGatewaysRequest$ === "object");
+assert(typeof ListGatewaysResponse$ === "object");
+assert(typeof ListGatewayTargetsRequest$ === "object");
+assert(typeof ListGatewayTargetsResponse$ === "object");
+assert(typeof ListHarnessEndpointsRequest$ === "object");
+assert(typeof ListHarnessEndpointsResponse$ === "object");
+assert(typeof ListHarnessesRequest$ === "object");
+assert(typeof ListHarnessesResponse$ === "object");
+assert(typeof ListHarnessVersionsRequest$ === "object");
+assert(typeof ListHarnessVersionsResponse$ === "object");
+assert(typeof ListMemoriesInput$ === "object");
+assert(typeof ListMemoriesOutput$ === "object");
+assert(typeof ListOauth2CredentialProvidersRequest$ === "object");
+assert(typeof ListOauth2CredentialProvidersResponse$ === "object");
+assert(typeof ListOnlineEvaluationConfigsRequest$ === "object");
+assert(typeof ListOnlineEvaluationConfigsResponse$ === "object");
+assert(typeof ListPaymentConnectorsRequest$ === "object");
+assert(typeof ListPaymentConnectorsResponse$ === "object");
+assert(typeof ListPaymentCredentialProvidersRequest$ === "object");
+assert(typeof ListPaymentCredentialProvidersResponse$ === "object");
+assert(typeof ListPaymentManagersRequest$ === "object");
+assert(typeof ListPaymentManagersResponse$ === "object");
+assert(typeof ListPoliciesRequest$ === "object");
+assert(typeof ListPoliciesResponse$ === "object");
+assert(typeof ListPolicyEnginesRequest$ === "object");
+assert(typeof ListPolicyEnginesResponse$ === "object");
+assert(typeof ListPolicyEngineSummariesRequest$ === "object");
+assert(typeof ListPolicyEngineSummariesResponse$ === "object");
+assert(typeof ListPolicyGenerationAssetsRequest$ === "object");
+assert(typeof ListPolicyGenerationAssetsResponse$ === "object");
+assert(typeof ListPolicyGenerationsRequest$ === "object");
+assert(typeof ListPolicyGenerationsResponse$ === "object");
+assert(typeof ListPolicyGenerationSummariesRequest$ === "object");
+assert(typeof ListPolicyGenerationSummariesResponse$ === "object");
+assert(typeof ListPolicySummariesRequest$ === "object");
+assert(typeof ListPolicySummariesResponse$ === "object");
+assert(typeof ListRegistriesRequest$ === "object");
+assert(typeof ListRegistriesResponse$ === "object");
+assert(typeof ListRegistryRecordsRequest$ === "object");
+assert(typeof ListRegistryRecordsResponse$ === "object");
+assert(typeof ListTagsForResourceRequest$ === "object");
+assert(typeof ListTagsForResourceResponse$ === "object");
+assert(typeof ListWorkloadIdentitiesRequest$ === "object");
+assert(typeof ListWorkloadIdentitiesResponse$ === "object");
+assert(typeof LlmAsAJudgeEvaluatorConfig$ === "object");
+assert(typeof LlmExtractionConfig$ === "object");
+assert(typeof ManagedResourceDetails$ === "object");
+assert(typeof ManagedVpcResource$ === "object");
+assert(typeof MatchModelEntry$ === "object");
+assert(typeof MatchModels$ === "object");
+assert(typeof MatchPaths$ === "object");
+assert(typeof MatchPrincipalEntry$ === "object");
+assert(typeof MatchPrincipals$ === "object");
+assert(typeof McpDescriptor$ === "object");
+assert(typeof MCPGatewayConfiguration$ === "object");
+assert(typeof McpLambdaTargetConfiguration$ === "object");
+assert(typeof McpServerTargetConfiguration$ === "object");
+assert(typeof McpTargetConfiguration$ === "object");
+assert(typeof McpToolSchemaConfiguration$ === "object");
+assert(typeof Memory$ === "object");
+assert(typeof MemoryRecordSchema$ === "object");
+assert(typeof MemoryStrategy$ === "object");
+assert(typeof MemoryStrategyInput$ === "object");
+assert(typeof MemorySummary$ === "object");
+assert(typeof MessageBasedTrigger$ === "object");
+assert(typeof MessageBasedTriggerInput$ === "object");
+assert(typeof MetadataConfiguration$ === "object");
+assert(typeof MetadataSchemaEntry$ === "object");
+assert(typeof MicrosoftOauth2ProviderConfigInput$ === "object");
+assert(typeof MicrosoftOauth2ProviderConfigOutput$ === "object");
+assert(typeof ModelEntry$ === "object");
+assert(typeof ModelMapping$ === "object");
+assert(typeof ModifyConsolidationConfiguration$ === "object");
+assert(typeof ModifyExtractionConfiguration$ === "object");
+assert(typeof ModifyInvocationConfigurationInput$ === "object");
+assert(typeof ModifyMemoryStrategies$ === "object");
+assert(typeof ModifyMemoryStrategyInput$ === "object");
+assert(typeof ModifyReflectionConfiguration$ === "object");
+assert(typeof ModifySelfManagedConfiguration$ === "object");
+assert(typeof ModifyStrategyConfiguration$ === "object");
+assert(typeof NamespaceKeyEntry$ === "object");
+assert(typeof NamespaceKeyValidation$ === "object");
+assert(typeof NetworkConfiguration$ === "object");
+assert(typeof NumberValidation$ === "object");
+assert(typeof NumericalScaleDefinition$ === "object");
+assert(typeof OAuth2AuthorizationData$ === "object");
+assert(typeof Oauth2AuthorizationServerMetadata$ === "object");
+assert(typeof Oauth2CredentialProviderItem$ === "object");
+assert(typeof Oauth2Discovery$ === "object");
+assert(typeof Oauth2ProviderConfigInput$ === "object");
+assert(typeof Oauth2ProviderConfigOutput$ === "object");
+assert(typeof OAuthCredentialProvider$ === "object");
+assert(typeof OnBehalfOfAuthenticationConfig$ === "object");
+assert(typeof OnBehalfOfTokenExchangeConfigType$ === "object");
+assert(typeof OnlineEvaluationConfigSummary$ === "object");
+assert(typeof OpenResponsesEvaluatorModelConfig$ === "object");
+assert(typeof OutputConfig$ === "object");
+assert(typeof PassthroughTargetConfiguration$ === "object");
+assert(typeof PaymentConnectorSummary$ === "object");
+assert(typeof PaymentCredentialProviderConfiguration$ === "object");
+assert(typeof PaymentCredentialProviderItem$ === "object");
+assert(typeof PaymentManagerSummary$ === "object");
+assert(typeof PaymentProviderConfigurationInput$ === "object");
+assert(typeof PaymentProviderConfigurationOutput$ === "object");
+assert(typeof PermissionsConfiguration$ === "object");
+assert(typeof Policy$ === "object");
+assert(typeof PolicyDefinition$ === "object");
+assert(typeof PolicyEngine$ === "object");
+assert(typeof PolicyEngineSummary$ === "object");
+assert(typeof PolicyGeneration$ === "object");
+assert(typeof PolicyGenerationAsset$ === "object");
+assert(typeof PolicyGenerationDetails$ === "object");
+assert(typeof PolicyGenerationSummary$ === "object");
+assert(typeof PolicyStatement$ === "object");
+assert(typeof PolicySummary$ === "object");
+assert(typeof PortRange$ === "object");
+assert(typeof PrivateEndpoint$ === "object");
+assert(typeof PrivateEndpointOverride$ === "object");
+assert(typeof PrivateKeyJwtConfig$ === "object");
+assert(typeof PrivateKeySource$ === "object");
+assert(typeof ProtocolConfiguration$ === "object");
+assert(typeof ProviderPrefix$ === "object");
+assert(typeof PutResourcePolicyRequest$ === "object");
+assert(typeof PutResourcePolicyResponse$ === "object");
+assert(typeof RateConfig$ === "object");
+assert(typeof RatingScale$ === "object");
+assert(typeof ReasoningConfiguration$ === "object");
+assert(typeof RecordExpirySpecification$ === "object");
+assert(typeof RecordingConfig$ === "object");
+assert(typeof ReflectionConfiguration$ === "object");
+assert(typeof RegistryRecordCredentialProviderConfiguration$ === "object");
+assert(typeof RegistryRecordCredentialProviderUnion$ === "object");
+assert(typeof RegistryRecordIamCredentialProvider$ === "object");
+assert(typeof RegistryRecordOAuthCredentialProvider$ === "object");
+assert(typeof RegistryRecordSummary$ === "object");
+assert(typeof RegistrySummary$ === "object");
+assert(typeof RequestHeaderConfiguration$ === "object");
+assert(typeof ResetTokenVaultKeyMaterialRequest$ === "object");
+assert(typeof ResetTokenVaultKeyMaterialResponse$ === "object");
+assert(typeof Resource$ === "object");
+assert(typeof ResourceConfiguration$ === "object");
+assert(typeof ResourceLocation$ === "object");
+assert(typeof RootVolumeConfiguration$ === "object");
+assert(typeof RotatePaymentConnectorCredentialsRequest$ === "object");
+assert(typeof RotatePaymentConnectorCredentialsResponse$ === "object");
+assert(typeof RouteToTargetAction$ === "object");
+assert(typeof Rule$ === "object");
+assert(typeof RuntimeHooksConfiguration$ === "object");
+assert(typeof RuntimeMetadataConfiguration$ === "object");
+assert(typeof RuntimeTargetConfiguration$ === "object");
+assert(typeof S3CertificateConfiguration$ === "object");
+assert(typeof S3Configuration$ === "object");
+assert(typeof S3FilesAccessPointConfiguration$ === "object");
+assert(typeof S3FilesConfiguration$ === "object");
+assert(typeof S3Location$ === "object");
+assert(typeof S3Source$ === "object");
+assert(typeof SalesforceOauth2ProviderConfigInput$ === "object");
+assert(typeof SalesforceOauth2ProviderConfigOutput$ === "object");
+assert(typeof SamplingConfig$ === "object");
+assert(typeof SchemaDefinition$ === "object");
+assert(typeof Secret$ === "object");
+assert(typeof SecretReference$ === "object");
+assert(typeof SecretsManagerCertificateConfiguration$ === "object");
+assert(typeof SecretsManagerLocation$ === "object");
+assert(typeof SelfManagedConfiguration$ === "object");
+assert(typeof SelfManagedConfigurationInput$ === "object");
+assert(typeof SelfManagedLatticeResource$ === "object");
+assert(typeof SemanticConsolidationOverride$ === "object");
+assert(typeof SemanticExtractionOverride$ === "object");
+assert(typeof SemanticMemoryStrategyInput$ === "object");
+assert(typeof SemanticOverrideConfigurationInput$ === "object");
+assert(typeof SemanticOverrideConsolidationConfigurationInput$ === "object");
+assert(typeof SemanticOverrideExtractionConfigurationInput$ === "object");
+assert(typeof ServerDefinition$ === "object");
+assert(typeof SessionConfig$ === "object");
+assert(typeof SessionConfiguration$ === "object");
+assert(typeof SessionStorageConfiguration$ === "object");
+assert(typeof SetTokenVaultCMKRequest$ === "object");
+assert(typeof SetTokenVaultCMKResponse$ === "object");
+assert(typeof SkillDefinition$ === "object");
+assert(typeof SkillMdDefinition$ === "object");
+assert(typeof SlackOauth2ProviderConfigInput$ === "object");
+assert(typeof SlackOauth2ProviderConfigOutput$ === "object");
+assert(typeof StartPolicyGenerationRequest$ === "object");
+assert(typeof StartPolicyGenerationResponse$ === "object");
+assert(typeof StaticOverride$ === "object");
+assert(typeof StaticRoute$ === "object");
+assert(typeof StickinessConfiguration$ === "object");
+assert(typeof StrategyConfiguration$ === "object");
+assert(typeof StreamDeliveryResource$ === "object");
+assert(typeof StreamDeliveryResources$ === "object");
+assert(typeof StreamingConfiguration$ === "object");
+assert(typeof StringListValidation$ === "object");
+assert(typeof StringValidation$ === "object");
+assert(typeof StripePrivyConfigurationInput$ === "object");
+assert(typeof StripePrivyConfigurationOutput$ === "object");
+assert(typeof SubmitRegistryRecordForApprovalRequest$ === "object");
+assert(typeof SubmitRegistryRecordForApprovalResponse$ === "object");
+assert(typeof SummaryConsolidationOverride$ === "object");
+assert(typeof SummaryMemoryStrategyInput$ === "object");
+assert(typeof SummaryOverrideConfigurationInput$ === "object");
+assert(typeof SummaryOverrideConsolidationConfigurationInput$ === "object");
+assert(typeof SynchronizationConfiguration$ === "object");
+assert(typeof SynchronizeGatewayTargetsRequest$ === "object");
+assert(typeof SynchronizeGatewayTargetsResponse$ === "object");
+assert(typeof SystemManagedBlock$ === "object");
+assert(typeof TagResourceRequest$ === "object");
+assert(typeof TagResourceResponse$ === "object");
+assert(typeof TargetConfiguration$ === "object");
+assert(typeof TargetSummary$ === "object");
+assert(typeof TargetTrafficSplitEntry$ === "object");
+assert(typeof TimeBasedTrigger$ === "object");
+assert(typeof TimeBasedTriggerInput$ === "object");
+assert(typeof TokenBasedTrigger$ === "object");
+assert(typeof TokenBasedTriggerInput$ === "object");
+assert(typeof TokenExchangeGrantTypeConfigType$ === "object");
+assert(typeof ToolDefinition$ === "object");
+assert(typeof ToolSchema$ === "object");
+assert(typeof ToolsDefinition$ === "object");
+assert(typeof ToolsFileSystemConfiguration$ === "object");
+assert(typeof TrafficSplitEntry$ === "object");
+assert(typeof TriggerCondition$ === "object");
+assert(typeof TriggerConditionInput$ === "object");
+assert(typeof UntagResourceRequest$ === "object");
+assert(typeof UntagResourceResponse$ === "object");
+assert(typeof UpdateAgentRuntimeEndpointRequest$ === "object");
+assert(typeof UpdateAgentRuntimeEndpointResponse$ === "object");
+assert(typeof UpdateAgentRuntimeRequest$ === "object");
+assert(typeof UpdateAgentRuntimeResponse$ === "object");
+assert(typeof UpdateApiKeyCredentialProviderRequest$ === "object");
+assert(typeof UpdateApiKeyCredentialProviderResponse$ === "object");
+assert(typeof UpdateCapacityProviderInput$ === "object");
+assert(typeof UpdateCapacityProviderOutput$ === "object");
+assert(typeof UpdateConfigurationBundleRequest$ === "object");
+assert(typeof UpdateConfigurationBundleResponse$ === "object");
+assert(typeof UpdateConsentPortalRequest$ === "object");
+assert(typeof UpdateConsentPortalResponse$ === "object");
+assert(typeof UpdatedA2aDescriptor$ === "object");
+assert(typeof UpdatedAgentSkillsDescriptor$ === "object");
+assert(typeof UpdatedAgentSkillsDescriptorFields$ === "object");
+assert(typeof UpdatedApprovalConfiguration$ === "object");
+assert(typeof UpdateDatasetExamplesRequest$ === "object");
+assert(typeof UpdateDatasetExamplesResponse$ === "object");
+assert(typeof UpdateDatasetRequest$ === "object");
+assert(typeof UpdateDatasetResponse$ === "object");
+assert(typeof UpdatedAuthorizerConfiguration$ === "object");
+assert(typeof UpdatedCustomDescriptor$ === "object");
+assert(typeof UpdatedDescription$ === "object");
+assert(typeof UpdatedDescriptors$ === "object");
+assert(typeof UpdatedDescriptorsUnion$ === "object");
+assert(typeof UpdatedHarnessEnvironmentArtifact$ === "object");
+assert(typeof UpdatedHarnessMemoryConfiguration$ === "object");
+assert(typeof UpdatedMcpDescriptor$ === "object");
+assert(typeof UpdatedMcpDescriptorFields$ === "object");
+assert(typeof UpdatedServerDefinition$ === "object");
+assert(typeof UpdatedSkillDefinition$ === "object");
+assert(typeof UpdatedSkillMdDefinition$ === "object");
+assert(typeof UpdatedSynchronizationConfiguration$ === "object");
+assert(typeof UpdatedSynchronizationType$ === "object");
+assert(typeof UpdatedToolsDefinition$ === "object");
+assert(typeof UpdateEvaluatorRequest$ === "object");
+assert(typeof UpdateEvaluatorResponse$ === "object");
+assert(typeof UpdateGatewayRateLimitRequest$ === "object");
+assert(typeof UpdateGatewayRateLimitResponse$ === "object");
+assert(typeof UpdateGatewayRequest$ === "object");
+assert(typeof UpdateGatewayResponse$ === "object");
+assert(typeof UpdateGatewayRuleRequest$ === "object");
+assert(typeof UpdateGatewayRuleResponse$ === "object");
+assert(typeof UpdateGatewayTargetRequest$ === "object");
+assert(typeof UpdateGatewayTargetResponse$ === "object");
+assert(typeof UpdateHarnessEndpointRequest$ === "object");
+assert(typeof UpdateHarnessEndpointResponse$ === "object");
+assert(typeof UpdateHarnessRequest$ === "object");
+assert(typeof UpdateHarnessResponse$ === "object");
+assert(typeof UpdateMemoryInput$ === "object");
+assert(typeof UpdateMemoryOutput$ === "object");
+assert(typeof UpdateOauth2CredentialProviderRequest$ === "object");
+assert(typeof UpdateOauth2CredentialProviderResponse$ === "object");
+assert(typeof UpdateOnlineEvaluationConfigRequest$ === "object");
+assert(typeof UpdateOnlineEvaluationConfigResponse$ === "object");
+assert(typeof UpdatePaymentConnectorRequest$ === "object");
+assert(typeof UpdatePaymentConnectorResponse$ === "object");
+assert(typeof UpdatePaymentCredentialProviderRequest$ === "object");
+assert(typeof UpdatePaymentCredentialProviderResponse$ === "object");
+assert(typeof UpdatePaymentManagerRequest$ === "object");
+assert(typeof UpdatePaymentManagerResponse$ === "object");
+assert(typeof UpdatePolicyEngineRequest$ === "object");
+assert(typeof UpdatePolicyEngineResponse$ === "object");
+assert(typeof UpdatePolicyRequest$ === "object");
+assert(typeof UpdatePolicyResponse$ === "object");
+assert(typeof UpdateRegistryRecordRequest$ === "object");
+assert(typeof UpdateRegistryRecordResponse$ === "object");
+assert(typeof UpdateRegistryRecordStatusRequest$ === "object");
+assert(typeof UpdateRegistryRecordStatusResponse$ === "object");
+assert(typeof UpdateRegistryRequest$ === "object");
+assert(typeof UpdateRegistryResponse$ === "object");
+assert(typeof UpdateWorkloadIdentityRequest$ === "object");
+assert(typeof UpdateWorkloadIdentityResponse$ === "object");
+assert(typeof UserPreferenceConsolidationOverride$ === "object");
+assert(typeof UserPreferenceExtractionOverride$ === "object");
+assert(typeof UserPreferenceMemoryStrategyInput$ === "object");
+assert(typeof UserPreferenceOverrideConfigurationInput$ === "object");
+assert(typeof UserPreferenceOverrideConsolidationConfigurationInput$ === "object");
+assert(typeof UserPreferenceOverrideExtractionConfigurationInput$ === "object");
+assert(typeof Validation$ === "object");
+assert(typeof ValidationExceptionField$ === "object");
+assert(typeof VersionCreatedBySource$ === "object");
+assert(typeof VersionFilter$ === "object");
+assert(typeof VersionLineageMetadata$ === "object");
+assert(typeof VolumeConfiguration$ === "object");
+assert(typeof VpcConfig$ === "object");
+assert(typeof VpcConfiguration$ === "object");
+assert(typeof WafConfiguration$ === "object");
+assert(typeof WeightedOverride$ === "object");
+assert(typeof WeightedRoute$ === "object");
+assert(typeof WorkloadIdentityDetails$ === "object");
+assert(typeof WorkloadIdentityType$ === "object");
+// enums
+assert(typeof ActorTokenContentType === "object");
+assert(typeof AgentManagedRuntimeType === "object");
+assert(typeof AgentRuntimeEndpointStatus === "object");
+assert(typeof AgentRuntimeStatus === "object");
+assert(typeof ApiKeyCredentialLocation === "object");
+assert(typeof AuthorizerType === "object");
+assert(typeof BrowserEnterprisePolicyType === "object");
+assert(typeof BrowserNetworkMode === "object");
+assert(typeof BrowserProfileStatus === "object");
+assert(typeof BrowserStatus === "object");
+assert(typeof CapacityProviderStatus === "object");
+assert(typeof CapacityProviderStatusCode === "object");
+assert(typeof CapacityReservationPreference === "object");
+assert(typeof CircuitBreakerMode === "object");
+assert(typeof ClaimMatchOperatorType === "object");
+assert(typeof ClientAuthenticationMethodType === "object");
+assert(typeof ClusteringFrequency === "object");
+assert(typeof CodeInterpreterNetworkMode === "object");
+assert(typeof CodeInterpreterStatus === "object");
+assert(typeof CoinbaseCdpSecret === "object");
+assert(typeof ConfigurationBundleStatus === "object");
+assert(typeof ConsentPortalSourceType === "object");
+assert(typeof ConsentPortalStatus === "object");
+assert(typeof ContentLevel === "object");
+assert(typeof ContentType === "object");
+assert(typeof CredentialProviderType === "object");
+assert(typeof CredentialProviderVendorType === "object");
+assert(typeof DatasetSchemaType === "object");
+assert(typeof DatasetStatus === "object");
+assert(typeof DescriptorType === "object");
+assert(typeof DraftStatus === "object");
+assert(typeof EbsVolumeType === "object");
+assert(typeof EndpointIpAddressType === "object");
+assert(typeof EnforcementMode === "object");
+assert(typeof EvaluatorLevel === "object");
+assert(typeof EvaluatorStatus === "object");
+assert(typeof EvaluatorType === "object");
+assert(typeof ExceptionLevel === "object");
+assert(typeof ExtractionType === "object");
+assert(typeof FallbackError === "object");
+assert(typeof FilterOperator === "object");
+assert(typeof FindingType === "object");
+assert(typeof GatewayInterceptionPoint === "object");
+assert(typeof GatewayPolicyEngineMode === "object");
+assert(typeof GatewayProtocolType === "object");
+assert(typeof GatewayRateLimitStatus === "object");
+assert(typeof GatewayRuleStatus === "object");
+assert(typeof GatewayStatus === "object");
+assert(typeof HarnessBedrockApiFormat === "object");
+assert(typeof HarnessEndpointStatus === "object");
+assert(typeof HarnessHookFailureMode === "object");
+assert(typeof HarnessManagedMemoryStrategyType === "object");
+assert(typeof HarnessOpenAiApiFormat === "object");
+assert(typeof HarnessStatus === "object");
+assert(typeof HarnessToolType === "object");
+assert(typeof HarnessTruncationStrategy === "object");
+assert(typeof InboundTokenClaimValueType === "object");
+assert(typeof IncludedData === "object");
+assert(typeof InterceptorPayloadExclusion === "object");
+assert(typeof KeyType === "object");
+assert(typeof ListingMode === "object");
+assert(typeof MatchOperator === "object");
+assert(typeof MemoryStatus === "object");
+assert(typeof MemoryStrategyStatus === "object");
+assert(typeof MemoryStrategyType === "object");
+assert(typeof MemoryView === "object");
+assert(typeof MetadataValueType === "object");
+assert(typeof Monitoring === "object");
+assert(typeof NetworkMode === "object");
+assert(typeof OAuthGrantType === "object");
+assert(typeof OnBehalfOfClientAuthenticationMethod === "object");
+assert(typeof OnBehalfOfTokenExchangeGrantTypeType === "object");
+assert(typeof OnlineEvaluationConfigStatus === "object");
+assert(typeof OnlineEvaluationExecutionStatus === "object");
+assert(typeof OperatingSystem === "object");
+assert(typeof OverrideType === "object");
+assert(typeof PassthroughProtocolType === "object");
+assert(typeof PaymentConnectorProvisionMode === "object");
+assert(typeof PaymentConnectorStatus === "object");
+assert(typeof PaymentConnectorType === "object");
+assert(typeof PaymentCredentialProviderVendorType === "object");
+assert(typeof PaymentManagerStatus === "object");
+assert(typeof PaymentsAuthorizerType === "object");
+assert(typeof Period === "object");
+assert(typeof PolicyEngineStatus === "object");
+assert(typeof PolicyGenerationStatus === "object");
+assert(typeof PolicyStatus === "object");
+assert(typeof PolicyValidationMode === "object");
+assert(typeof PrincipalMatchOperator === "object");
+assert(typeof Provider === "object");
+assert(typeof RecordExpiryAction === "object");
+assert(typeof RegistryAuthorizerType === "object");
+assert(typeof RegistryRecordCredentialProviderType === "object");
+assert(typeof RegistryRecordOAuthGrantType === "object");
+assert(typeof RegistryRecordStatus === "object");
+assert(typeof RegistryStatus === "object");
+assert(typeof ResourceType === "object");
+assert(typeof RestApiMethod === "object");
+assert(typeof ResultDestination === "object");
+assert(typeof SchemaType === "object");
+assert(typeof SearchType === "object");
+assert(typeof SecretSourceType === "object");
+assert(typeof ServerProtocol === "object");
+assert(typeof SigningAlgorithm === "object");
+assert(typeof StaticQueryParameterConflictResolution === "object");
+assert(typeof Status === "object");
+assert(typeof SynchronizationType === "object");
+assert(typeof TargetProtocolType === "object");
+assert(typeof TargetStatus === "object");
+assert(typeof TargetType === "object");
+assert(typeof ValidationExceptionReason === "object");
+assert(typeof WafFailureMode === "object");
+// errors
+assert(AccessDeniedException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof AccessDeniedException$ === "object");
+assert(ConcurrentModificationException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ConcurrentModificationException$ === "object");
+assert(ConflictException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ConflictException$ === "object");
+assert(DecryptionFailure.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof DecryptionFailure$ === "object");
+assert(EncryptionFailure.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof EncryptionFailure$ === "object");
+assert(InternalServerException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof InternalServerException$ === "object");
+assert(ResourceLimitExceededException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ResourceLimitExceededException$ === "object");
+assert(ResourceNotFoundException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ResourceNotFoundException$ === "object");
+assert(RetryableConflictException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof RetryableConflictException$ === "object");
+assert(ServiceException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ServiceException$ === "object");
+assert(ServiceQuotaExceededException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ServiceQuotaExceededException$ === "object");
+assert(SubscriptionRequiredException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof SubscriptionRequiredException$ === "object");
+assert(ThrottledException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ThrottledException$ === "object");
+assert(ThrottlingException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ThrottlingException$ === "object");
+assert(UnauthorizedException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof UnauthorizedException$ === "object");
+assert(ValidationException.prototype instanceof BedrockAgentCoreControlServiceException);
+assert(typeof ValidationException$ === "object");
+assert(BedrockAgentCoreControlServiceException.prototype instanceof Error);
+// waiters
+assert(typeof waitForMemoryCreated === "function");
+assert(typeof waitForPolicyActive === "function");
+assert(typeof waitForPolicyDeleted === "function");
+assert(typeof waitForPolicyEngineActive === "function");
+assert(typeof waitForPolicyEngineDeleted === "function");
+assert(typeof waitForPolicyGenerationCompleted === "function");
+assert(typeof waitUntilMemoryCreated === "function");
+assert(typeof waitUntilPolicyActive === "function");
+assert(typeof waitUntilPolicyDeleted === "function");
+assert(typeof waitUntilPolicyEngineActive === "function");
+assert(typeof waitUntilPolicyEngineDeleted === "function");
+assert(typeof waitUntilPolicyGenerationCompleted === "function");
+// paginators
+assert(typeof paginateListAgentRuntimeEndpoints === "function");
+assert(typeof paginateListAgentRuntimeVersions === "function");
+assert(typeof paginateListAgentRuntimeVersionsByCapacityProvider === "function");
+assert(typeof paginateListAgentRuntimes === "function");
+assert(typeof paginateListApiKeyCredentialProviders === "function");
+assert(typeof paginateListBrowserProfiles === "function");
+assert(typeof paginateListBrowsers === "function");
+assert(typeof paginateListCapacityProviders === "function");
+assert(typeof paginateListCodeInterpreters === "function");
+assert(typeof paginateListConfigurationBundleVersions === "function");
+assert(typeof paginateListConfigurationBundles === "function");
+assert(typeof paginateListConsentPortals === "function");
+assert(typeof paginateListDatasetExamples === "function");
+assert(typeof paginateListDatasetVersions === "function");
+assert(typeof paginateListDatasets === "function");
+assert(typeof paginateListEvaluators === "function");
+assert(typeof paginateListGatewayRateLimits === "function");
+assert(typeof paginateListGatewayRules === "function");
+assert(typeof paginateListGatewayTargets === "function");
+assert(typeof paginateListGateways === "function");
+assert(typeof paginateListHarnessEndpoints === "function");
+assert(typeof paginateListHarnessVersions === "function");
+assert(typeof paginateListHarnesses === "function");
+assert(typeof paginateListMemories === "function");
+assert(typeof paginateListOauth2CredentialProviders === "function");
+assert(typeof paginateListOnlineEvaluationConfigs === "function");
+assert(typeof paginateListPaymentConnectors === "function");
+assert(typeof paginateListPaymentCredentialProviders === "function");
+assert(typeof paginateListPaymentManagers === "function");
+assert(typeof paginateListPolicies === "function");
+assert(typeof paginateListPolicyEngineSummaries === "function");
+assert(typeof paginateListPolicyEngines === "function");
+assert(typeof paginateListPolicyGenerationAssets === "function");
+assert(typeof paginateListPolicyGenerationSummaries === "function");
+assert(typeof paginateListPolicyGenerations === "function");
+assert(typeof paginateListPolicySummaries === "function");
+assert(typeof paginateListRegistries === "function");
+assert(typeof paginateListRegistryRecords === "function");
+assert(typeof paginateListWorkloadIdentities === "function");
+console.log(`BedrockAgentCoreControl index test passed.`);

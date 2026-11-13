@@ -1,95 +1,182 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeSolutionVersionRequest, DescribeSolutionVersionResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1DescribeSolutionVersionCommand,
-  serializeAws_json1_1DescribeSolutionVersionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSolutionVersionRequest, DescribeSolutionVersionResponse } from "../models/models_0";
+import { DescribeSolutionVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSolutionVersionCommand}.
+ */
 export interface DescribeSolutionVersionCommandInput extends DescribeSolutionVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSolutionVersionCommand}.
+ */
 export interface DescribeSolutionVersionCommandOutput extends DescribeSolutionVersionResponse, __MetadataBearer {}
 
 /**
- * <p>Describes a specific version of a solution. For more information on solutions, see <a>CreateSolution</a>.</p>
+ * <p>Describes a specific version of a solution. For more information on solutions, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html">CreateSolution</a>
+ *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PersonalizeClient, DescribeSolutionVersionCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, DescribeSolutionVersionCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // DescribeSolutionVersionRequest
+ *   solutionVersionArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeSolutionVersionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSolutionVersionResponse
+ * //   solutionVersion: { // SolutionVersion
+ * //     name: "STRING_VALUE",
+ * //     solutionVersionArn: "STRING_VALUE",
+ * //     solutionArn: "STRING_VALUE",
+ * //     performHPO: true || false,
+ * //     performAutoML: true || false,
+ * //     performIncrementalUpdate: true || false,
+ * //     recipeArn: "STRING_VALUE",
+ * //     eventType: "STRING_VALUE",
+ * //     datasetGroupArn: "STRING_VALUE",
+ * //     solutionConfig: { // SolutionConfig
+ * //       eventValueThreshold: "STRING_VALUE",
+ * //       hpoConfig: { // HPOConfig
+ * //         hpoObjective: { // HPOObjective
+ * //           type: "STRING_VALUE",
+ * //           metricName: "STRING_VALUE",
+ * //           metricRegex: "STRING_VALUE",
+ * //         },
+ * //         hpoResourceConfig: { // HPOResourceConfig
+ * //           maxNumberOfTrainingJobs: "STRING_VALUE",
+ * //           maxParallelTrainingJobs: "STRING_VALUE",
+ * //         },
+ * //         algorithmHyperParameterRanges: { // HyperParameterRanges
+ * //           integerHyperParameterRanges: [ // IntegerHyperParameterRanges
+ * //             { // IntegerHyperParameterRange
+ * //               name: "STRING_VALUE",
+ * //               minValue: Number("int"),
+ * //               maxValue: Number("int"),
+ * //             },
+ * //           ],
+ * //           continuousHyperParameterRanges: [ // ContinuousHyperParameterRanges
+ * //             { // ContinuousHyperParameterRange
+ * //               name: "STRING_VALUE",
+ * //               minValue: Number("double"),
+ * //               maxValue: Number("double"),
+ * //             },
+ * //           ],
+ * //           categoricalHyperParameterRanges: [ // CategoricalHyperParameterRanges
+ * //             { // CategoricalHyperParameterRange
+ * //               name: "STRING_VALUE",
+ * //               values: [ // CategoricalValues
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //       algorithmHyperParameters: { // HyperParameters
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       featureTransformationParameters: { // FeatureTransformationParameters
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       autoMLConfig: { // AutoMLConfig
+ * //         metricName: "STRING_VALUE",
+ * //         recipeList: [ // ArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       eventsConfig: { // EventsConfig
+ * //         eventParametersList: [ // EventParametersList
+ * //           { // EventParameters
+ * //             eventType: "STRING_VALUE",
+ * //             eventValueThreshold: Number("double"),
+ * //             weight: Number("double"),
+ * //           },
+ * //         ],
+ * //       },
+ * //       optimizationObjective: { // OptimizationObjective
+ * //         itemAttribute: "STRING_VALUE",
+ * //         objectiveSensitivity: "LOW" || "MEDIUM" || "HIGH" || "OFF",
+ * //       },
+ * //       trainingDataConfig: { // TrainingDataConfig
+ * //         excludedDatasetColumns: { // ExcludedDatasetColumns
+ * //           "<keys>": [ // ColumnNamesList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         includedDatasetColumns: { // IncludedDatasetColumns
+ * //           "<keys>": [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //       autoTrainingConfig: { // AutoTrainingConfig
+ * //         schedulingExpression: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     trainingHours: Number("double"),
+ * //     trainingMode: "FULL" || "UPDATE" || "AUTOTRAIN",
+ * //     tunedHPOParams: { // TunedHPOParams
+ * //       algorithmHyperParameters: {
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     status: "STRING_VALUE",
+ * //     failureReason: "STRING_VALUE",
+ * //     creationDateTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //     trainingType: "AUTOMATIC" || "MANUAL",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeSolutionVersionCommandInput - {@link DescribeSolutionVersionCommandInput}
+ * @returns {@link DescribeSolutionVersionCommandOutput}
  * @see {@link DescribeSolutionVersionCommandInput} for command's `input` shape.
  * @see {@link DescribeSolutionVersionCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSolutionVersionCommand extends $Command<
-  DescribeSolutionVersionCommandInput,
-  DescribeSolutionVersionCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSolutionVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSolutionVersionCommandInput, DescribeSolutionVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "DescribeSolutionVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSolutionVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSolutionVersionResponse.filterSensitiveLog,
+export class DescribeSolutionVersionCommand extends command<DescribeSolutionVersionCommandInput, DescribeSolutionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSolutionVersion",
+  DescribeSolutionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSolutionVersionRequest;
+      output: DescribeSolutionVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSolutionVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSolutionVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSolutionVersionCommandOutput> {
-    return deserializeAws_json1_1DescribeSolutionVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSolutionVersionCommandInput;
+      output: DescribeSolutionVersionCommandOutput;
+    };
+  };
 }

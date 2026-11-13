@@ -1,0 +1,241 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetJobEntityRequest, BatchGetJobEntityResponse } from "../models/models_0";
+import { BatchGetJobEntity$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetJobEntityCommand}.
+ */
+export interface BatchGetJobEntityCommandInput extends BatchGetJobEntityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetJobEntityCommand}.
+ */
+export interface BatchGetJobEntityCommandOutput extends BatchGetJobEntityResponse, __MetadataBearer {}
+
+/**
+ * Get batched job details for a worker.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, BatchGetJobEntityCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, BatchGetJobEntityCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // BatchGetJobEntityRequest
+ *   farmId: "STRING_VALUE", // required
+ *   fleetId: "STRING_VALUE", // required
+ *   workerId: "STRING_VALUE", // required
+ *   identifiers: [ // JobEntityIdentifiers // required
+ *     { // JobEntityIdentifiersUnion Union: only one key present
+ *       jobDetails: { // JobDetailsIdentifiers
+ *         jobId: "STRING_VALUE", // required
+ *       },
+ *       jobAttachmentDetails: { // JobAttachmentDetailsIdentifiers
+ *         jobId: "STRING_VALUE", // required
+ *       },
+ *       stepDetails: { // StepDetailsIdentifiers
+ *         jobId: "STRING_VALUE", // required
+ *         stepId: "STRING_VALUE", // required
+ *       },
+ *       environmentDetails: { // EnvironmentDetailsIdentifiers
+ *         jobId: "STRING_VALUE", // required
+ *         environmentId: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   ],
+ * };
+ * const command = new BatchGetJobEntityCommand(input);
+ * const response = await client.send(command);
+ * // { // BatchGetJobEntityResponse
+ * //   entities: [ // BatchGetJobEntityList // required
+ * //     { // JobEntity Union: only one key present
+ * //       jobDetails: { // JobDetailsEntity
+ * //         jobId: "STRING_VALUE", // required
+ * //         jobAttachmentSettings: { // JobDetailsJobAttachmentSettings
+ * //           s3BucketName: "STRING_VALUE", // required
+ * //           rootPrefix: "STRING_VALUE", // required
+ * //         },
+ * //         jobRunAsUser: { // JobRunAsUser
+ * //           posix: { // PosixUser
+ * //             user: "STRING_VALUE", // required
+ * //             group: "STRING_VALUE", // required
+ * //           },
+ * //           windows: { // WindowsUser
+ * //             user: "STRING_VALUE", // required
+ * //             passwordArn: "STRING_VALUE", // required
+ * //           },
+ * //           runAs: "QUEUE_CONFIGURED_USER" || "WORKER_AGENT_USER", // required
+ * //         },
+ * //         logGroupName: "STRING_VALUE", // required
+ * //         queueRoleArn: "STRING_VALUE",
+ * //         parameters: { // JobParameters
+ * //           "<keys>": { // JobParameter Union: only one key present
+ * //             int: "STRING_VALUE",
+ * //             float: "STRING_VALUE",
+ * //             string: "STRING_VALUE",
+ * //             path: "STRING_VALUE",
+ * //             bool: "STRING_VALUE",
+ * //             rangeExpr: "STRING_VALUE",
+ * //             stringList: [ // ParameterStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             pathList: [ // PathStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             intList: [ // IntStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             floatList: [ // FloatStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             boolList: [ // BooleanStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             intListList: [ // IntStringListList
+ * //               [ // NestedIntStringList
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             ],
+ * //           },
+ * //         },
+ * //         schemaVersion: "STRING_VALUE", // required
+ * //         extensions: [ // OpenjdExtensionNameList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         pathMappingRules: [ // PathMappingRules
+ * //           { // PathMappingRule
+ * //             sourcePathFormat: "windows" || "posix", // required
+ * //             sourcePath: "STRING_VALUE", // required
+ * //             destinationPath: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //       jobAttachmentDetails: { // JobAttachmentDetailsEntity
+ * //         jobId: "STRING_VALUE", // required
+ * //         attachments: { // Attachments
+ * //           manifests: [ // ManifestPropertiesList // required
+ * //             { // ManifestProperties
+ * //               fileSystemLocationName: "STRING_VALUE",
+ * //               rootPath: "STRING_VALUE", // required
+ * //               rootPathFormat: "windows" || "posix", // required
+ * //               outputRelativeDirectories: [ // OutputRelativeDirectoriesList
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               inputManifestPath: "STRING_VALUE",
+ * //               inputManifestHash: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //           fileSystem: "COPIED" || "VIRTUAL",
+ * //         },
+ * //       },
+ * //       stepDetails: { // StepDetailsEntity
+ * //         jobId: "STRING_VALUE", // required
+ * //         stepId: "STRING_VALUE", // required
+ * //         schemaVersion: "STRING_VALUE", // required
+ * //         template: "DOCUMENT_VALUE", // required
+ * //         dependencies: [ // DependenciesList // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         extensions: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         resolvedSymbolTable: "STRING_VALUE",
+ * //       },
+ * //       environmentDetails: { // EnvironmentDetailsEntity
+ * //         jobId: "STRING_VALUE", // required
+ * //         environmentId: "STRING_VALUE", // required
+ * //         schemaVersion: "STRING_VALUE", // required
+ * //         template: "DOCUMENT_VALUE", // required
+ * //         extensions: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         resolvedSymbolTable: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   errors: [ // BatchGetJobEntityErrors // required
+ * //     { // GetJobEntityError Union: only one key present
+ * //       jobDetails: { // JobDetailsError
+ * //         jobId: "STRING_VALUE", // required
+ * //         code: "AccessDeniedException" || "InternalServerException" || "ValidationException" || "ResourceNotFoundException" || "MaxPayloadSizeExceeded" || "ConflictException", // required
+ * //         message: "STRING_VALUE", // required
+ * //       },
+ * //       jobAttachmentDetails: { // JobAttachmentDetailsError
+ * //         jobId: "STRING_VALUE", // required
+ * //         code: "AccessDeniedException" || "InternalServerException" || "ValidationException" || "ResourceNotFoundException" || "MaxPayloadSizeExceeded" || "ConflictException", // required
+ * //         message: "STRING_VALUE", // required
+ * //       },
+ * //       stepDetails: { // StepDetailsError
+ * //         jobId: "STRING_VALUE", // required
+ * //         stepId: "STRING_VALUE", // required
+ * //         code: "AccessDeniedException" || "InternalServerException" || "ValidationException" || "ResourceNotFoundException" || "MaxPayloadSizeExceeded" || "ConflictException", // required
+ * //         message: "STRING_VALUE", // required
+ * //       },
+ * //       environmentDetails: { // EnvironmentDetailsError
+ * //         jobId: "STRING_VALUE", // required
+ * //         environmentId: "STRING_VALUE", // required
+ * //         code: "AccessDeniedException" || "InternalServerException" || "ValidationException" || "ResourceNotFoundException" || "MaxPayloadSizeExceeded" || "ConflictException", // required
+ * //         message: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param BatchGetJobEntityCommandInput - {@link BatchGetJobEntityCommandInput}
+ * @returns {@link BatchGetJobEntityCommandOutput}
+ * @see {@link BatchGetJobEntityCommandInput} for command's `input` shape.
+ * @see {@link BatchGetJobEntityCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class BatchGetJobEntityCommand extends command<BatchGetJobEntityCommandInput, BatchGetJobEntityCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetJobEntity",
+  BatchGetJobEntity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetJobEntityRequest;
+      output: BatchGetJobEntityResponse;
+    };
+    sdk: {
+      input: BatchGetJobEntityCommandInput;
+      output: BatchGetJobEntityCommandOutput;
+    };
+  };
+}

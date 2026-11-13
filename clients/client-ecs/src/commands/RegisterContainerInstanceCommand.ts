@@ -1,103 +1,219 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { RegisterContainerInstanceRequest, RegisterContainerInstanceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1RegisterContainerInstanceCommand,
-  serializeAws_json1_1RegisterContainerInstanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterContainerInstanceRequest, RegisterContainerInstanceResponse } from "../models/models_0";
+import { RegisterContainerInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterContainerInstanceCommand}.
+ */
 export interface RegisterContainerInstanceCommandInput extends RegisterContainerInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterContainerInstanceCommand}.
+ */
 export interface RegisterContainerInstanceCommandOutput extends RegisterContainerInstanceResponse, __MetadataBearer {}
 
 /**
- * <note>
- *             <p>This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.</p>
- *          </note>
- *          <p>Registers an EC2
- * 			instance into the specified cluster. This instance becomes available to place containers
- * 			on.</p>
+ * <note> <p>This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.</p> </note> <p>Registers an EC2 instance into the specified cluster. This instance becomes available to place containers on.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, RegisterContainerInstanceCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, RegisterContainerInstanceCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // RegisterContainerInstanceRequest
+ *   cluster: "STRING_VALUE",
+ *   instanceIdentityDocument: "STRING_VALUE",
+ *   instanceIdentityDocumentSignature: "STRING_VALUE",
+ *   totalResources: [ // Resources
+ *     { // Resource
+ *       name: "STRING_VALUE",
+ *       type: "STRING_VALUE",
+ *       doubleValue: Number("double"),
+ *       longValue: Number("long"),
+ *       integerValue: Number("int"),
+ *       stringSetValue: [ // StringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   versionInfo: { // VersionInfo
+ *     agentVersion: "STRING_VALUE",
+ *     agentHash: "STRING_VALUE",
+ *     dockerVersion: "STRING_VALUE",
+ *   },
+ *   containerInstanceArn: "STRING_VALUE",
+ *   attributes: [ // Attributes
+ *     { // Attribute
+ *       name: "STRING_VALUE", // required
+ *       value: "STRING_VALUE",
+ *       targetType: "container-instance",
+ *       targetId: "STRING_VALUE",
+ *     },
+ *   ],
+ *   platformDevices: [ // PlatformDevices
+ *     { // PlatformDevice
+ *       id: "STRING_VALUE", // required
+ *       type: "GPU" || "NEURON_DEVICE", // required
+ *     },
+ *   ],
+ *   tags: [ // Tags
+ *     { // Tag
+ *       key: "STRING_VALUE",
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new RegisterContainerInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterContainerInstanceResponse
+ * //   containerInstance: { // ContainerInstance
+ * //     containerInstanceArn: "STRING_VALUE",
+ * //     ec2InstanceId: "STRING_VALUE",
+ * //     capacityProviderName: "STRING_VALUE",
+ * //     version: Number("long"),
+ * //     versionInfo: { // VersionInfo
+ * //       agentVersion: "STRING_VALUE",
+ * //       agentHash: "STRING_VALUE",
+ * //       dockerVersion: "STRING_VALUE",
+ * //     },
+ * //     remainingResources: [ // Resources
+ * //       { // Resource
+ * //         name: "STRING_VALUE",
+ * //         type: "STRING_VALUE",
+ * //         doubleValue: Number("double"),
+ * //         longValue: Number("long"),
+ * //         integerValue: Number("int"),
+ * //         stringSetValue: [ // StringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     registeredResources: [
+ * //       {
+ * //         name: "STRING_VALUE",
+ * //         type: "STRING_VALUE",
+ * //         doubleValue: Number("double"),
+ * //         longValue: Number("long"),
+ * //         integerValue: Number("int"),
+ * //         stringSetValue: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     status: "STRING_VALUE",
+ * //     statusReason: "STRING_VALUE",
+ * //     agentConnected: true || false,
+ * //     runningTasksCount: Number("int"),
+ * //     pendingTasksCount: Number("int"),
+ * //     agentUpdateStatus: "PENDING" || "STAGING" || "STAGED" || "UPDATING" || "UPDATED" || "FAILED",
+ * //     attributes: [ // Attributes
+ * //       { // Attribute
+ * //         name: "STRING_VALUE", // required
+ * //         value: "STRING_VALUE",
+ * //         targetType: "container-instance",
+ * //         targetId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     registeredAt: new Date("TIMESTAMP"),
+ * //     attachments: [ // Attachments
+ * //       { // Attachment
+ * //         id: "STRING_VALUE",
+ * //         type: "STRING_VALUE",
+ * //         status: "STRING_VALUE",
+ * //         details: [ // AttachmentDetails
+ * //           { // KeyValuePair
+ * //             name: "STRING_VALUE",
+ * //             value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     tags: [ // Tags
+ * //       { // Tag
+ * //         key: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     healthStatus: { // ContainerInstanceHealthStatus
+ * //       overallStatus: "OK" || "IMPAIRED" || "INSUFFICIENT_DATA" || "INITIALIZING",
+ * //       details: [ // InstanceHealthCheckResultList
+ * //         { // InstanceHealthCheckResult
+ * //           type: "CONTAINER_RUNTIME" || "ACCELERATED_COMPUTE" || "DAEMON" || "AGENT_CONNECTIVITY",
+ * //           status: "OK" || "IMPAIRED" || "INSUFFICIENT_DATA" || "INITIALIZING",
+ * //           statusReason: "STRING_VALUE",
+ * //           lastUpdated: new Date("TIMESTAMP"),
+ * //           lastStatusChange: new Date("TIMESTAMP"),
+ * //         },
+ * //       ],
+ * //     },
+ * //     gpuDevices: [ // GpuDevices
+ * //       { // GpuDevice
+ * //         gpuId: "STRING_VALUE",
+ * //         sharingMode: "IDLE" || "NVIDIA_MPS" || "DEDICATED",
+ * //         totalMemoryInMiB: Number("int"),
+ * //         remainingMemoryInMiB: Number("int"),
+ * //         containerCount: Number("int"),
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RegisterContainerInstanceCommandInput - {@link RegisterContainerInstanceCommandInput}
+ * @returns {@link RegisterContainerInstanceCommandOutput}
  * @see {@link RegisterContainerInstanceCommandInput} for command's `input` shape.
  * @see {@link RegisterContainerInstanceCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link ClusterNotFoundException} (client fault)
+ *  <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterContainerInstanceCommand extends $Command<
-  RegisterContainerInstanceCommandInput,
-  RegisterContainerInstanceCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterContainerInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterContainerInstanceCommandInput, RegisterContainerInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "RegisterContainerInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterContainerInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterContainerInstanceResponse.filterSensitiveLog,
+export class RegisterContainerInstanceCommand extends command<RegisterContainerInstanceCommandInput, RegisterContainerInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterContainerInstance",
+  RegisterContainerInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterContainerInstanceRequest;
+      output: RegisterContainerInstanceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterContainerInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RegisterContainerInstanceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RegisterContainerInstanceCommandOutput> {
-    return deserializeAws_json1_1RegisterContainerInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterContainerInstanceCommandInput;
+      output: RegisterContainerInstanceCommandOutput;
+    };
+  };
 }

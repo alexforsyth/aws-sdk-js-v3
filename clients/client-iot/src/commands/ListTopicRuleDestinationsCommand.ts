@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListTopicRuleDestinationsRequest, ListTopicRuleDestinationsResponse } from "../models/models_2";
-import {
-  deserializeAws_restJson1ListTopicRuleDestinationsCommand,
-  serializeAws_restJson1ListTopicRuleDestinationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTopicRuleDestinationsRequest, ListTopicRuleDestinationsResponse } from "../models/models_2";
+import { ListTopicRuleDestinations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTopicRuleDestinationsCommand}.
+ */
 export interface ListTopicRuleDestinationsCommandInput extends ListTopicRuleDestinationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTopicRuleDestinationsCommand}.
+ */
 export interface ListTopicRuleDestinationsCommandOutput extends ListTopicRuleDestinationsResponse, __MetadataBearer {}
 
 /**
@@ -29,71 +30,89 @@ export interface ListTopicRuleDestinationsCommandOutput extends ListTopicRuleDes
  * ```javascript
  * import { IoTClient, ListTopicRuleDestinationsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListTopicRuleDestinationsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListTopicRuleDestinationsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListTopicRuleDestinationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTopicRuleDestinationsResponse
+ * //   destinationSummaries: [ // TopicRuleDestinationSummaries
+ * //     { // TopicRuleDestinationSummary
+ * //       arn: "STRING_VALUE",
+ * //       status: "ENABLED" || "IN_PROGRESS" || "DISABLED" || "ERROR" || "DELETING",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       lastUpdatedAt: new Date("TIMESTAMP"),
+ * //       statusReason: "STRING_VALUE",
+ * //       httpUrlSummary: { // HttpUrlDestinationSummary
+ * //         confirmationUrl: "STRING_VALUE",
+ * //       },
+ * //       vpcDestinationSummary: { // VpcDestinationSummary
+ * //         subnetIds: [ // SubnetIdList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         securityGroups: [ // SecurityGroupList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         vpcId: "STRING_VALUE",
+ * //         roleArn: "STRING_VALUE",
+ * //       },
+ * //       influxDBSummary: { // InfluxDBDestinationSummary
+ * //         endpoint: "STRING_VALUE",
+ * //         influxDBVersion: "V2" || "V3",
+ * //         secretId: "STRING_VALUE",
+ * //         secretType: "SecretString" || "SecretBinary",
+ * //         secretKey: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTopicRuleDestinationsCommandInput - {@link ListTopicRuleDestinationsCommandInput}
+ * @returns {@link ListTopicRuleDestinationsCommandOutput}
  * @see {@link ListTopicRuleDestinationsCommandInput} for command's `input` shape.
  * @see {@link ListTopicRuleDestinationsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListTopicRuleDestinationsCommand extends $Command<
-  ListTopicRuleDestinationsCommandInput,
-  ListTopicRuleDestinationsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTopicRuleDestinationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTopicRuleDestinationsCommandInput, ListTopicRuleDestinationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListTopicRuleDestinationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTopicRuleDestinationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTopicRuleDestinationsResponse.filterSensitiveLog,
+export class ListTopicRuleDestinationsCommand extends command<ListTopicRuleDestinationsCommandInput, ListTopicRuleDestinationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTopicRuleDestinations",
+  ListTopicRuleDestinations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTopicRuleDestinationsRequest;
+      output: ListTopicRuleDestinationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTopicRuleDestinationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTopicRuleDestinationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListTopicRuleDestinationsCommandOutput> {
-    return deserializeAws_restJson1ListTopicRuleDestinationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTopicRuleDestinationsCommandInput;
+      output: ListTopicRuleDestinationsCommandOutput;
+    };
+  };
 }

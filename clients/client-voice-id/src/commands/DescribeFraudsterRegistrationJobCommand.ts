@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeFraudsterRegistrationJobRequest, DescribeFraudsterRegistrationJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeFraudsterRegistrationJobCommand,
-  serializeAws_json1_0DescribeFraudsterRegistrationJobCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, VoiceIDClientResolvedConfig } from "../VoiceIDClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeFraudsterRegistrationJobRequest,
+  DescribeFraudsterRegistrationJobResponse,
+} from "../models/models_0";
+import { DescribeFraudsterRegistrationJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFraudsterRegistrationJobCommand}.
+ */
 export interface DescribeFraudsterRegistrationJobCommandInput extends DescribeFraudsterRegistrationJobRequest {}
-export interface DescribeFraudsterRegistrationJobCommandOutput
-  extends DescribeFraudsterRegistrationJobResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFraudsterRegistrationJobCommand}.
+ */
+export interface DescribeFraudsterRegistrationJobCommandOutput extends DescribeFraudsterRegistrationJobResponse, __MetadataBearer {}
 
 /**
  * <p>Describes the specified fraudster registration job.</p>
@@ -30,74 +32,98 @@ export interface DescribeFraudsterRegistrationJobCommandOutput
  * ```javascript
  * import { VoiceIDClient, DescribeFraudsterRegistrationJobCommand } from "@aws-sdk/client-voice-id"; // ES Modules import
  * // const { VoiceIDClient, DescribeFraudsterRegistrationJobCommand } = require("@aws-sdk/client-voice-id"); // CommonJS import
+ * // import type { VoiceIDClientConfig } from "@aws-sdk/client-voice-id";
+ * const config = {}; // type is VoiceIDClientConfig
  * const client = new VoiceIDClient(config);
+ * const input = { // DescribeFraudsterRegistrationJobRequest
+ *   DomainId: "STRING_VALUE", // required
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeFraudsterRegistrationJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFraudsterRegistrationJobResponse
+ * //   Job: { // FraudsterRegistrationJob
+ * //     JobName: "STRING_VALUE",
+ * //     JobId: "STRING_VALUE",
+ * //     JobStatus: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     DataAccessRoleArn: "STRING_VALUE",
+ * //     RegistrationConfig: { // RegistrationConfig
+ * //       DuplicateRegistrationAction: "STRING_VALUE",
+ * //       FraudsterSimilarityThreshold: Number("int"),
+ * //       WatchlistIds: [ // RegistrationConfigWatchlistIds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     InputDataConfig: { // InputDataConfig
+ * //       S3Uri: "STRING_VALUE", // required
+ * //     },
+ * //     OutputDataConfig: { // OutputDataConfig
+ * //       S3Uri: "STRING_VALUE", // required
+ * //       KmsKeyId: "STRING_VALUE",
+ * //     },
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     EndedAt: new Date("TIMESTAMP"),
+ * //     FailureDetails: { // FailureDetails
+ * //       StatusCode: Number("int"),
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     JobProgress: { // JobProgress
+ * //       PercentComplete: Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeFraudsterRegistrationJobCommandInput - {@link DescribeFraudsterRegistrationJobCommandInput}
+ * @returns {@link DescribeFraudsterRegistrationJobCommandOutput}
  * @see {@link DescribeFraudsterRegistrationJobCommandInput} for command's `input` shape.
  * @see {@link DescribeFraudsterRegistrationJobCommandOutput} for command's `response` shape.
- * @see {@link VoiceIDClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link VoiceIDClientResolvedConfig | config} for VoiceIDClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action. Check the error message
+ *             and try again.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed due to an unknown error on the server side.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found. Check the <code>ResourceType</code> and error
+ *             message for more details.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. Please slow down your request rate.
+ *             Refer to <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas">
+ *                 Amazon Connect Voice ID Service API throttling quotas </a> and try your
+ *             request again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed one or more validations; check the error message for more
+ *             details.</p>
+ *
+ * @throws {@link VoiceIDServiceException}
+ * <p>Base exception class for all service exceptions from VoiceID service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFraudsterRegistrationJobCommand extends $Command<
-  DescribeFraudsterRegistrationJobCommandInput,
-  DescribeFraudsterRegistrationJobCommandOutput,
-  VoiceIDClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFraudsterRegistrationJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: VoiceIDClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFraudsterRegistrationJobCommandInput, DescribeFraudsterRegistrationJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "VoiceIDClient";
-    const commandName = "DescribeFraudsterRegistrationJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFraudsterRegistrationJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFraudsterRegistrationJobResponse.filterSensitiveLog,
+export class DescribeFraudsterRegistrationJobCommand extends command<DescribeFraudsterRegistrationJobCommandInput, DescribeFraudsterRegistrationJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFraudsterRegistrationJob",
+  DescribeFraudsterRegistrationJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFraudsterRegistrationJobRequest;
+      output: DescribeFraudsterRegistrationJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeFraudsterRegistrationJobCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeFraudsterRegistrationJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeFraudsterRegistrationJobCommandOutput> {
-    return deserializeAws_json1_0DescribeFraudsterRegistrationJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFraudsterRegistrationJobCommandInput;
+      output: DescribeFraudsterRegistrationJobCommandOutput;
+    };
+  };
 }

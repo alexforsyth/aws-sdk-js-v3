@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { CodeGuruProfiler } from "../CodeGuruProfiler";
 import { CodeGuruProfilerClient } from "../CodeGuruProfilerClient";
 import {
   ListFindingsReportsCommand,
   ListFindingsReportsCommandInput,
   ListFindingsReportsCommandOutput,
 } from "../commands/ListFindingsReportsCommand";
-import { CodeGuruProfilerPaginationConfiguration } from "./Interfaces";
+import type { CodeGuruProfilerPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: CodeGuruProfilerClient,
-  input: ListFindingsReportsCommandInput,
-  ...args: any
-): Promise<ListFindingsReportsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListFindingsReportsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: CodeGuruProfiler,
-  input: ListFindingsReportsCommandInput,
-  ...args: any
-): Promise<ListFindingsReportsCommandOutput> => {
-  // @ts-ignore
-  return await client.listFindingsReports(input, ...args);
-};
-export async function* paginateListFindingsReports(
+export const paginateListFindingsReports: (
   config: CodeGuruProfilerPaginationConfiguration,
   input: ListFindingsReportsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListFindingsReportsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListFindingsReportsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof CodeGuruProfiler) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof CodeGuruProfilerClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected CodeGuruProfiler | CodeGuruProfilerClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListFindingsReportsCommandOutput> = createPaginator<
+  CodeGuruProfilerPaginationConfiguration,
+  ListFindingsReportsCommandInput,
+  ListFindingsReportsCommandOutput
+>(CodeGuruProfilerClient, ListFindingsReportsCommand, "nextToken", "nextToken", "maxResults");

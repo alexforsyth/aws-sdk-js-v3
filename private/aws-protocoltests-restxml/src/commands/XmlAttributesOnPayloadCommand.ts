@@ -1,25 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { XmlAttributesOnPayloadInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restXmlXmlAttributesOnPayloadCommand,
-  serializeAws_restXmlXmlAttributesOnPayloadCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { XmlAttributesOnPayloadRequest, XmlAttributesOnPayloadResponse } from "../models/models_0";
+import { de_XmlAttributesOnPayloadCommand, se_XmlAttributesOnPayloadCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
-export interface XmlAttributesOnPayloadCommandInput extends XmlAttributesOnPayloadInputOutput {}
-export interface XmlAttributesOnPayloadCommandOutput extends XmlAttributesOnPayloadInputOutput, __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link XmlAttributesOnPayloadCommand}.
+ */
+export interface XmlAttributesOnPayloadCommandInput extends XmlAttributesOnPayloadRequest {}
+/**
+ * @public
+ *
+ * The output of {@link XmlAttributesOnPayloadCommand}.
+ */
+export interface XmlAttributesOnPayloadCommandOutput extends XmlAttributesOnPayloadResponse, __MetadataBearer {}
 
 /**
  * This example serializes an XML attributes on a document targeted by httpPayload.
@@ -28,68 +37,68 @@ export interface XmlAttributesOnPayloadCommandOutput extends XmlAttributesOnPayl
  * ```javascript
  * import { RestXmlProtocolClient, XmlAttributesOnPayloadCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
  * // const { RestXmlProtocolClient, XmlAttributesOnPayloadCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
  * const client = new RestXmlProtocolClient(config);
+ * const input = { // XmlAttributesOnPayloadRequest
+ *   payload: { // XmlAttributesPayloadRequest
+ *     foo: "STRING_VALUE",
+ *     attr: "STRING_VALUE",
+ *   },
+ * };
  * const command = new XmlAttributesOnPayloadCommand(input);
  * const response = await client.send(command);
+ * // { // XmlAttributesOnPayloadResponse
+ * //   payload: { // XmlAttributesPayloadResponse
+ * //     foo: "STRING_VALUE",
+ * //     attr: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param XmlAttributesOnPayloadCommandInput - {@link XmlAttributesOnPayloadCommandInput}
+ * @returns {@link XmlAttributesOnPayloadCommandOutput}
  * @see {@link XmlAttributesOnPayloadCommandInput} for command's `input` shape.
  * @see {@link XmlAttributesOnPayloadCommandOutput} for command's `response` shape.
- * @see {@link RestXmlProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
  *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class XmlAttributesOnPayloadCommand extends $Command<
-  XmlAttributesOnPayloadCommandInput,
-  XmlAttributesOnPayloadCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: XmlAttributesOnPayloadCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<XmlAttributesOnPayloadCommandInput, XmlAttributesOnPayloadCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "XmlAttributesOnPayloadCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: XmlAttributesOnPayloadInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: XmlAttributesOnPayloadInputOutput.filterSensitiveLog,
+export class XmlAttributesOnPayloadCommand extends $Command
+  .classBuilder<
+    XmlAttributesOnPayloadCommandInput,
+    XmlAttributesOnPayloadCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "XmlAttributesOnPayload", {})
+  .n("RestXmlProtocolClient", "XmlAttributesOnPayloadCommand")
+  .f(void 0, void 0)
+  .ser(se_XmlAttributesOnPayloadCommand)
+  .de(de_XmlAttributesOnPayloadCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: XmlAttributesOnPayloadRequest;
+      output: XmlAttributesOnPayloadResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: XmlAttributesOnPayloadCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlXmlAttributesOnPayloadCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<XmlAttributesOnPayloadCommandOutput> {
-    return deserializeAws_restXmlXmlAttributesOnPayloadCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: XmlAttributesOnPayloadCommandInput;
+      output: XmlAttributesOnPayloadCommandOutput;
+    };
+  };
 }

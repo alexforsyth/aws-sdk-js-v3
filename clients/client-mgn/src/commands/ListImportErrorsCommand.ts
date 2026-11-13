@@ -1,0 +1,98 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListImportErrorsRequest, ListImportErrorsResponse } from "../models/models_0";
+import { ListImportErrors$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListImportErrorsCommand}.
+ */
+export interface ListImportErrorsCommandInput extends ListImportErrorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListImportErrorsCommand}.
+ */
+export interface ListImportErrorsCommandOutput extends ListImportErrorsResponse, __MetadataBearer {}
+
+/**
+ * <p>List import errors.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MgnClient, ListImportErrorsCommand } from "@aws-sdk/client-mgn"; // ES Modules import
+ * // const { MgnClient, ListImportErrorsCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
+ * const client = new MgnClient(config);
+ * const input = { // ListImportErrorsRequest
+ *   importID: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
+ * const command = new ListImportErrorsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListImportErrorsResponse
+ * //   items: [ // ImportErrors
+ * //     { // ImportTaskError
+ * //       errorDateTime: "STRING_VALUE",
+ * //       errorType: "STRING_VALUE",
+ * //       errorData: { // ImportErrorData
+ * //         sourceServerID: "STRING_VALUE",
+ * //         applicationID: "STRING_VALUE",
+ * //         waveID: "STRING_VALUE",
+ * //         ec2LaunchTemplateID: "STRING_VALUE",
+ * //         rowNumber: Number("long"),
+ * //         rawError: "STRING_VALUE",
+ * //         accountID: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListImportErrorsCommandInput - {@link ListImportErrorsCommandInput}
+ * @returns {@link ListImportErrorsCommandOutput}
+ * @see {@link ListImportErrorsCommandInput} for command's `input` shape.
+ * @see {@link ListImportErrorsCommandOutput} for command's `response` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validate exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
+ */
+export class ListImportErrorsCommand extends command<ListImportErrorsCommandInput, ListImportErrorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListImportErrors",
+  ListImportErrors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListImportErrorsRequest;
+      output: ListImportErrorsResponse;
+    };
+    sdk: {
+      input: ListImportErrorsCommandInput;
+      output: ListImportErrorsCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PartnerIntegrationInputMessage, PartnerIntegrationOutputMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDeletePartnerCommand,
-  serializeAws_queryDeletePartnerCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PartnerIntegrationInputMessage, PartnerIntegrationOutputMessage } from "../models/models_0";
+import { DeletePartner$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePartnerCommand}.
+ */
 export interface DeletePartnerCommandInput extends PartnerIntegrationInputMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePartnerCommand}.
+ */
 export interface DeletePartnerCommandOutput extends PartnerIntegrationOutputMessage, __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface DeletePartnerCommandOutput extends PartnerIntegrationOutputMess
  * ```javascript
  * import { RedshiftClient, DeletePartnerCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DeletePartnerCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // PartnerIntegrationInputMessage
+ *   AccountId: "STRING_VALUE", // required
+ *   ClusterIdentifier: "STRING_VALUE", // required
+ *   DatabaseName: "STRING_VALUE", // required
+ *   PartnerName: "STRING_VALUE", // required
+ * };
  * const command = new DeletePartnerCommand(input);
  * const response = await client.send(command);
+ * // { // PartnerIntegrationOutputMessage
+ * //   DatabaseName: "STRING_VALUE",
+ * //   PartnerName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeletePartnerCommandInput - {@link DeletePartnerCommandInput}
+ * @returns {@link DeletePartnerCommandOutput}
  * @see {@link DeletePartnerCommandInput} for command's `input` shape.
  * @see {@link DeletePartnerCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link PartnerNotFoundFault} (client fault)
+ *  <p>The name of the partner was not found.</p>
+ *
+ * @throws {@link UnauthorizedPartnerIntegrationFault} (client fault)
+ *  <p>The partner integration is not authorized.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePartnerCommand extends $Command<
-  DeletePartnerCommandInput,
-  DeletePartnerCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePartnerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePartnerCommandInput, DeletePartnerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DeletePartnerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PartnerIntegrationInputMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: PartnerIntegrationOutputMessage.filterSensitiveLog,
+export class DeletePartnerCommand extends command<DeletePartnerCommandInput, DeletePartnerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePartner",
+  DeletePartner$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PartnerIntegrationInputMessage;
+      output: PartnerIntegrationOutputMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePartnerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeletePartnerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePartnerCommandOutput> {
-    return deserializeAws_queryDeletePartnerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePartnerCommandInput;
+      output: DeletePartnerCommandOutput;
+    };
+  };
 }

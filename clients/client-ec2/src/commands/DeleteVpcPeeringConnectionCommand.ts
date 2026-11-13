@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteVpcPeeringConnectionRequest, DeleteVpcPeeringConnectionResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteVpcPeeringConnectionCommand,
-  serializeAws_ec2DeleteVpcPeeringConnectionCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteVpcPeeringConnectionRequest, DeleteVpcPeeringConnectionResult } from "../models/models_3";
+import { DeleteVpcPeeringConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteVpcPeeringConnectionCommand}.
+ */
 export interface DeleteVpcPeeringConnectionCommandInput extends DeleteVpcPeeringConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteVpcPeeringConnectionCommand}.
+ */
 export interface DeleteVpcPeeringConnectionCommandOutput extends DeleteVpcPeeringConnectionResult, __MetadataBearer {}
 
 /**
@@ -26,77 +27,54 @@ export interface DeleteVpcPeeringConnectionCommandOutput extends DeleteVpcPeerin
  *             of the accepter VPC can delete the VPC peering connection if it's in the
  *                 <code>active</code> state. The owner of the requester VPC can delete a VPC peering
  *             connection in the <code>pending-acceptance</code> state. You cannot delete a VPC peering
- *             connection that's in the <code>failed</code> state.</p>
+ *           connection that's in the <code>failed</code> or <code>rejected</code> state.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DeleteVpcPeeringConnectionCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteVpcPeeringConnectionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteVpcPeeringConnectionRequest
+ *   DryRun: true || false,
+ *   VpcPeeringConnectionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteVpcPeeringConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteVpcPeeringConnectionResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DeleteVpcPeeringConnectionCommandInput - {@link DeleteVpcPeeringConnectionCommandInput}
+ * @returns {@link DeleteVpcPeeringConnectionCommandOutput}
  * @see {@link DeleteVpcPeeringConnectionCommandInput} for command's `input` shape.
  * @see {@link DeleteVpcPeeringConnectionCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteVpcPeeringConnectionCommand extends $Command<
-  DeleteVpcPeeringConnectionCommandInput,
-  DeleteVpcPeeringConnectionCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteVpcPeeringConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteVpcPeeringConnectionCommandInput, DeleteVpcPeeringConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteVpcPeeringConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteVpcPeeringConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteVpcPeeringConnectionResult.filterSensitiveLog,
+export class DeleteVpcPeeringConnectionCommand extends command<DeleteVpcPeeringConnectionCommandInput, DeleteVpcPeeringConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteVpcPeeringConnection",
+  DeleteVpcPeeringConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVpcPeeringConnectionRequest;
+      output: DeleteVpcPeeringConnectionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteVpcPeeringConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteVpcPeeringConnectionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteVpcPeeringConnectionCommandOutput> {
-    return deserializeAws_ec2DeleteVpcPeeringConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteVpcPeeringConnectionCommandInput;
+      output: DeleteVpcPeeringConnectionCommandOutput;
+    };
+  };
 }

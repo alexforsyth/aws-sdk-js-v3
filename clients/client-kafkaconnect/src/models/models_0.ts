@@ -1,2197 +1,2318 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  ConnectorOperationState,
+  ConnectorOperationStepState,
+  ConnectorOperationStepType,
+  ConnectorOperationType,
+  ConnectorState,
+  CustomPluginContentType,
+  CustomPluginState,
+  KafkaClusterClientAuthenticationType,
+  KafkaClusterEncryptionInTransitType,
+  NetworkType,
+  WorkerConfigurationState,
+} from "./enums";
+
+/**
+ * <p>Details of a step that is involved in a connector's operation.</p>
+ * @public
+ */
+export interface ConnectorOperationStep {
+  /**
+   * <p>The step type of the operation.</p>
+   * @public
+   */
+  stepType?: ConnectorOperationStepType | undefined;
+
+  /**
+   * <p>The step state of the operation.</p>
+   * @public
+   */
+  stepState?: ConnectorOperationStepState | undefined;
+}
+
+/**
+ * <p>Summary of a connector operation.</p>
+ * @public
+ */
+export interface ConnectorOperationSummary {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector operation.</p>
+   * @public
+   */
+  connectorOperationArn?: string | undefined;
+
+  /**
+   * <p>The type of connector operation performed.</p>
+   * @public
+   */
+  connectorOperationType?: ConnectorOperationType | undefined;
+
+  /**
+   * <p>The state of the connector operation.</p>
+   * @public
+   */
+  connectorOperationState?: ConnectorOperationState | undefined;
+
+  /**
+   * <p>The time when operation was created.</p>
+   * @public
+   */
+  creationTime?: Date | undefined;
+
+  /**
+   * <p>The time when operation ended.</p>
+   * @public
+   */
+  endTime?: Date | undefined;
+}
 
 /**
  * <p>The description of the scale-in policy for the connector.</p>
+ * @public
  */
 export interface ScaleInPolicyDescription {
   /**
    * <p>Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.</p>
+   * @public
    */
-  cpuUtilizationPercentage?: number;
-}
-
-export namespace ScaleInPolicyDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScaleInPolicyDescription): any => ({
-    ...obj,
-  });
+  cpuUtilizationPercentage?: number | undefined;
 }
 
 /**
  * <p>The description of the scale-out policy for the connector.</p>
+ * @public
  */
 export interface ScaleOutPolicyDescription {
   /**
    * <p>The CPU utilization percentage threshold at which you want connector scale out to be triggered.</p>
+   * @public
    */
-  cpuUtilizationPercentage?: number;
-}
-
-export namespace ScaleOutPolicyDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScaleOutPolicyDescription): any => ({
-    ...obj,
-  });
+  cpuUtilizationPercentage?: number | undefined;
 }
 
 /**
  * <p>Information about the auto scaling parameters for the connector.</p>
+ * @public
  */
 export interface AutoScalingDescription {
   /**
    * <p>The maximum number of workers allocated to the connector.</p>
+   * @public
    */
-  maxWorkerCount?: number;
+  maxWorkerCount?: number | undefined;
 
   /**
    * <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
+   * @public
    */
-  mcuCount?: number;
+  mcuCount?: number | undefined;
 
   /**
    * <p>The minimum number of workers allocated to the connector.</p>
+   * @public
    */
-  minWorkerCount?: number;
+  minWorkerCount?: number | undefined;
 
   /**
-   * <p>The sacle-in policy for the connector.</p>
+   * <p>The scale-in policy for the connector.</p>
+   * @public
    */
-  scaleInPolicy?: ScaleInPolicyDescription;
+  scaleInPolicy?: ScaleInPolicyDescription | undefined;
 
   /**
-   * <p>The sacle-out policy for the connector.&gt;</p>
+   * <p>The scale-out policy for the connector.</p>
+   * @public
    */
-  scaleOutPolicy?: ScaleOutPolicyDescription;
-}
+  scaleOutPolicy?: ScaleOutPolicyDescription | undefined;
 
-export namespace AutoScalingDescription {
   /**
-   * @internal
+   * <p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AutoScalingDescription): any => ({
-    ...obj,
-  });
+  maxAutoscalingTaskCount?: number | undefined;
 }
 
 /**
  * <p>The description of a connector's provisioned capacity.</p>
+ * @public
  */
 export interface ProvisionedCapacityDescription {
   /**
    * <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
+   * @public
    */
-  mcuCount?: number;
+  mcuCount?: number | undefined;
 
   /**
    * <p>The number of workers that are allocated to the connector.</p>
+   * @public
    */
-  workerCount?: number;
-}
-
-export namespace ProvisionedCapacityDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProvisionedCapacityDescription): any => ({
-    ...obj,
-  });
+  workerCount?: number | undefined;
 }
 
 /**
  * <p>A description of the connector's capacity.</p>
+ * @public
  */
 export interface CapacityDescription {
   /**
    * <p>Describes the connector's auto scaling capacity.</p>
+   * @public
    */
-  autoScaling?: AutoScalingDescription;
+  autoScaling?: AutoScalingDescription | undefined;
 
   /**
    * <p>Describes a connector's provisioned capacity.</p>
+   * @public
    */
-  provisionedCapacity?: ProvisionedCapacityDescription;
-}
-
-export namespace CapacityDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CapacityDescription): any => ({
-    ...obj,
-  });
-}
-
-export enum ConnectorState {
-  CREATING = "CREATING",
-  DELETING = "DELETING",
-  FAILED = "FAILED",
-  RUNNING = "RUNNING",
-  UPDATING = "UPDATING",
+  provisionedCapacity?: ProvisionedCapacityDescription | undefined;
 }
 
 /**
  * <p>The description of the VPC in which the connector resides.</p>
+ * @public
  */
 export interface VpcDescription {
   /**
    * <p>The security groups for the connector.</p>
+   * @public
    */
-  securityGroups?: string[];
+  securityGroups?: string[] | undefined;
 
   /**
    * <p>The subnets for the connector.</p>
+   * @public
    */
-  subnets?: string[];
-}
-
-export namespace VpcDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VpcDescription): any => ({
-    ...obj,
-  });
+  subnets?: string[] | undefined;
 }
 
 /**
  * <p>The description of the Apache Kafka cluster to which the connector is connected.</p>
+ * @public
  */
 export interface ApacheKafkaClusterDescription {
   /**
    * <p>The bootstrap servers of the cluster.</p>
+   * @public
    */
-  bootstrapServers?: string;
+  bootstrapServers?: string | undefined;
 
   /**
    * <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
+   * @public
    */
-  vpc?: VpcDescription;
-}
-
-export namespace ApacheKafkaClusterDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApacheKafkaClusterDescription): any => ({
-    ...obj,
-  });
+  vpc?: VpcDescription | undefined;
 }
 
 /**
  * <p>Details of how to connect to the Apache Kafka cluster.</p>
+ * @public
  */
 export interface KafkaClusterDescription {
   /**
    * <p>The Apache Kafka cluster to which the connector is connected.</p>
+   * @public
    */
-  apacheKafkaCluster?: ApacheKafkaClusterDescription;
-}
-
-export namespace KafkaClusterDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KafkaClusterDescription): any => ({
-    ...obj,
-  });
-}
-
-export enum KafkaClusterClientAuthenticationType {
-  IAM = "IAM",
-  NONE = "NONE",
+  apacheKafkaCluster?: ApacheKafkaClusterDescription | undefined;
 }
 
 /**
  * <p>The client authentication information used in order to authenticate with the Apache Kafka cluster.</p>
+ * @public
  */
 export interface KafkaClusterClientAuthenticationDescription {
   /**
    * <p>The type of client authentication used to connect to the Apache Kafka cluster. Value NONE means that no client authentication is used.</p>
+   * @public
    */
-  authenticationType?: KafkaClusterClientAuthenticationType | string;
-}
-
-export namespace KafkaClusterClientAuthenticationDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KafkaClusterClientAuthenticationDescription): any => ({
-    ...obj,
-  });
-}
-
-export enum KafkaClusterEncryptionInTransitType {
-  PLAINTEXT = "PLAINTEXT",
-  TLS = "TLS",
+  authenticationType?: KafkaClusterClientAuthenticationType | undefined;
 }
 
 /**
  * <p>The description of the encryption in transit to the Apache Kafka cluster.</p>
+ * @public
  */
 export interface KafkaClusterEncryptionInTransitDescription {
   /**
    * <p>The type of encryption in transit to the Apache Kafka cluster.</p>
+   * @public
    */
-  encryptionType?: KafkaClusterEncryptionInTransitType | string;
-}
-
-export namespace KafkaClusterEncryptionInTransitDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KafkaClusterEncryptionInTransitDescription): any => ({
-    ...obj,
-  });
+  encryptionType?: KafkaClusterEncryptionInTransitType | undefined;
 }
 
 /**
  * <p>A description of the log delivery settings.</p>
+ * @public
  */
 export interface CloudWatchLogsLogDeliveryDescription {
   /**
    * <p>Whether log delivery to Amazon CloudWatch Logs is enabled.</p>
+   * @public
    */
-  enabled?: boolean;
+  enabled?: boolean | undefined;
 
   /**
    * <p>The name of the CloudWatch log group that is the destination for log delivery.</p>
+   * @public
    */
-  logGroup?: string;
-}
-
-export namespace CloudWatchLogsLogDeliveryDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CloudWatchLogsLogDeliveryDescription): any => ({
-    ...obj,
-  });
+  logGroup?: string | undefined;
 }
 
 /**
  * <p>A description of the settings for delivering logs to Amazon Kinesis Data Firehose.</p>
+ * @public
  */
 export interface FirehoseLogDeliveryDescription {
   /**
    * <p>The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.</p>
+   * @public
    */
-  deliveryStream?: string;
+  deliveryStream?: string | undefined;
 
   /**
    * <p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>
+   * @public
    */
-  enabled?: boolean;
-}
-
-export namespace FirehoseLogDeliveryDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FirehoseLogDeliveryDescription): any => ({
-    ...obj,
-  });
+  enabled?: boolean | undefined;
 }
 
 /**
  * <p>The description of the details about delivering logs to Amazon S3.</p>
+ * @public
  */
 export interface S3LogDeliveryDescription {
   /**
    * <p>The name of the S3 bucket that is the destination for log delivery.</p>
+   * @public
    */
-  bucket?: string;
+  bucket?: string | undefined;
 
   /**
    * <p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>
+   * @public
    */
-  enabled?: boolean;
+  enabled?: boolean | undefined;
 
   /**
    * <p>The S3 prefix that is the destination for log delivery.</p>
+   * @public
    */
-  prefix?: string;
-}
-
-export namespace S3LogDeliveryDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3LogDeliveryDescription): any => ({
-    ...obj,
-  });
+  prefix?: string | undefined;
 }
 
 /**
  * <p>Workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
+ * @public
  */
 export interface WorkerLogDeliveryDescription {
   /**
    * <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
+   * @public
    */
-  cloudWatchLogs?: CloudWatchLogsLogDeliveryDescription;
+  cloudWatchLogs?: CloudWatchLogsLogDeliveryDescription | undefined;
 
   /**
    * <p>Details about delivering logs to Amazon Kinesis Data Firehose.</p>
+   * @public
    */
-  firehose?: FirehoseLogDeliveryDescription;
+  firehose?: FirehoseLogDeliveryDescription | undefined;
 
   /**
    * <p>Details about delivering logs to Amazon S3.</p>
+   * @public
    */
-  s3?: S3LogDeliveryDescription;
-}
-
-export namespace WorkerLogDeliveryDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerLogDeliveryDescription): any => ({
-    ...obj,
-  });
+  s3?: S3LogDeliveryDescription | undefined;
 }
 
 /**
  * <p>The description of the log delivery settings.</p>
+ * @public
  */
 export interface LogDeliveryDescription {
   /**
    * <p>The workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
+   * @public
    */
-  workerLogDelivery?: WorkerLogDeliveryDescription;
-}
-
-export namespace LogDeliveryDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LogDeliveryDescription): any => ({
-    ...obj,
-  });
+  workerLogDelivery?: WorkerLogDeliveryDescription | undefined;
 }
 
 /**
  * <p>Details about a custom plugin.</p>
+ * @public
  */
 export interface CustomPluginDescription {
   /**
    * <p>The Amazon Resource Name (ARN) of the custom plugin.</p>
+   * @public
    */
-  customPluginArn?: string;
+  customPluginArn?: string | undefined;
 
   /**
    * <p>The revision of the custom plugin.</p>
+   * @public
    */
-  revision?: number;
-}
-
-export namespace CustomPluginDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPluginDescription): any => ({
-    ...obj,
-  });
+  revision?: number | undefined;
 }
 
 /**
  * <p>The description of the plugin.</p>
+ * @public
  */
 export interface PluginDescription {
   /**
    * <p>Details about a custom plugin.</p>
+   * @public
    */
-  customPlugin?: CustomPluginDescription;
-}
-
-export namespace PluginDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PluginDescription): any => ({
-    ...obj,
-  });
+  customPlugin?: CustomPluginDescription | undefined;
 }
 
 /**
  * <p>The description of the worker configuration.</p>
+ * @public
  */
 export interface WorkerConfigurationDescription {
   /**
    * <p>The revision of the worker configuration.</p>
+   * @public
    */
-  revision?: number;
+  revision?: number | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the worker configuration.</p>
+   * @public
    */
-  workerConfigurationArn?: string;
-}
-
-export namespace WorkerConfigurationDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerConfigurationDescription): any => ({
-    ...obj,
-  });
+  workerConfigurationArn?: string | undefined;
 }
 
 /**
  * <p>Summary of a connector.</p>
+ * @public
  */
 export interface ConnectorSummary {
   /**
    * <p>The connector's compute capacity settings.</p>
+   * @public
    */
-  capacity?: CapacityDescription;
+  capacity?: CapacityDescription | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
    */
-  connectorArn?: string;
+  connectorArn?: string | undefined;
 
   /**
    * <p>The description of the connector.</p>
+   * @public
    */
-  connectorDescription?: string;
+  connectorDescription?: string | undefined;
 
   /**
    * <p>The name of the connector.</p>
+   * @public
    */
-  connectorName?: string;
+  connectorName?: string | undefined;
 
   /**
    * <p>The state of the connector.</p>
+   * @public
    */
-  connectorState?: ConnectorState | string;
+  connectorState?: ConnectorState | undefined;
 
   /**
    * <p>The time that the connector was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The current version of the connector.</p>
+   * @public
    */
-  currentVersion?: string;
+  currentVersion?: string | undefined;
 
   /**
    * <p>The details of the Apache Kafka cluster to which the connector is connected.</p>
+   * @public
    */
-  kafkaCluster?: KafkaClusterDescription;
+  kafkaCluster?: KafkaClusterDescription | undefined;
 
   /**
    * <p>The type of client authentication used to connect to the Apache Kafka cluster. The value is NONE when no client authentication is used.</p>
+   * @public
    */
-  kafkaClusterClientAuthentication?: KafkaClusterClientAuthenticationDescription;
+  kafkaClusterClientAuthentication?: KafkaClusterClientAuthenticationDescription | undefined;
 
   /**
    * <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+   * @public
    */
-  kafkaClusterEncryptionInTransit?: KafkaClusterEncryptionInTransitDescription;
+  kafkaClusterEncryptionInTransit?: KafkaClusterEncryptionInTransitDescription | undefined;
 
   /**
    * <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
+   * @public
    */
-  kafkaConnectVersion?: string;
+  kafkaConnectVersion?: string | undefined;
 
   /**
    * <p>The settings for delivering connector logs to Amazon CloudWatch Logs.</p>
+   * @public
    */
-  logDelivery?: LogDeliveryDescription;
+  logDelivery?: LogDeliveryDescription | undefined;
+
+  /**
+   * <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
+   * @public
+   */
+  networkType?: NetworkType | undefined;
 
   /**
    * <p>Specifies which plugins were used for this connector.</p>
+   * @public
    */
-  plugins?: PluginDescription[];
+  plugins?: PluginDescription[] | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon Web Services resources.</p>
+   * @public
    */
-  serviceExecutionRoleArn?: string;
+  serviceExecutionRoleArn?: string | undefined;
 
   /**
    * <p>The worker configurations that are in use with the connector.</p>
+   * @public
    */
-  workerConfiguration?: WorkerConfigurationDescription;
-}
-
-export namespace ConnectorSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConnectorSummary): any => ({
-    ...obj,
-  });
-}
-
-export enum CustomPluginState {
-  ACTIVE = "ACTIVE",
-  CREATE_FAILED = "CREATE_FAILED",
-  CREATING = "CREATING",
-  DELETING = "DELETING",
-  UPDATE_FAILED = "UPDATE_FAILED",
-  UPDATING = "UPDATING",
-}
-
-export enum CustomPluginContentType {
-  JAR = "JAR",
-  ZIP = "ZIP",
+  workerConfiguration?: WorkerConfigurationDescription | undefined;
 }
 
 /**
  * <p>Details about a custom plugin file.</p>
+ * @public
  */
 export interface CustomPluginFileDescription {
   /**
    * <p>The hex-encoded MD5 checksum of the custom plugin file. You can use it to validate the file.</p>
+   * @public
    */
-  fileMd5?: string;
+  fileMd5?: string | undefined;
 
   /**
    * <p>The size in bytes of the custom plugin file. You can use it to validate the file.</p>
+   * @public
    */
-  fileSize?: number;
-}
-
-export namespace CustomPluginFileDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPluginFileDescription): any => ({
-    ...obj,
-  });
+  fileSize?: number | undefined;
 }
 
 /**
  * <p>The description of the location of an object in Amazon S3.</p>
+ * @public
  */
 export interface S3LocationDescription {
   /**
    * <p>The Amazon Resource Name (ARN) of an S3 bucket.</p>
+   * @public
    */
-  bucketArn?: string;
+  bucketArn?: string | undefined;
 
   /**
    * <p>The file key for an object in an S3 bucket.</p>
+   * @public
    */
-  fileKey?: string;
+  fileKey?: string | undefined;
 
   /**
    * <p>The version of an object in an S3 bucket.</p>
+   * @public
    */
-  objectVersion?: string;
-}
-
-export namespace S3LocationDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3LocationDescription): any => ({
-    ...obj,
-  });
+  objectVersion?: string | undefined;
 }
 
 /**
  * <p>Information about the location of a custom plugin.</p>
+ * @public
  */
 export interface CustomPluginLocationDescription {
   /**
    * <p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.</p>
+   * @public
    */
-  s3Location?: S3LocationDescription;
-}
-
-export namespace CustomPluginLocationDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPluginLocationDescription): any => ({
-    ...obj,
-  });
+  s3Location?: S3LocationDescription | undefined;
 }
 
 /**
  * <p>Details about the revision of a custom plugin.</p>
+ * @public
  */
 export interface CustomPluginRevisionSummary {
   /**
    * <p>The format of the plugin file.</p>
+   * @public
    */
-  contentType?: CustomPluginContentType | string;
+  contentType?: CustomPluginContentType | undefined;
 
   /**
    * <p>The time that the custom plugin was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The description of the custom plugin.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Details about the custom plugin file.</p>
+   * @public
    */
-  fileDescription?: CustomPluginFileDescription;
+  fileDescription?: CustomPluginFileDescription | undefined;
 
   /**
    * <p>Information about the location of the custom plugin.</p>
+   * @public
    */
-  location?: CustomPluginLocationDescription;
+  location?: CustomPluginLocationDescription | undefined;
 
   /**
    * <p>The revision of the custom plugin.</p>
+   * @public
    */
-  revision?: number;
-}
-
-export namespace CustomPluginRevisionSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPluginRevisionSummary): any => ({
-    ...obj,
-  });
+  revision?: number | undefined;
 }
 
 /**
  * <p>A summary of the custom plugin.</p>
+ * @public
  */
 export interface CustomPluginSummary {
   /**
    * <p>The time that the custom plugin was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the custom plugin.</p>
+   * @public
    */
-  customPluginArn?: string;
+  customPluginArn?: string | undefined;
 
   /**
    * <p>The state of the custom plugin.</p>
+   * @public
    */
-  customPluginState?: CustomPluginState | string;
+  customPluginState?: CustomPluginState | undefined;
 
   /**
    * <p>A description of the custom plugin.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The latest revision of the custom plugin.</p>
+   * @public
    */
-  latestRevision?: CustomPluginRevisionSummary;
+  latestRevision?: CustomPluginRevisionSummary | undefined;
 
   /**
    * <p>The name of the custom plugin.</p>
+   * @public
    */
-  name?: string;
-}
-
-export namespace CustomPluginSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPluginSummary): any => ({
-    ...obj,
-  });
+  name?: string | undefined;
 }
 
 /**
- * <p>A plugin is an AWS resource that contains the code that defines a connector's logic.</p>
+ * <p>A plugin is an Amazon Web Services resource that contains the code that defines a connector's logic.</p>
+ * @public
  */
 export interface CustomPlugin {
   /**
    * <p>The Amazon Resource Name (ARN) of the custom plugin.</p>
+   * @public
    */
   customPluginArn: string | undefined;
 
   /**
    * <p>The revision of the custom plugin.</p>
+   * @public
    */
   revision: number | undefined;
 }
 
-export namespace CustomPlugin {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPlugin): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>A plugin is an AWS resource that contains the code that defines your connector logic. </p>
+ * <p>A plugin is an Amazon Web Services resource that contains the code that defines your connector logic. </p>
+ * @public
  */
 export interface Plugin {
   /**
    * <p>Details about a custom plugin.</p>
+   * @public
    */
   customPlugin: CustomPlugin | undefined;
 }
 
-export namespace Plugin {
+/**
+ * <p>Details about a custom plugin to use when you update a connector via <code>UpdateConnector</code>.</p>
+ * @public
+ */
+export interface CustomPluginUpdate {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the custom plugin.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Plugin): any => ({
-    ...obj,
-  });
+  customPluginArn: string | undefined;
+
+  /**
+   * <p>The revision of the custom plugin.</p>
+   * @public
+   */
+  revision: number | undefined;
+}
+
+/**
+ * <p>A custom plugin to use when you update a connector via <code>UpdateConnector</code>.</p>
+ * @public
+ */
+export interface PluginUpdate {
+  /**
+   * <p>The custom plugin to use for the connector.</p>
+   * @public
+   */
+  customPlugin: CustomPluginUpdate | undefined;
 }
 
 /**
  * <p>The summary of a worker configuration revision.</p>
+ * @public
  */
 export interface WorkerConfigurationRevisionSummary {
   /**
    * <p>The time that a worker configuration revision was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The description of a worker configuration revision.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The revision of a worker configuration.</p>
+   * @public
    */
-  revision?: number;
-}
-
-export namespace WorkerConfigurationRevisionSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerConfigurationRevisionSummary): any => ({
-    ...obj,
-  });
+  revision?: number | undefined;
 }
 
 /**
  * <p>The summary of a worker configuration.</p>
+ * @public
  */
 export interface WorkerConfigurationSummary {
   /**
    * <p>The time that a worker configuration was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The description of a worker configuration.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The latest revision of a worker configuration.</p>
+   * @public
    */
-  latestRevision?: WorkerConfigurationRevisionSummary;
+  latestRevision?: WorkerConfigurationRevisionSummary | undefined;
 
   /**
    * <p>The name of the worker configuration.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the worker configuration.</p>
+   * @public
    */
-  workerConfigurationArn?: string;
-}
+  workerConfigurationArn?: string | undefined;
 
-export namespace WorkerConfigurationSummary {
   /**
-   * @internal
+   * <p>The state of the worker configuration.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: WorkerConfigurationSummary): any => ({
-    ...obj,
-  });
+  workerConfigurationState?: WorkerConfigurationState | undefined;
 }
 
 /**
  * <p>Information about the VPC in which the connector resides.</p>
+ * @public
  */
 export interface Vpc {
   /**
    * <p>The security groups for the connector.</p>
+   * @public
    */
-  securityGroups?: string[];
+  securityGroups?: string[] | undefined;
 
   /**
    * <p>The subnets for the connector.</p>
+   * @public
    */
   subnets: string[] | undefined;
 }
 
-export namespace Vpc {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Vpc): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The details of the Apache Kafka cluster to which the connector is connected.</p>
+ * @public
  */
 export interface ApacheKafkaCluster {
   /**
    * <p>The bootstrap servers of the cluster.</p>
+   * @public
    */
   bootstrapServers: string | undefined;
 
   /**
    * <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
+   * @public
    */
   vpc: Vpc | undefined;
 }
 
-export namespace ApacheKafkaCluster {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApacheKafkaCluster): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The scale-in policy for the connector.</p>
+ * @public
  */
 export interface ScaleInPolicy {
   /**
    * <p>Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.</p>
+   * @public
    */
   cpuUtilizationPercentage: number | undefined;
-}
-
-export namespace ScaleInPolicy {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScaleInPolicy): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>The scale-out policy for the connector.</p>
+ * @public
  */
 export interface ScaleOutPolicy {
   /**
    * <p>The CPU utilization percentage threshold at which you want connector scale out to be triggered.</p>
+   * @public
    */
   cpuUtilizationPercentage: number | undefined;
 }
 
-export namespace ScaleOutPolicy {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScaleOutPolicy): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Specifies how the connector scales.</p>
+ * @public
  */
 export interface AutoScaling {
   /**
    * <p>The maximum number of workers allocated to the connector.</p>
+   * @public
    */
   maxWorkerCount: number | undefined;
 
   /**
    * <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
+   * @public
    */
   mcuCount: number | undefined;
 
   /**
    * <p>The minimum number of workers allocated to the connector.</p>
+   * @public
    */
   minWorkerCount: number | undefined;
 
   /**
-   * <p>The sacle-in policy for the connector.</p>
+   * <p>The scale-in policy for the connector.</p>
+   * @public
    */
-  scaleInPolicy?: ScaleInPolicy;
+  scaleInPolicy?: ScaleInPolicy | undefined;
 
   /**
-   * <p>The sacle-out policy for the connector.</p>
+   * <p>The scale-out policy for the connector.</p>
+   * @public
    */
-  scaleOutPolicy?: ScaleOutPolicy;
-}
+  scaleOutPolicy?: ScaleOutPolicy | undefined;
 
-export namespace AutoScaling {
   /**
-   * @internal
+   * <p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AutoScaling): any => ({
-    ...obj,
-  });
+  maxAutoscalingTaskCount?: number | undefined;
 }
 
 /**
  * <p>An update to the connector's scale-in policy.</p>
+ * @public
  */
 export interface ScaleInPolicyUpdate {
   /**
    * <p>The target CPU utilization percentage threshold at which you want connector scale in to be triggered.</p>
+   * @public
    */
   cpuUtilizationPercentage: number | undefined;
-}
-
-export namespace ScaleInPolicyUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScaleInPolicyUpdate): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>An update to the connector's scale-out policy.</p>
+ * @public
  */
 export interface ScaleOutPolicyUpdate {
   /**
    * <p>The target CPU utilization percentage threshold at which you want connector scale out to be triggered.</p>
+   * @public
    */
   cpuUtilizationPercentage: number | undefined;
 }
 
-export namespace ScaleOutPolicyUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScaleOutPolicyUpdate): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The updates to the auto scaling parameters for the connector.</p>
+ * @public
  */
 export interface AutoScalingUpdate {
   /**
    * <p>The target maximum number of workers allocated to the connector.</p>
+   * @public
    */
   maxWorkerCount: number | undefined;
 
   /**
    * <p>The target number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
+   * @public
    */
   mcuCount: number | undefined;
 
   /**
    * <p>The target minimum number of workers allocated to the connector.</p>
+   * @public
    */
   minWorkerCount: number | undefined;
 
   /**
-   * <p>The target sacle-in policy for the connector.</p>
+   * <p>The target scale-in policy for the connector.</p>
+   * @public
    */
   scaleInPolicy: ScaleInPolicyUpdate | undefined;
 
   /**
-   * <p>The target sacle-out policy for the connector.</p>
+   * <p>The target scale-out policy for the connector.</p>
+   * @public
    */
   scaleOutPolicy: ScaleOutPolicyUpdate | undefined;
-}
 
-export namespace AutoScalingUpdate {
   /**
-   * @internal
+   * <p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AutoScalingUpdate): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it.</p>
- */
-export interface BadRequestException extends __SmithyException, $MetadataBearer {
-  name: "BadRequestException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace BadRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BadRequestException): any => ({
-    ...obj,
-  });
+  maxAutoscalingTaskCount?: number | undefined;
 }
 
 /**
  * <p>Details about a connector's provisioned capacity.</p>
+ * @public
  */
 export interface ProvisionedCapacity {
   /**
    * <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
+   * @public
    */
   mcuCount: number | undefined;
 
   /**
    * <p>The number of workers that are allocated to the connector.</p>
+   * @public
    */
   workerCount: number | undefined;
-}
-
-export namespace ProvisionedCapacity {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProvisionedCapacity): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>Information about the capacity of the connector, whether it is auto scaled or provisioned.</p>
+ * @public
  */
 export interface Capacity {
   /**
    * <p>Information about the auto scaling parameters for the connector.</p>
+   * @public
    */
-  autoScaling?: AutoScaling;
+  autoScaling?: AutoScaling | undefined;
 
   /**
    * <p>Details about a fixed capacity allocated to a connector.</p>
+   * @public
    */
-  provisionedCapacity?: ProvisionedCapacity;
-}
-
-export namespace Capacity {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Capacity): any => ({
-    ...obj,
-  });
+  provisionedCapacity?: ProvisionedCapacity | undefined;
 }
 
 /**
  * <p>An update to a connector's fixed capacity.</p>
+ * @public
  */
 export interface ProvisionedCapacityUpdate {
   /**
    * <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
+   * @public
    */
   mcuCount: number | undefined;
 
   /**
    * <p>The number of workers that are allocated to the connector.</p>
+   * @public
    */
   workerCount: number | undefined;
 }
 
-export namespace ProvisionedCapacityUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProvisionedCapacityUpdate): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The target capacity for the connector. The capacity can be auto scaled or provisioned.</p>
+ * @public
  */
 export interface CapacityUpdate {
   /**
    * <p>The target auto scaling setting.</p>
+   * @public
    */
-  autoScaling?: AutoScalingUpdate;
+  autoScaling?: AutoScalingUpdate | undefined;
 
   /**
    * <p>The target settings for provisioned capacity.</p>
+   * @public
    */
-  provisionedCapacity?: ProvisionedCapacityUpdate;
-}
-
-export namespace CapacityUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CapacityUpdate): any => ({
-    ...obj,
-  });
+  provisionedCapacity?: ProvisionedCapacityUpdate | undefined;
 }
 
 /**
  * <p>The settings for delivering connector logs to Amazon CloudWatch Logs.</p>
+ * @public
  */
 export interface CloudWatchLogsLogDelivery {
   /**
    * <p>Whether log delivery to Amazon CloudWatch Logs is enabled.</p>
+   * @public
    */
   enabled: boolean | undefined;
 
   /**
    * <p>The name of the CloudWatch log group that is the destination for log delivery.</p>
+   * @public
    */
-  logGroup?: string;
-}
-
-export namespace CloudWatchLogsLogDelivery {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CloudWatchLogsLogDelivery): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 409: Conflict. A resource with this name already exists. Retry your request with another name.</p>
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
+  logGroup?: string | undefined;
 }
 
 /**
  * <p>The details of the Apache Kafka cluster to which the connector is connected.</p>
+ * @public
  */
 export interface KafkaCluster {
   /**
    * <p>The Apache Kafka cluster to which the connector is connected.</p>
+   * @public
    */
   apacheKafkaCluster: ApacheKafkaCluster | undefined;
 }
 
-export namespace KafkaCluster {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KafkaCluster): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The client authentication information used in order to authenticate with the Apache Kafka cluster.</p>
+ * @public
  */
 export interface KafkaClusterClientAuthentication {
   /**
    * <p>The type of client authentication used to connect to the Apache Kafka cluster. Value NONE means that no client authentication is used.</p>
+   * @public
    */
-  authenticationType: KafkaClusterClientAuthenticationType | string | undefined;
-}
-
-export namespace KafkaClusterClientAuthentication {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KafkaClusterClientAuthentication): any => ({
-    ...obj,
-  });
+  authenticationType: KafkaClusterClientAuthenticationType | undefined;
 }
 
 /**
  * <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+ * @public
  */
 export interface KafkaClusterEncryptionInTransit {
   /**
    * <p>The type of encryption in transit to the Apache Kafka cluster.</p>
+   * @public
    */
-  encryptionType: KafkaClusterEncryptionInTransitType | string | undefined;
-}
-
-export namespace KafkaClusterEncryptionInTransit {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KafkaClusterEncryptionInTransit): any => ({
-    ...obj,
-  });
+  encryptionType: KafkaClusterEncryptionInTransitType | undefined;
 }
 
 /**
  * <p>The settings for delivering logs to Amazon Kinesis Data Firehose.</p>
+ * @public
  */
 export interface FirehoseLogDelivery {
   /**
    * <p>The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.</p>
+   * @public
    */
-  deliveryStream?: string;
+  deliveryStream?: string | undefined;
 
   /**
    * <p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>
+   * @public
    */
   enabled: boolean | undefined;
 }
 
-export namespace FirehoseLogDelivery {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FirehoseLogDelivery): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Details about delivering logs to Amazon S3.</p>
+ * @public
  */
 export interface S3LogDelivery {
   /**
    * <p>The name of the S3 bucket that is the destination for log delivery.</p>
+   * @public
    */
-  bucket?: string;
+  bucket?: string | undefined;
 
   /**
    * <p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>
+   * @public
    */
   enabled: boolean | undefined;
 
   /**
    * <p>The S3 prefix that is the destination for log delivery.</p>
+   * @public
    */
-  prefix?: string;
-}
-
-export namespace S3LogDelivery {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3LogDelivery): any => ({
-    ...obj,
-  });
+  prefix?: string | undefined;
 }
 
 /**
  * <p>Workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
+ * @public
  */
 export interface WorkerLogDelivery {
   /**
    * <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
+   * @public
    */
-  cloudWatchLogs?: CloudWatchLogsLogDelivery;
+  cloudWatchLogs?: CloudWatchLogsLogDelivery | undefined;
 
   /**
    * <p>Details about delivering logs to Amazon Kinesis Data Firehose.</p>
+   * @public
    */
-  firehose?: FirehoseLogDelivery;
+  firehose?: FirehoseLogDelivery | undefined;
 
   /**
    * <p>Details about delivering logs to Amazon S3.</p>
+   * @public
    */
-  s3?: S3LogDelivery;
-}
-
-export namespace WorkerLogDelivery {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerLogDelivery): any => ({
-    ...obj,
-  });
+  s3?: S3LogDelivery | undefined;
 }
 
 /**
  * <p>Details about log delivery.</p>
+ * @public
  */
 export interface LogDelivery {
   /**
    * <p>The workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
+   * @public
    */
   workerLogDelivery: WorkerLogDelivery | undefined;
 }
 
-export namespace LogDelivery {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LogDelivery): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The configuration of the workers, which are the processes that run the connector logic.</p>
+ * @public
  */
 export interface WorkerConfiguration {
   /**
    * <p>The revision of the worker configuration.</p>
+   * @public
    */
   revision: number | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the worker configuration.</p>
+   * @public
    */
   workerConfigurationArn: string | undefined;
 }
 
-export namespace WorkerConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerConfiguration): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateConnectorRequest {
   /**
    * <p>Information about the capacity allocated to the connector. Exactly one of the two properties must be specified.</p>
+   * @public
    */
   capacity: Capacity | undefined;
 
   /**
    * <p>A map of keys to values that represent the configuration for the connector.</p>
+   * @public
    */
-  connectorConfiguration: { [key: string]: string } | undefined;
+  connectorConfiguration: Record<string, string> | undefined;
 
   /**
    * <p>A summary description of the connector.</p>
+   * @public
    */
-  connectorDescription?: string;
+  connectorDescription?: string | undefined;
 
   /**
    * <p>The name of the connector.</p>
+   * @public
    */
   connectorName: string | undefined;
 
   /**
    * <p>Specifies which Apache Kafka cluster to connect to.</p>
+   * @public
    */
   kafkaCluster: KafkaCluster | undefined;
 
   /**
    * <p>Details of the client authentication used by the Apache Kafka cluster.</p>
+   * @public
    */
   kafkaClusterClientAuthentication: KafkaClusterClientAuthentication | undefined;
 
   /**
    * <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+   * @public
    */
   kafkaClusterEncryptionInTransit: KafkaClusterEncryptionInTransit | undefined;
 
   /**
    * <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
+   * @public
    */
   kafkaConnectVersion: string | undefined;
 
   /**
    * <p>Details about log delivery.</p>
+   * @public
    */
-  logDelivery?: LogDelivery;
+  logDelivery?: LogDelivery | undefined;
 
   /**
-   * <p>Specifies which plugins to use for the connector.</p>
+   * <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
+   * @public
+   */
+  networkType?: NetworkType | undefined;
+
+  /**
+   * <important> <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p> </important> <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object.</p>
+   * @public
    */
   plugins: Plugin[] | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.</p>
+   * @public
    */
   serviceExecutionRoleArn: string | undefined;
 
   /**
    * <p>Specifies which worker configuration to use with the connector.</p>
+   * @public
    */
-  workerConfiguration?: WorkerConfiguration;
-}
+  workerConfiguration?: WorkerConfiguration | undefined;
 
-export namespace CreateConnectorRequest {
   /**
-   * @internal
+   * <p>The tags you want to attach to the connector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateConnectorRequest): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateConnectorResponse {
   /**
    * <p>The Amazon Resource Name (ARN) that Amazon assigned to the connector.</p>
+   * @public
    */
-  connectorArn?: string;
+  connectorArn?: string | undefined;
 
   /**
    * <p>The name of the connector.</p>
+   * @public
    */
-  connectorName?: string;
+  connectorName?: string | undefined;
 
   /**
    * <p>The state of the connector.</p>
+   * @public
    */
-  connectorState?: ConnectorState | string;
-}
-
-export namespace CreateConnectorResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectorResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request.</p>
- */
-export interface ForbiddenException extends __SmithyException, $MetadataBearer {
-  name: "ForbiddenException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ForbiddenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ForbiddenException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue.</p>
- */
-export interface InternalServerErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerErrorException";
-  $fault: "server";
-  message?: string;
-}
-
-export namespace InternalServerErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerErrorException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it.</p>
- */
-export interface NotFoundException extends __SmithyException, $MetadataBearer {
-  name: "NotFoundException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might resolve the issue.</p>
- */
-export interface ServiceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ServiceUnavailableException";
-  $fault: "server";
-  message?: string;
-}
-
-export namespace ServiceUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 429: Limit exceeded. Resource limit reached.</p>
- */
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated.</p>
- */
-export interface UnauthorizedException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace UnauthorizedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedException): any => ({
-    ...obj,
-  });
+  connectorState?: ConnectorState | undefined;
 }
 
 /**
  * <p>The location of an object in Amazon S3.</p>
+ * @public
  */
 export interface S3Location {
   /**
    * <p>The Amazon Resource Name (ARN) of an S3 bucket.</p>
+   * @public
    */
   bucketArn: string | undefined;
 
   /**
    * <p>The file key for an object in an S3 bucket.</p>
+   * @public
    */
   fileKey: string | undefined;
 
   /**
    * <p>The version of an object in an S3 bucket.</p>
+   * @public
    */
-  objectVersion?: string;
-}
-
-export namespace S3Location {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Location): any => ({
-    ...obj,
-  });
+  objectVersion?: string | undefined;
 }
 
 /**
  * <p>Information about the location of a custom plugin.</p>
+ * @public
  */
 export interface CustomPluginLocation {
   /**
    * <p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.</p>
+   * @public
    */
   s3Location: S3Location | undefined;
 }
 
-export namespace CustomPluginLocation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomPluginLocation): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCustomPluginRequest {
   /**
    * <p>The type of the plugin file.</p>
+   * @public
    */
-  contentType: CustomPluginContentType | string | undefined;
+  contentType: CustomPluginContentType | undefined;
 
   /**
    * <p>A summary description of the custom plugin.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Information about the location of a custom plugin.</p>
+   * @public
    */
   location: CustomPluginLocation | undefined;
 
   /**
    * <p>The name of the custom plugin.</p>
+   * @public
    */
   name: string | undefined;
-}
 
-export namespace CreateCustomPluginRequest {
   /**
-   * @internal
+   * <p>The tags you want to attach to the custom plugin.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateCustomPluginRequest): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateCustomPluginResponse {
   /**
    * <p>The Amazon Resource Name (ARN) that Amazon assigned to the custom plugin.</p>
+   * @public
    */
-  customPluginArn?: string;
+  customPluginArn?: string | undefined;
 
   /**
    * <p>The state of the custom plugin.</p>
+   * @public
    */
-  customPluginState?: CustomPluginState | string;
+  customPluginState?: CustomPluginState | undefined;
 
   /**
    * <p>The name of the custom plugin.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The revision of the custom plugin.</p>
+   * @public
    */
-  revision?: number;
+  revision?: number | undefined;
 }
 
-export namespace CreateCustomPluginResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCustomPluginResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateWorkerConfigurationRequest {
   /**
    * <p>A summary description of the worker configuration.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The name of the worker configuration.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>Base64 encoded contents of connect-distributed.properties file.</p>
+   * @public
    */
   propertiesFileContent: string | undefined;
-}
 
-export namespace CreateWorkerConfigurationRequest {
   /**
-   * @internal
+   * <p>The tags you want to attach to the worker configuration.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateWorkerConfigurationRequest): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateWorkerConfigurationResponse {
   /**
    * <p>The time that the worker configuration was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The latest revision of the worker configuration.</p>
+   * @public
    */
-  latestRevision?: WorkerConfigurationRevisionSummary;
+  latestRevision?: WorkerConfigurationRevisionSummary | undefined;
 
   /**
    * <p>The name of the worker configuration.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) that Amazon assigned to the worker configuration.</p>
+   * @public
    */
-  workerConfigurationArn?: string;
-}
+  workerConfigurationArn?: string | undefined;
 
-export namespace CreateWorkerConfigurationResponse {
   /**
-   * @internal
+   * <p>The state of the worker configuration.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateWorkerConfigurationResponse): any => ({
-    ...obj,
-  });
+  workerConfigurationState?: WorkerConfigurationState | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteConnectorRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the connector that you want to delete.</p>
+   * @public
    */
   connectorArn: string | undefined;
 
   /**
    * <p>The current version of the connector that you want to delete.</p>
+   * @public
    */
-  currentVersion?: string;
+  currentVersion?: string | undefined;
 }
 
-export namespace DeleteConnectorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConnectorRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteConnectorResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the connector that you requested to delete.</p>
+   * @public
    */
-  connectorArn?: string;
+  connectorArn?: string | undefined;
 
   /**
    * <p>The state of the connector that you requested to delete.</p>
+   * @public
    */
-  connectorState?: ConnectorState | string;
+  connectorState?: ConnectorState | undefined;
 }
 
-export namespace DeleteConnectorResponse {
+/**
+ * @public
+ */
+export interface DeleteCustomPluginRequest {
   /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConnectorResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeConnectorRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the connector that you want to describe.</p>
-   */
-  connectorArn: string | undefined;
-}
-
-export namespace DescribeConnectorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeConnectorRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeConnectorResponse {
-  /**
-   * <p>Information about the capacity of the connector, whether it is auto scaled or provisioned.</p>
-   */
-  capacity?: CapacityDescription;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the connector.</p>
-   */
-  connectorArn?: string;
-
-  /**
-   * <p>A map of keys to values that represent the configuration for the connector.</p>
-   */
-  connectorConfiguration?: { [key: string]: string };
-
-  /**
-   * <p>A summary description of the connector.</p>
-   */
-  connectorDescription?: string;
-
-  /**
-   * <p>The name of the connector.</p>
-   */
-  connectorName?: string;
-
-  /**
-   * <p>The state of the connector.</p>
-   */
-  connectorState?: ConnectorState | string;
-
-  /**
-   * <p>The time the connector was created.</p>
-   */
-  creationTime?: Date;
-
-  /**
-   * <p>The current version of the connector.</p>
-   */
-  currentVersion?: string;
-
-  /**
-   * <p>The Apache Kafka cluster that the connector is connected to.</p>
-   */
-  kafkaCluster?: KafkaClusterDescription;
-
-  /**
-   * <p>The type of client authentication used to connect to the Apache Kafka cluster. The value is NONE when no client authentication is used.</p>
-   */
-  kafkaClusterClientAuthentication?: KafkaClusterClientAuthenticationDescription;
-
-  /**
-   * <p>Details of encryption in transit to the Apache Kafka cluster.</p>
-   */
-  kafkaClusterEncryptionInTransit?: KafkaClusterEncryptionInTransitDescription;
-
-  /**
-   * <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
-   */
-  kafkaConnectVersion?: string;
-
-  /**
-   * <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
-   */
-  logDelivery?: LogDeliveryDescription;
-
-  /**
-   * <p>Specifies which plugins were used for this connector.</p>
-   */
-  plugins?: PluginDescription[];
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon Web Services resources.</p>
-   */
-  serviceExecutionRoleArn?: string;
-
-  /**
-   * <p>Specifies which worker configuration was used for the connector.</p>
-   */
-  workerConfiguration?: WorkerConfigurationDescription;
-}
-
-export namespace DescribeConnectorResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeConnectorResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeCustomPluginRequest {
-  /**
-   * <p>Returns information about a custom plugin.</p>
+   * <p>The Amazon Resource Name (ARN) of the custom plugin that you want to delete.</p>
+   * @public
    */
   customPluginArn: string | undefined;
 }
 
-export namespace DescribeCustomPluginRequest {
+/**
+ * @public
+ */
+export interface DeleteCustomPluginResponse {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the custom plugin that you requested to delete.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeCustomPluginRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeCustomPluginResponse {
-  /**
-   * <p>The time that the custom plugin was created.</p>
-   */
-  creationTime?: Date;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the custom plugin.</p>
-   */
-  customPluginArn?: string;
+  customPluginArn?: string | undefined;
 
   /**
    * <p>The state of the custom plugin.</p>
+   * @public
    */
-  customPluginState?: CustomPluginState | string;
-
-  /**
-   * <p>The description of the custom plugin.</p>
-   */
-  description?: string;
-
-  /**
-   * <p>The latest successfully created revision of the custom plugin. If there are no successfully created revisions, this field will be absent.</p>
-   */
-  latestRevision?: CustomPluginRevisionSummary;
-
-  /**
-   * <p>The name of the custom plugin.</p>
-   */
-  name?: string;
+  customPluginState?: CustomPluginState | undefined;
 }
 
-export namespace DescribeCustomPluginResponse {
+/**
+ * @public
+ */
+export interface DeleteWorkerConfigurationRequest {
   /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCustomPluginResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeWorkerConfigurationRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.</p>
+   * <p>The Amazon Resource Name (ARN) of the worker configuration that you want to delete.</p>
+   * @public
    */
   workerConfigurationArn: string | undefined;
 }
 
-export namespace DescribeWorkerConfigurationRequest {
+/**
+ * @public
+ */
+export interface DeleteWorkerConfigurationResponse {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the worker configuration that you requested to delete.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeWorkerConfigurationRequest): any => ({
-    ...obj,
-  });
+  workerConfigurationArn?: string | undefined;
+
+  /**
+   * <p>The state of the worker configuration.</p>
+   * @public
+   */
+  workerConfigurationState?: WorkerConfigurationState | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeConnectorRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector that you want to describe.</p>
+   * @public
+   */
+  connectorArn: string | undefined;
+}
+
+/**
+ * <p>Details about the state of a resource.</p>
+ * @public
+ */
+export interface StateDescription {
+  /**
+   * <p>A code that describes the state of a resource.</p>
+   * @public
+   */
+  code?: string | undefined;
+
+  /**
+   * <p>A message that describes the state of a resource.</p>
+   * @public
+   */
+  message?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeConnectorResponse {
+  /**
+   * <p>Information about the capacity of the connector, whether it is auto scaled or provisioned.</p>
+   * @public
+   */
+  capacity?: CapacityDescription | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
+   */
+  connectorArn?: string | undefined;
+
+  /**
+   * <p>A map of keys to values that represent the configuration for the connector.</p>
+   * @public
+   */
+  connectorConfiguration?: Record<string, string> | undefined;
+
+  /**
+   * <p>A summary description of the connector.</p>
+   * @public
+   */
+  connectorDescription?: string | undefined;
+
+  /**
+   * <p>The name of the connector.</p>
+   * @public
+   */
+  connectorName?: string | undefined;
+
+  /**
+   * <p>The state of the connector.</p>
+   * @public
+   */
+  connectorState?: ConnectorState | undefined;
+
+  /**
+   * <p>The time the connector was created.</p>
+   * @public
+   */
+  creationTime?: Date | undefined;
+
+  /**
+   * <p>The current version of the connector.</p>
+   * @public
+   */
+  currentVersion?: string | undefined;
+
+  /**
+   * <p>The Apache Kafka cluster that the connector is connected to.</p>
+   * @public
+   */
+  kafkaCluster?: KafkaClusterDescription | undefined;
+
+  /**
+   * <p>The type of client authentication used to connect to the Apache Kafka cluster. The value is NONE when no client authentication is used.</p>
+   * @public
+   */
+  kafkaClusterClientAuthentication?: KafkaClusterClientAuthenticationDescription | undefined;
+
+  /**
+   * <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+   * @public
+   */
+  kafkaClusterEncryptionInTransit?: KafkaClusterEncryptionInTransitDescription | undefined;
+
+  /**
+   * <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
+   * @public
+   */
+  kafkaConnectVersion?: string | undefined;
+
+  /**
+   * <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
+   * @public
+   */
+  logDelivery?: LogDeliveryDescription | undefined;
+
+  /**
+   * <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
+   * @public
+   */
+  networkType?: NetworkType | undefined;
+
+  /**
+   * <p>Specifies which plugins were used for this connector.</p>
+   * @public
+   */
+  plugins?: PluginDescription[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon Web Services resources.</p>
+   * @public
+   */
+  serviceExecutionRoleArn?: string | undefined;
+
+  /**
+   * <p>Specifies which worker configuration was used for the connector.</p>
+   * @public
+   */
+  workerConfiguration?: WorkerConfigurationDescription | undefined;
+
+  /**
+   * <p>Details about the state of a connector.</p>
+   * @public
+   */
+  stateDescription?: StateDescription | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeConnectorOperationRequest {
+  /**
+   * <p>ARN of the connector operation to be described.</p>
+   * @public
+   */
+  connectorOperationArn: string | undefined;
+}
+
+/**
+ * <p>Details about worker setting of a connector</p>
+ * @public
+ */
+export interface WorkerSetting {
+  /**
+   * <p>Specifies the compute capacity settings of the connector.</p>
+   * @public
+   */
+  capacity?: CapacityDescription | undefined;
+
+  /**
+   * <p>Specifies which plugins the connector uses.</p>
+   * @public
+   */
+  plugins?: PluginDescription[] | undefined;
+
+  /**
+   * <p>Specifies which worker configuration the connector uses.</p>
+   * @public
+   */
+  workerConfiguration?: WorkerConfigurationDescription | undefined;
+
+  /**
+   * <p>Specifies whether the connector uses the default worker configuration instead of a custom worker configuration.</p>
+   * @public
+   */
+  useDefaultWorkerConfiguration?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeConnectorOperationResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
+   */
+  connectorArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector operation.</p>
+   * @public
+   */
+  connectorOperationArn?: string | undefined;
+
+  /**
+   * <p>The state of the connector operation.</p>
+   * @public
+   */
+  connectorOperationState?: ConnectorOperationState | undefined;
+
+  /**
+   * <p>The type of connector operation performed.</p>
+   * @public
+   */
+  connectorOperationType?: ConnectorOperationType | undefined;
+
+  /**
+   * <p>The array of operation steps taken.</p>
+   * @public
+   */
+  operationSteps?: ConnectorOperationStep[] | undefined;
+
+  /**
+   * <p>The origin worker setting.</p>
+   * @public
+   */
+  originWorkerSetting?: WorkerSetting | undefined;
+
+  /**
+   * <p>The origin connector configuration.</p>
+   * @public
+   */
+  originConnectorConfiguration?: Record<string, string> | undefined;
+
+  /**
+   * <p>The target worker setting.</p>
+   * @public
+   */
+  targetWorkerSetting?: WorkerSetting | undefined;
+
+  /**
+   * <p>The target connector configuration.</p>
+   * @public
+   */
+  targetConnectorConfiguration?: Record<string, string> | undefined;
+
+  /**
+   * <p>Details about the state of a resource.</p>
+   * @public
+   */
+  errorInfo?: StateDescription | undefined;
+
+  /**
+   * <p>The time when the operation was created.</p>
+   * @public
+   */
+  creationTime?: Date | undefined;
+
+  /**
+   * <p>The time when the operation ended.</p>
+   * @public
+   */
+  endTime?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeCustomPluginRequest {
+  /**
+   * <p>Returns information about a custom plugin.</p>
+   * @public
+   */
+  customPluginArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeCustomPluginResponse {
+  /**
+   * <p>The time that the custom plugin was created.</p>
+   * @public
+   */
+  creationTime?: Date | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the custom plugin.</p>
+   * @public
+   */
+  customPluginArn?: string | undefined;
+
+  /**
+   * <p>The state of the custom plugin.</p>
+   * @public
+   */
+  customPluginState?: CustomPluginState | undefined;
+
+  /**
+   * <p>The description of the custom plugin.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The latest successfully created revision of the custom plugin. If there are no successfully created revisions, this field will be absent.</p>
+   * @public
+   */
+  latestRevision?: CustomPluginRevisionSummary | undefined;
+
+  /**
+   * <p>The name of the custom plugin.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Details about the state of a custom plugin.</p>
+   * @public
+   */
+  stateDescription?: StateDescription | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeWorkerConfigurationRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.</p>
+   * @public
+   */
+  workerConfigurationArn: string | undefined;
 }
 
 /**
  * <p>The description of the worker configuration revision.</p>
+ * @public
  */
 export interface WorkerConfigurationRevisionDescription {
   /**
    * <p>The time that the worker configuration was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The description of the worker configuration revision.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Base64 encoded contents of the connect-distributed.properties file.</p>
+   * @public
    */
-  propertiesFileContent?: string;
+  propertiesFileContent?: string | undefined;
 
   /**
    * <p>The description of a revision of the worker configuration.</p>
+   * @public
    */
-  revision?: number;
+  revision?: number | undefined;
 }
 
-export namespace WorkerConfigurationRevisionDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerConfigurationRevisionDescription): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeWorkerConfigurationResponse {
   /**
    * <p>The time that the worker configuration was created.</p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p>The description of the worker configuration.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The latest revision of the custom configuration.</p>
+   * @public
    */
-  latestRevision?: WorkerConfigurationRevisionDescription;
+  latestRevision?: WorkerConfigurationRevisionDescription | undefined;
 
   /**
    * <p>The name of the worker configuration.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the custom configuration.</p>
+   * @public
    */
-  workerConfigurationArn?: string;
-}
+  workerConfigurationArn?: string | undefined;
 
-export namespace DescribeWorkerConfigurationResponse {
   /**
-   * @internal
+   * <p>The state of the worker configuration.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeWorkerConfigurationResponse): any => ({
-    ...obj,
-  });
+  workerConfigurationState?: WorkerConfigurationState | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListConnectorOperationsRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector for which to list operations.</p>
+   * @public
+   */
+  connectorArn: string | undefined;
+
+  /**
+   * <p>Maximum number of connector operations to fetch in one get request.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>If the response is truncated, it includes a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListConnectorOperationsResponse {
+  /**
+   * <p>An array of connector operation descriptions.</p>
+   * @public
+   */
+  connectorOperations?: ConnectorOperationSummary[] | undefined;
+
+  /**
+   * <p>If the response is truncated, it includes a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListConnectorsRequest {
   /**
    * <p>The name prefix that you want to use to search for and list connectors.</p>
+   * @public
    */
-  connectorNamePrefix?: string;
+  connectorNamePrefix?: string | undefined;
 
   /**
    * <p>The maximum number of connectors to list in one response.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>If the response of a ListConnectors operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListConnectorsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConnectorsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListConnectorsResponse {
   /**
    * <p>An array of connector descriptions.</p>
+   * @public
    */
-  connectors?: ConnectorSummary[];
+  connectors?: ConnectorSummary[] | undefined;
 
   /**
    * <p>If the response of a ListConnectors operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListConnectorsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConnectorsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCustomPluginsRequest {
   /**
    * <p>The maximum number of custom plugins to list in one response.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>If the response of a ListCustomPlugins operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
+   * @public
    */
-  nextToken?: string;
-}
+  nextToken?: string | undefined;
 
-export namespace ListCustomPluginsRequest {
   /**
-   * @internal
+   * <p>Lists custom plugin names that start with the specified text string.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListCustomPluginsRequest): any => ({
-    ...obj,
-  });
+  namePrefix?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListCustomPluginsResponse {
   /**
    * <p>An array of custom plugin descriptions.</p>
+   * @public
    */
-  customPlugins?: CustomPluginSummary[];
+  customPlugins?: CustomPluginSummary[] | undefined;
 
   /**
    * <p>If the response of a ListCustomPlugins operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListCustomPluginsResponse {
+/**
+ * @public
+ */
+export interface ListTagsForResourceRequest {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListCustomPluginsResponse): any => ({
-    ...obj,
-  });
+  resourceArn: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListTagsForResourceResponse {
+  /**
+   * <p>Lists the tags attached to the specified resource in the corresponding request.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListWorkerConfigurationsRequest {
   /**
    * <p>The maximum number of worker configurations to list in one response.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
+   * @public
    */
-  nextToken?: string;
-}
+  nextToken?: string | undefined;
 
-export namespace ListWorkerConfigurationsRequest {
   /**
-   * @internal
+   * <p>Lists worker configuration names that start with the specified text string.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListWorkerConfigurationsRequest): any => ({
-    ...obj,
-  });
+  namePrefix?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListWorkerConfigurationsResponse {
   /**
    * <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>An array of worker configuration descriptions.</p>
+   * @public
    */
-  workerConfigurations?: WorkerConfigurationSummary[];
+  workerConfigurations?: WorkerConfigurationSummary[] | undefined;
 }
 
-export namespace ListWorkerConfigurationsResponse {
+/**
+ * @public
+ */
+export interface PauseConnectorRequest {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the connector that you want to pause.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListWorkerConfigurationsResponse): any => ({
-    ...obj,
-  });
+  connectorArn: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface PauseConnectorResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
+   */
+  connectorArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector operation created to perform the pause.</p>
+   * @public
+   */
+  connectorOperationArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RestartConnectorRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector that you want to restart.</p>
+   * @public
+   */
+  connectorArn: string | undefined;
+
+  /**
+   * <p>Specifies whether to restart only the connector's failed tasks. If <code>true</code>, the operation restarts only the tasks that are currently in a failed state, and healthy tasks continue running. If <code>false</code> or not specified, the operation restarts the connector and all of its tasks.</p>
+   * @public
+   */
+  onlyFailedTasks?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RestartConnectorResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
+   */
+  connectorArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector operation created to perform the restart.</p>
+   * @public
+   */
+  connectorOperationArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ResumeConnectorRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector that you want to resume.</p>
+   * @public
+   */
+  connectorArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ResumeConnectorResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
+   */
+  connectorArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the connector operation created to perform the resume.</p>
+   * @public
+   */
+  connectorOperationArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagResourceRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource to which you want to attach tags.</p>
+   * @public
+   */
+  resourceArn: string | undefined;
+
+  /**
+   * <p>The tags that you want to attach to the resource.</p>
+   * @public
+   */
+  tags: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagResourceResponse {}
+
+/**
+ * @public
+ */
+export interface UntagResourceRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource from which you want to remove tags.</p>
+   * @public
+   */
+  resourceArn: string | undefined;
+
+  /**
+   * <p>The keys of the tags that you want to remove from the resource.</p>
+   * @public
+   */
+  tagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UntagResourceResponse {}
+
+/**
+ * <p>The worker configuration to use when you update a connector via <code>UpdateConnector</code>.</p>
+ * @public
+ */
+export interface WorkerConfigurationUpdate {
+  /**
+   * <p>The revision of the worker configuration.</p>
+   * @public
+   */
+  revision: number | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the worker configuration.</p>
+   * @public
+   */
+  workerConfigurationArn: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateConnectorRequest {
   /**
    * <p>The target capacity.</p>
+   * @public
    */
-  capacity: CapacityUpdate | undefined;
+  capacity?: CapacityUpdate | undefined;
+
+  /**
+   * <p>A map of keys to values that represent the configuration for the connector.</p>
+   * @public
+   */
+  connectorConfiguration?: Record<string, string> | undefined;
+
+  /**
+   * <p>Specifies whether the update bypasses connector-level and task-level health checks. If <code>true</code>, the update skips the health checks. The update stays in effect even if the connector or its tasks are unhealthy, and Amazon MSK Connect doesn't roll it back. If <code>false</code> or not specified, the health checks run. If they fail, MSK Connect automatically rolls the connector back to its previous configuration, and the update doesn't take effect. To update a connector that is in the <code>PAUSED</code> state, you must set this parameter to <code>true</code>.</p>
+   * @public
+   */
+  skipHealthValidation?: boolean | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the connector that you want to update.</p>
+   * @public
    */
   connectorArn: string | undefined;
 
   /**
    * <p>The current version of the connector that you want to update.</p>
+   * @public
    */
   currentVersion: string | undefined;
-}
 
-export namespace UpdateConnectorRequest {
   /**
-   * @internal
+   * <important> <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p> </important> <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object. If you don't specify this parameter, the connector keeps its current plugin.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateConnectorRequest): any => ({
-    ...obj,
-  });
+  plugins?: PluginUpdate[] | undefined;
+
+  /**
+   * <p>The worker configuration to use with the connector. Specify the Amazon Resource Name (ARN) and the revision of the worker configuration. You can't specify both <code>workerConfiguration</code> and <code>useDefaultWorkerConfiguration</code> in the same request. If you specify neither parameter, the connector keeps its current worker configuration.</p>
+   * @public
+   */
+  workerConfiguration?: WorkerConfigurationUpdate | undefined;
+
+  /**
+   * <p>Specifies whether to switch the connector to the default worker configuration that Amazon MSK Connect provides. If <code>true</code>, the connector stops using its custom worker configuration and uses the default worker configuration instead. If <code>false</code> or not specified, the connector keeps its current worker configuration. You can't specify both <code>useDefaultWorkerConfiguration</code> and <code>workerConfiguration</code> in the same request.</p>
+   * @public
+   */
+  useDefaultWorkerConfiguration?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateConnectorResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the connector.</p>
+   * @public
    */
-  connectorArn?: string;
+  connectorArn?: string | undefined;
 
   /**
    * <p>The state of the connector.</p>
+   * @public
    */
-  connectorState?: ConnectorState | string;
-}
+  connectorState?: ConnectorState | undefined;
 
-export namespace UpdateConnectorResponse {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the connector operation.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateConnectorResponse): any => ({
-    ...obj,
-  });
+  connectorOperationArn?: string | undefined;
 }

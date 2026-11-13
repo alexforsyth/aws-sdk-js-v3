@@ -1,5 +1,23 @@
-export * from "./LakeFormation";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <fullname>Lake Formation</fullname>
+ *          <p>Defines the public endpoint for the Lake Formation service.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./LakeFormationClient";
+export * from "./LakeFormation";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { LakeFormationExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { LakeFormationServiceException } from "./models/LakeFormationServiceException";

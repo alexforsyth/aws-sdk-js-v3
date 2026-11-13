@@ -1,81 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreetingStruct } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { GreetingStruct } from "../models/models_0";
 import {
-  deserializeAws_restJson1MalformedContentTypeWithBodyCommand,
-  serializeAws_restJson1MalformedContentTypeWithBodyCommand,
+  de_MalformedContentTypeWithBodyCommand,
+  se_MalformedContentTypeWithBodyCommand,
 } from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MalformedContentTypeWithBodyCommand}.
+ */
 export interface MalformedContentTypeWithBodyCommandInput extends GreetingStruct {}
+/**
+ * @public
+ *
+ * The output of {@link MalformedContentTypeWithBodyCommand}.
+ */
 export interface MalformedContentTypeWithBodyCommandOutput extends __MetadataBearer {}
 
-export class MalformedContentTypeWithBodyCommand extends $Command<
-  MalformedContentTypeWithBodyCommandInput,
-  MalformedContentTypeWithBodyCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: MalformedContentTypeWithBodyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MalformedContentTypeWithBodyCommandInput, MalformedContentTypeWithBodyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "MalformedContentTypeWithBodyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GreetingStruct.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, MalformedContentTypeWithBodyCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, MalformedContentTypeWithBodyCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // GreetingStruct
+ *   hi: "STRING_VALUE",
+ * };
+ * const command = new MalformedContentTypeWithBodyCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param MalformedContentTypeWithBodyCommandInput - {@link MalformedContentTypeWithBodyCommandInput}
+ * @returns {@link MalformedContentTypeWithBodyCommandOutput}
+ * @see {@link MalformedContentTypeWithBodyCommandInput} for command's `input` shape.
+ * @see {@link MalformedContentTypeWithBodyCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class MalformedContentTypeWithBodyCommand extends $Command
+  .classBuilder<
+    MalformedContentTypeWithBodyCommandInput,
+    MalformedContentTypeWithBodyCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "MalformedContentTypeWithBody", {})
+  .n("RestJsonProtocolClient", "MalformedContentTypeWithBodyCommand")
+  .f(void 0, void 0)
+  .ser(se_MalformedContentTypeWithBodyCommand)
+  .de(de_MalformedContentTypeWithBodyCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GreetingStruct;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: MalformedContentTypeWithBodyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1MalformedContentTypeWithBodyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<MalformedContentTypeWithBodyCommandOutput> {
-    return deserializeAws_restJson1MalformedContentTypeWithBodyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MalformedContentTypeWithBodyCommandInput;
+      output: MalformedContentTypeWithBodyCommandOutput;
+    };
+  };
 }

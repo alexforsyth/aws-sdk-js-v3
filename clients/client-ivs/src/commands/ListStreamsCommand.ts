@@ -1,96 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvsClient";
-import { ListStreamsRequest, ListStreamsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListStreamsCommand,
-  serializeAws_restJson1ListStreamsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStreamsRequest, ListStreamsResponse } from "../models/models_0";
+import { ListStreams$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandInput extends ListStreamsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandOutput extends ListStreamsResponse, __MetadataBearer {}
 
 /**
- * <p>Gets summary information about live streams in your account, in the Amazon Web Services region where the
- *       API request is processed.</p>
+ * <p>Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IvsClient, ListStreamsCommand } from "@aws-sdk/client-ivs"; // ES Modules import
  * // const { IvsClient, ListStreamsCommand } = require("@aws-sdk/client-ivs"); // CommonJS import
+ * // import type { IvsClientConfig } from "@aws-sdk/client-ivs";
+ * const config = {}; // type is IvsClientConfig
  * const client = new IvsClient(config);
+ * const input = { // ListStreamsRequest
+ *   filterBy: { // StreamFilters
+ *     health: "STRING_VALUE",
+ *   },
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListStreamsCommand(input);
  * const response = await client.send(command);
+ * // { // ListStreamsResponse
+ * //   streams: [ // StreamList // required
+ * //     { // StreamSummary
+ * //       channelArn: "STRING_VALUE",
+ * //       streamId: "STRING_VALUE",
+ * //       state: "STRING_VALUE",
+ * //       health: "STRING_VALUE",
+ * //       viewerCount: Number("long"),
+ * //       startTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStreamsCommandInput - {@link ListStreamsCommandInput}
+ * @returns {@link ListStreamsCommandOutput}
  * @see {@link ListStreamsCommandInput} for command's `input` shape.
  * @see {@link ListStreamsCommandOutput} for command's `response` shape.
- * @see {@link IvsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IvsClientResolvedConfig | config} for IvsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IvsServiceException}
+ * <p>Base exception class for all service exceptions from Ivs service.</p>
+ *
+ *
+ * @public
  */
-export class ListStreamsCommand extends $Command<
-  ListStreamsCommandInput,
-  ListStreamsCommandOutput,
-  IvsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStreamsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStreamsCommandInput, ListStreamsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvsClient";
-    const commandName = "ListStreamsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStreamsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStreamsResponse.filterSensitiveLog,
+export class ListStreamsCommand extends command<ListStreamsCommandInput, ListStreamsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStreams",
+  ListStreams$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStreamsRequest;
+      output: ListStreamsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStreamsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListStreamsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStreamsCommandOutput> {
-    return deserializeAws_restJson1ListStreamsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStreamsCommandInput;
+      output: ListStreamsCommandOutput;
+    };
+  };
 }

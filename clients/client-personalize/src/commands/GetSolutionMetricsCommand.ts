@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetSolutionMetricsRequest, GetSolutionMetricsResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1GetSolutionMetricsCommand,
-  serializeAws_json1_1GetSolutionMetricsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSolutionMetricsRequest, GetSolutionMetricsResponse } from "../models/models_0";
+import { GetSolutionMetrics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSolutionMetricsCommand}.
+ */
 export interface GetSolutionMetricsCommandInput extends GetSolutionMetricsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSolutionMetricsCommand}.
+ */
 export interface GetSolutionMetricsCommandOutput extends GetSolutionMetricsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface GetSolutionMetricsCommandOutput extends GetSolutionMetricsRespo
  * ```javascript
  * import { PersonalizeClient, GetSolutionMetricsCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, GetSolutionMetricsCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // GetSolutionMetricsRequest
+ *   solutionVersionArn: "STRING_VALUE", // required
+ * };
  * const command = new GetSolutionMetricsCommand(input);
  * const response = await client.send(command);
+ * // { // GetSolutionMetricsResponse
+ * //   solutionVersionArn: "STRING_VALUE",
+ * //   metrics: { // Metrics
+ * //     "<keys>": Number("double"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSolutionMetricsCommandInput - {@link GetSolutionMetricsCommandInput}
+ * @returns {@link GetSolutionMetricsCommandOutput}
  * @see {@link GetSolutionMetricsCommandInput} for command's `input` shape.
  * @see {@link GetSolutionMetricsCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class GetSolutionMetricsCommand extends $Command<
-  GetSolutionMetricsCommandInput,
-  GetSolutionMetricsCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSolutionMetricsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSolutionMetricsCommandInput, GetSolutionMetricsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "GetSolutionMetricsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSolutionMetricsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSolutionMetricsResponse.filterSensitiveLog,
+export class GetSolutionMetricsCommand extends command<GetSolutionMetricsCommandInput, GetSolutionMetricsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSolutionMetrics",
+  GetSolutionMetrics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSolutionMetricsRequest;
+      output: GetSolutionMetricsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSolutionMetricsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetSolutionMetricsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSolutionMetricsCommandOutput> {
-    return deserializeAws_json1_1GetSolutionMetricsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSolutionMetricsCommandInput;
+      output: GetSolutionMetricsCommandOutput;
+    };
+  };
 }

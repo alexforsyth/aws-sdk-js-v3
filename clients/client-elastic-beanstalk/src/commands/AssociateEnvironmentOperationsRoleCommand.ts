@@ -1,104 +1,81 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { AssociateEnvironmentOperationsRoleMessage } from "../models/models_0";
-import {
-  deserializeAws_queryAssociateEnvironmentOperationsRoleCommand,
-  serializeAws_queryAssociateEnvironmentOperationsRoleCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateEnvironmentOperationsRoleMessage } from "../models/models_0";
+import { AssociateEnvironmentOperationsRole$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateEnvironmentOperationsRoleCommand}.
+ */
 export interface AssociateEnvironmentOperationsRoleCommandInput extends AssociateEnvironmentOperationsRoleMessage {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateEnvironmentOperationsRoleCommand}.
+ */
 export interface AssociateEnvironmentOperationsRoleCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk
- *       uses the associated operations role for permissions to downstream services during subsequent
- *       calls acting on this environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the
- *         <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+ * <important>
+ *             <p>The operations role feature of Elastic Beanstalk is in beta release and is subject to change.</p>
+ *          </important>
+ *          <p>Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk uses the associated operations role for permissions to
+ *       downstream services during subsequent calls acting on this environment.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, AssociateEnvironmentOperationsRoleCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, AssociateEnvironmentOperationsRoleCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // AssociateEnvironmentOperationsRoleMessage
+ *   EnvironmentName: "STRING_VALUE", // required
+ *   OperationsRole: "STRING_VALUE", // required
+ * };
  * const command = new AssociateEnvironmentOperationsRoleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateEnvironmentOperationsRoleCommandInput - {@link AssociateEnvironmentOperationsRoleCommandInput}
+ * @returns {@link AssociateEnvironmentOperationsRoleCommandOutput}
  * @see {@link AssociateEnvironmentOperationsRoleCommandInput} for command's `input` shape.
  * @see {@link AssociateEnvironmentOperationsRoleCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link InsufficientPrivilegesException} (client fault)
+ *  <p>The specified account does not have sufficient privileges for one or more Amazon Web Services services.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateEnvironmentOperationsRoleCommand extends $Command<
-  AssociateEnvironmentOperationsRoleCommandInput,
-  AssociateEnvironmentOperationsRoleCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateEnvironmentOperationsRoleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateEnvironmentOperationsRoleCommandInput, AssociateEnvironmentOperationsRoleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "AssociateEnvironmentOperationsRoleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateEnvironmentOperationsRoleMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class AssociateEnvironmentOperationsRoleCommand extends command<AssociateEnvironmentOperationsRoleCommandInput, AssociateEnvironmentOperationsRoleCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateEnvironmentOperationsRole",
+  AssociateEnvironmentOperationsRole$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateEnvironmentOperationsRoleMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateEnvironmentOperationsRoleCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryAssociateEnvironmentOperationsRoleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateEnvironmentOperationsRoleCommandOutput> {
-    return deserializeAws_queryAssociateEnvironmentOperationsRoleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateEnvironmentOperationsRoleCommandInput;
+      output: AssociateEnvironmentOperationsRoleCommandOutput;
+    };
+  };
 }

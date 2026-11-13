@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { PurchaseHostReservationRequest, PurchaseHostReservationResult } from "../models/models_5";
-import {
-  deserializeAws_ec2PurchaseHostReservationCommand,
-  serializeAws_ec2PurchaseHostReservationCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PurchaseHostReservationRequest, PurchaseHostReservationResult } from "../models/models_8";
+import { PurchaseHostReservation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PurchaseHostReservationCommand}.
+ */
 export interface PurchaseHostReservationCommandInput extends PurchaseHostReservationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PurchaseHostReservationCommand}.
+ */
 export interface PurchaseHostReservationCommandOutput extends PurchaseHostReservationResult, __MetadataBearer {}
 
 /**
@@ -31,68 +32,81 @@ export interface PurchaseHostReservationCommandOutput extends PurchaseHostReserv
  * ```javascript
  * import { EC2Client, PurchaseHostReservationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, PurchaseHostReservationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // PurchaseHostReservationRequest
+ *   ClientToken: "STRING_VALUE",
+ *   CurrencyCode: "USD",
+ *   HostIdSet: [ // RequestHostIdSet // required
+ *     "STRING_VALUE",
+ *   ],
+ *   LimitPrice: "STRING_VALUE",
+ *   OfferingId: "STRING_VALUE", // required
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new PurchaseHostReservationCommand(input);
  * const response = await client.send(command);
+ * // { // PurchaseHostReservationResult
+ * //   ClientToken: "STRING_VALUE",
+ * //   CurrencyCode: "USD",
+ * //   Purchase: [ // PurchaseSet
+ * //     { // Purchase
+ * //       CurrencyCode: "USD",
+ * //       Duration: Number("int"),
+ * //       HostIdSet: [ // ResponseHostIdSet
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       HostReservationId: "STRING_VALUE",
+ * //       HourlyPrice: "STRING_VALUE",
+ * //       InstanceFamily: "STRING_VALUE",
+ * //       PaymentOption: "AllUpfront" || "PartialUpfront" || "NoUpfront",
+ * //       UpfrontPrice: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   TotalHourlyPrice: "STRING_VALUE",
+ * //   TotalUpfrontPrice: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param PurchaseHostReservationCommandInput - {@link PurchaseHostReservationCommandInput}
+ * @returns {@link PurchaseHostReservationCommandOutput}
  * @see {@link PurchaseHostReservationCommandInput} for command's `input` shape.
  * @see {@link PurchaseHostReservationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class PurchaseHostReservationCommand extends $Command<
-  PurchaseHostReservationCommandInput,
-  PurchaseHostReservationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PurchaseHostReservationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PurchaseHostReservationCommandInput, PurchaseHostReservationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "PurchaseHostReservationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PurchaseHostReservationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PurchaseHostReservationResult.filterSensitiveLog,
+export class PurchaseHostReservationCommand extends command<PurchaseHostReservationCommandInput, PurchaseHostReservationCommandOutput>(
+  _ep0,
+  _mw0,
+  "PurchaseHostReservation",
+  PurchaseHostReservation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurchaseHostReservationRequest;
+      output: PurchaseHostReservationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PurchaseHostReservationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2PurchaseHostReservationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PurchaseHostReservationCommandOutput> {
-    return deserializeAws_ec2PurchaseHostReservationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PurchaseHostReservationCommandInput;
+      output: PurchaseHostReservationCommandOutput;
+    };
+  };
 }

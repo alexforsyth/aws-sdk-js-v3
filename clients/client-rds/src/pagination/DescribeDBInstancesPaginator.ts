@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeDBInstancesCommand,
   DescribeDBInstancesCommandInput,
   DescribeDBInstancesCommandOutput,
 } from "../commands/DescribeDBInstancesCommand";
-import { RDS } from "../RDS";
 import { RDSClient } from "../RDSClient";
-import { RDSPaginationConfiguration } from "./Interfaces";
+import type { RDSPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: RDSClient,
-  input: DescribeDBInstancesCommandInput,
-  ...args: any
-): Promise<DescribeDBInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeDBInstancesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: RDS,
-  input: DescribeDBInstancesCommandInput,
-  ...args: any
-): Promise<DescribeDBInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.describeDBInstances(input, ...args);
-};
-export async function* paginateDescribeDBInstances(
+export const paginateDescribeDBInstances: (
   config: RDSPaginationConfiguration,
   input: DescribeDBInstancesCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeDBInstancesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeDBInstancesCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxRecords"] = config.pageSize;
-    if (config.client instanceof RDS) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof RDSClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected RDS | RDSClient");
-    }
-    yield page;
-    token = page.Marker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeDBInstancesCommandOutput> = createPaginator<
+  RDSPaginationConfiguration,
+  DescribeDBInstancesCommandInput,
+  DescribeDBInstancesCommandOutput
+>(RDSClient, DescribeDBInstancesCommand, "Marker", "Marker", "MaxRecords");

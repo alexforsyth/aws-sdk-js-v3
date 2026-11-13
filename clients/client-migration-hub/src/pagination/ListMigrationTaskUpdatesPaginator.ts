@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListMigrationTaskUpdatesCommand,
+  ListMigrationTaskUpdatesCommandInput,
+  ListMigrationTaskUpdatesCommandOutput,
+} from "../commands/ListMigrationTaskUpdatesCommand";
+import { MigrationHubClient } from "../MigrationHubClient";
+import type { MigrationHubPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListMigrationTaskUpdates: (
+  config: MigrationHubPaginationConfiguration,
+  input: ListMigrationTaskUpdatesCommandInput,
+  ...rest: any[]
+) => Paginator<ListMigrationTaskUpdatesCommandOutput> = createPaginator<
+  MigrationHubPaginationConfiguration,
+  ListMigrationTaskUpdatesCommandInput,
+  ListMigrationTaskUpdatesCommandOutput
+>(MigrationHubClient, ListMigrationTaskUpdatesCommand, "NextToken", "NextToken", "MaxResults");

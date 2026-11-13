@@ -1,235 +1,234 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
-import { CloseTunnelCommand, CloseTunnelCommandInput, CloseTunnelCommandOutput } from "./commands/CloseTunnelCommand";
 import {
+  type CloseTunnelCommandInput,
+  type CloseTunnelCommandOutput,
+  CloseTunnelCommand,
+} from "./commands/CloseTunnelCommand";
+import {
+  type DescribeTunnelCommandInput,
+  type DescribeTunnelCommandOutput,
   DescribeTunnelCommand,
-  DescribeTunnelCommandInput,
-  DescribeTunnelCommandOutput,
 } from "./commands/DescribeTunnelCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListTunnelsCommand, ListTunnelsCommandInput, ListTunnelsCommandOutput } from "./commands/ListTunnelsCommand";
-import { OpenTunnelCommand, OpenTunnelCommandInput, OpenTunnelCommandOutput } from "./commands/OpenTunnelCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type ListTunnelsCommandInput,
+  type ListTunnelsCommandOutput,
+  ListTunnelsCommand,
+} from "./commands/ListTunnelsCommand";
+import {
+  type OpenTunnelCommandInput,
+  type OpenTunnelCommandOutput,
+  OpenTunnelCommand,
+} from "./commands/OpenTunnelCommand";
+import {
+  type RotateTunnelAccessTokenCommandInput,
+  type RotateTunnelAccessTokenCommandOutput,
+  RotateTunnelAccessTokenCommand,
+} from "./commands/RotateTunnelAccessTokenCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import { IoTSecureTunnelingClient } from "./IoTSecureTunnelingClient";
+import { paginateListTunnels } from "./pagination/ListTunnelsPaginator";
+
+const commands = {
+  CloseTunnelCommand,
+  DescribeTunnelCommand,
+  ListTagsForResourceCommand,
+  ListTunnelsCommand,
+  OpenTunnelCommand,
+  RotateTunnelAccessTokenCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateListTunnels,
+};
 
 /**
- * <fullname>AWS IoT Secure Tunneling</fullname>
- * 		       <p>AWS IoT Secure Tunnling enables you to create remote connections to devices
- * 			deployed in the field.</p>
- *
- * 		       <p>For more information about how AWS IoT Secure Tunneling works, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/secure-tunneling.html">AWS IoT Secure Tunneling</a>.</p>
+ * @public
  */
-export class IoTSecureTunneling extends IoTSecureTunnelingClient {
+export interface IoTSecureTunnelingRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IoTSecureTunneling {
   /**
-   * <p>Closes a tunnel identified by the unique tunnel id. When a <code>CloseTunnel</code>
-   * 			request is received, we close the WebSocket connections between the client and proxy
-   * 			server so no data can be transmitted.</p>
+   * @see {@link CloseTunnelCommand}
    */
-  public closeTunnel(args: CloseTunnelCommandInput, options?: __HttpHandlerOptions): Promise<CloseTunnelCommandOutput>;
-  public closeTunnel(args: CloseTunnelCommandInput, cb: (err: any, data?: CloseTunnelCommandOutput) => void): void;
-  public closeTunnel(
+  closeTunnel(
     args: CloseTunnelCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTSecureTunnelingRequestOptions
+  ): Promise<CloseTunnelCommandOutput>;
+  closeTunnel(
+    args: CloseTunnelCommandInput,
     cb: (err: any, data?: CloseTunnelCommandOutput) => void
   ): void;
-  public closeTunnel(
+  closeTunnel(
     args: CloseTunnelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CloseTunnelCommandOutput) => void),
-    cb?: (err: any, data?: CloseTunnelCommandOutput) => void
-  ): Promise<CloseTunnelCommandOutput> | void {
-    const command = new CloseTunnelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTSecureTunnelingRequestOptions,
+    cb: (err: any, data?: CloseTunnelCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about a tunnel identified by the unique tunnel id.</p>
+   * @see {@link DescribeTunnelCommand}
    */
-  public describeTunnel(
+  describeTunnel(
     args: DescribeTunnelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTSecureTunnelingRequestOptions
   ): Promise<DescribeTunnelCommandOutput>;
-  public describeTunnel(
+  describeTunnel(
     args: DescribeTunnelCommandInput,
     cb: (err: any, data?: DescribeTunnelCommandOutput) => void
   ): void;
-  public describeTunnel(
+  describeTunnel(
     args: DescribeTunnelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTSecureTunnelingRequestOptions,
     cb: (err: any, data?: DescribeTunnelCommandOutput) => void
   ): void;
-  public describeTunnel(
-    args: DescribeTunnelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTunnelCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTunnelCommandOutput) => void
-  ): Promise<DescribeTunnelCommandOutput> | void {
-    const command = new DescribeTunnelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags for the specified resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTSecureTunnelingRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTSecureTunnelingRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List all tunnels for an AWS account. Tunnels are listed by creation time in
-   * 			descending order, newer tunnels will be listed before older tunnels.</p>
+   * @see {@link ListTunnelsCommand}
    */
-  public listTunnels(args: ListTunnelsCommandInput, options?: __HttpHandlerOptions): Promise<ListTunnelsCommandOutput>;
-  public listTunnels(args: ListTunnelsCommandInput, cb: (err: any, data?: ListTunnelsCommandOutput) => void): void;
-  public listTunnels(
+  listTunnels(): Promise<ListTunnelsCommandOutput>;
+  listTunnels(
     args: ListTunnelsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTSecureTunnelingRequestOptions
+  ): Promise<ListTunnelsCommandOutput>;
+  listTunnels(
+    args: ListTunnelsCommandInput,
     cb: (err: any, data?: ListTunnelsCommandOutput) => void
   ): void;
-  public listTunnels(
+  listTunnels(
     args: ListTunnelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTunnelsCommandOutput) => void),
-    cb?: (err: any, data?: ListTunnelsCommandOutput) => void
-  ): Promise<ListTunnelsCommandOutput> | void {
-    const command = new ListTunnelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTSecureTunnelingRequestOptions,
+    cb: (err: any, data?: ListTunnelsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a new tunnel, and returns two client access tokens for clients to use to
-   * 			connect to the AWS IoT Secure Tunneling proxy server.</p>
+   * @see {@link OpenTunnelCommand}
    */
-  public openTunnel(args: OpenTunnelCommandInput, options?: __HttpHandlerOptions): Promise<OpenTunnelCommandOutput>;
-  public openTunnel(args: OpenTunnelCommandInput, cb: (err: any, data?: OpenTunnelCommandOutput) => void): void;
-  public openTunnel(
+  openTunnel(): Promise<OpenTunnelCommandOutput>;
+  openTunnel(
     args: OpenTunnelCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTSecureTunnelingRequestOptions
+  ): Promise<OpenTunnelCommandOutput>;
+  openTunnel(
+    args: OpenTunnelCommandInput,
     cb: (err: any, data?: OpenTunnelCommandOutput) => void
   ): void;
-  public openTunnel(
+  openTunnel(
     args: OpenTunnelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: OpenTunnelCommandOutput) => void),
-    cb?: (err: any, data?: OpenTunnelCommandOutput) => void
-  ): Promise<OpenTunnelCommandOutput> | void {
-    const command = new OpenTunnelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTSecureTunnelingRequestOptions,
+    cb: (err: any, data?: OpenTunnelCommandOutput) => void
+  ): void;
 
   /**
-   * <p>A resource tag.</p>
+   * @see {@link RotateTunnelAccessTokenCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  rotateTunnelAccessToken(
+    args: RotateTunnelAccessTokenCommandInput,
+    options?: IoTSecureTunnelingRequestOptions
+  ): Promise<RotateTunnelAccessTokenCommandOutput>;
+  rotateTunnelAccessToken(
+    args: RotateTunnelAccessTokenCommandInput,
+    cb: (err: any, data?: RotateTunnelAccessTokenCommandOutput) => void
+  ): void;
+  rotateTunnelAccessToken(
+    args: RotateTunnelAccessTokenCommandInput,
+    options: IoTSecureTunnelingRequestOptions,
+    cb: (err: any, data?: RotateTunnelAccessTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTSecureTunnelingRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTSecureTunnelingRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes a tag from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTSecureTunnelingRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTSecureTunnelingRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListTunnelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTunnelsCommandOutput}.
+   */
+  paginateListTunnels(
+    args?: ListTunnelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTunnelsCommandOutput>;
 }
+
+/**
+ * <fullname>IoT Secure Tunneling</fullname>
+ *          <p>IoT Secure Tunneling creates remote connections to devices deployed in the
+ * 			field.</p>
+ *          <p>For more information about how IoT Secure Tunneling works, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/secure-tunneling.html">IoT
+ * 				Secure Tunneling</a>.</p>
+ * @public
+ */
+export class IoTSecureTunneling extends IoTSecureTunnelingClient implements IoTSecureTunneling {}
+createAggregatedClient(commands, IoTSecureTunneling, { paginators });

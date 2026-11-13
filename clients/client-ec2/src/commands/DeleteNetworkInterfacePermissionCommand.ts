@@ -1,106 +1,83 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteNetworkInterfacePermissionRequest, DeleteNetworkInterfacePermissionResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteNetworkInterfacePermissionCommand,
-  serializeAws_ec2DeleteNetworkInterfacePermissionCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DeleteNetworkInterfacePermissionRequest,
+  DeleteNetworkInterfacePermissionResult,
+} from "../models/models_3";
+import { DeleteNetworkInterfacePermission$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteNetworkInterfacePermissionCommand}.
+ */
 export interface DeleteNetworkInterfacePermissionCommandInput extends DeleteNetworkInterfacePermissionRequest {}
-export interface DeleteNetworkInterfacePermissionCommandOutput
-  extends DeleteNetworkInterfacePermissionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteNetworkInterfacePermissionCommand}.
+ */
+export interface DeleteNetworkInterfacePermissionCommandOutput extends DeleteNetworkInterfacePermissionResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a permission for a network interface. By default, you cannot delete the
- * 			permission if the account for which you're removing the permission has attached the
- * 			network interface to an instance. However, you can force delete the permission,
- * 			regardless of any attachment.</p>
+ *             permission if the account for which you're removing the permission has attached the
+ *             network interface to an instance. However, you can force delete the permission,
+ *             regardless of any attachment.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DeleteNetworkInterfacePermissionCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteNetworkInterfacePermissionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteNetworkInterfacePermissionRequest
+ *   NetworkInterfacePermissionId: "STRING_VALUE", // required
+ *   Force: true || false,
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteNetworkInterfacePermissionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteNetworkInterfacePermissionResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DeleteNetworkInterfacePermissionCommandInput - {@link DeleteNetworkInterfacePermissionCommandInput}
+ * @returns {@link DeleteNetworkInterfacePermissionCommandOutput}
  * @see {@link DeleteNetworkInterfacePermissionCommandInput} for command's `input` shape.
  * @see {@link DeleteNetworkInterfacePermissionCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteNetworkInterfacePermissionCommand extends $Command<
-  DeleteNetworkInterfacePermissionCommandInput,
-  DeleteNetworkInterfacePermissionCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteNetworkInterfacePermissionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteNetworkInterfacePermissionCommandInput, DeleteNetworkInterfacePermissionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteNetworkInterfacePermissionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteNetworkInterfacePermissionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteNetworkInterfacePermissionResult.filterSensitiveLog,
+export class DeleteNetworkInterfacePermissionCommand extends command<DeleteNetworkInterfacePermissionCommandInput, DeleteNetworkInterfacePermissionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteNetworkInterfacePermission",
+  DeleteNetworkInterfacePermission$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNetworkInterfacePermissionRequest;
+      output: DeleteNetworkInterfacePermissionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteNetworkInterfacePermissionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteNetworkInterfacePermissionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteNetworkInterfacePermissionCommandOutput> {
-    return deserializeAws_ec2DeleteNetworkInterfacePermissionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteNetworkInterfacePermissionCommandInput;
+      output: DeleteNetworkInterfacePermissionCommandOutput;
+    };
+  };
 }

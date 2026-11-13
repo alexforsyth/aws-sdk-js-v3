@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { StopDominantLanguageDetectionJobRequest, StopDominantLanguageDetectionJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopDominantLanguageDetectionJobCommand,
-  serializeAws_json1_1StopDominantLanguageDetectionJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  StopDominantLanguageDetectionJobRequest,
+  StopDominantLanguageDetectionJobResponse,
+} from "../models/models_0";
+import { StopDominantLanguageDetectionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopDominantLanguageDetectionJobCommand}.
+ */
 export interface StopDominantLanguageDetectionJobCommandInput extends StopDominantLanguageDetectionJobRequest {}
-export interface StopDominantLanguageDetectionJobCommandOutput
-  extends StopDominantLanguageDetectionJobResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link StopDominantLanguageDetectionJobCommand}.
+ */
+export interface StopDominantLanguageDetectionJobCommandOutput extends StopDominantLanguageDetectionJobResponse, __MetadataBearer {}
 
 /**
  * <p>Stops a dominant language detection job in progress.</p>
@@ -39,74 +41,57 @@ export interface StopDominantLanguageDetectionJobCommandOutput
  * ```javascript
  * import { ComprehendClient, StopDominantLanguageDetectionJobCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, StopDominantLanguageDetectionJobCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // StopDominantLanguageDetectionJobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new StopDominantLanguageDetectionJobCommand(input);
  * const response = await client.send(command);
+ * // { // StopDominantLanguageDetectionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * //   JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * // };
+ *
  * ```
  *
+ * @param StopDominantLanguageDetectionJobCommandInput - {@link StopDominantLanguageDetectionJobCommandInput}
+ * @returns {@link StopDominantLanguageDetectionJobCommandOutput}
  * @see {@link StopDominantLanguageDetectionJobCommandInput} for command's `input` shape.
  * @see {@link StopDominantLanguageDetectionJobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link JobNotFoundException} (client fault)
+ *  <p>The specified job was not found. Check the job ID and try again.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class StopDominantLanguageDetectionJobCommand extends $Command<
-  StopDominantLanguageDetectionJobCommandInput,
-  StopDominantLanguageDetectionJobCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopDominantLanguageDetectionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopDominantLanguageDetectionJobCommandInput, StopDominantLanguageDetectionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "StopDominantLanguageDetectionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopDominantLanguageDetectionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopDominantLanguageDetectionJobResponse.filterSensitiveLog,
+export class StopDominantLanguageDetectionJobCommand extends command<StopDominantLanguageDetectionJobCommandInput, StopDominantLanguageDetectionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopDominantLanguageDetectionJob",
+  StopDominantLanguageDetectionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopDominantLanguageDetectionJobRequest;
+      output: StopDominantLanguageDetectionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: StopDominantLanguageDetectionJobCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopDominantLanguageDetectionJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StopDominantLanguageDetectionJobCommandOutput> {
-    return deserializeAws_json1_1StopDominantLanguageDetectionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopDominantLanguageDetectionJobCommandInput;
+      output: StopDominantLanguageDetectionJobCommandOutput;
+    };
+  };
 }

@@ -1,57 +1,61 @@
 {
   "name": "@aws-sdk/s3-request-presigner",
-  "version": "3.39.0",
-  "scripts": {
-    "build": "yarn build:cjs && yarn build:es && yarn build:types",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:es": "tsc -p tsconfig.es.json",
-    "build:types": "tsc -p tsconfig.types.json",
-    "downlevel-dts": "downlevel-dts dist-types dist-types/ts3.4",
-    "test": "jest"
+  "version": "3.1169.0",
+  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/s3-request-presigner",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "AWS SDK for JavaScript Team",
+    "url": "https://aws.amazon.com/sdk-for-javascript/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws/aws-sdk-js-v3.git",
+    "directory": "packages/s3-request-presigner"
+  },
+  "files": [
+    "dist-*/**"
+  ],
+  "sideEffects": false,
   "main": "./dist-cjs/index.js",
   "module": "./dist-es/index.js",
   "types": "./dist-types/index.d.ts",
-  "author": {
-    "name": "AWS SDK for JavaScript Team",
-    "url": "https://aws.amazon.com/javascript/"
-  },
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@aws-sdk/middleware-sdk-s3": "3.39.0",
-    "@aws-sdk/protocol-http": "3.38.0",
-    "@aws-sdk/signature-v4": "3.39.0",
-    "@aws-sdk/smithy-client": "3.38.0",
-    "@aws-sdk/types": "3.38.0",
-    "@aws-sdk/util-create-request": "3.38.0",
-    "@aws-sdk/util-format-url": "3.38.0",
-    "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "@aws-sdk/client-s3": "3.39.0",
-    "@aws-sdk/hash-node": "3.38.0",
-    "@types/jest": "^26.0.4",
-    "@types/node": "^12.0.2",
-    "jest": "^26.1.0",
-    "typescript": "~4.3.5"
-  },
-  "engines": {
-    "node": ">= 10.0.0"
-  },
   "typesVersions": {
-    "<4.0": {
+    "<4.5": {
       "dist-types/*": [
         "dist-types/ts3.4/*"
       ]
     }
   },
-  "files": [
-    "dist-*"
-  ],
-  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/s3-request-presigner",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aws/aws-sdk-js-v3.git",
-    "directory": "packages/s3-request-presigner"
+  "scripts": {
+    "build": "concurrently 'yarn:build:types' 'yarn:build:es' && yarn build:cjs",
+    "build:cjs": "node ../../scripts/compilation/inline",
+    "build:es": "premove dist-es && tsc -p tsconfig.es.json",
+    "build:include:deps": "yarn g:turbo run build -F=\"$npm_package_name\"",
+    "build:types": "premove dist-types && tsc -p tsconfig.types.json",
+    "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
+    "clean": "premove dist-cjs dist-es dist-types",
+    "extract:docs": "api-extractor run --local",
+    "test": "yarn g:vitest run",
+    "test:watch": "yarn g:vitest watch"
+  },
+  "dependencies": {
+    "@aws-sdk/core": "workspace:^3.981.0",
+    "@aws-sdk/signature-v4-multi-region": "workspace:^3.996.52",
+    "@aws-sdk/types": "workspace:^3.975.1",
+    "@smithy/core": "^3.40.0",
+    "@smithy/types": "^4.20.0",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "workspace:3.1169.0",
+    "@tsconfig/recommended": "1.0.1",
+    "@types/node": "^20.14.8",
+    "concurrently": "7.0.0",
+    "downlevel-dts": "0.10.1",
+    "premove": "4.0.0",
+    "typescript": "~7.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

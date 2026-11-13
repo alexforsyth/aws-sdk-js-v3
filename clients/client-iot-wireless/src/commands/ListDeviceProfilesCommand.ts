@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { ListDeviceProfilesRequest, ListDeviceProfilesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDeviceProfilesCommand,
-  serializeAws_restJson1ListDeviceProfilesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDeviceProfilesRequest, ListDeviceProfilesResponse } from "../models/models_0";
+import { ListDeviceProfiles$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDeviceProfilesCommand}.
+ */
 export interface ListDeviceProfilesCommandInput extends ListDeviceProfilesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDeviceProfilesCommand}.
+ */
 export interface ListDeviceProfilesCommandOutput extends ListDeviceProfilesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,68 @@ export interface ListDeviceProfilesCommandOutput extends ListDeviceProfilesRespo
  * ```javascript
  * import { IoTWirelessClient, ListDeviceProfilesCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, ListDeviceProfilesCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // ListDeviceProfilesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   DeviceProfileType: "Sidewalk" || "LoRaWAN",
+ * };
  * const command = new ListDeviceProfilesCommand(input);
  * const response = await client.send(command);
+ * // { // ListDeviceProfilesResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   DeviceProfileList: [ // DeviceProfileList
+ * //     { // DeviceProfile
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListDeviceProfilesCommandInput - {@link ListDeviceProfilesCommandInput}
+ * @returns {@link ListDeviceProfilesCommandOutput}
  * @see {@link ListDeviceProfilesCommandInput} for command's `input` shape.
  * @see {@link ListDeviceProfilesCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class ListDeviceProfilesCommand extends $Command<
-  ListDeviceProfilesCommandInput,
-  ListDeviceProfilesCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDeviceProfilesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDeviceProfilesCommandInput, ListDeviceProfilesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "ListDeviceProfilesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDeviceProfilesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDeviceProfilesResponse.filterSensitiveLog,
+export class ListDeviceProfilesCommand extends command<ListDeviceProfilesCommandInput, ListDeviceProfilesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDeviceProfiles",
+  ListDeviceProfiles$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDeviceProfilesRequest;
+      output: ListDeviceProfilesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDeviceProfilesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDeviceProfilesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDeviceProfilesCommandOutput> {
-    return deserializeAws_restJson1ListDeviceProfilesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDeviceProfilesCommandInput;
+      output: ListDeviceProfilesCommandOutput;
+    };
+  };
 }

@@ -1,98 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CancelSigningProfileRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1CancelSigningProfileCommand,
-  serializeAws_restJson1CancelSigningProfileCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SignerClientResolvedConfig } from "../SignerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelSigningProfileRequest } from "../models/models_0";
+import { CancelSigningProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelSigningProfileCommand}.
+ */
 export interface CancelSigningProfileCommandInput extends CancelSigningProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelSigningProfileCommand}.
+ */
 export interface CancelSigningProfileCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>.
  * 			A canceled profile is still viewable with the <code>ListSigningProfiles</code>
- * 			operation, but it cannot perform new signing jobs, and is deleted two years after
- * 			cancelation.</p>
+ * 				operation, but it cannot perform new signing jobs. See <a href="https://docs.aws.amazon.com/signer/latest/developerguide/retention.html">Data Retention</a> for more information on scheduled deletion of a canceled signing profile.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SignerClient, CancelSigningProfileCommand } from "@aws-sdk/client-signer"; // ES Modules import
  * // const { SignerClient, CancelSigningProfileCommand } = require("@aws-sdk/client-signer"); // CommonJS import
+ * // import type { SignerClientConfig } from "@aws-sdk/client-signer";
+ * const config = {}; // type is SignerClientConfig
  * const client = new SignerClient(config);
+ * const input = { // CancelSigningProfileRequest
+ *   profileName: "STRING_VALUE", // required
+ * };
  * const command = new CancelSigningProfileCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CancelSigningProfileCommandInput - {@link CancelSigningProfileCommandInput}
+ * @returns {@link CancelSigningProfileCommandOutput}
  * @see {@link CancelSigningProfileCommandInput} for command's `input` shape.
  * @see {@link CancelSigningProfileCommandOutput} for command's `response` shape.
- * @see {@link SignerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SignerClientResolvedConfig | config} for SignerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource could not be found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The allowed number of job-signing requests has been exceeded.</p>
+ *          <p>This error supersedes the error <code>ThrottlingException</code>.</p>
+ *
+ * @throws {@link SignerServiceException}
+ * <p>Base exception class for all service exceptions from Signer service.</p>
+ *
+ *
+ * @public
  */
-export class CancelSigningProfileCommand extends $Command<
-  CancelSigningProfileCommandInput,
-  CancelSigningProfileCommandOutput,
-  SignerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelSigningProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SignerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelSigningProfileCommandInput, CancelSigningProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SignerClient";
-    const commandName = "CancelSigningProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelSigningProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class CancelSigningProfileCommand extends command<CancelSigningProfileCommandInput, CancelSigningProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelSigningProfile",
+  CancelSigningProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelSigningProfileRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelSigningProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CancelSigningProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelSigningProfileCommandOutput> {
-    return deserializeAws_restJson1CancelSigningProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelSigningProfileCommandInput;
+      output: CancelSigningProfileCommandOutput;
+    };
+  };
 }

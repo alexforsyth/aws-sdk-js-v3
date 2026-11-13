@@ -1,79 +1,100 @@
-import {
-  BatchGetItemCommand as __BatchGetItemCommand,
-  BatchGetItemCommandInput as __BatchGetItemCommandInput,
-  BatchGetItemCommandOutput as __BatchGetItemCommandOutput,
-  KeysAndAttributes,
-} from "@aws-sdk/client-dynamodb";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
-import { marshallInput, unmarshallOutput } from "../commands/utils";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
+import { ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { BatchGetItemCommand as __BatchGetItemCommand } from "@aws-sdk/client-dynamodb";
 
-export type BatchGetCommandInput = Omit<__BatchGetItemCommandInput, "RequestItems"> & {
-  RequestItems:
-    | {
-        [key: string]: Omit<KeysAndAttributes, "Keys"> & {
-          Keys:
-            | {
-                [key: string]: NativeAttributeValue;
-              }[]
-            | undefined;
-        };
-      }
-    | undefined;
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type BatchGetKeysAndAttributes = Omit<KeysAndAttributes, "Keys"> & {
+  Keys: Record<string, NativeAttributeValue>[] | undefined;
 };
 
+/**
+ * @public
+ */
+export type BatchGetCommandInput = Omit<__BatchGetItemCommandInput, "RequestItems"> & {
+  RequestItems: Record<
+    string,
+    BatchGetKeysAndAttributes
+  > | undefined;
+};
+
+/**
+ * @public
+ */
 export type BatchGetCommandOutput = Omit<__BatchGetItemCommandOutput, "Responses" | "UnprocessedKeys"> & {
-  Responses?: {
-    [key: string]: {
-      [key: string]: NativeAttributeValue;
-    }[];
-  };
-  UnprocessedKeys?: {
-    [key: string]: Omit<KeysAndAttributes, "Keys"> & {
-      Keys:
-        | {
-            [key: string]: NativeAttributeValue;
-          }[]
-        | undefined;
-    };
-  };
+  Responses?: Record<
+    string,
+    Record<string, NativeAttributeValue>[]
+  > | undefined;
+  UnprocessedKeys?: Record<
+    string,
+    BatchGetKeysAndAttributes
+  > | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * BatchGetItemCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * BatchGetItemCommand operation from {@link @aws-sdk/client-dynamodb#BatchGetItemCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
-export class BatchGetCommand extends $Command<
+export class BatchGetCommand extends DynamoDBDocumentClientCommand<
   BatchGetCommandInput,
   BatchGetCommandOutput,
+  __BatchGetItemCommandInput,
+  __BatchGetItemCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  private readonly inputKeyNodes = [
-    {
-      key: "RequestItems",
-      children: {
-        children: [{ key: "Keys" }],
+  protected readonly inputKeyNodes = {
+    RequestItems: {
+      "*": {
+        Keys: {
+          "*": ALL_VALUES, // map with AttributeValue
+        },
       },
     },
-  ];
-  private readonly outputKeyNodes = [
-    { key: "Responses", children: {} },
-    {
-      key: "UnprocessedKeys",
-      children: {
-        children: [{ key: "Keys" }],
+  };
+  protected readonly outputKeyNodes = {
+    Responses: {
+      "*": {
+        "*": ALL_VALUES, // map with AttributeValue
       },
     },
-  ];
+    UnprocessedKeys: {
+      "*": {
+        Keys: {
+          "*": ALL_VALUES, // map with AttributeValue
+        },
+      },
+    },
+  };
+
+  protected readonly clientCommand: __BatchGetItemCommand;
+  public readonly middlewareStack: MiddlewareStack<BatchGetCommandInput | __BatchGetItemCommandInput,
+  BatchGetCommandOutput | __BatchGetItemCommandOutput>;
 
   constructor(readonly input: BatchGetCommandInput) {
     super();
+    this.clientCommand = new __BatchGetItemCommand(this.input as any);
+    this.middlewareStack = this.clientCommand.middlewareStack;
   }
 
   /**
@@ -84,16 +105,19 @@ export class BatchGetCommand extends $Command<
     configuration: DynamoDBDocumentClientResolvedConfig,
     options?: __HttpHandlerOptions
   ): Handler<BatchGetCommandInput, BatchGetCommandOutput> {
-    const { marshallOptions, unmarshallOptions } = configuration.translateConfig || {};
-    const command = new __BatchGetItemCommand(marshallInput(this.input, this.inputKeyNodes, marshallOptions));
-    const handler = command.resolveMiddleware(clientStack, configuration, options);
+    this.addMarshallingMiddleware(configuration);
+    const stack = clientStack.concat(this.middlewareStack as typeof clientStack);
+    const handler = this.clientCommand.resolveMiddleware(stack, configuration, options);
 
-    return async () => {
-      const data = await handler(command);
-      return {
-        ...data,
-        output: unmarshallOutput(data.output, this.outputKeyNodes, unmarshallOptions),
-      };
-    };
+    return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  BatchGetItemCommandInput as __BatchGetItemCommandInput,
+  BatchGetItemCommandOutput as __BatchGetItemCommandOutput,
+  KeysAndAttributes,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

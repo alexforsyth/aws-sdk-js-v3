@@ -1,7 +1,9 @@
+// smithy-typescript generated code
 export * from "./DescribeAffectedAccountsForOrganizationCommand";
 export * from "./DescribeAffectedEntitiesCommand";
 export * from "./DescribeAffectedEntitiesForOrganizationCommand";
 export * from "./DescribeEntityAggregatesCommand";
+export * from "./DescribeEntityAggregatesForOrganizationCommand";
 export * from "./DescribeEventAggregatesCommand";
 export * from "./DescribeEventDetailsCommand";
 export * from "./DescribeEventDetailsForOrganizationCommand";
@@ -9,5 +11,6 @@ export * from "./DescribeEventTypesCommand";
 export * from "./DescribeEventsCommand";
 export * from "./DescribeEventsForOrganizationCommand";
 export * from "./DescribeHealthServiceStatusForOrganizationCommand";
+export * from "./DescribeServiceLifecycleCommand";
 export * from "./DisableHealthServiceAccessForOrganizationCommand";
 export * from "./EnableHealthServiceAccessForOrganizationCommand";

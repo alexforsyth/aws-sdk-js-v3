@@ -1,168 +1,453 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
+  SdkStreamMixinInjector as __SdkStreamMixinInjector,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultLakeFormationHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AddLFTagsToResourceCommandInput,
   AddLFTagsToResourceCommandOutput,
 } from "./commands/AddLFTagsToResourceCommand";
-import {
+import type {
+  AssumeDecoratedRoleWithSAMLCommandInput,
+  AssumeDecoratedRoleWithSAMLCommandOutput,
+} from "./commands/AssumeDecoratedRoleWithSAMLCommand";
+import type { AttachRLSPolicyCommandInput, AttachRLSPolicyCommandOutput } from "./commands/AttachRLSPolicyCommand";
+import type {
   BatchGrantPermissionsCommandInput,
   BatchGrantPermissionsCommandOutput,
 } from "./commands/BatchGrantPermissionsCommand";
-import {
+import type {
   BatchRevokePermissionsCommandInput,
   BatchRevokePermissionsCommandOutput,
 } from "./commands/BatchRevokePermissionsCommand";
-import { CreateLFTagCommandInput, CreateLFTagCommandOutput } from "./commands/CreateLFTagCommand";
-import { DeleteLFTagCommandInput, DeleteLFTagCommandOutput } from "./commands/DeleteLFTagCommand";
-import { DeregisterResourceCommandInput, DeregisterResourceCommandOutput } from "./commands/DeregisterResourceCommand";
-import { DescribeResourceCommandInput, DescribeResourceCommandOutput } from "./commands/DescribeResourceCommand";
-import {
+import type {
+  CancelTransactionCommandInput,
+  CancelTransactionCommandOutput,
+} from "./commands/CancelTransactionCommand";
+import type {
+  CommitTransactionCommandInput,
+  CommitTransactionCommandOutput,
+} from "./commands/CommitTransactionCommand";
+import type {
+  CreateDataCellsFilterCommandInput,
+  CreateDataCellsFilterCommandOutput,
+} from "./commands/CreateDataCellsFilterCommand";
+import type {
+  CreateLakeFormationIdentityCenterConfigurationCommandInput,
+  CreateLakeFormationIdentityCenterConfigurationCommandOutput,
+} from "./commands/CreateLakeFormationIdentityCenterConfigurationCommand";
+import type {
+  CreateLakeFormationOptInCommandInput,
+  CreateLakeFormationOptInCommandOutput,
+} from "./commands/CreateLakeFormationOptInCommand";
+import type { CreateLFTagCommandInput, CreateLFTagCommandOutput } from "./commands/CreateLFTagCommand";
+import type {
+  CreateLFTagExpressionCommandInput,
+  CreateLFTagExpressionCommandOutput,
+} from "./commands/CreateLFTagExpressionCommand";
+import type { CreateRLSPolicyCommandInput, CreateRLSPolicyCommandOutput } from "./commands/CreateRLSPolicyCommand";
+import type {
+  DeleteDataCellsFilterCommandInput,
+  DeleteDataCellsFilterCommandOutput,
+} from "./commands/DeleteDataCellsFilterCommand";
+import type {
+  DeleteLakeFormationIdentityCenterConfigurationCommandInput,
+  DeleteLakeFormationIdentityCenterConfigurationCommandOutput,
+} from "./commands/DeleteLakeFormationIdentityCenterConfigurationCommand";
+import type {
+  DeleteLakeFormationOptInCommandInput,
+  DeleteLakeFormationOptInCommandOutput,
+} from "./commands/DeleteLakeFormationOptInCommand";
+import type { DeleteLFTagCommandInput, DeleteLFTagCommandOutput } from "./commands/DeleteLFTagCommand";
+import type {
+  DeleteLFTagExpressionCommandInput,
+  DeleteLFTagExpressionCommandOutput,
+} from "./commands/DeleteLFTagExpressionCommand";
+import type {
+  DeleteObjectsOnCancelCommandInput,
+  DeleteObjectsOnCancelCommandOutput,
+} from "./commands/DeleteObjectsOnCancelCommand";
+import type { DeleteRLSPolicyCommandInput, DeleteRLSPolicyCommandOutput } from "./commands/DeleteRLSPolicyCommand";
+import type {
+  DeregisterResourceCommandInput,
+  DeregisterResourceCommandOutput,
+} from "./commands/DeregisterResourceCommand";
+import type {
+  DescribeLakeFormationIdentityCenterConfigurationCommandInput,
+  DescribeLakeFormationIdentityCenterConfigurationCommandOutput,
+} from "./commands/DescribeLakeFormationIdentityCenterConfigurationCommand";
+import type { DescribeResourceCommandInput, DescribeResourceCommandOutput } from "./commands/DescribeResourceCommand";
+import type {
+  DescribeTransactionCommandInput,
+  DescribeTransactionCommandOutput,
+} from "./commands/DescribeTransactionCommand";
+import type { DetachRLSPolicyCommandInput, DetachRLSPolicyCommandOutput } from "./commands/DetachRLSPolicyCommand";
+import type {
+  ExtendTransactionCommandInput,
+  ExtendTransactionCommandOutput,
+} from "./commands/ExtendTransactionCommand";
+import type {
+  GetDataCellsFilterCommandInput,
+  GetDataCellsFilterCommandOutput,
+} from "./commands/GetDataCellsFilterCommand";
+import type {
+  GetDataLakePrincipalCommandInput,
+  GetDataLakePrincipalCommandOutput,
+} from "./commands/GetDataLakePrincipalCommand";
+import type {
   GetDataLakeSettingsCommandInput,
   GetDataLakeSettingsCommandOutput,
 } from "./commands/GetDataLakeSettingsCommand";
-import {
+import type {
   GetEffectivePermissionsForPathCommandInput,
   GetEffectivePermissionsForPathCommandOutput,
 } from "./commands/GetEffectivePermissionsForPathCommand";
-import { GetLFTagCommandInput, GetLFTagCommandOutput } from "./commands/GetLFTagCommand";
-import { GetResourceLFTagsCommandInput, GetResourceLFTagsCommandOutput } from "./commands/GetResourceLFTagsCommand";
-import { GrantPermissionsCommandInput, GrantPermissionsCommandOutput } from "./commands/GrantPermissionsCommand";
-import { ListLFTagsCommandInput, ListLFTagsCommandOutput } from "./commands/ListLFTagsCommand";
-import { ListPermissionsCommandInput, ListPermissionsCommandOutput } from "./commands/ListPermissionsCommand";
-import { ListResourcesCommandInput, ListResourcesCommandOutput } from "./commands/ListResourcesCommand";
-import {
+import type {
+  GetGlueFunctionSessionContextCommandInput,
+  GetGlueFunctionSessionContextCommandOutput,
+} from "./commands/GetGlueFunctionSessionContextCommand";
+import type { GetLFTagCommandInput, GetLFTagCommandOutput } from "./commands/GetLFTagCommand";
+import type {
+  GetLFTagExpressionCommandInput,
+  GetLFTagExpressionCommandOutput,
+} from "./commands/GetLFTagExpressionCommand";
+import type { GetQueryStateCommandInput, GetQueryStateCommandOutput } from "./commands/GetQueryStateCommand";
+import type {
+  GetQueryStatisticsCommandInput,
+  GetQueryStatisticsCommandOutput,
+} from "./commands/GetQueryStatisticsCommand";
+import type {
+  GetResourceLFTagsCommandInput,
+  GetResourceLFTagsCommandOutput,
+} from "./commands/GetResourceLFTagsCommand";
+import type { GetRLSPolicyCommandInput, GetRLSPolicyCommandOutput } from "./commands/GetRLSPolicyCommand";
+import type { GetTableObjectsCommandInput, GetTableObjectsCommandOutput } from "./commands/GetTableObjectsCommand";
+import type {
+  GetTemporaryDataLocationCredentialsCommandInput,
+  GetTemporaryDataLocationCredentialsCommandOutput,
+} from "./commands/GetTemporaryDataLocationCredentialsCommand";
+import type {
+  GetTemporaryGlueFunctionCredentialsCommandInput,
+  GetTemporaryGlueFunctionCredentialsCommandOutput,
+} from "./commands/GetTemporaryGlueFunctionCredentialsCommand";
+import type {
+  GetTemporaryGluePartitionCredentialsCommandInput,
+  GetTemporaryGluePartitionCredentialsCommandOutput,
+} from "./commands/GetTemporaryGluePartitionCredentialsCommand";
+import type {
+  GetTemporaryGlueTableCredentialsCommandInput,
+  GetTemporaryGlueTableCredentialsCommandOutput,
+} from "./commands/GetTemporaryGlueTableCredentialsCommand";
+import type {
+  GetWorkUnitResultsCommandInput,
+  GetWorkUnitResultsCommandOutput,
+} from "./commands/GetWorkUnitResultsCommand";
+import type { GetWorkUnitsCommandInput, GetWorkUnitsCommandOutput } from "./commands/GetWorkUnitsCommand";
+import type { GrantPermissionsCommandInput, GrantPermissionsCommandOutput } from "./commands/GrantPermissionsCommand";
+import type {
+  ListDataCellsFilterCommandInput,
+  ListDataCellsFilterCommandOutput,
+} from "./commands/ListDataCellsFilterCommand";
+import type {
+  ListLakeFormationOptInsCommandInput,
+  ListLakeFormationOptInsCommandOutput,
+} from "./commands/ListLakeFormationOptInsCommand";
+import type {
+  ListLFTagExpressionsCommandInput,
+  ListLFTagExpressionsCommandOutput,
+} from "./commands/ListLFTagExpressionsCommand";
+import type { ListLFTagsCommandInput, ListLFTagsCommandOutput } from "./commands/ListLFTagsCommand";
+import type { ListPermissionsCommandInput, ListPermissionsCommandOutput } from "./commands/ListPermissionsCommand";
+import type { ListResourcesCommandInput, ListResourcesCommandOutput } from "./commands/ListResourcesCommand";
+import type { ListRLSPoliciesCommandInput, ListRLSPoliciesCommandOutput } from "./commands/ListRLSPoliciesCommand";
+import type {
+  ListRLSPolicyAttachmentsCommandInput,
+  ListRLSPolicyAttachmentsCommandOutput,
+} from "./commands/ListRLSPolicyAttachmentsCommand";
+import type {
+  ListTableStorageOptimizersCommandInput,
+  ListTableStorageOptimizersCommandOutput,
+} from "./commands/ListTableStorageOptimizersCommand";
+import type { ListTransactionsCommandInput, ListTransactionsCommandOutput } from "./commands/ListTransactionsCommand";
+import type {
   PutDataLakeSettingsCommandInput,
   PutDataLakeSettingsCommandOutput,
 } from "./commands/PutDataLakeSettingsCommand";
-import { RegisterResourceCommandInput, RegisterResourceCommandOutput } from "./commands/RegisterResourceCommand";
-import {
+import type { RegisterResourceCommandInput, RegisterResourceCommandOutput } from "./commands/RegisterResourceCommand";
+import type {
   RemoveLFTagsFromResourceCommandInput,
   RemoveLFTagsFromResourceCommandOutput,
 } from "./commands/RemoveLFTagsFromResourceCommand";
-import { RevokePermissionsCommandInput, RevokePermissionsCommandOutput } from "./commands/RevokePermissionsCommand";
-import {
+import type {
+  RevokePermissionsCommandInput,
+  RevokePermissionsCommandOutput,
+} from "./commands/RevokePermissionsCommand";
+import type {
   SearchDatabasesByLFTagsCommandInput,
   SearchDatabasesByLFTagsCommandOutput,
 } from "./commands/SearchDatabasesByLFTagsCommand";
-import {
+import type {
   SearchTablesByLFTagsCommandInput,
   SearchTablesByLFTagsCommandOutput,
 } from "./commands/SearchTablesByLFTagsCommand";
-import { UpdateLFTagCommandInput, UpdateLFTagCommandOutput } from "./commands/UpdateLFTagCommand";
-import { UpdateResourceCommandInput, UpdateResourceCommandOutput } from "./commands/UpdateResourceCommand";
+import type {
+  StartQueryPlanningCommandInput,
+  StartQueryPlanningCommandOutput,
+} from "./commands/StartQueryPlanningCommand";
+import type { StartTransactionCommandInput, StartTransactionCommandOutput } from "./commands/StartTransactionCommand";
+import type {
+  UpdateDataCellsFilterCommandInput,
+  UpdateDataCellsFilterCommandOutput,
+} from "./commands/UpdateDataCellsFilterCommand";
+import type {
+  UpdateLakeFormationIdentityCenterConfigurationCommandInput,
+  UpdateLakeFormationIdentityCenterConfigurationCommandOutput,
+} from "./commands/UpdateLakeFormationIdentityCenterConfigurationCommand";
+import type { UpdateLFTagCommandInput, UpdateLFTagCommandOutput } from "./commands/UpdateLFTagCommand";
+import type {
+  UpdateLFTagExpressionCommandInput,
+  UpdateLFTagExpressionCommandOutput,
+} from "./commands/UpdateLFTagExpressionCommand";
+import type { UpdateResourceCommandInput, UpdateResourceCommandOutput } from "./commands/UpdateResourceCommand";
+import type { UpdateRLSPolicyCommandInput, UpdateRLSPolicyCommandOutput } from "./commands/UpdateRLSPolicyCommand";
+import type {
+  UpdateTableObjectsCommandInput,
+  UpdateTableObjectsCommandOutput,
+} from "./commands/UpdateTableObjectsCommand";
+import type {
+  UpdateTableStorageOptimizerCommandInput,
+  UpdateTableStorageOptimizerCommandOutput,
+} from "./commands/UpdateTableStorageOptimizerCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddLFTagsToResourceCommandInput
+  | AssumeDecoratedRoleWithSAMLCommandInput
+  | AttachRLSPolicyCommandInput
   | BatchGrantPermissionsCommandInput
   | BatchRevokePermissionsCommandInput
+  | CancelTransactionCommandInput
+  | CommitTransactionCommandInput
+  | CreateDataCellsFilterCommandInput
   | CreateLFTagCommandInput
+  | CreateLFTagExpressionCommandInput
+  | CreateLakeFormationIdentityCenterConfigurationCommandInput
+  | CreateLakeFormationOptInCommandInput
+  | CreateRLSPolicyCommandInput
+  | DeleteDataCellsFilterCommandInput
   | DeleteLFTagCommandInput
+  | DeleteLFTagExpressionCommandInput
+  | DeleteLakeFormationIdentityCenterConfigurationCommandInput
+  | DeleteLakeFormationOptInCommandInput
+  | DeleteObjectsOnCancelCommandInput
+  | DeleteRLSPolicyCommandInput
   | DeregisterResourceCommandInput
+  | DescribeLakeFormationIdentityCenterConfigurationCommandInput
   | DescribeResourceCommandInput
+  | DescribeTransactionCommandInput
+  | DetachRLSPolicyCommandInput
+  | ExtendTransactionCommandInput
+  | GetDataCellsFilterCommandInput
+  | GetDataLakePrincipalCommandInput
   | GetDataLakeSettingsCommandInput
   | GetEffectivePermissionsForPathCommandInput
+  | GetGlueFunctionSessionContextCommandInput
   | GetLFTagCommandInput
+  | GetLFTagExpressionCommandInput
+  | GetQueryStateCommandInput
+  | GetQueryStatisticsCommandInput
+  | GetRLSPolicyCommandInput
   | GetResourceLFTagsCommandInput
+  | GetTableObjectsCommandInput
+  | GetTemporaryDataLocationCredentialsCommandInput
+  | GetTemporaryGlueFunctionCredentialsCommandInput
+  | GetTemporaryGluePartitionCredentialsCommandInput
+  | GetTemporaryGlueTableCredentialsCommandInput
+  | GetWorkUnitResultsCommandInput
+  | GetWorkUnitsCommandInput
   | GrantPermissionsCommandInput
+  | ListDataCellsFilterCommandInput
+  | ListLFTagExpressionsCommandInput
   | ListLFTagsCommandInput
+  | ListLakeFormationOptInsCommandInput
   | ListPermissionsCommandInput
+  | ListRLSPoliciesCommandInput
+  | ListRLSPolicyAttachmentsCommandInput
   | ListResourcesCommandInput
+  | ListTableStorageOptimizersCommandInput
+  | ListTransactionsCommandInput
   | PutDataLakeSettingsCommandInput
   | RegisterResourceCommandInput
   | RemoveLFTagsFromResourceCommandInput
   | RevokePermissionsCommandInput
   | SearchDatabasesByLFTagsCommandInput
   | SearchTablesByLFTagsCommandInput
+  | StartQueryPlanningCommandInput
+  | StartTransactionCommandInput
+  | UpdateDataCellsFilterCommandInput
   | UpdateLFTagCommandInput
-  | UpdateResourceCommandInput;
+  | UpdateLFTagExpressionCommandInput
+  | UpdateLakeFormationIdentityCenterConfigurationCommandInput
+  | UpdateRLSPolicyCommandInput
+  | UpdateResourceCommandInput
+  | UpdateTableObjectsCommandInput
+  | UpdateTableStorageOptimizerCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddLFTagsToResourceCommandOutput
+  | AssumeDecoratedRoleWithSAMLCommandOutput
+  | AttachRLSPolicyCommandOutput
   | BatchGrantPermissionsCommandOutput
   | BatchRevokePermissionsCommandOutput
+  | CancelTransactionCommandOutput
+  | CommitTransactionCommandOutput
+  | CreateDataCellsFilterCommandOutput
   | CreateLFTagCommandOutput
+  | CreateLFTagExpressionCommandOutput
+  | CreateLakeFormationIdentityCenterConfigurationCommandOutput
+  | CreateLakeFormationOptInCommandOutput
+  | CreateRLSPolicyCommandOutput
+  | DeleteDataCellsFilterCommandOutput
   | DeleteLFTagCommandOutput
+  | DeleteLFTagExpressionCommandOutput
+  | DeleteLakeFormationIdentityCenterConfigurationCommandOutput
+  | DeleteLakeFormationOptInCommandOutput
+  | DeleteObjectsOnCancelCommandOutput
+  | DeleteRLSPolicyCommandOutput
   | DeregisterResourceCommandOutput
+  | DescribeLakeFormationIdentityCenterConfigurationCommandOutput
   | DescribeResourceCommandOutput
+  | DescribeTransactionCommandOutput
+  | DetachRLSPolicyCommandOutput
+  | ExtendTransactionCommandOutput
+  | GetDataCellsFilterCommandOutput
+  | GetDataLakePrincipalCommandOutput
   | GetDataLakeSettingsCommandOutput
   | GetEffectivePermissionsForPathCommandOutput
+  | GetGlueFunctionSessionContextCommandOutput
   | GetLFTagCommandOutput
+  | GetLFTagExpressionCommandOutput
+  | GetQueryStateCommandOutput
+  | GetQueryStatisticsCommandOutput
+  | GetRLSPolicyCommandOutput
   | GetResourceLFTagsCommandOutput
+  | GetTableObjectsCommandOutput
+  | GetTemporaryDataLocationCredentialsCommandOutput
+  | GetTemporaryGlueFunctionCredentialsCommandOutput
+  | GetTemporaryGluePartitionCredentialsCommandOutput
+  | GetTemporaryGlueTableCredentialsCommandOutput
+  | GetWorkUnitResultsCommandOutput
+  | GetWorkUnitsCommandOutput
   | GrantPermissionsCommandOutput
+  | ListDataCellsFilterCommandOutput
+  | ListLFTagExpressionsCommandOutput
   | ListLFTagsCommandOutput
+  | ListLakeFormationOptInsCommandOutput
   | ListPermissionsCommandOutput
+  | ListRLSPoliciesCommandOutput
+  | ListRLSPolicyAttachmentsCommandOutput
   | ListResourcesCommandOutput
+  | ListTableStorageOptimizersCommandOutput
+  | ListTransactionsCommandOutput
   | PutDataLakeSettingsCommandOutput
   | RegisterResourceCommandOutput
   | RemoveLFTagsFromResourceCommandOutput
   | RevokePermissionsCommandOutput
   | SearchDatabasesByLFTagsCommandOutput
   | SearchTablesByLFTagsCommandOutput
+  | StartQueryPlanningCommandOutput
+  | StartTransactionCommandOutput
+  | UpdateDataCellsFilterCommandOutput
   | UpdateLFTagCommandOutput
-  | UpdateResourceCommandOutput;
+  | UpdateLFTagExpressionCommandOutput
+  | UpdateLakeFormationIdentityCenterConfigurationCommandOutput
+  | UpdateRLSPolicyCommandOutput
+  | UpdateResourceCommandOutput
+  | UpdateTableObjectsCommandOutput
+  | UpdateTableStorageOptimizerCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -174,7 +459,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -213,25 +498,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -244,64 +520,120 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+  /**
+   * The internal function that inject utilities to runtime-specific stream to help users consume the data
+   * @internal
+   */
+  sdkStreamMixin?: __SdkStreamMixinInjector;
+
 }
 
-type LakeFormationClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of LakeFormationClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type LakeFormationClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of LakeFormationClient class constructor that set the region, credentials and other options.
  */
 export interface LakeFormationClientConfig extends LakeFormationClientConfigType {}
 
-type LakeFormationClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of LakeFormationClient class. This is resolved and normalized from the {@link LakeFormationClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type LakeFormationClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of LakeFormationClient class. This is resolved and normalized from the {@link LakeFormationClientConfig | constructor configuration interface}.
  */
 export interface LakeFormationClientResolvedConfig extends LakeFormationClientResolvedConfigType {}
 
 /**
- * <fullname>AWS Lake Formation</fullname>
- *          <p>Defines the public endpoint for the AWS Lake Formation service.</p>
+ * <fullname>Lake Formation</fullname>
+ *          <p>Defines the public endpoint for the Lake Formation service.</p>
+ * @public
  */
 export class LakeFormationClient extends __Client<
   __HttpHandlerOptions,
@@ -314,22 +646,36 @@ export class LakeFormationClient extends __Client<
    */
   readonly config: LakeFormationClientResolvedConfig;
 
-  constructor(configuration: LakeFormationClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<LakeFormationClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultLakeFormationHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: LakeFormationClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

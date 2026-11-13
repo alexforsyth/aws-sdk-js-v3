@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConvertClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConvertClient";
-import { DeleteQueueRequest, DeleteQueueResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeleteQueueCommand,
-  serializeAws_restJson1DeleteQueueCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteQueueRequest, DeleteQueueResponse } from "../models/models_0";
+import { DeleteQueue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteQueueCommand}.
+ */
 export interface DeleteQueueCommandInput extends DeleteQueueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteQueueCommand}.
+ */
 export interface DeleteQueueCommandOutput extends DeleteQueueResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface DeleteQueueCommandOutput extends DeleteQueueResponse, __Metadat
  * ```javascript
  * import { MediaConvertClient, DeleteQueueCommand } from "@aws-sdk/client-mediaconvert"; // ES Modules import
  * // const { MediaConvertClient, DeleteQueueCommand } = require("@aws-sdk/client-mediaconvert"); // CommonJS import
+ * // import type { MediaConvertClientConfig } from "@aws-sdk/client-mediaconvert";
+ * const config = {}; // type is MediaConvertClientConfig
  * const client = new MediaConvertClient(config);
+ * const input = { // DeleteQueueRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteQueueCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteQueueCommandInput - {@link DeleteQueueCommandInput}
+ * @returns {@link DeleteQueueCommandOutput}
  * @see {@link DeleteQueueCommandInput} for command's `input` shape.
  * @see {@link DeleteQueueCommandOutput} for command's `response` shape.
- * @see {@link MediaConvertClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConvertClientResolvedConfig | config} for MediaConvertClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  The service can't process your request because of a problem in the request. Please check your request form and syntax.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The service couldn't complete your request because there is a conflict with the current state of the resource.
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  You don't have permissions for this action with the credentials you sent.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  The service encountered an unexpected condition and can't fulfill your request.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The resource you requested doesn't exist.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You attempted to create more resources than the service allows based on service quotas.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests.
+ *
+ * @throws {@link MediaConvertServiceException}
+ * <p>Base exception class for all service exceptions from MediaConvert service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteQueueCommand extends $Command<
-  DeleteQueueCommandInput,
-  DeleteQueueCommandOutput,
-  MediaConvertClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteQueueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConvertClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteQueueCommandInput, DeleteQueueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConvertClient";
-    const commandName = "DeleteQueueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteQueueRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteQueueResponse.filterSensitiveLog,
+export class DeleteQueueCommand extends command<DeleteQueueCommandInput, DeleteQueueCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteQueue",
+  DeleteQueue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteQueueRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteQueueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteQueueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteQueueCommandOutput> {
-    return deserializeAws_restJson1DeleteQueueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteQueueCommandInput;
+      output: DeleteQueueCommandOutput;
+    };
+  };
 }

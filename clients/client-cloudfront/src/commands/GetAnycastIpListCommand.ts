@@ -1,0 +1,110 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAnycastIpListRequest, GetAnycastIpListResult } from "../models/models_0";
+import { GetAnycastIpList$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAnycastIpListCommand}.
+ */
+export interface GetAnycastIpListCommandInput extends GetAnycastIpListRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAnycastIpListCommand}.
+ */
+export interface GetAnycastIpListCommandOutput extends GetAnycastIpListResult, __MetadataBearer {}
+
+/**
+ * <p>Gets an Anycast static IP list.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudFrontClient, GetAnycastIpListCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
+ * // const { CloudFrontClient, GetAnycastIpListCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
+ * const client = new CloudFrontClient(config);
+ * const input = { // GetAnycastIpListRequest
+ *   Id: "STRING_VALUE", // required
+ * };
+ * const command = new GetAnycastIpListCommand(input);
+ * const response = await client.send(command);
+ * // { // GetAnycastIpListResult
+ * //   AnycastIpList: { // AnycastIpList
+ * //     Id: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE", // required
+ * //     Status: "STRING_VALUE", // required
+ * //     Arn: "STRING_VALUE", // required
+ * //     IpAddressType: "ipv4" || "ipv6" || "dualstack",
+ * //     IpamConfig: { // IpamConfig
+ * //       Quantity: Number("int"), // required
+ * //       IpamCidrConfigs: [ // IpamCidrConfigList // required
+ * //         { // IpamCidrConfig
+ * //           Cidr: "STRING_VALUE", // required
+ * //           IpamPoolArn: "STRING_VALUE", // required
+ * //           AnycastIp: "STRING_VALUE",
+ * //           Status: "provisioned" || "failed-provision" || "provisioning" || "deprovisioned" || "failed-deprovision" || "deprovisioning" || "advertised" || "failed-advertise" || "advertising" || "withdrawn" || "failed-withdraw" || "withdrawing",
+ * //         },
+ * //       ],
+ * //     },
+ * //     AnycastIps: [ // AnycastIps // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     IpCount: Number("int"), // required
+ * //     LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //   },
+ * //   ETag: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetAnycastIpListCommandInput - {@link GetAnycastIpListCommandInput}
+ * @returns {@link GetAnycastIpListCommandOutput}
+ * @see {@link GetAnycastIpListCommandInput} for command's `input` shape.
+ * @see {@link GetAnycastIpListCommandOutput} for command's `response` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
+ *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link EntityNotFound} (client fault)
+ *  <p>The entity was not found.</p>
+ *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>This operation is not supported in this Amazon Web Services Region.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
+ */
+export class GetAnycastIpListCommand extends command<GetAnycastIpListCommandInput, GetAnycastIpListCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAnycastIpList",
+  GetAnycastIpList$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAnycastIpListRequest;
+      output: GetAnycastIpListResult;
+    };
+    sdk: {
+      input: GetAnycastIpListCommandInput;
+      output: GetAnycastIpListCommandOutput;
+    };
+  };
+}

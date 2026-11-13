@@ -1,32 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodestarNotificationsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodestarNotificationsClient";
-import { UnsubscribeRequest, UnsubscribeResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1UnsubscribeCommand,
-  serializeAws_restJson1UnsubscribeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UnsubscribeRequest, UnsubscribeResult } from "../models/models_0";
+import { Unsubscribe$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UnsubscribeCommand}.
+ */
 export interface UnsubscribeCommandInput extends UnsubscribeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UnsubscribeCommand}.
+ */
 export interface UnsubscribeCommandOutput extends UnsubscribeResult, __MetadataBearer {}
 
 /**
- * <p>Removes an association between a notification rule and an Amazon SNS topic so that
+ * <p>Removes an association between a notification rule and an Amazon Q Developer in chat applications topic so that
  *             subscribers to that topic stop receiving notifications when the events described in the
  *             rule are triggered.</p>
  * @example
@@ -34,68 +31,51 @@ export interface UnsubscribeCommandOutput extends UnsubscribeResult, __MetadataB
  * ```javascript
  * import { CodestarNotificationsClient, UnsubscribeCommand } from "@aws-sdk/client-codestar-notifications"; // ES Modules import
  * // const { CodestarNotificationsClient, UnsubscribeCommand } = require("@aws-sdk/client-codestar-notifications"); // CommonJS import
+ * // import type { CodestarNotificationsClientConfig } from "@aws-sdk/client-codestar-notifications";
+ * const config = {}; // type is CodestarNotificationsClientConfig
  * const client = new CodestarNotificationsClient(config);
+ * const input = { // UnsubscribeRequest
+ *   Arn: "STRING_VALUE", // required
+ *   TargetAddress: "STRING_VALUE", // required
+ * };
  * const command = new UnsubscribeCommand(input);
  * const response = await client.send(command);
+ * // { // UnsubscribeResult
+ * //   Arn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UnsubscribeCommandInput - {@link UnsubscribeCommandInput}
+ * @returns {@link UnsubscribeCommandOutput}
  * @see {@link UnsubscribeCommandInput} for command's `input` shape.
  * @see {@link UnsubscribeCommandOutput} for command's `response` shape.
- * @see {@link CodestarNotificationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodestarNotificationsClientResolvedConfig | config} for CodestarNotificationsClient's `config` shape.
  *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link CodestarNotificationsServiceException}
+ * <p>Base exception class for all service exceptions from CodestarNotifications service.</p>
+ *
+ *
+ * @public
  */
-export class UnsubscribeCommand extends $Command<
-  UnsubscribeCommandInput,
-  UnsubscribeCommandOutput,
-  CodestarNotificationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UnsubscribeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodestarNotificationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UnsubscribeCommandInput, UnsubscribeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodestarNotificationsClient";
-    const commandName = "UnsubscribeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UnsubscribeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UnsubscribeResult.filterSensitiveLog,
+export class UnsubscribeCommand extends command<UnsubscribeCommandInput, UnsubscribeCommandOutput>(
+  _ep0,
+  _mw0,
+  "Unsubscribe",
+  Unsubscribe$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UnsubscribeRequest;
+      output: UnsubscribeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UnsubscribeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UnsubscribeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UnsubscribeCommandOutput> {
-    return deserializeAws_restJson1UnsubscribeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UnsubscribeCommandInput;
+      output: UnsubscribeCommandOutput;
+    };
+  };
 }

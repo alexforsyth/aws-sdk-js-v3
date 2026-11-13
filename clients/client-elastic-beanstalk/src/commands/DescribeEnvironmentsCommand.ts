@@ -1,95 +1,178 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { DescribeEnvironmentsMessage, EnvironmentDescriptionsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeEnvironmentsCommand,
-  serializeAws_queryDescribeEnvironmentsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEnvironmentsMessage, EnvironmentDescriptionsMessage } from "../models/models_0";
+import { DescribeEnvironments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEnvironmentsCommand}.
+ */
 export interface DescribeEnvironmentsCommandInput extends DescribeEnvironmentsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEnvironmentsCommand}.
+ */
 export interface DescribeEnvironmentsCommandOutput extends EnvironmentDescriptionsMessage, __MetadataBearer {}
 
 /**
  * <p>Returns descriptions for existing environments.</p>
+ *          <p>This action only returns information about environments that the calling principle has IAM permissions to access. For example, consider a case where
+ *       a user only has permission to access one of three environments. When the user calls the <i>DescribeEnvironments</i> action, the response
+ *       will only include the one environment that the user has permission to access instead of all three environments. If the user doesn’t have access to any of
+ *       the environments an empty result is returned.</p>
+ *          <note>
+ *             <p>The <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html">AWSElasticBeanstalkReadOnly</a>
+ *         managed policy allows operators to view information about resources related to Elastic Beanstalk environments. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html"> Managing Elastic Beanstalk user policies</a> in the <i>Elastic Beanstalk Developer
+ *           Guide</i>. For detailed instructions to attach a policy to a user or group, see the section <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed"> Controlling access with managed policies</a> in the
+ *         same topic.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, DescribeEnvironmentsCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, DescribeEnvironmentsCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // DescribeEnvironmentsMessage
+ *   ApplicationName: "STRING_VALUE",
+ *   VersionLabel: "STRING_VALUE",
+ *   EnvironmentIds: [ // EnvironmentIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   EnvironmentNames: [ // EnvironmentNamesList
+ *     "STRING_VALUE",
+ *   ],
+ *   IncludeDeleted: true || false,
+ *   IncludedDeletedBackTo: new Date("TIMESTAMP"),
+ *   MaxRecords: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeEnvironmentsCommand(input);
  * const response = await client.send(command);
+ * // { // EnvironmentDescriptionsMessage
+ * //   Environments: [ // EnvironmentDescriptionsList
+ * //     { // EnvironmentDescription
+ * //       EnvironmentName: "STRING_VALUE",
+ * //       EnvironmentId: "STRING_VALUE",
+ * //       ApplicationName: "STRING_VALUE",
+ * //       VersionLabel: "STRING_VALUE",
+ * //       SolutionStackName: "STRING_VALUE",
+ * //       PlatformArn: "STRING_VALUE",
+ * //       TemplateName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       EndpointURL: "STRING_VALUE",
+ * //       CNAME: "STRING_VALUE",
+ * //       DateCreated: new Date("TIMESTAMP"),
+ * //       DateUpdated: new Date("TIMESTAMP"),
+ * //       Status: "Aborting" || "Launching" || "Updating" || "LinkingFrom" || "LinkingTo" || "Ready" || "Terminating" || "Terminated",
+ * //       AbortableOperationInProgress: true || false,
+ * //       Health: "Green" || "Yellow" || "Red" || "Grey",
+ * //       HealthStatus: "NoData" || "Unknown" || "Pending" || "Ok" || "Info" || "Warning" || "Degraded" || "Severe" || "Suspended",
+ * //       Resources: { // EnvironmentResourcesDescription
+ * //         LoadBalancer: { // LoadBalancerDescription
+ * //           LoadBalancerName: "STRING_VALUE",
+ * //           Domain: "STRING_VALUE",
+ * //           Listeners: [ // LoadBalancerListenersDescription
+ * //             { // Listener
+ * //               Protocol: "STRING_VALUE",
+ * //               Port: Number("int"),
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //       Tier: { // EnvironmentTier
+ * //         Name: "STRING_VALUE",
+ * //         Type: "STRING_VALUE",
+ * //         Version: "STRING_VALUE",
+ * //       },
+ * //       EnvironmentLinks: [ // EnvironmentLinks
+ * //         { // EnvironmentLink
+ * //           LinkName: "STRING_VALUE",
+ * //           EnvironmentName: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       EnvironmentArn: "STRING_VALUE",
+ * //       OperationsRole: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEnvironmentsCommandInput - {@link DescribeEnvironmentsCommandInput}
+ * @returns {@link DescribeEnvironmentsCommandOutput}
  * @see {@link DescribeEnvironmentsCommandInput} for command's `input` shape.
  * @see {@link DescribeEnvironmentsCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To view information about an environment
+ * ```javascript
+ * // The following operation retrieves information about an environment named my-env:
+ * const input = {
+ *   EnvironmentNames: [
+ *     "my-env"
+ *   ]
+ * };
+ * const command = new DescribeEnvironmentsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Environments: [
+ *     {
+ *       AbortableOperationInProgress: false,
+ *       ApplicationName: "my-app",
+ *       CNAME: "my-env.elasticbeanstalk.com",
+ *       DateCreated: "2015-08-07T20:48:49.599Z",
+ *       DateUpdated: "2015-08-12T18:16:55.019Z",
+ *       EndpointURL: "awseb-e-w-AWSEBLoa-1483140XB0Q4L-109QXY8121.us-west-2.elb.amazonaws.com",
+ *       EnvironmentId: "e-rpqsewtp2j",
+ *       EnvironmentName: "my-env",
+ *       Health: "Green",
+ *       SolutionStackName: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8",
+ *       Status: "Ready",
+ *       Tier: {
+ *         Name: "WebServer",
+ *         Type: "Standard",
+ *         Version: " "
+ *       },
+ *       VersionLabel: "7f58-stage-150812_025409"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeEnvironmentsCommand extends $Command<
-  DescribeEnvironmentsCommandInput,
-  DescribeEnvironmentsCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEnvironmentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEnvironmentsCommandInput, DescribeEnvironmentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "DescribeEnvironmentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEnvironmentsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EnvironmentDescriptionsMessage.filterSensitiveLog,
+export class DescribeEnvironmentsCommand extends command<DescribeEnvironmentsCommandInput, DescribeEnvironmentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEnvironments",
+  DescribeEnvironments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEnvironmentsMessage;
+      output: EnvironmentDescriptionsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEnvironmentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEnvironmentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEnvironmentsCommandOutput> {
-    return deserializeAws_queryDescribeEnvironmentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEnvironmentsCommandInput;
+      output: DescribeEnvironmentsCommandOutput;
+    };
+  };
 }

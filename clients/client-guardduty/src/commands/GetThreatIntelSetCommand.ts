@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { GetThreatIntelSetRequest, GetThreatIntelSetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetThreatIntelSetCommand,
-  serializeAws_restJson1GetThreatIntelSetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetThreatIntelSetRequest, GetThreatIntelSetResponse } from "../models/models_1";
+import { GetThreatIntelSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetThreatIntelSetCommand}.
+ */
 export interface GetThreatIntelSetCommandInput extends GetThreatIntelSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetThreatIntelSetCommand}.
+ */
 export interface GetThreatIntelSetCommandOutput extends GetThreatIntelSetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,61 @@ export interface GetThreatIntelSetCommandOutput extends GetThreatIntelSetRespons
  * ```javascript
  * import { GuardDutyClient, GetThreatIntelSetCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, GetThreatIntelSetCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // GetThreatIntelSetRequest
+ *   DetectorId: "STRING_VALUE", // required
+ *   ThreatIntelSetId: "STRING_VALUE", // required
+ * };
  * const command = new GetThreatIntelSetCommand(input);
  * const response = await client.send(command);
+ * // { // GetThreatIntelSetResponse
+ * //   Name: "STRING_VALUE", // required
+ * //   Format: "TXT" || "STIX" || "OTX_CSV" || "ALIEN_VAULT" || "PROOF_POINT" || "FIRE_EYE", // required
+ * //   Location: "STRING_VALUE", // required
+ * //   Status: "INACTIVE" || "ACTIVATING" || "ACTIVE" || "DEACTIVATING" || "ERROR" || "DELETE_PENDING" || "DELETED", // required
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   ExpectedBucketOwner: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetThreatIntelSetCommandInput - {@link GetThreatIntelSetCommandInput}
+ * @returns {@link GetThreatIntelSetCommandOutput}
  * @see {@link GetThreatIntelSetCommandInput} for command's `input` shape.
  * @see {@link GetThreatIntelSetCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class GetThreatIntelSetCommand extends $Command<
-  GetThreatIntelSetCommandInput,
-  GetThreatIntelSetCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetThreatIntelSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetThreatIntelSetCommandInput, GetThreatIntelSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "GetThreatIntelSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetThreatIntelSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetThreatIntelSetResponse.filterSensitiveLog,
+export class GetThreatIntelSetCommand extends command<GetThreatIntelSetCommandInput, GetThreatIntelSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetThreatIntelSet",
+  GetThreatIntelSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetThreatIntelSetRequest;
+      output: GetThreatIntelSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetThreatIntelSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetThreatIntelSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetThreatIntelSetCommandOutput> {
-    return deserializeAws_restJson1GetThreatIntelSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetThreatIntelSetCommandInput;
+      output: GetThreatIntelSetCommandOutput;
+    };
+  };
 }

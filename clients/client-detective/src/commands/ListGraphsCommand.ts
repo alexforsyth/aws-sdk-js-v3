@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetectiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DetectiveClient";
-import { ListGraphsRequest, ListGraphsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListGraphsCommand,
-  serializeAws_restJson1ListGraphsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGraphsRequest, ListGraphsResponse } from "../models/models_0";
+import { ListGraphs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGraphsCommand}.
+ */
 export interface ListGraphsCommandInput extends ListGraphsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListGraphsCommand}.
+ */
 export interface ListGraphsCommandOutput extends ListGraphsResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,64 @@ export interface ListGraphsCommandOutput extends ListGraphsResponse, __MetadataB
  * ```javascript
  * import { DetectiveClient, ListGraphsCommand } from "@aws-sdk/client-detective"; // ES Modules import
  * // const { DetectiveClient, ListGraphsCommand } = require("@aws-sdk/client-detective"); // CommonJS import
+ * // import type { DetectiveClientConfig } from "@aws-sdk/client-detective";
+ * const config = {}; // type is DetectiveClientConfig
  * const client = new DetectiveClient(config);
+ * const input = { // ListGraphsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListGraphsCommand(input);
  * const response = await client.send(command);
+ * // { // ListGraphsResponse
+ * //   GraphList: [ // GraphList
+ * //     { // Graph
+ * //       Arn: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListGraphsCommandInput - {@link ListGraphsCommandInput}
+ * @returns {@link ListGraphsCommandOutput}
  * @see {@link ListGraphsCommandInput} for command's `input` shape.
  * @see {@link ListGraphsCommandOutput} for command's `response` shape.
- * @see {@link DetectiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DetectiveClientResolvedConfig | config} for DetectiveClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request issuer does not have permission to access this resource or perform this
+ *          operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request was valid but failed because of a problem with the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request parameters are invalid.</p>
+ *
+ * @throws {@link DetectiveServiceException}
+ * <p>Base exception class for all service exceptions from Detective service.</p>
+ *
+ *
+ * @public
  */
-export class ListGraphsCommand extends $Command<
-  ListGraphsCommandInput,
-  ListGraphsCommandOutput,
-  DetectiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGraphsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DetectiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGraphsCommandInput, ListGraphsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DetectiveClient";
-    const commandName = "ListGraphsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGraphsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGraphsResponse.filterSensitiveLog,
+export class ListGraphsCommand extends command<ListGraphsCommandInput, ListGraphsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGraphs",
+  ListGraphs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGraphsRequest;
+      output: ListGraphsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGraphsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListGraphsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListGraphsCommandOutput> {
-    return deserializeAws_restJson1ListGraphsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGraphsCommandInput;
+      output: ListGraphsCommandOutput;
+    };
+  };
 }

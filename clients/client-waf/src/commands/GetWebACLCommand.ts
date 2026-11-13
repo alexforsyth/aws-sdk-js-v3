@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetWebACLRequest, GetWebACLResponse } from "../models/models_0";
-import { deserializeAws_json1_1GetWebACLCommand, serializeAws_json1_1GetWebACLCommand } from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetWebACLRequest, GetWebACLResponse } from "../models/models_0";
+import { GetWebACL$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetWebACLCommand}.
+ */
 export interface GetWebACLCommandInput extends GetWebACLRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetWebACLCommand}.
+ */
 export interface GetWebACLCommandOutput extends GetWebACLResponse, __MetadataBearer {}
 
 /**
@@ -33,64 +37,113 @@ export interface GetWebACLCommandOutput extends GetWebACLResponse, __MetadataBea
  * ```javascript
  * import { WAFClient, GetWebACLCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, GetWebACLCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // GetWebACLRequest
+ *   WebACLId: "STRING_VALUE", // required
+ * };
  * const command = new GetWebACLCommand(input);
  * const response = await client.send(command);
+ * // { // GetWebACLResponse
+ * //   WebACL: { // WebACL
+ * //     WebACLId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     MetricName: "STRING_VALUE",
+ * //     DefaultAction: { // WafAction
+ * //       Type: "BLOCK" || "ALLOW" || "COUNT", // required
+ * //     },
+ * //     Rules: [ // ActivatedRules // required
+ * //       { // ActivatedRule
+ * //         Priority: Number("int"), // required
+ * //         RuleId: "STRING_VALUE", // required
+ * //         Action: {
+ * //           Type: "BLOCK" || "ALLOW" || "COUNT", // required
+ * //         },
+ * //         OverrideAction: { // WafOverrideAction
+ * //           Type: "NONE" || "COUNT", // required
+ * //         },
+ * //         Type: "REGULAR" || "RATE_BASED" || "GROUP",
+ * //         ExcludedRules: [ // ExcludedRules
+ * //           { // ExcludedRule
+ * //             RuleId: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     WebACLArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetWebACLCommandInput - {@link GetWebACLCommandInput}
+ * @returns {@link GetWebACLCommandOutput}
  * @see {@link GetWebACLCommandInput} for command's `input` shape.
  * @see {@link GetWebACLCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @example To get a web ACL
+ * ```javascript
+ * // The following example returns the details of a web ACL with the ID createwebacl-1472061481310.
+ * const input = {
+ *   WebACLId: "createwebacl-1472061481310"
+ * };
+ * const command = new GetWebACLCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   WebACL: {
+ *     DefaultAction: {
+ *       Type: "ALLOW"
+ *     },
+ *     MetricName: "CreateExample",
+ *     Name: "CreateExample",
+ *     Rules: [
+ *       {
+ *         Action: {
+ *           Type: "ALLOW"
+ *         },
+ *         Priority: 1,
+ *         RuleId: "WAFRule-1-Example"
+ *       }
+ *     ],
+ *     WebACLId: "createwebacl-1472061481310"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetWebACLCommand extends $Command<GetWebACLCommandInput, GetWebACLCommandOutput, WAFClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetWebACLCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetWebACLCommandInput, GetWebACLCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "GetWebACLCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetWebACLRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetWebACLResponse.filterSensitiveLog,
+export class GetWebACLCommand extends command<GetWebACLCommandInput, GetWebACLCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetWebACL",
+  GetWebACL$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWebACLRequest;
+      output: GetWebACLResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetWebACLCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetWebACLCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetWebACLCommandOutput> {
-    return deserializeAws_json1_1GetWebACLCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetWebACLCommandInput;
+      output: GetWebACLCommandOutput;
+    };
+  };
 }

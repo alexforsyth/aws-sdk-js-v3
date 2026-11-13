@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFlowAssociationsRequest, ListFlowAssociationsResponse } from "../models/models_2";
+import { ListFlowAssociations$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFlowAssociationsCommand}.
+ */
+export interface ListFlowAssociationsCommandInput extends ListFlowAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFlowAssociationsCommand}.
+ */
+export interface ListFlowAssociationsCommandOutput extends ListFlowAssociationsResponse, __MetadataBearer {}
+
+/**
+ * <p>List the flow association based on the filters.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, ListFlowAssociationsCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, ListFlowAssociationsCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // ListFlowAssociationsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ResourceType: "WHATSAPP_MESSAGING_PHONE_NUMBER" || "VOICE_PHONE_NUMBER" || "INBOUND_EMAIL" || "OUTBOUND_EMAIL" || "ANALYTICS_CONNECTOR",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
+ * const command = new ListFlowAssociationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListFlowAssociationsResponse
+ * //   FlowAssociationSummaryList: [ // FlowAssociationSummaryList
+ * //     { // FlowAssociationSummary
+ * //       ResourceId: "STRING_VALUE",
+ * //       FlowId: "STRING_VALUE",
+ * //       ResourceType: "WHATSAPP_MESSAGING_PHONE_NUMBER" || "VOICE_PHONE_NUMBER" || "INBOUND_EMAIL" || "OUTBOUND_EMAIL" || "ANALYTICS_CONNECTOR",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListFlowAssociationsCommandInput - {@link ListFlowAssociationsCommandInput}
+ * @returns {@link ListFlowAssociationsCommandOutput}
+ * @see {@link ListFlowAssociationsCommandInput} for command's `input` shape.
+ * @see {@link ListFlowAssociationsCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class ListFlowAssociationsCommand extends command<ListFlowAssociationsCommandInput, ListFlowAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFlowAssociations",
+  ListFlowAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFlowAssociationsRequest;
+      output: ListFlowAssociationsResponse;
+    };
+    sdk: {
+      input: ListFlowAssociationsCommandInput;
+      output: ListFlowAssociationsCommandOutput;
+    };
+  };
+}

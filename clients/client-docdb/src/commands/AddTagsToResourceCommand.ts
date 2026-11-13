@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { AddTagsToResourceMessage } from "../models/models_0";
-import {
-  deserializeAws_queryAddTagsToResourceCommand,
-  serializeAws_queryAddTagsToResourceCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddTagsToResourceMessage } from "../models/models_0";
+import { AddTagsToResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddTagsToResourceCommand}.
+ */
 export interface AddTagsToResourceCommandInput extends AddTagsToResourceMessage {}
+/**
+ * @public
+ *
+ * The output of {@link AddTagsToResourceCommand}.
+ */
 export interface AddTagsToResourceCommandOutput extends __MetadataBearer {}
 
 /**
@@ -31,68 +32,63 @@ export interface AddTagsToResourceCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { DocDBClient, AddTagsToResourceCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, AddTagsToResourceCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // AddTagsToResourceMessage
+ *   ResourceName: "STRING_VALUE", // required
+ *   Tags: [ // TagList // required
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new AddTagsToResourceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AddTagsToResourceCommandInput - {@link AddTagsToResourceCommandInput}
+ * @returns {@link AddTagsToResourceCommandOutput}
  * @see {@link AddTagsToResourceCommandInput} for command's `input` shape.
  * @see {@link AddTagsToResourceCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBClusterNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBClusterIdentifier</code> doesn't refer to an existing cluster. </p>
+ *
+ * @throws {@link DBInstanceNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBInstanceIdentifier</code> doesn't refer to an existing instance. </p>
+ *
+ * @throws {@link DBSnapshotNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBSnapshotIdentifier</code> doesn't refer to an existing snapshot. </p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class AddTagsToResourceCommand extends $Command<
-  AddTagsToResourceCommandInput,
-  AddTagsToResourceCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddTagsToResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddTagsToResourceCommandInput, AddTagsToResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "AddTagsToResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddTagsToResourceMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class AddTagsToResourceCommand extends command<AddTagsToResourceCommandInput, AddTagsToResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddTagsToResource",
+  AddTagsToResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddTagsToResourceMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddTagsToResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryAddTagsToResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddTagsToResourceCommandOutput> {
-    return deserializeAws_queryAddTagsToResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddTagsToResourceCommandInput;
+      output: AddTagsToResourceCommandOutput;
+    };
+  };
 }

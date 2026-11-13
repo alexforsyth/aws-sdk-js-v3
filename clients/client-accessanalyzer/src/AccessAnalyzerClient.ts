@@ -1,121 +1,197 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { ApplyArchiveRuleCommandInput, ApplyArchiveRuleCommandOutput } from "./commands/ApplyArchiveRuleCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultAccessAnalyzerHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { ApplyArchiveRuleCommandInput, ApplyArchiveRuleCommandOutput } from "./commands/ApplyArchiveRuleCommand";
+import type {
   CancelPolicyGenerationCommandInput,
   CancelPolicyGenerationCommandOutput,
 } from "./commands/CancelPolicyGenerationCommand";
-import {
+import type {
+  CheckAccessNotGrantedCommandInput,
+  CheckAccessNotGrantedCommandOutput,
+} from "./commands/CheckAccessNotGrantedCommand";
+import type { CheckNoNewAccessCommandInput, CheckNoNewAccessCommandOutput } from "./commands/CheckNoNewAccessCommand";
+import type {
+  CheckNoPublicAccessCommandInput,
+  CheckNoPublicAccessCommandOutput,
+} from "./commands/CheckNoPublicAccessCommand";
+import type {
   CreateAccessPreviewCommandInput,
   CreateAccessPreviewCommandOutput,
 } from "./commands/CreateAccessPreviewCommand";
-import { CreateAnalyzerCommandInput, CreateAnalyzerCommandOutput } from "./commands/CreateAnalyzerCommand";
-import { CreateArchiveRuleCommandInput, CreateArchiveRuleCommandOutput } from "./commands/CreateArchiveRuleCommand";
-import { DeleteAnalyzerCommandInput, DeleteAnalyzerCommandOutput } from "./commands/DeleteAnalyzerCommand";
-import { DeleteArchiveRuleCommandInput, DeleteArchiveRuleCommandOutput } from "./commands/DeleteArchiveRuleCommand";
-import { GetAccessPreviewCommandInput, GetAccessPreviewCommandOutput } from "./commands/GetAccessPreviewCommand";
-import {
+import type { CreateAnalyzerCommandInput, CreateAnalyzerCommandOutput } from "./commands/CreateAnalyzerCommand";
+import type {
+  CreateArchiveRuleCommandInput,
+  CreateArchiveRuleCommandOutput,
+} from "./commands/CreateArchiveRuleCommand";
+import type {
+  CreateServiceLinkedAnalyzerCommandInput,
+  CreateServiceLinkedAnalyzerCommandOutput,
+} from "./commands/CreateServiceLinkedAnalyzerCommand";
+import type { DeleteAnalyzerCommandInput, DeleteAnalyzerCommandOutput } from "./commands/DeleteAnalyzerCommand";
+import type {
+  DeleteArchiveRuleCommandInput,
+  DeleteArchiveRuleCommandOutput,
+} from "./commands/DeleteArchiveRuleCommand";
+import type {
+  DeleteServiceLinkedAnalyzerCommandInput,
+  DeleteServiceLinkedAnalyzerCommandOutput,
+} from "./commands/DeleteServiceLinkedAnalyzerCommand";
+import type {
+  GenerateFindingRecommendationCommandInput,
+  GenerateFindingRecommendationCommandOutput,
+} from "./commands/GenerateFindingRecommendationCommand";
+import type { GetAccessPreviewCommandInput, GetAccessPreviewCommandOutput } from "./commands/GetAccessPreviewCommand";
+import type {
   GetAnalyzedResourceCommandInput,
   GetAnalyzedResourceCommandOutput,
 } from "./commands/GetAnalyzedResourceCommand";
-import { GetAnalyzerCommandInput, GetAnalyzerCommandOutput } from "./commands/GetAnalyzerCommand";
-import { GetArchiveRuleCommandInput, GetArchiveRuleCommandOutput } from "./commands/GetArchiveRuleCommand";
-import { GetFindingCommandInput, GetFindingCommandOutput } from "./commands/GetFindingCommand";
-import { GetGeneratedPolicyCommandInput, GetGeneratedPolicyCommandOutput } from "./commands/GetGeneratedPolicyCommand";
-import {
+import type { GetAnalyzerCommandInput, GetAnalyzerCommandOutput } from "./commands/GetAnalyzerCommand";
+import type { GetArchiveRuleCommandInput, GetArchiveRuleCommandOutput } from "./commands/GetArchiveRuleCommand";
+import type { GetFindingCommandInput, GetFindingCommandOutput } from "./commands/GetFindingCommand";
+import type {
+  GetFindingRecommendationCommandInput,
+  GetFindingRecommendationCommandOutput,
+} from "./commands/GetFindingRecommendationCommand";
+import type {
+  GetFindingsStatisticsCommandInput,
+  GetFindingsStatisticsCommandOutput,
+} from "./commands/GetFindingsStatisticsCommand";
+import type { GetFindingV2CommandInput, GetFindingV2CommandOutput } from "./commands/GetFindingV2Command";
+import type {
+  GetGeneratedPolicyCommandInput,
+  GetGeneratedPolicyCommandOutput,
+} from "./commands/GetGeneratedPolicyCommand";
+import type {
   ListAccessPreviewFindingsCommandInput,
   ListAccessPreviewFindingsCommandOutput,
 } from "./commands/ListAccessPreviewFindingsCommand";
-import { ListAccessPreviewsCommandInput, ListAccessPreviewsCommandOutput } from "./commands/ListAccessPreviewsCommand";
-import {
+import type {
+  ListAccessPreviewsCommandInput,
+  ListAccessPreviewsCommandOutput,
+} from "./commands/ListAccessPreviewsCommand";
+import type {
   ListAnalyzedResourcesCommandInput,
   ListAnalyzedResourcesCommandOutput,
 } from "./commands/ListAnalyzedResourcesCommand";
-import { ListAnalyzersCommandInput, ListAnalyzersCommandOutput } from "./commands/ListAnalyzersCommand";
-import { ListArchiveRulesCommandInput, ListArchiveRulesCommandOutput } from "./commands/ListArchiveRulesCommand";
-import { ListFindingsCommandInput, ListFindingsCommandOutput } from "./commands/ListFindingsCommand";
-import {
+import type { ListAnalyzersCommandInput, ListAnalyzersCommandOutput } from "./commands/ListAnalyzersCommand";
+import type { ListArchiveRulesCommandInput, ListArchiveRulesCommandOutput } from "./commands/ListArchiveRulesCommand";
+import type { ListFindingsCommandInput, ListFindingsCommandOutput } from "./commands/ListFindingsCommand";
+import type { ListFindingsV2CommandInput, ListFindingsV2CommandOutput } from "./commands/ListFindingsV2Command";
+import type {
   ListPolicyGenerationsCommandInput,
   ListPolicyGenerationsCommandOutput,
 } from "./commands/ListPolicyGenerationsCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   StartPolicyGenerationCommandInput,
   StartPolicyGenerationCommandOutput,
 } from "./commands/StartPolicyGenerationCommand";
-import { StartResourceScanCommandInput, StartResourceScanCommandOutput } from "./commands/StartResourceScanCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateArchiveRuleCommandInput, UpdateArchiveRuleCommandOutput } from "./commands/UpdateArchiveRuleCommand";
-import { UpdateFindingsCommandInput, UpdateFindingsCommandOutput } from "./commands/UpdateFindingsCommand";
-import { ValidatePolicyCommandInput, ValidatePolicyCommandOutput } from "./commands/ValidatePolicyCommand";
+import type {
+  StartResourceScanCommandInput,
+  StartResourceScanCommandOutput,
+} from "./commands/StartResourceScanCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateAnalyzerCommandInput, UpdateAnalyzerCommandOutput } from "./commands/UpdateAnalyzerCommand";
+import type {
+  UpdateArchiveRuleCommandInput,
+  UpdateArchiveRuleCommandOutput,
+} from "./commands/UpdateArchiveRuleCommand";
+import type { UpdateFindingsCommandInput, UpdateFindingsCommandOutput } from "./commands/UpdateFindingsCommand";
+import type { ValidatePolicyCommandInput, ValidatePolicyCommandOutput } from "./commands/ValidatePolicyCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | ApplyArchiveRuleCommandInput
   | CancelPolicyGenerationCommandInput
+  | CheckAccessNotGrantedCommandInput
+  | CheckNoNewAccessCommandInput
+  | CheckNoPublicAccessCommandInput
   | CreateAccessPreviewCommandInput
   | CreateAnalyzerCommandInput
   | CreateArchiveRuleCommandInput
+  | CreateServiceLinkedAnalyzerCommandInput
   | DeleteAnalyzerCommandInput
   | DeleteArchiveRuleCommandInput
+  | DeleteServiceLinkedAnalyzerCommandInput
+  | GenerateFindingRecommendationCommandInput
   | GetAccessPreviewCommandInput
   | GetAnalyzedResourceCommandInput
   | GetAnalyzerCommandInput
   | GetArchiveRuleCommandInput
   | GetFindingCommandInput
+  | GetFindingRecommendationCommandInput
+  | GetFindingV2CommandInput
+  | GetFindingsStatisticsCommandInput
   | GetGeneratedPolicyCommandInput
   | ListAccessPreviewFindingsCommandInput
   | ListAccessPreviewsCommandInput
@@ -123,29 +199,43 @@ export type ServiceInputTypes =
   | ListAnalyzersCommandInput
   | ListArchiveRulesCommandInput
   | ListFindingsCommandInput
+  | ListFindingsV2CommandInput
   | ListPolicyGenerationsCommandInput
   | ListTagsForResourceCommandInput
   | StartPolicyGenerationCommandInput
   | StartResourceScanCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateAnalyzerCommandInput
   | UpdateArchiveRuleCommandInput
   | UpdateFindingsCommandInput
   | ValidatePolicyCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | ApplyArchiveRuleCommandOutput
   | CancelPolicyGenerationCommandOutput
+  | CheckAccessNotGrantedCommandOutput
+  | CheckNoNewAccessCommandOutput
+  | CheckNoPublicAccessCommandOutput
   | CreateAccessPreviewCommandOutput
   | CreateAnalyzerCommandOutput
   | CreateArchiveRuleCommandOutput
+  | CreateServiceLinkedAnalyzerCommandOutput
   | DeleteAnalyzerCommandOutput
   | DeleteArchiveRuleCommandOutput
+  | DeleteServiceLinkedAnalyzerCommandOutput
+  | GenerateFindingRecommendationCommandOutput
   | GetAccessPreviewCommandOutput
   | GetAnalyzedResourceCommandOutput
   | GetAnalyzerCommandOutput
   | GetArchiveRuleCommandOutput
   | GetFindingCommandOutput
+  | GetFindingRecommendationCommandOutput
+  | GetFindingV2CommandOutput
+  | GetFindingsStatisticsCommandOutput
   | GetGeneratedPolicyCommandOutput
   | ListAccessPreviewFindingsCommandOutput
   | ListAccessPreviewsCommandOutput
@@ -153,28 +243,33 @@ export type ServiceOutputTypes =
   | ListAnalyzersCommandOutput
   | ListArchiveRulesCommandOutput
   | ListFindingsCommandOutput
+  | ListFindingsV2CommandOutput
   | ListPolicyGenerationsCommandOutput
   | ListTagsForResourceCommandOutput
   | StartPolicyGenerationCommandOutput
   | StartResourceScanCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateAnalyzerCommandOutput
   | UpdateArchiveRuleCommandOutput
   | UpdateFindingsCommandOutput
   | ValidatePolicyCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -186,7 +281,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -225,25 +320,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -256,71 +342,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type AccessAnalyzerClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of AccessAnalyzerClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type AccessAnalyzerClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of AccessAnalyzerClient class constructor that set the region, credentials and other options.
  */
 export interface AccessAnalyzerClientConfig extends AccessAnalyzerClientConfigType {}
 
-type AccessAnalyzerClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of AccessAnalyzerClient class. This is resolved and normalized from the {@link AccessAnalyzerClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type AccessAnalyzerClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of AccessAnalyzerClient class. This is resolved and normalized from the {@link AccessAnalyzerClientConfig | constructor configuration interface}.
  */
 export interface AccessAnalyzerClientResolvedConfig extends AccessAnalyzerClientResolvedConfigType {}
 
 /**
- * <p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to
- *          identify any policies that grant access to an external principal. It does this by using
- *          logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An
- *          external principal can be another Amazon Web Services account, a root user, an IAM user or role, a
- *          federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to
- *          preview and validate public and cross-account access to your resources before deploying
- *          permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can
- *          call programmatically. For general information about IAM Access Analyzer, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>
- *          <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>
+ * <p>Identity and Access Management Access Analyzer helps you to set, verify, and refine your IAM policies by providing a suite of capabilities. Its features include findings for external, internal, and unused access, basic and custom policy checks for validating policies, and policy generation to generate fine-grained policies. To start using IAM Access Analyzer to identify external, internal, or unused access, you first need to create an analyzer.</p> <p> <b>External access analyzers</b> help you identify potential risks of accessing resources by enabling you to identify any resource policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An external principal can be another Amazon Web Services account, a root user, an IAM user or role, a federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to preview public and cross-account access to your resources before deploying permissions changes.</p> <p> <b>Internal access analyzers</b> help you identify which principals within your organization or account have access to selected resources. This analysis supports implementing the principle of least privilege by ensuring that your specified resources can only be accessed by the intended principals within your organization.</p> <p> <b>Unused access analyzers</b> help you identify potential identity access risks by enabling you to identify unused IAM roles, unused access keys, unused console passwords, and IAM principals with unused service and action-level permissions.</p> <p>Beyond findings, IAM Access Analyzer provides basic and custom policy checks to validate IAM policies before deploying permissions changes. You can use policy generation to refine permissions by attaching a policy generated using access activity logged in CloudTrail logs. </p> <p>This guide describes the IAM Access Analyzer operations that you can call programmatically. For general information about IAM Access Analyzer, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">Using Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>
+ * @public
  */
 export class AccessAnalyzerClient extends __Client<
   __HttpHandlerOptions,
@@ -333,22 +461,36 @@ export class AccessAnalyzerClient extends __Client<
    */
   readonly config: AccessAnalyzerClientResolvedConfig;
 
-  constructor(configuration: AccessAnalyzerClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<AccessAnalyzerClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultAccessAnalyzerHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: AccessAnalyzerClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import { ListScramSecretsRequest, ListScramSecretsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListScramSecretsCommand,
-  serializeAws_restJson1ListScramSecretsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListScramSecretsRequest, ListScramSecretsResponse } from "../models/models_0";
+import { ListScramSecrets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListScramSecretsCommand}.
+ */
 export interface ListScramSecretsCommandInput extends ListScramSecretsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListScramSecretsCommand}.
+ */
 export interface ListScramSecretsCommandOutput extends ListScramSecretsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface ListScramSecretsCommandOutput extends ListScramSecretsResponse,
  * ```javascript
  * import { KafkaClient, ListScramSecretsCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, ListScramSecretsCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // ListScramSecretsRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListScramSecretsCommand(input);
  * const response = await client.send(command);
+ * // { // ListScramSecretsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   SecretArnList: [ // __listOf__string
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListScramSecretsCommandInput - {@link ListScramSecretsCommandInput}
+ * @returns {@link ListScramSecretsCommandOutput}
  * @see {@link ListScramSecretsCommandInput} for command's `input` shape.
  * @see {@link ListScramSecretsCommandOutput} for command's `response` shape.
- * @see {@link KafkaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class ListScramSecretsCommand extends $Command<
-  ListScramSecretsCommandInput,
-  ListScramSecretsCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListScramSecretsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListScramSecretsCommandInput, ListScramSecretsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "ListScramSecretsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListScramSecretsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListScramSecretsResponse.filterSensitiveLog,
+export class ListScramSecretsCommand extends command<ListScramSecretsCommandInput, ListScramSecretsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListScramSecrets",
+  ListScramSecrets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListScramSecretsRequest;
+      output: ListScramSecretsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListScramSecretsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListScramSecretsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListScramSecretsCommandOutput> {
-    return deserializeAws_restJson1ListScramSecretsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListScramSecretsCommandInput;
+      output: ListScramSecretsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { ListTypeRegistrationsInput, ListTypeRegistrationsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryListTypeRegistrationsCommand,
-  serializeAws_queryListTypeRegistrationsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTypeRegistrationsInput, ListTypeRegistrationsOutput } from "../models/models_0";
+import { ListTypeRegistrations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTypeRegistrationsCommand}.
+ */
 export interface ListTypeRegistrationsCommandInput extends ListTypeRegistrationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListTypeRegistrationsCommand}.
+ */
 export interface ListTypeRegistrationsCommandOutput extends ListTypeRegistrationsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,58 @@ export interface ListTypeRegistrationsCommandOutput extends ListTypeRegistration
  * ```javascript
  * import { CloudFormationClient, ListTypeRegistrationsCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, ListTypeRegistrationsCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // ListTypeRegistrationsInput
+ *   Type: "RESOURCE" || "MODULE" || "HOOK",
+ *   TypeName: "STRING_VALUE",
+ *   TypeArn: "STRING_VALUE",
+ *   RegistrationStatusFilter: "COMPLETE" || "IN_PROGRESS" || "FAILED",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListTypeRegistrationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTypeRegistrationsOutput
+ * //   RegistrationTokenList: [ // RegistrationTokenList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTypeRegistrationsCommandInput - {@link ListTypeRegistrationsCommandInput}
+ * @returns {@link ListTypeRegistrationsCommandOutput}
  * @see {@link ListTypeRegistrationsCommandInput} for command's `input` shape.
  * @see {@link ListTypeRegistrationsCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListTypeRegistrationsCommand extends $Command<
-  ListTypeRegistrationsCommandInput,
-  ListTypeRegistrationsCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTypeRegistrationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTypeRegistrationsCommandInput, ListTypeRegistrationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "ListTypeRegistrationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTypeRegistrationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTypeRegistrationsOutput.filterSensitiveLog,
+export class ListTypeRegistrationsCommand extends command<ListTypeRegistrationsCommandInput, ListTypeRegistrationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTypeRegistrations",
+  ListTypeRegistrations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTypeRegistrationsInput;
+      output: ListTypeRegistrationsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTypeRegistrationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListTypeRegistrationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTypeRegistrationsCommandOutput> {
-    return deserializeAws_queryListTypeRegistrationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTypeRegistrationsCommandInput;
+      output: ListTypeRegistrationsCommandOutput;
+    };
+  };
 }

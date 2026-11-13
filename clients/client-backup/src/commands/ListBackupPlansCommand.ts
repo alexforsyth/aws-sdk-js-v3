@@ -1,97 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { ListBackupPlansInput, ListBackupPlansOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListBackupPlansCommand,
-  serializeAws_restJson1ListBackupPlansCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBackupPlansInput, ListBackupPlansOutput } from "../models/models_0";
+import { ListBackupPlans$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBackupPlansCommand}.
+ */
 export interface ListBackupPlansCommandInput extends ListBackupPlansInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListBackupPlansCommand}.
+ */
 export interface ListBackupPlansCommandOutput extends ListBackupPlansOutput, __MetadataBearer {}
 
 /**
- * <p>Returns a list of all active backup plans for an authenticated account. The list
- *          contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion
- *          dates, version IDs, plan names, and creator request IDs.</p>
+ * <p>Lists the active backup plans for the account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BackupClient, ListBackupPlansCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, ListBackupPlansCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // ListBackupPlansInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   IncludeDeleted: true || false,
+ * };
  * const command = new ListBackupPlansCommand(input);
  * const response = await client.send(command);
+ * // { // ListBackupPlansOutput
+ * //   NextToken: "STRING_VALUE",
+ * //   BackupPlansList: [ // BackupPlansList
+ * //     { // BackupPlansListMember
+ * //       BackupPlanArn: "STRING_VALUE",
+ * //       BackupPlanId: "STRING_VALUE",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       DeletionDate: new Date("TIMESTAMP"),
+ * //       VersionId: "STRING_VALUE",
+ * //       BackupPlanName: "STRING_VALUE",
+ * //       CreatorRequestId: "STRING_VALUE",
+ * //       LastExecutionDate: new Date("TIMESTAMP"),
+ * //       AdvancedBackupSettings: [ // AdvancedBackupSettings
+ * //         { // AdvancedBackupSetting
+ * //           ResourceType: "STRING_VALUE",
+ * //           BackupOptions: { // BackupOptions
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListBackupPlansCommandInput - {@link ListBackupPlansCommandInput}
+ * @returns {@link ListBackupPlansCommandOutput}
  * @see {@link ListBackupPlansCommandInput} for command's `input` shape.
  * @see {@link ListBackupPlansCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Indicates that a required parameter is missing.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action doesn't exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class ListBackupPlansCommand extends $Command<
-  ListBackupPlansCommandInput,
-  ListBackupPlansCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBackupPlansCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBackupPlansCommandInput, ListBackupPlansCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "ListBackupPlansCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBackupPlansInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBackupPlansOutput.filterSensitiveLog,
+export class ListBackupPlansCommand extends command<ListBackupPlansCommandInput, ListBackupPlansCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBackupPlans",
+  ListBackupPlans$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBackupPlansInput;
+      output: ListBackupPlansOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBackupPlansCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBackupPlansCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBackupPlansCommandOutput> {
-    return deserializeAws_restJson1ListBackupPlansCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBackupPlansCommandInput;
+      output: ListBackupPlansCommandOutput;
+    };
+  };
 }

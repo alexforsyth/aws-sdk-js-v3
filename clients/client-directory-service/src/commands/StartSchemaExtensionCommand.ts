@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { StartSchemaExtensionRequest, StartSchemaExtensionResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartSchemaExtensionCommand,
-  serializeAws_json1_1StartSchemaExtensionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartSchemaExtensionRequest, StartSchemaExtensionResult } from "../models/models_0";
+import { StartSchemaExtension$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartSchemaExtensionCommand}.
+ */
 export interface StartSchemaExtensionCommandInput extends StartSchemaExtensionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartSchemaExtensionCommand}.
+ */
 export interface StartSchemaExtensionCommandOutput extends StartSchemaExtensionResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,98 @@ export interface StartSchemaExtensionCommandOutput extends StartSchemaExtensionR
  * ```javascript
  * import { DirectoryServiceClient, StartSchemaExtensionCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, StartSchemaExtensionCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // StartSchemaExtensionRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   CreateSnapshotBeforeSchemaExtension: true || false, // required
+ *   LdifContent: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE", // required
+ * };
  * const command = new StartSchemaExtensionCommand(input);
  * const response = await client.send(command);
+ * // { // StartSchemaExtensionResult
+ * //   SchemaExtensionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartSchemaExtensionCommandInput - {@link StartSchemaExtensionCommandInput}
+ * @returns {@link StartSchemaExtensionCommandOutput}
  * @see {@link StartSchemaExtensionCommandInput} for command's `input` shape.
  * @see {@link StartSchemaExtensionCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The specified directory is unavailable.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link SnapshotLimitExceededException} (client fault)
+ *  <p>The maximum number of manual snapshots for the directory has been reached. You can
+ *             use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits
+ *             for a directory.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To start a schema extension
+ * ```javascript
+ * // The following example applies a schema extension to a specified Microsoft AD directory.
+ * const input = {
+ *   CreateSnapshotBeforeSchemaExtension: true,
+ *   Description: "Adds maycontain attribute to user class. Precede each line as it would be formatted in an ldif file.",
+ *   DirectoryId: "d-92654abfed",
+ *   LdifContent: "dn: CN=User,CN=Schema,CN=Configuration,DC=sales,DC=example,DC=com
+ * changetype: modify
+ * add: mayContain
+ * mayContain: drink
+ * -
+ *
+ * DN:
+ * changetype: modify
+ * replace: schemaupdatenow
+ * schemaupdatenow: 1
+ * -"
+ * };
+ * const command = new StartSchemaExtensionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SchemaExtensionId: "e-926731dc50"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class StartSchemaExtensionCommand extends $Command<
-  StartSchemaExtensionCommandInput,
-  StartSchemaExtensionCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartSchemaExtensionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartSchemaExtensionCommandInput, StartSchemaExtensionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "StartSchemaExtensionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartSchemaExtensionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartSchemaExtensionResult.filterSensitiveLog,
+export class StartSchemaExtensionCommand extends command<StartSchemaExtensionCommandInput, StartSchemaExtensionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartSchemaExtension",
+  StartSchemaExtension$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSchemaExtensionRequest;
+      output: StartSchemaExtensionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartSchemaExtensionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartSchemaExtensionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartSchemaExtensionCommandOutput> {
-    return deserializeAws_json1_1StartSchemaExtensionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartSchemaExtensionCommandInput;
+      output: StartSchemaExtensionCommandOutput;
+    };
+  };
 }

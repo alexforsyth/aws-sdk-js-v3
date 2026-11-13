@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { TerminateWorkflowExecutionInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0TerminateWorkflowExecutionCommand,
-  serializeAws_json1_0TerminateWorkflowExecutionCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TerminateWorkflowExecutionInput } from "../models/models_0";
+import { TerminateWorkflowExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TerminateWorkflowExecutionCommand}.
+ */
 export interface TerminateWorkflowExecutionCommandInput extends TerminateWorkflowExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link TerminateWorkflowExecutionCommand}.
+ */
 export interface TerminateWorkflowExecutionCommandOutput extends __MetadataBearer {}
 
 /**
@@ -26,23 +27,19 @@ export interface TerminateWorkflowExecutionCommandOutput extends __MetadataBeare
  *       workflow execution identified by the given domain, runId, and workflowId. The child policy,
  *       registered with the workflow type or specified when starting this execution, is applied to any
  *       open child workflow executions of this workflow execution.</p>
- *
  *          <important>
  *             <p>If the identified workflow execution was in progress, it is terminated
  *         immediately.</p>
  *          </important>
- *
  *          <note>
  *             <p>If a runId isn't specified, then the <code>WorkflowExecutionTerminated</code> event
  *         is recorded in the history of the current open workflow with the matching workflowId in the
  *         domain.</p>
  *          </note>
- *
  *          <note>
  *             <p>You should consider using <a>RequestCancelWorkflowExecution</a> action
  *         instead because it allows the workflow to gracefully close while <a>TerminateWorkflowExecution</a> doesn't.</p>
  *          </note>
- *
  *          <p>
  *             <b>Access Control</b>
  *          </p>
@@ -71,71 +68,56 @@ export interface TerminateWorkflowExecutionCommandOutput extends __MetadataBeare
  * ```javascript
  * import { SWFClient, TerminateWorkflowExecutionCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, TerminateWorkflowExecutionCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // TerminateWorkflowExecutionInput
+ *   domain: "STRING_VALUE", // required
+ *   workflowId: "STRING_VALUE", // required
+ *   runId: "STRING_VALUE",
+ *   reason: "STRING_VALUE",
+ *   details: "STRING_VALUE",
+ *   childPolicy: "TERMINATE" || "REQUEST_CANCEL" || "ABANDON",
+ * };
  * const command = new TerminateWorkflowExecutionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param TerminateWorkflowExecutionCommandInput - {@link TerminateWorkflowExecutionCommandInput}
+ * @returns {@link TerminateWorkflowExecutionCommandOutput}
  * @see {@link TerminateWorkflowExecutionCommandInput} for command's `input` shape.
  * @see {@link TerminateWorkflowExecutionCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class TerminateWorkflowExecutionCommand extends $Command<
-  TerminateWorkflowExecutionCommandInput,
-  TerminateWorkflowExecutionCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TerminateWorkflowExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TerminateWorkflowExecutionCommandInput, TerminateWorkflowExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "TerminateWorkflowExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TerminateWorkflowExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class TerminateWorkflowExecutionCommand extends command<TerminateWorkflowExecutionCommandInput, TerminateWorkflowExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "TerminateWorkflowExecution",
+  TerminateWorkflowExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TerminateWorkflowExecutionInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TerminateWorkflowExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0TerminateWorkflowExecutionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<TerminateWorkflowExecutionCommandOutput> {
-    return deserializeAws_json1_0TerminateWorkflowExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TerminateWorkflowExecutionCommandInput;
+      output: TerminateWorkflowExecutionCommandOutput;
+    };
+  };
 }

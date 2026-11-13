@@ -1,33 +1,43 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ConnectParticipantClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ConnectParticipantClient";
-import { SendEventRequest, SendEventResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SendEventCommand,
-  serializeAws_restJson1SendEventCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendEventRequest, SendEventResponse } from "../models/models_0";
+import { SendEvent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendEventCommand}.
+ */
 export interface SendEventCommandInput extends SendEventRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SendEventCommand}.
+ */
 export interface SendEventCommandOutput extends SendEventResponse, __MetadataBearer {}
 
 /**
- * <p>Sends an event. Note that ConnectionToken is used for invoking this API instead of
- *             ParticipantToken.</p>
+ * <note>
+ *             <p>The <code>application/vnd.amazonaws.connect.event.connection.acknowledged</code>
+ *                 ContentType is no longer maintained since December 31, 2024. This event has been
+ *                 migrated to the <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> API using the
+ *                     <code>ConnectParticipant</code> field.</p>
+ *          </note>
+ *          <p>Sends an event. Message receipts are not supported when there are more than two active
+ *             participants in the chat. Using the SendEvent API for message receipts when a supervisor
+ *             is barged-in will result in a conflict exception.</p>
+ *          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
+ *          <note>
+ *             <p>
+ *                <code>ConnectionToken</code> is used for invoking this API instead of
+ *                     <code>ParticipantToken</code>.</p>
+ *          </note>
  *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
  *                     authentication</a>.</p>
  * @example
@@ -35,68 +45,67 @@ export interface SendEventCommandOutput extends SendEventResponse, __MetadataBea
  * ```javascript
  * import { ConnectParticipantClient, SendEventCommand } from "@aws-sdk/client-connectparticipant"; // ES Modules import
  * // const { ConnectParticipantClient, SendEventCommand } = require("@aws-sdk/client-connectparticipant"); // CommonJS import
+ * // import type { ConnectParticipantClientConfig } from "@aws-sdk/client-connectparticipant";
+ * const config = {}; // type is ConnectParticipantClientConfig
  * const client = new ConnectParticipantClient(config);
+ * const input = { // SendEventRequest
+ *   ContentType: "STRING_VALUE", // required
+ *   Content: "STRING_VALUE",
+ *   ClientToken: "STRING_VALUE",
+ *   ConnectionToken: "STRING_VALUE", // required
+ * };
  * const command = new SendEventCommand(input);
  * const response = await client.send(command);
+ * // { // SendEventResponse
+ * //   Id: "STRING_VALUE",
+ * //   AbsoluteTime: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SendEventCommandInput - {@link SendEventCommandInput}
+ * @returns {@link SendEventCommandOutput}
  * @see {@link SendEventCommandInput} for command's `input` shape.
  * @see {@link SendEventCommandOutput} for command's `response` shape.
- * @see {@link ConnectParticipantClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectParticipantClientResolvedConfig | config} for ConnectParticipantClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation conflicts with the current state of a service resource
+ *             associated with the request. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Amazon Connect service.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by Amazon Connect.</p>
+ *
+ * @throws {@link ConnectParticipantServiceException}
+ * <p>Base exception class for all service exceptions from ConnectParticipant service.</p>
+ *
+ *
+ * @public
  */
-export class SendEventCommand extends $Command<
-  SendEventCommandInput,
-  SendEventCommandOutput,
-  ConnectParticipantClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendEventCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectParticipantClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendEventCommandInput, SendEventCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectParticipantClient";
-    const commandName = "SendEventCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendEventRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SendEventResponse.filterSensitiveLog,
+export class SendEventCommand extends command<SendEventCommandInput, SendEventCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendEvent",
+  SendEvent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendEventRequest;
+      output: SendEventResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendEventCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SendEventCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SendEventCommandOutput> {
-    return deserializeAws_restJson1SendEventCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendEventCommandInput;
+      output: SendEventCommandOutput;
+    };
+  };
 }

@@ -1,102 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListSigningProfilesRequest, ListSigningProfilesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSigningProfilesCommand,
-  serializeAws_restJson1ListSigningProfilesCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SignerClientResolvedConfig } from "../SignerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSigningProfilesRequest, ListSigningProfilesResponse } from "../models/models_0";
+import { ListSigningProfiles$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSigningProfilesCommand}.
+ */
 export interface ListSigningProfilesCommandInput extends ListSigningProfilesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSigningProfilesCommand}.
+ */
 export interface ListSigningProfilesCommandOutput extends ListSigningProfilesResponse, __MetadataBearer {}
 
 /**
- * <p>Lists all available signing profiles in your AWS account. Returns only profiles with
- * 			an <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is
- * 			set to <code>true</code>. If additional jobs remain to be listed, code signing returns a
+ * <p>Lists all available signing profiles in your AWS account. Returns only profiles with an
+ * 				<code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is
+ * 			set to <code>true</code>. If additional jobs remain to be listed, AWS Signer returns a
  * 				<code>nextToken</code> value. Use this value in subsequent calls to
  * 				<code>ListSigningJobs</code> to fetch the remaining values. You can continue calling
  * 				<code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with
- * 			new values that code signing returns in the <code>nextToken</code> parameter until all of your
- * 			signing jobs have been returned.</p>
+ * 			new values that Signer returns in the <code>nextToken</code> parameter until all of
+ * 			your signing jobs have been returned.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SignerClient, ListSigningProfilesCommand } from "@aws-sdk/client-signer"; // ES Modules import
  * // const { SignerClient, ListSigningProfilesCommand } = require("@aws-sdk/client-signer"); // CommonJS import
+ * // import type { SignerClientConfig } from "@aws-sdk/client-signer";
+ * const config = {}; // type is SignerClientConfig
  * const client = new SignerClient(config);
+ * const input = { // ListSigningProfilesRequest
+ *   includeCanceled: true || false,
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   platformId: "STRING_VALUE",
+ *   statuses: [ // Statuses
+ *     "Active" || "Canceled" || "Revoked",
+ *   ],
+ * };
  * const command = new ListSigningProfilesCommand(input);
  * const response = await client.send(command);
+ * // { // ListSigningProfilesResponse
+ * //   profiles: [ // SigningProfiles
+ * //     { // SigningProfile
+ * //       profileName: "STRING_VALUE",
+ * //       profileVersion: "STRING_VALUE",
+ * //       profileVersionArn: "STRING_VALUE",
+ * //       signingMaterial: { // SigningMaterial
+ * //         certificateArn: "STRING_VALUE", // required
+ * //       },
+ * //       signatureValidityPeriod: { // SignatureValidityPeriod
+ * //         value: Number("int"),
+ * //         type: "DAYS" || "MONTHS" || "YEARS",
+ * //       },
+ * //       platformId: "STRING_VALUE",
+ * //       platformDisplayName: "STRING_VALUE",
+ * //       signingParameters: { // SigningParameters
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       status: "Active" || "Canceled" || "Revoked",
+ * //       arn: "STRING_VALUE",
+ * //       tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSigningProfilesCommandInput - {@link ListSigningProfilesCommandInput}
+ * @returns {@link ListSigningProfilesCommandOutput}
  * @see {@link ListSigningProfilesCommandInput} for command's `input` shape.
  * @see {@link ListSigningProfilesCommandOutput} for command's `response` shape.
- * @see {@link SignerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SignerClientResolvedConfig | config} for SignerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error occurred.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The allowed number of job-signing requests has been exceeded.</p>
+ *          <p>This error supersedes the error <code>ThrottlingException</code>.</p>
+ *
+ * @throws {@link SignerServiceException}
+ * <p>Base exception class for all service exceptions from Signer service.</p>
+ *
+ *
+ * @public
  */
-export class ListSigningProfilesCommand extends $Command<
-  ListSigningProfilesCommandInput,
-  ListSigningProfilesCommandOutput,
-  SignerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSigningProfilesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SignerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSigningProfilesCommandInput, ListSigningProfilesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SignerClient";
-    const commandName = "ListSigningProfilesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSigningProfilesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSigningProfilesResponse.filterSensitiveLog,
+export class ListSigningProfilesCommand extends command<ListSigningProfilesCommandInput, ListSigningProfilesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSigningProfiles",
+  ListSigningProfiles$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSigningProfilesRequest;
+      output: ListSigningProfilesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSigningProfilesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSigningProfilesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSigningProfilesCommandOutput> {
-    return deserializeAws_restJson1ListSigningProfilesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSigningProfilesCommandInput;
+      output: ListSigningProfilesCommandOutput;
+    };
+  };
 }

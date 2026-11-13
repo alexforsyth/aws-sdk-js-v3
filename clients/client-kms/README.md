@@ -1,43 +1,62 @@
-# @aws-sdk/client-kms
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-kms/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-kms)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-kms.svg)](https://www.npmjs.com/package/@aws-sdk/client-kms)
+# @aws-sdk/client-kms
 
 ## Description
 
 AWS SDK for JavaScript KMS Client for Node.js, Browser and React Native.
 
 <fullname>Key Management Service</fullname>
-
 <p>Key Management Service (KMS) is an encryption and key management web service. This guide describes
 the KMS operations that you can call programmatically. For general information about KMS,
 see the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/">
 <i>Key Management Service Developer Guide</i>
 </a>.</p>
 <note>
-<p>KMS is replacing the term <i>customer master key (CMK)</i> with <i>KMS key</i> and <i>KMS key</i>. The concept has not changed. To prevent breaking changes, KMS is keeping some variations of this term.</p>
+<p>KMS has replaced the term <i>customer master key (CMK)</i> with <i>Key Management Service key</i>
+and <i>KMS key</i>. The concept has not changed. To prevent breaking changes, KMS is keeping some variations of this term.</p>
 <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming
-languages and platforms (Java, Ruby, .Net, macOS, Android, etc.). The SDKs provide a
-convenient way to create programmatic access to KMS and other Amazon Web Services services. For example,
-the SDKs take care of tasks such as signing requests (see below), managing errors, and
-retrying requests automatically. For more information about the Amazon Web Services SDKs, including how to
-download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web
-Services</a>.</p>
+languages and platforms (Java, Rust, Python, Ruby, .Net, macOS, Android, etc.). The SDKs
+provide a convenient way to create programmatic access to KMS and other Amazon Web Services services.
+For example, the SDKs take care of tasks such as signing requests (see below), managing
+errors, and retrying requests automatically. For more information about the Amazon Web Services SDKs,
+including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools
+for Amazon Web Services</a>.</p>
 </note>
 <p>We recommend that you use the Amazon Web Services SDKs to make programmatic API calls to KMS.</p>
-<p>Clients must support TLS (Transport Layer Security) 1.0. We recommend TLS 1.2. Clients
-must also support cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral
-Diffie-Hellman (DHE) or Elliptic Curve Ephemeral Diffie-Hellman (ECDHE). Most modern systems
-such as Java 7 and later support these modes.</p>
+<p>If you need to use FIPS 140-2 validated cryptographic modules when communicating with
+Amazon Web Services, use one of the FIPS endpoints in your preferred Amazon Web Services Region. If you need communicate
+over IPv6, use the dual-stack endpoint in your preferred Amazon Web Services Region. For more information
+see <a href="https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region">Service
+endpoints</a> in the Key Management Service topic of the <i>Amazon Web Services General Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/ipv6-kms.html">Dual-stack endpoint
+support</a> in the KMS Developer Guide.</p>
+<p>All KMS API calls must be signed and be transmitted using Transport Layer Security
+(TLS). KMS recommends you always use the latest supported TLS version. Clients must also
+support cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral Diffie-Hellman
+(DHE) or Elliptic Curve Ephemeral Diffie-Hellman (ECDHE). Most modern systems such as Java 7
+and later support these modes.</p>
+<note>
+<p>With current technology, brute force attacks on KMS TLS cipher suite key exchange
+mechanisms are not feasible. However, cipher suites that use Rivest–Shamir–Adleman (RSA)
+or Diffie-Hellman (DH) key exchange will be susceptible if large-scale quantum computing
+becomes practical.
+<a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf">NIST IR 8547</a>
+on the NIST website establishes a timeline to phase out quantum-vulnerable algorithms
+by 2030 and disallow them entirely by 2035. If your applications rely on the long-term
+confidentiality of KMS API traffic, we recommend that you
+<a href="https://docs.aws.amazon.com/kms/latest/developerguide/pqtls.html">use post-quantum TLS with KMS</a>.
+For more information about post-quantum cybersecurity, see <a href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/">Post-Quantum Cybersecurity Resources</a> on the
+National Security Agency (NSA) website.</p>
+</note>
 <p>
 <b>Signing Requests</b>
 </p>
-<p>Requests must be signed by using an access key ID and a secret access key. We strongly
-recommend that you <i>do not</i> use your Amazon Web Services account (root) access key ID and
-secret key for everyday work with KMS. Instead, use the access key ID and secret access key
-for an IAM user. You can also use the Amazon Web Services Security Token Service to generate temporary
-security credentials that you can use to sign requests.</p>
-<p>All KMS operations require <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
+<p>Requests must be signed using an access key ID and a secret access key. We strongly
+recommend that you do not use your Amazon Web Services account root access key ID and secret access key for
+everyday work. You can use the access key ID and secret access key for an IAM user or you
+can use the Security Token Service (STS) to generate temporary security credentials and use those to sign
+requests. </p>
+<p>All KMS requests must be signed with <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
 <p>
 <b>Logging API Requests</b>
 </p>
@@ -101,8 +120,7 @@ keys and assigning policies, by using the console.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-kms
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-kms`
 - `yarn add @aws-sdk/client-kms`
@@ -114,40 +132,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `KMSClient` and
-the commands you need, for example `CancelKeyDeletionCommand`:
+the commands you need, for example `ListAliasesCommand`:
 
 ```js
 // ES5 example
-const { KMSClient, CancelKeyDeletionCommand } = require("@aws-sdk/client-kms");
+const { KMSClient, ListAliasesCommand } = require("@aws-sdk/client-kms");
 ```
 
 ```ts
 // ES6+ example
-import { KMSClient, CancelKeyDeletionCommand } from "@aws-sdk/client-kms";
+import { KMSClient, ListAliasesCommand } from "@aws-sdk/client-kms";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new KMSClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CancelKeyDeletionCommand(params);
+const params = { /** input parameters */ };
+const command = new ListAliasesCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -162,26 +178,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -197,31 +196,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`KMS` extends `KMSClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`KMSClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-kms";
-const client = new AWS.KMS({ region: "REGION" });
+import { KMS } from "@aws-sdk/client-kms";
+
+const client = new KMS({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.cancelKeyDeletion(params);
+  const data = await client.listAliases(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -229,7 +222,7 @@ try {
 
 // Promises.
 client
-  .cancelKeyDeletion(params)
+  .listAliases(params)
   .then((data) => {
     // process data.
   })
@@ -237,9 +230,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.cancelKeyDeletion(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listAliases(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -265,12 +258,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -291,3 +286,398 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CancelKeyDeletion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/CancelKeyDeletionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CancelKeyDeletionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CancelKeyDeletionCommandOutput/)
+</details>
+<details>
+<summary>
+ConnectCustomKeyStore
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ConnectCustomKeyStoreCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ConnectCustomKeyStoreCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ConnectCustomKeyStoreCommandOutput/)
+</details>
+<details>
+<summary>
+CreateAlias
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/CreateAliasCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateAliasCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateAliasCommandOutput/)
+</details>
+<details>
+<summary>
+CreateCustomKeyStore
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/CreateCustomKeyStoreCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateCustomKeyStoreCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateCustomKeyStoreCommandOutput/)
+</details>
+<details>
+<summary>
+CreateGrant
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/CreateGrantCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateGrantCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateGrantCommandOutput/)
+</details>
+<details>
+<summary>
+CreateKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/CreateKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/CreateKeyCommandOutput/)
+</details>
+<details>
+<summary>
+Decapsulate
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DecapsulateCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DecapsulateCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DecapsulateCommandOutput/)
+</details>
+<details>
+<summary>
+Decrypt
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DecryptCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DecryptCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DecryptCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteAlias
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DeleteAliasCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeleteAliasCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeleteAliasCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteCustomKeyStore
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DeleteCustomKeyStoreCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeleteCustomKeyStoreCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeleteCustomKeyStoreCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteImportedKeyMaterial
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DeleteImportedKeyMaterialCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeleteImportedKeyMaterialCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeleteImportedKeyMaterialCommandOutput/)
+</details>
+<details>
+<summary>
+DeriveSharedSecret
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DeriveSharedSecretCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeriveSharedSecretCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DeriveSharedSecretCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeCustomKeyStores
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DescribeCustomKeyStoresCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DescribeCustomKeyStoresCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DescribeCustomKeyStoresCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DescribeKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DescribeKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DescribeKeyCommandOutput/)
+</details>
+<details>
+<summary>
+DisableKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DisableKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DisableKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DisableKeyCommandOutput/)
+</details>
+<details>
+<summary>
+DisableKeyRotation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DisableKeyRotationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DisableKeyRotationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DisableKeyRotationCommandOutput/)
+</details>
+<details>
+<summary>
+DisconnectCustomKeyStore
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/DisconnectCustomKeyStoreCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DisconnectCustomKeyStoreCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/DisconnectCustomKeyStoreCommandOutput/)
+</details>
+<details>
+<summary>
+EnableKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/EnableKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EnableKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EnableKeyCommandOutput/)
+</details>
+<details>
+<summary>
+EnableKeyRotation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/EnableKeyRotationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EnableKeyRotationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EnableKeyRotationCommandOutput/)
+</details>
+<details>
+<summary>
+Encapsulate
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/EncapsulateCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EncapsulateCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EncapsulateCommandOutput/)
+</details>
+<details>
+<summary>
+Encrypt
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/EncryptCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EncryptCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/EncryptCommandOutput/)
+</details>
+<details>
+<summary>
+GenerateDataKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GenerateDataKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyCommandOutput/)
+</details>
+<details>
+<summary>
+GenerateDataKeyPair
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GenerateDataKeyPairCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyPairCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyPairCommandOutput/)
+</details>
+<details>
+<summary>
+GenerateDataKeyPairWithoutPlaintext
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GenerateDataKeyPairWithoutPlaintextCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyPairWithoutPlaintextCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyPairWithoutPlaintextCommandOutput/)
+</details>
+<details>
+<summary>
+GenerateDataKeyWithoutPlaintext
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GenerateDataKeyWithoutPlaintextCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyWithoutPlaintextCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateDataKeyWithoutPlaintextCommandOutput/)
+</details>
+<details>
+<summary>
+GenerateMac
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GenerateMacCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateMacCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateMacCommandOutput/)
+</details>
+<details>
+<summary>
+GenerateRandom
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GenerateRandomCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateRandomCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GenerateRandomCommandOutput/)
+</details>
+<details>
+<summary>
+GetKeyLastUsage
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GetKeyLastUsageCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetKeyLastUsageCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetKeyLastUsageCommandOutput/)
+</details>
+<details>
+<summary>
+GetKeyPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GetKeyPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetKeyPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetKeyPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+GetKeyRotationStatus
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GetKeyRotationStatusCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetKeyRotationStatusCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetKeyRotationStatusCommandOutput/)
+</details>
+<details>
+<summary>
+GetParametersForImport
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GetParametersForImportCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetParametersForImportCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetParametersForImportCommandOutput/)
+</details>
+<details>
+<summary>
+GetPublicKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/GetPublicKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetPublicKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/GetPublicKeyCommandOutput/)
+</details>
+<details>
+<summary>
+ImportKeyMaterial
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ImportKeyMaterialCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ImportKeyMaterialCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ImportKeyMaterialCommandOutput/)
+</details>
+<details>
+<summary>
+ListAliases
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListAliasesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListAliasesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListAliasesCommandOutput/)
+</details>
+<details>
+<summary>
+ListGrants
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListGrantsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListGrantsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListGrantsCommandOutput/)
+</details>
+<details>
+<summary>
+ListKeyPolicies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListKeyPoliciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListKeyPoliciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListKeyPoliciesCommandOutput/)
+</details>
+<details>
+<summary>
+ListKeyRotations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListKeyRotationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListKeyRotationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListKeyRotationsCommandOutput/)
+</details>
+<details>
+<summary>
+ListKeys
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListKeysCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListKeysCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListKeysCommandOutput/)
+</details>
+<details>
+<summary>
+ListResourceTags
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListResourceTagsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListResourceTagsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListResourceTagsCommandOutput/)
+</details>
+<details>
+<summary>
+ListRetirableGrants
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ListRetirableGrantsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListRetirableGrantsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ListRetirableGrantsCommandOutput/)
+</details>
+<details>
+<summary>
+PutKeyPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/PutKeyPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/PutKeyPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/PutKeyPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+ReEncrypt
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ReEncryptCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ReEncryptCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ReEncryptCommandOutput/)
+</details>
+<details>
+<summary>
+ReplicateKey
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ReplicateKeyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ReplicateKeyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ReplicateKeyCommandOutput/)
+</details>
+<details>
+<summary>
+RetireGrant
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/RetireGrantCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/RetireGrantCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/RetireGrantCommandOutput/)
+</details>
+<details>
+<summary>
+RevokeGrant
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/RevokeGrantCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/RevokeGrantCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/RevokeGrantCommandOutput/)
+</details>
+<details>
+<summary>
+RotateKeyOnDemand
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/RotateKeyOnDemandCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/RotateKeyOnDemandCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/RotateKeyOnDemandCommandOutput/)
+</details>
+<details>
+<summary>
+ScheduleKeyDeletion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/ScheduleKeyDeletionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ScheduleKeyDeletionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/ScheduleKeyDeletionCommandOutput/)
+</details>
+<details>
+<summary>
+Sign
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/SignCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/SignCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/SignCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateAlias
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/UpdateAliasCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdateAliasCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdateAliasCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateCustomKeyStore
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/UpdateCustomKeyStoreCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdateCustomKeyStoreCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdateCustomKeyStoreCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateKeyDescription
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/UpdateKeyDescriptionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdateKeyDescriptionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdateKeyDescriptionCommandOutput/)
+</details>
+<details>
+<summary>
+UpdatePrimaryRegion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/UpdatePrimaryRegionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdatePrimaryRegionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/UpdatePrimaryRegionCommandOutput/)
+</details>
+<details>
+<summary>
+Verify
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/VerifyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/VerifyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/VerifyCommandOutput/)
+</details>
+<details>
+<summary>
+VerifyMac
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/kms/command/VerifyMacCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/VerifyMacCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-kms/Interface/VerifyMacCommandOutput/)
+</details>

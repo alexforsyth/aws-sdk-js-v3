@@ -1,99 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateOrganizationRequest, CreateOrganizationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateOrganizationCommand,
-  serializeAws_json1_1CreateOrganizationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateOrganizationRequest, CreateOrganizationResponse } from "../models/models_0";
+import { CreateOrganization$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateOrganizationCommand}.
+ */
 export interface CreateOrganizationCommandInput extends CreateOrganizationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateOrganizationCommand}.
+ */
 export interface CreateOrganizationCommandOutput extends CreateOrganizationResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html">Adding an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>
- *          <p>You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> and <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html">Choosing the default domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>
- *          <p>Optionally, you can use a customer managed master key from AWS Key Management Service
- *          (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a
- *          default AWS managed master key for you.</p>
+ * <p>Creates a new WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new WorkMail directory for you. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html">Adding an organization</a> in the <i>WorkMail Administrator Guide</i>.</p>
+ *          <p>You can associate multiple email domains with an organization, then choose your
+ *          default email domain from the WorkMail console. You can also associate a domain that is managed
+ *          in an Amazon Route 53 public hosted zone. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a
+ *             domain</a> and <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html">Choosing the default domain</a>
+ *          in the <i>WorkMail Administrator Guide</i>.</p>
+ *          <p>Optionally, you can use a customer managed key from AWS Key Management Service (AWS
+ *          KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, WorkMail
+ *          creates a default, AWS managed key for you.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkMailClient, CreateOrganizationCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, CreateOrganizationCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // CreateOrganizationRequest
+ *   DirectoryId: "STRING_VALUE",
+ *   Alias: "STRING_VALUE", // required
+ *   ClientToken: "STRING_VALUE",
+ *   Domains: [ // Domains
+ *     { // Domain
+ *       DomainName: "STRING_VALUE", // required
+ *       HostedZoneId: "STRING_VALUE",
+ *     },
+ *   ],
+ *   KmsKeyArn: "STRING_VALUE",
+ *   EnableInteroperability: true || false,
+ * };
  * const command = new CreateOrganizationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateOrganizationResponse
+ * //   OrganizationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateOrganizationCommandInput - {@link CreateOrganizationCommandInput}
+ * @returns {@link CreateOrganizationCommandOutput}
  * @see {@link CreateOrganizationCommandInput} for command's `input` shape.
  * @see {@link CreateOrganizationCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link DirectoryInUseException} (client fault)
+ *  <p>The directory is already in use by another WorkMail organization in the same account and Region.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The directory is unavailable. It might be located in another Region or deleted.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeds the limit of the resource.</p>
+ *
+ * @throws {@link NameAvailabilityException} (client fault)
+ *  <p>The user, group, or resource name isn't unique in WorkMail.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class CreateOrganizationCommand extends $Command<
-  CreateOrganizationCommandInput,
-  CreateOrganizationCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateOrganizationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateOrganizationCommandInput, CreateOrganizationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "CreateOrganizationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateOrganizationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateOrganizationResponse.filterSensitiveLog,
+export class CreateOrganizationCommand extends command<CreateOrganizationCommandInput, CreateOrganizationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateOrganization",
+  CreateOrganization$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateOrganizationRequest;
+      output: CreateOrganizationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateOrganizationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateOrganizationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateOrganizationCommandOutput> {
-    return deserializeAws_json1_1CreateOrganizationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateOrganizationCommandInput;
+      output: CreateOrganizationCommandOutput;
+    };
+  };
 }

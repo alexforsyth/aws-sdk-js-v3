@@ -1,110 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutInlinePolicyToPermissionSetRequest, PutInlinePolicyToPermissionSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutInlinePolicyToPermissionSetCommand,
-  serializeAws_json1_1PutInlinePolicyToPermissionSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
-
-export interface PutInlinePolicyToPermissionSetCommandInput extends PutInlinePolicyToPermissionSetRequest {}
-export interface PutInlinePolicyToPermissionSetCommandOutput
-  extends PutInlinePolicyToPermissionSetResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutInlinePolicyToPermissionSetRequest, PutInlinePolicyToPermissionSetResponse } from "../models/models_0";
+import { PutInlinePolicyToPermissionSet$ } from "../schemas/schemas_0";
 
 /**
- * <p>Attaches an IAM inline policy to a permission set.</p>
- *          <note>
- *             <p>If the permission set is already referenced by one or more account assignments, you will
- *         need to call <code>
- *                   <a>ProvisionPermissionSet</a>
- *                </code> after this action to
- *         apply the corresponding IAM policy updates to all assigned accounts.</p>
- *          </note>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutInlinePolicyToPermissionSetCommand}.
+ */
+export interface PutInlinePolicyToPermissionSetCommandInput extends PutInlinePolicyToPermissionSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutInlinePolicyToPermissionSetCommand}.
+ */
+export interface PutInlinePolicyToPermissionSetCommandOutput extends PutInlinePolicyToPermissionSetResponse, __MetadataBearer {}
+
+/**
+ * <p>Attaches an inline policy to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSOAdminClient, PutInlinePolicyToPermissionSetCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, PutInlinePolicyToPermissionSetCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // PutInlinePolicyToPermissionSetRequest
+ *   InstanceArn: "STRING_VALUE", // required
+ *   PermissionSetArn: "STRING_VALUE", // required
+ *   InlinePolicy: "STRING_VALUE", // required
+ * };
  * const command = new PutInlinePolicyToPermissionSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutInlinePolicyToPermissionSetCommandInput - {@link PutInlinePolicyToPermissionSetCommandInput}
+ * @returns {@link PutInlinePolicyToPermissionSetCommandOutput}
  * @see {@link PutInlinePolicyToPermissionSetCommandInput} for command's `input` shape.
  * @see {@link PutInlinePolicyToPermissionSetCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Occurs when a conflict with a previous successful write is detected. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Indicates that a requested resource is not found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Indicates that the principal has crossed the permitted number of resources that can be created.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class PutInlinePolicyToPermissionSetCommand extends $Command<
-  PutInlinePolicyToPermissionSetCommandInput,
-  PutInlinePolicyToPermissionSetCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutInlinePolicyToPermissionSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutInlinePolicyToPermissionSetCommandInput, PutInlinePolicyToPermissionSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "PutInlinePolicyToPermissionSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutInlinePolicyToPermissionSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutInlinePolicyToPermissionSetResponse.filterSensitiveLog,
+export class PutInlinePolicyToPermissionSetCommand extends command<PutInlinePolicyToPermissionSetCommandInput, PutInlinePolicyToPermissionSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutInlinePolicyToPermissionSet",
+  PutInlinePolicyToPermissionSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutInlinePolicyToPermissionSetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutInlinePolicyToPermissionSetCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutInlinePolicyToPermissionSetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutInlinePolicyToPermissionSetCommandOutput> {
-    return deserializeAws_json1_1PutInlinePolicyToPermissionSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutInlinePolicyToPermissionSetCommandInput;
+      output: PutInlinePolicyToPermissionSetCommandOutput;
+    };
+  };
 }

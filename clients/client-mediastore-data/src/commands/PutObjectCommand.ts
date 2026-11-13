@@ -1,33 +1,28 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadInputTypes } from "@smithy/types";
 
-import { MediaStoreDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreDataClient";
-import { PutObjectRequest, PutObjectResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutObjectCommand,
-  serializeAws_restJson1PutObjectCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutObjectRequest, PutObjectResponse } from "../models/models_0";
+import { PutObject$ } from "../schemas/schemas_0";
 
-type PutObjectCommandInputType = Omit<PutObjectRequest, "Body"> & {
-  /**
-   * For *`PutObjectRequest["Body"]`*, see {@link PutObjectRequest.Body}.
-   */
-  Body: PutObjectRequest["Body"] | string | Uint8Array | Buffer;
-};
 /**
- * This interface extends from `PutObjectRequest` interface. There are more parameters than `Body` defined in {@link PutObjectRequest}
+ * @public
  */
-export interface PutObjectCommandInput extends PutObjectCommandInputType {}
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutObjectCommand}.
+ */
+export interface PutObjectCommandInput extends Omit<PutObjectRequest, "Body"> {
+  Body: StreamingBlobPayloadInputTypes;
+}
+
+/**
+ * @public
+ *
+ * The output of {@link PutObjectCommand}.
+ */
 export interface PutObjectCommandOutput extends PutObjectResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +32,60 @@ export interface PutObjectCommandOutput extends PutObjectResponse, __MetadataBea
  * ```javascript
  * import { MediaStoreDataClient, PutObjectCommand } from "@aws-sdk/client-mediastore-data"; // ES Modules import
  * // const { MediaStoreDataClient, PutObjectCommand } = require("@aws-sdk/client-mediastore-data"); // CommonJS import
+ * // import type { MediaStoreDataClientConfig } from "@aws-sdk/client-mediastore-data";
+ * const config = {}; // type is MediaStoreDataClientConfig
  * const client = new MediaStoreDataClient(config);
+ * const input = { // PutObjectRequest
+ *   Body: "MULTIPLE_TYPES_ACCEPTED", // see \@smithy/types -> StreamingBlobPayloadInputTypes // required
+ *   Path: "STRING_VALUE", // required
+ *   ContentType: "STRING_VALUE",
+ *   CacheControl: "STRING_VALUE",
+ *   StorageClass: "TEMPORAL",
+ *   UploadAvailability: "STANDARD" || "STREAMING",
+ * };
  * const command = new PutObjectCommand(input);
  * const response = await client.send(command);
+ * // { // PutObjectResponse
+ * //   ContentSHA256: "STRING_VALUE",
+ * //   ETag: "STRING_VALUE",
+ * //   StorageClass: "TEMPORAL",
+ * // };
+ *
  * ```
  *
+ * @param PutObjectCommandInput - {@link PutObjectCommandInput}
+ * @returns {@link PutObjectCommandOutput}
  * @see {@link PutObjectCommandInput} for command's `input` shape.
  * @see {@link PutObjectCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreDataClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreDataClientResolvedConfig | config} for MediaStoreDataClient's `config` shape.
  *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The specified container was not found for the specified account.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link MediaStoreDataServiceException}
+ * <p>Base exception class for all service exceptions from MediaStoreData service.</p>
+ *
+ *
+ * @public
  */
-export class PutObjectCommand extends $Command<
-  PutObjectCommandInput,
-  PutObjectCommandOutput,
-  MediaStoreDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutObjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutObjectCommandInput, PutObjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreDataClient";
-    const commandName = "PutObjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutObjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutObjectResponse.filterSensitiveLog,
+export class PutObjectCommand extends command<PutObjectCommandInput, PutObjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutObject",
+  PutObject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutObjectRequest;
+      output: PutObjectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutObjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutObjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutObjectCommandOutput> {
-    return deserializeAws_restJson1PutObjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutObjectCommandInput;
+      output: PutObjectCommandOutput;
+    };
+  };
 }

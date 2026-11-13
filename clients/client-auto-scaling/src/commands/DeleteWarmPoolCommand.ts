@@ -1,97 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingClient";
-import { DeleteWarmPoolAnswer, DeleteWarmPoolType } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteWarmPoolCommand,
-  serializeAws_queryDeleteWarmPoolCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteWarmPoolAnswer, DeleteWarmPoolType } from "../models/models_0";
+import { DeleteWarmPool$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteWarmPoolCommand}.
+ */
 export interface DeleteWarmPoolCommandInput extends DeleteWarmPoolType {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteWarmPoolCommand}.
+ */
 export interface DeleteWarmPoolCommandOutput extends DeleteWarmPoolAnswer, __MetadataBearer {}
 
 /**
  * <p>Deletes the warm pool for the specified Auto Scaling group.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm pools for
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm pools for
  *                 Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AutoScalingClient, DeleteWarmPoolCommand } from "@aws-sdk/client-auto-scaling"; // ES Modules import
  * // const { AutoScalingClient, DeleteWarmPoolCommand } = require("@aws-sdk/client-auto-scaling"); // CommonJS import
+ * // import type { AutoScalingClientConfig } from "@aws-sdk/client-auto-scaling";
+ * const config = {}; // type is AutoScalingClientConfig
  * const client = new AutoScalingClient(config);
+ * const input = { // DeleteWarmPoolType
+ *   AutoScalingGroupName: "STRING_VALUE", // required
+ *   ForceDelete: true || false,
+ * };
  * const command = new DeleteWarmPoolCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteWarmPoolCommandInput - {@link DeleteWarmPoolCommandInput}
+ * @returns {@link DeleteWarmPoolCommandOutput}
  * @see {@link DeleteWarmPoolCommandInput} for command's `input` shape.
  * @see {@link DeleteWarmPoolCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingClientResolvedConfig | config} for AutoScalingClient's `config` shape.
  *
+ * @throws {@link LimitExceededFault} (client fault)
+ *  <p>You have already reached a limit for your Amazon EC2 Auto Scaling
+ *             resources (for example, Auto Scaling groups, launch configurations, or lifecycle hooks). For
+ *             more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html">DescribeAccountLimits</a> in the <i>Amazon EC2 Auto Scaling API
+ *             Reference</i>.</p>
+ *
+ * @throws {@link ResourceContentionFault} (server fault)
+ *  <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
+ *             instance, or load balancer).</p>
+ *
+ * @throws {@link ResourceInUseFault} (client fault)
+ *  <p>The operation can't be performed because the resource is in use.</p>
+ *
+ * @throws {@link ScalingActivityInProgressFault} (client fault)
+ *  <p>The operation can't be performed because there are scaling activities in
+ *             progress.</p>
+ *
+ * @throws {@link AutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from AutoScaling service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteWarmPoolCommand extends $Command<
-  DeleteWarmPoolCommandInput,
-  DeleteWarmPoolCommandOutput,
-  AutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteWarmPoolCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteWarmPoolCommandInput, DeleteWarmPoolCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingClient";
-    const commandName = "DeleteWarmPoolCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteWarmPoolType.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteWarmPoolAnswer.filterSensitiveLog,
+export class DeleteWarmPoolCommand extends command<DeleteWarmPoolCommandInput, DeleteWarmPoolCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteWarmPool",
+  DeleteWarmPool$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWarmPoolType;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteWarmPoolCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteWarmPoolCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteWarmPoolCommandOutput> {
-    return deserializeAws_queryDeleteWarmPoolCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteWarmPoolCommandInput;
+      output: DeleteWarmPoolCommandOutput;
+    };
+  };
 }

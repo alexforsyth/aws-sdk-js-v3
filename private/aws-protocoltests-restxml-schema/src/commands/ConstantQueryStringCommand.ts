@@ -1,0 +1,76 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConstantQueryStringInput } from "../models/models_0";
+import { ConstantQueryString$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ConstantQueryStringCommand}.
+ */
+export interface ConstantQueryStringCommandInput extends ConstantQueryStringInput {}
+/**
+ * @public
+ *
+ * The output of {@link ConstantQueryStringCommand}.
+ */
+export interface ConstantQueryStringCommandOutput extends __MetadataBearer {}
+
+/**
+ * This example uses a constant query string parameters and a label.
+ * This simply tests that labels and query string parameters are
+ * compatible. The fixed query string parameter named "hello" should
+ * in no way conflict with the label, `\{hello\}`.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestXmlProtocolClient, ConstantQueryStringCommand } from "@aws-sdk/aws-protocoltests-restxml-schema"; // ES Modules import
+ * // const { RestXmlProtocolClient, ConstantQueryStringCommand } = require("@aws-sdk/aws-protocoltests-restxml-schema"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml-schema";
+ * const config = {}; // type is RestXmlProtocolClientConfig
+ * const client = new RestXmlProtocolClient(config);
+ * const input = { // ConstantQueryStringInput
+ *   hello: "STRING_VALUE", // required
+ * };
+ * const command = new ConstantQueryStringCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param ConstantQueryStringCommandInput - {@link ConstantQueryStringCommandInput}
+ * @returns {@link ConstantQueryStringCommandOutput}
+ * @see {@link ConstantQueryStringCommandInput} for command's `input` shape.
+ * @see {@link ConstantQueryStringCommandOutput} for command's `response` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
+ *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
+ */
+export class ConstantQueryStringCommand extends command<ConstantQueryStringCommandInput, ConstantQueryStringCommandOutput>(
+  _ep0,
+  _mw0,
+  "ConstantQueryString",
+  ConstantQueryString$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConstantQueryStringInput;
+      output: {};
+    };
+    sdk: {
+      input: ConstantQueryStringCommandInput;
+      output: ConstantQueryStringCommandOutput;
+    };
+  };
+}

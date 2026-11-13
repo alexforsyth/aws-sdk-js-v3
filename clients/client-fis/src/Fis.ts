@@ -1,518 +1,708 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateExperimentTemplateCommandInput,
+  type CreateExperimentTemplateCommandOutput,
   CreateExperimentTemplateCommand,
-  CreateExperimentTemplateCommandInput,
-  CreateExperimentTemplateCommandOutput,
 } from "./commands/CreateExperimentTemplateCommand";
 import {
-  DeleteExperimentTemplateCommand,
-  DeleteExperimentTemplateCommandInput,
-  DeleteExperimentTemplateCommandOutput,
-} from "./commands/DeleteExperimentTemplateCommand";
-import { GetActionCommand, GetActionCommandInput, GetActionCommandOutput } from "./commands/GetActionCommand";
+  type CreateTargetAccountConfigurationCommandInput,
+  type CreateTargetAccountConfigurationCommandOutput,
+  CreateTargetAccountConfigurationCommand,
+} from "./commands/CreateTargetAccountConfigurationCommand";
 import {
+  type DeleteExperimentTemplateCommandInput,
+  type DeleteExperimentTemplateCommandOutput,
+  DeleteExperimentTemplateCommand,
+} from "./commands/DeleteExperimentTemplateCommand";
+import {
+  type DeleteTargetAccountConfigurationCommandInput,
+  type DeleteTargetAccountConfigurationCommandOutput,
+  DeleteTargetAccountConfigurationCommand,
+} from "./commands/DeleteTargetAccountConfigurationCommand";
+import { type GetActionCommandInput, type GetActionCommandOutput, GetActionCommand } from "./commands/GetActionCommand";
+import {
+  type GetExperimentCommandInput,
+  type GetExperimentCommandOutput,
   GetExperimentCommand,
-  GetExperimentCommandInput,
-  GetExperimentCommandOutput,
 } from "./commands/GetExperimentCommand";
 import {
-  GetExperimentTemplateCommand,
-  GetExperimentTemplateCommandInput,
-  GetExperimentTemplateCommandOutput,
-} from "./commands/GetExperimentTemplateCommand";
-import { ListActionsCommand, ListActionsCommandInput, ListActionsCommandOutput } from "./commands/ListActionsCommand";
+  type GetExperimentTargetAccountConfigurationCommandInput,
+  type GetExperimentTargetAccountConfigurationCommandOutput,
+  GetExperimentTargetAccountConfigurationCommand,
+} from "./commands/GetExperimentTargetAccountConfigurationCommand";
 import {
+  type GetExperimentTemplateCommandInput,
+  type GetExperimentTemplateCommandOutput,
+  GetExperimentTemplateCommand,
+} from "./commands/GetExperimentTemplateCommand";
+import {
+  type GetSafetyLeverCommandInput,
+  type GetSafetyLeverCommandOutput,
+  GetSafetyLeverCommand,
+} from "./commands/GetSafetyLeverCommand";
+import {
+  type GetTargetAccountConfigurationCommandInput,
+  type GetTargetAccountConfigurationCommandOutput,
+  GetTargetAccountConfigurationCommand,
+} from "./commands/GetTargetAccountConfigurationCommand";
+import {
+  type GetTargetResourceTypeCommandInput,
+  type GetTargetResourceTypeCommandOutput,
+  GetTargetResourceTypeCommand,
+} from "./commands/GetTargetResourceTypeCommand";
+import {
+  type ListActionsCommandInput,
+  type ListActionsCommandOutput,
+  ListActionsCommand,
+} from "./commands/ListActionsCommand";
+import {
+  type ListExperimentResolvedTargetsCommandInput,
+  type ListExperimentResolvedTargetsCommandOutput,
+  ListExperimentResolvedTargetsCommand,
+} from "./commands/ListExperimentResolvedTargetsCommand";
+import {
+  type ListExperimentsCommandInput,
+  type ListExperimentsCommandOutput,
   ListExperimentsCommand,
-  ListExperimentsCommandInput,
-  ListExperimentsCommandOutput,
 } from "./commands/ListExperimentsCommand";
 import {
+  type ListExperimentTargetAccountConfigurationsCommandInput,
+  type ListExperimentTargetAccountConfigurationsCommandOutput,
+  ListExperimentTargetAccountConfigurationsCommand,
+} from "./commands/ListExperimentTargetAccountConfigurationsCommand";
+import {
+  type ListExperimentTemplatesCommandInput,
+  type ListExperimentTemplatesCommandOutput,
   ListExperimentTemplatesCommand,
-  ListExperimentTemplatesCommandInput,
-  ListExperimentTemplatesCommandOutput,
 } from "./commands/ListExperimentTemplatesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTargetAccountConfigurationsCommandInput,
+  type ListTargetAccountConfigurationsCommandOutput,
+  ListTargetAccountConfigurationsCommand,
+} from "./commands/ListTargetAccountConfigurationsCommand";
+import {
+  type ListTargetResourceTypesCommandInput,
+  type ListTargetResourceTypesCommandOutput,
+  ListTargetResourceTypesCommand,
+} from "./commands/ListTargetResourceTypesCommand";
+import {
+  type StartExperimentCommandInput,
+  type StartExperimentCommandOutput,
   StartExperimentCommand,
-  StartExperimentCommandInput,
-  StartExperimentCommandOutput,
 } from "./commands/StartExperimentCommand";
 import {
+  type StopExperimentCommandInput,
+  type StopExperimentCommandOutput,
   StopExperimentCommand,
-  StopExperimentCommandInput,
-  StopExperimentCommandOutput,
 } from "./commands/StopExperimentCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateExperimentTemplateCommandInput,
+  type UpdateExperimentTemplateCommandOutput,
   UpdateExperimentTemplateCommand,
-  UpdateExperimentTemplateCommandInput,
-  UpdateExperimentTemplateCommandOutput,
 } from "./commands/UpdateExperimentTemplateCommand";
+import {
+  type UpdateSafetyLeverStateCommandInput,
+  type UpdateSafetyLeverStateCommandOutput,
+  UpdateSafetyLeverStateCommand,
+} from "./commands/UpdateSafetyLeverStateCommand";
+import {
+  type UpdateTargetAccountConfigurationCommandInput,
+  type UpdateTargetAccountConfigurationCommandOutput,
+  UpdateTargetAccountConfigurationCommand,
+} from "./commands/UpdateTargetAccountConfigurationCommand";
 import { FisClient } from "./FisClient";
+import { paginateListActions } from "./pagination/ListActionsPaginator";
+import { paginateListExperimentResolvedTargets } from "./pagination/ListExperimentResolvedTargetsPaginator";
+import { paginateListExperiments } from "./pagination/ListExperimentsPaginator";
+import { paginateListExperimentTemplates } from "./pagination/ListExperimentTemplatesPaginator";
+import { paginateListTargetAccountConfigurations } from "./pagination/ListTargetAccountConfigurationsPaginator";
+import { paginateListTargetResourceTypes } from "./pagination/ListTargetResourceTypesPaginator";
+
+const commands = {
+  CreateExperimentTemplateCommand,
+  CreateTargetAccountConfigurationCommand,
+  DeleteExperimentTemplateCommand,
+  DeleteTargetAccountConfigurationCommand,
+  GetActionCommand,
+  GetExperimentCommand,
+  GetExperimentTargetAccountConfigurationCommand,
+  GetExperimentTemplateCommand,
+  GetSafetyLeverCommand,
+  GetTargetAccountConfigurationCommand,
+  GetTargetResourceTypeCommand,
+  ListActionsCommand,
+  ListExperimentResolvedTargetsCommand,
+  ListExperimentsCommand,
+  ListExperimentTargetAccountConfigurationsCommand,
+  ListExperimentTemplatesCommand,
+  ListTagsForResourceCommand,
+  ListTargetAccountConfigurationsCommand,
+  ListTargetResourceTypesCommand,
+  StartExperimentCommand,
+  StopExperimentCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateExperimentTemplateCommand,
+  UpdateSafetyLeverStateCommand,
+  UpdateTargetAccountConfigurationCommand,
+};
+const paginators = {
+  paginateListActions,
+  paginateListExperimentResolvedTargets,
+  paginateListExperiments,
+  paginateListExperimentTemplates,
+  paginateListTargetAccountConfigurations,
+  paginateListTargetResourceTypes,
+};
 
 /**
- * <p>AWS Fault Injection Simulator is a managed service that enables you to perform fault injection
- *            experiments on your AWS workloads. For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">AWS Fault Injection Simulator User Guide</a>.</p>
+ * @public
  */
-export class Fis extends FisClient {
+export interface FisRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Fis {
   /**
-   * <p>Creates an experiment template. </p>
-   *          <p>To create a template, specify the following information: </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <b>Targets</b>: A target can be a specific resource
-   *                in your AWS environment, or one or more resources that match criteria that you
-   *                specify, for example, resources that have specific tags.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <b>Actions</b>: The actions to carry out on the
-   *                target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <b>Stop conditions</b>: If a stop condition is
-   *                triggered while an experiment is running, the experiment is automatically
-   *                stopped. You can define a stop condition as a CloudWatch alarm.</p>
-   *             </li>
-   *          </ul>
-   *          <p>For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">AWS Fault Injection Simulator User Guide</a>.</p>
+   * @see {@link CreateExperimentTemplateCommand}
    */
-  public createExperimentTemplate(
+  createExperimentTemplate(
     args: CreateExperimentTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<CreateExperimentTemplateCommandOutput>;
-  public createExperimentTemplate(
+  createExperimentTemplate(
     args: CreateExperimentTemplateCommandInput,
     cb: (err: any, data?: CreateExperimentTemplateCommandOutput) => void
   ): void;
-  public createExperimentTemplate(
+  createExperimentTemplate(
     args: CreateExperimentTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: CreateExperimentTemplateCommandOutput) => void
   ): void;
-  public createExperimentTemplate(
-    args: CreateExperimentTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateExperimentTemplateCommandOutput) => void),
-    cb?: (err: any, data?: CreateExperimentTemplateCommandOutput) => void
-  ): Promise<CreateExperimentTemplateCommandOutput> | void {
-    const command = new CreateExperimentTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified experiment template.</p>
+   * @see {@link CreateTargetAccountConfigurationCommand}
    */
-  public deleteExperimentTemplate(
+  createTargetAccountConfiguration(
+    args: CreateTargetAccountConfigurationCommandInput,
+    options?: FisRequestOptions
+  ): Promise<CreateTargetAccountConfigurationCommandOutput>;
+  createTargetAccountConfiguration(
+    args: CreateTargetAccountConfigurationCommandInput,
+    cb: (err: any, data?: CreateTargetAccountConfigurationCommandOutput) => void
+  ): void;
+  createTargetAccountConfiguration(
+    args: CreateTargetAccountConfigurationCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: CreateTargetAccountConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteExperimentTemplateCommand}
+   */
+  deleteExperimentTemplate(
     args: DeleteExperimentTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<DeleteExperimentTemplateCommandOutput>;
-  public deleteExperimentTemplate(
+  deleteExperimentTemplate(
     args: DeleteExperimentTemplateCommandInput,
     cb: (err: any, data?: DeleteExperimentTemplateCommandOutput) => void
   ): void;
-  public deleteExperimentTemplate(
+  deleteExperimentTemplate(
     args: DeleteExperimentTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: DeleteExperimentTemplateCommandOutput) => void
   ): void;
-  public deleteExperimentTemplate(
-    args: DeleteExperimentTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteExperimentTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteExperimentTemplateCommandOutput) => void
-  ): Promise<DeleteExperimentTemplateCommandOutput> | void {
-    const command = new DeleteExperimentTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about the specified AWS FIS action.</p>
+   * @see {@link DeleteTargetAccountConfigurationCommand}
    */
-  public getAction(args: GetActionCommandInput, options?: __HttpHandlerOptions): Promise<GetActionCommandOutput>;
-  public getAction(args: GetActionCommandInput, cb: (err: any, data?: GetActionCommandOutput) => void): void;
-  public getAction(
+  deleteTargetAccountConfiguration(
+    args: DeleteTargetAccountConfigurationCommandInput,
+    options?: FisRequestOptions
+  ): Promise<DeleteTargetAccountConfigurationCommandOutput>;
+  deleteTargetAccountConfiguration(
+    args: DeleteTargetAccountConfigurationCommandInput,
+    cb: (err: any, data?: DeleteTargetAccountConfigurationCommandOutput) => void
+  ): void;
+  deleteTargetAccountConfiguration(
+    args: DeleteTargetAccountConfigurationCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: DeleteTargetAccountConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetActionCommand}
+   */
+  getAction(
     args: GetActionCommandInput,
-    options: __HttpHandlerOptions,
+    options?: FisRequestOptions
+  ): Promise<GetActionCommandOutput>;
+  getAction(
+    args: GetActionCommandInput,
     cb: (err: any, data?: GetActionCommandOutput) => void
   ): void;
-  public getAction(
+  getAction(
     args: GetActionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetActionCommandOutput) => void),
-    cb?: (err: any, data?: GetActionCommandOutput) => void
-  ): Promise<GetActionCommandOutput> | void {
-    const command = new GetActionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: FisRequestOptions,
+    cb: (err: any, data?: GetActionCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about the specified experiment.</p>
+   * @see {@link GetExperimentCommand}
    */
-  public getExperiment(
+  getExperiment(
     args: GetExperimentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<GetExperimentCommandOutput>;
-  public getExperiment(
+  getExperiment(
     args: GetExperimentCommandInput,
     cb: (err: any, data?: GetExperimentCommandOutput) => void
   ): void;
-  public getExperiment(
+  getExperiment(
     args: GetExperimentCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: GetExperimentCommandOutput) => void
   ): void;
-  public getExperiment(
-    args: GetExperimentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetExperimentCommandOutput) => void),
-    cb?: (err: any, data?: GetExperimentCommandOutput) => void
-  ): Promise<GetExperimentCommandOutput> | void {
-    const command = new GetExperimentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about the specified experiment template.</p>
+   * @see {@link GetExperimentTargetAccountConfigurationCommand}
    */
-  public getExperimentTemplate(
+  getExperimentTargetAccountConfiguration(
+    args: GetExperimentTargetAccountConfigurationCommandInput,
+    options?: FisRequestOptions
+  ): Promise<GetExperimentTargetAccountConfigurationCommandOutput>;
+  getExperimentTargetAccountConfiguration(
+    args: GetExperimentTargetAccountConfigurationCommandInput,
+    cb: (err: any, data?: GetExperimentTargetAccountConfigurationCommandOutput) => void
+  ): void;
+  getExperimentTargetAccountConfiguration(
+    args: GetExperimentTargetAccountConfigurationCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: GetExperimentTargetAccountConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetExperimentTemplateCommand}
+   */
+  getExperimentTemplate(
     args: GetExperimentTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<GetExperimentTemplateCommandOutput>;
-  public getExperimentTemplate(
+  getExperimentTemplate(
     args: GetExperimentTemplateCommandInput,
     cb: (err: any, data?: GetExperimentTemplateCommandOutput) => void
   ): void;
-  public getExperimentTemplate(
+  getExperimentTemplate(
     args: GetExperimentTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: GetExperimentTemplateCommandOutput) => void
   ): void;
-  public getExperimentTemplate(
-    args: GetExperimentTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetExperimentTemplateCommandOutput) => void),
-    cb?: (err: any, data?: GetExperimentTemplateCommandOutput) => void
-  ): Promise<GetExperimentTemplateCommandOutput> | void {
-    const command = new GetExperimentTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the available AWS FIS actions.</p>
+   * @see {@link GetSafetyLeverCommand}
    */
-  public listActions(args: ListActionsCommandInput, options?: __HttpHandlerOptions): Promise<ListActionsCommandOutput>;
-  public listActions(args: ListActionsCommandInput, cb: (err: any, data?: ListActionsCommandOutput) => void): void;
-  public listActions(
+  getSafetyLever(
+    args: GetSafetyLeverCommandInput,
+    options?: FisRequestOptions
+  ): Promise<GetSafetyLeverCommandOutput>;
+  getSafetyLever(
+    args: GetSafetyLeverCommandInput,
+    cb: (err: any, data?: GetSafetyLeverCommandOutput) => void
+  ): void;
+  getSafetyLever(
+    args: GetSafetyLeverCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: GetSafetyLeverCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTargetAccountConfigurationCommand}
+   */
+  getTargetAccountConfiguration(
+    args: GetTargetAccountConfigurationCommandInput,
+    options?: FisRequestOptions
+  ): Promise<GetTargetAccountConfigurationCommandOutput>;
+  getTargetAccountConfiguration(
+    args: GetTargetAccountConfigurationCommandInput,
+    cb: (err: any, data?: GetTargetAccountConfigurationCommandOutput) => void
+  ): void;
+  getTargetAccountConfiguration(
+    args: GetTargetAccountConfigurationCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: GetTargetAccountConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTargetResourceTypeCommand}
+   */
+  getTargetResourceType(
+    args: GetTargetResourceTypeCommandInput,
+    options?: FisRequestOptions
+  ): Promise<GetTargetResourceTypeCommandOutput>;
+  getTargetResourceType(
+    args: GetTargetResourceTypeCommandInput,
+    cb: (err: any, data?: GetTargetResourceTypeCommandOutput) => void
+  ): void;
+  getTargetResourceType(
+    args: GetTargetResourceTypeCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: GetTargetResourceTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListActionsCommand}
+   */
+  listActions(): Promise<ListActionsCommandOutput>;
+  listActions(
     args: ListActionsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: FisRequestOptions
+  ): Promise<ListActionsCommandOutput>;
+  listActions(
+    args: ListActionsCommandInput,
     cb: (err: any, data?: ListActionsCommandOutput) => void
   ): void;
-  public listActions(
+  listActions(
     args: ListActionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListActionsCommandOutput) => void),
-    cb?: (err: any, data?: ListActionsCommandOutput) => void
-  ): Promise<ListActionsCommandOutput> | void {
-    const command = new ListActionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: FisRequestOptions,
+    cb: (err: any, data?: ListActionsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists your experiments.</p>
+   * @see {@link ListExperimentResolvedTargetsCommand}
    */
-  public listExperiments(
+  listExperimentResolvedTargets(
+    args: ListExperimentResolvedTargetsCommandInput,
+    options?: FisRequestOptions
+  ): Promise<ListExperimentResolvedTargetsCommandOutput>;
+  listExperimentResolvedTargets(
+    args: ListExperimentResolvedTargetsCommandInput,
+    cb: (err: any, data?: ListExperimentResolvedTargetsCommandOutput) => void
+  ): void;
+  listExperimentResolvedTargets(
+    args: ListExperimentResolvedTargetsCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: ListExperimentResolvedTargetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExperimentsCommand}
+   */
+  listExperiments(): Promise<ListExperimentsCommandOutput>;
+  listExperiments(
     args: ListExperimentsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<ListExperimentsCommandOutput>;
-  public listExperiments(
+  listExperiments(
     args: ListExperimentsCommandInput,
     cb: (err: any, data?: ListExperimentsCommandOutput) => void
   ): void;
-  public listExperiments(
+  listExperiments(
     args: ListExperimentsCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: ListExperimentsCommandOutput) => void
   ): void;
-  public listExperiments(
-    args: ListExperimentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListExperimentsCommandOutput) => void),
-    cb?: (err: any, data?: ListExperimentsCommandOutput) => void
-  ): Promise<ListExperimentsCommandOutput> | void {
-    const command = new ListExperimentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists your experiment templates.</p>
+   * @see {@link ListExperimentTargetAccountConfigurationsCommand}
    */
-  public listExperimentTemplates(
+  listExperimentTargetAccountConfigurations(
+    args: ListExperimentTargetAccountConfigurationsCommandInput,
+    options?: FisRequestOptions
+  ): Promise<ListExperimentTargetAccountConfigurationsCommandOutput>;
+  listExperimentTargetAccountConfigurations(
+    args: ListExperimentTargetAccountConfigurationsCommandInput,
+    cb: (err: any, data?: ListExperimentTargetAccountConfigurationsCommandOutput) => void
+  ): void;
+  listExperimentTargetAccountConfigurations(
+    args: ListExperimentTargetAccountConfigurationsCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: ListExperimentTargetAccountConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExperimentTemplatesCommand}
+   */
+  listExperimentTemplates(): Promise<ListExperimentTemplatesCommandOutput>;
+  listExperimentTemplates(
     args: ListExperimentTemplatesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<ListExperimentTemplatesCommandOutput>;
-  public listExperimentTemplates(
+  listExperimentTemplates(
     args: ListExperimentTemplatesCommandInput,
     cb: (err: any, data?: ListExperimentTemplatesCommandOutput) => void
   ): void;
-  public listExperimentTemplates(
+  listExperimentTemplates(
     args: ListExperimentTemplatesCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: ListExperimentTemplatesCommandOutput) => void
   ): void;
-  public listExperimentTemplates(
-    args: ListExperimentTemplatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListExperimentTemplatesCommandOutput) => void),
-    cb?: (err: any, data?: ListExperimentTemplatesCommandOutput) => void
-  ): Promise<ListExperimentTemplatesCommandOutput> | void {
-    const command = new ListExperimentTemplatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags for the specified resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts running an experiment from the specified experiment template.</p>
+   * @see {@link ListTargetAccountConfigurationsCommand}
    */
-  public startExperiment(
+  listTargetAccountConfigurations(
+    args: ListTargetAccountConfigurationsCommandInput,
+    options?: FisRequestOptions
+  ): Promise<ListTargetAccountConfigurationsCommandOutput>;
+  listTargetAccountConfigurations(
+    args: ListTargetAccountConfigurationsCommandInput,
+    cb: (err: any, data?: ListTargetAccountConfigurationsCommandOutput) => void
+  ): void;
+  listTargetAccountConfigurations(
+    args: ListTargetAccountConfigurationsCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: ListTargetAccountConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTargetResourceTypesCommand}
+   */
+  listTargetResourceTypes(): Promise<ListTargetResourceTypesCommandOutput>;
+  listTargetResourceTypes(
+    args: ListTargetResourceTypesCommandInput,
+    options?: FisRequestOptions
+  ): Promise<ListTargetResourceTypesCommandOutput>;
+  listTargetResourceTypes(
+    args: ListTargetResourceTypesCommandInput,
+    cb: (err: any, data?: ListTargetResourceTypesCommandOutput) => void
+  ): void;
+  listTargetResourceTypes(
+    args: ListTargetResourceTypesCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: ListTargetResourceTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartExperimentCommand}
+   */
+  startExperiment(
     args: StartExperimentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<StartExperimentCommandOutput>;
-  public startExperiment(
+  startExperiment(
     args: StartExperimentCommandInput,
     cb: (err: any, data?: StartExperimentCommandOutput) => void
   ): void;
-  public startExperiment(
+  startExperiment(
     args: StartExperimentCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: StartExperimentCommandOutput) => void
   ): void;
-  public startExperiment(
-    args: StartExperimentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartExperimentCommandOutput) => void),
-    cb?: (err: any, data?: StartExperimentCommandOutput) => void
-  ): Promise<StartExperimentCommandOutput> | void {
-    const command = new StartExperimentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops the specified experiment.</p>
+   * @see {@link StopExperimentCommand}
    */
-  public stopExperiment(
+  stopExperiment(
     args: StopExperimentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<StopExperimentCommandOutput>;
-  public stopExperiment(
+  stopExperiment(
     args: StopExperimentCommandInput,
     cb: (err: any, data?: StopExperimentCommandOutput) => void
   ): void;
-  public stopExperiment(
+  stopExperiment(
     args: StopExperimentCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: StopExperimentCommandOutput) => void
   ): void;
-  public stopExperiment(
-    args: StopExperimentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopExperimentCommandOutput) => void),
-    cb?: (err: any, data?: StopExperimentCommandOutput) => void
-  ): Promise<StopExperimentCommandOutput> | void {
-    const command = new StopExperimentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Applies the specified tags to the specified resource.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: FisRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: FisRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified tags from the specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified experiment template.</p>
+   * @see {@link UpdateExperimentTemplateCommand}
    */
-  public updateExperimentTemplate(
+  updateExperimentTemplate(
     args: UpdateExperimentTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: FisRequestOptions
   ): Promise<UpdateExperimentTemplateCommandOutput>;
-  public updateExperimentTemplate(
+  updateExperimentTemplate(
     args: UpdateExperimentTemplateCommandInput,
     cb: (err: any, data?: UpdateExperimentTemplateCommandOutput) => void
   ): void;
-  public updateExperimentTemplate(
+  updateExperimentTemplate(
     args: UpdateExperimentTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: FisRequestOptions,
     cb: (err: any, data?: UpdateExperimentTemplateCommandOutput) => void
   ): void;
-  public updateExperimentTemplate(
-    args: UpdateExperimentTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateExperimentTemplateCommandOutput) => void),
-    cb?: (err: any, data?: UpdateExperimentTemplateCommandOutput) => void
-  ): Promise<UpdateExperimentTemplateCommandOutput> | void {
-    const command = new UpdateExperimentTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateSafetyLeverStateCommand}
+   */
+  updateSafetyLeverState(
+    args: UpdateSafetyLeverStateCommandInput,
+    options?: FisRequestOptions
+  ): Promise<UpdateSafetyLeverStateCommandOutput>;
+  updateSafetyLeverState(
+    args: UpdateSafetyLeverStateCommandInput,
+    cb: (err: any, data?: UpdateSafetyLeverStateCommandOutput) => void
+  ): void;
+  updateSafetyLeverState(
+    args: UpdateSafetyLeverStateCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: UpdateSafetyLeverStateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTargetAccountConfigurationCommand}
+   */
+  updateTargetAccountConfiguration(
+    args: UpdateTargetAccountConfigurationCommandInput,
+    options?: FisRequestOptions
+  ): Promise<UpdateTargetAccountConfigurationCommandOutput>;
+  updateTargetAccountConfiguration(
+    args: UpdateTargetAccountConfigurationCommandInput,
+    cb: (err: any, data?: UpdateTargetAccountConfigurationCommandOutput) => void
+  ): void;
+  updateTargetAccountConfiguration(
+    args: UpdateTargetAccountConfigurationCommandInput,
+    options: FisRequestOptions,
+    cb: (err: any, data?: UpdateTargetAccountConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListActionsCommandOutput}.
+   */
+  paginateListActions(
+    args?: ListActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListActionsCommandOutput>;
+
+  /**
+   * @see {@link ListExperimentResolvedTargetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExperimentResolvedTargetsCommandOutput}.
+   */
+  paginateListExperimentResolvedTargets(
+    args: ListExperimentResolvedTargetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExperimentResolvedTargetsCommandOutput>;
+
+  /**
+   * @see {@link ListExperimentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExperimentsCommandOutput}.
+   */
+  paginateListExperiments(
+    args?: ListExperimentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExperimentsCommandOutput>;
+
+  /**
+   * @see {@link ListExperimentTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExperimentTemplatesCommandOutput}.
+   */
+  paginateListExperimentTemplates(
+    args?: ListExperimentTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExperimentTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListTargetAccountConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTargetAccountConfigurationsCommandOutput}.
+   */
+  paginateListTargetAccountConfigurations(
+    args: ListTargetAccountConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTargetAccountConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListTargetResourceTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTargetResourceTypesCommandOutput}.
+   */
+  paginateListTargetResourceTypes(
+    args?: ListTargetResourceTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTargetResourceTypesCommandOutput>;
 }
+
+/**
+ * <p>Amazon Web Services Fault Injection Service is a managed service that enables you to perform fault injection
+ *            experiments on your Amazon Web Services workloads. For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">Fault Injection Service User Guide</a>.</p>
+ * @public
+ */
+export class Fis extends FisClient implements Fis {}
+createAggregatedClient(commands, Fis, { paginators });

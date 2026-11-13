@@ -1,95 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { UpdateEndpointRequest, UpdateEndpointResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateEndpointCommand,
-  serializeAws_json1_1UpdateEndpointCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateEndpointRequest, UpdateEndpointResponse } from "../models/models_0";
+import { UpdateEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateEndpointCommand}.
+ */
 export interface UpdateEndpointCommandInput extends UpdateEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateEndpointCommand}.
+ */
 export interface UpdateEndpointCommandOutput extends UpdateEndpointResponse, __MetadataBearer {}
 
 /**
- * <p>Updates information about the specified endpoint.</p>
+ * <p>Updates information about the specified endpoint.
+ *       For information about endpoints, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html">Managing endpoints</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ComprehendClient, UpdateEndpointCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, UpdateEndpointCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // UpdateEndpointRequest
+ *   EndpointArn: "STRING_VALUE", // required
+ *   DesiredModelArn: "STRING_VALUE",
+ *   DesiredInferenceUnits: Number("int"),
+ *   DesiredDataAccessRoleArn: "STRING_VALUE",
+ *   FlywheelArn: "STRING_VALUE",
+ * };
  * const command = new UpdateEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateEndpointResponse
+ * //   DesiredModelArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateEndpointCommandInput - {@link UpdateEndpointCommandInput}
+ * @returns {@link UpdateEndpointCommandOutput}
  * @see {@link UpdateEndpointCommandInput} for command's `input` shape.
  * @see {@link UpdateEndpointCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource name is already in use. Use a different name and try your request
+ *       again.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>The maximum number of resources per account has been exceeded. Review the resources, and
+ *       then try your request again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource ARN was not found. Check the ARN and try your request again.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>The specified resource is not available. Check the resource and try your request
+ *       again.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateEndpointCommand extends $Command<
-  UpdateEndpointCommandInput,
-  UpdateEndpointCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateEndpointCommandInput, UpdateEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "UpdateEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateEndpointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateEndpointResponse.filterSensitiveLog,
+export class UpdateEndpointCommand extends command<UpdateEndpointCommandInput, UpdateEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateEndpoint",
+  UpdateEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEndpointRequest;
+      output: UpdateEndpointResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateEndpointCommandOutput> {
-    return deserializeAws_json1_1UpdateEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateEndpointCommandInput;
+      output: UpdateEndpointCommandOutput;
+    };
+  };
 }

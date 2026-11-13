@@ -1,5 +1,24 @@
-export * from "./TimestreamQuery";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <fullname>Amazon Timestream Query
+ *         </fullname>
+ *          <p></p>
+ *
+ * @packageDocumentation
+ */
 export * from "./TimestreamQueryClient";
+export * from "./TimestreamQuery";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { TimestreamQueryExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { TimestreamQueryServiceException } from "./models/TimestreamQueryServiceException";

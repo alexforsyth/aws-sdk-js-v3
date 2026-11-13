@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { CreateRoutingProfileRequest, CreateRoutingProfileResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateRoutingProfileCommand,
-  serializeAws_restJson1CreateRoutingProfileCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRoutingProfileRequest, CreateRoutingProfileResponse } from "../models/models_0";
+import { CreateRoutingProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRoutingProfileCommand}.
+ */
 export interface CreateRoutingProfileCommandInput extends CreateRoutingProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRoutingProfileCommand}.
+ */
 export interface CreateRoutingProfileCommandOutput extends CreateRoutingProfileResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,112 @@ export interface CreateRoutingProfileCommandOutput extends CreateRoutingProfileR
  * ```javascript
  * import { ConnectClient, CreateRoutingProfileCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, CreateRoutingProfileCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // CreateRoutingProfileRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE", // required
+ *   DefaultOutboundQueueId: "STRING_VALUE", // required
+ *   QueueConfigs: [ // RoutingProfileQueueConfigList
+ *     { // RoutingProfileQueueConfig
+ *       QueueReference: { // RoutingProfileQueueReference
+ *         QueueId: "STRING_VALUE", // required
+ *         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ *       },
+ *       Priority: Number("int"), // required
+ *       Delay: Number("int"), // required
+ *     },
+ *   ],
+ *   ManualAssignmentQueueConfigs: [ // RoutingProfileManualAssignmentQueueConfigList
+ *     { // RoutingProfileManualAssignmentQueueConfig
+ *       QueueReference: {
+ *         QueueId: "STRING_VALUE", // required
+ *         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ *       },
+ *     },
+ *   ],
+ *   MediaConcurrencies: [ // MediaConcurrencies // required
+ *     { // MediaConcurrency
+ *       Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ *       Concurrency: Number("int"),
+ *       CrossChannelBehavior: { // CrossChannelBehavior
+ *         BehaviorType: "ROUTE_CURRENT_CHANNEL_ONLY" || "ROUTE_ANY_CHANNEL", // required
+ *       },
+ *       WorkloadTypeConcurrencies: [ // WorkloadTypeConcurrencies
+ *         { // WorkloadTypeConcurrency
+ *           WorkloadType: "STRING_VALUE", // required
+ *           Concurrency: Number("int"), // required
+ *           CrossChannelWorkloadBehavior: { // CrossChannelWorkloadBehavior
+ *             ChannelWorkloadBehaviorType: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY" || "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY" || "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE",
+ *           },
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   AgentAvailabilityTimer: "TIME_SINCE_LAST_ACTIVITY" || "TIME_SINCE_LAST_INBOUND",
+ * };
  * const command = new CreateRoutingProfileCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRoutingProfileResponse
+ * //   RoutingProfileArn: "STRING_VALUE",
+ * //   RoutingProfileId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateRoutingProfileCommandInput - {@link CreateRoutingProfileCommandInput}
+ * @returns {@link CreateRoutingProfileCommandOutput}
  * @see {@link CreateRoutingProfileCommandInput} for command's `input` shape.
  * @see {@link CreateRoutingProfileCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link DuplicateResourceException} (client fault)
+ *  <p>A resource with the specified name already exists.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The allowed limit for the resource has been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRoutingProfileCommand extends $Command<
-  CreateRoutingProfileCommandInput,
-  CreateRoutingProfileCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRoutingProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRoutingProfileCommandInput, CreateRoutingProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "CreateRoutingProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRoutingProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRoutingProfileResponse.filterSensitiveLog,
+export class CreateRoutingProfileCommand extends command<CreateRoutingProfileCommandInput, CreateRoutingProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRoutingProfile",
+  CreateRoutingProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRoutingProfileRequest;
+      output: CreateRoutingProfileResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRoutingProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateRoutingProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRoutingProfileCommandOutput> {
-    return deserializeAws_restJson1CreateRoutingProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRoutingProfileCommandInput;
+      output: CreateRoutingProfileCommandOutput;
+    };
+  };
 }

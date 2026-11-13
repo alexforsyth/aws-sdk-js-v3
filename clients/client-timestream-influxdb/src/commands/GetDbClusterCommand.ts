@@ -1,0 +1,153 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDbClusterInput, GetDbClusterOutput } from "../models/models_0";
+import { GetDbCluster$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDbClusterCommand}.
+ */
+export interface GetDbClusterCommandInput extends GetDbClusterInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetDbClusterCommand}.
+ */
+export interface GetDbClusterCommandOutput extends GetDbClusterOutput, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about a Timestream for InfluxDB cluster.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { TimestreamInfluxDBClient, GetDbClusterCommand } from "@aws-sdk/client-timestream-influxdb"; // ES Modules import
+ * // const { TimestreamInfluxDBClient, GetDbClusterCommand } = require("@aws-sdk/client-timestream-influxdb"); // CommonJS import
+ * // import type { TimestreamInfluxDBClientConfig } from "@aws-sdk/client-timestream-influxdb";
+ * const config = {}; // type is TimestreamInfluxDBClientConfig
+ * const client = new TimestreamInfluxDBClient(config);
+ * const input = { // GetDbClusterInput
+ *   dbClusterId: "STRING_VALUE", // required
+ * };
+ * const command = new GetDbClusterCommand(input);
+ * const response = await client.send(command);
+ * // { // GetDbClusterOutput
+ * //   id: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   arn: "STRING_VALUE", // required
+ * //   status: "CREATING" || "UPDATING" || "DELETING" || "AVAILABLE" || "FAILED" || "DELETED" || "MAINTENANCE" || "UPDATING_INSTANCE_TYPE" || "REBOOTING" || "REBOOT_FAILED" || "PARTIALLY_AVAILABLE" || "RESTORING" || "RESTORE_FAILED",
+ * //   endpoint: "STRING_VALUE",
+ * //   readerEndpoint: "STRING_VALUE",
+ * //   port: Number("int"),
+ * //   deploymentType: "MULTI_NODE_READ_REPLICAS",
+ * //   dbInstanceType: "db.influx.medium" || "db.influx.large" || "db.influx.xlarge" || "db.influx.2xlarge" || "db.influx.4xlarge" || "db.influx.8xlarge" || "db.influx.12xlarge" || "db.influx.16xlarge" || "db.influx.24xlarge",
+ * //   networkType: "IPV4" || "DUAL",
+ * //   dbStorageType: "InfluxIOIncludedT1" || "InfluxIOIncludedT2" || "InfluxIOIncludedT3",
+ * //   allocatedStorage: Number("int"),
+ * //   engineType: "INFLUXDB_V2" || "INFLUXDB_V3_CORE" || "INFLUXDB_V3_ENTERPRISE",
+ * //   publiclyAccessible: true || false,
+ * //   dbParameterGroupIdentifier: "STRING_VALUE",
+ * //   effectiveDbParameterGroupIdentifier: "STRING_VALUE",
+ * //   logDeliveryConfiguration: { // LogDeliveryConfiguration
+ * //     s3Configuration: { // S3Configuration
+ * //       bucketName: "STRING_VALUE", // required
+ * //       enabled: true || false, // required
+ * //     },
+ * //   },
+ * //   maintenanceSchedule: { // MaintenanceSchedule
+ * //     timezone: "STRING_VALUE", // required
+ * //     preferredMaintenanceWindow: "STRING_VALUE", // required
+ * //   },
+ * //   lastMaintenanceTime: new Date("TIMESTAMP"),
+ * //   nextMaintenanceTime: new Date("TIMESTAMP"),
+ * //   influxAuthParametersSecretArn: "STRING_VALUE",
+ * //   vpcSubnetIds: [ // VpcSubnetIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   vpcSecurityGroupIds: [ // VpcSecurityGroupIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   failoverMode: "AUTOMATIC" || "NO_FAILOVER",
+ * //   clusterConfiguration: { // ClusterConfiguration
+ * //     ingestQueryInstances: Number("int"),
+ * //     queryOnlyInstances: Number("int"),
+ * //     dedicatedCompactor: true || false,
+ * //   },
+ * //   deploymentConfiguration: { // DeploymentConfiguration Union: only one key present
+ * //     InfluxDBv3Enterprise: { // InfluxDBv3EnterpriseDeploymentConfiguration
+ * //       nodeGroups: [ // NodeGroupList // required
+ * //         { // NodeGroup
+ * //           instanceModes: [ // InstanceModeList // required
+ * //             "PRIMARY" || "STANDBY" || "REPLICA" || "INGEST" || "QUERY" || "COMPACT" || "PROCESS",
+ * //           ],
+ * //           instanceType: "db.influx.medium" || "db.influx.large" || "db.influx.xlarge" || "db.influx.2xlarge" || "db.influx.4xlarge" || "db.influx.8xlarge" || "db.influx.12xlarge" || "db.influx.16xlarge" || "db.influx.24xlarge", // required
+ * //           count: Number("int"), // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * //   dbBackupConfigurations: [ // DbBackupConfigurationOutputList
+ * //     { // DbBackupConfigurationOutput
+ * //       type: "HOURLY" || "DAILY" || "WEEKLY" || "MONTHLY" || "CUSTOM_SCHEDULE" || "CONTINUOUS", // required
+ * //       retentionDays: Number("int"), // required
+ * //       enabled: true || false, // required
+ * //       customSchedule: "STRING_VALUE",
+ * //       nextAutomatedBackupTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   kmsKeyId: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetDbClusterCommandInput - {@link GetDbClusterCommandInput}
+ * @returns {@link GetDbClusterCommandOutput}
+ * @see {@link GetDbClusterCommandInput} for command's `input` shape.
+ * @see {@link GetDbClusterCommandOutput} for command's `response` shape.
+ * @see {@link TimestreamInfluxDBClientResolvedConfig | config} for TimestreamInfluxDBClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource was not found or does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by Timestream for InfluxDB.</p>
+ *
+ * @throws {@link TimestreamInfluxDBServiceException}
+ * <p>Base exception class for all service exceptions from TimestreamInfluxDB service.</p>
+ *
+ *
+ * @public
+ */
+export class GetDbClusterCommand extends command<GetDbClusterCommandInput, GetDbClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDbCluster",
+  GetDbCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDbClusterInput;
+      output: GetDbClusterOutput;
+    };
+    sdk: {
+      input: GetDbClusterCommandInput;
+      output: GetDbClusterCommandOutput;
+    };
+  };
+}

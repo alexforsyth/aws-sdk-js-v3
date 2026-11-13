@@ -1,98 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SetReceiptRulePositionRequest, SetReceiptRulePositionResponse } from "../models/models_0";
-import {
-  deserializeAws_querySetReceiptRulePositionCommand,
-  serializeAws_querySetReceiptRulePositionCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetReceiptRulePositionRequest, SetReceiptRulePositionResponse } from "../models/models_0";
+import { SetReceiptRulePosition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetReceiptRulePositionCommand}.
+ */
 export interface SetReceiptRulePositionCommandInput extends SetReceiptRulePositionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SetReceiptRulePositionCommand}.
+ */
 export interface SetReceiptRulePositionCommandOutput extends SetReceiptRulePositionResponse, __MetadataBearer {}
 
 /**
  * <p>Sets the position of the specified receipt rule in the receipt rule set.</p>
- *         <p>For information about managing receipt rules, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html">Amazon SES
+ *          <p>For information about managing receipt rules, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html">Amazon SES
  *                 Developer Guide</a>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, SetReceiptRulePositionCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, SetReceiptRulePositionCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // SetReceiptRulePositionRequest
+ *   RuleSetName: "STRING_VALUE", // required
+ *   RuleName: "STRING_VALUE", // required
+ *   After: "STRING_VALUE",
+ * };
  * const command = new SetReceiptRulePositionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetReceiptRulePositionCommandInput - {@link SetReceiptRulePositionCommandInput}
+ * @returns {@link SetReceiptRulePositionCommandOutput}
  * @see {@link SetReceiptRulePositionCommandInput} for command's `input` shape.
  * @see {@link SetReceiptRulePositionCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link RuleDoesNotExistException} (client fault)
+ *  <p>Indicates that the provided receipt rule does not exist.</p>
+ *
+ * @throws {@link RuleSetDoesNotExistException} (client fault)
+ *  <p>Indicates that the provided receipt rule set does not exist.</p>
+ *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @example SetReceiptRulePosition
+ * ```javascript
+ * // The following example sets the position of a receipt rule in a receipt rule set:
+ * const input = {
+ *   After: "PutRuleAfterThisRule",
+ *   RuleName: "RuleToReposition",
+ *   RuleSetName: "MyRuleSet"
+ * };
+ * const command = new SetReceiptRulePositionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class SetReceiptRulePositionCommand extends $Command<
-  SetReceiptRulePositionCommandInput,
-  SetReceiptRulePositionCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetReceiptRulePositionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetReceiptRulePositionCommandInput, SetReceiptRulePositionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "SetReceiptRulePositionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetReceiptRulePositionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SetReceiptRulePositionResponse.filterSensitiveLog,
+export class SetReceiptRulePositionCommand extends command<SetReceiptRulePositionCommandInput, SetReceiptRulePositionCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetReceiptRulePosition",
+  SetReceiptRulePosition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetReceiptRulePositionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetReceiptRulePositionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_querySetReceiptRulePositionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetReceiptRulePositionCommandOutput> {
-    return deserializeAws_querySetReceiptRulePositionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetReceiptRulePositionCommandInput;
+      output: SetReceiptRulePositionCommandOutput;
+    };
+  };
 }

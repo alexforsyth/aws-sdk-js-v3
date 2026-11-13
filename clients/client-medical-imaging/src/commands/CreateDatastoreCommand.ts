@@ -1,0 +1,104 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDatastoreRequest, CreateDatastoreResponse } from "../models/models_0";
+import { CreateDatastore$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDatastoreCommand}.
+ */
+export interface CreateDatastoreCommandInput extends CreateDatastoreRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDatastoreCommand}.
+ */
+export interface CreateDatastoreCommandOutput extends CreateDatastoreResponse, __MetadataBearer {}
+
+/**
+ * <p>Create a data store.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MedicalImagingClient, CreateDatastoreCommand } from "@aws-sdk/client-medical-imaging"; // ES Modules import
+ * // const { MedicalImagingClient, CreateDatastoreCommand } = require("@aws-sdk/client-medical-imaging"); // CommonJS import
+ * // import type { MedicalImagingClientConfig } from "@aws-sdk/client-medical-imaging";
+ * const config = {}; // type is MedicalImagingClientConfig
+ * const client = new MedicalImagingClient(config);
+ * const input = { // CreateDatastoreRequest
+ *   datastoreName: "STRING_VALUE",
+ *   clientToken: "STRING_VALUE", // required
+ *   tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   kmsKeyArn: "STRING_VALUE",
+ *   lambdaAuthorizerArn: "STRING_VALUE",
+ *   losslessStorageFormat: "HTJ2K" || "JPEG_2000_LOSSLESS",
+ * };
+ * const command = new CreateDatastoreCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateDatastoreResponse
+ * //   datastoreId: "STRING_VALUE", // required
+ * //   datastoreStatus: "CREATING" || "CREATE_FAILED" || "ACTIVE" || "DELETING" || "DELETED", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateDatastoreCommandInput - {@link CreateDatastoreCommandInput}
+ * @returns {@link CreateDatastoreCommandOutput}
+ * @see {@link CreateDatastoreCommandInput} for command's `input` shape.
+ * @see {@link CreateDatastoreCommandOutput} for command's `response` shape.
+ * @see {@link MedicalImagingClientResolvedConfig | config} for MedicalImagingClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource which does not exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request caused a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints set by the service.</p>
+ *
+ * @throws {@link MedicalImagingServiceException}
+ * <p>Base exception class for all service exceptions from MedicalImaging service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateDatastoreCommand extends command<CreateDatastoreCommandInput, CreateDatastoreCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDatastore",
+  CreateDatastore$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDatastoreRequest;
+      output: CreateDatastoreResponse;
+    };
+    sdk: {
+      input: CreateDatastoreCommandInput;
+      output: CreateDatastoreCommandOutput;
+    };
+  };
+}

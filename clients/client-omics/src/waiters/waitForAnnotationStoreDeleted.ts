@@ -1,0 +1,71 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type GetAnnotationStoreCommandInput,
+  type GetAnnotationStoreCommandOutput,
+  GetAnnotationStoreCommand,
+} from "../commands/GetAnnotationStoreCommand";
+import type { ResourceNotFoundException } from "../models/errors";
+import type { OmicsServiceException } from "../models/OmicsServiceException";
+import type { OmicsClient } from "../OmicsClient";
+
+const checkState = async (client: OmicsClient, input: GetAnnotationStoreCommandInput): Promise<WaiterResult<GetAnnotationStoreCommandOutput | OmicsServiceException>> => {
+  let reason;
+  try {
+    let result: GetAnnotationStoreCommandOutput & any = await client.send(new GetAnnotationStoreCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.status;
+      }
+      if (returnComparator() === "DELETED") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.status;
+      }
+      if (returnComparator() === "DELETING") {
+        return { state: WaiterState.RETRY, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+    if (exception.name === "ResourceNotFoundException") {
+      return { state: WaiterState.SUCCESS, reason };
+    }
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ * Wait until an annotation store is deleted.
+ *  @deprecated Use waitUntilAnnotationStoreDeleted instead. waitForAnnotationStoreDeleted does not throw error in non-success cases.
+ */
+export const waitForAnnotationStoreDeleted = async (
+  params: WaiterConfiguration<OmicsClient>,
+  input: GetAnnotationStoreCommandInput
+): Promise<WaiterResult<GetAnnotationStoreCommandOutput | OmicsServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 600 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ * Wait until an annotation store is deleted.
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to GetAnnotationStoreCommand for polling.
+ */
+export const waitUntilAnnotationStoreDeleted = async (
+  params: WaiterConfiguration<OmicsClient>,
+  input: GetAnnotationStoreCommandInput
+): Promise<WaiterResult<GetAnnotationStoreCommandOutput | ResourceNotFoundException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 600 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<GetAnnotationStoreCommandOutput | ResourceNotFoundException>;
+};

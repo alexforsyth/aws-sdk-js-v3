@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListRuleGroupsRequest, ListRuleGroupsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListRuleGroupsCommand,
-  serializeAws_json1_1ListRuleGroupsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRuleGroupsRequest, ListRuleGroupsResponse } from "../models/models_0";
+import { ListRuleGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRuleGroupsCommand}.
+ */
 export interface ListRuleGroupsCommandInput extends ListRuleGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRuleGroupsCommand}.
+ */
 export interface ListRuleGroupsCommandOutput extends ListRuleGroupsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,57 @@ export interface ListRuleGroupsCommandOutput extends ListRuleGroupsResponse, __M
  * ```javascript
  * import { WAFRegionalClient, ListRuleGroupsCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, ListRuleGroupsCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // ListRuleGroupsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListRuleGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRuleGroupsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   RuleGroups: [ // RuleGroupSummaries
+ * //     { // RuleGroupSummary
+ * //       RuleGroupId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListRuleGroupsCommandInput - {@link ListRuleGroupsCommandInput}
+ * @returns {@link ListRuleGroupsCommandOutput}
  * @see {@link ListRuleGroupsCommandInput} for command's `input` shape.
  * @see {@link ListRuleGroupsCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class ListRuleGroupsCommand extends $Command<
-  ListRuleGroupsCommandInput,
-  ListRuleGroupsCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRuleGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRuleGroupsCommandInput, ListRuleGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "ListRuleGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRuleGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRuleGroupsResponse.filterSensitiveLog,
+export class ListRuleGroupsCommand extends command<ListRuleGroupsCommandInput, ListRuleGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRuleGroups",
+  ListRuleGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRuleGroupsRequest;
+      output: ListRuleGroupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRuleGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListRuleGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRuleGroupsCommandOutput> {
-    return deserializeAws_json1_1ListRuleGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRuleGroupsCommandInput;
+      output: ListRuleGroupsCommandOutput;
+    };
+  };
 }

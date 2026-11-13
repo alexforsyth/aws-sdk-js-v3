@@ -1,0 +1,2532 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type ActivateMessageTemplateCommandInput,
+  type ActivateMessageTemplateCommandOutput,
+  ActivateMessageTemplateCommand,
+} from "./commands/ActivateMessageTemplateCommand";
+import {
+  type CreateAIAgentCommandInput,
+  type CreateAIAgentCommandOutput,
+  CreateAIAgentCommand,
+} from "./commands/CreateAIAgentCommand";
+import {
+  type CreateAIAgentVersionCommandInput,
+  type CreateAIAgentVersionCommandOutput,
+  CreateAIAgentVersionCommand,
+} from "./commands/CreateAIAgentVersionCommand";
+import {
+  type CreateAIGuardrailCommandInput,
+  type CreateAIGuardrailCommandOutput,
+  CreateAIGuardrailCommand,
+} from "./commands/CreateAIGuardrailCommand";
+import {
+  type CreateAIGuardrailVersionCommandInput,
+  type CreateAIGuardrailVersionCommandOutput,
+  CreateAIGuardrailVersionCommand,
+} from "./commands/CreateAIGuardrailVersionCommand";
+import {
+  type CreateAIPromptCommandInput,
+  type CreateAIPromptCommandOutput,
+  CreateAIPromptCommand,
+} from "./commands/CreateAIPromptCommand";
+import {
+  type CreateAIPromptVersionCommandInput,
+  type CreateAIPromptVersionCommandOutput,
+  CreateAIPromptVersionCommand,
+} from "./commands/CreateAIPromptVersionCommand";
+import {
+  type CreateAssistantAssociationCommandInput,
+  type CreateAssistantAssociationCommandOutput,
+  CreateAssistantAssociationCommand,
+} from "./commands/CreateAssistantAssociationCommand";
+import {
+  type CreateAssistantCommandInput,
+  type CreateAssistantCommandOutput,
+  CreateAssistantCommand,
+} from "./commands/CreateAssistantCommand";
+import {
+  type CreateContentAssociationCommandInput,
+  type CreateContentAssociationCommandOutput,
+  CreateContentAssociationCommand,
+} from "./commands/CreateContentAssociationCommand";
+import {
+  type CreateContentCommandInput,
+  type CreateContentCommandOutput,
+  CreateContentCommand,
+} from "./commands/CreateContentCommand";
+import {
+  type CreateKnowledgeBaseCommandInput,
+  type CreateKnowledgeBaseCommandOutput,
+  CreateKnowledgeBaseCommand,
+} from "./commands/CreateKnowledgeBaseCommand";
+import {
+  type CreateMessageTemplateAttachmentCommandInput,
+  type CreateMessageTemplateAttachmentCommandOutput,
+  CreateMessageTemplateAttachmentCommand,
+} from "./commands/CreateMessageTemplateAttachmentCommand";
+import {
+  type CreateMessageTemplateCommandInput,
+  type CreateMessageTemplateCommandOutput,
+  CreateMessageTemplateCommand,
+} from "./commands/CreateMessageTemplateCommand";
+import {
+  type CreateMessageTemplateVersionCommandInput,
+  type CreateMessageTemplateVersionCommandOutput,
+  CreateMessageTemplateVersionCommand,
+} from "./commands/CreateMessageTemplateVersionCommand";
+import {
+  type CreateQuickResponseCommandInput,
+  type CreateQuickResponseCommandOutput,
+  CreateQuickResponseCommand,
+} from "./commands/CreateQuickResponseCommand";
+import {
+  type CreateSessionCommandInput,
+  type CreateSessionCommandOutput,
+  CreateSessionCommand,
+} from "./commands/CreateSessionCommand";
+import {
+  type DeactivateMessageTemplateCommandInput,
+  type DeactivateMessageTemplateCommandOutput,
+  DeactivateMessageTemplateCommand,
+} from "./commands/DeactivateMessageTemplateCommand";
+import {
+  type DeleteAIAgentCommandInput,
+  type DeleteAIAgentCommandOutput,
+  DeleteAIAgentCommand,
+} from "./commands/DeleteAIAgentCommand";
+import {
+  type DeleteAIAgentVersionCommandInput,
+  type DeleteAIAgentVersionCommandOutput,
+  DeleteAIAgentVersionCommand,
+} from "./commands/DeleteAIAgentVersionCommand";
+import {
+  type DeleteAIGuardrailCommandInput,
+  type DeleteAIGuardrailCommandOutput,
+  DeleteAIGuardrailCommand,
+} from "./commands/DeleteAIGuardrailCommand";
+import {
+  type DeleteAIGuardrailVersionCommandInput,
+  type DeleteAIGuardrailVersionCommandOutput,
+  DeleteAIGuardrailVersionCommand,
+} from "./commands/DeleteAIGuardrailVersionCommand";
+import {
+  type DeleteAIPromptCommandInput,
+  type DeleteAIPromptCommandOutput,
+  DeleteAIPromptCommand,
+} from "./commands/DeleteAIPromptCommand";
+import {
+  type DeleteAIPromptVersionCommandInput,
+  type DeleteAIPromptVersionCommandOutput,
+  DeleteAIPromptVersionCommand,
+} from "./commands/DeleteAIPromptVersionCommand";
+import {
+  type DeleteAssistantAssociationCommandInput,
+  type DeleteAssistantAssociationCommandOutput,
+  DeleteAssistantAssociationCommand,
+} from "./commands/DeleteAssistantAssociationCommand";
+import {
+  type DeleteAssistantCommandInput,
+  type DeleteAssistantCommandOutput,
+  DeleteAssistantCommand,
+} from "./commands/DeleteAssistantCommand";
+import {
+  type DeleteContentAssociationCommandInput,
+  type DeleteContentAssociationCommandOutput,
+  DeleteContentAssociationCommand,
+} from "./commands/DeleteContentAssociationCommand";
+import {
+  type DeleteContentCommandInput,
+  type DeleteContentCommandOutput,
+  DeleteContentCommand,
+} from "./commands/DeleteContentCommand";
+import {
+  type DeleteImportJobCommandInput,
+  type DeleteImportJobCommandOutput,
+  DeleteImportJobCommand,
+} from "./commands/DeleteImportJobCommand";
+import {
+  type DeleteKnowledgeBaseCommandInput,
+  type DeleteKnowledgeBaseCommandOutput,
+  DeleteKnowledgeBaseCommand,
+} from "./commands/DeleteKnowledgeBaseCommand";
+import {
+  type DeleteMessageTemplateAttachmentCommandInput,
+  type DeleteMessageTemplateAttachmentCommandOutput,
+  DeleteMessageTemplateAttachmentCommand,
+} from "./commands/DeleteMessageTemplateAttachmentCommand";
+import {
+  type DeleteMessageTemplateCommandInput,
+  type DeleteMessageTemplateCommandOutput,
+  DeleteMessageTemplateCommand,
+} from "./commands/DeleteMessageTemplateCommand";
+import {
+  type DeleteQuickResponseCommandInput,
+  type DeleteQuickResponseCommandOutput,
+  DeleteQuickResponseCommand,
+} from "./commands/DeleteQuickResponseCommand";
+import {
+  type GetAIAgentCommandInput,
+  type GetAIAgentCommandOutput,
+  GetAIAgentCommand,
+} from "./commands/GetAIAgentCommand";
+import {
+  type GetAIGuardrailCommandInput,
+  type GetAIGuardrailCommandOutput,
+  GetAIGuardrailCommand,
+} from "./commands/GetAIGuardrailCommand";
+import {
+  type GetAIPromptCommandInput,
+  type GetAIPromptCommandOutput,
+  GetAIPromptCommand,
+} from "./commands/GetAIPromptCommand";
+import {
+  type GetAssistantAssociationCommandInput,
+  type GetAssistantAssociationCommandOutput,
+  GetAssistantAssociationCommand,
+} from "./commands/GetAssistantAssociationCommand";
+import {
+  type GetAssistantCommandInput,
+  type GetAssistantCommandOutput,
+  GetAssistantCommand,
+} from "./commands/GetAssistantCommand";
+import {
+  type GetContentAssociationCommandInput,
+  type GetContentAssociationCommandOutput,
+  GetContentAssociationCommand,
+} from "./commands/GetContentAssociationCommand";
+import {
+  type GetContentCommandInput,
+  type GetContentCommandOutput,
+  GetContentCommand,
+} from "./commands/GetContentCommand";
+import {
+  type GetContentSummaryCommandInput,
+  type GetContentSummaryCommandOutput,
+  GetContentSummaryCommand,
+} from "./commands/GetContentSummaryCommand";
+import {
+  type GetImportJobCommandInput,
+  type GetImportJobCommandOutput,
+  GetImportJobCommand,
+} from "./commands/GetImportJobCommand";
+import {
+  type GetKnowledgeBaseCommandInput,
+  type GetKnowledgeBaseCommandOutput,
+  GetKnowledgeBaseCommand,
+} from "./commands/GetKnowledgeBaseCommand";
+import {
+  type GetMessageTemplateCommandInput,
+  type GetMessageTemplateCommandOutput,
+  GetMessageTemplateCommand,
+} from "./commands/GetMessageTemplateCommand";
+import {
+  type GetNextMessageCommandInput,
+  type GetNextMessageCommandOutput,
+  GetNextMessageCommand,
+} from "./commands/GetNextMessageCommand";
+import {
+  type GetQuickResponseCommandInput,
+  type GetQuickResponseCommandOutput,
+  GetQuickResponseCommand,
+} from "./commands/GetQuickResponseCommand";
+import {
+  type GetRecommendationsCommandInput,
+  type GetRecommendationsCommandOutput,
+  GetRecommendationsCommand,
+} from "./commands/GetRecommendationsCommand";
+import {
+  type GetSessionCommandInput,
+  type GetSessionCommandOutput,
+  GetSessionCommand,
+} from "./commands/GetSessionCommand";
+import {
+  type ListAIAgentsCommandInput,
+  type ListAIAgentsCommandOutput,
+  ListAIAgentsCommand,
+} from "./commands/ListAIAgentsCommand";
+import {
+  type ListAIAgentVersionsCommandInput,
+  type ListAIAgentVersionsCommandOutput,
+  ListAIAgentVersionsCommand,
+} from "./commands/ListAIAgentVersionsCommand";
+import {
+  type ListAIGuardrailsCommandInput,
+  type ListAIGuardrailsCommandOutput,
+  ListAIGuardrailsCommand,
+} from "./commands/ListAIGuardrailsCommand";
+import {
+  type ListAIGuardrailVersionsCommandInput,
+  type ListAIGuardrailVersionsCommandOutput,
+  ListAIGuardrailVersionsCommand,
+} from "./commands/ListAIGuardrailVersionsCommand";
+import {
+  type ListAIPromptsCommandInput,
+  type ListAIPromptsCommandOutput,
+  ListAIPromptsCommand,
+} from "./commands/ListAIPromptsCommand";
+import {
+  type ListAIPromptVersionsCommandInput,
+  type ListAIPromptVersionsCommandOutput,
+  ListAIPromptVersionsCommand,
+} from "./commands/ListAIPromptVersionsCommand";
+import {
+  type ListAssistantAssociationsCommandInput,
+  type ListAssistantAssociationsCommandOutput,
+  ListAssistantAssociationsCommand,
+} from "./commands/ListAssistantAssociationsCommand";
+import {
+  type ListAssistantsCommandInput,
+  type ListAssistantsCommandOutput,
+  ListAssistantsCommand,
+} from "./commands/ListAssistantsCommand";
+import {
+  type ListContentAssociationsCommandInput,
+  type ListContentAssociationsCommandOutput,
+  ListContentAssociationsCommand,
+} from "./commands/ListContentAssociationsCommand";
+import {
+  type ListContentsCommandInput,
+  type ListContentsCommandOutput,
+  ListContentsCommand,
+} from "./commands/ListContentsCommand";
+import {
+  type ListImportJobsCommandInput,
+  type ListImportJobsCommandOutput,
+  ListImportJobsCommand,
+} from "./commands/ListImportJobsCommand";
+import {
+  type ListKnowledgeBasesCommandInput,
+  type ListKnowledgeBasesCommandOutput,
+  ListKnowledgeBasesCommand,
+} from "./commands/ListKnowledgeBasesCommand";
+import {
+  type ListMessagesCommandInput,
+  type ListMessagesCommandOutput,
+  ListMessagesCommand,
+} from "./commands/ListMessagesCommand";
+import {
+  type ListMessageTemplatesCommandInput,
+  type ListMessageTemplatesCommandOutput,
+  ListMessageTemplatesCommand,
+} from "./commands/ListMessageTemplatesCommand";
+import {
+  type ListMessageTemplateVersionsCommandInput,
+  type ListMessageTemplateVersionsCommandOutput,
+  ListMessageTemplateVersionsCommand,
+} from "./commands/ListMessageTemplateVersionsCommand";
+import {
+  type ListModelsCommandInput,
+  type ListModelsCommandOutput,
+  ListModelsCommand,
+} from "./commands/ListModelsCommand";
+import {
+  type ListQuickResponsesCommandInput,
+  type ListQuickResponsesCommandOutput,
+  ListQuickResponsesCommand,
+} from "./commands/ListQuickResponsesCommand";
+import { type ListSpansCommandInput, type ListSpansCommandOutput, ListSpansCommand } from "./commands/ListSpansCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type NotifyRecommendationsReceivedCommandInput,
+  type NotifyRecommendationsReceivedCommandOutput,
+  NotifyRecommendationsReceivedCommand,
+} from "./commands/NotifyRecommendationsReceivedCommand";
+import {
+  type PutFeedbackCommandInput,
+  type PutFeedbackCommandOutput,
+  PutFeedbackCommand,
+} from "./commands/PutFeedbackCommand";
+import {
+  type QueryAssistantCommandInput,
+  type QueryAssistantCommandOutput,
+  QueryAssistantCommand,
+} from "./commands/QueryAssistantCommand";
+import {
+  type RegisterAssistantReplicaKeyCommandInput,
+  type RegisterAssistantReplicaKeyCommandOutput,
+  RegisterAssistantReplicaKeyCommand,
+} from "./commands/RegisterAssistantReplicaKeyCommand";
+import {
+  type RegisterKnowledgeBaseReplicaKeyCommandInput,
+  type RegisterKnowledgeBaseReplicaKeyCommandOutput,
+  RegisterKnowledgeBaseReplicaKeyCommand,
+} from "./commands/RegisterKnowledgeBaseReplicaKeyCommand";
+import {
+  type RemoveAssistantAIAgentCommandInput,
+  type RemoveAssistantAIAgentCommandOutput,
+  RemoveAssistantAIAgentCommand,
+} from "./commands/RemoveAssistantAIAgentCommand";
+import {
+  type RemoveKnowledgeBaseTemplateUriCommandInput,
+  type RemoveKnowledgeBaseTemplateUriCommandOutput,
+  RemoveKnowledgeBaseTemplateUriCommand,
+} from "./commands/RemoveKnowledgeBaseTemplateUriCommand";
+import {
+  type RenderMessageTemplateCommandInput,
+  type RenderMessageTemplateCommandOutput,
+  RenderMessageTemplateCommand,
+} from "./commands/RenderMessageTemplateCommand";
+import { type RetrieveCommandInput, type RetrieveCommandOutput, RetrieveCommand } from "./commands/RetrieveCommand";
+import {
+  type SearchContentCommandInput,
+  type SearchContentCommandOutput,
+  SearchContentCommand,
+} from "./commands/SearchContentCommand";
+import {
+  type SearchMessageTemplatesCommandInput,
+  type SearchMessageTemplatesCommandOutput,
+  SearchMessageTemplatesCommand,
+} from "./commands/SearchMessageTemplatesCommand";
+import {
+  type SearchQuickResponsesCommandInput,
+  type SearchQuickResponsesCommandOutput,
+  SearchQuickResponsesCommand,
+} from "./commands/SearchQuickResponsesCommand";
+import {
+  type SearchSessionsCommandInput,
+  type SearchSessionsCommandOutput,
+  SearchSessionsCommand,
+} from "./commands/SearchSessionsCommand";
+import {
+  type SendMessageCommandInput,
+  type SendMessageCommandOutput,
+  SendMessageCommand,
+} from "./commands/SendMessageCommand";
+import {
+  type StartContentUploadCommandInput,
+  type StartContentUploadCommandOutput,
+  StartContentUploadCommand,
+} from "./commands/StartContentUploadCommand";
+import {
+  type StartImportJobCommandInput,
+  type StartImportJobCommandOutput,
+  StartImportJobCommand,
+} from "./commands/StartImportJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAIAgentCommandInput,
+  type UpdateAIAgentCommandOutput,
+  UpdateAIAgentCommand,
+} from "./commands/UpdateAIAgentCommand";
+import {
+  type UpdateAIGuardrailCommandInput,
+  type UpdateAIGuardrailCommandOutput,
+  UpdateAIGuardrailCommand,
+} from "./commands/UpdateAIGuardrailCommand";
+import {
+  type UpdateAIPromptCommandInput,
+  type UpdateAIPromptCommandOutput,
+  UpdateAIPromptCommand,
+} from "./commands/UpdateAIPromptCommand";
+import {
+  type UpdateAssistantAIAgentCommandInput,
+  type UpdateAssistantAIAgentCommandOutput,
+  UpdateAssistantAIAgentCommand,
+} from "./commands/UpdateAssistantAIAgentCommand";
+import {
+  type UpdateContentCommandInput,
+  type UpdateContentCommandOutput,
+  UpdateContentCommand,
+} from "./commands/UpdateContentCommand";
+import {
+  type UpdateKnowledgeBaseTemplateUriCommandInput,
+  type UpdateKnowledgeBaseTemplateUriCommandOutput,
+  UpdateKnowledgeBaseTemplateUriCommand,
+} from "./commands/UpdateKnowledgeBaseTemplateUriCommand";
+import {
+  type UpdateMessageTemplateCommandInput,
+  type UpdateMessageTemplateCommandOutput,
+  UpdateMessageTemplateCommand,
+} from "./commands/UpdateMessageTemplateCommand";
+import {
+  type UpdateMessageTemplateMetadataCommandInput,
+  type UpdateMessageTemplateMetadataCommandOutput,
+  UpdateMessageTemplateMetadataCommand,
+} from "./commands/UpdateMessageTemplateMetadataCommand";
+import {
+  type UpdateQuickResponseCommandInput,
+  type UpdateQuickResponseCommandOutput,
+  UpdateQuickResponseCommand,
+} from "./commands/UpdateQuickResponseCommand";
+import {
+  type UpdateSessionCommandInput,
+  type UpdateSessionCommandOutput,
+  UpdateSessionCommand,
+} from "./commands/UpdateSessionCommand";
+import {
+  type UpdateSessionDataCommandInput,
+  type UpdateSessionDataCommandOutput,
+  UpdateSessionDataCommand,
+} from "./commands/UpdateSessionDataCommand";
+import { paginateListAIAgents } from "./pagination/ListAIAgentsPaginator";
+import { paginateListAIAgentVersions } from "./pagination/ListAIAgentVersionsPaginator";
+import { paginateListAIGuardrails } from "./pagination/ListAIGuardrailsPaginator";
+import { paginateListAIGuardrailVersions } from "./pagination/ListAIGuardrailVersionsPaginator";
+import { paginateListAIPrompts } from "./pagination/ListAIPromptsPaginator";
+import { paginateListAIPromptVersions } from "./pagination/ListAIPromptVersionsPaginator";
+import { paginateListAssistantAssociations } from "./pagination/ListAssistantAssociationsPaginator";
+import { paginateListAssistants } from "./pagination/ListAssistantsPaginator";
+import { paginateListContentAssociations } from "./pagination/ListContentAssociationsPaginator";
+import { paginateListContents } from "./pagination/ListContentsPaginator";
+import { paginateListImportJobs } from "./pagination/ListImportJobsPaginator";
+import { paginateListKnowledgeBases } from "./pagination/ListKnowledgeBasesPaginator";
+import { paginateListMessages } from "./pagination/ListMessagesPaginator";
+import { paginateListMessageTemplates } from "./pagination/ListMessageTemplatesPaginator";
+import { paginateListMessageTemplateVersions } from "./pagination/ListMessageTemplateVersionsPaginator";
+import { paginateListModels } from "./pagination/ListModelsPaginator";
+import { paginateListQuickResponses } from "./pagination/ListQuickResponsesPaginator";
+import { paginateListSpans } from "./pagination/ListSpansPaginator";
+import { paginateQueryAssistant } from "./pagination/QueryAssistantPaginator";
+import { paginateSearchContent } from "./pagination/SearchContentPaginator";
+import { paginateSearchMessageTemplates } from "./pagination/SearchMessageTemplatesPaginator";
+import { paginateSearchQuickResponses } from "./pagination/SearchQuickResponsesPaginator";
+import { paginateSearchSessions } from "./pagination/SearchSessionsPaginator";
+import { QConnectClient } from "./QConnectClient";
+
+const commands = {
+  ActivateMessageTemplateCommand,
+  CreateAIAgentCommand,
+  CreateAIAgentVersionCommand,
+  CreateAIGuardrailCommand,
+  CreateAIGuardrailVersionCommand,
+  CreateAIPromptCommand,
+  CreateAIPromptVersionCommand,
+  CreateAssistantCommand,
+  CreateAssistantAssociationCommand,
+  CreateContentCommand,
+  CreateContentAssociationCommand,
+  CreateKnowledgeBaseCommand,
+  CreateMessageTemplateCommand,
+  CreateMessageTemplateAttachmentCommand,
+  CreateMessageTemplateVersionCommand,
+  CreateQuickResponseCommand,
+  CreateSessionCommand,
+  DeactivateMessageTemplateCommand,
+  DeleteAIAgentCommand,
+  DeleteAIAgentVersionCommand,
+  DeleteAIGuardrailCommand,
+  DeleteAIGuardrailVersionCommand,
+  DeleteAIPromptCommand,
+  DeleteAIPromptVersionCommand,
+  DeleteAssistantCommand,
+  DeleteAssistantAssociationCommand,
+  DeleteContentCommand,
+  DeleteContentAssociationCommand,
+  DeleteImportJobCommand,
+  DeleteKnowledgeBaseCommand,
+  DeleteMessageTemplateCommand,
+  DeleteMessageTemplateAttachmentCommand,
+  DeleteQuickResponseCommand,
+  GetAIAgentCommand,
+  GetAIGuardrailCommand,
+  GetAIPromptCommand,
+  GetAssistantCommand,
+  GetAssistantAssociationCommand,
+  GetContentCommand,
+  GetContentAssociationCommand,
+  GetContentSummaryCommand,
+  GetImportJobCommand,
+  GetKnowledgeBaseCommand,
+  GetMessageTemplateCommand,
+  GetNextMessageCommand,
+  GetQuickResponseCommand,
+  GetRecommendationsCommand,
+  GetSessionCommand,
+  ListAIAgentsCommand,
+  ListAIAgentVersionsCommand,
+  ListAIGuardrailsCommand,
+  ListAIGuardrailVersionsCommand,
+  ListAIPromptsCommand,
+  ListAIPromptVersionsCommand,
+  ListAssistantAssociationsCommand,
+  ListAssistantsCommand,
+  ListContentAssociationsCommand,
+  ListContentsCommand,
+  ListImportJobsCommand,
+  ListKnowledgeBasesCommand,
+  ListMessagesCommand,
+  ListMessageTemplatesCommand,
+  ListMessageTemplateVersionsCommand,
+  ListModelsCommand,
+  ListQuickResponsesCommand,
+  ListSpansCommand,
+  ListTagsForResourceCommand,
+  NotifyRecommendationsReceivedCommand,
+  PutFeedbackCommand,
+  QueryAssistantCommand,
+  RegisterAssistantReplicaKeyCommand,
+  RegisterKnowledgeBaseReplicaKeyCommand,
+  RemoveAssistantAIAgentCommand,
+  RemoveKnowledgeBaseTemplateUriCommand,
+  RenderMessageTemplateCommand,
+  RetrieveCommand,
+  SearchContentCommand,
+  SearchMessageTemplatesCommand,
+  SearchQuickResponsesCommand,
+  SearchSessionsCommand,
+  SendMessageCommand,
+  StartContentUploadCommand,
+  StartImportJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAIAgentCommand,
+  UpdateAIGuardrailCommand,
+  UpdateAIPromptCommand,
+  UpdateAssistantAIAgentCommand,
+  UpdateContentCommand,
+  UpdateKnowledgeBaseTemplateUriCommand,
+  UpdateMessageTemplateCommand,
+  UpdateMessageTemplateMetadataCommand,
+  UpdateQuickResponseCommand,
+  UpdateSessionCommand,
+  UpdateSessionDataCommand,
+};
+const paginators = {
+  paginateListAIAgents,
+  paginateListAIAgentVersions,
+  paginateListAIGuardrails,
+  paginateListAIGuardrailVersions,
+  paginateListAIPrompts,
+  paginateListAIPromptVersions,
+  paginateListAssistantAssociations,
+  paginateListAssistants,
+  paginateListContentAssociations,
+  paginateListContents,
+  paginateListImportJobs,
+  paginateListKnowledgeBases,
+  paginateListMessages,
+  paginateListMessageTemplates,
+  paginateListMessageTemplateVersions,
+  paginateListModels,
+  paginateListQuickResponses,
+  paginateListSpans,
+  paginateQueryAssistant,
+  paginateSearchContent,
+  paginateSearchMessageTemplates,
+  paginateSearchQuickResponses,
+  paginateSearchSessions,
+};
+
+/**
+ * @public
+ */
+export interface QConnectRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface QConnect {
+  /**
+   * @see {@link ActivateMessageTemplateCommand}
+   */
+  activateMessageTemplate(
+    args: ActivateMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ActivateMessageTemplateCommandOutput>;
+  activateMessageTemplate(
+    args: ActivateMessageTemplateCommandInput,
+    cb: (err: any, data?: ActivateMessageTemplateCommandOutput) => void
+  ): void;
+  activateMessageTemplate(
+    args: ActivateMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ActivateMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAIAgentCommand}
+   */
+  createAIAgent(
+    args: CreateAIAgentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAIAgentCommandOutput>;
+  createAIAgent(
+    args: CreateAIAgentCommandInput,
+    cb: (err: any, data?: CreateAIAgentCommandOutput) => void
+  ): void;
+  createAIAgent(
+    args: CreateAIAgentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAIAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAIAgentVersionCommand}
+   */
+  createAIAgentVersion(
+    args: CreateAIAgentVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAIAgentVersionCommandOutput>;
+  createAIAgentVersion(
+    args: CreateAIAgentVersionCommandInput,
+    cb: (err: any, data?: CreateAIAgentVersionCommandOutput) => void
+  ): void;
+  createAIAgentVersion(
+    args: CreateAIAgentVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAIAgentVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAIGuardrailCommand}
+   */
+  createAIGuardrail(
+    args: CreateAIGuardrailCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAIGuardrailCommandOutput>;
+  createAIGuardrail(
+    args: CreateAIGuardrailCommandInput,
+    cb: (err: any, data?: CreateAIGuardrailCommandOutput) => void
+  ): void;
+  createAIGuardrail(
+    args: CreateAIGuardrailCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAIGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAIGuardrailVersionCommand}
+   */
+  createAIGuardrailVersion(
+    args: CreateAIGuardrailVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAIGuardrailVersionCommandOutput>;
+  createAIGuardrailVersion(
+    args: CreateAIGuardrailVersionCommandInput,
+    cb: (err: any, data?: CreateAIGuardrailVersionCommandOutput) => void
+  ): void;
+  createAIGuardrailVersion(
+    args: CreateAIGuardrailVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAIGuardrailVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAIPromptCommand}
+   */
+  createAIPrompt(
+    args: CreateAIPromptCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAIPromptCommandOutput>;
+  createAIPrompt(
+    args: CreateAIPromptCommandInput,
+    cb: (err: any, data?: CreateAIPromptCommandOutput) => void
+  ): void;
+  createAIPrompt(
+    args: CreateAIPromptCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAIPromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAIPromptVersionCommand}
+   */
+  createAIPromptVersion(
+    args: CreateAIPromptVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAIPromptVersionCommandOutput>;
+  createAIPromptVersion(
+    args: CreateAIPromptVersionCommandInput,
+    cb: (err: any, data?: CreateAIPromptVersionCommandOutput) => void
+  ): void;
+  createAIPromptVersion(
+    args: CreateAIPromptVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAIPromptVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAssistantCommand}
+   */
+  createAssistant(
+    args: CreateAssistantCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAssistantCommandOutput>;
+  createAssistant(
+    args: CreateAssistantCommandInput,
+    cb: (err: any, data?: CreateAssistantCommandOutput) => void
+  ): void;
+  createAssistant(
+    args: CreateAssistantCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAssistantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAssistantAssociationCommand}
+   */
+  createAssistantAssociation(
+    args: CreateAssistantAssociationCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateAssistantAssociationCommandOutput>;
+  createAssistantAssociation(
+    args: CreateAssistantAssociationCommandInput,
+    cb: (err: any, data?: CreateAssistantAssociationCommandOutput) => void
+  ): void;
+  createAssistantAssociation(
+    args: CreateAssistantAssociationCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateAssistantAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContentCommand}
+   */
+  createContent(
+    args: CreateContentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateContentCommandOutput>;
+  createContent(
+    args: CreateContentCommandInput,
+    cb: (err: any, data?: CreateContentCommandOutput) => void
+  ): void;
+  createContent(
+    args: CreateContentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContentAssociationCommand}
+   */
+  createContentAssociation(
+    args: CreateContentAssociationCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateContentAssociationCommandOutput>;
+  createContentAssociation(
+    args: CreateContentAssociationCommandInput,
+    cb: (err: any, data?: CreateContentAssociationCommandOutput) => void
+  ): void;
+  createContentAssociation(
+    args: CreateContentAssociationCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateContentAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateKnowledgeBaseCommand}
+   */
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateKnowledgeBaseCommandOutput>;
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
+  ): void;
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMessageTemplateCommand}
+   */
+  createMessageTemplate(
+    args: CreateMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateMessageTemplateCommandOutput>;
+  createMessageTemplate(
+    args: CreateMessageTemplateCommandInput,
+    cb: (err: any, data?: CreateMessageTemplateCommandOutput) => void
+  ): void;
+  createMessageTemplate(
+    args: CreateMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMessageTemplateAttachmentCommand}
+   */
+  createMessageTemplateAttachment(
+    args: CreateMessageTemplateAttachmentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateMessageTemplateAttachmentCommandOutput>;
+  createMessageTemplateAttachment(
+    args: CreateMessageTemplateAttachmentCommandInput,
+    cb: (err: any, data?: CreateMessageTemplateAttachmentCommandOutput) => void
+  ): void;
+  createMessageTemplateAttachment(
+    args: CreateMessageTemplateAttachmentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateMessageTemplateAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMessageTemplateVersionCommand}
+   */
+  createMessageTemplateVersion(
+    args: CreateMessageTemplateVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateMessageTemplateVersionCommandOutput>;
+  createMessageTemplateVersion(
+    args: CreateMessageTemplateVersionCommandInput,
+    cb: (err: any, data?: CreateMessageTemplateVersionCommandOutput) => void
+  ): void;
+  createMessageTemplateVersion(
+    args: CreateMessageTemplateVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateMessageTemplateVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateQuickResponseCommand}
+   */
+  createQuickResponse(
+    args: CreateQuickResponseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateQuickResponseCommandOutput>;
+  createQuickResponse(
+    args: CreateQuickResponseCommandInput,
+    cb: (err: any, data?: CreateQuickResponseCommandOutput) => void
+  ): void;
+  createQuickResponse(
+    args: CreateQuickResponseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSessionCommand}
+   */
+  createSession(
+    args: CreateSessionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<CreateSessionCommandOutput>;
+  createSession(
+    args: CreateSessionCommandInput,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+  createSession(
+    args: CreateSessionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeactivateMessageTemplateCommand}
+   */
+  deactivateMessageTemplate(
+    args: DeactivateMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeactivateMessageTemplateCommandOutput>;
+  deactivateMessageTemplate(
+    args: DeactivateMessageTemplateCommandInput,
+    cb: (err: any, data?: DeactivateMessageTemplateCommandOutput) => void
+  ): void;
+  deactivateMessageTemplate(
+    args: DeactivateMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeactivateMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAIAgentCommand}
+   */
+  deleteAIAgent(
+    args: DeleteAIAgentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAIAgentCommandOutput>;
+  deleteAIAgent(
+    args: DeleteAIAgentCommandInput,
+    cb: (err: any, data?: DeleteAIAgentCommandOutput) => void
+  ): void;
+  deleteAIAgent(
+    args: DeleteAIAgentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAIAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAIAgentVersionCommand}
+   */
+  deleteAIAgentVersion(
+    args: DeleteAIAgentVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAIAgentVersionCommandOutput>;
+  deleteAIAgentVersion(
+    args: DeleteAIAgentVersionCommandInput,
+    cb: (err: any, data?: DeleteAIAgentVersionCommandOutput) => void
+  ): void;
+  deleteAIAgentVersion(
+    args: DeleteAIAgentVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAIAgentVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAIGuardrailCommand}
+   */
+  deleteAIGuardrail(
+    args: DeleteAIGuardrailCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAIGuardrailCommandOutput>;
+  deleteAIGuardrail(
+    args: DeleteAIGuardrailCommandInput,
+    cb: (err: any, data?: DeleteAIGuardrailCommandOutput) => void
+  ): void;
+  deleteAIGuardrail(
+    args: DeleteAIGuardrailCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAIGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAIGuardrailVersionCommand}
+   */
+  deleteAIGuardrailVersion(
+    args: DeleteAIGuardrailVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAIGuardrailVersionCommandOutput>;
+  deleteAIGuardrailVersion(
+    args: DeleteAIGuardrailVersionCommandInput,
+    cb: (err: any, data?: DeleteAIGuardrailVersionCommandOutput) => void
+  ): void;
+  deleteAIGuardrailVersion(
+    args: DeleteAIGuardrailVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAIGuardrailVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAIPromptCommand}
+   */
+  deleteAIPrompt(
+    args: DeleteAIPromptCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAIPromptCommandOutput>;
+  deleteAIPrompt(
+    args: DeleteAIPromptCommandInput,
+    cb: (err: any, data?: DeleteAIPromptCommandOutput) => void
+  ): void;
+  deleteAIPrompt(
+    args: DeleteAIPromptCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAIPromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAIPromptVersionCommand}
+   */
+  deleteAIPromptVersion(
+    args: DeleteAIPromptVersionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAIPromptVersionCommandOutput>;
+  deleteAIPromptVersion(
+    args: DeleteAIPromptVersionCommandInput,
+    cb: (err: any, data?: DeleteAIPromptVersionCommandOutput) => void
+  ): void;
+  deleteAIPromptVersion(
+    args: DeleteAIPromptVersionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAIPromptVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAssistantCommand}
+   */
+  deleteAssistant(
+    args: DeleteAssistantCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAssistantCommandOutput>;
+  deleteAssistant(
+    args: DeleteAssistantCommandInput,
+    cb: (err: any, data?: DeleteAssistantCommandOutput) => void
+  ): void;
+  deleteAssistant(
+    args: DeleteAssistantCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAssistantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAssistantAssociationCommand}
+   */
+  deleteAssistantAssociation(
+    args: DeleteAssistantAssociationCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteAssistantAssociationCommandOutput>;
+  deleteAssistantAssociation(
+    args: DeleteAssistantAssociationCommandInput,
+    cb: (err: any, data?: DeleteAssistantAssociationCommandOutput) => void
+  ): void;
+  deleteAssistantAssociation(
+    args: DeleteAssistantAssociationCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteAssistantAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContentCommand}
+   */
+  deleteContent(
+    args: DeleteContentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteContentCommandOutput>;
+  deleteContent(
+    args: DeleteContentCommandInput,
+    cb: (err: any, data?: DeleteContentCommandOutput) => void
+  ): void;
+  deleteContent(
+    args: DeleteContentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContentAssociationCommand}
+   */
+  deleteContentAssociation(
+    args: DeleteContentAssociationCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteContentAssociationCommandOutput>;
+  deleteContentAssociation(
+    args: DeleteContentAssociationCommandInput,
+    cb: (err: any, data?: DeleteContentAssociationCommandOutput) => void
+  ): void;
+  deleteContentAssociation(
+    args: DeleteContentAssociationCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteContentAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteImportJobCommand}
+   */
+  deleteImportJob(
+    args: DeleteImportJobCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteImportJobCommandOutput>;
+  deleteImportJob(
+    args: DeleteImportJobCommandInput,
+    cb: (err: any, data?: DeleteImportJobCommandOutput) => void
+  ): void;
+  deleteImportJob(
+    args: DeleteImportJobCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKnowledgeBaseCommand}
+   */
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteKnowledgeBaseCommandOutput>;
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMessageTemplateCommand}
+   */
+  deleteMessageTemplate(
+    args: DeleteMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteMessageTemplateCommandOutput>;
+  deleteMessageTemplate(
+    args: DeleteMessageTemplateCommandInput,
+    cb: (err: any, data?: DeleteMessageTemplateCommandOutput) => void
+  ): void;
+  deleteMessageTemplate(
+    args: DeleteMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMessageTemplateAttachmentCommand}
+   */
+  deleteMessageTemplateAttachment(
+    args: DeleteMessageTemplateAttachmentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteMessageTemplateAttachmentCommandOutput>;
+  deleteMessageTemplateAttachment(
+    args: DeleteMessageTemplateAttachmentCommandInput,
+    cb: (err: any, data?: DeleteMessageTemplateAttachmentCommandOutput) => void
+  ): void;
+  deleteMessageTemplateAttachment(
+    args: DeleteMessageTemplateAttachmentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteMessageTemplateAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteQuickResponseCommand}
+   */
+  deleteQuickResponse(
+    args: DeleteQuickResponseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<DeleteQuickResponseCommandOutput>;
+  deleteQuickResponse(
+    args: DeleteQuickResponseCommandInput,
+    cb: (err: any, data?: DeleteQuickResponseCommandOutput) => void
+  ): void;
+  deleteQuickResponse(
+    args: DeleteQuickResponseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: DeleteQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAIAgentCommand}
+   */
+  getAIAgent(
+    args: GetAIAgentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetAIAgentCommandOutput>;
+  getAIAgent(
+    args: GetAIAgentCommandInput,
+    cb: (err: any, data?: GetAIAgentCommandOutput) => void
+  ): void;
+  getAIAgent(
+    args: GetAIAgentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetAIAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAIGuardrailCommand}
+   */
+  getAIGuardrail(
+    args: GetAIGuardrailCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetAIGuardrailCommandOutput>;
+  getAIGuardrail(
+    args: GetAIGuardrailCommandInput,
+    cb: (err: any, data?: GetAIGuardrailCommandOutput) => void
+  ): void;
+  getAIGuardrail(
+    args: GetAIGuardrailCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetAIGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAIPromptCommand}
+   */
+  getAIPrompt(
+    args: GetAIPromptCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetAIPromptCommandOutput>;
+  getAIPrompt(
+    args: GetAIPromptCommandInput,
+    cb: (err: any, data?: GetAIPromptCommandOutput) => void
+  ): void;
+  getAIPrompt(
+    args: GetAIPromptCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetAIPromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssistantCommand}
+   */
+  getAssistant(
+    args: GetAssistantCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetAssistantCommandOutput>;
+  getAssistant(
+    args: GetAssistantCommandInput,
+    cb: (err: any, data?: GetAssistantCommandOutput) => void
+  ): void;
+  getAssistant(
+    args: GetAssistantCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetAssistantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssistantAssociationCommand}
+   */
+  getAssistantAssociation(
+    args: GetAssistantAssociationCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetAssistantAssociationCommandOutput>;
+  getAssistantAssociation(
+    args: GetAssistantAssociationCommandInput,
+    cb: (err: any, data?: GetAssistantAssociationCommandOutput) => void
+  ): void;
+  getAssistantAssociation(
+    args: GetAssistantAssociationCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetAssistantAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContentCommand}
+   */
+  getContent(
+    args: GetContentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetContentCommandOutput>;
+  getContent(
+    args: GetContentCommandInput,
+    cb: (err: any, data?: GetContentCommandOutput) => void
+  ): void;
+  getContent(
+    args: GetContentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContentAssociationCommand}
+   */
+  getContentAssociation(
+    args: GetContentAssociationCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetContentAssociationCommandOutput>;
+  getContentAssociation(
+    args: GetContentAssociationCommandInput,
+    cb: (err: any, data?: GetContentAssociationCommandOutput) => void
+  ): void;
+  getContentAssociation(
+    args: GetContentAssociationCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetContentAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContentSummaryCommand}
+   */
+  getContentSummary(
+    args: GetContentSummaryCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetContentSummaryCommandOutput>;
+  getContentSummary(
+    args: GetContentSummaryCommandInput,
+    cb: (err: any, data?: GetContentSummaryCommandOutput) => void
+  ): void;
+  getContentSummary(
+    args: GetContentSummaryCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetContentSummaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetImportJobCommand}
+   */
+  getImportJob(
+    args: GetImportJobCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetImportJobCommandOutput>;
+  getImportJob(
+    args: GetImportJobCommandInput,
+    cb: (err: any, data?: GetImportJobCommandOutput) => void
+  ): void;
+  getImportJob(
+    args: GetImportJobCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKnowledgeBaseCommand}
+   */
+  getKnowledgeBase(
+    args: GetKnowledgeBaseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetKnowledgeBaseCommandOutput>;
+  getKnowledgeBase(
+    args: GetKnowledgeBaseCommandInput,
+    cb: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
+  ): void;
+  getKnowledgeBase(
+    args: GetKnowledgeBaseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMessageTemplateCommand}
+   */
+  getMessageTemplate(
+    args: GetMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetMessageTemplateCommandOutput>;
+  getMessageTemplate(
+    args: GetMessageTemplateCommandInput,
+    cb: (err: any, data?: GetMessageTemplateCommandOutput) => void
+  ): void;
+  getMessageTemplate(
+    args: GetMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNextMessageCommand}
+   */
+  getNextMessage(
+    args: GetNextMessageCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetNextMessageCommandOutput>;
+  getNextMessage(
+    args: GetNextMessageCommandInput,
+    cb: (err: any, data?: GetNextMessageCommandOutput) => void
+  ): void;
+  getNextMessage(
+    args: GetNextMessageCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetNextMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetQuickResponseCommand}
+   */
+  getQuickResponse(
+    args: GetQuickResponseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetQuickResponseCommandOutput>;
+  getQuickResponse(
+    args: GetQuickResponseCommandInput,
+    cb: (err: any, data?: GetQuickResponseCommandOutput) => void
+  ): void;
+  getQuickResponse(
+    args: GetQuickResponseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationsCommand}
+   */
+  getRecommendations(
+    args: GetRecommendationsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetRecommendationsCommandOutput>;
+  getRecommendations(
+    args: GetRecommendationsCommandInput,
+    cb: (err: any, data?: GetRecommendationsCommandOutput) => void
+  ): void;
+  getRecommendations(
+    args: GetRecommendationsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionCommand}
+   */
+  getSession(
+    args: GetSessionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<GetSessionCommandOutput>;
+  getSession(
+    args: GetSessionCommandInput,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+  getSession(
+    args: GetSessionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIAgentsCommand}
+   */
+  listAIAgents(
+    args: ListAIAgentsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAIAgentsCommandOutput>;
+  listAIAgents(
+    args: ListAIAgentsCommandInput,
+    cb: (err: any, data?: ListAIAgentsCommandOutput) => void
+  ): void;
+  listAIAgents(
+    args: ListAIAgentsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAIAgentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIAgentVersionsCommand}
+   */
+  listAIAgentVersions(
+    args: ListAIAgentVersionsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAIAgentVersionsCommandOutput>;
+  listAIAgentVersions(
+    args: ListAIAgentVersionsCommandInput,
+    cb: (err: any, data?: ListAIAgentVersionsCommandOutput) => void
+  ): void;
+  listAIAgentVersions(
+    args: ListAIAgentVersionsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAIAgentVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIGuardrailsCommand}
+   */
+  listAIGuardrails(
+    args: ListAIGuardrailsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAIGuardrailsCommandOutput>;
+  listAIGuardrails(
+    args: ListAIGuardrailsCommandInput,
+    cb: (err: any, data?: ListAIGuardrailsCommandOutput) => void
+  ): void;
+  listAIGuardrails(
+    args: ListAIGuardrailsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAIGuardrailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIGuardrailVersionsCommand}
+   */
+  listAIGuardrailVersions(
+    args: ListAIGuardrailVersionsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAIGuardrailVersionsCommandOutput>;
+  listAIGuardrailVersions(
+    args: ListAIGuardrailVersionsCommandInput,
+    cb: (err: any, data?: ListAIGuardrailVersionsCommandOutput) => void
+  ): void;
+  listAIGuardrailVersions(
+    args: ListAIGuardrailVersionsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAIGuardrailVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIPromptsCommand}
+   */
+  listAIPrompts(
+    args: ListAIPromptsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAIPromptsCommandOutput>;
+  listAIPrompts(
+    args: ListAIPromptsCommandInput,
+    cb: (err: any, data?: ListAIPromptsCommandOutput) => void
+  ): void;
+  listAIPrompts(
+    args: ListAIPromptsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAIPromptsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIPromptVersionsCommand}
+   */
+  listAIPromptVersions(
+    args: ListAIPromptVersionsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAIPromptVersionsCommandOutput>;
+  listAIPromptVersions(
+    args: ListAIPromptVersionsCommandInput,
+    cb: (err: any, data?: ListAIPromptVersionsCommandOutput) => void
+  ): void;
+  listAIPromptVersions(
+    args: ListAIPromptVersionsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAIPromptVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssistantAssociationsCommand}
+   */
+  listAssistantAssociations(
+    args: ListAssistantAssociationsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAssistantAssociationsCommandOutput>;
+  listAssistantAssociations(
+    args: ListAssistantAssociationsCommandInput,
+    cb: (err: any, data?: ListAssistantAssociationsCommandOutput) => void
+  ): void;
+  listAssistantAssociations(
+    args: ListAssistantAssociationsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAssistantAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssistantsCommand}
+   */
+  listAssistants(): Promise<ListAssistantsCommandOutput>;
+  listAssistants(
+    args: ListAssistantsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListAssistantsCommandOutput>;
+  listAssistants(
+    args: ListAssistantsCommandInput,
+    cb: (err: any, data?: ListAssistantsCommandOutput) => void
+  ): void;
+  listAssistants(
+    args: ListAssistantsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListAssistantsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContentAssociationsCommand}
+   */
+  listContentAssociations(
+    args: ListContentAssociationsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListContentAssociationsCommandOutput>;
+  listContentAssociations(
+    args: ListContentAssociationsCommandInput,
+    cb: (err: any, data?: ListContentAssociationsCommandOutput) => void
+  ): void;
+  listContentAssociations(
+    args: ListContentAssociationsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListContentAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContentsCommand}
+   */
+  listContents(
+    args: ListContentsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListContentsCommandOutput>;
+  listContents(
+    args: ListContentsCommandInput,
+    cb: (err: any, data?: ListContentsCommandOutput) => void
+  ): void;
+  listContents(
+    args: ListContentsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListContentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportJobsCommand}
+   */
+  listImportJobs(
+    args: ListImportJobsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListImportJobsCommandOutput>;
+  listImportJobs(
+    args: ListImportJobsCommandInput,
+    cb: (err: any, data?: ListImportJobsCommandOutput) => void
+  ): void;
+  listImportJobs(
+    args: ListImportJobsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   */
+  listKnowledgeBases(): Promise<ListKnowledgeBasesCommandOutput>;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListKnowledgeBasesCommandOutput>;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
+  ): void;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMessagesCommand}
+   */
+  listMessages(
+    args: ListMessagesCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListMessagesCommandOutput>;
+  listMessages(
+    args: ListMessagesCommandInput,
+    cb: (err: any, data?: ListMessagesCommandOutput) => void
+  ): void;
+  listMessages(
+    args: ListMessagesCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListMessagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMessageTemplatesCommand}
+   */
+  listMessageTemplates(
+    args: ListMessageTemplatesCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListMessageTemplatesCommandOutput>;
+  listMessageTemplates(
+    args: ListMessageTemplatesCommandInput,
+    cb: (err: any, data?: ListMessageTemplatesCommandOutput) => void
+  ): void;
+  listMessageTemplates(
+    args: ListMessageTemplatesCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListMessageTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMessageTemplateVersionsCommand}
+   */
+  listMessageTemplateVersions(
+    args: ListMessageTemplateVersionsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListMessageTemplateVersionsCommandOutput>;
+  listMessageTemplateVersions(
+    args: ListMessageTemplateVersionsCommandInput,
+    cb: (err: any, data?: ListMessageTemplateVersionsCommandOutput) => void
+  ): void;
+  listMessageTemplateVersions(
+    args: ListMessageTemplateVersionsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListMessageTemplateVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelsCommand}
+   */
+  listModels(
+    args: ListModelsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListModelsCommandOutput>;
+  listModels(
+    args: ListModelsCommandInput,
+    cb: (err: any, data?: ListModelsCommandOutput) => void
+  ): void;
+  listModels(
+    args: ListModelsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListQuickResponsesCommand}
+   */
+  listQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListQuickResponsesCommandOutput>;
+  listQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    cb: (err: any, data?: ListQuickResponsesCommandOutput) => void
+  ): void;
+  listQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListQuickResponsesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSpansCommand}
+   */
+  listSpans(
+    args: ListSpansCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListSpansCommandOutput>;
+  listSpans(
+    args: ListSpansCommandInput,
+    cb: (err: any, data?: ListSpansCommandOutput) => void
+  ): void;
+  listSpans(
+    args: ListSpansCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListSpansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link NotifyRecommendationsReceivedCommand}
+   */
+  notifyRecommendationsReceived(
+    args: NotifyRecommendationsReceivedCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<NotifyRecommendationsReceivedCommandOutput>;
+  notifyRecommendationsReceived(
+    args: NotifyRecommendationsReceivedCommandInput,
+    cb: (err: any, data?: NotifyRecommendationsReceivedCommandOutput) => void
+  ): void;
+  notifyRecommendationsReceived(
+    args: NotifyRecommendationsReceivedCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: NotifyRecommendationsReceivedCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutFeedbackCommand}
+   */
+  putFeedback(
+    args: PutFeedbackCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<PutFeedbackCommandOutput>;
+  putFeedback(
+    args: PutFeedbackCommandInput,
+    cb: (err: any, data?: PutFeedbackCommandOutput) => void
+  ): void;
+  putFeedback(
+    args: PutFeedbackCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: PutFeedbackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryAssistantCommand}
+   */
+  queryAssistant(
+    args: QueryAssistantCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<QueryAssistantCommandOutput>;
+  queryAssistant(
+    args: QueryAssistantCommandInput,
+    cb: (err: any, data?: QueryAssistantCommandOutput) => void
+  ): void;
+  queryAssistant(
+    args: QueryAssistantCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: QueryAssistantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterAssistantReplicaKeyCommand}
+   */
+  registerAssistantReplicaKey(
+    args: RegisterAssistantReplicaKeyCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<RegisterAssistantReplicaKeyCommandOutput>;
+  registerAssistantReplicaKey(
+    args: RegisterAssistantReplicaKeyCommandInput,
+    cb: (err: any, data?: RegisterAssistantReplicaKeyCommandOutput) => void
+  ): void;
+  registerAssistantReplicaKey(
+    args: RegisterAssistantReplicaKeyCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: RegisterAssistantReplicaKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterKnowledgeBaseReplicaKeyCommand}
+   */
+  registerKnowledgeBaseReplicaKey(
+    args: RegisterKnowledgeBaseReplicaKeyCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<RegisterKnowledgeBaseReplicaKeyCommandOutput>;
+  registerKnowledgeBaseReplicaKey(
+    args: RegisterKnowledgeBaseReplicaKeyCommandInput,
+    cb: (err: any, data?: RegisterKnowledgeBaseReplicaKeyCommandOutput) => void
+  ): void;
+  registerKnowledgeBaseReplicaKey(
+    args: RegisterKnowledgeBaseReplicaKeyCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: RegisterKnowledgeBaseReplicaKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveAssistantAIAgentCommand}
+   */
+  removeAssistantAIAgent(
+    args: RemoveAssistantAIAgentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<RemoveAssistantAIAgentCommandOutput>;
+  removeAssistantAIAgent(
+    args: RemoveAssistantAIAgentCommandInput,
+    cb: (err: any, data?: RemoveAssistantAIAgentCommandOutput) => void
+  ): void;
+  removeAssistantAIAgent(
+    args: RemoveAssistantAIAgentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: RemoveAssistantAIAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveKnowledgeBaseTemplateUriCommand}
+   */
+  removeKnowledgeBaseTemplateUri(
+    args: RemoveKnowledgeBaseTemplateUriCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<RemoveKnowledgeBaseTemplateUriCommandOutput>;
+  removeKnowledgeBaseTemplateUri(
+    args: RemoveKnowledgeBaseTemplateUriCommandInput,
+    cb: (err: any, data?: RemoveKnowledgeBaseTemplateUriCommandOutput) => void
+  ): void;
+  removeKnowledgeBaseTemplateUri(
+    args: RemoveKnowledgeBaseTemplateUriCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: RemoveKnowledgeBaseTemplateUriCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RenderMessageTemplateCommand}
+   */
+  renderMessageTemplate(
+    args: RenderMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<RenderMessageTemplateCommandOutput>;
+  renderMessageTemplate(
+    args: RenderMessageTemplateCommandInput,
+    cb: (err: any, data?: RenderMessageTemplateCommandOutput) => void
+  ): void;
+  renderMessageTemplate(
+    args: RenderMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: RenderMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetrieveCommand}
+   */
+  retrieve(
+    args: RetrieveCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<RetrieveCommandOutput>;
+  retrieve(
+    args: RetrieveCommandInput,
+    cb: (err: any, data?: RetrieveCommandOutput) => void
+  ): void;
+  retrieve(
+    args: RetrieveCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: RetrieveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchContentCommand}
+   */
+  searchContent(
+    args: SearchContentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<SearchContentCommandOutput>;
+  searchContent(
+    args: SearchContentCommandInput,
+    cb: (err: any, data?: SearchContentCommandOutput) => void
+  ): void;
+  searchContent(
+    args: SearchContentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: SearchContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchMessageTemplatesCommand}
+   */
+  searchMessageTemplates(
+    args: SearchMessageTemplatesCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<SearchMessageTemplatesCommandOutput>;
+  searchMessageTemplates(
+    args: SearchMessageTemplatesCommandInput,
+    cb: (err: any, data?: SearchMessageTemplatesCommandOutput) => void
+  ): void;
+  searchMessageTemplates(
+    args: SearchMessageTemplatesCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: SearchMessageTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchQuickResponsesCommand}
+   */
+  searchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<SearchQuickResponsesCommandOutput>;
+  searchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    cb: (err: any, data?: SearchQuickResponsesCommandOutput) => void
+  ): void;
+  searchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: SearchQuickResponsesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchSessionsCommand}
+   */
+  searchSessions(
+    args: SearchSessionsCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<SearchSessionsCommandOutput>;
+  searchSessions(
+    args: SearchSessionsCommandInput,
+    cb: (err: any, data?: SearchSessionsCommandOutput) => void
+  ): void;
+  searchSessions(
+    args: SearchSessionsCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: SearchSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendMessageCommand}
+   */
+  sendMessage(
+    args: SendMessageCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<SendMessageCommandOutput>;
+  sendMessage(
+    args: SendMessageCommandInput,
+    cb: (err: any, data?: SendMessageCommandOutput) => void
+  ): void;
+  sendMessage(
+    args: SendMessageCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: SendMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartContentUploadCommand}
+   */
+  startContentUpload(
+    args: StartContentUploadCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<StartContentUploadCommandOutput>;
+  startContentUpload(
+    args: StartContentUploadCommandInput,
+    cb: (err: any, data?: StartContentUploadCommandOutput) => void
+  ): void;
+  startContentUpload(
+    args: StartContentUploadCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: StartContentUploadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartImportJobCommand}
+   */
+  startImportJob(
+    args: StartImportJobCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<StartImportJobCommandOutput>;
+  startImportJob(
+    args: StartImportJobCommandInput,
+    cb: (err: any, data?: StartImportJobCommandOutput) => void
+  ): void;
+  startImportJob(
+    args: StartImportJobCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: StartImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAIAgentCommand}
+   */
+  updateAIAgent(
+    args: UpdateAIAgentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateAIAgentCommandOutput>;
+  updateAIAgent(
+    args: UpdateAIAgentCommandInput,
+    cb: (err: any, data?: UpdateAIAgentCommandOutput) => void
+  ): void;
+  updateAIAgent(
+    args: UpdateAIAgentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateAIAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAIGuardrailCommand}
+   */
+  updateAIGuardrail(
+    args: UpdateAIGuardrailCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateAIGuardrailCommandOutput>;
+  updateAIGuardrail(
+    args: UpdateAIGuardrailCommandInput,
+    cb: (err: any, data?: UpdateAIGuardrailCommandOutput) => void
+  ): void;
+  updateAIGuardrail(
+    args: UpdateAIGuardrailCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateAIGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAIPromptCommand}
+   */
+  updateAIPrompt(
+    args: UpdateAIPromptCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateAIPromptCommandOutput>;
+  updateAIPrompt(
+    args: UpdateAIPromptCommandInput,
+    cb: (err: any, data?: UpdateAIPromptCommandOutput) => void
+  ): void;
+  updateAIPrompt(
+    args: UpdateAIPromptCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateAIPromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAssistantAIAgentCommand}
+   */
+  updateAssistantAIAgent(
+    args: UpdateAssistantAIAgentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateAssistantAIAgentCommandOutput>;
+  updateAssistantAIAgent(
+    args: UpdateAssistantAIAgentCommandInput,
+    cb: (err: any, data?: UpdateAssistantAIAgentCommandOutput) => void
+  ): void;
+  updateAssistantAIAgent(
+    args: UpdateAssistantAIAgentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateAssistantAIAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContentCommand}
+   */
+  updateContent(
+    args: UpdateContentCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateContentCommandOutput>;
+  updateContent(
+    args: UpdateContentCommandInput,
+    cb: (err: any, data?: UpdateContentCommandOutput) => void
+  ): void;
+  updateContent(
+    args: UpdateContentCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateKnowledgeBaseTemplateUriCommand}
+   */
+  updateKnowledgeBaseTemplateUri(
+    args: UpdateKnowledgeBaseTemplateUriCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateKnowledgeBaseTemplateUriCommandOutput>;
+  updateKnowledgeBaseTemplateUri(
+    args: UpdateKnowledgeBaseTemplateUriCommandInput,
+    cb: (err: any, data?: UpdateKnowledgeBaseTemplateUriCommandOutput) => void
+  ): void;
+  updateKnowledgeBaseTemplateUri(
+    args: UpdateKnowledgeBaseTemplateUriCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateKnowledgeBaseTemplateUriCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMessageTemplateCommand}
+   */
+  updateMessageTemplate(
+    args: UpdateMessageTemplateCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateMessageTemplateCommandOutput>;
+  updateMessageTemplate(
+    args: UpdateMessageTemplateCommandInput,
+    cb: (err: any, data?: UpdateMessageTemplateCommandOutput) => void
+  ): void;
+  updateMessageTemplate(
+    args: UpdateMessageTemplateCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateMessageTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMessageTemplateMetadataCommand}
+   */
+  updateMessageTemplateMetadata(
+    args: UpdateMessageTemplateMetadataCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateMessageTemplateMetadataCommandOutput>;
+  updateMessageTemplateMetadata(
+    args: UpdateMessageTemplateMetadataCommandInput,
+    cb: (err: any, data?: UpdateMessageTemplateMetadataCommandOutput) => void
+  ): void;
+  updateMessageTemplateMetadata(
+    args: UpdateMessageTemplateMetadataCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateMessageTemplateMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQuickResponseCommand}
+   */
+  updateQuickResponse(
+    args: UpdateQuickResponseCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateQuickResponseCommandOutput>;
+  updateQuickResponse(
+    args: UpdateQuickResponseCommandInput,
+    cb: (err: any, data?: UpdateQuickResponseCommandOutput) => void
+  ): void;
+  updateQuickResponse(
+    args: UpdateQuickResponseCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSessionCommand}
+   */
+  updateSession(
+    args: UpdateSessionCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateSessionCommandOutput>;
+  updateSession(
+    args: UpdateSessionCommandInput,
+    cb: (err: any, data?: UpdateSessionCommandOutput) => void
+  ): void;
+  updateSession(
+    args: UpdateSessionCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSessionDataCommand}
+   */
+  updateSessionData(
+    args: UpdateSessionDataCommandInput,
+    options?: QConnectRequestOptions
+  ): Promise<UpdateSessionDataCommandOutput>;
+  updateSessionData(
+    args: UpdateSessionDataCommandInput,
+    cb: (err: any, data?: UpdateSessionDataCommandOutput) => void
+  ): void;
+  updateSessionData(
+    args: UpdateSessionDataCommandInput,
+    options: QConnectRequestOptions,
+    cb: (err: any, data?: UpdateSessionDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAIAgentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAIAgentsCommandOutput}.
+   */
+  paginateListAIAgents(
+    args: ListAIAgentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAIAgentsCommandOutput>;
+
+  /**
+   * @see {@link ListAIAgentVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAIAgentVersionsCommandOutput}.
+   */
+  paginateListAIAgentVersions(
+    args: ListAIAgentVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAIAgentVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListAIGuardrailsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAIGuardrailsCommandOutput}.
+   */
+  paginateListAIGuardrails(
+    args: ListAIGuardrailsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAIGuardrailsCommandOutput>;
+
+  /**
+   * @see {@link ListAIGuardrailVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAIGuardrailVersionsCommandOutput}.
+   */
+  paginateListAIGuardrailVersions(
+    args: ListAIGuardrailVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAIGuardrailVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListAIPromptsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAIPromptsCommandOutput}.
+   */
+  paginateListAIPrompts(
+    args: ListAIPromptsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAIPromptsCommandOutput>;
+
+  /**
+   * @see {@link ListAIPromptVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAIPromptVersionsCommandOutput}.
+   */
+  paginateListAIPromptVersions(
+    args: ListAIPromptVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAIPromptVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListAssistantAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssistantAssociationsCommandOutput}.
+   */
+  paginateListAssistantAssociations(
+    args: ListAssistantAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssistantAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListAssistantsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssistantsCommandOutput}.
+   */
+  paginateListAssistants(
+    args?: ListAssistantsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssistantsCommandOutput>;
+
+  /**
+   * @see {@link ListContentAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContentAssociationsCommandOutput}.
+   */
+  paginateListContentAssociations(
+    args: ListContentAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContentAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListContentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContentsCommandOutput}.
+   */
+  paginateListContents(
+    args: ListContentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContentsCommandOutput>;
+
+  /**
+   * @see {@link ListImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportJobsCommandOutput}.
+   */
+  paginateListImportJobs(
+    args: ListImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKnowledgeBasesCommandOutput}.
+   */
+  paginateListKnowledgeBases(
+    args?: ListKnowledgeBasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKnowledgeBasesCommandOutput>;
+
+  /**
+   * @see {@link ListMessagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMessagesCommandOutput}.
+   */
+  paginateListMessages(
+    args: ListMessagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMessagesCommandOutput>;
+
+  /**
+   * @see {@link ListMessageTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMessageTemplatesCommandOutput}.
+   */
+  paginateListMessageTemplates(
+    args: ListMessageTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMessageTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListMessageTemplateVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMessageTemplateVersionsCommandOutput}.
+   */
+  paginateListMessageTemplateVersions(
+    args: ListMessageTemplateVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMessageTemplateVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelsCommandOutput}.
+   */
+  paginateListModels(
+    args: ListModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelsCommandOutput>;
+
+  /**
+   * @see {@link ListQuickResponsesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQuickResponsesCommandOutput}.
+   */
+  paginateListQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQuickResponsesCommandOutput>;
+
+  /**
+   * @see {@link ListSpansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSpansCommandOutput}.
+   */
+  paginateListSpans(
+    args: ListSpansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSpansCommandOutput>;
+
+  /**
+   * @see {@link QueryAssistantCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link QueryAssistantCommandOutput}.
+   */
+  paginateQueryAssistant(
+    args: QueryAssistantCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<QueryAssistantCommandOutput>;
+
+  /**
+   * @see {@link SearchContentCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchContentCommandOutput}.
+   */
+  paginateSearchContent(
+    args: SearchContentCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchContentCommandOutput>;
+
+  /**
+   * @see {@link SearchMessageTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchMessageTemplatesCommandOutput}.
+   */
+  paginateSearchMessageTemplates(
+    args: SearchMessageTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchMessageTemplatesCommandOutput>;
+
+  /**
+   * @see {@link SearchQuickResponsesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchQuickResponsesCommandOutput}.
+   */
+  paginateSearchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchQuickResponsesCommandOutput>;
+
+  /**
+   * @see {@link SearchSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchSessionsCommandOutput}.
+   */
+  paginateSearchSessions(
+    args: SearchSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchSessionsCommandOutput>;
+}
+
+/**
+ * <ul> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Q_Connect.html">Amazon Q actions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Q_Connect.html">Amazon Q data types</a> </p> </li> </ul> <note> <p> <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html">automated abuse detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full advantage of the controls implemented in Amazon Bedrock to enforce safety, security, and the responsible use of artificial intelligence (AI).</p> </note> <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced evolution of Connect Customer Wisdom that delivers real-time recommendations to help contact center agents resolve customer issues quickly and accurately.</p> <p>Amazon Q in Connect automatically detects customer intent during calls and chats using conversational analytics and natural language understanding (NLU). It then provides agents with immediate, real-time generative responses and suggested actions, and links to relevant documents and articles. Agents can also query Amazon Q in Connect directly using natural language or keywords to answer customer requests.</p> <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or manage content by uploading custom files.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html">Use Amazon Q in Connect for generative AI powered agent assistance in real-time</a> in the <i>Connect Customer Administrator Guide</i>.</p>
+ * @public
+ */
+export class QConnect extends QConnectClient implements QConnect {}
+createAggregatedClient(commands, QConnect, { paginators });

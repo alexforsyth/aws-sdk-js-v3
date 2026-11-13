@@ -1,104 +1,129 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { UpdateLogLevelsByResourceTypesRequest, UpdateLogLevelsByResourceTypesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateLogLevelsByResourceTypesCommand,
-  serializeAws_restJson1UpdateLogLevelsByResourceTypesCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface UpdateLogLevelsByResourceTypesCommandInput extends UpdateLogLevelsByResourceTypesRequest {}
-export interface UpdateLogLevelsByResourceTypesCommandOutput
-  extends UpdateLogLevelsByResourceTypesResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateLogLevelsByResourceTypesRequest, UpdateLogLevelsByResourceTypesResponse } from "../models/models_1";
+import { UpdateLogLevelsByResourceTypes$ } from "../schemas/schemas_0";
 
 /**
- * <p>Set default log level, or log levels by resource types. This can be for wireless device log options or
- *             wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateLogLevelsByResourceTypesCommand}.
+ */
+export interface UpdateLogLevelsByResourceTypesCommandInput extends UpdateLogLevelsByResourceTypesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateLogLevelsByResourceTypesCommand}.
+ */
+export interface UpdateLogLevelsByResourceTypesCommandOutput extends UpdateLogLevelsByResourceTypesResponse, __MetadataBearer {}
+
+/**
+ * <p>Set default log level, or log levels by resource types. This can be for wireless
+ *             device, wireless gateway, or FUOTA task log options, and is used to control the log
+ *             messages that'll be displayed in CloudWatch.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTWirelessClient, UpdateLogLevelsByResourceTypesCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, UpdateLogLevelsByResourceTypesCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // UpdateLogLevelsByResourceTypesRequest
+ *   DefaultLogLevel: "INFO" || "ERROR" || "DISABLED",
+ *   FuotaTaskLogOptions: [ // FuotaTaskLogOptionList
+ *     { // FuotaTaskLogOption
+ *       Type: "LoRaWAN", // required
+ *       LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ *       Events: [ // FuotaTaskEventLogOptionList
+ *         { // FuotaTaskEventLogOption
+ *           Event: "Fuota", // required
+ *           LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   WirelessDeviceLogOptions: [ // WirelessDeviceLogOptionList
+ *     { // WirelessDeviceLogOption
+ *       Type: "Sidewalk" || "LoRaWAN", // required
+ *       LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ *       Events: [ // WirelessDeviceEventLogOptionList
+ *         { // WirelessDeviceEventLogOption
+ *           Event: "Join" || "Rejoin" || "Uplink_Data" || "Downlink_Data" || "Registration", // required
+ *           LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   WirelessGatewayLogOptions: [ // WirelessGatewayLogOptionList
+ *     { // WirelessGatewayLogOption
+ *       Type: "LoRaWAN", // required
+ *       LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ *       Events: [ // WirelessGatewayEventLogOptionList
+ *         { // WirelessGatewayEventLogOption
+ *           Event: "CUPS_Request" || "Certificate", // required
+ *           LogLevel: "INFO" || "ERROR" || "DISABLED", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new UpdateLogLevelsByResourceTypesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateLogLevelsByResourceTypesCommandInput - {@link UpdateLogLevelsByResourceTypesCommandInput}
+ * @returns {@link UpdateLogLevelsByResourceTypesCommandOutput}
  * @see {@link UpdateLogLevelsByResourceTypesCommandInput} for command's `input` shape.
  * @see {@link UpdateLogLevelsByResourceTypesCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateLogLevelsByResourceTypesCommand extends $Command<
-  UpdateLogLevelsByResourceTypesCommandInput,
-  UpdateLogLevelsByResourceTypesCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateLogLevelsByResourceTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateLogLevelsByResourceTypesCommandInput, UpdateLogLevelsByResourceTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "UpdateLogLevelsByResourceTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateLogLevelsByResourceTypesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateLogLevelsByResourceTypesResponse.filterSensitiveLog,
+export class UpdateLogLevelsByResourceTypesCommand extends command<UpdateLogLevelsByResourceTypesCommandInput, UpdateLogLevelsByResourceTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateLogLevelsByResourceTypes",
+  UpdateLogLevelsByResourceTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLogLevelsByResourceTypesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateLogLevelsByResourceTypesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateLogLevelsByResourceTypesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateLogLevelsByResourceTypesCommandOutput> {
-    return deserializeAws_restJson1UpdateLogLevelsByResourceTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateLogLevelsByResourceTypesCommandInput;
+      output: UpdateLogLevelsByResourceTypesCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { AcceptSharedDirectoryRequest, AcceptSharedDirectoryResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1AcceptSharedDirectoryCommand,
-  serializeAws_json1_1AcceptSharedDirectoryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AcceptSharedDirectoryRequest, AcceptSharedDirectoryResult } from "../models/models_0";
+import { AcceptSharedDirectory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptSharedDirectoryCommand}.
+ */
 export interface AcceptSharedDirectoryCommandInput extends AcceptSharedDirectoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptSharedDirectoryCommand}.
+ */
 export interface AcceptSharedDirectoryCommandOutput extends AcceptSharedDirectoryResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface AcceptSharedDirectoryCommandOutput extends AcceptSharedDirector
  * ```javascript
  * import { DirectoryServiceClient, AcceptSharedDirectoryCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, AcceptSharedDirectoryCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // AcceptSharedDirectoryRequest
+ *   SharedDirectoryId: "STRING_VALUE", // required
+ * };
  * const command = new AcceptSharedDirectoryCommand(input);
  * const response = await client.send(command);
+ * // { // AcceptSharedDirectoryResult
+ * //   SharedDirectory: { // SharedDirectory
+ * //     OwnerAccountId: "STRING_VALUE",
+ * //     OwnerDirectoryId: "STRING_VALUE",
+ * //     ShareMethod: "ORGANIZATIONS" || "HANDSHAKE",
+ * //     SharedAccountId: "STRING_VALUE",
+ * //     SharedDirectoryId: "STRING_VALUE",
+ * //     ShareStatus: "Shared" || "PendingAcceptance" || "Rejected" || "Rejecting" || "RejectFailed" || "Sharing" || "ShareFailed" || "Deleted" || "Deleting",
+ * //     ShareNotes: "STRING_VALUE",
+ * //     CreatedDateTime: new Date("TIMESTAMP"),
+ * //     LastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AcceptSharedDirectoryCommandInput - {@link AcceptSharedDirectoryCommandInput}
+ * @returns {@link AcceptSharedDirectoryCommandOutput}
  * @see {@link AcceptSharedDirectoryCommandInput} for command's `input` shape.
  * @see {@link AcceptSharedDirectoryCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link DirectoryAlreadySharedException} (client fault)
+ *  <p>The specified directory has already been shared with this Amazon Web Services account.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptSharedDirectoryCommand extends $Command<
-  AcceptSharedDirectoryCommandInput,
-  AcceptSharedDirectoryCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptSharedDirectoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptSharedDirectoryCommandInput, AcceptSharedDirectoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "AcceptSharedDirectoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptSharedDirectoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptSharedDirectoryResult.filterSensitiveLog,
+export class AcceptSharedDirectoryCommand extends command<AcceptSharedDirectoryCommandInput, AcceptSharedDirectoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptSharedDirectory",
+  AcceptSharedDirectory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptSharedDirectoryRequest;
+      output: AcceptSharedDirectoryResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AcceptSharedDirectoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AcceptSharedDirectoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AcceptSharedDirectoryCommandOutput> {
-    return deserializeAws_json1_1AcceptSharedDirectoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptSharedDirectoryCommandInput;
+      output: AcceptSharedDirectoryCommandOutput;
+    };
+  };
 }

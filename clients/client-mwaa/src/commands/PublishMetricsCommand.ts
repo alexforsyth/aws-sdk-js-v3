@@ -1,95 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PublishMetricsInput, PublishMetricsOutput } from "../models/models_0";
-import { MWAAClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MWAAClient";
-import {
-  deserializeAws_restJson1PublishMetricsCommand,
-  serializeAws_restJson1PublishMetricsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PublishMetricsInput, PublishMetricsOutput } from "../models/models_0";
+import { PublishMetrics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PublishMetricsCommand}.
+ */
 export interface PublishMetricsCommandInput extends PublishMetricsInput {}
+/**
+ * @public
+ *
+ * The output of {@link PublishMetricsCommand}.
+ */
 export interface PublishMetricsCommandOutput extends PublishMetricsOutput, __MetadataBearer {}
 
 /**
- * An operation for publishing metrics from the customers to the Ops plane.
+ * <p> <b>Internal only</b>. Publishes environment health metrics to Amazon CloudWatch.</p>
+ *
+ * @deprecated This API is for internal use and not meant for public use, and is no longer available.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MWAAClient, PublishMetricsCommand } from "@aws-sdk/client-mwaa"; // ES Modules import
  * // const { MWAAClient, PublishMetricsCommand } = require("@aws-sdk/client-mwaa"); // CommonJS import
+ * // import type { MWAAClientConfig } from "@aws-sdk/client-mwaa";
+ * const config = {}; // type is MWAAClientConfig
  * const client = new MWAAClient(config);
+ * const input = { // PublishMetricsInput
+ *   EnvironmentName: "STRING_VALUE", // required
+ *   MetricData: [ // MetricData // required
+ *     { // MetricDatum
+ *       MetricName: "STRING_VALUE", // required
+ *       Timestamp: new Date("TIMESTAMP"), // required
+ *       Dimensions: [ // Dimensions
+ *         { // Dimension
+ *           Name: "STRING_VALUE", // required
+ *           Value: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *       Value: Number("double"),
+ *       Unit: "STRING_VALUE",
+ *       StatisticValues: { // StatisticSet
+ *         SampleCount: Number("int"),
+ *         Sum: Number("double"),
+ *         Minimum: Number("double"),
+ *         Maximum: Number("double"),
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new PublishMetricsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PublishMetricsCommandInput - {@link PublishMetricsCommandInput}
+ * @returns {@link PublishMetricsCommandOutput}
  * @see {@link PublishMetricsCommandInput} for command's `input` shape.
  * @see {@link PublishMetricsCommandOutput} for command's `response` shape.
- * @see {@link MWAAClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MWAAClientResolvedConfig | config} for MWAAClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>InternalServerException: An internal error has occurred.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>ValidationException: The provided input is not valid.</p>
+ *
+ * @throws {@link MWAAServiceException}
+ * <p>Base exception class for all service exceptions from MWAA service.</p>
+ *
+ *
+ * @public
  */
-export class PublishMetricsCommand extends $Command<
-  PublishMetricsCommandInput,
-  PublishMetricsCommandOutput,
-  MWAAClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PublishMetricsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MWAAClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PublishMetricsCommandInput, PublishMetricsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MWAAClient";
-    const commandName = "PublishMetricsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PublishMetricsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PublishMetricsOutput.filterSensitiveLog,
+export class PublishMetricsCommand extends command<PublishMetricsCommandInput, PublishMetricsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PublishMetrics",
+  PublishMetrics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PublishMetricsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PublishMetricsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PublishMetricsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PublishMetricsCommandOutput> {
-    return deserializeAws_restJson1PublishMetricsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PublishMetricsCommandInput;
+      output: PublishMetricsCommandOutput;
+    };
+  };
 }

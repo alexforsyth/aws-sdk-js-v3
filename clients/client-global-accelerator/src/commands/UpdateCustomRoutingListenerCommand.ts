@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import { UpdateCustomRoutingListenerRequest, UpdateCustomRoutingListenerResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateCustomRoutingListenerCommand,
-  serializeAws_json1_1UpdateCustomRoutingListenerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateCustomRoutingListenerRequest, UpdateCustomRoutingListenerResponse } from "../models/models_0";
+import { UpdateCustomRoutingListener$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCustomRoutingListenerCommand}.
+ */
 export interface UpdateCustomRoutingListenerCommandInput extends UpdateCustomRoutingListenerRequest {}
-export interface UpdateCustomRoutingListenerCommandOutput
-  extends UpdateCustomRoutingListenerResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCustomRoutingListenerCommand}.
+ */
+export interface UpdateCustomRoutingListenerCommandOutput extends UpdateCustomRoutingListenerResponse, __MetadataBearer {}
 
 /**
  * <p>Update a listener for a custom routing accelerator. </p>
@@ -34,71 +29,76 @@ export interface UpdateCustomRoutingListenerCommandOutput
  * ```javascript
  * import { GlobalAcceleratorClient, UpdateCustomRoutingListenerCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, UpdateCustomRoutingListenerCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // UpdateCustomRoutingListenerRequest
+ *   ListenerArn: "STRING_VALUE", // required
+ *   PortRanges: [ // PortRanges // required
+ *     { // PortRange
+ *       FromPort: Number("int"),
+ *       ToPort: Number("int"),
+ *     },
+ *   ],
+ * };
  * const command = new UpdateCustomRoutingListenerCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateCustomRoutingListenerResponse
+ * //   Listener: { // CustomRoutingListener
+ * //     ListenerArn: "STRING_VALUE",
+ * //     PortRanges: [ // PortRanges
+ * //       { // PortRange
+ * //         FromPort: Number("int"),
+ * //         ToPort: Number("int"),
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateCustomRoutingListenerCommandInput - {@link UpdateCustomRoutingListenerCommandInput}
+ * @returns {@link UpdateCustomRoutingListenerCommandOutput}
  * @see {@link UpdateCustomRoutingListenerCommandInput} for command's `input` shape.
  * @see {@link UpdateCustomRoutingListenerCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link InvalidPortRangeException} (client fault)
+ *  <p>The port numbers that you specified are not valid numbers or are not unique for this accelerator.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Processing your request would cause you to exceed an Global Accelerator limit.</p>
+ *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The listener that you specified doesn't exist.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateCustomRoutingListenerCommand extends $Command<
-  UpdateCustomRoutingListenerCommandInput,
-  UpdateCustomRoutingListenerCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateCustomRoutingListenerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateCustomRoutingListenerCommandInput, UpdateCustomRoutingListenerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "UpdateCustomRoutingListenerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateCustomRoutingListenerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateCustomRoutingListenerResponse.filterSensitiveLog,
+export class UpdateCustomRoutingListenerCommand extends command<UpdateCustomRoutingListenerCommandInput, UpdateCustomRoutingListenerCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCustomRoutingListener",
+  UpdateCustomRoutingListener$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCustomRoutingListenerRequest;
+      output: UpdateCustomRoutingListenerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateCustomRoutingListenerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateCustomRoutingListenerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateCustomRoutingListenerCommandOutput> {
-    return deserializeAws_json1_1UpdateCustomRoutingListenerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateCustomRoutingListenerCommandInput;
+      output: UpdateCustomRoutingListenerCommandOutput;
+    };
+  };
 }

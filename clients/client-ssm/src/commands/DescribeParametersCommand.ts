@@ -1,38 +1,42 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeParametersRequest } from "../models/models_0";
-import { DescribeParametersResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeParametersCommand,
-  serializeAws_json1_1DescribeParametersCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeParametersRequest, DescribeParametersResult } from "../models/models_0";
+import { DescribeParameters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeParametersCommand}.
+ */
 export interface DescribeParametersCommandInput extends DescribeParametersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeParametersCommand}.
+ */
 export interface DescribeParametersCommandOutput extends DescribeParametersResult, __MetadataBearer {}
 
 /**
- * <p>Get information about a parameter.</p>
+ * <p>Lists the parameters in your Amazon Web Services account or the parameters shared with you when you enable
+ *    the <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html#systemsmanager-DescribeParameters-request-Shared">Shared</a> option.</p>
  *          <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>
  *    in the request, the response includes information up to the limit specified. The number of items
  *    returned, however, can be between zero and the value of <code>MaxResults</code>. If the service
  *    reaches an internal limit while processing the results, it stops the operation and returns the
  *    matching values up to that point and a <code>NextToken</code>. You can specify the
  *     <code>NextToken</code> in a subsequent call to get the next set of results.</p>
+ *          <p>Parameter names can't contain spaces. The service removes any spaces specified for the
+ *    beginning or end of a parameter name. If the specified name for a parameter contains spaces
+ *    between characters, the request fails with a <code>ValidationException</code> error.</p>
  *          <important>
- *             <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must
- *     also update the key alias the parameter uses to reference KMS. Otherwise,
+ *             <p>If you change the KMS key alias for the KMS key used to encrypt a parameter,
+ *     then you must also update the key alias the parameter uses to reference KMS. Otherwise,
  *      <code>DescribeParameters</code> retrieves whatever the original key alias was
  *     referencing.</p>
  *          </important>
@@ -41,68 +45,104 @@ export interface DescribeParametersCommandOutput extends DescribeParametersResul
  * ```javascript
  * import { SSMClient, DescribeParametersCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DescribeParametersCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DescribeParametersRequest
+ *   Filters: [ // ParametersFilterList
+ *     { // ParametersFilter
+ *       Key: "Name" || "Type" || "KeyId", // required
+ *       Values: [ // ParametersFilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   ParameterFilters: [ // ParameterStringFilterList
+ *     { // ParameterStringFilter
+ *       Key: "STRING_VALUE", // required
+ *       Option: "STRING_VALUE",
+ *       Values: [ // ParameterStringFilterValueList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Shared: true || false,
+ * };
  * const command = new DescribeParametersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeParametersResult
+ * //   Parameters: [ // ParameterMetadataList
+ * //     { // ParameterMetadata
+ * //       Name: "STRING_VALUE",
+ * //       ARN: "STRING_VALUE",
+ * //       Type: "String" || "StringList" || "SecureString",
+ * //       KeyId: "STRING_VALUE",
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       LastModifiedUser: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       AllowedPattern: "STRING_VALUE",
+ * //       Version: Number("long"),
+ * //       Tier: "Standard" || "Advanced" || "Intelligent-Tiering",
+ * //       Policies: [ // ParameterPolicyList
+ * //         { // ParameterInlinePolicy
+ * //           PolicyText: "STRING_VALUE",
+ * //           PolicyType: "STRING_VALUE",
+ * //           PolicyStatus: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       DataType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeParametersCommandInput - {@link DescribeParametersCommandInput}
+ * @returns {@link DescribeParametersCommandOutput}
  * @see {@link DescribeParametersCommandInput} for command's `input` shape.
  * @see {@link DescribeParametersCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidFilterKey} (client fault)
+ *  <p>The specified key isn't valid.</p>
+ *
+ * @throws {@link InvalidFilterOption} (client fault)
+ *  <p>The specified filter option isn't valid. Valid options are Equals and BeginsWith. For Path
+ *    filter, valid options are Recursive and OneLevel.</p>
+ *
+ * @throws {@link InvalidFilterValue} (client fault)
+ *  <p>The filter value isn't valid. Verify the value and try again.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeParametersCommand extends $Command<
-  DescribeParametersCommandInput,
-  DescribeParametersCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeParametersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeParametersCommandInput, DescribeParametersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DescribeParametersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeParametersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeParametersResult.filterSensitiveLog,
+export class DescribeParametersCommand extends command<DescribeParametersCommandInput, DescribeParametersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeParameters",
+  DescribeParameters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeParametersRequest;
+      output: DescribeParametersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeParametersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeParametersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeParametersCommandOutput> {
-    return deserializeAws_json1_1DescribeParametersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeParametersCommandInput;
+      output: DescribeParametersCommandOutput;
+    };
+  };
 }

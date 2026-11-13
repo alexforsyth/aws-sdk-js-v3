@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { Route53RecoveryControlConfigClientConfig } from "./Route53RecoveryControlConfigClient";
+// smithy-typescript generated code
+import type { Route53RecoveryControlConfigClientConfig } from "./Route53RecoveryControlConfigClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: Route53RecoveryControlConfigClientConfi
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

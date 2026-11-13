@@ -1,21 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { XmlListsOutput } from "../models/models_0";
-import { deserializeAws_queryXmlListsCommand, serializeAws_queryXmlListsCommand } from "../protocols/Aws_query";
-import { QueryProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QueryProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { XmlListsOutput } from "../models/models_0";
+import { de_XmlListsCommand, se_XmlListsCommand } from "../protocols/Aws_query";
+import type { QueryProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QueryProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link XmlListsCommand}.
+ */
 export interface XmlListsCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link XmlListsCommand}.
+ */
 export interface XmlListsCommandOutput extends XmlListsOutput, __MetadataBearer {}
 
 /**
@@ -34,68 +42,106 @@ export interface XmlListsCommandOutput extends XmlListsOutput, __MetadataBearer 
  * ```javascript
  * import { QueryProtocolClient, XmlListsCommand } from "@aws-sdk/aws-protocoltests-query"; // ES Modules import
  * // const { QueryProtocolClient, XmlListsCommand } = require("@aws-sdk/aws-protocoltests-query"); // CommonJS import
+ * // import type { QueryProtocolClientConfig } from "@aws-sdk/aws-protocoltests-query";
+ * const config = {}; // type is QueryProtocolClientConfig
  * const client = new QueryProtocolClient(config);
+ * const input = {};
  * const command = new XmlListsCommand(input);
  * const response = await client.send(command);
+ * // { // XmlListsOutput
+ * //   stringList: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   stringSet: [ // StringSet
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   integerList: [ // IntegerList
+ * //     Number("int"),
+ * //   ],
+ * //   booleanList: [ // BooleanList
+ * //     true || false,
+ * //   ],
+ * //   timestampList: [ // TimestampList
+ * //     new Date("TIMESTAMP"),
+ * //   ],
+ * //   enumList: [ // FooEnumList
+ * //     "Foo" || "Baz" || "Bar" || "1" || "0",
+ * //   ],
+ * //   intEnumList: [ // IntegerEnumList
+ * //     1 || 2 || 3,
+ * //   ],
+ * //   nestedStringList: [ // NestedStringList
+ * //     [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   ],
+ * //   renamedListMembers: [ // RenamedListMembers
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   flattenedList: [
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   flattenedList2: [
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   flattenedListWithMemberNamespace: [ // ListWithMemberNamespace
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   flattenedListWithNamespace: [ // ListWithNamespace
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   structureList: [ // StructureList
+ * //     { // StructureListMember
+ * //       a: "STRING_VALUE",
+ * //       b: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param XmlListsCommandInput - {@link XmlListsCommandInput}
+ * @returns {@link XmlListsCommandOutput}
  * @see {@link XmlListsCommandInput} for command's `input` shape.
  * @see {@link XmlListsCommandOutput} for command's `response` shape.
- * @see {@link QueryProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QueryProtocolClientResolvedConfig | config} for QueryProtocolClient's `config` shape.
  *
+ * @throws {@link QueryProtocolServiceException}
+ * <p>Base exception class for all service exceptions from QueryProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class XmlListsCommand extends $Command<
-  XmlListsCommandInput,
-  XmlListsCommandOutput,
-  QueryProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: XmlListsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QueryProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<XmlListsCommandInput, XmlListsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QueryProtocolClient";
-    const commandName = "XmlListsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: XmlListsOutput.filterSensitiveLog,
+export class XmlListsCommand extends $Command
+  .classBuilder<
+    XmlListsCommandInput,
+    XmlListsCommandOutput,
+    QueryProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: QueryProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("AwsQuery", "XmlLists", {})
+  .n("QueryProtocolClient", "XmlListsCommand")
+  .f(void 0, void 0)
+  .ser(se_XmlListsCommand)
+  .de(de_XmlListsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: XmlListsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: XmlListsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryXmlListsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<XmlListsCommandOutput> {
-    return deserializeAws_queryXmlListsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: XmlListsCommandInput;
+      output: XmlListsCommandOutput;
+    };
+  };
 }

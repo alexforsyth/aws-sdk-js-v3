@@ -1,30 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeCachediSCSIVolumesInput, DescribeCachediSCSIVolumesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeCachediSCSIVolumesCommand,
-  serializeAws_json1_1DescribeCachediSCSIVolumesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeCachediSCSIVolumesInput, DescribeCachediSCSIVolumesOutput } from "../models/models_0";
+import { DescribeCachediSCSIVolumes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeCachediSCSIVolumesCommand}.
+ */
 export interface DescribeCachediSCSIVolumesCommandInput extends DescribeCachediSCSIVolumesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeCachediSCSIVolumesCommand}.
+ */
 export interface DescribeCachediSCSIVolumesCommandOutput extends DescribeCachediSCSIVolumesOutput, __MetadataBearer {}
 
 /**
  * <p>Returns a description of the gateway volumes specified in the request. This operation is
  *          only supported in the cached volume gateway types.</p>
- *
  *          <p>The list of gateway volumes in the request must be from one gateway. In the response,
  *             Storage Gateway returns volume information sorted by volume Amazon Resource Name
  *          (ARN).</p>
@@ -33,71 +33,111 @@ export interface DescribeCachediSCSIVolumesCommandOutput extends DescribeCachedi
  * ```javascript
  * import { StorageGatewayClient, DescribeCachediSCSIVolumesCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DescribeCachediSCSIVolumesCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DescribeCachediSCSIVolumesInput
+ *   VolumeARNs: [ // VolumeARNs // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeCachediSCSIVolumesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeCachediSCSIVolumesOutput
+ * //   CachediSCSIVolumes: [ // CachediSCSIVolumes
+ * //     { // CachediSCSIVolume
+ * //       VolumeARN: "STRING_VALUE",
+ * //       VolumeId: "STRING_VALUE",
+ * //       VolumeType: "STRING_VALUE",
+ * //       VolumeStatus: "STRING_VALUE",
+ * //       VolumeAttachmentStatus: "STRING_VALUE",
+ * //       VolumeSizeInBytes: Number("long"),
+ * //       VolumeProgress: Number("double"),
+ * //       SourceSnapshotId: "STRING_VALUE",
+ * //       VolumeiSCSIAttributes: { // VolumeiSCSIAttributes
+ * //         TargetARN: "STRING_VALUE",
+ * //         NetworkInterfaceId: "STRING_VALUE",
+ * //         NetworkInterfacePort: Number("int"),
+ * //         LunNumber: Number("int"),
+ * //         ChapEnabled: true || false,
+ * //       },
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       VolumeUsedInBytes: Number("long"),
+ * //       KMSKey: "STRING_VALUE",
+ * //       TargetName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeCachediSCSIVolumesCommandInput - {@link DescribeCachediSCSIVolumesCommandInput}
+ * @returns {@link DescribeCachediSCSIVolumesCommandOutput}
  * @see {@link DescribeCachediSCSIVolumesCommandInput} for command's `input` shape.
  * @see {@link DescribeCachediSCSIVolumesCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To describe gateway cached iSCSI volumes
+ * ```javascript
+ * // Returns a description of the gateway cached iSCSI volumes specified in the request.
+ * const input = {
+ *   VolumeARNs: [
+ *     "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"
+ *   ]
+ * };
+ * const command = new DescribeCachediSCSIVolumesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   CachediSCSIVolumes: [
+ *     {
+ *       VolumeARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB",
+ *       VolumeId: "vol-1122AABB",
+ *       VolumeSizeInBytes: 1099511627776,
+ *       VolumeStatus: "AVAILABLE",
+ *       VolumeType: "CACHED iSCSI",
+ *       VolumeiSCSIAttributes: {
+ *         ChapEnabled: true,
+ *         LunNumber: 1,
+ *         NetworkInterfaceId: "10.243.43.207",
+ *         NetworkInterfacePort: 3260,
+ *         TargetARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"
+ *       }
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeCachediSCSIVolumesCommand extends $Command<
-  DescribeCachediSCSIVolumesCommandInput,
-  DescribeCachediSCSIVolumesCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeCachediSCSIVolumesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeCachediSCSIVolumesCommandInput, DescribeCachediSCSIVolumesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DescribeCachediSCSIVolumesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeCachediSCSIVolumesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeCachediSCSIVolumesOutput.filterSensitiveLog,
+export class DescribeCachediSCSIVolumesCommand extends command<DescribeCachediSCSIVolumesCommandInput, DescribeCachediSCSIVolumesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCachediSCSIVolumes",
+  DescribeCachediSCSIVolumes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCachediSCSIVolumesInput;
+      output: DescribeCachediSCSIVolumesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeCachediSCSIVolumesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeCachediSCSIVolumesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeCachediSCSIVolumesCommandOutput> {
-    return deserializeAws_json1_1DescribeCachediSCSIVolumesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeCachediSCSIVolumesCommandInput;
+      output: DescribeCachediSCSIVolumesCommandOutput;
+    };
+  };
 }

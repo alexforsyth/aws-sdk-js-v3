@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { TagUserRequest } from "../models/models_0";
-import { deserializeAws_queryTagUserCommand, serializeAws_queryTagUserCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagUserRequest } from "../models/models_1";
+import { TagUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagUserCommand}.
+ */
 export interface TagUserCommandInput extends TagUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TagUserCommand}.
+ */
 export interface TagUserCommandOutput extends __MetadataBearer {}
 
 /**
@@ -34,7 +38,7 @@ export interface TagUserCommandOutput extends __MetadataBearer {}
  *             </li>
  *             <li>
  *                <p>
- *                   <b>Access control</b> - Include tags in IAM user-based
+ *                   <b>Access control</b> - Include tags in IAM identity-based
  *           and resource-based policies. You can use tags to restrict access to only an IAM
  *           requesting user that has a specified tag attached. You can also restrict access to only
  *           those resources that have a certain tag attached. For examples of policies that show how
@@ -68,64 +72,94 @@ export interface TagUserCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IAMClient, TagUserCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, TagUserCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // TagUserRequest
+ *   UserName: "STRING_VALUE", // required
+ *   Tags: [ // tagListType // required
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new TagUserCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param TagUserCommandInput - {@link TagUserCommandInput}
+ * @returns {@link TagUserCommandOutput}
  * @see {@link TagUserCommandInput} for command's `input` shape.
  * @see {@link TagUserCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The request was rejected because multiple requests to change this object were submitted
+ *       simultaneously. Wait a few minutes and submit your request again.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *       input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *       Amazon Web Services account limits. The error message describes the limit exceeded.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To add a tag key and value to an IAM user
+ * ```javascript
+ * // The following example shows how to add tags to an existing user.
+ * const input = {
+ *   Tags: [
+ *     {
+ *       Key: "Dept",
+ *       Value: "Accounting"
+ *     },
+ *     {
+ *       Key: "CostCenter",
+ *       Value: "12345"
+ *     }
+ *   ],
+ *   UserName: "anika"
+ * };
+ * const command = new TagUserCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class TagUserCommand extends $Command<TagUserCommandInput, TagUserCommandOutput, IAMClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TagUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TagUserCommandInput, TagUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "TagUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TagUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class TagUserCommand extends command<TagUserCommandInput, TagUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagUser",
+  TagUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagUserRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TagUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryTagUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TagUserCommandOutput> {
-    return deserializeAws_queryTagUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TagUserCommandInput;
+      output: TagUserCommandOutput;
+    };
+  };
 }

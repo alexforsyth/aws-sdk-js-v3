@@ -1,39 +1,40 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetBucketRequest, GetBucketResult } from "../models/models_0";
-import { deserializeAws_restXmlGetBucketCommand, serializeAws_restXmlGetBucketCommand } from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep5, _mw1, command } from "../commandBuilder";
+import type { GetBucketRequest, GetBucketResult } from "../models/models_0";
+import { GetBucket$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBucketCommand}.
+ */
 export interface GetBucketCommandInput extends GetBucketRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBucketCommand}.
+ */
 export interface GetBucketCommandOutput extends GetBucketResult, __MetadataBearer {}
 
 /**
- * <p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">
- *          Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>
- *          <p>If you are using an identity other than the root user of the Amazon Web Services account
- *          that owns the Outposts bucket, the calling identity must have the
- *          <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and
- *          belong to the Outposts bucket owner's account in order to use this action. Only
- *          users from Outposts bucket owner account with the right permissions can perform
- *          actions on an Outposts bucket.
- *       </p>
- *          <p>
- *          If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's
- *          account, Amazon S3 returns a <code>403 Access Denied</code> error.</p>
+ * <p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html"> Using Amazon S3 on Outposts</a> in the
+ *             <i>Amazon S3 User Guide</i>.</p>
+ *          <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the
+ *          Outposts bucket, the calling identity must have the <code>s3-outposts:GetBucket</code>
+ *          permissions on the specified Outposts bucket and belong to the Outposts bucket owner's
+ *          account in order to use this action. Only users from Outposts bucket owner account with
+ *          the right permissions can perform actions on an Outposts bucket. </p>
+ *          <p>If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an
+ *          identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access
+ *             Denied</code> error.</p>
  *          <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p>
- *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples">Examples</a> section.</p>
+ *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples">Examples</a> section.</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -56,69 +57,50 @@ export interface GetBucketCommandOutput extends GetBucketResult, __MetadataBeare
  * ```javascript
  * import { S3ControlClient, GetBucketCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, GetBucketCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // GetBucketRequest
+ *   AccountId: "STRING_VALUE",
+ *   Bucket: "STRING_VALUE", // required
+ * };
  * const command = new GetBucketCommand(input);
  * const response = await client.send(command);
+ * // { // GetBucketResult
+ * //   Bucket: "STRING_VALUE",
+ * //   PublicAccessBlockEnabled: true || false,
+ * //   CreationDate: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetBucketCommandInput - {@link GetBucketCommandInput}
+ * @returns {@link GetBucketCommandOutput}
  * @see {@link GetBucketCommandInput} for command's `input` shape.
  * @see {@link GetBucketCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class GetBucketCommand extends $Command<
-  GetBucketCommandInput,
-  GetBucketCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBucketCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBucketCommandInput, GetBucketCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "GetBucketCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBucketRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBucketResult.filterSensitiveLog,
+export class GetBucketCommand extends command<GetBucketCommandInput, GetBucketCommandOutput>(
+  _ep5,
+  _mw1,
+  "GetBucket",
+  GetBucket$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBucketRequest;
+      output: GetBucketResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBucketCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetBucketCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBucketCommandOutput> {
-    return deserializeAws_restXmlGetBucketCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBucketCommandInput;
+      output: GetBucketCommandOutput;
+    };
+  };
 }

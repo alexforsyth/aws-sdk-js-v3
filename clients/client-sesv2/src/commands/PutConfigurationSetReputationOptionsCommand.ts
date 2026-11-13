@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   PutConfigurationSetReputationOptionsRequest,
   PutConfigurationSetReputationOptionsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutConfigurationSetReputationOptionsCommand,
-  serializeAws_restJson1PutConfigurationSetReputationOptionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+import { PutConfigurationSetReputationOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutConfigurationSetReputationOptionsCommand}.
+ */
 export interface PutConfigurationSetReputationOptionsCommandInput extends PutConfigurationSetReputationOptionsRequest {}
-export interface PutConfigurationSetReputationOptionsCommandOutput
-  extends PutConfigurationSetReputationOptionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link PutConfigurationSetReputationOptionsCommand}.
+ */
+export interface PutConfigurationSetReputationOptionsCommandOutput extends PutConfigurationSetReputationOptionsResponse, __MetadataBearer {}
 
 /**
  * <p>Enable or disable collection of reputation metrics for emails that you send using a
@@ -34,74 +33,55 @@ export interface PutConfigurationSetReputationOptionsCommandOutput
  * ```javascript
  * import { SESv2Client, PutConfigurationSetReputationOptionsCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, PutConfigurationSetReputationOptionsCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // PutConfigurationSetReputationOptionsRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   ReputationMetricsEnabled: true || false,
+ * };
  * const command = new PutConfigurationSetReputationOptionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutConfigurationSetReputationOptionsCommandInput - {@link PutConfigurationSetReputationOptionsCommandInput}
+ * @returns {@link PutConfigurationSetReputationOptionsCommandOutput}
  * @see {@link PutConfigurationSetReputationOptionsCommandInput} for command's `input` shape.
  * @see {@link PutConfigurationSetReputationOptionsCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class PutConfigurationSetReputationOptionsCommand extends $Command<
-  PutConfigurationSetReputationOptionsCommandInput,
-  PutConfigurationSetReputationOptionsCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutConfigurationSetReputationOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutConfigurationSetReputationOptionsCommandInput, PutConfigurationSetReputationOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "PutConfigurationSetReputationOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutConfigurationSetReputationOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutConfigurationSetReputationOptionsResponse.filterSensitiveLog,
+export class PutConfigurationSetReputationOptionsCommand extends command<PutConfigurationSetReputationOptionsCommandInput, PutConfigurationSetReputationOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutConfigurationSetReputationOptions",
+  PutConfigurationSetReputationOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutConfigurationSetReputationOptionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutConfigurationSetReputationOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutConfigurationSetReputationOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutConfigurationSetReputationOptionsCommandOutput> {
-    return deserializeAws_restJson1PutConfigurationSetReputationOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutConfigurationSetReputationOptionsCommandInput;
+      output: PutConfigurationSetReputationOptionsCommandOutput;
+    };
+  };
 }

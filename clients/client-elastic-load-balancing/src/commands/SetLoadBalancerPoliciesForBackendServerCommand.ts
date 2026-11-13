@@ -1,35 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   SetLoadBalancerPoliciesForBackendServerInput,
   SetLoadBalancerPoliciesForBackendServerOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_querySetLoadBalancerPoliciesForBackendServerCommand,
-  serializeAws_querySetLoadBalancerPoliciesForBackendServerCommand,
-} from "../protocols/Aws_query";
+import { SetLoadBalancerPoliciesForBackendServer$ } from "../schemas/schemas_0";
 
-export interface SetLoadBalancerPoliciesForBackendServerCommandInput
-  extends SetLoadBalancerPoliciesForBackendServerInput {}
-export interface SetLoadBalancerPoliciesForBackendServerCommandOutput
-  extends SetLoadBalancerPoliciesForBackendServerOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetLoadBalancerPoliciesForBackendServerCommand}.
+ */
+export interface SetLoadBalancerPoliciesForBackendServerCommandInput extends SetLoadBalancerPoliciesForBackendServerInput {}
+/**
+ * @public
+ *
+ * The output of {@link SetLoadBalancerPoliciesForBackendServerCommand}.
+ */
+export interface SetLoadBalancerPoliciesForBackendServerCommandOutput extends SetLoadBalancerPoliciesForBackendServerOutput, __MetadataBearer {}
 
 /**
  * <p>Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies.
@@ -48,77 +42,75 @@ export interface SetLoadBalancerPoliciesForBackendServerCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, SetLoadBalancerPoliciesForBackendServerCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, SetLoadBalancerPoliciesForBackendServerCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // SetLoadBalancerPoliciesForBackendServerInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   InstancePort: Number("int"), // required
+ *   PolicyNames: [ // PolicyNames // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new SetLoadBalancerPoliciesForBackendServerCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetLoadBalancerPoliciesForBackendServerCommandInput - {@link SetLoadBalancerPoliciesForBackendServerCommandInput}
+ * @returns {@link SetLoadBalancerPoliciesForBackendServerCommandOutput}
  * @see {@link SetLoadBalancerPoliciesForBackendServerCommandInput} for command's `input` shape.
  * @see {@link SetLoadBalancerPoliciesForBackendServerCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link InvalidConfigurationRequestException} (client fault)
+ *  <p>The requested configuration change is not valid.</p>
+ *
+ * @throws {@link PolicyNotFoundException} (client fault)
+ *  <p>One or more of the specified policies do not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To replace the policies associated with a port for a backend instance
+ * ```javascript
+ * // This example replaces the policies that are currently associated with the specified port.
+ * const input = {
+ *   InstancePort: 80,
+ *   LoadBalancerName: "my-load-balancer",
+ *   PolicyNames: [
+ *     "my-ProxyProtocol-policy"
+ *   ]
+ * };
+ * const command = new SetLoadBalancerPoliciesForBackendServerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class SetLoadBalancerPoliciesForBackendServerCommand extends $Command<
-  SetLoadBalancerPoliciesForBackendServerCommandInput,
-  SetLoadBalancerPoliciesForBackendServerCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetLoadBalancerPoliciesForBackendServerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    SetLoadBalancerPoliciesForBackendServerCommandInput,
-    SetLoadBalancerPoliciesForBackendServerCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "SetLoadBalancerPoliciesForBackendServerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetLoadBalancerPoliciesForBackendServerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: SetLoadBalancerPoliciesForBackendServerOutput.filterSensitiveLog,
+export class SetLoadBalancerPoliciesForBackendServerCommand extends command<SetLoadBalancerPoliciesForBackendServerCommandInput, SetLoadBalancerPoliciesForBackendServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetLoadBalancerPoliciesForBackendServer",
+  SetLoadBalancerPoliciesForBackendServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetLoadBalancerPoliciesForBackendServerInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: SetLoadBalancerPoliciesForBackendServerCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_querySetLoadBalancerPoliciesForBackendServerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SetLoadBalancerPoliciesForBackendServerCommandOutput> {
-    return deserializeAws_querySetLoadBalancerPoliciesForBackendServerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetLoadBalancerPoliciesForBackendServerCommandInput;
+      output: SetLoadBalancerPoliciesForBackendServerCommandOutput;
+    };
+  };
 }

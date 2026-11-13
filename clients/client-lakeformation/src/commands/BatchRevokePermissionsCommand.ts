@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import { BatchRevokePermissionsRequest, BatchRevokePermissionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchRevokePermissionsCommand,
-  serializeAws_json1_1BatchRevokePermissionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchRevokePermissionsRequest, BatchRevokePermissionsResponse } from "../models/models_0";
+import { BatchRevokePermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchRevokePermissionsCommand}.
+ */
 export interface BatchRevokePermissionsCommandInput extends BatchRevokePermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchRevokePermissionsCommand}.
+ */
 export interface BatchRevokePermissionsCommandOutput extends BatchRevokePermissionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,244 @@ export interface BatchRevokePermissionsCommandOutput extends BatchRevokePermissi
  * ```javascript
  * import { LakeFormationClient, BatchRevokePermissionsCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, BatchRevokePermissionsCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // BatchRevokePermissionsRequest
+ *   CatalogId: "STRING_VALUE",
+ *   Entries: [ // BatchPermissionsRequestEntryList // required
+ *     { // BatchPermissionsRequestEntry
+ *       Id: "STRING_VALUE", // required
+ *       Principal: { // DataLakePrincipal
+ *         DataLakePrincipalIdentifier: "STRING_VALUE",
+ *       },
+ *       Resource: { // Resource
+ *         AnyResource: { // AnyResource
+ *           CatalogId: "STRING_VALUE",
+ *           ResourceType: "TABLE", // required
+ *         },
+ *         Catalog: { // CatalogResource
+ *           Id: "STRING_VALUE",
+ *         },
+ *         Database: { // DatabaseResource
+ *           CatalogId: "STRING_VALUE",
+ *           Name: "STRING_VALUE", // required
+ *         },
+ *         Table: { // TableResource
+ *           CatalogId: "STRING_VALUE",
+ *           DatabaseName: "STRING_VALUE", // required
+ *           Name: "STRING_VALUE",
+ *           TableWildcard: {},
+ *         },
+ *         TableWithColumns: { // TableWithColumnsResource
+ *           CatalogId: "STRING_VALUE",
+ *           DatabaseName: "STRING_VALUE", // required
+ *           Name: "STRING_VALUE", // required
+ *           ColumnNames: [ // ColumnNames
+ *             "STRING_VALUE",
+ *           ],
+ *           ColumnWildcard: { // ColumnWildcard
+ *             ExcludedColumnNames: [
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         },
+ *         DataLocation: { // DataLocationResource
+ *           CatalogId: "STRING_VALUE",
+ *           ResourceArn: "STRING_VALUE", // required
+ *         },
+ *         DataCellsFilter: { // DataCellsFilterResource
+ *           TableCatalogId: "STRING_VALUE",
+ *           DatabaseName: "STRING_VALUE",
+ *           TableName: "STRING_VALUE",
+ *           Name: "STRING_VALUE",
+ *         },
+ *         LFTag: { // LFTagKeyResource
+ *           CatalogId: "STRING_VALUE",
+ *           TagKey: "STRING_VALUE", // required
+ *           TagValues: [ // TagValueList // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *         LFTagPolicy: { // LFTagPolicyResource
+ *           CatalogId: "STRING_VALUE",
+ *           ResourceType: "DATABASE" || "TABLE", // required
+ *           Expression: [ // Expression
+ *             { // LFTag
+ *               TagKey: "STRING_VALUE", // required
+ *               TagValues: [ // required
+ *                 "STRING_VALUE",
+ *               ],
+ *             },
+ *           ],
+ *           ExpressionName: "STRING_VALUE",
+ *         },
+ *         LFTagExpression: { // LFTagExpressionResource
+ *           CatalogId: "STRING_VALUE",
+ *           Name: "STRING_VALUE", // required
+ *         },
+ *         RLSPolicy: { // RLSPolicyResource
+ *           CatalogId: "STRING_VALUE",
+ *           Name: "STRING_VALUE", // required
+ *         },
+ *         UserDefinedFunction: { // UserDefinedFunctionResource
+ *           CatalogId: "STRING_VALUE",
+ *           DatabaseName: "STRING_VALUE", // required
+ *           Name: "STRING_VALUE",
+ *           UserDefinedFunctionWildcard: {},
+ *         },
+ *       },
+ *       Permissions: [ // PermissionList
+ *         "ALL" || "SELECT" || "ALTER" || "DROP" || "DELETE" || "INSERT" || "DESCRIBE" || "CREATE_DATABASE" || "CREATE_TABLE" || "DATA_LOCATION_ACCESS" || "CREATE_LF_TAG" || "ASSOCIATE" || "GRANT_WITH_LF_TAG_EXPRESSION" || "CREATE_LF_TAG_EXPRESSION" || "CREATE_CATALOG" || "SUPER_USER" || "EXECUTE",
+ *       ],
+ *       Condition: { // Condition
+ *         Expression: "STRING_VALUE",
+ *       },
+ *       PermissionsWithGrantOption: [
+ *         "ALL" || "SELECT" || "ALTER" || "DROP" || "DELETE" || "INSERT" || "DESCRIBE" || "CREATE_DATABASE" || "CREATE_TABLE" || "DATA_LOCATION_ACCESS" || "CREATE_LF_TAG" || "ASSOCIATE" || "GRANT_WITH_LF_TAG_EXPRESSION" || "CREATE_LF_TAG_EXPRESSION" || "CREATE_CATALOG" || "SUPER_USER" || "EXECUTE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new BatchRevokePermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // BatchRevokePermissionsResponse
+ * //   Failures: [ // BatchPermissionsFailureList
+ * //     { // BatchPermissionsFailureEntry
+ * //       RequestEntry: { // BatchPermissionsRequestEntry
+ * //         Id: "STRING_VALUE", // required
+ * //         Principal: { // DataLakePrincipal
+ * //           DataLakePrincipalIdentifier: "STRING_VALUE",
+ * //         },
+ * //         Resource: { // Resource
+ * //           AnyResource: { // AnyResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             ResourceType: "TABLE", // required
+ * //           },
+ * //           Catalog: { // CatalogResource
+ * //             Id: "STRING_VALUE",
+ * //           },
+ * //           Database: { // DatabaseResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             Name: "STRING_VALUE", // required
+ * //           },
+ * //           Table: { // TableResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             DatabaseName: "STRING_VALUE", // required
+ * //             Name: "STRING_VALUE",
+ * //             TableWildcard: {},
+ * //           },
+ * //           TableWithColumns: { // TableWithColumnsResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             DatabaseName: "STRING_VALUE", // required
+ * //             Name: "STRING_VALUE", // required
+ * //             ColumnNames: [ // ColumnNames
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             ColumnWildcard: { // ColumnWildcard
+ * //               ExcludedColumnNames: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           },
+ * //           DataLocation: { // DataLocationResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             ResourceArn: "STRING_VALUE", // required
+ * //           },
+ * //           DataCellsFilter: { // DataCellsFilterResource
+ * //             TableCatalogId: "STRING_VALUE",
+ * //             DatabaseName: "STRING_VALUE",
+ * //             TableName: "STRING_VALUE",
+ * //             Name: "STRING_VALUE",
+ * //           },
+ * //           LFTag: { // LFTagKeyResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             TagKey: "STRING_VALUE", // required
+ * //             TagValues: [ // TagValueList // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           LFTagPolicy: { // LFTagPolicyResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             ResourceType: "DATABASE" || "TABLE", // required
+ * //             Expression: [ // Expression
+ * //               { // LFTag
+ * //                 TagKey: "STRING_VALUE", // required
+ * //                 TagValues: [ // required
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             ],
+ * //             ExpressionName: "STRING_VALUE",
+ * //           },
+ * //           LFTagExpression: { // LFTagExpressionResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             Name: "STRING_VALUE", // required
+ * //           },
+ * //           RLSPolicy: { // RLSPolicyResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             Name: "STRING_VALUE", // required
+ * //           },
+ * //           UserDefinedFunction: { // UserDefinedFunctionResource
+ * //             CatalogId: "STRING_VALUE",
+ * //             DatabaseName: "STRING_VALUE", // required
+ * //             Name: "STRING_VALUE",
+ * //             UserDefinedFunctionWildcard: {},
+ * //           },
+ * //         },
+ * //         Permissions: [ // PermissionList
+ * //           "ALL" || "SELECT" || "ALTER" || "DROP" || "DELETE" || "INSERT" || "DESCRIBE" || "CREATE_DATABASE" || "CREATE_TABLE" || "DATA_LOCATION_ACCESS" || "CREATE_LF_TAG" || "ASSOCIATE" || "GRANT_WITH_LF_TAG_EXPRESSION" || "CREATE_LF_TAG_EXPRESSION" || "CREATE_CATALOG" || "SUPER_USER" || "EXECUTE",
+ * //         ],
+ * //         Condition: { // Condition
+ * //           Expression: "STRING_VALUE",
+ * //         },
+ * //         PermissionsWithGrantOption: [
+ * //           "ALL" || "SELECT" || "ALTER" || "DROP" || "DELETE" || "INSERT" || "DESCRIBE" || "CREATE_DATABASE" || "CREATE_TABLE" || "DATA_LOCATION_ACCESS" || "CREATE_LF_TAG" || "ASSOCIATE" || "GRANT_WITH_LF_TAG_EXPRESSION" || "CREATE_LF_TAG_EXPRESSION" || "CREATE_CATALOG" || "SUPER_USER" || "EXECUTE",
+ * //         ],
+ * //       },
+ * //       Error: { // ErrorDetail
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchRevokePermissionsCommandInput - {@link BatchRevokePermissionsCommandInput}
+ * @returns {@link BatchRevokePermissionsCommandOutput}
  * @see {@link BatchRevokePermissionsCommandInput} for command's `input` shape.
  * @see {@link BatchRevokePermissionsCommandOutput} for command's `response` shape.
- * @see {@link LakeFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class BatchRevokePermissionsCommand extends $Command<
-  BatchRevokePermissionsCommandInput,
-  BatchRevokePermissionsCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchRevokePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchRevokePermissionsCommandInput, BatchRevokePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "BatchRevokePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchRevokePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchRevokePermissionsResponse.filterSensitiveLog,
+export class BatchRevokePermissionsCommand extends command<BatchRevokePermissionsCommandInput, BatchRevokePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchRevokePermissions",
+  BatchRevokePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchRevokePermissionsRequest;
+      output: BatchRevokePermissionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchRevokePermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchRevokePermissionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchRevokePermissionsCommandOutput> {
-    return deserializeAws_json1_1BatchRevokePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchRevokePermissionsCommandInput;
+      output: BatchRevokePermissionsCommandOutput;
+    };
+  };
 }

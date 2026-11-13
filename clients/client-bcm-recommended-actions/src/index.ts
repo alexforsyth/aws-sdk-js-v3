@@ -1,0 +1,22 @@
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>You can use the Billing and Cost Management Recommended Actions API to programmatically query your best practices and recommendations to optimize your costs.</p> <p>The Billing and Cost Management Recommended Actions API provides the following endpoint:</p> <ul> <li> <p> https://bcm-recommended-actions.us-east-1.api.aws</p> </li> </ul>
+ *
+ * @packageDocumentation
+ */
+export * from "./BCMRecommendedActionsClient";
+export * from "./BCMRecommendedActions";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { BCMRecommendedActionsExtensionConfiguration } from "./extensionConfiguration";
+export * from "./commands";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { BCMRecommendedActionsServiceException } from "./models/BCMRecommendedActionsServiceException";

@@ -1,95 +1,138 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { DescribeAddonVersionsRequest, DescribeAddonVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAddonVersionsCommand,
-  serializeAws_restJson1DescribeAddonVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAddonVersionsRequest, DescribeAddonVersionsResponse } from "../models/models_0";
+import { DescribeAddonVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAddonVersionsCommand}.
+ */
 export interface DescribeAddonVersionsCommandInput extends DescribeAddonVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAddonVersionsCommand}.
+ */
 export interface DescribeAddonVersionsCommandOutput extends DescribeAddonVersionsResponse, __MetadataBearer {}
 
 /**
- * <p>Describes the Kubernetes versions that the add-on can be used with.</p>
+ * <p>Describes the versions for an add-on.</p>
+ *          <p>Information such as the Kubernetes versions that you can use the add-on with, the
+ *                 <code>owner</code>, <code>publisher</code>, and the <code>type</code> of the add-on
+ *             are returned.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EKSClient, DescribeAddonVersionsCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, DescribeAddonVersionsCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // DescribeAddonVersionsRequest
+ *   kubernetesVersion: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   addonName: "STRING_VALUE",
+ *   types: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   publishers: [
+ *     "STRING_VALUE",
+ *   ],
+ *   owners: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeAddonVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAddonVersionsResponse
+ * //   addons: [ // Addons
+ * //     { // AddonInfo
+ * //       addonName: "STRING_VALUE",
+ * //       type: "STRING_VALUE",
+ * //       addonVersions: [ // AddonVersionInfoList
+ * //         { // AddonVersionInfo
+ * //           addonVersion: "STRING_VALUE",
+ * //           architecture: [ // StringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           computeTypes: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           compatibilities: [ // Compatibilities
+ * //             { // Compatibility
+ * //               clusterVersion: "STRING_VALUE",
+ * //               platformVersions: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               defaultVersion: true || false,
+ * //             },
+ * //           ],
+ * //           requiresConfiguration: true || false,
+ * //           requiresIamPermissions: true || false,
+ * //         },
+ * //       ],
+ * //       publisher: "STRING_VALUE",
+ * //       owner: "STRING_VALUE",
+ * //       marketplaceInformation: { // MarketplaceInformation
+ * //         productId: "STRING_VALUE",
+ * //         productUrl: "STRING_VALUE",
+ * //       },
+ * //       defaultNamespace: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAddonVersionsCommandInput - {@link DescribeAddonVersionsCommandInput}
+ * @returns {@link DescribeAddonVersionsCommandOutput}
  * @see {@link DescribeAddonVersionsCommandInput} for command's `input` shape.
  * @see {@link DescribeAddonVersionsCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAddonVersionsCommand extends $Command<
-  DescribeAddonVersionsCommandInput,
-  DescribeAddonVersionsCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAddonVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAddonVersionsCommandInput, DescribeAddonVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "DescribeAddonVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAddonVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAddonVersionsResponse.filterSensitiveLog,
+export class DescribeAddonVersionsCommand extends command<DescribeAddonVersionsCommandInput, DescribeAddonVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAddonVersions",
+  DescribeAddonVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAddonVersionsRequest;
+      output: DescribeAddonVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAddonVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAddonVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAddonVersionsCommandOutput> {
-    return deserializeAws_restJson1DescribeAddonVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAddonVersionsCommandInput;
+      output: DescribeAddonVersionsCommandOutput;
+    };
+  };
 }

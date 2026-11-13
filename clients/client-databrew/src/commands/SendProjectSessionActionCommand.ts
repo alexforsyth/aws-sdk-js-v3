@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { SendProjectSessionActionRequest, SendProjectSessionActionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SendProjectSessionActionCommand,
-  serializeAws_restJson1SendProjectSessionActionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendProjectSessionActionRequest, SendProjectSessionActionResponse } from "../models/models_0";
+import { SendProjectSessionAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendProjectSessionActionCommand}.
+ */
 export interface SendProjectSessionActionCommandInput extends SendProjectSessionActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SendProjectSessionActionCommand}.
+ */
 export interface SendProjectSessionActionCommandOutput extends SendProjectSessionActionResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,86 @@ export interface SendProjectSessionActionCommandOutput extends SendProjectSessio
  * ```javascript
  * import { DataBrewClient, SendProjectSessionActionCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, SendProjectSessionActionCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // SendProjectSessionActionRequest
+ *   Preview: true || false,
+ *   Name: "STRING_VALUE", // required
+ *   RecipeStep: { // RecipeStep
+ *     Action: { // RecipeAction
+ *       Operation: "STRING_VALUE", // required
+ *       Parameters: { // ParameterMap
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *     ConditionExpressions: [ // ConditionExpressionList
+ *       { // ConditionExpression
+ *         Condition: "STRING_VALUE", // required
+ *         Value: "STRING_VALUE",
+ *         TargetColumn: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ *   StepIndex: Number("int"),
+ *   ClientSessionId: "STRING_VALUE",
+ *   ViewFrame: { // ViewFrame
+ *     StartColumnIndex: Number("int"), // required
+ *     ColumnRange: Number("int"),
+ *     HiddenColumns: [ // HiddenColumnList
+ *       "STRING_VALUE",
+ *     ],
+ *     StartRowIndex: Number("int"),
+ *     RowRange: Number("int"),
+ *     Analytics: "ENABLE" || "DISABLE",
+ *   },
+ * };
  * const command = new SendProjectSessionActionCommand(input);
  * const response = await client.send(command);
+ * // { // SendProjectSessionActionResponse
+ * //   Result: "STRING_VALUE",
+ * //   Name: "STRING_VALUE", // required
+ * //   ActionId: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param SendProjectSessionActionCommandInput - {@link SendProjectSessionActionCommandInput}
+ * @returns {@link SendProjectSessionActionCommandOutput}
  * @see {@link SendProjectSessionActionCommandInput} for command's `input` shape.
  * @see {@link SendProjectSessionActionCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class SendProjectSessionActionCommand extends $Command<
-  SendProjectSessionActionCommandInput,
-  SendProjectSessionActionCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendProjectSessionActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendProjectSessionActionCommandInput, SendProjectSessionActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "SendProjectSessionActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendProjectSessionActionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SendProjectSessionActionResponse.filterSensitiveLog,
+export class SendProjectSessionActionCommand extends command<SendProjectSessionActionCommandInput, SendProjectSessionActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendProjectSessionAction",
+  SendProjectSessionAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendProjectSessionActionRequest;
+      output: SendProjectSessionActionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendProjectSessionActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SendProjectSessionActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SendProjectSessionActionCommandOutput> {
-    return deserializeAws_restJson1SendProjectSessionActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendProjectSessionActionCommandInput;
+      output: SendProjectSessionActionCommandOutput;
+    };
+  };
 }

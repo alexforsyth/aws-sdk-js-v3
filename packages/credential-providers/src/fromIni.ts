@@ -1,10 +1,5 @@
-import { getDefaultRoleAssumer, getDefaultRoleAssumerWithWebIdentity, STSClientConfig } from "@aws-sdk/client-sts";
-import { fromIni as _fromIni, FromIniInit as _FromIniInit } from "@aws-sdk/credential-provider-ini";
-import { CredentialProvider } from "@aws-sdk/types";
-
-export interface FromIniInit extends _FromIniInit {
-  clientConfig?: STSClientConfig;
-}
+import type { FromIniInit } from "@aws-sdk/credential-provider-ini";
+import type { AwsIdentityProperties, RuntimeConfigAwsCredentialIdentityProvider } from "@aws-sdk/types";
 
 /**
  * Creates a credential provider function that reads from a shared credentials file at `~/.aws/credentials` and a
@@ -38,14 +33,18 @@ export interface FromIniInit extends _FromIniInit {
  *     },
  *     // Optional. Custom STS client configurations overriding the default ones.
  *     clientConfig: { region },
+ *     // Optional. Custom STS client middleware plugin to modify the client default behavior.
+ *     // e.g. adding custom headers.
+ *     clientPlugins: [addFooHeadersPlugin],
  *   }),
  * });
  * ```
+ *
+ * @public
  */
-export const fromIni = (init: FromIniInit = {}): CredentialProvider =>
-  _fromIni({
-    ...init,
-    roleAssumer: init.roleAssumer ?? getDefaultRoleAssumer(init.clientConfig),
-    roleAssumerWithWebIdentity:
-      init.roleAssumerWithWebIdentity ?? getDefaultRoleAssumerWithWebIdentity(init.clientConfig),
-  });
+export const fromIni = (init: FromIniInit = {}): RuntimeConfigAwsCredentialIdentityProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromIni: _fromIni } = await import("@aws-sdk/credential-provider-ini");
+    return _fromIni({ ...init })(args);
+  };
+};

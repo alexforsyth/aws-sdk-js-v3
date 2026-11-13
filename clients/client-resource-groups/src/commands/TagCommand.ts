@@ -1,39 +1,43 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { TagInput, TagOutput } from "../models/models_0";
-import { deserializeAws_restJson1TagCommand, serializeAws_restJson1TagCommand } from "../protocols/Aws_restJson1";
-import { ResourceGroupsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResourceGroupsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagInput, TagOutput } from "../models/models_0";
+import { Tag$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagCommand}.
+ */
 export interface TagCommandInput extends TagInput {}
+/**
+ * @public
+ *
+ * The output of {@link TagCommand}.
+ */
 export interface TagCommandOutput extends TagOutput, __MetadataBearer {}
 
 /**
- * <p>Adds tags to a resource group with the specified ARN. Existing tags on a resource
+ * <p>Adds tags to a resource group with the specified Amazon resource name (ARN). Existing tags on a resource
  *             group are not changed if they are not specified in the request parameters.</p>
- *         <important>
+ *          <important>
  *             <p>Do not store personally identifiable information (PII) or other confidential or
  *                 sensitive information in tags. We use tags to provide you with billing and
  *                 administration services. Tags are not intended to be used for private or sensitive
  *                 data.</p>
- *         </important>
- *         <p>
+ *          </important>
+ *          <p>
  *             <b>Minimum permissions</b>
  *          </p>
  *          <p>To run this command, you must have the following permissions:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <code>resource-groups:Tag</code>
  *                </p>
  *             </li>
@@ -43,64 +47,72 @@ export interface TagCommandOutput extends TagOutput, __MetadataBearer {}
  * ```javascript
  * import { ResourceGroupsClient, TagCommand } from "@aws-sdk/client-resource-groups"; // ES Modules import
  * // const { ResourceGroupsClient, TagCommand } = require("@aws-sdk/client-resource-groups"); // CommonJS import
+ * // import type { ResourceGroupsClientConfig } from "@aws-sdk/client-resource-groups";
+ * const config = {}; // type is ResourceGroupsClientConfig
  * const client = new ResourceGroupsClient(config);
+ * const input = { // TagInput
+ *   Arn: "STRING_VALUE", // required
+ *   Tags: { // Tags // required
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new TagCommand(input);
  * const response = await client.send(command);
+ * // { // TagOutput
+ * //   Arn: "STRING_VALUE",
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param TagCommandInput - {@link TagCommandInput}
+ * @returns {@link TagCommandOutput}
  * @see {@link TagCommandInput} for command's `input` shape.
  * @see {@link TagCommandOutput} for command's `response` shape.
- * @see {@link ResourceGroupsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ResourceGroupsClientResolvedConfig | config} for ResourceGroupsClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request includes one or more parameters that violate validation rules.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The caller isn't authorized to make the request. Check permissions.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal error occurred while processing the request. Try again later.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The request uses an HTTP method that isn't allowed for the specified resource.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the specified resources don't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>You've exceeded throttling limits by making too many requests in a period of
+ *             time.</p>
+ *
+ * @throws {@link ResourceGroupsServiceException}
+ * <p>Base exception class for all service exceptions from ResourceGroups service.</p>
+ *
+ *
+ * @public
  */
-export class TagCommand extends $Command<TagCommandInput, TagCommandOutput, ResourceGroupsClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TagCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResourceGroupsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TagCommandInput, TagCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResourceGroupsClient";
-    const commandName = "TagCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TagInput.filterSensitiveLog,
-      outputFilterSensitiveLog: TagOutput.filterSensitiveLog,
+export class TagCommand extends command<TagCommandInput, TagCommandOutput>(
+  _ep0,
+  _mw0,
+  "Tag",
+  Tag$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagInput;
+      output: TagOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TagCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1TagCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TagCommandOutput> {
-    return deserializeAws_restJson1TagCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TagCommandInput;
+      output: TagCommandOutput;
+    };
+  };
 }

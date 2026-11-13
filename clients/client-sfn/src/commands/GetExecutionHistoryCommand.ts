@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetExecutionHistoryInput, GetExecutionHistoryOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0GetExecutionHistoryCommand,
-  serializeAws_json1_0GetExecutionHistoryCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetExecutionHistoryInput, GetExecutionHistoryOutput } from "../models/models_0";
+import { GetExecutionHistory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetExecutionHistoryCommand}.
+ */
 export interface GetExecutionHistoryCommandInput extends GetExecutionHistoryInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetExecutionHistoryCommand}.
+ */
 export interface GetExecutionHistoryCommandOutput extends GetExecutionHistoryOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,271 @@ export interface GetExecutionHistoryCommandOutput extends GetExecutionHistoryOut
  * ```javascript
  * import { SFNClient, GetExecutionHistoryCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, GetExecutionHistoryCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // GetExecutionHistoryInput
+ *   executionArn: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   reverseOrder: true || false,
+ *   nextToken: "STRING_VALUE",
+ *   includeExecutionData: true || false,
+ * };
  * const command = new GetExecutionHistoryCommand(input);
  * const response = await client.send(command);
+ * // { // GetExecutionHistoryOutput
+ * //   events: [ // HistoryEventList // required
+ * //     { // HistoryEvent
+ * //       timestamp: new Date("TIMESTAMP"), // required
+ * //       type: "ActivityFailed" || "ActivityScheduled" || "ActivityScheduleFailed" || "ActivityStarted" || "ActivitySucceeded" || "ActivityTimedOut" || "ChoiceStateEntered" || "ChoiceStateExited" || "ExecutionAborted" || "ExecutionFailed" || "ExecutionStarted" || "ExecutionSucceeded" || "ExecutionTimedOut" || "FailStateEntered" || "LambdaFunctionFailed" || "LambdaFunctionScheduled" || "LambdaFunctionScheduleFailed" || "LambdaFunctionStarted" || "LambdaFunctionStartFailed" || "LambdaFunctionSucceeded" || "LambdaFunctionTimedOut" || "MapIterationAborted" || "MapIterationFailed" || "MapIterationStarted" || "MapIterationSucceeded" || "MapStateAborted" || "MapStateEntered" || "MapStateExited" || "MapStateFailed" || "MapStateStarted" || "MapStateSucceeded" || "ParallelStateAborted" || "ParallelStateEntered" || "ParallelStateExited" || "ParallelStateFailed" || "ParallelStateStarted" || "ParallelStateSucceeded" || "PassStateEntered" || "PassStateExited" || "SucceedStateEntered" || "SucceedStateExited" || "TaskFailed" || "TaskScheduled" || "TaskStarted" || "TaskStartFailed" || "TaskStateAborted" || "TaskStateEntered" || "TaskStateExited" || "TaskSubmitFailed" || "TaskSubmitted" || "TaskSucceeded" || "TaskTimedOut" || "WaitStateAborted" || "WaitStateEntered" || "WaitStateExited" || "MapRunAborted" || "MapRunFailed" || "MapRunStarted" || "MapRunSucceeded" || "ExecutionRedriven" || "MapRunRedriven" || "EvaluationFailed", // required
+ * //       id: Number("long"), // required
+ * //       previousEventId: Number("long"),
+ * //       activityFailedEventDetails: { // ActivityFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       activityScheduleFailedEventDetails: { // ActivityScheduleFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       activityScheduledEventDetails: { // ActivityScheduledEventDetails
+ * //         resource: "STRING_VALUE", // required
+ * //         input: "STRING_VALUE",
+ * //         inputDetails: { // HistoryEventExecutionDataDetails
+ * //           truncated: true || false,
+ * //         },
+ * //         timeoutInSeconds: Number("long"),
+ * //         heartbeatInSeconds: Number("long"),
+ * //       },
+ * //       activityStartedEventDetails: { // ActivityStartedEventDetails
+ * //         workerName: "STRING_VALUE",
+ * //       },
+ * //       activitySucceededEventDetails: { // ActivitySucceededEventDetails
+ * //         output: "STRING_VALUE",
+ * //         outputDetails: {
+ * //           truncated: true || false,
+ * //         },
+ * //       },
+ * //       activityTimedOutEventDetails: { // ActivityTimedOutEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       taskFailedEventDetails: { // TaskFailedEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       taskScheduledEventDetails: { // TaskScheduledEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         region: "STRING_VALUE", // required
+ * //         parameters: "STRING_VALUE", // required
+ * //         timeoutInSeconds: Number("long"),
+ * //         heartbeatInSeconds: Number("long"),
+ * //         taskCredentials: { // TaskCredentials
+ * //           roleArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       taskStartFailedEventDetails: { // TaskStartFailedEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       taskStartedEventDetails: { // TaskStartedEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //       },
+ * //       taskSubmitFailedEventDetails: { // TaskSubmitFailedEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       taskSubmittedEventDetails: { // TaskSubmittedEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         output: "STRING_VALUE",
+ * //         outputDetails: {
+ * //           truncated: true || false,
+ * //         },
+ * //       },
+ * //       taskSucceededEventDetails: { // TaskSucceededEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         output: "STRING_VALUE",
+ * //         outputDetails: {
+ * //           truncated: true || false,
+ * //         },
+ * //       },
+ * //       taskTimedOutEventDetails: { // TaskTimedOutEventDetails
+ * //         resourceType: "STRING_VALUE", // required
+ * //         resource: "STRING_VALUE", // required
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       executionFailedEventDetails: { // ExecutionFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       executionStartedEventDetails: { // ExecutionStartedEventDetails
+ * //         input: "STRING_VALUE",
+ * //         inputDetails: {
+ * //           truncated: true || false,
+ * //         },
+ * //         roleArn: "STRING_VALUE",
+ * //         stateMachineAliasArn: "STRING_VALUE",
+ * //         stateMachineVersionArn: "STRING_VALUE",
+ * //       },
+ * //       executionSucceededEventDetails: { // ExecutionSucceededEventDetails
+ * //         output: "STRING_VALUE",
+ * //         outputDetails: "<HistoryEventExecutionDataDetails>",
+ * //       },
+ * //       executionAbortedEventDetails: { // ExecutionAbortedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       executionTimedOutEventDetails: { // ExecutionTimedOutEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       executionRedrivenEventDetails: { // ExecutionRedrivenEventDetails
+ * //         redriveCount: Number("int"),
+ * //       },
+ * //       mapStateStartedEventDetails: { // MapStateStartedEventDetails
+ * //         length: Number("int"),
+ * //       },
+ * //       mapIterationStartedEventDetails: { // MapIterationEventDetails
+ * //         name: "STRING_VALUE",
+ * //         index: Number("int"),
+ * //       },
+ * //       mapIterationSucceededEventDetails: {
+ * //         name: "STRING_VALUE",
+ * //         index: Number("int"),
+ * //       },
+ * //       mapIterationFailedEventDetails: {
+ * //         name: "STRING_VALUE",
+ * //         index: Number("int"),
+ * //       },
+ * //       mapIterationAbortedEventDetails: {
+ * //         name: "STRING_VALUE",
+ * //         index: Number("int"),
+ * //       },
+ * //       lambdaFunctionFailedEventDetails: { // LambdaFunctionFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       lambdaFunctionScheduleFailedEventDetails: { // LambdaFunctionScheduleFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       lambdaFunctionScheduledEventDetails: { // LambdaFunctionScheduledEventDetails
+ * //         resource: "STRING_VALUE", // required
+ * //         input: "STRING_VALUE",
+ * //         inputDetails: "<HistoryEventExecutionDataDetails>",
+ * //         timeoutInSeconds: Number("long"),
+ * //         taskCredentials: {
+ * //           roleArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       lambdaFunctionStartFailedEventDetails: { // LambdaFunctionStartFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       lambdaFunctionSucceededEventDetails: { // LambdaFunctionSucceededEventDetails
+ * //         output: "STRING_VALUE",
+ * //         outputDetails: "<HistoryEventExecutionDataDetails>",
+ * //       },
+ * //       lambdaFunctionTimedOutEventDetails: { // LambdaFunctionTimedOutEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       stateEnteredEventDetails: { // StateEnteredEventDetails
+ * //         name: "STRING_VALUE", // required
+ * //         input: "STRING_VALUE",
+ * //         inputDetails: "<HistoryEventExecutionDataDetails>",
+ * //       },
+ * //       stateExitedEventDetails: { // StateExitedEventDetails
+ * //         name: "STRING_VALUE", // required
+ * //         output: "STRING_VALUE",
+ * //         outputDetails: "<HistoryEventExecutionDataDetails>",
+ * //         assignedVariables: { // AssignedVariables
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         assignedVariablesDetails: { // AssignedVariablesDetails
+ * //           truncated: true || false,
+ * //         },
+ * //       },
+ * //       mapRunStartedEventDetails: { // MapRunStartedEventDetails
+ * //         mapRunArn: "STRING_VALUE",
+ * //       },
+ * //       mapRunFailedEventDetails: { // MapRunFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //       },
+ * //       mapRunRedrivenEventDetails: { // MapRunRedrivenEventDetails
+ * //         mapRunArn: "STRING_VALUE",
+ * //         redriveCount: Number("int"),
+ * //       },
+ * //       evaluationFailedEventDetails: { // EvaluationFailedEventDetails
+ * //         error: "STRING_VALUE",
+ * //         cause: "STRING_VALUE",
+ * //         location: "STRING_VALUE",
+ * //         state: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetExecutionHistoryCommandInput - {@link GetExecutionHistoryCommandInput}
+ * @returns {@link GetExecutionHistoryCommandOutput}
  * @see {@link GetExecutionHistoryCommandInput} for command's `input` shape.
  * @see {@link GetExecutionHistoryCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link ExecutionDoesNotExist} (client fault)
+ *  <p>The specified execution does not exist.</p>
+ *
+ * @throws {@link InvalidArn} (client fault)
+ *  <p>The provided Amazon Resource Name (ARN) is not valid.</p>
+ *
+ * @throws {@link InvalidToken} (client fault)
+ *  <p>The provided token is not valid.</p>
+ *
+ * @throws {@link KmsAccessDeniedException} (client fault)
+ *  <p>Either your KMS key policy or API caller does not have the required permissions.</p>
+ *
+ * @throws {@link KmsInvalidStateException} (client fault)
+ *  <p>The KMS key is not in valid state, for example: Disabled or Deleted.</p>
+ *
+ * @throws {@link KmsThrottlingException} (client fault)
+ *  <p>Received when KMS returns <code>ThrottlingException</code> for a KMS call that Step Functions makes on behalf of the caller.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class GetExecutionHistoryCommand extends $Command<
-  GetExecutionHistoryCommandInput,
-  GetExecutionHistoryCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetExecutionHistoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetExecutionHistoryCommandInput, GetExecutionHistoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "GetExecutionHistoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetExecutionHistoryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetExecutionHistoryOutput.filterSensitiveLog,
+export class GetExecutionHistoryCommand extends command<GetExecutionHistoryCommandInput, GetExecutionHistoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetExecutionHistory",
+  GetExecutionHistory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExecutionHistoryInput;
+      output: GetExecutionHistoryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetExecutionHistoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetExecutionHistoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetExecutionHistoryCommandOutput> {
-    return deserializeAws_json1_0GetExecutionHistoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetExecutionHistoryCommandInput;
+      output: GetExecutionHistoryCommandOutput;
+    };
+  };
 }

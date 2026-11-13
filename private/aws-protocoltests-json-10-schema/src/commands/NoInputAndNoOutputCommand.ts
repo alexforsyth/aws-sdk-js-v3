@@ -1,0 +1,72 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import { NoInputAndNoOutput$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link NoInputAndNoOutputCommand}.
+ */
+export interface NoInputAndNoOutputCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link NoInputAndNoOutputCommand}.
+ */
+export interface NoInputAndNoOutputCommandOutput extends __MetadataBearer {}
+
+/**
+ * The example tests how requests and responses are serialized when there's
+ * no request or response payload because the operation has no input or output.
+ * While this should be rare, code generators must support this.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { JSONRPC10Client, NoInputAndNoOutputCommand } from "@aws-sdk/aws-protocoltests-json-10-schema"; // ES Modules import
+ * // const { JSONRPC10Client, NoInputAndNoOutputCommand } = require("@aws-sdk/aws-protocoltests-json-10-schema"); // CommonJS import
+ * // import type { JSONRPC10ClientConfig } from "@aws-sdk/aws-protocoltests-json-10-schema";
+ * const config = {}; // type is JSONRPC10ClientConfig
+ * const client = new JSONRPC10Client(config);
+ * const input = {};
+ * const command = new NoInputAndNoOutputCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param NoInputAndNoOutputCommandInput - {@link NoInputAndNoOutputCommandInput}
+ * @returns {@link NoInputAndNoOutputCommandOutput}
+ * @see {@link NoInputAndNoOutputCommandInput} for command's `input` shape.
+ * @see {@link NoInputAndNoOutputCommandOutput} for command's `response` shape.
+ * @see {@link JSONRPC10ClientResolvedConfig | config} for JSONRPC10Client's `config` shape.
+ *
+ * @throws {@link JSONRPC10ServiceException}
+ * <p>Base exception class for all service exceptions from JSONRPC10 service.</p>
+ *
+ *
+ * @public
+ */
+export class NoInputAndNoOutputCommand extends command<NoInputAndNoOutputCommandInput, NoInputAndNoOutputCommandOutput>(
+  _ep0,
+  _mw0,
+  "NoInputAndNoOutput",
+  NoInputAndNoOutput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
+    };
+    sdk: {
+      input: NoInputAndNoOutputCommandInput;
+      output: NoInputAndNoOutputCommandOutput;
+    };
+  };
+}

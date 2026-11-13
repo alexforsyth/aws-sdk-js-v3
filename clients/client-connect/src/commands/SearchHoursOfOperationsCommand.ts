@@ -1,0 +1,172 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchHoursOfOperationsResponse } from "../models/models_3";
+import type { SearchHoursOfOperationsRequest } from "../models/models_4";
+import { SearchHoursOfOperations$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchHoursOfOperationsCommand}.
+ */
+export interface SearchHoursOfOperationsCommandInput extends SearchHoursOfOperationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchHoursOfOperationsCommand}.
+ */
+export interface SearchHoursOfOperationsCommandOutput extends SearchHoursOfOperationsResponse, __MetadataBearer {}
+
+/**
+ * <p>Searches the hours of operation in an Connect Customer instance, with optional filtering.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, SearchHoursOfOperationsCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, SearchHoursOfOperationsCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // SearchHoursOfOperationsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   SearchFilter: { // HoursOfOperationSearchFilter
+ *     TagFilter: { // ControlPlaneTagFilter
+ *       OrConditions: [ // TagOrConditionList
+ *         [ // TagAndConditionList
+ *           { // TagCondition
+ *             TagKey: "STRING_VALUE",
+ *             TagValue: "STRING_VALUE",
+ *           },
+ *         ],
+ *       ],
+ *       AndConditions: [
+ *         {
+ *           TagKey: "STRING_VALUE",
+ *           TagValue: "STRING_VALUE",
+ *         },
+ *       ],
+ *       TagCondition: "<TagCondition>",
+ *     },
+ *   },
+ *   SearchCriteria: { // HoursOfOperationSearchCriteria
+ *     OrConditions: [ // HoursOfOperationSearchConditionList
+ *       {
+ *         OrConditions: [
+ *           "<HoursOfOperationSearchCriteria>",
+ *         ],
+ *         AndConditions: [
+ *           "<HoursOfOperationSearchCriteria>",
+ *         ],
+ *         StringCondition: { // StringCondition
+ *           FieldName: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *           ComparisonType: "STARTS_WITH" || "CONTAINS" || "EXACT",
+ *         },
+ *       },
+ *     ],
+ *     AndConditions: [
+ *       "<HoursOfOperationSearchCriteria>",
+ *     ],
+ *     StringCondition: {
+ *       FieldName: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *       ComparisonType: "STARTS_WITH" || "CONTAINS" || "EXACT",
+ *     },
+ *   },
+ * };
+ * const command = new SearchHoursOfOperationsCommand(input);
+ * const response = await client.send(command);
+ * // { // SearchHoursOfOperationsResponse
+ * //   HoursOfOperations: [ // HoursOfOperationList
+ * //     { // HoursOfOperation
+ * //       HoursOfOperationId: "STRING_VALUE",
+ * //       HoursOfOperationArn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       TimeZone: "STRING_VALUE",
+ * //       Config: [ // HoursOfOperationConfigList
+ * //         { // HoursOfOperationConfig
+ * //           Day: "SUNDAY" || "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY", // required
+ * //           StartTime: { // HoursOfOperationTimeSlice
+ * //             Hours: Number("int"), // required
+ * //             Minutes: Number("int"), // required
+ * //           },
+ * //           EndTime: {
+ * //             Hours: Number("int"), // required
+ * //             Minutes: Number("int"), // required
+ * //           },
+ * //         },
+ * //       ],
+ * //       ParentHoursOfOperations: [ // ParentHoursOfOperationsList
+ * //         { // HoursOfOperationsIdentifier
+ * //           Name: "STRING_VALUE", // required
+ * //           Id: "STRING_VALUE", // required
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedRegion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   ApproximateTotalCount: Number("long"),
+ * // };
+ *
+ * ```
+ *
+ * @param SearchHoursOfOperationsCommandInput - {@link SearchHoursOfOperationsCommandInput}
+ * @returns {@link SearchHoursOfOperationsCommandOutput}
+ * @see {@link SearchHoursOfOperationsCommandInput} for command's `input` shape.
+ * @see {@link SearchHoursOfOperationsCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class SearchHoursOfOperationsCommand extends command<SearchHoursOfOperationsCommandInput, SearchHoursOfOperationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchHoursOfOperations",
+  SearchHoursOfOperations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchHoursOfOperationsRequest;
+      output: SearchHoursOfOperationsResponse;
+    };
+    sdk: {
+      input: SearchHoursOfOperationsCommandInput;
+      output: SearchHoursOfOperationsCommandOutput;
+    };
+  };
+}

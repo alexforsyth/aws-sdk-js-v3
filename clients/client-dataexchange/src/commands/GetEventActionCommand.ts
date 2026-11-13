@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataExchangeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataExchangeClient";
-import { GetEventActionRequest, GetEventActionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetEventActionCommand,
-  serializeAws_restJson1GetEventActionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEventActionRequest, GetEventActionResponse } from "../models/models_0";
+import { GetEventAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEventActionCommand}.
+ */
 export interface GetEventActionCommandInput extends GetEventActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEventActionCommand}.
+ */
 export interface GetEventActionCommandOutput extends GetEventActionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface GetEventActionCommandOutput extends GetEventActionResponse, __M
  * ```javascript
  * import { DataExchangeClient, GetEventActionCommand } from "@aws-sdk/client-dataexchange"; // ES Modules import
  * // const { DataExchangeClient, GetEventActionCommand } = require("@aws-sdk/client-dataexchange"); // CommonJS import
+ * // import type { DataExchangeClientConfig } from "@aws-sdk/client-dataexchange";
+ * const config = {}; // type is DataExchangeClientConfig
  * const client = new DataExchangeClient(config);
+ * const input = { // GetEventActionRequest
+ *   EventActionId: "STRING_VALUE", // required
+ * };
  * const command = new GetEventActionCommand(input);
  * const response = await client.send(command);
+ * // { // GetEventActionResponse
+ * //   Action: { // Action
+ * //     ExportRevisionToS3: { // AutoExportRevisionToS3RequestDetails
+ * //       Encryption: { // ExportServerSideEncryption
+ * //         KmsKeyArn: "STRING_VALUE",
+ * //         Type: "STRING_VALUE", // required
+ * //       },
+ * //       RevisionDestination: { // AutoExportRevisionDestinationEntry
+ * //         Bucket: "STRING_VALUE", // required
+ * //         KeyPattern: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * //   Arn: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"),
+ * //   Event: { // Event
+ * //     RevisionPublished: { // RevisionPublished
+ * //       DataSetId: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   Tags: { // MapOf__string
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   UpdatedAt: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetEventActionCommandInput - {@link GetEventActionCommandInput}
+ * @returns {@link GetEventActionCommandOutput}
  * @see {@link GetEventActionCommandInput} for command's `input` shape.
  * @see {@link GetEventActionCommandOutput} for command's `response` shape.
- * @see {@link DataExchangeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataExchangeClientResolvedConfig | config} for DataExchangeClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was invalid.</p>
+ *
+ * @throws {@link DataExchangeServiceException}
+ * <p>Base exception class for all service exceptions from DataExchange service.</p>
+ *
+ *
+ * @public
  */
-export class GetEventActionCommand extends $Command<
-  GetEventActionCommandInput,
-  GetEventActionCommandOutput,
-  DataExchangeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetEventActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataExchangeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetEventActionCommandInput, GetEventActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataExchangeClient";
-    const commandName = "GetEventActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetEventActionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetEventActionResponse.filterSensitiveLog,
+export class GetEventActionCommand extends command<GetEventActionCommandInput, GetEventActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEventAction",
+  GetEventAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEventActionRequest;
+      output: GetEventActionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetEventActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetEventActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetEventActionCommandOutput> {
-    return deserializeAws_restJson1GetEventActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetEventActionCommandInput;
+      output: GetEventActionCommandOutput;
+    };
+  };
 }

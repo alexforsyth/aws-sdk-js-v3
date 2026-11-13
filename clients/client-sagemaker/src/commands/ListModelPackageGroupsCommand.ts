@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListModelPackageGroupsInput, ListModelPackageGroupsOutput } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListModelPackageGroupsCommand,
-  serializeAws_json1_1ListModelPackageGroupsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListModelPackageGroupsInput, ListModelPackageGroupsOutput } from "../models/models_4";
+import { ListModelPackageGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListModelPackageGroupsCommand}.
+ */
 export interface ListModelPackageGroupsCommandInput extends ListModelPackageGroupsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListModelPackageGroupsCommand}.
+ */
 export interface ListModelPackageGroupsCommandOutput extends ListModelPackageGroupsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface ListModelPackageGroupsCommandOutput extends ListModelPackageGro
  * ```javascript
  * import { SageMakerClient, ListModelPackageGroupsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListModelPackageGroupsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListModelPackageGroupsInput
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   MaxResults: Number("int"),
+ *   NameContains: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ *   CrossAccountFilterOption: "SameAccount" || "CrossAccount",
+ * };
  * const command = new ListModelPackageGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListModelPackageGroupsOutput
+ * //   ModelPackageGroupSummaryList: [ // ModelPackageGroupSummaryList // required
+ * //     { // ModelPackageGroupSummary
+ * //       ModelPackageGroupName: "STRING_VALUE", // required
+ * //       ModelPackageGroupArn: "STRING_VALUE", // required
+ * //       ModelPackageGroupDescription: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       ModelPackageGroupStatus: "Pending" || "InProgress" || "Completed" || "Failed" || "Deleting" || "DeleteFailed", // required
+ * //       ManagedConfiguration: { // ManagedConfiguration
+ * //         ManagedStorageType: "Restricted",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListModelPackageGroupsCommandInput - {@link ListModelPackageGroupsCommandInput}
+ * @returns {@link ListModelPackageGroupsCommandOutput}
  * @see {@link ListModelPackageGroupsCommandInput} for command's `input` shape.
  * @see {@link ListModelPackageGroupsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListModelPackageGroupsCommand extends $Command<
-  ListModelPackageGroupsCommandInput,
-  ListModelPackageGroupsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListModelPackageGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListModelPackageGroupsCommandInput, ListModelPackageGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListModelPackageGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListModelPackageGroupsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListModelPackageGroupsOutput.filterSensitiveLog,
+export class ListModelPackageGroupsCommand extends command<ListModelPackageGroupsCommandInput, ListModelPackageGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListModelPackageGroups",
+  ListModelPackageGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListModelPackageGroupsInput;
+      output: ListModelPackageGroupsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListModelPackageGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListModelPackageGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListModelPackageGroupsCommandOutput> {
-    return deserializeAws_json1_1ListModelPackageGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListModelPackageGroupsCommandInput;
+      output: ListModelPackageGroupsCommandOutput;
+    };
+  };
 }

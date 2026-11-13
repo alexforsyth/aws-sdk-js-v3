@@ -1,36 +1,49 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type {
   MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+  StreamingBlobPayloadInputTypes,
+  StreamingBlobPayloadOutputTypes,
+} from "@smithy/types";
 
-import { StreamingTraitsWithMediaTypeInputOutput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
 import {
-  deserializeAws_restJson1StreamingTraitsWithMediaTypeCommand,
-  serializeAws_restJson1StreamingTraitsWithMediaTypeCommand,
+  type StreamingTraitsWithMediaTypeInputOutput,
+  StreamingTraitsWithMediaTypeInputOutputFilterSensitiveLog,
+} from "../models/models_0";
+import {
+  de_StreamingTraitsWithMediaTypeCommand,
+  se_StreamingTraitsWithMediaTypeCommand,
 } from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
-type StreamingTraitsWithMediaTypeCommandInputType = Omit<StreamingTraitsWithMediaTypeInputOutput, "blob"> & {
-  /**
-   * For *`StreamingTraitsWithMediaTypeInputOutput["blob"]`*, see {@link StreamingTraitsWithMediaTypeInputOutput.blob}.
-   */
-  blob?: StreamingTraitsWithMediaTypeInputOutput["blob"] | string | Uint8Array | Buffer;
-};
 /**
- * This interface extends from `StreamingTraitsWithMediaTypeInputOutput` interface. There are more parameters than `blob` defined in {@link StreamingTraitsWithMediaTypeInputOutput}
+ * @public
  */
-export interface StreamingTraitsWithMediaTypeCommandInput extends StreamingTraitsWithMediaTypeCommandInputType {}
-export interface StreamingTraitsWithMediaTypeCommandOutput
-  extends StreamingTraitsWithMediaTypeInputOutput,
-    __MetadataBearer {}
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StreamingTraitsWithMediaTypeCommand}.
+ */
+export interface StreamingTraitsWithMediaTypeCommandInput extends Omit<StreamingTraitsWithMediaTypeInputOutput, "blob"> {
+  blob?: StreamingBlobPayloadInputTypes;
+}
+
+/**
+ * @public
+ *
+ * The output of {@link StreamingTraitsWithMediaTypeCommand}.
+ */
+export interface StreamingTraitsWithMediaTypeCommandOutput extends Omit<StreamingTraitsWithMediaTypeInputOutput, "blob">, __MetadataBearer {
+  blob?: StreamingBlobPayloadOutputTypes;
+}
 
 /**
  * This examples serializes a streaming media-typed blob shape in the request body.
@@ -42,71 +55,69 @@ export interface StreamingTraitsWithMediaTypeCommandOutput
  * ```javascript
  * import { RestJsonProtocolClient, StreamingTraitsWithMediaTypeCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, StreamingTraitsWithMediaTypeCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // StreamingTraitsWithMediaTypeInputOutput
+ *   foo: "STRING_VALUE",
+ *   blob: "MULTIPLE_TYPES_ACCEPTED", // see \@smithy/types -> StreamingBlobPayloadInputTypes
+ * };
  * const command = new StreamingTraitsWithMediaTypeCommand(input);
  * const response = await client.send(command);
+ * // consume or destroy the stream to free the socket.
+ * const bytes = await response.blob.transformToByteArray();
+ * // const str = await response.blob.transformToString();
+ * // response.blob.destroy(); // only applicable to Node.js Readable streams.
+ *
+ * // { // StreamingTraitsWithMediaTypeInputOutput
+ * //   foo: "STRING_VALUE",
+ * //   blob: "<SdkStream>", // see \@smithy/types -> StreamingBlobPayloadOutputTypes
+ * // };
+ *
  * ```
  *
+ * @param StreamingTraitsWithMediaTypeCommandInput - {@link StreamingTraitsWithMediaTypeCommandInput}
+ * @returns {@link StreamingTraitsWithMediaTypeCommandOutput}
  * @see {@link StreamingTraitsWithMediaTypeCommandInput} for command's `input` shape.
  * @see {@link StreamingTraitsWithMediaTypeCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class StreamingTraitsWithMediaTypeCommand extends $Command<
-  StreamingTraitsWithMediaTypeCommandInput,
-  StreamingTraitsWithMediaTypeCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StreamingTraitsWithMediaTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StreamingTraitsWithMediaTypeCommandInput, StreamingTraitsWithMediaTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "StreamingTraitsWithMediaTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StreamingTraitsWithMediaTypeInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: StreamingTraitsWithMediaTypeInputOutput.filterSensitiveLog,
+export class StreamingTraitsWithMediaTypeCommand extends $Command
+  .classBuilder<
+    StreamingTraitsWithMediaTypeCommandInput,
+    StreamingTraitsWithMediaTypeCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "StreamingTraitsWithMediaType", {})
+  .n("RestJsonProtocolClient", "StreamingTraitsWithMediaTypeCommand")
+  .f(StreamingTraitsWithMediaTypeInputOutputFilterSensitiveLog, StreamingTraitsWithMediaTypeInputOutputFilterSensitiveLog)
+  .ser(se_StreamingTraitsWithMediaTypeCommand)
+  .de(de_StreamingTraitsWithMediaTypeCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StreamingTraitsWithMediaTypeInputOutput;
+      output: StreamingTraitsWithMediaTypeInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StreamingTraitsWithMediaTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StreamingTraitsWithMediaTypeCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StreamingTraitsWithMediaTypeCommandOutput> {
-    return deserializeAws_restJson1StreamingTraitsWithMediaTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StreamingTraitsWithMediaTypeCommandInput;
+      output: StreamingTraitsWithMediaTypeCommandOutput;
+    };
+  };
 }

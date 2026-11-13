@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import { BatchDisassociateScramSecretRequest, BatchDisassociateScramSecretResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchDisassociateScramSecretCommand,
-  serializeAws_restJson1BatchDisassociateScramSecretCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDisassociateScramSecretRequest, BatchDisassociateScramSecretResponse } from "../models/models_0";
+import { BatchDisassociateScramSecret$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDisassociateScramSecretCommand}.
+ */
 export interface BatchDisassociateScramSecretCommandInput extends BatchDisassociateScramSecretRequest {}
-export interface BatchDisassociateScramSecretCommandOutput
-  extends BatchDisassociateScramSecretResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDisassociateScramSecretCommand}.
+ */
+export interface BatchDisassociateScramSecretCommandOutput extends BatchDisassociateScramSecretResponse, __MetadataBearer {}
 
 /**
  * <p>Disassociates one or more Scram Secrets from an Amazon MSK cluster.</p>
@@ -30,71 +29,78 @@ export interface BatchDisassociateScramSecretCommandOutput
  * ```javascript
  * import { KafkaClient, BatchDisassociateScramSecretCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, BatchDisassociateScramSecretCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // BatchDisassociateScramSecretRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ *   SecretArnList: [ // __listOf__string // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchDisassociateScramSecretCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDisassociateScramSecretResponse
+ * //   ClusterArn: "STRING_VALUE",
+ * //   UnprocessedScramSecrets: [ // __listOfUnprocessedScramSecret
+ * //     { // UnprocessedScramSecret
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //       SecretArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDisassociateScramSecretCommandInput - {@link BatchDisassociateScramSecretCommandInput}
+ * @returns {@link BatchDisassociateScramSecretCommandOutput}
  * @see {@link BatchDisassociateScramSecretCommandInput} for command's `input` shape.
  * @see {@link BatchDisassociateScramSecretCommandOutput} for command's `response` shape.
- * @see {@link KafkaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDisassociateScramSecretCommand extends $Command<
-  BatchDisassociateScramSecretCommandInput,
-  BatchDisassociateScramSecretCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDisassociateScramSecretCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDisassociateScramSecretCommandInput, BatchDisassociateScramSecretCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "BatchDisassociateScramSecretCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDisassociateScramSecretRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDisassociateScramSecretResponse.filterSensitiveLog,
+export class BatchDisassociateScramSecretCommand extends command<BatchDisassociateScramSecretCommandInput, BatchDisassociateScramSecretCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDisassociateScramSecret",
+  BatchDisassociateScramSecret$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDisassociateScramSecretRequest;
+      output: BatchDisassociateScramSecretResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDisassociateScramSecretCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchDisassociateScramSecretCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchDisassociateScramSecretCommandOutput> {
-    return deserializeAws_restJson1BatchDisassociateScramSecretCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDisassociateScramSecretCommandInput;
+      output: BatchDisassociateScramSecretCommandOutput;
+    };
+  };
 }

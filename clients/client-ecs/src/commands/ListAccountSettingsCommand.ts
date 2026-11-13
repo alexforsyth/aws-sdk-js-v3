@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { ListAccountSettingsRequest, ListAccountSettingsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAccountSettingsCommand,
-  serializeAws_json1_1ListAccountSettingsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAccountSettingsRequest, ListAccountSettingsResponse } from "../models/models_0";
+import { ListAccountSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAccountSettingsCommand}.
+ */
 export interface ListAccountSettingsCommandInput extends ListAccountSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAccountSettingsCommand}.
+ */
 export interface ListAccountSettingsCommandOutput extends ListAccountSettingsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,135 @@ export interface ListAccountSettingsCommandOutput extends ListAccountSettingsRes
  * ```javascript
  * import { ECSClient, ListAccountSettingsCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, ListAccountSettingsCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // ListAccountSettingsRequest
+ *   name: "serviceLongArnFormat" || "taskLongArnFormat" || "containerInstanceLongArnFormat" || "awsvpcTrunking" || "containerInsights" || "fargateFIPSMode" || "tagResourceAuthorization" || "fargateTaskRetirementWaitPeriod" || "guardDutyActivate" || "defaultLogDriverMode" || "fargateEventWindows",
+ *   value: "STRING_VALUE",
+ *   principalArn: "STRING_VALUE",
+ *   effectiveSettings: true || false,
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListAccountSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAccountSettingsResponse
+ * //   settings: [ // Settings
+ * //     { // Setting
+ * //       name: "serviceLongArnFormat" || "taskLongArnFormat" || "containerInstanceLongArnFormat" || "awsvpcTrunking" || "containerInsights" || "fargateFIPSMode" || "tagResourceAuthorization" || "fargateTaskRetirementWaitPeriod" || "guardDutyActivate" || "defaultLogDriverMode" || "fargateEventWindows",
+ * //       value: "STRING_VALUE",
+ * //       principalArn: "STRING_VALUE",
+ * //       type: "user" || "aws_managed",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAccountSettingsCommandInput - {@link ListAccountSettingsCommandInput}
+ * @returns {@link ListAccountSettingsCommandOutput}
  * @see {@link ListAccountSettingsCommandInput} for command's `input` shape.
  * @see {@link ListAccountSettingsCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To view your effective account settings
+ * ```javascript
+ * // This example displays the effective account settings for your account.
+ * const input = {
+ *   effectiveSettings: true
+ * };
+ * const command = new ListAccountSettingsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   settings: [
+ *     {
+ *       name: "containerInstanceLongArnFormat",
+ *       principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *       value: "disabled"
+ *     },
+ *     {
+ *       name: "serviceLongArnFormat",
+ *       principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *       value: "enabled"
+ *     },
+ *     {
+ *       name: "taskLongArnFormat",
+ *       principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *       value: "disabled"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example To view the effective account settings for a specific IAM user or IAM role
+ * ```javascript
+ * // This example displays the effective account settings for the specified user or role.
+ * const input = {
+ *   effectiveSettings: true,
+ *   principalArn: "arn:aws:iam::<aws_account_id>:user/principalName"
+ * };
+ * const command = new ListAccountSettingsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   settings: [
+ *     {
+ *       name: "containerInstanceLongArnFormat",
+ *       principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *       value: "disabled"
+ *     },
+ *     {
+ *       name: "serviceLongArnFormat",
+ *       principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *       value: "enabled"
+ *     },
+ *     {
+ *       name: "taskLongArnFormat",
+ *       principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *       value: "disabled"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListAccountSettingsCommand extends $Command<
-  ListAccountSettingsCommandInput,
-  ListAccountSettingsCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAccountSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAccountSettingsCommandInput, ListAccountSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "ListAccountSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAccountSettingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAccountSettingsResponse.filterSensitiveLog,
+export class ListAccountSettingsCommand extends command<ListAccountSettingsCommandInput, ListAccountSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAccountSettings",
+  ListAccountSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccountSettingsRequest;
+      output: ListAccountSettingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAccountSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAccountSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAccountSettingsCommandOutput> {
-    return deserializeAws_json1_1ListAccountSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAccountSettingsCommandInput;
+      output: ListAccountSettingsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodePipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodePipelineClient";
-import { ListActionExecutionsInput, ListActionExecutionsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListActionExecutionsCommand,
-  serializeAws_json1_1ListActionExecutionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListActionExecutionsInput, ListActionExecutionsOutput } from "../models/models_0";
+import { ListActionExecutions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListActionExecutionsCommand}.
+ */
 export interface ListActionExecutionsCommandInput extends ListActionExecutionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListActionExecutionsCommand}.
+ */
 export interface ListActionExecutionsCommandOutput extends ListActionExecutionsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,133 @@ export interface ListActionExecutionsCommandOutput extends ListActionExecutionsO
  * ```javascript
  * import { CodePipelineClient, ListActionExecutionsCommand } from "@aws-sdk/client-codepipeline"; // ES Modules import
  * // const { CodePipelineClient, ListActionExecutionsCommand } = require("@aws-sdk/client-codepipeline"); // CommonJS import
+ * // import type { CodePipelineClientConfig } from "@aws-sdk/client-codepipeline";
+ * const config = {}; // type is CodePipelineClientConfig
  * const client = new CodePipelineClient(config);
+ * const input = { // ListActionExecutionsInput
+ *   pipelineName: "STRING_VALUE", // required
+ *   filter: { // ActionExecutionFilter
+ *     pipelineExecutionId: "STRING_VALUE",
+ *     latestInPipelineExecution: { // LatestInPipelineExecutionFilter
+ *       pipelineExecutionId: "STRING_VALUE", // required
+ *       startTimeRange: "Latest" || "All", // required
+ *     },
+ *   },
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListActionExecutionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListActionExecutionsOutput
+ * //   actionExecutionDetails: [ // ActionExecutionDetailList
+ * //     { // ActionExecutionDetail
+ * //       pipelineExecutionId: "STRING_VALUE",
+ * //       actionExecutionId: "STRING_VALUE",
+ * //       pipelineVersion: Number("int"),
+ * //       stageName: "STRING_VALUE",
+ * //       actionName: "STRING_VALUE",
+ * //       startTime: new Date("TIMESTAMP"),
+ * //       lastUpdateTime: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //       status: "InProgress" || "Abandoned" || "Succeeded" || "Failed",
+ * //       input: { // ActionExecutionInput
+ * //         actionTypeId: { // ActionTypeId
+ * //           category: "Source" || "Build" || "Deploy" || "Test" || "Invoke" || "Approval" || "Compute", // required
+ * //           owner: "AWS" || "ThirdParty" || "Custom", // required
+ * //           provider: "STRING_VALUE", // required
+ * //           version: "STRING_VALUE", // required
+ * //         },
+ * //         configuration: { // ActionConfigurationMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         resolvedConfiguration: { // ResolvedActionConfigurationMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         roleArn: "STRING_VALUE",
+ * //         region: "STRING_VALUE",
+ * //         inputArtifacts: [ // ArtifactDetailList
+ * //           { // ArtifactDetail
+ * //             name: "STRING_VALUE",
+ * //             s3location: { // S3Location
+ * //               bucket: "STRING_VALUE",
+ * //               key: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //         namespace: "STRING_VALUE",
+ * //       },
+ * //       output: { // ActionExecutionOutput
+ * //         outputArtifacts: [
+ * //           {
+ * //             name: "STRING_VALUE",
+ * //             s3location: {
+ * //               bucket: "STRING_VALUE",
+ * //               key: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //         executionResult: { // ActionExecutionResult
+ * //           externalExecutionId: "STRING_VALUE",
+ * //           externalExecutionSummary: "STRING_VALUE",
+ * //           externalExecutionUrl: "STRING_VALUE",
+ * //           errorDetails: { // ErrorDetails
+ * //             code: "STRING_VALUE",
+ * //             message: "STRING_VALUE",
+ * //           },
+ * //           logStreamARN: "STRING_VALUE",
+ * //         },
+ * //         outputVariables: { // OutputVariablesMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListActionExecutionsCommandInput - {@link ListActionExecutionsCommandInput}
+ * @returns {@link ListActionExecutionsCommandOutput}
  * @see {@link ListActionExecutionsCommandInput} for command's `input` shape.
  * @see {@link ListActionExecutionsCommandOutput} for command's `response` shape.
- * @see {@link CodePipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodePipelineClientResolvedConfig | config} for CodePipelineClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The next token was specified in an invalid format. Make sure that the next token
+ *             you provide is the token returned by a previous call.</p>
+ *
+ * @throws {@link PipelineExecutionNotFoundException} (client fault)
+ *  <p>The pipeline execution was specified in an invalid format or cannot be found, or an
+ *             execution ID does not belong to the specified pipeline. </p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The pipeline was specified in an invalid format or cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The validation was specified in an invalid format.</p>
+ *
+ * @throws {@link CodePipelineServiceException}
+ * <p>Base exception class for all service exceptions from CodePipeline service.</p>
+ *
+ *
+ * @public
  */
-export class ListActionExecutionsCommand extends $Command<
-  ListActionExecutionsCommandInput,
-  ListActionExecutionsCommandOutput,
-  CodePipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListActionExecutionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodePipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListActionExecutionsCommandInput, ListActionExecutionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodePipelineClient";
-    const commandName = "ListActionExecutionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListActionExecutionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListActionExecutionsOutput.filterSensitiveLog,
+export class ListActionExecutionsCommand extends command<ListActionExecutionsCommandInput, ListActionExecutionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListActionExecutions",
+  ListActionExecutions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListActionExecutionsInput;
+      output: ListActionExecutionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListActionExecutionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListActionExecutionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListActionExecutionsCommandOutput> {
-    return deserializeAws_json1_1ListActionExecutionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListActionExecutionsCommandInput;
+      output: ListActionExecutionsCommandOutput;
+    };
+  };
 }

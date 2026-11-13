@@ -1,96 +1,111 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeElasticGpusRequest, DescribeElasticGpusResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeElasticGpusCommand,
-  serializeAws_ec2DescribeElasticGpusCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeElasticGpusRequest } from "../models/models_3";
+import type { DescribeElasticGpusResult } from "../models/models_4";
+import { DescribeElasticGpus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeElasticGpusCommand}.
+ */
 export interface DescribeElasticGpusCommandInput extends DescribeElasticGpusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeElasticGpusCommand}.
+ */
 export interface DescribeElasticGpusCommandOutput extends DescribeElasticGpusResult, __MetadataBearer {}
 
 /**
- * <p>Describes the Elastic Graphics accelerator associated with your instances. For more information
- *             about Elastic Graphics, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html">Amazon Elastic Graphics</a>.</p>
+ * <note>
+ *             <p>Amazon Elastic Graphics reached end of life on January 8, 2024.</p>
+ *          </note>
+ *          <p>Describes the Elastic Graphics accelerator associated with your instances.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeElasticGpusCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeElasticGpusCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeElasticGpusRequest
+ *   ElasticGpuIds: [ // ElasticGpuIdSet
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeElasticGpusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeElasticGpusResult
+ * //   ElasticGpuSet: [ // ElasticGpuSet
+ * //     { // ElasticGpus
+ * //       ElasticGpuId: "STRING_VALUE",
+ * //       AvailabilityZone: "STRING_VALUE",
+ * //       ElasticGpuType: "STRING_VALUE",
+ * //       ElasticGpuHealth: { // ElasticGpuHealth
+ * //         Status: "OK" || "IMPAIRED",
+ * //       },
+ * //       ElasticGpuState: "ATTACHED",
+ * //       InstanceId: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   MaxResults: Number("int"),
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeElasticGpusCommandInput - {@link DescribeElasticGpusCommandInput}
+ * @returns {@link DescribeElasticGpusCommandOutput}
  * @see {@link DescribeElasticGpusCommandInput} for command's `input` shape.
  * @see {@link DescribeElasticGpusCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeElasticGpusCommand extends $Command<
-  DescribeElasticGpusCommandInput,
-  DescribeElasticGpusCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeElasticGpusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeElasticGpusCommandInput, DescribeElasticGpusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeElasticGpusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeElasticGpusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeElasticGpusResult.filterSensitiveLog,
+export class DescribeElasticGpusCommand extends command<DescribeElasticGpusCommandInput, DescribeElasticGpusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeElasticGpus",
+  DescribeElasticGpus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeElasticGpusRequest;
+      output: DescribeElasticGpusResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeElasticGpusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeElasticGpusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeElasticGpusCommandOutput> {
-    return deserializeAws_ec2DescribeElasticGpusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeElasticGpusCommandInput;
+      output: DescribeElasticGpusCommandOutput;
+    };
+  };
 }

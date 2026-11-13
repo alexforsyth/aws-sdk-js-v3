@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { GetDeviceInstanceRequest, GetDeviceInstanceResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDeviceInstanceCommand,
-  serializeAws_json1_1GetDeviceInstanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDeviceInstanceRequest, GetDeviceInstanceResult } from "../models/models_0";
+import { GetDeviceInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDeviceInstanceCommand}.
+ */
 export interface GetDeviceInstanceCommandInput extends GetDeviceInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDeviceInstanceCommand}.
+ */
 export interface GetDeviceInstanceCommandOutput extends GetDeviceInstanceResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface GetDeviceInstanceCommandOutput extends GetDeviceInstanceResult,
  * ```javascript
  * import { DeviceFarmClient, GetDeviceInstanceCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, GetDeviceInstanceCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // GetDeviceInstanceRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new GetDeviceInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // GetDeviceInstanceResult
+ * //   deviceInstance: { // DeviceInstance
+ * //     arn: "STRING_VALUE",
+ * //     deviceArn: "STRING_VALUE",
+ * //     labels: [ // InstanceLabels
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     status: "IN_USE" || "PREPARING" || "AVAILABLE" || "NOT_AVAILABLE",
+ * //     udid: "STRING_VALUE",
+ * //     instanceProfile: { // InstanceProfile
+ * //       arn: "STRING_VALUE",
+ * //       packageCleanup: true || false,
+ * //       excludeAppPackagesFromCleanup: [ // PackageIds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       rebootAfterUse: true || false,
+ * //       name: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDeviceInstanceCommandInput - {@link GetDeviceInstanceCommandInput}
+ * @returns {@link GetDeviceInstanceCommandOutput}
  * @see {@link GetDeviceInstanceCommandInput} for command's `input` shape.
  * @see {@link GetDeviceInstanceCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class GetDeviceInstanceCommand extends $Command<
-  GetDeviceInstanceCommandInput,
-  GetDeviceInstanceCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDeviceInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDeviceInstanceCommandInput, GetDeviceInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "GetDeviceInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDeviceInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDeviceInstanceResult.filterSensitiveLog,
+export class GetDeviceInstanceCommand extends command<GetDeviceInstanceCommandInput, GetDeviceInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDeviceInstance",
+  GetDeviceInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeviceInstanceRequest;
+      output: GetDeviceInstanceResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDeviceInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDeviceInstanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDeviceInstanceCommandOutput> {
-    return deserializeAws_json1_1GetDeviceInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDeviceInstanceCommandInput;
+      output: GetDeviceInstanceCommandOutput;
+    };
+  };
 }

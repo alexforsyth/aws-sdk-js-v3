@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { UpdateStageRequest, UpdateStageResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateStageCommand,
-  serializeAws_restJson1UpdateStageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateStageRequest, UpdateStageResponse } from "../models/models_0";
+import { UpdateStage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateStageCommand}.
+ */
 export interface UpdateStageCommandInput extends UpdateStageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateStageCommand}.
+ */
 export interface UpdateStageCommandOutput extends UpdateStageResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,121 @@ export interface UpdateStageCommandOutput extends UpdateStageResponse, __Metadat
  * ```javascript
  * import { ApiGatewayV2Client, UpdateStageCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, UpdateStageCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // UpdateStageRequest
+ *   AccessLogSettings: { // AccessLogSettings
+ *     DestinationArn: "STRING_VALUE",
+ *     Format: "STRING_VALUE",
+ *   },
+ *   ApiId: "STRING_VALUE", // required
+ *   AutoDeploy: true || false,
+ *   ClientCertificateId: "STRING_VALUE",
+ *   DefaultRouteSettings: { // RouteSettings
+ *     DataTraceEnabled: true || false,
+ *     DetailedMetricsEnabled: true || false,
+ *     LoggingLevel: "ERROR" || "INFO" || "OFF",
+ *     ThrottlingBurstLimit: Number("int"),
+ *     ThrottlingRateLimit: Number("double"),
+ *   },
+ *   DeploymentId: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   RouteSettings: { // RouteSettingsMap
+ *     "<keys>": {
+ *       DataTraceEnabled: true || false,
+ *       DetailedMetricsEnabled: true || false,
+ *       LoggingLevel: "ERROR" || "INFO" || "OFF",
+ *       ThrottlingBurstLimit: Number("int"),
+ *       ThrottlingRateLimit: Number("double"),
+ *     },
+ *   },
+ *   StageName: "STRING_VALUE", // required
+ *   StageVariables: { // StageVariablesMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new UpdateStageCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateStageResponse
+ * //   AccessLogSettings: { // AccessLogSettings
+ * //     DestinationArn: "STRING_VALUE",
+ * //     Format: "STRING_VALUE",
+ * //   },
+ * //   ApiGatewayManaged: true || false,
+ * //   AutoDeploy: true || false,
+ * //   ClientCertificateId: "STRING_VALUE",
+ * //   CreatedDate: new Date("TIMESTAMP"),
+ * //   DefaultRouteSettings: { // RouteSettings
+ * //     DataTraceEnabled: true || false,
+ * //     DetailedMetricsEnabled: true || false,
+ * //     LoggingLevel: "ERROR" || "INFO" || "OFF",
+ * //     ThrottlingBurstLimit: Number("int"),
+ * //     ThrottlingRateLimit: Number("double"),
+ * //   },
+ * //   DeploymentId: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   LastDeploymentStatusMessage: "STRING_VALUE",
+ * //   LastUpdatedDate: new Date("TIMESTAMP"),
+ * //   RouteSettings: { // RouteSettingsMap
+ * //     "<keys>": {
+ * //       DataTraceEnabled: true || false,
+ * //       DetailedMetricsEnabled: true || false,
+ * //       LoggingLevel: "ERROR" || "INFO" || "OFF",
+ * //       ThrottlingBurstLimit: Number("int"),
+ * //       ThrottlingRateLimit: Number("double"),
+ * //     },
+ * //   },
+ * //   StageName: "STRING_VALUE",
+ * //   StageVariables: { // StageVariablesMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateStageCommandInput - {@link UpdateStageCommandInput}
+ * @returns {@link UpdateStageCommandOutput}
  * @see {@link UpdateStageCommandInput} for command's `input` shape.
  * @see {@link UpdateStageCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateStageCommand extends $Command<
-  UpdateStageCommandInput,
-  UpdateStageCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateStageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateStageCommandInput, UpdateStageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "UpdateStageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateStageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateStageResponse.filterSensitiveLog,
+export class UpdateStageCommand extends command<UpdateStageCommandInput, UpdateStageCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateStage",
+  UpdateStage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateStageRequest;
+      output: UpdateStageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateStageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateStageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateStageCommandOutput> {
-    return deserializeAws_restJson1UpdateStageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateStageCommandInput;
+      output: UpdateStageCommandOutput;
+    };
+  };
 }

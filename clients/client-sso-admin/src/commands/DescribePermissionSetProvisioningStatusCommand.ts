@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribePermissionSetProvisioningStatusRequest,
   DescribePermissionSetProvisioningStatusResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribePermissionSetProvisioningStatusCommand,
-  serializeAws_json1_1DescribePermissionSetProvisioningStatusCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
+import { DescribePermissionSetProvisioningStatus$ } from "../schemas/schemas_0";
 
-export interface DescribePermissionSetProvisioningStatusCommandInput
-  extends DescribePermissionSetProvisioningStatusRequest {}
-export interface DescribePermissionSetProvisioningStatusCommandOutput
-  extends DescribePermissionSetProvisioningStatusResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePermissionSetProvisioningStatusCommand}.
+ */
+export interface DescribePermissionSetProvisioningStatusCommandInput extends DescribePermissionSetProvisioningStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePermissionSetProvisioningStatusCommand}.
+ */
+export interface DescribePermissionSetProvisioningStatusCommandOutput extends DescribePermissionSetProvisioningStatusResponse, __MetadataBearer {}
 
 /**
  * <p>Describes the status for the given permission set provisioning request.</p>
@@ -34,77 +32,70 @@ export interface DescribePermissionSetProvisioningStatusCommandOutput
  * ```javascript
  * import { SSOAdminClient, DescribePermissionSetProvisioningStatusCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, DescribePermissionSetProvisioningStatusCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // DescribePermissionSetProvisioningStatusRequest
+ *   InstanceArn: "STRING_VALUE", // required
+ *   ProvisionPermissionSetRequestId: "STRING_VALUE", // required
+ * };
  * const command = new DescribePermissionSetProvisioningStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePermissionSetProvisioningStatusResponse
+ * //   PermissionSetProvisioningStatus: { // PermissionSetProvisioningStatus
+ * //     Status: "IN_PROGRESS" || "FAILED" || "SUCCEEDED",
+ * //     RequestId: "STRING_VALUE",
+ * //     AccountId: "STRING_VALUE",
+ * //     PermissionSetArn: "STRING_VALUE",
+ * //     FailureReason: "STRING_VALUE",
+ * //     CreatedDate: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribePermissionSetProvisioningStatusCommandInput - {@link DescribePermissionSetProvisioningStatusCommandInput}
+ * @returns {@link DescribePermissionSetProvisioningStatusCommandOutput}
  * @see {@link DescribePermissionSetProvisioningStatusCommandInput} for command's `input` shape.
  * @see {@link DescribePermissionSetProvisioningStatusCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Indicates that a requested resource is not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePermissionSetProvisioningStatusCommand extends $Command<
-  DescribePermissionSetProvisioningStatusCommandInput,
-  DescribePermissionSetProvisioningStatusCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePermissionSetProvisioningStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribePermissionSetProvisioningStatusCommandInput,
-    DescribePermissionSetProvisioningStatusCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "DescribePermissionSetProvisioningStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePermissionSetProvisioningStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePermissionSetProvisioningStatusResponse.filterSensitiveLog,
+export class DescribePermissionSetProvisioningStatusCommand extends command<DescribePermissionSetProvisioningStatusCommandInput, DescribePermissionSetProvisioningStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePermissionSetProvisioningStatus",
+  DescribePermissionSetProvisioningStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePermissionSetProvisioningStatusRequest;
+      output: DescribePermissionSetProvisioningStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribePermissionSetProvisioningStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribePermissionSetProvisioningStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribePermissionSetProvisioningStatusCommandOutput> {
-    return deserializeAws_json1_1DescribePermissionSetProvisioningStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePermissionSetProvisioningStatusCommandInput;
+      output: DescribePermissionSetProvisioningStatusCommandOutput;
+    };
+  };
 }

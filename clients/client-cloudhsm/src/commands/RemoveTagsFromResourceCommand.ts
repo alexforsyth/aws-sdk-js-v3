@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudHSMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudHSMClient";
-import { RemoveTagsFromResourceRequest, RemoveTagsFromResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1RemoveTagsFromResourceCommand,
-  serializeAws_json1_1RemoveTagsFromResourceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveTagsFromResourceRequest, RemoveTagsFromResourceResponse } from "../models/models_0";
+import { RemoveTagsFromResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveTagsFromResourceCommand}.
+ */
 export interface RemoveTagsFromResourceCommandInput extends RemoveTagsFromResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveTagsFromResourceCommand}.
+ */
 export interface RemoveTagsFromResourceCommandOutput extends RemoveTagsFromResourceResponse, __MetadataBearer {}
 
 /**
@@ -35,73 +36,66 @@ export interface RemoveTagsFromResourceCommandOutput extends RemoveTagsFromResou
  *          <p>Removes one or more tags from the specified AWS CloudHSM resource.</p>
  *          <p>To remove a tag, specify only the tag key to remove (not the value). To overwrite the
  *       value for an existing tag, use <a>AddTagsToResource</a>.</p>
+ *
+ * @deprecated This API is deprecated.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudHSMClient, RemoveTagsFromResourceCommand } from "@aws-sdk/client-cloudhsm"; // ES Modules import
  * // const { CloudHSMClient, RemoveTagsFromResourceCommand } = require("@aws-sdk/client-cloudhsm"); // CommonJS import
+ * // import type { CloudHSMClientConfig } from "@aws-sdk/client-cloudhsm";
+ * const config = {}; // type is CloudHSMClientConfig
  * const client = new CloudHSMClient(config);
+ * const input = { // RemoveTagsFromResourceRequest
+ *   ResourceArn: "STRING_VALUE", // required
+ *   TagKeyList: [ // TagKeyList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new RemoveTagsFromResourceCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveTagsFromResourceResponse
+ * //   Status: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param RemoveTagsFromResourceCommandInput - {@link RemoveTagsFromResourceCommandInput}
+ * @returns {@link RemoveTagsFromResourceCommandOutput}
  * @see {@link RemoveTagsFromResourceCommandInput} for command's `input` shape.
  * @see {@link RemoveTagsFromResourceCommandOutput} for command's `response` shape.
- * @see {@link CloudHSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudHSMClientResolvedConfig | config} for CloudHSMClient's `config` shape.
  *
+ * @throws {@link CloudHsmInternalException} (server fault)
+ *  <p>Indicates that an internal error occurred.</p>
+ *
+ * @throws {@link CloudHsmServiceException} (client fault)
+ *  <p>Indicates that an exception occurred in the AWS CloudHSM service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that one or more of the request parameters are not valid.</p>
+ *
+ * @throws {@link CloudHSMServiceException}
+ * <p>Base exception class for all service exceptions from CloudHSM service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveTagsFromResourceCommand extends $Command<
-  RemoveTagsFromResourceCommandInput,
-  RemoveTagsFromResourceCommandOutput,
-  CloudHSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveTagsFromResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudHSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveTagsFromResourceCommandInput, RemoveTagsFromResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudHSMClient";
-    const commandName = "RemoveTagsFromResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveTagsFromResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveTagsFromResourceResponse.filterSensitiveLog,
+export class RemoveTagsFromResourceCommand extends command<RemoveTagsFromResourceCommandInput, RemoveTagsFromResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveTagsFromResource",
+  RemoveTagsFromResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveTagsFromResourceRequest;
+      output: RemoveTagsFromResourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveTagsFromResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RemoveTagsFromResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveTagsFromResourceCommandOutput> {
-    return deserializeAws_json1_1RemoveTagsFromResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveTagsFromResourceCommandInput;
+      output: RemoveTagsFromResourceCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationInsightsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationInsightsClient";
-import { ListApplicationsRequest, ListApplicationsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListApplicationsCommand,
-  serializeAws_json1_1ListApplicationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationsRequest, ListApplicationsResponse } from "../models/models_0";
+import { ListApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationsCommand}.
+ */
 export interface ListApplicationsCommandInput extends ListApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationsCommand}.
+ */
 export interface ListApplicationsCommandOutput extends ListApplicationsResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,70 @@ export interface ListApplicationsCommandOutput extends ListApplicationsResponse,
  * ```javascript
  * import { ApplicationInsightsClient, ListApplicationsCommand } from "@aws-sdk/client-application-insights"; // ES Modules import
  * // const { ApplicationInsightsClient, ListApplicationsCommand } = require("@aws-sdk/client-application-insights"); // CommonJS import
+ * // import type { ApplicationInsightsClientConfig } from "@aws-sdk/client-application-insights";
+ * const config = {}; // type is ApplicationInsightsClientConfig
  * const client = new ApplicationInsightsClient(config);
+ * const input = { // ListApplicationsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   AccountId: "STRING_VALUE",
+ * };
  * const command = new ListApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListApplicationsResponse
+ * //   ApplicationInfoList: [ // ApplicationInfoList
+ * //     { // ApplicationInfo
+ * //       AccountId: "STRING_VALUE",
+ * //       ResourceGroupName: "STRING_VALUE",
+ * //       LifeCycle: "STRING_VALUE",
+ * //       OpsItemSNSTopicArn: "STRING_VALUE",
+ * //       SNSNotificationArn: "STRING_VALUE",
+ * //       OpsCenterEnabled: true || false,
+ * //       CWEMonitorEnabled: true || false,
+ * //       Remarks: "STRING_VALUE",
+ * //       AutoConfigEnabled: true || false,
+ * //       DiscoveryType: "RESOURCE_GROUP_BASED" || "ACCOUNT_BASED",
+ * //       AttachMissingPermission: true || false,
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListApplicationsCommandInput - {@link ListApplicationsCommandInput}
+ * @returns {@link ListApplicationsCommandOutput}
  * @see {@link ListApplicationsCommandInput} for command's `input` shape.
  * @see {@link ListApplicationsCommandOutput} for command's `response` shape.
- * @see {@link ApplicationInsightsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationInsightsClientResolvedConfig | config} for ApplicationInsightsClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The parameter is not valid.</p>
+ *
+ * @throws {@link ApplicationInsightsServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationInsights service.</p>
+ *
+ *
+ * @public
  */
-export class ListApplicationsCommand extends $Command<
-  ListApplicationsCommandInput,
-  ListApplicationsCommandOutput,
-  ApplicationInsightsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationInsightsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListApplicationsCommandInput, ListApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationInsightsClient";
-    const commandName = "ListApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListApplicationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListApplicationsResponse.filterSensitiveLog,
+export class ListApplicationsCommand extends command<ListApplicationsCommandInput, ListApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplications",
+  ListApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationsRequest;
+      output: ListApplicationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListApplicationsCommandOutput> {
-    return deserializeAws_json1_1ListApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListApplicationsCommandInput;
+      output: ListApplicationsCommandOutput;
+    };
+  };
 }

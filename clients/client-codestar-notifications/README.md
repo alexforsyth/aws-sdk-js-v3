@@ -1,16 +1,14 @@
-# @aws-sdk/client-codestar-notifications
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-codestar-notifications/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-codestar-notifications)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-codestar-notifications.svg)](https://www.npmjs.com/package/@aws-sdk/client-codestar-notifications)
+# @aws-sdk/client-codestar-notifications
 
 ## Description
 
 AWS SDK for JavaScript CodestarNotifications Client for Node.js, Browser and React Native.
 
-<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the
-operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API
+<p>This CodeStar Notifications API Reference provides descriptions and usage examples of the
+operations and data types for the CodeStar Notifications API. You can use the CodeStar Notifications API
 to work with the following objects:</p>
-
 <p>Notification rules, by calling the following: </p>
 <ul>
 <li>
@@ -45,12 +43,11 @@ notification rule. </p>
 <a>Unsubscribe</a>, which removes a target from a notification rule. </p>
 </li>
 </ul>
-
 <p>Targets, by calling the following: </p>
 <ul>
 <li>
 <p>
-<a>DeleteTarget</a>, which removes a notification rule target (SNS topic) from a
+<a>DeleteTarget</a>, which removes a notification rule target from a
 notification rule. </p>
 </li>
 <li>
@@ -59,7 +56,6 @@ notification rule. </p>
 notification rule. </p>
 </li>
 </ul>
-
 <p>Events, by calling the following: </p>
 <ul>
 <li>
@@ -86,14 +82,13 @@ notification rule in your account. </p>
 your account. </p>
 </li>
 </ul>
-
-<p> For information about how to use AWS CodeStar Notifications, see link in the CodeStarNotifications User Guide.
+<p> For information about how to use CodeStar Notifications, see the <a href="https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html">
+Amazon Web Services Developer Tools Console User Guide</a>.
 </p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-codestar-notifications
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-codestar-notifications`
 - `yarn add @aws-sdk/client-codestar-notifications`
@@ -105,43 +100,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `CodestarNotificationsClient` and
-the commands you need, for example `CreateNotificationRuleCommand`:
+the commands you need, for example `ListTargetsCommand`:
 
 ```js
 // ES5 example
-const {
-  CodestarNotificationsClient,
-  CreateNotificationRuleCommand,
-} = require("@aws-sdk/client-codestar-notifications");
+const { CodestarNotificationsClient, ListTargetsCommand } = require("@aws-sdk/client-codestar-notifications");
 ```
 
 ```ts
 // ES6+ example
-import { CodestarNotificationsClient, CreateNotificationRuleCommand } from "@aws-sdk/client-codestar-notifications";
+import { CodestarNotificationsClient, ListTargetsCommand } from "@aws-sdk/client-codestar-notifications";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new CodestarNotificationsClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CreateNotificationRuleCommand(params);
+const params = { /** input parameters */ };
+const command = new ListTargetsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -156,26 +146,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -191,31 +164,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`CodestarNotifications` extends `CodestarNotificationsClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`CodestarNotificationsClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-codestar-notifications";
-const client = new AWS.CodestarNotifications({ region: "REGION" });
+import { CodestarNotifications } from "@aws-sdk/client-codestar-notifications";
+
+const client = new CodestarNotifications({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.createNotificationRule(params);
+  const data = await client.listTargets(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -223,7 +190,7 @@ try {
 
 // Promises.
 client
-  .createNotificationRule(params)
+  .listTargets(params)
   .then((data) => {
     // process data.
   })
@@ -231,9 +198,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.createNotificationRule(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listTargets(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -259,12 +226,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -285,3 +254,97 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CreateNotificationRule
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/CreateNotificationRuleCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/CreateNotificationRuleCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/CreateNotificationRuleCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteNotificationRule
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/DeleteNotificationRuleCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/DeleteNotificationRuleCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/DeleteNotificationRuleCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteTarget
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/DeleteTargetCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/DeleteTargetCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/DeleteTargetCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeNotificationRule
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/DescribeNotificationRuleCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/DescribeNotificationRuleCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/DescribeNotificationRuleCommandOutput/)
+</details>
+<details>
+<summary>
+ListEventTypes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/ListEventTypesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListEventTypesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListEventTypesCommandOutput/)
+</details>
+<details>
+<summary>
+ListNotificationRules
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/ListNotificationRulesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListNotificationRulesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListNotificationRulesCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+ListTargets
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/ListTargetsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListTargetsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/ListTargetsCommandOutput/)
+</details>
+<details>
+<summary>
+Subscribe
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/SubscribeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/SubscribeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/SubscribeCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+Unsubscribe
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/UnsubscribeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/UnsubscribeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/UnsubscribeCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateNotificationRule
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codestar-notifications/command/UpdateNotificationRuleCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/UpdateNotificationRuleCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codestar-notifications/Interface/UpdateNotificationRuleCommandOutput/)
+</details>

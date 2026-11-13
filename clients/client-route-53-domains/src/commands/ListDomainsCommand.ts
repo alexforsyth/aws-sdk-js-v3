@@ -1,95 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListDomainsRequest, ListDomainsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListDomainsCommand,
-  serializeAws_json1_1ListDomainsCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53DomainsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53DomainsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDomainsRequest, ListDomainsResponse } from "../models/models_0";
+import { ListDomains$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDomainsCommand}.
+ */
 export interface ListDomainsCommandInput extends ListDomainsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDomainsCommand}.
+ */
 export interface ListDomainsCommandOutput extends ListDomainsResponse, __MetadataBearer {}
 
 /**
- * <p>This operation returns all the domain names registered with Amazon Route 53 for the current AWS account.</p>
+ * <p>This operation returns all the domain names registered with Amazon Route 53 for the
+ * 			current Amazon Web Services account if no filtering conditions are used.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53DomainsClient, ListDomainsCommand } from "@aws-sdk/client-route-53-domains"; // ES Modules import
  * // const { Route53DomainsClient, ListDomainsCommand } = require("@aws-sdk/client-route-53-domains"); // CommonJS import
+ * // import type { Route53DomainsClientConfig } from "@aws-sdk/client-route-53-domains";
+ * const config = {}; // type is Route53DomainsClientConfig
  * const client = new Route53DomainsClient(config);
+ * const input = { // ListDomainsRequest
+ *   FilterConditions: [ // FilterConditions
+ *     { // FilterCondition
+ *       Name: "DomainName" || "Expiry", // required
+ *       Operator: "LE" || "GE" || "BEGINS_WITH", // required
+ *       Values: [ // Values // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   SortCondition: { // SortCondition
+ *     Name: "DomainName" || "Expiry", // required
+ *     SortOrder: "ASC" || "DESC", // required
+ *   },
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListDomainsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDomainsResponse
+ * //   Domains: [ // DomainSummaryList
+ * //     { // DomainSummary
+ * //       DomainName: "STRING_VALUE",
+ * //       AutoRenew: true || false,
+ * //       TransferLock: true || false,
+ * //       Expiry: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextPageMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDomainsCommandInput - {@link ListDomainsCommandInput}
+ * @returns {@link ListDomainsCommandOutput}
  * @see {@link ListDomainsCommandInput} for command's `input` shape.
  * @see {@link ListDomainsCommandOutput} for command's `response` shape.
- * @see {@link Route53DomainsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53DomainsClientResolvedConfig | config} for Route53DomainsClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The requested item is not acceptable. For example, for APIs that accept a domain name,
+ * 			the request might specify a domain name that doesn't belong to the account that
+ * 			submitted the request. For <code>AcceptDomainTransferFromAnotherAwsAccount</code>, the
+ * 			password might be invalid.</p>
+ *
+ * @throws {@link Route53DomainsServiceException}
+ * <p>Base exception class for all service exceptions from Route53Domains service.</p>
+ *
+ *
+ * @public
  */
-export class ListDomainsCommand extends $Command<
-  ListDomainsCommandInput,
-  ListDomainsCommandOutput,
-  Route53DomainsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDomainsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53DomainsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDomainsCommandInput, ListDomainsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53DomainsClient";
-    const commandName = "ListDomainsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDomainsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDomainsResponse.filterSensitiveLog,
+export class ListDomainsCommand extends command<ListDomainsCommandInput, ListDomainsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDomains",
+  ListDomains$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDomainsRequest;
+      output: ListDomainsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDomainsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDomainsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDomainsCommandOutput> {
-    return deserializeAws_json1_1ListDomainsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDomainsCommandInput;
+      output: ListDomainsCommandOutput;
+    };
+  };
 }

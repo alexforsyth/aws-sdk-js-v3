@@ -1,0 +1,88 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateGatewayToServerInput, AssociateGatewayToServerOutput } from "../models/models_0";
+import { AssociateGatewayToServer$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateGatewayToServerCommand}.
+ */
+export interface AssociateGatewayToServerCommandInput extends AssociateGatewayToServerInput {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateGatewayToServerCommand}.
+ */
+export interface AssociateGatewayToServerCommandOutput extends AssociateGatewayToServerOutput, __MetadataBearer {}
+
+/**
+ * <p>Associates a backup gateway with your server. After you complete the association process, you can back up and restore your VMs through the gateway.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BackupGatewayClient, AssociateGatewayToServerCommand } from "@aws-sdk/client-backup-gateway"; // ES Modules import
+ * // const { BackupGatewayClient, AssociateGatewayToServerCommand } = require("@aws-sdk/client-backup-gateway"); // CommonJS import
+ * // import type { BackupGatewayClientConfig } from "@aws-sdk/client-backup-gateway";
+ * const config = {}; // type is BackupGatewayClientConfig
+ * const client = new BackupGatewayClient(config);
+ * const input = { // AssociateGatewayToServerInput
+ *   GatewayArn: "STRING_VALUE", // required
+ *   ServerArn: "STRING_VALUE", // required
+ * };
+ * const command = new AssociateGatewayToServerCommand(input);
+ * const response = await client.send(command);
+ * // { // AssociateGatewayToServerOutput
+ * //   GatewayArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param AssociateGatewayToServerCommandInput - {@link AssociateGatewayToServerCommandInput}
+ * @returns {@link AssociateGatewayToServerCommandOutput}
+ * @see {@link AssociateGatewayToServerCommandInput} for command's `input` shape.
+ * @see {@link AssociateGatewayToServerCommandOutput} for command's `response` shape.
+ * @see {@link BackupGatewayClientResolvedConfig | config} for BackupGatewayClient's `config` shape.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The operation cannot proceed because it is not supported.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The operation did not succeed because an internal error occurred. Try again later.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The operation did not succeed because a validation error occurred.</p>
+ *
+ * @throws {@link BackupGatewayServiceException}
+ * <p>Base exception class for all service exceptions from BackupGateway service.</p>
+ *
+ *
+ * @public
+ */
+export class AssociateGatewayToServerCommand extends command<AssociateGatewayToServerCommandInput, AssociateGatewayToServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateGatewayToServer",
+  AssociateGatewayToServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateGatewayToServerInput;
+      output: AssociateGatewayToServerOutput;
+    };
+    sdk: {
+      input: AssociateGatewayToServerCommandInput;
+      output: AssociateGatewayToServerCommandOutput;
+    };
+  };
+}

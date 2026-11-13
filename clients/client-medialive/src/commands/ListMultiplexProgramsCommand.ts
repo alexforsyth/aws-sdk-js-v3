@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { ListMultiplexProgramsRequest, ListMultiplexProgramsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListMultiplexProgramsCommand,
-  serializeAws_restJson1ListMultiplexProgramsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMultiplexProgramsRequest, ListMultiplexProgramsResponse } from "../models/models_1";
+import { ListMultiplexPrograms$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMultiplexProgramsCommand}.
+ */
 export interface ListMultiplexProgramsCommandInput extends ListMultiplexProgramsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListMultiplexProgramsCommand}.
+ */
 export interface ListMultiplexProgramsCommandOutput extends ListMultiplexProgramsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,76 @@ export interface ListMultiplexProgramsCommandOutput extends ListMultiplexProgram
  * ```javascript
  * import { MediaLiveClient, ListMultiplexProgramsCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, ListMultiplexProgramsCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // ListMultiplexProgramsRequest
+ *   MaxResults: Number("int"),
+ *   MultiplexId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListMultiplexProgramsCommand(input);
  * const response = await client.send(command);
+ * // { // ListMultiplexProgramsResponse
+ * //   MultiplexPrograms: [ // __listOfMultiplexProgramSummary
+ * //     { // MultiplexProgramSummary
+ * //       ChannelId: "STRING_VALUE",
+ * //       ProgramName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListMultiplexProgramsCommandInput - {@link ListMultiplexProgramsCommandInput}
+ * @returns {@link ListMultiplexProgramsCommandOutput}
  * @see {@link ListMultiplexProgramsCommandInput} for command's `input` shape.
  * @see {@link ListMultiplexProgramsCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class ListMultiplexProgramsCommand extends $Command<
-  ListMultiplexProgramsCommandInput,
-  ListMultiplexProgramsCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListMultiplexProgramsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListMultiplexProgramsCommandInput, ListMultiplexProgramsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "ListMultiplexProgramsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListMultiplexProgramsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListMultiplexProgramsResponse.filterSensitiveLog,
+export class ListMultiplexProgramsCommand extends command<ListMultiplexProgramsCommandInput, ListMultiplexProgramsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMultiplexPrograms",
+  ListMultiplexPrograms$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMultiplexProgramsRequest;
+      output: ListMultiplexProgramsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListMultiplexProgramsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListMultiplexProgramsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListMultiplexProgramsCommandOutput> {
-    return deserializeAws_restJson1ListMultiplexProgramsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListMultiplexProgramsCommandInput;
+      output: ListMultiplexProgramsCommandOutput;
+    };
+  };
 }

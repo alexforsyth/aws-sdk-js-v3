@@ -1,95 +1,137 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetPermissionRequest, GetPermissionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetPermissionCommand,
-  serializeAws_restJson1GetPermissionCommand,
-} from "../protocols/Aws_restJson1";
-import { RAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RAMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPermissionRequest, GetPermissionResponse } from "../models/models_0";
+import { GetPermission$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPermissionCommand}.
+ */
 export interface GetPermissionCommandInput extends GetPermissionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPermissionCommand}.
+ */
 export interface GetPermissionCommandOutput extends GetPermissionResponse, __MetadataBearer {}
 
 /**
- * <p>Gets the contents of an RAM permission in JSON format.</p>
+ * <p>Retrieves the contents of a managed permission in JSON format.</p>
+ *          <p>If the permission has template parameters, you can include the
+ *             <code>permissionTemplateParameters</code> parameter in your request. The operation then
+ *             renders the returned policy with the specified values in place of the template parameter
+ *             placeholders. If you omit <code>permissionTemplateParameters</code>, the operation
+ *             returns the raw policy template with <code>@\{parameterName\}</code> placeholders
+ *             unchanged.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RAMClient, GetPermissionCommand } from "@aws-sdk/client-ram"; // ES Modules import
  * // const { RAMClient, GetPermissionCommand } = require("@aws-sdk/client-ram"); // CommonJS import
+ * // import type { RAMClientConfig } from "@aws-sdk/client-ram";
+ * const config = {}; // type is RAMClientConfig
  * const client = new RAMClient(config);
+ * const input = { // GetPermissionRequest
+ *   permissionArn: "STRING_VALUE", // required
+ *   permissionVersion: Number("int"),
+ *   permissionTemplateParameters: [ // PermissionTemplateParameterInputList
+ *     { // PermissionTemplateParameterInput
+ *       name: "STRING_VALUE",
+ *       values: [ // PermissionTemplateParameterValueList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new GetPermissionCommand(input);
  * const response = await client.send(command);
+ * // { // GetPermissionResponse
+ * //   permission: { // ResourceSharePermissionDetail
+ * //     arn: "STRING_VALUE",
+ * //     version: "STRING_VALUE",
+ * //     defaultVersion: true || false,
+ * //     name: "STRING_VALUE",
+ * //     resourceType: "STRING_VALUE",
+ * //     permission: "STRING_VALUE",
+ * //     permissionTemplateParameters: [ // PermissionTemplateParameterDeclarationList
+ * //       { // PermissionTemplateParameterDeclaration
+ * //         name: "STRING_VALUE",
+ * //         type: "STRING" || "STRING_LIST",
+ * //         description: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     creationTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedTime: new Date("TIMESTAMP"),
+ * //     isResourceTypeDefault: true || false,
+ * //     permissionType: "CUSTOMER_MANAGED" || "AWS_MANAGED",
+ * //     featureSet: "CREATED_FROM_POLICY" || "PROMOTING_TO_STANDARD" || "STANDARD",
+ * //     status: "ATTACHABLE" || "UNATTACHABLE" || "DELETING" || "DELETED" || "DEPRECATED",
+ * //     tags: [ // TagList
+ * //       { // Tag
+ * //         key: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     resourceOwner: "SELF" || "OTHER-ACCOUNTS",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetPermissionCommandInput - {@link GetPermissionCommandInput}
+ * @returns {@link GetPermissionCommandOutput}
  * @see {@link GetPermissionCommandInput} for command's `input` shape.
  * @see {@link GetPermissionCommandOutput} for command's `response` shape.
- * @see {@link RAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RAMClientResolvedConfig | config} for RAMClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The operation failed because a parameter you specified isn't valid.</p>
+ *
+ * @throws {@link MalformedArnException} (client fault)
+ *  <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> has a format that isn't
+ *             valid.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The operation failed because the requested operation isn't permitted.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The operation failed because the service could not respond to the request due to an
+ *             internal problem. Try again later.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The operation failed because the service isn't available. Try again later.</p>
+ *
+ * @throws {@link UnknownResourceException} (client fault)
+ *  <p>The operation failed because a specified resource couldn't be found.</p>
+ *
+ * @throws {@link RAMServiceException}
+ * <p>Base exception class for all service exceptions from RAM service.</p>
+ *
+ *
+ * @public
  */
-export class GetPermissionCommand extends $Command<
-  GetPermissionCommandInput,
-  GetPermissionCommandOutput,
-  RAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPermissionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPermissionCommandInput, GetPermissionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RAMClient";
-    const commandName = "GetPermissionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPermissionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPermissionResponse.filterSensitiveLog,
+export class GetPermissionCommand extends command<GetPermissionCommandInput, GetPermissionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPermission",
+  GetPermission$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPermissionRequest;
+      output: GetPermissionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPermissionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetPermissionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPermissionCommandOutput> {
-    return deserializeAws_restJson1GetPermissionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPermissionCommandInput;
+      output: GetPermissionCommandOutput;
+    };
+  };
 }

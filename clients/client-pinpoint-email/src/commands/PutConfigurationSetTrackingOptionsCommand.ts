@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   PutConfigurationSetTrackingOptionsRequest,
   PutConfigurationSetTrackingOptionsResponse,
 } from "../models/models_0";
-import { PinpointEmailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointEmailClient";
-import {
-  deserializeAws_restJson1PutConfigurationSetTrackingOptionsCommand,
-  serializeAws_restJson1PutConfigurationSetTrackingOptionsCommand,
-} from "../protocols/Aws_restJson1";
+import { PutConfigurationSetTrackingOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutConfigurationSetTrackingOptionsCommand}.
+ */
 export interface PutConfigurationSetTrackingOptionsCommandInput extends PutConfigurationSetTrackingOptionsRequest {}
-export interface PutConfigurationSetTrackingOptionsCommandOutput
-  extends PutConfigurationSetTrackingOptionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link PutConfigurationSetTrackingOptionsCommand}.
+ */
+export interface PutConfigurationSetTrackingOptionsCommandOutput extends PutConfigurationSetTrackingOptionsResponse, __MetadataBearer {}
 
 /**
  * <p>Specify a custom domain to use for open and click tracking elements in email that you
@@ -34,74 +33,55 @@ export interface PutConfigurationSetTrackingOptionsCommandOutput
  * ```javascript
  * import { PinpointEmailClient, PutConfigurationSetTrackingOptionsCommand } from "@aws-sdk/client-pinpoint-email"; // ES Modules import
  * // const { PinpointEmailClient, PutConfigurationSetTrackingOptionsCommand } = require("@aws-sdk/client-pinpoint-email"); // CommonJS import
+ * // import type { PinpointEmailClientConfig } from "@aws-sdk/client-pinpoint-email";
+ * const config = {}; // type is PinpointEmailClientConfig
  * const client = new PinpointEmailClient(config);
+ * const input = { // PutConfigurationSetTrackingOptionsRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   CustomRedirectDomain: "STRING_VALUE",
+ * };
  * const command = new PutConfigurationSetTrackingOptionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutConfigurationSetTrackingOptionsCommandInput - {@link PutConfigurationSetTrackingOptionsCommandInput}
+ * @returns {@link PutConfigurationSetTrackingOptionsCommandOutput}
  * @see {@link PutConfigurationSetTrackingOptionsCommandInput} for command's `input` shape.
  * @see {@link PutConfigurationSetTrackingOptionsCommandOutput} for command's `response` shape.
- * @see {@link PinpointEmailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointEmailClientResolvedConfig | config} for PinpointEmailClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link PinpointEmailServiceException}
+ * <p>Base exception class for all service exceptions from PinpointEmail service.</p>
+ *
+ *
+ * @public
  */
-export class PutConfigurationSetTrackingOptionsCommand extends $Command<
-  PutConfigurationSetTrackingOptionsCommandInput,
-  PutConfigurationSetTrackingOptionsCommandOutput,
-  PinpointEmailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutConfigurationSetTrackingOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointEmailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutConfigurationSetTrackingOptionsCommandInput, PutConfigurationSetTrackingOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointEmailClient";
-    const commandName = "PutConfigurationSetTrackingOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutConfigurationSetTrackingOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutConfigurationSetTrackingOptionsResponse.filterSensitiveLog,
+export class PutConfigurationSetTrackingOptionsCommand extends command<PutConfigurationSetTrackingOptionsCommandInput, PutConfigurationSetTrackingOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutConfigurationSetTrackingOptions",
+  PutConfigurationSetTrackingOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutConfigurationSetTrackingOptionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutConfigurationSetTrackingOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutConfigurationSetTrackingOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutConfigurationSetTrackingOptionsCommandOutput> {
-    return deserializeAws_restJson1PutConfigurationSetTrackingOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutConfigurationSetTrackingOptionsCommandInput;
+      output: PutConfigurationSetTrackingOptionsCommandOutput;
+    };
+  };
 }

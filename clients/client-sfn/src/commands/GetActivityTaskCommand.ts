@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetActivityTaskInput, GetActivityTaskOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0GetActivityTaskCommand,
-  serializeAws_json1_0GetActivityTaskCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { GetActivityTaskInput, GetActivityTaskOutput } from "../models/models_0";
+import { GetActivityTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetActivityTaskCommand}.
+ */
 export interface GetActivityTaskCommandInput extends GetActivityTaskInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetActivityTaskCommand}.
+ */
 export interface GetActivityTaskCommandOutput extends GetActivityTaskOutput, __MetadataBearer {}
 
 /**
@@ -40,68 +41,68 @@ export interface GetActivityTaskCommandOutput extends GetActivityTaskOutput, __M
  * ```javascript
  * import { SFNClient, GetActivityTaskCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, GetActivityTaskCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // GetActivityTaskInput
+ *   activityArn: "STRING_VALUE", // required
+ *   workerName: "STRING_VALUE",
+ * };
  * const command = new GetActivityTaskCommand(input);
  * const response = await client.send(command);
+ * // { // GetActivityTaskOutput
+ * //   taskToken: "STRING_VALUE",
+ * //   input: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetActivityTaskCommandInput - {@link GetActivityTaskCommandInput}
+ * @returns {@link GetActivityTaskCommandOutput}
  * @see {@link GetActivityTaskCommandInput} for command's `input` shape.
  * @see {@link GetActivityTaskCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link ActivityDoesNotExist} (client fault)
+ *  <p>The specified activity does not exist.</p>
+ *
+ * @throws {@link ActivityWorkerLimitExceeded} (client fault)
+ *  <p>The maximum number of workers concurrently polling for activity tasks has been
+ *       reached.</p>
+ *
+ * @throws {@link InvalidArn} (client fault)
+ *  <p>The provided Amazon Resource Name (ARN) is not valid.</p>
+ *
+ * @throws {@link KmsAccessDeniedException} (client fault)
+ *  <p>Either your KMS key policy or API caller does not have the required permissions.</p>
+ *
+ * @throws {@link KmsInvalidStateException} (client fault)
+ *  <p>The KMS key is not in valid state, for example: Disabled or Deleted.</p>
+ *
+ * @throws {@link KmsThrottlingException} (client fault)
+ *  <p>Received when KMS returns <code>ThrottlingException</code> for a KMS call that Step Functions makes on behalf of the caller.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class GetActivityTaskCommand extends $Command<
-  GetActivityTaskCommandInput,
-  GetActivityTaskCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetActivityTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetActivityTaskCommandInput, GetActivityTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "GetActivityTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetActivityTaskInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetActivityTaskOutput.filterSensitiveLog,
+export class GetActivityTaskCommand extends command<GetActivityTaskCommandInput, GetActivityTaskCommandOutput>(
+  _ep0,
+  _mw1,
+  "GetActivityTask",
+  GetActivityTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetActivityTaskInput;
+      output: GetActivityTaskOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetActivityTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetActivityTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetActivityTaskCommandOutput> {
-    return deserializeAws_json1_0GetActivityTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetActivityTaskCommandInput;
+      output: GetActivityTaskCommandOutput;
+    };
+  };
 }

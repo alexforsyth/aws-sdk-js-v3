@@ -1,0 +1,98 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListResourceProfileArtifactsRequest, ListResourceProfileArtifactsResponse } from "../models/models_0";
+import { ListResourceProfileArtifacts$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListResourceProfileArtifactsCommand}.
+ */
+export interface ListResourceProfileArtifactsCommandInput extends ListResourceProfileArtifactsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListResourceProfileArtifactsCommand}.
+ */
+export interface ListResourceProfileArtifactsCommandOutput extends ListResourceProfileArtifactsResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about objects that Amazon Macie selected from an S3 bucket for automated sensitive data discovery.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { Macie2Client, ListResourceProfileArtifactsCommand } from "@aws-sdk/client-macie2"; // ES Modules import
+ * // const { Macie2Client, ListResourceProfileArtifactsCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
+ * const client = new Macie2Client(config);
+ * const input = { // ListResourceProfileArtifactsRequest
+ *   nextToken: "STRING_VALUE",
+ *   resourceArn: "STRING_VALUE", // required
+ * };
+ * const command = new ListResourceProfileArtifactsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListResourceProfileArtifactsResponse
+ * //   artifacts: [ // __listOfResourceProfileArtifact
+ * //     { // ResourceProfileArtifact
+ * //       arn: "STRING_VALUE", // required
+ * //       classificationResultStatus: "STRING_VALUE", // required
+ * //       sensitive: true || false,
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListResourceProfileArtifactsCommandInput - {@link ListResourceProfileArtifactsCommandInput}
+ * @returns {@link ListResourceProfileArtifactsCommandOutput}
+ * @see {@link ListResourceProfileArtifactsCommandInput} for command's `input` shape.
+ * @see {@link ListResourceProfileArtifactsCommandOutput} for command's `response` shape.
+ * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
+ */
+export class ListResourceProfileArtifactsCommand extends command<ListResourceProfileArtifactsCommandInput, ListResourceProfileArtifactsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListResourceProfileArtifacts",
+  ListResourceProfileArtifacts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResourceProfileArtifactsRequest;
+      output: ListResourceProfileArtifactsResponse;
+    };
+    sdk: {
+      input: ListResourceProfileArtifactsCommandInput;
+      output: ListResourceProfileArtifactsCommandOutput;
+    };
+  };
+}

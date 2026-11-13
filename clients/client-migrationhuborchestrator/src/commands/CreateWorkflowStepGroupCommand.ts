@@ -1,0 +1,111 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateWorkflowStepGroupRequest, CreateWorkflowStepGroupResponse } from "../models/models_0";
+import { CreateWorkflowStepGroup$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateWorkflowStepGroupCommand}.
+ */
+export interface CreateWorkflowStepGroupCommandInput extends CreateWorkflowStepGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateWorkflowStepGroupCommand}.
+ */
+export interface CreateWorkflowStepGroupCommandOutput extends CreateWorkflowStepGroupResponse, __MetadataBearer {}
+
+/**
+ * <p>Create a step group in a migration workflow.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MigrationHubOrchestratorClient, CreateWorkflowStepGroupCommand } from "@aws-sdk/client-migrationhuborchestrator"; // ES Modules import
+ * // const { MigrationHubOrchestratorClient, CreateWorkflowStepGroupCommand } = require("@aws-sdk/client-migrationhuborchestrator"); // CommonJS import
+ * // import type { MigrationHubOrchestratorClientConfig } from "@aws-sdk/client-migrationhuborchestrator";
+ * const config = {}; // type is MigrationHubOrchestratorClientConfig
+ * const client = new MigrationHubOrchestratorClient(config);
+ * const input = { // CreateWorkflowStepGroupRequest
+ *   workflowId: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   next: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   previous: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
+ * const command = new CreateWorkflowStepGroupCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateWorkflowStepGroupResponse
+ * //   workflowId: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   id: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   tools: [ // ToolsList
+ * //     { // Tool
+ * //       name: "STRING_VALUE",
+ * //       url: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   next: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   previous: [
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   creationTime: new Date("TIMESTAMP"),
+ * // };
+ *
+ * ```
+ *
+ * @param CreateWorkflowStepGroupCommandInput - {@link CreateWorkflowStepGroupCommandInput}
+ * @returns {@link CreateWorkflowStepGroupCommandOutput}
+ * @see {@link CreateWorkflowStepGroupCommandInput} for command's `input` shape.
+ * @see {@link CreateWorkflowStepGroupCommandOutput} for command's `response` shape.
+ * @see {@link MigrationHubOrchestratorClientResolvedConfig | config} for MigrationHubOrchestratorClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an AWS service.</p>
+ *
+ * @throws {@link MigrationHubOrchestratorServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubOrchestrator service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateWorkflowStepGroupCommand extends command<CreateWorkflowStepGroupCommandInput, CreateWorkflowStepGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateWorkflowStepGroup",
+  CreateWorkflowStepGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWorkflowStepGroupRequest;
+      output: CreateWorkflowStepGroupResponse;
+    };
+    sdk: {
+      input: CreateWorkflowStepGroupCommandInput;
+      output: CreateWorkflowStepGroupCommandOutput;
+    };
+  };
+}

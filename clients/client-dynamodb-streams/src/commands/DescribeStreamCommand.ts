@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBStreamsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBStreamsClient";
-import { DescribeStreamInput, DescribeStreamOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeStreamCommand,
-  serializeAws_json1_0DescribeStreamCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStreamInput, DescribeStreamOutput } from "../models/models_0";
+import { DescribeStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStreamCommand}.
+ */
 export interface DescribeStreamCommandInput extends DescribeStreamInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStreamCommand}.
+ */
 export interface DescribeStreamCommandOutput extends DescribeStreamOutput, __MetadataBearer {}
 
 /**
@@ -36,68 +37,85 @@ export interface DescribeStreamCommandOutput extends DescribeStreamOutput, __Met
  * ```javascript
  * import { DynamoDBStreamsClient, DescribeStreamCommand } from "@aws-sdk/client-dynamodb-streams"; // ES Modules import
  * // const { DynamoDBStreamsClient, DescribeStreamCommand } = require("@aws-sdk/client-dynamodb-streams"); // CommonJS import
+ * // import type { DynamoDBStreamsClientConfig } from "@aws-sdk/client-dynamodb-streams";
+ * const config = {}; // type is DynamoDBStreamsClientConfig
  * const client = new DynamoDBStreamsClient(config);
+ * const input = { // DescribeStreamInput
+ *   StreamArn: "STRING_VALUE", // required
+ *   Limit: Number("int"),
+ *   ExclusiveStartShardId: "STRING_VALUE",
+ *   ShardFilter: { // ShardFilter
+ *     Type: "CHILD_SHARDS",
+ *     ShardId: "STRING_VALUE",
+ *   },
+ * };
  * const command = new DescribeStreamCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStreamOutput
+ * //   StreamDescription: { // StreamDescription
+ * //     StreamArn: "STRING_VALUE",
+ * //     StreamLabel: "STRING_VALUE",
+ * //     StreamStatus: "ENABLING" || "ENABLED" || "DISABLING" || "DISABLED",
+ * //     StreamViewType: "NEW_IMAGE" || "OLD_IMAGE" || "NEW_AND_OLD_IMAGES" || "KEYS_ONLY",
+ * //     CreationRequestDateTime: new Date("TIMESTAMP"),
+ * //     TableName: "STRING_VALUE",
+ * //     KeySchema: [ // KeySchema
+ * //       { // KeySchemaElement
+ * //         AttributeName: "STRING_VALUE", // required
+ * //         KeyType: "HASH" || "RANGE", // required
+ * //       },
+ * //     ],
+ * //     Shards: [ // ShardDescriptionList
+ * //       { // Shard
+ * //         ShardId: "STRING_VALUE",
+ * //         SequenceNumberRange: { // SequenceNumberRange
+ * //           StartingSequenceNumber: "STRING_VALUE",
+ * //           EndingSequenceNumber: "STRING_VALUE",
+ * //         },
+ * //         ParentShardId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     LastEvaluatedShardId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeStreamCommandInput - {@link DescribeStreamCommandInput}
+ * @returns {@link DescribeStreamCommandOutput}
  * @see {@link DescribeStreamCommandInput} for command's `input` shape.
  * @see {@link DescribeStreamCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBStreamsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBStreamsClientResolvedConfig | config} for DynamoDBStreamsClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access a nonexistent table or index. The resource
+ *             might not be specified correctly, or its status might not be
+ *             <code>ACTIVE</code>.</p>
+ *
+ * @throws {@link DynamoDBStreamsServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDBStreams service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStreamCommand extends $Command<
-  DescribeStreamCommandInput,
-  DescribeStreamCommandOutput,
-  DynamoDBStreamsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBStreamsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStreamCommandInput, DescribeStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBStreamsClient";
-    const commandName = "DescribeStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStreamInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStreamOutput.filterSensitiveLog,
+export class DescribeStreamCommand extends command<DescribeStreamCommandInput, DescribeStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStream",
+  DescribeStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStreamInput;
+      output: DescribeStreamOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeStreamCommandOutput> {
-    return deserializeAws_json1_0DescribeStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStreamCommandInput;
+      output: DescribeStreamCommandOutput;
+    };
+  };
 }

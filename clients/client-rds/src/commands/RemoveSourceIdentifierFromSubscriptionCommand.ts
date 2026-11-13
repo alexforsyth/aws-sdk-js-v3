@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   RemoveSourceIdentifierFromSubscriptionMessage,
   RemoveSourceIdentifierFromSubscriptionResult,
 } from "../models/models_1";
-import {
-  deserializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand,
-  serializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { RemoveSourceIdentifierFromSubscription$ } from "../schemas/schemas_0";
 
-export interface RemoveSourceIdentifierFromSubscriptionCommandInput
-  extends RemoveSourceIdentifierFromSubscriptionMessage {}
-export interface RemoveSourceIdentifierFromSubscriptionCommandOutput
-  extends RemoveSourceIdentifierFromSubscriptionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveSourceIdentifierFromSubscriptionCommand}.
+ */
+export interface RemoveSourceIdentifierFromSubscriptionCommandInput extends RemoveSourceIdentifierFromSubscriptionMessage {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveSourceIdentifierFromSubscriptionCommand}.
+ */
+export interface RemoveSourceIdentifierFromSubscriptionCommandOutput extends RemoveSourceIdentifierFromSubscriptionResult, __MetadataBearer {}
 
 /**
  * <p>Removes a source identifier from an existing RDS event notification subscription.</p>
@@ -34,74 +32,101 @@ export interface RemoveSourceIdentifierFromSubscriptionCommandOutput
  * ```javascript
  * import { RDSClient, RemoveSourceIdentifierFromSubscriptionCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, RemoveSourceIdentifierFromSubscriptionCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // RemoveSourceIdentifierFromSubscriptionMessage
+ *   SubscriptionName: "STRING_VALUE", // required
+ *   SourceIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new RemoveSourceIdentifierFromSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveSourceIdentifierFromSubscriptionResult
+ * //   EventSubscription: { // EventSubscription
+ * //     CustomerAwsId: "STRING_VALUE",
+ * //     CustSubscriptionId: "STRING_VALUE",
+ * //     SnsTopicArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     SubscriptionCreationTime: "STRING_VALUE",
+ * //     SourceType: "STRING_VALUE",
+ * //     SourceIdsList: [ // SourceIdsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     EventCategoriesList: [ // EventCategoriesList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Enabled: true || false,
+ * //     EventSubscriptionArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RemoveSourceIdentifierFromSubscriptionCommandInput - {@link RemoveSourceIdentifierFromSubscriptionCommandInput}
+ * @returns {@link RemoveSourceIdentifierFromSubscriptionCommandOutput}
  * @see {@link RemoveSourceIdentifierFromSubscriptionCommandInput} for command's `input` shape.
  * @see {@link RemoveSourceIdentifierFromSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link SourceNotFoundFault} (client fault)
+ *  <p>The requested source could not be found.</p>
+ *
+ * @throws {@link SubscriptionNotFoundFault} (client fault)
+ *  <p>The subscription name does not exist.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To remove a source identifier from a subscription
+ * ```javascript
+ * // The following example removes the specified source identifier from an existing subscription.
+ * const input = {
+ *   SourceIdentifier: "test-instance-repl",
+ *   SubscriptionName: "my-instance-events"
+ * };
+ * const command = new RemoveSourceIdentifierFromSubscriptionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   EventSubscription: {
+ *     CustSubscriptionId: "my-instance-events",
+ *     CustomerAwsId: "123456789012",
+ *     Enabled: false,
+ *     EventCategoriesList: [
+ *       "backup",
+ *       "recovery"
+ *     ],
+ *     EventSubscriptionArn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events",
+ *     SnsTopicArn: "arn:aws:sns:us-east-1:123456789012:interesting-events",
+ *     SourceIdsList: [
+ *       "test-instance"
+ *     ],
+ *     SourceType: "db-instance",
+ *     Status: "modifying",
+ *     SubscriptionCreationTime: "Tue Jul 31 23:22:01 UTC 2018"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class RemoveSourceIdentifierFromSubscriptionCommand extends $Command<
-  RemoveSourceIdentifierFromSubscriptionCommandInput,
-  RemoveSourceIdentifierFromSubscriptionCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveSourceIdentifierFromSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveSourceIdentifierFromSubscriptionCommandInput, RemoveSourceIdentifierFromSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "RemoveSourceIdentifierFromSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveSourceIdentifierFromSubscriptionMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveSourceIdentifierFromSubscriptionResult.filterSensitiveLog,
+export class RemoveSourceIdentifierFromSubscriptionCommand extends command<RemoveSourceIdentifierFromSubscriptionCommandInput, RemoveSourceIdentifierFromSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveSourceIdentifierFromSubscription",
+  RemoveSourceIdentifierFromSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveSourceIdentifierFromSubscriptionMessage;
+      output: RemoveSourceIdentifierFromSubscriptionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RemoveSourceIdentifierFromSubscriptionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveSourceIdentifierFromSubscriptionCommandOutput> {
-    return deserializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveSourceIdentifierFromSubscriptionCommandInput;
+      output: RemoveSourceIdentifierFromSubscriptionCommandOutput;
+    };
+  };
 }

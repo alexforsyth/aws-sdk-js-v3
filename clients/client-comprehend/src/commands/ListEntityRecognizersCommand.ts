@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { ListEntityRecognizersRequest, ListEntityRecognizersResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListEntityRecognizersCommand,
-  serializeAws_json1_1ListEntityRecognizersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEntityRecognizersRequest, ListEntityRecognizersResponse } from "../models/models_0";
+import { ListEntityRecognizers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEntityRecognizersCommand}.
+ */
 export interface ListEntityRecognizersCommandInput extends ListEntityRecognizersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListEntityRecognizersCommand}.
+ */
 export interface ListEntityRecognizersCommandOutput extends ListEntityRecognizersResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +34,148 @@ export interface ListEntityRecognizersCommandOutput extends ListEntityRecognizer
  * ```javascript
  * import { ComprehendClient, ListEntityRecognizersCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, ListEntityRecognizersCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // ListEntityRecognizersRequest
+ *   Filter: { // EntityRecognizerFilter
+ *     Status: "SUBMITTED" || "TRAINING" || "DELETING" || "STOP_REQUESTED" || "STOPPED" || "IN_ERROR" || "TRAINED" || "TRAINED_WITH_WARNING",
+ *     RecognizerName: "STRING_VALUE",
+ *     SubmitTimeBefore: new Date("TIMESTAMP"),
+ *     SubmitTimeAfter: new Date("TIMESTAMP"),
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListEntityRecognizersCommand(input);
  * const response = await client.send(command);
+ * // { // ListEntityRecognizersResponse
+ * //   EntityRecognizerPropertiesList: [ // EntityRecognizerPropertiesList
+ * //     { // EntityRecognizerProperties
+ * //       EntityRecognizerArn: "STRING_VALUE",
+ * //       LanguageCode: "en" || "es" || "fr" || "de" || "it" || "pt" || "ar" || "hi" || "ja" || "ko" || "zh" || "zh-TW",
+ * //       Status: "SUBMITTED" || "TRAINING" || "DELETING" || "STOP_REQUESTED" || "STOPPED" || "IN_ERROR" || "TRAINED" || "TRAINED_WITH_WARNING",
+ * //       Message: "STRING_VALUE",
+ * //       SubmitTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       TrainingStartTime: new Date("TIMESTAMP"),
+ * //       TrainingEndTime: new Date("TIMESTAMP"),
+ * //       InputDataConfig: { // EntityRecognizerInputDataConfig
+ * //         DataFormat: "COMPREHEND_CSV" || "AUGMENTED_MANIFEST",
+ * //         EntityTypes: [ // EntityTypesList // required
+ * //           { // EntityTypesListItem
+ * //             Type: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //         Documents: { // EntityRecognizerDocuments
+ * //           S3Uri: "STRING_VALUE", // required
+ * //           TestS3Uri: "STRING_VALUE",
+ * //           InputFormat: "ONE_DOC_PER_FILE" || "ONE_DOC_PER_LINE",
+ * //         },
+ * //         Annotations: { // EntityRecognizerAnnotations
+ * //           S3Uri: "STRING_VALUE", // required
+ * //           TestS3Uri: "STRING_VALUE",
+ * //         },
+ * //         EntityList: { // EntityRecognizerEntityList
+ * //           S3Uri: "STRING_VALUE", // required
+ * //         },
+ * //         AugmentedManifests: [ // EntityRecognizerAugmentedManifestsList
+ * //           { // AugmentedManifestsListItem
+ * //             S3Uri: "STRING_VALUE", // required
+ * //             Split: "TRAIN" || "TEST",
+ * //             AttributeNames: [ // AttributeNamesList // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             AnnotationDataS3Uri: "STRING_VALUE",
+ * //             SourceDocumentsS3Uri: "STRING_VALUE",
+ * //             DocumentType: "PLAIN_TEXT_DOCUMENT" || "SEMI_STRUCTURED_DOCUMENT",
+ * //           },
+ * //         ],
+ * //       },
+ * //       RecognizerMetadata: { // EntityRecognizerMetadata
+ * //         NumberOfTrainedDocuments: Number("int"),
+ * //         NumberOfTestDocuments: Number("int"),
+ * //         EvaluationMetrics: { // EntityRecognizerEvaluationMetrics
+ * //           Precision: Number("double"),
+ * //           Recall: Number("double"),
+ * //           F1Score: Number("double"),
+ * //         },
+ * //         EntityTypes: [ // EntityRecognizerMetadataEntityTypesList
+ * //           { // EntityRecognizerMetadataEntityTypesListItem
+ * //             Type: "STRING_VALUE",
+ * //             EvaluationMetrics: { // EntityTypesEvaluationMetrics
+ * //               Precision: Number("double"),
+ * //               Recall: Number("double"),
+ * //               F1Score: Number("double"),
+ * //             },
+ * //             NumberOfTrainMentions: Number("int"),
+ * //           },
+ * //         ],
+ * //       },
+ * //       DataAccessRoleArn: "STRING_VALUE",
+ * //       VolumeKmsKeyId: "STRING_VALUE",
+ * //       VpcConfig: { // VpcConfig
+ * //         SecurityGroupIds: [ // SecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Subnets: [ // Subnets // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       ModelKmsKeyId: "STRING_VALUE",
+ * //       VersionName: "STRING_VALUE",
+ * //       SourceModelArn: "STRING_VALUE",
+ * //       FlywheelArn: "STRING_VALUE",
+ * //       OutputDataConfig: { // EntityRecognizerOutputDataConfig
+ * //         FlywheelStatsS3Prefix: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEntityRecognizersCommandInput - {@link ListEntityRecognizersCommandInput}
+ * @returns {@link ListEntityRecognizersCommandOutput}
  * @see {@link ListEntityRecognizersCommandInput} for command's `input` shape.
  * @see {@link ListEntityRecognizersCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidFilterException} (client fault)
+ *  <p>The filter specified for the operation is invalid. Specify a different
+ *       filter.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class ListEntityRecognizersCommand extends $Command<
-  ListEntityRecognizersCommandInput,
-  ListEntityRecognizersCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEntityRecognizersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEntityRecognizersCommandInput, ListEntityRecognizersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "ListEntityRecognizersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEntityRecognizersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEntityRecognizersResponse.filterSensitiveLog,
+export class ListEntityRecognizersCommand extends command<ListEntityRecognizersCommandInput, ListEntityRecognizersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEntityRecognizers",
+  ListEntityRecognizers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEntityRecognizersRequest;
+      output: ListEntityRecognizersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEntityRecognizersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListEntityRecognizersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEntityRecognizersCommandOutput> {
-    return deserializeAws_json1_1ListEntityRecognizersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEntityRecognizersCommandInput;
+      output: ListEntityRecognizersCommandOutput;
+    };
+  };
 }

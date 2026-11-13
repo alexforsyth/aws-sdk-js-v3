@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListThingsInThingGroupCommand,
   ListThingsInThingGroupCommandInput,
   ListThingsInThingGroupCommandOutput,
 } from "../commands/ListThingsInThingGroupCommand";
-import { IoT } from "../IoT";
 import { IoTClient } from "../IoTClient";
-import { IoTPaginationConfiguration } from "./Interfaces";
+import type { IoTPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: IoTClient,
-  input: ListThingsInThingGroupCommandInput,
-  ...args: any
-): Promise<ListThingsInThingGroupCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListThingsInThingGroupCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: IoT,
-  input: ListThingsInThingGroupCommandInput,
-  ...args: any
-): Promise<ListThingsInThingGroupCommandOutput> => {
-  // @ts-ignore
-  return await client.listThingsInThingGroup(input, ...args);
-};
-export async function* paginateListThingsInThingGroup(
+export const paginateListThingsInThingGroup: (
   config: IoTPaginationConfiguration,
   input: ListThingsInThingGroupCommandInput,
-  ...additionalArguments: any
-): Paginator<ListThingsInThingGroupCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListThingsInThingGroupCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof IoT) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof IoTClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected IoT | IoTClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListThingsInThingGroupCommandOutput> = createPaginator<
+  IoTPaginationConfiguration,
+  ListThingsInThingGroupCommandInput,
+  ListThingsInThingGroupCommandOutput
+>(IoTClient, ListThingsInThingGroupCommand, "nextToken", "nextToken", "maxResults");

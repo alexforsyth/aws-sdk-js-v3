@@ -1,24 +1,37 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeAddonCommand, DescribeAddonCommandInput } from "../commands/DescribeAddonCommand";
-import { EKSClient } from "../EKSClient";
+import {
+  type DescribeAddonCommandInput,
+  type DescribeAddonCommandOutput,
+  DescribeAddonCommand,
+} from "../commands/DescribeAddonCommand";
+import type { EKSClient } from "../EKSClient";
+import type { EKSServiceException } from "../models/EKSServiceException";
+import type { ResourceNotFoundException } from "../models/errors";
 
-const checkState = async (client: EKSClient, input: DescribeAddonCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EKSClient, input: DescribeAddonCommandInput): Promise<WaiterResult<DescribeAddonCommandOutput | EKSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeAddonCommand(input));
+    let result: DescribeAddonCommandOutput & any = await client.send(new DescribeAddonCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.addon.status;
-      };
+      }
       if (returnComparator() === "DELETE_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -31,7 +44,7 @@ const checkState = async (client: EKSClient, input: DescribeAddonCommandInput): 
 export const waitForAddonDeleted = async (
   params: WaiterConfiguration<EKSClient>,
   input: DescribeAddonCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAddonCommandOutput | EKSServiceException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -43,8 +56,8 @@ export const waitForAddonDeleted = async (
 export const waitUntilAddonDeleted = async (
   params: WaiterConfiguration<EKSClient>,
   input: DescribeAddonCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundException>;
 };

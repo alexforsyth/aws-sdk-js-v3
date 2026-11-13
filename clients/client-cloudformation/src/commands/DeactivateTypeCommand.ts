@@ -1,100 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DeactivateTypeInput, DeactivateTypeOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDeactivateTypeCommand,
-  serializeAws_queryDeactivateTypeCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeactivateTypeInput, DeactivateTypeOutput } from "../models/models_0";
+import { DeactivateType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeactivateTypeCommand}.
+ */
 export interface DeactivateTypeCommandInput extends DeactivateTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeactivateTypeCommand}.
+ */
 export interface DeactivateTypeCommandOutput extends DeactivateTypeOutput, __MetadataBearer {}
 
 /**
- * <p>Deactivates a public extension that was previously activated in this account and
- *          region.</p>
- *          <p>Once deactivated, an extension cannot be used in any CloudFormation operation. This
- *          includes stack update operations where the stack template includes the extension, even if
- *          no updates are being made to the extension. In addition, deactivated extensions are not
- *          automatically updated if a new version of the extension is released.</p>
+ * <p>Deactivates a public third-party extension, such as a resource or module, or a CloudFormation
+ *       Hook when you no longer use it.</p>
+ *          <p>Deactivating an extension deletes the configuration details that are associated with it.
+ *       To temporarily disable a CloudFormation Hook instead, you can use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a>.</p>
+ *          <p>Once deactivated, an extension can't be used in any CloudFormation operation. This includes
+ *       stack update operations where the stack template includes the extension, even if no updates
+ *       are being made to the extension. In addition, deactivated extensions aren't automatically
+ *       updated if a new version of the extension is released.</p>
+ *          <p>To see which extensions are currently activated, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html">ListTypes</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DeactivateTypeCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DeactivateTypeCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DeactivateTypeInput
+ *   TypeName: "STRING_VALUE",
+ *   Type: "RESOURCE" || "MODULE" || "HOOK",
+ *   Arn: "STRING_VALUE",
+ * };
  * const command = new DeactivateTypeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeactivateTypeCommandInput - {@link DeactivateTypeCommandInput}
+ * @returns {@link DeactivateTypeCommandOutput}
  * @see {@link DeactivateTypeCommandInput} for command's `input` shape.
  * @see {@link DeactivateTypeCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link TypeNotFoundException} (client fault)
+ *  <p>The specified extension doesn't exist in the CloudFormation registry.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DeactivateTypeCommand extends $Command<
-  DeactivateTypeCommandInput,
-  DeactivateTypeCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeactivateTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeactivateTypeCommandInput, DeactivateTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DeactivateTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeactivateTypeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeactivateTypeOutput.filterSensitiveLog,
+export class DeactivateTypeCommand extends command<DeactivateTypeCommandInput, DeactivateTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeactivateType",
+  DeactivateType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeactivateTypeInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeactivateTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeactivateTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeactivateTypeCommandOutput> {
-    return deserializeAws_queryDeactivateTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeactivateTypeCommandInput;
+      output: DeactivateTypeCommandOutput;
+    };
+  };
 }

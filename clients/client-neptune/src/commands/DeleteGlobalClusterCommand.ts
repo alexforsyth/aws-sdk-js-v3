@@ -1,0 +1,113 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGlobalClusterMessage, DeleteGlobalClusterResult } from "../models/models_0";
+import { DeleteGlobalCluster$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGlobalClusterCommand}.
+ */
+export interface DeleteGlobalClusterCommandInput extends DeleteGlobalClusterMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGlobalClusterCommand}.
+ */
+export interface DeleteGlobalClusterCommandOutput extends DeleteGlobalClusterResult, __MetadataBearer {}
+
+/**
+ * <p>Deletes a global database. The primary and all secondary clusters must
+ *       already be detached or deleted first.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NeptuneClient, DeleteGlobalClusterCommand } from "@aws-sdk/client-neptune"; // ES Modules import
+ * // const { NeptuneClient, DeleteGlobalClusterCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
+ * const client = new NeptuneClient(config);
+ * const input = { // DeleteGlobalClusterMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteGlobalClusterCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteGlobalClusterResult
+ * //   GlobalCluster: { // GlobalCluster
+ * //     GlobalClusterIdentifier: "STRING_VALUE",
+ * //     GlobalClusterResourceId: "STRING_VALUE",
+ * //     GlobalClusterArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     DatabaseName: "STRING_VALUE",
+ * //     StorageEncrypted: true || false,
+ * //     DeletionProtection: true || false,
+ * //     GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //       { // GlobalClusterMember
+ * //         DBClusterArn: "STRING_VALUE",
+ * //         Readers: [ // ReadersArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         IsWriter: true || false,
+ * //       },
+ * //     ],
+ * //     FailoverState: { // FailoverState
+ * //       Status: "pending" || "failing-over" || "cancelling",
+ * //       FromDbClusterArn: "STRING_VALUE",
+ * //       ToDbClusterArn: "STRING_VALUE",
+ * //       IsDataLossAllowed: true || false,
+ * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteGlobalClusterCommandInput - {@link DeleteGlobalClusterCommandInput}
+ * @returns {@link DeleteGlobalClusterCommandOutput}
+ * @see {@link DeleteGlobalClusterCommandInput} for command's `input` shape.
+ * @see {@link DeleteGlobalClusterCommandOutput} for command's `response` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
+ *
+ * @throws {@link GlobalClusterNotFoundFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster. </p>
+ *
+ * @throws {@link InvalidGlobalClusterStateFault} (client fault)
+ *  <p>The global cluster is in an invalid state and can't perform the requested operation. </p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteGlobalClusterCommand extends command<DeleteGlobalClusterCommandInput, DeleteGlobalClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGlobalCluster",
+  DeleteGlobalCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGlobalClusterMessage;
+      output: DeleteGlobalClusterResult;
+    };
+    sdk: {
+      input: DeleteGlobalClusterCommandInput;
+      output: DeleteGlobalClusterCommandOutput;
+    };
+  };
+}

@@ -1,32 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutTraceSegmentsRequest, PutTraceSegmentsResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutTraceSegmentsCommand,
-  serializeAws_restJson1PutTraceSegmentsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, XRayClientResolvedConfig } from "../XRayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutTraceSegmentsRequest, PutTraceSegmentsResult } from "../models/models_0";
+import { PutTraceSegments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutTraceSegmentsCommand}.
+ */
 export interface PutTraceSegmentsCommandInput extends PutTraceSegmentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutTraceSegmentsCommand}.
+ */
 export interface PutTraceSegmentsCommandOutput extends PutTraceSegmentsResult, __MetadataBearer {}
 
 /**
- * <p>Uploads segment documents to Amazon Web Services X-Ray. The <a href="https://docs.aws.amazon.com/xray/index.html">X-Ray SDK</a> generates segment documents and sends them to the X-Ray daemon, which uploads them in
- *       batches. A segment document can be a completed segment, an in-progress segment, or an array of
+ * <p>Uploads segment documents to Amazon Web Services X-Ray.
+ *       A segment document can be a completed segment, an in-progress segment, or an array of
  *       subsegments.</p>
  *          <p>Segments must include the following fields. For the full segment document schema, see
- *       <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">Amazon Web Services X-Ray
+ *       <a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-api.html#xray-api-segmentdocuments.html">Amazon Web Services X-Ray
  *         Segment Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>
  *          <p class="title">
  *             <b>Required segment document fields</b>
@@ -67,7 +68,8 @@ export interface PutTraceSegmentsCommandOutput extends PutTraceSegmentsResult, _
  *             </li>
  *          </ul>
  *          <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example,
- *       1-58406520-a006649127e371903a2de979. This includes:</p>
+ *       1-58406520-a006649127e371903a2de979. For trace IDs created by an X-Ray SDK, or by Amazon Web Services services
+ *       integrated with X-Ray, a trace ID includes:</p>
  *          <p class="title">
  *             <b>Trace ID Format</b>
  *          </p>
@@ -85,73 +87,75 @@ export interface PutTraceSegmentsCommandOutput extends PutTraceSegmentsResult, _
  *           digits.</p>
  *             </li>
  *          </ul>
+ *          <note>
+ *             <p>Trace IDs created via OpenTelemetry have a different format based on the
+ *       <a href="https://www.w3.org/TR/trace-context/">W3C Trace Context specification</a>.
+ *       A W3C trace ID must be formatted in the X-Ray trace ID format when sending to X-Ray. For example, a W3C
+ *       trace ID <code>4efaaf4d1e8720b39541901950019ee5</code> should be formatted as
+ *       <code>1-4efaaf4d-1e8720b39541901950019ee5</code> when sending to X-Ray. While X-Ray trace IDs include
+ *       the original request timestamp in Unix epoch time, this is not required or validated.
+ *     </p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { XRayClient, PutTraceSegmentsCommand } from "@aws-sdk/client-xray"; // ES Modules import
  * // const { XRayClient, PutTraceSegmentsCommand } = require("@aws-sdk/client-xray"); // CommonJS import
+ * // import type { XRayClientConfig } from "@aws-sdk/client-xray";
+ * const config = {}; // type is XRayClientConfig
  * const client = new XRayClient(config);
+ * const input = { // PutTraceSegmentsRequest
+ *   TraceSegmentDocuments: [ // TraceSegmentDocumentList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new PutTraceSegmentsCommand(input);
  * const response = await client.send(command);
+ * // { // PutTraceSegmentsResult
+ * //   UnprocessedTraceSegments: [ // UnprocessedTraceSegmentList
+ * //     { // UnprocessedTraceSegment
+ * //       Id: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PutTraceSegmentsCommandInput - {@link PutTraceSegmentsCommandInput}
+ * @returns {@link PutTraceSegmentsCommandOutput}
  * @see {@link PutTraceSegmentsCommandInput} for command's `input` shape.
  * @see {@link PutTraceSegmentsCommandOutput} for command's `response` shape.
- * @see {@link XRayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link XRayClientResolvedConfig | config} for XRayClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is missing required parameters or has invalid parameters.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>The request exceeds the maximum number of requests per second.</p>
+ *
+ * @throws {@link XRayServiceException}
+ * <p>Base exception class for all service exceptions from XRay service.</p>
+ *
+ *
+ * @public
  */
-export class PutTraceSegmentsCommand extends $Command<
-  PutTraceSegmentsCommandInput,
-  PutTraceSegmentsCommandOutput,
-  XRayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutTraceSegmentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: XRayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutTraceSegmentsCommandInput, PutTraceSegmentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "XRayClient";
-    const commandName = "PutTraceSegmentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutTraceSegmentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutTraceSegmentsResult.filterSensitiveLog,
+export class PutTraceSegmentsCommand extends command<PutTraceSegmentsCommandInput, PutTraceSegmentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutTraceSegments",
+  PutTraceSegments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutTraceSegmentsRequest;
+      output: PutTraceSegmentsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutTraceSegmentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutTraceSegmentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutTraceSegmentsCommandOutput> {
-    return deserializeAws_restJson1PutTraceSegmentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutTraceSegmentsCommandInput;
+      output: PutTraceSegmentsCommandOutput;
+    };
+  };
 }

@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { KinesisAnalyticsV2ClientConfig } from "./KinesisAnalyticsV2Client";
+// smithy-typescript generated code
+import type { KinesisAnalyticsV2ClientConfig } from "./KinesisAnalyticsV2Client";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: KinesisAnalyticsV2ClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

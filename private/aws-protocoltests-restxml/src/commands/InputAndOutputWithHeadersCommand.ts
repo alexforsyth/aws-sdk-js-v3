@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InputAndOutputWithHeadersIO } from "../models/models_0";
-import {
-  deserializeAws_restXmlInputAndOutputWithHeadersCommand,
-  serializeAws_restXmlInputAndOutputWithHeadersCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { InputAndOutputWithHeadersIO } from "../models/models_0";
+import { de_InputAndOutputWithHeadersCommand, se_InputAndOutputWithHeadersCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link InputAndOutputWithHeadersCommand}.
+ */
 export interface InputAndOutputWithHeadersCommandInput extends InputAndOutputWithHeadersIO {}
+/**
+ * @public
+ *
+ * The output of {@link InputAndOutputWithHeadersCommand}.
+ */
 export interface InputAndOutputWithHeadersCommandOutput extends InputAndOutputWithHeadersIO, __MetadataBearer {}
 
 /**
@@ -29,71 +38,116 @@ export interface InputAndOutputWithHeadersCommandOutput extends InputAndOutputWi
  * ```javascript
  * import { RestXmlProtocolClient, InputAndOutputWithHeadersCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
  * // const { RestXmlProtocolClient, InputAndOutputWithHeadersCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
  * const client = new RestXmlProtocolClient(config);
+ * const input = { // InputAndOutputWithHeadersIO
+ *   headerString: "STRING_VALUE",
+ *   headerByte: 0, // BYTE_VALUE
+ *   headerShort: Number("short"),
+ *   headerInteger: Number("int"),
+ *   headerLong: Number("long"),
+ *   headerFloat: Number("float"),
+ *   headerDouble: Number("double"),
+ *   headerTrueBool: true || false,
+ *   headerFalseBool: true || false,
+ *   headerStringList: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   headerStringSet: [ // StringSet
+ *     "STRING_VALUE",
+ *   ],
+ *   headerIntegerList: [ // IntegerList
+ *     Number("int"),
+ *   ],
+ *   headerBooleanList: [ // BooleanList
+ *     true || false,
+ *   ],
+ *   headerTimestampList: [ // TimestampList
+ *     new Date("TIMESTAMP"),
+ *   ],
+ *   headerEnum: "Foo" || "Baz" || "Bar" || "1" || "0",
+ *   headerEnumList: [ // FooEnumList
+ *     "Foo" || "Baz" || "Bar" || "1" || "0",
+ *   ],
+ * };
  * const command = new InputAndOutputWithHeadersCommand(input);
  * const response = await client.send(command);
+ * // { // InputAndOutputWithHeadersIO
+ * //   headerString: "STRING_VALUE",
+ * //   headerByte: 0, // BYTE_VALUE
+ * //   headerShort: Number("short"),
+ * //   headerInteger: Number("int"),
+ * //   headerLong: Number("long"),
+ * //   headerFloat: Number("float"),
+ * //   headerDouble: Number("double"),
+ * //   headerTrueBool: true || false,
+ * //   headerFalseBool: true || false,
+ * //   headerStringList: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   headerStringSet: [ // StringSet
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   headerIntegerList: [ // IntegerList
+ * //     Number("int"),
+ * //   ],
+ * //   headerBooleanList: [ // BooleanList
+ * //     true || false,
+ * //   ],
+ * //   headerTimestampList: [ // TimestampList
+ * //     new Date("TIMESTAMP"),
+ * //   ],
+ * //   headerEnum: "Foo" || "Baz" || "Bar" || "1" || "0",
+ * //   headerEnumList: [ // FooEnumList
+ * //     "Foo" || "Baz" || "Bar" || "1" || "0",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param InputAndOutputWithHeadersCommandInput - {@link InputAndOutputWithHeadersCommandInput}
+ * @returns {@link InputAndOutputWithHeadersCommandOutput}
  * @see {@link InputAndOutputWithHeadersCommandInput} for command's `input` shape.
  * @see {@link InputAndOutputWithHeadersCommandOutput} for command's `response` shape.
- * @see {@link RestXmlProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
  *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class InputAndOutputWithHeadersCommand extends $Command<
-  InputAndOutputWithHeadersCommandInput,
-  InputAndOutputWithHeadersCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: InputAndOutputWithHeadersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<InputAndOutputWithHeadersCommandInput, InputAndOutputWithHeadersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "InputAndOutputWithHeadersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: InputAndOutputWithHeadersIO.filterSensitiveLog,
-      outputFilterSensitiveLog: InputAndOutputWithHeadersIO.filterSensitiveLog,
+export class InputAndOutputWithHeadersCommand extends $Command
+  .classBuilder<
+    InputAndOutputWithHeadersCommandInput,
+    InputAndOutputWithHeadersCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "InputAndOutputWithHeaders", {})
+  .n("RestXmlProtocolClient", "InputAndOutputWithHeadersCommand")
+  .f(void 0, void 0)
+  .ser(se_InputAndOutputWithHeadersCommand)
+  .de(de_InputAndOutputWithHeadersCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InputAndOutputWithHeadersIO;
+      output: InputAndOutputWithHeadersIO;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: InputAndOutputWithHeadersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlInputAndOutputWithHeadersCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<InputAndOutputWithHeadersCommandOutput> {
-    return deserializeAws_restXmlInputAndOutputWithHeadersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: InputAndOutputWithHeadersCommandInput;
+      output: InputAndOutputWithHeadersCommandOutput;
+    };
+  };
 }

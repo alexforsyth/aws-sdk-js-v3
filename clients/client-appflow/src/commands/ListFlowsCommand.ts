@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppflowClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppflowClient";
-import { ListFlowsRequest, ListFlowsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListFlowsCommand,
-  serializeAws_restJson1ListFlowsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFlowsRequest, ListFlowsResponse } from "../models/models_0";
+import { ListFlows$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFlowsCommand}.
+ */
 export interface ListFlowsCommandInput extends ListFlowsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFlowsCommand}.
+ */
 export interface ListFlowsCommandOutput extends ListFlowsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,80 @@ export interface ListFlowsCommandOutput extends ListFlowsResponse, __MetadataBea
  * ```javascript
  * import { AppflowClient, ListFlowsCommand } from "@aws-sdk/client-appflow"; // ES Modules import
  * // const { AppflowClient, ListFlowsCommand } = require("@aws-sdk/client-appflow"); // CommonJS import
+ * // import type { AppflowClientConfig } from "@aws-sdk/client-appflow";
+ * const config = {}; // type is AppflowClientConfig
  * const client = new AppflowClient(config);
+ * const input = { // ListFlowsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListFlowsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFlowsResponse
+ * //   flows: [ // FlowList
+ * //     { // FlowDefinition
+ * //       flowArn: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       flowName: "STRING_VALUE",
+ * //       flowStatus: "Active" || "Deprecated" || "Deleted" || "Draft" || "Errored" || "Suspended",
+ * //       sourceConnectorType: "Salesforce" || "Singular" || "Slack" || "Redshift" || "S3" || "Marketo" || "Googleanalytics" || "Zendesk" || "Servicenow" || "Datadog" || "Trendmicro" || "Snowflake" || "Dynatrace" || "Infornexus" || "Amplitude" || "Veeva" || "EventBridge" || "LookoutMetrics" || "Upsolver" || "Honeycode" || "CustomerProfiles" || "SAPOData" || "CustomConnector" || "Pardot",
+ * //       sourceConnectorLabel: "STRING_VALUE",
+ * //       destinationConnectorType: "Salesforce" || "Singular" || "Slack" || "Redshift" || "S3" || "Marketo" || "Googleanalytics" || "Zendesk" || "Servicenow" || "Datadog" || "Trendmicro" || "Snowflake" || "Dynatrace" || "Infornexus" || "Amplitude" || "Veeva" || "EventBridge" || "LookoutMetrics" || "Upsolver" || "Honeycode" || "CustomerProfiles" || "SAPOData" || "CustomConnector" || "Pardot",
+ * //       destinationConnectorLabel: "STRING_VALUE",
+ * //       triggerType: "Scheduled" || "Event" || "OnDemand",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       lastUpdatedAt: new Date("TIMESTAMP"),
+ * //       createdBy: "STRING_VALUE",
+ * //       lastUpdatedBy: "STRING_VALUE",
+ * //       tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       lastRunExecutionDetails: { // ExecutionDetails
+ * //         mostRecentExecutionMessage: "STRING_VALUE",
+ * //         mostRecentExecutionTime: new Date("TIMESTAMP"),
+ * //         mostRecentExecutionStatus: "InProgress" || "Successful" || "Error" || "CancelStarted" || "Canceled",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFlowsCommandInput - {@link ListFlowsCommandInput}
+ * @returns {@link ListFlowsCommandOutput}
  * @see {@link ListFlowsCommandInput} for command's `input` shape.
  * @see {@link ListFlowsCommandOutput} for command's `response` shape.
- * @see {@link AppflowClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppflowClientResolvedConfig | config} for AppflowClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *       later. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AppflowServiceException}
+ * <p>Base exception class for all service exceptions from Appflow service.</p>
+ *
+ *
+ * @public
  */
-export class ListFlowsCommand extends $Command<
-  ListFlowsCommandInput,
-  ListFlowsCommandOutput,
-  AppflowClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFlowsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppflowClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFlowsCommandInput, ListFlowsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppflowClient";
-    const commandName = "ListFlowsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFlowsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFlowsResponse.filterSensitiveLog,
+export class ListFlowsCommand extends command<ListFlowsCommandInput, ListFlowsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFlows",
+  ListFlows$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFlowsRequest;
+      output: ListFlowsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFlowsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListFlowsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFlowsCommandOutput> {
-    return deserializeAws_restJson1ListFlowsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFlowsCommandInput;
+      output: ListFlowsCommandOutput;
+    };
+  };
 }

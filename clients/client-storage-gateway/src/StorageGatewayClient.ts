@@ -1,299 +1,361 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { ActivateGatewayCommandInput, ActivateGatewayCommandOutput } from "./commands/ActivateGatewayCommand";
-import { AddCacheCommandInput, AddCacheCommandOutput } from "./commands/AddCacheCommand";
-import { AddTagsToResourceCommandInput, AddTagsToResourceCommandOutput } from "./commands/AddTagsToResourceCommand";
-import { AddUploadBufferCommandInput, AddUploadBufferCommandOutput } from "./commands/AddUploadBufferCommand";
-import { AddWorkingStorageCommandInput, AddWorkingStorageCommandOutput } from "./commands/AddWorkingStorageCommand";
-import { AssignTapePoolCommandInput, AssignTapePoolCommandOutput } from "./commands/AssignTapePoolCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultStorageGatewayHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { ActivateGatewayCommandInput, ActivateGatewayCommandOutput } from "./commands/ActivateGatewayCommand";
+import type { AddCacheCommandInput, AddCacheCommandOutput } from "./commands/AddCacheCommand";
+import type {
+  AddTagsToResourceCommandInput,
+  AddTagsToResourceCommandOutput,
+} from "./commands/AddTagsToResourceCommand";
+import type { AddUploadBufferCommandInput, AddUploadBufferCommandOutput } from "./commands/AddUploadBufferCommand";
+import type {
+  AddWorkingStorageCommandInput,
+  AddWorkingStorageCommandOutput,
+} from "./commands/AddWorkingStorageCommand";
+import type { AssignTapePoolCommandInput, AssignTapePoolCommandOutput } from "./commands/AssignTapePoolCommand";
+import type {
   AssociateFileSystemCommandInput,
   AssociateFileSystemCommandOutput,
 } from "./commands/AssociateFileSystemCommand";
-import { AttachVolumeCommandInput, AttachVolumeCommandOutput } from "./commands/AttachVolumeCommand";
-import { CancelArchivalCommandInput, CancelArchivalCommandOutput } from "./commands/CancelArchivalCommand";
-import { CancelRetrievalCommandInput, CancelRetrievalCommandOutput } from "./commands/CancelRetrievalCommand";
-import {
+import type { AttachVolumeCommandInput, AttachVolumeCommandOutput } from "./commands/AttachVolumeCommand";
+import type { CancelArchivalCommandInput, CancelArchivalCommandOutput } from "./commands/CancelArchivalCommand";
+import type {
+  CancelCacheReportCommandInput,
+  CancelCacheReportCommandOutput,
+} from "./commands/CancelCacheReportCommand";
+import type { CancelRetrievalCommandInput, CancelRetrievalCommandOutput } from "./commands/CancelRetrievalCommand";
+import type {
   CreateCachediSCSIVolumeCommandInput,
   CreateCachediSCSIVolumeCommandOutput,
 } from "./commands/CreateCachediSCSIVolumeCommand";
-import { CreateNFSFileShareCommandInput, CreateNFSFileShareCommandOutput } from "./commands/CreateNFSFileShareCommand";
-import { CreateSMBFileShareCommandInput, CreateSMBFileShareCommandOutput } from "./commands/CreateSMBFileShareCommand";
-import { CreateSnapshotCommandInput, CreateSnapshotCommandOutput } from "./commands/CreateSnapshotCommand";
-import {
+import type {
+  CreateNFSFileShareCommandInput,
+  CreateNFSFileShareCommandOutput,
+} from "./commands/CreateNFSFileShareCommand";
+import type {
+  CreateSMBFileShareCommandInput,
+  CreateSMBFileShareCommandOutput,
+} from "./commands/CreateSMBFileShareCommand";
+import type { CreateSnapshotCommandInput, CreateSnapshotCommandOutput } from "./commands/CreateSnapshotCommand";
+import type {
   CreateSnapshotFromVolumeRecoveryPointCommandInput,
   CreateSnapshotFromVolumeRecoveryPointCommandOutput,
 } from "./commands/CreateSnapshotFromVolumeRecoveryPointCommand";
-import {
+import type {
   CreateStorediSCSIVolumeCommandInput,
   CreateStorediSCSIVolumeCommandOutput,
 } from "./commands/CreateStorediSCSIVolumeCommand";
-import { CreateTapePoolCommandInput, CreateTapePoolCommandOutput } from "./commands/CreateTapePoolCommand";
-import { CreateTapesCommandInput, CreateTapesCommandOutput } from "./commands/CreateTapesCommand";
-import {
+import type { CreateTapePoolCommandInput, CreateTapePoolCommandOutput } from "./commands/CreateTapePoolCommand";
+import type { CreateTapesCommandInput, CreateTapesCommandOutput } from "./commands/CreateTapesCommand";
+import type {
   CreateTapeWithBarcodeCommandInput,
   CreateTapeWithBarcodeCommandOutput,
 } from "./commands/CreateTapeWithBarcodeCommand";
-import {
+import type {
   DeleteAutomaticTapeCreationPolicyCommandInput,
   DeleteAutomaticTapeCreationPolicyCommandOutput,
 } from "./commands/DeleteAutomaticTapeCreationPolicyCommand";
-import {
+import type {
   DeleteBandwidthRateLimitCommandInput,
   DeleteBandwidthRateLimitCommandOutput,
 } from "./commands/DeleteBandwidthRateLimitCommand";
-import {
+import type {
+  DeleteCacheReportCommandInput,
+  DeleteCacheReportCommandOutput,
+} from "./commands/DeleteCacheReportCommand";
+import type {
   DeleteChapCredentialsCommandInput,
   DeleteChapCredentialsCommandOutput,
 } from "./commands/DeleteChapCredentialsCommand";
-import { DeleteFileShareCommandInput, DeleteFileShareCommandOutput } from "./commands/DeleteFileShareCommand";
-import { DeleteGatewayCommandInput, DeleteGatewayCommandOutput } from "./commands/DeleteGatewayCommand";
-import {
+import type { DeleteFileShareCommandInput, DeleteFileShareCommandOutput } from "./commands/DeleteFileShareCommand";
+import type { DeleteGatewayCommandInput, DeleteGatewayCommandOutput } from "./commands/DeleteGatewayCommand";
+import type {
   DeleteSnapshotScheduleCommandInput,
   DeleteSnapshotScheduleCommandOutput,
 } from "./commands/DeleteSnapshotScheduleCommand";
-import { DeleteTapeArchiveCommandInput, DeleteTapeArchiveCommandOutput } from "./commands/DeleteTapeArchiveCommand";
-import { DeleteTapeCommandInput, DeleteTapeCommandOutput } from "./commands/DeleteTapeCommand";
-import { DeleteTapePoolCommandInput, DeleteTapePoolCommandOutput } from "./commands/DeleteTapePoolCommand";
-import { DeleteVolumeCommandInput, DeleteVolumeCommandOutput } from "./commands/DeleteVolumeCommand";
-import {
+import type {
+  DeleteTapeArchiveCommandInput,
+  DeleteTapeArchiveCommandOutput,
+} from "./commands/DeleteTapeArchiveCommand";
+import type { DeleteTapeCommandInput, DeleteTapeCommandOutput } from "./commands/DeleteTapeCommand";
+import type { DeleteTapePoolCommandInput, DeleteTapePoolCommandOutput } from "./commands/DeleteTapePoolCommand";
+import type { DeleteVolumeCommandInput, DeleteVolumeCommandOutput } from "./commands/DeleteVolumeCommand";
+import type {
   DescribeAvailabilityMonitorTestCommandInput,
   DescribeAvailabilityMonitorTestCommandOutput,
 } from "./commands/DescribeAvailabilityMonitorTestCommand";
-import {
+import type {
   DescribeBandwidthRateLimitCommandInput,
   DescribeBandwidthRateLimitCommandOutput,
 } from "./commands/DescribeBandwidthRateLimitCommand";
-import {
+import type {
   DescribeBandwidthRateLimitScheduleCommandInput,
   DescribeBandwidthRateLimitScheduleCommandOutput,
 } from "./commands/DescribeBandwidthRateLimitScheduleCommand";
-import { DescribeCacheCommandInput, DescribeCacheCommandOutput } from "./commands/DescribeCacheCommand";
-import {
+import type { DescribeCacheCommandInput, DescribeCacheCommandOutput } from "./commands/DescribeCacheCommand";
+import type {
   DescribeCachediSCSIVolumesCommandInput,
   DescribeCachediSCSIVolumesCommandOutput,
 } from "./commands/DescribeCachediSCSIVolumesCommand";
-import {
+import type {
+  DescribeCacheReportCommandInput,
+  DescribeCacheReportCommandOutput,
+} from "./commands/DescribeCacheReportCommand";
+import type {
   DescribeChapCredentialsCommandInput,
   DescribeChapCredentialsCommandOutput,
 } from "./commands/DescribeChapCredentialsCommand";
-import {
+import type {
   DescribeFileSystemAssociationsCommandInput,
   DescribeFileSystemAssociationsCommandOutput,
 } from "./commands/DescribeFileSystemAssociationsCommand";
-import {
+import type {
   DescribeGatewayInformationCommandInput,
   DescribeGatewayInformationCommandOutput,
 } from "./commands/DescribeGatewayInformationCommand";
-import {
+import type {
   DescribeMaintenanceStartTimeCommandInput,
   DescribeMaintenanceStartTimeCommandOutput,
 } from "./commands/DescribeMaintenanceStartTimeCommand";
-import {
+import type {
   DescribeNFSFileSharesCommandInput,
   DescribeNFSFileSharesCommandOutput,
 } from "./commands/DescribeNFSFileSharesCommand";
-import {
+import type {
   DescribeSMBFileSharesCommandInput,
   DescribeSMBFileSharesCommandOutput,
 } from "./commands/DescribeSMBFileSharesCommand";
-import {
+import type {
   DescribeSMBSettingsCommandInput,
   DescribeSMBSettingsCommandOutput,
 } from "./commands/DescribeSMBSettingsCommand";
-import {
+import type {
   DescribeSnapshotScheduleCommandInput,
   DescribeSnapshotScheduleCommandOutput,
 } from "./commands/DescribeSnapshotScheduleCommand";
-import {
+import type {
   DescribeStorediSCSIVolumesCommandInput,
   DescribeStorediSCSIVolumesCommandOutput,
 } from "./commands/DescribeStorediSCSIVolumesCommand";
-import {
+import type {
   DescribeTapeArchivesCommandInput,
   DescribeTapeArchivesCommandOutput,
 } from "./commands/DescribeTapeArchivesCommand";
-import {
+import type {
   DescribeTapeRecoveryPointsCommandInput,
   DescribeTapeRecoveryPointsCommandOutput,
 } from "./commands/DescribeTapeRecoveryPointsCommand";
-import { DescribeTapesCommandInput, DescribeTapesCommandOutput } from "./commands/DescribeTapesCommand";
-import {
+import type { DescribeTapesCommandInput, DescribeTapesCommandOutput } from "./commands/DescribeTapesCommand";
+import type {
   DescribeUploadBufferCommandInput,
   DescribeUploadBufferCommandOutput,
 } from "./commands/DescribeUploadBufferCommand";
-import { DescribeVTLDevicesCommandInput, DescribeVTLDevicesCommandOutput } from "./commands/DescribeVTLDevicesCommand";
-import {
+import type {
+  DescribeVTLDevicesCommandInput,
+  DescribeVTLDevicesCommandOutput,
+} from "./commands/DescribeVTLDevicesCommand";
+import type {
   DescribeWorkingStorageCommandInput,
   DescribeWorkingStorageCommandOutput,
 } from "./commands/DescribeWorkingStorageCommand";
-import { DetachVolumeCommandInput, DetachVolumeCommandOutput } from "./commands/DetachVolumeCommand";
-import { DisableGatewayCommandInput, DisableGatewayCommandOutput } from "./commands/DisableGatewayCommand";
-import {
+import type { DetachVolumeCommandInput, DetachVolumeCommandOutput } from "./commands/DetachVolumeCommand";
+import type { DisableGatewayCommandInput, DisableGatewayCommandOutput } from "./commands/DisableGatewayCommand";
+import type {
   DisassociateFileSystemCommandInput,
   DisassociateFileSystemCommandOutput,
 } from "./commands/DisassociateFileSystemCommand";
-import { JoinDomainCommandInput, JoinDomainCommandOutput } from "./commands/JoinDomainCommand";
-import {
+import type {
+  EvictFilesFailingUploadCommandInput,
+  EvictFilesFailingUploadCommandOutput,
+} from "./commands/EvictFilesFailingUploadCommand";
+import type { JoinDomainCommandInput, JoinDomainCommandOutput } from "./commands/JoinDomainCommand";
+import type {
   ListAutomaticTapeCreationPoliciesCommandInput,
   ListAutomaticTapeCreationPoliciesCommandOutput,
 } from "./commands/ListAutomaticTapeCreationPoliciesCommand";
-import { ListFileSharesCommandInput, ListFileSharesCommandOutput } from "./commands/ListFileSharesCommand";
-import {
+import type { ListCacheReportsCommandInput, ListCacheReportsCommandOutput } from "./commands/ListCacheReportsCommand";
+import type { ListFileSharesCommandInput, ListFileSharesCommandOutput } from "./commands/ListFileSharesCommand";
+import type {
   ListFileSystemAssociationsCommandInput,
   ListFileSystemAssociationsCommandOutput,
 } from "./commands/ListFileSystemAssociationsCommand";
-import { ListGatewaysCommandInput, ListGatewaysCommandOutput } from "./commands/ListGatewaysCommand";
-import { ListLocalDisksCommandInput, ListLocalDisksCommandOutput } from "./commands/ListLocalDisksCommand";
-import {
+import type { ListGatewaysCommandInput, ListGatewaysCommandOutput } from "./commands/ListGatewaysCommand";
+import type { ListLocalDisksCommandInput, ListLocalDisksCommandOutput } from "./commands/ListLocalDisksCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListTapePoolsCommandInput, ListTapePoolsCommandOutput } from "./commands/ListTapePoolsCommand";
-import { ListTapesCommandInput, ListTapesCommandOutput } from "./commands/ListTapesCommand";
-import {
+import type { ListTapePoolsCommandInput, ListTapePoolsCommandOutput } from "./commands/ListTapePoolsCommand";
+import type { ListTapesCommandInput, ListTapesCommandOutput } from "./commands/ListTapesCommand";
+import type {
   ListVolumeInitiatorsCommandInput,
   ListVolumeInitiatorsCommandOutput,
 } from "./commands/ListVolumeInitiatorsCommand";
-import {
+import type {
   ListVolumeRecoveryPointsCommandInput,
   ListVolumeRecoveryPointsCommandOutput,
 } from "./commands/ListVolumeRecoveryPointsCommand";
-import { ListVolumesCommandInput, ListVolumesCommandOutput } from "./commands/ListVolumesCommand";
-import { NotifyWhenUploadedCommandInput, NotifyWhenUploadedCommandOutput } from "./commands/NotifyWhenUploadedCommand";
-import { RefreshCacheCommandInput, RefreshCacheCommandOutput } from "./commands/RefreshCacheCommand";
-import {
+import type { ListVolumesCommandInput, ListVolumesCommandOutput } from "./commands/ListVolumesCommand";
+import type {
+  NotifyWhenUploadedCommandInput,
+  NotifyWhenUploadedCommandOutput,
+} from "./commands/NotifyWhenUploadedCommand";
+import type { RefreshCacheCommandInput, RefreshCacheCommandOutput } from "./commands/RefreshCacheCommand";
+import type {
   RemoveTagsFromResourceCommandInput,
   RemoveTagsFromResourceCommandOutput,
 } from "./commands/RemoveTagsFromResourceCommand";
-import { ResetCacheCommandInput, ResetCacheCommandOutput } from "./commands/ResetCacheCommand";
-import {
+import type { ResetCacheCommandInput, ResetCacheCommandOutput } from "./commands/ResetCacheCommand";
+import type {
   RetrieveTapeArchiveCommandInput,
   RetrieveTapeArchiveCommandOutput,
 } from "./commands/RetrieveTapeArchiveCommand";
-import {
+import type {
   RetrieveTapeRecoveryPointCommandInput,
   RetrieveTapeRecoveryPointCommandOutput,
 } from "./commands/RetrieveTapeRecoveryPointCommand";
-import {
+import type {
   SetLocalConsolePasswordCommandInput,
   SetLocalConsolePasswordCommandOutput,
 } from "./commands/SetLocalConsolePasswordCommand";
-import {
+import type {
   SetSMBGuestPasswordCommandInput,
   SetSMBGuestPasswordCommandOutput,
 } from "./commands/SetSMBGuestPasswordCommand";
-import { ShutdownGatewayCommandInput, ShutdownGatewayCommandOutput } from "./commands/ShutdownGatewayCommand";
-import {
+import type { ShutdownGatewayCommandInput, ShutdownGatewayCommandOutput } from "./commands/ShutdownGatewayCommand";
+import type {
   StartAvailabilityMonitorTestCommandInput,
   StartAvailabilityMonitorTestCommandOutput,
 } from "./commands/StartAvailabilityMonitorTestCommand";
-import { StartGatewayCommandInput, StartGatewayCommandOutput } from "./commands/StartGatewayCommand";
-import {
+import type { StartCacheReportCommandInput, StartCacheReportCommandOutput } from "./commands/StartCacheReportCommand";
+import type { StartGatewayCommandInput, StartGatewayCommandOutput } from "./commands/StartGatewayCommand";
+import type {
   UpdateAutomaticTapeCreationPolicyCommandInput,
   UpdateAutomaticTapeCreationPolicyCommandOutput,
 } from "./commands/UpdateAutomaticTapeCreationPolicyCommand";
-import {
+import type {
   UpdateBandwidthRateLimitCommandInput,
   UpdateBandwidthRateLimitCommandOutput,
 } from "./commands/UpdateBandwidthRateLimitCommand";
-import {
+import type {
   UpdateBandwidthRateLimitScheduleCommandInput,
   UpdateBandwidthRateLimitScheduleCommandOutput,
 } from "./commands/UpdateBandwidthRateLimitScheduleCommand";
-import {
+import type {
   UpdateChapCredentialsCommandInput,
   UpdateChapCredentialsCommandOutput,
 } from "./commands/UpdateChapCredentialsCommand";
-import {
+import type {
   UpdateFileSystemAssociationCommandInput,
   UpdateFileSystemAssociationCommandOutput,
 } from "./commands/UpdateFileSystemAssociationCommand";
-import {
+import type {
   UpdateGatewayInformationCommandInput,
   UpdateGatewayInformationCommandOutput,
 } from "./commands/UpdateGatewayInformationCommand";
-import {
+import type {
   UpdateGatewaySoftwareNowCommandInput,
   UpdateGatewaySoftwareNowCommandOutput,
 } from "./commands/UpdateGatewaySoftwareNowCommand";
-import {
+import type {
   UpdateMaintenanceStartTimeCommandInput,
   UpdateMaintenanceStartTimeCommandOutput,
 } from "./commands/UpdateMaintenanceStartTimeCommand";
-import { UpdateNFSFileShareCommandInput, UpdateNFSFileShareCommandOutput } from "./commands/UpdateNFSFileShareCommand";
-import { UpdateSMBFileShareCommandInput, UpdateSMBFileShareCommandOutput } from "./commands/UpdateSMBFileShareCommand";
-import {
+import type {
+  UpdateNFSFileShareCommandInput,
+  UpdateNFSFileShareCommandOutput,
+} from "./commands/UpdateNFSFileShareCommand";
+import type {
+  UpdateSMBFileShareCommandInput,
+  UpdateSMBFileShareCommandOutput,
+} from "./commands/UpdateSMBFileShareCommand";
+import type {
   UpdateSMBFileShareVisibilityCommandInput,
   UpdateSMBFileShareVisibilityCommandOutput,
 } from "./commands/UpdateSMBFileShareVisibilityCommand";
-import {
+import type {
   UpdateSMBLocalGroupsCommandInput,
   UpdateSMBLocalGroupsCommandOutput,
 } from "./commands/UpdateSMBLocalGroupsCommand";
-import {
+import type {
   UpdateSMBSecurityStrategyCommandInput,
   UpdateSMBSecurityStrategyCommandOutput,
 } from "./commands/UpdateSMBSecurityStrategyCommand";
-import {
+import type {
   UpdateSnapshotScheduleCommandInput,
   UpdateSnapshotScheduleCommandOutput,
 } from "./commands/UpdateSnapshotScheduleCommand";
-import {
+import type {
   UpdateVTLDeviceTypeCommandInput,
   UpdateVTLDeviceTypeCommandOutput,
 } from "./commands/UpdateVTLDeviceTypeCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | ActivateGatewayCommandInput
   | AddCacheCommandInput
@@ -304,6 +366,7 @@ export type ServiceInputTypes =
   | AssociateFileSystemCommandInput
   | AttachVolumeCommandInput
   | CancelArchivalCommandInput
+  | CancelCacheReportCommandInput
   | CancelRetrievalCommandInput
   | CreateCachediSCSIVolumeCommandInput
   | CreateNFSFileShareCommandInput
@@ -316,6 +379,7 @@ export type ServiceInputTypes =
   | CreateTapesCommandInput
   | DeleteAutomaticTapeCreationPolicyCommandInput
   | DeleteBandwidthRateLimitCommandInput
+  | DeleteCacheReportCommandInput
   | DeleteChapCredentialsCommandInput
   | DeleteFileShareCommandInput
   | DeleteGatewayCommandInput
@@ -328,6 +392,7 @@ export type ServiceInputTypes =
   | DescribeBandwidthRateLimitCommandInput
   | DescribeBandwidthRateLimitScheduleCommandInput
   | DescribeCacheCommandInput
+  | DescribeCacheReportCommandInput
   | DescribeCachediSCSIVolumesCommandInput
   | DescribeChapCredentialsCommandInput
   | DescribeFileSystemAssociationsCommandInput
@@ -347,8 +412,10 @@ export type ServiceInputTypes =
   | DetachVolumeCommandInput
   | DisableGatewayCommandInput
   | DisassociateFileSystemCommandInput
+  | EvictFilesFailingUploadCommandInput
   | JoinDomainCommandInput
   | ListAutomaticTapeCreationPoliciesCommandInput
+  | ListCacheReportsCommandInput
   | ListFileSharesCommandInput
   | ListFileSystemAssociationsCommandInput
   | ListGatewaysCommandInput
@@ -369,6 +436,7 @@ export type ServiceInputTypes =
   | SetSMBGuestPasswordCommandInput
   | ShutdownGatewayCommandInput
   | StartAvailabilityMonitorTestCommandInput
+  | StartCacheReportCommandInput
   | StartGatewayCommandInput
   | UpdateAutomaticTapeCreationPolicyCommandInput
   | UpdateBandwidthRateLimitCommandInput
@@ -386,6 +454,9 @@ export type ServiceInputTypes =
   | UpdateSnapshotScheduleCommandInput
   | UpdateVTLDeviceTypeCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | ActivateGatewayCommandOutput
   | AddCacheCommandOutput
@@ -396,6 +467,7 @@ export type ServiceOutputTypes =
   | AssociateFileSystemCommandOutput
   | AttachVolumeCommandOutput
   | CancelArchivalCommandOutput
+  | CancelCacheReportCommandOutput
   | CancelRetrievalCommandOutput
   | CreateCachediSCSIVolumeCommandOutput
   | CreateNFSFileShareCommandOutput
@@ -408,6 +480,7 @@ export type ServiceOutputTypes =
   | CreateTapesCommandOutput
   | DeleteAutomaticTapeCreationPolicyCommandOutput
   | DeleteBandwidthRateLimitCommandOutput
+  | DeleteCacheReportCommandOutput
   | DeleteChapCredentialsCommandOutput
   | DeleteFileShareCommandOutput
   | DeleteGatewayCommandOutput
@@ -420,6 +493,7 @@ export type ServiceOutputTypes =
   | DescribeBandwidthRateLimitCommandOutput
   | DescribeBandwidthRateLimitScheduleCommandOutput
   | DescribeCacheCommandOutput
+  | DescribeCacheReportCommandOutput
   | DescribeCachediSCSIVolumesCommandOutput
   | DescribeChapCredentialsCommandOutput
   | DescribeFileSystemAssociationsCommandOutput
@@ -439,8 +513,10 @@ export type ServiceOutputTypes =
   | DetachVolumeCommandOutput
   | DisableGatewayCommandOutput
   | DisassociateFileSystemCommandOutput
+  | EvictFilesFailingUploadCommandOutput
   | JoinDomainCommandOutput
   | ListAutomaticTapeCreationPoliciesCommandOutput
+  | ListCacheReportsCommandOutput
   | ListFileSharesCommandOutput
   | ListFileSystemAssociationsCommandOutput
   | ListGatewaysCommandOutput
@@ -461,6 +537,7 @@ export type ServiceOutputTypes =
   | SetSMBGuestPasswordCommandOutput
   | ShutdownGatewayCommandOutput
   | StartAvailabilityMonitorTestCommandOutput
+  | StartCacheReportCommandOutput
   | StartGatewayCommandOutput
   | UpdateAutomaticTapeCreationPolicyCommandOutput
   | UpdateBandwidthRateLimitCommandOutput
@@ -478,18 +555,21 @@ export type ServiceOutputTypes =
   | UpdateSnapshotScheduleCommandOutput
   | UpdateVTLDeviceTypeCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -501,7 +581,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -540,25 +620,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -571,72 +642,123 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type StorageGatewayClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of StorageGatewayClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type StorageGatewayClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of StorageGatewayClient class constructor that set the region, credentials and other options.
  */
 export interface StorageGatewayClientConfig extends StorageGatewayClientConfigType {}
 
-type StorageGatewayClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of StorageGatewayClient class. This is resolved and normalized from the {@link StorageGatewayClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type StorageGatewayClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of StorageGatewayClient class. This is resolved and normalized from the {@link StorageGatewayClientConfig | constructor configuration interface}.
  */
 export interface StorageGatewayClientResolvedConfig extends StorageGatewayClientResolvedConfigType {}
 
 /**
  * <fullname>Storage Gateway Service</fullname>
- *
+ *          <important>
+ *             <p>Amazon FSx File Gateway is no longer available to new customers. Existing
+ *             customers of FSx File Gateway can continue to use the service normally. For
+ *             capabilities similar to FSx File Gateway, visit <a href="https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/">this blog post</a>.</p>
+ *          </important>
  *          <p>Storage Gateway is the service that connects an on-premises software appliance
  *          with cloud-based storage to provide seamless and secure integration between an
  *          organization's on-premises IT environment and the Amazon Web Services storage
  *          infrastructure. The service enables you to securely upload data to the Amazon Web Services Cloud for cost effective backup and rapid disaster recovery.</p>
- *
  *          <p>Use the following links to get started using the <i>Storage Gateway
  *             Service API Reference</i>:</p>
- *
  *          <ul>
  *             <li>
  *                <p>
@@ -664,7 +786,6 @@ export interface StorageGatewayClientResolvedConfig extends StorageGatewayClient
  *                and the endpoints available for use with Storage Gateway.</p>
  *             </li>
  *          </ul>
- *
  *          <note>
  *             <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs
  *             with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change
@@ -673,7 +794,6 @@ export interface StorageGatewayClientResolvedConfig extends StorageGatewayClient
  *             this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>.
  *             Otherwise, the EC2 API might not behave as expected.</p>
  *          </note>
- *
  *          <important>
  *             <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway
  *             volumes are changing to a longer format. Starting in December 2016, all new volumes and
@@ -681,20 +801,17 @@ export interface StorageGatewayClientResolvedConfig extends StorageGatewayClient
  *             be able to use these longer IDs so you can test your systems with the new format. For
  *             more information, see <a href="http://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and
  *                EBS resource IDs</a>.</p>
- *
  *             <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format
  *             looks like the following:</p>
- *
  *             <p>
  *                <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p>
- *
  *             <p>A snapshot ID with the longer ID format looks like the following:
  *                <code>snap-78e226633445566ee</code>.</p>
- *
  *             <p>For more information, see <a href="http://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement:
  *                Heads-up – Longer Storage Gateway volume and snapshot IDs coming in
  *             2016</a>.</p>
  *          </important>
+ * @public
  */
 export class StorageGatewayClient extends __Client<
   __HttpHandlerOptions,
@@ -707,22 +824,36 @@ export class StorageGatewayClient extends __Client<
    */
   readonly config: StorageGatewayClientResolvedConfig;
 
-  constructor(configuration: StorageGatewayClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<StorageGatewayClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultStorageGatewayHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: StorageGatewayClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

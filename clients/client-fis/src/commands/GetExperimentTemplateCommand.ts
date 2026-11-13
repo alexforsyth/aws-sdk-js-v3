@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FisClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FisClient";
-import { GetExperimentTemplateRequest, GetExperimentTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetExperimentTemplateCommand,
-  serializeAws_restJson1GetExperimentTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetExperimentTemplateRequest, GetExperimentTemplateResponse } from "../models/models_0";
+import { GetExperimentTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetExperimentTemplateCommand}.
+ */
 export interface GetExperimentTemplateCommandInput extends GetExperimentTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetExperimentTemplateCommand}.
+ */
 export interface GetExperimentTemplateCommandOutput extends GetExperimentTemplateResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,139 @@ export interface GetExperimentTemplateCommandOutput extends GetExperimentTemplat
  * ```javascript
  * import { FisClient, GetExperimentTemplateCommand } from "@aws-sdk/client-fis"; // ES Modules import
  * // const { FisClient, GetExperimentTemplateCommand } = require("@aws-sdk/client-fis"); // CommonJS import
+ * // import type { FisClientConfig } from "@aws-sdk/client-fis";
+ * const config = {}; // type is FisClientConfig
  * const client = new FisClient(config);
+ * const input = { // GetExperimentTemplateRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new GetExperimentTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // GetExperimentTemplateResponse
+ * //   experimentTemplate: { // ExperimentTemplate
+ * //     id: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     targets: { // ExperimentTemplateTargetMap
+ * //       "<keys>": { // ExperimentTemplateTarget
+ * //         resourceType: "STRING_VALUE",
+ * //         resourceArns: [ // ResourceArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         resourceTags: { // TagMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         filters: [ // ExperimentTemplateTargetFilterList
+ * //           { // ExperimentTemplateTargetFilter
+ * //             path: "STRING_VALUE",
+ * //             values: [ // ExperimentTemplateTargetFilterValues
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         selectionMode: "STRING_VALUE",
+ * //         parameters: { // ExperimentTemplateTargetParameterMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     actions: { // ExperimentTemplateActionMap
+ * //       "<keys>": { // ExperimentTemplateAction
+ * //         actionId: "STRING_VALUE",
+ * //         description: "STRING_VALUE",
+ * //         parameters: { // ExperimentTemplateActionParameterMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         targets: { // ExperimentTemplateActionTargetMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         startAfter: [ // ExperimentTemplateActionStartAfterList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //     stopConditions: [ // ExperimentTemplateStopConditionList
+ * //       { // ExperimentTemplateStopCondition
+ * //         source: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     creationTime: new Date("TIMESTAMP"),
+ * //     lastUpdateTime: new Date("TIMESTAMP"),
+ * //     roleArn: "STRING_VALUE",
+ * //     tags: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     logConfiguration: { // ExperimentTemplateLogConfiguration
+ * //       cloudWatchLogsConfiguration: { // ExperimentTemplateCloudWatchLogsLogConfiguration
+ * //         logGroupArn: "STRING_VALUE",
+ * //       },
+ * //       s3Configuration: { // ExperimentTemplateS3LogConfiguration
+ * //         bucketName: "STRING_VALUE",
+ * //         prefix: "STRING_VALUE",
+ * //       },
+ * //       logSchemaVersion: Number("int"),
+ * //     },
+ * //     experimentOptions: { // ExperimentTemplateExperimentOptions
+ * //       accountTargeting: "single-account" || "multi-account",
+ * //       emptyTargetResolutionMode: "fail" || "skip",
+ * //     },
+ * //     targetAccountConfigurationsCount: Number("long"),
+ * //     experimentReportConfiguration: { // ExperimentTemplateReportConfiguration
+ * //       outputs: { // ExperimentTemplateReportConfigurationOutputs
+ * //         s3Configuration: { // ReportConfigurationS3Output
+ * //           bucketName: "STRING_VALUE",
+ * //           prefix: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       dataSources: { // ExperimentTemplateReportConfigurationDataSources
+ * //         cloudWatchDashboards: [ // ExperimentTemplateReportConfigurationCloudWatchDashboardList
+ * //           { // ExperimentTemplateReportConfigurationCloudWatchDashboard
+ * //             dashboardIdentifier: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //       preExperimentDuration: "STRING_VALUE",
+ * //       postExperimentDuration: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetExperimentTemplateCommandInput - {@link GetExperimentTemplateCommandInput}
+ * @returns {@link GetExperimentTemplateCommandOutput}
  * @see {@link GetExperimentTemplateCommandInput} for command's `input` shape.
  * @see {@link GetExperimentTemplateCommandOutput} for command's `response` shape.
- * @see {@link FisClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FisClientResolvedConfig | config} for FisClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The specified input is not valid, or fails to satisfy the constraints for the request.</p>
+ *
+ * @throws {@link FisServiceException}
+ * <p>Base exception class for all service exceptions from Fis service.</p>
+ *
+ *
+ * @public
  */
-export class GetExperimentTemplateCommand extends $Command<
-  GetExperimentTemplateCommandInput,
-  GetExperimentTemplateCommandOutput,
-  FisClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetExperimentTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FisClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetExperimentTemplateCommandInput, GetExperimentTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FisClient";
-    const commandName = "GetExperimentTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetExperimentTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetExperimentTemplateResponse.filterSensitiveLog,
+export class GetExperimentTemplateCommand extends command<GetExperimentTemplateCommandInput, GetExperimentTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetExperimentTemplate",
+  GetExperimentTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExperimentTemplateRequest;
+      output: GetExperimentTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetExperimentTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetExperimentTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetExperimentTemplateCommandOutput> {
-    return deserializeAws_restJson1GetExperimentTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetExperimentTemplateCommandInput;
+      output: GetExperimentTemplateCommandOutput;
+    };
+  };
 }

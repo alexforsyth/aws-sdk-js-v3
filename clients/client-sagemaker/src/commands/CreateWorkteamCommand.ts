@@ -1,98 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateWorkteamRequest, CreateWorkteamResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1CreateWorkteamCommand,
-  serializeAws_json1_1CreateWorkteamCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateWorkteamRequest, CreateWorkteamResponse } from "../models/models_2";
+import { CreateWorkteam$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateWorkteamCommand}.
+ */
 export interface CreateWorkteamCommandInput extends CreateWorkteamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateWorkteamCommand}.
+ */
 export interface CreateWorkteamCommandOutput extends CreateWorkteamResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new work team for labeling your data. A work team is defined by one or more
- *             Amazon Cognito user pools. You must first create the user pools before you can create a work
- *             team.</p>
- *         <p>You cannot create more than 25 work teams in an account and region.</p>
+ * <p>Creates a new work team for labeling your data. A work team is defined by one or more Amazon Cognito user pools. You must first create the user pools before you can create a work team.</p> <p>You cannot create more than 25 work teams in an account and region.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, CreateWorkteamCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateWorkteamCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateWorkteamRequest
+ *   WorkteamName: "STRING_VALUE", // required
+ *   WorkforceName: "STRING_VALUE",
+ *   MemberDefinitions: [ // MemberDefinitions // required
+ *     { // MemberDefinition
+ *       CognitoMemberDefinition: { // CognitoMemberDefinition
+ *         UserPool: "STRING_VALUE", // required
+ *         UserGroup: "STRING_VALUE", // required
+ *         ClientId: "STRING_VALUE", // required
+ *       },
+ *       OidcMemberDefinition: { // OidcMemberDefinition
+ *         Groups: [ // Groups
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *   ],
+ *   Description: "STRING_VALUE", // required
+ *   NotificationConfiguration: { // NotificationConfiguration
+ *     NotificationTopicArn: "STRING_VALUE",
+ *   },
+ *   WorkerAccessConfiguration: { // WorkerAccessConfiguration
+ *     S3Presign: { // S3Presign
+ *       IamPolicyConstraints: { // IamPolicyConstraints
+ *         SourceIp: "Enabled" || "Disabled",
+ *         VpcSourceIp: "Enabled" || "Disabled",
+ *       },
+ *     },
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateWorkteamCommand(input);
  * const response = await client.send(command);
+ * // { // CreateWorkteamResponse
+ * //   WorkteamArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateWorkteamCommandInput - {@link CreateWorkteamCommandInput}
+ * @returns {@link CreateWorkteamCommandOutput}
  * @see {@link CreateWorkteamCommandInput} for command's `input` shape.
  * @see {@link CreateWorkteamCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceInUse} (client fault)
+ *  <p>Resource being accessed is in use.</p>
+ *
+ * @throws {@link ResourceLimitExceeded} (client fault)
+ *  <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateWorkteamCommand extends $Command<
-  CreateWorkteamCommandInput,
-  CreateWorkteamCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateWorkteamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateWorkteamCommandInput, CreateWorkteamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateWorkteamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateWorkteamRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateWorkteamResponse.filterSensitiveLog,
+export class CreateWorkteamCommand extends command<CreateWorkteamCommandInput, CreateWorkteamCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateWorkteam",
+  CreateWorkteam$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWorkteamRequest;
+      output: CreateWorkteamResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateWorkteamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateWorkteamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateWorkteamCommandOutput> {
-    return deserializeAws_json1_1CreateWorkteamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateWorkteamCommandInput;
+      output: CreateWorkteamCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,968 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { BillingconductorClient } from "./BillingconductorClient";
+import {
+  type AssociateAccountsCommandInput,
+  type AssociateAccountsCommandOutput,
+  AssociateAccountsCommand,
+} from "./commands/AssociateAccountsCommand";
+import {
+  type AssociatePricingRulesCommandInput,
+  type AssociatePricingRulesCommandOutput,
+  AssociatePricingRulesCommand,
+} from "./commands/AssociatePricingRulesCommand";
+import {
+  type BatchAssociateResourcesToCustomLineItemCommandInput,
+  type BatchAssociateResourcesToCustomLineItemCommandOutput,
+  BatchAssociateResourcesToCustomLineItemCommand,
+} from "./commands/BatchAssociateResourcesToCustomLineItemCommand";
+import {
+  type BatchDisassociateResourcesFromCustomLineItemCommandInput,
+  type BatchDisassociateResourcesFromCustomLineItemCommandOutput,
+  BatchDisassociateResourcesFromCustomLineItemCommand,
+} from "./commands/BatchDisassociateResourcesFromCustomLineItemCommand";
+import {
+  type CreateBillingGroupCommandInput,
+  type CreateBillingGroupCommandOutput,
+  CreateBillingGroupCommand,
+} from "./commands/CreateBillingGroupCommand";
+import {
+  type CreateCustomLineItemCommandInput,
+  type CreateCustomLineItemCommandOutput,
+  CreateCustomLineItemCommand,
+} from "./commands/CreateCustomLineItemCommand";
+import {
+  type CreatePricingPlanCommandInput,
+  type CreatePricingPlanCommandOutput,
+  CreatePricingPlanCommand,
+} from "./commands/CreatePricingPlanCommand";
+import {
+  type CreatePricingRuleCommandInput,
+  type CreatePricingRuleCommandOutput,
+  CreatePricingRuleCommand,
+} from "./commands/CreatePricingRuleCommand";
+import {
+  type DeleteBillingGroupCommandInput,
+  type DeleteBillingGroupCommandOutput,
+  DeleteBillingGroupCommand,
+} from "./commands/DeleteBillingGroupCommand";
+import {
+  type DeleteCustomLineItemCommandInput,
+  type DeleteCustomLineItemCommandOutput,
+  DeleteCustomLineItemCommand,
+} from "./commands/DeleteCustomLineItemCommand";
+import {
+  type DeletePricingPlanCommandInput,
+  type DeletePricingPlanCommandOutput,
+  DeletePricingPlanCommand,
+} from "./commands/DeletePricingPlanCommand";
+import {
+  type DeletePricingRuleCommandInput,
+  type DeletePricingRuleCommandOutput,
+  DeletePricingRuleCommand,
+} from "./commands/DeletePricingRuleCommand";
+import {
+  type DisassociateAccountsCommandInput,
+  type DisassociateAccountsCommandOutput,
+  DisassociateAccountsCommand,
+} from "./commands/DisassociateAccountsCommand";
+import {
+  type DisassociatePricingRulesCommandInput,
+  type DisassociatePricingRulesCommandOutput,
+  DisassociatePricingRulesCommand,
+} from "./commands/DisassociatePricingRulesCommand";
+import {
+  type GetBillingGroupCostReportCommandInput,
+  type GetBillingGroupCostReportCommandOutput,
+  GetBillingGroupCostReportCommand,
+} from "./commands/GetBillingGroupCostReportCommand";
+import {
+  type GetBillingTransferPreferenceCommandInput,
+  type GetBillingTransferPreferenceCommandOutput,
+  GetBillingTransferPreferenceCommand,
+} from "./commands/GetBillingTransferPreferenceCommand";
+import {
+  type ListAccountAssociationsCommandInput,
+  type ListAccountAssociationsCommandOutput,
+  ListAccountAssociationsCommand,
+} from "./commands/ListAccountAssociationsCommand";
+import {
+  type ListBillingGroupCostReportsCommandInput,
+  type ListBillingGroupCostReportsCommandOutput,
+  ListBillingGroupCostReportsCommand,
+} from "./commands/ListBillingGroupCostReportsCommand";
+import {
+  type ListBillingGroupsCommandInput,
+  type ListBillingGroupsCommandOutput,
+  ListBillingGroupsCommand,
+} from "./commands/ListBillingGroupsCommand";
+import {
+  type ListCustomLineItemsCommandInput,
+  type ListCustomLineItemsCommandOutput,
+  ListCustomLineItemsCommand,
+} from "./commands/ListCustomLineItemsCommand";
+import {
+  type ListCustomLineItemVersionsCommandInput,
+  type ListCustomLineItemVersionsCommandOutput,
+  ListCustomLineItemVersionsCommand,
+} from "./commands/ListCustomLineItemVersionsCommand";
+import {
+  type ListPricingPlansAssociatedWithPricingRuleCommandInput,
+  type ListPricingPlansAssociatedWithPricingRuleCommandOutput,
+  ListPricingPlansAssociatedWithPricingRuleCommand,
+} from "./commands/ListPricingPlansAssociatedWithPricingRuleCommand";
+import {
+  type ListPricingPlansCommandInput,
+  type ListPricingPlansCommandOutput,
+  ListPricingPlansCommand,
+} from "./commands/ListPricingPlansCommand";
+import {
+  type ListPricingRulesAssociatedToPricingPlanCommandInput,
+  type ListPricingRulesAssociatedToPricingPlanCommandOutput,
+  ListPricingRulesAssociatedToPricingPlanCommand,
+} from "./commands/ListPricingRulesAssociatedToPricingPlanCommand";
+import {
+  type ListPricingRulesCommandInput,
+  type ListPricingRulesCommandOutput,
+  ListPricingRulesCommand,
+} from "./commands/ListPricingRulesCommand";
+import {
+  type ListResourcesAssociatedToCustomLineItemCommandInput,
+  type ListResourcesAssociatedToCustomLineItemCommandOutput,
+  ListResourcesAssociatedToCustomLineItemCommand,
+} from "./commands/ListResourcesAssociatedToCustomLineItemCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateBillingGroupCommandInput,
+  type UpdateBillingGroupCommandOutput,
+  UpdateBillingGroupCommand,
+} from "./commands/UpdateBillingGroupCommand";
+import {
+  type UpdateBillingTransferPreferenceCommandInput,
+  type UpdateBillingTransferPreferenceCommandOutput,
+  UpdateBillingTransferPreferenceCommand,
+} from "./commands/UpdateBillingTransferPreferenceCommand";
+import {
+  type UpdateCustomLineItemCommandInput,
+  type UpdateCustomLineItemCommandOutput,
+  UpdateCustomLineItemCommand,
+} from "./commands/UpdateCustomLineItemCommand";
+import {
+  type UpdatePricingPlanCommandInput,
+  type UpdatePricingPlanCommandOutput,
+  UpdatePricingPlanCommand,
+} from "./commands/UpdatePricingPlanCommand";
+import {
+  type UpdatePricingRuleCommandInput,
+  type UpdatePricingRuleCommandOutput,
+  UpdatePricingRuleCommand,
+} from "./commands/UpdatePricingRuleCommand";
+import { paginateGetBillingGroupCostReport } from "./pagination/GetBillingGroupCostReportPaginator";
+import { paginateListAccountAssociations } from "./pagination/ListAccountAssociationsPaginator";
+import { paginateListBillingGroupCostReports } from "./pagination/ListBillingGroupCostReportsPaginator";
+import { paginateListBillingGroups } from "./pagination/ListBillingGroupsPaginator";
+import { paginateListCustomLineItems } from "./pagination/ListCustomLineItemsPaginator";
+import { paginateListCustomLineItemVersions } from "./pagination/ListCustomLineItemVersionsPaginator";
+import {
+  paginateListPricingPlansAssociatedWithPricingRule,
+} from "./pagination/ListPricingPlansAssociatedWithPricingRulePaginator";
+import { paginateListPricingPlans } from "./pagination/ListPricingPlansPaginator";
+import {
+  paginateListPricingRulesAssociatedToPricingPlan,
+} from "./pagination/ListPricingRulesAssociatedToPricingPlanPaginator";
+import { paginateListPricingRules } from "./pagination/ListPricingRulesPaginator";
+import {
+  paginateListResourcesAssociatedToCustomLineItem,
+} from "./pagination/ListResourcesAssociatedToCustomLineItemPaginator";
+
+const commands = {
+  AssociateAccountsCommand,
+  AssociatePricingRulesCommand,
+  BatchAssociateResourcesToCustomLineItemCommand,
+  BatchDisassociateResourcesFromCustomLineItemCommand,
+  CreateBillingGroupCommand,
+  CreateCustomLineItemCommand,
+  CreatePricingPlanCommand,
+  CreatePricingRuleCommand,
+  DeleteBillingGroupCommand,
+  DeleteCustomLineItemCommand,
+  DeletePricingPlanCommand,
+  DeletePricingRuleCommand,
+  DisassociateAccountsCommand,
+  DisassociatePricingRulesCommand,
+  GetBillingGroupCostReportCommand,
+  GetBillingTransferPreferenceCommand,
+  ListAccountAssociationsCommand,
+  ListBillingGroupCostReportsCommand,
+  ListBillingGroupsCommand,
+  ListCustomLineItemsCommand,
+  ListCustomLineItemVersionsCommand,
+  ListPricingPlansCommand,
+  ListPricingPlansAssociatedWithPricingRuleCommand,
+  ListPricingRulesCommand,
+  ListPricingRulesAssociatedToPricingPlanCommand,
+  ListResourcesAssociatedToCustomLineItemCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateBillingGroupCommand,
+  UpdateBillingTransferPreferenceCommand,
+  UpdateCustomLineItemCommand,
+  UpdatePricingPlanCommand,
+  UpdatePricingRuleCommand,
+};
+const paginators = {
+  paginateGetBillingGroupCostReport,
+  paginateListAccountAssociations,
+  paginateListBillingGroupCostReports,
+  paginateListBillingGroups,
+  paginateListCustomLineItems,
+  paginateListCustomLineItemVersions,
+  paginateListPricingPlans,
+  paginateListPricingPlansAssociatedWithPricingRule,
+  paginateListPricingRules,
+  paginateListPricingRulesAssociatedToPricingPlan,
+  paginateListResourcesAssociatedToCustomLineItem,
+};
+
+/**
+ * @public
+ */
+export interface BillingconductorRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Billingconductor {
+  /**
+   * @see {@link AssociateAccountsCommand}
+   */
+  associateAccounts(
+    args: AssociateAccountsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<AssociateAccountsCommandOutput>;
+  associateAccounts(
+    args: AssociateAccountsCommandInput,
+    cb: (err: any, data?: AssociateAccountsCommandOutput) => void
+  ): void;
+  associateAccounts(
+    args: AssociateAccountsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: AssociateAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociatePricingRulesCommand}
+   */
+  associatePricingRules(
+    args: AssociatePricingRulesCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<AssociatePricingRulesCommandOutput>;
+  associatePricingRules(
+    args: AssociatePricingRulesCommandInput,
+    cb: (err: any, data?: AssociatePricingRulesCommandOutput) => void
+  ): void;
+  associatePricingRules(
+    args: AssociatePricingRulesCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: AssociatePricingRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchAssociateResourcesToCustomLineItemCommand}
+   */
+  batchAssociateResourcesToCustomLineItem(
+    args: BatchAssociateResourcesToCustomLineItemCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<BatchAssociateResourcesToCustomLineItemCommandOutput>;
+  batchAssociateResourcesToCustomLineItem(
+    args: BatchAssociateResourcesToCustomLineItemCommandInput,
+    cb: (err: any, data?: BatchAssociateResourcesToCustomLineItemCommandOutput) => void
+  ): void;
+  batchAssociateResourcesToCustomLineItem(
+    args: BatchAssociateResourcesToCustomLineItemCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: BatchAssociateResourcesToCustomLineItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDisassociateResourcesFromCustomLineItemCommand}
+   */
+  batchDisassociateResourcesFromCustomLineItem(
+    args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<BatchDisassociateResourcesFromCustomLineItemCommandOutput>;
+  batchDisassociateResourcesFromCustomLineItem(
+    args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
+    cb: (err: any, data?: BatchDisassociateResourcesFromCustomLineItemCommandOutput) => void
+  ): void;
+  batchDisassociateResourcesFromCustomLineItem(
+    args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: BatchDisassociateResourcesFromCustomLineItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBillingGroupCommand}
+   */
+  createBillingGroup(
+    args: CreateBillingGroupCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<CreateBillingGroupCommandOutput>;
+  createBillingGroup(
+    args: CreateBillingGroupCommandInput,
+    cb: (err: any, data?: CreateBillingGroupCommandOutput) => void
+  ): void;
+  createBillingGroup(
+    args: CreateBillingGroupCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: CreateBillingGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomLineItemCommand}
+   */
+  createCustomLineItem(
+    args: CreateCustomLineItemCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<CreateCustomLineItemCommandOutput>;
+  createCustomLineItem(
+    args: CreateCustomLineItemCommandInput,
+    cb: (err: any, data?: CreateCustomLineItemCommandOutput) => void
+  ): void;
+  createCustomLineItem(
+    args: CreateCustomLineItemCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: CreateCustomLineItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePricingPlanCommand}
+   */
+  createPricingPlan(
+    args: CreatePricingPlanCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<CreatePricingPlanCommandOutput>;
+  createPricingPlan(
+    args: CreatePricingPlanCommandInput,
+    cb: (err: any, data?: CreatePricingPlanCommandOutput) => void
+  ): void;
+  createPricingPlan(
+    args: CreatePricingPlanCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: CreatePricingPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePricingRuleCommand}
+   */
+  createPricingRule(
+    args: CreatePricingRuleCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<CreatePricingRuleCommandOutput>;
+  createPricingRule(
+    args: CreatePricingRuleCommandInput,
+    cb: (err: any, data?: CreatePricingRuleCommandOutput) => void
+  ): void;
+  createPricingRule(
+    args: CreatePricingRuleCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: CreatePricingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBillingGroupCommand}
+   */
+  deleteBillingGroup(
+    args: DeleteBillingGroupCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<DeleteBillingGroupCommandOutput>;
+  deleteBillingGroup(
+    args: DeleteBillingGroupCommandInput,
+    cb: (err: any, data?: DeleteBillingGroupCommandOutput) => void
+  ): void;
+  deleteBillingGroup(
+    args: DeleteBillingGroupCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: DeleteBillingGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomLineItemCommand}
+   */
+  deleteCustomLineItem(
+    args: DeleteCustomLineItemCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<DeleteCustomLineItemCommandOutput>;
+  deleteCustomLineItem(
+    args: DeleteCustomLineItemCommandInput,
+    cb: (err: any, data?: DeleteCustomLineItemCommandOutput) => void
+  ): void;
+  deleteCustomLineItem(
+    args: DeleteCustomLineItemCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: DeleteCustomLineItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePricingPlanCommand}
+   */
+  deletePricingPlan(
+    args: DeletePricingPlanCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<DeletePricingPlanCommandOutput>;
+  deletePricingPlan(
+    args: DeletePricingPlanCommandInput,
+    cb: (err: any, data?: DeletePricingPlanCommandOutput) => void
+  ): void;
+  deletePricingPlan(
+    args: DeletePricingPlanCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: DeletePricingPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePricingRuleCommand}
+   */
+  deletePricingRule(
+    args: DeletePricingRuleCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<DeletePricingRuleCommandOutput>;
+  deletePricingRule(
+    args: DeletePricingRuleCommandInput,
+    cb: (err: any, data?: DeletePricingRuleCommandOutput) => void
+  ): void;
+  deletePricingRule(
+    args: DeletePricingRuleCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: DeletePricingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAccountsCommand}
+   */
+  disassociateAccounts(
+    args: DisassociateAccountsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<DisassociateAccountsCommandOutput>;
+  disassociateAccounts(
+    args: DisassociateAccountsCommandInput,
+    cb: (err: any, data?: DisassociateAccountsCommandOutput) => void
+  ): void;
+  disassociateAccounts(
+    args: DisassociateAccountsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: DisassociateAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociatePricingRulesCommand}
+   */
+  disassociatePricingRules(
+    args: DisassociatePricingRulesCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<DisassociatePricingRulesCommandOutput>;
+  disassociatePricingRules(
+    args: DisassociatePricingRulesCommandInput,
+    cb: (err: any, data?: DisassociatePricingRulesCommandOutput) => void
+  ): void;
+  disassociatePricingRules(
+    args: DisassociatePricingRulesCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: DisassociatePricingRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBillingGroupCostReportCommand}
+   */
+  getBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<GetBillingGroupCostReportCommandOutput>;
+  getBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    cb: (err: any, data?: GetBillingGroupCostReportCommandOutput) => void
+  ): void;
+  getBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: GetBillingGroupCostReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBillingTransferPreferenceCommand}
+   */
+  getBillingTransferPreference(
+    args: GetBillingTransferPreferenceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<GetBillingTransferPreferenceCommandOutput>;
+  getBillingTransferPreference(
+    args: GetBillingTransferPreferenceCommandInput,
+    cb: (err: any, data?: GetBillingTransferPreferenceCommandOutput) => void
+  ): void;
+  getBillingTransferPreference(
+    args: GetBillingTransferPreferenceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: GetBillingTransferPreferenceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountAssociationsCommand}
+   */
+  listAccountAssociations(): Promise<ListAccountAssociationsCommandOutput>;
+  listAccountAssociations(
+    args: ListAccountAssociationsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListAccountAssociationsCommandOutput>;
+  listAccountAssociations(
+    args: ListAccountAssociationsCommandInput,
+    cb: (err: any, data?: ListAccountAssociationsCommandOutput) => void
+  ): void;
+  listAccountAssociations(
+    args: ListAccountAssociationsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListAccountAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBillingGroupCostReportsCommand}
+   */
+  listBillingGroupCostReports(): Promise<ListBillingGroupCostReportsCommandOutput>;
+  listBillingGroupCostReports(
+    args: ListBillingGroupCostReportsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListBillingGroupCostReportsCommandOutput>;
+  listBillingGroupCostReports(
+    args: ListBillingGroupCostReportsCommandInput,
+    cb: (err: any, data?: ListBillingGroupCostReportsCommandOutput) => void
+  ): void;
+  listBillingGroupCostReports(
+    args: ListBillingGroupCostReportsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListBillingGroupCostReportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBillingGroupsCommand}
+   */
+  listBillingGroups(): Promise<ListBillingGroupsCommandOutput>;
+  listBillingGroups(
+    args: ListBillingGroupsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListBillingGroupsCommandOutput>;
+  listBillingGroups(
+    args: ListBillingGroupsCommandInput,
+    cb: (err: any, data?: ListBillingGroupsCommandOutput) => void
+  ): void;
+  listBillingGroups(
+    args: ListBillingGroupsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListBillingGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomLineItemsCommand}
+   */
+  listCustomLineItems(): Promise<ListCustomLineItemsCommandOutput>;
+  listCustomLineItems(
+    args: ListCustomLineItemsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListCustomLineItemsCommandOutput>;
+  listCustomLineItems(
+    args: ListCustomLineItemsCommandInput,
+    cb: (err: any, data?: ListCustomLineItemsCommandOutput) => void
+  ): void;
+  listCustomLineItems(
+    args: ListCustomLineItemsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListCustomLineItemsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomLineItemVersionsCommand}
+   */
+  listCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListCustomLineItemVersionsCommandOutput>;
+  listCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    cb: (err: any, data?: ListCustomLineItemVersionsCommandOutput) => void
+  ): void;
+  listCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListCustomLineItemVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPricingPlansCommand}
+   */
+  listPricingPlans(): Promise<ListPricingPlansCommandOutput>;
+  listPricingPlans(
+    args: ListPricingPlansCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListPricingPlansCommandOutput>;
+  listPricingPlans(
+    args: ListPricingPlansCommandInput,
+    cb: (err: any, data?: ListPricingPlansCommandOutput) => void
+  ): void;
+  listPricingPlans(
+    args: ListPricingPlansCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListPricingPlansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPricingPlansAssociatedWithPricingRuleCommand}
+   */
+  listPricingPlansAssociatedWithPricingRule(
+    args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListPricingPlansAssociatedWithPricingRuleCommandOutput>;
+  listPricingPlansAssociatedWithPricingRule(
+    args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
+    cb: (err: any, data?: ListPricingPlansAssociatedWithPricingRuleCommandOutput) => void
+  ): void;
+  listPricingPlansAssociatedWithPricingRule(
+    args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListPricingPlansAssociatedWithPricingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPricingRulesCommand}
+   */
+  listPricingRules(): Promise<ListPricingRulesCommandOutput>;
+  listPricingRules(
+    args: ListPricingRulesCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListPricingRulesCommandOutput>;
+  listPricingRules(
+    args: ListPricingRulesCommandInput,
+    cb: (err: any, data?: ListPricingRulesCommandOutput) => void
+  ): void;
+  listPricingRules(
+    args: ListPricingRulesCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListPricingRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPricingRulesAssociatedToPricingPlanCommand}
+   */
+  listPricingRulesAssociatedToPricingPlan(
+    args: ListPricingRulesAssociatedToPricingPlanCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListPricingRulesAssociatedToPricingPlanCommandOutput>;
+  listPricingRulesAssociatedToPricingPlan(
+    args: ListPricingRulesAssociatedToPricingPlanCommandInput,
+    cb: (err: any, data?: ListPricingRulesAssociatedToPricingPlanCommandOutput) => void
+  ): void;
+  listPricingRulesAssociatedToPricingPlan(
+    args: ListPricingRulesAssociatedToPricingPlanCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListPricingRulesAssociatedToPricingPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListResourcesAssociatedToCustomLineItemCommand}
+   */
+  listResourcesAssociatedToCustomLineItem(
+    args: ListResourcesAssociatedToCustomLineItemCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListResourcesAssociatedToCustomLineItemCommandOutput>;
+  listResourcesAssociatedToCustomLineItem(
+    args: ListResourcesAssociatedToCustomLineItemCommandInput,
+    cb: (err: any, data?: ListResourcesAssociatedToCustomLineItemCommandOutput) => void
+  ): void;
+  listResourcesAssociatedToCustomLineItem(
+    args: ListResourcesAssociatedToCustomLineItemCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListResourcesAssociatedToCustomLineItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBillingGroupCommand}
+   */
+  updateBillingGroup(
+    args: UpdateBillingGroupCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UpdateBillingGroupCommandOutput>;
+  updateBillingGroup(
+    args: UpdateBillingGroupCommandInput,
+    cb: (err: any, data?: UpdateBillingGroupCommandOutput) => void
+  ): void;
+  updateBillingGroup(
+    args: UpdateBillingGroupCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UpdateBillingGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBillingTransferPreferenceCommand}
+   */
+  updateBillingTransferPreference(
+    args: UpdateBillingTransferPreferenceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UpdateBillingTransferPreferenceCommandOutput>;
+  updateBillingTransferPreference(
+    args: UpdateBillingTransferPreferenceCommandInput,
+    cb: (err: any, data?: UpdateBillingTransferPreferenceCommandOutput) => void
+  ): void;
+  updateBillingTransferPreference(
+    args: UpdateBillingTransferPreferenceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UpdateBillingTransferPreferenceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCustomLineItemCommand}
+   */
+  updateCustomLineItem(
+    args: UpdateCustomLineItemCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UpdateCustomLineItemCommandOutput>;
+  updateCustomLineItem(
+    args: UpdateCustomLineItemCommandInput,
+    cb: (err: any, data?: UpdateCustomLineItemCommandOutput) => void
+  ): void;
+  updateCustomLineItem(
+    args: UpdateCustomLineItemCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UpdateCustomLineItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePricingPlanCommand}
+   */
+  updatePricingPlan(
+    args: UpdatePricingPlanCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UpdatePricingPlanCommandOutput>;
+  updatePricingPlan(
+    args: UpdatePricingPlanCommandInput,
+    cb: (err: any, data?: UpdatePricingPlanCommandOutput) => void
+  ): void;
+  updatePricingPlan(
+    args: UpdatePricingPlanCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UpdatePricingPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePricingRuleCommand}
+   */
+  updatePricingRule(
+    args: UpdatePricingRuleCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UpdatePricingRuleCommandOutput>;
+  updatePricingRule(
+    args: UpdatePricingRuleCommandInput,
+    cb: (err: any, data?: UpdatePricingRuleCommandOutput) => void
+  ): void;
+  updatePricingRule(
+    args: UpdatePricingRuleCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UpdatePricingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBillingGroupCostReportCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetBillingGroupCostReportCommandOutput}.
+   */
+  paginateGetBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetBillingGroupCostReportCommandOutput>;
+
+  /**
+   * @see {@link ListAccountAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountAssociationsCommandOutput}.
+   */
+  paginateListAccountAssociations(
+    args?: ListAccountAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListBillingGroupCostReportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBillingGroupCostReportsCommandOutput}.
+   */
+  paginateListBillingGroupCostReports(
+    args?: ListBillingGroupCostReportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBillingGroupCostReportsCommandOutput>;
+
+  /**
+   * @see {@link ListBillingGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBillingGroupsCommandOutput}.
+   */
+  paginateListBillingGroups(
+    args?: ListBillingGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBillingGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomLineItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomLineItemsCommandOutput}.
+   */
+  paginateListCustomLineItems(
+    args?: ListCustomLineItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomLineItemsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomLineItemVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomLineItemVersionsCommandOutput}.
+   */
+  paginateListCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomLineItemVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListPricingPlansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingPlansCommandOutput}.
+   */
+  paginateListPricingPlans(
+    args?: ListPricingPlansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingPlansCommandOutput>;
+
+  /**
+   * @see {@link ListPricingPlansAssociatedWithPricingRuleCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingPlansAssociatedWithPricingRuleCommandOutput}.
+   */
+  paginateListPricingPlansAssociatedWithPricingRule(
+    args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingPlansAssociatedWithPricingRuleCommandOutput>;
+
+  /**
+   * @see {@link ListPricingRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingRulesCommandOutput}.
+   */
+  paginateListPricingRules(
+    args?: ListPricingRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingRulesCommandOutput>;
+
+  /**
+   * @see {@link ListPricingRulesAssociatedToPricingPlanCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingRulesAssociatedToPricingPlanCommandOutput}.
+   */
+  paginateListPricingRulesAssociatedToPricingPlan(
+    args: ListPricingRulesAssociatedToPricingPlanCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingRulesAssociatedToPricingPlanCommandOutput>;
+
+  /**
+   * @see {@link ListResourcesAssociatedToCustomLineItemCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourcesAssociatedToCustomLineItemCommandOutput}.
+   */
+  paginateListResourcesAssociatedToCustomLineItem(
+    args: ListResourcesAssociatedToCustomLineItemCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourcesAssociatedToCustomLineItemCommandOutput>;
+}
+
+/**
+ * <p>Billing Conductor is a fully managed service that you can use to customize a <a href="https://docs.aws.amazon.com/billingconductor/latest/userguide/understanding-eb.html#eb-other-definitions">pro forma</a> version of your billing data each month, to accurately show or chargeback your end customers. Billing Conductor doesn't change the way you're billed by Amazon Web Services each month by design. Instead, it provides you with a mechanism to configure, generate, and display rates to certain customers over a given billing period. You can also analyze the difference between the rates you apply to your accounting groupings relative to your actual rates from Amazon Web Services. As a result of your Billing Conductor configuration, the payer account can also see the custom rate applied on the billing details page of the <a href="https://console.aws.amazon.com/billing">Billing console</a>, or configure a cost and usage report per billing group.</p> <p>This documentation shows how you can configure Billing Conductor by using its API. For more information about using the <a href="https://console.aws.amazon.com/billingconductor/">Billing Conductor</a> user interface, see the <a href="https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html"> Billing Conductor User Guide</a>.</p>
+ * @public
+ */
+export class Billingconductor extends BillingconductorClient implements Billingconductor {}
+createAggregatedClient(commands, Billingconductor, { paginators });

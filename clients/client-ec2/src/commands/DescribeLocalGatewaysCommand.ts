@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeLocalGatewaysRequest, DescribeLocalGatewaysResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeLocalGatewaysCommand,
-  serializeAws_ec2DescribeLocalGatewaysCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeLocalGatewaysRequest, DescribeLocalGatewaysResult } from "../models/models_4";
+import { DescribeLocalGateways$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLocalGatewaysCommand}.
+ */
 export interface DescribeLocalGatewaysCommandInput extends DescribeLocalGatewaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLocalGatewaysCommand}.
+ */
 export interface DescribeLocalGatewaysCommandOutput extends DescribeLocalGatewaysResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,74 @@ export interface DescribeLocalGatewaysCommandOutput extends DescribeLocalGateway
  * ```javascript
  * import { EC2Client, DescribeLocalGatewaysCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeLocalGatewaysCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeLocalGatewaysRequest
+ *   LocalGatewayIds: [ // LocalGatewayIdSet
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeLocalGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeLocalGatewaysResult
+ * //   LocalGateways: [ // LocalGatewaySet
+ * //     { // LocalGateway
+ * //       LocalGatewayId: "STRING_VALUE",
+ * //       OutpostArn: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeLocalGatewaysCommandInput - {@link DescribeLocalGatewaysCommandInput}
+ * @returns {@link DescribeLocalGatewaysCommandOutput}
  * @see {@link DescribeLocalGatewaysCommandInput} for command's `input` shape.
  * @see {@link DescribeLocalGatewaysCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeLocalGatewaysCommand extends $Command<
-  DescribeLocalGatewaysCommandInput,
-  DescribeLocalGatewaysCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLocalGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLocalGatewaysCommandInput, DescribeLocalGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeLocalGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeLocalGatewaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeLocalGatewaysResult.filterSensitiveLog,
+export class DescribeLocalGatewaysCommand extends command<DescribeLocalGatewaysCommandInput, DescribeLocalGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLocalGateways",
+  DescribeLocalGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLocalGatewaysRequest;
+      output: DescribeLocalGatewaysResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeLocalGatewaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeLocalGatewaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeLocalGatewaysCommandOutput> {
-    return deserializeAws_ec2DescribeLocalGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLocalGatewaysCommandInput;
+      output: DescribeLocalGatewaysCommandOutput;
+    };
+  };
 }

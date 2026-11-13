@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ForecastGeofenceEventsCommand,
+  ForecastGeofenceEventsCommandInput,
+  ForecastGeofenceEventsCommandOutput,
+} from "../commands/ForecastGeofenceEventsCommand";
+import { LocationClient } from "../LocationClient";
+import type { LocationPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateForecastGeofenceEvents: (
+  config: LocationPaginationConfiguration,
+  input: ForecastGeofenceEventsCommandInput,
+  ...rest: any[]
+) => Paginator<ForecastGeofenceEventsCommandOutput> = createPaginator<
+  LocationPaginationConfiguration,
+  ForecastGeofenceEventsCommandInput,
+  ForecastGeofenceEventsCommandOutput
+>(LocationClient, ForecastGeofenceEventsCommand, "NextToken", "NextToken", "MaxResults");

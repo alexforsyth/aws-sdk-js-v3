@@ -1,96 +1,148 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LookoutEquipmentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LookoutEquipmentClient";
-import { DescribeDataIngestionJobRequest, DescribeDataIngestionJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeDataIngestionJobCommand,
-  serializeAws_json1_0DescribeDataIngestionJobCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDataIngestionJobRequest, DescribeDataIngestionJobResponse } from "../models/models_0";
+import { DescribeDataIngestionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDataIngestionJobCommand}.
+ */
 export interface DescribeDataIngestionJobCommandInput extends DescribeDataIngestionJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDataIngestionJobCommand}.
+ */
 export interface DescribeDataIngestionJobCommandOutput extends DescribeDataIngestionJobResponse, __MetadataBearer {}
 
 /**
  * <p>Provides information on a specific data ingestion job such as creation time, dataset
- *          ARN, status, and so on. </p>
+ *          ARN, and status.</p>
+ *
+ * @deprecated (since 2026-10-07) End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LookoutEquipmentClient, DescribeDataIngestionJobCommand } from "@aws-sdk/client-lookoutequipment"; // ES Modules import
  * // const { LookoutEquipmentClient, DescribeDataIngestionJobCommand } = require("@aws-sdk/client-lookoutequipment"); // CommonJS import
+ * // import type { LookoutEquipmentClientConfig } from "@aws-sdk/client-lookoutequipment";
+ * const config = {}; // type is LookoutEquipmentClientConfig
  * const client = new LookoutEquipmentClient(config);
+ * const input = { // DescribeDataIngestionJobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDataIngestionJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDataIngestionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * //   DatasetArn: "STRING_VALUE",
+ * //   IngestionInputConfiguration: { // IngestionInputConfiguration
+ * //     S3InputConfiguration: { // IngestionS3InputConfiguration
+ * //       Bucket: "STRING_VALUE", // required
+ * //       Prefix: "STRING_VALUE",
+ * //       KeyPattern: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   RoleArn: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"),
+ * //   Status: "IN_PROGRESS" || "SUCCESS" || "FAILED" || "IMPORT_IN_PROGRESS",
+ * //   FailedReason: "STRING_VALUE",
+ * //   DataQualitySummary: { // DataQualitySummary
+ * //     InsufficientSensorData: { // InsufficientSensorData
+ * //       MissingCompleteSensorData: { // MissingCompleteSensorData
+ * //         AffectedSensorCount: Number("int"), // required
+ * //       },
+ * //       SensorsWithShortDateRange: { // SensorsWithShortDateRange
+ * //         AffectedSensorCount: Number("int"), // required
+ * //       },
+ * //     },
+ * //     MissingSensorData: { // MissingSensorData
+ * //       AffectedSensorCount: Number("int"), // required
+ * //       TotalNumberOfMissingValues: Number("int"), // required
+ * //     },
+ * //     InvalidSensorData: { // InvalidSensorData
+ * //       AffectedSensorCount: Number("int"), // required
+ * //       TotalNumberOfInvalidValues: Number("int"), // required
+ * //     },
+ * //     UnsupportedTimestamps: { // UnsupportedTimestamps
+ * //       TotalNumberOfUnsupportedTimestamps: Number("int"), // required
+ * //     },
+ * //     DuplicateTimestamps: { // DuplicateTimestamps
+ * //       TotalNumberOfDuplicateTimestamps: Number("int"), // required
+ * //     },
+ * //   },
+ * //   IngestedFilesSummary: { // IngestedFilesSummary
+ * //     TotalNumberOfFiles: Number("int"), // required
+ * //     IngestedNumberOfFiles: Number("int"), // required
+ * //     DiscardedFiles: [ // ListOfDiscardedFiles
+ * //       { // S3Object
+ * //         Bucket: "STRING_VALUE", // required
+ * //         Key: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   StatusDetail: "STRING_VALUE",
+ * //   IngestedDataSize: Number("long"),
+ * //   DataStartTime: new Date("TIMESTAMP"),
+ * //   DataEndTime: new Date("TIMESTAMP"),
+ * //   SourceDatasetArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDataIngestionJobCommandInput - {@link DescribeDataIngestionJobCommandInput}
+ * @returns {@link DescribeDataIngestionJobCommandOutput}
  * @see {@link DescribeDataIngestionJobCommandInput} for command's `input` shape.
  * @see {@link DescribeDataIngestionJobCommandOutput} for command's `response` shape.
- * @see {@link LookoutEquipmentClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LookoutEquipmentClientResolvedConfig | config} for LookoutEquipmentClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request could not be completed because you do not have access to the resource.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Processing of the request has failed because of an unknown error, exception or failure.
+ *       </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource requested could not be found. Verify the resource ID and retry your
+ *          request. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services
+ *          service that's being utilized. </p>
+ *
+ * @throws {@link LookoutEquipmentServiceException}
+ * <p>Base exception class for all service exceptions from LookoutEquipment service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDataIngestionJobCommand extends $Command<
-  DescribeDataIngestionJobCommandInput,
-  DescribeDataIngestionJobCommandOutput,
-  LookoutEquipmentClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDataIngestionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LookoutEquipmentClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDataIngestionJobCommandInput, DescribeDataIngestionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LookoutEquipmentClient";
-    const commandName = "DescribeDataIngestionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDataIngestionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDataIngestionJobResponse.filterSensitiveLog,
+export class DescribeDataIngestionJobCommand extends command<DescribeDataIngestionJobCommandInput, DescribeDataIngestionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDataIngestionJob",
+  DescribeDataIngestionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDataIngestionJobRequest;
+      output: DescribeDataIngestionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDataIngestionJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeDataIngestionJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDataIngestionJobCommandOutput> {
-    return deserializeAws_json1_0DescribeDataIngestionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDataIngestionJobCommandInput;
+      output: DescribeDataIngestionJobCommandOutput;
+    };
+  };
 }

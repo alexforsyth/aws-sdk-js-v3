@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { GetFunctionRequest, GetFunctionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFunctionCommand,
-  serializeAws_restJson1GetFunctionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFunctionRequest, GetFunctionResponse } from "../models/models_0";
+import { GetFunction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFunctionCommand}.
+ */
 export interface GetFunctionCommandInput extends GetFunctionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFunctionCommand}.
+ */
 export interface GetFunctionCommandOutput extends GetFunctionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,81 @@ export interface GetFunctionCommandOutput extends GetFunctionResponse, __Metadat
  * ```javascript
  * import { AppSyncClient, GetFunctionCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, GetFunctionCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // GetFunctionRequest
+ *   apiId: "STRING_VALUE", // required
+ *   functionId: "STRING_VALUE", // required
+ * };
  * const command = new GetFunctionCommand(input);
  * const response = await client.send(command);
+ * // { // GetFunctionResponse
+ * //   functionConfiguration: { // FunctionConfiguration
+ * //     functionId: "STRING_VALUE",
+ * //     functionArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     dataSourceName: "STRING_VALUE",
+ * //     requestMappingTemplate: "STRING_VALUE",
+ * //     responseMappingTemplate: "STRING_VALUE",
+ * //     functionVersion: "STRING_VALUE",
+ * //     syncConfig: { // SyncConfig
+ * //       conflictHandler: "OPTIMISTIC_CONCURRENCY" || "LAMBDA" || "AUTOMERGE" || "NONE",
+ * //       conflictDetection: "VERSION" || "NONE",
+ * //       lambdaConflictHandlerConfig: { // LambdaConflictHandlerConfig
+ * //         lambdaConflictHandlerArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     maxBatchSize: Number("int"),
+ * //     runtime: { // AppSyncRuntime
+ * //       name: "APPSYNC_JS", // required
+ * //       runtimeVersion: "STRING_VALUE", // required
+ * //     },
+ * //     code: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetFunctionCommandInput - {@link GetFunctionCommandInput}
+ * @returns {@link GetFunctionCommandOutput}
  * @see {@link GetFunctionCommandInput} for command's `input` shape.
  * @see {@link GetFunctionCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Another modification is in progress at this time and it must complete before you can
+ *          make your change.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class GetFunctionCommand extends $Command<
-  GetFunctionCommandInput,
-  GetFunctionCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFunctionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFunctionCommandInput, GetFunctionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "GetFunctionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFunctionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFunctionResponse.filterSensitiveLog,
+export class GetFunctionCommand extends command<GetFunctionCommandInput, GetFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFunction",
+  GetFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionRequest;
+      output: GetFunctionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFunctionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFunctionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFunctionCommandOutput> {
-    return deserializeAws_restJson1GetFunctionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFunctionCommandInput;
+      output: GetFunctionCommandOutput;
+    };
+  };
 }

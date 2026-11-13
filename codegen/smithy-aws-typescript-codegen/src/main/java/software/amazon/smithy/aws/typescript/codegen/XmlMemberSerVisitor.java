@@ -1,18 +1,7 @@
 /*
- * Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
  */
-
 package software.amazon.smithy.aws.typescript.codegen;
 
 import software.amazon.smithy.codegen.core.CodegenException;
@@ -34,6 +23,7 @@ import software.amazon.smithy.model.traits.XmlNameTrait;
 import software.amazon.smithy.typescript.codegen.TypeScriptWriter;
 import software.amazon.smithy.typescript.codegen.integration.DocumentMemberSerVisitor;
 import software.amazon.smithy.typescript.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.typescript.codegen.util.StringStore;
 import software.amazon.smithy.utils.SmithyInternalApi;
 
 /**
@@ -47,15 +37,17 @@ import software.amazon.smithy.utils.SmithyInternalApi;
  *
  * TODO: Work out support for BigDecimal and BigInteger, natively or through a library.
  *
- * @see <a href="https://awslabs.github.io/smithy/spec/xml.html">Smithy XML traits.</a>
+ * @see <a href="https://smithy.io/2.0/spec/protocol-traits.html#xml-bindings">Smithy XML traits.</a>
  */
 @SmithyInternalApi
 final class XmlMemberSerVisitor extends DocumentMemberSerVisitor {
     private final GenerationContext context;
+    private final StringStore stringStore;
 
     XmlMemberSerVisitor(GenerationContext context, String dataSource, Format defaultTimestampFormat) {
         super(context, dataSource, defaultTimestampFormat);
         this.context = context;
+        this.stringStore = context.getStringStore();
     }
 
     @Override
@@ -115,13 +107,13 @@ final class XmlMemberSerVisitor extends DocumentMemberSerVisitor {
     String getAsXmlText(Shape shape, String dataSource) {
         // Handle the @xmlName trait for the shape itself.
         String nodeName = shape.getTrait(XmlNameTrait.class)
-                .map(XmlNameTrait::getValue)
-                .orElse(shape.getId().getName(context.getService()));
+            .map(XmlNameTrait::getValue)
+            .orElse(shape.getId().getName(context.getService()));
 
         TypeScriptWriter writer = getContext().getWriter();
         writer.addImport("XmlNode", "__XmlNode", "@aws-sdk/xml-builder");
         writer.addImport("XmlText", "__XmlText", "@aws-sdk/xml-builder");
-        return "new __XmlNode(\"" + nodeName + "\").addChildNode(new __XmlText(" + dataSource + "))";
+        return "__XmlNode.of(" + stringStore.var(nodeName) + ", " + dataSource + ")";
     }
 
     @Override
@@ -137,7 +129,12 @@ final class XmlMemberSerVisitor extends DocumentMemberSerVisitor {
     }
 
     private String unsupportedShape(Shape shape) {
-        throw new CodegenException(String.format("Cannot serialize shape type %s on protocol, shape: %s.",
-                shape.getType(), shape.getId()));
+        throw new CodegenException(
+            String.format(
+                "Cannot serialize shape type %s on protocol, shape: %s.",
+                shape.getType(),
+                shape.getId()
+            )
+        );
     }
 }

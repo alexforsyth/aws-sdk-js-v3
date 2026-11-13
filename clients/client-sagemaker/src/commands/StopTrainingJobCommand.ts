@@ -1,101 +1,76 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StopTrainingJobRequest } from "../models/models_3";
-import {
-  deserializeAws_json1_1StopTrainingJobCommand,
-  serializeAws_json1_1StopTrainingJobCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopTrainingJobRequest } from "../models/models_5";
+import { StopTrainingJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopTrainingJobCommand}.
+ */
 export interface StopTrainingJobCommandInput extends StopTrainingJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopTrainingJobCommand}.
+ */
 export interface StopTrainingJobCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Stops a training job. To stop a job, Amazon SageMaker sends the algorithm the
- *                 <code>SIGTERM</code> signal, which delays job termination for 120 seconds.
- *             Algorithms might use this 120-second window to save the model artifacts, so the results
- *             of the training is not lost. </p>
- *         <p>When it receives a <code>StopTrainingJob</code> request, Amazon SageMaker changes the status of
- *             the job to <code>Stopping</code>. After Amazon SageMaker stops the job, it sets the status to
- *                 <code>Stopped</code>.</p>
+ * <p>Stops a training job. To stop a job, SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of the training is not lost. </p> <p>When it receives a <code>StopTrainingJob</code> request, SageMaker changes the status of the job to <code>Stopping</code>. After SageMaker stops the job, it sets the status to <code>Stopped</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, StopTrainingJobCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, StopTrainingJobCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // StopTrainingJobRequest
+ *   TrainingJobName: "STRING_VALUE", // required
+ * };
  * const command = new StopTrainingJobCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopTrainingJobCommandInput - {@link StopTrainingJobCommandInput}
+ * @returns {@link StopTrainingJobCommandOutput}
  * @see {@link StopTrainingJobCommandInput} for command's `input` shape.
  * @see {@link StopTrainingJobCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class StopTrainingJobCommand extends $Command<
-  StopTrainingJobCommandInput,
-  StopTrainingJobCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopTrainingJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopTrainingJobCommandInput, StopTrainingJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "StopTrainingJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopTrainingJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class StopTrainingJobCommand extends command<StopTrainingJobCommandInput, StopTrainingJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopTrainingJob",
+  StopTrainingJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopTrainingJobRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopTrainingJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopTrainingJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopTrainingJobCommandOutput> {
-    return deserializeAws_json1_1StopTrainingJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopTrainingJobCommandInput;
+      output: StopTrainingJobCommandOutput;
+    };
+  };
 }

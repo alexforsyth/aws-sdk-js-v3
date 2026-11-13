@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListTopicRulesRequest, ListTopicRulesResponse } from "../models/models_2";
-import {
-  deserializeAws_restJson1ListTopicRulesCommand,
-  serializeAws_restJson1ListTopicRulesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTopicRulesRequest, ListTopicRulesResponse } from "../models/models_2";
+import { ListTopicRules$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTopicRulesCommand}.
+ */
 export interface ListTopicRulesCommandInput extends ListTopicRulesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTopicRulesCommand}.
+ */
 export interface ListTopicRulesCommandOutput extends ListTopicRulesResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,71 @@ export interface ListTopicRulesCommandOutput extends ListTopicRulesResponse, __M
  * ```javascript
  * import { IoTClient, ListTopicRulesCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListTopicRulesCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListTopicRulesRequest
+ *   topic: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   ruleDisabled: true || false,
+ * };
  * const command = new ListTopicRulesCommand(input);
  * const response = await client.send(command);
+ * // { // ListTopicRulesResponse
+ * //   rules: [ // TopicRuleList
+ * //     { // TopicRuleListItem
+ * //       ruleArn: "STRING_VALUE",
+ * //       ruleName: "STRING_VALUE",
+ * //       topicPattern: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       ruleDisabled: true || false,
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTopicRulesCommandInput - {@link ListTopicRulesCommandInput}
+ * @returns {@link ListTopicRulesCommandOutput}
  * @see {@link ListTopicRulesCommandInput} for command's `input` shape.
  * @see {@link ListTopicRulesCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListTopicRulesCommand extends $Command<
-  ListTopicRulesCommandInput,
-  ListTopicRulesCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTopicRulesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTopicRulesCommandInput, ListTopicRulesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListTopicRulesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTopicRulesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTopicRulesResponse.filterSensitiveLog,
+export class ListTopicRulesCommand extends command<ListTopicRulesCommandInput, ListTopicRulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTopicRules",
+  ListTopicRules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTopicRulesRequest;
+      output: ListTopicRulesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTopicRulesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTopicRulesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTopicRulesCommandOutput> {
-    return deserializeAws_restJson1ListTopicRulesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTopicRulesCommandInput;
+      output: ListTopicRulesCommandOutput;
+    };
+  };
 }

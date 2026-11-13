@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateEndpointAccessMessage, EndpointAccess } from "../models/models_0";
-import {
-  deserializeAws_queryCreateEndpointAccessCommand,
-  serializeAws_queryCreateEndpointAccessCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEndpointAccessMessage, EndpointAccess } from "../models/models_0";
+import { CreateEndpointAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEndpointAccessCommand}.
+ */
 export interface CreateEndpointAccessCommandInput extends CreateEndpointAccessMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEndpointAccessCommand}.
+ */
 export interface CreateEndpointAccessCommandOutput extends EndpointAccess, __MetadataBearer {}
 
 /**
@@ -28,68 +29,111 @@ export interface CreateEndpointAccessCommandOutput extends EndpointAccess, __Met
  * ```javascript
  * import { RedshiftClient, CreateEndpointAccessCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, CreateEndpointAccessCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // CreateEndpointAccessMessage
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   ResourceOwner: "STRING_VALUE",
+ *   EndpointName: "STRING_VALUE", // required
+ *   SubnetGroupName: "STRING_VALUE", // required
+ *   VpcSecurityGroupIds: [ // VpcSecurityGroupIdList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new CreateEndpointAccessCommand(input);
  * const response = await client.send(command);
+ * // { // EndpointAccess
+ * //   ClusterIdentifier: "STRING_VALUE",
+ * //   ResourceOwner: "STRING_VALUE",
+ * //   SubnetGroupName: "STRING_VALUE",
+ * //   EndpointStatus: "STRING_VALUE",
+ * //   EndpointName: "STRING_VALUE",
+ * //   EndpointCreateTime: new Date("TIMESTAMP"),
+ * //   Port: Number("int"),
+ * //   Address: "STRING_VALUE",
+ * //   VpcSecurityGroups: [ // VpcSecurityGroupMembershipList
+ * //     { // VpcSecurityGroupMembership
+ * //       VpcSecurityGroupId: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   VpcEndpoint: { // VpcEndpoint
+ * //     VpcEndpointId: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     NetworkInterfaces: [ // NetworkInterfaceList
+ * //       { // NetworkInterface
+ * //         NetworkInterfaceId: "STRING_VALUE",
+ * //         SubnetId: "STRING_VALUE",
+ * //         PrivateIpAddress: "STRING_VALUE",
+ * //         AvailabilityZone: "STRING_VALUE",
+ * //         Ipv6Address: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateEndpointAccessCommandInput - {@link CreateEndpointAccessCommandInput}
+ * @returns {@link CreateEndpointAccessCommandOutput}
  * @see {@link CreateEndpointAccessCommandInput} for command's `input` shape.
  * @see {@link CreateEndpointAccessCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link AccessToClusterDeniedFault} (client fault)
+ *  <p>You are not authorized to access the cluster.</p>
+ *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link ClusterSubnetGroupNotFoundFault} (client fault)
+ *  <p>The cluster subnet group name does not refer to an existing cluster subnet
+ *             group.</p>
+ *
+ * @throws {@link EndpointAlreadyExistsFault} (client fault)
+ *  <p>The account already has a Redshift-managed VPC endpoint with the given identifier.</p>
+ *
+ * @throws {@link EndpointsPerAuthorizationLimitExceededFault} (client fault)
+ *  <p>The number of Redshift-managed VPC endpoints per authorization has exceeded its limit.</p>
+ *
+ * @throws {@link EndpointsPerClusterLimitExceededFault} (client fault)
+ *  <p>The number of Redshift-managed VPC endpoints per cluster has exceeded its limit.</p>
+ *
+ * @throws {@link InvalidClusterSecurityGroupStateFault} (client fault)
+ *  <p>The state of the cluster security group is not <code>available</code>. </p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The specified cluster is not in the <code>available</code> state. </p>
+ *
+ * @throws {@link UnauthorizedOperation} (client fault)
+ *  <p>Your account is not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateEndpointAccessCommand extends $Command<
-  CreateEndpointAccessCommandInput,
-  CreateEndpointAccessCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateEndpointAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateEndpointAccessCommandInput, CreateEndpointAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "CreateEndpointAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateEndpointAccessMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EndpointAccess.filterSensitiveLog,
+export class CreateEndpointAccessCommand extends command<CreateEndpointAccessCommandInput, CreateEndpointAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEndpointAccess",
+  CreateEndpointAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEndpointAccessMessage;
+      output: EndpointAccess;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateEndpointAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateEndpointAccessCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateEndpointAccessCommandOutput> {
-    return deserializeAws_queryCreateEndpointAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateEndpointAccessCommandInput;
+      output: CreateEndpointAccessCommandOutput;
+    };
+  };
 }

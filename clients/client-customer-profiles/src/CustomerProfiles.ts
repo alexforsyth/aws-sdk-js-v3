@@ -1,1220 +1,2875 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AddProfileKeyCommandInput,
+  type AddProfileKeyCommandOutput,
   AddProfileKeyCommand,
-  AddProfileKeyCommandInput,
-  AddProfileKeyCommandOutput,
 } from "./commands/AddProfileKeyCommand";
 import {
+  type AssociateStreamForSegmentsCommandInput,
+  type AssociateStreamForSegmentsCommandOutput,
+  AssociateStreamForSegmentsCommand,
+} from "./commands/AssociateStreamForSegmentsCommand";
+import {
+  type BatchGetCalculatedAttributeForProfileCommandInput,
+  type BatchGetCalculatedAttributeForProfileCommandOutput,
+  BatchGetCalculatedAttributeForProfileCommand,
+} from "./commands/BatchGetCalculatedAttributeForProfileCommand";
+import {
+  type BatchGetProfileCommandInput,
+  type BatchGetProfileCommandOutput,
+  BatchGetProfileCommand,
+} from "./commands/BatchGetProfileCommand";
+import {
+  type BatchPutProfileObjectCommandInput,
+  type BatchPutProfileObjectCommandOutput,
+  BatchPutProfileObjectCommand,
+} from "./commands/BatchPutProfileObjectCommand";
+import {
+  type CreateCalculatedAttributeDefinitionCommandInput,
+  type CreateCalculatedAttributeDefinitionCommandOutput,
+  CreateCalculatedAttributeDefinitionCommand,
+} from "./commands/CreateCalculatedAttributeDefinitionCommand";
+import {
+  type CreateDomainCommandInput,
+  type CreateDomainCommandOutput,
   CreateDomainCommand,
-  CreateDomainCommandInput,
-  CreateDomainCommandOutput,
 } from "./commands/CreateDomainCommand";
 import {
+  type CreateDomainLayoutCommandInput,
+  type CreateDomainLayoutCommandOutput,
+  CreateDomainLayoutCommand,
+} from "./commands/CreateDomainLayoutCommand";
+import {
+  type CreateEventStreamCommandInput,
+  type CreateEventStreamCommandOutput,
+  CreateEventStreamCommand,
+} from "./commands/CreateEventStreamCommand";
+import {
+  type CreateEventTriggerCommandInput,
+  type CreateEventTriggerCommandOutput,
+  CreateEventTriggerCommand,
+} from "./commands/CreateEventTriggerCommand";
+import {
+  type CreateIntegrationWorkflowCommandInput,
+  type CreateIntegrationWorkflowCommandOutput,
+  CreateIntegrationWorkflowCommand,
+} from "./commands/CreateIntegrationWorkflowCommand";
+import {
+  type CreateProfileCommandInput,
+  type CreateProfileCommandOutput,
   CreateProfileCommand,
-  CreateProfileCommandInput,
-  CreateProfileCommandOutput,
 } from "./commands/CreateProfileCommand";
 import {
+  type CreateRecommenderCommandInput,
+  type CreateRecommenderCommandOutput,
+  CreateRecommenderCommand,
+} from "./commands/CreateRecommenderCommand";
+import {
+  type CreateRecommenderFilterCommandInput,
+  type CreateRecommenderFilterCommandOutput,
+  CreateRecommenderFilterCommand,
+} from "./commands/CreateRecommenderFilterCommand";
+import {
+  type CreateRecommenderSchemaCommandInput,
+  type CreateRecommenderSchemaCommandOutput,
+  CreateRecommenderSchemaCommand,
+} from "./commands/CreateRecommenderSchemaCommand";
+import {
+  type CreateSegmentDefinitionCommandInput,
+  type CreateSegmentDefinitionCommandOutput,
+  CreateSegmentDefinitionCommand,
+} from "./commands/CreateSegmentDefinitionCommand";
+import {
+  type CreateSegmentEstimateCommandInput,
+  type CreateSegmentEstimateCommandOutput,
+  CreateSegmentEstimateCommand,
+} from "./commands/CreateSegmentEstimateCommand";
+import {
+  type CreateSegmentSnapshotCommandInput,
+  type CreateSegmentSnapshotCommandOutput,
+  CreateSegmentSnapshotCommand,
+} from "./commands/CreateSegmentSnapshotCommand";
+import {
+  type CreateUploadJobCommandInput,
+  type CreateUploadJobCommandOutput,
+  CreateUploadJobCommand,
+} from "./commands/CreateUploadJobCommand";
+import {
+  type DeleteCalculatedAttributeDefinitionCommandInput,
+  type DeleteCalculatedAttributeDefinitionCommandOutput,
+  DeleteCalculatedAttributeDefinitionCommand,
+} from "./commands/DeleteCalculatedAttributeDefinitionCommand";
+import {
+  type DeleteDomainCommandInput,
+  type DeleteDomainCommandOutput,
   DeleteDomainCommand,
-  DeleteDomainCommandInput,
-  DeleteDomainCommandOutput,
 } from "./commands/DeleteDomainCommand";
 import {
+  type DeleteDomainLayoutCommandInput,
+  type DeleteDomainLayoutCommandOutput,
+  DeleteDomainLayoutCommand,
+} from "./commands/DeleteDomainLayoutCommand";
+import {
+  type DeleteDomainObjectTypeCommandInput,
+  type DeleteDomainObjectTypeCommandOutput,
+  DeleteDomainObjectTypeCommand,
+} from "./commands/DeleteDomainObjectTypeCommand";
+import {
+  type DeleteEventStreamCommandInput,
+  type DeleteEventStreamCommandOutput,
+  DeleteEventStreamCommand,
+} from "./commands/DeleteEventStreamCommand";
+import {
+  type DeleteEventTriggerCommandInput,
+  type DeleteEventTriggerCommandOutput,
+  DeleteEventTriggerCommand,
+} from "./commands/DeleteEventTriggerCommand";
+import {
+  type DeleteIntegrationCommandInput,
+  type DeleteIntegrationCommandOutput,
   DeleteIntegrationCommand,
-  DeleteIntegrationCommandInput,
-  DeleteIntegrationCommandOutput,
 } from "./commands/DeleteIntegrationCommand";
 import {
+  type DeleteProfileCommandInput,
+  type DeleteProfileCommandOutput,
   DeleteProfileCommand,
-  DeleteProfileCommandInput,
-  DeleteProfileCommandOutput,
 } from "./commands/DeleteProfileCommand";
 import {
+  type DeleteProfileKeyCommandInput,
+  type DeleteProfileKeyCommandOutput,
   DeleteProfileKeyCommand,
-  DeleteProfileKeyCommandInput,
-  DeleteProfileKeyCommandOutput,
 } from "./commands/DeleteProfileKeyCommand";
 import {
+  type DeleteProfileObjectCommandInput,
+  type DeleteProfileObjectCommandOutput,
   DeleteProfileObjectCommand,
-  DeleteProfileObjectCommandInput,
-  DeleteProfileObjectCommandOutput,
 } from "./commands/DeleteProfileObjectCommand";
 import {
+  type DeleteProfileObjectTypeCommandInput,
+  type DeleteProfileObjectTypeCommandOutput,
   DeleteProfileObjectTypeCommand,
-  DeleteProfileObjectTypeCommandInput,
-  DeleteProfileObjectTypeCommandOutput,
 } from "./commands/DeleteProfileObjectTypeCommand";
-import { GetDomainCommand, GetDomainCommandInput, GetDomainCommandOutput } from "./commands/GetDomainCommand";
 import {
+  type DeleteRecommenderCommandInput,
+  type DeleteRecommenderCommandOutput,
+  DeleteRecommenderCommand,
+} from "./commands/DeleteRecommenderCommand";
+import {
+  type DeleteRecommenderFilterCommandInput,
+  type DeleteRecommenderFilterCommandOutput,
+  DeleteRecommenderFilterCommand,
+} from "./commands/DeleteRecommenderFilterCommand";
+import {
+  type DeleteRecommenderSchemaCommandInput,
+  type DeleteRecommenderSchemaCommandOutput,
+  DeleteRecommenderSchemaCommand,
+} from "./commands/DeleteRecommenderSchemaCommand";
+import {
+  type DeleteSegmentDefinitionCommandInput,
+  type DeleteSegmentDefinitionCommandOutput,
+  DeleteSegmentDefinitionCommand,
+} from "./commands/DeleteSegmentDefinitionCommand";
+import {
+  type DeleteSegmentSubscriptionCommandInput,
+  type DeleteSegmentSubscriptionCommandOutput,
+  DeleteSegmentSubscriptionCommand,
+} from "./commands/DeleteSegmentSubscriptionCommand";
+import {
+  type DeleteWorkflowCommandInput,
+  type DeleteWorkflowCommandOutput,
+  DeleteWorkflowCommand,
+} from "./commands/DeleteWorkflowCommand";
+import {
+  type DetectProfileObjectTypeCommandInput,
+  type DetectProfileObjectTypeCommandOutput,
+  DetectProfileObjectTypeCommand,
+} from "./commands/DetectProfileObjectTypeCommand";
+import {
+  type DisassociateStreamForSegmentsCommandInput,
+  type DisassociateStreamForSegmentsCommandOutput,
+  DisassociateStreamForSegmentsCommand,
+} from "./commands/DisassociateStreamForSegmentsCommand";
+import {
+  type GetAutoMergingPreviewCommandInput,
+  type GetAutoMergingPreviewCommandOutput,
+  GetAutoMergingPreviewCommand,
+} from "./commands/GetAutoMergingPreviewCommand";
+import {
+  type GetCalculatedAttributeDefinitionCommandInput,
+  type GetCalculatedAttributeDefinitionCommandOutput,
+  GetCalculatedAttributeDefinitionCommand,
+} from "./commands/GetCalculatedAttributeDefinitionCommand";
+import {
+  type GetCalculatedAttributeForProfileCommandInput,
+  type GetCalculatedAttributeForProfileCommandOutput,
+  GetCalculatedAttributeForProfileCommand,
+} from "./commands/GetCalculatedAttributeForProfileCommand";
+import { type GetDomainCommandInput, type GetDomainCommandOutput, GetDomainCommand } from "./commands/GetDomainCommand";
+import {
+  type GetDomainLayoutCommandInput,
+  type GetDomainLayoutCommandOutput,
+  GetDomainLayoutCommand,
+} from "./commands/GetDomainLayoutCommand";
+import {
+  type GetDomainObjectTypeCommandInput,
+  type GetDomainObjectTypeCommandOutput,
+  GetDomainObjectTypeCommand,
+} from "./commands/GetDomainObjectTypeCommand";
+import {
+  type GetEventStreamCommandInput,
+  type GetEventStreamCommandOutput,
+  GetEventStreamCommand,
+} from "./commands/GetEventStreamCommand";
+import {
+  type GetEventTriggerCommandInput,
+  type GetEventTriggerCommandOutput,
+  GetEventTriggerCommand,
+} from "./commands/GetEventTriggerCommand";
+import {
+  type GetIdentityResolutionJobCommandInput,
+  type GetIdentityResolutionJobCommandOutput,
+  GetIdentityResolutionJobCommand,
+} from "./commands/GetIdentityResolutionJobCommand";
+import {
+  type GetIntegrationCommandInput,
+  type GetIntegrationCommandOutput,
   GetIntegrationCommand,
-  GetIntegrationCommandInput,
-  GetIntegrationCommandOutput,
 } from "./commands/GetIntegrationCommand";
-import { GetMatchesCommand, GetMatchesCommandInput, GetMatchesCommandOutput } from "./commands/GetMatchesCommand";
 import {
+  type GetMatchesCommandInput,
+  type GetMatchesCommandOutput,
+  GetMatchesCommand,
+} from "./commands/GetMatchesCommand";
+import {
+  type GetObjectTypeAttributeStatisticsCommandInput,
+  type GetObjectTypeAttributeStatisticsCommandOutput,
+  GetObjectTypeAttributeStatisticsCommand,
+} from "./commands/GetObjectTypeAttributeStatisticsCommand";
+import {
+  type GetProfileHistoryRecordCommandInput,
+  type GetProfileHistoryRecordCommandOutput,
+  GetProfileHistoryRecordCommand,
+} from "./commands/GetProfileHistoryRecordCommand";
+import {
+  type GetProfileObjectTypeCommandInput,
+  type GetProfileObjectTypeCommandOutput,
   GetProfileObjectTypeCommand,
-  GetProfileObjectTypeCommandInput,
-  GetProfileObjectTypeCommandOutput,
 } from "./commands/GetProfileObjectTypeCommand";
 import {
+  type GetProfileObjectTypeTemplateCommandInput,
+  type GetProfileObjectTypeTemplateCommandOutput,
   GetProfileObjectTypeTemplateCommand,
-  GetProfileObjectTypeTemplateCommandInput,
-  GetProfileObjectTypeTemplateCommandOutput,
 } from "./commands/GetProfileObjectTypeTemplateCommand";
 import {
-  ListAccountIntegrationsCommand,
-  ListAccountIntegrationsCommandInput,
-  ListAccountIntegrationsCommandOutput,
-} from "./commands/ListAccountIntegrationsCommand";
-import { ListDomainsCommand, ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
+  type GetProfileRecommendationsCommandInput,
+  type GetProfileRecommendationsCommandOutput,
+  GetProfileRecommendationsCommand,
+} from "./commands/GetProfileRecommendationsCommand";
 import {
+  type GetRecommenderCommandInput,
+  type GetRecommenderCommandOutput,
+  GetRecommenderCommand,
+} from "./commands/GetRecommenderCommand";
+import {
+  type GetRecommenderFilterCommandInput,
+  type GetRecommenderFilterCommandOutput,
+  GetRecommenderFilterCommand,
+} from "./commands/GetRecommenderFilterCommand";
+import {
+  type GetRecommenderSchemaCommandInput,
+  type GetRecommenderSchemaCommandOutput,
+  GetRecommenderSchemaCommand,
+} from "./commands/GetRecommenderSchemaCommand";
+import {
+  type GetSegmentDefinitionCommandInput,
+  type GetSegmentDefinitionCommandOutput,
+  GetSegmentDefinitionCommand,
+} from "./commands/GetSegmentDefinitionCommand";
+import {
+  type GetSegmentEstimateCommandInput,
+  type GetSegmentEstimateCommandOutput,
+  GetSegmentEstimateCommand,
+} from "./commands/GetSegmentEstimateCommand";
+import {
+  type GetSegmentMembershipCommandInput,
+  type GetSegmentMembershipCommandOutput,
+  GetSegmentMembershipCommand,
+} from "./commands/GetSegmentMembershipCommand";
+import {
+  type GetSegmentSnapshotCommandInput,
+  type GetSegmentSnapshotCommandOutput,
+  GetSegmentSnapshotCommand,
+} from "./commands/GetSegmentSnapshotCommand";
+import {
+  type GetSegmentSubscriptionCommandInput,
+  type GetSegmentSubscriptionCommandOutput,
+  GetSegmentSubscriptionCommand,
+} from "./commands/GetSegmentSubscriptionCommand";
+import {
+  type GetSimilarProfilesCommandInput,
+  type GetSimilarProfilesCommandOutput,
+  GetSimilarProfilesCommand,
+} from "./commands/GetSimilarProfilesCommand";
+import {
+  type GetStreamForSegmentsCommandInput,
+  type GetStreamForSegmentsCommandOutput,
+  GetStreamForSegmentsCommand,
+} from "./commands/GetStreamForSegmentsCommand";
+import {
+  type GetUploadJobCommandInput,
+  type GetUploadJobCommandOutput,
+  GetUploadJobCommand,
+} from "./commands/GetUploadJobCommand";
+import {
+  type GetUploadJobPathCommandInput,
+  type GetUploadJobPathCommandOutput,
+  GetUploadJobPathCommand,
+} from "./commands/GetUploadJobPathCommand";
+import {
+  type GetWorkflowCommandInput,
+  type GetWorkflowCommandOutput,
+  GetWorkflowCommand,
+} from "./commands/GetWorkflowCommand";
+import {
+  type GetWorkflowStepsCommandInput,
+  type GetWorkflowStepsCommandOutput,
+  GetWorkflowStepsCommand,
+} from "./commands/GetWorkflowStepsCommand";
+import {
+  type ListAccountIntegrationsCommandInput,
+  type ListAccountIntegrationsCommandOutput,
+  ListAccountIntegrationsCommand,
+} from "./commands/ListAccountIntegrationsCommand";
+import {
+  type ListCalculatedAttributeDefinitionsCommandInput,
+  type ListCalculatedAttributeDefinitionsCommandOutput,
+  ListCalculatedAttributeDefinitionsCommand,
+} from "./commands/ListCalculatedAttributeDefinitionsCommand";
+import {
+  type ListCalculatedAttributesForProfileCommandInput,
+  type ListCalculatedAttributesForProfileCommandOutput,
+  ListCalculatedAttributesForProfileCommand,
+} from "./commands/ListCalculatedAttributesForProfileCommand";
+import {
+  type ListDomainLayoutsCommandInput,
+  type ListDomainLayoutsCommandOutput,
+  ListDomainLayoutsCommand,
+} from "./commands/ListDomainLayoutsCommand";
+import {
+  type ListDomainObjectTypesCommandInput,
+  type ListDomainObjectTypesCommandOutput,
+  ListDomainObjectTypesCommand,
+} from "./commands/ListDomainObjectTypesCommand";
+import {
+  type ListDomainsCommandInput,
+  type ListDomainsCommandOutput,
+  ListDomainsCommand,
+} from "./commands/ListDomainsCommand";
+import {
+  type ListEventStreamsCommandInput,
+  type ListEventStreamsCommandOutput,
+  ListEventStreamsCommand,
+} from "./commands/ListEventStreamsCommand";
+import {
+  type ListEventTriggersCommandInput,
+  type ListEventTriggersCommandOutput,
+  ListEventTriggersCommand,
+} from "./commands/ListEventTriggersCommand";
+import {
+  type ListIdentityResolutionJobsCommandInput,
+  type ListIdentityResolutionJobsCommandOutput,
+  ListIdentityResolutionJobsCommand,
+} from "./commands/ListIdentityResolutionJobsCommand";
+import {
+  type ListIntegrationsCommandInput,
+  type ListIntegrationsCommandOutput,
   ListIntegrationsCommand,
-  ListIntegrationsCommandInput,
-  ListIntegrationsCommandOutput,
 } from "./commands/ListIntegrationsCommand";
 import {
+  type ListObjectTypeAttributesCommandInput,
+  type ListObjectTypeAttributesCommandOutput,
+  ListObjectTypeAttributesCommand,
+} from "./commands/ListObjectTypeAttributesCommand";
+import {
+  type ListObjectTypeAttributeValuesCommandInput,
+  type ListObjectTypeAttributeValuesCommandOutput,
+  ListObjectTypeAttributeValuesCommand,
+} from "./commands/ListObjectTypeAttributeValuesCommand";
+import {
+  type ListProfileAttributeValuesCommandInput,
+  type ListProfileAttributeValuesCommandOutput,
+  ListProfileAttributeValuesCommand,
+} from "./commands/ListProfileAttributeValuesCommand";
+import {
+  type ListProfileHistoryRecordsCommandInput,
+  type ListProfileHistoryRecordsCommandOutput,
+  ListProfileHistoryRecordsCommand,
+} from "./commands/ListProfileHistoryRecordsCommand";
+import {
+  type ListProfileObjectsCommandInput,
+  type ListProfileObjectsCommandOutput,
   ListProfileObjectsCommand,
-  ListProfileObjectsCommandInput,
-  ListProfileObjectsCommandOutput,
 } from "./commands/ListProfileObjectsCommand";
 import {
+  type ListProfileObjectTypesCommandInput,
+  type ListProfileObjectTypesCommandOutput,
   ListProfileObjectTypesCommand,
-  ListProfileObjectTypesCommandInput,
-  ListProfileObjectTypesCommandOutput,
 } from "./commands/ListProfileObjectTypesCommand";
 import {
+  type ListProfileObjectTypeTemplatesCommandInput,
+  type ListProfileObjectTypeTemplatesCommandOutput,
   ListProfileObjectTypeTemplatesCommand,
-  ListProfileObjectTypeTemplatesCommandInput,
-  ListProfileObjectTypeTemplatesCommandOutput,
 } from "./commands/ListProfileObjectTypeTemplatesCommand";
 import {
+  type ListRecommenderFiltersCommandInput,
+  type ListRecommenderFiltersCommandOutput,
+  ListRecommenderFiltersCommand,
+} from "./commands/ListRecommenderFiltersCommand";
+import {
+  type ListRecommenderRecipesCommandInput,
+  type ListRecommenderRecipesCommandOutput,
+  ListRecommenderRecipesCommand,
+} from "./commands/ListRecommenderRecipesCommand";
+import {
+  type ListRecommenderSchemasCommandInput,
+  type ListRecommenderSchemasCommandOutput,
+  ListRecommenderSchemasCommand,
+} from "./commands/ListRecommenderSchemasCommand";
+import {
+  type ListRecommendersCommandInput,
+  type ListRecommendersCommandOutput,
+  ListRecommendersCommand,
+} from "./commands/ListRecommendersCommand";
+import {
+  type ListRuleBasedMatchesCommandInput,
+  type ListRuleBasedMatchesCommandOutput,
+  ListRuleBasedMatchesCommand,
+} from "./commands/ListRuleBasedMatchesCommand";
+import {
+  type ListSegmentDefinitionsCommandInput,
+  type ListSegmentDefinitionsCommandOutput,
+  ListSegmentDefinitionsCommand,
+} from "./commands/ListSegmentDefinitionsCommand";
+import {
+  type ListSegmentSubscriptionEventsCommandInput,
+  type ListSegmentSubscriptionEventsCommandOutput,
+  ListSegmentSubscriptionEventsCommand,
+} from "./commands/ListSegmentSubscriptionEventsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListUploadJobsCommandInput,
+  type ListUploadJobsCommandOutput,
+  ListUploadJobsCommand,
+} from "./commands/ListUploadJobsCommand";
+import {
+  type ListWorkflowsCommandInput,
+  type ListWorkflowsCommandOutput,
+  ListWorkflowsCommand,
+} from "./commands/ListWorkflowsCommand";
+import {
+  type MergeProfilesCommandInput,
+  type MergeProfilesCommandOutput,
   MergeProfilesCommand,
-  MergeProfilesCommandInput,
-  MergeProfilesCommandOutput,
 } from "./commands/MergeProfilesCommand";
 import {
+  type PutDomainObjectTypeCommandInput,
+  type PutDomainObjectTypeCommandOutput,
+  PutDomainObjectTypeCommand,
+} from "./commands/PutDomainObjectTypeCommand";
+import {
+  type PutIntegrationCommandInput,
+  type PutIntegrationCommandOutput,
   PutIntegrationCommand,
-  PutIntegrationCommandInput,
-  PutIntegrationCommandOutput,
 } from "./commands/PutIntegrationCommand";
 import {
+  type PutProfileObjectCommandInput,
+  type PutProfileObjectCommandOutput,
   PutProfileObjectCommand,
-  PutProfileObjectCommandInput,
-  PutProfileObjectCommandOutput,
 } from "./commands/PutProfileObjectCommand";
 import {
+  type PutProfileObjectTypeCommandInput,
+  type PutProfileObjectTypeCommandOutput,
   PutProfileObjectTypeCommand,
-  PutProfileObjectTypeCommandInput,
-  PutProfileObjectTypeCommandOutput,
 } from "./commands/PutProfileObjectTypeCommand";
 import {
-  SearchProfilesCommand,
-  SearchProfilesCommandInput,
-  SearchProfilesCommandOutput,
-} from "./commands/SearchProfilesCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutSegmentSubscriptionCommandInput,
+  type PutSegmentSubscriptionCommandOutput,
+  PutSegmentSubscriptionCommand,
+} from "./commands/PutSegmentSubscriptionCommand";
 import {
+  type SearchProfilesCommandInput,
+  type SearchProfilesCommandOutput,
+  SearchProfilesCommand,
+} from "./commands/SearchProfilesCommand";
+import {
+  type SearchRecommendationsCommandInput,
+  type SearchRecommendationsCommandOutput,
+  SearchRecommendationsCommand,
+} from "./commands/SearchRecommendationsCommand";
+import {
+  type StartRecommenderCommandInput,
+  type StartRecommenderCommandOutput,
+  StartRecommenderCommand,
+} from "./commands/StartRecommenderCommand";
+import {
+  type StartUploadJobCommandInput,
+  type StartUploadJobCommandOutput,
+  StartUploadJobCommand,
+} from "./commands/StartUploadJobCommand";
+import {
+  type StopRecommenderCommandInput,
+  type StopRecommenderCommandOutput,
+  StopRecommenderCommand,
+} from "./commands/StopRecommenderCommand";
+import {
+  type StopUploadJobCommandInput,
+  type StopUploadJobCommandOutput,
+  StopUploadJobCommand,
+} from "./commands/StopUploadJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateCalculatedAttributeDefinitionCommandInput,
+  type UpdateCalculatedAttributeDefinitionCommandOutput,
+  UpdateCalculatedAttributeDefinitionCommand,
+} from "./commands/UpdateCalculatedAttributeDefinitionCommand";
+import {
+  type UpdateDomainCommandInput,
+  type UpdateDomainCommandOutput,
   UpdateDomainCommand,
-  UpdateDomainCommandInput,
-  UpdateDomainCommandOutput,
 } from "./commands/UpdateDomainCommand";
 import {
+  type UpdateDomainLayoutCommandInput,
+  type UpdateDomainLayoutCommandOutput,
+  UpdateDomainLayoutCommand,
+} from "./commands/UpdateDomainLayoutCommand";
+import {
+  type UpdateEventTriggerCommandInput,
+  type UpdateEventTriggerCommandOutput,
+  UpdateEventTriggerCommand,
+} from "./commands/UpdateEventTriggerCommand";
+import {
+  type UpdateProfileCommandInput,
+  type UpdateProfileCommandOutput,
   UpdateProfileCommand,
-  UpdateProfileCommandInput,
-  UpdateProfileCommandOutput,
 } from "./commands/UpdateProfileCommand";
+import {
+  type UpdateRecommenderCommandInput,
+  type UpdateRecommenderCommandOutput,
+  UpdateRecommenderCommand,
+} from "./commands/UpdateRecommenderCommand";
 import { CustomerProfilesClient } from "./CustomerProfilesClient";
+import { paginateGetSimilarProfiles } from "./pagination/GetSimilarProfilesPaginator";
+import { paginateListDomainLayouts } from "./pagination/ListDomainLayoutsPaginator";
+import { paginateListDomainObjectTypes } from "./pagination/ListDomainObjectTypesPaginator";
+import { paginateListEventStreams } from "./pagination/ListEventStreamsPaginator";
+import { paginateListEventTriggers } from "./pagination/ListEventTriggersPaginator";
+import { paginateListObjectTypeAttributes } from "./pagination/ListObjectTypeAttributesPaginator";
+import { paginateListRecommenderFilters } from "./pagination/ListRecommenderFiltersPaginator";
+import { paginateListRecommenderRecipes } from "./pagination/ListRecommenderRecipesPaginator";
+import { paginateListRecommenderSchemas } from "./pagination/ListRecommenderSchemasPaginator";
+import { paginateListRecommenders } from "./pagination/ListRecommendersPaginator";
+import { paginateListRuleBasedMatches } from "./pagination/ListRuleBasedMatchesPaginator";
+import { paginateListSegmentDefinitions } from "./pagination/ListSegmentDefinitionsPaginator";
+import { paginateListSegmentSubscriptionEvents } from "./pagination/ListSegmentSubscriptionEventsPaginator";
+import { paginateListUploadJobs } from "./pagination/ListUploadJobsPaginator";
+
+const commands = {
+  AddProfileKeyCommand,
+  AssociateStreamForSegmentsCommand,
+  BatchGetCalculatedAttributeForProfileCommand,
+  BatchGetProfileCommand,
+  BatchPutProfileObjectCommand,
+  CreateCalculatedAttributeDefinitionCommand,
+  CreateDomainCommand,
+  CreateDomainLayoutCommand,
+  CreateEventStreamCommand,
+  CreateEventTriggerCommand,
+  CreateIntegrationWorkflowCommand,
+  CreateProfileCommand,
+  CreateRecommenderCommand,
+  CreateRecommenderFilterCommand,
+  CreateRecommenderSchemaCommand,
+  CreateSegmentDefinitionCommand,
+  CreateSegmentEstimateCommand,
+  CreateSegmentSnapshotCommand,
+  CreateUploadJobCommand,
+  DeleteCalculatedAttributeDefinitionCommand,
+  DeleteDomainCommand,
+  DeleteDomainLayoutCommand,
+  DeleteDomainObjectTypeCommand,
+  DeleteEventStreamCommand,
+  DeleteEventTriggerCommand,
+  DeleteIntegrationCommand,
+  DeleteProfileCommand,
+  DeleteProfileKeyCommand,
+  DeleteProfileObjectCommand,
+  DeleteProfileObjectTypeCommand,
+  DeleteRecommenderCommand,
+  DeleteRecommenderFilterCommand,
+  DeleteRecommenderSchemaCommand,
+  DeleteSegmentDefinitionCommand,
+  DeleteSegmentSubscriptionCommand,
+  DeleteWorkflowCommand,
+  DetectProfileObjectTypeCommand,
+  DisassociateStreamForSegmentsCommand,
+  GetAutoMergingPreviewCommand,
+  GetCalculatedAttributeDefinitionCommand,
+  GetCalculatedAttributeForProfileCommand,
+  GetDomainCommand,
+  GetDomainLayoutCommand,
+  GetDomainObjectTypeCommand,
+  GetEventStreamCommand,
+  GetEventTriggerCommand,
+  GetIdentityResolutionJobCommand,
+  GetIntegrationCommand,
+  GetMatchesCommand,
+  GetObjectTypeAttributeStatisticsCommand,
+  GetProfileHistoryRecordCommand,
+  GetProfileObjectTypeCommand,
+  GetProfileObjectTypeTemplateCommand,
+  GetProfileRecommendationsCommand,
+  GetRecommenderCommand,
+  GetRecommenderFilterCommand,
+  GetRecommenderSchemaCommand,
+  GetSegmentDefinitionCommand,
+  GetSegmentEstimateCommand,
+  GetSegmentMembershipCommand,
+  GetSegmentSnapshotCommand,
+  GetSegmentSubscriptionCommand,
+  GetSimilarProfilesCommand,
+  GetStreamForSegmentsCommand,
+  GetUploadJobCommand,
+  GetUploadJobPathCommand,
+  GetWorkflowCommand,
+  GetWorkflowStepsCommand,
+  ListAccountIntegrationsCommand,
+  ListCalculatedAttributeDefinitionsCommand,
+  ListCalculatedAttributesForProfileCommand,
+  ListDomainLayoutsCommand,
+  ListDomainObjectTypesCommand,
+  ListDomainsCommand,
+  ListEventStreamsCommand,
+  ListEventTriggersCommand,
+  ListIdentityResolutionJobsCommand,
+  ListIntegrationsCommand,
+  ListObjectTypeAttributesCommand,
+  ListObjectTypeAttributeValuesCommand,
+  ListProfileAttributeValuesCommand,
+  ListProfileHistoryRecordsCommand,
+  ListProfileObjectsCommand,
+  ListProfileObjectTypesCommand,
+  ListProfileObjectTypeTemplatesCommand,
+  ListRecommenderFiltersCommand,
+  ListRecommenderRecipesCommand,
+  ListRecommendersCommand,
+  ListRecommenderSchemasCommand,
+  ListRuleBasedMatchesCommand,
+  ListSegmentDefinitionsCommand,
+  ListSegmentSubscriptionEventsCommand,
+  ListTagsForResourceCommand,
+  ListUploadJobsCommand,
+  ListWorkflowsCommand,
+  MergeProfilesCommand,
+  PutDomainObjectTypeCommand,
+  PutIntegrationCommand,
+  PutProfileObjectCommand,
+  PutProfileObjectTypeCommand,
+  PutSegmentSubscriptionCommand,
+  SearchProfilesCommand,
+  SearchRecommendationsCommand,
+  StartRecommenderCommand,
+  StartUploadJobCommand,
+  StopRecommenderCommand,
+  StopUploadJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCalculatedAttributeDefinitionCommand,
+  UpdateDomainCommand,
+  UpdateDomainLayoutCommand,
+  UpdateEventTriggerCommand,
+  UpdateProfileCommand,
+  UpdateRecommenderCommand,
+};
+const paginators = {
+  paginateGetSimilarProfiles,
+  paginateListDomainLayouts,
+  paginateListDomainObjectTypes,
+  paginateListEventStreams,
+  paginateListEventTriggers,
+  paginateListObjectTypeAttributes,
+  paginateListRecommenderFilters,
+  paginateListRecommenderRecipes,
+  paginateListRecommenders,
+  paginateListRecommenderSchemas,
+  paginateListRuleBasedMatches,
+  paginateListSegmentDefinitions,
+  paginateListSegmentSubscriptionEvents,
+  paginateListUploadJobs,
+};
 
 /**
- * <fullname>Amazon Connect Customer Profiles</fullname>
- *          <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information
- *          about the Amazon Connect Customer Profiles API, including supported operations, data types,
- *          parameters, and schemas.</p>
- *          <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has
- *          pre-built connectors powered by AppFlow that make it easy to combine customer information
- *          from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your
- *          enterprise resource planning (ERP), with contact history from your Amazon Connect contact
- *          center.</p>
- *          <p>If you're new to Amazon Connect , you might find it helpful to also review the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html">Amazon Connect Administrator Guide</a>.</p>
+ * @public
  */
-export class CustomerProfiles extends CustomerProfilesClient {
+export interface CustomerProfilesRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CustomerProfiles {
   /**
-   * <p>Associates a new key value with a specific profile, such as a Contact Trace Record (CTR)
-   *          ContactId.</p>
-   *          <p>A profile object can have a single unique key and any number of additional keys that can
-   *          be used to identify the profile that it belongs to.</p>
+   * @see {@link AddProfileKeyCommand}
    */
-  public addProfileKey(
+  addProfileKey(
     args: AddProfileKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<AddProfileKeyCommandOutput>;
-  public addProfileKey(
+  addProfileKey(
     args: AddProfileKeyCommandInput,
     cb: (err: any, data?: AddProfileKeyCommandOutput) => void
   ): void;
-  public addProfileKey(
+  addProfileKey(
     args: AddProfileKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: AddProfileKeyCommandOutput) => void
   ): void;
-  public addProfileKey(
-    args: AddProfileKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddProfileKeyCommandOutput) => void),
-    cb?: (err: any, data?: AddProfileKeyCommandOutput) => void
-  ): Promise<AddProfileKeyCommandOutput> | void {
-    const command = new AddProfileKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a domain, which is a container for all customer data, such as customer profile
-   *          attributes, object types, profile keys, and encryption keys. You can create multiple
-   *          domains, and each domain can have multiple third-party integrations.</p>
-   *          <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can
-   *          be associated with one domain.</p>
-   *          <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to
-   *          enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity
-   *             resolution</a>: set <code>Matching</code> to true. </p>
+   * @see {@link AssociateStreamForSegmentsCommand}
    */
-  public createDomain(
+  associateStreamForSegments(
+    args: AssociateStreamForSegmentsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<AssociateStreamForSegmentsCommandOutput>;
+  associateStreamForSegments(
+    args: AssociateStreamForSegmentsCommandInput,
+    cb: (err: any, data?: AssociateStreamForSegmentsCommandOutput) => void
+  ): void;
+  associateStreamForSegments(
+    args: AssociateStreamForSegmentsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: AssociateStreamForSegmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetCalculatedAttributeForProfileCommand}
+   */
+  batchGetCalculatedAttributeForProfile(
+    args: BatchGetCalculatedAttributeForProfileCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<BatchGetCalculatedAttributeForProfileCommandOutput>;
+  batchGetCalculatedAttributeForProfile(
+    args: BatchGetCalculatedAttributeForProfileCommandInput,
+    cb: (err: any, data?: BatchGetCalculatedAttributeForProfileCommandOutput) => void
+  ): void;
+  batchGetCalculatedAttributeForProfile(
+    args: BatchGetCalculatedAttributeForProfileCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: BatchGetCalculatedAttributeForProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetProfileCommand}
+   */
+  batchGetProfile(
+    args: BatchGetProfileCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<BatchGetProfileCommandOutput>;
+  batchGetProfile(
+    args: BatchGetProfileCommandInput,
+    cb: (err: any, data?: BatchGetProfileCommandOutput) => void
+  ): void;
+  batchGetProfile(
+    args: BatchGetProfileCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: BatchGetProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchPutProfileObjectCommand}
+   */
+  batchPutProfileObject(
+    args: BatchPutProfileObjectCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<BatchPutProfileObjectCommandOutput>;
+  batchPutProfileObject(
+    args: BatchPutProfileObjectCommandInput,
+    cb: (err: any, data?: BatchPutProfileObjectCommandOutput) => void
+  ): void;
+  batchPutProfileObject(
+    args: BatchPutProfileObjectCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: BatchPutProfileObjectCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCalculatedAttributeDefinitionCommand}
+   */
+  createCalculatedAttributeDefinition(
+    args: CreateCalculatedAttributeDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateCalculatedAttributeDefinitionCommandOutput>;
+  createCalculatedAttributeDefinition(
+    args: CreateCalculatedAttributeDefinitionCommandInput,
+    cb: (err: any, data?: CreateCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+  createCalculatedAttributeDefinition(
+    args: CreateCalculatedAttributeDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDomainCommand}
+   */
+  createDomain(
     args: CreateDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<CreateDomainCommandOutput>;
-  public createDomain(args: CreateDomainCommandInput, cb: (err: any, data?: CreateDomainCommandOutput) => void): void;
-  public createDomain(
+  createDomain(
     args: CreateDomainCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateDomainCommandOutput) => void
   ): void;
-  public createDomain(
+  createDomain(
     args: CreateDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDomainCommandOutput) => void),
-    cb?: (err: any, data?: CreateDomainCommandOutput) => void
-  ): Promise<CreateDomainCommandOutput> | void {
-    const command = new CreateDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateDomainCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a standard profile.</p>
-   *          <p>A standard profile represents the following attributes for a customer profile in a
-   *          domain.</p>
+   * @see {@link CreateDomainLayoutCommand}
    */
-  public createProfile(
+  createDomainLayout(
+    args: CreateDomainLayoutCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateDomainLayoutCommandOutput>;
+  createDomainLayout(
+    args: CreateDomainLayoutCommandInput,
+    cb: (err: any, data?: CreateDomainLayoutCommandOutput) => void
+  ): void;
+  createDomainLayout(
+    args: CreateDomainLayoutCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateDomainLayoutCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventStreamCommand}
+   */
+  createEventStream(
+    args: CreateEventStreamCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateEventStreamCommandOutput>;
+  createEventStream(
+    args: CreateEventStreamCommandInput,
+    cb: (err: any, data?: CreateEventStreamCommandOutput) => void
+  ): void;
+  createEventStream(
+    args: CreateEventStreamCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateEventStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventTriggerCommand}
+   */
+  createEventTrigger(
+    args: CreateEventTriggerCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateEventTriggerCommandOutput>;
+  createEventTrigger(
+    args: CreateEventTriggerCommandInput,
+    cb: (err: any, data?: CreateEventTriggerCommandOutput) => void
+  ): void;
+  createEventTrigger(
+    args: CreateEventTriggerCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateEventTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIntegrationWorkflowCommand}
+   */
+  createIntegrationWorkflow(
+    args: CreateIntegrationWorkflowCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateIntegrationWorkflowCommandOutput>;
+  createIntegrationWorkflow(
+    args: CreateIntegrationWorkflowCommandInput,
+    cb: (err: any, data?: CreateIntegrationWorkflowCommandOutput) => void
+  ): void;
+  createIntegrationWorkflow(
+    args: CreateIntegrationWorkflowCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateIntegrationWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProfileCommand}
+   */
+  createProfile(
     args: CreateProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<CreateProfileCommandOutput>;
-  public createProfile(
+  createProfile(
     args: CreateProfileCommandInput,
     cb: (err: any, data?: CreateProfileCommandOutput) => void
   ): void;
-  public createProfile(
+  createProfile(
     args: CreateProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: CreateProfileCommandOutput) => void
   ): void;
-  public createProfile(
-    args: CreateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateProfileCommandOutput) => void),
-    cb?: (err: any, data?: CreateProfileCommandOutput) => void
-  ): Promise<CreateProfileCommandOutput> | void {
-    const command = new CreateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a specific domain and all of its customer data, such as customer profile
-   *          attributes and their related objects.</p>
+   * @see {@link CreateRecommenderCommand}
    */
-  public deleteDomain(
+  createRecommender(
+    args: CreateRecommenderCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateRecommenderCommandOutput>;
+  createRecommender(
+    args: CreateRecommenderCommandInput,
+    cb: (err: any, data?: CreateRecommenderCommandOutput) => void
+  ): void;
+  createRecommender(
+    args: CreateRecommenderCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecommenderFilterCommand}
+   */
+  createRecommenderFilter(
+    args: CreateRecommenderFilterCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateRecommenderFilterCommandOutput>;
+  createRecommenderFilter(
+    args: CreateRecommenderFilterCommandInput,
+    cb: (err: any, data?: CreateRecommenderFilterCommandOutput) => void
+  ): void;
+  createRecommenderFilter(
+    args: CreateRecommenderFilterCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateRecommenderFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecommenderSchemaCommand}
+   */
+  createRecommenderSchema(
+    args: CreateRecommenderSchemaCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateRecommenderSchemaCommandOutput>;
+  createRecommenderSchema(
+    args: CreateRecommenderSchemaCommandInput,
+    cb: (err: any, data?: CreateRecommenderSchemaCommandOutput) => void
+  ): void;
+  createRecommenderSchema(
+    args: CreateRecommenderSchemaCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateRecommenderSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSegmentDefinitionCommand}
+   */
+  createSegmentDefinition(
+    args: CreateSegmentDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateSegmentDefinitionCommandOutput>;
+  createSegmentDefinition(
+    args: CreateSegmentDefinitionCommandInput,
+    cb: (err: any, data?: CreateSegmentDefinitionCommandOutput) => void
+  ): void;
+  createSegmentDefinition(
+    args: CreateSegmentDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateSegmentDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSegmentEstimateCommand}
+   */
+  createSegmentEstimate(
+    args: CreateSegmentEstimateCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateSegmentEstimateCommandOutput>;
+  createSegmentEstimate(
+    args: CreateSegmentEstimateCommandInput,
+    cb: (err: any, data?: CreateSegmentEstimateCommandOutput) => void
+  ): void;
+  createSegmentEstimate(
+    args: CreateSegmentEstimateCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateSegmentEstimateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSegmentSnapshotCommand}
+   */
+  createSegmentSnapshot(
+    args: CreateSegmentSnapshotCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateSegmentSnapshotCommandOutput>;
+  createSegmentSnapshot(
+    args: CreateSegmentSnapshotCommandInput,
+    cb: (err: any, data?: CreateSegmentSnapshotCommandOutput) => void
+  ): void;
+  createSegmentSnapshot(
+    args: CreateSegmentSnapshotCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateSegmentSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUploadJobCommand}
+   */
+  createUploadJob(
+    args: CreateUploadJobCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<CreateUploadJobCommandOutput>;
+  createUploadJob(
+    args: CreateUploadJobCommandInput,
+    cb: (err: any, data?: CreateUploadJobCommandOutput) => void
+  ): void;
+  createUploadJob(
+    args: CreateUploadJobCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: CreateUploadJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCalculatedAttributeDefinitionCommand}
+   */
+  deleteCalculatedAttributeDefinition(
+    args: DeleteCalculatedAttributeDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteCalculatedAttributeDefinitionCommandOutput>;
+  deleteCalculatedAttributeDefinition(
+    args: DeleteCalculatedAttributeDefinitionCommandInput,
+    cb: (err: any, data?: DeleteCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+  deleteCalculatedAttributeDefinition(
+    args: DeleteCalculatedAttributeDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainCommand}
+   */
+  deleteDomain(
     args: DeleteDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<DeleteDomainCommandOutput>;
-  public deleteDomain(args: DeleteDomainCommandInput, cb: (err: any, data?: DeleteDomainCommandOutput) => void): void;
-  public deleteDomain(
+  deleteDomain(
     args: DeleteDomainCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteDomainCommandOutput) => void
   ): void;
-  public deleteDomain(
+  deleteDomain(
     args: DeleteDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainCommandOutput) => void
-  ): Promise<DeleteDomainCommandOutput> | void {
-    const command = new DeleteDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteDomainCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes an integration from a specific domain.</p>
+   * @see {@link DeleteDomainLayoutCommand}
    */
-  public deleteIntegration(
+  deleteDomainLayout(
+    args: DeleteDomainLayoutCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteDomainLayoutCommandOutput>;
+  deleteDomainLayout(
+    args: DeleteDomainLayoutCommandInput,
+    cb: (err: any, data?: DeleteDomainLayoutCommandOutput) => void
+  ): void;
+  deleteDomainLayout(
+    args: DeleteDomainLayoutCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteDomainLayoutCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainObjectTypeCommand}
+   */
+  deleteDomainObjectType(
+    args: DeleteDomainObjectTypeCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteDomainObjectTypeCommandOutput>;
+  deleteDomainObjectType(
+    args: DeleteDomainObjectTypeCommandInput,
+    cb: (err: any, data?: DeleteDomainObjectTypeCommandOutput) => void
+  ): void;
+  deleteDomainObjectType(
+    args: DeleteDomainObjectTypeCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteDomainObjectTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEventStreamCommand}
+   */
+  deleteEventStream(
+    args: DeleteEventStreamCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteEventStreamCommandOutput>;
+  deleteEventStream(
+    args: DeleteEventStreamCommandInput,
+    cb: (err: any, data?: DeleteEventStreamCommandOutput) => void
+  ): void;
+  deleteEventStream(
+    args: DeleteEventStreamCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteEventStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEventTriggerCommand}
+   */
+  deleteEventTrigger(
+    args: DeleteEventTriggerCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteEventTriggerCommandOutput>;
+  deleteEventTrigger(
+    args: DeleteEventTriggerCommandInput,
+    cb: (err: any, data?: DeleteEventTriggerCommandOutput) => void
+  ): void;
+  deleteEventTrigger(
+    args: DeleteEventTriggerCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteEventTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationCommand}
+   */
+  deleteIntegration(
     args: DeleteIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<DeleteIntegrationCommandOutput>;
-  public deleteIntegration(
+  deleteIntegration(
     args: DeleteIntegrationCommandInput,
     cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
   ): void;
-  public deleteIntegration(
+  deleteIntegration(
     args: DeleteIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
   ): void;
-  public deleteIntegration(
-    args: DeleteIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIntegrationCommandOutput) => void
-  ): Promise<DeleteIntegrationCommandOutput> | void {
-    const command = new DeleteIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the standard customer profile and all data pertaining to the profile.</p>
+   * @see {@link DeleteProfileCommand}
    */
-  public deleteProfile(
+  deleteProfile(
     args: DeleteProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<DeleteProfileCommandOutput>;
-  public deleteProfile(
+  deleteProfile(
     args: DeleteProfileCommandInput,
     cb: (err: any, data?: DeleteProfileCommandOutput) => void
   ): void;
-  public deleteProfile(
+  deleteProfile(
     args: DeleteProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: DeleteProfileCommandOutput) => void
   ): void;
-  public deleteProfile(
-    args: DeleteProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteProfileCommandOutput) => void),
-    cb?: (err: any, data?: DeleteProfileCommandOutput) => void
-  ): Promise<DeleteProfileCommandOutput> | void {
-    const command = new DeleteProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a searchable key from a customer profile.</p>
+   * @see {@link DeleteProfileKeyCommand}
    */
-  public deleteProfileKey(
+  deleteProfileKey(
     args: DeleteProfileKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<DeleteProfileKeyCommandOutput>;
-  public deleteProfileKey(
+  deleteProfileKey(
     args: DeleteProfileKeyCommandInput,
     cb: (err: any, data?: DeleteProfileKeyCommandOutput) => void
   ): void;
-  public deleteProfileKey(
+  deleteProfileKey(
     args: DeleteProfileKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: DeleteProfileKeyCommandOutput) => void
   ): void;
-  public deleteProfileKey(
-    args: DeleteProfileKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteProfileKeyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteProfileKeyCommandOutput) => void
-  ): Promise<DeleteProfileKeyCommandOutput> | void {
-    const command = new DeleteProfileKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes an object associated with a profile of a given ProfileObjectType.</p>
+   * @see {@link DeleteProfileObjectCommand}
    */
-  public deleteProfileObject(
+  deleteProfileObject(
     args: DeleteProfileObjectCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<DeleteProfileObjectCommandOutput>;
-  public deleteProfileObject(
+  deleteProfileObject(
     args: DeleteProfileObjectCommandInput,
     cb: (err: any, data?: DeleteProfileObjectCommandOutput) => void
   ): void;
-  public deleteProfileObject(
+  deleteProfileObject(
     args: DeleteProfileObjectCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: DeleteProfileObjectCommandOutput) => void
   ): void;
-  public deleteProfileObject(
-    args: DeleteProfileObjectCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteProfileObjectCommandOutput) => void),
-    cb?: (err: any, data?: DeleteProfileObjectCommandOutput) => void
-  ): Promise<DeleteProfileObjectCommandOutput> | void {
-    const command = new DeleteProfileObjectCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a ProfileObjectType from a specific domain as well as removes all the
-   *          ProfileObjects of that type. It also disables integrations from this specific
-   *          ProfileObjectType. In addition, it scrubs all of the fields of the standard profile that
-   *          were populated from this ProfileObjectType.</p>
+   * @see {@link DeleteProfileObjectTypeCommand}
    */
-  public deleteProfileObjectType(
+  deleteProfileObjectType(
     args: DeleteProfileObjectTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<DeleteProfileObjectTypeCommandOutput>;
-  public deleteProfileObjectType(
+  deleteProfileObjectType(
     args: DeleteProfileObjectTypeCommandInput,
     cb: (err: any, data?: DeleteProfileObjectTypeCommandOutput) => void
   ): void;
-  public deleteProfileObjectType(
+  deleteProfileObjectType(
     args: DeleteProfileObjectTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: DeleteProfileObjectTypeCommandOutput) => void
   ): void;
-  public deleteProfileObjectType(
-    args: DeleteProfileObjectTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteProfileObjectTypeCommandOutput) => void),
-    cb?: (err: any, data?: DeleteProfileObjectTypeCommandOutput) => void
-  ): Promise<DeleteProfileObjectTypeCommandOutput> | void {
-    const command = new DeleteProfileObjectTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a specific domain.</p>
+   * @see {@link DeleteRecommenderCommand}
    */
-  public getDomain(args: GetDomainCommandInput, options?: __HttpHandlerOptions): Promise<GetDomainCommandOutput>;
-  public getDomain(args: GetDomainCommandInput, cb: (err: any, data?: GetDomainCommandOutput) => void): void;
-  public getDomain(
+  deleteRecommender(
+    args: DeleteRecommenderCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteRecommenderCommandOutput>;
+  deleteRecommender(
+    args: DeleteRecommenderCommandInput,
+    cb: (err: any, data?: DeleteRecommenderCommandOutput) => void
+  ): void;
+  deleteRecommender(
+    args: DeleteRecommenderCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecommenderFilterCommand}
+   */
+  deleteRecommenderFilter(
+    args: DeleteRecommenderFilterCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteRecommenderFilterCommandOutput>;
+  deleteRecommenderFilter(
+    args: DeleteRecommenderFilterCommandInput,
+    cb: (err: any, data?: DeleteRecommenderFilterCommandOutput) => void
+  ): void;
+  deleteRecommenderFilter(
+    args: DeleteRecommenderFilterCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteRecommenderFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecommenderSchemaCommand}
+   */
+  deleteRecommenderSchema(
+    args: DeleteRecommenderSchemaCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteRecommenderSchemaCommandOutput>;
+  deleteRecommenderSchema(
+    args: DeleteRecommenderSchemaCommandInput,
+    cb: (err: any, data?: DeleteRecommenderSchemaCommandOutput) => void
+  ): void;
+  deleteRecommenderSchema(
+    args: DeleteRecommenderSchemaCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteRecommenderSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSegmentDefinitionCommand}
+   */
+  deleteSegmentDefinition(
+    args: DeleteSegmentDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteSegmentDefinitionCommandOutput>;
+  deleteSegmentDefinition(
+    args: DeleteSegmentDefinitionCommandInput,
+    cb: (err: any, data?: DeleteSegmentDefinitionCommandOutput) => void
+  ): void;
+  deleteSegmentDefinition(
+    args: DeleteSegmentDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteSegmentDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSegmentSubscriptionCommand}
+   */
+  deleteSegmentSubscription(
+    args: DeleteSegmentSubscriptionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteSegmentSubscriptionCommandOutput>;
+  deleteSegmentSubscription(
+    args: DeleteSegmentSubscriptionCommandInput,
+    cb: (err: any, data?: DeleteSegmentSubscriptionCommandOutput) => void
+  ): void;
+  deleteSegmentSubscription(
+    args: DeleteSegmentSubscriptionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteSegmentSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkflowCommand}
+   */
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DeleteWorkflowCommandOutput>;
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
+  ): void;
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetectProfileObjectTypeCommand}
+   */
+  detectProfileObjectType(
+    args: DetectProfileObjectTypeCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DetectProfileObjectTypeCommandOutput>;
+  detectProfileObjectType(
+    args: DetectProfileObjectTypeCommandInput,
+    cb: (err: any, data?: DetectProfileObjectTypeCommandOutput) => void
+  ): void;
+  detectProfileObjectType(
+    args: DetectProfileObjectTypeCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DetectProfileObjectTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateStreamForSegmentsCommand}
+   */
+  disassociateStreamForSegments(
+    args: DisassociateStreamForSegmentsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<DisassociateStreamForSegmentsCommandOutput>;
+  disassociateStreamForSegments(
+    args: DisassociateStreamForSegmentsCommandInput,
+    cb: (err: any, data?: DisassociateStreamForSegmentsCommandOutput) => void
+  ): void;
+  disassociateStreamForSegments(
+    args: DisassociateStreamForSegmentsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: DisassociateStreamForSegmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutoMergingPreviewCommand}
+   */
+  getAutoMergingPreview(
+    args: GetAutoMergingPreviewCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetAutoMergingPreviewCommandOutput>;
+  getAutoMergingPreview(
+    args: GetAutoMergingPreviewCommandInput,
+    cb: (err: any, data?: GetAutoMergingPreviewCommandOutput) => void
+  ): void;
+  getAutoMergingPreview(
+    args: GetAutoMergingPreviewCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetAutoMergingPreviewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCalculatedAttributeDefinitionCommand}
+   */
+  getCalculatedAttributeDefinition(
+    args: GetCalculatedAttributeDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetCalculatedAttributeDefinitionCommandOutput>;
+  getCalculatedAttributeDefinition(
+    args: GetCalculatedAttributeDefinitionCommandInput,
+    cb: (err: any, data?: GetCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+  getCalculatedAttributeDefinition(
+    args: GetCalculatedAttributeDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCalculatedAttributeForProfileCommand}
+   */
+  getCalculatedAttributeForProfile(
+    args: GetCalculatedAttributeForProfileCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetCalculatedAttributeForProfileCommandOutput>;
+  getCalculatedAttributeForProfile(
+    args: GetCalculatedAttributeForProfileCommandInput,
+    cb: (err: any, data?: GetCalculatedAttributeForProfileCommandOutput) => void
+  ): void;
+  getCalculatedAttributeForProfile(
+    args: GetCalculatedAttributeForProfileCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetCalculatedAttributeForProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainCommand}
+   */
+  getDomain(
     args: GetDomainCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetDomainCommandOutput>;
+  getDomain(
+    args: GetDomainCommandInput,
     cb: (err: any, data?: GetDomainCommandOutput) => void
   ): void;
-  public getDomain(
+  getDomain(
     args: GetDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDomainCommandOutput) => void),
-    cb?: (err: any, data?: GetDomainCommandOutput) => void
-  ): Promise<GetDomainCommandOutput> | void {
-    const command = new GetDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetDomainCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns an integration for a domain.</p>
+   * @see {@link GetDomainLayoutCommand}
    */
-  public getIntegration(
+  getDomainLayout(
+    args: GetDomainLayoutCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetDomainLayoutCommandOutput>;
+  getDomainLayout(
+    args: GetDomainLayoutCommandInput,
+    cb: (err: any, data?: GetDomainLayoutCommandOutput) => void
+  ): void;
+  getDomainLayout(
+    args: GetDomainLayoutCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetDomainLayoutCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainObjectTypeCommand}
+   */
+  getDomainObjectType(
+    args: GetDomainObjectTypeCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetDomainObjectTypeCommandOutput>;
+  getDomainObjectType(
+    args: GetDomainObjectTypeCommandInput,
+    cb: (err: any, data?: GetDomainObjectTypeCommandOutput) => void
+  ): void;
+  getDomainObjectType(
+    args: GetDomainObjectTypeCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetDomainObjectTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEventStreamCommand}
+   */
+  getEventStream(
+    args: GetEventStreamCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetEventStreamCommandOutput>;
+  getEventStream(
+    args: GetEventStreamCommandInput,
+    cb: (err: any, data?: GetEventStreamCommandOutput) => void
+  ): void;
+  getEventStream(
+    args: GetEventStreamCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetEventStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEventTriggerCommand}
+   */
+  getEventTrigger(
+    args: GetEventTriggerCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetEventTriggerCommandOutput>;
+  getEventTrigger(
+    args: GetEventTriggerCommandInput,
+    cb: (err: any, data?: GetEventTriggerCommandOutput) => void
+  ): void;
+  getEventTrigger(
+    args: GetEventTriggerCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetEventTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdentityResolutionJobCommand}
+   */
+  getIdentityResolutionJob(
+    args: GetIdentityResolutionJobCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetIdentityResolutionJobCommandOutput>;
+  getIdentityResolutionJob(
+    args: GetIdentityResolutionJobCommandInput,
+    cb: (err: any, data?: GetIdentityResolutionJobCommandOutput) => void
+  ): void;
+  getIdentityResolutionJob(
+    args: GetIdentityResolutionJobCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetIdentityResolutionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationCommand}
+   */
+  getIntegration(
     args: GetIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<GetIntegrationCommandOutput>;
-  public getIntegration(
+  getIntegration(
     args: GetIntegrationCommandInput,
     cb: (err: any, data?: GetIntegrationCommandOutput) => void
   ): void;
-  public getIntegration(
+  getIntegration(
     args: GetIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: GetIntegrationCommandOutput) => void
   ): void;
-  public getIntegration(
-    args: GetIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: GetIntegrationCommandOutput) => void
-  ): Promise<GetIntegrationCommandOutput> | void {
-    const command = new GetIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and subject to change.</p>
-   *          <p>Before calling this API, use <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> or
-   *             <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to
-   *          enable identity resolution: set <code>Matching</code> to true.</p>
-   *          <p>GetMatches returns potentially matching profiles, based on the results of the latest run
-   *          of a machine learning process. </p>
-   *          <important>
-   *             <p>Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles.
-   *             The results are returned up to seven days after the Saturday run.</p>
-   *          </important>
-   *
-   *          <p>Amazon Connect uses the following profile attributes to identify matches:</p>
-   *          <ul>
-   *             <li>
-   *                <p>PhoneNumber</p>
-   *             </li>
-   *             <li>
-   *                <p>HomePhoneNumber</p>
-   *             </li>
-   *             <li>
-   *                <p>BusinessPhoneNumber</p>
-   *             </li>
-   *             <li>
-   *                <p>MobilePhoneNumber</p>
-   *             </li>
-   *             <li>
-   *                <p>EmailAddress</p>
-   *             </li>
-   *             <li>
-   *                <p>PersonalEmailAddress</p>
-   *             </li>
-   *             <li>
-   *                <p>BusinessEmailAddress</p>
-   *             </li>
-   *             <li>
-   *                <p>FullName</p>
-   *             </li>
-   *             <li>
-   *                <p>BusinessName</p>
-   *             </li>
-   *          </ul>
-   *          <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing
-   *          email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and
-   *             <b>johndoe@anycompany.com</b>, or different phone number
-   *          formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>
+   * @see {@link GetMatchesCommand}
    */
-  public getMatches(args: GetMatchesCommandInput, options?: __HttpHandlerOptions): Promise<GetMatchesCommandOutput>;
-  public getMatches(args: GetMatchesCommandInput, cb: (err: any, data?: GetMatchesCommandOutput) => void): void;
-  public getMatches(
+  getMatches(
     args: GetMatchesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetMatchesCommandOutput>;
+  getMatches(
+    args: GetMatchesCommandInput,
     cb: (err: any, data?: GetMatchesCommandOutput) => void
   ): void;
-  public getMatches(
+  getMatches(
     args: GetMatchesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMatchesCommandOutput) => void),
-    cb?: (err: any, data?: GetMatchesCommandOutput) => void
-  ): Promise<GetMatchesCommandOutput> | void {
-    const command = new GetMatchesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetMatchesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns the object types for a specific domain.</p>
+   * @see {@link GetObjectTypeAttributeStatisticsCommand}
    */
-  public getProfileObjectType(
+  getObjectTypeAttributeStatistics(
+    args: GetObjectTypeAttributeStatisticsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetObjectTypeAttributeStatisticsCommandOutput>;
+  getObjectTypeAttributeStatistics(
+    args: GetObjectTypeAttributeStatisticsCommandInput,
+    cb: (err: any, data?: GetObjectTypeAttributeStatisticsCommandOutput) => void
+  ): void;
+  getObjectTypeAttributeStatistics(
+    args: GetObjectTypeAttributeStatisticsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetObjectTypeAttributeStatisticsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProfileHistoryRecordCommand}
+   */
+  getProfileHistoryRecord(
+    args: GetProfileHistoryRecordCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetProfileHistoryRecordCommandOutput>;
+  getProfileHistoryRecord(
+    args: GetProfileHistoryRecordCommandInput,
+    cb: (err: any, data?: GetProfileHistoryRecordCommandOutput) => void
+  ): void;
+  getProfileHistoryRecord(
+    args: GetProfileHistoryRecordCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetProfileHistoryRecordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProfileObjectTypeCommand}
+   */
+  getProfileObjectType(
     args: GetProfileObjectTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<GetProfileObjectTypeCommandOutput>;
-  public getProfileObjectType(
+  getProfileObjectType(
     args: GetProfileObjectTypeCommandInput,
     cb: (err: any, data?: GetProfileObjectTypeCommandOutput) => void
   ): void;
-  public getProfileObjectType(
+  getProfileObjectType(
     args: GetProfileObjectTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: GetProfileObjectTypeCommandOutput) => void
   ): void;
-  public getProfileObjectType(
-    args: GetProfileObjectTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetProfileObjectTypeCommandOutput) => void),
-    cb?: (err: any, data?: GetProfileObjectTypeCommandOutput) => void
-  ): Promise<GetProfileObjectTypeCommandOutput> | void {
-    const command = new GetProfileObjectTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the template information for a specific object type.</p>
-   *          <p>A template is a predefined ProfileObjectType, such as “Salesforce-Account” or
-   *          “Salesforce-Contact.” When a user sends a ProfileObject, using the PutProfileObject API,
-   *          with an ObjectTypeName that matches one of the TemplateIds, it uses the mappings from the
-   *          template.</p>
+   * @see {@link GetProfileObjectTypeTemplateCommand}
    */
-  public getProfileObjectTypeTemplate(
+  getProfileObjectTypeTemplate(
     args: GetProfileObjectTypeTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<GetProfileObjectTypeTemplateCommandOutput>;
-  public getProfileObjectTypeTemplate(
+  getProfileObjectTypeTemplate(
     args: GetProfileObjectTypeTemplateCommandInput,
     cb: (err: any, data?: GetProfileObjectTypeTemplateCommandOutput) => void
   ): void;
-  public getProfileObjectTypeTemplate(
+  getProfileObjectTypeTemplate(
     args: GetProfileObjectTypeTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: GetProfileObjectTypeTemplateCommandOutput) => void
   ): void;
-  public getProfileObjectTypeTemplate(
-    args: GetProfileObjectTypeTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetProfileObjectTypeTemplateCommandOutput) => void),
-    cb?: (err: any, data?: GetProfileObjectTypeTemplateCommandOutput) => void
-  ): Promise<GetProfileObjectTypeTemplateCommandOutput> | void {
-    const command = new GetProfileObjectTypeTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all of the integrations associated to a specific URI in the AWS account.</p>
+   * @see {@link GetProfileRecommendationsCommand}
    */
-  public listAccountIntegrations(
+  getProfileRecommendations(
+    args: GetProfileRecommendationsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetProfileRecommendationsCommandOutput>;
+  getProfileRecommendations(
+    args: GetProfileRecommendationsCommandInput,
+    cb: (err: any, data?: GetProfileRecommendationsCommandOutput) => void
+  ): void;
+  getProfileRecommendations(
+    args: GetProfileRecommendationsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetProfileRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommenderCommand}
+   */
+  getRecommender(
+    args: GetRecommenderCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetRecommenderCommandOutput>;
+  getRecommender(
+    args: GetRecommenderCommandInput,
+    cb: (err: any, data?: GetRecommenderCommandOutput) => void
+  ): void;
+  getRecommender(
+    args: GetRecommenderCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommenderFilterCommand}
+   */
+  getRecommenderFilter(
+    args: GetRecommenderFilterCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetRecommenderFilterCommandOutput>;
+  getRecommenderFilter(
+    args: GetRecommenderFilterCommandInput,
+    cb: (err: any, data?: GetRecommenderFilterCommandOutput) => void
+  ): void;
+  getRecommenderFilter(
+    args: GetRecommenderFilterCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetRecommenderFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommenderSchemaCommand}
+   */
+  getRecommenderSchema(
+    args: GetRecommenderSchemaCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetRecommenderSchemaCommandOutput>;
+  getRecommenderSchema(
+    args: GetRecommenderSchemaCommandInput,
+    cb: (err: any, data?: GetRecommenderSchemaCommandOutput) => void
+  ): void;
+  getRecommenderSchema(
+    args: GetRecommenderSchemaCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetRecommenderSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSegmentDefinitionCommand}
+   */
+  getSegmentDefinition(
+    args: GetSegmentDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetSegmentDefinitionCommandOutput>;
+  getSegmentDefinition(
+    args: GetSegmentDefinitionCommandInput,
+    cb: (err: any, data?: GetSegmentDefinitionCommandOutput) => void
+  ): void;
+  getSegmentDefinition(
+    args: GetSegmentDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetSegmentDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSegmentEstimateCommand}
+   */
+  getSegmentEstimate(
+    args: GetSegmentEstimateCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetSegmentEstimateCommandOutput>;
+  getSegmentEstimate(
+    args: GetSegmentEstimateCommandInput,
+    cb: (err: any, data?: GetSegmentEstimateCommandOutput) => void
+  ): void;
+  getSegmentEstimate(
+    args: GetSegmentEstimateCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetSegmentEstimateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSegmentMembershipCommand}
+   */
+  getSegmentMembership(
+    args: GetSegmentMembershipCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetSegmentMembershipCommandOutput>;
+  getSegmentMembership(
+    args: GetSegmentMembershipCommandInput,
+    cb: (err: any, data?: GetSegmentMembershipCommandOutput) => void
+  ): void;
+  getSegmentMembership(
+    args: GetSegmentMembershipCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetSegmentMembershipCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSegmentSnapshotCommand}
+   */
+  getSegmentSnapshot(
+    args: GetSegmentSnapshotCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetSegmentSnapshotCommandOutput>;
+  getSegmentSnapshot(
+    args: GetSegmentSnapshotCommandInput,
+    cb: (err: any, data?: GetSegmentSnapshotCommandOutput) => void
+  ): void;
+  getSegmentSnapshot(
+    args: GetSegmentSnapshotCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetSegmentSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSegmentSubscriptionCommand}
+   */
+  getSegmentSubscription(
+    args: GetSegmentSubscriptionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetSegmentSubscriptionCommandOutput>;
+  getSegmentSubscription(
+    args: GetSegmentSubscriptionCommandInput,
+    cb: (err: any, data?: GetSegmentSubscriptionCommandOutput) => void
+  ): void;
+  getSegmentSubscription(
+    args: GetSegmentSubscriptionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetSegmentSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSimilarProfilesCommand}
+   */
+  getSimilarProfiles(
+    args: GetSimilarProfilesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetSimilarProfilesCommandOutput>;
+  getSimilarProfiles(
+    args: GetSimilarProfilesCommandInput,
+    cb: (err: any, data?: GetSimilarProfilesCommandOutput) => void
+  ): void;
+  getSimilarProfiles(
+    args: GetSimilarProfilesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetSimilarProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStreamForSegmentsCommand}
+   */
+  getStreamForSegments(
+    args: GetStreamForSegmentsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetStreamForSegmentsCommandOutput>;
+  getStreamForSegments(
+    args: GetStreamForSegmentsCommandInput,
+    cb: (err: any, data?: GetStreamForSegmentsCommandOutput) => void
+  ): void;
+  getStreamForSegments(
+    args: GetStreamForSegmentsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetStreamForSegmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUploadJobCommand}
+   */
+  getUploadJob(
+    args: GetUploadJobCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetUploadJobCommandOutput>;
+  getUploadJob(
+    args: GetUploadJobCommandInput,
+    cb: (err: any, data?: GetUploadJobCommandOutput) => void
+  ): void;
+  getUploadJob(
+    args: GetUploadJobCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetUploadJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUploadJobPathCommand}
+   */
+  getUploadJobPath(
+    args: GetUploadJobPathCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetUploadJobPathCommandOutput>;
+  getUploadJobPath(
+    args: GetUploadJobPathCommandInput,
+    cb: (err: any, data?: GetUploadJobPathCommandOutput) => void
+  ): void;
+  getUploadJobPath(
+    args: GetUploadJobPathCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetUploadJobPathCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowCommand}
+   */
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetWorkflowCommandOutput>;
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    cb: (err: any, data?: GetWorkflowCommandOutput) => void
+  ): void;
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowStepsCommand}
+   */
+  getWorkflowSteps(
+    args: GetWorkflowStepsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<GetWorkflowStepsCommandOutput>;
+  getWorkflowSteps(
+    args: GetWorkflowStepsCommandInput,
+    cb: (err: any, data?: GetWorkflowStepsCommandOutput) => void
+  ): void;
+  getWorkflowSteps(
+    args: GetWorkflowStepsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: GetWorkflowStepsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountIntegrationsCommand}
+   */
+  listAccountIntegrations(
     args: ListAccountIntegrationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<ListAccountIntegrationsCommandOutput>;
-  public listAccountIntegrations(
+  listAccountIntegrations(
     args: ListAccountIntegrationsCommandInput,
     cb: (err: any, data?: ListAccountIntegrationsCommandOutput) => void
   ): void;
-  public listAccountIntegrations(
+  listAccountIntegrations(
     args: ListAccountIntegrationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: ListAccountIntegrationsCommandOutput) => void
   ): void;
-  public listAccountIntegrations(
-    args: ListAccountIntegrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccountIntegrationsCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountIntegrationsCommandOutput) => void
-  ): Promise<ListAccountIntegrationsCommandOutput> | void {
-    const command = new ListAccountIntegrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of all the domains for an AWS account that have been created.</p>
+   * @see {@link ListCalculatedAttributeDefinitionsCommand}
    */
-  public listDomains(args: ListDomainsCommandInput, options?: __HttpHandlerOptions): Promise<ListDomainsCommandOutput>;
-  public listDomains(args: ListDomainsCommandInput, cb: (err: any, data?: ListDomainsCommandOutput) => void): void;
-  public listDomains(
+  listCalculatedAttributeDefinitions(
+    args: ListCalculatedAttributeDefinitionsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListCalculatedAttributeDefinitionsCommandOutput>;
+  listCalculatedAttributeDefinitions(
+    args: ListCalculatedAttributeDefinitionsCommandInput,
+    cb: (err: any, data?: ListCalculatedAttributeDefinitionsCommandOutput) => void
+  ): void;
+  listCalculatedAttributeDefinitions(
+    args: ListCalculatedAttributeDefinitionsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListCalculatedAttributeDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCalculatedAttributesForProfileCommand}
+   */
+  listCalculatedAttributesForProfile(
+    args: ListCalculatedAttributesForProfileCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListCalculatedAttributesForProfileCommandOutput>;
+  listCalculatedAttributesForProfile(
+    args: ListCalculatedAttributesForProfileCommandInput,
+    cb: (err: any, data?: ListCalculatedAttributesForProfileCommandOutput) => void
+  ): void;
+  listCalculatedAttributesForProfile(
+    args: ListCalculatedAttributesForProfileCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListCalculatedAttributesForProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDomainLayoutsCommand}
+   */
+  listDomainLayouts(
+    args: ListDomainLayoutsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListDomainLayoutsCommandOutput>;
+  listDomainLayouts(
+    args: ListDomainLayoutsCommandInput,
+    cb: (err: any, data?: ListDomainLayoutsCommandOutput) => void
+  ): void;
+  listDomainLayouts(
+    args: ListDomainLayoutsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListDomainLayoutsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDomainObjectTypesCommand}
+   */
+  listDomainObjectTypes(
+    args: ListDomainObjectTypesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListDomainObjectTypesCommandOutput>;
+  listDomainObjectTypes(
+    args: ListDomainObjectTypesCommandInput,
+    cb: (err: any, data?: ListDomainObjectTypesCommandOutput) => void
+  ): void;
+  listDomainObjectTypes(
+    args: ListDomainObjectTypesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListDomainObjectTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDomainsCommand}
+   */
+  listDomains(): Promise<ListDomainsCommandOutput>;
+  listDomains(
     args: ListDomainsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListDomainsCommandOutput>;
+  listDomains(
+    args: ListDomainsCommandInput,
     cb: (err: any, data?: ListDomainsCommandOutput) => void
   ): void;
-  public listDomains(
+  listDomains(
     args: ListDomainsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDomainsCommandOutput) => void),
-    cb?: (err: any, data?: ListDomainsCommandOutput) => void
-  ): Promise<ListDomainsCommandOutput> | void {
-    const command = new ListDomainsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListDomainsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all of the integrations in your domain.</p>
+   * @see {@link ListEventStreamsCommand}
    */
-  public listIntegrations(
+  listEventStreams(
+    args: ListEventStreamsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListEventStreamsCommandOutput>;
+  listEventStreams(
+    args: ListEventStreamsCommandInput,
+    cb: (err: any, data?: ListEventStreamsCommandOutput) => void
+  ): void;
+  listEventStreams(
+    args: ListEventStreamsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListEventStreamsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEventTriggersCommand}
+   */
+  listEventTriggers(
+    args: ListEventTriggersCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListEventTriggersCommandOutput>;
+  listEventTriggers(
+    args: ListEventTriggersCommandInput,
+    cb: (err: any, data?: ListEventTriggersCommandOutput) => void
+  ): void;
+  listEventTriggers(
+    args: ListEventTriggersCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListEventTriggersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdentityResolutionJobsCommand}
+   */
+  listIdentityResolutionJobs(
+    args: ListIdentityResolutionJobsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListIdentityResolutionJobsCommandOutput>;
+  listIdentityResolutionJobs(
+    args: ListIdentityResolutionJobsCommandInput,
+    cb: (err: any, data?: ListIdentityResolutionJobsCommandOutput) => void
+  ): void;
+  listIdentityResolutionJobs(
+    args: ListIdentityResolutionJobsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListIdentityResolutionJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIntegrationsCommand}
+   */
+  listIntegrations(
     args: ListIntegrationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<ListIntegrationsCommandOutput>;
-  public listIntegrations(
+  listIntegrations(
     args: ListIntegrationsCommandInput,
     cb: (err: any, data?: ListIntegrationsCommandOutput) => void
   ): void;
-  public listIntegrations(
+  listIntegrations(
     args: ListIntegrationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: ListIntegrationsCommandOutput) => void
   ): void;
-  public listIntegrations(
-    args: ListIntegrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIntegrationsCommandOutput) => void),
-    cb?: (err: any, data?: ListIntegrationsCommandOutput) => void
-  ): Promise<ListIntegrationsCommandOutput> | void {
-    const command = new ListIntegrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of objects associated with a profile of a given ProfileObjectType.</p>
+   * @see {@link ListObjectTypeAttributesCommand}
    */
-  public listProfileObjects(
+  listObjectTypeAttributes(
+    args: ListObjectTypeAttributesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListObjectTypeAttributesCommandOutput>;
+  listObjectTypeAttributes(
+    args: ListObjectTypeAttributesCommandInput,
+    cb: (err: any, data?: ListObjectTypeAttributesCommandOutput) => void
+  ): void;
+  listObjectTypeAttributes(
+    args: ListObjectTypeAttributesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListObjectTypeAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListObjectTypeAttributeValuesCommand}
+   */
+  listObjectTypeAttributeValues(
+    args: ListObjectTypeAttributeValuesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListObjectTypeAttributeValuesCommandOutput>;
+  listObjectTypeAttributeValues(
+    args: ListObjectTypeAttributeValuesCommandInput,
+    cb: (err: any, data?: ListObjectTypeAttributeValuesCommandOutput) => void
+  ): void;
+  listObjectTypeAttributeValues(
+    args: ListObjectTypeAttributeValuesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListObjectTypeAttributeValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProfileAttributeValuesCommand}
+   */
+  listProfileAttributeValues(
+    args: ListProfileAttributeValuesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListProfileAttributeValuesCommandOutput>;
+  listProfileAttributeValues(
+    args: ListProfileAttributeValuesCommandInput,
+    cb: (err: any, data?: ListProfileAttributeValuesCommandOutput) => void
+  ): void;
+  listProfileAttributeValues(
+    args: ListProfileAttributeValuesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListProfileAttributeValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProfileHistoryRecordsCommand}
+   */
+  listProfileHistoryRecords(
+    args: ListProfileHistoryRecordsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListProfileHistoryRecordsCommandOutput>;
+  listProfileHistoryRecords(
+    args: ListProfileHistoryRecordsCommandInput,
+    cb: (err: any, data?: ListProfileHistoryRecordsCommandOutput) => void
+  ): void;
+  listProfileHistoryRecords(
+    args: ListProfileHistoryRecordsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListProfileHistoryRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProfileObjectsCommand}
+   */
+  listProfileObjects(
     args: ListProfileObjectsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<ListProfileObjectsCommandOutput>;
-  public listProfileObjects(
+  listProfileObjects(
     args: ListProfileObjectsCommandInput,
     cb: (err: any, data?: ListProfileObjectsCommandOutput) => void
   ): void;
-  public listProfileObjects(
+  listProfileObjects(
     args: ListProfileObjectsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: ListProfileObjectsCommandOutput) => void
   ): void;
-  public listProfileObjects(
-    args: ListProfileObjectsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListProfileObjectsCommandOutput) => void),
-    cb?: (err: any, data?: ListProfileObjectsCommandOutput) => void
-  ): Promise<ListProfileObjectsCommandOutput> | void {
-    const command = new ListProfileObjectsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all of the templates available within the service.</p>
+   * @see {@link ListProfileObjectTypesCommand}
    */
-  public listProfileObjectTypes(
+  listProfileObjectTypes(
     args: ListProfileObjectTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<ListProfileObjectTypesCommandOutput>;
-  public listProfileObjectTypes(
+  listProfileObjectTypes(
     args: ListProfileObjectTypesCommandInput,
     cb: (err: any, data?: ListProfileObjectTypesCommandOutput) => void
   ): void;
-  public listProfileObjectTypes(
+  listProfileObjectTypes(
     args: ListProfileObjectTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: ListProfileObjectTypesCommandOutput) => void
   ): void;
-  public listProfileObjectTypes(
-    args: ListProfileObjectTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListProfileObjectTypesCommandOutput) => void),
-    cb?: (err: any, data?: ListProfileObjectTypesCommandOutput) => void
-  ): Promise<ListProfileObjectTypesCommandOutput> | void {
-    const command = new ListProfileObjectTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all of the template information for object types.</p>
+   * @see {@link ListProfileObjectTypeTemplatesCommand}
    */
-  public listProfileObjectTypeTemplates(
+  listProfileObjectTypeTemplates(): Promise<ListProfileObjectTypeTemplatesCommandOutput>;
+  listProfileObjectTypeTemplates(
     args: ListProfileObjectTypeTemplatesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<ListProfileObjectTypeTemplatesCommandOutput>;
-  public listProfileObjectTypeTemplates(
+  listProfileObjectTypeTemplates(
     args: ListProfileObjectTypeTemplatesCommandInput,
     cb: (err: any, data?: ListProfileObjectTypeTemplatesCommandOutput) => void
   ): void;
-  public listProfileObjectTypeTemplates(
+  listProfileObjectTypeTemplates(
     args: ListProfileObjectTypeTemplatesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: ListProfileObjectTypeTemplatesCommandOutput) => void
   ): void;
-  public listProfileObjectTypeTemplates(
-    args: ListProfileObjectTypeTemplatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListProfileObjectTypeTemplatesCommandOutput) => void),
-    cb?: (err: any, data?: ListProfileObjectTypeTemplatesCommandOutput) => void
-  ): Promise<ListProfileObjectTypeTemplatesCommandOutput> | void {
-    const command = new ListProfileObjectTypeTemplatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays the tags associated with an Amazon Connect Customer Profiles resource. In Connect
-   *          Customer Profiles, domains, profile object types, and integrations can be tagged.</p>
+   * @see {@link ListRecommenderFiltersCommand}
    */
-  public listTagsForResource(
+  listRecommenderFilters(
+    args: ListRecommenderFiltersCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListRecommenderFiltersCommandOutput>;
+  listRecommenderFilters(
+    args: ListRecommenderFiltersCommandInput,
+    cb: (err: any, data?: ListRecommenderFiltersCommandOutput) => void
+  ): void;
+  listRecommenderFilters(
+    args: ListRecommenderFiltersCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListRecommenderFiltersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommenderRecipesCommand}
+   */
+  listRecommenderRecipes(): Promise<ListRecommenderRecipesCommandOutput>;
+  listRecommenderRecipes(
+    args: ListRecommenderRecipesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListRecommenderRecipesCommandOutput>;
+  listRecommenderRecipes(
+    args: ListRecommenderRecipesCommandInput,
+    cb: (err: any, data?: ListRecommenderRecipesCommandOutput) => void
+  ): void;
+  listRecommenderRecipes(
+    args: ListRecommenderRecipesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListRecommenderRecipesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendersCommand}
+   */
+  listRecommenders(
+    args: ListRecommendersCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListRecommendersCommandOutput>;
+  listRecommenders(
+    args: ListRecommendersCommandInput,
+    cb: (err: any, data?: ListRecommendersCommandOutput) => void
+  ): void;
+  listRecommenders(
+    args: ListRecommendersCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListRecommendersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommenderSchemasCommand}
+   */
+  listRecommenderSchemas(
+    args: ListRecommenderSchemasCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListRecommenderSchemasCommandOutput>;
+  listRecommenderSchemas(
+    args: ListRecommenderSchemasCommandInput,
+    cb: (err: any, data?: ListRecommenderSchemasCommandOutput) => void
+  ): void;
+  listRecommenderSchemas(
+    args: ListRecommenderSchemasCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListRecommenderSchemasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRuleBasedMatchesCommand}
+   */
+  listRuleBasedMatches(
+    args: ListRuleBasedMatchesCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListRuleBasedMatchesCommandOutput>;
+  listRuleBasedMatches(
+    args: ListRuleBasedMatchesCommandInput,
+    cb: (err: any, data?: ListRuleBasedMatchesCommandOutput) => void
+  ): void;
+  listRuleBasedMatches(
+    args: ListRuleBasedMatchesCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListRuleBasedMatchesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSegmentDefinitionsCommand}
+   */
+  listSegmentDefinitions(
+    args: ListSegmentDefinitionsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListSegmentDefinitionsCommandOutput>;
+  listSegmentDefinitions(
+    args: ListSegmentDefinitionsCommandInput,
+    cb: (err: any, data?: ListSegmentDefinitionsCommandOutput) => void
+  ): void;
+  listSegmentDefinitions(
+    args: ListSegmentDefinitionsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListSegmentDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSegmentSubscriptionEventsCommand}
+   */
+  listSegmentSubscriptionEvents(
+    args: ListSegmentSubscriptionEventsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListSegmentSubscriptionEventsCommandOutput>;
+  listSegmentSubscriptionEvents(
+    args: ListSegmentSubscriptionEventsCommandInput,
+    cb: (err: any, data?: ListSegmentSubscriptionEventsCommandOutput) => void
+  ): void;
+  listSegmentSubscriptionEvents(
+    args: ListSegmentSubscriptionEventsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListSegmentSubscriptionEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and subject to change.</p>
-   *          <p>Runs an AWS Lambda job that does the following:</p>
-   *          <ol>
-   *             <li>
-   *                <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the
-   *                main profile.</p>
-   *             </li>
-   *             <li>
-   *                <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main
-   *                profile.</p>
-   *             </li>
-   *             <li>
-   *                <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p>
-   *             </li>
-   *             <li>
-   *                <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the
-   *                main profile.</p>
-   *             </li>
-   *             <li>
-   *                <p>Standard fields are merged as follows:</p>
-   *                <ol>
-   *                   <li>
-   *                      <p>Fields are always "union"-ed if there are no conflicts in standard fields or
-   *                      attributeKeys.</p>
-   *                   </li>
-   *                   <li>
-   *                      <p>When there are conflicting fields:</p>
-   *
-   *                      <ol>
-   *                         <li>
-   *                            <p>If no <code>SourceProfileIds</code> entry is specified, the main
-   *                            Profile value is always taken. </p>
-   *                         </li>
-   *                         <li>
-   *                            <p>If a <code>SourceProfileIds</code> entry is specified, the specified
-   *                            profileId is always taken, even if it is a NULL value.</p>
-   *                         </li>
-   *                      </ol>
-   *                   </li>
-   *                </ol>
-   *             </li>
-   *          </ol>
-   *          <p>You can use MergeProfiles together with <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>, which
-   *          returns potentially matching profiles, or use it with the results of another matching
-   *          system. After profiles have been merged, they cannot be separated (unmerged).</p>
+   * @see {@link ListUploadJobsCommand}
    */
-  public mergeProfiles(
+  listUploadJobs(
+    args: ListUploadJobsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListUploadJobsCommandOutput>;
+  listUploadJobs(
+    args: ListUploadJobsCommandInput,
+    cb: (err: any, data?: ListUploadJobsCommandOutput) => void
+  ): void;
+  listUploadJobs(
+    args: ListUploadJobsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListUploadJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   */
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<ListWorkflowsCommandOutput>;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
+  ): void;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link MergeProfilesCommand}
+   */
+  mergeProfiles(
     args: MergeProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<MergeProfilesCommandOutput>;
-  public mergeProfiles(
+  mergeProfiles(
     args: MergeProfilesCommandInput,
     cb: (err: any, data?: MergeProfilesCommandOutput) => void
   ): void;
-  public mergeProfiles(
+  mergeProfiles(
     args: MergeProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: MergeProfilesCommandOutput) => void
   ): void;
-  public mergeProfiles(
-    args: MergeProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MergeProfilesCommandOutput) => void),
-    cb?: (err: any, data?: MergeProfilesCommandOutput) => void
-  ): Promise<MergeProfilesCommandOutput> | void {
-    const command = new MergeProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds an integration between the service and a third-party service, which includes
-   *          Amazon AppFlow and Amazon Connect.</p>
-   *          <p>An integration can belong to only one domain.</p>
+   * @see {@link PutDomainObjectTypeCommand}
    */
-  public putIntegration(
+  putDomainObjectType(
+    args: PutDomainObjectTypeCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<PutDomainObjectTypeCommandOutput>;
+  putDomainObjectType(
+    args: PutDomainObjectTypeCommandInput,
+    cb: (err: any, data?: PutDomainObjectTypeCommandOutput) => void
+  ): void;
+  putDomainObjectType(
+    args: PutDomainObjectTypeCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: PutDomainObjectTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutIntegrationCommand}
+   */
+  putIntegration(
     args: PutIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<PutIntegrationCommandOutput>;
-  public putIntegration(
+  putIntegration(
     args: PutIntegrationCommandInput,
     cb: (err: any, data?: PutIntegrationCommandOutput) => void
   ): void;
-  public putIntegration(
+  putIntegration(
     args: PutIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: PutIntegrationCommandOutput) => void
   ): void;
-  public putIntegration(
-    args: PutIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: PutIntegrationCommandOutput) => void
-  ): Promise<PutIntegrationCommandOutput> | void {
-    const command = new PutIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds additional objects to customer profiles of a given ObjectType.</p>
-   *          <p>When adding a specific profile object, like a Contact Trace Record (CTR), an inferred
-   *          profile can get created if it is not mapped to an existing profile. The resulting profile
-   *          will only have a phone number populated in the standard ProfileObject. Any additional CTRs
-   *          with the same phone number will be mapped to the same inferred profile.</p>
-   *          <p>When a ProfileObject is created and if a ProfileObjectType already exists for the
-   *          ProfileObject, it will provide data to a standard profile depending on the
-   *          ProfileObjectType definition.</p>
-   *          <p>PutProfileObject needs an ObjectType, which can be created using
-   *          PutProfileObjectType.</p>
+   * @see {@link PutProfileObjectCommand}
    */
-  public putProfileObject(
+  putProfileObject(
     args: PutProfileObjectCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<PutProfileObjectCommandOutput>;
-  public putProfileObject(
+  putProfileObject(
     args: PutProfileObjectCommandInput,
     cb: (err: any, data?: PutProfileObjectCommandOutput) => void
   ): void;
-  public putProfileObject(
+  putProfileObject(
     args: PutProfileObjectCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: PutProfileObjectCommandOutput) => void
   ): void;
-  public putProfileObject(
-    args: PutProfileObjectCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutProfileObjectCommandOutput) => void),
-    cb?: (err: any, data?: PutProfileObjectCommandOutput) => void
-  ): Promise<PutProfileObjectCommandOutput> | void {
-    const command = new PutProfileObjectCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Defines a ProfileObjectType.</p>
+   * @see {@link PutProfileObjectTypeCommand}
    */
-  public putProfileObjectType(
+  putProfileObjectType(
     args: PutProfileObjectTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<PutProfileObjectTypeCommandOutput>;
-  public putProfileObjectType(
+  putProfileObjectType(
     args: PutProfileObjectTypeCommandInput,
     cb: (err: any, data?: PutProfileObjectTypeCommandOutput) => void
   ): void;
-  public putProfileObjectType(
+  putProfileObjectType(
     args: PutProfileObjectTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: PutProfileObjectTypeCommandOutput) => void
   ): void;
-  public putProfileObjectType(
-    args: PutProfileObjectTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutProfileObjectTypeCommandOutput) => void),
-    cb?: (err: any, data?: PutProfileObjectTypeCommandOutput) => void
-  ): Promise<PutProfileObjectTypeCommandOutput> | void {
-    const command = new PutProfileObjectTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for profiles within a specific domain name using name, phone number, email
-   *          address, account number, or a custom defined index.</p>
+   * @see {@link PutSegmentSubscriptionCommand}
    */
-  public searchProfiles(
+  putSegmentSubscription(
+    args: PutSegmentSubscriptionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<PutSegmentSubscriptionCommandOutput>;
+  putSegmentSubscription(
+    args: PutSegmentSubscriptionCommandInput,
+    cb: (err: any, data?: PutSegmentSubscriptionCommandOutput) => void
+  ): void;
+  putSegmentSubscription(
+    args: PutSegmentSubscriptionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: PutSegmentSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchProfilesCommand}
+   */
+  searchProfiles(
     args: SearchProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<SearchProfilesCommandOutput>;
-  public searchProfiles(
+  searchProfiles(
     args: SearchProfilesCommandInput,
     cb: (err: any, data?: SearchProfilesCommandOutput) => void
   ): void;
-  public searchProfiles(
+  searchProfiles(
     args: SearchProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: SearchProfilesCommandOutput) => void
   ): void;
-  public searchProfiles(
-    args: SearchProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchProfilesCommandOutput) => void),
-    cb?: (err: any, data?: SearchProfilesCommandOutput) => void
-  ): Promise<SearchProfilesCommandOutput> | void {
-    const command = new SearchProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns one or more tags (key-value pairs) to the specified Amazon Connect Customer Profiles
-   *          resource. Tags can help you organize and categorize your resources. You can also use them
-   *          to scope user permissions by granting a user permission to access or change only resources
-   *          with certain tag values. In Connect Customer Profiles, domains, profile object types, and
-   *          integrations can be tagged.</p>
-   *          <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of
-   *          characters.</p>
-   *          <p>You can use the TagResource action with a resource that already has tags. If you specify
-   *          a new tag key, this tag is appended to the list of tags associated with the resource. If
-   *          you specify a tag key that is already associated with the resource, the new tag value that
-   *          you specify replaces the previous value for that tag.</p>
-   *          <p>You can associate as many as 50 tags with a resource.</p>
+   * @see {@link SearchRecommendationsCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  searchRecommendations(
+    args: SearchRecommendationsCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<SearchRecommendationsCommandOutput>;
+  searchRecommendations(
+    args: SearchRecommendationsCommandInput,
+    cb: (err: any, data?: SearchRecommendationsCommandOutput) => void
+  ): void;
+  searchRecommendations(
+    args: SearchRecommendationsCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: SearchRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecommenderCommand}
+   */
+  startRecommender(
+    args: StartRecommenderCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<StartRecommenderCommandOutput>;
+  startRecommender(
+    args: StartRecommenderCommandInput,
+    cb: (err: any, data?: StartRecommenderCommandOutput) => void
+  ): void;
+  startRecommender(
+    args: StartRecommenderCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: StartRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartUploadJobCommand}
+   */
+  startUploadJob(
+    args: StartUploadJobCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<StartUploadJobCommandOutput>;
+  startUploadJob(
+    args: StartUploadJobCommandInput,
+    cb: (err: any, data?: StartUploadJobCommandOutput) => void
+  ): void;
+  startUploadJob(
+    args: StartUploadJobCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: StartUploadJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopRecommenderCommand}
+   */
+  stopRecommender(
+    args: StopRecommenderCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<StopRecommenderCommandOutput>;
+  stopRecommender(
+    args: StopRecommenderCommandInput,
+    cb: (err: any, data?: StopRecommenderCommandOutput) => void
+  ): void;
+  stopRecommender(
+    args: StopRecommenderCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: StopRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopUploadJobCommand}
+   */
+  stopUploadJob(
+    args: StopUploadJobCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<StopUploadJobCommandOutput>;
+  stopUploadJob(
+    args: StopUploadJobCommandInput,
+    cb: (err: any, data?: StopUploadJobCommandOutput) => void
+  ): void;
+  stopUploadJob(
+    args: StopUploadJobCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: StopUploadJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes one or more tags from the specified Amazon Connect Customer Profiles resource. In Connect
-   *          Customer Profiles, domains, profile object types, and integrations can be tagged.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the properties of a domain, including creating or selecting a dead letter queue
-   *          or an encryption key.</p>
-   *          <p>After a domain is created, the name can’t be changed.</p>
-   *          <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> to
-   *          enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity
-   *             resolution</a>: set <code>Matching</code> to true. </p>
+   * @see {@link UpdateCalculatedAttributeDefinitionCommand}
    */
-  public updateDomain(
+  updateCalculatedAttributeDefinition(
+    args: UpdateCalculatedAttributeDefinitionCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<UpdateCalculatedAttributeDefinitionCommandOutput>;
+  updateCalculatedAttributeDefinition(
+    args: UpdateCalculatedAttributeDefinitionCommandInput,
+    cb: (err: any, data?: UpdateCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+  updateCalculatedAttributeDefinition(
+    args: UpdateCalculatedAttributeDefinitionCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: UpdateCalculatedAttributeDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDomainCommand}
+   */
+  updateDomain(
     args: UpdateDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<UpdateDomainCommandOutput>;
-  public updateDomain(args: UpdateDomainCommandInput, cb: (err: any, data?: UpdateDomainCommandOutput) => void): void;
-  public updateDomain(
+  updateDomain(
     args: UpdateDomainCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateDomainCommandOutput) => void
   ): void;
-  public updateDomain(
+  updateDomain(
     args: UpdateDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDomainCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDomainCommandOutput) => void
-  ): Promise<UpdateDomainCommandOutput> | void {
-    const command = new UpdateDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: UpdateDomainCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the properties of a profile. The ProfileId is required for updating a customer
-   *          profile.</p>
-   *          <p>When calling the UpdateProfile API, specifying an empty string value means that any
-   *          existing value will be removed. Not specifying a string value means that any value already
-   *          there will be kept.</p>
+   * @see {@link UpdateDomainLayoutCommand}
    */
-  public updateProfile(
+  updateDomainLayout(
+    args: UpdateDomainLayoutCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<UpdateDomainLayoutCommandOutput>;
+  updateDomainLayout(
+    args: UpdateDomainLayoutCommandInput,
+    cb: (err: any, data?: UpdateDomainLayoutCommandOutput) => void
+  ): void;
+  updateDomainLayout(
+    args: UpdateDomainLayoutCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: UpdateDomainLayoutCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEventTriggerCommand}
+   */
+  updateEventTrigger(
+    args: UpdateEventTriggerCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<UpdateEventTriggerCommandOutput>;
+  updateEventTrigger(
+    args: UpdateEventTriggerCommandInput,
+    cb: (err: any, data?: UpdateEventTriggerCommandOutput) => void
+  ): void;
+  updateEventTrigger(
+    args: UpdateEventTriggerCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: UpdateEventTriggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProfileCommand}
+   */
+  updateProfile(
     args: UpdateProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CustomerProfilesRequestOptions
   ): Promise<UpdateProfileCommandOutput>;
-  public updateProfile(
+  updateProfile(
     args: UpdateProfileCommandInput,
     cb: (err: any, data?: UpdateProfileCommandOutput) => void
   ): void;
-  public updateProfile(
+  updateProfile(
     args: UpdateProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: CustomerProfilesRequestOptions,
     cb: (err: any, data?: UpdateProfileCommandOutput) => void
   ): void;
-  public updateProfile(
-    args: UpdateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateProfileCommandOutput) => void),
-    cb?: (err: any, data?: UpdateProfileCommandOutput) => void
-  ): Promise<UpdateProfileCommandOutput> | void {
-    const command = new UpdateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateRecommenderCommand}
+   */
+  updateRecommender(
+    args: UpdateRecommenderCommandInput,
+    options?: CustomerProfilesRequestOptions
+  ): Promise<UpdateRecommenderCommandOutput>;
+  updateRecommender(
+    args: UpdateRecommenderCommandInput,
+    cb: (err: any, data?: UpdateRecommenderCommandOutput) => void
+  ): void;
+  updateRecommender(
+    args: UpdateRecommenderCommandInput,
+    options: CustomerProfilesRequestOptions,
+    cb: (err: any, data?: UpdateRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSimilarProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSimilarProfilesCommandOutput}.
+   */
+  paginateGetSimilarProfiles(
+    args: GetSimilarProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSimilarProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListDomainLayoutsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDomainLayoutsCommandOutput}.
+   */
+  paginateListDomainLayouts(
+    args: ListDomainLayoutsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDomainLayoutsCommandOutput>;
+
+  /**
+   * @see {@link ListDomainObjectTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDomainObjectTypesCommandOutput}.
+   */
+  paginateListDomainObjectTypes(
+    args: ListDomainObjectTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDomainObjectTypesCommandOutput>;
+
+  /**
+   * @see {@link ListEventStreamsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventStreamsCommandOutput}.
+   */
+  paginateListEventStreams(
+    args: ListEventStreamsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventStreamsCommandOutput>;
+
+  /**
+   * @see {@link ListEventTriggersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventTriggersCommandOutput}.
+   */
+  paginateListEventTriggers(
+    args: ListEventTriggersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventTriggersCommandOutput>;
+
+  /**
+   * @see {@link ListObjectTypeAttributesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListObjectTypeAttributesCommandOutput}.
+   */
+  paginateListObjectTypeAttributes(
+    args: ListObjectTypeAttributesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListObjectTypeAttributesCommandOutput>;
+
+  /**
+   * @see {@link ListRecommenderFiltersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommenderFiltersCommandOutput}.
+   */
+  paginateListRecommenderFilters(
+    args: ListRecommenderFiltersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommenderFiltersCommandOutput>;
+
+  /**
+   * @see {@link ListRecommenderRecipesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommenderRecipesCommandOutput}.
+   */
+  paginateListRecommenderRecipes(
+    args?: ListRecommenderRecipesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommenderRecipesCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendersCommandOutput}.
+   */
+  paginateListRecommenders(
+    args: ListRecommendersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendersCommandOutput>;
+
+  /**
+   * @see {@link ListRecommenderSchemasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommenderSchemasCommandOutput}.
+   */
+  paginateListRecommenderSchemas(
+    args: ListRecommenderSchemasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommenderSchemasCommandOutput>;
+
+  /**
+   * @see {@link ListRuleBasedMatchesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRuleBasedMatchesCommandOutput}.
+   */
+  paginateListRuleBasedMatches(
+    args: ListRuleBasedMatchesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRuleBasedMatchesCommandOutput>;
+
+  /**
+   * @see {@link ListSegmentDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSegmentDefinitionsCommandOutput}.
+   */
+  paginateListSegmentDefinitions(
+    args: ListSegmentDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSegmentDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListSegmentSubscriptionEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSegmentSubscriptionEventsCommandOutput}.
+   */
+  paginateListSegmentSubscriptionEvents(
+    args: ListSegmentSubscriptionEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSegmentSubscriptionEventsCommandOutput>;
+
+  /**
+   * @see {@link ListUploadJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUploadJobsCommandOutput}.
+   */
+  paginateListUploadJobs(
+    args: ListUploadJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUploadJobsCommandOutput>;
 }
+
+/**
+ * <fullname>Connect Customer Customer Profiles</fullname>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html">Customer Profiles actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html">Customer Profiles data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>Connect Customer Customer Profiles is a unified customer profile for your contact
+ *          center that has pre-built connectors powered by AppFlow that make it easy to combine
+ *          customer information from third party applications, such as Salesforce (CRM), ServiceNow
+ *          (ITSM), and your enterprise resource planning (ERP), with contact history from your Connect Customer contact center. </p>
+ *          <p>For more information about the Connect Customer Customer Profiles feature, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html">Use Customer
+ *             Profiles</a> in the <i>Connect Customer Administrator's Guide</i>. </p>
+ * @public
+ */
+export class CustomerProfiles extends CustomerProfilesClient implements CustomerProfiles {}
+createAggregatedClient(commands, CustomerProfiles, { paginators });

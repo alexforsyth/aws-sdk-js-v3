@@ -1,0 +1,125 @@
+======================== minimal response ========================
+[status] 400
+  
+content-type: application/xml
+
+[Uint8Array (xml)]
+<ErrorResponse xmlns="https://placeholder.amazonaws.com">
+    <Error>
+        <Type>
+            Sender
+        </Type>
+        <Code>
+            KeySigningKeyWithActiveStatusNotFound
+        </Code>
+    </Error>
+    <RequestId>
+        00000000-0000-4000-8000-000000000000
+    </RequestId>
+</ErrorResponse>
+
+
+--- [error name & message] ---
+KeySigningKeyWithActiveStatusNotFound: UnknownError
+
+--- [error object] ---
+{
+  $fault: "client",
+  $retryable: (undefined),
+  $metadata: {
+    httpStatusCode: (number) 400,
+    requestId: "00000000-0000-4000-8000-000000000000",
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  },
+  name: "KeySigningKeyWithActiveStatusNotFound",
+  message: "UnknownError",
+  Error: {
+    Type: "Sender",
+    Code: "KeySigningKeyWithActiveStatusNotFound"
+  },
+  RequestId: "00000000-0000-4000-8000-000000000000",
+  xmlns: "https://placeholder.amazonaws.com",
+  Type: "Sender",
+  Code: "KeySigningKeyWithActiveStatusNotFound"
+}
+
+======================== w/ optional fields ========================
+[status] 400
+  
+content-type: application/xml
+
+[Uint8Array (xml)]
+<ErrorResponse xmlns="https://placeholder.amazonaws.com">
+    <Error>
+        <Type>
+            Sender
+        </Type>
+        <Code>
+            KeySigningKeyWithActiveStatusNotFound
+        </Code>
+        <message>
+            __message__
+        </message>
+    </Error>
+    <RequestId>
+        00000000-0000-4000-8000-000000000000
+    </RequestId>
+</ErrorResponse>
+
+
+--- [error name & message] ---
+KeySigningKeyWithActiveStatusNotFound: __message__
+
+--- [error object] ---
+{
+  $fault: "client",
+  $retryable: (undefined),
+  $metadata: {
+    httpStatusCode: (number) 400,
+    requestId: "00000000-0000-4000-8000-000000000000",
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  },
+  name: "KeySigningKeyWithActiveStatusNotFound",
+  message: "__message__",
+  Error: {
+    Type: "Sender",
+    Code: "KeySigningKeyWithActiveStatusNotFound",
+    message: "__message__"
+  },
+  RequestId: "00000000-0000-4000-8000-000000000000",
+  xmlns: "https://placeholder.amazonaws.com",
+  Type: "Sender",
+  Code: "KeySigningKeyWithActiveStatusNotFound"
+}
+
+======================== frontend error ========================
+[status] 500
+  
+content-type: text/html
+
+[Uint8Array (text)]
+An unmodeled error occurred in a front end layer.
+
+
+--- [error name & message] ---
+Error: @aws-sdk XML parse error: unexpected content.
+  Deserialization error: to see the raw response, inspect the hidden field {error}.$response on this object.
+
+--- [error object] ---
+{
+  $metadata: {
+    httpStatusCode: (number) 500,
+    requestId: (undefined),
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  }
+}
+

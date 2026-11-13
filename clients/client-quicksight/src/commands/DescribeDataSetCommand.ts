@@ -1,95 +1,801 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDataSetRequest, DescribeDataSetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeDataSetCommand,
-  serializeAws_restJson1DescribeDataSetCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDataSetRequest, DescribeDataSetResponse } from "../models/models_4";
+import { DescribeDataSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDataSetCommand}.
+ */
 export interface DescribeDataSetCommandInput extends DescribeDataSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDataSetCommand}.
+ */
 export interface DescribeDataSetCommandOutput extends DescribeDataSetResponse, __MetadataBearer {}
 
 /**
- * <p>Describes a dataset. </p>
+ * <p>Describes a dataset.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { QuickSightClient, DescribeDataSetCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, DescribeDataSetCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // DescribeDataSetRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   DataSetId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDataSetCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDataSetResponse
+ * //   DataSet: { // DataSet
+ * //     Arn: "STRING_VALUE",
+ * //     DataSetId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     CreatedTime: new Date("TIMESTAMP"),
+ * //     LastUpdatedTime: new Date("TIMESTAMP"),
+ * //     PhysicalTableMap: { // PhysicalTableMap
+ * //       "<keys>": { // PhysicalTable Union: only one key present
+ * //         RelationalTable: { // RelationalTable
+ * //           DataSourceArn: "STRING_VALUE", // required
+ * //           Catalog: "STRING_VALUE",
+ * //           Schema: "STRING_VALUE",
+ * //           Name: "STRING_VALUE", // required
+ * //           InputColumns: [ // InputColumnList // required
+ * //             { // InputColumn
+ * //               Name: "STRING_VALUE", // required
+ * //               Id: "STRING_VALUE",
+ * //               Type: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME" || "BIT" || "BOOLEAN" || "JSON" || "SEMISTRUCT", // required
+ * //               SubType: "FLOAT" || "FIXED",
+ * //             },
+ * //           ],
+ * //         },
+ * //         CustomSql: { // CustomSql
+ * //           DataSourceArn: "STRING_VALUE", // required
+ * //           Name: "STRING_VALUE", // required
+ * //           SqlQuery: "STRING_VALUE", // required
+ * //           Columns: [
+ * //             {
+ * //               Name: "STRING_VALUE", // required
+ * //               Id: "STRING_VALUE",
+ * //               Type: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME" || "BIT" || "BOOLEAN" || "JSON" || "SEMISTRUCT", // required
+ * //               SubType: "FLOAT" || "FIXED",
+ * //             },
+ * //           ],
+ * //         },
+ * //         S3Source: { // S3Source
+ * //           DataSourceArn: "STRING_VALUE", // required
+ * //           UploadSettings: { // UploadSettings
+ * //             Format: "CSV" || "TSV" || "CLF" || "ELF" || "XLSX" || "JSON",
+ * //             StartFromRow: Number("int"),
+ * //             ContainsHeader: true || false,
+ * //             TextQualifier: "DOUBLE_QUOTE" || "SINGLE_QUOTE",
+ * //             Delimiter: "STRING_VALUE",
+ * //             CustomCellAddressRange: "STRING_VALUE",
+ * //           },
+ * //           InputColumns: [ // required
+ * //             {
+ * //               Name: "STRING_VALUE", // required
+ * //               Id: "STRING_VALUE",
+ * //               Type: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME" || "BIT" || "BOOLEAN" || "JSON" || "SEMISTRUCT", // required
+ * //               SubType: "FLOAT" || "FIXED",
+ * //             },
+ * //           ],
+ * //         },
+ * //         SaaSTable: { // SaaSTable
+ * //           DataSourceArn: "STRING_VALUE", // required
+ * //           TablePath: [ // TablePathElementList // required
+ * //             { // TablePathElement
+ * //               Name: "STRING_VALUE",
+ * //               Id: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //           InputColumns: [ // required
+ * //             {
+ * //               Name: "STRING_VALUE", // required
+ * //               Id: "STRING_VALUE",
+ * //               Type: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME" || "BIT" || "BOOLEAN" || "JSON" || "SEMISTRUCT", // required
+ * //               SubType: "FLOAT" || "FIXED",
+ * //             },
+ * //           ],
+ * //         },
+ * //         FileSource: { // FileSource
+ * //           DataSourceArn: "STRING_VALUE", // required
+ * //           UploadSettings: {
+ * //             Format: "CSV" || "TSV" || "CLF" || "ELF" || "XLSX" || "JSON",
+ * //             StartFromRow: Number("int"),
+ * //             ContainsHeader: true || false,
+ * //             TextQualifier: "DOUBLE_QUOTE" || "SINGLE_QUOTE",
+ * //             Delimiter: "STRING_VALUE",
+ * //             CustomCellAddressRange: "STRING_VALUE",
+ * //           },
+ * //           SheetIndex: Number("int"), // required
+ * //           InputColumns: [ // required
+ * //             {
+ * //               Name: "STRING_VALUE", // required
+ * //               Id: "STRING_VALUE",
+ * //               Type: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME" || "BIT" || "BOOLEAN" || "JSON" || "SEMISTRUCT", // required
+ * //               SubType: "FLOAT" || "FIXED",
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //     LogicalTableMap: { // LogicalTableMap
+ * //       "<keys>": { // LogicalTable
+ * //         Alias: "STRING_VALUE", // required
+ * //         DataTransforms: [ // TransformOperationList
+ * //           { // TransformOperation Union: only one key present
+ * //             ProjectOperation: { // ProjectOperation
+ * //               Alias: "STRING_VALUE",
+ * //               Source: { // TransformOperationSource
+ * //                 TransformOperationId: "STRING_VALUE", // required
+ * //                 ColumnIdMappings: [ // DataSetColumnIdMappingList
+ * //                   { // DataSetColumnIdMapping
+ * //                     SourceColumnId: "STRING_VALUE", // required
+ * //                     TargetColumnId: "STRING_VALUE", // required
+ * //                   },
+ * //                 ],
+ * //               },
+ * //               ProjectedColumns: [ // ProjectedColumnNameList // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //             FilterOperation: { // FilterOperation
+ * //               ConditionExpression: "STRING_VALUE",
+ * //               StringFilterCondition: { // DataSetStringFilterCondition
+ * //                 ColumnName: "STRING_VALUE",
+ * //                 ComparisonFilterCondition: { // DataSetStringComparisonFilterCondition
+ * //                   Operator: "EQUALS" || "DOES_NOT_EQUAL" || "CONTAINS" || "DOES_NOT_CONTAIN" || "STARTS_WITH" || "ENDS_WITH", // required
+ * //                   Value: { // DataSetStringFilterValue
+ * //                     StaticValue: "STRING_VALUE",
+ * //                   },
+ * //                 },
+ * //                 ListFilterCondition: { // DataSetStringListFilterCondition
+ * //                   Operator: "INCLUDE" || "EXCLUDE", // required
+ * //                   Values: { // DataSetStringListFilterValue
+ * //                     StaticValues: [ // DataSetStringFilterStaticValueList
+ * //                       "STRING_VALUE",
+ * //                     ],
+ * //                   },
+ * //                 },
+ * //               },
+ * //               NumericFilterCondition: { // DataSetNumericFilterCondition
+ * //                 ColumnName: "STRING_VALUE",
+ * //                 ComparisonFilterCondition: { // DataSetNumericComparisonFilterCondition
+ * //                   Operator: "EQUALS" || "DOES_NOT_EQUAL" || "GREATER_THAN" || "GREATER_THAN_OR_EQUALS_TO" || "LESS_THAN" || "LESS_THAN_OR_EQUALS_TO", // required
+ * //                   Value: { // DataSetNumericFilterValue
+ * //                     StaticValue: Number("double"),
+ * //                   },
+ * //                 },
+ * //                 RangeFilterCondition: { // DataSetNumericRangeFilterCondition
+ * //                   RangeMinimum: {
+ * //                     StaticValue: Number("double"),
+ * //                   },
+ * //                   RangeMaximum: {
+ * //                     StaticValue: Number("double"),
+ * //                   },
+ * //                   IncludeMinimum: true || false,
+ * //                   IncludeMaximum: true || false,
+ * //                 },
+ * //               },
+ * //               DateFilterCondition: { // DataSetDateFilterCondition
+ * //                 ColumnName: "STRING_VALUE",
+ * //                 ComparisonFilterCondition: { // DataSetDateComparisonFilterCondition
+ * //                   Operator: "BEFORE" || "BEFORE_OR_EQUALS_TO" || "AFTER" || "AFTER_OR_EQUALS_TO", // required
+ * //                   Value: { // DataSetDateFilterValue
+ * //                     StaticValue: new Date("TIMESTAMP"),
+ * //                   },
+ * //                 },
+ * //                 RangeFilterCondition: { // DataSetDateRangeFilterCondition
+ * //                   RangeMinimum: {
+ * //                     StaticValue: new Date("TIMESTAMP"),
+ * //                   },
+ * //                   RangeMaximum: {
+ * //                     StaticValue: new Date("TIMESTAMP"),
+ * //                   },
+ * //                   IncludeMinimum: true || false,
+ * //                   IncludeMaximum: true || false,
+ * //                 },
+ * //               },
+ * //             },
+ * //             CreateColumnsOperation: { // CreateColumnsOperation
+ * //               Alias: "STRING_VALUE",
+ * //               Source: {
+ * //                 TransformOperationId: "STRING_VALUE", // required
+ * //                 ColumnIdMappings: [
+ * //                   {
+ * //                     SourceColumnId: "STRING_VALUE", // required
+ * //                     TargetColumnId: "STRING_VALUE", // required
+ * //                   },
+ * //                 ],
+ * //               },
+ * //               Columns: [ // CalculatedColumnList // required
+ * //                 { // CalculatedColumn
+ * //                   ColumnName: "STRING_VALUE", // required
+ * //                   ColumnId: "STRING_VALUE", // required
+ * //                   Expression: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //             RenameColumnOperation: { // RenameColumnOperation
+ * //               ColumnName: "STRING_VALUE", // required
+ * //               NewColumnName: "STRING_VALUE", // required
+ * //             },
+ * //             CastColumnTypeOperation: { // CastColumnTypeOperation
+ * //               ColumnName: "STRING_VALUE", // required
+ * //               NewColumnType: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME", // required
+ * //               SubType: "FLOAT" || "FIXED",
+ * //               Format: "STRING_VALUE",
+ * //             },
+ * //             TagColumnOperation: { // TagColumnOperation
+ * //               ColumnName: "STRING_VALUE", // required
+ * //               Tags: [ // ColumnTagList // required
+ * //                 { // ColumnTag
+ * //                   ColumnGeographicRole: "COUNTRY" || "STATE" || "COUNTY" || "CITY" || "POSTCODE" || "LONGITUDE" || "LATITUDE",
+ * //                   ColumnDescription: { // ColumnDescription
+ * //                     Text: "STRING_VALUE",
+ * //                   },
+ * //                 },
+ * //               ],
+ * //             },
+ * //             UntagColumnOperation: { // UntagColumnOperation
+ * //               ColumnName: "STRING_VALUE", // required
+ * //               TagNames: [ // ColumnTagNames // required
+ * //                 "COLUMN_GEOGRAPHIC_ROLE" || "COLUMN_DESCRIPTION",
+ * //               ],
+ * //             },
+ * //             OverrideDatasetParameterOperation: { // OverrideDatasetParameterOperation
+ * //               ParameterName: "STRING_VALUE", // required
+ * //               NewParameterName: "STRING_VALUE",
+ * //               NewDefaultValues: { // NewDefaultValues
+ * //                 StringStaticValues: [ // StringDatasetParameterValueList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 DecimalStaticValues: [ // DecimalDatasetParameterValueList
+ * //                   Number("double"),
+ * //                 ],
+ * //                 DateTimeStaticValues: [ // DateTimeDatasetParameterValueList
+ * //                   new Date("TIMESTAMP"),
+ * //                 ],
+ * //                 IntegerStaticValues: [ // IntegerDatasetParameterValueList
+ * //                   Number("long"),
+ * //                 ],
+ * //               },
+ * //             },
+ * //           },
+ * //         ],
+ * //         Source: { // LogicalTableSource
+ * //           JoinInstruction: { // JoinInstruction
+ * //             LeftOperand: "STRING_VALUE", // required
+ * //             RightOperand: "STRING_VALUE", // required
+ * //             LeftJoinKeyProperties: { // JoinKeyProperties
+ * //               UniqueKey: true || false,
+ * //             },
+ * //             RightJoinKeyProperties: {
+ * //               UniqueKey: true || false,
+ * //             },
+ * //             Type: "INNER" || "OUTER" || "LEFT" || "RIGHT", // required
+ * //             OnClause: "STRING_VALUE", // required
+ * //           },
+ * //           PhysicalTableId: "STRING_VALUE",
+ * //           DataSetArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     OutputColumns: [ // OutputColumnList
+ * //       { // OutputColumn
+ * //         Name: "STRING_VALUE",
+ * //         Id: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //         Type: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME",
+ * //         SubType: "FLOAT" || "FIXED",
+ * //       },
+ * //     ],
+ * //     ImportMode: "SPICE" || "DIRECT_QUERY",
+ * //     ConsumedSpiceCapacityInBytes: Number("long"),
+ * //     ColumnGroups: [ // ColumnGroupList
+ * //       { // ColumnGroup
+ * //         GeoSpatialColumnGroup: { // GeoSpatialColumnGroup
+ * //           Name: "STRING_VALUE", // required
+ * //           CountryCode: "US",
+ * //           Columns: [ // ColumnList // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     FieldFolders: { // FieldFolderMap
+ * //       "<keys>": { // FieldFolder
+ * //         description: "STRING_VALUE",
+ * //         columns: [ // FolderColumnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //     RowLevelPermissionDataSet: { // RowLevelPermissionDataSet
+ * //       Namespace: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE", // required
+ * //       PermissionPolicy: "GRANT_ACCESS" || "DENY_ACCESS", // required
+ * //       FormatVersion: "VERSION_1" || "VERSION_2",
+ * //       Status: "ENABLED" || "DISABLED",
+ * //     },
+ * //     RowLevelPermissionTagConfiguration: { // RowLevelPermissionTagConfiguration
+ * //       Status: "ENABLED" || "DISABLED",
+ * //       TagRules: [ // RowLevelPermissionTagRuleList // required
+ * //         { // RowLevelPermissionTagRule
+ * //           TagKey: "STRING_VALUE", // required
+ * //           ColumnName: "STRING_VALUE", // required
+ * //           TagMultiValueDelimiter: "STRING_VALUE",
+ * //           MatchAllValue: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       TagRuleConfigurations: [ // RowLevelPermissionTagRuleConfigurationList
+ * //         [ // RowLevelPermissionTagRuleConfiguration
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       ],
+ * //     },
+ * //     ColumnLevelPermissionRules: [ // ColumnLevelPermissionRuleList
+ * //       { // ColumnLevelPermissionRule
+ * //         Principals: [ // PrincipalList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         ColumnNames: [ // ColumnLevelPermissionRuleColumnNameList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     DataSetUsageConfiguration: { // DataSetUsageConfiguration
+ * //       DisableUseAsDirectQuerySource: true || false,
+ * //       DisableUseAsImportedSource: true || false,
+ * //     },
+ * //     DatasetParameters: [ // DatasetParameterList
+ * //       { // DatasetParameter
+ * //         StringDatasetParameter: { // StringDatasetParameter
+ * //           Id: "STRING_VALUE", // required
+ * //           Name: "STRING_VALUE", // required
+ * //           ValueType: "MULTI_VALUED" || "SINGLE_VALUED", // required
+ * //           DefaultValues: { // StringDatasetParameterDefaultValues
+ * //             StaticValues: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //         DecimalDatasetParameter: { // DecimalDatasetParameter
+ * //           Id: "STRING_VALUE", // required
+ * //           Name: "STRING_VALUE", // required
+ * //           ValueType: "MULTI_VALUED" || "SINGLE_VALUED", // required
+ * //           DefaultValues: { // DecimalDatasetParameterDefaultValues
+ * //             StaticValues: [
+ * //               Number("double"),
+ * //             ],
+ * //           },
+ * //         },
+ * //         IntegerDatasetParameter: { // IntegerDatasetParameter
+ * //           Id: "STRING_VALUE", // required
+ * //           Name: "STRING_VALUE", // required
+ * //           ValueType: "MULTI_VALUED" || "SINGLE_VALUED", // required
+ * //           DefaultValues: { // IntegerDatasetParameterDefaultValues
+ * //             StaticValues: [
+ * //               Number("long"),
+ * //             ],
+ * //           },
+ * //         },
+ * //         DateTimeDatasetParameter: { // DateTimeDatasetParameter
+ * //           Id: "STRING_VALUE", // required
+ * //           Name: "STRING_VALUE", // required
+ * //           ValueType: "MULTI_VALUED" || "SINGLE_VALUED", // required
+ * //           TimeGranularity: "YEAR" || "QUARTER" || "MONTH" || "WEEK" || "DAY" || "HOUR" || "MINUTE" || "SECOND" || "MILLISECOND",
+ * //           DefaultValues: { // DateTimeDatasetParameterDefaultValues
+ * //             StaticValues: [
+ * //               new Date("TIMESTAMP"),
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //     PerformanceConfiguration: { // PerformanceConfiguration
+ * //       UniqueKeys: [ // UniqueKeyList
+ * //         { // UniqueKey
+ * //           ColumnNames: [ // UniqueKeyColumnNameList // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     UseAs: "RLS_RULES",
+ * //     DataPrepConfiguration: { // DataPrepConfiguration
+ * //       SourceTableMap: { // SourceTableMap // required
+ * //         "<keys>": { // SourceTable
+ * //           PhysicalTableId: "STRING_VALUE",
+ * //           DataSet: { // ParentDataSet
+ * //             DataSetArn: "STRING_VALUE", // required
+ * //             InputColumns: "<InputColumnList>", // required
+ * //           },
+ * //         },
+ * //       },
+ * //       TransformStepMap: { // TransformStepMap // required
+ * //         "<keys>": { // TransformStep
+ * //           ImportTableStep: { // ImportTableOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: { // ImportTableOperationSource
+ * //               SourceTableId: "STRING_VALUE", // required
+ * //               ColumnIdMappings: [
+ * //                 {
+ * //                   SourceColumnId: "STRING_VALUE", // required
+ * //                   TargetColumnId: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //           ProjectStep: {
+ * //             Alias: "STRING_VALUE",
+ * //             Source: {
+ * //               TransformOperationId: "STRING_VALUE", // required
+ * //               ColumnIdMappings: [
+ * //                 {
+ * //                   SourceColumnId: "STRING_VALUE", // required
+ * //                   TargetColumnId: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //             ProjectedColumns: [ // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           FiltersStep: { // FiltersOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: {
+ * //               TransformOperationId: "STRING_VALUE", // required
+ * //               ColumnIdMappings: [
+ * //                 {
+ * //                   SourceColumnId: "STRING_VALUE", // required
+ * //                   TargetColumnId: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //             FilterOperations: [ // FilterOperationList // required
+ * //               {
+ * //                 ConditionExpression: "STRING_VALUE",
+ * //                 StringFilterCondition: {
+ * //                   ColumnName: "STRING_VALUE",
+ * //                   ComparisonFilterCondition: {
+ * //                     Operator: "EQUALS" || "DOES_NOT_EQUAL" || "CONTAINS" || "DOES_NOT_CONTAIN" || "STARTS_WITH" || "ENDS_WITH", // required
+ * //                     Value: {
+ * //                       StaticValue: "STRING_VALUE",
+ * //                     },
+ * //                   },
+ * //                   ListFilterCondition: {
+ * //                     Operator: "INCLUDE" || "EXCLUDE", // required
+ * //                     Values: {
+ * //                       StaticValues: [
+ * //                         "STRING_VALUE",
+ * //                       ],
+ * //                     },
+ * //                   },
+ * //                 },
+ * //                 NumericFilterCondition: {
+ * //                   ColumnName: "STRING_VALUE",
+ * //                   ComparisonFilterCondition: {
+ * //                     Operator: "EQUALS" || "DOES_NOT_EQUAL" || "GREATER_THAN" || "GREATER_THAN_OR_EQUALS_TO" || "LESS_THAN" || "LESS_THAN_OR_EQUALS_TO", // required
+ * //                     Value: {
+ * //                       StaticValue: Number("double"),
+ * //                     },
+ * //                   },
+ * //                   RangeFilterCondition: {
+ * //                     RangeMinimum: {
+ * //                       StaticValue: Number("double"),
+ * //                     },
+ * //                     RangeMaximum: "<DataSetNumericFilterValue>",
+ * //                     IncludeMinimum: true || false,
+ * //                     IncludeMaximum: true || false,
+ * //                   },
+ * //                 },
+ * //                 DateFilterCondition: {
+ * //                   ColumnName: "STRING_VALUE",
+ * //                   ComparisonFilterCondition: {
+ * //                     Operator: "BEFORE" || "BEFORE_OR_EQUALS_TO" || "AFTER" || "AFTER_OR_EQUALS_TO", // required
+ * //                     Value: {
+ * //                       StaticValue: new Date("TIMESTAMP"),
+ * //                     },
+ * //                   },
+ * //                   RangeFilterCondition: {
+ * //                     RangeMinimum: {
+ * //                       StaticValue: new Date("TIMESTAMP"),
+ * //                     },
+ * //                     RangeMaximum: "<DataSetDateFilterValue>",
+ * //                     IncludeMinimum: true || false,
+ * //                     IncludeMaximum: true || false,
+ * //                   },
+ * //                 },
+ * //               },
+ * //             ],
+ * //           },
+ * //           CreateColumnsStep: {
+ * //             Alias: "STRING_VALUE",
+ * //             Source: {
+ * //               TransformOperationId: "STRING_VALUE", // required
+ * //               ColumnIdMappings: "<DataSetColumnIdMappingList>",
+ * //             },
+ * //             Columns: [ // required
+ * //               {
+ * //                 ColumnName: "STRING_VALUE", // required
+ * //                 ColumnId: "STRING_VALUE", // required
+ * //                 Expression: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //           RenameColumnsStep: { // RenameColumnsOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: "<TransformOperationSource>", // required
+ * //             RenameColumnOperations: [ // RenameColumnOperationList // required
+ * //               {
+ * //                 ColumnName: "STRING_VALUE", // required
+ * //                 NewColumnName: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //           CastColumnTypesStep: { // CastColumnTypesOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: "<TransformOperationSource>", // required
+ * //             CastColumnTypeOperations: [ // CastColumnTypeOperationList // required
+ * //               {
+ * //                 ColumnName: "STRING_VALUE", // required
+ * //                 NewColumnType: "STRING" || "INTEGER" || "DECIMAL" || "DATETIME", // required
+ * //                 SubType: "FLOAT" || "FIXED",
+ * //                 Format: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //           JoinStep: { // JoinOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             LeftOperand: "<TransformOperationSource>", // required
+ * //             RightOperand: "<TransformOperationSource>", // required
+ * //             Type: "INNER" || "OUTER" || "LEFT" || "RIGHT", // required
+ * //             OnClause: "STRING_VALUE", // required
+ * //             LeftOperandProperties: { // JoinOperandProperties
+ * //               OutputColumnNameOverrides: [ // OutputColumnNameOverrideList // required
+ * //                 { // OutputColumnNameOverride
+ * //                   SourceColumnName: "STRING_VALUE",
+ * //                   OutputColumnName: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //             RightOperandProperties: {
+ * //               OutputColumnNameOverrides: [ // required
+ * //                 {
+ * //                   SourceColumnName: "STRING_VALUE",
+ * //                   OutputColumnName: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //           AggregateStep: { // AggregateOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: "<TransformOperationSource>", // required
+ * //             GroupByColumnNames: [ // GroupByColumnNameList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             Aggregations: [ // AggregationList // required
+ * //               { // Aggregation
+ * //                 AggregationFunction: { // DataPrepAggregationFunction
+ * //                   SimpleAggregation: { // DataPrepSimpleAggregationFunction
+ * //                     InputColumnName: "STRING_VALUE",
+ * //                     FunctionType: "COUNT" || "DISTINCT_COUNT" || "SUM" || "AVERAGE" || "MAX" || "MIN", // required
+ * //                   },
+ * //                   ListAggregation: { // DataPrepListAggregationFunction
+ * //                     InputColumnName: "STRING_VALUE",
+ * //                     Separator: "STRING_VALUE", // required
+ * //                     Distinct: true || false, // required
+ * //                   },
+ * //                 },
+ * //                 NewColumnName: "STRING_VALUE", // required
+ * //                 NewColumnId: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //           PivotStep: { // PivotOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: "<TransformOperationSource>", // required
+ * //             GroupByColumnNames: [ // PivotGroupByColumnNameList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             ValueColumnConfiguration: { // ValueColumnConfiguration
+ * //               AggregationFunction: {
+ * //                 SimpleAggregation: {
+ * //                   InputColumnName: "STRING_VALUE",
+ * //                   FunctionType: "COUNT" || "DISTINCT_COUNT" || "SUM" || "AVERAGE" || "MAX" || "MIN", // required
+ * //                 },
+ * //                 ListAggregation: {
+ * //                   InputColumnName: "STRING_VALUE",
+ * //                   Separator: "STRING_VALUE", // required
+ * //                   Distinct: true || false, // required
+ * //                 },
+ * //               },
+ * //             },
+ * //             PivotConfiguration: { // PivotConfiguration
+ * //               LabelColumnName: "STRING_VALUE",
+ * //               PivotedLabels: [ // PivotedLabelList // required
+ * //                 { // PivotedLabel
+ * //                   LabelName: "STRING_VALUE", // required
+ * //                   NewColumnName: "STRING_VALUE", // required
+ * //                   NewColumnId: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //           UnpivotStep: { // UnpivotOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             Source: "<TransformOperationSource>", // required
+ * //             ColumnsToUnpivot: [ // ColumnToUnpivotList // required
+ * //               { // ColumnToUnpivot
+ * //                 ColumnName: "STRING_VALUE",
+ * //                 NewValue: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //             UnpivotedLabelColumnName: "STRING_VALUE", // required
+ * //             UnpivotedLabelColumnId: "STRING_VALUE", // required
+ * //             UnpivotedValueColumnName: "STRING_VALUE", // required
+ * //             UnpivotedValueColumnId: "STRING_VALUE", // required
+ * //           },
+ * //           AppendStep: { // AppendOperation
+ * //             Alias: "STRING_VALUE", // required
+ * //             FirstSource: "<TransformOperationSource>",
+ * //             SecondSource: "<TransformOperationSource>",
+ * //             AppendedColumns: [ // AppendedColumnList // required
+ * //               { // AppendedColumn
+ * //                 ColumnName: "STRING_VALUE", // required
+ * //                 NewColumnId: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //       DestinationTableMap: { // DestinationTableMap // required
+ * //         "<keys>": { // DestinationTable
+ * //           Alias: "STRING_VALUE", // required
+ * //           Source: { // DestinationTableSource
+ * //             TransformOperationId: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     SemanticModelConfiguration: { // SemanticModelConfiguration
+ * //       TableMap: { // SemanticTableMap
+ * //         "<keys>": { // SemanticTable
+ * //           Alias: "STRING_VALUE", // required
+ * //           DestinationTableId: "STRING_VALUE", // required
+ * //           RowLevelPermissionConfiguration: { // RowLevelPermissionConfiguration
+ * //             TagConfiguration: {
+ * //               Status: "ENABLED" || "DISABLED",
+ * //               TagRules: [ // required
+ * //                 {
+ * //                   TagKey: "STRING_VALUE", // required
+ * //                   ColumnName: "STRING_VALUE", // required
+ * //                   TagMultiValueDelimiter: "STRING_VALUE",
+ * //                   MatchAllValue: "STRING_VALUE",
+ * //                 },
+ * //               ],
+ * //               TagRuleConfigurations: [
+ * //                 [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               ],
+ * //             },
+ * //             RowLevelPermissionDataSet: {
+ * //               Namespace: "STRING_VALUE",
+ * //               Arn: "STRING_VALUE", // required
+ * //               PermissionPolicy: "GRANT_ACCESS" || "DENY_ACCESS", // required
+ * //               FormatVersion: "VERSION_1" || "VERSION_2",
+ * //               Status: "ENABLED" || "DISABLED",
+ * //             },
+ * //           },
+ * //           SemanticMetadata: { // TableSemanticMetadata
+ * //             ColumnMetadata: [ // SharedColumnSemanticMetadataList
+ * //               { // SharedColumnSemanticMetadata
+ * //                 ColumnNames: [ // ColumnNameList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 ColumnProperties: [ // ColumnSemanticPropertyList // required
+ * //                   { // ColumnSemanticProperty
+ * //                     Description: {
+ * //                       Text: "STRING_VALUE",
+ * //                     },
+ * //                     AdditionalNotes: { // AdditionalNotes
+ * //                       Text: "STRING_VALUE",
+ * //                     },
+ * //                     SemanticType: { // ColumnSemanticType
+ * //                       GeographicalRole: "COUNTRY" || "STATE" || "COUNTY" || "CITY" || "POSTCODE" || "LONGITUDE" || "LATITUDE",
+ * //                     },
+ * //                   },
+ * //                 ],
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //       SemanticMetadata: [ // DataSetSemanticMetadataList
+ * //         { // DataSetSemanticMetadata
+ * //           Description: { // DataSetSemanticDescription
+ * //             Text: "STRING_VALUE", // required
+ * //           },
+ * //           CustomInstructions: [ // CustomInstructionList
+ * //             { // CustomInstruction
+ * //               InlineCustomInstruction: { // InlineCustomInstruction
+ * //                 InstructionText: "STRING_VALUE", // required
+ * //                 UploadedDocumentMetadata: { // UploadedDocumentMetadata
+ * //                   Name: "STRING_VALUE",
+ * //                 },
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeDataSetCommandInput - {@link DescribeDataSetCommandInput}
+ * @returns {@link DescribeDataSetCommandOutput}
  * @see {@link DescribeDataSetCommandInput} for command's `input` shape.
  * @see {@link DescribeDataSetCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDataSetCommand extends $Command<
-  DescribeDataSetCommandInput,
-  DescribeDataSetCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDataSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDataSetCommandInput, DescribeDataSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "DescribeDataSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDataSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDataSetResponse.filterSensitiveLog,
+export class DescribeDataSetCommand extends command<DescribeDataSetCommandInput, DescribeDataSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDataSet",
+  DescribeDataSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDataSetRequest;
+      output: DescribeDataSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDataSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeDataSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDataSetCommandOutput> {
-    return deserializeAws_restJson1DescribeDataSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDataSetCommandInput;
+      output: DescribeDataSetCommandOutput;
+    };
+  };
 }

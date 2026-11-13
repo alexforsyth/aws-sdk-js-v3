@@ -1,97 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { DescribeContactFlowRequest, DescribeContactFlowResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeContactFlowCommand,
-  serializeAws_restJson1DescribeContactFlowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeContactFlowRequest, DescribeContactFlowResponse } from "../models/models_1";
+import { DescribeContactFlow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeContactFlowCommand}.
+ */
 export interface DescribeContactFlowCommandInput extends DescribeContactFlowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeContactFlowCommand}.
+ */
 export interface DescribeContactFlowCommandOutput extends DescribeContactFlowResponse, __MetadataBearer {}
 
 /**
- * <p>Describes the specified contact flow.</p>
- *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
+ * <p>Describes the specified flow.</p>
+ *          <p>You can also create and update flows using the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html">Connect Customer
  *    Flow language</a>.</p>
+ *          <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content of a Flow. For
+ *    example, <code>arn:aws:.../contact-flow/\{id\}:$SAVED</code>. After a flow is published, <code>$SAVED</code> needs to
+ *    be supplied to view saved content that has not been published.</p>
+ *          <p>Use <code>arn:aws:.../contact-flow/\{id\}:\{version\}</code> to retrieve the content of a specific flow
+ *    version.</p>
+ *          <p>In the response, <b>Status</b> indicates the flow status as either <code>SAVED</code>
+ *    or <code>PUBLISHED</code>. The <code>PUBLISHED</code> status will initiate validation on the content.
+ *     <code>SAVED</code> does not initiate validation of the content. <code>SAVED</code> | <code>PUBLISHED</code>
+ *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, DescribeContactFlowCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, DescribeContactFlowCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // DescribeContactFlowRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactFlowId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeContactFlowCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeContactFlowResponse
+ * //   ContactFlow: { // ContactFlow
+ * //     Arn: "STRING_VALUE",
+ * //     Id: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Type: "CONTACT_FLOW" || "CUSTOMER_QUEUE" || "CUSTOMER_HOLD" || "CUSTOMER_WHISPER" || "AGENT_HOLD" || "AGENT_WHISPER" || "OUTBOUND_WHISPER" || "AGENT_TRANSFER" || "QUEUE_TRANSFER" || "CAMPAIGN",
+ * //     State: "ACTIVE" || "ARCHIVED",
+ * //     Status: "PUBLISHED" || "SAVED",
+ * //     Description: "STRING_VALUE",
+ * //     Content: "STRING_VALUE",
+ * //     Tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     FlowContentSha256: "STRING_VALUE",
+ * //     Version: Number("long"),
+ * //     VersionDescription: "STRING_VALUE",
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //     LastModifiedRegion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeContactFlowCommandInput - {@link DescribeContactFlowCommandInput}
+ * @returns {@link DescribeContactFlowCommandOutput}
  * @see {@link DescribeContactFlowCommandInput} for command's `input` shape.
  * @see {@link DescribeContactFlowCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link ContactFlowNotPublishedException} (client fault)
+ *  <p>The flow has not been published.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeContactFlowCommand extends $Command<
-  DescribeContactFlowCommandInput,
-  DescribeContactFlowCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeContactFlowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeContactFlowCommandInput, DescribeContactFlowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "DescribeContactFlowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeContactFlowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeContactFlowResponse.filterSensitiveLog,
+export class DescribeContactFlowCommand extends command<DescribeContactFlowCommandInput, DescribeContactFlowCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeContactFlow",
+  DescribeContactFlow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContactFlowRequest;
+      output: DescribeContactFlowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeContactFlowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeContactFlowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeContactFlowCommandOutput> {
-    return deserializeAws_restJson1DescribeContactFlowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeContactFlowCommandInput;
+      output: DescribeContactFlowCommandOutput;
+    };
+  };
 }

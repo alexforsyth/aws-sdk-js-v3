@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { ListDataflowEndpointGroupsRequest, ListDataflowEndpointGroupsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDataflowEndpointGroupsCommand,
-  serializeAws_restJson1ListDataflowEndpointGroupsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDataflowEndpointGroupsRequest, ListDataflowEndpointGroupsResponse } from "../models/models_0";
+import { ListDataflowEndpointGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDataflowEndpointGroupsCommand}.
+ */
 export interface ListDataflowEndpointGroupsCommandInput extends ListDataflowEndpointGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDataflowEndpointGroupsCommand}.
+ */
 export interface ListDataflowEndpointGroupsCommandOutput extends ListDataflowEndpointGroupsResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,63 @@ export interface ListDataflowEndpointGroupsCommandOutput extends ListDataflowEnd
  * ```javascript
  * import { GroundStationClient, ListDataflowEndpointGroupsCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, ListDataflowEndpointGroupsCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // ListDataflowEndpointGroupsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListDataflowEndpointGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDataflowEndpointGroupsResponse
+ * //   nextToken: "STRING_VALUE",
+ * //   dataflowEndpointGroupList: [ // DataflowEndpointGroupList
+ * //     { // DataflowEndpointListItem
+ * //       dataflowEndpointGroupId: "STRING_VALUE",
+ * //       dataflowEndpointGroupArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListDataflowEndpointGroupsCommandInput - {@link ListDataflowEndpointGroupsCommandInput}
+ * @returns {@link ListDataflowEndpointGroupsCommandOutput}
  * @see {@link ListDataflowEndpointGroupsCommandInput} for command's `input` shape.
  * @see {@link ListDataflowEndpointGroupsCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class ListDataflowEndpointGroupsCommand extends $Command<
-  ListDataflowEndpointGroupsCommandInput,
-  ListDataflowEndpointGroupsCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDataflowEndpointGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDataflowEndpointGroupsCommandInput, ListDataflowEndpointGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "ListDataflowEndpointGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDataflowEndpointGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDataflowEndpointGroupsResponse.filterSensitiveLog,
+export class ListDataflowEndpointGroupsCommand extends command<ListDataflowEndpointGroupsCommandInput, ListDataflowEndpointGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDataflowEndpointGroups",
+  ListDataflowEndpointGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDataflowEndpointGroupsRequest;
+      output: ListDataflowEndpointGroupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDataflowEndpointGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDataflowEndpointGroupsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListDataflowEndpointGroupsCommandOutput> {
-    return deserializeAws_restJson1ListDataflowEndpointGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDataflowEndpointGroupsCommandInput;
+      output: ListDataflowEndpointGroupsCommandOutput;
+    };
+  };
 }

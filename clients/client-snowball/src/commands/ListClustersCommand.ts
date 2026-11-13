@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListClustersRequest, ListClustersResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListClustersCommand,
-  serializeAws_json1_1ListClustersCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SnowballClientResolvedConfig } from "../SnowballClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListClustersRequest, ListClustersResult } from "../models/models_0";
+import { ListClusters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListClustersCommand}.
+ */
 export interface ListClustersCommandInput extends ListClustersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListClustersCommand}.
+ */
 export interface ListClustersCommandOutput extends ListClustersResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,61 @@ export interface ListClustersCommandOutput extends ListClustersResult, __Metadat
  * ```javascript
  * import { SnowballClient, ListClustersCommand } from "@aws-sdk/client-snowball"; // ES Modules import
  * // const { SnowballClient, ListClustersCommand } = require("@aws-sdk/client-snowball"); // CommonJS import
+ * // import type { SnowballClientConfig } from "@aws-sdk/client-snowball";
+ * const config = {}; // type is SnowballClientConfig
  * const client = new SnowballClient(config);
+ * const input = { // ListClustersRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListClustersCommand(input);
  * const response = await client.send(command);
+ * // { // ListClustersResult
+ * //   ClusterListEntries: [ // ClusterListEntryList
+ * //     { // ClusterListEntry
+ * //       ClusterId: "STRING_VALUE",
+ * //       ClusterState: "AwaitingQuorum" || "Pending" || "InUse" || "Complete" || "Cancelled",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       Description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListClustersCommandInput - {@link ListClustersCommandInput}
+ * @returns {@link ListClustersCommandOutput}
  * @see {@link ListClustersCommandInput} for command's `input` shape.
  * @see {@link ListClustersCommandOutput} for command's `response` shape.
- * @see {@link SnowballClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowballClientResolvedConfig | config} for SnowballClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> string was altered unexpectedly, and the operation has
+ *       stopped. Run the operation without changing the <code>NextToken</code> string, and try
+ *       again.</p>
+ *
+ * @throws {@link SnowballServiceException}
+ * <p>Base exception class for all service exceptions from Snowball service.</p>
+ *
+ *
+ * @public
  */
-export class ListClustersCommand extends $Command<
-  ListClustersCommandInput,
-  ListClustersCommandOutput,
-  SnowballClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListClustersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowballClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListClustersCommandInput, ListClustersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowballClient";
-    const commandName = "ListClustersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListClustersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListClustersResult.filterSensitiveLog,
+export class ListClustersCommand extends command<ListClustersCommandInput, ListClustersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListClusters",
+  ListClusters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListClustersRequest;
+      output: ListClustersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListClustersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListClustersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListClustersCommandOutput> {
-    return deserializeAws_json1_1ListClustersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListClustersCommandInput;
+      output: ListClustersCommandOutput;
+    };
+  };
 }

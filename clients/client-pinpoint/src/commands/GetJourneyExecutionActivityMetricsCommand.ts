@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetJourneyExecutionActivityMetricsRequest,
   GetJourneyExecutionActivityMetricsResponse,
 } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetJourneyExecutionActivityMetricsCommand,
-  serializeAws_restJson1GetJourneyExecutionActivityMetricsCommand,
-} from "../protocols/Aws_restJson1";
+import { GetJourneyExecutionActivityMetrics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJourneyExecutionActivityMetricsCommand}.
+ */
 export interface GetJourneyExecutionActivityMetricsCommandInput extends GetJourneyExecutionActivityMetricsRequest {}
-export interface GetJourneyExecutionActivityMetricsCommandOutput
-  extends GetJourneyExecutionActivityMetricsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetJourneyExecutionActivityMetricsCommand}.
+ */
+export interface GetJourneyExecutionActivityMetricsCommandOutput extends GetJourneyExecutionActivityMetricsResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey activity.</p>
@@ -33,74 +32,81 @@ export interface GetJourneyExecutionActivityMetricsCommandOutput
  * ```javascript
  * import { PinpointClient, GetJourneyExecutionActivityMetricsCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetJourneyExecutionActivityMetricsCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetJourneyExecutionActivityMetricsRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   JourneyActivityId: "STRING_VALUE", // required
+ *   JourneyId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   PageSize: "STRING_VALUE",
+ * };
  * const command = new GetJourneyExecutionActivityMetricsCommand(input);
  * const response = await client.send(command);
+ * // { // GetJourneyExecutionActivityMetricsResponse
+ * //   JourneyExecutionActivityMetricsResponse: { // JourneyExecutionActivityMetricsResponse
+ * //     ActivityType: "STRING_VALUE", // required
+ * //     ApplicationId: "STRING_VALUE", // required
+ * //     JourneyActivityId: "STRING_VALUE", // required
+ * //     JourneyId: "STRING_VALUE", // required
+ * //     LastEvaluatedTime: "STRING_VALUE", // required
+ * //     Metrics: { // MapOf__string // required
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetJourneyExecutionActivityMetricsCommandInput - {@link GetJourneyExecutionActivityMetricsCommandInput}
+ * @returns {@link GetJourneyExecutionActivityMetricsCommandOutput}
  * @see {@link GetJourneyExecutionActivityMetricsCommandInput} for command's `input` shape.
  * @see {@link GetJourneyExecutionActivityMetricsCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetJourneyExecutionActivityMetricsCommand extends $Command<
-  GetJourneyExecutionActivityMetricsCommandInput,
-  GetJourneyExecutionActivityMetricsCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetJourneyExecutionActivityMetricsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetJourneyExecutionActivityMetricsCommandInput, GetJourneyExecutionActivityMetricsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetJourneyExecutionActivityMetricsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetJourneyExecutionActivityMetricsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetJourneyExecutionActivityMetricsResponse.filterSensitiveLog,
+export class GetJourneyExecutionActivityMetricsCommand extends command<GetJourneyExecutionActivityMetricsCommandInput, GetJourneyExecutionActivityMetricsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetJourneyExecutionActivityMetrics",
+  GetJourneyExecutionActivityMetrics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJourneyExecutionActivityMetricsRequest;
+      output: GetJourneyExecutionActivityMetricsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetJourneyExecutionActivityMetricsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetJourneyExecutionActivityMetricsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetJourneyExecutionActivityMetricsCommandOutput> {
-    return deserializeAws_restJson1GetJourneyExecutionActivityMetricsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetJourneyExecutionActivityMetricsCommandInput;
+      output: GetJourneyExecutionActivityMetricsCommandOutput;
+    };
+  };
 }

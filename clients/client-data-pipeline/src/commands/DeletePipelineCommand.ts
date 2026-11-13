@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { DeletePipelineInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeletePipelineCommand,
-  serializeAws_json1_1DeletePipelineCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePipelineInput } from "../models/models_0";
+import { DeletePipeline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePipelineCommand}.
+ */
 export interface DeletePipelineCommandInput extends DeletePipelineInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePipelineCommand}.
+ */
 export interface DeletePipelineCommandOutput extends __MetadataBearer {}
 
 /**
@@ -39,7 +40,7 @@ export interface DeletePipelineCommandOutput extends __MetadataBearer {}
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"pipelineId": "df-06372391ZG65EXAMPLE"}
+ * \{"pipelineId": "df-06372391ZG65EXAMPLE"\}
  *
  *             </request>
  *
@@ -59,68 +60,54 @@ export interface DeletePipelineCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { DataPipelineClient, DeletePipelineCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, DeletePipelineCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // DeletePipelineInput
+ *   pipelineId: "STRING_VALUE", // required
+ * };
  * const command = new DeletePipelineCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePipelineCommandInput - {@link DeletePipelineCommandInput}
+ * @returns {@link DeletePipelineCommandOutput}
  * @see {@link DeletePipelineCommandInput} for command's `input` shape.
  * @see {@link DeletePipelineCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePipelineCommand extends $Command<
-  DeletePipelineCommandInput,
-  DeletePipelineCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePipelineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePipelineCommandInput, DeletePipelineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "DeletePipelineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePipelineInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeletePipelineCommand extends command<DeletePipelineCommandInput, DeletePipelineCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePipeline",
+  DeletePipeline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePipelineInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePipelineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeletePipelineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePipelineCommandOutput> {
-    return deserializeAws_json1_1DeletePipelineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePipelineCommandInput;
+      output: DeletePipelineCommandOutput;
+    };
+  };
 }

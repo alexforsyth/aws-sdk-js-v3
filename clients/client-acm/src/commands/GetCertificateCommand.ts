@@ -1,98 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMClient";
-import { GetCertificateRequest, GetCertificateResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetCertificateCommand,
-  serializeAws_json1_1GetCertificateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCertificateRequest, GetCertificateResponse } from "../models/models_0";
+import { GetCertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCertificateCommand}.
+ */
 export interface GetCertificateCommandInput extends GetCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCertificateCommand}.
+ */
 export interface GetCertificateCommandOutput extends GetCertificateResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves an Amazon-issued certificate and its certificate chain. The chain consists of
- *       the certificate of the issuing CA and the intermediate certificates of any other subordinate
- *       CAs. All of the certificates are base64 encoded. You can use <a href="https://wiki.openssl.org/index.php/Command_Line_Utilities">OpenSSL</a> to decode
- *       the certificates and inspect individual fields.</p>
+ * <p>Retrieves a certificate and its certificate chain. The certificate may be either a public or private certificate issued using the ACM <code>RequestCertificate</code> action, or a certificate imported into ACM using the <code>ImportCertificate</code> action. The chain consists of the certificate of the issuing CA and the intermediate certificates of any other subordinate CAs. All of the certificates are base64 encoded. You can use <a href="https://wiki.openssl.org/index.php/Command_Line_Utilities">OpenSSL</a> to decode the certificates and inspect individual fields.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMClient, GetCertificateCommand } from "@aws-sdk/client-acm"; // ES Modules import
  * // const { ACMClient, GetCertificateCommand } = require("@aws-sdk/client-acm"); // CommonJS import
+ * // import type { ACMClientConfig } from "@aws-sdk/client-acm";
+ * const config = {}; // type is ACMClientConfig
  * const client = new ACMClient(config);
+ * const input = { // GetCertificateRequest
+ *   CertificateArn: "STRING_VALUE", // required
+ * };
  * const command = new GetCertificateCommand(input);
  * const response = await client.send(command);
+ * // { // GetCertificateResponse
+ * //   Certificate: "STRING_VALUE",
+ * //   CertificateChain: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCertificateCommandInput - {@link GetCertificateCommandInput}
+ * @returns {@link GetCertificateCommandOutput}
  * @see {@link GetCertificateCommandInput} for command's `input` shape.
  * @see {@link GetCertificateCommandOutput} for command's `response` shape.
- * @see {@link ACMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMClientResolvedConfig | config} for ACMClient's `config` shape.
  *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
+ *
+ * @throws {@link RequestInProgressException} (client fault)
+ *  <p>The certificate request is in process and the certificate in your account has not yet been issued.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified certificate cannot be found in the caller's account or the caller's account cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>
+ *
+ * @throws {@link ACMServiceException}
+ * <p>Base exception class for all service exceptions from ACM service.</p>
+ *
+ *
+ * @public
  */
-export class GetCertificateCommand extends $Command<
-  GetCertificateCommandInput,
-  GetCertificateCommandOutput,
-  ACMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCertificateCommandInput, GetCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMClient";
-    const commandName = "GetCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCertificateResponse.filterSensitiveLog,
+export class GetCertificateCommand extends command<GetCertificateCommandInput, GetCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCertificate",
+  GetCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCertificateRequest;
+      output: GetCertificateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetCertificateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCertificateCommandOutput> {
-    return deserializeAws_json1_1GetCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCertificateCommandInput;
+      output: GetCertificateCommandOutput;
+    };
+  };
 }

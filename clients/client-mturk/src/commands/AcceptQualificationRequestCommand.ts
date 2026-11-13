@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AcceptQualificationRequestRequest, AcceptQualificationRequestResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1AcceptQualificationRequestCommand,
-  serializeAws_json1_1AcceptQualificationRequestCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AcceptQualificationRequestRequest, AcceptQualificationRequestResponse } from "../models/models_0";
+import { AcceptQualificationRequest$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptQualificationRequestCommand}.
+ */
 export interface AcceptQualificationRequestCommandInput extends AcceptQualificationRequestRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptQualificationRequestCommand}.
+ */
 export interface AcceptQualificationRequestCommandOutput extends AcceptQualificationRequestResponse, __MetadataBearer {}
 
 /**
@@ -37,71 +38,52 @@ export interface AcceptQualificationRequestCommandOutput extends AcceptQualifica
  * ```javascript
  * import { MTurkClient, AcceptQualificationRequestCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, AcceptQualificationRequestCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // AcceptQualificationRequestRequest
+ *   QualificationRequestId: "STRING_VALUE", // required
+ *   IntegerValue: Number("int"),
+ * };
  * const command = new AcceptQualificationRequestCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AcceptQualificationRequestCommandInput - {@link AcceptQualificationRequestCommandInput}
+ * @returns {@link AcceptQualificationRequestCommandOutput}
  * @see {@link AcceptQualificationRequestCommandInput} for command's `input` shape.
  * @see {@link AcceptQualificationRequestCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptQualificationRequestCommand extends $Command<
-  AcceptQualificationRequestCommandInput,
-  AcceptQualificationRequestCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptQualificationRequestCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptQualificationRequestCommandInput, AcceptQualificationRequestCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "AcceptQualificationRequestCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptQualificationRequestRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptQualificationRequestResponse.filterSensitiveLog,
+export class AcceptQualificationRequestCommand extends command<AcceptQualificationRequestCommandInput, AcceptQualificationRequestCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptQualificationRequest",
+  AcceptQualificationRequest$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptQualificationRequestRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AcceptQualificationRequestCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AcceptQualificationRequestCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AcceptQualificationRequestCommandOutput> {
-    return deserializeAws_json1_1AcceptQualificationRequestCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptQualificationRequestCommandInput;
+      output: AcceptQualificationRequestCommandOutput;
+    };
+  };
 }

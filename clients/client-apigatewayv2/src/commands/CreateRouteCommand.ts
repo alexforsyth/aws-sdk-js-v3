@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { CreateRouteRequest, CreateRouteResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateRouteCommand,
-  serializeAws_restJson1CreateRouteCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRouteRequest, CreateRouteResult } from "../models/models_0";
+import { CreateRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRouteCommand}.
+ */
 export interface CreateRouteCommandInput extends CreateRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRouteCommand}.
+ */
 export interface CreateRouteCommandOutput extends CreateRouteResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,98 @@ export interface CreateRouteCommandOutput extends CreateRouteResult, __MetadataB
  * ```javascript
  * import { ApiGatewayV2Client, CreateRouteCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, CreateRouteCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // CreateRouteRequest
+ *   ApiId: "STRING_VALUE", // required
+ *   ApiKeyRequired: true || false,
+ *   AuthorizationScopes: [ // AuthorizationScopes
+ *     "STRING_VALUE",
+ *   ],
+ *   AuthorizationType: "NONE" || "AWS_IAM" || "CUSTOM" || "JWT",
+ *   AuthorizerId: "STRING_VALUE",
+ *   ModelSelectionExpression: "STRING_VALUE",
+ *   OperationName: "STRING_VALUE",
+ *   RequestModels: { // RouteModels
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   RequestParameters: { // RouteParameters
+ *     "<keys>": { // ParameterConstraints
+ *       Required: true || false,
+ *     },
+ *   },
+ *   RouteKey: "STRING_VALUE", // required
+ *   RouteResponseSelectionExpression: "STRING_VALUE",
+ *   Target: "STRING_VALUE",
+ * };
  * const command = new CreateRouteCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRouteResult
+ * //   ApiGatewayManaged: true || false,
+ * //   ApiKeyRequired: true || false,
+ * //   AuthorizationScopes: [ // AuthorizationScopes
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   AuthorizationType: "NONE" || "AWS_IAM" || "CUSTOM" || "JWT",
+ * //   AuthorizerId: "STRING_VALUE",
+ * //   ModelSelectionExpression: "STRING_VALUE",
+ * //   OperationName: "STRING_VALUE",
+ * //   RequestModels: { // RouteModels
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   RequestParameters: { // RouteParameters
+ * //     "<keys>": { // ParameterConstraints
+ * //       Required: true || false,
+ * //     },
+ * //   },
+ * //   RouteId: "STRING_VALUE",
+ * //   RouteKey: "STRING_VALUE",
+ * //   RouteResponseSelectionExpression: "STRING_VALUE",
+ * //   Target: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateRouteCommandInput - {@link CreateRouteCommandInput}
+ * @returns {@link CreateRouteCommandOutput}
  * @see {@link CreateRouteCommandInput} for command's `input` shape.
  * @see {@link CreateRouteCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRouteCommand extends $Command<
-  CreateRouteCommandInput,
-  CreateRouteCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRouteCommandInput, CreateRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "CreateRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRouteResult.filterSensitiveLog,
+export class CreateRouteCommand extends command<CreateRouteCommandInput, CreateRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRoute",
+  CreateRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRouteRequest;
+      output: CreateRouteResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateRouteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRouteCommandOutput> {
-    return deserializeAws_restJson1CreateRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRouteCommandInput;
+      output: CreateRouteCommandOutput;
+    };
+  };
 }

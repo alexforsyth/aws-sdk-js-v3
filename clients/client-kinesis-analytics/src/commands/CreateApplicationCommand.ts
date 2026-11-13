@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisAnalyticsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisAnalyticsClient";
-import { CreateApplicationRequest, CreateApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateApplicationCommand,
-  serializeAws_json1_1CreateApplicationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateApplicationRequest, CreateApplicationResponse } from "../models/models_0";
+import { CreateApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateApplicationCommand}.
+ */
 export interface CreateApplicationCommandInput extends CreateApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateApplicationCommand}.
+ */
 export interface CreateApplicationCommandOutput extends CreateApplicationResponse, __MetadataBearer {}
 
 /**
@@ -54,68 +55,147 @@ export interface CreateApplicationCommandOutput extends CreateApplicationRespons
  * ```javascript
  * import { KinesisAnalyticsClient, CreateApplicationCommand } from "@aws-sdk/client-kinesis-analytics"; // ES Modules import
  * // const { KinesisAnalyticsClient, CreateApplicationCommand } = require("@aws-sdk/client-kinesis-analytics"); // CommonJS import
+ * // import type { KinesisAnalyticsClientConfig } from "@aws-sdk/client-kinesis-analytics";
+ * const config = {}; // type is KinesisAnalyticsClientConfig
  * const client = new KinesisAnalyticsClient(config);
+ * const input = { // CreateApplicationRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   ApplicationDescription: "STRING_VALUE",
+ *   Inputs: [ // Inputs
+ *     { // Input
+ *       NamePrefix: "STRING_VALUE", // required
+ *       InputProcessingConfiguration: { // InputProcessingConfiguration
+ *         InputLambdaProcessor: { // InputLambdaProcessor
+ *           ResourceARN: "STRING_VALUE", // required
+ *           RoleARN: "STRING_VALUE", // required
+ *         },
+ *       },
+ *       KinesisStreamsInput: { // KinesisStreamsInput
+ *         ResourceARN: "STRING_VALUE", // required
+ *         RoleARN: "STRING_VALUE", // required
+ *       },
+ *       KinesisFirehoseInput: { // KinesisFirehoseInput
+ *         ResourceARN: "STRING_VALUE", // required
+ *         RoleARN: "STRING_VALUE", // required
+ *       },
+ *       InputParallelism: { // InputParallelism
+ *         Count: Number("int"),
+ *       },
+ *       InputSchema: { // SourceSchema
+ *         RecordFormat: { // RecordFormat
+ *           RecordFormatType: "JSON" || "CSV", // required
+ *           MappingParameters: { // MappingParameters
+ *             JSONMappingParameters: { // JSONMappingParameters
+ *               RecordRowPath: "STRING_VALUE", // required
+ *             },
+ *             CSVMappingParameters: { // CSVMappingParameters
+ *               RecordRowDelimiter: "STRING_VALUE", // required
+ *               RecordColumnDelimiter: "STRING_VALUE", // required
+ *             },
+ *           },
+ *         },
+ *         RecordEncoding: "STRING_VALUE",
+ *         RecordColumns: [ // RecordColumns // required
+ *           { // RecordColumn
+ *             Name: "STRING_VALUE", // required
+ *             Mapping: "STRING_VALUE",
+ *             SqlType: "STRING_VALUE", // required
+ *           },
+ *         ],
+ *       },
+ *     },
+ *   ],
+ *   Outputs: [ // Outputs
+ *     { // Output
+ *       Name: "STRING_VALUE", // required
+ *       KinesisStreamsOutput: { // KinesisStreamsOutput
+ *         ResourceARN: "STRING_VALUE", // required
+ *         RoleARN: "STRING_VALUE", // required
+ *       },
+ *       KinesisFirehoseOutput: { // KinesisFirehoseOutput
+ *         ResourceARN: "STRING_VALUE", // required
+ *         RoleARN: "STRING_VALUE", // required
+ *       },
+ *       LambdaOutput: { // LambdaOutput
+ *         ResourceARN: "STRING_VALUE", // required
+ *         RoleARN: "STRING_VALUE", // required
+ *       },
+ *       DestinationSchema: { // DestinationSchema
+ *         RecordFormatType: "JSON" || "CSV", // required
+ *       },
+ *     },
+ *   ],
+ *   CloudWatchLoggingOptions: [ // CloudWatchLoggingOptions
+ *     { // CloudWatchLoggingOption
+ *       LogStreamARN: "STRING_VALUE", // required
+ *       RoleARN: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   ApplicationCode: "STRING_VALUE",
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateApplicationResponse
+ * //   ApplicationSummary: { // ApplicationSummary
+ * //     ApplicationName: "STRING_VALUE", // required
+ * //     ApplicationARN: "STRING_VALUE", // required
+ * //     ApplicationStatus: "DELETING" || "STARTING" || "STOPPING" || "READY" || "RUNNING" || "UPDATING", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateApplicationCommandInput - {@link CreateApplicationCommandInput}
+ * @returns {@link CreateApplicationCommandOutput}
  * @see {@link CreateApplicationCommandInput} for command's `input` shape.
  * @see {@link CreateApplicationCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsClientResolvedConfig | config} for KinesisAnalyticsClient's `config` shape.
  *
+ * @throws {@link CodeValidationException} (client fault)
+ *  <p>User-provided application code (query) is invalid. This can be a simple syntax error.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>Specified input parameter value is invalid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Exceeded the number of applications allowed.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>Application is not available for this operation.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>Application created with too many tags, or too many tags added to an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.</p>
+ *
+ * @throws {@link KinesisAnalyticsServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalytics service.</p>
+ *
+ *
+ * @public
  */
-export class CreateApplicationCommand extends $Command<
-  CreateApplicationCommandInput,
-  CreateApplicationCommandOutput,
-  KinesisAnalyticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateApplicationCommandInput, CreateApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsClient";
-    const commandName = "CreateApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateApplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateApplicationResponse.filterSensitiveLog,
+export class CreateApplicationCommand extends command<CreateApplicationCommandInput, CreateApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateApplication",
+  CreateApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateApplicationRequest;
+      output: CreateApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateApplicationCommandOutput> {
-    return deserializeAws_json1_1CreateApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateApplicationCommandInput;
+      output: CreateApplicationCommandOutput;
+    };
+  };
 }

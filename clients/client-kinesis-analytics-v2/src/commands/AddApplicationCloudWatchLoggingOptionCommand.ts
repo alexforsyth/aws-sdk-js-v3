@@ -1,35 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  KinesisAnalyticsV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../KinesisAnalyticsV2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AddApplicationCloudWatchLoggingOptionRequest,
   AddApplicationCloudWatchLoggingOptionResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1AddApplicationCloudWatchLoggingOptionCommand,
-  serializeAws_json1_1AddApplicationCloudWatchLoggingOptionCommand,
-} from "../protocols/Aws_json1_1";
+import { AddApplicationCloudWatchLoggingOption$ } from "../schemas/schemas_0";
 
-export interface AddApplicationCloudWatchLoggingOptionCommandInput
-  extends AddApplicationCloudWatchLoggingOptionRequest {}
-export interface AddApplicationCloudWatchLoggingOptionCommandOutput
-  extends AddApplicationCloudWatchLoggingOptionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddApplicationCloudWatchLoggingOptionCommand}.
+ */
+export interface AddApplicationCloudWatchLoggingOptionCommandInput extends AddApplicationCloudWatchLoggingOptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddApplicationCloudWatchLoggingOptionCommand}.
+ */
+export interface AddApplicationCloudWatchLoggingOptionCommandOutput extends AddApplicationCloudWatchLoggingOptionResponse, __MetadataBearer {}
 
 /**
  * <p>Adds an Amazon CloudWatch log stream to monitor application configuration errors.</p>
@@ -38,74 +32,81 @@ export interface AddApplicationCloudWatchLoggingOptionCommandOutput
  * ```javascript
  * import { KinesisAnalyticsV2Client, AddApplicationCloudWatchLoggingOptionCommand } from "@aws-sdk/client-kinesis-analytics-v2"; // ES Modules import
  * // const { KinesisAnalyticsV2Client, AddApplicationCloudWatchLoggingOptionCommand } = require("@aws-sdk/client-kinesis-analytics-v2"); // CommonJS import
+ * // import type { KinesisAnalyticsV2ClientConfig } from "@aws-sdk/client-kinesis-analytics-v2";
+ * const config = {}; // type is KinesisAnalyticsV2ClientConfig
  * const client = new KinesisAnalyticsV2Client(config);
+ * const input = { // AddApplicationCloudWatchLoggingOptionRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   CurrentApplicationVersionId: Number("long"),
+ *   CloudWatchLoggingOption: { // CloudWatchLoggingOption
+ *     LogStreamARN: "STRING_VALUE", // required
+ *   },
+ *   ConditionalToken: "STRING_VALUE",
+ * };
  * const command = new AddApplicationCloudWatchLoggingOptionCommand(input);
  * const response = await client.send(command);
+ * // { // AddApplicationCloudWatchLoggingOptionResponse
+ * //   ApplicationARN: "STRING_VALUE",
+ * //   ApplicationVersionId: Number("long"),
+ * //   CloudWatchLoggingOptionDescriptions: [ // CloudWatchLoggingOptionDescriptions
+ * //     { // CloudWatchLoggingOptionDescription
+ * //       CloudWatchLoggingOptionId: "STRING_VALUE",
+ * //       LogStreamARN: "STRING_VALUE", // required
+ * //       RoleARN: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   OperationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AddApplicationCloudWatchLoggingOptionCommandInput - {@link AddApplicationCloudWatchLoggingOptionCommandInput}
+ * @returns {@link AddApplicationCloudWatchLoggingOptionCommandOutput}
  * @see {@link AddApplicationCloudWatchLoggingOptionCommandInput} for command's `input` shape.
  * @see {@link AddApplicationCloudWatchLoggingOptionCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsV2ClientResolvedConfig | config} for KinesisAnalyticsV2Client's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Exception thrown as a result of concurrent modifications to an application or snapshot. This error can
+ *       be the result of attempting to modify an application without using the current application
+ *       ID.</p>
+ *
+ * @throws {@link InvalidApplicationConfigurationException} (client fault)
+ *  <p>The user-provided application configuration is not valid.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The specified input parameter value is not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request JSON is not valid for the operation.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The application or snapshot is not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified application, snapshot, or snapshot operation can't be found.</p>
+ *
+ * @throws {@link KinesisAnalyticsV2ServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalyticsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class AddApplicationCloudWatchLoggingOptionCommand extends $Command<
-  AddApplicationCloudWatchLoggingOptionCommandInput,
-  AddApplicationCloudWatchLoggingOptionCommandOutput,
-  KinesisAnalyticsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddApplicationCloudWatchLoggingOptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddApplicationCloudWatchLoggingOptionCommandInput, AddApplicationCloudWatchLoggingOptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsV2Client";
-    const commandName = "AddApplicationCloudWatchLoggingOptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddApplicationCloudWatchLoggingOptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddApplicationCloudWatchLoggingOptionResponse.filterSensitiveLog,
+export class AddApplicationCloudWatchLoggingOptionCommand extends command<AddApplicationCloudWatchLoggingOptionCommandInput, AddApplicationCloudWatchLoggingOptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddApplicationCloudWatchLoggingOption",
+  AddApplicationCloudWatchLoggingOption$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddApplicationCloudWatchLoggingOptionRequest;
+      output: AddApplicationCloudWatchLoggingOptionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AddApplicationCloudWatchLoggingOptionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddApplicationCloudWatchLoggingOptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AddApplicationCloudWatchLoggingOptionCommandOutput> {
-    return deserializeAws_json1_1AddApplicationCloudWatchLoggingOptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddApplicationCloudWatchLoggingOptionCommandInput;
+      output: AddApplicationCloudWatchLoggingOptionCommandOutput;
+    };
+  };
 }

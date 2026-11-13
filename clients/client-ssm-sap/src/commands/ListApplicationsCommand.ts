@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationsInput, ListApplicationsOutput } from "../models/models_0";
+import { ListApplications$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationsCommand}.
+ */
+export interface ListApplicationsCommandInput extends ListApplicationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationsCommand}.
+ */
+export interface ListApplicationsCommandOutput extends ListApplicationsOutput, __MetadataBearer {}
+
+/**
+ * <p>Lists all the applications registered with AWS Systems Manager for SAP.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { SsmSapClient, ListApplicationsCommand } from "@aws-sdk/client-ssm-sap"; // ES Modules import
+ * // const { SsmSapClient, ListApplicationsCommand } = require("@aws-sdk/client-ssm-sap"); // CommonJS import
+ * // import type { SsmSapClientConfig } from "@aws-sdk/client-ssm-sap";
+ * const config = {}; // type is SsmSapClientConfig
+ * const client = new SsmSapClient(config);
+ * const input = { // ListApplicationsInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *       Operator: "Equals" || "GreaterThanOrEquals" || "LessThanOrEquals", // required
+ *     },
+ *   ],
+ * };
+ * const command = new ListApplicationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListApplicationsOutput
+ * //   Applications: [ // ApplicationSummaryList
+ * //     { // ApplicationSummary
+ * //       Id: "STRING_VALUE",
+ * //       DiscoveryStatus: "SUCCESS" || "REGISTRATION_FAILED" || "REFRESH_FAILED" || "REGISTERING" || "DELETING",
+ * //       Type: "HANA" || "SAP_ABAP",
+ * //       Arn: "STRING_VALUE",
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListApplicationsCommandInput - {@link ListApplicationsCommandInput}
+ * @returns {@link ListApplicationsCommandOutput}
+ * @see {@link ListApplicationsCommandInput} for command's `input` shape.
+ * @see {@link ListApplicationsCommandOutput} for command's `response` shape.
+ * @see {@link SsmSapClientResolvedConfig | config} for SsmSapClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource is not available.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an AWS service. </p>
+ *
+ * @throws {@link SsmSapServiceException}
+ * <p>Base exception class for all service exceptions from SsmSap service.</p>
+ *
+ *
+ * @public
+ */
+export class ListApplicationsCommand extends command<ListApplicationsCommandInput, ListApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplications",
+  ListApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationsInput;
+      output: ListApplicationsOutput;
+    };
+    sdk: {
+      input: ListApplicationsCommandInput;
+      output: ListApplicationsCommandOutput;
+    };
+  };
+}

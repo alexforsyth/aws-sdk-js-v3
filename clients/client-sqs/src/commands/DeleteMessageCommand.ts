@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteMessageRequest } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteMessageCommand,
-  serializeAws_queryDeleteMessageCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SQSClientResolvedConfig } from "../SQSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMessageRequest } from "../models/models_0";
+import { DeleteMessage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMessageCommand}.
+ */
 export interface DeleteMessageCommandInput extends DeleteMessageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMessageCommand}.
+ */
 export interface DeleteMessageCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,12 +30,13 @@ export interface DeleteMessageCommandOutput extends __MetadataBearer {}
  *             be locked by another consumer. Amazon SQS automatically deletes messages left in a queue
  *             longer than the retention period configured for the queue. </p>
  *          <note>
- *             <p>The <code>ReceiptHandle</code> is associated with a <i>specific
- *                     instance</i> of receiving a message. If you receive a message more than
- *                 once, the <code>ReceiptHandle</code> is different each time you receive a message.
- *                 When you use the <code>DeleteMessage</code> action, you must provide the most
- *                 recently received <code>ReceiptHandle</code> for the message (otherwise, the request
- *                 succeeds, but the message might not be deleted).</p>
+ *             <p>Each time you receive a message, meaning when a consumer retrieves a message from
+ *                 the queue, it comes with a unique <code>ReceiptHandle</code>. If you receive the
+ *                 same message more than once, you will get a different <code>ReceiptHandle</code>
+ *                 each time. When you want to delete a message using the <code>DeleteMessage</code>
+ *                 action, you must use the <code>ReceiptHandle</code> from the most recent time you
+ *                 received the message. If you use an old <code>ReceiptHandle</code>, the request will
+ *                 succeed, but the message might not be deleted. </p>
  *             <p>For standard queues, it is possible to receive a message even after you
  *                 delete it. This might happen on rare occasions if one of the servers which stores a
  *                 copy of the message is unavailable when you send the request to delete the message.
@@ -47,68 +49,79 @@ export interface DeleteMessageCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SQSClient, DeleteMessageCommand } from "@aws-sdk/client-sqs"; // ES Modules import
  * // const { SQSClient, DeleteMessageCommand } = require("@aws-sdk/client-sqs"); // CommonJS import
+ * // import type { SQSClientConfig } from "@aws-sdk/client-sqs";
+ * const config = {}; // type is SQSClientConfig
  * const client = new SQSClient(config);
+ * const input = { // DeleteMessageRequest
+ *   QueueUrl: "STRING_VALUE", // required
+ *   ReceiptHandle: "STRING_VALUE", // required
+ * };
  * const command = new DeleteMessageCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteMessageCommandInput - {@link DeleteMessageCommandInput}
+ * @returns {@link DeleteMessageCommandOutput}
  * @see {@link DeleteMessageCommandInput} for command's `input` shape.
  * @see {@link DeleteMessageCommandOutput} for command's `response` shape.
- * @see {@link SQSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SQSClientResolvedConfig | config} for SQSClient's `config` shape.
  *
+ * @throws {@link InvalidAddress} (client fault)
+ *  <p>The specified ID is invalid.</p>
+ *
+ * @throws {@link InvalidIdFormat} (client fault)
+ *  <p>The specified receipt handle isn't valid for the current version.</p>
+ *
+ * @throws {@link InvalidSecurity} (client fault)
+ *  <p>The request was not made over HTTPS or did not use SigV4 for signing.</p>
+ *
+ * @throws {@link QueueDoesNotExist} (client fault)
+ *  <p>Ensure that the <code>QueueUrl</code> is correct and that the queue has not been
+ *             deleted.</p>
+ *
+ * @throws {@link ReceiptHandleIsInvalid} (client fault)
+ *  <p>The specified receipt handle isn't valid.</p>
+ *
+ * @throws {@link RequestThrottled} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *          <ul>
+ *             <li>
+ *                <p>Exceeds the permitted request rate for the queue or for the recipient of the
+ *                     request.</p>
+ *             </li>
+ *             <li>
+ *                <p>Ensure that the request rate is within the Amazon SQS limits for
+ *                     sending messages. For more information, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-quotas.html#quotas-requests">Amazon SQS quotas</a> in the <i>Amazon SQS
+ *                         Developer Guide</i>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>Error code 400. Unsupported operation.</p>
+ *
+ * @throws {@link SQSServiceException}
+ * <p>Base exception class for all service exceptions from SQS service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMessageCommand extends $Command<
-  DeleteMessageCommandInput,
-  DeleteMessageCommandOutput,
-  SQSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMessageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SQSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMessageCommandInput, DeleteMessageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SQSClient";
-    const commandName = "DeleteMessageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMessageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteMessageCommand extends command<DeleteMessageCommandInput, DeleteMessageCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMessage",
+  DeleteMessage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMessageRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMessageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteMessageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteMessageCommandOutput> {
-    return deserializeAws_queryDeleteMessageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMessageCommandInput;
+      output: DeleteMessageCommandOutput;
+    };
+  };
 }

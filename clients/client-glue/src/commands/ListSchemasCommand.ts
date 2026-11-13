@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { ListSchemasInput, ListSchemasResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1ListSchemasCommand,
-  serializeAws_json1_1ListSchemasCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSchemasInput, ListSchemasResponse } from "../models/models_2";
+import { ListSchemas$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSchemasCommand}.
+ */
 export interface ListSchemasCommandInput extends ListSchemasInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListSchemasCommand}.
+ */
 export interface ListSchemasCommandOutput extends ListSchemasResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,75 @@ export interface ListSchemasCommandOutput extends ListSchemasResponse, __Metadat
  * ```javascript
  * import { GlueClient, ListSchemasCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, ListSchemasCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // ListSchemasInput
+ *   RegistryId: { // RegistryId
+ *     RegistryName: "STRING_VALUE",
+ *     RegistryArn: "STRING_VALUE",
+ *   },
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListSchemasCommand(input);
  * const response = await client.send(command);
+ * // { // ListSchemasResponse
+ * //   Schemas: [ // SchemaListDefinition
+ * //     { // SchemaListItem
+ * //       RegistryName: "STRING_VALUE",
+ * //       SchemaName: "STRING_VALUE",
+ * //       SchemaArn: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       SchemaStatus: "AVAILABLE" || "PENDING" || "DELETING",
+ * //       CreatedTime: "STRING_VALUE",
+ * //       UpdatedTime: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSchemasCommandInput - {@link ListSchemasCommandInput}
+ * @returns {@link ListSchemasCommandOutput}
  * @see {@link ListSchemasCommandInput} for command's `input` shape.
  * @see {@link ListSchemasCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class ListSchemasCommand extends $Command<
-  ListSchemasCommandInput,
-  ListSchemasCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSchemasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSchemasCommandInput, ListSchemasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "ListSchemasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSchemasInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSchemasResponse.filterSensitiveLog,
+export class ListSchemasCommand extends command<ListSchemasCommandInput, ListSchemasCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSchemas",
+  ListSchemas$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSchemasInput;
+      output: ListSchemasResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSchemasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListSchemasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSchemasCommandOutput> {
-    return deserializeAws_json1_1ListSchemasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSchemasCommandInput;
+      output: ListSchemasCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListExecutionsInput, ListExecutionsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListExecutionsCommand,
-  serializeAws_restJson1ListExecutionsCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceInputTypes,
-  ServiceOutputTypes,
-  SnowDeviceManagementClientResolvedConfig,
-} from "../SnowDeviceManagementClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListExecutionsInput, ListExecutionsOutput } from "../models/models_0";
+import { ListExecutions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListExecutionsCommand}.
+ */
 export interface ListExecutionsCommandInput extends ListExecutionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListExecutionsCommand}.
+ */
 export interface ListExecutionsCommandOutput extends ListExecutionsOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +29,73 @@ export interface ListExecutionsCommandOutput extends ListExecutionsOutput, __Met
  * ```javascript
  * import { SnowDeviceManagementClient, ListExecutionsCommand } from "@aws-sdk/client-snow-device-management"; // ES Modules import
  * // const { SnowDeviceManagementClient, ListExecutionsCommand } = require("@aws-sdk/client-snow-device-management"); // CommonJS import
+ * // import type { SnowDeviceManagementClientConfig } from "@aws-sdk/client-snow-device-management";
+ * const config = {}; // type is SnowDeviceManagementClientConfig
  * const client = new SnowDeviceManagementClient(config);
+ * const input = { // ListExecutionsInput
+ *   taskId: "STRING_VALUE", // required
+ *   state: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListExecutionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListExecutionsOutput
+ * //   executions: [ // ExecutionSummaryList
+ * //     { // ExecutionSummary
+ * //       taskId: "STRING_VALUE",
+ * //       executionId: "STRING_VALUE",
+ * //       managedDeviceId: "STRING_VALUE",
+ * //       state: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListExecutionsCommandInput - {@link ListExecutionsCommandInput}
+ * @returns {@link ListExecutionsCommandOutput}
  * @see {@link ListExecutionsCommandInput} for command's `input` shape.
  * @see {@link ListExecutionsCommandOutput} for command's `response` shape.
- * @see {@link SnowDeviceManagementClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowDeviceManagementClientResolvedConfig | config} for SnowDeviceManagementClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link SnowDeviceManagementServiceException}
+ * <p>Base exception class for all service exceptions from SnowDeviceManagement service.</p>
+ *
+ *
+ * @public
  */
-export class ListExecutionsCommand extends $Command<
-  ListExecutionsCommandInput,
-  ListExecutionsCommandOutput,
-  SnowDeviceManagementClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListExecutionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowDeviceManagementClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListExecutionsCommandInput, ListExecutionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowDeviceManagementClient";
-    const commandName = "ListExecutionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListExecutionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListExecutionsOutput.filterSensitiveLog,
+export class ListExecutionsCommand extends command<ListExecutionsCommandInput, ListExecutionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListExecutions",
+  ListExecutions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListExecutionsInput;
+      output: ListExecutionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListExecutionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListExecutionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListExecutionsCommandOutput> {
-    return deserializeAws_restJson1ListExecutionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListExecutionsCommandInput;
+      output: ListExecutionsCommandOutput;
+    };
+  };
 }

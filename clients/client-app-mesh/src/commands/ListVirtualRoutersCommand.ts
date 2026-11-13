@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppMeshClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppMeshClient";
-import { ListVirtualRoutersInput, ListVirtualRoutersOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListVirtualRoutersCommand,
-  serializeAws_restJson1ListVirtualRoutersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListVirtualRoutersInput, ListVirtualRoutersOutput } from "../models/models_0";
+import { ListVirtualRouters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListVirtualRoutersCommand}.
+ */
 export interface ListVirtualRoutersCommandInput extends ListVirtualRoutersInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListVirtualRoutersCommand}.
+ */
 export interface ListVirtualRoutersCommandOutput extends ListVirtualRoutersOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface ListVirtualRoutersCommandOutput extends ListVirtualRoutersOutpu
  * ```javascript
  * import { AppMeshClient, ListVirtualRoutersCommand } from "@aws-sdk/client-app-mesh"; // ES Modules import
  * // const { AppMeshClient, ListVirtualRoutersCommand } = require("@aws-sdk/client-app-mesh"); // CommonJS import
+ * // import type { AppMeshClientConfig } from "@aws-sdk/client-app-mesh";
+ * const config = {}; // type is AppMeshClientConfig
  * const client = new AppMeshClient(config);
+ * const input = { // ListVirtualRoutersInput
+ *   meshName: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   limit: Number("int"),
+ *   meshOwner: "STRING_VALUE",
+ * };
  * const command = new ListVirtualRoutersCommand(input);
  * const response = await client.send(command);
+ * // { // ListVirtualRoutersOutput
+ * //   virtualRouters: [ // VirtualRouterList // required
+ * //     { // VirtualRouterRef
+ * //       meshName: "STRING_VALUE", // required
+ * //       virtualRouterName: "STRING_VALUE", // required
+ * //       meshOwner: "STRING_VALUE", // required
+ * //       resourceOwner: "STRING_VALUE", // required
+ * //       arn: "STRING_VALUE", // required
+ * //       version: Number("long"), // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       lastUpdatedAt: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListVirtualRoutersCommandInput - {@link ListVirtualRoutersCommandInput}
+ * @returns {@link ListVirtualRoutersCommandOutput}
  * @see {@link ListVirtualRoutersCommandInput} for command's `input` shape.
  * @see {@link ListVirtualRoutersCommandOutput} for command's `response` shape.
- * @see {@link AppMeshClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppMeshClientResolvedConfig | config} for AppMeshClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request syntax was malformed. Check your request syntax and try again.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You don't have permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or
+ *          failure.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist. Check your request syntax and try again.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The maximum request rate permitted by the App Mesh APIs has been exceeded for
+ *          your account. For best results, use an increasing or variable sleep interval between
+ *          requests.</p>
+ *
+ * @throws {@link AppMeshServiceException}
+ * <p>Base exception class for all service exceptions from AppMesh service.</p>
+ *
+ *
+ * @public
  */
-export class ListVirtualRoutersCommand extends $Command<
-  ListVirtualRoutersCommandInput,
-  ListVirtualRoutersCommandOutput,
-  AppMeshClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListVirtualRoutersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppMeshClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListVirtualRoutersCommandInput, ListVirtualRoutersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppMeshClient";
-    const commandName = "ListVirtualRoutersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListVirtualRoutersInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListVirtualRoutersOutput.filterSensitiveLog,
+export class ListVirtualRoutersCommand extends command<ListVirtualRoutersCommandInput, ListVirtualRoutersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListVirtualRouters",
+  ListVirtualRouters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVirtualRoutersInput;
+      output: ListVirtualRoutersOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListVirtualRoutersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListVirtualRoutersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListVirtualRoutersCommandOutput> {
-    return deserializeAws_restJson1ListVirtualRoutersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListVirtualRoutersCommandInput;
+      output: ListVirtualRoutersCommandOutput;
+    };
+  };
 }

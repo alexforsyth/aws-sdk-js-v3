@@ -1,110 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListStackInstancesForProvisionedProductInput,
   ListStackInstancesForProvisionedProductOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListStackInstancesForProvisionedProductCommand,
-  serializeAws_json1_1ListStackInstancesForProvisionedProductCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
-
-export interface ListStackInstancesForProvisionedProductCommandInput
-  extends ListStackInstancesForProvisionedProductInput {}
-export interface ListStackInstancesForProvisionedProductCommandOutput
-  extends ListStackInstancesForProvisionedProductOutput,
-    __MetadataBearer {}
+import { ListStackInstancesForProvisionedProduct$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns summary information about stack instances that are associated with the specified <code>CFN_STACKSET</code> type provisioned product. You can filter for stack instances that are associated with a specific AWS account name or region. </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStackInstancesForProvisionedProductCommand}.
+ */
+export interface ListStackInstancesForProvisionedProductCommandInput extends ListStackInstancesForProvisionedProductInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStackInstancesForProvisionedProductCommand}.
+ */
+export interface ListStackInstancesForProvisionedProductCommandOutput extends ListStackInstancesForProvisionedProductOutput, __MetadataBearer {}
+
+/**
+ * <p>Returns summary information about stack instances that are associated with the specified <code>CFN_STACKSET</code> type provisioned product. You can filter for stack instances that are associated with a specific Amazon Web Services account name or Region. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceCatalogClient, ListStackInstancesForProvisionedProductCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, ListStackInstancesForProvisionedProductCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // ListStackInstancesForProvisionedProductInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   ProvisionedProductId: "STRING_VALUE", // required
+ *   PageToken: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ * };
  * const command = new ListStackInstancesForProvisionedProductCommand(input);
  * const response = await client.send(command);
+ * // { // ListStackInstancesForProvisionedProductOutput
+ * //   StackInstances: [ // StackInstances
+ * //     { // StackInstance
+ * //       Account: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //       StackInstanceStatus: "CURRENT" || "OUTDATED" || "INOPERABLE",
+ * //     },
+ * //   ],
+ * //   NextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStackInstancesForProvisionedProductCommandInput - {@link ListStackInstancesForProvisionedProductCommandInput}
+ * @returns {@link ListStackInstancesForProvisionedProductCommandOutput}
  * @see {@link ListStackInstancesForProvisionedProductCommandInput} for command's `input` shape.
  * @see {@link ListStackInstancesForProvisionedProductCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class ListStackInstancesForProvisionedProductCommand extends $Command<
-  ListStackInstancesForProvisionedProductCommandInput,
-  ListStackInstancesForProvisionedProductCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStackInstancesForProvisionedProductCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListStackInstancesForProvisionedProductCommandInput,
-    ListStackInstancesForProvisionedProductCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "ListStackInstancesForProvisionedProductCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStackInstancesForProvisionedProductInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStackInstancesForProvisionedProductOutput.filterSensitiveLog,
+export class ListStackInstancesForProvisionedProductCommand extends command<ListStackInstancesForProvisionedProductCommandInput, ListStackInstancesForProvisionedProductCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStackInstancesForProvisionedProduct",
+  ListStackInstancesForProvisionedProduct$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStackInstancesForProvisionedProductInput;
+      output: ListStackInstancesForProvisionedProductOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListStackInstancesForProvisionedProductCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListStackInstancesForProvisionedProductCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListStackInstancesForProvisionedProductCommandOutput> {
-    return deserializeAws_json1_1ListStackInstancesForProvisionedProductCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStackInstancesForProvisionedProductCommandInput;
+      output: ListStackInstancesForProvisionedProductCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { UpdateApiDestinationRequest, UpdateApiDestinationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateApiDestinationCommand,
-  serializeAws_json1_1UpdateApiDestinationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateApiDestinationRequest, UpdateApiDestinationResponse } from "../models/models_0";
+import { UpdateApiDestination$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateApiDestinationCommand}.
+ */
 export interface UpdateApiDestinationCommandInput extends UpdateApiDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateApiDestinationCommand}.
+ */
 export interface UpdateApiDestinationCommandOutput extends UpdateApiDestinationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,68 @@ export interface UpdateApiDestinationCommandOutput extends UpdateApiDestinationR
  * ```javascript
  * import { EventBridgeClient, UpdateApiDestinationCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, UpdateApiDestinationCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // UpdateApiDestinationRequest
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   ConnectionArn: "STRING_VALUE",
+ *   InvocationEndpoint: "STRING_VALUE",
+ *   HttpMethod: "POST" || "GET" || "HEAD" || "OPTIONS" || "PUT" || "PATCH" || "DELETE",
+ *   InvocationRateLimitPerSecond: Number("int"),
+ * };
  * const command = new UpdateApiDestinationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateApiDestinationResponse
+ * //   ApiDestinationArn: "STRING_VALUE",
+ * //   ApiDestinationState: "ACTIVE" || "INACTIVE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateApiDestinationCommandInput - {@link UpdateApiDestinationCommandInput}
+ * @returns {@link UpdateApiDestinationCommandOutput}
  * @see {@link UpdateApiDestinationCommandInput} for command's `input` shape.
  * @see {@link UpdateApiDestinationCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request failed because it attempted to create resource beyond the allowed service
+ *       quota.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateApiDestinationCommand extends $Command<
-  UpdateApiDestinationCommandInput,
-  UpdateApiDestinationCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateApiDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateApiDestinationCommandInput, UpdateApiDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "UpdateApiDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateApiDestinationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateApiDestinationResponse.filterSensitiveLog,
+export class UpdateApiDestinationCommand extends command<UpdateApiDestinationCommandInput, UpdateApiDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateApiDestination",
+  UpdateApiDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApiDestinationRequest;
+      output: UpdateApiDestinationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateApiDestinationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateApiDestinationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateApiDestinationCommandOutput> {
-    return deserializeAws_json1_1UpdateApiDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateApiDestinationCommandInput;
+      output: UpdateApiDestinationCommandOutput;
+    };
+  };
 }

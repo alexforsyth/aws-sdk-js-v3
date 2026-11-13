@@ -1,27 +1,37 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeFargateProfileCommandInput,
+  type DescribeFargateProfileCommandOutput,
   DescribeFargateProfileCommand,
-  DescribeFargateProfileCommandInput,
 } from "../commands/DescribeFargateProfileCommand";
-import { EKSClient } from "../EKSClient";
+import type { EKSClient } from "../EKSClient";
+import type { EKSServiceException } from "../models/EKSServiceException";
+import type { ResourceNotFoundException } from "../models/errors";
 
-const checkState = async (client: EKSClient, input: DescribeFargateProfileCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EKSClient, input: DescribeFargateProfileCommandInput): Promise<WaiterResult<DescribeFargateProfileCommandOutput | EKSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeFargateProfileCommand(input));
+    let result: DescribeFargateProfileCommandOutput & any = await client.send(new DescribeFargateProfileCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.fargateProfile.status;
-      };
+      }
       if (returnComparator() === "DELETE_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -34,7 +44,7 @@ const checkState = async (client: EKSClient, input: DescribeFargateProfileComman
 export const waitForFargateProfileDeleted = async (
   params: WaiterConfiguration<EKSClient>,
   input: DescribeFargateProfileCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeFargateProfileCommandOutput | EKSServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -46,8 +56,8 @@ export const waitForFargateProfileDeleted = async (
 export const waitUntilFargateProfileDeleted = async (
   params: WaiterConfiguration<EKSClient>,
   input: DescribeFargateProfileCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundException>;
 };

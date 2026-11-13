@@ -1,212 +1,376 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultECSHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AssociateGatewayWithClusterCommandInput,
+  AssociateGatewayWithClusterCommandOutput,
+} from "./commands/AssociateGatewayWithClusterCommand";
+import type {
+  ContinueServiceDeploymentCommandInput,
+  ContinueServiceDeploymentCommandOutput,
+} from "./commands/ContinueServiceDeploymentCommand";
+import type {
   CreateCapacityProviderCommandInput,
   CreateCapacityProviderCommandOutput,
 } from "./commands/CreateCapacityProviderCommand";
-import { CreateClusterCommandInput, CreateClusterCommandOutput } from "./commands/CreateClusterCommand";
-import { CreateServiceCommandInput, CreateServiceCommandOutput } from "./commands/CreateServiceCommand";
-import { CreateTaskSetCommandInput, CreateTaskSetCommandOutput } from "./commands/CreateTaskSetCommand";
-import {
+import type { CreateClusterCommandInput, CreateClusterCommandOutput } from "./commands/CreateClusterCommand";
+import type { CreateDaemonCommandInput, CreateDaemonCommandOutput } from "./commands/CreateDaemonCommand";
+import type {
+  CreateExpressGatewayServiceCommandInput,
+  CreateExpressGatewayServiceCommandOutput,
+} from "./commands/CreateExpressGatewayServiceCommand";
+import type { CreateGatewayCommandInput, CreateGatewayCommandOutput } from "./commands/CreateGatewayCommand";
+import type { CreateServiceCommandInput, CreateServiceCommandOutput } from "./commands/CreateServiceCommand";
+import type { CreateTaskSetCommandInput, CreateTaskSetCommandOutput } from "./commands/CreateTaskSetCommand";
+import type {
   DeleteAccountSettingCommandInput,
   DeleteAccountSettingCommandOutput,
 } from "./commands/DeleteAccountSettingCommand";
-import { DeleteAttributesCommandInput, DeleteAttributesCommandOutput } from "./commands/DeleteAttributesCommand";
-import {
+import type { DeleteAttributesCommandInput, DeleteAttributesCommandOutput } from "./commands/DeleteAttributesCommand";
+import type {
   DeleteCapacityProviderCommandInput,
   DeleteCapacityProviderCommandOutput,
 } from "./commands/DeleteCapacityProviderCommand";
-import { DeleteClusterCommandInput, DeleteClusterCommandOutput } from "./commands/DeleteClusterCommand";
-import { DeleteServiceCommandInput, DeleteServiceCommandOutput } from "./commands/DeleteServiceCommand";
-import { DeleteTaskSetCommandInput, DeleteTaskSetCommandOutput } from "./commands/DeleteTaskSetCommand";
-import {
+import type { DeleteClusterCommandInput, DeleteClusterCommandOutput } from "./commands/DeleteClusterCommand";
+import type { DeleteDaemonCommandInput, DeleteDaemonCommandOutput } from "./commands/DeleteDaemonCommand";
+import type {
+  DeleteDaemonTaskDefinitionCommandInput,
+  DeleteDaemonTaskDefinitionCommandOutput,
+} from "./commands/DeleteDaemonTaskDefinitionCommand";
+import type {
+  DeleteExpressGatewayServiceCommandInput,
+  DeleteExpressGatewayServiceCommandOutput,
+} from "./commands/DeleteExpressGatewayServiceCommand";
+import type { DeleteGatewayCommandInput, DeleteGatewayCommandOutput } from "./commands/DeleteGatewayCommand";
+import type { DeleteServiceCommandInput, DeleteServiceCommandOutput } from "./commands/DeleteServiceCommand";
+import type {
+  DeleteTaskDefinitionsCommandInput,
+  DeleteTaskDefinitionsCommandOutput,
+} from "./commands/DeleteTaskDefinitionsCommand";
+import type { DeleteTaskSetCommandInput, DeleteTaskSetCommandOutput } from "./commands/DeleteTaskSetCommand";
+import type {
   DeregisterContainerInstanceCommandInput,
   DeregisterContainerInstanceCommandOutput,
 } from "./commands/DeregisterContainerInstanceCommand";
-import {
+import type {
   DeregisterTaskDefinitionCommandInput,
   DeregisterTaskDefinitionCommandOutput,
 } from "./commands/DeregisterTaskDefinitionCommand";
-import {
+import type {
   DescribeCapacityProvidersCommandInput,
   DescribeCapacityProvidersCommandOutput,
 } from "./commands/DescribeCapacityProvidersCommand";
-import { DescribeClustersCommandInput, DescribeClustersCommandOutput } from "./commands/DescribeClustersCommand";
-import {
+import type { DescribeClustersCommandInput, DescribeClustersCommandOutput } from "./commands/DescribeClustersCommand";
+import type {
   DescribeContainerInstancesCommandInput,
   DescribeContainerInstancesCommandOutput,
 } from "./commands/DescribeContainerInstancesCommand";
-import { DescribeServicesCommandInput, DescribeServicesCommandOutput } from "./commands/DescribeServicesCommand";
-import {
+import type { DescribeDaemonCommandInput, DescribeDaemonCommandOutput } from "./commands/DescribeDaemonCommand";
+import type {
+  DescribeDaemonDeploymentsCommandInput,
+  DescribeDaemonDeploymentsCommandOutput,
+} from "./commands/DescribeDaemonDeploymentsCommand";
+import type {
+  DescribeDaemonRevisionsCommandInput,
+  DescribeDaemonRevisionsCommandOutput,
+} from "./commands/DescribeDaemonRevisionsCommand";
+import type {
+  DescribeDaemonTaskDefinitionCommandInput,
+  DescribeDaemonTaskDefinitionCommandOutput,
+} from "./commands/DescribeDaemonTaskDefinitionCommand";
+import type {
+  DescribeExpressGatewayServiceCommandInput,
+  DescribeExpressGatewayServiceCommandOutput,
+} from "./commands/DescribeExpressGatewayServiceCommand";
+import type { DescribeGatewayCommandInput, DescribeGatewayCommandOutput } from "./commands/DescribeGatewayCommand";
+import type {
+  DescribeGatewayResourcesCommandInput,
+  DescribeGatewayResourcesCommandOutput,
+} from "./commands/DescribeGatewayResourcesCommand";
+import type {
+  DescribeGatewayRouteCommandInput,
+  DescribeGatewayRouteCommandOutput,
+} from "./commands/DescribeGatewayRouteCommand";
+import type {
+  DescribeServiceDeploymentsCommandInput,
+  DescribeServiceDeploymentsCommandOutput,
+} from "./commands/DescribeServiceDeploymentsCommand";
+import type {
+  DescribeServiceRevisionsCommandInput,
+  DescribeServiceRevisionsCommandOutput,
+} from "./commands/DescribeServiceRevisionsCommand";
+import type { DescribeServicesCommandInput, DescribeServicesCommandOutput } from "./commands/DescribeServicesCommand";
+import type {
   DescribeTaskDefinitionCommandInput,
   DescribeTaskDefinitionCommandOutput,
 } from "./commands/DescribeTaskDefinitionCommand";
-import { DescribeTasksCommandInput, DescribeTasksCommandOutput } from "./commands/DescribeTasksCommand";
-import { DescribeTaskSetsCommandInput, DescribeTaskSetsCommandOutput } from "./commands/DescribeTaskSetsCommand";
-import {
+import type { DescribeTasksCommandInput, DescribeTasksCommandOutput } from "./commands/DescribeTasksCommand";
+import type { DescribeTaskSetsCommandInput, DescribeTaskSetsCommandOutput } from "./commands/DescribeTaskSetsCommand";
+import type {
+  DisassociateGatewayFromClusterCommandInput,
+  DisassociateGatewayFromClusterCommandOutput,
+} from "./commands/DisassociateGatewayFromClusterCommand";
+import type {
   DiscoverPollEndpointCommandInput,
   DiscoverPollEndpointCommandOutput,
 } from "./commands/DiscoverPollEndpointCommand";
-import { ExecuteCommandCommandInput, ExecuteCommandCommandOutput } from "./commands/ExecuteCommandCommand";
-import {
+import type { ExecuteCommandCommandInput, ExecuteCommandCommandOutput } from "./commands/ExecuteCommandCommand";
+import type {
+  GetTaskProtectionCommandInput,
+  GetTaskProtectionCommandOutput,
+} from "./commands/GetTaskProtectionCommand";
+import type {
   ListAccountSettingsCommandInput,
   ListAccountSettingsCommandOutput,
 } from "./commands/ListAccountSettingsCommand";
-import { ListAttributesCommandInput, ListAttributesCommandOutput } from "./commands/ListAttributesCommand";
-import { ListClustersCommandInput, ListClustersCommandOutput } from "./commands/ListClustersCommand";
-import {
+import type { ListAttributesCommandInput, ListAttributesCommandOutput } from "./commands/ListAttributesCommand";
+import type { ListClustersCommandInput, ListClustersCommandOutput } from "./commands/ListClustersCommand";
+import type {
   ListContainerInstancesCommandInput,
   ListContainerInstancesCommandOutput,
 } from "./commands/ListContainerInstancesCommand";
-import { ListServicesCommandInput, ListServicesCommandOutput } from "./commands/ListServicesCommand";
-import {
+import type {
+  ListDaemonDeploymentsCommandInput,
+  ListDaemonDeploymentsCommandOutput,
+} from "./commands/ListDaemonDeploymentsCommand";
+import type { ListDaemonsCommandInput, ListDaemonsCommandOutput } from "./commands/ListDaemonsCommand";
+import type {
+  ListDaemonTaskDefinitionsCommandInput,
+  ListDaemonTaskDefinitionsCommandOutput,
+} from "./commands/ListDaemonTaskDefinitionsCommand";
+import type {
+  ListGatewayClusterAssociationsCommandInput,
+  ListGatewayClusterAssociationsCommandOutput,
+} from "./commands/ListGatewayClusterAssociationsCommand";
+import type {
+  ListGatewayRoutesCommandInput,
+  ListGatewayRoutesCommandOutput,
+} from "./commands/ListGatewayRoutesCommand";
+import type { ListGatewaysCommandInput, ListGatewaysCommandOutput } from "./commands/ListGatewaysCommand";
+import type {
+  ListServiceDeploymentsCommandInput,
+  ListServiceDeploymentsCommandOutput,
+} from "./commands/ListServiceDeploymentsCommand";
+import type {
+  ListServicesByNamespaceCommandInput,
+  ListServicesByNamespaceCommandOutput,
+} from "./commands/ListServicesByNamespaceCommand";
+import type { ListServicesCommandInput, ListServicesCommandOutput } from "./commands/ListServicesCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ListTaskDefinitionFamiliesCommandInput,
   ListTaskDefinitionFamiliesCommandOutput,
 } from "./commands/ListTaskDefinitionFamiliesCommand";
-import {
+import type {
   ListTaskDefinitionsCommandInput,
   ListTaskDefinitionsCommandOutput,
 } from "./commands/ListTaskDefinitionsCommand";
-import { ListTasksCommandInput, ListTasksCommandOutput } from "./commands/ListTasksCommand";
-import { PutAccountSettingCommandInput, PutAccountSettingCommandOutput } from "./commands/PutAccountSettingCommand";
-import {
+import type { ListTasksCommandInput, ListTasksCommandOutput } from "./commands/ListTasksCommand";
+import type {
+  PutAccountSettingCommandInput,
+  PutAccountSettingCommandOutput,
+} from "./commands/PutAccountSettingCommand";
+import type {
   PutAccountSettingDefaultCommandInput,
   PutAccountSettingDefaultCommandOutput,
 } from "./commands/PutAccountSettingDefaultCommand";
-import { PutAttributesCommandInput, PutAttributesCommandOutput } from "./commands/PutAttributesCommand";
-import {
+import type { PutAttributesCommandInput, PutAttributesCommandOutput } from "./commands/PutAttributesCommand";
+import type {
   PutClusterCapacityProvidersCommandInput,
   PutClusterCapacityProvidersCommandOutput,
 } from "./commands/PutClusterCapacityProvidersCommand";
-import {
+import type {
   RegisterContainerInstanceCommandInput,
   RegisterContainerInstanceCommandOutput,
 } from "./commands/RegisterContainerInstanceCommand";
-import {
+import type {
+  RegisterDaemonTaskDefinitionCommandInput,
+  RegisterDaemonTaskDefinitionCommandOutput,
+} from "./commands/RegisterDaemonTaskDefinitionCommand";
+import type {
   RegisterTaskDefinitionCommandInput,
   RegisterTaskDefinitionCommandOutput,
 } from "./commands/RegisterTaskDefinitionCommand";
-import { RunTaskCommandInput, RunTaskCommandOutput } from "./commands/RunTaskCommand";
-import { StartTaskCommandInput, StartTaskCommandOutput } from "./commands/StartTaskCommand";
-import { StopTaskCommandInput, StopTaskCommandOutput } from "./commands/StopTaskCommand";
-import {
+import type { RunTaskCommandInput, RunTaskCommandOutput } from "./commands/RunTaskCommand";
+import type { StartTaskCommandInput, StartTaskCommandOutput } from "./commands/StartTaskCommand";
+import type {
+  StopServiceDeploymentCommandInput,
+  StopServiceDeploymentCommandOutput,
+} from "./commands/StopServiceDeploymentCommand";
+import type { StopTaskCommandInput, StopTaskCommandOutput } from "./commands/StopTaskCommand";
+import type {
   SubmitAttachmentStateChangesCommandInput,
   SubmitAttachmentStateChangesCommandOutput,
 } from "./commands/SubmitAttachmentStateChangesCommand";
-import {
+import type {
   SubmitContainerStateChangeCommandInput,
   SubmitContainerStateChangeCommandOutput,
 } from "./commands/SubmitContainerStateChangeCommand";
-import {
+import type {
   SubmitTaskStateChangeCommandInput,
   SubmitTaskStateChangeCommandOutput,
 } from "./commands/SubmitTaskStateChangeCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateCapacityProviderCommandInput,
   UpdateCapacityProviderCommandOutput,
 } from "./commands/UpdateCapacityProviderCommand";
-import { UpdateClusterCommandInput, UpdateClusterCommandOutput } from "./commands/UpdateClusterCommand";
-import {
+import type { UpdateClusterCommandInput, UpdateClusterCommandOutput } from "./commands/UpdateClusterCommand";
+import type {
   UpdateClusterSettingsCommandInput,
   UpdateClusterSettingsCommandOutput,
 } from "./commands/UpdateClusterSettingsCommand";
-import {
+import type {
   UpdateContainerAgentCommandInput,
   UpdateContainerAgentCommandOutput,
 } from "./commands/UpdateContainerAgentCommand";
-import {
+import type {
   UpdateContainerInstancesStateCommandInput,
   UpdateContainerInstancesStateCommandOutput,
 } from "./commands/UpdateContainerInstancesStateCommand";
-import { UpdateServiceCommandInput, UpdateServiceCommandOutput } from "./commands/UpdateServiceCommand";
-import {
+import type { UpdateDaemonCommandInput, UpdateDaemonCommandOutput } from "./commands/UpdateDaemonCommand";
+import type {
+  UpdateExpressGatewayServiceCommandInput,
+  UpdateExpressGatewayServiceCommandOutput,
+} from "./commands/UpdateExpressGatewayServiceCommand";
+import type { UpdateGatewayCommandInput, UpdateGatewayCommandOutput } from "./commands/UpdateGatewayCommand";
+import type { UpdateServiceCommandInput, UpdateServiceCommandOutput } from "./commands/UpdateServiceCommand";
+import type {
   UpdateServicePrimaryTaskSetCommandInput,
   UpdateServicePrimaryTaskSetCommandOutput,
 } from "./commands/UpdateServicePrimaryTaskSetCommand";
-import { UpdateTaskSetCommandInput, UpdateTaskSetCommandOutput } from "./commands/UpdateTaskSetCommand";
+import type {
+  UpdateTaskProtectionCommandInput,
+  UpdateTaskProtectionCommandOutput,
+} from "./commands/UpdateTaskProtectionCommand";
+import type { UpdateTaskSetCommandInput, UpdateTaskSetCommandOutput } from "./commands/UpdateTaskSetCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AssociateGatewayWithClusterCommandInput
+  | ContinueServiceDeploymentCommandInput
   | CreateCapacityProviderCommandInput
   | CreateClusterCommandInput
+  | CreateDaemonCommandInput
+  | CreateExpressGatewayServiceCommandInput
+  | CreateGatewayCommandInput
   | CreateServiceCommandInput
   | CreateTaskSetCommandInput
   | DeleteAccountSettingCommandInput
   | DeleteAttributesCommandInput
   | DeleteCapacityProviderCommandInput
   | DeleteClusterCommandInput
+  | DeleteDaemonCommandInput
+  | DeleteDaemonTaskDefinitionCommandInput
+  | DeleteExpressGatewayServiceCommandInput
+  | DeleteGatewayCommandInput
   | DeleteServiceCommandInput
+  | DeleteTaskDefinitionsCommandInput
   | DeleteTaskSetCommandInput
   | DeregisterContainerInstanceCommandInput
   | DeregisterTaskDefinitionCommandInput
   | DescribeCapacityProvidersCommandInput
   | DescribeClustersCommandInput
   | DescribeContainerInstancesCommandInput
+  | DescribeDaemonCommandInput
+  | DescribeDaemonDeploymentsCommandInput
+  | DescribeDaemonRevisionsCommandInput
+  | DescribeDaemonTaskDefinitionCommandInput
+  | DescribeExpressGatewayServiceCommandInput
+  | DescribeGatewayCommandInput
+  | DescribeGatewayResourcesCommandInput
+  | DescribeGatewayRouteCommandInput
+  | DescribeServiceDeploymentsCommandInput
+  | DescribeServiceRevisionsCommandInput
   | DescribeServicesCommandInput
   | DescribeTaskDefinitionCommandInput
   | DescribeTaskSetsCommandInput
   | DescribeTasksCommandInput
+  | DisassociateGatewayFromClusterCommandInput
   | DiscoverPollEndpointCommandInput
   | ExecuteCommandCommandInput
+  | GetTaskProtectionCommandInput
   | ListAccountSettingsCommandInput
   | ListAttributesCommandInput
   | ListClustersCommandInput
   | ListContainerInstancesCommandInput
+  | ListDaemonDeploymentsCommandInput
+  | ListDaemonTaskDefinitionsCommandInput
+  | ListDaemonsCommandInput
+  | ListGatewayClusterAssociationsCommandInput
+  | ListGatewayRoutesCommandInput
+  | ListGatewaysCommandInput
+  | ListServiceDeploymentsCommandInput
+  | ListServicesByNamespaceCommandInput
   | ListServicesCommandInput
   | ListTagsForResourceCommandInput
   | ListTaskDefinitionFamiliesCommandInput
@@ -217,9 +381,11 @@ export type ServiceInputTypes =
   | PutAttributesCommandInput
   | PutClusterCapacityProvidersCommandInput
   | RegisterContainerInstanceCommandInput
+  | RegisterDaemonTaskDefinitionCommandInput
   | RegisterTaskDefinitionCommandInput
   | RunTaskCommandInput
   | StartTaskCommandInput
+  | StopServiceDeploymentCommandInput
   | StopTaskCommandInput
   | SubmitAttachmentStateChangesCommandInput
   | SubmitContainerStateChangeCommandInput
@@ -231,36 +397,73 @@ export type ServiceInputTypes =
   | UpdateClusterSettingsCommandInput
   | UpdateContainerAgentCommandInput
   | UpdateContainerInstancesStateCommandInput
+  | UpdateDaemonCommandInput
+  | UpdateExpressGatewayServiceCommandInput
+  | UpdateGatewayCommandInput
   | UpdateServiceCommandInput
   | UpdateServicePrimaryTaskSetCommandInput
+  | UpdateTaskProtectionCommandInput
   | UpdateTaskSetCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AssociateGatewayWithClusterCommandOutput
+  | ContinueServiceDeploymentCommandOutput
   | CreateCapacityProviderCommandOutput
   | CreateClusterCommandOutput
+  | CreateDaemonCommandOutput
+  | CreateExpressGatewayServiceCommandOutput
+  | CreateGatewayCommandOutput
   | CreateServiceCommandOutput
   | CreateTaskSetCommandOutput
   | DeleteAccountSettingCommandOutput
   | DeleteAttributesCommandOutput
   | DeleteCapacityProviderCommandOutput
   | DeleteClusterCommandOutput
+  | DeleteDaemonCommandOutput
+  | DeleteDaemonTaskDefinitionCommandOutput
+  | DeleteExpressGatewayServiceCommandOutput
+  | DeleteGatewayCommandOutput
   | DeleteServiceCommandOutput
+  | DeleteTaskDefinitionsCommandOutput
   | DeleteTaskSetCommandOutput
   | DeregisterContainerInstanceCommandOutput
   | DeregisterTaskDefinitionCommandOutput
   | DescribeCapacityProvidersCommandOutput
   | DescribeClustersCommandOutput
   | DescribeContainerInstancesCommandOutput
+  | DescribeDaemonCommandOutput
+  | DescribeDaemonDeploymentsCommandOutput
+  | DescribeDaemonRevisionsCommandOutput
+  | DescribeDaemonTaskDefinitionCommandOutput
+  | DescribeExpressGatewayServiceCommandOutput
+  | DescribeGatewayCommandOutput
+  | DescribeGatewayResourcesCommandOutput
+  | DescribeGatewayRouteCommandOutput
+  | DescribeServiceDeploymentsCommandOutput
+  | DescribeServiceRevisionsCommandOutput
   | DescribeServicesCommandOutput
   | DescribeTaskDefinitionCommandOutput
   | DescribeTaskSetsCommandOutput
   | DescribeTasksCommandOutput
+  | DisassociateGatewayFromClusterCommandOutput
   | DiscoverPollEndpointCommandOutput
   | ExecuteCommandCommandOutput
+  | GetTaskProtectionCommandOutput
   | ListAccountSettingsCommandOutput
   | ListAttributesCommandOutput
   | ListClustersCommandOutput
   | ListContainerInstancesCommandOutput
+  | ListDaemonDeploymentsCommandOutput
+  | ListDaemonTaskDefinitionsCommandOutput
+  | ListDaemonsCommandOutput
+  | ListGatewayClusterAssociationsCommandOutput
+  | ListGatewayRoutesCommandOutput
+  | ListGatewaysCommandOutput
+  | ListServiceDeploymentsCommandOutput
+  | ListServicesByNamespaceCommandOutput
   | ListServicesCommandOutput
   | ListTagsForResourceCommandOutput
   | ListTaskDefinitionFamiliesCommandOutput
@@ -271,9 +474,11 @@ export type ServiceOutputTypes =
   | PutAttributesCommandOutput
   | PutClusterCapacityProvidersCommandOutput
   | RegisterContainerInstanceCommandOutput
+  | RegisterDaemonTaskDefinitionCommandOutput
   | RegisterTaskDefinitionCommandOutput
   | RunTaskCommandOutput
   | StartTaskCommandOutput
+  | StopServiceDeploymentCommandOutput
   | StopTaskCommandOutput
   | SubmitAttachmentStateChangesCommandOutput
   | SubmitContainerStateChangeCommandOutput
@@ -285,22 +490,29 @@ export type ServiceOutputTypes =
   | UpdateClusterSettingsCommandOutput
   | UpdateContainerAgentCommandOutput
   | UpdateContainerInstancesStateCommandOutput
+  | UpdateDaemonCommandOutput
+  | UpdateExpressGatewayServiceCommandOutput
+  | UpdateGatewayCommandOutput
   | UpdateServiceCommandOutput
   | UpdateServicePrimaryTaskSetCommandOutput
+  | UpdateTaskProtectionCommandOutput
   | UpdateTaskSetCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -312,7 +524,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -351,25 +563,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -382,75 +585,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ECSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ECSClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ECSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ECSClient class constructor that set the region, credentials and other options.
  */
 export interface ECSClientConfig extends ECSClientConfigType {}
 
-type ECSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ECSClient class. This is resolved and normalized from the {@link ECSClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ECSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ECSClient class. This is resolved and normalized from the {@link ECSClientConfig | constructor configuration interface}.
  */
 export interface ECSClientResolvedConfig extends ECSClientResolvedConfigType {}
 
 /**
- * <fullname>Amazon Elastic Container Service</fullname>
- * 		       <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes
- * 			it easy to run, stop, and manage Docker containers on a cluster. You can host your
- * 			cluster on a serverless infrastructure that is managed by Amazon ECS by launching your
- * 			services or tasks on Fargate. For more control, you can host your tasks on a cluster
- * 			of Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage.</p>
- * 		       <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API
- * 			calls, allows you to get the state of your cluster from a centralized service, and gives
- * 			you access to many familiar Amazon EC2 features.</p>
- * 		       <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on
- * 			your resource needs, isolation policies, and availability requirements. Amazon ECS eliminates
- * 			the need for you to operate your own cluster management and configuration management
- * 			systems or worry about scaling your management infrastructure.</p>
+ * <fullname>Amazon Elastic Container Service</fullname> <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service. It makes it easy to run, stop, and manage Docker containers. You can host your cluster on a serverless infrastructure that's managed by Amazon ECS by launching your services or tasks on Fargate. For more control, you can host your tasks on a cluster of Amazon Elastic Compute Cloud (Amazon EC2) or External (on-premises) instances that you manage.</p> <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API calls. This makes it easy to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. With Amazon ECS, you don't need to operate your own cluster management and configuration management systems. You also don't need to worry about scaling your management infrastructure. </p>
+ * @public
  */
 export class ECSClient extends __Client<
   __HttpHandlerOptions,
@@ -463,22 +704,36 @@ export class ECSClient extends __Client<
    */
   readonly config: ECSClientResolvedConfig;
 
-  constructor(configuration: ECSClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ECSClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultECSHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ECSClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

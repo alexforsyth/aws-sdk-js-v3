@@ -1,115 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateWorkforceRequest, CreateWorkforceResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1CreateWorkforceCommand,
-  serializeAws_json1_1CreateWorkforceCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateWorkforceRequest, CreateWorkforceResponse } from "../models/models_2";
+import { CreateWorkforce$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateWorkforceCommand}.
+ */
 export interface CreateWorkforceCommandInput extends CreateWorkforceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateWorkforceCommand}.
+ */
 export interface CreateWorkforceCommandOutput extends CreateWorkforceResponse, __MetadataBearer {}
 
 /**
- * <p>Use this operation to create a workforce. This operation will return an error
- *           if a workforce already exists in the Amazon Web Services Region that you specify. You can only
- *           create one workforce in each Amazon Web Services Region per Amazon Web Services account.</p>
- *
- *         <p>If you want to create a new workforce in an Amazon Web Services Region where
- *       a workforce already exists, use the  API
- *       operation to delete the existing workforce and then use <code>CreateWorkforce</code>
- *       to create a new workforce.</p>
- *
- *          <p>To create a private workforce using Amazon Cognito, you must specify a Cognito user pool
- *     in <code>CognitoConfig</code>.
- *     You can also create an Amazon Cognito workforce using the Amazon SageMaker console.
- *     For more information, see
- *       <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html">
- *       Create a Private Workforce (Amazon Cognito)</a>.</p>
- *
- *          <p>To create a private workforce using your own OIDC Identity Provider (IdP), specify your IdP
- *       configuration in <code>OidcConfig</code>. Your OIDC IdP must support <i>groups</i>
- *       because groups are used by Ground Truth and Amazon A2I to create work teams.
- *       For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html">
- *       Create a Private Workforce (OIDC IdP)</a>.</p>
+ * <p>Use this operation to create a workforce. This operation will return an error if a workforce already exists in the Amazon Web Services Region that you specify. You can only create one workforce in each Amazon Web Services Region per Amazon Web Services account.</p> <p>If you want to create a new workforce in an Amazon Web Services Region where a workforce already exists, use the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkforce.html">DeleteWorkforce</a> API operation to delete the existing workforce and then use <code>CreateWorkforce</code> to create a new workforce.</p> <p>To create a private workforce using Amazon Cognito, you must specify a Cognito user pool in <code>CognitoConfig</code>. You can also create an Amazon Cognito workforce using the Amazon SageMaker console. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html"> Create a Private Workforce (Amazon Cognito)</a>.</p> <p>To create a private workforce using your own OIDC Identity Provider (IdP), specify your IdP configuration in <code>OidcConfig</code>. Your OIDC IdP must support <i>groups</i> because groups are used by Ground Truth and Amazon A2I to create work teams. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html"> Create a Private Workforce (OIDC IdP)</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, CreateWorkforceCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateWorkforceCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateWorkforceRequest
+ *   CognitoConfig: { // CognitoConfig
+ *     UserPool: "STRING_VALUE", // required
+ *     ClientId: "STRING_VALUE", // required
+ *   },
+ *   OidcConfig: { // OidcConfig
+ *     ClientId: "STRING_VALUE", // required
+ *     ClientSecret: "STRING_VALUE", // required
+ *     Issuer: "STRING_VALUE", // required
+ *     AuthorizationEndpoint: "STRING_VALUE", // required
+ *     TokenEndpoint: "STRING_VALUE", // required
+ *     UserInfoEndpoint: "STRING_VALUE", // required
+ *     LogoutEndpoint: "STRING_VALUE", // required
+ *     JwksUri: "STRING_VALUE", // required
+ *     Scope: "STRING_VALUE",
+ *     AuthenticationRequestExtraParams: { // AuthenticationRequestExtraParams
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   SourceIpConfig: { // SourceIpConfig
+ *     Cidrs: [ // Cidrs // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   WorkforceName: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   WorkforceVpcConfig: { // WorkforceVpcConfigRequest
+ *     VpcId: "STRING_VALUE",
+ *     SecurityGroupIds: [ // WorkforceSecurityGroupIds
+ *       "STRING_VALUE",
+ *     ],
+ *     Subnets: [ // WorkforceSubnets
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   IpAddressType: "ipv4" || "dualstack",
+ * };
  * const command = new CreateWorkforceCommand(input);
  * const response = await client.send(command);
+ * // { // CreateWorkforceResponse
+ * //   WorkforceArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateWorkforceCommandInput - {@link CreateWorkforceCommandInput}
+ * @returns {@link CreateWorkforceCommandOutput}
  * @see {@link CreateWorkforceCommandInput} for command's `input` shape.
  * @see {@link CreateWorkforceCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateWorkforceCommand extends $Command<
-  CreateWorkforceCommandInput,
-  CreateWorkforceCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateWorkforceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateWorkforceCommandInput, CreateWorkforceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateWorkforceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateWorkforceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateWorkforceResponse.filterSensitiveLog,
+export class CreateWorkforceCommand extends command<CreateWorkforceCommandInput, CreateWorkforceCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateWorkforce",
+  CreateWorkforce$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWorkforceRequest;
+      output: CreateWorkforceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateWorkforceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateWorkforceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateWorkforceCommandOutput> {
-    return deserializeAws_json1_1CreateWorkforceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateWorkforceCommandInput;
+      output: CreateWorkforceCommandOutput;
+    };
+  };
 }

@@ -1,95 +1,131 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { UpdateFlowMediaStreamRequest, UpdateFlowMediaStreamResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateFlowMediaStreamCommand,
-  serializeAws_restJson1UpdateFlowMediaStreamCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFlowMediaStreamRequest, UpdateFlowMediaStreamResponse } from "../models/models_1";
+import { UpdateFlowMediaStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFlowMediaStreamCommand}.
+ */
 export interface UpdateFlowMediaStreamCommandInput extends UpdateFlowMediaStreamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFlowMediaStreamCommand}.
+ */
 export interface UpdateFlowMediaStreamCommandOutput extends UpdateFlowMediaStreamResponse, __MetadataBearer {}
 
 /**
- * Updates an existing media stream.
+ * <p> Updates an existing media stream.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, UpdateFlowMediaStreamCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, UpdateFlowMediaStreamCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // UpdateFlowMediaStreamRequest
+ *   Attributes: { // MediaStreamAttributesRequest
+ *     Fmtp: { // FmtpRequest
+ *       ChannelOrder: "STRING_VALUE",
+ *       Colorimetry: "BT601" || "BT709" || "BT2020" || "BT2100" || "ST2065-1" || "ST2065-3" || "XYZ",
+ *       ExactFramerate: "STRING_VALUE",
+ *       Par: "STRING_VALUE",
+ *       Range: "NARROW" || "FULL" || "FULLPROTECT",
+ *       ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ *       Tcs: "SDR" || "PQ" || "HLG" || "LINEAR" || "BT2100LINPQ" || "BT2100LINHLG" || "ST2065-1" || "ST428-1" || "DENSITY",
+ *     },
+ *     Lang: "STRING_VALUE",
+ *   },
+ *   ClockRate: Number("int"),
+ *   Description: "STRING_VALUE",
+ *   FlowArn: "STRING_VALUE", // required
+ *   MediaStreamName: "STRING_VALUE", // required
+ *   MediaStreamType: "video" || "audio" || "ancillary-data",
+ *   VideoFormat: "STRING_VALUE",
+ * };
  * const command = new UpdateFlowMediaStreamCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateFlowMediaStreamResponse
+ * //   FlowArn: "STRING_VALUE",
+ * //   MediaStream: { // MediaStream
+ * //     Attributes: { // MediaStreamAttributes
+ * //       Fmtp: { // Fmtp
+ * //         ChannelOrder: "STRING_VALUE",
+ * //         Colorimetry: "BT601" || "BT709" || "BT2020" || "BT2100" || "ST2065-1" || "ST2065-3" || "XYZ",
+ * //         ExactFramerate: "STRING_VALUE",
+ * //         Par: "STRING_VALUE",
+ * //         Range: "NARROW" || "FULL" || "FULLPROTECT",
+ * //         ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ * //         Tcs: "SDR" || "PQ" || "HLG" || "LINEAR" || "BT2100LINPQ" || "BT2100LINHLG" || "ST2065-1" || "ST428-1" || "DENSITY",
+ * //       },
+ * //       Lang: "STRING_VALUE",
+ * //     },
+ * //     ClockRate: Number("int"),
+ * //     Description: "STRING_VALUE",
+ * //     Fmt: Number("int"), // required
+ * //     MediaStreamId: Number("int"), // required
+ * //     MediaStreamName: "STRING_VALUE", // required
+ * //     MediaStreamType: "video" || "audio" || "ancillary-data", // required
+ * //     VideoFormat: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateFlowMediaStreamCommandInput - {@link UpdateFlowMediaStreamCommandInput}
+ * @returns {@link UpdateFlowMediaStreamCommandOutput}
  * @see {@link UpdateFlowMediaStreamCommandInput} for command's `input` shape.
  * @see {@link UpdateFlowMediaStreamCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateFlowMediaStreamCommand extends $Command<
-  UpdateFlowMediaStreamCommandInput,
-  UpdateFlowMediaStreamCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateFlowMediaStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateFlowMediaStreamCommandInput, UpdateFlowMediaStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "UpdateFlowMediaStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateFlowMediaStreamRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateFlowMediaStreamResponse.filterSensitiveLog,
+export class UpdateFlowMediaStreamCommand extends command<UpdateFlowMediaStreamCommandInput, UpdateFlowMediaStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFlowMediaStream",
+  UpdateFlowMediaStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFlowMediaStreamRequest;
+      output: UpdateFlowMediaStreamResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateFlowMediaStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateFlowMediaStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateFlowMediaStreamCommandOutput> {
-    return deserializeAws_restJson1UpdateFlowMediaStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateFlowMediaStreamCommandInput;
+      output: UpdateFlowMediaStreamCommandOutput;
+    };
+  };
 }

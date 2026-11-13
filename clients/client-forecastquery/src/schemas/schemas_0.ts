@@ -1,0 +1,136 @@
+const _DP = "DataPoint";
+const _ED = "EndDate";
+const _F = "Forecast";
+const _FA = "ForecastArn";
+const _Fi = "Filters";
+const _IIE = "InvalidInputException";
+const _INTE = "InvalidNextTokenException";
+const _LEE = "LimitExceededException";
+const _M = "Message";
+const _NT = "NextToken";
+const _P = "Predictions";
+const _QF = "QueryForecast";
+const _QFR = "QueryForecastRequest";
+const _QFRu = "QueryForecastResponse";
+const _QWIF = "QueryWhatIfForecast";
+const _QWIFR = "QueryWhatIfForecastRequest";
+const _QWIFRu = "QueryWhatIfForecastResponse";
+const _RIUE = "ResourceInUseException";
+const _RNFE = "ResourceNotFoundException";
+const _SD = "StartDate";
+const _T = "Timestamp";
+const _TS = "TimeSeries";
+const _V = "Value";
+const _WIFA = "WhatIfForecastArn";
+const _c = "client";
+const _e = "error";
+const _hE = "httpError";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.forecastquery";
+const n0 = "com.amazonaws.forecastquery";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticStructureSchema,
+} from "@smithy/types";
+
+import {
+  InvalidInputException,
+  InvalidNextTokenException,
+  LimitExceededException,
+  ResourceInUseException,
+  ResourceNotFoundException,
+} from "../models/errors";
+import { ForecastqueryServiceException } from "../models/ForecastqueryServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var ForecastqueryServiceException$: StaticErrorSchema = [-3, _s, "ForecastqueryServiceException", 0, [], []];
+_s_registry.registerError(ForecastqueryServiceException$, ForecastqueryServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var InvalidInputException$: StaticErrorSchema = [-3, n0, _IIE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(InvalidInputException$, InvalidInputException);
+export var InvalidNextTokenException$: StaticErrorSchema = [-3, n0, _INTE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(InvalidNextTokenException$, InvalidNextTokenException);
+export var LimitExceededException$: StaticErrorSchema = [-3, n0, _LEE,
+  { [_e]: _c, [_hE]: 409 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(LimitExceededException$, LimitExceededException);
+export var ResourceInUseException$: StaticErrorSchema = [-3, n0, _RIUE,
+  { [_e]: _c, [_hE]: 409 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ResourceInUseException$, ResourceInUseException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+export var DataPoint$: StaticStructureSchema = [3, n0, _DP,
+  0,
+  [_T, _V],
+  [0, 1]
+];
+export var Forecast$: StaticStructureSchema = [3, n0, _F,
+  0,
+  [_P],
+  [() => Predictions]
+];
+export var QueryForecastRequest$: StaticStructureSchema = [3, n0, _QFR,
+  0,
+  [_FA, _Fi, _SD, _ED, _NT],
+  [0, 128 | 0, 0, 0, 0], 2
+];
+export var QueryForecastResponse$: StaticStructureSchema = [3, n0, _QFRu,
+  0,
+  [_F],
+  [() => Forecast$]
+];
+export var QueryWhatIfForecastRequest$: StaticStructureSchema = [3, n0, _QWIFR,
+  0,
+  [_WIFA, _Fi, _SD, _ED, _NT],
+  [0, 128 | 0, 0, 0, 0], 2
+];
+export var QueryWhatIfForecastResponse$: StaticStructureSchema = [3, n0, _QWIFRu,
+  0,
+  [_F],
+  [() => Forecast$]
+];
+var TimeSeries: StaticListSchema = [1, n0, _TS,
+  0, () => DataPoint$
+];
+var Filters = 128 | 0;
+var Predictions: StaticMapSchema = [2, n0, _P,
+  0, 0, () => TimeSeries
+];
+export var QueryForecast$: StaticOperationSchema = [9, n0, _QF,
+  0, () => QueryForecastRequest$, () => QueryForecastResponse$
+];
+export var QueryWhatIfForecast$: StaticOperationSchema = [9, n0, _QWIF,
+  0, () => QueryWhatIfForecastRequest$, () => QueryWhatIfForecastResponse$
+];

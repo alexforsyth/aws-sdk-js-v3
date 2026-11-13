@@ -1,99 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { DescribeLocationFsxWindowsRequest, DescribeLocationFsxWindowsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeLocationFsxWindowsCommand,
-  serializeAws_json1_1DescribeLocationFsxWindowsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeLocationFsxWindowsRequest, DescribeLocationFsxWindowsResponse } from "../models/models_0";
+import { DescribeLocationFsxWindows$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLocationFsxWindowsCommand}.
+ */
 export interface DescribeLocationFsxWindowsCommandInput extends DescribeLocationFsxWindowsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLocationFsxWindowsCommand}.
+ */
 export interface DescribeLocationFsxWindowsCommandOutput extends DescribeLocationFsxWindowsResponse, __MetadataBearer {}
 
 /**
- * <p>Returns metadata, such as the path information about an Amazon FSx for Windows File Server
- *       location.</p>
+ * <p>Provides details about how an DataSync transfer location for an Amazon FSx for Windows File Server file system is configured.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, DescribeLocationFsxWindowsCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, DescribeLocationFsxWindowsCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // DescribeLocationFsxWindowsRequest
+ *   LocationArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeLocationFsxWindowsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeLocationFsxWindowsResponse
+ * //   LocationArn: "STRING_VALUE",
+ * //   LocationUri: "STRING_VALUE",
+ * //   SecurityGroupArns: [ // Ec2SecurityGroupArnList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   User: "STRING_VALUE",
+ * //   Domain: "STRING_VALUE",
+ * //   ManagedSecretConfig: { // ManagedSecretConfig
+ * //     SecretArn: "STRING_VALUE",
+ * //   },
+ * //   CmkSecretConfig: { // CmkSecretConfig
+ * //     SecretArn: "STRING_VALUE",
+ * //     KmsKeyArn: "STRING_VALUE",
+ * //   },
+ * //   CustomSecretConfig: { // CustomSecretConfig
+ * //     SecretArn: "STRING_VALUE",
+ * //     SecretAccessRoleArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeLocationFsxWindowsCommandInput - {@link DescribeLocationFsxWindowsCommandInput}
+ * @returns {@link DescribeLocationFsxWindowsCommandOutput}
  * @see {@link DescribeLocationFsxWindowsCommandInput} for command's `input` shape.
  * @see {@link DescribeLocationFsxWindowsCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeLocationFsxWindowsCommand extends $Command<
-  DescribeLocationFsxWindowsCommandInput,
-  DescribeLocationFsxWindowsCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLocationFsxWindowsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLocationFsxWindowsCommandInput, DescribeLocationFsxWindowsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "DescribeLocationFsxWindowsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeLocationFsxWindowsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeLocationFsxWindowsResponse.filterSensitiveLog,
+export class DescribeLocationFsxWindowsCommand extends command<DescribeLocationFsxWindowsCommandInput, DescribeLocationFsxWindowsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLocationFsxWindows",
+  DescribeLocationFsxWindows$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLocationFsxWindowsRequest;
+      output: DescribeLocationFsxWindowsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeLocationFsxWindowsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeLocationFsxWindowsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeLocationFsxWindowsCommandOutput> {
-    return deserializeAws_json1_1DescribeLocationFsxWindowsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLocationFsxWindowsCommandInput;
+      output: DescribeLocationFsxWindowsCommandOutput;
+    };
+  };
 }

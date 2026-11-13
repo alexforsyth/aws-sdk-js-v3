@@ -1,461 +1,578 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddTagsToResourceCommandInput, AddTagsToResourceCommandOutput } from "./commands/AddTagsToResourceCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultSSMHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AddTagsToResourceCommandInput,
+  AddTagsToResourceCommandOutput,
+} from "./commands/AddTagsToResourceCommand";
+import type {
   AssociateOpsItemRelatedItemCommandInput,
   AssociateOpsItemRelatedItemCommandOutput,
 } from "./commands/AssociateOpsItemRelatedItemCommand";
-import { CancelCommandCommandInput, CancelCommandCommandOutput } from "./commands/CancelCommandCommand";
-import {
+import type { CancelCommandCommandInput, CancelCommandCommandOutput } from "./commands/CancelCommandCommand";
+import type {
   CancelMaintenanceWindowExecutionCommandInput,
   CancelMaintenanceWindowExecutionCommandOutput,
 } from "./commands/CancelMaintenanceWindowExecutionCommand";
-import { CreateActivationCommandInput, CreateActivationCommandOutput } from "./commands/CreateActivationCommand";
-import {
+import type { CreateActivationCommandInput, CreateActivationCommandOutput } from "./commands/CreateActivationCommand";
+import type {
   CreateAssociationBatchCommandInput,
   CreateAssociationBatchCommandOutput,
 } from "./commands/CreateAssociationBatchCommand";
-import { CreateAssociationCommandInput, CreateAssociationCommandOutput } from "./commands/CreateAssociationCommand";
-import { CreateDocumentCommandInput, CreateDocumentCommandOutput } from "./commands/CreateDocumentCommand";
-import {
+import type {
+  CreateAssociationCommandInput,
+  CreateAssociationCommandOutput,
+} from "./commands/CreateAssociationCommand";
+import type {
+  CreateCloudConnectorCommandInput,
+  CreateCloudConnectorCommandOutput,
+} from "./commands/CreateCloudConnectorCommand";
+import type { CreateDocumentCommandInput, CreateDocumentCommandOutput } from "./commands/CreateDocumentCommand";
+import type {
   CreateMaintenanceWindowCommandInput,
   CreateMaintenanceWindowCommandOutput,
 } from "./commands/CreateMaintenanceWindowCommand";
-import { CreateOpsItemCommandInput, CreateOpsItemCommandOutput } from "./commands/CreateOpsItemCommand";
-import { CreateOpsMetadataCommandInput, CreateOpsMetadataCommandOutput } from "./commands/CreateOpsMetadataCommand";
-import {
+import type { CreateOpsItemCommandInput, CreateOpsItemCommandOutput } from "./commands/CreateOpsItemCommand";
+import type {
+  CreateOpsMetadataCommandInput,
+  CreateOpsMetadataCommandOutput,
+} from "./commands/CreateOpsMetadataCommand";
+import type {
   CreatePatchBaselineCommandInput,
   CreatePatchBaselineCommandOutput,
 } from "./commands/CreatePatchBaselineCommand";
-import {
+import type {
   CreateResourceDataSyncCommandInput,
   CreateResourceDataSyncCommandOutput,
 } from "./commands/CreateResourceDataSyncCommand";
-import { DeleteActivationCommandInput, DeleteActivationCommandOutput } from "./commands/DeleteActivationCommand";
-import { DeleteAssociationCommandInput, DeleteAssociationCommandOutput } from "./commands/DeleteAssociationCommand";
-import { DeleteDocumentCommandInput, DeleteDocumentCommandOutput } from "./commands/DeleteDocumentCommand";
-import { DeleteInventoryCommandInput, DeleteInventoryCommandOutput } from "./commands/DeleteInventoryCommand";
-import {
+import type { DeleteActivationCommandInput, DeleteActivationCommandOutput } from "./commands/DeleteActivationCommand";
+import type {
+  DeleteAssociationCommandInput,
+  DeleteAssociationCommandOutput,
+} from "./commands/DeleteAssociationCommand";
+import type {
+  DeleteCloudConnectorCommandInput,
+  DeleteCloudConnectorCommandOutput,
+} from "./commands/DeleteCloudConnectorCommand";
+import type { DeleteDocumentCommandInput, DeleteDocumentCommandOutput } from "./commands/DeleteDocumentCommand";
+import type { DeleteInventoryCommandInput, DeleteInventoryCommandOutput } from "./commands/DeleteInventoryCommand";
+import type {
   DeleteMaintenanceWindowCommandInput,
   DeleteMaintenanceWindowCommandOutput,
 } from "./commands/DeleteMaintenanceWindowCommand";
-import { DeleteOpsMetadataCommandInput, DeleteOpsMetadataCommandOutput } from "./commands/DeleteOpsMetadataCommand";
-import { DeleteParameterCommandInput, DeleteParameterCommandOutput } from "./commands/DeleteParameterCommand";
-import { DeleteParametersCommandInput, DeleteParametersCommandOutput } from "./commands/DeleteParametersCommand";
-import {
+import type { DeleteOpsItemCommandInput, DeleteOpsItemCommandOutput } from "./commands/DeleteOpsItemCommand";
+import type {
+  DeleteOpsMetadataCommandInput,
+  DeleteOpsMetadataCommandOutput,
+} from "./commands/DeleteOpsMetadataCommand";
+import type { DeleteParameterCommandInput, DeleteParameterCommandOutput } from "./commands/DeleteParameterCommand";
+import type { DeleteParametersCommandInput, DeleteParametersCommandOutput } from "./commands/DeleteParametersCommand";
+import type {
   DeletePatchBaselineCommandInput,
   DeletePatchBaselineCommandOutput,
 } from "./commands/DeletePatchBaselineCommand";
-import {
+import type {
   DeleteResourceDataSyncCommandInput,
   DeleteResourceDataSyncCommandOutput,
 } from "./commands/DeleteResourceDataSyncCommand";
-import {
+import type {
+  DeleteResourcePolicyCommandInput,
+  DeleteResourcePolicyCommandOutput,
+} from "./commands/DeleteResourcePolicyCommand";
+import type {
+  DeregisterDefaultHostManagementConfigurationCommandInput,
+  DeregisterDefaultHostManagementConfigurationCommandOutput,
+} from "./commands/DeregisterDefaultHostManagementConfigurationCommand";
+import type {
   DeregisterManagedInstanceCommandInput,
   DeregisterManagedInstanceCommandOutput,
 } from "./commands/DeregisterManagedInstanceCommand";
-import {
+import type {
   DeregisterPatchBaselineForPatchGroupCommandInput,
   DeregisterPatchBaselineForPatchGroupCommandOutput,
 } from "./commands/DeregisterPatchBaselineForPatchGroupCommand";
-import {
+import type {
   DeregisterTargetFromMaintenanceWindowCommandInput,
   DeregisterTargetFromMaintenanceWindowCommandOutput,
 } from "./commands/DeregisterTargetFromMaintenanceWindowCommand";
-import {
+import type {
   DeregisterTaskFromMaintenanceWindowCommandInput,
   DeregisterTaskFromMaintenanceWindowCommandOutput,
 } from "./commands/DeregisterTaskFromMaintenanceWindowCommand";
-import {
+import type {
   DescribeActivationsCommandInput,
   DescribeActivationsCommandOutput,
 } from "./commands/DescribeActivationsCommand";
-import {
+import type {
   DescribeAssociationCommandInput,
   DescribeAssociationCommandOutput,
 } from "./commands/DescribeAssociationCommand";
-import {
+import type {
   DescribeAssociationExecutionsCommandInput,
   DescribeAssociationExecutionsCommandOutput,
 } from "./commands/DescribeAssociationExecutionsCommand";
-import {
+import type {
   DescribeAssociationExecutionTargetsCommandInput,
   DescribeAssociationExecutionTargetsCommandOutput,
 } from "./commands/DescribeAssociationExecutionTargetsCommand";
-import {
+import type {
   DescribeAutomationExecutionsCommandInput,
   DescribeAutomationExecutionsCommandOutput,
 } from "./commands/DescribeAutomationExecutionsCommand";
-import {
+import type {
   DescribeAutomationStepExecutionsCommandInput,
   DescribeAutomationStepExecutionsCommandOutput,
 } from "./commands/DescribeAutomationStepExecutionsCommand";
-import {
+import type {
   DescribeAvailablePatchesCommandInput,
   DescribeAvailablePatchesCommandOutput,
 } from "./commands/DescribeAvailablePatchesCommand";
-import { DescribeDocumentCommandInput, DescribeDocumentCommandOutput } from "./commands/DescribeDocumentCommand";
-import {
+import type { DescribeDocumentCommandInput, DescribeDocumentCommandOutput } from "./commands/DescribeDocumentCommand";
+import type {
   DescribeDocumentPermissionCommandInput,
   DescribeDocumentPermissionCommandOutput,
 } from "./commands/DescribeDocumentPermissionCommand";
-import {
+import type {
   DescribeEffectiveInstanceAssociationsCommandInput,
   DescribeEffectiveInstanceAssociationsCommandOutput,
 } from "./commands/DescribeEffectiveInstanceAssociationsCommand";
-import {
+import type {
   DescribeEffectivePatchesForPatchBaselineCommandInput,
   DescribeEffectivePatchesForPatchBaselineCommandOutput,
 } from "./commands/DescribeEffectivePatchesForPatchBaselineCommand";
-import {
+import type {
   DescribeInstanceAssociationsStatusCommandInput,
   DescribeInstanceAssociationsStatusCommandOutput,
 } from "./commands/DescribeInstanceAssociationsStatusCommand";
-import {
+import type {
   DescribeInstanceInformationCommandInput,
   DescribeInstanceInformationCommandOutput,
 } from "./commands/DescribeInstanceInformationCommand";
-import {
+import type {
   DescribeInstancePatchesCommandInput,
   DescribeInstancePatchesCommandOutput,
 } from "./commands/DescribeInstancePatchesCommand";
-import {
+import type {
   DescribeInstancePatchStatesCommandInput,
   DescribeInstancePatchStatesCommandOutput,
 } from "./commands/DescribeInstancePatchStatesCommand";
-import {
+import type {
   DescribeInstancePatchStatesForPatchGroupCommandInput,
   DescribeInstancePatchStatesForPatchGroupCommandOutput,
 } from "./commands/DescribeInstancePatchStatesForPatchGroupCommand";
-import {
+import type {
+  DescribeInstancePropertiesCommandInput,
+  DescribeInstancePropertiesCommandOutput,
+} from "./commands/DescribeInstancePropertiesCommand";
+import type {
   DescribeInventoryDeletionsCommandInput,
   DescribeInventoryDeletionsCommandOutput,
 } from "./commands/DescribeInventoryDeletionsCommand";
-import {
+import type {
   DescribeMaintenanceWindowExecutionsCommandInput,
   DescribeMaintenanceWindowExecutionsCommandOutput,
 } from "./commands/DescribeMaintenanceWindowExecutionsCommand";
-import {
+import type {
   DescribeMaintenanceWindowExecutionTaskInvocationsCommandInput,
   DescribeMaintenanceWindowExecutionTaskInvocationsCommandOutput,
 } from "./commands/DescribeMaintenanceWindowExecutionTaskInvocationsCommand";
-import {
+import type {
   DescribeMaintenanceWindowExecutionTasksCommandInput,
   DescribeMaintenanceWindowExecutionTasksCommandOutput,
 } from "./commands/DescribeMaintenanceWindowExecutionTasksCommand";
-import {
+import type {
   DescribeMaintenanceWindowScheduleCommandInput,
   DescribeMaintenanceWindowScheduleCommandOutput,
 } from "./commands/DescribeMaintenanceWindowScheduleCommand";
-import {
+import type {
   DescribeMaintenanceWindowsCommandInput,
   DescribeMaintenanceWindowsCommandOutput,
 } from "./commands/DescribeMaintenanceWindowsCommand";
-import {
+import type {
   DescribeMaintenanceWindowsForTargetCommandInput,
   DescribeMaintenanceWindowsForTargetCommandOutput,
 } from "./commands/DescribeMaintenanceWindowsForTargetCommand";
-import {
+import type {
   DescribeMaintenanceWindowTargetsCommandInput,
   DescribeMaintenanceWindowTargetsCommandOutput,
 } from "./commands/DescribeMaintenanceWindowTargetsCommand";
-import {
+import type {
   DescribeMaintenanceWindowTasksCommandInput,
   DescribeMaintenanceWindowTasksCommandOutput,
 } from "./commands/DescribeMaintenanceWindowTasksCommand";
-import { DescribeOpsItemsCommandInput, DescribeOpsItemsCommandOutput } from "./commands/DescribeOpsItemsCommand";
-import { DescribeParametersCommandInput, DescribeParametersCommandOutput } from "./commands/DescribeParametersCommand";
-import {
+import type { DescribeOpsItemsCommandInput, DescribeOpsItemsCommandOutput } from "./commands/DescribeOpsItemsCommand";
+import type {
+  DescribeParametersCommandInput,
+  DescribeParametersCommandOutput,
+} from "./commands/DescribeParametersCommand";
+import type {
   DescribePatchBaselinesCommandInput,
   DescribePatchBaselinesCommandOutput,
 } from "./commands/DescribePatchBaselinesCommand";
-import {
+import type {
   DescribePatchGroupsCommandInput,
   DescribePatchGroupsCommandOutput,
 } from "./commands/DescribePatchGroupsCommand";
-import {
+import type {
   DescribePatchGroupStateCommandInput,
   DescribePatchGroupStateCommandOutput,
 } from "./commands/DescribePatchGroupStateCommand";
-import {
+import type {
   DescribePatchPropertiesCommandInput,
   DescribePatchPropertiesCommandOutput,
 } from "./commands/DescribePatchPropertiesCommand";
-import { DescribeSessionsCommandInput, DescribeSessionsCommandOutput } from "./commands/DescribeSessionsCommand";
-import {
+import type { DescribeSessionsCommandInput, DescribeSessionsCommandOutput } from "./commands/DescribeSessionsCommand";
+import type {
   DisassociateOpsItemRelatedItemCommandInput,
   DisassociateOpsItemRelatedItemCommandOutput,
 } from "./commands/DisassociateOpsItemRelatedItemCommand";
-import {
+import type { GetAccessTokenCommandInput, GetAccessTokenCommandOutput } from "./commands/GetAccessTokenCommand";
+import type {
   GetAutomationExecutionCommandInput,
   GetAutomationExecutionCommandOutput,
 } from "./commands/GetAutomationExecutionCommand";
-import { GetCalendarStateCommandInput, GetCalendarStateCommandOutput } from "./commands/GetCalendarStateCommand";
-import {
+import type { GetCalendarStateCommandInput, GetCalendarStateCommandOutput } from "./commands/GetCalendarStateCommand";
+import type {
+  GetCloudConnectorCommandInput,
+  GetCloudConnectorCommandOutput,
+} from "./commands/GetCloudConnectorCommand";
+import type {
   GetCommandInvocationCommandInput,
   GetCommandInvocationCommandOutput,
 } from "./commands/GetCommandInvocationCommand";
-import {
+import type {
   GetConnectionStatusCommandInput,
   GetConnectionStatusCommandOutput,
 } from "./commands/GetConnectionStatusCommand";
-import {
+import type {
   GetDefaultPatchBaselineCommandInput,
   GetDefaultPatchBaselineCommandOutput,
 } from "./commands/GetDefaultPatchBaselineCommand";
-import {
+import type {
   GetDeployablePatchSnapshotForInstanceCommandInput,
   GetDeployablePatchSnapshotForInstanceCommandOutput,
 } from "./commands/GetDeployablePatchSnapshotForInstanceCommand";
-import { GetDocumentCommandInput, GetDocumentCommandOutput } from "./commands/GetDocumentCommand";
-import { GetInventoryCommandInput, GetInventoryCommandOutput } from "./commands/GetInventoryCommand";
-import { GetInventorySchemaCommandInput, GetInventorySchemaCommandOutput } from "./commands/GetInventorySchemaCommand";
-import {
+import type { GetDocumentCommandInput, GetDocumentCommandOutput } from "./commands/GetDocumentCommand";
+import type {
+  GetExecutionPreviewCommandInput,
+  GetExecutionPreviewCommandOutput,
+} from "./commands/GetExecutionPreviewCommand";
+import type { GetInventoryCommandInput, GetInventoryCommandOutput } from "./commands/GetInventoryCommand";
+import type {
+  GetInventorySchemaCommandInput,
+  GetInventorySchemaCommandOutput,
+} from "./commands/GetInventorySchemaCommand";
+import type {
   GetMaintenanceWindowCommandInput,
   GetMaintenanceWindowCommandOutput,
 } from "./commands/GetMaintenanceWindowCommand";
-import {
+import type {
   GetMaintenanceWindowExecutionCommandInput,
   GetMaintenanceWindowExecutionCommandOutput,
 } from "./commands/GetMaintenanceWindowExecutionCommand";
-import {
+import type {
   GetMaintenanceWindowExecutionTaskCommandInput,
   GetMaintenanceWindowExecutionTaskCommandOutput,
 } from "./commands/GetMaintenanceWindowExecutionTaskCommand";
-import {
+import type {
   GetMaintenanceWindowExecutionTaskInvocationCommandInput,
   GetMaintenanceWindowExecutionTaskInvocationCommandOutput,
 } from "./commands/GetMaintenanceWindowExecutionTaskInvocationCommand";
-import {
+import type {
   GetMaintenanceWindowTaskCommandInput,
   GetMaintenanceWindowTaskCommandOutput,
 } from "./commands/GetMaintenanceWindowTaskCommand";
-import { GetOpsItemCommandInput, GetOpsItemCommandOutput } from "./commands/GetOpsItemCommand";
-import { GetOpsMetadataCommandInput, GetOpsMetadataCommandOutput } from "./commands/GetOpsMetadataCommand";
-import { GetOpsSummaryCommandInput, GetOpsSummaryCommandOutput } from "./commands/GetOpsSummaryCommand";
-import { GetParameterCommandInput, GetParameterCommandOutput } from "./commands/GetParameterCommand";
-import {
+import type { GetOpsItemCommandInput, GetOpsItemCommandOutput } from "./commands/GetOpsItemCommand";
+import type { GetOpsMetadataCommandInput, GetOpsMetadataCommandOutput } from "./commands/GetOpsMetadataCommand";
+import type { GetOpsSummaryCommandInput, GetOpsSummaryCommandOutput } from "./commands/GetOpsSummaryCommand";
+import type { GetParameterCommandInput, GetParameterCommandOutput } from "./commands/GetParameterCommand";
+import type {
   GetParameterHistoryCommandInput,
   GetParameterHistoryCommandOutput,
 } from "./commands/GetParameterHistoryCommand";
-import {
+import type {
   GetParametersByPathCommandInput,
   GetParametersByPathCommandOutput,
 } from "./commands/GetParametersByPathCommand";
-import { GetParametersCommandInput, GetParametersCommandOutput } from "./commands/GetParametersCommand";
-import { GetPatchBaselineCommandInput, GetPatchBaselineCommandOutput } from "./commands/GetPatchBaselineCommand";
-import {
+import type { GetParametersCommandInput, GetParametersCommandOutput } from "./commands/GetParametersCommand";
+import type { GetPatchBaselineCommandInput, GetPatchBaselineCommandOutput } from "./commands/GetPatchBaselineCommand";
+import type {
   GetPatchBaselineForPatchGroupCommandInput,
   GetPatchBaselineForPatchGroupCommandOutput,
 } from "./commands/GetPatchBaselineForPatchGroupCommand";
-import { GetServiceSettingCommandInput, GetServiceSettingCommandOutput } from "./commands/GetServiceSettingCommand";
-import {
+import type {
+  GetResourcePoliciesCommandInput,
+  GetResourcePoliciesCommandOutput,
+} from "./commands/GetResourcePoliciesCommand";
+import type {
+  GetServiceSettingCommandInput,
+  GetServiceSettingCommandOutput,
+} from "./commands/GetServiceSettingCommand";
+import type {
   LabelParameterVersionCommandInput,
   LabelParameterVersionCommandOutput,
 } from "./commands/LabelParameterVersionCommand";
-import { ListAssociationsCommandInput, ListAssociationsCommandOutput } from "./commands/ListAssociationsCommand";
-import {
+import type { ListAssociationsCommandInput, ListAssociationsCommandOutput } from "./commands/ListAssociationsCommand";
+import type {
   ListAssociationVersionsCommandInput,
   ListAssociationVersionsCommandOutput,
 } from "./commands/ListAssociationVersionsCommand";
-import {
+import type {
+  ListCloudConnectorsCommandInput,
+  ListCloudConnectorsCommandOutput,
+} from "./commands/ListCloudConnectorsCommand";
+import type {
   ListCommandInvocationsCommandInput,
   ListCommandInvocationsCommandOutput,
 } from "./commands/ListCommandInvocationsCommand";
-import { ListCommandsCommandInput, ListCommandsCommandOutput } from "./commands/ListCommandsCommand";
-import {
+import type { ListCommandsCommandInput, ListCommandsCommandOutput } from "./commands/ListCommandsCommand";
+import type {
   ListComplianceItemsCommandInput,
   ListComplianceItemsCommandOutput,
 } from "./commands/ListComplianceItemsCommand";
-import {
+import type {
   ListComplianceSummariesCommandInput,
   ListComplianceSummariesCommandOutput,
 } from "./commands/ListComplianceSummariesCommand";
-import {
+import type {
   ListDocumentMetadataHistoryCommandInput,
   ListDocumentMetadataHistoryCommandOutput,
 } from "./commands/ListDocumentMetadataHistoryCommand";
-import { ListDocumentsCommandInput, ListDocumentsCommandOutput } from "./commands/ListDocumentsCommand";
-import {
+import type { ListDocumentsCommandInput, ListDocumentsCommandOutput } from "./commands/ListDocumentsCommand";
+import type {
   ListDocumentVersionsCommandInput,
   ListDocumentVersionsCommandOutput,
 } from "./commands/ListDocumentVersionsCommand";
-import {
+import type {
   ListInventoryEntriesCommandInput,
   ListInventoryEntriesCommandOutput,
 } from "./commands/ListInventoryEntriesCommand";
-import { ListOpsItemEventsCommandInput, ListOpsItemEventsCommandOutput } from "./commands/ListOpsItemEventsCommand";
-import {
+import type { ListNodesCommandInput, ListNodesCommandOutput } from "./commands/ListNodesCommand";
+import type { ListNodesSummaryCommandInput, ListNodesSummaryCommandOutput } from "./commands/ListNodesSummaryCommand";
+import type {
+  ListOpsItemEventsCommandInput,
+  ListOpsItemEventsCommandOutput,
+} from "./commands/ListOpsItemEventsCommand";
+import type {
   ListOpsItemRelatedItemsCommandInput,
   ListOpsItemRelatedItemsCommandOutput,
 } from "./commands/ListOpsItemRelatedItemsCommand";
-import { ListOpsMetadataCommandInput, ListOpsMetadataCommandOutput } from "./commands/ListOpsMetadataCommand";
-import {
+import type { ListOpsMetadataCommandInput, ListOpsMetadataCommandOutput } from "./commands/ListOpsMetadataCommand";
+import type {
   ListResourceComplianceSummariesCommandInput,
   ListResourceComplianceSummariesCommandOutput,
 } from "./commands/ListResourceComplianceSummariesCommand";
-import {
+import type {
   ListResourceDataSyncCommandInput,
   ListResourceDataSyncCommandOutput,
 } from "./commands/ListResourceDataSyncCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ModifyDocumentPermissionCommandInput,
   ModifyDocumentPermissionCommandOutput,
 } from "./commands/ModifyDocumentPermissionCommand";
-import { PutComplianceItemsCommandInput, PutComplianceItemsCommandOutput } from "./commands/PutComplianceItemsCommand";
-import { PutInventoryCommandInput, PutInventoryCommandOutput } from "./commands/PutInventoryCommand";
-import { PutParameterCommandInput, PutParameterCommandOutput } from "./commands/PutParameterCommand";
-import {
+import type {
+  PutComplianceItemsCommandInput,
+  PutComplianceItemsCommandOutput,
+} from "./commands/PutComplianceItemsCommand";
+import type { PutInventoryCommandInput, PutInventoryCommandOutput } from "./commands/PutInventoryCommand";
+import type { PutParameterCommandInput, PutParameterCommandOutput } from "./commands/PutParameterCommand";
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type {
+  RegisterDefaultHostManagementConfigurationCommandInput,
+  RegisterDefaultHostManagementConfigurationCommandOutput,
+} from "./commands/RegisterDefaultHostManagementConfigurationCommand";
+import type {
   RegisterDefaultPatchBaselineCommandInput,
   RegisterDefaultPatchBaselineCommandOutput,
 } from "./commands/RegisterDefaultPatchBaselineCommand";
-import {
+import type {
   RegisterPatchBaselineForPatchGroupCommandInput,
   RegisterPatchBaselineForPatchGroupCommandOutput,
 } from "./commands/RegisterPatchBaselineForPatchGroupCommand";
-import {
+import type {
   RegisterTargetWithMaintenanceWindowCommandInput,
   RegisterTargetWithMaintenanceWindowCommandOutput,
 } from "./commands/RegisterTargetWithMaintenanceWindowCommand";
-import {
+import type {
   RegisterTaskWithMaintenanceWindowCommandInput,
   RegisterTaskWithMaintenanceWindowCommandOutput,
 } from "./commands/RegisterTaskWithMaintenanceWindowCommand";
-import {
+import type {
   RemoveTagsFromResourceCommandInput,
   RemoveTagsFromResourceCommandOutput,
 } from "./commands/RemoveTagsFromResourceCommand";
-import {
+import type {
   ResetServiceSettingCommandInput,
   ResetServiceSettingCommandOutput,
 } from "./commands/ResetServiceSettingCommand";
-import { ResumeSessionCommandInput, ResumeSessionCommandOutput } from "./commands/ResumeSessionCommand";
-import {
+import type { ResumeSessionCommandInput, ResumeSessionCommandOutput } from "./commands/ResumeSessionCommand";
+import type {
   SendAutomationSignalCommandInput,
   SendAutomationSignalCommandOutput,
 } from "./commands/SendAutomationSignalCommand";
-import { SendCommandCommandInput, SendCommandCommandOutput } from "./commands/SendCommandCommand";
-import {
+import type { SendCommandCommandInput, SendCommandCommandOutput } from "./commands/SendCommandCommand";
+import type {
+  StartAccessRequestCommandInput,
+  StartAccessRequestCommandOutput,
+} from "./commands/StartAccessRequestCommand";
+import type {
   StartAssociationsOnceCommandInput,
   StartAssociationsOnceCommandOutput,
 } from "./commands/StartAssociationsOnceCommand";
-import {
+import type {
   StartAutomationExecutionCommandInput,
   StartAutomationExecutionCommandOutput,
 } from "./commands/StartAutomationExecutionCommand";
-import {
+import type {
   StartChangeRequestExecutionCommandInput,
   StartChangeRequestExecutionCommandOutput,
 } from "./commands/StartChangeRequestExecutionCommand";
-import { StartSessionCommandInput, StartSessionCommandOutput } from "./commands/StartSessionCommand";
-import {
+import type {
+  StartExecutionPreviewCommandInput,
+  StartExecutionPreviewCommandOutput,
+} from "./commands/StartExecutionPreviewCommand";
+import type { StartSessionCommandInput, StartSessionCommandOutput } from "./commands/StartSessionCommand";
+import type {
   StopAutomationExecutionCommandInput,
   StopAutomationExecutionCommandOutput,
 } from "./commands/StopAutomationExecutionCommand";
-import { TerminateSessionCommandInput, TerminateSessionCommandOutput } from "./commands/TerminateSessionCommand";
-import {
+import type { TerminateSessionCommandInput, TerminateSessionCommandOutput } from "./commands/TerminateSessionCommand";
+import type {
   UnlabelParameterVersionCommandInput,
   UnlabelParameterVersionCommandOutput,
 } from "./commands/UnlabelParameterVersionCommand";
-import { UpdateAssociationCommandInput, UpdateAssociationCommandOutput } from "./commands/UpdateAssociationCommand";
-import {
+import type {
+  UpdateAssociationCommandInput,
+  UpdateAssociationCommandOutput,
+} from "./commands/UpdateAssociationCommand";
+import type {
   UpdateAssociationStatusCommandInput,
   UpdateAssociationStatusCommandOutput,
 } from "./commands/UpdateAssociationStatusCommand";
-import { UpdateDocumentCommandInput, UpdateDocumentCommandOutput } from "./commands/UpdateDocumentCommand";
-import {
+import type {
+  UpdateCloudConnectorCommandInput,
+  UpdateCloudConnectorCommandOutput,
+} from "./commands/UpdateCloudConnectorCommand";
+import type { UpdateDocumentCommandInput, UpdateDocumentCommandOutput } from "./commands/UpdateDocumentCommand";
+import type {
   UpdateDocumentDefaultVersionCommandInput,
   UpdateDocumentDefaultVersionCommandOutput,
 } from "./commands/UpdateDocumentDefaultVersionCommand";
-import {
+import type {
   UpdateDocumentMetadataCommandInput,
   UpdateDocumentMetadataCommandOutput,
 } from "./commands/UpdateDocumentMetadataCommand";
-import {
+import type {
   UpdateMaintenanceWindowCommandInput,
   UpdateMaintenanceWindowCommandOutput,
 } from "./commands/UpdateMaintenanceWindowCommand";
-import {
+import type {
   UpdateMaintenanceWindowTargetCommandInput,
   UpdateMaintenanceWindowTargetCommandOutput,
 } from "./commands/UpdateMaintenanceWindowTargetCommand";
-import {
+import type {
   UpdateMaintenanceWindowTaskCommandInput,
   UpdateMaintenanceWindowTaskCommandOutput,
 } from "./commands/UpdateMaintenanceWindowTaskCommand";
-import {
+import type {
   UpdateManagedInstanceRoleCommandInput,
   UpdateManagedInstanceRoleCommandOutput,
 } from "./commands/UpdateManagedInstanceRoleCommand";
-import { UpdateOpsItemCommandInput, UpdateOpsItemCommandOutput } from "./commands/UpdateOpsItemCommand";
-import { UpdateOpsMetadataCommandInput, UpdateOpsMetadataCommandOutput } from "./commands/UpdateOpsMetadataCommand";
-import {
+import type { UpdateOpsItemCommandInput, UpdateOpsItemCommandOutput } from "./commands/UpdateOpsItemCommand";
+import type {
+  UpdateOpsMetadataCommandInput,
+  UpdateOpsMetadataCommandOutput,
+} from "./commands/UpdateOpsMetadataCommand";
+import type {
   UpdatePatchBaselineCommandInput,
   UpdatePatchBaselineCommandOutput,
 } from "./commands/UpdatePatchBaselineCommand";
-import {
+import type {
   UpdateResourceDataSyncCommandInput,
   UpdateResourceDataSyncCommandOutput,
 } from "./commands/UpdateResourceDataSyncCommand";
-import {
+import type {
   UpdateServiceSettingCommandInput,
   UpdateServiceSettingCommandOutput,
 } from "./commands/UpdateServiceSettingCommand";
+import type {
+  ValidateCloudConnectorCommandInput,
+  ValidateCloudConnectorCommandOutput,
+} from "./commands/ValidateCloudConnectorCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddTagsToResourceCommandInput
   | AssociateOpsItemRelatedItemCommandInput
@@ -464,6 +581,7 @@ export type ServiceInputTypes =
   | CreateActivationCommandInput
   | CreateAssociationBatchCommandInput
   | CreateAssociationCommandInput
+  | CreateCloudConnectorCommandInput
   | CreateDocumentCommandInput
   | CreateMaintenanceWindowCommandInput
   | CreateOpsItemCommandInput
@@ -472,14 +590,18 @@ export type ServiceInputTypes =
   | CreateResourceDataSyncCommandInput
   | DeleteActivationCommandInput
   | DeleteAssociationCommandInput
+  | DeleteCloudConnectorCommandInput
   | DeleteDocumentCommandInput
   | DeleteInventoryCommandInput
   | DeleteMaintenanceWindowCommandInput
+  | DeleteOpsItemCommandInput
   | DeleteOpsMetadataCommandInput
   | DeleteParameterCommandInput
   | DeleteParametersCommandInput
   | DeletePatchBaselineCommandInput
   | DeleteResourceDataSyncCommandInput
+  | DeleteResourcePolicyCommandInput
+  | DeregisterDefaultHostManagementConfigurationCommandInput
   | DeregisterManagedInstanceCommandInput
   | DeregisterPatchBaselineForPatchGroupCommandInput
   | DeregisterTargetFromMaintenanceWindowCommandInput
@@ -500,6 +622,7 @@ export type ServiceInputTypes =
   | DescribeInstancePatchStatesCommandInput
   | DescribeInstancePatchStatesForPatchGroupCommandInput
   | DescribeInstancePatchesCommandInput
+  | DescribeInstancePropertiesCommandInput
   | DescribeInventoryDeletionsCommandInput
   | DescribeMaintenanceWindowExecutionTaskInvocationsCommandInput
   | DescribeMaintenanceWindowExecutionTasksCommandInput
@@ -517,13 +640,16 @@ export type ServiceInputTypes =
   | DescribePatchPropertiesCommandInput
   | DescribeSessionsCommandInput
   | DisassociateOpsItemRelatedItemCommandInput
+  | GetAccessTokenCommandInput
   | GetAutomationExecutionCommandInput
   | GetCalendarStateCommandInput
+  | GetCloudConnectorCommandInput
   | GetCommandInvocationCommandInput
   | GetConnectionStatusCommandInput
   | GetDefaultPatchBaselineCommandInput
   | GetDeployablePatchSnapshotForInstanceCommandInput
   | GetDocumentCommandInput
+  | GetExecutionPreviewCommandInput
   | GetInventoryCommandInput
   | GetInventorySchemaCommandInput
   | GetMaintenanceWindowCommandInput
@@ -540,10 +666,12 @@ export type ServiceInputTypes =
   | GetParametersCommandInput
   | GetPatchBaselineCommandInput
   | GetPatchBaselineForPatchGroupCommandInput
+  | GetResourcePoliciesCommandInput
   | GetServiceSettingCommandInput
   | LabelParameterVersionCommandInput
   | ListAssociationVersionsCommandInput
   | ListAssociationsCommandInput
+  | ListCloudConnectorsCommandInput
   | ListCommandInvocationsCommandInput
   | ListCommandsCommandInput
   | ListComplianceItemsCommandInput
@@ -552,6 +680,8 @@ export type ServiceInputTypes =
   | ListDocumentVersionsCommandInput
   | ListDocumentsCommandInput
   | ListInventoryEntriesCommandInput
+  | ListNodesCommandInput
+  | ListNodesSummaryCommandInput
   | ListOpsItemEventsCommandInput
   | ListOpsItemRelatedItemsCommandInput
   | ListOpsMetadataCommandInput
@@ -562,6 +692,8 @@ export type ServiceInputTypes =
   | PutComplianceItemsCommandInput
   | PutInventoryCommandInput
   | PutParameterCommandInput
+  | PutResourcePolicyCommandInput
+  | RegisterDefaultHostManagementConfigurationCommandInput
   | RegisterDefaultPatchBaselineCommandInput
   | RegisterPatchBaselineForPatchGroupCommandInput
   | RegisterTargetWithMaintenanceWindowCommandInput
@@ -571,15 +703,18 @@ export type ServiceInputTypes =
   | ResumeSessionCommandInput
   | SendAutomationSignalCommandInput
   | SendCommandCommandInput
+  | StartAccessRequestCommandInput
   | StartAssociationsOnceCommandInput
   | StartAutomationExecutionCommandInput
   | StartChangeRequestExecutionCommandInput
+  | StartExecutionPreviewCommandInput
   | StartSessionCommandInput
   | StopAutomationExecutionCommandInput
   | TerminateSessionCommandInput
   | UnlabelParameterVersionCommandInput
   | UpdateAssociationCommandInput
   | UpdateAssociationStatusCommandInput
+  | UpdateCloudConnectorCommandInput
   | UpdateDocumentCommandInput
   | UpdateDocumentDefaultVersionCommandInput
   | UpdateDocumentMetadataCommandInput
@@ -591,8 +726,12 @@ export type ServiceInputTypes =
   | UpdateOpsMetadataCommandInput
   | UpdatePatchBaselineCommandInput
   | UpdateResourceDataSyncCommandInput
-  | UpdateServiceSettingCommandInput;
+  | UpdateServiceSettingCommandInput
+  | ValidateCloudConnectorCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddTagsToResourceCommandOutput
   | AssociateOpsItemRelatedItemCommandOutput
@@ -601,6 +740,7 @@ export type ServiceOutputTypes =
   | CreateActivationCommandOutput
   | CreateAssociationBatchCommandOutput
   | CreateAssociationCommandOutput
+  | CreateCloudConnectorCommandOutput
   | CreateDocumentCommandOutput
   | CreateMaintenanceWindowCommandOutput
   | CreateOpsItemCommandOutput
@@ -609,14 +749,18 @@ export type ServiceOutputTypes =
   | CreateResourceDataSyncCommandOutput
   | DeleteActivationCommandOutput
   | DeleteAssociationCommandOutput
+  | DeleteCloudConnectorCommandOutput
   | DeleteDocumentCommandOutput
   | DeleteInventoryCommandOutput
   | DeleteMaintenanceWindowCommandOutput
+  | DeleteOpsItemCommandOutput
   | DeleteOpsMetadataCommandOutput
   | DeleteParameterCommandOutput
   | DeleteParametersCommandOutput
   | DeletePatchBaselineCommandOutput
   | DeleteResourceDataSyncCommandOutput
+  | DeleteResourcePolicyCommandOutput
+  | DeregisterDefaultHostManagementConfigurationCommandOutput
   | DeregisterManagedInstanceCommandOutput
   | DeregisterPatchBaselineForPatchGroupCommandOutput
   | DeregisterTargetFromMaintenanceWindowCommandOutput
@@ -637,6 +781,7 @@ export type ServiceOutputTypes =
   | DescribeInstancePatchStatesCommandOutput
   | DescribeInstancePatchStatesForPatchGroupCommandOutput
   | DescribeInstancePatchesCommandOutput
+  | DescribeInstancePropertiesCommandOutput
   | DescribeInventoryDeletionsCommandOutput
   | DescribeMaintenanceWindowExecutionTaskInvocationsCommandOutput
   | DescribeMaintenanceWindowExecutionTasksCommandOutput
@@ -654,13 +799,16 @@ export type ServiceOutputTypes =
   | DescribePatchPropertiesCommandOutput
   | DescribeSessionsCommandOutput
   | DisassociateOpsItemRelatedItemCommandOutput
+  | GetAccessTokenCommandOutput
   | GetAutomationExecutionCommandOutput
   | GetCalendarStateCommandOutput
+  | GetCloudConnectorCommandOutput
   | GetCommandInvocationCommandOutput
   | GetConnectionStatusCommandOutput
   | GetDefaultPatchBaselineCommandOutput
   | GetDeployablePatchSnapshotForInstanceCommandOutput
   | GetDocumentCommandOutput
+  | GetExecutionPreviewCommandOutput
   | GetInventoryCommandOutput
   | GetInventorySchemaCommandOutput
   | GetMaintenanceWindowCommandOutput
@@ -677,10 +825,12 @@ export type ServiceOutputTypes =
   | GetParametersCommandOutput
   | GetPatchBaselineCommandOutput
   | GetPatchBaselineForPatchGroupCommandOutput
+  | GetResourcePoliciesCommandOutput
   | GetServiceSettingCommandOutput
   | LabelParameterVersionCommandOutput
   | ListAssociationVersionsCommandOutput
   | ListAssociationsCommandOutput
+  | ListCloudConnectorsCommandOutput
   | ListCommandInvocationsCommandOutput
   | ListCommandsCommandOutput
   | ListComplianceItemsCommandOutput
@@ -689,6 +839,8 @@ export type ServiceOutputTypes =
   | ListDocumentVersionsCommandOutput
   | ListDocumentsCommandOutput
   | ListInventoryEntriesCommandOutput
+  | ListNodesCommandOutput
+  | ListNodesSummaryCommandOutput
   | ListOpsItemEventsCommandOutput
   | ListOpsItemRelatedItemsCommandOutput
   | ListOpsMetadataCommandOutput
@@ -699,6 +851,8 @@ export type ServiceOutputTypes =
   | PutComplianceItemsCommandOutput
   | PutInventoryCommandOutput
   | PutParameterCommandOutput
+  | PutResourcePolicyCommandOutput
+  | RegisterDefaultHostManagementConfigurationCommandOutput
   | RegisterDefaultPatchBaselineCommandOutput
   | RegisterPatchBaselineForPatchGroupCommandOutput
   | RegisterTargetWithMaintenanceWindowCommandOutput
@@ -708,15 +862,18 @@ export type ServiceOutputTypes =
   | ResumeSessionCommandOutput
   | SendAutomationSignalCommandOutput
   | SendCommandCommandOutput
+  | StartAccessRequestCommandOutput
   | StartAssociationsOnceCommandOutput
   | StartAutomationExecutionCommandOutput
   | StartChangeRequestExecutionCommandOutput
+  | StartExecutionPreviewCommandOutput
   | StartSessionCommandOutput
   | StopAutomationExecutionCommandOutput
   | TerminateSessionCommandOutput
   | UnlabelParameterVersionCommandOutput
   | UpdateAssociationCommandOutput
   | UpdateAssociationStatusCommandOutput
+  | UpdateCloudConnectorCommandOutput
   | UpdateDocumentCommandOutput
   | UpdateDocumentDefaultVersionCommandOutput
   | UpdateDocumentMetadataCommandOutput
@@ -728,20 +885,24 @@ export type ServiceOutputTypes =
   | UpdateOpsMetadataCommandOutput
   | UpdatePatchBaselineCommandOutput
   | UpdateResourceDataSyncCommandOutput
-  | UpdateServiceSettingCommandOutput;
+  | UpdateServiceSettingCommandOutput
+  | ValidateCloudConnectorCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -753,7 +914,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -792,25 +953,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -823,94 +975,150 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type SSMClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of SSMClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type SSMClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of SSMClient class constructor that set the region, credentials and other options.
  */
 export interface SSMClientConfig extends SSMClientConfigType {}
 
-type SSMClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of SSMClient class. This is resolved and normalized from the {@link SSMClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type SSMClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of SSMClient class. This is resolved and normalized from the {@link SSMClientConfig | constructor configuration interface}.
  */
 export interface SSMClientResolvedConfig extends SSMClientResolvedConfigType {}
 
 /**
- * <p>Amazon Web Services Systems Manager is a collection of capabilities that helps you automate management tasks such as
- *    collecting system inventory, applying operating system (OS) patches, automating the creation of
- *    Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.
- *    Systems Manager lets you remotely and securely manage the configuration of your managed instances. A
- *     <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any
- *    on-premises server or virtual machine (VM) in your hybrid environment that has been configured
- *    for Systems Manager.</p>
- *          <p>This reference is intended to be used with the <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon Web Services Systems Manager User Guide</a>.</p>
- *          <p>To get started, verify prerequisites and configure managed instances. For more information,
- *    see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Setting up
- *     Amazon Web Services Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+ * <p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure
+ *    end-to-end management solution for hybrid cloud environments that enables safe and secure
+ *    operations at scale.</p>
+ *          <p>This reference is intended to be used with the <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-console.html">Setting up
+ *     Amazon Web Services Systems Manager</a>.</p>
  *          <p class="title">
  *             <b>Related resources</b>
  *          </p>
  *          <ul>
  *             <li>
- *                <p>For information about how to use a Query API, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API requests</a>. </p>
+ *                <p>For information about each of the tools that comprise Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-tools.html">Using
+ *       Systems Manager tools</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
  *             </li>
  *             <li>
- *                <p>For information about other API operations you can perform on EC2 instances, see the
- *       <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>.</p>
+ *                <p>For details about predefined runbooks for Automation, a tool in Amazon Web Services Systems Manager, see the
+ *        <i>
+ *                      <a href="https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html">Systems Manager Automation Runbook Reference</a>
+ *                   </i>.</p>
  *             </li>
  *             <li>
- *                <p>For information about AppConfig, a capability of Systems Manager, see the <a href="https://docs.aws.amazon.com/appconfig/latest/userguide/">AppConfig User Guide</a> and the <a href="https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/">AppConfig API
- *      Reference</a>.</p>
+ *                <p>For information about AppConfig, a tool in Systems Manager, see the <i>
+ *                      <a href="https://docs.aws.amazon.com/appconfig/latest/userguide/">AppConfig User Guide</a>
+ *                   </i>
+ *      and the <i>
+ *                      <a href="https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/">AppConfig
+ *        API Reference</a>
+ *                   </i>.</p>
  *             </li>
  *             <li>
- *                <p>For information about Incident Manager, a capability of Systems Manager, see the <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/">Incident Manager User Guide</a>
- *      and the <a href="https://docs.aws.amazon.com/incident-manager/latest/APIReference/">Incident Manager API
- *       Reference</a>.</p>
+ *                <p>For information about Incident Manager, a tool in Systems Manager, see the <i>
+ *                      <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/">Systems Manager Incident Manager User
+ *        Guide</a>
+ *                   </i> and the <i>
+ *                      <a href="https://docs.aws.amazon.com/incident-manager/latest/APIReference/">Systems Manager Incident Manager API
+ *      Reference</a>
+ *                   </i>.</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export class SSMClient extends __Client<
   __HttpHandlerOptions,
@@ -923,22 +1131,36 @@ export class SSMClient extends __Client<
    */
   readonly config: SSMClientResolvedConfig;
 
-  constructor(configuration: SSMClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<SSMClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultSSMHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: SSMClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,95 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListPermissionSetsRequest, ListPermissionSetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListPermissionSetsCommand,
-  serializeAws_json1_1ListPermissionSetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPermissionSetsRequest, ListPermissionSetsResponse } from "../models/models_0";
+import { ListPermissionSets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPermissionSetsCommand}.
+ */
 export interface ListPermissionSetsCommandInput extends ListPermissionSetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPermissionSetsCommand}.
+ */
 export interface ListPermissionSetsCommandOutput extends ListPermissionSetsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the <a>PermissionSet</a>s in an SSO instance.</p>
+ * <p>Lists the <a>PermissionSet</a>s in an IAM Identity Center instance.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSOAdminClient, ListPermissionSetsCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, ListPermissionSetsCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // ListPermissionSetsRequest
+ *   InstanceArn: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListPermissionSetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListPermissionSetsResponse
+ * //   PermissionSets: [ // PermissionSetList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPermissionSetsCommandInput - {@link ListPermissionSetsCommandInput}
+ * @returns {@link ListPermissionSetsCommandOutput}
  * @see {@link ListPermissionSetsCommandInput} for command's `input` shape.
  * @see {@link ListPermissionSetsCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Indicates that a requested resource is not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class ListPermissionSetsCommand extends $Command<
-  ListPermissionSetsCommandInput,
-  ListPermissionSetsCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPermissionSetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPermissionSetsCommandInput, ListPermissionSetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "ListPermissionSetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPermissionSetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPermissionSetsResponse.filterSensitiveLog,
+export class ListPermissionSetsCommand extends command<ListPermissionSetsCommandInput, ListPermissionSetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPermissionSets",
+  ListPermissionSets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPermissionSetsRequest;
+      output: ListPermissionSetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPermissionSetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListPermissionSetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPermissionSetsCommandOutput> {
-    return deserializeAws_json1_1ListPermissionSetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPermissionSetsCommandInput;
+      output: ListPermissionSetsCommandOutput;
+    };
+  };
 }

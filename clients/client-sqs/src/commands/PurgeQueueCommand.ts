@@ -1,105 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PurgeQueueRequest } from "../models/models_0";
-import { deserializeAws_queryPurgeQueueCommand, serializeAws_queryPurgeQueueCommand } from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SQSClientResolvedConfig } from "../SQSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PurgeQueueRequest } from "../models/models_0";
+import { PurgeQueue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PurgeQueueCommand}.
+ */
 export interface PurgeQueueCommandInput extends PurgeQueueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PurgeQueueCommand}.
+ */
 export interface PurgeQueueCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes the messages in a queue specified by the <code>QueueURL</code>
- *             parameter.</p>
- *
+ * <p>Deletes available messages in a queue (including in-flight messages) specified by the
+ *                 <code>QueueURL</code> parameter.</p>
  *          <important>
  *             <p>When you use the <code>PurgeQueue</code> action, you can't retrieve any messages
  *                 deleted from a queue.</p>
- *             <p>The message deletion process takes up to 60 seconds. We recommend waiting for
- *                 60 seconds regardless of your queue's size. </p>
+ *             <p>The message deletion process takes up to 60 seconds. We recommend waiting for 60
+ *                 seconds regardless of your queue's size. </p>
  *          </important>
- *         <p>Messages sent to the queue <i>before</i> you call
+ *          <p>Messages sent to the queue <i>before</i> you call
  *                 <code>PurgeQueue</code> might be received but are deleted within the next
  *             minute.</p>
- *         <p>Messages sent to the queue <i>after</i> you call
- *                 <code>PurgeQueue</code> might be deleted while the queue is being purged.</p>
+ *          <p>Messages sent to the queue <i>after</i> you call <code>PurgeQueue</code>
+ *             might be deleted while the queue is being purged.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SQSClient, PurgeQueueCommand } from "@aws-sdk/client-sqs"; // ES Modules import
  * // const { SQSClient, PurgeQueueCommand } = require("@aws-sdk/client-sqs"); // CommonJS import
+ * // import type { SQSClientConfig } from "@aws-sdk/client-sqs";
+ * const config = {}; // type is SQSClientConfig
  * const client = new SQSClient(config);
+ * const input = { // PurgeQueueRequest
+ *   QueueUrl: "STRING_VALUE", // required
+ * };
  * const command = new PurgeQueueCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PurgeQueueCommandInput - {@link PurgeQueueCommandInput}
+ * @returns {@link PurgeQueueCommandOutput}
  * @see {@link PurgeQueueCommandInput} for command's `input` shape.
  * @see {@link PurgeQueueCommandOutput} for command's `response` shape.
- * @see {@link SQSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SQSClientResolvedConfig | config} for SQSClient's `config` shape.
  *
+ * @throws {@link InvalidAddress} (client fault)
+ *  <p>The specified ID is invalid.</p>
+ *
+ * @throws {@link InvalidSecurity} (client fault)
+ *  <p>The request was not made over HTTPS or did not use SigV4 for signing.</p>
+ *
+ * @throws {@link PurgeQueueInProgress} (client fault)
+ *  <p>Indicates that the specified queue previously received a <code>PurgeQueue</code>
+ *             request within the last 60 seconds (the time it can take to delete the messages in the
+ *             queue).</p>
+ *
+ * @throws {@link QueueDoesNotExist} (client fault)
+ *  <p>Ensure that the <code>QueueUrl</code> is correct and that the queue has not been
+ *             deleted.</p>
+ *
+ * @throws {@link RequestThrottled} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *          <ul>
+ *             <li>
+ *                <p>Exceeds the permitted request rate for the queue or for the recipient of the
+ *                     request.</p>
+ *             </li>
+ *             <li>
+ *                <p>Ensure that the request rate is within the Amazon SQS limits for
+ *                     sending messages. For more information, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-quotas.html#quotas-requests">Amazon SQS quotas</a> in the <i>Amazon SQS
+ *                         Developer Guide</i>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>Error code 400. Unsupported operation.</p>
+ *
+ * @throws {@link SQSServiceException}
+ * <p>Base exception class for all service exceptions from SQS service.</p>
+ *
+ *
+ * @public
  */
-export class PurgeQueueCommand extends $Command<
-  PurgeQueueCommandInput,
-  PurgeQueueCommandOutput,
-  SQSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PurgeQueueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SQSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PurgeQueueCommandInput, PurgeQueueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SQSClient";
-    const commandName = "PurgeQueueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PurgeQueueRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PurgeQueueCommand extends command<PurgeQueueCommandInput, PurgeQueueCommandOutput>(
+  _ep0,
+  _mw0,
+  "PurgeQueue",
+  PurgeQueue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurgeQueueRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PurgeQueueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryPurgeQueueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PurgeQueueCommandOutput> {
-    return deserializeAws_queryPurgeQueueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PurgeQueueCommandInput;
+      output: PurgeQueueCommandOutput;
+    };
+  };
 }

@@ -1,31 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { UpdateRegionSettingsInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRegionSettingsCommand,
-  serializeAws_restJson1UpdateRegionSettingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRegionSettingsInput } from "../models/models_0";
+import { UpdateRegionSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRegionSettingsCommand}.
+ */
 export interface UpdateRegionSettingsCommandInput extends UpdateRegionSettingsInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRegionSettingsCommand}.
+ */
 export interface UpdateRegionSettingsCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Updates the current service opt-in settings for the Region. If service-opt-in is enabled
- *          for a service, Backup tries to protect that service's resources in this Region,
- *          when the resource is included in an on-demand backup or scheduled backup plan. Otherwise,
- *             Backup does not try to protect that service's resources in this Region. Use
+ * <p>Updates the current service opt-in settings for the Region.</p>
+ *          <p>Use
  *          the <code>DescribeRegionSettings</code> API to determine the resource types that are
  *          supported.</p>
  * @example
@@ -33,68 +32,60 @@ export interface UpdateRegionSettingsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { BackupClient, UpdateRegionSettingsCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, UpdateRegionSettingsCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // UpdateRegionSettingsInput
+ *   ResourceTypeOptInPreference: { // ResourceTypeOptInPreference
+ *     "<keys>": true || false,
+ *   },
+ *   ResourceTypeManagementPreference: { // ResourceTypeManagementPreference
+ *     "<keys>": true || false,
+ *   },
+ * };
  * const command = new UpdateRegionSettingsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateRegionSettingsCommandInput - {@link UpdateRegionSettingsCommandInput}
+ * @returns {@link UpdateRegionSettingsCommandOutput}
  * @see {@link UpdateRegionSettingsCommandInput} for command's `input` shape.
  * @see {@link UpdateRegionSettingsCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Indicates that a required parameter is missing.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRegionSettingsCommand extends $Command<
-  UpdateRegionSettingsCommandInput,
-  UpdateRegionSettingsCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRegionSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRegionSettingsCommandInput, UpdateRegionSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "UpdateRegionSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRegionSettingsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateRegionSettingsCommand extends command<UpdateRegionSettingsCommandInput, UpdateRegionSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRegionSettings",
+  UpdateRegionSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRegionSettingsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRegionSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRegionSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRegionSettingsCommandOutput> {
-    return deserializeAws_restJson1UpdateRegionSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRegionSettingsCommandInput;
+      output: UpdateRegionSettingsCommandOutput;
+    };
+  };
 }

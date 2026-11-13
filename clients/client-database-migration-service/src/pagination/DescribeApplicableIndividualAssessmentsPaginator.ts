@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeApplicableIndividualAssessmentsCommand,
   DescribeApplicableIndividualAssessmentsCommandInput,
   DescribeApplicableIndividualAssessmentsCommandOutput,
 } from "../commands/DescribeApplicableIndividualAssessmentsCommand";
-import { DatabaseMigrationService } from "../DatabaseMigrationService";
 import { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
-import { DatabaseMigrationServicePaginationConfiguration } from "./Interfaces";
+import type { DatabaseMigrationServicePaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: DatabaseMigrationServiceClient,
-  input: DescribeApplicableIndividualAssessmentsCommandInput,
-  ...args: any
-): Promise<DescribeApplicableIndividualAssessmentsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeApplicableIndividualAssessmentsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: DatabaseMigrationService,
-  input: DescribeApplicableIndividualAssessmentsCommandInput,
-  ...args: any
-): Promise<DescribeApplicableIndividualAssessmentsCommandOutput> => {
-  // @ts-ignore
-  return await client.describeApplicableIndividualAssessments(input, ...args);
-};
-export async function* paginateDescribeApplicableIndividualAssessments(
+export const paginateDescribeApplicableIndividualAssessments: (
   config: DatabaseMigrationServicePaginationConfiguration,
   input: DescribeApplicableIndividualAssessmentsCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeApplicableIndividualAssessmentsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeApplicableIndividualAssessmentsCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxRecords"] = config.pageSize;
-    if (config.client instanceof DatabaseMigrationService) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof DatabaseMigrationServiceClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected DatabaseMigrationService | DatabaseMigrationServiceClient");
-    }
-    yield page;
-    token = page.Marker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeApplicableIndividualAssessmentsCommandOutput> = createPaginator<
+  DatabaseMigrationServicePaginationConfiguration,
+  DescribeApplicableIndividualAssessmentsCommandInput,
+  DescribeApplicableIndividualAssessmentsCommandOutput
+>(DatabaseMigrationServiceClient, DescribeApplicableIndividualAssessmentsCommand, "Marker", "Marker", "MaxRecords");

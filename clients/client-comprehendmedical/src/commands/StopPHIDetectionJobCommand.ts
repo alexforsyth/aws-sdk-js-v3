@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ComprehendMedicalClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ComprehendMedicalClient";
-import { StopPHIDetectionJobRequest, StopPHIDetectionJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopPHIDetectionJobCommand,
-  serializeAws_json1_1StopPHIDetectionJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopPHIDetectionJobRequest, StopPHIDetectionJobResponse } from "../models/models_0";
+import { StopPHIDetectionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopPHIDetectionJobCommand}.
+ */
 export interface StopPHIDetectionJobCommandInput extends StopPHIDetectionJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopPHIDetectionJobCommand}.
+ */
 export interface StopPHIDetectionJobCommandOutput extends StopPHIDetectionJobResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,58 @@ export interface StopPHIDetectionJobCommandOutput extends StopPHIDetectionJobRes
  * ```javascript
  * import { ComprehendMedicalClient, StopPHIDetectionJobCommand } from "@aws-sdk/client-comprehendmedical"; // ES Modules import
  * // const { ComprehendMedicalClient, StopPHIDetectionJobCommand } = require("@aws-sdk/client-comprehendmedical"); // CommonJS import
+ * // import type { ComprehendMedicalClientConfig } from "@aws-sdk/client-comprehendmedical";
+ * const config = {}; // type is ComprehendMedicalClientConfig
  * const client = new ComprehendMedicalClient(config);
+ * const input = { // StopPHIDetectionJobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new StopPHIDetectionJobCommand(input);
  * const response = await client.send(command);
+ * // { // StopPHIDetectionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StopPHIDetectionJobCommandInput - {@link StopPHIDetectionJobCommandInput}
+ * @returns {@link StopPHIDetectionJobCommandOutput}
  * @see {@link StopPHIDetectionJobCommandInput} for command's `input` shape.
  * @see {@link StopPHIDetectionJobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendMedicalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendMedicalClientResolvedConfig | config} for ComprehendMedicalClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal server error occurred. Retry your request. </p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p> The request that you made is invalid. Check your request to determine why it's invalid
+ *       and then retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource identified by the specified Amazon Resource Name (ARN) was not found. Check
+ *       the ARN and try your request again.</p>
+ *
+ * @throws {@link ComprehendMedicalServiceException}
+ * <p>Base exception class for all service exceptions from ComprehendMedical service.</p>
+ *
+ *
+ * @public
  */
-export class StopPHIDetectionJobCommand extends $Command<
-  StopPHIDetectionJobCommandInput,
-  StopPHIDetectionJobCommandOutput,
-  ComprehendMedicalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopPHIDetectionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendMedicalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopPHIDetectionJobCommandInput, StopPHIDetectionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendMedicalClient";
-    const commandName = "StopPHIDetectionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopPHIDetectionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopPHIDetectionJobResponse.filterSensitiveLog,
+export class StopPHIDetectionJobCommand extends command<StopPHIDetectionJobCommandInput, StopPHIDetectionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopPHIDetectionJob",
+  StopPHIDetectionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopPHIDetectionJobRequest;
+      output: StopPHIDetectionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopPHIDetectionJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopPHIDetectionJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopPHIDetectionJobCommandOutput> {
-    return deserializeAws_json1_1StopPHIDetectionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopPHIDetectionJobCommandInput;
+      output: StopPHIDetectionJobCommandOutput;
+    };
+  };
 }

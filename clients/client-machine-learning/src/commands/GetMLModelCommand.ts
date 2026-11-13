@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { GetMLModelInput, GetMLModelOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetMLModelCommand,
-  serializeAws_json1_1GetMLModelCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMLModelInput, GetMLModelOutput } from "../models/models_0";
+import { GetMLModel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMLModelCommand}.
+ */
 export interface GetMLModelCommandInput extends GetMLModelInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetMLModelCommand}.
+ */
 export interface GetMLModelCommandOutput extends GetMLModelOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,84 @@ export interface GetMLModelCommandOutput extends GetMLModelOutput, __MetadataBea
  * ```javascript
  * import { MachineLearningClient, GetMLModelCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, GetMLModelCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // GetMLModelInput
+ *   MLModelId: "STRING_VALUE", // required
+ *   Verbose: true || false,
+ * };
  * const command = new GetMLModelCommand(input);
  * const response = await client.send(command);
+ * // { // GetMLModelOutput
+ * //   MLModelId: "STRING_VALUE",
+ * //   TrainingDataSourceId: "STRING_VALUE",
+ * //   CreatedByIamUser: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"),
+ * //   LastUpdatedAt: new Date("TIMESTAMP"),
+ * //   Name: "STRING_VALUE",
+ * //   Status: "PENDING" || "INPROGRESS" || "FAILED" || "COMPLETED" || "DELETED",
+ * //   SizeInBytes: Number("long"),
+ * //   EndpointInfo: { // RealtimeEndpointInfo
+ * //     PeakRequestsPerSecond: Number("int"),
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     EndpointUrl: "STRING_VALUE",
+ * //     EndpointStatus: "NONE" || "READY" || "UPDATING" || "FAILED",
+ * //   },
+ * //   TrainingParameters: { // TrainingParameters
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   InputDataLocationS3: "STRING_VALUE",
+ * //   MLModelType: "REGRESSION" || "BINARY" || "MULTICLASS",
+ * //   ScoreThreshold: Number("float"),
+ * //   ScoreThresholdLastUpdatedAt: new Date("TIMESTAMP"),
+ * //   LogUri: "STRING_VALUE",
+ * //   Message: "STRING_VALUE",
+ * //   ComputeTime: Number("long"),
+ * //   FinishedAt: new Date("TIMESTAMP"),
+ * //   StartedAt: new Date("TIMESTAMP"),
+ * //   Recipe: "STRING_VALUE",
+ * //   Schema: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetMLModelCommandInput - {@link GetMLModelCommandInput}
+ * @returns {@link GetMLModelCommandOutput}
  * @see {@link GetMLModelCommandInput} for command's `input` shape.
  * @see {@link GetMLModelCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource cannot be located.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class GetMLModelCommand extends $Command<
-  GetMLModelCommandInput,
-  GetMLModelCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMLModelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMLModelCommandInput, GetMLModelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "GetMLModelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMLModelInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMLModelOutput.filterSensitiveLog,
+export class GetMLModelCommand extends command<GetMLModelCommandInput, GetMLModelCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMLModel",
+  GetMLModel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMLModelInput;
+      output: GetMLModelOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMLModelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetMLModelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMLModelCommandOutput> {
-    return deserializeAws_json1_1GetMLModelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMLModelCommandInput;
+      output: GetMLModelCommandOutput;
+    };
+  };
 }

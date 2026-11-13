@@ -1,95 +1,231 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListNamespacesRequest, ListNamespacesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListNamespacesCommand,
-  serializeAws_json1_1ListNamespacesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceDiscoveryClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceDiscoveryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListNamespacesRequest, ListNamespacesResponse } from "../models/models_0";
+import { ListNamespaces$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListNamespacesCommand}.
+ */
 export interface ListNamespacesCommandInput extends ListNamespacesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListNamespacesCommand}.
+ */
 export interface ListNamespacesCommandOutput extends ListNamespacesResponse, __MetadataBearer {}
 
 /**
- * <p>Lists summary information about the namespaces that were created by the current account.</p>
+ * <p>Lists summary information about the namespaces that were created by the current Amazon Web Services account and shared with the current Amazon Web Services account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceDiscoveryClient, ListNamespacesCommand } from "@aws-sdk/client-servicediscovery"; // ES Modules import
  * // const { ServiceDiscoveryClient, ListNamespacesCommand } = require("@aws-sdk/client-servicediscovery"); // CommonJS import
+ * // import type { ServiceDiscoveryClientConfig } from "@aws-sdk/client-servicediscovery";
+ * const config = {}; // type is ServiceDiscoveryClientConfig
  * const client = new ServiceDiscoveryClient(config);
+ * const input = { // ListNamespacesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // NamespaceFilters
+ *     { // NamespaceFilter
+ *       Name: "TYPE" || "NAME" || "HTTP_NAME" || "RESOURCE_OWNER", // required
+ *       Values: [ // FilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Condition: "EQ" || "IN" || "BETWEEN" || "BEGINS_WITH",
+ *     },
+ *   ],
+ * };
  * const command = new ListNamespacesCommand(input);
  * const response = await client.send(command);
+ * // { // ListNamespacesResponse
+ * //   Namespaces: [ // NamespaceSummariesList
+ * //     { // NamespaceSummary
+ * //       Id: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       ResourceOwner: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Type: "DNS_PUBLIC" || "DNS_PRIVATE" || "HTTP",
+ * //       Description: "STRING_VALUE",
+ * //       ServiceCount: Number("int"),
+ * //       Properties: { // NamespaceProperties
+ * //         DnsProperties: { // DnsProperties
+ * //           HostedZoneId: "STRING_VALUE",
+ * //           SOA: { // SOA
+ * //             TTL: Number("long"), // required
+ * //           },
+ * //         },
+ * //         HttpProperties: { // HttpProperties
+ * //           HttpName: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       CreateDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListNamespacesCommandInput - {@link ListNamespacesCommandInput}
+ * @returns {@link ListNamespacesCommandOutput}
  * @see {@link ListNamespacesCommandInput} for command's `input` shape.
  * @see {@link ListNamespacesCommandOutput} for command's `response` shape.
- * @see {@link ServiceDiscoveryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceDiscoveryClientResolvedConfig | config} for ServiceDiscoveryClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>One or more specified values aren't valid. For example, a required value might be missing, a
+ *    numeric value might be outside the allowed range, or a string value might exceed length
+ *    constraints.</p>
+ *
+ * @throws {@link ServiceDiscoveryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceDiscovery service.</p>
+ *
+ *
+ * @example Example: List namespaces
+ * ```javascript
+ * // Example: List namespaces
+ * const input = { /* empty *\/ };
+ * const command = new ListNamespacesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Namespaces: [
+ *     {
+ *       Arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile",
+ *       CreateDate: 1.7051616E9,
+ *       Id: "ns-a3ccy2e7e3a7rile",
+ *       Name: "local",
+ *       Properties: {
+ *         DnsProperties: {
+ *           HostedZoneId: "Z06752353VBUDTC32S84S",
+ *           SOA: {
+ *             TTL: 60
+ *           }
+ *         },
+ *         HttpProperties: {
+ *           HttpName: "local"
+ *         }
+ *       },
+ *       ResourceOwner: "123456789012",
+ *       ServiceCount: 2,
+ *       Type: "DNS_PRIVATE"
+ *     },
+ *     {
+ *       Arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx",
+ *       CreateDate: 1.7051616E9,
+ *       Description: "My second namespace",
+ *       Id: "ns-pocfyjtrsmwtvcxx",
+ *       Name: "My-second-namespace",
+ *       Properties: {
+ *         DnsProperties: {
+ *           SOA: {
+ *             TTL: 60
+ *           }
+ *         },
+ *         HttpProperties: {
+ *           HttpName: "My-second-namespace"
+ *         }
+ *       },
+ *       ResourceOwner: "123456789012",
+ *       ServiceCount: 1,
+ *       Type: "HTTP"
+ *     },
+ *     {
+ *       Arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm",
+ *       CreateDate: 1.7051616E9,
+ *       Id: "ns-ylexjili4cdxy3xm",
+ *       Name: "example.com",
+ *       Properties: {
+ *         DnsProperties: {
+ *           HostedZoneId: "Z09983722P0QME1B3KC8I",
+ *           SOA: {
+ *             TTL: 60
+ *           }
+ *         },
+ *         HttpProperties: {
+ *           HttpName: "example.com"
+ *         }
+ *       },
+ *       ResourceOwner: "123456789012",
+ *       ServiceCount: 3,
+ *       Type: "DNS_PRIVATE"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example List namespaces filtered by resource owner
+ * ```javascript
+ * // This example shows how to list namespaces that are shared with you from other AWS accounts using the RESOURCE_OWNER filter.
+ * const input = {
+ *   Filters: [
+ *     {
+ *       Name: "RESOURCE_OWNER",
+ *       Values: [
+ *         "OTHER_ACCOUNTS"
+ *       ]
+ *     }
+ *   ]
+ * };
+ * const command = new ListNamespacesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Namespaces: [
+ *     {
+ *       Arn: "arn:aws:servicediscovery:us-west-2:111122223333:namespace/ns-abcd1234xmpl5678",
+ *       CreateDate: 1.7051616E9,
+ *       Description: "Example private DNS namespace",
+ *       Id: "ns-abcd1234xmpl5678",
+ *       Name: "example-namespace",
+ *       Properties: {
+ *         DnsProperties: {
+ *           HostedZoneId: "Z1D633PJN98FT9",
+ *           SOA: {
+ *             TTL: 60
+ *           }
+ *         },
+ *         HttpProperties: {
+ *           HttpName: "example-namespace"
+ *         }
+ *       },
+ *       ResourceOwner: "111122223333",
+ *       ServiceCount: 2,
+ *       Type: "DNS_PRIVATE"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListNamespacesCommand extends $Command<
-  ListNamespacesCommandInput,
-  ListNamespacesCommandOutput,
-  ServiceDiscoveryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListNamespacesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceDiscoveryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListNamespacesCommandInput, ListNamespacesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceDiscoveryClient";
-    const commandName = "ListNamespacesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListNamespacesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListNamespacesResponse.filterSensitiveLog,
+export class ListNamespacesCommand extends command<ListNamespacesCommandInput, ListNamespacesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListNamespaces",
+  ListNamespaces$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListNamespacesRequest;
+      output: ListNamespacesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListNamespacesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListNamespacesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListNamespacesCommandOutput> {
-    return deserializeAws_json1_1ListNamespacesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListNamespacesCommandInput;
+      output: ListNamespacesCommandOutput;
+    };
+  };
 }

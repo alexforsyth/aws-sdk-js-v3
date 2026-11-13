@@ -1,95 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CancelBundleTaskRequest, CancelBundleTaskResult } from "../models/models_0";
-import {
-  deserializeAws_ec2CancelBundleTaskCommand,
-  serializeAws_ec2CancelBundleTaskCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelBundleTaskRequest, CancelBundleTaskResult } from "../models/models_0";
+import { CancelBundleTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelBundleTaskCommand}.
+ */
 export interface CancelBundleTaskCommandInput extends CancelBundleTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelBundleTaskCommand}.
+ */
 export interface CancelBundleTaskCommandOutput extends CancelBundleTaskResult, __MetadataBearer {}
 
 /**
  * <p>Cancels a bundling operation for an instance store-backed Windows instance.</p>
+ *          <note>
+ *             <p>CancelBundleTask is no longer supported because <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BundleInstance.html">BundleInstance</a>,
+ *         the operation it cancels, is no longer supported.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CancelBundleTaskCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CancelBundleTaskCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CancelBundleTaskRequest
+ *   BundleId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new CancelBundleTaskCommand(input);
  * const response = await client.send(command);
+ * // { // CancelBundleTaskResult
+ * //   BundleTask: { // BundleTask
+ * //     InstanceId: "STRING_VALUE",
+ * //     BundleId: "STRING_VALUE",
+ * //     State: "pending" || "waiting-for-shutdown" || "bundling" || "storing" || "cancelling" || "complete" || "failed",
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     UpdateTime: new Date("TIMESTAMP"),
+ * //     Storage: { // Storage
+ * //       S3: { // S3Storage
+ * //         AWSAccessKeyId: "STRING_VALUE",
+ * //         Bucket: "STRING_VALUE",
+ * //         Prefix: "STRING_VALUE",
+ * //         UploadPolicy: new Uint8Array(),
+ * //         UploadPolicySignature: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     Progress: "STRING_VALUE",
+ * //     BundleTaskError: { // BundleTaskError
+ * //       Code: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CancelBundleTaskCommandInput - {@link CancelBundleTaskCommandInput}
+ * @returns {@link CancelBundleTaskCommandOutput}
  * @see {@link CancelBundleTaskCommandInput} for command's `input` shape.
  * @see {@link CancelBundleTaskCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CancelBundleTaskCommand extends $Command<
-  CancelBundleTaskCommandInput,
-  CancelBundleTaskCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelBundleTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelBundleTaskCommandInput, CancelBundleTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CancelBundleTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelBundleTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelBundleTaskResult.filterSensitiveLog,
+export class CancelBundleTaskCommand extends command<CancelBundleTaskCommandInput, CancelBundleTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelBundleTask",
+  CancelBundleTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelBundleTaskRequest;
+      output: CancelBundleTaskResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelBundleTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CancelBundleTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelBundleTaskCommandOutput> {
-    return deserializeAws_ec2CancelBundleTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelBundleTaskCommandInput;
+      output: CancelBundleTaskCommandOutput;
+    };
+  };
 }

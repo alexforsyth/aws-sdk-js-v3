@@ -1,105 +1,109 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DisassociateIamInstanceProfileRequest, DisassociateIamInstanceProfileResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateIamInstanceProfileCommand,
-  serializeAws_ec2DisassociateIamInstanceProfileCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateIamInstanceProfileRequest, DisassociateIamInstanceProfileResult } from "../models/models_6";
+import { DisassociateIamInstanceProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateIamInstanceProfileCommand}.
+ */
 export interface DisassociateIamInstanceProfileCommandInput extends DisassociateIamInstanceProfileRequest {}
-export interface DisassociateIamInstanceProfileCommandOutput
-  extends DisassociateIamInstanceProfileResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateIamInstanceProfileCommand}.
+ */
+export interface DisassociateIamInstanceProfileCommandOutput extends DisassociateIamInstanceProfileResult, __MetadataBearer {}
 
 /**
  * <p>Disassociates an IAM instance profile from a running or stopped instance.</p>
- *         <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association
+ *          <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association
  *             ID.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DisassociateIamInstanceProfileCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateIamInstanceProfileCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateIamInstanceProfileRequest
+ *   AssociationId: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateIamInstanceProfileCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateIamInstanceProfileResult
+ * //   IamInstanceProfileAssociation: { // IamInstanceProfileAssociation
+ * //     AssociationId: "STRING_VALUE",
+ * //     InstanceId: "STRING_VALUE",
+ * //     IamInstanceProfile: { // IamInstanceProfile
+ * //       Arn: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //     },
+ * //     State: "associating" || "associated" || "disassociating" || "disassociated",
+ * //     Timestamp: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisassociateIamInstanceProfileCommandInput - {@link DisassociateIamInstanceProfileCommandInput}
+ * @returns {@link DisassociateIamInstanceProfileCommandOutput}
  * @see {@link DisassociateIamInstanceProfileCommandInput} for command's `input` shape.
  * @see {@link DisassociateIamInstanceProfileCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To disassociate an IAM instance profile
+ * ```javascript
+ * // This example disassociates the specified IAM instance profile from an instance.
+ * const input = {
+ *   AssociationId: "iip-assoc-05020b59952902f5f"
+ * };
+ * const command = new DisassociateIamInstanceProfileCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   IamInstanceProfileAssociation: {
+ *     AssociationId: "iip-assoc-05020b59952902f5f",
+ *     IamInstanceProfile: {
+ *       Arn: "arn:aws:iam::123456789012:instance-profile/admin-role",
+ *       Id: "AIPAI5IVIHMFFYY2DKV5Y"
+ *     },
+ *     InstanceId: "i-123456789abcde123",
+ *     State: "disassociating"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisassociateIamInstanceProfileCommand extends $Command<
-  DisassociateIamInstanceProfileCommandInput,
-  DisassociateIamInstanceProfileCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateIamInstanceProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateIamInstanceProfileCommandInput, DisassociateIamInstanceProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateIamInstanceProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateIamInstanceProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateIamInstanceProfileResult.filterSensitiveLog,
+export class DisassociateIamInstanceProfileCommand extends command<DisassociateIamInstanceProfileCommandInput, DisassociateIamInstanceProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateIamInstanceProfile",
+  DisassociateIamInstanceProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateIamInstanceProfileRequest;
+      output: DisassociateIamInstanceProfileResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateIamInstanceProfileCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateIamInstanceProfileCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateIamInstanceProfileCommandOutput> {
-    return deserializeAws_ec2DisassociateIamInstanceProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateIamInstanceProfileCommandInput;
+      output: DisassociateIamInstanceProfileCommandOutput;
+    };
+  };
 }

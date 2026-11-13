@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { ReportTaskRunnerHeartbeatInput, ReportTaskRunnerHeartbeatOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ReportTaskRunnerHeartbeatCommand,
-  serializeAws_json1_1ReportTaskRunnerHeartbeatCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ReportTaskRunnerHeartbeatInput, ReportTaskRunnerHeartbeatOutput } from "../models/models_0";
+import { ReportTaskRunnerHeartbeat$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ReportTaskRunnerHeartbeatCommand}.
+ */
 export interface ReportTaskRunnerHeartbeatCommandInput extends ReportTaskRunnerHeartbeatInput {}
+/**
+ * @public
+ *
+ * The output of {@link ReportTaskRunnerHeartbeatCommand}.
+ */
 export interface ReportTaskRunnerHeartbeatCommandOutput extends ReportTaskRunnerHeartbeatOutput, __MetadataBearer {}
 
 /**
@@ -37,9 +38,9 @@ export interface ReportTaskRunnerHeartbeatCommandOutput extends ReportTaskRunner
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"taskrunnerId": "1234567890",
+ * \{"taskrunnerId": "1234567890",
  *  "workerGroup": "wg-12345",
- *  "hostname": "example.com"}
+ *  "hostname": "example.com"\}
  *
  *             </request>
  *
@@ -51,7 +52,7 @@ export interface ReportTaskRunnerHeartbeatCommandOutput extends ReportTaskRunner
  * Content-Length: 20
  * Date: Mon, 12 Nov 2012 17:50:53 GMT
  *
- * {"terminate": false}
+ * \{"terminate": false\}
  *
  *             </response>
  *         </examples>
@@ -60,71 +61,55 @@ export interface ReportTaskRunnerHeartbeatCommandOutput extends ReportTaskRunner
  * ```javascript
  * import { DataPipelineClient, ReportTaskRunnerHeartbeatCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, ReportTaskRunnerHeartbeatCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // ReportTaskRunnerHeartbeatInput
+ *   taskrunnerId: "STRING_VALUE", // required
+ *   workerGroup: "STRING_VALUE",
+ *   hostname: "STRING_VALUE",
+ * };
  * const command = new ReportTaskRunnerHeartbeatCommand(input);
  * const response = await client.send(command);
+ * // { // ReportTaskRunnerHeartbeatOutput
+ * //   terminate: true || false, // required
+ * // };
+ *
  * ```
  *
+ * @param ReportTaskRunnerHeartbeatCommandInput - {@link ReportTaskRunnerHeartbeatCommandInput}
+ * @returns {@link ReportTaskRunnerHeartbeatCommandOutput}
  * @see {@link ReportTaskRunnerHeartbeatCommandInput} for command's `input` shape.
  * @see {@link ReportTaskRunnerHeartbeatCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class ReportTaskRunnerHeartbeatCommand extends $Command<
-  ReportTaskRunnerHeartbeatCommandInput,
-  ReportTaskRunnerHeartbeatCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ReportTaskRunnerHeartbeatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ReportTaskRunnerHeartbeatCommandInput, ReportTaskRunnerHeartbeatCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "ReportTaskRunnerHeartbeatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ReportTaskRunnerHeartbeatInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ReportTaskRunnerHeartbeatOutput.filterSensitiveLog,
+export class ReportTaskRunnerHeartbeatCommand extends command<ReportTaskRunnerHeartbeatCommandInput, ReportTaskRunnerHeartbeatCommandOutput>(
+  _ep0,
+  _mw0,
+  "ReportTaskRunnerHeartbeat",
+  ReportTaskRunnerHeartbeat$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReportTaskRunnerHeartbeatInput;
+      output: ReportTaskRunnerHeartbeatOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ReportTaskRunnerHeartbeatCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ReportTaskRunnerHeartbeatCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ReportTaskRunnerHeartbeatCommandOutput> {
-    return deserializeAws_json1_1ReportTaskRunnerHeartbeatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ReportTaskRunnerHeartbeatCommandInput;
+      output: ReportTaskRunnerHeartbeatCommandOutput;
+    };
+  };
 }

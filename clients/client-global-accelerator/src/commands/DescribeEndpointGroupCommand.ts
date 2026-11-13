@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import { DescribeEndpointGroupRequest, DescribeEndpointGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEndpointGroupCommand,
-  serializeAws_json1_1DescribeEndpointGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEndpointGroupRequest, DescribeEndpointGroupResponse } from "../models/models_0";
+import { DescribeEndpointGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEndpointGroupCommand}.
+ */
 export interface DescribeEndpointGroupCommandInput extends DescribeEndpointGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEndpointGroupCommand}.
+ */
 export interface DescribeEndpointGroupCommandOutput extends DescribeEndpointGroupResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,80 @@ export interface DescribeEndpointGroupCommandOutput extends DescribeEndpointGrou
  * ```javascript
  * import { GlobalAcceleratorClient, DescribeEndpointGroupCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, DescribeEndpointGroupCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // DescribeEndpointGroupRequest
+ *   EndpointGroupArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeEndpointGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEndpointGroupResponse
+ * //   EndpointGroup: { // EndpointGroup
+ * //     EndpointGroupArn: "STRING_VALUE",
+ * //     EndpointGroupRegion: "STRING_VALUE",
+ * //     EndpointDescriptions: [ // EndpointDescriptions
+ * //       { // EndpointDescription
+ * //         EndpointId: "STRING_VALUE",
+ * //         Weight: Number("int"),
+ * //         HealthState: "INITIAL" || "HEALTHY" || "UNHEALTHY",
+ * //         HealthReason: "STRING_VALUE",
+ * //         ClientIPPreservationEnabled: true || false,
+ * //       },
+ * //     ],
+ * //     TrafficDialPercentage: Number("float"),
+ * //     HealthCheckPort: Number("int"),
+ * //     HealthCheckProtocol: "TCP" || "HTTP" || "HTTPS",
+ * //     HealthCheckPath: "STRING_VALUE",
+ * //     HealthCheckIntervalSeconds: Number("int"),
+ * //     ThresholdCount: Number("int"),
+ * //     PortOverrides: [ // PortOverrides
+ * //       { // PortOverride
+ * //         ListenerPort: Number("int"),
+ * //         EndpointPort: Number("int"),
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeEndpointGroupCommandInput - {@link DescribeEndpointGroupCommandInput}
+ * @returns {@link DescribeEndpointGroupCommandOutput}
  * @see {@link DescribeEndpointGroupCommandInput} for command's `input` shape.
  * @see {@link DescribeEndpointGroupCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link EndpointGroupNotFoundException} (client fault)
+ *  <p>The endpoint group that you specified doesn't exist.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEndpointGroupCommand extends $Command<
-  DescribeEndpointGroupCommandInput,
-  DescribeEndpointGroupCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEndpointGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEndpointGroupCommandInput, DescribeEndpointGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "DescribeEndpointGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEndpointGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEndpointGroupResponse.filterSensitiveLog,
+export class DescribeEndpointGroupCommand extends command<DescribeEndpointGroupCommandInput, DescribeEndpointGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEndpointGroup",
+  DescribeEndpointGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEndpointGroupRequest;
+      output: DescribeEndpointGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEndpointGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEndpointGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEndpointGroupCommandOutput> {
-    return deserializeAws_json1_1DescribeEndpointGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEndpointGroupCommandInput;
+      output: DescribeEndpointGroupCommandOutput;
+    };
+  };
 }

@@ -1,97 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { BatchDetectEntitiesRequest, BatchDetectEntitiesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchDetectEntitiesCommand,
-  serializeAws_json1_1BatchDetectEntitiesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDetectEntitiesRequest, BatchDetectEntitiesResponse } from "../models/models_0";
+import { BatchDetectEntities$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDetectEntitiesCommand}.
+ */
 export interface BatchDetectEntitiesCommandInput extends BatchDetectEntitiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDetectEntitiesCommand}.
+ */
 export interface BatchDetectEntitiesCommandOutput extends BatchDetectEntitiesResponse, __MetadataBearer {}
 
 /**
  * <p>Inspects the text of a batch of documents for named entities and returns information
- *       about them. For more information about named entities, see <a>how-entities</a>
- *          </p>
+ *       about them. For more information about named entities, see
+ *       <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html">Entities</a> in the Comprehend Developer Guide.
+ *     </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ComprehendClient, BatchDetectEntitiesCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, BatchDetectEntitiesCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // BatchDetectEntitiesRequest
+ *   TextList: [ // CustomerInputStringList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   LanguageCode: "en" || "es" || "fr" || "de" || "it" || "pt" || "ar" || "hi" || "ja" || "ko" || "zh" || "zh-TW", // required
+ * };
  * const command = new BatchDetectEntitiesCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDetectEntitiesResponse
+ * //   ResultList: [ // ListOfDetectEntitiesResult // required
+ * //     { // BatchDetectEntitiesItemResult
+ * //       Index: Number("int"),
+ * //       Entities: [ // ListOfEntities
+ * //         { // Entity
+ * //           Score: Number("float"),
+ * //           Type: "PERSON" || "LOCATION" || "ORGANIZATION" || "COMMERCIAL_ITEM" || "EVENT" || "DATE" || "QUANTITY" || "TITLE" || "OTHER",
+ * //           Text: "STRING_VALUE",
+ * //           BeginOffset: Number("int"),
+ * //           EndOffset: Number("int"),
+ * //           BlockReferences: [ // ListOfBlockReferences
+ * //             { // BlockReference
+ * //               BlockId: "STRING_VALUE",
+ * //               BeginOffset: Number("int"),
+ * //               EndOffset: Number("int"),
+ * //               ChildBlocks: [ // ListOfChildBlocks
+ * //                 { // ChildBlock
+ * //                   ChildBlockId: "STRING_VALUE",
+ * //                   BeginOffset: Number("int"),
+ * //                   EndOffset: Number("int"),
+ * //                 },
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   ErrorList: [ // BatchItemErrorList // required
+ * //     { // BatchItemError
+ * //       Index: Number("int"),
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDetectEntitiesCommandInput - {@link BatchDetectEntitiesCommandInput}
+ * @returns {@link BatchDetectEntitiesCommandOutput}
  * @see {@link BatchDetectEntitiesCommandInput} for command's `input` shape.
  * @see {@link BatchDetectEntitiesCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link BatchSizeLimitExceededException} (client fault)
+ *  <p>The number of documents in the request exceeds the limit of 25. Try your request again
+ *       with fewer documents.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TextSizeLimitExceededException} (client fault)
+ *  <p>The size of the input text exceeds the limit. Use a smaller document.</p>
+ *
+ * @throws {@link UnsupportedLanguageException} (client fault)
+ *  <p>Amazon Comprehend can't process the language of the input text. For a list of supported languages,
+ *       <a href="https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html">Supported languages</a> in the Comprehend Developer Guide.
+ *     </p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDetectEntitiesCommand extends $Command<
-  BatchDetectEntitiesCommandInput,
-  BatchDetectEntitiesCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDetectEntitiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDetectEntitiesCommandInput, BatchDetectEntitiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "BatchDetectEntitiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDetectEntitiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDetectEntitiesResponse.filterSensitiveLog,
+export class BatchDetectEntitiesCommand extends command<BatchDetectEntitiesCommandInput, BatchDetectEntitiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDetectEntities",
+  BatchDetectEntities$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDetectEntitiesRequest;
+      output: BatchDetectEntitiesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDetectEntitiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchDetectEntitiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchDetectEntitiesCommandOutput> {
-    return deserializeAws_json1_1BatchDetectEntitiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDetectEntitiesCommandInput;
+      output: BatchDetectEntitiesCommandOutput;
+    };
+  };
 }

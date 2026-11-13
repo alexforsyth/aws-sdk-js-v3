@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { CreateDomainConfigurationRequest, CreateDomainConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateDomainConfigurationCommand,
-  serializeAws_restJson1CreateDomainConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDomainConfigurationRequest, CreateDomainConfigurationResponse } from "../models/models_0";
+import { CreateDomainConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDomainConfigurationCommand}.
+ */
 export interface CreateDomainConfigurationCommandInput extends CreateDomainConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDomainConfigurationCommand}.
+ */
 export interface CreateDomainConfigurationCommandOutput extends CreateDomainConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -29,71 +30,101 @@ export interface CreateDomainConfigurationCommandOutput extends CreateDomainConf
  * ```javascript
  * import { IoTClient, CreateDomainConfigurationCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, CreateDomainConfigurationCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // CreateDomainConfigurationRequest
+ *   domainConfigurationName: "STRING_VALUE", // required
+ *   domainName: "STRING_VALUE",
+ *   serverCertificateArns: [ // ServerCertificateArns
+ *     "STRING_VALUE",
+ *   ],
+ *   validationCertificateArn: "STRING_VALUE",
+ *   authorizerConfig: { // AuthorizerConfig
+ *     defaultAuthorizerName: "STRING_VALUE",
+ *     allowAuthorizerOverride: true || false,
+ *   },
+ *   serviceType: "DATA" || "CREDENTIAL_PROVIDER" || "JOBS",
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   tlsConfig: { // TlsConfig
+ *     securityPolicy: "STRING_VALUE",
+ *   },
+ *   serverCertificateConfig: { // ServerCertificateConfig
+ *     enableOCSPCheck: true || false,
+ *     ocspLambdaArn: "STRING_VALUE",
+ *     ocspAuthorizedResponderArn: "STRING_VALUE",
+ *   },
+ *   authenticationType: "CUSTOM_AUTH_X509" || "CUSTOM_AUTH" || "AWS_X509" || "AWS_SIGV4" || "DEFAULT",
+ *   applicationProtocol: "SECURE_MQTT" || "MQTT_WSS" || "HTTPS" || "DEFAULT",
+ *   clientCertificateConfig: { // ClientCertificateConfig
+ *     clientCertificateCallbackArn: "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateDomainConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDomainConfigurationResponse
+ * //   domainConfigurationName: "STRING_VALUE",
+ * //   domainConfigurationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateDomainConfigurationCommandInput - {@link CreateDomainConfigurationCommandInput}
+ * @returns {@link CreateDomainConfigurationCommandOutput}
  * @see {@link CreateDomainConfigurationCommandInput} for command's `input` shape.
  * @see {@link CreateDomainConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link CertificateValidationException} (client fault)
+ *  <p>The certificate is invalid.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDomainConfigurationCommand extends $Command<
-  CreateDomainConfigurationCommandInput,
-  CreateDomainConfigurationCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDomainConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDomainConfigurationCommandInput, CreateDomainConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "CreateDomainConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDomainConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDomainConfigurationResponse.filterSensitiveLog,
+export class CreateDomainConfigurationCommand extends command<CreateDomainConfigurationCommandInput, CreateDomainConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDomainConfiguration",
+  CreateDomainConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDomainConfigurationRequest;
+      output: CreateDomainConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDomainConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateDomainConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateDomainConfigurationCommandOutput> {
-    return deserializeAws_restJson1CreateDomainConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDomainConfigurationCommandInput;
+      output: CreateDomainConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateLoggingConfigurationRequest, UpdateLoggingConfigurationResponse } from "../models/models_0";
-import { NetworkFirewallClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkFirewallClient";
-import {
-  deserializeAws_json1_0UpdateLoggingConfigurationCommand,
-  serializeAws_json1_0UpdateLoggingConfigurationCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateLoggingConfigurationRequest, UpdateLoggingConfigurationResponse } from "../models/models_0";
+import { UpdateLoggingConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateLoggingConfigurationCommand}.
+ */
 export interface UpdateLoggingConfigurationCommandInput extends UpdateLoggingConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateLoggingConfigurationCommand}.
+ */
 export interface UpdateLoggingConfigurationCommandOutput extends UpdateLoggingConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -53,71 +54,105 @@ export interface UpdateLoggingConfigurationCommandOutput extends UpdateLoggingCo
  * ```javascript
  * import { NetworkFirewallClient, UpdateLoggingConfigurationCommand } from "@aws-sdk/client-network-firewall"; // ES Modules import
  * // const { NetworkFirewallClient, UpdateLoggingConfigurationCommand } = require("@aws-sdk/client-network-firewall"); // CommonJS import
+ * // import type { NetworkFirewallClientConfig } from "@aws-sdk/client-network-firewall";
+ * const config = {}; // type is NetworkFirewallClientConfig
  * const client = new NetworkFirewallClient(config);
+ * const input = { // UpdateLoggingConfigurationRequest
+ *   FirewallArn: "STRING_VALUE",
+ *   FirewallName: "STRING_VALUE",
+ *   LoggingConfiguration: { // LoggingConfiguration
+ *     LogDestinationConfigs: [ // LogDestinationConfigs // required
+ *       { // LogDestinationConfig
+ *         LogType: "ALERT" || "FLOW" || "TLS", // required
+ *         LogDestinationType: "S3" || "CloudWatchLogs" || "KinesisDataFirehose", // required
+ *         LogDestination: { // LogDestinationMap // required
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *       },
+ *     ],
+ *   },
+ *   EnableMonitoringDashboard: true || false,
+ * };
  * const command = new UpdateLoggingConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateLoggingConfigurationResponse
+ * //   FirewallArn: "STRING_VALUE",
+ * //   FirewallName: "STRING_VALUE",
+ * //   LoggingConfiguration: { // LoggingConfiguration
+ * //     LogDestinationConfigs: [ // LogDestinationConfigs // required
+ * //       { // LogDestinationConfig
+ * //         LogType: "ALERT" || "FLOW" || "TLS", // required
+ * //         LogDestinationType: "S3" || "CloudWatchLogs" || "KinesisDataFirehose", // required
+ * //         LogDestination: { // LogDestinationMap // required
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * //   EnableMonitoringDashboard: true || false,
+ * // };
+ *
  * ```
  *
+ * @param UpdateLoggingConfigurationCommandInput - {@link UpdateLoggingConfigurationCommandInput}
+ * @returns {@link UpdateLoggingConfigurationCommandOutput}
  * @see {@link UpdateLoggingConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateLoggingConfigurationCommandOutput} for command's `response` shape.
- * @see {@link NetworkFirewallClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NetworkFirewallClientResolvedConfig | config} for NetworkFirewallClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Your request is valid, but Network Firewall couldn't perform the operation because of a
+ *          system problem. Retry your request. </p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The operation failed because of a problem with your request. Examples include: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified an unsupported parameter name or value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a property with a value that isn't among the available
+ *                types.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                that isn't valid in the context of the request.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link InvalidTokenException} (client fault)
+ *  <p>The token you provided is stale or isn't valid for the operation. </p>
+ *
+ * @throws {@link LogDestinationPermissionException} (client fault)
+ *  <p>Unable to send logs to a configured logging destination. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Unable to locate a resource using the parameters that you provided.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Unable to process the request due to throttling limitations.</p>
+ *
+ * @throws {@link NetworkFirewallServiceException}
+ * <p>Base exception class for all service exceptions from NetworkFirewall service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateLoggingConfigurationCommand extends $Command<
-  UpdateLoggingConfigurationCommandInput,
-  UpdateLoggingConfigurationCommandOutput,
-  NetworkFirewallClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateLoggingConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkFirewallClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateLoggingConfigurationCommandInput, UpdateLoggingConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkFirewallClient";
-    const commandName = "UpdateLoggingConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateLoggingConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateLoggingConfigurationResponse.filterSensitiveLog,
+export class UpdateLoggingConfigurationCommand extends command<UpdateLoggingConfigurationCommandInput, UpdateLoggingConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateLoggingConfiguration",
+  UpdateLoggingConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLoggingConfigurationRequest;
+      output: UpdateLoggingConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateLoggingConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0UpdateLoggingConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateLoggingConfigurationCommandOutput> {
-    return deserializeAws_json1_0UpdateLoggingConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateLoggingConfigurationCommandInput;
+      output: UpdateLoggingConfigurationCommandOutput;
+    };
+  };
 }

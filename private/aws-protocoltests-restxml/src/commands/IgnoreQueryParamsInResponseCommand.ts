@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IgnoreQueryParamsInResponseOutput } from "../models/models_0";
-import {
-  deserializeAws_restXmlIgnoreQueryParamsInResponseCommand,
-  serializeAws_restXmlIgnoreQueryParamsInResponseCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { IgnoreQueryParamsInResponseOutput } from "../models/models_0";
+import { de_IgnoreQueryParamsInResponseCommand, se_IgnoreQueryParamsInResponseCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link IgnoreQueryParamsInResponseCommand}.
+ */
 export interface IgnoreQueryParamsInResponseCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link IgnoreQueryParamsInResponseCommand}.
+ */
 export interface IgnoreQueryParamsInResponseCommandOutput extends IgnoreQueryParamsInResponseOutput, __MetadataBearer {}
 
 /**
@@ -30,71 +39,60 @@ export interface IgnoreQueryParamsInResponseCommandOutput extends IgnoreQueryPar
  * ```javascript
  * import { RestXmlProtocolClient, IgnoreQueryParamsInResponseCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
  * // const { RestXmlProtocolClient, IgnoreQueryParamsInResponseCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
  * const client = new RestXmlProtocolClient(config);
+ * const input = {};
  * const command = new IgnoreQueryParamsInResponseCommand(input);
  * const response = await client.send(command);
+ * // { // IgnoreQueryParamsInResponseOutput
+ * //   baz: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param IgnoreQueryParamsInResponseCommandInput - {@link IgnoreQueryParamsInResponseCommandInput}
+ * @returns {@link IgnoreQueryParamsInResponseCommandOutput}
  * @see {@link IgnoreQueryParamsInResponseCommandInput} for command's `input` shape.
  * @see {@link IgnoreQueryParamsInResponseCommandOutput} for command's `response` shape.
- * @see {@link RestXmlProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
  *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class IgnoreQueryParamsInResponseCommand extends $Command<
-  IgnoreQueryParamsInResponseCommandInput,
-  IgnoreQueryParamsInResponseCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: IgnoreQueryParamsInResponseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<IgnoreQueryParamsInResponseCommandInput, IgnoreQueryParamsInResponseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "IgnoreQueryParamsInResponseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: IgnoreQueryParamsInResponseOutput.filterSensitiveLog,
+export class IgnoreQueryParamsInResponseCommand extends $Command
+  .classBuilder<
+    IgnoreQueryParamsInResponseCommandInput,
+    IgnoreQueryParamsInResponseCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "IgnoreQueryParamsInResponse", {})
+  .n("RestXmlProtocolClient", "IgnoreQueryParamsInResponseCommand")
+  .f(void 0, void 0)
+  .ser(se_IgnoreQueryParamsInResponseCommand)
+  .de(de_IgnoreQueryParamsInResponseCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: IgnoreQueryParamsInResponseOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: IgnoreQueryParamsInResponseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlIgnoreQueryParamsInResponseCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<IgnoreQueryParamsInResponseCommandOutput> {
-    return deserializeAws_restXmlIgnoreQueryParamsInResponseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: IgnoreQueryParamsInResponseCommandInput;
+      output: IgnoreQueryParamsInResponseCommandOutput;
+    };
+  };
 }

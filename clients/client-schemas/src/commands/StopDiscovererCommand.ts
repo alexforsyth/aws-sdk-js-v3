@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StopDiscovererRequest, StopDiscovererResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopDiscovererCommand,
-  serializeAws_restJson1StopDiscovererCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopDiscovererRequest, StopDiscovererResponse } from "../models/models_0";
+import { StopDiscoverer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopDiscovererCommand}.
+ */
 export interface StopDiscovererCommandInput extends StopDiscovererRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopDiscovererCommand}.
+ */
 export interface StopDiscovererCommandOutput extends StopDiscovererResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface StopDiscovererCommandOutput extends StopDiscovererResponse, __M
  * ```javascript
  * import { SchemasClient, StopDiscovererCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, StopDiscovererCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // StopDiscovererRequest
+ *   DiscovererId: "STRING_VALUE", // required
+ * };
  * const command = new StopDiscovererCommand(input);
  * const response = await client.send(command);
+ * // { // StopDiscovererResponse
+ * //   DiscovererId: "STRING_VALUE",
+ * //   State: "STARTED" || "STOPPED",
+ * // };
+ *
  * ```
  *
+ * @param StopDiscovererCommandInput - {@link StopDiscovererCommandInput}
+ * @returns {@link StopDiscovererCommandOutput}
  * @see {@link StopDiscovererCommandInput} for command's `input` shape.
  * @see {@link StopDiscovererCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class StopDiscovererCommand extends $Command<
-  StopDiscovererCommandInput,
-  StopDiscovererCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopDiscovererCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopDiscovererCommandInput, StopDiscovererCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "StopDiscovererCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopDiscovererRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopDiscovererResponse.filterSensitiveLog,
+export class StopDiscovererCommand extends command<StopDiscovererCommandInput, StopDiscovererCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopDiscoverer",
+  StopDiscoverer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopDiscovererRequest;
+      output: StopDiscovererResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopDiscovererCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopDiscovererCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopDiscovererCommandOutput> {
-    return deserializeAws_restJson1StopDiscovererCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopDiscovererCommandInput;
+      output: StopDiscovererCommandOutput;
+    };
+  };
 }

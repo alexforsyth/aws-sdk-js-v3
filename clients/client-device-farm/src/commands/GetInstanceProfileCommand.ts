@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { GetInstanceProfileRequest, GetInstanceProfileResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetInstanceProfileCommand,
-  serializeAws_json1_1GetInstanceProfileCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInstanceProfileRequest, GetInstanceProfileResult } from "../models/models_0";
+import { GetInstanceProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInstanceProfileCommand}.
+ */
 export interface GetInstanceProfileCommandInput extends GetInstanceProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInstanceProfileCommand}.
+ */
 export interface GetInstanceProfileCommandOutput extends GetInstanceProfileResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,68 @@ export interface GetInstanceProfileCommandOutput extends GetInstanceProfileResul
  * ```javascript
  * import { DeviceFarmClient, GetInstanceProfileCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, GetInstanceProfileCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // GetInstanceProfileRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new GetInstanceProfileCommand(input);
  * const response = await client.send(command);
+ * // { // GetInstanceProfileResult
+ * //   instanceProfile: { // InstanceProfile
+ * //     arn: "STRING_VALUE",
+ * //     packageCleanup: true || false,
+ * //     excludeAppPackagesFromCleanup: [ // PackageIds
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     rebootAfterUse: true || false,
+ * //     name: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetInstanceProfileCommandInput - {@link GetInstanceProfileCommandInput}
+ * @returns {@link GetInstanceProfileCommandOutput}
  * @see {@link GetInstanceProfileCommandInput} for command's `input` shape.
  * @see {@link GetInstanceProfileCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class GetInstanceProfileCommand extends $Command<
-  GetInstanceProfileCommandInput,
-  GetInstanceProfileCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInstanceProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInstanceProfileCommandInput, GetInstanceProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "GetInstanceProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInstanceProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetInstanceProfileResult.filterSensitiveLog,
+export class GetInstanceProfileCommand extends command<GetInstanceProfileCommandInput, GetInstanceProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInstanceProfile",
+  GetInstanceProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceProfileRequest;
+      output: GetInstanceProfileResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetInstanceProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetInstanceProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetInstanceProfileCommandOutput> {
-    return deserializeAws_json1_1GetInstanceProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInstanceProfileCommandInput;
+      output: GetInstanceProfileCommandOutput;
+    };
+  };
 }

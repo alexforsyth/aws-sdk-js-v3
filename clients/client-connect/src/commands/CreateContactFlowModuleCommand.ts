@@ -1,0 +1,117 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateContactFlowModuleRequest, CreateContactFlowModuleResponse } from "../models/models_0";
+import { CreateContactFlowModule$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateContactFlowModuleCommand}.
+ */
+export interface CreateContactFlowModuleCommandInput extends CreateContactFlowModuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateContactFlowModuleCommand}.
+ */
+export interface CreateContactFlowModuleCommandOutput extends CreateContactFlowModuleResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a flow module for the specified Connect Customer instance. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, CreateContactFlowModuleCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, CreateContactFlowModuleCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // CreateContactFlowModuleRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   Content: "STRING_VALUE", // required
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   ClientToken: "STRING_VALUE",
+ *   Settings: "STRING_VALUE",
+ *   ExternalInvocationConfiguration: { // ExternalInvocationConfiguration
+ *     Enabled: true || false,
+ *   },
+ * };
+ * const command = new CreateContactFlowModuleCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateContactFlowModuleResponse
+ * //   Id: "STRING_VALUE",
+ * //   Arn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateContactFlowModuleCommandInput - {@link CreateContactFlowModuleCommandInput}
+ * @returns {@link CreateContactFlowModuleCommandOutput}
+ * @see {@link CreateContactFlowModuleCommandInput} for command's `input` shape.
+ * @see {@link CreateContactFlowModuleCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link DuplicateResourceException} (client fault)
+ *  <p>A resource with the specified name already exists.</p>
+ *
+ * @throws {@link IdempotencyException} (client fault)
+ *  <p>An entity with the same name already exists.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidContactFlowModuleException} (client fault)
+ *  <p>The problems with the module. Please fix before trying again.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The allowed limit for the resource has been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateContactFlowModuleCommand extends command<CreateContactFlowModuleCommandInput, CreateContactFlowModuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateContactFlowModule",
+  CreateContactFlowModule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateContactFlowModuleRequest;
+      output: CreateContactFlowModuleResponse;
+    };
+    sdk: {
+      input: CreateContactFlowModuleCommandInput;
+      output: CreateContactFlowModuleCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateReplicationSetInput, UpdateReplicationSetOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateReplicationSetCommand,
-  serializeAws_restJson1UpdateReplicationSetCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMIncidentsClientResolvedConfig } from "../SSMIncidentsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateReplicationSetInput, UpdateReplicationSetOutput } from "../models/models_0";
+import { UpdateReplicationSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateReplicationSetCommand}.
+ */
 export interface UpdateReplicationSetCommandInput extends UpdateReplicationSetInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateReplicationSetCommand}.
+ */
 export interface UpdateReplicationSetCommandOutput extends UpdateReplicationSetOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface UpdateReplicationSetCommandOutput extends UpdateReplicationSetO
  * ```javascript
  * import { SSMIncidentsClient, UpdateReplicationSetCommand } from "@aws-sdk/client-ssm-incidents"; // ES Modules import
  * // const { SSMIncidentsClient, UpdateReplicationSetCommand } = require("@aws-sdk/client-ssm-incidents"); // CommonJS import
+ * // import type { SSMIncidentsClientConfig } from "@aws-sdk/client-ssm-incidents";
+ * const config = {}; // type is SSMIncidentsClientConfig
  * const client = new SSMIncidentsClient(config);
+ * const input = { // UpdateReplicationSetInput
+ *   arn: "STRING_VALUE", // required
+ *   actions: [ // UpdateActionList // required
+ *     { // UpdateReplicationSetAction Union: only one key present
+ *       addRegionAction: { // AddRegionAction
+ *         regionName: "STRING_VALUE", // required
+ *         sseKmsKeyId: "STRING_VALUE",
+ *       },
+ *       deleteRegionAction: { // DeleteRegionAction
+ *         regionName: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   ],
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new UpdateReplicationSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateReplicationSetCommandInput - {@link UpdateReplicationSetCommandInput}
+ * @returns {@link UpdateReplicationSetCommandOutput}
  * @see {@link UpdateReplicationSetCommandInput} for command's `input` shape.
  * @see {@link UpdateReplicationSetCommandOutput} for command's `response` shape.
- * @see {@link SSMIncidentsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMIncidentsClientResolvedConfig | config} for SSMIncidentsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource causes an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which doesn't exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *       service.</p>
+ *
+ * @throws {@link SSMIncidentsServiceException}
+ * <p>Base exception class for all service exceptions from SSMIncidents service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateReplicationSetCommand extends $Command<
-  UpdateReplicationSetCommandInput,
-  UpdateReplicationSetCommandOutput,
-  SSMIncidentsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateReplicationSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMIncidentsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateReplicationSetCommandInput, UpdateReplicationSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMIncidentsClient";
-    const commandName = "UpdateReplicationSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateReplicationSetInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateReplicationSetOutput.filterSensitiveLog,
+export class UpdateReplicationSetCommand extends command<UpdateReplicationSetCommandInput, UpdateReplicationSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateReplicationSet",
+  UpdateReplicationSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateReplicationSetInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateReplicationSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateReplicationSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateReplicationSetCommandOutput> {
-    return deserializeAws_restJson1UpdateReplicationSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateReplicationSetCommandInput;
+      output: UpdateReplicationSetCommandOutput;
+    };
+  };
 }

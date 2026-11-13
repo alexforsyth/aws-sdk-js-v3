@@ -1,50 +1,703 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { CodeStarConnectionsClient } from "./CodeStarConnectionsClient";
 import {
+  type CreateConnectionCommandInput,
+  type CreateConnectionCommandOutput,
   CreateConnectionCommand,
-  CreateConnectionCommandInput,
-  CreateConnectionCommandOutput,
 } from "./commands/CreateConnectionCommand";
-import { CreateHostCommand, CreateHostCommandInput, CreateHostCommandOutput } from "./commands/CreateHostCommand";
 import {
+  type CreateHostCommandInput,
+  type CreateHostCommandOutput,
+  CreateHostCommand,
+} from "./commands/CreateHostCommand";
+import {
+  type CreateRepositoryLinkCommandInput,
+  type CreateRepositoryLinkCommandOutput,
+  CreateRepositoryLinkCommand,
+} from "./commands/CreateRepositoryLinkCommand";
+import {
+  type CreateSyncConfigurationCommandInput,
+  type CreateSyncConfigurationCommandOutput,
+  CreateSyncConfigurationCommand,
+} from "./commands/CreateSyncConfigurationCommand";
+import {
+  type DeleteConnectionCommandInput,
+  type DeleteConnectionCommandOutput,
   DeleteConnectionCommand,
-  DeleteConnectionCommandInput,
-  DeleteConnectionCommandOutput,
 } from "./commands/DeleteConnectionCommand";
-import { DeleteHostCommand, DeleteHostCommandInput, DeleteHostCommandOutput } from "./commands/DeleteHostCommand";
 import {
+  type DeleteHostCommandInput,
+  type DeleteHostCommandOutput,
+  DeleteHostCommand,
+} from "./commands/DeleteHostCommand";
+import {
+  type DeleteRepositoryLinkCommandInput,
+  type DeleteRepositoryLinkCommandOutput,
+  DeleteRepositoryLinkCommand,
+} from "./commands/DeleteRepositoryLinkCommand";
+import {
+  type DeleteSyncConfigurationCommandInput,
+  type DeleteSyncConfigurationCommandOutput,
+  DeleteSyncConfigurationCommand,
+} from "./commands/DeleteSyncConfigurationCommand";
+import {
+  type GetConnectionCommandInput,
+  type GetConnectionCommandOutput,
   GetConnectionCommand,
-  GetConnectionCommandInput,
-  GetConnectionCommandOutput,
 } from "./commands/GetConnectionCommand";
-import { GetHostCommand, GetHostCommandInput, GetHostCommandOutput } from "./commands/GetHostCommand";
+import { type GetHostCommandInput, type GetHostCommandOutput, GetHostCommand } from "./commands/GetHostCommand";
 import {
+  type GetRepositoryLinkCommandInput,
+  type GetRepositoryLinkCommandOutput,
+  GetRepositoryLinkCommand,
+} from "./commands/GetRepositoryLinkCommand";
+import {
+  type GetRepositorySyncStatusCommandInput,
+  type GetRepositorySyncStatusCommandOutput,
+  GetRepositorySyncStatusCommand,
+} from "./commands/GetRepositorySyncStatusCommand";
+import {
+  type GetResourceSyncStatusCommandInput,
+  type GetResourceSyncStatusCommandOutput,
+  GetResourceSyncStatusCommand,
+} from "./commands/GetResourceSyncStatusCommand";
+import {
+  type GetSyncBlockerSummaryCommandInput,
+  type GetSyncBlockerSummaryCommandOutput,
+  GetSyncBlockerSummaryCommand,
+} from "./commands/GetSyncBlockerSummaryCommand";
+import {
+  type GetSyncConfigurationCommandInput,
+  type GetSyncConfigurationCommandOutput,
+  GetSyncConfigurationCommand,
+} from "./commands/GetSyncConfigurationCommand";
+import {
+  type ListConnectionsCommandInput,
+  type ListConnectionsCommandOutput,
   ListConnectionsCommand,
-  ListConnectionsCommandInput,
-  ListConnectionsCommandOutput,
 } from "./commands/ListConnectionsCommand";
-import { ListHostsCommand, ListHostsCommandInput, ListHostsCommandOutput } from "./commands/ListHostsCommand";
+import { type ListHostsCommandInput, type ListHostsCommandOutput, ListHostsCommand } from "./commands/ListHostsCommand";
 import {
+  type ListRepositoryLinksCommandInput,
+  type ListRepositoryLinksCommandOutput,
+  ListRepositoryLinksCommand,
+} from "./commands/ListRepositoryLinksCommand";
+import {
+  type ListRepositorySyncDefinitionsCommandInput,
+  type ListRepositorySyncDefinitionsCommandOutput,
+  ListRepositorySyncDefinitionsCommand,
+} from "./commands/ListRepositorySyncDefinitionsCommand";
+import {
+  type ListSyncConfigurationsCommandInput,
+  type ListSyncConfigurationsCommandOutput,
+  ListSyncConfigurationsCommand,
+} from "./commands/ListSyncConfigurationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateHostCommand, UpdateHostCommandInput, UpdateHostCommandOutput } from "./commands/UpdateHostCommand";
+import {
+  type UpdateHostCommandInput,
+  type UpdateHostCommandOutput,
+  UpdateHostCommand,
+} from "./commands/UpdateHostCommand";
+import {
+  type UpdateRepositoryLinkCommandInput,
+  type UpdateRepositoryLinkCommandOutput,
+  UpdateRepositoryLinkCommand,
+} from "./commands/UpdateRepositoryLinkCommand";
+import {
+  type UpdateSyncBlockerCommandInput,
+  type UpdateSyncBlockerCommandOutput,
+  UpdateSyncBlockerCommand,
+} from "./commands/UpdateSyncBlockerCommand";
+import {
+  type UpdateSyncConfigurationCommandInput,
+  type UpdateSyncConfigurationCommandOutput,
+  UpdateSyncConfigurationCommand,
+} from "./commands/UpdateSyncConfigurationCommand";
+import { paginateListConnections } from "./pagination/ListConnectionsPaginator";
+import { paginateListHosts } from "./pagination/ListHostsPaginator";
+import { paginateListRepositoryLinks } from "./pagination/ListRepositoryLinksPaginator";
+import { paginateListSyncConfigurations } from "./pagination/ListSyncConfigurationsPaginator";
+
+const commands = {
+  CreateConnectionCommand,
+  CreateHostCommand,
+  CreateRepositoryLinkCommand,
+  CreateSyncConfigurationCommand,
+  DeleteConnectionCommand,
+  DeleteHostCommand,
+  DeleteRepositoryLinkCommand,
+  DeleteSyncConfigurationCommand,
+  GetConnectionCommand,
+  GetHostCommand,
+  GetRepositoryLinkCommand,
+  GetRepositorySyncStatusCommand,
+  GetResourceSyncStatusCommand,
+  GetSyncBlockerSummaryCommand,
+  GetSyncConfigurationCommand,
+  ListConnectionsCommand,
+  ListHostsCommand,
+  ListRepositoryLinksCommand,
+  ListRepositorySyncDefinitionsCommand,
+  ListSyncConfigurationsCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateHostCommand,
+  UpdateRepositoryLinkCommand,
+  UpdateSyncBlockerCommand,
+  UpdateSyncConfigurationCommand,
+};
+const paginators = {
+  paginateListConnections,
+  paginateListHosts,
+  paginateListRepositoryLinks,
+  paginateListSyncConfigurations,
+};
+
+/**
+ * @public
+ */
+export interface CodeStarConnectionsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CodeStarConnections {
+  /**
+   * @see {@link CreateConnectionCommand}
+   */
+  createConnection(
+    args: CreateConnectionCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<CreateConnectionCommandOutput>;
+  createConnection(
+    args: CreateConnectionCommandInput,
+    cb: (err: any, data?: CreateConnectionCommandOutput) => void
+  ): void;
+  createConnection(
+    args: CreateConnectionCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: CreateConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateHostCommand}
+   */
+  createHost(
+    args: CreateHostCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<CreateHostCommandOutput>;
+  createHost(
+    args: CreateHostCommandInput,
+    cb: (err: any, data?: CreateHostCommandOutput) => void
+  ): void;
+  createHost(
+    args: CreateHostCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: CreateHostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRepositoryLinkCommand}
+   */
+  createRepositoryLink(
+    args: CreateRepositoryLinkCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<CreateRepositoryLinkCommandOutput>;
+  createRepositoryLink(
+    args: CreateRepositoryLinkCommandInput,
+    cb: (err: any, data?: CreateRepositoryLinkCommandOutput) => void
+  ): void;
+  createRepositoryLink(
+    args: CreateRepositoryLinkCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: CreateRepositoryLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSyncConfigurationCommand}
+   */
+  createSyncConfiguration(
+    args: CreateSyncConfigurationCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<CreateSyncConfigurationCommandOutput>;
+  createSyncConfiguration(
+    args: CreateSyncConfigurationCommandInput,
+    cb: (err: any, data?: CreateSyncConfigurationCommandOutput) => void
+  ): void;
+  createSyncConfiguration(
+    args: CreateSyncConfigurationCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: CreateSyncConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectionCommand}
+   */
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<DeleteConnectionCommandOutput>;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteHostCommand}
+   */
+  deleteHost(
+    args: DeleteHostCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<DeleteHostCommandOutput>;
+  deleteHost(
+    args: DeleteHostCommandInput,
+    cb: (err: any, data?: DeleteHostCommandOutput) => void
+  ): void;
+  deleteHost(
+    args: DeleteHostCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: DeleteHostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRepositoryLinkCommand}
+   */
+  deleteRepositoryLink(
+    args: DeleteRepositoryLinkCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<DeleteRepositoryLinkCommandOutput>;
+  deleteRepositoryLink(
+    args: DeleteRepositoryLinkCommandInput,
+    cb: (err: any, data?: DeleteRepositoryLinkCommandOutput) => void
+  ): void;
+  deleteRepositoryLink(
+    args: DeleteRepositoryLinkCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: DeleteRepositoryLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSyncConfigurationCommand}
+   */
+  deleteSyncConfiguration(
+    args: DeleteSyncConfigurationCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<DeleteSyncConfigurationCommandOutput>;
+  deleteSyncConfiguration(
+    args: DeleteSyncConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSyncConfigurationCommandOutput) => void
+  ): void;
+  deleteSyncConfiguration(
+    args: DeleteSyncConfigurationCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: DeleteSyncConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionCommand}
+   */
+  getConnection(
+    args: GetConnectionCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetConnectionCommandOutput>;
+  getConnection(
+    args: GetConnectionCommandInput,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+  getConnection(
+    args: GetConnectionCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetHostCommand}
+   */
+  getHost(
+    args: GetHostCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetHostCommandOutput>;
+  getHost(
+    args: GetHostCommandInput,
+    cb: (err: any, data?: GetHostCommandOutput) => void
+  ): void;
+  getHost(
+    args: GetHostCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetHostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRepositoryLinkCommand}
+   */
+  getRepositoryLink(
+    args: GetRepositoryLinkCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetRepositoryLinkCommandOutput>;
+  getRepositoryLink(
+    args: GetRepositoryLinkCommandInput,
+    cb: (err: any, data?: GetRepositoryLinkCommandOutput) => void
+  ): void;
+  getRepositoryLink(
+    args: GetRepositoryLinkCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetRepositoryLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRepositorySyncStatusCommand}
+   */
+  getRepositorySyncStatus(
+    args: GetRepositorySyncStatusCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetRepositorySyncStatusCommandOutput>;
+  getRepositorySyncStatus(
+    args: GetRepositorySyncStatusCommandInput,
+    cb: (err: any, data?: GetRepositorySyncStatusCommandOutput) => void
+  ): void;
+  getRepositorySyncStatus(
+    args: GetRepositorySyncStatusCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetRepositorySyncStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceSyncStatusCommand}
+   */
+  getResourceSyncStatus(
+    args: GetResourceSyncStatusCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetResourceSyncStatusCommandOutput>;
+  getResourceSyncStatus(
+    args: GetResourceSyncStatusCommandInput,
+    cb: (err: any, data?: GetResourceSyncStatusCommandOutput) => void
+  ): void;
+  getResourceSyncStatus(
+    args: GetResourceSyncStatusCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetResourceSyncStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSyncBlockerSummaryCommand}
+   */
+  getSyncBlockerSummary(
+    args: GetSyncBlockerSummaryCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetSyncBlockerSummaryCommandOutput>;
+  getSyncBlockerSummary(
+    args: GetSyncBlockerSummaryCommandInput,
+    cb: (err: any, data?: GetSyncBlockerSummaryCommandOutput) => void
+  ): void;
+  getSyncBlockerSummary(
+    args: GetSyncBlockerSummaryCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetSyncBlockerSummaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSyncConfigurationCommand}
+   */
+  getSyncConfiguration(
+    args: GetSyncConfigurationCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<GetSyncConfigurationCommandOutput>;
+  getSyncConfiguration(
+    args: GetSyncConfigurationCommandInput,
+    cb: (err: any, data?: GetSyncConfigurationCommandOutput) => void
+  ): void;
+  getSyncConfiguration(
+    args: GetSyncConfigurationCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: GetSyncConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectionsCommand}
+   */
+  listConnections(): Promise<ListConnectionsCommandOutput>;
+  listConnections(
+    args: ListConnectionsCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<ListConnectionsCommandOutput>;
+  listConnections(
+    args: ListConnectionsCommandInput,
+    cb: (err: any, data?: ListConnectionsCommandOutput) => void
+  ): void;
+  listConnections(
+    args: ListConnectionsCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: ListConnectionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListHostsCommand}
+   */
+  listHosts(): Promise<ListHostsCommandOutput>;
+  listHosts(
+    args: ListHostsCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<ListHostsCommandOutput>;
+  listHosts(
+    args: ListHostsCommandInput,
+    cb: (err: any, data?: ListHostsCommandOutput) => void
+  ): void;
+  listHosts(
+    args: ListHostsCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: ListHostsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRepositoryLinksCommand}
+   */
+  listRepositoryLinks(): Promise<ListRepositoryLinksCommandOutput>;
+  listRepositoryLinks(
+    args: ListRepositoryLinksCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<ListRepositoryLinksCommandOutput>;
+  listRepositoryLinks(
+    args: ListRepositoryLinksCommandInput,
+    cb: (err: any, data?: ListRepositoryLinksCommandOutput) => void
+  ): void;
+  listRepositoryLinks(
+    args: ListRepositoryLinksCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: ListRepositoryLinksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRepositorySyncDefinitionsCommand}
+   */
+  listRepositorySyncDefinitions(
+    args: ListRepositorySyncDefinitionsCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<ListRepositorySyncDefinitionsCommandOutput>;
+  listRepositorySyncDefinitions(
+    args: ListRepositorySyncDefinitionsCommandInput,
+    cb: (err: any, data?: ListRepositorySyncDefinitionsCommandOutput) => void
+  ): void;
+  listRepositorySyncDefinitions(
+    args: ListRepositorySyncDefinitionsCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: ListRepositorySyncDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSyncConfigurationsCommand}
+   */
+  listSyncConfigurations(
+    args: ListSyncConfigurationsCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<ListSyncConfigurationsCommandOutput>;
+  listSyncConfigurations(
+    args: ListSyncConfigurationsCommandInput,
+    cb: (err: any, data?: ListSyncConfigurationsCommandOutput) => void
+  ): void;
+  listSyncConfigurations(
+    args: ListSyncConfigurationsCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: ListSyncConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateHostCommand}
+   */
+  updateHost(
+    args: UpdateHostCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<UpdateHostCommandOutput>;
+  updateHost(
+    args: UpdateHostCommandInput,
+    cb: (err: any, data?: UpdateHostCommandOutput) => void
+  ): void;
+  updateHost(
+    args: UpdateHostCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: UpdateHostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRepositoryLinkCommand}
+   */
+  updateRepositoryLink(
+    args: UpdateRepositoryLinkCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<UpdateRepositoryLinkCommandOutput>;
+  updateRepositoryLink(
+    args: UpdateRepositoryLinkCommandInput,
+    cb: (err: any, data?: UpdateRepositoryLinkCommandOutput) => void
+  ): void;
+  updateRepositoryLink(
+    args: UpdateRepositoryLinkCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: UpdateRepositoryLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSyncBlockerCommand}
+   */
+  updateSyncBlocker(
+    args: UpdateSyncBlockerCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<UpdateSyncBlockerCommandOutput>;
+  updateSyncBlocker(
+    args: UpdateSyncBlockerCommandInput,
+    cb: (err: any, data?: UpdateSyncBlockerCommandOutput) => void
+  ): void;
+  updateSyncBlocker(
+    args: UpdateSyncBlockerCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: UpdateSyncBlockerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSyncConfigurationCommand}
+   */
+  updateSyncConfiguration(
+    args: UpdateSyncConfigurationCommandInput,
+    options?: CodeStarConnectionsRequestOptions
+  ): Promise<UpdateSyncConfigurationCommandOutput>;
+  updateSyncConfiguration(
+    args: UpdateSyncConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSyncConfigurationCommandOutput) => void
+  ): void;
+  updateSyncConfiguration(
+    args: UpdateSyncConfigurationCommandInput,
+    options: CodeStarConnectionsRequestOptions,
+    cb: (err: any, data?: UpdateSyncConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectionsCommandOutput}.
+   */
+  paginateListConnections(
+    args?: ListConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectionsCommandOutput>;
+
+  /**
+   * @see {@link ListHostsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListHostsCommandOutput}.
+   */
+  paginateListHosts(
+    args?: ListHostsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListHostsCommandOutput>;
+
+  /**
+   * @see {@link ListRepositoryLinksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRepositoryLinksCommandOutput}.
+   */
+  paginateListRepositoryLinks(
+    args?: ListRepositoryLinksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRepositoryLinksCommandOutput>;
+
+  /**
+   * @see {@link ListSyncConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSyncConfigurationsCommandOutput}.
+   */
+  paginateListSyncConfigurations(
+    args: ListSyncConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSyncConfigurationsCommandOutput>;
+}
 
 /**
  * <fullname>AWS CodeStar Connections</fullname>
- *          <p>This AWS CodeStar Connections API Reference provides descriptions and usage examples of
- *       the operations and data types for the AWS CodeStar Connections API. You can use the
+ *          <p>This Amazon Web Services CodeStar Connections API Reference provides descriptions and usage examples of
+ *       the operations and data types for the Amazon Web Services CodeStar Connections API. You can use the
  *       connections API to work with connections and installations.</p>
  *          <p>
- *             <i>Connections</i> are configurations that you use to connect AWS
+ *             <i>Connections</i> are configurations that you use to connect Amazon Web Services
  *       resources to external code repositories. Each connection is a resource that can be given to
  *       services such as CodePipeline to connect to a third-party repository such as Bitbucket. For
  *       example, you can add the connection in CodePipeline so that it triggers your pipeline when a
@@ -99,387 +752,27 @@ import { UpdateHostCommand, UpdateHostCommandInput, UpdateHostCommandOutput } fr
  *           account.</p>
  *             </li>
  *          </ul>
- *          <p>You can work with tags in AWS CodeStar Connections by calling the following:</p>
+ *          <p>You can work with tags in Amazon Web Services CodeStar Connections by calling the following:</p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <a>ListTagsForResource</a>, which gets information about AWS tags for a
- *           specified Amazon Resource Name (ARN) in AWS CodeStar Connections.</p>
+ *                   <a>ListTagsForResource</a>, which gets information about Amazon Web Services tags for a
+ *           specified Amazon Resource Name (ARN) in Amazon Web Services CodeStar Connections.</p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeStar
+ *                   <a>TagResource</a>, which adds or updates tags for a resource in Amazon Web Services CodeStar
  *           Connections.</p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>UntagResource</a>, which removes tags for a resource in AWS CodeStar
+ *                   <a>UntagResource</a>, which removes tags for a resource in Amazon Web Services CodeStar
  *           Connections.</p>
  *             </li>
  *          </ul>
- *          <p>For information about how to use AWS CodeStar Connections, see the <a href="https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html">Developer Tools User
+ *          <p>For information about how to use Amazon Web Services CodeStar Connections, see the <a href="https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html">Developer Tools User
  *         Guide</a>.</p>
+ * @public
  */
-export class CodeStarConnections extends CodeStarConnectionsClient {
-  /**
-   * <p>Creates a connection that can then be given to other AWS services like CodePipeline so
-   *       that it can access third-party code repositories. The connection is in pending status until
-   *       the third-party connection handshake is completed from the console.</p>
-   */
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateConnectionCommandOutput>;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    cb: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): void;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): void;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateConnectionCommandOutput) => void),
-    cb?: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): Promise<CreateConnectionCommandOutput> | void {
-    const command = new CreateConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a resource that represents the infrastructure where a third-party provider is
-   *       installed. The host is used when you create connections to an installed third-party provider
-   *       type, such as GitHub Enterprise Server. You create one host for all connections to that
-   *       provider.</p>
-   *          <note>
-   *             <p>A host created through the CLI or the SDK is in `PENDING` status by
-   *         default. You can make its status `AVAILABLE` by setting up the host in the console.</p>
-   *          </note>
-   */
-  public createHost(args: CreateHostCommandInput, options?: __HttpHandlerOptions): Promise<CreateHostCommandOutput>;
-  public createHost(args: CreateHostCommandInput, cb: (err: any, data?: CreateHostCommandOutput) => void): void;
-  public createHost(
-    args: CreateHostCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateHostCommandOutput) => void
-  ): void;
-  public createHost(
-    args: CreateHostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateHostCommandOutput) => void),
-    cb?: (err: any, data?: CreateHostCommandOutput) => void
-  ): Promise<CreateHostCommandOutput> | void {
-    const command = new CreateHostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>The connection to be deleted.</p>
-   */
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteConnectionCommandOutput>;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConnectionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): Promise<DeleteConnectionCommandOutput> | void {
-    const command = new DeleteConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>The host to be deleted. Before you delete a host, all connections associated to the host must be deleted.</p>
-   *          <note>
-   *             <p>A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state.</p>
-   *          </note>
-   */
-  public deleteHost(args: DeleteHostCommandInput, options?: __HttpHandlerOptions): Promise<DeleteHostCommandOutput>;
-  public deleteHost(args: DeleteHostCommandInput, cb: (err: any, data?: DeleteHostCommandOutput) => void): void;
-  public deleteHost(
-    args: DeleteHostCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteHostCommandOutput) => void
-  ): void;
-  public deleteHost(
-    args: DeleteHostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteHostCommandOutput) => void),
-    cb?: (err: any, data?: DeleteHostCommandOutput) => void
-  ): Promise<DeleteHostCommandOutput> | void {
-    const command = new DeleteHostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the connection ARN and details such as status, owner, and provider type.</p>
-   */
-  public getConnection(
-    args: GetConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetConnectionCommandOutput>;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    cb: (err: any, data?: GetConnectionCommandOutput) => void
-  ): void;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetConnectionCommandOutput) => void
-  ): void;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetConnectionCommandOutput) => void),
-    cb?: (err: any, data?: GetConnectionCommandOutput) => void
-  ): Promise<GetConnectionCommandOutput> | void {
-    const command = new GetConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the host ARN and details such as status, provider type, endpoint, and, if
-   *       applicable, the VPC configuration.</p>
-   */
-  public getHost(args: GetHostCommandInput, options?: __HttpHandlerOptions): Promise<GetHostCommandOutput>;
-  public getHost(args: GetHostCommandInput, cb: (err: any, data?: GetHostCommandOutput) => void): void;
-  public getHost(
-    args: GetHostCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetHostCommandOutput) => void
-  ): void;
-  public getHost(
-    args: GetHostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetHostCommandOutput) => void),
-    cb?: (err: any, data?: GetHostCommandOutput) => void
-  ): Promise<GetHostCommandOutput> | void {
-    const command = new GetHostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the connections associated with your account.</p>
-   */
-  public listConnections(
-    args: ListConnectionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListConnectionsCommandOutput>;
-  public listConnections(
-    args: ListConnectionsCommandInput,
-    cb: (err: any, data?: ListConnectionsCommandOutput) => void
-  ): void;
-  public listConnections(
-    args: ListConnectionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListConnectionsCommandOutput) => void
-  ): void;
-  public listConnections(
-    args: ListConnectionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListConnectionsCommandOutput) => void),
-    cb?: (err: any, data?: ListConnectionsCommandOutput) => void
-  ): Promise<ListConnectionsCommandOutput> | void {
-    const command = new ListConnectionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the hosts associated with your account.</p>
-   */
-  public listHosts(args: ListHostsCommandInput, options?: __HttpHandlerOptions): Promise<ListHostsCommandOutput>;
-  public listHosts(args: ListHostsCommandInput, cb: (err: any, data?: ListHostsCommandOutput) => void): void;
-  public listHosts(
-    args: ListHostsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListHostsCommandOutput) => void
-  ): void;
-  public listHosts(
-    args: ListHostsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListHostsCommandOutput) => void),
-    cb?: (err: any, data?: ListHostsCommandOutput) => void
-  ): Promise<ListHostsCommandOutput> | void {
-    const command = new ListHostsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the set of key-value pairs (metadata) that are used to manage the resource.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds to or modifies the tags of the given resource. Tags are metadata that can be used
-   *       to manage a resource.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes tags from an AWS resource.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a specified host with the provided configurations.</p>
-   */
-  public updateHost(args: UpdateHostCommandInput, options?: __HttpHandlerOptions): Promise<UpdateHostCommandOutput>;
-  public updateHost(args: UpdateHostCommandInput, cb: (err: any, data?: UpdateHostCommandOutput) => void): void;
-  public updateHost(
-    args: UpdateHostCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateHostCommandOutput) => void
-  ): void;
-  public updateHost(
-    args: UpdateHostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateHostCommandOutput) => void),
-    cb?: (err: any, data?: UpdateHostCommandOutput) => void
-  ): Promise<UpdateHostCommandOutput> | void {
-    const command = new UpdateHostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class CodeStarConnections extends CodeStarConnectionsClient implements CodeStarConnections {}
+createAggregatedClient(commands, CodeStarConnections, { paginators });

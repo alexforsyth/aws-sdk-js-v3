@@ -1,98 +1,80 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { DeleteResourcesByExternalIdInput, DeleteResourcesByExternalIdOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteResourcesByExternalIdCommand,
-  serializeAws_json1_1DeleteResourcesByExternalIdCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteResourcesByExternalIdInput, DeleteResourcesByExternalIdOutput } from "../models/models_0";
+import { DeleteResourcesByExternalId$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteResourcesByExternalIdCommand}.
+ */
 export interface DeleteResourcesByExternalIdCommandInput extends DeleteResourcesByExternalIdInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteResourcesByExternalIdCommand}.
+ */
 export interface DeleteResourcesByExternalIdCommandOutput extends DeleteResourcesByExternalIdOutput, __MetadataBearer {}
 
 /**
- * <p>Deletes resources linked to an external ID.</p>
+ * <p>Deletes resources linked to an external ID. This action only applies if you have
+ *             configured blue/green deployments through CloudFormation. </p>
+ *          <note>
+ *             <p>It is not necessary to call this action directly. CloudFormation calls it
+ *                 on your behalf when it needs to delete stack resources. This action is offered
+ *                 publicly in case you need to delete resources to comply with General Data Protection
+ *                 Regulation (GDPR) requirements.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, DeleteResourcesByExternalIdCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, DeleteResourcesByExternalIdCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // DeleteResourcesByExternalIdInput
+ *   externalId: "STRING_VALUE",
+ * };
  * const command = new DeleteResourcesByExternalIdCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteResourcesByExternalIdCommandInput - {@link DeleteResourcesByExternalIdCommandInput}
+ * @returns {@link DeleteResourcesByExternalIdCommandOutput}
  * @see {@link DeleteResourcesByExternalIdCommandInput} for command's `input` shape.
  * @see {@link DeleteResourcesByExternalIdCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteResourcesByExternalIdCommand extends $Command<
-  DeleteResourcesByExternalIdCommandInput,
-  DeleteResourcesByExternalIdCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteResourcesByExternalIdCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteResourcesByExternalIdCommandInput, DeleteResourcesByExternalIdCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "DeleteResourcesByExternalIdCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteResourcesByExternalIdInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteResourcesByExternalIdOutput.filterSensitiveLog,
+export class DeleteResourcesByExternalIdCommand extends command<DeleteResourcesByExternalIdCommandInput, DeleteResourcesByExternalIdCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteResourcesByExternalId",
+  DeleteResourcesByExternalId$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteResourcesByExternalIdInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteResourcesByExternalIdCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteResourcesByExternalIdCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteResourcesByExternalIdCommandOutput> {
-    return deserializeAws_json1_1DeleteResourcesByExternalIdCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteResourcesByExternalIdCommandInput;
+      output: DeleteResourcesByExternalIdCommandOutput;
+    };
+  };
 }

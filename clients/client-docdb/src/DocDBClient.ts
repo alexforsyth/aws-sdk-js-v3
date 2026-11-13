@@ -1,229 +1,267 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultDocDBHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AddSourceIdentifierToSubscriptionCommandInput,
   AddSourceIdentifierToSubscriptionCommandOutput,
 } from "./commands/AddSourceIdentifierToSubscriptionCommand";
-import { AddTagsToResourceCommandInput, AddTagsToResourceCommandOutput } from "./commands/AddTagsToResourceCommand";
-import {
+import type {
+  AddTagsToResourceCommandInput,
+  AddTagsToResourceCommandOutput,
+} from "./commands/AddTagsToResourceCommand";
+import type {
   ApplyPendingMaintenanceActionCommandInput,
   ApplyPendingMaintenanceActionCommandOutput,
 } from "./commands/ApplyPendingMaintenanceActionCommand";
-import {
+import type {
   CopyDBClusterParameterGroupCommandInput,
   CopyDBClusterParameterGroupCommandOutput,
 } from "./commands/CopyDBClusterParameterGroupCommand";
-import {
+import type {
   CopyDBClusterSnapshotCommandInput,
   CopyDBClusterSnapshotCommandOutput,
 } from "./commands/CopyDBClusterSnapshotCommand";
-import { CreateDBClusterCommandInput, CreateDBClusterCommandOutput } from "./commands/CreateDBClusterCommand";
-import {
+import type { CreateDBClusterCommandInput, CreateDBClusterCommandOutput } from "./commands/CreateDBClusterCommand";
+import type {
   CreateDBClusterParameterGroupCommandInput,
   CreateDBClusterParameterGroupCommandOutput,
 } from "./commands/CreateDBClusterParameterGroupCommand";
-import {
+import type {
   CreateDBClusterSnapshotCommandInput,
   CreateDBClusterSnapshotCommandOutput,
 } from "./commands/CreateDBClusterSnapshotCommand";
-import { CreateDBInstanceCommandInput, CreateDBInstanceCommandOutput } from "./commands/CreateDBInstanceCommand";
-import {
+import type { CreateDBInstanceCommandInput, CreateDBInstanceCommandOutput } from "./commands/CreateDBInstanceCommand";
+import type {
   CreateDBSubnetGroupCommandInput,
   CreateDBSubnetGroupCommandOutput,
 } from "./commands/CreateDBSubnetGroupCommand";
-import {
+import type {
   CreateEventSubscriptionCommandInput,
   CreateEventSubscriptionCommandOutput,
 } from "./commands/CreateEventSubscriptionCommand";
-import {
+import type {
   CreateGlobalClusterCommandInput,
   CreateGlobalClusterCommandOutput,
 } from "./commands/CreateGlobalClusterCommand";
-import { DeleteDBClusterCommandInput, DeleteDBClusterCommandOutput } from "./commands/DeleteDBClusterCommand";
-import {
+import type { DeleteDBClusterCommandInput, DeleteDBClusterCommandOutput } from "./commands/DeleteDBClusterCommand";
+import type {
   DeleteDBClusterParameterGroupCommandInput,
   DeleteDBClusterParameterGroupCommandOutput,
 } from "./commands/DeleteDBClusterParameterGroupCommand";
-import {
+import type {
   DeleteDBClusterSnapshotCommandInput,
   DeleteDBClusterSnapshotCommandOutput,
 } from "./commands/DeleteDBClusterSnapshotCommand";
-import { DeleteDBInstanceCommandInput, DeleteDBInstanceCommandOutput } from "./commands/DeleteDBInstanceCommand";
-import {
+import type { DeleteDBInstanceCommandInput, DeleteDBInstanceCommandOutput } from "./commands/DeleteDBInstanceCommand";
+import type {
   DeleteDBSubnetGroupCommandInput,
   DeleteDBSubnetGroupCommandOutput,
 } from "./commands/DeleteDBSubnetGroupCommand";
-import {
+import type {
   DeleteEventSubscriptionCommandInput,
   DeleteEventSubscriptionCommandOutput,
 } from "./commands/DeleteEventSubscriptionCommand";
-import {
+import type {
   DeleteGlobalClusterCommandInput,
   DeleteGlobalClusterCommandOutput,
 } from "./commands/DeleteGlobalClusterCommand";
-import {
+import type {
   DescribeCertificatesCommandInput,
   DescribeCertificatesCommandOutput,
 } from "./commands/DescribeCertificatesCommand";
-import {
+import type {
   DescribeDBClusterParameterGroupsCommandInput,
   DescribeDBClusterParameterGroupsCommandOutput,
 } from "./commands/DescribeDBClusterParameterGroupsCommand";
-import {
+import type {
   DescribeDBClusterParametersCommandInput,
   DescribeDBClusterParametersCommandOutput,
 } from "./commands/DescribeDBClusterParametersCommand";
-import { DescribeDBClustersCommandInput, DescribeDBClustersCommandOutput } from "./commands/DescribeDBClustersCommand";
-import {
+import type {
+  DescribeDBClustersCommandInput,
+  DescribeDBClustersCommandOutput,
+} from "./commands/DescribeDBClustersCommand";
+import type {
   DescribeDBClusterSnapshotAttributesCommandInput,
   DescribeDBClusterSnapshotAttributesCommandOutput,
 } from "./commands/DescribeDBClusterSnapshotAttributesCommand";
-import {
+import type {
   DescribeDBClusterSnapshotsCommandInput,
   DescribeDBClusterSnapshotsCommandOutput,
 } from "./commands/DescribeDBClusterSnapshotsCommand";
-import {
+import type {
   DescribeDBEngineVersionsCommandInput,
   DescribeDBEngineVersionsCommandOutput,
 } from "./commands/DescribeDBEngineVersionsCommand";
-import {
+import type {
   DescribeDBInstancesCommandInput,
   DescribeDBInstancesCommandOutput,
 } from "./commands/DescribeDBInstancesCommand";
-import {
+import type {
   DescribeDBSubnetGroupsCommandInput,
   DescribeDBSubnetGroupsCommandOutput,
 } from "./commands/DescribeDBSubnetGroupsCommand";
-import {
+import type {
   DescribeEngineDefaultClusterParametersCommandInput,
   DescribeEngineDefaultClusterParametersCommandOutput,
 } from "./commands/DescribeEngineDefaultClusterParametersCommand";
-import {
+import type {
   DescribeEventCategoriesCommandInput,
   DescribeEventCategoriesCommandOutput,
 } from "./commands/DescribeEventCategoriesCommand";
-import { DescribeEventsCommandInput, DescribeEventsCommandOutput } from "./commands/DescribeEventsCommand";
-import {
+import type { DescribeEventsCommandInput, DescribeEventsCommandOutput } from "./commands/DescribeEventsCommand";
+import type {
   DescribeEventSubscriptionsCommandInput,
   DescribeEventSubscriptionsCommandOutput,
 } from "./commands/DescribeEventSubscriptionsCommand";
-import {
+import type {
   DescribeGlobalClustersCommandInput,
   DescribeGlobalClustersCommandOutput,
 } from "./commands/DescribeGlobalClustersCommand";
-import {
+import type {
   DescribeOrderableDBInstanceOptionsCommandInput,
   DescribeOrderableDBInstanceOptionsCommandOutput,
 } from "./commands/DescribeOrderableDBInstanceOptionsCommand";
-import {
+import type {
   DescribePendingMaintenanceActionsCommandInput,
   DescribePendingMaintenanceActionsCommandOutput,
 } from "./commands/DescribePendingMaintenanceActionsCommand";
-import { FailoverDBClusterCommandInput, FailoverDBClusterCommandOutput } from "./commands/FailoverDBClusterCommand";
-import {
+import type {
+  DescribeServerlessV2PlatformVersionsCommandInput,
+  DescribeServerlessV2PlatformVersionsCommandOutput,
+} from "./commands/DescribeServerlessV2PlatformVersionsCommand";
+import type {
+  FailoverDBClusterCommandInput,
+  FailoverDBClusterCommandOutput,
+} from "./commands/FailoverDBClusterCommand";
+import type {
+  FailoverGlobalClusterCommandInput,
+  FailoverGlobalClusterCommandOutput,
+} from "./commands/FailoverGlobalClusterCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ModifyDBClusterCommandInput, ModifyDBClusterCommandOutput } from "./commands/ModifyDBClusterCommand";
-import {
+import type { ModifyDBClusterCommandInput, ModifyDBClusterCommandOutput } from "./commands/ModifyDBClusterCommand";
+import type {
   ModifyDBClusterParameterGroupCommandInput,
   ModifyDBClusterParameterGroupCommandOutput,
 } from "./commands/ModifyDBClusterParameterGroupCommand";
-import {
+import type {
   ModifyDBClusterSnapshotAttributeCommandInput,
   ModifyDBClusterSnapshotAttributeCommandOutput,
 } from "./commands/ModifyDBClusterSnapshotAttributeCommand";
-import { ModifyDBInstanceCommandInput, ModifyDBInstanceCommandOutput } from "./commands/ModifyDBInstanceCommand";
-import {
+import type { ModifyDBInstanceCommandInput, ModifyDBInstanceCommandOutput } from "./commands/ModifyDBInstanceCommand";
+import type {
   ModifyDBSubnetGroupCommandInput,
   ModifyDBSubnetGroupCommandOutput,
 } from "./commands/ModifyDBSubnetGroupCommand";
-import {
+import type {
   ModifyEventSubscriptionCommandInput,
   ModifyEventSubscriptionCommandOutput,
 } from "./commands/ModifyEventSubscriptionCommand";
-import {
+import type {
   ModifyGlobalClusterCommandInput,
   ModifyGlobalClusterCommandOutput,
 } from "./commands/ModifyGlobalClusterCommand";
-import { RebootDBInstanceCommandInput, RebootDBInstanceCommandOutput } from "./commands/RebootDBInstanceCommand";
-import {
+import type { RebootDBInstanceCommandInput, RebootDBInstanceCommandOutput } from "./commands/RebootDBInstanceCommand";
+import type {
   RemoveFromGlobalClusterCommandInput,
   RemoveFromGlobalClusterCommandOutput,
 } from "./commands/RemoveFromGlobalClusterCommand";
-import {
+import type {
   RemoveSourceIdentifierFromSubscriptionCommandInput,
   RemoveSourceIdentifierFromSubscriptionCommandOutput,
 } from "./commands/RemoveSourceIdentifierFromSubscriptionCommand";
-import {
+import type {
   RemoveTagsFromResourceCommandInput,
   RemoveTagsFromResourceCommandOutput,
 } from "./commands/RemoveTagsFromResourceCommand";
-import {
+import type {
   ResetDBClusterParameterGroupCommandInput,
   ResetDBClusterParameterGroupCommandOutput,
 } from "./commands/ResetDBClusterParameterGroupCommand";
-import {
+import type {
   RestoreDBClusterFromSnapshotCommandInput,
   RestoreDBClusterFromSnapshotCommandOutput,
 } from "./commands/RestoreDBClusterFromSnapshotCommand";
-import {
+import type {
   RestoreDBClusterToPointInTimeCommandInput,
   RestoreDBClusterToPointInTimeCommandOutput,
 } from "./commands/RestoreDBClusterToPointInTimeCommand";
-import { StartDBClusterCommandInput, StartDBClusterCommandOutput } from "./commands/StartDBClusterCommand";
-import { StopDBClusterCommandInput, StopDBClusterCommandOutput } from "./commands/StopDBClusterCommand";
+import type { StartDBClusterCommandInput, StartDBClusterCommandOutput } from "./commands/StartDBClusterCommand";
+import type { StopDBClusterCommandInput, StopDBClusterCommandOutput } from "./commands/StopDBClusterCommand";
+import type {
+  SwitchoverGlobalClusterCommandInput,
+  SwitchoverGlobalClusterCommandOutput,
+} from "./commands/SwitchoverGlobalClusterCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddSourceIdentifierToSubscriptionCommandInput
   | AddTagsToResourceCommandInput
@@ -260,7 +298,9 @@ export type ServiceInputTypes =
   | DescribeGlobalClustersCommandInput
   | DescribeOrderableDBInstanceOptionsCommandInput
   | DescribePendingMaintenanceActionsCommandInput
+  | DescribeServerlessV2PlatformVersionsCommandInput
   | FailoverDBClusterCommandInput
+  | FailoverGlobalClusterCommandInput
   | ListTagsForResourceCommandInput
   | ModifyDBClusterCommandInput
   | ModifyDBClusterParameterGroupCommandInput
@@ -277,8 +317,12 @@ export type ServiceInputTypes =
   | RestoreDBClusterFromSnapshotCommandInput
   | RestoreDBClusterToPointInTimeCommandInput
   | StartDBClusterCommandInput
-  | StopDBClusterCommandInput;
+  | StopDBClusterCommandInput
+  | SwitchoverGlobalClusterCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddSourceIdentifierToSubscriptionCommandOutput
   | AddTagsToResourceCommandOutput
@@ -315,7 +359,9 @@ export type ServiceOutputTypes =
   | DescribeGlobalClustersCommandOutput
   | DescribeOrderableDBInstanceOptionsCommandOutput
   | DescribePendingMaintenanceActionsCommandOutput
+  | DescribeServerlessV2PlatformVersionsCommandOutput
   | FailoverDBClusterCommandOutput
+  | FailoverGlobalClusterCommandOutput
   | ListTagsForResourceCommandOutput
   | ModifyDBClusterCommandOutput
   | ModifyDBClusterParameterGroupCommandOutput
@@ -332,20 +378,24 @@ export type ServiceOutputTypes =
   | RestoreDBClusterFromSnapshotCommandOutput
   | RestoreDBClusterToPointInTimeCommandOutput
   | StartDBClusterCommandOutput
-  | StopDBClusterCommandOutput;
+  | StopDBClusterCommandOutput
+  | SwitchoverGlobalClusterCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -357,7 +407,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -396,25 +446,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -427,63 +468,115 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type DocDBClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of DocDBClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type DocDBClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of DocDBClient class constructor that set the region, credentials and other options.
  */
 export interface DocDBClientConfig extends DocDBClientConfigType {}
 
-type DocDBClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of DocDBClient class. This is resolved and normalized from the {@link DocDBClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type DocDBClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of DocDBClient class. This is resolved and normalized from the {@link DocDBClientConfig | constructor configuration interface}.
  */
 export interface DocDBClientResolvedConfig extends DocDBClientResolvedConfigType {}
 
 /**
- * <p>Amazon DocumentDB API documentation</p>
+ * <p>Amazon DocumentDB is a fast, reliable, and fully managed database service.
+ *          Amazon DocumentDB makes it easy to set up, operate, and scale MongoDB-compatible databases in the cloud.
+ *          With Amazon DocumentDB, you can run the same application code and use the same drivers and tools that you use with MongoDB.</p>
+ * @public
  */
 export class DocDBClient extends __Client<
   __HttpHandlerOptions,
@@ -496,22 +589,36 @@ export class DocDBClient extends __Client<
    */
   readonly config: DocDBClientResolvedConfig;
 
-  constructor(configuration: DocDBClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<DocDBClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultDocDBHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: DocDBClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

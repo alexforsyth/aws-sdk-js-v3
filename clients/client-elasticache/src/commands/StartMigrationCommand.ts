@@ -1,95 +1,279 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElastiCacheClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElastiCacheClient";
-import { StartMigrationMessage, StartMigrationResponse } from "../models/models_0";
-import {
-  deserializeAws_queryStartMigrationCommand,
-  serializeAws_queryStartMigrationCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartMigrationMessage, StartMigrationResponse } from "../models/models_0";
+import { StartMigration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartMigrationCommand}.
+ */
 export interface StartMigrationCommandInput extends StartMigrationMessage {}
+/**
+ * @public
+ *
+ * The output of {@link StartMigrationCommand}.
+ */
 export interface StartMigrationCommandOutput extends StartMigrationResponse, __MetadataBearer {}
 
 /**
- * <p>Start the migration of data.</p>
+ * <p>Starts the migration of data.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElastiCacheClient, StartMigrationCommand } from "@aws-sdk/client-elasticache"; // ES Modules import
  * // const { ElastiCacheClient, StartMigrationCommand } = require("@aws-sdk/client-elasticache"); // CommonJS import
+ * // import type { ElastiCacheClientConfig } from "@aws-sdk/client-elasticache";
+ * const config = {}; // type is ElastiCacheClientConfig
  * const client = new ElastiCacheClient(config);
+ * const input = { // StartMigrationMessage
+ *   ServerlessCacheName: "STRING_VALUE",
+ *   ReplicationGroupId: "STRING_VALUE",
+ *   CustomerNodeEndpointList: [ // CustomerNodeEndpointList
+ *     { // CustomerNodeEndpoint
+ *       Address: "STRING_VALUE",
+ *       Port: Number("int"),
+ *     },
+ *   ],
+ *   AutoCutover: true || false,
+ *   ClearTargetCacheData: true || false,
+ * };
  * const command = new StartMigrationCommand(input);
  * const response = await client.send(command);
+ * // { // StartMigrationResponse
+ * //   ReplicationGroup: { // ReplicationGroup
+ * //     ReplicationGroupId: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     GlobalReplicationGroupInfo: { // GlobalReplicationGroupInfo
+ * //       GlobalReplicationGroupId: "STRING_VALUE",
+ * //       GlobalReplicationGroupMemberRole: "STRING_VALUE",
+ * //     },
+ * //     Status: "STRING_VALUE",
+ * //     PendingModifiedValues: { // ReplicationGroupPendingModifiedValues
+ * //       PrimaryClusterId: "STRING_VALUE",
+ * //       AutomaticFailoverStatus: "enabled" || "disabled",
+ * //       Resharding: { // ReshardingStatus
+ * //         SlotMigration: { // SlotMigration
+ * //           ProgressPercentage: Number("double"),
+ * //         },
+ * //       },
+ * //       AuthTokenStatus: "SETTING" || "ROTATING",
+ * //       UserGroups: { // UserGroupsUpdateStatus
+ * //         UserGroupIdsToAdd: [ // UserGroupIdList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         UserGroupIdsToRemove: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       LogDeliveryConfigurations: [ // PendingLogDeliveryConfigurationList
+ * //         { // PendingLogDeliveryConfiguration
+ * //           LogType: "slow-log" || "engine-log",
+ * //           DestinationType: "cloudwatch-logs" || "kinesis-firehose",
+ * //           DestinationDetails: { // DestinationDetails
+ * //             CloudWatchLogsDetails: { // CloudWatchLogsDestinationDetails
+ * //               LogGroup: "STRING_VALUE",
+ * //             },
+ * //             KinesisFirehoseDetails: { // KinesisFirehoseDestinationDetails
+ * //               DeliveryStream: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //           LogFormat: "text" || "json",
+ * //         },
+ * //       ],
+ * //       TransitEncryptionEnabled: true || false,
+ * //       TransitEncryptionMode: "preferred" || "required",
+ * //       ClusterMode: "enabled" || "disabled" || "compatible",
+ * //     },
+ * //     MemberClusters: [ // ClusterIdList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     NodeGroups: [ // NodeGroupList
+ * //       { // NodeGroup
+ * //         NodeGroupId: "STRING_VALUE",
+ * //         Status: "STRING_VALUE",
+ * //         PrimaryEndpoint: { // Endpoint
+ * //           Address: "STRING_VALUE",
+ * //           Port: Number("int"),
+ * //         },
+ * //         ReaderEndpoint: {
+ * //           Address: "STRING_VALUE",
+ * //           Port: Number("int"),
+ * //         },
+ * //         Slots: "STRING_VALUE",
+ * //         NodeGroupMembers: [ // NodeGroupMemberList
+ * //           { // NodeGroupMember
+ * //             CacheClusterId: "STRING_VALUE",
+ * //             CacheNodeId: "STRING_VALUE",
+ * //             ReadEndpoint: {
+ * //               Address: "STRING_VALUE",
+ * //               Port: Number("int"),
+ * //             },
+ * //             PreferredAvailabilityZone: "STRING_VALUE",
+ * //             PreferredOutpostArn: "STRING_VALUE",
+ * //             CurrentRole: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     SnapshottingClusterId: "STRING_VALUE",
+ * //     AutomaticFailover: "enabled" || "disabled" || "enabling" || "disabling",
+ * //     MultiAZ: "enabled" || "disabled",
+ * //     ConfigurationEndpoint: "<Endpoint>",
+ * //     SnapshotRetentionLimit: Number("int"),
+ * //     SnapshotWindow: "STRING_VALUE",
+ * //     ClusterEnabled: true || false,
+ * //     CacheNodeType: "STRING_VALUE",
+ * //     AuthTokenEnabled: true || false,
+ * //     AuthTokenLastModifiedDate: new Date("TIMESTAMP"),
+ * //     TransitEncryptionEnabled: true || false,
+ * //     AtRestEncryptionEnabled: true || false,
+ * //     MemberClustersOutpostArns: [ // ReplicationGroupOutpostArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     StorageEncryptionType: "none" || "sse-elasticache" || "sse-kms",
+ * //     ARN: "STRING_VALUE",
+ * //     UserGroupIds: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     LogDeliveryConfigurations: [ // LogDeliveryConfigurationList
+ * //       { // LogDeliveryConfiguration
+ * //         LogType: "slow-log" || "engine-log",
+ * //         DestinationType: "cloudwatch-logs" || "kinesis-firehose",
+ * //         DestinationDetails: {
+ * //           CloudWatchLogsDetails: {
+ * //             LogGroup: "STRING_VALUE",
+ * //           },
+ * //           KinesisFirehoseDetails: {
+ * //             DeliveryStream: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         LogFormat: "text" || "json",
+ * //         Status: "active" || "enabling" || "modifying" || "disabling" || "error",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     ReplicationGroupCreateTime: new Date("TIMESTAMP"),
+ * //     DataTiering: "enabled" || "disabled",
+ * //     AutoMinorVersionUpgrade: true || false,
+ * //     NetworkType: "ipv4" || "ipv6" || "dual_stack",
+ * //     IpDiscovery: "ipv4" || "ipv6",
+ * //     TransitEncryptionMode: "preferred" || "required",
+ * //     ClusterMode: "enabled" || "disabled" || "compatible",
+ * //     Engine: "STRING_VALUE",
+ * //     Durability: "default" || "async" || "sync" || "disabled",
+ * //     EffectiveDurability: "async" || "sync" || "disabled",
+ * //   },
+ * //   ServerlessCache: { // ServerlessCache
+ * //     ServerlessCacheName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     CreateTime: new Date("TIMESTAMP"),
+ * //     Status: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     MajorEngineVersion: "STRING_VALUE",
+ * //     FullEngineVersion: "STRING_VALUE",
+ * //     CacheUsageLimits: { // CacheUsageLimits
+ * //       DataStorage: { // DataStorage
+ * //         Maximum: Number("int"),
+ * //         Minimum: Number("int"),
+ * //         Unit: "GB", // required
+ * //       },
+ * //       ECPUPerSecond: { // ECPUPerSecond
+ * //         Maximum: Number("int"),
+ * //         Minimum: Number("int"),
+ * //       },
+ * //     },
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     StorageEncryptionType: "none" || "sse-elasticache" || "sse-kms",
+ * //     SecurityGroupIds: [ // SecurityGroupIdsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Endpoint: "<Endpoint>",
+ * //     ReaderEndpoint: "<Endpoint>",
+ * //     ARN: "STRING_VALUE",
+ * //     UserGroupId: "STRING_VALUE",
+ * //     SubnetIds: [ // SubnetIdsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SnapshotRetentionLimit: Number("int"),
+ * //     DailySnapshotTime: "STRING_VALUE",
+ * //     NetworkType: "ipv4" || "ipv6" || "dual_stack",
+ * //     ConnectionType: "vpc" || "public",
+ * //     Migration: { // MigrationSummary
+ * //       Status: "STRING_VALUE",
+ * //       MigrationEndpoint: "<Endpoint>",
+ * //       CutoverMode: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartMigrationCommandInput - {@link StartMigrationCommandInput}
+ * @returns {@link StartMigrationCommandOutput}
  * @see {@link StartMigrationCommandInput} for command's `input` shape.
  * @see {@link StartMigrationCommandOutput} for command's `response` shape.
- * @see {@link ElastiCacheClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElastiCacheClientResolvedConfig | config} for ElastiCacheClient's `config` shape.
  *
+ * @throws {@link InvalidCacheClusterStateFault} (client fault)
+ *  <p>The requested cluster is not in the <code>available</code> state.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Two or more incompatible parameters were specified.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value for a parameter is invalid.</p>
+ *
+ * @throws {@link InvalidReplicationGroupStateFault} (client fault)
+ *  <p>The requested replication group is not in the <code>available</code> state.</p>
+ *
+ * @throws {@link InvalidServerlessCacheStateFault} (client fault)
+ *  <p>The account for these credentials is not currently active.</p>
+ *
+ * @throws {@link MigrationHealthFault} (client fault)
+ *  <p>The migration is not healthy. Check the events for this serverless cache for more details. For
+ *             <code>CompleteMigration</code>, set <code>Force</code> to true to bypass this check.</p>
+ *
+ * @throws {@link ReplicationGroupAlreadyUnderMigrationFault} (client fault)
+ *  <p>The targeted replication group is not available. </p>
+ *
+ * @throws {@link ReplicationGroupNotFoundFault} (client fault)
+ *  <p>The specified replication group does not exist.</p>
+ *
+ * @throws {@link ServerlessCacheNotFoundFault} (client fault)
+ *  <p>The serverless cache was not found or does not exist.</p>
+ *
+ * @throws {@link ServerlessCacheNotUnderMigrationFault} (client fault)
+ *  <p>The serverless cache is not currently under migration.</p>
+ *
+ * @throws {@link ElastiCacheServiceException}
+ * <p>Base exception class for all service exceptions from ElastiCache service.</p>
+ *
+ *
+ * @public
  */
-export class StartMigrationCommand extends $Command<
-  StartMigrationCommandInput,
-  StartMigrationCommandOutput,
-  ElastiCacheClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartMigrationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElastiCacheClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartMigrationCommandInput, StartMigrationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElastiCacheClient";
-    const commandName = "StartMigrationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartMigrationMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: StartMigrationResponse.filterSensitiveLog,
+export class StartMigrationCommand extends command<StartMigrationCommandInput, StartMigrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartMigration",
+  StartMigration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMigrationMessage;
+      output: StartMigrationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartMigrationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryStartMigrationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartMigrationCommandOutput> {
-    return deserializeAws_queryStartMigrationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartMigrationCommandInput;
+      output: StartMigrationCommandOutput;
+    };
+  };
 }

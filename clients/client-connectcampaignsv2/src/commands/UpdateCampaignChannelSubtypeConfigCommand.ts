@@ -1,0 +1,162 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateCampaignChannelSubtypeConfigRequest } from "../models/models_0";
+import { UpdateCampaignChannelSubtypeConfig$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCampaignChannelSubtypeConfigCommand}.
+ */
+export interface UpdateCampaignChannelSubtypeConfigCommandInput extends UpdateCampaignChannelSubtypeConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCampaignChannelSubtypeConfigCommand}.
+ */
+export interface UpdateCampaignChannelSubtypeConfigCommandOutput extends __MetadataBearer {}
+
+/**
+ * Updates the channel subtype config of a campaign. This API is idempotent.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectCampaignsV2Client, UpdateCampaignChannelSubtypeConfigCommand } from "@aws-sdk/client-connectcampaignsv2"; // ES Modules import
+ * // const { ConnectCampaignsV2Client, UpdateCampaignChannelSubtypeConfigCommand } = require("@aws-sdk/client-connectcampaignsv2"); // CommonJS import
+ * // import type { ConnectCampaignsV2ClientConfig } from "@aws-sdk/client-connectcampaignsv2";
+ * const config = {}; // type is ConnectCampaignsV2ClientConfig
+ * const client = new ConnectCampaignsV2Client(config);
+ * const input = { // UpdateCampaignChannelSubtypeConfigRequest
+ *   id: "STRING_VALUE", // required
+ *   channelSubtypeConfig: { // ChannelSubtypeConfig
+ *     telephony: { // TelephonyChannelSubtypeConfig
+ *       capacity: Number("double"),
+ *       connectQueueId: "STRING_VALUE",
+ *       outboundMode: { // TelephonyOutboundMode Union: only one key present
+ *         progressive: { // ProgressiveConfig
+ *           bandwidthAllocation: Number("double"), // required
+ *         },
+ *         predictive: { // PredictiveConfig
+ *           bandwidthAllocation: Number("double"), // required
+ *           pacingStrategies: [ // PacingStrategyList
+ *             { // PacingStrategy Union: only one key present
+ *               abandonmentRate: { // AbandonmentRatePacingConfig
+ *                 targetRate: Number("double"), // required
+ *                 connectionStartPoint: "STRING_VALUE", // required
+ *                 connectionThresholdSeconds: Number("int"), // required
+ *                 evaluationWindow: "STRING_VALUE", // required
+ *               },
+ *             },
+ *           ],
+ *         },
+ *         agentless: {},
+ *         preview: { // PreviewConfig
+ *           bandwidthAllocation: Number("double"), // required
+ *           timeoutConfig: { // TimeoutConfig
+ *             durationInSeconds: Number("int"), // required
+ *           },
+ *           agentActions: [ // AgentActions
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       },
+ *       defaultOutboundConfig: { // TelephonyOutboundConfig
+ *         connectContactFlowId: "STRING_VALUE", // required
+ *         connectSourcePhoneNumber: "STRING_VALUE",
+ *         answerMachineDetectionConfig: { // AnswerMachineDetectionConfig
+ *           enableAnswerMachineDetection: true || false, // required
+ *           awaitAnswerMachinePrompt: true || false,
+ *         },
+ *         ringTimeout: Number("int"),
+ *       },
+ *     },
+ *     sms: { // SmsChannelSubtypeConfig
+ *       capacity: Number("double"),
+ *       outboundMode: { // SmsOutboundMode Union: only one key present
+ *         agentless: {},
+ *       },
+ *       defaultOutboundConfig: { // SmsOutboundConfig
+ *         connectSourcePhoneNumberArn: "STRING_VALUE", // required
+ *         wisdomTemplateArn: "STRING_VALUE", // required
+ *       },
+ *     },
+ *     email: { // EmailChannelSubtypeConfig
+ *       capacity: Number("double"),
+ *       outboundMode: { // EmailOutboundMode Union: only one key present
+ *         agentless: {},
+ *       },
+ *       defaultOutboundConfig: { // EmailOutboundConfig
+ *         connectSourceEmailAddress: "STRING_VALUE", // required
+ *         sourceEmailAddressDisplayName: "STRING_VALUE",
+ *         wisdomTemplateArn: "STRING_VALUE", // required
+ *       },
+ *     },
+ *     whatsApp: { // WhatsAppChannelSubtypeConfig
+ *       capacity: Number("double"),
+ *       outboundMode: { // WhatsAppOutboundMode Union: only one key present
+ *         agentless: {},
+ *       },
+ *       defaultOutboundConfig: { // WhatsAppOutboundConfig
+ *         connectSourcePhoneNumberArn: "STRING_VALUE", // required
+ *         wisdomTemplateArn: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   },
+ * };
+ * const command = new UpdateCampaignChannelSubtypeConfigCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateCampaignChannelSubtypeConfigCommandInput - {@link UpdateCampaignChannelSubtypeConfigCommandInput}
+ * @returns {@link UpdateCampaignChannelSubtypeConfigCommandOutput}
+ * @see {@link UpdateCampaignChannelSubtypeConfigCommandInput} for command's `input` shape.
+ * @see {@link UpdateCampaignChannelSubtypeConfigCommandOutput} for command's `response` shape.
+ * @see {@link ConnectCampaignsV2ClientResolvedConfig | config} for ConnectCampaignsV2Client's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The request could not be processed because of conflict in the current state of the resource.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsV2ServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaignsV2 service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateCampaignChannelSubtypeConfigCommand extends command<UpdateCampaignChannelSubtypeConfigCommandInput, UpdateCampaignChannelSubtypeConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCampaignChannelSubtypeConfig",
+  UpdateCampaignChannelSubtypeConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCampaignChannelSubtypeConfigRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateCampaignChannelSubtypeConfigCommandInput;
+      output: UpdateCampaignChannelSubtypeConfigCommandOutput;
+    };
+  };
+}

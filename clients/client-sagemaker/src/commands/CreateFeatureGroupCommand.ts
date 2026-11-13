@@ -1,107 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateFeatureGroupRequest, CreateFeatureGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateFeatureGroupCommand,
-  serializeAws_json1_1CreateFeatureGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFeatureGroupRequest, CreateFeatureGroupResponse } from "../models/models_1";
+import { CreateFeatureGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFeatureGroupCommand}.
+ */
 export interface CreateFeatureGroupCommandInput extends CreateFeatureGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFeatureGroupCommand}.
+ */
 export interface CreateFeatureGroupCommandOutput extends CreateFeatureGroupResponse, __MetadataBearer {}
 
 /**
- * <p>Create a new <code>FeatureGroup</code>. A <code>FeatureGroup</code> is a group of
- *             <code>Features</code> defined in the <code>FeatureStore</code> to describe a
- *             <code>Record</code>. </p>
- *          <p>The <code>FeatureGroup</code> defines the schema and features contained in the
- *          FeatureGroup. A <code>FeatureGroup</code> definition is composed of a list of
- *             <code>Features</code>, a <code>RecordIdentifierFeatureName</code>, an
- *             <code>EventTimeFeatureName</code> and configurations for its <code>OnlineStore</code>
- *          and <code>OfflineStore</code>. Check <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">Amazon Web Services service quotas</a> to see
- *          the <code>FeatureGroup</code>s quota for your Amazon Web Services account.</p>
- *          <important>
- *             <p>You must include at least one of <code>OnlineStoreConfig</code> and
- *                <code>OfflineStoreConfig</code> to create a <code>FeatureGroup</code>.</p>
- *          </important>
+ * <p>Create a new <code>FeatureGroup</code>. A <code>FeatureGroup</code> is a group of <code>Features</code> defined in the <code>FeatureStore</code> to describe a <code>Record</code>. </p> <p>The <code>FeatureGroup</code> defines the schema and features contained in the <code>FeatureGroup</code>. A <code>FeatureGroup</code> definition is composed of a list of <code>Features</code>, a <code>RecordIdentifierFeatureName</code>, an <code>EventTimeFeatureName</code> and configurations for its <code>OnlineStore</code> and <code>OfflineStore</code>. Check <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">Amazon Web Services service quotas</a> to see the <code>FeatureGroup</code>s quota for your Amazon Web Services account.</p> <p>Note that it can take approximately 10-15 minutes to provision an <code>OnlineStore</code> <code>FeatureGroup</code> with the <code>InMemory</code> <code>StorageType</code>.</p> <important> <p>You must include at least one of <code>OnlineStoreConfig</code> and <code>OfflineStoreConfig</code> to create a <code>FeatureGroup</code>.</p> </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, CreateFeatureGroupCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateFeatureGroupCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateFeatureGroupRequest
+ *   FeatureGroupName: "STRING_VALUE", // required
+ *   RecordIdentifierFeatureName: "STRING_VALUE", // required
+ *   EventTimeFeatureName: "STRING_VALUE", // required
+ *   FeatureDefinitions: [ // FeatureDefinitions // required
+ *     { // FeatureDefinition
+ *       FeatureName: "STRING_VALUE", // required
+ *       FeatureType: "Integral" || "Fractional" || "String", // required
+ *       CollectionType: "List" || "Set" || "Vector",
+ *       CollectionConfig: { // CollectionConfig Union: only one key present
+ *         VectorConfig: { // VectorConfig
+ *           Dimension: Number("int"), // required
+ *         },
+ *       },
+ *     },
+ *   ],
+ *   OnlineStoreConfig: { // OnlineStoreConfig
+ *     SecurityConfig: { // OnlineStoreSecurityConfig
+ *       KmsKeyId: "STRING_VALUE",
+ *     },
+ *     EnableOnlineStore: true || false,
+ *     TtlDuration: { // TtlDuration
+ *       Unit: "Seconds" || "Minutes" || "Hours" || "Days" || "Weeks",
+ *       Value: Number("int"),
+ *     },
+ *     StorageType: "Standard" || "Standard_V2" || "InMemory",
+ *   },
+ *   OfflineStoreConfig: { // OfflineStoreConfig
+ *     S3StorageConfig: { // S3StorageConfig
+ *       S3Uri: "STRING_VALUE", // required
+ *       KmsKeyId: "STRING_VALUE",
+ *       ResolvedOutputS3Uri: "STRING_VALUE",
+ *     },
+ *     DisableGlueTableCreation: true || false,
+ *     DataCatalogConfig: { // DataCatalogConfig
+ *       TableName: "STRING_VALUE", // required
+ *       Catalog: "STRING_VALUE", // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     TableFormat: "Default" || "Glue" || "Iceberg",
+ *   },
+ *   ThroughputConfig: { // ThroughputConfig
+ *     ThroughputMode: "OnDemand" || "Provisioned", // required
+ *     ProvisionedReadCapacityUnits: Number("int"),
+ *     ProvisionedWriteCapacityUnits: Number("int"),
+ *   },
+ *   RoleArn: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateFeatureGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateFeatureGroupResponse
+ * //   FeatureGroupArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateFeatureGroupCommandInput - {@link CreateFeatureGroupCommandInput}
+ * @returns {@link CreateFeatureGroupCommandOutput}
  * @see {@link CreateFeatureGroupCommandInput} for command's `input` shape.
  * @see {@link CreateFeatureGroupCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceInUse} (client fault)
+ *  <p>Resource being accessed is in use.</p>
+ *
+ * @throws {@link ResourceLimitExceeded} (client fault)
+ *  <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateFeatureGroupCommand extends $Command<
-  CreateFeatureGroupCommandInput,
-  CreateFeatureGroupCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateFeatureGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateFeatureGroupCommandInput, CreateFeatureGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateFeatureGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateFeatureGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateFeatureGroupResponse.filterSensitiveLog,
+export class CreateFeatureGroupCommand extends command<CreateFeatureGroupCommandInput, CreateFeatureGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFeatureGroup",
+  CreateFeatureGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFeatureGroupRequest;
+      output: CreateFeatureGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateFeatureGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateFeatureGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateFeatureGroupCommandOutput> {
-    return deserializeAws_json1_1CreateFeatureGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateFeatureGroupCommandInput;
+      output: CreateFeatureGroupCommandOutput;
+    };
+  };
 }

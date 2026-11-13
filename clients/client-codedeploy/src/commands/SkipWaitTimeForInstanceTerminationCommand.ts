@@ -1,104 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { SkipWaitTimeForInstanceTerminationInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1SkipWaitTimeForInstanceTerminationCommand,
-  serializeAws_json1_1SkipWaitTimeForInstanceTerminationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SkipWaitTimeForInstanceTerminationInput } from "../models/models_0";
+import { SkipWaitTimeForInstanceTermination$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SkipWaitTimeForInstanceTerminationCommand}.
+ */
 export interface SkipWaitTimeForInstanceTerminationCommandInput extends SkipWaitTimeForInstanceTerminationInput {}
+/**
+ * @public
+ *
+ * The output of {@link SkipWaitTimeForInstanceTerminationCommand}.
+ */
 export interface SkipWaitTimeForInstanceTerminationCommandOutput extends __MetadataBearer {}
 
 /**
- * @deprecated
- *
  * <p>In a blue/green deployment, overrides any specified wait time and starts terminating
  *             instances immediately after the traffic routing is complete.</p>
+ *
+ * @deprecated This operation is deprecated, use ContinueDeployment with DeploymentWaitType instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, SkipWaitTimeForInstanceTerminationCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, SkipWaitTimeForInstanceTerminationCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // SkipWaitTimeForInstanceTerminationInput
+ *   deploymentId: "STRING_VALUE",
+ * };
  * const command = new SkipWaitTimeForInstanceTerminationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SkipWaitTimeForInstanceTerminationCommandInput - {@link SkipWaitTimeForInstanceTerminationCommandInput}
+ * @returns {@link SkipWaitTimeForInstanceTerminationCommandOutput}
  * @see {@link SkipWaitTimeForInstanceTerminationCommandInput} for command's `input` shape.
  * @see {@link SkipWaitTimeForInstanceTerminationCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link DeploymentAlreadyCompletedException} (client fault)
+ *  <p>The deployment is already complete.</p>
+ *
+ * @throws {@link DeploymentDoesNotExistException} (client fault)
+ *  <p>The deployment with the user or Amazon Web Services account does not exist.</p>
+ *
+ * @throws {@link DeploymentIdRequiredException} (client fault)
+ *  <p>At least one deployment ID must be specified.</p>
+ *
+ * @throws {@link DeploymentNotStartedException} (client fault)
+ *  <p>The specified deployment has not started.</p>
+ *
+ * @throws {@link InvalidDeploymentIdException} (client fault)
+ *  <p>At least one of the deployment IDs was specified in an invalid format.</p>
+ *
+ * @throws {@link UnsupportedActionForDeploymentTypeException} (client fault)
+ *  <p>A call was submitted that is not supported for the specified deployment type.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class SkipWaitTimeForInstanceTerminationCommand extends $Command<
-  SkipWaitTimeForInstanceTerminationCommandInput,
-  SkipWaitTimeForInstanceTerminationCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SkipWaitTimeForInstanceTerminationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SkipWaitTimeForInstanceTerminationCommandInput, SkipWaitTimeForInstanceTerminationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "SkipWaitTimeForInstanceTerminationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SkipWaitTimeForInstanceTerminationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class SkipWaitTimeForInstanceTerminationCommand extends command<SkipWaitTimeForInstanceTerminationCommandInput, SkipWaitTimeForInstanceTerminationCommandOutput>(
+  _ep0,
+  _mw0,
+  "SkipWaitTimeForInstanceTermination",
+  SkipWaitTimeForInstanceTermination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SkipWaitTimeForInstanceTerminationInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: SkipWaitTimeForInstanceTerminationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1SkipWaitTimeForInstanceTerminationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SkipWaitTimeForInstanceTerminationCommandOutput> {
-    return deserializeAws_json1_1SkipWaitTimeForInstanceTerminationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SkipWaitTimeForInstanceTerminationCommandInput;
+      output: SkipWaitTimeForInstanceTerminationCommandOutput;
+    };
+  };
 }

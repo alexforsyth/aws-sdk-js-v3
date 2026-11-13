@@ -1,0 +1,85 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopFailbackRequest } from "../models/models_0";
+import { StopFailback$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopFailbackCommand}.
+ */
+export interface StopFailbackCommandInput extends StopFailbackRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopFailbackCommand}.
+ */
+export interface StopFailbackCommandOutput extends __MetadataBearer {}
+
+/**
+ * <p>Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK_NOT_STARTED.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DrsClient, StopFailbackCommand } from "@aws-sdk/client-drs"; // ES Modules import
+ * // const { DrsClient, StopFailbackCommand } = require("@aws-sdk/client-drs"); // CommonJS import
+ * // import type { DrsClientConfig } from "@aws-sdk/client-drs";
+ * const config = {}; // type is DrsClientConfig
+ * const client = new DrsClient(config);
+ * const input = { // StopFailbackRequest
+ *   recoveryInstanceID: "STRING_VALUE", // required
+ * };
+ * const command = new StopFailbackCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param StopFailbackCommandInput - {@link StopFailbackCommandInput}
+ * @returns {@link StopFailbackCommandOutput}
+ * @see {@link StopFailbackCommandInput} for command's `input` shape.
+ * @see {@link StopFailbackCommandOutput} for command's `response` shape.
+ * @see {@link DrsClientResolvedConfig | config} for DrsClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource for this operation was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>The account performing the request has not been initialized.</p>
+ *
+ * @throws {@link DrsServiceException}
+ * <p>Base exception class for all service exceptions from Drs service.</p>
+ *
+ *
+ * @public
+ */
+export class StopFailbackCommand extends command<StopFailbackCommandInput, StopFailbackCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopFailback",
+  StopFailback$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopFailbackRequest;
+      output: {};
+    };
+    sdk: {
+      input: StopFailbackCommandInput;
+      output: StopFailbackCommandOutput;
+    };
+  };
+}

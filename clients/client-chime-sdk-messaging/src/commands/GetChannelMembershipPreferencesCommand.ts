@@ -1,109 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ChimeSDKMessagingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ChimeSDKMessagingClient";
-import { GetChannelMembershipPreferencesRequest, GetChannelMembershipPreferencesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetChannelMembershipPreferencesCommand,
-  serializeAws_restJson1GetChannelMembershipPreferencesCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetChannelMembershipPreferencesCommandInput extends GetChannelMembershipPreferencesRequest {}
-export interface GetChannelMembershipPreferencesCommandOutput
-  extends GetChannelMembershipPreferencesResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetChannelMembershipPreferencesRequest,
+  GetChannelMembershipPreferencesResponse,
+} from "../models/models_0";
+import { GetChannelMembershipPreferences$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel.
- *          Only the <code>AppInstanceUser</code> who owns the membership can retrieve preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't retrieve preferences for other users.
- *          Banned users can't retrieve membership preferences for the channel from which they are banned.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetChannelMembershipPreferencesCommand}.
+ */
+export interface GetChannelMembershipPreferencesCommandInput extends GetChannelMembershipPreferencesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetChannelMembershipPreferencesCommand}.
+ */
+export interface GetChannelMembershipPreferencesCommandOutput extends GetChannelMembershipPreferencesResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets the membership preferences of an <code>AppInstanceUser</code> or <code>AppInstanceBot</code>
+ *          for the specified channel. A user or a bot must be a member of the channel and own the membership in order to retrieve membership preferences.
+ *          Users or bots in the <code>AppInstanceAdmin</code> and channel moderator roles can't
+ *          retrieve preferences for other users or bots. Banned users or bots can't retrieve membership preferences for the
+ *          channel from which they are banned.</p>
+ *          <note>
+ *             <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the
+ *          ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in
+ *          the header.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ChimeSDKMessagingClient, GetChannelMembershipPreferencesCommand } from "@aws-sdk/client-chime-sdk-messaging"; // ES Modules import
  * // const { ChimeSDKMessagingClient, GetChannelMembershipPreferencesCommand } = require("@aws-sdk/client-chime-sdk-messaging"); // CommonJS import
+ * // import type { ChimeSDKMessagingClientConfig } from "@aws-sdk/client-chime-sdk-messaging";
+ * const config = {}; // type is ChimeSDKMessagingClientConfig
  * const client = new ChimeSDKMessagingClient(config);
+ * const input = { // GetChannelMembershipPreferencesRequest
+ *   ChannelArn: "STRING_VALUE", // required
+ *   MemberArn: "STRING_VALUE", // required
+ *   ChimeBearer: "STRING_VALUE", // required
+ * };
  * const command = new GetChannelMembershipPreferencesCommand(input);
  * const response = await client.send(command);
+ * // { // GetChannelMembershipPreferencesResponse
+ * //   ChannelArn: "STRING_VALUE",
+ * //   Member: { // Identity
+ * //     Arn: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //   },
+ * //   Preferences: { // ChannelMembershipPreferences
+ * //     PushNotifications: { // PushNotificationPreferences
+ * //       AllowNotifications: "ALL" || "NONE" || "FILTERED", // required
+ * //       FilterRule: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetChannelMembershipPreferencesCommandInput - {@link GetChannelMembershipPreferencesCommandInput}
+ * @returns {@link GetChannelMembershipPreferencesCommandOutput}
  * @see {@link GetChannelMembershipPreferencesCommandInput} for command's `input` shape.
  * @see {@link GetChannelMembershipPreferencesCommandOutput} for command's `response` shape.
- * @see {@link ChimeSDKMessagingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ChimeSDKMessagingClientResolvedConfig | config} for ChimeSDKMessagingClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKMessagingServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKMessaging service.</p>
+ *
+ *
+ * @public
  */
-export class GetChannelMembershipPreferencesCommand extends $Command<
-  GetChannelMembershipPreferencesCommandInput,
-  GetChannelMembershipPreferencesCommandOutput,
-  ChimeSDKMessagingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetChannelMembershipPreferencesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKMessagingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetChannelMembershipPreferencesCommandInput, GetChannelMembershipPreferencesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKMessagingClient";
-    const commandName = "GetChannelMembershipPreferencesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetChannelMembershipPreferencesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetChannelMembershipPreferencesResponse.filterSensitiveLog,
+export class GetChannelMembershipPreferencesCommand extends command<GetChannelMembershipPreferencesCommandInput, GetChannelMembershipPreferencesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetChannelMembershipPreferences",
+  GetChannelMembershipPreferences$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetChannelMembershipPreferencesRequest;
+      output: GetChannelMembershipPreferencesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetChannelMembershipPreferencesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetChannelMembershipPreferencesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetChannelMembershipPreferencesCommandOutput> {
-    return deserializeAws_restJson1GetChannelMembershipPreferencesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetChannelMembershipPreferencesCommandInput;
+      output: GetChannelMembershipPreferencesCommandOutput;
+    };
+  };
 }

@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { DescribeUsageReportSubscriptionsRequest, DescribeUsageReportSubscriptionsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUsageReportSubscriptionsCommand,
-  serializeAws_json1_1DescribeUsageReportSubscriptionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeUsageReportSubscriptionsRequest,
+  DescribeUsageReportSubscriptionsResult,
+} from "../models/models_0";
+import { DescribeUsageReportSubscriptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUsageReportSubscriptionsCommand}.
+ */
 export interface DescribeUsageReportSubscriptionsCommandInput extends DescribeUsageReportSubscriptionsRequest {}
-export interface DescribeUsageReportSubscriptionsCommandOutput
-  extends DescribeUsageReportSubscriptionsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUsageReportSubscriptionsCommand}.
+ */
+export interface DescribeUsageReportSubscriptionsCommandOutput extends DescribeUsageReportSubscriptionsResult, __MetadataBearer {}
 
 /**
  * <p>Retrieves a list that describes one or more usage report subscriptions.</p>
@@ -30,74 +32,67 @@ export interface DescribeUsageReportSubscriptionsCommandOutput
  * ```javascript
  * import { AppStreamClient, DescribeUsageReportSubscriptionsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DescribeUsageReportSubscriptionsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DescribeUsageReportSubscriptionsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeUsageReportSubscriptionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUsageReportSubscriptionsResult
+ * //   UsageReportSubscriptions: [ // UsageReportSubscriptionList
+ * //     { // UsageReportSubscription
+ * //       S3BucketName: "STRING_VALUE",
+ * //       Schedule: "DAILY",
+ * //       LastGeneratedReportDate: new Date("TIMESTAMP"),
+ * //       SubscriptionErrors: [ // LastReportGenerationExecutionErrors
+ * //         { // LastReportGenerationExecutionError
+ * //           ErrorCode: "RESOURCE_NOT_FOUND" || "ACCESS_DENIED" || "INTERNAL_SERVICE_ERROR",
+ * //           ErrorMessage: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeUsageReportSubscriptionsCommandInput - {@link DescribeUsageReportSubscriptionsCommandInput}
+ * @returns {@link DescribeUsageReportSubscriptionsCommandOutput}
  * @see {@link DescribeUsageReportSubscriptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeUsageReportSubscriptionsCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link InvalidAccountStatusException} (client fault)
+ *  <p>The resource cannot be created because your AWS account is suspended. For assistance, contact AWS Support. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUsageReportSubscriptionsCommand extends $Command<
-  DescribeUsageReportSubscriptionsCommandInput,
-  DescribeUsageReportSubscriptionsCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUsageReportSubscriptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUsageReportSubscriptionsCommandInput, DescribeUsageReportSubscriptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DescribeUsageReportSubscriptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUsageReportSubscriptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUsageReportSubscriptionsResult.filterSensitiveLog,
+export class DescribeUsageReportSubscriptionsCommand extends command<DescribeUsageReportSubscriptionsCommandInput, DescribeUsageReportSubscriptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUsageReportSubscriptions",
+  DescribeUsageReportSubscriptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUsageReportSubscriptionsRequest;
+      output: DescribeUsageReportSubscriptionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeUsageReportSubscriptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUsageReportSubscriptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeUsageReportSubscriptionsCommandOutput> {
-    return deserializeAws_json1_1DescribeUsageReportSubscriptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUsageReportSubscriptionsCommandInput;
+      output: DescribeUsageReportSubscriptionsCommandOutput;
+    };
+  };
 }

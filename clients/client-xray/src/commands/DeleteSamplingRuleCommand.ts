@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteSamplingRuleRequest, DeleteSamplingRuleResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteSamplingRuleCommand,
-  serializeAws_restJson1DeleteSamplingRuleCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, XRayClientResolvedConfig } from "../XRayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSamplingRuleRequest, DeleteSamplingRuleResult } from "../models/models_0";
+import { DeleteSamplingRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSamplingRuleCommand}.
+ */
 export interface DeleteSamplingRuleCommandInput extends DeleteSamplingRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSamplingRuleCommand}.
+ */
 export interface DeleteSamplingRuleCommandOutput extends DeleteSamplingRuleResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface DeleteSamplingRuleCommandOutput extends DeleteSamplingRuleResul
  * ```javascript
  * import { XRayClient, DeleteSamplingRuleCommand } from "@aws-sdk/client-xray"; // ES Modules import
  * // const { XRayClient, DeleteSamplingRuleCommand } = require("@aws-sdk/client-xray"); // CommonJS import
+ * // import type { XRayClientConfig } from "@aws-sdk/client-xray";
+ * const config = {}; // type is XRayClientConfig
  * const client = new XRayClient(config);
+ * const input = { // DeleteSamplingRuleRequest
+ *   RuleName: "STRING_VALUE",
+ *   RuleARN: "STRING_VALUE",
+ * };
  * const command = new DeleteSamplingRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteSamplingRuleResult
+ * //   SamplingRuleRecord: { // SamplingRuleRecord
+ * //     SamplingRule: { // SamplingRule
+ * //       RuleName: "STRING_VALUE",
+ * //       RuleARN: "STRING_VALUE",
+ * //       ResourceARN: "STRING_VALUE", // required
+ * //       Priority: Number("int"), // required
+ * //       FixedRate: Number("double"), // required
+ * //       ReservoirSize: Number("int"), // required
+ * //       ServiceName: "STRING_VALUE", // required
+ * //       ServiceType: "STRING_VALUE", // required
+ * //       Host: "STRING_VALUE", // required
+ * //       HTTPMethod: "STRING_VALUE", // required
+ * //       URLPath: "STRING_VALUE", // required
+ * //       Version: Number("int"), // required
+ * //       Attributes: { // AttributeMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       SamplingRateBoost: { // SamplingRateBoost
+ * //         MaxRate: Number("double"), // required
+ * //         CooldownWindowMinutes: Number("int"), // required
+ * //       },
+ * //     },
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     ModifiedAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteSamplingRuleCommandInput - {@link DeleteSamplingRuleCommandInput}
+ * @returns {@link DeleteSamplingRuleCommandOutput}
  * @see {@link DeleteSamplingRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteSamplingRuleCommandOutput} for command's `response` shape.
- * @see {@link XRayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link XRayClientResolvedConfig | config} for XRayClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is missing required parameters or has invalid parameters.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>The request exceeds the maximum number of requests per second.</p>
+ *
+ * @throws {@link XRayServiceException}
+ * <p>Base exception class for all service exceptions from XRay service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSamplingRuleCommand extends $Command<
-  DeleteSamplingRuleCommandInput,
-  DeleteSamplingRuleCommandOutput,
-  XRayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSamplingRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: XRayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSamplingRuleCommandInput, DeleteSamplingRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "XRayClient";
-    const commandName = "DeleteSamplingRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSamplingRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSamplingRuleResult.filterSensitiveLog,
+export class DeleteSamplingRuleCommand extends command<DeleteSamplingRuleCommandInput, DeleteSamplingRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSamplingRule",
+  DeleteSamplingRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSamplingRuleRequest;
+      output: DeleteSamplingRuleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSamplingRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteSamplingRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSamplingRuleCommandOutput> {
-    return deserializeAws_restJson1DeleteSamplingRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSamplingRuleCommandInput;
+      output: DeleteSamplingRuleCommandOutput;
+    };
+  };
 }

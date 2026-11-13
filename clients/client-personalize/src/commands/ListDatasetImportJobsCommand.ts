@@ -1,99 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListDatasetImportJobsRequest, ListDatasetImportJobsResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1ListDatasetImportJobsCommand,
-  serializeAws_json1_1ListDatasetImportJobsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDatasetImportJobsRequest, ListDatasetImportJobsResponse } from "../models/models_0";
+import { ListDatasetImportJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDatasetImportJobsCommand}.
+ */
 export interface ListDatasetImportJobsCommandInput extends ListDatasetImportJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDatasetImportJobsCommand}.
+ */
 export interface ListDatasetImportJobsCommandOutput extends ListDatasetImportJobsResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of dataset import jobs that use the given dataset. When a dataset is not
- *       specified, all the dataset import jobs associated with the account are listed. The response
- *       provides the properties for each dataset import job, including the Amazon Resource Name (ARN).
- *       For more information on dataset import jobs, see <a>CreateDatasetImportJob</a>. For
- *       more information on datasets, see <a>CreateDataset</a>.</p>
+ * <p>Returns a list of dataset import jobs that use the given dataset. When
+ *       a dataset is not specified, all the dataset import jobs associated with
+ *       the account are listed. The response provides the properties for each
+ *       dataset import job, including the Amazon Resource Name (ARN). For more
+ *       information on dataset import jobs, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html">CreateDatasetImportJob</a>. For more information on datasets, see
+ *         <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html">CreateDataset</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PersonalizeClient, ListDatasetImportJobsCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, ListDatasetImportJobsCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // ListDatasetImportJobsRequest
+ *   datasetArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListDatasetImportJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDatasetImportJobsResponse
+ * //   datasetImportJobs: [ // DatasetImportJobs
+ * //     { // DatasetImportJobSummary
+ * //       datasetImportJobArn: "STRING_VALUE",
+ * //       jobName: "STRING_VALUE",
+ * //       status: "STRING_VALUE",
+ * //       creationDateTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //       failureReason: "STRING_VALUE",
+ * //       importMode: "FULL" || "INCREMENTAL",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDatasetImportJobsCommandInput - {@link ListDatasetImportJobsCommandInput}
+ * @returns {@link ListDatasetImportJobsCommandOutput}
  * @see {@link ListDatasetImportJobsCommandInput} for command's `input` shape.
  * @see {@link ListDatasetImportJobsCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class ListDatasetImportJobsCommand extends $Command<
-  ListDatasetImportJobsCommandInput,
-  ListDatasetImportJobsCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDatasetImportJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDatasetImportJobsCommandInput, ListDatasetImportJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "ListDatasetImportJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDatasetImportJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDatasetImportJobsResponse.filterSensitiveLog,
+export class ListDatasetImportJobsCommand extends command<ListDatasetImportJobsCommandInput, ListDatasetImportJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDatasetImportJobs",
+  ListDatasetImportJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDatasetImportJobsRequest;
+      output: ListDatasetImportJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDatasetImportJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDatasetImportJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDatasetImportJobsCommandOutput> {
-    return deserializeAws_json1_1ListDatasetImportJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDatasetImportJobsCommandInput;
+      output: ListDatasetImportJobsCommandOutput;
+    };
+  };
 }

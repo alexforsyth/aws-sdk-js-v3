@@ -1,5 +1,5 @@
 {
-  "smithy": "1.0",
+  "smithy": "2.0",
   "metadata": {
     "suppressions": [
       {
@@ -79,14 +79,16 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for ActivatePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for ActivatePipeline.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#ActivatePipelineOutput": {
       "type": "structure",
       "members": {},
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of ActivatePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the output of ActivatePipeline.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#AddTags": {
@@ -134,14 +136,16 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for AddTags.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for AddTags.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#AddTagsOutput": {
       "type": "structure",
       "members": {},
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of AddTags.</p>"
+        "smithy.api#documentation": "<p>Contains the output of AddTags.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#CreatePipeline": {
@@ -195,7 +199,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for CreatePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for CreatePipeline.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#CreatePipelineOutput": {
@@ -210,7 +215,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of CreatePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the output of CreatePipeline.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#DataPipeline": {
@@ -281,6 +287,7 @@
           "arnNamespace": "datapipeline",
           "cloudFormationName": "DataPipeline",
           "cloudTrailEventSource": "datapipeline.amazonaws.com",
+          "docId": "datapipeline-2012-10-29",
           "endpointPrefix": "datapipeline"
         },
         "aws.auth#sigv4": {
@@ -291,6 +298,830 @@
         "smithy.api#title": "AWS Data Pipeline",
         "smithy.api#xmlNamespace": {
           "uri": "http://datapipeline.amazonaws.com/doc/2012-10-29/"
+        },
+        "smithy.rules#endpointBdd": {
+          "version": "1.1",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Endpoint"
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ]
+            },
+            {
+              "fn": "aws.partition",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ],
+              "assign": "PartitionResult"
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseFIPS"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseDualStack"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsDualStack"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsFIPS"
+                  ]
+                },
+                true
+              ]
+            }
+          ],
+          "results": [
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": {
+                  "ref": "Endpoint"
+                },
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://datapipeline-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://datapipeline-fips.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS is enabled but this partition does not support FIPS",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://datapipeline.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "DualStack is enabled but this partition does not support DualStack",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://datapipeline.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ],
+          "root": 2,
+          "nodeCount": 13,
+          "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+        },
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseDualStack"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Region"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "aws.partition",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ],
+                      "assign": "PartitionResult"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        },
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://datapipeline-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://datapipeline-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS is enabled but this partition does not support FIPS",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://datapipeline.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "DualStack is enabled but this partition does not support DualStack",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": "https://datapipeline.{Region}.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://datapipeline.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
         }
       }
     },
@@ -338,20 +1169,25 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for DeactivatePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for DeactivatePipeline.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#DeactivatePipelineOutput": {
       "type": "structure",
       "members": {},
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of DeactivatePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the output of DeactivatePipeline.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#DeletePipeline": {
       "type": "operation",
       "input": {
         "target": "com.amazonaws.datapipeline#DeletePipelineInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -380,7 +1216,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for DeletePipeline.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for DeletePipeline.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#DescribeObjects": {
@@ -434,6 +1271,7 @@
         "evaluateExpressions": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether any expressions in the object should be evaluated when the object descriptions are returned.</p>"
           }
         },
@@ -445,7 +1283,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for DescribeObjects.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for DescribeObjects.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#DescribeObjectsOutput": {
@@ -467,12 +1306,14 @@
         "hasMoreResults": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether there are more results to return.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of DescribeObjects.</p>"
+        "smithy.api#documentation": "<p>Contains the output of DescribeObjects.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#DescribePipelines": {
@@ -513,7 +1354,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for DescribePipelines.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for DescribePipelines.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#DescribePipelinesOutput": {
@@ -528,7 +1370,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of DescribePipelines.</p>"
+        "smithy.api#documentation": "<p>Contains the output of DescribePipelines.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#EvaluateExpression": {
@@ -586,7 +1429,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for EvaluateExpression.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for EvaluateExpression.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#EvaluateExpressionOutput": {
@@ -601,7 +1445,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of EvaluateExpression.</p>"
+        "smithy.api#documentation": "<p>Contains the output of EvaluateExpression.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#Field": {
@@ -675,7 +1520,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for GetPipelineDefinition.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for GetPipelineDefinition.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#GetPipelineDefinitionOutput": {
@@ -701,7 +1547,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of GetPipelineDefinition.</p>"
+        "smithy.api#documentation": "<p>Contains the output of GetPipelineDefinition.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#InstanceIdentity": {
@@ -790,7 +1637,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for ListPipelines.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for ListPipelines.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#ListPipelinesOutput": {
@@ -812,12 +1660,14 @@
         "hasMoreResults": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether there are more results that can be obtained by a subsequent call.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of ListPipelines.</p>"
+        "smithy.api#documentation": "<p>Contains the output of ListPipelines.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#Operator": {
@@ -841,30 +1691,38 @@
       }
     },
     "com.amazonaws.datapipeline#OperatorType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "EQ",
-            "name": "Equal"
-          },
-          {
-            "value": "REF_EQ",
-            "name": "ReferenceEqual"
-          },
-          {
-            "value": "LE",
-            "name": "LessThanOrEqual"
-          },
-          {
-            "value": "GE",
-            "name": "GreaterThanOrEqual"
-          },
-          {
-            "value": "BETWEEN",
-            "name": "Between"
+      "type": "enum",
+      "members": {
+        "Equal": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "EQ"
           }
-        ]
+        },
+        "ReferenceEqual": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "REF_EQ"
+          }
+        },
+        "LessThanOrEqual": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "LE"
+          }
+        },
+        "GreaterThanOrEqual": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "GE"
+          }
+        },
+        "Between": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BETWEEN"
+          }
+        }
       }
     },
     "com.amazonaws.datapipeline#ParameterAttribute": {
@@ -1139,7 +1997,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for PollForTask.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for PollForTask.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#PollForTaskOutput": {
@@ -1153,7 +2012,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of PollForTask.</p>"
+        "smithy.api#documentation": "<p>Contains the output of PollForTask.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#PutPipelineDefinition": {
@@ -1213,7 +2073,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for PutPipelineDefinition.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for PutPipelineDefinition.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#PutPipelineDefinitionOutput": {
@@ -1234,13 +2095,15 @@
         "errored": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether there were validation errors, and the pipeline definition is stored but cannot be \n            activated until you correct the pipeline and call <code>PutPipelineDefinition</code> to commit the corrected pipeline.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of PutPipelineDefinition.</p>"
+        "smithy.api#documentation": "<p>Contains the output of PutPipelineDefinition.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#Query": {
@@ -1326,7 +2189,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for QueryObjects.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for QueryObjects.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#QueryObjectsOutput": {
@@ -1347,12 +2211,14 @@
         "hasMoreResults": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether there are more results that can be obtained by a subsequent call.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of QueryObjects.</p>"
+        "smithy.api#documentation": "<p>Contains the output of QueryObjects.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#RemoveTags": {
@@ -1400,14 +2266,16 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for RemoveTags.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for RemoveTags.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#RemoveTagsOutput": {
       "type": "structure",
       "members": {},
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of RemoveTags.</p>"
+        "smithy.api#documentation": "<p>Contains the output of RemoveTags.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#ReportTaskProgress": {
@@ -1457,7 +2325,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for ReportTaskProgress.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for ReportTaskProgress.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#ReportTaskProgressOutput": {
@@ -1466,13 +2335,15 @@
         "canceled": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>If true, the calling task runner should cancel processing of the task. The task runner does not need to call <a>SetTaskStatus</a> for canceled tasks.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of ReportTaskProgress.</p>"
+        "smithy.api#documentation": "<p>Contains the output of ReportTaskProgress.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#ReportTaskRunnerHeartbeat": {
@@ -1519,7 +2390,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for ReportTaskRunnerHeartbeat.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for ReportTaskRunnerHeartbeat.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#ReportTaskRunnerHeartbeatOutput": {
@@ -1528,13 +2400,15 @@
         "terminate": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether the calling task runner should terminate.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of ReportTaskRunnerHeartbeat.</p>"
+        "smithy.api#documentation": "<p>Contains the output of ReportTaskRunnerHeartbeat.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#Selector": {
@@ -1567,6 +2441,9 @@
       "type": "operation",
       "input": {
         "target": "com.amazonaws.datapipeline#SetStatusInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
       },
       "errors": [
         {
@@ -1612,7 +2489,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for SetStatus.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for SetStatus.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#SetTaskStatus": {
@@ -1681,14 +2559,16 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for SetTaskStatus.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for SetTaskStatus.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#SetTaskStatusOutput": {
       "type": "structure",
       "members": {},
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of SetTaskStatus.</p>"
+        "smithy.api#documentation": "<p>Contains the output of SetTaskStatus.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#Tag": {
@@ -1761,22 +2641,26 @@
       }
     },
     "com.amazonaws.datapipeline#TaskStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "FINISHED",
-            "name": "FINISHED"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
-          },
-          {
-            "value": "FALSE",
-            "name": "FALSE"
+      "type": "enum",
+      "members": {
+        "FINISHED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FINISHED"
           }
-        ]
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "FALSE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FALSE"
+          }
+        }
       }
     },
     "com.amazonaws.datapipeline#ValidatePipelineDefinition": {
@@ -1836,7 +2720,8 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the parameters for ValidatePipelineDefinition.</p>"
+        "smithy.api#documentation": "<p>Contains the parameters for ValidatePipelineDefinition.</p>",
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.datapipeline#ValidatePipelineDefinitionOutput": {
@@ -1857,13 +2742,15 @@
         "errored": {
           "target": "com.amazonaws.datapipeline#boolean",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Indicates whether there were validation errors.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains the output of ValidatePipelineDefinition.</p>"
+        "smithy.api#documentation": "<p>Contains the output of ValidatePipelineDefinition.</p>",
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.datapipeline#ValidationError": {
@@ -1925,7 +2812,7 @@
           "min": 1,
           "max": 256
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#attributeValueString": {
@@ -1935,17 +2822,17 @@
           "min": 0,
           "max": 10240
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#boolean": {
-      "type": "boolean"
-    },
-    "com.amazonaws.datapipeline#cancelActive": {
       "type": "boolean",
       "traits": {
-        "smithy.api#box": {}
+        "smithy.api#default": false
       }
+    },
+    "com.amazonaws.datapipeline#cancelActive": {
+      "type": "boolean"
     },
     "com.amazonaws.datapipeline#errorMessage": {
       "type": "string"
@@ -1963,7 +2850,7 @@
           "min": 1,
           "max": 256
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#fieldStringValue": {
@@ -1973,7 +2860,7 @@
           "min": 0,
           "max": 10240
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#id": {
@@ -1983,7 +2870,7 @@
           "min": 1,
           "max": 1024
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#idList": {
@@ -1993,10 +2880,7 @@
       }
     },
     "com.amazonaws.datapipeline#int": {
-      "type": "integer",
-      "traits": {
-        "smithy.api#box": {}
-      }
+      "type": "integer"
     },
     "com.amazonaws.datapipeline#longString": {
       "type": "string",
@@ -2005,7 +2889,7 @@
           "min": 0,
           "max": 20971520
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#pipelineList": {
@@ -2021,7 +2905,7 @@
           "min": 0,
           "max": 1024
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#stringList": {
@@ -2067,7 +2951,7 @@
           "min": 1,
           "max": 2048
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#timestamp": {
@@ -2080,7 +2964,7 @@
           "min": 0,
           "max": 10000
         },
-        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
       }
     },
     "com.amazonaws.datapipeline#validationMessages": {

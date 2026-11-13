@@ -1,7 +1,6 @@
-# @aws-sdk/client-application-auto-scaling
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-application-auto-scaling/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-application-auto-scaling)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-application-auto-scaling.svg)](https://www.npmjs.com/package/@aws-sdk/client-application-auto-scaling)
+# @aws-sdk/client-application-auto-scaling
 
 ## Description
 
@@ -26,7 +25,7 @@ resources:</p>
 <p>Amazon ECS services</p>
 </li>
 <li>
-<p>Amazon ElastiCache for Redis clusters (replication groups)</p>
+<p>Amazon ElastiCache replication groups (Redis OSS and Valkey) and Memcached clusters</p>
 </li>
 <li>
 <p>Amazon EMR clusters</p>
@@ -47,12 +46,23 @@ resources:</p>
 <p>Amazon SageMaker endpoint variants</p>
 </li>
 <li>
+<p>Amazon SageMaker inference components</p>
+</li>
+<li>
+<p>Amazon SageMaker serverless endpoint provisioned concurrency</p>
+</li>
+<li>
 <p>Spot Fleets (Amazon EC2)</p>
+</li>
+<li>
+<p>Pool of WorkSpaces</p>
 </li>
 <li>
 <p>Custom resources provided by your own applications or services</p>
 </li>
 </ul>
+<p>To learn more about Application Auto Scaling, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User
+Guide</a>.</p>
 <p>
 <b>API Summary</b>
 </p>
@@ -77,14 +87,9 @@ and scheduled scaling.</p>
 </li>
 </ul>
 
-<p>To learn more about Application Auto Scaling, including information about granting IAM users required
-permissions for Application Auto Scaling actions, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User
-Guide</a>.</p>
-
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-application-auto-scaling
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-application-auto-scaling`
 - `yarn add @aws-sdk/client-application-auto-scaling`
@@ -96,43 +101,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `ApplicationAutoScalingClient` and
-the commands you need, for example `DeleteScalingPolicyCommand`:
+the commands you need, for example `ListTagsForResourceCommand`:
 
 ```js
 // ES5 example
-const {
-  ApplicationAutoScalingClient,
-  DeleteScalingPolicyCommand,
-} = require("@aws-sdk/client-application-auto-scaling");
+const { ApplicationAutoScalingClient, ListTagsForResourceCommand } = require("@aws-sdk/client-application-auto-scaling");
 ```
 
 ```ts
 // ES6+ example
-import { ApplicationAutoScalingClient, DeleteScalingPolicyCommand } from "@aws-sdk/client-application-auto-scaling";
+import { ApplicationAutoScalingClient, ListTagsForResourceCommand } from "@aws-sdk/client-application-auto-scaling";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new ApplicationAutoScalingClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new DeleteScalingPolicyCommand(params);
+const params = { /** input parameters */ };
+const command = new ListTagsForResourceCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -147,26 +147,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -182,31 +165,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`ApplicationAutoScaling` extends `ApplicationAutoScalingClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`ApplicationAutoScalingClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-application-auto-scaling";
-const client = new AWS.ApplicationAutoScaling({ region: "REGION" });
+import { ApplicationAutoScaling } from "@aws-sdk/client-application-auto-scaling";
+
+const client = new ApplicationAutoScaling({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.deleteScalingPolicy(params);
+  const data = await client.listTagsForResource(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -214,7 +191,7 @@ try {
 
 // Promises.
 client
-  .deleteScalingPolicy(params)
+  .listTagsForResource(params)
   .then((data) => {
     // process data.
   })
@@ -222,9 +199,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.deleteScalingPolicy(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listTagsForResource(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -250,12 +227,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -276,3 +255,104 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+DeleteScalingPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DeleteScalingPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DeleteScalingPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DeleteScalingPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteScheduledAction
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DeleteScheduledActionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DeleteScheduledActionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DeleteScheduledActionCommandOutput/)
+</details>
+<details>
+<summary>
+DeregisterScalableTarget
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DeregisterScalableTargetCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DeregisterScalableTargetCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DeregisterScalableTargetCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeScalableTargets
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DescribeScalableTargetsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScalableTargetsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScalableTargetsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeScalingActivities
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DescribeScalingActivitiesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScalingActivitiesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScalingActivitiesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeScalingPolicies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DescribeScalingPoliciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScalingPoliciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScalingPoliciesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeScheduledActions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/DescribeScheduledActionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScheduledActionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/DescribeScheduledActionsCommandOutput/)
+</details>
+<details>
+<summary>
+GetPredictiveScalingForecast
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/GetPredictiveScalingForecastCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/GetPredictiveScalingForecastCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/GetPredictiveScalingForecastCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+PutScalingPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/PutScalingPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/PutScalingPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/PutScalingPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+PutScheduledAction
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/PutScheduledActionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/PutScheduledActionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/PutScheduledActionCommandOutput/)
+</details>
+<details>
+<summary>
+RegisterScalableTarget
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/RegisterScalableTargetCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/RegisterScalableTargetCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/RegisterScalableTargetCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/application-auto-scaling/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-application-auto-scaling/Interface/UntagResourceCommandOutput/)
+</details>

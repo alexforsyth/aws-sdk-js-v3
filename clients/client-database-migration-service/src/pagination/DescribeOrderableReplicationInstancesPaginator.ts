@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeOrderableReplicationInstancesCommand,
   DescribeOrderableReplicationInstancesCommandInput,
   DescribeOrderableReplicationInstancesCommandOutput,
 } from "../commands/DescribeOrderableReplicationInstancesCommand";
-import { DatabaseMigrationService } from "../DatabaseMigrationService";
 import { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
-import { DatabaseMigrationServicePaginationConfiguration } from "./Interfaces";
+import type { DatabaseMigrationServicePaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: DatabaseMigrationServiceClient,
-  input: DescribeOrderableReplicationInstancesCommandInput,
-  ...args: any
-): Promise<DescribeOrderableReplicationInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeOrderableReplicationInstancesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: DatabaseMigrationService,
-  input: DescribeOrderableReplicationInstancesCommandInput,
-  ...args: any
-): Promise<DescribeOrderableReplicationInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.describeOrderableReplicationInstances(input, ...args);
-};
-export async function* paginateDescribeOrderableReplicationInstances(
+export const paginateDescribeOrderableReplicationInstances: (
   config: DatabaseMigrationServicePaginationConfiguration,
   input: DescribeOrderableReplicationInstancesCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeOrderableReplicationInstancesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeOrderableReplicationInstancesCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxRecords"] = config.pageSize;
-    if (config.client instanceof DatabaseMigrationService) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof DatabaseMigrationServiceClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected DatabaseMigrationService | DatabaseMigrationServiceClient");
-    }
-    yield page;
-    token = page.Marker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeOrderableReplicationInstancesCommandOutput> = createPaginator<
+  DatabaseMigrationServicePaginationConfiguration,
+  DescribeOrderableReplicationInstancesCommandInput,
+  DescribeOrderableReplicationInstancesCommandOutput
+>(DatabaseMigrationServiceClient, DescribeOrderableReplicationInstancesCommand, "Marker", "Marker", "MaxRecords");

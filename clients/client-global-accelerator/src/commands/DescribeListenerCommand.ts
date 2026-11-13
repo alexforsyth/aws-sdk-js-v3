@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import { DescribeListenerRequest, DescribeListenerResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeListenerCommand,
-  serializeAws_json1_1DescribeListenerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeListenerRequest, DescribeListenerResponse } from "../models/models_0";
+import { DescribeListener$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeListenerCommand}.
+ */
 export interface DescribeListenerCommandInput extends DescribeListenerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeListenerCommand}.
+ */
 export interface DescribeListenerCommandOutput extends DescribeListenerResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,66 @@ export interface DescribeListenerCommandOutput extends DescribeListenerResponse,
  * ```javascript
  * import { GlobalAcceleratorClient, DescribeListenerCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, DescribeListenerCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // DescribeListenerRequest
+ *   ListenerArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeListenerCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeListenerResponse
+ * //   Listener: { // Listener
+ * //     ListenerArn: "STRING_VALUE",
+ * //     PortRanges: [ // PortRanges
+ * //       { // PortRange
+ * //         FromPort: Number("int"),
+ * //         ToPort: Number("int"),
+ * //       },
+ * //     ],
+ * //     Protocol: "TCP" || "UDP",
+ * //     ClientAffinity: "NONE" || "SOURCE_IP",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeListenerCommandInput - {@link DescribeListenerCommandInput}
+ * @returns {@link DescribeListenerCommandOutput}
  * @see {@link DescribeListenerCommandInput} for command's `input` shape.
  * @see {@link DescribeListenerCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The listener that you specified doesn't exist.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeListenerCommand extends $Command<
-  DescribeListenerCommandInput,
-  DescribeListenerCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeListenerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeListenerCommandInput, DescribeListenerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "DescribeListenerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeListenerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeListenerResponse.filterSensitiveLog,
+export class DescribeListenerCommand extends command<DescribeListenerCommandInput, DescribeListenerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeListener",
+  DescribeListener$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeListenerRequest;
+      output: DescribeListenerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeListenerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeListenerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeListenerCommandOutput> {
-    return deserializeAws_json1_1DescribeListenerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeListenerCommandInput;
+      output: DescribeListenerCommandOutput;
+    };
+  };
 }

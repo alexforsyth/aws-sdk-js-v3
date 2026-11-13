@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { SetStatusInput } from "../models/models_0";
-import { deserializeAws_json1_1SetStatusCommand, serializeAws_json1_1SetStatusCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetStatusInput } from "../models/models_0";
+import { SetStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetStatusCommand}.
+ */
 export interface SetStatusCommandInput extends SetStatusInput {}
+/**
+ * @public
+ *
+ * The output of {@link SetStatusCommand}.
+ */
 export interface SetStatusCommandOutput extends __MetadataBearer {}
 
 /**
@@ -34,10 +38,10 @@ export interface SetStatusCommandOutput extends __MetadataBearer {}
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"pipelineId": "df-0634701J7KEXAMPLE",
+ * \{"pipelineId": "df-0634701J7KEXAMPLE",
  *  "objectIds":
  *   ["o-08600941GHJWMBR9E2"],
- *  "status": "pause"}
+ *  "status": "pause"\}
  *
  *             </request>
  *
@@ -57,68 +61,61 @@ export interface SetStatusCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { DataPipelineClient, SetStatusCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, SetStatusCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // SetStatusInput
+ *   pipelineId: "STRING_VALUE", // required
+ *   objectIds: [ // idList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   status: "STRING_VALUE", // required
+ * };
  * const command = new SetStatusCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetStatusCommandInput - {@link SetStatusCommandInput}
+ * @returns {@link SetStatusCommandOutput}
  * @see {@link SetStatusCommandInput} for command's `input` shape.
  * @see {@link SetStatusCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link PipelineDeletedException} (client fault)
+ *  <p>The specified pipeline has been deleted.</p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class SetStatusCommand extends $Command<
-  SetStatusCommandInput,
-  SetStatusCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetStatusCommandInput, SetStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "SetStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetStatusInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class SetStatusCommand extends command<SetStatusCommandInput, SetStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetStatus",
+  SetStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetStatusInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SetStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetStatusCommandOutput> {
-    return deserializeAws_json1_1SetStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetStatusCommandInput;
+      output: SetStatusCommandOutput;
+    };
+  };
 }

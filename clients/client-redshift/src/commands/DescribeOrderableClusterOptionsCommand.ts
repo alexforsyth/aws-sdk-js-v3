@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeOrderableClusterOptionsMessage, OrderableClusterOptionsMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeOrderableClusterOptionsCommand,
-  serializeAws_queryDescribeOrderableClusterOptionsCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeOrderableClusterOptionsMessage, OrderableClusterOptionsMessage } from "../models/models_0";
+import { DescribeOrderableClusterOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeOrderableClusterOptionsCommand}.
+ */
 export interface DescribeOrderableClusterOptionsCommandInput extends DescribeOrderableClusterOptionsMessage {}
-export interface DescribeOrderableClusterOptionsCommandOutput
-  extends OrderableClusterOptionsMessage,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeOrderableClusterOptionsCommand}.
+ */
+export interface DescribeOrderableClusterOptionsCommandOutput extends OrderableClusterOptionsMessage, __MetadataBearer {}
 
 /**
  * <p>Returns a list of orderable cluster options. Before you create a new cluster you
@@ -38,74 +37,67 @@ export interface DescribeOrderableClusterOptionsCommandOutput
  * ```javascript
  * import { RedshiftClient, DescribeOrderableClusterOptionsCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeOrderableClusterOptionsCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeOrderableClusterOptionsMessage
+ *   ClusterVersion: "STRING_VALUE",
+ *   NodeType: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeOrderableClusterOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // OrderableClusterOptionsMessage
+ * //   OrderableClusterOptions: [ // OrderableClusterOptionsList
+ * //     { // OrderableClusterOption
+ * //       ClusterVersion: "STRING_VALUE",
+ * //       ClusterType: "STRING_VALUE",
+ * //       NodeType: "STRING_VALUE",
+ * //       AvailabilityZones: [ // AvailabilityZoneList
+ * //         { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //           SupportedPlatforms: [ // SupportedPlatformsList
+ * //             { // SupportedPlatform
+ * //               Name: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeOrderableClusterOptionsCommandInput - {@link DescribeOrderableClusterOptionsCommandInput}
+ * @returns {@link DescribeOrderableClusterOptionsCommandOutput}
  * @see {@link DescribeOrderableClusterOptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeOrderableClusterOptionsCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeOrderableClusterOptionsCommand extends $Command<
-  DescribeOrderableClusterOptionsCommandInput,
-  DescribeOrderableClusterOptionsCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeOrderableClusterOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeOrderableClusterOptionsCommandInput, DescribeOrderableClusterOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeOrderableClusterOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeOrderableClusterOptionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: OrderableClusterOptionsMessage.filterSensitiveLog,
+export class DescribeOrderableClusterOptionsCommand extends command<DescribeOrderableClusterOptionsCommandInput, DescribeOrderableClusterOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeOrderableClusterOptions",
+  DescribeOrderableClusterOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeOrderableClusterOptionsMessage;
+      output: OrderableClusterOptionsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeOrderableClusterOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeOrderableClusterOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeOrderableClusterOptionsCommandOutput> {
-    return deserializeAws_queryDescribeOrderableClusterOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeOrderableClusterOptionsCommandInput;
+      output: DescribeOrderableClusterOptionsCommandOutput;
+    };
+  };
 }

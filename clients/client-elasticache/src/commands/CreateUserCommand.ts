@@ -1,92 +1,131 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElastiCacheClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElastiCacheClient";
-import { CreateUserMessage, User } from "../models/models_0";
-import { deserializeAws_queryCreateUserCommand, serializeAws_queryCreateUserCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateUserMessage, User } from "../models/models_0";
+import { CreateUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateUserCommand}.
+ */
 export interface CreateUserCommandInput extends CreateUserMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateUserCommand}.
+ */
 export interface CreateUserCommandOutput extends User, __MetadataBearer {}
 
 /**
- * <p>For Redis engine version 6.x onwards: Creates a Redis user. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>.</p>
+ * <p>For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user. For more information, see
+ *                 <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElastiCacheClient, CreateUserCommand } from "@aws-sdk/client-elasticache"; // ES Modules import
  * // const { ElastiCacheClient, CreateUserCommand } = require("@aws-sdk/client-elasticache"); // CommonJS import
+ * // import type { ElastiCacheClientConfig } from "@aws-sdk/client-elasticache";
+ * const config = {}; // type is ElastiCacheClientConfig
  * const client = new ElastiCacheClient(config);
+ * const input = { // CreateUserMessage
+ *   UserId: "STRING_VALUE", // required
+ *   UserName: "STRING_VALUE", // required
+ *   Engine: "STRING_VALUE", // required
+ *   Passwords: [ // PasswordListInput
+ *     "STRING_VALUE",
+ *   ],
+ *   AccessString: "STRING_VALUE", // required
+ *   NoPasswordRequired: true || false,
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   AuthenticationMode: { // AuthenticationMode
+ *     Type: "password" || "no-password-required" || "iam",
+ *     Passwords: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new CreateUserCommand(input);
  * const response = await client.send(command);
+ * // { // User
+ * //   UserId: "STRING_VALUE",
+ * //   UserName: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * //   Engine: "STRING_VALUE",
+ * //   MinimumEngineVersion: "STRING_VALUE",
+ * //   AccessString: "STRING_VALUE",
+ * //   UserGroupIds: [ // UserGroupIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Authentication: { // Authentication
+ * //     Type: "password" || "no-password" || "iam",
+ * //     PasswordCount: Number("int"),
+ * //   },
+ * //   ARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateUserCommandInput - {@link CreateUserCommandInput}
+ * @returns {@link CreateUserCommandOutput}
  * @see {@link CreateUserCommandInput} for command's `input` shape.
  * @see {@link CreateUserCommandOutput} for command's `response` shape.
- * @see {@link ElastiCacheClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElastiCacheClientResolvedConfig | config} for ElastiCacheClient's `config` shape.
  *
+ * @throws {@link DuplicateUserNameFault} (client fault)
+ *  <p>A user with this username already exists.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Two or more incompatible parameters were specified.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value for a parameter is invalid.</p>
+ *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The specified service linked role (SLR) was not found.</p>
+ *
+ * @throws {@link TagQuotaPerResourceExceeded} (client fault)
+ *  <p>The request cannot be processed because it would cause the resource to have more than
+ *             the allowed number of tags. The maximum number of tags permitted on a resource is
+ *             50.</p>
+ *
+ * @throws {@link UserAlreadyExistsFault} (client fault)
+ *  <p>A user with this ID already exists.</p>
+ *
+ * @throws {@link UserQuotaExceededFault} (client fault)
+ *  <p>The quota of users has been exceeded.</p>
+ *
+ * @throws {@link ElastiCacheServiceException}
+ * <p>Base exception class for all service exceptions from ElastiCache service.</p>
+ *
+ *
+ * @public
  */
-export class CreateUserCommand extends $Command<
-  CreateUserCommandInput,
-  CreateUserCommandOutput,
-  ElastiCacheClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElastiCacheClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateUserCommandInput, CreateUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElastiCacheClient";
-    const commandName = "CreateUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateUserMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: User.filterSensitiveLog,
+export class CreateUserCommand extends command<CreateUserCommandInput, CreateUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateUser",
+  CreateUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateUserMessage;
+      output: User;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateUserCommandOutput> {
-    return deserializeAws_queryCreateUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateUserCommandInput;
+      output: CreateUserCommandOutput;
+    };
+  };
 }

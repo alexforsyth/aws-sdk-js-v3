@@ -1,20 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeImageScanFindingsCommandInput,
+  type DescribeImageScanFindingsCommandOutput,
   DescribeImageScanFindingsCommand,
-  DescribeImageScanFindingsCommandInput,
 } from "../commands/DescribeImageScanFindingsCommand";
-import { ECRClient } from "../ECRClient";
+import type { ECRClient } from "../ECRClient";
+import type { ECRServiceException } from "../models/ECRServiceException";
 
-const checkState = async (client: ECRClient, input: DescribeImageScanFindingsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ECRClient, input: DescribeImageScanFindingsCommandInput): Promise<WaiterResult<DescribeImageScanFindingsCommandOutput | ECRServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeImageScanFindingsCommand(input));
+    let result: DescribeImageScanFindingsCommandOutput & any = await client.send(new DescribeImageScanFindingsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.imageScanStatus.status;
-      };
+      }
       if (returnComparator() === "COMPLETE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -22,7 +31,7 @@ const checkState = async (client: ECRClient, input: DescribeImageScanFindingsCom
     try {
       const returnComparator = () => {
         return result.imageScanStatus.status;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -39,7 +48,7 @@ const checkState = async (client: ECRClient, input: DescribeImageScanFindingsCom
 export const waitForImageScanComplete = async (
   params: WaiterConfiguration<ECRClient>,
   input: DescribeImageScanFindingsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeImageScanFindingsCommandOutput | ECRServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -51,8 +60,8 @@ export const waitForImageScanComplete = async (
 export const waitUntilImageScanComplete = async (
   params: WaiterConfiguration<ECRClient>,
   input: DescribeImageScanFindingsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeImageScanFindingsCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeImageScanFindingsCommandOutput>;
 };

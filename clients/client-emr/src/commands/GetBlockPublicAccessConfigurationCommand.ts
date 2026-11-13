@@ -1,106 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRClient";
-import { GetBlockPublicAccessConfigurationInput, GetBlockPublicAccessConfigurationOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetBlockPublicAccessConfigurationCommand,
-  serializeAws_json1_1GetBlockPublicAccessConfigurationCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface GetBlockPublicAccessConfigurationCommandInput extends GetBlockPublicAccessConfigurationInput {}
-export interface GetBlockPublicAccessConfigurationCommandOutput
-  extends GetBlockPublicAccessConfigurationOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetBlockPublicAccessConfigurationInput,
+  GetBlockPublicAccessConfigurationOutput,
+} from "../models/models_0";
+import { GetBlockPublicAccessConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns the Amazon EMR block public access configuration for your Amazon Web Services account in the
- *          current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
- *             Public Access for Amazon EMR</a> in the <i>Amazon EMR Management
- *             Guide</i>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBlockPublicAccessConfigurationCommand}.
+ */
+export interface GetBlockPublicAccessConfigurationCommandInput extends GetBlockPublicAccessConfigurationInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetBlockPublicAccessConfigurationCommand}.
+ */
+export interface GetBlockPublicAccessConfigurationCommandOutput extends GetBlockPublicAccessConfigurationOutput, __MetadataBearer {}
+
+/**
+ * <p>Returns the Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block
+ *             Public Access for Amazon EMR</a> in the <i>Amazon EMR
+ *             Management Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EMRClient, GetBlockPublicAccessConfigurationCommand } from "@aws-sdk/client-emr"; // ES Modules import
  * // const { EMRClient, GetBlockPublicAccessConfigurationCommand } = require("@aws-sdk/client-emr"); // CommonJS import
+ * // import type { EMRClientConfig } from "@aws-sdk/client-emr";
+ * const config = {}; // type is EMRClientConfig
  * const client = new EMRClient(config);
+ * const input = {};
  * const command = new GetBlockPublicAccessConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetBlockPublicAccessConfigurationOutput
+ * //   BlockPublicAccessConfiguration: { // BlockPublicAccessConfiguration
+ * //     BlockPublicSecurityGroupRules: true || false, // required
+ * //     PermittedPublicSecurityGroupRuleRanges: [ // PortRanges
+ * //       { // PortRange
+ * //         MinRange: Number("int"), // required
+ * //         MaxRange: Number("int"),
+ * //       },
+ * //     ],
+ * //     Classification: "STRING_VALUE",
+ * //     Configurations: [ // ConfigurationList
+ * //       { // Configuration
+ * //         Classification: "STRING_VALUE",
+ * //         Configurations: [
+ * //           {
+ * //             Classification: "STRING_VALUE",
+ * //             Configurations: "<ConfigurationList>",
+ * //             Properties: { // StringMap
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //         Properties: {
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //     Properties: "<StringMap>",
+ * //   },
+ * //   BlockPublicAccessConfigurationMetadata: { // BlockPublicAccessConfigurationMetadata
+ * //     CreationDateTime: new Date("TIMESTAMP"), // required
+ * //     CreatedByArn: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetBlockPublicAccessConfigurationCommandInput - {@link GetBlockPublicAccessConfigurationCommandInput}
+ * @returns {@link GetBlockPublicAccessConfigurationCommandOutput}
  * @see {@link GetBlockPublicAccessConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetBlockPublicAccessConfigurationCommandOutput} for command's `response` shape.
- * @see {@link EMRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRClientResolvedConfig | config} for EMRClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Amazon EMR
+ *          service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception occurs when there is something wrong with user input.</p>
+ *
+ * @throws {@link EMRServiceException}
+ * <p>Base exception class for all service exceptions from EMR service.</p>
+ *
+ *
+ * @public
  */
-export class GetBlockPublicAccessConfigurationCommand extends $Command<
-  GetBlockPublicAccessConfigurationCommandInput,
-  GetBlockPublicAccessConfigurationCommandOutput,
-  EMRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBlockPublicAccessConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBlockPublicAccessConfigurationCommandInput, GetBlockPublicAccessConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRClient";
-    const commandName = "GetBlockPublicAccessConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBlockPublicAccessConfigurationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBlockPublicAccessConfigurationOutput.filterSensitiveLog,
+export class GetBlockPublicAccessConfigurationCommand extends command<GetBlockPublicAccessConfigurationCommandInput, GetBlockPublicAccessConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBlockPublicAccessConfiguration",
+  GetBlockPublicAccessConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetBlockPublicAccessConfigurationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetBlockPublicAccessConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetBlockPublicAccessConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetBlockPublicAccessConfigurationCommandOutput> {
-    return deserializeAws_json1_1GetBlockPublicAccessConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBlockPublicAccessConfigurationCommandInput;
+      output: GetBlockPublicAccessConfigurationCommandOutput;
+    };
+  };
 }

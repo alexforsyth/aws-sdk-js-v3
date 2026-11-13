@@ -1,55 +1,20 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import { ListGroupsCommand, ListGroupsCommandInput, ListGroupsCommandOutput } from "../commands/ListGroupsCommand";
-import { WorkMail } from "../WorkMail";
 import { WorkMailClient } from "../WorkMailClient";
-import { WorkMailPaginationConfiguration } from "./Interfaces";
+import type { WorkMailPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: WorkMailClient,
-  input: ListGroupsCommandInput,
-  ...args: any
-): Promise<ListGroupsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListGroupsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: WorkMail,
-  input: ListGroupsCommandInput,
-  ...args: any
-): Promise<ListGroupsCommandOutput> => {
-  // @ts-ignore
-  return await client.listGroups(input, ...args);
-};
-export async function* paginateListGroups(
+export const paginateListGroups: (
   config: WorkMailPaginationConfiguration,
   input: ListGroupsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListGroupsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListGroupsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof WorkMail) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof WorkMailClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected WorkMail | WorkMailClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListGroupsCommandOutput> = createPaginator<
+  WorkMailPaginationConfiguration,
+  ListGroupsCommandInput,
+  ListGroupsCommandOutput
+>(WorkMailClient, ListGroupsCommand, "NextToken", "NextToken", "MaxResults");

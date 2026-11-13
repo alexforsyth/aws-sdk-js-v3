@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListReviewableHITsRequest, ListReviewableHITsResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1ListReviewableHITsCommand,
-  serializeAws_json1_1ListReviewableHITsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListReviewableHITsRequest, ListReviewableHITsResponse } from "../models/models_0";
+import { ListReviewableHITs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListReviewableHITsCommand}.
+ */
 export interface ListReviewableHITsCommandInput extends ListReviewableHITsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListReviewableHITsCommand}.
+ */
 export interface ListReviewableHITsCommandOutput extends ListReviewableHITsResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,98 @@ export interface ListReviewableHITsCommandOutput extends ListReviewableHITsRespo
  * ```javascript
  * import { MTurkClient, ListReviewableHITsCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, ListReviewableHITsCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // ListReviewableHITsRequest
+ *   HITTypeId: "STRING_VALUE",
+ *   Status: "Reviewable" || "Reviewing",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListReviewableHITsCommand(input);
  * const response = await client.send(command);
+ * // { // ListReviewableHITsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   NumResults: Number("int"),
+ * //   HITs: [ // HITList
+ * //     { // HIT
+ * //       HITId: "STRING_VALUE",
+ * //       HITTypeId: "STRING_VALUE",
+ * //       HITGroupId: "STRING_VALUE",
+ * //       HITLayoutId: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       Title: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Question: "STRING_VALUE",
+ * //       Keywords: "STRING_VALUE",
+ * //       HITStatus: "Assignable" || "Unassignable" || "Reviewable" || "Reviewing" || "Disposed",
+ * //       MaxAssignments: Number("int"),
+ * //       Reward: "STRING_VALUE",
+ * //       AutoApprovalDelayInSeconds: Number("long"),
+ * //       Expiration: new Date("TIMESTAMP"),
+ * //       AssignmentDurationInSeconds: Number("long"),
+ * //       RequesterAnnotation: "STRING_VALUE",
+ * //       QualificationRequirements: [ // QualificationRequirementList
+ * //         { // QualificationRequirement
+ * //           QualificationTypeId: "STRING_VALUE", // required
+ * //           Comparator: "LessThan" || "LessThanOrEqualTo" || "GreaterThan" || "GreaterThanOrEqualTo" || "EqualTo" || "NotEqualTo" || "Exists" || "DoesNotExist" || "In" || "NotIn", // required
+ * //           IntegerValues: [ // IntegerList
+ * //             Number("int"),
+ * //           ],
+ * //           LocaleValues: [ // LocaleList
+ * //             { // Locale
+ * //               Country: "STRING_VALUE", // required
+ * //               Subdivision: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //           RequiredToPreview: true || false,
+ * //           ActionsGuarded: "Accept" || "PreviewAndAccept" || "DiscoverPreviewAndAccept",
+ * //         },
+ * //       ],
+ * //       HITReviewStatus: "NotReviewed" || "MarkedForReview" || "ReviewedAppropriate" || "ReviewedInappropriate",
+ * //       NumberOfAssignmentsPending: Number("int"),
+ * //       NumberOfAssignmentsAvailable: Number("int"),
+ * //       NumberOfAssignmentsCompleted: Number("int"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListReviewableHITsCommandInput - {@link ListReviewableHITsCommandInput}
+ * @returns {@link ListReviewableHITsCommandOutput}
  * @see {@link ListReviewableHITsCommandInput} for command's `input` shape.
  * @see {@link ListReviewableHITsCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class ListReviewableHITsCommand extends $Command<
-  ListReviewableHITsCommandInput,
-  ListReviewableHITsCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListReviewableHITsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListReviewableHITsCommandInput, ListReviewableHITsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "ListReviewableHITsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListReviewableHITsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListReviewableHITsResponse.filterSensitiveLog,
+export class ListReviewableHITsCommand extends command<ListReviewableHITsCommandInput, ListReviewableHITsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListReviewableHITs",
+  ListReviewableHITs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListReviewableHITsRequest;
+      output: ListReviewableHITsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListReviewableHITsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListReviewableHITsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListReviewableHITsCommandOutput> {
-    return deserializeAws_json1_1ListReviewableHITsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListReviewableHITsCommandInput;
+      output: ListReviewableHITsCommandOutput;
+    };
+  };
 }

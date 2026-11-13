@@ -1,4 +1,20 @@
-export * from "./Forecastquery";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Provides APIs for creating and managing Amazon Forecast resources.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./ForecastqueryClient";
+export * from "./Forecastquery";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { ForecastqueryExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./schemas/schemas_0";
+
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { ForecastqueryServiceException } from "./models/ForecastqueryServiceException";

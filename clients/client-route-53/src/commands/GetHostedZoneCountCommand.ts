@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetHostedZoneCountRequest, GetHostedZoneCountResponse } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetHostedZoneCountCommand,
-  serializeAws_restXmlGetHostedZoneCountCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw2, command } from "../commandBuilder";
+import type { GetHostedZoneCountRequest, GetHostedZoneCountResponse } from "../models/models_0";
+import { GetHostedZoneCount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetHostedZoneCountCommand}.
+ */
 export interface GetHostedZoneCountCommandInput extends GetHostedZoneCountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetHostedZoneCountCommand}.
+ */
 export interface GetHostedZoneCountCommandOutput extends GetHostedZoneCountResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,48 @@ export interface GetHostedZoneCountCommandOutput extends GetHostedZoneCountRespo
  * ```javascript
  * import { Route53Client, GetHostedZoneCountCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, GetHostedZoneCountCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = {};
  * const command = new GetHostedZoneCountCommand(input);
  * const response = await client.send(command);
+ * // { // GetHostedZoneCountResponse
+ * //   HostedZoneCount: Number("long"), // required
+ * // };
+ *
  * ```
  *
+ * @param GetHostedZoneCountCommandInput - {@link GetHostedZoneCountCommandInput}
+ * @returns {@link GetHostedZoneCountCommandOutput}
  * @see {@link GetHostedZoneCountCommandInput} for command's `input` shape.
  * @see {@link GetHostedZoneCountCommandOutput} for command's `response` shape.
- * @see {@link Route53ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class GetHostedZoneCountCommand extends $Command<
-  GetHostedZoneCountCommandInput,
-  GetHostedZoneCountCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetHostedZoneCountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetHostedZoneCountCommandInput, GetHostedZoneCountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "GetHostedZoneCountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetHostedZoneCountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetHostedZoneCountResponse.filterSensitiveLog,
+export class GetHostedZoneCountCommand extends command<GetHostedZoneCountCommandInput, GetHostedZoneCountCommandOutput>(
+  _ep0,
+  _mw2,
+  "GetHostedZoneCount",
+  GetHostedZoneCount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetHostedZoneCountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetHostedZoneCountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetHostedZoneCountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetHostedZoneCountCommandOutput> {
-    return deserializeAws_restXmlGetHostedZoneCountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetHostedZoneCountCommandInput;
+      output: GetHostedZoneCountCommandOutput;
+    };
+  };
 }

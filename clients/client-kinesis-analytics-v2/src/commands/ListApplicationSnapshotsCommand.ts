@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  KinesisAnalyticsV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../KinesisAnalyticsV2Client";
-import { ListApplicationSnapshotsRequest, ListApplicationSnapshotsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListApplicationSnapshotsCommand,
-  serializeAws_json1_1ListApplicationSnapshotsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationSnapshotsRequest, ListApplicationSnapshotsResponse } from "../models/models_0";
+import { ListApplicationSnapshots$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationSnapshotsCommand}.
+ */
 export interface ListApplicationSnapshotsCommandInput extends ListApplicationSnapshotsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationSnapshotsCommand}.
+ */
 export interface ListApplicationSnapshotsCommandOutput extends ListApplicationSnapshotsResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,69 @@ export interface ListApplicationSnapshotsCommandOutput extends ListApplicationSn
  * ```javascript
  * import { KinesisAnalyticsV2Client, ListApplicationSnapshotsCommand } from "@aws-sdk/client-kinesis-analytics-v2"; // ES Modules import
  * // const { KinesisAnalyticsV2Client, ListApplicationSnapshotsCommand } = require("@aws-sdk/client-kinesis-analytics-v2"); // CommonJS import
+ * // import type { KinesisAnalyticsV2ClientConfig } from "@aws-sdk/client-kinesis-analytics-v2";
+ * const config = {}; // type is KinesisAnalyticsV2ClientConfig
  * const client = new KinesisAnalyticsV2Client(config);
+ * const input = { // ListApplicationSnapshotsRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListApplicationSnapshotsCommand(input);
  * const response = await client.send(command);
+ * // { // ListApplicationSnapshotsResponse
+ * //   SnapshotSummaries: [ // SnapshotSummaries
+ * //     { // SnapshotDetails
+ * //       SnapshotName: "STRING_VALUE", // required
+ * //       SnapshotStatus: "CREATING" || "READY" || "DELETING" || "FAILED", // required
+ * //       ApplicationVersionId: Number("long"), // required
+ * //       SnapshotCreationTimestamp: new Date("TIMESTAMP"),
+ * //       RuntimeEnvironment: "SQL-1_0" || "FLINK-1_6" || "FLINK-1_8" || "ZEPPELIN-FLINK-1_0" || "FLINK-1_11" || "FLINK-1_13" || "ZEPPELIN-FLINK-2_0" || "FLINK-1_15" || "ZEPPELIN-FLINK-3_0" || "FLINK-1_18" || "FLINK-1_19" || "FLINK-1_20" || "FLINK-2_2" || "FLINK-2_3",
+ * //       ApplicationEncryptionConfigurationDescription: { // ApplicationEncryptionConfigurationDescription
+ * //         KeyId: "STRING_VALUE",
+ * //         KeyType: "AWS_OWNED_KEY" || "CUSTOMER_MANAGED_KEY", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListApplicationSnapshotsCommandInput - {@link ListApplicationSnapshotsCommandInput}
+ * @returns {@link ListApplicationSnapshotsCommandOutput}
  * @see {@link ListApplicationSnapshotsCommandInput} for command's `input` shape.
  * @see {@link ListApplicationSnapshotsCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsV2ClientResolvedConfig | config} for KinesisAnalyticsV2Client's `config` shape.
  *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The specified input parameter value is not valid.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this
+ *       operation. </p>
+ *
+ * @throws {@link KinesisAnalyticsV2ServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalyticsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListApplicationSnapshotsCommand extends $Command<
-  ListApplicationSnapshotsCommandInput,
-  ListApplicationSnapshotsCommandOutput,
-  KinesisAnalyticsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListApplicationSnapshotsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListApplicationSnapshotsCommandInput, ListApplicationSnapshotsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsV2Client";
-    const commandName = "ListApplicationSnapshotsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListApplicationSnapshotsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListApplicationSnapshotsResponse.filterSensitiveLog,
+export class ListApplicationSnapshotsCommand extends command<ListApplicationSnapshotsCommandInput, ListApplicationSnapshotsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplicationSnapshots",
+  ListApplicationSnapshots$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationSnapshotsRequest;
+      output: ListApplicationSnapshotsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListApplicationSnapshotsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListApplicationSnapshotsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListApplicationSnapshotsCommandOutput> {
-    return deserializeAws_json1_1ListApplicationSnapshotsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListApplicationSnapshotsCommandInput;
+      output: ListApplicationSnapshotsCommandOutput;
+    };
+  };
 }

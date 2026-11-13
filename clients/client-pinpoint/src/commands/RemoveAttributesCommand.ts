@@ -1,95 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RemoveAttributesRequest, RemoveAttributesResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1RemoveAttributesCommand,
-  serializeAws_restJson1RemoveAttributesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveAttributesRequest, RemoveAttributesResponse } from "../models/models_1";
+import { RemoveAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveAttributesCommand}.
+ */
 export interface RemoveAttributesCommandInput extends RemoveAttributesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveAttributesCommand}.
+ */
 export interface RemoveAttributesCommandOutput extends RemoveAttributesResponse, __MetadataBearer {}
 
 /**
- * <p>Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.</p>
+ * <p>Removes one or more custom attributes, of the same attribute type, from the application. Existing endpoints still have the attributes but Amazon Pinpoint will stop capturing new or changed values for these attributes.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PinpointClient, RemoveAttributesCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, RemoveAttributesCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // RemoveAttributesRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   AttributeType: "STRING_VALUE", // required
+ *   UpdateAttributesRequest: { // UpdateAttributesRequest
+ *     Blacklist: [ // ListOf__string
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new RemoveAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveAttributesResponse
+ * //   AttributesResource: { // AttributesResource
+ * //     ApplicationId: "STRING_VALUE", // required
+ * //     AttributeType: "STRING_VALUE", // required
+ * //     Attributes: [ // ListOf__string
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RemoveAttributesCommandInput - {@link RemoveAttributesCommandInput}
+ * @returns {@link RemoveAttributesCommandOutput}
  * @see {@link RemoveAttributesCommandInput} for command's `input` shape.
  * @see {@link RemoveAttributesCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveAttributesCommand extends $Command<
-  RemoveAttributesCommandInput,
-  RemoveAttributesCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveAttributesCommandInput, RemoveAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "RemoveAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveAttributesResponse.filterSensitiveLog,
+export class RemoveAttributesCommand extends command<RemoveAttributesCommandInput, RemoveAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveAttributes",
+  RemoveAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveAttributesRequest;
+      output: RemoveAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RemoveAttributesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveAttributesCommandOutput> {
-    return deserializeAws_restJson1RemoveAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveAttributesCommandInput;
+      output: RemoveAttributesCommandOutput;
+    };
+  };
 }

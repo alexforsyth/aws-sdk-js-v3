@@ -1,28 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { BlobPayloadInputTypes, MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApiGatewayManagementApiClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApiGatewayManagementApiClient";
-import { PostToConnectionRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1PostToConnectionCommand,
-  serializeAws_restJson1PostToConnectionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PostToConnectionRequest } from "../models/models_0";
+import { PostToConnection$ } from "../schemas/schemas_0";
 
-export interface PostToConnectionCommandInput extends PostToConnectionRequest {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ */
+export type PostToConnectionCommandInputType = Omit<PostToConnectionRequest, "Data"> & {
+  Data: BlobPayloadInputTypes;
+};
+
+/**
+ * @public
+ *
+ * The input for {@link PostToConnectionCommand}.
+ */
+export interface PostToConnectionCommandInput extends PostToConnectionCommandInputType {}
+/**
+ * @public
+ *
+ * The output of {@link PostToConnectionCommand}.
+ */
 export interface PostToConnectionCommandOutput extends __MetadataBearer {}
 
 /**
@@ -32,68 +36,58 @@ export interface PostToConnectionCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { ApiGatewayManagementApiClient, PostToConnectionCommand } from "@aws-sdk/client-apigatewaymanagementapi"; // ES Modules import
  * // const { ApiGatewayManagementApiClient, PostToConnectionCommand } = require("@aws-sdk/client-apigatewaymanagementapi"); // CommonJS import
+ * // import type { ApiGatewayManagementApiClientConfig } from "@aws-sdk/client-apigatewaymanagementapi";
+ * const config = {}; // type is ApiGatewayManagementApiClientConfig
  * const client = new ApiGatewayManagementApiClient(config);
+ * const input = { // PostToConnectionRequest
+ *   Data: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ *   ConnectionId: "STRING_VALUE", // required
+ * };
  * const command = new PostToConnectionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PostToConnectionCommandInput - {@link PostToConnectionCommandInput}
+ * @returns {@link PostToConnectionCommandOutput}
  * @see {@link PostToConnectionCommandInput} for command's `input` shape.
  * @see {@link PostToConnectionCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayManagementApiClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayManagementApiClientResolvedConfig | config} for ApiGatewayManagementApiClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The caller is not authorized to invoke this operation.</p>
+ *
+ * @throws {@link GoneException} (client fault)
+ *  <p>The connection with the provided id no longer exists.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The client is sending more than the allowed number of requests per unit of time or the WebSocket client side buffer is full.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>The data has exceeded the maximum size allowed.</p>
+ *
+ * @throws {@link ApiGatewayManagementApiServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayManagementApi service.</p>
+ *
+ *
+ * @public
  */
-export class PostToConnectionCommand extends $Command<
-  PostToConnectionCommandInput,
-  PostToConnectionCommandOutput,
-  ApiGatewayManagementApiClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PostToConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayManagementApiClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PostToConnectionCommandInput, PostToConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayManagementApiClient";
-    const commandName = "PostToConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PostToConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PostToConnectionCommand extends command<PostToConnectionCommandInput, PostToConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "PostToConnection",
+  PostToConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PostToConnectionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PostToConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PostToConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PostToConnectionCommandOutput> {
-    return deserializeAws_restJson1PostToConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PostToConnectionCommandInput;
+      output: PostToConnectionCommandOutput;
+    };
+  };
 }

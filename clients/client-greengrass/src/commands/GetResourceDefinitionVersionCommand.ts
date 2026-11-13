@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { GetResourceDefinitionVersionRequest, GetResourceDefinitionVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetResourceDefinitionVersionCommand,
-  serializeAws_restJson1GetResourceDefinitionVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourceDefinitionVersionRequest, GetResourceDefinitionVersionResponse } from "../models/models_0";
+import { GetResourceDefinitionVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourceDefinitionVersionCommand}.
+ */
 export interface GetResourceDefinitionVersionCommandInput extends GetResourceDefinitionVersionRequest {}
-export interface GetResourceDefinitionVersionCommandOutput
-  extends GetResourceDefinitionVersionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourceDefinitionVersionCommand}.
+ */
+export interface GetResourceDefinitionVersionCommandOutput extends GetResourceDefinitionVersionResponse, __MetadataBearer {}
 
 /**
  * Retrieves information about a resource definition version, including which resources are included in the version.
@@ -30,71 +29,101 @@ export interface GetResourceDefinitionVersionCommandOutput
  * ```javascript
  * import { GreengrassClient, GetResourceDefinitionVersionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, GetResourceDefinitionVersionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // GetResourceDefinitionVersionRequest
+ *   ResourceDefinitionId: "STRING_VALUE", // required
+ *   ResourceDefinitionVersionId: "STRING_VALUE", // required
+ * };
  * const command = new GetResourceDefinitionVersionCommand(input);
  * const response = await client.send(command);
+ * // { // GetResourceDefinitionVersionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Definition: { // ResourceDefinitionVersion
+ * //     Resources: [ // __listOfResource
+ * //       { // Resource
+ * //         Id: "STRING_VALUE", // required
+ * //         Name: "STRING_VALUE", // required
+ * //         ResourceDataContainer: { // ResourceDataContainer
+ * //           LocalDeviceResourceData: { // LocalDeviceResourceData
+ * //             GroupOwnerSetting: { // GroupOwnerSetting
+ * //               AutoAddGroupOwner: true || false,
+ * //               GroupOwner: "STRING_VALUE",
+ * //             },
+ * //             SourcePath: "STRING_VALUE",
+ * //           },
+ * //           LocalVolumeResourceData: { // LocalVolumeResourceData
+ * //             DestinationPath: "STRING_VALUE",
+ * //             GroupOwnerSetting: {
+ * //               AutoAddGroupOwner: true || false,
+ * //               GroupOwner: "STRING_VALUE",
+ * //             },
+ * //             SourcePath: "STRING_VALUE",
+ * //           },
+ * //           S3MachineLearningModelResourceData: { // S3MachineLearningModelResourceData
+ * //             DestinationPath: "STRING_VALUE",
+ * //             OwnerSetting: { // ResourceDownloadOwnerSetting
+ * //               GroupOwner: "STRING_VALUE", // required
+ * //               GroupPermission: "ro" || "rw", // required
+ * //             },
+ * //             S3Uri: "STRING_VALUE",
+ * //           },
+ * //           SageMakerMachineLearningModelResourceData: { // SageMakerMachineLearningModelResourceData
+ * //             DestinationPath: "STRING_VALUE",
+ * //             OwnerSetting: {
+ * //               GroupOwner: "STRING_VALUE", // required
+ * //               GroupPermission: "ro" || "rw", // required
+ * //             },
+ * //             SageMakerJobArn: "STRING_VALUE",
+ * //           },
+ * //           SecretsManagerSecretResourceData: { // SecretsManagerSecretResourceData
+ * //             ARN: "STRING_VALUE",
+ * //             AdditionalStagingLabelsToDownload: [ // __listOf__string
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetResourceDefinitionVersionCommandInput - {@link GetResourceDefinitionVersionCommandInput}
+ * @returns {@link GetResourceDefinitionVersionCommandOutput}
  * @see {@link GetResourceDefinitionVersionCommandInput} for command's `input` shape.
  * @see {@link GetResourceDefinitionVersionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class GetResourceDefinitionVersionCommand extends $Command<
-  GetResourceDefinitionVersionCommandInput,
-  GetResourceDefinitionVersionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetResourceDefinitionVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetResourceDefinitionVersionCommandInput, GetResourceDefinitionVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "GetResourceDefinitionVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetResourceDefinitionVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetResourceDefinitionVersionResponse.filterSensitiveLog,
+export class GetResourceDefinitionVersionCommand extends command<GetResourceDefinitionVersionCommandInput, GetResourceDefinitionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourceDefinitionVersion",
+  GetResourceDefinitionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceDefinitionVersionRequest;
+      output: GetResourceDefinitionVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetResourceDefinitionVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetResourceDefinitionVersionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetResourceDefinitionVersionCommandOutput> {
-    return deserializeAws_restJson1GetResourceDefinitionVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetResourceDefinitionVersionCommandInput;
+      output: GetResourceDefinitionVersionCommandOutput;
+    };
+  };
 }

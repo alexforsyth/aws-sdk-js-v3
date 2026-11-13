@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { IoTThingsGraphClientConfig } from "./IoTThingsGraphClient";
+// smithy-typescript generated code
+import type { IoTThingsGraphClientConfig } from "./IoTThingsGraphClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: IoTThingsGraphClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

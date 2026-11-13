@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { ListGeofencesRequest, ListGeofencesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListGeofencesCommand,
-  serializeAws_restJson1ListGeofencesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGeofencesRequest, ListGeofencesResponse } from "../models/models_0";
+import { ListGeofences$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGeofencesCommand}.
+ */
 export interface ListGeofencesCommandInput extends ListGeofencesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListGeofencesCommand}.
+ */
 export interface ListGeofencesCommandOutput extends ListGeofencesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,98 @@ export interface ListGeofencesCommandOutput extends ListGeofencesResponse, __Met
  * ```javascript
  * import { LocationClient, ListGeofencesCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, ListGeofencesCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // ListGeofencesRequest
+ *   CollectionName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListGeofencesCommand(input);
  * const response = await client.send(command);
+ * // { // ListGeofencesResponse
+ * //   Entries: [ // ListGeofenceResponseEntryList // required
+ * //     { // ListGeofenceResponseEntry
+ * //       GeofenceId: "STRING_VALUE", // required
+ * //       Geometry: { // GeofenceGeometry
+ * //         Polygon: [ // LinearRings
+ * //           [ // LinearRing
+ * //             [ // Position
+ * //               Number("double"),
+ * //             ],
+ * //           ],
+ * //         ],
+ * //         Circle: { // Circle
+ * //           Center: [ // required
+ * //             Number("double"),
+ * //           ],
+ * //           Radius: Number("double"), // required
+ * //         },
+ * //         Geobuf: new Uint8Array(),
+ * //         MultiPolygon: [ // MultiLinearRings
+ * //           [
+ * //             [
+ * //               "<Position>",
+ * //             ],
+ * //           ],
+ * //         ],
+ * //       },
+ * //       Status: "STRING_VALUE", // required
+ * //       CreateTime: new Date("TIMESTAMP"), // required
+ * //       UpdateTime: new Date("TIMESTAMP"), // required
+ * //       GeofenceProperties: { // PropertyMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListGeofencesCommandInput - {@link ListGeofencesCommandInput}
+ * @returns {@link ListGeofencesCommandOutput}
  * @see {@link ListGeofencesCommandInput} for command's `input` shape.
  * @see {@link ListGeofencesCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource that you've entered was not found in your AWS account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class ListGeofencesCommand extends $Command<
-  ListGeofencesCommandInput,
-  ListGeofencesCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGeofencesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGeofencesCommandInput, ListGeofencesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "ListGeofencesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGeofencesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGeofencesResponse.filterSensitiveLog,
+export class ListGeofencesCommand extends command<ListGeofencesCommandInput, ListGeofencesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGeofences",
+  ListGeofences$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGeofencesRequest;
+      output: ListGeofencesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGeofencesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListGeofencesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListGeofencesCommandOutput> {
-    return deserializeAws_restJson1ListGeofencesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGeofencesCommandInput;
+      output: ListGeofencesCommandOutput;
+    };
+  };
 }

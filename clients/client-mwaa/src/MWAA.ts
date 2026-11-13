@@ -1,406 +1,321 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateCliTokenCommandInput,
+  type CreateCliTokenCommandOutput,
   CreateCliTokenCommand,
-  CreateCliTokenCommandInput,
-  CreateCliTokenCommandOutput,
 } from "./commands/CreateCliTokenCommand";
 import {
+  type CreateEnvironmentCommandInput,
+  type CreateEnvironmentCommandOutput,
   CreateEnvironmentCommand,
-  CreateEnvironmentCommandInput,
-  CreateEnvironmentCommandOutput,
 } from "./commands/CreateEnvironmentCommand";
 import {
+  type CreateWebLoginTokenCommandInput,
+  type CreateWebLoginTokenCommandOutput,
   CreateWebLoginTokenCommand,
-  CreateWebLoginTokenCommandInput,
-  CreateWebLoginTokenCommandOutput,
 } from "./commands/CreateWebLoginTokenCommand";
 import {
+  type DeleteEnvironmentCommandInput,
+  type DeleteEnvironmentCommandOutput,
   DeleteEnvironmentCommand,
-  DeleteEnvironmentCommandInput,
-  DeleteEnvironmentCommandOutput,
 } from "./commands/DeleteEnvironmentCommand";
 import {
+  type GetEnvironmentCommandInput,
+  type GetEnvironmentCommandOutput,
   GetEnvironmentCommand,
-  GetEnvironmentCommandInput,
-  GetEnvironmentCommandOutput,
 } from "./commands/GetEnvironmentCommand";
 import {
+  type InvokeRestApiCommandInput,
+  type InvokeRestApiCommandOutput,
+  InvokeRestApiCommand,
+} from "./commands/InvokeRestApiCommand";
+import {
+  type ListEnvironmentsCommandInput,
+  type ListEnvironmentsCommandOutput,
   ListEnvironmentsCommand,
-  ListEnvironmentsCommandInput,
-  ListEnvironmentsCommandOutput,
 } from "./commands/ListEnvironmentsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type PublishMetricsCommandInput,
+  type PublishMetricsCommandOutput,
   PublishMetricsCommand,
-  PublishMetricsCommandInput,
-  PublishMetricsCommandOutput,
 } from "./commands/PublishMetricsCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateEnvironmentCommandInput,
+  type UpdateEnvironmentCommandOutput,
   UpdateEnvironmentCommand,
-  UpdateEnvironmentCommandInput,
-  UpdateEnvironmentCommandOutput,
 } from "./commands/UpdateEnvironmentCommand";
 import { MWAAClient } from "./MWAAClient";
+import { paginateListEnvironments } from "./pagination/ListEnvironmentsPaginator";
+
+const commands = {
+  CreateCliTokenCommand,
+  CreateEnvironmentCommand,
+  CreateWebLoginTokenCommand,
+  DeleteEnvironmentCommand,
+  GetEnvironmentCommand,
+  InvokeRestApiCommand,
+  ListEnvironmentsCommand,
+  ListTagsForResourceCommand,
+  PublishMetricsCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateEnvironmentCommand,
+};
+const paginators = {
+  paginateListEnvironments,
+};
 
 /**
- * <fullname>Amazon Managed Workflows for Apache Airflow</fullname>
- *         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html">What Is Amazon MWAA?</a>.</p>
+ * @public
  */
-export class MWAA extends MWAAClient {
+export interface MWAARequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MWAA {
   /**
-   * <p>Create a CLI token to use Airflow CLI.</p>
+   * @see {@link CreateCliTokenCommand}
    */
-  public createCliToken(
+  createCliToken(
     args: CreateCliTokenCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<CreateCliTokenCommandOutput>;
-  public createCliToken(
+  createCliToken(
     args: CreateCliTokenCommandInput,
     cb: (err: any, data?: CreateCliTokenCommandOutput) => void
   ): void;
-  public createCliToken(
+  createCliToken(
     args: CreateCliTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: CreateCliTokenCommandOutput) => void
   ): void;
-  public createCliToken(
-    args: CreateCliTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCliTokenCommandOutput) => void),
-    cb?: (err: any, data?: CreateCliTokenCommandOutput) => void
-  ): Promise<CreateCliTokenCommandOutput> | void {
-    const command = new CreateCliTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>
+   * @see {@link CreateEnvironmentCommand}
    */
-  public createEnvironment(
+  createEnvironment(
     args: CreateEnvironmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<CreateEnvironmentCommandOutput>;
-  public createEnvironment(
+  createEnvironment(
     args: CreateEnvironmentCommandInput,
     cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
   ): void;
-  public createEnvironment(
+  createEnvironment(
     args: CreateEnvironmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
   ): void;
-  public createEnvironment(
-    args: CreateEnvironmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEnvironmentCommandOutput) => void),
-    cb?: (err: any, data?: CreateEnvironmentCommandOutput) => void
-  ): Promise<CreateEnvironmentCommandOutput> | void {
-    const command = new CreateEnvironmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Create a JWT token to be used to login to Airflow Web UI with claims based Authentication.</p>
+   * @see {@link CreateWebLoginTokenCommand}
    */
-  public createWebLoginToken(
+  createWebLoginToken(
     args: CreateWebLoginTokenCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<CreateWebLoginTokenCommandOutput>;
-  public createWebLoginToken(
+  createWebLoginToken(
     args: CreateWebLoginTokenCommandInput,
     cb: (err: any, data?: CreateWebLoginTokenCommandOutput) => void
   ): void;
-  public createWebLoginToken(
+  createWebLoginToken(
     args: CreateWebLoginTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: CreateWebLoginTokenCommandOutput) => void
   ): void;
-  public createWebLoginToken(
-    args: CreateWebLoginTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWebLoginTokenCommandOutput) => void),
-    cb?: (err: any, data?: CreateWebLoginTokenCommandOutput) => void
-  ): Promise<CreateWebLoginTokenCommandOutput> | void {
-    const command = new CreateWebLoginTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>
+   * @see {@link DeleteEnvironmentCommand}
    */
-  public deleteEnvironment(
+  deleteEnvironment(
     args: DeleteEnvironmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<DeleteEnvironmentCommandOutput>;
-  public deleteEnvironment(
+  deleteEnvironment(
     args: DeleteEnvironmentCommandInput,
     cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
   ): void;
-  public deleteEnvironment(
+  deleteEnvironment(
     args: DeleteEnvironmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
   ): void;
-  public deleteEnvironment(
-    args: DeleteEnvironmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEnvironmentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEnvironmentCommandOutput) => void
-  ): Promise<DeleteEnvironmentCommandOutput> | void {
-    const command = new DeleteEnvironmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the details of an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>
+   * @see {@link GetEnvironmentCommand}
    */
-  public getEnvironment(
+  getEnvironment(
     args: GetEnvironmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<GetEnvironmentCommandOutput>;
-  public getEnvironment(
+  getEnvironment(
     args: GetEnvironmentCommandInput,
     cb: (err: any, data?: GetEnvironmentCommandOutput) => void
   ): void;
-  public getEnvironment(
+  getEnvironment(
     args: GetEnvironmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: GetEnvironmentCommandOutput) => void
   ): void;
-  public getEnvironment(
-    args: GetEnvironmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEnvironmentCommandOutput) => void),
-    cb?: (err: any, data?: GetEnvironmentCommandOutput) => void
-  ): Promise<GetEnvironmentCommandOutput> | void {
-    const command = new GetEnvironmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.</p>
+   * @see {@link InvokeRestApiCommand}
    */
-  public listEnvironments(
+  invokeRestApi(
+    args: InvokeRestApiCommandInput,
+    options?: MWAARequestOptions
+  ): Promise<InvokeRestApiCommandOutput>;
+  invokeRestApi(
+    args: InvokeRestApiCommandInput,
+    cb: (err: any, data?: InvokeRestApiCommandOutput) => void
+  ): void;
+  invokeRestApi(
+    args: InvokeRestApiCommandInput,
+    options: MWAARequestOptions,
+    cb: (err: any, data?: InvokeRestApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   */
+  listEnvironments(): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
     args: ListEnvironmentsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<ListEnvironmentsCommandOutput>;
-  public listEnvironments(
+  listEnvironments(
     args: ListEnvironmentsCommandInput,
     cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
   ): void;
-  public listEnvironments(
+  listEnvironments(
     args: ListEnvironmentsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
   ): void;
-  public listEnvironments(
-    args: ListEnvironmentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEnvironmentsCommandOutput) => void),
-    cb?: (err: any, data?: ListEnvironmentsCommandOutput) => void
-  ): Promise<ListEnvironmentsCommandOutput> | void {
-    const command = new ListEnvironmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the key-value tag pairs associated to the Amazon Managed Workflows for Apache Airflow (MWAA) environment. For example, <code>"Environment": "Staging"</code>. </p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * An operation for publishing metrics from the customers to the Ops plane.
+   * @see {@link PublishMetricsCommand}
    */
-  public publishMetrics(
+  publishMetrics(
     args: PublishMetricsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<PublishMetricsCommandOutput>;
-  public publishMetrics(
+  publishMetrics(
     args: PublishMetricsCommandInput,
     cb: (err: any, data?: PublishMetricsCommandOutput) => void
   ): void;
-  public publishMetrics(
+  publishMetrics(
     args: PublishMetricsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: PublishMetricsCommandOutput) => void
   ): void;
-  public publishMetrics(
-    args: PublishMetricsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PublishMetricsCommandOutput) => void),
-    cb?: (err: any, data?: PublishMetricsCommandOutput) => void
-  ): Promise<PublishMetricsCommandOutput> | void {
-    const command = new PublishMetricsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates key-value tag pairs to your Amazon Managed Workflows for Apache Airflow (MWAA) environment. </p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MWAARequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MWAARequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes key-value tag pairs associated to your Amazon Managed Workflows for Apache Airflow (MWAA) environment. For example, <code>"Environment": "Staging"</code>.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>
+   * @see {@link UpdateEnvironmentCommand}
    */
-  public updateEnvironment(
+  updateEnvironment(
     args: UpdateEnvironmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MWAARequestOptions
   ): Promise<UpdateEnvironmentCommandOutput>;
-  public updateEnvironment(
+  updateEnvironment(
     args: UpdateEnvironmentCommandInput,
     cb: (err: any, data?: UpdateEnvironmentCommandOutput) => void
   ): void;
-  public updateEnvironment(
+  updateEnvironment(
     args: UpdateEnvironmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: MWAARequestOptions,
     cb: (err: any, data?: UpdateEnvironmentCommandOutput) => void
   ): void;
-  public updateEnvironment(
-    args: UpdateEnvironmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEnvironmentCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEnvironmentCommandOutput) => void
-  ): Promise<UpdateEnvironmentCommandOutput> | void {
-    const command = new UpdateEnvironmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentsCommandOutput}.
+   */
+  paginateListEnvironments(
+    args?: ListEnvironmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentsCommandOutput>;
 }
+
+/**
+ * <fullname>Amazon Managed Workflows for Apache Airflow</fullname> <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html">What is Amazon MWAA?</a>.</p> <p> <b>Endpoints</b> </p> <ul> <li> <p> <code>api.airflow.\{region\}.amazonaws.com</code> (use <code>api.airflow.\{region\}.api.aws</code> for IPv6) - This endpoint is used for environment management.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html">CreateEnvironment</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html">DeleteEnvironment</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html">GetEnvironment</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html">ListEnvironments</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html">ListTagsForResource</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html">TagResource</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html">UntagResource</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html">UpdateEnvironment</a> </p> </li> </ul> </li> <li> <p> <code>env.airflow.\{region\}.amazonaws.com</code> (use <code>env.airflow.\{region\}.api.aws</code> for IPv6) - This endpoint is used to operate the Airflow environment.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html ">CreateCliToken</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html">CreateWebLoginToken</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_InvokeRestApi.html">InvokeRestApi</a> </p> </li> </ul> </li> </ul> <p> <b>Regions</b> </p> <p>For a list of supported regions, see <a href="https://docs.aws.amazon.com/general/latest/gr/mwaa.html">Amazon MWAA endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>
+ * @public
+ */
+export class MWAA extends MWAAClient implements MWAA {}
+createAggregatedClient(commands, MWAA, { paginators });

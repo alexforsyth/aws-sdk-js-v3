@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ReportInstanceStatusRequest } from "../models/models_5";
-import {
-  deserializeAws_ec2ReportInstanceStatusCommand,
-  serializeAws_ec2ReportInstanceStatusCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ReportInstanceStatusRequest } from "../models/models_8";
+import { ReportInstanceStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ReportInstanceStatusCommand}.
+ */
 export interface ReportInstanceStatusCommandInput extends ReportInstanceStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ReportInstanceStatusCommand}.
+ */
 export interface ReportInstanceStatusCommandOutput extends __MetadataBearer {}
 
 /**
@@ -26,74 +27,61 @@ export interface ReportInstanceStatusCommandOutput extends __MetadataBearer {}
  *                 <code>running</code> state. If your experience with the instance differs from the
  *             instance status returned by <a>DescribeInstanceStatus</a>, use <a>ReportInstanceStatus</a> to report your experience with the instance. Amazon
  *             EC2 collects this information to improve the accuracy of status checks.</p>
- *         <p>Use of this action does not change the value returned by <a>DescribeInstanceStatus</a>.</p>
+ *          <p>Use of this action does not change the value returned by <a>DescribeInstanceStatus</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ReportInstanceStatusCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ReportInstanceStatusCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ReportInstanceStatusRequest
+ *   DryRun: true || false,
+ *   Instances: [ // InstanceIdStringList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   Status: "ok" || "impaired", // required
+ *   StartTime: new Date("TIMESTAMP"),
+ *   EndTime: new Date("TIMESTAMP"),
+ *   ReasonCodes: [ // ReasonCodesList // required
+ *     "instance-stuck-in-state" || "unresponsive" || "not-accepting-credentials" || "password-not-available" || "performance-network" || "performance-instance-store" || "performance-ebs-volume" || "performance-other" || "other",
+ *   ],
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new ReportInstanceStatusCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ReportInstanceStatusCommandInput - {@link ReportInstanceStatusCommandInput}
+ * @returns {@link ReportInstanceStatusCommandOutput}
  * @see {@link ReportInstanceStatusCommandInput} for command's `input` shape.
  * @see {@link ReportInstanceStatusCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ReportInstanceStatusCommand extends $Command<
-  ReportInstanceStatusCommandInput,
-  ReportInstanceStatusCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ReportInstanceStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ReportInstanceStatusCommandInput, ReportInstanceStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ReportInstanceStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ReportInstanceStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class ReportInstanceStatusCommand extends command<ReportInstanceStatusCommandInput, ReportInstanceStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "ReportInstanceStatus",
+  ReportInstanceStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ReportInstanceStatusRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ReportInstanceStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ReportInstanceStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ReportInstanceStatusCommandOutput> {
-    return deserializeAws_ec2ReportInstanceStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ReportInstanceStatusCommandInput;
+      output: ReportInstanceStatusCommandOutput;
+    };
+  };
 }

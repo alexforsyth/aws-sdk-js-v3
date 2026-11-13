@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFleetMembersRequest, ListFleetMembersResponse } from "../models/models_0";
+import { ListFleetMembers$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFleetMembersCommand}.
+ */
+export interface ListFleetMembersCommandInput extends ListFleetMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFleetMembersCommand}.
+ */
+export interface ListFleetMembersCommandOutput extends ListFleetMembersResponse, __MetadataBearer {}
+
+/**
+ * Lists fleet members.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListFleetMembersCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListFleetMembersCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListFleetMembersRequest
+ *   farmId: "STRING_VALUE", // required
+ *   fleetId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
+ * const command = new ListFleetMembersCommand(input);
+ * const response = await client.send(command);
+ * // { // ListFleetMembersResponse
+ * //   members: [ // FleetMembers // required
+ * //     { // FleetMember
+ * //       farmId: "STRING_VALUE", // required
+ * //       fleetId: "STRING_VALUE", // required
+ * //       principalId: "STRING_VALUE", // required
+ * //       principalType: "USER" || "GROUP", // required
+ * //       identityStoreId: "STRING_VALUE", // required
+ * //       membershipLevel: "VIEWER" || "CONTRIBUTOR" || "OWNER" || "MANAGER", // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListFleetMembersCommandInput - {@link ListFleetMembersCommandInput}
+ * @returns {@link ListFleetMembersCommandOutput}
+ * @see {@link ListFleetMembersCommandInput} for command's `input` shape.
+ * @see {@link ListFleetMembersCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListFleetMembersCommand extends command<ListFleetMembersCommandInput, ListFleetMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFleetMembers",
+  ListFleetMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFleetMembersRequest;
+      output: ListFleetMembersResponse;
+    };
+    sdk: {
+      input: ListFleetMembersCommandInput;
+      output: ListFleetMembersCommandOutput;
+    };
+  };
+}

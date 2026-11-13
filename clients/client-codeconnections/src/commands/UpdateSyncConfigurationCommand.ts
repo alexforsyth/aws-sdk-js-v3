@@ -1,0 +1,117 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateSyncConfigurationInput, UpdateSyncConfigurationOutput } from "../models/models_0";
+import { UpdateSyncConfiguration$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateSyncConfigurationCommand}.
+ */
+export interface UpdateSyncConfigurationCommandInput extends UpdateSyncConfigurationInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateSyncConfigurationCommand}.
+ */
+export interface UpdateSyncConfigurationCommandOutput extends UpdateSyncConfigurationOutput, __MetadataBearer {}
+
+/**
+ * <p>Updates the sync configuration for your connection and a specified external Git repository.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CodeConnectionsClient, UpdateSyncConfigurationCommand } from "@aws-sdk/client-codeconnections"; // ES Modules import
+ * // const { CodeConnectionsClient, UpdateSyncConfigurationCommand } = require("@aws-sdk/client-codeconnections"); // CommonJS import
+ * // import type { CodeConnectionsClientConfig } from "@aws-sdk/client-codeconnections";
+ * const config = {}; // type is CodeConnectionsClientConfig
+ * const client = new CodeConnectionsClient(config);
+ * const input = { // UpdateSyncConfigurationInput
+ *   Branch: "STRING_VALUE",
+ *   ConfigFile: "STRING_VALUE",
+ *   RepositoryLinkId: "STRING_VALUE",
+ *   ResourceName: "STRING_VALUE", // required
+ *   RoleArn: "STRING_VALUE",
+ *   SyncType: "CFN_STACK_SYNC", // required
+ *   PublishDeploymentStatus: "ENABLED" || "DISABLED",
+ *   TriggerResourceUpdateOn: "ANY_CHANGE" || "FILE_CHANGE",
+ *   PullRequestComment: "ENABLED" || "DISABLED",
+ * };
+ * const command = new UpdateSyncConfigurationCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateSyncConfigurationOutput
+ * //   SyncConfiguration: { // SyncConfiguration
+ * //     Branch: "STRING_VALUE", // required
+ * //     ConfigFile: "STRING_VALUE",
+ * //     OwnerId: "STRING_VALUE", // required
+ * //     ProviderType: "Bitbucket" || "GitHub" || "GitHubEnterpriseServer" || "GitLab" || "GitLabSelfManaged" || "AzureDevOps", // required
+ * //     RepositoryLinkId: "STRING_VALUE", // required
+ * //     RepositoryName: "STRING_VALUE", // required
+ * //     ResourceName: "STRING_VALUE", // required
+ * //     RoleArn: "STRING_VALUE", // required
+ * //     SyncType: "CFN_STACK_SYNC", // required
+ * //     PublishDeploymentStatus: "ENABLED" || "DISABLED",
+ * //     TriggerResourceUpdateOn: "ANY_CHANGE" || "FILE_CHANGE",
+ * //     PullRequestComment: "ENABLED" || "DISABLED",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateSyncConfigurationCommandInput - {@link UpdateSyncConfigurationCommandInput}
+ * @returns {@link UpdateSyncConfigurationCommandOutput}
+ * @see {@link UpdateSyncConfigurationCommandInput} for command's `input` shape.
+ * @see {@link UpdateSyncConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link CodeConnectionsClientResolvedConfig | config} for CodeConnectionsClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Received an internal server exception. Try again later.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input is not valid. Verify that the action is typed correctly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found. Verify the connection resource ARN and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link UpdateOutOfSyncException} (client fault)
+ *  <p>The update is out of sync. Try syncing again.</p>
+ *
+ * @throws {@link CodeConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeConnections service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateSyncConfigurationCommand extends command<UpdateSyncConfigurationCommandInput, UpdateSyncConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateSyncConfiguration",
+  UpdateSyncConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSyncConfigurationInput;
+      output: UpdateSyncConfigurationOutput;
+    };
+    sdk: {
+      input: UpdateSyncConfigurationCommandInput;
+      output: UpdateSyncConfigurationCommandOutput;
+    };
+  };
+}

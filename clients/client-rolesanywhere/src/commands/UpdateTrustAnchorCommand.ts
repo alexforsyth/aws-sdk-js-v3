@@ -1,0 +1,124 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TrustAnchorDetailResponse, UpdateTrustAnchorRequest } from "../models/models_0";
+import { UpdateTrustAnchor$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTrustAnchorCommand}.
+ */
+export interface UpdateTrustAnchorCommandInput extends UpdateTrustAnchorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTrustAnchorCommand}.
+ */
+export interface UpdateTrustAnchorCommandOutput extends TrustAnchorDetailResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateTrustAnchor</code>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RolesAnywhereClient, UpdateTrustAnchorCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
+ * // const { RolesAnywhereClient, UpdateTrustAnchorCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
+ * const client = new RolesAnywhereClient(config);
+ * const input = { // UpdateTrustAnchorRequest
+ *   trustAnchorId: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   source: { // Source
+ *     sourceType: "STRING_VALUE",
+ *     sourceData: { // SourceData Union: only one key present
+ *       x509CertificateData: "STRING_VALUE",
+ *       acmPcaArn: "STRING_VALUE",
+ *     },
+ *   },
+ *   crlDpRevocationEnabled: true || false,
+ *   aliasName: "STRING_VALUE",
+ * };
+ * const command = new UpdateTrustAnchorCommand(input);
+ * const response = await client.send(command);
+ * // { // TrustAnchorDetailResponse
+ * //   trustAnchor: { // TrustAnchorDetail
+ * //     trustAnchorId: "STRING_VALUE",
+ * //     trustAnchorArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     source: { // Source
+ * //       sourceType: "STRING_VALUE",
+ * //       sourceData: { // SourceData Union: only one key present
+ * //         x509CertificateData: "STRING_VALUE",
+ * //         acmPcaArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     enabled: true || false,
+ * //     crlDpRevocationEnabled: true || false,
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     notificationSettings: [ // NotificationSettingDetails
+ * //       { // NotificationSettingDetail
+ * //         enabled: true || false, // required
+ * //         event: "STRING_VALUE", // required
+ * //         threshold: Number("int"),
+ * //         channel: "STRING_VALUE",
+ * //         configuredBy: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateTrustAnchorCommandInput - {@link UpdateTrustAnchorCommandInput}
+ * @returns {@link UpdateTrustAnchorCommandOutput}
+ * @see {@link UpdateTrustAnchorCommandInput} for command's `input` shape.
+ * @see {@link UpdateTrustAnchorCommandOutput} for command's `response` shape.
+ * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateTrustAnchorCommand extends command<UpdateTrustAnchorCommandInput, UpdateTrustAnchorCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTrustAnchor",
+  UpdateTrustAnchor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrustAnchorRequest;
+      output: TrustAnchorDetailResponse;
+    };
+    sdk: {
+      input: UpdateTrustAnchorCommandInput;
+      output: UpdateTrustAnchorCommandOutput;
+    };
+  };
+}

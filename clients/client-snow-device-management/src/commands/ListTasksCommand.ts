@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListTasksInput, ListTasksOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListTasksCommand,
-  serializeAws_restJson1ListTasksCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceInputTypes,
-  ServiceOutputTypes,
-  SnowDeviceManagementClientResolvedConfig,
-} from "../SnowDeviceManagementClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTasksInput, ListTasksOutput } from "../models/models_0";
+import { ListTasks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTasksCommand}.
+ */
 export interface ListTasksCommandInput extends ListTasksInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListTasksCommand}.
+ */
 export interface ListTasksCommandOutput extends ListTasksOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +29,71 @@ export interface ListTasksCommandOutput extends ListTasksOutput, __MetadataBeare
  * ```javascript
  * import { SnowDeviceManagementClient, ListTasksCommand } from "@aws-sdk/client-snow-device-management"; // ES Modules import
  * // const { SnowDeviceManagementClient, ListTasksCommand } = require("@aws-sdk/client-snow-device-management"); // CommonJS import
+ * // import type { SnowDeviceManagementClientConfig } from "@aws-sdk/client-snow-device-management";
+ * const config = {}; // type is SnowDeviceManagementClientConfig
  * const client = new SnowDeviceManagementClient(config);
+ * const input = { // ListTasksInput
+ *   state: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListTasksCommand(input);
  * const response = await client.send(command);
+ * // { // ListTasksOutput
+ * //   tasks: [ // TaskSummaryList
+ * //     { // TaskSummary
+ * //       taskId: "STRING_VALUE", // required
+ * //       taskArn: "STRING_VALUE",
+ * //       state: "STRING_VALUE",
+ * //       tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTasksCommandInput - {@link ListTasksCommandInput}
+ * @returns {@link ListTasksCommandOutput}
  * @see {@link ListTasksCommandInput} for command's `input` shape.
  * @see {@link ListTasksCommandOutput} for command's `response` shape.
- * @see {@link SnowDeviceManagementClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowDeviceManagementClientResolvedConfig | config} for SnowDeviceManagementClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link SnowDeviceManagementServiceException}
+ * <p>Base exception class for all service exceptions from SnowDeviceManagement service.</p>
+ *
+ *
+ * @public
  */
-export class ListTasksCommand extends $Command<
-  ListTasksCommandInput,
-  ListTasksCommandOutput,
-  SnowDeviceManagementClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTasksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowDeviceManagementClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTasksCommandInput, ListTasksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowDeviceManagementClient";
-    const commandName = "ListTasksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTasksInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTasksOutput.filterSensitiveLog,
+export class ListTasksCommand extends command<ListTasksCommandInput, ListTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTasks",
+  ListTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTasksInput;
+      output: ListTasksOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTasksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTasksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTasksCommandOutput> {
-    return deserializeAws_restJson1ListTasksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTasksCommandInput;
+      output: ListTasksCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,119 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTasksRequest, ListTasksResponse } from "../models/models_1";
+import { ListTasks$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTasksCommand}.
+ */
+export interface ListTasksCommandInput extends ListTasksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTasksCommand}.
+ */
+export interface ListTasksCommandOutput extends ListTasksResponse, __MetadataBearer {}
+
+/**
+ * Lists tasks for a job.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListTasksCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListTasksCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListTasksRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   jobId: "STRING_VALUE", // required
+ *   stepId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
+ * const command = new ListTasksCommand(input);
+ * const response = await client.send(command);
+ * // { // ListTasksResponse
+ * //   tasks: [ // TaskSummaries // required
+ * //     { // TaskSummary
+ * //       taskId: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       createdBy: "STRING_VALUE", // required
+ * //       runStatus: "PENDING" || "READY" || "ASSIGNED" || "STARTING" || "SCHEDULED" || "INTERRUPTING" || "RUNNING" || "SUSPENDED" || "CANCELED" || "FAILED" || "SUCCEEDED" || "NOT_COMPATIBLE", // required
+ * //       targetRunStatus: "READY" || "FAILED" || "SUCCEEDED" || "CANCELED" || "SUSPENDED" || "PENDING",
+ * //       failureRetryCount: Number("int"),
+ * //       startedAt: new Date("TIMESTAMP"),
+ * //       endedAt: new Date("TIMESTAMP"),
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //       latestSessionActionId: "STRING_VALUE",
+ * //       parameters: { // TaskParameters
+ * //         "<keys>": { // TaskParameterValue Union: only one key present
+ * //           int: "STRING_VALUE",
+ * //           float: "STRING_VALUE",
+ * //           string: "STRING_VALUE",
+ * //           path: "STRING_VALUE",
+ * //           chunkInt: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListTasksCommandInput - {@link ListTasksCommandInput}
+ * @returns {@link ListTasksCommandOutput}
+ * @see {@link ListTasksCommandInput} for command's `input` shape.
+ * @see {@link ListTasksCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListTasksCommand extends command<ListTasksCommandInput, ListTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTasks",
+  ListTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTasksRequest;
+      output: ListTasksResponse;
+    };
+    sdk: {
+      input: ListTasksCommandInput;
+      output: ListTasksCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { UpdateAssetModelRequest, UpdateAssetModelResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateAssetModelCommand,
-  serializeAws_restJson1UpdateAssetModelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAssetModelRequest, UpdateAssetModelResponse } from "../models/models_1";
+import { UpdateAssetModel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAssetModelCommand}.
+ */
 export interface UpdateAssetModelCommandInput extends UpdateAssetModelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAssetModelCommand}.
+ */
 export interface UpdateAssetModelCommandOutput extends UpdateAssetModelResponse, __MetadataBearer {}
 
 /**
@@ -27,81 +28,281 @@ export interface UpdateAssetModelCommandOutput extends UpdateAssetModelResponse,
  *       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html">Updating assets and models</a> in the
  *         <i>IoT SiteWise User Guide</i>.</p>
  *          <important>
- *             <p>This operation overwrites the existing model with the provided model. To avoid deleting
- *         your asset model's properties or hierarchies, you must include their IDs and definitions in
- *         the updated asset model payload. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html">DescribeAssetModel</a>.</p>
  *             <p>If you remove a property from an asset model, IoT SiteWise deletes all previous data for that
- *         property. If you remove a hierarchy definition from an asset model, IoT SiteWise disassociates every
- *         asset associated with that hierarchy. You can't change the type or data type of an existing
- *         property.</p>
+ *         property. You can’t change the type or data type of an existing property.</p>
+ *             <p>To replace an existing asset model property with a new one with the same
+ *           <code>name</code>, do the following:</p>
+ *             <ol>
+ *                <li>
+ *                   <p>Submit an <code>UpdateAssetModel</code> request with the entire existing property
+ *             removed.</p>
+ *                </li>
+ *                <li>
+ *                   <p>Submit a second <code>UpdateAssetModel</code> request that includes the new
+ *             property. The new asset property will have the same <code>name</code> as the previous
+ *             one and IoT SiteWise will generate a new unique <code>id</code>.</p>
+ *                </li>
+ *             </ol>
  *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTSiteWiseClient, UpdateAssetModelCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, UpdateAssetModelCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // UpdateAssetModelRequest
+ *   assetModelId: "STRING_VALUE", // required
+ *   assetModelExternalId: "STRING_VALUE",
+ *   assetModelName: "STRING_VALUE", // required
+ *   assetModelDescription: "STRING_VALUE",
+ *   assetModelProperties: [ // AssetModelProperties
+ *     { // AssetModelProperty
+ *       id: "STRING_VALUE",
+ *       externalId: "STRING_VALUE",
+ *       name: "STRING_VALUE", // required
+ *       dataType: "STRING" || "INTEGER" || "DOUBLE" || "BOOLEAN" || "STRUCT" || "VIDEO" || "ANNOTATION" || "JSON", // required
+ *       dataTypeSpec: "STRING_VALUE",
+ *       unit: "STRING_VALUE",
+ *       type: { // PropertyType
+ *         attribute: { // Attribute
+ *           defaultValue: "STRING_VALUE",
+ *         },
+ *         measurement: { // Measurement
+ *           processingConfig: { // MeasurementProcessingConfig
+ *             forwardingConfig: { // ForwardingConfig
+ *               state: "DISABLED" || "ENABLED", // required
+ *             },
+ *           },
+ *         },
+ *         transform: { // Transform
+ *           expression: "STRING_VALUE", // required
+ *           variables: [ // ExpressionVariables // required
+ *             { // ExpressionVariable
+ *               name: "STRING_VALUE", // required
+ *               value: { // VariableValue
+ *                 propertyId: "STRING_VALUE",
+ *                 hierarchyId: "STRING_VALUE",
+ *                 propertyPath: [ // AssetModelPropertyPath
+ *                   { // AssetModelPropertyPathSegment
+ *                     id: "STRING_VALUE",
+ *                     name: "STRING_VALUE",
+ *                   },
+ *                 ],
+ *               },
+ *             },
+ *           ],
+ *           processingConfig: { // TransformProcessingConfig
+ *             computeLocation: "EDGE" || "CLOUD", // required
+ *             forwardingConfig: {
+ *               state: "DISABLED" || "ENABLED", // required
+ *             },
+ *           },
+ *         },
+ *         metric: { // Metric
+ *           expression: "STRING_VALUE",
+ *           variables: [
+ *             {
+ *               name: "STRING_VALUE", // required
+ *               value: {
+ *                 propertyId: "STRING_VALUE",
+ *                 hierarchyId: "STRING_VALUE",
+ *                 propertyPath: [
+ *                   {
+ *                     id: "STRING_VALUE",
+ *                     name: "STRING_VALUE",
+ *                   },
+ *                 ],
+ *               },
+ *             },
+ *           ],
+ *           window: { // MetricWindow
+ *             tumbling: { // TumblingWindow
+ *               interval: "STRING_VALUE", // required
+ *               offset: "STRING_VALUE",
+ *             },
+ *           },
+ *           processingConfig: { // MetricProcessingConfig
+ *             computeLocation: "EDGE" || "CLOUD", // required
+ *           },
+ *         },
+ *       },
+ *       path: [
+ *         {
+ *           id: "STRING_VALUE",
+ *           name: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   assetModelHierarchies: [ // AssetModelHierarchies
+ *     { // AssetModelHierarchy
+ *       id: "STRING_VALUE",
+ *       externalId: "STRING_VALUE",
+ *       name: "STRING_VALUE", // required
+ *       childAssetModelId: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   assetModelCompositeModels: [ // AssetModelCompositeModels
+ *     { // AssetModelCompositeModel
+ *       name: "STRING_VALUE", // required
+ *       description: "STRING_VALUE",
+ *       type: "STRING_VALUE", // required
+ *       properties: [
+ *         {
+ *           id: "STRING_VALUE",
+ *           externalId: "STRING_VALUE",
+ *           name: "STRING_VALUE", // required
+ *           dataType: "STRING" || "INTEGER" || "DOUBLE" || "BOOLEAN" || "STRUCT" || "VIDEO" || "ANNOTATION" || "JSON", // required
+ *           dataTypeSpec: "STRING_VALUE",
+ *           unit: "STRING_VALUE",
+ *           type: {
+ *             attribute: {
+ *               defaultValue: "STRING_VALUE",
+ *             },
+ *             measurement: {
+ *               processingConfig: {
+ *                 forwardingConfig: {
+ *                   state: "DISABLED" || "ENABLED", // required
+ *                 },
+ *               },
+ *             },
+ *             transform: {
+ *               expression: "STRING_VALUE", // required
+ *               variables: [ // required
+ *                 {
+ *                   name: "STRING_VALUE", // required
+ *                   value: {
+ *                     propertyId: "STRING_VALUE",
+ *                     hierarchyId: "STRING_VALUE",
+ *                     propertyPath: "<AssetModelPropertyPath>",
+ *                   },
+ *                 },
+ *               ],
+ *               processingConfig: {
+ *                 computeLocation: "EDGE" || "CLOUD", // required
+ *                 forwardingConfig: {
+ *                   state: "DISABLED" || "ENABLED", // required
+ *                 },
+ *               },
+ *             },
+ *             metric: {
+ *               expression: "STRING_VALUE",
+ *               variables: [
+ *                 {
+ *                   name: "STRING_VALUE", // required
+ *                   value: {
+ *                     propertyId: "STRING_VALUE",
+ *                     hierarchyId: "STRING_VALUE",
+ *                     propertyPath: "<AssetModelPropertyPath>",
+ *                   },
+ *                 },
+ *               ],
+ *               window: {
+ *                 tumbling: {
+ *                   interval: "STRING_VALUE", // required
+ *                   offset: "STRING_VALUE",
+ *                 },
+ *               },
+ *               processingConfig: {
+ *                 computeLocation: "EDGE" || "CLOUD", // required
+ *               },
+ *             },
+ *           },
+ *           path: "<AssetModelPropertyPath>",
+ *         },
+ *       ],
+ *       id: "STRING_VALUE",
+ *       externalId: "STRING_VALUE",
+ *     },
+ *   ],
+ *   clientToken: "STRING_VALUE",
+ *   ifMatch: "STRING_VALUE",
+ *   ifNoneMatch: "STRING_VALUE",
+ *   matchForVersionType: "LATEST" || "ACTIVE",
+ * };
  * const command = new UpdateAssetModelCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateAssetModelResponse
+ * //   assetModelId: "STRING_VALUE",
+ * //   assetModelStatus: { // AssetModelStatus
+ * //     state: "CREATING" || "ACTIVE" || "UPDATING" || "PROPAGATING" || "DELETING" || "FAILED", // required
+ * //     error: { // ErrorDetails
+ * //       code: "VALIDATION_ERROR" || "INTERNAL_FAILURE", // required
+ * //       message: "STRING_VALUE", // required
+ * //       details: [ // DetailedErrors
+ * //         { // DetailedError
+ * //           code: "INCOMPATIBLE_COMPUTE_LOCATION" || "INCOMPATIBLE_FORWARDING_CONFIGURATION", // required
+ * //           message: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateAssetModelCommandInput - {@link UpdateAssetModelCommandInput}
+ * @returns {@link UpdateAssetModelCommandOutput}
  * @see {@link UpdateAssetModelCommandInput} for command's `input` shape.
  * @see {@link UpdateAssetModelCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link ConflictingOperationException} (client fault)
+ *  <p>Your request has conflicting operations. This can occur if you're trying to perform more
+ *       than one operation on the same resource at the same time.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You've reached the quota for a resource. For example, this can occur if you're trying to
+ *       associate more than the allowed number of child assets or attempting to create more than the
+ *       allowed number of properties for an asset model.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link PreconditionFailedException} (client fault)
+ *  <p>The precondition in one or more of the request-header fields evaluated to
+ *         <code>FALSE</code>.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAssetModelCommand extends $Command<
-  UpdateAssetModelCommandInput,
-  UpdateAssetModelCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAssetModelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAssetModelCommandInput, UpdateAssetModelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "UpdateAssetModelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAssetModelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateAssetModelResponse.filterSensitiveLog,
+export class UpdateAssetModelCommand extends command<UpdateAssetModelCommandInput, UpdateAssetModelCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAssetModel",
+  UpdateAssetModel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssetModelRequest;
+      output: UpdateAssetModelResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAssetModelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateAssetModelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateAssetModelCommandOutput> {
-    return deserializeAws_restJson1UpdateAssetModelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAssetModelCommandInput;
+      output: UpdateAssetModelCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeletePatchBaselineRequest, DeletePatchBaselineResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeletePatchBaselineCommand,
-  serializeAws_json1_1DeletePatchBaselineCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePatchBaselineRequest, DeletePatchBaselineResult } from "../models/models_0";
+import { DeletePatchBaseline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePatchBaselineCommand}.
+ */
 export interface DeletePatchBaselineCommandInput extends DeletePatchBaselineRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePatchBaselineCommand}.
+ */
 export interface DeletePatchBaselineCommandOutput extends DeletePatchBaselineResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,54 @@ export interface DeletePatchBaselineCommandOutput extends DeletePatchBaselineRes
  * ```javascript
  * import { SSMClient, DeletePatchBaselineCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DeletePatchBaselineCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DeletePatchBaselineRequest
+ *   BaselineId: "STRING_VALUE", // required
+ * };
  * const command = new DeletePatchBaselineCommand(input);
  * const response = await client.send(command);
+ * // { // DeletePatchBaselineResult
+ * //   BaselineId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeletePatchBaselineCommandInput - {@link DeletePatchBaselineCommandInput}
+ * @returns {@link DeletePatchBaselineCommandOutput}
  * @see {@link DeletePatchBaselineCommandInput} for command's `input` shape.
  * @see {@link DeletePatchBaselineCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>Error returned if an attempt is made to delete a patch baseline that is registered for a
+ *    patch group.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePatchBaselineCommand extends $Command<
-  DeletePatchBaselineCommandInput,
-  DeletePatchBaselineCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePatchBaselineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePatchBaselineCommandInput, DeletePatchBaselineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DeletePatchBaselineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePatchBaselineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeletePatchBaselineResult.filterSensitiveLog,
+export class DeletePatchBaselineCommand extends command<DeletePatchBaselineCommandInput, DeletePatchBaselineCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePatchBaseline",
+  DeletePatchBaseline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePatchBaselineRequest;
+      output: DeletePatchBaselineResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePatchBaselineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeletePatchBaselineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePatchBaselineCommandOutput> {
-    return deserializeAws_json1_1DeletePatchBaselineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePatchBaselineCommandInput;
+      output: DeletePatchBaselineCommandOutput;
+    };
+  };
 }

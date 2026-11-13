@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ChimeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeClient";
-import { UpdateRoomMembershipRequest, UpdateRoomMembershipResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateRoomMembershipCommand,
-  serializeAws_restJson1UpdateRoomMembershipCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRoomMembershipRequest, UpdateRoomMembershipResponse } from "../models/models_0";
+import { UpdateRoomMembership$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRoomMembershipCommand}.
+ */
 export interface UpdateRoomMembershipCommandInput extends UpdateRoomMembershipRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRoomMembershipCommand}.
+ */
 export interface UpdateRoomMembershipCommandOutput extends UpdateRoomMembershipResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,83 @@ export interface UpdateRoomMembershipCommandOutput extends UpdateRoomMembershipR
  * ```javascript
  * import { ChimeClient, UpdateRoomMembershipCommand } from "@aws-sdk/client-chime"; // ES Modules import
  * // const { ChimeClient, UpdateRoomMembershipCommand } = require("@aws-sdk/client-chime"); // CommonJS import
+ * // import type { ChimeClientConfig } from "@aws-sdk/client-chime";
+ * const config = {}; // type is ChimeClientConfig
  * const client = new ChimeClient(config);
+ * const input = { // UpdateRoomMembershipRequest
+ *   AccountId: "STRING_VALUE", // required
+ *   RoomId: "STRING_VALUE", // required
+ *   MemberId: "STRING_VALUE", // required
+ *   Role: "Administrator" || "Member",
+ * };
  * const command = new UpdateRoomMembershipCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRoomMembershipResponse
+ * //   RoomMembership: { // RoomMembership
+ * //     RoomId: "STRING_VALUE",
+ * //     Member: { // Member
+ * //       MemberId: "STRING_VALUE",
+ * //       MemberType: "User" || "Bot" || "Webhook",
+ * //       Email: "STRING_VALUE",
+ * //       FullName: "STRING_VALUE",
+ * //       AccountId: "STRING_VALUE",
+ * //     },
+ * //     Role: "Administrator" || "Member",
+ * //     InvitedBy: "STRING_VALUE",
+ * //     UpdatedTimestamp: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateRoomMembershipCommandInput - {@link UpdateRoomMembershipCommandInput}
+ * @returns {@link UpdateRoomMembershipCommandOutput}
  * @see {@link UpdateRoomMembershipCommandInput} for command's `input` shape.
  * @see {@link UpdateRoomMembershipCommandOutput} for command's `response` shape.
- * @see {@link ChimeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ChimeClientResolvedConfig | config} for ChimeClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeServiceException}
+ * <p>Base exception class for all service exceptions from Chime service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRoomMembershipCommand extends $Command<
-  UpdateRoomMembershipCommandInput,
-  UpdateRoomMembershipCommandOutput,
-  ChimeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRoomMembershipCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRoomMembershipCommandInput, UpdateRoomMembershipCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeClient";
-    const commandName = "UpdateRoomMembershipCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRoomMembershipRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRoomMembershipResponse.filterSensitiveLog,
+export class UpdateRoomMembershipCommand extends command<UpdateRoomMembershipCommandInput, UpdateRoomMembershipCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRoomMembership",
+  UpdateRoomMembership$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRoomMembershipRequest;
+      output: UpdateRoomMembershipResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRoomMembershipCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRoomMembershipCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRoomMembershipCommandOutput> {
-    return deserializeAws_restJson1UpdateRoomMembershipCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRoomMembershipCommandInput;
+      output: UpdateRoomMembershipCommandOutput;
+    };
+  };
 }

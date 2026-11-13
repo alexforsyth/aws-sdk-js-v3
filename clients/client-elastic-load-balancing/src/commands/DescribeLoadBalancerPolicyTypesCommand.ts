@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { DescribeLoadBalancerPolicyTypesInput, DescribeLoadBalancerPolicyTypesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeLoadBalancerPolicyTypesCommand,
-  serializeAws_queryDescribeLoadBalancerPolicyTypesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeLoadBalancerPolicyTypesInput, DescribeLoadBalancerPolicyTypesOutput } from "../models/models_0";
+import { DescribeLoadBalancerPolicyTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLoadBalancerPolicyTypesCommand}.
+ */
 export interface DescribeLoadBalancerPolicyTypesCommandInput extends DescribeLoadBalancerPolicyTypesInput {}
-export interface DescribeLoadBalancerPolicyTypesCommandOutput
-  extends DescribeLoadBalancerPolicyTypesOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLoadBalancerPolicyTypesCommand}.
+ */
+export interface DescribeLoadBalancerPolicyTypesCommandOutput extends DescribeLoadBalancerPolicyTypesOutput, __MetadataBearer {}
 
 /**
  * <p>Describes the specified load balancer policy types or all load balancer policy types.</p>
@@ -41,74 +36,95 @@ export interface DescribeLoadBalancerPolicyTypesCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, DescribeLoadBalancerPolicyTypesCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, DescribeLoadBalancerPolicyTypesCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // DescribeLoadBalancerPolicyTypesInput
+ *   PolicyTypeNames: [ // PolicyTypeNames
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeLoadBalancerPolicyTypesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeLoadBalancerPolicyTypesOutput
+ * //   PolicyTypeDescriptions: [ // PolicyTypeDescriptions
+ * //     { // PolicyTypeDescription
+ * //       PolicyTypeName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       PolicyAttributeTypeDescriptions: [ // PolicyAttributeTypeDescriptions
+ * //         { // PolicyAttributeTypeDescription
+ * //           AttributeName: "STRING_VALUE",
+ * //           AttributeType: "STRING_VALUE",
+ * //           Description: "STRING_VALUE",
+ * //           DefaultValue: "STRING_VALUE",
+ * //           Cardinality: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeLoadBalancerPolicyTypesCommandInput - {@link DescribeLoadBalancerPolicyTypesCommandInput}
+ * @returns {@link DescribeLoadBalancerPolicyTypesCommandOutput}
  * @see {@link DescribeLoadBalancerPolicyTypesCommandInput} for command's `input` shape.
  * @see {@link DescribeLoadBalancerPolicyTypesCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link PolicyTypeNotFoundException} (client fault)
+ *  <p>One or more of the specified policy types do not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To describe a load balancer policy type defined by Elastic Load Balancing
+ * ```javascript
+ * // This example describes the specified load balancer policy type.
+ * const input = {
+ *   PolicyTypeNames: [
+ *     "ProxyProtocolPolicyType"
+ *   ]
+ * };
+ * const command = new DescribeLoadBalancerPolicyTypesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   PolicyTypeDescriptions: [
+ *     {
+ *       Description: "Policy that controls whether to include the IP address and port of the originating request for TCP messages. This policy operates on TCP listeners only.",
+ *       PolicyAttributeTypeDescriptions: [
+ *         {
+ *           AttributeName: "ProxyProtocol",
+ *           AttributeType: "Boolean",
+ *           Cardinality: "ONE"
+ *         }
+ *       ],
+ *       PolicyTypeName: "ProxyProtocolPolicyType"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeLoadBalancerPolicyTypesCommand extends $Command<
-  DescribeLoadBalancerPolicyTypesCommandInput,
-  DescribeLoadBalancerPolicyTypesCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLoadBalancerPolicyTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLoadBalancerPolicyTypesCommandInput, DescribeLoadBalancerPolicyTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "DescribeLoadBalancerPolicyTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeLoadBalancerPolicyTypesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeLoadBalancerPolicyTypesOutput.filterSensitiveLog,
+export class DescribeLoadBalancerPolicyTypesCommand extends command<DescribeLoadBalancerPolicyTypesCommandInput, DescribeLoadBalancerPolicyTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLoadBalancerPolicyTypes",
+  DescribeLoadBalancerPolicyTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLoadBalancerPolicyTypesInput;
+      output: DescribeLoadBalancerPolicyTypesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeLoadBalancerPolicyTypesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeLoadBalancerPolicyTypesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeLoadBalancerPolicyTypesCommandOutput> {
-    return deserializeAws_queryDescribeLoadBalancerPolicyTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLoadBalancerPolicyTypesCommandInput;
+      output: DescribeLoadBalancerPolicyTypesCommandOutput;
+    };
+  };
 }

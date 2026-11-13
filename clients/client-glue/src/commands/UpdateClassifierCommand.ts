@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { UpdateClassifierRequest, UpdateClassifierResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1UpdateClassifierCommand,
-  serializeAws_json1_1UpdateClassifierCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateClassifierRequest, UpdateClassifierResponse } from "../models/models_3";
+import { UpdateClassifier$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateClassifierCommand}.
+ */
 export interface UpdateClassifierCommandInput extends UpdateClassifierRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateClassifierCommand}.
+ */
 export interface UpdateClassifierCommandOutput extends UpdateClassifierResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,87 @@ export interface UpdateClassifierCommandOutput extends UpdateClassifierResponse,
  * ```javascript
  * import { GlueClient, UpdateClassifierCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, UpdateClassifierCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // UpdateClassifierRequest
+ *   GrokClassifier: { // UpdateGrokClassifierRequest
+ *     Name: "STRING_VALUE", // required
+ *     Classification: "STRING_VALUE",
+ *     GrokPattern: "STRING_VALUE",
+ *     CustomPatterns: "STRING_VALUE",
+ *   },
+ *   XMLClassifier: { // UpdateXMLClassifierRequest
+ *     Name: "STRING_VALUE", // required
+ *     Classification: "STRING_VALUE",
+ *     RowTag: "STRING_VALUE",
+ *   },
+ *   JsonClassifier: { // UpdateJsonClassifierRequest
+ *     Name: "STRING_VALUE", // required
+ *     JsonPath: "STRING_VALUE",
+ *   },
+ *   CsvClassifier: { // UpdateCsvClassifierRequest
+ *     Name: "STRING_VALUE", // required
+ *     Delimiter: "STRING_VALUE",
+ *     QuoteSymbol: "STRING_VALUE",
+ *     ContainsHeader: "UNKNOWN" || "PRESENT" || "ABSENT",
+ *     Header: [ // CsvHeader
+ *       "STRING_VALUE",
+ *     ],
+ *     DisableValueTrimming: true || false,
+ *     AllowSingleColumn: true || false,
+ *     CustomDatatypeConfigured: true || false,
+ *     CustomDatatypes: [ // CustomDatatypes
+ *       "STRING_VALUE",
+ *     ],
+ *     Serde: "OpenCSVSerDe" || "LazySimpleSerDe" || "None",
+ *   },
+ * };
  * const command = new UpdateClassifierCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateClassifierCommandInput - {@link UpdateClassifierCommandInput}
+ * @returns {@link UpdateClassifierCommandOutput}
  * @see {@link UpdateClassifierCommandInput} for command's `input` shape.
  * @see {@link UpdateClassifierCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link VersionMismatchException} (client fault)
+ *  <p>There was a version conflict.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateClassifierCommand extends $Command<
-  UpdateClassifierCommandInput,
-  UpdateClassifierCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateClassifierCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateClassifierCommandInput, UpdateClassifierCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "UpdateClassifierCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateClassifierRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateClassifierResponse.filterSensitiveLog,
+export class UpdateClassifierCommand extends command<UpdateClassifierCommandInput, UpdateClassifierCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateClassifier",
+  UpdateClassifier$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateClassifierRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateClassifierCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateClassifierCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateClassifierCommandOutput> {
-    return deserializeAws_json1_1UpdateClassifierCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateClassifierCommandInput;
+      output: UpdateClassifierCommandOutput;
+    };
+  };
 }

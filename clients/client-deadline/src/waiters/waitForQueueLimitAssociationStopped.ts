@@ -1,0 +1,59 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type GetQueueLimitAssociationCommandInput,
+  type GetQueueLimitAssociationCommandOutput,
+  GetQueueLimitAssociationCommand,
+} from "../commands/GetQueueLimitAssociationCommand";
+import type { DeadlineClient } from "../DeadlineClient";
+import type { DeadlineServiceException } from "../models/DeadlineServiceException";
+
+const checkState = async (client: DeadlineClient, input: GetQueueLimitAssociationCommandInput): Promise<WaiterResult<GetQueueLimitAssociationCommandOutput | DeadlineServiceException>> => {
+  let reason;
+  try {
+    let result: GetQueueLimitAssociationCommandOutput & any = await client.send(new GetQueueLimitAssociationCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.status;
+      }
+      if (returnComparator() === "STOPPED") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ * Wait until a QueueLimitAssociation is stopped. Use this after setting the status to STOP_LIMIT_USAGE_AND_COMPLETE_TASKS or STOP_LIMIT_USAGE_AND_CANCEL_TASKS to wait for a QueueLimitAssociation to reach STOPPED
+ *  @deprecated Use waitUntilQueueLimitAssociationStopped instead. waitForQueueLimitAssociationStopped does not throw error in non-success cases.
+ */
+export const waitForQueueLimitAssociationStopped = async (
+  params: WaiterConfiguration<DeadlineClient>,
+  input: GetQueueLimitAssociationCommandInput
+): Promise<WaiterResult<GetQueueLimitAssociationCommandOutput | DeadlineServiceException>> => {
+  const serviceDefaults = { minDelay: 10, maxDelay: 600 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ * Wait until a QueueLimitAssociation is stopped. Use this after setting the status to STOP_LIMIT_USAGE_AND_COMPLETE_TASKS or STOP_LIMIT_USAGE_AND_CANCEL_TASKS to wait for a QueueLimitAssociation to reach STOPPED
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to GetQueueLimitAssociationCommand for polling.
+ */
+export const waitUntilQueueLimitAssociationStopped = async (
+  params: WaiterConfiguration<DeadlineClient>,
+  input: GetQueueLimitAssociationCommandInput
+): Promise<WaiterResult<GetQueueLimitAssociationCommandOutput>> => {
+  const serviceDefaults = { minDelay: 10, maxDelay: 600 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<GetQueueLimitAssociationCommandOutput>;
+};

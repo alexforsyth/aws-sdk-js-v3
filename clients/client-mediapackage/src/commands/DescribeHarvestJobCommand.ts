@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaPackageClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaPackageClient";
-import { DescribeHarvestJobRequest, DescribeHarvestJobResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeHarvestJobCommand,
-  serializeAws_restJson1DescribeHarvestJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeHarvestJobRequest, DescribeHarvestJobResponse } from "../models/models_0";
+import { DescribeHarvestJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeHarvestJobCommand}.
+ */
 export interface DescribeHarvestJobCommandInput extends DescribeHarvestJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeHarvestJobCommand}.
+ */
 export interface DescribeHarvestJobCommandOutput extends DescribeHarvestJobResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface DescribeHarvestJobCommandOutput extends DescribeHarvestJobRespo
  * ```javascript
  * import { MediaPackageClient, DescribeHarvestJobCommand } from "@aws-sdk/client-mediapackage"; // ES Modules import
  * // const { MediaPackageClient, DescribeHarvestJobCommand } = require("@aws-sdk/client-mediapackage"); // CommonJS import
+ * // import type { MediaPackageClientConfig } from "@aws-sdk/client-mediapackage";
+ * const config = {}; // type is MediaPackageClientConfig
  * const client = new MediaPackageClient(config);
+ * const input = { // DescribeHarvestJobRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DescribeHarvestJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeHarvestJobResponse
+ * //   Arn: "STRING_VALUE",
+ * //   ChannelId: "STRING_VALUE",
+ * //   CreatedAt: "STRING_VALUE",
+ * //   EndTime: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   OriginEndpointId: "STRING_VALUE",
+ * //   S3Destination: { // S3Destination
+ * //     BucketName: "STRING_VALUE", // required
+ * //     ManifestKey: "STRING_VALUE", // required
+ * //     RoleArn: "STRING_VALUE", // required
+ * //   },
+ * //   StartTime: "STRING_VALUE",
+ * //   Status: "IN_PROGRESS" || "SUCCEEDED" || "FAILED",
+ * // };
+ *
  * ```
  *
+ * @param DescribeHarvestJobCommandInput - {@link DescribeHarvestJobCommandInput}
+ * @returns {@link DescribeHarvestJobCommandOutput}
  * @see {@link DescribeHarvestJobCommandInput} for command's `input` shape.
  * @see {@link DescribeHarvestJobCommandOutput} for command's `response` shape.
- * @see {@link MediaPackageClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaPackageClientResolvedConfig | config} for MediaPackageClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  The client is not authorized to access the requested resource.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  The client has exceeded their resource or throttling limits.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The parameters sent in the request are not valid.
+ *
+ * @throws {@link MediaPackageServiceException}
+ * <p>Base exception class for all service exceptions from MediaPackage service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeHarvestJobCommand extends $Command<
-  DescribeHarvestJobCommandInput,
-  DescribeHarvestJobCommandOutput,
-  MediaPackageClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeHarvestJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaPackageClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeHarvestJobCommandInput, DescribeHarvestJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaPackageClient";
-    const commandName = "DescribeHarvestJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeHarvestJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeHarvestJobResponse.filterSensitiveLog,
+export class DescribeHarvestJobCommand extends command<DescribeHarvestJobCommandInput, DescribeHarvestJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeHarvestJob",
+  DescribeHarvestJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeHarvestJobRequest;
+      output: DescribeHarvestJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeHarvestJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeHarvestJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeHarvestJobCommandOutput> {
-    return deserializeAws_restJson1DescribeHarvestJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeHarvestJobCommandInput;
+      output: DescribeHarvestJobCommandOutput;
+    };
+  };
 }

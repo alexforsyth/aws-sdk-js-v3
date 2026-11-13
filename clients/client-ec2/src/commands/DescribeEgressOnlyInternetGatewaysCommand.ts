@@ -1,106 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeEgressOnlyInternetGatewaysRequest,
   DescribeEgressOnlyInternetGatewaysResult,
-} from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeEgressOnlyInternetGatewaysCommand,
-  serializeAws_ec2DescribeEgressOnlyInternetGatewaysCommand,
-} from "../protocols/Aws_ec2";
-
-export interface DescribeEgressOnlyInternetGatewaysCommandInput extends DescribeEgressOnlyInternetGatewaysRequest {}
-export interface DescribeEgressOnlyInternetGatewaysCommandOutput
-  extends DescribeEgressOnlyInternetGatewaysResult,
-    __MetadataBearer {}
+} from "../models/models_3";
+import { DescribeEgressOnlyInternetGateways$ } from "../schemas/schemas_0";
 
 /**
- * <p>Describes one or more of your egress-only internet gateways.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEgressOnlyInternetGatewaysCommand}.
+ */
+export interface DescribeEgressOnlyInternetGatewaysCommandInput extends DescribeEgressOnlyInternetGatewaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEgressOnlyInternetGatewaysCommand}.
+ */
+export interface DescribeEgressOnlyInternetGatewaysCommandOutput extends DescribeEgressOnlyInternetGatewaysResult, __MetadataBearer {}
+
+/**
+ * <p>Describes your egress-only internet gateways. The default is to describe all your egress-only internet gateways.
+ *             Alternatively, you can specify specific egress-only internet gateway IDs or filter the results to
+ *             include only the egress-only internet gateways that match specific criteria.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeEgressOnlyInternetGatewaysCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeEgressOnlyInternetGatewaysCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeEgressOnlyInternetGatewaysRequest
+ *   DryRun: true || false,
+ *   EgressOnlyInternetGatewayIds: [ // EgressOnlyInternetGatewayIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeEgressOnlyInternetGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEgressOnlyInternetGatewaysResult
+ * //   EgressOnlyInternetGateways: [ // EgressOnlyInternetGatewayList
+ * //     { // EgressOnlyInternetGateway
+ * //       Attachments: [ // InternetGatewayAttachmentList
+ * //         { // InternetGatewayAttachment
+ * //           State: "attaching" || "attached" || "detaching" || "detached",
+ * //           VpcId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       EgressOnlyInternetGatewayId: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEgressOnlyInternetGatewaysCommandInput - {@link DescribeEgressOnlyInternetGatewaysCommandInput}
+ * @returns {@link DescribeEgressOnlyInternetGatewaysCommandOutput}
  * @see {@link DescribeEgressOnlyInternetGatewaysCommandInput} for command's `input` shape.
  * @see {@link DescribeEgressOnlyInternetGatewaysCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEgressOnlyInternetGatewaysCommand extends $Command<
-  DescribeEgressOnlyInternetGatewaysCommandInput,
-  DescribeEgressOnlyInternetGatewaysCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEgressOnlyInternetGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEgressOnlyInternetGatewaysCommandInput, DescribeEgressOnlyInternetGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeEgressOnlyInternetGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEgressOnlyInternetGatewaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEgressOnlyInternetGatewaysResult.filterSensitiveLog,
+export class DescribeEgressOnlyInternetGatewaysCommand extends command<DescribeEgressOnlyInternetGatewaysCommandInput, DescribeEgressOnlyInternetGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEgressOnlyInternetGateways",
+  DescribeEgressOnlyInternetGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEgressOnlyInternetGatewaysRequest;
+      output: DescribeEgressOnlyInternetGatewaysResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeEgressOnlyInternetGatewaysCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeEgressOnlyInternetGatewaysCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeEgressOnlyInternetGatewaysCommandOutput> {
-    return deserializeAws_ec2DescribeEgressOnlyInternetGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEgressOnlyInternetGatewaysCommandInput;
+      output: DescribeEgressOnlyInternetGatewaysCommandOutput;
+    };
+  };
 }

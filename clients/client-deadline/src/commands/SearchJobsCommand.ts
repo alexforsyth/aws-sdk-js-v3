@@ -1,0 +1,234 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchJobsRequest, SearchJobsResponse } from "../models/models_1";
+import { SearchJobs$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchJobsCommand}.
+ */
+export interface SearchJobsCommandInput extends SearchJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchJobsCommand}.
+ */
+export interface SearchJobsCommandOutput extends SearchJobsResponse, __MetadataBearer {}
+
+/**
+ * Searches for jobs.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, SearchJobsCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, SearchJobsCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // SearchJobsRequest
+ *   farmId: "STRING_VALUE", // required
+ *   filterExpressions: { // SearchGroupedFilterExpressions
+ *     filters: [ // SearchFilterExpressions // required
+ *       { // SearchFilterExpression Union: only one key present
+ *         dateTimeFilter: { // DateTimeFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           dateTime: new Date("TIMESTAMP"), // required
+ *         },
+ *         parameterFilter: { // ParameterFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           value: "STRING_VALUE", // required
+ *         },
+ *         searchTermFilter: { // SearchTermFilterExpression
+ *           searchTerm: "STRING_VALUE", // required
+ *           matchType: "FUZZY_MATCH" || "CONTAINS",
+ *         },
+ *         stringFilter: { // StringFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           value: "STRING_VALUE", // required
+ *         },
+ *         stringListFilter: { // StringListFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           values: [ // StringFilterList // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *         groupFilter: {
+ *           filters: [ // required
+ *             {//  Union: only one key present
+ *               dateTimeFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 dateTime: new Date("TIMESTAMP"), // required
+ *               },
+ *               parameterFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 value: "STRING_VALUE", // required
+ *               },
+ *               searchTermFilter: {
+ *                 searchTerm: "STRING_VALUE", // required
+ *                 matchType: "FUZZY_MATCH" || "CONTAINS",
+ *               },
+ *               stringFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 value: "STRING_VALUE", // required
+ *               },
+ *               stringListFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 values: [ // required
+ *                   "STRING_VALUE",
+ *                 ],
+ *               },
+ *               groupFilter: "<SearchGroupedFilterExpressions>",
+ *             },
+ *           ],
+ *           operator: "AND" || "OR", // required
+ *         },
+ *       },
+ *     ],
+ *     operator: "AND" || "OR", // required
+ *   },
+ *   sortExpressions: [ // SearchSortExpressions
+ *     { // SearchSortExpression Union: only one key present
+ *       userJobsFirst: { // UserJobsFirst
+ *         userIdentityId: "STRING_VALUE", // required
+ *       },
+ *       fieldSort: { // FieldSortExpression
+ *         sortOrder: "ASCENDING" || "DESCENDING", // required
+ *         name: "STRING_VALUE", // required
+ *       },
+ *       parameterSort: { // ParameterSortExpression
+ *         sortOrder: "ASCENDING" || "DESCENDING", // required
+ *         name: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   ],
+ *   itemOffset: Number("int"), // required
+ *   pageSize: Number("int"),
+ *   queueIds: [ // QueueIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
+ * const command = new SearchJobsCommand(input);
+ * const response = await client.send(command);
+ * // { // SearchJobsResponse
+ * //   jobs: [ // JobSearchSummaries // required
+ * //     { // JobSearchSummary
+ * //       jobId: "STRING_VALUE",
+ * //       queueId: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       lifecycleStatus: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "CREATE_COMPLETE" || "UPLOAD_IN_PROGRESS" || "UPLOAD_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_FAILED" || "UPDATE_SUCCEEDED" || "ARCHIVED",
+ * //       lifecycleStatusMessage: "STRING_VALUE",
+ * //       taskRunStatus: "PENDING" || "READY" || "ASSIGNED" || "STARTING" || "SCHEDULED" || "INTERRUPTING" || "RUNNING" || "SUSPENDED" || "CANCELED" || "FAILED" || "SUCCEEDED" || "NOT_COMPATIBLE",
+ * //       targetTaskRunStatus: "READY" || "FAILED" || "SUCCEEDED" || "CANCELED" || "SUSPENDED" || "PENDING",
+ * //       taskRunStatusCounts: { // TaskRunStatusCounts
+ * //         "<keys>": Number("int"),
+ * //       },
+ * //       taskFailureRetryCount: Number("int"),
+ * //       priority: Number("int"),
+ * //       maxFailedTasksCount: Number("int"),
+ * //       maxRetriesPerTask: Number("int"),
+ * //       createdBy: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       endedAt: new Date("TIMESTAMP"),
+ * //       startedAt: new Date("TIMESTAMP"),
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //       jobParameters: { // JobParameters
+ * //         "<keys>": { // JobParameter Union: only one key present
+ * //           int: "STRING_VALUE",
+ * //           float: "STRING_VALUE",
+ * //           string: "STRING_VALUE",
+ * //           path: "STRING_VALUE",
+ * //           bool: "STRING_VALUE",
+ * //           rangeExpr: "STRING_VALUE",
+ * //           stringList: [ // ParameterStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           pathList: [ // PathStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           intList: [ // IntStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           floatList: [ // FloatStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           boolList: [ // BooleanStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           intListList: [ // IntStringListList
+ * //             [ // NestedIntStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           ],
+ * //         },
+ * //       },
+ * //       maxWorkerCount: Number("int"),
+ * //       sourceJobId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextItemOffset: Number("int"),
+ * //   totalResults: Number("int"), // required
+ * // };
+ *
+ * ```
+ *
+ * @param SearchJobsCommandInput - {@link SearchJobsCommandInput}
+ * @returns {@link SearchJobsCommandOutput}
+ * @see {@link SearchJobsCommandInput} for command's `input` shape.
+ * @see {@link SearchJobsCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class SearchJobsCommand extends command<SearchJobsCommandInput, SearchJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchJobs",
+  SearchJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchJobsRequest;
+      output: SearchJobsResponse;
+    };
+    sdk: {
+      input: SearchJobsCommandInput;
+      output: SearchJobsCommandOutput;
+    };
+  };
+}

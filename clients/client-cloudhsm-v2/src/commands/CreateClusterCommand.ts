@@ -1,95 +1,163 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudHSMV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudHSMV2Client";
-import { CreateClusterRequest, CreateClusterResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateClusterCommand,
-  serializeAws_json1_1CreateClusterCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateClusterRequest, CreateClusterResponse } from "../models/models_0";
+import { CreateCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateClusterCommand}.
+ */
 export interface CreateClusterCommandInput extends CreateClusterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateClusterCommand}.
+ */
 export interface CreateClusterCommandOutput extends CreateClusterResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new AWS CloudHSM cluster.</p>
+ * <p>Creates a new CloudHSM cluster.</p>
+ *          <p>
+ *             <b>Cross-account use:</b> Yes. To perform this operation with an CloudHSM backup in a different AWS account, specify the full backup
+ *     ARN in the value of the SourceBackupId parameter.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudHSMV2Client, CreateClusterCommand } from "@aws-sdk/client-cloudhsm-v2"; // ES Modules import
  * // const { CloudHSMV2Client, CreateClusterCommand } = require("@aws-sdk/client-cloudhsm-v2"); // CommonJS import
+ * // import type { CloudHSMV2ClientConfig } from "@aws-sdk/client-cloudhsm-v2";
+ * const config = {}; // type is CloudHSMV2ClientConfig
  * const client = new CloudHSMV2Client(config);
+ * const input = { // CreateClusterRequest
+ *   BackupRetentionPolicy: { // BackupRetentionPolicy
+ *     Type: "DAYS",
+ *     Value: "STRING_VALUE",
+ *   },
+ *   HsmType: "STRING_VALUE", // required
+ *   SourceBackupId: "STRING_VALUE",
+ *   SubnetIds: [ // SubnetIds // required
+ *     "STRING_VALUE",
+ *   ],
+ *   NetworkType: "IPV4" || "DUALSTACK",
+ *   TagList: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   Mode: "FIPS" || "NON_FIPS",
+ * };
  * const command = new CreateClusterCommand(input);
  * const response = await client.send(command);
+ * // { // CreateClusterResponse
+ * //   Cluster: { // Cluster
+ * //     BackupPolicy: "DEFAULT",
+ * //     BackupRetentionPolicy: { // BackupRetentionPolicy
+ * //       Type: "DAYS",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //     ClusterId: "STRING_VALUE",
+ * //     CreateTimestamp: new Date("TIMESTAMP"),
+ * //     Hsms: [ // Hsms
+ * //       { // Hsm
+ * //         AvailabilityZone: "STRING_VALUE",
+ * //         ClusterId: "STRING_VALUE",
+ * //         SubnetId: "STRING_VALUE",
+ * //         EniId: "STRING_VALUE",
+ * //         EniIp: "STRING_VALUE",
+ * //         EniIpV6: "STRING_VALUE",
+ * //         HsmId: "STRING_VALUE", // required
+ * //         HsmType: "STRING_VALUE",
+ * //         State: "CREATE_IN_PROGRESS" || "ACTIVE" || "DEGRADED" || "DELETE_IN_PROGRESS" || "DELETED",
+ * //         StateMessage: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     HsmType: "STRING_VALUE",
+ * //     HsmTypeRollbackExpiration: new Date("TIMESTAMP"),
+ * //     PreCoPassword: "STRING_VALUE",
+ * //     SecurityGroup: "STRING_VALUE",
+ * //     SourceBackupId: "STRING_VALUE",
+ * //     State: "CREATE_IN_PROGRESS" || "UNINITIALIZED" || "INITIALIZE_IN_PROGRESS" || "INITIALIZED" || "ACTIVE" || "UPDATE_IN_PROGRESS" || "MODIFY_IN_PROGRESS" || "ROLLBACK_IN_PROGRESS" || "DELETE_IN_PROGRESS" || "DELETED" || "DEGRADED",
+ * //     StateMessage: "STRING_VALUE",
+ * //     SubnetMapping: { // ExternalSubnetMapping
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     VpcId: "STRING_VALUE",
+ * //     NetworkType: "IPV4" || "DUALSTACK",
+ * //     Certificates: { // Certificates
+ * //       ClusterCsr: "STRING_VALUE",
+ * //       HsmCertificate: "STRING_VALUE",
+ * //       AwsHardwareCertificate: "STRING_VALUE",
+ * //       ManufacturerHardwareCertificate: "STRING_VALUE",
+ * //       ClusterCertificate: "STRING_VALUE",
+ * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     Mode: "FIPS" || "NON_FIPS",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateClusterCommandInput - {@link CreateClusterCommandInput}
+ * @returns {@link CreateClusterCommandOutput}
  * @see {@link CreateClusterCommandInput} for command's `input` shape.
  * @see {@link CreateClusterCommandOutput} for command's `response` shape.
- * @see {@link CloudHSMV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudHSMV2ClientResolvedConfig | config} for CloudHSMV2Client's `config` shape.
  *
+ * @throws {@link CloudHsmAccessDeniedException} (client fault)
+ *  <p>The request was rejected because the requester does not have permission to perform the
+ *       requested operation.</p>
+ *
+ * @throws {@link CloudHsmInternalFailureException} (server fault)
+ *  <p>The request was rejected because of an CloudHSM internal failure. The request can
+ *       be retried.</p>
+ *
+ * @throws {@link CloudHsmInvalidRequestException} (client fault)
+ *  <p>The request was rejected because it is not a valid request.</p>
+ *
+ * @throws {@link CloudHsmResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it refers to a resource that cannot be
+ *       found.</p>
+ *
+ * @throws {@link CloudHsmServiceException} (client fault)
+ *  <p>The request was rejected because an error occurred.</p>
+ *
+ * @throws {@link CloudHsmTagException} (client fault)
+ *  <p>The request was rejected because of a tagging failure. Verify the tag conditions in all applicable policies, and then retry the request.</p>
+ *
+ * @throws {@link CloudHSMV2ServiceException}
+ * <p>Base exception class for all service exceptions from CloudHSMV2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateClusterCommand extends $Command<
-  CreateClusterCommandInput,
-  CreateClusterCommandOutput,
-  CloudHSMV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudHSMV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateClusterCommandInput, CreateClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudHSMV2Client";
-    const commandName = "CreateClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateClusterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateClusterResponse.filterSensitiveLog,
+export class CreateClusterCommand extends command<CreateClusterCommandInput, CreateClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateCluster",
+  CreateCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateClusterRequest;
+      output: CreateClusterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateClusterCommandOutput> {
-    return deserializeAws_json1_1CreateClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateClusterCommandInput;
+      output: CreateClusterCommandOutput;
+    };
+  };
 }

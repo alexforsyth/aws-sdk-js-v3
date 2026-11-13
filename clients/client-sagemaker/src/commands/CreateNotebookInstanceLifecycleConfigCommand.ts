@@ -1,119 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   CreateNotebookInstanceLifecycleConfigInput,
   CreateNotebookInstanceLifecycleConfigOutput,
-} from "../models/models_1";
-import {
-  deserializeAws_json1_1CreateNotebookInstanceLifecycleConfigCommand,
-  serializeAws_json1_1CreateNotebookInstanceLifecycleConfigCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
-
-export interface CreateNotebookInstanceLifecycleConfigCommandInput extends CreateNotebookInstanceLifecycleConfigInput {}
-export interface CreateNotebookInstanceLifecycleConfigCommandOutput
-  extends CreateNotebookInstanceLifecycleConfigOutput,
-    __MetadataBearer {}
+} from "../models/models_2";
+import { CreateNotebookInstanceLifecycleConfig$ } from "../schemas/schemas_0";
 
 /**
- * <p>Creates a lifecycle configuration that you can associate with a notebook instance. A
- *                 <i>lifecycle configuration</i> is a collection of shell scripts that
- *             run when you create or start a notebook instance.</p>
- *         <p>Each lifecycle configuration script has a limit of 16384 characters.</p>
- *         <p>The value of the <code>$PATH</code> environment variable that is available to both
- *             scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p>
- *         <p>View CloudWatch Logs for notebook instance lifecycle configurations in log group
- *                 <code>/aws/sagemaker/NotebookInstances</code> in log stream
- *                 <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p>
- *         <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs
- *             for longer than 5 minutes, it fails and the notebook instance is not created or
- *             started.</p>
- *         <p>For information about notebook instance lifestyle configurations, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html">Step
- *                 2.1: (Optional) Customize a Notebook Instance</a>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateNotebookInstanceLifecycleConfigCommand}.
+ */
+export interface CreateNotebookInstanceLifecycleConfigCommandInput extends CreateNotebookInstanceLifecycleConfigInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateNotebookInstanceLifecycleConfigCommand}.
+ */
+export interface CreateNotebookInstanceLifecycleConfigCommandOutput extends CreateNotebookInstanceLifecycleConfigOutput, __MetadataBearer {}
+
+/**
+ * <p>Creates a lifecycle configuration that you can associate with a notebook instance. A <i>lifecycle configuration</i> is a collection of shell scripts that run when you create or start a notebook instance.</p> <p>Each lifecycle configuration script has a limit of 16384 characters.</p> <p>The value of the <code>$PATH</code> environment variable that is available to both scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>View Amazon CloudWatch Logs for notebook instance lifecycle configurations in log group <code>/aws/sagemaker/NotebookInstances</code> in log stream <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p> <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.</p> <p>For information about notebook instance lifestyle configurations, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html">Step 2.1: (Optional) Customize a Notebook Instance</a>.</p> <note> <p>Lifecycle configuration scripts execute with root access and the notebook instance's IAM execution role privileges. Grant this permission only to trusted principals. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html">Customize a Notebook Instance Using a Lifecycle Configuration Script</a> for security best practices.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, CreateNotebookInstanceLifecycleConfigCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateNotebookInstanceLifecycleConfigCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateNotebookInstanceLifecycleConfigInput
+ *   NotebookInstanceLifecycleConfigName: "STRING_VALUE", // required
+ *   OnCreate: [ // NotebookInstanceLifecycleConfigList
+ *     { // NotebookInstanceLifecycleHook
+ *       Content: "STRING_VALUE",
+ *     },
+ *   ],
+ *   OnStart: [
+ *     {
+ *       Content: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateNotebookInstanceLifecycleConfigCommand(input);
  * const response = await client.send(command);
+ * // { // CreateNotebookInstanceLifecycleConfigOutput
+ * //   NotebookInstanceLifecycleConfigArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateNotebookInstanceLifecycleConfigCommandInput - {@link CreateNotebookInstanceLifecycleConfigCommandInput}
+ * @returns {@link CreateNotebookInstanceLifecycleConfigCommandOutput}
  * @see {@link CreateNotebookInstanceLifecycleConfigCommandInput} for command's `input` shape.
  * @see {@link CreateNotebookInstanceLifecycleConfigCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceLimitExceeded} (client fault)
+ *  <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateNotebookInstanceLifecycleConfigCommand extends $Command<
-  CreateNotebookInstanceLifecycleConfigCommandInput,
-  CreateNotebookInstanceLifecycleConfigCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateNotebookInstanceLifecycleConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateNotebookInstanceLifecycleConfigCommandInput, CreateNotebookInstanceLifecycleConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateNotebookInstanceLifecycleConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateNotebookInstanceLifecycleConfigInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateNotebookInstanceLifecycleConfigOutput.filterSensitiveLog,
+export class CreateNotebookInstanceLifecycleConfigCommand extends command<CreateNotebookInstanceLifecycleConfigCommandInput, CreateNotebookInstanceLifecycleConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateNotebookInstanceLifecycleConfig",
+  CreateNotebookInstanceLifecycleConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNotebookInstanceLifecycleConfigInput;
+      output: CreateNotebookInstanceLifecycleConfigOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateNotebookInstanceLifecycleConfigCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateNotebookInstanceLifecycleConfigCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateNotebookInstanceLifecycleConfigCommandOutput> {
-    return deserializeAws_json1_1CreateNotebookInstanceLifecycleConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateNotebookInstanceLifecycleConfigCommandInput;
+      output: CreateNotebookInstanceLifecycleConfigCommandOutput;
+    };
+  };
 }

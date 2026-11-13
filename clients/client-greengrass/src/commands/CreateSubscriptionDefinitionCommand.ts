@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { CreateSubscriptionDefinitionRequest, CreateSubscriptionDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateSubscriptionDefinitionCommand,
-  serializeAws_restJson1CreateSubscriptionDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSubscriptionDefinitionRequest, CreateSubscriptionDefinitionResponse } from "../models/models_0";
+import { CreateSubscriptionDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSubscriptionDefinitionCommand}.
+ */
 export interface CreateSubscriptionDefinitionCommandInput extends CreateSubscriptionDefinitionRequest {}
-export interface CreateSubscriptionDefinitionCommandOutput
-  extends CreateSubscriptionDefinitionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSubscriptionDefinitionCommand}.
+ */
+export interface CreateSubscriptionDefinitionCommandOutput extends CreateSubscriptionDefinitionResponse, __MetadataBearer {}
 
 /**
  * Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
@@ -30,71 +29,70 @@ export interface CreateSubscriptionDefinitionCommandOutput
  * ```javascript
  * import { GreengrassClient, CreateSubscriptionDefinitionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, CreateSubscriptionDefinitionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // CreateSubscriptionDefinitionRequest
+ *   AmznClientToken: "STRING_VALUE",
+ *   InitialVersion: { // SubscriptionDefinitionVersion
+ *     Subscriptions: [ // __listOfSubscription
+ *       { // Subscription
+ *         Id: "STRING_VALUE", // required
+ *         Source: "STRING_VALUE", // required
+ *         Subject: "STRING_VALUE", // required
+ *         Target: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ *   Name: "STRING_VALUE",
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateSubscriptionDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSubscriptionDefinitionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   LastUpdatedTimestamp: "STRING_VALUE",
+ * //   LatestVersion: "STRING_VALUE",
+ * //   LatestVersionArn: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSubscriptionDefinitionCommandInput - {@link CreateSubscriptionDefinitionCommandInput}
+ * @returns {@link CreateSubscriptionDefinitionCommandOutput}
  * @see {@link CreateSubscriptionDefinitionCommandInput} for command's `input` shape.
  * @see {@link CreateSubscriptionDefinitionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSubscriptionDefinitionCommand extends $Command<
-  CreateSubscriptionDefinitionCommandInput,
-  CreateSubscriptionDefinitionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSubscriptionDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSubscriptionDefinitionCommandInput, CreateSubscriptionDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "CreateSubscriptionDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSubscriptionDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSubscriptionDefinitionResponse.filterSensitiveLog,
+export class CreateSubscriptionDefinitionCommand extends command<CreateSubscriptionDefinitionCommandInput, CreateSubscriptionDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSubscriptionDefinition",
+  CreateSubscriptionDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSubscriptionDefinitionRequest;
+      output: CreateSubscriptionDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSubscriptionDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateSubscriptionDefinitionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateSubscriptionDefinitionCommandOutput> {
-    return deserializeAws_restJson1CreateSubscriptionDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSubscriptionDefinitionCommandInput;
+      output: CreateSubscriptionDefinitionCommandOutput;
+    };
+  };
 }

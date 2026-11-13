@@ -1,99 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DisassociateRouteTableRequest } from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateRouteTableCommand,
-  serializeAws_ec2DisassociateRouteTableCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateRouteTableRequest } from "../models/models_6";
+import { DisassociateRouteTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateRouteTableCommand}.
+ */
 export interface DisassociateRouteTableCommandInput extends DisassociateRouteTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateRouteTableCommand}.
+ */
 export interface DisassociateRouteTableCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Disassociates a subnet or gateway from a route table.</p>
- * 		       <p>After you perform this action, the subnet no longer uses the routes in the route table.
+ *          <p>After you perform this action, the subnet no longer uses the routes in the route table.
  * 				Instead, it uses the routes in the VPC's main route table. For more information
  * 				about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route
- * 				tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+ * 				tables</a> in the <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DisassociateRouteTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateRouteTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateRouteTableRequest
+ *   DryRun: true || false,
+ *   AssociationId: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateRouteTableCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateRouteTableCommandInput - {@link DisassociateRouteTableCommandInput}
+ * @returns {@link DisassociateRouteTableCommandOutput}
  * @see {@link DisassociateRouteTableCommandInput} for command's `input` shape.
  * @see {@link DisassociateRouteTableCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To disassociate a route table
+ * ```javascript
+ * // This example disassociates the specified route table from its associated subnet.
+ * const input = {
+ *   AssociationId: "rtbassoc-781d0d1a"
+ * };
+ * const command = new DisassociateRouteTableCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisassociateRouteTableCommand extends $Command<
-  DisassociateRouteTableCommandInput,
-  DisassociateRouteTableCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateRouteTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateRouteTableCommandInput, DisassociateRouteTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateRouteTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateRouteTableRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DisassociateRouteTableCommand extends command<DisassociateRouteTableCommandInput, DisassociateRouteTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateRouteTable",
+  DisassociateRouteTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateRouteTableRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateRouteTableCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateRouteTableCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisassociateRouteTableCommandOutput> {
-    return deserializeAws_ec2DisassociateRouteTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateRouteTableCommandInput;
+      output: DisassociateRouteTableCommandOutput;
+    };
+  };
 }

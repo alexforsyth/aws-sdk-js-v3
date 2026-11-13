@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoSyncClient";
-import { RegisterDeviceRequest, RegisterDeviceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RegisterDeviceCommand,
-  serializeAws_restJson1RegisterDeviceCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterDeviceRequest, RegisterDeviceResponse } from "../models/models_0";
+import { RegisterDevice$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterDeviceCommand}.
+ */
 export interface RegisterDeviceCommandInput extends RegisterDeviceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterDeviceCommand}.
+ */
 export interface RegisterDeviceCommandOutput extends RegisterDeviceResponse, __MetadataBearer {}
 
 /**
@@ -37,17 +38,17 @@ export interface RegisterDeviceCommandOutput extends RegisterDeviceResponse, __M
  * X-AMZ-SECURITY-TOKEN: <securitytoken>
  * AUTHORIZATION: AWS4-HMAC-SHA256 Credential=<credential>, SignedHeaders=content-type;content-length;host;x-amz-date;x-amz-target, Signature=<signature>
  *
- * {
+ * \{
  *     "Operation": "com.amazonaws.cognito.sync.model#RegisterDevice",
  *     "Service": "com.amazonaws.cognito.sync.model#AWSCognitoSyncService",
  *     "Input":
- *     {
+ *     \{
  *         "IdentityPoolId": "ID_POOL_ID",
  *         "IdentityId": "IDENTITY_ID",
  *         "Platform": "GCM",
  *         "Token": "PUSH_TOKEN"
- *     }
- * }
+ *     \}
+ * \}
  *                </request>
  *             <response>
  * 1.1 200 OK
@@ -56,14 +57,14 @@ export interface RegisterDeviceCommandOutput extends RegisterDeviceResponse, __M
  * content-type: application/json
  * content-length: 145
  *
- * {
+ * \{
  *     "Output":
- *     {
+ *     \{
  *         "__type": "com.amazonaws.cognito.sync.model#RegisterDeviceResponse",
  *         "DeviceId": "5cd28fbe-dd83-47ab-9f83-19093a5fb014"
- *     },
+ *     \},
  *     "Version": "1.0"
- * }
+ * \}
  *                </response>
  *          </example>
  *       </examples>
@@ -72,68 +73,72 @@ export interface RegisterDeviceCommandOutput extends RegisterDeviceResponse, __M
  * ```javascript
  * import { CognitoSyncClient, RegisterDeviceCommand } from "@aws-sdk/client-cognito-sync"; // ES Modules import
  * // const { CognitoSyncClient, RegisterDeviceCommand } = require("@aws-sdk/client-cognito-sync"); // CommonJS import
+ * // import type { CognitoSyncClientConfig } from "@aws-sdk/client-cognito-sync";
+ * const config = {}; // type is CognitoSyncClientConfig
  * const client = new CognitoSyncClient(config);
+ * const input = { // RegisterDeviceRequest
+ *   IdentityPoolId: "STRING_VALUE", // required
+ *   IdentityId: "STRING_VALUE", // required
+ *   Platform: "APNS" || "APNS_SANDBOX" || "GCM" || "ADM", // required
+ *   Token: "STRING_VALUE", // required
+ * };
  * const command = new RegisterDeviceCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterDeviceResponse
+ * //   DeviceId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RegisterDeviceCommandInput - {@link RegisterDeviceCommandInput}
+ * @returns {@link RegisterDeviceCommandOutput}
  * @see {@link RegisterDeviceCommandInput} for command's `input` shape.
  * @see {@link RegisterDeviceCommandOutput} for command's `response` shape.
- * @see {@link CognitoSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoSyncClientResolvedConfig | config} for CognitoSyncClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  Indicates an internal service
+ *       error.
+ *
+ * @throws {@link InvalidConfigurationException} (client fault)
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  Thrown when a request parameter does not comply
+ *       with the associated constraints.
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  Thrown when a user is not authorized to access the
+ *       requested resource.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  Thrown if the resource doesn't
+ *       exist.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Thrown if the request is
+ *       throttled.
+ *
+ * @throws {@link CognitoSyncServiceException}
+ * <p>Base exception class for all service exceptions from CognitoSync service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterDeviceCommand extends $Command<
-  RegisterDeviceCommandInput,
-  RegisterDeviceCommandOutput,
-  CognitoSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterDeviceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterDeviceCommandInput, RegisterDeviceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoSyncClient";
-    const commandName = "RegisterDeviceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterDeviceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterDeviceResponse.filterSensitiveLog,
+export class RegisterDeviceCommand extends command<RegisterDeviceCommandInput, RegisterDeviceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterDevice",
+  RegisterDevice$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterDeviceRequest;
+      output: RegisterDeviceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterDeviceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RegisterDeviceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterDeviceCommandOutput> {
-    return deserializeAws_restJson1RegisterDeviceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterDeviceCommandInput;
+      output: RegisterDeviceCommandOutput;
+    };
+  };
 }

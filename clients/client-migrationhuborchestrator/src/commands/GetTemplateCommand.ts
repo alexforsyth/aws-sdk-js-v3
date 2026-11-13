@@ -1,0 +1,111 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMigrationWorkflowTemplateRequest, GetMigrationWorkflowTemplateResponse } from "../models/models_0";
+import { GetTemplate$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTemplateCommand}.
+ */
+export interface GetTemplateCommandInput extends GetMigrationWorkflowTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTemplateCommand}.
+ */
+export interface GetTemplateCommandOutput extends GetMigrationWorkflowTemplateResponse, __MetadataBearer {}
+
+/**
+ * <p>Get the template you want to use for creating a migration workflow.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MigrationHubOrchestratorClient, GetTemplateCommand } from "@aws-sdk/client-migrationhuborchestrator"; // ES Modules import
+ * // const { MigrationHubOrchestratorClient, GetTemplateCommand } = require("@aws-sdk/client-migrationhuborchestrator"); // CommonJS import
+ * // import type { MigrationHubOrchestratorClientConfig } from "@aws-sdk/client-migrationhuborchestrator";
+ * const config = {}; // type is MigrationHubOrchestratorClientConfig
+ * const client = new MigrationHubOrchestratorClient(config);
+ * const input = { // GetMigrationWorkflowTemplateRequest
+ *   id: "STRING_VALUE", // required
+ * };
+ * const command = new GetTemplateCommand(input);
+ * const response = await client.send(command);
+ * // { // GetMigrationWorkflowTemplateResponse
+ * //   id: "STRING_VALUE",
+ * //   templateArn: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   inputs: [ // TemplateInputList
+ * //     { // TemplateInput
+ * //       inputName: "STRING_VALUE",
+ * //       dataType: "STRING_VALUE",
+ * //       required: true || false,
+ * //     },
+ * //   ],
+ * //   tools: [ // ToolsList
+ * //     { // Tool
+ * //       name: "STRING_VALUE",
+ * //       url: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   creationTime: new Date("TIMESTAMP"),
+ * //   owner: "STRING_VALUE",
+ * //   status: "STRING_VALUE",
+ * //   statusMessage: "STRING_VALUE",
+ * //   templateClass: "STRING_VALUE",
+ * //   tags: { // StringMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetTemplateCommandInput - {@link GetTemplateCommandInput}
+ * @returns {@link GetTemplateCommandOutput}
+ * @see {@link GetTemplateCommandInput} for command's `input` shape.
+ * @see {@link GetTemplateCommandOutput} for command's `response` shape.
+ * @see {@link MigrationHubOrchestratorClientResolvedConfig | config} for MigrationHubOrchestratorClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource is not available.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link MigrationHubOrchestratorServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubOrchestrator service.</p>
+ *
+ *
+ * @public
+ */
+export class GetTemplateCommand extends command<GetTemplateCommandInput, GetTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTemplate",
+  GetTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMigrationWorkflowTemplateRequest;
+      output: GetMigrationWorkflowTemplateResponse;
+    };
+    sdk: {
+      input: GetTemplateCommandInput;
+      output: GetTemplateCommandOutput;
+    };
+  };
+}

@@ -1,389 +1,1149 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CancelIngestionCommandInput, CancelIngestionCommandOutput } from "./commands/CancelIngestionCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultQuickSightHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  BatchCreateTopicReviewedAnswerCommandInput,
+  BatchCreateTopicReviewedAnswerCommandOutput,
+} from "./commands/BatchCreateTopicReviewedAnswerCommand";
+import type {
+  BatchDeleteKnowledgeBaseCommandInput,
+  BatchDeleteKnowledgeBaseCommandOutput,
+} from "./commands/BatchDeleteKnowledgeBaseCommand";
+import type {
+  BatchDeleteTopicReviewedAnswerCommandInput,
+  BatchDeleteTopicReviewedAnswerCommandOutput,
+} from "./commands/BatchDeleteTopicReviewedAnswerCommand";
+import type {
+  BatchDescribeUserLimitsCommandInput,
+  BatchDescribeUserLimitsCommandOutput,
+} from "./commands/BatchDescribeUserLimitsCommand";
+import type { CancelIngestionCommandInput, CancelIngestionCommandOutput } from "./commands/CancelIngestionCommand";
+import type {
   CreateAccountCustomizationCommandInput,
   CreateAccountCustomizationCommandOutput,
 } from "./commands/CreateAccountCustomizationCommand";
-import { CreateAnalysisCommandInput, CreateAnalysisCommandOutput } from "./commands/CreateAnalysisCommand";
-import { CreateDashboardCommandInput, CreateDashboardCommandOutput } from "./commands/CreateDashboardCommand";
-import { CreateDataSetCommandInput, CreateDataSetCommandOutput } from "./commands/CreateDataSetCommand";
-import { CreateDataSourceCommandInput, CreateDataSourceCommandOutput } from "./commands/CreateDataSourceCommand";
-import { CreateFolderCommandInput, CreateFolderCommandOutput } from "./commands/CreateFolderCommand";
-import {
+import type {
+  CreateAccountSubscriptionCommandInput,
+  CreateAccountSubscriptionCommandOutput,
+} from "./commands/CreateAccountSubscriptionCommand";
+import type {
+  CreateActionConnectorCommandInput,
+  CreateActionConnectorCommandOutput,
+} from "./commands/CreateActionConnectorCommand";
+import type { CreateAgentCommandInput, CreateAgentCommandOutput } from "./commands/CreateAgentCommand";
+import type { CreateAnalysisCommandInput, CreateAnalysisCommandOutput } from "./commands/CreateAnalysisCommand";
+import type {
+  CreateApprovalPolicyCommandInput,
+  CreateApprovalPolicyCommandOutput,
+} from "./commands/CreateApprovalPolicyCommand";
+import type { CreateBrandCommandInput, CreateBrandCommandOutput } from "./commands/CreateBrandCommand";
+import type {
+  CreateCustomPermissionsCommandInput,
+  CreateCustomPermissionsCommandOutput,
+} from "./commands/CreateCustomPermissionsCommand";
+import type { CreateDashboardCommandInput, CreateDashboardCommandOutput } from "./commands/CreateDashboardCommand";
+import type { CreateDataSetCommandInput, CreateDataSetCommandOutput } from "./commands/CreateDataSetCommand";
+import type { CreateDataSourceCommandInput, CreateDataSourceCommandOutput } from "./commands/CreateDataSourceCommand";
+import type { CreateDlpSettingCommandInput, CreateDlpSettingCommandOutput } from "./commands/CreateDlpSettingCommand";
+import type { CreateFlowCommandInput, CreateFlowCommandOutput } from "./commands/CreateFlowCommand";
+import type { CreateFolderCommandInput, CreateFolderCommandOutput } from "./commands/CreateFolderCommand";
+import type {
   CreateFolderMembershipCommandInput,
   CreateFolderMembershipCommandOutput,
 } from "./commands/CreateFolderMembershipCommand";
-import { CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
-import {
+import type { CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
+import type {
   CreateGroupMembershipCommandInput,
   CreateGroupMembershipCommandOutput,
 } from "./commands/CreateGroupMembershipCommand";
-import {
+import type {
   CreateIAMPolicyAssignmentCommandInput,
   CreateIAMPolicyAssignmentCommandOutput,
 } from "./commands/CreateIAMPolicyAssignmentCommand";
-import { CreateIngestionCommandInput, CreateIngestionCommandOutput } from "./commands/CreateIngestionCommand";
-import { CreateNamespaceCommandInput, CreateNamespaceCommandOutput } from "./commands/CreateNamespaceCommand";
-import {
+import type { CreateIngestionCommandInput, CreateIngestionCommandOutput } from "./commands/CreateIngestionCommand";
+import type {
+  CreateKnowledgeBaseCommandInput,
+  CreateKnowledgeBaseCommandOutput,
+} from "./commands/CreateKnowledgeBaseCommand";
+import type {
+  CreateLimitsProfileCommandInput,
+  CreateLimitsProfileCommandOutput,
+} from "./commands/CreateLimitsProfileCommand";
+import type { CreateNamespaceCommandInput, CreateNamespaceCommandOutput } from "./commands/CreateNamespaceCommand";
+import type {
+  CreateOAuthClientApplicationCommandInput,
+  CreateOAuthClientApplicationCommandOutput,
+} from "./commands/CreateOAuthClientApplicationCommand";
+import type {
+  CreateRefreshScheduleCommandInput,
+  CreateRefreshScheduleCommandOutput,
+} from "./commands/CreateRefreshScheduleCommand";
+import type {
+  CreateRoleMembershipCommandInput,
+  CreateRoleMembershipCommandOutput,
+} from "./commands/CreateRoleMembershipCommand";
+import type { CreateSpaceCommandInput, CreateSpaceCommandOutput } from "./commands/CreateSpaceCommand";
+import type {
   CreateTemplateAliasCommandInput,
   CreateTemplateAliasCommandOutput,
 } from "./commands/CreateTemplateAliasCommand";
-import { CreateTemplateCommandInput, CreateTemplateCommandOutput } from "./commands/CreateTemplateCommand";
-import { CreateThemeAliasCommandInput, CreateThemeAliasCommandOutput } from "./commands/CreateThemeAliasCommand";
-import { CreateThemeCommandInput, CreateThemeCommandOutput } from "./commands/CreateThemeCommand";
-import {
+import type { CreateTemplateCommandInput, CreateTemplateCommandOutput } from "./commands/CreateTemplateCommand";
+import type { CreateThemeAliasCommandInput, CreateThemeAliasCommandOutput } from "./commands/CreateThemeAliasCommand";
+import type { CreateThemeCommandInput, CreateThemeCommandOutput } from "./commands/CreateThemeCommand";
+import type { CreateTopicCommandInput, CreateTopicCommandOutput } from "./commands/CreateTopicCommand";
+import type {
+  CreateTopicRefreshScheduleCommandInput,
+  CreateTopicRefreshScheduleCommandOutput,
+} from "./commands/CreateTopicRefreshScheduleCommand";
+import type { CreateTopicV2CommandInput, CreateTopicV2CommandOutput } from "./commands/CreateTopicV2Command";
+import type {
+  CreateVPCConnectionCommandInput,
+  CreateVPCConnectionCommandOutput,
+} from "./commands/CreateVPCConnectionCommand";
+import type {
   DeleteAccountCustomizationCommandInput,
   DeleteAccountCustomizationCommandOutput,
 } from "./commands/DeleteAccountCustomizationCommand";
-import { DeleteAnalysisCommandInput, DeleteAnalysisCommandOutput } from "./commands/DeleteAnalysisCommand";
-import { DeleteDashboardCommandInput, DeleteDashboardCommandOutput } from "./commands/DeleteDashboardCommand";
-import { DeleteDataSetCommandInput, DeleteDataSetCommandOutput } from "./commands/DeleteDataSetCommand";
-import { DeleteDataSourceCommandInput, DeleteDataSourceCommandOutput } from "./commands/DeleteDataSourceCommand";
-import { DeleteFolderCommandInput, DeleteFolderCommandOutput } from "./commands/DeleteFolderCommand";
-import {
+import type {
+  DeleteAccountCustomPermissionCommandInput,
+  DeleteAccountCustomPermissionCommandOutput,
+} from "./commands/DeleteAccountCustomPermissionCommand";
+import type {
+  DeleteAccountSubscriptionCommandInput,
+  DeleteAccountSubscriptionCommandOutput,
+} from "./commands/DeleteAccountSubscriptionCommand";
+import type {
+  DeleteActionConnectorCommandInput,
+  DeleteActionConnectorCommandOutput,
+} from "./commands/DeleteActionConnectorCommand";
+import type { DeleteAgentCommandInput, DeleteAgentCommandOutput } from "./commands/DeleteAgentCommand";
+import type { DeleteAnalysisCommandInput, DeleteAnalysisCommandOutput } from "./commands/DeleteAnalysisCommand";
+import type { DeleteAppCommandInput, DeleteAppCommandOutput } from "./commands/DeleteAppCommand";
+import type {
+  DeleteApprovalPolicyCommandInput,
+  DeleteApprovalPolicyCommandOutput,
+} from "./commands/DeleteApprovalPolicyCommand";
+import type {
+  DeleteBrandAssignmentCommandInput,
+  DeleteBrandAssignmentCommandOutput,
+} from "./commands/DeleteBrandAssignmentCommand";
+import type { DeleteBrandCommandInput, DeleteBrandCommandOutput } from "./commands/DeleteBrandCommand";
+import type {
+  DeleteCustomPermissionsCommandInput,
+  DeleteCustomPermissionsCommandOutput,
+} from "./commands/DeleteCustomPermissionsCommand";
+import type { DeleteDashboardCommandInput, DeleteDashboardCommandOutput } from "./commands/DeleteDashboardCommand";
+import type { DeleteDataSetCommandInput, DeleteDataSetCommandOutput } from "./commands/DeleteDataSetCommand";
+import type {
+  DeleteDataSetRefreshPropertiesCommandInput,
+  DeleteDataSetRefreshPropertiesCommandOutput,
+} from "./commands/DeleteDataSetRefreshPropertiesCommand";
+import type { DeleteDataSourceCommandInput, DeleteDataSourceCommandOutput } from "./commands/DeleteDataSourceCommand";
+import type {
+  DeleteDefaultQBusinessApplicationCommandInput,
+  DeleteDefaultQBusinessApplicationCommandOutput,
+} from "./commands/DeleteDefaultQBusinessApplicationCommand";
+import type { DeleteDlpSettingCommandInput, DeleteDlpSettingCommandOutput } from "./commands/DeleteDlpSettingCommand";
+import type { DeleteFlowCommandInput, DeleteFlowCommandOutput } from "./commands/DeleteFlowCommand";
+import type { DeleteFolderCommandInput, DeleteFolderCommandOutput } from "./commands/DeleteFolderCommand";
+import type {
   DeleteFolderMembershipCommandInput,
   DeleteFolderMembershipCommandOutput,
 } from "./commands/DeleteFolderMembershipCommand";
-import { DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
-import {
+import type { DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
+import type {
   DeleteGroupMembershipCommandInput,
   DeleteGroupMembershipCommandOutput,
 } from "./commands/DeleteGroupMembershipCommand";
-import {
+import type {
   DeleteIAMPolicyAssignmentCommandInput,
   DeleteIAMPolicyAssignmentCommandOutput,
 } from "./commands/DeleteIAMPolicyAssignmentCommand";
-import { DeleteNamespaceCommandInput, DeleteNamespaceCommandOutput } from "./commands/DeleteNamespaceCommand";
-import {
+import type {
+  DeleteIdentityPropagationConfigCommandInput,
+  DeleteIdentityPropagationConfigCommandOutput,
+} from "./commands/DeleteIdentityPropagationConfigCommand";
+import type {
+  DeleteKnowledgeBaseCommandInput,
+  DeleteKnowledgeBaseCommandOutput,
+} from "./commands/DeleteKnowledgeBaseCommand";
+import type {
+  DeleteLimitsProfileCommandInput,
+  DeleteLimitsProfileCommandOutput,
+} from "./commands/DeleteLimitsProfileCommand";
+import type { DeleteNamespaceCommandInput, DeleteNamespaceCommandOutput } from "./commands/DeleteNamespaceCommand";
+import type {
+  DeleteOAuthClientApplicationCommandInput,
+  DeleteOAuthClientApplicationCommandOutput,
+} from "./commands/DeleteOAuthClientApplicationCommand";
+import type {
+  DeleteRefreshScheduleCommandInput,
+  DeleteRefreshScheduleCommandOutput,
+} from "./commands/DeleteRefreshScheduleCommand";
+import type {
+  DeleteRoleCustomPermissionCommandInput,
+  DeleteRoleCustomPermissionCommandOutput,
+} from "./commands/DeleteRoleCustomPermissionCommand";
+import type {
+  DeleteRoleMembershipCommandInput,
+  DeleteRoleMembershipCommandOutput,
+} from "./commands/DeleteRoleMembershipCommand";
+import type { DeleteSpaceCommandInput, DeleteSpaceCommandOutput } from "./commands/DeleteSpaceCommand";
+import type {
   DeleteTemplateAliasCommandInput,
   DeleteTemplateAliasCommandOutput,
 } from "./commands/DeleteTemplateAliasCommand";
-import { DeleteTemplateCommandInput, DeleteTemplateCommandOutput } from "./commands/DeleteTemplateCommand";
-import { DeleteThemeAliasCommandInput, DeleteThemeAliasCommandOutput } from "./commands/DeleteThemeAliasCommand";
-import { DeleteThemeCommandInput, DeleteThemeCommandOutput } from "./commands/DeleteThemeCommand";
-import {
+import type { DeleteTemplateCommandInput, DeleteTemplateCommandOutput } from "./commands/DeleteTemplateCommand";
+import type { DeleteThemeAliasCommandInput, DeleteThemeAliasCommandOutput } from "./commands/DeleteThemeAliasCommand";
+import type { DeleteThemeCommandInput, DeleteThemeCommandOutput } from "./commands/DeleteThemeCommand";
+import type { DeleteTopicCommandInput, DeleteTopicCommandOutput } from "./commands/DeleteTopicCommand";
+import type {
+  DeleteTopicRefreshScheduleCommandInput,
+  DeleteTopicRefreshScheduleCommandOutput,
+} from "./commands/DeleteTopicRefreshScheduleCommand";
+import type { DeleteTopicV2CommandInput, DeleteTopicV2CommandOutput } from "./commands/DeleteTopicV2Command";
+import type {
   DeleteUserByPrincipalIdCommandInput,
   DeleteUserByPrincipalIdCommandOutput,
 } from "./commands/DeleteUserByPrincipalIdCommand";
-import { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
-import {
+import type { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+import type {
+  DeleteUserCustomPermissionCommandInput,
+  DeleteUserCustomPermissionCommandOutput,
+} from "./commands/DeleteUserCustomPermissionCommand";
+import type {
+  DeleteVPCConnectionCommandInput,
+  DeleteVPCConnectionCommandOutput,
+} from "./commands/DeleteVPCConnectionCommand";
+import type {
   DescribeAccountCustomizationCommandInput,
   DescribeAccountCustomizationCommandOutput,
 } from "./commands/DescribeAccountCustomizationCommand";
-import {
+import type {
+  DescribeAccountCustomPermissionCommandInput,
+  DescribeAccountCustomPermissionCommandOutput,
+} from "./commands/DescribeAccountCustomPermissionCommand";
+import type {
   DescribeAccountSettingsCommandInput,
   DescribeAccountSettingsCommandOutput,
 } from "./commands/DescribeAccountSettingsCommand";
-import { DescribeAnalysisCommandInput, DescribeAnalysisCommandOutput } from "./commands/DescribeAnalysisCommand";
-import {
+import type {
+  DescribeAccountSubscriptionCommandInput,
+  DescribeAccountSubscriptionCommandOutput,
+} from "./commands/DescribeAccountSubscriptionCommand";
+import type {
+  DescribeActionConnectorCommandInput,
+  DescribeActionConnectorCommandOutput,
+} from "./commands/DescribeActionConnectorCommand";
+import type {
+  DescribeActionConnectorPermissionsCommandInput,
+  DescribeActionConnectorPermissionsCommandOutput,
+} from "./commands/DescribeActionConnectorPermissionsCommand";
+import type { DescribeAgentCommandInput, DescribeAgentCommandOutput } from "./commands/DescribeAgentCommand";
+import type {
+  DescribeAgentPermissionsCommandInput,
+  DescribeAgentPermissionsCommandOutput,
+} from "./commands/DescribeAgentPermissionsCommand";
+import type { DescribeAnalysisCommandInput, DescribeAnalysisCommandOutput } from "./commands/DescribeAnalysisCommand";
+import type {
+  DescribeAnalysisDefinitionCommandInput,
+  DescribeAnalysisDefinitionCommandOutput,
+} from "./commands/DescribeAnalysisDefinitionCommand";
+import type {
   DescribeAnalysisPermissionsCommandInput,
   DescribeAnalysisPermissionsCommandOutput,
 } from "./commands/DescribeAnalysisPermissionsCommand";
-import { DescribeDashboardCommandInput, DescribeDashboardCommandOutput } from "./commands/DescribeDashboardCommand";
-import {
+import type { DescribeAppCommandInput, DescribeAppCommandOutput } from "./commands/DescribeAppCommand";
+import type {
+  DescribeAppPermissionsCommandInput,
+  DescribeAppPermissionsCommandOutput,
+} from "./commands/DescribeAppPermissionsCommand";
+import type {
+  DescribeApprovalPolicyCommandInput,
+  DescribeApprovalPolicyCommandOutput,
+} from "./commands/DescribeApprovalPolicyCommand";
+import type {
+  DescribeAssetBundleExportJobCommandInput,
+  DescribeAssetBundleExportJobCommandOutput,
+} from "./commands/DescribeAssetBundleExportJobCommand";
+import type {
+  DescribeAssetBundleImportJobCommandInput,
+  DescribeAssetBundleImportJobCommandOutput,
+} from "./commands/DescribeAssetBundleImportJobCommand";
+import type {
+  DescribeAutomationJobCommandInput,
+  DescribeAutomationJobCommandOutput,
+} from "./commands/DescribeAutomationJobCommand";
+import type {
+  DescribeBrandAssignmentCommandInput,
+  DescribeBrandAssignmentCommandOutput,
+} from "./commands/DescribeBrandAssignmentCommand";
+import type { DescribeBrandCommandInput, DescribeBrandCommandOutput } from "./commands/DescribeBrandCommand";
+import type {
+  DescribeBrandPublishedVersionCommandInput,
+  DescribeBrandPublishedVersionCommandOutput,
+} from "./commands/DescribeBrandPublishedVersionCommand";
+import type {
+  DescribeCustomPermissionsCommandInput,
+  DescribeCustomPermissionsCommandOutput,
+} from "./commands/DescribeCustomPermissionsCommand";
+import type {
+  DescribeDashboardCommandInput,
+  DescribeDashboardCommandOutput,
+} from "./commands/DescribeDashboardCommand";
+import type {
+  DescribeDashboardDefinitionCommandInput,
+  DescribeDashboardDefinitionCommandOutput,
+} from "./commands/DescribeDashboardDefinitionCommand";
+import type {
   DescribeDashboardPermissionsCommandInput,
   DescribeDashboardPermissionsCommandOutput,
 } from "./commands/DescribeDashboardPermissionsCommand";
-import { DescribeDataSetCommandInput, DescribeDataSetCommandOutput } from "./commands/DescribeDataSetCommand";
-import {
+import type {
+  DescribeDashboardSnapshotJobCommandInput,
+  DescribeDashboardSnapshotJobCommandOutput,
+} from "./commands/DescribeDashboardSnapshotJobCommand";
+import type {
+  DescribeDashboardSnapshotJobResultCommandInput,
+  DescribeDashboardSnapshotJobResultCommandOutput,
+} from "./commands/DescribeDashboardSnapshotJobResultCommand";
+import type {
+  DescribeDashboardsQAConfigurationCommandInput,
+  DescribeDashboardsQAConfigurationCommandOutput,
+} from "./commands/DescribeDashboardsQAConfigurationCommand";
+import type { DescribeDataSetCommandInput, DescribeDataSetCommandOutput } from "./commands/DescribeDataSetCommand";
+import type {
   DescribeDataSetPermissionsCommandInput,
   DescribeDataSetPermissionsCommandOutput,
 } from "./commands/DescribeDataSetPermissionsCommand";
-import { DescribeDataSourceCommandInput, DescribeDataSourceCommandOutput } from "./commands/DescribeDataSourceCommand";
-import {
+import type {
+  DescribeDataSetRefreshPropertiesCommandInput,
+  DescribeDataSetRefreshPropertiesCommandOutput,
+} from "./commands/DescribeDataSetRefreshPropertiesCommand";
+import type {
+  DescribeDataSourceCommandInput,
+  DescribeDataSourceCommandOutput,
+} from "./commands/DescribeDataSourceCommand";
+import type {
   DescribeDataSourcePermissionsCommandInput,
   DescribeDataSourcePermissionsCommandOutput,
 } from "./commands/DescribeDataSourcePermissionsCommand";
-import { DescribeFolderCommandInput, DescribeFolderCommandOutput } from "./commands/DescribeFolderCommand";
-import {
+import type {
+  DescribeDefaultQBusinessApplicationCommandInput,
+  DescribeDefaultQBusinessApplicationCommandOutput,
+} from "./commands/DescribeDefaultQBusinessApplicationCommand";
+import type {
+  DescribeDlpSettingCommandInput,
+  DescribeDlpSettingCommandOutput,
+} from "./commands/DescribeDlpSettingCommand";
+import type { DescribeFlowCommandInput, DescribeFlowCommandOutput } from "./commands/DescribeFlowCommand";
+import type { DescribeFolderCommandInput, DescribeFolderCommandOutput } from "./commands/DescribeFolderCommand";
+import type {
   DescribeFolderPermissionsCommandInput,
   DescribeFolderPermissionsCommandOutput,
 } from "./commands/DescribeFolderPermissionsCommand";
-import {
+import type {
   DescribeFolderResolvedPermissionsCommandInput,
   DescribeFolderResolvedPermissionsCommandOutput,
 } from "./commands/DescribeFolderResolvedPermissionsCommand";
-import { DescribeGroupCommandInput, DescribeGroupCommandOutput } from "./commands/DescribeGroupCommand";
-import {
+import type { DescribeGroupCommandInput, DescribeGroupCommandOutput } from "./commands/DescribeGroupCommand";
+import type {
+  DescribeGroupMembershipCommandInput,
+  DescribeGroupMembershipCommandOutput,
+} from "./commands/DescribeGroupMembershipCommand";
+import type {
   DescribeIAMPolicyAssignmentCommandInput,
   DescribeIAMPolicyAssignmentCommandOutput,
 } from "./commands/DescribeIAMPolicyAssignmentCommand";
-import { DescribeIngestionCommandInput, DescribeIngestionCommandOutput } from "./commands/DescribeIngestionCommand";
-import {
+import type {
+  DescribeIngestionCommandInput,
+  DescribeIngestionCommandOutput,
+} from "./commands/DescribeIngestionCommand";
+import type {
   DescribeIpRestrictionCommandInput,
   DescribeIpRestrictionCommandOutput,
 } from "./commands/DescribeIpRestrictionCommand";
-import { DescribeNamespaceCommandInput, DescribeNamespaceCommandOutput } from "./commands/DescribeNamespaceCommand";
-import {
+import type {
+  DescribeKeyRegistrationCommandInput,
+  DescribeKeyRegistrationCommandOutput,
+} from "./commands/DescribeKeyRegistrationCommand";
+import type {
+  DescribeKnowledgeBaseCommandInput,
+  DescribeKnowledgeBaseCommandOutput,
+} from "./commands/DescribeKnowledgeBaseCommand";
+import type {
+  DescribeKnowledgeBasePermissionsCommandInput,
+  DescribeKnowledgeBasePermissionsCommandOutput,
+} from "./commands/DescribeKnowledgeBasePermissionsCommand";
+import type {
+  DescribeLimitsProfileCommandInput,
+  DescribeLimitsProfileCommandOutput,
+} from "./commands/DescribeLimitsProfileCommand";
+import type {
+  DescribeNamespaceCommandInput,
+  DescribeNamespaceCommandOutput,
+} from "./commands/DescribeNamespaceCommand";
+import type {
+  DescribeOAuthClientApplicationCommandInput,
+  DescribeOAuthClientApplicationCommandOutput,
+} from "./commands/DescribeOAuthClientApplicationCommand";
+import type {
+  DescribeQPersonalizationConfigurationCommandInput,
+  DescribeQPersonalizationConfigurationCommandOutput,
+} from "./commands/DescribeQPersonalizationConfigurationCommand";
+import type {
+  DescribeQuickSightQSearchConfigurationCommandInput,
+  DescribeQuickSightQSearchConfigurationCommandOutput,
+} from "./commands/DescribeQuickSightQSearchConfigurationCommand";
+import type {
+  DescribeRefreshScheduleCommandInput,
+  DescribeRefreshScheduleCommandOutput,
+} from "./commands/DescribeRefreshScheduleCommand";
+import type {
+  DescribeResourcePermissionsCommandInput,
+  DescribeResourcePermissionsCommandOutput,
+} from "./commands/DescribeResourcePermissionsCommand";
+import type {
+  DescribeRoleCustomPermissionCommandInput,
+  DescribeRoleCustomPermissionCommandOutput,
+} from "./commands/DescribeRoleCustomPermissionCommand";
+import type {
+  DescribeSelfUpgradeConfigurationCommandInput,
+  DescribeSelfUpgradeConfigurationCommandOutput,
+} from "./commands/DescribeSelfUpgradeConfigurationCommand";
+import type { DescribeSpaceCommandInput, DescribeSpaceCommandOutput } from "./commands/DescribeSpaceCommand";
+import type {
+  DescribeSpacePermissionsCommandInput,
+  DescribeSpacePermissionsCommandOutput,
+} from "./commands/DescribeSpacePermissionsCommand";
+import type {
   DescribeTemplateAliasCommandInput,
   DescribeTemplateAliasCommandOutput,
 } from "./commands/DescribeTemplateAliasCommand";
-import { DescribeTemplateCommandInput, DescribeTemplateCommandOutput } from "./commands/DescribeTemplateCommand";
-import {
+import type { DescribeTemplateCommandInput, DescribeTemplateCommandOutput } from "./commands/DescribeTemplateCommand";
+import type {
+  DescribeTemplateDefinitionCommandInput,
+  DescribeTemplateDefinitionCommandOutput,
+} from "./commands/DescribeTemplateDefinitionCommand";
+import type {
   DescribeTemplatePermissionsCommandInput,
   DescribeTemplatePermissionsCommandOutput,
 } from "./commands/DescribeTemplatePermissionsCommand";
-import { DescribeThemeAliasCommandInput, DescribeThemeAliasCommandOutput } from "./commands/DescribeThemeAliasCommand";
-import { DescribeThemeCommandInput, DescribeThemeCommandOutput } from "./commands/DescribeThemeCommand";
-import {
+import type {
+  DescribeThemeAliasCommandInput,
+  DescribeThemeAliasCommandOutput,
+} from "./commands/DescribeThemeAliasCommand";
+import type { DescribeThemeCommandInput, DescribeThemeCommandOutput } from "./commands/DescribeThemeCommand";
+import type {
   DescribeThemePermissionsCommandInput,
   DescribeThemePermissionsCommandOutput,
 } from "./commands/DescribeThemePermissionsCommand";
-import { DescribeUserCommandInput, DescribeUserCommandOutput } from "./commands/DescribeUserCommand";
-import {
+import type { DescribeTopicCommandInput, DescribeTopicCommandOutput } from "./commands/DescribeTopicCommand";
+import type {
+  DescribeTopicPermissionsCommandInput,
+  DescribeTopicPermissionsCommandOutput,
+} from "./commands/DescribeTopicPermissionsCommand";
+import type {
+  DescribeTopicPermissionsV2CommandInput,
+  DescribeTopicPermissionsV2CommandOutput,
+} from "./commands/DescribeTopicPermissionsV2Command";
+import type {
+  DescribeTopicRefreshCommandInput,
+  DescribeTopicRefreshCommandOutput,
+} from "./commands/DescribeTopicRefreshCommand";
+import type {
+  DescribeTopicRefreshScheduleCommandInput,
+  DescribeTopicRefreshScheduleCommandOutput,
+} from "./commands/DescribeTopicRefreshScheduleCommand";
+import type { DescribeTopicV2CommandInput, DescribeTopicV2CommandOutput } from "./commands/DescribeTopicV2Command";
+import type { DescribeUserCommandInput, DescribeUserCommandOutput } from "./commands/DescribeUserCommand";
+import type {
+  DescribeVPCConnectionCommandInput,
+  DescribeVPCConnectionCommandOutput,
+} from "./commands/DescribeVPCConnectionCommand";
+import type {
   GenerateEmbedUrlForAnonymousUserCommandInput,
   GenerateEmbedUrlForAnonymousUserCommandOutput,
 } from "./commands/GenerateEmbedUrlForAnonymousUserCommand";
-import {
+import type {
   GenerateEmbedUrlForRegisteredUserCommandInput,
   GenerateEmbedUrlForRegisteredUserCommandOutput,
 } from "./commands/GenerateEmbedUrlForRegisteredUserCommand";
-import {
+import type {
+  GenerateEmbedUrlForRegisteredUserWithIdentityCommandInput,
+  GenerateEmbedUrlForRegisteredUserWithIdentityCommandOutput,
+} from "./commands/GenerateEmbedUrlForRegisteredUserWithIdentityCommand";
+import type {
   GetDashboardEmbedUrlCommandInput,
   GetDashboardEmbedUrlCommandOutput,
 } from "./commands/GetDashboardEmbedUrlCommand";
-import { GetSessionEmbedUrlCommandInput, GetSessionEmbedUrlCommandOutput } from "./commands/GetSessionEmbedUrlCommand";
-import { ListAnalysesCommandInput, ListAnalysesCommandOutput } from "./commands/ListAnalysesCommand";
-import { ListDashboardsCommandInput, ListDashboardsCommandOutput } from "./commands/ListDashboardsCommand";
-import {
+import type { GetFlowMetadataCommandInput, GetFlowMetadataCommandOutput } from "./commands/GetFlowMetadataCommand";
+import type {
+  GetFlowPermissionsCommandInput,
+  GetFlowPermissionsCommandOutput,
+} from "./commands/GetFlowPermissionsCommand";
+import type {
+  GetIdentityContextCommandInput,
+  GetIdentityContextCommandOutput,
+} from "./commands/GetIdentityContextCommand";
+import type {
+  GetSessionEmbedUrlCommandInput,
+  GetSessionEmbedUrlCommandOutput,
+} from "./commands/GetSessionEmbedUrlCommand";
+import type {
+  ListActionConnectorsCommandInput,
+  ListActionConnectorsCommandOutput,
+} from "./commands/ListActionConnectorsCommand";
+import type { ListAgentsCommandInput, ListAgentsCommandOutput } from "./commands/ListAgentsCommand";
+import type { ListAnalysesCommandInput, ListAnalysesCommandOutput } from "./commands/ListAnalysesCommand";
+import type {
+  ListApprovalPoliciesCommandInput,
+  ListApprovalPoliciesCommandOutput,
+} from "./commands/ListApprovalPoliciesCommand";
+import type { ListAppsCommandInput, ListAppsCommandOutput } from "./commands/ListAppsCommand";
+import type {
+  ListAssetBundleExportJobsCommandInput,
+  ListAssetBundleExportJobsCommandOutput,
+} from "./commands/ListAssetBundleExportJobsCommand";
+import type {
+  ListAssetBundleImportJobsCommandInput,
+  ListAssetBundleImportJobsCommandOutput,
+} from "./commands/ListAssetBundleImportJobsCommand";
+import type { ListBrandsCommandInput, ListBrandsCommandOutput } from "./commands/ListBrandsCommand";
+import type {
+  ListCustomPermissionsCommandInput,
+  ListCustomPermissionsCommandOutput,
+} from "./commands/ListCustomPermissionsCommand";
+import type { ListDashboardsCommandInput, ListDashboardsCommandOutput } from "./commands/ListDashboardsCommand";
+import type {
   ListDashboardVersionsCommandInput,
   ListDashboardVersionsCommandOutput,
 } from "./commands/ListDashboardVersionsCommand";
-import { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/ListDataSetsCommand";
-import { ListDataSourcesCommandInput, ListDataSourcesCommandOutput } from "./commands/ListDataSourcesCommand";
-import { ListFolderMembersCommandInput, ListFolderMembersCommandOutput } from "./commands/ListFolderMembersCommand";
-import { ListFoldersCommandInput, ListFoldersCommandOutput } from "./commands/ListFoldersCommand";
-import {
+import type { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/ListDataSetsCommand";
+import type { ListDataSourcesCommandInput, ListDataSourcesCommandOutput } from "./commands/ListDataSourcesCommand";
+import type { ListDlpSettingsCommandInput, ListDlpSettingsCommandOutput } from "./commands/ListDlpSettingsCommand";
+import type { ListFlowsCommandInput, ListFlowsCommandOutput } from "./commands/ListFlowsCommand";
+import type {
+  ListFolderMembersCommandInput,
+  ListFolderMembersCommandOutput,
+} from "./commands/ListFolderMembersCommand";
+import type { ListFoldersCommandInput, ListFoldersCommandOutput } from "./commands/ListFoldersCommand";
+import type {
+  ListFoldersForResourceCommandInput,
+  ListFoldersForResourceCommandOutput,
+} from "./commands/ListFoldersForResourceCommand";
+import type {
   ListGroupMembershipsCommandInput,
   ListGroupMembershipsCommandOutput,
 } from "./commands/ListGroupMembershipsCommand";
-import { ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
-import {
+import type { ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
+import type {
   ListIAMPolicyAssignmentsCommandInput,
   ListIAMPolicyAssignmentsCommandOutput,
 } from "./commands/ListIAMPolicyAssignmentsCommand";
-import {
+import type {
   ListIAMPolicyAssignmentsForUserCommandInput,
   ListIAMPolicyAssignmentsForUserCommandOutput,
 } from "./commands/ListIAMPolicyAssignmentsForUserCommand";
-import { ListIngestionsCommandInput, ListIngestionsCommandOutput } from "./commands/ListIngestionsCommand";
-import { ListNamespacesCommandInput, ListNamespacesCommandOutput } from "./commands/ListNamespacesCommand";
-import {
+import type {
+  ListIdentityPropagationConfigsCommandInput,
+  ListIdentityPropagationConfigsCommandOutput,
+} from "./commands/ListIdentityPropagationConfigsCommand";
+import type { ListIngestionsCommandInput, ListIngestionsCommandOutput } from "./commands/ListIngestionsCommand";
+import type {
+  ListKnowledgeBasesCommandInput,
+  ListKnowledgeBasesCommandOutput,
+} from "./commands/ListKnowledgeBasesCommand";
+import type {
+  ListLimitsProfilesCommandInput,
+  ListLimitsProfilesCommandOutput,
+} from "./commands/ListLimitsProfilesCommand";
+import type { ListNamespacesCommandInput, ListNamespacesCommandOutput } from "./commands/ListNamespacesCommand";
+import type {
+  ListOAuthClientApplicationsCommandInput,
+  ListOAuthClientApplicationsCommandOutput,
+} from "./commands/ListOAuthClientApplicationsCommand";
+import type {
+  ListRefreshSchedulesCommandInput,
+  ListRefreshSchedulesCommandOutput,
+} from "./commands/ListRefreshSchedulesCommand";
+import type {
+  ListRoleMembershipsCommandInput,
+  ListRoleMembershipsCommandOutput,
+} from "./commands/ListRoleMembershipsCommand";
+import type { ListSelfUpgradesCommandInput, ListSelfUpgradesCommandOutput } from "./commands/ListSelfUpgradesCommand";
+import type {
+  ListSpaceResourcesCommandInput,
+  ListSpaceResourcesCommandOutput,
+} from "./commands/ListSpaceResourcesCommand";
+import type { ListSpacesCommandInput, ListSpacesCommandOutput } from "./commands/ListSpacesCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ListTemplateAliasesCommandInput,
   ListTemplateAliasesCommandOutput,
 } from "./commands/ListTemplateAliasesCommand";
-import { ListTemplatesCommandInput, ListTemplatesCommandOutput } from "./commands/ListTemplatesCommand";
-import {
+import type { ListTemplatesCommandInput, ListTemplatesCommandOutput } from "./commands/ListTemplatesCommand";
+import type {
   ListTemplateVersionsCommandInput,
   ListTemplateVersionsCommandOutput,
 } from "./commands/ListTemplateVersionsCommand";
-import { ListThemeAliasesCommandInput, ListThemeAliasesCommandOutput } from "./commands/ListThemeAliasesCommand";
-import { ListThemesCommandInput, ListThemesCommandOutput } from "./commands/ListThemesCommand";
-import { ListThemeVersionsCommandInput, ListThemeVersionsCommandOutput } from "./commands/ListThemeVersionsCommand";
-import { ListUserGroupsCommandInput, ListUserGroupsCommandOutput } from "./commands/ListUserGroupsCommand";
-import { ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
-import { RegisterUserCommandInput, RegisterUserCommandOutput } from "./commands/RegisterUserCommand";
-import { RestoreAnalysisCommandInput, RestoreAnalysisCommandOutput } from "./commands/RestoreAnalysisCommand";
-import { SearchAnalysesCommandInput, SearchAnalysesCommandOutput } from "./commands/SearchAnalysesCommand";
-import { SearchDashboardsCommandInput, SearchDashboardsCommandOutput } from "./commands/SearchDashboardsCommand";
-import { SearchFoldersCommandInput, SearchFoldersCommandOutput } from "./commands/SearchFoldersCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { ListThemeAliasesCommandInput, ListThemeAliasesCommandOutput } from "./commands/ListThemeAliasesCommand";
+import type { ListThemesCommandInput, ListThemesCommandOutput } from "./commands/ListThemesCommand";
+import type {
+  ListThemeVersionsCommandInput,
+  ListThemeVersionsCommandOutput,
+} from "./commands/ListThemeVersionsCommand";
+import type {
+  ListTopicRefreshSchedulesCommandInput,
+  ListTopicRefreshSchedulesCommandOutput,
+} from "./commands/ListTopicRefreshSchedulesCommand";
+import type {
+  ListTopicReviewedAnswersCommandInput,
+  ListTopicReviewedAnswersCommandOutput,
+} from "./commands/ListTopicReviewedAnswersCommand";
+import type { ListTopicsCommandInput, ListTopicsCommandOutput } from "./commands/ListTopicsCommand";
+import type { ListTopicsV2CommandInput, ListTopicsV2CommandOutput } from "./commands/ListTopicsV2Command";
+import type { ListUserGroupsCommandInput, ListUserGroupsCommandOutput } from "./commands/ListUserGroupsCommand";
+import type { ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
+import type {
+  ListUsersIndexCapacityCommandInput,
+  ListUsersIndexCapacityCommandOutput,
+} from "./commands/ListUsersIndexCapacityCommand";
+import type {
+  ListVPCConnectionsCommandInput,
+  ListVPCConnectionsCommandOutput,
+} from "./commands/ListVPCConnectionsCommand";
+import type { PredictQAResultsCommandInput, PredictQAResultsCommandOutput } from "./commands/PredictQAResultsCommand";
+import type {
+  PutDataSetRefreshPropertiesCommandInput,
+  PutDataSetRefreshPropertiesCommandOutput,
+} from "./commands/PutDataSetRefreshPropertiesCommand";
+import type { RegisterUserCommandInput, RegisterUserCommandOutput } from "./commands/RegisterUserCommand";
+import type { RestoreAnalysisCommandInput, RestoreAnalysisCommandOutput } from "./commands/RestoreAnalysisCommand";
+import type {
+  SearchActionConnectorsCommandInput,
+  SearchActionConnectorsCommandOutput,
+} from "./commands/SearchActionConnectorsCommand";
+import type { SearchAgentsCommandInput, SearchAgentsCommandOutput } from "./commands/SearchAgentsCommand";
+import type { SearchAnalysesCommandInput, SearchAnalysesCommandOutput } from "./commands/SearchAnalysesCommand";
+import type { SearchAppsCommandInput, SearchAppsCommandOutput } from "./commands/SearchAppsCommand";
+import type { SearchDashboardsCommandInput, SearchDashboardsCommandOutput } from "./commands/SearchDashboardsCommand";
+import type { SearchDataSetsCommandInput, SearchDataSetsCommandOutput } from "./commands/SearchDataSetsCommand";
+import type {
+  SearchDataSourcesCommandInput,
+  SearchDataSourcesCommandOutput,
+} from "./commands/SearchDataSourcesCommand";
+import type { SearchFlowsCommandInput, SearchFlowsCommandOutput } from "./commands/SearchFlowsCommand";
+import type { SearchFoldersCommandInput, SearchFoldersCommandOutput } from "./commands/SearchFoldersCommand";
+import type { SearchGroupsCommandInput, SearchGroupsCommandOutput } from "./commands/SearchGroupsCommand";
+import type {
+  SearchKnowledgeBasesCommandInput,
+  SearchKnowledgeBasesCommandOutput,
+} from "./commands/SearchKnowledgeBasesCommand";
+import type { SearchSpacesCommandInput, SearchSpacesCommandOutput } from "./commands/SearchSpacesCommand";
+import type { SearchTopicsCommandInput, SearchTopicsCommandOutput } from "./commands/SearchTopicsCommand";
+import type { SearchTopicsV2CommandInput, SearchTopicsV2CommandOutput } from "./commands/SearchTopicsV2Command";
+import type {
+  StartAssetBundleExportJobCommandInput,
+  StartAssetBundleExportJobCommandOutput,
+} from "./commands/StartAssetBundleExportJobCommand";
+import type {
+  StartAssetBundleImportJobCommandInput,
+  StartAssetBundleImportJobCommandOutput,
+} from "./commands/StartAssetBundleImportJobCommand";
+import type {
+  StartAutomationJobCommandInput,
+  StartAutomationJobCommandOutput,
+} from "./commands/StartAutomationJobCommand";
+import type {
+  StartDashboardSnapshotJobCommandInput,
+  StartDashboardSnapshotJobCommandOutput,
+} from "./commands/StartDashboardSnapshotJobCommand";
+import type {
+  StartDashboardSnapshotJobScheduleCommandInput,
+  StartDashboardSnapshotJobScheduleCommandOutput,
+} from "./commands/StartDashboardSnapshotJobScheduleCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateAccountCustomizationCommandInput,
   UpdateAccountCustomizationCommandOutput,
 } from "./commands/UpdateAccountCustomizationCommand";
-import {
+import type {
+  UpdateAccountCustomPermissionCommandInput,
+  UpdateAccountCustomPermissionCommandOutput,
+} from "./commands/UpdateAccountCustomPermissionCommand";
+import type {
   UpdateAccountSettingsCommandInput,
   UpdateAccountSettingsCommandOutput,
 } from "./commands/UpdateAccountSettingsCommand";
-import { UpdateAnalysisCommandInput, UpdateAnalysisCommandOutput } from "./commands/UpdateAnalysisCommand";
-import {
+import type {
+  UpdateActionConnectorCommandInput,
+  UpdateActionConnectorCommandOutput,
+} from "./commands/UpdateActionConnectorCommand";
+import type {
+  UpdateActionConnectorPermissionsCommandInput,
+  UpdateActionConnectorPermissionsCommandOutput,
+} from "./commands/UpdateActionConnectorPermissionsCommand";
+import type { UpdateAgentCommandInput, UpdateAgentCommandOutput } from "./commands/UpdateAgentCommand";
+import type {
+  UpdateAgentPermissionsCommandInput,
+  UpdateAgentPermissionsCommandOutput,
+} from "./commands/UpdateAgentPermissionsCommand";
+import type { UpdateAnalysisCommandInput, UpdateAnalysisCommandOutput } from "./commands/UpdateAnalysisCommand";
+import type {
   UpdateAnalysisPermissionsCommandInput,
   UpdateAnalysisPermissionsCommandOutput,
 } from "./commands/UpdateAnalysisPermissionsCommand";
-import { UpdateDashboardCommandInput, UpdateDashboardCommandOutput } from "./commands/UpdateDashboardCommand";
-import {
+import type {
+  UpdateApplicationWithTokenExchangeGrantCommandInput,
+  UpdateApplicationWithTokenExchangeGrantCommandOutput,
+} from "./commands/UpdateApplicationWithTokenExchangeGrantCommand";
+import type {
+  UpdateAppPermissionsCommandInput,
+  UpdateAppPermissionsCommandOutput,
+} from "./commands/UpdateAppPermissionsCommand";
+import type {
+  UpdateApprovalPolicyCommandInput,
+  UpdateApprovalPolicyCommandOutput,
+} from "./commands/UpdateApprovalPolicyCommand";
+import type {
+  UpdateBrandAssignmentCommandInput,
+  UpdateBrandAssignmentCommandOutput,
+} from "./commands/UpdateBrandAssignmentCommand";
+import type { UpdateBrandCommandInput, UpdateBrandCommandOutput } from "./commands/UpdateBrandCommand";
+import type {
+  UpdateBrandPublishedVersionCommandInput,
+  UpdateBrandPublishedVersionCommandOutput,
+} from "./commands/UpdateBrandPublishedVersionCommand";
+import type {
+  UpdateCustomPermissionsCommandInput,
+  UpdateCustomPermissionsCommandOutput,
+} from "./commands/UpdateCustomPermissionsCommand";
+import type { UpdateDashboardCommandInput, UpdateDashboardCommandOutput } from "./commands/UpdateDashboardCommand";
+import type {
+  UpdateDashboardLinksCommandInput,
+  UpdateDashboardLinksCommandOutput,
+} from "./commands/UpdateDashboardLinksCommand";
+import type {
   UpdateDashboardPermissionsCommandInput,
   UpdateDashboardPermissionsCommandOutput,
 } from "./commands/UpdateDashboardPermissionsCommand";
-import {
+import type {
   UpdateDashboardPublishedVersionCommandInput,
   UpdateDashboardPublishedVersionCommandOutput,
 } from "./commands/UpdateDashboardPublishedVersionCommand";
-import { UpdateDataSetCommandInput, UpdateDataSetCommandOutput } from "./commands/UpdateDataSetCommand";
-import {
+import type {
+  UpdateDashboardsQAConfigurationCommandInput,
+  UpdateDashboardsQAConfigurationCommandOutput,
+} from "./commands/UpdateDashboardsQAConfigurationCommand";
+import type { UpdateDataSetCommandInput, UpdateDataSetCommandOutput } from "./commands/UpdateDataSetCommand";
+import type {
   UpdateDataSetPermissionsCommandInput,
   UpdateDataSetPermissionsCommandOutput,
 } from "./commands/UpdateDataSetPermissionsCommand";
-import { UpdateDataSourceCommandInput, UpdateDataSourceCommandOutput } from "./commands/UpdateDataSourceCommand";
-import {
+import type { UpdateDataSourceCommandInput, UpdateDataSourceCommandOutput } from "./commands/UpdateDataSourceCommand";
+import type {
   UpdateDataSourcePermissionsCommandInput,
   UpdateDataSourcePermissionsCommandOutput,
 } from "./commands/UpdateDataSourcePermissionsCommand";
-import { UpdateFolderCommandInput, UpdateFolderCommandOutput } from "./commands/UpdateFolderCommand";
-import {
+import type {
+  UpdateDefaultQBusinessApplicationCommandInput,
+  UpdateDefaultQBusinessApplicationCommandOutput,
+} from "./commands/UpdateDefaultQBusinessApplicationCommand";
+import type { UpdateDlpSettingCommandInput, UpdateDlpSettingCommandOutput } from "./commands/UpdateDlpSettingCommand";
+import type { UpdateFlowCommandInput, UpdateFlowCommandOutput } from "./commands/UpdateFlowCommand";
+import type {
+  UpdateFlowPermissionsCommandInput,
+  UpdateFlowPermissionsCommandOutput,
+} from "./commands/UpdateFlowPermissionsCommand";
+import type { UpdateFolderCommandInput, UpdateFolderCommandOutput } from "./commands/UpdateFolderCommand";
+import type {
   UpdateFolderPermissionsCommandInput,
   UpdateFolderPermissionsCommandOutput,
 } from "./commands/UpdateFolderPermissionsCommand";
-import { UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
-import {
+import type { UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
+import type {
   UpdateIAMPolicyAssignmentCommandInput,
   UpdateIAMPolicyAssignmentCommandOutput,
 } from "./commands/UpdateIAMPolicyAssignmentCommand";
-import {
+import type {
+  UpdateIdentityPropagationConfigCommandInput,
+  UpdateIdentityPropagationConfigCommandOutput,
+} from "./commands/UpdateIdentityPropagationConfigCommand";
+import type {
   UpdateIpRestrictionCommandInput,
   UpdateIpRestrictionCommandOutput,
 } from "./commands/UpdateIpRestrictionCommand";
-import {
+import type {
+  UpdateKeyRegistrationCommandInput,
+  UpdateKeyRegistrationCommandOutput,
+} from "./commands/UpdateKeyRegistrationCommand";
+import type {
+  UpdateKnowledgeBaseCommandInput,
+  UpdateKnowledgeBaseCommandOutput,
+} from "./commands/UpdateKnowledgeBaseCommand";
+import type {
+  UpdateKnowledgeBasePermissionsCommandInput,
+  UpdateKnowledgeBasePermissionsCommandOutput,
+} from "./commands/UpdateKnowledgeBasePermissionsCommand";
+import type {
+  UpdateLimitsProfileCommandInput,
+  UpdateLimitsProfileCommandOutput,
+} from "./commands/UpdateLimitsProfileCommand";
+import type {
+  UpdateOAuthClientApplicationCommandInput,
+  UpdateOAuthClientApplicationCommandOutput,
+} from "./commands/UpdateOAuthClientApplicationCommand";
+import type {
+  UpdatePublicSharingSettingsCommandInput,
+  UpdatePublicSharingSettingsCommandOutput,
+} from "./commands/UpdatePublicSharingSettingsCommand";
+import type {
+  UpdateQPersonalizationConfigurationCommandInput,
+  UpdateQPersonalizationConfigurationCommandOutput,
+} from "./commands/UpdateQPersonalizationConfigurationCommand";
+import type {
+  UpdateQuickSightQSearchConfigurationCommandInput,
+  UpdateQuickSightQSearchConfigurationCommandOutput,
+} from "./commands/UpdateQuickSightQSearchConfigurationCommand";
+import type {
+  UpdateRefreshScheduleCommandInput,
+  UpdateRefreshScheduleCommandOutput,
+} from "./commands/UpdateRefreshScheduleCommand";
+import type {
+  UpdateResourcePermissionsCommandInput,
+  UpdateResourcePermissionsCommandOutput,
+} from "./commands/UpdateResourcePermissionsCommand";
+import type {
+  UpdateRoleCustomPermissionCommandInput,
+  UpdateRoleCustomPermissionCommandOutput,
+} from "./commands/UpdateRoleCustomPermissionCommand";
+import type {
+  UpdateSelfUpgradeCommandInput,
+  UpdateSelfUpgradeCommandOutput,
+} from "./commands/UpdateSelfUpgradeCommand";
+import type {
+  UpdateSelfUpgradeConfigurationCommandInput,
+  UpdateSelfUpgradeConfigurationCommandOutput,
+} from "./commands/UpdateSelfUpgradeConfigurationCommand";
+import type { UpdateSpaceCommandInput, UpdateSpaceCommandOutput } from "./commands/UpdateSpaceCommand";
+import type {
+  UpdateSpacePermissionsCommandInput,
+  UpdateSpacePermissionsCommandOutput,
+} from "./commands/UpdateSpacePermissionsCommand";
+import type {
+  UpdateSpaceResourcesCommandInput,
+  UpdateSpaceResourcesCommandOutput,
+} from "./commands/UpdateSpaceResourcesCommand";
+import type {
+  UpdateSPICECapacityConfigurationCommandInput,
+  UpdateSPICECapacityConfigurationCommandOutput,
+} from "./commands/UpdateSPICECapacityConfigurationCommand";
+import type {
   UpdateTemplateAliasCommandInput,
   UpdateTemplateAliasCommandOutput,
 } from "./commands/UpdateTemplateAliasCommand";
-import { UpdateTemplateCommandInput, UpdateTemplateCommandOutput } from "./commands/UpdateTemplateCommand";
-import {
+import type { UpdateTemplateCommandInput, UpdateTemplateCommandOutput } from "./commands/UpdateTemplateCommand";
+import type {
   UpdateTemplatePermissionsCommandInput,
   UpdateTemplatePermissionsCommandOutput,
 } from "./commands/UpdateTemplatePermissionsCommand";
-import { UpdateThemeAliasCommandInput, UpdateThemeAliasCommandOutput } from "./commands/UpdateThemeAliasCommand";
-import { UpdateThemeCommandInput, UpdateThemeCommandOutput } from "./commands/UpdateThemeCommand";
-import {
+import type { UpdateThemeAliasCommandInput, UpdateThemeAliasCommandOutput } from "./commands/UpdateThemeAliasCommand";
+import type { UpdateThemeCommandInput, UpdateThemeCommandOutput } from "./commands/UpdateThemeCommand";
+import type {
   UpdateThemePermissionsCommandInput,
   UpdateThemePermissionsCommandOutput,
 } from "./commands/UpdateThemePermissionsCommand";
-import { UpdateUserCommandInput, UpdateUserCommandOutput } from "./commands/UpdateUserCommand";
+import type { UpdateTopicCommandInput, UpdateTopicCommandOutput } from "./commands/UpdateTopicCommand";
+import type {
+  UpdateTopicPermissionsCommandInput,
+  UpdateTopicPermissionsCommandOutput,
+} from "./commands/UpdateTopicPermissionsCommand";
+import type {
+  UpdateTopicPermissionsV2CommandInput,
+  UpdateTopicPermissionsV2CommandOutput,
+} from "./commands/UpdateTopicPermissionsV2Command";
+import type {
+  UpdateTopicRefreshScheduleCommandInput,
+  UpdateTopicRefreshScheduleCommandOutput,
+} from "./commands/UpdateTopicRefreshScheduleCommand";
+import type { UpdateTopicV2CommandInput, UpdateTopicV2CommandOutput } from "./commands/UpdateTopicV2Command";
+import type { UpdateUserCommandInput, UpdateUserCommandOutput } from "./commands/UpdateUserCommand";
+import type {
+  UpdateUserCustomPermissionCommandInput,
+  UpdateUserCustomPermissionCommandOutput,
+} from "./commands/UpdateUserCustomPermissionCommand";
+import type {
+  UpdateVPCConnectionCommandInput,
+  UpdateVPCConnectionCommandOutput,
+} from "./commands/UpdateVPCConnectionCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | BatchCreateTopicReviewedAnswerCommandInput
+  | BatchDeleteKnowledgeBaseCommandInput
+  | BatchDeleteTopicReviewedAnswerCommandInput
+  | BatchDescribeUserLimitsCommandInput
   | CancelIngestionCommandInput
   | CreateAccountCustomizationCommandInput
+  | CreateAccountSubscriptionCommandInput
+  | CreateActionConnectorCommandInput
+  | CreateAgentCommandInput
   | CreateAnalysisCommandInput
+  | CreateApprovalPolicyCommandInput
+  | CreateBrandCommandInput
+  | CreateCustomPermissionsCommandInput
   | CreateDashboardCommandInput
   | CreateDataSetCommandInput
   | CreateDataSourceCommandInput
+  | CreateDlpSettingCommandInput
+  | CreateFlowCommandInput
   | CreateFolderCommandInput
   | CreateFolderMembershipCommandInput
   | CreateGroupCommandInput
   | CreateGroupMembershipCommandInput
   | CreateIAMPolicyAssignmentCommandInput
   | CreateIngestionCommandInput
+  | CreateKnowledgeBaseCommandInput
+  | CreateLimitsProfileCommandInput
   | CreateNamespaceCommandInput
+  | CreateOAuthClientApplicationCommandInput
+  | CreateRefreshScheduleCommandInput
+  | CreateRoleMembershipCommandInput
+  | CreateSpaceCommandInput
   | CreateTemplateAliasCommandInput
   | CreateTemplateCommandInput
   | CreateThemeAliasCommandInput
   | CreateThemeCommandInput
+  | CreateTopicCommandInput
+  | CreateTopicRefreshScheduleCommandInput
+  | CreateTopicV2CommandInput
+  | CreateVPCConnectionCommandInput
+  | DeleteAccountCustomPermissionCommandInput
   | DeleteAccountCustomizationCommandInput
+  | DeleteAccountSubscriptionCommandInput
+  | DeleteActionConnectorCommandInput
+  | DeleteAgentCommandInput
   | DeleteAnalysisCommandInput
+  | DeleteAppCommandInput
+  | DeleteApprovalPolicyCommandInput
+  | DeleteBrandAssignmentCommandInput
+  | DeleteBrandCommandInput
+  | DeleteCustomPermissionsCommandInput
   | DeleteDashboardCommandInput
   | DeleteDataSetCommandInput
+  | DeleteDataSetRefreshPropertiesCommandInput
   | DeleteDataSourceCommandInput
+  | DeleteDefaultQBusinessApplicationCommandInput
+  | DeleteDlpSettingCommandInput
+  | DeleteFlowCommandInput
   | DeleteFolderCommandInput
   | DeleteFolderMembershipCommandInput
   | DeleteGroupCommandInput
   | DeleteGroupMembershipCommandInput
   | DeleteIAMPolicyAssignmentCommandInput
+  | DeleteIdentityPropagationConfigCommandInput
+  | DeleteKnowledgeBaseCommandInput
+  | DeleteLimitsProfileCommandInput
   | DeleteNamespaceCommandInput
+  | DeleteOAuthClientApplicationCommandInput
+  | DeleteRefreshScheduleCommandInput
+  | DeleteRoleCustomPermissionCommandInput
+  | DeleteRoleMembershipCommandInput
+  | DeleteSpaceCommandInput
   | DeleteTemplateAliasCommandInput
   | DeleteTemplateCommandInput
   | DeleteThemeAliasCommandInput
   | DeleteThemeCommandInput
+  | DeleteTopicCommandInput
+  | DeleteTopicRefreshScheduleCommandInput
+  | DeleteTopicV2CommandInput
   | DeleteUserByPrincipalIdCommandInput
   | DeleteUserCommandInput
+  | DeleteUserCustomPermissionCommandInput
+  | DeleteVPCConnectionCommandInput
+  | DescribeAccountCustomPermissionCommandInput
   | DescribeAccountCustomizationCommandInput
   | DescribeAccountSettingsCommandInput
+  | DescribeAccountSubscriptionCommandInput
+  | DescribeActionConnectorCommandInput
+  | DescribeActionConnectorPermissionsCommandInput
+  | DescribeAgentCommandInput
+  | DescribeAgentPermissionsCommandInput
   | DescribeAnalysisCommandInput
+  | DescribeAnalysisDefinitionCommandInput
   | DescribeAnalysisPermissionsCommandInput
+  | DescribeAppCommandInput
+  | DescribeAppPermissionsCommandInput
+  | DescribeApprovalPolicyCommandInput
+  | DescribeAssetBundleExportJobCommandInput
+  | DescribeAssetBundleImportJobCommandInput
+  | DescribeAutomationJobCommandInput
+  | DescribeBrandAssignmentCommandInput
+  | DescribeBrandCommandInput
+  | DescribeBrandPublishedVersionCommandInput
+  | DescribeCustomPermissionsCommandInput
   | DescribeDashboardCommandInput
+  | DescribeDashboardDefinitionCommandInput
   | DescribeDashboardPermissionsCommandInput
+  | DescribeDashboardSnapshotJobCommandInput
+  | DescribeDashboardSnapshotJobResultCommandInput
+  | DescribeDashboardsQAConfigurationCommandInput
   | DescribeDataSetCommandInput
   | DescribeDataSetPermissionsCommandInput
+  | DescribeDataSetRefreshPropertiesCommandInput
   | DescribeDataSourceCommandInput
   | DescribeDataSourcePermissionsCommandInput
+  | DescribeDefaultQBusinessApplicationCommandInput
+  | DescribeDlpSettingCommandInput
+  | DescribeFlowCommandInput
   | DescribeFolderCommandInput
   | DescribeFolderPermissionsCommandInput
   | DescribeFolderResolvedPermissionsCommandInput
   | DescribeGroupCommandInput
+  | DescribeGroupMembershipCommandInput
   | DescribeIAMPolicyAssignmentCommandInput
   | DescribeIngestionCommandInput
   | DescribeIpRestrictionCommandInput
+  | DescribeKeyRegistrationCommandInput
+  | DescribeKnowledgeBaseCommandInput
+  | DescribeKnowledgeBasePermissionsCommandInput
+  | DescribeLimitsProfileCommandInput
   | DescribeNamespaceCommandInput
+  | DescribeOAuthClientApplicationCommandInput
+  | DescribeQPersonalizationConfigurationCommandInput
+  | DescribeQuickSightQSearchConfigurationCommandInput
+  | DescribeRefreshScheduleCommandInput
+  | DescribeResourcePermissionsCommandInput
+  | DescribeRoleCustomPermissionCommandInput
+  | DescribeSelfUpgradeConfigurationCommandInput
+  | DescribeSpaceCommandInput
+  | DescribeSpacePermissionsCommandInput
   | DescribeTemplateAliasCommandInput
   | DescribeTemplateCommandInput
+  | DescribeTemplateDefinitionCommandInput
   | DescribeTemplatePermissionsCommandInput
   | DescribeThemeAliasCommandInput
   | DescribeThemeCommandInput
   | DescribeThemePermissionsCommandInput
+  | DescribeTopicCommandInput
+  | DescribeTopicPermissionsCommandInput
+  | DescribeTopicPermissionsV2CommandInput
+  | DescribeTopicRefreshCommandInput
+  | DescribeTopicRefreshScheduleCommandInput
+  | DescribeTopicV2CommandInput
   | DescribeUserCommandInput
+  | DescribeVPCConnectionCommandInput
   | GenerateEmbedUrlForAnonymousUserCommandInput
   | GenerateEmbedUrlForRegisteredUserCommandInput
+  | GenerateEmbedUrlForRegisteredUserWithIdentityCommandInput
   | GetDashboardEmbedUrlCommandInput
+  | GetFlowMetadataCommandInput
+  | GetFlowPermissionsCommandInput
+  | GetIdentityContextCommandInput
   | GetSessionEmbedUrlCommandInput
+  | ListActionConnectorsCommandInput
+  | ListAgentsCommandInput
   | ListAnalysesCommandInput
+  | ListApprovalPoliciesCommandInput
+  | ListAppsCommandInput
+  | ListAssetBundleExportJobsCommandInput
+  | ListAssetBundleImportJobsCommandInput
+  | ListBrandsCommandInput
+  | ListCustomPermissionsCommandInput
   | ListDashboardVersionsCommandInput
   | ListDashboardsCommandInput
   | ListDataSetsCommandInput
   | ListDataSourcesCommandInput
+  | ListDlpSettingsCommandInput
+  | ListFlowsCommandInput
   | ListFolderMembersCommandInput
   | ListFoldersCommandInput
+  | ListFoldersForResourceCommandInput
   | ListGroupMembershipsCommandInput
   | ListGroupsCommandInput
   | ListIAMPolicyAssignmentsCommandInput
   | ListIAMPolicyAssignmentsForUserCommandInput
+  | ListIdentityPropagationConfigsCommandInput
   | ListIngestionsCommandInput
+  | ListKnowledgeBasesCommandInput
+  | ListLimitsProfilesCommandInput
   | ListNamespacesCommandInput
+  | ListOAuthClientApplicationsCommandInput
+  | ListRefreshSchedulesCommandInput
+  | ListRoleMembershipsCommandInput
+  | ListSelfUpgradesCommandInput
+  | ListSpaceResourcesCommandInput
+  | ListSpacesCommandInput
   | ListTagsForResourceCommandInput
   | ListTemplateAliasesCommandInput
   | ListTemplateVersionsCommandInput
@@ -391,116 +1151,305 @@ export type ServiceInputTypes =
   | ListThemeAliasesCommandInput
   | ListThemeVersionsCommandInput
   | ListThemesCommandInput
+  | ListTopicRefreshSchedulesCommandInput
+  | ListTopicReviewedAnswersCommandInput
+  | ListTopicsCommandInput
+  | ListTopicsV2CommandInput
   | ListUserGroupsCommandInput
   | ListUsersCommandInput
+  | ListUsersIndexCapacityCommandInput
+  | ListVPCConnectionsCommandInput
+  | PredictQAResultsCommandInput
+  | PutDataSetRefreshPropertiesCommandInput
   | RegisterUserCommandInput
   | RestoreAnalysisCommandInput
+  | SearchActionConnectorsCommandInput
+  | SearchAgentsCommandInput
   | SearchAnalysesCommandInput
+  | SearchAppsCommandInput
   | SearchDashboardsCommandInput
+  | SearchDataSetsCommandInput
+  | SearchDataSourcesCommandInput
+  | SearchFlowsCommandInput
   | SearchFoldersCommandInput
+  | SearchGroupsCommandInput
+  | SearchKnowledgeBasesCommandInput
+  | SearchSpacesCommandInput
+  | SearchTopicsCommandInput
+  | SearchTopicsV2CommandInput
+  | StartAssetBundleExportJobCommandInput
+  | StartAssetBundleImportJobCommandInput
+  | StartAutomationJobCommandInput
+  | StartDashboardSnapshotJobCommandInput
+  | StartDashboardSnapshotJobScheduleCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateAccountCustomPermissionCommandInput
   | UpdateAccountCustomizationCommandInput
   | UpdateAccountSettingsCommandInput
+  | UpdateActionConnectorCommandInput
+  | UpdateActionConnectorPermissionsCommandInput
+  | UpdateAgentCommandInput
+  | UpdateAgentPermissionsCommandInput
   | UpdateAnalysisCommandInput
   | UpdateAnalysisPermissionsCommandInput
+  | UpdateAppPermissionsCommandInput
+  | UpdateApplicationWithTokenExchangeGrantCommandInput
+  | UpdateApprovalPolicyCommandInput
+  | UpdateBrandAssignmentCommandInput
+  | UpdateBrandCommandInput
+  | UpdateBrandPublishedVersionCommandInput
+  | UpdateCustomPermissionsCommandInput
   | UpdateDashboardCommandInput
+  | UpdateDashboardLinksCommandInput
   | UpdateDashboardPermissionsCommandInput
   | UpdateDashboardPublishedVersionCommandInput
+  | UpdateDashboardsQAConfigurationCommandInput
   | UpdateDataSetCommandInput
   | UpdateDataSetPermissionsCommandInput
   | UpdateDataSourceCommandInput
   | UpdateDataSourcePermissionsCommandInput
+  | UpdateDefaultQBusinessApplicationCommandInput
+  | UpdateDlpSettingCommandInput
+  | UpdateFlowCommandInput
+  | UpdateFlowPermissionsCommandInput
   | UpdateFolderCommandInput
   | UpdateFolderPermissionsCommandInput
   | UpdateGroupCommandInput
   | UpdateIAMPolicyAssignmentCommandInput
+  | UpdateIdentityPropagationConfigCommandInput
   | UpdateIpRestrictionCommandInput
+  | UpdateKeyRegistrationCommandInput
+  | UpdateKnowledgeBaseCommandInput
+  | UpdateKnowledgeBasePermissionsCommandInput
+  | UpdateLimitsProfileCommandInput
+  | UpdateOAuthClientApplicationCommandInput
+  | UpdatePublicSharingSettingsCommandInput
+  | UpdateQPersonalizationConfigurationCommandInput
+  | UpdateQuickSightQSearchConfigurationCommandInput
+  | UpdateRefreshScheduleCommandInput
+  | UpdateResourcePermissionsCommandInput
+  | UpdateRoleCustomPermissionCommandInput
+  | UpdateSPICECapacityConfigurationCommandInput
+  | UpdateSelfUpgradeCommandInput
+  | UpdateSelfUpgradeConfigurationCommandInput
+  | UpdateSpaceCommandInput
+  | UpdateSpacePermissionsCommandInput
+  | UpdateSpaceResourcesCommandInput
   | UpdateTemplateAliasCommandInput
   | UpdateTemplateCommandInput
   | UpdateTemplatePermissionsCommandInput
   | UpdateThemeAliasCommandInput
   | UpdateThemeCommandInput
   | UpdateThemePermissionsCommandInput
-  | UpdateUserCommandInput;
+  | UpdateTopicCommandInput
+  | UpdateTopicPermissionsCommandInput
+  | UpdateTopicPermissionsV2CommandInput
+  | UpdateTopicRefreshScheduleCommandInput
+  | UpdateTopicV2CommandInput
+  | UpdateUserCommandInput
+  | UpdateUserCustomPermissionCommandInput
+  | UpdateVPCConnectionCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | BatchCreateTopicReviewedAnswerCommandOutput
+  | BatchDeleteKnowledgeBaseCommandOutput
+  | BatchDeleteTopicReviewedAnswerCommandOutput
+  | BatchDescribeUserLimitsCommandOutput
   | CancelIngestionCommandOutput
   | CreateAccountCustomizationCommandOutput
+  | CreateAccountSubscriptionCommandOutput
+  | CreateActionConnectorCommandOutput
+  | CreateAgentCommandOutput
   | CreateAnalysisCommandOutput
+  | CreateApprovalPolicyCommandOutput
+  | CreateBrandCommandOutput
+  | CreateCustomPermissionsCommandOutput
   | CreateDashboardCommandOutput
   | CreateDataSetCommandOutput
   | CreateDataSourceCommandOutput
+  | CreateDlpSettingCommandOutput
+  | CreateFlowCommandOutput
   | CreateFolderCommandOutput
   | CreateFolderMembershipCommandOutput
   | CreateGroupCommandOutput
   | CreateGroupMembershipCommandOutput
   | CreateIAMPolicyAssignmentCommandOutput
   | CreateIngestionCommandOutput
+  | CreateKnowledgeBaseCommandOutput
+  | CreateLimitsProfileCommandOutput
   | CreateNamespaceCommandOutput
+  | CreateOAuthClientApplicationCommandOutput
+  | CreateRefreshScheduleCommandOutput
+  | CreateRoleMembershipCommandOutput
+  | CreateSpaceCommandOutput
   | CreateTemplateAliasCommandOutput
   | CreateTemplateCommandOutput
   | CreateThemeAliasCommandOutput
   | CreateThemeCommandOutput
+  | CreateTopicCommandOutput
+  | CreateTopicRefreshScheduleCommandOutput
+  | CreateTopicV2CommandOutput
+  | CreateVPCConnectionCommandOutput
+  | DeleteAccountCustomPermissionCommandOutput
   | DeleteAccountCustomizationCommandOutput
+  | DeleteAccountSubscriptionCommandOutput
+  | DeleteActionConnectorCommandOutput
+  | DeleteAgentCommandOutput
   | DeleteAnalysisCommandOutput
+  | DeleteAppCommandOutput
+  | DeleteApprovalPolicyCommandOutput
+  | DeleteBrandAssignmentCommandOutput
+  | DeleteBrandCommandOutput
+  | DeleteCustomPermissionsCommandOutput
   | DeleteDashboardCommandOutput
   | DeleteDataSetCommandOutput
+  | DeleteDataSetRefreshPropertiesCommandOutput
   | DeleteDataSourceCommandOutput
+  | DeleteDefaultQBusinessApplicationCommandOutput
+  | DeleteDlpSettingCommandOutput
+  | DeleteFlowCommandOutput
   | DeleteFolderCommandOutput
   | DeleteFolderMembershipCommandOutput
   | DeleteGroupCommandOutput
   | DeleteGroupMembershipCommandOutput
   | DeleteIAMPolicyAssignmentCommandOutput
+  | DeleteIdentityPropagationConfigCommandOutput
+  | DeleteKnowledgeBaseCommandOutput
+  | DeleteLimitsProfileCommandOutput
   | DeleteNamespaceCommandOutput
+  | DeleteOAuthClientApplicationCommandOutput
+  | DeleteRefreshScheduleCommandOutput
+  | DeleteRoleCustomPermissionCommandOutput
+  | DeleteRoleMembershipCommandOutput
+  | DeleteSpaceCommandOutput
   | DeleteTemplateAliasCommandOutput
   | DeleteTemplateCommandOutput
   | DeleteThemeAliasCommandOutput
   | DeleteThemeCommandOutput
+  | DeleteTopicCommandOutput
+  | DeleteTopicRefreshScheduleCommandOutput
+  | DeleteTopicV2CommandOutput
   | DeleteUserByPrincipalIdCommandOutput
   | DeleteUserCommandOutput
+  | DeleteUserCustomPermissionCommandOutput
+  | DeleteVPCConnectionCommandOutput
+  | DescribeAccountCustomPermissionCommandOutput
   | DescribeAccountCustomizationCommandOutput
   | DescribeAccountSettingsCommandOutput
+  | DescribeAccountSubscriptionCommandOutput
+  | DescribeActionConnectorCommandOutput
+  | DescribeActionConnectorPermissionsCommandOutput
+  | DescribeAgentCommandOutput
+  | DescribeAgentPermissionsCommandOutput
   | DescribeAnalysisCommandOutput
+  | DescribeAnalysisDefinitionCommandOutput
   | DescribeAnalysisPermissionsCommandOutput
+  | DescribeAppCommandOutput
+  | DescribeAppPermissionsCommandOutput
+  | DescribeApprovalPolicyCommandOutput
+  | DescribeAssetBundleExportJobCommandOutput
+  | DescribeAssetBundleImportJobCommandOutput
+  | DescribeAutomationJobCommandOutput
+  | DescribeBrandAssignmentCommandOutput
+  | DescribeBrandCommandOutput
+  | DescribeBrandPublishedVersionCommandOutput
+  | DescribeCustomPermissionsCommandOutput
   | DescribeDashboardCommandOutput
+  | DescribeDashboardDefinitionCommandOutput
   | DescribeDashboardPermissionsCommandOutput
+  | DescribeDashboardSnapshotJobCommandOutput
+  | DescribeDashboardSnapshotJobResultCommandOutput
+  | DescribeDashboardsQAConfigurationCommandOutput
   | DescribeDataSetCommandOutput
   | DescribeDataSetPermissionsCommandOutput
+  | DescribeDataSetRefreshPropertiesCommandOutput
   | DescribeDataSourceCommandOutput
   | DescribeDataSourcePermissionsCommandOutput
+  | DescribeDefaultQBusinessApplicationCommandOutput
+  | DescribeDlpSettingCommandOutput
+  | DescribeFlowCommandOutput
   | DescribeFolderCommandOutput
   | DescribeFolderPermissionsCommandOutput
   | DescribeFolderResolvedPermissionsCommandOutput
   | DescribeGroupCommandOutput
+  | DescribeGroupMembershipCommandOutput
   | DescribeIAMPolicyAssignmentCommandOutput
   | DescribeIngestionCommandOutput
   | DescribeIpRestrictionCommandOutput
+  | DescribeKeyRegistrationCommandOutput
+  | DescribeKnowledgeBaseCommandOutput
+  | DescribeKnowledgeBasePermissionsCommandOutput
+  | DescribeLimitsProfileCommandOutput
   | DescribeNamespaceCommandOutput
+  | DescribeOAuthClientApplicationCommandOutput
+  | DescribeQPersonalizationConfigurationCommandOutput
+  | DescribeQuickSightQSearchConfigurationCommandOutput
+  | DescribeRefreshScheduleCommandOutput
+  | DescribeResourcePermissionsCommandOutput
+  | DescribeRoleCustomPermissionCommandOutput
+  | DescribeSelfUpgradeConfigurationCommandOutput
+  | DescribeSpaceCommandOutput
+  | DescribeSpacePermissionsCommandOutput
   | DescribeTemplateAliasCommandOutput
   | DescribeTemplateCommandOutput
+  | DescribeTemplateDefinitionCommandOutput
   | DescribeTemplatePermissionsCommandOutput
   | DescribeThemeAliasCommandOutput
   | DescribeThemeCommandOutput
   | DescribeThemePermissionsCommandOutput
+  | DescribeTopicCommandOutput
+  | DescribeTopicPermissionsCommandOutput
+  | DescribeTopicPermissionsV2CommandOutput
+  | DescribeTopicRefreshCommandOutput
+  | DescribeTopicRefreshScheduleCommandOutput
+  | DescribeTopicV2CommandOutput
   | DescribeUserCommandOutput
+  | DescribeVPCConnectionCommandOutput
   | GenerateEmbedUrlForAnonymousUserCommandOutput
   | GenerateEmbedUrlForRegisteredUserCommandOutput
+  | GenerateEmbedUrlForRegisteredUserWithIdentityCommandOutput
   | GetDashboardEmbedUrlCommandOutput
+  | GetFlowMetadataCommandOutput
+  | GetFlowPermissionsCommandOutput
+  | GetIdentityContextCommandOutput
   | GetSessionEmbedUrlCommandOutput
+  | ListActionConnectorsCommandOutput
+  | ListAgentsCommandOutput
   | ListAnalysesCommandOutput
+  | ListApprovalPoliciesCommandOutput
+  | ListAppsCommandOutput
+  | ListAssetBundleExportJobsCommandOutput
+  | ListAssetBundleImportJobsCommandOutput
+  | ListBrandsCommandOutput
+  | ListCustomPermissionsCommandOutput
   | ListDashboardVersionsCommandOutput
   | ListDashboardsCommandOutput
   | ListDataSetsCommandOutput
   | ListDataSourcesCommandOutput
+  | ListDlpSettingsCommandOutput
+  | ListFlowsCommandOutput
   | ListFolderMembersCommandOutput
   | ListFoldersCommandOutput
+  | ListFoldersForResourceCommandOutput
   | ListGroupMembershipsCommandOutput
   | ListGroupsCommandOutput
   | ListIAMPolicyAssignmentsCommandOutput
   | ListIAMPolicyAssignmentsForUserCommandOutput
+  | ListIdentityPropagationConfigsCommandOutput
   | ListIngestionsCommandOutput
+  | ListKnowledgeBasesCommandOutput
+  | ListLimitsProfilesCommandOutput
   | ListNamespacesCommandOutput
+  | ListOAuthClientApplicationsCommandOutput
+  | ListRefreshSchedulesCommandOutput
+  | ListRoleMembershipsCommandOutput
+  | ListSelfUpgradesCommandOutput
+  | ListSpaceResourcesCommandOutput
+  | ListSpacesCommandOutput
   | ListTagsForResourceCommandOutput
   | ListTemplateAliasesCommandOutput
   | ListTemplateVersionsCommandOutput
@@ -508,51 +1457,121 @@ export type ServiceOutputTypes =
   | ListThemeAliasesCommandOutput
   | ListThemeVersionsCommandOutput
   | ListThemesCommandOutput
+  | ListTopicRefreshSchedulesCommandOutput
+  | ListTopicReviewedAnswersCommandOutput
+  | ListTopicsCommandOutput
+  | ListTopicsV2CommandOutput
   | ListUserGroupsCommandOutput
   | ListUsersCommandOutput
+  | ListUsersIndexCapacityCommandOutput
+  | ListVPCConnectionsCommandOutput
+  | PredictQAResultsCommandOutput
+  | PutDataSetRefreshPropertiesCommandOutput
   | RegisterUserCommandOutput
   | RestoreAnalysisCommandOutput
+  | SearchActionConnectorsCommandOutput
+  | SearchAgentsCommandOutput
   | SearchAnalysesCommandOutput
+  | SearchAppsCommandOutput
   | SearchDashboardsCommandOutput
+  | SearchDataSetsCommandOutput
+  | SearchDataSourcesCommandOutput
+  | SearchFlowsCommandOutput
   | SearchFoldersCommandOutput
+  | SearchGroupsCommandOutput
+  | SearchKnowledgeBasesCommandOutput
+  | SearchSpacesCommandOutput
+  | SearchTopicsCommandOutput
+  | SearchTopicsV2CommandOutput
+  | StartAssetBundleExportJobCommandOutput
+  | StartAssetBundleImportJobCommandOutput
+  | StartAutomationJobCommandOutput
+  | StartDashboardSnapshotJobCommandOutput
+  | StartDashboardSnapshotJobScheduleCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateAccountCustomPermissionCommandOutput
   | UpdateAccountCustomizationCommandOutput
   | UpdateAccountSettingsCommandOutput
+  | UpdateActionConnectorCommandOutput
+  | UpdateActionConnectorPermissionsCommandOutput
+  | UpdateAgentCommandOutput
+  | UpdateAgentPermissionsCommandOutput
   | UpdateAnalysisCommandOutput
   | UpdateAnalysisPermissionsCommandOutput
+  | UpdateAppPermissionsCommandOutput
+  | UpdateApplicationWithTokenExchangeGrantCommandOutput
+  | UpdateApprovalPolicyCommandOutput
+  | UpdateBrandAssignmentCommandOutput
+  | UpdateBrandCommandOutput
+  | UpdateBrandPublishedVersionCommandOutput
+  | UpdateCustomPermissionsCommandOutput
   | UpdateDashboardCommandOutput
+  | UpdateDashboardLinksCommandOutput
   | UpdateDashboardPermissionsCommandOutput
   | UpdateDashboardPublishedVersionCommandOutput
+  | UpdateDashboardsQAConfigurationCommandOutput
   | UpdateDataSetCommandOutput
   | UpdateDataSetPermissionsCommandOutput
   | UpdateDataSourceCommandOutput
   | UpdateDataSourcePermissionsCommandOutput
+  | UpdateDefaultQBusinessApplicationCommandOutput
+  | UpdateDlpSettingCommandOutput
+  | UpdateFlowCommandOutput
+  | UpdateFlowPermissionsCommandOutput
   | UpdateFolderCommandOutput
   | UpdateFolderPermissionsCommandOutput
   | UpdateGroupCommandOutput
   | UpdateIAMPolicyAssignmentCommandOutput
+  | UpdateIdentityPropagationConfigCommandOutput
   | UpdateIpRestrictionCommandOutput
+  | UpdateKeyRegistrationCommandOutput
+  | UpdateKnowledgeBaseCommandOutput
+  | UpdateKnowledgeBasePermissionsCommandOutput
+  | UpdateLimitsProfileCommandOutput
+  | UpdateOAuthClientApplicationCommandOutput
+  | UpdatePublicSharingSettingsCommandOutput
+  | UpdateQPersonalizationConfigurationCommandOutput
+  | UpdateQuickSightQSearchConfigurationCommandOutput
+  | UpdateRefreshScheduleCommandOutput
+  | UpdateResourcePermissionsCommandOutput
+  | UpdateRoleCustomPermissionCommandOutput
+  | UpdateSPICECapacityConfigurationCommandOutput
+  | UpdateSelfUpgradeCommandOutput
+  | UpdateSelfUpgradeConfigurationCommandOutput
+  | UpdateSpaceCommandOutput
+  | UpdateSpacePermissionsCommandOutput
+  | UpdateSpaceResourcesCommandOutput
   | UpdateTemplateAliasCommandOutput
   | UpdateTemplateCommandOutput
   | UpdateTemplatePermissionsCommandOutput
   | UpdateThemeAliasCommandOutput
   | UpdateThemeCommandOutput
   | UpdateThemePermissionsCommandOutput
-  | UpdateUserCommandOutput;
+  | UpdateTopicCommandOutput
+  | UpdateTopicPermissionsCommandOutput
+  | UpdateTopicPermissionsV2CommandOutput
+  | UpdateTopicRefreshScheduleCommandOutput
+  | UpdateTopicV2CommandOutput
+  | UpdateUserCommandOutput
+  | UpdateUserCustomPermissionCommandOutput
+  | UpdateVPCConnectionCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -564,7 +1583,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -603,25 +1622,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -634,67 +1644,117 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type QuickSightClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of QuickSightClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type QuickSightClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of QuickSightClient class constructor that set the region, credentials and other options.
  */
 export interface QuickSightClientConfig extends QuickSightClientConfigType {}
 
-type QuickSightClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of QuickSightClient class. This is resolved and normalized from the {@link QuickSightClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type QuickSightClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of QuickSightClient class. This is resolved and normalized from the {@link QuickSightClientConfig | constructor configuration interface}.
  */
 export interface QuickSightClientResolvedConfig extends QuickSightClientResolvedConfigType {}
 
 /**
- * <fullname>Amazon QuickSight API Reference</fullname>
- *         <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the
+ * <fullname>Amazon Quick API Reference</fullname>
+ *          <p>Amazon Quick Sight is a fully managed, serverless business intelligence service for the
  *             Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your
  *             organization. This API reference contains documentation for a programming interface that
- *             you can use to manage Amazon QuickSight. </p>
+ *             you can use to manage Amazon Quick Sight. </p>
+ * @public
  */
 export class QuickSightClient extends __Client<
   __HttpHandlerOptions,
@@ -707,22 +1767,36 @@ export class QuickSightClient extends __Client<
    */
   readonly config: QuickSightClientResolvedConfig;
 
-  constructor(configuration: QuickSightClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<QuickSightClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultQuickSightHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: QuickSightClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

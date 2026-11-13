@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { CreateNetworkProfileRequest, CreateNetworkProfileResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateNetworkProfileCommand,
-  serializeAws_json1_1CreateNetworkProfileCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateNetworkProfileRequest, CreateNetworkProfileResult } from "../models/models_0";
+import { CreateNetworkProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateNetworkProfileCommand}.
+ */
 export interface CreateNetworkProfileCommandInput extends CreateNetworkProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateNetworkProfileCommand}.
+ */
 export interface CreateNetworkProfileCommandOutput extends CreateNetworkProfileResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface CreateNetworkProfileCommandOutput extends CreateNetworkProfileR
  * ```javascript
  * import { DeviceFarmClient, CreateNetworkProfileCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, CreateNetworkProfileCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // CreateNetworkProfileRequest
+ *   projectArn: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   type: "CURATED" || "PRIVATE",
+ *   uplinkBandwidthBits: Number("long"),
+ *   downlinkBandwidthBits: Number("long"),
+ *   uplinkDelayMs: Number("long"),
+ *   downlinkDelayMs: Number("long"),
+ *   uplinkJitterMs: Number("long"),
+ *   downlinkJitterMs: Number("long"),
+ *   uplinkLossPercent: Number("int"),
+ *   downlinkLossPercent: Number("int"),
+ * };
  * const command = new CreateNetworkProfileCommand(input);
  * const response = await client.send(command);
+ * // { // CreateNetworkProfileResult
+ * //   networkProfile: { // NetworkProfile
+ * //     arn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     type: "CURATED" || "PRIVATE",
+ * //     uplinkBandwidthBits: Number("long"),
+ * //     downlinkBandwidthBits: Number("long"),
+ * //     uplinkDelayMs: Number("long"),
+ * //     downlinkDelayMs: Number("long"),
+ * //     uplinkJitterMs: Number("long"),
+ * //     downlinkJitterMs: Number("long"),
+ * //     uplinkLossPercent: Number("int"),
+ * //     downlinkLossPercent: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateNetworkProfileCommandInput - {@link CreateNetworkProfileCommandInput}
+ * @returns {@link CreateNetworkProfileCommandOutput}
  * @see {@link CreateNetworkProfileCommandInput} for command's `input` shape.
  * @see {@link CreateNetworkProfileCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class CreateNetworkProfileCommand extends $Command<
-  CreateNetworkProfileCommandInput,
-  CreateNetworkProfileCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateNetworkProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateNetworkProfileCommandInput, CreateNetworkProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "CreateNetworkProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateNetworkProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateNetworkProfileResult.filterSensitiveLog,
+export class CreateNetworkProfileCommand extends command<CreateNetworkProfileCommandInput, CreateNetworkProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateNetworkProfile",
+  CreateNetworkProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNetworkProfileRequest;
+      output: CreateNetworkProfileResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateNetworkProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateNetworkProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateNetworkProfileCommandOutput> {
-    return deserializeAws_json1_1CreateNetworkProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateNetworkProfileCommandInput;
+      output: CreateNetworkProfileCommandOutput;
+    };
+  };
 }

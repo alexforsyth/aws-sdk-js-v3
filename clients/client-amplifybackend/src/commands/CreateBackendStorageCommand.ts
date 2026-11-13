@@ -1,0 +1,104 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateBackendStorageRequest, CreateBackendStorageResponse } from "../models/models_0";
+import { CreateBackendStorage$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateBackendStorageCommand}.
+ */
+export interface CreateBackendStorageCommandInput extends CreateBackendStorageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateBackendStorageCommand}.
+ */
+export interface CreateBackendStorageCommandOutput extends CreateBackendStorageResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a backend storage resource.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AmplifyBackendClient, CreateBackendStorageCommand } from "@aws-sdk/client-amplifybackend"; // ES Modules import
+ * // const { AmplifyBackendClient, CreateBackendStorageCommand } = require("@aws-sdk/client-amplifybackend"); // CommonJS import
+ * // import type { AmplifyBackendClientConfig } from "@aws-sdk/client-amplifybackend";
+ * const config = {}; // type is AmplifyBackendClientConfig
+ * const client = new AmplifyBackendClient(config);
+ * const input = { // CreateBackendStorageRequest
+ *   AppId: "STRING_VALUE", // required
+ *   BackendEnvironmentName: "STRING_VALUE", // required
+ *   ResourceConfig: { // CreateBackendStorageResourceConfig
+ *     BucketName: "STRING_VALUE",
+ *     Permissions: { // BackendStoragePermissions
+ *       Authenticated: [ // ListOfAuthenticatedElement // required
+ *         "READ" || "CREATE_AND_UPDATE" || "DELETE",
+ *       ],
+ *       UnAuthenticated: [ // ListOfUnAuthenticatedElement
+ *         "READ" || "CREATE_AND_UPDATE" || "DELETE",
+ *       ],
+ *     },
+ *     ServiceName: "S3", // required
+ *   },
+ *   ResourceName: "STRING_VALUE", // required
+ * };
+ * const command = new CreateBackendStorageCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateBackendStorageResponse
+ * //   AppId: "STRING_VALUE",
+ * //   BackendEnvironmentName: "STRING_VALUE",
+ * //   JobId: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateBackendStorageCommandInput - {@link CreateBackendStorageCommandInput}
+ * @returns {@link CreateBackendStorageCommandOutput}
+ * @see {@link CreateBackendStorageCommandInput} for command's `input` shape.
+ * @see {@link CreateBackendStorageCommandOutput} for command's `response` shape.
+ * @see {@link AmplifyBackendClientResolvedConfig | config} for AmplifyBackendClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>An error returned if a request is not formed properly.</p>
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  <p>An error returned if there's a temporary issue with the service.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An error returned when a specific resource type is not found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>An error that is returned when a limit of a specific type has been exceeded.</p>
+ *
+ * @throws {@link AmplifyBackendServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyBackend service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateBackendStorageCommand extends command<CreateBackendStorageCommandInput, CreateBackendStorageCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateBackendStorage",
+  CreateBackendStorage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBackendStorageRequest;
+      output: CreateBackendStorageResponse;
+    };
+    sdk: {
+      input: CreateBackendStorageCommandInput;
+      output: CreateBackendStorageCommandOutput;
+    };
+  };
+}

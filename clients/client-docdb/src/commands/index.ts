@@ -1,3 +1,4 @@
+// smithy-typescript generated code
 export * from "./AddSourceIdentifierToSubscriptionCommand";
 export * from "./AddTagsToResourceCommand";
 export * from "./ApplyPendingMaintenanceActionCommand";
@@ -33,7 +34,9 @@ export * from "./DescribeEventsCommand";
 export * from "./DescribeGlobalClustersCommand";
 export * from "./DescribeOrderableDBInstanceOptionsCommand";
 export * from "./DescribePendingMaintenanceActionsCommand";
+export * from "./DescribeServerlessV2PlatformVersionsCommand";
 export * from "./FailoverDBClusterCommand";
+export * from "./FailoverGlobalClusterCommand";
 export * from "./ListTagsForResourceCommand";
 export * from "./ModifyDBClusterCommand";
 export * from "./ModifyDBClusterParameterGroupCommand";
@@ -51,3 +54,4 @@ export * from "./RestoreDBClusterFromSnapshotCommand";
 export * from "./RestoreDBClusterToPointInTimeCommand";
 export * from "./StartDBClusterCommand";
 export * from "./StopDBClusterCommand";
+export * from "./SwitchoverGlobalClusterCommand";

@@ -1,100 +1,172 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FSxClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FSxClient";
-import { UpdateStorageVirtualMachineRequest, UpdateStorageVirtualMachineResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateStorageVirtualMachineCommand,
-  serializeAws_json1_1UpdateStorageVirtualMachineCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface UpdateStorageVirtualMachineCommandInput extends UpdateStorageVirtualMachineRequest {}
-export interface UpdateStorageVirtualMachineCommandOutput
-  extends UpdateStorageVirtualMachineResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateStorageVirtualMachineRequest, UpdateStorageVirtualMachineResponse } from "../models/models_0";
+import { UpdateStorageVirtualMachine$ } from "../schemas/schemas_0";
 
 /**
- * <p>Updates an Amazon FSx for ONTAP storage virtual machine (SVM).</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateStorageVirtualMachineCommand}.
+ */
+export interface UpdateStorageVirtualMachineCommandInput extends UpdateStorageVirtualMachineRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateStorageVirtualMachineCommand}.
+ */
+export interface UpdateStorageVirtualMachineCommandOutput extends UpdateStorageVirtualMachineResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates an FSx for ONTAP storage virtual machine (SVM).</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { FSxClient, UpdateStorageVirtualMachineCommand } from "@aws-sdk/client-fsx"; // ES Modules import
  * // const { FSxClient, UpdateStorageVirtualMachineCommand } = require("@aws-sdk/client-fsx"); // CommonJS import
+ * // import type { FSxClientConfig } from "@aws-sdk/client-fsx";
+ * const config = {}; // type is FSxClientConfig
  * const client = new FSxClient(config);
+ * const input = { // UpdateStorageVirtualMachineRequest
+ *   ActiveDirectoryConfiguration: { // UpdateSvmActiveDirectoryConfiguration
+ *     SelfManagedActiveDirectoryConfiguration: { // SelfManagedActiveDirectoryConfigurationUpdates
+ *       UserName: "STRING_VALUE",
+ *       Password: "STRING_VALUE",
+ *       DnsIps: [ // DnsIps
+ *         "STRING_VALUE",
+ *       ],
+ *       DomainName: "STRING_VALUE",
+ *       OrganizationalUnitDistinguishedName: "STRING_VALUE",
+ *       FileSystemAdministratorsGroup: "STRING_VALUE",
+ *       DomainJoinServiceAccountSecret: "STRING_VALUE",
+ *     },
+ *     NetBiosName: "STRING_VALUE",
+ *   },
+ *   ClientRequestToken: "STRING_VALUE",
+ *   StorageVirtualMachineId: "STRING_VALUE", // required
+ *   SvmAdminPassword: "STRING_VALUE",
+ * };
  * const command = new UpdateStorageVirtualMachineCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateStorageVirtualMachineResponse
+ * //   StorageVirtualMachine: { // StorageVirtualMachine
+ * //     ActiveDirectoryConfiguration: { // SvmActiveDirectoryConfiguration
+ * //       NetBiosName: "STRING_VALUE",
+ * //       SelfManagedActiveDirectoryConfiguration: { // SelfManagedActiveDirectoryAttributes
+ * //         DomainName: "STRING_VALUE",
+ * //         OrganizationalUnitDistinguishedName: "STRING_VALUE",
+ * //         FileSystemAdministratorsGroup: "STRING_VALUE",
+ * //         UserName: "STRING_VALUE",
+ * //         DnsIps: [ // DnsIps
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         DomainJoinServiceAccountSecret: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Endpoints: { // SvmEndpoints
+ * //       Iscsi: { // SvmEndpoint
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: [ // OntapEndpointIpAddresses
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6Addresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Management: {
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6Addresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Nfs: {
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6Addresses: "<OntapEndpointIpAddresses>",
+ * //       },
+ * //       Smb: {
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: "<OntapEndpointIpAddresses>",
+ * //         Ipv6Addresses: "<OntapEndpointIpAddresses>",
+ * //       },
+ * //     },
+ * //     FileSystemId: "STRING_VALUE",
+ * //     Lifecycle: "CREATED" || "CREATING" || "DELETING" || "FAILED" || "MISCONFIGURED" || "PENDING",
+ * //     Name: "STRING_VALUE",
+ * //     ResourceARN: "STRING_VALUE",
+ * //     StorageVirtualMachineId: "STRING_VALUE",
+ * //     Subtype: "DEFAULT" || "DP_DESTINATION" || "SYNC_DESTINATION" || "SYNC_SOURCE",
+ * //     UUID: "STRING_VALUE",
+ * //     Tags: [ // Tags
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     LifecycleTransitionReason: { // LifecycleTransitionReason
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     RootVolumeSecurityStyle: "UNIX" || "NTFS" || "MIXED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateStorageVirtualMachineCommandInput - {@link UpdateStorageVirtualMachineCommandInput}
+ * @returns {@link UpdateStorageVirtualMachineCommandOutput}
  * @see {@link UpdateStorageVirtualMachineCommandInput} for command's `input` shape.
  * @see {@link UpdateStorageVirtualMachineCommandOutput} for command's `response` shape.
- * @see {@link FSxClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FSxClientResolvedConfig | config} for FSxClient's `config` shape.
  *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>A generic error indicating a failure with a client request.</p>
+ *
+ * @throws {@link IncompatibleParameterError} (client fault)
+ *  <p>The error returned when a second request is received with the same client request
+ *             token but different parameters settings. A client request token should always uniquely
+ *             identify a single request.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>A generic error indicating a server-side failure.</p>
+ *
+ * @throws {@link StorageVirtualMachineNotFound} (client fault)
+ *  <p>No FSx for ONTAP SVMs were found based upon the supplied parameters.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>The requested operation is not supported for this resource or API.</p>
+ *
+ * @throws {@link FSxServiceException}
+ * <p>Base exception class for all service exceptions from FSx service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateStorageVirtualMachineCommand extends $Command<
-  UpdateStorageVirtualMachineCommandInput,
-  UpdateStorageVirtualMachineCommandOutput,
-  FSxClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateStorageVirtualMachineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FSxClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateStorageVirtualMachineCommandInput, UpdateStorageVirtualMachineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FSxClient";
-    const commandName = "UpdateStorageVirtualMachineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateStorageVirtualMachineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateStorageVirtualMachineResponse.filterSensitiveLog,
+export class UpdateStorageVirtualMachineCommand extends command<UpdateStorageVirtualMachineCommandInput, UpdateStorageVirtualMachineCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateStorageVirtualMachine",
+  UpdateStorageVirtualMachine$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateStorageVirtualMachineRequest;
+      output: UpdateStorageVirtualMachineResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateStorageVirtualMachineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateStorageVirtualMachineCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateStorageVirtualMachineCommandOutput> {
-    return deserializeAws_json1_1UpdateStorageVirtualMachineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateStorageVirtualMachineCommandInput;
+      output: UpdateStorageVirtualMachineCommandOutput;
+    };
+  };
 }

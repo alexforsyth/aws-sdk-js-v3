@@ -1,185 +1,312 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultImagebuilderHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   CancelImageCreationCommandInput,
   CancelImageCreationCommandOutput,
 } from "./commands/CancelImageCreationCommand";
-import { CreateComponentCommandInput, CreateComponentCommandOutput } from "./commands/CreateComponentCommand";
-import {
+import type {
+  CancelLifecycleExecutionCommandInput,
+  CancelLifecycleExecutionCommandOutput,
+} from "./commands/CancelLifecycleExecutionCommand";
+import type { CreateComponentCommandInput, CreateComponentCommandOutput } from "./commands/CreateComponentCommand";
+import type {
   CreateContainerRecipeCommandInput,
   CreateContainerRecipeCommandOutput,
 } from "./commands/CreateContainerRecipeCommand";
-import {
+import type {
   CreateDistributionConfigurationCommandInput,
   CreateDistributionConfigurationCommandOutput,
 } from "./commands/CreateDistributionConfigurationCommand";
-import { CreateImageCommandInput, CreateImageCommandOutput } from "./commands/CreateImageCommand";
-import {
+import type { CreateImageCommandInput, CreateImageCommandOutput } from "./commands/CreateImageCommand";
+import type {
   CreateImagePipelineCommandInput,
   CreateImagePipelineCommandOutput,
 } from "./commands/CreateImagePipelineCommand";
-import { CreateImageRecipeCommandInput, CreateImageRecipeCommandOutput } from "./commands/CreateImageRecipeCommand";
-import {
+import type {
+  CreateImageRecipeCommandInput,
+  CreateImageRecipeCommandOutput,
+} from "./commands/CreateImageRecipeCommand";
+import type {
   CreateInfrastructureConfigurationCommandInput,
   CreateInfrastructureConfigurationCommandOutput,
 } from "./commands/CreateInfrastructureConfigurationCommand";
-import { DeleteComponentCommandInput, DeleteComponentCommandOutput } from "./commands/DeleteComponentCommand";
-import {
+import type {
+  CreateLifecyclePolicyCommandInput,
+  CreateLifecyclePolicyCommandOutput,
+} from "./commands/CreateLifecyclePolicyCommand";
+import type { CreateWorkflowCommandInput, CreateWorkflowCommandOutput } from "./commands/CreateWorkflowCommand";
+import type { DeleteComponentCommandInput, DeleteComponentCommandOutput } from "./commands/DeleteComponentCommand";
+import type {
   DeleteContainerRecipeCommandInput,
   DeleteContainerRecipeCommandOutput,
 } from "./commands/DeleteContainerRecipeCommand";
-import {
+import type {
   DeleteDistributionConfigurationCommandInput,
   DeleteDistributionConfigurationCommandOutput,
 } from "./commands/DeleteDistributionConfigurationCommand";
-import { DeleteImageCommandInput, DeleteImageCommandOutput } from "./commands/DeleteImageCommand";
-import {
+import type { DeleteImageCommandInput, DeleteImageCommandOutput } from "./commands/DeleteImageCommand";
+import type {
   DeleteImagePipelineCommandInput,
   DeleteImagePipelineCommandOutput,
 } from "./commands/DeleteImagePipelineCommand";
-import { DeleteImageRecipeCommandInput, DeleteImageRecipeCommandOutput } from "./commands/DeleteImageRecipeCommand";
-import {
+import type {
+  DeleteImageRecipeCommandInput,
+  DeleteImageRecipeCommandOutput,
+} from "./commands/DeleteImageRecipeCommand";
+import type {
   DeleteInfrastructureConfigurationCommandInput,
   DeleteInfrastructureConfigurationCommandOutput,
 } from "./commands/DeleteInfrastructureConfigurationCommand";
-import { GetComponentCommandInput, GetComponentCommandOutput } from "./commands/GetComponentCommand";
-import { GetComponentPolicyCommandInput, GetComponentPolicyCommandOutput } from "./commands/GetComponentPolicyCommand";
-import { GetContainerRecipeCommandInput, GetContainerRecipeCommandOutput } from "./commands/GetContainerRecipeCommand";
-import {
+import type {
+  DeleteLifecyclePolicyCommandInput,
+  DeleteLifecyclePolicyCommandOutput,
+} from "./commands/DeleteLifecyclePolicyCommand";
+import type { DeleteWorkflowCommandInput, DeleteWorkflowCommandOutput } from "./commands/DeleteWorkflowCommand";
+import type { DistributeImageCommandInput, DistributeImageCommandOutput } from "./commands/DistributeImageCommand";
+import type { GetComponentCommandInput, GetComponentCommandOutput } from "./commands/GetComponentCommand";
+import type {
+  GetComponentPolicyCommandInput,
+  GetComponentPolicyCommandOutput,
+} from "./commands/GetComponentPolicyCommand";
+import type {
+  GetContainerRecipeCommandInput,
+  GetContainerRecipeCommandOutput,
+} from "./commands/GetContainerRecipeCommand";
+import type {
   GetContainerRecipePolicyCommandInput,
   GetContainerRecipePolicyCommandOutput,
 } from "./commands/GetContainerRecipePolicyCommand";
-import {
+import type {
   GetDistributionConfigurationCommandInput,
   GetDistributionConfigurationCommandOutput,
 } from "./commands/GetDistributionConfigurationCommand";
-import { GetImageCommandInput, GetImageCommandOutput } from "./commands/GetImageCommand";
-import { GetImagePipelineCommandInput, GetImagePipelineCommandOutput } from "./commands/GetImagePipelineCommand";
-import { GetImagePolicyCommandInput, GetImagePolicyCommandOutput } from "./commands/GetImagePolicyCommand";
-import { GetImageRecipeCommandInput, GetImageRecipeCommandOutput } from "./commands/GetImageRecipeCommand";
-import {
+import type { GetImageCommandInput, GetImageCommandOutput } from "./commands/GetImageCommand";
+import type { GetImagePipelineCommandInput, GetImagePipelineCommandOutput } from "./commands/GetImagePipelineCommand";
+import type { GetImagePolicyCommandInput, GetImagePolicyCommandOutput } from "./commands/GetImagePolicyCommand";
+import type { GetImageRecipeCommandInput, GetImageRecipeCommandOutput } from "./commands/GetImageRecipeCommand";
+import type {
   GetImageRecipePolicyCommandInput,
   GetImageRecipePolicyCommandOutput,
 } from "./commands/GetImageRecipePolicyCommand";
-import {
+import type {
   GetInfrastructureConfigurationCommandInput,
   GetInfrastructureConfigurationCommandOutput,
 } from "./commands/GetInfrastructureConfigurationCommand";
-import { ImportComponentCommandInput, ImportComponentCommandOutput } from "./commands/ImportComponentCommand";
-import {
+import type {
+  GetLifecycleExecutionCommandInput,
+  GetLifecycleExecutionCommandOutput,
+} from "./commands/GetLifecycleExecutionCommand";
+import type {
+  GetLifecyclePolicyCommandInput,
+  GetLifecyclePolicyCommandOutput,
+} from "./commands/GetLifecyclePolicyCommand";
+import type {
+  GetMarketplaceResourceCommandInput,
+  GetMarketplaceResourceCommandOutput,
+} from "./commands/GetMarketplaceResourceCommand";
+import type { GetWorkflowCommandInput, GetWorkflowCommandOutput } from "./commands/GetWorkflowCommand";
+import type {
+  GetWorkflowExecutionCommandInput,
+  GetWorkflowExecutionCommandOutput,
+} from "./commands/GetWorkflowExecutionCommand";
+import type {
+  GetWorkflowStepExecutionCommandInput,
+  GetWorkflowStepExecutionCommandOutput,
+} from "./commands/GetWorkflowStepExecutionCommand";
+import type { ImportComponentCommandInput, ImportComponentCommandOutput } from "./commands/ImportComponentCommand";
+import type { ImportDiskImageCommandInput, ImportDiskImageCommandOutput } from "./commands/ImportDiskImageCommand";
+import type { ImportVmImageCommandInput, ImportVmImageCommandOutput } from "./commands/ImportVmImageCommand";
+import type {
   ListComponentBuildVersionsCommandInput,
   ListComponentBuildVersionsCommandOutput,
 } from "./commands/ListComponentBuildVersionsCommand";
-import { ListComponentsCommandInput, ListComponentsCommandOutput } from "./commands/ListComponentsCommand";
-import {
+import type { ListComponentsCommandInput, ListComponentsCommandOutput } from "./commands/ListComponentsCommand";
+import type {
   ListContainerRecipesCommandInput,
   ListContainerRecipesCommandOutput,
 } from "./commands/ListContainerRecipesCommand";
-import {
+import type {
   ListDistributionConfigurationsCommandInput,
   ListDistributionConfigurationsCommandOutput,
 } from "./commands/ListDistributionConfigurationsCommand";
-import {
+import type {
   ListImageBuildVersionsCommandInput,
   ListImageBuildVersionsCommandOutput,
 } from "./commands/ListImageBuildVersionsCommand";
-import { ListImagePackagesCommandInput, ListImagePackagesCommandOutput } from "./commands/ListImagePackagesCommand";
-import {
+import type {
+  ListImagePackagesCommandInput,
+  ListImagePackagesCommandOutput,
+} from "./commands/ListImagePackagesCommand";
+import type {
   ListImagePipelineImagesCommandInput,
   ListImagePipelineImagesCommandOutput,
 } from "./commands/ListImagePipelineImagesCommand";
-import { ListImagePipelinesCommandInput, ListImagePipelinesCommandOutput } from "./commands/ListImagePipelinesCommand";
-import { ListImageRecipesCommandInput, ListImageRecipesCommandOutput } from "./commands/ListImageRecipesCommand";
-import { ListImagesCommandInput, ListImagesCommandOutput } from "./commands/ListImagesCommand";
-import {
+import type {
+  ListImagePipelinesCommandInput,
+  ListImagePipelinesCommandOutput,
+} from "./commands/ListImagePipelinesCommand";
+import type { ListImageRecipesCommandInput, ListImageRecipesCommandOutput } from "./commands/ListImageRecipesCommand";
+import type {
+  ListImageScanFindingAggregationsCommandInput,
+  ListImageScanFindingAggregationsCommandOutput,
+} from "./commands/ListImageScanFindingAggregationsCommand";
+import type {
+  ListImageScanFindingsCommandInput,
+  ListImageScanFindingsCommandOutput,
+} from "./commands/ListImageScanFindingsCommand";
+import type { ListImagesCommandInput, ListImagesCommandOutput } from "./commands/ListImagesCommand";
+import type {
   ListInfrastructureConfigurationsCommandInput,
   ListInfrastructureConfigurationsCommandOutput,
 } from "./commands/ListInfrastructureConfigurationsCommand";
-import {
+import type {
+  ListLifecycleExecutionResourcesCommandInput,
+  ListLifecycleExecutionResourcesCommandOutput,
+} from "./commands/ListLifecycleExecutionResourcesCommand";
+import type {
+  ListLifecycleExecutionsCommandInput,
+  ListLifecycleExecutionsCommandOutput,
+} from "./commands/ListLifecycleExecutionsCommand";
+import type {
+  ListLifecyclePoliciesCommandInput,
+  ListLifecyclePoliciesCommandOutput,
+} from "./commands/ListLifecyclePoliciesCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { PutComponentPolicyCommandInput, PutComponentPolicyCommandOutput } from "./commands/PutComponentPolicyCommand";
-import {
+import type {
+  ListWaitingWorkflowStepsCommandInput,
+  ListWaitingWorkflowStepsCommandOutput,
+} from "./commands/ListWaitingWorkflowStepsCommand";
+import type {
+  ListWorkflowBuildVersionsCommandInput,
+  ListWorkflowBuildVersionsCommandOutput,
+} from "./commands/ListWorkflowBuildVersionsCommand";
+import type {
+  ListWorkflowExecutionsCommandInput,
+  ListWorkflowExecutionsCommandOutput,
+} from "./commands/ListWorkflowExecutionsCommand";
+import type { ListWorkflowsCommandInput, ListWorkflowsCommandOutput } from "./commands/ListWorkflowsCommand";
+import type {
+  ListWorkflowStepExecutionsCommandInput,
+  ListWorkflowStepExecutionsCommandOutput,
+} from "./commands/ListWorkflowStepExecutionsCommand";
+import type {
+  PutComponentPolicyCommandInput,
+  PutComponentPolicyCommandOutput,
+} from "./commands/PutComponentPolicyCommand";
+import type {
   PutContainerRecipePolicyCommandInput,
   PutContainerRecipePolicyCommandOutput,
 } from "./commands/PutContainerRecipePolicyCommand";
-import { PutImagePolicyCommandInput, PutImagePolicyCommandOutput } from "./commands/PutImagePolicyCommand";
-import {
+import type { PutImagePolicyCommandInput, PutImagePolicyCommandOutput } from "./commands/PutImagePolicyCommand";
+import type {
   PutImageRecipePolicyCommandInput,
   PutImageRecipePolicyCommandOutput,
 } from "./commands/PutImageRecipePolicyCommand";
-import {
+import type { RetryImageCommandInput, RetryImageCommandOutput } from "./commands/RetryImageCommand";
+import type {
+  SendWorkflowStepActionCommandInput,
+  SendWorkflowStepActionCommandOutput,
+} from "./commands/SendWorkflowStepActionCommand";
+import type {
   StartImagePipelineExecutionCommandInput,
   StartImagePipelineExecutionCommandOutput,
 } from "./commands/StartImagePipelineExecutionCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type {
+  StartResourceStateUpdateCommandInput,
+  StartResourceStateUpdateCommandOutput,
+} from "./commands/StartResourceStateUpdateCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateDistributionConfigurationCommandInput,
   UpdateDistributionConfigurationCommandOutput,
 } from "./commands/UpdateDistributionConfigurationCommand";
-import {
+import type {
   UpdateImagePipelineCommandInput,
   UpdateImagePipelineCommandOutput,
 } from "./commands/UpdateImagePipelineCommand";
-import {
+import type {
   UpdateInfrastructureConfigurationCommandInput,
   UpdateInfrastructureConfigurationCommandOutput,
 } from "./commands/UpdateInfrastructureConfigurationCommand";
+import type {
+  UpdateLifecyclePolicyCommandInput,
+  UpdateLifecyclePolicyCommandOutput,
+} from "./commands/UpdateLifecyclePolicyCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CancelImageCreationCommandInput
+  | CancelLifecycleExecutionCommandInput
   | CreateComponentCommandInput
   | CreateContainerRecipeCommandInput
   | CreateDistributionConfigurationCommandInput
@@ -187,6 +314,8 @@ export type ServiceInputTypes =
   | CreateImagePipelineCommandInput
   | CreateImageRecipeCommandInput
   | CreateInfrastructureConfigurationCommandInput
+  | CreateLifecyclePolicyCommandInput
+  | CreateWorkflowCommandInput
   | DeleteComponentCommandInput
   | DeleteContainerRecipeCommandInput
   | DeleteDistributionConfigurationCommandInput
@@ -194,6 +323,9 @@ export type ServiceInputTypes =
   | DeleteImagePipelineCommandInput
   | DeleteImageRecipeCommandInput
   | DeleteInfrastructureConfigurationCommandInput
+  | DeleteLifecyclePolicyCommandInput
+  | DeleteWorkflowCommandInput
+  | DistributeImageCommandInput
   | GetComponentCommandInput
   | GetComponentPolicyCommandInput
   | GetContainerRecipeCommandInput
@@ -205,7 +337,15 @@ export type ServiceInputTypes =
   | GetImageRecipeCommandInput
   | GetImageRecipePolicyCommandInput
   | GetInfrastructureConfigurationCommandInput
+  | GetLifecycleExecutionCommandInput
+  | GetLifecyclePolicyCommandInput
+  | GetMarketplaceResourceCommandInput
+  | GetWorkflowCommandInput
+  | GetWorkflowExecutionCommandInput
+  | GetWorkflowStepExecutionCommandInput
   | ImportComponentCommandInput
+  | ImportDiskImageCommandInput
+  | ImportVmImageCommandInput
   | ListComponentBuildVersionsCommandInput
   | ListComponentsCommandInput
   | ListContainerRecipesCommandInput
@@ -215,22 +355,40 @@ export type ServiceInputTypes =
   | ListImagePipelineImagesCommandInput
   | ListImagePipelinesCommandInput
   | ListImageRecipesCommandInput
+  | ListImageScanFindingAggregationsCommandInput
+  | ListImageScanFindingsCommandInput
   | ListImagesCommandInput
   | ListInfrastructureConfigurationsCommandInput
+  | ListLifecycleExecutionResourcesCommandInput
+  | ListLifecycleExecutionsCommandInput
+  | ListLifecyclePoliciesCommandInput
   | ListTagsForResourceCommandInput
+  | ListWaitingWorkflowStepsCommandInput
+  | ListWorkflowBuildVersionsCommandInput
+  | ListWorkflowExecutionsCommandInput
+  | ListWorkflowStepExecutionsCommandInput
+  | ListWorkflowsCommandInput
   | PutComponentPolicyCommandInput
   | PutContainerRecipePolicyCommandInput
   | PutImagePolicyCommandInput
   | PutImageRecipePolicyCommandInput
+  | RetryImageCommandInput
+  | SendWorkflowStepActionCommandInput
   | StartImagePipelineExecutionCommandInput
+  | StartResourceStateUpdateCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
   | UpdateDistributionConfigurationCommandInput
   | UpdateImagePipelineCommandInput
-  | UpdateInfrastructureConfigurationCommandInput;
+  | UpdateInfrastructureConfigurationCommandInput
+  | UpdateLifecyclePolicyCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CancelImageCreationCommandOutput
+  | CancelLifecycleExecutionCommandOutput
   | CreateComponentCommandOutput
   | CreateContainerRecipeCommandOutput
   | CreateDistributionConfigurationCommandOutput
@@ -238,6 +396,8 @@ export type ServiceOutputTypes =
   | CreateImagePipelineCommandOutput
   | CreateImageRecipeCommandOutput
   | CreateInfrastructureConfigurationCommandOutput
+  | CreateLifecyclePolicyCommandOutput
+  | CreateWorkflowCommandOutput
   | DeleteComponentCommandOutput
   | DeleteContainerRecipeCommandOutput
   | DeleteDistributionConfigurationCommandOutput
@@ -245,6 +405,9 @@ export type ServiceOutputTypes =
   | DeleteImagePipelineCommandOutput
   | DeleteImageRecipeCommandOutput
   | DeleteInfrastructureConfigurationCommandOutput
+  | DeleteLifecyclePolicyCommandOutput
+  | DeleteWorkflowCommandOutput
+  | DistributeImageCommandOutput
   | GetComponentCommandOutput
   | GetComponentPolicyCommandOutput
   | GetContainerRecipeCommandOutput
@@ -256,7 +419,15 @@ export type ServiceOutputTypes =
   | GetImageRecipeCommandOutput
   | GetImageRecipePolicyCommandOutput
   | GetInfrastructureConfigurationCommandOutput
+  | GetLifecycleExecutionCommandOutput
+  | GetLifecyclePolicyCommandOutput
+  | GetMarketplaceResourceCommandOutput
+  | GetWorkflowCommandOutput
+  | GetWorkflowExecutionCommandOutput
+  | GetWorkflowStepExecutionCommandOutput
   | ImportComponentCommandOutput
+  | ImportDiskImageCommandOutput
+  | ImportVmImageCommandOutput
   | ListComponentBuildVersionsCommandOutput
   | ListComponentsCommandOutput
   | ListContainerRecipesCommandOutput
@@ -266,32 +437,49 @@ export type ServiceOutputTypes =
   | ListImagePipelineImagesCommandOutput
   | ListImagePipelinesCommandOutput
   | ListImageRecipesCommandOutput
+  | ListImageScanFindingAggregationsCommandOutput
+  | ListImageScanFindingsCommandOutput
   | ListImagesCommandOutput
   | ListInfrastructureConfigurationsCommandOutput
+  | ListLifecycleExecutionResourcesCommandOutput
+  | ListLifecycleExecutionsCommandOutput
+  | ListLifecyclePoliciesCommandOutput
   | ListTagsForResourceCommandOutput
+  | ListWaitingWorkflowStepsCommandOutput
+  | ListWorkflowBuildVersionsCommandOutput
+  | ListWorkflowExecutionsCommandOutput
+  | ListWorkflowStepExecutionsCommandOutput
+  | ListWorkflowsCommandOutput
   | PutComponentPolicyCommandOutput
   | PutContainerRecipePolicyCommandOutput
   | PutImagePolicyCommandOutput
   | PutImageRecipePolicyCommandOutput
+  | RetryImageCommandOutput
+  | SendWorkflowStepActionCommandOutput
   | StartImagePipelineExecutionCommandOutput
+  | StartResourceStateUpdateCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
   | UpdateDistributionConfigurationCommandOutput
   | UpdateImagePipelineCommandOutput
-  | UpdateInfrastructureConfigurationCommandOutput;
+  | UpdateInfrastructureConfigurationCommandOutput
+  | UpdateLifecyclePolicyCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -303,7 +491,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -342,25 +530,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -373,66 +552,120 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ImagebuilderClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ImagebuilderClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ImagebuilderClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ImagebuilderClient class constructor that set the region, credentials and other options.
  */
 export interface ImagebuilderClientConfig extends ImagebuilderClientConfigType {}
 
-type ImagebuilderClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ImagebuilderClient class. This is resolved and normalized from the {@link ImagebuilderClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ImagebuilderClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ImagebuilderClient class. This is resolved and normalized from the {@link ImagebuilderClientConfig | constructor configuration interface}.
  */
 export interface ImagebuilderClientResolvedConfig extends ImagebuilderClientResolvedConfigType {}
 
 /**
- * <p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the
- *       creation, management, and deployment of customized, secure, and up-to-date "golden" server
- *       images that are pre-installed and pre-configured with software and settings to meet specific
- *       IT standards.</p>
+ * <p>EC2 Image Builder automates the
+ * 			creation, management, and deployment of customized, secure, and up-to-date
+ * 			server images. You can build Amazon Machine Images (AMIs) and container images
+ * 			that are pre-installed and pre-configured with software and settings to meet
+ * 			specific IT standards.</p>
+ *          <p>For an introduction to the service concepts that these API operations work with,
+ * 			see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/how-image-builder-works.html">How Image Builder
+ * 				works</a> in the <i>EC2 Image Builder User Guide</i>.</p>
+ * @public
  */
 export class ImagebuilderClient extends __Client<
   __HttpHandlerOptions,
@@ -445,22 +678,36 @@ export class ImagebuilderClient extends __Client<
    */
   readonly config: ImagebuilderClientResolvedConfig;
 
-  constructor(configuration: ImagebuilderClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ImagebuilderClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultImagebuilderHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ImagebuilderClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { DefineAnalysisSchemeRequest, DefineAnalysisSchemeResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDefineAnalysisSchemeCommand,
-  serializeAws_queryDefineAnalysisSchemeCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DefineAnalysisSchemeRequest, DefineAnalysisSchemeResponse } from "../models/models_0";
+import { DefineAnalysisScheme$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DefineAnalysisSchemeCommand}.
+ */
 export interface DefineAnalysisSchemeCommandInput extends DefineAnalysisSchemeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DefineAnalysisSchemeCommand}.
+ */
 export interface DefineAnalysisSchemeCommandOutput extends DefineAnalysisSchemeResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,96 @@ export interface DefineAnalysisSchemeCommandOutput extends DefineAnalysisSchemeR
  * ```javascript
  * import { CloudSearchClient, DefineAnalysisSchemeCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, DefineAnalysisSchemeCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // DefineAnalysisSchemeRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   AnalysisScheme: { // AnalysisScheme
+ *     AnalysisSchemeName: "STRING_VALUE", // required
+ *     AnalysisSchemeLanguage: "ar" || "bg" || "ca" || "cs" || "da" || "de" || "el" || "en" || "es" || "eu" || "fa" || "fi" || "fr" || "ga" || "gl" || "he" || "hi" || "hu" || "hy" || "id" || "it" || "ja" || "ko" || "lv" || "mul" || "nl" || "no" || "pt" || "ro" || "ru" || "sv" || "th" || "tr" || "zh-Hans" || "zh-Hant", // required
+ *     AnalysisOptions: { // AnalysisOptions
+ *       Synonyms: "STRING_VALUE",
+ *       Stopwords: "STRING_VALUE",
+ *       StemmingDictionary: "STRING_VALUE",
+ *       JapaneseTokenizationDictionary: "STRING_VALUE",
+ *       AlgorithmicStemming: "none" || "minimal" || "light" || "full",
+ *     },
+ *   },
+ * };
  * const command = new DefineAnalysisSchemeCommand(input);
  * const response = await client.send(command);
+ * // { // DefineAnalysisSchemeResponse
+ * //   AnalysisScheme: { // AnalysisSchemeStatus
+ * //     Options: { // AnalysisScheme
+ * //       AnalysisSchemeName: "STRING_VALUE", // required
+ * //       AnalysisSchemeLanguage: "ar" || "bg" || "ca" || "cs" || "da" || "de" || "el" || "en" || "es" || "eu" || "fa" || "fi" || "fr" || "ga" || "gl" || "he" || "hi" || "hu" || "hy" || "id" || "it" || "ja" || "ko" || "lv" || "mul" || "nl" || "no" || "pt" || "ro" || "ru" || "sv" || "th" || "tr" || "zh-Hans" || "zh-Hant", // required
+ * //       AnalysisOptions: { // AnalysisOptions
+ * //         Synonyms: "STRING_VALUE",
+ * //         Stopwords: "STRING_VALUE",
+ * //         StemmingDictionary: "STRING_VALUE",
+ * //         JapaneseTokenizationDictionary: "STRING_VALUE",
+ * //         AlgorithmicStemming: "none" || "minimal" || "light" || "full",
+ * //       },
+ * //     },
+ * //     Status: { // OptionStatus
+ * //       CreationDate: new Date("TIMESTAMP"), // required
+ * //       UpdateDate: new Date("TIMESTAMP"), // required
+ * //       UpdateVersion: Number("int"),
+ * //       State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //       PendingDeletion: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DefineAnalysisSchemeCommandInput - {@link DefineAnalysisSchemeCommandInput}
+ * @returns {@link DefineAnalysisSchemeCommandOutput}
  * @see {@link DefineAnalysisSchemeCommandInput} for command's `input` shape.
  * @see {@link DefineAnalysisSchemeCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link InvalidTypeException} (client fault)
+ *  <p>The request was rejected because it specified an invalid type definition.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because a resource limit has already been met.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was rejected because it has invalid parameters.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DefineAnalysisSchemeCommand extends $Command<
-  DefineAnalysisSchemeCommandInput,
-  DefineAnalysisSchemeCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DefineAnalysisSchemeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DefineAnalysisSchemeCommandInput, DefineAnalysisSchemeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "DefineAnalysisSchemeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DefineAnalysisSchemeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DefineAnalysisSchemeResponse.filterSensitiveLog,
+export class DefineAnalysisSchemeCommand extends command<DefineAnalysisSchemeCommandInput, DefineAnalysisSchemeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DefineAnalysisScheme",
+  DefineAnalysisScheme$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DefineAnalysisSchemeRequest;
+      output: DefineAnalysisSchemeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DefineAnalysisSchemeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDefineAnalysisSchemeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DefineAnalysisSchemeCommandOutput> {
-    return deserializeAws_queryDefineAnalysisSchemeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DefineAnalysisSchemeCommandInput;
+      output: DefineAnalysisSchemeCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteNatGatewayRequest, DeleteNatGatewayResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteNatGatewayCommand,
-  serializeAws_ec2DeleteNatGatewayCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteNatGatewayRequest, DeleteNatGatewayResult } from "../models/models_3";
+import { DeleteNatGateway$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteNatGatewayCommand}.
+ */
 export interface DeleteNatGatewayCommandInput extends DeleteNatGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteNatGatewayCommand}.
+ */
 export interface DeleteNatGatewayCommandOutput extends DeleteNatGatewayResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,63 @@ export interface DeleteNatGatewayCommandOutput extends DeleteNatGatewayResult, _
  * ```javascript
  * import { EC2Client, DeleteNatGatewayCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteNatGatewayCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteNatGatewayRequest
+ *   DryRun: true || false,
+ *   NatGatewayId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteNatGatewayCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteNatGatewayResult
+ * //   NatGatewayId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteNatGatewayCommandInput - {@link DeleteNatGatewayCommandInput}
+ * @returns {@link DeleteNatGatewayCommandOutput}
  * @see {@link DeleteNatGatewayCommandInput} for command's `input` shape.
  * @see {@link DeleteNatGatewayCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To delete a NAT gateway
+ * ```javascript
+ * // This example deletes the specified NAT gateway.
+ * const input = {
+ *   NatGatewayId: "nat-04ae55e711cec5680"
+ * };
+ * const command = new DeleteNatGatewayCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   NatGatewayId: "nat-04ae55e711cec5680"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteNatGatewayCommand extends $Command<
-  DeleteNatGatewayCommandInput,
-  DeleteNatGatewayCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteNatGatewayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteNatGatewayCommandInput, DeleteNatGatewayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteNatGatewayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteNatGatewayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteNatGatewayResult.filterSensitiveLog,
+export class DeleteNatGatewayCommand extends command<DeleteNatGatewayCommandInput, DeleteNatGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteNatGateway",
+  DeleteNatGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNatGatewayRequest;
+      output: DeleteNatGatewayResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteNatGatewayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteNatGatewayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteNatGatewayCommandOutput> {
-    return deserializeAws_ec2DeleteNatGatewayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteNatGatewayCommandInput;
+      output: DeleteNatGatewayCommandOutput;
+    };
+  };
 }

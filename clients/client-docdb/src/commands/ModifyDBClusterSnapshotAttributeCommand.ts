@@ -1,104 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { ModifyDBClusterSnapshotAttributeMessage, ModifyDBClusterSnapshotAttributeResult } from "../models/models_0";
-import {
-  deserializeAws_queryModifyDBClusterSnapshotAttributeCommand,
-  serializeAws_queryModifyDBClusterSnapshotAttributeCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ModifyDBClusterSnapshotAttributeMessage,
+  ModifyDBClusterSnapshotAttributeResult,
+} from "../models/models_0";
+import { ModifyDBClusterSnapshotAttribute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyDBClusterSnapshotAttributeCommand}.
+ */
 export interface ModifyDBClusterSnapshotAttributeCommandInput extends ModifyDBClusterSnapshotAttributeMessage {}
-export interface ModifyDBClusterSnapshotAttributeCommandOutput
-  extends ModifyDBClusterSnapshotAttributeResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyDBClusterSnapshotAttributeCommand}.
+ */
+export interface ModifyDBClusterSnapshotAttributeCommandOutput extends ModifyDBClusterSnapshotAttributeResult, __MetadataBearer {}
 
 /**
  * <p>Adds an attribute and values to, or removes an attribute and values from, a manual cluster snapshot.</p>
- *         <p>To share a manual cluster snapshot with other accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all accounts. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want available to all accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized account IDs for the <code>ValuesToAdd</code> parameter. You can't use <code>all</code> as a value for that parameter in this case.</p>
+ *          <p>To share a manual cluster snapshot with other Amazon Web Services accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the Amazon Web Services accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all Amazon Web Services accounts. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want available to all Amazon Web Services accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized Amazon Web Services account IDs for the <code>ValuesToAdd</code> parameter. You can't use <code>all</code> as a value for that parameter in this case.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DocDBClient, ModifyDBClusterSnapshotAttributeCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, ModifyDBClusterSnapshotAttributeCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // ModifyDBClusterSnapshotAttributeMessage
+ *   DBClusterSnapshotIdentifier: "STRING_VALUE", // required
+ *   AttributeName: "STRING_VALUE", // required
+ *   ValuesToAdd: [ // AttributeValueList
+ *     "STRING_VALUE",
+ *   ],
+ *   ValuesToRemove: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifyDBClusterSnapshotAttributeCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyDBClusterSnapshotAttributeResult
+ * //   DBClusterSnapshotAttributesResult: { // DBClusterSnapshotAttributesResult
+ * //     DBClusterSnapshotIdentifier: "STRING_VALUE",
+ * //     DBClusterSnapshotAttributes: [ // DBClusterSnapshotAttributeList
+ * //       { // DBClusterSnapshotAttribute
+ * //         AttributeName: "STRING_VALUE",
+ * //         AttributeValues: [ // AttributeValueList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyDBClusterSnapshotAttributeCommandInput - {@link ModifyDBClusterSnapshotAttributeCommandInput}
+ * @returns {@link ModifyDBClusterSnapshotAttributeCommandOutput}
  * @see {@link ModifyDBClusterSnapshotAttributeCommandInput} for command's `input` shape.
  * @see {@link ModifyDBClusterSnapshotAttributeCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBClusterSnapshotNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBClusterSnapshotIdentifier</code> doesn't refer to an existing cluster snapshot. </p>
+ *
+ * @throws {@link InvalidDBClusterSnapshotStateFault} (client fault)
+ *  <p>The provided value isn't a valid cluster snapshot state.</p>
+ *
+ * @throws {@link SharedSnapshotQuotaExceededFault} (client fault)
+ *  <p>You have exceeded the maximum number of accounts that you can share a manual DB
+ *             snapshot with. </p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyDBClusterSnapshotAttributeCommand extends $Command<
-  ModifyDBClusterSnapshotAttributeCommandInput,
-  ModifyDBClusterSnapshotAttributeCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyDBClusterSnapshotAttributeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyDBClusterSnapshotAttributeCommandInput, ModifyDBClusterSnapshotAttributeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "ModifyDBClusterSnapshotAttributeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyDBClusterSnapshotAttributeMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyDBClusterSnapshotAttributeResult.filterSensitiveLog,
+export class ModifyDBClusterSnapshotAttributeCommand extends command<ModifyDBClusterSnapshotAttributeCommandInput, ModifyDBClusterSnapshotAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyDBClusterSnapshotAttribute",
+  ModifyDBClusterSnapshotAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyDBClusterSnapshotAttributeMessage;
+      output: ModifyDBClusterSnapshotAttributeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ModifyDBClusterSnapshotAttributeCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryModifyDBClusterSnapshotAttributeCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyDBClusterSnapshotAttributeCommandOutput> {
-    return deserializeAws_queryModifyDBClusterSnapshotAttributeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyDBClusterSnapshotAttributeCommandInput;
+      output: ModifyDBClusterSnapshotAttributeCommandOutput;
+    };
+  };
 }

@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeIamInstanceProfileAssociationsRequest,
   DescribeIamInstanceProfileAssociationsResult,
-} from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeIamInstanceProfileAssociationsCommand,
-  serializeAws_ec2DescribeIamInstanceProfileAssociationsCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_4";
+import { DescribeIamInstanceProfileAssociations$ } from "../schemas/schemas_0";
 
-export interface DescribeIamInstanceProfileAssociationsCommandInput
-  extends DescribeIamInstanceProfileAssociationsRequest {}
-export interface DescribeIamInstanceProfileAssociationsCommandOutput
-  extends DescribeIamInstanceProfileAssociationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeIamInstanceProfileAssociationsCommand}.
+ */
+export interface DescribeIamInstanceProfileAssociationsCommandInput extends DescribeIamInstanceProfileAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeIamInstanceProfileAssociationsCommand}.
+ */
+export interface DescribeIamInstanceProfileAssociationsCommandOutput extends DescribeIamInstanceProfileAssociationsResult, __MetadataBearer {}
 
 /**
  * <p>Describes your IAM instance profile associations.</p>
@@ -34,74 +32,98 @@ export interface DescribeIamInstanceProfileAssociationsCommandOutput
  * ```javascript
  * import { EC2Client, DescribeIamInstanceProfileAssociationsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeIamInstanceProfileAssociationsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeIamInstanceProfileAssociationsRequest
+ *   AssociationIds: [ // AssociationIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeIamInstanceProfileAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeIamInstanceProfileAssociationsResult
+ * //   IamInstanceProfileAssociations: [ // IamInstanceProfileAssociationSet
+ * //     { // IamInstanceProfileAssociation
+ * //       AssociationId: "STRING_VALUE",
+ * //       InstanceId: "STRING_VALUE",
+ * //       IamInstanceProfile: { // IamInstanceProfile
+ * //         Arn: "STRING_VALUE",
+ * //         Id: "STRING_VALUE",
+ * //       },
+ * //       State: "associating" || "associated" || "disassociating" || "disassociated",
+ * //       Timestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeIamInstanceProfileAssociationsCommandInput - {@link DescribeIamInstanceProfileAssociationsCommandInput}
+ * @returns {@link DescribeIamInstanceProfileAssociationsCommandOutput}
  * @see {@link DescribeIamInstanceProfileAssociationsCommandInput} for command's `input` shape.
  * @see {@link DescribeIamInstanceProfileAssociationsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe an IAM instance profile association
+ * ```javascript
+ * // This example describes the specified IAM instance profile association.
+ * const input = {
+ *   AssociationIds: [
+ *     "iip-assoc-0db249b1f25fa24b8"
+ *   ]
+ * };
+ * const command = new DescribeIamInstanceProfileAssociationsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   IamInstanceProfileAssociations: [
+ *     {
+ *       AssociationId: "iip-assoc-0db249b1f25fa24b8",
+ *       IamInstanceProfile: {
+ *         Arn: "arn:aws:iam::123456789012:instance-profile/admin-role",
+ *         Id: "AIPAJVQN4F5WVLGCJDRGM"
+ *       },
+ *       InstanceId: "i-09eb09efa73ec1dee",
+ *       State: "associated"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeIamInstanceProfileAssociationsCommand extends $Command<
-  DescribeIamInstanceProfileAssociationsCommandInput,
-  DescribeIamInstanceProfileAssociationsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeIamInstanceProfileAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeIamInstanceProfileAssociationsCommandInput, DescribeIamInstanceProfileAssociationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeIamInstanceProfileAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeIamInstanceProfileAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeIamInstanceProfileAssociationsResult.filterSensitiveLog,
+export class DescribeIamInstanceProfileAssociationsCommand extends command<DescribeIamInstanceProfileAssociationsCommandInput, DescribeIamInstanceProfileAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeIamInstanceProfileAssociations",
+  DescribeIamInstanceProfileAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIamInstanceProfileAssociationsRequest;
+      output: DescribeIamInstanceProfileAssociationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeIamInstanceProfileAssociationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeIamInstanceProfileAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeIamInstanceProfileAssociationsCommandOutput> {
-    return deserializeAws_ec2DescribeIamInstanceProfileAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeIamInstanceProfileAssociationsCommandInput;
+      output: DescribeIamInstanceProfileAssociationsCommandOutput;
+    };
+  };
 }

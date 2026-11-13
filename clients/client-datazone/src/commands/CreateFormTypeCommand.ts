@@ -1,0 +1,109 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFormTypeInput, CreateFormTypeOutput } from "../models/models_0";
+import { CreateFormType$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFormTypeCommand}.
+ */
+export interface CreateFormTypeCommandInput extends CreateFormTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFormTypeCommand}.
+ */
+export interface CreateFormTypeCommandOutput extends CreateFormTypeOutput, __MetadataBearer {}
+
+/**
+ * <p>Creates a metadata form type.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain must exist and be in an <code>ENABLED</code> state. </p> </li> <li> <p>The owning project must exist and be accessible.</p> </li> <li> <p>The name must be unique within the domain.</p> </li> </ul> <p>For custom form types, to indicate that a field should be searchable, annotate it with <code>@amazon.datazone#searchable</code>. By default, searchable fields are indexed for semantic search, where related query terms will match the attribute value even if they are not stemmed or keyword matches. To indicate that a field should be indexed for lexical search (which disables semantic search but supports stemmed and partial matches), annotate it with <code>@amazon.datazone#searchable(modes:["LEXICAL"])</code>. To indicate that a field should be indexed for technical identifier search (for more information on technical identifier search, see: <a href="https://aws.amazon.com/blogs/big-data/streamline-data-discovery-with-precise-technical-identifier-search-in-amazon-sagemaker-unified-studio/">https://aws.amazon.com/blogs/big-data/streamline-data-discovery-with-precise-technical-identifier-search-in-amazon-sagemaker-unified-studio/</a>), annotate it with <code>@amazon.datazone#searchable(modes:["TECHNICAL"])</code>.</p> <p>To denote that a field will store glossary term ids (which are filterable via the Search/SearchListings APIs), annotate it with <code>@amazon.datazone#glossaryterm("$\{GLOSSARY_ID\}")</code>, where <code>$\{GLOSSARY_ID\}</code> is the id of the glossary that the glossary terms stored in the field belong to. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DataZoneClient, CreateFormTypeCommand } from "@aws-sdk/client-datazone"; // ES Modules import
+ * // const { DataZoneClient, CreateFormTypeCommand } = require("@aws-sdk/client-datazone"); // CommonJS import
+ * // import type { DataZoneClientConfig } from "@aws-sdk/client-datazone";
+ * const config = {}; // type is DataZoneClientConfig
+ * const client = new DataZoneClient(config);
+ * const input = { // CreateFormTypeInput
+ *   domainIdentifier: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   model: { // Model Union: only one key present
+ *     smithy: "STRING_VALUE",
+ *   },
+ *   owningProjectIdentifier: "STRING_VALUE", // required
+ *   status: "ENABLED" || "DISABLED",
+ *   description: "STRING_VALUE",
+ * };
+ * const command = new CreateFormTypeCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateFormTypeOutput
+ * //   domainId: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   revision: "STRING_VALUE", // required
+ * //   description: "STRING_VALUE",
+ * //   owningProjectId: "STRING_VALUE",
+ * //   originDomainId: "STRING_VALUE",
+ * //   originProjectId: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateFormTypeCommandInput - {@link CreateFormTypeCommandInput}
+ * @returns {@link CreateFormTypeCommandOutput}
+ * @see {@link CreateFormTypeCommandInput} for command's `input` shape.
+ * @see {@link CreateFormTypeCommandOutput} for command's `response` shape.
+ * @see {@link DataZoneClientResolvedConfig | config} for DataZoneClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There is a conflict while performing this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request has exceeded the specified service quota.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the Amazon Web Services service.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You do not have permission to perform this action.</p>
+ *
+ * @throws {@link DataZoneServiceException}
+ * <p>Base exception class for all service exceptions from DataZone service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateFormTypeCommand extends command<CreateFormTypeCommandInput, CreateFormTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFormType",
+  CreateFormType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFormTypeInput;
+      output: CreateFormTypeOutput;
+    };
+    sdk: {
+      input: CreateFormTypeCommandInput;
+      output: CreateFormTypeCommandOutput;
+    };
+  };
+}

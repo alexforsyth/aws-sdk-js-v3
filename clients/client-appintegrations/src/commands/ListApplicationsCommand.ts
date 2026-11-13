@@ -1,0 +1,125 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationsRequest, ListApplicationsResponse } from "../models/models_0";
+import { ListApplications$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationsCommand}.
+ */
+export interface ListApplicationsCommandInput extends ListApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationsCommand}.
+ */
+export interface ListApplicationsCommandOutput extends ListApplicationsResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists applications in the account.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AppIntegrationsClient, ListApplicationsCommand } from "@aws-sdk/client-appintegrations"; // ES Modules import
+ * // const { AppIntegrationsClient, ListApplicationsCommand } = require("@aws-sdk/client-appintegrations"); // CommonJS import
+ * // import type { AppIntegrationsClientConfig } from "@aws-sdk/client-appintegrations";
+ * const config = {}; // type is AppIntegrationsClientConfig
+ * const client = new AppIntegrationsClient(config);
+ * const input = { // ListApplicationsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   ApplicationType: "STANDARD" || "SERVICE" || "MCP_SERVER" || "A2A_SERVER",
+ * };
+ * const command = new ListApplicationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListApplicationsResponse
+ * //   Applications: [ // ApplicationsList
+ * //     { // ApplicationSummary
+ * //       Arn: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Namespace: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedRegion: "STRING_VALUE",
+ * //       IsService: true || false,
+ * //       ApplicationType: "STANDARD" || "SERVICE" || "MCP_SERVER" || "A2A_SERVER",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListApplicationsCommandInput - {@link ListApplicationsCommandInput}
+ * @returns {@link ListApplicationsCommandOutput}
+ * @see {@link ListApplicationsCommandInput} for command's `input` shape.
+ * @see {@link ListApplicationsCommandOutput} for command's `response` shape.
+ * @see {@link AppIntegrationsClientResolvedConfig | config} for AppIntegrationsClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>Request processing failed due to an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link AppIntegrationsServiceException}
+ * <p>Base exception class for all service exceptions from AppIntegrations service.</p>
+ *
+ *
+ * @example To list applications in the account
+ * ```javascript
+ * // The following lists application summary in the account.
+ * const input = {
+ *   MaxResults: 1
+ * };
+ * const command = new ListApplicationsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Applications: [
+ *     {
+ *       Arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+ *       Id: "98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+ *       Name: "My Application",
+ *       Namespace: "myapplication"
+ *     }
+ *   ],
+ *   NextToken: "abc"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class ListApplicationsCommand extends command<ListApplicationsCommandInput, ListApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplications",
+  ListApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationsRequest;
+      output: ListApplicationsResponse;
+    };
+    sdk: {
+      input: ListApplicationsCommandInput;
+      output: ListApplicationsCommandOutput;
+    };
+  };
+}

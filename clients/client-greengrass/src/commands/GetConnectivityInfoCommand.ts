@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { GetConnectivityInfoRequest, GetConnectivityInfoResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetConnectivityInfoCommand,
-  serializeAws_restJson1GetConnectivityInfoCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetConnectivityInfoRequest, GetConnectivityInfoResponse } from "../models/models_0";
+import { GetConnectivityInfo$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetConnectivityInfoCommand}.
+ */
 export interface GetConnectivityInfoCommandInput extends GetConnectivityInfoRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetConnectivityInfoCommand}.
+ */
 export interface GetConnectivityInfoCommandOutput extends GetConnectivityInfoResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,61 @@ export interface GetConnectivityInfoCommandOutput extends GetConnectivityInfoRes
  * ```javascript
  * import { GreengrassClient, GetConnectivityInfoCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, GetConnectivityInfoCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // GetConnectivityInfoRequest
+ *   ThingName: "STRING_VALUE", // required
+ * };
  * const command = new GetConnectivityInfoCommand(input);
  * const response = await client.send(command);
+ * // { // GetConnectivityInfoResponse
+ * //   ConnectivityInfo: [ // __listOfConnectivityInfo
+ * //     { // ConnectivityInfo
+ * //       HostAddress: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Metadata: "STRING_VALUE",
+ * //       PortNumber: Number("int"),
+ * //     },
+ * //   ],
+ * //   Message: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetConnectivityInfoCommandInput - {@link GetConnectivityInfoCommandInput}
+ * @returns {@link GetConnectivityInfoCommandOutput}
  * @see {@link GetConnectivityInfoCommandInput} for command's `input` shape.
  * @see {@link GetConnectivityInfoCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class GetConnectivityInfoCommand extends $Command<
-  GetConnectivityInfoCommandInput,
-  GetConnectivityInfoCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetConnectivityInfoCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetConnectivityInfoCommandInput, GetConnectivityInfoCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "GetConnectivityInfoCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetConnectivityInfoRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetConnectivityInfoResponse.filterSensitiveLog,
+export class GetConnectivityInfoCommand extends command<GetConnectivityInfoCommandInput, GetConnectivityInfoCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetConnectivityInfo",
+  GetConnectivityInfo$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConnectivityInfoRequest;
+      output: GetConnectivityInfoResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetConnectivityInfoCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetConnectivityInfoCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetConnectivityInfoCommandOutput> {
-    return deserializeAws_restJson1GetConnectivityInfoCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetConnectivityInfoCommandInput;
+      output: GetConnectivityInfoCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SearchProductsAsAdminInput, SearchProductsAsAdminOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1SearchProductsAsAdminCommand,
-  serializeAws_json1_1SearchProductsAsAdminCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchProductsAsAdminInput, SearchProductsAsAdminOutput } from "../models/models_0";
+import { SearchProductsAsAdmin$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchProductsAsAdminCommand}.
+ */
 export interface SearchProductsAsAdminCommandInput extends SearchProductsAsAdminInput {}
+/**
+ * @public
+ *
+ * The output of {@link SearchProductsAsAdminCommand}.
+ */
 export interface SearchProductsAsAdminCommandOutput extends SearchProductsAsAdminOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,102 @@ export interface SearchProductsAsAdminCommandOutput extends SearchProductsAsAdmi
  * ```javascript
  * import { ServiceCatalogClient, SearchProductsAsAdminCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, SearchProductsAsAdminCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // SearchProductsAsAdminInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   PortfolioId: "STRING_VALUE",
+ *   Filters: { // ProductViewFilters
+ *     "<keys>": [ // ProductViewFilterValues
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   SortBy: "Title" || "VersionCount" || "CreationDate",
+ *   SortOrder: "ASCENDING" || "DESCENDING",
+ *   PageToken: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ *   ProductSource: "ACCOUNT",
+ * };
  * const command = new SearchProductsAsAdminCommand(input);
  * const response = await client.send(command);
+ * // { // SearchProductsAsAdminOutput
+ * //   ProductViewDetails: [ // ProductViewDetails
+ * //     { // ProductViewDetail
+ * //       ProductViewSummary: { // ProductViewSummary
+ * //         Id: "STRING_VALUE",
+ * //         ProductId: "STRING_VALUE",
+ * //         Name: "STRING_VALUE",
+ * //         Owner: "STRING_VALUE",
+ * //         ShortDescription: "STRING_VALUE",
+ * //         Type: "CLOUD_FORMATION_TEMPLATE" || "MARKETPLACE" || "TERRAFORM_OPEN_SOURCE" || "TERRAFORM_CLOUD" || "EXTERNAL",
+ * //         Distributor: "STRING_VALUE",
+ * //         HasDefaultPath: true || false,
+ * //         SupportEmail: "STRING_VALUE",
+ * //         SupportDescription: "STRING_VALUE",
+ * //         SupportUrl: "STRING_VALUE",
+ * //       },
+ * //       Status: "AVAILABLE" || "CREATING" || "FAILED",
+ * //       ProductARN: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       SourceConnection: { // SourceConnectionDetail
+ * //         Type: "CODESTAR",
+ * //         ConnectionParameters: { // SourceConnectionParameters
+ * //           CodeStar: { // CodeStarParameters
+ * //             ConnectionArn: "STRING_VALUE", // required
+ * //             Repository: "STRING_VALUE", // required
+ * //             Branch: "STRING_VALUE", // required
+ * //             ArtifactPath: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //         LastSync: { // LastSync
+ * //           LastSyncTime: new Date("TIMESTAMP"),
+ * //           LastSyncStatus: "SUCCEEDED" || "FAILED",
+ * //           LastSyncStatusMessage: "STRING_VALUE",
+ * //           LastSuccessfulSyncTime: new Date("TIMESTAMP"),
+ * //           LastSuccessfulSyncProvisioningArtifactId: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchProductsAsAdminCommandInput - {@link SearchProductsAsAdminCommandInput}
+ * @returns {@link SearchProductsAsAdminCommandOutput}
  * @see {@link SearchProductsAsAdminCommandInput} for command's `input` shape.
  * @see {@link SearchProductsAsAdminCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class SearchProductsAsAdminCommand extends $Command<
-  SearchProductsAsAdminCommandInput,
-  SearchProductsAsAdminCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchProductsAsAdminCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchProductsAsAdminCommandInput, SearchProductsAsAdminCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "SearchProductsAsAdminCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchProductsAsAdminInput.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchProductsAsAdminOutput.filterSensitiveLog,
+export class SearchProductsAsAdminCommand extends command<SearchProductsAsAdminCommandInput, SearchProductsAsAdminCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchProductsAsAdmin",
+  SearchProductsAsAdmin$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchProductsAsAdminInput;
+      output: SearchProductsAsAdminOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchProductsAsAdminCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SearchProductsAsAdminCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchProductsAsAdminCommandOutput> {
-    return deserializeAws_json1_1SearchProductsAsAdminCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchProductsAsAdminCommandInput;
+      output: SearchProductsAsAdminCommandOutput;
+    };
+  };
 }

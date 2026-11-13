@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { CreateResourceGroupRequest, CreateResourceGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateResourceGroupCommand,
-  serializeAws_json1_1CreateResourceGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateResourceGroupRequest, CreateResourceGroupResponse } from "../models/models_0";
+import { CreateResourceGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateResourceGroupCommand}.
+ */
 export interface CreateResourceGroupCommandInput extends CreateResourceGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateResourceGroupCommand}.
+ */
 export interface CreateResourceGroupCommandOutput extends CreateResourceGroupResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,89 @@ export interface CreateResourceGroupCommandOutput extends CreateResourceGroupRes
  * ```javascript
  * import { InspectorClient, CreateResourceGroupCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, CreateResourceGroupCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // CreateResourceGroupRequest
+ *   resourceGroupTags: [ // ResourceGroupTags // required
+ *     { // ResourceGroupTag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateResourceGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateResourceGroupResponse
+ * //   resourceGroupArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateResourceGroupCommandInput - {@link CreateResourceGroupCommandInput}
+ * @returns {@link CreateResourceGroupCommandOutput}
  * @see {@link CreateResourceGroupCommandInput} for command's `input` shape.
  * @see {@link CreateResourceGroupCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to access the requested resource.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *          AWS account limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ServiceTemporarilyUnavailableException} (server fault)
+ *  <p>The serice is temporary unavailable.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @example Create resource group
+ * ```javascript
+ * // Creates a resource group using the specified set of tags (key and value pairs) that are used to select the EC2 instances to be included in an Amazon Inspector assessment target. The created resource group is then used to create an Amazon Inspector assessment target.
+ * const input = {
+ *   resourceGroupTags: [
+ *     {
+ *       key: "Name",
+ *       value: "example"
+ *     }
+ *   ]
+ * };
+ * const command = new CreateResourceGroupCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   resourceGroupArn: "arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateResourceGroupCommand extends $Command<
-  CreateResourceGroupCommandInput,
-  CreateResourceGroupCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateResourceGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateResourceGroupCommandInput, CreateResourceGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "CreateResourceGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateResourceGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateResourceGroupResponse.filterSensitiveLog,
+export class CreateResourceGroupCommand extends command<CreateResourceGroupCommandInput, CreateResourceGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateResourceGroup",
+  CreateResourceGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateResourceGroupRequest;
+      output: CreateResourceGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateResourceGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateResourceGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateResourceGroupCommandOutput> {
-    return deserializeAws_json1_1CreateResourceGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateResourceGroupCommandInput;
+      output: CreateResourceGroupCommandOutput;
+    };
+  };
 }

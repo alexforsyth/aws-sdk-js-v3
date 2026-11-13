@@ -1,115 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   RegisterTransitGatewayMulticastGroupSourcesRequest,
   RegisterTransitGatewayMulticastGroupSourcesResult,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesCommand,
-  serializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_8";
+import { RegisterTransitGatewayMulticastGroupSources$ } from "../schemas/schemas_0";
 
-export interface RegisterTransitGatewayMulticastGroupSourcesCommandInput
-  extends RegisterTransitGatewayMulticastGroupSourcesRequest {}
-export interface RegisterTransitGatewayMulticastGroupSourcesCommandOutput
-  extends RegisterTransitGatewayMulticastGroupSourcesResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterTransitGatewayMulticastGroupSourcesCommand}.
+ */
+export interface RegisterTransitGatewayMulticastGroupSourcesCommandInput extends RegisterTransitGatewayMulticastGroupSourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterTransitGatewayMulticastGroupSourcesCommand}.
+ */
+export interface RegisterTransitGatewayMulticastGroupSourcesCommandOutput extends RegisterTransitGatewayMulticastGroupSourcesResult, __MetadataBearer {}
 
 /**
  * <p>Registers sources (network interfaces) with the specified  transit gateway multicast group.</p>
- *         <p>A multicast source is a network interface attached to a supported instance that sends
- *             multicast traffic. For information about supported instances, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits">Multicast
- *                 Considerations</a> in <i>Amazon VPC Transit Gateways</i>.</p>
- *         <p>After you add the source, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html">SearchTransitGatewayMulticastGroups</a> to verify that the source was added to the multicast
+ *          <p>A multicast source is a network interface attached to a supported instance that sends
+ *             multicast traffic. For more information about supported instances, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-multicast-overview.html">Multicast
+ *                 on transit gateways</a> in the <i>Amazon Web Services Transit Gateways Guide</i>.</p>
+ *          <p>After you add the source, use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html">SearchTransitGatewayMulticastGroups</a> to verify that the source was added to the multicast
  *             group.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, RegisterTransitGatewayMulticastGroupSourcesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, RegisterTransitGatewayMulticastGroupSourcesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // RegisterTransitGatewayMulticastGroupSourcesRequest
+ *   TransitGatewayMulticastDomainId: "STRING_VALUE", // required
+ *   GroupIpAddress: "STRING_VALUE",
+ *   NetworkInterfaceIds: [ // TransitGatewayNetworkInterfaceIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ * };
  * const command = new RegisterTransitGatewayMulticastGroupSourcesCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterTransitGatewayMulticastGroupSourcesResult
+ * //   RegisteredMulticastGroupSources: { // TransitGatewayMulticastRegisteredGroupSources
+ * //     TransitGatewayMulticastDomainId: "STRING_VALUE",
+ * //     RegisteredNetworkInterfaceIds: [ // ValueStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     GroupIpAddress: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RegisterTransitGatewayMulticastGroupSourcesCommandInput - {@link RegisterTransitGatewayMulticastGroupSourcesCommandInput}
+ * @returns {@link RegisterTransitGatewayMulticastGroupSourcesCommandOutput}
  * @see {@link RegisterTransitGatewayMulticastGroupSourcesCommandInput} for command's `input` shape.
  * @see {@link RegisterTransitGatewayMulticastGroupSourcesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterTransitGatewayMulticastGroupSourcesCommand extends $Command<
-  RegisterTransitGatewayMulticastGroupSourcesCommandInput,
-  RegisterTransitGatewayMulticastGroupSourcesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterTransitGatewayMulticastGroupSourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    RegisterTransitGatewayMulticastGroupSourcesCommandInput,
-    RegisterTransitGatewayMulticastGroupSourcesCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "RegisterTransitGatewayMulticastGroupSourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterTransitGatewayMulticastGroupSourcesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterTransitGatewayMulticastGroupSourcesResult.filterSensitiveLog,
+export class RegisterTransitGatewayMulticastGroupSourcesCommand extends command<RegisterTransitGatewayMulticastGroupSourcesCommandInput, RegisterTransitGatewayMulticastGroupSourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterTransitGatewayMulticastGroupSources",
+  RegisterTransitGatewayMulticastGroupSources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterTransitGatewayMulticastGroupSourcesRequest;
+      output: RegisterTransitGatewayMulticastGroupSourcesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RegisterTransitGatewayMulticastGroupSourcesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RegisterTransitGatewayMulticastGroupSourcesCommandOutput> {
-    return deserializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterTransitGatewayMulticastGroupSourcesCommandInput;
+      output: RegisterTransitGatewayMulticastGroupSourcesCommandOutput;
+    };
+  };
 }

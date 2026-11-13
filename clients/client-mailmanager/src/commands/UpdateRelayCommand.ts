@@ -1,0 +1,89 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRelayRequest, UpdateRelayResponse } from "../models/models_0";
+import { UpdateRelay$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRelayCommand}.
+ */
+export interface UpdateRelayCommandInput extends UpdateRelayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRelayCommand}.
+ */
+export interface UpdateRelayCommandOutput extends UpdateRelayResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the attributes of an existing relay resource.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MailManagerClient, UpdateRelayCommand } from "@aws-sdk/client-mailmanager"; // ES Modules import
+ * // const { MailManagerClient, UpdateRelayCommand } = require("@aws-sdk/client-mailmanager"); // CommonJS import
+ * // import type { MailManagerClientConfig } from "@aws-sdk/client-mailmanager";
+ * const config = {}; // type is MailManagerClientConfig
+ * const client = new MailManagerClient(config);
+ * const input = { // UpdateRelayRequest
+ *   RelayId: "STRING_VALUE", // required
+ *   RelayName: "STRING_VALUE",
+ *   ServerName: "STRING_VALUE",
+ *   ServerPort: Number("int"),
+ *   Authentication: { // RelayAuthentication Union: only one key present
+ *     SecretArn: "STRING_VALUE",
+ *     NoAuthentication: {},
+ *   },
+ * };
+ * const command = new UpdateRelayCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateRelayCommandInput - {@link UpdateRelayCommandInput}
+ * @returns {@link UpdateRelayCommandOutput}
+ * @see {@link UpdateRelayCommandInput} for command's `input` shape.
+ * @see {@link UpdateRelayCommandOutput} for command's `response` shape.
+ * @see {@link MailManagerClientResolvedConfig | config} for MailManagerClient's `config` shape.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request configuration has conflicts. For details, see the accompanying error message.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Occurs when a requested resource is not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request validation has failed. For details, see the accompanying error message.</p>
+ *
+ * @throws {@link MailManagerServiceException}
+ * <p>Base exception class for all service exceptions from MailManager service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateRelayCommand extends command<UpdateRelayCommandInput, UpdateRelayCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRelay",
+  UpdateRelay$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRelayRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateRelayCommandInput;
+      output: UpdateRelayCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreatePlatformApplicationInput, CreatePlatformApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_queryCreatePlatformApplicationCommand,
-  serializeAws_queryCreatePlatformApplicationCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePlatformApplicationInput, CreatePlatformApplicationResponse } from "../models/models_0";
+import { CreatePlatformApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePlatformApplicationCommand}.
+ */
 export interface CreatePlatformApplicationCommandInput extends CreatePlatformApplicationInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePlatformApplicationCommand}.
+ */
 export interface CreatePlatformApplicationCommandOutput extends CreatePlatformApplicationResponse, __MetadataBearer {}
 
 /**
@@ -27,111 +28,113 @@ export interface CreatePlatformApplicationCommandOutput extends CreatePlatformAp
  *             apps may register. You must specify <code>PlatformPrincipal</code> and
  *                 <code>PlatformCredential</code> attributes when using the
  *                 <code>CreatePlatformApplication</code> action.</p>
- *         <p>
+ *          <p>
  *             <code>PlatformPrincipal</code> and <code>PlatformCredential</code> are received from
  *             the notification service.</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>For <code>ADM</code>, <code>PlatformPrincipal</code> is <code>client id</code>
- *                     and <code>PlatformCredential</code> is <code>client secret</code>.</p>
+ *                <p>For ADM, <code>PlatformPrincipal</code> is <code>client id</code> and
+ *                         <code>PlatformCredential</code> is <code>client secret</code>.</p>
  *             </li>
  *             <li>
- *                 <p>For <code>Baidu</code>, <code>PlatformPrincipal</code> is <code>API key</code>
- *                     and <code>PlatformCredential</code> is <code>secret key</code>.</p>
- *             </li>
- *             <li>
- *                 <p>For <code>APNS</code> and <code>APNS_SANDBOX</code>,
+ *                <p>For APNS and <code>APNS_SANDBOX</code> using certificate credentials,
  *                         <code>PlatformPrincipal</code> is <code>SSL certificate</code> and
  *                         <code>PlatformCredential</code> is <code>private key</code>.</p>
  *             </li>
  *             <li>
- *                 <p>For <code>GCM</code> (Firebase Cloud Messaging), there is no
- *                         <code>PlatformPrincipal</code> and the <code>PlatformCredential</code> is
+ *                <p>For APNS and <code>APNS_SANDBOX</code> using token credentials,
+ *                         <code>PlatformPrincipal</code> is <code>signing key ID</code> and
+ *                         <code>PlatformCredential</code> is <code>signing key</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>For Baidu, <code>PlatformPrincipal</code> is <code>API key</code> and
+ *                         <code>PlatformCredential</code> is <code>secret key</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>For GCM (Firebase Cloud Messaging) using key credentials, there is no
+ *                         <code>PlatformPrincipal</code>. The <code>PlatformCredential</code> is
  *                         <code>API key</code>.</p>
  *             </li>
  *             <li>
- *                 <p>For <code>MPNS</code>, <code>PlatformPrincipal</code> is <code>TLS
- *                         certificate</code> and <code>PlatformCredential</code> is <code>private
- *                         key</code>.</p>
+ *                <p>For GCM (Firebase Cloud Messaging) using token credentials, there is no
+ *                         <code>PlatformPrincipal</code>. The <code>PlatformCredential</code> is a
+ *                     JSON formatted private key file. When using the Amazon Web Services CLI or Amazon Web Services SDKs, the
+ *                     file must be in string format and special characters must be ignored. To format
+ *                     the file correctly, Amazon SNS recommends using the following command:
+ *                         <code>SERVICE_JSON=$(jq @json < service.json)</code>.</p>
  *             </li>
  *             <li>
- *                 <p>For <code>WNS</code>, <code>PlatformPrincipal</code> is <code>Package Security
+ *                <p>For MPNS, <code>PlatformPrincipal</code> is <code>TLS certificate</code> and
+ *                         <code>PlatformCredential</code> is <code>private key</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>For WNS, <code>PlatformPrincipal</code> is <code>Package Security
  *                         Identifier</code> and <code>PlatformCredential</code> is <code>secret
  *                         key</code>.</p>
  *             </li>
  *          </ul>
- *         <p>You can use the returned <code>PlatformApplicationArn</code> as an attribute for the
+ *          <p>You can use the returned <code>PlatformApplicationArn</code> as an attribute for the
  *                 <code>CreatePlatformEndpoint</code> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SNSClient, CreatePlatformApplicationCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, CreatePlatformApplicationCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // CreatePlatformApplicationInput
+ *   Name: "STRING_VALUE", // required
+ *   Platform: "STRING_VALUE", // required
+ *   Attributes: { // MapStringToString // required
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreatePlatformApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePlatformApplicationResponse
+ * //   PlatformApplicationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePlatformApplicationCommandInput - {@link CreatePlatformApplicationCommandInput}
+ * @returns {@link CreatePlatformApplicationCommandOutput}
  * @see {@link CreatePlatformApplicationCommandInput} for command's `input` shape.
  * @see {@link CreatePlatformApplicationCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePlatformApplicationCommand extends $Command<
-  CreatePlatformApplicationCommandInput,
-  CreatePlatformApplicationCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePlatformApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePlatformApplicationCommandInput, CreatePlatformApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "CreatePlatformApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePlatformApplicationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePlatformApplicationResponse.filterSensitiveLog,
+export class CreatePlatformApplicationCommand extends command<CreatePlatformApplicationCommandInput, CreatePlatformApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePlatformApplication",
+  CreatePlatformApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePlatformApplicationInput;
+      output: CreatePlatformApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePlatformApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreatePlatformApplicationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreatePlatformApplicationCommandOutput> {
-    return deserializeAws_queryCreatePlatformApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePlatformApplicationCommandInput;
+      output: CreatePlatformApplicationCommandOutput;
+    };
+  };
 }

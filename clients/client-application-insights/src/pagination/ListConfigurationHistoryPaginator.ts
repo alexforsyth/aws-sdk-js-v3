@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { ApplicationInsights } from "../ApplicationInsights";
 import { ApplicationInsightsClient } from "../ApplicationInsightsClient";
 import {
   ListConfigurationHistoryCommand,
   ListConfigurationHistoryCommandInput,
   ListConfigurationHistoryCommandOutput,
 } from "../commands/ListConfigurationHistoryCommand";
-import { ApplicationInsightsPaginationConfiguration } from "./Interfaces";
+import type { ApplicationInsightsPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: ApplicationInsightsClient,
-  input: ListConfigurationHistoryCommandInput,
-  ...args: any
-): Promise<ListConfigurationHistoryCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListConfigurationHistoryCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: ApplicationInsights,
-  input: ListConfigurationHistoryCommandInput,
-  ...args: any
-): Promise<ListConfigurationHistoryCommandOutput> => {
-  // @ts-ignore
-  return await client.listConfigurationHistory(input, ...args);
-};
-export async function* paginateListConfigurationHistory(
+export const paginateListConfigurationHistory: (
   config: ApplicationInsightsPaginationConfiguration,
   input: ListConfigurationHistoryCommandInput,
-  ...additionalArguments: any
-): Paginator<ListConfigurationHistoryCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListConfigurationHistoryCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof ApplicationInsights) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof ApplicationInsightsClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected ApplicationInsights | ApplicationInsightsClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListConfigurationHistoryCommandOutput> = createPaginator<
+  ApplicationInsightsPaginationConfiguration,
+  ListConfigurationHistoryCommandInput,
+  ListConfigurationHistoryCommandOutput
+>(ApplicationInsightsClient, ListConfigurationHistoryCommand, "NextToken", "NextToken", "MaxResults");

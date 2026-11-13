@@ -1,106 +1,123 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ProvisionByoipCidrRequest, ProvisionByoipCidrResult } from "../models/models_5";
-import {
-  deserializeAws_ec2ProvisionByoipCidrCommand,
-  serializeAws_ec2ProvisionByoipCidrCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ProvisionByoipCidrRequest, ProvisionByoipCidrResult } from "../models/models_7";
+import { ProvisionByoipCidr$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ProvisionByoipCidrCommand}.
+ */
 export interface ProvisionByoipCidrCommandInput extends ProvisionByoipCidrRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ProvisionByoipCidrCommand}.
+ */
 export interface ProvisionByoipCidrCommandOutput extends ProvisionByoipCidrResult, __MetadataBearer {}
 
 /**
  * <p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP
  *          addresses (BYOIP) and creates a corresponding address pool. After the address range is
- *          provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p>
+ *          provisioned, it is ready to be advertised.</p>
  *          <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it.
  *          You must ensure that the address range is registered to you and that you created an
  *          RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range.
- *          For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ *          For the Amazon Web Services GovCloud (US) Regions, authorize only ASN 8987. For the Amazon Web Services
+ *          European Sovereign Cloud, authorize ASNs 16509 and 214101.
+ *          For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon EC2 User Guide</i>.</p>
  *          <p>Provisioning an address range is an asynchronous operation, so the call returns immediately,
  *          but the address range is not ready to use until its status changes from <code>pending-provision</code>
- *          to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>.
- *          To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a>
- *          with either the specific address from the address pool or the ID of the address pool.</p>
+ *           to <code>provisioned</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/byoip-onboard.html">Onboard your address range</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ProvisionByoipCidrCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ProvisionByoipCidrCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ProvisionByoipCidrRequest
+ *   Cidr: "STRING_VALUE", // required
+ *   CidrAuthorizationContext: { // CidrAuthorizationContext
+ *     Message: "STRING_VALUE", // required
+ *     Signature: "STRING_VALUE", // required
+ *   },
+ *   PubliclyAdvertisable: true || false,
+ *   Description: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   PoolTagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   MultiRegion: true || false,
+ *   NetworkBorderGroup: "STRING_VALUE",
+ * };
  * const command = new ProvisionByoipCidrCommand(input);
  * const response = await client.send(command);
+ * // { // ProvisionByoipCidrResult
+ * //   ByoipCidr: { // ByoipCidr
+ * //     Cidr: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     AsnAssociations: [ // AsnAssociationSet
+ * //       { // AsnAssociation
+ * //         Asn: "STRING_VALUE",
+ * //         Cidr: "STRING_VALUE",
+ * //         StatusMessage: "STRING_VALUE",
+ * //         State: "disassociated" || "failed-disassociation" || "failed-association" || "pending-disassociation" || "pending-association" || "associated",
+ * //       },
+ * //     ],
+ * //     StatusMessage: "STRING_VALUE",
+ * //     State: "advertised" || "deprovisioned" || "failed-deprovision" || "failed-provision" || "pending-advertising" || "pending-deprovision" || "pending-provision" || "pending-withdrawal" || "provisioned" || "provisioned-not-publicly-advertisable",
+ * //     NetworkBorderGroup: "STRING_VALUE",
+ * //     AdvertisementType: "STRING_VALUE",
+ * //     PoolId: "STRING_VALUE",
+ * //     IpamPoolId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ProvisionByoipCidrCommandInput - {@link ProvisionByoipCidrCommandInput}
+ * @returns {@link ProvisionByoipCidrCommandOutput}
  * @see {@link ProvisionByoipCidrCommandInput} for command's `input` shape.
  * @see {@link ProvisionByoipCidrCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ProvisionByoipCidrCommand extends $Command<
-  ProvisionByoipCidrCommandInput,
-  ProvisionByoipCidrCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ProvisionByoipCidrCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ProvisionByoipCidrCommandInput, ProvisionByoipCidrCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ProvisionByoipCidrCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ProvisionByoipCidrRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ProvisionByoipCidrResult.filterSensitiveLog,
+export class ProvisionByoipCidrCommand extends command<ProvisionByoipCidrCommandInput, ProvisionByoipCidrCommandOutput>(
+  _ep0,
+  _mw0,
+  "ProvisionByoipCidr",
+  ProvisionByoipCidr$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ProvisionByoipCidrRequest;
+      output: ProvisionByoipCidrResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ProvisionByoipCidrCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ProvisionByoipCidrCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ProvisionByoipCidrCommandOutput> {
-    return deserializeAws_ec2ProvisionByoipCidrCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ProvisionByoipCidrCommandInput;
+      output: ProvisionByoipCidrCommandOutput;
+    };
+  };
 }

@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { AddRegionRequest, AddRegionResult } from "../models/models_0";
-import { deserializeAws_json1_1AddRegionCommand, serializeAws_json1_1AddRegionCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddRegionRequest, AddRegionResult } from "../models/models_0";
+import { AddRegion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddRegionCommand}.
+ */
 export interface AddRegionCommandInput extends AddRegionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddRegionCommand}.
+ */
 export interface AddRegionCommandOutput extends AddRegionResult, __MetadataBearer {}
 
 /**
@@ -25,68 +29,84 @@ export interface AddRegionCommandOutput extends AddRegionResult, __MetadataBeare
  * ```javascript
  * import { DirectoryServiceClient, AddRegionCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, AddRegionCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // AddRegionRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   RegionName: "STRING_VALUE", // required
+ *   VPCSettings: { // DirectoryVpcSettings
+ *     VpcId: "STRING_VALUE", // required
+ *     SubnetIds: [ // SubnetIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new AddRegionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AddRegionCommandInput - {@link AddRegionCommandInput}
+ * @returns {@link AddRegionCommandOutput}
  * @see {@link AddRegionCommandInput} for command's `input` shape.
  * @see {@link AddRegionCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link DirectoryAlreadyInRegionException} (client fault)
+ *  <p>The Region you specified is the same Region where the Managed Microsoft AD directory was created.
+ *       Specify a different Region and try again.</p>
+ *
+ * @throws {@link DirectoryDoesNotExistException} (client fault)
+ *  <p>The specified directory does not exist in the system.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The specified directory is unavailable.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link RegionLimitExceededException} (client fault)
+ *  <p>You have reached the limit for maximum number of simultaneous Region replications per
+ *       directory.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The operation is not supported.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @public
  */
-export class AddRegionCommand extends $Command<
-  AddRegionCommandInput,
-  AddRegionCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddRegionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddRegionCommandInput, AddRegionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "AddRegionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddRegionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddRegionResult.filterSensitiveLog,
+export class AddRegionCommand extends command<AddRegionCommandInput, AddRegionCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddRegion",
+  AddRegion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddRegionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddRegionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddRegionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddRegionCommandOutput> {
-    return deserializeAws_json1_1AddRegionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddRegionCommandInput;
+      output: AddRegionCommandOutput;
+    };
+  };
 }

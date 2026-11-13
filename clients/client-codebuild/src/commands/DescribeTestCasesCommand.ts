@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { DescribeTestCasesInput, DescribeTestCasesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeTestCasesCommand,
-  serializeAws_json1_1DescribeTestCasesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTestCasesInput, DescribeTestCasesOutput } from "../models/models_0";
+import { DescribeTestCases$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTestCasesCommand}.
+ */
 export interface DescribeTestCasesCommandInput extends DescribeTestCasesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTestCasesCommand}.
+ */
 export interface DescribeTestCasesCommandOutput extends DescribeTestCasesOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,72 @@ export interface DescribeTestCasesCommandOutput extends DescribeTestCasesOutput,
  * ```javascript
  * import { CodeBuildClient, DescribeTestCasesCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, DescribeTestCasesCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // DescribeTestCasesInput
+ *   reportArn: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   filter: { // TestCaseFilter
+ *     status: "STRING_VALUE",
+ *     keyword: "STRING_VALUE",
+ *   },
+ * };
  * const command = new DescribeTestCasesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTestCasesOutput
+ * //   nextToken: "STRING_VALUE",
+ * //   testCases: [ // TestCases
+ * //     { // TestCase
+ * //       reportArn: "STRING_VALUE",
+ * //       testRawDataPath: "STRING_VALUE",
+ * //       prefix: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       status: "STRING_VALUE",
+ * //       durationInNanoSeconds: Number("long"),
+ * //       message: "STRING_VALUE",
+ * //       expired: new Date("TIMESTAMP"),
+ * //       testSuiteName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeTestCasesCommandInput - {@link DescribeTestCasesCommandInput}
+ * @returns {@link DescribeTestCasesCommandOutput}
  * @see {@link DescribeTestCasesCommandInput} for command's `input` shape.
  * @see {@link DescribeTestCasesCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be found.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTestCasesCommand extends $Command<
-  DescribeTestCasesCommandInput,
-  DescribeTestCasesCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTestCasesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTestCasesCommandInput, DescribeTestCasesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "DescribeTestCasesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTestCasesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTestCasesOutput.filterSensitiveLog,
+export class DescribeTestCasesCommand extends command<DescribeTestCasesCommandInput, DescribeTestCasesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTestCases",
+  DescribeTestCases$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTestCasesInput;
+      output: DescribeTestCasesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTestCasesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeTestCasesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTestCasesCommandOutput> {
-    return deserializeAws_json1_1DescribeTestCasesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTestCasesCommandInput;
+      output: DescribeTestCasesCommandOutput;
+    };
+  };
 }

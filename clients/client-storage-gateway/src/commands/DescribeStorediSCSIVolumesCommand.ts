@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeStorediSCSIVolumesInput, DescribeStorediSCSIVolumesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeStorediSCSIVolumesCommand,
-  serializeAws_json1_1DescribeStorediSCSIVolumesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStorediSCSIVolumesInput, DescribeStorediSCSIVolumesOutput } from "../models/models_0";
+import { DescribeStorediSCSIVolumes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStorediSCSIVolumesCommand}.
+ */
 export interface DescribeStorediSCSIVolumesCommandInput extends DescribeStorediSCSIVolumesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStorediSCSIVolumesCommand}.
+ */
 export interface DescribeStorediSCSIVolumesCommandOutput extends DescribeStorediSCSIVolumesOutput, __MetadataBearer {}
 
 /**
@@ -30,71 +31,114 @@ export interface DescribeStorediSCSIVolumesCommandOutput extends DescribeStoredi
  * ```javascript
  * import { StorageGatewayClient, DescribeStorediSCSIVolumesCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DescribeStorediSCSIVolumesCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DescribeStorediSCSIVolumesInput
+ *   VolumeARNs: [ // VolumeARNs // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeStorediSCSIVolumesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStorediSCSIVolumesOutput
+ * //   StorediSCSIVolumes: [ // StorediSCSIVolumes
+ * //     { // StorediSCSIVolume
+ * //       VolumeARN: "STRING_VALUE",
+ * //       VolumeId: "STRING_VALUE",
+ * //       VolumeType: "STRING_VALUE",
+ * //       VolumeStatus: "STRING_VALUE",
+ * //       VolumeAttachmentStatus: "STRING_VALUE",
+ * //       VolumeSizeInBytes: Number("long"),
+ * //       VolumeProgress: Number("double"),
+ * //       VolumeDiskId: "STRING_VALUE",
+ * //       SourceSnapshotId: "STRING_VALUE",
+ * //       PreservedExistingData: true || false,
+ * //       VolumeiSCSIAttributes: { // VolumeiSCSIAttributes
+ * //         TargetARN: "STRING_VALUE",
+ * //         NetworkInterfaceId: "STRING_VALUE",
+ * //         NetworkInterfacePort: Number("int"),
+ * //         LunNumber: Number("int"),
+ * //         ChapEnabled: true || false,
+ * //       },
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       VolumeUsedInBytes: Number("long"),
+ * //       KMSKey: "STRING_VALUE",
+ * //       TargetName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeStorediSCSIVolumesCommandInput - {@link DescribeStorediSCSIVolumesCommandInput}
+ * @returns {@link DescribeStorediSCSIVolumesCommandOutput}
  * @see {@link DescribeStorediSCSIVolumesCommandInput} for command's `input` shape.
  * @see {@link DescribeStorediSCSIVolumesCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To describe the volumes of a gateway
+ * ```javascript
+ * // Returns the description of the gateway volumes specified in the request belonging to the same gateway.
+ * const input = {
+ *   VolumeARNs: [
+ *     "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"
+ *   ]
+ * };
+ * const command = new DescribeStorediSCSIVolumesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   StorediSCSIVolumes: [
+ *     {
+ *       PreservedExistingData: false,
+ *       VolumeARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB",
+ *       VolumeDiskId: "pci-0000:03:00.0-scsi-0:0:0:0",
+ *       VolumeId: "vol-1122AABB",
+ *       VolumeProgress: 23.7,
+ *       VolumeSizeInBytes: 1099511627776,
+ *       VolumeStatus: "BOOTSTRAPPING",
+ *       VolumeiSCSIAttributes: {
+ *         ChapEnabled: true,
+ *         NetworkInterfaceId: "10.243.43.207",
+ *         NetworkInterfacePort: 3260,
+ *         TargetARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"
+ *       }
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeStorediSCSIVolumesCommand extends $Command<
-  DescribeStorediSCSIVolumesCommandInput,
-  DescribeStorediSCSIVolumesCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStorediSCSIVolumesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStorediSCSIVolumesCommandInput, DescribeStorediSCSIVolumesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DescribeStorediSCSIVolumesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStorediSCSIVolumesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStorediSCSIVolumesOutput.filterSensitiveLog,
+export class DescribeStorediSCSIVolumesCommand extends command<DescribeStorediSCSIVolumesCommandInput, DescribeStorediSCSIVolumesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStorediSCSIVolumes",
+  DescribeStorediSCSIVolumes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStorediSCSIVolumesInput;
+      output: DescribeStorediSCSIVolumesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStorediSCSIVolumesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeStorediSCSIVolumesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeStorediSCSIVolumesCommandOutput> {
-    return deserializeAws_json1_1DescribeStorediSCSIVolumesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStorediSCSIVolumesCommandInput;
+      output: DescribeStorediSCSIVolumesCommandOutput;
+    };
+  };
 }

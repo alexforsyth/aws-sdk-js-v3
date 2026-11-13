@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { StartExportLabelsTaskRunRequest, StartExportLabelsTaskRunResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1StartExportLabelsTaskRunCommand,
-  serializeAws_json1_1StartExportLabelsTaskRunCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartExportLabelsTaskRunRequest, StartExportLabelsTaskRunResponse } from "../models/models_3";
+import { StartExportLabelsTaskRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartExportLabelsTaskRunCommand}.
+ */
 export interface StartExportLabelsTaskRunCommandInput extends StartExportLabelsTaskRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartExportLabelsTaskRunCommand}.
+ */
 export interface StartExportLabelsTaskRunCommandOutput extends StartExportLabelsTaskRunResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,60 @@ export interface StartExportLabelsTaskRunCommandOutput extends StartExportLabels
  * ```javascript
  * import { GlueClient, StartExportLabelsTaskRunCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, StartExportLabelsTaskRunCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // StartExportLabelsTaskRunRequest
+ *   TransformId: "STRING_VALUE", // required
+ *   OutputS3Path: "STRING_VALUE", // required
+ * };
  * const command = new StartExportLabelsTaskRunCommand(input);
  * const response = await client.send(command);
+ * // { // StartExportLabelsTaskRunResponse
+ * //   TaskRunId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartExportLabelsTaskRunCommandInput - {@link StartExportLabelsTaskRunCommandInput}
+ * @returns {@link StartExportLabelsTaskRunCommandOutput}
  * @see {@link StartExportLabelsTaskRunCommandInput} for command's `input` shape.
  * @see {@link StartExportLabelsTaskRunCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class StartExportLabelsTaskRunCommand extends $Command<
-  StartExportLabelsTaskRunCommandInput,
-  StartExportLabelsTaskRunCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartExportLabelsTaskRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartExportLabelsTaskRunCommandInput, StartExportLabelsTaskRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "StartExportLabelsTaskRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartExportLabelsTaskRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartExportLabelsTaskRunResponse.filterSensitiveLog,
+export class StartExportLabelsTaskRunCommand extends command<StartExportLabelsTaskRunCommandInput, StartExportLabelsTaskRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartExportLabelsTaskRun",
+  StartExportLabelsTaskRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartExportLabelsTaskRunRequest;
+      output: StartExportLabelsTaskRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartExportLabelsTaskRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartExportLabelsTaskRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartExportLabelsTaskRunCommandOutput> {
-    return deserializeAws_json1_1StartExportLabelsTaskRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartExportLabelsTaskRunCommandInput;
+      output: StartExportLabelsTaskRunCommandOutput;
+    };
+  };
 }

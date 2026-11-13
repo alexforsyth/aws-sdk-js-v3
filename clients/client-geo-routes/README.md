@@ -1,0 +1,216 @@
+<!-- generated file, do not edit directly -->
+
+# @aws-sdk/client-geo-routes
+
+## Description
+
+AWS SDK for JavaScript GeoRoutes Client for Node.js, Browser and React Native.
+
+<p>With the Routes API you can calculate routes and estimate travel time based on up-to-date road network and live traffic information. Key features include:</p> <ul> <li> <p>Point-to-point routing with estimated travel time, distance, and turn-by-turn directions. See <a href="https://docs.aws.amazon.com/location/latest/APIReference/API_CalculateRoutes.html">CalculateRoutes</a>.</p> </li> <li> <p>Multi-point route optimization to minimize travel time or distance. See <a href="https://docs.aws.amazon.com/location/latest/APIReference/API_OptimizeWaypoints.html">OptimizeWaypoints</a>.</p> </li> <li> <p>Route matrices for efficient multi-destination planning. See <a href="https://docs.aws.amazon.com/location/latest/APIReference/API_CalculateRouteMatrix.html">CalculateRouteMatrix</a>.</p> </li> <li> <p>Isoline calculations to determine reachable areas within specified time or distance thresholds. See <a href="https://docs.aws.amazon.com/location/latest/APIReference/API_CalculateIsolines.html">CalculateIsolines</a>.</p> </li> <li> <p>Map-matching to align GPS traces with the road network. See <a href="https://docs.aws.amazon.com/location/latest/APIReference/API_SnapToRoads.html">SnapToRoads</a>.</p> </li> </ul>
+
+## Installing
+
+To install this package, use the CLI of your favorite package manager:
+
+- `npm install @aws-sdk/client-geo-routes`
+- `yarn add @aws-sdk/client-geo-routes`
+- `pnpm add @aws-sdk/client-geo-routes`
+
+## Getting Started
+
+### Import
+
+The AWS SDK is modulized by clients and commands.
+To send a request, you only need to import the `GeoRoutesClient` and
+the commands you need, for example `SnapToRoadsCommand`:
+
+```js
+// ES5 example
+const { GeoRoutesClient, SnapToRoadsCommand } = require("@aws-sdk/client-geo-routes");
+```
+
+```ts
+// ES6+ example
+import { GeoRoutesClient, SnapToRoadsCommand } from "@aws-sdk/client-geo-routes";
+```
+
+### Usage
+
+To send a request:
+
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
+
+```js
+const client = new GeoRoutesClient({ region: "REGION" });
+
+const params = { /** input parameters */ };
+const command = new SnapToRoadsCommand(params);
+```
+
+#### Async/await
+
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+operator to wait for the promise returned by send operation as follows:
+
+```js
+// async/await.
+try {
+  const data = await client.send(command);
+  // process data.
+} catch (error) {
+  // error handling.
+} finally {
+  // finally.
+}
+```
+
+#### Promises
+
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
+
+```js
+client
+  .send(command)
+  .then((data) => {
+    // process data.
+  })
+  .catch((error) => {
+    // error handling.
+  })
+  .finally(() => {
+    // finally.
+  });
+```
+
+#### Aggregated client
+
+The aggregated client class is exported from the same package, but without the "Client" suffix.
+
+`GeoRoutes` extends `GeoRoutesClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
+
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`GeoRoutesClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
+
+```ts
+import { GeoRoutes } from "@aws-sdk/client-geo-routes";
+
+const client = new GeoRoutes({ region: "REGION" });
+
+// async/await.
+try {
+  const data = await client.snapToRoads(params);
+  // process data.
+} catch (error) {
+  // error handling.
+}
+
+// Promises.
+client
+  .snapToRoads(params)
+  .then((data) => {
+    // process data.
+  })
+  .catch((error) => {
+    // error handling.
+  });
+
+// callbacks (not recommended).
+client.snapToRoads(params, (err, data) => {
+  // process err and data.
+});
+```
+
+### Troubleshooting
+
+When the service returns an exception, the error will include the exception information,
+as well as response metadata (e.g. request id).
+
+```js
+try {
+  const data = await client.send(command);
+  // process data.
+} catch (error) {
+  const { requestId, cfId, extendedRequestId } = error.$metadata;
+  console.log({ requestId, cfId, extendedRequestId });
+  /**
+   * The keys within exceptions are also parsed.
+   * You can access them by specifying exception names:
+   * if (error.name === 'SomeServiceException') {
+   *     const value = error.specialKeyInException;
+   * }
+   */
+}
+```
+
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
+## Getting Help
+
+Please use these community resources for getting help.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+  or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
+- Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
+  on AWS Developer Blog.
+- Ask a question on [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-js) and tag it with `aws-sdk-js`.
+- Join the AWS JavaScript community on [gitter](https://gitter.im/aws/aws-sdk-js-v3).
+- If it turns out that you may have found a bug, please [open an issue](https://github.com/aws/aws-sdk-js-v3/issues/new/choose).
+
+To test your universal JavaScript code in Node.js, browser and react-native environments,
+visit our [code samples repo](https://github.com/aws-samples/aws-sdk-js-tests).
+
+## Contributing
+
+This client code is generated automatically. Any modifications will be overwritten the next time the `@aws-sdk/client-geo-routes` package is updated.
+To contribute to client you can check our [generate clients scripts](https://github.com/aws/aws-sdk-js-v3/tree/main/scripts/generate-clients).
+
+## License
+
+This SDK is distributed under the
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
+see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CalculateIsolines
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/geo-routes/command/CalculateIsolinesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/CalculateIsolinesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/CalculateIsolinesCommandOutput/)
+</details>
+<details>
+<summary>
+CalculateRouteMatrix
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/geo-routes/command/CalculateRouteMatrixCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/CalculateRouteMatrixCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/CalculateRouteMatrixCommandOutput/)
+</details>
+<details>
+<summary>
+CalculateRoutes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/geo-routes/command/CalculateRoutesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/CalculateRoutesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/CalculateRoutesCommandOutput/)
+</details>
+<details>
+<summary>
+OptimizeWaypoints
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/geo-routes/command/OptimizeWaypointsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/OptimizeWaypointsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/OptimizeWaypointsCommandOutput/)
+</details>
+<details>
+<summary>
+SnapToRoads
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/geo-routes/command/SnapToRoadsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/SnapToRoadsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-geo-routes/Interface/SnapToRoadsCommandOutput/)
+</details>

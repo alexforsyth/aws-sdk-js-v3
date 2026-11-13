@@ -1,98 +1,73 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRClient";
-import { RemoveManagedScalingPolicyInput, RemoveManagedScalingPolicyOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1RemoveManagedScalingPolicyCommand,
-  serializeAws_json1_1RemoveManagedScalingPolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveManagedScalingPolicyInput, RemoveManagedScalingPolicyOutput } from "../models/models_0";
+import { RemoveManagedScalingPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveManagedScalingPolicyCommand}.
+ */
 export interface RemoveManagedScalingPolicyCommandInput extends RemoveManagedScalingPolicyInput {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveManagedScalingPolicyCommand}.
+ */
 export interface RemoveManagedScalingPolicyCommandOutput extends RemoveManagedScalingPolicyOutput, __MetadataBearer {}
 
 /**
- * <p> Removes a managed scaling policy from a specified EMR cluster. </p>
+ * <p> Removes a managed scaling policy from a specified Amazon EMR cluster. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EMRClient, RemoveManagedScalingPolicyCommand } from "@aws-sdk/client-emr"; // ES Modules import
  * // const { EMRClient, RemoveManagedScalingPolicyCommand } = require("@aws-sdk/client-emr"); // CommonJS import
+ * // import type { EMRClientConfig } from "@aws-sdk/client-emr";
+ * const config = {}; // type is EMRClientConfig
  * const client = new EMRClient(config);
+ * const input = { // RemoveManagedScalingPolicyInput
+ *   ClusterId: "STRING_VALUE", // required
+ * };
  * const command = new RemoveManagedScalingPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveManagedScalingPolicyCommandInput - {@link RemoveManagedScalingPolicyCommandInput}
+ * @returns {@link RemoveManagedScalingPolicyCommandOutput}
  * @see {@link RemoveManagedScalingPolicyCommandInput} for command's `input` shape.
  * @see {@link RemoveManagedScalingPolicyCommandOutput} for command's `response` shape.
- * @see {@link EMRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRClientResolvedConfig | config} for EMRClient's `config` shape.
  *
+ * @throws {@link EMRServiceException}
+ * <p>Base exception class for all service exceptions from EMR service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveManagedScalingPolicyCommand extends $Command<
-  RemoveManagedScalingPolicyCommandInput,
-  RemoveManagedScalingPolicyCommandOutput,
-  EMRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveManagedScalingPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveManagedScalingPolicyCommandInput, RemoveManagedScalingPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRClient";
-    const commandName = "RemoveManagedScalingPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveManagedScalingPolicyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveManagedScalingPolicyOutput.filterSensitiveLog,
+export class RemoveManagedScalingPolicyCommand extends command<RemoveManagedScalingPolicyCommandInput, RemoveManagedScalingPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveManagedScalingPolicy",
+  RemoveManagedScalingPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveManagedScalingPolicyInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveManagedScalingPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RemoveManagedScalingPolicyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveManagedScalingPolicyCommandOutput> {
-    return deserializeAws_json1_1RemoveManagedScalingPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveManagedScalingPolicyCommandInput;
+      output: RemoveManagedScalingPolicyCommandOutput;
+    };
+  };
 }

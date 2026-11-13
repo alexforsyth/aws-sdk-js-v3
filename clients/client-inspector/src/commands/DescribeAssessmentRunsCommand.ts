@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { DescribeAssessmentRunsRequest, DescribeAssessmentRunsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAssessmentRunsCommand,
-  serializeAws_json1_1DescribeAssessmentRunsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAssessmentRunsRequest, DescribeAssessmentRunsResponse } from "../models/models_0";
+import { DescribeAssessmentRuns$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAssessmentRunsCommand}.
+ */
 export interface DescribeAssessmentRunsCommandInput extends DescribeAssessmentRunsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAssessmentRunsCommand}.
+ */
 export interface DescribeAssessmentRunsCommandOutput extends DescribeAssessmentRunsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,103 @@ export interface DescribeAssessmentRunsCommandOutput extends DescribeAssessmentR
  * ```javascript
  * import { InspectorClient, DescribeAssessmentRunsCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, DescribeAssessmentRunsCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // DescribeAssessmentRunsRequest
+ *   assessmentRunArns: [ // BatchDescribeArnList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeAssessmentRunsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAssessmentRunsResponse
+ * //   assessmentRuns: [ // AssessmentRunList // required
+ * //     { // AssessmentRun
+ * //       arn: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       assessmentTemplateArn: "STRING_VALUE", // required
+ * //       state: "CREATED" || "START_DATA_COLLECTION_PENDING" || "START_DATA_COLLECTION_IN_PROGRESS" || "COLLECTING_DATA" || "STOP_DATA_COLLECTION_PENDING" || "DATA_COLLECTED" || "START_EVALUATING_RULES_PENDING" || "EVALUATING_RULES" || "FAILED" || "ERROR" || "COMPLETED" || "COMPLETED_WITH_ERRORS" || "CANCELED", // required
+ * //       durationInSeconds: Number("int"), // required
+ * //       rulesPackageArns: [ // AssessmentRulesPackageArnList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       userAttributesForFindings: [ // UserAttributeList // required
+ * //         { // Attribute
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       startedAt: new Date("TIMESTAMP"),
+ * //       completedAt: new Date("TIMESTAMP"),
+ * //       stateChangedAt: new Date("TIMESTAMP"), // required
+ * //       dataCollected: true || false, // required
+ * //       stateChanges: [ // AssessmentRunStateChangeList // required
+ * //         { // AssessmentRunStateChange
+ * //           stateChangedAt: new Date("TIMESTAMP"), // required
+ * //           state: "CREATED" || "START_DATA_COLLECTION_PENDING" || "START_DATA_COLLECTION_IN_PROGRESS" || "COLLECTING_DATA" || "STOP_DATA_COLLECTION_PENDING" || "DATA_COLLECTED" || "START_EVALUATING_RULES_PENDING" || "EVALUATING_RULES" || "FAILED" || "ERROR" || "COMPLETED" || "COMPLETED_WITH_ERRORS" || "CANCELED", // required
+ * //         },
+ * //       ],
+ * //       notifications: [ // AssessmentRunNotificationList // required
+ * //         { // AssessmentRunNotification
+ * //           date: new Date("TIMESTAMP"), // required
+ * //           event: "ASSESSMENT_RUN_STARTED" || "ASSESSMENT_RUN_COMPLETED" || "ASSESSMENT_RUN_STATE_CHANGED" || "FINDING_REPORTED" || "OTHER", // required
+ * //           message: "STRING_VALUE",
+ * //           error: true || false, // required
+ * //           snsTopicArn: "STRING_VALUE",
+ * //           snsPublishStatusCode: "SUCCESS" || "TOPIC_DOES_NOT_EXIST" || "ACCESS_DENIED" || "INTERNAL_ERROR",
+ * //         },
+ * //       ],
+ * //       findingCounts: { // AssessmentRunFindingCounts // required
+ * //         "<keys>": Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   failedItems: { // FailedItems // required
+ * //     "<keys>": { // FailedItemDetails
+ * //       failureCode: "INVALID_ARN" || "DUPLICATE_ARN" || "ITEM_DOES_NOT_EXIST" || "ACCESS_DENIED" || "LIMIT_EXCEEDED" || "INTERNAL_ERROR", // required
+ * //       retryable: true || false, // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAssessmentRunsCommandInput - {@link DescribeAssessmentRunsCommandInput}
+ * @returns {@link DescribeAssessmentRunsCommandOutput}
  * @see {@link DescribeAssessmentRunsCommandInput} for command's `input` shape.
  * @see {@link DescribeAssessmentRunsCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAssessmentRunsCommand extends $Command<
-  DescribeAssessmentRunsCommandInput,
-  DescribeAssessmentRunsCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAssessmentRunsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAssessmentRunsCommandInput, DescribeAssessmentRunsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "DescribeAssessmentRunsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAssessmentRunsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAssessmentRunsResponse.filterSensitiveLog,
+export class DescribeAssessmentRunsCommand extends command<DescribeAssessmentRunsCommandInput, DescribeAssessmentRunsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAssessmentRuns",
+  DescribeAssessmentRuns$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAssessmentRunsRequest;
+      output: DescribeAssessmentRunsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAssessmentRunsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAssessmentRunsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAssessmentRunsCommandOutput> {
-    return deserializeAws_json1_1DescribeAssessmentRunsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAssessmentRunsCommandInput;
+      output: DescribeAssessmentRunsCommandOutput;
+    };
+  };
 }

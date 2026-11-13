@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { EC2InstanceConnectClientConfig } from "./EC2InstanceConnectClient";
+// smithy-typescript generated code
+import type { EC2InstanceConnectClientConfig } from "./EC2InstanceConnectClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: EC2InstanceConnectClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

@@ -1,0 +1,498 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CopyImageSetCommandInput,
+  type CopyImageSetCommandOutput,
+  CopyImageSetCommand,
+} from "./commands/CopyImageSetCommand";
+import {
+  type CreateDatastoreCommandInput,
+  type CreateDatastoreCommandOutput,
+  CreateDatastoreCommand,
+} from "./commands/CreateDatastoreCommand";
+import {
+  type DeleteDatastoreCommandInput,
+  type DeleteDatastoreCommandOutput,
+  DeleteDatastoreCommand,
+} from "./commands/DeleteDatastoreCommand";
+import {
+  type DeleteImageSetCommandInput,
+  type DeleteImageSetCommandOutput,
+  DeleteImageSetCommand,
+} from "./commands/DeleteImageSetCommand";
+import {
+  type GetDatastoreCommandInput,
+  type GetDatastoreCommandOutput,
+  GetDatastoreCommand,
+} from "./commands/GetDatastoreCommand";
+import {
+  type GetDICOMImportJobCommandInput,
+  type GetDICOMImportJobCommandOutput,
+  GetDICOMImportJobCommand,
+} from "./commands/GetDICOMImportJobCommand";
+import {
+  type GetImageFrameCommandInput,
+  type GetImageFrameCommandOutput,
+  GetImageFrameCommand,
+} from "./commands/GetImageFrameCommand";
+import {
+  type GetImageSetCommandInput,
+  type GetImageSetCommandOutput,
+  GetImageSetCommand,
+} from "./commands/GetImageSetCommand";
+import {
+  type GetImageSetMetadataCommandInput,
+  type GetImageSetMetadataCommandOutput,
+  GetImageSetMetadataCommand,
+} from "./commands/GetImageSetMetadataCommand";
+import {
+  type ListDatastoresCommandInput,
+  type ListDatastoresCommandOutput,
+  ListDatastoresCommand,
+} from "./commands/ListDatastoresCommand";
+import {
+  type ListDICOMImportJobsCommandInput,
+  type ListDICOMImportJobsCommandOutput,
+  ListDICOMImportJobsCommand,
+} from "./commands/ListDICOMImportJobsCommand";
+import {
+  type ListImageSetVersionsCommandInput,
+  type ListImageSetVersionsCommandOutput,
+  ListImageSetVersionsCommand,
+} from "./commands/ListImageSetVersionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type SearchImageSetsCommandInput,
+  type SearchImageSetsCommandOutput,
+  SearchImageSetsCommand,
+} from "./commands/SearchImageSetsCommand";
+import {
+  type StartDICOMImportJobCommandInput,
+  type StartDICOMImportJobCommandOutput,
+  StartDICOMImportJobCommand,
+} from "./commands/StartDICOMImportJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateImageSetMetadataCommandInput,
+  type UpdateImageSetMetadataCommandOutput,
+  UpdateImageSetMetadataCommand,
+} from "./commands/UpdateImageSetMetadataCommand";
+import { MedicalImagingClient } from "./MedicalImagingClient";
+import { paginateListDatastores } from "./pagination/ListDatastoresPaginator";
+import { paginateListDICOMImportJobs } from "./pagination/ListDICOMImportJobsPaginator";
+import { paginateListImageSetVersions } from "./pagination/ListImageSetVersionsPaginator";
+import { paginateSearchImageSets } from "./pagination/SearchImageSetsPaginator";
+
+const commands = {
+  CopyImageSetCommand,
+  CreateDatastoreCommand,
+  DeleteDatastoreCommand,
+  DeleteImageSetCommand,
+  GetDatastoreCommand,
+  GetDICOMImportJobCommand,
+  GetImageFrameCommand,
+  GetImageSetCommand,
+  GetImageSetMetadataCommand,
+  ListDatastoresCommand,
+  ListDICOMImportJobsCommand,
+  ListImageSetVersionsCommand,
+  ListTagsForResourceCommand,
+  SearchImageSetsCommand,
+  StartDICOMImportJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateImageSetMetadataCommand,
+};
+const paginators = {
+  paginateListDatastores,
+  paginateListDICOMImportJobs,
+  paginateListImageSetVersions,
+  paginateSearchImageSets,
+};
+
+/**
+ * @public
+ */
+export interface MedicalImagingRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MedicalImaging {
+  /**
+   * @see {@link CopyImageSetCommand}
+   */
+  copyImageSet(
+    args: CopyImageSetCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<CopyImageSetCommandOutput>;
+  copyImageSet(
+    args: CopyImageSetCommandInput,
+    cb: (err: any, data?: CopyImageSetCommandOutput) => void
+  ): void;
+  copyImageSet(
+    args: CopyImageSetCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: CopyImageSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDatastoreCommand}
+   */
+  createDatastore(
+    args: CreateDatastoreCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<CreateDatastoreCommandOutput>;
+  createDatastore(
+    args: CreateDatastoreCommandInput,
+    cb: (err: any, data?: CreateDatastoreCommandOutput) => void
+  ): void;
+  createDatastore(
+    args: CreateDatastoreCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: CreateDatastoreCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDatastoreCommand}
+   */
+  deleteDatastore(
+    args: DeleteDatastoreCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<DeleteDatastoreCommandOutput>;
+  deleteDatastore(
+    args: DeleteDatastoreCommandInput,
+    cb: (err: any, data?: DeleteDatastoreCommandOutput) => void
+  ): void;
+  deleteDatastore(
+    args: DeleteDatastoreCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: DeleteDatastoreCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteImageSetCommand}
+   */
+  deleteImageSet(
+    args: DeleteImageSetCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<DeleteImageSetCommandOutput>;
+  deleteImageSet(
+    args: DeleteImageSetCommandInput,
+    cb: (err: any, data?: DeleteImageSetCommandOutput) => void
+  ): void;
+  deleteImageSet(
+    args: DeleteImageSetCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: DeleteImageSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDatastoreCommand}
+   */
+  getDatastore(
+    args: GetDatastoreCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<GetDatastoreCommandOutput>;
+  getDatastore(
+    args: GetDatastoreCommandInput,
+    cb: (err: any, data?: GetDatastoreCommandOutput) => void
+  ): void;
+  getDatastore(
+    args: GetDatastoreCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: GetDatastoreCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDICOMImportJobCommand}
+   */
+  getDICOMImportJob(
+    args: GetDICOMImportJobCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<GetDICOMImportJobCommandOutput>;
+  getDICOMImportJob(
+    args: GetDICOMImportJobCommandInput,
+    cb: (err: any, data?: GetDICOMImportJobCommandOutput) => void
+  ): void;
+  getDICOMImportJob(
+    args: GetDICOMImportJobCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: GetDICOMImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetImageFrameCommand}
+   */
+  getImageFrame(
+    args: GetImageFrameCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<GetImageFrameCommandOutput>;
+  getImageFrame(
+    args: GetImageFrameCommandInput,
+    cb: (err: any, data?: GetImageFrameCommandOutput) => void
+  ): void;
+  getImageFrame(
+    args: GetImageFrameCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: GetImageFrameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetImageSetCommand}
+   */
+  getImageSet(
+    args: GetImageSetCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<GetImageSetCommandOutput>;
+  getImageSet(
+    args: GetImageSetCommandInput,
+    cb: (err: any, data?: GetImageSetCommandOutput) => void
+  ): void;
+  getImageSet(
+    args: GetImageSetCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: GetImageSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetImageSetMetadataCommand}
+   */
+  getImageSetMetadata(
+    args: GetImageSetMetadataCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<GetImageSetMetadataCommandOutput>;
+  getImageSetMetadata(
+    args: GetImageSetMetadataCommandInput,
+    cb: (err: any, data?: GetImageSetMetadataCommandOutput) => void
+  ): void;
+  getImageSetMetadata(
+    args: GetImageSetMetadataCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: GetImageSetMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatastoresCommand}
+   */
+  listDatastores(): Promise<ListDatastoresCommandOutput>;
+  listDatastores(
+    args: ListDatastoresCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<ListDatastoresCommandOutput>;
+  listDatastores(
+    args: ListDatastoresCommandInput,
+    cb: (err: any, data?: ListDatastoresCommandOutput) => void
+  ): void;
+  listDatastores(
+    args: ListDatastoresCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: ListDatastoresCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDICOMImportJobsCommand}
+   */
+  listDICOMImportJobs(
+    args: ListDICOMImportJobsCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<ListDICOMImportJobsCommandOutput>;
+  listDICOMImportJobs(
+    args: ListDICOMImportJobsCommandInput,
+    cb: (err: any, data?: ListDICOMImportJobsCommandOutput) => void
+  ): void;
+  listDICOMImportJobs(
+    args: ListDICOMImportJobsCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: ListDICOMImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImageSetVersionsCommand}
+   */
+  listImageSetVersions(
+    args: ListImageSetVersionsCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<ListImageSetVersionsCommandOutput>;
+  listImageSetVersions(
+    args: ListImageSetVersionsCommandInput,
+    cb: (err: any, data?: ListImageSetVersionsCommandOutput) => void
+  ): void;
+  listImageSetVersions(
+    args: ListImageSetVersionsCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: ListImageSetVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchImageSetsCommand}
+   */
+  searchImageSets(
+    args: SearchImageSetsCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<SearchImageSetsCommandOutput>;
+  searchImageSets(
+    args: SearchImageSetsCommandInput,
+    cb: (err: any, data?: SearchImageSetsCommandOutput) => void
+  ): void;
+  searchImageSets(
+    args: SearchImageSetsCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: SearchImageSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDICOMImportJobCommand}
+   */
+  startDICOMImportJob(
+    args: StartDICOMImportJobCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<StartDICOMImportJobCommandOutput>;
+  startDICOMImportJob(
+    args: StartDICOMImportJobCommandInput,
+    cb: (err: any, data?: StartDICOMImportJobCommandOutput) => void
+  ): void;
+  startDICOMImportJob(
+    args: StartDICOMImportJobCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: StartDICOMImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateImageSetMetadataCommand}
+   */
+  updateImageSetMetadata(
+    args: UpdateImageSetMetadataCommandInput,
+    options?: MedicalImagingRequestOptions
+  ): Promise<UpdateImageSetMetadataCommandOutput>;
+  updateImageSetMetadata(
+    args: UpdateImageSetMetadataCommandInput,
+    cb: (err: any, data?: UpdateImageSetMetadataCommandOutput) => void
+  ): void;
+  updateImageSetMetadata(
+    args: UpdateImageSetMetadataCommandInput,
+    options: MedicalImagingRequestOptions,
+    cb: (err: any, data?: UpdateImageSetMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatastoresCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDatastoresCommandOutput}.
+   */
+  paginateListDatastores(
+    args?: ListDatastoresCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDatastoresCommandOutput>;
+
+  /**
+   * @see {@link ListDICOMImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDICOMImportJobsCommandOutput}.
+   */
+  paginateListDICOMImportJobs(
+    args: ListDICOMImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDICOMImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListImageSetVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImageSetVersionsCommandOutput}.
+   */
+  paginateListImageSetVersions(
+    args: ListImageSetVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImageSetVersionsCommandOutput>;
+
+  /**
+   * @see {@link SearchImageSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchImageSetsCommandOutput}.
+   */
+  paginateSearchImageSets(
+    args: SearchImageSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchImageSetsCommandOutput>;
+}
+
+/**
+ * <p>This is the <i>AWS HealthImaging API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/healthimaging/latest/devguide/what-is.html">What is AWS HealthImaging?</a> in the <i>AWS HealthImaging Developer Guide</i>.</p>
+ * @public
+ */
+export class MedicalImaging extends MedicalImagingClient implements MedicalImaging {}
+createAggregatedClient(commands, MedicalImaging, { paginators });

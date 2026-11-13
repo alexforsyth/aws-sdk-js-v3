@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DisassociateSubnetCidrBlockRequest, DisassociateSubnetCidrBlockResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateSubnetCidrBlockCommand,
-  serializeAws_ec2DisassociateSubnetCidrBlockCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateSubnetCidrBlockRequest, DisassociateSubnetCidrBlockResult } from "../models/models_6";
+import { DisassociateSubnetCidrBlock$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateSubnetCidrBlockCommand}.
+ */
 export interface DisassociateSubnetCidrBlockCommandInput extends DisassociateSubnetCidrBlockRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateSubnetCidrBlockCommand}.
+ */
 export interface DisassociateSubnetCidrBlockCommandOutput extends DisassociateSubnetCidrBlockResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,57 @@ export interface DisassociateSubnetCidrBlockCommandOutput extends DisassociateSu
  * ```javascript
  * import { EC2Client, DisassociateSubnetCidrBlockCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateSubnetCidrBlockCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateSubnetCidrBlockRequest
+ *   AssociationId: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateSubnetCidrBlockCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateSubnetCidrBlockResult
+ * //   Ipv6CidrBlockAssociation: { // SubnetIpv6CidrBlockAssociation
+ * //     AssociationId: "STRING_VALUE",
+ * //     Ipv6CidrBlock: "STRING_VALUE",
+ * //     Ipv6CidrBlockState: { // SubnetCidrBlockState
+ * //       State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //     Ipv6AddressAttribute: "public" || "private",
+ * //     IpSource: "amazon" || "byoip" || "none",
+ * //   },
+ * //   SubnetId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DisassociateSubnetCidrBlockCommandInput - {@link DisassociateSubnetCidrBlockCommandInput}
+ * @returns {@link DisassociateSubnetCidrBlockCommandOutput}
  * @see {@link DisassociateSubnetCidrBlockCommandInput} for command's `input` shape.
  * @see {@link DisassociateSubnetCidrBlockCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateSubnetCidrBlockCommand extends $Command<
-  DisassociateSubnetCidrBlockCommandInput,
-  DisassociateSubnetCidrBlockCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateSubnetCidrBlockCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateSubnetCidrBlockCommandInput, DisassociateSubnetCidrBlockCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateSubnetCidrBlockCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateSubnetCidrBlockRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateSubnetCidrBlockResult.filterSensitiveLog,
+export class DisassociateSubnetCidrBlockCommand extends command<DisassociateSubnetCidrBlockCommandInput, DisassociateSubnetCidrBlockCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateSubnetCidrBlock",
+  DisassociateSubnetCidrBlock$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateSubnetCidrBlockRequest;
+      output: DisassociateSubnetCidrBlockResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateSubnetCidrBlockCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateSubnetCidrBlockCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateSubnetCidrBlockCommandOutput> {
-    return deserializeAws_ec2DisassociateSubnetCidrBlockCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateSubnetCidrBlockCommandInput;
+      output: DisassociateSubnetCidrBlockCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRClient";
-import { AddJobFlowStepsInput, AddJobFlowStepsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1AddJobFlowStepsCommand,
-  serializeAws_json1_1AddJobFlowStepsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddJobFlowStepsInput, AddJobFlowStepsOutput } from "../models/models_0";
+import { AddJobFlowSteps$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddJobFlowStepsCommand}.
+ */
 export interface AddJobFlowStepsCommandInput extends AddJobFlowStepsInput {}
+/**
+ * @public
+ *
+ * The output of {@link AddJobFlowStepsCommand}.
+ */
 export interface AddJobFlowStepsCommandOutput extends AddJobFlowStepsOutput, __MetadataBearer {}
 
 /**
@@ -27,85 +28,98 @@ export interface AddJobFlowStepsCommandOutput extends AddJobFlowStepsOutput, __M
  *          <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may
  *          require more than 256 steps to process your data. You can bypass the 256-step limitation in
  *          various ways, including using SSH to connect to the master node and submitting queries
- *          directly to the software running on the master node, such as Hive and Hadoop. For more
- *          information on how to do this, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html">Add More than 256 Steps to a
- *             Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p>
+ *          directly to the software running on the master node, such as Hive and Hadoop.</p>
  *          <p>A step specifies the location of a JAR file stored either on the master node of the
- *          cluster or in Amazon S3. Each step is performed by the main function of the main class of
- *          the JAR file. The main class can be specified either in the manifest of the JAR or by using
- *          the MainFunction parameter of the step.</p>
- *          <p>Amazon EMR executes each step in the order listed. For a step to be considered complete,
- *          the main function must exit with a zero exit code and all Hadoop jobs started while the
- *          step was running must have completed and run successfully.</p>
+ *          cluster or in Amazon S3. Each step is performed by the main function of the main
+ *          class of the JAR file. The main class can be specified either in the manifest of the JAR or
+ *          by using the MainFunction parameter of the step.</p>
+ *          <p>Amazon EMR executes each step in the order listed. For a step to be considered
+ *          complete, the main function must exit with a zero exit code and all Hadoop jobs started
+ *          while the step was running must have completed and run successfully.</p>
  *          <p>You can only add steps to a cluster that is in one of the following states: STARTING,
  *          BOOTSTRAPPING, RUNNING, or WAITING.</p>
+ *          <note>
+ *             <p>The string values passed into <code>HadoopJarStep</code> object cannot exceed a total
+ *             of 10240 characters.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EMRClient, AddJobFlowStepsCommand } from "@aws-sdk/client-emr"; // ES Modules import
  * // const { EMRClient, AddJobFlowStepsCommand } = require("@aws-sdk/client-emr"); // CommonJS import
+ * // import type { EMRClientConfig } from "@aws-sdk/client-emr";
+ * const config = {}; // type is EMRClientConfig
  * const client = new EMRClient(config);
+ * const input = { // AddJobFlowStepsInput
+ *   JobFlowId: "STRING_VALUE", // required
+ *   Steps: [ // StepConfigList // required
+ *     { // StepConfig
+ *       Name: "STRING_VALUE", // required
+ *       ActionOnFailure: "TERMINATE_JOB_FLOW" || "TERMINATE_CLUSTER" || "CANCEL_AND_WAIT" || "CONTINUE",
+ *       HadoopJarStep: { // HadoopJarStepConfig
+ *         Properties: [ // KeyValueList
+ *           { // KeyValue
+ *             Key: "STRING_VALUE",
+ *             Value: "STRING_VALUE",
+ *           },
+ *         ],
+ *         Jar: "STRING_VALUE", // required
+ *         MainClass: "STRING_VALUE",
+ *         Args: [ // XmlStringList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       StepMonitoringConfiguration: { // StepMonitoringConfiguration
+ *         S3MonitoringConfiguration: { // S3MonitoringConfiguration
+ *           LogUri: "STRING_VALUE",
+ *           EncryptionKeyArn: "STRING_VALUE",
+ *         },
+ *       },
+ *     },
+ *   ],
+ *   ExecutionRoleArn: "STRING_VALUE",
+ * };
  * const command = new AddJobFlowStepsCommand(input);
  * const response = await client.send(command);
+ * // { // AddJobFlowStepsOutput
+ * //   StepIds: [ // StepIdsList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param AddJobFlowStepsCommandInput - {@link AddJobFlowStepsCommandInput}
+ * @returns {@link AddJobFlowStepsCommandOutput}
  * @see {@link AddJobFlowStepsCommandInput} for command's `input` shape.
  * @see {@link AddJobFlowStepsCommandOutput} for command's `response` shape.
- * @see {@link EMRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRClientResolvedConfig | config} for EMRClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Indicates that an error occurred while processing the request and that the request was
+ *          not completed.</p>
+ *
+ * @throws {@link EMRServiceException}
+ * <p>Base exception class for all service exceptions from EMR service.</p>
+ *
+ *
+ * @public
  */
-export class AddJobFlowStepsCommand extends $Command<
-  AddJobFlowStepsCommandInput,
-  AddJobFlowStepsCommandOutput,
-  EMRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddJobFlowStepsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddJobFlowStepsCommandInput, AddJobFlowStepsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRClient";
-    const commandName = "AddJobFlowStepsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddJobFlowStepsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AddJobFlowStepsOutput.filterSensitiveLog,
+export class AddJobFlowStepsCommand extends command<AddJobFlowStepsCommandInput, AddJobFlowStepsCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddJobFlowSteps",
+  AddJobFlowSteps$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddJobFlowStepsInput;
+      output: AddJobFlowStepsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddJobFlowStepsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddJobFlowStepsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddJobFlowStepsCommandOutput> {
-    return deserializeAws_json1_1AddJobFlowStepsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddJobFlowStepsCommandInput;
+      output: AddJobFlowStepsCommandOutput;
+    };
+  };
 }

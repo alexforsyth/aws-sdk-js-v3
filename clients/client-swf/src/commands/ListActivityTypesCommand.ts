@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ActivityTypeInfos, ListActivityTypesInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListActivityTypesCommand,
-  serializeAws_json1_0ListActivityTypesCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ActivityTypeInfos, ListActivityTypesInput } from "../models/models_0";
+import { ListActivityTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListActivityTypesCommand}.
+ */
 export interface ListActivityTypesCommandInput extends ListActivityTypesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListActivityTypesCommand}.
+ */
 export interface ListActivityTypesCommandOutput extends ActivityTypeInfos, __MetadataBearer {}
 
 /**
@@ -55,68 +56,70 @@ export interface ListActivityTypesCommandOutput extends ActivityTypeInfos, __Met
  * ```javascript
  * import { SWFClient, ListActivityTypesCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, ListActivityTypesCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // ListActivityTypesInput
+ *   domain: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   registrationStatus: "REGISTERED" || "DEPRECATED", // required
+ *   nextPageToken: "STRING_VALUE",
+ *   maximumPageSize: Number("int"),
+ *   reverseOrder: true || false,
+ * };
  * const command = new ListActivityTypesCommand(input);
  * const response = await client.send(command);
+ * // { // ActivityTypeInfos
+ * //   typeInfos: [ // ActivityTypeInfoList // required
+ * //     { // ActivityTypeInfo
+ * //       activityType: { // ActivityType
+ * //         name: "STRING_VALUE", // required
+ * //         version: "STRING_VALUE", // required
+ * //       },
+ * //       status: "REGISTERED" || "DEPRECATED", // required
+ * //       description: "STRING_VALUE",
+ * //       creationDate: new Date("TIMESTAMP"), // required
+ * //       deprecationDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListActivityTypesCommandInput - {@link ListActivityTypesCommandInput}
+ * @returns {@link ListActivityTypesCommandOutput}
  * @see {@link ListActivityTypesCommandInput} for command's `input` shape.
  * @see {@link ListActivityTypesCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class ListActivityTypesCommand extends $Command<
-  ListActivityTypesCommandInput,
-  ListActivityTypesCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListActivityTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListActivityTypesCommandInput, ListActivityTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "ListActivityTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListActivityTypesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ActivityTypeInfos.filterSensitiveLog,
+export class ListActivityTypesCommand extends command<ListActivityTypesCommandInput, ListActivityTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListActivityTypes",
+  ListActivityTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListActivityTypesInput;
+      output: ActivityTypeInfos;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListActivityTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListActivityTypesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListActivityTypesCommandOutput> {
-    return deserializeAws_json1_0ListActivityTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListActivityTypesCommandInput;
+      output: ListActivityTypesCommandOutput;
+    };
+  };
 }

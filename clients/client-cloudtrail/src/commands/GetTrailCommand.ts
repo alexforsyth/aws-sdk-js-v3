@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudTrailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudTrailClient";
-import { GetTrailRequest, GetTrailResponse } from "../models/models_0";
-import { deserializeAws_json1_1GetTrailCommand, serializeAws_json1_1GetTrailCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetTrailRequest, GetTrailResponse } from "../models/models_0";
+import { GetTrail$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTrailCommand}.
+ */
 export interface GetTrailCommandInput extends GetTrailRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTrailCommand}.
+ */
 export interface GetTrailCommandOutput extends GetTrailResponse, __MetadataBearer {}
 
 /**
@@ -25,68 +29,110 @@ export interface GetTrailCommandOutput extends GetTrailResponse, __MetadataBeare
  * ```javascript
  * import { CloudTrailClient, GetTrailCommand } from "@aws-sdk/client-cloudtrail"; // ES Modules import
  * // const { CloudTrailClient, GetTrailCommand } = require("@aws-sdk/client-cloudtrail"); // CommonJS import
+ * // import type { CloudTrailClientConfig } from "@aws-sdk/client-cloudtrail";
+ * const config = {}; // type is CloudTrailClientConfig
  * const client = new CloudTrailClient(config);
+ * const input = { // GetTrailRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetTrailCommand(input);
  * const response = await client.send(command);
+ * // { // GetTrailResponse
+ * //   Trail: { // Trail
+ * //     Name: "STRING_VALUE",
+ * //     S3BucketName: "STRING_VALUE",
+ * //     S3KeyPrefix: "STRING_VALUE",
+ * //     SnsTopicName: "STRING_VALUE",
+ * //     SnsTopicARN: "STRING_VALUE",
+ * //     IncludeGlobalServiceEvents: true || false,
+ * //     IsMultiRegionTrail: true || false,
+ * //     HomeRegion: "STRING_VALUE",
+ * //     TrailARN: "STRING_VALUE",
+ * //     LogFileValidationEnabled: true || false,
+ * //     CloudWatchLogsLogGroupArn: "STRING_VALUE",
+ * //     CloudWatchLogsRoleArn: "STRING_VALUE",
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     HasCustomEventSelectors: true || false,
+ * //     HasInsightSelectors: true || false,
+ * //     IsOrganizationTrail: true || false,
+ * //     RecursiveLogging: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetTrailCommandInput - {@link GetTrailCommandInput}
+ * @returns {@link GetTrailCommandOutput}
  * @see {@link GetTrailCommandInput} for command's `input` shape.
  * @see {@link GetTrailCommandOutput} for command's `response` shape.
- * @see {@link CloudTrailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudTrailClientResolvedConfig | config} for CloudTrailClient's `config` shape.
  *
+ * @throws {@link CloudTrailARNInvalidException} (client fault)
+ *  <p>This exception is thrown when an operation is called with an ARN that is not valid.</p>
+ *          <p>The following is the format of a trail ARN: <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>
+ *          </p>
+ *          <p>The following is the format of an event data store ARN:
+ *          <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>
+ *          </p>
+ *          <p>The following is the format of a dashboard ARN: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>
+ *          </p>
+ *          <p>The following is the format of a channel ARN:
+ *          <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>
+ *          </p>
+ *
+ * @throws {@link InvalidTrailNameException} (client fault)
+ *  <p>This exception is thrown when the provided trail name is not valid. Trail names must
+ *          meet the following requirements:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
+ *                (_), or dashes (-)</p>
+ *             </li>
+ *             <li>
+ *                <p>Start with a letter or number, and end with a letter or number</p>
+ *             </li>
+ *             <li>
+ *                <p>Be between 3 and 128 characters</p>
+ *             </li>
+ *             <li>
+ *                <p>Have no adjacent periods, underscores or dashes. Names like
+ *                   <code>my-_namespace</code> and <code>my--namespace</code> are not valid.</p>
+ *             </li>
+ *             <li>
+ *                <p>Not be in IP address format (for example, 192.168.5.4)</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>This exception is thrown when the requested operation is not permitted.</p>
+ *
+ * @throws {@link TrailNotFoundException} (client fault)
+ *  <p>This exception is thrown when the trail with the given name is not found.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>This exception is thrown when the requested operation is not supported.</p>
+ *
+ * @throws {@link CloudTrailServiceException}
+ * <p>Base exception class for all service exceptions from CloudTrail service.</p>
+ *
+ *
+ * @public
  */
-export class GetTrailCommand extends $Command<
-  GetTrailCommandInput,
-  GetTrailCommandOutput,
-  CloudTrailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTrailCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudTrailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTrailCommandInput, GetTrailCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudTrailClient";
-    const commandName = "GetTrailCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTrailRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetTrailResponse.filterSensitiveLog,
+export class GetTrailCommand extends command<GetTrailCommandInput, GetTrailCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTrail",
+  GetTrail$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTrailRequest;
+      output: GetTrailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetTrailCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetTrailCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetTrailCommandOutput> {
-    return deserializeAws_json1_1GetTrailCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTrailCommandInput;
+      output: GetTrailCommandOutput;
+    };
+  };
 }

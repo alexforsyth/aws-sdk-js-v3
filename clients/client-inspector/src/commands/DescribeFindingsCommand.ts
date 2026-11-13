@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { DescribeFindingsRequest, DescribeFindingsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeFindingsCommand,
-  serializeAws_json1_1DescribeFindingsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFindingsRequest, DescribeFindingsResponse } from "../models/models_0";
+import { DescribeFindings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFindingsCommand}.
+ */
 export interface DescribeFindingsCommandInput extends DescribeFindingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFindingsCommand}.
+ */
 export interface DescribeFindingsCommandOutput extends DescribeFindingsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,139 @@ export interface DescribeFindingsCommandOutput extends DescribeFindingsResponse,
  * ```javascript
  * import { InspectorClient, DescribeFindingsCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, DescribeFindingsCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // DescribeFindingsRequest
+ *   findingArns: [ // BatchDescribeArnList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   locale: "EN_US",
+ * };
  * const command = new DescribeFindingsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFindingsResponse
+ * //   findings: [ // FindingList // required
+ * //     { // Finding
+ * //       arn: "STRING_VALUE", // required
+ * //       schemaVersion: Number("int"),
+ * //       service: "STRING_VALUE",
+ * //       serviceAttributes: { // InspectorServiceAttributes
+ * //         schemaVersion: Number("int"), // required
+ * //         assessmentRunArn: "STRING_VALUE",
+ * //         rulesPackageArn: "STRING_VALUE",
+ * //       },
+ * //       assetType: "ec2-instance",
+ * //       assetAttributes: { // AssetAttributes
+ * //         schemaVersion: Number("int"), // required
+ * //         agentId: "STRING_VALUE",
+ * //         autoScalingGroup: "STRING_VALUE",
+ * //         amiId: "STRING_VALUE",
+ * //         hostname: "STRING_VALUE",
+ * //         ipv4Addresses: [ // Ipv4AddressList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         tags: [ // Tags
+ * //           { // Tag
+ * //             key: "STRING_VALUE", // required
+ * //             value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         networkInterfaces: [ // NetworkInterfaces
+ * //           { // NetworkInterface
+ * //             networkInterfaceId: "STRING_VALUE",
+ * //             subnetId: "STRING_VALUE",
+ * //             vpcId: "STRING_VALUE",
+ * //             privateDnsName: "STRING_VALUE",
+ * //             privateIpAddress: "STRING_VALUE",
+ * //             privateIpAddresses: [ // PrivateIpAddresses
+ * //               { // PrivateIp
+ * //                 privateDnsName: "STRING_VALUE",
+ * //                 privateIpAddress: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //             publicDnsName: "STRING_VALUE",
+ * //             publicIp: "STRING_VALUE",
+ * //             ipv6Addresses: [ // Ipv6Addresses
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             securityGroups: [ // SecurityGroups
+ * //               { // SecurityGroup
+ * //                 groupName: "STRING_VALUE",
+ * //                 groupId: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //       id: "STRING_VALUE",
+ * //       title: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       recommendation: "STRING_VALUE",
+ * //       severity: "Low" || "Medium" || "High" || "Informational" || "Undefined",
+ * //       numericSeverity: Number("double"),
+ * //       confidence: Number("int"),
+ * //       indicatorOfCompromise: true || false,
+ * //       attributes: [ // AttributeList // required
+ * //         { // Attribute
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       userAttributes: [ // UserAttributeList // required
+ * //         {
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       updatedAt: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   failedItems: { // FailedItems // required
+ * //     "<keys>": { // FailedItemDetails
+ * //       failureCode: "INVALID_ARN" || "DUPLICATE_ARN" || "ITEM_DOES_NOT_EXIST" || "ACCESS_DENIED" || "LIMIT_EXCEEDED" || "INTERNAL_ERROR", // required
+ * //       retryable: true || false, // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeFindingsCommandInput - {@link DescribeFindingsCommandInput}
+ * @returns {@link DescribeFindingsCommandOutput}
  * @see {@link DescribeFindingsCommandInput} for command's `input` shape.
  * @see {@link DescribeFindingsCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFindingsCommand extends $Command<
-  DescribeFindingsCommandInput,
-  DescribeFindingsCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFindingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFindingsCommandInput, DescribeFindingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "DescribeFindingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFindingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFindingsResponse.filterSensitiveLog,
+export class DescribeFindingsCommand extends command<DescribeFindingsCommandInput, DescribeFindingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFindings",
+  DescribeFindings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFindingsRequest;
+      output: DescribeFindingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFindingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeFindingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFindingsCommandOutput> {
-    return deserializeAws_json1_1DescribeFindingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFindingsCommandInput;
+      output: DescribeFindingsCommandOutput;
+    };
+  };
 }

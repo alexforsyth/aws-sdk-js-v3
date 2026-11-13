@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteTagOptionInput, DeleteTagOptionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteTagOptionCommand,
-  serializeAws_json1_1DeleteTagOptionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTagOptionInput, DeleteTagOptionOutput } from "../models/models_0";
+import { DeleteTagOption$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTagOptionCommand}.
+ */
 export interface DeleteTagOptionCommandInput extends DeleteTagOptionInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTagOptionCommand}.
+ */
 export interface DeleteTagOptionCommandOutput extends DeleteTagOptionOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,56 @@ export interface DeleteTagOptionCommandOutput extends DeleteTagOptionOutput, __M
  * ```javascript
  * import { ServiceCatalogClient, DeleteTagOptionCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, DeleteTagOptionCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // DeleteTagOptionInput
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteTagOptionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteTagOptionCommandInput - {@link DeleteTagOptionCommandInput}
+ * @returns {@link DeleteTagOptionCommandOutput}
  * @see {@link DeleteTagOptionCommandInput} for command's `input` shape.
  * @see {@link DeleteTagOptionCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>A resource that is currently in use. Ensure that the resource is not in use and retry the operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link TagOptionNotMigratedException} (client fault)
+ *  <p>An operation requiring TagOptions failed because the TagOptions migration process has
+ *          not been performed for this account. Use the Amazon Web Services Management Console to perform the migration
+ *          process before retrying the operation.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTagOptionCommand extends $Command<
-  DeleteTagOptionCommandInput,
-  DeleteTagOptionCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTagOptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTagOptionCommandInput, DeleteTagOptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "DeleteTagOptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTagOptionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTagOptionOutput.filterSensitiveLog,
+export class DeleteTagOptionCommand extends command<DeleteTagOptionCommandInput, DeleteTagOptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTagOption",
+  DeleteTagOption$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTagOptionInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTagOptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteTagOptionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTagOptionCommandOutput> {
-    return deserializeAws_json1_1DeleteTagOptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTagOptionCommandInput;
+      output: DeleteTagOptionCommandOutput;
+    };
+  };
 }

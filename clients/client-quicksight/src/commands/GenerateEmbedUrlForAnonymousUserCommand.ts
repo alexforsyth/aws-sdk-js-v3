@@ -1,122 +1,188 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GenerateEmbedUrlForAnonymousUserRequest, GenerateEmbedUrlForAnonymousUserResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1GenerateEmbedUrlForAnonymousUserCommand,
-  serializeAws_restJson1GenerateEmbedUrlForAnonymousUserCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
-
-export interface GenerateEmbedUrlForAnonymousUserCommandInput extends GenerateEmbedUrlForAnonymousUserRequest {}
-export interface GenerateEmbedUrlForAnonymousUserCommandOutput
-  extends GenerateEmbedUrlForAnonymousUserResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GenerateEmbedUrlForAnonymousUserRequest,
+  GenerateEmbedUrlForAnonymousUserResponse,
+} from "../models/models_4";
+import { GenerateEmbedUrlForAnonymousUser$ } from "../schemas/schemas_0";
 
 /**
- * <p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>
- *         <p>The following rules apply to the generated URL:</p>
- *         <ul>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GenerateEmbedUrlForAnonymousUserCommand}.
+ */
+export interface GenerateEmbedUrlForAnonymousUserCommandInput extends GenerateEmbedUrlForAnonymousUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GenerateEmbedUrlForAnonymousUserCommand}.
+ */
+export interface GenerateEmbedUrlForAnonymousUserCommandOutput extends GenerateEmbedUrlForAnonymousUserResponse, __MetadataBearer {}
+
+/**
+ * <p>Generates an embed URL that you can use to embed an Amazon Quick dashboard or
+ *             visual in your website, without having to register any reader users. Before you use this
+ *             action, make sure that you have configured the dashboards and permissions.</p>
+ *          <p>The following rules apply to the generated URL:</p>
+ *          <ul>
  *             <li>
- *                 <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>
+ *                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is
+ *                     generated. Once redeemed within this period, it cannot be re-used again.</p>
  *             </li>
  *             <li>
- *                 <p>The URL validity period should not be confused with the actual session lifetime
- *         that can be customized using the <code>
+ *                <p>The URL validity period should not be confused with the actual session
+ *                     lifetime that can be customized using the <code>
  *                      <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes">SessionLifetimeInMinutes</a>
- *                   </code> parameter.</p>
- *                 <p>The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).</p>
+ *                   </code> parameter. The resulting user
+ *                     session is valid for 15 minutes (minimum) to 10 hours (maximum). The default
+ *                     session duration is 10 hours.</p>
  *             </li>
  *             <li>
- *                 <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>
+ *                <p>You are charged only when the URL is used or there is interaction with Amazon Quick.</p>
  *             </li>
  *          </ul>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html">Embedded Analytics</a> in the <i>Amazon QuickSight User
- *             Guide</i>.</p>
- *         <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon QuickSight Developer Portal</a>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html">Embedded Analytics</a> in
+ *             the <i>Amazon Quick User Guide</i>.</p>
+ *          <p>For more information about the high-level steps for embedding and for an interactive
+ *             demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon Quick
+ *                 Developer Portal</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { QuickSightClient, GenerateEmbedUrlForAnonymousUserCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, GenerateEmbedUrlForAnonymousUserCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // GenerateEmbedUrlForAnonymousUserRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   SessionLifetimeInMinutes: Number("long"),
+ *   Namespace: "STRING_VALUE", // required
+ *   SessionTags: [ // SessionTagList
+ *     { // SessionTag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   AuthorizedResourceArns: [ // ArnList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   ExperienceConfiguration: { // AnonymousUserEmbeddingExperienceConfiguration
+ *     Dashboard: { // AnonymousUserDashboardEmbeddingConfiguration
+ *       InitialDashboardId: "STRING_VALUE", // required
+ *       EnabledFeatures: [ // AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures
+ *         "SHARED_VIEW",
+ *       ],
+ *       DisabledFeatures: [ // AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures
+ *         "SHARED_VIEW",
+ *       ],
+ *       FeatureConfigurations: { // AnonymousUserDashboardFeatureConfigurations
+ *         SharedView: { // SharedViewConfigurations
+ *           Enabled: true || false, // required
+ *         },
+ *       },
+ *     },
+ *     DashboardVisual: { // AnonymousUserDashboardVisualEmbeddingConfiguration
+ *       InitialDashboardVisualId: { // DashboardVisualId
+ *         DashboardId: "STRING_VALUE", // required
+ *         SheetId: "STRING_VALUE", // required
+ *         VisualId: "STRING_VALUE", // required
+ *       },
+ *     },
+ *     QSearchBar: { // AnonymousUserQSearchBarEmbeddingConfiguration
+ *       InitialTopicId: "STRING_VALUE", // required
+ *     },
+ *     GenerativeQnA: { // AnonymousUserGenerativeQnAEmbeddingConfiguration
+ *       InitialTopicId: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   AllowedDomains: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new GenerateEmbedUrlForAnonymousUserCommand(input);
  * const response = await client.send(command);
+ * // { // GenerateEmbedUrlForAnonymousUserResponse
+ * //   EmbedUrl: "STRING_VALUE", // required
+ * //   Status: Number("int"), // required
+ * //   RequestId: "STRING_VALUE", // required
+ * //   AnonymousUserArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param GenerateEmbedUrlForAnonymousUserCommandInput - {@link GenerateEmbedUrlForAnonymousUserCommandInput}
+ * @returns {@link GenerateEmbedUrlForAnonymousUserCommandOutput}
  * @see {@link GenerateEmbedUrlForAnonymousUserCommandInput} for command's `input` shape.
  * @see {@link GenerateEmbedUrlForAnonymousUserCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link SessionLifetimeInMinutesInvalidException} (client fault)
+ *  <p>The number of minutes specified for the lifetime of a session isn't valid. The session
+ * 			lifetime must be 15-600 minutes.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedPricingPlanException} (client fault)
+ *  <p>This error indicates that you are calling an embedding operation in Amazon Quick Sight
+ * 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding
+ * 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You
+ * 		    can do this on the <b>Manage Quick Suite</b> page. </p>
+ *          <p>After capacity pricing is added, you can use the
+ *             <code>
+ *                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html">GetDashboardEmbedUrl</a>
+ *             </code> API operation with the
+ *             <code>--identity-type ANONYMOUS</code> option.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class GenerateEmbedUrlForAnonymousUserCommand extends $Command<
-  GenerateEmbedUrlForAnonymousUserCommandInput,
-  GenerateEmbedUrlForAnonymousUserCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GenerateEmbedUrlForAnonymousUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GenerateEmbedUrlForAnonymousUserCommandInput, GenerateEmbedUrlForAnonymousUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "GenerateEmbedUrlForAnonymousUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GenerateEmbedUrlForAnonymousUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GenerateEmbedUrlForAnonymousUserResponse.filterSensitiveLog,
+export class GenerateEmbedUrlForAnonymousUserCommand extends command<GenerateEmbedUrlForAnonymousUserCommandInput, GenerateEmbedUrlForAnonymousUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "GenerateEmbedUrlForAnonymousUser",
+  GenerateEmbedUrlForAnonymousUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GenerateEmbedUrlForAnonymousUserRequest;
+      output: GenerateEmbedUrlForAnonymousUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GenerateEmbedUrlForAnonymousUserCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GenerateEmbedUrlForAnonymousUserCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GenerateEmbedUrlForAnonymousUserCommandOutput> {
-    return deserializeAws_restJson1GenerateEmbedUrlForAnonymousUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GenerateEmbedUrlForAnonymousUserCommandInput;
+      output: GenerateEmbedUrlForAnonymousUserCommandOutput;
+    };
+  };
 }

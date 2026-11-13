@@ -1,0 +1,173 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateKnowledgeBaseTemplateUriRequest, UpdateKnowledgeBaseTemplateUriResponse } from "../models/models_1";
+import { UpdateKnowledgeBaseTemplateUri$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateKnowledgeBaseTemplateUriCommand}.
+ */
+export interface UpdateKnowledgeBaseTemplateUriCommandInput extends UpdateKnowledgeBaseTemplateUriRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateKnowledgeBaseTemplateUriCommand}.
+ */
+export interface UpdateKnowledgeBaseTemplateUriCommandOutput extends UpdateKnowledgeBaseTemplateUriResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in <code>$\{variable\}</code> format; this interpolated by Amazon Q in Connect using ingested content. For example, if you ingest a Salesforce article, it has an <code>Id</code> value, and you can set the template URI to <code>https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*$\{Id\}*\/view</code>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { QConnectClient, UpdateKnowledgeBaseTemplateUriCommand } from "@aws-sdk/client-qconnect"; // ES Modules import
+ * // const { QConnectClient, UpdateKnowledgeBaseTemplateUriCommand } = require("@aws-sdk/client-qconnect"); // CommonJS import
+ * // import type { QConnectClientConfig } from "@aws-sdk/client-qconnect";
+ * const config = {}; // type is QConnectClientConfig
+ * const client = new QConnectClient(config);
+ * const input = { // UpdateKnowledgeBaseTemplateUriRequest
+ *   knowledgeBaseId: "STRING_VALUE", // required
+ *   templateUri: "STRING_VALUE", // required
+ * };
+ * const command = new UpdateKnowledgeBaseTemplateUriCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateKnowledgeBaseTemplateUriResponse
+ * //   knowledgeBase: { // KnowledgeBaseData
+ * //     knowledgeBaseId: "STRING_VALUE", // required
+ * //     knowledgeBaseArn: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE", // required
+ * //     knowledgeBaseType: "STRING_VALUE", // required
+ * //     status: "STRING_VALUE", // required
+ * //     lastContentModificationTime: new Date("TIMESTAMP"),
+ * //     vectorIngestionConfiguration: { // VectorIngestionConfiguration
+ * //       chunkingConfiguration: { // ChunkingConfiguration
+ * //         chunkingStrategy: "STRING_VALUE", // required
+ * //         fixedSizeChunkingConfiguration: { // FixedSizeChunkingConfiguration
+ * //           maxTokens: Number("int"), // required
+ * //           overlapPercentage: Number("int"), // required
+ * //         },
+ * //         hierarchicalChunkingConfiguration: { // HierarchicalChunkingConfiguration
+ * //           levelConfigurations: [ // HierarchicalChunkingLevelConfigurations // required
+ * //             { // HierarchicalChunkingLevelConfiguration
+ * //               maxTokens: Number("int"), // required
+ * //             },
+ * //           ],
+ * //           overlapTokens: Number("int"), // required
+ * //         },
+ * //         semanticChunkingConfiguration: { // SemanticChunkingConfiguration
+ * //           maxTokens: Number("int"), // required
+ * //           bufferSize: Number("int"), // required
+ * //           breakpointPercentileThreshold: Number("int"), // required
+ * //         },
+ * //       },
+ * //       parsingConfiguration: { // ParsingConfiguration
+ * //         parsingStrategy: "STRING_VALUE", // required
+ * //         bedrockFoundationModelConfiguration: { // BedrockFoundationModelConfigurationForParsing
+ * //           modelArn: "STRING_VALUE", // required
+ * //           parsingPrompt: { // ParsingPrompt
+ * //             parsingPromptText: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     sourceConfiguration: { // SourceConfiguration Union: only one key present
+ * //       appIntegrations: { // AppIntegrationsConfiguration
+ * //         appIntegrationArn: "STRING_VALUE", // required
+ * //         objectFields: [ // ObjectFieldsList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       managedSourceConfiguration: { // ManagedSourceConfiguration Union: only one key present
+ * //         webCrawlerConfiguration: { // WebCrawlerConfiguration
+ * //           urlConfiguration: { // UrlConfiguration
+ * //             seedUrls: [ // SeedUrls
+ * //               { // SeedUrl
+ * //                 url: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //           crawlerLimits: { // WebCrawlerLimits
+ * //             rateLimit: Number("int"),
+ * //           },
+ * //           inclusionFilters: [ // UrlFilterList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           exclusionFilters: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           scope: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     renderingConfiguration: { // RenderingConfiguration
+ * //       templateUri: "STRING_VALUE",
+ * //     },
+ * //     serverSideEncryptionConfiguration: { // ServerSideEncryptionConfiguration
+ * //       kmsKeyId: "STRING_VALUE",
+ * //       replicaKmsKeys: [ // ReplicaKmsKeyList
+ * //         { // ReplicaKmsKey
+ * //           arn: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //     description: "STRING_VALUE",
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     ingestionStatus: "STRING_VALUE",
+ * //     ingestionFailureReasons: [ // FailureReason
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     lastModifiedTime: new Date("TIMESTAMP"),
+ * //     lastModifiedRegion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateKnowledgeBaseTemplateUriCommandInput - {@link UpdateKnowledgeBaseTemplateUriCommandInput}
+ * @returns {@link UpdateKnowledgeBaseTemplateUriCommandOutput}
+ * @see {@link UpdateKnowledgeBaseTemplateUriCommandInput} for command's `input` shape.
+ * @see {@link UpdateKnowledgeBaseTemplateUriCommandOutput} for command's `response` shape.
+ * @see {@link QConnectClientResolvedConfig | config} for QConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by a service.</p>
+ *
+ * @throws {@link QConnectServiceException}
+ * <p>Base exception class for all service exceptions from QConnect service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateKnowledgeBaseTemplateUriCommand extends command<UpdateKnowledgeBaseTemplateUriCommandInput, UpdateKnowledgeBaseTemplateUriCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateKnowledgeBaseTemplateUri",
+  UpdateKnowledgeBaseTemplateUri$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateKnowledgeBaseTemplateUriRequest;
+      output: UpdateKnowledgeBaseTemplateUriResponse;
+    };
+    sdk: {
+      input: UpdateKnowledgeBaseTemplateUriCommandInput;
+      output: UpdateKnowledgeBaseTemplateUriCommandOutput;
+    };
+  };
+}

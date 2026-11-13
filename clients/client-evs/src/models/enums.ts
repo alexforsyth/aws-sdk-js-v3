@@ -1,0 +1,194 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const VlanState = {
+  CREATED: "CREATED",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETING: "DELETING",
+} as const;
+/**
+ * @public
+ */
+export type VlanState = (typeof VlanState)[keyof typeof VlanState];
+
+/**
+ * @public
+ * @enum
+ */
+export const ValidationExceptionReason = {
+  CANNOT_PARSE: "cannotParse",
+  FIELD_VALIDATION_FAILED: "fieldValidationFailed",
+  OTHER: "other",
+  UNKNOWN_OPERATION: "unknownOperation",
+} as const;
+/**
+ * @public
+ */
+export type ValidationExceptionReason = (typeof ValidationExceptionReason)[keyof typeof ValidationExceptionReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const EntitlementType = {
+  WINDOWS_SERVER: "WINDOWS_SERVER",
+} as const;
+/**
+ * @public
+ */
+export type EntitlementType = (typeof EntitlementType)[keyof typeof EntitlementType];
+
+/**
+ * @public
+ * @enum
+ */
+export const EntitlementStatus = {
+  AT_RISK: "AT_RISK",
+  CREATED: "CREATED",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  ENTITLEMENT_REMOVED: "ENTITLEMENT_REMOVED",
+} as const;
+/**
+ * @public
+ */
+export type EntitlementStatus = (typeof EntitlementStatus)[keyof typeof EntitlementStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const _InstanceType = {
+  I4I_METAL: "i4i.metal",
+  I7I_METAL_24XL: "i7i.metal-24xl",
+  I7I_METAL_48XL: "i7i.metal-48xl",
+  R7I_METAL_24XL: "r7i.metal-24xl",
+  R7I_METAL_48XL: "r7i.metal-48xl",
+} as const;
+/**
+ * @public
+ */
+export type _InstanceType = (typeof _InstanceType)[keyof typeof _InstanceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const VcfVersion = {
+  SELF_DEPLOYED: "SELF_DEPLOYED",
+  VCF_5_2_1: "VCF-5.2.1",
+  VCF_5_2_2: "VCF-5.2.2",
+} as const;
+/**
+ * @public
+ */
+export type VcfVersion = (typeof VcfVersion)[keyof typeof VcfVersion];
+
+/**
+ * @public
+ * @enum
+ */
+export const CheckResult = {
+  FAILED: "FAILED",
+  PASSED: "PASSED",
+  UNKNOWN: "UNKNOWN",
+} as const;
+/**
+ * @public
+ */
+export type CheckResult = (typeof CheckResult)[keyof typeof CheckResult];
+
+/**
+ * @public
+ * @enum
+ */
+export const CheckType = {
+  CONNECTOR_HEALTH: "CONNECTOR_HEALTH",
+  HOST_COUNT: "HOST_COUNT",
+  KEY_COVERAGE: "KEY_COVERAGE",
+  KEY_REUSE: "KEY_REUSE",
+  OPERATIONS_MANAGER_REACHABILITY: "OPERATIONS_MANAGER_REACHABILITY",
+  REACHABILITY: "REACHABILITY",
+  SDDC_MANAGER_HOST_COUNT: "SDDC_MANAGER_HOST_COUNT",
+  SDDC_MANAGER_KEY_COVERAGE: "SDDC_MANAGER_KEY_COVERAGE",
+  SDDC_MANAGER_KEY_REUSE: "SDDC_MANAGER_KEY_REUSE",
+  SDDC_MANAGER_REACHABILITY: "SDDC_MANAGER_REACHABILITY",
+  VCENTER_REACHABILITY: "VCENTER_REACHABILITY",
+  VCENTER_VM_EVENT: "VCENTER_VM_EVENT",
+  VCENTER_VM_SYNC: "VCENTER_VM_SYNC",
+} as const;
+/**
+ * @public
+ */
+export type CheckType = (typeof CheckType)[keyof typeof CheckType];
+
+/**
+ * @public
+ * @enum
+ */
+export const EnvironmentState = {
+  CREATED: "CREATED",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETING: "DELETING",
+} as const;
+/**
+ * @public
+ */
+export type EnvironmentState = (typeof EnvironmentState)[keyof typeof EnvironmentState];
+
+/**
+ * @public
+ * @enum
+ */
+export const ConnectorType = {
+  OPERATIONS_MANAGER: "OPERATIONS_MANAGER",
+  SDDC_MANAGER: "SDDC_MANAGER",
+  VCENTER: "VCENTER",
+} as const;
+/**
+ * @public
+ */
+export type ConnectorType = (typeof ConnectorType)[keyof typeof ConnectorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ConnectorState = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type ConnectorState = (typeof ConnectorState)[keyof typeof ConnectorState];
+
+/**
+ * @public
+ * @enum
+ */
+export const HostState = {
+  CREATED: "CREATED",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type HostState = (typeof HostState)[keyof typeof HostState];

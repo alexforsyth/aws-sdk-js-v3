@@ -1,97 +1,127 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateProjectRequest, CreateProjectResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateProjectCommand,
-  serializeAws_json1_1CreateProjectCommand,
-} from "../protocols/Aws_json1_1";
-import { RekognitionClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RekognitionClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateProjectRequest, CreateProjectResponse } from "../models/models_0";
+import { CreateProject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateProjectCommand}.
+ */
 export interface CreateProjectCommandInput extends CreateProjectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateProjectCommand}.
+ */
 export interface CreateProjectCommandOutput extends CreateProjectResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new Amazon Rekognition Custom Labels project. A project is a logical grouping of resources (images, Labels, models)
- *          and operations (training, evaluation and detection).  </p>
- *          <p>This operation requires permissions to perform the <code>rekognition:CreateProject</code> action.</p>
+ * <p>Creates a new Amazon Rekognition project. A project is a group of resources (datasets, model
+ *          versions) that you use to create and manage a Amazon Rekognition Custom Labels Model or custom adapter. You can
+ *          specify a feature to create the project with, if no feature is specified then Custom Labels
+ *          is used by default. For adapters, you can also choose whether or not to have the project
+ *          auto update by using the AutoUpdate argument. This operation requires permissions to
+ *          perform the <code>rekognition:CreateProject</code> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RekognitionClient, CreateProjectCommand } from "@aws-sdk/client-rekognition"; // ES Modules import
  * // const { RekognitionClient, CreateProjectCommand } = require("@aws-sdk/client-rekognition"); // CommonJS import
+ * // import type { RekognitionClientConfig } from "@aws-sdk/client-rekognition";
+ * const config = {}; // type is RekognitionClientConfig
  * const client = new RekognitionClient(config);
+ * const input = { // CreateProjectRequest
+ *   ProjectName: "STRING_VALUE", // required
+ *   Feature: "CONTENT_MODERATION" || "CUSTOM_LABELS",
+ *   AutoUpdate: "ENABLED" || "DISABLED",
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateProjectCommand(input);
  * const response = await client.send(command);
+ * // { // CreateProjectResponse
+ * //   ProjectArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateProjectCommandInput - {@link CreateProjectCommandInput}
+ * @returns {@link CreateProjectCommandOutput}
  * @see {@link CreateProjectCommandInput} for command's `input` shape.
  * @see {@link CreateProjectCommandOutput} for command's `response` shape.
- * @see {@link RekognitionClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RekognitionClientResolvedConfig | config} for RekognitionClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to perform the action.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Amazon Rekognition experienced a service issue. Try your call again.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Input parameter violated a constraint. Validate your parameter before calling the API
+ *       operation again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>An Amazon Rekognition service limit was exceeded. For example, if you start too many jobs
+ *             concurrently, subsequent calls to start operations (ex:
+ *             <code>StartLabelDetection</code>) will raise a <code>LimitExceededException</code>
+ *             exception (HTTP status code: 400) until the number of concurrently running jobs is below
+ *             the Amazon Rekognition service limit. </p>
+ *
+ * @throws {@link ProvisionedThroughputExceededException} (client fault)
+ *  <p>The number of requests exceeded your throughput limit. If you want to increase this
+ *       limit, contact Amazon Rekognition.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is already being used.</p>
+ *
+ * @throws {@link ThrottlingException} (server fault)
+ *  <p>Amazon Rekognition is temporarily unable to process the request. Try your call again.</p>
+ *
+ * @throws {@link RekognitionServiceException}
+ * <p>Base exception class for all service exceptions from Rekognition service.</p>
+ *
+ *
+ * @example To create an Amazon Rekognition Custom Labels project
+ * ```javascript
+ * // Creates an Amazon Rekognition Custom Labels project.
+ * const input = {
+ *   ProjectName: "my-project"
+ * };
+ * const command = new CreateProjectCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ProjectArn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690405809285"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateProjectCommand extends $Command<
-  CreateProjectCommandInput,
-  CreateProjectCommandOutput,
-  RekognitionClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateProjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RekognitionClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateProjectCommandInput, CreateProjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RekognitionClient";
-    const commandName = "CreateProjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateProjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateProjectResponse.filterSensitiveLog,
+export class CreateProjectCommand extends command<CreateProjectCommandInput, CreateProjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateProject",
+  CreateProject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProjectRequest;
+      output: CreateProjectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateProjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateProjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateProjectCommandOutput> {
-    return deserializeAws_json1_1CreateProjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateProjectCommandInput;
+      output: CreateProjectCommandOutput;
+    };
+  };
 }

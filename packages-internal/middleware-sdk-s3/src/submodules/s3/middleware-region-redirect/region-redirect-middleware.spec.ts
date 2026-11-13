@@ -1,0 +1,102 @@
+import type { AwsHandlerExecutionContext } from "@aws-sdk/types";
+import type { HandlerExecutionContext } from "@smithy/types";
+import { beforeEach, describe, expect, test as it } from "vitest";
+
+import { regionRedirectMiddleware } from "./region-redirect-middleware";
+
+describe(regionRedirectMiddleware.name, () => {
+  const region = async () => "us-east-1";
+  const redirectRegion = "us-west-2";
+  let call = 0;
+  const next = (arg: any) => {
+    if (call === 0) {
+      call++;
+      throw Object.assign(new Error(), {
+        name: "PermanentRedirect",
+        $metadata: { httpStatusCode: 301 },
+        $response: { headers: { "x-amz-bucket-region": redirectRegion } },
+      });
+    }
+    return null as any;
+  };
+
+  const next400 = (arg: any) => {
+    if (call === 0) {
+      call++;
+      throw Object.assign(new Error(), {
+        name: "IllegalLocationConstraintException",
+        $metadata: { httpStatusCode: 400 },
+        $response: { headers: { "x-amz-bucket-region": redirectRegion } },
+      });
+    }
+    return null as any;
+  };
+
+  const nextHeadBucket400 = (arg: any) => {
+    if (call === 0) {
+      call++;
+      throw Object.assign(new Error(), {
+        $metadata: { httpStatusCode: 400 },
+        $response: { headers: { "x-amz-bucket-region": redirectRegion } },
+      });
+    }
+    return null as any;
+  };
+
+  beforeEach(() => {
+    call = 0;
+  });
+
+  it("set S3 region redirect on context if receiving a PermanentRedirect error code with status 301", async () => {
+    const middleware = regionRedirectMiddleware({ region, followRegionRedirects: true });
+    const context = {} as HandlerExecutionContext;
+    const handler = middleware(next, context);
+    await handler({ input: null });
+    expect(context.__s3RegionRedirect).toEqual(redirectRegion);
+    expect(features(context)).toEqual({ S3_REGION_REDIRECT: "Ah" });
+  });
+
+  it("set S3 region redirect on context if receiving an error with status 400", async () => {
+    const middleware = regionRedirectMiddleware({ region, followRegionRedirects: true });
+    const context = {} as HandlerExecutionContext;
+    const handler = middleware(next400, context);
+    await handler({ input: null });
+    expect(context.__s3RegionRedirect).toEqual(redirectRegion);
+    expect(features(context)).toEqual({ S3_REGION_REDIRECT: "Ah" });
+  });
+
+  it("set S3 region redirect on context for HeadBucket with 400 status and x-amz-bucket-region header", async () => {
+    const middleware = regionRedirectMiddleware({ region, followRegionRedirects: true });
+    const context = { commandName: "HeadBucketCommand" } as HandlerExecutionContext;
+    const handler = middleware(nextHeadBucket400, context);
+    await handler({ input: null });
+    expect(context.__s3RegionRedirect).toEqual(redirectRegion);
+    expect(features(context)).toEqual({ S3_REGION_REDIRECT: "Ah" });
+  });
+
+  it("does not follow the redirect when followRegionRedirects is false", async () => {
+    const middleware = regionRedirectMiddleware({ region, followRegionRedirects: false });
+    const context = {} as HandlerExecutionContext;
+    const handler = middleware(next, context);
+    // Simulating a PermanentRedirect error with status 301
+    await expect(async () => {
+      await handler({ input: null });
+    }).rejects.toThrowError(
+      Object.assign(new Error(), {
+        name: "PermanentRedirect",
+        $metadata: { httpStatusCode: 301 },
+        $response: { headers: { "x-amz-bucket-region": redirectRegion } },
+      })
+    );
+    // Ensure that context.__s3RegionRedirect is not set
+    expect(context.__s3RegionRedirect).toBeUndefined();
+    expect(features(context)).toBeUndefined();
+  });
+});
+
+/**
+ * @returns the user agent features tracked on the given context.
+ */
+function features(context: HandlerExecutionContext) {
+  return (context as AwsHandlerExecutionContext).__aws_sdk_context?.features;
+}

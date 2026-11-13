@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetEmailIdentityRequest, GetEmailIdentityResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetEmailIdentityCommand,
-  serializeAws_restJson1GetEmailIdentityCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEmailIdentityRequest, GetEmailIdentityResponse } from "../models/models_0";
+import { GetEmailIdentity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEmailIdentityCommand}.
+ */
 export interface GetEmailIdentityCommandInput extends GetEmailIdentityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEmailIdentityCommand}.
+ */
 export interface GetEmailIdentityCommandOutput extends GetEmailIdentityResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,96 @@ export interface GetEmailIdentityCommandOutput extends GetEmailIdentityResponse,
  * ```javascript
  * import { SESv2Client, GetEmailIdentityCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, GetEmailIdentityCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // GetEmailIdentityRequest
+ *   EmailIdentity: "STRING_VALUE", // required
+ * };
  * const command = new GetEmailIdentityCommand(input);
  * const response = await client.send(command);
+ * // { // GetEmailIdentityResponse
+ * //   IdentityType: "EMAIL_ADDRESS" || "DOMAIN" || "MANAGED_DOMAIN",
+ * //   FeedbackForwardingStatus: true || false,
+ * //   VerifiedForSendingStatus: true || false,
+ * //   DkimAttributes: { // DkimAttributes
+ * //     SigningEnabled: true || false,
+ * //     Status: "PENDING" || "SUCCESS" || "FAILED" || "TEMPORARY_FAILURE" || "NOT_STARTED",
+ * //     Tokens: [ // DnsTokenList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SigningHostedZone: "STRING_VALUE",
+ * //     SigningAttributesOrigin: "AWS_SES" || "EXTERNAL" || "AWS_SES_AF_SOUTH_1" || "AWS_SES_EU_NORTH_1" || "AWS_SES_AP_SOUTH_1" || "AWS_SES_EU_WEST_3" || "AWS_SES_EU_WEST_2" || "AWS_SES_EU_SOUTH_1" || "AWS_SES_EU_WEST_1" || "AWS_SES_AP_NORTHEAST_3" || "AWS_SES_AP_NORTHEAST_2" || "AWS_SES_ME_SOUTH_1" || "AWS_SES_AP_NORTHEAST_1" || "AWS_SES_IL_CENTRAL_1" || "AWS_SES_SA_EAST_1" || "AWS_SES_CA_CENTRAL_1" || "AWS_SES_AP_SOUTHEAST_1" || "AWS_SES_AP_SOUTHEAST_2" || "AWS_SES_AP_SOUTHEAST_3" || "AWS_SES_EU_CENTRAL_1" || "AWS_SES_US_EAST_1" || "AWS_SES_US_EAST_2" || "AWS_SES_US_WEST_1" || "AWS_SES_US_WEST_2" || "AWS_SES_ME_CENTRAL_1" || "AWS_SES_AP_SOUTH_2" || "AWS_SES_EU_CENTRAL_2" || "AWS_SES_AP_SOUTHEAST_5" || "AWS_SES_CA_WEST_1" || "AWS_SES_US_GOV_EAST_1" || "AWS_SES_US_GOV_WEST_1",
+ * //     NextSigningKeyLength: "RSA_1024_BIT" || "RSA_2048_BIT",
+ * //     CurrentSigningKeyLength: "RSA_1024_BIT" || "RSA_2048_BIT",
+ * //     LastKeyGenerationTimestamp: new Date("TIMESTAMP"),
+ * //   },
+ * //   MailFromAttributes: { // MailFromAttributes
+ * //     MailFromDomain: "STRING_VALUE", // required
+ * //     MailFromDomainStatus: "PENDING" || "SUCCESS" || "FAILED" || "TEMPORARY_FAILURE", // required
+ * //     BehaviorOnMxFailure: "USE_DEFAULT_VALUE" || "REJECT_MESSAGE", // required
+ * //   },
+ * //   Policies: { // PolicyMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   ConfigurationSetName: "STRING_VALUE",
+ * //   VerificationStatus: "PENDING" || "SUCCESS" || "FAILED" || "TEMPORARY_FAILURE" || "NOT_STARTED",
+ * //   VerificationInfo: { // VerificationInfo
+ * //     LastCheckedTimestamp: new Date("TIMESTAMP"),
+ * //     LastSuccessTimestamp: new Date("TIMESTAMP"),
+ * //     ErrorType: "SERVICE_ERROR" || "DNS_SERVER_ERROR" || "HOST_NOT_FOUND" || "TYPE_NOT_FOUND" || "INVALID_VALUE" || "REPLICATION_ACCESS_DENIED" || "REPLICATION_PRIMARY_NOT_FOUND" || "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED" || "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED" || "REPLICATION_PRIMARY_INVALID_REGION",
+ * //     SOARecord: { // SOARecord
+ * //       PrimaryNameServer: "STRING_VALUE",
+ * //       AdminEmail: "STRING_VALUE",
+ * //       SerialNumber: Number("long"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetEmailIdentityCommandInput - {@link GetEmailIdentityCommandInput}
+ * @returns {@link GetEmailIdentityCommandOutput}
  * @see {@link GetEmailIdentityCommandInput} for command's `input` shape.
  * @see {@link GetEmailIdentityCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetEmailIdentityCommand extends $Command<
-  GetEmailIdentityCommandInput,
-  GetEmailIdentityCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetEmailIdentityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetEmailIdentityCommandInput, GetEmailIdentityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "GetEmailIdentityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetEmailIdentityRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetEmailIdentityResponse.filterSensitiveLog,
+export class GetEmailIdentityCommand extends command<GetEmailIdentityCommandInput, GetEmailIdentityCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEmailIdentity",
+  GetEmailIdentity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEmailIdentityRequest;
+      output: GetEmailIdentityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetEmailIdentityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetEmailIdentityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetEmailIdentityCommandOutput> {
-    return deserializeAws_restJson1GetEmailIdentityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetEmailIdentityCommandInput;
+      output: GetEmailIdentityCommandOutput;
+    };
+  };
 }

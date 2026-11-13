@@ -1,0 +1,87 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTransitGatewayPolicyTableRequest, DeleteTransitGatewayPolicyTableResult } from "../models/models_3";
+import { DeleteTransitGatewayPolicyTable$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayPolicyTableCommand}.
+ */
+export interface DeleteTransitGatewayPolicyTableCommandInput extends DeleteTransitGatewayPolicyTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayPolicyTableCommand}.
+ */
+export interface DeleteTransitGatewayPolicyTableCommandOutput extends DeleteTransitGatewayPolicyTableResult, __MetadataBearer {}
+
+/**
+ * <p>Deletes the specified transit gateway policy table.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, DeleteTransitGatewayPolicyTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, DeleteTransitGatewayPolicyTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayPolicyTableRequest
+ *   TransitGatewayPolicyTableId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
+ * const command = new DeleteTransitGatewayPolicyTableCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteTransitGatewayPolicyTableResult
+ * //   TransitGatewayPolicyTable: { // TransitGatewayPolicyTable
+ * //     TransitGatewayPolicyTableId: "STRING_VALUE",
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "deleting" || "deleted",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteTransitGatewayPolicyTableCommandInput - {@link DeleteTransitGatewayPolicyTableCommandInput}
+ * @returns {@link DeleteTransitGatewayPolicyTableCommandOutput}
+ * @see {@link DeleteTransitGatewayPolicyTableCommandInput} for command's `input` shape.
+ * @see {@link DeleteTransitGatewayPolicyTableCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteTransitGatewayPolicyTableCommand extends command<DeleteTransitGatewayPolicyTableCommandInput, DeleteTransitGatewayPolicyTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGatewayPolicyTable",
+  DeleteTransitGatewayPolicyTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayPolicyTableRequest;
+      output: DeleteTransitGatewayPolicyTableResult;
+    };
+    sdk: {
+      input: DeleteTransitGatewayPolicyTableCommandInput;
+      output: DeleteTransitGatewayPolicyTableCommandOutput;
+    };
+  };
+}

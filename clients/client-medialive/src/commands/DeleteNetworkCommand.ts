@@ -1,0 +1,116 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteNetworkRequest, DeleteNetworkResponse } from "../models/models_1";
+import { DeleteNetwork$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteNetworkCommand}.
+ */
+export interface DeleteNetworkCommandInput extends DeleteNetworkRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteNetworkCommand}.
+ */
+export interface DeleteNetworkCommandOutput extends DeleteNetworkResponse, __MetadataBearer {}
+
+/**
+ * Delete a Network. The Network must have no resources associated with it.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaLiveClient, DeleteNetworkCommand } from "@aws-sdk/client-medialive"; // ES Modules import
+ * // const { MediaLiveClient, DeleteNetworkCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
+ * const client = new MediaLiveClient(config);
+ * const input = { // DeleteNetworkRequest
+ *   NetworkId: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteNetworkCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteNetworkResponse
+ * //   Arn: "STRING_VALUE",
+ * //   AssociatedClusterIds: [ // __listOf__string
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Id: "STRING_VALUE",
+ * //   IpPools: [ // __listOfIpPool
+ * //     { // IpPool
+ * //       Cidr: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Name: "STRING_VALUE",
+ * //   Routes: [ // __listOfRoute
+ * //     { // Route
+ * //       Cidr: "STRING_VALUE",
+ * //       Gateway: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   State: "CREATING" || "CREATE_FAILED" || "ACTIVE" || "DELETING" || "IDLE" || "IN_USE" || "UPDATING" || "DELETE_FAILED" || "DELETED",
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteNetworkCommandInput - {@link DeleteNetworkCommandInput}
+ * @returns {@link DeleteNetworkCommandOutput}
+ * @see {@link DeleteNetworkCommandInput} for command's `input` shape.
+ * @see {@link DeleteNetworkCommandOutput} for command's `response` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
+ *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Placeholder documentation for ConflictException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteNetworkCommand extends command<DeleteNetworkCommandInput, DeleteNetworkCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteNetwork",
+  DeleteNetwork$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNetworkRequest;
+      output: DeleteNetworkResponse;
+    };
+    sdk: {
+      input: DeleteNetworkCommandInput;
+      output: DeleteNetworkCommandOutput;
+    };
+  };
+}

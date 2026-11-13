@@ -1,40 +1,43 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateAccessPointRequest, CreateAccessPointResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlCreateAccessPointCommand,
-  serializeAws_restXmlCreateAccessPointCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep1, _mw1, command } from "../commandBuilder";
+import type { CreateAccessPointRequest, CreateAccessPointResult } from "../models/models_0";
+import { CreateAccessPoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAccessPointCommand}.
+ */
 export interface CreateAccessPointCommandInput extends CreateAccessPointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAccessPointCommand}.
+ */
 export interface CreateAccessPointCommandOutput extends CreateAccessPointResult, __MetadataBearer {}
 
 /**
- * <p>Creates an access point and associates it with the specified bucket. For more information, see
- *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html">Managing Data Access with Amazon S3 Access
- *             Points</a> in the <i>Amazon S3 User Guide</i>.</p>
+ * <p>Creates an access point and associates it to a specified bucket. For more information, see
+ *             <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html">Managing
+ *             access to shared datasets with access points</a> or <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html">Managing access to
+ *             shared datasets in directory buckets with access points</a> in the
+ *             <i>Amazon S3 User Guide</i>.</p>
+ *          <p>To create an access point and attach it to a volume on an Amazon FSx file system, see <a href="https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateAndAttachS3AccessPoint.html">CreateAndAttachS3AccessPoint</a> in the <i>Amazon FSx API
+ *          Reference</i>.</p>
  *          <p></p>
  *          <note>
- *             <p>S3 on Outposts only supports VPC-style access points.
- *          </p>
- *             <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">
- *          Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points</a> in
- *          the <i>Amazon S3 User Guide</i>.</p>
+ *             <p>S3 on Outposts only supports VPC-style access points. </p>
+ *             <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html"> Accessing Amazon S3 on Outposts using
+ *                virtual private cloud (VPC) only access points</a> in the
+ *                <i>Amazon S3 User Guide</i>.</p>
  *          </note>
- *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples">Examples</a> section.</p>
+ *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples">Examples</a> section.</p>
  *          <p></p>
  *          <p>The following actions are related to <code>CreateAccessPoint</code>:</p>
  *          <ul>
@@ -53,75 +56,85 @@ export interface CreateAccessPointCommandOutput extends CreateAccessPointResult,
  *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html">ListAccessPoints</a>
  *                </p>
  *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html">ListAccessPointsForDirectoryBuckets</a>
+ *                </p>
+ *             </li>
  *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3ControlClient, CreateAccessPointCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, CreateAccessPointCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // CreateAccessPointRequest
+ *   AccountId: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ *   Bucket: "STRING_VALUE", // required
+ *   VpcConfiguration: { // VpcConfiguration
+ *     VpcId: "STRING_VALUE", // required
+ *   },
+ *   PublicAccessBlockConfiguration: { // PublicAccessBlockConfiguration
+ *     BlockPublicAcls: true || false,
+ *     IgnorePublicAcls: true || false,
+ *     BlockPublicPolicy: true || false,
+ *     RestrictPublicBuckets: true || false,
+ *   },
+ *   BucketAccountId: "STRING_VALUE",
+ *   Scope: { // Scope
+ *     Prefixes: [ // PrefixesList
+ *       "STRING_VALUE",
+ *     ],
+ *     Permissions: [ // ScopePermissionList
+ *       "GetObject" || "GetObjectAttributes" || "ListMultipartUploadParts" || "ListBucket" || "ListBucketMultipartUploads" || "PutObject" || "DeleteObject" || "AbortMultipartUpload",
+ *     ],
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateAccessPointCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAccessPointResult
+ * //   AccessPointArn: "STRING_VALUE",
+ * //   Alias: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateAccessPointCommandInput - {@link CreateAccessPointCommandInput}
+ * @returns {@link CreateAccessPointCommandOutput}
  * @see {@link CreateAccessPointCommandInput} for command's `input` shape.
  * @see {@link CreateAccessPointCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAccessPointCommand extends $Command<
-  CreateAccessPointCommandInput,
-  CreateAccessPointCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAccessPointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAccessPointCommandInput, CreateAccessPointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "CreateAccessPointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAccessPointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAccessPointResult.filterSensitiveLog,
+export class CreateAccessPointCommand extends command<CreateAccessPointCommandInput, CreateAccessPointCommandOutput>(
+  _ep1,
+  _mw1,
+  "CreateAccessPoint",
+  CreateAccessPoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAccessPointRequest;
+      output: CreateAccessPointResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAccessPointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlCreateAccessPointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAccessPointCommandOutput> {
-    return deserializeAws_restXmlCreateAccessPointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAccessPointCommandInput;
+      output: CreateAccessPointCommandOutput;
+    };
+  };
 }

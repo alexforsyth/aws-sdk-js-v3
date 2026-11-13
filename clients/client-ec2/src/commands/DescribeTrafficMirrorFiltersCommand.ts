@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeTrafficMirrorFiltersRequest, DescribeTrafficMirrorFiltersResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeTrafficMirrorFiltersCommand,
-  serializeAws_ec2DescribeTrafficMirrorFiltersCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTrafficMirrorFiltersRequest, DescribeTrafficMirrorFiltersResult } from "../models/models_5";
+import { DescribeTrafficMirrorFilters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTrafficMirrorFiltersCommand}.
+ */
 export interface DescribeTrafficMirrorFiltersCommandInput extends DescribeTrafficMirrorFiltersRequest {}
-export interface DescribeTrafficMirrorFiltersCommandOutput
-  extends DescribeTrafficMirrorFiltersResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTrafficMirrorFiltersCommand}.
+ */
+export interface DescribeTrafficMirrorFiltersCommandOutput extends DescribeTrafficMirrorFiltersResult, __MetadataBearer {}
 
 /**
  * <p>Describes one or more Traffic Mirror filters.</p>
@@ -30,71 +29,129 @@ export interface DescribeTrafficMirrorFiltersCommandOutput
  * ```javascript
  * import { EC2Client, DescribeTrafficMirrorFiltersCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeTrafficMirrorFiltersCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeTrafficMirrorFiltersRequest
+ *   TrafficMirrorFilterIds: [ // TrafficMirrorFilterIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeTrafficMirrorFiltersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTrafficMirrorFiltersResult
+ * //   TrafficMirrorFilters: [ // TrafficMirrorFilterSet
+ * //     { // TrafficMirrorFilter
+ * //       TrafficMirrorFilterId: "STRING_VALUE",
+ * //       IngressFilterRules: [ // TrafficMirrorFilterRuleList
+ * //         { // TrafficMirrorFilterRule
+ * //           TrafficMirrorFilterRuleId: "STRING_VALUE",
+ * //           TrafficMirrorFilterId: "STRING_VALUE",
+ * //           TrafficDirection: "ingress" || "egress",
+ * //           RuleNumber: Number("int"),
+ * //           RuleAction: "accept" || "reject",
+ * //           Protocol: Number("int"),
+ * //           DestinationPortRange: { // TrafficMirrorPortRange
+ * //             FromPort: Number("int"),
+ * //             ToPort: Number("int"),
+ * //           },
+ * //           SourcePortRange: {
+ * //             FromPort: Number("int"),
+ * //             ToPort: Number("int"),
+ * //           },
+ * //           DestinationCidrBlock: "STRING_VALUE",
+ * //           SourceCidrBlock: "STRING_VALUE",
+ * //           Description: "STRING_VALUE",
+ * //           Tags: [ // TagList
+ * //             { // Tag
+ * //               Key: "STRING_VALUE",
+ * //               Value: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       EgressFilterRules: [
+ * //         {
+ * //           TrafficMirrorFilterRuleId: "STRING_VALUE",
+ * //           TrafficMirrorFilterId: "STRING_VALUE",
+ * //           TrafficDirection: "ingress" || "egress",
+ * //           RuleNumber: Number("int"),
+ * //           RuleAction: "accept" || "reject",
+ * //           Protocol: Number("int"),
+ * //           DestinationPortRange: {
+ * //             FromPort: Number("int"),
+ * //             ToPort: Number("int"),
+ * //           },
+ * //           SourcePortRange: {
+ * //             FromPort: Number("int"),
+ * //             ToPort: Number("int"),
+ * //           },
+ * //           DestinationCidrBlock: "STRING_VALUE",
+ * //           SourceCidrBlock: "STRING_VALUE",
+ * //           Description: "STRING_VALUE",
+ * //           Tags: [
+ * //             {
+ * //               Key: "STRING_VALUE",
+ * //               Value: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       NetworkServices: [ // TrafficMirrorNetworkServiceList
+ * //         "amazon-dns",
+ * //       ],
+ * //       Description: "STRING_VALUE",
+ * //       Tags: [
+ * //         {
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTrafficMirrorFiltersCommandInput - {@link DescribeTrafficMirrorFiltersCommandInput}
+ * @returns {@link DescribeTrafficMirrorFiltersCommandOutput}
  * @see {@link DescribeTrafficMirrorFiltersCommandInput} for command's `input` shape.
  * @see {@link DescribeTrafficMirrorFiltersCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTrafficMirrorFiltersCommand extends $Command<
-  DescribeTrafficMirrorFiltersCommandInput,
-  DescribeTrafficMirrorFiltersCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTrafficMirrorFiltersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTrafficMirrorFiltersCommandInput, DescribeTrafficMirrorFiltersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeTrafficMirrorFiltersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTrafficMirrorFiltersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTrafficMirrorFiltersResult.filterSensitiveLog,
+export class DescribeTrafficMirrorFiltersCommand extends command<DescribeTrafficMirrorFiltersCommandInput, DescribeTrafficMirrorFiltersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTrafficMirrorFilters",
+  DescribeTrafficMirrorFilters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTrafficMirrorFiltersRequest;
+      output: DescribeTrafficMirrorFiltersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTrafficMirrorFiltersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeTrafficMirrorFiltersCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeTrafficMirrorFiltersCommandOutput> {
-    return deserializeAws_ec2DescribeTrafficMirrorFiltersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTrafficMirrorFiltersCommandInput;
+      output: DescribeTrafficMirrorFiltersCommandOutput;
+    };
+  };
 }

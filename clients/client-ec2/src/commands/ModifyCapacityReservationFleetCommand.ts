@@ -1,107 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyCapacityReservationFleetRequest, ModifyCapacityReservationFleetResult } from "../models/models_4";
-import {
-  deserializeAws_ec2ModifyCapacityReservationFleetCommand,
-  serializeAws_ec2ModifyCapacityReservationFleetCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyCapacityReservationFleetRequest, ModifyCapacityReservationFleetResult } from "../models/models_7";
+import { ModifyCapacityReservationFleet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyCapacityReservationFleetCommand}.
+ */
 export interface ModifyCapacityReservationFleetCommandInput extends ModifyCapacityReservationFleetRequest {}
-export interface ModifyCapacityReservationFleetCommandOutput
-  extends ModifyCapacityReservationFleetResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyCapacityReservationFleetCommand}.
+ */
+export interface ModifyCapacityReservationFleetCommandOutput extends ModifyCapacityReservationFleetResult, __MetadataBearer {}
 
 /**
  * <p>Modifies a Capacity Reservation Fleet.</p>
- * 		       <p>When you modify the total target capacity of a Capacity Reservation Fleet, the Fleet automatically
- * 			creates new Capacity Reservations, or modifies or cancels existing Capacity Reservations in the Fleet
- * 			to meet the new total target capacity. When you modify the end date for the Fleet, the end dates for
- * 			all of the individual Capacity Reservations in the Fleet are updated accordingly.</p>
+ *          <p>When you modify the total target capacity of a Capacity Reservation Fleet, the Fleet
+ * 			automatically creates new Capacity Reservations, or modifies or cancels existing
+ * 			Capacity Reservations in the Fleet to meet the new total target capacity. When you
+ * 			modify the end date for the Fleet, the end dates for all of the individual Capacity
+ * 			Reservations in the Fleet are updated accordingly.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ModifyCapacityReservationFleetCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyCapacityReservationFleetCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyCapacityReservationFleetRequest
+ *   CapacityReservationFleetId: "STRING_VALUE", // required
+ *   TotalTargetCapacity: Number("int"),
+ *   EndDate: new Date("TIMESTAMP"),
+ *   DryRun: true || false,
+ *   RemoveEndDate: true || false,
+ * };
  * const command = new ModifyCapacityReservationFleetCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyCapacityReservationFleetResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ModifyCapacityReservationFleetCommandInput - {@link ModifyCapacityReservationFleetCommandInput}
+ * @returns {@link ModifyCapacityReservationFleetCommandOutput}
  * @see {@link ModifyCapacityReservationFleetCommandInput} for command's `input` shape.
  * @see {@link ModifyCapacityReservationFleetCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyCapacityReservationFleetCommand extends $Command<
-  ModifyCapacityReservationFleetCommandInput,
-  ModifyCapacityReservationFleetCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyCapacityReservationFleetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyCapacityReservationFleetCommandInput, ModifyCapacityReservationFleetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyCapacityReservationFleetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyCapacityReservationFleetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyCapacityReservationFleetResult.filterSensitiveLog,
+export class ModifyCapacityReservationFleetCommand extends command<ModifyCapacityReservationFleetCommandInput, ModifyCapacityReservationFleetCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyCapacityReservationFleet",
+  ModifyCapacityReservationFleet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyCapacityReservationFleetRequest;
+      output: ModifyCapacityReservationFleetResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ModifyCapacityReservationFleetCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyCapacityReservationFleetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyCapacityReservationFleetCommandOutput> {
-    return deserializeAws_ec2ModifyCapacityReservationFleetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyCapacityReservationFleetCommandInput;
+      output: ModifyCapacityReservationFleetCommandOutput;
+    };
+  };
 }

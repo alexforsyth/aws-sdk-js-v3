@@ -1,322 +1,446 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
+  type FlexibleChecksumsInputConfig,
+  type FlexibleChecksumsResolvedConfig,
+  resolveFlexibleChecksumsConfig,
+} from "@aws-sdk/checksums/flexible-checksums";
 import {
-  EventStreamSerdeInputConfig,
-  EventStreamSerdeResolvedConfig,
-  resolveEventStreamSerdeConfig,
-} from "@aws-sdk/eventstream-serde-config-resolver";
-import {
-  BucketEndpointInputConfig,
-  BucketEndpointResolvedConfig,
-  resolveBucketEndpointConfig,
-} from "@aws-sdk/middleware-bucket-endpoint";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import { getAddExpectContinuePlugin } from "@aws-sdk/middleware-expect-continue";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import { getUseRegionalEndpointPlugin, getValidateBucketNamePlugin } from "@aws-sdk/middleware-sdk-s3";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  type S3InputConfig,
+  type S3ResolvedConfig,
+  getAddExpectContinuePlugin,
+  getRegionRedirectMiddlewarePlugin,
+  getS3ExpressHttpSigningPlugin,
+  getS3ExpressPlugin,
+  getValidateBucketNamePlugin,
+  resolveS3Config,
+} from "@aws-sdk/middleware-sdk-s3/s3";
+import type { GetAwsChunkedEncodingStream } from "@aws-sdk/types";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
 import {
-  Credentials as __Credentials,
+  type EventStreamSerdeInputConfig,
+  type EventStreamSerdeResolvedConfig,
+  resolveEventStreamSerdeConfig,
+} from "@smithy/core/event-streams";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  Checksum as __Checksum,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
   EventStreamSerdeProvider as __EventStreamSerdeProvider,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
+  SdkStreamMixinInjector as __SdkStreamMixinInjector,
   StreamCollector as __StreamCollector,
   StreamHasher as __StreamHasher,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
-import { Readable } from "stream";
+} from "@smithy/types";
+import type { Readable } from "node:stream";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultS3HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AbortMultipartUploadCommandInput,
   AbortMultipartUploadCommandOutput,
 } from "./commands/AbortMultipartUploadCommand";
-import {
+import type {
   CompleteMultipartUploadCommandInput,
   CompleteMultipartUploadCommandOutput,
 } from "./commands/CompleteMultipartUploadCommand";
-import { CopyObjectCommandInput, CopyObjectCommandOutput } from "./commands/CopyObjectCommand";
-import { CreateBucketCommandInput, CreateBucketCommandOutput } from "./commands/CreateBucketCommand";
-import {
+import type { CopyObjectCommandInput, CopyObjectCommandOutput } from "./commands/CopyObjectCommand";
+import type { CreateBucketCommandInput, CreateBucketCommandOutput } from "./commands/CreateBucketCommand";
+import type {
+  CreateBucketMetadataConfigurationCommandInput,
+  CreateBucketMetadataConfigurationCommandOutput,
+} from "./commands/CreateBucketMetadataConfigurationCommand";
+import type {
+  CreateBucketMetadataTableConfigurationCommandInput,
+  CreateBucketMetadataTableConfigurationCommandOutput,
+} from "./commands/CreateBucketMetadataTableConfigurationCommand";
+import type {
   CreateMultipartUploadCommandInput,
   CreateMultipartUploadCommandOutput,
 } from "./commands/CreateMultipartUploadCommand";
 import {
+  type CreateSessionCommandInput,
+  type CreateSessionCommandOutput,
+  CreateSessionCommand,
+} from "./commands/CreateSessionCommand";
+import type {
   DeleteBucketAnalyticsConfigurationCommandInput,
   DeleteBucketAnalyticsConfigurationCommandOutput,
 } from "./commands/DeleteBucketAnalyticsConfigurationCommand";
-import { DeleteBucketCommandInput, DeleteBucketCommandOutput } from "./commands/DeleteBucketCommand";
-import { DeleteBucketCorsCommandInput, DeleteBucketCorsCommandOutput } from "./commands/DeleteBucketCorsCommand";
-import {
+import type { DeleteBucketCommandInput, DeleteBucketCommandOutput } from "./commands/DeleteBucketCommand";
+import type { DeleteBucketCorsCommandInput, DeleteBucketCorsCommandOutput } from "./commands/DeleteBucketCorsCommand";
+import type {
   DeleteBucketEncryptionCommandInput,
   DeleteBucketEncryptionCommandOutput,
 } from "./commands/DeleteBucketEncryptionCommand";
-import {
+import type {
   DeleteBucketIntelligentTieringConfigurationCommandInput,
   DeleteBucketIntelligentTieringConfigurationCommandOutput,
 } from "./commands/DeleteBucketIntelligentTieringConfigurationCommand";
-import {
+import type {
   DeleteBucketInventoryConfigurationCommandInput,
   DeleteBucketInventoryConfigurationCommandOutput,
 } from "./commands/DeleteBucketInventoryConfigurationCommand";
-import {
+import type {
   DeleteBucketLifecycleCommandInput,
   DeleteBucketLifecycleCommandOutput,
 } from "./commands/DeleteBucketLifecycleCommand";
-import {
+import type {
+  DeleteBucketMetadataConfigurationCommandInput,
+  DeleteBucketMetadataConfigurationCommandOutput,
+} from "./commands/DeleteBucketMetadataConfigurationCommand";
+import type {
+  DeleteBucketMetadataTableConfigurationCommandInput,
+  DeleteBucketMetadataTableConfigurationCommandOutput,
+} from "./commands/DeleteBucketMetadataTableConfigurationCommand";
+import type {
   DeleteBucketMetricsConfigurationCommandInput,
   DeleteBucketMetricsConfigurationCommandOutput,
 } from "./commands/DeleteBucketMetricsConfigurationCommand";
-import {
+import type {
   DeleteBucketOwnershipControlsCommandInput,
   DeleteBucketOwnershipControlsCommandOutput,
 } from "./commands/DeleteBucketOwnershipControlsCommand";
-import { DeleteBucketPolicyCommandInput, DeleteBucketPolicyCommandOutput } from "./commands/DeleteBucketPolicyCommand";
-import {
+import type {
+  DeleteBucketPolicyCommandInput,
+  DeleteBucketPolicyCommandOutput,
+} from "./commands/DeleteBucketPolicyCommand";
+import type {
   DeleteBucketReplicationCommandInput,
   DeleteBucketReplicationCommandOutput,
 } from "./commands/DeleteBucketReplicationCommand";
-import {
+import type {
   DeleteBucketTaggingCommandInput,
   DeleteBucketTaggingCommandOutput,
 } from "./commands/DeleteBucketTaggingCommand";
-import {
+import type {
   DeleteBucketWebsiteCommandInput,
   DeleteBucketWebsiteCommandOutput,
 } from "./commands/DeleteBucketWebsiteCommand";
-import { DeleteObjectCommandInput, DeleteObjectCommandOutput } from "./commands/DeleteObjectCommand";
-import { DeleteObjectsCommandInput, DeleteObjectsCommandOutput } from "./commands/DeleteObjectsCommand";
-import {
+import type {
+  DeleteObjectAnnotationCommandInput,
+  DeleteObjectAnnotationCommandOutput,
+} from "./commands/DeleteObjectAnnotationCommand";
+import type { DeleteObjectCommandInput, DeleteObjectCommandOutput } from "./commands/DeleteObjectCommand";
+import type { DeleteObjectsCommandInput, DeleteObjectsCommandOutput } from "./commands/DeleteObjectsCommand";
+import type {
   DeleteObjectTaggingCommandInput,
   DeleteObjectTaggingCommandOutput,
 } from "./commands/DeleteObjectTaggingCommand";
-import {
+import type {
   DeletePublicAccessBlockCommandInput,
   DeletePublicAccessBlockCommandOutput,
 } from "./commands/DeletePublicAccessBlockCommand";
-import {
+import type { GetBucketAbacCommandInput, GetBucketAbacCommandOutput } from "./commands/GetBucketAbacCommand";
+import type {
   GetBucketAccelerateConfigurationCommandInput,
   GetBucketAccelerateConfigurationCommandOutput,
 } from "./commands/GetBucketAccelerateConfigurationCommand";
-import { GetBucketAclCommandInput, GetBucketAclCommandOutput } from "./commands/GetBucketAclCommand";
-import {
+import type { GetBucketAclCommandInput, GetBucketAclCommandOutput } from "./commands/GetBucketAclCommand";
+import type {
   GetBucketAnalyticsConfigurationCommandInput,
   GetBucketAnalyticsConfigurationCommandOutput,
 } from "./commands/GetBucketAnalyticsConfigurationCommand";
-import { GetBucketCorsCommandInput, GetBucketCorsCommandOutput } from "./commands/GetBucketCorsCommand";
-import {
+import type { GetBucketCorsCommandInput, GetBucketCorsCommandOutput } from "./commands/GetBucketCorsCommand";
+import type {
   GetBucketEncryptionCommandInput,
   GetBucketEncryptionCommandOutput,
 } from "./commands/GetBucketEncryptionCommand";
-import {
+import type {
   GetBucketIntelligentTieringConfigurationCommandInput,
   GetBucketIntelligentTieringConfigurationCommandOutput,
 } from "./commands/GetBucketIntelligentTieringConfigurationCommand";
-import {
+import type {
   GetBucketInventoryConfigurationCommandInput,
   GetBucketInventoryConfigurationCommandOutput,
 } from "./commands/GetBucketInventoryConfigurationCommand";
-import {
+import type {
   GetBucketLifecycleConfigurationCommandInput,
   GetBucketLifecycleConfigurationCommandOutput,
 } from "./commands/GetBucketLifecycleConfigurationCommand";
-import { GetBucketLocationCommandInput, GetBucketLocationCommandOutput } from "./commands/GetBucketLocationCommand";
-import { GetBucketLoggingCommandInput, GetBucketLoggingCommandOutput } from "./commands/GetBucketLoggingCommand";
-import {
+import type {
+  GetBucketLocationCommandInput,
+  GetBucketLocationCommandOutput,
+} from "./commands/GetBucketLocationCommand";
+import type { GetBucketLoggingCommandInput, GetBucketLoggingCommandOutput } from "./commands/GetBucketLoggingCommand";
+import type {
+  GetBucketMetadataConfigurationCommandInput,
+  GetBucketMetadataConfigurationCommandOutput,
+} from "./commands/GetBucketMetadataConfigurationCommand";
+import type {
+  GetBucketMetadataTableConfigurationCommandInput,
+  GetBucketMetadataTableConfigurationCommandOutput,
+} from "./commands/GetBucketMetadataTableConfigurationCommand";
+import type {
   GetBucketMetricsConfigurationCommandInput,
   GetBucketMetricsConfigurationCommandOutput,
 } from "./commands/GetBucketMetricsConfigurationCommand";
-import {
+import type {
   GetBucketNotificationConfigurationCommandInput,
   GetBucketNotificationConfigurationCommandOutput,
 } from "./commands/GetBucketNotificationConfigurationCommand";
-import {
+import type {
   GetBucketOwnershipControlsCommandInput,
   GetBucketOwnershipControlsCommandOutput,
 } from "./commands/GetBucketOwnershipControlsCommand";
-import { GetBucketPolicyCommandInput, GetBucketPolicyCommandOutput } from "./commands/GetBucketPolicyCommand";
-import {
+import type { GetBucketPolicyCommandInput, GetBucketPolicyCommandOutput } from "./commands/GetBucketPolicyCommand";
+import type {
   GetBucketPolicyStatusCommandInput,
   GetBucketPolicyStatusCommandOutput,
 } from "./commands/GetBucketPolicyStatusCommand";
-import {
+import type {
   GetBucketReplicationCommandInput,
   GetBucketReplicationCommandOutput,
 } from "./commands/GetBucketReplicationCommand";
-import {
+import type {
   GetBucketRequestPaymentCommandInput,
   GetBucketRequestPaymentCommandOutput,
 } from "./commands/GetBucketRequestPaymentCommand";
-import { GetBucketTaggingCommandInput, GetBucketTaggingCommandOutput } from "./commands/GetBucketTaggingCommand";
-import {
+import type { GetBucketTaggingCommandInput, GetBucketTaggingCommandOutput } from "./commands/GetBucketTaggingCommand";
+import type {
   GetBucketVersioningCommandInput,
   GetBucketVersioningCommandOutput,
 } from "./commands/GetBucketVersioningCommand";
-import { GetBucketWebsiteCommandInput, GetBucketWebsiteCommandOutput } from "./commands/GetBucketWebsiteCommand";
-import { GetObjectAclCommandInput, GetObjectAclCommandOutput } from "./commands/GetObjectAclCommand";
-import { GetObjectCommandInput, GetObjectCommandOutput } from "./commands/GetObjectCommand";
-import { GetObjectLegalHoldCommandInput, GetObjectLegalHoldCommandOutput } from "./commands/GetObjectLegalHoldCommand";
-import {
+import type { GetBucketWebsiteCommandInput, GetBucketWebsiteCommandOutput } from "./commands/GetBucketWebsiteCommand";
+import type { GetObjectAclCommandInput, GetObjectAclCommandOutput } from "./commands/GetObjectAclCommand";
+import type {
+  GetObjectAnnotationCommandInput,
+  GetObjectAnnotationCommandOutput,
+} from "./commands/GetObjectAnnotationCommand";
+import type {
+  GetObjectAttributesCommandInput,
+  GetObjectAttributesCommandOutput,
+} from "./commands/GetObjectAttributesCommand";
+import type { GetObjectCommandInput, GetObjectCommandOutput } from "./commands/GetObjectCommand";
+import type {
+  GetObjectLegalHoldCommandInput,
+  GetObjectLegalHoldCommandOutput,
+} from "./commands/GetObjectLegalHoldCommand";
+import type {
   GetObjectLockConfigurationCommandInput,
   GetObjectLockConfigurationCommandOutput,
 } from "./commands/GetObjectLockConfigurationCommand";
-import { GetObjectRetentionCommandInput, GetObjectRetentionCommandOutput } from "./commands/GetObjectRetentionCommand";
-import { GetObjectTaggingCommandInput, GetObjectTaggingCommandOutput } from "./commands/GetObjectTaggingCommand";
-import { GetObjectTorrentCommandInput, GetObjectTorrentCommandOutput } from "./commands/GetObjectTorrentCommand";
-import {
+import type {
+  GetObjectRetentionCommandInput,
+  GetObjectRetentionCommandOutput,
+} from "./commands/GetObjectRetentionCommand";
+import type { GetObjectTaggingCommandInput, GetObjectTaggingCommandOutput } from "./commands/GetObjectTaggingCommand";
+import type { GetObjectTorrentCommandInput, GetObjectTorrentCommandOutput } from "./commands/GetObjectTorrentCommand";
+import type {
   GetPublicAccessBlockCommandInput,
   GetPublicAccessBlockCommandOutput,
 } from "./commands/GetPublicAccessBlockCommand";
-import { HeadBucketCommandInput, HeadBucketCommandOutput } from "./commands/HeadBucketCommand";
-import { HeadObjectCommandInput, HeadObjectCommandOutput } from "./commands/HeadObjectCommand";
-import {
+import type { HeadBucketCommandInput, HeadBucketCommandOutput } from "./commands/HeadBucketCommand";
+import type { HeadObjectCommandInput, HeadObjectCommandOutput } from "./commands/HeadObjectCommand";
+import type {
   ListBucketAnalyticsConfigurationsCommandInput,
   ListBucketAnalyticsConfigurationsCommandOutput,
 } from "./commands/ListBucketAnalyticsConfigurationsCommand";
-import {
+import type {
   ListBucketIntelligentTieringConfigurationsCommandInput,
   ListBucketIntelligentTieringConfigurationsCommandOutput,
 } from "./commands/ListBucketIntelligentTieringConfigurationsCommand";
-import {
+import type {
   ListBucketInventoryConfigurationsCommandInput,
   ListBucketInventoryConfigurationsCommandOutput,
 } from "./commands/ListBucketInventoryConfigurationsCommand";
-import {
+import type {
   ListBucketMetricsConfigurationsCommandInput,
   ListBucketMetricsConfigurationsCommandOutput,
 } from "./commands/ListBucketMetricsConfigurationsCommand";
-import { ListBucketsCommandInput, ListBucketsCommandOutput } from "./commands/ListBucketsCommand";
-import {
+import type { ListBucketsCommandInput, ListBucketsCommandOutput } from "./commands/ListBucketsCommand";
+import type {
+  ListDirectoryBucketsCommandInput,
+  ListDirectoryBucketsCommandOutput,
+} from "./commands/ListDirectoryBucketsCommand";
+import type {
   ListMultipartUploadsCommandInput,
   ListMultipartUploadsCommandOutput,
 } from "./commands/ListMultipartUploadsCommand";
-import { ListObjectsCommandInput, ListObjectsCommandOutput } from "./commands/ListObjectsCommand";
-import { ListObjectsV2CommandInput, ListObjectsV2CommandOutput } from "./commands/ListObjectsV2Command";
-import { ListObjectVersionsCommandInput, ListObjectVersionsCommandOutput } from "./commands/ListObjectVersionsCommand";
-import { ListPartsCommandInput, ListPartsCommandOutput } from "./commands/ListPartsCommand";
-import {
+import type {
+  ListObjectAnnotationsCommandInput,
+  ListObjectAnnotationsCommandOutput,
+} from "./commands/ListObjectAnnotationsCommand";
+import type { ListObjectsCommandInput, ListObjectsCommandOutput } from "./commands/ListObjectsCommand";
+import type { ListObjectsV2CommandInput, ListObjectsV2CommandOutput } from "./commands/ListObjectsV2Command";
+import type {
+  ListObjectVersionsCommandInput,
+  ListObjectVersionsCommandOutput,
+} from "./commands/ListObjectVersionsCommand";
+import type { ListPartsCommandInput, ListPartsCommandOutput } from "./commands/ListPartsCommand";
+import type { PutBucketAbacCommandInput, PutBucketAbacCommandOutput } from "./commands/PutBucketAbacCommand";
+import type {
   PutBucketAccelerateConfigurationCommandInput,
   PutBucketAccelerateConfigurationCommandOutput,
 } from "./commands/PutBucketAccelerateConfigurationCommand";
-import { PutBucketAclCommandInput, PutBucketAclCommandOutput } from "./commands/PutBucketAclCommand";
-import {
+import type { PutBucketAclCommandInput, PutBucketAclCommandOutput } from "./commands/PutBucketAclCommand";
+import type {
   PutBucketAnalyticsConfigurationCommandInput,
   PutBucketAnalyticsConfigurationCommandOutput,
 } from "./commands/PutBucketAnalyticsConfigurationCommand";
-import { PutBucketCorsCommandInput, PutBucketCorsCommandOutput } from "./commands/PutBucketCorsCommand";
-import {
+import type { PutBucketCorsCommandInput, PutBucketCorsCommandOutput } from "./commands/PutBucketCorsCommand";
+import type {
   PutBucketEncryptionCommandInput,
   PutBucketEncryptionCommandOutput,
 } from "./commands/PutBucketEncryptionCommand";
-import {
+import type {
   PutBucketIntelligentTieringConfigurationCommandInput,
   PutBucketIntelligentTieringConfigurationCommandOutput,
 } from "./commands/PutBucketIntelligentTieringConfigurationCommand";
-import {
+import type {
   PutBucketInventoryConfigurationCommandInput,
   PutBucketInventoryConfigurationCommandOutput,
 } from "./commands/PutBucketInventoryConfigurationCommand";
-import {
+import type {
   PutBucketLifecycleConfigurationCommandInput,
   PutBucketLifecycleConfigurationCommandOutput,
 } from "./commands/PutBucketLifecycleConfigurationCommand";
-import { PutBucketLoggingCommandInput, PutBucketLoggingCommandOutput } from "./commands/PutBucketLoggingCommand";
-import {
+import type { PutBucketLoggingCommandInput, PutBucketLoggingCommandOutput } from "./commands/PutBucketLoggingCommand";
+import type {
   PutBucketMetricsConfigurationCommandInput,
   PutBucketMetricsConfigurationCommandOutput,
 } from "./commands/PutBucketMetricsConfigurationCommand";
-import {
+import type {
   PutBucketNotificationConfigurationCommandInput,
   PutBucketNotificationConfigurationCommandOutput,
 } from "./commands/PutBucketNotificationConfigurationCommand";
-import {
+import type {
   PutBucketOwnershipControlsCommandInput,
   PutBucketOwnershipControlsCommandOutput,
 } from "./commands/PutBucketOwnershipControlsCommand";
-import { PutBucketPolicyCommandInput, PutBucketPolicyCommandOutput } from "./commands/PutBucketPolicyCommand";
-import {
+import type { PutBucketPolicyCommandInput, PutBucketPolicyCommandOutput } from "./commands/PutBucketPolicyCommand";
+import type {
   PutBucketReplicationCommandInput,
   PutBucketReplicationCommandOutput,
 } from "./commands/PutBucketReplicationCommand";
-import {
+import type {
   PutBucketRequestPaymentCommandInput,
   PutBucketRequestPaymentCommandOutput,
 } from "./commands/PutBucketRequestPaymentCommand";
-import { PutBucketTaggingCommandInput, PutBucketTaggingCommandOutput } from "./commands/PutBucketTaggingCommand";
-import {
+import type { PutBucketTaggingCommandInput, PutBucketTaggingCommandOutput } from "./commands/PutBucketTaggingCommand";
+import type {
   PutBucketVersioningCommandInput,
   PutBucketVersioningCommandOutput,
 } from "./commands/PutBucketVersioningCommand";
-import { PutBucketWebsiteCommandInput, PutBucketWebsiteCommandOutput } from "./commands/PutBucketWebsiteCommand";
-import { PutObjectAclCommandInput, PutObjectAclCommandOutput } from "./commands/PutObjectAclCommand";
-import { PutObjectCommandInput, PutObjectCommandOutput } from "./commands/PutObjectCommand";
-import { PutObjectLegalHoldCommandInput, PutObjectLegalHoldCommandOutput } from "./commands/PutObjectLegalHoldCommand";
-import {
+import type { PutBucketWebsiteCommandInput, PutBucketWebsiteCommandOutput } from "./commands/PutBucketWebsiteCommand";
+import type { PutObjectAclCommandInput, PutObjectAclCommandOutput } from "./commands/PutObjectAclCommand";
+import type {
+  PutObjectAnnotationCommandInput,
+  PutObjectAnnotationCommandOutput,
+} from "./commands/PutObjectAnnotationCommand";
+import type { PutObjectCommandInput, PutObjectCommandOutput } from "./commands/PutObjectCommand";
+import type {
+  PutObjectLegalHoldCommandInput,
+  PutObjectLegalHoldCommandOutput,
+} from "./commands/PutObjectLegalHoldCommand";
+import type {
   PutObjectLockConfigurationCommandInput,
   PutObjectLockConfigurationCommandOutput,
 } from "./commands/PutObjectLockConfigurationCommand";
-import { PutObjectRetentionCommandInput, PutObjectRetentionCommandOutput } from "./commands/PutObjectRetentionCommand";
-import { PutObjectTaggingCommandInput, PutObjectTaggingCommandOutput } from "./commands/PutObjectTaggingCommand";
-import {
+import type {
+  PutObjectRetentionCommandInput,
+  PutObjectRetentionCommandOutput,
+} from "./commands/PutObjectRetentionCommand";
+import type { PutObjectTaggingCommandInput, PutObjectTaggingCommandOutput } from "./commands/PutObjectTaggingCommand";
+import type {
   PutPublicAccessBlockCommandInput,
   PutPublicAccessBlockCommandOutput,
 } from "./commands/PutPublicAccessBlockCommand";
-import { RestoreObjectCommandInput, RestoreObjectCommandOutput } from "./commands/RestoreObjectCommand";
-import {
+import type { RenameObjectCommandInput, RenameObjectCommandOutput } from "./commands/RenameObjectCommand";
+import type { RestoreObjectCommandInput, RestoreObjectCommandOutput } from "./commands/RestoreObjectCommand";
+import type {
   SelectObjectContentCommandInput,
   SelectObjectContentCommandOutput,
 } from "./commands/SelectObjectContentCommand";
-import { UploadPartCommandInput, UploadPartCommandOutput } from "./commands/UploadPartCommand";
-import { UploadPartCopyCommandInput, UploadPartCopyCommandOutput } from "./commands/UploadPartCopyCommand";
-import {
+import type {
+  UpdateBucketMetadataAnnotationTableConfigurationCommandInput,
+  UpdateBucketMetadataAnnotationTableConfigurationCommandOutput,
+} from "./commands/UpdateBucketMetadataAnnotationTableConfigurationCommand";
+import type {
+  UpdateBucketMetadataInventoryTableConfigurationCommandInput,
+  UpdateBucketMetadataInventoryTableConfigurationCommandOutput,
+} from "./commands/UpdateBucketMetadataInventoryTableConfigurationCommand";
+import type {
+  UpdateBucketMetadataJournalTableConfigurationCommandInput,
+  UpdateBucketMetadataJournalTableConfigurationCommandOutput,
+} from "./commands/UpdateBucketMetadataJournalTableConfigurationCommand";
+import type {
+  UpdateObjectEncryptionCommandInput,
+  UpdateObjectEncryptionCommandOutput,
+} from "./commands/UpdateObjectEncryptionCommand";
+import type { UploadPartCommandInput, UploadPartCommandOutput } from "./commands/UploadPartCommand";
+import type { UploadPartCopyCommandInput, UploadPartCopyCommandOutput } from "./commands/UploadPartCopyCommand";
+import type {
   WriteGetObjectResponseCommandInput,
   WriteGetObjectResponseCommandOutput,
 } from "./commands/WriteGetObjectResponseCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AbortMultipartUploadCommandInput
   | CompleteMultipartUploadCommandInput
   | CopyObjectCommandInput
   | CreateBucketCommandInput
+  | CreateBucketMetadataConfigurationCommandInput
+  | CreateBucketMetadataTableConfigurationCommandInput
   | CreateMultipartUploadCommandInput
+  | CreateSessionCommandInput
   | DeleteBucketAnalyticsConfigurationCommandInput
   | DeleteBucketCommandInput
   | DeleteBucketCorsCommandInput
@@ -324,16 +448,20 @@ export type ServiceInputTypes =
   | DeleteBucketIntelligentTieringConfigurationCommandInput
   | DeleteBucketInventoryConfigurationCommandInput
   | DeleteBucketLifecycleCommandInput
+  | DeleteBucketMetadataConfigurationCommandInput
+  | DeleteBucketMetadataTableConfigurationCommandInput
   | DeleteBucketMetricsConfigurationCommandInput
   | DeleteBucketOwnershipControlsCommandInput
   | DeleteBucketPolicyCommandInput
   | DeleteBucketReplicationCommandInput
   | DeleteBucketTaggingCommandInput
   | DeleteBucketWebsiteCommandInput
+  | DeleteObjectAnnotationCommandInput
   | DeleteObjectCommandInput
   | DeleteObjectTaggingCommandInput
   | DeleteObjectsCommandInput
   | DeletePublicAccessBlockCommandInput
+  | GetBucketAbacCommandInput
   | GetBucketAccelerateConfigurationCommandInput
   | GetBucketAclCommandInput
   | GetBucketAnalyticsConfigurationCommandInput
@@ -344,6 +472,8 @@ export type ServiceInputTypes =
   | GetBucketLifecycleConfigurationCommandInput
   | GetBucketLocationCommandInput
   | GetBucketLoggingCommandInput
+  | GetBucketMetadataConfigurationCommandInput
+  | GetBucketMetadataTableConfigurationCommandInput
   | GetBucketMetricsConfigurationCommandInput
   | GetBucketNotificationConfigurationCommandInput
   | GetBucketOwnershipControlsCommandInput
@@ -355,6 +485,8 @@ export type ServiceInputTypes =
   | GetBucketVersioningCommandInput
   | GetBucketWebsiteCommandInput
   | GetObjectAclCommandInput
+  | GetObjectAnnotationCommandInput
+  | GetObjectAttributesCommandInput
   | GetObjectCommandInput
   | GetObjectLegalHoldCommandInput
   | GetObjectLockConfigurationCommandInput
@@ -369,11 +501,14 @@ export type ServiceInputTypes =
   | ListBucketInventoryConfigurationsCommandInput
   | ListBucketMetricsConfigurationsCommandInput
   | ListBucketsCommandInput
+  | ListDirectoryBucketsCommandInput
   | ListMultipartUploadsCommandInput
+  | ListObjectAnnotationsCommandInput
   | ListObjectVersionsCommandInput
   | ListObjectsCommandInput
   | ListObjectsV2CommandInput
   | ListPartsCommandInput
+  | PutBucketAbacCommandInput
   | PutBucketAccelerateConfigurationCommandInput
   | PutBucketAclCommandInput
   | PutBucketAnalyticsConfigurationCommandInput
@@ -393,24 +528,36 @@ export type ServiceInputTypes =
   | PutBucketVersioningCommandInput
   | PutBucketWebsiteCommandInput
   | PutObjectAclCommandInput
+  | PutObjectAnnotationCommandInput
   | PutObjectCommandInput
   | PutObjectLegalHoldCommandInput
   | PutObjectLockConfigurationCommandInput
   | PutObjectRetentionCommandInput
   | PutObjectTaggingCommandInput
   | PutPublicAccessBlockCommandInput
+  | RenameObjectCommandInput
   | RestoreObjectCommandInput
   | SelectObjectContentCommandInput
+  | UpdateBucketMetadataAnnotationTableConfigurationCommandInput
+  | UpdateBucketMetadataInventoryTableConfigurationCommandInput
+  | UpdateBucketMetadataJournalTableConfigurationCommandInput
+  | UpdateObjectEncryptionCommandInput
   | UploadPartCommandInput
   | UploadPartCopyCommandInput
   | WriteGetObjectResponseCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AbortMultipartUploadCommandOutput
   | CompleteMultipartUploadCommandOutput
   | CopyObjectCommandOutput
   | CreateBucketCommandOutput
+  | CreateBucketMetadataConfigurationCommandOutput
+  | CreateBucketMetadataTableConfigurationCommandOutput
   | CreateMultipartUploadCommandOutput
+  | CreateSessionCommandOutput
   | DeleteBucketAnalyticsConfigurationCommandOutput
   | DeleteBucketCommandOutput
   | DeleteBucketCorsCommandOutput
@@ -418,16 +565,20 @@ export type ServiceOutputTypes =
   | DeleteBucketIntelligentTieringConfigurationCommandOutput
   | DeleteBucketInventoryConfigurationCommandOutput
   | DeleteBucketLifecycleCommandOutput
+  | DeleteBucketMetadataConfigurationCommandOutput
+  | DeleteBucketMetadataTableConfigurationCommandOutput
   | DeleteBucketMetricsConfigurationCommandOutput
   | DeleteBucketOwnershipControlsCommandOutput
   | DeleteBucketPolicyCommandOutput
   | DeleteBucketReplicationCommandOutput
   | DeleteBucketTaggingCommandOutput
   | DeleteBucketWebsiteCommandOutput
+  | DeleteObjectAnnotationCommandOutput
   | DeleteObjectCommandOutput
   | DeleteObjectTaggingCommandOutput
   | DeleteObjectsCommandOutput
   | DeletePublicAccessBlockCommandOutput
+  | GetBucketAbacCommandOutput
   | GetBucketAccelerateConfigurationCommandOutput
   | GetBucketAclCommandOutput
   | GetBucketAnalyticsConfigurationCommandOutput
@@ -438,6 +589,8 @@ export type ServiceOutputTypes =
   | GetBucketLifecycleConfigurationCommandOutput
   | GetBucketLocationCommandOutput
   | GetBucketLoggingCommandOutput
+  | GetBucketMetadataConfigurationCommandOutput
+  | GetBucketMetadataTableConfigurationCommandOutput
   | GetBucketMetricsConfigurationCommandOutput
   | GetBucketNotificationConfigurationCommandOutput
   | GetBucketOwnershipControlsCommandOutput
@@ -449,6 +602,8 @@ export type ServiceOutputTypes =
   | GetBucketVersioningCommandOutput
   | GetBucketWebsiteCommandOutput
   | GetObjectAclCommandOutput
+  | GetObjectAnnotationCommandOutput
+  | GetObjectAttributesCommandOutput
   | GetObjectCommandOutput
   | GetObjectLegalHoldCommandOutput
   | GetObjectLockConfigurationCommandOutput
@@ -463,11 +618,14 @@ export type ServiceOutputTypes =
   | ListBucketInventoryConfigurationsCommandOutput
   | ListBucketMetricsConfigurationsCommandOutput
   | ListBucketsCommandOutput
+  | ListDirectoryBucketsCommandOutput
   | ListMultipartUploadsCommandOutput
+  | ListObjectAnnotationsCommandOutput
   | ListObjectVersionsCommandOutput
   | ListObjectsCommandOutput
   | ListObjectsV2CommandOutput
   | ListPartsCommandOutput
+  | PutBucketAbacCommandOutput
   | PutBucketAccelerateConfigurationCommandOutput
   | PutBucketAclCommandOutput
   | PutBucketAnalyticsConfigurationCommandOutput
@@ -487,30 +645,39 @@ export type ServiceOutputTypes =
   | PutBucketVersioningCommandOutput
   | PutBucketWebsiteCommandOutput
   | PutObjectAclCommandOutput
+  | PutObjectAnnotationCommandOutput
   | PutObjectCommandOutput
   | PutObjectLegalHoldCommandOutput
   | PutObjectLockConfigurationCommandOutput
   | PutObjectRetentionCommandOutput
   | PutObjectTaggingCommandOutput
   | PutPublicAccessBlockCommandOutput
+  | RenameObjectCommandOutput
   | RestoreObjectCommandOutput
   | SelectObjectContentCommandOutput
+  | UpdateBucketMetadataAnnotationTableConfigurationCommandOutput
+  | UpdateBucketMetadataInventoryTableConfigurationCommandOutput
+  | UpdateBucketMetadataJournalTableConfigurationCommandOutput
+  | UpdateObjectEncryptionCommandOutput
   | UploadPartCommandOutput
   | UploadPartCopyCommandOutput
   | WriteGetObjectResponseCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -522,7 +689,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -561,25 +728,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -592,47 +750,34 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+  profile?: string;
 
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
-
-  /**
-   * Whether to escape request path when signing the request.
-   */
-  signingEscapePath?: boolean;
-
-  /**
-   * Whether to override the request region with the region inferred from requested resource's ARN. Defaults to false.
-   */
-  useArnRegion?: boolean | Provider<boolean>;
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
-
-  /**
-   * The function that provides necessary utilities for generating and parsing event stream
-   */
-  eventStreamSerdeProvider?: __EventStreamSerdeProvider;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
    * A function that, given a hash constructor and a stream, calculates the
@@ -642,45 +787,145 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   streamHasher?: __StreamHasher<Readable> | __StreamHasher<Blob>;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link __Checksum} interface
    * that computes MD5 hashes.
    * @internal
    */
-  md5?: __HashConstructor;
+  md5?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * A constructor for a class implementing the {@link __Checksum} interface
+   * that computes SHA1 hashes.
+   * @internal
+   */
+  sha1?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * A function that returns Readable Stream which follows aws-chunked encoding stream.
+   * @internal
+   */
+  getAwsChunkedEncodingStream?: GetAwsChunkedEncodingStream;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The function that provides necessary utilities for generating and parsing event stream
+   */
+  eventStreamSerdeProvider?: __EventStreamSerdeProvider;
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+  /**
+   * Whether to escape request path when signing the request.
+   */
+  signingEscapePath?: boolean;
+
+  /**
+   * Whether to override the request region with the region inferred from requested resource's ARN. Defaults to undefined.
+   */
+  useArnRegion?: boolean | undefined | __Provider<boolean | undefined>;
+  /**
+   * The internal function that inject utilities to runtime-specific stream to help users consume the data
+   * @internal
+   */
+  sdkStreamMixin?: __SdkStreamMixinInjector;
+
 }
 
-type S3ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  BucketEndpointInputConfig &
-  UserAgentInputConfig &
-  EventStreamSerdeInputConfig;
 /**
- * The configuration interface of S3Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type S3ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  FlexibleChecksumsInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  EventStreamSerdeInputConfig &
+  HttpAuthSchemeInputConfig &
+  S3InputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of S3Client class constructor that set the region, credentials and other options.
  */
 export interface S3ClientConfig extends S3ClientConfigType {}
 
-type S3ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  BucketEndpointResolvedConfig &
-  UserAgentResolvedConfig &
-  EventStreamSerdeResolvedConfig;
 /**
- * The resolved configuration interface of S3Client class. This is resolved and normalized from the {@link S3ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type S3ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  FlexibleChecksumsResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  EventStreamSerdeResolvedConfig &
+  HttpAuthSchemeResolvedConfig &
+  S3ResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of S3Client class. This is resolved and normalized from the {@link S3ClientConfig | constructor configuration interface}.
  */
 export interface S3ClientResolvedConfig extends S3ClientResolvedConfigType {}
 
 /**
- * <p></p>
+ * <note>
+ *             <p>For information about using the Amazon S3 API—including authentication, signing requests, code examples, and error handling—see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/developerguide/Welcome.html">Amazon S3 Developer Guide</a>.</p>
+ *          </note>
+ *          <p>Welcome to the <i>Amazon S3 API Reference</i>. This guide explains the Amazon Simple Storage Service (Amazon S3)
+ *       application programming interface (API).</p>
+ *          <p>Welcome to the <i>Amazon S3 API Reference</i>. This guide explains the Amazon Simple Storage Service (Amazon S3)
+ *       application programming interface (API).</p>
+ *          <p>You can use any toolkit that supports HTTP to use the REST API. You can even use a browser
+ *       to fetch objects, as long as they are anonymously readable.</p>
+ *          <p>The REST API uses the standard HTTP headers and status codes, so that standard browsers and toolkits work as expected. In some areas, we have added functionality to HTTP (for example, we added headers to support access control). In these cases, we have done our best to add the new functionality in a way that matched the style of standard HTTP usage.</p>
+ *          <p>The current version of the Amazon S3 API is <code>2006-03-01</code>.</p>
+ *          <p>Amazon S3 supports the REST API.</p>
+ *          <note>
+ *             <p>Support for SOAP over HTTP is deprecated, but it is still available over HTTPS.
+ *         However, new Amazon S3 features will not be supported for SOAP. We recommend that
+ *         you use either this REST API or the Amazon Web Services SDKs.</p>
+ *          </note>
+ * @public
  */
 export class S3Client extends __Client<
   __HttpHandlerOptions,
@@ -693,27 +938,45 @@ export class S3Client extends __Client<
    */
   readonly config: S3ClientResolvedConfig;
 
-  constructor(configuration: S3ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
-    const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveBucketEndpointConfig(_config_5);
-    const _config_7 = resolveUserAgentConfig(_config_6);
+  constructor(...[configuration]: __CheckOptionalClientConfig<S3ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveFlexibleChecksumsConfig(_config_2);
+    const _config_4 = resolveRetryConfig(_config_3);
+    const _config_5 = resolveRegionConfig(_config_4);
+    const _config_6 = resolveHostHeaderConfig(_config_5);
+    const _config_7 = resolveEndpointConfig(_config_6);
     const _config_8 = resolveEventStreamSerdeConfig(_config_7);
-    super(_config_8);
-    this.config = _config_8;
+    const _config_9 = resolveHttpAuthSchemeConfig(_config_8);
+    const _config_10 = resolveS3Config(_config_9, { session: [() => this, CreateSessionCommand] });
+    const _config_11 = resolveRuntimeExtensions(_config_10, configuration?.extensions || []);
+    this.config = _config_11;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultS3HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: S3ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+            "aws.auth#sigv4a": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
     this.middlewareStack.use(getValidateBucketNamePlugin(this.config));
-    this.middlewareStack.use(getUseRegionalEndpointPlugin(this.config));
     this.middlewareStack.use(getAddExpectContinuePlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRegionRedirectMiddlewarePlugin(this.config));
+    this.middlewareStack.use(getS3ExpressPlugin(this.config));
+    this.middlewareStack.use(getS3ExpressHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,98 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { CreateMissionProfileRequest, MissionProfileIdResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateMissionProfileCommand,
-  serializeAws_restJson1CreateMissionProfileCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateMissionProfileRequest, MissionProfileIdResponse } from "../models/models_0";
+import { CreateMissionProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateMissionProfileCommand}.
+ */
 export interface CreateMissionProfileCommandInput extends CreateMissionProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateMissionProfileCommand}.
+ */
 export interface CreateMissionProfileCommandOutput extends MissionProfileIdResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a mission profile.</p>
- *          <p>
- *             <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings
- *          has two elements: a <i>from</i> ARN and a <i>to</i> ARN.</p>
+ * <p>Creates a mission profile.</p> <p> <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings has two elements: a <i>from</i> ARN and a <i>to</i> ARN.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GroundStationClient, CreateMissionProfileCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, CreateMissionProfileCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // CreateMissionProfileRequest
+ *   name: "STRING_VALUE", // required
+ *   contactPrePassDurationSeconds: Number("int"),
+ *   contactPostPassDurationSeconds: Number("int"),
+ *   minimumViableContactDurationSeconds: Number("int"), // required
+ *   dataflowEdges: [ // DataflowEdgeList // required
+ *     [ // DataflowEdge
+ *       "STRING_VALUE",
+ *     ],
+ *   ],
+ *   trackingConfigArn: "STRING_VALUE", // required
+ *   telemetrySinkConfigArn: "STRING_VALUE",
+ *   tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   streamsKmsKey: { // KmsKey Union: only one key present
+ *     kmsKeyArn: "STRING_VALUE",
+ *     kmsAliasArn: "STRING_VALUE",
+ *     kmsAliasName: "STRING_VALUE",
+ *   },
+ *   streamsKmsRole: "STRING_VALUE",
+ * };
  * const command = new CreateMissionProfileCommand(input);
  * const response = await client.send(command);
+ * // { // MissionProfileIdResponse
+ * //   missionProfileId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateMissionProfileCommandInput - {@link CreateMissionProfileCommandInput}
+ * @returns {@link CreateMissionProfileCommandOutput}
  * @see {@link CreateMissionProfileCommandInput} for command's `input` shape.
  * @see {@link CreateMissionProfileCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class CreateMissionProfileCommand extends $Command<
-  CreateMissionProfileCommandInput,
-  CreateMissionProfileCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateMissionProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateMissionProfileCommandInput, CreateMissionProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "CreateMissionProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateMissionProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: MissionProfileIdResponse.filterSensitiveLog,
+export class CreateMissionProfileCommand extends command<CreateMissionProfileCommandInput, CreateMissionProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateMissionProfile",
+  CreateMissionProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMissionProfileRequest;
+      output: MissionProfileIdResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateMissionProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateMissionProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateMissionProfileCommandOutput> {
-    return deserializeAws_restJson1CreateMissionProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateMissionProfileCommandInput;
+      output: CreateMissionProfileCommandOutput;
+    };
+  };
 }

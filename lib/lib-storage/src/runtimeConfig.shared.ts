@@ -1,6 +1,9 @@
 /**
  * @internal
  */
-export const ClientSharedValues = {
-  lstatSync: () => {},
+export const runtimeConfigShared = {
+  statSync: () => {},
+  isFileReadStream(f: unknown) {
+    return false;
+  },
 };

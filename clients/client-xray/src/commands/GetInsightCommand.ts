@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetInsightRequest, GetInsightResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetInsightCommand,
-  serializeAws_restJson1GetInsightCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, XRayClientResolvedConfig } from "../XRayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInsightRequest, GetInsightResult } from "../models/models_0";
+import { GetInsight$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInsightCommand}.
+ */
 export interface GetInsightCommandInput extends GetInsightRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInsightCommand}.
+ */
 export interface GetInsightCommandOutput extends GetInsightResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,94 @@ export interface GetInsightCommandOutput extends GetInsightResult, __MetadataBea
  * ```javascript
  * import { XRayClient, GetInsightCommand } from "@aws-sdk/client-xray"; // ES Modules import
  * // const { XRayClient, GetInsightCommand } = require("@aws-sdk/client-xray"); // CommonJS import
+ * // import type { XRayClientConfig } from "@aws-sdk/client-xray";
+ * const config = {}; // type is XRayClientConfig
  * const client = new XRayClient(config);
+ * const input = { // GetInsightRequest
+ *   InsightId: "STRING_VALUE", // required
+ * };
  * const command = new GetInsightCommand(input);
  * const response = await client.send(command);
+ * // { // GetInsightResult
+ * //   Insight: { // Insight
+ * //     InsightId: "STRING_VALUE",
+ * //     GroupARN: "STRING_VALUE",
+ * //     GroupName: "STRING_VALUE",
+ * //     RootCauseServiceId: { // ServiceId
+ * //       Name: "STRING_VALUE",
+ * //       Names: [ // ServiceNames
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AccountId: "STRING_VALUE",
+ * //       Type: "STRING_VALUE",
+ * //     },
+ * //     Categories: [ // InsightCategoryList
+ * //       "FAULT",
+ * //     ],
+ * //     State: "ACTIVE" || "CLOSED",
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     EndTime: new Date("TIMESTAMP"),
+ * //     Summary: "STRING_VALUE",
+ * //     ClientRequestImpactStatistics: { // RequestImpactStatistics
+ * //       FaultCount: Number("long"),
+ * //       OkCount: Number("long"),
+ * //       TotalCount: Number("long"),
+ * //     },
+ * //     RootCauseServiceRequestImpactStatistics: {
+ * //       FaultCount: Number("long"),
+ * //       OkCount: Number("long"),
+ * //       TotalCount: Number("long"),
+ * //     },
+ * //     TopAnomalousServices: [ // AnomalousServiceList
+ * //       { // AnomalousService
+ * //         ServiceId: {
+ * //           Name: "STRING_VALUE",
+ * //           Names: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           AccountId: "STRING_VALUE",
+ * //           Type: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetInsightCommandInput - {@link GetInsightCommandInput}
+ * @returns {@link GetInsightCommandOutput}
  * @see {@link GetInsightCommandInput} for command's `input` shape.
  * @see {@link GetInsightCommandOutput} for command's `response` shape.
- * @see {@link XRayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link XRayClientResolvedConfig | config} for XRayClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is missing required parameters or has invalid parameters.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>The request exceeds the maximum number of requests per second.</p>
+ *
+ * @throws {@link XRayServiceException}
+ * <p>Base exception class for all service exceptions from XRay service.</p>
+ *
+ *
+ * @public
  */
-export class GetInsightCommand extends $Command<
-  GetInsightCommandInput,
-  GetInsightCommandOutput,
-  XRayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInsightCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: XRayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInsightCommandInput, GetInsightCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "XRayClient";
-    const commandName = "GetInsightCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInsightRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetInsightResult.filterSensitiveLog,
+export class GetInsightCommand extends command<GetInsightCommandInput, GetInsightCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInsight",
+  GetInsight$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInsightRequest;
+      output: GetInsightResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetInsightCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetInsightCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetInsightCommandOutput> {
-    return deserializeAws_restJson1GetInsightCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInsightCommandInput;
+      output: GetInsightCommandOutput;
+    };
+  };
 }

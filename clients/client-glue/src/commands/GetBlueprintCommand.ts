@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetBlueprintRequest, GetBlueprintResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetBlueprintCommand,
-  serializeAws_json1_1GetBlueprintCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetBlueprintRequest, GetBlueprintResponse } from "../models/models_1";
+import { GetBlueprint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBlueprintCommand}.
+ */
 export interface GetBlueprintCommandInput extends GetBlueprintRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBlueprintCommand}.
+ */
 export interface GetBlueprintCommandOutput extends GetBlueprintResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface GetBlueprintCommandOutput extends GetBlueprintResponse, __Metad
  * ```javascript
  * import { GlueClient, GetBlueprintCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetBlueprintCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetBlueprintRequest
+ *   Name: "STRING_VALUE", // required
+ *   IncludeBlueprint: true || false,
+ *   IncludeParameterSpec: true || false,
+ * };
  * const command = new GetBlueprintCommand(input);
  * const response = await client.send(command);
+ * // { // GetBlueprintResponse
+ * //   Blueprint: { // Blueprint
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     CreatedOn: new Date("TIMESTAMP"),
+ * //     LastModifiedOn: new Date("TIMESTAMP"),
+ * //     ParameterSpec: "STRING_VALUE",
+ * //     BlueprintLocation: "STRING_VALUE",
+ * //     BlueprintServiceLocation: "STRING_VALUE",
+ * //     Status: "CREATING" || "ACTIVE" || "UPDATING" || "FAILED",
+ * //     ErrorMessage: "STRING_VALUE",
+ * //     LastActiveDefinition: { // LastActiveDefinition
+ * //       Description: "STRING_VALUE",
+ * //       LastModifiedOn: new Date("TIMESTAMP"),
+ * //       ParameterSpec: "STRING_VALUE",
+ * //       BlueprintLocation: "STRING_VALUE",
+ * //       BlueprintServiceLocation: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetBlueprintCommandInput - {@link GetBlueprintCommandInput}
+ * @returns {@link GetBlueprintCommandOutput}
  * @see {@link GetBlueprintCommandInput} for command's `input` shape.
  * @see {@link GetBlueprintCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetBlueprintCommand extends $Command<
-  GetBlueprintCommandInput,
-  GetBlueprintCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBlueprintCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBlueprintCommandInput, GetBlueprintCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetBlueprintCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBlueprintRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBlueprintResponse.filterSensitiveLog,
+export class GetBlueprintCommand extends command<GetBlueprintCommandInput, GetBlueprintCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBlueprint",
+  GetBlueprint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBlueprintRequest;
+      output: GetBlueprintResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBlueprintCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetBlueprintCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBlueprintCommandOutput> {
-    return deserializeAws_json1_1GetBlueprintCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBlueprintCommandInput;
+      output: GetBlueprintCommandOutput;
+    };
+  };
 }

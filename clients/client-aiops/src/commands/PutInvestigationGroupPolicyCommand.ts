@@ -1,0 +1,97 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutInvestigationGroupPolicyRequest, PutInvestigationGroupPolicyResponse } from "../models/models_0";
+import { PutInvestigationGroupPolicy$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutInvestigationGroupPolicyCommand}.
+ */
+export interface PutInvestigationGroupPolicyCommandInput extends PutInvestigationGroupPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutInvestigationGroupPolicyCommand}.
+ */
+export interface PutInvestigationGroupPolicyCommandOutput extends PutInvestigationGroupPolicyResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates an IAM resource policy and assigns it to the specified investigation group.</p> <p>If you create your investigation group with <code>CreateInvestigationGroup</code> and you want to enable CloudWatch alarms to create investigations and add events to investigations, you must use this operation to create a policy similar to this example.</p> <p> <code> \{ "Version": "2008-10-17", "Statement": [ \{ "Effect": "Allow", "Principal": \{ "Service": "aiops.alarms.cloudwatch.amazonaws.com" \}, "Action": [ "aiops:CreateInvestigation", "aiops:CreateInvestigationEvent" ], "Resource": "*", "Condition": \{ "StringEquals": \{ "aws:SourceAccount": "account-id" \}, "ArnLike": \{ "aws:SourceArn": "arn:aws:cloudwatch:region:account-id:alarm:*" \} \} \} ] \} </code> </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AIOpsClient, PutInvestigationGroupPolicyCommand } from "@aws-sdk/client-aiops"; // ES Modules import
+ * // const { AIOpsClient, PutInvestigationGroupPolicyCommand } = require("@aws-sdk/client-aiops"); // CommonJS import
+ * // import type { AIOpsClientConfig } from "@aws-sdk/client-aiops";
+ * const config = {}; // type is AIOpsClientConfig
+ * const client = new AIOpsClient(config);
+ * const input = { // PutInvestigationGroupPolicyRequest
+ *   identifier: "STRING_VALUE", // required
+ *   policy: "STRING_VALUE", // required
+ * };
+ * const command = new PutInvestigationGroupPolicyCommand(input);
+ * const response = await client.send(command);
+ * // { // PutInvestigationGroupPolicyResponse
+ * //   investigationGroupArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param PutInvestigationGroupPolicyCommandInput - {@link PutInvestigationGroupPolicyCommandInput}
+ * @returns {@link PutInvestigationGroupPolicyCommandOutput}
+ * @see {@link PutInvestigationGroupPolicyCommandInput} for command's `input` shape.
+ * @see {@link PutInvestigationGroupPolicyCommandOutput} for command's `response` shape.
+ * @see {@link AIOpsClientResolvedConfig | config} for AIOpsClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>This operation couldn't be completed because of a conflict in resource states.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. You can try again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled because of quota limits. You can try again later.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This operation or its parameters aren't formatted correctly.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Access id denied for this operation, or this operation is not valid for the specified resource.</p>
+ *
+ * @throws {@link AIOpsServiceException}
+ * <p>Base exception class for all service exceptions from AIOps service.</p>
+ *
+ *
+ * @public
+ */
+export class PutInvestigationGroupPolicyCommand extends command<PutInvestigationGroupPolicyCommandInput, PutInvestigationGroupPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutInvestigationGroupPolicy",
+  PutInvestigationGroupPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutInvestigationGroupPolicyRequest;
+      output: PutInvestigationGroupPolicyResponse;
+    };
+    sdk: {
+      input: PutInvestigationGroupPolicyCommandInput;
+      output: PutInvestigationGroupPolicyCommandOutput;
+    };
+  };
+}

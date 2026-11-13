@@ -1,0 +1,85 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DeleteIdentityCenterApplicationRequest,
+  DeleteIdentityCenterApplicationResponse,
+} from "../models/models_0";
+import { DeleteIdentityCenterApplication$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteIdentityCenterApplicationCommand}.
+ */
+export interface DeleteIdentityCenterApplicationCommandInput extends DeleteIdentityCenterApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteIdentityCenterApplicationCommand}.
+ */
+export interface DeleteIdentityCenterApplicationCommandOutput extends DeleteIdentityCenterApplicationResponse, __MetadataBearer {}
+
+/**
+ * <p>
+ *          Deletes the IAM Identity Center application from WorkMail. This action does not affect the authentication settings for any WorkMail organizations.
+ *       </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { WorkMailClient, DeleteIdentityCenterApplicationCommand } from "@aws-sdk/client-workmail"; // ES Modules import
+ * // const { WorkMailClient, DeleteIdentityCenterApplicationCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
+ * const client = new WorkMailClient(config);
+ * const input = { // DeleteIdentityCenterApplicationRequest
+ *   ApplicationArn: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteIdentityCenterApplicationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteIdentityCenterApplicationCommandInput - {@link DeleteIdentityCenterApplicationCommandInput}
+ * @returns {@link DeleteIdentityCenterApplicationCommandOutput}
+ * @see {@link DeleteIdentityCenterApplicationCommandInput} for command's `input` shape.
+ * @see {@link DeleteIdentityCenterApplicationCommandOutput} for command's `response` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link OrganizationStateException} (client fault)
+ *  <p>The organization must have a valid state to perform certain
+ *          operations on the organization or its members.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteIdentityCenterApplicationCommand extends command<DeleteIdentityCenterApplicationCommandInput, DeleteIdentityCenterApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteIdentityCenterApplication",
+  DeleteIdentityCenterApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIdentityCenterApplicationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteIdentityCenterApplicationCommandInput;
+      output: DeleteIdentityCenterApplicationCommandOutput;
+    };
+  };
+}

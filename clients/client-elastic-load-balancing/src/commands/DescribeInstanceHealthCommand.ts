@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { DescribeEndPointStateInput, DescribeEndPointStateOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeInstanceHealthCommand,
-  serializeAws_queryDescribeInstanceHealthCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEndPointStateInput, DescribeEndPointStateOutput } from "../models/models_0";
+import { DescribeInstanceHealth$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeInstanceHealthCommand}.
+ */
 export interface DescribeInstanceHealthCommandInput extends DescribeEndPointStateInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeInstanceHealthCommand}.
+ */
 export interface DescribeInstanceHealthCommandOutput extends DescribeEndPointStateOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +29,93 @@ export interface DescribeInstanceHealthCommandOutput extends DescribeEndPointSta
  * ```javascript
  * import { ElasticLoadBalancingClient, DescribeInstanceHealthCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, DescribeInstanceHealthCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // DescribeEndPointStateInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   Instances: [ // Instances
+ *     { // Instance
+ *       InstanceId: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new DescribeInstanceHealthCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEndPointStateOutput
+ * //   InstanceStates: [ // InstanceStates
+ * //     { // InstanceState
+ * //       InstanceId: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //       ReasonCode: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeInstanceHealthCommandInput - {@link DescribeInstanceHealthCommandInput}
+ * @returns {@link DescribeInstanceHealthCommandOutput}
  * @see {@link DescribeInstanceHealthCommandInput} for command's `input` shape.
  * @see {@link DescribeInstanceHealthCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link InvalidEndPointException} (client fault)
+ *  <p>The specified endpoint is not valid.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To describe the health of the instances for a load balancer
+ * ```javascript
+ * // This example describes the health of the instances for the specified load balancer.
+ * const input = {
+ *   LoadBalancerName: "my-load-balancer"
+ * };
+ * const command = new DescribeInstanceHealthCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   InstanceStates: [
+ *     {
+ *       Description: "N/A",
+ *       InstanceId: "i-207d9717",
+ *       ReasonCode: "N/A",
+ *       State: "InService"
+ *     },
+ *     {
+ *       Description: "N/A",
+ *       InstanceId: "i-afefb49b",
+ *       ReasonCode: "N/A",
+ *       State: "InService"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeInstanceHealthCommand extends $Command<
-  DescribeInstanceHealthCommandInput,
-  DescribeInstanceHealthCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeInstanceHealthCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeInstanceHealthCommandInput, DescribeInstanceHealthCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "DescribeInstanceHealthCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEndPointStateInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEndPointStateOutput.filterSensitiveLog,
+export class DescribeInstanceHealthCommand extends command<DescribeInstanceHealthCommandInput, DescribeInstanceHealthCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeInstanceHealth",
+  DescribeInstanceHealth$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEndPointStateInput;
+      output: DescribeEndPointStateOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeInstanceHealthCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeInstanceHealthCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeInstanceHealthCommandOutput> {
-    return deserializeAws_queryDescribeInstanceHealthCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeInstanceHealthCommandInput;
+      output: DescribeInstanceHealthCommandOutput;
+    };
+  };
 }

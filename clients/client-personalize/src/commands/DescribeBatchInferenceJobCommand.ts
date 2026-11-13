@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeBatchInferenceJobRequest, DescribeBatchInferenceJobResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1DescribeBatchInferenceJobCommand,
-  serializeAws_json1_1DescribeBatchInferenceJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBatchInferenceJobRequest, DescribeBatchInferenceJobResponse } from "../models/models_0";
+import { DescribeBatchInferenceJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBatchInferenceJobCommand}.
+ */
 export interface DescribeBatchInferenceJobCommandInput extends DescribeBatchInferenceJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBatchInferenceJobCommand}.
+ */
 export interface DescribeBatchInferenceJobCommandOutput extends DescribeBatchInferenceJobResponse, __MetadataBearer {}
 
 /**
@@ -30,71 +31,90 @@ export interface DescribeBatchInferenceJobCommandOutput extends DescribeBatchInf
  * ```javascript
  * import { PersonalizeClient, DescribeBatchInferenceJobCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, DescribeBatchInferenceJobCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // DescribeBatchInferenceJobRequest
+ *   batchInferenceJobArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeBatchInferenceJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBatchInferenceJobResponse
+ * //   batchInferenceJob: { // BatchInferenceJob
+ * //     jobName: "STRING_VALUE",
+ * //     batchInferenceJobArn: "STRING_VALUE",
+ * //     filterArn: "STRING_VALUE",
+ * //     failureReason: "STRING_VALUE",
+ * //     solutionVersionArn: "STRING_VALUE",
+ * //     numResults: Number("int"),
+ * //     jobInput: { // BatchInferenceJobInput
+ * //       s3DataSource: { // S3DataConfig
+ * //         path: "STRING_VALUE", // required
+ * //         kmsKeyArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     jobOutput: { // BatchInferenceJobOutput
+ * //       s3DataDestination: {
+ * //         path: "STRING_VALUE", // required
+ * //         kmsKeyArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     batchInferenceJobConfig: { // BatchInferenceJobConfig
+ * //       itemExplorationConfig: { // HyperParameters
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       rankingInfluence: { // RankingInfluence
+ * //         "<keys>": Number("double"),
+ * //       },
+ * //     },
+ * //     roleArn: "STRING_VALUE",
+ * //     batchInferenceJobMode: "BATCH_INFERENCE" || "THEME_GENERATION",
+ * //     themeGenerationConfig: { // ThemeGenerationConfig
+ * //       fieldsForThemeGeneration: { // FieldsForThemeGeneration
+ * //         itemName: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //     status: "STRING_VALUE",
+ * //     creationDateTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeBatchInferenceJobCommandInput - {@link DescribeBatchInferenceJobCommandInput}
+ * @returns {@link DescribeBatchInferenceJobCommandOutput}
  * @see {@link DescribeBatchInferenceJobCommandInput} for command's `input` shape.
  * @see {@link DescribeBatchInferenceJobCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBatchInferenceJobCommand extends $Command<
-  DescribeBatchInferenceJobCommandInput,
-  DescribeBatchInferenceJobCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBatchInferenceJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBatchInferenceJobCommandInput, DescribeBatchInferenceJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "DescribeBatchInferenceJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBatchInferenceJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBatchInferenceJobResponse.filterSensitiveLog,
+export class DescribeBatchInferenceJobCommand extends command<DescribeBatchInferenceJobCommandInput, DescribeBatchInferenceJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBatchInferenceJob",
+  DescribeBatchInferenceJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBatchInferenceJobRequest;
+      output: DescribeBatchInferenceJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBatchInferenceJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeBatchInferenceJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeBatchInferenceJobCommandOutput> {
-    return deserializeAws_json1_1DescribeBatchInferenceJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBatchInferenceJobCommandInput;
+      output: DescribeBatchInferenceJobCommandOutput;
+    };
+  };
 }

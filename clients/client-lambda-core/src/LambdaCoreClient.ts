@@ -1,0 +1,435 @@
+// smithy-typescript generated code
+import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+  Client as __Client,
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@smithy/types";
+
+import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultLambdaCoreHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  CreateNetworkConnectorCommandInput,
+  CreateNetworkConnectorCommandOutput,
+} from "./commands/CreateNetworkConnectorCommand";
+import type {
+  CreateRuntimeAliasCommandInput,
+  CreateRuntimeAliasCommandOutput,
+} from "./commands/CreateRuntimeAliasCommand";
+import type { CreateRuntimeCommandInput, CreateRuntimeCommandOutput } from "./commands/CreateRuntimeCommand";
+import type {
+  CreateRuntimeVersionCommandInput,
+  CreateRuntimeVersionCommandOutput,
+} from "./commands/CreateRuntimeVersionCommand";
+import type {
+  DeleteNetworkConnectorCommandInput,
+  DeleteNetworkConnectorCommandOutput,
+} from "./commands/DeleteNetworkConnectorCommand";
+import type {
+  DeleteRuntimeAliasCommandInput,
+  DeleteRuntimeAliasCommandOutput,
+} from "./commands/DeleteRuntimeAliasCommand";
+import type { DeleteRuntimeCommandInput, DeleteRuntimeCommandOutput } from "./commands/DeleteRuntimeCommand";
+import type {
+  DeleteRuntimeVersionCommandInput,
+  DeleteRuntimeVersionCommandOutput,
+} from "./commands/DeleteRuntimeVersionCommand";
+import type {
+  GetNetworkConnectorCommandInput,
+  GetNetworkConnectorCommandOutput,
+} from "./commands/GetNetworkConnectorCommand";
+import type { GetRuntimeAliasCommandInput, GetRuntimeAliasCommandOutput } from "./commands/GetRuntimeAliasCommand";
+import type { GetRuntimeCommandInput, GetRuntimeCommandOutput } from "./commands/GetRuntimeCommand";
+import type {
+  GetRuntimeVersionCommandInput,
+  GetRuntimeVersionCommandOutput,
+} from "./commands/GetRuntimeVersionCommand";
+import type {
+  ListNetworkConnectorsCommandInput,
+  ListNetworkConnectorsCommandOutput,
+} from "./commands/ListNetworkConnectorsCommand";
+import type {
+  ListNetworkConnectorVersionsCommandInput,
+  ListNetworkConnectorVersionsCommandOutput,
+} from "./commands/ListNetworkConnectorVersionsCommand";
+import type {
+  ListRuntimeAliasesCommandInput,
+  ListRuntimeAliasesCommandOutput,
+} from "./commands/ListRuntimeAliasesCommand";
+import type { ListRuntimesCommandInput, ListRuntimesCommandOutput } from "./commands/ListRuntimesCommand";
+import type {
+  ListRuntimeVersionsCommandInput,
+  ListRuntimeVersionsCommandOutput,
+} from "./commands/ListRuntimeVersionsCommand";
+import type { RestoreRuntimeCommandInput, RestoreRuntimeCommandOutput } from "./commands/RestoreRuntimeCommand";
+import type {
+  UpdateNetworkConnectorCommandInput,
+  UpdateNetworkConnectorCommandOutput,
+} from "./commands/UpdateNetworkConnectorCommand";
+import type {
+  UpdateRuntimeAliasCommandInput,
+  UpdateRuntimeAliasCommandOutput,
+} from "./commands/UpdateRuntimeAliasCommand";
+import type { UpdateRuntimeCommandInput, UpdateRuntimeCommandOutput } from "./commands/UpdateRuntimeCommand";
+import type {
+  UpdateRuntimeVersionCommandInput,
+  UpdateRuntimeVersionCommandOutput,
+} from "./commands/UpdateRuntimeVersionCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
+
+export { __Client };
+
+/**
+ * @public
+ */
+export type ServiceInputTypes =
+  | CreateNetworkConnectorCommandInput
+  | CreateRuntimeAliasCommandInput
+  | CreateRuntimeCommandInput
+  | CreateRuntimeVersionCommandInput
+  | DeleteNetworkConnectorCommandInput
+  | DeleteRuntimeAliasCommandInput
+  | DeleteRuntimeCommandInput
+  | DeleteRuntimeVersionCommandInput
+  | GetNetworkConnectorCommandInput
+  | GetRuntimeAliasCommandInput
+  | GetRuntimeCommandInput
+  | GetRuntimeVersionCommandInput
+  | ListNetworkConnectorVersionsCommandInput
+  | ListNetworkConnectorsCommandInput
+  | ListRuntimeAliasesCommandInput
+  | ListRuntimeVersionsCommandInput
+  | ListRuntimesCommandInput
+  | RestoreRuntimeCommandInput
+  | UpdateNetworkConnectorCommandInput
+  | UpdateRuntimeAliasCommandInput
+  | UpdateRuntimeCommandInput
+  | UpdateRuntimeVersionCommandInput;
+
+/**
+ * @public
+ */
+export type ServiceOutputTypes =
+  | CreateNetworkConnectorCommandOutput
+  | CreateRuntimeAliasCommandOutput
+  | CreateRuntimeCommandOutput
+  | CreateRuntimeVersionCommandOutput
+  | DeleteNetworkConnectorCommandOutput
+  | DeleteRuntimeAliasCommandOutput
+  | DeleteRuntimeCommandOutput
+  | DeleteRuntimeVersionCommandOutput
+  | GetNetworkConnectorCommandOutput
+  | GetRuntimeAliasCommandOutput
+  | GetRuntimeCommandOutput
+  | GetRuntimeVersionCommandOutput
+  | ListNetworkConnectorVersionsCommandOutput
+  | ListNetworkConnectorsCommandOutput
+  | ListRuntimeAliasesCommandOutput
+  | ListRuntimeVersionsCommandOutput
+  | ListRuntimesCommandOutput
+  | RestoreRuntimeCommandOutput
+  | UpdateNetworkConnectorCommandOutput
+  | UpdateRuntimeAliasCommandOutput
+  | UpdateRuntimeCommandOutput
+  | UpdateRuntimeVersionCommandOutput;
+
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandlerUserInput;
+
+  /**
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: __BodyLengthCalculator;
+
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+
+  /**
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+
+  /**
+   * Enables IPv6/IPv4 dualstack endpoint.
+   */
+  useDualstackEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * Enables FIPS compatible endpoints.
+   */
+  useFipsEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+
+  /**
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
+   */
+  profile?: string;
+
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+}
+
+/**
+ * @public
+ */
+export type LambdaCoreClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of LambdaCoreClient class constructor that set the region, credentials and other options.
+ */
+export interface LambdaCoreClientConfig extends LambdaCoreClientConfigType {}
+
+/**
+ * @public
+ */
+export type LambdaCoreClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of LambdaCoreClient class. This is resolved and normalized from the {@link LambdaCoreClientConfig | constructor configuration interface}.
+ */
+export interface LambdaCoreClientResolvedConfig extends LambdaCoreClientResolvedConfigType {}
+
+/**
+ * <fullname>Lambda</fullname> <p> <b>Overview</b> </p> <p>Lambda Core is a set of APIs for managing shared infrastructure resources used by Lambda. The Lambda Core API provides operations for:</p> <ol> <li> <p>Creating and managing network connectors that enable Lambda MicroVMs and Lambda Web Functions to access resources in your Amazon Virtual Private Cloud (Amazon VPC).</p> </li> <li> <p>Creating customer-managed runtimes which can be used with Lambda Event Functions.</p> </li> </ol> <p>Network connectors provision elastic network interfaces (ENIs) in your VPC subnets, providing a managed network path from Lambda compute environments to private resources such as Amazon RDS databases, Amazon ElastiCache clusters, and internal APIs. You create a network connector once and attach it to one or more Lambda MicroVMs or Lambda Web Functions at run time.</p> <p>A customer-managed runtime is a Lambda runtime that you create and manage as a standalone resource. Lambda Event Functions can use your customer-managed runtime instead of using one of the built-in Lambda-managed runtimes. Customer-managed runtimes enable you to create customized runtimes for your workloads, and give you control over runtime updates and the deprecation lifecycle.</p> <p>The <i>Lambda Core API Reference</i> provides information about each of the API methods, including details about the parameters in each API request and response.</p> <p>You can use Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools to access the API. For installation instructions, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> <p>For a list of Region-specific endpoints that Lambda supports, see <a href="https://docs.aws.amazon.com/general/latest/gr/lambda-service.html">Lambda endpoints and quotas</a> in the <i>Amazon Web Services General Reference.</i> </p> <p>When making the API calls, you will need to authenticate your request by providing a signature. Lambda supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 signing process</a> in the <i>Amazon Web Services General Reference.</i> </p>
+ * @public
+ */
+export class LambdaCoreClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  LambdaCoreClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of LambdaCoreClient class. This is resolved and normalized from the {@link LambdaCoreClientConfig | constructor configuration interface}.
+   */
+  readonly config: LambdaCoreClientResolvedConfig;
+
+  constructor(...[configuration]: __CheckOptionalClientConfig<LambdaCoreClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveRetryConfig(_config_2);
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRetryPlugin(this.config));
+    this.middlewareStack.use(getContentLengthPlugin(this.config));
+    this.middlewareStack.use(getHostHeaderPlugin(this.config));
+    this.middlewareStack.use(getLoggerPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultLambdaCoreHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: LambdaCoreClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
+  }
+
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void {
+    super.destroy();
+  }
+}

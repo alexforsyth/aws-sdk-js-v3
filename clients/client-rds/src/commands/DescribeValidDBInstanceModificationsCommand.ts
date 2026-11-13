@@ -1,109 +1,206 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeValidDBInstanceModificationsMessage,
   DescribeValidDBInstanceModificationsResult,
 } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeValidDBInstanceModificationsCommand,
-  serializeAws_queryDescribeValidDBInstanceModificationsCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
-
-export interface DescribeValidDBInstanceModificationsCommandInput extends DescribeValidDBInstanceModificationsMessage {}
-export interface DescribeValidDBInstanceModificationsCommandOutput
-  extends DescribeValidDBInstanceModificationsResult,
-    __MetadataBearer {}
+import { DescribeValidDBInstanceModifications$ } from "../schemas/schemas_0";
 
 /**
- * <p>You can call <code>DescribeValidDBInstanceModifications</code> to learn what modifications you can make to
- *             your DB instance. You can use this information when you call <code>ModifyDBInstance</code>.
- *         </p>
- *         <p>This command doesn't apply to RDS Custom.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeValidDBInstanceModificationsCommand}.
+ */
+export interface DescribeValidDBInstanceModificationsCommandInput extends DescribeValidDBInstanceModificationsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeValidDBInstanceModificationsCommand}.
+ */
+export interface DescribeValidDBInstanceModificationsCommandOutput extends DescribeValidDBInstanceModificationsResult, __MetadataBearer {}
+
+/**
+ * <p>You can call <code>DescribeValidDBInstanceModifications</code> to learn what modifications you can make to your DB instance. You can use this information when you call <code>ModifyDBInstance</code>.</p> <p>This command doesn't apply to RDS Custom.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSClient, DescribeValidDBInstanceModificationsCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DescribeValidDBInstanceModificationsCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DescribeValidDBInstanceModificationsMessage
+ *   DBInstanceIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new DescribeValidDBInstanceModificationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeValidDBInstanceModificationsResult
+ * //   ValidDBInstanceModificationsMessage: { // ValidDBInstanceModificationsMessage
+ * //     Storage: [ // ValidStorageOptionsList
+ * //       { // ValidStorageOptions
+ * //         StorageType: "STRING_VALUE",
+ * //         StorageSize: [ // RangeList
+ * //           { // Range
+ * //             From: Number("int"),
+ * //             To: Number("int"),
+ * //             Step: Number("int"),
+ * //           },
+ * //         ],
+ * //         ProvisionedIops: [
+ * //           {
+ * //             From: Number("int"),
+ * //             To: Number("int"),
+ * //             Step: Number("int"),
+ * //           },
+ * //         ],
+ * //         IopsToStorageRatio: [ // DoubleRangeList
+ * //           { // DoubleRange
+ * //             From: Number("double"),
+ * //             To: Number("double"),
+ * //           },
+ * //         ],
+ * //         ProvisionedStorageThroughput: [
+ * //           {
+ * //             From: Number("int"),
+ * //             To: Number("int"),
+ * //             Step: Number("int"),
+ * //           },
+ * //         ],
+ * //         StorageThroughputToIopsRatio: [
+ * //           {
+ * //             From: Number("double"),
+ * //             To: Number("double"),
+ * //           },
+ * //         ],
+ * //         SupportsStorageAutoscaling: true || false,
+ * //       },
+ * //     ],
+ * //     ValidProcessorFeatures: [ // AvailableProcessorFeatureList
+ * //       { // AvailableProcessorFeature
+ * //         Name: "STRING_VALUE",
+ * //         DefaultValue: "STRING_VALUE",
+ * //         AllowedValues: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SupportsDedicatedLogVolume: true || false,
+ * //     AdditionalStorage: { // ValidAdditionalStorageOptions
+ * //       SupportsAdditionalStorageVolumes: true || false,
+ * //       Volumes: [ // ValidVolumeOptionsList
+ * //         { // ValidVolumeOptions
+ * //           VolumeName: "STRING_VALUE",
+ * //           Storage: [
+ * //             {
+ * //               StorageType: "STRING_VALUE",
+ * //               StorageSize: [
+ * //                 {
+ * //                   From: Number("int"),
+ * //                   To: Number("int"),
+ * //                   Step: Number("int"),
+ * //                 },
+ * //               ],
+ * //               ProvisionedIops: [
+ * //                 {
+ * //                   From: Number("int"),
+ * //                   To: Number("int"),
+ * //                   Step: Number("int"),
+ * //                 },
+ * //               ],
+ * //               IopsToStorageRatio: [
+ * //                 {
+ * //                   From: Number("double"),
+ * //                   To: Number("double"),
+ * //                 },
+ * //               ],
+ * //               ProvisionedStorageThroughput: "<RangeList>",
+ * //               StorageThroughputToIopsRatio: [
+ * //                 {
+ * //                   From: Number("double"),
+ * //                   To: Number("double"),
+ * //                 },
+ * //               ],
+ * //               SupportsStorageAutoscaling: true || false,
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeValidDBInstanceModificationsCommandInput - {@link DescribeValidDBInstanceModificationsCommandInput}
+ * @returns {@link DescribeValidDBInstanceModificationsCommandOutput}
  * @see {@link DescribeValidDBInstanceModificationsCommandInput} for command's `input` shape.
  * @see {@link DescribeValidDBInstanceModificationsCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBInstanceNotFoundFault} (client fault)
+ *  <p> <code>DBInstanceIdentifier</code> doesn't refer to an existing DB instance.</p>
+ *
+ * @throws {@link InvalidDBInstanceStateFault} (client fault)
+ *  <p>The DB instance isn't in a valid state.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To describe valid modifications for a DB instance
+ * ```javascript
+ * // The following example retrieves details about the valid modifications for the specified DB instance.
+ * const input = {
+ *   DBInstanceIdentifier: "database-test1"
+ * };
+ * const command = new DescribeValidDBInstanceModificationsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ValidDBInstanceModificationsMessage: {
+ *     Storage: [
+ *       {
+ *         StorageSize: [
+ *           {
+ *             From: 20,
+ *             Step: 1,
+ *             To: 20
+ *           },
+ *           {
+ *             From: 22,
+ *             Step: 1,
+ *             To: 6144
+ *           }
+ *         ],
+ *         StorageType: "gp2"
+ *       }
+ *     ]
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeValidDBInstanceModificationsCommand extends $Command<
-  DescribeValidDBInstanceModificationsCommandInput,
-  DescribeValidDBInstanceModificationsCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeValidDBInstanceModificationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeValidDBInstanceModificationsCommandInput, DescribeValidDBInstanceModificationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DescribeValidDBInstanceModificationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeValidDBInstanceModificationsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeValidDBInstanceModificationsResult.filterSensitiveLog,
+export class DescribeValidDBInstanceModificationsCommand extends command<DescribeValidDBInstanceModificationsCommandInput, DescribeValidDBInstanceModificationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeValidDBInstanceModifications",
+  DescribeValidDBInstanceModifications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeValidDBInstanceModificationsMessage;
+      output: DescribeValidDBInstanceModificationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeValidDBInstanceModificationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeValidDBInstanceModificationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeValidDBInstanceModificationsCommandOutput> {
-    return deserializeAws_queryDescribeValidDBInstanceModificationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeValidDBInstanceModificationsCommandInput;
+      output: DescribeValidDBInstanceModificationsCommandOutput;
+    };
+  };
 }

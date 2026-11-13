@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyTrafficMirrorSessionRequest, ModifyTrafficMirrorSessionResult } from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyTrafficMirrorSessionCommand,
-  serializeAws_ec2ModifyTrafficMirrorSessionCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyTrafficMirrorSessionRequest, ModifyTrafficMirrorSessionResult } from "../models/models_7";
+import { ModifyTrafficMirrorSession$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyTrafficMirrorSessionCommand}.
+ */
 export interface ModifyTrafficMirrorSessionCommandInput extends ModifyTrafficMirrorSessionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyTrafficMirrorSessionCommand}.
+ */
 export interface ModifyTrafficMirrorSessionCommandOutput extends ModifyTrafficMirrorSessionResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,73 @@ export interface ModifyTrafficMirrorSessionCommandOutput extends ModifyTrafficMi
  * ```javascript
  * import { EC2Client, ModifyTrafficMirrorSessionCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyTrafficMirrorSessionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyTrafficMirrorSessionRequest
+ *   TrafficMirrorSessionId: "STRING_VALUE", // required
+ *   TrafficMirrorTargetId: "STRING_VALUE",
+ *   TrafficMirrorFilterId: "STRING_VALUE",
+ *   PacketLength: Number("int"),
+ *   SessionNumber: Number("int"),
+ *   VirtualNetworkId: Number("int"),
+ *   Description: "STRING_VALUE",
+ *   RemoveFields: [ // TrafficMirrorSessionFieldList
+ *     "packet-length" || "description" || "virtual-network-id",
+ *   ],
+ *   DryRun: true || false,
+ * };
  * const command = new ModifyTrafficMirrorSessionCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyTrafficMirrorSessionResult
+ * //   TrafficMirrorSession: { // TrafficMirrorSession
+ * //     TrafficMirrorSessionId: "STRING_VALUE",
+ * //     TrafficMirrorTargetId: "STRING_VALUE",
+ * //     TrafficMirrorFilterId: "STRING_VALUE",
+ * //     NetworkInterfaceId: "STRING_VALUE",
+ * //     OwnerId: "STRING_VALUE",
+ * //     PacketLength: Number("int"),
+ * //     SessionNumber: Number("int"),
+ * //     VirtualNetworkId: Number("int"),
+ * //     Description: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyTrafficMirrorSessionCommandInput - {@link ModifyTrafficMirrorSessionCommandInput}
+ * @returns {@link ModifyTrafficMirrorSessionCommandOutput}
  * @see {@link ModifyTrafficMirrorSessionCommandInput} for command's `input` shape.
  * @see {@link ModifyTrafficMirrorSessionCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyTrafficMirrorSessionCommand extends $Command<
-  ModifyTrafficMirrorSessionCommandInput,
-  ModifyTrafficMirrorSessionCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyTrafficMirrorSessionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyTrafficMirrorSessionCommandInput, ModifyTrafficMirrorSessionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyTrafficMirrorSessionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyTrafficMirrorSessionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyTrafficMirrorSessionResult.filterSensitiveLog,
+export class ModifyTrafficMirrorSessionCommand extends command<ModifyTrafficMirrorSessionCommandInput, ModifyTrafficMirrorSessionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyTrafficMirrorSession",
+  ModifyTrafficMirrorSession$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyTrafficMirrorSessionRequest;
+      output: ModifyTrafficMirrorSessionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyTrafficMirrorSessionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyTrafficMirrorSessionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyTrafficMirrorSessionCommandOutput> {
-    return deserializeAws_ec2ModifyTrafficMirrorSessionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyTrafficMirrorSessionCommandInput;
+      output: ModifyTrafficMirrorSessionCommandOutput;
+    };
+  };
 }

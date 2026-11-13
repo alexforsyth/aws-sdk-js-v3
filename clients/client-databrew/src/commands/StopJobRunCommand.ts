@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { StopJobRunRequest, StopJobRunResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopJobRunCommand,
-  serializeAws_restJson1StopJobRunCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopJobRunRequest, StopJobRunResponse } from "../models/models_0";
+import { StopJobRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopJobRunCommand}.
+ */
 export interface StopJobRunCommandInput extends StopJobRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopJobRunCommand}.
+ */
 export interface StopJobRunCommandOutput extends StopJobRunResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,54 @@ export interface StopJobRunCommandOutput extends StopJobRunResponse, __MetadataB
  * ```javascript
  * import { DataBrewClient, StopJobRunCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, StopJobRunCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // StopJobRunRequest
+ *   Name: "STRING_VALUE", // required
+ *   RunId: "STRING_VALUE", // required
+ * };
  * const command = new StopJobRunCommand(input);
  * const response = await client.send(command);
+ * // { // StopJobRunResponse
+ * //   RunId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param StopJobRunCommandInput - {@link StopJobRunCommandInput}
+ * @returns {@link StopJobRunCommandOutput}
  * @see {@link StopJobRunCommandInput} for command's `input` shape.
  * @see {@link StopJobRunCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class StopJobRunCommand extends $Command<
-  StopJobRunCommandInput,
-  StopJobRunCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopJobRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopJobRunCommandInput, StopJobRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "StopJobRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopJobRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopJobRunResponse.filterSensitiveLog,
+export class StopJobRunCommand extends command<StopJobRunCommandInput, StopJobRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopJobRun",
+  StopJobRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopJobRunRequest;
+      output: StopJobRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopJobRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopJobRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopJobRunCommandOutput> {
-    return deserializeAws_restJson1StopJobRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopJobRunCommandInput;
+      output: StopJobRunCommandOutput;
+    };
+  };
 }

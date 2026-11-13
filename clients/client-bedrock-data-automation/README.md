@@ -1,0 +1,370 @@
+<!-- generated file, do not edit directly -->
+
+# @aws-sdk/client-bedrock-data-automation
+
+## Description
+
+AWS SDK for JavaScript BedrockDataAutomation Client for Node.js, Browser and React Native.
+
+Amazon Bedrock Data Automation BuildTime
+
+## Installing
+
+To install this package, use the CLI of your favorite package manager:
+
+- `npm install @aws-sdk/client-bedrock-data-automation`
+- `yarn add @aws-sdk/client-bedrock-data-automation`
+- `pnpm add @aws-sdk/client-bedrock-data-automation`
+
+## Getting Started
+
+### Import
+
+The AWS SDK is modulized by clients and commands.
+To send a request, you only need to import the `BedrockDataAutomationClient` and
+the commands you need, for example `ListBlueprintsCommand`:
+
+```js
+// ES5 example
+const { BedrockDataAutomationClient, ListBlueprintsCommand } = require("@aws-sdk/client-bedrock-data-automation");
+```
+
+```ts
+// ES6+ example
+import { BedrockDataAutomationClient, ListBlueprintsCommand } from "@aws-sdk/client-bedrock-data-automation";
+```
+
+### Usage
+
+To send a request:
+
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
+
+```js
+const client = new BedrockDataAutomationClient({ region: "REGION" });
+
+const params = { /** input parameters */ };
+const command = new ListBlueprintsCommand(params);
+```
+
+#### Async/await
+
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+operator to wait for the promise returned by send operation as follows:
+
+```js
+// async/await.
+try {
+  const data = await client.send(command);
+  // process data.
+} catch (error) {
+  // error handling.
+} finally {
+  // finally.
+}
+```
+
+#### Promises
+
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
+
+```js
+client
+  .send(command)
+  .then((data) => {
+    // process data.
+  })
+  .catch((error) => {
+    // error handling.
+  })
+  .finally(() => {
+    // finally.
+  });
+```
+
+#### Aggregated client
+
+The aggregated client class is exported from the same package, but without the "Client" suffix.
+
+`BedrockDataAutomation` extends `BedrockDataAutomationClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
+
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`BedrockDataAutomationClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
+
+```ts
+import { BedrockDataAutomation } from "@aws-sdk/client-bedrock-data-automation";
+
+const client = new BedrockDataAutomation({ region: "REGION" });
+
+// async/await.
+try {
+  const data = await client.listBlueprints(params);
+  // process data.
+} catch (error) {
+  // error handling.
+}
+
+// Promises.
+client
+  .listBlueprints(params)
+  .then((data) => {
+    // process data.
+  })
+  .catch((error) => {
+    // error handling.
+  });
+
+// callbacks (not recommended).
+client.listBlueprints(params, (err, data) => {
+  // process err and data.
+});
+```
+
+### Troubleshooting
+
+When the service returns an exception, the error will include the exception information,
+as well as response metadata (e.g. request id).
+
+```js
+try {
+  const data = await client.send(command);
+  // process data.
+} catch (error) {
+  const { requestId, cfId, extendedRequestId } = error.$metadata;
+  console.log({ requestId, cfId, extendedRequestId });
+  /**
+   * The keys within exceptions are also parsed.
+   * You can access them by specifying exception names:
+   * if (error.name === 'SomeServiceException') {
+   *     const value = error.specialKeyInException;
+   * }
+   */
+}
+```
+
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
+## Getting Help
+
+Please use these community resources for getting help.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+  or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
+- Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
+  on AWS Developer Blog.
+- Ask a question on [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-js) and tag it with `aws-sdk-js`.
+- Join the AWS JavaScript community on [gitter](https://gitter.im/aws/aws-sdk-js-v3).
+- If it turns out that you may have found a bug, please [open an issue](https://github.com/aws/aws-sdk-js-v3/issues/new/choose).
+
+To test your universal JavaScript code in Node.js, browser and react-native environments,
+visit our [code samples repo](https://github.com/aws-samples/aws-sdk-js-tests).
+
+## Contributing
+
+This client code is generated automatically. Any modifications will be overwritten the next time the `@aws-sdk/client-bedrock-data-automation` package is updated.
+To contribute to client you can check our [generate clients scripts](https://github.com/aws/aws-sdk-js-v3/tree/main/scripts/generate-clients).
+
+## License
+
+This SDK is distributed under the
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
+see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CopyBlueprintStage
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/CopyBlueprintStageCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CopyBlueprintStageCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CopyBlueprintStageCommandOutput/)
+</details>
+<details>
+<summary>
+CreateBlueprint
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/CreateBlueprintCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateBlueprintCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateBlueprintCommandOutput/)
+</details>
+<details>
+<summary>
+CreateBlueprintVersion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/CreateBlueprintVersionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateBlueprintVersionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateBlueprintVersionCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDataAutomationLibrary
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/CreateDataAutomationLibraryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateDataAutomationLibraryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateDataAutomationLibraryCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDataAutomationProject
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/CreateDataAutomationProjectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateDataAutomationProjectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/CreateDataAutomationProjectCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteBlueprint
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/DeleteBlueprintCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/DeleteBlueprintCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/DeleteBlueprintCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDataAutomationLibrary
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/DeleteDataAutomationLibraryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/DeleteDataAutomationLibraryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/DeleteDataAutomationLibraryCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDataAutomationProject
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/DeleteDataAutomationProjectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/DeleteDataAutomationProjectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/DeleteDataAutomationProjectCommandOutput/)
+</details>
+<details>
+<summary>
+GetBlueprint
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/GetBlueprintCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetBlueprintCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetBlueprintCommandOutput/)
+</details>
+<details>
+<summary>
+GetBlueprintOptimizationStatus
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/GetBlueprintOptimizationStatusCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetBlueprintOptimizationStatusCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetBlueprintOptimizationStatusCommandOutput/)
+</details>
+<details>
+<summary>
+GetDataAutomationLibrary
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/GetDataAutomationLibraryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationLibraryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationLibraryCommandOutput/)
+</details>
+<details>
+<summary>
+GetDataAutomationLibraryEntity
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/GetDataAutomationLibraryEntityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationLibraryEntityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationLibraryEntityCommandOutput/)
+</details>
+<details>
+<summary>
+GetDataAutomationLibraryIngestionJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/GetDataAutomationLibraryIngestionJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationLibraryIngestionJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationLibraryIngestionJobCommandOutput/)
+</details>
+<details>
+<summary>
+GetDataAutomationProject
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/GetDataAutomationProjectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationProjectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/GetDataAutomationProjectCommandOutput/)
+</details>
+<details>
+<summary>
+InvokeBlueprintOptimizationAsync
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/InvokeBlueprintOptimizationAsyncCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/InvokeBlueprintOptimizationAsyncCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/InvokeBlueprintOptimizationAsyncCommandOutput/)
+</details>
+<details>
+<summary>
+InvokeDataAutomationLibraryIngestionJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/InvokeDataAutomationLibraryIngestionJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/InvokeDataAutomationLibraryIngestionJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/InvokeDataAutomationLibraryIngestionJobCommandOutput/)
+</details>
+<details>
+<summary>
+ListBlueprints
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/ListBlueprintsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListBlueprintsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListBlueprintsCommandOutput/)
+</details>
+<details>
+<summary>
+ListDataAutomationLibraries
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/ListDataAutomationLibrariesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationLibrariesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationLibrariesCommandOutput/)
+</details>
+<details>
+<summary>
+ListDataAutomationLibraryEntities
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/ListDataAutomationLibraryEntitiesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationLibraryEntitiesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationLibraryEntitiesCommandOutput/)
+</details>
+<details>
+<summary>
+ListDataAutomationLibraryIngestionJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/ListDataAutomationLibraryIngestionJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationLibraryIngestionJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationLibraryIngestionJobsCommandOutput/)
+</details>
+<details>
+<summary>
+ListDataAutomationProjects
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/ListDataAutomationProjectsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationProjectsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListDataAutomationProjectsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateBlueprint
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/UpdateBlueprintCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UpdateBlueprintCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UpdateBlueprintCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDataAutomationLibrary
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/UpdateDataAutomationLibraryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UpdateDataAutomationLibraryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UpdateDataAutomationLibraryCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDataAutomationProject
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/bedrock-data-automation/command/UpdateDataAutomationProjectCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UpdateDataAutomationProjectCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-bedrock-data-automation/Interface/UpdateDataAutomationProjectCommandOutput/)
+</details>

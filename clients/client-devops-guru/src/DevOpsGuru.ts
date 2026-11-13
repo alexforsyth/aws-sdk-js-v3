@@ -1,846 +1,949 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AddNotificationChannelCommandInput,
+  type AddNotificationChannelCommandOutput,
   AddNotificationChannelCommand,
-  AddNotificationChannelCommandInput,
-  AddNotificationChannelCommandOutput,
 } from "./commands/AddNotificationChannelCommand";
 import {
+  type DeleteInsightCommandInput,
+  type DeleteInsightCommandOutput,
+  DeleteInsightCommand,
+} from "./commands/DeleteInsightCommand";
+import {
+  type DescribeAccountHealthCommandInput,
+  type DescribeAccountHealthCommandOutput,
   DescribeAccountHealthCommand,
-  DescribeAccountHealthCommandInput,
-  DescribeAccountHealthCommandOutput,
 } from "./commands/DescribeAccountHealthCommand";
 import {
+  type DescribeAccountOverviewCommandInput,
+  type DescribeAccountOverviewCommandOutput,
   DescribeAccountOverviewCommand,
-  DescribeAccountOverviewCommandInput,
-  DescribeAccountOverviewCommandOutput,
 } from "./commands/DescribeAccountOverviewCommand";
 import {
+  type DescribeAnomalyCommandInput,
+  type DescribeAnomalyCommandOutput,
   DescribeAnomalyCommand,
-  DescribeAnomalyCommandInput,
-  DescribeAnomalyCommandOutput,
 } from "./commands/DescribeAnomalyCommand";
 import {
+  type DescribeEventSourcesConfigCommandInput,
+  type DescribeEventSourcesConfigCommandOutput,
+  DescribeEventSourcesConfigCommand,
+} from "./commands/DescribeEventSourcesConfigCommand";
+import {
+  type DescribeFeedbackCommandInput,
+  type DescribeFeedbackCommandOutput,
   DescribeFeedbackCommand,
-  DescribeFeedbackCommandInput,
-  DescribeFeedbackCommandOutput,
 } from "./commands/DescribeFeedbackCommand";
 import {
+  type DescribeInsightCommandInput,
+  type DescribeInsightCommandOutput,
   DescribeInsightCommand,
-  DescribeInsightCommandInput,
-  DescribeInsightCommandOutput,
 } from "./commands/DescribeInsightCommand";
 import {
+  type DescribeOrganizationHealthCommandInput,
+  type DescribeOrganizationHealthCommandOutput,
+  DescribeOrganizationHealthCommand,
+} from "./commands/DescribeOrganizationHealthCommand";
+import {
+  type DescribeOrganizationOverviewCommandInput,
+  type DescribeOrganizationOverviewCommandOutput,
+  DescribeOrganizationOverviewCommand,
+} from "./commands/DescribeOrganizationOverviewCommand";
+import {
+  type DescribeOrganizationResourceCollectionHealthCommandInput,
+  type DescribeOrganizationResourceCollectionHealthCommandOutput,
+  DescribeOrganizationResourceCollectionHealthCommand,
+} from "./commands/DescribeOrganizationResourceCollectionHealthCommand";
+import {
+  type DescribeResourceCollectionHealthCommandInput,
+  type DescribeResourceCollectionHealthCommandOutput,
   DescribeResourceCollectionHealthCommand,
-  DescribeResourceCollectionHealthCommandInput,
-  DescribeResourceCollectionHealthCommandOutput,
 } from "./commands/DescribeResourceCollectionHealthCommand";
 import {
+  type DescribeServiceIntegrationCommandInput,
+  type DescribeServiceIntegrationCommandOutput,
   DescribeServiceIntegrationCommand,
-  DescribeServiceIntegrationCommandInput,
-  DescribeServiceIntegrationCommandOutput,
 } from "./commands/DescribeServiceIntegrationCommand";
 import {
+  type GetCostEstimationCommandInput,
+  type GetCostEstimationCommandOutput,
   GetCostEstimationCommand,
-  GetCostEstimationCommandInput,
-  GetCostEstimationCommandOutput,
 } from "./commands/GetCostEstimationCommand";
 import {
+  type GetResourceCollectionCommandInput,
+  type GetResourceCollectionCommandOutput,
   GetResourceCollectionCommand,
-  GetResourceCollectionCommandInput,
-  GetResourceCollectionCommandOutput,
 } from "./commands/GetResourceCollectionCommand";
 import {
+  type ListAnomaliesForInsightCommandInput,
+  type ListAnomaliesForInsightCommandOutput,
   ListAnomaliesForInsightCommand,
-  ListAnomaliesForInsightCommandInput,
-  ListAnomaliesForInsightCommandOutput,
 } from "./commands/ListAnomaliesForInsightCommand";
-import { ListEventsCommand, ListEventsCommandInput, ListEventsCommandOutput } from "./commands/ListEventsCommand";
 import {
+  type ListAnomalousLogGroupsCommandInput,
+  type ListAnomalousLogGroupsCommandOutput,
+  ListAnomalousLogGroupsCommand,
+} from "./commands/ListAnomalousLogGroupsCommand";
+import {
+  type ListEventsCommandInput,
+  type ListEventsCommandOutput,
+  ListEventsCommand,
+} from "./commands/ListEventsCommand";
+import {
+  type ListInsightsCommandInput,
+  type ListInsightsCommandOutput,
   ListInsightsCommand,
-  ListInsightsCommandInput,
-  ListInsightsCommandOutput,
 } from "./commands/ListInsightsCommand";
 import {
+  type ListMonitoredResourcesCommandInput,
+  type ListMonitoredResourcesCommandOutput,
+  ListMonitoredResourcesCommand,
+} from "./commands/ListMonitoredResourcesCommand";
+import {
+  type ListNotificationChannelsCommandInput,
+  type ListNotificationChannelsCommandOutput,
   ListNotificationChannelsCommand,
-  ListNotificationChannelsCommandInput,
-  ListNotificationChannelsCommandOutput,
 } from "./commands/ListNotificationChannelsCommand";
 import {
-  ListRecommendationsCommand,
-  ListRecommendationsCommandInput,
-  ListRecommendationsCommandOutput,
-} from "./commands/ListRecommendationsCommand";
-import { PutFeedbackCommand, PutFeedbackCommandInput, PutFeedbackCommandOutput } from "./commands/PutFeedbackCommand";
+  type ListOrganizationInsightsCommandInput,
+  type ListOrganizationInsightsCommandOutput,
+  ListOrganizationInsightsCommand,
+} from "./commands/ListOrganizationInsightsCommand";
 import {
+  type ListRecommendationsCommandInput,
+  type ListRecommendationsCommandOutput,
+  ListRecommendationsCommand,
+} from "./commands/ListRecommendationsCommand";
+import {
+  type PutFeedbackCommandInput,
+  type PutFeedbackCommandOutput,
+  PutFeedbackCommand,
+} from "./commands/PutFeedbackCommand";
+import {
+  type RemoveNotificationChannelCommandInput,
+  type RemoveNotificationChannelCommandOutput,
   RemoveNotificationChannelCommand,
-  RemoveNotificationChannelCommandInput,
-  RemoveNotificationChannelCommandOutput,
 } from "./commands/RemoveNotificationChannelCommand";
 import {
+  type SearchInsightsCommandInput,
+  type SearchInsightsCommandOutput,
   SearchInsightsCommand,
-  SearchInsightsCommandInput,
-  SearchInsightsCommandOutput,
 } from "./commands/SearchInsightsCommand";
 import {
+  type SearchOrganizationInsightsCommandInput,
+  type SearchOrganizationInsightsCommandOutput,
+  SearchOrganizationInsightsCommand,
+} from "./commands/SearchOrganizationInsightsCommand";
+import {
+  type StartCostEstimationCommandInput,
+  type StartCostEstimationCommandOutput,
   StartCostEstimationCommand,
-  StartCostEstimationCommandInput,
-  StartCostEstimationCommandOutput,
 } from "./commands/StartCostEstimationCommand";
 import {
+  type UpdateEventSourcesConfigCommandInput,
+  type UpdateEventSourcesConfigCommandOutput,
+  UpdateEventSourcesConfigCommand,
+} from "./commands/UpdateEventSourcesConfigCommand";
+import {
+  type UpdateResourceCollectionCommandInput,
+  type UpdateResourceCollectionCommandOutput,
   UpdateResourceCollectionCommand,
-  UpdateResourceCollectionCommandInput,
-  UpdateResourceCollectionCommandOutput,
 } from "./commands/UpdateResourceCollectionCommand";
 import {
+  type UpdateServiceIntegrationCommandInput,
+  type UpdateServiceIntegrationCommandOutput,
   UpdateServiceIntegrationCommand,
-  UpdateServiceIntegrationCommandInput,
-  UpdateServiceIntegrationCommandOutput,
 } from "./commands/UpdateServiceIntegrationCommand";
 import { DevOpsGuruClient } from "./DevOpsGuruClient";
+import {
+  paginateDescribeOrganizationResourceCollectionHealth,
+} from "./pagination/DescribeOrganizationResourceCollectionHealthPaginator";
+import { paginateDescribeResourceCollectionHealth } from "./pagination/DescribeResourceCollectionHealthPaginator";
+import { paginateGetCostEstimation } from "./pagination/GetCostEstimationPaginator";
+import { paginateGetResourceCollection } from "./pagination/GetResourceCollectionPaginator";
+import { paginateListAnomaliesForInsight } from "./pagination/ListAnomaliesForInsightPaginator";
+import { paginateListAnomalousLogGroups } from "./pagination/ListAnomalousLogGroupsPaginator";
+import { paginateListEvents } from "./pagination/ListEventsPaginator";
+import { paginateListInsights } from "./pagination/ListInsightsPaginator";
+import { paginateListMonitoredResources } from "./pagination/ListMonitoredResourcesPaginator";
+import { paginateListNotificationChannels } from "./pagination/ListNotificationChannelsPaginator";
+import { paginateListOrganizationInsights } from "./pagination/ListOrganizationInsightsPaginator";
+import { paginateListRecommendations } from "./pagination/ListRecommendationsPaginator";
+import { paginateSearchInsights } from "./pagination/SearchInsightsPaginator";
+import { paginateSearchOrganizationInsights } from "./pagination/SearchOrganizationInsightsPaginator";
+
+const commands = {
+  AddNotificationChannelCommand,
+  DeleteInsightCommand,
+  DescribeAccountHealthCommand,
+  DescribeAccountOverviewCommand,
+  DescribeAnomalyCommand,
+  DescribeEventSourcesConfigCommand,
+  DescribeFeedbackCommand,
+  DescribeInsightCommand,
+  DescribeOrganizationHealthCommand,
+  DescribeOrganizationOverviewCommand,
+  DescribeOrganizationResourceCollectionHealthCommand,
+  DescribeResourceCollectionHealthCommand,
+  DescribeServiceIntegrationCommand,
+  GetCostEstimationCommand,
+  GetResourceCollectionCommand,
+  ListAnomaliesForInsightCommand,
+  ListAnomalousLogGroupsCommand,
+  ListEventsCommand,
+  ListInsightsCommand,
+  ListMonitoredResourcesCommand,
+  ListNotificationChannelsCommand,
+  ListOrganizationInsightsCommand,
+  ListRecommendationsCommand,
+  PutFeedbackCommand,
+  RemoveNotificationChannelCommand,
+  SearchInsightsCommand,
+  SearchOrganizationInsightsCommand,
+  StartCostEstimationCommand,
+  UpdateEventSourcesConfigCommand,
+  UpdateResourceCollectionCommand,
+  UpdateServiceIntegrationCommand,
+};
+const paginators = {
+  paginateDescribeOrganizationResourceCollectionHealth,
+  paginateDescribeResourceCollectionHealth,
+  paginateGetCostEstimation,
+  paginateGetResourceCollection,
+  paginateListAnomaliesForInsight,
+  paginateListAnomalousLogGroups,
+  paginateListEvents,
+  paginateListInsights,
+  paginateListMonitoredResources,
+  paginateListNotificationChannels,
+  paginateListOrganizationInsights,
+  paginateListRecommendations,
+  paginateSearchInsights,
+  paginateSearchOrganizationInsights,
+};
 
 /**
- * <p> Amazon DevOps Guru is a fully managed service that helps you identify anomalous behavior in business
- * 			critical operational applications. You specify the AWS resources that you want DevOps Guru to cover,
- * 			then the Amazon CloudWatch metrics and AWS CloudTrail events related to those resources are analyzed. When
- * 			anomalous behavior is detected, DevOps Guru creates an <i>insight</i> that includes
- * 			recommendations, related events, and related metrics that can help you improve your
- * 			operational applications. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html">What is Amazon DevOps Guru</a>. </p>
- *
- * 		       <p>
- * 			You can specify 1 or 2 Amazon Simple Notification Service topics so you are notified every time a new insight is created. You can also enable DevOps Guru to generate
- * 			an OpsItem in AWS Systems Manager for each insight to help you manage and track your work addressing insights.
- * 		</p>
- *
- * 		       <p>
- * 			To learn about the DevOps Guru workflow, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html#how-it-works">How DevOps Guru works</a>. To
- * 			learn about DevOps Guru concepts, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/concepts.html">Concepts in DevOps Guru</a>.
- * 		</p>
+ * @public
  */
-export class DevOpsGuru extends DevOpsGuruClient {
+export interface DevOpsGuruRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface DevOpsGuru {
   /**
-   * <p>
-   * 			Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.
-   * 		</p>
-   *
-   * 		       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission
-   * 				to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account.
-   * 				For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions
-   * 				for cross account Amazon SNS topics</a>.</p>
-   * 				     <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions
-   * 				to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for
-   * 				AWS KMS–encrypted Amazon SNS topics</a>.</p>
+   * @see {@link AddNotificationChannelCommand}
    */
-  public addNotificationChannel(
+  addNotificationChannel(
     args: AddNotificationChannelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<AddNotificationChannelCommandOutput>;
-  public addNotificationChannel(
+  addNotificationChannel(
     args: AddNotificationChannelCommandInput,
     cb: (err: any, data?: AddNotificationChannelCommandOutput) => void
   ): void;
-  public addNotificationChannel(
+  addNotificationChannel(
     args: AddNotificationChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: AddNotificationChannelCommandOutput) => void
   ): void;
-  public addNotificationChannel(
-    args: AddNotificationChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddNotificationChannelCommandOutput) => void),
-    cb?: (err: any, data?: AddNotificationChannelCommandOutput) => void
-  ): Promise<AddNotificationChannelCommandOutput> | void {
-    const command = new AddNotificationChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your AWS account.
-   *    		Use these numbers to gauge the health of operations in your AWS account.
-   *    	</p>
+   * @see {@link DeleteInsightCommand}
    */
-  public describeAccountHealth(
+  deleteInsight(
+    args: DeleteInsightCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<DeleteInsightCommandOutput>;
+  deleteInsight(
+    args: DeleteInsightCommandInput,
+    cb: (err: any, data?: DeleteInsightCommandOutput) => void
+  ): void;
+  deleteInsight(
+    args: DeleteInsightCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: DeleteInsightCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountHealthCommand}
+   */
+  describeAccountHealth(): Promise<DescribeAccountHealthCommandOutput>;
+  describeAccountHealth(
     args: DescribeAccountHealthCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeAccountHealthCommandOutput>;
-  public describeAccountHealth(
+  describeAccountHealth(
     args: DescribeAccountHealthCommandInput,
     cb: (err: any, data?: DescribeAccountHealthCommandOutput) => void
   ): void;
-  public describeAccountHealth(
+  describeAccountHealth(
     args: DescribeAccountHealthCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeAccountHealthCommandOutput) => void
   ): void;
-  public describeAccountHealth(
-    args: DescribeAccountHealthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccountHealthCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountHealthCommandOutput) => void
-  ): Promise<DescribeAccountHealthCommandOutput> | void {
-    const command = new DescribeAccountHealthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		For the time range passed in, returns the number of open reactive insight that were created, the number of open proactive insights
-   *    		that were created, and the Mean Time to Recover (MTTR) for all closed reactive insights.
-   *    	</p>
+   * @see {@link DescribeAccountOverviewCommand}
    */
-  public describeAccountOverview(
+  describeAccountOverview(
     args: DescribeAccountOverviewCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeAccountOverviewCommandOutput>;
-  public describeAccountOverview(
+  describeAccountOverview(
     args: DescribeAccountOverviewCommandInput,
     cb: (err: any, data?: DescribeAccountOverviewCommandOutput) => void
   ): void;
-  public describeAccountOverview(
+  describeAccountOverview(
     args: DescribeAccountOverviewCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeAccountOverviewCommandOutput) => void
   ): void;
-  public describeAccountOverview(
-    args: DescribeAccountOverviewCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccountOverviewCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountOverviewCommandOutput) => void
-  ): Promise<DescribeAccountOverviewCommandOutput> | void {
-    const command = new DescribeAccountOverviewCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns details about an anomaly that you specify using its ID.
-   *    	</p>
+   * @see {@link DescribeAnomalyCommand}
    */
-  public describeAnomaly(
+  describeAnomaly(
     args: DescribeAnomalyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeAnomalyCommandOutput>;
-  public describeAnomaly(
+  describeAnomaly(
     args: DescribeAnomalyCommandInput,
     cb: (err: any, data?: DescribeAnomalyCommandOutput) => void
   ): void;
-  public describeAnomaly(
+  describeAnomaly(
     args: DescribeAnomalyCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeAnomalyCommandOutput) => void
   ): void;
-  public describeAnomaly(
-    args: DescribeAnomalyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAnomalyCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAnomalyCommandOutput) => void
-  ): Promise<DescribeAnomalyCommandOutput> | void {
-    const command = new DescribeAnomalyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   * 			Returns the most recent feedback submitted in the current AWS account and Region.
-   * 		</p>
+   * @see {@link DescribeEventSourcesConfigCommand}
    */
-  public describeFeedback(
+  describeEventSourcesConfig(): Promise<DescribeEventSourcesConfigCommandOutput>;
+  describeEventSourcesConfig(
+    args: DescribeEventSourcesConfigCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<DescribeEventSourcesConfigCommandOutput>;
+  describeEventSourcesConfig(
+    args: DescribeEventSourcesConfigCommandInput,
+    cb: (err: any, data?: DescribeEventSourcesConfigCommandOutput) => void
+  ): void;
+  describeEventSourcesConfig(
+    args: DescribeEventSourcesConfigCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: DescribeEventSourcesConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFeedbackCommand}
+   */
+  describeFeedback(): Promise<DescribeFeedbackCommandOutput>;
+  describeFeedback(
     args: DescribeFeedbackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeFeedbackCommandOutput>;
-  public describeFeedback(
+  describeFeedback(
     args: DescribeFeedbackCommandInput,
     cb: (err: any, data?: DescribeFeedbackCommandOutput) => void
   ): void;
-  public describeFeedback(
+  describeFeedback(
     args: DescribeFeedbackCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeFeedbackCommandOutput) => void
   ): void;
-  public describeFeedback(
-    args: DescribeFeedbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFeedbackCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFeedbackCommandOutput) => void
-  ): Promise<DescribeFeedbackCommandOutput> | void {
-    const command = new DescribeFeedbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns details about an insight that you specify using its ID.
-   *    	</p>
+   * @see {@link DescribeInsightCommand}
    */
-  public describeInsight(
+  describeInsight(
     args: DescribeInsightCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeInsightCommandOutput>;
-  public describeInsight(
+  describeInsight(
     args: DescribeInsightCommandInput,
     cb: (err: any, data?: DescribeInsightCommandOutput) => void
   ): void;
-  public describeInsight(
+  describeInsight(
     args: DescribeInsightCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeInsightCommandOutput) => void
   ): void;
-  public describeInsight(
-    args: DescribeInsightCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeInsightCommandOutput) => void),
-    cb?: (err: any, data?: DescribeInsightCommandOutput) => void
-  ): Promise<DescribeInsightCommandOutput> | void {
-    const command = new DescribeInsightCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in
-   *    		resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze
-   *       	only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.
-   *    	</p>
+   * @see {@link DescribeOrganizationHealthCommand}
    */
-  public describeResourceCollectionHealth(
+  describeOrganizationHealth(): Promise<DescribeOrganizationHealthCommandOutput>;
+  describeOrganizationHealth(
+    args: DescribeOrganizationHealthCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<DescribeOrganizationHealthCommandOutput>;
+  describeOrganizationHealth(
+    args: DescribeOrganizationHealthCommandInput,
+    cb: (err: any, data?: DescribeOrganizationHealthCommandOutput) => void
+  ): void;
+  describeOrganizationHealth(
+    args: DescribeOrganizationHealthCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: DescribeOrganizationHealthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOrganizationOverviewCommand}
+   */
+  describeOrganizationOverview(
+    args: DescribeOrganizationOverviewCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<DescribeOrganizationOverviewCommandOutput>;
+  describeOrganizationOverview(
+    args: DescribeOrganizationOverviewCommandInput,
+    cb: (err: any, data?: DescribeOrganizationOverviewCommandOutput) => void
+  ): void;
+  describeOrganizationOverview(
+    args: DescribeOrganizationOverviewCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: DescribeOrganizationOverviewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOrganizationResourceCollectionHealthCommand}
+   */
+  describeOrganizationResourceCollectionHealth(
+    args: DescribeOrganizationResourceCollectionHealthCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<DescribeOrganizationResourceCollectionHealthCommandOutput>;
+  describeOrganizationResourceCollectionHealth(
+    args: DescribeOrganizationResourceCollectionHealthCommandInput,
+    cb: (err: any, data?: DescribeOrganizationResourceCollectionHealthCommandOutput) => void
+  ): void;
+  describeOrganizationResourceCollectionHealth(
+    args: DescribeOrganizationResourceCollectionHealthCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: DescribeOrganizationResourceCollectionHealthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourceCollectionHealthCommand}
+   */
+  describeResourceCollectionHealth(
     args: DescribeResourceCollectionHealthCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeResourceCollectionHealthCommandOutput>;
-  public describeResourceCollectionHealth(
+  describeResourceCollectionHealth(
     args: DescribeResourceCollectionHealthCommandInput,
     cb: (err: any, data?: DescribeResourceCollectionHealthCommandOutput) => void
   ): void;
-  public describeResourceCollectionHealth(
+  describeResourceCollectionHealth(
     args: DescribeResourceCollectionHealthCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeResourceCollectionHealthCommandOutput) => void
   ): void;
-  public describeResourceCollectionHealth(
-    args: DescribeResourceCollectionHealthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResourceCollectionHealthCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResourceCollectionHealthCommandOutput) => void
-  ): Promise<DescribeResourceCollectionHealthCommandOutput> | void {
-    const command = new DescribeResourceCollectionHealthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   * 			Returns the integration status of services that are integrated with DevOps Guru.
-   * 			The one service that can be integrated with DevOps Guru
-   *       	is AWS Systems Manager, which can be used to create an OpsItem for each generated insight.
-   * 		</p>
+   * @see {@link DescribeServiceIntegrationCommand}
    */
-  public describeServiceIntegration(
+  describeServiceIntegration(): Promise<DescribeServiceIntegrationCommandOutput>;
+  describeServiceIntegration(
     args: DescribeServiceIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<DescribeServiceIntegrationCommandOutput>;
-  public describeServiceIntegration(
+  describeServiceIntegration(
     args: DescribeServiceIntegrationCommandInput,
     cb: (err: any, data?: DescribeServiceIntegrationCommandOutput) => void
   ): void;
-  public describeServiceIntegration(
+  describeServiceIntegration(
     args: DescribeServiceIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: DescribeServiceIntegrationCommandOutput) => void
   ): void;
-  public describeServiceIntegration(
-    args: DescribeServiceIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeServiceIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeServiceIntegrationCommandOutput) => void
-  ): Promise<DescribeServiceIntegrationCommandOutput> | void {
-    const command = new DescribeServiceIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources.
-   * 			For more information,
-   * 			see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your
-   * 			Amazon DevOps Guru costs</a> and
-   * 			<a href="http://aws.amazon.com/devops-guru/pricing/">Amazon DevOps Guru pricing</a>.</p>
+   * @see {@link GetCostEstimationCommand}
    */
-  public getCostEstimation(
+  getCostEstimation(): Promise<GetCostEstimationCommandOutput>;
+  getCostEstimation(
     args: GetCostEstimationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<GetCostEstimationCommandOutput>;
-  public getCostEstimation(
+  getCostEstimation(
     args: GetCostEstimationCommandInput,
     cb: (err: any, data?: GetCostEstimationCommandOutput) => void
   ): void;
-  public getCostEstimation(
+  getCostEstimation(
     args: GetCostEstimationCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: GetCostEstimationCommandOutput) => void
   ): void;
-  public getCostEstimation(
-    args: GetCostEstimationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCostEstimationCommandOutput) => void),
-    cb?: (err: any, data?: GetCostEstimationCommandOutput) => void
-  ): Promise<GetCostEstimationCommandOutput> | void {
-    const command = new GetCostEstimationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze
-   *       	only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.
-   *    	</p>
+   * @see {@link GetResourceCollectionCommand}
    */
-  public getResourceCollection(
+  getResourceCollection(
     args: GetResourceCollectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<GetResourceCollectionCommandOutput>;
-  public getResourceCollection(
+  getResourceCollection(
     args: GetResourceCollectionCommandInput,
     cb: (err: any, data?: GetResourceCollectionCommandOutput) => void
   ): void;
-  public getResourceCollection(
+  getResourceCollection(
     args: GetResourceCollectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: GetResourceCollectionCommandOutput) => void
   ): void;
-  public getResourceCollection(
-    args: GetResourceCollectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceCollectionCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceCollectionCommandOutput) => void
-  ): Promise<GetResourceCollectionCommandOutput> | void {
-    const command = new GetResourceCollectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns a list of the anomalies that belong to an insight that you specify using its ID.
-   *    	</p>
+   * @see {@link ListAnomaliesForInsightCommand}
    */
-  public listAnomaliesForInsight(
+  listAnomaliesForInsight(
     args: ListAnomaliesForInsightCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<ListAnomaliesForInsightCommandOutput>;
-  public listAnomaliesForInsight(
+  listAnomaliesForInsight(
     args: ListAnomaliesForInsightCommandInput,
     cb: (err: any, data?: ListAnomaliesForInsightCommandOutput) => void
   ): void;
-  public listAnomaliesForInsight(
+  listAnomaliesForInsight(
     args: ListAnomaliesForInsightCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: ListAnomaliesForInsightCommandOutput) => void
   ): void;
-  public listAnomaliesForInsight(
-    args: ListAnomaliesForInsightCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAnomaliesForInsightCommandOutput) => void),
-    cb?: (err: any, data?: ListAnomaliesForInsightCommandOutput) => void
-  ): Promise<ListAnomaliesForInsightCommandOutput> | void {
-    const command = new ListAnomaliesForInsightCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns a list of the events emitted by the resources that are evaluated by DevOps Guru. You can use filters to specify which events are returned.
-   *    	</p>
+   * @see {@link ListAnomalousLogGroupsCommand}
    */
-  public listEvents(args: ListEventsCommandInput, options?: __HttpHandlerOptions): Promise<ListEventsCommandOutput>;
-  public listEvents(args: ListEventsCommandInput, cb: (err: any, data?: ListEventsCommandOutput) => void): void;
-  public listEvents(
+  listAnomalousLogGroups(
+    args: ListAnomalousLogGroupsCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<ListAnomalousLogGroupsCommandOutput>;
+  listAnomalousLogGroups(
+    args: ListAnomalousLogGroupsCommandInput,
+    cb: (err: any, data?: ListAnomalousLogGroupsCommandOutput) => void
+  ): void;
+  listAnomalousLogGroups(
+    args: ListAnomalousLogGroupsCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: ListAnomalousLogGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEventsCommand}
+   */
+  listEvents(
     args: ListEventsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<ListEventsCommandOutput>;
+  listEvents(
+    args: ListEventsCommandInput,
     cb: (err: any, data?: ListEventsCommandOutput) => void
   ): void;
-  public listEvents(
+  listEvents(
     args: ListEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventsCommandOutput) => void),
-    cb?: (err: any, data?: ListEventsCommandOutput) => void
-  ): Promise<ListEventsCommandOutput> | void {
-    const command = new ListEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: ListEventsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>
-   *    		Returns a list of insights in your AWS account. You can specify which insights are returned by their start time and
-   *    		status (<code>ONGOING</code>, <code>CLOSED</code>, or <code>ANY</code>).
-   *    	</p>
+   * @see {@link ListInsightsCommand}
    */
-  public listInsights(
+  listInsights(
     args: ListInsightsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<ListInsightsCommandOutput>;
-  public listInsights(args: ListInsightsCommandInput, cb: (err: any, data?: ListInsightsCommandOutput) => void): void;
-  public listInsights(
+  listInsights(
     args: ListInsightsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListInsightsCommandOutput) => void
   ): void;
-  public listInsights(
+  listInsights(
     args: ListInsightsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListInsightsCommandOutput) => void),
-    cb?: (err: any, data?: ListInsightsCommandOutput) => void
-  ): Promise<ListInsightsCommandOutput> | void {
-    const command = new ListInsightsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: ListInsightsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>
-   *    		Returns a list of notification channels configured for DevOps Guru. Each notification channel is used to notify you when
-   *    		DevOps Guru generates an insight that contains information about how to improve your operations. The one
-   *       	supported notification channel is Amazon Simple Notification Service (Amazon SNS).
-   *    	</p>
+   * @see {@link ListMonitoredResourcesCommand}
    */
-  public listNotificationChannels(
+  listMonitoredResources(): Promise<ListMonitoredResourcesCommandOutput>;
+  listMonitoredResources(
+    args: ListMonitoredResourcesCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<ListMonitoredResourcesCommandOutput>;
+  listMonitoredResources(
+    args: ListMonitoredResourcesCommandInput,
+    cb: (err: any, data?: ListMonitoredResourcesCommandOutput) => void
+  ): void;
+  listMonitoredResources(
+    args: ListMonitoredResourcesCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: ListMonitoredResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNotificationChannelsCommand}
+   */
+  listNotificationChannels(): Promise<ListNotificationChannelsCommandOutput>;
+  listNotificationChannels(
     args: ListNotificationChannelsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<ListNotificationChannelsCommandOutput>;
-  public listNotificationChannels(
+  listNotificationChannels(
     args: ListNotificationChannelsCommandInput,
     cb: (err: any, data?: ListNotificationChannelsCommandOutput) => void
   ): void;
-  public listNotificationChannels(
+  listNotificationChannels(
     args: ListNotificationChannelsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: ListNotificationChannelsCommandOutput) => void
   ): void;
-  public listNotificationChannels(
-    args: ListNotificationChannelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNotificationChannelsCommandOutput) => void),
-    cb?: (err: any, data?: ListNotificationChannelsCommandOutput) => void
-  ): Promise<ListNotificationChannelsCommandOutput> | void {
-    const command = new ListNotificationChannelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns a list of a specified insight's recommendations. Each recommendation includes a list of related metrics and a list of related events.
-   *    	</p>
+   * @see {@link ListOrganizationInsightsCommand}
    */
-  public listRecommendations(
+  listOrganizationInsights(
+    args: ListOrganizationInsightsCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<ListOrganizationInsightsCommandOutput>;
+  listOrganizationInsights(
+    args: ListOrganizationInsightsCommandInput,
+    cb: (err: any, data?: ListOrganizationInsightsCommandOutput) => void
+  ): void;
+  listOrganizationInsights(
+    args: ListOrganizationInsightsCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: ListOrganizationInsightsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendationsCommand}
+   */
+  listRecommendations(
     args: ListRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<ListRecommendationsCommandOutput>;
-  public listRecommendations(
+  listRecommendations(
     args: ListRecommendationsCommandInput,
     cb: (err: any, data?: ListRecommendationsCommandOutput) => void
   ): void;
-  public listRecommendations(
+  listRecommendations(
     args: ListRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: ListRecommendationsCommandOutput) => void
   ): void;
-  public listRecommendations(
-    args: ListRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ListRecommendationsCommandOutput) => void
-  ): Promise<ListRecommendationsCommandOutput> | void {
-    const command = new ListRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Collects customer feedback about the specified insight.
-   *    	</p>
+   * @see {@link PutFeedbackCommand}
    */
-  public putFeedback(args: PutFeedbackCommandInput, options?: __HttpHandlerOptions): Promise<PutFeedbackCommandOutput>;
-  public putFeedback(args: PutFeedbackCommandInput, cb: (err: any, data?: PutFeedbackCommandOutput) => void): void;
-  public putFeedback(
+  putFeedback(): Promise<PutFeedbackCommandOutput>;
+  putFeedback(
     args: PutFeedbackCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<PutFeedbackCommandOutput>;
+  putFeedback(
+    args: PutFeedbackCommandInput,
     cb: (err: any, data?: PutFeedbackCommandOutput) => void
   ): void;
-  public putFeedback(
+  putFeedback(
     args: PutFeedbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutFeedbackCommandOutput) => void),
-    cb?: (err: any, data?: PutFeedbackCommandOutput) => void
-  ): Promise<PutFeedbackCommandOutput> | void {
-    const command = new PutFeedbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: PutFeedbackCommandOutput) => void
+  ): void;
 
   /**
-   * <p>
-   *    		Removes a notification channel from DevOps Guru. A notification channel is used to notify you when DevOps Guru generates an insight
-   *    		that contains information about how to improve your operations.
-   *    	</p>
+   * @see {@link RemoveNotificationChannelCommand}
    */
-  public removeNotificationChannel(
+  removeNotificationChannel(
     args: RemoveNotificationChannelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<RemoveNotificationChannelCommandOutput>;
-  public removeNotificationChannel(
+  removeNotificationChannel(
     args: RemoveNotificationChannelCommandInput,
     cb: (err: any, data?: RemoveNotificationChannelCommandOutput) => void
   ): void;
-  public removeNotificationChannel(
+  removeNotificationChannel(
     args: RemoveNotificationChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: RemoveNotificationChannelCommandOutput) => void
   ): void;
-  public removeNotificationChannel(
-    args: RemoveNotificationChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveNotificationChannelCommandOutput) => void),
-    cb?: (err: any, data?: RemoveNotificationChannelCommandOutput) => void
-  ): Promise<RemoveNotificationChannelCommandOutput> | void {
-    const command = new RemoveNotificationChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *    		Returns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses
-   *    		(<code>ONGOING</code>, <code>CLOSED</code>, and <code>CLOSED</code>), one or more severities (<code>LOW</code>, <code>MEDIUM</code>,
-   *    		and <code>HIGH</code>), and type (<code>REACTIVE</code> or <code>PROACTIVE</code>).
-   *    	</p>
-   *    	     <p>
-   *    		Use the <code>Filters</code> parameter to specify status and severity
-   *    		search parameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or <code>PROACTIVE</code> in your search.
-   *    	</p>
+   * @see {@link SearchInsightsCommand}
    */
-  public searchInsights(
+  searchInsights(
     args: SearchInsightsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<SearchInsightsCommandOutput>;
-  public searchInsights(
+  searchInsights(
     args: SearchInsightsCommandInput,
     cb: (err: any, data?: SearchInsightsCommandOutput) => void
   ): void;
-  public searchInsights(
+  searchInsights(
     args: SearchInsightsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: SearchInsightsCommandOutput) => void
   ): void;
-  public searchInsights(
-    args: SearchInsightsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchInsightsCommandOutput) => void),
-    cb?: (err: any, data?: SearchInsightsCommandOutput) => void
-  ): Promise<SearchInsightsCommandOutput> | void {
-    const command = new SearchInsightsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts the creation of an estimate of the monthly cost to analyze your AWS resources.</p>
+   * @see {@link SearchOrganizationInsightsCommand}
    */
-  public startCostEstimation(
+  searchOrganizationInsights(
+    args: SearchOrganizationInsightsCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<SearchOrganizationInsightsCommandOutput>;
+  searchOrganizationInsights(
+    args: SearchOrganizationInsightsCommandInput,
+    cb: (err: any, data?: SearchOrganizationInsightsCommandOutput) => void
+  ): void;
+  searchOrganizationInsights(
+    args: SearchOrganizationInsightsCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: SearchOrganizationInsightsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCostEstimationCommand}
+   */
+  startCostEstimation(
     args: StartCostEstimationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<StartCostEstimationCommandOutput>;
-  public startCostEstimation(
+  startCostEstimation(
     args: StartCostEstimationCommandInput,
     cb: (err: any, data?: StartCostEstimationCommandOutput) => void
   ): void;
-  public startCostEstimation(
+  startCostEstimation(
     args: StartCostEstimationCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: StartCostEstimationCommandOutput) => void
   ): void;
-  public startCostEstimation(
-    args: StartCostEstimationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartCostEstimationCommandOutput) => void),
-    cb?: (err: any, data?: StartCostEstimationCommandOutput) => void
-  ): Promise<StartCostEstimationCommandOutput> | void {
-    const command = new StartCostEstimationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p> Updates the collection of resources that DevOps Guru analyzes.
-   * 			The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze
-   *       	only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you
-   * 			to use DevOps Guru. </p>
+   * @see {@link UpdateEventSourcesConfigCommand}
    */
-  public updateResourceCollection(
+  updateEventSourcesConfig(): Promise<UpdateEventSourcesConfigCommandOutput>;
+  updateEventSourcesConfig(
+    args: UpdateEventSourcesConfigCommandInput,
+    options?: DevOpsGuruRequestOptions
+  ): Promise<UpdateEventSourcesConfigCommandOutput>;
+  updateEventSourcesConfig(
+    args: UpdateEventSourcesConfigCommandInput,
+    cb: (err: any, data?: UpdateEventSourcesConfigCommandOutput) => void
+  ): void;
+  updateEventSourcesConfig(
+    args: UpdateEventSourcesConfigCommandInput,
+    options: DevOpsGuruRequestOptions,
+    cb: (err: any, data?: UpdateEventSourcesConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateResourceCollectionCommand}
+   */
+  updateResourceCollection(
     args: UpdateResourceCollectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<UpdateResourceCollectionCommandOutput>;
-  public updateResourceCollection(
+  updateResourceCollection(
     args: UpdateResourceCollectionCommandInput,
     cb: (err: any, data?: UpdateResourceCollectionCommandOutput) => void
   ): void;
-  public updateResourceCollection(
+  updateResourceCollection(
     args: UpdateResourceCollectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: UpdateResourceCollectionCommandOutput) => void
   ): void;
-  public updateResourceCollection(
-    args: UpdateResourceCollectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourceCollectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourceCollectionCommandOutput) => void
-  ): Promise<UpdateResourceCollectionCommandOutput> | void {
-    const command = new UpdateResourceCollectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   * 			Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with
-   * 			DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight.
-   * 		</p>
+   * @see {@link UpdateServiceIntegrationCommand}
    */
-  public updateServiceIntegration(
+  updateServiceIntegration(
     args: UpdateServiceIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DevOpsGuruRequestOptions
   ): Promise<UpdateServiceIntegrationCommandOutput>;
-  public updateServiceIntegration(
+  updateServiceIntegration(
     args: UpdateServiceIntegrationCommandInput,
     cb: (err: any, data?: UpdateServiceIntegrationCommandOutput) => void
   ): void;
-  public updateServiceIntegration(
+  updateServiceIntegration(
     args: UpdateServiceIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: DevOpsGuruRequestOptions,
     cb: (err: any, data?: UpdateServiceIntegrationCommandOutput) => void
   ): void;
-  public updateServiceIntegration(
-    args: UpdateServiceIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateServiceIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateServiceIntegrationCommandOutput) => void
-  ): Promise<UpdateServiceIntegrationCommandOutput> | void {
-    const command = new UpdateServiceIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link DescribeOrganizationResourceCollectionHealthCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeOrganizationResourceCollectionHealthCommandOutput}.
+   */
+  paginateDescribeOrganizationResourceCollectionHealth(
+    args: DescribeOrganizationResourceCollectionHealthCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeOrganizationResourceCollectionHealthCommandOutput>;
+
+  /**
+   * @see {@link DescribeResourceCollectionHealthCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeResourceCollectionHealthCommandOutput}.
+   */
+  paginateDescribeResourceCollectionHealth(
+    args: DescribeResourceCollectionHealthCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeResourceCollectionHealthCommandOutput>;
+
+  /**
+   * @see {@link GetCostEstimationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCostEstimationCommandOutput}.
+   */
+  paginateGetCostEstimation(
+    args?: GetCostEstimationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCostEstimationCommandOutput>;
+
+  /**
+   * @see {@link GetResourceCollectionCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetResourceCollectionCommandOutput}.
+   */
+  paginateGetResourceCollection(
+    args: GetResourceCollectionCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetResourceCollectionCommandOutput>;
+
+  /**
+   * @see {@link ListAnomaliesForInsightCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnomaliesForInsightCommandOutput}.
+   */
+  paginateListAnomaliesForInsight(
+    args: ListAnomaliesForInsightCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnomaliesForInsightCommandOutput>;
+
+  /**
+   * @see {@link ListAnomalousLogGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnomalousLogGroupsCommandOutput}.
+   */
+  paginateListAnomalousLogGroups(
+    args: ListAnomalousLogGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnomalousLogGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventsCommandOutput}.
+   */
+  paginateListEvents(
+    args: ListEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventsCommandOutput>;
+
+  /**
+   * @see {@link ListInsightsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInsightsCommandOutput}.
+   */
+  paginateListInsights(
+    args: ListInsightsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInsightsCommandOutput>;
+
+  /**
+   * @see {@link ListMonitoredResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMonitoredResourcesCommandOutput}.
+   */
+  paginateListMonitoredResources(
+    args?: ListMonitoredResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMonitoredResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListNotificationChannelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNotificationChannelsCommandOutput}.
+   */
+  paginateListNotificationChannels(
+    args?: ListNotificationChannelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNotificationChannelsCommandOutput>;
+
+  /**
+   * @see {@link ListOrganizationInsightsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOrganizationInsightsCommandOutput}.
+   */
+  paginateListOrganizationInsights(
+    args: ListOrganizationInsightsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOrganizationInsightsCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendationsCommandOutput}.
+   */
+  paginateListRecommendations(
+    args: ListRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link SearchInsightsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchInsightsCommandOutput}.
+   */
+  paginateSearchInsights(
+    args: SearchInsightsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchInsightsCommandOutput>;
+
+  /**
+   * @see {@link SearchOrganizationInsightsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchOrganizationInsightsCommandOutput}.
+   */
+  paginateSearchOrganizationInsights(
+    args: SearchOrganizationInsightsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchOrganizationInsightsCommandOutput>;
 }
+
+/**
+ * <p> Amazon DevOps Guru is a fully managed service that helps you identify anomalous behavior in
+ * 			business critical operational applications. You specify the Amazon Web Services resources that you
+ * 			want DevOps Guru to cover, then the Amazon CloudWatch metrics and Amazon Web Services CloudTrail events related to those
+ * 			resources are analyzed. When anomalous behavior is detected, DevOps Guru creates an
+ * 				<i>insight</i> that includes recommendations, related events, and
+ * 			related metrics that can help you improve your operational applications. For more
+ * 			information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html">What is Amazon DevOps Guru</a>. </p>
+ *          <p> You can specify 1 or 2 Amazon Simple Notification Service topics so you are notified every time a new insight
+ * 			is created. You can also enable DevOps Guru to generate an OpsItem in Amazon Web Services Systems Manager for each
+ * 			insight to help you manage and track your work addressing insights. </p>
+ *          <p> To learn about the DevOps Guru workflow, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html#how-it-works">How DevOps Guru works</a>. To
+ * 			learn about DevOps Guru concepts, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/concepts.html">Concepts in DevOps Guru</a>. </p>
+ * @public
+ */
+export class DevOpsGuru extends DevOpsGuruClient implements DevOpsGuru {}
+createAggregatedClient(commands, DevOpsGuru, { paginators });

@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { ListDocumentClassificationJobsRequest, ListDocumentClassificationJobsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListDocumentClassificationJobsCommand,
-  serializeAws_json1_1ListDocumentClassificationJobsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDocumentClassificationJobsRequest, ListDocumentClassificationJobsResponse } from "../models/models_0";
+import { ListDocumentClassificationJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDocumentClassificationJobsCommand}.
+ */
 export interface ListDocumentClassificationJobsCommandInput extends ListDocumentClassificationJobsRequest {}
-export interface ListDocumentClassificationJobsCommandOutput
-  extends ListDocumentClassificationJobsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListDocumentClassificationJobsCommand}.
+ */
+export interface ListDocumentClassificationJobsCommandOutput extends ListDocumentClassificationJobsResponse, __MetadataBearer {}
 
 /**
  * <p>Gets a list of the documentation classification jobs that you have submitted.</p>
@@ -30,74 +29,105 @@ export interface ListDocumentClassificationJobsCommandOutput
  * ```javascript
  * import { ComprehendClient, ListDocumentClassificationJobsCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, ListDocumentClassificationJobsCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // ListDocumentClassificationJobsRequest
+ *   Filter: { // DocumentClassificationJobFilter
+ *     JobName: "STRING_VALUE",
+ *     JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ *     SubmitTimeBefore: new Date("TIMESTAMP"),
+ *     SubmitTimeAfter: new Date("TIMESTAMP"),
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListDocumentClassificationJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDocumentClassificationJobsResponse
+ * //   DocumentClassificationJobPropertiesList: [ // DocumentClassificationJobPropertiesList
+ * //     { // DocumentClassificationJobProperties
+ * //       JobId: "STRING_VALUE",
+ * //       JobArn: "STRING_VALUE",
+ * //       JobName: "STRING_VALUE",
+ * //       JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * //       Message: "STRING_VALUE",
+ * //       SubmitTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       DocumentClassifierArn: "STRING_VALUE",
+ * //       InputDataConfig: { // InputDataConfig
+ * //         S3Uri: "STRING_VALUE", // required
+ * //         InputFormat: "ONE_DOC_PER_FILE" || "ONE_DOC_PER_LINE",
+ * //         DocumentReaderConfig: { // DocumentReaderConfig
+ * //           DocumentReadAction: "TEXTRACT_DETECT_DOCUMENT_TEXT" || "TEXTRACT_ANALYZE_DOCUMENT", // required
+ * //           DocumentReadMode: "SERVICE_DEFAULT" || "FORCE_DOCUMENT_READ_ACTION",
+ * //           FeatureTypes: [ // ListOfDocumentReadFeatureTypes
+ * //             "TABLES" || "FORMS",
+ * //           ],
+ * //         },
+ * //       },
+ * //       OutputDataConfig: { // OutputDataConfig
+ * //         S3Uri: "STRING_VALUE", // required
+ * //         KmsKeyId: "STRING_VALUE",
+ * //       },
+ * //       DataAccessRoleArn: "STRING_VALUE",
+ * //       VolumeKmsKeyId: "STRING_VALUE",
+ * //       VpcConfig: { // VpcConfig
+ * //         SecurityGroupIds: [ // SecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Subnets: [ // Subnets // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       FlywheelArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDocumentClassificationJobsCommandInput - {@link ListDocumentClassificationJobsCommandInput}
+ * @returns {@link ListDocumentClassificationJobsCommandOutput}
  * @see {@link ListDocumentClassificationJobsCommandInput} for command's `input` shape.
  * @see {@link ListDocumentClassificationJobsCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidFilterException} (client fault)
+ *  <p>The filter specified for the operation is invalid. Specify a different
+ *       filter.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class ListDocumentClassificationJobsCommand extends $Command<
-  ListDocumentClassificationJobsCommandInput,
-  ListDocumentClassificationJobsCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDocumentClassificationJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDocumentClassificationJobsCommandInput, ListDocumentClassificationJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "ListDocumentClassificationJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDocumentClassificationJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDocumentClassificationJobsResponse.filterSensitiveLog,
+export class ListDocumentClassificationJobsCommand extends command<ListDocumentClassificationJobsCommandInput, ListDocumentClassificationJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDocumentClassificationJobs",
+  ListDocumentClassificationJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDocumentClassificationJobsRequest;
+      output: ListDocumentClassificationJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListDocumentClassificationJobsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDocumentClassificationJobsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListDocumentClassificationJobsCommandOutput> {
-    return deserializeAws_json1_1ListDocumentClassificationJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDocumentClassificationJobsCommandInput;
+      output: ListDocumentClassificationJobsCommandOutput;
+    };
+  };
 }

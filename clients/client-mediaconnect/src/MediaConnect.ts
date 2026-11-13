@@ -1,1045 +1,2652 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type AddBridgeOutputsCommandInput,
+  type AddBridgeOutputsCommandOutput,
+  AddBridgeOutputsCommand,
+} from "./commands/AddBridgeOutputsCommand";
+import {
+  type AddBridgeSourcesCommandInput,
+  type AddBridgeSourcesCommandOutput,
+  AddBridgeSourcesCommand,
+} from "./commands/AddBridgeSourcesCommand";
+import {
+  type AddFlowMediaStreamsCommandInput,
+  type AddFlowMediaStreamsCommandOutput,
   AddFlowMediaStreamsCommand,
-  AddFlowMediaStreamsCommandInput,
-  AddFlowMediaStreamsCommandOutput,
 } from "./commands/AddFlowMediaStreamsCommand";
 import {
+  type AddFlowOutputsCommandInput,
+  type AddFlowOutputsCommandOutput,
   AddFlowOutputsCommand,
-  AddFlowOutputsCommandInput,
-  AddFlowOutputsCommandOutput,
 } from "./commands/AddFlowOutputsCommand";
 import {
+  type AddFlowSourcesCommandInput,
+  type AddFlowSourcesCommandOutput,
   AddFlowSourcesCommand,
-  AddFlowSourcesCommandInput,
-  AddFlowSourcesCommandOutput,
 } from "./commands/AddFlowSourcesCommand";
 import {
+  type AddFlowVpcInterfacesCommandInput,
+  type AddFlowVpcInterfacesCommandOutput,
   AddFlowVpcInterfacesCommand,
-  AddFlowVpcInterfacesCommandInput,
-  AddFlowVpcInterfacesCommandOutput,
 } from "./commands/AddFlowVpcInterfacesCommand";
-import { CreateFlowCommand, CreateFlowCommandInput, CreateFlowCommandOutput } from "./commands/CreateFlowCommand";
-import { DeleteFlowCommand, DeleteFlowCommandInput, DeleteFlowCommandOutput } from "./commands/DeleteFlowCommand";
 import {
+  type BatchGetDestinationEndpointCommandInput,
+  type BatchGetDestinationEndpointCommandOutput,
+  BatchGetDestinationEndpointCommand,
+} from "./commands/BatchGetDestinationEndpointCommand";
+import {
+  type BatchGetRouterInputCommandInput,
+  type BatchGetRouterInputCommandOutput,
+  BatchGetRouterInputCommand,
+} from "./commands/BatchGetRouterInputCommand";
+import {
+  type BatchGetRouterNetworkInterfaceCommandInput,
+  type BatchGetRouterNetworkInterfaceCommandOutput,
+  BatchGetRouterNetworkInterfaceCommand,
+} from "./commands/BatchGetRouterNetworkInterfaceCommand";
+import {
+  type BatchGetRouterOutputCommandInput,
+  type BatchGetRouterOutputCommandOutput,
+  BatchGetRouterOutputCommand,
+} from "./commands/BatchGetRouterOutputCommand";
+import {
+  type BatchGetSourceEndpointCommandInput,
+  type BatchGetSourceEndpointCommandOutput,
+  BatchGetSourceEndpointCommand,
+} from "./commands/BatchGetSourceEndpointCommand";
+import {
+  type ConnectEndpointsCommandInput,
+  type ConnectEndpointsCommandOutput,
+  ConnectEndpointsCommand,
+} from "./commands/ConnectEndpointsCommand";
+import {
+  type CreateBridgeCommandInput,
+  type CreateBridgeCommandOutput,
+  CreateBridgeCommand,
+} from "./commands/CreateBridgeCommand";
+import {
+  type CreateFlowCommandInput,
+  type CreateFlowCommandOutput,
+  CreateFlowCommand,
+} from "./commands/CreateFlowCommand";
+import {
+  type CreateGatewayCommandInput,
+  type CreateGatewayCommandOutput,
+  CreateGatewayCommand,
+} from "./commands/CreateGatewayCommand";
+import {
+  type CreateRouterInputCommandInput,
+  type CreateRouterInputCommandOutput,
+  CreateRouterInputCommand,
+} from "./commands/CreateRouterInputCommand";
+import {
+  type CreateRouterNetworkInterfaceCommandInput,
+  type CreateRouterNetworkInterfaceCommandOutput,
+  CreateRouterNetworkInterfaceCommand,
+} from "./commands/CreateRouterNetworkInterfaceCommand";
+import {
+  type CreateRouterOutputCommandInput,
+  type CreateRouterOutputCommandOutput,
+  CreateRouterOutputCommand,
+} from "./commands/CreateRouterOutputCommand";
+import {
+  type DeleteBridgeCommandInput,
+  type DeleteBridgeCommandOutput,
+  DeleteBridgeCommand,
+} from "./commands/DeleteBridgeCommand";
+import {
+  type DeleteFlowCommandInput,
+  type DeleteFlowCommandOutput,
+  DeleteFlowCommand,
+} from "./commands/DeleteFlowCommand";
+import {
+  type DeleteGatewayCommandInput,
+  type DeleteGatewayCommandOutput,
+  DeleteGatewayCommand,
+} from "./commands/DeleteGatewayCommand";
+import {
+  type DeleteRouterInputCommandInput,
+  type DeleteRouterInputCommandOutput,
+  DeleteRouterInputCommand,
+} from "./commands/DeleteRouterInputCommand";
+import {
+  type DeleteRouterNetworkInterfaceCommandInput,
+  type DeleteRouterNetworkInterfaceCommandOutput,
+  DeleteRouterNetworkInterfaceCommand,
+} from "./commands/DeleteRouterNetworkInterfaceCommand";
+import {
+  type DeleteRouterOutputCommandInput,
+  type DeleteRouterOutputCommandOutput,
+  DeleteRouterOutputCommand,
+} from "./commands/DeleteRouterOutputCommand";
+import {
+  type DeregisterDestinationEndpointCommandInput,
+  type DeregisterDestinationEndpointCommandOutput,
+  DeregisterDestinationEndpointCommand,
+} from "./commands/DeregisterDestinationEndpointCommand";
+import {
+  type DeregisterGatewayInstanceCommandInput,
+  type DeregisterGatewayInstanceCommandOutput,
+  DeregisterGatewayInstanceCommand,
+} from "./commands/DeregisterGatewayInstanceCommand";
+import {
+  type DeregisterSourceEndpointCommandInput,
+  type DeregisterSourceEndpointCommandOutput,
+  DeregisterSourceEndpointCommand,
+} from "./commands/DeregisterSourceEndpointCommand";
+import {
+  type DescribeBridgeCommandInput,
+  type DescribeBridgeCommandOutput,
+  DescribeBridgeCommand,
+} from "./commands/DescribeBridgeCommand";
+import {
+  type DescribeFlowCommandInput,
+  type DescribeFlowCommandOutput,
   DescribeFlowCommand,
-  DescribeFlowCommandInput,
-  DescribeFlowCommandOutput,
 } from "./commands/DescribeFlowCommand";
 import {
+  type DescribeFlowSourceMetadataCommandInput,
+  type DescribeFlowSourceMetadataCommandOutput,
+  DescribeFlowSourceMetadataCommand,
+} from "./commands/DescribeFlowSourceMetadataCommand";
+import {
+  type DescribeFlowSourceThumbnailCommandInput,
+  type DescribeFlowSourceThumbnailCommandOutput,
+  DescribeFlowSourceThumbnailCommand,
+} from "./commands/DescribeFlowSourceThumbnailCommand";
+import {
+  type DescribeGatewayCommandInput,
+  type DescribeGatewayCommandOutput,
+  DescribeGatewayCommand,
+} from "./commands/DescribeGatewayCommand";
+import {
+  type DescribeGatewayInstanceCommandInput,
+  type DescribeGatewayInstanceCommandOutput,
+  DescribeGatewayInstanceCommand,
+} from "./commands/DescribeGatewayInstanceCommand";
+import {
+  type DescribeOfferingCommandInput,
+  type DescribeOfferingCommandOutput,
   DescribeOfferingCommand,
-  DescribeOfferingCommandInput,
-  DescribeOfferingCommandOutput,
 } from "./commands/DescribeOfferingCommand";
 import {
+  type DescribeReservationCommandInput,
+  type DescribeReservationCommandOutput,
   DescribeReservationCommand,
-  DescribeReservationCommandInput,
-  DescribeReservationCommandOutput,
 } from "./commands/DescribeReservationCommand";
 import {
+  type DisconnectEndpointsCommandInput,
+  type DisconnectEndpointsCommandOutput,
+  DisconnectEndpointsCommand,
+} from "./commands/DisconnectEndpointsCommand";
+import {
+  type GetDestinationEndpointCommandInput,
+  type GetDestinationEndpointCommandOutput,
+  GetDestinationEndpointCommand,
+} from "./commands/GetDestinationEndpointCommand";
+import {
+  type GetRouterInputCommandInput,
+  type GetRouterInputCommandOutput,
+  GetRouterInputCommand,
+} from "./commands/GetRouterInputCommand";
+import {
+  type GetRouterInputSourceMetadataCommandInput,
+  type GetRouterInputSourceMetadataCommandOutput,
+  GetRouterInputSourceMetadataCommand,
+} from "./commands/GetRouterInputSourceMetadataCommand";
+import {
+  type GetRouterInputThumbnailCommandInput,
+  type GetRouterInputThumbnailCommandOutput,
+  GetRouterInputThumbnailCommand,
+} from "./commands/GetRouterInputThumbnailCommand";
+import {
+  type GetRouterNetworkInterfaceCommandInput,
+  type GetRouterNetworkInterfaceCommandOutput,
+  GetRouterNetworkInterfaceCommand,
+} from "./commands/GetRouterNetworkInterfaceCommand";
+import {
+  type GetRouterOutputCommandInput,
+  type GetRouterOutputCommandOutput,
+  GetRouterOutputCommand,
+} from "./commands/GetRouterOutputCommand";
+import {
+  type GetSourceEndpointCommandInput,
+  type GetSourceEndpointCommandOutput,
+  GetSourceEndpointCommand,
+} from "./commands/GetSourceEndpointCommand";
+import {
+  type GrantFlowEntitlementsCommandInput,
+  type GrantFlowEntitlementsCommandOutput,
   GrantFlowEntitlementsCommand,
-  GrantFlowEntitlementsCommandInput,
-  GrantFlowEntitlementsCommandOutput,
 } from "./commands/GrantFlowEntitlementsCommand";
 import {
-  ListEntitlementsCommand,
-  ListEntitlementsCommandInput,
-  ListEntitlementsCommandOutput,
-} from "./commands/ListEntitlementsCommand";
-import { ListFlowsCommand, ListFlowsCommandInput, ListFlowsCommandOutput } from "./commands/ListFlowsCommand";
+  type ListBridgesCommandInput,
+  type ListBridgesCommandOutput,
+  ListBridgesCommand,
+} from "./commands/ListBridgesCommand";
 import {
+  type ListDestinationEndpointsCommandInput,
+  type ListDestinationEndpointsCommandOutput,
+  ListDestinationEndpointsCommand,
+} from "./commands/ListDestinationEndpointsCommand";
+import {
+  type ListEntitlementsCommandInput,
+  type ListEntitlementsCommandOutput,
+  ListEntitlementsCommand,
+} from "./commands/ListEntitlementsCommand";
+import { type ListFlowsCommandInput, type ListFlowsCommandOutput, ListFlowsCommand } from "./commands/ListFlowsCommand";
+import {
+  type ListGatewayInstancesCommandInput,
+  type ListGatewayInstancesCommandOutput,
+  ListGatewayInstancesCommand,
+} from "./commands/ListGatewayInstancesCommand";
+import {
+  type ListGatewaysCommandInput,
+  type ListGatewaysCommandOutput,
+  ListGatewaysCommand,
+} from "./commands/ListGatewaysCommand";
+import {
+  type ListOfferingsCommandInput,
+  type ListOfferingsCommandOutput,
   ListOfferingsCommand,
-  ListOfferingsCommandInput,
-  ListOfferingsCommandOutput,
 } from "./commands/ListOfferingsCommand";
 import {
+  type ListReservationsCommandInput,
+  type ListReservationsCommandOutput,
   ListReservationsCommand,
-  ListReservationsCommandInput,
-  ListReservationsCommandOutput,
 } from "./commands/ListReservationsCommand";
 import {
+  type ListRouterInputsCommandInput,
+  type ListRouterInputsCommandOutput,
+  ListRouterInputsCommand,
+} from "./commands/ListRouterInputsCommand";
+import {
+  type ListRouterNetworkInterfacesCommandInput,
+  type ListRouterNetworkInterfacesCommandOutput,
+  ListRouterNetworkInterfacesCommand,
+} from "./commands/ListRouterNetworkInterfacesCommand";
+import {
+  type ListRouterOutputsCommandInput,
+  type ListRouterOutputsCommandOutput,
+  ListRouterOutputsCommand,
+} from "./commands/ListRouterOutputsCommand";
+import {
+  type ListSourceEndpointsCommandInput,
+  type ListSourceEndpointsCommandOutput,
+  ListSourceEndpointsCommand,
+} from "./commands/ListSourceEndpointsCommand";
+import {
+  type ListTagsForGlobalResourceCommandInput,
+  type ListTagsForGlobalResourceCommandOutput,
+  ListTagsForGlobalResourceCommand,
+} from "./commands/ListTagsForGlobalResourceCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type PurchaseOfferingCommandInput,
+  type PurchaseOfferingCommandOutput,
   PurchaseOfferingCommand,
-  PurchaseOfferingCommandInput,
-  PurchaseOfferingCommandOutput,
 } from "./commands/PurchaseOfferingCommand";
 import {
+  type RegisterDestinationEndpointCommandInput,
+  type RegisterDestinationEndpointCommandOutput,
+  RegisterDestinationEndpointCommand,
+} from "./commands/RegisterDestinationEndpointCommand";
+import {
+  type RegisterSourceEndpointCommandInput,
+  type RegisterSourceEndpointCommandOutput,
+  RegisterSourceEndpointCommand,
+} from "./commands/RegisterSourceEndpointCommand";
+import {
+  type RemoveBridgeOutputCommandInput,
+  type RemoveBridgeOutputCommandOutput,
+  RemoveBridgeOutputCommand,
+} from "./commands/RemoveBridgeOutputCommand";
+import {
+  type RemoveBridgeSourceCommandInput,
+  type RemoveBridgeSourceCommandOutput,
+  RemoveBridgeSourceCommand,
+} from "./commands/RemoveBridgeSourceCommand";
+import {
+  type RemoveFlowMediaStreamCommandInput,
+  type RemoveFlowMediaStreamCommandOutput,
   RemoveFlowMediaStreamCommand,
-  RemoveFlowMediaStreamCommandInput,
-  RemoveFlowMediaStreamCommandOutput,
 } from "./commands/RemoveFlowMediaStreamCommand";
 import {
+  type RemoveFlowOutputCommandInput,
+  type RemoveFlowOutputCommandOutput,
   RemoveFlowOutputCommand,
-  RemoveFlowOutputCommandInput,
-  RemoveFlowOutputCommandOutput,
 } from "./commands/RemoveFlowOutputCommand";
 import {
+  type RemoveFlowSourceCommandInput,
+  type RemoveFlowSourceCommandOutput,
   RemoveFlowSourceCommand,
-  RemoveFlowSourceCommandInput,
-  RemoveFlowSourceCommandOutput,
 } from "./commands/RemoveFlowSourceCommand";
 import {
+  type RemoveFlowVpcInterfaceCommandInput,
+  type RemoveFlowVpcInterfaceCommandOutput,
   RemoveFlowVpcInterfaceCommand,
-  RemoveFlowVpcInterfaceCommandInput,
-  RemoveFlowVpcInterfaceCommandOutput,
 } from "./commands/RemoveFlowVpcInterfaceCommand";
 import {
+  type RestartRouterInputCommandInput,
+  type RestartRouterInputCommandOutput,
+  RestartRouterInputCommand,
+} from "./commands/RestartRouterInputCommand";
+import {
+  type RestartRouterOutputCommandInput,
+  type RestartRouterOutputCommandOutput,
+  RestartRouterOutputCommand,
+} from "./commands/RestartRouterOutputCommand";
+import {
+  type RevokeFlowEntitlementCommandInput,
+  type RevokeFlowEntitlementCommandOutput,
   RevokeFlowEntitlementCommand,
-  RevokeFlowEntitlementCommandInput,
-  RevokeFlowEntitlementCommandOutput,
 } from "./commands/RevokeFlowEntitlementCommand";
-import { StartFlowCommand, StartFlowCommandInput, StartFlowCommandOutput } from "./commands/StartFlowCommand";
-import { StopFlowCommand, StopFlowCommandInput, StopFlowCommandOutput } from "./commands/StopFlowCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import { type StartFlowCommandInput, type StartFlowCommandOutput, StartFlowCommand } from "./commands/StartFlowCommand";
 import {
+  type StartRouterInputCommandInput,
+  type StartRouterInputCommandOutput,
+  StartRouterInputCommand,
+} from "./commands/StartRouterInputCommand";
+import {
+  type StartRouterOutputCommandInput,
+  type StartRouterOutputCommandOutput,
+  StartRouterOutputCommand,
+} from "./commands/StartRouterOutputCommand";
+import { type StopFlowCommandInput, type StopFlowCommandOutput, StopFlowCommand } from "./commands/StopFlowCommand";
+import {
+  type StopRouterInputCommandInput,
+  type StopRouterInputCommandOutput,
+  StopRouterInputCommand,
+} from "./commands/StopRouterInputCommand";
+import {
+  type StopRouterOutputCommandInput,
+  type StopRouterOutputCommandOutput,
+  StopRouterOutputCommand,
+} from "./commands/StopRouterOutputCommand";
+import {
+  type TagGlobalResourceCommandInput,
+  type TagGlobalResourceCommandOutput,
+  TagGlobalResourceCommand,
+} from "./commands/TagGlobalResourceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TakeRouterInputCommandInput,
+  type TakeRouterInputCommandOutput,
+  TakeRouterInputCommand,
+} from "./commands/TakeRouterInputCommand";
+import {
+  type UntagGlobalResourceCommandInput,
+  type UntagGlobalResourceCommandOutput,
+  UntagGlobalResourceCommand,
+} from "./commands/UntagGlobalResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateFlowCommand, UpdateFlowCommandInput, UpdateFlowCommandOutput } from "./commands/UpdateFlowCommand";
 import {
+  type UpdateBridgeCommandInput,
+  type UpdateBridgeCommandOutput,
+  UpdateBridgeCommand,
+} from "./commands/UpdateBridgeCommand";
+import {
+  type UpdateBridgeOutputCommandInput,
+  type UpdateBridgeOutputCommandOutput,
+  UpdateBridgeOutputCommand,
+} from "./commands/UpdateBridgeOutputCommand";
+import {
+  type UpdateBridgeSourceCommandInput,
+  type UpdateBridgeSourceCommandOutput,
+  UpdateBridgeSourceCommand,
+} from "./commands/UpdateBridgeSourceCommand";
+import {
+  type UpdateBridgeStateCommandInput,
+  type UpdateBridgeStateCommandOutput,
+  UpdateBridgeStateCommand,
+} from "./commands/UpdateBridgeStateCommand";
+import {
+  type UpdateDestinationEndpointCommandInput,
+  type UpdateDestinationEndpointCommandOutput,
+  UpdateDestinationEndpointCommand,
+} from "./commands/UpdateDestinationEndpointCommand";
+import {
+  type UpdateFlowCommandInput,
+  type UpdateFlowCommandOutput,
+  UpdateFlowCommand,
+} from "./commands/UpdateFlowCommand";
+import {
+  type UpdateFlowEntitlementCommandInput,
+  type UpdateFlowEntitlementCommandOutput,
   UpdateFlowEntitlementCommand,
-  UpdateFlowEntitlementCommandInput,
-  UpdateFlowEntitlementCommandOutput,
 } from "./commands/UpdateFlowEntitlementCommand";
 import {
+  type UpdateFlowMediaStreamCommandInput,
+  type UpdateFlowMediaStreamCommandOutput,
   UpdateFlowMediaStreamCommand,
-  UpdateFlowMediaStreamCommandInput,
-  UpdateFlowMediaStreamCommandOutput,
 } from "./commands/UpdateFlowMediaStreamCommand";
 import {
+  type UpdateFlowOutputCommandInput,
+  type UpdateFlowOutputCommandOutput,
   UpdateFlowOutputCommand,
-  UpdateFlowOutputCommandInput,
-  UpdateFlowOutputCommandOutput,
 } from "./commands/UpdateFlowOutputCommand";
 import {
+  type UpdateFlowSourceCommandInput,
+  type UpdateFlowSourceCommandOutput,
   UpdateFlowSourceCommand,
-  UpdateFlowSourceCommandInput,
-  UpdateFlowSourceCommandOutput,
 } from "./commands/UpdateFlowSourceCommand";
+import {
+  type UpdateGatewayInstanceCommandInput,
+  type UpdateGatewayInstanceCommandOutput,
+  UpdateGatewayInstanceCommand,
+} from "./commands/UpdateGatewayInstanceCommand";
+import {
+  type UpdateRouterInputCommandInput,
+  type UpdateRouterInputCommandOutput,
+  UpdateRouterInputCommand,
+} from "./commands/UpdateRouterInputCommand";
+import {
+  type UpdateRouterNetworkInterfaceCommandInput,
+  type UpdateRouterNetworkInterfaceCommandOutput,
+  UpdateRouterNetworkInterfaceCommand,
+} from "./commands/UpdateRouterNetworkInterfaceCommand";
+import {
+  type UpdateRouterOutputCommandInput,
+  type UpdateRouterOutputCommandOutput,
+  UpdateRouterOutputCommand,
+} from "./commands/UpdateRouterOutputCommand";
+import {
+  type UpdateSourceEndpointCommandInput,
+  type UpdateSourceEndpointCommandOutput,
+  UpdateSourceEndpointCommand,
+} from "./commands/UpdateSourceEndpointCommand";
 import { MediaConnectClient } from "./MediaConnectClient";
+import type { NotFoundException } from "./models/errors";
+import type { MediaConnectServiceException } from "./models/MediaConnectServiceException";
+import { paginateListBridges } from "./pagination/ListBridgesPaginator";
+import { paginateListDestinationEndpoints } from "./pagination/ListDestinationEndpointsPaginator";
+import { paginateListEntitlements } from "./pagination/ListEntitlementsPaginator";
+import { paginateListFlows } from "./pagination/ListFlowsPaginator";
+import { paginateListGatewayInstances } from "./pagination/ListGatewayInstancesPaginator";
+import { paginateListGateways } from "./pagination/ListGatewaysPaginator";
+import { paginateListOfferings } from "./pagination/ListOfferingsPaginator";
+import { paginateListReservations } from "./pagination/ListReservationsPaginator";
+import { paginateListRouterInputs } from "./pagination/ListRouterInputsPaginator";
+import { paginateListRouterNetworkInterfaces } from "./pagination/ListRouterNetworkInterfacesPaginator";
+import { paginateListRouterOutputs } from "./pagination/ListRouterOutputsPaginator";
+import { paginateListSourceEndpoints } from "./pagination/ListSourceEndpointsPaginator";
+import { waitUntilDestinationEndpointConnected } from "./waiters/waitForDestinationEndpointConnected";
+import { waitUntilDestinationEndpointDeregistered } from "./waiters/waitForDestinationEndpointDeregistered";
+import { waitUntilDestinationEndpointDisconnected } from "./waiters/waitForDestinationEndpointDisconnected";
+import { waitUntilDestinationEndpointRegistered } from "./waiters/waitForDestinationEndpointRegistered";
+import { waitUntilFlowActive } from "./waiters/waitForFlowActive";
+import { waitUntilFlowDeleted } from "./waiters/waitForFlowDeleted";
+import { waitUntilFlowStandby } from "./waiters/waitForFlowStandby";
+import { waitUntilInputActive } from "./waiters/waitForInputActive";
+import { waitUntilInputDeleted } from "./waiters/waitForInputDeleted";
+import { waitUntilInputStandby } from "./waiters/waitForInputStandby";
+import { waitUntilOutputActive } from "./waiters/waitForOutputActive";
+import { waitUntilOutputDeleted } from "./waiters/waitForOutputDeleted";
+import { waitUntilOutputRouted } from "./waiters/waitForOutputRouted";
+import { waitUntilOutputStandby } from "./waiters/waitForOutputStandby";
+import { waitUntilOutputUnrouted } from "./waiters/waitForOutputUnrouted";
+import { waitUntilSourceEndpointConnected } from "./waiters/waitForSourceEndpointConnected";
+import { waitUntilSourceEndpointConnecting } from "./waiters/waitForSourceEndpointConnecting";
+import { waitUntilSourceEndpointDeregistered } from "./waiters/waitForSourceEndpointDeregistered";
+import { waitUntilSourceEndpointDisconnected } from "./waiters/waitForSourceEndpointDisconnected";
+import { waitUntilSourceEndpointDisconnecting } from "./waiters/waitForSourceEndpointDisconnecting";
+import { waitUntilSourceEndpointRegistered } from "./waiters/waitForSourceEndpointRegistered";
+
+const commands = {
+  AddBridgeOutputsCommand,
+  AddBridgeSourcesCommand,
+  AddFlowMediaStreamsCommand,
+  AddFlowOutputsCommand,
+  AddFlowSourcesCommand,
+  AddFlowVpcInterfacesCommand,
+  BatchGetDestinationEndpointCommand,
+  BatchGetRouterInputCommand,
+  BatchGetRouterNetworkInterfaceCommand,
+  BatchGetRouterOutputCommand,
+  BatchGetSourceEndpointCommand,
+  ConnectEndpointsCommand,
+  CreateBridgeCommand,
+  CreateFlowCommand,
+  CreateGatewayCommand,
+  CreateRouterInputCommand,
+  CreateRouterNetworkInterfaceCommand,
+  CreateRouterOutputCommand,
+  DeleteBridgeCommand,
+  DeleteFlowCommand,
+  DeleteGatewayCommand,
+  DeleteRouterInputCommand,
+  DeleteRouterNetworkInterfaceCommand,
+  DeleteRouterOutputCommand,
+  DeregisterDestinationEndpointCommand,
+  DeregisterGatewayInstanceCommand,
+  DeregisterSourceEndpointCommand,
+  DescribeBridgeCommand,
+  DescribeFlowCommand,
+  DescribeFlowSourceMetadataCommand,
+  DescribeFlowSourceThumbnailCommand,
+  DescribeGatewayCommand,
+  DescribeGatewayInstanceCommand,
+  DescribeOfferingCommand,
+  DescribeReservationCommand,
+  DisconnectEndpointsCommand,
+  GetDestinationEndpointCommand,
+  GetRouterInputCommand,
+  GetRouterInputSourceMetadataCommand,
+  GetRouterInputThumbnailCommand,
+  GetRouterNetworkInterfaceCommand,
+  GetRouterOutputCommand,
+  GetSourceEndpointCommand,
+  GrantFlowEntitlementsCommand,
+  ListBridgesCommand,
+  ListDestinationEndpointsCommand,
+  ListEntitlementsCommand,
+  ListFlowsCommand,
+  ListGatewayInstancesCommand,
+  ListGatewaysCommand,
+  ListOfferingsCommand,
+  ListReservationsCommand,
+  ListRouterInputsCommand,
+  ListRouterNetworkInterfacesCommand,
+  ListRouterOutputsCommand,
+  ListSourceEndpointsCommand,
+  ListTagsForGlobalResourceCommand,
+  ListTagsForResourceCommand,
+  PurchaseOfferingCommand,
+  RegisterDestinationEndpointCommand,
+  RegisterSourceEndpointCommand,
+  RemoveBridgeOutputCommand,
+  RemoveBridgeSourceCommand,
+  RemoveFlowMediaStreamCommand,
+  RemoveFlowOutputCommand,
+  RemoveFlowSourceCommand,
+  RemoveFlowVpcInterfaceCommand,
+  RestartRouterInputCommand,
+  RestartRouterOutputCommand,
+  RevokeFlowEntitlementCommand,
+  StartFlowCommand,
+  StartRouterInputCommand,
+  StartRouterOutputCommand,
+  StopFlowCommand,
+  StopRouterInputCommand,
+  StopRouterOutputCommand,
+  TagGlobalResourceCommand,
+  TagResourceCommand,
+  TakeRouterInputCommand,
+  UntagGlobalResourceCommand,
+  UntagResourceCommand,
+  UpdateBridgeCommand,
+  UpdateBridgeOutputCommand,
+  UpdateBridgeSourceCommand,
+  UpdateBridgeStateCommand,
+  UpdateDestinationEndpointCommand,
+  UpdateFlowCommand,
+  UpdateFlowEntitlementCommand,
+  UpdateFlowMediaStreamCommand,
+  UpdateFlowOutputCommand,
+  UpdateFlowSourceCommand,
+  UpdateGatewayInstanceCommand,
+  UpdateRouterInputCommand,
+  UpdateRouterNetworkInterfaceCommand,
+  UpdateRouterOutputCommand,
+  UpdateSourceEndpointCommand,
+};
+const paginators = {
+  paginateListBridges,
+  paginateListDestinationEndpoints,
+  paginateListEntitlements,
+  paginateListFlows,
+  paginateListGatewayInstances,
+  paginateListGateways,
+  paginateListOfferings,
+  paginateListReservations,
+  paginateListRouterInputs,
+  paginateListRouterNetworkInterfaces,
+  paginateListRouterOutputs,
+  paginateListSourceEndpoints,
+};
+const waiters = {
+  waitUntilFlowActive,
+  waitUntilFlowStandby,
+  waitUntilFlowDeleted,
+  waitUntilDestinationEndpointConnected,
+  waitUntilDestinationEndpointDisconnected,
+  waitUntilDestinationEndpointDeregistered,
+  waitUntilDestinationEndpointRegistered,
+  waitUntilInputActive,
+  waitUntilInputStandby,
+  waitUntilInputDeleted,
+  waitUntilOutputActive,
+  waitUntilOutputDeleted,
+  waitUntilOutputRouted,
+  waitUntilOutputStandby,
+  waitUntilOutputUnrouted,
+  waitUntilSourceEndpointConnected,
+  waitUntilSourceEndpointDisconnected,
+  waitUntilSourceEndpointConnecting,
+  waitUntilSourceEndpointRegistered,
+  waitUntilSourceEndpointDisconnecting,
+  waitUntilSourceEndpointDeregistered,
+};
 
 /**
- * API for AWS Elemental MediaConnect
+ * @public
  */
-export class MediaConnect extends MediaConnectClient {
+export interface MediaConnectRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MediaConnect {
   /**
-   * Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.
+   * @see {@link AddBridgeOutputsCommand}
    */
-  public addFlowMediaStreams(
+  addBridgeOutputs(
+    args: AddBridgeOutputsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<AddBridgeOutputsCommandOutput>;
+  addBridgeOutputs(
+    args: AddBridgeOutputsCommandInput,
+    cb: (err: any, data?: AddBridgeOutputsCommandOutput) => void
+  ): void;
+  addBridgeOutputs(
+    args: AddBridgeOutputsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: AddBridgeOutputsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AddBridgeSourcesCommand}
+   */
+  addBridgeSources(
+    args: AddBridgeSourcesCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<AddBridgeSourcesCommandOutput>;
+  addBridgeSources(
+    args: AddBridgeSourcesCommandInput,
+    cb: (err: any, data?: AddBridgeSourcesCommandOutput) => void
+  ): void;
+  addBridgeSources(
+    args: AddBridgeSourcesCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: AddBridgeSourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AddFlowMediaStreamsCommand}
+   */
+  addFlowMediaStreams(
     args: AddFlowMediaStreamsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<AddFlowMediaStreamsCommandOutput>;
-  public addFlowMediaStreams(
+  addFlowMediaStreams(
     args: AddFlowMediaStreamsCommandInput,
     cb: (err: any, data?: AddFlowMediaStreamsCommandOutput) => void
   ): void;
-  public addFlowMediaStreams(
+  addFlowMediaStreams(
     args: AddFlowMediaStreamsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: AddFlowMediaStreamsCommandOutput) => void
   ): void;
-  public addFlowMediaStreams(
-    args: AddFlowMediaStreamsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddFlowMediaStreamsCommandOutput) => void),
-    cb?: (err: any, data?: AddFlowMediaStreamsCommandOutput) => void
-  ): Promise<AddFlowMediaStreamsCommandOutput> | void {
-    const command = new AddFlowMediaStreamsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Adds outputs to an existing flow. You can create up to 50 outputs per flow.
+   * @see {@link AddFlowOutputsCommand}
    */
-  public addFlowOutputs(
+  addFlowOutputs(
     args: AddFlowOutputsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<AddFlowOutputsCommandOutput>;
-  public addFlowOutputs(
+  addFlowOutputs(
     args: AddFlowOutputsCommandInput,
     cb: (err: any, data?: AddFlowOutputsCommandOutput) => void
   ): void;
-  public addFlowOutputs(
+  addFlowOutputs(
     args: AddFlowOutputsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: AddFlowOutputsCommandOutput) => void
   ): void;
-  public addFlowOutputs(
-    args: AddFlowOutputsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddFlowOutputsCommandOutput) => void),
-    cb?: (err: any, data?: AddFlowOutputsCommandOutput) => void
-  ): Promise<AddFlowOutputsCommandOutput> | void {
-    const command = new AddFlowOutputsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Adds Sources to flow
+   * @see {@link AddFlowSourcesCommand}
    */
-  public addFlowSources(
+  addFlowSources(
     args: AddFlowSourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<AddFlowSourcesCommandOutput>;
-  public addFlowSources(
+  addFlowSources(
     args: AddFlowSourcesCommandInput,
     cb: (err: any, data?: AddFlowSourcesCommandOutput) => void
   ): void;
-  public addFlowSources(
+  addFlowSources(
     args: AddFlowSourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: AddFlowSourcesCommandOutput) => void
   ): void;
-  public addFlowSources(
-    args: AddFlowSourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddFlowSourcesCommandOutput) => void),
-    cb?: (err: any, data?: AddFlowSourcesCommandOutput) => void
-  ): Promise<AddFlowSourcesCommandOutput> | void {
-    const command = new AddFlowSourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Adds VPC interfaces to flow
+   * @see {@link AddFlowVpcInterfacesCommand}
    */
-  public addFlowVpcInterfaces(
+  addFlowVpcInterfaces(
     args: AddFlowVpcInterfacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<AddFlowVpcInterfacesCommandOutput>;
-  public addFlowVpcInterfaces(
+  addFlowVpcInterfaces(
     args: AddFlowVpcInterfacesCommandInput,
     cb: (err: any, data?: AddFlowVpcInterfacesCommandOutput) => void
   ): void;
-  public addFlowVpcInterfaces(
+  addFlowVpcInterfaces(
     args: AddFlowVpcInterfacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: AddFlowVpcInterfacesCommandOutput) => void
   ): void;
-  public addFlowVpcInterfaces(
-    args: AddFlowVpcInterfacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddFlowVpcInterfacesCommandOutput) => void),
-    cb?: (err: any, data?: AddFlowVpcInterfacesCommandOutput) => void
-  ): Promise<AddFlowVpcInterfacesCommandOutput> | void {
-    const command = new AddFlowVpcInterfacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
+   * @see {@link BatchGetDestinationEndpointCommand}
    */
-  public createFlow(args: CreateFlowCommandInput, options?: __HttpHandlerOptions): Promise<CreateFlowCommandOutput>;
-  public createFlow(args: CreateFlowCommandInput, cb: (err: any, data?: CreateFlowCommandOutput) => void): void;
-  public createFlow(
+  batchGetDestinationEndpoint(
+    args: BatchGetDestinationEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<BatchGetDestinationEndpointCommandOutput>;
+  batchGetDestinationEndpoint(
+    args: BatchGetDestinationEndpointCommandInput,
+    cb: (err: any, data?: BatchGetDestinationEndpointCommandOutput) => void
+  ): void;
+  batchGetDestinationEndpoint(
+    args: BatchGetDestinationEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: BatchGetDestinationEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetRouterInputCommand}
+   */
+  batchGetRouterInput(
+    args: BatchGetRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<BatchGetRouterInputCommandOutput>;
+  batchGetRouterInput(
+    args: BatchGetRouterInputCommandInput,
+    cb: (err: any, data?: BatchGetRouterInputCommandOutput) => void
+  ): void;
+  batchGetRouterInput(
+    args: BatchGetRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: BatchGetRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetRouterNetworkInterfaceCommand}
+   */
+  batchGetRouterNetworkInterface(
+    args: BatchGetRouterNetworkInterfaceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<BatchGetRouterNetworkInterfaceCommandOutput>;
+  batchGetRouterNetworkInterface(
+    args: BatchGetRouterNetworkInterfaceCommandInput,
+    cb: (err: any, data?: BatchGetRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+  batchGetRouterNetworkInterface(
+    args: BatchGetRouterNetworkInterfaceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: BatchGetRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetRouterOutputCommand}
+   */
+  batchGetRouterOutput(
+    args: BatchGetRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<BatchGetRouterOutputCommandOutput>;
+  batchGetRouterOutput(
+    args: BatchGetRouterOutputCommandInput,
+    cb: (err: any, data?: BatchGetRouterOutputCommandOutput) => void
+  ): void;
+  batchGetRouterOutput(
+    args: BatchGetRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: BatchGetRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetSourceEndpointCommand}
+   */
+  batchGetSourceEndpoint(
+    args: BatchGetSourceEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<BatchGetSourceEndpointCommandOutput>;
+  batchGetSourceEndpoint(
+    args: BatchGetSourceEndpointCommandInput,
+    cb: (err: any, data?: BatchGetSourceEndpointCommandOutput) => void
+  ): void;
+  batchGetSourceEndpoint(
+    args: BatchGetSourceEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: BatchGetSourceEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ConnectEndpointsCommand}
+   */
+  connectEndpoints(
+    args: ConnectEndpointsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ConnectEndpointsCommandOutput>;
+  connectEndpoints(
+    args: ConnectEndpointsCommandInput,
+    cb: (err: any, data?: ConnectEndpointsCommandOutput) => void
+  ): void;
+  connectEndpoints(
+    args: ConnectEndpointsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ConnectEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBridgeCommand}
+   */
+  createBridge(
+    args: CreateBridgeCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<CreateBridgeCommandOutput>;
+  createBridge(
+    args: CreateBridgeCommandInput,
+    cb: (err: any, data?: CreateBridgeCommandOutput) => void
+  ): void;
+  createBridge(
+    args: CreateBridgeCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: CreateBridgeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFlowCommand}
+   */
+  createFlow(
     args: CreateFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<CreateFlowCommandOutput>;
+  createFlow(
+    args: CreateFlowCommandInput,
     cb: (err: any, data?: CreateFlowCommandOutput) => void
   ): void;
-  public createFlow(
+  createFlow(
     args: CreateFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFlowCommandOutput) => void),
-    cb?: (err: any, data?: CreateFlowCommandOutput) => void
-  ): Promise<CreateFlowCommandOutput> | void {
-    const command = new CreateFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: CreateFlowCommandOutput) => void
+  ): void;
 
   /**
-   * Deletes a flow. Before you can delete a flow, you must stop the flow.
+   * @see {@link CreateGatewayCommand}
    */
-  public deleteFlow(args: DeleteFlowCommandInput, options?: __HttpHandlerOptions): Promise<DeleteFlowCommandOutput>;
-  public deleteFlow(args: DeleteFlowCommandInput, cb: (err: any, data?: DeleteFlowCommandOutput) => void): void;
-  public deleteFlow(
+  createGateway(
+    args: CreateGatewayCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<CreateGatewayCommandOutput>;
+  createGateway(
+    args: CreateGatewayCommandInput,
+    cb: (err: any, data?: CreateGatewayCommandOutput) => void
+  ): void;
+  createGateway(
+    args: CreateGatewayCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: CreateGatewayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRouterInputCommand}
+   */
+  createRouterInput(
+    args: CreateRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<CreateRouterInputCommandOutput>;
+  createRouterInput(
+    args: CreateRouterInputCommandInput,
+    cb: (err: any, data?: CreateRouterInputCommandOutput) => void
+  ): void;
+  createRouterInput(
+    args: CreateRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: CreateRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRouterNetworkInterfaceCommand}
+   */
+  createRouterNetworkInterface(
+    args: CreateRouterNetworkInterfaceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<CreateRouterNetworkInterfaceCommandOutput>;
+  createRouterNetworkInterface(
+    args: CreateRouterNetworkInterfaceCommandInput,
+    cb: (err: any, data?: CreateRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+  createRouterNetworkInterface(
+    args: CreateRouterNetworkInterfaceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: CreateRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRouterOutputCommand}
+   */
+  createRouterOutput(
+    args: CreateRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<CreateRouterOutputCommandOutput>;
+  createRouterOutput(
+    args: CreateRouterOutputCommandInput,
+    cb: (err: any, data?: CreateRouterOutputCommandOutput) => void
+  ): void;
+  createRouterOutput(
+    args: CreateRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: CreateRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBridgeCommand}
+   */
+  deleteBridge(
+    args: DeleteBridgeCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeleteBridgeCommandOutput>;
+  deleteBridge(
+    args: DeleteBridgeCommandInput,
+    cb: (err: any, data?: DeleteBridgeCommandOutput) => void
+  ): void;
+  deleteBridge(
+    args: DeleteBridgeCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeleteBridgeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFlowCommand}
+   */
+  deleteFlow(
     args: DeleteFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeleteFlowCommandOutput>;
+  deleteFlow(
+    args: DeleteFlowCommandInput,
     cb: (err: any, data?: DeleteFlowCommandOutput) => void
   ): void;
-  public deleteFlow(
+  deleteFlow(
     args: DeleteFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFlowCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFlowCommandOutput) => void
-  ): Promise<DeleteFlowCommandOutput> | void {
-    const command = new DeleteFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeleteFlowCommandOutput) => void
+  ): void;
 
   /**
-   * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
+   * @see {@link DeleteGatewayCommand}
    */
-  public describeFlow(
+  deleteGateway(
+    args: DeleteGatewayCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeleteGatewayCommandOutput>;
+  deleteGateway(
+    args: DeleteGatewayCommandInput,
+    cb: (err: any, data?: DeleteGatewayCommandOutput) => void
+  ): void;
+  deleteGateway(
+    args: DeleteGatewayCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeleteGatewayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouterInputCommand}
+   */
+  deleteRouterInput(
+    args: DeleteRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeleteRouterInputCommandOutput>;
+  deleteRouterInput(
+    args: DeleteRouterInputCommandInput,
+    cb: (err: any, data?: DeleteRouterInputCommandOutput) => void
+  ): void;
+  deleteRouterInput(
+    args: DeleteRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeleteRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouterNetworkInterfaceCommand}
+   */
+  deleteRouterNetworkInterface(
+    args: DeleteRouterNetworkInterfaceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeleteRouterNetworkInterfaceCommandOutput>;
+  deleteRouterNetworkInterface(
+    args: DeleteRouterNetworkInterfaceCommandInput,
+    cb: (err: any, data?: DeleteRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+  deleteRouterNetworkInterface(
+    args: DeleteRouterNetworkInterfaceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeleteRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouterOutputCommand}
+   */
+  deleteRouterOutput(
+    args: DeleteRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeleteRouterOutputCommandOutput>;
+  deleteRouterOutput(
+    args: DeleteRouterOutputCommandInput,
+    cb: (err: any, data?: DeleteRouterOutputCommandOutput) => void
+  ): void;
+  deleteRouterOutput(
+    args: DeleteRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeleteRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterDestinationEndpointCommand}
+   */
+  deregisterDestinationEndpoint(
+    args: DeregisterDestinationEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeregisterDestinationEndpointCommandOutput>;
+  deregisterDestinationEndpoint(
+    args: DeregisterDestinationEndpointCommandInput,
+    cb: (err: any, data?: DeregisterDestinationEndpointCommandOutput) => void
+  ): void;
+  deregisterDestinationEndpoint(
+    args: DeregisterDestinationEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeregisterDestinationEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterGatewayInstanceCommand}
+   */
+  deregisterGatewayInstance(
+    args: DeregisterGatewayInstanceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeregisterGatewayInstanceCommandOutput>;
+  deregisterGatewayInstance(
+    args: DeregisterGatewayInstanceCommandInput,
+    cb: (err: any, data?: DeregisterGatewayInstanceCommandOutput) => void
+  ): void;
+  deregisterGatewayInstance(
+    args: DeregisterGatewayInstanceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeregisterGatewayInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterSourceEndpointCommand}
+   */
+  deregisterSourceEndpoint(
+    args: DeregisterSourceEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DeregisterSourceEndpointCommandOutput>;
+  deregisterSourceEndpoint(
+    args: DeregisterSourceEndpointCommandInput,
+    cb: (err: any, data?: DeregisterSourceEndpointCommandOutput) => void
+  ): void;
+  deregisterSourceEndpoint(
+    args: DeregisterSourceEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DeregisterSourceEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBridgeCommand}
+   */
+  describeBridge(
+    args: DescribeBridgeCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DescribeBridgeCommandOutput>;
+  describeBridge(
+    args: DescribeBridgeCommandInput,
+    cb: (err: any, data?: DescribeBridgeCommandOutput) => void
+  ): void;
+  describeBridge(
+    args: DescribeBridgeCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DescribeBridgeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFlowCommand}
+   */
+  describeFlow(
     args: DescribeFlowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<DescribeFlowCommandOutput>;
-  public describeFlow(args: DescribeFlowCommandInput, cb: (err: any, data?: DescribeFlowCommandOutput) => void): void;
-  public describeFlow(
+  describeFlow(
     args: DescribeFlowCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeFlowCommandOutput) => void
   ): void;
-  public describeFlow(
+  describeFlow(
     args: DescribeFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFlowCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFlowCommandOutput) => void
-  ): Promise<DescribeFlowCommandOutput> | void {
-    const command = new DescribeFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DescribeFlowCommandOutput) => void
+  ): void;
 
   /**
-   * Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).
+   * @see {@link DescribeFlowSourceMetadataCommand}
    */
-  public describeOffering(
+  describeFlowSourceMetadata(
+    args: DescribeFlowSourceMetadataCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DescribeFlowSourceMetadataCommandOutput>;
+  describeFlowSourceMetadata(
+    args: DescribeFlowSourceMetadataCommandInput,
+    cb: (err: any, data?: DescribeFlowSourceMetadataCommandOutput) => void
+  ): void;
+  describeFlowSourceMetadata(
+    args: DescribeFlowSourceMetadataCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DescribeFlowSourceMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFlowSourceThumbnailCommand}
+   */
+  describeFlowSourceThumbnail(
+    args: DescribeFlowSourceThumbnailCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DescribeFlowSourceThumbnailCommandOutput>;
+  describeFlowSourceThumbnail(
+    args: DescribeFlowSourceThumbnailCommandInput,
+    cb: (err: any, data?: DescribeFlowSourceThumbnailCommandOutput) => void
+  ): void;
+  describeFlowSourceThumbnail(
+    args: DescribeFlowSourceThumbnailCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DescribeFlowSourceThumbnailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeGatewayCommand}
+   */
+  describeGateway(
+    args: DescribeGatewayCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DescribeGatewayCommandOutput>;
+  describeGateway(
+    args: DescribeGatewayCommandInput,
+    cb: (err: any, data?: DescribeGatewayCommandOutput) => void
+  ): void;
+  describeGateway(
+    args: DescribeGatewayCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DescribeGatewayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeGatewayInstanceCommand}
+   */
+  describeGatewayInstance(
+    args: DescribeGatewayInstanceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DescribeGatewayInstanceCommandOutput>;
+  describeGatewayInstance(
+    args: DescribeGatewayInstanceCommandInput,
+    cb: (err: any, data?: DescribeGatewayInstanceCommandOutput) => void
+  ): void;
+  describeGatewayInstance(
+    args: DescribeGatewayInstanceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DescribeGatewayInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOfferingCommand}
+   */
+  describeOffering(
     args: DescribeOfferingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<DescribeOfferingCommandOutput>;
-  public describeOffering(
+  describeOffering(
     args: DescribeOfferingCommandInput,
     cb: (err: any, data?: DescribeOfferingCommandOutput) => void
   ): void;
-  public describeOffering(
+  describeOffering(
     args: DescribeOfferingCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: DescribeOfferingCommandOutput) => void
   ): void;
-  public describeOffering(
-    args: DescribeOfferingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeOfferingCommandOutput) => void),
-    cb?: (err: any, data?: DescribeOfferingCommandOutput) => void
-  ): Promise<DescribeOfferingCommandOutput> | void {
-    const command = new DescribeOfferingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).
+   * @see {@link DescribeReservationCommand}
    */
-  public describeReservation(
+  describeReservation(
     args: DescribeReservationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<DescribeReservationCommandOutput>;
-  public describeReservation(
+  describeReservation(
     args: DescribeReservationCommandInput,
     cb: (err: any, data?: DescribeReservationCommandOutput) => void
   ): void;
-  public describeReservation(
+  describeReservation(
     args: DescribeReservationCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: DescribeReservationCommandOutput) => void
   ): void;
-  public describeReservation(
-    args: DescribeReservationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeReservationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReservationCommandOutput) => void
-  ): Promise<DescribeReservationCommandOutput> | void {
-    const command = new DescribeReservationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Grants entitlements to an existing flow.
+   * @see {@link DisconnectEndpointsCommand}
    */
-  public grantFlowEntitlements(
+  disconnectEndpoints(
+    args: DisconnectEndpointsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<DisconnectEndpointsCommandOutput>;
+  disconnectEndpoints(
+    args: DisconnectEndpointsCommandInput,
+    cb: (err: any, data?: DisconnectEndpointsCommandOutput) => void
+  ): void;
+  disconnectEndpoints(
+    args: DisconnectEndpointsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: DisconnectEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDestinationEndpointCommand}
+   */
+  getDestinationEndpoint(
+    args: GetDestinationEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetDestinationEndpointCommandOutput>;
+  getDestinationEndpoint(
+    args: GetDestinationEndpointCommandInput,
+    cb: (err: any, data?: GetDestinationEndpointCommandOutput) => void
+  ): void;
+  getDestinationEndpoint(
+    args: GetDestinationEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetDestinationEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouterInputCommand}
+   */
+  getRouterInput(
+    args: GetRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetRouterInputCommandOutput>;
+  getRouterInput(
+    args: GetRouterInputCommandInput,
+    cb: (err: any, data?: GetRouterInputCommandOutput) => void
+  ): void;
+  getRouterInput(
+    args: GetRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouterInputSourceMetadataCommand}
+   */
+  getRouterInputSourceMetadata(
+    args: GetRouterInputSourceMetadataCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetRouterInputSourceMetadataCommandOutput>;
+  getRouterInputSourceMetadata(
+    args: GetRouterInputSourceMetadataCommandInput,
+    cb: (err: any, data?: GetRouterInputSourceMetadataCommandOutput) => void
+  ): void;
+  getRouterInputSourceMetadata(
+    args: GetRouterInputSourceMetadataCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetRouterInputSourceMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouterInputThumbnailCommand}
+   */
+  getRouterInputThumbnail(
+    args: GetRouterInputThumbnailCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetRouterInputThumbnailCommandOutput>;
+  getRouterInputThumbnail(
+    args: GetRouterInputThumbnailCommandInput,
+    cb: (err: any, data?: GetRouterInputThumbnailCommandOutput) => void
+  ): void;
+  getRouterInputThumbnail(
+    args: GetRouterInputThumbnailCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetRouterInputThumbnailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouterNetworkInterfaceCommand}
+   */
+  getRouterNetworkInterface(
+    args: GetRouterNetworkInterfaceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetRouterNetworkInterfaceCommandOutput>;
+  getRouterNetworkInterface(
+    args: GetRouterNetworkInterfaceCommandInput,
+    cb: (err: any, data?: GetRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+  getRouterNetworkInterface(
+    args: GetRouterNetworkInterfaceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouterOutputCommand}
+   */
+  getRouterOutput(
+    args: GetRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetRouterOutputCommandOutput>;
+  getRouterOutput(
+    args: GetRouterOutputCommandInput,
+    cb: (err: any, data?: GetRouterOutputCommandOutput) => void
+  ): void;
+  getRouterOutput(
+    args: GetRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   */
+  getSourceEndpoint(
+    args: GetSourceEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<GetSourceEndpointCommandOutput>;
+  getSourceEndpoint(
+    args: GetSourceEndpointCommandInput,
+    cb: (err: any, data?: GetSourceEndpointCommandOutput) => void
+  ): void;
+  getSourceEndpoint(
+    args: GetSourceEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: GetSourceEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GrantFlowEntitlementsCommand}
+   */
+  grantFlowEntitlements(
     args: GrantFlowEntitlementsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<GrantFlowEntitlementsCommandOutput>;
-  public grantFlowEntitlements(
+  grantFlowEntitlements(
     args: GrantFlowEntitlementsCommandInput,
     cb: (err: any, data?: GrantFlowEntitlementsCommandOutput) => void
   ): void;
-  public grantFlowEntitlements(
+  grantFlowEntitlements(
     args: GrantFlowEntitlementsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: GrantFlowEntitlementsCommandOutput) => void
   ): void;
-  public grantFlowEntitlements(
-    args: GrantFlowEntitlementsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GrantFlowEntitlementsCommandOutput) => void),
-    cb?: (err: any, data?: GrantFlowEntitlementsCommandOutput) => void
-  ): Promise<GrantFlowEntitlementsCommandOutput> | void {
-    const command = new GrantFlowEntitlementsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
+   * @see {@link ListBridgesCommand}
    */
-  public listEntitlements(
+  listBridges(): Promise<ListBridgesCommandOutput>;
+  listBridges(
+    args: ListBridgesCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListBridgesCommandOutput>;
+  listBridges(
+    args: ListBridgesCommandInput,
+    cb: (err: any, data?: ListBridgesCommandOutput) => void
+  ): void;
+  listBridges(
+    args: ListBridgesCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListBridgesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDestinationEndpointsCommand}
+   */
+  listDestinationEndpoints(): Promise<ListDestinationEndpointsCommandOutput>;
+  listDestinationEndpoints(
+    args: ListDestinationEndpointsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListDestinationEndpointsCommandOutput>;
+  listDestinationEndpoints(
+    args: ListDestinationEndpointsCommandInput,
+    cb: (err: any, data?: ListDestinationEndpointsCommandOutput) => void
+  ): void;
+  listDestinationEndpoints(
+    args: ListDestinationEndpointsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListDestinationEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEntitlementsCommand}
+   */
+  listEntitlements(): Promise<ListEntitlementsCommandOutput>;
+  listEntitlements(
     args: ListEntitlementsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<ListEntitlementsCommandOutput>;
-  public listEntitlements(
+  listEntitlements(
     args: ListEntitlementsCommandInput,
     cb: (err: any, data?: ListEntitlementsCommandOutput) => void
   ): void;
-  public listEntitlements(
+  listEntitlements(
     args: ListEntitlementsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: ListEntitlementsCommandOutput) => void
   ): void;
-  public listEntitlements(
-    args: ListEntitlementsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEntitlementsCommandOutput) => void),
-    cb?: (err: any, data?: ListEntitlementsCommandOutput) => void
-  ): Promise<ListEntitlementsCommandOutput> | void {
-    const command = new ListEntitlementsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Displays a list of flows that are associated with this account. This request returns a paginated result.
+   * @see {@link ListFlowsCommand}
    */
-  public listFlows(args: ListFlowsCommandInput, options?: __HttpHandlerOptions): Promise<ListFlowsCommandOutput>;
-  public listFlows(args: ListFlowsCommandInput, cb: (err: any, data?: ListFlowsCommandOutput) => void): void;
-  public listFlows(
+  listFlows(): Promise<ListFlowsCommandOutput>;
+  listFlows(
     args: ListFlowsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListFlowsCommandOutput>;
+  listFlows(
+    args: ListFlowsCommandInput,
     cb: (err: any, data?: ListFlowsCommandOutput) => void
   ): void;
-  public listFlows(
+  listFlows(
     args: ListFlowsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFlowsCommandOutput) => void),
-    cb?: (err: any, data?: ListFlowsCommandOutput) => void
-  ): Promise<ListFlowsCommandOutput> | void {
-    const command = new ListFlowsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListFlowsCommandOutput) => void
+  ): void;
 
   /**
-   * Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.
+   * @see {@link ListGatewayInstancesCommand}
    */
-  public listOfferings(
+  listGatewayInstances(): Promise<ListGatewayInstancesCommandOutput>;
+  listGatewayInstances(
+    args: ListGatewayInstancesCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListGatewayInstancesCommandOutput>;
+  listGatewayInstances(
+    args: ListGatewayInstancesCommandInput,
+    cb: (err: any, data?: ListGatewayInstancesCommandOutput) => void
+  ): void;
+  listGatewayInstances(
+    args: ListGatewayInstancesCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListGatewayInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListGatewaysCommand}
+   */
+  listGateways(): Promise<ListGatewaysCommandOutput>;
+  listGateways(
+    args: ListGatewaysCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListGatewaysCommandOutput>;
+  listGateways(
+    args: ListGatewaysCommandInput,
+    cb: (err: any, data?: ListGatewaysCommandOutput) => void
+  ): void;
+  listGateways(
+    args: ListGatewaysCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListGatewaysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListOfferingsCommand}
+   */
+  listOfferings(): Promise<ListOfferingsCommandOutput>;
+  listOfferings(
     args: ListOfferingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<ListOfferingsCommandOutput>;
-  public listOfferings(
+  listOfferings(
     args: ListOfferingsCommandInput,
     cb: (err: any, data?: ListOfferingsCommandOutput) => void
   ): void;
-  public listOfferings(
+  listOfferings(
     args: ListOfferingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: ListOfferingsCommandOutput) => void
   ): void;
-  public listOfferings(
-    args: ListOfferingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListOfferingsCommandOutput) => void),
-    cb?: (err: any, data?: ListOfferingsCommandOutput) => void
-  ): Promise<ListOfferingsCommandOutput> | void {
-    const command = new ListOfferingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired).
+   * @see {@link ListReservationsCommand}
    */
-  public listReservations(
+  listReservations(): Promise<ListReservationsCommandOutput>;
+  listReservations(
     args: ListReservationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<ListReservationsCommandOutput>;
-  public listReservations(
+  listReservations(
     args: ListReservationsCommandInput,
     cb: (err: any, data?: ListReservationsCommandOutput) => void
   ): void;
-  public listReservations(
+  listReservations(
     args: ListReservationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: ListReservationsCommandOutput) => void
   ): void;
-  public listReservations(
-    args: ListReservationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListReservationsCommandOutput) => void),
-    cb?: (err: any, data?: ListReservationsCommandOutput) => void
-  ): Promise<ListReservationsCommandOutput> | void {
-    const command = new ListReservationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * List all tags on an AWS Elemental MediaConnect resource
+   * @see {@link ListRouterInputsCommand}
    */
-  public listTagsForResource(
+  listRouterInputs(): Promise<ListRouterInputsCommandOutput>;
+  listRouterInputs(
+    args: ListRouterInputsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListRouterInputsCommandOutput>;
+  listRouterInputs(
+    args: ListRouterInputsCommandInput,
+    cb: (err: any, data?: ListRouterInputsCommandOutput) => void
+  ): void;
+  listRouterInputs(
+    args: ListRouterInputsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListRouterInputsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRouterNetworkInterfacesCommand}
+   */
+  listRouterNetworkInterfaces(): Promise<ListRouterNetworkInterfacesCommandOutput>;
+  listRouterNetworkInterfaces(
+    args: ListRouterNetworkInterfacesCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListRouterNetworkInterfacesCommandOutput>;
+  listRouterNetworkInterfaces(
+    args: ListRouterNetworkInterfacesCommandInput,
+    cb: (err: any, data?: ListRouterNetworkInterfacesCommandOutput) => void
+  ): void;
+  listRouterNetworkInterfaces(
+    args: ListRouterNetworkInterfacesCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListRouterNetworkInterfacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRouterOutputsCommand}
+   */
+  listRouterOutputs(): Promise<ListRouterOutputsCommandOutput>;
+  listRouterOutputs(
+    args: ListRouterOutputsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListRouterOutputsCommandOutput>;
+  listRouterOutputs(
+    args: ListRouterOutputsCommandInput,
+    cb: (err: any, data?: ListRouterOutputsCommandOutput) => void
+  ): void;
+  listRouterOutputs(
+    args: ListRouterOutputsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListRouterOutputsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSourceEndpointsCommand}
+   */
+  listSourceEndpoints(): Promise<ListSourceEndpointsCommandOutput>;
+  listSourceEndpoints(
+    args: ListSourceEndpointsCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListSourceEndpointsCommandOutput>;
+  listSourceEndpoints(
+    args: ListSourceEndpointsCommandInput,
+    cb: (err: any, data?: ListSourceEndpointsCommandOutput) => void
+  ): void;
+  listSourceEndpoints(
+    args: ListSourceEndpointsCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListSourceEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForGlobalResourceCommand}
+   */
+  listTagsForGlobalResource(
+    args: ListTagsForGlobalResourceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<ListTagsForGlobalResourceCommandOutput>;
+  listTagsForGlobalResource(
+    args: ListTagsForGlobalResourceCommandInput,
+    cb: (err: any, data?: ListTagsForGlobalResourceCommandOutput) => void
+  ): void;
+  listTagsForGlobalResource(
+    args: ListTagsForGlobalResourceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: ListTagsForGlobalResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.
+   * @see {@link PurchaseOfferingCommand}
    */
-  public purchaseOffering(
+  purchaseOffering(
     args: PurchaseOfferingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<PurchaseOfferingCommandOutput>;
-  public purchaseOffering(
+  purchaseOffering(
     args: PurchaseOfferingCommandInput,
     cb: (err: any, data?: PurchaseOfferingCommandOutput) => void
   ): void;
-  public purchaseOffering(
+  purchaseOffering(
     args: PurchaseOfferingCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: PurchaseOfferingCommandOutput) => void
   ): void;
-  public purchaseOffering(
-    args: PurchaseOfferingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PurchaseOfferingCommandOutput) => void),
-    cb?: (err: any, data?: PurchaseOfferingCommandOutput) => void
-  ): Promise<PurchaseOfferingCommandOutput> | void {
-    const command = new PurchaseOfferingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.
+   * @see {@link RegisterDestinationEndpointCommand}
    */
-  public removeFlowMediaStream(
+  registerDestinationEndpoint(
+    args: RegisterDestinationEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<RegisterDestinationEndpointCommandOutput>;
+  registerDestinationEndpoint(
+    args: RegisterDestinationEndpointCommandInput,
+    cb: (err: any, data?: RegisterDestinationEndpointCommandOutput) => void
+  ): void;
+  registerDestinationEndpoint(
+    args: RegisterDestinationEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: RegisterDestinationEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterSourceEndpointCommand}
+   */
+  registerSourceEndpoint(
+    args: RegisterSourceEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<RegisterSourceEndpointCommandOutput>;
+  registerSourceEndpoint(
+    args: RegisterSourceEndpointCommandInput,
+    cb: (err: any, data?: RegisterSourceEndpointCommandOutput) => void
+  ): void;
+  registerSourceEndpoint(
+    args: RegisterSourceEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: RegisterSourceEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveBridgeOutputCommand}
+   */
+  removeBridgeOutput(
+    args: RemoveBridgeOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<RemoveBridgeOutputCommandOutput>;
+  removeBridgeOutput(
+    args: RemoveBridgeOutputCommandInput,
+    cb: (err: any, data?: RemoveBridgeOutputCommandOutput) => void
+  ): void;
+  removeBridgeOutput(
+    args: RemoveBridgeOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: RemoveBridgeOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveBridgeSourceCommand}
+   */
+  removeBridgeSource(
+    args: RemoveBridgeSourceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<RemoveBridgeSourceCommandOutput>;
+  removeBridgeSource(
+    args: RemoveBridgeSourceCommandInput,
+    cb: (err: any, data?: RemoveBridgeSourceCommandOutput) => void
+  ): void;
+  removeBridgeSource(
+    args: RemoveBridgeSourceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: RemoveBridgeSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveFlowMediaStreamCommand}
+   */
+  removeFlowMediaStream(
     args: RemoveFlowMediaStreamCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<RemoveFlowMediaStreamCommandOutput>;
-  public removeFlowMediaStream(
+  removeFlowMediaStream(
     args: RemoveFlowMediaStreamCommandInput,
     cb: (err: any, data?: RemoveFlowMediaStreamCommandOutput) => void
   ): void;
-  public removeFlowMediaStream(
+  removeFlowMediaStream(
     args: RemoveFlowMediaStreamCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: RemoveFlowMediaStreamCommandOutput) => void
   ): void;
-  public removeFlowMediaStream(
-    args: RemoveFlowMediaStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveFlowMediaStreamCommandOutput) => void),
-    cb?: (err: any, data?: RemoveFlowMediaStreamCommandOutput) => void
-  ): Promise<RemoveFlowMediaStreamCommandOutput> | void {
-    const command = new RemoveFlowMediaStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
+   * @see {@link RemoveFlowOutputCommand}
    */
-  public removeFlowOutput(
+  removeFlowOutput(
     args: RemoveFlowOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<RemoveFlowOutputCommandOutput>;
-  public removeFlowOutput(
+  removeFlowOutput(
     args: RemoveFlowOutputCommandInput,
     cb: (err: any, data?: RemoveFlowOutputCommandOutput) => void
   ): void;
-  public removeFlowOutput(
+  removeFlowOutput(
     args: RemoveFlowOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: RemoveFlowOutputCommandOutput) => void
   ): void;
-  public removeFlowOutput(
-    args: RemoveFlowOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveFlowOutputCommandOutput) => void),
-    cb?: (err: any, data?: RemoveFlowOutputCommandOutput) => void
-  ): Promise<RemoveFlowOutputCommandOutput> | void {
-    const command = new RemoveFlowOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Removes a source from an existing flow. This request can be made only if there is more than one source on the flow.
+   * @see {@link RemoveFlowSourceCommand}
    */
-  public removeFlowSource(
+  removeFlowSource(
     args: RemoveFlowSourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<RemoveFlowSourceCommandOutput>;
-  public removeFlowSource(
+  removeFlowSource(
     args: RemoveFlowSourceCommandInput,
     cb: (err: any, data?: RemoveFlowSourceCommandOutput) => void
   ): void;
-  public removeFlowSource(
+  removeFlowSource(
     args: RemoveFlowSourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: RemoveFlowSourceCommandOutput) => void
   ): void;
-  public removeFlowSource(
-    args: RemoveFlowSourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveFlowSourceCommandOutput) => void),
-    cb?: (err: any, data?: RemoveFlowSourceCommandOutput) => void
-  ): Promise<RemoveFlowSourceCommandOutput> | void {
-    const command = new RemoveFlowSourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.
+   * @see {@link RemoveFlowVpcInterfaceCommand}
    */
-  public removeFlowVpcInterface(
+  removeFlowVpcInterface(
     args: RemoveFlowVpcInterfaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<RemoveFlowVpcInterfaceCommandOutput>;
-  public removeFlowVpcInterface(
+  removeFlowVpcInterface(
     args: RemoveFlowVpcInterfaceCommandInput,
     cb: (err: any, data?: RemoveFlowVpcInterfaceCommandOutput) => void
   ): void;
-  public removeFlowVpcInterface(
+  removeFlowVpcInterface(
     args: RemoveFlowVpcInterfaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: RemoveFlowVpcInterfaceCommandOutput) => void
   ): void;
-  public removeFlowVpcInterface(
-    args: RemoveFlowVpcInterfaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveFlowVpcInterfaceCommandOutput) => void),
-    cb?: (err: any, data?: RemoveFlowVpcInterfaceCommandOutput) => void
-  ): Promise<RemoveFlowVpcInterfaceCommandOutput> | void {
-    const command = new RemoveFlowVpcInterfaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
+   * @see {@link RestartRouterInputCommand}
    */
-  public revokeFlowEntitlement(
+  restartRouterInput(
+    args: RestartRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<RestartRouterInputCommandOutput>;
+  restartRouterInput(
+    args: RestartRouterInputCommandInput,
+    cb: (err: any, data?: RestartRouterInputCommandOutput) => void
+  ): void;
+  restartRouterInput(
+    args: RestartRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: RestartRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestartRouterOutputCommand}
+   */
+  restartRouterOutput(
+    args: RestartRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<RestartRouterOutputCommandOutput>;
+  restartRouterOutput(
+    args: RestartRouterOutputCommandInput,
+    cb: (err: any, data?: RestartRouterOutputCommandOutput) => void
+  ): void;
+  restartRouterOutput(
+    args: RestartRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: RestartRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RevokeFlowEntitlementCommand}
+   */
+  revokeFlowEntitlement(
     args: RevokeFlowEntitlementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<RevokeFlowEntitlementCommandOutput>;
-  public revokeFlowEntitlement(
+  revokeFlowEntitlement(
     args: RevokeFlowEntitlementCommandInput,
     cb: (err: any, data?: RevokeFlowEntitlementCommandOutput) => void
   ): void;
-  public revokeFlowEntitlement(
+  revokeFlowEntitlement(
     args: RevokeFlowEntitlementCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: RevokeFlowEntitlementCommandOutput) => void
   ): void;
-  public revokeFlowEntitlement(
-    args: RevokeFlowEntitlementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RevokeFlowEntitlementCommandOutput) => void),
-    cb?: (err: any, data?: RevokeFlowEntitlementCommandOutput) => void
-  ): Promise<RevokeFlowEntitlementCommandOutput> | void {
-    const command = new RevokeFlowEntitlementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Starts a flow.
+   * @see {@link StartFlowCommand}
    */
-  public startFlow(args: StartFlowCommandInput, options?: __HttpHandlerOptions): Promise<StartFlowCommandOutput>;
-  public startFlow(args: StartFlowCommandInput, cb: (err: any, data?: StartFlowCommandOutput) => void): void;
-  public startFlow(
+  startFlow(
     args: StartFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<StartFlowCommandOutput>;
+  startFlow(
+    args: StartFlowCommandInput,
     cb: (err: any, data?: StartFlowCommandOutput) => void
   ): void;
-  public startFlow(
+  startFlow(
     args: StartFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartFlowCommandOutput) => void),
-    cb?: (err: any, data?: StartFlowCommandOutput) => void
-  ): Promise<StartFlowCommandOutput> | void {
-    const command = new StartFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: StartFlowCommandOutput) => void
+  ): void;
 
   /**
-   * Stops a flow.
+   * @see {@link StartRouterInputCommand}
    */
-  public stopFlow(args: StopFlowCommandInput, options?: __HttpHandlerOptions): Promise<StopFlowCommandOutput>;
-  public stopFlow(args: StopFlowCommandInput, cb: (err: any, data?: StopFlowCommandOutput) => void): void;
-  public stopFlow(
+  startRouterInput(
+    args: StartRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<StartRouterInputCommandOutput>;
+  startRouterInput(
+    args: StartRouterInputCommandInput,
+    cb: (err: any, data?: StartRouterInputCommandOutput) => void
+  ): void;
+  startRouterInput(
+    args: StartRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: StartRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRouterOutputCommand}
+   */
+  startRouterOutput(
+    args: StartRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<StartRouterOutputCommandOutput>;
+  startRouterOutput(
+    args: StartRouterOutputCommandInput,
+    cb: (err: any, data?: StartRouterOutputCommandOutput) => void
+  ): void;
+  startRouterOutput(
+    args: StartRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: StartRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopFlowCommand}
+   */
+  stopFlow(
     args: StopFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<StopFlowCommandOutput>;
+  stopFlow(
+    args: StopFlowCommandInput,
     cb: (err: any, data?: StopFlowCommandOutput) => void
   ): void;
-  public stopFlow(
+  stopFlow(
     args: StopFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopFlowCommandOutput) => void),
-    cb?: (err: any, data?: StopFlowCommandOutput) => void
-  ): Promise<StopFlowCommandOutput> | void {
-    const command = new StopFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: StopFlowCommandOutput) => void
+  ): void;
 
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   * @see {@link StopRouterInputCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  stopRouterInput(
+    args: StopRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<StopRouterInputCommandOutput>;
+  stopRouterInput(
+    args: StopRouterInputCommandInput,
+    cb: (err: any, data?: StopRouterInputCommandOutput) => void
+  ): void;
+  stopRouterInput(
+    args: StopRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: StopRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopRouterOutputCommand}
+   */
+  stopRouterOutput(
+    args: StopRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<StopRouterOutputCommandOutput>;
+  stopRouterOutput(
+    args: StopRouterOutputCommandInput,
+    cb: (err: any, data?: StopRouterOutputCommandOutput) => void
+  ): void;
+  stopRouterOutput(
+    args: StopRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: StopRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagGlobalResourceCommand}
+   */
+  tagGlobalResource(
+    args: TagGlobalResourceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<TagGlobalResourceCommandOutput>;
+  tagGlobalResource(
+    args: TagGlobalResourceCommandInput,
+    cb: (err: any, data?: TagGlobalResourceCommandOutput) => void
+  ): void;
+  tagGlobalResource(
+    args: TagGlobalResourceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: TagGlobalResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * Deletes specified tags from a resource.
+   * @see {@link TakeRouterInputCommand}
    */
-  public untagResource(
+  takeRouterInput(
+    args: TakeRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<TakeRouterInputCommandOutput>;
+  takeRouterInput(
+    args: TakeRouterInputCommandInput,
+    cb: (err: any, data?: TakeRouterInputCommandOutput) => void
+  ): void;
+  takeRouterInput(
+    args: TakeRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: TakeRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagGlobalResourceCommand}
+   */
+  untagGlobalResource(
+    args: UntagGlobalResourceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UntagGlobalResourceCommandOutput>;
+  untagGlobalResource(
+    args: UntagGlobalResourceCommandInput,
+    cb: (err: any, data?: UntagGlobalResourceCommandOutput) => void
+  ): void;
+  untagGlobalResource(
+    args: UntagGlobalResourceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UntagGlobalResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates flow
+   * @see {@link UpdateBridgeCommand}
    */
-  public updateFlow(args: UpdateFlowCommandInput, options?: __HttpHandlerOptions): Promise<UpdateFlowCommandOutput>;
-  public updateFlow(args: UpdateFlowCommandInput, cb: (err: any, data?: UpdateFlowCommandOutput) => void): void;
-  public updateFlow(
+  updateBridge(
+    args: UpdateBridgeCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateBridgeCommandOutput>;
+  updateBridge(
+    args: UpdateBridgeCommandInput,
+    cb: (err: any, data?: UpdateBridgeCommandOutput) => void
+  ): void;
+  updateBridge(
+    args: UpdateBridgeCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateBridgeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBridgeOutputCommand}
+   */
+  updateBridgeOutput(
+    args: UpdateBridgeOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateBridgeOutputCommandOutput>;
+  updateBridgeOutput(
+    args: UpdateBridgeOutputCommandInput,
+    cb: (err: any, data?: UpdateBridgeOutputCommandOutput) => void
+  ): void;
+  updateBridgeOutput(
+    args: UpdateBridgeOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateBridgeOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBridgeSourceCommand}
+   */
+  updateBridgeSource(
+    args: UpdateBridgeSourceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateBridgeSourceCommandOutput>;
+  updateBridgeSource(
+    args: UpdateBridgeSourceCommandInput,
+    cb: (err: any, data?: UpdateBridgeSourceCommandOutput) => void
+  ): void;
+  updateBridgeSource(
+    args: UpdateBridgeSourceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateBridgeSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBridgeStateCommand}
+   */
+  updateBridgeState(
+    args: UpdateBridgeStateCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateBridgeStateCommandOutput>;
+  updateBridgeState(
+    args: UpdateBridgeStateCommandInput,
+    cb: (err: any, data?: UpdateBridgeStateCommandOutput) => void
+  ): void;
+  updateBridgeState(
+    args: UpdateBridgeStateCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateBridgeStateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDestinationEndpointCommand}
+   */
+  updateDestinationEndpoint(
+    args: UpdateDestinationEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateDestinationEndpointCommandOutput>;
+  updateDestinationEndpoint(
+    args: UpdateDestinationEndpointCommandInput,
+    cb: (err: any, data?: UpdateDestinationEndpointCommandOutput) => void
+  ): void;
+  updateDestinationEndpoint(
+    args: UpdateDestinationEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateDestinationEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFlowCommand}
+   */
+  updateFlow(
     args: UpdateFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateFlowCommandOutput>;
+  updateFlow(
+    args: UpdateFlowCommandInput,
     cb: (err: any, data?: UpdateFlowCommandOutput) => void
   ): void;
-  public updateFlow(
+  updateFlow(
     args: UpdateFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFlowCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFlowCommandOutput) => void
-  ): Promise<UpdateFlowCommandOutput> | void {
-    const command = new UpdateFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateFlowCommandOutput) => void
+  ): void;
 
   /**
-   * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
+   * @see {@link UpdateFlowEntitlementCommand}
    */
-  public updateFlowEntitlement(
+  updateFlowEntitlement(
     args: UpdateFlowEntitlementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<UpdateFlowEntitlementCommandOutput>;
-  public updateFlowEntitlement(
+  updateFlowEntitlement(
     args: UpdateFlowEntitlementCommandInput,
     cb: (err: any, data?: UpdateFlowEntitlementCommandOutput) => void
   ): void;
-  public updateFlowEntitlement(
+  updateFlowEntitlement(
     args: UpdateFlowEntitlementCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: UpdateFlowEntitlementCommandOutput) => void
   ): void;
-  public updateFlowEntitlement(
-    args: UpdateFlowEntitlementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFlowEntitlementCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFlowEntitlementCommandOutput) => void
-  ): Promise<UpdateFlowEntitlementCommandOutput> | void {
-    const command = new UpdateFlowEntitlementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates an existing media stream.
+   * @see {@link UpdateFlowMediaStreamCommand}
    */
-  public updateFlowMediaStream(
+  updateFlowMediaStream(
     args: UpdateFlowMediaStreamCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<UpdateFlowMediaStreamCommandOutput>;
-  public updateFlowMediaStream(
+  updateFlowMediaStream(
     args: UpdateFlowMediaStreamCommandInput,
     cb: (err: any, data?: UpdateFlowMediaStreamCommandOutput) => void
   ): void;
-  public updateFlowMediaStream(
+  updateFlowMediaStream(
     args: UpdateFlowMediaStreamCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: UpdateFlowMediaStreamCommandOutput) => void
   ): void;
-  public updateFlowMediaStream(
-    args: UpdateFlowMediaStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFlowMediaStreamCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFlowMediaStreamCommandOutput) => void
-  ): Promise<UpdateFlowMediaStreamCommandOutput> | void {
-    const command = new UpdateFlowMediaStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates an existing flow output.
+   * @see {@link UpdateFlowOutputCommand}
    */
-  public updateFlowOutput(
+  updateFlowOutput(
     args: UpdateFlowOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<UpdateFlowOutputCommandOutput>;
-  public updateFlowOutput(
+  updateFlowOutput(
     args: UpdateFlowOutputCommandInput,
     cb: (err: any, data?: UpdateFlowOutputCommandOutput) => void
   ): void;
-  public updateFlowOutput(
+  updateFlowOutput(
     args: UpdateFlowOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: UpdateFlowOutputCommandOutput) => void
   ): void;
-  public updateFlowOutput(
-    args: UpdateFlowOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFlowOutputCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFlowOutputCommandOutput) => void
-  ): Promise<UpdateFlowOutputCommandOutput> | void {
-    const command = new UpdateFlowOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates the source of a flow.
+   * @see {@link UpdateFlowSourceCommand}
    */
-  public updateFlowSource(
+  updateFlowSource(
     args: UpdateFlowSourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MediaConnectRequestOptions
   ): Promise<UpdateFlowSourceCommandOutput>;
-  public updateFlowSource(
+  updateFlowSource(
     args: UpdateFlowSourceCommandInput,
     cb: (err: any, data?: UpdateFlowSourceCommandOutput) => void
   ): void;
-  public updateFlowSource(
+  updateFlowSource(
     args: UpdateFlowSourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MediaConnectRequestOptions,
     cb: (err: any, data?: UpdateFlowSourceCommandOutput) => void
   ): void;
-  public updateFlowSource(
-    args: UpdateFlowSourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFlowSourceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFlowSourceCommandOutput) => void
-  ): Promise<UpdateFlowSourceCommandOutput> | void {
-    const command = new UpdateFlowSourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateGatewayInstanceCommand}
+   */
+  updateGatewayInstance(
+    args: UpdateGatewayInstanceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateGatewayInstanceCommandOutput>;
+  updateGatewayInstance(
+    args: UpdateGatewayInstanceCommandInput,
+    cb: (err: any, data?: UpdateGatewayInstanceCommandOutput) => void
+  ): void;
+  updateGatewayInstance(
+    args: UpdateGatewayInstanceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateGatewayInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRouterInputCommand}
+   */
+  updateRouterInput(
+    args: UpdateRouterInputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateRouterInputCommandOutput>;
+  updateRouterInput(
+    args: UpdateRouterInputCommandInput,
+    cb: (err: any, data?: UpdateRouterInputCommandOutput) => void
+  ): void;
+  updateRouterInput(
+    args: UpdateRouterInputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateRouterInputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRouterNetworkInterfaceCommand}
+   */
+  updateRouterNetworkInterface(
+    args: UpdateRouterNetworkInterfaceCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateRouterNetworkInterfaceCommandOutput>;
+  updateRouterNetworkInterface(
+    args: UpdateRouterNetworkInterfaceCommandInput,
+    cb: (err: any, data?: UpdateRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+  updateRouterNetworkInterface(
+    args: UpdateRouterNetworkInterfaceCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateRouterNetworkInterfaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRouterOutputCommand}
+   */
+  updateRouterOutput(
+    args: UpdateRouterOutputCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateRouterOutputCommandOutput>;
+  updateRouterOutput(
+    args: UpdateRouterOutputCommandInput,
+    cb: (err: any, data?: UpdateRouterOutputCommandOutput) => void
+  ): void;
+  updateRouterOutput(
+    args: UpdateRouterOutputCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateRouterOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSourceEndpointCommand}
+   */
+  updateSourceEndpoint(
+    args: UpdateSourceEndpointCommandInput,
+    options?: MediaConnectRequestOptions
+  ): Promise<UpdateSourceEndpointCommandOutput>;
+  updateSourceEndpoint(
+    args: UpdateSourceEndpointCommandInput,
+    cb: (err: any, data?: UpdateSourceEndpointCommandOutput) => void
+  ): void;
+  updateSourceEndpoint(
+    args: UpdateSourceEndpointCommandInput,
+    options: MediaConnectRequestOptions,
+    cb: (err: any, data?: UpdateSourceEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBridgesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBridgesCommandOutput}.
+   */
+  paginateListBridges(
+    args?: ListBridgesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBridgesCommandOutput>;
+
+  /**
+   * @see {@link ListDestinationEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDestinationEndpointsCommandOutput}.
+   */
+  paginateListDestinationEndpoints(
+    args?: ListDestinationEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDestinationEndpointsCommandOutput>;
+
+  /**
+   * @see {@link ListEntitlementsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEntitlementsCommandOutput}.
+   */
+  paginateListEntitlements(
+    args?: ListEntitlementsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEntitlementsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowsCommandOutput}.
+   */
+  paginateListFlows(
+    args?: ListFlowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowsCommandOutput>;
+
+  /**
+   * @see {@link ListGatewayInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGatewayInstancesCommandOutput}.
+   */
+  paginateListGatewayInstances(
+    args?: ListGatewayInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGatewayInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListGatewaysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGatewaysCommandOutput}.
+   */
+  paginateListGateways(
+    args?: ListGatewaysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGatewaysCommandOutput>;
+
+  /**
+   * @see {@link ListOfferingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOfferingsCommandOutput}.
+   */
+  paginateListOfferings(
+    args?: ListOfferingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOfferingsCommandOutput>;
+
+  /**
+   * @see {@link ListReservationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReservationsCommandOutput}.
+   */
+  paginateListReservations(
+    args?: ListReservationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReservationsCommandOutput>;
+
+  /**
+   * @see {@link ListRouterInputsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRouterInputsCommandOutput}.
+   */
+  paginateListRouterInputs(
+    args?: ListRouterInputsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRouterInputsCommandOutput>;
+
+  /**
+   * @see {@link ListRouterNetworkInterfacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRouterNetworkInterfacesCommandOutput}.
+   */
+  paginateListRouterNetworkInterfaces(
+    args?: ListRouterNetworkInterfacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRouterNetworkInterfacesCommandOutput>;
+
+  /**
+   * @see {@link ListRouterOutputsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRouterOutputsCommandOutput}.
+   */
+  paginateListRouterOutputs(
+    args?: ListRouterOutputsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRouterOutputsCommandOutput>;
+
+  /**
+   * @see {@link ListSourceEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSourceEndpointsCommandOutput}.
+   */
+  paginateListSourceEndpoints(
+    args?: ListSourceEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSourceEndpointsCommandOutput>;
+
+  /**
+   * @see {@link DescribeFlowCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFlowActive(
+    args: DescribeFlowCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<DescribeFlowCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFlowCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFlowStandby(
+    args: DescribeFlowCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<DescribeFlowCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFlowCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFlowDeleted(
+    args: DescribeFlowCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<NotFoundException>>;
+
+  /**
+   * @see {@link GetDestinationEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilDestinationEndpointConnected(
+    args: GetDestinationEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetDestinationEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetDestinationEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilDestinationEndpointDisconnected(
+    args: GetDestinationEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetDestinationEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetDestinationEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilDestinationEndpointDeregistered(
+    args: GetDestinationEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<NotFoundException>>;
+
+  /**
+   * @see {@link GetDestinationEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilDestinationEndpointRegistered(
+    args: GetDestinationEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetDestinationEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetRouterInputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilInputActive(
+    args: GetRouterInputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetRouterInputCommandOutput>>;
+
+  /**
+   * @see {@link GetRouterInputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilInputStandby(
+    args: GetRouterInputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetRouterInputCommandOutput>>;
+
+  /**
+   * @see {@link GetRouterInputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilInputDeleted(
+    args: GetRouterInputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<NotFoundException>>;
+
+  /**
+   * @see {@link GetRouterOutputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilOutputActive(
+    args: GetRouterOutputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetRouterOutputCommandOutput>>;
+
+  /**
+   * @see {@link GetRouterOutputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilOutputDeleted(
+    args: GetRouterOutputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<NotFoundException>>;
+
+  /**
+   * @see {@link GetRouterOutputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilOutputRouted(
+    args: GetRouterOutputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetRouterOutputCommandOutput>>;
+
+  /**
+   * @see {@link GetRouterOutputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilOutputStandby(
+    args: GetRouterOutputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetRouterOutputCommandOutput>>;
+
+  /**
+   * @see {@link GetRouterOutputCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilOutputUnrouted(
+    args: GetRouterOutputCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetRouterOutputCommandOutput>>;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSourceEndpointConnected(
+    args: GetSourceEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetSourceEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSourceEndpointDisconnected(
+    args: GetSourceEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetSourceEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSourceEndpointConnecting(
+    args: GetSourceEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetSourceEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSourceEndpointRegistered(
+    args: GetSourceEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetSourceEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSourceEndpointDisconnecting(
+    args: GetSourceEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<GetSourceEndpointCommandOutput>>;
+
+  /**
+   * @see {@link GetSourceEndpointCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSourceEndpointDeregistered(
+    args: GetSourceEndpointCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<MediaConnect>, "client">
+  ): Promise<WaiterResult<NotFoundException>>;
 }
+
+/**
+ * <p>Welcome to the Elemental MediaConnect API reference. </p> <p>MediaConnect is a service that lets you ingest live video content into the cloud and distribute it to destinations all over the world, both inside and outside the Amazon Web Services cloud. This API reference provides descriptions, syntax, and usage examples for each of the actions and data types that are supported by MediaConnect. </p> <p>Use the following links to get started with the MediaConnect API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/API_Operations.html">Actions</a>: An alphabetical list of all MediaConnect API operations.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/API_Types.html">Data types</a>: An alphabetical list of all MediaConnect data types.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/CommonParameters.html">Common parameters</a>: Parameters that all operations can use.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/CommonErrors.html">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul>
+ * @public
+ */
+export class MediaConnect extends MediaConnectClient implements MediaConnect {}
+createAggregatedClient(commands, MediaConnect, { paginators, waiters });

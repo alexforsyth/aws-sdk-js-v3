@@ -1,84 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MalformedTimestampBodyHttpDateInput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { MalformedTimestampBodyHttpDateInput } from "../models/models_0";
 import {
-  deserializeAws_restJson1MalformedTimestampBodyHttpDateCommand,
-  serializeAws_restJson1MalformedTimestampBodyHttpDateCommand,
+  de_MalformedTimestampBodyHttpDateCommand,
+  se_MalformedTimestampBodyHttpDateCommand,
 } from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MalformedTimestampBodyHttpDateCommand}.
+ */
 export interface MalformedTimestampBodyHttpDateCommandInput extends MalformedTimestampBodyHttpDateInput {}
+/**
+ * @public
+ *
+ * The output of {@link MalformedTimestampBodyHttpDateCommand}.
+ */
 export interface MalformedTimestampBodyHttpDateCommandOutput extends __MetadataBearer {}
 
-export class MalformedTimestampBodyHttpDateCommand extends $Command<
-  MalformedTimestampBodyHttpDateCommandInput,
-  MalformedTimestampBodyHttpDateCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: MalformedTimestampBodyHttpDateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MalformedTimestampBodyHttpDateCommandInput, MalformedTimestampBodyHttpDateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "MalformedTimestampBodyHttpDateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: MalformedTimestampBodyHttpDateInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, MalformedTimestampBodyHttpDateCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, MalformedTimestampBodyHttpDateCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // MalformedTimestampBodyHttpDateInput
+ *   timestamp: new Date("TIMESTAMP"), // required
+ * };
+ * const command = new MalformedTimestampBodyHttpDateCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param MalformedTimestampBodyHttpDateCommandInput - {@link MalformedTimestampBodyHttpDateCommandInput}
+ * @returns {@link MalformedTimestampBodyHttpDateCommandOutput}
+ * @see {@link MalformedTimestampBodyHttpDateCommandInput} for command's `input` shape.
+ * @see {@link MalformedTimestampBodyHttpDateCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class MalformedTimestampBodyHttpDateCommand extends $Command
+  .classBuilder<
+    MalformedTimestampBodyHttpDateCommandInput,
+    MalformedTimestampBodyHttpDateCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "MalformedTimestampBodyHttpDate", {})
+  .n("RestJsonProtocolClient", "MalformedTimestampBodyHttpDateCommand")
+  .f(void 0, void 0)
+  .ser(se_MalformedTimestampBodyHttpDateCommand)
+  .de(de_MalformedTimestampBodyHttpDateCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MalformedTimestampBodyHttpDateInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: MalformedTimestampBodyHttpDateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1MalformedTimestampBodyHttpDateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<MalformedTimestampBodyHttpDateCommandOutput> {
-    return deserializeAws_restJson1MalformedTimestampBodyHttpDateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MalformedTimestampBodyHttpDateCommandInput;
+      output: MalformedTimestampBodyHttpDateCommandOutput;
+    };
+  };
 }

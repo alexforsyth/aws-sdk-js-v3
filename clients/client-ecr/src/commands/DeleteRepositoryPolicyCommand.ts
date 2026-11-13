@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { DeleteRepositoryPolicyRequest, DeleteRepositoryPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteRepositoryPolicyCommand,
-  serializeAws_json1_1DeleteRepositoryPolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRepositoryPolicyRequest, DeleteRepositoryPolicyResponse } from "../models/models_0";
+import { DeleteRepositoryPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRepositoryPolicyCommand}.
+ */
 export interface DeleteRepositoryPolicyCommandInput extends DeleteRepositoryPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRepositoryPolicyCommand}.
+ */
 export interface DeleteRepositoryPolicyCommandOutput extends DeleteRepositoryPolicyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface DeleteRepositoryPolicyCommandOutput extends DeleteRepositoryPol
  * ```javascript
  * import { ECRClient, DeleteRepositoryPolicyCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, DeleteRepositoryPolicyCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // DeleteRepositoryPolicyRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRepositoryPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRepositoryPolicyResponse
+ * //   registryId: "STRING_VALUE",
+ * //   repositoryName: "STRING_VALUE",
+ * //   policyText: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteRepositoryPolicyCommandInput - {@link DeleteRepositoryPolicyCommandInput}
+ * @returns {@link DeleteRepositoryPolicyCommandOutput}
  * @see {@link DeleteRepositoryPolicyCommandInput} for command's `input` shape.
  * @see {@link DeleteRepositoryPolicyCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link RepositoryPolicyNotFoundException} (client fault)
+ *  <p>The specified repository and registry combination does not have an associated
+ *             repository policy.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @example To delete the policy associated with a repository
+ * ```javascript
+ * // This example deletes the policy associated with the repository named ubuntu in the current account.
+ * const input = {
+ *   repositoryName: "ubuntu"
+ * };
+ * const command = new DeleteRepositoryPolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   policyText: "{ ... }",
+ *   registryId: "012345678901",
+ *   repositoryName: "ubuntu"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteRepositoryPolicyCommand extends $Command<
-  DeleteRepositoryPolicyCommandInput,
-  DeleteRepositoryPolicyCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRepositoryPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRepositoryPolicyCommandInput, DeleteRepositoryPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "DeleteRepositoryPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRepositoryPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRepositoryPolicyResponse.filterSensitiveLog,
+export class DeleteRepositoryPolicyCommand extends command<DeleteRepositoryPolicyCommandInput, DeleteRepositoryPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRepositoryPolicy",
+  DeleteRepositoryPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRepositoryPolicyRequest;
+      output: DeleteRepositoryPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRepositoryPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteRepositoryPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRepositoryPolicyCommandOutput> {
-    return deserializeAws_json1_1DeleteRepositoryPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRepositoryPolicyCommandInput;
+      output: DeleteRepositoryPolicyCommandOutput;
+    };
+  };
 }

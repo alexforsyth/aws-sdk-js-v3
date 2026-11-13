@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CancelResizeMessage, ResizeProgressMessage } from "../models/models_0";
-import { deserializeAws_queryCancelResizeCommand, serializeAws_queryCancelResizeCommand } from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelResizeMessage, ResizeProgressMessage } from "../models/models_0";
+import { CancelResize$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelResizeCommand}.
+ */
 export interface CancelResizeCommandInput extends CancelResizeMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CancelResizeCommand}.
+ */
 export interface CancelResizeCommandOutput extends ResizeProgressMessage, __MetadataBearer {}
 
 /**
@@ -25,68 +29,81 @@ export interface CancelResizeCommandOutput extends ResizeProgressMessage, __Meta
  * ```javascript
  * import { RedshiftClient, CancelResizeCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, CancelResizeCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // CancelResizeMessage
+ *   ClusterIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new CancelResizeCommand(input);
  * const response = await client.send(command);
+ * // { // ResizeProgressMessage
+ * //   TargetNodeType: "STRING_VALUE",
+ * //   TargetNumberOfNodes: Number("int"),
+ * //   TargetClusterType: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * //   ImportTablesCompleted: [ // ImportTablesCompleted
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ImportTablesInProgress: [ // ImportTablesInProgress
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ImportTablesNotStarted: [ // ImportTablesNotStarted
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   AvgResizeRateInMegaBytesPerSecond: Number("double"),
+ * //   TotalResizeDataInMegaBytes: Number("long"),
+ * //   ProgressInMegaBytes: Number("long"),
+ * //   ElapsedTimeInSeconds: Number("long"),
+ * //   EstimatedTimeToCompletionInSeconds: Number("long"),
+ * //   ResizeType: "STRING_VALUE",
+ * //   Message: "STRING_VALUE",
+ * //   TargetEncryptionType: "STRING_VALUE",
+ * //   DataTransferProgressPercent: Number("double"),
+ * // };
+ *
  * ```
  *
+ * @param CancelResizeCommandInput - {@link CancelResizeCommandInput}
+ * @returns {@link CancelResizeCommandOutput}
  * @see {@link CancelResizeCommandInput} for command's `input` shape.
  * @see {@link CancelResizeCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The specified cluster is not in the <code>available</code> state. </p>
+ *
+ * @throws {@link ResizeNotFoundFault} (client fault)
+ *  <p>A resize operation for the specified cluster is not found.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class CancelResizeCommand extends $Command<
-  CancelResizeCommandInput,
-  CancelResizeCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelResizeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelResizeCommandInput, CancelResizeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "CancelResizeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelResizeMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ResizeProgressMessage.filterSensitiveLog,
+export class CancelResizeCommand extends command<CancelResizeCommandInput, CancelResizeCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelResize",
+  CancelResize$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelResizeMessage;
+      output: ResizeProgressMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelResizeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCancelResizeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelResizeCommandOutput> {
-    return deserializeAws_queryCancelResizeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelResizeCommandInput;
+      output: CancelResizeCommandOutput;
+    };
+  };
 }

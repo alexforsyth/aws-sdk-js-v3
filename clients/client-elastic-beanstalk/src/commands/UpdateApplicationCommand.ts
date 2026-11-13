@@ -1,99 +1,136 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ApplicationDescriptionMessage, UpdateApplicationMessage } from "../models/models_0";
-import {
-  deserializeAws_queryUpdateApplicationCommand,
-  serializeAws_queryUpdateApplicationCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ApplicationDescriptionMessage, UpdateApplicationMessage } from "../models/models_0";
+import { UpdateApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateApplicationCommand}.
+ */
 export interface UpdateApplicationCommandInput extends UpdateApplicationMessage {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateApplicationCommand}.
+ */
 export interface UpdateApplicationCommandOutput extends ApplicationDescriptionMessage, __MetadataBearer {}
 
 /**
  * <p>Updates the specified application to have the specified properties.</p>
  *          <note>
- *             <p>If a property (for example, <code>description</code>) is not provided, the value
- *         remains unchanged. To clear these properties, specify an empty string.</p>
+ *             <p>If a property (for example, <code>description</code>) is not provided, the value remains
+ *         unchanged. To clear these properties, specify an empty string.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, UpdateApplicationCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, UpdateApplicationCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // UpdateApplicationMessage
+ *   ApplicationName: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new UpdateApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // ApplicationDescriptionMessage
+ * //   Application: { // ApplicationDescription
+ * //     ApplicationArn: "STRING_VALUE",
+ * //     ApplicationName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     DateCreated: new Date("TIMESTAMP"),
+ * //     DateUpdated: new Date("TIMESTAMP"),
+ * //     Versions: [ // VersionLabelsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ConfigurationTemplates: [ // ConfigurationTemplateNamesList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ResourceLifecycleConfig: { // ApplicationResourceLifecycleConfig
+ * //       ServiceRole: "STRING_VALUE",
+ * //       VersionLifecycleConfig: { // ApplicationVersionLifecycleConfig
+ * //         MaxCountRule: { // MaxCountRule
+ * //           Enabled: true || false, // required
+ * //           MaxCount: Number("int"),
+ * //           DeleteSourceFromS3: true || false,
+ * //         },
+ * //         MaxAgeRule: { // MaxAgeRule
+ * //           Enabled: true || false, // required
+ * //           MaxAgeInDays: Number("int"),
+ * //           DeleteSourceFromS3: true || false,
+ * //         },
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateApplicationCommandInput - {@link UpdateApplicationCommandInput}
+ * @returns {@link UpdateApplicationCommandOutput}
  * @see {@link UpdateApplicationCommandInput} for command's `input` shape.
  * @see {@link UpdateApplicationCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To change an application's description
+ * ```javascript
+ * // The following operation updates the description of an application named my-app:
+ * const input = {
+ *   ApplicationName: "my-app",
+ *   Description: "my Elastic Beanstalk application"
+ * };
+ * const command = new UpdateApplicationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Application: {
+ *     ApplicationName: "my-app",
+ *     ConfigurationTemplates:     [],
+ *     DateCreated: "2015-08-13T19:15:50.449Z",
+ *     DateUpdated: "2015-08-20T22:34:56.195Z",
+ *     Description: "my Elastic Beanstalk application",
+ *     Versions: [
+ *       "2fba-stage-150819_234450",
+ *       "bf07-stage-150820_214945",
+ *       "93f8",
+ *       "fd7c-stage-150820_000431",
+ *       "22a0-stage-150819_185942"
+ *     ]
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateApplicationCommand extends $Command<
-  UpdateApplicationCommandInput,
-  UpdateApplicationCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateApplicationCommandInput, UpdateApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "UpdateApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateApplicationMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ApplicationDescriptionMessage.filterSensitiveLog,
+export class UpdateApplicationCommand extends command<UpdateApplicationCommandInput, UpdateApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateApplication",
+  UpdateApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApplicationMessage;
+      output: ApplicationDescriptionMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryUpdateApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateApplicationCommandOutput> {
-    return deserializeAws_queryUpdateApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateApplicationCommandInput;
+      output: UpdateApplicationCommandOutput;
+    };
+  };
 }

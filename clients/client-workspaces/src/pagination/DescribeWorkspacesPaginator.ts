@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeWorkspacesCommand,
   DescribeWorkspacesCommandInput,
   DescribeWorkspacesCommandOutput,
 } from "../commands/DescribeWorkspacesCommand";
-import { WorkSpaces } from "../WorkSpaces";
 import { WorkSpacesClient } from "../WorkSpacesClient";
-import { WorkSpacesPaginationConfiguration } from "./Interfaces";
+import type { WorkSpacesPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: WorkSpacesClient,
-  input: DescribeWorkspacesCommandInput,
-  ...args: any
-): Promise<DescribeWorkspacesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeWorkspacesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: WorkSpaces,
-  input: DescribeWorkspacesCommandInput,
-  ...args: any
-): Promise<DescribeWorkspacesCommandOutput> => {
-  // @ts-ignore
-  return await client.describeWorkspaces(input, ...args);
-};
-export async function* paginateDescribeWorkspaces(
+export const paginateDescribeWorkspaces: (
   config: WorkSpacesPaginationConfiguration,
   input: DescribeWorkspacesCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeWorkspacesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeWorkspacesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["Limit"] = config.pageSize;
-    if (config.client instanceof WorkSpaces) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof WorkSpacesClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected WorkSpaces | WorkSpacesClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeWorkspacesCommandOutput> = createPaginator<
+  WorkSpacesPaginationConfiguration,
+  DescribeWorkspacesCommandInput,
+  DescribeWorkspacesCommandOutput
+>(WorkSpacesClient, DescribeWorkspacesCommand, "NextToken", "NextToken", "Limit");

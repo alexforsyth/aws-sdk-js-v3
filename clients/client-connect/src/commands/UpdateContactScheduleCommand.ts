@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateContactScheduleRequest, UpdateContactScheduleResponse } from "../models/models_3";
+import { UpdateContactSchedule$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateContactScheduleCommand}.
+ */
+export interface UpdateContactScheduleCommandInput extends UpdateContactScheduleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateContactScheduleCommand}.
+ */
+export interface UpdateContactScheduleCommandOutput extends UpdateContactScheduleResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the scheduled time of a task contact that is already scheduled.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, UpdateContactScheduleCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, UpdateContactScheduleCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // UpdateContactScheduleRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactId: "STRING_VALUE", // required
+ *   ScheduledTime: new Date("TIMESTAMP"), // required
+ * };
+ * const command = new UpdateContactScheduleCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateContactScheduleCommandInput - {@link UpdateContactScheduleCommandInput}
+ * @returns {@link UpdateContactScheduleCommandOutput}
+ * @see {@link UpdateContactScheduleCommandInput} for command's `input` shape.
+ * @see {@link UpdateContactScheduleCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The allowed limit for the resource has been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateContactScheduleCommand extends command<UpdateContactScheduleCommandInput, UpdateContactScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateContactSchedule",
+  UpdateContactSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateContactScheduleRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateContactScheduleCommandInput;
+      output: UpdateContactScheduleCommandOutput;
+    };
+  };
+}

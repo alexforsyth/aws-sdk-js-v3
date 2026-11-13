@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ConfigurationSettingsValidationMessages, ValidateConfigurationSettingsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryValidateConfigurationSettingsCommand,
-  serializeAws_queryValidateConfigurationSettingsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigurationSettingsValidationMessages, ValidateConfigurationSettingsMessage } from "../models/models_0";
+import { ValidateConfigurationSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ValidateConfigurationSettingsCommand}.
+ */
 export interface ValidateConfigurationSettingsCommandInput extends ValidateConfigurationSettingsMessage {}
-export interface ValidateConfigurationSettingsCommandOutput
-  extends ConfigurationSettingsValidationMessages,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ValidateConfigurationSettingsCommand}.
+ */
+export interface ValidateConfigurationSettingsCommandOutput extends ConfigurationSettingsValidationMessages, __MetadataBearer {}
 
 /**
  * <p>Takes a set of configuration settings and either a configuration template or
@@ -33,71 +32,93 @@ export interface ValidateConfigurationSettingsCommandOutput
  * ```javascript
  * import { ElasticBeanstalkClient, ValidateConfigurationSettingsCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, ValidateConfigurationSettingsCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // ValidateConfigurationSettingsMessage
+ *   ApplicationName: "STRING_VALUE", // required
+ *   TemplateName: "STRING_VALUE",
+ *   EnvironmentName: "STRING_VALUE",
+ *   OptionSettings: [ // ConfigurationOptionSettingsList // required
+ *     { // ConfigurationOptionSetting
+ *       ResourceName: "STRING_VALUE",
+ *       Namespace: "STRING_VALUE",
+ *       OptionName: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new ValidateConfigurationSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigurationSettingsValidationMessages
+ * //   Messages: [ // ValidationMessagesList
+ * //     { // ValidationMessage
+ * //       Message: "STRING_VALUE",
+ * //       Severity: "error" || "warning",
+ * //       Namespace: "STRING_VALUE",
+ * //       OptionName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ValidateConfigurationSettingsCommandInput - {@link ValidateConfigurationSettingsCommandInput}
+ * @returns {@link ValidateConfigurationSettingsCommandOutput}
  * @see {@link ValidateConfigurationSettingsCommandInput} for command's `input` shape.
  * @see {@link ValidateConfigurationSettingsCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link InsufficientPrivilegesException} (client fault)
+ *  <p>The specified account does not have sufficient privileges for one or more Amazon Web Services services.</p>
+ *
+ * @throws {@link TooManyBucketsException} (client fault)
+ *  <p>The specified account has reached its limit of Amazon S3 buckets.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To validate configuration settings
+ * ```javascript
+ * // The following operation validates a CloudWatch custom metrics config document:
+ * const input = {
+ *   ApplicationName: "my-app",
+ *   EnvironmentName: "my-env",
+ *   OptionSettings: [
+ *     {
+ *       Namespace: "aws:elasticbeanstalk:healthreporting:system",
+ *       OptionName: "ConfigDocument",
+ *       Value: `{"CloudWatchMetrics": {"Environment": {"ApplicationLatencyP99.9": null,"InstancesSevere": 60,"ApplicationLatencyP90": 60,"ApplicationLatencyP99": null,"ApplicationLatencyP95": 60,"InstancesUnknown": 60,"ApplicationLatencyP85": 60,"InstancesInfo": null,"ApplicationRequests2xx": null,"InstancesDegraded": null,"InstancesWarning": 60,"ApplicationLatencyP50": 60,"ApplicationRequestsTotal": null,"InstancesNoData": null,"InstancesPending": 60,"ApplicationLatencyP10": null,"ApplicationRequests5xx": null,"ApplicationLatencyP75": null,"InstancesOk": 60,"ApplicationRequests3xx": null,"ApplicationRequests4xx": null},"Instance": {"ApplicationLatencyP99.9": null,"ApplicationLatencyP90": 60,"ApplicationLatencyP99": null,"ApplicationLatencyP95": null,"ApplicationLatencyP85": null,"CPUUser": 60,"ApplicationRequests2xx": null,"CPUIdle": null,"ApplicationLatencyP50": null,"ApplicationRequestsTotal": 60,"RootFilesystemUtil": null,"LoadAverage1min": null,"CPUIrq": null,"CPUNice": 60,"CPUIowait": 60,"ApplicationLatencyP10": null,"LoadAverage5min": null,"ApplicationRequests5xx": null,"ApplicationLatencyP75": 60,"CPUSystem": 60,"ApplicationRequests3xx": 60,"ApplicationRequests4xx": null,"InstanceHealth": null,"CPUSoftirq": 60}},"Version": 1}`
+ *     }
+ *   ]
+ * };
+ * const command = new ValidateConfigurationSettingsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Messages:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ValidateConfigurationSettingsCommand extends $Command<
-  ValidateConfigurationSettingsCommandInput,
-  ValidateConfigurationSettingsCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ValidateConfigurationSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ValidateConfigurationSettingsCommandInput, ValidateConfigurationSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "ValidateConfigurationSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ValidateConfigurationSettingsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigurationSettingsValidationMessages.filterSensitiveLog,
+export class ValidateConfigurationSettingsCommand extends command<ValidateConfigurationSettingsCommandInput, ValidateConfigurationSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ValidateConfigurationSettings",
+  ValidateConfigurationSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ValidateConfigurationSettingsMessage;
+      output: ConfigurationSettingsValidationMessages;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ValidateConfigurationSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryValidateConfigurationSettingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ValidateConfigurationSettingsCommandOutput> {
-    return deserializeAws_queryValidateConfigurationSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ValidateConfigurationSettingsCommandInput;
+      output: ValidateConfigurationSettingsCommandOutput;
+    };
+  };
 }

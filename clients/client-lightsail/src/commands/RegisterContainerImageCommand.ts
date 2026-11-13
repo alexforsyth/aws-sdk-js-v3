@@ -1,33 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LightsailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LightsailClient";
-import { RegisterContainerImageRequest, RegisterContainerImageResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1RegisterContainerImageCommand,
-  serializeAws_json1_1RegisterContainerImageCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterContainerImageRequest, RegisterContainerImageResult } from "../models/models_1";
+import { RegisterContainerImage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterContainerImageCommand}.
+ */
 export interface RegisterContainerImageCommandInput extends RegisterContainerImageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterContainerImageCommand}.
+ */
 export interface RegisterContainerImageCommandOutput extends RegisterContainerImageResult, __MetadataBearer {}
 
 /**
  * <p>Registers a container image to your Amazon Lightsail container service.</p>
- *
  *          <note>
  *             <p>This action is not required if you install and use the Lightsail Control
  *         (lightsailctl) plugin to push container images to your Lightsail container service. For
- *         more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a>
+ *         more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a>
  *         in the <i>Amazon Lightsail Developer Guide</i>.</p>
  *          </note>
  * @example
@@ -35,68 +35,80 @@ export interface RegisterContainerImageCommandOutput extends RegisterContainerIm
  * ```javascript
  * import { LightsailClient, RegisterContainerImageCommand } from "@aws-sdk/client-lightsail"; // ES Modules import
  * // const { LightsailClient, RegisterContainerImageCommand } = require("@aws-sdk/client-lightsail"); // CommonJS import
+ * // import type { LightsailClientConfig } from "@aws-sdk/client-lightsail";
+ * const config = {}; // type is LightsailClientConfig
  * const client = new LightsailClient(config);
+ * const input = { // RegisterContainerImageRequest
+ *   serviceName: "STRING_VALUE", // required
+ *   label: "STRING_VALUE", // required
+ *   digest: "STRING_VALUE", // required
+ * };
  * const command = new RegisterContainerImageCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterContainerImageResult
+ * //   containerImage: { // ContainerImage
+ * //     image: "STRING_VALUE",
+ * //     digest: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RegisterContainerImageCommandInput - {@link RegisterContainerImageCommandInput}
+ * @returns {@link RegisterContainerImageCommandOutput}
  * @see {@link RegisterContainerImageCommandInput} for command's `input` shape.
  * @see {@link RegisterContainerImageCommandOutput} for command's `response` shape.
- * @see {@link LightsailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LightsailClientResolvedConfig | config} for LightsailClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Lightsail throws this exception when the user cannot be authenticated or uses invalid
+ *       credentials to access a resource.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Lightsail throws this exception when user input does not conform to the validation rules
+ *       of an input field.</p>
+ *          <note>
+ *             <p>Domain and distribution APIs are only available in the N. Virginia
+ *           (<code>us-east-1</code>) Amazon Web Services Region. Please set your Amazon Web Services
+ *         Region configuration to <code>us-east-1</code> to create, view, or edit these
+ *         resources.</p>
+ *          </note>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Lightsail throws this exception when it cannot find a resource.</p>
+ *
+ * @throws {@link RegionSetupInProgressException} (client fault)
+ *  <p>Lightsail throws this exception when an operation is performed on resources in an opt-in
+ *       Region that is currently being set up.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>A general service exception.</p>
+ *
+ * @throws {@link UnauthenticatedException} (client fault)
+ *  <p>Lightsail throws this exception when the user has not been authenticated.</p>
+ *
+ * @throws {@link LightsailServiceException}
+ * <p>Base exception class for all service exceptions from Lightsail service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterContainerImageCommand extends $Command<
-  RegisterContainerImageCommandInput,
-  RegisterContainerImageCommandOutput,
-  LightsailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterContainerImageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LightsailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterContainerImageCommandInput, RegisterContainerImageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LightsailClient";
-    const commandName = "RegisterContainerImageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterContainerImageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterContainerImageResult.filterSensitiveLog,
+export class RegisterContainerImageCommand extends command<RegisterContainerImageCommandInput, RegisterContainerImageCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterContainerImage",
+  RegisterContainerImage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterContainerImageRequest;
+      output: RegisterContainerImageResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterContainerImageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RegisterContainerImageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterContainerImageCommandOutput> {
-    return deserializeAws_json1_1RegisterContainerImageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterContainerImageCommandInput;
+      output: RegisterContainerImageCommandOutput;
+    };
+  };
 }

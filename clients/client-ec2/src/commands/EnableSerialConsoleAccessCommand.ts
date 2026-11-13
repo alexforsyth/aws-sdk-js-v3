@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { EnableSerialConsoleAccessRequest, EnableSerialConsoleAccessResult } from "../models/models_4";
-import {
-  deserializeAws_ec2EnableSerialConsoleAccessCommand,
-  serializeAws_ec2EnableSerialConsoleAccessCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableSerialConsoleAccessRequest, EnableSerialConsoleAccessResult } from "../models/models_6";
+import { EnableSerialConsoleAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableSerialConsoleAccessCommand}.
+ */
 export interface EnableSerialConsoleAccessCommandInput extends EnableSerialConsoleAccessRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableSerialConsoleAccessCommand}.
+ */
 export interface EnableSerialConsoleAccessCommandOutput extends EnableSerialConsoleAccessResult, __MetadataBearer {}
 
 /**
@@ -30,71 +31,47 @@ export interface EnableSerialConsoleAccessCommandOutput extends EnableSerialCons
  * ```javascript
  * import { EC2Client, EnableSerialConsoleAccessCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, EnableSerialConsoleAccessCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // EnableSerialConsoleAccessRequest
+ *   DryRun: true || false,
+ * };
  * const command = new EnableSerialConsoleAccessCommand(input);
  * const response = await client.send(command);
+ * // { // EnableSerialConsoleAccessResult
+ * //   SerialConsoleAccessEnabled: true || false,
+ * // };
+ *
  * ```
  *
+ * @param EnableSerialConsoleAccessCommandInput - {@link EnableSerialConsoleAccessCommandInput}
+ * @returns {@link EnableSerialConsoleAccessCommandOutput}
  * @see {@link EnableSerialConsoleAccessCommandInput} for command's `input` shape.
  * @see {@link EnableSerialConsoleAccessCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class EnableSerialConsoleAccessCommand extends $Command<
-  EnableSerialConsoleAccessCommandInput,
-  EnableSerialConsoleAccessCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableSerialConsoleAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableSerialConsoleAccessCommandInput, EnableSerialConsoleAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "EnableSerialConsoleAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableSerialConsoleAccessRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: EnableSerialConsoleAccessResult.filterSensitiveLog,
+export class EnableSerialConsoleAccessCommand extends command<EnableSerialConsoleAccessCommandInput, EnableSerialConsoleAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableSerialConsoleAccess",
+  EnableSerialConsoleAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableSerialConsoleAccessRequest;
+      output: EnableSerialConsoleAccessResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: EnableSerialConsoleAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2EnableSerialConsoleAccessCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<EnableSerialConsoleAccessCommandOutput> {
-    return deserializeAws_ec2EnableSerialConsoleAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableSerialConsoleAccessCommandInput;
+      output: EnableSerialConsoleAccessCommandOutput;
+    };
+  };
 }

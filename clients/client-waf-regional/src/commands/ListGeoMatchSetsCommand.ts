@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListGeoMatchSetsRequest, ListGeoMatchSetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListGeoMatchSetsCommand,
-  serializeAws_json1_1ListGeoMatchSetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGeoMatchSetsRequest, ListGeoMatchSetsResponse } from "../models/models_0";
+import { ListGeoMatchSets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGeoMatchSetsCommand}.
+ */
 export interface ListGeoMatchSetsCommandInput extends ListGeoMatchSetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListGeoMatchSetsCommand}.
+ */
 export interface ListGeoMatchSetsCommandOutput extends ListGeoMatchSetsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,60 @@ export interface ListGeoMatchSetsCommandOutput extends ListGeoMatchSetsResponse,
  * ```javascript
  * import { WAFRegionalClient, ListGeoMatchSetsCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, ListGeoMatchSetsCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // ListGeoMatchSetsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListGeoMatchSetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListGeoMatchSetsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   GeoMatchSets: [ // GeoMatchSetSummaries
+ * //     { // GeoMatchSetSummary
+ * //       GeoMatchSetId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListGeoMatchSetsCommandInput - {@link ListGeoMatchSetsCommandInput}
+ * @returns {@link ListGeoMatchSetsCommandOutput}
  * @see {@link ListGeoMatchSetsCommandInput} for command's `input` shape.
  * @see {@link ListGeoMatchSetsCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class ListGeoMatchSetsCommand extends $Command<
-  ListGeoMatchSetsCommandInput,
-  ListGeoMatchSetsCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGeoMatchSetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGeoMatchSetsCommandInput, ListGeoMatchSetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "ListGeoMatchSetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGeoMatchSetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGeoMatchSetsResponse.filterSensitiveLog,
+export class ListGeoMatchSetsCommand extends command<ListGeoMatchSetsCommandInput, ListGeoMatchSetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGeoMatchSets",
+  ListGeoMatchSets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGeoMatchSetsRequest;
+      output: ListGeoMatchSetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGeoMatchSetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListGeoMatchSetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListGeoMatchSetsCommandOutput> {
-    return deserializeAws_json1_1ListGeoMatchSetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGeoMatchSetsCommandInput;
+      output: ListGeoMatchSetsCommandOutput;
+    };
+  };
 }

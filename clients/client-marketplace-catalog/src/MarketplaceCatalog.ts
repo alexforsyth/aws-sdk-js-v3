@@ -1,254 +1,433 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchDescribeEntitiesCommandInput,
+  type BatchDescribeEntitiesCommandOutput,
+  BatchDescribeEntitiesCommand,
+} from "./commands/BatchDescribeEntitiesCommand";
+import {
+  type CancelChangeSetCommandInput,
+  type CancelChangeSetCommandOutput,
   CancelChangeSetCommand,
-  CancelChangeSetCommandInput,
-  CancelChangeSetCommandOutput,
 } from "./commands/CancelChangeSetCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DescribeAssessmentCommandInput,
+  type DescribeAssessmentCommandOutput,
+  DescribeAssessmentCommand,
+} from "./commands/DescribeAssessmentCommand";
+import {
+  type DescribeChangeSetCommandInput,
+  type DescribeChangeSetCommandOutput,
   DescribeChangeSetCommand,
-  DescribeChangeSetCommandInput,
-  DescribeChangeSetCommandOutput,
 } from "./commands/DescribeChangeSetCommand";
 import {
+  type DescribeEntityCommandInput,
+  type DescribeEntityCommandOutput,
   DescribeEntityCommand,
-  DescribeEntityCommandInput,
-  DescribeEntityCommandOutput,
 } from "./commands/DescribeEntityCommand";
 import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type ListAssessmentsCommandInput,
+  type ListAssessmentsCommandOutput,
+  ListAssessmentsCommand,
+} from "./commands/ListAssessmentsCommand";
+import {
+  type ListChangeSetsCommandInput,
+  type ListChangeSetsCommandOutput,
   ListChangeSetsCommand,
-  ListChangeSetsCommandInput,
-  ListChangeSetsCommandOutput,
 } from "./commands/ListChangeSetsCommand";
 import {
+  type ListEntitiesCommandInput,
+  type ListEntitiesCommandOutput,
   ListEntitiesCommand,
-  ListEntitiesCommandInput,
-  ListEntitiesCommandOutput,
 } from "./commands/ListEntitiesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type StartChangeSetCommandInput,
+  type StartChangeSetCommandOutput,
   StartChangeSetCommand,
-  StartChangeSetCommandInput,
-  StartChangeSetCommandOutput,
 } from "./commands/StartChangeSetCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
 import { MarketplaceCatalogClient } from "./MarketplaceCatalogClient";
+import { paginateDescribeAssessment } from "./pagination/DescribeAssessmentPaginator";
+import { paginateListAssessments } from "./pagination/ListAssessmentsPaginator";
+import { paginateListChangeSets } from "./pagination/ListChangeSetsPaginator";
+import { paginateListEntities } from "./pagination/ListEntitiesPaginator";
+
+const commands = {
+  BatchDescribeEntitiesCommand,
+  CancelChangeSetCommand,
+  DeleteResourcePolicyCommand,
+  DescribeAssessmentCommand,
+  DescribeChangeSetCommand,
+  DescribeEntityCommand,
+  GetResourcePolicyCommand,
+  ListAssessmentsCommand,
+  ListChangeSetsCommand,
+  ListEntitiesCommand,
+  ListTagsForResourceCommand,
+  PutResourcePolicyCommand,
+  StartChangeSetCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateDescribeAssessment,
+  paginateListAssessments,
+  paginateListChangeSets,
+  paginateListEntities,
+};
 
 /**
- * <p>Catalog API actions allow you to manage your entities through list, describe, and update
- *             capabilities. An entity can be a product or an offer on AWS Marketplace. </p>
- *
- *         <p>You can automate your entity update process by integrating the AWS Marketplace Catalog
+ * @public
+ */
+export interface MarketplaceCatalogRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MarketplaceCatalog {
+  /**
+   * @see {@link BatchDescribeEntitiesCommand}
+   */
+  batchDescribeEntities(
+    args: BatchDescribeEntitiesCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<BatchDescribeEntitiesCommandOutput>;
+  batchDescribeEntities(
+    args: BatchDescribeEntitiesCommandInput,
+    cb: (err: any, data?: BatchDescribeEntitiesCommandOutput) => void
+  ): void;
+  batchDescribeEntities(
+    args: BatchDescribeEntitiesCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: BatchDescribeEntitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelChangeSetCommand}
+   */
+  cancelChangeSet(
+    args: CancelChangeSetCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<CancelChangeSetCommandOutput>;
+  cancelChangeSet(
+    args: CancelChangeSetCommandInput,
+    cb: (err: any, data?: CancelChangeSetCommandOutput) => void
+  ): void;
+  cancelChangeSet(
+    args: CancelChangeSetCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: CancelChangeSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAssessmentCommand}
+   */
+  describeAssessment(
+    args: DescribeAssessmentCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<DescribeAssessmentCommandOutput>;
+  describeAssessment(
+    args: DescribeAssessmentCommandInput,
+    cb: (err: any, data?: DescribeAssessmentCommandOutput) => void
+  ): void;
+  describeAssessment(
+    args: DescribeAssessmentCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: DescribeAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeChangeSetCommand}
+   */
+  describeChangeSet(
+    args: DescribeChangeSetCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<DescribeChangeSetCommandOutput>;
+  describeChangeSet(
+    args: DescribeChangeSetCommandInput,
+    cb: (err: any, data?: DescribeChangeSetCommandOutput) => void
+  ): void;
+  describeChangeSet(
+    args: DescribeChangeSetCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: DescribeChangeSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEntityCommand}
+   */
+  describeEntity(
+    args: DescribeEntityCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<DescribeEntityCommandOutput>;
+  describeEntity(
+    args: DescribeEntityCommandInput,
+    cb: (err: any, data?: DescribeEntityCommandOutput) => void
+  ): void;
+  describeEntity(
+    args: DescribeEntityCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: DescribeEntityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssessmentsCommand}
+   */
+  listAssessments(
+    args: ListAssessmentsCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<ListAssessmentsCommandOutput>;
+  listAssessments(
+    args: ListAssessmentsCommandInput,
+    cb: (err: any, data?: ListAssessmentsCommandOutput) => void
+  ): void;
+  listAssessments(
+    args: ListAssessmentsCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: ListAssessmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChangeSetsCommand}
+   */
+  listChangeSets(
+    args: ListChangeSetsCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<ListChangeSetsCommandOutput>;
+  listChangeSets(
+    args: ListChangeSetsCommandInput,
+    cb: (err: any, data?: ListChangeSetsCommandOutput) => void
+  ): void;
+  listChangeSets(
+    args: ListChangeSetsCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: ListChangeSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEntitiesCommand}
+   */
+  listEntities(
+    args: ListEntitiesCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<ListEntitiesCommandOutput>;
+  listEntities(
+    args: ListEntitiesCommandInput,
+    cb: (err: any, data?: ListEntitiesCommandOutput) => void
+  ): void;
+  listEntities(
+    args: ListEntitiesCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: ListEntitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartChangeSetCommand}
+   */
+  startChangeSet(
+    args: StartChangeSetCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<StartChangeSetCommandOutput>;
+  startChangeSet(
+    args: StartChangeSetCommandInput,
+    cb: (err: any, data?: StartChangeSetCommandOutput) => void
+  ): void;
+  startChangeSet(
+    args: StartChangeSetCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: StartChangeSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: MarketplaceCatalogRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: MarketplaceCatalogRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAssessmentCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAssessmentCommandOutput}.
+   */
+  paginateDescribeAssessment(
+    args: DescribeAssessmentCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAssessmentCommandOutput>;
+
+  /**
+   * @see {@link ListAssessmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssessmentsCommandOutput}.
+   */
+  paginateListAssessments(
+    args: ListAssessmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssessmentsCommandOutput>;
+
+  /**
+   * @see {@link ListChangeSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListChangeSetsCommandOutput}.
+   */
+  paginateListChangeSets(
+    args: ListChangeSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListChangeSetsCommandOutput>;
+
+  /**
+   * @see {@link ListEntitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEntitiesCommandOutput}.
+   */
+  paginateListEntities(
+    args: ListEntitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEntitiesCommandOutput>;
+}
+
+/**
+ * <p>Catalog API actions allow you to manage your entities through list, describe, and
+ *             update capabilities. An <i>entity</i> can be a product or an offer on AWS Marketplace. </p>
+ *          <p>You can automate your entity update process by integrating the AWS Marketplace Catalog
  *             API with your AWS Marketplace product build or deployment pipelines. You can also create
  *             your own applications on top of the Catalog API to manage your products on AWS
  *             Marketplace.</p>
+ * @public
  */
-export class MarketplaceCatalog extends MarketplaceCatalogClient {
-  /**
-   * <p>Used to cancel an open change request. Must be sent before the status of the request
-   *             changes to <code>APPLYING</code>, the final stage of completing your change request. You
-   *             can describe a change during the 60-day request history retention period for API
-   *             calls.</p>
-   */
-  public cancelChangeSet(
-    args: CancelChangeSetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CancelChangeSetCommandOutput>;
-  public cancelChangeSet(
-    args: CancelChangeSetCommandInput,
-    cb: (err: any, data?: CancelChangeSetCommandOutput) => void
-  ): void;
-  public cancelChangeSet(
-    args: CancelChangeSetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CancelChangeSetCommandOutput) => void
-  ): void;
-  public cancelChangeSet(
-    args: CancelChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: CancelChangeSetCommandOutput) => void
-  ): Promise<CancelChangeSetCommandOutput> | void {
-    const command = new CancelChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about a given change set.</p>
-   */
-  public describeChangeSet(
-    args: DescribeChangeSetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeChangeSetCommandOutput>;
-  public describeChangeSet(
-    args: DescribeChangeSetCommandInput,
-    cb: (err: any, data?: DescribeChangeSetCommandOutput) => void
-  ): void;
-  public describeChangeSet(
-    args: DescribeChangeSetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeChangeSetCommandOutput) => void
-  ): void;
-  public describeChangeSet(
-    args: DescribeChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: DescribeChangeSetCommandOutput) => void
-  ): Promise<DescribeChangeSetCommandOutput> | void {
-    const command = new DescribeChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the metadata and content of the entity.</p>
-   */
-  public describeEntity(
-    args: DescribeEntityCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEntityCommandOutput>;
-  public describeEntity(
-    args: DescribeEntityCommandInput,
-    cb: (err: any, data?: DescribeEntityCommandOutput) => void
-  ): void;
-  public describeEntity(
-    args: DescribeEntityCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEntityCommandOutput) => void
-  ): void;
-  public describeEntity(
-    args: DescribeEntityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEntityCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEntityCommandOutput) => void
-  ): Promise<DescribeEntityCommandOutput> | void {
-    const command = new DescribeEntityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of change sets owned by the account being used to make the call. You
-   *             can filter this list by providing any combination of <code>entityId</code>,
-   *                 <code>ChangeSetName</code>, and status. If you provide more than one filter, the API
-   *             operation applies a logical AND between the filters.</p>
-   *
-   *         <p>You can describe a change during the 60-day request history retention period for API
-   *             calls.</p>
-   */
-  public listChangeSets(
-    args: ListChangeSetsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListChangeSetsCommandOutput>;
-  public listChangeSets(
-    args: ListChangeSetsCommandInput,
-    cb: (err: any, data?: ListChangeSetsCommandOutput) => void
-  ): void;
-  public listChangeSets(
-    args: ListChangeSetsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListChangeSetsCommandOutput) => void
-  ): void;
-  public listChangeSets(
-    args: ListChangeSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListChangeSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListChangeSetsCommandOutput) => void
-  ): Promise<ListChangeSetsCommandOutput> | void {
-    const command = new ListChangeSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides the list of entities of a given type.</p>
-   */
-  public listEntities(
-    args: ListEntitiesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListEntitiesCommandOutput>;
-  public listEntities(args: ListEntitiesCommandInput, cb: (err: any, data?: ListEntitiesCommandOutput) => void): void;
-  public listEntities(
-    args: ListEntitiesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListEntitiesCommandOutput) => void
-  ): void;
-  public listEntities(
-    args: ListEntitiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEntitiesCommandOutput) => void),
-    cb?: (err: any, data?: ListEntitiesCommandOutput) => void
-  ): Promise<ListEntitiesCommandOutput> | void {
-    const command = new ListEntitiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>This operation allows you to request changes for your entities. Within a single
-   *             ChangeSet, you cannot start the same change type against the same entity multiple times.
-   *             Additionally, when a ChangeSet is running, all the entities targeted by the different
-   *             changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If
-   *             you try to start a ChangeSet containing a change against an entity that is already
-   *             locked, you will receive a <code>ResourceInUseException</code>.</p>
-   *
-   *         <p>For example, you cannot start the ChangeSet described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic, because it contains two changes to execute the same change
-   *             type (<code>AddRevisions</code>) against the same entity
-   *             (<code>entity-id@1)</code>.</p>
-   *
-   *         <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets">
-   *             Working with change sets</a>.</p>
-   */
-  public startChangeSet(
-    args: StartChangeSetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartChangeSetCommandOutput>;
-  public startChangeSet(
-    args: StartChangeSetCommandInput,
-    cb: (err: any, data?: StartChangeSetCommandOutput) => void
-  ): void;
-  public startChangeSet(
-    args: StartChangeSetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartChangeSetCommandOutput) => void
-  ): void;
-  public startChangeSet(
-    args: StartChangeSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartChangeSetCommandOutput) => void),
-    cb?: (err: any, data?: StartChangeSetCommandOutput) => void
-  ): Promise<StartChangeSetCommandOutput> | void {
-    const command = new StartChangeSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class MarketplaceCatalog extends MarketplaceCatalogClient implements MarketplaceCatalog {}
+createAggregatedClient(commands, MarketplaceCatalog, { paginators });

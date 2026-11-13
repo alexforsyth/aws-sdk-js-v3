@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { DeleteReplicationSubnetGroupMessage, DeleteReplicationSubnetGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteReplicationSubnetGroupCommand,
-  serializeAws_json1_1DeleteReplicationSubnetGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteReplicationSubnetGroupMessage, DeleteReplicationSubnetGroupResponse } from "../models/models_0";
+import { DeleteReplicationSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteReplicationSubnetGroupCommand}.
+ */
 export interface DeleteReplicationSubnetGroupCommandInput extends DeleteReplicationSubnetGroupMessage {}
-export interface DeleteReplicationSubnetGroupCommandOutput
-  extends DeleteReplicationSubnetGroupResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteReplicationSubnetGroupCommand}.
+ */
+export interface DeleteReplicationSubnetGroupCommandOutput extends DeleteReplicationSubnetGroupResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes a subnet group.</p>
@@ -34,71 +29,68 @@ export interface DeleteReplicationSubnetGroupCommandOutput
  * ```javascript
  * import { DatabaseMigrationServiceClient, DeleteReplicationSubnetGroupCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DeleteReplicationSubnetGroupCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DeleteReplicationSubnetGroupMessage
+ *   ReplicationSubnetGroupIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new DeleteReplicationSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteReplicationSubnetGroupCommandInput - {@link DeleteReplicationSubnetGroupCommandInput}
+ * @returns {@link DeleteReplicationSubnetGroupCommandOutput}
  * @see {@link DeleteReplicationSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteReplicationSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Delete Replication Subnet Group
+ * ```javascript
+ * // Deletes a replication subnet group.
+ * const input = {
+ *   ReplicationSubnetGroupIdentifier: "us-west-2ab-vpc-215ds366"
+ * };
+ * const command = new DeleteReplicationSubnetGroupCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteReplicationSubnetGroupCommand extends $Command<
-  DeleteReplicationSubnetGroupCommandInput,
-  DeleteReplicationSubnetGroupCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteReplicationSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteReplicationSubnetGroupCommandInput, DeleteReplicationSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DeleteReplicationSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteReplicationSubnetGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteReplicationSubnetGroupResponse.filterSensitiveLog,
+export class DeleteReplicationSubnetGroupCommand extends command<DeleteReplicationSubnetGroupCommandInput, DeleteReplicationSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteReplicationSubnetGroup",
+  DeleteReplicationSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReplicationSubnetGroupMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteReplicationSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteReplicationSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteReplicationSubnetGroupCommandOutput> {
-    return deserializeAws_json1_1DeleteReplicationSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteReplicationSubnetGroupCommandInput;
+      output: DeleteReplicationSubnetGroupCommandOutput;
+    };
+  };
 }

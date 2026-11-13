@@ -1,103 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AssociatePrincipalWithPortfolioInput, AssociatePrincipalWithPortfolioOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociatePrincipalWithPortfolioCommand,
-  serializeAws_json1_1AssociatePrincipalWithPortfolioCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociatePrincipalWithPortfolioInput, AssociatePrincipalWithPortfolioOutput } from "../models/models_0";
+import { AssociatePrincipalWithPortfolio$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociatePrincipalWithPortfolioCommand}.
+ */
 export interface AssociatePrincipalWithPortfolioCommandInput extends AssociatePrincipalWithPortfolioInput {}
-export interface AssociatePrincipalWithPortfolioCommandOutput
-  extends AssociatePrincipalWithPortfolioOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AssociatePrincipalWithPortfolioCommand}.
+ */
+export interface AssociatePrincipalWithPortfolioCommandOutput extends AssociatePrincipalWithPortfolioOutput, __MetadataBearer {}
 
 /**
  * <p>Associates the specified principal ARN with the specified portfolio.</p>
+ *          <p>If you share the portfolio with principal name sharing enabled, the <code>PrincipalARN</code> association is
+ *          included in the share. </p>
+ *          <p>The <code>PortfolioID</code>, <code>PrincipalARN</code>, and <code>PrincipalType</code> parameters are
+ *       required. </p>
+ *          <p>You can associate a maximum of 10 Principals with a portfolio using <code>PrincipalType</code> as <code>IAM_PATTERN</code>. </p>
+ *          <note>
+ *             <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is
+ *          then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin,
+ *          but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal
+ *          name association for the portfolio. Although this user may not know which principal names are associated through
+ *          Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then
+ *          Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration,
+ *          the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceCatalogClient, AssociatePrincipalWithPortfolioCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, AssociatePrincipalWithPortfolioCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // AssociatePrincipalWithPortfolioInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   PortfolioId: "STRING_VALUE", // required
+ *   PrincipalARN: "STRING_VALUE", // required
+ *   PrincipalType: "IAM" || "IAM_PATTERN", // required
+ * };
  * const command = new AssociatePrincipalWithPortfolioCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociatePrincipalWithPortfolioCommandInput - {@link AssociatePrincipalWithPortfolioCommandInput}
+ * @returns {@link AssociatePrincipalWithPortfolioCommandOutput}
  * @see {@link AssociatePrincipalWithPortfolioCommandInput} for command's `input` shape.
  * @see {@link AssociatePrincipalWithPortfolioCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The current limits of the service would have been exceeded by this operation. Decrease your
+ *          resource use or increase your service limits and retry the operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class AssociatePrincipalWithPortfolioCommand extends $Command<
-  AssociatePrincipalWithPortfolioCommandInput,
-  AssociatePrincipalWithPortfolioCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociatePrincipalWithPortfolioCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociatePrincipalWithPortfolioCommandInput, AssociatePrincipalWithPortfolioCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "AssociatePrincipalWithPortfolioCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociatePrincipalWithPortfolioInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociatePrincipalWithPortfolioOutput.filterSensitiveLog,
+export class AssociatePrincipalWithPortfolioCommand extends command<AssociatePrincipalWithPortfolioCommandInput, AssociatePrincipalWithPortfolioCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociatePrincipalWithPortfolio",
+  AssociatePrincipalWithPortfolio$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociatePrincipalWithPortfolioInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociatePrincipalWithPortfolioCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociatePrincipalWithPortfolioCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociatePrincipalWithPortfolioCommandOutput> {
-    return deserializeAws_json1_1AssociatePrincipalWithPortfolioCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociatePrincipalWithPortfolioCommandInput;
+      output: AssociatePrincipalWithPortfolioCommandOutput;
+    };
+  };
 }

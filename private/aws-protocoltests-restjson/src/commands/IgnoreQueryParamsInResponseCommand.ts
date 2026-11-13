@@ -1,24 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IgnoreQueryParamsInResponseOutput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { IgnoreQueryParamsInResponseOutput } from "../models/models_0";
 import {
-  deserializeAws_restJson1IgnoreQueryParamsInResponseCommand,
-  serializeAws_restJson1IgnoreQueryParamsInResponseCommand,
+  de_IgnoreQueryParamsInResponseCommand,
+  se_IgnoreQueryParamsInResponseCommand,
 } from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link IgnoreQueryParamsInResponseCommand}.
+ */
 export interface IgnoreQueryParamsInResponseCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link IgnoreQueryParamsInResponseCommand}.
+ */
 export interface IgnoreQueryParamsInResponseCommandOutput extends IgnoreQueryParamsInResponseOutput, __MetadataBearer {}
 
 /**
@@ -30,71 +42,60 @@ export interface IgnoreQueryParamsInResponseCommandOutput extends IgnoreQueryPar
  * ```javascript
  * import { RestJsonProtocolClient, IgnoreQueryParamsInResponseCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, IgnoreQueryParamsInResponseCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = {};
  * const command = new IgnoreQueryParamsInResponseCommand(input);
  * const response = await client.send(command);
+ * // { // IgnoreQueryParamsInResponseOutput
+ * //   baz: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param IgnoreQueryParamsInResponseCommandInput - {@link IgnoreQueryParamsInResponseCommandInput}
+ * @returns {@link IgnoreQueryParamsInResponseCommandOutput}
  * @see {@link IgnoreQueryParamsInResponseCommandInput} for command's `input` shape.
  * @see {@link IgnoreQueryParamsInResponseCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class IgnoreQueryParamsInResponseCommand extends $Command<
-  IgnoreQueryParamsInResponseCommandInput,
-  IgnoreQueryParamsInResponseCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: IgnoreQueryParamsInResponseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<IgnoreQueryParamsInResponseCommandInput, IgnoreQueryParamsInResponseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "IgnoreQueryParamsInResponseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: IgnoreQueryParamsInResponseOutput.filterSensitiveLog,
+export class IgnoreQueryParamsInResponseCommand extends $Command
+  .classBuilder<
+    IgnoreQueryParamsInResponseCommandInput,
+    IgnoreQueryParamsInResponseCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "IgnoreQueryParamsInResponse", {})
+  .n("RestJsonProtocolClient", "IgnoreQueryParamsInResponseCommand")
+  .f(void 0, void 0)
+  .ser(se_IgnoreQueryParamsInResponseCommand)
+  .de(de_IgnoreQueryParamsInResponseCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: IgnoreQueryParamsInResponseOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: IgnoreQueryParamsInResponseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1IgnoreQueryParamsInResponseCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<IgnoreQueryParamsInResponseCommandOutput> {
-    return deserializeAws_restJson1IgnoreQueryParamsInResponseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: IgnoreQueryParamsInResponseCommandInput;
+      output: IgnoreQueryParamsInResponseCommandOutput;
+    };
+  };
 }

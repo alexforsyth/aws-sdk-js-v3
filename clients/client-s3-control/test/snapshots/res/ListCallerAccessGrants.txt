@@ -1,0 +1,113 @@
+======================== minimal response ========================
+[status] 200
+  
+content-type: application/xml
+x-amzn-requestid: 1111amzn-requ-stid-uuid-000000001111
+
+[Uint8Array (xml)]
+<ListCallerAccessGrantsResult xmlns="https://placeholder.amazonaws.com"/>
+
+
+--- [output object] ---
+{
+  $metadata: {
+    httpStatusCode: (number) 200,
+    requestId: "1111amzn-requ-stid-uuid-000000001111",
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  }
+}
+
+======================== w/ optional fields ========================
+[status] 200
+  
+content-type: application/xml
+x-amzn-requestid: 1111amzn-requ-stid-uuid-000000001111
+
+[Uint8Array (xml)]
+<ListCallerAccessGrantsResult xmlns="https://placeholder.amazonaws.com">
+    <NextToken>
+        __NextToken__
+    </NextToken>
+    <CallerAccessGrantsList>
+        <AccessGrant>
+            <Permission>
+                __Permission__
+            </Permission>
+            <GrantScope>
+                __GrantScope__
+            </GrantScope>
+            <ApplicationArn>
+                __ApplicationArn__
+            </ApplicationArn>
+            <AccessGrantsInstanceArn>
+                __AccessGrantsInstanceArn__
+            </AccessGrantsInstanceArn>
+        </AccessGrant>
+        <AccessGrant>
+            <Permission>
+                __Permission__
+            </Permission>
+            <GrantScope>
+                __GrantScope__
+            </GrantScope>
+            <ApplicationArn>
+                __ApplicationArn__
+            </ApplicationArn>
+            <AccessGrantsInstanceArn>
+                __AccessGrantsInstanceArn__
+            </AccessGrantsInstanceArn>
+        </AccessGrant>
+        <AccessGrant>
+            <Permission>
+                __Permission__
+            </Permission>
+            <GrantScope>
+                __GrantScope__
+            </GrantScope>
+            <ApplicationArn>
+                __ApplicationArn__
+            </ApplicationArn>
+            <AccessGrantsInstanceArn>
+                __AccessGrantsInstanceArn__
+            </AccessGrantsInstanceArn>
+        </AccessGrant>
+    </CallerAccessGrantsList>
+</ListCallerAccessGrantsResult>
+
+
+--- [output object] ---
+{
+  NextToken: "__NextToken__",
+  CallerAccessGrantsList: [
+    {
+      Permission: "__Permission__",
+      GrantScope: "__GrantScope__",
+      ApplicationArn: "__ApplicationArn__",
+      AccessGrantsInstanceArn: "__AccessGrantsInstanceArn__"
+    },
+    {
+      Permission: "__Permission__",
+      GrantScope: "__GrantScope__",
+      ApplicationArn: "__ApplicationArn__",
+      AccessGrantsInstanceArn: "__AccessGrantsInstanceArn__"
+    },
+    {
+      Permission: "__Permission__",
+      GrantScope: "__GrantScope__",
+      ApplicationArn: "__ApplicationArn__",
+      AccessGrantsInstanceArn: "__AccessGrantsInstanceArn__"
+    }
+  ],
+  $metadata: {
+    httpStatusCode: (number) 200,
+    requestId: "1111amzn-requ-stid-uuid-000000001111",
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  }
+}
+

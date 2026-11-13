@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { BatchDetectDominantLanguageRequest, BatchDetectDominantLanguageResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchDetectDominantLanguageCommand,
-  serializeAws_json1_1BatchDetectDominantLanguageCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDetectDominantLanguageRequest, BatchDetectDominantLanguageResponse } from "../models/models_0";
+import { BatchDetectDominantLanguage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDetectDominantLanguageCommand}.
+ */
 export interface BatchDetectDominantLanguageCommandInput extends BatchDetectDominantLanguageRequest {}
-export interface BatchDetectDominantLanguageCommandOutput
-  extends BatchDetectDominantLanguageResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDetectDominantLanguageCommand}.
+ */
+export interface BatchDetectDominantLanguageCommandOutput extends BatchDetectDominantLanguageResponse, __MetadataBearer {}
 
 /**
  * <p>Determines the dominant language of the input text for a batch of documents. For a list
@@ -32,71 +31,79 @@ export interface BatchDetectDominantLanguageCommandOutput
  * ```javascript
  * import { ComprehendClient, BatchDetectDominantLanguageCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, BatchDetectDominantLanguageCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // BatchDetectDominantLanguageRequest
+ *   TextList: [ // CustomerInputStringList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchDetectDominantLanguageCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDetectDominantLanguageResponse
+ * //   ResultList: [ // ListOfDetectDominantLanguageResult // required
+ * //     { // BatchDetectDominantLanguageItemResult
+ * //       Index: Number("int"),
+ * //       Languages: [ // ListOfDominantLanguages
+ * //         { // DominantLanguage
+ * //           LanguageCode: "STRING_VALUE",
+ * //           Score: Number("float"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   ErrorList: [ // BatchItemErrorList // required
+ * //     { // BatchItemError
+ * //       Index: Number("int"),
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDetectDominantLanguageCommandInput - {@link BatchDetectDominantLanguageCommandInput}
+ * @returns {@link BatchDetectDominantLanguageCommandOutput}
  * @see {@link BatchDetectDominantLanguageCommandInput} for command's `input` shape.
  * @see {@link BatchDetectDominantLanguageCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link BatchSizeLimitExceededException} (client fault)
+ *  <p>The number of documents in the request exceeds the limit of 25. Try your request again
+ *       with fewer documents.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TextSizeLimitExceededException} (client fault)
+ *  <p>The size of the input text exceeds the limit. Use a smaller document.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDetectDominantLanguageCommand extends $Command<
-  BatchDetectDominantLanguageCommandInput,
-  BatchDetectDominantLanguageCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDetectDominantLanguageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDetectDominantLanguageCommandInput, BatchDetectDominantLanguageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "BatchDetectDominantLanguageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDetectDominantLanguageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDetectDominantLanguageResponse.filterSensitiveLog,
+export class BatchDetectDominantLanguageCommand extends command<BatchDetectDominantLanguageCommandInput, BatchDetectDominantLanguageCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDetectDominantLanguage",
+  BatchDetectDominantLanguage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDetectDominantLanguageRequest;
+      output: BatchDetectDominantLanguageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDetectDominantLanguageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchDetectDominantLanguageCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchDetectDominantLanguageCommandOutput> {
-    return deserializeAws_json1_1BatchDetectDominantLanguageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDetectDominantLanguageCommandInput;
+      output: BatchDetectDominantLanguageCommandOutput;
+    };
+  };
 }

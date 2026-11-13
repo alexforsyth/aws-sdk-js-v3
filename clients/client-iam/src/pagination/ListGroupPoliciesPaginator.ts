@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListGroupPoliciesCommand,
   ListGroupPoliciesCommandInput,
   ListGroupPoliciesCommandOutput,
 } from "../commands/ListGroupPoliciesCommand";
-import { IAM } from "../IAM";
 import { IAMClient } from "../IAMClient";
-import { IAMPaginationConfiguration } from "./Interfaces";
+import type { IAMPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: IAMClient,
-  input: ListGroupPoliciesCommandInput,
-  ...args: any
-): Promise<ListGroupPoliciesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListGroupPoliciesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: IAM,
-  input: ListGroupPoliciesCommandInput,
-  ...args: any
-): Promise<ListGroupPoliciesCommandOutput> => {
-  // @ts-ignore
-  return await client.listGroupPolicies(input, ...args);
-};
-export async function* paginateListGroupPolicies(
+export const paginateListGroupPolicies: (
   config: IAMPaginationConfiguration,
   input: ListGroupPoliciesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListGroupPoliciesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListGroupPoliciesCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxItems"] = config.pageSize;
-    if (config.client instanceof IAM) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof IAMClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected IAM | IAMClient");
-    }
-    yield page;
-    token = page.Marker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListGroupPoliciesCommandOutput> = createPaginator<
+  IAMPaginationConfiguration,
+  ListGroupPoliciesCommandInput,
+  ListGroupPoliciesCommandOutput
+>(IAMClient, ListGroupPoliciesCommand, "Marker", "Marker", "MaxItems");

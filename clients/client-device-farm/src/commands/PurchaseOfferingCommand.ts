@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { PurchaseOfferingRequest, PurchaseOfferingResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1PurchaseOfferingCommand,
-  serializeAws_json1_1PurchaseOfferingCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PurchaseOfferingRequest, PurchaseOfferingResult } from "../models/models_0";
+import { PurchaseOffering$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PurchaseOfferingCommand}.
+ */
 export interface PurchaseOfferingCommandInput extends PurchaseOfferingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PurchaseOfferingCommand}.
+ */
 export interface PurchaseOfferingCommandOutput extends PurchaseOfferingResult, __MetadataBearer {}
 
 /**
@@ -31,68 +32,93 @@ export interface PurchaseOfferingCommandOutput extends PurchaseOfferingResult, _
  * ```javascript
  * import { DeviceFarmClient, PurchaseOfferingCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, PurchaseOfferingCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // PurchaseOfferingRequest
+ *   offeringId: "STRING_VALUE", // required
+ *   quantity: Number("int"), // required
+ *   offeringPromotionId: "STRING_VALUE",
+ * };
  * const command = new PurchaseOfferingCommand(input);
  * const response = await client.send(command);
+ * // { // PurchaseOfferingResult
+ * //   offeringTransaction: { // OfferingTransaction
+ * //     offeringStatus: { // OfferingStatus
+ * //       type: "PURCHASE" || "RENEW" || "SYSTEM",
+ * //       offering: { // Offering
+ * //         id: "STRING_VALUE",
+ * //         description: "STRING_VALUE",
+ * //         type: "RECURRING",
+ * //         platform: "ANDROID" || "IOS",
+ * //         recurringCharges: [ // RecurringCharges
+ * //           { // RecurringCharge
+ * //             cost: { // MonetaryAmount
+ * //               amount: Number("double"),
+ * //               currencyCode: "USD",
+ * //             },
+ * //             frequency: "MONTHLY",
+ * //           },
+ * //         ],
+ * //       },
+ * //       quantity: Number("int"),
+ * //       effectiveOn: new Date("TIMESTAMP"),
+ * //     },
+ * //     transactionId: "STRING_VALUE",
+ * //     offeringPromotionId: "STRING_VALUE",
+ * //     createdOn: new Date("TIMESTAMP"),
+ * //     cost: {
+ * //       amount: Number("double"),
+ * //       currencyCode: "USD",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PurchaseOfferingCommandInput - {@link PurchaseOfferingCommandInput}
+ * @returns {@link PurchaseOfferingCommandOutput}
  * @see {@link PurchaseOfferingCommandInput} for command's `input` shape.
  * @see {@link PurchaseOfferingCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotEligibleException} (client fault)
+ *  <p>Exception gets thrown when a user is not eligible to perform the specified
+ *             transaction.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class PurchaseOfferingCommand extends $Command<
-  PurchaseOfferingCommandInput,
-  PurchaseOfferingCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PurchaseOfferingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PurchaseOfferingCommandInput, PurchaseOfferingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "PurchaseOfferingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PurchaseOfferingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PurchaseOfferingResult.filterSensitiveLog,
+export class PurchaseOfferingCommand extends command<PurchaseOfferingCommandInput, PurchaseOfferingCommandOutput>(
+  _ep0,
+  _mw0,
+  "PurchaseOffering",
+  PurchaseOffering$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PurchaseOfferingRequest;
+      output: PurchaseOfferingResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PurchaseOfferingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PurchaseOfferingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PurchaseOfferingCommandOutput> {
-    return deserializeAws_json1_1PurchaseOfferingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PurchaseOfferingCommandInput;
+      output: PurchaseOfferingCommandOutput;
+    };
+  };
 }

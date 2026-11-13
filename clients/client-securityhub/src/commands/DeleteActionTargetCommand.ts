@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteActionTargetRequest, DeleteActionTargetResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeleteActionTargetCommand,
-  serializeAws_restJson1DeleteActionTargetCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteActionTargetRequest, DeleteActionTargetResponse } from "../models/models_2";
+import { DeleteActionTarget$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteActionTargetCommand}.
+ */
 export interface DeleteActionTargetCommandInput extends DeleteActionTargetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteActionTargetCommand}.
+ */
 export interface DeleteActionTargetCommandOutput extends DeleteActionTargetResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a custom action target from Security Hub.</p>
+ * <p>Deletes a custom action target from Security Hub CSPM.</p>
  *          <p>Deleting a custom action target does not affect any findings or insights that were
  *          already sent to Amazon CloudWatch Events using the custom action.</p>
  * @example
@@ -30,68 +31,75 @@ export interface DeleteActionTargetCommandOutput extends DeleteActionTargetRespo
  * ```javascript
  * import { SecurityHubClient, DeleteActionTargetCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, DeleteActionTargetCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // DeleteActionTargetRequest
+ *   ActionTargetArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteActionTargetCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteActionTargetResponse
+ * //   ActionTargetArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteActionTargetCommandInput - {@link DeleteActionTargetCommandInput}
+ * @returns {@link DeleteActionTargetCommandOutput}
  * @see {@link DeleteActionTargetCommandInput} for command's `input` shape.
  * @see {@link DeleteActionTargetCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To delete a custom action target
+ * ```javascript
+ * // The following example deletes a custom action target that triggers target actions in Amazon CloudWatch Events. Deleting a custom action target doesn't affect findings or insights that were already sent to CloudWatch Events based on the custom action.
+ * const input = {
+ *   ActionTargetArn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation"
+ * };
+ * const command = new DeleteActionTargetCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ActionTargetArn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteActionTargetCommand extends $Command<
-  DeleteActionTargetCommandInput,
-  DeleteActionTargetCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteActionTargetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteActionTargetCommandInput, DeleteActionTargetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "DeleteActionTargetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteActionTargetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteActionTargetResponse.filterSensitiveLog,
+export class DeleteActionTargetCommand extends command<DeleteActionTargetCommandInput, DeleteActionTargetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteActionTarget",
+  DeleteActionTarget$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteActionTargetRequest;
+      output: DeleteActionTargetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteActionTargetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteActionTargetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteActionTargetCommandOutput> {
-    return deserializeAws_restJson1DeleteActionTargetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteActionTargetCommandInput;
+      output: DeleteActionTargetCommandOutput;
+    };
+  };
 }

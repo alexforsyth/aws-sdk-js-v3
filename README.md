@@ -2,8 +2,7 @@
 
 ![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiMmtFajZWQmNUbEhidnBKN1VncjRrNVI3d0JUcFpGWUd3STh4T3N3Rnljc1BMaEIrYm9HU2t4YTV1RlE1YmlnUG9XM3luY0Ftc2tBc0xTeVFJMkVOa24wPSIsIml2UGFyYW1ldGVyU3BlYyI6IlBDMDl6UEROK1dlU1h1OWciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
 [![codecov](https://codecov.io/gh/aws/aws-sdk-js-v3/branch/main/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js-v3)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=aws/aws-sdk-js-v3)](https://dependabot.com)
+[![code style: oxfmt](https://img.shields.io/badge/code_style-oxfmt-50C878.svg)](https://github.com/nicolo-ribaudo/oxfmt)
 
 The **AWS SDK for JavaScript v3** is a rewrite of v2 with some great new features.
 As with version 2, it enables you to easily work with [Amazon Web Services](https://aws.amazon.com/),
@@ -26,6 +25,9 @@ and provides step-by-step migration instructions to v3.
 To test your universal JavaScript code in Node.js, browser and react-native environments,
 visit our [code samples repo](https://github.com/aws-samples/aws-sdk-js-tests).
 
+Performance is crucial for the AWS SDK for JavaScript because it directly impacts the user experience.
+Please refer to [Performance](https://github.com/aws/aws-sdk-js-v3/tree/main/supplemental-docs/performance) section to know more.
+
 # Table of Contents
 
 1. [Getting Started](#getting-started)
@@ -33,16 +35,24 @@ visit our [code samples repo](https://github.com/aws-samples/aws-sdk-js-tests).
    1. [Modularized packages](#modularized-packages)
    1. [API consistency changes](#api-changes)
       1. [Configuration](#configuration)
-      1. [Middleware Stack](#Middleware)
+      1. [Middleware Stack](#middleware)
    1. [How to upgrade](#other-changes)
 1. [High Level Concepts in V3](#high-level-concepts)
    1. [Generated Packages](#generated-code)
+   1. [Streams](#streams)
    1. [Paginators](#paginators)
    1. [Abort Controller](#abort-controller)
    1. [Middleware Stack](#middleware-stack)
-1. [Install from Source](#install-from-Source)
+1. [Working with the SDK in Lambda](#working-with-the-sdk-in-lambda)
+1. [Performance](#performance)
+1. [Install from Source](#install-from-source)
 1. [Giving feedback and contributing](#giving-feedback-and-contributing)
+1. [Release Cadence](#release-cadence)
+1. [Node.js and ECMAScript Version Support Policy](#nodejs-and-ecmascript-version-support-policy)
+1. [TypeScript Version Support Policy](#typescript-version-support-policy)
+1. [Stability of Modular Packages](#stability-of-modular-packages)
 1. [Known Issues](#known-issues)
+   1. [Functionality requiring AWS Common Runtime (CRT)](#functionality-requiring-aws-common-runtime-crt)
 
 ## Getting Started
 
@@ -94,12 +104,20 @@ to add and import following polyfills in your react-native application:
 
 - [react-native-get-random-values](https://www.npmjs.com/package/react-native-get-random-values)
 - [react-native-url-polyfill](https://www.npmjs.com/package/react-native-url-polyfill)
+- [web-streams-polyfill](https://www.npmjs.com/package/web-streams-polyfill)
 
 ```js
 import "react-native-get-random-values";
 import "react-native-url-polyfill/auto";
+import "web-streams-polyfill/dist/polyfill";
+
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 ```
+
+Specifically Metro bundler used by react-native, enable Package Exports Support:
+
+- https://metrobundler.dev/docs/package-exports/
+- https://reactnative.dev/blog/2023/06/21/package-exports-support
 
 ## New features
 
@@ -142,20 +160,26 @@ Some feedback we received frequently was that it can be difficult to debug what 
 We’ve switched to using a middleware stack to control the lifecycle of an operation call now.
 This gives us a few benefits. Each middleware in the stack calls the next middleware after making any changes to the request object.
 This also makes debugging issues in the stack much easier since you can see exactly which middleware have been called leading up to an error.
-Here’s an example of adding a custom header using middleware:
+Here’s an example of logging requests using middleware:
 
 ```javascript
 const client = new DynamoDB({ region: "us-west-2" });
+
 client.middlewareStack.add(
-  (next, context) => (args) => {
-    args.request.headers["Custom-Header"] = "value";
-    console.log("\n -- printed from inside middleware -- \n");
-    return next(args);
+  (next, context) => async (args) => {
+    console.log("AWS SDK context", context.clientName, context.commandName);
+    console.log("AWS SDK request input", args.input);
+    const result = await next(args);
+    console.log("AWS SDK request output:", result.output);
+    return result;
   },
   {
+    name: "MyMiddleware",
     step: "build",
+    override: true,
   }
 );
+
 await client.listTables({});
 ```
 
@@ -168,7 +192,67 @@ It returns a function that accepts args, an object that contains the parameters 
 If you are looking for a breakdown of the API changes from AWS SDK for JavaScript v2 to v3,
 we have them listed in [UPGRADING.md](https://github.com/aws/aws-sdk-js-v3/blob/main/UPGRADING.md).
 
-### Install from Source
+## Working with the SDK in Lambda
+
+### General Info
+
+The Lambda provided AWS SDK is set to a specific minor version, and NOT the latest version. To
+determine which version of the SDK is included with the runtime you're using,
+see [Runtime-included SDK versions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html#nodejs-sdk-included)
+in the Lambda Developer Guide. To maintain full control of your dependencies, and to maximize
+backward compatibility during automatic runtime updates, we recommend that you always include
+the SDK modules your code uses in your function's deployment package or in a Lambda layer.
+See [Backward compatibility](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-update-compatibility)
+to learn more.
+
+The performance of the AWS SDK for JavaScript v3 on node 18 has improved from v2 as seen in the [performance benchmarking](https://aws.amazon.com/blogs/developer/reduce-lambda-cold-start-times-migrate-to-aws-sdk-for-javascript-v3/)
+
+### Best practices
+
+When using Lambda we should use a single SDK client per service, per region, and initialize it outside of the handler's codepath. This is done to optimize for Lambda's [container reuse](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html).
+
+The API calls themselves should be made from within the handler's codepath.
+This is done to ensure that API calls are signed at the very last step of Lambda's execution cycle, after the Lambda is "hot" to avoid signing time skew.
+
+Example:
+
+```javascript
+import { STSClient, GetCallerIdentityCommand } from "@aws-sdk/client-sts";
+
+const client = new STSClient({}); // SDK Client initialized outside the handler
+
+export const handler = async (event) => {
+  const response = {
+    statusCode: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const results = await client.send(new GetCallerIdentityCommand({})); // API operation made from within the handler
+    const responseBody = {
+      userId: results.UserId,
+    };
+
+    response.body = JSON.stringify(responseBody);
+  } catch (err) {
+    console.log("Error:", err);
+    response.statusCode = 500;
+    response.body = JSON.stringify({
+      message: "Internal Server Error",
+    });
+  }
+
+  return response;
+};
+```
+
+## Performance
+
+Please refer to supplemental docs on [performance](https://github.com/aws/aws-sdk-js-v3/tree/main/supplemental-docs/performance) to know more.
+
+## Install from Source
 
 All clients have been published to NPM and can be installed as described above. If you want to play with latest clients, you can build from source as follows:
 
@@ -212,13 +296,13 @@ All clients have been published to NPM and can be installed as described above. 
    yarn add ./path/to/vendors/folder/aws-sdk-client-dynamodb-v3.0.0.tgz
    ```
 
-### Giving feedback and contributing
+## Giving feedback and contributing
 
 You can provide feedback to us in several ways. Both positive and negative feedback is appreciated.
 If you do, please feel free to [open an issue](https://github.com/aws/aws-sdk-js-v3/issues/new/choose) on our GitHub repository.
 Our GitHub issues page also includes work we know still needs to be done to reach full feature parity with v2 SDK.
 
-#### Feedback
+### Feedback
 
 **GitHub issues**. Customers who are comfortable giving public feedback can open a GitHub issue in the new repository.
 This is the preferred mechanism to give feedback so that other customers can engage in the conversation, +1 issues, etc.
@@ -228,7 +312,7 @@ Issues you open will be evaluated, and included in our roadmap for the GA launch
 The Gitter channel is also a great place to get help with v3 from other developers. JS SDK team doesn't
 track the discussion daily, so feel free to open a GitHub issue if your question is not answered there.
 
-#### Contributing
+### Contributing
 
 You can open pull requests for fixes or additions to the new AWS SDK for JavaScript v3.
 All pull requests must be submitted under the Apache 2.0 license and will be reviewed by an SDK team member prior to merging.
@@ -273,27 +357,67 @@ await aggregatedS3.getObject({...}));
 
 The v3 codebase is generated from internal AWS models that AWS services expose. We use [smithy-typescript](https://github.com/awslabs/smithy-typescript) to generate all code in the `/clients` subdirectory. These packages always have a prefix of `@aws-sdk/client-XXXX` and are one-to-one with AWS services and service operations. You should be importing `@aws-sdk/client-XXXX` for most usage.
 
-Clients depend on common "utility" code in `/packages`. The code in `/packages` is manually written and outside of special cases (like credenitials or abort controller) is generally not very useful alone.
+Clients depend on common "utility" code in `/packages`. The code in `/packages` is manually written and outside of special cases (like credentials or abort controller) is generally not very useful alone.
 
-Lastly we have higher level libraries in `/lib`. These are javascript specific libraries that wrap client operations to make them easier to work with. Popular examples are `@aws-sdk/lib-dynamodb` which [simplifies working with items in Amazon DynamoDB](https://github.com/aws/aws-sdk-js-v3/blob/main/lib/lib-dynamodb/README.md) or `@aws-sdk/lib-storage` which exposes the `Upload` function and [simplifies parallel uploads in S3's multipartUpload](https://github.com/aws/aws-sdk-js-v3/blob/main/lib/lib-storage/README.md).
+Lastly, we have higher level libraries in `/lib`. These are javascript specific libraries that wrap client operations to make them easier to work with. Popular examples are `@aws-sdk/lib-dynamodb` which [simplifies working with items in Amazon DynamoDB](https://github.com/aws/aws-sdk-js-v3/blob/main/lib/lib-dynamodb/README.md) or `@aws-sdk/lib-storage` which exposes the `Upload` function and [simplifies parallel uploads in S3's multipartUpload](https://github.com/aws/aws-sdk-js-v3/blob/main/lib/lib-storage/README.md).
 
 1. `/packages`. This sub directory is where most manual code updates are done. These are published to NPM under `@aws-sdk/XXXX` and have no special prefix.
 1. `/clients`. This sub directory is code generated and depends on code published from `/packages` . It is 1:1 with AWS services and operations. Manual edits should generally not occur here. These are published to NPM under `@aws-sdk/client-XXXX`.
 1. `/lib`. This sub directory depends on generated code published from `/clients`. It wraps existing AWS services and operations to make them easier to work with in Javascript. These are published to NPM under `@aws-sdk/lib-XXXX`
 
+### Streams
+
+Certain command outputs include streams, which have different implementations in
+Node.js and browsers. For convenience, a set of stream handling methods will be
+merged (`Object.assign`) to the output stream object, as defined in
+[SdkStreamMixin][serde-code-url].
+
+Output types having this feature will be indicated by the `WithSdkStreamMixin<T, StreamKey>`
+[wrapper type][serde-code-url], where `T` is the original output type
+and `StreamKey` is the output property key having a stream type specific to
+the runtime environment.
+
+[serde-code-url]: https://github.com/aws/aws-sdk-js-v3/blob/main/packages/types/src/serde.ts
+
+Here is an example using `S3::GetObject`.
+
+```js
+import { S3 } from "@aws-sdk/client-s3";
+
+const client = new S3({});
+
+const getObjectResult = await client.getObject({
+  Bucket: "...",
+  Key: "...",
+});
+
+// env-specific stream with added mixin methods.
+const bodyStream = getObjectResult.Body;
+
+// one-time transform.
+const bodyAsString = await bodyStream.transformToString();
+
+// throws an error on 2nd call, stream cannot be rewound.
+const __error__ = await bodyStream.transformToString();
+```
+
+Note that these methods will read the stream in order to collect it,
+so **you must save the output**. The methods cannot be called more than once
+on a stream.
+
 ### Paginators
 
 Many AWS operations return paginated results when the response object is too large to return in a single response. In AWS SDK for JavaScript v2, the response contains a token you can use to retrieve the next page of results. You then need to write additional functions to process pages of results.
 
-In AWS SDK for JavaScript v3 we’ve improved pagination using async generator functions, which are similar to generator functions, with the following differences:
+In AWS SDK for JavaScript v3, we’ve improved pagination using async generator functions, which are similar to generator functions, with the following differences:
 
-- When called, async generator functions return an object, an async generator whose methods (`next`, `throw`, and `return`) return promises for { `value`, `done` }, instead of directly returning { `value`, `done` }. This automatically makes the returned async generator objects async iterators.
+- When called, async generator functions return an object, an async generator whose methods (`next`, `throw`, and `return`) return promises for `{ `value`, `done` }`, instead of directly returning `{ `value`, `done` }`. This automatically makes the returned async generator objects async iterators.
 - await expressions and `for await (x of y)` statements are allowed.
 - The behavior of `yield*` is modified to support delegation to async iterables.
 
 The Async Iterators were added in the ES2018 iteration of JavaScript. They are supported by Node.js 10.x+ and by all modern browsers, including Chrome 63+, Firefox 57+, Safari 11.1+, and Edge 79+. If you’re using TypeScript v2.3+, you can compile Async Iterators to older versions of JavaScript.
 
-An async iterator is much like an iterator, except that its `next()` method returns a promise for a { `value`, `done` } pair. As an implicit aspect of the Async Iteration protocol, the next promise is not requested until the previous one resolves. This is a simple, yet a very powerful pattern.
+An async iterator is much like an iterator, except that its `next()` method returns a promise for a `{ `value`, `done` }` pair. As an implicit aspect of the Async Iteration protocol, the next promise is not requested until the previous one resolves. This is a simple, yet a very powerful pattern.
 
 #### Example Pagination Usage
 
@@ -380,8 +504,6 @@ abortController.abort();
 await requestPromise;
 ```
 
-For a full pagination deep dive please check out our [blog post](https://aws.amazon.com/blogs/developer/pagination-using-async-iterators-in-modular-aws-sdk-for-javascript/).
-
 #### AbortController Example
 
 The following code snippet shows how to upload a file using S3's putObject API in the browser with support to abort the upload. First, create a controller using the `AbortController()` constructor, then grab a reference to its associated AbortSignal object using the AbortController.signal property. When the `PutObjectCommand` is called with `.send()` operation, pass in AbortController.signal as abortSignal in the httpOptions parameter. This will allow you to abort the PutObject operation by calling `abortController.abort()`.
@@ -414,33 +536,37 @@ const uploadObject = async (file) => {
 }
 ```
 
-For a full abort controller deep dive please check out our [blog post](https://aws.amazon.com/blogs/developer/abortcontroller-in-modular-aws-sdk-for-javascript/).
+For a full abort controller deep dive, please check out our [blog post](https://aws.amazon.com/blogs/developer/abortcontroller-in-modular-aws-sdk-for-javascript/).
 
 ### Middleware Stack
 
-The JavaScript SDK maintains a series of asynchronous actions. These series include actions that serialize input parameters into the data over the wire and deserialize response data into JavaScript objects. Such actions are implemented using functions called middleware and executed in a specific order. The object that hosts all the middleware including the ordering information is called a Middleware Stack. You can add your custom actions to the SDK and/or remove the default ones.
+The AWS SDK for JavaScript (v3) maintains a series of asynchronous actions. These series include actions that serialize input parameters into the data over the wire and deserialize response data into JavaScript objects. Such actions are implemented using functions called middleware and executed in a specific order. The object that hosts all the middleware including the ordering information is called a Middleware Stack. You can add your custom actions to the SDK and/or remove the default ones.
 
 When an API call is made, SDK sorts the middleware according to the step it belongs to and its priority within each step. The input parameters pass through each middleware. An HTTP request gets created and updated along the process. The HTTP Handler sends a request to the service, and receives a response. A response object is passed back through the same middleware stack in reverse, and is deserialized into a JavaScript object.
 
 A middleware is a higher-order function that transfers user input and/or HTTP request, then delegates to “next” middleware. It also transfers the result from “next” middleware. A middleware function also has access to context parameter, which optionally contains data to be shared across middleware.
 
-For example, you can use middleware to add a custom header like S3 object metadata:
+For example, you can use middleware to log or modify a request:
 
 ```javascript
 const { S3 } = require("@aws-sdk/client-s3");
 const client = new S3({ region: "us-west-2" });
+
 // Middleware added to client, applies to all commands.
 client.middlewareStack.add(
   (next, context) => async (args) => {
     args.request.headers["x-amz-meta-foo"] = "bar";
+    console.log("AWS SDK context", context.clientName, context.commandName);
+    console.log("AWS SDK request input", args.input);
     const result = await next(args);
-    // result.response contains data returned from next middleware.
+    console.log("AWS SDK request output:", result.output);
     return result;
   },
   {
     step: "build",
     name: "addFooMetadataMiddleware",
     tags: ["METADATA", "FOO"],
+    override: true,
   }
 );
 
@@ -455,17 +581,196 @@ The example above adds middleware to `build` step of middleware stack. The middl
 - The **build** lifecycle step builds on top of serialized HTTP request. Examples of typical build tasks include injecting HTTP headers that describe a stable aspect of the request, such as `Content-Length` or a body checksum. Any request alterations will be applied to all retries.
 - The **finalizeRequest** lifecycle step prepares the request to be sent over the wire. The request in this stage is semantically complete and should therefore only be altered to match the recipient’s expectations. Examples of typical finalization tasks include request signing, performing retries and injecting hop-by-hop headers.
 - The **deserialize** lifecycle step deserializes the raw response object to a structured response. The upstream middleware have access to deserialized data in next callbacks return value: `result.output`.
-  Each middleware must be added to a specific step. By default each middleware in the same step has undifferentiated order. In some cases, you might want to execute a middleware before or after another middleware in the same step. You can achieve it by specifying its `priority`.
+  Each middleware must be added to a specific step. By default, each middleware in the same step has undifferentiated order. In some cases, you might want to execute a middleware before or after another middleware in the same step. You can achieve it by specifying its `priority`.
 
 ```javascript
 client.middlewareStack.add(middleware, {
+  name: "MyMiddleware",
   step: "initialize",
   priority: "high", // or "low".
+  override: true, // provide both a name and override=true to avoid accidental middleware duplication.
 });
 ```
 
-For a full middleware stack deep dive please check out our [blog post](https://aws.amazon.com/blogs/developer/middleware-stack-modular-aws-sdk-js/).
+For a full middleware stack deep dive, please check out our [blog post](https://aws.amazon.com/blogs/developer/middleware-stack-modular-aws-sdk-js/).
+
+## Release Cadence
+
+Our releases usually happen once per weekday. Each release increments the
+minor version, e.g. 3.200.0 -> 3.201.0.
+
+## Node.js and ECMAScript Version Support Policy
+
+In 2025, we [announced](https://a.co/c895JFp) that JS SDK v3 will start following the Node.js release schedule for
+ending support for Node.js and ECMAScript versions. The Node.js LTS versions reach end-of-life (EOL) in April. We will
+drop support for the EOL Node.js LTS versions after 8 months of it going EOL, i.e. in the January the following year.
+
+### Node.js versions
+
+- v3.968.0 and higher requires Node.js >= 20.
+- v3.723.0 and higher requires Node.js >= 18.
+- v3.567.0 and higher requires Node.js >= 16.
+- v3.201.0 and higher requires Node.js >= 14.
+- v3.46.0 to v3.200.0 requires Node.js >= 12.
+- Earlier versions require Node.js >= 10.
+
+### ECMAScript versions
+
+The browser artifacts will follow the ECMAScript versions required by supported Node.js versions. This doesn’t impact
+most applications because new versions of browsers are released at a much faster pace (usually every 4–6 weeks), and
+they are automatically updated. Also, most browser applications use bundlers, where the ECMAScript version is specified
+in the application bundler configuration and the bundler will transpile all dependencies to that target.
+
+## TypeScript Version Support Policy
+
+In 2026, we [announced](https://aws.amazon.com/blogs/developer/updating-typescript-version-support-in-aws-sdk-for-javascript-v3/)
+an update to the range of TypeScript versions supported by AWS SDK for JavaScript v3.
+
+| TypeScript version | Release Date       | DefinitelyTyped end-of-support | JS SDK end-of-support |
+| ------------------ | ------------------ | ------------------------------ | --------------------- |
+| <= 5.5             | June 20, 2024      | June 20, 2026\*                | January 4, 2027       |
+| 5.6                | September 24, 2024 | September 24, 2026\*           | March 31, 2027        |
+| 5.7                | November 22, 2024  | November 22, 2026\*            | May 31, 2027          |
+| 5.8                | March 5, 2025      | March 5, 2027\*                | September 30, 2027    |
+| 5.9                | August 1, 2025     | August 1, 2027                 | February 29, 2028     |
+
+\* DefinitelyTyped supports the last 2 years of released TypeScript versions.
+
+## Stability of Modular Packages
+
+| Package name                | containing folder | API controlled by | stability     |
+| --------------------------- | ----------------- | ----------------- | ------------- |
+| @aws-sdk/client-\* Commands | clients           | AWS service teams | public/stable |
+| @aws-sdk/client-\* Clients  | clients           | AWS SDK JS team   | public/stable |
+| @aws-sdk/lib-\*             | lib               | AWS SDK JS team   | public/stable |
+| @aws-sdk/\*-signer          | packages          | AWS SDK JS team   | public/stable |
+| @aws-sdk/middleware-stack   | packages          | AWS SDK JS team   | public/stable |
+| remaining @aws-sdk/\*       | packages          | AWS SDK JS team   | internal      |
+
+Public interfaces are marked with the `@public` annotation in source code and appear
+in our [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/).
+
+Additional notes:
+
+- `@internal` does not mean a package or interface is constantly changing
+  or being actively worked on. It means it is subject to change without any
+  notice period. The changes are included in the release notes.
+- public interfaces such as client configuration are also subject to change
+  in exceptional cases. We will try to undergo a deprecation period with
+  an advance notice.
+
+All supported interfaces are provided at the package level, e.g.:
+
+```js
+import { S3Client } from "@aws-sdk/client-s3"; // Yes, do this.
+
+import { S3Client } from "@aws-sdk/client-s3/dist-cjs/S3Client"; // No, don't do this.
+```
+
+Do not import from a deep path in any package, since the file structure may change, and
+in the future packages may include the `exports` metadata in `package.json` preventing
+access to the file structure.
 
 ## Known Issues
+
+### Functionality requiring AWS Common Runtime (CRT)
+
+This SDK has optional functionality that requires the [AWS Common Runtime (CRT)](https://docs.aws.amazon.com/sdkref/latest/guide/common-runtime.html)
+bindings to be included as a dependency with your application. This functionality includes:
+
+- [Amazon S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
+- [Amazon S3 Object Integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
+- [Amazon CloudFront-KeyValueStore](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/kvs-with-functions-kvp.html)
+
+If the required AWS Common Runtime components are not installed, you will receive an error like:
+
+```console
+Cannot find module '@aws-sdk/signature-v4-crt'
+...
+Please check whether you have installed the "@aws-sdk/signature-v4-crt" package explicitly.
+You must also register the package by calling [require("@aws-sdk/signature-v4-crt");]
+or an ESM equivalent such as [import "@aws-sdk/signature-v4-crt";].
+For more information please go to
+https://github.com/aws/aws-sdk-js-v3#functionality-requiring-aws-common-runtime-crt"
+```
+
+indicating that the required dependency is missing to use the associated functionality. To install this dependency, follow
+the provided [instructions](#installing-the-aws-common-runtime-crt-dependency).
+
+For [Amazon S3 CRC64-NVME checksums](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html),
+we include JavaScript implementation by default, but you can optionally install and include `"@aws-sdk/crc64-nvme-crt"`
+on Node.js runtime for improved performance.
+
+#### Installing the AWS Common Runtime (CRT) Dependency
+
+You can install the CRT dependency with different commands depending on the package management tool you are using.
+If you are using NPM:
+
+```console
+npm install @aws-sdk/signature-v4-crt
+```
+
+If you are using Yarn:
+
+```console
+yarn add @aws-sdk/signature-v4-crt
+```
+
+Additionally, load the signature-v4-crt package by importing it.
+
+```js
+require("@aws-sdk/signature-v4-crt");
+// or ESM
+import "@aws-sdk/signature-v4-crt";
+```
+
+Only the import statement is needed. The implementation then registers itself with `@aws-sdk/signature-v4-multi-region`
+and becomes available for its use. You do not need to use any imported objects directly.
+
+Note that you can also use the native JavaScript implementation of SigV4a that does not depend on AWS CRT and can be used in browsers (unlike the CRT version). The instructions for using that package are below.
+
+### Using JavaScript (non-CRT) implementation of SigV4a
+
+Note: Use of AWS SignatureV4a in the browser (JS implementation) is not recommended, due to the bundle size of the SigV4a signing algorithm code. Consider whether there are other ways to achieve your desired application functionality without the use of sigv4a before installing these packages.
+
+AWS SDK for JavaScript v3 now supports a native JavaScript version of SigV4a that can be used in browsers and Node, and does not depend on [AWS Common Runtime (CRT)](https://docs.aws.amazon.com/sdkref/latest/guide/common-runtime.html). This is an alternative to the AWS CRT version, so you don't need to have both packages together.
+
+If neither the CRT components nor the JavaScript SigV4a implementation are installed, you will receive an error like:
+
+```console
+Neither CRT nor JS SigV4a implementation is available.
+Please load either @aws-sdk/signature-v4-crt or @aws-sdk/signature-v4a.
+```
+
+indicating that at least one of the required dependencies is missing to use the associated functionality. To install the JavaScript SigV4a dependency, follow the provided instructions.
+
+#### Installing the JavaScript SigV4a Dependency
+
+You can install the JavaScript SigV4a dependency with different commands depending on the package management tool you are using.
+If you are using NPM:
+
+```console
+npm install @aws-sdk/signature-v4a
+```
+
+If you are using Yarn:
+
+```console
+yarn add @aws-sdk/signature-v4a
+```
+
+Additionally, load the signature-v4a package by importing it.
+
+```js
+require("@aws-sdk/signature-v4a");
+// or ESM
+import "@aws-sdk/signature-v4a";
+```
+
+Only the import statement is needed. The implementation then registers itself with `@aws-sdk/signature-v4-multi-region`
+and becomes available for its use. You do not need to use any imported objects directly.
+Note that if both the CRT-based implementation and the JavaScript implementation are available, the SDK will prefer to use the CRT-based implementation for better performance. If you specifically want to use the JavaScript implementation, ensure that the CRT package is not installed or imported.
+
+#### Related issues
 
 1. [S3 Multi-Region Access Point(MRAP) is not available unless with additional dependency](https://github.com/aws/aws-sdk-js-v3/issues/2822)

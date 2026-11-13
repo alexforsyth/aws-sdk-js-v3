@@ -1,22 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteKeyPairRequest } from "../models/models_2";
-import { deserializeAws_ec2DeleteKeyPairCommand, serializeAws_ec2DeleteKeyPairCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteKeyPairRequest, DeleteKeyPairResult } from "../models/models_3";
+import { DeleteKeyPair$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteKeyPairCommand}.
+ */
 export interface DeleteKeyPairCommandInput extends DeleteKeyPairRequest {}
-export interface DeleteKeyPairCommandOutput extends __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteKeyPairCommand}.
+ */
+export interface DeleteKeyPairCommandOutput extends DeleteKeyPairResult, __MetadataBearer {}
 
 /**
  * <p>Deletes the specified key pair, by removing the public key from Amazon EC2.</p>
@@ -25,68 +29,63 @@ export interface DeleteKeyPairCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2Client, DeleteKeyPairCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteKeyPairCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteKeyPairRequest
+ *   KeyName: "STRING_VALUE",
+ *   KeyPairId: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteKeyPairCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteKeyPairResult
+ * //   Return: true || false,
+ * //   KeyPairId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteKeyPairCommandInput - {@link DeleteKeyPairCommandInput}
+ * @returns {@link DeleteKeyPairCommandOutput}
  * @see {@link DeleteKeyPairCommandInput} for command's `input` shape.
  * @see {@link DeleteKeyPairCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To delete a key pair
+ * ```javascript
+ * // This example deletes the specified key pair.
+ * const input = {
+ *   KeyName: "my-key-pair"
+ * };
+ * const command = new DeleteKeyPairCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteKeyPairCommand extends $Command<
-  DeleteKeyPairCommandInput,
-  DeleteKeyPairCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteKeyPairCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteKeyPairCommandInput, DeleteKeyPairCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteKeyPairCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteKeyPairRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteKeyPairCommand extends command<DeleteKeyPairCommandInput, DeleteKeyPairCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteKeyPair",
+  DeleteKeyPair$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteKeyPairRequest;
+      output: DeleteKeyPairResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteKeyPairCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteKeyPairCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteKeyPairCommandOutput> {
-    return deserializeAws_ec2DeleteKeyPairCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteKeyPairCommandInput;
+      output: DeleteKeyPairCommandOutput;
+    };
+  };
 }

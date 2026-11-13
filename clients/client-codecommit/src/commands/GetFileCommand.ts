@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { GetFileInput, GetFileOutput } from "../models/models_0";
-import { deserializeAws_json1_1GetFileCommand, serializeAws_json1_1GetFileCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFileInput, GetFileOutput } from "../models/models_0";
+import { GetFile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFileCommand}.
+ */
 export interface GetFileCommandInput extends GetFileInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetFileCommand}.
+ */
 export interface GetFileCommandOutput extends GetFileOutput, __MetadataBearer {}
 
 /**
@@ -25,68 +29,104 @@ export interface GetFileCommandOutput extends GetFileOutput, __MetadataBearer {}
  * ```javascript
  * import { CodeCommitClient, GetFileCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, GetFileCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // GetFileInput
+ *   repositoryName: "STRING_VALUE", // required
+ *   commitSpecifier: "STRING_VALUE",
+ *   filePath: "STRING_VALUE", // required
+ * };
  * const command = new GetFileCommand(input);
  * const response = await client.send(command);
+ * // { // GetFileOutput
+ * //   commitId: "STRING_VALUE", // required
+ * //   blobId: "STRING_VALUE", // required
+ * //   filePath: "STRING_VALUE", // required
+ * //   fileMode: "EXECUTABLE" || "NORMAL" || "SYMLINK", // required
+ * //   fileSize: Number("long"), // required
+ * //   fileContent: new Uint8Array(), // required
+ * // };
+ *
  * ```
  *
+ * @param GetFileCommandInput - {@link GetFileCommandInput}
+ * @returns {@link GetFileCommandOutput}
  * @see {@link GetFileCommandInput} for command's `input` shape.
  * @see {@link GetFileCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link CommitDoesNotExistException} (client fault)
+ *  <p>The specified commit does not exist or no commit was specified, and the specified repository has no default branch.</p>
+ *
+ * @throws {@link EncryptionIntegrityChecksFailedException} (server fault)
+ *  <p>An encryption integrity check failed.</p>
+ *
+ * @throws {@link EncryptionKeyAccessDeniedException} (client fault)
+ *  <p>An encryption key could not be accessed.</p>
+ *
+ * @throws {@link EncryptionKeyDisabledException} (client fault)
+ *  <p>The encryption key is disabled.</p>
+ *
+ * @throws {@link EncryptionKeyNotFoundException} (client fault)
+ *  <p>No encryption key was found.</p>
+ *
+ * @throws {@link EncryptionKeyUnavailableException} (client fault)
+ *  <p>The encryption key is not available.</p>
+ *
+ * @throws {@link FileDoesNotExistException} (client fault)
+ *  <p>The specified file does not exist. Verify that you have used the correct file name,
+ *             full path, and extension.</p>
+ *
+ * @throws {@link FileTooLargeException} (client fault)
+ *  <p>The specified file exceeds the file size limit for CodeCommit. For more information about limits in CodeCommit, see
+ *             <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>
+ *                CodeCommit User Guide</i>.</p>
+ *
+ * @throws {@link InvalidCommitException} (client fault)
+ *  <p>The specified commit is not valid.</p>
+ *
+ * @throws {@link InvalidPathException} (client fault)
+ *  <p>The specified path is not valid.</p>
+ *
+ * @throws {@link InvalidRepositoryNameException} (client fault)
+ *  <p>A specified repository name is not valid.</p>
+ *          <note>
+ *             <p>This exception occurs only when a specified repository name is not valid. Other
+ *                 exceptions occur when a required repository parameter is missing, or when a
+ *                 specified repository does not exist.</p>
+ *          </note>
+ *
+ * @throws {@link PathRequiredException} (client fault)
+ *  <p>The folderPath for a location cannot be null.</p>
+ *
+ * @throws {@link RepositoryDoesNotExistException} (client fault)
+ *  <p>The specified repository does not exist.</p>
+ *
+ * @throws {@link RepositoryNameRequiredException} (client fault)
+ *  <p>A repository name is required, but was not specified.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class GetFileCommand extends $Command<
-  GetFileCommandInput,
-  GetFileCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFileCommandInput, GetFileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "GetFileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFileInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFileOutput.filterSensitiveLog,
+export class GetFileCommand extends command<GetFileCommandInput, GetFileCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFile",
+  GetFile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFileInput;
+      output: GetFileOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetFileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFileCommandOutput> {
-    return deserializeAws_json1_1GetFileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFileCommandInput;
+      output: GetFileCommandOutput;
+    };
+  };
 }

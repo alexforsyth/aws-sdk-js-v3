@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeWorkspacesConnectionStatusRequest,
   DescribeWorkspacesConnectionStatusResult,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeWorkspacesConnectionStatusCommand,
-  serializeAws_json1_1DescribeWorkspacesConnectionStatusCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { DescribeWorkspacesConnectionStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeWorkspacesConnectionStatusCommand}.
+ */
 export interface DescribeWorkspacesConnectionStatusCommandInput extends DescribeWorkspacesConnectionStatusRequest {}
-export interface DescribeWorkspacesConnectionStatusCommandOutput
-  extends DescribeWorkspacesConnectionStatusResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeWorkspacesConnectionStatusCommand}.
+ */
+export interface DescribeWorkspacesConnectionStatusCommandOutput extends DescribeWorkspacesConnectionStatusResult, __MetadataBearer {}
 
 /**
  * <p>Describes the connection status of the specified WorkSpaces.</p>
@@ -33,74 +32,61 @@ export interface DescribeWorkspacesConnectionStatusCommandOutput
  * ```javascript
  * import { WorkSpacesClient, DescribeWorkspacesConnectionStatusCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, DescribeWorkspacesConnectionStatusCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeWorkspacesConnectionStatusRequest
+ *   WorkspaceIds: [ // WorkspaceIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeWorkspacesConnectionStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeWorkspacesConnectionStatusResult
+ * //   WorkspacesConnectionStatus: [ // WorkspaceConnectionStatusList
+ * //     { // WorkspaceConnectionStatus
+ * //       WorkspaceId: "STRING_VALUE",
+ * //       ConnectionState: "CONNECTED" || "DISCONNECTED" || "UNKNOWN",
+ * //       ConnectionStateCheckTimestamp: new Date("TIMESTAMP"),
+ * //       LastKnownUserConnectionTimestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeWorkspacesConnectionStatusCommandInput - {@link DescribeWorkspacesConnectionStatusCommandInput}
+ * @returns {@link DescribeWorkspacesConnectionStatusCommandOutput}
  * @see {@link DescribeWorkspacesConnectionStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeWorkspacesConnectionStatusCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeWorkspacesConnectionStatusCommand extends $Command<
-  DescribeWorkspacesConnectionStatusCommandInput,
-  DescribeWorkspacesConnectionStatusCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeWorkspacesConnectionStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeWorkspacesConnectionStatusCommandInput, DescribeWorkspacesConnectionStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "DescribeWorkspacesConnectionStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeWorkspacesConnectionStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeWorkspacesConnectionStatusResult.filterSensitiveLog,
+export class DescribeWorkspacesConnectionStatusCommand extends command<DescribeWorkspacesConnectionStatusCommandInput, DescribeWorkspacesConnectionStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeWorkspacesConnectionStatus",
+  DescribeWorkspacesConnectionStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWorkspacesConnectionStatusRequest;
+      output: DescribeWorkspacesConnectionStatusResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeWorkspacesConnectionStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeWorkspacesConnectionStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeWorkspacesConnectionStatusCommandOutput> {
-    return deserializeAws_json1_1DescribeWorkspacesConnectionStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeWorkspacesConnectionStatusCommandInput;
+      output: DescribeWorkspacesConnectionStatusCommandOutput;
+    };
+  };
 }

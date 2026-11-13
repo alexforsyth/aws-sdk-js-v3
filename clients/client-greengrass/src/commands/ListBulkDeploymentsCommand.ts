@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { ListBulkDeploymentsRequest, ListBulkDeploymentsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListBulkDeploymentsCommand,
-  serializeAws_restJson1ListBulkDeploymentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBulkDeploymentsRequest, ListBulkDeploymentsResponse } from "../models/models_0";
+import { ListBulkDeployments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBulkDeploymentsCommand}.
+ */
 export interface ListBulkDeploymentsCommandInput extends ListBulkDeploymentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBulkDeploymentsCommand}.
+ */
 export interface ListBulkDeploymentsCommandOutput extends ListBulkDeploymentsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,58 @@ export interface ListBulkDeploymentsCommandOutput extends ListBulkDeploymentsRes
  * ```javascript
  * import { GreengrassClient, ListBulkDeploymentsCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, ListBulkDeploymentsCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // ListBulkDeploymentsRequest
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListBulkDeploymentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBulkDeploymentsResponse
+ * //   BulkDeployments: [ // BulkDeployments
+ * //     { // BulkDeployment
+ * //       BulkDeploymentArn: "STRING_VALUE",
+ * //       BulkDeploymentId: "STRING_VALUE",
+ * //       CreatedAt: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBulkDeploymentsCommandInput - {@link ListBulkDeploymentsCommandInput}
+ * @returns {@link ListBulkDeploymentsCommandOutput}
  * @see {@link ListBulkDeploymentsCommandInput} for command's `input` shape.
  * @see {@link ListBulkDeploymentsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class ListBulkDeploymentsCommand extends $Command<
-  ListBulkDeploymentsCommandInput,
-  ListBulkDeploymentsCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBulkDeploymentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBulkDeploymentsCommandInput, ListBulkDeploymentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "ListBulkDeploymentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBulkDeploymentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBulkDeploymentsResponse.filterSensitiveLog,
+export class ListBulkDeploymentsCommand extends command<ListBulkDeploymentsCommandInput, ListBulkDeploymentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBulkDeployments",
+  ListBulkDeployments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBulkDeploymentsRequest;
+      output: ListBulkDeploymentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBulkDeploymentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBulkDeploymentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBulkDeploymentsCommandOutput> {
-    return deserializeAws_restJson1ListBulkDeploymentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBulkDeploymentsCommandInput;
+      output: ListBulkDeploymentsCommandOutput;
+    };
+  };
 }

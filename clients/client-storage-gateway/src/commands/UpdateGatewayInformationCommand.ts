@@ -1,31 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateGatewayInformationInput, UpdateGatewayInformationOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateGatewayInformationCommand,
-  serializeAws_json1_1UpdateGatewayInformationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateGatewayInformationInput, UpdateGatewayInformationOutput } from "../models/models_0";
+import { UpdateGatewayInformation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateGatewayInformationCommand}.
+ */
 export interface UpdateGatewayInformationCommandInput extends UpdateGatewayInformationInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateGatewayInformationCommand}.
+ */
 export interface UpdateGatewayInformationCommandOutput extends UpdateGatewayInformationOutput, __MetadataBearer {}
 
 /**
- * <p>Updates a gateway's metadata, which includes the gateway's name and time zone.
- *          To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in
- *          your request.</p>
- *
+ * <p>Updates a gateway's metadata, which includes the gateway's name, time zone,
+ *          and metadata cache size. To specify which gateway to update, use the Amazon Resource Name
+ *          (ARN) of the gateway in your request.</p>
  *          <note>
  *             <p>For gateways activated after September 2, 2015, the gateway's ARN contains the
  *             gateway ID rather than the gateway name. However, changing the name of the gateway has
@@ -36,68 +36,78 @@ export interface UpdateGatewayInformationCommandOutput extends UpdateGatewayInfo
  * ```javascript
  * import { StorageGatewayClient, UpdateGatewayInformationCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, UpdateGatewayInformationCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // UpdateGatewayInformationInput
+ *   GatewayARN: "STRING_VALUE", // required
+ *   GatewayName: "STRING_VALUE",
+ *   GatewayTimezone: "STRING_VALUE",
+ *   CloudWatchLogGroupARN: "STRING_VALUE",
+ *   GatewayCapacity: "Small" || "Medium" || "Large",
+ * };
  * const command = new UpdateGatewayInformationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateGatewayInformationOutput
+ * //   GatewayARN: "STRING_VALUE",
+ * //   GatewayName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateGatewayInformationCommandInput - {@link UpdateGatewayInformationCommandInput}
+ * @returns {@link UpdateGatewayInformationCommandOutput}
  * @see {@link UpdateGatewayInformationCommandInput} for command's `input` shape.
  * @see {@link UpdateGatewayInformationCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To update a gateway's metadata
+ * ```javascript
+ * // Updates a gateway's metadata, which includes the gateway's name and time zone.
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
+ *   GatewayName: "MyGateway2",
+ *   GatewayTimezone: "GMT-12:00"
+ * };
+ * const command = new UpdateGatewayInformationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
+ *   GatewayName: ""
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateGatewayInformationCommand extends $Command<
-  UpdateGatewayInformationCommandInput,
-  UpdateGatewayInformationCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateGatewayInformationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateGatewayInformationCommandInput, UpdateGatewayInformationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "UpdateGatewayInformationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateGatewayInformationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateGatewayInformationOutput.filterSensitiveLog,
+export class UpdateGatewayInformationCommand extends command<UpdateGatewayInformationCommandInput, UpdateGatewayInformationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateGatewayInformation",
+  UpdateGatewayInformation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGatewayInformationInput;
+      output: UpdateGatewayInformationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateGatewayInformationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateGatewayInformationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateGatewayInformationCommandOutput> {
-    return deserializeAws_json1_1UpdateGatewayInformationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateGatewayInformationCommandInput;
+      output: UpdateGatewayInformationCommandOutput;
+    };
+  };
 }

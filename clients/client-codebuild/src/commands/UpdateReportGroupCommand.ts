@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { UpdateReportGroupInput, UpdateReportGroupOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateReportGroupCommand,
-  serializeAws_json1_1UpdateReportGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateReportGroupInput, UpdateReportGroupOutput } from "../models/models_0";
+import { UpdateReportGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateReportGroupCommand}.
+ */
 export interface UpdateReportGroupCommandInput extends UpdateReportGroupInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateReportGroupCommand}.
+ */
 export interface UpdateReportGroupCommandOutput extends UpdateReportGroupOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,94 @@ export interface UpdateReportGroupCommandOutput extends UpdateReportGroupOutput,
  * ```javascript
  * import { CodeBuildClient, UpdateReportGroupCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, UpdateReportGroupCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // UpdateReportGroupInput
+ *   arn: "STRING_VALUE", // required
+ *   exportConfig: { // ReportExportConfig
+ *     exportConfigType: "S3" || "NO_EXPORT",
+ *     s3Destination: { // S3ReportExportConfig
+ *       bucket: "STRING_VALUE",
+ *       bucketOwner: "STRING_VALUE",
+ *       path: "STRING_VALUE",
+ *       packaging: "ZIP" || "NONE",
+ *       encryptionKey: "STRING_VALUE",
+ *       encryptionDisabled: true || false,
+ *     },
+ *   },
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE",
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateReportGroupCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateReportGroupOutput
+ * //   reportGroup: { // ReportGroup
+ * //     arn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     type: "TEST" || "CODE_COVERAGE",
+ * //     exportConfig: { // ReportExportConfig
+ * //       exportConfigType: "S3" || "NO_EXPORT",
+ * //       s3Destination: { // S3ReportExportConfig
+ * //         bucket: "STRING_VALUE",
+ * //         bucketOwner: "STRING_VALUE",
+ * //         path: "STRING_VALUE",
+ * //         packaging: "ZIP" || "NONE",
+ * //         encryptionKey: "STRING_VALUE",
+ * //         encryptionDisabled: true || false,
+ * //       },
+ * //     },
+ * //     created: new Date("TIMESTAMP"),
+ * //     lastModified: new Date("TIMESTAMP"),
+ * //     tags: [ // TagList
+ * //       { // Tag
+ * //         key: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     status: "ACTIVE" || "DELETING",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateReportGroupCommandInput - {@link UpdateReportGroupCommandInput}
+ * @returns {@link UpdateReportGroupCommandOutput}
  * @see {@link UpdateReportGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateReportGroupCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be found.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateReportGroupCommand extends $Command<
-  UpdateReportGroupCommandInput,
-  UpdateReportGroupCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateReportGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateReportGroupCommandInput, UpdateReportGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "UpdateReportGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateReportGroupInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateReportGroupOutput.filterSensitiveLog,
+export class UpdateReportGroupCommand extends command<UpdateReportGroupCommandInput, UpdateReportGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateReportGroup",
+  UpdateReportGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateReportGroupInput;
+      output: UpdateReportGroupOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateReportGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateReportGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateReportGroupCommandOutput> {
-    return deserializeAws_json1_1UpdateReportGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateReportGroupCommandInput;
+      output: UpdateReportGroupCommandOutput;
+    };
+  };
 }

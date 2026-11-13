@@ -1,4168 +1,10563 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type ActivateEvaluationFormCommandInput,
+  type ActivateEvaluationFormCommandOutput,
+  ActivateEvaluationFormCommand,
+} from "./commands/ActivateEvaluationFormCommand";
+import {
+  type AssociateAnalyticsDataSetCommandInput,
+  type AssociateAnalyticsDataSetCommandOutput,
+  AssociateAnalyticsDataSetCommand,
+} from "./commands/AssociateAnalyticsDataSetCommand";
+import {
+  type AssociateApprovedOriginCommandInput,
+  type AssociateApprovedOriginCommandOutput,
   AssociateApprovedOriginCommand,
-  AssociateApprovedOriginCommandInput,
-  AssociateApprovedOriginCommandOutput,
 } from "./commands/AssociateApprovedOriginCommand";
 import {
+  type AssociateBotCommandInput,
+  type AssociateBotCommandOutput,
   AssociateBotCommand,
-  AssociateBotCommandInput,
-  AssociateBotCommandOutput,
 } from "./commands/AssociateBotCommand";
 import {
+  type AssociateContactWithUserCommandInput,
+  type AssociateContactWithUserCommandOutput,
+  AssociateContactWithUserCommand,
+} from "./commands/AssociateContactWithUserCommand";
+import {
+  type AssociateDefaultVocabularyCommandInput,
+  type AssociateDefaultVocabularyCommandOutput,
+  AssociateDefaultVocabularyCommand,
+} from "./commands/AssociateDefaultVocabularyCommand";
+import {
+  type AssociateEmailAddressAliasCommandInput,
+  type AssociateEmailAddressAliasCommandOutput,
+  AssociateEmailAddressAliasCommand,
+} from "./commands/AssociateEmailAddressAliasCommand";
+import {
+  type AssociateFlowCommandInput,
+  type AssociateFlowCommandOutput,
+  AssociateFlowCommand,
+} from "./commands/AssociateFlowCommand";
+import {
+  type AssociateHoursOfOperationsCommandInput,
+  type AssociateHoursOfOperationsCommandOutput,
+  AssociateHoursOfOperationsCommand,
+} from "./commands/AssociateHoursOfOperationsCommand";
+import {
+  type AssociateInstanceStorageConfigCommandInput,
+  type AssociateInstanceStorageConfigCommandOutput,
   AssociateInstanceStorageConfigCommand,
-  AssociateInstanceStorageConfigCommandInput,
-  AssociateInstanceStorageConfigCommandOutput,
 } from "./commands/AssociateInstanceStorageConfigCommand";
 import {
+  type AssociateLambdaFunctionCommandInput,
+  type AssociateLambdaFunctionCommandOutput,
   AssociateLambdaFunctionCommand,
-  AssociateLambdaFunctionCommandInput,
-  AssociateLambdaFunctionCommandOutput,
 } from "./commands/AssociateLambdaFunctionCommand";
 import {
+  type AssociateLexBotCommandInput,
+  type AssociateLexBotCommandOutput,
   AssociateLexBotCommand,
-  AssociateLexBotCommandInput,
-  AssociateLexBotCommandOutput,
 } from "./commands/AssociateLexBotCommand";
 import {
+  type AssociatePhoneNumberContactFlowCommandInput,
+  type AssociatePhoneNumberContactFlowCommandOutput,
+  AssociatePhoneNumberContactFlowCommand,
+} from "./commands/AssociatePhoneNumberContactFlowCommand";
+import {
+  type AssociateQueueEmailAddressesCommandInput,
+  type AssociateQueueEmailAddressesCommandOutput,
+  AssociateQueueEmailAddressesCommand,
+} from "./commands/AssociateQueueEmailAddressesCommand";
+import {
+  type AssociateQueueQuickConnectsCommandInput,
+  type AssociateQueueQuickConnectsCommandOutput,
   AssociateQueueQuickConnectsCommand,
-  AssociateQueueQuickConnectsCommandInput,
-  AssociateQueueQuickConnectsCommandOutput,
 } from "./commands/AssociateQueueQuickConnectsCommand";
 import {
+  type AssociateRoutingProfileQueuesCommandInput,
+  type AssociateRoutingProfileQueuesCommandOutput,
   AssociateRoutingProfileQueuesCommand,
-  AssociateRoutingProfileQueuesCommandInput,
-  AssociateRoutingProfileQueuesCommandOutput,
 } from "./commands/AssociateRoutingProfileQueuesCommand";
 import {
+  type AssociateSecurityKeyCommandInput,
+  type AssociateSecurityKeyCommandOutput,
   AssociateSecurityKeyCommand,
-  AssociateSecurityKeyCommandInput,
-  AssociateSecurityKeyCommandOutput,
 } from "./commands/AssociateSecurityKeyCommand";
 import {
+  type AssociateSecurityProfilesCommandInput,
+  type AssociateSecurityProfilesCommandOutput,
+  AssociateSecurityProfilesCommand,
+} from "./commands/AssociateSecurityProfilesCommand";
+import {
+  type AssociateTrafficDistributionGroupUserCommandInput,
+  type AssociateTrafficDistributionGroupUserCommandOutput,
+  AssociateTrafficDistributionGroupUserCommand,
+} from "./commands/AssociateTrafficDistributionGroupUserCommand";
+import {
+  type AssociateUserProficienciesCommandInput,
+  type AssociateUserProficienciesCommandOutput,
+  AssociateUserProficienciesCommand,
+} from "./commands/AssociateUserProficienciesCommand";
+import {
+  type AssociateWorkspaceCommandInput,
+  type AssociateWorkspaceCommandOutput,
+  AssociateWorkspaceCommand,
+} from "./commands/AssociateWorkspaceCommand";
+import {
+  type BatchAssociateAnalyticsDataSetCommandInput,
+  type BatchAssociateAnalyticsDataSetCommandOutput,
+  BatchAssociateAnalyticsDataSetCommand,
+} from "./commands/BatchAssociateAnalyticsDataSetCommand";
+import {
+  type BatchCreateDataTableValueCommandInput,
+  type BatchCreateDataTableValueCommandOutput,
+  BatchCreateDataTableValueCommand,
+} from "./commands/BatchCreateDataTableValueCommand";
+import {
+  type BatchDeleteDataTableValueCommandInput,
+  type BatchDeleteDataTableValueCommandOutput,
+  BatchDeleteDataTableValueCommand,
+} from "./commands/BatchDeleteDataTableValueCommand";
+import {
+  type BatchDescribeDataTableValueCommandInput,
+  type BatchDescribeDataTableValueCommandOutput,
+  BatchDescribeDataTableValueCommand,
+} from "./commands/BatchDescribeDataTableValueCommand";
+import {
+  type BatchDisassociateAnalyticsDataSetCommandInput,
+  type BatchDisassociateAnalyticsDataSetCommandOutput,
+  BatchDisassociateAnalyticsDataSetCommand,
+} from "./commands/BatchDisassociateAnalyticsDataSetCommand";
+import {
+  type BatchGetAttachedFileMetadataCommandInput,
+  type BatchGetAttachedFileMetadataCommandOutput,
+  BatchGetAttachedFileMetadataCommand,
+} from "./commands/BatchGetAttachedFileMetadataCommand";
+import {
+  type BatchGetFlowAssociationCommandInput,
+  type BatchGetFlowAssociationCommandOutput,
+  BatchGetFlowAssociationCommand,
+} from "./commands/BatchGetFlowAssociationCommand";
+import {
+  type BatchPutContactCommandInput,
+  type BatchPutContactCommandOutput,
+  BatchPutContactCommand,
+} from "./commands/BatchPutContactCommand";
+import {
+  type BatchUpdateDataTableValueCommandInput,
+  type BatchUpdateDataTableValueCommandOutput,
+  BatchUpdateDataTableValueCommand,
+} from "./commands/BatchUpdateDataTableValueCommand";
+import {
+  type ClaimPhoneNumberCommandInput,
+  type ClaimPhoneNumberCommandOutput,
+  ClaimPhoneNumberCommand,
+} from "./commands/ClaimPhoneNumberCommand";
+import {
+  type CompleteAttachedFileUploadCommandInput,
+  type CompleteAttachedFileUploadCommandOutput,
+  CompleteAttachedFileUploadCommand,
+} from "./commands/CompleteAttachedFileUploadCommand";
+import {
+  type CreateAgentStatusCommandInput,
+  type CreateAgentStatusCommandOutput,
   CreateAgentStatusCommand,
-  CreateAgentStatusCommandInput,
-  CreateAgentStatusCommandOutput,
 } from "./commands/CreateAgentStatusCommand";
 import {
+  type CreateAttachedFileCommandInput,
+  type CreateAttachedFileCommandOutput,
+  CreateAttachedFileCommand,
+} from "./commands/CreateAttachedFileCommand";
+import {
+  type CreateAuthCodeCommandInput,
+  type CreateAuthCodeCommandOutput,
+  CreateAuthCodeCommand,
+} from "./commands/CreateAuthCodeCommand";
+import {
+  type CreateContactCommandInput,
+  type CreateContactCommandOutput,
+  CreateContactCommand,
+} from "./commands/CreateContactCommand";
+import {
+  type CreateContactFlowAliasCommandInput,
+  type CreateContactFlowAliasCommandOutput,
+  CreateContactFlowAliasCommand,
+} from "./commands/CreateContactFlowAliasCommand";
+import {
+  type CreateContactFlowCommandInput,
+  type CreateContactFlowCommandOutput,
   CreateContactFlowCommand,
-  CreateContactFlowCommandInput,
-  CreateContactFlowCommandOutput,
 } from "./commands/CreateContactFlowCommand";
 import {
+  type CreateContactFlowModuleAliasCommandInput,
+  type CreateContactFlowModuleAliasCommandOutput,
+  CreateContactFlowModuleAliasCommand,
+} from "./commands/CreateContactFlowModuleAliasCommand";
+import {
+  type CreateContactFlowModuleCommandInput,
+  type CreateContactFlowModuleCommandOutput,
+  CreateContactFlowModuleCommand,
+} from "./commands/CreateContactFlowModuleCommand";
+import {
+  type CreateContactFlowModuleVersionCommandInput,
+  type CreateContactFlowModuleVersionCommandOutput,
+  CreateContactFlowModuleVersionCommand,
+} from "./commands/CreateContactFlowModuleVersionCommand";
+import {
+  type CreateContactFlowVersionCommandInput,
+  type CreateContactFlowVersionCommandOutput,
+  CreateContactFlowVersionCommand,
+} from "./commands/CreateContactFlowVersionCommand";
+import {
+  type CreateDataTableAttributeCommandInput,
+  type CreateDataTableAttributeCommandOutput,
+  CreateDataTableAttributeCommand,
+} from "./commands/CreateDataTableAttributeCommand";
+import {
+  type CreateDataTableCommandInput,
+  type CreateDataTableCommandOutput,
+  CreateDataTableCommand,
+} from "./commands/CreateDataTableCommand";
+import {
+  type CreateEmailAddressCommandInput,
+  type CreateEmailAddressCommandOutput,
+  CreateEmailAddressCommand,
+} from "./commands/CreateEmailAddressCommand";
+import {
+  type CreateEvaluationFormCommandInput,
+  type CreateEvaluationFormCommandOutput,
+  CreateEvaluationFormCommand,
+} from "./commands/CreateEvaluationFormCommand";
+import {
+  type CreateExtractionDefinitionCommandInput,
+  type CreateExtractionDefinitionCommandOutput,
+  CreateExtractionDefinitionCommand,
+} from "./commands/CreateExtractionDefinitionCommand";
+import {
+  type CreateHoursOfOperationCommandInput,
+  type CreateHoursOfOperationCommandOutput,
   CreateHoursOfOperationCommand,
-  CreateHoursOfOperationCommandInput,
-  CreateHoursOfOperationCommandOutput,
 } from "./commands/CreateHoursOfOperationCommand";
 import {
+  type CreateHoursOfOperationOverrideCommandInput,
+  type CreateHoursOfOperationOverrideCommandOutput,
+  CreateHoursOfOperationOverrideCommand,
+} from "./commands/CreateHoursOfOperationOverrideCommand";
+import {
+  type CreateInstanceCommandInput,
+  type CreateInstanceCommandOutput,
   CreateInstanceCommand,
-  CreateInstanceCommandInput,
-  CreateInstanceCommandOutput,
 } from "./commands/CreateInstanceCommand";
 import {
+  type CreateIntegrationAssociationCommandInput,
+  type CreateIntegrationAssociationCommandOutput,
   CreateIntegrationAssociationCommand,
-  CreateIntegrationAssociationCommandInput,
-  CreateIntegrationAssociationCommandOutput,
 } from "./commands/CreateIntegrationAssociationCommand";
-import { CreateQueueCommand, CreateQueueCommandInput, CreateQueueCommandOutput } from "./commands/CreateQueueCommand";
 import {
+  type CreateMetricCommandInput,
+  type CreateMetricCommandOutput,
+  CreateMetricCommand,
+} from "./commands/CreateMetricCommand";
+import {
+  type CreateNotificationCommandInput,
+  type CreateNotificationCommandOutput,
+  CreateNotificationCommand,
+} from "./commands/CreateNotificationCommand";
+import {
+  type CreateParticipantCommandInput,
+  type CreateParticipantCommandOutput,
+  CreateParticipantCommand,
+} from "./commands/CreateParticipantCommand";
+import {
+  type CreatePersistentContactAssociationCommandInput,
+  type CreatePersistentContactAssociationCommandOutput,
+  CreatePersistentContactAssociationCommand,
+} from "./commands/CreatePersistentContactAssociationCommand";
+import {
+  type CreatePredefinedAttributeCommandInput,
+  type CreatePredefinedAttributeCommandOutput,
+  CreatePredefinedAttributeCommand,
+} from "./commands/CreatePredefinedAttributeCommand";
+import {
+  type CreatePromptCommandInput,
+  type CreatePromptCommandOutput,
+  CreatePromptCommand,
+} from "./commands/CreatePromptCommand";
+import {
+  type CreatePushNotificationRegistrationCommandInput,
+  type CreatePushNotificationRegistrationCommandOutput,
+  CreatePushNotificationRegistrationCommand,
+} from "./commands/CreatePushNotificationRegistrationCommand";
+import {
+  type CreateQueueCommandInput,
+  type CreateQueueCommandOutput,
+  CreateQueueCommand,
+} from "./commands/CreateQueueCommand";
+import {
+  type CreateQuickConnectCommandInput,
+  type CreateQuickConnectCommandOutput,
   CreateQuickConnectCommand,
-  CreateQuickConnectCommandInput,
-  CreateQuickConnectCommandOutput,
 } from "./commands/CreateQuickConnectCommand";
 import {
+  type CreateRoutingProfileCommandInput,
+  type CreateRoutingProfileCommandOutput,
   CreateRoutingProfileCommand,
-  CreateRoutingProfileCommandInput,
-  CreateRoutingProfileCommandOutput,
 } from "./commands/CreateRoutingProfileCommand";
 import {
-  CreateUseCaseCommand,
-  CreateUseCaseCommandInput,
-  CreateUseCaseCommandOutput,
-} from "./commands/CreateUseCaseCommand";
-import { CreateUserCommand, CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
+  type CreateRuleCommandInput,
+  type CreateRuleCommandOutput,
+  CreateRuleCommand,
+} from "./commands/CreateRuleCommand";
 import {
+  type CreateSecurityProfileCommandInput,
+  type CreateSecurityProfileCommandOutput,
+  CreateSecurityProfileCommand,
+} from "./commands/CreateSecurityProfileCommand";
+import {
+  type CreateTaskTemplateCommandInput,
+  type CreateTaskTemplateCommandOutput,
+  CreateTaskTemplateCommand,
+} from "./commands/CreateTaskTemplateCommand";
+import {
+  type CreateTestCaseCommandInput,
+  type CreateTestCaseCommandOutput,
+  CreateTestCaseCommand,
+} from "./commands/CreateTestCaseCommand";
+import {
+  type CreateTrafficDistributionGroupCommandInput,
+  type CreateTrafficDistributionGroupCommandOutput,
+  CreateTrafficDistributionGroupCommand,
+} from "./commands/CreateTrafficDistributionGroupCommand";
+import {
+  type CreateUseCaseCommandInput,
+  type CreateUseCaseCommandOutput,
+  CreateUseCaseCommand,
+} from "./commands/CreateUseCaseCommand";
+import {
+  type CreateUserCommandInput,
+  type CreateUserCommandOutput,
+  CreateUserCommand,
+} from "./commands/CreateUserCommand";
+import {
+  type CreateUserHierarchyGroupCommandInput,
+  type CreateUserHierarchyGroupCommandOutput,
   CreateUserHierarchyGroupCommand,
-  CreateUserHierarchyGroupCommandInput,
-  CreateUserHierarchyGroupCommandOutput,
 } from "./commands/CreateUserHierarchyGroupCommand";
 import {
+  type CreateViewCommandInput,
+  type CreateViewCommandOutput,
+  CreateViewCommand,
+} from "./commands/CreateViewCommand";
+import {
+  type CreateViewVersionCommandInput,
+  type CreateViewVersionCommandOutput,
+  CreateViewVersionCommand,
+} from "./commands/CreateViewVersionCommand";
+import {
+  type CreateVocabularyCommandInput,
+  type CreateVocabularyCommandOutput,
+  CreateVocabularyCommand,
+} from "./commands/CreateVocabularyCommand";
+import {
+  type CreateWorkspaceCommandInput,
+  type CreateWorkspaceCommandOutput,
+  CreateWorkspaceCommand,
+} from "./commands/CreateWorkspaceCommand";
+import {
+  type CreateWorkspacePageCommandInput,
+  type CreateWorkspacePageCommandOutput,
+  CreateWorkspacePageCommand,
+} from "./commands/CreateWorkspacePageCommand";
+import {
+  type DeactivateEvaluationFormCommandInput,
+  type DeactivateEvaluationFormCommandOutput,
+  DeactivateEvaluationFormCommand,
+} from "./commands/DeactivateEvaluationFormCommand";
+import {
+  type DeleteAttachedFileCommandInput,
+  type DeleteAttachedFileCommandOutput,
+  DeleteAttachedFileCommand,
+} from "./commands/DeleteAttachedFileCommand";
+import {
+  type DeleteContactDataCommandInput,
+  type DeleteContactDataCommandOutput,
+  DeleteContactDataCommand,
+} from "./commands/DeleteContactDataCommand";
+import {
+  type DeleteContactEvaluationCommandInput,
+  type DeleteContactEvaluationCommandOutput,
+  DeleteContactEvaluationCommand,
+} from "./commands/DeleteContactEvaluationCommand";
+import {
+  type DeleteContactFlowAliasCommandInput,
+  type DeleteContactFlowAliasCommandOutput,
+  DeleteContactFlowAliasCommand,
+} from "./commands/DeleteContactFlowAliasCommand";
+import {
+  type DeleteContactFlowCommandInput,
+  type DeleteContactFlowCommandOutput,
+  DeleteContactFlowCommand,
+} from "./commands/DeleteContactFlowCommand";
+import {
+  type DeleteContactFlowModuleAliasCommandInput,
+  type DeleteContactFlowModuleAliasCommandOutput,
+  DeleteContactFlowModuleAliasCommand,
+} from "./commands/DeleteContactFlowModuleAliasCommand";
+import {
+  type DeleteContactFlowModuleCommandInput,
+  type DeleteContactFlowModuleCommandOutput,
+  DeleteContactFlowModuleCommand,
+} from "./commands/DeleteContactFlowModuleCommand";
+import {
+  type DeleteContactFlowModuleVersionCommandInput,
+  type DeleteContactFlowModuleVersionCommandOutput,
+  DeleteContactFlowModuleVersionCommand,
+} from "./commands/DeleteContactFlowModuleVersionCommand";
+import {
+  type DeleteContactFlowVersionCommandInput,
+  type DeleteContactFlowVersionCommandOutput,
+  DeleteContactFlowVersionCommand,
+} from "./commands/DeleteContactFlowVersionCommand";
+import {
+  type DeleteDataTableAttributeCommandInput,
+  type DeleteDataTableAttributeCommandOutput,
+  DeleteDataTableAttributeCommand,
+} from "./commands/DeleteDataTableAttributeCommand";
+import {
+  type DeleteDataTableCommandInput,
+  type DeleteDataTableCommandOutput,
+  DeleteDataTableCommand,
+} from "./commands/DeleteDataTableCommand";
+import {
+  type DeleteEmailAddressCommandInput,
+  type DeleteEmailAddressCommandOutput,
+  DeleteEmailAddressCommand,
+} from "./commands/DeleteEmailAddressCommand";
+import {
+  type DeleteEvaluationFormCommandInput,
+  type DeleteEvaluationFormCommandOutput,
+  DeleteEvaluationFormCommand,
+} from "./commands/DeleteEvaluationFormCommand";
+import {
+  type DeleteExtractionDefinitionCommandInput,
+  type DeleteExtractionDefinitionCommandOutput,
+  DeleteExtractionDefinitionCommand,
+} from "./commands/DeleteExtractionDefinitionCommand";
+import {
+  type DeleteHoursOfOperationCommandInput,
+  type DeleteHoursOfOperationCommandOutput,
   DeleteHoursOfOperationCommand,
-  DeleteHoursOfOperationCommandInput,
-  DeleteHoursOfOperationCommandOutput,
 } from "./commands/DeleteHoursOfOperationCommand";
 import {
+  type DeleteHoursOfOperationOverrideCommandInput,
+  type DeleteHoursOfOperationOverrideCommandOutput,
+  DeleteHoursOfOperationOverrideCommand,
+} from "./commands/DeleteHoursOfOperationOverrideCommand";
+import {
+  type DeleteInstanceCommandInput,
+  type DeleteInstanceCommandOutput,
   DeleteInstanceCommand,
-  DeleteInstanceCommandInput,
-  DeleteInstanceCommandOutput,
 } from "./commands/DeleteInstanceCommand";
 import {
+  type DeleteIntegrationAssociationCommandInput,
+  type DeleteIntegrationAssociationCommandOutput,
   DeleteIntegrationAssociationCommand,
-  DeleteIntegrationAssociationCommandInput,
-  DeleteIntegrationAssociationCommandOutput,
 } from "./commands/DeleteIntegrationAssociationCommand";
 import {
+  type DeleteMetricCommandInput,
+  type DeleteMetricCommandOutput,
+  DeleteMetricCommand,
+} from "./commands/DeleteMetricCommand";
+import {
+  type DeleteNotificationCommandInput,
+  type DeleteNotificationCommandOutput,
+  DeleteNotificationCommand,
+} from "./commands/DeleteNotificationCommand";
+import {
+  type DeletePredefinedAttributeCommandInput,
+  type DeletePredefinedAttributeCommandOutput,
+  DeletePredefinedAttributeCommand,
+} from "./commands/DeletePredefinedAttributeCommand";
+import {
+  type DeletePromptCommandInput,
+  type DeletePromptCommandOutput,
+  DeletePromptCommand,
+} from "./commands/DeletePromptCommand";
+import {
+  type DeletePushNotificationRegistrationCommandInput,
+  type DeletePushNotificationRegistrationCommandOutput,
+  DeletePushNotificationRegistrationCommand,
+} from "./commands/DeletePushNotificationRegistrationCommand";
+import {
+  type DeleteQueueCommandInput,
+  type DeleteQueueCommandOutput,
+  DeleteQueueCommand,
+} from "./commands/DeleteQueueCommand";
+import {
+  type DeleteQuickConnectCommandInput,
+  type DeleteQuickConnectCommandOutput,
   DeleteQuickConnectCommand,
-  DeleteQuickConnectCommandInput,
-  DeleteQuickConnectCommandOutput,
 } from "./commands/DeleteQuickConnectCommand";
 import {
-  DeleteUseCaseCommand,
-  DeleteUseCaseCommandInput,
-  DeleteUseCaseCommandOutput,
-} from "./commands/DeleteUseCaseCommand";
-import { DeleteUserCommand, DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+  type DeleteRoutingProfileCommandInput,
+  type DeleteRoutingProfileCommandOutput,
+  DeleteRoutingProfileCommand,
+} from "./commands/DeleteRoutingProfileCommand";
 import {
+  type DeleteRuleCommandInput,
+  type DeleteRuleCommandOutput,
+  DeleteRuleCommand,
+} from "./commands/DeleteRuleCommand";
+import {
+  type DeleteSecurityProfileCommandInput,
+  type DeleteSecurityProfileCommandOutput,
+  DeleteSecurityProfileCommand,
+} from "./commands/DeleteSecurityProfileCommand";
+import {
+  type DeleteSessionCommandInput,
+  type DeleteSessionCommandOutput,
+  DeleteSessionCommand,
+} from "./commands/DeleteSessionCommand";
+import {
+  type DeleteTaskTemplateCommandInput,
+  type DeleteTaskTemplateCommandOutput,
+  DeleteTaskTemplateCommand,
+} from "./commands/DeleteTaskTemplateCommand";
+import {
+  type DeleteTestCaseCommandInput,
+  type DeleteTestCaseCommandOutput,
+  DeleteTestCaseCommand,
+} from "./commands/DeleteTestCaseCommand";
+import {
+  type DeleteTrafficDistributionGroupCommandInput,
+  type DeleteTrafficDistributionGroupCommandOutput,
+  DeleteTrafficDistributionGroupCommand,
+} from "./commands/DeleteTrafficDistributionGroupCommand";
+import {
+  type DeleteUseCaseCommandInput,
+  type DeleteUseCaseCommandOutput,
+  DeleteUseCaseCommand,
+} from "./commands/DeleteUseCaseCommand";
+import {
+  type DeleteUserCommandInput,
+  type DeleteUserCommandOutput,
+  DeleteUserCommand,
+} from "./commands/DeleteUserCommand";
+import {
+  type DeleteUserHierarchyGroupCommandInput,
+  type DeleteUserHierarchyGroupCommandOutput,
   DeleteUserHierarchyGroupCommand,
-  DeleteUserHierarchyGroupCommandInput,
-  DeleteUserHierarchyGroupCommandOutput,
 } from "./commands/DeleteUserHierarchyGroupCommand";
 import {
+  type DeleteViewCommandInput,
+  type DeleteViewCommandOutput,
+  DeleteViewCommand,
+} from "./commands/DeleteViewCommand";
+import {
+  type DeleteViewVersionCommandInput,
+  type DeleteViewVersionCommandOutput,
+  DeleteViewVersionCommand,
+} from "./commands/DeleteViewVersionCommand";
+import {
+  type DeleteVocabularyCommandInput,
+  type DeleteVocabularyCommandOutput,
+  DeleteVocabularyCommand,
+} from "./commands/DeleteVocabularyCommand";
+import {
+  type DeleteWorkspaceCommandInput,
+  type DeleteWorkspaceCommandOutput,
+  DeleteWorkspaceCommand,
+} from "./commands/DeleteWorkspaceCommand";
+import {
+  type DeleteWorkspaceMediaCommandInput,
+  type DeleteWorkspaceMediaCommandOutput,
+  DeleteWorkspaceMediaCommand,
+} from "./commands/DeleteWorkspaceMediaCommand";
+import {
+  type DeleteWorkspacePageCommandInput,
+  type DeleteWorkspacePageCommandOutput,
+  DeleteWorkspacePageCommand,
+} from "./commands/DeleteWorkspacePageCommand";
+import {
+  type DescribeAgentStatusCommandInput,
+  type DescribeAgentStatusCommandOutput,
   DescribeAgentStatusCommand,
-  DescribeAgentStatusCommandInput,
-  DescribeAgentStatusCommandOutput,
 } from "./commands/DescribeAgentStatusCommand";
 import {
+  type DescribeAttachedFilesConfigurationCommandInput,
+  type DescribeAttachedFilesConfigurationCommandOutput,
+  DescribeAttachedFilesConfigurationCommand,
+} from "./commands/DescribeAttachedFilesConfigurationCommand";
+import {
+  type DescribeAuthenticationProfileCommandInput,
+  type DescribeAuthenticationProfileCommandOutput,
+  DescribeAuthenticationProfileCommand,
+} from "./commands/DescribeAuthenticationProfileCommand";
+import {
+  type DescribeContactCommandInput,
+  type DescribeContactCommandOutput,
+  DescribeContactCommand,
+} from "./commands/DescribeContactCommand";
+import {
+  type DescribeContactEvaluationCommandInput,
+  type DescribeContactEvaluationCommandOutput,
+  DescribeContactEvaluationCommand,
+} from "./commands/DescribeContactEvaluationCommand";
+import {
+  type DescribeContactFlowAliasCommandInput,
+  type DescribeContactFlowAliasCommandOutput,
+  DescribeContactFlowAliasCommand,
+} from "./commands/DescribeContactFlowAliasCommand";
+import {
+  type DescribeContactFlowCommandInput,
+  type DescribeContactFlowCommandOutput,
   DescribeContactFlowCommand,
-  DescribeContactFlowCommandInput,
-  DescribeContactFlowCommandOutput,
 } from "./commands/DescribeContactFlowCommand";
 import {
+  type DescribeContactFlowModuleAliasCommandInput,
+  type DescribeContactFlowModuleAliasCommandOutput,
+  DescribeContactFlowModuleAliasCommand,
+} from "./commands/DescribeContactFlowModuleAliasCommand";
+import {
+  type DescribeContactFlowModuleCommandInput,
+  type DescribeContactFlowModuleCommandOutput,
+  DescribeContactFlowModuleCommand,
+} from "./commands/DescribeContactFlowModuleCommand";
+import {
+  type DescribeDataTableAttributeCommandInput,
+  type DescribeDataTableAttributeCommandOutput,
+  DescribeDataTableAttributeCommand,
+} from "./commands/DescribeDataTableAttributeCommand";
+import {
+  type DescribeDataTableCommandInput,
+  type DescribeDataTableCommandOutput,
+  DescribeDataTableCommand,
+} from "./commands/DescribeDataTableCommand";
+import {
+  type DescribeEmailAddressCommandInput,
+  type DescribeEmailAddressCommandOutput,
+  DescribeEmailAddressCommand,
+} from "./commands/DescribeEmailAddressCommand";
+import {
+  type DescribeEvaluationFormCommandInput,
+  type DescribeEvaluationFormCommandOutput,
+  DescribeEvaluationFormCommand,
+} from "./commands/DescribeEvaluationFormCommand";
+import {
+  type DescribeExtractionDefinitionCommandInput,
+  type DescribeExtractionDefinitionCommandOutput,
+  DescribeExtractionDefinitionCommand,
+} from "./commands/DescribeExtractionDefinitionCommand";
+import {
+  type DescribeHoursOfOperationCommandInput,
+  type DescribeHoursOfOperationCommandOutput,
   DescribeHoursOfOperationCommand,
-  DescribeHoursOfOperationCommandInput,
-  DescribeHoursOfOperationCommandOutput,
 } from "./commands/DescribeHoursOfOperationCommand";
 import {
+  type DescribeHoursOfOperationOverrideCommandInput,
+  type DescribeHoursOfOperationOverrideCommandOutput,
+  DescribeHoursOfOperationOverrideCommand,
+} from "./commands/DescribeHoursOfOperationOverrideCommand";
+import {
+  type DescribeInstanceAttributeCommandInput,
+  type DescribeInstanceAttributeCommandOutput,
   DescribeInstanceAttributeCommand,
-  DescribeInstanceAttributeCommandInput,
-  DescribeInstanceAttributeCommandOutput,
 } from "./commands/DescribeInstanceAttributeCommand";
 import {
+  type DescribeInstanceCommandInput,
+  type DescribeInstanceCommandOutput,
   DescribeInstanceCommand,
-  DescribeInstanceCommandInput,
-  DescribeInstanceCommandOutput,
 } from "./commands/DescribeInstanceCommand";
 import {
+  type DescribeInstanceStorageConfigCommandInput,
+  type DescribeInstanceStorageConfigCommandOutput,
   DescribeInstanceStorageConfigCommand,
-  DescribeInstanceStorageConfigCommandInput,
-  DescribeInstanceStorageConfigCommandOutput,
 } from "./commands/DescribeInstanceStorageConfigCommand";
 import {
+  type DescribeMetricCommandInput,
+  type DescribeMetricCommandOutput,
+  DescribeMetricCommand,
+} from "./commands/DescribeMetricCommand";
+import {
+  type DescribeNotificationCommandInput,
+  type DescribeNotificationCommandOutput,
+  DescribeNotificationCommand,
+} from "./commands/DescribeNotificationCommand";
+import {
+  type DescribePhoneNumberCommandInput,
+  type DescribePhoneNumberCommandOutput,
+  DescribePhoneNumberCommand,
+} from "./commands/DescribePhoneNumberCommand";
+import {
+  type DescribePredefinedAttributeCommandInput,
+  type DescribePredefinedAttributeCommandOutput,
+  DescribePredefinedAttributeCommand,
+} from "./commands/DescribePredefinedAttributeCommand";
+import {
+  type DescribePromptCommandInput,
+  type DescribePromptCommandOutput,
+  DescribePromptCommand,
+} from "./commands/DescribePromptCommand";
+import {
+  type DescribeQueueCommandInput,
+  type DescribeQueueCommandOutput,
   DescribeQueueCommand,
-  DescribeQueueCommandInput,
-  DescribeQueueCommandOutput,
 } from "./commands/DescribeQueueCommand";
 import {
+  type DescribeQuickConnectCommandInput,
+  type DescribeQuickConnectCommandOutput,
   DescribeQuickConnectCommand,
-  DescribeQuickConnectCommandInput,
-  DescribeQuickConnectCommandOutput,
 } from "./commands/DescribeQuickConnectCommand";
 import {
+  type DescribeRoutingProfileCommandInput,
+  type DescribeRoutingProfileCommandOutput,
   DescribeRoutingProfileCommand,
-  DescribeRoutingProfileCommandInput,
-  DescribeRoutingProfileCommandOutput,
 } from "./commands/DescribeRoutingProfileCommand";
 import {
+  type DescribeRuleCommandInput,
+  type DescribeRuleCommandOutput,
+  DescribeRuleCommand,
+} from "./commands/DescribeRuleCommand";
+import {
+  type DescribeSecurityProfileCommandInput,
+  type DescribeSecurityProfileCommandOutput,
+  DescribeSecurityProfileCommand,
+} from "./commands/DescribeSecurityProfileCommand";
+import {
+  type DescribeTestCaseCommandInput,
+  type DescribeTestCaseCommandOutput,
+  DescribeTestCaseCommand,
+} from "./commands/DescribeTestCaseCommand";
+import {
+  type DescribeTrafficDistributionGroupCommandInput,
+  type DescribeTrafficDistributionGroupCommandOutput,
+  DescribeTrafficDistributionGroupCommand,
+} from "./commands/DescribeTrafficDistributionGroupCommand";
+import {
+  type DescribeUserCommandInput,
+  type DescribeUserCommandOutput,
   DescribeUserCommand,
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
 } from "./commands/DescribeUserCommand";
 import {
+  type DescribeUserHierarchyGroupCommandInput,
+  type DescribeUserHierarchyGroupCommandOutput,
   DescribeUserHierarchyGroupCommand,
-  DescribeUserHierarchyGroupCommandInput,
-  DescribeUserHierarchyGroupCommandOutput,
 } from "./commands/DescribeUserHierarchyGroupCommand";
 import {
+  type DescribeUserHierarchyStructureCommandInput,
+  type DescribeUserHierarchyStructureCommandOutput,
   DescribeUserHierarchyStructureCommand,
-  DescribeUserHierarchyStructureCommandInput,
-  DescribeUserHierarchyStructureCommandOutput,
 } from "./commands/DescribeUserHierarchyStructureCommand";
 import {
+  type DescribeViewCommandInput,
+  type DescribeViewCommandOutput,
+  DescribeViewCommand,
+} from "./commands/DescribeViewCommand";
+import {
+  type DescribeVocabularyCommandInput,
+  type DescribeVocabularyCommandOutput,
+  DescribeVocabularyCommand,
+} from "./commands/DescribeVocabularyCommand";
+import {
+  type DescribeWorkspaceCommandInput,
+  type DescribeWorkspaceCommandOutput,
+  DescribeWorkspaceCommand,
+} from "./commands/DescribeWorkspaceCommand";
+import {
+  type DisassociateAnalyticsDataSetCommandInput,
+  type DisassociateAnalyticsDataSetCommandOutput,
+  DisassociateAnalyticsDataSetCommand,
+} from "./commands/DisassociateAnalyticsDataSetCommand";
+import {
+  type DisassociateApprovedOriginCommandInput,
+  type DisassociateApprovedOriginCommandOutput,
   DisassociateApprovedOriginCommand,
-  DisassociateApprovedOriginCommandInput,
-  DisassociateApprovedOriginCommandOutput,
 } from "./commands/DisassociateApprovedOriginCommand";
 import {
+  type DisassociateBotCommandInput,
+  type DisassociateBotCommandOutput,
   DisassociateBotCommand,
-  DisassociateBotCommandInput,
-  DisassociateBotCommandOutput,
 } from "./commands/DisassociateBotCommand";
 import {
+  type DisassociateEmailAddressAliasCommandInput,
+  type DisassociateEmailAddressAliasCommandOutput,
+  DisassociateEmailAddressAliasCommand,
+} from "./commands/DisassociateEmailAddressAliasCommand";
+import {
+  type DisassociateFlowCommandInput,
+  type DisassociateFlowCommandOutput,
+  DisassociateFlowCommand,
+} from "./commands/DisassociateFlowCommand";
+import {
+  type DisassociateHoursOfOperationsCommandInput,
+  type DisassociateHoursOfOperationsCommandOutput,
+  DisassociateHoursOfOperationsCommand,
+} from "./commands/DisassociateHoursOfOperationsCommand";
+import {
+  type DisassociateInstanceStorageConfigCommandInput,
+  type DisassociateInstanceStorageConfigCommandOutput,
   DisassociateInstanceStorageConfigCommand,
-  DisassociateInstanceStorageConfigCommandInput,
-  DisassociateInstanceStorageConfigCommandOutput,
 } from "./commands/DisassociateInstanceStorageConfigCommand";
 import {
+  type DisassociateLambdaFunctionCommandInput,
+  type DisassociateLambdaFunctionCommandOutput,
   DisassociateLambdaFunctionCommand,
-  DisassociateLambdaFunctionCommandInput,
-  DisassociateLambdaFunctionCommandOutput,
 } from "./commands/DisassociateLambdaFunctionCommand";
 import {
+  type DisassociateLexBotCommandInput,
+  type DisassociateLexBotCommandOutput,
   DisassociateLexBotCommand,
-  DisassociateLexBotCommandInput,
-  DisassociateLexBotCommandOutput,
 } from "./commands/DisassociateLexBotCommand";
 import {
+  type DisassociatePhoneNumberContactFlowCommandInput,
+  type DisassociatePhoneNumberContactFlowCommandOutput,
+  DisassociatePhoneNumberContactFlowCommand,
+} from "./commands/DisassociatePhoneNumberContactFlowCommand";
+import {
+  type DisassociateQueueEmailAddressesCommandInput,
+  type DisassociateQueueEmailAddressesCommandOutput,
+  DisassociateQueueEmailAddressesCommand,
+} from "./commands/DisassociateQueueEmailAddressesCommand";
+import {
+  type DisassociateQueueQuickConnectsCommandInput,
+  type DisassociateQueueQuickConnectsCommandOutput,
   DisassociateQueueQuickConnectsCommand,
-  DisassociateQueueQuickConnectsCommandInput,
-  DisassociateQueueQuickConnectsCommandOutput,
 } from "./commands/DisassociateQueueQuickConnectsCommand";
 import {
+  type DisassociateRoutingProfileQueuesCommandInput,
+  type DisassociateRoutingProfileQueuesCommandOutput,
   DisassociateRoutingProfileQueuesCommand,
-  DisassociateRoutingProfileQueuesCommandInput,
-  DisassociateRoutingProfileQueuesCommandOutput,
 } from "./commands/DisassociateRoutingProfileQueuesCommand";
 import {
+  type DisassociateSecurityKeyCommandInput,
+  type DisassociateSecurityKeyCommandOutput,
   DisassociateSecurityKeyCommand,
-  DisassociateSecurityKeyCommandInput,
-  DisassociateSecurityKeyCommandOutput,
 } from "./commands/DisassociateSecurityKeyCommand";
 import {
+  type DisassociateSecurityProfilesCommandInput,
+  type DisassociateSecurityProfilesCommandOutput,
+  DisassociateSecurityProfilesCommand,
+} from "./commands/DisassociateSecurityProfilesCommand";
+import {
+  type DisassociateTrafficDistributionGroupUserCommandInput,
+  type DisassociateTrafficDistributionGroupUserCommandOutput,
+  DisassociateTrafficDistributionGroupUserCommand,
+} from "./commands/DisassociateTrafficDistributionGroupUserCommand";
+import {
+  type DisassociateUserProficienciesCommandInput,
+  type DisassociateUserProficienciesCommandOutput,
+  DisassociateUserProficienciesCommand,
+} from "./commands/DisassociateUserProficienciesCommand";
+import {
+  type DisassociateWorkspaceCommandInput,
+  type DisassociateWorkspaceCommandOutput,
+  DisassociateWorkspaceCommand,
+} from "./commands/DisassociateWorkspaceCommand";
+import {
+  type DismissUserContactCommandInput,
+  type DismissUserContactCommandOutput,
+  DismissUserContactCommand,
+} from "./commands/DismissUserContactCommand";
+import {
+  type EvaluateDataTableValuesCommandInput,
+  type EvaluateDataTableValuesCommandOutput,
+  EvaluateDataTableValuesCommand,
+} from "./commands/EvaluateDataTableValuesCommand";
+import {
+  type GetAttachedFileCommandInput,
+  type GetAttachedFileCommandOutput,
+  GetAttachedFileCommand,
+} from "./commands/GetAttachedFileCommand";
+import {
+  type GetContactAttributesCommandInput,
+  type GetContactAttributesCommandOutput,
   GetContactAttributesCommand,
-  GetContactAttributesCommandInput,
-  GetContactAttributesCommandOutput,
 } from "./commands/GetContactAttributesCommand";
 import {
+  type GetContactMetricsCommandInput,
+  type GetContactMetricsCommandOutput,
+  GetContactMetricsCommand,
+} from "./commands/GetContactMetricsCommand";
+import {
+  type GetCrossRegionRoutingCommandInput,
+  type GetCrossRegionRoutingCommandOutput,
+  GetCrossRegionRoutingCommand,
+} from "./commands/GetCrossRegionRoutingCommand";
+import {
+  type GetCurrentMetricDataCommandInput,
+  type GetCurrentMetricDataCommandOutput,
   GetCurrentMetricDataCommand,
-  GetCurrentMetricDataCommandInput,
-  GetCurrentMetricDataCommandOutput,
 } from "./commands/GetCurrentMetricDataCommand";
 import {
+  type GetCurrentUserDataCommandInput,
+  type GetCurrentUserDataCommandOutput,
+  GetCurrentUserDataCommand,
+} from "./commands/GetCurrentUserDataCommand";
+import {
+  type GetEffectiveHoursOfOperationsCommandInput,
+  type GetEffectiveHoursOfOperationsCommandOutput,
+  GetEffectiveHoursOfOperationsCommand,
+} from "./commands/GetEffectiveHoursOfOperationsCommand";
+import {
+  type GetEvaluationFormValidationCommandInput,
+  type GetEvaluationFormValidationCommandOutput,
+  GetEvaluationFormValidationCommand,
+} from "./commands/GetEvaluationFormValidationCommand";
+import {
+  type GetFederationTokenCommandInput,
+  type GetFederationTokenCommandOutput,
   GetFederationTokenCommand,
-  GetFederationTokenCommandInput,
-  GetFederationTokenCommandOutput,
 } from "./commands/GetFederationTokenCommand";
 import {
+  type GetFlowAssociationCommandInput,
+  type GetFlowAssociationCommandOutput,
+  GetFlowAssociationCommand,
+} from "./commands/GetFlowAssociationCommand";
+import {
+  type GetMetricDataCommandInput,
+  type GetMetricDataCommandOutput,
   GetMetricDataCommand,
-  GetMetricDataCommandInput,
-  GetMetricDataCommandOutput,
 } from "./commands/GetMetricDataCommand";
 import {
+  type GetMetricDataV2CommandInput,
+  type GetMetricDataV2CommandOutput,
+  GetMetricDataV2Command,
+} from "./commands/GetMetricDataV2Command";
+import {
+  type GetPromptFileCommandInput,
+  type GetPromptFileCommandOutput,
+  GetPromptFileCommand,
+} from "./commands/GetPromptFileCommand";
+import {
+  type GetTaskTemplateCommandInput,
+  type GetTaskTemplateCommandOutput,
+  GetTaskTemplateCommand,
+} from "./commands/GetTaskTemplateCommand";
+import {
+  type GetTestCaseExecutionSummaryCommandInput,
+  type GetTestCaseExecutionSummaryCommandOutput,
+  GetTestCaseExecutionSummaryCommand,
+} from "./commands/GetTestCaseExecutionSummaryCommand";
+import {
+  type GetTrafficDistributionCommandInput,
+  type GetTrafficDistributionCommandOutput,
+  GetTrafficDistributionCommand,
+} from "./commands/GetTrafficDistributionCommand";
+import {
+  type ImportPhoneNumberCommandInput,
+  type ImportPhoneNumberCommandOutput,
+  ImportPhoneNumberCommand,
+} from "./commands/ImportPhoneNumberCommand";
+import {
+  type ImportWorkspaceMediaCommandInput,
+  type ImportWorkspaceMediaCommandOutput,
+  ImportWorkspaceMediaCommand,
+} from "./commands/ImportWorkspaceMediaCommand";
+import {
+  type ListAgentStatusesCommandInput,
+  type ListAgentStatusesCommandOutput,
   ListAgentStatusesCommand,
-  ListAgentStatusesCommandInput,
-  ListAgentStatusesCommandOutput,
 } from "./commands/ListAgentStatusesCommand";
 import {
-  ListApprovedOriginsCommand,
-  ListApprovedOriginsCommandInput,
-  ListApprovedOriginsCommandOutput,
-} from "./commands/ListApprovedOriginsCommand";
-import { ListBotsCommand, ListBotsCommandInput, ListBotsCommandOutput } from "./commands/ListBotsCommand";
+  type ListAnalyticsDataAssociationsCommandInput,
+  type ListAnalyticsDataAssociationsCommandOutput,
+  ListAnalyticsDataAssociationsCommand,
+} from "./commands/ListAnalyticsDataAssociationsCommand";
 import {
+  type ListAnalyticsDataLakeDataSetsCommandInput,
+  type ListAnalyticsDataLakeDataSetsCommandOutput,
+  ListAnalyticsDataLakeDataSetsCommand,
+} from "./commands/ListAnalyticsDataLakeDataSetsCommand";
+import {
+  type ListApprovedOriginsCommandInput,
+  type ListApprovedOriginsCommandOutput,
+  ListApprovedOriginsCommand,
+} from "./commands/ListApprovedOriginsCommand";
+import {
+  type ListAssociatedContactsCommandInput,
+  type ListAssociatedContactsCommandOutput,
+  ListAssociatedContactsCommand,
+} from "./commands/ListAssociatedContactsCommand";
+import {
+  type ListAttachedFilesConfigurationsCommandInput,
+  type ListAttachedFilesConfigurationsCommandOutput,
+  ListAttachedFilesConfigurationsCommand,
+} from "./commands/ListAttachedFilesConfigurationsCommand";
+import {
+  type ListAuthenticationProfilesCommandInput,
+  type ListAuthenticationProfilesCommandOutput,
+  ListAuthenticationProfilesCommand,
+} from "./commands/ListAuthenticationProfilesCommand";
+import { type ListBotsCommandInput, type ListBotsCommandOutput, ListBotsCommand } from "./commands/ListBotsCommand";
+import {
+  type ListChildHoursOfOperationsCommandInput,
+  type ListChildHoursOfOperationsCommandOutput,
+  ListChildHoursOfOperationsCommand,
+} from "./commands/ListChildHoursOfOperationsCommand";
+import {
+  type ListContactEvaluationsCommandInput,
+  type ListContactEvaluationsCommandOutput,
+  ListContactEvaluationsCommand,
+} from "./commands/ListContactEvaluationsCommand";
+import {
+  type ListContactFlowAliasesCommandInput,
+  type ListContactFlowAliasesCommandOutput,
+  ListContactFlowAliasesCommand,
+} from "./commands/ListContactFlowAliasesCommand";
+import {
+  type ListContactFlowModuleAliasesCommandInput,
+  type ListContactFlowModuleAliasesCommandOutput,
+  ListContactFlowModuleAliasesCommand,
+} from "./commands/ListContactFlowModuleAliasesCommand";
+import {
+  type ListContactFlowModulesCommandInput,
+  type ListContactFlowModulesCommandOutput,
+  ListContactFlowModulesCommand,
+} from "./commands/ListContactFlowModulesCommand";
+import {
+  type ListContactFlowModuleVersionsCommandInput,
+  type ListContactFlowModuleVersionsCommandOutput,
+  ListContactFlowModuleVersionsCommand,
+} from "./commands/ListContactFlowModuleVersionsCommand";
+import {
+  type ListContactFlowsCommandInput,
+  type ListContactFlowsCommandOutput,
   ListContactFlowsCommand,
-  ListContactFlowsCommandInput,
-  ListContactFlowsCommandOutput,
 } from "./commands/ListContactFlowsCommand";
 import {
+  type ListContactFlowVersionsCommandInput,
+  type ListContactFlowVersionsCommandOutput,
+  ListContactFlowVersionsCommand,
+} from "./commands/ListContactFlowVersionsCommand";
+import {
+  type ListContactReferencesCommandInput,
+  type ListContactReferencesCommandOutput,
+  ListContactReferencesCommand,
+} from "./commands/ListContactReferencesCommand";
+import {
+  type ListDataTableAttributesCommandInput,
+  type ListDataTableAttributesCommandOutput,
+  ListDataTableAttributesCommand,
+} from "./commands/ListDataTableAttributesCommand";
+import {
+  type ListDataTablePrimaryValuesCommandInput,
+  type ListDataTablePrimaryValuesCommandOutput,
+  ListDataTablePrimaryValuesCommand,
+} from "./commands/ListDataTablePrimaryValuesCommand";
+import {
+  type ListDataTablesCommandInput,
+  type ListDataTablesCommandOutput,
+  ListDataTablesCommand,
+} from "./commands/ListDataTablesCommand";
+import {
+  type ListDataTableValuesCommandInput,
+  type ListDataTableValuesCommandOutput,
+  ListDataTableValuesCommand,
+} from "./commands/ListDataTableValuesCommand";
+import {
+  type ListDefaultVocabulariesCommandInput,
+  type ListDefaultVocabulariesCommandOutput,
+  ListDefaultVocabulariesCommand,
+} from "./commands/ListDefaultVocabulariesCommand";
+import {
+  type ListEntitySecurityProfilesCommandInput,
+  type ListEntitySecurityProfilesCommandOutput,
+  ListEntitySecurityProfilesCommand,
+} from "./commands/ListEntitySecurityProfilesCommand";
+import {
+  type ListEvaluationFormAIVersionsCommandInput,
+  type ListEvaluationFormAIVersionsCommandOutput,
+  ListEvaluationFormAIVersionsCommand,
+} from "./commands/ListEvaluationFormAIVersionsCommand";
+import {
+  type ListEvaluationFormsCommandInput,
+  type ListEvaluationFormsCommandOutput,
+  ListEvaluationFormsCommand,
+} from "./commands/ListEvaluationFormsCommand";
+import {
+  type ListEvaluationFormVersionsCommandInput,
+  type ListEvaluationFormVersionsCommandOutput,
+  ListEvaluationFormVersionsCommand,
+} from "./commands/ListEvaluationFormVersionsCommand";
+import {
+  type ListExtractionDefinitionsCommandInput,
+  type ListExtractionDefinitionsCommandOutput,
+  ListExtractionDefinitionsCommand,
+} from "./commands/ListExtractionDefinitionsCommand";
+import {
+  type ListFlowAssociationsCommandInput,
+  type ListFlowAssociationsCommandOutput,
+  ListFlowAssociationsCommand,
+} from "./commands/ListFlowAssociationsCommand";
+import {
+  type ListHoursOfOperationOverridesCommandInput,
+  type ListHoursOfOperationOverridesCommandOutput,
+  ListHoursOfOperationOverridesCommand,
+} from "./commands/ListHoursOfOperationOverridesCommand";
+import {
+  type ListHoursOfOperationsCommandInput,
+  type ListHoursOfOperationsCommandOutput,
   ListHoursOfOperationsCommand,
-  ListHoursOfOperationsCommandInput,
-  ListHoursOfOperationsCommandOutput,
 } from "./commands/ListHoursOfOperationsCommand";
 import {
+  type ListInstanceAttributesCommandInput,
+  type ListInstanceAttributesCommandOutput,
   ListInstanceAttributesCommand,
-  ListInstanceAttributesCommandInput,
-  ListInstanceAttributesCommandOutput,
 } from "./commands/ListInstanceAttributesCommand";
 import {
+  type ListInstancesCommandInput,
+  type ListInstancesCommandOutput,
   ListInstancesCommand,
-  ListInstancesCommandInput,
-  ListInstancesCommandOutput,
 } from "./commands/ListInstancesCommand";
 import {
+  type ListInstanceStorageConfigsCommandInput,
+  type ListInstanceStorageConfigsCommandOutput,
   ListInstanceStorageConfigsCommand,
-  ListInstanceStorageConfigsCommandInput,
-  ListInstanceStorageConfigsCommandOutput,
 } from "./commands/ListInstanceStorageConfigsCommand";
 import {
+  type ListIntegrationAssociationsCommandInput,
+  type ListIntegrationAssociationsCommandOutput,
   ListIntegrationAssociationsCommand,
-  ListIntegrationAssociationsCommandInput,
-  ListIntegrationAssociationsCommandOutput,
 } from "./commands/ListIntegrationAssociationsCommand";
 import {
+  type ListLambdaFunctionsCommandInput,
+  type ListLambdaFunctionsCommandOutput,
   ListLambdaFunctionsCommand,
-  ListLambdaFunctionsCommandInput,
-  ListLambdaFunctionsCommandOutput,
 } from "./commands/ListLambdaFunctionsCommand";
-import { ListLexBotsCommand, ListLexBotsCommandInput, ListLexBotsCommandOutput } from "./commands/ListLexBotsCommand";
 import {
+  type ListLexBotsCommandInput,
+  type ListLexBotsCommandOutput,
+  ListLexBotsCommand,
+} from "./commands/ListLexBotsCommand";
+import {
+  type ListMetricsCommandInput,
+  type ListMetricsCommandOutput,
+  ListMetricsCommand,
+} from "./commands/ListMetricsCommand";
+import {
+  type ListNotificationsCommandInput,
+  type ListNotificationsCommandOutput,
+  ListNotificationsCommand,
+} from "./commands/ListNotificationsCommand";
+import {
+  type ListPhoneNumbersCommandInput,
+  type ListPhoneNumbersCommandOutput,
   ListPhoneNumbersCommand,
-  ListPhoneNumbersCommandInput,
-  ListPhoneNumbersCommandOutput,
 } from "./commands/ListPhoneNumbersCommand";
-import { ListPromptsCommand, ListPromptsCommandInput, ListPromptsCommandOutput } from "./commands/ListPromptsCommand";
 import {
+  type ListPhoneNumbersV2CommandInput,
+  type ListPhoneNumbersV2CommandOutput,
+  ListPhoneNumbersV2Command,
+} from "./commands/ListPhoneNumbersV2Command";
+import {
+  type ListPredefinedAttributesCommandInput,
+  type ListPredefinedAttributesCommandOutput,
+  ListPredefinedAttributesCommand,
+} from "./commands/ListPredefinedAttributesCommand";
+import {
+  type ListPromptsCommandInput,
+  type ListPromptsCommandOutput,
+  ListPromptsCommand,
+} from "./commands/ListPromptsCommand";
+import {
+  type ListQueueEmailAddressesCommandInput,
+  type ListQueueEmailAddressesCommandOutput,
+  ListQueueEmailAddressesCommand,
+} from "./commands/ListQueueEmailAddressesCommand";
+import {
+  type ListQueueQuickConnectsCommandInput,
+  type ListQueueQuickConnectsCommandOutput,
   ListQueueQuickConnectsCommand,
-  ListQueueQuickConnectsCommandInput,
-  ListQueueQuickConnectsCommandOutput,
 } from "./commands/ListQueueQuickConnectsCommand";
-import { ListQueuesCommand, ListQueuesCommandInput, ListQueuesCommandOutput } from "./commands/ListQueuesCommand";
 import {
+  type ListQueuesCommandInput,
+  type ListQueuesCommandOutput,
+  ListQueuesCommand,
+} from "./commands/ListQueuesCommand";
+import {
+  type ListQuickConnectsCommandInput,
+  type ListQuickConnectsCommandOutput,
   ListQuickConnectsCommand,
-  ListQuickConnectsCommandInput,
-  ListQuickConnectsCommandOutput,
 } from "./commands/ListQuickConnectsCommand";
 import {
+  type ListRealtimeContactAnalysisSegmentsV2CommandInput,
+  type ListRealtimeContactAnalysisSegmentsV2CommandOutput,
+  ListRealtimeContactAnalysisSegmentsV2Command,
+} from "./commands/ListRealtimeContactAnalysisSegmentsV2Command";
+import {
+  type ListReplicationFindingsCommandInput,
+  type ListReplicationFindingsCommandOutput,
+  ListReplicationFindingsCommand,
+} from "./commands/ListReplicationFindingsCommand";
+import {
+  type ListRoutingProfileManualAssignmentQueuesCommandInput,
+  type ListRoutingProfileManualAssignmentQueuesCommandOutput,
+  ListRoutingProfileManualAssignmentQueuesCommand,
+} from "./commands/ListRoutingProfileManualAssignmentQueuesCommand";
+import {
+  type ListRoutingProfileQueuesCommandInput,
+  type ListRoutingProfileQueuesCommandOutput,
   ListRoutingProfileQueuesCommand,
-  ListRoutingProfileQueuesCommandInput,
-  ListRoutingProfileQueuesCommandOutput,
 } from "./commands/ListRoutingProfileQueuesCommand";
 import {
+  type ListRoutingProfilesCommandInput,
+  type ListRoutingProfilesCommandOutput,
   ListRoutingProfilesCommand,
-  ListRoutingProfilesCommandInput,
-  ListRoutingProfilesCommandOutput,
 } from "./commands/ListRoutingProfilesCommand";
+import { type ListRulesCommandInput, type ListRulesCommandOutput, ListRulesCommand } from "./commands/ListRulesCommand";
 import {
+  type ListSecurityKeysCommandInput,
+  type ListSecurityKeysCommandOutput,
   ListSecurityKeysCommand,
-  ListSecurityKeysCommandInput,
-  ListSecurityKeysCommandOutput,
 } from "./commands/ListSecurityKeysCommand";
 import {
+  type ListSecurityProfileAIAgentsCommandInput,
+  type ListSecurityProfileAIAgentsCommandOutput,
+  ListSecurityProfileAIAgentsCommand,
+} from "./commands/ListSecurityProfileAIAgentsCommand";
+import {
+  type ListSecurityProfileApplicationsCommandInput,
+  type ListSecurityProfileApplicationsCommandOutput,
+  ListSecurityProfileApplicationsCommand,
+} from "./commands/ListSecurityProfileApplicationsCommand";
+import {
+  type ListSecurityProfileFlowModulesCommandInput,
+  type ListSecurityProfileFlowModulesCommandOutput,
+  ListSecurityProfileFlowModulesCommand,
+} from "./commands/ListSecurityProfileFlowModulesCommand";
+import {
+  type ListSecurityProfilePermissionsCommandInput,
+  type ListSecurityProfilePermissionsCommandOutput,
+  ListSecurityProfilePermissionsCommand,
+} from "./commands/ListSecurityProfilePermissionsCommand";
+import {
+  type ListSecurityProfilesCommandInput,
+  type ListSecurityProfilesCommandOutput,
   ListSecurityProfilesCommand,
-  ListSecurityProfilesCommandInput,
-  ListSecurityProfilesCommandOutput,
 } from "./commands/ListSecurityProfilesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTaskTemplatesCommandInput,
+  type ListTaskTemplatesCommandOutput,
+  ListTaskTemplatesCommand,
+} from "./commands/ListTaskTemplatesCommand";
+import {
+  type ListTestCaseExecutionRecordsCommandInput,
+  type ListTestCaseExecutionRecordsCommandOutput,
+  ListTestCaseExecutionRecordsCommand,
+} from "./commands/ListTestCaseExecutionRecordsCommand";
+import {
+  type ListTestCaseExecutionsCommandInput,
+  type ListTestCaseExecutionsCommandOutput,
+  ListTestCaseExecutionsCommand,
+} from "./commands/ListTestCaseExecutionsCommand";
+import {
+  type ListTestCasesCommandInput,
+  type ListTestCasesCommandOutput,
+  ListTestCasesCommand,
+} from "./commands/ListTestCasesCommand";
+import {
+  type ListTrafficDistributionGroupsCommandInput,
+  type ListTrafficDistributionGroupsCommandOutput,
+  ListTrafficDistributionGroupsCommand,
+} from "./commands/ListTrafficDistributionGroupsCommand";
+import {
+  type ListTrafficDistributionGroupUsersCommandInput,
+  type ListTrafficDistributionGroupUsersCommandOutput,
+  ListTrafficDistributionGroupUsersCommand,
+} from "./commands/ListTrafficDistributionGroupUsersCommand";
+import {
+  type ListUseCasesCommandInput,
+  type ListUseCasesCommandOutput,
   ListUseCasesCommand,
-  ListUseCasesCommandInput,
-  ListUseCasesCommandOutput,
 } from "./commands/ListUseCasesCommand";
 import {
+  type ListUserHierarchyGroupsCommandInput,
+  type ListUserHierarchyGroupsCommandOutput,
   ListUserHierarchyGroupsCommand,
-  ListUserHierarchyGroupsCommandInput,
-  ListUserHierarchyGroupsCommandOutput,
 } from "./commands/ListUserHierarchyGroupsCommand";
-import { ListUsersCommand, ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
 import {
+  type ListUserNotificationsCommandInput,
+  type ListUserNotificationsCommandOutput,
+  ListUserNotificationsCommand,
+} from "./commands/ListUserNotificationsCommand";
+import {
+  type ListUserProficienciesCommandInput,
+  type ListUserProficienciesCommandOutput,
+  ListUserProficienciesCommand,
+} from "./commands/ListUserProficienciesCommand";
+import { type ListUsersCommandInput, type ListUsersCommandOutput, ListUsersCommand } from "./commands/ListUsersCommand";
+import { type ListViewsCommandInput, type ListViewsCommandOutput, ListViewsCommand } from "./commands/ListViewsCommand";
+import {
+  type ListViewVersionsCommandInput,
+  type ListViewVersionsCommandOutput,
+  ListViewVersionsCommand,
+} from "./commands/ListViewVersionsCommand";
+import {
+  type ListWorkspaceMediaCommandInput,
+  type ListWorkspaceMediaCommandOutput,
+  ListWorkspaceMediaCommand,
+} from "./commands/ListWorkspaceMediaCommand";
+import {
+  type ListWorkspacePagesCommandInput,
+  type ListWorkspacePagesCommandOutput,
+  ListWorkspacePagesCommand,
+} from "./commands/ListWorkspacePagesCommand";
+import {
+  type ListWorkspacesCommandInput,
+  type ListWorkspacesCommandOutput,
+  ListWorkspacesCommand,
+} from "./commands/ListWorkspacesCommand";
+import {
+  type MonitorContactCommandInput,
+  type MonitorContactCommandOutput,
+  MonitorContactCommand,
+} from "./commands/MonitorContactCommand";
+import {
+  type PauseContactCommandInput,
+  type PauseContactCommandOutput,
+  PauseContactCommand,
+} from "./commands/PauseContactCommand";
+import {
+  type PutUserStatusCommandInput,
+  type PutUserStatusCommandOutput,
+  PutUserStatusCommand,
+} from "./commands/PutUserStatusCommand";
+import {
+  type ReleasePhoneNumberCommandInput,
+  type ReleasePhoneNumberCommandOutput,
+  ReleasePhoneNumberCommand,
+} from "./commands/ReleasePhoneNumberCommand";
+import {
+  type ReplicateInstanceCommandInput,
+  type ReplicateInstanceCommandOutput,
+  ReplicateInstanceCommand,
+} from "./commands/ReplicateInstanceCommand";
+import {
+  type ResumeContactCommandInput,
+  type ResumeContactCommandOutput,
+  ResumeContactCommand,
+} from "./commands/ResumeContactCommand";
+import {
+  type ResumeContactRecordingCommandInput,
+  type ResumeContactRecordingCommandOutput,
   ResumeContactRecordingCommand,
-  ResumeContactRecordingCommandInput,
-  ResumeContactRecordingCommandOutput,
 } from "./commands/ResumeContactRecordingCommand";
 import {
+  type SearchAgentStatusesCommandInput,
+  type SearchAgentStatusesCommandOutput,
+  SearchAgentStatusesCommand,
+} from "./commands/SearchAgentStatusesCommand";
+import {
+  type SearchAvailablePhoneNumbersCommandInput,
+  type SearchAvailablePhoneNumbersCommandOutput,
+  SearchAvailablePhoneNumbersCommand,
+} from "./commands/SearchAvailablePhoneNumbersCommand";
+import {
+  type SearchContactEvaluationsCommandInput,
+  type SearchContactEvaluationsCommandOutput,
+  SearchContactEvaluationsCommand,
+} from "./commands/SearchContactEvaluationsCommand";
+import {
+  type SearchContactFlowModulesCommandInput,
+  type SearchContactFlowModulesCommandOutput,
+  SearchContactFlowModulesCommand,
+} from "./commands/SearchContactFlowModulesCommand";
+import {
+  type SearchContactFlowsCommandInput,
+  type SearchContactFlowsCommandOutput,
+  SearchContactFlowsCommand,
+} from "./commands/SearchContactFlowsCommand";
+import {
+  type SearchContactsCommandInput,
+  type SearchContactsCommandOutput,
+  SearchContactsCommand,
+} from "./commands/SearchContactsCommand";
+import {
+  type SearchDataTablesCommandInput,
+  type SearchDataTablesCommandOutput,
+  SearchDataTablesCommand,
+} from "./commands/SearchDataTablesCommand";
+import {
+  type SearchEmailAddressesCommandInput,
+  type SearchEmailAddressesCommandOutput,
+  SearchEmailAddressesCommand,
+} from "./commands/SearchEmailAddressesCommand";
+import {
+  type SearchEvaluationFormsCommandInput,
+  type SearchEvaluationFormsCommandOutput,
+  SearchEvaluationFormsCommand,
+} from "./commands/SearchEvaluationFormsCommand";
+import {
+  type SearchHoursOfOperationOverridesCommandInput,
+  type SearchHoursOfOperationOverridesCommandOutput,
+  SearchHoursOfOperationOverridesCommand,
+} from "./commands/SearchHoursOfOperationOverridesCommand";
+import {
+  type SearchHoursOfOperationsCommandInput,
+  type SearchHoursOfOperationsCommandOutput,
+  SearchHoursOfOperationsCommand,
+} from "./commands/SearchHoursOfOperationsCommand";
+import {
+  type SearchMetricsCommandInput,
+  type SearchMetricsCommandOutput,
+  SearchMetricsCommand,
+} from "./commands/SearchMetricsCommand";
+import {
+  type SearchNotificationsCommandInput,
+  type SearchNotificationsCommandOutput,
+  SearchNotificationsCommand,
+} from "./commands/SearchNotificationsCommand";
+import {
+  type SearchPredefinedAttributesCommandInput,
+  type SearchPredefinedAttributesCommandOutput,
+  SearchPredefinedAttributesCommand,
+} from "./commands/SearchPredefinedAttributesCommand";
+import {
+  type SearchPromptsCommandInput,
+  type SearchPromptsCommandOutput,
+  SearchPromptsCommand,
+} from "./commands/SearchPromptsCommand";
+import {
+  type SearchQueuesCommandInput,
+  type SearchQueuesCommandOutput,
+  SearchQueuesCommand,
+} from "./commands/SearchQueuesCommand";
+import {
+  type SearchQuickConnectsCommandInput,
+  type SearchQuickConnectsCommandOutput,
+  SearchQuickConnectsCommand,
+} from "./commands/SearchQuickConnectsCommand";
+import {
+  type SearchResourceTagsCommandInput,
+  type SearchResourceTagsCommandOutput,
+  SearchResourceTagsCommand,
+} from "./commands/SearchResourceTagsCommand";
+import {
+  type SearchRoutingProfilesCommandInput,
+  type SearchRoutingProfilesCommandOutput,
+  SearchRoutingProfilesCommand,
+} from "./commands/SearchRoutingProfilesCommand";
+import {
+  type SearchRulesCommandInput,
+  type SearchRulesCommandOutput,
+  SearchRulesCommand,
+} from "./commands/SearchRulesCommand";
+import {
+  type SearchSecurityProfilesCommandInput,
+  type SearchSecurityProfilesCommandOutput,
+  SearchSecurityProfilesCommand,
+} from "./commands/SearchSecurityProfilesCommand";
+import {
+  type SearchTestCasesCommandInput,
+  type SearchTestCasesCommandOutput,
+  SearchTestCasesCommand,
+} from "./commands/SearchTestCasesCommand";
+import {
+  type SearchUserHierarchyGroupsCommandInput,
+  type SearchUserHierarchyGroupsCommandOutput,
+  SearchUserHierarchyGroupsCommand,
+} from "./commands/SearchUserHierarchyGroupsCommand";
+import {
+  type SearchUsersCommandInput,
+  type SearchUsersCommandOutput,
+  SearchUsersCommand,
+} from "./commands/SearchUsersCommand";
+import {
+  type SearchViewsCommandInput,
+  type SearchViewsCommandOutput,
+  SearchViewsCommand,
+} from "./commands/SearchViewsCommand";
+import {
+  type SearchVocabulariesCommandInput,
+  type SearchVocabulariesCommandOutput,
+  SearchVocabulariesCommand,
+} from "./commands/SearchVocabulariesCommand";
+import {
+  type SearchWorkspaceAssociationsCommandInput,
+  type SearchWorkspaceAssociationsCommandOutput,
+  SearchWorkspaceAssociationsCommand,
+} from "./commands/SearchWorkspaceAssociationsCommand";
+import {
+  type SearchWorkspacesCommandInput,
+  type SearchWorkspacesCommandOutput,
+  SearchWorkspacesCommand,
+} from "./commands/SearchWorkspacesCommand";
+import {
+  type SendChatIntegrationEventCommandInput,
+  type SendChatIntegrationEventCommandOutput,
+  SendChatIntegrationEventCommand,
+} from "./commands/SendChatIntegrationEventCommand";
+import {
+  type SendOutboundEmailCommandInput,
+  type SendOutboundEmailCommandOutput,
+  SendOutboundEmailCommand,
+} from "./commands/SendOutboundEmailCommand";
+import {
+  type SendOutboundWebNotificationCommandInput,
+  type SendOutboundWebNotificationCommandOutput,
+  SendOutboundWebNotificationCommand,
+} from "./commands/SendOutboundWebNotificationCommand";
+import {
+  type StartAssistantContactCommandInput,
+  type StartAssistantContactCommandOutput,
+  StartAssistantContactCommand,
+} from "./commands/StartAssistantContactCommand";
+import {
+  type StartAttachedFileUploadCommandInput,
+  type StartAttachedFileUploadCommandOutput,
+  StartAttachedFileUploadCommand,
+} from "./commands/StartAttachedFileUploadCommand";
+import {
+  type StartChatContactCommandInput,
+  type StartChatContactCommandOutput,
   StartChatContactCommand,
-  StartChatContactCommandInput,
-  StartChatContactCommandOutput,
 } from "./commands/StartChatContactCommand";
 import {
+  type StartContactConversationalAnalyticsJobCommandInput,
+  type StartContactConversationalAnalyticsJobCommandOutput,
+  StartContactConversationalAnalyticsJobCommand,
+} from "./commands/StartContactConversationalAnalyticsJobCommand";
+import {
+  type StartContactEvaluationCommandInput,
+  type StartContactEvaluationCommandOutput,
+  StartContactEvaluationCommand,
+} from "./commands/StartContactEvaluationCommand";
+import {
+  type StartContactMediaProcessingCommandInput,
+  type StartContactMediaProcessingCommandOutput,
+  StartContactMediaProcessingCommand,
+} from "./commands/StartContactMediaProcessingCommand";
+import {
+  type StartContactRecordingCommandInput,
+  type StartContactRecordingCommandOutput,
   StartContactRecordingCommand,
-  StartContactRecordingCommandInput,
-  StartContactRecordingCommandOutput,
 } from "./commands/StartContactRecordingCommand";
 import {
+  type StartContactStreamingCommandInput,
+  type StartContactStreamingCommandOutput,
+  StartContactStreamingCommand,
+} from "./commands/StartContactStreamingCommand";
+import {
+  type StartEmailContactCommandInput,
+  type StartEmailContactCommandOutput,
+  StartEmailContactCommand,
+} from "./commands/StartEmailContactCommand";
+import {
+  type StartEvaluationFormValidationCommandInput,
+  type StartEvaluationFormValidationCommandOutput,
+  StartEvaluationFormValidationCommand,
+} from "./commands/StartEvaluationFormValidationCommand";
+import {
+  type StartOutboundChatContactCommandInput,
+  type StartOutboundChatContactCommandOutput,
+  StartOutboundChatContactCommand,
+} from "./commands/StartOutboundChatContactCommand";
+import {
+  type StartOutboundEmailContactCommandInput,
+  type StartOutboundEmailContactCommandOutput,
+  StartOutboundEmailContactCommand,
+} from "./commands/StartOutboundEmailContactCommand";
+import {
+  type StartOutboundVoiceContactCommandInput,
+  type StartOutboundVoiceContactCommandOutput,
   StartOutboundVoiceContactCommand,
-  StartOutboundVoiceContactCommandInput,
-  StartOutboundVoiceContactCommandOutput,
 } from "./commands/StartOutboundVoiceContactCommand";
 import {
-  StartTaskContactCommand,
-  StartTaskContactCommandInput,
-  StartTaskContactCommandOutput,
-} from "./commands/StartTaskContactCommand";
-import { StopContactCommand, StopContactCommandInput, StopContactCommandOutput } from "./commands/StopContactCommand";
+  type StartScreenSharingCommandInput,
+  type StartScreenSharingCommandOutput,
+  StartScreenSharingCommand,
+} from "./commands/StartScreenSharingCommand";
 import {
+  type StartTaskContactCommandInput,
+  type StartTaskContactCommandOutput,
+  StartTaskContactCommand,
+} from "./commands/StartTaskContactCommand";
+import {
+  type StartTestCaseExecutionCommandInput,
+  type StartTestCaseExecutionCommandOutput,
+  StartTestCaseExecutionCommand,
+} from "./commands/StartTestCaseExecutionCommand";
+import {
+  type StartWebRTCContactCommandInput,
+  type StartWebRTCContactCommandOutput,
+  StartWebRTCContactCommand,
+} from "./commands/StartWebRTCContactCommand";
+import {
+  type StopContactCommandInput,
+  type StopContactCommandOutput,
+  StopContactCommand,
+} from "./commands/StopContactCommand";
+import {
+  type StopContactMediaProcessingCommandInput,
+  type StopContactMediaProcessingCommandOutput,
+  StopContactMediaProcessingCommand,
+} from "./commands/StopContactMediaProcessingCommand";
+import {
+  type StopContactRecordingCommandInput,
+  type StopContactRecordingCommandOutput,
   StopContactRecordingCommand,
-  StopContactRecordingCommandInput,
-  StopContactRecordingCommandOutput,
 } from "./commands/StopContactRecordingCommand";
 import {
-  SuspendContactRecordingCommand,
-  SuspendContactRecordingCommandInput,
-  SuspendContactRecordingCommandOutput,
-} from "./commands/SuspendContactRecordingCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type StopContactStreamingCommandInput,
+  type StopContactStreamingCommandOutput,
+  StopContactStreamingCommand,
+} from "./commands/StopContactStreamingCommand";
 import {
+  type StopTestCaseExecutionCommandInput,
+  type StopTestCaseExecutionCommandOutput,
+  StopTestCaseExecutionCommand,
+} from "./commands/StopTestCaseExecutionCommand";
+import {
+  type SubmitContactEvaluationCommandInput,
+  type SubmitContactEvaluationCommandOutput,
+  SubmitContactEvaluationCommand,
+} from "./commands/SubmitContactEvaluationCommand";
+import {
+  type SuspendContactRecordingCommandInput,
+  type SuspendContactRecordingCommandOutput,
+  SuspendContactRecordingCommand,
+} from "./commands/SuspendContactRecordingCommand";
+import {
+  type TagContactCommandInput,
+  type TagContactCommandOutput,
+  TagContactCommand,
+} from "./commands/TagContactCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TransferContactCommandInput,
+  type TransferContactCommandOutput,
+  TransferContactCommand,
+} from "./commands/TransferContactCommand";
+import {
+  type UntagContactCommandInput,
+  type UntagContactCommandOutput,
+  UntagContactCommand,
+} from "./commands/UntagContactCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAgentStatusCommandInput,
+  type UpdateAgentStatusCommandOutput,
   UpdateAgentStatusCommand,
-  UpdateAgentStatusCommandInput,
-  UpdateAgentStatusCommandOutput,
 } from "./commands/UpdateAgentStatusCommand";
 import {
+  type UpdateAttachedFilesConfigurationCommandInput,
+  type UpdateAttachedFilesConfigurationCommandOutput,
+  UpdateAttachedFilesConfigurationCommand,
+} from "./commands/UpdateAttachedFilesConfigurationCommand";
+import {
+  type UpdateAuthenticationProfileCommandInput,
+  type UpdateAuthenticationProfileCommandOutput,
+  UpdateAuthenticationProfileCommand,
+} from "./commands/UpdateAuthenticationProfileCommand";
+import {
+  type UpdateContactAttributesCommandInput,
+  type UpdateContactAttributesCommandOutput,
   UpdateContactAttributesCommand,
-  UpdateContactAttributesCommandInput,
-  UpdateContactAttributesCommandOutput,
 } from "./commands/UpdateContactAttributesCommand";
 import {
+  type UpdateContactCommandInput,
+  type UpdateContactCommandOutput,
+  UpdateContactCommand,
+} from "./commands/UpdateContactCommand";
+import {
+  type UpdateContactEvaluationCommandInput,
+  type UpdateContactEvaluationCommandOutput,
+  UpdateContactEvaluationCommand,
+} from "./commands/UpdateContactEvaluationCommand";
+import {
+  type UpdateContactFlowAliasCommandInput,
+  type UpdateContactFlowAliasCommandOutput,
+  UpdateContactFlowAliasCommand,
+} from "./commands/UpdateContactFlowAliasCommand";
+import {
+  type UpdateContactFlowContentCommandInput,
+  type UpdateContactFlowContentCommandOutput,
   UpdateContactFlowContentCommand,
-  UpdateContactFlowContentCommandInput,
-  UpdateContactFlowContentCommandOutput,
 } from "./commands/UpdateContactFlowContentCommand";
 import {
+  type UpdateContactFlowMetadataCommandInput,
+  type UpdateContactFlowMetadataCommandOutput,
+  UpdateContactFlowMetadataCommand,
+} from "./commands/UpdateContactFlowMetadataCommand";
+import {
+  type UpdateContactFlowModuleAliasCommandInput,
+  type UpdateContactFlowModuleAliasCommandOutput,
+  UpdateContactFlowModuleAliasCommand,
+} from "./commands/UpdateContactFlowModuleAliasCommand";
+import {
+  type UpdateContactFlowModuleContentCommandInput,
+  type UpdateContactFlowModuleContentCommandOutput,
+  UpdateContactFlowModuleContentCommand,
+} from "./commands/UpdateContactFlowModuleContentCommand";
+import {
+  type UpdateContactFlowModuleMetadataCommandInput,
+  type UpdateContactFlowModuleMetadataCommandOutput,
+  UpdateContactFlowModuleMetadataCommand,
+} from "./commands/UpdateContactFlowModuleMetadataCommand";
+import {
+  type UpdateContactFlowNameCommandInput,
+  type UpdateContactFlowNameCommandOutput,
   UpdateContactFlowNameCommand,
-  UpdateContactFlowNameCommandInput,
-  UpdateContactFlowNameCommandOutput,
 } from "./commands/UpdateContactFlowNameCommand";
 import {
+  type UpdateContactRoutingDataCommandInput,
+  type UpdateContactRoutingDataCommandOutput,
+  UpdateContactRoutingDataCommand,
+} from "./commands/UpdateContactRoutingDataCommand";
+import {
+  type UpdateContactScheduleCommandInput,
+  type UpdateContactScheduleCommandOutput,
+  UpdateContactScheduleCommand,
+} from "./commands/UpdateContactScheduleCommand";
+import {
+  type UpdateContactTaskTemplateCommandInput,
+  type UpdateContactTaskTemplateCommandOutput,
+  UpdateContactTaskTemplateCommand,
+} from "./commands/UpdateContactTaskTemplateCommand";
+import {
+  type UpdateCrossRegionRoutingCommandInput,
+  type UpdateCrossRegionRoutingCommandOutput,
+  UpdateCrossRegionRoutingCommand,
+} from "./commands/UpdateCrossRegionRoutingCommand";
+import {
+  type UpdateDataTableAttributeCommandInput,
+  type UpdateDataTableAttributeCommandOutput,
+  UpdateDataTableAttributeCommand,
+} from "./commands/UpdateDataTableAttributeCommand";
+import {
+  type UpdateDataTableMetadataCommandInput,
+  type UpdateDataTableMetadataCommandOutput,
+  UpdateDataTableMetadataCommand,
+} from "./commands/UpdateDataTableMetadataCommand";
+import {
+  type UpdateDataTablePrimaryValuesCommandInput,
+  type UpdateDataTablePrimaryValuesCommandOutput,
+  UpdateDataTablePrimaryValuesCommand,
+} from "./commands/UpdateDataTablePrimaryValuesCommand";
+import {
+  type UpdateEmailAddressMetadataCommandInput,
+  type UpdateEmailAddressMetadataCommandOutput,
+  UpdateEmailAddressMetadataCommand,
+} from "./commands/UpdateEmailAddressMetadataCommand";
+import {
+  type UpdateEvaluationFormCommandInput,
+  type UpdateEvaluationFormCommandOutput,
+  UpdateEvaluationFormCommand,
+} from "./commands/UpdateEvaluationFormCommand";
+import {
+  type UpdateExtractionDefinitionCommandInput,
+  type UpdateExtractionDefinitionCommandOutput,
+  UpdateExtractionDefinitionCommand,
+} from "./commands/UpdateExtractionDefinitionCommand";
+import {
+  type UpdateHoursOfOperationCommandInput,
+  type UpdateHoursOfOperationCommandOutput,
   UpdateHoursOfOperationCommand,
-  UpdateHoursOfOperationCommandInput,
-  UpdateHoursOfOperationCommandOutput,
 } from "./commands/UpdateHoursOfOperationCommand";
 import {
+  type UpdateHoursOfOperationOverrideCommandInput,
+  type UpdateHoursOfOperationOverrideCommandOutput,
+  UpdateHoursOfOperationOverrideCommand,
+} from "./commands/UpdateHoursOfOperationOverrideCommand";
+import {
+  type UpdateInstanceAttributeCommandInput,
+  type UpdateInstanceAttributeCommandOutput,
   UpdateInstanceAttributeCommand,
-  UpdateInstanceAttributeCommandInput,
-  UpdateInstanceAttributeCommandOutput,
 } from "./commands/UpdateInstanceAttributeCommand";
 import {
+  type UpdateInstanceStorageConfigCommandInput,
+  type UpdateInstanceStorageConfigCommandOutput,
   UpdateInstanceStorageConfigCommand,
-  UpdateInstanceStorageConfigCommandInput,
-  UpdateInstanceStorageConfigCommandOutput,
 } from "./commands/UpdateInstanceStorageConfigCommand";
 import {
+  type UpdateMetricContentCommandInput,
+  type UpdateMetricContentCommandOutput,
+  UpdateMetricContentCommand,
+} from "./commands/UpdateMetricContentCommand";
+import {
+  type UpdateMetricMetadataCommandInput,
+  type UpdateMetricMetadataCommandOutput,
+  UpdateMetricMetadataCommand,
+} from "./commands/UpdateMetricMetadataCommand";
+import {
+  type UpdateNotificationContentCommandInput,
+  type UpdateNotificationContentCommandOutput,
+  UpdateNotificationContentCommand,
+} from "./commands/UpdateNotificationContentCommand";
+import {
+  type UpdateOutboundEmailContactMessageCommandInput,
+  type UpdateOutboundEmailContactMessageCommandOutput,
+  UpdateOutboundEmailContactMessageCommand,
+} from "./commands/UpdateOutboundEmailContactMessageCommand";
+import {
+  type UpdateParticipantAuthenticationCommandInput,
+  type UpdateParticipantAuthenticationCommandOutput,
+  UpdateParticipantAuthenticationCommand,
+} from "./commands/UpdateParticipantAuthenticationCommand";
+import {
+  type UpdateParticipantRoleConfigCommandInput,
+  type UpdateParticipantRoleConfigCommandOutput,
+  UpdateParticipantRoleConfigCommand,
+} from "./commands/UpdateParticipantRoleConfigCommand";
+import {
+  type UpdatePhoneNumberCommandInput,
+  type UpdatePhoneNumberCommandOutput,
+  UpdatePhoneNumberCommand,
+} from "./commands/UpdatePhoneNumberCommand";
+import {
+  type UpdatePhoneNumberMetadataCommandInput,
+  type UpdatePhoneNumberMetadataCommandOutput,
+  UpdatePhoneNumberMetadataCommand,
+} from "./commands/UpdatePhoneNumberMetadataCommand";
+import {
+  type UpdatePredefinedAttributeCommandInput,
+  type UpdatePredefinedAttributeCommandOutput,
+  UpdatePredefinedAttributeCommand,
+} from "./commands/UpdatePredefinedAttributeCommand";
+import {
+  type UpdatePromptCommandInput,
+  type UpdatePromptCommandOutput,
+  UpdatePromptCommand,
+} from "./commands/UpdatePromptCommand";
+import {
+  type UpdateQueueHoursOfOperationCommandInput,
+  type UpdateQueueHoursOfOperationCommandOutput,
   UpdateQueueHoursOfOperationCommand,
-  UpdateQueueHoursOfOperationCommandInput,
-  UpdateQueueHoursOfOperationCommandOutput,
 } from "./commands/UpdateQueueHoursOfOperationCommand";
 import {
+  type UpdateQueueMaxContactsCommandInput,
+  type UpdateQueueMaxContactsCommandOutput,
   UpdateQueueMaxContactsCommand,
-  UpdateQueueMaxContactsCommandInput,
-  UpdateQueueMaxContactsCommandOutput,
 } from "./commands/UpdateQueueMaxContactsCommand";
 import {
+  type UpdateQueueNameCommandInput,
+  type UpdateQueueNameCommandOutput,
   UpdateQueueNameCommand,
-  UpdateQueueNameCommandInput,
-  UpdateQueueNameCommandOutput,
 } from "./commands/UpdateQueueNameCommand";
 import {
+  type UpdateQueueOutboundCallerConfigCommandInput,
+  type UpdateQueueOutboundCallerConfigCommandOutput,
   UpdateQueueOutboundCallerConfigCommand,
-  UpdateQueueOutboundCallerConfigCommandInput,
-  UpdateQueueOutboundCallerConfigCommandOutput,
 } from "./commands/UpdateQueueOutboundCallerConfigCommand";
 import {
+  type UpdateQueueOutboundEmailConfigCommandInput,
+  type UpdateQueueOutboundEmailConfigCommandOutput,
+  UpdateQueueOutboundEmailConfigCommand,
+} from "./commands/UpdateQueueOutboundEmailConfigCommand";
+import {
+  type UpdateQueueStatusCommandInput,
+  type UpdateQueueStatusCommandOutput,
   UpdateQueueStatusCommand,
-  UpdateQueueStatusCommandInput,
-  UpdateQueueStatusCommandOutput,
 } from "./commands/UpdateQueueStatusCommand";
 import {
+  type UpdateQuickConnectConfigCommandInput,
+  type UpdateQuickConnectConfigCommandOutput,
   UpdateQuickConnectConfigCommand,
-  UpdateQuickConnectConfigCommandInput,
-  UpdateQuickConnectConfigCommandOutput,
 } from "./commands/UpdateQuickConnectConfigCommand";
 import {
+  type UpdateQuickConnectNameCommandInput,
+  type UpdateQuickConnectNameCommandOutput,
   UpdateQuickConnectNameCommand,
-  UpdateQuickConnectNameCommandInput,
-  UpdateQuickConnectNameCommandOutput,
 } from "./commands/UpdateQuickConnectNameCommand";
 import {
+  type UpdateRoutingProfileAgentAvailabilityTimerCommandInput,
+  type UpdateRoutingProfileAgentAvailabilityTimerCommandOutput,
+  UpdateRoutingProfileAgentAvailabilityTimerCommand,
+} from "./commands/UpdateRoutingProfileAgentAvailabilityTimerCommand";
+import {
+  type UpdateRoutingProfileConcurrencyCommandInput,
+  type UpdateRoutingProfileConcurrencyCommandOutput,
   UpdateRoutingProfileConcurrencyCommand,
-  UpdateRoutingProfileConcurrencyCommandInput,
-  UpdateRoutingProfileConcurrencyCommandOutput,
 } from "./commands/UpdateRoutingProfileConcurrencyCommand";
 import {
+  type UpdateRoutingProfileDefaultOutboundQueueCommandInput,
+  type UpdateRoutingProfileDefaultOutboundQueueCommandOutput,
   UpdateRoutingProfileDefaultOutboundQueueCommand,
-  UpdateRoutingProfileDefaultOutboundQueueCommandInput,
-  UpdateRoutingProfileDefaultOutboundQueueCommandOutput,
 } from "./commands/UpdateRoutingProfileDefaultOutboundQueueCommand";
 import {
+  type UpdateRoutingProfileNameCommandInput,
+  type UpdateRoutingProfileNameCommandOutput,
   UpdateRoutingProfileNameCommand,
-  UpdateRoutingProfileNameCommandInput,
-  UpdateRoutingProfileNameCommandOutput,
 } from "./commands/UpdateRoutingProfileNameCommand";
 import {
+  type UpdateRoutingProfileQueuesCommandInput,
+  type UpdateRoutingProfileQueuesCommandOutput,
   UpdateRoutingProfileQueuesCommand,
-  UpdateRoutingProfileQueuesCommandInput,
-  UpdateRoutingProfileQueuesCommandOutput,
 } from "./commands/UpdateRoutingProfileQueuesCommand";
 import {
+  type UpdateRuleCommandInput,
+  type UpdateRuleCommandOutput,
+  UpdateRuleCommand,
+} from "./commands/UpdateRuleCommand";
+import {
+  type UpdateSecurityProfileCommandInput,
+  type UpdateSecurityProfileCommandOutput,
+  UpdateSecurityProfileCommand,
+} from "./commands/UpdateSecurityProfileCommand";
+import {
+  type UpdateTaskTemplateCommandInput,
+  type UpdateTaskTemplateCommandOutput,
+  UpdateTaskTemplateCommand,
+} from "./commands/UpdateTaskTemplateCommand";
+import {
+  type UpdateTestCaseCommandInput,
+  type UpdateTestCaseCommandOutput,
+  UpdateTestCaseCommand,
+} from "./commands/UpdateTestCaseCommand";
+import {
+  type UpdateTrafficDistributionCommandInput,
+  type UpdateTrafficDistributionCommandOutput,
+  UpdateTrafficDistributionCommand,
+} from "./commands/UpdateTrafficDistributionCommand";
+import {
+  type UpdateUserConfigCommandInput,
+  type UpdateUserConfigCommandOutput,
+  UpdateUserConfigCommand,
+} from "./commands/UpdateUserConfigCommand";
+import {
+  type UpdateUserHierarchyCommandInput,
+  type UpdateUserHierarchyCommandOutput,
   UpdateUserHierarchyCommand,
-  UpdateUserHierarchyCommandInput,
-  UpdateUserHierarchyCommandOutput,
 } from "./commands/UpdateUserHierarchyCommand";
 import {
+  type UpdateUserHierarchyGroupNameCommandInput,
+  type UpdateUserHierarchyGroupNameCommandOutput,
   UpdateUserHierarchyGroupNameCommand,
-  UpdateUserHierarchyGroupNameCommandInput,
-  UpdateUserHierarchyGroupNameCommandOutput,
 } from "./commands/UpdateUserHierarchyGroupNameCommand";
 import {
+  type UpdateUserHierarchyStructureCommandInput,
+  type UpdateUserHierarchyStructureCommandOutput,
   UpdateUserHierarchyStructureCommand,
-  UpdateUserHierarchyStructureCommandInput,
-  UpdateUserHierarchyStructureCommandOutput,
 } from "./commands/UpdateUserHierarchyStructureCommand";
 import {
+  type UpdateUserIdentityInfoCommandInput,
+  type UpdateUserIdentityInfoCommandOutput,
   UpdateUserIdentityInfoCommand,
-  UpdateUserIdentityInfoCommandInput,
-  UpdateUserIdentityInfoCommandOutput,
 } from "./commands/UpdateUserIdentityInfoCommand";
 import {
+  type UpdateUserNotificationStatusCommandInput,
+  type UpdateUserNotificationStatusCommandOutput,
+  UpdateUserNotificationStatusCommand,
+} from "./commands/UpdateUserNotificationStatusCommand";
+import {
+  type UpdateUserPhoneConfigCommandInput,
+  type UpdateUserPhoneConfigCommandOutput,
   UpdateUserPhoneConfigCommand,
-  UpdateUserPhoneConfigCommandInput,
-  UpdateUserPhoneConfigCommandOutput,
 } from "./commands/UpdateUserPhoneConfigCommand";
 import {
+  type UpdateUserProficienciesCommandInput,
+  type UpdateUserProficienciesCommandOutput,
+  UpdateUserProficienciesCommand,
+} from "./commands/UpdateUserProficienciesCommand";
+import {
+  type UpdateUserRoutingProfileCommandInput,
+  type UpdateUserRoutingProfileCommandOutput,
   UpdateUserRoutingProfileCommand,
-  UpdateUserRoutingProfileCommandInput,
-  UpdateUserRoutingProfileCommandOutput,
 } from "./commands/UpdateUserRoutingProfileCommand";
 import {
+  type UpdateUserSecurityProfilesCommandInput,
+  type UpdateUserSecurityProfilesCommandOutput,
   UpdateUserSecurityProfilesCommand,
-  UpdateUserSecurityProfilesCommandInput,
-  UpdateUserSecurityProfilesCommandOutput,
 } from "./commands/UpdateUserSecurityProfilesCommand";
+import {
+  type UpdateViewContentCommandInput,
+  type UpdateViewContentCommandOutput,
+  UpdateViewContentCommand,
+} from "./commands/UpdateViewContentCommand";
+import {
+  type UpdateViewMetadataCommandInput,
+  type UpdateViewMetadataCommandOutput,
+  UpdateViewMetadataCommand,
+} from "./commands/UpdateViewMetadataCommand";
+import {
+  type UpdateWorkspaceMetadataCommandInput,
+  type UpdateWorkspaceMetadataCommandOutput,
+  UpdateWorkspaceMetadataCommand,
+} from "./commands/UpdateWorkspaceMetadataCommand";
+import {
+  type UpdateWorkspacePageCommandInput,
+  type UpdateWorkspacePageCommandOutput,
+  UpdateWorkspacePageCommand,
+} from "./commands/UpdateWorkspacePageCommand";
+import {
+  type UpdateWorkspaceThemeCommandInput,
+  type UpdateWorkspaceThemeCommandOutput,
+  UpdateWorkspaceThemeCommand,
+} from "./commands/UpdateWorkspaceThemeCommand";
+import {
+  type UpdateWorkspaceVisibilityCommandInput,
+  type UpdateWorkspaceVisibilityCommandOutput,
+  UpdateWorkspaceVisibilityCommand,
+} from "./commands/UpdateWorkspaceVisibilityCommand";
 import { ConnectClient } from "./ConnectClient";
+import { paginateEvaluateDataTableValues } from "./pagination/EvaluateDataTableValuesPaginator";
+import { paginateGetCurrentMetricData } from "./pagination/GetCurrentMetricDataPaginator";
+import { paginateGetCurrentUserData } from "./pagination/GetCurrentUserDataPaginator";
+import { paginateGetMetricData } from "./pagination/GetMetricDataPaginator";
+import { paginateGetMetricDataV2 } from "./pagination/GetMetricDataV2Paginator";
+import { paginateListAgentStatuses } from "./pagination/ListAgentStatusesPaginator";
+import { paginateListApprovedOrigins } from "./pagination/ListApprovedOriginsPaginator";
+import { paginateListAttachedFilesConfigurations } from "./pagination/ListAttachedFilesConfigurationsPaginator";
+import { paginateListAuthenticationProfiles } from "./pagination/ListAuthenticationProfilesPaginator";
+import { paginateListBots } from "./pagination/ListBotsPaginator";
+import { paginateListChildHoursOfOperations } from "./pagination/ListChildHoursOfOperationsPaginator";
+import { paginateListContactEvaluations } from "./pagination/ListContactEvaluationsPaginator";
+import { paginateListContactFlowAliases } from "./pagination/ListContactFlowAliasesPaginator";
+import { paginateListContactFlowModuleAliases } from "./pagination/ListContactFlowModuleAliasesPaginator";
+import { paginateListContactFlowModules } from "./pagination/ListContactFlowModulesPaginator";
+import { paginateListContactFlowModuleVersions } from "./pagination/ListContactFlowModuleVersionsPaginator";
+import { paginateListContactFlows } from "./pagination/ListContactFlowsPaginator";
+import { paginateListContactFlowVersions } from "./pagination/ListContactFlowVersionsPaginator";
+import { paginateListContactReferences } from "./pagination/ListContactReferencesPaginator";
+import { paginateListDataTableAttributes } from "./pagination/ListDataTableAttributesPaginator";
+import { paginateListDataTablePrimaryValues } from "./pagination/ListDataTablePrimaryValuesPaginator";
+import { paginateListDataTables } from "./pagination/ListDataTablesPaginator";
+import { paginateListDataTableValues } from "./pagination/ListDataTableValuesPaginator";
+import { paginateListDefaultVocabularies } from "./pagination/ListDefaultVocabulariesPaginator";
+import { paginateListEntitySecurityProfiles } from "./pagination/ListEntitySecurityProfilesPaginator";
+import { paginateListEvaluationFormAIVersions } from "./pagination/ListEvaluationFormAIVersionsPaginator";
+import { paginateListEvaluationForms } from "./pagination/ListEvaluationFormsPaginator";
+import { paginateListEvaluationFormVersions } from "./pagination/ListEvaluationFormVersionsPaginator";
+import { paginateListExtractionDefinitions } from "./pagination/ListExtractionDefinitionsPaginator";
+import { paginateListFlowAssociations } from "./pagination/ListFlowAssociationsPaginator";
+import { paginateListHoursOfOperationOverrides } from "./pagination/ListHoursOfOperationOverridesPaginator";
+import { paginateListHoursOfOperations } from "./pagination/ListHoursOfOperationsPaginator";
+import { paginateListInstanceAttributes } from "./pagination/ListInstanceAttributesPaginator";
+import { paginateListInstances } from "./pagination/ListInstancesPaginator";
+import { paginateListInstanceStorageConfigs } from "./pagination/ListInstanceStorageConfigsPaginator";
+import { paginateListIntegrationAssociations } from "./pagination/ListIntegrationAssociationsPaginator";
+import { paginateListLambdaFunctions } from "./pagination/ListLambdaFunctionsPaginator";
+import { paginateListLexBots } from "./pagination/ListLexBotsPaginator";
+import { paginateListMetrics } from "./pagination/ListMetricsPaginator";
+import { paginateListPhoneNumbers } from "./pagination/ListPhoneNumbersPaginator";
+import { paginateListPhoneNumbersV2 } from "./pagination/ListPhoneNumbersV2Paginator";
+import { paginateListPredefinedAttributes } from "./pagination/ListPredefinedAttributesPaginator";
+import { paginateListPrompts } from "./pagination/ListPromptsPaginator";
+import { paginateListQueueQuickConnects } from "./pagination/ListQueueQuickConnectsPaginator";
+import { paginateListQueues } from "./pagination/ListQueuesPaginator";
+import { paginateListQuickConnects } from "./pagination/ListQuickConnectsPaginator";
+import {
+  paginateListRealtimeContactAnalysisSegmentsV2,
+} from "./pagination/ListRealtimeContactAnalysisSegmentsV2Paginator";
+import { paginateListReplicationFindings } from "./pagination/ListReplicationFindingsPaginator";
+import {
+  paginateListRoutingProfileManualAssignmentQueues,
+} from "./pagination/ListRoutingProfileManualAssignmentQueuesPaginator";
+import { paginateListRoutingProfileQueues } from "./pagination/ListRoutingProfileQueuesPaginator";
+import { paginateListRoutingProfiles } from "./pagination/ListRoutingProfilesPaginator";
+import { paginateListRules } from "./pagination/ListRulesPaginator";
+import { paginateListSecurityKeys } from "./pagination/ListSecurityKeysPaginator";
+import { paginateListSecurityProfileAIAgents } from "./pagination/ListSecurityProfileAIAgentsPaginator";
+import { paginateListSecurityProfileApplications } from "./pagination/ListSecurityProfileApplicationsPaginator";
+import { paginateListSecurityProfileFlowModules } from "./pagination/ListSecurityProfileFlowModulesPaginator";
+import { paginateListSecurityProfilePermissions } from "./pagination/ListSecurityProfilePermissionsPaginator";
+import { paginateListSecurityProfiles } from "./pagination/ListSecurityProfilesPaginator";
+import { paginateListTaskTemplates } from "./pagination/ListTaskTemplatesPaginator";
+import { paginateListTestCases } from "./pagination/ListTestCasesPaginator";
+import { paginateListTrafficDistributionGroups } from "./pagination/ListTrafficDistributionGroupsPaginator";
+import { paginateListTrafficDistributionGroupUsers } from "./pagination/ListTrafficDistributionGroupUsersPaginator";
+import { paginateListUseCases } from "./pagination/ListUseCasesPaginator";
+import { paginateListUserHierarchyGroups } from "./pagination/ListUserHierarchyGroupsPaginator";
+import { paginateListUserProficiencies } from "./pagination/ListUserProficienciesPaginator";
+import { paginateListUsers } from "./pagination/ListUsersPaginator";
+import { paginateListViews } from "./pagination/ListViewsPaginator";
+import { paginateListViewVersions } from "./pagination/ListViewVersionsPaginator";
+import { paginateListWorkspacePages } from "./pagination/ListWorkspacePagesPaginator";
+import { paginateListWorkspaces } from "./pagination/ListWorkspacesPaginator";
+import { paginateSearchAgentStatuses } from "./pagination/SearchAgentStatusesPaginator";
+import { paginateSearchAvailablePhoneNumbers } from "./pagination/SearchAvailablePhoneNumbersPaginator";
+import { paginateSearchContactFlowModules } from "./pagination/SearchContactFlowModulesPaginator";
+import { paginateSearchContactFlows } from "./pagination/SearchContactFlowsPaginator";
+import { paginateSearchContacts } from "./pagination/SearchContactsPaginator";
+import { paginateSearchDataTables } from "./pagination/SearchDataTablesPaginator";
+import { paginateSearchHoursOfOperationOverrides } from "./pagination/SearchHoursOfOperationOverridesPaginator";
+import { paginateSearchHoursOfOperations } from "./pagination/SearchHoursOfOperationsPaginator";
+import { paginateSearchMetrics } from "./pagination/SearchMetricsPaginator";
+import { paginateSearchPredefinedAttributes } from "./pagination/SearchPredefinedAttributesPaginator";
+import { paginateSearchPrompts } from "./pagination/SearchPromptsPaginator";
+import { paginateSearchQueues } from "./pagination/SearchQueuesPaginator";
+import { paginateSearchQuickConnects } from "./pagination/SearchQuickConnectsPaginator";
+import { paginateSearchResourceTags } from "./pagination/SearchResourceTagsPaginator";
+import { paginateSearchRoutingProfiles } from "./pagination/SearchRoutingProfilesPaginator";
+import { paginateSearchRules } from "./pagination/SearchRulesPaginator";
+import { paginateSearchSecurityProfiles } from "./pagination/SearchSecurityProfilesPaginator";
+import { paginateSearchTestCases } from "./pagination/SearchTestCasesPaginator";
+import { paginateSearchUserHierarchyGroups } from "./pagination/SearchUserHierarchyGroupsPaginator";
+import { paginateSearchUsers } from "./pagination/SearchUsersPaginator";
+import { paginateSearchViews } from "./pagination/SearchViewsPaginator";
+import { paginateSearchVocabularies } from "./pagination/SearchVocabulariesPaginator";
+import { paginateSearchWorkspaceAssociations } from "./pagination/SearchWorkspaceAssociationsPaginator";
+import { paginateSearchWorkspaces } from "./pagination/SearchWorkspacesPaginator";
+
+const commands = {
+  ActivateEvaluationFormCommand,
+  AssociateAnalyticsDataSetCommand,
+  AssociateApprovedOriginCommand,
+  AssociateBotCommand,
+  AssociateContactWithUserCommand,
+  AssociateDefaultVocabularyCommand,
+  AssociateEmailAddressAliasCommand,
+  AssociateFlowCommand,
+  AssociateHoursOfOperationsCommand,
+  AssociateInstanceStorageConfigCommand,
+  AssociateLambdaFunctionCommand,
+  AssociateLexBotCommand,
+  AssociatePhoneNumberContactFlowCommand,
+  AssociateQueueEmailAddressesCommand,
+  AssociateQueueQuickConnectsCommand,
+  AssociateRoutingProfileQueuesCommand,
+  AssociateSecurityKeyCommand,
+  AssociateSecurityProfilesCommand,
+  AssociateTrafficDistributionGroupUserCommand,
+  AssociateUserProficienciesCommand,
+  AssociateWorkspaceCommand,
+  BatchAssociateAnalyticsDataSetCommand,
+  BatchCreateDataTableValueCommand,
+  BatchDeleteDataTableValueCommand,
+  BatchDescribeDataTableValueCommand,
+  BatchDisassociateAnalyticsDataSetCommand,
+  BatchGetAttachedFileMetadataCommand,
+  BatchGetFlowAssociationCommand,
+  BatchPutContactCommand,
+  BatchUpdateDataTableValueCommand,
+  ClaimPhoneNumberCommand,
+  CompleteAttachedFileUploadCommand,
+  CreateAgentStatusCommand,
+  CreateAttachedFileCommand,
+  CreateAuthCodeCommand,
+  CreateContactCommand,
+  CreateContactFlowCommand,
+  CreateContactFlowAliasCommand,
+  CreateContactFlowModuleCommand,
+  CreateContactFlowModuleAliasCommand,
+  CreateContactFlowModuleVersionCommand,
+  CreateContactFlowVersionCommand,
+  CreateDataTableCommand,
+  CreateDataTableAttributeCommand,
+  CreateEmailAddressCommand,
+  CreateEvaluationFormCommand,
+  CreateExtractionDefinitionCommand,
+  CreateHoursOfOperationCommand,
+  CreateHoursOfOperationOverrideCommand,
+  CreateInstanceCommand,
+  CreateIntegrationAssociationCommand,
+  CreateMetricCommand,
+  CreateNotificationCommand,
+  CreateParticipantCommand,
+  CreatePersistentContactAssociationCommand,
+  CreatePredefinedAttributeCommand,
+  CreatePromptCommand,
+  CreatePushNotificationRegistrationCommand,
+  CreateQueueCommand,
+  CreateQuickConnectCommand,
+  CreateRoutingProfileCommand,
+  CreateRuleCommand,
+  CreateSecurityProfileCommand,
+  CreateTaskTemplateCommand,
+  CreateTestCaseCommand,
+  CreateTrafficDistributionGroupCommand,
+  CreateUseCaseCommand,
+  CreateUserCommand,
+  CreateUserHierarchyGroupCommand,
+  CreateViewCommand,
+  CreateViewVersionCommand,
+  CreateVocabularyCommand,
+  CreateWorkspaceCommand,
+  CreateWorkspacePageCommand,
+  DeactivateEvaluationFormCommand,
+  DeleteAttachedFileCommand,
+  DeleteContactDataCommand,
+  DeleteContactEvaluationCommand,
+  DeleteContactFlowCommand,
+  DeleteContactFlowAliasCommand,
+  DeleteContactFlowModuleCommand,
+  DeleteContactFlowModuleAliasCommand,
+  DeleteContactFlowModuleVersionCommand,
+  DeleteContactFlowVersionCommand,
+  DeleteDataTableCommand,
+  DeleteDataTableAttributeCommand,
+  DeleteEmailAddressCommand,
+  DeleteEvaluationFormCommand,
+  DeleteExtractionDefinitionCommand,
+  DeleteHoursOfOperationCommand,
+  DeleteHoursOfOperationOverrideCommand,
+  DeleteInstanceCommand,
+  DeleteIntegrationAssociationCommand,
+  DeleteMetricCommand,
+  DeleteNotificationCommand,
+  DeletePredefinedAttributeCommand,
+  DeletePromptCommand,
+  DeletePushNotificationRegistrationCommand,
+  DeleteQueueCommand,
+  DeleteQuickConnectCommand,
+  DeleteRoutingProfileCommand,
+  DeleteRuleCommand,
+  DeleteSecurityProfileCommand,
+  DeleteSessionCommand,
+  DeleteTaskTemplateCommand,
+  DeleteTestCaseCommand,
+  DeleteTrafficDistributionGroupCommand,
+  DeleteUseCaseCommand,
+  DeleteUserCommand,
+  DeleteUserHierarchyGroupCommand,
+  DeleteViewCommand,
+  DeleteViewVersionCommand,
+  DeleteVocabularyCommand,
+  DeleteWorkspaceCommand,
+  DeleteWorkspaceMediaCommand,
+  DeleteWorkspacePageCommand,
+  DescribeAgentStatusCommand,
+  DescribeAttachedFilesConfigurationCommand,
+  DescribeAuthenticationProfileCommand,
+  DescribeContactCommand,
+  DescribeContactEvaluationCommand,
+  DescribeContactFlowCommand,
+  DescribeContactFlowAliasCommand,
+  DescribeContactFlowModuleCommand,
+  DescribeContactFlowModuleAliasCommand,
+  DescribeDataTableCommand,
+  DescribeDataTableAttributeCommand,
+  DescribeEmailAddressCommand,
+  DescribeEvaluationFormCommand,
+  DescribeExtractionDefinitionCommand,
+  DescribeHoursOfOperationCommand,
+  DescribeHoursOfOperationOverrideCommand,
+  DescribeInstanceCommand,
+  DescribeInstanceAttributeCommand,
+  DescribeInstanceStorageConfigCommand,
+  DescribeMetricCommand,
+  DescribeNotificationCommand,
+  DescribePhoneNumberCommand,
+  DescribePredefinedAttributeCommand,
+  DescribePromptCommand,
+  DescribeQueueCommand,
+  DescribeQuickConnectCommand,
+  DescribeRoutingProfileCommand,
+  DescribeRuleCommand,
+  DescribeSecurityProfileCommand,
+  DescribeTestCaseCommand,
+  DescribeTrafficDistributionGroupCommand,
+  DescribeUserCommand,
+  DescribeUserHierarchyGroupCommand,
+  DescribeUserHierarchyStructureCommand,
+  DescribeViewCommand,
+  DescribeVocabularyCommand,
+  DescribeWorkspaceCommand,
+  DisassociateAnalyticsDataSetCommand,
+  DisassociateApprovedOriginCommand,
+  DisassociateBotCommand,
+  DisassociateEmailAddressAliasCommand,
+  DisassociateFlowCommand,
+  DisassociateHoursOfOperationsCommand,
+  DisassociateInstanceStorageConfigCommand,
+  DisassociateLambdaFunctionCommand,
+  DisassociateLexBotCommand,
+  DisassociatePhoneNumberContactFlowCommand,
+  DisassociateQueueEmailAddressesCommand,
+  DisassociateQueueQuickConnectsCommand,
+  DisassociateRoutingProfileQueuesCommand,
+  DisassociateSecurityKeyCommand,
+  DisassociateSecurityProfilesCommand,
+  DisassociateTrafficDistributionGroupUserCommand,
+  DisassociateUserProficienciesCommand,
+  DisassociateWorkspaceCommand,
+  DismissUserContactCommand,
+  EvaluateDataTableValuesCommand,
+  GetAttachedFileCommand,
+  GetContactAttributesCommand,
+  GetContactMetricsCommand,
+  GetCrossRegionRoutingCommand,
+  GetCurrentMetricDataCommand,
+  GetCurrentUserDataCommand,
+  GetEffectiveHoursOfOperationsCommand,
+  GetEvaluationFormValidationCommand,
+  GetFederationTokenCommand,
+  GetFlowAssociationCommand,
+  GetMetricDataCommand,
+  GetMetricDataV2Command,
+  GetPromptFileCommand,
+  GetTaskTemplateCommand,
+  GetTestCaseExecutionSummaryCommand,
+  GetTrafficDistributionCommand,
+  ImportPhoneNumberCommand,
+  ImportWorkspaceMediaCommand,
+  ListAgentStatusesCommand,
+  ListAnalyticsDataAssociationsCommand,
+  ListAnalyticsDataLakeDataSetsCommand,
+  ListApprovedOriginsCommand,
+  ListAssociatedContactsCommand,
+  ListAttachedFilesConfigurationsCommand,
+  ListAuthenticationProfilesCommand,
+  ListBotsCommand,
+  ListChildHoursOfOperationsCommand,
+  ListContactEvaluationsCommand,
+  ListContactFlowAliasesCommand,
+  ListContactFlowModuleAliasesCommand,
+  ListContactFlowModulesCommand,
+  ListContactFlowModuleVersionsCommand,
+  ListContactFlowsCommand,
+  ListContactFlowVersionsCommand,
+  ListContactReferencesCommand,
+  ListDataTableAttributesCommand,
+  ListDataTablePrimaryValuesCommand,
+  ListDataTablesCommand,
+  ListDataTableValuesCommand,
+  ListDefaultVocabulariesCommand,
+  ListEntitySecurityProfilesCommand,
+  ListEvaluationFormAIVersionsCommand,
+  ListEvaluationFormsCommand,
+  ListEvaluationFormVersionsCommand,
+  ListExtractionDefinitionsCommand,
+  ListFlowAssociationsCommand,
+  ListHoursOfOperationOverridesCommand,
+  ListHoursOfOperationsCommand,
+  ListInstanceAttributesCommand,
+  ListInstancesCommand,
+  ListInstanceStorageConfigsCommand,
+  ListIntegrationAssociationsCommand,
+  ListLambdaFunctionsCommand,
+  ListLexBotsCommand,
+  ListMetricsCommand,
+  ListNotificationsCommand,
+  ListPhoneNumbersCommand,
+  ListPhoneNumbersV2Command,
+  ListPredefinedAttributesCommand,
+  ListPromptsCommand,
+  ListQueueEmailAddressesCommand,
+  ListQueueQuickConnectsCommand,
+  ListQueuesCommand,
+  ListQuickConnectsCommand,
+  ListRealtimeContactAnalysisSegmentsV2Command,
+  ListReplicationFindingsCommand,
+  ListRoutingProfileManualAssignmentQueuesCommand,
+  ListRoutingProfileQueuesCommand,
+  ListRoutingProfilesCommand,
+  ListRulesCommand,
+  ListSecurityKeysCommand,
+  ListSecurityProfileAIAgentsCommand,
+  ListSecurityProfileApplicationsCommand,
+  ListSecurityProfileFlowModulesCommand,
+  ListSecurityProfilePermissionsCommand,
+  ListSecurityProfilesCommand,
+  ListTagsForResourceCommand,
+  ListTaskTemplatesCommand,
+  ListTestCaseExecutionRecordsCommand,
+  ListTestCaseExecutionsCommand,
+  ListTestCasesCommand,
+  ListTrafficDistributionGroupsCommand,
+  ListTrafficDistributionGroupUsersCommand,
+  ListUseCasesCommand,
+  ListUserHierarchyGroupsCommand,
+  ListUserNotificationsCommand,
+  ListUserProficienciesCommand,
+  ListUsersCommand,
+  ListViewsCommand,
+  ListViewVersionsCommand,
+  ListWorkspaceMediaCommand,
+  ListWorkspacePagesCommand,
+  ListWorkspacesCommand,
+  MonitorContactCommand,
+  PauseContactCommand,
+  PutUserStatusCommand,
+  ReleasePhoneNumberCommand,
+  ReplicateInstanceCommand,
+  ResumeContactCommand,
+  ResumeContactRecordingCommand,
+  SearchAgentStatusesCommand,
+  SearchAvailablePhoneNumbersCommand,
+  SearchContactEvaluationsCommand,
+  SearchContactFlowModulesCommand,
+  SearchContactFlowsCommand,
+  SearchContactsCommand,
+  SearchDataTablesCommand,
+  SearchEmailAddressesCommand,
+  SearchEvaluationFormsCommand,
+  SearchHoursOfOperationOverridesCommand,
+  SearchHoursOfOperationsCommand,
+  SearchMetricsCommand,
+  SearchNotificationsCommand,
+  SearchPredefinedAttributesCommand,
+  SearchPromptsCommand,
+  SearchQueuesCommand,
+  SearchQuickConnectsCommand,
+  SearchResourceTagsCommand,
+  SearchRoutingProfilesCommand,
+  SearchRulesCommand,
+  SearchSecurityProfilesCommand,
+  SearchTestCasesCommand,
+  SearchUserHierarchyGroupsCommand,
+  SearchUsersCommand,
+  SearchViewsCommand,
+  SearchVocabulariesCommand,
+  SearchWorkspaceAssociationsCommand,
+  SearchWorkspacesCommand,
+  SendChatIntegrationEventCommand,
+  SendOutboundEmailCommand,
+  SendOutboundWebNotificationCommand,
+  StartAssistantContactCommand,
+  StartAttachedFileUploadCommand,
+  StartChatContactCommand,
+  StartContactConversationalAnalyticsJobCommand,
+  StartContactEvaluationCommand,
+  StartContactMediaProcessingCommand,
+  StartContactRecordingCommand,
+  StartContactStreamingCommand,
+  StartEmailContactCommand,
+  StartEvaluationFormValidationCommand,
+  StartOutboundChatContactCommand,
+  StartOutboundEmailContactCommand,
+  StartOutboundVoiceContactCommand,
+  StartScreenSharingCommand,
+  StartTaskContactCommand,
+  StartTestCaseExecutionCommand,
+  StartWebRTCContactCommand,
+  StopContactCommand,
+  StopContactMediaProcessingCommand,
+  StopContactRecordingCommand,
+  StopContactStreamingCommand,
+  StopTestCaseExecutionCommand,
+  SubmitContactEvaluationCommand,
+  SuspendContactRecordingCommand,
+  TagContactCommand,
+  TagResourceCommand,
+  TransferContactCommand,
+  UntagContactCommand,
+  UntagResourceCommand,
+  UpdateAgentStatusCommand,
+  UpdateAttachedFilesConfigurationCommand,
+  UpdateAuthenticationProfileCommand,
+  UpdateContactCommand,
+  UpdateContactAttributesCommand,
+  UpdateContactEvaluationCommand,
+  UpdateContactFlowAliasCommand,
+  UpdateContactFlowContentCommand,
+  UpdateContactFlowMetadataCommand,
+  UpdateContactFlowModuleAliasCommand,
+  UpdateContactFlowModuleContentCommand,
+  UpdateContactFlowModuleMetadataCommand,
+  UpdateContactFlowNameCommand,
+  UpdateContactRoutingDataCommand,
+  UpdateContactScheduleCommand,
+  UpdateContactTaskTemplateCommand,
+  UpdateCrossRegionRoutingCommand,
+  UpdateDataTableAttributeCommand,
+  UpdateDataTableMetadataCommand,
+  UpdateDataTablePrimaryValuesCommand,
+  UpdateEmailAddressMetadataCommand,
+  UpdateEvaluationFormCommand,
+  UpdateExtractionDefinitionCommand,
+  UpdateHoursOfOperationCommand,
+  UpdateHoursOfOperationOverrideCommand,
+  UpdateInstanceAttributeCommand,
+  UpdateInstanceStorageConfigCommand,
+  UpdateMetricContentCommand,
+  UpdateMetricMetadataCommand,
+  UpdateNotificationContentCommand,
+  UpdateOutboundEmailContactMessageCommand,
+  UpdateParticipantAuthenticationCommand,
+  UpdateParticipantRoleConfigCommand,
+  UpdatePhoneNumberCommand,
+  UpdatePhoneNumberMetadataCommand,
+  UpdatePredefinedAttributeCommand,
+  UpdatePromptCommand,
+  UpdateQueueHoursOfOperationCommand,
+  UpdateQueueMaxContactsCommand,
+  UpdateQueueNameCommand,
+  UpdateQueueOutboundCallerConfigCommand,
+  UpdateQueueOutboundEmailConfigCommand,
+  UpdateQueueStatusCommand,
+  UpdateQuickConnectConfigCommand,
+  UpdateQuickConnectNameCommand,
+  UpdateRoutingProfileAgentAvailabilityTimerCommand,
+  UpdateRoutingProfileConcurrencyCommand,
+  UpdateRoutingProfileDefaultOutboundQueueCommand,
+  UpdateRoutingProfileNameCommand,
+  UpdateRoutingProfileQueuesCommand,
+  UpdateRuleCommand,
+  UpdateSecurityProfileCommand,
+  UpdateTaskTemplateCommand,
+  UpdateTestCaseCommand,
+  UpdateTrafficDistributionCommand,
+  UpdateUserConfigCommand,
+  UpdateUserHierarchyCommand,
+  UpdateUserHierarchyGroupNameCommand,
+  UpdateUserHierarchyStructureCommand,
+  UpdateUserIdentityInfoCommand,
+  UpdateUserNotificationStatusCommand,
+  UpdateUserPhoneConfigCommand,
+  UpdateUserProficienciesCommand,
+  UpdateUserRoutingProfileCommand,
+  UpdateUserSecurityProfilesCommand,
+  UpdateViewContentCommand,
+  UpdateViewMetadataCommand,
+  UpdateWorkspaceMetadataCommand,
+  UpdateWorkspacePageCommand,
+  UpdateWorkspaceThemeCommand,
+  UpdateWorkspaceVisibilityCommand,
+};
+const paginators = {
+  paginateEvaluateDataTableValues,
+  paginateGetCurrentMetricData,
+  paginateGetCurrentUserData,
+  paginateGetMetricData,
+  paginateGetMetricDataV2,
+  paginateListAgentStatuses,
+  paginateListApprovedOrigins,
+  paginateListAttachedFilesConfigurations,
+  paginateListAuthenticationProfiles,
+  paginateListBots,
+  paginateListChildHoursOfOperations,
+  paginateListContactEvaluations,
+  paginateListContactFlowAliases,
+  paginateListContactFlowModuleAliases,
+  paginateListContactFlowModules,
+  paginateListContactFlowModuleVersions,
+  paginateListContactFlows,
+  paginateListContactFlowVersions,
+  paginateListContactReferences,
+  paginateListDataTableAttributes,
+  paginateListDataTablePrimaryValues,
+  paginateListDataTables,
+  paginateListDataTableValues,
+  paginateListDefaultVocabularies,
+  paginateListEntitySecurityProfiles,
+  paginateListEvaluationFormAIVersions,
+  paginateListEvaluationForms,
+  paginateListEvaluationFormVersions,
+  paginateListExtractionDefinitions,
+  paginateListFlowAssociations,
+  paginateListHoursOfOperationOverrides,
+  paginateListHoursOfOperations,
+  paginateListInstanceAttributes,
+  paginateListInstances,
+  paginateListInstanceStorageConfigs,
+  paginateListIntegrationAssociations,
+  paginateListLambdaFunctions,
+  paginateListLexBots,
+  paginateListMetrics,
+  paginateListPhoneNumbers,
+  paginateListPhoneNumbersV2,
+  paginateListPredefinedAttributes,
+  paginateListPrompts,
+  paginateListQueueQuickConnects,
+  paginateListQueues,
+  paginateListQuickConnects,
+  paginateListRealtimeContactAnalysisSegmentsV2,
+  paginateListReplicationFindings,
+  paginateListRoutingProfileManualAssignmentQueues,
+  paginateListRoutingProfileQueues,
+  paginateListRoutingProfiles,
+  paginateListRules,
+  paginateListSecurityKeys,
+  paginateListSecurityProfileAIAgents,
+  paginateListSecurityProfileApplications,
+  paginateListSecurityProfileFlowModules,
+  paginateListSecurityProfilePermissions,
+  paginateListSecurityProfiles,
+  paginateListTaskTemplates,
+  paginateListTestCases,
+  paginateListTrafficDistributionGroups,
+  paginateListTrafficDistributionGroupUsers,
+  paginateListUseCases,
+  paginateListUserHierarchyGroups,
+  paginateListUserProficiencies,
+  paginateListUsers,
+  paginateListViews,
+  paginateListViewVersions,
+  paginateListWorkspacePages,
+  paginateListWorkspaces,
+  paginateSearchAgentStatuses,
+  paginateSearchAvailablePhoneNumbers,
+  paginateSearchContactFlowModules,
+  paginateSearchContactFlows,
+  paginateSearchContacts,
+  paginateSearchDataTables,
+  paginateSearchHoursOfOperationOverrides,
+  paginateSearchHoursOfOperations,
+  paginateSearchMetrics,
+  paginateSearchPredefinedAttributes,
+  paginateSearchPrompts,
+  paginateSearchQueues,
+  paginateSearchQuickConnects,
+  paginateSearchResourceTags,
+  paginateSearchRoutingProfiles,
+  paginateSearchRules,
+  paginateSearchSecurityProfiles,
+  paginateSearchTestCases,
+  paginateSearchUserHierarchyGroups,
+  paginateSearchUsers,
+  paginateSearchViews,
+  paginateSearchVocabularies,
+  paginateSearchWorkspaceAssociations,
+  paginateSearchWorkspaces,
+};
 
 /**
- * <p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer
- *    contact center and provide reliable customer engagement at any scale.</p>
- *          <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing.
- *    You can also resolve customer issues more efficiently by getting customers in touch with the
- *    appropriate agents.</p>
- *          <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits
- *    to the number of requests that you can make per second. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect
- *     Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
- *          <p>You can
- *    connect
- *    programmatically to an AWS service by using an endpoint. For a list of Amazon Connect endpoints, see
- *     <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect
- *    Endpoints</a>.</p>
- *          <note>
- *             <p>Working with contact flows? Check out the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect Flow language</a>.</p>
- *          </note>
+ * @public
  */
-export class Connect extends ConnectClient {
+export interface ConnectRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Connect {
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Associates an approved origin to an Amazon Connect instance.</p>
+   * @see {@link ActivateEvaluationFormCommand}
    */
-  public associateApprovedOrigin(
-    args: AssociateApprovedOriginCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateApprovedOriginCommandOutput>;
-  public associateApprovedOrigin(
-    args: AssociateApprovedOriginCommandInput,
-    cb: (err: any, data?: AssociateApprovedOriginCommandOutput) => void
+  activateEvaluationForm(
+    args: ActivateEvaluationFormCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ActivateEvaluationFormCommandOutput>;
+  activateEvaluationForm(
+    args: ActivateEvaluationFormCommandInput,
+    cb: (err: any, data?: ActivateEvaluationFormCommandOutput) => void
   ): void;
-  public associateApprovedOrigin(
-    args: AssociateApprovedOriginCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateApprovedOriginCommandOutput) => void
+  activateEvaluationForm(
+    args: ActivateEvaluationFormCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ActivateEvaluationFormCommandOutput) => void
   ): void;
-  public associateApprovedOrigin(
-    args: AssociateApprovedOriginCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateApprovedOriginCommandOutput) => void),
-    cb?: (err: any, data?: AssociateApprovedOriginCommandOutput) => void
-  ): Promise<AssociateApprovedOriginCommandOutput> | void {
-    const command = new AssociateApprovedOriginCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex or Amazon Lex V2 bot.</p>
+   * @see {@link AssociateAnalyticsDataSetCommand}
    */
-  public associateBot(
+  associateAnalyticsDataSet(
+    args: AssociateAnalyticsDataSetCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateAnalyticsDataSetCommandOutput>;
+  associateAnalyticsDataSet(
+    args: AssociateAnalyticsDataSetCommandInput,
+    cb: (err: any, data?: AssociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+  associateAnalyticsDataSet(
+    args: AssociateAnalyticsDataSetCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateApprovedOriginCommand}
+   */
+  associateApprovedOrigin(
+    args: AssociateApprovedOriginCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateApprovedOriginCommandOutput>;
+  associateApprovedOrigin(
+    args: AssociateApprovedOriginCommandInput,
+    cb: (err: any, data?: AssociateApprovedOriginCommandOutput) => void
+  ): void;
+  associateApprovedOrigin(
+    args: AssociateApprovedOriginCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateApprovedOriginCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateBotCommand}
+   */
+  associateBot(
     args: AssociateBotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateBotCommandOutput>;
-  public associateBot(args: AssociateBotCommandInput, cb: (err: any, data?: AssociateBotCommandOutput) => void): void;
-  public associateBot(
+  associateBot(
     args: AssociateBotCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: AssociateBotCommandOutput) => void
   ): void;
-  public associateBot(
+  associateBot(
     args: AssociateBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateBotCommandOutput) => void),
-    cb?: (err: any, data?: AssociateBotCommandOutput) => void
-  ): Promise<AssociateBotCommandOutput> | void {
-    const command = new AssociateBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateBotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Associates a storage resource type for the first time. You can only associate one type of
-   *    storage configuration in a single call. This means, for example, that you can't define an
-   *    instance with multiple S3 buckets for storing chat transcripts.</p>
-   *          <p>This API does not create a resource that doesn't exist. It only associates it to the
-   *    instance. Ensure that the resource being specified in the storage configuration, like an S3
-   *    bucket, exists when being used for association.</p>
+   * @see {@link AssociateContactWithUserCommand}
    */
-  public associateInstanceStorageConfig(
+  associateContactWithUser(
+    args: AssociateContactWithUserCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateContactWithUserCommandOutput>;
+  associateContactWithUser(
+    args: AssociateContactWithUserCommandInput,
+    cb: (err: any, data?: AssociateContactWithUserCommandOutput) => void
+  ): void;
+  associateContactWithUser(
+    args: AssociateContactWithUserCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateContactWithUserCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateDefaultVocabularyCommand}
+   */
+  associateDefaultVocabulary(
+    args: AssociateDefaultVocabularyCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateDefaultVocabularyCommandOutput>;
+  associateDefaultVocabulary(
+    args: AssociateDefaultVocabularyCommandInput,
+    cb: (err: any, data?: AssociateDefaultVocabularyCommandOutput) => void
+  ): void;
+  associateDefaultVocabulary(
+    args: AssociateDefaultVocabularyCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateDefaultVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateEmailAddressAliasCommand}
+   */
+  associateEmailAddressAlias(
+    args: AssociateEmailAddressAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateEmailAddressAliasCommandOutput>;
+  associateEmailAddressAlias(
+    args: AssociateEmailAddressAliasCommandInput,
+    cb: (err: any, data?: AssociateEmailAddressAliasCommandOutput) => void
+  ): void;
+  associateEmailAddressAlias(
+    args: AssociateEmailAddressAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateEmailAddressAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateFlowCommand}
+   */
+  associateFlow(
+    args: AssociateFlowCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateFlowCommandOutput>;
+  associateFlow(
+    args: AssociateFlowCommandInput,
+    cb: (err: any, data?: AssociateFlowCommandOutput) => void
+  ): void;
+  associateFlow(
+    args: AssociateFlowCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateHoursOfOperationsCommand}
+   */
+  associateHoursOfOperations(
+    args: AssociateHoursOfOperationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateHoursOfOperationsCommandOutput>;
+  associateHoursOfOperations(
+    args: AssociateHoursOfOperationsCommandInput,
+    cb: (err: any, data?: AssociateHoursOfOperationsCommandOutput) => void
+  ): void;
+  associateHoursOfOperations(
+    args: AssociateHoursOfOperationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateHoursOfOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateInstanceStorageConfigCommand}
+   */
+  associateInstanceStorageConfig(
     args: AssociateInstanceStorageConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateInstanceStorageConfigCommandOutput>;
-  public associateInstanceStorageConfig(
+  associateInstanceStorageConfig(
     args: AssociateInstanceStorageConfigCommandInput,
     cb: (err: any, data?: AssociateInstanceStorageConfigCommandOutput) => void
   ): void;
-  public associateInstanceStorageConfig(
+  associateInstanceStorageConfig(
     args: AssociateInstanceStorageConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: AssociateInstanceStorageConfigCommandOutput) => void
   ): void;
-  public associateInstanceStorageConfig(
-    args: AssociateInstanceStorageConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateInstanceStorageConfigCommandOutput) => void),
-    cb?: (err: any, data?: AssociateInstanceStorageConfigCommandOutput) => void
-  ): Promise<AssociateInstanceStorageConfigCommandOutput> | void {
-    const command = new AssociateInstanceStorageConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>
+   * @see {@link AssociateLambdaFunctionCommand}
    */
-  public associateLambdaFunction(
+  associateLambdaFunction(
     args: AssociateLambdaFunctionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateLambdaFunctionCommandOutput>;
-  public associateLambdaFunction(
+  associateLambdaFunction(
     args: AssociateLambdaFunctionCommandInput,
     cb: (err: any, data?: AssociateLambdaFunctionCommandOutput) => void
   ): void;
-  public associateLambdaFunction(
+  associateLambdaFunction(
     args: AssociateLambdaFunctionCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: AssociateLambdaFunctionCommandOutput) => void
   ): void;
-  public associateLambdaFunction(
-    args: AssociateLambdaFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateLambdaFunctionCommandOutput) => void),
-    cb?: (err: any, data?: AssociateLambdaFunctionCommandOutput) => void
-  ): Promise<AssociateLambdaFunctionCommandOutput> | void {
-    const command = new AssociateLambdaFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>
+   * @see {@link AssociateLexBotCommand}
    */
-  public associateLexBot(
+  associateLexBot(
     args: AssociateLexBotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateLexBotCommandOutput>;
-  public associateLexBot(
+  associateLexBot(
     args: AssociateLexBotCommandInput,
     cb: (err: any, data?: AssociateLexBotCommandOutput) => void
   ): void;
-  public associateLexBot(
+  associateLexBot(
     args: AssociateLexBotCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: AssociateLexBotCommandOutput) => void
   ): void;
-  public associateLexBot(
-    args: AssociateLexBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateLexBotCommandOutput) => void),
-    cb?: (err: any, data?: AssociateLexBotCommandOutput) => void
-  ): Promise<AssociateLexBotCommandOutput> | void {
-    const command = new AssociateLexBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Associates a set of quick connects with a queue.</p>
+   * @see {@link AssociatePhoneNumberContactFlowCommand}
    */
-  public associateQueueQuickConnects(
+  associatePhoneNumberContactFlow(
+    args: AssociatePhoneNumberContactFlowCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociatePhoneNumberContactFlowCommandOutput>;
+  associatePhoneNumberContactFlow(
+    args: AssociatePhoneNumberContactFlowCommandInput,
+    cb: (err: any, data?: AssociatePhoneNumberContactFlowCommandOutput) => void
+  ): void;
+  associatePhoneNumberContactFlow(
+    args: AssociatePhoneNumberContactFlowCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociatePhoneNumberContactFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateQueueEmailAddressesCommand}
+   */
+  associateQueueEmailAddresses(
+    args: AssociateQueueEmailAddressesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateQueueEmailAddressesCommandOutput>;
+  associateQueueEmailAddresses(
+    args: AssociateQueueEmailAddressesCommandInput,
+    cb: (err: any, data?: AssociateQueueEmailAddressesCommandOutput) => void
+  ): void;
+  associateQueueEmailAddresses(
+    args: AssociateQueueEmailAddressesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateQueueEmailAddressesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateQueueQuickConnectsCommand}
+   */
+  associateQueueQuickConnects(
     args: AssociateQueueQuickConnectsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateQueueQuickConnectsCommandOutput>;
-  public associateQueueQuickConnects(
+  associateQueueQuickConnects(
     args: AssociateQueueQuickConnectsCommandInput,
     cb: (err: any, data?: AssociateQueueQuickConnectsCommandOutput) => void
   ): void;
-  public associateQueueQuickConnects(
+  associateQueueQuickConnects(
     args: AssociateQueueQuickConnectsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: AssociateQueueQuickConnectsCommandOutput) => void
   ): void;
-  public associateQueueQuickConnects(
-    args: AssociateQueueQuickConnectsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateQueueQuickConnectsCommandOutput) => void),
-    cb?: (err: any, data?: AssociateQueueQuickConnectsCommandOutput) => void
-  ): Promise<AssociateQueueQuickConnectsCommandOutput> | void {
-    const command = new AssociateQueueQuickConnectsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a set of queues with a routing profile.</p>
+   * @see {@link AssociateRoutingProfileQueuesCommand}
    */
-  public associateRoutingProfileQueues(
+  associateRoutingProfileQueues(
     args: AssociateRoutingProfileQueuesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateRoutingProfileQueuesCommandOutput>;
-  public associateRoutingProfileQueues(
+  associateRoutingProfileQueues(
     args: AssociateRoutingProfileQueuesCommandInput,
     cb: (err: any, data?: AssociateRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public associateRoutingProfileQueues(
+  associateRoutingProfileQueues(
     args: AssociateRoutingProfileQueuesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: AssociateRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public associateRoutingProfileQueues(
-    args: AssociateRoutingProfileQueuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateRoutingProfileQueuesCommandOutput) => void),
-    cb?: (err: any, data?: AssociateRoutingProfileQueuesCommandOutput) => void
-  ): Promise<AssociateRoutingProfileQueuesCommandOutput> | void {
-    const command = new AssociateRoutingProfileQueuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Associates a security key to the instance.</p>
+   * @see {@link AssociateSecurityKeyCommand}
    */
-  public associateSecurityKey(
+  associateSecurityKey(
     args: AssociateSecurityKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<AssociateSecurityKeyCommandOutput>;
-  public associateSecurityKey(
+  associateSecurityKey(
     args: AssociateSecurityKeyCommandInput,
     cb: (err: any, data?: AssociateSecurityKeyCommandOutput) => void
   ): void;
-  public associateSecurityKey(
+  associateSecurityKey(
     args: AssociateSecurityKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: AssociateSecurityKeyCommandOutput) => void
   ): void;
-  public associateSecurityKey(
-    args: AssociateSecurityKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateSecurityKeyCommandOutput) => void),
-    cb?: (err: any, data?: AssociateSecurityKeyCommandOutput) => void
-  ): Promise<AssociateSecurityKeyCommandOutput> | void {
-    const command = new AssociateSecurityKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Creates an agent status for the specified Amazon Connect instance.</p>
+   * @see {@link AssociateSecurityProfilesCommand}
    */
-  public createAgentStatus(
+  associateSecurityProfiles(
+    args: AssociateSecurityProfilesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateSecurityProfilesCommandOutput>;
+  associateSecurityProfiles(
+    args: AssociateSecurityProfilesCommandInput,
+    cb: (err: any, data?: AssociateSecurityProfilesCommandOutput) => void
+  ): void;
+  associateSecurityProfiles(
+    args: AssociateSecurityProfilesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateSecurityProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateTrafficDistributionGroupUserCommand}
+   */
+  associateTrafficDistributionGroupUser(
+    args: AssociateTrafficDistributionGroupUserCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateTrafficDistributionGroupUserCommandOutput>;
+  associateTrafficDistributionGroupUser(
+    args: AssociateTrafficDistributionGroupUserCommandInput,
+    cb: (err: any, data?: AssociateTrafficDistributionGroupUserCommandOutput) => void
+  ): void;
+  associateTrafficDistributionGroupUser(
+    args: AssociateTrafficDistributionGroupUserCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateTrafficDistributionGroupUserCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateUserProficienciesCommand}
+   */
+  associateUserProficiencies(
+    args: AssociateUserProficienciesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateUserProficienciesCommandOutput>;
+  associateUserProficiencies(
+    args: AssociateUserProficienciesCommandInput,
+    cb: (err: any, data?: AssociateUserProficienciesCommandOutput) => void
+  ): void;
+  associateUserProficiencies(
+    args: AssociateUserProficienciesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateUserProficienciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateWorkspaceCommand}
+   */
+  associateWorkspace(
+    args: AssociateWorkspaceCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<AssociateWorkspaceCommandOutput>;
+  associateWorkspace(
+    args: AssociateWorkspaceCommandInput,
+    cb: (err: any, data?: AssociateWorkspaceCommandOutput) => void
+  ): void;
+  associateWorkspace(
+    args: AssociateWorkspaceCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: AssociateWorkspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchAssociateAnalyticsDataSetCommand}
+   */
+  batchAssociateAnalyticsDataSet(
+    args: BatchAssociateAnalyticsDataSetCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchAssociateAnalyticsDataSetCommandOutput>;
+  batchAssociateAnalyticsDataSet(
+    args: BatchAssociateAnalyticsDataSetCommandInput,
+    cb: (err: any, data?: BatchAssociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+  batchAssociateAnalyticsDataSet(
+    args: BatchAssociateAnalyticsDataSetCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchAssociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchCreateDataTableValueCommand}
+   */
+  batchCreateDataTableValue(
+    args: BatchCreateDataTableValueCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchCreateDataTableValueCommandOutput>;
+  batchCreateDataTableValue(
+    args: BatchCreateDataTableValueCommandInput,
+    cb: (err: any, data?: BatchCreateDataTableValueCommandOutput) => void
+  ): void;
+  batchCreateDataTableValue(
+    args: BatchCreateDataTableValueCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchCreateDataTableValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteDataTableValueCommand}
+   */
+  batchDeleteDataTableValue(
+    args: BatchDeleteDataTableValueCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchDeleteDataTableValueCommandOutput>;
+  batchDeleteDataTableValue(
+    args: BatchDeleteDataTableValueCommandInput,
+    cb: (err: any, data?: BatchDeleteDataTableValueCommandOutput) => void
+  ): void;
+  batchDeleteDataTableValue(
+    args: BatchDeleteDataTableValueCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchDeleteDataTableValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDescribeDataTableValueCommand}
+   */
+  batchDescribeDataTableValue(
+    args: BatchDescribeDataTableValueCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchDescribeDataTableValueCommandOutput>;
+  batchDescribeDataTableValue(
+    args: BatchDescribeDataTableValueCommandInput,
+    cb: (err: any, data?: BatchDescribeDataTableValueCommandOutput) => void
+  ): void;
+  batchDescribeDataTableValue(
+    args: BatchDescribeDataTableValueCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchDescribeDataTableValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDisassociateAnalyticsDataSetCommand}
+   */
+  batchDisassociateAnalyticsDataSet(
+    args: BatchDisassociateAnalyticsDataSetCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchDisassociateAnalyticsDataSetCommandOutput>;
+  batchDisassociateAnalyticsDataSet(
+    args: BatchDisassociateAnalyticsDataSetCommandInput,
+    cb: (err: any, data?: BatchDisassociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+  batchDisassociateAnalyticsDataSet(
+    args: BatchDisassociateAnalyticsDataSetCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchDisassociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetAttachedFileMetadataCommand}
+   */
+  batchGetAttachedFileMetadata(
+    args: BatchGetAttachedFileMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchGetAttachedFileMetadataCommandOutput>;
+  batchGetAttachedFileMetadata(
+    args: BatchGetAttachedFileMetadataCommandInput,
+    cb: (err: any, data?: BatchGetAttachedFileMetadataCommandOutput) => void
+  ): void;
+  batchGetAttachedFileMetadata(
+    args: BatchGetAttachedFileMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchGetAttachedFileMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetFlowAssociationCommand}
+   */
+  batchGetFlowAssociation(
+    args: BatchGetFlowAssociationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchGetFlowAssociationCommandOutput>;
+  batchGetFlowAssociation(
+    args: BatchGetFlowAssociationCommandInput,
+    cb: (err: any, data?: BatchGetFlowAssociationCommandOutput) => void
+  ): void;
+  batchGetFlowAssociation(
+    args: BatchGetFlowAssociationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchGetFlowAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchPutContactCommand}
+   */
+  batchPutContact(
+    args: BatchPutContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchPutContactCommandOutput>;
+  batchPutContact(
+    args: BatchPutContactCommandInput,
+    cb: (err: any, data?: BatchPutContactCommandOutput) => void
+  ): void;
+  batchPutContact(
+    args: BatchPutContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchPutContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateDataTableValueCommand}
+   */
+  batchUpdateDataTableValue(
+    args: BatchUpdateDataTableValueCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<BatchUpdateDataTableValueCommandOutput>;
+  batchUpdateDataTableValue(
+    args: BatchUpdateDataTableValueCommandInput,
+    cb: (err: any, data?: BatchUpdateDataTableValueCommandOutput) => void
+  ): void;
+  batchUpdateDataTableValue(
+    args: BatchUpdateDataTableValueCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: BatchUpdateDataTableValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ClaimPhoneNumberCommand}
+   */
+  claimPhoneNumber(
+    args: ClaimPhoneNumberCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ClaimPhoneNumberCommandOutput>;
+  claimPhoneNumber(
+    args: ClaimPhoneNumberCommandInput,
+    cb: (err: any, data?: ClaimPhoneNumberCommandOutput) => void
+  ): void;
+  claimPhoneNumber(
+    args: ClaimPhoneNumberCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ClaimPhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CompleteAttachedFileUploadCommand}
+   */
+  completeAttachedFileUpload(
+    args: CompleteAttachedFileUploadCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CompleteAttachedFileUploadCommandOutput>;
+  completeAttachedFileUpload(
+    args: CompleteAttachedFileUploadCommandInput,
+    cb: (err: any, data?: CompleteAttachedFileUploadCommandOutput) => void
+  ): void;
+  completeAttachedFileUpload(
+    args: CompleteAttachedFileUploadCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CompleteAttachedFileUploadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentStatusCommand}
+   */
+  createAgentStatus(
     args: CreateAgentStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateAgentStatusCommandOutput>;
-  public createAgentStatus(
+  createAgentStatus(
     args: CreateAgentStatusCommandInput,
     cb: (err: any, data?: CreateAgentStatusCommandOutput) => void
   ): void;
-  public createAgentStatus(
+  createAgentStatus(
     args: CreateAgentStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateAgentStatusCommandOutput) => void
   ): void;
-  public createAgentStatus(
-    args: CreateAgentStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAgentStatusCommandOutput) => void),
-    cb?: (err: any, data?: CreateAgentStatusCommandOutput) => void
-  ): Promise<CreateAgentStatusCommandOutput> | void {
-    const command = new CreateAgentStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a contact flow for the specified Amazon Connect instance.</p>
-   *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
-   *    Flow language</a>.</p>
+   * @see {@link CreateAttachedFileCommand}
    */
-  public createContactFlow(
+  createAttachedFile(
+    args: CreateAttachedFileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateAttachedFileCommandOutput>;
+  createAttachedFile(
+    args: CreateAttachedFileCommandInput,
+    cb: (err: any, data?: CreateAttachedFileCommandOutput) => void
+  ): void;
+  createAttachedFile(
+    args: CreateAttachedFileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateAttachedFileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAuthCodeCommand}
+   */
+  createAuthCode(
+    args: CreateAuthCodeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateAuthCodeCommandOutput>;
+  createAuthCode(
+    args: CreateAuthCodeCommandInput,
+    cb: (err: any, data?: CreateAuthCodeCommandOutput) => void
+  ): void;
+  createAuthCode(
+    args: CreateAuthCodeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateAuthCodeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactCommand}
+   */
+  createContact(
+    args: CreateContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateContactCommandOutput>;
+  createContact(
+    args: CreateContactCommandInput,
+    cb: (err: any, data?: CreateContactCommandOutput) => void
+  ): void;
+  createContact(
+    args: CreateContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactFlowCommand}
+   */
+  createContactFlow(
     args: CreateContactFlowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateContactFlowCommandOutput>;
-  public createContactFlow(
+  createContactFlow(
     args: CreateContactFlowCommandInput,
     cb: (err: any, data?: CreateContactFlowCommandOutput) => void
   ): void;
-  public createContactFlow(
+  createContactFlow(
     args: CreateContactFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateContactFlowCommandOutput) => void
   ): void;
-  public createContactFlow(
-    args: CreateContactFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateContactFlowCommandOutput) => void),
-    cb?: (err: any, data?: CreateContactFlowCommandOutput) => void
-  ): Promise<CreateContactFlowCommandOutput> | void {
-    const command = new CreateContactFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates hours of operation. </p>
+   * @see {@link CreateContactFlowAliasCommand}
    */
-  public createHoursOfOperation(
+  createContactFlowAlias(
+    args: CreateContactFlowAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateContactFlowAliasCommandOutput>;
+  createContactFlowAlias(
+    args: CreateContactFlowAliasCommandInput,
+    cb: (err: any, data?: CreateContactFlowAliasCommandOutput) => void
+  ): void;
+  createContactFlowAlias(
+    args: CreateContactFlowAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateContactFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactFlowModuleCommand}
+   */
+  createContactFlowModule(
+    args: CreateContactFlowModuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateContactFlowModuleCommandOutput>;
+  createContactFlowModule(
+    args: CreateContactFlowModuleCommandInput,
+    cb: (err: any, data?: CreateContactFlowModuleCommandOutput) => void
+  ): void;
+  createContactFlowModule(
+    args: CreateContactFlowModuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateContactFlowModuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactFlowModuleAliasCommand}
+   */
+  createContactFlowModuleAlias(
+    args: CreateContactFlowModuleAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateContactFlowModuleAliasCommandOutput>;
+  createContactFlowModuleAlias(
+    args: CreateContactFlowModuleAliasCommandInput,
+    cb: (err: any, data?: CreateContactFlowModuleAliasCommandOutput) => void
+  ): void;
+  createContactFlowModuleAlias(
+    args: CreateContactFlowModuleAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateContactFlowModuleAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactFlowModuleVersionCommand}
+   */
+  createContactFlowModuleVersion(
+    args: CreateContactFlowModuleVersionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateContactFlowModuleVersionCommandOutput>;
+  createContactFlowModuleVersion(
+    args: CreateContactFlowModuleVersionCommandInput,
+    cb: (err: any, data?: CreateContactFlowModuleVersionCommandOutput) => void
+  ): void;
+  createContactFlowModuleVersion(
+    args: CreateContactFlowModuleVersionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateContactFlowModuleVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactFlowVersionCommand}
+   */
+  createContactFlowVersion(
+    args: CreateContactFlowVersionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateContactFlowVersionCommandOutput>;
+  createContactFlowVersion(
+    args: CreateContactFlowVersionCommandInput,
+    cb: (err: any, data?: CreateContactFlowVersionCommandOutput) => void
+  ): void;
+  createContactFlowVersion(
+    args: CreateContactFlowVersionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateContactFlowVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataTableCommand}
+   */
+  createDataTable(
+    args: CreateDataTableCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateDataTableCommandOutput>;
+  createDataTable(
+    args: CreateDataTableCommandInput,
+    cb: (err: any, data?: CreateDataTableCommandOutput) => void
+  ): void;
+  createDataTable(
+    args: CreateDataTableCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateDataTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataTableAttributeCommand}
+   */
+  createDataTableAttribute(
+    args: CreateDataTableAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateDataTableAttributeCommandOutput>;
+  createDataTableAttribute(
+    args: CreateDataTableAttributeCommandInput,
+    cb: (err: any, data?: CreateDataTableAttributeCommandOutput) => void
+  ): void;
+  createDataTableAttribute(
+    args: CreateDataTableAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateDataTableAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEmailAddressCommand}
+   */
+  createEmailAddress(
+    args: CreateEmailAddressCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateEmailAddressCommandOutput>;
+  createEmailAddress(
+    args: CreateEmailAddressCommandInput,
+    cb: (err: any, data?: CreateEmailAddressCommandOutput) => void
+  ): void;
+  createEmailAddress(
+    args: CreateEmailAddressCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateEmailAddressCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEvaluationFormCommand}
+   */
+  createEvaluationForm(
+    args: CreateEvaluationFormCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateEvaluationFormCommandOutput>;
+  createEvaluationForm(
+    args: CreateEvaluationFormCommandInput,
+    cb: (err: any, data?: CreateEvaluationFormCommandOutput) => void
+  ): void;
+  createEvaluationForm(
+    args: CreateEvaluationFormCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateEvaluationFormCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateExtractionDefinitionCommand}
+   */
+  createExtractionDefinition(
+    args: CreateExtractionDefinitionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateExtractionDefinitionCommandOutput>;
+  createExtractionDefinition(
+    args: CreateExtractionDefinitionCommandInput,
+    cb: (err: any, data?: CreateExtractionDefinitionCommandOutput) => void
+  ): void;
+  createExtractionDefinition(
+    args: CreateExtractionDefinitionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateExtractionDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateHoursOfOperationCommand}
+   */
+  createHoursOfOperation(
     args: CreateHoursOfOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateHoursOfOperationCommandOutput>;
-  public createHoursOfOperation(
+  createHoursOfOperation(
     args: CreateHoursOfOperationCommandInput,
     cb: (err: any, data?: CreateHoursOfOperationCommandOutput) => void
   ): void;
-  public createHoursOfOperation(
+  createHoursOfOperation(
     args: CreateHoursOfOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateHoursOfOperationCommandOutput) => void
   ): void;
-  public createHoursOfOperation(
-    args: CreateHoursOfOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateHoursOfOperationCommandOutput) => void),
-    cb?: (err: any, data?: CreateHoursOfOperationCommandOutput) => void
-  ): Promise<CreateHoursOfOperationCommandOutput> | void {
-    const command = new CreateHoursOfOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any
-   *    storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not
-   *    allow for any configurations on features, such as Contact Lens for Amazon Connect. </p>
-   *          <p>Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days.
-   * If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances.
-   * You must wait 30 days before you can restart creating and deleting instances in your account.</p>
+   * @see {@link CreateHoursOfOperationOverrideCommand}
    */
-  public createInstance(
+  createHoursOfOperationOverride(
+    args: CreateHoursOfOperationOverrideCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateHoursOfOperationOverrideCommandOutput>;
+  createHoursOfOperationOverride(
+    args: CreateHoursOfOperationOverrideCommandInput,
+    cb: (err: any, data?: CreateHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+  createHoursOfOperationOverride(
+    args: CreateHoursOfOperationOverrideCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstanceCommand}
+   */
+  createInstance(
     args: CreateInstanceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateInstanceCommandOutput>;
-  public createInstance(
+  createInstance(
     args: CreateInstanceCommandInput,
     cb: (err: any, data?: CreateInstanceCommandOutput) => void
   ): void;
-  public createInstance(
+  createInstance(
     args: CreateInstanceCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateInstanceCommandOutput) => void
   ): void;
-  public createInstance(
-    args: CreateInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateInstanceCommandOutput) => void),
-    cb?: (err: any, data?: CreateInstanceCommandOutput) => void
-  ): Promise<CreateInstanceCommandOutput> | void {
-    const command = new CreateInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an AWS resource association with an Amazon Connect instance.</p>
+   * @see {@link CreateIntegrationAssociationCommand}
    */
-  public createIntegrationAssociation(
+  createIntegrationAssociation(
     args: CreateIntegrationAssociationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateIntegrationAssociationCommandOutput>;
-  public createIntegrationAssociation(
+  createIntegrationAssociation(
     args: CreateIntegrationAssociationCommandInput,
     cb: (err: any, data?: CreateIntegrationAssociationCommandOutput) => void
   ): void;
-  public createIntegrationAssociation(
+  createIntegrationAssociation(
     args: CreateIntegrationAssociationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateIntegrationAssociationCommandOutput) => void
   ): void;
-  public createIntegrationAssociation(
-    args: CreateIntegrationAssociationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIntegrationAssociationCommandOutput) => void),
-    cb?: (err: any, data?: CreateIntegrationAssociationCommandOutput) => void
-  ): Promise<CreateIntegrationAssociationCommandOutput> | void {
-    const command = new CreateIntegrationAssociationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Creates a new queue for the specified Amazon Connect instance.</p>
+   * @see {@link CreateMetricCommand}
    */
-  public createQueue(args: CreateQueueCommandInput, options?: __HttpHandlerOptions): Promise<CreateQueueCommandOutput>;
-  public createQueue(args: CreateQueueCommandInput, cb: (err: any, data?: CreateQueueCommandOutput) => void): void;
-  public createQueue(
+  createMetric(
+    args: CreateMetricCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateMetricCommandOutput>;
+  createMetric(
+    args: CreateMetricCommandInput,
+    cb: (err: any, data?: CreateMetricCommandOutput) => void
+  ): void;
+  createMetric(
+    args: CreateMetricCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateMetricCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNotificationCommand}
+   */
+  createNotification(
+    args: CreateNotificationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateNotificationCommandOutput>;
+  createNotification(
+    args: CreateNotificationCommandInput,
+    cb: (err: any, data?: CreateNotificationCommandOutput) => void
+  ): void;
+  createNotification(
+    args: CreateNotificationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateNotificationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateParticipantCommand}
+   */
+  createParticipant(
+    args: CreateParticipantCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateParticipantCommandOutput>;
+  createParticipant(
+    args: CreateParticipantCommandInput,
+    cb: (err: any, data?: CreateParticipantCommandOutput) => void
+  ): void;
+  createParticipant(
+    args: CreateParticipantCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateParticipantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePersistentContactAssociationCommand}
+   */
+  createPersistentContactAssociation(
+    args: CreatePersistentContactAssociationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreatePersistentContactAssociationCommandOutput>;
+  createPersistentContactAssociation(
+    args: CreatePersistentContactAssociationCommandInput,
+    cb: (err: any, data?: CreatePersistentContactAssociationCommandOutput) => void
+  ): void;
+  createPersistentContactAssociation(
+    args: CreatePersistentContactAssociationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreatePersistentContactAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePredefinedAttributeCommand}
+   */
+  createPredefinedAttribute(
+    args: CreatePredefinedAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreatePredefinedAttributeCommandOutput>;
+  createPredefinedAttribute(
+    args: CreatePredefinedAttributeCommandInput,
+    cb: (err: any, data?: CreatePredefinedAttributeCommandOutput) => void
+  ): void;
+  createPredefinedAttribute(
+    args: CreatePredefinedAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreatePredefinedAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePromptCommand}
+   */
+  createPrompt(
+    args: CreatePromptCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreatePromptCommandOutput>;
+  createPrompt(
+    args: CreatePromptCommandInput,
+    cb: (err: any, data?: CreatePromptCommandOutput) => void
+  ): void;
+  createPrompt(
+    args: CreatePromptCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreatePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePushNotificationRegistrationCommand}
+   */
+  createPushNotificationRegistration(
+    args: CreatePushNotificationRegistrationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreatePushNotificationRegistrationCommandOutput>;
+  createPushNotificationRegistration(
+    args: CreatePushNotificationRegistrationCommandInput,
+    cb: (err: any, data?: CreatePushNotificationRegistrationCommandOutput) => void
+  ): void;
+  createPushNotificationRegistration(
+    args: CreatePushNotificationRegistrationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreatePushNotificationRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateQueueCommand}
+   */
+  createQueue(
     args: CreateQueueCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<CreateQueueCommandOutput>;
+  createQueue(
+    args: CreateQueueCommandInput,
     cb: (err: any, data?: CreateQueueCommandOutput) => void
   ): void;
-  public createQueue(
+  createQueue(
     args: CreateQueueCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateQueueCommandOutput) => void),
-    cb?: (err: any, data?: CreateQueueCommandOutput) => void
-  ): Promise<CreateQueueCommandOutput> | void {
-    const command = new CreateQueueCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateQueueCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a quick connect for the specified Amazon Connect instance.</p>
+   * @see {@link CreateQuickConnectCommand}
    */
-  public createQuickConnect(
+  createQuickConnect(
     args: CreateQuickConnectCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateQuickConnectCommandOutput>;
-  public createQuickConnect(
+  createQuickConnect(
     args: CreateQuickConnectCommandInput,
     cb: (err: any, data?: CreateQuickConnectCommandOutput) => void
   ): void;
-  public createQuickConnect(
+  createQuickConnect(
     args: CreateQuickConnectCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateQuickConnectCommandOutput) => void
   ): void;
-  public createQuickConnect(
-    args: CreateQuickConnectCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateQuickConnectCommandOutput) => void),
-    cb?: (err: any, data?: CreateQuickConnectCommandOutput) => void
-  ): Promise<CreateQuickConnectCommandOutput> | void {
-    const command = new CreateQuickConnectCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new routing profile.</p>
+   * @see {@link CreateRoutingProfileCommand}
    */
-  public createRoutingProfile(
+  createRoutingProfile(
     args: CreateRoutingProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateRoutingProfileCommandOutput>;
-  public createRoutingProfile(
+  createRoutingProfile(
     args: CreateRoutingProfileCommandInput,
     cb: (err: any, data?: CreateRoutingProfileCommandOutput) => void
   ): void;
-  public createRoutingProfile(
+  createRoutingProfile(
     args: CreateRoutingProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateRoutingProfileCommandOutput) => void
   ): void;
-  public createRoutingProfile(
-    args: CreateRoutingProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRoutingProfileCommandOutput) => void),
-    cb?: (err: any, data?: CreateRoutingProfileCommandOutput) => void
-  ): Promise<CreateRoutingProfileCommandOutput> | void {
-    const command = new CreateRoutingProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a use case for an integration association.</p>
+   * @see {@link CreateRuleCommand}
    */
-  public createUseCase(
+  createRule(
+    args: CreateRuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateRuleCommandOutput>;
+  createRule(
+    args: CreateRuleCommandInput,
+    cb: (err: any, data?: CreateRuleCommandOutput) => void
+  ): void;
+  createRule(
+    args: CreateRuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSecurityProfileCommand}
+   */
+  createSecurityProfile(
+    args: CreateSecurityProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateSecurityProfileCommandOutput>;
+  createSecurityProfile(
+    args: CreateSecurityProfileCommandInput,
+    cb: (err: any, data?: CreateSecurityProfileCommandOutput) => void
+  ): void;
+  createSecurityProfile(
+    args: CreateSecurityProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateSecurityProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTaskTemplateCommand}
+   */
+  createTaskTemplate(
+    args: CreateTaskTemplateCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateTaskTemplateCommandOutput>;
+  createTaskTemplate(
+    args: CreateTaskTemplateCommandInput,
+    cb: (err: any, data?: CreateTaskTemplateCommandOutput) => void
+  ): void;
+  createTaskTemplate(
+    args: CreateTaskTemplateCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateTaskTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTestCaseCommand}
+   */
+  createTestCase(
+    args: CreateTestCaseCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateTestCaseCommandOutput>;
+  createTestCase(
+    args: CreateTestCaseCommandInput,
+    cb: (err: any, data?: CreateTestCaseCommandOutput) => void
+  ): void;
+  createTestCase(
+    args: CreateTestCaseCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTrafficDistributionGroupCommand}
+   */
+  createTrafficDistributionGroup(
+    args: CreateTrafficDistributionGroupCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateTrafficDistributionGroupCommandOutput>;
+  createTrafficDistributionGroup(
+    args: CreateTrafficDistributionGroupCommandInput,
+    cb: (err: any, data?: CreateTrafficDistributionGroupCommandOutput) => void
+  ): void;
+  createTrafficDistributionGroup(
+    args: CreateTrafficDistributionGroupCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateTrafficDistributionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUseCaseCommand}
+   */
+  createUseCase(
     args: CreateUseCaseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateUseCaseCommandOutput>;
-  public createUseCase(
+  createUseCase(
     args: CreateUseCaseCommandInput,
     cb: (err: any, data?: CreateUseCaseCommandOutput) => void
   ): void;
-  public createUseCase(
+  createUseCase(
     args: CreateUseCaseCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateUseCaseCommandOutput) => void
   ): void;
-  public createUseCase(
-    args: CreateUseCaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUseCaseCommandOutput) => void),
-    cb?: (err: any, data?: CreateUseCaseCommandOutput) => void
-  ): Promise<CreateUseCaseCommandOutput> | void {
-    const command = new CreateUseCaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a user account for the specified Amazon Connect instance.</p>
-   *          <p>For information about how to create user accounts using the Amazon Connect console, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html">Add Users</a> in
-   *    the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link CreateUserCommand}
    */
-  public createUser(args: CreateUserCommandInput, options?: __HttpHandlerOptions): Promise<CreateUserCommandOutput>;
-  public createUser(args: CreateUserCommandInput, cb: (err: any, data?: CreateUserCommandOutput) => void): void;
-  public createUser(
+  createUser(
     args: CreateUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<CreateUserCommandOutput>;
+  createUser(
+    args: CreateUserCommandInput,
     cb: (err: any, data?: CreateUserCommandOutput) => void
   ): void;
-  public createUser(
+  createUser(
     args: CreateUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserCommandOutput) => void
-  ): Promise<CreateUserCommandOutput> | void {
-    const command = new CreateUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a new user hierarchy group.</p>
+   * @see {@link CreateUserHierarchyGroupCommand}
    */
-  public createUserHierarchyGroup(
+  createUserHierarchyGroup(
     args: CreateUserHierarchyGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<CreateUserHierarchyGroupCommandOutput>;
-  public createUserHierarchyGroup(
+  createUserHierarchyGroup(
     args: CreateUserHierarchyGroupCommandInput,
     cb: (err: any, data?: CreateUserHierarchyGroupCommandOutput) => void
   ): void;
-  public createUserHierarchyGroup(
+  createUserHierarchyGroup(
     args: CreateUserHierarchyGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: CreateUserHierarchyGroupCommandOutput) => void
   ): void;
-  public createUserHierarchyGroup(
-    args: CreateUserHierarchyGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserHierarchyGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserHierarchyGroupCommandOutput) => void
-  ): Promise<CreateUserHierarchyGroupCommandOutput> | void {
-    const command = new CreateUserHierarchyGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an hours of operation.</p>
+   * @see {@link CreateViewCommand}
    */
-  public deleteHoursOfOperation(
+  createView(
+    args: CreateViewCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateViewCommandOutput>;
+  createView(
+    args: CreateViewCommandInput,
+    cb: (err: any, data?: CreateViewCommandOutput) => void
+  ): void;
+  createView(
+    args: CreateViewCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateViewVersionCommand}
+   */
+  createViewVersion(
+    args: CreateViewVersionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateViewVersionCommandOutput>;
+  createViewVersion(
+    args: CreateViewVersionCommandInput,
+    cb: (err: any, data?: CreateViewVersionCommandOutput) => void
+  ): void;
+  createViewVersion(
+    args: CreateViewVersionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateViewVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVocabularyCommand}
+   */
+  createVocabulary(
+    args: CreateVocabularyCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateVocabularyCommandOutput>;
+  createVocabulary(
+    args: CreateVocabularyCommandInput,
+    cb: (err: any, data?: CreateVocabularyCommandOutput) => void
+  ): void;
+  createVocabulary(
+    args: CreateVocabularyCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkspaceCommand}
+   */
+  createWorkspace(
+    args: CreateWorkspaceCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateWorkspaceCommandOutput>;
+  createWorkspace(
+    args: CreateWorkspaceCommandInput,
+    cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
+  ): void;
+  createWorkspace(
+    args: CreateWorkspaceCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkspacePageCommand}
+   */
+  createWorkspacePage(
+    args: CreateWorkspacePageCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<CreateWorkspacePageCommandOutput>;
+  createWorkspacePage(
+    args: CreateWorkspacePageCommandInput,
+    cb: (err: any, data?: CreateWorkspacePageCommandOutput) => void
+  ): void;
+  createWorkspacePage(
+    args: CreateWorkspacePageCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: CreateWorkspacePageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeactivateEvaluationFormCommand}
+   */
+  deactivateEvaluationForm(
+    args: DeactivateEvaluationFormCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeactivateEvaluationFormCommandOutput>;
+  deactivateEvaluationForm(
+    args: DeactivateEvaluationFormCommandInput,
+    cb: (err: any, data?: DeactivateEvaluationFormCommandOutput) => void
+  ): void;
+  deactivateEvaluationForm(
+    args: DeactivateEvaluationFormCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeactivateEvaluationFormCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAttachedFileCommand}
+   */
+  deleteAttachedFile(
+    args: DeleteAttachedFileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteAttachedFileCommandOutput>;
+  deleteAttachedFile(
+    args: DeleteAttachedFileCommandInput,
+    cb: (err: any, data?: DeleteAttachedFileCommandOutput) => void
+  ): void;
+  deleteAttachedFile(
+    args: DeleteAttachedFileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteAttachedFileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactDataCommand}
+   */
+  deleteContactData(
+    args: DeleteContactDataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactDataCommandOutput>;
+  deleteContactData(
+    args: DeleteContactDataCommandInput,
+    cb: (err: any, data?: DeleteContactDataCommandOutput) => void
+  ): void;
+  deleteContactData(
+    args: DeleteContactDataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactEvaluationCommand}
+   */
+  deleteContactEvaluation(
+    args: DeleteContactEvaluationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactEvaluationCommandOutput>;
+  deleteContactEvaluation(
+    args: DeleteContactEvaluationCommandInput,
+    cb: (err: any, data?: DeleteContactEvaluationCommandOutput) => void
+  ): void;
+  deleteContactEvaluation(
+    args: DeleteContactEvaluationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactFlowCommand}
+   */
+  deleteContactFlow(
+    args: DeleteContactFlowCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactFlowCommandOutput>;
+  deleteContactFlow(
+    args: DeleteContactFlowCommandInput,
+    cb: (err: any, data?: DeleteContactFlowCommandOutput) => void
+  ): void;
+  deleteContactFlow(
+    args: DeleteContactFlowCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactFlowAliasCommand}
+   */
+  deleteContactFlowAlias(
+    args: DeleteContactFlowAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactFlowAliasCommandOutput>;
+  deleteContactFlowAlias(
+    args: DeleteContactFlowAliasCommandInput,
+    cb: (err: any, data?: DeleteContactFlowAliasCommandOutput) => void
+  ): void;
+  deleteContactFlowAlias(
+    args: DeleteContactFlowAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactFlowModuleCommand}
+   */
+  deleteContactFlowModule(
+    args: DeleteContactFlowModuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactFlowModuleCommandOutput>;
+  deleteContactFlowModule(
+    args: DeleteContactFlowModuleCommandInput,
+    cb: (err: any, data?: DeleteContactFlowModuleCommandOutput) => void
+  ): void;
+  deleteContactFlowModule(
+    args: DeleteContactFlowModuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactFlowModuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactFlowModuleAliasCommand}
+   */
+  deleteContactFlowModuleAlias(
+    args: DeleteContactFlowModuleAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactFlowModuleAliasCommandOutput>;
+  deleteContactFlowModuleAlias(
+    args: DeleteContactFlowModuleAliasCommandInput,
+    cb: (err: any, data?: DeleteContactFlowModuleAliasCommandOutput) => void
+  ): void;
+  deleteContactFlowModuleAlias(
+    args: DeleteContactFlowModuleAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactFlowModuleAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactFlowModuleVersionCommand}
+   */
+  deleteContactFlowModuleVersion(
+    args: DeleteContactFlowModuleVersionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactFlowModuleVersionCommandOutput>;
+  deleteContactFlowModuleVersion(
+    args: DeleteContactFlowModuleVersionCommandInput,
+    cb: (err: any, data?: DeleteContactFlowModuleVersionCommandOutput) => void
+  ): void;
+  deleteContactFlowModuleVersion(
+    args: DeleteContactFlowModuleVersionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactFlowModuleVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactFlowVersionCommand}
+   */
+  deleteContactFlowVersion(
+    args: DeleteContactFlowVersionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteContactFlowVersionCommandOutput>;
+  deleteContactFlowVersion(
+    args: DeleteContactFlowVersionCommandInput,
+    cb: (err: any, data?: DeleteContactFlowVersionCommandOutput) => void
+  ): void;
+  deleteContactFlowVersion(
+    args: DeleteContactFlowVersionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteContactFlowVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataTableCommand}
+   */
+  deleteDataTable(
+    args: DeleteDataTableCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteDataTableCommandOutput>;
+  deleteDataTable(
+    args: DeleteDataTableCommandInput,
+    cb: (err: any, data?: DeleteDataTableCommandOutput) => void
+  ): void;
+  deleteDataTable(
+    args: DeleteDataTableCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteDataTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataTableAttributeCommand}
+   */
+  deleteDataTableAttribute(
+    args: DeleteDataTableAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteDataTableAttributeCommandOutput>;
+  deleteDataTableAttribute(
+    args: DeleteDataTableAttributeCommandInput,
+    cb: (err: any, data?: DeleteDataTableAttributeCommandOutput) => void
+  ): void;
+  deleteDataTableAttribute(
+    args: DeleteDataTableAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteDataTableAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEmailAddressCommand}
+   */
+  deleteEmailAddress(
+    args: DeleteEmailAddressCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteEmailAddressCommandOutput>;
+  deleteEmailAddress(
+    args: DeleteEmailAddressCommandInput,
+    cb: (err: any, data?: DeleteEmailAddressCommandOutput) => void
+  ): void;
+  deleteEmailAddress(
+    args: DeleteEmailAddressCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteEmailAddressCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEvaluationFormCommand}
+   */
+  deleteEvaluationForm(
+    args: DeleteEvaluationFormCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteEvaluationFormCommandOutput>;
+  deleteEvaluationForm(
+    args: DeleteEvaluationFormCommandInput,
+    cb: (err: any, data?: DeleteEvaluationFormCommandOutput) => void
+  ): void;
+  deleteEvaluationForm(
+    args: DeleteEvaluationFormCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteEvaluationFormCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteExtractionDefinitionCommand}
+   */
+  deleteExtractionDefinition(
+    args: DeleteExtractionDefinitionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteExtractionDefinitionCommandOutput>;
+  deleteExtractionDefinition(
+    args: DeleteExtractionDefinitionCommandInput,
+    cb: (err: any, data?: DeleteExtractionDefinitionCommandOutput) => void
+  ): void;
+  deleteExtractionDefinition(
+    args: DeleteExtractionDefinitionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteExtractionDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteHoursOfOperationCommand}
+   */
+  deleteHoursOfOperation(
     args: DeleteHoursOfOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DeleteHoursOfOperationCommandOutput>;
-  public deleteHoursOfOperation(
+  deleteHoursOfOperation(
     args: DeleteHoursOfOperationCommandInput,
     cb: (err: any, data?: DeleteHoursOfOperationCommandOutput) => void
   ): void;
-  public deleteHoursOfOperation(
+  deleteHoursOfOperation(
     args: DeleteHoursOfOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DeleteHoursOfOperationCommandOutput) => void
   ): void;
-  public deleteHoursOfOperation(
-    args: DeleteHoursOfOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteHoursOfOperationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteHoursOfOperationCommandOutput) => void
-  ): Promise<DeleteHoursOfOperationCommandOutput> | void {
-    const command = new DeleteHoursOfOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Deletes the Amazon Connect instance.</p>
-   *          <p>Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days.
-   * If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances.
-   * You must wait 30 days before you can restart creating and deleting instances in your account.</p>
+   * @see {@link DeleteHoursOfOperationOverrideCommand}
    */
-  public deleteInstance(
+  deleteHoursOfOperationOverride(
+    args: DeleteHoursOfOperationOverrideCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteHoursOfOperationOverrideCommandOutput>;
+  deleteHoursOfOperationOverride(
+    args: DeleteHoursOfOperationOverrideCommandInput,
+    cb: (err: any, data?: DeleteHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+  deleteHoursOfOperationOverride(
+    args: DeleteHoursOfOperationOverrideCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstanceCommand}
+   */
+  deleteInstance(
     args: DeleteInstanceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DeleteInstanceCommandOutput>;
-  public deleteInstance(
+  deleteInstance(
     args: DeleteInstanceCommandInput,
     cb: (err: any, data?: DeleteInstanceCommandOutput) => void
   ): void;
-  public deleteInstance(
+  deleteInstance(
     args: DeleteInstanceCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DeleteInstanceCommandOutput) => void
   ): void;
-  public deleteInstance(
-    args: DeleteInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInstanceCommandOutput) => void
-  ): Promise<DeleteInstanceCommandOutput> | void {
-    const command = new DeleteInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an AWS resource association from an Amazon Connect instance. The association must not have
-   *    any use cases associated with it.</p>
+   * @see {@link DeleteIntegrationAssociationCommand}
    */
-  public deleteIntegrationAssociation(
+  deleteIntegrationAssociation(
     args: DeleteIntegrationAssociationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DeleteIntegrationAssociationCommandOutput>;
-  public deleteIntegrationAssociation(
+  deleteIntegrationAssociation(
     args: DeleteIntegrationAssociationCommandInput,
     cb: (err: any, data?: DeleteIntegrationAssociationCommandOutput) => void
   ): void;
-  public deleteIntegrationAssociation(
+  deleteIntegrationAssociation(
     args: DeleteIntegrationAssociationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DeleteIntegrationAssociationCommandOutput) => void
   ): void;
-  public deleteIntegrationAssociation(
-    args: DeleteIntegrationAssociationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIntegrationAssociationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIntegrationAssociationCommandOutput) => void
-  ): Promise<DeleteIntegrationAssociationCommandOutput> | void {
-    const command = new DeleteIntegrationAssociationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a quick connect.</p>
+   * @see {@link DeleteMetricCommand}
    */
-  public deleteQuickConnect(
+  deleteMetric(
+    args: DeleteMetricCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteMetricCommandOutput>;
+  deleteMetric(
+    args: DeleteMetricCommandInput,
+    cb: (err: any, data?: DeleteMetricCommandOutput) => void
+  ): void;
+  deleteMetric(
+    args: DeleteMetricCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteMetricCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNotificationCommand}
+   */
+  deleteNotification(
+    args: DeleteNotificationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteNotificationCommandOutput>;
+  deleteNotification(
+    args: DeleteNotificationCommandInput,
+    cb: (err: any, data?: DeleteNotificationCommandOutput) => void
+  ): void;
+  deleteNotification(
+    args: DeleteNotificationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteNotificationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePredefinedAttributeCommand}
+   */
+  deletePredefinedAttribute(
+    args: DeletePredefinedAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeletePredefinedAttributeCommandOutput>;
+  deletePredefinedAttribute(
+    args: DeletePredefinedAttributeCommandInput,
+    cb: (err: any, data?: DeletePredefinedAttributeCommandOutput) => void
+  ): void;
+  deletePredefinedAttribute(
+    args: DeletePredefinedAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeletePredefinedAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePromptCommand}
+   */
+  deletePrompt(
+    args: DeletePromptCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeletePromptCommandOutput>;
+  deletePrompt(
+    args: DeletePromptCommandInput,
+    cb: (err: any, data?: DeletePromptCommandOutput) => void
+  ): void;
+  deletePrompt(
+    args: DeletePromptCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeletePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePushNotificationRegistrationCommand}
+   */
+  deletePushNotificationRegistration(
+    args: DeletePushNotificationRegistrationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeletePushNotificationRegistrationCommandOutput>;
+  deletePushNotificationRegistration(
+    args: DeletePushNotificationRegistrationCommandInput,
+    cb: (err: any, data?: DeletePushNotificationRegistrationCommandOutput) => void
+  ): void;
+  deletePushNotificationRegistration(
+    args: DeletePushNotificationRegistrationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeletePushNotificationRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteQueueCommand}
+   */
+  deleteQueue(
+    args: DeleteQueueCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteQueueCommandOutput>;
+  deleteQueue(
+    args: DeleteQueueCommandInput,
+    cb: (err: any, data?: DeleteQueueCommandOutput) => void
+  ): void;
+  deleteQueue(
+    args: DeleteQueueCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteQueueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteQuickConnectCommand}
+   */
+  deleteQuickConnect(
     args: DeleteQuickConnectCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DeleteQuickConnectCommandOutput>;
-  public deleteQuickConnect(
+  deleteQuickConnect(
     args: DeleteQuickConnectCommandInput,
     cb: (err: any, data?: DeleteQuickConnectCommandOutput) => void
   ): void;
-  public deleteQuickConnect(
+  deleteQuickConnect(
     args: DeleteQuickConnectCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DeleteQuickConnectCommandOutput) => void
   ): void;
-  public deleteQuickConnect(
-    args: DeleteQuickConnectCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteQuickConnectCommandOutput) => void),
-    cb?: (err: any, data?: DeleteQuickConnectCommandOutput) => void
-  ): Promise<DeleteQuickConnectCommandOutput> | void {
-    const command = new DeleteQuickConnectCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a use case from an integration association.</p>
+   * @see {@link DeleteRoutingProfileCommand}
    */
-  public deleteUseCase(
+  deleteRoutingProfile(
+    args: DeleteRoutingProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteRoutingProfileCommandOutput>;
+  deleteRoutingProfile(
+    args: DeleteRoutingProfileCommandInput,
+    cb: (err: any, data?: DeleteRoutingProfileCommandOutput) => void
+  ): void;
+  deleteRoutingProfile(
+    args: DeleteRoutingProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteRoutingProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRuleCommand}
+   */
+  deleteRule(
+    args: DeleteRuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteRuleCommandOutput>;
+  deleteRule(
+    args: DeleteRuleCommandInput,
+    cb: (err: any, data?: DeleteRuleCommandOutput) => void
+  ): void;
+  deleteRule(
+    args: DeleteRuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSecurityProfileCommand}
+   */
+  deleteSecurityProfile(
+    args: DeleteSecurityProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteSecurityProfileCommandOutput>;
+  deleteSecurityProfile(
+    args: DeleteSecurityProfileCommandInput,
+    cb: (err: any, data?: DeleteSecurityProfileCommandOutput) => void
+  ): void;
+  deleteSecurityProfile(
+    args: DeleteSecurityProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteSecurityProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSessionCommand}
+   */
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteSessionCommandOutput>;
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    cb: (err: any, data?: DeleteSessionCommandOutput) => void
+  ): void;
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTaskTemplateCommand}
+   */
+  deleteTaskTemplate(
+    args: DeleteTaskTemplateCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteTaskTemplateCommandOutput>;
+  deleteTaskTemplate(
+    args: DeleteTaskTemplateCommandInput,
+    cb: (err: any, data?: DeleteTaskTemplateCommandOutput) => void
+  ): void;
+  deleteTaskTemplate(
+    args: DeleteTaskTemplateCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteTaskTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTestCaseCommand}
+   */
+  deleteTestCase(
+    args: DeleteTestCaseCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteTestCaseCommandOutput>;
+  deleteTestCase(
+    args: DeleteTestCaseCommandInput,
+    cb: (err: any, data?: DeleteTestCaseCommandOutput) => void
+  ): void;
+  deleteTestCase(
+    args: DeleteTestCaseCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTrafficDistributionGroupCommand}
+   */
+  deleteTrafficDistributionGroup(
+    args: DeleteTrafficDistributionGroupCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteTrafficDistributionGroupCommandOutput>;
+  deleteTrafficDistributionGroup(
+    args: DeleteTrafficDistributionGroupCommandInput,
+    cb: (err: any, data?: DeleteTrafficDistributionGroupCommandOutput) => void
+  ): void;
+  deleteTrafficDistributionGroup(
+    args: DeleteTrafficDistributionGroupCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteTrafficDistributionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUseCaseCommand}
+   */
+  deleteUseCase(
     args: DeleteUseCaseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DeleteUseCaseCommandOutput>;
-  public deleteUseCase(
+  deleteUseCase(
     args: DeleteUseCaseCommandInput,
     cb: (err: any, data?: DeleteUseCaseCommandOutput) => void
   ): void;
-  public deleteUseCase(
+  deleteUseCase(
     args: DeleteUseCaseCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DeleteUseCaseCommandOutput) => void
   ): void;
-  public deleteUseCase(
-    args: DeleteUseCaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUseCaseCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUseCaseCommandOutput) => void
-  ): Promise<DeleteUseCaseCommandOutput> | void {
-    const command = new DeleteUseCaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a user account from the specified Amazon Connect instance.</p>
-   *          <p>For information about what happens to a user's data when their account is deleted, see
-   *     <a href="https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html">Delete Users from
-   *     Your Amazon Connect Instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link DeleteUserCommand}
    */
-  public deleteUser(args: DeleteUserCommandInput, options?: __HttpHandlerOptions): Promise<DeleteUserCommandOutput>;
-  public deleteUser(args: DeleteUserCommandInput, cb: (err: any, data?: DeleteUserCommandOutput) => void): void;
-  public deleteUser(
+  deleteUser(
     args: DeleteUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteUserCommandOutput>;
+  deleteUser(
+    args: DeleteUserCommandInput,
     cb: (err: any, data?: DeleteUserCommandOutput) => void
   ): void;
-  public deleteUser(
+  deleteUser(
     args: DeleteUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserCommandOutput) => void
-  ): Promise<DeleteUserCommandOutput> | void {
-    const command = new DeleteUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes an existing user hierarchy group. It must not be associated with any agents or have
-   *    any active child groups.</p>
+   * @see {@link DeleteUserHierarchyGroupCommand}
    */
-  public deleteUserHierarchyGroup(
+  deleteUserHierarchyGroup(
     args: DeleteUserHierarchyGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DeleteUserHierarchyGroupCommandOutput>;
-  public deleteUserHierarchyGroup(
+  deleteUserHierarchyGroup(
     args: DeleteUserHierarchyGroupCommandInput,
     cb: (err: any, data?: DeleteUserHierarchyGroupCommandOutput) => void
   ): void;
-  public deleteUserHierarchyGroup(
+  deleteUserHierarchyGroup(
     args: DeleteUserHierarchyGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DeleteUserHierarchyGroupCommandOutput) => void
   ): void;
-  public deleteUserHierarchyGroup(
-    args: DeleteUserHierarchyGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserHierarchyGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserHierarchyGroupCommandOutput) => void
-  ): Promise<DeleteUserHierarchyGroupCommandOutput> | void {
-    const command = new DeleteUserHierarchyGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Describes an agent status.</p>
+   * @see {@link DeleteViewCommand}
    */
-  public describeAgentStatus(
+  deleteView(
+    args: DeleteViewCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteViewCommandOutput>;
+  deleteView(
+    args: DeleteViewCommandInput,
+    cb: (err: any, data?: DeleteViewCommandOutput) => void
+  ): void;
+  deleteView(
+    args: DeleteViewCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteViewVersionCommand}
+   */
+  deleteViewVersion(
+    args: DeleteViewVersionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteViewVersionCommandOutput>;
+  deleteViewVersion(
+    args: DeleteViewVersionCommandInput,
+    cb: (err: any, data?: DeleteViewVersionCommandOutput) => void
+  ): void;
+  deleteViewVersion(
+    args: DeleteViewVersionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteViewVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVocabularyCommand}
+   */
+  deleteVocabulary(
+    args: DeleteVocabularyCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteVocabularyCommandOutput>;
+  deleteVocabulary(
+    args: DeleteVocabularyCommandInput,
+    cb: (err: any, data?: DeleteVocabularyCommandOutput) => void
+  ): void;
+  deleteVocabulary(
+    args: DeleteVocabularyCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspaceCommand}
+   */
+  deleteWorkspace(
+    args: DeleteWorkspaceCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteWorkspaceCommandOutput>;
+  deleteWorkspace(
+    args: DeleteWorkspaceCommandInput,
+    cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
+  ): void;
+  deleteWorkspace(
+    args: DeleteWorkspaceCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspaceMediaCommand}
+   */
+  deleteWorkspaceMedia(
+    args: DeleteWorkspaceMediaCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteWorkspaceMediaCommandOutput>;
+  deleteWorkspaceMedia(
+    args: DeleteWorkspaceMediaCommandInput,
+    cb: (err: any, data?: DeleteWorkspaceMediaCommandOutput) => void
+  ): void;
+  deleteWorkspaceMedia(
+    args: DeleteWorkspaceMediaCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteWorkspaceMediaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspacePageCommand}
+   */
+  deleteWorkspacePage(
+    args: DeleteWorkspacePageCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DeleteWorkspacePageCommandOutput>;
+  deleteWorkspacePage(
+    args: DeleteWorkspacePageCommandInput,
+    cb: (err: any, data?: DeleteWorkspacePageCommandOutput) => void
+  ): void;
+  deleteWorkspacePage(
+    args: DeleteWorkspacePageCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DeleteWorkspacePageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAgentStatusCommand}
+   */
+  describeAgentStatus(
     args: DescribeAgentStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeAgentStatusCommandOutput>;
-  public describeAgentStatus(
+  describeAgentStatus(
     args: DescribeAgentStatusCommandInput,
     cb: (err: any, data?: DescribeAgentStatusCommandOutput) => void
   ): void;
-  public describeAgentStatus(
+  describeAgentStatus(
     args: DescribeAgentStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeAgentStatusCommandOutput) => void
   ): void;
-  public describeAgentStatus(
-    args: DescribeAgentStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAgentStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAgentStatusCommandOutput) => void
-  ): Promise<DescribeAgentStatusCommandOutput> | void {
-    const command = new DescribeAgentStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified contact flow.</p>
-   *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
-   *    Flow language</a>.</p>
+   * @see {@link DescribeAttachedFilesConfigurationCommand}
    */
-  public describeContactFlow(
+  describeAttachedFilesConfiguration(
+    args: DescribeAttachedFilesConfigurationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeAttachedFilesConfigurationCommandOutput>;
+  describeAttachedFilesConfiguration(
+    args: DescribeAttachedFilesConfigurationCommandInput,
+    cb: (err: any, data?: DescribeAttachedFilesConfigurationCommandOutput) => void
+  ): void;
+  describeAttachedFilesConfiguration(
+    args: DescribeAttachedFilesConfigurationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeAttachedFilesConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAuthenticationProfileCommand}
+   */
+  describeAuthenticationProfile(
+    args: DescribeAuthenticationProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeAuthenticationProfileCommandOutput>;
+  describeAuthenticationProfile(
+    args: DescribeAuthenticationProfileCommandInput,
+    cb: (err: any, data?: DescribeAuthenticationProfileCommandOutput) => void
+  ): void;
+  describeAuthenticationProfile(
+    args: DescribeAuthenticationProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeAuthenticationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeContactCommand}
+   */
+  describeContact(
+    args: DescribeContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeContactCommandOutput>;
+  describeContact(
+    args: DescribeContactCommandInput,
+    cb: (err: any, data?: DescribeContactCommandOutput) => void
+  ): void;
+  describeContact(
+    args: DescribeContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeContactEvaluationCommand}
+   */
+  describeContactEvaluation(
+    args: DescribeContactEvaluationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeContactEvaluationCommandOutput>;
+  describeContactEvaluation(
+    args: DescribeContactEvaluationCommandInput,
+    cb: (err: any, data?: DescribeContactEvaluationCommandOutput) => void
+  ): void;
+  describeContactEvaluation(
+    args: DescribeContactEvaluationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeContactEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeContactFlowCommand}
+   */
+  describeContactFlow(
     args: DescribeContactFlowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeContactFlowCommandOutput>;
-  public describeContactFlow(
+  describeContactFlow(
     args: DescribeContactFlowCommandInput,
     cb: (err: any, data?: DescribeContactFlowCommandOutput) => void
   ): void;
-  public describeContactFlow(
+  describeContactFlow(
     args: DescribeContactFlowCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeContactFlowCommandOutput) => void
   ): void;
-  public describeContactFlow(
-    args: DescribeContactFlowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeContactFlowCommandOutput) => void),
-    cb?: (err: any, data?: DescribeContactFlowCommandOutput) => void
-  ): Promise<DescribeContactFlowCommandOutput> | void {
-    const command = new DescribeContactFlowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the hours of operation.</p>
+   * @see {@link DescribeContactFlowAliasCommand}
    */
-  public describeHoursOfOperation(
+  describeContactFlowAlias(
+    args: DescribeContactFlowAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeContactFlowAliasCommandOutput>;
+  describeContactFlowAlias(
+    args: DescribeContactFlowAliasCommandInput,
+    cb: (err: any, data?: DescribeContactFlowAliasCommandOutput) => void
+  ): void;
+  describeContactFlowAlias(
+    args: DescribeContactFlowAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeContactFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeContactFlowModuleCommand}
+   */
+  describeContactFlowModule(
+    args: DescribeContactFlowModuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeContactFlowModuleCommandOutput>;
+  describeContactFlowModule(
+    args: DescribeContactFlowModuleCommandInput,
+    cb: (err: any, data?: DescribeContactFlowModuleCommandOutput) => void
+  ): void;
+  describeContactFlowModule(
+    args: DescribeContactFlowModuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeContactFlowModuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeContactFlowModuleAliasCommand}
+   */
+  describeContactFlowModuleAlias(
+    args: DescribeContactFlowModuleAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeContactFlowModuleAliasCommandOutput>;
+  describeContactFlowModuleAlias(
+    args: DescribeContactFlowModuleAliasCommandInput,
+    cb: (err: any, data?: DescribeContactFlowModuleAliasCommandOutput) => void
+  ): void;
+  describeContactFlowModuleAlias(
+    args: DescribeContactFlowModuleAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeContactFlowModuleAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataTableCommand}
+   */
+  describeDataTable(
+    args: DescribeDataTableCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeDataTableCommandOutput>;
+  describeDataTable(
+    args: DescribeDataTableCommandInput,
+    cb: (err: any, data?: DescribeDataTableCommandOutput) => void
+  ): void;
+  describeDataTable(
+    args: DescribeDataTableCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeDataTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataTableAttributeCommand}
+   */
+  describeDataTableAttribute(
+    args: DescribeDataTableAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeDataTableAttributeCommandOutput>;
+  describeDataTableAttribute(
+    args: DescribeDataTableAttributeCommandInput,
+    cb: (err: any, data?: DescribeDataTableAttributeCommandOutput) => void
+  ): void;
+  describeDataTableAttribute(
+    args: DescribeDataTableAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeDataTableAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEmailAddressCommand}
+   */
+  describeEmailAddress(
+    args: DescribeEmailAddressCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeEmailAddressCommandOutput>;
+  describeEmailAddress(
+    args: DescribeEmailAddressCommandInput,
+    cb: (err: any, data?: DescribeEmailAddressCommandOutput) => void
+  ): void;
+  describeEmailAddress(
+    args: DescribeEmailAddressCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeEmailAddressCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEvaluationFormCommand}
+   */
+  describeEvaluationForm(
+    args: DescribeEvaluationFormCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeEvaluationFormCommandOutput>;
+  describeEvaluationForm(
+    args: DescribeEvaluationFormCommandInput,
+    cb: (err: any, data?: DescribeEvaluationFormCommandOutput) => void
+  ): void;
+  describeEvaluationForm(
+    args: DescribeEvaluationFormCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeEvaluationFormCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeExtractionDefinitionCommand}
+   */
+  describeExtractionDefinition(
+    args: DescribeExtractionDefinitionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeExtractionDefinitionCommandOutput>;
+  describeExtractionDefinition(
+    args: DescribeExtractionDefinitionCommandInput,
+    cb: (err: any, data?: DescribeExtractionDefinitionCommandOutput) => void
+  ): void;
+  describeExtractionDefinition(
+    args: DescribeExtractionDefinitionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeExtractionDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeHoursOfOperationCommand}
+   */
+  describeHoursOfOperation(
     args: DescribeHoursOfOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeHoursOfOperationCommandOutput>;
-  public describeHoursOfOperation(
+  describeHoursOfOperation(
     args: DescribeHoursOfOperationCommandInput,
     cb: (err: any, data?: DescribeHoursOfOperationCommandOutput) => void
   ): void;
-  public describeHoursOfOperation(
+  describeHoursOfOperation(
     args: DescribeHoursOfOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeHoursOfOperationCommandOutput) => void
   ): void;
-  public describeHoursOfOperation(
-    args: DescribeHoursOfOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeHoursOfOperationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeHoursOfOperationCommandOutput) => void
-  ): Promise<DescribeHoursOfOperationCommandOutput> | void {
-    const command = new DescribeHoursOfOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Returns the current state of the specified instance identifier. It tracks the instance while
-   *    it is being created and returns an error status, if applicable. </p>
-   *          <p>If an instance is not created successfully, the instance status reason field returns details
-   *    relevant to the reason. The instance in a failed state is returned only for 24 hours after the
-   *    CreateInstance API was invoked.</p>
+   * @see {@link DescribeHoursOfOperationOverrideCommand}
    */
-  public describeInstance(
+  describeHoursOfOperationOverride(
+    args: DescribeHoursOfOperationOverrideCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeHoursOfOperationOverrideCommandOutput>;
+  describeHoursOfOperationOverride(
+    args: DescribeHoursOfOperationOverrideCommandInput,
+    cb: (err: any, data?: DescribeHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+  describeHoursOfOperationOverride(
+    args: DescribeHoursOfOperationOverrideCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInstanceCommand}
+   */
+  describeInstance(
     args: DescribeInstanceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeInstanceCommandOutput>;
-  public describeInstance(
+  describeInstance(
     args: DescribeInstanceCommandInput,
     cb: (err: any, data?: DescribeInstanceCommandOutput) => void
   ): void;
-  public describeInstance(
+  describeInstance(
     args: DescribeInstanceCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeInstanceCommandOutput) => void
   ): void;
-  public describeInstance(
-    args: DescribeInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeInstanceCommandOutput) => void
-  ): Promise<DescribeInstanceCommandOutput> | void {
-    const command = new DescribeInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Describes the specified instance attribute.</p>
+   * @see {@link DescribeInstanceAttributeCommand}
    */
-  public describeInstanceAttribute(
+  describeInstanceAttribute(
     args: DescribeInstanceAttributeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeInstanceAttributeCommandOutput>;
-  public describeInstanceAttribute(
+  describeInstanceAttribute(
     args: DescribeInstanceAttributeCommandInput,
     cb: (err: any, data?: DescribeInstanceAttributeCommandOutput) => void
   ): void;
-  public describeInstanceAttribute(
+  describeInstanceAttribute(
     args: DescribeInstanceAttributeCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeInstanceAttributeCommandOutput) => void
   ): void;
-  public describeInstanceAttribute(
-    args: DescribeInstanceAttributeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeInstanceAttributeCommandOutput) => void),
-    cb?: (err: any, data?: DescribeInstanceAttributeCommandOutput) => void
-  ): Promise<DescribeInstanceAttributeCommandOutput> | void {
-    const command = new DescribeInstanceAttributeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Retrieves the current storage configurations for the specified resource type, association
-   *    ID, and instance ID.</p>
+   * @see {@link DescribeInstanceStorageConfigCommand}
    */
-  public describeInstanceStorageConfig(
+  describeInstanceStorageConfig(
     args: DescribeInstanceStorageConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeInstanceStorageConfigCommandOutput>;
-  public describeInstanceStorageConfig(
+  describeInstanceStorageConfig(
     args: DescribeInstanceStorageConfigCommandInput,
     cb: (err: any, data?: DescribeInstanceStorageConfigCommandOutput) => void
   ): void;
-  public describeInstanceStorageConfig(
+  describeInstanceStorageConfig(
     args: DescribeInstanceStorageConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeInstanceStorageConfigCommandOutput) => void
   ): void;
-  public describeInstanceStorageConfig(
-    args: DescribeInstanceStorageConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeInstanceStorageConfigCommandOutput) => void),
-    cb?: (err: any, data?: DescribeInstanceStorageConfigCommandOutput) => void
-  ): Promise<DescribeInstanceStorageConfigCommandOutput> | void {
-    const command = new DescribeInstanceStorageConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Describes the specified queue.</p>
+   * @see {@link DescribeMetricCommand}
    */
-  public describeQueue(
+  describeMetric(
+    args: DescribeMetricCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeMetricCommandOutput>;
+  describeMetric(
+    args: DescribeMetricCommandInput,
+    cb: (err: any, data?: DescribeMetricCommandOutput) => void
+  ): void;
+  describeMetric(
+    args: DescribeMetricCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeMetricCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeNotificationCommand}
+   */
+  describeNotification(
+    args: DescribeNotificationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeNotificationCommandOutput>;
+  describeNotification(
+    args: DescribeNotificationCommandInput,
+    cb: (err: any, data?: DescribeNotificationCommandOutput) => void
+  ): void;
+  describeNotification(
+    args: DescribeNotificationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeNotificationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePhoneNumberCommand}
+   */
+  describePhoneNumber(
+    args: DescribePhoneNumberCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribePhoneNumberCommandOutput>;
+  describePhoneNumber(
+    args: DescribePhoneNumberCommandInput,
+    cb: (err: any, data?: DescribePhoneNumberCommandOutput) => void
+  ): void;
+  describePhoneNumber(
+    args: DescribePhoneNumberCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribePhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePredefinedAttributeCommand}
+   */
+  describePredefinedAttribute(
+    args: DescribePredefinedAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribePredefinedAttributeCommandOutput>;
+  describePredefinedAttribute(
+    args: DescribePredefinedAttributeCommandInput,
+    cb: (err: any, data?: DescribePredefinedAttributeCommandOutput) => void
+  ): void;
+  describePredefinedAttribute(
+    args: DescribePredefinedAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribePredefinedAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePromptCommand}
+   */
+  describePrompt(
+    args: DescribePromptCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribePromptCommandOutput>;
+  describePrompt(
+    args: DescribePromptCommandInput,
+    cb: (err: any, data?: DescribePromptCommandOutput) => void
+  ): void;
+  describePrompt(
+    args: DescribePromptCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeQueueCommand}
+   */
+  describeQueue(
     args: DescribeQueueCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeQueueCommandOutput>;
-  public describeQueue(
+  describeQueue(
     args: DescribeQueueCommandInput,
     cb: (err: any, data?: DescribeQueueCommandOutput) => void
   ): void;
-  public describeQueue(
+  describeQueue(
     args: DescribeQueueCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeQueueCommandOutput) => void
   ): void;
-  public describeQueue(
-    args: DescribeQueueCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeQueueCommandOutput) => void),
-    cb?: (err: any, data?: DescribeQueueCommandOutput) => void
-  ): Promise<DescribeQueueCommandOutput> | void {
-    const command = new DescribeQueueCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the quick connect.</p>
+   * @see {@link DescribeQuickConnectCommand}
    */
-  public describeQuickConnect(
+  describeQuickConnect(
     args: DescribeQuickConnectCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeQuickConnectCommandOutput>;
-  public describeQuickConnect(
+  describeQuickConnect(
     args: DescribeQuickConnectCommandInput,
     cb: (err: any, data?: DescribeQuickConnectCommandOutput) => void
   ): void;
-  public describeQuickConnect(
+  describeQuickConnect(
     args: DescribeQuickConnectCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeQuickConnectCommandOutput) => void
   ): void;
-  public describeQuickConnect(
-    args: DescribeQuickConnectCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeQuickConnectCommandOutput) => void),
-    cb?: (err: any, data?: DescribeQuickConnectCommandOutput) => void
-  ): Promise<DescribeQuickConnectCommandOutput> | void {
-    const command = new DescribeQuickConnectCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified routing profile.</p>
+   * @see {@link DescribeRoutingProfileCommand}
    */
-  public describeRoutingProfile(
+  describeRoutingProfile(
     args: DescribeRoutingProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeRoutingProfileCommandOutput>;
-  public describeRoutingProfile(
+  describeRoutingProfile(
     args: DescribeRoutingProfileCommandInput,
     cb: (err: any, data?: DescribeRoutingProfileCommandOutput) => void
   ): void;
-  public describeRoutingProfile(
+  describeRoutingProfile(
     args: DescribeRoutingProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeRoutingProfileCommandOutput) => void
   ): void;
-  public describeRoutingProfile(
-    args: DescribeRoutingProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRoutingProfileCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRoutingProfileCommandOutput) => void
-  ): Promise<DescribeRoutingProfileCommandOutput> | void {
-    const command = new DescribeRoutingProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified user account. You can find the instance ID in the console (it’s the
-   *    final part of the ARN). The console does not display the user IDs. Instead, list the users and
-   *    note the IDs provided in the output.</p>
+   * @see {@link DescribeRuleCommand}
    */
-  public describeUser(
+  describeRule(
+    args: DescribeRuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeRuleCommandOutput>;
+  describeRule(
+    args: DescribeRuleCommandInput,
+    cb: (err: any, data?: DescribeRuleCommandOutput) => void
+  ): void;
+  describeRule(
+    args: DescribeRuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSecurityProfileCommand}
+   */
+  describeSecurityProfile(
+    args: DescribeSecurityProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeSecurityProfileCommandOutput>;
+  describeSecurityProfile(
+    args: DescribeSecurityProfileCommandInput,
+    cb: (err: any, data?: DescribeSecurityProfileCommandOutput) => void
+  ): void;
+  describeSecurityProfile(
+    args: DescribeSecurityProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeSecurityProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTestCaseCommand}
+   */
+  describeTestCase(
+    args: DescribeTestCaseCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeTestCaseCommandOutput>;
+  describeTestCase(
+    args: DescribeTestCaseCommandInput,
+    cb: (err: any, data?: DescribeTestCaseCommandOutput) => void
+  ): void;
+  describeTestCase(
+    args: DescribeTestCaseCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTrafficDistributionGroupCommand}
+   */
+  describeTrafficDistributionGroup(
+    args: DescribeTrafficDistributionGroupCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeTrafficDistributionGroupCommandOutput>;
+  describeTrafficDistributionGroup(
+    args: DescribeTrafficDistributionGroupCommandInput,
+    cb: (err: any, data?: DescribeTrafficDistributionGroupCommandOutput) => void
+  ): void;
+  describeTrafficDistributionGroup(
+    args: DescribeTrafficDistributionGroupCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeTrafficDistributionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeUserCommand}
+   */
+  describeUser(
     args: DescribeUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeUserCommandOutput>;
-  public describeUser(args: DescribeUserCommandInput, cb: (err: any, data?: DescribeUserCommandOutput) => void): void;
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeUserCommandOutput) => void
   ): void;
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserCommandOutput) => void
-  ): Promise<DescribeUserCommandOutput> | void {
-    const command = new DescribeUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Describes the specified hierarchy group.</p>
+   * @see {@link DescribeUserHierarchyGroupCommand}
    */
-  public describeUserHierarchyGroup(
+  describeUserHierarchyGroup(
     args: DescribeUserHierarchyGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeUserHierarchyGroupCommandOutput>;
-  public describeUserHierarchyGroup(
+  describeUserHierarchyGroup(
     args: DescribeUserHierarchyGroupCommandInput,
     cb: (err: any, data?: DescribeUserHierarchyGroupCommandOutput) => void
   ): void;
-  public describeUserHierarchyGroup(
+  describeUserHierarchyGroup(
     args: DescribeUserHierarchyGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeUserHierarchyGroupCommandOutput) => void
   ): void;
-  public describeUserHierarchyGroup(
-    args: DescribeUserHierarchyGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserHierarchyGroupCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserHierarchyGroupCommandOutput) => void
-  ): Promise<DescribeUserHierarchyGroupCommandOutput> | void {
-    const command = new DescribeUserHierarchyGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the hierarchy structure of the specified Amazon Connect instance.</p>
+   * @see {@link DescribeUserHierarchyStructureCommand}
    */
-  public describeUserHierarchyStructure(
+  describeUserHierarchyStructure(
     args: DescribeUserHierarchyStructureCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DescribeUserHierarchyStructureCommandOutput>;
-  public describeUserHierarchyStructure(
+  describeUserHierarchyStructure(
     args: DescribeUserHierarchyStructureCommandInput,
     cb: (err: any, data?: DescribeUserHierarchyStructureCommandOutput) => void
   ): void;
-  public describeUserHierarchyStructure(
+  describeUserHierarchyStructure(
     args: DescribeUserHierarchyStructureCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DescribeUserHierarchyStructureCommandOutput) => void
   ): void;
-  public describeUserHierarchyStructure(
-    args: DescribeUserHierarchyStructureCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserHierarchyStructureCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserHierarchyStructureCommandOutput) => void
-  ): Promise<DescribeUserHierarchyStructureCommandOutput> | void {
-    const command = new DescribeUserHierarchyStructureCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Revokes access to integrated applications from Amazon Connect.</p>
+   * @see {@link DescribeViewCommand}
    */
-  public disassociateApprovedOrigin(
+  describeView(
+    args: DescribeViewCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeViewCommandOutput>;
+  describeView(
+    args: DescribeViewCommandInput,
+    cb: (err: any, data?: DescribeViewCommandOutput) => void
+  ): void;
+  describeView(
+    args: DescribeViewCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeVocabularyCommand}
+   */
+  describeVocabulary(
+    args: DescribeVocabularyCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeVocabularyCommandOutput>;
+  describeVocabulary(
+    args: DescribeVocabularyCommandInput,
+    cb: (err: any, data?: DescribeVocabularyCommandOutput) => void
+  ): void;
+  describeVocabulary(
+    args: DescribeVocabularyCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeWorkspaceCommand}
+   */
+  describeWorkspace(
+    args: DescribeWorkspaceCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DescribeWorkspaceCommandOutput>;
+  describeWorkspace(
+    args: DescribeWorkspaceCommandInput,
+    cb: (err: any, data?: DescribeWorkspaceCommandOutput) => void
+  ): void;
+  describeWorkspace(
+    args: DescribeWorkspaceCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DescribeWorkspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAnalyticsDataSetCommand}
+   */
+  disassociateAnalyticsDataSet(
+    args: DisassociateAnalyticsDataSetCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateAnalyticsDataSetCommandOutput>;
+  disassociateAnalyticsDataSet(
+    args: DisassociateAnalyticsDataSetCommandInput,
+    cb: (err: any, data?: DisassociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+  disassociateAnalyticsDataSet(
+    args: DisassociateAnalyticsDataSetCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateAnalyticsDataSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateApprovedOriginCommand}
+   */
+  disassociateApprovedOrigin(
     args: DisassociateApprovedOriginCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateApprovedOriginCommandOutput>;
-  public disassociateApprovedOrigin(
+  disassociateApprovedOrigin(
     args: DisassociateApprovedOriginCommandInput,
     cb: (err: any, data?: DisassociateApprovedOriginCommandOutput) => void
   ): void;
-  public disassociateApprovedOrigin(
+  disassociateApprovedOrigin(
     args: DisassociateApprovedOriginCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateApprovedOriginCommandOutput) => void
   ): void;
-  public disassociateApprovedOrigin(
-    args: DisassociateApprovedOriginCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateApprovedOriginCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateApprovedOriginCommandOutput) => void
-  ): Promise<DisassociateApprovedOriginCommandOutput> | void {
-    const command = new DisassociateApprovedOriginCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Revokes authorization from the specified instance to access the specified Amazon Lex or Amazon Lex V2
-   *    bot. </p>
+   * @see {@link DisassociateBotCommand}
    */
-  public disassociateBot(
+  disassociateBot(
     args: DisassociateBotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateBotCommandOutput>;
-  public disassociateBot(
+  disassociateBot(
     args: DisassociateBotCommandInput,
     cb: (err: any, data?: DisassociateBotCommandOutput) => void
   ): void;
-  public disassociateBot(
+  disassociateBot(
     args: DisassociateBotCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateBotCommandOutput) => void
   ): void;
-  public disassociateBot(
-    args: DisassociateBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateBotCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateBotCommandOutput) => void
-  ): Promise<DisassociateBotCommandOutput> | void {
-    const command = new DisassociateBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Removes the storage type configurations for the specified resource type and association
-   *    ID.</p>
+   * @see {@link DisassociateEmailAddressAliasCommand}
    */
-  public disassociateInstanceStorageConfig(
+  disassociateEmailAddressAlias(
+    args: DisassociateEmailAddressAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateEmailAddressAliasCommandOutput>;
+  disassociateEmailAddressAlias(
+    args: DisassociateEmailAddressAliasCommandInput,
+    cb: (err: any, data?: DisassociateEmailAddressAliasCommandOutput) => void
+  ): void;
+  disassociateEmailAddressAlias(
+    args: DisassociateEmailAddressAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateEmailAddressAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateFlowCommand}
+   */
+  disassociateFlow(
+    args: DisassociateFlowCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateFlowCommandOutput>;
+  disassociateFlow(
+    args: DisassociateFlowCommandInput,
+    cb: (err: any, data?: DisassociateFlowCommandOutput) => void
+  ): void;
+  disassociateFlow(
+    args: DisassociateFlowCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateHoursOfOperationsCommand}
+   */
+  disassociateHoursOfOperations(
+    args: DisassociateHoursOfOperationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateHoursOfOperationsCommandOutput>;
+  disassociateHoursOfOperations(
+    args: DisassociateHoursOfOperationsCommandInput,
+    cb: (err: any, data?: DisassociateHoursOfOperationsCommandOutput) => void
+  ): void;
+  disassociateHoursOfOperations(
+    args: DisassociateHoursOfOperationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateHoursOfOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateInstanceStorageConfigCommand}
+   */
+  disassociateInstanceStorageConfig(
     args: DisassociateInstanceStorageConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateInstanceStorageConfigCommandOutput>;
-  public disassociateInstanceStorageConfig(
+  disassociateInstanceStorageConfig(
     args: DisassociateInstanceStorageConfigCommandInput,
     cb: (err: any, data?: DisassociateInstanceStorageConfigCommandOutput) => void
   ): void;
-  public disassociateInstanceStorageConfig(
+  disassociateInstanceStorageConfig(
     args: DisassociateInstanceStorageConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateInstanceStorageConfigCommandOutput) => void
   ): void;
-  public disassociateInstanceStorageConfig(
-    args: DisassociateInstanceStorageConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateInstanceStorageConfigCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateInstanceStorageConfigCommandOutput) => void
-  ): Promise<DisassociateInstanceStorageConfigCommandOutput> | void {
-    const command = new DisassociateInstanceStorageConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Remove the Lambda function from the dropdown options available in the relevant contact flow
-   *    blocks.</p>
+   * @see {@link DisassociateLambdaFunctionCommand}
    */
-  public disassociateLambdaFunction(
+  disassociateLambdaFunction(
     args: DisassociateLambdaFunctionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateLambdaFunctionCommandOutput>;
-  public disassociateLambdaFunction(
+  disassociateLambdaFunction(
     args: DisassociateLambdaFunctionCommandInput,
     cb: (err: any, data?: DisassociateLambdaFunctionCommandOutput) => void
   ): void;
-  public disassociateLambdaFunction(
+  disassociateLambdaFunction(
     args: DisassociateLambdaFunctionCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateLambdaFunctionCommandOutput) => void
   ): void;
-  public disassociateLambdaFunction(
-    args: DisassociateLambdaFunctionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateLambdaFunctionCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateLambdaFunctionCommandOutput) => void
-  ): Promise<DisassociateLambdaFunctionCommandOutput> | void {
-    const command = new DisassociateLambdaFunctionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>
+   * @see {@link DisassociateLexBotCommand}
    */
-  public disassociateLexBot(
+  disassociateLexBot(
     args: DisassociateLexBotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateLexBotCommandOutput>;
-  public disassociateLexBot(
+  disassociateLexBot(
     args: DisassociateLexBotCommandInput,
     cb: (err: any, data?: DisassociateLexBotCommandOutput) => void
   ): void;
-  public disassociateLexBot(
+  disassociateLexBot(
     args: DisassociateLexBotCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateLexBotCommandOutput) => void
   ): void;
-  public disassociateLexBot(
-    args: DisassociateLexBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateLexBotCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateLexBotCommandOutput) => void
-  ): Promise<DisassociateLexBotCommandOutput> | void {
-    const command = new DisassociateLexBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Disassociates a set of quick connects from a queue.</p>
+   * @see {@link DisassociatePhoneNumberContactFlowCommand}
    */
-  public disassociateQueueQuickConnects(
+  disassociatePhoneNumberContactFlow(
+    args: DisassociatePhoneNumberContactFlowCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociatePhoneNumberContactFlowCommandOutput>;
+  disassociatePhoneNumberContactFlow(
+    args: DisassociatePhoneNumberContactFlowCommandInput,
+    cb: (err: any, data?: DisassociatePhoneNumberContactFlowCommandOutput) => void
+  ): void;
+  disassociatePhoneNumberContactFlow(
+    args: DisassociatePhoneNumberContactFlowCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociatePhoneNumberContactFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateQueueEmailAddressesCommand}
+   */
+  disassociateQueueEmailAddresses(
+    args: DisassociateQueueEmailAddressesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateQueueEmailAddressesCommandOutput>;
+  disassociateQueueEmailAddresses(
+    args: DisassociateQueueEmailAddressesCommandInput,
+    cb: (err: any, data?: DisassociateQueueEmailAddressesCommandOutput) => void
+  ): void;
+  disassociateQueueEmailAddresses(
+    args: DisassociateQueueEmailAddressesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateQueueEmailAddressesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateQueueQuickConnectsCommand}
+   */
+  disassociateQueueQuickConnects(
     args: DisassociateQueueQuickConnectsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateQueueQuickConnectsCommandOutput>;
-  public disassociateQueueQuickConnects(
+  disassociateQueueQuickConnects(
     args: DisassociateQueueQuickConnectsCommandInput,
     cb: (err: any, data?: DisassociateQueueQuickConnectsCommandOutput) => void
   ): void;
-  public disassociateQueueQuickConnects(
+  disassociateQueueQuickConnects(
     args: DisassociateQueueQuickConnectsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateQueueQuickConnectsCommandOutput) => void
   ): void;
-  public disassociateQueueQuickConnects(
-    args: DisassociateQueueQuickConnectsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateQueueQuickConnectsCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateQueueQuickConnectsCommandOutput) => void
-  ): Promise<DisassociateQueueQuickConnectsCommandOutput> | void {
-    const command = new DisassociateQueueQuickConnectsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a set of queues from a routing profile.</p>
+   * @see {@link DisassociateRoutingProfileQueuesCommand}
    */
-  public disassociateRoutingProfileQueues(
+  disassociateRoutingProfileQueues(
     args: DisassociateRoutingProfileQueuesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateRoutingProfileQueuesCommandOutput>;
-  public disassociateRoutingProfileQueues(
+  disassociateRoutingProfileQueues(
     args: DisassociateRoutingProfileQueuesCommandInput,
     cb: (err: any, data?: DisassociateRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public disassociateRoutingProfileQueues(
+  disassociateRoutingProfileQueues(
     args: DisassociateRoutingProfileQueuesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public disassociateRoutingProfileQueues(
-    args: DisassociateRoutingProfileQueuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateRoutingProfileQueuesCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateRoutingProfileQueuesCommandOutput) => void
-  ): Promise<DisassociateRoutingProfileQueuesCommandOutput> | void {
-    const command = new DisassociateRoutingProfileQueuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Deletes the specified security key.</p>
+   * @see {@link DisassociateSecurityKeyCommand}
    */
-  public disassociateSecurityKey(
+  disassociateSecurityKey(
     args: DisassociateSecurityKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<DisassociateSecurityKeyCommandOutput>;
-  public disassociateSecurityKey(
+  disassociateSecurityKey(
     args: DisassociateSecurityKeyCommandInput,
     cb: (err: any, data?: DisassociateSecurityKeyCommandOutput) => void
   ): void;
-  public disassociateSecurityKey(
+  disassociateSecurityKey(
     args: DisassociateSecurityKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: DisassociateSecurityKeyCommandOutput) => void
   ): void;
-  public disassociateSecurityKey(
-    args: DisassociateSecurityKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateSecurityKeyCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateSecurityKeyCommandOutput) => void
-  ): Promise<DisassociateSecurityKeyCommandOutput> | void {
-    const command = new DisassociateSecurityKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the contact attributes for the specified contact.</p>
+   * @see {@link DisassociateSecurityProfilesCommand}
    */
-  public getContactAttributes(
+  disassociateSecurityProfiles(
+    args: DisassociateSecurityProfilesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateSecurityProfilesCommandOutput>;
+  disassociateSecurityProfiles(
+    args: DisassociateSecurityProfilesCommandInput,
+    cb: (err: any, data?: DisassociateSecurityProfilesCommandOutput) => void
+  ): void;
+  disassociateSecurityProfiles(
+    args: DisassociateSecurityProfilesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateSecurityProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateTrafficDistributionGroupUserCommand}
+   */
+  disassociateTrafficDistributionGroupUser(
+    args: DisassociateTrafficDistributionGroupUserCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateTrafficDistributionGroupUserCommandOutput>;
+  disassociateTrafficDistributionGroupUser(
+    args: DisassociateTrafficDistributionGroupUserCommandInput,
+    cb: (err: any, data?: DisassociateTrafficDistributionGroupUserCommandOutput) => void
+  ): void;
+  disassociateTrafficDistributionGroupUser(
+    args: DisassociateTrafficDistributionGroupUserCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateTrafficDistributionGroupUserCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateUserProficienciesCommand}
+   */
+  disassociateUserProficiencies(
+    args: DisassociateUserProficienciesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateUserProficienciesCommandOutput>;
+  disassociateUserProficiencies(
+    args: DisassociateUserProficienciesCommandInput,
+    cb: (err: any, data?: DisassociateUserProficienciesCommandOutput) => void
+  ): void;
+  disassociateUserProficiencies(
+    args: DisassociateUserProficienciesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateUserProficienciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateWorkspaceCommand}
+   */
+  disassociateWorkspace(
+    args: DisassociateWorkspaceCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DisassociateWorkspaceCommandOutput>;
+  disassociateWorkspace(
+    args: DisassociateWorkspaceCommandInput,
+    cb: (err: any, data?: DisassociateWorkspaceCommandOutput) => void
+  ): void;
+  disassociateWorkspace(
+    args: DisassociateWorkspaceCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DisassociateWorkspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DismissUserContactCommand}
+   */
+  dismissUserContact(
+    args: DismissUserContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<DismissUserContactCommandOutput>;
+  dismissUserContact(
+    args: DismissUserContactCommandInput,
+    cb: (err: any, data?: DismissUserContactCommandOutput) => void
+  ): void;
+  dismissUserContact(
+    args: DismissUserContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: DismissUserContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EvaluateDataTableValuesCommand}
+   */
+  evaluateDataTableValues(
+    args: EvaluateDataTableValuesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<EvaluateDataTableValuesCommandOutput>;
+  evaluateDataTableValues(
+    args: EvaluateDataTableValuesCommandInput,
+    cb: (err: any, data?: EvaluateDataTableValuesCommandOutput) => void
+  ): void;
+  evaluateDataTableValues(
+    args: EvaluateDataTableValuesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: EvaluateDataTableValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAttachedFileCommand}
+   */
+  getAttachedFile(
+    args: GetAttachedFileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetAttachedFileCommandOutput>;
+  getAttachedFile(
+    args: GetAttachedFileCommandInput,
+    cb: (err: any, data?: GetAttachedFileCommandOutput) => void
+  ): void;
+  getAttachedFile(
+    args: GetAttachedFileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetAttachedFileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContactAttributesCommand}
+   */
+  getContactAttributes(
     args: GetContactAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<GetContactAttributesCommandOutput>;
-  public getContactAttributes(
+  getContactAttributes(
     args: GetContactAttributesCommandInput,
     cb: (err: any, data?: GetContactAttributesCommandOutput) => void
   ): void;
-  public getContactAttributes(
+  getContactAttributes(
     args: GetContactAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: GetContactAttributesCommandOutput) => void
   ): void;
-  public getContactAttributes(
-    args: GetContactAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContactAttributesCommandOutput) => void),
-    cb?: (err: any, data?: GetContactAttributesCommandOutput) => void
-  ): Promise<GetContactAttributesCommandOutput> | void {
-    const command = new GetContactAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the real-time metric data from the specified Amazon Connect instance.</p>
-   *          <p>For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics
-   *     Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link GetContactMetricsCommand}
    */
-  public getCurrentMetricData(
+  getContactMetrics(
+    args: GetContactMetricsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetContactMetricsCommandOutput>;
+  getContactMetrics(
+    args: GetContactMetricsCommandInput,
+    cb: (err: any, data?: GetContactMetricsCommandOutput) => void
+  ): void;
+  getContactMetrics(
+    args: GetContactMetricsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetContactMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCrossRegionRoutingCommand}
+   */
+  getCrossRegionRouting(
+    args: GetCrossRegionRoutingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetCrossRegionRoutingCommandOutput>;
+  getCrossRegionRouting(
+    args: GetCrossRegionRoutingCommandInput,
+    cb: (err: any, data?: GetCrossRegionRoutingCommandOutput) => void
+  ): void;
+  getCrossRegionRouting(
+    args: GetCrossRegionRoutingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetCrossRegionRoutingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCurrentMetricDataCommand}
+   */
+  getCurrentMetricData(
     args: GetCurrentMetricDataCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<GetCurrentMetricDataCommandOutput>;
-  public getCurrentMetricData(
+  getCurrentMetricData(
     args: GetCurrentMetricDataCommandInput,
     cb: (err: any, data?: GetCurrentMetricDataCommandOutput) => void
   ): void;
-  public getCurrentMetricData(
+  getCurrentMetricData(
     args: GetCurrentMetricDataCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: GetCurrentMetricDataCommandOutput) => void
   ): void;
-  public getCurrentMetricData(
-    args: GetCurrentMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCurrentMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetCurrentMetricDataCommandOutput) => void
-  ): Promise<GetCurrentMetricDataCommandOutput> | void {
-    const command = new GetCurrentMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a token for federation.</p>
-   *          <note>
-   *             <p>This API doesn't support root users. If you try to invoke GetFederationToken with root
-   *     credentials, an error message similar to the following one appears: </p>
-   *             <p>
-   *                <code>Provided identity: Principal: .... User: .... cannot be used for federation with
-   *      Amazon Connect</code>
-   *             </p>
-   *          </note>
+   * @see {@link GetCurrentUserDataCommand}
    */
-  public getFederationToken(
+  getCurrentUserData(
+    args: GetCurrentUserDataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetCurrentUserDataCommandOutput>;
+  getCurrentUserData(
+    args: GetCurrentUserDataCommandInput,
+    cb: (err: any, data?: GetCurrentUserDataCommandOutput) => void
+  ): void;
+  getCurrentUserData(
+    args: GetCurrentUserDataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetCurrentUserDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEffectiveHoursOfOperationsCommand}
+   */
+  getEffectiveHoursOfOperations(
+    args: GetEffectiveHoursOfOperationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetEffectiveHoursOfOperationsCommandOutput>;
+  getEffectiveHoursOfOperations(
+    args: GetEffectiveHoursOfOperationsCommandInput,
+    cb: (err: any, data?: GetEffectiveHoursOfOperationsCommandOutput) => void
+  ): void;
+  getEffectiveHoursOfOperations(
+    args: GetEffectiveHoursOfOperationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetEffectiveHoursOfOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEvaluationFormValidationCommand}
+   */
+  getEvaluationFormValidation(
+    args: GetEvaluationFormValidationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetEvaluationFormValidationCommandOutput>;
+  getEvaluationFormValidation(
+    args: GetEvaluationFormValidationCommandInput,
+    cb: (err: any, data?: GetEvaluationFormValidationCommandOutput) => void
+  ): void;
+  getEvaluationFormValidation(
+    args: GetEvaluationFormValidationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetEvaluationFormValidationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFederationTokenCommand}
+   */
+  getFederationToken(
     args: GetFederationTokenCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<GetFederationTokenCommandOutput>;
-  public getFederationToken(
+  getFederationToken(
     args: GetFederationTokenCommandInput,
     cb: (err: any, data?: GetFederationTokenCommandOutput) => void
   ): void;
-  public getFederationToken(
+  getFederationToken(
     args: GetFederationTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: GetFederationTokenCommandOutput) => void
   ): void;
-  public getFederationToken(
-    args: GetFederationTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFederationTokenCommandOutput) => void),
-    cb?: (err: any, data?: GetFederationTokenCommandOutput) => void
-  ): Promise<GetFederationTokenCommandOutput> | void {
-    const command = new GetFederationTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets historical metric data from the specified Amazon Connect instance.</p>
-   *
-   *          <p>For a description of each historical metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics
-   *     Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link GetFlowAssociationCommand}
    */
-  public getMetricData(
+  getFlowAssociation(
+    args: GetFlowAssociationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetFlowAssociationCommandOutput>;
+  getFlowAssociation(
+    args: GetFlowAssociationCommandInput,
+    cb: (err: any, data?: GetFlowAssociationCommandOutput) => void
+  ): void;
+  getFlowAssociation(
+    args: GetFlowAssociationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetFlowAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMetricDataCommand}
+   */
+  getMetricData(
     args: GetMetricDataCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<GetMetricDataCommandOutput>;
-  public getMetricData(
+  getMetricData(
     args: GetMetricDataCommandInput,
     cb: (err: any, data?: GetMetricDataCommandOutput) => void
   ): void;
-  public getMetricData(
+  getMetricData(
     args: GetMetricDataCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: GetMetricDataCommandOutput) => void
   ): void;
-  public getMetricData(
-    args: GetMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetMetricDataCommandOutput) => void
-  ): Promise<GetMetricDataCommandOutput> | void {
-    const command = new GetMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Lists agent statuses.</p>
+   * @see {@link GetMetricDataV2Command}
    */
-  public listAgentStatuses(
+  getMetricDataV2(
+    args: GetMetricDataV2CommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetMetricDataV2CommandOutput>;
+  getMetricDataV2(
+    args: GetMetricDataV2CommandInput,
+    cb: (err: any, data?: GetMetricDataV2CommandOutput) => void
+  ): void;
+  getMetricDataV2(
+    args: GetMetricDataV2CommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetMetricDataV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPromptFileCommand}
+   */
+  getPromptFile(
+    args: GetPromptFileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetPromptFileCommandOutput>;
+  getPromptFile(
+    args: GetPromptFileCommandInput,
+    cb: (err: any, data?: GetPromptFileCommandOutput) => void
+  ): void;
+  getPromptFile(
+    args: GetPromptFileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetPromptFileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTaskTemplateCommand}
+   */
+  getTaskTemplate(
+    args: GetTaskTemplateCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetTaskTemplateCommandOutput>;
+  getTaskTemplate(
+    args: GetTaskTemplateCommandInput,
+    cb: (err: any, data?: GetTaskTemplateCommandOutput) => void
+  ): void;
+  getTaskTemplate(
+    args: GetTaskTemplateCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetTaskTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTestCaseExecutionSummaryCommand}
+   */
+  getTestCaseExecutionSummary(
+    args: GetTestCaseExecutionSummaryCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetTestCaseExecutionSummaryCommandOutput>;
+  getTestCaseExecutionSummary(
+    args: GetTestCaseExecutionSummaryCommandInput,
+    cb: (err: any, data?: GetTestCaseExecutionSummaryCommandOutput) => void
+  ): void;
+  getTestCaseExecutionSummary(
+    args: GetTestCaseExecutionSummaryCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetTestCaseExecutionSummaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrafficDistributionCommand}
+   */
+  getTrafficDistribution(
+    args: GetTrafficDistributionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<GetTrafficDistributionCommandOutput>;
+  getTrafficDistribution(
+    args: GetTrafficDistributionCommandInput,
+    cb: (err: any, data?: GetTrafficDistributionCommandOutput) => void
+  ): void;
+  getTrafficDistribution(
+    args: GetTrafficDistributionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: GetTrafficDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportPhoneNumberCommand}
+   */
+  importPhoneNumber(
+    args: ImportPhoneNumberCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ImportPhoneNumberCommandOutput>;
+  importPhoneNumber(
+    args: ImportPhoneNumberCommandInput,
+    cb: (err: any, data?: ImportPhoneNumberCommandOutput) => void
+  ): void;
+  importPhoneNumber(
+    args: ImportPhoneNumberCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ImportPhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportWorkspaceMediaCommand}
+   */
+  importWorkspaceMedia(
+    args: ImportWorkspaceMediaCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ImportWorkspaceMediaCommandOutput>;
+  importWorkspaceMedia(
+    args: ImportWorkspaceMediaCommandInput,
+    cb: (err: any, data?: ImportWorkspaceMediaCommandOutput) => void
+  ): void;
+  importWorkspaceMedia(
+    args: ImportWorkspaceMediaCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ImportWorkspaceMediaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentStatusesCommand}
+   */
+  listAgentStatuses(
     args: ListAgentStatusesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListAgentStatusesCommandOutput>;
-  public listAgentStatuses(
+  listAgentStatuses(
     args: ListAgentStatusesCommandInput,
     cb: (err: any, data?: ListAgentStatusesCommandOutput) => void
   ): void;
-  public listAgentStatuses(
+  listAgentStatuses(
     args: ListAgentStatusesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListAgentStatusesCommandOutput) => void
   ): void;
-  public listAgentStatuses(
-    args: ListAgentStatusesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAgentStatusesCommandOutput) => void),
-    cb?: (err: any, data?: ListAgentStatusesCommandOutput) => void
-  ): Promise<ListAgentStatusesCommandOutput> | void {
-    const command = new ListAgentStatusesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Returns a paginated list of all approved origins associated with the instance.</p>
+   * @see {@link ListAnalyticsDataAssociationsCommand}
    */
-  public listApprovedOrigins(
+  listAnalyticsDataAssociations(
+    args: ListAnalyticsDataAssociationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListAnalyticsDataAssociationsCommandOutput>;
+  listAnalyticsDataAssociations(
+    args: ListAnalyticsDataAssociationsCommandInput,
+    cb: (err: any, data?: ListAnalyticsDataAssociationsCommandOutput) => void
+  ): void;
+  listAnalyticsDataAssociations(
+    args: ListAnalyticsDataAssociationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListAnalyticsDataAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnalyticsDataLakeDataSetsCommand}
+   */
+  listAnalyticsDataLakeDataSets(
+    args: ListAnalyticsDataLakeDataSetsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListAnalyticsDataLakeDataSetsCommandOutput>;
+  listAnalyticsDataLakeDataSets(
+    args: ListAnalyticsDataLakeDataSetsCommandInput,
+    cb: (err: any, data?: ListAnalyticsDataLakeDataSetsCommandOutput) => void
+  ): void;
+  listAnalyticsDataLakeDataSets(
+    args: ListAnalyticsDataLakeDataSetsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListAnalyticsDataLakeDataSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApprovedOriginsCommand}
+   */
+  listApprovedOrigins(
     args: ListApprovedOriginsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListApprovedOriginsCommandOutput>;
-  public listApprovedOrigins(
+  listApprovedOrigins(
     args: ListApprovedOriginsCommandInput,
     cb: (err: any, data?: ListApprovedOriginsCommandOutput) => void
   ): void;
-  public listApprovedOrigins(
+  listApprovedOrigins(
     args: ListApprovedOriginsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListApprovedOriginsCommandOutput) => void
   ): void;
-  public listApprovedOrigins(
-    args: ListApprovedOriginsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListApprovedOriginsCommandOutput) => void),
-    cb?: (err: any, data?: ListApprovedOriginsCommandOutput) => void
-  ): Promise<ListApprovedOriginsCommandOutput> | void {
-    const command = new ListApprovedOriginsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the
-   *    instance. </p>
+   * @see {@link ListAssociatedContactsCommand}
    */
-  public listBots(args: ListBotsCommandInput, options?: __HttpHandlerOptions): Promise<ListBotsCommandOutput>;
-  public listBots(args: ListBotsCommandInput, cb: (err: any, data?: ListBotsCommandOutput) => void): void;
-  public listBots(
+  listAssociatedContacts(
+    args: ListAssociatedContactsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListAssociatedContactsCommandOutput>;
+  listAssociatedContacts(
+    args: ListAssociatedContactsCommandInput,
+    cb: (err: any, data?: ListAssociatedContactsCommandOutput) => void
+  ): void;
+  listAssociatedContacts(
+    args: ListAssociatedContactsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListAssociatedContactsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAttachedFilesConfigurationsCommand}
+   */
+  listAttachedFilesConfigurations(
+    args: ListAttachedFilesConfigurationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListAttachedFilesConfigurationsCommandOutput>;
+  listAttachedFilesConfigurations(
+    args: ListAttachedFilesConfigurationsCommandInput,
+    cb: (err: any, data?: ListAttachedFilesConfigurationsCommandOutput) => void
+  ): void;
+  listAttachedFilesConfigurations(
+    args: ListAttachedFilesConfigurationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListAttachedFilesConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAuthenticationProfilesCommand}
+   */
+  listAuthenticationProfiles(
+    args: ListAuthenticationProfilesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListAuthenticationProfilesCommandOutput>;
+  listAuthenticationProfiles(
+    args: ListAuthenticationProfilesCommandInput,
+    cb: (err: any, data?: ListAuthenticationProfilesCommandOutput) => void
+  ): void;
+  listAuthenticationProfiles(
+    args: ListAuthenticationProfilesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListAuthenticationProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotsCommand}
+   */
+  listBots(
     args: ListBotsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<ListBotsCommandOutput>;
+  listBots(
+    args: ListBotsCommandInput,
     cb: (err: any, data?: ListBotsCommandOutput) => void
   ): void;
-  public listBots(
+  listBots(
     args: ListBotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBotsCommandOutput) => void),
-    cb?: (err: any, data?: ListBotsCommandOutput) => void
-  ): Promise<ListBotsCommandOutput> | void {
-    const command = new ListBotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListBotsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Provides information about the contact flows for the specified Amazon Connect instance.</p>
-   *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
-   *    Flow language</a>.</p>
-   *          <p>For more information about contact flows, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html">Contact Flows</a> in the
-   *     <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListChildHoursOfOperationsCommand}
    */
-  public listContactFlows(
+  listChildHoursOfOperations(
+    args: ListChildHoursOfOperationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListChildHoursOfOperationsCommandOutput>;
+  listChildHoursOfOperations(
+    args: ListChildHoursOfOperationsCommandInput,
+    cb: (err: any, data?: ListChildHoursOfOperationsCommandOutput) => void
+  ): void;
+  listChildHoursOfOperations(
+    args: ListChildHoursOfOperationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListChildHoursOfOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactEvaluationsCommand}
+   */
+  listContactEvaluations(
+    args: ListContactEvaluationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactEvaluationsCommandOutput>;
+  listContactEvaluations(
+    args: ListContactEvaluationsCommandInput,
+    cb: (err: any, data?: ListContactEvaluationsCommandOutput) => void
+  ): void;
+  listContactEvaluations(
+    args: ListContactEvaluationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactEvaluationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactFlowAliasesCommand}
+   */
+  listContactFlowAliases(
+    args: ListContactFlowAliasesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactFlowAliasesCommandOutput>;
+  listContactFlowAliases(
+    args: ListContactFlowAliasesCommandInput,
+    cb: (err: any, data?: ListContactFlowAliasesCommandOutput) => void
+  ): void;
+  listContactFlowAliases(
+    args: ListContactFlowAliasesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactFlowAliasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactFlowModuleAliasesCommand}
+   */
+  listContactFlowModuleAliases(
+    args: ListContactFlowModuleAliasesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactFlowModuleAliasesCommandOutput>;
+  listContactFlowModuleAliases(
+    args: ListContactFlowModuleAliasesCommandInput,
+    cb: (err: any, data?: ListContactFlowModuleAliasesCommandOutput) => void
+  ): void;
+  listContactFlowModuleAliases(
+    args: ListContactFlowModuleAliasesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactFlowModuleAliasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactFlowModulesCommand}
+   */
+  listContactFlowModules(
+    args: ListContactFlowModulesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactFlowModulesCommandOutput>;
+  listContactFlowModules(
+    args: ListContactFlowModulesCommandInput,
+    cb: (err: any, data?: ListContactFlowModulesCommandOutput) => void
+  ): void;
+  listContactFlowModules(
+    args: ListContactFlowModulesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactFlowModulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactFlowModuleVersionsCommand}
+   */
+  listContactFlowModuleVersions(
+    args: ListContactFlowModuleVersionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactFlowModuleVersionsCommandOutput>;
+  listContactFlowModuleVersions(
+    args: ListContactFlowModuleVersionsCommandInput,
+    cb: (err: any, data?: ListContactFlowModuleVersionsCommandOutput) => void
+  ): void;
+  listContactFlowModuleVersions(
+    args: ListContactFlowModuleVersionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactFlowModuleVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactFlowsCommand}
+   */
+  listContactFlows(
     args: ListContactFlowsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListContactFlowsCommandOutput>;
-  public listContactFlows(
+  listContactFlows(
     args: ListContactFlowsCommandInput,
     cb: (err: any, data?: ListContactFlowsCommandOutput) => void
   ): void;
-  public listContactFlows(
+  listContactFlows(
     args: ListContactFlowsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListContactFlowsCommandOutput) => void
   ): void;
-  public listContactFlows(
-    args: ListContactFlowsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListContactFlowsCommandOutput) => void),
-    cb?: (err: any, data?: ListContactFlowsCommandOutput) => void
-  ): Promise<ListContactFlowsCommandOutput> | void {
-    const command = new ListContactFlowsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides information about the hours of operation for the specified Amazon Connect instance.</p>
-   *          <p>For more information about hours of operation, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html">Set the Hours of Operation for a
-   *     Queue</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListContactFlowVersionsCommand}
    */
-  public listHoursOfOperations(
+  listContactFlowVersions(
+    args: ListContactFlowVersionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactFlowVersionsCommandOutput>;
+  listContactFlowVersions(
+    args: ListContactFlowVersionsCommandInput,
+    cb: (err: any, data?: ListContactFlowVersionsCommandOutput) => void
+  ): void;
+  listContactFlowVersions(
+    args: ListContactFlowVersionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactFlowVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContactReferencesCommand}
+   */
+  listContactReferences(
+    args: ListContactReferencesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListContactReferencesCommandOutput>;
+  listContactReferences(
+    args: ListContactReferencesCommandInput,
+    cb: (err: any, data?: ListContactReferencesCommandOutput) => void
+  ): void;
+  listContactReferences(
+    args: ListContactReferencesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListContactReferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTableAttributesCommand}
+   */
+  listDataTableAttributes(
+    args: ListDataTableAttributesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListDataTableAttributesCommandOutput>;
+  listDataTableAttributes(
+    args: ListDataTableAttributesCommandInput,
+    cb: (err: any, data?: ListDataTableAttributesCommandOutput) => void
+  ): void;
+  listDataTableAttributes(
+    args: ListDataTableAttributesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListDataTableAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTablePrimaryValuesCommand}
+   */
+  listDataTablePrimaryValues(
+    args: ListDataTablePrimaryValuesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListDataTablePrimaryValuesCommandOutput>;
+  listDataTablePrimaryValues(
+    args: ListDataTablePrimaryValuesCommandInput,
+    cb: (err: any, data?: ListDataTablePrimaryValuesCommandOutput) => void
+  ): void;
+  listDataTablePrimaryValues(
+    args: ListDataTablePrimaryValuesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListDataTablePrimaryValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTablesCommand}
+   */
+  listDataTables(
+    args: ListDataTablesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListDataTablesCommandOutput>;
+  listDataTables(
+    args: ListDataTablesCommandInput,
+    cb: (err: any, data?: ListDataTablesCommandOutput) => void
+  ): void;
+  listDataTables(
+    args: ListDataTablesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListDataTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTableValuesCommand}
+   */
+  listDataTableValues(
+    args: ListDataTableValuesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListDataTableValuesCommandOutput>;
+  listDataTableValues(
+    args: ListDataTableValuesCommandInput,
+    cb: (err: any, data?: ListDataTableValuesCommandOutput) => void
+  ): void;
+  listDataTableValues(
+    args: ListDataTableValuesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListDataTableValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDefaultVocabulariesCommand}
+   */
+  listDefaultVocabularies(
+    args: ListDefaultVocabulariesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListDefaultVocabulariesCommandOutput>;
+  listDefaultVocabularies(
+    args: ListDefaultVocabulariesCommandInput,
+    cb: (err: any, data?: ListDefaultVocabulariesCommandOutput) => void
+  ): void;
+  listDefaultVocabularies(
+    args: ListDefaultVocabulariesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListDefaultVocabulariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEntitySecurityProfilesCommand}
+   */
+  listEntitySecurityProfiles(
+    args: ListEntitySecurityProfilesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListEntitySecurityProfilesCommandOutput>;
+  listEntitySecurityProfiles(
+    args: ListEntitySecurityProfilesCommandInput,
+    cb: (err: any, data?: ListEntitySecurityProfilesCommandOutput) => void
+  ): void;
+  listEntitySecurityProfiles(
+    args: ListEntitySecurityProfilesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListEntitySecurityProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEvaluationFormAIVersionsCommand}
+   */
+  listEvaluationFormAIVersions(
+    args: ListEvaluationFormAIVersionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListEvaluationFormAIVersionsCommandOutput>;
+  listEvaluationFormAIVersions(
+    args: ListEvaluationFormAIVersionsCommandInput,
+    cb: (err: any, data?: ListEvaluationFormAIVersionsCommandOutput) => void
+  ): void;
+  listEvaluationFormAIVersions(
+    args: ListEvaluationFormAIVersionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListEvaluationFormAIVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEvaluationFormsCommand}
+   */
+  listEvaluationForms(
+    args: ListEvaluationFormsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListEvaluationFormsCommandOutput>;
+  listEvaluationForms(
+    args: ListEvaluationFormsCommandInput,
+    cb: (err: any, data?: ListEvaluationFormsCommandOutput) => void
+  ): void;
+  listEvaluationForms(
+    args: ListEvaluationFormsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListEvaluationFormsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEvaluationFormVersionsCommand}
+   */
+  listEvaluationFormVersions(
+    args: ListEvaluationFormVersionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListEvaluationFormVersionsCommandOutput>;
+  listEvaluationFormVersions(
+    args: ListEvaluationFormVersionsCommandInput,
+    cb: (err: any, data?: ListEvaluationFormVersionsCommandOutput) => void
+  ): void;
+  listEvaluationFormVersions(
+    args: ListEvaluationFormVersionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListEvaluationFormVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExtractionDefinitionsCommand}
+   */
+  listExtractionDefinitions(
+    args: ListExtractionDefinitionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListExtractionDefinitionsCommandOutput>;
+  listExtractionDefinitions(
+    args: ListExtractionDefinitionsCommandInput,
+    cb: (err: any, data?: ListExtractionDefinitionsCommandOutput) => void
+  ): void;
+  listExtractionDefinitions(
+    args: ListExtractionDefinitionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListExtractionDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowAssociationsCommand}
+   */
+  listFlowAssociations(
+    args: ListFlowAssociationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListFlowAssociationsCommandOutput>;
+  listFlowAssociations(
+    args: ListFlowAssociationsCommandInput,
+    cb: (err: any, data?: ListFlowAssociationsCommandOutput) => void
+  ): void;
+  listFlowAssociations(
+    args: ListFlowAssociationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListFlowAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListHoursOfOperationOverridesCommand}
+   */
+  listHoursOfOperationOverrides(
+    args: ListHoursOfOperationOverridesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListHoursOfOperationOverridesCommandOutput>;
+  listHoursOfOperationOverrides(
+    args: ListHoursOfOperationOverridesCommandInput,
+    cb: (err: any, data?: ListHoursOfOperationOverridesCommandOutput) => void
+  ): void;
+  listHoursOfOperationOverrides(
+    args: ListHoursOfOperationOverridesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListHoursOfOperationOverridesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListHoursOfOperationsCommand}
+   */
+  listHoursOfOperations(
     args: ListHoursOfOperationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListHoursOfOperationsCommandOutput>;
-  public listHoursOfOperations(
+  listHoursOfOperations(
     args: ListHoursOfOperationsCommandInput,
     cb: (err: any, data?: ListHoursOfOperationsCommandOutput) => void
   ): void;
-  public listHoursOfOperations(
+  listHoursOfOperations(
     args: ListHoursOfOperationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListHoursOfOperationsCommandOutput) => void
   ): void;
-  public listHoursOfOperations(
-    args: ListHoursOfOperationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListHoursOfOperationsCommandOutput) => void),
-    cb?: (err: any, data?: ListHoursOfOperationsCommandOutput) => void
-  ): Promise<ListHoursOfOperationsCommandOutput> | void {
-    const command = new ListHoursOfOperationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Returns a paginated list of all attribute types for the given instance.</p>
+   * @see {@link ListInstanceAttributesCommand}
    */
-  public listInstanceAttributes(
+  listInstanceAttributes(
     args: ListInstanceAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListInstanceAttributesCommandOutput>;
-  public listInstanceAttributes(
+  listInstanceAttributes(
     args: ListInstanceAttributesCommandInput,
     cb: (err: any, data?: ListInstanceAttributesCommandOutput) => void
   ): void;
-  public listInstanceAttributes(
+  listInstanceAttributes(
     args: ListInstanceAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListInstanceAttributesCommandOutput) => void
   ): void;
-  public listInstanceAttributes(
-    args: ListInstanceAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListInstanceAttributesCommandOutput) => void),
-    cb?: (err: any, data?: ListInstanceAttributesCommandOutput) => void
-  ): Promise<ListInstanceAttributesCommandOutput> | void {
-    const command = new ListInstanceAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Return a list of instances which are in active state, creation-in-progress state, and failed
-   *    state. Instances that aren't successfully created (they are in a failed state) are returned only
-   *    for 24 hours after the CreateInstance API was invoked.</p>
+   * @see {@link ListInstancesCommand}
    */
-  public listInstances(
+  listInstances(): Promise<ListInstancesCommandOutput>;
+  listInstances(
     args: ListInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListInstancesCommandOutput>;
-  public listInstances(
+  listInstances(
     args: ListInstancesCommandInput,
     cb: (err: any, data?: ListInstancesCommandOutput) => void
   ): void;
-  public listInstances(
+  listInstances(
     args: ListInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListInstancesCommandOutput) => void
   ): void;
-  public listInstances(
-    args: ListInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListInstancesCommandOutput) => void),
-    cb?: (err: any, data?: ListInstancesCommandOutput) => void
-  ): Promise<ListInstancesCommandOutput> | void {
-    const command = new ListInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *
-   *          <p>Returns a paginated list of storage configs for the identified instance and resource
-   *    type.</p>
+   * @see {@link ListInstanceStorageConfigsCommand}
    */
-  public listInstanceStorageConfigs(
+  listInstanceStorageConfigs(
     args: ListInstanceStorageConfigsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListInstanceStorageConfigsCommandOutput>;
-  public listInstanceStorageConfigs(
+  listInstanceStorageConfigs(
     args: ListInstanceStorageConfigsCommandInput,
     cb: (err: any, data?: ListInstanceStorageConfigsCommandOutput) => void
   ): void;
-  public listInstanceStorageConfigs(
+  listInstanceStorageConfigs(
     args: ListInstanceStorageConfigsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListInstanceStorageConfigsCommandOutput) => void
   ): void;
-  public listInstanceStorageConfigs(
-    args: ListInstanceStorageConfigsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListInstanceStorageConfigsCommandOutput) => void),
-    cb?: (err: any, data?: ListInstanceStorageConfigsCommandOutput) => void
-  ): Promise<ListInstanceStorageConfigsCommandOutput> | void {
-    const command = new ListInstanceStorageConfigsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides summary information about the AWS resource associations for the specified Amazon Connect
-   *    instance.</p>
+   * @see {@link ListIntegrationAssociationsCommand}
    */
-  public listIntegrationAssociations(
+  listIntegrationAssociations(
     args: ListIntegrationAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListIntegrationAssociationsCommandOutput>;
-  public listIntegrationAssociations(
+  listIntegrationAssociations(
     args: ListIntegrationAssociationsCommandInput,
     cb: (err: any, data?: ListIntegrationAssociationsCommandOutput) => void
   ): void;
-  public listIntegrationAssociations(
+  listIntegrationAssociations(
     args: ListIntegrationAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListIntegrationAssociationsCommandOutput) => void
   ): void;
-  public listIntegrationAssociations(
-    args: ListIntegrationAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIntegrationAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: ListIntegrationAssociationsCommandOutput) => void
-  ): Promise<ListIntegrationAssociationsCommandOutput> | void {
-    const command = new ListIntegrationAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Returns a paginated list of all Lambda functions that display in the dropdown options in the
-   *    relevant contact flow blocks.</p>
+   * @see {@link ListLambdaFunctionsCommand}
    */
-  public listLambdaFunctions(
+  listLambdaFunctions(
     args: ListLambdaFunctionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListLambdaFunctionsCommandOutput>;
-  public listLambdaFunctions(
+  listLambdaFunctions(
     args: ListLambdaFunctionsCommandInput,
     cb: (err: any, data?: ListLambdaFunctionsCommandOutput) => void
   ): void;
-  public listLambdaFunctions(
+  listLambdaFunctions(
     args: ListLambdaFunctionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListLambdaFunctionsCommandOutput) => void
   ): void;
-  public listLambdaFunctions(
-    args: ListLambdaFunctionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLambdaFunctionsCommandOutput) => void),
-    cb?: (err: any, data?: ListLambdaFunctionsCommandOutput) => void
-  ): Promise<ListLambdaFunctionsCommandOutput> | void {
-    const command = new ListLambdaFunctionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Returns a paginated list of all the Amazon Lex bots currently associated with the
-   *    instance.</p>
+   * @see {@link ListLexBotsCommand}
    */
-  public listLexBots(args: ListLexBotsCommandInput, options?: __HttpHandlerOptions): Promise<ListLexBotsCommandOutput>;
-  public listLexBots(args: ListLexBotsCommandInput, cb: (err: any, data?: ListLexBotsCommandOutput) => void): void;
-  public listLexBots(
+  listLexBots(
     args: ListLexBotsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<ListLexBotsCommandOutput>;
+  listLexBots(
+    args: ListLexBotsCommandInput,
     cb: (err: any, data?: ListLexBotsCommandOutput) => void
   ): void;
-  public listLexBots(
+  listLexBots(
     args: ListLexBotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLexBotsCommandOutput) => void),
-    cb?: (err: any, data?: ListLexBotsCommandOutput) => void
-  ): Promise<ListLexBotsCommandOutput> | void {
-    const command = new ListLexBotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListLexBotsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>
-   *          <p>For more information about phone numbers, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html">Set Up Phone Numbers for Your
-   *     Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListMetricsCommand}
    */
-  public listPhoneNumbers(
+  listMetrics(
+    args: ListMetricsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListMetricsCommandOutput>;
+  listMetrics(
+    args: ListMetricsCommandInput,
+    cb: (err: any, data?: ListMetricsCommandOutput) => void
+  ): void;
+  listMetrics(
+    args: ListMetricsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNotificationsCommand}
+   */
+  listNotifications(
+    args: ListNotificationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListNotificationsCommandOutput>;
+  listNotifications(
+    args: ListNotificationsCommandInput,
+    cb: (err: any, data?: ListNotificationsCommandOutput) => void
+  ): void;
+  listNotifications(
+    args: ListNotificationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListNotificationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPhoneNumbersCommand}
+   */
+  listPhoneNumbers(
     args: ListPhoneNumbersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListPhoneNumbersCommandOutput>;
-  public listPhoneNumbers(
+  listPhoneNumbers(
     args: ListPhoneNumbersCommandInput,
     cb: (err: any, data?: ListPhoneNumbersCommandOutput) => void
   ): void;
-  public listPhoneNumbers(
+  listPhoneNumbers(
     args: ListPhoneNumbersCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListPhoneNumbersCommandOutput) => void
   ): void;
-  public listPhoneNumbers(
-    args: ListPhoneNumbersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPhoneNumbersCommandOutput) => void),
-    cb?: (err: any, data?: ListPhoneNumbersCommandOutput) => void
-  ): Promise<ListPhoneNumbersCommandOutput> | void {
-    const command = new ListPhoneNumbersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides information about the prompts for the specified Amazon Connect instance.</p>
+   * @see {@link ListPhoneNumbersV2Command}
    */
-  public listPrompts(args: ListPromptsCommandInput, options?: __HttpHandlerOptions): Promise<ListPromptsCommandOutput>;
-  public listPrompts(args: ListPromptsCommandInput, cb: (err: any, data?: ListPromptsCommandOutput) => void): void;
-  public listPrompts(
+  listPhoneNumbersV2(): Promise<ListPhoneNumbersV2CommandOutput>;
+  listPhoneNumbersV2(
+    args: ListPhoneNumbersV2CommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListPhoneNumbersV2CommandOutput>;
+  listPhoneNumbersV2(
+    args: ListPhoneNumbersV2CommandInput,
+    cb: (err: any, data?: ListPhoneNumbersV2CommandOutput) => void
+  ): void;
+  listPhoneNumbersV2(
+    args: ListPhoneNumbersV2CommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListPhoneNumbersV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPredefinedAttributesCommand}
+   */
+  listPredefinedAttributes(
+    args: ListPredefinedAttributesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListPredefinedAttributesCommandOutput>;
+  listPredefinedAttributes(
+    args: ListPredefinedAttributesCommandInput,
+    cb: (err: any, data?: ListPredefinedAttributesCommandOutput) => void
+  ): void;
+  listPredefinedAttributes(
+    args: ListPredefinedAttributesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListPredefinedAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPromptsCommand}
+   */
+  listPrompts(
     args: ListPromptsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<ListPromptsCommandOutput>;
+  listPrompts(
+    args: ListPromptsCommandInput,
     cb: (err: any, data?: ListPromptsCommandOutput) => void
   ): void;
-  public listPrompts(
+  listPrompts(
     args: ListPromptsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPromptsCommandOutput) => void),
-    cb?: (err: any, data?: ListPromptsCommandOutput) => void
-  ): Promise<ListPromptsCommandOutput> | void {
-    const command = new ListPromptsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListPromptsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Lists the quick connects associated with a queue.</p>
+   * @see {@link ListQueueEmailAddressesCommand}
    */
-  public listQueueQuickConnects(
+  listQueueEmailAddresses(
+    args: ListQueueEmailAddressesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListQueueEmailAddressesCommandOutput>;
+  listQueueEmailAddresses(
+    args: ListQueueEmailAddressesCommandInput,
+    cb: (err: any, data?: ListQueueEmailAddressesCommandOutput) => void
+  ): void;
+  listQueueEmailAddresses(
+    args: ListQueueEmailAddressesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListQueueEmailAddressesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListQueueQuickConnectsCommand}
+   */
+  listQueueQuickConnects(
     args: ListQueueQuickConnectsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListQueueQuickConnectsCommandOutput>;
-  public listQueueQuickConnects(
+  listQueueQuickConnects(
     args: ListQueueQuickConnectsCommandInput,
     cb: (err: any, data?: ListQueueQuickConnectsCommandOutput) => void
   ): void;
-  public listQueueQuickConnects(
+  listQueueQuickConnects(
     args: ListQueueQuickConnectsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListQueueQuickConnectsCommandOutput) => void
   ): void;
-  public listQueueQuickConnects(
-    args: ListQueueQuickConnectsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListQueueQuickConnectsCommandOutput) => void),
-    cb?: (err: any, data?: ListQueueQuickConnectsCommandOutput) => void
-  ): Promise<ListQueueQuickConnectsCommandOutput> | void {
-    const command = new ListQueueQuickConnectsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides information about the queues for the specified Amazon Connect instance.</p>
-   *          <p>If you do not specify a <code>QueueTypes</code>
-   *    parameter, both standard and agent queues are returned. This might cause an unexpected truncation
-   *    of results if you have more than 1000 agents and you limit the number of results of the API call
-   *    in code.</p>
-   *          <p>For more information about queues, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html">Queues: Standard and
-   *     Agent</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListQueuesCommand}
    */
-  public listQueues(args: ListQueuesCommandInput, options?: __HttpHandlerOptions): Promise<ListQueuesCommandOutput>;
-  public listQueues(args: ListQueuesCommandInput, cb: (err: any, data?: ListQueuesCommandOutput) => void): void;
-  public listQueues(
+  listQueues(
     args: ListQueuesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<ListQueuesCommandOutput>;
+  listQueues(
+    args: ListQueuesCommandInput,
     cb: (err: any, data?: ListQueuesCommandOutput) => void
   ): void;
-  public listQueues(
+  listQueues(
     args: ListQueuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListQueuesCommandOutput) => void),
-    cb?: (err: any, data?: ListQueuesCommandOutput) => void
-  ): Promise<ListQueuesCommandOutput> | void {
-    const command = new ListQueuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListQueuesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Provides information about the quick connects for the specified Amazon Connect instance. </p>
+   * @see {@link ListQuickConnectsCommand}
    */
-  public listQuickConnects(
+  listQuickConnects(
     args: ListQuickConnectsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListQuickConnectsCommandOutput>;
-  public listQuickConnects(
+  listQuickConnects(
     args: ListQuickConnectsCommandInput,
     cb: (err: any, data?: ListQuickConnectsCommandOutput) => void
   ): void;
-  public listQuickConnects(
+  listQuickConnects(
     args: ListQuickConnectsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListQuickConnectsCommandOutput) => void
   ): void;
-  public listQuickConnects(
-    args: ListQuickConnectsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListQuickConnectsCommandOutput) => void),
-    cb?: (err: any, data?: ListQuickConnectsCommandOutput) => void
-  ): Promise<ListQuickConnectsCommandOutput> | void {
-    const command = new ListQuickConnectsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the queues associated with a routing profile.</p>
+   * @see {@link ListRealtimeContactAnalysisSegmentsV2Command}
    */
-  public listRoutingProfileQueues(
+  listRealtimeContactAnalysisSegmentsV2(
+    args: ListRealtimeContactAnalysisSegmentsV2CommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListRealtimeContactAnalysisSegmentsV2CommandOutput>;
+  listRealtimeContactAnalysisSegmentsV2(
+    args: ListRealtimeContactAnalysisSegmentsV2CommandInput,
+    cb: (err: any, data?: ListRealtimeContactAnalysisSegmentsV2CommandOutput) => void
+  ): void;
+  listRealtimeContactAnalysisSegmentsV2(
+    args: ListRealtimeContactAnalysisSegmentsV2CommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListRealtimeContactAnalysisSegmentsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReplicationFindingsCommand}
+   */
+  listReplicationFindings(
+    args: ListReplicationFindingsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListReplicationFindingsCommandOutput>;
+  listReplicationFindings(
+    args: ListReplicationFindingsCommandInput,
+    cb: (err: any, data?: ListReplicationFindingsCommandOutput) => void
+  ): void;
+  listReplicationFindings(
+    args: ListReplicationFindingsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListReplicationFindingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoutingProfileManualAssignmentQueuesCommand}
+   */
+  listRoutingProfileManualAssignmentQueues(
+    args: ListRoutingProfileManualAssignmentQueuesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListRoutingProfileManualAssignmentQueuesCommandOutput>;
+  listRoutingProfileManualAssignmentQueues(
+    args: ListRoutingProfileManualAssignmentQueuesCommandInput,
+    cb: (err: any, data?: ListRoutingProfileManualAssignmentQueuesCommandOutput) => void
+  ): void;
+  listRoutingProfileManualAssignmentQueues(
+    args: ListRoutingProfileManualAssignmentQueuesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListRoutingProfileManualAssignmentQueuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoutingProfileQueuesCommand}
+   */
+  listRoutingProfileQueues(
     args: ListRoutingProfileQueuesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListRoutingProfileQueuesCommandOutput>;
-  public listRoutingProfileQueues(
+  listRoutingProfileQueues(
     args: ListRoutingProfileQueuesCommandInput,
     cb: (err: any, data?: ListRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public listRoutingProfileQueues(
+  listRoutingProfileQueues(
     args: ListRoutingProfileQueuesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public listRoutingProfileQueues(
-    args: ListRoutingProfileQueuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRoutingProfileQueuesCommandOutput) => void),
-    cb?: (err: any, data?: ListRoutingProfileQueuesCommandOutput) => void
-  ): Promise<ListRoutingProfileQueuesCommandOutput> | void {
-    const command = new ListRoutingProfileQueuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides summary information about the routing profiles for the specified Amazon Connect
-   *    instance.</p>
-   *          <p>For more information about routing profiles, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html">Routing Profiles</a> and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html">Create a Routing
-   *     Profile</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListRoutingProfilesCommand}
    */
-  public listRoutingProfiles(
+  listRoutingProfiles(
     args: ListRoutingProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListRoutingProfilesCommandOutput>;
-  public listRoutingProfiles(
+  listRoutingProfiles(
     args: ListRoutingProfilesCommandInput,
     cb: (err: any, data?: ListRoutingProfilesCommandOutput) => void
   ): void;
-  public listRoutingProfiles(
+  listRoutingProfiles(
     args: ListRoutingProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListRoutingProfilesCommandOutput) => void
   ): void;
-  public listRoutingProfiles(
-    args: ListRoutingProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRoutingProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListRoutingProfilesCommandOutput) => void
-  ): Promise<ListRoutingProfilesCommandOutput> | void {
-    const command = new ListRoutingProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Returns a paginated list of all security keys associated with the instance.</p>
+   * @see {@link ListRulesCommand}
    */
-  public listSecurityKeys(
+  listRules(
+    args: ListRulesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListRulesCommandOutput>;
+  listRules(
+    args: ListRulesCommandInput,
+    cb: (err: any, data?: ListRulesCommandOutput) => void
+  ): void;
+  listRules(
+    args: ListRulesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityKeysCommand}
+   */
+  listSecurityKeys(
     args: ListSecurityKeysCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListSecurityKeysCommandOutput>;
-  public listSecurityKeys(
+  listSecurityKeys(
     args: ListSecurityKeysCommandInput,
     cb: (err: any, data?: ListSecurityKeysCommandOutput) => void
   ): void;
-  public listSecurityKeys(
+  listSecurityKeys(
     args: ListSecurityKeysCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListSecurityKeysCommandOutput) => void
   ): void;
-  public listSecurityKeys(
-    args: ListSecurityKeysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSecurityKeysCommandOutput) => void),
-    cb?: (err: any, data?: ListSecurityKeysCommandOutput) => void
-  ): Promise<ListSecurityKeysCommandOutput> | void {
-    const command = new ListSecurityKeysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides summary information about the security profiles for the specified Amazon Connect
-   *    instance.</p>
-   *          <p>For more information about security profiles, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html">Security Profiles</a> in the
-   *     <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListSecurityProfileAIAgentsCommand}
    */
-  public listSecurityProfiles(
+  listSecurityProfileAIAgents(
+    args: ListSecurityProfileAIAgentsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListSecurityProfileAIAgentsCommandOutput>;
+  listSecurityProfileAIAgents(
+    args: ListSecurityProfileAIAgentsCommandInput,
+    cb: (err: any, data?: ListSecurityProfileAIAgentsCommandOutput) => void
+  ): void;
+  listSecurityProfileAIAgents(
+    args: ListSecurityProfileAIAgentsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListSecurityProfileAIAgentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityProfileApplicationsCommand}
+   */
+  listSecurityProfileApplications(
+    args: ListSecurityProfileApplicationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListSecurityProfileApplicationsCommandOutput>;
+  listSecurityProfileApplications(
+    args: ListSecurityProfileApplicationsCommandInput,
+    cb: (err: any, data?: ListSecurityProfileApplicationsCommandOutput) => void
+  ): void;
+  listSecurityProfileApplications(
+    args: ListSecurityProfileApplicationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListSecurityProfileApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityProfileFlowModulesCommand}
+   */
+  listSecurityProfileFlowModules(
+    args: ListSecurityProfileFlowModulesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListSecurityProfileFlowModulesCommandOutput>;
+  listSecurityProfileFlowModules(
+    args: ListSecurityProfileFlowModulesCommandInput,
+    cb: (err: any, data?: ListSecurityProfileFlowModulesCommandOutput) => void
+  ): void;
+  listSecurityProfileFlowModules(
+    args: ListSecurityProfileFlowModulesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListSecurityProfileFlowModulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityProfilePermissionsCommand}
+   */
+  listSecurityProfilePermissions(
+    args: ListSecurityProfilePermissionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListSecurityProfilePermissionsCommandOutput>;
+  listSecurityProfilePermissions(
+    args: ListSecurityProfilePermissionsCommandInput,
+    cb: (err: any, data?: ListSecurityProfilePermissionsCommandOutput) => void
+  ): void;
+  listSecurityProfilePermissions(
+    args: ListSecurityProfilePermissionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListSecurityProfilePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityProfilesCommand}
+   */
+  listSecurityProfiles(
     args: ListSecurityProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListSecurityProfilesCommandOutput>;
-  public listSecurityProfiles(
+  listSecurityProfiles(
     args: ListSecurityProfilesCommandInput,
     cb: (err: any, data?: ListSecurityProfilesCommandOutput) => void
   ): void;
-  public listSecurityProfiles(
+  listSecurityProfiles(
     args: ListSecurityProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListSecurityProfilesCommandOutput) => void
   ): void;
-  public listSecurityProfiles(
-    args: ListSecurityProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSecurityProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListSecurityProfilesCommandOutput) => void
-  ): Promise<ListSecurityProfilesCommandOutput> | void {
-    const command = new ListSecurityProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags for the specified resource.</p>
-   *          <p>For sample policies that use tags, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html">Amazon Connect Identity-Based
-   *     Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the use cases for the integration association. </p>
+   * @see {@link ListTaskTemplatesCommand}
    */
-  public listUseCases(
+  listTaskTemplates(
+    args: ListTaskTemplatesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListTaskTemplatesCommandOutput>;
+  listTaskTemplates(
+    args: ListTaskTemplatesCommandInput,
+    cb: (err: any, data?: ListTaskTemplatesCommandOutput) => void
+  ): void;
+  listTaskTemplates(
+    args: ListTaskTemplatesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListTaskTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestCaseExecutionRecordsCommand}
+   */
+  listTestCaseExecutionRecords(
+    args: ListTestCaseExecutionRecordsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListTestCaseExecutionRecordsCommandOutput>;
+  listTestCaseExecutionRecords(
+    args: ListTestCaseExecutionRecordsCommandInput,
+    cb: (err: any, data?: ListTestCaseExecutionRecordsCommandOutput) => void
+  ): void;
+  listTestCaseExecutionRecords(
+    args: ListTestCaseExecutionRecordsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListTestCaseExecutionRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestCaseExecutionsCommand}
+   */
+  listTestCaseExecutions(
+    args: ListTestCaseExecutionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListTestCaseExecutionsCommandOutput>;
+  listTestCaseExecutions(
+    args: ListTestCaseExecutionsCommandInput,
+    cb: (err: any, data?: ListTestCaseExecutionsCommandOutput) => void
+  ): void;
+  listTestCaseExecutions(
+    args: ListTestCaseExecutionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListTestCaseExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestCasesCommand}
+   */
+  listTestCases(
+    args: ListTestCasesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListTestCasesCommandOutput>;
+  listTestCases(
+    args: ListTestCasesCommandInput,
+    cb: (err: any, data?: ListTestCasesCommandOutput) => void
+  ): void;
+  listTestCases(
+    args: ListTestCasesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListTestCasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrafficDistributionGroupsCommand}
+   */
+  listTrafficDistributionGroups(): Promise<ListTrafficDistributionGroupsCommandOutput>;
+  listTrafficDistributionGroups(
+    args: ListTrafficDistributionGroupsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListTrafficDistributionGroupsCommandOutput>;
+  listTrafficDistributionGroups(
+    args: ListTrafficDistributionGroupsCommandInput,
+    cb: (err: any, data?: ListTrafficDistributionGroupsCommandOutput) => void
+  ): void;
+  listTrafficDistributionGroups(
+    args: ListTrafficDistributionGroupsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListTrafficDistributionGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrafficDistributionGroupUsersCommand}
+   */
+  listTrafficDistributionGroupUsers(
+    args: ListTrafficDistributionGroupUsersCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListTrafficDistributionGroupUsersCommandOutput>;
+  listTrafficDistributionGroupUsers(
+    args: ListTrafficDistributionGroupUsersCommandInput,
+    cb: (err: any, data?: ListTrafficDistributionGroupUsersCommandOutput) => void
+  ): void;
+  listTrafficDistributionGroupUsers(
+    args: ListTrafficDistributionGroupUsersCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListTrafficDistributionGroupUsersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUseCasesCommand}
+   */
+  listUseCases(
     args: ListUseCasesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListUseCasesCommandOutput>;
-  public listUseCases(args: ListUseCasesCommandInput, cb: (err: any, data?: ListUseCasesCommandOutput) => void): void;
-  public listUseCases(
+  listUseCases(
     args: ListUseCasesCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListUseCasesCommandOutput) => void
   ): void;
-  public listUseCases(
+  listUseCases(
     args: ListUseCasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUseCasesCommandOutput) => void),
-    cb?: (err: any, data?: ListUseCasesCommandOutput) => void
-  ): Promise<ListUseCasesCommandOutput> | void {
-    const command = new ListUseCasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListUseCasesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Provides summary information about the hierarchy groups for the specified Amazon Connect
-   *    instance.</p>
-   *          <p>For more information about agent hierarchies, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html">Set Up Agent Hierarchies</a> in the
-   *     <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link ListUserHierarchyGroupsCommand}
    */
-  public listUserHierarchyGroups(
+  listUserHierarchyGroups(
     args: ListUserHierarchyGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ListUserHierarchyGroupsCommandOutput>;
-  public listUserHierarchyGroups(
+  listUserHierarchyGroups(
     args: ListUserHierarchyGroupsCommandInput,
     cb: (err: any, data?: ListUserHierarchyGroupsCommandOutput) => void
   ): void;
-  public listUserHierarchyGroups(
+  listUserHierarchyGroups(
     args: ListUserHierarchyGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ListUserHierarchyGroupsCommandOutput) => void
   ): void;
-  public listUserHierarchyGroups(
-    args: ListUserHierarchyGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUserHierarchyGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListUserHierarchyGroupsCommandOutput) => void
-  ): Promise<ListUserHierarchyGroupsCommandOutput> | void {
-    const command = new ListUserHierarchyGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides summary information about the users for the specified Amazon Connect instance.</p>
+   * @see {@link ListUserNotificationsCommand}
    */
-  public listUsers(args: ListUsersCommandInput, options?: __HttpHandlerOptions): Promise<ListUsersCommandOutput>;
-  public listUsers(args: ListUsersCommandInput, cb: (err: any, data?: ListUsersCommandOutput) => void): void;
-  public listUsers(
+  listUserNotifications(
+    args: ListUserNotificationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListUserNotificationsCommandOutput>;
+  listUserNotifications(
+    args: ListUserNotificationsCommandInput,
+    cb: (err: any, data?: ListUserNotificationsCommandOutput) => void
+  ): void;
+  listUserNotifications(
+    args: ListUserNotificationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListUserNotificationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUserProficienciesCommand}
+   */
+  listUserProficiencies(
+    args: ListUserProficienciesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListUserProficienciesCommandOutput>;
+  listUserProficiencies(
+    args: ListUserProficienciesCommandInput,
+    cb: (err: any, data?: ListUserProficienciesCommandOutput) => void
+  ): void;
+  listUserProficiencies(
+    args: ListUserProficienciesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListUserProficienciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUsersCommand}
+   */
+  listUsers(
     args: ListUsersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<ListUsersCommandOutput>;
+  listUsers(
+    args: ListUsersCommandInput,
     cb: (err: any, data?: ListUsersCommandOutput) => void
   ): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsersCommandOutput) => void),
-    cb?: (err: any, data?: ListUsersCommandOutput) => void
-  ): Promise<ListUsersCommandOutput> | void {
-    const command = new ListUsersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListUsersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>When a contact is being recorded, and the recording has been suspended using
-   *    SuspendContactRecording, this API resumes recording the call.</p>
-   *
-   *          <p>Only voice recordings are supported at this time.</p>
+   * @see {@link ListViewsCommand}
    */
-  public resumeContactRecording(
+  listViews(
+    args: ListViewsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListViewsCommandOutput>;
+  listViews(
+    args: ListViewsCommandInput,
+    cb: (err: any, data?: ListViewsCommandOutput) => void
+  ): void;
+  listViews(
+    args: ListViewsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListViewsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListViewVersionsCommand}
+   */
+  listViewVersions(
+    args: ListViewVersionsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListViewVersionsCommandOutput>;
+  listViewVersions(
+    args: ListViewVersionsCommandInput,
+    cb: (err: any, data?: ListViewVersionsCommandOutput) => void
+  ): void;
+  listViewVersions(
+    args: ListViewVersionsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListViewVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkspaceMediaCommand}
+   */
+  listWorkspaceMedia(
+    args: ListWorkspaceMediaCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListWorkspaceMediaCommandOutput>;
+  listWorkspaceMedia(
+    args: ListWorkspaceMediaCommandInput,
+    cb: (err: any, data?: ListWorkspaceMediaCommandOutput) => void
+  ): void;
+  listWorkspaceMedia(
+    args: ListWorkspaceMediaCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListWorkspaceMediaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkspacePagesCommand}
+   */
+  listWorkspacePages(
+    args: ListWorkspacePagesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListWorkspacePagesCommandOutput>;
+  listWorkspacePages(
+    args: ListWorkspacePagesCommandInput,
+    cb: (err: any, data?: ListWorkspacePagesCommandOutput) => void
+  ): void;
+  listWorkspacePages(
+    args: ListWorkspacePagesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListWorkspacePagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkspacesCommand}
+   */
+  listWorkspaces(
+    args: ListWorkspacesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ListWorkspacesCommandOutput>;
+  listWorkspaces(
+    args: ListWorkspacesCommandInput,
+    cb: (err: any, data?: ListWorkspacesCommandOutput) => void
+  ): void;
+  listWorkspaces(
+    args: ListWorkspacesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ListWorkspacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link MonitorContactCommand}
+   */
+  monitorContact(
+    args: MonitorContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<MonitorContactCommandOutput>;
+  monitorContact(
+    args: MonitorContactCommandInput,
+    cb: (err: any, data?: MonitorContactCommandOutput) => void
+  ): void;
+  monitorContact(
+    args: MonitorContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: MonitorContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PauseContactCommand}
+   */
+  pauseContact(
+    args: PauseContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<PauseContactCommandOutput>;
+  pauseContact(
+    args: PauseContactCommandInput,
+    cb: (err: any, data?: PauseContactCommandOutput) => void
+  ): void;
+  pauseContact(
+    args: PauseContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: PauseContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutUserStatusCommand}
+   */
+  putUserStatus(
+    args: PutUserStatusCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<PutUserStatusCommandOutput>;
+  putUserStatus(
+    args: PutUserStatusCommandInput,
+    cb: (err: any, data?: PutUserStatusCommandOutput) => void
+  ): void;
+  putUserStatus(
+    args: PutUserStatusCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: PutUserStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReleasePhoneNumberCommand}
+   */
+  releasePhoneNumber(
+    args: ReleasePhoneNumberCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ReleasePhoneNumberCommandOutput>;
+  releasePhoneNumber(
+    args: ReleasePhoneNumberCommandInput,
+    cb: (err: any, data?: ReleasePhoneNumberCommandOutput) => void
+  ): void;
+  releasePhoneNumber(
+    args: ReleasePhoneNumberCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ReleasePhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReplicateInstanceCommand}
+   */
+  replicateInstance(
+    args: ReplicateInstanceCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ReplicateInstanceCommandOutput>;
+  replicateInstance(
+    args: ReplicateInstanceCommandInput,
+    cb: (err: any, data?: ReplicateInstanceCommandOutput) => void
+  ): void;
+  replicateInstance(
+    args: ReplicateInstanceCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ReplicateInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResumeContactCommand}
+   */
+  resumeContact(
+    args: ResumeContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<ResumeContactCommandOutput>;
+  resumeContact(
+    args: ResumeContactCommandInput,
+    cb: (err: any, data?: ResumeContactCommandOutput) => void
+  ): void;
+  resumeContact(
+    args: ResumeContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: ResumeContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResumeContactRecordingCommand}
+   */
+  resumeContactRecording(
     args: ResumeContactRecordingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<ResumeContactRecordingCommandOutput>;
-  public resumeContactRecording(
+  resumeContactRecording(
     args: ResumeContactRecordingCommandInput,
     cb: (err: any, data?: ResumeContactRecordingCommandOutput) => void
   ): void;
-  public resumeContactRecording(
+  resumeContactRecording(
     args: ResumeContactRecordingCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: ResumeContactRecordingCommandOutput) => void
   ): void;
-  public resumeContactRecording(
-    args: ResumeContactRecordingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResumeContactRecordingCommandOutput) => void),
-    cb?: (err: any, data?: ResumeContactRecordingCommandOutput) => void
-  ): Promise<ResumeContactRecordingCommandOutput> | void {
-    const command = new ResumeContactRecordingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Initiates a contact flow to start a new chat for the customer. Response of this API provides
-   *    a token required to obtain credentials from the <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>
-   *
-   *          <p>When a new chat contact is successfully created, clients must subscribe to the participant’s
-   *    connection for the created chat within 5 minutes. This is achieved by invoking <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>
-   *
-   *          <p>A 429 error occurs in two situations:</p>
-   *          <ul>
-   *             <li>
-   *                <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>
-   *      exception.</p>
-   *             </li>
-   *             <li>
-   *                <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">quota for concurrent active
-   *       chats</a> is exceeded. Active chat throttling returns a
-   *       <code>LimitExceededException</code>.</p>
-   *             </li>
-   *          </ul>
-   *
-   *          <p>For more information about chat, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat.html">Chat</a> in the <i>Amazon Connect Administrator
-   *     Guide</i>.</p>
+   * @see {@link SearchAgentStatusesCommand}
    */
-  public startChatContact(
+  searchAgentStatuses(
+    args: SearchAgentStatusesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchAgentStatusesCommandOutput>;
+  searchAgentStatuses(
+    args: SearchAgentStatusesCommandInput,
+    cb: (err: any, data?: SearchAgentStatusesCommandOutput) => void
+  ): void;
+  searchAgentStatuses(
+    args: SearchAgentStatusesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchAgentStatusesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchAvailablePhoneNumbersCommand}
+   */
+  searchAvailablePhoneNumbers(
+    args: SearchAvailablePhoneNumbersCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchAvailablePhoneNumbersCommandOutput>;
+  searchAvailablePhoneNumbers(
+    args: SearchAvailablePhoneNumbersCommandInput,
+    cb: (err: any, data?: SearchAvailablePhoneNumbersCommandOutput) => void
+  ): void;
+  searchAvailablePhoneNumbers(
+    args: SearchAvailablePhoneNumbersCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchAvailablePhoneNumbersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchContactEvaluationsCommand}
+   */
+  searchContactEvaluations(
+    args: SearchContactEvaluationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchContactEvaluationsCommandOutput>;
+  searchContactEvaluations(
+    args: SearchContactEvaluationsCommandInput,
+    cb: (err: any, data?: SearchContactEvaluationsCommandOutput) => void
+  ): void;
+  searchContactEvaluations(
+    args: SearchContactEvaluationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchContactEvaluationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchContactFlowModulesCommand}
+   */
+  searchContactFlowModules(
+    args: SearchContactFlowModulesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchContactFlowModulesCommandOutput>;
+  searchContactFlowModules(
+    args: SearchContactFlowModulesCommandInput,
+    cb: (err: any, data?: SearchContactFlowModulesCommandOutput) => void
+  ): void;
+  searchContactFlowModules(
+    args: SearchContactFlowModulesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchContactFlowModulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchContactFlowsCommand}
+   */
+  searchContactFlows(
+    args: SearchContactFlowsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchContactFlowsCommandOutput>;
+  searchContactFlows(
+    args: SearchContactFlowsCommandInput,
+    cb: (err: any, data?: SearchContactFlowsCommandOutput) => void
+  ): void;
+  searchContactFlows(
+    args: SearchContactFlowsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchContactFlowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchContactsCommand}
+   */
+  searchContacts(
+    args: SearchContactsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchContactsCommandOutput>;
+  searchContacts(
+    args: SearchContactsCommandInput,
+    cb: (err: any, data?: SearchContactsCommandOutput) => void
+  ): void;
+  searchContacts(
+    args: SearchContactsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchContactsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchDataTablesCommand}
+   */
+  searchDataTables(
+    args: SearchDataTablesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchDataTablesCommandOutput>;
+  searchDataTables(
+    args: SearchDataTablesCommandInput,
+    cb: (err: any, data?: SearchDataTablesCommandOutput) => void
+  ): void;
+  searchDataTables(
+    args: SearchDataTablesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchDataTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchEmailAddressesCommand}
+   */
+  searchEmailAddresses(
+    args: SearchEmailAddressesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchEmailAddressesCommandOutput>;
+  searchEmailAddresses(
+    args: SearchEmailAddressesCommandInput,
+    cb: (err: any, data?: SearchEmailAddressesCommandOutput) => void
+  ): void;
+  searchEmailAddresses(
+    args: SearchEmailAddressesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchEmailAddressesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchEvaluationFormsCommand}
+   */
+  searchEvaluationForms(
+    args: SearchEvaluationFormsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchEvaluationFormsCommandOutput>;
+  searchEvaluationForms(
+    args: SearchEvaluationFormsCommandInput,
+    cb: (err: any, data?: SearchEvaluationFormsCommandOutput) => void
+  ): void;
+  searchEvaluationForms(
+    args: SearchEvaluationFormsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchEvaluationFormsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchHoursOfOperationOverridesCommand}
+   */
+  searchHoursOfOperationOverrides(
+    args: SearchHoursOfOperationOverridesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchHoursOfOperationOverridesCommandOutput>;
+  searchHoursOfOperationOverrides(
+    args: SearchHoursOfOperationOverridesCommandInput,
+    cb: (err: any, data?: SearchHoursOfOperationOverridesCommandOutput) => void
+  ): void;
+  searchHoursOfOperationOverrides(
+    args: SearchHoursOfOperationOverridesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchHoursOfOperationOverridesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchHoursOfOperationsCommand}
+   */
+  searchHoursOfOperations(
+    args: SearchHoursOfOperationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchHoursOfOperationsCommandOutput>;
+  searchHoursOfOperations(
+    args: SearchHoursOfOperationsCommandInput,
+    cb: (err: any, data?: SearchHoursOfOperationsCommandOutput) => void
+  ): void;
+  searchHoursOfOperations(
+    args: SearchHoursOfOperationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchHoursOfOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchMetricsCommand}
+   */
+  searchMetrics(
+    args: SearchMetricsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchMetricsCommandOutput>;
+  searchMetrics(
+    args: SearchMetricsCommandInput,
+    cb: (err: any, data?: SearchMetricsCommandOutput) => void
+  ): void;
+  searchMetrics(
+    args: SearchMetricsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchNotificationsCommand}
+   */
+  searchNotifications(
+    args: SearchNotificationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchNotificationsCommandOutput>;
+  searchNotifications(
+    args: SearchNotificationsCommandInput,
+    cb: (err: any, data?: SearchNotificationsCommandOutput) => void
+  ): void;
+  searchNotifications(
+    args: SearchNotificationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchNotificationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchPredefinedAttributesCommand}
+   */
+  searchPredefinedAttributes(
+    args: SearchPredefinedAttributesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchPredefinedAttributesCommandOutput>;
+  searchPredefinedAttributes(
+    args: SearchPredefinedAttributesCommandInput,
+    cb: (err: any, data?: SearchPredefinedAttributesCommandOutput) => void
+  ): void;
+  searchPredefinedAttributes(
+    args: SearchPredefinedAttributesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchPredefinedAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchPromptsCommand}
+   */
+  searchPrompts(
+    args: SearchPromptsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchPromptsCommandOutput>;
+  searchPrompts(
+    args: SearchPromptsCommandInput,
+    cb: (err: any, data?: SearchPromptsCommandOutput) => void
+  ): void;
+  searchPrompts(
+    args: SearchPromptsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchPromptsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchQueuesCommand}
+   */
+  searchQueues(
+    args: SearchQueuesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchQueuesCommandOutput>;
+  searchQueues(
+    args: SearchQueuesCommandInput,
+    cb: (err: any, data?: SearchQueuesCommandOutput) => void
+  ): void;
+  searchQueues(
+    args: SearchQueuesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchQueuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchQuickConnectsCommand}
+   */
+  searchQuickConnects(
+    args: SearchQuickConnectsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchQuickConnectsCommandOutput>;
+  searchQuickConnects(
+    args: SearchQuickConnectsCommandInput,
+    cb: (err: any, data?: SearchQuickConnectsCommandOutput) => void
+  ): void;
+  searchQuickConnects(
+    args: SearchQuickConnectsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchQuickConnectsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchResourceTagsCommand}
+   */
+  searchResourceTags(
+    args: SearchResourceTagsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchResourceTagsCommandOutput>;
+  searchResourceTags(
+    args: SearchResourceTagsCommandInput,
+    cb: (err: any, data?: SearchResourceTagsCommandOutput) => void
+  ): void;
+  searchResourceTags(
+    args: SearchResourceTagsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchResourceTagsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchRoutingProfilesCommand}
+   */
+  searchRoutingProfiles(
+    args: SearchRoutingProfilesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchRoutingProfilesCommandOutput>;
+  searchRoutingProfiles(
+    args: SearchRoutingProfilesCommandInput,
+    cb: (err: any, data?: SearchRoutingProfilesCommandOutput) => void
+  ): void;
+  searchRoutingProfiles(
+    args: SearchRoutingProfilesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchRoutingProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchRulesCommand}
+   */
+  searchRules(
+    args: SearchRulesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchRulesCommandOutput>;
+  searchRules(
+    args: SearchRulesCommandInput,
+    cb: (err: any, data?: SearchRulesCommandOutput) => void
+  ): void;
+  searchRules(
+    args: SearchRulesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchSecurityProfilesCommand}
+   */
+  searchSecurityProfiles(
+    args: SearchSecurityProfilesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchSecurityProfilesCommandOutput>;
+  searchSecurityProfiles(
+    args: SearchSecurityProfilesCommandInput,
+    cb: (err: any, data?: SearchSecurityProfilesCommandOutput) => void
+  ): void;
+  searchSecurityProfiles(
+    args: SearchSecurityProfilesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchSecurityProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchTestCasesCommand}
+   */
+  searchTestCases(
+    args: SearchTestCasesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchTestCasesCommandOutput>;
+  searchTestCases(
+    args: SearchTestCasesCommandInput,
+    cb: (err: any, data?: SearchTestCasesCommandOutput) => void
+  ): void;
+  searchTestCases(
+    args: SearchTestCasesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchTestCasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchUserHierarchyGroupsCommand}
+   */
+  searchUserHierarchyGroups(
+    args: SearchUserHierarchyGroupsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchUserHierarchyGroupsCommandOutput>;
+  searchUserHierarchyGroups(
+    args: SearchUserHierarchyGroupsCommandInput,
+    cb: (err: any, data?: SearchUserHierarchyGroupsCommandOutput) => void
+  ): void;
+  searchUserHierarchyGroups(
+    args: SearchUserHierarchyGroupsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchUserHierarchyGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchUsersCommand}
+   */
+  searchUsers(
+    args: SearchUsersCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchUsersCommandOutput>;
+  searchUsers(
+    args: SearchUsersCommandInput,
+    cb: (err: any, data?: SearchUsersCommandOutput) => void
+  ): void;
+  searchUsers(
+    args: SearchUsersCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchUsersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchViewsCommand}
+   */
+  searchViews(
+    args: SearchViewsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchViewsCommandOutput>;
+  searchViews(
+    args: SearchViewsCommandInput,
+    cb: (err: any, data?: SearchViewsCommandOutput) => void
+  ): void;
+  searchViews(
+    args: SearchViewsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchViewsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchVocabulariesCommand}
+   */
+  searchVocabularies(
+    args: SearchVocabulariesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchVocabulariesCommandOutput>;
+  searchVocabularies(
+    args: SearchVocabulariesCommandInput,
+    cb: (err: any, data?: SearchVocabulariesCommandOutput) => void
+  ): void;
+  searchVocabularies(
+    args: SearchVocabulariesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchVocabulariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchWorkspaceAssociationsCommand}
+   */
+  searchWorkspaceAssociations(
+    args: SearchWorkspaceAssociationsCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchWorkspaceAssociationsCommandOutput>;
+  searchWorkspaceAssociations(
+    args: SearchWorkspaceAssociationsCommandInput,
+    cb: (err: any, data?: SearchWorkspaceAssociationsCommandOutput) => void
+  ): void;
+  searchWorkspaceAssociations(
+    args: SearchWorkspaceAssociationsCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchWorkspaceAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchWorkspacesCommand}
+   */
+  searchWorkspaces(
+    args: SearchWorkspacesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SearchWorkspacesCommandOutput>;
+  searchWorkspaces(
+    args: SearchWorkspacesCommandInput,
+    cb: (err: any, data?: SearchWorkspacesCommandOutput) => void
+  ): void;
+  searchWorkspaces(
+    args: SearchWorkspacesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SearchWorkspacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendChatIntegrationEventCommand}
+   */
+  sendChatIntegrationEvent(
+    args: SendChatIntegrationEventCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SendChatIntegrationEventCommandOutput>;
+  sendChatIntegrationEvent(
+    args: SendChatIntegrationEventCommandInput,
+    cb: (err: any, data?: SendChatIntegrationEventCommandOutput) => void
+  ): void;
+  sendChatIntegrationEvent(
+    args: SendChatIntegrationEventCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SendChatIntegrationEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendOutboundEmailCommand}
+   */
+  sendOutboundEmail(
+    args: SendOutboundEmailCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SendOutboundEmailCommandOutput>;
+  sendOutboundEmail(
+    args: SendOutboundEmailCommandInput,
+    cb: (err: any, data?: SendOutboundEmailCommandOutput) => void
+  ): void;
+  sendOutboundEmail(
+    args: SendOutboundEmailCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SendOutboundEmailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendOutboundWebNotificationCommand}
+   */
+  sendOutboundWebNotification(
+    args: SendOutboundWebNotificationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SendOutboundWebNotificationCommandOutput>;
+  sendOutboundWebNotification(
+    args: SendOutboundWebNotificationCommandInput,
+    cb: (err: any, data?: SendOutboundWebNotificationCommandOutput) => void
+  ): void;
+  sendOutboundWebNotification(
+    args: SendOutboundWebNotificationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SendOutboundWebNotificationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAssistantContactCommand}
+   */
+  startAssistantContact(
+    args: StartAssistantContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartAssistantContactCommandOutput>;
+  startAssistantContact(
+    args: StartAssistantContactCommandInput,
+    cb: (err: any, data?: StartAssistantContactCommandOutput) => void
+  ): void;
+  startAssistantContact(
+    args: StartAssistantContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartAssistantContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAttachedFileUploadCommand}
+   */
+  startAttachedFileUpload(
+    args: StartAttachedFileUploadCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartAttachedFileUploadCommandOutput>;
+  startAttachedFileUpload(
+    args: StartAttachedFileUploadCommandInput,
+    cb: (err: any, data?: StartAttachedFileUploadCommandOutput) => void
+  ): void;
+  startAttachedFileUpload(
+    args: StartAttachedFileUploadCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartAttachedFileUploadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartChatContactCommand}
+   */
+  startChatContact(
     args: StartChatContactCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<StartChatContactCommandOutput>;
-  public startChatContact(
+  startChatContact(
     args: StartChatContactCommandInput,
     cb: (err: any, data?: StartChatContactCommandOutput) => void
   ): void;
-  public startChatContact(
+  startChatContact(
     args: StartChatContactCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: StartChatContactCommandOutput) => void
   ): void;
-  public startChatContact(
-    args: StartChatContactCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartChatContactCommandOutput) => void),
-    cb?: (err: any, data?: StartChatContactCommandOutput) => void
-  ): Promise<StartChatContactCommandOutput> | void {
-    const command = new StartChatContactCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts recording the contact when the agent joins the call. StartContactRecording is a
-   *    one-time action. For example, if you use StopContactRecording to stop recording an ongoing call,
-   *    you can't use StartContactRecording to restart it. For scenarios where the recording has started
-   *    and you want to suspend and resume it, such as when collecting sensitive information (for
-   *    example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p>
-   *          <p>You can use this API to override the recording behavior configured in the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html">Set recording
-   *     behavior</a> block.</p>
-   *          <p>Only voice recordings are supported at this time.</p>
+   * @see {@link StartContactConversationalAnalyticsJobCommand}
    */
-  public startContactRecording(
+  startContactConversationalAnalyticsJob(
+    args: StartContactConversationalAnalyticsJobCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartContactConversationalAnalyticsJobCommandOutput>;
+  startContactConversationalAnalyticsJob(
+    args: StartContactConversationalAnalyticsJobCommandInput,
+    cb: (err: any, data?: StartContactConversationalAnalyticsJobCommandOutput) => void
+  ): void;
+  startContactConversationalAnalyticsJob(
+    args: StartContactConversationalAnalyticsJobCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartContactConversationalAnalyticsJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartContactEvaluationCommand}
+   */
+  startContactEvaluation(
+    args: StartContactEvaluationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartContactEvaluationCommandOutput>;
+  startContactEvaluation(
+    args: StartContactEvaluationCommandInput,
+    cb: (err: any, data?: StartContactEvaluationCommandOutput) => void
+  ): void;
+  startContactEvaluation(
+    args: StartContactEvaluationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartContactEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartContactMediaProcessingCommand}
+   */
+  startContactMediaProcessing(): Promise<StartContactMediaProcessingCommandOutput>;
+  startContactMediaProcessing(
+    args: StartContactMediaProcessingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartContactMediaProcessingCommandOutput>;
+  startContactMediaProcessing(
+    args: StartContactMediaProcessingCommandInput,
+    cb: (err: any, data?: StartContactMediaProcessingCommandOutput) => void
+  ): void;
+  startContactMediaProcessing(
+    args: StartContactMediaProcessingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartContactMediaProcessingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartContactRecordingCommand}
+   */
+  startContactRecording(
     args: StartContactRecordingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<StartContactRecordingCommandOutput>;
-  public startContactRecording(
+  startContactRecording(
     args: StartContactRecordingCommandInput,
     cb: (err: any, data?: StartContactRecordingCommandOutput) => void
   ): void;
-  public startContactRecording(
+  startContactRecording(
     args: StartContactRecordingCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: StartContactRecordingCommandOutput) => void
   ): void;
-  public startContactRecording(
-    args: StartContactRecordingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartContactRecordingCommandOutput) => void),
-    cb?: (err: any, data?: StartContactRecordingCommandOutput) => void
-  ): Promise<StartContactRecordingCommandOutput> | void {
-    const command = new StartContactRecordingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Places an outbound call to a contact, and then initiates the contact flow. It performs the
-   *    actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p>
-   *
-   *          <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If
-   *    the contact flow places an outbound call to a contact, and then puts the contact in queue, the
-   *    call is then routed to the agent, like any other inbound case.</p>
-   *
-   *          <p>There is a 60-second dialing timeout for this operation. If the call is not connected after
-   *    60 seconds, it fails.</p>
-   *          <note>
-   *             <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK
-   *     mobile numbers, you must submit a service quota increase request. For more information, see
-   *      <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
-   *          </note>
-   *          <note>
-   *             <p>Campaign calls are not allowed by default. Before you can make a call with
-   *     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase request. For more information, see
-   *     <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
-   *          </note>
+   * @see {@link StartContactStreamingCommand}
    */
-  public startOutboundVoiceContact(
+  startContactStreaming(
+    args: StartContactStreamingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartContactStreamingCommandOutput>;
+  startContactStreaming(
+    args: StartContactStreamingCommandInput,
+    cb: (err: any, data?: StartContactStreamingCommandOutput) => void
+  ): void;
+  startContactStreaming(
+    args: StartContactStreamingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartContactStreamingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartEmailContactCommand}
+   */
+  startEmailContact(
+    args: StartEmailContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartEmailContactCommandOutput>;
+  startEmailContact(
+    args: StartEmailContactCommandInput,
+    cb: (err: any, data?: StartEmailContactCommandOutput) => void
+  ): void;
+  startEmailContact(
+    args: StartEmailContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartEmailContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartEvaluationFormValidationCommand}
+   */
+  startEvaluationFormValidation(
+    args: StartEvaluationFormValidationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartEvaluationFormValidationCommandOutput>;
+  startEvaluationFormValidation(
+    args: StartEvaluationFormValidationCommandInput,
+    cb: (err: any, data?: StartEvaluationFormValidationCommandOutput) => void
+  ): void;
+  startEvaluationFormValidation(
+    args: StartEvaluationFormValidationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartEvaluationFormValidationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartOutboundChatContactCommand}
+   */
+  startOutboundChatContact(
+    args: StartOutboundChatContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartOutboundChatContactCommandOutput>;
+  startOutboundChatContact(
+    args: StartOutboundChatContactCommandInput,
+    cb: (err: any, data?: StartOutboundChatContactCommandOutput) => void
+  ): void;
+  startOutboundChatContact(
+    args: StartOutboundChatContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartOutboundChatContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartOutboundEmailContactCommand}
+   */
+  startOutboundEmailContact(
+    args: StartOutboundEmailContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartOutboundEmailContactCommandOutput>;
+  startOutboundEmailContact(
+    args: StartOutboundEmailContactCommandInput,
+    cb: (err: any, data?: StartOutboundEmailContactCommandOutput) => void
+  ): void;
+  startOutboundEmailContact(
+    args: StartOutboundEmailContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartOutboundEmailContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartOutboundVoiceContactCommand}
+   */
+  startOutboundVoiceContact(
     args: StartOutboundVoiceContactCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<StartOutboundVoiceContactCommandOutput>;
-  public startOutboundVoiceContact(
+  startOutboundVoiceContact(
     args: StartOutboundVoiceContactCommandInput,
     cb: (err: any, data?: StartOutboundVoiceContactCommandOutput) => void
   ): void;
-  public startOutboundVoiceContact(
+  startOutboundVoiceContact(
     args: StartOutboundVoiceContactCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: StartOutboundVoiceContactCommandOutput) => void
   ): void;
-  public startOutboundVoiceContact(
-    args: StartOutboundVoiceContactCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartOutboundVoiceContactCommandOutput) => void),
-    cb?: (err: any, data?: StartOutboundVoiceContactCommandOutput) => void
-  ): Promise<StartOutboundVoiceContactCommandOutput> | void {
-    const command = new StartOutboundVoiceContactCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Initiates a contact flow to start a new task.</p>
+   * @see {@link StartScreenSharingCommand}
    */
-  public startTaskContact(
+  startScreenSharing(
+    args: StartScreenSharingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartScreenSharingCommandOutput>;
+  startScreenSharing(
+    args: StartScreenSharingCommandInput,
+    cb: (err: any, data?: StartScreenSharingCommandOutput) => void
+  ): void;
+  startScreenSharing(
+    args: StartScreenSharingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartScreenSharingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTaskContactCommand}
+   */
+  startTaskContact(
     args: StartTaskContactCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<StartTaskContactCommandOutput>;
-  public startTaskContact(
+  startTaskContact(
     args: StartTaskContactCommandInput,
     cb: (err: any, data?: StartTaskContactCommandOutput) => void
   ): void;
-  public startTaskContact(
+  startTaskContact(
     args: StartTaskContactCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: StartTaskContactCommandOutput) => void
   ): void;
-  public startTaskContact(
-    args: StartTaskContactCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartTaskContactCommandOutput) => void),
-    cb?: (err: any, data?: StartTaskContactCommandOutput) => void
-  ): Promise<StartTaskContactCommandOutput> | void {
-    const command = new StartTaskContactCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Ends the specified contact.</p>
+   * @see {@link StartTestCaseExecutionCommand}
    */
-  public stopContact(args: StopContactCommandInput, options?: __HttpHandlerOptions): Promise<StopContactCommandOutput>;
-  public stopContact(args: StopContactCommandInput, cb: (err: any, data?: StopContactCommandOutput) => void): void;
-  public stopContact(
+  startTestCaseExecution(
+    args: StartTestCaseExecutionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartTestCaseExecutionCommandOutput>;
+  startTestCaseExecution(
+    args: StartTestCaseExecutionCommandInput,
+    cb: (err: any, data?: StartTestCaseExecutionCommandOutput) => void
+  ): void;
+  startTestCaseExecution(
+    args: StartTestCaseExecutionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartTestCaseExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartWebRTCContactCommand}
+   */
+  startWebRTCContact(
+    args: StartWebRTCContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StartWebRTCContactCommandOutput>;
+  startWebRTCContact(
+    args: StartWebRTCContactCommandInput,
+    cb: (err: any, data?: StartWebRTCContactCommandOutput) => void
+  ): void;
+  startWebRTCContact(
+    args: StartWebRTCContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StartWebRTCContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopContactCommand}
+   */
+  stopContact(
     args: StopContactCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<StopContactCommandOutput>;
+  stopContact(
+    args: StopContactCommandInput,
     cb: (err: any, data?: StopContactCommandOutput) => void
   ): void;
-  public stopContact(
+  stopContact(
     args: StopContactCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopContactCommandOutput) => void),
-    cb?: (err: any, data?: StopContactCommandOutput) => void
-  ): Promise<StopContactCommandOutput> | void {
-    const command = new StopContactCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StopContactCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Stops recording a call when a contact is being recorded. StopContactRecording is a one-time
-   *    action. If you use StopContactRecording to stop recording an ongoing call, you can't use
-   *    StartContactRecording to restart it. For scenarios where the recording has started and you want
-   *    to suspend it for sensitive information (for example, to collect a credit card number), and then
-   *    restart it, use SuspendContactRecording and ResumeContactRecording.</p>
-   *
-   *          <p>Only voice recordings are supported at this time.</p>
+   * @see {@link StopContactMediaProcessingCommand}
    */
-  public stopContactRecording(
+  stopContactMediaProcessing(): Promise<StopContactMediaProcessingCommandOutput>;
+  stopContactMediaProcessing(
+    args: StopContactMediaProcessingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StopContactMediaProcessingCommandOutput>;
+  stopContactMediaProcessing(
+    args: StopContactMediaProcessingCommandInput,
+    cb: (err: any, data?: StopContactMediaProcessingCommandOutput) => void
+  ): void;
+  stopContactMediaProcessing(
+    args: StopContactMediaProcessingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StopContactMediaProcessingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopContactRecordingCommand}
+   */
+  stopContactRecording(
     args: StopContactRecordingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<StopContactRecordingCommandOutput>;
-  public stopContactRecording(
+  stopContactRecording(
     args: StopContactRecordingCommandInput,
     cb: (err: any, data?: StopContactRecordingCommandOutput) => void
   ): void;
-  public stopContactRecording(
+  stopContactRecording(
     args: StopContactRecordingCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: StopContactRecordingCommandOutput) => void
   ): void;
-  public stopContactRecording(
-    args: StopContactRecordingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopContactRecordingCommandOutput) => void),
-    cb?: (err: any, data?: StopContactRecordingCommandOutput) => void
-  ): Promise<StopContactRecordingCommandOutput> | void {
-    const command = new StopContactRecordingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>When a contact is being recorded, this API suspends recording the call. For example, you
-   *    might suspend the call recording while collecting sensitive information, such as a credit card
-   *    number. Then use ResumeContactRecording to restart recording. </p>
-   *          <p>The period of time that the recording is suspended is filled with silence in the final
-   *    recording. </p>
-   *          <p>Only voice recordings are supported at this time.</p>
+   * @see {@link StopContactStreamingCommand}
    */
-  public suspendContactRecording(
+  stopContactStreaming(
+    args: StopContactStreamingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StopContactStreamingCommandOutput>;
+  stopContactStreaming(
+    args: StopContactStreamingCommandInput,
+    cb: (err: any, data?: StopContactStreamingCommandOutput) => void
+  ): void;
+  stopContactStreaming(
+    args: StopContactStreamingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StopContactStreamingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopTestCaseExecutionCommand}
+   */
+  stopTestCaseExecution(
+    args: StopTestCaseExecutionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<StopTestCaseExecutionCommandOutput>;
+  stopTestCaseExecution(
+    args: StopTestCaseExecutionCommandInput,
+    cb: (err: any, data?: StopTestCaseExecutionCommandOutput) => void
+  ): void;
+  stopTestCaseExecution(
+    args: StopTestCaseExecutionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: StopTestCaseExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SubmitContactEvaluationCommand}
+   */
+  submitContactEvaluation(
+    args: SubmitContactEvaluationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<SubmitContactEvaluationCommandOutput>;
+  submitContactEvaluation(
+    args: SubmitContactEvaluationCommandInput,
+    cb: (err: any, data?: SubmitContactEvaluationCommandOutput) => void
+  ): void;
+  submitContactEvaluation(
+    args: SubmitContactEvaluationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: SubmitContactEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SuspendContactRecordingCommand}
+   */
+  suspendContactRecording(
     args: SuspendContactRecordingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<SuspendContactRecordingCommandOutput>;
-  public suspendContactRecording(
+  suspendContactRecording(
     args: SuspendContactRecordingCommandInput,
     cb: (err: any, data?: SuspendContactRecordingCommandOutput) => void
   ): void;
-  public suspendContactRecording(
+  suspendContactRecording(
     args: SuspendContactRecordingCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: SuspendContactRecordingCommandOutput) => void
   ): void;
-  public suspendContactRecording(
-    args: SuspendContactRecordingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SuspendContactRecordingCommandOutput) => void),
-    cb?: (err: any, data?: SuspendContactRecordingCommandOutput) => void
-  ): Promise<SuspendContactRecordingCommandOutput> | void {
-    const command = new SuspendContactRecordingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds the specified tags to the specified resource.</p>
-   *          <p>The supported resource types are users, routing profiles, queues, quick connects,
-   *    contact flows, agent status, and hours of operation.</p>
-   *          <p>For sample policies that use tags, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html">Amazon Connect Identity-Based
-   *     Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @see {@link TagContactCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagContact(
+    args: TagContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<TagContactCommandOutput>;
+  tagContact(
+    args: TagContactCommandInput,
+    cb: (err: any, data?: TagContactCommandOutput) => void
+  ): void;
+  tagContact(
+    args: TagContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: TagContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified tags from the specified resource.</p>
+   * @see {@link TransferContactCommand}
    */
-  public untagResource(
+  transferContact(
+    args: TransferContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<TransferContactCommandOutput>;
+  transferContact(
+    args: TransferContactCommandInput,
+    cb: (err: any, data?: TransferContactCommandOutput) => void
+  ): void;
+  transferContact(
+    args: TransferContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: TransferContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagContactCommand}
+   */
+  untagContact(
+    args: UntagContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UntagContactCommandOutput>;
+  untagContact(
+    args: UntagContactCommandInput,
+    cb: (err: any, data?: UntagContactCommandOutput) => void
+  ): void;
+  untagContact(
+    args: UntagContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UntagContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates agent status.</p>
+   * @see {@link UpdateAgentStatusCommand}
    */
-  public updateAgentStatus(
+  updateAgentStatus(
     args: UpdateAgentStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateAgentStatusCommandOutput>;
-  public updateAgentStatus(
+  updateAgentStatus(
     args: UpdateAgentStatusCommandInput,
     cb: (err: any, data?: UpdateAgentStatusCommandOutput) => void
   ): void;
-  public updateAgentStatus(
+  updateAgentStatus(
     args: UpdateAgentStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateAgentStatusCommandOutput) => void
   ): void;
-  public updateAgentStatus(
-    args: UpdateAgentStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAgentStatusCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAgentStatusCommandOutput) => void
-  ): Promise<UpdateAgentStatusCommandOutput> | void {
-    const command = new UpdateAgentStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates or updates
-   *    user-defined contact attributes
-   *    associated with the specified contact.</p>
-   *          <p>You can create or update user-defined attributes for both ongoing and completed contacts.
-   *    For example, while the call is active, you can update the customer's name or the reason the
-   *    customer called. You can add notes about steps that the agent took during the call that display
-   *    to the next agent that takes the call. You can also update attributes for a contact using data
-   *    from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls
-   *    for additional analysis, such as legal review or to identify abusive callers.</p>
-   *          <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For
-   *    information about CTR retention and the maximum size of the CTR attributes section, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature
-   *     specifications</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
-   *
-   *          <p>
-   *             <b>Important:</b> You cannot use the operation to update
-   *    attributes for contacts that occurred prior to the release of the API, which was September 12,
-   *    2018. You can update attributes only for contacts that started after the release of the API. If
-   *    you attempt to update attributes for a contact that occurred prior to the release of the API, a
-   *    400 error is returned. This applies also to queued callbacks that were initiated prior to the
-   *    release of the API but are still active in your instance.</p>
+   * @see {@link UpdateAttachedFilesConfigurationCommand}
    */
-  public updateContactAttributes(
+  updateAttachedFilesConfiguration(
+    args: UpdateAttachedFilesConfigurationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateAttachedFilesConfigurationCommandOutput>;
+  updateAttachedFilesConfiguration(
+    args: UpdateAttachedFilesConfigurationCommandInput,
+    cb: (err: any, data?: UpdateAttachedFilesConfigurationCommandOutput) => void
+  ): void;
+  updateAttachedFilesConfiguration(
+    args: UpdateAttachedFilesConfigurationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateAttachedFilesConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAuthenticationProfileCommand}
+   */
+  updateAuthenticationProfile(
+    args: UpdateAuthenticationProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateAuthenticationProfileCommandOutput>;
+  updateAuthenticationProfile(
+    args: UpdateAuthenticationProfileCommandInput,
+    cb: (err: any, data?: UpdateAuthenticationProfileCommandOutput) => void
+  ): void;
+  updateAuthenticationProfile(
+    args: UpdateAuthenticationProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateAuthenticationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactCommand}
+   */
+  updateContact(
+    args: UpdateContactCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactCommandOutput>;
+  updateContact(
+    args: UpdateContactCommandInput,
+    cb: (err: any, data?: UpdateContactCommandOutput) => void
+  ): void;
+  updateContact(
+    args: UpdateContactCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactAttributesCommand}
+   */
+  updateContactAttributes(
     args: UpdateContactAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateContactAttributesCommandOutput>;
-  public updateContactAttributes(
+  updateContactAttributes(
     args: UpdateContactAttributesCommandInput,
     cb: (err: any, data?: UpdateContactAttributesCommandOutput) => void
   ): void;
-  public updateContactAttributes(
+  updateContactAttributes(
     args: UpdateContactAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateContactAttributesCommandOutput) => void
   ): void;
-  public updateContactAttributes(
-    args: UpdateContactAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateContactAttributesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateContactAttributesCommandOutput) => void
-  ): Promise<UpdateContactAttributesCommandOutput> | void {
-    const command = new UpdateContactAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified contact flow.</p>
-   *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
-   *    Flow language</a>.</p>
+   * @see {@link UpdateContactEvaluationCommand}
    */
-  public updateContactFlowContent(
+  updateContactEvaluation(
+    args: UpdateContactEvaluationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactEvaluationCommandOutput>;
+  updateContactEvaluation(
+    args: UpdateContactEvaluationCommandInput,
+    cb: (err: any, data?: UpdateContactEvaluationCommandOutput) => void
+  ): void;
+  updateContactEvaluation(
+    args: UpdateContactEvaluationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactEvaluationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactFlowAliasCommand}
+   */
+  updateContactFlowAlias(
+    args: UpdateContactFlowAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactFlowAliasCommandOutput>;
+  updateContactFlowAlias(
+    args: UpdateContactFlowAliasCommandInput,
+    cb: (err: any, data?: UpdateContactFlowAliasCommandOutput) => void
+  ): void;
+  updateContactFlowAlias(
+    args: UpdateContactFlowAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactFlowContentCommand}
+   */
+  updateContactFlowContent(
     args: UpdateContactFlowContentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateContactFlowContentCommandOutput>;
-  public updateContactFlowContent(
+  updateContactFlowContent(
     args: UpdateContactFlowContentCommandInput,
     cb: (err: any, data?: UpdateContactFlowContentCommandOutput) => void
   ): void;
-  public updateContactFlowContent(
+  updateContactFlowContent(
     args: UpdateContactFlowContentCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateContactFlowContentCommandOutput) => void
   ): void;
-  public updateContactFlowContent(
-    args: UpdateContactFlowContentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateContactFlowContentCommandOutput) => void),
-    cb?: (err: any, data?: UpdateContactFlowContentCommandOutput) => void
-  ): Promise<UpdateContactFlowContentCommandOutput> | void {
-    const command = new UpdateContactFlowContentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>The name of the contact flow.</p>
-   *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
-   *    Flow language</a>.</p>
+   * @see {@link UpdateContactFlowMetadataCommand}
    */
-  public updateContactFlowName(
+  updateContactFlowMetadata(
+    args: UpdateContactFlowMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactFlowMetadataCommandOutput>;
+  updateContactFlowMetadata(
+    args: UpdateContactFlowMetadataCommandInput,
+    cb: (err: any, data?: UpdateContactFlowMetadataCommandOutput) => void
+  ): void;
+  updateContactFlowMetadata(
+    args: UpdateContactFlowMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactFlowMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactFlowModuleAliasCommand}
+   */
+  updateContactFlowModuleAlias(
+    args: UpdateContactFlowModuleAliasCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactFlowModuleAliasCommandOutput>;
+  updateContactFlowModuleAlias(
+    args: UpdateContactFlowModuleAliasCommandInput,
+    cb: (err: any, data?: UpdateContactFlowModuleAliasCommandOutput) => void
+  ): void;
+  updateContactFlowModuleAlias(
+    args: UpdateContactFlowModuleAliasCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactFlowModuleAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactFlowModuleContentCommand}
+   */
+  updateContactFlowModuleContent(
+    args: UpdateContactFlowModuleContentCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactFlowModuleContentCommandOutput>;
+  updateContactFlowModuleContent(
+    args: UpdateContactFlowModuleContentCommandInput,
+    cb: (err: any, data?: UpdateContactFlowModuleContentCommandOutput) => void
+  ): void;
+  updateContactFlowModuleContent(
+    args: UpdateContactFlowModuleContentCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactFlowModuleContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactFlowModuleMetadataCommand}
+   */
+  updateContactFlowModuleMetadata(
+    args: UpdateContactFlowModuleMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactFlowModuleMetadataCommandOutput>;
+  updateContactFlowModuleMetadata(
+    args: UpdateContactFlowModuleMetadataCommandInput,
+    cb: (err: any, data?: UpdateContactFlowModuleMetadataCommandOutput) => void
+  ): void;
+  updateContactFlowModuleMetadata(
+    args: UpdateContactFlowModuleMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactFlowModuleMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactFlowNameCommand}
+   */
+  updateContactFlowName(
     args: UpdateContactFlowNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateContactFlowNameCommandOutput>;
-  public updateContactFlowName(
+  updateContactFlowName(
     args: UpdateContactFlowNameCommandInput,
     cb: (err: any, data?: UpdateContactFlowNameCommandOutput) => void
   ): void;
-  public updateContactFlowName(
+  updateContactFlowName(
     args: UpdateContactFlowNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateContactFlowNameCommandOutput) => void
   ): void;
-  public updateContactFlowName(
-    args: UpdateContactFlowNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateContactFlowNameCommandOutput) => void),
-    cb?: (err: any, data?: UpdateContactFlowNameCommandOutput) => void
-  ): Promise<UpdateContactFlowNameCommandOutput> | void {
-    const command = new UpdateContactFlowNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the hours of operation.</p>
+   * @see {@link UpdateContactRoutingDataCommand}
    */
-  public updateHoursOfOperation(
+  updateContactRoutingData(
+    args: UpdateContactRoutingDataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactRoutingDataCommandOutput>;
+  updateContactRoutingData(
+    args: UpdateContactRoutingDataCommandInput,
+    cb: (err: any, data?: UpdateContactRoutingDataCommandOutput) => void
+  ): void;
+  updateContactRoutingData(
+    args: UpdateContactRoutingDataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactRoutingDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactScheduleCommand}
+   */
+  updateContactSchedule(
+    args: UpdateContactScheduleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactScheduleCommandOutput>;
+  updateContactSchedule(
+    args: UpdateContactScheduleCommandInput,
+    cb: (err: any, data?: UpdateContactScheduleCommandOutput) => void
+  ): void;
+  updateContactSchedule(
+    args: UpdateContactScheduleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContactTaskTemplateCommand}
+   */
+  updateContactTaskTemplate(
+    args: UpdateContactTaskTemplateCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateContactTaskTemplateCommandOutput>;
+  updateContactTaskTemplate(
+    args: UpdateContactTaskTemplateCommandInput,
+    cb: (err: any, data?: UpdateContactTaskTemplateCommandOutput) => void
+  ): void;
+  updateContactTaskTemplate(
+    args: UpdateContactTaskTemplateCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateContactTaskTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCrossRegionRoutingCommand}
+   */
+  updateCrossRegionRouting(
+    args: UpdateCrossRegionRoutingCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateCrossRegionRoutingCommandOutput>;
+  updateCrossRegionRouting(
+    args: UpdateCrossRegionRoutingCommandInput,
+    cb: (err: any, data?: UpdateCrossRegionRoutingCommandOutput) => void
+  ): void;
+  updateCrossRegionRouting(
+    args: UpdateCrossRegionRoutingCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateCrossRegionRoutingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataTableAttributeCommand}
+   */
+  updateDataTableAttribute(
+    args: UpdateDataTableAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateDataTableAttributeCommandOutput>;
+  updateDataTableAttribute(
+    args: UpdateDataTableAttributeCommandInput,
+    cb: (err: any, data?: UpdateDataTableAttributeCommandOutput) => void
+  ): void;
+  updateDataTableAttribute(
+    args: UpdateDataTableAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateDataTableAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataTableMetadataCommand}
+   */
+  updateDataTableMetadata(
+    args: UpdateDataTableMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateDataTableMetadataCommandOutput>;
+  updateDataTableMetadata(
+    args: UpdateDataTableMetadataCommandInput,
+    cb: (err: any, data?: UpdateDataTableMetadataCommandOutput) => void
+  ): void;
+  updateDataTableMetadata(
+    args: UpdateDataTableMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateDataTableMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataTablePrimaryValuesCommand}
+   */
+  updateDataTablePrimaryValues(
+    args: UpdateDataTablePrimaryValuesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateDataTablePrimaryValuesCommandOutput>;
+  updateDataTablePrimaryValues(
+    args: UpdateDataTablePrimaryValuesCommandInput,
+    cb: (err: any, data?: UpdateDataTablePrimaryValuesCommandOutput) => void
+  ): void;
+  updateDataTablePrimaryValues(
+    args: UpdateDataTablePrimaryValuesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateDataTablePrimaryValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEmailAddressMetadataCommand}
+   */
+  updateEmailAddressMetadata(
+    args: UpdateEmailAddressMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateEmailAddressMetadataCommandOutput>;
+  updateEmailAddressMetadata(
+    args: UpdateEmailAddressMetadataCommandInput,
+    cb: (err: any, data?: UpdateEmailAddressMetadataCommandOutput) => void
+  ): void;
+  updateEmailAddressMetadata(
+    args: UpdateEmailAddressMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateEmailAddressMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEvaluationFormCommand}
+   */
+  updateEvaluationForm(
+    args: UpdateEvaluationFormCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateEvaluationFormCommandOutput>;
+  updateEvaluationForm(
+    args: UpdateEvaluationFormCommandInput,
+    cb: (err: any, data?: UpdateEvaluationFormCommandOutput) => void
+  ): void;
+  updateEvaluationForm(
+    args: UpdateEvaluationFormCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateEvaluationFormCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateExtractionDefinitionCommand}
+   */
+  updateExtractionDefinition(
+    args: UpdateExtractionDefinitionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateExtractionDefinitionCommandOutput>;
+  updateExtractionDefinition(
+    args: UpdateExtractionDefinitionCommandInput,
+    cb: (err: any, data?: UpdateExtractionDefinitionCommandOutput) => void
+  ): void;
+  updateExtractionDefinition(
+    args: UpdateExtractionDefinitionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateExtractionDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateHoursOfOperationCommand}
+   */
+  updateHoursOfOperation(
     args: UpdateHoursOfOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateHoursOfOperationCommandOutput>;
-  public updateHoursOfOperation(
+  updateHoursOfOperation(
     args: UpdateHoursOfOperationCommandInput,
     cb: (err: any, data?: UpdateHoursOfOperationCommandOutput) => void
   ): void;
-  public updateHoursOfOperation(
+  updateHoursOfOperation(
     args: UpdateHoursOfOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateHoursOfOperationCommandOutput) => void
   ): void;
-  public updateHoursOfOperation(
-    args: UpdateHoursOfOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateHoursOfOperationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateHoursOfOperationCommandOutput) => void
-  ): Promise<UpdateHoursOfOperationCommandOutput> | void {
-    const command = new UpdateHoursOfOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates the value for the specified attribute type.</p>
+   * @see {@link UpdateHoursOfOperationOverrideCommand}
    */
-  public updateInstanceAttribute(
+  updateHoursOfOperationOverride(
+    args: UpdateHoursOfOperationOverrideCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateHoursOfOperationOverrideCommandOutput>;
+  updateHoursOfOperationOverride(
+    args: UpdateHoursOfOperationOverrideCommandInput,
+    cb: (err: any, data?: UpdateHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+  updateHoursOfOperationOverride(
+    args: UpdateHoursOfOperationOverrideCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateHoursOfOperationOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateInstanceAttributeCommand}
+   */
+  updateInstanceAttribute(
     args: UpdateInstanceAttributeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateInstanceAttributeCommandOutput>;
-  public updateInstanceAttribute(
+  updateInstanceAttribute(
     args: UpdateInstanceAttributeCommandInput,
     cb: (err: any, data?: UpdateInstanceAttributeCommandOutput) => void
   ): void;
-  public updateInstanceAttribute(
+  updateInstanceAttribute(
     args: UpdateInstanceAttributeCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateInstanceAttributeCommandOutput) => void
   ): void;
-  public updateInstanceAttribute(
-    args: UpdateInstanceAttributeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateInstanceAttributeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateInstanceAttributeCommandOutput) => void
-  ): Promise<UpdateInstanceAttributeCommandOutput> | void {
-    const command = new UpdateInstanceAttributeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates an existing configuration for a resource type. This API is idempotent.</p>
+   * @see {@link UpdateInstanceStorageConfigCommand}
    */
-  public updateInstanceStorageConfig(
+  updateInstanceStorageConfig(
     args: UpdateInstanceStorageConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateInstanceStorageConfigCommandOutput>;
-  public updateInstanceStorageConfig(
+  updateInstanceStorageConfig(
     args: UpdateInstanceStorageConfigCommandInput,
     cb: (err: any, data?: UpdateInstanceStorageConfigCommandOutput) => void
   ): void;
-  public updateInstanceStorageConfig(
+  updateInstanceStorageConfig(
     args: UpdateInstanceStorageConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateInstanceStorageConfigCommandOutput) => void
   ): void;
-  public updateInstanceStorageConfig(
-    args: UpdateInstanceStorageConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateInstanceStorageConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateInstanceStorageConfigCommandOutput) => void
-  ): Promise<UpdateInstanceStorageConfigCommandOutput> | void {
-    const command = new UpdateInstanceStorageConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates the hours of operation for the specified queue.</p>
+   * @see {@link UpdateMetricContentCommand}
    */
-  public updateQueueHoursOfOperation(
+  updateMetricContent(
+    args: UpdateMetricContentCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateMetricContentCommandOutput>;
+  updateMetricContent(
+    args: UpdateMetricContentCommandInput,
+    cb: (err: any, data?: UpdateMetricContentCommandOutput) => void
+  ): void;
+  updateMetricContent(
+    args: UpdateMetricContentCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateMetricContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMetricMetadataCommand}
+   */
+  updateMetricMetadata(
+    args: UpdateMetricMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateMetricMetadataCommandOutput>;
+  updateMetricMetadata(
+    args: UpdateMetricMetadataCommandInput,
+    cb: (err: any, data?: UpdateMetricMetadataCommandOutput) => void
+  ): void;
+  updateMetricMetadata(
+    args: UpdateMetricMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateMetricMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNotificationContentCommand}
+   */
+  updateNotificationContent(
+    args: UpdateNotificationContentCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateNotificationContentCommandOutput>;
+  updateNotificationContent(
+    args: UpdateNotificationContentCommandInput,
+    cb: (err: any, data?: UpdateNotificationContentCommandOutput) => void
+  ): void;
+  updateNotificationContent(
+    args: UpdateNotificationContentCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateNotificationContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateOutboundEmailContactMessageCommand}
+   */
+  updateOutboundEmailContactMessage(
+    args: UpdateOutboundEmailContactMessageCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateOutboundEmailContactMessageCommandOutput>;
+  updateOutboundEmailContactMessage(
+    args: UpdateOutboundEmailContactMessageCommandInput,
+    cb: (err: any, data?: UpdateOutboundEmailContactMessageCommandOutput) => void
+  ): void;
+  updateOutboundEmailContactMessage(
+    args: UpdateOutboundEmailContactMessageCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateOutboundEmailContactMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateParticipantAuthenticationCommand}
+   */
+  updateParticipantAuthentication(
+    args: UpdateParticipantAuthenticationCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateParticipantAuthenticationCommandOutput>;
+  updateParticipantAuthentication(
+    args: UpdateParticipantAuthenticationCommandInput,
+    cb: (err: any, data?: UpdateParticipantAuthenticationCommandOutput) => void
+  ): void;
+  updateParticipantAuthentication(
+    args: UpdateParticipantAuthenticationCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateParticipantAuthenticationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateParticipantRoleConfigCommand}
+   */
+  updateParticipantRoleConfig(
+    args: UpdateParticipantRoleConfigCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateParticipantRoleConfigCommandOutput>;
+  updateParticipantRoleConfig(
+    args: UpdateParticipantRoleConfigCommandInput,
+    cb: (err: any, data?: UpdateParticipantRoleConfigCommandOutput) => void
+  ): void;
+  updateParticipantRoleConfig(
+    args: UpdateParticipantRoleConfigCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateParticipantRoleConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePhoneNumberCommand}
+   */
+  updatePhoneNumber(
+    args: UpdatePhoneNumberCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdatePhoneNumberCommandOutput>;
+  updatePhoneNumber(
+    args: UpdatePhoneNumberCommandInput,
+    cb: (err: any, data?: UpdatePhoneNumberCommandOutput) => void
+  ): void;
+  updatePhoneNumber(
+    args: UpdatePhoneNumberCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdatePhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePhoneNumberMetadataCommand}
+   */
+  updatePhoneNumberMetadata(
+    args: UpdatePhoneNumberMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdatePhoneNumberMetadataCommandOutput>;
+  updatePhoneNumberMetadata(
+    args: UpdatePhoneNumberMetadataCommandInput,
+    cb: (err: any, data?: UpdatePhoneNumberMetadataCommandOutput) => void
+  ): void;
+  updatePhoneNumberMetadata(
+    args: UpdatePhoneNumberMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdatePhoneNumberMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePredefinedAttributeCommand}
+   */
+  updatePredefinedAttribute(
+    args: UpdatePredefinedAttributeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdatePredefinedAttributeCommandOutput>;
+  updatePredefinedAttribute(
+    args: UpdatePredefinedAttributeCommandInput,
+    cb: (err: any, data?: UpdatePredefinedAttributeCommandOutput) => void
+  ): void;
+  updatePredefinedAttribute(
+    args: UpdatePredefinedAttributeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdatePredefinedAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePromptCommand}
+   */
+  updatePrompt(
+    args: UpdatePromptCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdatePromptCommandOutput>;
+  updatePrompt(
+    args: UpdatePromptCommandInput,
+    cb: (err: any, data?: UpdatePromptCommandOutput) => void
+  ): void;
+  updatePrompt(
+    args: UpdatePromptCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdatePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQueueHoursOfOperationCommand}
+   */
+  updateQueueHoursOfOperation(
     args: UpdateQueueHoursOfOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQueueHoursOfOperationCommandOutput>;
-  public updateQueueHoursOfOperation(
+  updateQueueHoursOfOperation(
     args: UpdateQueueHoursOfOperationCommandInput,
     cb: (err: any, data?: UpdateQueueHoursOfOperationCommandOutput) => void
   ): void;
-  public updateQueueHoursOfOperation(
+  updateQueueHoursOfOperation(
     args: UpdateQueueHoursOfOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQueueHoursOfOperationCommandOutput) => void
   ): void;
-  public updateQueueHoursOfOperation(
-    args: UpdateQueueHoursOfOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQueueHoursOfOperationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQueueHoursOfOperationCommandOutput) => void
-  ): Promise<UpdateQueueHoursOfOperationCommandOutput> | void {
-    const command = new UpdateQueueHoursOfOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates the maximum number of contacts allowed in a queue before it is considered
-   *    full.</p>
+   * @see {@link UpdateQueueMaxContactsCommand}
    */
-  public updateQueueMaxContacts(
+  updateQueueMaxContacts(
     args: UpdateQueueMaxContactsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQueueMaxContactsCommandOutput>;
-  public updateQueueMaxContacts(
+  updateQueueMaxContacts(
     args: UpdateQueueMaxContactsCommandInput,
     cb: (err: any, data?: UpdateQueueMaxContactsCommandOutput) => void
   ): void;
-  public updateQueueMaxContacts(
+  updateQueueMaxContacts(
     args: UpdateQueueMaxContactsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQueueMaxContactsCommandOutput) => void
   ): void;
-  public updateQueueMaxContacts(
-    args: UpdateQueueMaxContactsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQueueMaxContactsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQueueMaxContactsCommandOutput) => void
-  ): Promise<UpdateQueueMaxContactsCommandOutput> | void {
-    const command = new UpdateQueueMaxContactsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates the name and description of a queue. At least <code>Name</code> or <code>Description</code> must be provided.</p>
+   * @see {@link UpdateQueueNameCommand}
    */
-  public updateQueueName(
+  updateQueueName(
     args: UpdateQueueNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQueueNameCommandOutput>;
-  public updateQueueName(
+  updateQueueName(
     args: UpdateQueueNameCommandInput,
     cb: (err: any, data?: UpdateQueueNameCommandOutput) => void
   ): void;
-  public updateQueueName(
+  updateQueueName(
     args: UpdateQueueNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQueueNameCommandOutput) => void
   ): void;
-  public updateQueueName(
-    args: UpdateQueueNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQueueNameCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQueueNameCommandOutput) => void
-  ): Promise<UpdateQueueNameCommandOutput> | void {
-    const command = new UpdateQueueNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified
-   *    queue.</p>
+   * @see {@link UpdateQueueOutboundCallerConfigCommand}
    */
-  public updateQueueOutboundCallerConfig(
+  updateQueueOutboundCallerConfig(
     args: UpdateQueueOutboundCallerConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQueueOutboundCallerConfigCommandOutput>;
-  public updateQueueOutboundCallerConfig(
+  updateQueueOutboundCallerConfig(
     args: UpdateQueueOutboundCallerConfigCommandInput,
     cb: (err: any, data?: UpdateQueueOutboundCallerConfigCommandOutput) => void
   ): void;
-  public updateQueueOutboundCallerConfig(
+  updateQueueOutboundCallerConfig(
     args: UpdateQueueOutboundCallerConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQueueOutboundCallerConfigCommandOutput) => void
   ): void;
-  public updateQueueOutboundCallerConfig(
-    args: UpdateQueueOutboundCallerConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQueueOutboundCallerConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQueueOutboundCallerConfigCommandOutput) => void
-  ): Promise<UpdateQueueOutboundCallerConfigCommandOutput> | void {
-    const command = new UpdateQueueOutboundCallerConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
-   *          <p>Updates the status of the queue.</p>
+   * @see {@link UpdateQueueOutboundEmailConfigCommand}
    */
-  public updateQueueStatus(
+  updateQueueOutboundEmailConfig(
+    args: UpdateQueueOutboundEmailConfigCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateQueueOutboundEmailConfigCommandOutput>;
+  updateQueueOutboundEmailConfig(
+    args: UpdateQueueOutboundEmailConfigCommandInput,
+    cb: (err: any, data?: UpdateQueueOutboundEmailConfigCommandOutput) => void
+  ): void;
+  updateQueueOutboundEmailConfig(
+    args: UpdateQueueOutboundEmailConfigCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateQueueOutboundEmailConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQueueStatusCommand}
+   */
+  updateQueueStatus(
     args: UpdateQueueStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQueueStatusCommandOutput>;
-  public updateQueueStatus(
+  updateQueueStatus(
     args: UpdateQueueStatusCommandInput,
     cb: (err: any, data?: UpdateQueueStatusCommandOutput) => void
   ): void;
-  public updateQueueStatus(
+  updateQueueStatus(
     args: UpdateQueueStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQueueStatusCommandOutput) => void
   ): void;
-  public updateQueueStatus(
-    args: UpdateQueueStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQueueStatusCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQueueStatusCommandOutput) => void
-  ): Promise<UpdateQueueStatusCommandOutput> | void {
-    const command = new UpdateQueueStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the configuration settings for the specified quick connect.</p>
+   * @see {@link UpdateQuickConnectConfigCommand}
    */
-  public updateQuickConnectConfig(
+  updateQuickConnectConfig(
     args: UpdateQuickConnectConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQuickConnectConfigCommandOutput>;
-  public updateQuickConnectConfig(
+  updateQuickConnectConfig(
     args: UpdateQuickConnectConfigCommandInput,
     cb: (err: any, data?: UpdateQuickConnectConfigCommandOutput) => void
   ): void;
-  public updateQuickConnectConfig(
+  updateQuickConnectConfig(
     args: UpdateQuickConnectConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQuickConnectConfigCommandOutput) => void
   ): void;
-  public updateQuickConnectConfig(
-    args: UpdateQuickConnectConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQuickConnectConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQuickConnectConfigCommandOutput) => void
-  ): Promise<UpdateQuickConnectConfigCommandOutput> | void {
-    const command = new UpdateQuickConnectConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least <code>Name</code> or <code>Description</code> must be provided.</p>
+   * @see {@link UpdateQuickConnectNameCommand}
    */
-  public updateQuickConnectName(
+  updateQuickConnectName(
     args: UpdateQuickConnectNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateQuickConnectNameCommandOutput>;
-  public updateQuickConnectName(
+  updateQuickConnectName(
     args: UpdateQuickConnectNameCommandInput,
     cb: (err: any, data?: UpdateQuickConnectNameCommandOutput) => void
   ): void;
-  public updateQuickConnectName(
+  updateQuickConnectName(
     args: UpdateQuickConnectNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateQuickConnectNameCommandOutput) => void
   ): void;
-  public updateQuickConnectName(
-    args: UpdateQuickConnectNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateQuickConnectNameCommandOutput) => void),
-    cb?: (err: any, data?: UpdateQuickConnectNameCommandOutput) => void
-  ): Promise<UpdateQuickConnectNameCommandOutput> | void {
-    const command = new UpdateQuickConnectNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing
-   *    profile.</p>
+   * @see {@link UpdateRoutingProfileAgentAvailabilityTimerCommand}
    */
-  public updateRoutingProfileConcurrency(
+  updateRoutingProfileAgentAvailabilityTimer(
+    args: UpdateRoutingProfileAgentAvailabilityTimerCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateRoutingProfileAgentAvailabilityTimerCommandOutput>;
+  updateRoutingProfileAgentAvailabilityTimer(
+    args: UpdateRoutingProfileAgentAvailabilityTimerCommandInput,
+    cb: (err: any, data?: UpdateRoutingProfileAgentAvailabilityTimerCommandOutput) => void
+  ): void;
+  updateRoutingProfileAgentAvailabilityTimer(
+    args: UpdateRoutingProfileAgentAvailabilityTimerCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateRoutingProfileAgentAvailabilityTimerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRoutingProfileConcurrencyCommand}
+   */
+  updateRoutingProfileConcurrency(
     args: UpdateRoutingProfileConcurrencyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateRoutingProfileConcurrencyCommandOutput>;
-  public updateRoutingProfileConcurrency(
+  updateRoutingProfileConcurrency(
     args: UpdateRoutingProfileConcurrencyCommandInput,
     cb: (err: any, data?: UpdateRoutingProfileConcurrencyCommandOutput) => void
   ): void;
-  public updateRoutingProfileConcurrency(
+  updateRoutingProfileConcurrency(
     args: UpdateRoutingProfileConcurrencyCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateRoutingProfileConcurrencyCommandOutput) => void
   ): void;
-  public updateRoutingProfileConcurrency(
-    args: UpdateRoutingProfileConcurrencyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRoutingProfileConcurrencyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRoutingProfileConcurrencyCommandOutput) => void
-  ): Promise<UpdateRoutingProfileConcurrencyCommandOutput> | void {
-    const command = new UpdateRoutingProfileConcurrencyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the default outbound queue of a routing profile.</p>
+   * @see {@link UpdateRoutingProfileDefaultOutboundQueueCommand}
    */
-  public updateRoutingProfileDefaultOutboundQueue(
+  updateRoutingProfileDefaultOutboundQueue(
     args: UpdateRoutingProfileDefaultOutboundQueueCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateRoutingProfileDefaultOutboundQueueCommandOutput>;
-  public updateRoutingProfileDefaultOutboundQueue(
+  updateRoutingProfileDefaultOutboundQueue(
     args: UpdateRoutingProfileDefaultOutboundQueueCommandInput,
     cb: (err: any, data?: UpdateRoutingProfileDefaultOutboundQueueCommandOutput) => void
   ): void;
-  public updateRoutingProfileDefaultOutboundQueue(
+  updateRoutingProfileDefaultOutboundQueue(
     args: UpdateRoutingProfileDefaultOutboundQueueCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateRoutingProfileDefaultOutboundQueueCommandOutput) => void
   ): void;
-  public updateRoutingProfileDefaultOutboundQueue(
-    args: UpdateRoutingProfileDefaultOutboundQueueCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: UpdateRoutingProfileDefaultOutboundQueueCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRoutingProfileDefaultOutboundQueueCommandOutput) => void
-  ): Promise<UpdateRoutingProfileDefaultOutboundQueueCommandOutput> | void {
-    const command = new UpdateRoutingProfileDefaultOutboundQueueCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the name and description of a routing profile. The request accepts the following data in JSON format.
-   *    At least <code>Name</code> or <code>Description</code> must be provided.</p>
+   * @see {@link UpdateRoutingProfileNameCommand}
    */
-  public updateRoutingProfileName(
+  updateRoutingProfileName(
     args: UpdateRoutingProfileNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateRoutingProfileNameCommandOutput>;
-  public updateRoutingProfileName(
+  updateRoutingProfileName(
     args: UpdateRoutingProfileNameCommandInput,
     cb: (err: any, data?: UpdateRoutingProfileNameCommandOutput) => void
   ): void;
-  public updateRoutingProfileName(
+  updateRoutingProfileName(
     args: UpdateRoutingProfileNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateRoutingProfileNameCommandOutput) => void
   ): void;
-  public updateRoutingProfileName(
-    args: UpdateRoutingProfileNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRoutingProfileNameCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRoutingProfileNameCommandOutput) => void
-  ): Promise<UpdateRoutingProfileNameCommandOutput> | void {
-    const command = new UpdateRoutingProfileNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the properties associated with a set of queues for a routing profile.</p>
+   * @see {@link UpdateRoutingProfileQueuesCommand}
    */
-  public updateRoutingProfileQueues(
+  updateRoutingProfileQueues(
     args: UpdateRoutingProfileQueuesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateRoutingProfileQueuesCommandOutput>;
-  public updateRoutingProfileQueues(
+  updateRoutingProfileQueues(
     args: UpdateRoutingProfileQueuesCommandInput,
     cb: (err: any, data?: UpdateRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public updateRoutingProfileQueues(
+  updateRoutingProfileQueues(
     args: UpdateRoutingProfileQueuesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateRoutingProfileQueuesCommandOutput) => void
   ): void;
-  public updateRoutingProfileQueues(
-    args: UpdateRoutingProfileQueuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRoutingProfileQueuesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRoutingProfileQueuesCommandOutput) => void
-  ): Promise<UpdateRoutingProfileQueuesCommandOutput> | void {
-    const command = new UpdateRoutingProfileQueuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns the specified hierarchy group to the specified user.</p>
+   * @see {@link UpdateRuleCommand}
    */
-  public updateUserHierarchy(
+  updateRule(
+    args: UpdateRuleCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateRuleCommandOutput>;
+  updateRule(
+    args: UpdateRuleCommandInput,
+    cb: (err: any, data?: UpdateRuleCommandOutput) => void
+  ): void;
+  updateRule(
+    args: UpdateRuleCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSecurityProfileCommand}
+   */
+  updateSecurityProfile(
+    args: UpdateSecurityProfileCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateSecurityProfileCommandOutput>;
+  updateSecurityProfile(
+    args: UpdateSecurityProfileCommandInput,
+    cb: (err: any, data?: UpdateSecurityProfileCommandOutput) => void
+  ): void;
+  updateSecurityProfile(
+    args: UpdateSecurityProfileCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateSecurityProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTaskTemplateCommand}
+   */
+  updateTaskTemplate(
+    args: UpdateTaskTemplateCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateTaskTemplateCommandOutput>;
+  updateTaskTemplate(
+    args: UpdateTaskTemplateCommandInput,
+    cb: (err: any, data?: UpdateTaskTemplateCommandOutput) => void
+  ): void;
+  updateTaskTemplate(
+    args: UpdateTaskTemplateCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateTaskTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTestCaseCommand}
+   */
+  updateTestCase(
+    args: UpdateTestCaseCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateTestCaseCommandOutput>;
+  updateTestCase(
+    args: UpdateTestCaseCommandInput,
+    cb: (err: any, data?: UpdateTestCaseCommandOutput) => void
+  ): void;
+  updateTestCase(
+    args: UpdateTestCaseCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTrafficDistributionCommand}
+   */
+  updateTrafficDistribution(
+    args: UpdateTrafficDistributionCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateTrafficDistributionCommandOutput>;
+  updateTrafficDistribution(
+    args: UpdateTrafficDistributionCommandInput,
+    cb: (err: any, data?: UpdateTrafficDistributionCommandOutput) => void
+  ): void;
+  updateTrafficDistribution(
+    args: UpdateTrafficDistributionCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateTrafficDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserConfigCommand}
+   */
+  updateUserConfig(
+    args: UpdateUserConfigCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateUserConfigCommandOutput>;
+  updateUserConfig(
+    args: UpdateUserConfigCommandInput,
+    cb: (err: any, data?: UpdateUserConfigCommandOutput) => void
+  ): void;
+  updateUserConfig(
+    args: UpdateUserConfigCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateUserConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserHierarchyCommand}
+   */
+  updateUserHierarchy(
     args: UpdateUserHierarchyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserHierarchyCommandOutput>;
-  public updateUserHierarchy(
+  updateUserHierarchy(
     args: UpdateUserHierarchyCommandInput,
     cb: (err: any, data?: UpdateUserHierarchyCommandOutput) => void
   ): void;
-  public updateUserHierarchy(
+  updateUserHierarchy(
     args: UpdateUserHierarchyCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserHierarchyCommandOutput) => void
   ): void;
-  public updateUserHierarchy(
-    args: UpdateUserHierarchyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserHierarchyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserHierarchyCommandOutput) => void
-  ): Promise<UpdateUserHierarchyCommandOutput> | void {
-    const command = new UpdateUserHierarchyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the name of the user hierarchy group. </p>
+   * @see {@link UpdateUserHierarchyGroupNameCommand}
    */
-  public updateUserHierarchyGroupName(
+  updateUserHierarchyGroupName(
     args: UpdateUserHierarchyGroupNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserHierarchyGroupNameCommandOutput>;
-  public updateUserHierarchyGroupName(
+  updateUserHierarchyGroupName(
     args: UpdateUserHierarchyGroupNameCommandInput,
     cb: (err: any, data?: UpdateUserHierarchyGroupNameCommandOutput) => void
   ): void;
-  public updateUserHierarchyGroupName(
+  updateUserHierarchyGroupName(
     args: UpdateUserHierarchyGroupNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserHierarchyGroupNameCommandOutput) => void
   ): void;
-  public updateUserHierarchyGroupName(
-    args: UpdateUserHierarchyGroupNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserHierarchyGroupNameCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserHierarchyGroupNameCommandOutput) => void
-  ): Promise<UpdateUserHierarchyGroupNameCommandOutput> | void {
-    const command = new UpdateUserHierarchyGroupNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the user hierarchy structure: add, remove, and rename user hierarchy levels.</p>
+   * @see {@link UpdateUserHierarchyStructureCommand}
    */
-  public updateUserHierarchyStructure(
+  updateUserHierarchyStructure(
     args: UpdateUserHierarchyStructureCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserHierarchyStructureCommandOutput>;
-  public updateUserHierarchyStructure(
+  updateUserHierarchyStructure(
     args: UpdateUserHierarchyStructureCommandInput,
     cb: (err: any, data?: UpdateUserHierarchyStructureCommandOutput) => void
   ): void;
-  public updateUserHierarchyStructure(
+  updateUserHierarchyStructure(
     args: UpdateUserHierarchyStructureCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserHierarchyStructureCommandOutput) => void
   ): void;
-  public updateUserHierarchyStructure(
-    args: UpdateUserHierarchyStructureCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserHierarchyStructureCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserHierarchyStructureCommandOutput) => void
-  ): Promise<UpdateUserHierarchyStructureCommandOutput> | void {
-    const command = new UpdateUserHierarchyStructureCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the identity information for the specified user.</p>
-   *          <important>
-   *             <p>We strongly recommend limiting who has the ability to invoke
-   *      <code>UpdateUserIdentityInfo</code>. Someone with that ability can change the login credentials
-   *     of other users by changing their email address. This poses a security risk to your organization.
-   *     They can change the email address of a user to the attacker's email address, and then reset the
-   *     password through email. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html">Best Practices for
-   *      Security Profiles</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
-   *          </important>
+   * @see {@link UpdateUserIdentityInfoCommand}
    */
-  public updateUserIdentityInfo(
+  updateUserIdentityInfo(
     args: UpdateUserIdentityInfoCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserIdentityInfoCommandOutput>;
-  public updateUserIdentityInfo(
+  updateUserIdentityInfo(
     args: UpdateUserIdentityInfoCommandInput,
     cb: (err: any, data?: UpdateUserIdentityInfoCommandOutput) => void
   ): void;
-  public updateUserIdentityInfo(
+  updateUserIdentityInfo(
     args: UpdateUserIdentityInfoCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserIdentityInfoCommandOutput) => void
   ): void;
-  public updateUserIdentityInfo(
-    args: UpdateUserIdentityInfoCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserIdentityInfoCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserIdentityInfoCommandOutput) => void
-  ): Promise<UpdateUserIdentityInfoCommandOutput> | void {
-    const command = new UpdateUserIdentityInfoCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the phone configuration settings for the specified user.</p>
+   * @see {@link UpdateUserNotificationStatusCommand}
    */
-  public updateUserPhoneConfig(
+  updateUserNotificationStatus(
+    args: UpdateUserNotificationStatusCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateUserNotificationStatusCommandOutput>;
+  updateUserNotificationStatus(
+    args: UpdateUserNotificationStatusCommandInput,
+    cb: (err: any, data?: UpdateUserNotificationStatusCommandOutput) => void
+  ): void;
+  updateUserNotificationStatus(
+    args: UpdateUserNotificationStatusCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateUserNotificationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserPhoneConfigCommand}
+   */
+  updateUserPhoneConfig(
     args: UpdateUserPhoneConfigCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserPhoneConfigCommandOutput>;
-  public updateUserPhoneConfig(
+  updateUserPhoneConfig(
     args: UpdateUserPhoneConfigCommandInput,
     cb: (err: any, data?: UpdateUserPhoneConfigCommandOutput) => void
   ): void;
-  public updateUserPhoneConfig(
+  updateUserPhoneConfig(
     args: UpdateUserPhoneConfigCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserPhoneConfigCommandOutput) => void
   ): void;
-  public updateUserPhoneConfig(
-    args: UpdateUserPhoneConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserPhoneConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserPhoneConfigCommandOutput) => void
-  ): Promise<UpdateUserPhoneConfigCommandOutput> | void {
-    const command = new UpdateUserPhoneConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns the specified routing profile to the specified user.</p>
+   * @see {@link UpdateUserProficienciesCommand}
    */
-  public updateUserRoutingProfile(
+  updateUserProficiencies(
+    args: UpdateUserProficienciesCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateUserProficienciesCommandOutput>;
+  updateUserProficiencies(
+    args: UpdateUserProficienciesCommandInput,
+    cb: (err: any, data?: UpdateUserProficienciesCommandOutput) => void
+  ): void;
+  updateUserProficiencies(
+    args: UpdateUserProficienciesCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateUserProficienciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserRoutingProfileCommand}
+   */
+  updateUserRoutingProfile(
     args: UpdateUserRoutingProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserRoutingProfileCommandOutput>;
-  public updateUserRoutingProfile(
+  updateUserRoutingProfile(
     args: UpdateUserRoutingProfileCommandInput,
     cb: (err: any, data?: UpdateUserRoutingProfileCommandOutput) => void
   ): void;
-  public updateUserRoutingProfile(
+  updateUserRoutingProfile(
     args: UpdateUserRoutingProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserRoutingProfileCommandOutput) => void
   ): void;
-  public updateUserRoutingProfile(
-    args: UpdateUserRoutingProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserRoutingProfileCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserRoutingProfileCommandOutput) => void
-  ): Promise<UpdateUserRoutingProfileCommandOutput> | void {
-    const command = new UpdateUserRoutingProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns the specified security profiles to the specified user.</p>
+   * @see {@link UpdateUserSecurityProfilesCommand}
    */
-  public updateUserSecurityProfiles(
+  updateUserSecurityProfiles(
     args: UpdateUserSecurityProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectRequestOptions
   ): Promise<UpdateUserSecurityProfilesCommandOutput>;
-  public updateUserSecurityProfiles(
+  updateUserSecurityProfiles(
     args: UpdateUserSecurityProfilesCommandInput,
     cb: (err: any, data?: UpdateUserSecurityProfilesCommandOutput) => void
   ): void;
-  public updateUserSecurityProfiles(
+  updateUserSecurityProfiles(
     args: UpdateUserSecurityProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectRequestOptions,
     cb: (err: any, data?: UpdateUserSecurityProfilesCommandOutput) => void
   ): void;
-  public updateUserSecurityProfiles(
-    args: UpdateUserSecurityProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserSecurityProfilesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserSecurityProfilesCommandOutput) => void
-  ): Promise<UpdateUserSecurityProfilesCommandOutput> | void {
-    const command = new UpdateUserSecurityProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateViewContentCommand}
+   */
+  updateViewContent(
+    args: UpdateViewContentCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateViewContentCommandOutput>;
+  updateViewContent(
+    args: UpdateViewContentCommandInput,
+    cb: (err: any, data?: UpdateViewContentCommandOutput) => void
+  ): void;
+  updateViewContent(
+    args: UpdateViewContentCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateViewContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateViewMetadataCommand}
+   */
+  updateViewMetadata(
+    args: UpdateViewMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateViewMetadataCommandOutput>;
+  updateViewMetadata(
+    args: UpdateViewMetadataCommandInput,
+    cb: (err: any, data?: UpdateViewMetadataCommandOutput) => void
+  ): void;
+  updateViewMetadata(
+    args: UpdateViewMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateViewMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkspaceMetadataCommand}
+   */
+  updateWorkspaceMetadata(
+    args: UpdateWorkspaceMetadataCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateWorkspaceMetadataCommandOutput>;
+  updateWorkspaceMetadata(
+    args: UpdateWorkspaceMetadataCommandInput,
+    cb: (err: any, data?: UpdateWorkspaceMetadataCommandOutput) => void
+  ): void;
+  updateWorkspaceMetadata(
+    args: UpdateWorkspaceMetadataCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateWorkspaceMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkspacePageCommand}
+   */
+  updateWorkspacePage(
+    args: UpdateWorkspacePageCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateWorkspacePageCommandOutput>;
+  updateWorkspacePage(
+    args: UpdateWorkspacePageCommandInput,
+    cb: (err: any, data?: UpdateWorkspacePageCommandOutput) => void
+  ): void;
+  updateWorkspacePage(
+    args: UpdateWorkspacePageCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateWorkspacePageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkspaceThemeCommand}
+   */
+  updateWorkspaceTheme(
+    args: UpdateWorkspaceThemeCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateWorkspaceThemeCommandOutput>;
+  updateWorkspaceTheme(
+    args: UpdateWorkspaceThemeCommandInput,
+    cb: (err: any, data?: UpdateWorkspaceThemeCommandOutput) => void
+  ): void;
+  updateWorkspaceTheme(
+    args: UpdateWorkspaceThemeCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateWorkspaceThemeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkspaceVisibilityCommand}
+   */
+  updateWorkspaceVisibility(
+    args: UpdateWorkspaceVisibilityCommandInput,
+    options?: ConnectRequestOptions
+  ): Promise<UpdateWorkspaceVisibilityCommandOutput>;
+  updateWorkspaceVisibility(
+    args: UpdateWorkspaceVisibilityCommandInput,
+    cb: (err: any, data?: UpdateWorkspaceVisibilityCommandOutput) => void
+  ): void;
+  updateWorkspaceVisibility(
+    args: UpdateWorkspaceVisibilityCommandInput,
+    options: ConnectRequestOptions,
+    cb: (err: any, data?: UpdateWorkspaceVisibilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EvaluateDataTableValuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link EvaluateDataTableValuesCommandOutput}.
+   */
+  paginateEvaluateDataTableValues(
+    args: EvaluateDataTableValuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<EvaluateDataTableValuesCommandOutput>;
+
+  /**
+   * @see {@link GetCurrentMetricDataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCurrentMetricDataCommandOutput}.
+   */
+  paginateGetCurrentMetricData(
+    args: GetCurrentMetricDataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCurrentMetricDataCommandOutput>;
+
+  /**
+   * @see {@link GetCurrentUserDataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCurrentUserDataCommandOutput}.
+   */
+  paginateGetCurrentUserData(
+    args: GetCurrentUserDataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCurrentUserDataCommandOutput>;
+
+  /**
+   * @see {@link GetMetricDataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetMetricDataCommandOutput}.
+   */
+  paginateGetMetricData(
+    args: GetMetricDataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetMetricDataCommandOutput>;
+
+  /**
+   * @see {@link GetMetricDataV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetMetricDataV2CommandOutput}.
+   */
+  paginateGetMetricDataV2(
+    args: GetMetricDataV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetMetricDataV2CommandOutput>;
+
+  /**
+   * @see {@link ListAgentStatusesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentStatusesCommandOutput}.
+   */
+  paginateListAgentStatuses(
+    args: ListAgentStatusesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentStatusesCommandOutput>;
+
+  /**
+   * @see {@link ListApprovedOriginsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApprovedOriginsCommandOutput}.
+   */
+  paginateListApprovedOrigins(
+    args: ListApprovedOriginsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApprovedOriginsCommandOutput>;
+
+  /**
+   * @see {@link ListAttachedFilesConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAttachedFilesConfigurationsCommandOutput}.
+   */
+  paginateListAttachedFilesConfigurations(
+    args: ListAttachedFilesConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAttachedFilesConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListAuthenticationProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAuthenticationProfilesCommandOutput}.
+   */
+  paginateListAuthenticationProfiles(
+    args: ListAuthenticationProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAuthenticationProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListBotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotsCommandOutput}.
+   */
+  paginateListBots(
+    args: ListBotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotsCommandOutput>;
+
+  /**
+   * @see {@link ListChildHoursOfOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListChildHoursOfOperationsCommandOutput}.
+   */
+  paginateListChildHoursOfOperations(
+    args: ListChildHoursOfOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListChildHoursOfOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListContactEvaluationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactEvaluationsCommandOutput}.
+   */
+  paginateListContactEvaluations(
+    args: ListContactEvaluationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactEvaluationsCommandOutput>;
+
+  /**
+   * @see {@link ListContactFlowAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactFlowAliasesCommandOutput}.
+   */
+  paginateListContactFlowAliases(
+    args: ListContactFlowAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactFlowAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListContactFlowModuleAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactFlowModuleAliasesCommandOutput}.
+   */
+  paginateListContactFlowModuleAliases(
+    args: ListContactFlowModuleAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactFlowModuleAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListContactFlowModulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactFlowModulesCommandOutput}.
+   */
+  paginateListContactFlowModules(
+    args: ListContactFlowModulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactFlowModulesCommandOutput>;
+
+  /**
+   * @see {@link ListContactFlowModuleVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactFlowModuleVersionsCommandOutput}.
+   */
+  paginateListContactFlowModuleVersions(
+    args: ListContactFlowModuleVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactFlowModuleVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListContactFlowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactFlowsCommandOutput}.
+   */
+  paginateListContactFlows(
+    args: ListContactFlowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactFlowsCommandOutput>;
+
+  /**
+   * @see {@link ListContactFlowVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactFlowVersionsCommandOutput}.
+   */
+  paginateListContactFlowVersions(
+    args: ListContactFlowVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactFlowVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListContactReferencesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContactReferencesCommandOutput}.
+   */
+  paginateListContactReferences(
+    args: ListContactReferencesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContactReferencesCommandOutput>;
+
+  /**
+   * @see {@link ListDataTableAttributesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTableAttributesCommandOutput}.
+   */
+  paginateListDataTableAttributes(
+    args: ListDataTableAttributesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTableAttributesCommandOutput>;
+
+  /**
+   * @see {@link ListDataTablePrimaryValuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTablePrimaryValuesCommandOutput}.
+   */
+  paginateListDataTablePrimaryValues(
+    args: ListDataTablePrimaryValuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTablePrimaryValuesCommandOutput>;
+
+  /**
+   * @see {@link ListDataTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTablesCommandOutput}.
+   */
+  paginateListDataTables(
+    args: ListDataTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTablesCommandOutput>;
+
+  /**
+   * @see {@link ListDataTableValuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTableValuesCommandOutput}.
+   */
+  paginateListDataTableValues(
+    args: ListDataTableValuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTableValuesCommandOutput>;
+
+  /**
+   * @see {@link ListDefaultVocabulariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDefaultVocabulariesCommandOutput}.
+   */
+  paginateListDefaultVocabularies(
+    args: ListDefaultVocabulariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDefaultVocabulariesCommandOutput>;
+
+  /**
+   * @see {@link ListEntitySecurityProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEntitySecurityProfilesCommandOutput}.
+   */
+  paginateListEntitySecurityProfiles(
+    args: ListEntitySecurityProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEntitySecurityProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListEvaluationFormAIVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEvaluationFormAIVersionsCommandOutput}.
+   */
+  paginateListEvaluationFormAIVersions(
+    args: ListEvaluationFormAIVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEvaluationFormAIVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListEvaluationFormsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEvaluationFormsCommandOutput}.
+   */
+  paginateListEvaluationForms(
+    args: ListEvaluationFormsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEvaluationFormsCommandOutput>;
+
+  /**
+   * @see {@link ListEvaluationFormVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEvaluationFormVersionsCommandOutput}.
+   */
+  paginateListEvaluationFormVersions(
+    args: ListEvaluationFormVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEvaluationFormVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListExtractionDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExtractionDefinitionsCommandOutput}.
+   */
+  paginateListExtractionDefinitions(
+    args: ListExtractionDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExtractionDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowAssociationsCommandOutput}.
+   */
+  paginateListFlowAssociations(
+    args: ListFlowAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListHoursOfOperationOverridesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListHoursOfOperationOverridesCommandOutput}.
+   */
+  paginateListHoursOfOperationOverrides(
+    args: ListHoursOfOperationOverridesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListHoursOfOperationOverridesCommandOutput>;
+
+  /**
+   * @see {@link ListHoursOfOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListHoursOfOperationsCommandOutput}.
+   */
+  paginateListHoursOfOperations(
+    args: ListHoursOfOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListHoursOfOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListInstanceAttributesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInstanceAttributesCommandOutput}.
+   */
+  paginateListInstanceAttributes(
+    args: ListInstanceAttributesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInstanceAttributesCommandOutput>;
+
+  /**
+   * @see {@link ListInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInstancesCommandOutput}.
+   */
+  paginateListInstances(
+    args?: ListInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListInstanceStorageConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInstanceStorageConfigsCommandOutput}.
+   */
+  paginateListInstanceStorageConfigs(
+    args: ListInstanceStorageConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInstanceStorageConfigsCommandOutput>;
+
+  /**
+   * @see {@link ListIntegrationAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIntegrationAssociationsCommandOutput}.
+   */
+  paginateListIntegrationAssociations(
+    args: ListIntegrationAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIntegrationAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListLambdaFunctionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLambdaFunctionsCommandOutput}.
+   */
+  paginateListLambdaFunctions(
+    args: ListLambdaFunctionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLambdaFunctionsCommandOutput>;
+
+  /**
+   * @see {@link ListLexBotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLexBotsCommandOutput}.
+   */
+  paginateListLexBots(
+    args: ListLexBotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLexBotsCommandOutput>;
+
+  /**
+   * @see {@link ListMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMetricsCommandOutput}.
+   */
+  paginateListMetrics(
+    args: ListMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListPhoneNumbersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPhoneNumbersCommandOutput}.
+   */
+  paginateListPhoneNumbers(
+    args: ListPhoneNumbersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPhoneNumbersCommandOutput>;
+
+  /**
+   * @see {@link ListPhoneNumbersV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPhoneNumbersV2CommandOutput}.
+   */
+  paginateListPhoneNumbersV2(
+    args?: ListPhoneNumbersV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPhoneNumbersV2CommandOutput>;
+
+  /**
+   * @see {@link ListPredefinedAttributesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPredefinedAttributesCommandOutput}.
+   */
+  paginateListPredefinedAttributes(
+    args: ListPredefinedAttributesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPredefinedAttributesCommandOutput>;
+
+  /**
+   * @see {@link ListPromptsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPromptsCommandOutput}.
+   */
+  paginateListPrompts(
+    args: ListPromptsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPromptsCommandOutput>;
+
+  /**
+   * @see {@link ListQueueQuickConnectsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQueueQuickConnectsCommandOutput}.
+   */
+  paginateListQueueQuickConnects(
+    args: ListQueueQuickConnectsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQueueQuickConnectsCommandOutput>;
+
+  /**
+   * @see {@link ListQueuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQueuesCommandOutput}.
+   */
+  paginateListQueues(
+    args: ListQueuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQueuesCommandOutput>;
+
+  /**
+   * @see {@link ListQuickConnectsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQuickConnectsCommandOutput}.
+   */
+  paginateListQuickConnects(
+    args: ListQuickConnectsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQuickConnectsCommandOutput>;
+
+  /**
+   * @see {@link ListRealtimeContactAnalysisSegmentsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRealtimeContactAnalysisSegmentsV2CommandOutput}.
+   */
+  paginateListRealtimeContactAnalysisSegmentsV2(
+    args: ListRealtimeContactAnalysisSegmentsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRealtimeContactAnalysisSegmentsV2CommandOutput>;
+
+  /**
+   * @see {@link ListReplicationFindingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReplicationFindingsCommandOutput}.
+   */
+  paginateListReplicationFindings(
+    args: ListReplicationFindingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReplicationFindingsCommandOutput>;
+
+  /**
+   * @see {@link ListRoutingProfileManualAssignmentQueuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoutingProfileManualAssignmentQueuesCommandOutput}.
+   */
+  paginateListRoutingProfileManualAssignmentQueues(
+    args: ListRoutingProfileManualAssignmentQueuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoutingProfileManualAssignmentQueuesCommandOutput>;
+
+  /**
+   * @see {@link ListRoutingProfileQueuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoutingProfileQueuesCommandOutput}.
+   */
+  paginateListRoutingProfileQueues(
+    args: ListRoutingProfileQueuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoutingProfileQueuesCommandOutput>;
+
+  /**
+   * @see {@link ListRoutingProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoutingProfilesCommandOutput}.
+   */
+  paginateListRoutingProfiles(
+    args: ListRoutingProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoutingProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRulesCommandOutput}.
+   */
+  paginateListRules(
+    args: ListRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRulesCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityKeysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityKeysCommandOutput}.
+   */
+  paginateListSecurityKeys(
+    args: ListSecurityKeysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityKeysCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityProfileAIAgentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityProfileAIAgentsCommandOutput}.
+   */
+  paginateListSecurityProfileAIAgents(
+    args: ListSecurityProfileAIAgentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityProfileAIAgentsCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityProfileApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityProfileApplicationsCommandOutput}.
+   */
+  paginateListSecurityProfileApplications(
+    args: ListSecurityProfileApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityProfileApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityProfileFlowModulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityProfileFlowModulesCommandOutput}.
+   */
+  paginateListSecurityProfileFlowModules(
+    args: ListSecurityProfileFlowModulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityProfileFlowModulesCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityProfilePermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityProfilePermissionsCommandOutput}.
+   */
+  paginateListSecurityProfilePermissions(
+    args: ListSecurityProfilePermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityProfilePermissionsCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityProfilesCommandOutput}.
+   */
+  paginateListSecurityProfiles(
+    args: ListSecurityProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListTaskTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTaskTemplatesCommandOutput}.
+   */
+  paginateListTaskTemplates(
+    args: ListTaskTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTaskTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListTestCasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTestCasesCommandOutput}.
+   */
+  paginateListTestCases(
+    args: ListTestCasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTestCasesCommandOutput>;
+
+  /**
+   * @see {@link ListTrafficDistributionGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrafficDistributionGroupsCommandOutput}.
+   */
+  paginateListTrafficDistributionGroups(
+    args?: ListTrafficDistributionGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrafficDistributionGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListTrafficDistributionGroupUsersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrafficDistributionGroupUsersCommandOutput}.
+   */
+  paginateListTrafficDistributionGroupUsers(
+    args: ListTrafficDistributionGroupUsersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrafficDistributionGroupUsersCommandOutput>;
+
+  /**
+   * @see {@link ListUseCasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUseCasesCommandOutput}.
+   */
+  paginateListUseCases(
+    args: ListUseCasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUseCasesCommandOutput>;
+
+  /**
+   * @see {@link ListUserHierarchyGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserHierarchyGroupsCommandOutput}.
+   */
+  paginateListUserHierarchyGroups(
+    args: ListUserHierarchyGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserHierarchyGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListUserProficienciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserProficienciesCommandOutput}.
+   */
+  paginateListUserProficiencies(
+    args: ListUserProficienciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserProficienciesCommandOutput>;
+
+  /**
+   * @see {@link ListUsersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsersCommandOutput}.
+   */
+  paginateListUsers(
+    args: ListUsersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsersCommandOutput>;
+
+  /**
+   * @see {@link ListViewsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListViewsCommandOutput}.
+   */
+  paginateListViews(
+    args: ListViewsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListViewsCommandOutput>;
+
+  /**
+   * @see {@link ListViewVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListViewVersionsCommandOutput}.
+   */
+  paginateListViewVersions(
+    args: ListViewVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListViewVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspacePagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspacePagesCommandOutput}.
+   */
+  paginateListWorkspacePages(
+    args: ListWorkspacePagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspacePagesCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspacesCommandOutput}.
+   */
+  paginateListWorkspaces(
+    args: ListWorkspacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspacesCommandOutput>;
+
+  /**
+   * @see {@link SearchAgentStatusesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchAgentStatusesCommandOutput}.
+   */
+  paginateSearchAgentStatuses(
+    args: SearchAgentStatusesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchAgentStatusesCommandOutput>;
+
+  /**
+   * @see {@link SearchAvailablePhoneNumbersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchAvailablePhoneNumbersCommandOutput}.
+   */
+  paginateSearchAvailablePhoneNumbers(
+    args: SearchAvailablePhoneNumbersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchAvailablePhoneNumbersCommandOutput>;
+
+  /**
+   * @see {@link SearchContactFlowModulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchContactFlowModulesCommandOutput}.
+   */
+  paginateSearchContactFlowModules(
+    args: SearchContactFlowModulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchContactFlowModulesCommandOutput>;
+
+  /**
+   * @see {@link SearchContactFlowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchContactFlowsCommandOutput}.
+   */
+  paginateSearchContactFlows(
+    args: SearchContactFlowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchContactFlowsCommandOutput>;
+
+  /**
+   * @see {@link SearchContactsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchContactsCommandOutput}.
+   */
+  paginateSearchContacts(
+    args: SearchContactsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchContactsCommandOutput>;
+
+  /**
+   * @see {@link SearchDataTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchDataTablesCommandOutput}.
+   */
+  paginateSearchDataTables(
+    args: SearchDataTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchDataTablesCommandOutput>;
+
+  /**
+   * @see {@link SearchHoursOfOperationOverridesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchHoursOfOperationOverridesCommandOutput}.
+   */
+  paginateSearchHoursOfOperationOverrides(
+    args: SearchHoursOfOperationOverridesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchHoursOfOperationOverridesCommandOutput>;
+
+  /**
+   * @see {@link SearchHoursOfOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchHoursOfOperationsCommandOutput}.
+   */
+  paginateSearchHoursOfOperations(
+    args: SearchHoursOfOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchHoursOfOperationsCommandOutput>;
+
+  /**
+   * @see {@link SearchMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchMetricsCommandOutput}.
+   */
+  paginateSearchMetrics(
+    args: SearchMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchMetricsCommandOutput>;
+
+  /**
+   * @see {@link SearchPredefinedAttributesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchPredefinedAttributesCommandOutput}.
+   */
+  paginateSearchPredefinedAttributes(
+    args: SearchPredefinedAttributesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchPredefinedAttributesCommandOutput>;
+
+  /**
+   * @see {@link SearchPromptsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchPromptsCommandOutput}.
+   */
+  paginateSearchPrompts(
+    args: SearchPromptsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchPromptsCommandOutput>;
+
+  /**
+   * @see {@link SearchQueuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchQueuesCommandOutput}.
+   */
+  paginateSearchQueues(
+    args: SearchQueuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchQueuesCommandOutput>;
+
+  /**
+   * @see {@link SearchQuickConnectsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchQuickConnectsCommandOutput}.
+   */
+  paginateSearchQuickConnects(
+    args: SearchQuickConnectsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchQuickConnectsCommandOutput>;
+
+  /**
+   * @see {@link SearchResourceTagsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchResourceTagsCommandOutput}.
+   */
+  paginateSearchResourceTags(
+    args: SearchResourceTagsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchResourceTagsCommandOutput>;
+
+  /**
+   * @see {@link SearchRoutingProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchRoutingProfilesCommandOutput}.
+   */
+  paginateSearchRoutingProfiles(
+    args: SearchRoutingProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchRoutingProfilesCommandOutput>;
+
+  /**
+   * @see {@link SearchRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchRulesCommandOutput}.
+   */
+  paginateSearchRules(
+    args: SearchRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchRulesCommandOutput>;
+
+  /**
+   * @see {@link SearchSecurityProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchSecurityProfilesCommandOutput}.
+   */
+  paginateSearchSecurityProfiles(
+    args: SearchSecurityProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchSecurityProfilesCommandOutput>;
+
+  /**
+   * @see {@link SearchTestCasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchTestCasesCommandOutput}.
+   */
+  paginateSearchTestCases(
+    args: SearchTestCasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchTestCasesCommandOutput>;
+
+  /**
+   * @see {@link SearchUserHierarchyGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchUserHierarchyGroupsCommandOutput}.
+   */
+  paginateSearchUserHierarchyGroups(
+    args: SearchUserHierarchyGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchUserHierarchyGroupsCommandOutput>;
+
+  /**
+   * @see {@link SearchUsersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchUsersCommandOutput}.
+   */
+  paginateSearchUsers(
+    args: SearchUsersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchUsersCommandOutput>;
+
+  /**
+   * @see {@link SearchViewsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchViewsCommandOutput}.
+   */
+  paginateSearchViews(
+    args: SearchViewsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchViewsCommandOutput>;
+
+  /**
+   * @see {@link SearchVocabulariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchVocabulariesCommandOutput}.
+   */
+  paginateSearchVocabularies(
+    args: SearchVocabulariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchVocabulariesCommandOutput>;
+
+  /**
+   * @see {@link SearchWorkspaceAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchWorkspaceAssociationsCommandOutput}.
+   */
+  paginateSearchWorkspaceAssociations(
+    args: SearchWorkspaceAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchWorkspaceAssociationsCommandOutput>;
+
+  /**
+   * @see {@link SearchWorkspacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchWorkspacesCommandOutput}.
+   */
+  paginateSearchWorkspaces(
+    args: SearchWorkspacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchWorkspacesCommandOutput>;
 }
+
+/**
+ * <note>
+ *             <p>Amazon Connect now refers to a portfolio of agentic solutions for business functions. The
+ *     legacy product is now called Amazon Connect Customer, or simply Customer. The legacy name
+ *     is used interchangeably in this documentation.</p>
+ *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html">Connect Customer Customer actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html">Connect Customer Customer data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>Connect Customer Customer engages customers at every touchpoint and creates deeper
+ *    relationships with AI powered capabilities.</p>
+ *          <p>Build and manage customer communication experiences. Connect customers to agents, enable
+ *    intelligent routing, and track performance in real-time.</p>
+ *          <p>There are limits to the number of Connect Customer resources that you can create. There are also limits to the
+ *    number of requests that you can make per second. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Connect Customer Service Quotas</a> in the
+ *      <i>Connect Customer Administrator Guide</i>.</p>
+ *          <p>You can use an endpoint to connect programmatically to an Amazon Web Services service. For a list of Connect Customer endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Connect Customer
+ *     Endpoints</a>.</p>
+ * @public
+ */
+export class Connect extends ConnectClient implements Connect {}
+createAggregatedClient(commands, Connect, { paginators });

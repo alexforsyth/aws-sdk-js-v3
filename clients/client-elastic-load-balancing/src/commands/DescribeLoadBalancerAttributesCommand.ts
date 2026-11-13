@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { DescribeLoadBalancerAttributesInput, DescribeLoadBalancerAttributesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeLoadBalancerAttributesCommand,
-  serializeAws_queryDescribeLoadBalancerAttributesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeLoadBalancerAttributesInput, DescribeLoadBalancerAttributesOutput } from "../models/models_0";
+import { DescribeLoadBalancerAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLoadBalancerAttributesCommand}.
+ */
 export interface DescribeLoadBalancerAttributesCommandInput extends DescribeLoadBalancerAttributesInput {}
-export interface DescribeLoadBalancerAttributesCommandOutput
-  extends DescribeLoadBalancerAttributesOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLoadBalancerAttributesCommand}.
+ */
+export interface DescribeLoadBalancerAttributesCommandOutput extends DescribeLoadBalancerAttributesOutput, __MetadataBearer {}
 
 /**
  * <p>Describes the attributes for the specified load balancer.</p>
@@ -34,74 +29,105 @@ export interface DescribeLoadBalancerAttributesCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, DescribeLoadBalancerAttributesCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, DescribeLoadBalancerAttributesCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // DescribeLoadBalancerAttributesInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeLoadBalancerAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeLoadBalancerAttributesOutput
+ * //   LoadBalancerAttributes: { // LoadBalancerAttributes
+ * //     CrossZoneLoadBalancing: { // CrossZoneLoadBalancing
+ * //       Enabled: true || false, // required
+ * //     },
+ * //     AccessLog: { // AccessLog
+ * //       Enabled: true || false, // required
+ * //       S3BucketName: "STRING_VALUE",
+ * //       EmitInterval: Number("int"),
+ * //       S3BucketPrefix: "STRING_VALUE",
+ * //     },
+ * //     ConnectionDraining: { // ConnectionDraining
+ * //       Enabled: true || false, // required
+ * //       Timeout: Number("int"),
+ * //     },
+ * //     ConnectionSettings: { // ConnectionSettings
+ * //       IdleTimeout: Number("int"), // required
+ * //     },
+ * //     AdditionalAttributes: [ // AdditionalAttributes
+ * //       { // AdditionalAttribute
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeLoadBalancerAttributesCommandInput - {@link DescribeLoadBalancerAttributesCommandInput}
+ * @returns {@link DescribeLoadBalancerAttributesCommandOutput}
  * @see {@link DescribeLoadBalancerAttributesCommandInput} for command's `input` shape.
  * @see {@link DescribeLoadBalancerAttributesCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link LoadBalancerAttributeNotFoundException} (client fault)
+ *  <p>The specified load balancer attribute does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To describe the attributes of a load balancer
+ * ```javascript
+ * // This example describes the attributes of the specified load balancer.
+ * const input = {
+ *   LoadBalancerName: "my-load-balancer"
+ * };
+ * const command = new DescribeLoadBalancerAttributesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   LoadBalancerAttributes: {
+ *     AccessLog: {
+ *       Enabled: false
+ *     },
+ *     ConnectionDraining: {
+ *       Enabled: false,
+ *       Timeout: 300
+ *     },
+ *     ConnectionSettings: {
+ *       IdleTimeout: 60
+ *     },
+ *     CrossZoneLoadBalancing: {
+ *       Enabled: false
+ *     }
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeLoadBalancerAttributesCommand extends $Command<
-  DescribeLoadBalancerAttributesCommandInput,
-  DescribeLoadBalancerAttributesCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLoadBalancerAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLoadBalancerAttributesCommandInput, DescribeLoadBalancerAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "DescribeLoadBalancerAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeLoadBalancerAttributesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeLoadBalancerAttributesOutput.filterSensitiveLog,
+export class DescribeLoadBalancerAttributesCommand extends command<DescribeLoadBalancerAttributesCommandInput, DescribeLoadBalancerAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLoadBalancerAttributes",
+  DescribeLoadBalancerAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLoadBalancerAttributesInput;
+      output: DescribeLoadBalancerAttributesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeLoadBalancerAttributesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeLoadBalancerAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeLoadBalancerAttributesCommandOutput> {
-    return deserializeAws_queryDescribeLoadBalancerAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLoadBalancerAttributesCommandInput;
+      output: DescribeLoadBalancerAttributesCommandOutput;
+    };
+  };
 }

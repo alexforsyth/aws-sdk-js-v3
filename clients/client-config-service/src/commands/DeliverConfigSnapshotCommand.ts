@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import { DeliverConfigSnapshotRequest, DeliverConfigSnapshotResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeliverConfigSnapshotCommand,
-  serializeAws_json1_1DeliverConfigSnapshotCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeliverConfigSnapshotRequest, DeliverConfigSnapshotResponse } from "../models/models_0";
+import { DeliverConfigSnapshot$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeliverConfigSnapshotCommand}.
+ */
 export interface DeliverConfigSnapshotCommandInput extends DeliverConfigSnapshotRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeliverConfigSnapshotCommand}.
+ */
 export interface DeliverConfigSnapshotCommandOutput extends DeliverConfigSnapshotResponse, __MetadataBearer {}
 
 /**
@@ -26,86 +27,76 @@ export interface DeliverConfigSnapshotCommandOutput extends DeliverConfigSnapsho
  * 			bucket in the specified delivery channel. After the delivery has
  * 			started, Config sends the following notifications using an
  * 			Amazon SNS topic that you have specified.</p>
- * 		       <ul>
+ *          <ul>
  *             <li>
- * 				           <p>Notification of the start of the delivery.</p>
- * 			         </li>
+ *                <p>Notification of the start of the delivery.</p>
+ *             </li>
  *             <li>
- * 				           <p>Notification of the completion of the delivery, if the
+ *                <p>Notification of the completion of the delivery, if the
  * 					delivery was successfully completed.</p>
- * 			         </li>
+ *             </li>
  *             <li>
- * 				           <p>Notification of delivery failure, if the delivery
+ *                <p>Notification of delivery failure, if the delivery
  * 					failed.</p>
- * 			         </li>
+ *             </li>
  *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConfigServiceClient, DeliverConfigSnapshotCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DeliverConfigSnapshotCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DeliverConfigSnapshotRequest
+ *   deliveryChannelName: "STRING_VALUE", // required
+ * };
  * const command = new DeliverConfigSnapshotCommand(input);
  * const response = await client.send(command);
+ * // { // DeliverConfigSnapshotResponse
+ * //   configSnapshotId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeliverConfigSnapshotCommandInput - {@link DeliverConfigSnapshotCommandInput}
+ * @returns {@link DeliverConfigSnapshotCommandOutput}
  * @see {@link DeliverConfigSnapshotCommandInput} for command's `input` shape.
  * @see {@link DeliverConfigSnapshotCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link NoAvailableConfigurationRecorderException} (client fault)
+ *  <p>There are no customer managed configuration recorders available to record your resources. Use the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationRecorder.html">PutConfigurationRecorder</a> operation to create the customer managed configuration
+ * 			recorder.</p>
+ *
+ * @throws {@link NoRunningConfigurationRecorderException} (client fault)
+ *  <p>There is no configuration recorder running.</p>
+ *
+ * @throws {@link NoSuchDeliveryChannelException} (client fault)
+ *  <p>You have specified a delivery channel that does not
+ * 			exist.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DeliverConfigSnapshotCommand extends $Command<
-  DeliverConfigSnapshotCommandInput,
-  DeliverConfigSnapshotCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeliverConfigSnapshotCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeliverConfigSnapshotCommandInput, DeliverConfigSnapshotCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DeliverConfigSnapshotCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeliverConfigSnapshotRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeliverConfigSnapshotResponse.filterSensitiveLog,
+export class DeliverConfigSnapshotCommand extends command<DeliverConfigSnapshotCommandInput, DeliverConfigSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeliverConfigSnapshot",
+  DeliverConfigSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeliverConfigSnapshotRequest;
+      output: DeliverConfigSnapshotResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeliverConfigSnapshotCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeliverConfigSnapshotCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeliverConfigSnapshotCommandOutput> {
-    return deserializeAws_json1_1DeliverConfigSnapshotCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeliverConfigSnapshotCommandInput;
+      output: DeliverConfigSnapshotCommandOutput;
+    };
+  };
 }

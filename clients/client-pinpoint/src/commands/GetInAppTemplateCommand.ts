@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetInAppTemplateRequest, GetInAppTemplateResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetInAppTemplateCommand,
-  serializeAws_restJson1GetInAppTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInAppTemplateRequest, GetInAppTemplateResponse } from "../models/models_0";
+import { GetInAppTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInAppTemplateCommand}.
+ */
 export interface GetInAppTemplateCommandInput extends GetInAppTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInAppTemplateCommand}.
+ */
 export interface GetInAppTemplateCommandOutput extends GetInAppTemplateResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,141 @@ export interface GetInAppTemplateCommandOutput extends GetInAppTemplateResponse,
  * ```javascript
  * import { PinpointClient, GetInAppTemplateCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetInAppTemplateCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetInAppTemplateRequest
+ *   TemplateName: "STRING_VALUE", // required
+ *   Version: "STRING_VALUE",
+ * };
  * const command = new GetInAppTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // GetInAppTemplateResponse
+ * //   InAppTemplateResponse: { // InAppTemplateResponse
+ * //     Arn: "STRING_VALUE",
+ * //     Content: [ // ListOfInAppMessageContent
+ * //       { // InAppMessageContent
+ * //         BackgroundColor: "STRING_VALUE",
+ * //         BodyConfig: { // InAppMessageBodyConfig
+ * //           Alignment: "LEFT" || "CENTER" || "RIGHT", // required
+ * //           Body: "STRING_VALUE", // required
+ * //           TextColor: "STRING_VALUE", // required
+ * //         },
+ * //         HeaderConfig: { // InAppMessageHeaderConfig
+ * //           Alignment: "LEFT" || "CENTER" || "RIGHT", // required
+ * //           Header: "STRING_VALUE", // required
+ * //           TextColor: "STRING_VALUE", // required
+ * //         },
+ * //         ImageUrl: "STRING_VALUE",
+ * //         PrimaryBtn: { // InAppMessageButton
+ * //           Android: { // OverrideButtonConfiguration
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //           },
+ * //           DefaultConfig: { // DefaultButtonConfiguration
+ * //             BackgroundColor: "STRING_VALUE",
+ * //             BorderRadius: Number("int"),
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //             Text: "STRING_VALUE", // required
+ * //             TextColor: "STRING_VALUE",
+ * //           },
+ * //           IOS: {
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //           },
+ * //           Web: {
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         SecondaryBtn: {
+ * //           Android: {
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //           },
+ * //           DefaultConfig: {
+ * //             BackgroundColor: "STRING_VALUE",
+ * //             BorderRadius: Number("int"),
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //             Text: "STRING_VALUE", // required
+ * //             TextColor: "STRING_VALUE",
+ * //           },
+ * //           IOS: {
+ * //             ButtonAction: "LINK" || "DEEP_LINK" || "CLOSE", // required
+ * //             Link: "STRING_VALUE",
+ * //           },
+ * //           Web: "<OverrideButtonConfiguration>",
+ * //         },
+ * //       },
+ * //     ],
+ * //     CreationDate: "STRING_VALUE", // required
+ * //     CustomConfig: { // MapOf__string
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     LastModifiedDate: "STRING_VALUE", // required
+ * //     Layout: "BOTTOM_BANNER" || "TOP_BANNER" || "OVERLAYS" || "MOBILE_FEED" || "MIDDLE_BANNER" || "CAROUSEL",
+ * //     tags: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     TemplateDescription: "STRING_VALUE",
+ * //     TemplateName: "STRING_VALUE", // required
+ * //     TemplateType: "EMAIL" || "SMS" || "VOICE" || "PUSH" || "INAPP", // required
+ * //     Version: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetInAppTemplateCommandInput - {@link GetInAppTemplateCommandInput}
+ * @returns {@link GetInAppTemplateCommandOutput}
  * @see {@link GetInAppTemplateCommandInput} for command's `input` shape.
  * @see {@link GetInAppTemplateCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetInAppTemplateCommand extends $Command<
-  GetInAppTemplateCommandInput,
-  GetInAppTemplateCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInAppTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInAppTemplateCommandInput, GetInAppTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetInAppTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInAppTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetInAppTemplateResponse.filterSensitiveLog,
+export class GetInAppTemplateCommand extends command<GetInAppTemplateCommandInput, GetInAppTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInAppTemplate",
+  GetInAppTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInAppTemplateRequest;
+      output: GetInAppTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetInAppTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetInAppTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetInAppTemplateCommandOutput> {
-    return deserializeAws_restJson1GetInAppTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInAppTemplateCommandInput;
+      output: GetInAppTemplateCommandOutput;
+    };
+  };
 }

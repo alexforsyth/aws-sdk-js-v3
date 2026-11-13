@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListLexiconsInput, ListLexiconsOutput } from "../models/models_0";
-import { PollyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PollyClient";
-import {
-  deserializeAws_restJson1ListLexiconsCommand,
-  serializeAws_restJson1ListLexiconsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLexiconsInput, ListLexiconsOutput } from "../models/models_0";
+import { ListLexicons$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLexiconsCommand}.
+ */
 export interface ListLexiconsCommandInput extends ListLexiconsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListLexiconsCommand}.
+ */
 export interface ListLexiconsCommandOutput extends ListLexiconsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,92 @@ export interface ListLexiconsCommandOutput extends ListLexiconsOutput, __Metadat
  * ```javascript
  * import { PollyClient, ListLexiconsCommand } from "@aws-sdk/client-polly"; // ES Modules import
  * // const { PollyClient, ListLexiconsCommand } = require("@aws-sdk/client-polly"); // CommonJS import
+ * // import type { PollyClientConfig } from "@aws-sdk/client-polly";
+ * const config = {}; // type is PollyClientConfig
  * const client = new PollyClient(config);
+ * const input = { // ListLexiconsInput
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListLexiconsCommand(input);
  * const response = await client.send(command);
+ * // { // ListLexiconsOutput
+ * //   Lexicons: [ // LexiconDescriptionList
+ * //     { // LexiconDescription
+ * //       Name: "STRING_VALUE",
+ * //       Attributes: { // LexiconAttributes
+ * //         Alphabet: "STRING_VALUE",
+ * //         LanguageCode: "arb" || "cmn-CN" || "cy-GB" || "da-DK" || "de-DE" || "en-AU" || "en-GB" || "en-GB-WLS" || "en-IN" || "en-US" || "es-ES" || "es-MX" || "es-US" || "fr-CA" || "fr-FR" || "is-IS" || "it-IT" || "ja-JP" || "hi-IN" || "ko-KR" || "nb-NO" || "nl-NL" || "pl-PL" || "pt-BR" || "pt-PT" || "ro-RO" || "ru-RU" || "sv-SE" || "tr-TR" || "en-NZ" || "en-ZA" || "ca-ES" || "de-AT" || "yue-CN" || "ar-AE" || "fi-FI" || "en-IE" || "nl-BE" || "fr-BE" || "cs-CZ" || "de-CH" || "en-SG",
+ * //         LastModified: new Date("TIMESTAMP"),
+ * //         LexiconArn: "STRING_VALUE",
+ * //         LexemesCount: Number("int"),
+ * //         Size: Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListLexiconsCommandInput - {@link ListLexiconsCommandInput}
+ * @returns {@link ListLexiconsCommandOutput}
  * @see {@link ListLexiconsCommandInput} for command's `input` shape.
  * @see {@link ListLexiconsCommandOutput} for command's `response` shape.
- * @see {@link PollyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PollyClientResolvedConfig | config} for PollyClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The NextToken is invalid. Verify that it's spelled correctly, and
+ *       then try again.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>An unknown condition has caused a service failure.</p>
+ *
+ * @throws {@link PollyServiceException}
+ * <p>Base exception class for all service exceptions from Polly service.</p>
+ *
+ *
+ * @example To list all lexicons in a region
+ * ```javascript
+ * // Returns a list of pronunciation lexicons stored in an AWS Region.
+ * const input = { /* empty *\/ };
+ * const command = new ListLexiconsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Lexicons: [
+ *     {
+ *       Attributes: {
+ *         Alphabet: "ipa",
+ *         LanguageCode: "en-US",
+ *         LastModified: 1.478542980117E9,
+ *         LexemesCount: 1,
+ *         LexiconArn: "arn:aws:polly:us-east-1:123456789012:lexicon/example",
+ *         Size: 503
+ *       },
+ *       Name: "example"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListLexiconsCommand extends $Command<
-  ListLexiconsCommandInput,
-  ListLexiconsCommandOutput,
-  PollyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLexiconsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PollyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLexiconsCommandInput, ListLexiconsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PollyClient";
-    const commandName = "ListLexiconsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLexiconsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListLexiconsOutput.filterSensitiveLog,
+export class ListLexiconsCommand extends command<ListLexiconsCommandInput, ListLexiconsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLexicons",
+  ListLexicons$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLexiconsInput;
+      output: ListLexiconsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLexiconsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListLexiconsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListLexiconsCommandOutput> {
-    return deserializeAws_restJson1ListLexiconsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLexiconsCommandInput;
+      output: ListLexiconsCommandOutput;
+    };
+  };
 }

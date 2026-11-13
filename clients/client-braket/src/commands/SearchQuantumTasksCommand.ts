@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BraketClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BraketClient";
-import { SearchQuantumTasksRequest, SearchQuantumTasksResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SearchQuantumTasksCommand,
-  serializeAws_restJson1SearchQuantumTasksCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchQuantumTasksRequest, SearchQuantumTasksResponse } from "../models/models_0";
+import { SearchQuantumTasks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchQuantumTasksCommand}.
+ */
 export interface SearchQuantumTasksCommandInput extends SearchQuantumTasksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchQuantumTasksCommand}.
+ */
 export interface SearchQuantumTasksCommandOutput extends SearchQuantumTasksResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,84 @@ export interface SearchQuantumTasksCommandOutput extends SearchQuantumTasksRespo
  * ```javascript
  * import { BraketClient, SearchQuantumTasksCommand } from "@aws-sdk/client-braket"; // ES Modules import
  * // const { BraketClient, SearchQuantumTasksCommand } = require("@aws-sdk/client-braket"); // CommonJS import
+ * // import type { BraketClientConfig } from "@aws-sdk/client-braket";
+ * const config = {}; // type is BraketClientConfig
  * const client = new BraketClient(config);
+ * const input = { // SearchQuantumTasksRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   filters: [ // SearchQuantumTasksFilterList // required
+ *     { // SearchQuantumTasksFilter
+ *       name: "STRING_VALUE", // required
+ *       values: [ // String256List // required
+ *         "STRING_VALUE",
+ *       ],
+ *       operator: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new SearchQuantumTasksCommand(input);
  * const response = await client.send(command);
+ * // { // SearchQuantumTasksResponse
+ * //   quantumTasks: [ // QuantumTaskSummaryList // required
+ * //     { // QuantumTaskSummary
+ * //       quantumTaskArn: "STRING_VALUE", // required
+ * //       status: "STRING_VALUE", // required
+ * //       deviceArn: "STRING_VALUE", // required
+ * //       shots: Number("long"), // required
+ * //       outputS3Bucket: "STRING_VALUE", // required
+ * //       outputS3Directory: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       endedAt: new Date("TIMESTAMP"),
+ * //       tags: { // TagsMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchQuantumTasksCommandInput - {@link SearchQuantumTasksCommandInput}
+ * @returns {@link SearchQuantumTasksCommandOutput}
  * @see {@link SearchQuantumTasksCommandInput} for command's `input` shape.
  * @see {@link SearchQuantumTasksCommandOutput} for command's `response` shape.
- * @see {@link BraketClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BraketClientResolvedConfig | config} for BraketClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The request failed because of an unknown error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The API throttling rate limit is exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input request failed to satisfy constraints expected by Amazon Braket.</p>
+ *
+ * @throws {@link BraketServiceException}
+ * <p>Base exception class for all service exceptions from Braket service.</p>
+ *
+ *
+ * @public
  */
-export class SearchQuantumTasksCommand extends $Command<
-  SearchQuantumTasksCommandInput,
-  SearchQuantumTasksCommandOutput,
-  BraketClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchQuantumTasksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BraketClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchQuantumTasksCommandInput, SearchQuantumTasksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BraketClient";
-    const commandName = "SearchQuantumTasksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchQuantumTasksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchQuantumTasksResponse.filterSensitiveLog,
+export class SearchQuantumTasksCommand extends command<SearchQuantumTasksCommandInput, SearchQuantumTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchQuantumTasks",
+  SearchQuantumTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchQuantumTasksRequest;
+      output: SearchQuantumTasksResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchQuantumTasksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SearchQuantumTasksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchQuantumTasksCommandOutput> {
-    return deserializeAws_restJson1SearchQuantumTasksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchQuantumTasksCommandInput;
+      output: SearchQuantumTasksCommandOutput;
+    };
+  };
 }

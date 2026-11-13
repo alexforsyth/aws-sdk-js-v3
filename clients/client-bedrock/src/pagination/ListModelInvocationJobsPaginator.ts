@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import { BedrockClient } from "../BedrockClient";
+import {
+  ListModelInvocationJobsCommand,
+  ListModelInvocationJobsCommandInput,
+  ListModelInvocationJobsCommandOutput,
+} from "../commands/ListModelInvocationJobsCommand";
+import type { BedrockPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListModelInvocationJobs: (
+  config: BedrockPaginationConfiguration,
+  input: ListModelInvocationJobsCommandInput,
+  ...rest: any[]
+) => Paginator<ListModelInvocationJobsCommandOutput> = createPaginator<
+  BedrockPaginationConfiguration,
+  ListModelInvocationJobsCommandInput,
+  ListModelInvocationJobsCommandOutput
+>(BedrockClient, ListModelInvocationJobsCommand, "nextToken", "nextToken", "maxResults");

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MemoryDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MemoryDBClient";
-import { CreateUserRequest, CreateUserResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateUserCommand,
-  serializeAws_json1_1CreateUserCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateUserRequest, CreateUserResponse } from "../models/models_0";
+import { CreateUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateUserCommand}.
+ */
 export interface CreateUserCommandInput extends CreateUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateUserCommand}.
+ */
 export interface CreateUserCommandOutput extends CreateUserResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,91 @@ export interface CreateUserCommandOutput extends CreateUserResponse, __MetadataB
  * ```javascript
  * import { MemoryDBClient, CreateUserCommand } from "@aws-sdk/client-memorydb"; // ES Modules import
  * // const { MemoryDBClient, CreateUserCommand } = require("@aws-sdk/client-memorydb"); // CommonJS import
+ * // import type { MemoryDBClientConfig } from "@aws-sdk/client-memorydb";
+ * const config = {}; // type is MemoryDBClientConfig
  * const client = new MemoryDBClient(config);
+ * const input = { // CreateUserRequest
+ *   UserName: "STRING_VALUE", // required
+ *   AuthenticationMode: { // AuthenticationMode
+ *     Type: "password" || "iam",
+ *     Passwords: [ // PasswordListInput
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   AccessString: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateUserCommand(input);
  * const response = await client.send(command);
+ * // { // CreateUserResponse
+ * //   User: { // User
+ * //     Name: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     AccessString: "STRING_VALUE",
+ * //     ACLNames: [ // ACLNameList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     MinimumEngineVersion: "STRING_VALUE",
+ * //     Authentication: { // Authentication
+ * //       Type: "password" || "no-password" || "iam",
+ * //       PasswordCount: Number("int"),
+ * //     },
+ * //     ARN: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateUserCommandInput - {@link CreateUserCommandInput}
+ * @returns {@link CreateUserCommandOutput}
  * @see {@link CreateUserCommandInput} for command's `input` shape.
  * @see {@link CreateUserCommandOutput} for command's `response` shape.
- * @see {@link MemoryDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MemoryDBClientResolvedConfig | config} for MemoryDBClient's `config` shape.
  *
+ * @throws {@link DuplicateUserNameFault} (client fault)
+ *  <p>A user with the specified name already exists.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>The specified parameter combination is not valid.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The specified parameter value is not valid.</p>
+ *
+ * @throws {@link TagQuotaPerResourceExceeded} (client fault)
+ *  <p>The request cannot be processed because it would exceed the maximum number of tags allowed per resource.</p>
+ *
+ * @throws {@link UserAlreadyExistsFault} (client fault)
+ *  <p>A user with the specified name already exists.</p>
+ *
+ * @throws {@link UserQuotaExceededFault} (client fault)
+ *  <p>The request cannot be processed because it would exceed the maximum number of users allowed.</p>
+ *
+ * @throws {@link MemoryDBServiceException}
+ * <p>Base exception class for all service exceptions from MemoryDB service.</p>
+ *
+ *
+ * @public
  */
-export class CreateUserCommand extends $Command<
-  CreateUserCommandInput,
-  CreateUserCommandOutput,
-  MemoryDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MemoryDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateUserCommandInput, CreateUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MemoryDBClient";
-    const commandName = "CreateUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateUserResponse.filterSensitiveLog,
+export class CreateUserCommand extends command<CreateUserCommandInput, CreateUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateUser",
+  CreateUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateUserRequest;
+      output: CreateUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateUserCommandOutput> {
-    return deserializeAws_json1_1CreateUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateUserCommandInput;
+      output: CreateUserCommandOutput;
+    };
+  };
 }

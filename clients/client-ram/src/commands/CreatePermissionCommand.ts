@@ -1,0 +1,158 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePermissionRequest, CreatePermissionResponse } from "../models/models_0";
+import { CreatePermission$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePermissionCommand}.
+ */
+export interface CreatePermissionCommandInput extends CreatePermissionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePermissionCommand}.
+ */
+export interface CreatePermissionCommandOutput extends CreatePermissionResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a customer managed permission for a specified resource type that you can attach to resource shares.
+ *             It is created in the Amazon Web Services Region in which you call the operation.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RAMClient, CreatePermissionCommand } from "@aws-sdk/client-ram"; // ES Modules import
+ * // const { RAMClient, CreatePermissionCommand } = require("@aws-sdk/client-ram"); // CommonJS import
+ * // import type { RAMClientConfig } from "@aws-sdk/client-ram";
+ * const config = {}; // type is RAMClientConfig
+ * const client = new RAMClient(config);
+ * const input = { // CreatePermissionRequest
+ *   name: "STRING_VALUE", // required
+ *   resourceType: "STRING_VALUE", // required
+ *   policyTemplate: "STRING_VALUE", // required
+ *   permissionTemplateParameters: [ // PermissionTemplateParameterDeclarationList
+ *     { // PermissionTemplateParameterDeclaration
+ *       name: "STRING_VALUE",
+ *       type: "STRING" || "STRING_LIST",
+ *       description: "STRING_VALUE",
+ *     },
+ *   ],
+ *   clientToken: "STRING_VALUE",
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE",
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
+ * const command = new CreatePermissionCommand(input);
+ * const response = await client.send(command);
+ * // { // CreatePermissionResponse
+ * //   permission: { // ResourceSharePermissionSummary
+ * //     arn: "STRING_VALUE",
+ * //     version: "STRING_VALUE",
+ * //     defaultVersion: true || false,
+ * //     name: "STRING_VALUE",
+ * //     resourceType: "STRING_VALUE",
+ * //     status: "STRING_VALUE",
+ * //     creationTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedTime: new Date("TIMESTAMP"),
+ * //     isResourceTypeDefault: true || false,
+ * //     permissionType: "CUSTOMER_MANAGED" || "AWS_MANAGED",
+ * //     featureSet: "CREATED_FROM_POLICY" || "PROMOTING_TO_STANDARD" || "STANDARD",
+ * //     permissionTemplateParameters: [ // PermissionTemplateParameterList
+ * //       { // PermissionTemplateParameter
+ * //         name: "STRING_VALUE",
+ * //         type: "STRING" || "STRING_LIST",
+ * //         description: "STRING_VALUE",
+ * //         values: [ // PermissionTemplateParameterValueList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     tags: [ // TagList
+ * //       { // Tag
+ * //         key: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     resourceOwner: "SELF" || "OTHER-ACCOUNTS",
+ * //   },
+ * //   clientToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreatePermissionCommandInput - {@link CreatePermissionCommandInput}
+ * @returns {@link CreatePermissionCommandOutput}
+ * @see {@link CreatePermissionCommandInput} for command's `input` shape.
+ * @see {@link CreatePermissionCommandOutput} for command's `response` shape.
+ * @see {@link RAMClientResolvedConfig | config} for RAMClient's `config` shape.
+ *
+ * @throws {@link IdempotentParameterMismatchException} (client fault)
+ *  <p>The operation failed because the client token input parameter matched one that was
+ *             used with a previous call to the operation, but at least one of the other input
+ *             parameters is different from the previous call.</p>
+ *
+ * @throws {@link InvalidClientTokenException} (client fault)
+ *  <p>The operation failed because the specified client token isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The operation failed because a parameter you specified isn't valid.</p>
+ *
+ * @throws {@link InvalidPolicyException} (client fault)
+ *  <p>The operation failed because a policy you specified isn't valid.</p>
+ *
+ * @throws {@link MalformedPolicyTemplateException} (client fault)
+ *  <p>The operation failed because the policy template that you provided isn't valid.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The operation failed because the requested operation isn't permitted.</p>
+ *
+ * @throws {@link PermissionAlreadyExistsException} (client fault)
+ *  <p>The operation failed because a permission with the specified name already exists in
+ *             the requested Amazon Web Services Region. Choose a different name.</p>
+ *
+ * @throws {@link PermissionLimitExceededException} (client fault)
+ *  <p>The operation failed because it would exceed the maximum number of permissions you can
+ *             create in each Amazon Web Services Region. To view the limits for your Amazon Web Services account, see the <a href="https://console.aws.amazon.com/servicequotas/home/services/ram/quotas">RAM page in the
+ *                 Service Quotas console</a>.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The operation failed because the service could not respond to the request due to an
+ *             internal problem. Try again later.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The operation failed because the service isn't available. Try again later.</p>
+ *
+ * @throws {@link RAMServiceException}
+ * <p>Base exception class for all service exceptions from RAM service.</p>
+ *
+ *
+ * @public
+ */
+export class CreatePermissionCommand extends command<CreatePermissionCommandInput, CreatePermissionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePermission",
+  CreatePermission$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePermissionRequest;
+      output: CreatePermissionResponse;
+    };
+    sdk: {
+      input: CreatePermissionCommandInput;
+      output: CreatePermissionCommandOutput;
+    };
+  };
+}

@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListMemberAccountsCommand,
   ListMemberAccountsCommandInput,
   ListMemberAccountsCommandOutput,
 } from "../commands/ListMemberAccountsCommand";
-import { FMS } from "../FMS";
 import { FMSClient } from "../FMSClient";
-import { FMSPaginationConfiguration } from "./Interfaces";
+import type { FMSPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: FMSClient,
-  input: ListMemberAccountsCommandInput,
-  ...args: any
-): Promise<ListMemberAccountsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListMemberAccountsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: FMS,
-  input: ListMemberAccountsCommandInput,
-  ...args: any
-): Promise<ListMemberAccountsCommandOutput> => {
-  // @ts-ignore
-  return await client.listMemberAccounts(input, ...args);
-};
-export async function* paginateListMemberAccounts(
+export const paginateListMemberAccounts: (
   config: FMSPaginationConfiguration,
   input: ListMemberAccountsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListMemberAccountsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListMemberAccountsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof FMS) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof FMSClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected FMS | FMSClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListMemberAccountsCommandOutput> = createPaginator<
+  FMSPaginationConfiguration,
+  ListMemberAccountsCommandInput,
+  ListMemberAccountsCommandOutput
+>(FMSClient, ListMemberAccountsCommand, "NextToken", "NextToken", "MaxResults");

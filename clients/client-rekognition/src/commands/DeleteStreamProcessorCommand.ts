@@ -1,96 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteStreamProcessorRequest, DeleteStreamProcessorResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteStreamProcessorCommand,
-  serializeAws_json1_1DeleteStreamProcessorCommand,
-} from "../protocols/Aws_json1_1";
-import { RekognitionClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RekognitionClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteStreamProcessorRequest, DeleteStreamProcessorResponse } from "../models/models_0";
+import { DeleteStreamProcessor$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteStreamProcessorCommand}.
+ */
 export interface DeleteStreamProcessorCommandInput extends DeleteStreamProcessorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteStreamProcessorCommand}.
+ */
 export interface DeleteStreamProcessorCommandOutput extends DeleteStreamProcessorResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes the stream processor identified by <code>Name</code>. You assign the value for <code>Name</code> when you create the stream processor with
+ * <important>
+ *             <p>Service availability notice: Streaming Video and Bulk Image Analysis is no longer available to new customers. For more information, see
+ * <a href="https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html">Rekognition feature availability changes</a>.</p>
+ *             <p>
+ *                <b>This change does not impact the availability of other Amazon Rekognition features.</b>
+ *             </p>
+ *          </important>
+ *          <p>Deletes the stream processor identified by <code>Name</code>. You assign the value for <code>Name</code> when you create the stream processor with
  *             <a>CreateStreamProcessor</a>. You might not be able to use the same name for a stream processor for a few seconds after calling <code>DeleteStreamProcessor</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RekognitionClient, DeleteStreamProcessorCommand } from "@aws-sdk/client-rekognition"; // ES Modules import
  * // const { RekognitionClient, DeleteStreamProcessorCommand } = require("@aws-sdk/client-rekognition"); // CommonJS import
+ * // import type { RekognitionClientConfig } from "@aws-sdk/client-rekognition";
+ * const config = {}; // type is RekognitionClientConfig
  * const client = new RekognitionClient(config);
+ * const input = { // DeleteStreamProcessorRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteStreamProcessorCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteStreamProcessorCommandInput - {@link DeleteStreamProcessorCommandInput}
+ * @returns {@link DeleteStreamProcessorCommandOutput}
  * @see {@link DeleteStreamProcessorCommandInput} for command's `input` shape.
  * @see {@link DeleteStreamProcessorCommandOutput} for command's `response` shape.
- * @see {@link RekognitionClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RekognitionClientResolvedConfig | config} for RekognitionClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to perform the action.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Amazon Rekognition experienced a service issue. Try your call again.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Input parameter violated a constraint. Validate your parameter before calling the API
+ *       operation again.</p>
+ *
+ * @throws {@link ProvisionedThroughputExceededException} (client fault)
+ *  <p>The number of requests exceeded your throughput limit. If you want to increase this
+ *       limit, contact Amazon Rekognition.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is already being used.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (server fault)
+ *  <p>Amazon Rekognition is temporarily unable to process the request. Try your call again.</p>
+ *
+ * @throws {@link RekognitionServiceException}
+ * <p>Base exception class for all service exceptions from Rekognition service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteStreamProcessorCommand extends $Command<
-  DeleteStreamProcessorCommandInput,
-  DeleteStreamProcessorCommandOutput,
-  RekognitionClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteStreamProcessorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RekognitionClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteStreamProcessorCommandInput, DeleteStreamProcessorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RekognitionClient";
-    const commandName = "DeleteStreamProcessorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteStreamProcessorRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteStreamProcessorResponse.filterSensitiveLog,
+export class DeleteStreamProcessorCommand extends command<DeleteStreamProcessorCommandInput, DeleteStreamProcessorCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteStreamProcessor",
+  DeleteStreamProcessor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteStreamProcessorRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteStreamProcessorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteStreamProcessorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteStreamProcessorCommandOutput> {
-    return deserializeAws_json1_1DeleteStreamProcessorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteStreamProcessorCommandInput;
+      output: DeleteStreamProcessorCommandOutput;
+    };
+  };
 }

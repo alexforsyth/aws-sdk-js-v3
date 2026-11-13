@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
-import { DeleteQueryDefinitionRequest, DeleteQueryDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteQueryDefinitionCommand,
-  serializeAws_json1_1DeleteQueryDefinitionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteQueryDefinitionRequest, DeleteQueryDefinitionResponse } from "../models/models_0";
+import { DeleteQueryDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteQueryDefinitionCommand}.
+ */
 export interface DeleteQueryDefinitionCommandInput extends DeleteQueryDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteQueryDefinitionCommand}.
+ */
 export interface DeleteQueryDefinitionCommandOutput extends DeleteQueryDefinitionResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a saved CloudWatch Logs Insights query definition.
- *       A query definition contains details about a saved CloudWatch Logs Insights query.</p>
+ * <p>Deletes a saved CloudWatch Logs Insights query definition. A query definition contains
+ *       details about a saved CloudWatch Logs Insights query.</p>
  *          <p>Each <code>DeleteQueryDefinition</code> operation can delete one query definition.</p>
  *          <p>You must have the <code>logs:DeleteQueryDefinition</code> permission to be able to perform
  *       this operation.</p>
@@ -32,68 +33,56 @@ export interface DeleteQueryDefinitionCommandOutput extends DeleteQueryDefinitio
  * ```javascript
  * import { CloudWatchLogsClient, DeleteQueryDefinitionCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
  * // const { CloudWatchLogsClient, DeleteQueryDefinitionCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * // import type { CloudWatchLogsClientConfig } from "@aws-sdk/client-cloudwatch-logs";
+ * const config = {}; // type is CloudWatchLogsClientConfig
  * const client = new CloudWatchLogsClient(config);
+ * const input = { // DeleteQueryDefinitionRequest
+ *   queryDefinitionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteQueryDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteQueryDefinitionResponse
+ * //   success: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DeleteQueryDefinitionCommandInput - {@link DeleteQueryDefinitionCommandInput}
+ * @returns {@link DeleteQueryDefinitionCommandOutput}
  * @see {@link DeleteQueryDefinitionCommandInput} for command's `input` shape.
  * @see {@link DeleteQueryDefinitionCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchLogsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for CloudWatchLogsClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>A parameter is specified incorrectly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service cannot complete the request.</p>
+ *
+ * @throws {@link CloudWatchLogsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchLogs service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteQueryDefinitionCommand extends $Command<
-  DeleteQueryDefinitionCommandInput,
-  DeleteQueryDefinitionCommandOutput,
-  CloudWatchLogsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteQueryDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchLogsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteQueryDefinitionCommandInput, DeleteQueryDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchLogsClient";
-    const commandName = "DeleteQueryDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteQueryDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteQueryDefinitionResponse.filterSensitiveLog,
+export class DeleteQueryDefinitionCommand extends command<DeleteQueryDefinitionCommandInput, DeleteQueryDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteQueryDefinition",
+  DeleteQueryDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteQueryDefinitionRequest;
+      output: DeleteQueryDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteQueryDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteQueryDefinitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteQueryDefinitionCommandOutput> {
-    return deserializeAws_json1_1DeleteQueryDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteQueryDefinitionCommandInput;
+      output: DeleteQueryDefinitionCommandOutput;
+    };
+  };
 }

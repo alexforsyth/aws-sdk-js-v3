@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteNetworkInsightsAnalysisRequest, DeleteNetworkInsightsAnalysisResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteNetworkInsightsAnalysisCommand,
-  serializeAws_ec2DeleteNetworkInsightsAnalysisCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteNetworkInsightsAnalysisRequest, DeleteNetworkInsightsAnalysisResult } from "../models/models_3";
+import { DeleteNetworkInsightsAnalysis$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteNetworkInsightsAnalysisCommand}.
+ */
 export interface DeleteNetworkInsightsAnalysisCommandInput extends DeleteNetworkInsightsAnalysisRequest {}
-export interface DeleteNetworkInsightsAnalysisCommandOutput
-  extends DeleteNetworkInsightsAnalysisResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteNetworkInsightsAnalysisCommand}.
+ */
+export interface DeleteNetworkInsightsAnalysisCommandOutput extends DeleteNetworkInsightsAnalysisResult, __MetadataBearer {}
 
 /**
  * <p>Deletes the specified network insights analysis.</p>
@@ -30,71 +29,48 @@ export interface DeleteNetworkInsightsAnalysisCommandOutput
  * ```javascript
  * import { EC2Client, DeleteNetworkInsightsAnalysisCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteNetworkInsightsAnalysisCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteNetworkInsightsAnalysisRequest
+ *   DryRun: true || false,
+ *   NetworkInsightsAnalysisId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteNetworkInsightsAnalysisCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteNetworkInsightsAnalysisResult
+ * //   NetworkInsightsAnalysisId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteNetworkInsightsAnalysisCommandInput - {@link DeleteNetworkInsightsAnalysisCommandInput}
+ * @returns {@link DeleteNetworkInsightsAnalysisCommandOutput}
  * @see {@link DeleteNetworkInsightsAnalysisCommandInput} for command's `input` shape.
  * @see {@link DeleteNetworkInsightsAnalysisCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteNetworkInsightsAnalysisCommand extends $Command<
-  DeleteNetworkInsightsAnalysisCommandInput,
-  DeleteNetworkInsightsAnalysisCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteNetworkInsightsAnalysisCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteNetworkInsightsAnalysisCommandInput, DeleteNetworkInsightsAnalysisCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteNetworkInsightsAnalysisCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteNetworkInsightsAnalysisRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteNetworkInsightsAnalysisResult.filterSensitiveLog,
+export class DeleteNetworkInsightsAnalysisCommand extends command<DeleteNetworkInsightsAnalysisCommandInput, DeleteNetworkInsightsAnalysisCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteNetworkInsightsAnalysis",
+  DeleteNetworkInsightsAnalysis$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNetworkInsightsAnalysisRequest;
+      output: DeleteNetworkInsightsAnalysisResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteNetworkInsightsAnalysisCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteNetworkInsightsAnalysisCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteNetworkInsightsAnalysisCommandOutput> {
-    return deserializeAws_ec2DeleteNetworkInsightsAnalysisCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteNetworkInsightsAnalysisCommandInput;
+      output: DeleteNetworkInsightsAnalysisCommandOutput;
+    };
+  };
 }

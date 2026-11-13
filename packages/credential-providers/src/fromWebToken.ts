@@ -1,13 +1,5 @@
-import { getDefaultRoleAssumerWithWebIdentity, STSClientConfig } from "@aws-sdk/client-sts";
-import {
-  fromWebToken as _fromWebToken,
-  FromWebTokenInit as _FromWebTokenInit,
-} from "@aws-sdk/credential-provider-web-identity";
-import { CredentialProvider } from "@aws-sdk/types";
-
-export interface FromWebTokenInit extends _FromWebTokenInit {
-  clientConfig?: STSClientConfig;
-}
+import type { FromWebTokenInit } from "@aws-sdk/credential-provider-web-identity";
+import type { AwsIdentityProperties, RuntimeConfigAwsCredentialIdentityProvider } from "@aws-sdk/types";
 
 /**
  * Creates a credential provider function that gets credentials calling STS
@@ -26,6 +18,9 @@ export interface FromWebTokenInit extends _FromWebTokenInit {
  *     webIdentityToken: await openIdProvider()
  *     // Optional. Custom STS client configurations overriding the default ones.
  *     clientConfig: { region }
+ *     // Optional. Custom STS client middleware plugin to modify the client default behavior.
+ *     // e.g. adding custom headers.
+ *     clientPlugins: [addFooHeadersPlugin],
  *     // Optional. A function that assumes a role with web identity and returns a promise fulfilled with credentials for
  *     // the assumed role.
  *     roleAssumerWithWebIdentity,
@@ -42,10 +37,12 @@ export interface FromWebTokenInit extends _FromWebTokenInit {
  *   }),
  * });
  * ```
+ *
+ * @public
  */
-export const fromWebToken = (init: FromWebTokenInit): CredentialProvider =>
-  _fromWebToken({
-    ...init,
-    roleAssumerWithWebIdentity:
-      init.roleAssumerWithWebIdentity ?? getDefaultRoleAssumerWithWebIdentity(init.clientConfig),
-  });
+export const fromWebToken = (init: FromWebTokenInit): RuntimeConfigAwsCredentialIdentityProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromWebToken: _fromWebToken } = await import("@aws-sdk/credential-provider-web-identity");
+    return _fromWebToken({ ...init })(args);
+  };
+};

@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDataSharesForConsumerMessage, DescribeDataSharesForConsumerResult } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeDataSharesForConsumerCommand,
-  serializeAws_queryDescribeDataSharesForConsumerCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDataSharesForConsumerMessage, DescribeDataSharesForConsumerResult } from "../models/models_0";
+import { DescribeDataSharesForConsumer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDataSharesForConsumerCommand}.
+ */
 export interface DescribeDataSharesForConsumerCommandInput extends DescribeDataSharesForConsumerMessage {}
-export interface DescribeDataSharesForConsumerCommandOutput
-  extends DescribeDataSharesForConsumerResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDataSharesForConsumerCommand}.
+ */
+export interface DescribeDataSharesForConsumerCommandOutput extends DescribeDataSharesForConsumerResult, __MetadataBearer {}
 
 /**
  * <p>Returns a list of datashares where the account identifier being called is a consumer account identifier.</p>
@@ -30,71 +29,73 @@ export interface DescribeDataSharesForConsumerCommandOutput
  * ```javascript
  * import { RedshiftClient, DescribeDataSharesForConsumerCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeDataSharesForConsumerCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeDataSharesForConsumerMessage
+ *   ConsumerArn: "STRING_VALUE",
+ *   Status: "ACTIVE" || "AVAILABLE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeDataSharesForConsumerCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDataSharesForConsumerResult
+ * //   DataShares: [ // DataShareList
+ * //     { // DataShare
+ * //       DataShareArn: "STRING_VALUE",
+ * //       ProducerArn: "STRING_VALUE",
+ * //       AllowPubliclyAccessibleConsumers: true || false,
+ * //       DataShareAssociations: [ // DataShareAssociationList
+ * //         { // DataShareAssociation
+ * //           ConsumerIdentifier: "STRING_VALUE",
+ * //           Status: "ACTIVE" || "PENDING_AUTHORIZATION" || "AUTHORIZED" || "DEAUTHORIZED" || "REJECTED" || "AVAILABLE",
+ * //           ConsumerRegion: "STRING_VALUE",
+ * //           CreatedDate: new Date("TIMESTAMP"),
+ * //           StatusChangeDate: new Date("TIMESTAMP"),
+ * //           ProducerAllowedWrites: true || false,
+ * //           ConsumerAcceptedWrites: true || false,
+ * //         },
+ * //       ],
+ * //       ManagedBy: "STRING_VALUE",
+ * //       DataShareType: "INTERNAL",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDataSharesForConsumerCommandInput - {@link DescribeDataSharesForConsumerCommandInput}
+ * @returns {@link DescribeDataSharesForConsumerCommandOutput}
  * @see {@link DescribeDataSharesForConsumerCommandInput} for command's `input` shape.
  * @see {@link DescribeDataSharesForConsumerCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidNamespaceFault} (client fault)
+ *  <p>The namespace isn't valid because the namespace doesn't exist. Provide a valid namespace.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDataSharesForConsumerCommand extends $Command<
-  DescribeDataSharesForConsumerCommandInput,
-  DescribeDataSharesForConsumerCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDataSharesForConsumerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDataSharesForConsumerCommandInput, DescribeDataSharesForConsumerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeDataSharesForConsumerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDataSharesForConsumerMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDataSharesForConsumerResult.filterSensitiveLog,
+export class DescribeDataSharesForConsumerCommand extends command<DescribeDataSharesForConsumerCommandInput, DescribeDataSharesForConsumerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDataSharesForConsumer",
+  DescribeDataSharesForConsumer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDataSharesForConsumerMessage;
+      output: DescribeDataSharesForConsumerResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDataSharesForConsumerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeDataSharesForConsumerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDataSharesForConsumerCommandOutput> {
-    return deserializeAws_queryDescribeDataSharesForConsumerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDataSharesForConsumerCommandInput;
+      output: DescribeDataSharesForConsumerCommandOutput;
+    };
+  };
 }

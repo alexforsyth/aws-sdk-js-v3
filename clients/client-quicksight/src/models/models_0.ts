@@ -1,9431 +1,8687 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  ActionConnectorErrorType,
+  ActionConnectorSearchFilterNameEnum,
+  ActionConnectorType,
+  AgentLifecycle,
+  AgentOwnershipFilterAttribute,
+  AgentStatus,
+  AggType,
+  AnalysisErrorType,
+  AnchorOption,
+  AuthorizationCodeGrantCredentialsSource,
+  AxisBinding,
+  CategoricalAggregationFunction,
+  CategoryFilterMatchOperator,
+  CategoryFilterSelectAllOptions,
+  ClientCredentialsSource,
+  ColumnRole,
+  CommitMode,
+  ComparisonOperator,
+  ConnectionAuthType,
+  ControlSortDirection,
+  DashboardBehavior,
+  DataLabelContent,
+  DataLabelOverlap,
+  DataLabelPosition,
+  DataPrepSimpleAggregationFunctionType,
+  DateAggregationFunction,
+  DayOfTheWeek,
+  DecalPatternType,
+  DecalStyleType,
+  DigitGroupingStyle,
+  Edition,
+  FilterNullOption,
+  FilterOperator,
+  FilterVisualScope,
+  FontDecoration,
+  FontStyle,
+  FontWeightName,
+  ImageCustomActionTrigger,
+  LayoutElementType,
+  LegendPosition,
+  NegativeValueDisplayMode,
+  NumberScale,
+  NumericEqualityMatchOperator,
+  NumericFilterSelectAllOptions,
+  NumericSeparatorSymbol,
+  PaperOrientation,
+  PaperSize,
+  ParameterValueType,
+  QBusinessInsightsStatus,
+  QueryExecutionMode,
+  ReferenceLineLabelHorizontalPosition,
+  ReferenceLineLabelVerticalPosition,
+  ReferenceLinePatternType,
+  ReferenceLineSeriesType,
+  ReferenceLineValueLabelRelativePosition,
+  RelativeDateType,
+  RelativeFontSize,
+  ResizeOption,
+  ResourceStatus,
+  SectionPageBreakStatus,
+  SelectAllValueOptions,
+  SelectedFieldOptions,
+  SheetContentType,
+  SheetControlDateTimePickerType,
+  SheetControlListType,
+  SheetControlSliderType,
+  SheetImageScalingType,
+  SheetLayoutGroupMemberType,
+  SimpleAttributeAggregationFunction,
+  SimpleNumericalAggregationFunction,
+  SortDirection,
+  SpecialValue,
+  TargetVisualOptions,
+  TimeGranularity,
+  TopicTimeGranularity,
+  URLTargetConfiguration,
+  ValueWhenUnsetOption,
+  Visibility,
+  VisualCustomActionTrigger,
+  VisualHighlightTrigger,
+  WidgetStatus,
+} from "./enums";
 
 /**
- * <p>You don't have access to this item. The provided credentials couldn't be
- * 			validated. You might not be authorized to carry out the request. Make sure that your
- * 			account is authorized to use the Amazon QuickSight service, that your policies have the
- * 			correct permissions, and that you are using the correct access keys.</p>
+ * <p>The access control settings for a knowledge base. Use this structure to enable or disable document-level access control lists (ACLs) that filter query results based on the permissions from the source data connector.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  Message?: string;
+export interface AccessControlConfiguration {
   /**
-   * <p>The Amazon Web Services request ID for this request.</p>
+   * <p>Specifies whether ACLs are enabled for the knowledge base.</p>
+   *          <p>This setting works together with the data source connector's ACL crawling. To enforce document-level access control end to end, set <code>isACLEnabled</code> to <code>true</code> and enable ACL crawling on the connector. For example, for an Amazon S3 data source, set <code>accessControlConfiguration.crawlAcl</code> to <code>true</code> in the connector template. For more information, see <code>KbTemplateConfiguration</code>. Enabling only one of the two settings does not produce a fully ACL-enforced knowledge base.</p>
+   * @public
    */
-  RequestId?: string;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
+  isACLEnabled?: boolean | undefined;
 }
 
 /**
- * <p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a Amazon QuickSight namespace in a specific Amazon Web Services Region.</p>
+ * <p>The Quick Sight customizations associated with your Amazon Web Services account or a Quick Sight namespace in a specific Amazon Web Services Region.</p>
+ * @public
  */
 export interface AccountCustomization {
   /**
-   * <p>The default theme for this Amazon QuickSight subscription.</p>
+   * <p>The default theme for this Quick Sight subscription.</p>
+   * @public
    */
-  DefaultTheme?: string;
-}
+  DefaultTheme?: string | undefined;
 
-export namespace AccountCustomization {
   /**
-   * @internal
+   * <p>The default email customization template.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AccountCustomization): any => ({
-    ...obj,
-  });
-}
-
-export enum Edition {
-  ENTERPRISE = "ENTERPRISE",
-  STANDARD = "STANDARD",
+  DefaultEmailCustomizationTemplate?: string | undefined;
 }
 
 /**
- * <p>The Amazon QuickSight settings associated with your Amazon Web Services account.</p>
+ * <p>A structure that contains the following account information elements:
+ *           </p>
+ *          <ul>
+ *             <li>
+ *                <p>Your Quick Sight account name.</p>
+ *             </li>
+ *             <li>
+ *                <p>The edition of Quick Sight that your account is using.</p>
+ *             </li>
+ *             <li>
+ *                <p>The notification email address that is associated with the Quick Sight account.
+ *             </p>
+ *             </li>
+ *             <li>
+ *                <p>The authentication type of the Quick Sight account.</p>
+ *             </li>
+ *             <li>
+ *                <p>The status of the Quick Sight account's subscription.</p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export interface AccountInfo {
+  /**
+   * <p>The account name that you provided for the Amazon Quick Sight subscription in your
+   *                 Amazon Web Services account. You create this name when you sign up for Quick. It's unique over all of Amazon Web Services, and it appears only when
+   *             users sign in.</p>
+   * @public
+   */
+  AccountName?: string | undefined;
+
+  /**
+   * <p>The edition of your Quick Sight account.</p>
+   * @public
+   */
+  Edition?: Edition | undefined;
+
+  /**
+   * <p>The email address that will be used for Quick Sight to send notifications regarding your Amazon Web Services account or Quick Sight subscription.</p>
+   * @public
+   */
+  NotificationEmail?: string | undefined;
+
+  /**
+   * <p>The way that your Amazon Quick Sight account is authenticated.</p>
+   * @public
+   */
+  AuthenticationType?: string | undefined;
+
+  /**
+   * <p>The status of your account subscription.</p>
+   * @public
+   */
+  AccountSubscriptionStatus?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>
+   * @public
+   */
+  IAMIdentityCenterInstanceArn?: string | undefined;
+}
+
+/**
+ * <p>The Quick Sight settings associated with your Amazon Web Services account.</p>
+ * @public
  */
 export interface AccountSettings {
   /**
-   * <p>The "account name" you provided for the Amazon QuickSight subscription in your Amazon Web Services account.
-   *             You create this name when you sign up for Amazon QuickSight. It is unique in all of Amazon Web Services and
+   * <p>The "account name" you provided for the Quick Sight subscription in your Amazon Web Services account.
+   *             You create this name when you sign up for Quick Sight. It is unique in all of Amazon Web Services and
    *             it appears only when users sign in.</p>
+   * @public
    */
-  AccountName?: string;
+  AccountName?: string | undefined;
 
   /**
-   * <p>The edition of Amazon QuickSight that you're currently subscribed to:
+   * <p>The edition of Quick Sight that you're currently subscribed to:
    *         Enterprise edition or Standard edition.</p>
+   * @public
    */
-  Edition?: Edition | string;
+  Edition?: Edition | undefined;
 
   /**
-   * <p>The default Amazon QuickSight namespace for your Amazon Web Services account. </p>
+   * <p>The default Quick Sight namespace for your Amazon Web Services account. </p>
+   * @public
    */
-  DefaultNamespace?: string;
+  DefaultNamespace?: string | undefined;
 
   /**
-   * <p>The main notification email for your Amazon QuickSight subscription.</p>
+   * <p>The main notification email for your Quick Sight subscription.</p>
+   * @public
    */
-  NotificationEmail?: string;
-}
-
-export namespace AccountSettings {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccountSettings): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The active Identity and Access Management (IAM) policy assignment.</p>
- */
-export interface ActiveIAMPolicyAssignment {
-  /**
-   * <p>A name for the IAMpolicy assignment.</p>
-   */
-  AssignmentName?: string;
+  NotificationEmail?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * <p>A Boolean value that indicates whether public sharing is turned on for an Quick account. For more information about turning on public sharing, see <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html">UpdatePublicSharingSettings</a>.</p>
+   * @public
    */
-  PolicyArn?: string;
-}
+  PublicSharingEnabled?: boolean | undefined;
 
-export namespace ActiveIAMPolicyAssignment {
   /**
-   * @internal
+   * <p>A boolean value that determines whether or not an Quick Sight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubsctiption</code> request. A <code>False</code> value will allow the ccount to be deleted. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ActiveIAMPolicyAssignment): any => ({
-    ...obj,
-  });
-}
-
-export enum DashboardBehavior {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
+  TerminationProtectionEnabled?: boolean | undefined;
 }
 
 /**
- * <p>Ad hoc (one-time) filtering option.</p>
+ * <p>Read-only authentication metadata for API key-based connections, containing non-sensitive configuration details.</p>
+ * @public
  */
-export interface AdHocFilteringOption {
+export interface ReadAPIKeyConnectionMetadata {
   /**
-   * <p>Availability status.</p>
+   * <p>The base endpoint URL for API key authentication.</p>
+   * @public
    */
-  AvailabilityStatus?: DashboardBehavior | string;
-}
+  BaseEndpoint: string | undefined;
 
-export namespace AdHocFilteringOption {
   /**
-   * @internal
+   * <p>The email address associated with the API key authentication.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AdHocFilteringOption): any => ({
-    ...obj,
-  });
+  Email?: string | undefined;
 }
 
 /**
- * <p>The parameters for OpenSearch.</p>
+ * <p>Read-only configuration details for OAuth2 authorization code grant flow, including endpoints and client information.</p>
+ * @public
  */
-export interface AmazonElasticsearchParameters {
+export interface ReadAuthorizationCodeGrantDetails {
   /**
-   * <p>The OpenSearch domain.</p>
+   * <p>The client identifier for the OAuth2 authorization code grant flow.</p>
+   * @public
    */
-  Domain: string | undefined;
-}
+  ClientId: string | undefined;
 
-export namespace AmazonElasticsearchParameters {
   /**
-   * @internal
+   * <p>The authorization server endpoint used to obtain access tokens via the authorization code grant flow.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AmazonElasticsearchParameters): any => ({
-    ...obj,
-  });
-}
+  TokenEndpoint: string | undefined;
 
-export interface AmazonOpenSearchParameters {
-  Domain: string | undefined;
-}
-
-export namespace AmazonOpenSearchParameters {
   /**
-   * @internal
+   * <p>The authorization server endpoint used to obtain authorization codes from the resource owner.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AmazonOpenSearchParameters): any => ({
-    ...obj,
-  });
-}
-
-export enum AnalysisErrorType {
-  ACCESS_DENIED = "ACCESS_DENIED",
-  COLUMN_GEOGRAPHIC_ROLE_MISMATCH = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-  COLUMN_REPLACEMENT_MISSING = "COLUMN_REPLACEMENT_MISSING",
-  COLUMN_TYPE_MISMATCH = "COLUMN_TYPE_MISMATCH",
-  DATA_SET_NOT_FOUND = "DATA_SET_NOT_FOUND",
-  INTERNAL_FAILURE = "INTERNAL_FAILURE",
-  PARAMETER_NOT_FOUND = "PARAMETER_NOT_FOUND",
-  PARAMETER_TYPE_INVALID = "PARAMETER_TYPE_INVALID",
-  PARAMETER_VALUE_INCOMPATIBLE = "PARAMETER_VALUE_INCOMPATIBLE",
-  SOURCE_NOT_FOUND = "SOURCE_NOT_FOUND",
+  AuthorizationEndpoint: string | undefined;
 }
 
 /**
- * <p>Analysis error.</p>
+ * <p>Read-only credentials details for OAuth2 authorization code grant flow, containing non-sensitive configuration information.</p>
+ * @public
  */
-export interface AnalysisError {
+export type ReadAuthorizationCodeGrantCredentialsDetails =
+  | ReadAuthorizationCodeGrantCredentialsDetails.ReadAuthorizationCodeGrantDetailsMember
+  | ReadAuthorizationCodeGrantCredentialsDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReadAuthorizationCodeGrantCredentialsDetails {
   /**
-   * <p>The type of the analysis error.</p>
+   * <p>The read-only authorization code grant configuration details.</p>
+   * @public
    */
-  Type?: AnalysisErrorType | string;
+  export interface ReadAuthorizationCodeGrantDetailsMember {
+    ReadAuthorizationCodeGrantDetails: ReadAuthorizationCodeGrantDetails;
+    $unknown?: never;
+  }
 
   /**
-   * <p>The message associated with the analysis error.</p>
+   * @public
    */
-  Message?: string;
-}
+  export interface $UnknownMember {
+    ReadAuthorizationCodeGrantDetails?: never;
+    $unknown: [string, any];
+  }
 
-export namespace AnalysisError {
   /**
-   * @internal
+   * @deprecated unused in schema-serde mode.
+   *
    */
-  export const filterSensitiveLog = (obj: AnalysisError): any => ({
-    ...obj,
-  });
+  export interface Visitor<T> {
+    ReadAuthorizationCodeGrantDetails: (value: ReadAuthorizationCodeGrantDetails) => T;
+    _: (name: string, value: any) => T;
+  }
 }
 
 /**
- * <p>A <i>sheet</i>, which is an object that contains a set of visuals that
- *             are viewed together on one page in Amazon QuickSight. Every analysis and dashboard
- *             contains at least one sheet. Each sheet contains at least one visualization widget, for
- *             example a chart, pivot table, or narrative insight. Sheets can be associated with other
- *             components, such as controls, filters, and so on.</p>
+ * <p>Read-only metadata for OAuth2 authorization code grant authentication configuration.</p>
+ * @public
  */
-export interface Sheet {
+export interface ReadAuthorizationCodeGrantMetadata {
   /**
-   * <p>The unique identifier associated with a sheet.</p>
+   * <p>The base endpoint URL for the OAuth2 authorization code grant flow.</p>
+   * @public
    */
-  SheetId?: string;
+  BaseEndpoint: string | undefined;
 
   /**
-   * <p>The name of a sheet. This name is displayed on the sheet's tab in the Amazon QuickSight
-   *             console.</p>
+   * <p>The redirect URL where the authorization server will send the user after authorization.</p>
+   * @public
    */
-  Name?: string;
-}
+  RedirectUrl: string | undefined;
 
-export namespace Sheet {
   /**
-   * @internal
+   * <p>The read-only credentials details for the authorization code grant flow.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Sheet): any => ({
-    ...obj,
-  });
-}
+  ReadAuthorizationCodeGrantCredentialsDetails?: ReadAuthorizationCodeGrantCredentialsDetails | undefined;
 
-export enum ResourceStatus {
-  CREATION_FAILED = "CREATION_FAILED",
-  CREATION_IN_PROGRESS = "CREATION_IN_PROGRESS",
-  CREATION_SUCCESSFUL = "CREATION_SUCCESSFUL",
-  DELETED = "DELETED",
-  UPDATE_FAILED = "UPDATE_FAILED",
-  UPDATE_IN_PROGRESS = "UPDATE_IN_PROGRESS",
-  UPDATE_SUCCESSFUL = "UPDATE_SUCCESSFUL",
+  /**
+   * <p>The source of credentials for the authorization code grant flow.</p>
+   * @public
+   */
+  AuthorizationCodeGrantCredentialsSource?: AuthorizationCodeGrantCredentialsSource | undefined;
 }
 
 /**
- * <p>Metadata structure for an analysis in Amazon QuickSight</p>
+ * <p>Read-only metadata for basic authentication connections, containing non-sensitive configuration details.</p>
+ * @public
  */
-export interface Analysis {
+export interface ReadBasicAuthConnectionMetadata {
   /**
-   * <p>The ID of the analysis.</p>
+   * <p>The base endpoint URL for basic authentication.</p>
+   * @public
    */
-  AnalysisId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the analysis.</p>
-   */
-  Arn?: string;
+  BaseEndpoint: string | undefined;
 
   /**
-   * <p>The descriptive name of the analysis.</p>
+   * <p>The username used for basic authentication.</p>
+   * @public
    */
-  Name?: string;
-
-  /**
-   * <p>Status associated with the analysis.</p>
-   */
-  Status?: ResourceStatus | string;
-
-  /**
-   * <p>Errors associated with the analysis.</p>
-   */
-  Errors?: AnalysisError[];
-
-  /**
-   * <p>The ARNs of the datasets of the analysis.</p>
-   */
-  DataSetArns?: string[];
-
-  /**
-   * <p>The ARN of the theme of the analysis.</p>
-   */
-  ThemeArn?: string;
-
-  /**
-   * <p>The time that the analysis was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The time that the analysis was last updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>A list of the associated sheets with the unique identifier and name of each sheet.</p>
-   */
-  Sheets?: Sheet[];
-}
-
-export namespace Analysis {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Analysis): any => ({
-    ...obj,
-  });
-}
-
-export enum AnalysisFilterAttribute {
-  QUICKSIGHT_USER = "QUICKSIGHT_USER",
-}
-
-export enum FilterOperator {
-  StringEquals = "StringEquals",
+  Username: string | undefined;
 }
 
 /**
- * <p>A filter that you apply when searching for one or more analyses.</p>
+ * <p>Read-only configuration details for OAuth2 client credentials grant flow, including client ID and token endpoint.</p>
+ * @public
  */
-export interface AnalysisSearchFilter {
+export interface ReadClientCredentialsGrantDetails {
   /**
-   * <p>The comparison operator that you want to use as a filter, for example
-   *                 <code>"Operator": "StringEquals"</code>.</p>
+   * <p>The client identifier for the OAuth2 client credentials grant flow.</p>
+   * @public
    */
-  Operator?: FilterOperator | string;
+  ClientId: string | undefined;
 
   /**
-   * <p>The name of the value that you want to use as a filter, for example <code>"Name":
-   *                 "QUICKSIGHT_USER"</code>.</p>
+   * <p>The authorization server endpoint used to obtain access tokens via the client credentials grant flow.</p>
+   * @public
    */
-  Name?: AnalysisFilterAttribute | string;
-
-  /**
-   * <p>The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want
-   *             to use as a filter, for example <code>"Value"</code>. An example is
-   *                 <code>"arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
-   */
-  Value?: string;
-}
-
-export namespace AnalysisSearchFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnalysisSearchFilter): any => ({
-    ...obj,
-  });
+  TokenEndpoint: string | undefined;
 }
 
 /**
- * <p>Dataset reference.</p>
+ * <p>Read-only details for OAuth2 client credentials, containing non-sensitive configuration information.</p>
+ * @public
  */
-export interface DataSetReference {
+export type ReadClientCredentialsDetails =
+  | ReadClientCredentialsDetails.ReadClientCredentialsGrantDetailsMember
+  | ReadClientCredentialsDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReadClientCredentialsDetails {
   /**
-   * <p>Dataset placeholder.</p>
+   * <p>The read-only client credentials grant configuration details.</p>
+   * @public
    */
-  DataSetPlaceholder: string | undefined;
+  export interface ReadClientCredentialsGrantDetailsMember {
+    ReadClientCredentialsGrantDetails: ReadClientCredentialsGrantDetails;
+    $unknown?: never;
+  }
 
   /**
-   * <p>Dataset Amazon Resource Name (ARN).</p>
+   * @public
    */
-  DataSetArn: string | undefined;
-}
+  export interface $UnknownMember {
+    ReadClientCredentialsGrantDetails?: never;
+    $unknown: [string, any];
+  }
 
-export namespace DataSetReference {
   /**
-   * @internal
+   * @deprecated unused in schema-serde mode.
+   *
    */
-  export const filterSensitiveLog = (obj: DataSetReference): any => ({
-    ...obj,
-  });
+  export interface Visitor<T> {
+    ReadClientCredentialsGrantDetails: (value: ReadClientCredentialsGrantDetails) => T;
+    _: (name: string, value: any) => T;
+  }
 }
 
 /**
- * <p>The source template of an analysis.</p>
+ * <p>Read-only metadata for OAuth2 client credentials grant authentication configuration.</p>
+ * @public
  */
-export interface AnalysisSourceTemplate {
+export interface ReadClientCredentialsGrantMetadata {
   /**
-   * <p>The dataset references of the source template of an analysis.</p>
+   * <p>The base endpoint URL for the OAuth2 client credentials grant flow.</p>
+   * @public
    */
-  DataSetReferences: DataSetReference[] | undefined;
+  BaseEndpoint: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
+   * <p>The read-only client credentials configuration details.</p>
+   * @public
+   */
+  ReadClientCredentialsDetails?: ReadClientCredentialsDetails | undefined;
+
+  /**
+   * <p>The source of client credentials for the OAuth2 client credentials grant flow.</p>
+   * @public
+   */
+  ClientCredentialsSource?: ClientCredentialsSource | undefined;
+}
+
+/**
+ * <p>Read-only metadata for IAM-based connections, containing role and source ARN information.</p>
+ * @public
+ */
+export interface ReadIamConnectionMetadata {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role to assume for authentication.</p>
+   * @public
+   */
+  RoleArn: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the source resource for IAM authentication.</p>
+   * @public
+   */
+  SourceArn: string | undefined;
+}
+
+/**
+ * <p>Read-only metadata for connections that do not require authentication credentials.</p>
+ * @public
+ */
+export interface ReadNoneConnectionMetadata {
+  /**
+   * <p>The base endpoint URL for connections that do not require authentication.</p>
+   * @public
+   */
+  BaseEndpoint: string | undefined;
+}
+
+/**
+ * <p>Read-only authentication metadata union containing non-sensitive configuration details for different authentication types.</p>
+ * @public
+ */
+export type ReadAuthenticationMetadata =
+  | ReadAuthenticationMetadata.ApiKeyConnectionMetadataMember
+  | ReadAuthenticationMetadata.AuthorizationCodeGrantMetadataMember
+  | ReadAuthenticationMetadata.BasicAuthConnectionMetadataMember
+  | ReadAuthenticationMetadata.ClientCredentialsGrantMetadataMember
+  | ReadAuthenticationMetadata.IamConnectionMetadataMember
+  | ReadAuthenticationMetadata.NoneConnectionMetadataMember
+  | ReadAuthenticationMetadata.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReadAuthenticationMetadata {
+  /**
+   * <p>Read-only metadata for OAuth2 authorization code grant flow configuration.</p>
+   * @public
+   */
+  export interface AuthorizationCodeGrantMetadataMember {
+    AuthorizationCodeGrantMetadata: ReadAuthorizationCodeGrantMetadata;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Read-only metadata for OAuth2 client credentials grant flow configuration.</p>
+   * @public
+   */
+  export interface ClientCredentialsGrantMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata: ReadClientCredentialsGrantMetadata;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Read-only metadata for basic authentication configuration.</p>
+   * @public
+   */
+  export interface BasicAuthConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata: ReadBasicAuthConnectionMetadata;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Read-only metadata for API key authentication configuration.</p>
+   * @public
+   */
+  export interface ApiKeyConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata: ReadAPIKeyConnectionMetadata;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Read-only metadata for connections that do not require authentication.</p>
+   * @public
+   */
+  export interface NoneConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata: ReadNoneConnectionMetadata;
+    IamConnectionMetadata?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Read-only metadata for IAM-based authentication configuration.</p>
+   * @public
+   */
+  export interface IamConnectionMetadataMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata: ReadIamConnectionMetadata;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AuthorizationCodeGrantMetadata?: never;
+    ClientCredentialsGrantMetadata?: never;
+    BasicAuthConnectionMetadata?: never;
+    ApiKeyConnectionMetadata?: never;
+    NoneConnectionMetadata?: never;
+    IamConnectionMetadata?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AuthorizationCodeGrantMetadata: (value: ReadAuthorizationCodeGrantMetadata) => T;
+    ClientCredentialsGrantMetadata: (value: ReadClientCredentialsGrantMetadata) => T;
+    BasicAuthConnectionMetadata: (value: ReadBasicAuthConnectionMetadata) => T;
+    ApiKeyConnectionMetadata: (value: ReadAPIKeyConnectionMetadata) => T;
+    NoneConnectionMetadata: (value: ReadNoneConnectionMetadata) => T;
+    IamConnectionMetadata: (value: ReadIamConnectionMetadata) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Read-only authentication configuration containing non-sensitive authentication details for action connectors.</p>
+ * @public
+ */
+export interface ReadAuthConfig {
+  /**
+   * <p>The type of authentication being used (BASIC, API_KEY, OAUTH2_CLIENT_CREDENTIALS, or OAUTH2_AUTHORIZATION_CODE).</p>
+   * @public
+   */
+  AuthenticationType: ConnectionAuthType | undefined;
+
+  /**
+   * <p>The authentication metadata containing configuration details specific to the authentication type.</p>
+   * @public
+   */
+  AuthenticationMetadata: ReadAuthenticationMetadata | undefined;
+}
+
+/**
+ * <p>Contains error information for an action connector that is in an error state.</p>
+ * @public
+ */
+export interface ActionConnectorError {
+  /**
+   * <p>The error message describing what went wrong with the action connector.</p>
+   * @public
+   */
+  Message?: string | undefined;
+
+  /**
+   * <p>The type or category of the error.</p>
+   * @public
+   */
+  Type?: ActionConnectorErrorType | undefined;
+}
+
+/**
+ * <p>Contains detailed information about an action connector, including its configuration, status, and enabled actions.</p>
+ * @public
+ */
+export interface ActionConnector {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the action connector.</p>
+   * @public
    */
   Arn: string | undefined;
-}
 
-export namespace AnalysisSourceTemplate {
   /**
-   * @internal
+   * <p>The unique identifier of the action connector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AnalysisSourceTemplate): any => ({
-    ...obj,
-  });
-}
+  ActionConnectorId: string | undefined;
 
-/**
- * <p>The source entity of an analysis.</p>
- */
-export interface AnalysisSourceEntity {
   /**
-   * <p>The source template for the source entity of the analysis.</p>
+   * <p>The type of action connector.</p>
+   * @public
    */
-  SourceTemplate?: AnalysisSourceTemplate;
-}
-
-export namespace AnalysisSourceEntity {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnalysisSourceEntity): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The summary metadata that describes an analysis.</p>
- */
-export interface AnalysisSummary {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the analysis.</p>
-   */
-  Arn?: string;
+  Type: ActionConnectorType | undefined;
 
   /**
-   * <p>The ID of the analysis. This ID displays in the URL.</p>
-   */
-  AnalysisId?: string;
-
-  /**
-   * <p>The name of the analysis. This name is displayed in the Amazon QuickSight console.
-   *             </p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The last known status for the analysis.</p>
-   */
-  Status?: ResourceStatus | string;
-
-  /**
-   * <p>The time that the analysis was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The time that the analysis was last updated.</p>
-   */
-  LastUpdatedTime?: Date;
-}
-
-export namespace AnalysisSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnalysisSummary): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Information about the dashboard that you want to embed.</p>
- */
-export interface AnonymousUserDashboardEmbeddingConfiguration {
-  /**
-   * <p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard.</p>
-   *         <p>The Amazon Resource Name (ARN) of this dashboard must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>
-   */
-  InitialDashboardId: string | undefined;
-}
-
-export namespace AnonymousUserDashboardEmbeddingConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnonymousUserDashboardEmbeddingConfiguration): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The type of experience you want to embed. For anonymous users, you can embed an Amazon QuickSight dashboard.</p>
- */
-export interface AnonymousUserEmbeddingExperienceConfiguration {
-  /**
-   * <p>The type of embedding experience. In this case, an Amazon QuickSight dashboard.</p>
-   */
-  Dashboard?: AnonymousUserDashboardEmbeddingConfiguration;
-}
-
-export namespace AnonymousUserEmbeddingExperienceConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnonymousUserEmbeddingExperienceConfiguration): any => ({
-    ...obj,
-  });
-}
-
-export enum AssignmentStatus {
-  DISABLED = "DISABLED",
-  DRAFT = "DRAFT",
-  ENABLED = "ENABLED",
-}
-
-/**
- * <p>Parameters for Amazon Athena.</p>
- */
-export interface AthenaParameters {
-  /**
-   * <p>The workgroup that Amazon Athena uses.</p>
-   */
-  WorkGroup?: string;
-}
-
-export namespace AthenaParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AthenaParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Parameters for Amazon Aurora.</p>
- */
-export interface AuroraParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace AuroraParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuroraParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>
- */
-export interface AuroraPostgreSqlParameters {
-  /**
-   * <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>The Amazon Aurora PostgreSQL database to connect to.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace AuroraPostgreSqlParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuroraPostgreSqlParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for IoT Analytics.</p>
- */
-export interface AwsIotAnalyticsParameters {
-  /**
-   * <p>Dataset name.</p>
-   */
-  DataSetName: string | undefined;
-}
-
-export namespace AwsIotAnalyticsParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsIotAnalyticsParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The display options for tile borders for visuals.</p>
- */
-export interface BorderStyle {
-  /**
-   * <p>The option to enable display of borders for visuals.</p>
-   */
-  Show?: boolean;
-}
-
-export namespace BorderStyle {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BorderStyle): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A calculated column for a dataset.</p>
- */
-export interface CalculatedColumn {
-  /**
-   * <p>Column name.</p>
-   */
-  ColumnName: string | undefined;
-
-  /**
-   * <p>A unique ID to identify a calculated column. During a dataset update, if the column ID
-   *             of a calculated column matches that of an existing calculated column, Amazon QuickSight
-   *             preserves the existing calculated column.</p>
-   */
-  ColumnId: string | undefined;
-
-  /**
-   * <p>An expression that defines the calculated column.</p>
-   */
-  Expression: string | undefined;
-}
-
-export namespace CalculatedColumn {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CalculatedColumn): any => ({
-    ...obj,
-  });
-}
-
-export interface CancelIngestionRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the dataset used in the ingestion.</p>
-   */
-  DataSetId: string | undefined;
-
-  /**
-   * <p>An ID for the ingestion.</p>
-   */
-  IngestionId: string | undefined;
-}
-
-export namespace CancelIngestionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelIngestionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CancelIngestionResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the data ingestion.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>An ID for the ingestion.</p>
-   */
-  IngestionId?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CancelIngestionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelIngestionResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An internal failure occurred.</p>
- */
-export interface InternalFailureException extends __SmithyException, $MetadataBearer {
-  name: "InternalFailureException";
-  $fault: "server";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InternalFailureException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalFailureException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more parameters has a value that isn't valid.</p>
- */
-export interface InvalidParameterValueException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterValueException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InvalidParameterValueException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterValueException): any => ({
-    ...obj,
-  });
-}
-
-export enum ExceptionResourceType {
-  ACCOUNT_SETTINGS = "ACCOUNT_SETTINGS",
-  DATA_SET = "DATA_SET",
-  DATA_SOURCE = "DATA_SOURCE",
-  GROUP = "GROUP",
-  IAMPOLICY_ASSIGNMENT = "IAMPOLICY_ASSIGNMENT",
-  INGESTION = "INGESTION",
-  NAMESPACE = "NAMESPACE",
-  USER = "USER",
-  VPC_CONNECTION = "VPC_CONNECTION",
-}
-
-/**
- * <p>The resource specified already exists. </p>
- */
-export interface ResourceExistsException extends __SmithyException, $MetadataBearer {
-  name: "ResourceExistsException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The resource type for this request.</p>
-   */
-  ResourceType?: ExceptionResourceType | string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace ResourceExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceExistsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more resources can't be found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The resource type for this request.</p>
-   */
-  ResourceType?: ExceptionResourceType | string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Access is throttled.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-export enum ColumnDataType {
-  DATETIME = "DATETIME",
-  DECIMAL = "DECIMAL",
-  INTEGER = "INTEGER",
-  STRING = "STRING",
-}
-
-/**
- * <p>A transform operation that casts a column to a different type.</p>
- */
-export interface CastColumnTypeOperation {
-  /**
-   * <p>Column name.</p>
-   */
-  ColumnName: string | undefined;
-
-  /**
-   * <p>New column data type.</p>
-   */
-  NewColumnType: ColumnDataType | string | undefined;
-
-  /**
-   * <p>When casting a column from string to datetime type, you can supply a string in a
-   *             format supported by Amazon QuickSight to denote the source data format.</p>
-   */
-  Format?: string;
-}
-
-export namespace CastColumnTypeOperation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CastColumnTypeOperation): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Metadata that contains a description for a column.</p>
- */
-export interface ColumnDescription {
-  /**
-   * <p>The text of a description for a column.</p>
-   */
-  Text?: string;
-}
-
-export namespace ColumnDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ColumnDescription): any => ({
-    ...obj,
-  });
-}
-
-export enum GeoSpatialCountryCode {
-  US = "US",
-}
-
-/**
- * <p>Geospatial column group that denotes a hierarchy.</p>
- */
-export interface GeoSpatialColumnGroup {
-  /**
-   * <p>A display name for the hierarchy.</p>
+   * <p>The name of the action connector.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>Country code.</p>
+   * <p>The timestamp when the action connector was created.</p>
+   * @public
    */
-  CountryCode: GeoSpatialCountryCode | string | undefined;
+  CreatedTime?: Date | undefined;
 
   /**
-   * <p>Columns in this hierarchy.</p>
+   * <p>The date and time when the action connector was last updated.</p>
+   * @public
    */
-  Columns: string[] | undefined;
-}
+  LastUpdatedTime: Date | undefined;
 
-export namespace GeoSpatialColumnGroup {
   /**
-   * @internal
+   * <p>The current status of the action connector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GeoSpatialColumnGroup): any => ({
-    ...obj,
-  });
-}
+  Status?: ResourceStatus | undefined;
 
-/**
- * <p>Groupings of columns that work together in certain Amazon QuickSight features. This is
- *             a variant type structure. For this structure to be valid, only one of the attributes can
- *             be non-null.</p>
- */
-export interface ColumnGroup {
   /**
-   * <p>Geospatial column group that denotes a hierarchy.</p>
+   * <p>Error information if the action connector is in an error state.</p>
+   * @public
    */
-  GeoSpatialColumnGroup?: GeoSpatialColumnGroup;
-}
+  Error?: ActionConnectorError | undefined;
 
-export namespace ColumnGroup {
   /**
-   * @internal
+   * <p>The description of the action connector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ColumnGroup): any => ({
-    ...obj,
-  });
-}
+  Description?: string | undefined;
 
-/**
- * <p>A structure describing the name, data type, and geographic role of the columns.</p>
- */
-export interface ColumnGroupColumnSchema {
   /**
-   * <p>The name of the column group's column schema.</p>
+   * <p>The authentication configuration used to connect to the external service.</p>
+   * @public
    */
-  Name?: string;
-}
+  AuthenticationConfig?: ReadAuthConfig | undefined;
 
-export namespace ColumnGroupColumnSchema {
   /**
-   * @internal
+   * <p>The list of actions that are enabled for this connector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ColumnGroupColumnSchema): any => ({
-    ...obj,
-  });
+  EnabledActions?: string[] | undefined;
+
+  /**
+   * <p>The ARN of the VPC connection used for secure connectivity to the external service.</p>
+   * @public
+   */
+  VpcConnectionArn?: string | undefined;
 }
 
 /**
- * <p>The column group schema.</p>
+ * <p>A filter used to search for action connectors based on specific criteria.</p>
+ * @public
  */
-export interface ColumnGroupSchema {
+export interface ActionConnectorSearchFilter {
   /**
-   * <p>The name of the column group schema.</p>
+   * <p>The name of the filter attribute (e.g., ACTION_CONNECTOR_NAME, ACTION_CONNECTOR_TYPE, QUICKSIGHT_VIEWER_OR_OWNER).</p>
+   * @public
    */
-  Name?: string;
+  Name: ActionConnectorSearchFilterNameEnum | undefined;
 
   /**
-   * <p>A structure containing the list of schemas for column group columns.</p>
+   * <p>The comparison operator to use for the filter (e.g., StringEquals, StringLike).</p>
+   * @public
    */
-  ColumnGroupColumnSchemaList?: ColumnGroupColumnSchema[];
-}
-
-export namespace ColumnGroupSchema {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ColumnGroupSchema): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A rule defined to grant access on one or more restricted columns.
- *             Each dataset can have multiple rules.
- *             To create a restricted column, you add it to one or more rules.
- *             Each rule must contain at least one column and at least one user or group.
- *             To be able to see a restricted column, a user or group needs to be added
- *             to a rule for that column.</p>
- */
-export interface ColumnLevelPermissionRule {
-  /**
-   * <p>An array of Amazon Resource Names (ARNs) for Amazon QuickSight users or groups.</p>
-   */
-  Principals?: string[];
+  Operator: FilterOperator | undefined;
 
   /**
-   * <p>An array of column names.</p>
-   */
-  ColumnNames?: string[];
-}
-
-export namespace ColumnLevelPermissionRule {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ColumnLevelPermissionRule): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The column schema.</p>
- */
-export interface ColumnSchema {
-  /**
-   * <p>The name of the column schema.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The data type of the column schema.</p>
-   */
-  DataType?: string;
-
-  /**
-   * <p>The geographic role of the column schema.</p>
-   */
-  GeographicRole?: string;
-}
-
-export namespace ColumnSchema {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ColumnSchema): any => ({
-    ...obj,
-  });
-}
-
-export enum GeoSpatialDataRole {
-  CITY = "CITY",
-  COUNTRY = "COUNTRY",
-  COUNTY = "COUNTY",
-  LATITUDE = "LATITUDE",
-  LONGITUDE = "LONGITUDE",
-  POSTCODE = "POSTCODE",
-  STATE = "STATE",
-}
-
-/**
- * <p>A tag for a column in a <a>TagColumnOperation</a> structure. This is a
- *             variant type structure. For this structure to be valid, only one of the attributes can
- *             be non-null.</p>
- */
-export interface ColumnTag {
-  /**
-   * <p>A geospatial role for a column.</p>
-   */
-  ColumnGeographicRole?: GeoSpatialDataRole | string;
-
-  /**
-   * <p>A description for a column.</p>
-   */
-  ColumnDescription?: ColumnDescription;
-}
-
-export namespace ColumnTag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ColumnTag): any => ({
-    ...obj,
-  });
-}
-
-export enum ColumnTagName {
-  COLUMN_DESCRIPTION = "COLUMN_DESCRIPTION",
-  COLUMN_GEOGRAPHIC_ROLE = "COLUMN_GEOGRAPHIC_ROLE",
-}
-
-/**
- * <p>A resource is already in a state that indicates an operation is happening that must complete
- * 			before a new update can be applied.</p>
- */
-export interface ConcurrentUpdatingException extends __SmithyException, $MetadataBearer {
-  name: "ConcurrentUpdatingException";
-  $fault: "server";
-  Message?: string;
-  RequestId?: string;
-}
-
-export namespace ConcurrentUpdatingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConcurrentUpdatingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Updating or deleting a resource can cause an inconsistent state.</p>
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The key or keys of the key-value pairs for the resource tag or tags assigned to the
- *             resource.</p>
- */
-export interface Tag {
-  /**
-   * <p>Tag key.</p>
-   */
-  Key: string | undefined;
-
-  /**
-   * <p>Tag value.</p>
+   * <p>The value to compare against using the specified operator.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateAccountCustomizationRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that you want to customize Amazon QuickSight for.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The Amazon QuickSight namespace that you want to add customizations to.</p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. You can add
-   *             these to an Amazon Web Services account and a Amazon QuickSight namespace. </p>
-   *         <p>For example, you can add a default theme by setting <code>AccountCustomization</code>
-   *             to the midnight theme: <code>"AccountCustomization": { "DefaultTheme":
-   *                 "arn:aws:quicksight::aws:theme/MIDNIGHT" }</code>. Or, you can add a custom theme by
-   *             specifying <code>"AccountCustomization": { "DefaultTheme":
-   *                 "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
-   *                 }</code>. </p>
-   */
-  AccountCustomization: AccountCustomization | undefined;
-
-  /**
-   * <p>A list of the tags that you want to attach to this resource.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateAccountCustomizationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAccountCustomizationRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateAccountCustomizationResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the customization that you created for this Amazon Web Services account.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that you want to customize Amazon QuickSight for.</p>
-   */
-  AwsAccountId?: string;
-
-  /**
-   * <p>The namespace associated with the customization you're creating. </p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. </p>
-   */
-  AccountCustomization?: AccountCustomization;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateAccountCustomizationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAccountCustomizationResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>This resource is currently unavailable.</p>
+ * <p>Contains summary information about an action connector, used in list and search operations.</p>
+ * @public
  */
-export interface ResourceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ResourceUnavailableException";
-  $fault: "server";
-  Message?: string;
+export interface ActionConnectorSummary {
   /**
-   * <p>The resource type for this request.</p>
+   * <p>The Amazon Resource Name (ARN) of the action connector.</p>
+   * @public
    */
-  ResourceType?: ExceptionResourceType | string;
+  Arn: string | undefined;
 
   /**
-   * <p>The Amazon Web Services request ID for this request.</p>
+   * <p>The unique identifier of the action connector.</p>
+   * @public
    */
-  RequestId?: string;
-}
+  ActionConnectorId: string | undefined;
 
-export namespace ResourceUnavailableException {
   /**
-   * @internal
+   * <p>The type of action connector (e.g., SALESFORCE, JIRA, CUSTOM, BEDROCK).</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResourceUnavailableException): any => ({
-    ...obj,
-  });
-}
+  Type: ActionConnectorType | undefined;
 
-/**
- * <p>A date-time parameter.</p>
- */
-export interface DateTimeParameter {
   /**
-   * <p>A display name for the date-time parameter.</p>
+   * <p>The name of the action connector.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>The values for the date-time parameter.</p>
+   * <p>The date and time when the action connector was created.</p>
+   * @public
    */
-  Values: Date[] | undefined;
-}
-
-export namespace DateTimeParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DateTimeParameter): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A decimal parameter.</p>
- */
-export interface DecimalParameter {
-  /**
-   * <p>A display name for the decimal parameter.</p>
-   */
-  Name: string | undefined;
+  CreatedTime?: Date | undefined;
 
   /**
-   * <p>The values for the decimal parameter.</p>
+   * <p>The date and time when the action connector was last updated.</p>
+   * @public
    */
-  Values: number[] | undefined;
-}
+  LastUpdatedTime: Date | undefined;
 
-export namespace DecimalParameter {
   /**
-   * @internal
+   * <p>The current status of the action connector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DecimalParameter): any => ({
-    ...obj,
-  });
+  Status?: ResourceStatus | undefined;
+
+  /**
+   * <p>Error information if the action connector is in an error state.</p>
+   * @public
+   */
+  Error?: ActionConnectorError | undefined;
 }
 
 /**
- * <p>An integer parameter.</p>
+ * <p>The active Identity and Access Management (IAM) policy assignment.</p>
+ * @public
  */
-export interface IntegerParameter {
+export interface ActiveIAMPolicyAssignment {
   /**
-   * <p>The name of the integer parameter.</p>
+   * <p>A name for the IAM policy assignment.</p>
+   * @public
    */
-  Name: string | undefined;
-
-  /**
-   * <p>The values for the integer parameter.</p>
-   */
-  Values: number[] | undefined;
-}
-
-export namespace IntegerParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IntegerParameter): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A string parameter.</p>
- */
-export interface StringParameter {
-  /**
-   * <p>A display name for a string parameter.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The values of a string parameter.</p>
-   */
-  Values: string[] | undefined;
-}
-
-export namespace StringParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StringParameter): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A list of Amazon QuickSight parameters and the list's override values.</p>
- */
-export interface _Parameters {
-  /**
-   * <p>The parameters that have a data type of string.</p>
-   */
-  StringParameters?: StringParameter[];
-
-  /**
-   * <p>The parameters that have a data type of integer.</p>
-   */
-  IntegerParameters?: IntegerParameter[];
-
-  /**
-   * <p>The parameters that have a data type of decimal.</p>
-   */
-  DecimalParameters?: DecimalParameter[];
-
-  /**
-   * <p>The parameters that have a data type of date-time.</p>
-   */
-  DateTimeParameters?: DateTimeParameter[];
-}
-
-export namespace _Parameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: _Parameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Permission for the resource.</p>
- */
-export interface ResourcePermission {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
-   *             following:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
-   *             </li>
-   *             <li>
-   *                 <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
-   *             </li>
-   *             <li>
-   *                 <p>The ARN of an Amazon Web Services account root: This is an IAMARN rather than a Amazon QuickSight
-   *                     ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.
-   *                     (This is less common.) </p>
-   *             </li>
-   *          </ul>
-   */
-  Principal: string | undefined;
-
-  /**
-   * <p>The IAMaction to grant or revoke permissions on.</p>
-   */
-  Actions: string[] | undefined;
-}
-
-export namespace ResourcePermission {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourcePermission): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateAnalysisRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account where you are creating an analysis.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the analysis that you're creating. This ID displays in the URL of the
-   *             analysis.</p>
-   */
-  AnalysisId: string | undefined;
-
-  /**
-   * <p>A descriptive name for the analysis that you're creating. This name displays for the
-   *             analysis in the Amazon QuickSight console. </p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The parameter names and override values that you want to use. An analysis can have
-   *             any parameter type, and some parameters might accept multiple values. </p>
-   */
-  Parameters?: _Parameters;
-
-  /**
-   * <p>A structure that describes the principals and the resource-level permissions on an
-   *             analysis. You can use the <code>Permissions</code> structure to grant permissions by
-   *             providing a list of Identity and Access Management (IAM) action information for each
-   *             principal listed by Amazon Resource Name (ARN). </p>
-   *
-   *         <p>To specify no permissions, omit <code>Permissions</code>.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>A source entity to use for the analysis that you're creating. This metadata structure
-   *             contains details that describe a source template and one or more datasets.</p>
-   */
-  SourceEntity: AnalysisSourceEntity | undefined;
-
-  /**
-   * <p>The ARN for the theme to apply to the analysis that you're creating. To see the theme
-   *             in the Amazon QuickSight console, make sure that you have access to it.</p>
-   */
-  ThemeArn?: string;
-
-  /**
-   * <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
-   *             analysis.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateAnalysisRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAnalysisRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateAnalysisResponse {
-  /**
-   * <p>The ARN for the analysis.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the analysis.</p>
-   */
-  AnalysisId?: string;
-
-  /**
-   * <p>The status of the creation of the analysis. </p>
-   */
-  CreationStatus?: ResourceStatus | string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateAnalysisResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAnalysisResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>This error indicates that you are calling an operation on an Amazon QuickSight
- * 			subscription where the edition doesn't include support for that operation. Amazon
- * 			Amazon QuickSight currently has Standard Edition and Enterprise Edition. Not every operation and
- * 			capability is available in every edition.</p>
- */
-export interface UnsupportedUserEditionException extends __SmithyException, $MetadataBearer {
-  name: "UnsupportedUserEditionException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace UnsupportedUserEditionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnsupportedUserEditionException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A transform operation that creates calculated columns. Columns created in one such
- *             operation form a lexical closure.</p>
- */
-export interface CreateColumnsOperation {
-  /**
-   * <p>Calculated columns to create.</p>
-   */
-  Columns: CalculatedColumn[] | undefined;
-}
-
-export namespace CreateColumnsOperation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateColumnsOperation): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Export to .csv option.</p>
- */
-export interface ExportToCSVOption {
-  /**
-   * <p>Availability status.</p>
-   */
-  AvailabilityStatus?: DashboardBehavior | string;
-}
-
-export namespace ExportToCSVOption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportToCSVOption): any => ({
-    ...obj,
-  });
-}
-
-export enum DashboardUIState {
-  COLLAPSED = "COLLAPSED",
-  EXPANDED = "EXPANDED",
-}
-
-/**
- * <p>Sheet controls option.</p>
- */
-export interface SheetControlsOption {
-  /**
-   * <p>Visibility state.</p>
-   */
-  VisibilityState?: DashboardUIState | string;
-}
-
-export namespace SheetControlsOption {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SheetControlsOption): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Dashboard publish options.</p>
- */
-export interface DashboardPublishOptions {
-  /**
-   * <p>Ad hoc (one-time) filtering option.</p>
-   */
-  AdHocFilteringOption?: AdHocFilteringOption;
-
-  /**
-   * <p>Export to .csv option.</p>
-   */
-  ExportToCSVOption?: ExportToCSVOption;
-
-  /**
-   * <p>Sheet controls option.</p>
-   */
-  SheetControlsOption?: SheetControlsOption;
-}
-
-export namespace DashboardPublishOptions {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardPublishOptions): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Dashboard source template.</p>
- */
-export interface DashboardSourceTemplate {
-  /**
-   * <p>Dataset references.</p>
-   */
-  DataSetReferences: DataSetReference[] | undefined;
+  AssignmentName?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
-  Arn: string | undefined;
-}
-
-export namespace DashboardSourceTemplate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardSourceTemplate): any => ({
-    ...obj,
-  });
+  PolicyArn?: string | undefined;
 }
 
 /**
- * <p>Dashboard source entity.</p>
+ * <p>Additional notes that provide supplementary context for a column.</p>
+ * @public
  */
-export interface DashboardSourceEntity {
+export interface AdditionalNotes {
   /**
-   * <p>Source template.</p>
+   * <p>The additional notes text.</p>
+   * @public
    */
-  SourceTemplate?: DashboardSourceTemplate;
+  Text?: string | undefined;
 }
 
-export namespace DashboardSourceEntity {
+/**
+ * <p>An ad hoc (one-time) filtering option.</p>
+ * @public
+ */
+export interface AdHocFilteringOption {
   /**
-   * @internal
+   * <p>Availability status.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DashboardSourceEntity): any => ({
-    ...obj,
-  });
+  AvailabilityStatus?: DashboardBehavior | undefined;
 }
 
-export interface CreateDashboardRequest {
+/**
+ * <p>The custom prompt interface configuration that defines how an agent's prompt is configured.</p>
+ * @public
+ */
+export interface CustomPromptInterface {
   /**
-   * <p>The ID of the Amazon Web Services account where you want to create the dashboard.</p>
+   * <p>The identifier of the model profile.</p>
+   * @public
    */
-  AwsAccountId: string | undefined;
+  ModelProfileId: string | undefined;
 
   /**
-   * <p>The ID for the dashboard, also added to the IAMpolicy.</p>
+   * <p>The subscription identifier.</p>
+   * @public
    */
-  DashboardId: string | undefined;
+  SubscriptionId: string | undefined;
 
   /**
-   * <p>The display name of the dashboard.</p>
+   * <p>The Amazon Web Services account ID for the Q Business service.</p>
+   * @public
+   */
+  QbsAwsAccountId: string | undefined;
+
+  /**
+   * <p>Instructions for the desired response length.</p>
+   * @public
+   */
+  ResponseLength?: string | undefined;
+
+  /**
+   * <p>Instructions for the desired output style.</p>
+   * @public
+   */
+  OutputStyle?: string | undefined;
+
+  /**
+   * <p>Instructions that define the agent's identity and persona.</p>
+   * @public
+   */
+  Identity?: string | undefined;
+
+  /**
+   * <p>Instructions for the desired tone of responses.</p>
+   * @public
+   */
+  Tone?: string | undefined;
+
+  /**
+   * <p>Custom instructions for the agent's behavior.</p>
+   * @public
+   */
+  CustomInstructions?: string | undefined;
+
+  /**
+   * <p>A summary of the custom prompt configuration.</p>
+   * @public
+   */
+  promptSummary?: string | undefined;
+}
+
+/**
+ * <p>An agent resource in Amazon QuickSight that provides AI-powered conversational experiences.</p>
+ * @public
+ */
+export interface Agent {
+  /**
+   * <p>The Amazon Resource Names (ARNs) of the spaces attached to the agent.</p>
+   * @public
+   */
+  Spaces?: string[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Names (ARNs) of the action connectors attached to the agent.</p>
+   * @public
+   */
+  ActionConnectors?: string[] | undefined;
+
+  /**
+   * <p>A description of the agent.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The icon identifier for the agent.</p>
+   * @public
+   */
+  IconId?: string | undefined;
+
+  /**
+   * <p>The name of the agent.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>The parameters for the creation of the dashboard, which you want to use to override
-   *             the default settings. A dashboard can have any type of parameters, and some parameters
-   *             might accept multiple values. </p>
+   * <p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>
+   * @public
    */
-  Parameters?: _Parameters;
+  StarterPrompts?: string[] | undefined;
 
   /**
-   * <p>A structure that contains the permissions of the dashboard. You can use this structure
-   *             for granting permissions by providing a list of IAMaction information for each
-   *             principal ARN. </p>
-   *
-   *         <p>To specify no permissions, omit the permissions list.</p>
+   * <p>The welcome message that is displayed when a user starts a conversation with the agent.</p>
+   * @public
    */
-  Permissions?: ResourcePermission[];
+  WelcomeMessage?: string | undefined;
 
   /**
-   * <p>The entity that you are using as a source when you create the dashboard. In
-   *             <code>SourceEntity</code>, you specify the type of object you're using as source. You
-   *             can only create a dashboard from a template, so you use a <code>SourceTemplate</code>
-   *             entity. If you need to create a dashboard from an analysis, first convert the analysis
-   *             to a template by using the <a>CreateTemplate</a> API operation. For
-   *             <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source
-   *             template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any
-   *             Amazon QuickSight-supported Amazon Web Services Region. </p>
-   *         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to
-   *             list the replacement datasets for the placeholders listed in the original. The schema in
-   *             each dataset must match its placeholder. </p>
+   * <p>The Amazon Resource Name (ARN) of the agent.</p>
+   * @public
    */
-  SourceEntity: DashboardSourceEntity | undefined;
+  Arn: string | undefined;
 
   /**
-   * <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
-   *             dashboard.</p>
+   * <p>The unique identifier for the agent.</p>
+   * @public
    */
-  Tags?: Tag[];
+  AgentId: string | undefined;
 
   /**
-   * <p>A description for the first version of the dashboard being created.</p>
+   * <p>The lifecycle state of the agent. Valid values are <code>PREVIEW</code> and <code>PUBLISHED</code>.</p>
+   * @public
    */
-  VersionDescription?: string;
+  AgentLifecycle: AgentLifecycle | undefined;
 
   /**
-   * <p>Options for publishing the dashboard when you create it:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>
-   *                   <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This
-   *                     status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is
-   *                     set to <code>DISABLED</code>, Amazon QuickSight disables the left filter pane on the
-   *                     published dashboard, which can be used for ad hoc (one-time) filtering. This
-   *                     option is <code>ENABLED</code> by default. </p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This
-   *                     status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual
-   *                     option to export data to .CSV format isn't enabled when this is set to
-   *                     <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>VisibilityState</code> for <code>SheetControlsOption</code> - This
-   *                     visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>.
-   *                     This option is <code>COLLAPSED</code> by default. </p>
-   *             </li>
-   *          </ul>
+   * <p>The status of the agent.</p>
+   * @public
    */
-  DashboardPublishOptions?: DashboardPublishOptions;
+  AgentStatus: AgentStatus | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
-   *             you add a value for this field, it overrides the value that is used in the source
-   *             entity. The theme ARN must exist in the same Amazon Web Services account where you create the
-   *             dashboard.</p>
+   * <p>The date and time that the agent was created.</p>
+   * @public
    */
-  ThemeArn?: string;
-}
-
-export namespace CreateDashboardRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDashboardRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateDashboardResponse {
-  /**
-   * <p>The ARN of the dashboard.</p>
-   */
-  Arn?: string;
+  CreatedAt: Date | undefined;
 
   /**
-   * <p>The ARN of the dashboard, including the version number of the first version that is
-   *             created.</p>
+   * <p>The identity of the user who created the agent.</p>
+   * @public
    */
-  VersionArn?: string;
+  Creator: string | undefined;
 
   /**
-   * <p>The ID for the dashboard.</p>
+   * <p>The custom prompt interface configuration for the agent.</p>
+   * @public
    */
-  DashboardId?: string;
+  CustomPromptInterface?: CustomPromptInterface | undefined;
 
   /**
-   * <p>The status of the dashboard creation request.</p>
+   * <p>An error message associated with the agent, if applicable.</p>
+   * @public
    */
-  CreationStatus?: ResourceStatus | string;
+  ErrorMessage?: string | undefined;
 
   /**
-   * <p>The HTTP status of the request.</p>
+   * <p>The date and time that the agent was last updated.</p>
+   * @public
    */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateDashboardResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDashboardResponse): any => ({
-    ...obj,
-  });
+  UpdatedAt: Date | undefined;
 }
 
 /**
- * <p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>
+ * <p>A filter to apply when searching agents.</p>
+ * @public
  */
-export interface DataSetUsageConfiguration {
+export interface AgentSearchFilter {
   /**
-   * <p>An option that controls whether a child dataset of a direct query can use this dataset as a source.</p>
+   * <p>The name of the field to filter on.</p>
+   * @public
    */
-  DisableUseAsDirectQuerySource?: boolean;
+  Name?: AgentOwnershipFilterAttribute | undefined;
 
   /**
-   * <p>An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.</p>
+   * <p>The comparison operator to use for the filter.</p>
+   * @public
    */
-  DisableUseAsImportedSource?: boolean;
-}
+  Operator?: ComparisonOperator | undefined;
 
-export namespace DataSetUsageConfiguration {
   /**
-   * @internal
+   * <p>The value to filter on.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DataSetUsageConfiguration): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
- * <p>A FieldFolder element is a folder that contains fields and nested subfolders.</p>
+ * <p>A summary of an agent, including its identifier, name, and metadata.</p>
+ * @public
  */
-export interface FieldFolder {
+export interface AgentSummary {
   /**
-   * <p>The description for a field folder.</p>
+   * <p>The Amazon Resource Name (ARN) of the agent.</p>
+   * @public
    */
-  description?: string;
+  Arn: string | undefined;
 
   /**
-   * <p>A folder has a list of columns. A column can only be in one folder.</p>
+   * <p>The unique identifier for the agent.</p>
+   * @public
    */
-  columns?: string[];
-}
+  AgentId: string | undefined;
 
-export namespace FieldFolder {
   /**
-   * @internal
+   * <p>The name of the agent.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: FieldFolder): any => ({
-    ...obj,
-  });
-}
+  Name: string | undefined;
 
-export enum DataSetImportMode {
-  DIRECT_QUERY = "DIRECT_QUERY",
-  SPICE = "SPICE",
+  /**
+   * <p>A description of the agent.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The date and time that the agent was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The date and time that the agent was last updated.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+
+  /**
+   * <p>The icon identifier for the agent.</p>
+   * @public
+   */
+  IconId?: string | undefined;
 }
 
 /**
- * <p>A transform operation that filters rows based on a condition.</p>
+ * <p>The definition of an Agg function.</p>
+ * @public
  */
-export interface FilterOperation {
+export interface AggFunction {
   /**
-   * <p>An expression that must evaluate to a Boolean value. Rows for which the expression
-   *             evaluates to true are kept in the dataset.</p>
+   * <p>The aggregation of an Agg function.</p>
+   * @public
    */
-  ConditionExpression: string | undefined;
-}
+  Aggregation?: AggType | undefined;
 
-export namespace FilterOperation {
   /**
-   * @internal
+   * <p>The aggregation parameters for an Agg function.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: FilterOperation): any => ({
-    ...obj,
-  });
+  AggregationFunctionParameters?: Record<string, string> | undefined;
+
+  /**
+   * <p>The period of an Agg function.</p>
+   * @public
+   */
+  Period?: TopicTimeGranularity | undefined;
+
+  /**
+   * <p>The period field for an Agg function.</p>
+   * @public
+   */
+  PeriodField?: string | undefined;
 }
 
 /**
- * <p>A transform operation that projects columns. Operations that come after a projection
- *             can only refer to projected columns.</p>
+ * <p>An aggregation function that concatenates values from multiple rows into a single string with a specified
+ *            separator.</p>
+ * @public
  */
-export interface ProjectOperation {
+export interface DataPrepListAggregationFunction {
   /**
-   * <p>Projected columns.</p>
+   * <p>The name of the column containing values to be concatenated.</p>
+   * @public
    */
-  ProjectedColumns: string[] | undefined;
-}
+  InputColumnName?: string | undefined;
 
-export namespace ProjectOperation {
   /**
-   * @internal
+   * <p>The string used to separate values in the concatenated result.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ProjectOperation): any => ({
-    ...obj,
-  });
+  Separator: string | undefined;
+
+  /**
+   * <p>Whether to include only distinct values in the concatenated result, removing duplicates.</p>
+   * @public
+   */
+  Distinct: boolean | undefined;
 }
 
 /**
- * <p>A transform operation that renames a column.</p>
+ * <p>A simple aggregation function that performs standard statistical operations on a column.</p>
+ * @public
  */
-export interface RenameColumnOperation {
+export interface DataPrepSimpleAggregationFunction {
   /**
-   * <p>The name of the column to be renamed.</p>
+   * <p>The name of the column on which to perform the aggregation function.</p>
+   * @public
    */
-  ColumnName: string | undefined;
+  InputColumnName?: string | undefined;
 
   /**
-   * <p>The new name for the column.</p>
+   * <p>The type of aggregation function to perform, such as <code>COUNT</code>, <code>SUM</code>, <code>AVERAGE</code>,
+   *            <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>
+   * @public
+   */
+  FunctionType: DataPrepSimpleAggregationFunctionType | undefined;
+}
+
+/**
+ * <p>Defines the type of aggregation function to apply to data during data preparation, supporting simple
+ *           and list aggregations.</p>
+ * @public
+ */
+export interface DataPrepAggregationFunction {
+  /**
+   * <p>A simple aggregation function such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>,
+   *            <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>
+   * @public
+   */
+  SimpleAggregation?: DataPrepSimpleAggregationFunction | undefined;
+
+  /**
+   * <p>A list aggregation function that concatenates values from multiple rows into a single delimited string.</p>
+   * @public
+   */
+  ListAggregation?: DataPrepListAggregationFunction | undefined;
+}
+
+/**
+ * <p>Defines an aggregation function to be applied to grouped data, creating a new column with
+ *            the calculated result.</p>
+ * @public
+ */
+export interface Aggregation {
+  /**
+   * <p>The aggregation function to apply, such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>,
+   *            <code>MIN</code>, <code>MAX</code>
+   *          </p>
+   * @public
+   */
+  AggregationFunction: DataPrepAggregationFunction | undefined;
+
+  /**
+   * <p>The name for the new column that will contain the aggregated values.</p>
+   * @public
    */
   NewColumnName: string | undefined;
-}
 
-export namespace RenameColumnOperation {
   /**
-   * @internal
+   * <p>A unique identifier for the new column that will contain the aggregated values.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RenameColumnOperation): any => ({
-    ...obj,
-  });
+  NewColumnId: string | undefined;
 }
 
 /**
- * <p>A transform operation that tags a column with additional information.</p>
+ * <p>Maps a source column identifier to a target column identifier during transform operations.</p>
+ * @public
  */
-export interface TagColumnOperation {
+export interface DataSetColumnIdMapping {
   /**
-   * <p>The column that this operation acts on.</p>
+   * <p>Source column ID.</p>
+   * @public
    */
-  ColumnName: string | undefined;
+  SourceColumnId: string | undefined;
 
   /**
-   * <p>The dataset column tag, currently only used for geospatial type tagging.</p>
-   *         <note>
-   *             <p>This is not tags for the Amazon Web Services tagging feature.</p>
-   *         </note>
+   * <p>Target column ID.</p>
+   * @public
    */
-  Tags: ColumnTag[] | undefined;
-}
-
-export namespace TagColumnOperation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagColumnOperation): any => ({
-    ...obj,
-  });
+  TargetColumnId: string | undefined;
 }
 
 /**
- * <p>A transform operation that removes tags associated with a column.</p>
+ * <p>Specifies the source of data for a transform operation, including the source operation and column mappings.</p>
+ * @public
  */
-export interface UntagColumnOperation {
+export interface TransformOperationSource {
   /**
-   * <p>The column that this operation acts on.</p>
+   * <p>The identifier of the transform operation that provides input data.</p>
+   * @public
    */
-  ColumnName: string | undefined;
+  TransformOperationId: string | undefined;
 
   /**
-   * <p>The column tags to remove from this column.</p>
+   * <p>The mappings between source column identifiers and target column identifiers for this transformation.</p>
+   * @public
    */
-  TagNames: (ColumnTagName | string)[] | undefined;
-}
-
-export namespace UntagColumnOperation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagColumnOperation): any => ({
-    ...obj,
-  });
+  ColumnIdMappings?: DataSetColumnIdMapping[] | undefined;
 }
 
 /**
- * <p>A data transformation on a logical table. This is a variant type structure. For this
- *             structure to be valid, only one of the attributes can be non-null.</p>
+ * <p>A transform operation that groups rows by specified columns and applies aggregation functions
+ *            to calculate summary values.</p>
+ * @public
  */
-export type TransformOperation =
-  | TransformOperation.CastColumnTypeOperationMember
-  | TransformOperation.CreateColumnsOperationMember
-  | TransformOperation.FilterOperationMember
-  | TransformOperation.ProjectOperationMember
-  | TransformOperation.RenameColumnOperationMember
-  | TransformOperation.TagColumnOperationMember
-  | TransformOperation.UntagColumnOperationMember
-  | TransformOperation.$UnknownMember;
-
-export namespace TransformOperation {
+export interface AggregateOperation {
   /**
-   * <p>An operation that projects columns. Operations that come after a projection can only
-   *             refer to projected columns.</p>
-   */
-  export interface ProjectOperationMember {
-    ProjectOperation: ProjectOperation;
-    FilterOperation?: never;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation?: never;
-    UntagColumnOperation?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>An operation that filters rows based on some condition.</p>
-   */
-  export interface FilterOperationMember {
-    ProjectOperation?: never;
-    FilterOperation: FilterOperation;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation?: never;
-    UntagColumnOperation?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>An operation that creates calculated columns. Columns created in one such operation
-   *             form a lexical closure.</p>
-   */
-  export interface CreateColumnsOperationMember {
-    ProjectOperation?: never;
-    FilterOperation?: never;
-    CreateColumnsOperation: CreateColumnsOperation;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation?: never;
-    UntagColumnOperation?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>An operation that renames a column.</p>
-   */
-  export interface RenameColumnOperationMember {
-    ProjectOperation?: never;
-    FilterOperation?: never;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation: RenameColumnOperation;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation?: never;
-    UntagColumnOperation?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>A transform operation that casts a column to a different type.</p>
-   */
-  export interface CastColumnTypeOperationMember {
-    ProjectOperation?: never;
-    FilterOperation?: never;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation: CastColumnTypeOperation;
-    TagColumnOperation?: never;
-    UntagColumnOperation?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>An operation that tags a column with additional information.</p>
-   */
-  export interface TagColumnOperationMember {
-    ProjectOperation?: never;
-    FilterOperation?: never;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation: TagColumnOperation;
-    UntagColumnOperation?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>A transform operation that removes tags associated with a column.</p>
-   */
-  export interface UntagColumnOperationMember {
-    ProjectOperation?: never;
-    FilterOperation?: never;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation?: never;
-    UntagColumnOperation: UntagColumnOperation;
-    $unknown?: never;
-  }
-
-  export interface $UnknownMember {
-    ProjectOperation?: never;
-    FilterOperation?: never;
-    CreateColumnsOperation?: never;
-    RenameColumnOperation?: never;
-    CastColumnTypeOperation?: never;
-    TagColumnOperation?: never;
-    UntagColumnOperation?: never;
-    $unknown: [string, any];
-  }
-
-  export interface Visitor<T> {
-    ProjectOperation: (value: ProjectOperation) => T;
-    FilterOperation: (value: FilterOperation) => T;
-    CreateColumnsOperation: (value: CreateColumnsOperation) => T;
-    RenameColumnOperation: (value: RenameColumnOperation) => T;
-    CastColumnTypeOperation: (value: CastColumnTypeOperation) => T;
-    TagColumnOperation: (value: TagColumnOperation) => T;
-    UntagColumnOperation: (value: UntagColumnOperation) => T;
-    _: (name: string, value: any) => T;
-  }
-
-  export const visit = <T>(value: TransformOperation, visitor: Visitor<T>): T => {
-    if (value.ProjectOperation !== undefined) return visitor.ProjectOperation(value.ProjectOperation);
-    if (value.FilterOperation !== undefined) return visitor.FilterOperation(value.FilterOperation);
-    if (value.CreateColumnsOperation !== undefined) return visitor.CreateColumnsOperation(value.CreateColumnsOperation);
-    if (value.RenameColumnOperation !== undefined) return visitor.RenameColumnOperation(value.RenameColumnOperation);
-    if (value.CastColumnTypeOperation !== undefined)
-      return visitor.CastColumnTypeOperation(value.CastColumnTypeOperation);
-    if (value.TagColumnOperation !== undefined) return visitor.TagColumnOperation(value.TagColumnOperation);
-    if (value.UntagColumnOperation !== undefined) return visitor.UntagColumnOperation(value.UntagColumnOperation);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TransformOperation): any => {
-    if (obj.ProjectOperation !== undefined)
-      return { ProjectOperation: ProjectOperation.filterSensitiveLog(obj.ProjectOperation) };
-    if (obj.FilterOperation !== undefined)
-      return { FilterOperation: FilterOperation.filterSensitiveLog(obj.FilterOperation) };
-    if (obj.CreateColumnsOperation !== undefined)
-      return { CreateColumnsOperation: CreateColumnsOperation.filterSensitiveLog(obj.CreateColumnsOperation) };
-    if (obj.RenameColumnOperation !== undefined)
-      return { RenameColumnOperation: RenameColumnOperation.filterSensitiveLog(obj.RenameColumnOperation) };
-    if (obj.CastColumnTypeOperation !== undefined)
-      return { CastColumnTypeOperation: CastColumnTypeOperation.filterSensitiveLog(obj.CastColumnTypeOperation) };
-    if (obj.TagColumnOperation !== undefined)
-      return { TagColumnOperation: TagColumnOperation.filterSensitiveLog(obj.TagColumnOperation) };
-    if (obj.UntagColumnOperation !== undefined)
-      return { UntagColumnOperation: UntagColumnOperation.filterSensitiveLog(obj.UntagColumnOperation) };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
-}
-
-/**
- * <p>Properties associated with the columns participating in a join.</p>
- */
-export interface JoinKeyProperties {
-  /**
-   * <p>A value that indicates that a row in a table is uniquely identified by the columns in
-   *             a join key. This is used by Amazon QuickSight to optimize query performance.</p>
-   */
-  UniqueKey?: boolean;
-}
-
-export namespace JoinKeyProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JoinKeyProperties): any => ({
-    ...obj,
-  });
-}
-
-export enum JoinType {
-  INNER = "INNER",
-  LEFT = "LEFT",
-  OUTER = "OUTER",
-  RIGHT = "RIGHT",
-}
-
-/**
- * <p>The instructions associated with a join. </p>
- */
-export interface JoinInstruction {
-  /**
-   * <p>The operand on the left side of a join.</p>
-   */
-  LeftOperand: string | undefined;
-
-  /**
-   * <p>The operand on the right side of a join.</p>
-   */
-  RightOperand: string | undefined;
-
-  /**
-   * <p>Join key properties of the left operand.</p>
-   */
-  LeftJoinKeyProperties?: JoinKeyProperties;
-
-  /**
-   * <p>Join key properties of the right operand.</p>
-   */
-  RightJoinKeyProperties?: JoinKeyProperties;
-
-  /**
-   * <p>The type of join that it is.</p>
-   */
-  Type: JoinType | string | undefined;
-
-  /**
-   * <p>The join instructions provided in the <code>ON</code> clause of a join.</p>
-   */
-  OnClause: string | undefined;
-}
-
-export namespace JoinInstruction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JoinInstruction): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Information about the source of a logical table. This is a variant type structure. For
- *             this structure to be valid, only one of the attributes can be non-null.</p>
- */
-export interface LogicalTableSource {
-  /**
-   * <p>Specifies the result of a join of two logical tables.</p>
-   */
-  JoinInstruction?: JoinInstruction;
-
-  /**
-   * <p>Physical table ID.</p>
-   */
-  PhysicalTableId?: string;
-
-  /**
-   * <p>The Amazon Resource Number (ARN) of the parent dataset.</p>
-   */
-  DataSetArn?: string;
-}
-
-export namespace LogicalTableSource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LogicalTableSource): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A <i>logical table</i> is a unit that joins and that data
- *             transformations operate on. A logical table has a source, which can be either a physical
- *             table or result of a join. When a logical table points to a physical table, the logical
- *             table acts as a mutable copy of that physical table through transform operations.</p>
- */
-export interface LogicalTable {
-  /**
-   * <p>A display name for the logical table.</p>
+   * <p>Alias for this operation.</p>
+   * @public
    */
   Alias: string | undefined;
 
   /**
-   * <p>Transform operations that act on this logical table.</p>
+   * <p>The source transform operation that provides input data for the aggregation.</p>
+   * @public
    */
-  DataTransforms?: TransformOperation[];
+  Source: TransformOperationSource | undefined;
 
   /**
-   * <p>Source of this logical table.</p>
+   * <p>The list of column names to group by when performing the aggregation. Rows with the same values in
+   *            these columns will be grouped together.</p>
+   * @public
    */
-  Source: LogicalTableSource | undefined;
-}
+  GroupByColumnNames?: string[] | undefined;
 
-export namespace LogicalTable {
   /**
-   * @internal
+   * <p>The list of aggregation functions to apply to the grouped data, such as <code>SUM</code>,
+   *            <code>COUNT</code>, or <code>AVERAGE</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: LogicalTable): any => ({
-    ...obj,
-    ...(obj.DataTransforms && {
-      DataTransforms: obj.DataTransforms.map((item) => TransformOperation.filterSensitiveLog(item)),
-    }),
-  });
-}
-
-export enum InputColumnDataType {
-  BIT = "BIT",
-  BOOLEAN = "BOOLEAN",
-  DATETIME = "DATETIME",
-  DECIMAL = "DECIMAL",
-  INTEGER = "INTEGER",
-  JSON = "JSON",
-  STRING = "STRING",
+  Aggregations: Aggregation[] | undefined;
 }
 
 /**
- * <p>Metadata for a column that is used as the input of a transform operation.</p>
+ * <p>Aggregation for attributes.</p>
+ * @public
  */
-export interface InputColumn {
+export interface AttributeAggregationFunction {
   /**
-   * <p>The name of this column in the underlying data source.</p>
+   * <p>The built-in aggregation functions for attributes.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>UNIQUE_VALUE</code>: Returns the unique value for a field, aggregated by the dimension fields.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  Name: string | undefined;
+  SimpleAttributeAggregation?: SimpleAttributeAggregationFunction | undefined;
 
   /**
-   * <p>The data type of the column.</p>
+   * <p>Used by the <code>UNIQUE_VALUE</code> aggregation function. If there are multiple values for the field used by the aggregation, the value for this property will be returned instead. Defaults to '*'.</p>
+   * @public
    */
-  Type: InputColumnDataType | string | undefined;
-}
-
-export namespace InputColumn {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InputColumn): any => ({
-    ...obj,
-  });
+  ValueForMultipleValues?: string | undefined;
 }
 
 /**
- * <p>A physical table type built from the results of the custom SQL query.</p>
+ * <p>An aggregation based on the percentile of values in a dimension or measure.</p>
+ * @public
  */
-export interface CustomSql {
+export interface PercentileAggregation {
   /**
-   * <p>The Amazon Resource Name (ARN) of the data source.</p>
+   * <p>The percentile value. This value can be any numeric constant 0–100. A percentile value of 50 computes the median value of the measure.</p>
+   * @public
    */
-  DataSourceArn: string | undefined;
-
-  /**
-   * <p>A display name for the SQL query result.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The SQL query.</p>
-   */
-  SqlQuery: string | undefined;
-
-  /**
-   * <p>The column schema from the SQL query result set.</p>
-   */
-  Columns?: InputColumn[];
-}
-
-export namespace CustomSql {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomSql): any => ({
-    ...obj,
-  });
+  PercentileValue?: number | undefined;
 }
 
 /**
- * <p>A physical table type for relational data sources.</p>
+ * <p>Aggregation for numerical values.</p>
+ * @public
  */
-export interface RelationalTable {
+export interface NumericalAggregationFunction {
   /**
-   * <p>The Amazon Resource Name (ARN) for the data source.</p>
+   * <p>Built-in aggregation functions for numerical values.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SUM</code>: The sum of a dimension or measure. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>AVERAGE</code>: The average of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MIN</code>: The minimum value of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MAX</code>: The maximum value of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>COUNT</code>: The count of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISTINCT_COUNT</code>: The count of distinct values in a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>VAR</code>: The variance of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>VARP</code>: The partitioned variance of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STDEV</code>: The standard deviation of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STDEVP</code>: The partitioned standard deviation of a dimension or measure.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MEDIAN</code>: The median value of a dimension or measure.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  DataSourceArn: string | undefined;
+  SimpleNumericalAggregation?: SimpleNumericalAggregationFunction | undefined;
 
   /**
-   * <p>The catalog associated with a table.</p>
+   * <p>An aggregation based on the percentile of values in a dimension or measure.</p>
+   * @public
    */
-  Catalog?: string;
-
-  /**
-   * <p>The schema name. This name applies to certain relational database engines.</p>
-   */
-  Schema?: string;
-
-  /**
-   * <p>The name of the relational table.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The column schema of the table.</p>
-   */
-  InputColumns: InputColumn[] | undefined;
-}
-
-export namespace RelationalTable {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RelationalTable): any => ({
-    ...obj,
-  });
-}
-
-export enum FileFormat {
-  CLF = "CLF",
-  CSV = "CSV",
-  ELF = "ELF",
-  JSON = "JSON",
-  TSV = "TSV",
-  XLSX = "XLSX",
-}
-
-export enum TextQualifier {
-  DOUBLE_QUOTE = "DOUBLE_QUOTE",
-  SINGLE_QUOTE = "SINGLE_QUOTE",
+  PercentileAggregation?: PercentileAggregation | undefined;
 }
 
 /**
- * <p>Information about the format for a source file or files.</p>
+ * <p>An aggregation function aggregates values from a dimension or measure.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
  */
-export interface UploadSettings {
+export interface AggregationFunction {
   /**
-   * <p>File format.</p>
+   * <p>Aggregation for numerical values.</p>
+   * @public
    */
-  Format?: FileFormat | string;
+  NumericalAggregationFunction?: NumericalAggregationFunction | undefined;
 
   /**
-   * <p>A row number to start reading data from.</p>
+   * <p>Aggregation for categorical values.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>COUNT</code>: Aggregate by the total number of values, including duplicates.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISTINCT_COUNT</code>: Aggregate by the total number of distinct values.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  StartFromRow?: number;
+  CategoricalAggregationFunction?: CategoricalAggregationFunction | undefined;
 
   /**
-   * <p>Whether the file has a header row, or the files each have a header row.</p>
+   * <p>Aggregation for date values.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>COUNT</code>: Aggregate by the total number of values, including duplicates.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISTINCT_COUNT</code>: Aggregate by the total number of distinct values.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MIN</code>: Select the smallest date value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MAX</code>: Select the largest date value.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  ContainsHeader?: boolean;
+  DateAggregationFunction?: DateAggregationFunction | undefined;
 
   /**
-   * <p>Text qualifier.</p>
+   * <p>Aggregation for attributes.</p>
+   * @public
    */
-  TextQualifier?: TextQualifier | string;
-
-  /**
-   * <p>The delimiter between values in the file.</p>
-   */
-  Delimiter?: string;
-}
-
-export namespace UploadSettings {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadSettings): any => ({
-    ...obj,
-  });
+  AttributeAggregationFunction?: AttributeAggregationFunction | undefined;
 }
 
 /**
- * <p>A physical table type for an S3 data source.</p>
+ * <p>The definition of an <code>AggregationPartitionBy</code>.</p>
+ * @public
  */
-export interface S3Source {
+export interface AggregationPartitionBy {
   /**
-   * <p>The Amazon Resource Name (ARN) for the data source.</p>
+   * <p>The field Name for an <code>AggregationPartitionBy</code>.</p>
+   * @public
    */
-  DataSourceArn: string | undefined;
+  FieldName?: string | undefined;
 
   /**
-   * <p>Information about the format for the S3 source file or files.</p>
+   * <p>The <code>TimeGranularity</code> for an <code>AggregationPartitionBy</code>.</p>
+   * @public
    */
-  UploadSettings?: UploadSettings;
-
-  /**
-   * <p>A physical table type for an S3 data source.</p>
-   *         <note>
-   *             <p>For files that aren't JSON, only <code>STRING</code> data types are supported in input columns.</p>
-   *         </note>
-   */
-  InputColumns: InputColumn[] | undefined;
-}
-
-export namespace S3Source {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Source): any => ({
-    ...obj,
-  });
+  TimeGranularity?: TimeGranularity | undefined;
 }
 
 /**
- * <p>A view of a data source that contains information about the shape of the data in the
- *             underlying source. This is a variant type structure. For this structure to be valid,
- *             only one of the attributes can be non-null.</p>
+ * <p>A column of a data set.</p>
+ * @public
  */
-export type PhysicalTable =
-  | PhysicalTable.CustomSqlMember
-  | PhysicalTable.RelationalTableMember
-  | PhysicalTable.S3SourceMember
-  | PhysicalTable.$UnknownMember;
-
-export namespace PhysicalTable {
+export interface ColumnIdentifier {
   /**
-   * <p>A physical table type for relational data sources.</p>
+   * <p>The data set that the column belongs to.</p>
+   * @public
    */
-  export interface RelationalTableMember {
-    RelationalTable: RelationalTable;
-    CustomSql?: never;
-    S3Source?: never;
-    $unknown?: never;
-  }
+  DataSetIdentifier?: string | undefined;
 
   /**
-   * <p>A physical table type built from the results of the custom SQL query.</p>
+   * <p>The topic that the column belongs to.</p>
+   * @public
    */
-  export interface CustomSqlMember {
-    RelationalTable?: never;
-    CustomSql: CustomSql;
-    S3Source?: never;
-    $unknown?: never;
-  }
+  TopicIdentifier?: string | undefined;
 
   /**
-   * <p>A physical table type for as S3 data source.</p>
-   */
-  export interface S3SourceMember {
-    RelationalTable?: never;
-    CustomSql?: never;
-    S3Source: S3Source;
-    $unknown?: never;
-  }
-
-  export interface $UnknownMember {
-    RelationalTable?: never;
-    CustomSql?: never;
-    S3Source?: never;
-    $unknown: [string, any];
-  }
-
-  export interface Visitor<T> {
-    RelationalTable: (value: RelationalTable) => T;
-    CustomSql: (value: CustomSql) => T;
-    S3Source: (value: S3Source) => T;
-    _: (name: string, value: any) => T;
-  }
-
-  export const visit = <T>(value: PhysicalTable, visitor: Visitor<T>): T => {
-    if (value.RelationalTable !== undefined) return visitor.RelationalTable(value.RelationalTable);
-    if (value.CustomSql !== undefined) return visitor.CustomSql(value.CustomSql);
-    if (value.S3Source !== undefined) return visitor.S3Source(value.S3Source);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PhysicalTable): any => {
-    if (obj.RelationalTable !== undefined)
-      return { RelationalTable: RelationalTable.filterSensitiveLog(obj.RelationalTable) };
-    if (obj.CustomSql !== undefined) return { CustomSql: CustomSql.filterSensitiveLog(obj.CustomSql) };
-    if (obj.S3Source !== undefined) return { S3Source: S3Source.filterSensitiveLog(obj.S3Source) };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
-}
-
-export enum RowLevelPermissionFormatVersion {
-  VERSION_1 = "VERSION_1",
-  VERSION_2 = "VERSION_2",
-}
-
-export enum RowLevelPermissionPolicy {
-  DENY_ACCESS = "DENY_ACCESS",
-  GRANT_ACCESS = "GRANT_ACCESS",
-}
-
-export enum Status {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-}
-
-/**
- * <p>Information about a dataset that contains permissions for row-level security (RLS).
- *             The permissions dataset maps fields to users or groups. For more information, see
- *             <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User
- *                 Guide</i>.</p>
- *             <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is
- *             not supported for new RLS datasets.</p>
- */
-export interface RowLevelPermissionDataSet {
-  /**
-   * <p>The namespace associated with the dataset that contains permissions for RLS.</p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.</p>
-   */
-  Arn: string | undefined;
-
-  /**
-   * <p>The type of permissions to use when interpreting the permissions for RLS. <code>DENY_ACCESS</code>
-   *         is included for backward compatibility only.</p>
-   */
-  PermissionPolicy: RowLevelPermissionPolicy | string | undefined;
-
-  /**
-   * <p>The user or group rules associated with the dataset that contains permissions for RLS.</p>
-   *          <p>By default, <code>FormatVersion</code> is <code>VERSION_1</code>. When <code>FormatVersion</code> is <code>VERSION_1</code>, <code>UserName</code> and <code>GroupName</code> are required. When <code>FormatVersion</code> is <code>VERSION_2</code>, <code>UserARN</code> and <code>GroupARN</code> are required, and <code>Namespace</code> must not exist.</p>
-   */
-  FormatVersion?: RowLevelPermissionFormatVersion | string;
-
-  /**
-   * <p>The status of the row-level security permission dataset. If enabled, the status is <code>ENABLED</code>. If disabled, the status is <code>DISABLED</code>.</p>
-   */
-  Status?: Status | string;
-}
-
-export namespace RowLevelPermissionDataSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RowLevelPermissionDataSet): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A set of rules associated with a tag.</p>
- */
-export interface RowLevelPermissionTagRule {
-  /**
-   * <p>The unique key for a tag.</p>
-   */
-  TagKey: string | undefined;
-
-  /**
-   * <p>The column name that a tag key is assigned to.</p>
+   * <p>The name of the column.</p>
+   * @public
    */
   ColumnName: string | undefined;
-
-  /**
-   * <p>A string that you want to use to delimit the values when you pass the values at run time. For example, you can delimit the values with a comma.</p>
-   */
-  TagMultiValueDelimiter?: string;
-
-  /**
-   * <p>A string that you want to use to filter by all the values in a column in the dataset and don’t want to list the values one by one. For example, you can use an asterisk as your match all value.</p>
-   */
-  MatchAllValue?: string;
-}
-
-export namespace RowLevelPermissionTagRule {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RowLevelPermissionTagRule): any => ({
-    ...obj,
-    ...(obj.MatchAllValue && { MatchAllValue: SENSITIVE_STRING }),
-  });
 }
 
 /**
- * <p>The configuration of tags on a dataset to set row-level security. </p>
+ * <p>The configuration options to sort aggregated values.</p>
+ * @public
  */
-export interface RowLevelPermissionTagConfiguration {
+export interface AggregationSortConfiguration {
   /**
-   * <p>The status of row-level security tags. If enabled, the status is <code>ENABLED</code>. If disabled, the status is <code>DISABLED</code>.</p>
+   * <p>The column that determines the sort order of aggregated values.</p>
+   * @public
    */
-  Status?: Status | string;
+  Column: ColumnIdentifier | undefined;
 
   /**
-   * <p>A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.</p>
-   */
-  TagRules: RowLevelPermissionTagRule[] | undefined;
-}
-
-export namespace RowLevelPermissionTagConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RowLevelPermissionTagConfiguration): any => ({
-    ...obj,
-    ...(obj.TagRules && { TagRules: obj.TagRules.map((item) => RowLevelPermissionTagRule.filterSensitiveLog(item)) }),
-  });
-}
-
-export interface CreateDataSetRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId: string | undefined;
-
-  /**
-   * <p>The display name for the dataset.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>Declares the physical tables that are available in the underlying data sources.</p>
-   */
-  PhysicalTableMap: { [key: string]: PhysicalTable } | undefined;
-
-  /**
-   * <p>Configures the combination and transformation of the data from the physical tables.</p>
-   */
-  LogicalTableMap?: { [key: string]: LogicalTable };
-
-  /**
-   * <p>Indicates whether you want to import the data into SPICE.</p>
-   */
-  ImportMode: DataSetImportMode | string | undefined;
-
-  /**
-   * <p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>
-   */
-  ColumnGroups?: ColumnGroup[];
-
-  /**
-   * <p>The folder that contains fields and nested subfolders for your dataset.</p>
-   */
-  FieldFolders?: { [key: string]: FieldFolder };
-
-  /**
-   * <p>A list of resource permissions on the dataset.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The row-level security configuration for the data that you want to create.</p>
-   */
-  RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
-
-  /**
-   * <p>The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.</p>
-   */
-  RowLevelPermissionTagConfiguration?: RowLevelPermissionTagConfiguration;
-
-  /**
-   * <p>A set of one or more definitions of a <code>
-   *                <a>ColumnLevelPermissionRule</a>
-   *             </code>.</p>
-   */
-  ColumnLevelPermissionRules?: ColumnLevelPermissionRule[];
-
-  /**
-   * <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>
-   */
-  DataSetUsageConfiguration?: DataSetUsageConfiguration;
-}
-
-export namespace CreateDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDataSetRequest): any => ({
-    ...obj,
-    ...(obj.PhysicalTableMap && {
-      PhysicalTableMap: Object.entries(obj.PhysicalTableMap).reduce(
-        (acc: any, [key, value]: [string, PhysicalTable]) => ({
-          ...acc,
-          [key]: PhysicalTable.filterSensitiveLog(value),
-        }),
-        {}
-      ),
-    }),
-    ...(obj.LogicalTableMap && {
-      LogicalTableMap: Object.entries(obj.LogicalTableMap).reduce(
-        (acc: any, [key, value]: [string, LogicalTable]) => ({
-          ...acc,
-          [key]: LogicalTable.filterSensitiveLog(value),
-        }),
-        {}
-      ),
-    }),
-    ...(obj.RowLevelPermissionTagConfiguration && {
-      RowLevelPermissionTagConfiguration: RowLevelPermissionTagConfiguration.filterSensitiveLog(
-        obj.RowLevelPermissionTagConfiguration
-      ),
-    }),
-  });
-}
-
-export interface CreateDataSetResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dataset.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId?: string;
-
-  /**
-   * <p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import
-   * 			mode is SPICE.</p>
-   */
-  IngestionArn?: string;
-
-  /**
-   * <p>The ID of the ingestion, which is triggered as a result of dataset creation if the import
-   * 			mode is SPICE.</p>
-   */
-  IngestionId?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateDataSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDataSetResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A limit is exceeded.</p>
- */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>Limit exceeded.</p>
-   */
-  ResourceType?: ExceptionResourceType | string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace LimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Jira.</p>
- */
-export interface JiraParameters {
-  /**
-   * <p>The base URL of the Jira site.</p>
-   */
-  SiteBaseUrl: string | undefined;
-}
-
-export namespace JiraParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JiraParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for MariaDB.</p>
- */
-export interface MariaDbParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace MariaDbParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MariaDbParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for MySQL.</p>
- */
-export interface MySqlParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace MySqlParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MySqlParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Oracle.</p>
- */
-export interface OracleParameters {
-  /**
-   * <p>An Oracle host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace OracleParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OracleParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for PostgreSQL.</p>
- */
-export interface PostgreSqlParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace PostgreSqlParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PostgreSqlParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Presto.</p>
- */
-export interface PrestoParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Catalog.</p>
-   */
-  Catalog: string | undefined;
-}
-
-export namespace PrestoParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PrestoParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Amazon RDS.</p>
- */
-export interface RdsParameters {
-  /**
-   * <p>Instance ID.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace RdsParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RdsParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
- *             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
- *             <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>
- */
-export interface RedshiftParameters {
-  /**
-   * <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-   */
-  Host?: string;
-
-  /**
-   * <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
-   */
-  Port?: number;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-
-  /**
-   * <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
-   *             provided.</p>
-   */
-  ClusterId?: string;
-}
-
-export namespace RedshiftParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RedshiftParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Amazon S3 manifest file location.</p>
- */
-export interface ManifestFileLocation {
-  /**
-   * <p>Amazon S3 bucket.</p>
-   */
-  Bucket: string | undefined;
-
-  /**
-   * <p>Amazon S3 key that identifies an object.</p>
-   */
-  Key: string | undefined;
-}
-
-export namespace ManifestFileLocation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ManifestFileLocation): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for S3.</p>
- */
-export interface S3Parameters {
-  /**
-   * <p>Location of the Amazon S3 manifest file. This is NULL if the manifest file was
-   *             uploaded into Amazon QuickSight.</p>
-   */
-  ManifestFileLocation: ManifestFileLocation | undefined;
-}
-
-export namespace S3Parameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Parameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for ServiceNow.</p>
- */
-export interface ServiceNowParameters {
-  /**
-   * <p>URL of the base site.</p>
-   */
-  SiteBaseUrl: string | undefined;
-}
-
-export namespace ServiceNowParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceNowParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Snowflake.</p>
- */
-export interface SnowflakeParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-
-  /**
-   * <p>Warehouse.</p>
-   */
-  Warehouse: string | undefined;
-}
-
-export namespace SnowflakeParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnowflakeParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Spark.</p>
- */
-export interface SparkParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-}
-
-export namespace SparkParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SparkParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for SQL Server.</p>
- */
-export interface SqlServerParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace SqlServerParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SqlServerParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Teradata.</p>
- */
-export interface TeradataParameters {
-  /**
-   * <p>Host.</p>
-   */
-  Host: string | undefined;
-
-  /**
-   * <p>Port.</p>
-   */
-  Port: number | undefined;
-
-  /**
-   * <p>Database.</p>
-   */
-  Database: string | undefined;
-}
-
-export namespace TeradataParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TeradataParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters for Twitter.</p>
- */
-export interface TwitterParameters {
-  /**
-   * <p>Twitter query string.</p>
-   */
-  Query: string | undefined;
-
-  /**
-   * <p>Maximum number of rows to query Twitter.</p>
-   */
-  MaxRows: number | undefined;
-}
-
-export namespace TwitterParameters {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TwitterParameters): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
- *             This is a variant type structure. For this structure to be valid, only one of the
- *             attributes can be non-null.</p>
- */
-export type DataSourceParameters =
-  | DataSourceParameters.AmazonElasticsearchParametersMember
-  | DataSourceParameters.AmazonOpenSearchParametersMember
-  | DataSourceParameters.AthenaParametersMember
-  | DataSourceParameters.AuroraParametersMember
-  | DataSourceParameters.AuroraPostgreSqlParametersMember
-  | DataSourceParameters.AwsIotAnalyticsParametersMember
-  | DataSourceParameters.JiraParametersMember
-  | DataSourceParameters.MariaDbParametersMember
-  | DataSourceParameters.MySqlParametersMember
-  | DataSourceParameters.OracleParametersMember
-  | DataSourceParameters.PostgreSqlParametersMember
-  | DataSourceParameters.PrestoParametersMember
-  | DataSourceParameters.RdsParametersMember
-  | DataSourceParameters.RedshiftParametersMember
-  | DataSourceParameters.S3ParametersMember
-  | DataSourceParameters.ServiceNowParametersMember
-  | DataSourceParameters.SnowflakeParametersMember
-  | DataSourceParameters.SparkParametersMember
-  | DataSourceParameters.SqlServerParametersMember
-  | DataSourceParameters.TeradataParametersMember
-  | DataSourceParameters.TwitterParametersMember
-  | DataSourceParameters.$UnknownMember;
-
-export namespace DataSourceParameters {
-  /**
-   * <p>The parameters for OpenSearch.</p>
-   */
-  export interface AmazonElasticsearchParametersMember {
-    AmazonElasticsearchParameters: AmazonElasticsearchParameters;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Amazon Athena.</p>
-   */
-  export interface AthenaParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters: AthenaParameters;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Amazon Aurora MySQL.</p>
-   */
-  export interface AuroraParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters: AuroraParameters;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Amazon Aurora.</p>
-   */
-  export interface AuroraPostgreSqlParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters: AuroraPostgreSqlParameters;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for IoT Analytics.</p>
-   */
-  export interface AwsIotAnalyticsParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters: AwsIotAnalyticsParameters;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Jira.</p>
-   */
-  export interface JiraParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters: JiraParameters;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for MariaDB.</p>
-   */
-  export interface MariaDbParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters: MariaDbParameters;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for MySQL.</p>
-   */
-  export interface MySqlParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters: MySqlParameters;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Oracle.</p>
-   */
-  export interface OracleParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters: OracleParameters;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for PostgreSQL.</p>
-   */
-  export interface PostgreSqlParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters: PostgreSqlParameters;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Presto.</p>
-   */
-  export interface PrestoParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters: PrestoParameters;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Amazon RDS.</p>
-   */
-  export interface RdsParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters: RdsParameters;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Amazon Redshift.</p>
-   */
-  export interface RedshiftParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters: RedshiftParameters;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for S3.</p>
-   */
-  export interface S3ParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters: S3Parameters;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for ServiceNow.</p>
-   */
-  export interface ServiceNowParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters: ServiceNowParameters;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Snowflake.</p>
-   */
-  export interface SnowflakeParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters: SnowflakeParameters;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Spark.</p>
-   */
-  export interface SparkParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters: SparkParameters;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for SQL Server.</p>
-   */
-  export interface SqlServerParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters: SqlServerParameters;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Teradata.</p>
-   */
-  export interface TeradataParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters: TeradataParameters;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>The parameters for Twitter.</p>
-   */
-  export interface TwitterParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters: TwitterParameters;
-    AmazonOpenSearchParameters?: never;
-    $unknown?: never;
-  }
-
-  export interface AmazonOpenSearchParametersMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters: AmazonOpenSearchParameters;
-    $unknown?: never;
-  }
-
-  export interface $UnknownMember {
-    AmazonElasticsearchParameters?: never;
-    AthenaParameters?: never;
-    AuroraParameters?: never;
-    AuroraPostgreSqlParameters?: never;
-    AwsIotAnalyticsParameters?: never;
-    JiraParameters?: never;
-    MariaDbParameters?: never;
-    MySqlParameters?: never;
-    OracleParameters?: never;
-    PostgreSqlParameters?: never;
-    PrestoParameters?: never;
-    RdsParameters?: never;
-    RedshiftParameters?: never;
-    S3Parameters?: never;
-    ServiceNowParameters?: never;
-    SnowflakeParameters?: never;
-    SparkParameters?: never;
-    SqlServerParameters?: never;
-    TeradataParameters?: never;
-    TwitterParameters?: never;
-    AmazonOpenSearchParameters?: never;
-    $unknown: [string, any];
-  }
-
-  export interface Visitor<T> {
-    AmazonElasticsearchParameters: (value: AmazonElasticsearchParameters) => T;
-    AthenaParameters: (value: AthenaParameters) => T;
-    AuroraParameters: (value: AuroraParameters) => T;
-    AuroraPostgreSqlParameters: (value: AuroraPostgreSqlParameters) => T;
-    AwsIotAnalyticsParameters: (value: AwsIotAnalyticsParameters) => T;
-    JiraParameters: (value: JiraParameters) => T;
-    MariaDbParameters: (value: MariaDbParameters) => T;
-    MySqlParameters: (value: MySqlParameters) => T;
-    OracleParameters: (value: OracleParameters) => T;
-    PostgreSqlParameters: (value: PostgreSqlParameters) => T;
-    PrestoParameters: (value: PrestoParameters) => T;
-    RdsParameters: (value: RdsParameters) => T;
-    RedshiftParameters: (value: RedshiftParameters) => T;
-    S3Parameters: (value: S3Parameters) => T;
-    ServiceNowParameters: (value: ServiceNowParameters) => T;
-    SnowflakeParameters: (value: SnowflakeParameters) => T;
-    SparkParameters: (value: SparkParameters) => T;
-    SqlServerParameters: (value: SqlServerParameters) => T;
-    TeradataParameters: (value: TeradataParameters) => T;
-    TwitterParameters: (value: TwitterParameters) => T;
-    AmazonOpenSearchParameters: (value: AmazonOpenSearchParameters) => T;
-    _: (name: string, value: any) => T;
-  }
-
-  export const visit = <T>(value: DataSourceParameters, visitor: Visitor<T>): T => {
-    if (value.AmazonElasticsearchParameters !== undefined)
-      return visitor.AmazonElasticsearchParameters(value.AmazonElasticsearchParameters);
-    if (value.AthenaParameters !== undefined) return visitor.AthenaParameters(value.AthenaParameters);
-    if (value.AuroraParameters !== undefined) return visitor.AuroraParameters(value.AuroraParameters);
-    if (value.AuroraPostgreSqlParameters !== undefined)
-      return visitor.AuroraPostgreSqlParameters(value.AuroraPostgreSqlParameters);
-    if (value.AwsIotAnalyticsParameters !== undefined)
-      return visitor.AwsIotAnalyticsParameters(value.AwsIotAnalyticsParameters);
-    if (value.JiraParameters !== undefined) return visitor.JiraParameters(value.JiraParameters);
-    if (value.MariaDbParameters !== undefined) return visitor.MariaDbParameters(value.MariaDbParameters);
-    if (value.MySqlParameters !== undefined) return visitor.MySqlParameters(value.MySqlParameters);
-    if (value.OracleParameters !== undefined) return visitor.OracleParameters(value.OracleParameters);
-    if (value.PostgreSqlParameters !== undefined) return visitor.PostgreSqlParameters(value.PostgreSqlParameters);
-    if (value.PrestoParameters !== undefined) return visitor.PrestoParameters(value.PrestoParameters);
-    if (value.RdsParameters !== undefined) return visitor.RdsParameters(value.RdsParameters);
-    if (value.RedshiftParameters !== undefined) return visitor.RedshiftParameters(value.RedshiftParameters);
-    if (value.S3Parameters !== undefined) return visitor.S3Parameters(value.S3Parameters);
-    if (value.ServiceNowParameters !== undefined) return visitor.ServiceNowParameters(value.ServiceNowParameters);
-    if (value.SnowflakeParameters !== undefined) return visitor.SnowflakeParameters(value.SnowflakeParameters);
-    if (value.SparkParameters !== undefined) return visitor.SparkParameters(value.SparkParameters);
-    if (value.SqlServerParameters !== undefined) return visitor.SqlServerParameters(value.SqlServerParameters);
-    if (value.TeradataParameters !== undefined) return visitor.TeradataParameters(value.TeradataParameters);
-    if (value.TwitterParameters !== undefined) return visitor.TwitterParameters(value.TwitterParameters);
-    if (value.AmazonOpenSearchParameters !== undefined)
-      return visitor.AmazonOpenSearchParameters(value.AmazonOpenSearchParameters);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSourceParameters): any => {
-    if (obj.AmazonElasticsearchParameters !== undefined)
-      return {
-        AmazonElasticsearchParameters: AmazonElasticsearchParameters.filterSensitiveLog(
-          obj.AmazonElasticsearchParameters
-        ),
-      };
-    if (obj.AthenaParameters !== undefined)
-      return { AthenaParameters: AthenaParameters.filterSensitiveLog(obj.AthenaParameters) };
-    if (obj.AuroraParameters !== undefined)
-      return { AuroraParameters: AuroraParameters.filterSensitiveLog(obj.AuroraParameters) };
-    if (obj.AuroraPostgreSqlParameters !== undefined)
-      return {
-        AuroraPostgreSqlParameters: AuroraPostgreSqlParameters.filterSensitiveLog(obj.AuroraPostgreSqlParameters),
-      };
-    if (obj.AwsIotAnalyticsParameters !== undefined)
-      return { AwsIotAnalyticsParameters: AwsIotAnalyticsParameters.filterSensitiveLog(obj.AwsIotAnalyticsParameters) };
-    if (obj.JiraParameters !== undefined)
-      return { JiraParameters: JiraParameters.filterSensitiveLog(obj.JiraParameters) };
-    if (obj.MariaDbParameters !== undefined)
-      return { MariaDbParameters: MariaDbParameters.filterSensitiveLog(obj.MariaDbParameters) };
-    if (obj.MySqlParameters !== undefined)
-      return { MySqlParameters: MySqlParameters.filterSensitiveLog(obj.MySqlParameters) };
-    if (obj.OracleParameters !== undefined)
-      return { OracleParameters: OracleParameters.filterSensitiveLog(obj.OracleParameters) };
-    if (obj.PostgreSqlParameters !== undefined)
-      return { PostgreSqlParameters: PostgreSqlParameters.filterSensitiveLog(obj.PostgreSqlParameters) };
-    if (obj.PrestoParameters !== undefined)
-      return { PrestoParameters: PrestoParameters.filterSensitiveLog(obj.PrestoParameters) };
-    if (obj.RdsParameters !== undefined) return { RdsParameters: RdsParameters.filterSensitiveLog(obj.RdsParameters) };
-    if (obj.RedshiftParameters !== undefined)
-      return { RedshiftParameters: RedshiftParameters.filterSensitiveLog(obj.RedshiftParameters) };
-    if (obj.S3Parameters !== undefined) return { S3Parameters: S3Parameters.filterSensitiveLog(obj.S3Parameters) };
-    if (obj.ServiceNowParameters !== undefined)
-      return { ServiceNowParameters: ServiceNowParameters.filterSensitiveLog(obj.ServiceNowParameters) };
-    if (obj.SnowflakeParameters !== undefined)
-      return { SnowflakeParameters: SnowflakeParameters.filterSensitiveLog(obj.SnowflakeParameters) };
-    if (obj.SparkParameters !== undefined)
-      return { SparkParameters: SparkParameters.filterSensitiveLog(obj.SparkParameters) };
-    if (obj.SqlServerParameters !== undefined)
-      return { SqlServerParameters: SqlServerParameters.filterSensitiveLog(obj.SqlServerParameters) };
-    if (obj.TeradataParameters !== undefined)
-      return { TeradataParameters: TeradataParameters.filterSensitiveLog(obj.TeradataParameters) };
-    if (obj.TwitterParameters !== undefined)
-      return { TwitterParameters: TwitterParameters.filterSensitiveLog(obj.TwitterParameters) };
-    if (obj.AmazonOpenSearchParameters !== undefined)
-      return {
-        AmazonOpenSearchParameters: AmazonOpenSearchParameters.filterSensitiveLog(obj.AmazonOpenSearchParameters),
-      };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
-}
-
-/**
- * <p>The combination of user name and password that are used as credentials.</p>
- */
-export interface CredentialPair {
-  /**
-   * <p>User name.</p>
-   */
-  Username: string | undefined;
-
-  /**
-   * <p>Password.</p>
-   */
-  Password: string | undefined;
-
-  /**
-   * <p>A set of alternate data source parameters that you want to share for these
-   *             credentials. The credentials are applied in tandem with the data source parameters when
-   *             you copy a data source by using a create or update request. The API operation compares
-   *             the <code>DataSourceParameters</code> structure that's in the request with the
-   *             structures in the <code>AlternateDataSourceParameters</code> allow list. If the
-   *             structures are an exact match, the request is allowed to use the new data source with
-   *             the existing credentials. If the <code>AlternateDataSourceParameters</code> list is
-   *             null, the <code>DataSourceParameters</code> originally used with these
-   *                 <code>Credentials</code> is automatically allowed.</p>
-   */
-  AlternateDataSourceParameters?: DataSourceParameters[];
-}
-
-export namespace CredentialPair {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CredentialPair): any => ({
-    ...obj,
-    ...(obj.AlternateDataSourceParameters && {
-      AlternateDataSourceParameters: obj.AlternateDataSourceParameters.map((item) =>
-        DataSourceParameters.filterSensitiveLog(item)
-      ),
-    }),
-  });
-}
-
-/**
- * <p>Data source credentials. This is a variant type structure. For this structure to be
- *             valid, only one of the attributes can be non-null.</p>
- */
-export interface DataSourceCredentials {
-  /**
-   * <p>Credential pair. For more information, see <a>CredentialPair</a>.</p>
-   */
-  CredentialPair?: CredentialPair;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you
-   *             want to use. When <code>CopySourceArn</code> is not null, the credential pair from the
-   *             data source in the ARN is used as the credentials for the
-   *             <code>DataSourceCredentials</code> structure.</p>
-   */
-  CopySourceArn?: string;
-}
-
-export namespace DataSourceCredentials {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSourceCredentials): any => ({
-    ...obj,
-    ...(obj.CredentialPair && { CredentialPair: CredentialPair.filterSensitiveLog(obj.CredentialPair) }),
-  });
-}
-
-/**
- * <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
- *             underlying data source.</p>
- */
-export interface SslProperties {
-  /**
-   * <p>A Boolean option to control whether SSL should be disabled.</p>
-   */
-  DisableSsl?: boolean;
-}
-
-export namespace SslProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SslProperties): any => ({
-    ...obj,
-  });
-}
-
-export enum DataSourceType {
-  ADOBE_ANALYTICS = "ADOBE_ANALYTICS",
-  AMAZON_ELASTICSEARCH = "AMAZON_ELASTICSEARCH",
-  AMAZON_OPENSEARCH = "AMAZON_OPENSEARCH",
-  ATHENA = "ATHENA",
-  AURORA = "AURORA",
-  AURORA_POSTGRESQL = "AURORA_POSTGRESQL",
-  AWS_IOT_ANALYTICS = "AWS_IOT_ANALYTICS",
-  GITHUB = "GITHUB",
-  JIRA = "JIRA",
-  MARIADB = "MARIADB",
-  MYSQL = "MYSQL",
-  ORACLE = "ORACLE",
-  POSTGRESQL = "POSTGRESQL",
-  PRESTO = "PRESTO",
-  REDSHIFT = "REDSHIFT",
-  S3 = "S3",
-  SALESFORCE = "SALESFORCE",
-  SERVICENOW = "SERVICENOW",
-  SNOWFLAKE = "SNOWFLAKE",
-  SPARK = "SPARK",
-  SQLSERVER = "SQLSERVER",
-  TERADATA = "TERADATA",
-  TIMESTREAM = "TIMESTREAM",
-  TWITTER = "TWITTER",
-}
-
-/**
- * <p>VPC connection properties.</p>
- */
-export interface VpcConnectionProperties {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
-   */
-  VpcConnectionArn: string | undefined;
-}
-
-export namespace VpcConnectionProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VpcConnectionProperties): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateDataSourceRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>
-   */
-  DataSourceId: string | undefined;
-
-  /**
-   * <p>A display name for the data source.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The type of the data source. To return a
-   * 			list of all data sources, use <code>ListDataSources</code>.</p>
-   * 		       <p>Use <code>AMAZON_ELASTICSEARCH</code> for Amazon OpenSearch Service.</p>
-   */
-  Type: DataSourceType | string | undefined;
-
-  /**
-   * <p>The parameters that Amazon QuickSight uses to connect to your underlying source.</p>
-   */
-  DataSourceParameters?: DataSourceParameters;
-
-  /**
-   * <p>The credentials Amazon QuickSight that uses to connect to your underlying source. Currently, only
-   * 			credentials based on user name and password are supported.</p>
-   */
-  Credentials?: DataSourceCredentials;
-
-  /**
-   * <p>A list of resource permissions on the data source.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>Use this parameter only when you want Amazon QuickSight to use a VPC connection when connecting to
-   * 			your underlying source.</p>
-   */
-  VpcConnectionProperties?: VpcConnectionProperties;
-
-  /**
-   * <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying source.</p>
-   */
-  SslProperties?: SslProperties;
-
-  /**
-   * <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateDataSourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDataSourceRequest): any => ({
-    ...obj,
-    ...(obj.DataSourceParameters && {
-      DataSourceParameters: DataSourceParameters.filterSensitiveLog(obj.DataSourceParameters),
-    }),
-    ...(obj.Credentials && { Credentials: SENSITIVE_STRING }),
-  });
-}
-
-export interface CreateDataSourceResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the data source.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSourceId?: string;
-
-  /**
-   * <p>The status of creating the data source.</p>
-   */
-  CreationStatus?: ResourceStatus | string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateDataSourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDataSourceResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum FolderType {
-  SHARED = "SHARED",
-}
-
-export interface CreateFolderRequest {
-  /**
-   * <p>The AWS Account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId: string | undefined;
-
-  /**
-   * <p>The name of the folder.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of folder. By default, <code>folderType</code> is <code>SHARED</code>.</p>
-   */
-  FolderType?: FolderType | string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the parent folder.</p>
-   * 	        <p>
-   *             <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>
-   */
-  ParentFolderArn?: string;
-
-  /**
-   * <p>A structure that describes the principals and the resource-level permissions of a folder.</p>
-   * 	        <p>To specify no permissions, omit <code>Permissions</code>.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>Tags for the folder.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFolderRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateFolderResponse {
-  /**
-   * <p>The status of the newly created folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the newly created folder.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The folder ID for the newly created folder.</p>
-   */
-  FolderId?: string;
-
-  /**
-   * <p>The request ID for the newly created folder.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFolderResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum MemberType {
-  ANALYSIS = "ANALYSIS",
-  DASHBOARD = "DASHBOARD",
-  DATASET = "DATASET",
-}
-
-export interface CreateFolderMembershipRequest {
-  /**
-   * <p>The AWS Account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId: string | undefined;
-
-  /**
-   * <p>The ID of the asset (the dashboard, analysis, or dataset).</p>
-   */
-  MemberId: string | undefined;
-
-  /**
-   * <p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>.</p>
-   */
-  MemberType: MemberType | string | undefined;
-}
-
-export namespace CreateFolderMembershipRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFolderMembershipRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An asset in a folder, such as a dashboard, analysis, or dataset.</p>
- */
-export interface FolderMember {
-  /**
-   * <p>The ID of the asset.</p>
-   */
-  MemberId?: string;
-
-  /**
-   * <p>The type of the asset.</p>
-   */
-  MemberType?: MemberType | string;
-}
-
-export namespace FolderMember {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FolderMember): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateFolderMembershipResponse {
-  /**
-   * <p>The status of the folder membership. If succeeded, the status is <code>SC_OK (200)</code>.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>Information about the member in the folder.</p>
-   */
-  FolderMember?: FolderMember;
-
-  /**
-   * <p>The request ID.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateFolderMembershipResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFolderMembershipResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request object for this operation. </p>
- */
-export interface CreateGroupRequest {
-  /**
-   * <p>A name for the group that you want to create.</p>
-   */
-  GroupName: string | undefined;
-
-  /**
-   * <p>A description for the group that you want to create.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace CreateGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A <i>group</i> in Amazon QuickSight consists of a set of users. You can
- *             use groups to make it easier to manage access and security. </p>
- */
-export interface Group {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the group.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the group.</p>
-   */
-  GroupName?: string;
-
-  /**
-   * <p>The group description.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The principal ID of the group.</p>
-   */
-  PrincipalId?: string;
-}
-
-export namespace Group {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Group): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The response object for this operation.</p>
- */
-export interface CreateGroupResponse {
-  /**
-   * <p>The name of the group.</p>
-   */
-  Group?: Group;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more preconditions aren't met.</p>
- */
-export interface PreconditionNotMetException extends __SmithyException, $MetadataBearer {
-  name: "PreconditionNotMetException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace PreconditionNotMetException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PreconditionNotMetException): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateGroupMembershipRequest {
-  /**
-   * <p>The name of the user that you want to add to the group membership.</p>
-   */
-  MemberName: string | undefined;
-
-  /**
-   * <p>The name of the group that you want to add the user to.</p>
-   */
-  GroupName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace CreateGroupMembershipRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupMembershipRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A member of an Amazon QuickSight group. Currently, group members must be users. Groups
- *             can't be members of another group. .</p>
- */
-export interface GroupMember {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the group member (user).</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the group member (user).</p>
-   */
-  MemberName?: string;
-}
-
-export namespace GroupMember {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupMember): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateGroupMembershipResponse {
-  /**
-   * <p>The group member.</p>
-   */
-  GroupMember?: GroupMember;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateGroupMembershipResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGroupMembershipResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateIAMPolicyAssignmentRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account where you want to assign an IAMpolicy to Amazon QuickSight users or
-   * 			groups.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The name of the assignment, also called a rule. It must be unique within an Amazon Web Services account.</p>
-   */
-  AssignmentName: string | undefined;
-
-  /**
-   * <p>The status of the assignment. Possible values are as follows:</p>
-   * 		       <ul>
+   * <p>The sort direction of values.</p>
+   *          <ul>
    *             <li>
    *                <p>
-   *                   <code>ENABLED</code> - Anything specified in this assignment is used when creating the data
-   * 					source.</p>
+   *                   <code>ASC</code>: Sort in ascending order.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>DISABLED</code> - This assignment isn't used when creating the data source.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>DRAFT</code> - This assignment is an unfinished draft and isn't used when creating the
-   * 					data source.</p>
+   *                   <code>DESC</code>: Sort in descending order.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  AssignmentStatus: AssignmentStatus | string | undefined;
+  SortDirection: SortDirection | undefined;
 
   /**
-   * <p>The ARN for the IAMpolicy to apply to the Amazon QuickSight users and groups
-   * 			specified in this assignment.</p>
+   * <p>The function that aggregates the values in <code>Column</code>.</p>
+   * @public
    */
-  PolicyArn?: string;
-
-  /**
-   * <p>The Amazon QuickSight users, groups, or both that you want to assign the policy to.</p>
-   */
-  Identities?: { [key: string]: string[] };
-
-  /**
-   * <p>The namespace that contains the assignment.</p>
-   */
-  Namespace: string | undefined;
+  AggregationFunction?: AggregationFunction | undefined;
 }
 
-export namespace CreateIAMPolicyAssignmentRequest {
+/**
+ * <p>An empty object that represents that the <code>AllSheets</code> option is the chosen value for the <code>FilterScopeConfiguration</code> parameter. This structure applies the filter to all visuals on all sheets of an Analysis, Dashboard, or Template.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface AllSheetsFilterScopeConfiguration {}
+
+/**
+ * <p>The parameters for OpenSearch.</p>
+ * @public
+ */
+export interface AmazonElasticsearchParameters {
   /**
-   * @internal
+   * <p>The OpenSearch domain.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateIAMPolicyAssignmentRequest): any => ({
-    ...obj,
-  });
+  Domain: string | undefined;
 }
 
-export interface CreateIAMPolicyAssignmentResponse {
+/**
+ * <p>The parameters for OpenSearch.</p>
+ * @public
+ */
+export interface AmazonOpenSearchParameters {
   /**
-   * <p>The name of the assignment. This name must be unique within the Amazon Web Services account.</p>
+   * <p>The OpenSearch domain.</p>
+   * @public
    */
-  AssignmentName?: string;
+  Domain: string | undefined;
+}
+
+/**
+ * <p>The generative Q&A settings of an embedded Quick Sight console.</p>
+ * @public
+ */
+export interface DataQnAConfigurations {
+  /**
+   * <p>The generative Q&A settings of an embedded Quick Sight console.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>The data story settings of an embedded Quick Sight console.</p>
+ * @public
+ */
+export interface DataStoriesConfigurations {
+  /**
+   * <p>The data story settings of an embedded Quick Sight console.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>The executive summary settings of an embedded Quick Sight console or dashboard.</p>
+ * @public
+ */
+export interface ExecutiveSummaryConfigurations {
+  /**
+   * <p>The executive summary settings of an embedded Quick Sight console or dashboard.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>The generative BI authoring settings of an embedded Quick Sight console.</p>
+ * @public
+ */
+export interface GenerativeAuthoringConfigurations {
+  /**
+   * <p>The generative BI authoring settings of an embedded Quick Sight console.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>A collection of Amazon Q feature configurations in an embedded Quick Sight
+ *             console.</p>
+ * @public
+ */
+export interface AmazonQInQuickSightConsoleConfigurations {
+  /**
+   * <p>Adds generative Q&A capabilitiees to an embedded Quick Sight console.</p>
+   * @public
+   */
+  DataQnA?: DataQnAConfigurations | undefined;
 
   /**
-   * <p>The ID for the assignment.</p>
+   * <p>Adds the generative BI authoring experience to an embedded Quick Sight console.</p>
+   * @public
    */
-  AssignmentId?: string;
+  GenerativeAuthoring?: GenerativeAuthoringConfigurations | undefined;
 
   /**
-   * <p>The status of the assignment. Possible values are as follows:</p>
-   * 		       <ul>
+   * <p>Adds the executive summaries feature to an embedded Quick Sight console.</p>
+   * @public
+   */
+  ExecutiveSummary?: ExecutiveSummaryConfigurations | undefined;
+
+  /**
+   * <p>Adds the data stories feature to an embedded Quick Sight console.</p>
+   * @public
+   */
+  DataStories?: DataStoriesConfigurations | undefined;
+}
+
+/**
+ * <p>A collection of Amazon Q feature configurations in an embedded Quick Sight
+ *             dashboard.</p>
+ * @public
+ */
+export interface AmazonQInQuickSightDashboardConfigurations {
+  /**
+   * <p>A generated executive summary of an embedded Quick Sight dashboard.</p>
+   * @public
+   */
+  ExecutiveSummary?: ExecutiveSummaryConfigurations | undefined;
+}
+
+/**
+ * <p>An object, structure, or sub-structure of an analysis, template, or dashboard.</p>
+ * @public
+ */
+export interface Entity {
+  /**
+   * <p>The hierarchical path of the entity within the analysis, template, or dashboard definition tree.</p>
+   * @public
+   */
+  Path?: string | undefined;
+}
+
+/**
+ * <p>Analysis error.</p>
+ * @public
+ */
+export interface AnalysisError {
+  /**
+   * <p>The type of the analysis error.</p>
+   * @public
+   */
+  Type?: AnalysisErrorType | undefined;
+
+  /**
+   * <p>The message associated with the analysis error.</p>
+   * @public
+   */
+  Message?: string | undefined;
+
+  /**
+   * <p>Lists the violated entities that caused the analysis error</p>
+   * @public
+   */
+  ViolatedEntities?: Entity[] | undefined;
+}
+
+/**
+ * <p>The navigation configuration for <code>CustomActionNavigationOperation</code>.</p>
+ * @public
+ */
+export interface LocalNavigationConfiguration {
+  /**
+   * <p>The sheet that is targeted for navigation in the same analysis.</p>
+   * @public
+   */
+  TargetSheetId: string | undefined;
+}
+
+/**
+ * <p>The navigation operation that navigates between different sheets in the same analysis.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface CustomActionNavigationOperation {
+  /**
+   * <p>The configuration that chooses the navigation target.</p>
+   * @public
+   */
+  LocalNavigationConfiguration?: LocalNavigationConfiguration | undefined;
+}
+
+/**
+ * <p>The customized parameter values.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface CustomParameterValues {
+  /**
+   * <p>A list of string-type parameter values.</p>
+   * @public
+   */
+  StringValues?: string[] | undefined;
+
+  /**
+   * <p>A list of integer-type parameter values.</p>
+   * @public
+   */
+  IntegerValues?: number[] | undefined;
+
+  /**
+   * <p>A list of decimal-type parameter values.</p>
+   * @public
+   */
+  DecimalValues?: number[] | undefined;
+
+  /**
+   * <p>A list of datetime-type parameter values.</p>
+   * @public
+   */
+  DateTimeValues?: Date[] | undefined;
+}
+
+/**
+ * <p>The configuration of custom values for the destination parameter in <code>DestinationParameterValueConfiguration</code>.</p>
+ * @public
+ */
+export interface CustomValuesConfiguration {
+  /**
+   * <p>Includes the null value in custom action parameter values.</p>
+   * @public
+   */
+  IncludeNullValue?: boolean | undefined;
+
+  /**
+   * <p>The customized parameter values.</p>
+   *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+   * @public
+   */
+  CustomValues: CustomParameterValues | undefined;
+}
+
+/**
+ * <p>The configuration of destination parameter values.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface DestinationParameterValueConfiguration {
+  /**
+   * <p>The configuration of custom values for destination parameter in <code>DestinationParameterValueConfiguration</code>.</p>
+   * @public
+   */
+  CustomValuesConfiguration?: CustomValuesConfiguration | undefined;
+
+  /**
+   * <p>The configuration that selects all options.</p>
+   * @public
+   */
+  SelectAllValueOptions?: SelectAllValueOptions | undefined;
+
+  /**
+   * <p>The source parameter name of the destination parameter.</p>
+   * @public
+   */
+  SourceParameterName?: string | undefined;
+
+  /**
+   * <p>The source field ID of the destination parameter.</p>
+   * @public
+   */
+  SourceField?: string | undefined;
+
+  /**
+   * <p>A column of a data set.</p>
+   * @public
+   */
+  SourceColumn?: ColumnIdentifier | undefined;
+}
+
+/**
+ * <p>The configuration of adding parameters in action.</p>
+ * @public
+ */
+export interface SetParameterValueConfiguration {
+  /**
+   * <p>The destination parameter name of the <code>SetParameterValueConfiguration</code>.</p>
+   * @public
+   */
+  DestinationParameterName: string | undefined;
+
+  /**
+   * <p>The configuration of destination parameter values.</p>
+   *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+   * @public
+   */
+  Value: DestinationParameterValueConfiguration | undefined;
+}
+
+/**
+ * <p>The set parameter operation that sets parameters in custom action.</p>
+ * @public
+ */
+export interface CustomActionSetParametersOperation {
+  /**
+   * <p>The parameter that determines the value configuration.</p>
+   * @public
+   */
+  ParameterValueConfigurations: SetParameterValueConfiguration[] | undefined;
+}
+
+/**
+ * <p>The URL operation that opens a link to another webpage.</p>
+ * @public
+ */
+export interface CustomActionURLOperation {
+  /**
+   * <p>THe URL link of the <code>CustomActionURLOperation</code>.</p>
+   * @public
+   */
+  URLTemplate: string | undefined;
+
+  /**
+   * <p>The target of the <code>CustomActionURLOperation</code>.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
    *             <li>
    *                <p>
-   *                   <code>ENABLED</code> - Anything specified in this assignment is used when creating the data
-   * 				source.</p>
+   *                   <code>NEW_TAB</code>: Opens the target URL in a new browser tab.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>DISABLED</code> - This assignment isn't used when creating the data source.</p>
+   *                   <code>NEW_WINDOW</code>: Opens the target URL in a new browser window.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>DRAFT</code> - This assignment is an unfinished draft and isn't used when creating the
-   * 				data source.</p>
+   *                   <code>SAME_TAB</code>: Opens the target URL in the same browser tab.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  AssignmentStatus?: AssignmentStatus | string;
-
-  /**
-   * <p>The ARN for the IAMpolicy that is applied to the Amazon QuickSight users and groups specified in this assignment.</p>
-   */
-  PolicyArn?: string;
-
-  /**
-   * <p>The Amazon QuickSight users, groups, or both that the IAMpolicy is assigned to.</p>
-   */
-  Identities?: { [key: string]: string[] };
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateIAMPolicyAssignmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateIAMPolicyAssignmentResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum IngestionType {
-  FULL_REFRESH = "FULL_REFRESH",
-  INCREMENTAL_REFRESH = "INCREMENTAL_REFRESH",
-}
-
-export interface CreateIngestionRequest {
-  /**
-   * <p>The ID of the dataset used in the ingestion.</p>
-   */
-  DataSetId: string | undefined;
-
-  /**
-   * <p>An ID for the ingestion.</p>
-   */
-  IngestionId: string | undefined;
-
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The type of ingestion that you want to create.</p>
-   */
-  IngestionType?: IngestionType | string;
-}
-
-export namespace CreateIngestionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateIngestionRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum IngestionStatus {
-  CANCELLED = "CANCELLED",
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  INITIALIZED = "INITIALIZED",
-  QUEUED = "QUEUED",
-  RUNNING = "RUNNING",
-}
-
-export interface CreateIngestionResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the data ingestion.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>An ID for the ingestion.</p>
-   */
-  IngestionId?: string;
-
-  /**
-   * <p>The ingestion status.</p>
-   */
-  IngestionStatus?: IngestionStatus | string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateIngestionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateIngestionResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum IdentityStore {
-  QUICKSIGHT = "QUICKSIGHT",
-}
-
-export interface CreateNamespaceRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that you want to create the Amazon QuickSight namespace in.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The name that you want to use to describe the new namespace.</p>
-   */
-  Namespace: string | undefined;
-
-  /**
-   * <p>Specifies the type of your user identity directory. Currently, this supports users
-   *             with an identity type of <code>QUICKSIGHT</code>.</p>
-   */
-  IdentityStore: IdentityStore | string | undefined;
-
-  /**
-   * <p>The tags that you want to associate with the namespace that you're creating.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateNamespaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateNamespaceRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum NamespaceStatus {
-  CREATED = "CREATED",
-  CREATING = "CREATING",
-  DELETING = "DELETING",
-  NON_RETRYABLE_FAILURE = "NON_RETRYABLE_FAILURE",
-  RETRYABLE_FAILURE = "RETRYABLE_FAILURE",
-}
-
-export interface CreateNamespaceResponse {
-  /**
-   * <p>The ARN of the Amazon QuickSight namespace you created. </p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the new namespace that you created.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The Amazon Web Services Region; that you want to use for the free SPICE capacity for the new namespace.
-   *             This is set to the region that you run CreateNamespace in. </p>
-   */
-  CapacityRegion?: string;
-
-  /**
-   * <p>The status of the creation of the namespace. This is an asynchronous process. A status
-   *             of <code>CREATED</code> means that your namespace is ready to use. If an error occurs,
-   *             it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In
-   *             the case of a non-retryable error, refer to the error message for follow-up
-   *             tasks.</p>
-   */
-  CreationStatus?: NamespaceStatus | string;
-
-  /**
-   * <p>Specifies the type of your user identity directory. Currently, this supports users
-   *             with an identity type of <code>QUICKSIGHT</code>.</p>
-   */
-  IdentityStore?: IdentityStore | string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace CreateNamespaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateNamespaceResponse): any => ({
-    ...obj,
-  });
+  URLTarget: URLTargetConfiguration | undefined;
 }
 
 /**
- * <p>The source analysis of the template.</p>
+ * <p>The operation that is defined by the custom action.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
  */
-export interface TemplateSourceAnalysis {
+export interface ImageCustomActionOperation {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * <p>The navigation operation that navigates between different sheets in the same analysis.</p>
+   *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+   * @public
    */
-  Arn: string | undefined;
+  NavigationOperation?: CustomActionNavigationOperation | undefined;
 
   /**
-   * <p>A structure containing information about the dataset references used as placeholders
-   *             in the template.</p>
+   * <p>The URL operation that opens a link to another webpage.</p>
+   * @public
    */
-  DataSetReferences: DataSetReference[] | undefined;
-}
+  URLOperation?: CustomActionURLOperation | undefined;
 
-export namespace TemplateSourceAnalysis {
   /**
-   * @internal
+   * <p>The set parameter operation that sets parameters in custom action.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TemplateSourceAnalysis): any => ({
-    ...obj,
-  });
+  SetParametersOperation?: CustomActionSetParametersOperation | undefined;
 }
 
 /**
- * <p>The source template of the template.</p>
+ * <p>A custom action defined on an image.</p>
+ * @public
  */
-export interface TemplateSourceTemplate {
+export interface ImageCustomAction {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * <p>The ID of the custom action.</p>
+   * @public
    */
-  Arn: string | undefined;
-}
+  CustomActionId: string | undefined;
 
-export namespace TemplateSourceTemplate {
   /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TemplateSourceTemplate): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The source entity of the template.</p>
- */
-export interface TemplateSourceEntity {
-  /**
-   * <p>The source analysis, if it is based on an analysis.</p>
-   */
-  SourceAnalysis?: TemplateSourceAnalysis;
-
-  /**
-   * <p>The source template, if it is based on an template.</p>
-   */
-  SourceTemplate?: TemplateSourceTemplate;
-}
-
-export namespace TemplateSourceEntity {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TemplateSourceEntity): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateTemplateRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that the group is in. You use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the template that you want to create. This template is unique per Amazon Web Services Region; in
-   * 			each Amazon Web Services account.</p>
-   */
-  TemplateId: string | undefined;
-
-  /**
-   * <p>A display name for the template.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A list of resource permissions to be set on the template. </p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The entity that you are using as a source when you create the template. In
-   * 			<code>SourceEntity</code>, you specify the type of object you're using as source:
-   * 			<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an
-   * 			analysis. Both of these require an Amazon Resource Name (ARN). For
-   * 			<code>SourceTemplate</code>, specify the ARN of the source template. For
-   * 			<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>
-   * 			ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p>
-   * 		       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or
-   * 			<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed
-   * 			in the original. The schema in each dataset must match its placeholder. </p>
-   */
-  SourceEntity: TemplateSourceEntity | undefined;
-
-  /**
-   * <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>A description of the current template version being created. This API operation creates the
-   * 			first version of the template. Every time <code>UpdateTemplate</code> is called, a new
-   * 			version is created. Each version of the template maintains a description of the version
-   * 			in the <code>VersionDescription</code> field.</p>
-   */
-  VersionDescription?: string;
-}
-
-export namespace CreateTemplateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTemplateRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateTemplateResponse {
-  /**
-   * <p>The ARN for the template.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ARN for the template, including the version information of
-   * 			the first version.</p>
-   */
-  VersionArn?: string;
-
-  /**
-   * <p>The ID of the template.</p>
-   */
-  TemplateId?: string;
-
-  /**
-   * <p>The template creation status.</p>
-   */
-  CreationStatus?: ResourceStatus | string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateTemplateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTemplateResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateTemplateAliasRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the template that you creating an alias for.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the template.</p>
-   */
-  TemplateId: string | undefined;
-
-  /**
-   * <p>The name that you want to give to the template alias that you're creating. Don't start the
-   * 			alias name with the <code>$</code> character. Alias names that start with <code>$</code>
-   * 			are reserved by Amazon QuickSight. </p>
-   */
-  AliasName: string | undefined;
-
-  /**
-   * <p>The version number of the template.</p>
-   */
-  TemplateVersionNumber: number | undefined;
-}
-
-export namespace CreateTemplateAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTemplateAliasRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The template alias.</p>
- */
-export interface TemplateAlias {
-  /**
-   * <p>The display name of the template alias.</p>
-   */
-  AliasName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the template alias.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The version number of the template alias.</p>
-   */
-  TemplateVersionNumber?: number;
-}
-
-export namespace TemplateAlias {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TemplateAlias): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateTemplateAliasResponse {
-  /**
-   * <p>Information about the template alias.</p>
-   */
-  TemplateAlias?: TemplateAlias;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateTemplateAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTemplateAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The theme colors that are used for data colors in charts. The colors description is a
- *             hexadecimal color code that consists of six alphanumerical characters, prefixed with
- *                 <code>#</code>, for example #37BFF5. </p>
- */
-export interface DataColorPalette {
-  /**
-   * <p>The hexadecimal codes for the colors.</p>
-   */
-  Colors?: string[];
-
-  /**
-   * <p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>
-   */
-  MinMaxGradient?: string[];
-
-  /**
-   * <p>The hexadecimal code of a color that applies to charts where a lack of data is
-   *             highlighted.</p>
-   */
-  EmptyFillColor?: string;
-}
-
-export namespace DataColorPalette {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataColorPalette): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Display options related to tiles on a sheet.</p>
- */
-export interface TileStyle {
-  /**
-   * <p>The border around a tile.</p>
-   */
-  Border?: BorderStyle;
-}
-
-export namespace TileStyle {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TileStyle): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The display options for gutter spacing between tiles on a sheet.</p>
- */
-export interface GutterStyle {
-  /**
-   * <p>This Boolean value controls whether to display a gutter space between sheet tiles.
-   *         </p>
-   */
-  Show?: boolean;
-}
-
-export namespace GutterStyle {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GutterStyle): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The display options for margins around the outside edge of sheets.</p>
- */
-export interface MarginStyle {
-  /**
-   * <p>This Boolean value controls whether to display sheet margins.</p>
-   */
-  Show?: boolean;
-}
-
-export namespace MarginStyle {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MarginStyle): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The display options for the layout of tiles on a sheet.</p>
- */
-export interface TileLayoutStyle {
-  /**
-   * <p>The gutter settings that apply between tiles. </p>
-   */
-  Gutter?: GutterStyle;
-
-  /**
-   * <p>The margin settings that apply around the outside edge of sheets.</p>
-   */
-  Margin?: MarginStyle;
-}
-
-export namespace TileLayoutStyle {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TileLayoutStyle): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The theme display options for sheets. </p>
- */
-export interface SheetStyle {
-  /**
-   * <p>The display options for tiles.</p>
-   */
-  Tile?: TileStyle;
-
-  /**
-   * <p>The layout options for tiles.</p>
-   */
-  TileLayout?: TileLayoutStyle;
-}
-
-export namespace SheetStyle {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SheetStyle): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
- *             description is a hexadecimal color code that consists of six alphanumerical characters,
- *             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
- *                 Guide.</i>
- *         </p>
- */
-export interface UIColorPalette {
-  /**
-   * <p>The color of text and other foreground elements that appear over the primary
-   *             background regions, such as grid lines, borders, table banding, icons, and so on.</p>
-   */
-  PrimaryForeground?: string;
-
-  /**
-   * <p>The background color that applies to visuals and other high emphasis UI.</p>
-   */
-  PrimaryBackground?: string;
-
-  /**
-   * <p>The foreground color that applies to any sheet title, sheet control text, or UI that
-   *             appears over the secondary background.</p>
-   */
-  SecondaryForeground?: string;
-
-  /**
-   * <p>The background color that applies to the sheet background and sheet controls.</p>
-   */
-  SecondaryBackground?: string;
-
-  /**
-   * <p>This color is that applies to selected states and buttons.</p>
-   */
-  Accent?: string;
-
-  /**
-   * <p>The foreground color that applies to any text or other elements that appear over the
-   *             accent color.</p>
-   */
-  AccentForeground?: string;
-
-  /**
-   * <p>The color that applies to error messages.</p>
-   */
-  Danger?: string;
-
-  /**
-   * <p>The foreground color that applies to any text or other elements that appear over the
-   *             error color.</p>
-   */
-  DangerForeground?: string;
-
-  /**
-   * <p>This color that applies to warning and informational messages.</p>
-   */
-  Warning?: string;
-
-  /**
-   * <p>The foreground color that applies to any text or other elements that appear over the
-   *             warning color.</p>
-   */
-  WarningForeground?: string;
-
-  /**
-   * <p>The color that applies to success messages, for example the check mark for a
-   *             successful download.</p>
-   */
-  Success?: string;
-
-  /**
-   * <p>The foreground color that applies to any text or other elements that appear over the
-   *             success color.</p>
-   */
-  SuccessForeground?: string;
-
-  /**
-   * <p>The color that applies to the names of fields that are identified as
-   *             dimensions.</p>
-   */
-  Dimension?: string;
-
-  /**
-   * <p>The foreground color that applies to any text or other elements that appear over the
-   *             dimension color.</p>
-   */
-  DimensionForeground?: string;
-
-  /**
-   * <p>The color that applies to the names of fields that are identified as measures.</p>
-   */
-  Measure?: string;
-
-  /**
-   * <p>The foreground color that applies to any text or other elements that appear over the
-   *             measure color.</p>
-   */
-  MeasureForeground?: string;
-}
-
-export namespace UIColorPalette {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UIColorPalette): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The theme configuration. This configuration contains all of the display properties for
- *             a theme.</p>
- */
-export interface ThemeConfiguration {
-  /**
-   * <p>Color properties that apply to chart data colors.</p>
-   */
-  DataColorPalette?: DataColorPalette;
-
-  /**
-   * <p>Color properties that apply to the UI and to charts, excluding the colors that apply
-   *             to data. </p>
-   */
-  UIColorPalette?: UIColorPalette;
-
-  /**
-   * <p>Display options related to sheets.</p>
-   */
-  Sheet?: SheetStyle;
-}
-
-export namespace ThemeConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThemeConfiguration): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateThemeRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account where you want to store the new theme. </p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the theme that you want to create. The theme ID is unique per Amazon Web Services Region in
-   * 			each Amazon Web Services account.</p>
-   */
-  ThemeId: string | undefined;
-
-  /**
-   * <p>A display name for the theme.</p>
+   * <p>The name of the custom action.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of
-   * 			the starting themes defined by Amazon QuickSight. For a list of the starting themes, use
-   * 				<code>ListThemes</code> or choose <b>Themes</b> from
-   * 			within a Amazon QuickSight analysis. </p>
+   * <p>The status of the custom action.</p>
+   * @public
    */
-  BaseThemeId: string | undefined;
+  Status?: WidgetStatus | undefined;
 
   /**
-   * <p>A description of the first version of the theme that you're creating. Every time
-   * 				<code>UpdateTheme</code> is called, a new version is created. Each version of the
-   * 			theme has a description of the version in the <code>VersionDescription</code>
-   * 			field.</p>
+   * <p>The trigger of the <code>VisualCustomAction</code>.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>CLICK</code>: Initiates a custom action by a left pointer click on a data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MENU</code>: Initiates a custom action by right pointer click from the menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  VersionDescription?: string;
+  Trigger: ImageCustomActionTrigger | undefined;
 
   /**
-   * <p>The theme configuration, which contains the theme display properties.</p>
+   * <p>A list of <code>ImageCustomActionOperations</code>.</p>
+   *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+   * @public
    */
-  Configuration: ThemeConfiguration | undefined;
-
-  /**
-   * <p>A valid grouping of resource permissions to apply to the new theme.
-   * 			</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>A map of the key-value pairs for the resource tag or tags that you want to add to the
-   * 			resource.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateThemeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThemeRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateThemeResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the theme.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the new theme.</p>
-   */
-  VersionArn?: string;
-
-  /**
-   * <p>The ID of the theme.</p>
-   */
-  ThemeId?: string;
-
-  /**
-   * <p>The theme creation status.</p>
-   */
-  CreationStatus?: ResourceStatus | string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateThemeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThemeResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateThemeAliasRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the theme for the new theme alias.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the theme alias.</p>
-   */
-  ThemeId: string | undefined;
-
-  /**
-   * <p>The name that you want to give to the theme alias that you are creating. The
-   * 			alias name can't begin with a <code>$</code>. Alias names that start with <code>$</code>
-   * 			are reserved by Amazon QuickSight. </p>
-   */
-  AliasName: string | undefined;
-
-  /**
-   * <p>The version number of the theme.</p>
-   */
-  ThemeVersionNumber: number | undefined;
-}
-
-export namespace CreateThemeAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThemeAliasRequest): any => ({
-    ...obj,
-  });
+  ActionOperations: ImageCustomActionOperation[] | undefined;
 }
 
 /**
- * <p>An alias for a theme.</p>
+ * <p>The menu options for the interactions of an image.</p>
+ * @public
  */
-export interface ThemeAlias {
+export interface ImageMenuOption {
   /**
-   * <p>The Amazon Resource Name (ARN) of the theme alias.</p>
+   * <p>The availability status of the image menu. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the image menu.</p>
+   * @public
    */
-  Arn?: string;
-
-  /**
-   * <p>The display name of the theme alias.</p>
-   */
-  AliasName?: string;
-
-  /**
-   * <p>The version number of the theme alias.</p>
-   */
-  ThemeVersionNumber?: number;
-}
-
-export namespace ThemeAlias {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThemeAlias): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateThemeAliasResponse {
-  /**
-   * <p>Information about the theme alias.</p>
-   */
-  ThemeAlias?: ThemeAlias;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CreateThemeAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThemeAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum DashboardErrorType {
-  ACCESS_DENIED = "ACCESS_DENIED",
-  COLUMN_GEOGRAPHIC_ROLE_MISMATCH = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-  COLUMN_REPLACEMENT_MISSING = "COLUMN_REPLACEMENT_MISSING",
-  COLUMN_TYPE_MISMATCH = "COLUMN_TYPE_MISMATCH",
-  DATA_SET_NOT_FOUND = "DATA_SET_NOT_FOUND",
-  INTERNAL_FAILURE = "INTERNAL_FAILURE",
-  PARAMETER_NOT_FOUND = "PARAMETER_NOT_FOUND",
-  PARAMETER_TYPE_INVALID = "PARAMETER_TYPE_INVALID",
-  PARAMETER_VALUE_INCOMPATIBLE = "PARAMETER_VALUE_INCOMPATIBLE",
-  SOURCE_NOT_FOUND = "SOURCE_NOT_FOUND",
+  AvailabilityStatus?: DashboardBehavior | undefined;
 }
 
 /**
- * <p>Dashboard error.</p>
+ * <p>The general image interactions setup for image publish options.</p>
+ * @public
  */
-export interface DashboardError {
+export interface ImageInteractionOptions {
   /**
-   * <p>Type.</p>
+   * <p>The menu options for the image.</p>
+   * @public
    */
-  Type?: DashboardErrorType | string;
-
-  /**
-   * <p>Message.</p>
-   */
-  Message?: string;
-}
-
-export namespace DashboardError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardError): any => ({
-    ...obj,
-  });
+  ImageMenuOption?: ImageMenuOption | undefined;
 }
 
 /**
- * <p>Dashboard version.</p>
+ * <p>Determines how the image is scaled</p>
+ * @public
  */
-export interface DashboardVersion {
+export interface SheetImageScalingConfiguration {
   /**
-   * <p>The time that this dashboard version was created.</p>
+   * <p>The scaling option to use when fitting the image inside the container.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SCALE_TO_WIDTH</code>: The image takes up the entire width of the container. The image aspect ratio is preserved.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SCALE_TO_HEIGHT</code>: The image takes up the entire height of the container. The image aspect ratio is preserved.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SCALE_TO_CONTAINER</code>: The image takes up the entire width and height of the container. The image aspect ratio is not preserved.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SCALE_NONE</code>: The image is displayed in its original size and is not scaled to the container.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  CreatedTime?: Date;
+  ScalingType?: SheetImageScalingType | undefined;
+}
+
+/**
+ * <p>The source of the static file that contains the image.</p>
+ * @public
+ */
+export interface SheetImageStaticFileSource {
+  /**
+   * <p>The ID of the static file that contains the image.</p>
+   * @public
+   */
+  StaticFileId: string | undefined;
+}
+
+/**
+ * <p>The source of the image.</p>
+ * @public
+ */
+export interface SheetImageSource {
+  /**
+   * <p>The source of the static file that contains the image.</p>
+   * @public
+   */
+  SheetImageStaticFileSource?: SheetImageStaticFileSource | undefined;
+}
+
+/**
+ * <p>The text that appears in the sheet image tooltip.</p>
+ * @public
+ */
+export interface SheetImageTooltipText {
+  /**
+   * <p>The plain text format.</p>
+   * @public
+   */
+  PlainText?: string | undefined;
+}
+
+/**
+ * <p>The tooltip configuration for a sheet image.</p>
+ * @public
+ */
+export interface SheetImageTooltipConfiguration {
+  /**
+   * <p>The text that appears in the tooltip.</p>
+   * @public
+   */
+  TooltipText?: SheetImageTooltipText | undefined;
 
   /**
-   * <p>Errors associated with this dashboard version.</p>
+   * <p>The visibility of the tooltip.</p>
+   * @public
    */
-  Errors?: DashboardError[];
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>An image that is located on a sheet.</p>
+ * @public
+ */
+export interface SheetImage {
+  /**
+   * <p>The ID of the sheet image.</p>
+   * @public
+   */
+  SheetImageId: string | undefined;
 
   /**
-   * <p>Version number for this version of the dashboard.</p>
+   * <p>The source of the image.</p>
+   * @public
    */
-  VersionNumber?: number;
+  Source: SheetImageSource | undefined;
 
   /**
-   * <p>The HTTP status of the request.</p>
+   * <p>Determines how the image is scaled.</p>
+   * @public
    */
-  Status?: ResourceStatus | string;
+  Scaling?: SheetImageScalingConfiguration | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * <p>The tooltip to be shown when hovering over the image.</p>
+   * @public
    */
-  Arn?: string;
+  Tooltip?: SheetImageTooltipConfiguration | undefined;
 
   /**
-   * <p>Source entity ARN.</p>
+   * <p>The alt text for the image.</p>
+   * @public
    */
-  SourceEntityArn?: string;
+  ImageContentAltText?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this
-   *             version of the dashboard.</p>
+   * <p>The general image interactions setup for an image.</p>
+   * @public
    */
-  DataSetArns?: string[];
+  Interactions?: ImageInteractionOptions | undefined;
 
   /**
-   * <p>Description.</p>
+   * <p>A list of custom actions that are configured for an image.</p>
+   * @public
    */
-  Description?: string;
+  Actions?: ImageCustomAction[] | undefined;
+}
+
+/**
+ * <p>A <i>sheet</i>, which is an object that contains a set of visuals that
+ *             are viewed together on one page in Quick Sight. Every analysis and dashboard
+ *             contains at least one sheet. Each sheet contains at least one visualization widget, for
+ *             example a chart, pivot table, or narrative insight. Sheets can be associated with other
+ *             components, such as controls, filters, and so on.</p>
+ * @public
+ */
+export interface Sheet {
+  /**
+   * <p>The unique identifier associated with a sheet.</p>
+   * @public
+   */
+  SheetId?: string | undefined;
 
   /**
-   * <p>The ARN of the theme associated with a version of the dashboard.</p>
+   * <p>The name of a sheet. This name is displayed on the sheet's tab in the Quick Sight
+   *             console.</p>
+   * @public
    */
-  ThemeArn?: string;
+  Name?: string | undefined;
+
+  /**
+   * <p>A list of images on a sheet.</p>
+   * @public
+   */
+  Images?: SheetImage[] | undefined;
+}
+
+/**
+ * <p>Metadata structure for an analysis in Quick Sight</p>
+ * @public
+ */
+export interface Analysis {
+  /**
+   * <p>The ID of the analysis.</p>
+   * @public
+   */
+  AnalysisId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the analysis.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The descriptive name of the analysis.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>Status associated with the analysis.</p>
+   * @public
+   */
+  Status?: ResourceStatus | undefined;
+
+  /**
+   * <p>Errors associated with the analysis.</p>
+   * @public
+   */
+  Errors?: AnalysisError[] | undefined;
+
+  /**
+   * <p>The ARNs of the datasets of the analysis.</p>
+   * @public
+   */
+  DataSetArns?: string[] | undefined;
+
+  /**
+   * <p>The ARNs of the topics associated with the analysis.</p>
+   * @public
+   */
+  TopicArns?: string[] | undefined;
+
+  /**
+   * <p>The ARN of the theme of the analysis.</p>
+   * @public
+   */
+  ThemeArn?: string | undefined;
+
+  /**
+   * <p>The time that the analysis was created.</p>
+   * @public
+   */
+  CreatedTime?: Date | undefined;
+
+  /**
+   * <p>The time that the analysis was last updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
 
   /**
    * <p>A list of the associated sheets with the unique identifier and name of each sheet.</p>
+   * @public
    */
-  Sheets?: Sheet[];
-}
-
-export namespace DashboardVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardVersion): any => ({
-    ...obj,
-  });
+  Sheets?: Sheet[] | undefined;
 }
 
 /**
- * <p>Dashboard.</p>
+ * <p>The options that determine the sizing of the canvas used in a free-form layout.</p>
+ * @public
  */
-export interface Dashboard {
+export interface FreeFormLayoutScreenCanvasSizeOptions {
   /**
-   * <p>Dashboard ID.</p>
+   * <p>The width that the view port will be optimized for when the layout renders.</p>
+   * @public
    */
-  DashboardId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>A display name for the dashboard.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>Version.</p>
-   */
-  Version?: DashboardVersion;
-
-  /**
-   * <p>The time that this dataset was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The last time that this dataset was published.</p>
-   */
-  LastPublishedTime?: Date;
-
-  /**
-   * <p>The last time that this dataset was updated.</p>
-   */
-  LastUpdatedTime?: Date;
-}
-
-export namespace Dashboard {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Dashboard): any => ({
-    ...obj,
-  });
-}
-
-export enum DashboardFilterAttribute {
-  QUICKSIGHT_USER = "QUICKSIGHT_USER",
+  OptimizedViewPortWidth: string | undefined;
 }
 
 /**
- * <p>A filter that you apply when searching for dashboards. </p>
+ * <p>Configuration options for the canvas of a free-form layout.</p>
+ * @public
  */
-export interface DashboardSearchFilter {
+export interface FreeFormLayoutCanvasSizeOptions {
   /**
-   * <p>The comparison operator that you want to use as a filter, for example,
-   *             <code>"Operator": "StringEquals"</code>.</p>
+   * <p>The options that determine the sizing of the canvas used in a free-form layout.</p>
+   * @public
    */
-  Operator: FilterOperator | string | undefined;
-
-  /**
-   * <p>The name of the value that you want to use as a filter, for example, <code>"Name":
-   *             "QUICKSIGHT_USER"</code>. </p>
-   */
-  Name?: DashboardFilterAttribute | string;
-
-  /**
-   * <p>The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want
-   *             to use as a filter, for example, <code>"Value":
-   *             "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>. </p>
-   */
-  Value?: string;
-}
-
-export namespace DashboardSearchFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardSearchFilter): any => ({
-    ...obj,
-  });
+  ScreenCanvasSizeOptions?: FreeFormLayoutScreenCanvasSizeOptions | undefined;
 }
 
 /**
- * <p>Dashboard summary.</p>
+ * <p>The options that determine the default settings of a free-form layout configuration.</p>
+ * @public
  */
-export interface DashboardSummary {
+export interface DefaultFreeFormLayoutConfiguration {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * <p>Determines the screen canvas size options for a free-form layout.</p>
+   * @public
    */
-  Arn?: string;
-
-  /**
-   * <p>Dashboard ID.</p>
-   */
-  DashboardId?: string;
-
-  /**
-   * <p>A display name for the dashboard.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The time that this dashboard was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The last time that this dashboard was updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>Published version number.</p>
-   */
-  PublishedVersionNumber?: number;
-
-  /**
-   * <p>The last time that this dashboard was published.</p>
-   */
-  LastPublishedTime?: Date;
-}
-
-export namespace DashboardSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardSummary): any => ({
-    ...obj,
-  });
+  CanvasSizeOptions: FreeFormLayoutCanvasSizeOptions | undefined;
 }
 
 /**
- * <p>Dashboard version summary.</p>
+ * <p>The options that determine the sizing of the canvas used in a grid layout.</p>
+ * @public
  */
-export interface DashboardVersionSummary {
+export interface GridLayoutScreenCanvasSizeOptions {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The time that this dashboard version was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>Version number.</p>
-   */
-  VersionNumber?: number;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: ResourceStatus | string;
-
-  /**
-   * <p>Source entity ARN.</p>
-   */
-  SourceEntityArn?: string;
-
-  /**
-   * <p>Description.</p>
-   */
-  Description?: string;
-}
-
-export namespace DashboardVersionSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardVersionSummary): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Output column.</p>
- */
-export interface OutputColumn {
-  /**
-   * <p>A display name for the dataset.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A description for a column.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>Type.</p>
-   */
-  Type?: ColumnDataType | string;
-}
-
-export namespace OutputColumn {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OutputColumn): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Dataset.</p>
- */
-export interface DataSet {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the dataset.</p>
-   */
-  DataSetId?: string;
-
-  /**
-   * <p>A display name for the dataset.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The time that this dataset was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The last time that this dataset was updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>Declares the physical tables that are available in the underlying data sources.</p>
-   */
-  PhysicalTableMap?: { [key: string]: PhysicalTable };
-
-  /**
-   * <p>Configures the combination and transformation of the data from the physical
-   *             tables.</p>
-   */
-  LogicalTableMap?: { [key: string]: LogicalTable };
-
-  /**
-   * <p>The list of columns after all transforms. These columns are available in templates,
-   *             analyses, and dashboards.</p>
-   */
-  OutputColumns?: OutputColumn[];
-
-  /**
-   * <p>A value that indicates whether you want to import the data into SPICE.</p>
-   */
-  ImportMode?: DataSetImportMode | string;
-
-  /**
-   * <p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't
-   *             imported into SPICE.</p>
-   */
-  ConsumedSpiceCapacityInBytes?: number;
-
-  /**
-   * <p>Groupings of columns that work together in certain Amazon QuickSight features.
-   *             Currently, only geospatial hierarchy is supported.</p>
-   */
-  ColumnGroups?: ColumnGroup[];
-
-  /**
-   * <p>The folder that contains fields and nested subfolders for your dataset.</p>
-   */
-  FieldFolders?: { [key: string]: FieldFolder };
-
-  /**
-   * <p>The row-level security configuration for the dataset.</p>
-   */
-  RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
-
-  /**
-   * <p>The element you can use to define tags for row-level security.</p>
-   */
-  RowLevelPermissionTagConfiguration?: RowLevelPermissionTagConfiguration;
-
-  /**
-   * <p>A set of one or more definitions of a <code>
-   *                <a>ColumnLevelPermissionRule</a>
-   *             </code>.</p>
-   */
-  ColumnLevelPermissionRules?: ColumnLevelPermissionRule[];
-
-  /**
-   * <p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>
-   */
-  DataSetUsageConfiguration?: DataSetUsageConfiguration;
-}
-
-export namespace DataSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSet): any => ({
-    ...obj,
-    ...(obj.PhysicalTableMap && {
-      PhysicalTableMap: Object.entries(obj.PhysicalTableMap).reduce(
-        (acc: any, [key, value]: [string, PhysicalTable]) => ({
-          ...acc,
-          [key]: PhysicalTable.filterSensitiveLog(value),
-        }),
-        {}
-      ),
-    }),
-    ...(obj.LogicalTableMap && {
-      LogicalTableMap: Object.entries(obj.LogicalTableMap).reduce(
-        (acc: any, [key, value]: [string, LogicalTable]) => ({
-          ...acc,
-          [key]: LogicalTable.filterSensitiveLog(value),
-        }),
-        {}
-      ),
-    }),
-    ...(obj.RowLevelPermissionTagConfiguration && {
-      RowLevelPermissionTagConfiguration: RowLevelPermissionTagConfiguration.filterSensitiveLog(
-        obj.RowLevelPermissionTagConfiguration
-      ),
-    }),
-  });
-}
-
-/**
- * <p>Dataset schema.</p>
- */
-export interface DataSetSchema {
-  /**
-   * <p>A structure containing the list of column schemas.</p>
-   */
-  ColumnSchemaList?: ColumnSchema[];
-}
-
-export namespace DataSetSchema {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSetSchema): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Dataset configuration.</p>
- */
-export interface DataSetConfiguration {
-  /**
-   * <p>Placeholder.</p>
-   */
-  Placeholder?: string;
-
-  /**
-   * <p>Dataset schema.</p>
-   */
-  DataSetSchema?: DataSetSchema;
-
-  /**
-   * <p>A structure containing the list of column group schemas.</p>
-   */
-  ColumnGroupSchemaList?: ColumnGroupSchema[];
-}
-
-export namespace DataSetConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSetConfiguration): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Dataset summary.</p>
- */
-export interface DataSetSummary {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dataset.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the dataset.</p>
-   */
-  DataSetId?: string;
-
-  /**
-   * <p>A display name for the dataset.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The time that this dataset was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The last time that this dataset was updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>A value that indicates whether you want to import the data into SPICE.</p>
-   */
-  ImportMode?: DataSetImportMode | string;
-
-  /**
-   * <p>The row-level security configuration for the dataset.</p>
-   */
-  RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
-
-  /**
-   * <p>Whether or not the row level permission tags are applied.</p>
-   */
-  RowLevelPermissionTagConfigurationApplied?: boolean;
-
-  /**
-   * <p>A value that indicates if the dataset has column level permission configured.</p>
-   */
-  ColumnLevelPermissionRulesApplied?: boolean;
-}
-
-export namespace DataSetSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSetSummary): any => ({
-    ...obj,
-  });
-}
-
-export enum DataSourceErrorInfoType {
-  ACCESS_DENIED = "ACCESS_DENIED",
-  CONFLICT = "CONFLICT",
-  COPY_SOURCE_NOT_FOUND = "COPY_SOURCE_NOT_FOUND",
-  ENGINE_VERSION_NOT_SUPPORTED = "ENGINE_VERSION_NOT_SUPPORTED",
-  GENERIC_SQL_FAILURE = "GENERIC_SQL_FAILURE",
-  TIMEOUT = "TIMEOUT",
-  UNKNOWN = "UNKNOWN",
-  UNKNOWN_HOST = "UNKNOWN_HOST",
-}
-
-/**
- * <p>Error information for the data source creation or update.</p>
- */
-export interface DataSourceErrorInfo {
-  /**
-   * <p>Error type.</p>
-   */
-  Type?: DataSourceErrorInfoType | string;
-
-  /**
-   * <p>Error message.</p>
-   */
-  Message?: string;
-}
-
-export namespace DataSourceErrorInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSourceErrorInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The structure of a data source.</p>
- */
-export interface DataSource {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the data source.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
-   *             Amazon Web Services account.</p>
-   */
-  DataSourceId?: string;
-
-  /**
-   * <p>A display name for the data source.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of the data source. This type indicates which database engine the data source
-   *             connects to.</p>
-   */
-  Type?: DataSourceType | string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: ResourceStatus | string;
-
-  /**
-   * <p>The time that this data source was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The last time that this data source was updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>The parameters that Amazon QuickSight uses to connect to your underlying source. This
-   *             is a variant type structure. For this structure to be valid, only one of the attributes
-   *             can be non-null.</p>
-   */
-  DataSourceParameters?: DataSourceParameters;
-
-  /**
-   * <p>A set of alternate data source parameters that you want to share for the credentials
-   *             stored with this data source. The credentials are applied in tandem with the data source
-   *             parameters when you copy a data source by using a create or update request. The API
-   *             operation compares the <code>DataSourceParameters</code> structure that's in the request
-   *             with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the
-   *             structures are an exact match, the request is allowed to use the credentials from this
-   *             existing data source. If the <code>AlternateDataSourceParameters</code> list is null,
-   *             the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>
-   *             are automatically allowed.</p>
-   */
-  AlternateDataSourceParameters?: DataSourceParameters[];
-
-  /**
-   * <p>The VPC connection information. You need to use this parameter only when you want
-   *             Amazon QuickSight to use a VPC connection when connecting to your underlying source.</p>
-   */
-  VpcConnectionProperties?: VpcConnectionProperties;
-
-  /**
-   * <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
-   *             underlying source.</p>
-   */
-  SslProperties?: SslProperties;
-
-  /**
-   * <p>Error information from the last update or the creation of the data source.</p>
-   */
-  ErrorInfo?: DataSourceErrorInfo;
-}
-
-export namespace DataSource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataSource): any => ({
-    ...obj,
-    ...(obj.DataSourceParameters && {
-      DataSourceParameters: DataSourceParameters.filterSensitiveLog(obj.DataSourceParameters),
-    }),
-    ...(obj.AlternateDataSourceParameters && {
-      AlternateDataSourceParameters: obj.AlternateDataSourceParameters.map((item) =>
-        DataSourceParameters.filterSensitiveLog(item)
-      ),
-    }),
-  });
-}
-
-export interface DeleteAccountCustomizationRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that you want to delete Amazon QuickSight customizations from in
-   *             this Amazon Web Services Region.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The Amazon QuickSight namespace that you're deleting the customizations from.</p>
-   */
-  Namespace?: string;
-}
-
-export namespace DeleteAccountCustomizationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAccountCustomizationRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteAccountCustomizationResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteAccountCustomizationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAccountCustomizationResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteAnalysisRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account where you want to delete an analysis.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the analysis that you're deleting.</p>
-   */
-  AnalysisId: string | undefined;
-
-  /**
-   * <p>A value that specifies the number of days that Amazon QuickSight waits before it deletes the
-   *             analysis. You can't use this parameter with the <code>ForceDeleteWithoutRecovery</code>
-   *             option in the same API call. The default value is 30.</p>
-   */
-  RecoveryWindowInDays?: number;
-
-  /**
-   * <p>This option defaults to the value <code>NoForceDeleteWithoutRecovery</code>. To
-   *             immediately delete the analysis, add the <code>ForceDeleteWithoutRecovery</code> option.
-   *             You can't restore an analysis after it's deleted. </p>
-   */
-  ForceDeleteWithoutRecovery?: boolean;
-}
-
-export namespace DeleteAnalysisRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAnalysisRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteAnalysisResponse {
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the deleted analysis.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the deleted analysis.</p>
-   */
-  AnalysisId?: string;
-
-  /**
-   * <p>The date and time that the analysis is scheduled to be deleted.</p>
-   */
-  DeletionTime?: Date;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DeleteAnalysisResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAnalysisResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDashboardRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the dashboard that you're
-   *             deleting.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the dashboard.</p>
-   */
-  DashboardId: string | undefined;
-
-  /**
-   * <p>The version number of the dashboard. If the version number property is provided, only
-   *             the specified version of the dashboard is deleted.</p>
-   */
-  VersionNumber?: number;
-}
-
-export namespace DeleteDashboardRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDashboardRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDashboardResponse {
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Secure Socket Layer (SSL) properties that apply for the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the dashboard.</p>
-   */
-  DashboardId?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DeleteDashboardResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDashboardResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDataSetRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId: string | undefined;
-}
-
-export namespace DeleteDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDataSetRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDataSetResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dataset.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteDataSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDataSetResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDataSourceRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSourceId: string | undefined;
-}
-
-export namespace DeleteDataSourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDataSourceRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDataSourceResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the data source that you deleted.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSourceId?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteDataSourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDataSourceResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteFolderRequest {
-  /**
-   * <p>The AWS Account ID for the folder.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId: string | undefined;
-}
-
-export namespace DeleteFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFolderRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteFolderResponse {
-  /**
-   * <p>The status of deleting the folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Resource Name of the deleted folder.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId?: string;
-
-  /**
-   * <p>The request ID.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DeleteFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFolderResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteFolderMembershipRequest {
-  /**
-   * <p>The AWS Account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The Folder ID.</p>
-   */
-  FolderId: string | undefined;
-
-  /**
-   * <p>The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.</p>
-   */
-  MemberId: string | undefined;
-
-  /**
-   * <p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>
-   *          </p>
-   */
-  MemberType: MemberType | string | undefined;
-}
-
-export namespace DeleteFolderMembershipRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFolderMembershipRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteFolderMembershipResponse {
-  /**
-   * <p>The status of deleting the asset. If succeeded, the status is <code>SC_OK (200)</code>.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The request ID.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DeleteFolderMembershipResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFolderMembershipResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteGroupRequest {
-  /**
-   * <p>The name of the group that you want to delete.</p>
-   */
-  GroupName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DeleteGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteGroupResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGroupResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteGroupMembershipRequest {
-  /**
-   * <p>The name of the user that you want to delete from the group membership.</p>
-   */
-  MemberName: string | undefined;
-
-  /**
-   * <p>The name of the group that you want to delete the user from.</p>
-   */
-  GroupName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DeleteGroupMembershipRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGroupMembershipRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteGroupMembershipResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteGroupMembershipResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGroupMembershipResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteIAMPolicyAssignmentRequest {
-  /**
-   * <p>The Amazon Web Services account ID where you want to delete the IAMpolicy assignment.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The name of the assignment. </p>
-   */
-  AssignmentName: string | undefined;
-
-  /**
-   * <p>The namespace that contains the assignment.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DeleteIAMPolicyAssignmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteIAMPolicyAssignmentRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteIAMPolicyAssignmentResponse {
-  /**
-   * <p>The name of the assignment. </p>
-   */
-  AssignmentName?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteIAMPolicyAssignmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteIAMPolicyAssignmentResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteNamespaceRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that you want to delete the Amazon QuickSight namespace from.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace that you want to delete.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DeleteNamespaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteNamespaceRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteNamespaceResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteNamespaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteNamespaceResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteTemplateRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the template that you're deleting.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the template you want to delete.</p>
-   */
-  TemplateId: string | undefined;
-
-  /**
-   * <p>Specifies the version of the template that you want to delete.
-   * 			If you don't provide a version number, <code>DeleteTemplate</code> deletes all versions of the template.
-   * 	 </p>
-   */
-  VersionNumber?: number;
-}
-
-export namespace DeleteTemplateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteTemplateRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteTemplateResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>An ID for the template.</p>
-   */
-  TemplateId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteTemplateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteTemplateResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteTemplateAliasRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the item to delete.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the template that the specified alias is for.</p>
-   */
-  TemplateId: string | undefined;
-
-  /**
-   * <p>The name for the template alias. To delete a specific alias, you delete the version that the
-   * 			alias points to. You can specify the alias name, or specify the latest version of the
-   * 			template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code>
-   * 			parameter. </p>
-   */
-  AliasName: string | undefined;
-}
-
-export namespace DeleteTemplateAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteTemplateAliasRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteTemplateAliasResponse {
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>An ID for the template associated with the deletion.</p>
-   */
-  TemplateId?: string;
-
-  /**
-   * <p>The name for the template alias.</p>
-   */
-  AliasName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the template you want to delete.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DeleteTemplateAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteTemplateAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteThemeRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the theme that you're deleting.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>An ID for the theme that you want to delete.</p>
-   */
-  ThemeId: string | undefined;
-
-  /**
-   * <p>The version of the theme that you want to delete. </p>
-   * 		       <p>
-   *             <b>Note:</b> If you don't provide a version number, you're
-   * 			using this call to <code>DeleteTheme</code> to delete all versions of the theme.</p>
-   */
-  VersionNumber?: number;
-}
-
-export namespace DeleteThemeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteThemeRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteThemeResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>An ID for the theme.</p>
-   */
-  ThemeId?: string;
-}
-
-export namespace DeleteThemeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteThemeResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteThemeAliasRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the theme alias to delete.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the theme that the specified alias is for.</p>
-   */
-  ThemeId: string | undefined;
-
-  /**
-   * <p>The unique name for the theme alias to delete.</p>
-   */
-  AliasName: string | undefined;
-}
-
-export namespace DeleteThemeAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteThemeAliasRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteThemeAliasResponse {
-  /**
-   * <p>The name for the theme alias.</p>
-   */
-  AliasName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the theme resource using the deleted alias.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>An ID for the theme associated with the deletion.</p>
-   */
-  ThemeId?: string;
-}
-
-export namespace DeleteThemeAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteThemeAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteUserRequest {
-  /**
-   * <p>The name of the user that you want to delete.</p>
-   */
-  UserName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DeleteUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteUserResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface DeleteUserByPrincipalIdRequest {
-  /**
-   * <p>The principal ID of the user.</p>
-   */
-  PrincipalId: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DeleteUserByPrincipalIdRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserByPrincipalIdRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteUserByPrincipalIdResponse {
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DeleteUserByPrincipalIdResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserByPrincipalIdResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAccountCustomizationRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that you want to describe Amazon QuickSight customizations
-   *             for.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The Amazon QuickSight namespace that you want to describe Amazon QuickSight customizations
-   *             for.</p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The <code>Resolved</code> flag works with the other parameters to determine which view
-   *             of Amazon QuickSight customizations is returned. You can add this flag to your command to use
-   *             the same view that Amazon QuickSight uses to identify which customizations to apply to the
-   *             console. Omit this flag, or set it to <code>no-resolved</code>, to reveal customizations
-   *             that are configured at different levels. </p>
-   */
-  Resolved?: boolean;
-}
-
-export namespace DescribeAccountCustomizationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAccountCustomizationRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAccountCustomizationResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the customization that's associated with this Amazon Web Services account.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that you're describing.</p>
-   */
-  AwsAccountId?: string;
-
-  /**
-   * <p>The Amazon QuickSight namespace that you're describing. </p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The Amazon QuickSight customizations that exist in the current Amazon Web Services Region. </p>
-   */
-  AccountCustomization?: AccountCustomization;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeAccountCustomizationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAccountCustomizationResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAccountSettingsRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that contains the settings that you want to list.</p>
-   */
-  AwsAccountId: string | undefined;
-}
-
-export namespace DescribeAccountSettingsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAccountSettingsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAccountSettingsResponse {
-  /**
-   * <p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon
-   *             Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the
-   *             Amazon QuickSight subscription. In the Amazon QuickSight console, the Amazon QuickSight subscription is sometimes
-   *             referred to as a Amazon QuickSight "account" even though it's technically not an account
-   *             by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The
-   *             edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>
-   */
-  AccountSettings?: AccountSettings;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeAccountSettingsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAccountSettingsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAnalysisRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the
-   *             Amazon Web Services account that the analysis is in.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the analysis that you're describing. The ID is part of the URL of the
-   *             analysis.</p>
-   */
-  AnalysisId: string | undefined;
-}
-
-export namespace DescribeAnalysisRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAnalysisRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAnalysisResponse {
-  /**
-   * <p>A metadata structure that contains summary information for the analysis that you're
-   *             describing.</p>
-   */
-  Analysis?: Analysis;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeAnalysisResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAnalysisResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAnalysisPermissionsRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the analysis whose permissions you're
-   *             describing. You must be using the Amazon Web Services account that the analysis is in.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the analysis whose permissions you're describing. The ID is part of the
-   *             analysis URL.</p>
-   */
-  AnalysisId: string | undefined;
-}
-
-export namespace DescribeAnalysisPermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAnalysisPermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAnalysisPermissionsResponse {
-  /**
-   * <p>The ID of the analysis whose permissions you're describing.</p>
-   */
-  AnalysisId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the analysis whose permissions you're
-   *             describing.</p>
-   */
-  AnalysisArn?: string;
-
-  /**
-   * <p>A structure that describes the principals and the resource-level permissions on an
-   *             analysis.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeAnalysisPermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAnalysisPermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDashboardRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the dashboard that you're
-   *             describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the dashboard.</p>
-   */
-  DashboardId: string | undefined;
-
-  /**
-   * <p>The version number for the dashboard. If a version number isn't passed, the
-   *             latest published dashboard version is described. </p>
-   */
-  VersionNumber?: number;
-
-  /**
-   * <p>The alias name.</p>
-   */
-  AliasName?: string;
-}
-
-export namespace DescribeDashboardRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDashboardRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDashboardResponse {
-  /**
-   * <p>Information about the dashboard.</p>
-   */
-  Dashboard?: Dashboard;
-
-  /**
-   * <p>The HTTP status of this request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeDashboardResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDashboardResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDashboardPermissionsRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the dashboard that you're describing
-   *             permissions for.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the dashboard, also added to the IAMpolicy.</p>
-   */
-  DashboardId: string | undefined;
-}
-
-export namespace DescribeDashboardPermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDashboardPermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDashboardPermissionsResponse {
-  /**
-   * <p>The ID for the dashboard.</p>
-   */
-  DashboardId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dashboard.</p>
-   */
-  DashboardArn?: string;
-
-  /**
-   * <p>A structure that contains the permissions for the dashboard.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeDashboardPermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDashboardPermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDataSetRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId: string | undefined;
-}
-
-export namespace DescribeDataSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSetRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDataSetResponse {
-  /**
-   * <p>Information on the dataset.</p>
-   */
-  DataSet?: DataSet;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeDataSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSetResponse): any => ({
-    ...obj,
-    ...(obj.DataSet && { DataSet: DataSet.filterSensitiveLog(obj.DataSet) }),
-  });
-}
-
-export interface DescribeDataSetPermissionsRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId: string | undefined;
-}
-
-export namespace DescribeDataSetPermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSetPermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDataSetPermissionsResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dataset.</p>
-   */
-  DataSetArn?: string;
-
-  /**
-   * <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSetId?: string;
-
-  /**
-   * <p>A list of resource permissions on the dataset.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeDataSetPermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSetPermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDataSourceRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSourceId: string | undefined;
-}
-
-export namespace DescribeDataSourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSourceRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDataSourceResponse {
-  /**
-   * <p>The information on the data source.</p>
-   */
-  DataSource?: DataSource;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeDataSourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSourceResponse): any => ({
-    ...obj,
-    ...(obj.DataSource && { DataSource: DataSource.filterSensitiveLog(obj.DataSource) }),
-  });
-}
-
-export interface DescribeDataSourcePermissionsRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSourceId: string | undefined;
-}
-
-export namespace DescribeDataSourcePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSourcePermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeDataSourcePermissionsResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the data source.</p>
-   */
-  DataSourceArn?: string;
-
-  /**
-   * <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  DataSourceId?: string;
-
-  /**
-   * <p>A list of resource permissions on the data source.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeDataSourcePermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDataSourcePermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeFolderRequest {
-  /**
-   * <p>The AWS account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId: string | undefined;
-}
-
-export namespace DescribeFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A folder.</p>
- */
-export interface Folder {
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId?: string;
-
-  /**
-   * <p>The folder Amazon Resource Name (ARN).</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>A display name for the folder.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of the folder.</p>
-   */
-  FolderType?: FolderType | string;
-
-  /**
-   * <p>An array of ancestor folder ARN strings.</p>
-   */
-  FolderPath?: string[];
-
-  /**
-   * <p>The time that the folder was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The time that the folder was last updated.</p>
-   */
-  LastUpdatedTime?: Date;
-}
-
-export namespace Folder {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Folder): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeFolderResponse {
-  /**
-   * <p>The status. If succeeded, the status is <code>SC_OK (200)</code>.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>Information about the folder.</p>
-   */
-  Folder?: Folder;
-
-  /**
-   * <p>The request ID.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeFolderPermissionsRequest {
-  /**
-   * <p>The AWS Account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId: string | undefined;
-}
-
-export namespace DescribeFolderPermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderPermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeFolderPermissionsResponse {
-  /**
-   * <p>The status. If succeeded, the status is <code>SC_OK</code>.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the folder.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>Information about the permissions on the folder.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The request ID.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeFolderPermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderPermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeFolderResolvedPermissionsRequest {
-  /**
-   * <p>The AWS account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId: string | undefined;
-}
-
-export namespace DescribeFolderResolvedPermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderResolvedPermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeFolderResolvedPermissionsResponse {
-  /**
-   * <p>The status. If succeeded, the status is <code>SC_OK</code>
-   *          </p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The folder ID.</p>
-   */
-  FolderId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN).</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>Information about the permissions on the dashboard.</p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The request ID.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeFolderResolvedPermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderResolvedPermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeGroupRequest {
-  /**
-   * <p>The name of the group that you want to describe.</p>
-   */
-  GroupName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DescribeGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeGroupResponse {
-  /**
-   * <p>The name of the group.</p>
-   */
-  Group?: Group;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeGroupResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeIAMPolicyAssignmentRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the assignment that you want to describe.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The name of the assignment, also called a rule.</p>
-   */
-  AssignmentName: string | undefined;
-
-  /**
-   * <p>The namespace that contains the assignment.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DescribeIAMPolicyAssignmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIAMPolicyAssignmentRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An Identity and Access Management (IAM) policy assignment.</p>
- */
-export interface IAMPolicyAssignment {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId?: string;
-
-  /**
-   * <p>Assignment ID.</p>
-   */
-  AssignmentId?: string;
-
-  /**
-   * <p>Assignment name.</p>
-   */
-  AssignmentName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the IAMpolicy.</p>
-   */
-  PolicyArn?: string;
-
-  /**
-   * <p>Identities.</p>
-   */
-  Identities?: { [key: string]: string[] };
-
-  /**
-   * <p>Assignment status.</p>
-   */
-  AssignmentStatus?: AssignmentStatus | string;
-}
-
-export namespace IAMPolicyAssignment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IAMPolicyAssignment): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeIAMPolicyAssignmentResponse {
-  /**
-   * <p>Information describing the IAMpolicy assignment.</p>
-   */
-  IAMPolicyAssignment?: IAMPolicyAssignment;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeIAMPolicyAssignmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIAMPolicyAssignmentResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The <code>NextToken</code> value isn't valid.</p>
- */
-export interface InvalidNextTokenException extends __SmithyException, $MetadataBearer {
-  name: "InvalidNextTokenException";
-  $fault: "client";
-  Message?: string;
-  /**
-   * <p>The Amazon Web Services request ID for this request.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InvalidNextTokenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidNextTokenException): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeIngestionRequest {
-  /**
-   * <p>The Amazon Web Services account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID of the dataset used in the ingestion.</p>
-   */
-  DataSetId: string | undefined;
-
-  /**
-   * <p>An ID for the ingestion.</p>
-   */
-  IngestionId: string | undefined;
-}
-
-export namespace DescribeIngestionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIngestionRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum IngestionErrorType {
-  ACCOUNT_CAPACITY_LIMIT_EXCEEDED = "ACCOUNT_CAPACITY_LIMIT_EXCEEDED",
-  CONNECTION_FAILURE = "CONNECTION_FAILURE",
-  CURSOR_NOT_ENABLED = "CURSOR_NOT_ENABLED",
-  CUSTOMER_ERROR = "CUSTOMER_ERROR",
-  DATA_SET_DELETED = "DATA_SET_DELETED",
-  DATA_SET_NOT_SPICE = "DATA_SET_NOT_SPICE",
-  DATA_SET_SIZE_LIMIT_EXCEEDED = "DATA_SET_SIZE_LIMIT_EXCEEDED",
-  DATA_SOURCE_AUTH_FAILED = "DATA_SOURCE_AUTH_FAILED",
-  DATA_SOURCE_CONNECTION_FAILED = "DATA_SOURCE_CONNECTION_FAILED",
-  DATA_SOURCE_NOT_FOUND = "DATA_SOURCE_NOT_FOUND",
-  DATA_TOLERANCE_EXCEPTION = "DATA_TOLERANCE_EXCEPTION",
-  ELASTICSEARCH_CURSOR_NOT_ENABLED = "ELASTICSEARCH_CURSOR_NOT_ENABLED",
-  FAILURE_TO_ASSUME_ROLE = "FAILURE_TO_ASSUME_ROLE",
-  FAILURE_TO_PROCESS_JSON_FILE = "FAILURE_TO_PROCESS_JSON_FILE",
-  IAM_ROLE_NOT_AVAILABLE = "IAM_ROLE_NOT_AVAILABLE",
-  INGESTION_CANCELED = "INGESTION_CANCELED",
-  INGESTION_SUPERSEDED = "INGESTION_SUPERSEDED",
-  INTERNAL_SERVICE_ERROR = "INTERNAL_SERVICE_ERROR",
-  INVALID_DATAPREP_SYNTAX = "INVALID_DATAPREP_SYNTAX",
-  INVALID_DATA_SOURCE_CONFIG = "INVALID_DATA_SOURCE_CONFIG",
-  INVALID_DATE_FORMAT = "INVALID_DATE_FORMAT",
-  IOT_DATA_SET_FILE_EMPTY = "IOT_DATA_SET_FILE_EMPTY",
-  IOT_FILE_NOT_FOUND = "IOT_FILE_NOT_FOUND",
-  OAUTH_TOKEN_FAILURE = "OAUTH_TOKEN_FAILURE",
-  PASSWORD_AUTHENTICATION_FAILURE = "PASSWORD_AUTHENTICATION_FAILURE",
-  PERMISSION_DENIED = "PERMISSION_DENIED",
-  PERMISSION_NOT_FOUND = "PERMISSION_NOT_FOUND",
-  QUERY_TIMEOUT = "QUERY_TIMEOUT",
-  REFRESH_SUPPRESSED_BY_EDIT = "REFRESH_SUPPRESSED_BY_EDIT",
-  ROW_SIZE_LIMIT_EXCEEDED = "ROW_SIZE_LIMIT_EXCEEDED",
-  S3_FILE_INACCESSIBLE = "S3_FILE_INACCESSIBLE",
-  S3_MANIFEST_ERROR = "S3_MANIFEST_ERROR",
-  S3_UPLOADED_FILE_DELETED = "S3_UPLOADED_FILE_DELETED",
-  SOURCE_API_LIMIT_EXCEEDED_FAILURE = "SOURCE_API_LIMIT_EXCEEDED_FAILURE",
-  SOURCE_RESOURCE_LIMIT_EXCEEDED = "SOURCE_RESOURCE_LIMIT_EXCEEDED",
-  SPICE_TABLE_NOT_FOUND = "SPICE_TABLE_NOT_FOUND",
-  SQL_EXCEPTION = "SQL_EXCEPTION",
-  SQL_INVALID_PARAMETER_VALUE = "SQL_INVALID_PARAMETER_VALUE",
-  SQL_NUMERIC_OVERFLOW = "SQL_NUMERIC_OVERFLOW",
-  SQL_SCHEMA_MISMATCH_ERROR = "SQL_SCHEMA_MISMATCH_ERROR",
-  SQL_TABLE_NOT_FOUND = "SQL_TABLE_NOT_FOUND",
-  SSL_CERTIFICATE_VALIDATION_FAILURE = "SSL_CERTIFICATE_VALIDATION_FAILURE",
-  UNRESOLVABLE_HOST = "UNRESOLVABLE_HOST",
-  UNROUTABLE_HOST = "UNROUTABLE_HOST",
-}
-
-/**
- * <p>Error information for the SPICE ingestion of a dataset.</p>
- */
-export interface ErrorInfo {
-  /**
-   * <p>Error type.</p>
-   */
-  Type?: IngestionErrorType | string;
-
-  /**
-   * <p>Error message.</p>
-   */
-  Message?: string;
-}
-
-export namespace ErrorInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ErrorInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Information about a queued dataset SPICE ingestion.</p>
- */
-export interface QueueInfo {
-  /**
-   * <p>The ID of the queued ingestion.</p>
-   */
-  WaitingOnIngestion: string | undefined;
-
-  /**
-   * <p>The ID of the ongoing ingestion. The queued ingestion is waiting for the ongoing
-   *             ingestion to complete.</p>
-   */
-  QueuedIngestion: string | undefined;
-}
-
-export namespace QueueInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: QueueInfo): any => ({
-    ...obj,
-  });
-}
-
-export enum IngestionRequestSource {
-  MANUAL = "MANUAL",
-  SCHEDULED = "SCHEDULED",
-}
-
-export enum IngestionRequestType {
-  EDIT = "EDIT",
-  FULL_REFRESH = "FULL_REFRESH",
-  INCREMENTAL_REFRESH = "INCREMENTAL_REFRESH",
-  INITIAL_INGESTION = "INITIAL_INGESTION",
-}
-
-/**
- * <p>Information about rows for a data set SPICE ingestion.</p>
- */
-export interface RowInfo {
-  /**
-   * <p>The number of rows that were ingested.</p>
-   */
-  RowsIngested?: number;
-
-  /**
-   * <p>The number of rows that were not ingested.</p>
-   */
-  RowsDropped?: number;
-
-  /**
-   * <p>The total number of rows in the dataset.</p>
-   */
-  TotalRowsInDataset?: number;
-}
-
-export namespace RowInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RowInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Information about the SPICE ingestion for a dataset.</p>
- */
-export interface Ingestion {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn: string | undefined;
-
-  /**
-   * <p>Ingestion ID.</p>
-   */
-  IngestionId?: string;
-
-  /**
-   * <p>Ingestion status.</p>
-   */
-  IngestionStatus: IngestionStatus | string | undefined;
-
-  /**
-   * <p>Error information for this ingestion.</p>
-   */
-  ErrorInfo?: ErrorInfo;
-
-  /**
-   * <p>Information about rows for a data set SPICE ingestion.</p>
-   */
-  RowInfo?: RowInfo;
-
-  /**
-   * <p>Information about a queued dataset SPICE ingestion.</p>
-   */
-  QueueInfo?: QueueInfo;
-
-  /**
-   * <p>The time that this ingestion started.</p>
-   */
-  CreatedTime: Date | undefined;
-
-  /**
-   * <p>The time that this ingestion took, measured in seconds.</p>
-   */
-  IngestionTimeInSeconds?: number;
-
-  /**
-   * <p>The size of the data ingested, in bytes.</p>
-   */
-  IngestionSizeInBytes?: number;
-
-  /**
-   * <p>Event source for this ingestion.</p>
-   */
-  RequestSource?: IngestionRequestSource | string;
-
-  /**
-   * <p>Type of this ingestion.</p>
-   */
-  RequestType?: IngestionRequestType | string;
-}
-
-export namespace Ingestion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Ingestion): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeIngestionResponse {
-  /**
-   * <p>Information about the ingestion.</p>
-   */
-  Ingestion?: Ingestion;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeIngestionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIngestionResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeIpRestrictionRequest {
-  /**
-   * <p>Your AWS account ID.</p>
-   */
-  AwsAccountId: string | undefined;
-}
-
-export namespace DescribeIpRestrictionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIpRestrictionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeIpRestrictionResponse {
-  /**
-   * <p>Your AWS account ID.</p>
-   */
-  AwsAccountId?: string;
-
-  /**
-   * <p>Describes the IP rules with CIDR range and description.</p>
-   */
-  IpRestrictionRuleMap?: { [key: string]: string };
-
-  /**
-   * <p>Whether or not IP rules are enabled.</p>
-   */
-  Enabled?: boolean;
-
-  /**
-   * <p>The ID of the describe request.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The status of a set of IP restrictions. A successful request returns a 200 status code.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeIpRestrictionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIpRestrictionResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeNamespaceRequest {
-  /**
-   * <p>The ID for the Amazon Web Services account that contains the Amazon QuickSight namespace that you want to describe.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace that you want to describe.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DescribeNamespaceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeNamespaceRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum NamespaceErrorType {
-  INTERNAL_SERVICE_ERROR = "INTERNAL_SERVICE_ERROR",
-  PERMISSION_DENIED = "PERMISSION_DENIED",
-}
-
-/**
- * <p>Errors that occur during namespace creation.</p>
- */
-export interface NamespaceError {
-  /**
-   * <p>The error type.</p>
-   */
-  Type?: NamespaceErrorType | string;
-
-  /**
-   * <p>The message for the error.</p>
-   */
-  Message?: string;
-}
-
-export namespace NamespaceError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NamespaceError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The error type.</p>
- */
-export interface NamespaceInfoV2 {
-  /**
-   * <p>The name of the error.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The namespace ARN.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The namespace Amazon Web Services Region.</p>
-   */
-  CapacityRegion?: string;
-
-  /**
-   * <p>The creation status of a namespace that is not yet completely created.</p>
-   */
-  CreationStatus?: NamespaceStatus | string;
-
-  /**
-   * <p>The identity store used for the namespace.</p>
-   */
-  IdentityStore?: IdentityStore | string;
-
-  /**
-   * <p>An error that occurred when the namespace was created.</p>
-   */
-  NamespaceError?: NamespaceError;
-}
-
-export namespace NamespaceInfoV2 {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NamespaceInfoV2): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeNamespaceResponse {
-  /**
-   * <p>The information about the namespace that you're describing. The response includes
-   *         the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. <code>DescribeNamespace</code> also
-   *         works for namespaces that are in the process of being created. For incomplete namespaces,
-   *         this API operation lists the namespace error types and messages associated with the creation process.</p>
-   */
-  Namespace?: NamespaceInfoV2;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeNamespaceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeNamespaceResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeTemplateRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the template that you're describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the template.</p>
-   */
-  TemplateId: string | undefined;
-
-  /**
-   * <p>(Optional) The number for the version to describe. If a <code>VersionNumber</code> parameter
-   * 			value isn't provided, the latest version of the template is described.</p>
-   */
-  VersionNumber?: number;
-
-  /**
-   * <p>The alias of the template that you want to describe. If you name a specific alias, you
-   * 			describe the version that the alias points to. You can specify the latest version of the
-   * 			template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code>
-   * 			parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>
-   */
-  AliasName?: string;
-}
-
-export namespace DescribeTemplateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTemplateRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum TemplateErrorType {
-  ACCESS_DENIED = "ACCESS_DENIED",
-  DATA_SET_NOT_FOUND = "DATA_SET_NOT_FOUND",
-  INTERNAL_FAILURE = "INTERNAL_FAILURE",
-  SOURCE_NOT_FOUND = "SOURCE_NOT_FOUND",
-}
-
-/**
- * <p>List of errors that occurred when the template version creation failed.</p>
- */
-export interface TemplateError {
-  /**
-   * <p>Type of error.</p>
-   */
-  Type?: TemplateErrorType | string;
-
-  /**
-   * <p>Description of the error type.</p>
-   */
-  Message?: string;
-}
-
-export namespace TemplateError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TemplateError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A version of a template.</p>
- */
-export interface TemplateVersion {
-  /**
-   * <p>The time that this template version was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>Errors associated with this template version.</p>
-   */
-  Errors?: TemplateError[];
-
-  /**
-   * <p>The version number of the template version.</p>
-   */
-  VersionNumber?: number;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: ResourceStatus | string;
-
-  /**
-   * <p>Schema of the dataset identified by the placeholder. Any dashboard created from this
-   *             template should be bound to new datasets matching the same schema described through this
-   *             API operation.</p>
-   */
-  DataSetConfigurations?: DataSetConfiguration[];
-
-  /**
-   * <p>The description of the template.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this
-   *             template.</p>
-   */
-  SourceEntityArn?: string;
-
-  /**
-   * <p>The ARN of the theme associated with this version of the template.</p>
-   */
-  ThemeArn?: string;
-
-  /**
-   * <p>A list of the associated sheets with the unique identifier and name of each sheet.</p>
-   */
-  Sheets?: Sheet[];
-}
-
-export namespace TemplateVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TemplateVersion): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A template object. A <i>template</i> is an entity in Amazon QuickSight that
- *             encapsulates the metadata required to create an analysis and that you can use to create
- *             a dashboard. A template adds a layer of abstraction by using placeholders to replace the
- *             dataset associated with an analysis. You can use templates to create dashboards by
- *             replacing dataset placeholders with datasets that follow the same schema that was used
- *             to create the source analysis and template.</p>
- *         <p>You can share templates across Amazon Web Services accounts by allowing users in other Amazon Web Services accounts to
- *             create a template or a dashboard from an existing template.</p>
- */
-export interface Template {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the template.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The display name of the template.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A structure describing the versions of the template.</p>
-   */
-  Version?: TemplateVersion;
-
-  /**
-   * <p>The ID for the template. This is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
-   */
-  TemplateId?: string;
-
-  /**
-   * <p>Time when this was last updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>Time when this was created.</p>
-   */
-  CreatedTime?: Date;
-}
-
-export namespace Template {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Template): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeTemplateResponse {
-  /**
-   * <p>The template structure for the object you want to describe.</p>
-   */
-  Template?: Template;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeTemplateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTemplateResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeTemplateAliasRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the template alias that you're
-   * 			describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the template.</p>
-   */
-  TemplateId: string | undefined;
-
-  /**
-   * <p>The name of the template alias that you want to describe. If you name a specific alias, you
-   * 			describe the version that the alias points to. You can specify the latest version of the
-   * 			template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code>
-   * 			parameter. The keyword <code>$PUBLISHED</code> doesn't apply to templates.</p>
-   */
-  AliasName: string | undefined;
-}
-
-export namespace DescribeTemplateAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTemplateAliasRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeTemplateAliasResponse {
-  /**
-   * <p>Information about the template alias.</p>
-   */
-  TemplateAlias?: TemplateAlias;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeTemplateAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTemplateAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeTemplatePermissionsRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the template that you're describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the template.</p>
-   */
-  TemplateId: string | undefined;
-}
-
-export namespace DescribeTemplatePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTemplatePermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeTemplatePermissionsResponse {
-  /**
-   * <p>The ID for the template.</p>
-   */
-  TemplateId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the template.</p>
-   */
-  TemplateArn?: string;
-
-  /**
-   * <p>A list of resource permissions to be set on the template. </p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeTemplatePermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTemplatePermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeThemeRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the theme that you're describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the theme.</p>
-   */
-  ThemeId: string | undefined;
-
-  /**
-   * <p>The version number for the version to describe. If a <code>VersionNumber</code> parameter
-   * 			value isn't provided, the latest version of the theme is described.</p>
-   */
-  VersionNumber?: number;
-
-  /**
-   * <p>The alias of the theme that you want to describe. If you name a specific alias, you
-   * 			describe the version that the alias points to. You can specify the latest version of the
-   * 			theme by providing the keyword <code>$LATEST</code> in the <code>AliasName</code>
-   * 			parameter. The keyword <code>$PUBLISHED</code> doesn't apply to themes.</p>
-   */
-  AliasName?: string;
-}
-
-export namespace DescribeThemeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeThemeRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ThemeType {
-  ALL = "ALL",
-  CUSTOM = "CUSTOM",
-  QUICKSIGHT = "QUICKSIGHT",
-}
-
-export enum ThemeErrorType {
-  INTERNAL_FAILURE = "INTERNAL_FAILURE",
-}
-
-/**
- * <p>Theme error.</p>
- */
-export interface ThemeError {
-  /**
-   * <p>The type of error.</p>
-   */
-  Type?: ThemeErrorType | string;
-
-  /**
-   * <p>The error message.</p>
-   */
-  Message?: string;
-}
-
-export namespace ThemeError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThemeError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A version of a theme.</p>
- */
-export interface ThemeVersion {
-  /**
-   * <p>The version number of the theme.</p>
-   */
-  VersionNumber?: number;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the resource.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The description of the theme.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
-   *             themes initially inherit from a default Amazon QuickSight theme.</p>
-   */
-  BaseThemeId?: string;
-
-  /**
-   * <p>The date and time that this theme version was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The theme configuration, which contains all the theme display properties.</p>
-   */
-  Configuration?: ThemeConfiguration;
-
-  /**
-   * <p>Errors associated with the theme.</p>
-   */
-  Errors?: ThemeError[];
-
-  /**
-   * <p>The status of the theme version.</p>
-   */
-  Status?: ResourceStatus | string;
-}
-
-export namespace ThemeVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThemeVersion): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Summary information about a theme.</p>
- */
-export interface Theme {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the theme.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name that the user gives to the theme.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The identifier that the user gives to the theme.</p>
-   */
-  ThemeId?: string;
-
-  /**
-   * <p>A version of a theme.</p>
-   */
-  Version?: ThemeVersion;
-
-  /**
-   * <p>The date and time that the theme was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The date and time that the theme was last updated.</p>
-   */
-  LastUpdatedTime?: Date;
-
-  /**
-   * <p>The type of theme, based on how it was created. Valid values include:
-   *             <code>QUICKSIGHT</code> and <code>CUSTOM</code>.</p>
-   */
-  Type?: ThemeType | string;
-}
-
-export namespace Theme {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Theme): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeThemeResponse {
-  /**
-   * <p>The information about the theme that you are describing.</p>
-   */
-  Theme?: Theme;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeThemeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeThemeResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeThemeAliasRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the theme alias that you're
-   * 			describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the theme.</p>
-   */
-  ThemeId: string | undefined;
-
-  /**
-   * <p>The name of the theme alias that you want to describe.</p>
-   */
-  AliasName: string | undefined;
-}
-
-export namespace DescribeThemeAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeThemeAliasRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeThemeAliasResponse {
-  /**
-   * <p>Information about the theme alias.</p>
-   */
-  ThemeAlias?: ThemeAlias;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DescribeThemeAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeThemeAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeThemePermissionsRequest {
-  /**
-   * <p>The ID of the Amazon Web Services account that contains the theme that you're describing.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The ID for the theme that you want to describe permissions for.</p>
-   */
-  ThemeId: string | undefined;
-}
-
-export namespace DescribeThemePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeThemePermissionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeThemePermissionsResponse {
-  /**
-   * <p>The ID for the theme.</p>
-   */
-  ThemeId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the theme.</p>
-   */
-  ThemeArn?: string;
-
-  /**
-   * <p>A list of resource permissions set on the theme. </p>
-   */
-  Permissions?: ResourcePermission[];
-
-  /**
-   * <p>The Amazon Web Services request ID for this operation.</p>
-   */
-  RequestId?: string;
-
-  /**
-   * <p>The HTTP status of the request.</p>
-   */
-  Status?: number;
-}
-
-export namespace DescribeThemePermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeThemePermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeUserRequest {
-  /**
-   * <p>The name of the user that you want to describe.</p>
-   */
-  UserName: string | undefined;
-
-  /**
-   * <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-   * 			Amazon Web Services account that contains your Amazon QuickSight account.</p>
-   */
-  AwsAccountId: string | undefined;
-
-  /**
-   * <p>The namespace. Currently, you should set this to <code>default</code>.</p>
-   */
-  Namespace: string | undefined;
-}
-
-export namespace DescribeUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeUserRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum IdentityType {
-  IAM = "IAM",
-  QUICKSIGHT = "QUICKSIGHT",
-}
-
-export enum UserRole {
-  ADMIN = "ADMIN",
-  AUTHOR = "AUTHOR",
-  READER = "READER",
-  RESTRICTED_AUTHOR = "RESTRICTED_AUTHOR",
-  RESTRICTED_READER = "RESTRICTED_READER",
-}
-
-/**
- * <p>A registered user of Amazon QuickSight. </p>
- */
-export interface User {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the user.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The user's user name.</p>
-   */
-  UserName?: string;
-
-  /**
-   * <p>The user's email address.</p>
-   */
-  Email?: string;
-
-  /**
-   * <p>The Amazon QuickSight role for the user. The user role can be one of the
-   *             following:.</p>
-   *         <ul>
+   * <p>This value determines the layout behavior when the viewport is resized.</p>
+   *          <ul>
    *             <li>
-   *                 <p>
-   *                   <code>READER</code>: A user who has read-only access to dashboards.</p>
+   *                <p>
+   *                   <code>FIXED</code>: A fixed width will be used when optimizing the layout. In
+   *                     the Quick Sight console, this option is called <code>Classic</code>.</p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                   <code>AUTHOR</code>: A user who can create data sources, datasets, analyses,
-   *                     and dashboards.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>ADMIN</code>: A user who is an author, who can also manage Amazon
-   *                     Amazon QuickSight settings.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>RESTRICTED_READER</code>: This role isn't currently available for
-   *                     use.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for
-   *                     use.</p>
+   *                <p>
+   *                   <code>RESPONSIVE</code>: The width of the canvas will be responsive and
+   *                     optimized to the view port. In the Quick Sight console, this option is called <code>Tiled</code>.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Role?: UserRole | string;
+  ResizeOption: ResizeOption | undefined;
 
   /**
-   * <p>The type of identity authentication used by the user.</p>
+   * <p>The width that the view port will be optimized for when the layout renders.</p>
+   * @public
    */
-  IdentityType?: IdentityType | string;
-
-  /**
-   * <p>The active status of user. When you create an Amazon QuickSight user that’s not an IAM
-   *             user or an Active Directory user, that user is inactive until they sign in and provide a
-   *             password.</p>
-   */
-  Active?: boolean;
-
-  /**
-   * <p>The principal ID of the user.</p>
-   */
-  PrincipalId?: string;
-
-  /**
-   * <p>The custom permissions profile associated with this user.</p>
-   */
-  CustomPermissionsName?: string;
-
-  /**
-   * <p>The type of supported external login provider that provides identity to let the user
-   *             federate into Amazon QuickSight with an associated IAMrole. The type can be one of the following.</p>
-   *         <ul>
-   *             <li>
-   *                     <p>
-   *                   <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.</p>
-   *                 </li>
-   *             <li>
-   *                     <p>
-   *                   <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider.</p>
-   *                 </li>
-   *          </ul>
-   */
-  ExternalLoginFederationProviderType?: string;
-
-  /**
-   * <p>The URL of the external login provider.</p>
-   */
-  ExternalLoginFederationProviderUrl?: string;
-
-  /**
-   * <p>The identity ID for the user in the external login provider.</p>
-   */
-  ExternalLoginId?: string;
+  OptimizedViewPortWidth?: string | undefined;
 }
 
-export namespace User {
+/**
+ * <p>Configuration options for the canvas of a grid layout.</p>
+ * @public
+ */
+export interface GridLayoutCanvasSizeOptions {
   /**
-   * @internal
+   * <p>The options that determine the sizing of the canvas used in a grid layout.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: User): any => ({
-    ...obj,
-  });
+  ScreenCanvasSizeOptions?: GridLayoutScreenCanvasSizeOptions | undefined;
+}
+
+/**
+ * <p>The options that determine the default settings for a grid layout configuration.</p>
+ * @public
+ */
+export interface DefaultGridLayoutConfiguration {
+  /**
+   * <p>Determines the screen canvas size options for a grid layout.</p>
+   * @public
+   */
+  CanvasSizeOptions: GridLayoutCanvasSizeOptions | undefined;
+}
+
+/**
+ * <p>The options that determine the default settings for interactive layout configuration.</p>
+ * @public
+ */
+export interface DefaultInteractiveLayoutConfiguration {
+  /**
+   * <p>The options that determine the default settings for a grid layout configuration.</p>
+   * @public
+   */
+  Grid?: DefaultGridLayoutConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the default settings of a free-form layout configuration.</p>
+   * @public
+   */
+  FreeForm?: DefaultFreeFormLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration of spacing (often a margin or padding).</p>
+ * @public
+ */
+export interface Spacing {
+  /**
+   * <p>Define the top spacing.</p>
+   * @public
+   */
+  Top?: string | undefined;
+
+  /**
+   * <p>Define the bottom spacing.</p>
+   * @public
+   */
+  Bottom?: string | undefined;
+
+  /**
+   * <p>Define the left spacing.</p>
+   * @public
+   */
+  Left?: string | undefined;
+
+  /**
+   * <p>Define the right spacing.</p>
+   * @public
+   */
+  Right?: string | undefined;
+}
+
+/**
+ * <p>The options for a paper canvas of a section-based layout.</p>
+ * @public
+ */
+export interface SectionBasedLayoutPaperCanvasSizeOptions {
+  /**
+   * <p>The paper size that is used to define canvas dimensions.</p>
+   * @public
+   */
+  PaperSize?: PaperSize | undefined;
+
+  /**
+   * <p>The paper orientation that
+   *             is used to define canvas dimensions. Choose one of the following
+   *             options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>PORTRAIT</p>
+   *             </li>
+   *             <li>
+   *                <p>LANDSCAPE</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  PaperOrientation?: PaperOrientation | undefined;
+
+  /**
+   * <p>Defines the spacing between the canvas content and the top, bottom, left, and right edges.</p>
+   * @public
+   */
+  PaperMargin?: Spacing | undefined;
+}
+
+/**
+ * <p>The options for the canvas of a section-based layout.</p>
+ * @public
+ */
+export interface SectionBasedLayoutCanvasSizeOptions {
+  /**
+   * <p>The options for a paper canvas of a section-based layout.</p>
+   * @public
+   */
+  PaperCanvasSizeOptions?: SectionBasedLayoutPaperCanvasSizeOptions | undefined;
+}
+
+/**
+ * <p>The options that determine the default settings for a section-based layout configuration.</p>
+ * @public
+ */
+export interface DefaultSectionBasedLayoutConfiguration {
+  /**
+   * <p>Determines the screen canvas size options for a section-based layout.</p>
+   * @public
+   */
+  CanvasSizeOptions: SectionBasedLayoutCanvasSizeOptions | undefined;
+}
+
+/**
+ * <p>The options that determine the default settings for a paginated layout configuration.</p>
+ * @public
+ */
+export interface DefaultPaginatedLayoutConfiguration {
+  /**
+   * <p>The options that determine the default settings for a section-based layout configuration.</p>
+   * @public
+   */
+  SectionBased?: DefaultSectionBasedLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration for default new sheet settings.</p>
+ * @public
+ */
+export interface DefaultNewSheetConfiguration {
+  /**
+   * <p>The options that determine the default settings for interactive layout configuration.</p>
+   * @public
+   */
+  InteractiveLayoutConfiguration?: DefaultInteractiveLayoutConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the default settings for a paginated layout configuration.</p>
+   * @public
+   */
+  PaginatedLayoutConfiguration?: DefaultPaginatedLayoutConfiguration | undefined;
+
+  /**
+   * <p>The option that determines the sheet content type.</p>
+   * @public
+   */
+  SheetContentType?: SheetContentType | undefined;
+}
+
+/**
+ * <p>The configuration for default analysis settings.</p>
+ * @public
+ */
+export interface AnalysisDefaults {
+  /**
+   * <p>The configuration for default new sheet settings.</p>
+   * @public
+   */
+  DefaultNewSheetConfiguration: DefaultNewSheetConfiguration | undefined;
+}
+
+/**
+ * <p>The calculated field of an analysis.</p>
+ * @public
+ */
+export interface CalculatedField {
+  /**
+   * <p>The data set that is used in this calculated field.</p>
+   * @public
+   */
+  DataSetIdentifier?: string | undefined;
+
+  /**
+   * <p>The topic that is used in this calculated field.</p>
+   * @public
+   */
+  TopicIdentifier?: string | undefined;
+
+  /**
+   * <p>The name of the calculated field.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The expression of the calculated field.</p>
+   * @public
+   */
+  Expression: string | undefined;
+}
+
+/**
+ * <p>Determines the color that's applied to a particular data value in a column.</p>
+ * @public
+ */
+export interface CustomColor {
+  /**
+   * <p>The data value that the color is applied to.</p>
+   * @public
+   */
+  FieldValue?: string | undefined;
+
+  /**
+   * <p>The color that is applied to the data value.</p>
+   * @public
+   */
+  Color: string | undefined;
+
+  /**
+   * <p>The value of a special data value.</p>
+   * @public
+   */
+  SpecialValue?: SpecialValue | undefined;
+}
+
+/**
+ * <p>The color configurations for a column.</p>
+ * @public
+ */
+export interface ColorsConfiguration {
+  /**
+   * <p>A list of up to 50 custom colors.</p>
+   * @public
+   */
+  CustomColors?: CustomColor[] | undefined;
+}
+
+/**
+ * <p>Decal settings for accessibility features that define visual patterns and styling for data elements.</p>
+ * @public
+ */
+export interface DecalSettings {
+  /**
+   * <p>Field value of the field that you are setting the decal pattern to. Applicable only for field level settings.</p>
+   * @public
+   */
+  ElementValue?: string | undefined;
+
+  /**
+   * <p>Visibility setting for the decal pattern.</p>
+   * @public
+   */
+  DecalVisibility?: Visibility | undefined;
+
+  /**
+   * <p>Color configuration for the decal pattern.</p>
+   * @public
+   */
+  DecalColor?: string | undefined;
+
+  /**
+   * <p>Type of pattern used for the decal, such as solid, diagonal, or circular patterns in various sizes.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SOLID</code>: Solid fill pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAGONAL_SMALL</code>: Small diagonal stripes pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAGONAL_MEDIUM</code>: Medium diagonal stripes pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAGONAL_LARGE</code>: Large diagonal stripes pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAGONAL_OPPOSITE_SMALL</code>: Small cross-diagonal stripes pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAGONAL_OPPOSITE_MEDIUM</code>: Medium cross-diagonal stripes pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAGONAL_OPPOSITE_LARGE</code>: Large cross-diagonal stripes pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CIRCLE_SMALL</code>: Small circle pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CIRCLE_MEDIUM</code>: Medium circle pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CIRCLE_LARGE</code>: Large circle pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAMOND_SMALL</code>: Small diamonds pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAMOND_MEDIUM</code>: Medium diamonds pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAMOND_LARGE</code>: Large diamonds pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAMOND_GRID_SMALL</code>: Small diamond grid pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAMOND_GRID_MEDIUM</code>: Medium diamond grid pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DIAMOND_GRID_LARGE</code>: Large diamond grid pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CHECKERBOARD_SMALL</code>: Small checkerboard pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CHECKERBOARD_MEDIUM</code>: Medium checkerboard pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CHECKERBOARD_LARGE</code>: Large checkerboard pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TRIANGLE_SMALL</code>: Small triangles pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TRIANGLE_MEDIUM</code>: Medium triangles pattern.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TRIANGLE_LARGE</code>: Large triangles pattern.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  DecalPatternType?: DecalPatternType | undefined;
+
+  /**
+   * <p>Style type for the decal, which can be either manual or automatic. This field is only applicable for line series.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Manual</code>: Apply manual line and marker configuration for line series.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Auto</code>: Apply automatic line and marker configuration for line series.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  DecalStyleType?: DecalStyleType | undefined;
+}
+
+/**
+ * <p>Decal settings configuration for a column</p>
+ * @public
+ */
+export interface DecalSettingsConfiguration {
+  /**
+   * <p>A list of up to 50 decal settings.</p>
+   * @public
+   */
+  CustomDecalSettings?: DecalSettings[] | undefined;
+}
+
+/**
+ * <p>The options that determine the null value format configuration.</p>
+ * @public
+ */
+export interface NullValueFormatConfiguration {
+  /**
+   * <p>Determines the null string of null values.</p>
+   * @public
+   */
+  NullString: string | undefined;
+}
+
+/**
+ * <p>The option that determines the decimal places configuration.</p>
+ * @public
+ */
+export interface DecimalPlacesConfiguration {
+  /**
+   * <p>The values of the decimal places.</p>
+   * @public
+   */
+  DecimalPlaces: number | undefined;
+}
+
+/**
+ * <p>The options that determine the negative value configuration.</p>
+ * @public
+ */
+export interface NegativeValueConfiguration {
+  /**
+   * <p>Determines the display mode of the negative value configuration.</p>
+   * @public
+   */
+  DisplayMode: NegativeValueDisplayMode | undefined;
+}
+
+/**
+ * <p>The options that determine the thousands separator configuration.</p>
+ * @public
+ */
+export interface ThousandSeparatorOptions {
+  /**
+   * <p>Determines the thousands separator symbol.</p>
+   * @public
+   */
+  Symbol?: NumericSeparatorSymbol | undefined;
+
+  /**
+   * <p>Determines the visibility of the thousands separator.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>Determines the way numbers are styled to accommodate different readability standards. The <code>DEFAULT</code> value uses the standard international grouping system and groups numbers by the thousands. The <code>LAKHS</code> value uses the Indian numbering system and groups numbers by lakhs and crores.</p>
+   * @public
+   */
+  GroupingStyle?: DigitGroupingStyle | undefined;
+}
+
+/**
+ * <p>The options that determine the numeric separator configuration.</p>
+ * @public
+ */
+export interface NumericSeparatorConfiguration {
+  /**
+   * <p>Determines the decimal separator.</p>
+   * @public
+   */
+  DecimalSeparator?: NumericSeparatorSymbol | undefined;
+
+  /**
+   * <p>The options that determine the thousands separator configuration.</p>
+   * @public
+   */
+  ThousandsSeparator?: ThousandSeparatorOptions | undefined;
+}
+
+/**
+ * <p>The options that determine the currency display format configuration.</p>
+ * @public
+ */
+export interface CurrencyDisplayFormatConfiguration {
+  /**
+   * <p>Determines the prefix value of the currency format.</p>
+   * @public
+   */
+  Prefix?: string | undefined;
+
+  /**
+   * <p>Determines the suffix value of the currency format.</p>
+   * @public
+   */
+  Suffix?: string | undefined;
+
+  /**
+   * <p>The options that determine the numeric separator configuration.</p>
+   * @public
+   */
+  SeparatorConfiguration?: NumericSeparatorConfiguration | undefined;
+
+  /**
+   * <p>Determines the symbol for the currency format.</p>
+   * @public
+   */
+  Symbol?: string | undefined;
+
+  /**
+   * <p>The option that determines the decimal places configuration.</p>
+   * @public
+   */
+  DecimalPlacesConfiguration?: DecimalPlacesConfiguration | undefined;
+
+  /**
+   * <p>Determines the number scale value for the currency format.</p>
+   * @public
+   */
+  NumberScale?: NumberScale | undefined;
+
+  /**
+   * <p>The options that determine the negative value configuration.</p>
+   * @public
+   */
+  NegativeValueConfiguration?: NegativeValueConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the null value format configuration.</p>
+   * @public
+   */
+  NullValueFormatConfiguration?: NullValueFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The options that determine the number display format configuration.</p>
+ * @public
+ */
+export interface NumberDisplayFormatConfiguration {
+  /**
+   * <p>Determines the prefix value of the number format.</p>
+   * @public
+   */
+  Prefix?: string | undefined;
+
+  /**
+   * <p>Determines the suffix value of the number format.</p>
+   * @public
+   */
+  Suffix?: string | undefined;
+
+  /**
+   * <p>The options that determine the numeric separator configuration.</p>
+   * @public
+   */
+  SeparatorConfiguration?: NumericSeparatorConfiguration | undefined;
+
+  /**
+   * <p>The option that determines the decimal places configuration.</p>
+   * @public
+   */
+  DecimalPlacesConfiguration?: DecimalPlacesConfiguration | undefined;
+
+  /**
+   * <p>Determines the number scale value of the number format.</p>
+   * @public
+   */
+  NumberScale?: NumberScale | undefined;
+
+  /**
+   * <p>The options that determine the negative value configuration.</p>
+   * @public
+   */
+  NegativeValueConfiguration?: NegativeValueConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the null value format configuration.</p>
+   * @public
+   */
+  NullValueFormatConfiguration?: NullValueFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The options that determine the percentage display format configuration.</p>
+ * @public
+ */
+export interface PercentageDisplayFormatConfiguration {
+  /**
+   * <p>Determines the prefix value of the percentage format.</p>
+   * @public
+   */
+  Prefix?: string | undefined;
+
+  /**
+   * <p>Determines the suffix value of the percentage format.</p>
+   * @public
+   */
+  Suffix?: string | undefined;
+
+  /**
+   * <p>The options that determine the numeric separator configuration.</p>
+   * @public
+   */
+  SeparatorConfiguration?: NumericSeparatorConfiguration | undefined;
+
+  /**
+   * <p>The option that determines the decimal places configuration.</p>
+   * @public
+   */
+  DecimalPlacesConfiguration?: DecimalPlacesConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the negative value configuration.</p>
+   * @public
+   */
+  NegativeValueConfiguration?: NegativeValueConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the null value format configuration.</p>
+   * @public
+   */
+  NullValueFormatConfiguration?: NullValueFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The options that determine the numeric format configuration.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface NumericFormatConfiguration {
+  /**
+   * <p>The options that determine the number display format configuration.</p>
+   * @public
+   */
+  NumberDisplayFormatConfiguration?: NumberDisplayFormatConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the currency display format configuration.</p>
+   * @public
+   */
+  CurrencyDisplayFormatConfiguration?: CurrencyDisplayFormatConfiguration | undefined;
+
+  /**
+   * <p>The options that determine the percentage display format configuration.</p>
+   * @public
+   */
+  PercentageDisplayFormatConfiguration?: PercentageDisplayFormatConfiguration | undefined;
+}
+
+/**
+ * <p>Formatting configuration for <code>DateTime</code> fields.</p>
+ * @public
+ */
+export interface DateTimeFormatConfiguration {
+  /**
+   * <p>Determines the <code>DateTime</code> format.</p>
+   * @public
+   */
+  DateTimeFormat?: string | undefined;
+
+  /**
+   * <p>The options that determine the null value format configuration.</p>
+   * @public
+   */
+  NullValueFormatConfiguration?: NullValueFormatConfiguration | undefined;
+
+  /**
+   * <p>The formatting configuration for numeric <code>DateTime</code> fields.</p>
+   * @public
+   */
+  NumericFormatConfiguration?: NumericFormatConfiguration | undefined;
+}
+
+/**
+ * <p>Formatting configuration for number fields.</p>
+ * @public
+ */
+export interface NumberFormatConfiguration {
+  /**
+   * <p>The options that determine the numeric format configuration.</p>
+   * @public
+   */
+  FormatConfiguration?: NumericFormatConfiguration | undefined;
+}
+
+/**
+ * <p>Formatting configuration for string fields.</p>
+ * @public
+ */
+export interface StringFormatConfiguration {
+  /**
+   * <p>The options that determine the null value format configuration.</p>
+   * @public
+   */
+  NullValueFormatConfiguration?: NullValueFormatConfiguration | undefined;
+
+  /**
+   * <p>The formatting configuration for numeric strings.</p>
+   * @public
+   */
+  NumericFormatConfiguration?: NumericFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The formatting configuration for all types of field.</p>
+ * @public
+ */
+export interface FormatConfiguration {
+  /**
+   * <p>Formatting configuration for string fields.</p>
+   * @public
+   */
+  StringFormatConfiguration?: StringFormatConfiguration | undefined;
+
+  /**
+   * <p>Formatting configuration for number fields.</p>
+   * @public
+   */
+  NumberFormatConfiguration?: NumberFormatConfiguration | undefined;
+
+  /**
+   * <p>Formatting configuration for <code>DateTime</code> fields.</p>
+   * @public
+   */
+  DateTimeFormatConfiguration?: DateTimeFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The general configuration of a column.</p>
+ * @public
+ */
+export interface ColumnConfiguration {
+  /**
+   * <p>The column.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The format configuration of a column.</p>
+   * @public
+   */
+  FormatConfiguration?: FormatConfiguration | undefined;
+
+  /**
+   * <p>The role of the column.</p>
+   * @public
+   */
+  Role?: ColumnRole | undefined;
+
+  /**
+   * <p>The color configurations of the column.</p>
+   * @public
+   */
+  ColorsConfiguration?: ColorsConfiguration | undefined;
+
+  /**
+   * <p>Decal configuration of the column.</p>
+   * @public
+   */
+  DecalSettingsConfiguration?: DecalSettingsConfiguration | undefined;
+}
+
+/**
+ * <p>A data set.</p>
+ * @public
+ */
+export interface DataSetIdentifierDeclaration {
+  /**
+   * <p>The identifier of the data set, typically the data set's name.</p>
+   * @public
+   */
+  Identifier: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the data set.</p>
+   * @public
+   */
+  DataSetArn: string | undefined;
+}
+
+/**
+ * <p>A custom filter that filters based on a single value. This filter can be partially matched.</p>
+ * @public
+ */
+export interface CustomFilterConfiguration {
+  /**
+   * <p>The match operator that is used to determine if a filter should be applied.</p>
+   * @public
+   */
+  MatchOperator: CategoryFilterMatchOperator | undefined;
+
+  /**
+   * <p>The category value for the filter.</p>
+   *          <p>This field is mutually exclusive to <code>ParameterName</code>.</p>
+   * @public
+   */
+  CategoryValue?: string | undefined;
+
+  /**
+   * <p>Select all of the values. Null is not the assigned value of select all.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FILTER_ALL_VALUES</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectAllOptions?: CategoryFilterSelectAllOptions | undefined;
+
+  /**
+   * <p>The parameter whose value should be used for the filter value.</p>
+   *          <p>This field is mutually exclusive to <code>CategoryValue</code>.</p>
+   * @public
+   */
+  ParameterName?: string | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption: FilterNullOption | undefined;
+}
+
+/**
+ * <p>A list of custom filter values.</p>
+ * @public
+ */
+export interface CustomFilterListConfiguration {
+  /**
+   * <p>The match operator that is used to determine if a filter should be applied.</p>
+   * @public
+   */
+  MatchOperator: CategoryFilterMatchOperator | undefined;
+
+  /**
+   * <p>The list of category values for the filter.</p>
+   * @public
+   */
+  CategoryValues?: string[] | undefined;
+
+  /**
+   * <p>Select all of the values. Null is not the assigned value of select all.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FILTER_ALL_VALUES</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectAllOptions?: CategoryFilterSelectAllOptions | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption: FilterNullOption | undefined;
+}
+
+/**
+ * <p>A list of filter configurations.</p>
+ * @public
+ */
+export interface FilterListConfiguration {
+  /**
+   * <p>The match operator that is used to determine if a filter should be applied.</p>
+   * @public
+   */
+  MatchOperator: CategoryFilterMatchOperator | undefined;
+
+  /**
+   * <p>The list of category values for the filter.</p>
+   * @public
+   */
+  CategoryValues?: string[] | undefined;
+
+  /**
+   * <p>Select all of the values. Null is not the assigned value of select all.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FILTER_ALL_VALUES</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectAllOptions?: CategoryFilterSelectAllOptions | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption?: FilterNullOption | undefined;
+}
+
+/**
+ * <p>The configuration for a <code>CategoryFilter</code>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface CategoryFilterConfiguration {
+  /**
+   * <p>A list of filter configurations. In the Quick Sight console, this filter type is called a filter list.</p>
+   * @public
+   */
+  FilterListConfiguration?: FilterListConfiguration | undefined;
+
+  /**
+   * <p>A list of custom filter values. In the Quick Sight console, this filter type is called a custom filter list.</p>
+   * @public
+   */
+  CustomFilterListConfiguration?: CustomFilterListConfiguration | undefined;
+
+  /**
+   * <p>A custom filter that filters based on a single value. This filter can be partially matched.</p>
+   * @public
+   */
+  CustomFilterConfiguration?: CustomFilterConfiguration | undefined;
+}
+
+/**
+ * <p>A control to display info icons for filters and parameters.</p>
+ * @public
+ */
+export interface SheetControlInfoIconLabelOptions {
+  /**
+   * <p>The visibility configuration of info icon label options.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p> The text content of info icon.</p>
+   * @public
+   */
+  InfoIconText?: string | undefined;
+}
+
+/**
+ * <p>The option that determines the text display size.</p>
+ * @public
+ */
+export interface FontSize {
+  /**
+   * <p>The lexical name for the text size, proportional to its surrounding context.</p>
+   * @public
+   */
+  Relative?: RelativeFontSize | undefined;
+
+  /**
+   * <p>The font size that you want to use in px.</p>
+   * @public
+   */
+  Absolute?: string | undefined;
+}
+
+/**
+ * <p>The option that determines the text display weight, or boldness.</p>
+ * @public
+ */
+export interface FontWeight {
+  /**
+   * <p>The lexical name for the level of boldness of the text display.</p>
+   * @public
+   */
+  Name?: FontWeightName | undefined;
+}
+
+/**
+ * <p>Configures the display properties of the given text.</p>
+ * @public
+ */
+export interface FontConfiguration {
+  /**
+   * <p>The option that determines the text display size.</p>
+   * @public
+   */
+  FontSize?: FontSize | undefined;
+
+  /**
+   * <p>Determines the appearance of decorative lines on the text.</p>
+   * @public
+   */
+  FontDecoration?: FontDecoration | undefined;
+
+  /**
+   * <p>Determines the color of the text.</p>
+   * @public
+   */
+  FontColor?: string | undefined;
+
+  /**
+   * <p>The option that determines the text display weight, or boldness.</p>
+   * @public
+   */
+  FontWeight?: FontWeight | undefined;
+
+  /**
+   * <p>Determines the text display face that is inherited by the given font family.</p>
+   * @public
+   */
+  FontStyle?: FontStyle | undefined;
+
+  /**
+   * <p>The font family that you want to use.</p>
+   * @public
+   */
+  FontFamily?: string | undefined;
+}
+
+/**
+ * <p>The share label options for the labels.</p>
+ * @public
+ */
+export interface LabelOptions {
+  /**
+   * <p>Determines whether or not the label is visible.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The font configuration of the label.</p>
+   * @public
+   */
+  FontConfiguration?: FontConfiguration | undefined;
+
+  /**
+   * <p>The text for the label.</p>
+   * @public
+   */
+  CustomLabel?: string | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface DateTimePickerControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>Customize how dates are formatted in controls.</p>
+   * @public
+   */
+  DateTimeFormat?: string | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+
+  /**
+   * <p>The helper text visibility of the <code>DateTimePickerControlDisplayOptions</code>.</p>
+   * @public
+   */
+  HelperTextVisibility?: Visibility | undefined;
+
+  /**
+   * <p>The date icon visibility of the <code>DateTimePickerControlDisplayOptions</code>.</p>
+   * @public
+   */
+  DateIconVisibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the filter control type of a <code>DateTimePicker</code>.</p>
+ * @public
+ */
+export interface DefaultDateTimePickerControlOptions {
+  /**
+   * <p>The date time picker type of the <code>DefaultDateTimePickerControlOptions</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_VALUED</code>: The filter condition is a fixed date.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DATE_RANGE</code>: The filter condition is a date time range.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlDateTimePickerType | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: DateTimePickerControlDisplayOptions | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>DateTimePickerControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+}
+
+/**
+ * <p>The sort configuration for selectable values in a control.</p>
+ * @public
+ */
+export interface SelectableValuesSort {
+  /**
+   * <p>The sort direction for the selectable values. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ASC</code>: Sort in ascending order.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DESC</code>: Sort in descending order.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>USER_DEFINED_ORDER</code>: Preserve the order in which the values were entered.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Direction: ControlSortDirection | undefined;
+}
+
+/**
+ * <p>The sort configuration for control values. This is a tagged union type. Specify either <code>SelectableValuesSort</code> or <code>ControlColumnSort</code>, but not both.</p>
+ * @public
+ */
+export interface ControlSortConfiguration {
+  /**
+   * <p>The sort configuration for user-specified values in the control. Use this option to sort values that are manually entered by users in a dropdown or list control.</p>
+   * @public
+   */
+  SelectableValuesSort?: SelectableValuesSort | undefined;
+
+  /**
+   * <p>The sort configuration for controls that are tied to a dataset column. Use this option to sort control values by an aggregate of a column.</p>
+   * @public
+   */
+  ControlColumnSort?: AggregationSortConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration of the <code>Select all</code> options in a list control.</p>
+ * @public
+ */
+export interface ListControlSelectAllOptions {
+  /**
+   * <p>The visibility configuration of the <code>Select all</code> options in a list control.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface DropDownControlDisplayOptions {
+  /**
+   * <p>The configuration of the <code>Select all</code> options in a
+   *             dropdown control.</p>
+   * @public
+   */
+  SelectAllOptions?: ListControlSelectAllOptions | undefined;
+
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>A list of selectable values that are used in a control.</p>
+ * @public
+ */
+export interface FilterSelectableValues {
+  /**
+   * <p>The values that are used in the <code>FilterSelectableValues</code>.</p>
+   * @public
+   */
+  Values?: string[] | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>Dropdown</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultFilterDropDownControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: DropDownControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>A list of selectable values that are used in a control.</p>
+   * @public
+   */
+  SelectableValues?: FilterSelectableValues | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+}
+
+/**
+ * <p>The title format text configuration for a sheet control. This is a tagged union type. Specify either <code>PlainText</code> or <code>RichText</code>, but not both.</p>
+ * @public
+ */
+export interface ControlTitleFormatText {
+  /**
+   * <p>The plain text format of the title text.</p>
+   * @public
+   */
+  PlainText?: string | undefined;
+
+  /**
+   * <p>The rich text format of the title text.</p>
+   * @public
+   */
+  RichText?: string | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface HierarchyFilterDropDownControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultHierarchyFilterDropDownControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: HierarchyFilterDropDownControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>DefaultHierarchyFilterDropDownControlOptions</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>The configuration of the search options in a hierarchy list control.</p>
+ * @public
+ */
+export interface HierarchyFilterListControlSearchOptions {
+  /**
+   * <p>The visibility configuration of the search options in a hierarchy list control.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface HierarchyFilterListControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+
+  /**
+   * <p>The configuration of the search options in a hierarchy list control.</p>
+   * @public
+   */
+  SearchOptions?: HierarchyFilterListControlSearchOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultHierarchyFilterListControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: HierarchyFilterListControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>DefaultHierarchyFilterListControlOptions</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>The configuration of the search options in a list control.</p>
+ * @public
+ */
+export interface ListControlSearchOptions {
+  /**
+   * <p>The visibility configuration of the search options in a list control.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface ListControlDisplayOptions {
+  /**
+   * <p>The configuration of the search options in a list control.</p>
+   * @public
+   */
+  SearchOptions?: ListControlSearchOptions | undefined;
+
+  /**
+   * <p>The configuration of the <code>Select all</code> options in a list control.</p>
+   * @public
+   */
+  SelectAllOptions?: ListControlSelectAllOptions | undefined;
+
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>List</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultFilterListControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: ListControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>DefaultFilterListControlOptions</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>A list of selectable values that are used in a control.</p>
+   * @public
+   */
+  SelectableValues?: FilterSelectableValues | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface RelativeDateTimeControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>Customize how dates are formatted in controls.</p>
+   * @public
+   */
+  DateTimeFormat?: string | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultRelativeDateTimeControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: RelativeDateTimeControlDisplayOptions | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>RelativeDateTimeControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface SliderControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>Slider</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultSliderControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: SliderControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>DefaultSliderControlOptions</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_POINT</code>: Filter against(equals) a single data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RANGE</code>: Filter data that is in a specified range.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlSliderType | undefined;
+
+  /**
+   * <p>The larger value that is displayed at the right of the slider.</p>
+   * @public
+   */
+  MaximumValue: number | undefined;
+
+  /**
+   * <p>The smaller value that is displayed at the left of the slider.</p>
+   * @public
+   */
+  MinimumValue: number | undefined;
+
+  /**
+   * <p>The number of increments that the slider bar is divided into.</p>
+   * @public
+   */
+  StepSize: number | undefined;
+}
+
+/**
+ * <p>The configuration of the placeholder options in a text control.</p>
+ * @public
+ */
+export interface TextControlPlaceholderOptions {
+  /**
+   * <p>The visibility configuration of the placeholder options in a text control.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface TextAreaControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of the placeholder options in a text area control.</p>
+   * @public
+   */
+  PlaceholderOptions?: TextControlPlaceholderOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>TextArea</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultTextAreaControlOptions {
+  /**
+   * <p>The delimiter that is used to separate the lines in text.</p>
+   * @public
+   */
+  Delimiter?: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: TextAreaControlDisplayOptions | undefined;
+}
+
+/**
+ * <p>The display options of a control.</p>
+ * @public
+ */
+export interface TextFieldControlDisplayOptions {
+  /**
+   * <p>The options to configure the title visibility, name, and font size.</p>
+   * @public
+   */
+  TitleOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The configuration of the placeholder options in a text field control.</p>
+   * @public
+   */
+  PlaceholderOptions?: TextControlPlaceholderOptions | undefined;
+
+  /**
+   * <p>The configuration of info icon label options.</p>
+   * @public
+   */
+  InfoIconLabelOptions?: SheetControlInfoIconLabelOptions | undefined;
+}
+
+/**
+ * <p>The default options that correspond to the <code>TextField</code> filter control type.</p>
+ * @public
+ */
+export interface DefaultTextFieldControlOptions {
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: TextFieldControlDisplayOptions | undefined;
+}
+
+/**
+ * <p>The option that corresponds to the control type of the filter.</p>
+ * @public
+ */
+export interface DefaultFilterControlOptions {
+  /**
+   * <p>The default options that correspond to the filter control type of a <code>DateTimePicker</code>.</p>
+   * @public
+   */
+  DefaultDateTimePickerOptions?: DefaultDateTimePickerControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>List</code> filter control type.</p>
+   * @public
+   */
+  DefaultListOptions?: DefaultFilterListControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>Dropdown</code> filter control type.</p>
+   * @public
+   */
+  DefaultDropdownOptions?: DefaultFilterDropDownControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>TextField</code> filter control type.</p>
+   * @public
+   */
+  DefaultTextFieldOptions?: DefaultTextFieldControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>TextArea</code> filter control type.</p>
+   * @public
+   */
+  DefaultTextAreaOptions?: DefaultTextAreaControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>Slider</code> filter control type.</p>
+   * @public
+   */
+  DefaultSliderOptions?: DefaultSliderControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>
+   * @public
+   */
+  DefaultRelativeDateTimeOptions?: DefaultRelativeDateTimeControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>
+   * @public
+   */
+  DefaultHierarchyList?: DefaultHierarchyFilterListControlOptions | undefined;
+
+  /**
+   * <p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>
+   * @public
+   */
+  DefaultHierarchyDropdown?: DefaultHierarchyFilterDropDownControlOptions | undefined;
+}
+
+/**
+ * <p>The default configuration for all dependent controls of the filter.</p>
+ * @public
+ */
+export interface DefaultFilterControlConfiguration {
+  /**
+   * <p>The title of the <code>DefaultFilterControlConfiguration</code>. This title is shared by all controls that are tied to this filter.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The control option for the <code>DefaultFilterControlConfiguration</code>.</p>
+   * @public
+   */
+  ControlOptions: DefaultFilterControlOptions | undefined;
+
+  /**
+   * <p>The title text format configuration for the default filter control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A <code>CategoryFilter</code> filters text values.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html">Adding text filters</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ * @public
+ */
+export interface CategoryFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The configuration for a <code>CategoryFilter</code>.</p>
+   * @public
+   */
+  Configuration: CategoryFilterConfiguration | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>One level of the drill-down path of a <code>HierarchyFilter</code>.</p>
+ * @public
+ */
+export interface HierarchyFilterLevel {
+  /**
+   * <p>The column that this level of the hierarchy drills down by. This column must belong to
+   *             the same dataset as <code>HierarchyFilter$Column</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+}
+
+/**
+ * <p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>
+ * @public
+ */
+export interface CategoryInnerFilter {
+  /**
+   * <p>A column of a data set.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The configuration for a <code>CategoryFilter</code>.</p>
+   *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+   * @public
+   */
+  Configuration: CategoryFilterConfiguration | undefined;
+
+  /**
+   * <p>The default configuration for all dependent controls of the filter.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>
+ * @public
+ */
+export interface InnerFilter {
+  /**
+   * <p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>
+   * @public
+   */
+  CategoryInnerFilter?: CategoryInnerFilter | undefined;
+}
+
+/**
+ * <p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>
+ * @public
+ */
+export interface NestedFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>A boolean condition to include or exclude the subset that is defined by the values of the nested inner filter.</p>
+   * @public
+   */
+  IncludeInnerSet: boolean | undefined;
+
+  /**
+   * <p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>
+   * @public
+   */
+  InnerFilter: InnerFilter | undefined;
+}
+
+/**
+ * <p>A <code>NumericEqualityFilter</code> filters values that are equal to the specified value.</p>
+ * @public
+ */
+export interface NumericEqualityFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The input value.</p>
+   * @public
+   */
+  Value?: number | undefined;
+
+  /**
+   * <p>Select all of the values. Null is not the assigned value of select all.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FILTER_ALL_VALUES</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectAllOptions?: NumericFilterSelectAllOptions | undefined;
+
+  /**
+   * <p>The match operator that is used to determine if a filter should be applied.</p>
+   * @public
+   */
+  MatchOperator: NumericEqualityMatchOperator | undefined;
+
+  /**
+   * <p>The aggregation function of the filter.</p>
+   * @public
+   */
+  AggregationFunction?: AggregationFunction | undefined;
+
+  /**
+   * <p>The parameter whose value should be used for the filter value.</p>
+   * @public
+   */
+  ParameterName?: string | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption: FilterNullOption | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>The value input pf the numeric range filter.</p>
+ * @public
+ */
+export interface NumericRangeFilterValue {
+  /**
+   * <p>The static value of the numeric range filter.</p>
+   * @public
+   */
+  StaticValue?: number | undefined;
+
+  /**
+   * <p>The parameter that is used in the numeric range.</p>
+   * @public
+   */
+  Parameter?: string | undefined;
+}
+
+/**
+ * <p>A <code>NumericRangeFilter</code> filters values that are within the value range.</p>
+ * @public
+ */
+export interface NumericRangeFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>Determines whether the minimum value in the filter value range should be included in the filtered results.</p>
+   * @public
+   */
+  IncludeMinimum?: boolean | undefined;
+
+  /**
+   * <p>Determines whether the maximum value in the filter value range should be included in the filtered results.</p>
+   * @public
+   */
+  IncludeMaximum?: boolean | undefined;
+
+  /**
+   * <p>The minimum value for the filter value range.</p>
+   * @public
+   */
+  RangeMinimum?: NumericRangeFilterValue | undefined;
+
+  /**
+   * <p>The maximum value for the filter value range.</p>
+   * @public
+   */
+  RangeMaximum?: NumericRangeFilterValue | undefined;
+
+  /**
+   * <p>Select all of the values. Null is not the assigned value of select all.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FILTER_ALL_VALUES</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectAllOptions?: NumericFilterSelectAllOptions | undefined;
+
+  /**
+   * <p>The aggregation function of the filter.</p>
+   * @public
+   */
+  AggregationFunction?: AggregationFunction | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption: FilterNullOption | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>The date configuration of the filter.</p>
+ * @public
+ */
+export interface AnchorDateConfiguration {
+  /**
+   * <p>The options for the date configuration. Choose one of the options below:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NOW</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AnchorOption?: AnchorOption | undefined;
+
+  /**
+   * <p>The name of the parameter that is used for the anchor date configuration.</p>
+   * @public
+   */
+  ParameterName?: string | undefined;
+}
+
+/**
+ * <p>The exclude period of <code>TimeRangeFilter</code> or <code>RelativeDatesFilter</code>.</p>
+ * @public
+ */
+export interface ExcludePeriodConfiguration {
+  /**
+   * <p>The amount or number of the exclude period.</p>
+   * @public
+   */
+  Amount: number | undefined;
+
+  /**
+   * <p>The granularity or unit (day, month, year) of the exclude period.</p>
+   * @public
+   */
+  Granularity: TimeGranularity | undefined;
+
+  /**
+   * <p>The status of the exclude period. Choose from the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ENABLED</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISABLED</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Status?: WidgetStatus | undefined;
+}
+
+/**
+ * <p>A <code>RelativeDatesFilter</code> filters relative dates values.</p>
+ * @public
+ */
+export interface RelativeDatesFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The date configuration of the filter.</p>
+   * @public
+   */
+  AnchorDateConfiguration: AnchorDateConfiguration | undefined;
+
+  /**
+   * <p>The minimum granularity (period granularity) of the relative dates filter.</p>
+   * @public
+   */
+  MinimumGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>
+   * @public
+   */
+  TimeGranularity: TimeGranularity | undefined;
+
+  /**
+   * <p>The range date type of the filter. Choose one of the options below:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PREVIOUS</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>THIS</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LAST</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NOW</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NEXT</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  RelativeDateType: RelativeDateType | undefined;
+
+  /**
+   * <p>The date value of the filter.</p>
+   * @public
+   */
+  RelativeDateValue?: number | undefined;
+
+  /**
+   * <p>The parameter whose value should be used for the filter value.</p>
+   * @public
+   */
+  ParameterName?: string | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption: FilterNullOption | undefined;
+
+  /**
+   * <p>The configuration for the exclude period of the filter.</p>
+   * @public
+   */
+  ExcludePeriodConfiguration?: ExcludePeriodConfiguration | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>The rolling date configuration of a date time filter.</p>
+ * @public
+ */
+export interface RollingDateConfiguration {
+  /**
+   * <p>The data set that is used in the rolling date configuration.</p>
+   * @public
+   */
+  DataSetIdentifier?: string | undefined;
+
+  /**
+   * <p>The expression of the rolling date configuration.</p>
+   * @public
+   */
+  Expression: string | undefined;
+}
+
+/**
+ * <p>A <code>TimeEqualityFilter</code> filters values that are equal to a given value.</p>
+ * @public
+ */
+export interface TimeEqualityFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The value of a <code>TimeEquality</code> filter.</p>
+   *          <p>This field is mutually exclusive to <code>RollingDate</code> and <code>ParameterName</code>.</p>
+   * @public
+   */
+  Value?: Date | undefined;
+
+  /**
+   * <p>The parameter whose value should be used for the filter value.</p>
+   *          <p>This field is mutually exclusive to <code>Value</code> and <code>RollingDate</code>.</p>
+   * @public
+   */
+  ParameterName?: string | undefined;
+
+  /**
+   * <p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>
+   * @public
+   */
+  TimeGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The rolling date input for the <code>TimeEquality</code> filter.</p>
+   *          <p>This field is mutually exclusive to <code>Value</code> and <code>ParameterName</code>.</p>
+   * @public
+   */
+  RollingDate?: RollingDateConfiguration | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>The value of a time range filter.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface TimeRangeFilterValue {
+  /**
+   * <p>The static input value.</p>
+   * @public
+   */
+  StaticValue?: Date | undefined;
+
+  /**
+   * <p>The rolling date input value.</p>
+   * @public
+   */
+  RollingDate?: RollingDateConfiguration | undefined;
+
+  /**
+   * <p>The parameter type input value.</p>
+   * @public
+   */
+  Parameter?: string | undefined;
+}
+
+/**
+ * <p>A <code>TimeRangeFilter</code> filters values that are between two specified values.</p>
+ * @public
+ */
+export interface TimeRangeFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>Determines whether the minimum value in the filter value range should be included in the filtered results.</p>
+   * @public
+   */
+  IncludeMinimum?: boolean | undefined;
+
+  /**
+   * <p>Determines whether the maximum value in the filter value range should be included in the filtered results.</p>
+   * @public
+   */
+  IncludeMaximum?: boolean | undefined;
+
+  /**
+   * <p>The minimum value for the filter value range.</p>
+   * @public
+   */
+  RangeMinimumValue?: TimeRangeFilterValue | undefined;
+
+  /**
+   * <p>The maximum value for the filter value range.</p>
+   * @public
+   */
+  RangeMaximumValue?: TimeRangeFilterValue | undefined;
+
+  /**
+   * <p>This option determines how null values should be treated when filtering data.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  NullOption: FilterNullOption | undefined;
+
+  /**
+   * <p>The exclude period of the time range filter.</p>
+   * @public
+   */
+  ExcludePeriodConfiguration?: ExcludePeriodConfiguration | undefined;
+
+  /**
+   * <p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>
+   * @public
+   */
+  TimeGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>A <code>TopBottomFilter</code> filters values that are at the top or the bottom.</p>
+ * @public
+ */
+export interface TopBottomFilter {
+  /**
+   * <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+   * @public
+   */
+  FilterId: string | undefined;
+
+  /**
+   * <p>The column that the filter is applied to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The number of items to include in the top bottom filter results.</p>
+   * @public
+   */
+  Limit?: number | undefined;
+
+  /**
+   * <p>The aggregation and sort configuration of the top bottom filter.</p>
+   * @public
+   */
+  AggregationSortConfigurations: AggregationSortConfiguration[] | undefined;
+
+  /**
+   * <p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>
+   * @public
+   */
+  TimeGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The parameter whose value should be used for the filter value.</p>
+   * @public
+   */
+  ParameterName?: string | undefined;
+
+  /**
+   * <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+   * @public
+   */
+  DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration | undefined;
+}
+
+/**
+ * <p>The filter that is applied to the options.</p>
+ * @public
+ */
+export interface SheetVisualScopingConfiguration {
+  /**
+   * <p>The selected sheet that the filter is applied to.</p>
+   * @public
+   */
+  SheetId: string | undefined;
+
+  /**
+   * <p>The scope of the applied entities. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VISUALS</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SELECTED_VISUALS</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Scope: FilterVisualScope | undefined;
+
+  /**
+   * <p>The selected visuals that the filter is applied to.</p>
+   * @public
+   */
+  VisualIds?: string[] | undefined;
+}
+
+/**
+ * <p>The configuration for applying a filter to specific sheets or visuals. You can apply this filter to multiple visuals that are on one sheet or to all visuals on a sheet.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface SelectedSheetsFilterScopeConfiguration {
+  /**
+   * <p>The sheet ID and visual IDs of the sheet and visuals that the filter is applied to.</p>
+   * @public
+   */
+  SheetVisualScopingConfigurations?: SheetVisualScopingConfiguration[] | undefined;
+}
+
+/**
+ * <p>The scope configuration for a <code>FilterGroup</code>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface FilterScopeConfiguration {
+  /**
+   * <p>The configuration for applying a filter to specific sheets.</p>
+   * @public
+   */
+  SelectedSheets?: SelectedSheetsFilterScopeConfiguration | undefined;
+
+  /**
+   * <p>The configuration that applies a filter to all sheets. When you choose <code>AllSheets</code> as the value for a <code>FilterScopeConfiguration</code>, this filter is applied to all visuals of all sheets in an Analysis, Dashboard, or Template. The <code>AllSheetsFilterScopeConfiguration</code> is chosen.</p>
+   * @public
+   */
+  AllSheets?: AllSheetsFilterScopeConfiguration | undefined;
+}
+
+/**
+ * <p>Defines what initiates a highlight operation on a visual, such as a click or hover.</p>
+ * @public
+ */
+export interface VisualHighlightOperation {
+  /**
+   * <p>Specifies whether a highlight operation is initiated by a click or hover, or whether it's disabled.</p>
+   * @public
+   */
+  Trigger: VisualHighlightTrigger | undefined;
+}
+
+/**
+ * <p>A list of custom actions applied to visuals in an analysis or sheet.</p>
+ * @public
+ */
+export interface VisualCustomActionDefaults {
+  /**
+   * <p>A list of highlight operations available for visuals in an analysis or sheet.</p>
+   * @public
+   */
+  highlightOperation?: VisualHighlightOperation | undefined;
+}
+
+/**
+ * <p>The configuration for a customizable message displayed on a visual. Supports parameter substitution in text fields.</p>
+ * @public
+ */
+export interface VisualMessageConfiguration {
+  /**
+   * <p>Specifies whether the custom message is displayed on the visual. When set to <code>true</code>, the custom message appears in place of the default message. When set to <code>false</code> or omitted, the default message is displayed.</p>
+   * @public
+   */
+  Enabled?: boolean | undefined;
+
+  /**
+   * <p>The title text of the message that is displayed on the visual.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>Specifies whether the title of the message is displayed.</p>
+   * @public
+   */
+  TitleVisibility?: Visibility | undefined;
+
+  /**
+   * <p>The description text of the message that is displayed on the visual.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>Specifies whether the description of the message is displayed.</p>
+   * @public
+   */
+  DescriptionVisibility?: Visibility | undefined;
+
+  /**
+   * <p>The display text of the hyperlink that is shown in the message.</p>
+   * @public
+   */
+  LinkText?: string | undefined;
+
+  /**
+   * <p>The destination URL of the hyperlink that is shown in the message. Only valid <code>http</code>, <code>https</code>, and <code>mailto</code> URLs are supported.</p>
+   * @public
+   */
+  LinkUrl?: string | undefined;
+
+  /**
+   * <p>Specifies whether the hyperlink in the message is displayed.</p>
+   * @public
+   */
+  LinkVisibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The messages that are displayed on a visual under specific conditions, such as when the visual returns no data.</p>
+ * @public
+ */
+export interface VisualMessages {
+  /**
+   * <p>The message that is displayed on a visual when there is no data to display.</p>
+   * @public
+   */
+  NoDataMessage?: VisualMessageConfiguration | undefined;
+}
+
+/**
+ * <p>An array of analysis level configurations.</p>
+ * @public
+ */
+export interface AssetOptions {
+  /**
+   * <p>Determines the timezone for the analysis.</p>
+   * @public
+   */
+  Timezone?: string | undefined;
+
+  /**
+   * <p>Determines the week start day for an analysis.</p>
+   * @public
+   */
+  WeekStart?: DayOfTheWeek | undefined;
+
+  /**
+   * <p>Determines whether insight summaries from Amazon Q Business are allowed in Dashboard Q&A.</p>
+   * @public
+   */
+  QBusinessInsightsStatus?: QBusinessInsightsStatus | undefined;
+
+  /**
+   * <p>A list of dataset ARNS to exclude from Dashboard Q&A.</p>
+   * @public
+   */
+  ExcludedDataSetArns?: string[] | undefined;
+
+  /**
+   * <p>A list of visual custom actions for the analysis.</p>
+   * @public
+   */
+  CustomActionDefaults?: VisualCustomActionDefaults | undefined;
+
+  /**
+   * <p>The configuration options for the messages that are displayed on visuals in the analysis.</p>
+   * @public
+   */
+  VisualMessages?: VisualMessages | undefined;
+}
+
+/**
+ * <p>Defines different defaults to the users or groups based on mapping.</p>
+ * @public
+ */
+export interface DynamicDefaultValue {
+  /**
+   * <p>The column that contains the username.</p>
+   * @public
+   */
+  UserNameColumn?: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The column that contains the group name.</p>
+   * @public
+   */
+  GroupNameColumn?: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The column that contains the default value of each user or group.</p>
+   * @public
+   */
+  DefaultValueColumn: ColumnIdentifier | undefined;
+}
+
+/**
+ * <p>The default values of the <code>DateTimeParameterDeclaration</code>.</p>
+ * @public
+ */
+export interface DateTimeDefaultValues {
+  /**
+   * <p>The dynamic value of the  <code>DataTimeDefaultValues</code>. Different defaults are displayed according to users, groups, and values mapping.</p>
+   * @public
+   */
+  DynamicValue?: DynamicDefaultValue | undefined;
+
+  /**
+   * <p>The static values of the <code>DataTimeDefaultValues</code>.</p>
+   * @public
+   */
+  StaticValues?: Date[] | undefined;
+
+  /**
+   * <p>The rolling date of the <code>DataTimeDefaultValues</code>. The date is determined from the dataset based on input expression.</p>
+   * @public
+   */
+  RollingDate?: RollingDateConfiguration | undefined;
+}
+
+/**
+ * <p>A dataset parameter that is mapped to an analysis parameter.</p>
+ * @public
+ */
+export interface MappedDataSetParameter {
+  /**
+   * <p>A unique name that identifies a dataset within the analysis or dashboard.</p>
+   * @public
+   */
+  DataSetIdentifier: string | undefined;
+
+  /**
+   * <p>The name of the dataset parameter.</p>
+   * @public
+   */
+  DataSetParameterName: string | undefined;
+}
+
+/**
+ * <p>The configuration that defines the default value of a <code>DateTime</code> parameter when a value has not been set.</p>
+ * @public
+ */
+export interface DateTimeValueWhenUnsetConfiguration {
+  /**
+   * <p>The built-in options for default values. The value can be one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>RECOMMENDED</code>: The recommended value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULL</code>: The <code>NULL</code> value.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ValueWhenUnsetOption?: ValueWhenUnsetOption | undefined;
+
+  /**
+   * <p>A custom value that's used when the value of a parameter isn't set.</p>
+   * @public
+   */
+  CustomValue?: Date | undefined;
+}
+
+/**
+ * <p>A parameter declaration for the <code>DateTime</code> data type.</p>
+ * @public
+ */
+export interface DateTimeParameterDeclaration {
+  /**
+   * <p>The name of the parameter that is being declared.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The default values of a parameter. If the parameter is a single-value parameter, a maximum of one default value can be provided.</p>
+   * @public
+   */
+  DefaultValues?: DateTimeDefaultValues | undefined;
+
+  /**
+   * <p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>
+   * @public
+   */
+  TimeGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The configuration that defines the default value of a <code>DateTime</code> parameter when a value has not been set.</p>
+   * @public
+   */
+  ValueWhenUnset?: DateTimeValueWhenUnsetConfiguration | undefined;
+
+  /**
+   * <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
+   * @public
+   */
+  MappedDataSetParameters?: MappedDataSetParameter[] | undefined;
+}
+
+/**
+ * <p>The default values of the <code>DecimalParameterDeclaration</code>.</p>
+ * @public
+ */
+export interface DecimalDefaultValues {
+  /**
+   * <p>The dynamic value of the <code>DecimalDefaultValues</code>. Different defaults are displayed according to users, groups, and values mapping.</p>
+   * @public
+   */
+  DynamicValue?: DynamicDefaultValue | undefined;
+
+  /**
+   * <p>The static values of the <code>DecimalDefaultValues</code>.</p>
+   * @public
+   */
+  StaticValues?: number[] | undefined;
+}
+
+/**
+ * <p>The configuration that defines the default value of a <code>Decimal</code> parameter when a value has not been set.</p>
+ * @public
+ */
+export interface DecimalValueWhenUnsetConfiguration {
+  /**
+   * <p>The built-in options for default values. The value can be one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>RECOMMENDED</code>: The recommended value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULL</code>: The <code>NULL</code> value.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ValueWhenUnsetOption?: ValueWhenUnsetOption | undefined;
+
+  /**
+   * <p>A custom value that's used when the value of a parameter isn't set.</p>
+   * @public
+   */
+  CustomValue?: number | undefined;
+}
+
+/**
+ * <p>A parameter declaration for the <code>Decimal</code> data type.</p>
+ * @public
+ */
+export interface DecimalParameterDeclaration {
+  /**
+   * <p>The value type determines whether the parameter is a single-value or multi-value parameter.</p>
+   * @public
+   */
+  ParameterValueType: ParameterValueType | undefined;
+
+  /**
+   * <p>The name of the parameter that is being declared.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The default values of a parameter. If the parameter is a single-value parameter, a maximum of one default value can be provided.</p>
+   * @public
+   */
+  DefaultValues?: DecimalDefaultValues | undefined;
+
+  /**
+   * <p>The configuration that defines the default value of a <code>Decimal</code> parameter when a value has not been set.</p>
+   * @public
+   */
+  ValueWhenUnset?: DecimalValueWhenUnsetConfiguration | undefined;
+
+  /**
+   * <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
+   * @public
+   */
+  MappedDataSetParameters?: MappedDataSetParameter[] | undefined;
+}
+
+/**
+ * <p>The default values of the <code>IntegerParameterDeclaration</code>.</p>
+ * @public
+ */
+export interface IntegerDefaultValues {
+  /**
+   * <p>The dynamic value of the <code>IntegerDefaultValues</code>. Different defaults are displayed according to users, groups, and values mapping.</p>
+   * @public
+   */
+  DynamicValue?: DynamicDefaultValue | undefined;
+
+  /**
+   * <p>The static values of the <code>IntegerDefaultValues</code>.</p>
+   * @public
+   */
+  StaticValues?: number[] | undefined;
+}
+
+/**
+ * <p>A parameter declaration for the <code>Integer</code> data type.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface IntegerValueWhenUnsetConfiguration {
+  /**
+   * <p>The built-in options for default values. The value can be one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>RECOMMENDED</code>: The recommended value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULL</code>: The <code>NULL</code> value.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ValueWhenUnsetOption?: ValueWhenUnsetOption | undefined;
+
+  /**
+   * <p>A custom value that's used when the value of a parameter isn't set.</p>
+   * @public
+   */
+  CustomValue?: number | undefined;
+}
+
+/**
+ * <p>A parameter declaration for the <code>Integer</code> data type.</p>
+ * @public
+ */
+export interface IntegerParameterDeclaration {
+  /**
+   * <p>The value type determines whether the parameter is a single-value or multi-value parameter.</p>
+   * @public
+   */
+  ParameterValueType: ParameterValueType | undefined;
+
+  /**
+   * <p>The name of the parameter that is being declared.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The default values of a parameter. If the parameter is a single-value parameter, a maximum of one default value can be provided.</p>
+   * @public
+   */
+  DefaultValues?: IntegerDefaultValues | undefined;
+
+  /**
+   * <p>A parameter declaration for the <code>Integer</code> data type.</p>
+   * @public
+   */
+  ValueWhenUnset?: IntegerValueWhenUnsetConfiguration | undefined;
+
+  /**
+   * <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
+   * @public
+   */
+  MappedDataSetParameters?: MappedDataSetParameter[] | undefined;
+}
+
+/**
+ * <p>The default values of the <code>StringParameterDeclaration</code>.</p>
+ * @public
+ */
+export interface StringDefaultValues {
+  /**
+   * <p>The dynamic value of the <code>StringDefaultValues</code>. Different defaults displayed according to users, groups, and values mapping.</p>
+   * @public
+   */
+  DynamicValue?: DynamicDefaultValue | undefined;
+
+  /**
+   * <p>The static values of the <code>DecimalDefaultValues</code>.</p>
+   * @public
+   */
+  StaticValues?: string[] | undefined;
+}
+
+/**
+ * <p>The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.</p>
+ * @public
+ */
+export interface StringValueWhenUnsetConfiguration {
+  /**
+   * <p>The built-in options for default values. The value can be one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>RECOMMENDED</code>: The recommended value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NULL</code>: The <code>NULL</code> value.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ValueWhenUnsetOption?: ValueWhenUnsetOption | undefined;
+
+  /**
+   * <p>A custom value that's used when the value of a parameter isn't set.</p>
+   * @public
+   */
+  CustomValue?: string | undefined;
+}
+
+/**
+ * <p>A parameter declaration for the <code>String</code> data type.</p>
+ * @public
+ */
+export interface StringParameterDeclaration {
+  /**
+   * <p>The value type determines whether the parameter is a single-value or multi-value parameter.</p>
+   * @public
+   */
+  ParameterValueType: ParameterValueType | undefined;
+
+  /**
+   * <p>The name of the parameter that is being declared.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The default values of a parameter. If the parameter is a single-value parameter, a maximum of one default value can be provided.</p>
+   * @public
+   */
+  DefaultValues?: StringDefaultValues | undefined;
+
+  /**
+   * <p>The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.</p>
+   * @public
+   */
+  ValueWhenUnset?: StringValueWhenUnsetConfiguration | undefined;
+
+  /**
+   * <p>A list of dataset parameters that are mapped to an analysis parameter.</p>
+   * @public
+   */
+  MappedDataSetParameters?: MappedDataSetParameter[] | undefined;
+}
+
+/**
+ * <p>The declaration definition of a parameter.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface ParameterDeclaration {
+  /**
+   * <p>A parameter declaration for the <code>String</code> data type.</p>
+   * @public
+   */
+  StringParameterDeclaration?: StringParameterDeclaration | undefined;
+
+  /**
+   * <p>A parameter declaration for the <code>Decimal</code> data type.</p>
+   * @public
+   */
+  DecimalParameterDeclaration?: DecimalParameterDeclaration | undefined;
+
+  /**
+   * <p>A parameter declaration for the <code>Integer</code> data type.</p>
+   * @public
+   */
+  IntegerParameterDeclaration?: IntegerParameterDeclaration | undefined;
+
+  /**
+   * <p>A parameter declaration for the <code>DateTime</code> data type.</p>
+   * @public
+   */
+  DateTimeParameterDeclaration?: DateTimeParameterDeclaration | undefined;
+}
+
+/**
+ * <p>A structure that describes the query execution options.</p>
+ * @public
+ */
+export interface QueryExecutionOptions {
+  /**
+   * <p>A structure that describes the query execution mode.</p>
+   * @public
+   */
+  QueryExecutionMode?: QueryExecutionMode | undefined;
+}
+
+/**
+ * <p>The source controls that are used in a <code>CascadingControlConfiguration</code>.</p>
+ * @public
+ */
+export interface CascadingControlSource {
+  /**
+   * <p>The source sheet control ID of a <code>CascadingControlSource</code>.</p>
+   * @public
+   */
+  SourceSheetControlId?: string | undefined;
+
+  /**
+   * <p>The column identifier that determines which column to look up for the source sheet control.</p>
+   * @public
+   */
+  ColumnToMatch?: ColumnIdentifier | undefined;
+}
+
+/**
+ * <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
+ * @public
+ */
+export interface CascadingControlConfiguration {
+  /**
+   * <p>A list of source controls that determine the values that are used in the current control.</p>
+   * @public
+   */
+  SourceControls?: CascadingControlSource[] | undefined;
+}
+
+/**
+ * <p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>
+ * @public
+ */
+export interface FilterCrossSheetControl {
+  /**
+   * <p>The ID of the <code>FilterCrossSheetControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterCrossSheetControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
+   * @public
+   */
+  CascadingControlConfiguration?: CascadingControlConfiguration | undefined;
+}
+
+/**
+ * <p>A control from a date filter that is used to specify date and time.</p>
+ * @public
+ */
+export interface FilterDateTimePickerControl {
+  /**
+   * <p>The ID of the <code>FilterDateTimePickerControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterDateTimePickerControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterDateTimePickerControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: DateTimePickerControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlDateTimePickerType | undefined;
+
+  /**
+   * <p>The visibility configurationof the Apply button on a <code>DateTimePickerControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
+ * @public
+ */
+export interface FilterDropDownControl {
+  /**
+   * <p>The ID of the <code>FilterDropDownControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterDropDownControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterDropDownControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The display options of the <code>FilterDropDownControl</code>.</p>
+   * @public
+   */
+  DisplayOptions?: DropDownControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>A list of selectable values that are used in a control.</p>
+   * @public
+   */
+  SelectableValues?: FilterSelectableValues | undefined;
+
+  /**
+   * <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
+   * @public
+   */
+  CascadingControlConfiguration?: CascadingControlConfiguration | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+ * @public
+ */
+export interface HierarchyFilterDropDownControl {
+  /**
+   * <p>The ID of the <code>HierarchyFilterDropDownControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>HierarchyFilterDropDownControl</code>. This must be
+   *             the <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The title of the <code>HierarchyFilterDropDownControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: HierarchyFilterDropDownControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>HierarchyFilterDropDownControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+ * @public
+ */
+export interface HierarchyFilterListControl {
+  /**
+   * <p>The ID of the <code>HierarchyFilterListControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>HierarchyFilterListControl</code>. This must be the
+   *             <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The title of the <code>HierarchyFilterListControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: HierarchyFilterListControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>HierarchyFilterListControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a list of buttons or boxes. This is used to select either a single value or multiple values.</p>
+ * @public
+ */
+export interface FilterListControl {
+  /**
+   * <p>The ID of the <code>FilterListControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterListControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterListControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: ListControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>FilterListControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>A list of selectable values that are used in a control.</p>
+   * @public
+   */
+  SelectableValues?: FilterSelectableValues | undefined;
+
+  /**
+   * <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
+   * @public
+   */
+  CascadingControlConfiguration?: CascadingControlConfiguration | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control from a date filter that is used to specify the relative date.</p>
+ * @public
+ */
+export interface FilterRelativeDateTimeControl {
+  /**
+   * <p>The ID of the <code>FilterTextAreaControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterTextAreaControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterTextAreaControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: RelativeDateTimeControlDisplayOptions | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>FilterRelativeDateTimeControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
+ * @public
+ */
+export interface FilterSliderControl {
+  /**
+   * <p>The ID of the <code>FilterSliderControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterSliderControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterSliderControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: SliderControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of the <code>FilterSliderControl</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SINGLE_POINT</code>: Filter against(equals) a single data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RANGE</code>: Filter data that is in a specified range.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type?: SheetControlSliderType | undefined;
+
+  /**
+   * <p>The larger value that is displayed at the right of the slider.</p>
+   * @public
+   */
+  MaximumValue: number | undefined;
+
+  /**
+   * <p>The smaller value that is displayed at the left of the slider.</p>
+   * @public
+   */
+  MinimumValue: number | undefined;
+
+  /**
+   * <p>The number of increments that the slider bar is divided into.</p>
+   * @public
+   */
+  StepSize: number | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a text box that is used to enter multiple entries.</p>
+ * @public
+ */
+export interface FilterTextAreaControl {
+  /**
+   * <p>The ID of the <code>FilterTextAreaControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterTextAreaControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterTextAreaControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The delimiter that is used to separate the lines in text.</p>
+   * @public
+   */
+  Delimiter?: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: TextAreaControlDisplayOptions | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a text box that is used to enter a single entry.</p>
+ * @public
+ */
+export interface FilterTextFieldControl {
+  /**
+   * <p>The ID of the <code>FilterTextFieldControl</code>.</p>
+   * @public
+   */
+  FilterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>FilterTextFieldControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source filter ID of the <code>FilterTextFieldControl</code>.</p>
+   * @public
+   */
+  SourceFilterId: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: TextFieldControlDisplayOptions | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>The control of a filter that is used to interact with a dashboard or an analysis.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface FilterControl {
+  /**
+   * <p>A control from a date filter that is used to specify date and time.</p>
+   * @public
+   */
+  DateTimePicker?: FilterDateTimePickerControl | undefined;
+
+  /**
+   * <p>A control to display a list of buttons or boxes. This is used to select either a single value or multiple values.</p>
+   * @public
+   */
+  List?: FilterListControl | undefined;
+
+  /**
+   * <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
+   * @public
+   */
+  Dropdown?: FilterDropDownControl | undefined;
+
+  /**
+   * <p>A control to display a text box that is used to enter a single entry.</p>
+   * @public
+   */
+  TextField?: FilterTextFieldControl | undefined;
+
+  /**
+   * <p>A control to display a text box that is used to enter multiple entries.</p>
+   * @public
+   */
+  TextArea?: FilterTextAreaControl | undefined;
+
+  /**
+   * <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
+   * @public
+   */
+  Slider?: FilterSliderControl | undefined;
+
+  /**
+   * <p>A control from a date filter that is used to specify the relative date.</p>
+   * @public
+   */
+  RelativeDateTime?: FilterRelativeDateTimeControl | undefined;
+
+  /**
+   * <p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>
+   * @public
+   */
+  CrossSheet?: FilterCrossSheetControl | undefined;
+
+  /**
+   * <p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+   * @public
+   */
+  HierarchyList?: HierarchyFilterListControl | undefined;
+
+  /**
+   * <p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+   * @public
+   */
+  HierarchyDropdown?: HierarchyFilterDropDownControl | undefined;
+}
+
+/**
+ * <p>The background style configuration of a free-form layout element.</p>
+ * @public
+ */
+export interface FreeFormLayoutElementBackgroundStyle {
+  /**
+   * <p>The background visibility of a free-form layout element.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The background color of a free-form layout element.</p>
+   * @public
+   */
+  Color?: string | undefined;
+}
+
+/**
+ * <p>The background style configuration of a free-form layout element.</p>
+ * @public
+ */
+export interface FreeFormLayoutElementBorderStyle {
+  /**
+   * <p>The border visibility of a free-form layout element.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The border color of a free-form layout element.</p>
+   * @public
+   */
+  Color?: string | undefined;
+
+  /**
+   * <p>The border width of a free-form layout element.</p>
+   * @public
+   */
+  Width?: string | undefined;
+}
+
+/**
+ * <p>The configuration of loading animation in free-form layout. </p>
+ * @public
+ */
+export interface LoadingAnimation {
+  /**
+   * <p>The visibility configuration of <code>LoadingAnimation</code>.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The override configuration of the rendering rules of a sheet.</p>
+ * @public
+ */
+export interface SheetElementConfigurationOverrides {
+  /**
+   * <p>Determines whether or not the overrides are visible. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>VISIBLE</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>HIDDEN</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The rendering rules of a sheet that uses a free-form layout.</p>
+ * @public
+ */
+export interface SheetElementRenderingRule {
+  /**
+   * <p>The expression of the rendering rules of a sheet.</p>
+   * @public
+   */
+  Expression: string | undefined;
+
+  /**
+   * <p>The override configuration of the rendering rules of a sheet.</p>
+   * @public
+   */
+  ConfigurationOverrides: SheetElementConfigurationOverrides | undefined;
+}
+
+/**
+ * <p>An element within a free-form layout.</p>
+ * @public
+ */
+export interface FreeFormLayoutElement {
+  /**
+   * <p>A unique identifier for an element within a free-form layout.</p>
+   * @public
+   */
+  ElementId: string | undefined;
+
+  /**
+   * <p>The type of element.</p>
+   * @public
+   */
+  ElementType: LayoutElementType | undefined;
+
+  /**
+   * <p>The x-axis coordinate of the element.</p>
+   * @public
+   */
+  XAxisLocation: string | undefined;
+
+  /**
+   * <p>The y-axis coordinate of the element.</p>
+   * @public
+   */
+  YAxisLocation: string | undefined;
+
+  /**
+   * <p>The width of an element within a free-form layout.</p>
+   * @public
+   */
+  Width: string | undefined;
+
+  /**
+   * <p>The height of an element within a free-form layout.</p>
+   * @public
+   */
+  Height: string | undefined;
+
+  /**
+   * <p>The visibility of an element within a free-form layout.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The rendering rules that determine when an element should be displayed within a free-form layout.</p>
+   * @public
+   */
+  RenderingRules?: SheetElementRenderingRule[] | undefined;
+
+  /**
+   * <p>The border style configuration of a free-form layout element.</p>
+   * @public
+   */
+  BorderStyle?: FreeFormLayoutElementBorderStyle | undefined;
+
+  /**
+   * <p>The border style configuration of a free-form layout element. This border style is used when the element is selected.</p>
+   * @public
+   */
+  SelectedBorderStyle?: FreeFormLayoutElementBorderStyle | undefined;
+
+  /**
+   * <p>The background style configuration of a free-form layout element.</p>
+   * @public
+   */
+  BackgroundStyle?: FreeFormLayoutElementBackgroundStyle | undefined;
+
+  /**
+   * <p>The loading animation configuration of a free-form layout element.</p>
+   * @public
+   */
+  LoadingAnimation?: LoadingAnimation | undefined;
+
+  /**
+   * <p>The border radius of a free-form layout element.</p>
+   * @public
+   */
+  BorderRadius?: string | undefined;
+
+  /**
+   * <p>The padding of a free-form layout element.</p>
+   * @public
+   */
+  Padding?: string | undefined;
+}
+
+/**
+ * <p>A member of a sheet layout group.</p>
+ * @public
+ */
+export interface SheetLayoutGroupMember {
+  /**
+   * <p>The unique identifier of the group member.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The type of the group member.</p>
+   * @public
+   */
+  Type: SheetLayoutGroupMemberType | undefined;
+}
+
+/**
+ * <p>A group of elements within a sheet layout.</p>
+ * @public
+ */
+export interface SheetLayoutGroup {
+  /**
+   * <p>A unique identifier for the group.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The members of the group.</p>
+   * @public
+   */
+  Members: SheetLayoutGroupMember[] | undefined;
+}
+
+/**
+ * <p>The configuration of a free-form layout.</p>
+ * @public
+ */
+export interface FreeFormLayoutConfiguration {
+  /**
+   * <p>The elements that are included in a free-form layout.</p>
+   * @public
+   */
+  Elements: FreeFormLayoutElement[] | undefined;
+
+  /**
+   * <p>Configuration options for the canvas of a free-form layout.</p>
+   * @public
+   */
+  CanvasSizeOptions?: FreeFormLayoutCanvasSizeOptions | undefined;
+
+  /**
+   * <p>The groups that are included in a free-form layout.</p>
+   * @public
+   */
+  Groups?: SheetLayoutGroup[] | undefined;
+}
+
+/**
+ * <p>The background style configuration of a grid layout element.</p>
+ * @public
+ */
+export interface GridLayoutElementBackgroundStyle {
+  /**
+   * <p>The background visibility of a grid layout element.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The background color of a grid layout element.</p>
+   * @public
+   */
+  Color?: string | undefined;
+}
+
+/**
+ * <p>The border style configuration of a grid layout element.</p>
+ * @public
+ */
+export interface GridLayoutElementBorderStyle {
+  /**
+   * <p>The border visibility of a grid layout element.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The border color of a grid layout element.</p>
+   * @public
+   */
+  Color?: string | undefined;
+
+  /**
+   * <p>The border width of a grid layout element.</p>
+   * @public
+   */
+  Width?: string | undefined;
+}
+
+/**
+ * <p>An element within a grid layout.</p>
+ * @public
+ */
+export interface GridLayoutElement {
+  /**
+   * <p>A unique identifier for an element within a grid layout.</p>
+   * @public
+   */
+  ElementId: string | undefined;
+
+  /**
+   * <p>The type of element.</p>
+   * @public
+   */
+  ElementType: LayoutElementType | undefined;
+
+  /**
+   * <p>The column index for the upper left corner of an element.</p>
+   * @public
+   */
+  ColumnIndex?: number | undefined;
+
+  /**
+   * <p>The width of a grid element expressed as a number of grid columns.</p>
+   * @public
+   */
+  ColumnSpan: number | undefined;
+
+  /**
+   * <p>The row index for the upper left corner of an element.</p>
+   * @public
+   */
+  RowIndex?: number | undefined;
+
+  /**
+   * <p>The height of a grid element expressed as a number of grid rows.</p>
+   * @public
+   */
+  RowSpan: number | undefined;
+
+  /**
+   * <p>The border style configuration of a grid layout element.</p>
+   * @public
+   */
+  BorderStyle?: GridLayoutElementBorderStyle | undefined;
+
+  /**
+   * <p>The border style configuration of a grid layout element. This border style is used when the element is selected.</p>
+   * @public
+   */
+  SelectedBorderStyle?: GridLayoutElementBorderStyle | undefined;
+
+  /**
+   * <p>The background style configuration of a grid layout element.</p>
+   * @public
+   */
+  BackgroundStyle?: GridLayoutElementBackgroundStyle | undefined;
+
+  /**
+   * <p>The configuration of loading animation in free-form layout. </p>
+   * @public
+   */
+  LoadingAnimation?: LoadingAnimation | undefined;
+
+  /**
+   * <p>The border radius of a grid layout element.</p>
+   * @public
+   */
+  BorderRadius?: string | undefined;
+
+  /**
+   * <p>The padding of a grid layout element.</p>
+   * @public
+   */
+  Padding?: string | undefined;
+}
+
+/**
+ * <p>The configuration for a grid layout. Also called a tiled layout.</p>
+ *          <p>Visuals snap to a grid with standard spacing and alignment. Dashboards are displayed as designed, with options to fit to screen or view at actual size.</p>
+ * @public
+ */
+export interface GridLayoutConfiguration {
+  /**
+   * <p>The elements that are included in a grid layout.</p>
+   * @public
+   */
+  Elements: GridLayoutElement[] | undefined;
+
+  /**
+   * <p>Configuration options for the canvas of a grid layout.</p>
+   * @public
+   */
+  CanvasSizeOptions?: GridLayoutCanvasSizeOptions | undefined;
+}
+
+/**
+ * <p>The free-form layout configuration of a section.</p>
+ * @public
+ */
+export interface FreeFormSectionLayoutConfiguration {
+  /**
+   * <p>The elements that are included in the free-form layout.</p>
+   * @public
+   */
+  Elements: FreeFormLayoutElement[] | undefined;
+}
+
+/**
+ * <p>The layout configuration of a section.</p>
+ * @public
+ */
+export interface SectionLayoutConfiguration {
+  /**
+   * <p>The free-form layout configuration of a section.</p>
+   * @public
+   */
+  FreeFormLayout: FreeFormSectionLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration of content in a body section.</p>
+ * @public
+ */
+export interface BodySectionContent {
+  /**
+   * <p>The layout configuration of a body section.</p>
+   * @public
+   */
+  Layout?: SectionLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration of a page break after a section.</p>
+ * @public
+ */
+export interface SectionAfterPageBreak {
+  /**
+   * <p>The option that enables or disables a page break at the end of a section.</p>
+   * @public
+   */
+  Status?: SectionPageBreakStatus | undefined;
+}
+
+/**
+ * <p>The configuration of a page break for a section.</p>
+ * @public
+ */
+export interface SectionPageBreakConfiguration {
+  /**
+   * <p>The configuration of a page break after a section.</p>
+   * @public
+   */
+  After?: SectionAfterPageBreak | undefined;
+}
+
+/**
+ * <p>The sort configuration for a column that is not used in a field well.</p>
+ * @public
+ */
+export interface ColumnSort {
+  /**
+   * <p>A column of a data set.</p>
+   * @public
+   */
+  SortBy: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The sort direction.</p>
+   * @public
+   */
+  Direction: SortDirection | undefined;
+
+  /**
+   * <p>The aggregation function that is defined in the column sort.</p>
+   * @public
+   */
+  AggregationFunction?: AggregationFunction | undefined;
+}
+
+/**
+ * <p>Describes the <b>Category</b> dataset column and constraints for the dynamic values used to repeat the contents of a section.</p>
+ * @public
+ */
+export interface BodySectionDynamicCategoryDimensionConfiguration {
+  /**
+   * <p>A column of a data set.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>Number of values to use from the column for repetition.</p>
+   * @public
+   */
+  Limit?: number | undefined;
+
+  /**
+   * <p>Sort criteria on the column values that you use for repetition. </p>
+   * @public
+   */
+  SortByMetrics?: ColumnSort[] | undefined;
+}
+
+/**
+ * <p>Describes the <b>Numeric</b> dataset column and constraints for the dynamic values used to repeat the  contents of a section.</p>
+ * @public
+ */
+export interface BodySectionDynamicNumericDimensionConfiguration {
+  /**
+   * <p>A column of a data set.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>Number of values to use from the column for repetition.</p>
+   * @public
+   */
+  Limit?: number | undefined;
+
+  /**
+   * <p>Sort criteria on the column values that you use for repetition. </p>
+   * @public
+   */
+  SortByMetrics?: ColumnSort[] | undefined;
+}
+
+/**
+ * <p>Describes the dataset column and constraints for the dynamic values used to repeat the contents of a section. The dataset column is either <b>Category</b> or <b>Numeric</b> column configuration</p>
+ * @public
+ */
+export interface BodySectionRepeatDimensionConfiguration {
+  /**
+   * <p>Describes the <b>Category</b> dataset column and constraints around the dynamic values that will be used in repeating the section contents.</p>
+   * @public
+   */
+  DynamicCategoryDimensionConfiguration?: BodySectionDynamicCategoryDimensionConfiguration | undefined;
+
+  /**
+   * <p>Describes the <b>Numeric</b> dataset column and constraints around the dynamic values used to repeat the  contents of a section.</p>
+   * @public
+   */
+  DynamicNumericDimensionConfiguration?: BodySectionDynamicNumericDimensionConfiguration | undefined;
+}
+
+/**
+ * <p>The page break configuration to apply for each repeating instance.</p>
+ * @public
+ */
+export interface BodySectionRepeatPageBreakConfiguration {
+  /**
+   * <p>The configuration of a page break after a section.</p>
+   * @public
+   */
+  After?: SectionAfterPageBreak | undefined;
+}
+
+/**
+ * <p>Describes the configurations that are required to declare a section as repeating.</p>
+ * @public
+ */
+export interface BodySectionRepeatConfiguration {
+  /**
+   * <p>List of <code>BodySectionRepeatDimensionConfiguration</code> values that describe the dataset column and constraints for the column used to repeat the contents of a section.</p>
+   * @public
+   */
+  DimensionConfigurations?: BodySectionRepeatDimensionConfiguration[] | undefined;
+
+  /**
+   * <p>Page break configuration to apply for each repeating instance.</p>
+   * @public
+   */
+  PageBreakConfiguration?: BodySectionRepeatPageBreakConfiguration | undefined;
+
+  /**
+   * <p>List of visuals to exclude from repetition in repeating sections. The visuals will render identically, and ignore the repeating configurations in all repeating instances.</p>
+   * @public
+   */
+  NonRepeatingVisuals?: string[] | undefined;
+}
+
+/**
+ * <p>The options that style a section.</p>
+ * @public
+ */
+export interface SectionStyle {
+  /**
+   * <p>The height of a section.</p>
+   *          <p>Heights can only be defined for header and footer sections. The default height margin is 0.5 inches. </p>
+   * @public
+   */
+  Height?: string | undefined;
+
+  /**
+   * <p>The spacing between section content and its top, bottom, left, and right edges.</p>
+   *          <p>There is no padding by default.</p>
+   * @public
+   */
+  Padding?: Spacing | undefined;
+}
+
+/**
+ * <p>The configuration of a body section.</p>
+ * @public
+ */
+export interface BodySectionConfiguration {
+  /**
+   * <p>The unique identifier of a body section.</p>
+   * @public
+   */
+  SectionId: string | undefined;
+
+  /**
+   * <p>The configuration of content in a body section.</p>
+   * @public
+   */
+  Content: BodySectionContent | undefined;
+
+  /**
+   * <p>The style options of a body section.</p>
+   * @public
+   */
+  Style?: SectionStyle | undefined;
+
+  /**
+   * <p>The configuration of a page break for a section.</p>
+   * @public
+   */
+  PageBreakConfiguration?: SectionPageBreakConfiguration | undefined;
+
+  /**
+   * <p>Describes the configurations that are required to declare a section as repeating.</p>
+   * @public
+   */
+  RepeatConfiguration?: BodySectionRepeatConfiguration | undefined;
+}
+
+/**
+ * <p>The configuration of a header or footer section.</p>
+ * @public
+ */
+export interface HeaderFooterSectionConfiguration {
+  /**
+   * <p>The unique identifier of the header or footer section.</p>
+   * @public
+   */
+  SectionId: string | undefined;
+
+  /**
+   * <p>The layout configuration of the header or footer section.</p>
+   * @public
+   */
+  Layout: SectionLayoutConfiguration | undefined;
+
+  /**
+   * <p>The style options of a header or footer section.</p>
+   * @public
+   */
+  Style?: SectionStyle | undefined;
+}
+
+/**
+ * <p>The configuration for a
+ *             section-based layout.</p>
+ * @public
+ */
+export interface SectionBasedLayoutConfiguration {
+  /**
+   * <p>A list of header section configurations.</p>
+   * @public
+   */
+  HeaderSections: HeaderFooterSectionConfiguration[] | undefined;
+
+  /**
+   * <p>A list of body section configurations.</p>
+   * @public
+   */
+  BodySections: BodySectionConfiguration[] | undefined;
+
+  /**
+   * <p>A list of footer section configurations.</p>
+   * @public
+   */
+  FooterSections: HeaderFooterSectionConfiguration[] | undefined;
+
+  /**
+   * <p>The options for the canvas of a section-based layout.</p>
+   * @public
+   */
+  CanvasSizeOptions: SectionBasedLayoutCanvasSizeOptions | undefined;
+}
+
+/**
+ * <p>The configuration that determines what the type of layout will be used on a sheet.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface LayoutConfiguration {
+  /**
+   * <p>A type of layout that can be used on a sheet. In a grid layout, visuals snap to a grid with standard spacing and alignment. Dashboards are displayed as designed, with options to fit to screen or view at actual size. A grid layout can be configured to behave in one of two ways when the viewport is resized: <code>FIXED</code> or <code>RESPONSIVE</code>.</p>
+   * @public
+   */
+  GridLayout?: GridLayoutConfiguration | undefined;
+
+  /**
+   * <p>A free-form is optimized for a fixed width and has more control over the exact placement of layout elements.</p>
+   * @public
+   */
+  FreeFormLayout?: FreeFormLayoutConfiguration | undefined;
+
+  /**
+   * <p>A section based layout organizes visuals into multiple sections and has customized header, footer and page break.</p>
+   * @public
+   */
+  SectionBasedLayout?: SectionBasedLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>A <code>Layout</code> defines the placement of elements within a sheet.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface Layout {
+  /**
+   * <p>The configuration that determines what the type of layout for a sheet.</p>
+   * @public
+   */
+  Configuration: LayoutConfiguration | undefined;
+}
+
+/**
+ * <p>A control from a date parameter that specifies date and time.</p>
+ * @public
+ */
+export interface ParameterDateTimePickerControl {
+  /**
+   * <p>The ID of the <code>ParameterDateTimePickerControl</code>.</p>
+   * @public
+   */
+  ParameterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>ParameterDateTimePickerControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The name of the <code>ParameterDateTimePickerControl</code>.</p>
+   * @public
+   */
+  SourceParameterName: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: DateTimePickerControlDisplayOptions | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A list of selectable values that are used in a control.</p>
+ * @public
+ */
+export interface ParameterSelectableValues {
+  /**
+   * <p>The values that are used in <code>ParameterSelectableValues</code>.</p>
+   * @public
+   */
+  Values?: string[] | undefined;
+
+  /**
+   * <p>The column identifier that fetches values from the data set.</p>
+   * @public
+   */
+  LinkToDataSetColumn?: ColumnIdentifier | undefined;
+}
+
+/**
+ * <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
+ * @public
+ */
+export interface ParameterDropDownControl {
+  /**
+   * <p>The ID of the <code>ParameterDropDownControl</code>.</p>
+   * @public
+   */
+  ParameterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>ParameterDropDownControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source parameter name of the <code>ParameterDropDownControl</code>.</p>
+   * @public
+   */
+  SourceParameterName: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: DropDownControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type parameter name of the <code>ParameterDropDownControl</code>.</p>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>A list of selectable values that are used in a control.</p>
+   * @public
+   */
+  SelectableValues?: ParameterSelectableValues | undefined;
+
+  /**
+   * <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
+   * @public
+   */
+  CascadingControlConfiguration?: CascadingControlConfiguration | undefined;
+
+  /**
+   * <p>The visibility configuration of the Apply button on a <code>ParameterDropDownControl</code>.</p>
+   * @public
+   */
+  CommitMode?: CommitMode | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a list with buttons or boxes that are used to select either a single value or multiple values.</p>
+ * @public
+ */
+export interface ParameterListControl {
+  /**
+   * <p>The ID of the <code>ParameterListControl</code>.</p>
+   * @public
+   */
+  ParameterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>ParameterListControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source parameter name of the <code>ParameterListControl</code>.</p>
+   * @public
+   */
+  SourceParameterName: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: ListControlDisplayOptions | undefined;
+
+  /**
+   * <p>The type of <code>ParameterListControl</code>.</p>
+   * @public
+   */
+  Type?: SheetControlListType | undefined;
+
+  /**
+   * <p>A list of selectable values that are used in a control.</p>
+   * @public
+   */
+  SelectableValues?: ParameterSelectableValues | undefined;
+
+  /**
+   * <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
+   * @public
+   */
+  CascadingControlConfiguration?: CascadingControlConfiguration | undefined;
+
+  /**
+   * <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+   * @public
+   */
+  ControlSortConfigurations?: ControlSortConfiguration[] | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
+ * @public
+ */
+export interface ParameterSliderControl {
+  /**
+   * <p>The ID of the <code>ParameterSliderControl</code>.</p>
+   * @public
+   */
+  ParameterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>ParameterSliderControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source parameter name of the <code>ParameterSliderControl</code>.</p>
+   * @public
+   */
+  SourceParameterName: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: SliderControlDisplayOptions | undefined;
+
+  /**
+   * <p>The larger value that is displayed at the right of the slider.</p>
+   * @public
+   */
+  MaximumValue: number | undefined;
+
+  /**
+   * <p>The smaller value that is displayed at the left of the slider.</p>
+   * @public
+   */
+  MinimumValue: number | undefined;
+
+  /**
+   * <p>The number of increments that the slider bar is divided into.</p>
+   * @public
+   */
+  StepSize: number | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a text box that is used to enter multiple entries.</p>
+ * @public
+ */
+export interface ParameterTextAreaControl {
+  /**
+   * <p>The ID of the <code>ParameterTextAreaControl</code>.</p>
+   * @public
+   */
+  ParameterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>ParameterTextAreaControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source parameter name of the <code>ParameterTextAreaControl</code>.</p>
+   * @public
+   */
+  SourceParameterName: string | undefined;
+
+  /**
+   * <p>The delimiter that is used to separate the lines in text.</p>
+   * @public
+   */
+  Delimiter?: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: TextAreaControlDisplayOptions | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>A control to display a text box that is used to enter a single entry.</p>
+ * @public
+ */
+export interface ParameterTextFieldControl {
+  /**
+   * <p>The ID of the <code>ParameterTextFieldControl</code>.</p>
+   * @public
+   */
+  ParameterControlId: string | undefined;
+
+  /**
+   * <p>The title of the <code>ParameterTextFieldControl</code>.</p>
+   * @public
+   */
+  Title?: string | undefined;
+
+  /**
+   * <p>The source parameter name of the <code>ParameterTextFieldControl</code>.</p>
+   * @public
+   */
+  SourceParameterName: string | undefined;
+
+  /**
+   * <p>The display options of a control.</p>
+   * @public
+   */
+  DisplayOptions?: TextFieldControlDisplayOptions | undefined;
+
+  /**
+   * <p>The title text format configuration for the control.</p>
+   * @public
+   */
+  ControlTitleFormatText?: ControlTitleFormatText | undefined;
+}
+
+/**
+ * <p>The control of a parameter that users can interact with in a dashboard or an analysis.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface ParameterControl {
+  /**
+   * <p>A control from a date parameter that specifies date and time.</p>
+   * @public
+   */
+  DateTimePicker?: ParameterDateTimePickerControl | undefined;
+
+  /**
+   * <p>A control to display a list with buttons or boxes that are used to select either a single value or multiple values.</p>
+   * @public
+   */
+  List?: ParameterListControl | undefined;
+
+  /**
+   * <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
+   * @public
+   */
+  Dropdown?: ParameterDropDownControl | undefined;
+
+  /**
+   * <p>A control to display a text box that is used to enter a single entry.</p>
+   * @public
+   */
+  TextField?: ParameterTextFieldControl | undefined;
+
+  /**
+   * <p>A control to display a text box that is used to enter multiple entries.</p>
+   * @public
+   */
+  TextArea?: ParameterTextAreaControl | undefined;
+
+  /**
+   * <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
+   * @public
+   */
+  Slider?: ParameterSliderControl | undefined;
+}
+
+/**
+ * <p>The configuration that determines the elements and canvas size options of sheet control.</p>
+ * @public
+ */
+export interface SheetControlLayoutConfiguration {
+  /**
+   * <p>The configuration that determines the elements and canvas size options of sheet control.</p>
+   * @public
+   */
+  GridLayout?: GridLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>A grid layout to define the placement of sheet control.</p>
+ * @public
+ */
+export interface SheetControlLayout {
+  /**
+   * <p>The configuration that determines the elements and canvas size options of sheet control.</p>
+   * @public
+   */
+  Configuration: SheetControlLayoutConfiguration | undefined;
+}
+
+/**
+ * <p>The menu options for the interactions of a textbox.</p>
+ * @public
+ */
+export interface TextBoxMenuOption {
+  /**
+   * <p>The availability status of the textbox menu. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the textbox menu.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The general textbox interactions setup for textbox publish options.</p>
+ * @public
+ */
+export interface TextBoxInteractionOptions {
+  /**
+   * <p>The menu options for the textbox.</p>
+   * @public
+   */
+  TextBoxMenuOption?: TextBoxMenuOption | undefined;
+}
+
+/**
+ * <p>A text box.</p>
+ * @public
+ */
+export interface SheetTextBox {
+  /**
+   * <p>The unique identifier for a text box. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have text boxes that share identifiers.</p>
+   * @public
+   */
+  SheetTextBoxId: string | undefined;
+
+  /**
+   * <p>The content that is displayed in the text box.</p>
+   * @public
+   */
+  Content?: string | undefined;
+
+  /**
+   * <p>The general textbox interactions setup for a textbox.</p>
+   * @public
+   */
+  Interactions?: TextBoxInteractionOptions | undefined;
+}
+
+/**
+ * <p>The configuration of selected fields in the<code>CustomActionFilterOperation</code>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface FilterOperationSelectedFieldsConfiguration {
+  /**
+   * <p>Chooses the fields that are filtered in <code>CustomActionFilterOperation</code>.</p>
+   * @public
+   */
+  SelectedFields?: string[] | undefined;
+
+  /**
+   * <p>A structure that contains the options that choose which fields are filtered in the <code>CustomActionFilterOperation</code>.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_FIELDS</code>: Applies the filter operation to all fields.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SelectedFieldOptions?: SelectedFieldOptions | undefined;
+
+  /**
+   * <p>The selected columns of a dataset.</p>
+   * @public
+   */
+  SelectedColumns?: ColumnIdentifier[] | undefined;
+}
+
+/**
+ * <p>The configuration of the same-sheet target visuals that you want to be filtered.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface SameSheetTargetVisualConfiguration {
+  /**
+   * <p>A list of the target visual IDs that are located in the same sheet of the analysis.</p>
+   * @public
+   */
+  TargetVisuals?: string[] | undefined;
+
+  /**
+   * <p>The options that choose the target visual in the same sheet.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ALL_VISUALS</code>: Applies the filter operation to all visuals in the same sheet.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  TargetVisualOptions?: TargetVisualOptions | undefined;
+}
+
+/**
+ * <p>The configuration of target visuals that you want to be filtered.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface FilterOperationTargetVisualsConfiguration {
+  /**
+   * <p>The configuration of the same-sheet target visuals that you want to be filtered.</p>
+   * @public
+   */
+  SameSheetTargetVisualConfiguration?: SameSheetTargetVisualConfiguration | undefined;
+}
+
+/**
+ * <p>The filter operation that filters data included in a visual or in an entire sheet.</p>
+ * @public
+ */
+export interface CustomActionFilterOperation {
+  /**
+   * <p>The configuration that chooses the fields to be filtered.</p>
+   * @public
+   */
+  SelectedFieldsConfiguration: FilterOperationSelectedFieldsConfiguration | undefined;
+
+  /**
+   * <p>The configuration that chooses the target visuals to be filtered.</p>
+   * @public
+   */
+  TargetVisualsConfiguration: FilterOperationTargetVisualsConfiguration | undefined;
+}
+
+/**
+ * <p>The operation that is defined by the custom action.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface VisualCustomActionOperation {
+  /**
+   * <p>The filter operation that filters data included in a visual or in an entire sheet.</p>
+   * @public
+   */
+  FilterOperation?: CustomActionFilterOperation | undefined;
+
+  /**
+   * <p>The navigation operation that navigates between different sheets in the same analysis.</p>
+   * @public
+   */
+  NavigationOperation?: CustomActionNavigationOperation | undefined;
+
+  /**
+   * <p>The URL operation that opens a link to another webpage.</p>
+   * @public
+   */
+  URLOperation?: CustomActionURLOperation | undefined;
+
+  /**
+   * <p>The set parameter operation that sets parameters in custom action.</p>
+   * @public
+   */
+  SetParametersOperation?: CustomActionSetParametersOperation | undefined;
+}
+
+/**
+ * <p>A custom action defined on a visual.</p>
+ * @public
+ */
+export interface VisualCustomAction {
+  /**
+   * <p>The ID of the <code>VisualCustomAction</code>.</p>
+   * @public
+   */
+  CustomActionId: string | undefined;
+
+  /**
+   * <p>The name of the <code>VisualCustomAction</code>.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The status of the <code>VisualCustomAction</code>.</p>
+   * @public
+   */
+  Status?: WidgetStatus | undefined;
+
+  /**
+   * <p>The trigger of the <code>VisualCustomAction</code>.</p>
+   *          <p>Valid values are defined as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DATA_POINT_CLICK</code>: Initiates a custom action by a left pointer click on a data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DATA_POINT_MENU</code>: Initiates a custom action by right pointer click from the menu.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Trigger: VisualCustomActionTrigger | undefined;
+
+  /**
+   * <p>A list of <code>VisualCustomActionOperations</code>.</p>
+   *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+   * @public
+   */
+  ActionOperations: VisualCustomActionOperation[] | undefined;
+}
+
+/**
+ * <p>The options that determine how a date axis is displayed.</p>
+ * @public
+ */
+export interface DateAxisOptions {
+  /**
+   * <p>Determines whether or not missing dates are displayed.</p>
+   * @public
+   */
+  MissingDateVisibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The options that are saved for future extension.</p>
+ * @public
+ */
+export interface AxisDisplayDataDrivenRange {}
+
+/**
+ * <p>The minimum and maximum setup for an axis display range.</p>
+ * @public
+ */
+export interface AxisDisplayMinMaxRange {
+  /**
+   * <p>The minimum setup for an axis display range.</p>
+   * @public
+   */
+  Minimum?: number | undefined;
+
+  /**
+   * <p>The maximum setup for an axis display range.</p>
+   * @public
+   */
+  Maximum?: number | undefined;
+}
+
+/**
+ * <p>The range setup of a numeric axis display range.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface AxisDisplayRange {
+  /**
+   * <p>The minimum and maximum setup of an axis display range.</p>
+   * @public
+   */
+  MinMax?: AxisDisplayMinMaxRange | undefined;
+
+  /**
+   * <p>The data-driven setup of an axis display range.</p>
+   * @public
+   */
+  DataDriven?: AxisDisplayDataDrivenRange | undefined;
+}
+
+/**
+ * <p>The liner axis scale setup.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface AxisLinearScale {
+  /**
+   * <p>The step count setup of a linear axis.</p>
+   * @public
+   */
+  StepCount?: number | undefined;
+
+  /**
+   * <p>The step size setup of a linear axis.</p>
+   * @public
+   */
+  StepSize?: number | undefined;
+}
+
+/**
+ * <p>The logarithmic axis scale setup.</p>
+ * @public
+ */
+export interface AxisLogarithmicScale {
+  /**
+   * <p>The base setup of a logarithmic axis scale.</p>
+   * @public
+   */
+  Base?: number | undefined;
+}
+
+/**
+ * <p>The scale setup
+ *             options for a numeric axis display.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface AxisScale {
+  /**
+   * <p>The linear axis scale setup.</p>
+   * @public
+   */
+  Linear?: AxisLinearScale | undefined;
+
+  /**
+   * <p>The logarithmic axis scale setup.</p>
+   * @public
+   */
+  Logarithmic?: AxisLogarithmicScale | undefined;
+}
+
+/**
+ * <p>The options for an axis with a numeric field.</p>
+ * @public
+ */
+export interface NumericAxisOptions {
+  /**
+   * <p>The scale setup of a numeric axis.</p>
+   * @public
+   */
+  Scale?: AxisScale | undefined;
+
+  /**
+   * <p>The range setup of a numeric axis.</p>
+   * @public
+   */
+  Range?: AxisDisplayRange | undefined;
+}
+
+/**
+ * <p>The data options for an axis.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface AxisDataOptions {
+  /**
+   * <p>The options for an axis with a numeric field.</p>
+   * @public
+   */
+  NumericAxisOptions?: NumericAxisOptions | undefined;
+
+  /**
+   * <p>The options for an axis with a date field.</p>
+   * @public
+   */
+  DateAxisOptions?: DateAxisOptions | undefined;
+}
+
+/**
+ * <p>The percent range in the visible range.</p>
+ * @public
+ */
+export interface PercentVisibleRange {
+  /**
+   * <p>The lower bound of the range.</p>
+   * @public
+   */
+  From?: number | undefined;
+
+  /**
+   * <p>The top bound of the range.</p>
+   * @public
+   */
+  To?: number | undefined;
+}
+
+/**
+ * <p>The range options for the data zoom scroll bar.</p>
+ * @public
+ */
+export interface VisibleRangeOptions {
+  /**
+   * <p>The percent range in the visible range.</p>
+   * @public
+   */
+  PercentRange?: PercentVisibleRange | undefined;
+}
+
+/**
+ * <p>The visual display options for a data zoom scroll bar.</p>
+ * @public
+ */
+export interface ScrollBarOptions {
+  /**
+   * <p>The visibility of the data zoom scroll bar.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The visibility range for the data zoom scroll bar.</p>
+   * @public
+   */
+  VisibleRange?: VisibleRangeOptions | undefined;
+}
+
+/**
+ * <p>The tick label options of an axis.</p>
+ * @public
+ */
+export interface AxisTickLabelOptions {
+  /**
+   * <p>Determines whether or not the axis ticks are visible.</p>
+   * @public
+   */
+  LabelOptions?: LabelOptions | undefined;
+
+  /**
+   * <p>The rotation angle of the axis tick labels.</p>
+   * @public
+   */
+  RotationAngle?: number | undefined;
+}
+
+/**
+ * <p>The display options for the axis label.</p>
+ * @public
+ */
+export interface AxisDisplayOptions {
+  /**
+   * <p>The tick label options of an axis.</p>
+   * @public
+   */
+  TickLabelOptions?: AxisTickLabelOptions | undefined;
+
+  /**
+   * <p>Determines whether or not the axis line is visible.</p>
+   * @public
+   */
+  AxisLineVisibility?: Visibility | undefined;
+
+  /**
+   * <p>Determines whether or not the grid line is visible.</p>
+   * @public
+   */
+  GridLineVisibility?: Visibility | undefined;
+
+  /**
+   * <p>The data options for an axis.</p>
+   * @public
+   */
+  DataOptions?: AxisDataOptions | undefined;
+
+  /**
+   * <p>The scroll bar options for an axis.</p>
+   * @public
+   */
+  ScrollbarOptions?: ScrollBarOptions | undefined;
+
+  /**
+   * <p>The offset value that determines the starting placement of the axis within a visual's bounds.</p>
+   * @public
+   */
+  AxisOffset?: string | undefined;
+}
+
+/**
+ * <p>The reference that specifies where the axis label is applied to.</p>
+ * @public
+ */
+export interface AxisLabelReferenceOptions {
+  /**
+   * <p>The field that the axis label is targeted to.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that the axis label is targeted to.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+}
+
+/**
+ * <p>The label options for a chart axis. You must specify the field that the label is targeted to.</p>
+ * @public
+ */
+export interface AxisLabelOptions {
+  /**
+   * <p>The font configuration of the axis label.</p>
+   * @public
+   */
+  FontConfiguration?: FontConfiguration | undefined;
+
+  /**
+   * <p>The text for the axis label.</p>
+   * @public
+   */
+  CustomLabel?: string | undefined;
+
+  /**
+   * <p>The options that indicate which field the label belongs to.</p>
+   * @public
+   */
+  ApplyTo?: AxisLabelReferenceOptions | undefined;
+}
+
+/**
+ * <p>The label options for an axis on a chart.</p>
+ * @public
+ */
+export interface ChartAxisLabelOptions {
+  /**
+   * <p>The visibility of an axis label on a chart. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>VISIBLE</code>: Shows the axis.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>HIDDEN</code>: Hides the axis.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The visibility configuration of the sort icon on a chart's axis label.</p>
+   * @public
+   */
+  SortIconVisibility?: Visibility | undefined;
+
+  /**
+   * <p>The label options for a chart axis.</p>
+   * @public
+   */
+  AxisLabelOptions?: AxisLabelOptions[] | undefined;
+}
+
+/**
+ * <p>The contribution analysis visual display for a line, pie, or bar chart.</p>
+ * @public
+ */
+export interface ContributionAnalysisDefault {
+  /**
+   * <p>The measure field that is used in the contribution analysis.</p>
+   * @public
+   */
+  MeasureFieldId: string | undefined;
+
+  /**
+   * <p>The dimensions columns that are used in the contribution analysis,
+   *             usually a list of <code>ColumnIdentifiers</code>.</p>
+   * @public
+   */
+  ContributorDimensions: ColumnIdentifier[] | undefined;
+}
+
+/**
+ * <p>The option that specifies individual data values for labels.</p>
+ * @public
+ */
+export interface DataPathLabelType {
+  /**
+   * <p>The field ID of the field that the data label needs to be applied to.</p>
+   * @public
+   */
+  FieldId?: string | undefined;
+
+  /**
+   * <p>The actual value of the field that is labeled.</p>
+   * @public
+   */
+  FieldValue?: string | undefined;
+
+  /**
+   * <p>The visibility of the data label.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The field label type.</p>
+ * @public
+ */
+export interface FieldLabelType {
+  /**
+   * <p>Indicates the field that is targeted by the field
+   *             label.</p>
+   * @public
+   */
+  FieldId?: string | undefined;
+
+  /**
+   * <p>The visibility of the field label.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The maximum label of a data path label.</p>
+ * @public
+ */
+export interface MaximumLabelType {
+  /**
+   * <p>The visibility of the maximum label.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The minimum label of a data path label.</p>
+ * @public
+ */
+export interface MinimumLabelType {
+  /**
+   * <p>The visibility of the minimum label.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The range ends label type of a data path label.</p>
+ * @public
+ */
+export interface RangeEndsLabelType {
+  /**
+   * <p>The visibility of the range ends label.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+}
+
+/**
+ * <p>The option that determines the data label type.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface DataLabelType {
+  /**
+   * <p>Determines the label configuration for the entire field.</p>
+   * @public
+   */
+  FieldLabelType?: FieldLabelType | undefined;
+
+  /**
+   * <p>The option that specifies individual data values for labels.</p>
+   * @public
+   */
+  DataPathLabelType?: DataPathLabelType | undefined;
+
+  /**
+   * <p>Determines the label configuration for range end value in a visual.</p>
+   * @public
+   */
+  RangeEndsLabelType?: RangeEndsLabelType | undefined;
+
+  /**
+   * <p>Determines the label configuration for the minimum value in a visual.</p>
+   * @public
+   */
+  MinimumLabelType?: MinimumLabelType | undefined;
+
+  /**
+   * <p>Determines the label configuration for the maximum value in a visual.</p>
+   * @public
+   */
+  MaximumLabelType?: MaximumLabelType | undefined;
+}
+
+/**
+ * <p>The options that determine the presentation of the data labels.</p>
+ * @public
+ */
+export interface DataLabelOptions {
+  /**
+   * <p>Determines the visibility of the data labels.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>Determines the visibility of the category field labels.</p>
+   * @public
+   */
+  CategoryLabelVisibility?: Visibility | undefined;
+
+  /**
+   * <p>Determines the visibility of the measure field labels.</p>
+   * @public
+   */
+  MeasureLabelVisibility?: Visibility | undefined;
+
+  /**
+   * <p>The option that determines the data label type.</p>
+   * @public
+   */
+  DataLabelTypes?: DataLabelType[] | undefined;
+
+  /**
+   * <p>Determines the position of the data labels.</p>
+   * @public
+   */
+  Position?: DataLabelPosition | undefined;
+
+  /**
+   * <p>Determines the content of the data labels.</p>
+   * @public
+   */
+  LabelContent?: DataLabelContent | undefined;
+
+  /**
+   * <p>Determines the font configuration of the data labels.</p>
+   * @public
+   */
+  LabelFontConfiguration?: FontConfiguration | undefined;
+
+  /**
+   * <p>Determines the color of the data labels.</p>
+   * @public
+   */
+  LabelColor?: string | undefined;
+
+  /**
+   * <p>Determines whether overlap is enabled or disabled for the data labels.</p>
+   * @public
+   */
+  Overlap?: DataLabelOverlap | undefined;
+
+  /**
+   * <p>Determines the visibility of the total.</p>
+   * @public
+   */
+  TotalsVisibility?: Visibility | undefined;
+}
+
+/**
+ * <p>Border settings configuration for visual elements, including visibility, width, and color properties.</p>
+ * @public
+ */
+export interface BorderSettings {
+  /**
+   * <p>Visibility setting for the border.</p>
+   * @public
+   */
+  BorderVisibility?: Visibility | undefined;
+
+  /**
+   * <p>Width of the border. Valid range is from 1px to 8px.</p>
+   * @public
+   */
+  BorderWidth?: string | undefined;
+
+  /**
+   * <p>Color of the border.</p>
+   * @public
+   */
+  BorderColor?: string | undefined;
+}
+
+/**
+ * <p>The options that determine the default presentation of all bar series in <code>BarChartVisual</code>.</p>
+ * @public
+ */
+export interface BarChartDefaultSeriesSettings {
+  /**
+   * <p>Decal settings for all bar series in the visual.</p>
+   * @public
+   */
+  DecalSettings?: DecalSettings | undefined;
+
+  /**
+   * <p>Border settings for all bar series in the visual.</p>
+   * @public
+   */
+  BorderSettings?: BorderSettings | undefined;
+}
+
+/**
+ * <p>The dimension type field with categorical type columns..</p>
+ * @public
+ */
+export interface CategoricalDimensionField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that is used in the <code>CategoricalDimensionField</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The custom hierarchy ID.</p>
+   * @public
+   */
+  HierarchyId?: string | undefined;
+
+  /**
+   * <p>The format configuration of the field.</p>
+   * @public
+   */
+  FormatConfiguration?: StringFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The dimension type field with date type columns.</p>
+ * @public
+ */
+export interface DateDimensionField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that is used in the <code>DateDimensionField</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The date granularity of the <code>DateDimensionField</code>. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>YEAR</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>QUARTER</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MONTH</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>WEEK</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DAY</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>HOUR</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MINUTE</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SECOND</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MILLISECOND</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  DateGranularity?: TimeGranularity | undefined;
+
+  /**
+   * <p>The custom hierarchy ID.</p>
+   * @public
+   */
+  HierarchyId?: string | undefined;
+
+  /**
+   * <p>The format configuration of the field.</p>
+   * @public
+   */
+  FormatConfiguration?: DateTimeFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The dimension type field with numerical type columns.</p>
+ * @public
+ */
+export interface NumericalDimensionField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that is used in the <code>NumericalDimensionField</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The custom hierarchy ID.</p>
+   * @public
+   */
+  HierarchyId?: string | undefined;
+
+  /**
+   * <p>The format configuration of the field.</p>
+   * @public
+   */
+  FormatConfiguration?: NumberFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The dimension type field.</p>
+ * @public
+ */
+export interface DimensionField {
+  /**
+   * <p>The dimension type field with numerical type columns.</p>
+   * @public
+   */
+  NumericalDimensionField?: NumericalDimensionField | undefined;
+
+  /**
+   * <p>The dimension type field with categorical type columns.</p>
+   * @public
+   */
+  CategoricalDimensionField?: CategoricalDimensionField | undefined;
+
+  /**
+   * <p>The dimension type field with date type columns.</p>
+   * @public
+   */
+  DateDimensionField?: DateDimensionField | undefined;
+}
+
+/**
+ * <p>The table calculation measure field for pivot tables.</p>
+ * @public
+ */
+export interface CalculatedMeasureField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The expression in the table calculation.</p>
+   * @public
+   */
+  Expression: string | undefined;
+}
+
+/**
+ * <p>The measure type field with categorical type columns.</p>
+ * @public
+ */
+export interface CategoricalMeasureField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that is used in the <code>CategoricalMeasureField</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The aggregation function of the measure field.</p>
+   * @public
+   */
+  AggregationFunction?: CategoricalAggregationFunction | undefined;
+
+  /**
+   * <p>The format configuration of the field.</p>
+   * @public
+   */
+  FormatConfiguration?: StringFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The measure type field with date type columns.</p>
+ * @public
+ */
+export interface DateMeasureField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that is used in the <code>DateMeasureField</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The aggregation function of the measure field.</p>
+   * @public
+   */
+  AggregationFunction?: DateAggregationFunction | undefined;
+
+  /**
+   * <p>The format configuration of the field.</p>
+   * @public
+   */
+  FormatConfiguration?: DateTimeFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The measure type field with numerical type columns.</p>
+ * @public
+ */
+export interface NumericalMeasureField {
+  /**
+   * <p>The custom field ID.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>The column that is used in the <code>NumericalMeasureField</code>.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The aggregation function of the measure field.</p>
+   * @public
+   */
+  AggregationFunction?: NumericalAggregationFunction | undefined;
+
+  /**
+   * <p>The format configuration of the field.</p>
+   * @public
+   */
+  FormatConfiguration?: NumberFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The measure (metric) type field.</p>
+ * @public
+ */
+export interface MeasureField {
+  /**
+   * <p>The measure type field with numerical type columns.</p>
+   * @public
+   */
+  NumericalMeasureField?: NumericalMeasureField | undefined;
+
+  /**
+   * <p>The measure type field with categorical type columns.</p>
+   * @public
+   */
+  CategoricalMeasureField?: CategoricalMeasureField | undefined;
+
+  /**
+   * <p>The measure type field with date type columns.</p>
+   * @public
+   */
+  DateMeasureField?: DateMeasureField | undefined;
+
+  /**
+   * <p>The calculated measure field only used in pivot tables.</p>
+   * @public
+   */
+  CalculatedMeasureField?: CalculatedMeasureField | undefined;
+}
+
+/**
+ * <p>The aggregated field wells of a bar chart.</p>
+ * @public
+ */
+export interface BarChartAggregatedFieldWells {
+  /**
+   * <p>The category (y-axis) field well of a bar chart.</p>
+   * @public
+   */
+  Category?: DimensionField[] | undefined;
+
+  /**
+   * <p>The value field wells of a bar chart. Values are aggregated by
+   *             category.</p>
+   * @public
+   */
+  Values?: MeasureField[] | undefined;
+
+  /**
+   * <p>The color (group/color) field well of a bar chart.</p>
+   * @public
+   */
+  Colors?: DimensionField[] | undefined;
+
+  /**
+   * <p>The small multiples field well of a bar chart.</p>
+   * @public
+   */
+  SmallMultiples?: DimensionField[] | undefined;
+}
+
+/**
+ * <p>The field wells of a <code>BarChartVisual</code>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface BarChartFieldWells {
+  /**
+   * <p>The aggregated field wells of a bar chart.</p>
+   * @public
+   */
+  BarChartAggregatedFieldWells?: BarChartAggregatedFieldWells | undefined;
+}
+
+/**
+ * <p>The context menu options for a visual's interactions.</p>
+ * @public
+ */
+export interface ContextMenuOption {
+  /**
+   * <p>The availability status of the context menu options. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the context menu.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The menu options for a visual.</p>
+ * @public
+ */
+export interface VisualMenuOption {
+  /**
+   * <p>The availaiblity status of a visual's menu options.</p>
+   * @public
+   */
+  AvailabilityStatus?: DashboardBehavior | undefined;
+}
+
+/**
+ * <p>The general visual interactions setup for visual publish options</p>
+ * @public
+ */
+export interface VisualInteractionOptions {
+  /**
+   * <p>The on-visual menu options for a visual.</p>
+   * @public
+   */
+  VisualMenuOption?: VisualMenuOption | undefined;
+
+  /**
+   * <p>The context menu options for a visual.</p>
+   * @public
+   */
+  ContextMenuOption?: ContextMenuOption | undefined;
+}
+
+/**
+ * <p>The options for the legend setup of a visual.</p>
+ * @public
+ */
+export interface LegendOptions {
+  /**
+   * <p>Determines whether or not the legend is visible.</p>
+   * @public
+   */
+  Visibility?: Visibility | undefined;
+
+  /**
+   * <p>The custom title for the legend.</p>
+   * @public
+   */
+  Title?: LabelOptions | undefined;
+
+  /**
+   * <p>The positions for the legend. Choose one of the following
+   *             options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>AUTO</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RIGHT</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>BOTTOM</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LEFT</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Position?: LegendPosition | undefined;
+
+  /**
+   * <p>The width of the legend. If this value is omitted, a default width is used when rendering.</p>
+   * @public
+   */
+  Width?: string | undefined;
+
+  /**
+   * <p>The height of the legend. If this value is omitted, a default height is used when
+   *             rendering.</p>
+   * @public
+   */
+  Height?: string | undefined;
+
+  /**
+   * <p>Configures the display properties of the given text.</p>
+   * @public
+   */
+  ValueFontConfiguration?: FontConfiguration | undefined;
+}
+
+/**
+ * <p>The dynamic configuration of the reference line data configuration.</p>
+ * @public
+ */
+export interface ReferenceLineDynamicDataConfiguration {
+  /**
+   * <p>The column that the dynamic data targets.</p>
+   * @public
+   */
+  Column: ColumnIdentifier | undefined;
+
+  /**
+   * <p>The aggregation function that is used in the dynamic data.</p>
+   * @public
+   */
+  MeasureAggregationFunction?: AggregationFunction | undefined;
+
+  /**
+   * <p>The calculation that is used in the dynamic data.</p>
+   * @public
+   */
+  Calculation: NumericalAggregationFunction | undefined;
+}
+
+/**
+ * <p>The static data configuration of the reference line data configuration.</p>
+ * @public
+ */
+export interface ReferenceLineStaticDataConfiguration {
+  /**
+   * <p>The double input of the static data.</p>
+   * @public
+   */
+  Value: number | undefined;
+}
+
+/**
+ * <p>The data configuration of the reference line.</p>
+ * @public
+ */
+export interface ReferenceLineDataConfiguration {
+  /**
+   * <p>The static data configuration of the reference line data configuration.</p>
+   * @public
+   */
+  StaticConfiguration?: ReferenceLineStaticDataConfiguration | undefined;
+
+  /**
+   * <p>The dynamic configuration of the reference line data configuration.</p>
+   * @public
+   */
+  DynamicConfiguration?: ReferenceLineDynamicDataConfiguration | undefined;
+
+  /**
+   * <p>The axis binding type of the reference line. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PrimaryY</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SecondaryY</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AxisBinding?: AxisBinding | undefined;
+
+  /**
+   * <p>The series type of the reference line data configuration. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BAR</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LINE</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  SeriesType?: ReferenceLineSeriesType | undefined;
+}
+
+/**
+ * <p>The configuration for a custom label on a <code>ReferenceLine</code>.</p>
+ * @public
+ */
+export interface ReferenceLineCustomLabelConfiguration {
+  /**
+   * <p>The string text of the custom label.</p>
+   * @public
+   */
+  CustomLabel: string | undefined;
+}
+
+/**
+ * <p>The value label configuration of the label in a reference line.</p>
+ * @public
+ */
+export interface ReferenceLineValueLabelConfiguration {
+  /**
+   * <p>The relative position of the value label. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BEFORE_CUSTOM_LABEL</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>AFTER_CUSTOM_LABEL</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  RelativePosition?: ReferenceLineValueLabelRelativePosition | undefined;
+
+  /**
+   * <p>The format configuration of the value label.</p>
+   * @public
+   */
+  FormatConfiguration?: NumericFormatConfiguration | undefined;
+}
+
+/**
+ * <p>The label configuration of a reference line.</p>
+ * @public
+ */
+export interface ReferenceLineLabelConfiguration {
+  /**
+   * <p>The value label configuration of the label in a reference line.</p>
+   * @public
+   */
+  ValueLabelConfiguration?: ReferenceLineValueLabelConfiguration | undefined;
+
+  /**
+   * <p>The custom label configuration of the label in a reference line.</p>
+   * @public
+   */
+  CustomLabelConfiguration?: ReferenceLineCustomLabelConfiguration | undefined;
+
+  /**
+   * <p>The font configuration of the label in a reference line.</p>
+   * @public
+   */
+  FontConfiguration?: FontConfiguration | undefined;
+
+  /**
+   * <p>The font color configuration of the label in a reference line.</p>
+   * @public
+   */
+  FontColor?: string | undefined;
+
+  /**
+   * <p>The horizontal position configuration of the label in a reference line. Choose one of
+   *             the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>LEFT</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CENTER</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RIGHT</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  HorizontalPosition?: ReferenceLineLabelHorizontalPosition | undefined;
+
+  /**
+   * <p>The vertical position configuration of the label in a reference line. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ABOVE</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>BELOW</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  VerticalPosition?: ReferenceLineLabelVerticalPosition | undefined;
+}
+
+/**
+ * <p>The style configuration of the reference
+ *             line.</p>
+ * @public
+ */
+export interface ReferenceLineStyleConfiguration {
+  /**
+   * <p>The pattern type of the line style. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SOLID</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DASHED</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DOTTED</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Pattern?: ReferenceLinePatternType | undefined;
+
+  /**
+   * <p>The hex color of the reference line.</p>
+   * @public
+   */
+  Color?: string | undefined;
+}
+
+/**
+ * <p>The reference line visual display options.</p>
+ * @public
+ */
+export interface ReferenceLine {
+  /**
+   * <p>The status of the reference line. Choose one of the following options:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ENABLE</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISABLE</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Status?: WidgetStatus | undefined;
+
+  /**
+   * <p>The data configuration of the reference line.</p>
+   * @public
+   */
+  DataConfiguration: ReferenceLineDataConfiguration | undefined;
+
+  /**
+   * <p>The style configuration of the reference line.</p>
+   * @public
+   */
+  StyleConfiguration?: ReferenceLineStyleConfiguration | undefined;
+
+  /**
+   * <p>The label configuration of the reference line.</p>
+   * @public
+   */
+  LabelConfiguration?: ReferenceLineLabelConfiguration | undefined;
+}
+
+/**
+ * <p>Options that determine the presentation of a bar series in the visual.</p>
+ * @public
+ */
+export interface BarChartSeriesSettings {
+  /**
+   * <p>Decal settings for the bar series.</p>
+   * @public
+   */
+  DecalSettings?: DecalSettings | undefined;
+
+  /**
+   * <p>Border settings for the bar series.</p>
+   * @public
+   */
+  BorderSettings?: BorderSettings | undefined;
+}
+
+/**
+ * <p>The data field series item configuration of a  <code>BarChartVisual</code>.</p>
+ * @public
+ */
+export interface DataFieldBarSeriesItem {
+  /**
+   * <p>Field ID of the field that you are setting the series configuration for.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>Field value of the field that you are setting the series configuration for.</p>
+   * @public
+   */
+  FieldValue?: string | undefined;
+
+  /**
+   * <p>Options that determine the presentation of bar series associated to the field.</p>
+   * @public
+   */
+  Settings?: BarChartSeriesSettings | undefined;
+}
+
+/**
+ * <p>The field series item configuration of a  <code>BarChartVisual</code>.</p>
+ * @public
+ */
+export interface FieldBarSeriesItem {
+  /**
+   * <p>Field ID of the field for which you are setting the series configuration.</p>
+   * @public
+   */
+  FieldId: string | undefined;
+
+  /**
+   * <p>Options that determine the presentation of bar series associated to the field.</p>
+   * @public
+   */
+  Settings?: BarChartSeriesSettings | undefined;
+}
+
+/**
+ * <p>The series item configuration of a  <code>BarChartVisual</code>.</p>
+ *          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+ * @public
+ */
+export interface BarSeriesItem {
+  /**
+   * <p>The field series item configuration of a  <code>BarChartVisual</code>.</p>
+   * @public
+   */
+  FieldBarSeriesItem?: FieldBarSeriesItem | undefined;
+
+  /**
+   * <p>The data field series item configuration of a  <code>BarChartVisual</code>.</p>
+   * @public
+   */
+  DataFieldBarSeriesItem?: DataFieldBarSeriesItem | undefined;
 }

@@ -1,100 +1,144 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetResourceShareInvitationsRequest, GetResourceShareInvitationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetResourceShareInvitationsCommand,
-  serializeAws_restJson1GetResourceShareInvitationsCommand,
-} from "../protocols/Aws_restJson1";
-import { RAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RAMClient";
-
-export interface GetResourceShareInvitationsCommandInput extends GetResourceShareInvitationsRequest {}
-export interface GetResourceShareInvitationsCommandOutput
-  extends GetResourceShareInvitationsResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourceShareInvitationsRequest, GetResourceShareInvitationsResponse } from "../models/models_0";
+import { GetResourceShareInvitations$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets the invitations that you have received for resource shares.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourceShareInvitationsCommand}.
+ */
+export interface GetResourceShareInvitationsCommandInput extends GetResourceShareInvitationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourceShareInvitationsCommand}.
+ */
+export interface GetResourceShareInvitationsCommandOutput extends GetResourceShareInvitationsResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves details about invitations that you have received for resource shares.</p>
+ *          <note>
+ *             <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value
+ * when calling a paginated operation. These operations can occasionally return an empty set of results even when there are more
+ * results available. The <code>NextToken</code> response parameter value is <code>null</code>
+ *                <i>only</i>
+ * when there are no more results to display.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RAMClient, GetResourceShareInvitationsCommand } from "@aws-sdk/client-ram"; // ES Modules import
  * // const { RAMClient, GetResourceShareInvitationsCommand } = require("@aws-sdk/client-ram"); // CommonJS import
+ * // import type { RAMClientConfig } from "@aws-sdk/client-ram";
+ * const config = {}; // type is RAMClientConfig
  * const client = new RAMClient(config);
+ * const input = { // GetResourceShareInvitationsRequest
+ *   resourceShareInvitationArns: [ // ResourceShareInvitationArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   resourceShareArns: [ // ResourceShareArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new GetResourceShareInvitationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetResourceShareInvitationsResponse
+ * //   resourceShareInvitations: [ // ResourceShareInvitationList
+ * //     { // ResourceShareInvitation
+ * //       resourceShareInvitationArn: "STRING_VALUE",
+ * //       resourceShareName: "STRING_VALUE",
+ * //       resourceShareArn: "STRING_VALUE",
+ * //       senderAccountId: "STRING_VALUE",
+ * //       receiverAccountId: "STRING_VALUE",
+ * //       invitationTimestamp: new Date("TIMESTAMP"),
+ * //       status: "PENDING" || "ACCEPTED" || "REJECTED" || "EXPIRED",
+ * //       resourceShareAssociations: [ // ResourceShareAssociationList
+ * //         { // ResourceShareAssociation
+ * //           resourceShareArn: "STRING_VALUE",
+ * //           resourceShareName: "STRING_VALUE",
+ * //           associatedEntity: "STRING_VALUE",
+ * //           associationType: "PRINCIPAL" || "RESOURCE" || "SOURCE",
+ * //           status: "ASSOCIATING" || "ASSOCIATED" || "FAILED" || "DISASSOCIATING" || "DISASSOCIATED" || "SUSPENDED" || "SUSPENDING" || "RESTORING",
+ * //           statusMessage: "STRING_VALUE",
+ * //           creationTime: new Date("TIMESTAMP"),
+ * //           lastUpdatedTime: new Date("TIMESTAMP"),
+ * //           external: true || false,
+ * //         },
+ * //       ],
+ * //       receiverArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetResourceShareInvitationsCommandInput - {@link GetResourceShareInvitationsCommandInput}
+ * @returns {@link GetResourceShareInvitationsCommandOutput}
  * @see {@link GetResourceShareInvitationsCommandInput} for command's `input` shape.
  * @see {@link GetResourceShareInvitationsCommandOutput} for command's `response` shape.
- * @see {@link RAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RAMClientResolvedConfig | config} for RAMClient's `config` shape.
  *
+ * @throws {@link InvalidMaxResultsException} (client fault)
+ *  <p>The operation failed because the specified value for <code>MaxResults</code> isn't
+ *             valid.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The operation failed because the specified value for <code>NextToken</code> isn't
+ *             valid. You must specify a value you received in the <code>NextToken</code> response of a
+ *             previous call to this operation.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The operation failed because a parameter you specified isn't valid.</p>
+ *
+ * @throws {@link MalformedArnException} (client fault)
+ *  <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> has a format that isn't
+ *             valid.</p>
+ *
+ * @throws {@link ResourceShareInvitationArnNotFoundException} (client fault)
+ *  <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> for an invitation was not
+ *             found.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The operation failed because the service could not respond to the request due to an
+ *             internal problem. Try again later.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The operation failed because the service isn't available. Try again later.</p>
+ *
+ * @throws {@link UnknownResourceException} (client fault)
+ *  <p>The operation failed because a specified resource couldn't be found.</p>
+ *
+ * @throws {@link RAMServiceException}
+ * <p>Base exception class for all service exceptions from RAM service.</p>
+ *
+ *
+ * @public
  */
-export class GetResourceShareInvitationsCommand extends $Command<
-  GetResourceShareInvitationsCommandInput,
-  GetResourceShareInvitationsCommandOutput,
-  RAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetResourceShareInvitationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetResourceShareInvitationsCommandInput, GetResourceShareInvitationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RAMClient";
-    const commandName = "GetResourceShareInvitationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetResourceShareInvitationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetResourceShareInvitationsResponse.filterSensitiveLog,
+export class GetResourceShareInvitationsCommand extends command<GetResourceShareInvitationsCommandInput, GetResourceShareInvitationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourceShareInvitations",
+  GetResourceShareInvitations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceShareInvitationsRequest;
+      output: GetResourceShareInvitationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetResourceShareInvitationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetResourceShareInvitationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetResourceShareInvitationsCommandOutput> {
-    return deserializeAws_restJson1GetResourceShareInvitationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetResourceShareInvitationsCommandInput;
+      output: GetResourceShareInvitationsCommandOutput;
+    };
+  };
 }

@@ -1,29 +1,26 @@
-# @aws-sdk/client-batch
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-batch/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-batch)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-batch.svg)](https://www.npmjs.com/package/@aws-sdk/client-batch)
+# @aws-sdk/client-batch
 
 ## Description
 
 AWS SDK for JavaScript Batch Client for Node.js, Browser and React Native.
 
 <fullname>Batch</fullname>
-
-<p>Using Batch, you can run batch computing workloads on the Cloud. Batch computing is a common means for
+<p>Using Batch, you can run batch computing workloads on the Amazon Web Services Cloud. Batch computing is a common means for
 developers, scientists, and engineers to access large amounts of compute resources. Batch uses the advantages of
-this computing workload to remove the undifferentiated heavy lifting of configuring and managing required
-infrastructure. At the same time, it also adopts a familiar batch computing software approach. Given these
-advantages, Batch can help you to efficiently provision resources in response to jobs submitted, thus effectively
-helping you to eliminate capacity constraints, reduce compute costs, and deliver your results more quickly.</p>
+the batch computing to remove the undifferentiated heavy lifting of configuring and managing required infrastructure.
+At the same time, it also adopts a familiar batch computing software approach. You can use Batch to efficiently
+provision resources, and work toward eliminating capacity constraints, reducing your overall compute costs, and
+delivering results more quickly.</p>
 <p>As a fully managed service, Batch can run batch computing workloads of any scale. Batch automatically
 provisions compute resources and optimizes workload distribution based on the quantity and scale of your specific
 workloads. With Batch, there's no need to install or manage batch computing software. This means that you can focus
-your time and energy on analyzing results and solving your specific problems. </p>
+on analyzing results and solving your specific problems instead.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-batch
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-batch`
 - `yarn add @aws-sdk/client-batch`
@@ -35,40 +32,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `BatchClient` and
-the commands you need, for example `CancelJobCommand`:
+the commands you need, for example `ListJobsCommand`:
 
 ```js
 // ES5 example
-const { BatchClient, CancelJobCommand } = require("@aws-sdk/client-batch");
+const { BatchClient, ListJobsCommand } = require("@aws-sdk/client-batch");
 ```
 
 ```ts
 // ES6+ example
-import { BatchClient, CancelJobCommand } from "@aws-sdk/client-batch";
+import { BatchClient, ListJobsCommand } from "@aws-sdk/client-batch";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new BatchClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CancelJobCommand(params);
+const params = { /** input parameters */ };
+const command = new ListJobsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -83,26 +78,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -118,31 +96,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Batch` extends `BatchClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`BatchClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-batch";
-const client = new AWS.Batch({ region: "REGION" });
+import { Batch } from "@aws-sdk/client-batch";
+
+const client = new Batch({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.cancelJob(params);
+  const data = await client.listJobs(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -150,7 +122,7 @@ try {
 
 // Promises.
 client
-  .cancelJob(params)
+  .listJobs(params)
   .then((data) => {
     // process data.
   })
@@ -158,9 +130,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.cancelJob(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listJobs(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -186,12 +158,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -212,3 +186,342 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CancelJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CancelJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CancelJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CancelJobCommandOutput/)
+</details>
+<details>
+<summary>
+CancelJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CancelJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CancelJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CancelJobsCommandOutput/)
+</details>
+<details>
+<summary>
+CreateComputeEnvironment
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CreateComputeEnvironmentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateComputeEnvironmentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateComputeEnvironmentCommandOutput/)
+</details>
+<details>
+<summary>
+CreateConsumableResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CreateConsumableResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateConsumableResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateConsumableResourceCommandOutput/)
+</details>
+<details>
+<summary>
+CreateJobQueue
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CreateJobQueueCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateJobQueueCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateJobQueueCommandOutput/)
+</details>
+<details>
+<summary>
+CreateQuotaShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CreateQuotaShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateQuotaShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateQuotaShareCommandOutput/)
+</details>
+<details>
+<summary>
+CreateSchedulingPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CreateSchedulingPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateSchedulingPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateSchedulingPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+CreateServiceEnvironment
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/CreateServiceEnvironmentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateServiceEnvironmentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/CreateServiceEnvironmentCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteComputeEnvironment
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeleteComputeEnvironmentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteComputeEnvironmentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteComputeEnvironmentCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteConsumableResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeleteConsumableResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteConsumableResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteConsumableResourceCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteJobQueue
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeleteJobQueueCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteJobQueueCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteJobQueueCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteQuotaShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeleteQuotaShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteQuotaShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteQuotaShareCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteSchedulingPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeleteSchedulingPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteSchedulingPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteSchedulingPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteServiceEnvironment
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeleteServiceEnvironmentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteServiceEnvironmentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeleteServiceEnvironmentCommandOutput/)
+</details>
+<details>
+<summary>
+DeregisterJobDefinition
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DeregisterJobDefinitionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeregisterJobDefinitionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DeregisterJobDefinitionCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeComputeEnvironments
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeComputeEnvironmentsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeComputeEnvironmentsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeComputeEnvironmentsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeConsumableResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeConsumableResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeConsumableResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeConsumableResourceCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeJobDefinitions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeJobDefinitionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeJobDefinitionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeJobDefinitionsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeJobQueues
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeJobQueuesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeJobQueuesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeJobQueuesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeJobsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeQuotaShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeQuotaShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeQuotaShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeQuotaShareCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSchedulingPolicies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeSchedulingPoliciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeSchedulingPoliciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeSchedulingPoliciesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeServiceEnvironments
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeServiceEnvironmentsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeServiceEnvironmentsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeServiceEnvironmentsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeServiceJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/DescribeServiceJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeServiceJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/DescribeServiceJobCommandOutput/)
+</details>
+<details>
+<summary>
+GetJobQueueSnapshot
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/GetJobQueueSnapshotCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/GetJobQueueSnapshotCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/GetJobQueueSnapshotCommandOutput/)
+</details>
+<details>
+<summary>
+ListConsumableResources
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListConsumableResourcesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListConsumableResourcesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListConsumableResourcesCommandOutput/)
+</details>
+<details>
+<summary>
+ListJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListJobsCommandOutput/)
+</details>
+<details>
+<summary>
+ListJobsByConsumableResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListJobsByConsumableResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListJobsByConsumableResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListJobsByConsumableResourceCommandOutput/)
+</details>
+<details>
+<summary>
+ListQuotaShares
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListQuotaSharesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListQuotaSharesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListQuotaSharesCommandOutput/)
+</details>
+<details>
+<summary>
+ListSchedulingPolicies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListSchedulingPoliciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListSchedulingPoliciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListSchedulingPoliciesCommandOutput/)
+</details>
+<details>
+<summary>
+ListServiceJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListServiceJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListServiceJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListServiceJobsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+RegisterJobDefinition
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/RegisterJobDefinitionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/RegisterJobDefinitionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/RegisterJobDefinitionCommandOutput/)
+</details>
+<details>
+<summary>
+SubmitJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/SubmitJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/SubmitJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/SubmitJobCommandOutput/)
+</details>
+<details>
+<summary>
+SubmitServiceJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/SubmitServiceJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/SubmitServiceJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/SubmitServiceJobCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+TerminateJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/TerminateJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateJobCommandOutput/)
+</details>
+<details>
+<summary>
+TerminateJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/TerminateJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateJobsCommandOutput/)
+</details>
+<details>
+<summary>
+TerminateServiceJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/TerminateServiceJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateServiceJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateServiceJobCommandOutput/)
+</details>
+<details>
+<summary>
+TerminateServiceJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/TerminateServiceJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateServiceJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/TerminateServiceJobsCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateComputeEnvironment
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateComputeEnvironmentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateComputeEnvironmentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateComputeEnvironmentCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateConsumableResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateConsumableResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateConsumableResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateConsumableResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateJobQueue
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateJobQueueCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateJobQueueCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateJobQueueCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateQuotaShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateQuotaShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateQuotaShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateQuotaShareCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateSchedulingPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateSchedulingPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateSchedulingPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateSchedulingPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateServiceEnvironment
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateServiceEnvironmentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateServiceEnvironmentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateServiceEnvironmentCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateServiceJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/batch/command/UpdateServiceJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateServiceJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-batch/Interface/UpdateServiceJobCommandOutput/)
+</details>

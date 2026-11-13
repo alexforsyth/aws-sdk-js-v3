@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { DetachLoadBalancerFromSubnetsInput, DetachLoadBalancerFromSubnetsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDetachLoadBalancerFromSubnetsCommand,
-  serializeAws_queryDetachLoadBalancerFromSubnetsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DetachLoadBalancerFromSubnetsInput, DetachLoadBalancerFromSubnetsOutput } from "../models/models_0";
+import { DetachLoadBalancerFromSubnets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DetachLoadBalancerFromSubnetsCommand}.
+ */
 export interface DetachLoadBalancerFromSubnetsCommandInput extends DetachLoadBalancerFromSubnetsInput {}
-export interface DetachLoadBalancerFromSubnetsCommandOutput
-  extends DetachLoadBalancerFromSubnetsOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DetachLoadBalancerFromSubnetsCommand}.
+ */
+export interface DetachLoadBalancerFromSubnetsCommandOutput extends DetachLoadBalancerFromSubnetsOutput, __MetadataBearer {}
 
 /**
  * <p>Removes the specified subnets from the set of configured subnets for the load balancer.</p>
@@ -37,71 +32,78 @@ export interface DetachLoadBalancerFromSubnetsCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, DetachLoadBalancerFromSubnetsCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, DetachLoadBalancerFromSubnetsCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // DetachLoadBalancerFromSubnetsInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   Subnets: [ // Subnets // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DetachLoadBalancerFromSubnetsCommand(input);
  * const response = await client.send(command);
+ * // { // DetachLoadBalancerFromSubnetsOutput
+ * //   Subnets: [ // Subnets
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DetachLoadBalancerFromSubnetsCommandInput - {@link DetachLoadBalancerFromSubnetsCommandInput}
+ * @returns {@link DetachLoadBalancerFromSubnetsCommandOutput}
  * @see {@link DetachLoadBalancerFromSubnetsCommandInput} for command's `input` shape.
  * @see {@link DetachLoadBalancerFromSubnetsCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link InvalidConfigurationRequestException} (client fault)
+ *  <p>The requested configuration change is not valid.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To detach a load balancer from a subnet
+ * ```javascript
+ * // This example detaches the specified load balancer from the specified subnet.
+ * const input = {
+ *   LoadBalancerName: "my-load-balancer",
+ *   Subnets: [
+ *     "subnet-0ecac448"
+ *   ]
+ * };
+ * const command = new DetachLoadBalancerFromSubnetsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Subnets: [
+ *     "subnet-15aaab61"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DetachLoadBalancerFromSubnetsCommand extends $Command<
-  DetachLoadBalancerFromSubnetsCommandInput,
-  DetachLoadBalancerFromSubnetsCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DetachLoadBalancerFromSubnetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DetachLoadBalancerFromSubnetsCommandInput, DetachLoadBalancerFromSubnetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "DetachLoadBalancerFromSubnetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DetachLoadBalancerFromSubnetsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DetachLoadBalancerFromSubnetsOutput.filterSensitiveLog,
+export class DetachLoadBalancerFromSubnetsCommand extends command<DetachLoadBalancerFromSubnetsCommandInput, DetachLoadBalancerFromSubnetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DetachLoadBalancerFromSubnets",
+  DetachLoadBalancerFromSubnets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetachLoadBalancerFromSubnetsInput;
+      output: DetachLoadBalancerFromSubnetsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DetachLoadBalancerFromSubnetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDetachLoadBalancerFromSubnetsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DetachLoadBalancerFromSubnetsCommandOutput> {
-    return deserializeAws_queryDetachLoadBalancerFromSubnetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DetachLoadBalancerFromSubnetsCommandInput;
+      output: DetachLoadBalancerFromSubnetsCommandOutput;
+    };
+  };
 }

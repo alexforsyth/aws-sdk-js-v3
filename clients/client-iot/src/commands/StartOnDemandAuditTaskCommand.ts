@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { StartOnDemandAuditTaskRequest, StartOnDemandAuditTaskResponse } from "../models/models_2";
-import {
-  deserializeAws_restJson1StartOnDemandAuditTaskCommand,
-  serializeAws_restJson1StartOnDemandAuditTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartOnDemandAuditTaskRequest, StartOnDemandAuditTaskResponse } from "../models/models_2";
+import { StartOnDemandAuditTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartOnDemandAuditTaskCommand}.
+ */
 export interface StartOnDemandAuditTaskCommandInput extends StartOnDemandAuditTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartOnDemandAuditTaskCommand}.
+ */
 export interface StartOnDemandAuditTaskCommandOutput extends StartOnDemandAuditTaskResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface StartOnDemandAuditTaskCommandOutput extends StartOnDemandAuditT
  * ```javascript
  * import { IoTClient, StartOnDemandAuditTaskCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, StartOnDemandAuditTaskCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // StartOnDemandAuditTaskRequest
+ *   targetCheckNames: [ // TargetAuditCheckNames // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new StartOnDemandAuditTaskCommand(input);
  * const response = await client.send(command);
+ * // { // StartOnDemandAuditTaskResponse
+ * //   taskId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartOnDemandAuditTaskCommandInput - {@link StartOnDemandAuditTaskCommandInput}
+ * @returns {@link StartOnDemandAuditTaskCommandOutput}
  * @see {@link StartOnDemandAuditTaskCommandInput} for command's `input` shape.
  * @see {@link StartOnDemandAuditTaskCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class StartOnDemandAuditTaskCommand extends $Command<
-  StartOnDemandAuditTaskCommandInput,
-  StartOnDemandAuditTaskCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartOnDemandAuditTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartOnDemandAuditTaskCommandInput, StartOnDemandAuditTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "StartOnDemandAuditTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartOnDemandAuditTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartOnDemandAuditTaskResponse.filterSensitiveLog,
+export class StartOnDemandAuditTaskCommand extends command<StartOnDemandAuditTaskCommandInput, StartOnDemandAuditTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartOnDemandAuditTask",
+  StartOnDemandAuditTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartOnDemandAuditTaskRequest;
+      output: StartOnDemandAuditTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartOnDemandAuditTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartOnDemandAuditTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartOnDemandAuditTaskCommandOutput> {
-    return deserializeAws_restJson1StartOnDemandAuditTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartOnDemandAuditTaskCommandInput;
+      output: StartOnDemandAuditTaskCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutPermissionPolicyRequest, PutPermissionPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutPermissionPolicyCommand,
-  serializeAws_json1_1PutPermissionPolicyCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutPermissionPolicyRequest, PutPermissionPolicyResponse } from "../models/models_0";
+import { PutPermissionPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutPermissionPolicyCommand}.
+ */
 export interface PutPermissionPolicyCommandInput extends PutPermissionPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutPermissionPolicyCommand}.
+ */
 export interface PutPermissionPolicyCommandOutput extends PutPermissionPolicyResponse, __MetadataBearer {}
 
 /**
@@ -68,68 +69,87 @@ export interface PutPermissionPolicyCommandOutput extends PutPermissionPolicyRes
  * ```javascript
  * import { WAFClient, PutPermissionPolicyCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, PutPermissionPolicyCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // PutPermissionPolicyRequest
+ *   ResourceArn: "STRING_VALUE", // required
+ *   Policy: "STRING_VALUE", // required
+ * };
  * const command = new PutPermissionPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutPermissionPolicyCommandInput - {@link PutPermissionPolicyCommandInput}
+ * @returns {@link PutPermissionPolicyCommandOutput}
  * @see {@link PutPermissionPolicyCommandInput} for command's `input` shape.
  * @see {@link PutPermissionPolicyCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidPermissionPolicyException} (client fault)
+ *  <p>The operation failed because the specified policy is not in the proper format. </p>
+ *          <p>The policy is subject to the following restrictions:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You can attach only one policy with each <code>PutPermissionPolicy</code> request.</p>
+ *             </li>
+ *             <li>
+ *                <p>The policy must include an <code>Effect</code>, <code>Action</code> and <code>Principal</code>. </p>
+ *             </li>
+ *             <li>
+ *
+ *                <p>
+ *                   <code>Effect</code> must specify <code>Allow</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>Action</code> in the policy must be <code>waf:UpdateWebACL</code>, <code>waf-regional:UpdateWebACL</code>, <code>waf:GetRuleGroup</code> and <code>waf-regional:GetRuleGroup</code> . Any extra or wildcard actions in the policy will be rejected.</p>
+ *             </li>
+ *             <li>
+ *                <p>The policy cannot include a <code>Resource</code> parameter.</p>
+ *             </li>
+ *             <li>
+ *                <p>The ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.</p>
+ *             </li>
+ *             <li>
+ *                <p>The user making the request must be the owner of the RuleGroup.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your policy must be composed using IAM Policy version 2012-10-17.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class PutPermissionPolicyCommand extends $Command<
-  PutPermissionPolicyCommandInput,
-  PutPermissionPolicyCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutPermissionPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutPermissionPolicyCommandInput, PutPermissionPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "PutPermissionPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutPermissionPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutPermissionPolicyResponse.filterSensitiveLog,
+export class PutPermissionPolicyCommand extends command<PutPermissionPolicyCommandInput, PutPermissionPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutPermissionPolicy",
+  PutPermissionPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutPermissionPolicyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutPermissionPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutPermissionPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutPermissionPolicyCommandOutput> {
-    return deserializeAws_json1_1PutPermissionPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutPermissionPolicyCommandInput;
+      output: PutPermissionPolicyCommandOutput;
+    };
+  };
 }

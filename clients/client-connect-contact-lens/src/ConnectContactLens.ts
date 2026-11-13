@@ -1,51 +1,86 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type ListRealtimeContactAnalysisSegmentsCommandInput,
+  type ListRealtimeContactAnalysisSegmentsCommandOutput,
   ListRealtimeContactAnalysisSegmentsCommand,
-  ListRealtimeContactAnalysisSegmentsCommandInput,
-  ListRealtimeContactAnalysisSegmentsCommandOutput,
 } from "./commands/ListRealtimeContactAnalysisSegmentsCommand";
 import { ConnectContactLensClient } from "./ConnectContactLensClient";
+import { paginateListRealtimeContactAnalysisSegments } from "./pagination/ListRealtimeContactAnalysisSegmentsPaginator";
+
+const commands = {
+  ListRealtimeContactAnalysisSegmentsCommand,
+};
+const paginators = {
+  paginateListRealtimeContactAnalysisSegments,
+};
 
 /**
- * <p>Contact Lens for Amazon Connect enables you to analyze conversations between customer and agents,
- *       by using speech transcription, natural language processing, and intelligent search
- *       capabilities. It performs sentiment analysis, detects issues, and enables you to automatically
- *       categorize contacts.</p>
- *          <p>Contact Lens for Amazon Connect provides both real-time and post-call analytics of customer-agent
- *       conversations. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html">Analyze conversations using
- *         Contact Lens</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
+ * @public
  */
-export class ConnectContactLens extends ConnectContactLensClient {
-  /**
-   * <p>Provides a list of analysis segments for a real-time analysis session.</p>
-   */
-  public listRealtimeContactAnalysisSegments(
-    args: ListRealtimeContactAnalysisSegmentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRealtimeContactAnalysisSegmentsCommandOutput>;
-  public listRealtimeContactAnalysisSegments(
-    args: ListRealtimeContactAnalysisSegmentsCommandInput,
-    cb: (err: any, data?: ListRealtimeContactAnalysisSegmentsCommandOutput) => void
-  ): void;
-  public listRealtimeContactAnalysisSegments(
-    args: ListRealtimeContactAnalysisSegmentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRealtimeContactAnalysisSegmentsCommandOutput) => void
-  ): void;
-  public listRealtimeContactAnalysisSegments(
-    args: ListRealtimeContactAnalysisSegmentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRealtimeContactAnalysisSegmentsCommandOutput) => void),
-    cb?: (err: any, data?: ListRealtimeContactAnalysisSegmentsCommandOutput) => void
-  ): Promise<ListRealtimeContactAnalysisSegmentsCommandOutput> | void {
-    const command = new ListRealtimeContactAnalysisSegmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+export interface ConnectContactLensRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
 }
+
+export interface ConnectContactLens {
+  /**
+   * @see {@link ListRealtimeContactAnalysisSegmentsCommand}
+   */
+  listRealtimeContactAnalysisSegments(
+    args: ListRealtimeContactAnalysisSegmentsCommandInput,
+    options?: ConnectContactLensRequestOptions
+  ): Promise<ListRealtimeContactAnalysisSegmentsCommandOutput>;
+  listRealtimeContactAnalysisSegments(
+    args: ListRealtimeContactAnalysisSegmentsCommandInput,
+    cb: (err: any, data?: ListRealtimeContactAnalysisSegmentsCommandOutput) => void
+  ): void;
+  listRealtimeContactAnalysisSegments(
+    args: ListRealtimeContactAnalysisSegmentsCommandInput,
+    options: ConnectContactLensRequestOptions,
+    cb: (err: any, data?: ListRealtimeContactAnalysisSegmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRealtimeContactAnalysisSegmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRealtimeContactAnalysisSegmentsCommandOutput}.
+   */
+  paginateListRealtimeContactAnalysisSegments(
+    args: ListRealtimeContactAnalysisSegmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRealtimeContactAnalysisSegmentsCommandOutput>;
+}
+
+/**
+ * <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Contact_Lens.html">Contact Lens actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Contact_Lens.html">Contact Lens data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>Amazon Connect Contact Lens enables you to analyze conversations between customer and agents, by using
+ *             speech transcription, natural language processing, and intelligent search capabilities.
+ *             It performs sentiment analysis, detects issues, and enables you to automatically
+ *             categorize contacts.</p>
+ *          <p>Amazon Connect Contact Lens provides both real-time and post-call analytics of customer-agent
+ *             conversations. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html">Analyze conversations
+ *                 using speech analytics</a> in the <i>Amazon Connect Administrator
+ *             Guide</i>. </p>
+ * @public
+ */
+export class ConnectContactLens extends ConnectContactLensClient implements ConnectContactLens {}
+createAggregatedClient(commands, ConnectContactLens, { paginators });

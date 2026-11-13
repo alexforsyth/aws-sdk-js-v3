@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDRTAccessRequest, DescribeDRTAccessResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDRTAccessCommand,
-  serializeAws_json1_1DescribeDRTAccessCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDRTAccessRequest, DescribeDRTAccessResponse } from "../models/models_0";
+import { DescribeDRTAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDRTAccessCommand}.
+ */
 export interface DescribeDRTAccessCommandInput extends DescribeDRTAccessRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDRTAccessCommand}.
+ */
 export interface DescribeDRTAccessCommandOutput extends DescribeDRTAccessResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,54 @@ export interface DescribeDRTAccessCommandOutput extends DescribeDRTAccessRespons
  * ```javascript
  * import { ShieldClient, DescribeDRTAccessCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, DescribeDRTAccessCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = {};
  * const command = new DescribeDRTAccessCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDRTAccessResponse
+ * //   RoleArn: "STRING_VALUE",
+ * //   LogBucketList: [ // LogBucketList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeDRTAccessCommandInput - {@link DescribeDRTAccessCommandInput}
+ * @returns {@link DescribeDRTAccessCommandOutput}
  * @see {@link DescribeDRTAccessCommandInput} for command's `input` shape.
  * @see {@link DescribeDRTAccessCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDRTAccessCommand extends $Command<
-  DescribeDRTAccessCommandInput,
-  DescribeDRTAccessCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDRTAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDRTAccessCommandInput, DescribeDRTAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "DescribeDRTAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDRTAccessRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDRTAccessResponse.filterSensitiveLog,
+export class DescribeDRTAccessCommand extends command<DescribeDRTAccessCommandInput, DescribeDRTAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDRTAccess",
+  DescribeDRTAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeDRTAccessResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDRTAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDRTAccessCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDRTAccessCommandOutput> {
-    return deserializeAws_json1_1DescribeDRTAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDRTAccessCommandInput;
+      output: DescribeDRTAccessCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import { ARCRegionSwitchClient } from "../ARCRegionSwitchClient";
+import {
+  GetPlanEvaluationStatusCommand,
+  GetPlanEvaluationStatusCommandInput,
+  GetPlanEvaluationStatusCommandOutput,
+} from "../commands/GetPlanEvaluationStatusCommand";
+import type { ARCRegionSwitchPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateGetPlanEvaluationStatus: (
+  config: ARCRegionSwitchPaginationConfiguration,
+  input: GetPlanEvaluationStatusCommandInput,
+  ...rest: any[]
+) => Paginator<GetPlanEvaluationStatusCommandOutput> = createPaginator<
+  ARCRegionSwitchPaginationConfiguration,
+  GetPlanEvaluationStatusCommandInput,
+  GetPlanEvaluationStatusCommandOutput
+>(ARCRegionSwitchClient, GetPlanEvaluationStatusCommand, "nextToken", "nextToken", "maxResults");

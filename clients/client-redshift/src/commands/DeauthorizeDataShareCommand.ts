@@ -1,95 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataShare, DeauthorizeDataShareMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDeauthorizeDataShareCommand,
-  serializeAws_queryDeauthorizeDataShareCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DataShare, DeauthorizeDataShareMessage } from "../models/models_0";
+import { DeauthorizeDataShare$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeauthorizeDataShareCommand}.
+ */
 export interface DeauthorizeDataShareCommandInput extends DeauthorizeDataShareMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeauthorizeDataShareCommand}.
+ */
 export interface DeauthorizeDataShareCommandOutput extends DataShare, __MetadataBearer {}
 
 /**
- * <p>From the producer account, removes authorization from the specified datashare. </p>
+ * <p>From a datashare producer account, removes authorization from the specified datashare. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RedshiftClient, DeauthorizeDataShareCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DeauthorizeDataShareCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DeauthorizeDataShareMessage
+ *   DataShareArn: "STRING_VALUE", // required
+ *   ConsumerIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new DeauthorizeDataShareCommand(input);
  * const response = await client.send(command);
+ * // { // DataShare
+ * //   DataShareArn: "STRING_VALUE",
+ * //   ProducerArn: "STRING_VALUE",
+ * //   AllowPubliclyAccessibleConsumers: true || false,
+ * //   DataShareAssociations: [ // DataShareAssociationList
+ * //     { // DataShareAssociation
+ * //       ConsumerIdentifier: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "PENDING_AUTHORIZATION" || "AUTHORIZED" || "DEAUTHORIZED" || "REJECTED" || "AVAILABLE",
+ * //       ConsumerRegion: "STRING_VALUE",
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       StatusChangeDate: new Date("TIMESTAMP"),
+ * //       ProducerAllowedWrites: true || false,
+ * //       ConsumerAcceptedWrites: true || false,
+ * //     },
+ * //   ],
+ * //   ManagedBy: "STRING_VALUE",
+ * //   DataShareType: "INTERNAL",
+ * // };
+ *
  * ```
  *
+ * @param DeauthorizeDataShareCommandInput - {@link DeauthorizeDataShareCommandInput}
+ * @returns {@link DeauthorizeDataShareCommandOutput}
  * @see {@link DeauthorizeDataShareCommandInput} for command's `input` shape.
  * @see {@link DeauthorizeDataShareCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidDataShareFault} (client fault)
+ *  <p>There is an error with the datashare.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DeauthorizeDataShareCommand extends $Command<
-  DeauthorizeDataShareCommandInput,
-  DeauthorizeDataShareCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeauthorizeDataShareCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeauthorizeDataShareCommandInput, DeauthorizeDataShareCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DeauthorizeDataShareCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeauthorizeDataShareMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DataShare.filterSensitiveLog,
+export class DeauthorizeDataShareCommand extends command<DeauthorizeDataShareCommandInput, DeauthorizeDataShareCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeauthorizeDataShare",
+  DeauthorizeDataShare$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeauthorizeDataShareMessage;
+      output: DataShare;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeauthorizeDataShareCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeauthorizeDataShareCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeauthorizeDataShareCommandOutput> {
-    return deserializeAws_queryDeauthorizeDataShareCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeauthorizeDataShareCommandInput;
+      output: DeauthorizeDataShareCommandOutput;
+    };
+  };
 }

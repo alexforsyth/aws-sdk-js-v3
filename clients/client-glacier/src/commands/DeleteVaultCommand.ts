@@ -1,31 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { DeleteVaultInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteVaultCommand,
-  serializeAws_restJson1DeleteVaultCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteVaultInput } from "../models/models_0";
+import { DeleteVault$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteVaultCommand}.
+ */
 export interface DeleteVaultCommandInput extends DeleteVaultInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteVaultCommand}.
+ */
 export interface DeleteVaultCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>This operation deletes a vault. Amazon S3 Glacier will delete a vault only if there are
+ * <p>This operation deletes a vault. Amazon Glacier will delete a vault only if there are
  *          no archives in the vault as of the last inventory and there have been no writes to the
  *          vault since the last inventory. If either of these conditions is not satisfied, the vault
- *          deletion fails (that is, the vault is not removed) and Amazon S3 Glacier returns an error. You
+ *          deletion fails (that is, the vault is not removed) and Amazon Glacier returns an error. You
  *          can use <a>DescribeVault</a> to return the number of archives in a vault, and
  *          you can use <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html">Initiate a Job (POST
  *             jobs)</a> to initiate a new inventory retrieval for a vault. The inventory contains
@@ -41,74 +42,82 @@ export interface DeleteVaultCommandOutput extends __MetadataBearer {}
  *             AWS Identity and Access Management (IAM)</a>.</p>
  *          <p> For conceptual information and underlying REST API, see <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html">Deleting a Vault in Amazon
  *             Glacier</a> and <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html">Delete Vault </a> in the
- *             <i>Amazon S3 Glacier Developer Guide</i>. </p>
+ *             <i>Amazon Glacier Developer Guide</i>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GlacierClient, DeleteVaultCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, DeleteVaultCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // DeleteVaultInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteVaultCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteVaultCommandInput - {@link DeleteVaultCommandInput}
+ * @returns {@link DeleteVaultCommandOutput}
  * @see {@link DeleteVaultCommandInput} for command's `input` shape.
  * @see {@link DeleteVaultCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To delete a vault
+ * ```javascript
+ * // The example deletes a vault named my-vault:
+ * const input = {
+ *   accountId: "-",
+ *   vaultName: "my-vault"
+ * };
+ * const command = new DeleteVaultCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteVaultCommand extends $Command<
-  DeleteVaultCommandInput,
-  DeleteVaultCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteVaultCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteVaultCommandInput, DeleteVaultCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "DeleteVaultCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteVaultInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteVaultCommand extends command<DeleteVaultCommandInput, DeleteVaultCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteVault",
+  DeleteVault$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVaultInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteVaultCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteVaultCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteVaultCommandOutput> {
-    return deserializeAws_restJson1DeleteVaultCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteVaultCommandInput;
+      output: DeleteVaultCommandOutput;
+    };
+  };
 }

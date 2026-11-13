@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeBrokerEngineTypesRequest, DescribeBrokerEngineTypesResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1DescribeBrokerEngineTypesCommand,
-  serializeAws_restJson1DescribeBrokerEngineTypesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBrokerEngineTypesRequest, DescribeBrokerEngineTypesResponse } from "../models/models_0";
+import { DescribeBrokerEngineTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBrokerEngineTypesCommand}.
+ */
 export interface DescribeBrokerEngineTypesCommandInput extends DescribeBrokerEngineTypesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBrokerEngineTypesCommand}.
+ */
 export interface DescribeBrokerEngineTypesCommandOutput extends DescribeBrokerEngineTypesResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,69 @@ export interface DescribeBrokerEngineTypesCommandOutput extends DescribeBrokerEn
  * ```javascript
  * import { MqClient, DescribeBrokerEngineTypesCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, DescribeBrokerEngineTypesCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // DescribeBrokerEngineTypesRequest
+ *   EngineType: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeBrokerEngineTypesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBrokerEngineTypesResponse
+ * //   BrokerEngineTypes: [ // __listOfBrokerEngineType
+ * //     { // BrokerEngineType
+ * //       EngineType: "ACTIVEMQ" || "RABBITMQ",
+ * //       EngineVersions: [ // __listOfEngineVersion
+ * //         { // EngineVersion
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   MaxResults: Number("int"),
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeBrokerEngineTypesCommandInput - {@link DescribeBrokerEngineTypesCommandInput}
+ * @returns {@link DescribeBrokerEngineTypesCommandOutput}
  * @see {@link DescribeBrokerEngineTypesCommandInput} for command's `input` shape.
  * @see {@link DescribeBrokerEngineTypesCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBrokerEngineTypesCommand extends $Command<
-  DescribeBrokerEngineTypesCommandInput,
-  DescribeBrokerEngineTypesCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBrokerEngineTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBrokerEngineTypesCommandInput, DescribeBrokerEngineTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "DescribeBrokerEngineTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBrokerEngineTypesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBrokerEngineTypesResponse.filterSensitiveLog,
+export class DescribeBrokerEngineTypesCommand extends command<DescribeBrokerEngineTypesCommandInput, DescribeBrokerEngineTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBrokerEngineTypes",
+  DescribeBrokerEngineTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBrokerEngineTypesRequest;
+      output: DescribeBrokerEngineTypesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBrokerEngineTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeBrokerEngineTypesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeBrokerEngineTypesCommandOutput> {
-    return deserializeAws_restJson1DescribeBrokerEngineTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBrokerEngineTypesCommandInput;
+      output: DescribeBrokerEngineTypesCommandOutput;
+    };
+  };
 }

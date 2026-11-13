@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElastiCacheClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElastiCacheClient";
-import { ModifyUserMessage, User } from "../models/models_0";
-import { deserializeAws_queryModifyUserCommand, serializeAws_queryModifyUserCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyUserMessage, User } from "../models/models_0";
+import { ModifyUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyUserCommand}.
+ */
 export interface ModifyUserCommandInput extends ModifyUserMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyUserCommand}.
+ */
 export interface ModifyUserCommandOutput extends User, __MetadataBearer {}
 
 /**
@@ -25,68 +29,88 @@ export interface ModifyUserCommandOutput extends User, __MetadataBearer {}
  * ```javascript
  * import { ElastiCacheClient, ModifyUserCommand } from "@aws-sdk/client-elasticache"; // ES Modules import
  * // const { ElastiCacheClient, ModifyUserCommand } = require("@aws-sdk/client-elasticache"); // CommonJS import
+ * // import type { ElastiCacheClientConfig } from "@aws-sdk/client-elasticache";
+ * const config = {}; // type is ElastiCacheClientConfig
  * const client = new ElastiCacheClient(config);
+ * const input = { // ModifyUserMessage
+ *   UserId: "STRING_VALUE", // required
+ *   AccessString: "STRING_VALUE",
+ *   AppendAccessString: "STRING_VALUE",
+ *   Passwords: [ // PasswordListInput
+ *     "STRING_VALUE",
+ *   ],
+ *   NoPasswordRequired: true || false,
+ *   AuthenticationMode: { // AuthenticationMode
+ *     Type: "password" || "no-password-required" || "iam",
+ *     Passwords: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   Engine: "STRING_VALUE",
+ * };
  * const command = new ModifyUserCommand(input);
  * const response = await client.send(command);
+ * // { // User
+ * //   UserId: "STRING_VALUE",
+ * //   UserName: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * //   Engine: "STRING_VALUE",
+ * //   MinimumEngineVersion: "STRING_VALUE",
+ * //   AccessString: "STRING_VALUE",
+ * //   UserGroupIds: [ // UserGroupIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Authentication: { // Authentication
+ * //     Type: "password" || "no-password" || "iam",
+ * //     PasswordCount: Number("int"),
+ * //   },
+ * //   ARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ModifyUserCommandInput - {@link ModifyUserCommandInput}
+ * @returns {@link ModifyUserCommandOutput}
  * @see {@link ModifyUserCommandInput} for command's `input` shape.
  * @see {@link ModifyUserCommandOutput} for command's `response` shape.
- * @see {@link ElastiCacheClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElastiCacheClientResolvedConfig | config} for ElastiCacheClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Two or more incompatible parameters were specified.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value for a parameter is invalid.</p>
+ *
+ * @throws {@link InvalidUserStateFault} (client fault)
+ *  <p>The user is not in active state.</p>
+ *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The specified service linked role (SLR) was not found.</p>
+ *
+ * @throws {@link UserNotFoundFault} (client fault)
+ *  <p>The user does not exist or could not be found.</p>
+ *
+ * @throws {@link ElastiCacheServiceException}
+ * <p>Base exception class for all service exceptions from ElastiCache service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyUserCommand extends $Command<
-  ModifyUserCommandInput,
-  ModifyUserCommandOutput,
-  ElastiCacheClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElastiCacheClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyUserCommandInput, ModifyUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElastiCacheClient";
-    const commandName = "ModifyUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyUserMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: User.filterSensitiveLog,
+export class ModifyUserCommand extends command<ModifyUserCommandInput, ModifyUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyUser",
+  ModifyUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyUserMessage;
+      output: User;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyUserCommandOutput> {
-    return deserializeAws_queryModifyUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyUserCommandInput;
+      output: ModifyUserCommandOutput;
+    };
+  };
 }

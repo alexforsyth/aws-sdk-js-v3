@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { JsonBlobsInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1JsonBlobsCommand,
-  serializeAws_restJson1JsonBlobsCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { JsonBlobsInputOutput } from "../models/models_0";
+import { de_JsonBlobsCommand, se_JsonBlobsCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link JsonBlobsCommand}.
+ */
 export interface JsonBlobsCommandInput extends JsonBlobsInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link JsonBlobsCommand}.
+ */
 export interface JsonBlobsCommandOutput extends JsonBlobsInputOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +37,62 @@ export interface JsonBlobsCommandOutput extends JsonBlobsInputOutput, __Metadata
  * ```javascript
  * import { RestJsonProtocolClient, JsonBlobsCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, JsonBlobsCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // JsonBlobsInputOutput
+ *   data: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ * };
  * const command = new JsonBlobsCommand(input);
  * const response = await client.send(command);
+ * // { // JsonBlobsInputOutput
+ * //   data: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param JsonBlobsCommandInput - {@link JsonBlobsCommandInput}
+ * @returns {@link JsonBlobsCommandOutput}
  * @see {@link JsonBlobsCommandInput} for command's `input` shape.
  * @see {@link JsonBlobsCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class JsonBlobsCommand extends $Command<
-  JsonBlobsCommandInput,
-  JsonBlobsCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: JsonBlobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<JsonBlobsCommandInput, JsonBlobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "JsonBlobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: JsonBlobsInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: JsonBlobsInputOutput.filterSensitiveLog,
+export class JsonBlobsCommand extends $Command
+  .classBuilder<
+    JsonBlobsCommandInput,
+    JsonBlobsCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "JsonBlobs", {})
+  .n("RestJsonProtocolClient", "JsonBlobsCommand")
+  .f(void 0, void 0)
+  .ser(se_JsonBlobsCommand)
+  .de(de_JsonBlobsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: JsonBlobsInputOutput;
+      output: JsonBlobsInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: JsonBlobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1JsonBlobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<JsonBlobsCommandOutput> {
-    return deserializeAws_restJson1JsonBlobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: JsonBlobsCommandInput;
+      output: JsonBlobsCommandOutput;
+    };
+  };
 }

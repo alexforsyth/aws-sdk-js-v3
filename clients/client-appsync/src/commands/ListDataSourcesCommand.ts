@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { ListDataSourcesRequest, ListDataSourcesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDataSourcesCommand,
-  serializeAws_restJson1ListDataSourcesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDataSourcesRequest, ListDataSourcesResponse } from "../models/models_0";
+import { ListDataSources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDataSourcesCommand}.
+ */
 export interface ListDataSourcesCommandInput extends ListDataSourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDataSourcesCommand}.
+ */
 export interface ListDataSourcesCommandOutput extends ListDataSourcesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,118 @@ export interface ListDataSourcesCommandOutput extends ListDataSourcesResponse, _
  * ```javascript
  * import { AppSyncClient, ListDataSourcesCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, ListDataSourcesCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // ListDataSourcesRequest
+ *   apiId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListDataSourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListDataSourcesResponse
+ * //   dataSources: [ // DataSources
+ * //     { // DataSource
+ * //       dataSourceArn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       type: "AWS_LAMBDA" || "AMAZON_DYNAMODB" || "AMAZON_ELASTICSEARCH" || "NONE" || "HTTP" || "RELATIONAL_DATABASE" || "AMAZON_OPENSEARCH_SERVICE" || "AMAZON_EVENTBRIDGE" || "AMAZON_BEDROCK_RUNTIME",
+ * //       serviceRoleArn: "STRING_VALUE",
+ * //       dynamodbConfig: { // DynamodbDataSourceConfig
+ * //         tableName: "STRING_VALUE", // required
+ * //         awsRegion: "STRING_VALUE", // required
+ * //         useCallerCredentials: true || false,
+ * //         deltaSyncConfig: { // DeltaSyncConfig
+ * //           baseTableTTL: Number("long"),
+ * //           deltaSyncTableName: "STRING_VALUE",
+ * //           deltaSyncTableTTL: Number("long"),
+ * //         },
+ * //         versioned: true || false,
+ * //       },
+ * //       lambdaConfig: { // LambdaDataSourceConfig
+ * //         lambdaFunctionArn: "STRING_VALUE", // required
+ * //       },
+ * //       elasticsearchConfig: { // ElasticsearchDataSourceConfig
+ * //         endpoint: "STRING_VALUE", // required
+ * //         awsRegion: "STRING_VALUE", // required
+ * //       },
+ * //       openSearchServiceConfig: { // OpenSearchServiceDataSourceConfig
+ * //         endpoint: "STRING_VALUE", // required
+ * //         awsRegion: "STRING_VALUE", // required
+ * //       },
+ * //       httpConfig: { // HttpDataSourceConfig
+ * //         endpoint: "STRING_VALUE",
+ * //         authorizationConfig: { // AuthorizationConfig
+ * //           authorizationType: "AWS_IAM", // required
+ * //           awsIamConfig: { // AwsIamConfig
+ * //             signingRegion: "STRING_VALUE",
+ * //             signingServiceName: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //       relationalDatabaseConfig: { // RelationalDatabaseDataSourceConfig
+ * //         relationalDatabaseSourceType: "RDS_HTTP_ENDPOINT",
+ * //         rdsHttpEndpointConfig: { // RdsHttpEndpointConfig
+ * //           awsRegion: "STRING_VALUE",
+ * //           dbClusterIdentifier: "STRING_VALUE",
+ * //           databaseName: "STRING_VALUE",
+ * //           schema: "STRING_VALUE",
+ * //           awsSecretStoreArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       eventBridgeConfig: { // EventBridgeDataSourceConfig
+ * //         eventBusArn: "STRING_VALUE", // required
+ * //       },
+ * //       metricsConfig: "ENABLED" || "DISABLED",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDataSourcesCommandInput - {@link ListDataSourcesCommandInput}
+ * @returns {@link ListDataSourcesCommandOutput}
  * @see {@link ListDataSourcesCommandInput} for command's `input` shape.
  * @see {@link ListDataSourcesCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class ListDataSourcesCommand extends $Command<
-  ListDataSourcesCommandInput,
-  ListDataSourcesCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDataSourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDataSourcesCommandInput, ListDataSourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "ListDataSourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDataSourcesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDataSourcesResponse.filterSensitiveLog,
+export class ListDataSourcesCommand extends command<ListDataSourcesCommandInput, ListDataSourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDataSources",
+  ListDataSources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDataSourcesRequest;
+      output: ListDataSourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDataSourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDataSourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDataSourcesCommandOutput> {
-    return deserializeAws_restJson1ListDataSourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDataSourcesCommandInput;
+      output: ListDataSourcesCommandOutput;
+    };
+  };
 }

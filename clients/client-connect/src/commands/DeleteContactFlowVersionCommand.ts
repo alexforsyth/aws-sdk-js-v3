@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteContactFlowVersionRequest, DeleteContactFlowVersionResponse } from "../models/models_1";
+import { DeleteContactFlowVersion$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteContactFlowVersionCommand}.
+ */
+export interface DeleteContactFlowVersionCommandInput extends DeleteContactFlowVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteContactFlowVersionCommand}.
+ */
+export interface DeleteContactFlowVersionCommandOutput extends DeleteContactFlowVersionResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes the particular version specified in flow version identifier.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, DeleteContactFlowVersionCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, DeleteContactFlowVersionCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // DeleteContactFlowVersionRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactFlowId: "STRING_VALUE", // required
+ *   ContactFlowVersion: Number("long"), // required
+ * };
+ * const command = new DeleteContactFlowVersionCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteContactFlowVersionCommandInput - {@link DeleteContactFlowVersionCommandInput}
+ * @returns {@link DeleteContactFlowVersionCommandOutput}
+ * @see {@link DeleteContactFlowVersionCommandInput} for command's `input` shape.
+ * @see {@link DeleteContactFlowVersionCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteContactFlowVersionCommand extends command<DeleteContactFlowVersionCommandInput, DeleteContactFlowVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteContactFlowVersion",
+  DeleteContactFlowVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteContactFlowVersionRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteContactFlowVersionCommandInput;
+      output: DeleteContactFlowVersionCommandOutput;
+    };
+  };
+}

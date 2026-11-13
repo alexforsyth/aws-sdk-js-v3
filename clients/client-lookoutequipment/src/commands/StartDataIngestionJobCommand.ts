@@ -1,95 +1,113 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LookoutEquipmentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LookoutEquipmentClient";
-import { StartDataIngestionJobRequest, StartDataIngestionJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0StartDataIngestionJobCommand,
-  serializeAws_json1_0StartDataIngestionJobCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartDataIngestionJobRequest, StartDataIngestionJobResponse } from "../models/models_0";
+import { StartDataIngestionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartDataIngestionJobCommand}.
+ */
 export interface StartDataIngestionJobCommandInput extends StartDataIngestionJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartDataIngestionJobCommand}.
+ */
 export interface StartDataIngestionJobCommandOutput extends StartDataIngestionJobResponse, __MetadataBearer {}
 
 /**
  * <p>Starts a data ingestion job. Amazon Lookout for Equipment returns the job status. </p>
+ *
+ * @deprecated (since 2026-10-07) End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LookoutEquipmentClient, StartDataIngestionJobCommand } from "@aws-sdk/client-lookoutequipment"; // ES Modules import
  * // const { LookoutEquipmentClient, StartDataIngestionJobCommand } = require("@aws-sdk/client-lookoutequipment"); // CommonJS import
+ * // import type { LookoutEquipmentClientConfig } from "@aws-sdk/client-lookoutequipment";
+ * const config = {}; // type is LookoutEquipmentClientConfig
  * const client = new LookoutEquipmentClient(config);
+ * const input = { // StartDataIngestionJobRequest
+ *   DatasetName: "STRING_VALUE", // required
+ *   IngestionInputConfiguration: { // IngestionInputConfiguration
+ *     S3InputConfiguration: { // IngestionS3InputConfiguration
+ *       Bucket: "STRING_VALUE", // required
+ *       Prefix: "STRING_VALUE",
+ *       KeyPattern: "STRING_VALUE",
+ *     },
+ *   },
+ *   RoleArn: "STRING_VALUE", // required
+ *   ClientToken: "STRING_VALUE", // required
+ * };
  * const command = new StartDataIngestionJobCommand(input);
  * const response = await client.send(command);
+ * // { // StartDataIngestionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * //   Status: "IN_PROGRESS" || "SUCCESS" || "FAILED" || "IMPORT_IN_PROGRESS",
+ * // };
+ *
  * ```
  *
+ * @param StartDataIngestionJobCommandInput - {@link StartDataIngestionJobCommandInput}
+ * @returns {@link StartDataIngestionJobCommandOutput}
  * @see {@link StartDataIngestionJobCommandInput} for command's `input` shape.
  * @see {@link StartDataIngestionJobCommandOutput} for command's `response` shape.
- * @see {@link LookoutEquipmentClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LookoutEquipmentClientResolvedConfig | config} for LookoutEquipmentClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request could not be completed because you do not have access to the resource.
+ *       </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> The request could not be completed due to a conflict with the current state of the
+ *          target resource. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Processing of the request has failed because of an unknown error, exception or failure.
+ *       </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource requested could not be found. Verify the resource ID and retry your
+ *          request. </p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p> Resource limitations have been exceeded. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services
+ *          service that's being utilized. </p>
+ *
+ * @throws {@link LookoutEquipmentServiceException}
+ * <p>Base exception class for all service exceptions from LookoutEquipment service.</p>
+ *
+ *
+ * @public
  */
-export class StartDataIngestionJobCommand extends $Command<
-  StartDataIngestionJobCommandInput,
-  StartDataIngestionJobCommandOutput,
-  LookoutEquipmentClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartDataIngestionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LookoutEquipmentClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartDataIngestionJobCommandInput, StartDataIngestionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LookoutEquipmentClient";
-    const commandName = "StartDataIngestionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartDataIngestionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartDataIngestionJobResponse.filterSensitiveLog,
+export class StartDataIngestionJobCommand extends command<StartDataIngestionJobCommandInput, StartDataIngestionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartDataIngestionJob",
+  StartDataIngestionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDataIngestionJobRequest;
+      output: StartDataIngestionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartDataIngestionJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0StartDataIngestionJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartDataIngestionJobCommandOutput> {
-    return deserializeAws_json1_0StartDataIngestionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartDataIngestionJobCommandInput;
+      output: StartDataIngestionJobCommandOutput;
+    };
+  };
 }

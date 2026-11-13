@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ComprehendMedicalClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ComprehendMedicalClient";
-import { InferICD10CMRequest, InferICD10CMResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1InferICD10CMCommand,
-  serializeAws_json1_1InferICD10CMCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { InferICD10CMRequest, InferICD10CMResponse } from "../models/models_0";
+import { InferICD10CM$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link InferICD10CMCommand}.
+ */
 export interface InferICD10CMCommandInput extends InferICD10CMRequest {}
+/**
+ * @public
+ *
+ * The output of {@link InferICD10CMCommand}.
+ */
 export interface InferICD10CMCommandOutput extends InferICD10CMResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +32,115 @@ export interface InferICD10CMCommandOutput extends InferICD10CMResponse, __Metad
  * ```javascript
  * import { ComprehendMedicalClient, InferICD10CMCommand } from "@aws-sdk/client-comprehendmedical"; // ES Modules import
  * // const { ComprehendMedicalClient, InferICD10CMCommand } = require("@aws-sdk/client-comprehendmedical"); // CommonJS import
+ * // import type { ComprehendMedicalClientConfig } from "@aws-sdk/client-comprehendmedical";
+ * const config = {}; // type is ComprehendMedicalClientConfig
  * const client = new ComprehendMedicalClient(config);
+ * const input = { // InferICD10CMRequest
+ *   Text: "STRING_VALUE", // required
+ * };
  * const command = new InferICD10CMCommand(input);
  * const response = await client.send(command);
+ * // { // InferICD10CMResponse
+ * //   Entities: [ // ICD10CMEntityList // required
+ * //     { // ICD10CMEntity
+ * //       Id: Number("int"),
+ * //       Text: "STRING_VALUE",
+ * //       Category: "MEDICAL_CONDITION",
+ * //       Type: "DX_NAME" || "TIME_EXPRESSION",
+ * //       Score: Number("float"),
+ * //       BeginOffset: Number("int"),
+ * //       EndOffset: Number("int"),
+ * //       Attributes: [ // ICD10CMAttributeList
+ * //         { // ICD10CMAttribute
+ * //           Type: "ACUITY" || "DIRECTION" || "SYSTEM_ORGAN_SITE" || "QUALITY" || "QUANTITY" || "TIME_TO_DX_NAME" || "TIME_EXPRESSION",
+ * //           Score: Number("float"),
+ * //           RelationshipScore: Number("float"),
+ * //           Id: Number("int"),
+ * //           BeginOffset: Number("int"),
+ * //           EndOffset: Number("int"),
+ * //           Text: "STRING_VALUE",
+ * //           Traits: [ // ICD10CMTraitList
+ * //             { // ICD10CMTrait
+ * //               Name: "NEGATION" || "DIAGNOSIS" || "SIGN" || "SYMPTOM" || "PERTAINS_TO_FAMILY" || "HYPOTHETICAL" || "LOW_CONFIDENCE",
+ * //               Score: Number("float"),
+ * //             },
+ * //           ],
+ * //           Category: "DX_NAME" || "TIME_EXPRESSION",
+ * //           RelationshipType: "OVERLAP" || "SYSTEM_ORGAN_SITE" || "QUALITY",
+ * //         },
+ * //       ],
+ * //       Traits: [
+ * //         {
+ * //           Name: "NEGATION" || "DIAGNOSIS" || "SIGN" || "SYMPTOM" || "PERTAINS_TO_FAMILY" || "HYPOTHETICAL" || "LOW_CONFIDENCE",
+ * //           Score: Number("float"),
+ * //         },
+ * //       ],
+ * //       ICD10CMConcepts: [ // ICD10CMConceptList
+ * //         { // ICD10CMConcept
+ * //           Description: "STRING_VALUE",
+ * //           Code: "STRING_VALUE",
+ * //           Score: Number("float"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   PaginationToken: "STRING_VALUE",
+ * //   ModelVersion: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param InferICD10CMCommandInput - {@link InferICD10CMCommandInput}
+ * @returns {@link InferICD10CMCommandOutput}
  * @see {@link InferICD10CMCommandInput} for command's `input` shape.
  * @see {@link InferICD10CMCommandOutput} for command's `response` shape.
- * @see {@link ComprehendMedicalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendMedicalClientResolvedConfig | config} for ComprehendMedicalClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal server error occurred. Retry your request. </p>
+ *
+ * @throws {@link InvalidEncodingException} (client fault)
+ *  <p> The input text was not in valid UTF-8 character encoding. Check your text then retry your
+ *       request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p> The request that you made is invalid. Check your request to determine why it's invalid
+ *       and then retry the request.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p> The Amazon Comprehend Medical service is temporarily unavailable. Please wait and then retry your request.
+ *     </p>
+ *
+ * @throws {@link TextSizeLimitExceededException} (client fault)
+ *  <p> The size of the text you submitted exceeds the size limit. Reduce the size of the text or
+ *       use a smaller document and then retry your request. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> You have made too many requests within a short period of time. Wait for a short time and
+ *       then try your request again. Contact customer support for more information about a service
+ *       limit increase. </p>
+ *
+ * @throws {@link ComprehendMedicalServiceException}
+ * <p>Base exception class for all service exceptions from ComprehendMedical service.</p>
+ *
+ *
+ * @public
  */
-export class InferICD10CMCommand extends $Command<
-  InferICD10CMCommandInput,
-  InferICD10CMCommandOutput,
-  ComprehendMedicalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: InferICD10CMCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendMedicalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<InferICD10CMCommandInput, InferICD10CMCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendMedicalClient";
-    const commandName = "InferICD10CMCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: InferICD10CMRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: InferICD10CMResponse.filterSensitiveLog,
+export class InferICD10CMCommand extends command<InferICD10CMCommandInput, InferICD10CMCommandOutput>(
+  _ep0,
+  _mw0,
+  "InferICD10CM",
+  InferICD10CM$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InferICD10CMRequest;
+      output: InferICD10CMResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: InferICD10CMCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1InferICD10CMCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<InferICD10CMCommandOutput> {
-    return deserializeAws_json1_1InferICD10CMCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: InferICD10CMCommandInput;
+      output: InferICD10CMCommandOutput;
+    };
+  };
 }

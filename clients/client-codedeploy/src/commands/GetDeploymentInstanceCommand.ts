@@ -1,97 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { GetDeploymentInstanceInput, GetDeploymentInstanceOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDeploymentInstanceCommand,
-  serializeAws_json1_1GetDeploymentInstanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDeploymentInstanceInput, GetDeploymentInstanceOutput } from "../models/models_0";
+import { GetDeploymentInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDeploymentInstanceCommand}.
+ */
 export interface GetDeploymentInstanceCommandInput extends GetDeploymentInstanceInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetDeploymentInstanceCommand}.
+ */
 export interface GetDeploymentInstanceCommandOutput extends GetDeploymentInstanceOutput, __MetadataBearer {}
 
 /**
- * @deprecated
- *
  * <p>Gets information about an instance as part of a deployment.</p>
+ *
+ * @deprecated This operation is deprecated, use GetDeploymentTarget instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, GetDeploymentInstanceCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, GetDeploymentInstanceCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // GetDeploymentInstanceInput
+ *   deploymentId: "STRING_VALUE", // required
+ *   instanceId: "STRING_VALUE", // required
+ * };
  * const command = new GetDeploymentInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // GetDeploymentInstanceOutput
+ * //   instanceSummary: { // InstanceSummary
+ * //     deploymentId: "STRING_VALUE",
+ * //     instanceId: "STRING_VALUE",
+ * //     status: "Pending" || "InProgress" || "Succeeded" || "Failed" || "Skipped" || "Unknown" || "Ready",
+ * //     lastUpdatedAt: new Date("TIMESTAMP"),
+ * //     lifecycleEvents: [ // LifecycleEventList
+ * //       { // LifecycleEvent
+ * //         lifecycleEventName: "STRING_VALUE",
+ * //         diagnostics: { // Diagnostics
+ * //           errorCode: "Success" || "ScriptMissing" || "ScriptNotExecutable" || "ScriptTimedOut" || "ScriptFailed" || "UnknownError",
+ * //           scriptName: "STRING_VALUE",
+ * //           message: "STRING_VALUE",
+ * //           logTail: "STRING_VALUE",
+ * //         },
+ * //         startTime: new Date("TIMESTAMP"),
+ * //         endTime: new Date("TIMESTAMP"),
+ * //         status: "Pending" || "InProgress" || "Succeeded" || "Failed" || "Skipped" || "Unknown",
+ * //       },
+ * //     ],
+ * //     instanceType: "Blue" || "Green",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDeploymentInstanceCommandInput - {@link GetDeploymentInstanceCommandInput}
+ * @returns {@link GetDeploymentInstanceCommandOutput}
  * @see {@link GetDeploymentInstanceCommandInput} for command's `input` shape.
  * @see {@link GetDeploymentInstanceCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link DeploymentDoesNotExistException} (client fault)
+ *  <p>The deployment with the user or Amazon Web Services account does not exist.</p>
+ *
+ * @throws {@link DeploymentIdRequiredException} (client fault)
+ *  <p>At least one deployment ID must be specified.</p>
+ *
+ * @throws {@link InstanceDoesNotExistException} (client fault)
+ *  <p>The specified instance does not exist in the deployment group.</p>
+ *
+ * @throws {@link InstanceIdRequiredException} (client fault)
+ *  <p>The instance ID was not specified.</p>
+ *
+ * @throws {@link InvalidComputePlatformException} (client fault)
+ *  <p>The computePlatform is invalid. The computePlatform should be <code>Lambda</code>, <code>Server</code>, or <code>ECS</code>.</p>
+ *
+ * @throws {@link InvalidDeploymentIdException} (client fault)
+ *  <p>At least one of the deployment IDs was specified in an invalid format.</p>
+ *
+ * @throws {@link InvalidInstanceNameException} (client fault)
+ *  <p>The on-premises instance name was specified in an invalid format.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class GetDeploymentInstanceCommand extends $Command<
-  GetDeploymentInstanceCommandInput,
-  GetDeploymentInstanceCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDeploymentInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDeploymentInstanceCommandInput, GetDeploymentInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "GetDeploymentInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDeploymentInstanceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDeploymentInstanceOutput.filterSensitiveLog,
+export class GetDeploymentInstanceCommand extends command<GetDeploymentInstanceCommandInput, GetDeploymentInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDeploymentInstance",
+  GetDeploymentInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeploymentInstanceInput;
+      output: GetDeploymentInstanceOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDeploymentInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDeploymentInstanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDeploymentInstanceCommandOutput> {
-    return deserializeAws_json1_1GetDeploymentInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDeploymentInstanceCommandInput;
+      output: GetDeploymentInstanceCommandOutput;
+    };
+  };
 }

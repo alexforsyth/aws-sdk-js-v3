@@ -1,91 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { AliasConfiguration, GetAliasRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetAliasCommand,
-  serializeAws_restJson1GetAliasCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AliasConfiguration, GetAliasRequest } from "../models/models_0";
+import { GetAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAliasCommand}.
+ */
 export interface GetAliasCommandInput extends GetAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAliasCommand}.
+ */
 export interface GetAliasCommandOutput extends AliasConfiguration, __MetadataBearer {}
 
 /**
- * <p>Returns details about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.</p>
+ * <p>Returns details about a Lambda Event Function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, GetAliasCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, GetAliasCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // GetAliasRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetAliasCommand(input);
  * const response = await client.send(command);
+ * // { // AliasConfiguration
+ * //   AliasArn: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   FunctionVersion: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   RoutingConfig: { // AliasRoutingConfiguration
+ * //     AdditionalVersionWeights: { // AdditionalVersionWeights
+ * //       "<keys>": Number("double"),
+ * //     },
+ * //   },
+ * //   RevisionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetAliasCommandInput - {@link GetAliasCommandInput}
+ * @returns {@link GetAliasCommandOutput}
  * @see {@link GetAliasCommandInput} for command's `input` shape.
  * @see {@link GetAliasCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To get a Lambda function alias
+ * ```javascript
+ * // The following example returns details about an alias named BLUE for a function named my-function
+ * const input = {
+ *   FunctionName: "my-function",
+ *   Name: "BLUE"
+ * };
+ * const command = new GetAliasCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AliasArn: "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE",
+ *   Description: "Production environment BLUE.",
+ *   FunctionVersion: "3",
+ *   Name: "BLUE",
+ *   RevisionId: "594f41fb-xmpl-4c20-95c7-6ca5f2a92c93"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetAliasCommand extends $Command<GetAliasCommandInput, GetAliasCommandOutput, LambdaClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAliasCommandInput, GetAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "GetAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAliasRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AliasConfiguration.filterSensitiveLog,
+export class GetAliasCommand extends command<GetAliasCommandInput, GetAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAlias",
+  GetAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAliasRequest;
+      output: AliasConfiguration;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAliasCommandOutput> {
-    return deserializeAws_restJson1GetAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAliasCommandInput;
+      output: GetAliasCommandOutput;
+    };
+  };
 }

@@ -1,96 +1,128 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDocumentVersionsRequest, DescribeDocumentVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeDocumentVersionsCommand,
-  serializeAws_restJson1DescribeDocumentVersionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDocumentVersionsRequest, DescribeDocumentVersionsResponse } from "../models/models_0";
+import { DescribeDocumentVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDocumentVersionsCommand}.
+ */
 export interface DescribeDocumentVersionsCommandInput extends DescribeDocumentVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDocumentVersionsCommand}.
+ */
 export interface DescribeDocumentVersionsCommandOutput extends DescribeDocumentVersionsResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves the document versions for the specified document.</p>
- *         <p>By default, only active versions are returned.</p>
+ *          <p>By default, only active versions are returned.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkDocsClient, DescribeDocumentVersionsCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, DescribeDocumentVersionsCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // DescribeDocumentVersionsRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   DocumentId: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ *   Include: "STRING_VALUE",
+ *   Fields: "STRING_VALUE",
+ * };
  * const command = new DescribeDocumentVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDocumentVersionsResponse
+ * //   DocumentVersions: [ // DocumentVersionMetadataList
+ * //     { // DocumentVersionMetadata
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       ContentType: "STRING_VALUE",
+ * //       Size: Number("long"),
+ * //       Signature: "STRING_VALUE",
+ * //       Status: "INITIALIZED" || "ACTIVE",
+ * //       CreatedTimestamp: new Date("TIMESTAMP"),
+ * //       ModifiedTimestamp: new Date("TIMESTAMP"),
+ * //       ContentCreatedTimestamp: new Date("TIMESTAMP"),
+ * //       ContentModifiedTimestamp: new Date("TIMESTAMP"),
+ * //       CreatorId: "STRING_VALUE",
+ * //       Thumbnail: { // DocumentThumbnailUrlMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       Source: { // DocumentSourceUrlMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDocumentVersionsCommandInput - {@link DescribeDocumentVersionsCommandInput}
+ * @returns {@link DescribeDocumentVersionsCommandOutput}
  * @see {@link DescribeDocumentVersionsCommandInput} for command's `input` shape.
  * @see {@link DescribeDocumentVersionsCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The pagination marker or limit fields are not valid.</p>
+ *
+ * @throws {@link InvalidPasswordException} (client fault)
+ *  <p>The password is invalid.</p>
+ *
+ * @throws {@link ProhibitedStateException} (client fault)
+ *  <p>The specified document version is not in the INITIALIZED state.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDocumentVersionsCommand extends $Command<
-  DescribeDocumentVersionsCommandInput,
-  DescribeDocumentVersionsCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDocumentVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDocumentVersionsCommandInput, DescribeDocumentVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "DescribeDocumentVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDocumentVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDocumentVersionsResponse.filterSensitiveLog,
+export class DescribeDocumentVersionsCommand extends command<DescribeDocumentVersionsCommandInput, DescribeDocumentVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDocumentVersions",
+  DescribeDocumentVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDocumentVersionsRequest;
+      output: DescribeDocumentVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDocumentVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeDocumentVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDocumentVersionsCommandOutput> {
-    return deserializeAws_restJson1DescribeDocumentVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDocumentVersionsCommandInput;
+      output: DescribeDocumentVersionsCommandOutput;
+    };
+  };
 }

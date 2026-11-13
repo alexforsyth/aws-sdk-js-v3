@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
-import { DeleteMetricStreamInput, DeleteMetricStreamOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteMetricStreamCommand,
-  serializeAws_queryDeleteMetricStreamCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMetricStreamInput, DeleteMetricStreamOutput } from "../models/models_0";
+import { DeleteMetricStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMetricStreamCommand}.
+ */
 export interface DeleteMetricStreamCommandInput extends DeleteMetricStreamInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMetricStreamCommand}.
+ */
 export interface DeleteMetricStreamCommandOutput extends DeleteMetricStreamOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,55 @@ export interface DeleteMetricStreamCommandOutput extends DeleteMetricStreamOutpu
  * ```javascript
  * import { CloudWatchClient, DeleteMetricStreamCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
  * // const { CloudWatchClient, DeleteMetricStreamCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * // import type { CloudWatchClientConfig } from "@aws-sdk/client-cloudwatch";
+ * const config = {}; // type is CloudWatchClientConfig
  * const client = new CloudWatchClient(config);
+ * const input = { // DeleteMetricStreamInput
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteMetricStreamCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteMetricStreamCommandInput - {@link DeleteMetricStreamCommandInput}
+ * @returns {@link DeleteMetricStreamCommandOutput}
  * @see {@link DeleteMetricStreamCommandInput} for command's `input` shape.
  * @see {@link DeleteMetricStreamCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for CloudWatchClient's `config` shape.
  *
+ * @throws {@link InternalServiceFault} (server fault)
+ *  <p>Request processing has failed due to some unknown error, exception, or
+ *             failure.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of an input parameter is bad or out-of-range.</p>
+ *
+ * @throws {@link MissingRequiredParameterException} (client fault)
+ *  <p>An input parameter that is required is missing.</p>
+ *
+ * @throws {@link CloudWatchServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatch service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMetricStreamCommand extends $Command<
-  DeleteMetricStreamCommandInput,
-  DeleteMetricStreamCommandOutput,
-  CloudWatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMetricStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMetricStreamCommandInput, DeleteMetricStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchClient";
-    const commandName = "DeleteMetricStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMetricStreamInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMetricStreamOutput.filterSensitiveLog,
+export class DeleteMetricStreamCommand extends command<DeleteMetricStreamCommandInput, DeleteMetricStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMetricStream",
+  DeleteMetricStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMetricStreamInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMetricStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteMetricStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteMetricStreamCommandOutput> {
-    return deserializeAws_queryDeleteMetricStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMetricStreamCommandInput;
+      output: DeleteMetricStreamCommandOutput;
+    };
+  };
 }

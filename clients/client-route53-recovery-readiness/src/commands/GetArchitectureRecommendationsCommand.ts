@@ -1,107 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetArchitectureRecommendationsRequest, GetArchitectureRecommendationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetArchitectureRecommendationsCommand,
-  serializeAws_restJson1GetArchitectureRecommendationsCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryReadinessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryReadinessClient";
-
-export interface GetArchitectureRecommendationsCommandInput extends GetArchitectureRecommendationsRequest {}
-export interface GetArchitectureRecommendationsCommandOutput
-  extends GetArchitectureRecommendationsResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetArchitectureRecommendationsRequest, GetArchitectureRecommendationsResponse } from "../models/models_0";
+import { GetArchitectureRecommendations$ } from "../schemas/schemas_0";
 
 /**
- * Returns a collection of recommendations to improve resilliance and readiness check quality for a Recovery Group.
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetArchitectureRecommendationsCommand}.
+ */
+export interface GetArchitectureRecommendationsCommandInput extends GetArchitectureRecommendationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetArchitectureRecommendationsCommand}.
+ */
+export interface GetArchitectureRecommendationsCommandOutput extends GetArchitectureRecommendationsResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets recommendations about architecture designs for improving resiliency for an application, based on a recovery group.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53RecoveryReadinessClient, GetArchitectureRecommendationsCommand } from "@aws-sdk/client-route53-recovery-readiness"; // ES Modules import
  * // const { Route53RecoveryReadinessClient, GetArchitectureRecommendationsCommand } = require("@aws-sdk/client-route53-recovery-readiness"); // CommonJS import
+ * // import type { Route53RecoveryReadinessClientConfig } from "@aws-sdk/client-route53-recovery-readiness";
+ * const config = {}; // type is Route53RecoveryReadinessClientConfig
  * const client = new Route53RecoveryReadinessClient(config);
+ * const input = { // GetArchitectureRecommendationsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   RecoveryGroupName: "STRING_VALUE", // required
+ * };
  * const command = new GetArchitectureRecommendationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetArchitectureRecommendationsResponse
+ * //   LastAuditTimestamp: new Date("TIMESTAMP"),
+ * //   NextToken: "STRING_VALUE",
+ * //   Recommendations: [ // __listOfRecommendation
+ * //     { // Recommendation
+ * //       RecommendationText: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetArchitectureRecommendationsCommandInput - {@link GetArchitectureRecommendationsCommandInput}
+ * @returns {@link GetArchitectureRecommendationsCommandOutput}
  * @see {@link GetArchitectureRecommendationsCommandInput} for command's `input` shape.
  * @see {@link GetArchitectureRecommendationsCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for Route53RecoveryReadinessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  User does not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link Route53RecoveryReadinessServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryReadiness service.</p>
+ *
+ *
+ * @public
  */
-export class GetArchitectureRecommendationsCommand extends $Command<
-  GetArchitectureRecommendationsCommandInput,
-  GetArchitectureRecommendationsCommandOutput,
-  Route53RecoveryReadinessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetArchitectureRecommendationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryReadinessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetArchitectureRecommendationsCommandInput, GetArchitectureRecommendationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryReadinessClient";
-    const commandName = "GetArchitectureRecommendationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetArchitectureRecommendationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetArchitectureRecommendationsResponse.filterSensitiveLog,
+export class GetArchitectureRecommendationsCommand extends command<GetArchitectureRecommendationsCommandInput, GetArchitectureRecommendationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetArchitectureRecommendations",
+  GetArchitectureRecommendations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetArchitectureRecommendationsRequest;
+      output: GetArchitectureRecommendationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetArchitectureRecommendationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetArchitectureRecommendationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetArchitectureRecommendationsCommandOutput> {
-    return deserializeAws_restJson1GetArchitectureRecommendationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetArchitectureRecommendationsCommandInput;
+      output: GetArchitectureRecommendationsCommandOutput;
+    };
+  };
 }

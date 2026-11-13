@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeactivateContactChannelRequest, DeactivateContactChannelResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeactivateContactChannelCommand,
-  serializeAws_json1_1DeactivateContactChannelCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMContactsClientResolvedConfig } from "../SSMContactsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeactivateContactChannelRequest, DeactivateContactChannelResult } from "../models/models_0";
+import { DeactivateContactChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeactivateContactChannelCommand}.
+ */
 export interface DeactivateContactChannelCommandInput extends DeactivateContactChannelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeactivateContactChannelCommand}.
+ */
 export interface DeactivateContactChannelCommandOutput extends DeactivateContactChannelResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface DeactivateContactChannelCommandOutput extends DeactivateContact
  * ```javascript
  * import { SSMContactsClient, DeactivateContactChannelCommand } from "@aws-sdk/client-ssm-contacts"; // ES Modules import
  * // const { SSMContactsClient, DeactivateContactChannelCommand } = require("@aws-sdk/client-ssm-contacts"); // CommonJS import
+ * // import type { SSMContactsClientConfig } from "@aws-sdk/client-ssm-contacts";
+ * const config = {}; // type is SSMContactsClientConfig
  * const client = new SSMContactsClient(config);
+ * const input = { // DeactivateContactChannelRequest
+ *   ContactChannelId: "STRING_VALUE", // required
+ * };
  * const command = new DeactivateContactChannelCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeactivateContactChannelCommandInput - {@link DeactivateContactChannelCommandInput}
+ * @returns {@link DeactivateContactChannelCommandOutput}
  * @see {@link DeactivateContactChannelCommandInput} for command's `input` shape.
  * @see {@link DeactivateContactChannelCommandOutput} for command's `response` shape.
- * @see {@link SSMContactsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMContactsClientResolvedConfig | config} for SSMContactsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *          service.</p>
+ *
+ * @throws {@link SSMContactsServiceException}
+ * <p>Base exception class for all service exceptions from SSMContacts service.</p>
+ *
+ *
+ * @public
  */
-export class DeactivateContactChannelCommand extends $Command<
-  DeactivateContactChannelCommandInput,
-  DeactivateContactChannelCommandOutput,
-  SSMContactsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeactivateContactChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMContactsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeactivateContactChannelCommandInput, DeactivateContactChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMContactsClient";
-    const commandName = "DeactivateContactChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeactivateContactChannelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeactivateContactChannelResult.filterSensitiveLog,
+export class DeactivateContactChannelCommand extends command<DeactivateContactChannelCommandInput, DeactivateContactChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeactivateContactChannel",
+  DeactivateContactChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeactivateContactChannelRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeactivateContactChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeactivateContactChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeactivateContactChannelCommandOutput> {
-    return deserializeAws_json1_1DeactivateContactChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeactivateContactChannelCommandInput;
+      output: DeactivateContactChannelCommandOutput;
+    };
+  };
 }

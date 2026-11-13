@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListEnvironmentsCommand,
+  ListEnvironmentsCommandInput,
+  ListEnvironmentsCommandOutput,
+} from "../commands/ListEnvironmentsCommand";
+import { EvsClient } from "../EvsClient";
+import type { EvsPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListEnvironments: (
+  config: EvsPaginationConfiguration,
+  input: ListEnvironmentsCommandInput,
+  ...rest: any[]
+) => Paginator<ListEnvironmentsCommandOutput> = createPaginator<
+  EvsPaginationConfiguration,
+  ListEnvironmentsCommandInput,
+  ListEnvironmentsCommandOutput
+>(EvsClient, ListEnvironmentsCommand, "nextToken", "nextToken", "maxResults");

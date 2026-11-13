@@ -1,95 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteOutpostInput, DeleteOutpostOutput } from "../models/models_0";
-import { OutpostsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OutpostsClient";
-import {
-  deserializeAws_restJson1DeleteOutpostCommand,
-  serializeAws_restJson1DeleteOutpostCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteOutpostInput, DeleteOutpostOutput } from "../models/models_0";
+import { DeleteOutpost$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteOutpostCommand}.
+ */
 export interface DeleteOutpostCommandInput extends DeleteOutpostInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteOutpostCommand}.
+ */
 export interface DeleteOutpostCommandOutput extends DeleteOutpostOutput, __MetadataBearer {}
 
 /**
- * <p>Deletes the Outpost.</p>
+ * <p>Deletes the specified Outpost.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OutpostsClient, DeleteOutpostCommand } from "@aws-sdk/client-outposts"; // ES Modules import
  * // const { OutpostsClient, DeleteOutpostCommand } = require("@aws-sdk/client-outposts"); // CommonJS import
+ * // import type { OutpostsClientConfig } from "@aws-sdk/client-outposts";
+ * const config = {}; // type is OutpostsClientConfig
  * const client = new OutpostsClient(config);
+ * const input = { // DeleteOutpostInput
+ *   OutpostId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteOutpostCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteOutpostCommandInput - {@link DeleteOutpostCommandInput}
+ * @returns {@link DeleteOutpostCommandOutput}
  * @see {@link DeleteOutpostCommandInput} for command's `input` shape.
  * @see {@link DeleteOutpostCommandOutput} for command's `response` shape.
- * @see {@link OutpostsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OutpostsClientResolvedConfig | config} for OutpostsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have permission to perform this operation.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting this resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified request is not valid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link OutpostsServiceException}
+ * <p>Base exception class for all service exceptions from Outposts service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteOutpostCommand extends $Command<
-  DeleteOutpostCommandInput,
-  DeleteOutpostCommandOutput,
-  OutpostsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteOutpostCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OutpostsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteOutpostCommandInput, DeleteOutpostCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OutpostsClient";
-    const commandName = "DeleteOutpostCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteOutpostInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteOutpostOutput.filterSensitiveLog,
+export class DeleteOutpostCommand extends command<DeleteOutpostCommandInput, DeleteOutpostCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteOutpost",
+  DeleteOutpost$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteOutpostInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteOutpostCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteOutpostCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteOutpostCommandOutput> {
-    return deserializeAws_restJson1DeleteOutpostCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteOutpostCommandInput;
+      output: DeleteOutpostCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { DeleteEvaluationInput, DeleteEvaluationOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteEvaluationCommand,
-  serializeAws_json1_1DeleteEvaluationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteEvaluationInput, DeleteEvaluationOutput } from "../models/models_0";
+import { DeleteEvaluation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteEvaluationCommand}.
+ */
 export interface DeleteEvaluationCommandInput extends DeleteEvaluationInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteEvaluationCommand}.
+ */
 export interface DeleteEvaluationCommandOutput extends DeleteEvaluationOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,56 @@ export interface DeleteEvaluationCommandOutput extends DeleteEvaluationOutput, _
  * ```javascript
  * import { MachineLearningClient, DeleteEvaluationCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, DeleteEvaluationCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // DeleteEvaluationInput
+ *   EvaluationId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteEvaluationCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteEvaluationOutput
+ * //   EvaluationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteEvaluationCommandInput - {@link DeleteEvaluationCommandInput}
+ * @returns {@link DeleteEvaluationCommandOutput}
  * @see {@link DeleteEvaluationCommandInput} for command's `input` shape.
  * @see {@link DeleteEvaluationCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource cannot be located.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteEvaluationCommand extends $Command<
-  DeleteEvaluationCommandInput,
-  DeleteEvaluationCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteEvaluationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteEvaluationCommandInput, DeleteEvaluationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "DeleteEvaluationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteEvaluationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteEvaluationOutput.filterSensitiveLog,
+export class DeleteEvaluationCommand extends command<DeleteEvaluationCommandInput, DeleteEvaluationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteEvaluation",
+  DeleteEvaluation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteEvaluationInput;
+      output: DeleteEvaluationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteEvaluationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteEvaluationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteEvaluationCommandOutput> {
-    return deserializeAws_json1_1DeleteEvaluationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteEvaluationCommandInput;
+      output: DeleteEvaluationCommandOutput;
+    };
+  };
 }

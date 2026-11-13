@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeImportCommand, DescribeImportCommandInput } from "../commands/DescribeImportCommand";
-import { LexModelsV2Client } from "../LexModelsV2Client";
+import {
+  type DescribeImportCommandInput,
+  type DescribeImportCommandOutput,
+  DescribeImportCommand,
+} from "../commands/DescribeImportCommand";
+import type { LexModelsV2Client } from "../LexModelsV2Client";
+import type { LexModelsV2ServiceException } from "../models/LexModelsV2ServiceException";
 
-const checkState = async (client: LexModelsV2Client, input: DescribeImportCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: LexModelsV2Client, input: DescribeImportCommandInput): Promise<WaiterResult<DescribeImportCommandOutput | LexModelsV2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeImportCommand(input));
+    let result: DescribeImportCommandOutput & any = await client.send(new DescribeImportCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.importStatus;
-      };
+      }
       if (returnComparator() === "Completed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: LexModelsV2Client, input: DescribeImportComman
     try {
       const returnComparator = () => {
         return result.importStatus;
-      };
+      }
       if (returnComparator() === "Deleting") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -27,7 +39,7 @@ const checkState = async (client: LexModelsV2Client, input: DescribeImportComman
     try {
       const returnComparator = () => {
         return result.importStatus;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -44,7 +56,7 @@ const checkState = async (client: LexModelsV2Client, input: DescribeImportComman
 export const waitForBotImportCompleted = async (
   params: WaiterConfiguration<LexModelsV2Client>,
   input: DescribeImportCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeImportCommandOutput | LexModelsV2ServiceException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -56,8 +68,8 @@ export const waitForBotImportCompleted = async (
 export const waitUntilBotImportCompleted = async (
   params: WaiterConfiguration<LexModelsV2Client>,
   input: DescribeImportCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeImportCommandOutput>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeImportCommandOutput>;
 };

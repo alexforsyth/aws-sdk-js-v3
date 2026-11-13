@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisassociateWirelessGatewayFromCertificateRequest,
   DisassociateWirelessGatewayFromCertificateResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateWirelessGatewayFromCertificateCommand,
-  serializeAws_restJson1DisassociateWirelessGatewayFromCertificateCommand,
-} from "../protocols/Aws_restJson1";
+import { DisassociateWirelessGatewayFromCertificate$ } from "../schemas/schemas_0";
 
-export interface DisassociateWirelessGatewayFromCertificateCommandInput
-  extends DisassociateWirelessGatewayFromCertificateRequest {}
-export interface DisassociateWirelessGatewayFromCertificateCommandOutput
-  extends DisassociateWirelessGatewayFromCertificateResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateWirelessGatewayFromCertificateCommand}.
+ */
+export interface DisassociateWirelessGatewayFromCertificateCommandInput extends DisassociateWirelessGatewayFromCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateWirelessGatewayFromCertificateCommand}.
+ */
+export interface DisassociateWirelessGatewayFromCertificateCommandOutput extends DisassociateWirelessGatewayFromCertificateResponse, __MetadataBearer {}
 
 /**
  * <p>Disassociates a wireless gateway from its currently associated certificate.</p>
@@ -34,77 +32,60 @@ export interface DisassociateWirelessGatewayFromCertificateCommandOutput
  * ```javascript
  * import { IoTWirelessClient, DisassociateWirelessGatewayFromCertificateCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, DisassociateWirelessGatewayFromCertificateCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // DisassociateWirelessGatewayFromCertificateRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateWirelessGatewayFromCertificateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateWirelessGatewayFromCertificateCommandInput - {@link DisassociateWirelessGatewayFromCertificateCommandInput}
+ * @returns {@link DisassociateWirelessGatewayFromCertificateCommandOutput}
  * @see {@link DisassociateWirelessGatewayFromCertificateCommandInput} for command's `input` shape.
  * @see {@link DisassociateWirelessGatewayFromCertificateCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateWirelessGatewayFromCertificateCommand extends $Command<
-  DisassociateWirelessGatewayFromCertificateCommandInput,
-  DisassociateWirelessGatewayFromCertificateCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateWirelessGatewayFromCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DisassociateWirelessGatewayFromCertificateCommandInput,
-    DisassociateWirelessGatewayFromCertificateCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "DisassociateWirelessGatewayFromCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateWirelessGatewayFromCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateWirelessGatewayFromCertificateResponse.filterSensitiveLog,
+export class DisassociateWirelessGatewayFromCertificateCommand extends command<DisassociateWirelessGatewayFromCertificateCommandInput, DisassociateWirelessGatewayFromCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateWirelessGatewayFromCertificate",
+  DisassociateWirelessGatewayFromCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateWirelessGatewayFromCertificateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateWirelessGatewayFromCertificateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateWirelessGatewayFromCertificateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateWirelessGatewayFromCertificateCommandOutput> {
-    return deserializeAws_restJson1DisassociateWirelessGatewayFromCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateWirelessGatewayFromCertificateCommandInput;
+      output: DisassociateWirelessGatewayFromCertificateCommandOutput;
+    };
+  };
 }

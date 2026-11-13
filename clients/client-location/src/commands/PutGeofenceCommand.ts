@@ -1,96 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { PutGeofenceRequest, PutGeofenceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutGeofenceCommand,
-  serializeAws_restJson1PutGeofenceCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutGeofenceRequest, PutGeofenceResponse } from "../models/models_0";
+import { PutGeofence$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutGeofenceCommand}.
+ */
 export interface PutGeofenceCommandInput extends PutGeofenceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutGeofenceCommand}.
+ */
 export interface PutGeofenceCommandOutput extends PutGeofenceResponse, __MetadataBearer {}
 
 /**
- * <p>Stores a geofence geometry in a given geofence collection, or updates the geometry of
- *             an existing geofence if a geofence ID is included in the request. </p>
+ * <p>Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LocationClient, PutGeofenceCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, PutGeofenceCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // PutGeofenceRequest
+ *   CollectionName: "STRING_VALUE", // required
+ *   GeofenceId: "STRING_VALUE", // required
+ *   Geometry: { // GeofenceGeometry
+ *     Polygon: [ // LinearRings
+ *       [ // LinearRing
+ *         [ // Position
+ *           Number("double"),
+ *         ],
+ *       ],
+ *     ],
+ *     Circle: { // Circle
+ *       Center: [ // required
+ *         Number("double"),
+ *       ],
+ *       Radius: Number("double"), // required
+ *     },
+ *     Geobuf: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *     MultiPolygon: [ // MultiLinearRings
+ *       [
+ *         [
+ *           "<Position>",
+ *         ],
+ *       ],
+ *     ],
+ *   },
+ *   GeofenceProperties: { // PropertyMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new PutGeofenceCommand(input);
  * const response = await client.send(command);
+ * // { // PutGeofenceResponse
+ * //   GeofenceId: "STRING_VALUE", // required
+ * //   CreateTime: new Date("TIMESTAMP"), // required
+ * //   UpdateTime: new Date("TIMESTAMP"), // required
+ * // };
+ *
  * ```
  *
+ * @param PutGeofenceCommandInput - {@link PutGeofenceCommandInput}
+ * @returns {@link PutGeofenceCommandOutput}
  * @see {@link PutGeofenceCommandInput} for command's `input` shape.
  * @see {@link PutGeofenceCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request was unsuccessful because of a conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource that you've entered was not found in your AWS account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class PutGeofenceCommand extends $Command<
-  PutGeofenceCommandInput,
-  PutGeofenceCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutGeofenceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutGeofenceCommandInput, PutGeofenceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "PutGeofenceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutGeofenceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutGeofenceResponse.filterSensitiveLog,
+export class PutGeofenceCommand extends command<PutGeofenceCommandInput, PutGeofenceCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutGeofence",
+  PutGeofence$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutGeofenceRequest;
+      output: PutGeofenceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutGeofenceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutGeofenceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutGeofenceCommandOutput> {
-    return deserializeAws_restJson1PutGeofenceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutGeofenceCommandInput;
+      output: PutGeofenceCommandOutput;
+    };
+  };
 }

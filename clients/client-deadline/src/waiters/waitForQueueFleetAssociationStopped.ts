@@ -1,0 +1,59 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type GetQueueFleetAssociationCommandInput,
+  type GetQueueFleetAssociationCommandOutput,
+  GetQueueFleetAssociationCommand,
+} from "../commands/GetQueueFleetAssociationCommand";
+import type { DeadlineClient } from "../DeadlineClient";
+import type { DeadlineServiceException } from "../models/DeadlineServiceException";
+
+const checkState = async (client: DeadlineClient, input: GetQueueFleetAssociationCommandInput): Promise<WaiterResult<GetQueueFleetAssociationCommandOutput | DeadlineServiceException>> => {
+  let reason;
+  try {
+    let result: GetQueueFleetAssociationCommandOutput & any = await client.send(new GetQueueFleetAssociationCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.status;
+      }
+      if (returnComparator() === "STOPPED") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ * Wait until a QueueFleetAssociation is stopped. Use this after setting the status to STOP_SCHEDULING_AND_COMPLETE_TASKS or STOP_SCHEDULING_AND_CANCEL_TASKS to wait for a QueueFleetAssociation to reach STOPPED
+ *  @deprecated Use waitUntilQueueFleetAssociationStopped instead. waitForQueueFleetAssociationStopped does not throw error in non-success cases.
+ */
+export const waitForQueueFleetAssociationStopped = async (
+  params: WaiterConfiguration<DeadlineClient>,
+  input: GetQueueFleetAssociationCommandInput
+): Promise<WaiterResult<GetQueueFleetAssociationCommandOutput | DeadlineServiceException>> => {
+  const serviceDefaults = { minDelay: 10, maxDelay: 600 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ * Wait until a QueueFleetAssociation is stopped. Use this after setting the status to STOP_SCHEDULING_AND_COMPLETE_TASKS or STOP_SCHEDULING_AND_CANCEL_TASKS to wait for a QueueFleetAssociation to reach STOPPED
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to GetQueueFleetAssociationCommand for polling.
+ */
+export const waitUntilQueueFleetAssociationStopped = async (
+  params: WaiterConfiguration<DeadlineClient>,
+  input: GetQueueFleetAssociationCommandInput
+): Promise<WaiterResult<GetQueueFleetAssociationCommandOutput>> => {
+  const serviceDefaults = { minDelay: 10, maxDelay: 600 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<GetQueueFleetAssociationCommandOutput>;
+};

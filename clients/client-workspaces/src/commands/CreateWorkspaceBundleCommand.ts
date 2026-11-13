@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateWorkspaceBundleRequest, CreateWorkspaceBundleResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateWorkspaceBundleCommand,
-  serializeAws_json1_1CreateWorkspaceBundleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateWorkspaceBundleRequest, CreateWorkspaceBundleResult } from "../models/models_0";
+import { CreateWorkspaceBundle$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateWorkspaceBundleCommand}.
+ */
 export interface CreateWorkspaceBundleCommandInput extends CreateWorkspaceBundleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateWorkspaceBundleCommand}.
+ */
 export interface CreateWorkspaceBundleCommandOutput extends CreateWorkspaceBundleResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,101 @@ export interface CreateWorkspaceBundleCommandOutput extends CreateWorkspaceBundl
  * ```javascript
  * import { WorkSpacesClient, CreateWorkspaceBundleCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, CreateWorkspaceBundleCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // CreateWorkspaceBundleRequest
+ *   BundleName: "STRING_VALUE", // required
+ *   BundleDescription: "STRING_VALUE", // required
+ *   ImageId: "STRING_VALUE", // required
+ *   ComputeType: { // ComputeType
+ *     Name: "VALUE" || "STANDARD" || "PERFORMANCE" || "POWER" || "GRAPHICS" || "POWERPRO" || "GENERALPURPOSE_4XLARGE" || "GENERALPURPOSE_8XLARGE" || "GRAPHICSPRO" || "GRAPHICS_G4DN" || "GRAPHICSPRO_G4DN" || "GRAPHICS_G6_XLARGE" || "GRAPHICS_G6_2XLARGE" || "GRAPHICS_G6_4XLARGE" || "GRAPHICS_G6_8XLARGE" || "GRAPHICS_G6_16XLARGE" || "GRAPHICS_GR6_4XLARGE" || "GRAPHICS_GR6_8XLARGE" || "GRAPHICS_G6F_LARGE" || "GRAPHICS_G6F_XLARGE" || "GRAPHICS_G6F_2XLARGE" || "GRAPHICS_G6F_4XLARGE" || "GRAPHICS_GR6F_4XLARGE" || "GRAPHICS_G7_2XLARGE" || "GRAPHICS_G7_4XLARGE" || "GRAPHICS_G7_8XLARGE" || "GRAPHICS_G7_12XLARGE",
+ *   },
+ *   UserStorage: { // UserStorage
+ *     Capacity: "STRING_VALUE", // required
+ *   },
+ *   RootStorage: { // RootStorage
+ *     Capacity: "STRING_VALUE", // required
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateWorkspaceBundleCommand(input);
  * const response = await client.send(command);
+ * // { // CreateWorkspaceBundleResult
+ * //   WorkspaceBundle: { // WorkspaceBundle
+ * //     BundleId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Owner: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     ImageId: "STRING_VALUE",
+ * //     RootStorage: { // RootStorage
+ * //       Capacity: "STRING_VALUE", // required
+ * //     },
+ * //     UserStorage: { // UserStorage
+ * //       Capacity: "STRING_VALUE", // required
+ * //     },
+ * //     ComputeType: { // ComputeType
+ * //       Name: "VALUE" || "STANDARD" || "PERFORMANCE" || "POWER" || "GRAPHICS" || "POWERPRO" || "GENERALPURPOSE_4XLARGE" || "GENERALPURPOSE_8XLARGE" || "GRAPHICSPRO" || "GRAPHICS_G4DN" || "GRAPHICSPRO_G4DN" || "GRAPHICS_G6_XLARGE" || "GRAPHICS_G6_2XLARGE" || "GRAPHICS_G6_4XLARGE" || "GRAPHICS_G6_8XLARGE" || "GRAPHICS_G6_16XLARGE" || "GRAPHICS_GR6_4XLARGE" || "GRAPHICS_GR6_8XLARGE" || "GRAPHICS_G6F_LARGE" || "GRAPHICS_G6F_XLARGE" || "GRAPHICS_G6F_2XLARGE" || "GRAPHICS_G6F_4XLARGE" || "GRAPHICS_GR6F_4XLARGE" || "GRAPHICS_G7_2XLARGE" || "GRAPHICS_G7_4XLARGE" || "GRAPHICS_G7_8XLARGE" || "GRAPHICS_G7_12XLARGE",
+ * //     },
+ * //     LastUpdatedTime: new Date("TIMESTAMP"),
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     State: "AVAILABLE" || "PENDING" || "ERROR",
+ * //     BundleType: "REGULAR" || "STANDBY",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateWorkspaceBundleCommandInput - {@link CreateWorkspaceBundleCommandInput}
+ * @returns {@link CreateWorkspaceBundleCommandOutput}
  * @see {@link CreateWorkspaceBundleCommandInput} for command's `input` shape.
  * @see {@link CreateWorkspaceBundleCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified resource already exists.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Your resource limits have been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>The specified resource is not available.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class CreateWorkspaceBundleCommand extends $Command<
-  CreateWorkspaceBundleCommandInput,
-  CreateWorkspaceBundleCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateWorkspaceBundleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateWorkspaceBundleCommandInput, CreateWorkspaceBundleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "CreateWorkspaceBundleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateWorkspaceBundleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateWorkspaceBundleResult.filterSensitiveLog,
+export class CreateWorkspaceBundleCommand extends command<CreateWorkspaceBundleCommandInput, CreateWorkspaceBundleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateWorkspaceBundle",
+  CreateWorkspaceBundle$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWorkspaceBundleRequest;
+      output: CreateWorkspaceBundleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateWorkspaceBundleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateWorkspaceBundleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateWorkspaceBundleCommandOutput> {
-    return deserializeAws_json1_1CreateWorkspaceBundleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateWorkspaceBundleCommandInput;
+      output: CreateWorkspaceBundleCommandOutput;
+    };
+  };
 }

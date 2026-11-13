@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { CreateExclusionsPreviewRequest, CreateExclusionsPreviewResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateExclusionsPreviewCommand,
-  serializeAws_json1_1CreateExclusionsPreviewCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateExclusionsPreviewRequest, CreateExclusionsPreviewResponse } from "../models/models_0";
+import { CreateExclusionsPreview$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateExclusionsPreviewCommand}.
+ */
 export interface CreateExclusionsPreviewCommandInput extends CreateExclusionsPreviewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateExclusionsPreviewCommand}.
+ */
 export interface CreateExclusionsPreviewCommandOutput extends CreateExclusionsPreviewResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,68 @@ export interface CreateExclusionsPreviewCommandOutput extends CreateExclusionsPr
  * ```javascript
  * import { InspectorClient, CreateExclusionsPreviewCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, CreateExclusionsPreviewCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // CreateExclusionsPreviewRequest
+ *   assessmentTemplateArn: "STRING_VALUE", // required
+ * };
  * const command = new CreateExclusionsPreviewCommand(input);
  * const response = await client.send(command);
+ * // { // CreateExclusionsPreviewResponse
+ * //   previewToken: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateExclusionsPreviewCommandInput - {@link CreateExclusionsPreviewCommandInput}
+ * @returns {@link CreateExclusionsPreviewCommandOutput}
  * @see {@link CreateExclusionsPreviewCommandInput} for command's `input` shape.
  * @see {@link CreateExclusionsPreviewCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to access the requested resource.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced an entity that does not exist. The
+ *          error code describes the entity.</p>
+ *
+ * @throws {@link PreviewGenerationInProgressException} (client fault)
+ *  <p>The request is rejected. The specified assessment template is currently generating an
+ *          exclusions preview.</p>
+ *
+ * @throws {@link ServiceTemporarilyUnavailableException} (server fault)
+ *  <p>The serice is temporary unavailable.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @public
  */
-export class CreateExclusionsPreviewCommand extends $Command<
-  CreateExclusionsPreviewCommandInput,
-  CreateExclusionsPreviewCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateExclusionsPreviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateExclusionsPreviewCommandInput, CreateExclusionsPreviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "CreateExclusionsPreviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateExclusionsPreviewRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateExclusionsPreviewResponse.filterSensitiveLog,
+export class CreateExclusionsPreviewCommand extends command<CreateExclusionsPreviewCommandInput, CreateExclusionsPreviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateExclusionsPreview",
+  CreateExclusionsPreview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateExclusionsPreviewRequest;
+      output: CreateExclusionsPreviewResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateExclusionsPreviewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateExclusionsPreviewCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateExclusionsPreviewCommandOutput> {
-    return deserializeAws_json1_1CreateExclusionsPreviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateExclusionsPreviewCommandInput;
+      output: CreateExclusionsPreviewCommandOutput;
+    };
+  };
 }

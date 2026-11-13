@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { DescribeReplayRequest, DescribeReplayResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeReplayCommand,
-  serializeAws_json1_1DescribeReplayCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeReplayRequest, DescribeReplayResponse } from "../models/models_0";
+import { DescribeReplay$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeReplayCommand}.
+ */
 export interface DescribeReplayCommandInput extends DescribeReplayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeReplayCommand}.
+ */
 export interface DescribeReplayCommandOutput extends DescribeReplayResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,69 @@ export interface DescribeReplayCommandOutput extends DescribeReplayResponse, __M
  * ```javascript
  * import { EventBridgeClient, DescribeReplayCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, DescribeReplayCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // DescribeReplayRequest
+ *   ReplayName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeReplayCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeReplayResponse
+ * //   ReplayName: "STRING_VALUE",
+ * //   ReplayArn: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   State: "STARTING" || "RUNNING" || "CANCELLING" || "COMPLETED" || "CANCELLED" || "FAILED",
+ * //   StateReason: "STRING_VALUE",
+ * //   EventSourceArn: "STRING_VALUE",
+ * //   Destination: { // ReplayDestination
+ * //     Arn: "STRING_VALUE", // required
+ * //     FilterArns: [ // ReplayDestinationFilters
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   EventStartTime: new Date("TIMESTAMP"),
+ * //   EventEndTime: new Date("TIMESTAMP"),
+ * //   EventLastReplayedTime: new Date("TIMESTAMP"),
+ * //   ReplayStartTime: new Date("TIMESTAMP"),
+ * //   ReplayEndTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeReplayCommandInput - {@link DescribeReplayCommandInput}
+ * @returns {@link DescribeReplayCommandOutput}
  * @see {@link DescribeReplayCommandInput} for command's `input` shape.
  * @see {@link DescribeReplayCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeReplayCommand extends $Command<
-  DescribeReplayCommandInput,
-  DescribeReplayCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeReplayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeReplayCommandInput, DescribeReplayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "DescribeReplayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeReplayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeReplayResponse.filterSensitiveLog,
+export class DescribeReplayCommand extends command<DescribeReplayCommandInput, DescribeReplayCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeReplay",
+  DescribeReplay$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReplayRequest;
+      output: DescribeReplayResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeReplayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeReplayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeReplayCommandOutput> {
-    return deserializeAws_json1_1DescribeReplayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeReplayCommandInput;
+      output: DescribeReplayCommandOutput;
+    };
+  };
 }

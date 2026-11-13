@@ -1,22 +1,22 @@
-# @aws-sdk/client-firehose
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-firehose/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-firehose)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-firehose.svg)](https://www.npmjs.com/package/@aws-sdk/client-firehose)
+# @aws-sdk/client-firehose
 
 ## Description
 
 AWS SDK for JavaScript Firehose Client for Node.js, Browser and React Native.
 
-<fullname>Amazon Kinesis Data Firehose API Reference</fullname>
-
-<p>Amazon Kinesis Data Firehose is a fully managed service that delivers real-time
-streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon
-Elasticsearch Service (Amazon ES), Amazon Redshift, and Splunk.</p>
+<fullname>Amazon Data Firehose</fullname>
+<note>
+<p>Amazon Data Firehose was previously known as Amazon Kinesis Data Firehose.</p>
+</note>
+<p>Amazon Data Firehose is a fully managed service that delivers real-time streaming
+data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon OpenSearch
+Service, Amazon Redshift, Splunk, and various other supported destinations.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-firehose
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-firehose`
 - `yarn add @aws-sdk/client-firehose`
@@ -28,40 +28,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `FirehoseClient` and
-the commands you need, for example `CreateDeliveryStreamCommand`:
+the commands you need, for example `ListDeliveryStreamsCommand`:
 
 ```js
 // ES5 example
-const { FirehoseClient, CreateDeliveryStreamCommand } = require("@aws-sdk/client-firehose");
+const { FirehoseClient, ListDeliveryStreamsCommand } = require("@aws-sdk/client-firehose");
 ```
 
 ```ts
 // ES6+ example
-import { FirehoseClient, CreateDeliveryStreamCommand } from "@aws-sdk/client-firehose";
+import { FirehoseClient, ListDeliveryStreamsCommand } from "@aws-sdk/client-firehose";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new FirehoseClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CreateDeliveryStreamCommand(params);
+const params = { /** input parameters */ };
+const command = new ListDeliveryStreamsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -76,26 +74,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -111,31 +92,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Firehose` extends `FirehoseClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`FirehoseClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-firehose";
-const client = new AWS.Firehose({ region: "REGION" });
+import { Firehose } from "@aws-sdk/client-firehose";
+
+const client = new Firehose({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.createDeliveryStream(params);
+  const data = await client.listDeliveryStreams(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -143,7 +118,7 @@ try {
 
 // Promises.
 client
-  .createDeliveryStream(params)
+  .listDeliveryStreams(params)
   .then((data) => {
     // process data.
   })
@@ -151,9 +126,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.createDeliveryStream(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listDeliveryStreams(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -179,12 +154,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -205,3 +182,90 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CreateDeliveryStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/CreateDeliveryStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/CreateDeliveryStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/CreateDeliveryStreamCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDeliveryStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/DeleteDeliveryStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/DeleteDeliveryStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/DeleteDeliveryStreamCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDeliveryStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/DescribeDeliveryStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/DescribeDeliveryStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/DescribeDeliveryStreamCommandOutput/)
+</details>
+<details>
+<summary>
+ListDeliveryStreams
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/ListDeliveryStreamsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/ListDeliveryStreamsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/ListDeliveryStreamsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForDeliveryStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/ListTagsForDeliveryStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/ListTagsForDeliveryStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/ListTagsForDeliveryStreamCommandOutput/)
+</details>
+<details>
+<summary>
+PutRecord
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/PutRecordCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/PutRecordCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/PutRecordCommandOutput/)
+</details>
+<details>
+<summary>
+PutRecordBatch
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/PutRecordBatchCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/PutRecordBatchCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/PutRecordBatchCommandOutput/)
+</details>
+<details>
+<summary>
+StartDeliveryStreamEncryption
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/StartDeliveryStreamEncryptionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/StartDeliveryStreamEncryptionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/StartDeliveryStreamEncryptionCommandOutput/)
+</details>
+<details>
+<summary>
+StopDeliveryStreamEncryption
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/StopDeliveryStreamEncryptionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/StopDeliveryStreamEncryptionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/StopDeliveryStreamEncryptionCommandOutput/)
+</details>
+<details>
+<summary>
+TagDeliveryStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/TagDeliveryStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/TagDeliveryStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/TagDeliveryStreamCommandOutput/)
+</details>
+<details>
+<summary>
+UntagDeliveryStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/UntagDeliveryStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/UntagDeliveryStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/UntagDeliveryStreamCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDestination
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/firehose/command/UpdateDestinationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/UpdateDestinationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-firehose/Interface/UpdateDestinationCommandOutput/)
+</details>

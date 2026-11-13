@@ -1,107 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListCrossAccountAuthorizationsRequest, ListCrossAccountAuthorizationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListCrossAccountAuthorizationsCommand,
-  serializeAws_restJson1ListCrossAccountAuthorizationsCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryReadinessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryReadinessClient";
-
-export interface ListCrossAccountAuthorizationsCommandInput extends ListCrossAccountAuthorizationsRequest {}
-export interface ListCrossAccountAuthorizationsCommandOutput
-  extends ListCrossAccountAuthorizationsResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCrossAccountAuthorizationsRequest, ListCrossAccountAuthorizationsResponse } from "../models/models_0";
+import { ListCrossAccountAuthorizations$ } from "../schemas/schemas_0";
 
 /**
- * Returns a collection of cross account readiness authorizations.
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCrossAccountAuthorizationsCommand}.
+ */
+export interface ListCrossAccountAuthorizationsCommandInput extends ListCrossAccountAuthorizationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCrossAccountAuthorizationsCommand}.
+ */
+export interface ListCrossAccountAuthorizationsCommandOutput extends ListCrossAccountAuthorizationsResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists the cross-account readiness authorizations that are in place for an account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53RecoveryReadinessClient, ListCrossAccountAuthorizationsCommand } from "@aws-sdk/client-route53-recovery-readiness"; // ES Modules import
  * // const { Route53RecoveryReadinessClient, ListCrossAccountAuthorizationsCommand } = require("@aws-sdk/client-route53-recovery-readiness"); // CommonJS import
+ * // import type { Route53RecoveryReadinessClientConfig } from "@aws-sdk/client-route53-recovery-readiness";
+ * const config = {}; // type is Route53RecoveryReadinessClientConfig
  * const client = new Route53RecoveryReadinessClient(config);
+ * const input = { // ListCrossAccountAuthorizationsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListCrossAccountAuthorizationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListCrossAccountAuthorizationsResponse
+ * //   CrossAccountAuthorizations: [ // __listOfCrossAccountAuthorization
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListCrossAccountAuthorizationsCommandInput - {@link ListCrossAccountAuthorizationsCommandInput}
+ * @returns {@link ListCrossAccountAuthorizationsCommandOutput}
  * @see {@link ListCrossAccountAuthorizationsCommandInput} for command's `input` shape.
  * @see {@link ListCrossAccountAuthorizationsCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for Route53RecoveryReadinessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  User does not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link Route53RecoveryReadinessServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryReadiness service.</p>
+ *
+ *
+ * @public
  */
-export class ListCrossAccountAuthorizationsCommand extends $Command<
-  ListCrossAccountAuthorizationsCommandInput,
-  ListCrossAccountAuthorizationsCommandOutput,
-  Route53RecoveryReadinessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCrossAccountAuthorizationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryReadinessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCrossAccountAuthorizationsCommandInput, ListCrossAccountAuthorizationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryReadinessClient";
-    const commandName = "ListCrossAccountAuthorizationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCrossAccountAuthorizationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListCrossAccountAuthorizationsResponse.filterSensitiveLog,
+export class ListCrossAccountAuthorizationsCommand extends command<ListCrossAccountAuthorizationsCommandInput, ListCrossAccountAuthorizationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCrossAccountAuthorizations",
+  ListCrossAccountAuthorizations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCrossAccountAuthorizationsRequest;
+      output: ListCrossAccountAuthorizationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListCrossAccountAuthorizationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListCrossAccountAuthorizationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListCrossAccountAuthorizationsCommandOutput> {
-    return deserializeAws_restJson1ListCrossAccountAuthorizationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCrossAccountAuthorizationsCommandInput;
+      output: ListCrossAccountAuthorizationsCommandOutput;
+    };
+  };
 }

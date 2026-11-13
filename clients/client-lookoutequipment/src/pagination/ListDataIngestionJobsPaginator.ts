@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListDataIngestionJobsCommand,
   ListDataIngestionJobsCommandInput,
   ListDataIngestionJobsCommandOutput,
 } from "../commands/ListDataIngestionJobsCommand";
-import { LookoutEquipment } from "../LookoutEquipment";
 import { LookoutEquipmentClient } from "../LookoutEquipmentClient";
-import { LookoutEquipmentPaginationConfiguration } from "./Interfaces";
+import type { LookoutEquipmentPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: LookoutEquipmentClient,
-  input: ListDataIngestionJobsCommandInput,
-  ...args: any
-): Promise<ListDataIngestionJobsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListDataIngestionJobsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: LookoutEquipment,
-  input: ListDataIngestionJobsCommandInput,
-  ...args: any
-): Promise<ListDataIngestionJobsCommandOutput> => {
-  // @ts-ignore
-  return await client.listDataIngestionJobs(input, ...args);
-};
-export async function* paginateListDataIngestionJobs(
+export const paginateListDataIngestionJobs: (
   config: LookoutEquipmentPaginationConfiguration,
   input: ListDataIngestionJobsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListDataIngestionJobsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListDataIngestionJobsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof LookoutEquipment) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof LookoutEquipmentClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected LookoutEquipment | LookoutEquipmentClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListDataIngestionJobsCommandOutput> = createPaginator<
+  LookoutEquipmentPaginationConfiguration,
+  ListDataIngestionJobsCommandInput,
+  ListDataIngestionJobsCommandOutput
+>(LookoutEquipmentClient, ListDataIngestionJobsCommand, "NextToken", "NextToken", "MaxResults");

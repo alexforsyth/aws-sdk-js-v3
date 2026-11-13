@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { DeleteBackupPlanInput, DeleteBackupPlanOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteBackupPlanCommand,
-  serializeAws_restJson1DeleteBackupPlanCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteBackupPlanInput, DeleteBackupPlanOutput } from "../models/models_0";
+import { DeleteBackupPlan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteBackupPlanCommand}.
+ */
 export interface DeleteBackupPlanCommandInput extends DeleteBackupPlanInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteBackupPlanCommand}.
+ */
 export interface DeleteBackupPlanCommandOutput extends DeleteBackupPlanOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,67 @@ export interface DeleteBackupPlanCommandOutput extends DeleteBackupPlanOutput, _
  * ```javascript
  * import { BackupClient, DeleteBackupPlanCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, DeleteBackupPlanCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // DeleteBackupPlanInput
+ *   BackupPlanId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteBackupPlanCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteBackupPlanOutput
+ * //   BackupPlanId: "STRING_VALUE",
+ * //   BackupPlanArn: "STRING_VALUE",
+ * //   DeletionDate: new Date("TIMESTAMP"),
+ * //   VersionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteBackupPlanCommandInput - {@link DeleteBackupPlanCommandInput}
+ * @returns {@link DeleteBackupPlanCommandOutput}
  * @see {@link DeleteBackupPlanCommandInput} for command's `input` shape.
  * @see {@link DeleteBackupPlanCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *          parameter is of the wrong type.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Indicates that a required parameter is missing.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action doesn't exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteBackupPlanCommand extends $Command<
-  DeleteBackupPlanCommandInput,
-  DeleteBackupPlanCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteBackupPlanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteBackupPlanCommandInput, DeleteBackupPlanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "DeleteBackupPlanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteBackupPlanInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteBackupPlanOutput.filterSensitiveLog,
+export class DeleteBackupPlanCommand extends command<DeleteBackupPlanCommandInput, DeleteBackupPlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteBackupPlan",
+  DeleteBackupPlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBackupPlanInput;
+      output: DeleteBackupPlanOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteBackupPlanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteBackupPlanCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteBackupPlanCommandOutput> {
-    return deserializeAws_restJson1DeleteBackupPlanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteBackupPlanCommandInput;
+      output: DeleteBackupPlanCommandOutput;
+    };
+  };
 }

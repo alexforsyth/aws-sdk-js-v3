@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListPipelineExecutionStepsRequest, ListPipelineExecutionStepsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListPipelineExecutionStepsCommand,
-  serializeAws_json1_1ListPipelineExecutionStepsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPipelineExecutionStepsRequest, ListPipelineExecutionStepsResponse } from "../models/models_4";
+import { ListPipelineExecutionSteps$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPipelineExecutionStepsCommand}.
+ */
 export interface ListPipelineExecutionStepsCommandInput extends ListPipelineExecutionStepsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPipelineExecutionStepsCommand}.
+ */
 export interface ListPipelineExecutionStepsCommandOutput extends ListPipelineExecutionStepsResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,234 @@ export interface ListPipelineExecutionStepsCommandOutput extends ListPipelineExe
  * ```javascript
  * import { SageMakerClient, ListPipelineExecutionStepsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListPipelineExecutionStepsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListPipelineExecutionStepsRequest
+ *   PipelineExecutionArn: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   SortOrder: "Ascending" || "Descending",
+ * };
  * const command = new ListPipelineExecutionStepsCommand(input);
  * const response = await client.send(command);
+ * // { // ListPipelineExecutionStepsResponse
+ * //   PipelineExecutionSteps: [ // PipelineExecutionStepList
+ * //     { // PipelineExecutionStep
+ * //       StepName: "STRING_VALUE",
+ * //       StepDisplayName: "STRING_VALUE",
+ * //       StepDescription: "STRING_VALUE",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       StepStatus: "Starting" || "Executing" || "Stopping" || "Stopped" || "Failed" || "Succeeded",
+ * //       CacheHitResult: { // CacheHitResult
+ * //         SourcePipelineExecutionArn: "STRING_VALUE",
+ * //       },
+ * //       FailureReason: "STRING_VALUE",
+ * //       Metadata: { // PipelineExecutionStepMetadata
+ * //         TrainingJob: { // TrainingJobStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         ProcessingJob: { // ProcessingJobStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         TransformJob: { // TransformJobStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         TuningJob: { // TuningJobStepMetaData
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         Model: { // ModelStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         RegisterModel: { // RegisterModelStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         Condition: { // ConditionStepMetadata
+ * //           Outcome: "True" || "False",
+ * //         },
+ * //         Callback: { // CallbackStepMetadata
+ * //           CallbackToken: "STRING_VALUE",
+ * //           SqsQueueUrl: "STRING_VALUE",
+ * //           OutputParameters: [ // OutputParameterList
+ * //             { // OutputParameter
+ * //               Name: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //         Lambda: { // LambdaStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //           OutputParameters: [
+ * //             {
+ * //               Name: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //         EMR: { // EMRStepMetadata
+ * //           ClusterId: "STRING_VALUE",
+ * //           StepId: "STRING_VALUE",
+ * //           StepName: "STRING_VALUE",
+ * //           LogFilePath: "STRING_VALUE",
+ * //         },
+ * //         EMRServerless: { // EMRServerlessStepMetadata
+ * //           ApplicationId: "STRING_VALUE",
+ * //           JobRunId: "STRING_VALUE",
+ * //           JobRunName: "STRING_VALUE",
+ * //           LogFilePath: "STRING_VALUE",
+ * //         },
+ * //         QualityCheck: { // QualityCheckStepMetadata
+ * //           CheckType: "STRING_VALUE",
+ * //           BaselineUsedForDriftCheckStatistics: "STRING_VALUE",
+ * //           BaselineUsedForDriftCheckConstraints: "STRING_VALUE",
+ * //           CalculatedBaselineStatistics: "STRING_VALUE",
+ * //           CalculatedBaselineConstraints: "STRING_VALUE",
+ * //           ModelPackageGroupName: "STRING_VALUE",
+ * //           ViolationReport: "STRING_VALUE",
+ * //           CheckJobArn: "STRING_VALUE",
+ * //           SkipCheck: true || false,
+ * //           RegisterNewBaseline: true || false,
+ * //         },
+ * //         ClarifyCheck: { // ClarifyCheckStepMetadata
+ * //           CheckType: "STRING_VALUE",
+ * //           BaselineUsedForDriftCheckConstraints: "STRING_VALUE",
+ * //           CalculatedBaselineConstraints: "STRING_VALUE",
+ * //           ModelPackageGroupName: "STRING_VALUE",
+ * //           ViolationReport: "STRING_VALUE",
+ * //           CheckJobArn: "STRING_VALUE",
+ * //           SkipCheck: true || false,
+ * //           RegisterNewBaseline: true || false,
+ * //         },
+ * //         Fail: { // FailStepMetadata
+ * //           ErrorMessage: "STRING_VALUE",
+ * //         },
+ * //         AutoMLJob: { // AutoMLJobStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         Endpoint: { // EndpointStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         EndpointConfig: { // EndpointConfigStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         BedrockCustomModel: { // BedrockCustomModelMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         BedrockCustomModelDeployment: { // BedrockCustomModelDeploymentMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         BedrockProvisionedModelThroughput: { // BedrockProvisionedModelThroughputMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         BedrockModelImport: { // BedrockModelImportMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         InferenceComponent: { // InferenceComponentMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         Lineage: { // LineageMetadata
+ * //           ActionArns: { // MapString2048
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //           ArtifactArns: {
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //           ContextArns: {
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //           Associations: [ // AssociationInfoList
+ * //             { // AssociationInfo
+ * //               SourceArn: "STRING_VALUE", // required
+ * //               DestinationArn: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //         Job: { // JobStepMetadata
+ * //           Arn: "STRING_VALUE",
+ * //         },
+ * //         Athena: { // AthenaStepMetadata
+ * //           QueryExecutionId: "STRING_VALUE",
+ * //           S3OutputLocation: "STRING_VALUE",
+ * //         },
+ * //         Cleanup: { // CleanupStepMetadata
+ * //           CleanedSteps: [ // CleanupStepNameList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           FailedSteps: [ // CleanupFailureList
+ * //             { // CleanupFailure
+ * //               StepName: "STRING_VALUE",
+ * //               ErrorCode: "ClientError" || "InternalFailure",
+ * //               ErrorMessage: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //           SkippedSteps: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         ForEach: { // ForEachStepMetadata
+ * //           Status: "Succeeded" || "Failed" || "Stopped",
+ * //           InputItemCount: Number("int"),
+ * //           TotalStepCount: Number("int"),
+ * //           SucceededStepCount: Number("int"),
+ * //           FailedStepCount: Number("int"),
+ * //           StoppedStepCount: Number("int"),
+ * //           Selector: { // ForEachSelectorResult
+ * //             StepName: "STRING_VALUE",
+ * //             Index: Number("int"),
+ * //           },
+ * //         },
+ * //         HubContent: { // HubContentStepMetadata
+ * //           HubArn: "STRING_VALUE",
+ * //           HubContentArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       AttemptCount: Number("int"),
+ * //       SelectiveExecutionResult: { // SelectiveExecutionResult
+ * //         SourcePipelineExecutionArn: "STRING_VALUE",
+ * //       },
+ * //       IterationContext: { // IterationContext
+ * //         ParentStepName: "STRING_VALUE",
+ * //         Index: Number("int"),
+ * //         Item: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPipelineExecutionStepsCommandInput - {@link ListPipelineExecutionStepsCommandInput}
+ * @returns {@link ListPipelineExecutionStepsCommandOutput}
  * @see {@link ListPipelineExecutionStepsCommandInput} for command's `input` shape.
  * @see {@link ListPipelineExecutionStepsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListPipelineExecutionStepsCommand extends $Command<
-  ListPipelineExecutionStepsCommandInput,
-  ListPipelineExecutionStepsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPipelineExecutionStepsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPipelineExecutionStepsCommandInput, ListPipelineExecutionStepsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListPipelineExecutionStepsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPipelineExecutionStepsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPipelineExecutionStepsResponse.filterSensitiveLog,
+export class ListPipelineExecutionStepsCommand extends command<ListPipelineExecutionStepsCommandInput, ListPipelineExecutionStepsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPipelineExecutionSteps",
+  ListPipelineExecutionSteps$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPipelineExecutionStepsRequest;
+      output: ListPipelineExecutionStepsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPipelineExecutionStepsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListPipelineExecutionStepsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListPipelineExecutionStepsCommandOutput> {
-    return deserializeAws_json1_1ListPipelineExecutionStepsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPipelineExecutionStepsCommandInput;
+      output: ListPipelineExecutionStepsCommandOutput;
+    };
+  };
 }

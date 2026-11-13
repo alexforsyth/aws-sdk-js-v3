@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { DeleteVaultAccessPolicyInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteVaultAccessPolicyCommand,
-  serializeAws_restJson1DeleteVaultAccessPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteVaultAccessPolicyInput } from "../models/models_0";
+import { DeleteVaultAccessPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteVaultAccessPolicyCommand}.
+ */
 export interface DeleteVaultAccessPolicyCommandInput extends DeleteVaultAccessPolicyInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteVaultAccessPolicyCommand}.
+ */
 export interface DeleteVaultAccessPolicyCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>This operation deletes the access policy associated with the specified vault. The
- *          operation is eventually consistent; that is, it might take some time for Amazon S3 Glacier to
+ *          operation is eventually consistent; that is, it might take some time for Amazon Glacier to
  *          completely remove the access policy, and you might still see the effect of the policy for a
  *          short time after you send the delete request.</p>
  *          <p>This operation is idempotent. You can invoke delete multiple times, even if there is
@@ -34,68 +35,76 @@ export interface DeleteVaultAccessPolicyCommandOutput extends __MetadataBearer {
  * ```javascript
  * import { GlacierClient, DeleteVaultAccessPolicyCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, DeleteVaultAccessPolicyCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // DeleteVaultAccessPolicyInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteVaultAccessPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteVaultAccessPolicyCommandInput - {@link DeleteVaultAccessPolicyCommandInput}
+ * @returns {@link DeleteVaultAccessPolicyCommandOutput}
  * @see {@link DeleteVaultAccessPolicyCommandInput} for command's `input` shape.
  * @see {@link DeleteVaultAccessPolicyCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To delete the vault access policy
+ * ```javascript
+ * // The example deletes the access policy associated with the vault named examplevault.
+ * const input = {
+ *   accountId: "-",
+ *   vaultName: "examplevault"
+ * };
+ * const command = new DeleteVaultAccessPolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteVaultAccessPolicyCommand extends $Command<
-  DeleteVaultAccessPolicyCommandInput,
-  DeleteVaultAccessPolicyCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteVaultAccessPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteVaultAccessPolicyCommandInput, DeleteVaultAccessPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "DeleteVaultAccessPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteVaultAccessPolicyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteVaultAccessPolicyCommand extends command<DeleteVaultAccessPolicyCommandInput, DeleteVaultAccessPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteVaultAccessPolicy",
+  DeleteVaultAccessPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVaultAccessPolicyInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteVaultAccessPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteVaultAccessPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteVaultAccessPolicyCommandOutput> {
-    return deserializeAws_restJson1DeleteVaultAccessPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteVaultAccessPolicyCommandInput;
+      output: DeleteVaultAccessPolicyCommandOutput;
+    };
+  };
 }

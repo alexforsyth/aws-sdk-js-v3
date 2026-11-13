@@ -1,97 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { ListProtectedResourcesInput, ListProtectedResourcesOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListProtectedResourcesCommand,
-  serializeAws_restJson1ListProtectedResourcesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProtectedResourcesInput, ListProtectedResourcesOutput } from "../models/models_0";
+import { ListProtectedResources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProtectedResourcesCommand}.
+ */
 export interface ListProtectedResourcesCommandInput extends ListProtectedResourcesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListProtectedResourcesCommand}.
+ */
 export interface ListProtectedResourcesCommandOutput extends ListProtectedResourcesOutput, __MetadataBearer {}
 
 /**
- * <p>Returns an array of resources successfully backed up by Backup, including
- *          the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a
- *          resource type.</p>
+ * <p>Returns an array of resources with recovery points created by Backup
+ *          (regardless of the recovery point's <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status">status</a>),
+ *          including the time the resource was saved, an Amazon Resource Name (ARN) of the resource,
+ *          and a resource type.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BackupClient, ListProtectedResourcesCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, ListProtectedResourcesCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // ListProtectedResourcesInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListProtectedResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListProtectedResourcesOutput
+ * //   Results: [ // ProtectedResourcesList
+ * //     { // ProtectedResource
+ * //       ResourceArn: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE",
+ * //       LastBackupTime: new Date("TIMESTAMP"),
+ * //       ResourceName: "STRING_VALUE",
+ * //       LastBackupVaultArn: "STRING_VALUE",
+ * //       LastRecoveryPointArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProtectedResourcesCommandInput - {@link ListProtectedResourcesCommandInput}
+ * @returns {@link ListProtectedResourcesCommandOutput}
  * @see {@link ListProtectedResourcesCommandInput} for command's `input` shape.
  * @see {@link ListProtectedResourcesCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class ListProtectedResourcesCommand extends $Command<
-  ListProtectedResourcesCommandInput,
-  ListProtectedResourcesCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProtectedResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProtectedResourcesCommandInput, ListProtectedResourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "ListProtectedResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProtectedResourcesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProtectedResourcesOutput.filterSensitiveLog,
+export class ListProtectedResourcesCommand extends command<ListProtectedResourcesCommandInput, ListProtectedResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProtectedResources",
+  ListProtectedResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProtectedResourcesInput;
+      output: ListProtectedResourcesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProtectedResourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListProtectedResourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProtectedResourcesCommandOutput> {
-    return deserializeAws_restJson1ListProtectedResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProtectedResourcesCommandInput;
+      output: ListProtectedResourcesCommandOutput;
+    };
+  };
 }

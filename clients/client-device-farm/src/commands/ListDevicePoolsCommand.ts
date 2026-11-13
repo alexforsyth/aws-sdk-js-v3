@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { ListDevicePoolsRequest, ListDevicePoolsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListDevicePoolsCommand,
-  serializeAws_json1_1ListDevicePoolsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDevicePoolsRequest, ListDevicePoolsResult } from "../models/models_0";
+import { ListDevicePools$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDevicePoolsCommand}.
+ */
 export interface ListDevicePoolsCommandInput extends ListDevicePoolsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDevicePoolsCommand}.
+ */
 export interface ListDevicePoolsCommandOutput extends ListDevicePoolsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,118 @@ export interface ListDevicePoolsCommandOutput extends ListDevicePoolsResult, __M
  * ```javascript
  * import { DeviceFarmClient, ListDevicePoolsCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, ListDevicePoolsCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // ListDevicePoolsRequest
+ *   arn: "STRING_VALUE", // required
+ *   type: "CURATED" || "PRIVATE",
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListDevicePoolsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDevicePoolsResult
+ * //   devicePools: [ // DevicePools
+ * //     { // DevicePool
+ * //       arn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       type: "CURATED" || "PRIVATE",
+ * //       rules: [ // Rules
+ * //         { // Rule
+ * //           attribute: "ARN" || "PLATFORM" || "FORM_FACTOR" || "MANUFACTURER" || "REMOTE_ACCESS_ENABLED" || "REMOTE_DEBUG_ENABLED" || "APPIUM_VERSION" || "INSTANCE_ARN" || "INSTANCE_LABELS" || "FLEET_TYPE" || "OS_VERSION" || "MODEL" || "AVAILABILITY",
+ * //           operator: "EQUALS" || "LESS_THAN" || "LESS_THAN_OR_EQUALS" || "GREATER_THAN" || "GREATER_THAN_OR_EQUALS" || "IN" || "NOT_IN" || "CONTAINS",
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       maxDevices: Number("int"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDevicePoolsCommandInput - {@link ListDevicePoolsCommandInput}
+ * @returns {@link ListDevicePoolsCommandOutput}
  * @see {@link ListDevicePoolsCommandInput} for command's `input` shape.
  * @see {@link ListDevicePoolsCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @example To get information about device pools
+ * ```javascript
+ * // The following example returns information about the private device pools in a specific project.
+ * const input = {
+ *   arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+ *   type: "PRIVATE"
+ * };
+ * const command = new ListDevicePoolsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   devicePools: [
+ *     {
+ *       arn: "arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE",
+ *       description: "Top devices",
+ *       name: "Top Devices",
+ *       rules: [
+ *         {
+ *           attribute: "ARN",
+ *           operator: "IN",
+ *           value: `["arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE"]`
+ *         }
+ *       ]
+ *     },
+ *     {
+ *       arn: "arn:aws:devicefarm:us-west-2:123456789101:devicepool:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/bf96e75a-28f6-4e61-b6a7-12345EXAMPLE",
+ *       description: "Samsung Galaxy Android devices",
+ *       name: "My Android Device Pool",
+ *       rules: [
+ *         {
+ *           attribute: "ARN",
+ *           operator: "IN",
+ *           value: `["arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE"]`
+ *         }
+ *       ]
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListDevicePoolsCommand extends $Command<
-  ListDevicePoolsCommandInput,
-  ListDevicePoolsCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDevicePoolsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDevicePoolsCommandInput, ListDevicePoolsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "ListDevicePoolsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDevicePoolsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDevicePoolsResult.filterSensitiveLog,
+export class ListDevicePoolsCommand extends command<ListDevicePoolsCommandInput, ListDevicePoolsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDevicePools",
+  ListDevicePools$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDevicePoolsRequest;
+      output: ListDevicePoolsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDevicePoolsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDevicePoolsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDevicePoolsCommandOutput> {
-    return deserializeAws_json1_1ListDevicePoolsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDevicePoolsCommandInput;
+      output: ListDevicePoolsCommandOutput;
+    };
+  };
 }

@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingV2Client";
-import { DescribeListenerCertificatesInput, DescribeListenerCertificatesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeListenerCertificatesCommand,
-  serializeAws_queryDescribeListenerCertificatesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeListenerCertificatesInput, DescribeListenerCertificatesOutput } from "../models/models_0";
+import { DescribeListenerCertificates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeListenerCertificatesCommand}.
+ */
 export interface DescribeListenerCertificatesCommandInput extends DescribeListenerCertificatesInput {}
-export interface DescribeListenerCertificatesCommandOutput
-  extends DescribeListenerCertificatesOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeListenerCertificatesCommand}.
+ */
+export interface DescribeListenerCertificatesCommandOutput extends DescribeListenerCertificatesOutput, __MetadataBearer {}
 
 /**
  * <p>Describes the default certificate and the certificate list for the specified HTTPS or TLS
@@ -33,79 +28,66 @@ export interface DescribeListenerCertificatesCommandOutput
  *          <p>If the default certificate is also in the certificate list, it appears twice in the
  *       results (once with <code>IsDefault</code> set to true and once with <code>IsDefault</code> set
  *       to false).</p>
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates">SSL certificates</a> in the <i>Application Load Balancers Guide</i> or
- *         <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#tls-listener-certificate">Server certificates</a> in the <i>Network Load Balancers
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/https-listener-certificates.html">SSL certificates</a> in the <i>Application Load Balancers Guide</i> or
+ *         <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html">Server certificates</a> in the <i>Network Load Balancers
  *       Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticLoadBalancingV2Client, DescribeListenerCertificatesCommand } from "@aws-sdk/client-elastic-load-balancing-v2"; // ES Modules import
  * // const { ElasticLoadBalancingV2Client, DescribeListenerCertificatesCommand } = require("@aws-sdk/client-elastic-load-balancing-v2"); // CommonJS import
+ * // import type { ElasticLoadBalancingV2ClientConfig } from "@aws-sdk/client-elastic-load-balancing-v2";
+ * const config = {}; // type is ElasticLoadBalancingV2ClientConfig
  * const client = new ElasticLoadBalancingV2Client(config);
+ * const input = { // DescribeListenerCertificatesInput
+ *   ListenerArn: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ * };
  * const command = new DescribeListenerCertificatesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeListenerCertificatesOutput
+ * //   Certificates: [ // CertificateList
+ * //     { // Certificate
+ * //       CertificateArn: "STRING_VALUE",
+ * //       IsDefault: true || false,
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeListenerCertificatesCommandInput - {@link DescribeListenerCertificatesCommandInput}
+ * @returns {@link DescribeListenerCertificatesCommandOutput}
  * @see {@link DescribeListenerCertificatesCommandInput} for command's `input` shape.
  * @see {@link DescribeListenerCertificatesCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for ElasticLoadBalancingV2Client's `config` shape.
  *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The specified listener does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingV2ServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancingV2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeListenerCertificatesCommand extends $Command<
-  DescribeListenerCertificatesCommandInput,
-  DescribeListenerCertificatesCommandOutput,
-  ElasticLoadBalancingV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeListenerCertificatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeListenerCertificatesCommandInput, DescribeListenerCertificatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingV2Client";
-    const commandName = "DescribeListenerCertificatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeListenerCertificatesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeListenerCertificatesOutput.filterSensitiveLog,
+export class DescribeListenerCertificatesCommand extends command<DescribeListenerCertificatesCommandInput, DescribeListenerCertificatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeListenerCertificates",
+  DescribeListenerCertificates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeListenerCertificatesInput;
+      output: DescribeListenerCertificatesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeListenerCertificatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeListenerCertificatesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeListenerCertificatesCommandOutput> {
-    return deserializeAws_queryDescribeListenerCertificatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeListenerCertificatesCommandInput;
+      output: DescribeListenerCertificatesCommandOutput;
+    };
+  };
 }

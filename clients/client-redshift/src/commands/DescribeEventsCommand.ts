@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeEventsMessage, EventsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeEventsCommand,
-  serializeAws_queryDescribeEventsCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEventsMessage, EventsMessage } from "../models/models_0";
+import { DescribeEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventsCommand}.
+ */
 export interface DescribeEventsCommandInput extends DescribeEventsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventsCommand}.
+ */
 export interface DescribeEventsCommandOutput extends EventsMessage, __MetadataBearer {}
 
 /**
@@ -31,68 +32,66 @@ export interface DescribeEventsCommandOutput extends EventsMessage, __MetadataBe
  * ```javascript
  * import { RedshiftClient, DescribeEventsCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeEventsCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeEventsMessage
+ *   SourceIdentifier: "STRING_VALUE",
+ *   SourceType: "cluster" || "cluster-parameter-group" || "cluster-security-group" || "cluster-snapshot" || "scheduled-action",
+ *   StartTime: new Date("TIMESTAMP"),
+ *   EndTime: new Date("TIMESTAMP"),
+ *   Duration: Number("int"),
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeEventsCommand(input);
  * const response = await client.send(command);
+ * // { // EventsMessage
+ * //   Marker: "STRING_VALUE",
+ * //   Events: [ // EventList
+ * //     { // Event
+ * //       SourceIdentifier: "STRING_VALUE",
+ * //       SourceType: "cluster" || "cluster-parameter-group" || "cluster-security-group" || "cluster-snapshot" || "scheduled-action",
+ * //       Message: "STRING_VALUE",
+ * //       EventCategories: [ // EventCategoriesList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Severity: "STRING_VALUE",
+ * //       Date: new Date("TIMESTAMP"),
+ * //       EventId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventsCommandInput - {@link DescribeEventsCommandInput}
+ * @returns {@link DescribeEventsCommandOutput}
  * @see {@link DescribeEventsCommandInput} for command's `input` shape.
  * @see {@link DescribeEventsCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEventsCommand extends $Command<
-  DescribeEventsCommandInput,
-  DescribeEventsCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventsCommandInput, DescribeEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EventsMessage.filterSensitiveLog,
+export class DescribeEventsCommand extends command<DescribeEventsCommandInput, DescribeEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEvents",
+  DescribeEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventsMessage;
+      output: EventsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEventsCommandOutput> {
-    return deserializeAws_queryDescribeEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventsCommandInput;
+      output: DescribeEventsCommandOutput;
+    };
+  };
 }

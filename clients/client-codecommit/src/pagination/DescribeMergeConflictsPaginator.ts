@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { CodeCommit } from "../CodeCommit";
 import { CodeCommitClient } from "../CodeCommitClient";
 import {
   DescribeMergeConflictsCommand,
   DescribeMergeConflictsCommandInput,
   DescribeMergeConflictsCommandOutput,
 } from "../commands/DescribeMergeConflictsCommand";
-import { CodeCommitPaginationConfiguration } from "./Interfaces";
+import type { CodeCommitPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: CodeCommitClient,
-  input: DescribeMergeConflictsCommandInput,
-  ...args: any
-): Promise<DescribeMergeConflictsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeMergeConflictsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: CodeCommit,
-  input: DescribeMergeConflictsCommandInput,
-  ...args: any
-): Promise<DescribeMergeConflictsCommandOutput> => {
-  // @ts-ignore
-  return await client.describeMergeConflicts(input, ...args);
-};
-export async function* paginateDescribeMergeConflicts(
+export const paginateDescribeMergeConflicts: (
   config: CodeCommitPaginationConfiguration,
   input: DescribeMergeConflictsCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeMergeConflictsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeMergeConflictsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxMergeHunks"] = config.pageSize;
-    if (config.client instanceof CodeCommit) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof CodeCommitClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected CodeCommit | CodeCommitClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeMergeConflictsCommandOutput> = createPaginator<
+  CodeCommitPaginationConfiguration,
+  DescribeMergeConflictsCommandInput,
+  DescribeMergeConflictsCommandOutput
+>(CodeCommitClient, DescribeMergeConflictsCommand, "nextToken", "nextToken", "maxMergeHunks");

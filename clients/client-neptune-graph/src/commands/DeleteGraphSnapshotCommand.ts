@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGraphSnapshotInput, DeleteGraphSnapshotOutput } from "../models/models_0";
+import { DeleteGraphSnapshot$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGraphSnapshotCommand}.
+ */
+export interface DeleteGraphSnapshotCommandInput extends DeleteGraphSnapshotInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGraphSnapshotCommand}.
+ */
+export interface DeleteGraphSnapshotCommandOutput extends DeleteGraphSnapshotOutput, __MetadataBearer {}
+
+/**
+ * <p>Deletes the specified graph snapshot.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NeptuneGraphClient, DeleteGraphSnapshotCommand } from "@aws-sdk/client-neptune-graph"; // ES Modules import
+ * // const { NeptuneGraphClient, DeleteGraphSnapshotCommand } = require("@aws-sdk/client-neptune-graph"); // CommonJS import
+ * // import type { NeptuneGraphClientConfig } from "@aws-sdk/client-neptune-graph";
+ * const config = {}; // type is NeptuneGraphClientConfig
+ * const client = new NeptuneGraphClient(config);
+ * const input = { // DeleteGraphSnapshotInput
+ *   snapshotIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteGraphSnapshotCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteGraphSnapshotOutput
+ * //   id: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   arn: "STRING_VALUE", // required
+ * //   sourceGraphId: "STRING_VALUE",
+ * //   snapshotCreateTime: new Date("TIMESTAMP"),
+ * //   status: "CREATING" || "AVAILABLE" || "DELETING" || "FAILED",
+ * //   kmsKeyIdentifier: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteGraphSnapshotCommandInput - {@link DeleteGraphSnapshotCommandInput}
+ * @returns {@link DeleteGraphSnapshotCommandOutput}
+ * @see {@link DeleteGraphSnapshotCommandInput} for command's `input` shape.
+ * @see {@link DeleteGraphSnapshotCommandOutput} for command's `response` shape.
+ * @see {@link NeptuneGraphClientResolvedConfig | config} for NeptuneGraphClient's `config` shape.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Raised when a conflict is encountered.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>A failure occurred on the server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource could not be located.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The exception was interrupted by throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A resource could not be validated.</p>
+ *
+ * @throws {@link NeptuneGraphServiceException}
+ * <p>Base exception class for all service exceptions from NeptuneGraph service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteGraphSnapshotCommand extends command<DeleteGraphSnapshotCommandInput, DeleteGraphSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGraphSnapshot",
+  DeleteGraphSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGraphSnapshotInput;
+      output: DeleteGraphSnapshotOutput;
+    };
+    sdk: {
+      input: DeleteGraphSnapshotCommandInput;
+      output: DeleteGraphSnapshotCommandOutput;
+    };
+  };
+}

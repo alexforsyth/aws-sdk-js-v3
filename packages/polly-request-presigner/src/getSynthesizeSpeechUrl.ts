@@ -1,4 +1,5 @@
-import { Polly, PollyClient, SynthesizeSpeechCommand, SynthesizeSpeechInput } from "@aws-sdk/client-polly";
+import type { PollyClient, SynthesizeSpeechInput } from "@aws-sdk/client-polly";
+import { SynthesizeSpeechCommand } from "@aws-sdk/client-polly";
 
 import { getSignedUrl } from "./getSignedUrls";
 
@@ -29,7 +30,7 @@ export interface PresignedPollyInput {
   options?: PresignedPollyOptions;
 }
 
-export const getSynthesizeSpeechUrl = async (input: PresignedPollyInput): Promise<String> => {
+export const getSynthesizeSpeechUrl = async (input: PresignedPollyInput): Promise<string> => {
   const command = new SynthesizeSpeechCommand(input.params);
   const options = input.options || {};
   return await getSignedUrl(input.client, command, options);

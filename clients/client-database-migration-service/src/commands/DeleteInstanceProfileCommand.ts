@@ -1,0 +1,136 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteInstanceProfileMessage, DeleteInstanceProfileResponse } from "../models/models_0";
+import { DeleteInstanceProfile$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteInstanceProfileCommand}.
+ */
+export interface DeleteInstanceProfileCommandInput extends DeleteInstanceProfileMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteInstanceProfileCommand}.
+ */
+export interface DeleteInstanceProfileCommandOutput extends DeleteInstanceProfileResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes the specified instance profile.</p>
+ *          <p>
+ *             <b>Required permissions:</b>
+ *             <code>dms:DeleteInstanceProfile</code>. For more information, see
+ *          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+ *          <note>
+ *             <p>All migration projects associated with the instance profile must be deleted or
+ *             modified before you can delete the instance profile.</p>
+ *          </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DatabaseMigrationServiceClient, DeleteInstanceProfileCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
+ * // const { DatabaseMigrationServiceClient, DeleteInstanceProfileCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
+ * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DeleteInstanceProfileMessage
+ *   InstanceProfileIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteInstanceProfileCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteInstanceProfileResponse
+ * //   InstanceProfile: { // InstanceProfile
+ * //     InstanceProfileArn: "STRING_VALUE",
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     KmsKeyArn: "STRING_VALUE",
+ * //     PubliclyAccessible: true || false,
+ * //     NetworkType: "STRING_VALUE",
+ * //     InstanceProfileName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     InstanceProfileCreationTime: new Date("TIMESTAMP"),
+ * //     SubnetGroupIdentifier: "STRING_VALUE",
+ * //     VpcSecurityGroups: [ // StringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteInstanceProfileCommandInput - {@link DeleteInstanceProfileCommandInput}
+ * @returns {@link DeleteInstanceProfileCommandOutput}
+ * @see {@link DeleteInstanceProfileCommandInput} for command's `input` shape.
+ * @see {@link DeleteInstanceProfileCommandOutput} for command's `response` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link FailedDependencyFault} (client fault)
+ *  <p>A dependency threw an exception.</p>
+ *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Delete an instance profile
+ * ```javascript
+ * // The following example deletes an instance profile identified by its ARN.
+ * const input = {
+ *   InstanceProfileIdentifier: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS"
+ * };
+ * const command = new DeleteInstanceProfileCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   InstanceProfile: {
+ *     Description: "Example instance profile for documentation",
+ *     InstanceProfileArn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+ *     InstanceProfileCreationTime: "2026-01-09T12:30:00.000000Z",
+ *     InstanceProfileName: "example-instance-profile",
+ *     KmsKeyArn: "arn:aws:kms:us-east-1:111122223333:key/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+ *     NetworkType: "IPV4",
+ *     PubliclyAccessible: false,
+ *     SubnetGroupIdentifier: "example-replication-subnet-group",
+ *     VpcSecurityGroups: [
+ *       "sg-0123456789abcdef0"
+ *     ]
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class DeleteInstanceProfileCommand extends command<DeleteInstanceProfileCommandInput, DeleteInstanceProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteInstanceProfile",
+  DeleteInstanceProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInstanceProfileMessage;
+      output: DeleteInstanceProfileResponse;
+    };
+    sdk: {
+      input: DeleteInstanceProfileCommandInput;
+      output: DeleteInstanceProfileCommandOutput;
+    };
+  };
+}

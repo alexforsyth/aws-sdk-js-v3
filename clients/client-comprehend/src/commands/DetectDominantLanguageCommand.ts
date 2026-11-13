@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { DetectDominantLanguageRequest, DetectDominantLanguageResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DetectDominantLanguageCommand,
-  serializeAws_json1_1DetectDominantLanguageCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DetectDominantLanguageRequest, DetectDominantLanguageResponse } from "../models/models_0";
+import { DetectDominantLanguage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DetectDominantLanguageCommand}.
+ */
 export interface DetectDominantLanguageCommandInput extends DetectDominantLanguageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DetectDominantLanguageCommand}.
+ */
 export interface DetectDominantLanguageCommandOutput extends DetectDominantLanguageResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface DetectDominantLanguageCommandOutput extends DetectDominantLangu
  * ```javascript
  * import { ComprehendClient, DetectDominantLanguageCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, DetectDominantLanguageCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // DetectDominantLanguageRequest
+ *   Text: "STRING_VALUE", // required
+ * };
  * const command = new DetectDominantLanguageCommand(input);
  * const response = await client.send(command);
+ * // { // DetectDominantLanguageResponse
+ * //   Languages: [ // ListOfDominantLanguages
+ * //     { // DominantLanguage
+ * //       LanguageCode: "STRING_VALUE",
+ * //       Score: Number("float"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DetectDominantLanguageCommandInput - {@link DetectDominantLanguageCommandInput}
+ * @returns {@link DetectDominantLanguageCommandOutput}
  * @see {@link DetectDominantLanguageCommandInput} for command's `input` shape.
  * @see {@link DetectDominantLanguageCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TextSizeLimitExceededException} (client fault)
+ *  <p>The size of the input text exceeds the limit. Use a smaller document.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class DetectDominantLanguageCommand extends $Command<
-  DetectDominantLanguageCommandInput,
-  DetectDominantLanguageCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DetectDominantLanguageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DetectDominantLanguageCommandInput, DetectDominantLanguageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "DetectDominantLanguageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DetectDominantLanguageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DetectDominantLanguageResponse.filterSensitiveLog,
+export class DetectDominantLanguageCommand extends command<DetectDominantLanguageCommandInput, DetectDominantLanguageCommandOutput>(
+  _ep0,
+  _mw0,
+  "DetectDominantLanguage",
+  DetectDominantLanguage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DetectDominantLanguageRequest;
+      output: DetectDominantLanguageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DetectDominantLanguageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DetectDominantLanguageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DetectDominantLanguageCommandOutput> {
-    return deserializeAws_json1_1DetectDominantLanguageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DetectDominantLanguageCommandInput;
+      output: DetectDominantLanguageCommandOutput;
+    };
+  };
 }

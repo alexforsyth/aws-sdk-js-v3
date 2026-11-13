@@ -1,780 +1,990 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  ArtifactStatus,
+  ChatItemType,
+  ConnectionType,
+  ContentDisposition,
+  MeetingFeatureStatus,
+  MessageProcessingStatus,
+  ParticipantRole,
+  ScanDirection,
+  SortKey,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient access to perform this action.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  Message: string | undefined;
-}
-
-export namespace AccessDeniedException {
+export interface CancelParticipantAuthenticationRequest {
   /**
-   * @internal
+   * <p>The <code>sessionId</code> provided in the <code>authenticationInitiated</code>
+   *             event.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
+  SessionId: string | undefined;
+
+  /**
+   * <p>The authentication token associated with the participant's connection.</p>
+   * @public
+   */
+  ConnectionToken: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface CancelParticipantAuthenticationResponse {}
+
+/**
+ * @public
+ */
 export interface CompleteAttachmentUploadRequest {
   /**
    * <p>A list of unique identifiers for the attachments.</p>
+   * @public
    */
   AttachmentIds: string[] | undefined;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
    */
-  ClientToken?: string;
+  ClientToken?: string | undefined;
 
   /**
    * <p>The authentication token associated with the participant's connection.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
 }
 
-export namespace CompleteAttachmentUploadRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CompleteAttachmentUploadRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CompleteAttachmentUploadResponse {}
 
-export namespace CompleteAttachmentUploadResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CompleteAttachmentUploadResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>An attachment with that identifier is already being uploaded.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  Message: string | undefined;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>This exception occurs when there is an internal failure in the Amazon Connect service.</p>
- */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  Message: string | undefined;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The number of attachments per contact exceeds the quota.</p>
- */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
-  Message: string | undefined;
-}
-
-export namespace ServiceQuotaExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was denied due to request throttling.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  Message: string | undefined;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The input fails to satisfy the constraints specified by Amazon Connect.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  Message: string | undefined;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-export enum ConnectionType {
-  CONNECTION_CREDENTIALS = "CONNECTION_CREDENTIALS",
-  WEBSOCKET = "WEBSOCKET",
-}
-
 export interface CreateParticipantConnectionRequest {
   /**
-   * <p>Type of connection information required.</p>
+   * <p>Type of connection information required. If you need
+   *                 <code>CONNECTION_CREDENTIALS</code> along with marking participant as connected,
+   *             pass <code>CONNECTION_CREDENTIALS</code> in <code>Type</code>.</p>
+   * @public
    */
-  Type: (ConnectionType | string)[] | undefined;
+  Type?: ConnectionType[] | undefined;
 
   /**
    * <p>This is a header parameter.</p>
-   *         <p>The ParticipantToken as obtained from <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html">StartChatContact</a>
+   *          <p>The ParticipantToken as obtained from <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html">StartChatContact</a>
    *             API response.</p>
+   * @public
    */
   ParticipantToken: string | undefined;
 
   /**
-   * <p>Amazon Connect Participant is used to mark the participant as connected for message
-   *             streaming.</p>
+   * <p>Amazon Connect Participant is used to mark the participant as connected for customer
+   *             participant in message streaming, as well as for agent or manager participant in
+   *             non-streaming chats.</p>
+   * @public
    */
-  ConnectParticipant?: boolean;
-}
-
-export namespace CreateParticipantConnectionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateParticipantConnectionRequest): any => ({
-    ...obj,
-  });
+  ConnectParticipant?: boolean | undefined;
 }
 
 /**
  * <p>Connection credentials. </p>
+ * @public
  */
 export interface ConnectionCredentials {
   /**
    * <p>The connection token.</p>
+   * @public
    */
-  ConnectionToken?: string;
+  ConnectionToken?: string | undefined;
 
   /**
    * <p>The expiration of the token.</p>
-   *         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *          <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
    *             2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  Expiry?: string;
+  Expiry?: string | undefined;
 }
 
-export namespace ConnectionCredentials {
+/**
+ * <p>The attendee information, including attendee ID and join token.</p>
+ * @public
+ */
+export interface Attendee {
   /**
-   * @internal
+   * <p>The Amazon Chime SDK attendee ID.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ConnectionCredentials): any => ({
-    ...obj,
-  });
+  AttendeeId?: string | undefined;
+
+  /**
+   * <p>The join token used by the Amazon Chime SDK attendee.</p>
+   * @public
+   */
+  JoinToken?: string | undefined;
+}
+
+/**
+ * <p>A set of endpoints used by clients to connect to the media service group for an
+ *             Amazon Chime SDK meeting.</p>
+ * @public
+ */
+export interface WebRTCMediaPlacement {
+  /**
+   * <p>The audio host URL.</p>
+   * @public
+   */
+  AudioHostUrl?: string | undefined;
+
+  /**
+   * <p>The audio fallback URL.</p>
+   * @public
+   */
+  AudioFallbackUrl?: string | undefined;
+
+  /**
+   * <p>The signaling URL.</p>
+   * @public
+   */
+  SignalingUrl?: string | undefined;
+
+  /**
+   * <p>The event ingestion URL to which you send client meeting events.</p>
+   * @public
+   */
+  EventIngestionUrl?: string | undefined;
+}
+
+/**
+ * <p>Has audio-specific configurations as the operating parameter for Echo Reduction.</p>
+ * @public
+ */
+export interface AudioFeatures {
+  /**
+   * <p>Makes echo reduction available to clients who connect to the meeting.</p>
+   * @public
+   */
+  EchoReduction?: MeetingFeatureStatus | undefined;
+}
+
+/**
+ * <p>The configuration settings of the features available to a meeting.</p>
+ * @public
+ */
+export interface MeetingFeaturesConfiguration {
+  /**
+   * <p>The configuration settings for the audio features available to a meeting.</p>
+   * @public
+   */
+  Audio?: AudioFeatures | undefined;
+}
+
+/**
+ * <p>A meeting created using the Amazon Chime SDK.</p>
+ * @public
+ */
+export interface WebRTCMeeting {
+  /**
+   * <p>The media placement for the meeting.</p>
+   * @public
+   */
+  MediaPlacement?: WebRTCMediaPlacement | undefined;
+
+  /**
+   * <p>The configuration settings of the features available to a meeting.</p>
+   * @public
+   */
+  MeetingFeatures?: MeetingFeaturesConfiguration | undefined;
+
+  /**
+   * <p>The Amazon Chime SDK meeting ID.</p>
+   * @public
+   */
+  MeetingId?: string | undefined;
+}
+
+/**
+ * <p>Creates the participant’s WebRTC connection data required for the client application
+ *             (mobile or web) to connect to the call.</p>
+ * @public
+ */
+export interface WebRTCConnection {
+  /**
+   * <p>The attendee information, including attendee ID and join token.</p>
+   * @public
+   */
+  Attendee?: Attendee | undefined;
+
+  /**
+   * <p>A meeting created using the Amazon Chime SDK.</p>
+   * @public
+   */
+  Meeting?: WebRTCMeeting | undefined;
 }
 
 /**
  * <p>The websocket for the participant's connection.</p>
+ * @public
  */
 export interface Websocket {
   /**
    * <p>The URL of the websocket.</p>
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * <p>The URL expiration timestamp in ISO date format.</p>
-   *         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *          <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
    *             2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  ConnectionExpiry?: string;
+  ConnectionExpiry?: string | undefined;
 }
 
-export namespace Websocket {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Websocket): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateParticipantConnectionResponse {
   /**
    * <p>Creates the participant's websocket connection.</p>
+   * @public
    */
-  Websocket?: Websocket;
+  Websocket?: Websocket | undefined;
 
   /**
    * <p>Creates the participant's connection credentials. The authentication token associated
    *             with the participant's connection.</p>
+   * @public
    */
-  ConnectionCredentials?: ConnectionCredentials;
+  ConnectionCredentials?: ConnectionCredentials | undefined;
+
+  /**
+   * <p>Creates the participant's WebRTC connection data required for the client application
+   *             (mobile application or website) to connect to the call. </p>
+   * @public
+   */
+  WebRTCConnection?: WebRTCConnection | undefined;
 }
 
-export namespace CreateParticipantConnectionResponse {
+/**
+ * @public
+ */
+export interface DescribeViewRequest {
   /**
-   * @internal
+   * <p>An encrypted token originating from the interactive message of a ShowView block
+   *             operation. Represents the desired view.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateParticipantConnectionResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DisconnectParticipantRequest {
-  /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
-   */
-  ClientToken?: string;
+  ViewToken: string | undefined;
 
   /**
-   * <p>The authentication token associated with the participant's connection.</p>
+   * <p>The connection token.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
 }
 
-export namespace DisconnectParticipantRequest {
+/**
+ * <p>View content containing all content necessary to render a view except for runtime
+ *             input data.</p>
+ * @public
+ */
+export interface ViewContent {
   /**
-   * @internal
+   * <p>The schema representing the input data that the view template must be supplied to
+   *             render.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DisconnectParticipantRequest): any => ({
-    ...obj,
-  });
+  InputSchema?: string | undefined;
+
+  /**
+   * <p>The view template representing the structure of the view.</p>
+   * @public
+   */
+  Template?: string | undefined;
+
+  /**
+   * <p>A list of actions possible from the view</p>
+   * @public
+   */
+  Actions?: string[] | undefined;
 }
 
+/**
+ * <p>A view resource object. Contains metadata and content necessary to render the
+ *             view.</p>
+ * @public
+ */
+export interface View {
+  /**
+   * <p>The identifier of the view.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the view.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The name of the view.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The current version of the view.</p>
+   * @public
+   */
+  Version?: number | undefined;
+
+  /**
+   * <p>View content containing all content necessary to render a view except for runtime
+   *             input data.</p>
+   * @public
+   */
+  Content?: ViewContent | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeViewResponse {
+  /**
+   * <p>A view resource object. Contains metadata and content necessary to render the
+   *             view.</p>
+   * @public
+   */
+  View?: View | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisconnectParticipantRequest {
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The authentication token associated with the participant's connection.</p>
+   * @public
+   */
+  ConnectionToken: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DisconnectParticipantResponse {}
 
-export namespace DisconnectParticipantResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisconnectParticipantResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAttachmentRequest {
   /**
    * <p>A unique identifier for the attachment.</p>
+   * @public
    */
   AttachmentId: string | undefined;
 
   /**
    * <p>The authentication token associated with the participant's connection.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
-}
 
-export namespace GetAttachmentRequest {
   /**
-   * @internal
+   * <p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format:
+   *             yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetAttachmentRequest): any => ({
-    ...obj,
-  });
+  UrlExpiryInSeconds?: number | undefined;
+
+  /**
+   * <p>Specifies how a browser handles the file at the pre-signed URL. The following values
+   *             are valid:</p>
+   *          <dl>
+   *             <dt>INLINE</dt>
+   *             <dd>
+   *                <p>Displays the file in the browser.</p>
+   *             </dd>
+   *             <dt>ATTACHMENT</dt>
+   *             <dd>
+   *                <p>Downloads the file. This is the default behavior.</p>
+   *             </dd>
+   *          </dl>
+   * @public
+   */
+  UrlContentDisposition?: ContentDisposition | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetAttachmentResponse {
   /**
    * <p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response
    * to <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html">StartAttachmentUpload</a>.</p>
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * <p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  UrlExpiry?: string;
-}
+  UrlExpiry?: string | undefined;
 
-export namespace GetAttachmentResponse {
   /**
-   * @internal
+   * <p>The size of the attachment in bytes.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetAttachmentResponse): any => ({
-    ...obj,
-  });
+  AttachmentSizeInBytes: number | undefined;
 }
 
-export enum ScanDirection {
-  BACKWARD = "BACKWARD",
-  FORWARD = "FORWARD",
+/**
+ * @public
+ */
+export interface GetAuthenticationUrlRequest {
+  /**
+   * <p>The sessionId provided in the authenticationInitiated event.</p>
+   * @public
+   */
+  SessionId: string | undefined;
+
+  /**
+   * <p>The URL where the customer will be redirected after Amazon Cognito authorizes the
+   *             user.</p>
+   * @public
+   */
+  RedirectUri: string | undefined;
+
+  /**
+   * <p>The authentication token associated with the participant's connection.</p>
+   * @public
+   */
+  ConnectionToken: string | undefined;
 }
 
-export enum SortKey {
-  ASCENDING = "ASCENDING",
-  DESCENDING = "DESCENDING",
+/**
+ * @public
+ */
+export interface GetAuthenticationUrlResponse {
+  /**
+   * <p>The URL where the customer will sign in to the identity provider. This URL contains
+   *             the authorize endpoint for the Cognito UserPool used in the authentication.</p>
+   * @public
+   */
+  AuthenticationUrl?: string | undefined;
 }
 
 /**
  * <p>A filtering option for where to start. For example, if you sent 100 messages, start
  *             with message 50. </p>
+ * @public
  */
 export interface StartPosition {
   /**
    * <p>The ID of the message or event where to start. </p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The time in ISO format where to start.</p>
-   *         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *          <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
    *             2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  AbsoluteTime?: string;
+  AbsoluteTime?: string | undefined;
 
   /**
    * <p>The start position of the most recent message where you want to start. </p>
+   * @public
    */
-  MostRecent?: number;
+  MostRecent?: number | undefined;
 }
 
-export namespace StartPosition {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartPosition): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetTranscriptRequest {
   /**
    * <p>The contactId from the current contact chain for which transcript is needed.</p>
+   * @public
    */
-  ContactId?: string;
+  ContactId?: string | undefined;
 
   /**
    * <p>The maximum number of results to return in the page. Default: 10. </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The pagination token. Use the value returned previously in the next subsequent request
    *             to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The direction from StartPosition from which to retrieve message. Default: BACKWARD
    *             when no StartPosition is provided, FORWARD with StartPosition. </p>
+   * @public
    */
-  ScanDirection?: ScanDirection | string;
+  ScanDirection?: ScanDirection | undefined;
 
   /**
    * <p>The sort order for the records. Default: DESCENDING.</p>
+   * @public
    */
-  SortOrder?: SortKey | string;
+  SortOrder?: SortKey | undefined;
 
   /**
    * <p>A filtering option for where to start.</p>
+   * @public
    */
-  StartPosition?: StartPosition;
+  StartPosition?: StartPosition | undefined;
 
   /**
    * <p>The authentication token associated with the participant's connection.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
-}
-
-export namespace GetTranscriptRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetTranscriptRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ArtifactStatus {
-  APPROVED = "APPROVED",
-  IN_PROGRESS = "IN_PROGRESS",
-  REJECTED = "REJECTED",
 }
 
 /**
  * <p>The case-insensitive input to indicate standard MIME type that describes the format of the file
  *             that will be uploaded.</p>
+ * @public
  */
 export interface AttachmentItem {
   /**
-   * <p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * <p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>A unique identifier for the attachment.</p>
+   * @public
    */
-  AttachmentId?: string;
+  AttachmentId?: string | undefined;
 
   /**
    * <p>A case-sensitive name of the attachment being uploaded.</p>
+   * @public
    */
-  AttachmentName?: string;
+  AttachmentName?: string | undefined;
 
   /**
    * <p>Status of the attachment.</p>
+   * @public
    */
-  Status?: ArtifactStatus | string;
+  Status?: ArtifactStatus | undefined;
 }
 
-export namespace AttachmentItem {
+/**
+ * <p>The receipt for the message delivered to the recipient.</p>
+ * @public
+ */
+export interface Receipt {
   /**
-   * @internal
+   * <p>The time when the message was delivered to the recipient.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AttachmentItem): any => ({
-    ...obj,
-  });
+  DeliveredTimestamp?: string | undefined;
+
+  /**
+   * <p>The time when the message was read by the recipient.</p>
+   * @public
+   */
+  ReadTimestamp?: string | undefined;
+
+  /**
+   * <p>The identifier of the recipient of the message. </p>
+   * @public
+   */
+  RecipientParticipantId?: string | undefined;
 }
 
-export enum ParticipantRole {
-  AGENT = "AGENT",
-  CUSTOMER = "CUSTOMER",
-  SYSTEM = "SYSTEM",
-}
+/**
+ * <p>Contains metadata related to a message.</p>
+ * @public
+ */
+export interface MessageMetadata {
+  /**
+   * <p>The identifier of the message that contains the metadata information. </p>
+   * @public
+   */
+  MessageId?: string | undefined;
 
-export enum ChatItemType {
-  ATTACHMENT = "ATTACHMENT",
-  CHAT_ENDED = "CHAT_ENDED",
-  CONNECTION_ACK = "CONNECTION_ACK",
-  EVENT = "EVENT",
-  MESSAGE = "MESSAGE",
-  PARTICIPANT_ACTIVE = "PARTICIPANT_ACTIVE",
-  PARTICIPANT_DISENGAGED = "PARTICIPANT_DISENGAGED",
-  PARTICIPANT_ENGAGED = "PARTICIPANT_ENGAGED",
-  PARTICIPANT_INACTIVE = "PARTICIPANT_INACTIVE",
-  PARTICIPANT_JOINED = "PARTICIPANT_JOINED",
-  PARTICIPANT_LEFT = "PARTICIPANT_LEFT",
-  TRANSFER_FAILED = "TRANSFER_FAILED",
-  TRANSFER_SUCCEEDED = "TRANSFER_SUCCEEDED",
-  TYPING = "TYPING",
+  /**
+   * <p>The list of receipt information for a message for different recipients.</p>
+   * @public
+   */
+  Receipts?: Receipt[] | undefined;
+
+  /**
+   * <p>The status of Message Processing for the message.</p>
+   * @public
+   */
+  MessageProcessingStatus?: MessageProcessingStatus | undefined;
 }
 
 /**
  * <p>An item - message or event - that has been sent. </p>
+ * @public
  */
 export interface Item {
   /**
    * <p>The time when the message or event was sent.</p>
-   *         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *          <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
    *             2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  AbsoluteTime?: string;
+  AbsoluteTime?: string | undefined;
 
   /**
    * <p>The content of the message or event.</p>
+   * @public
    */
-  Content?: string;
+  Content?: string | undefined;
 
   /**
    * <p>The type of content of the item.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The ID of the item.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>Type of the item: message or event. </p>
+   * @public
    */
-  Type?: ChatItemType | string;
+  Type?: ChatItemType | undefined;
 
   /**
    * <p>The ID of the sender in the session.</p>
+   * @public
    */
-  ParticipantId?: string;
+  ParticipantId?: string | undefined;
 
   /**
    * <p>The chat display name of the sender.</p>
+   * @public
    */
-  DisplayName?: string;
+  DisplayName?: string | undefined;
 
   /**
    * <p>The role of the sender. For example, is it a customer, agent, or system.</p>
+   * @public
    */
-  ParticipantRole?: ParticipantRole | string;
+  ParticipantRole?: ParticipantRole | undefined;
 
   /**
    * <p>Provides information about the attachments.</p>
+   * @public
    */
-  Attachments?: AttachmentItem[];
-}
+  Attachments?: AttachmentItem[] | undefined;
 
-export namespace Item {
   /**
-   * @internal
+   * <p>The metadata related to the message. Currently this supports only information related
+   *             to message receipts.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Item): any => ({
-    ...obj,
-  });
+  MessageMetadata?: MessageMetadata | undefined;
+
+  /**
+   * <p>The contactId on which the transcript item was originally sent. This field is only
+   *             populated for persistent chats when the transcript item is from the past chat session.
+   *             For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html">Enable persistent
+   *             chat</a>.</p>
+   * @public
+   */
+  RelatedContactId?: string | undefined;
+
+  /**
+   * <p>The contactId on which the transcript item was originally sent. This field is
+   *             populated only when the transcript item is from the current chat session.</p>
+   * @public
+   */
+  ContactId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetTranscriptResponse {
   /**
    * <p>The initial contact ID for the contact. </p>
+   * @public
    */
-  InitialContactId?: string;
+  InitialContactId?: string | undefined;
 
   /**
    * <p>The list of messages in the session.</p>
+   * @public
    */
-  Transcript?: Item[];
+  Transcript?: Item[] | undefined;
 
   /**
    * <p>The pagination token. Use the value returned previously in the next subsequent request
    *             to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetTranscriptResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetTranscriptResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendEventRequest {
   /**
    * <p>The content type of the request. Supported types are:</p>
-   *
-   *         <ul>
+   *          <ul>
    *             <li>
-   *                 <p>application/vnd.amazonaws.connect.event.typing</p>
+   *                <p>application/vnd.amazonaws.connect.event.typing</p>
    *             </li>
    *             <li>
-   *                 <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p>
+   *                <p>application/vnd.amazonaws.connect.event.connection.acknowledged (is no longer
+   *                     maintained since December 31, 2024) </p>
+   *             </li>
+   *             <li>
+   *                <p>application/vnd.amazonaws.connect.event.message.delivered</p>
+   *             </li>
+   *             <li>
+   *                <p>application/vnd.amazonaws.connect.event.message.read</p>
    *             </li>
    *          </ul>
+   * @public
    */
   ContentType: string | undefined;
 
   /**
-   * <p>The content of the event to be sent (for example, message text). This is not yet
-   *             supported.</p>
+   * <p>The content of the event to be sent (for example, message text). For content related
+   *             to message receipts, this is supported in the form of a JSON string.</p>
+   *          <p>Sample Content: "\{\"messageId\":\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\"\}"</p>
+   * @public
    */
-  Content?: string;
+  Content?: string | undefined;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
    */
-  ClientToken?: string;
+  ClientToken?: string | undefined;
 
   /**
    * <p>The authentication token associated with the participant's connection.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
 }
 
-export namespace SendEventRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendEventRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendEventResponse {
   /**
    * <p>The ID of the response.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The time when the event was sent.</p>
-   *         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *          <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
    *             2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  AbsoluteTime?: string;
+  AbsoluteTime?: string | undefined;
 }
 
-export namespace SendEventResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendEventResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendMessageRequest {
   /**
-   * <p>The type of the content. Supported types are text/plain.</p>
+   * <p>The type of the content. Possible types are <code>text/plain</code>,
+   *                 <code>text/markdown</code>, <code>application/json</code>, and
+   *                 <code>application/vnd.amazonaws.connect.message.interactive.response</code>.
+   *             </p>
+   *          <p>Supported types on the contact are configured through
+   *                 <code>SupportedMessagingContentTypes</code> on <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html">StartChatContact</a>
+   *             and <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html">StartOutboundChatContact</a>.</p>
+   *          <p> For Apple Messages for Business, SMS, and WhatsApp Business Messaging contacts, only
+   *                 <code>text/plain</code> is supported.</p>
+   * @public
    */
   ContentType: string | undefined;
 
   /**
-   * <p>The content of the message.</p>
+   * <p>The content of the message. Maximum of 16,384 bytes for all content types
+   *             (<code>text/plain</code>, <code>text/markdown</code>, <code>application/json</code>,
+   *             and <code>application/vnd.amazonaws.connect.message.interactive.response</code>).</p>
+   *          <p>Some messaging channels enforce lower limits. For channel-specific message size
+   *             limits, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html#chat-message-size-limits">Chat message size limits by channel</a> in the <i>Amazon Connect Customer
+   *                 Administrator Guide</i>.</p>
+   * @public
    */
   Content: string | undefined;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
    */
-  ClientToken?: string;
+  ClientToken?: string | undefined;
 
   /**
    * <p>The authentication token associated with the connection.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
 }
 
-export namespace SendMessageRequest {
+/**
+ * <p>Contains metadata for chat messages.</p>
+ * @public
+ */
+export interface MessageProcessingMetadata {
   /**
-   * @internal
+   * <p>The status of Message Processing for the message.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SendMessageRequest): any => ({
-    ...obj,
-  });
+  MessageProcessingStatus?: MessageProcessingStatus | undefined;
 }
 
+/**
+ * @public
+ */
 export interface SendMessageResponse {
   /**
    * <p>The ID of the message.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The time when the message was sent.</p>
-   *         <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *          <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
    *             2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  AbsoluteTime?: string;
-}
+  AbsoluteTime?: string | undefined;
 
-export namespace SendMessageResponse {
   /**
-   * @internal
+   * <p>Contains metadata for the message.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SendMessageResponse): any => ({
-    ...obj,
-  });
+  MessageMetadata?: MessageProcessingMetadata | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartAttachmentUploadRequest {
   /**
-   * <p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * <p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * @public
    */
   ContentType: string | undefined;
 
   /**
    * <p>The size of the attachment in bytes.</p>
+   * @public
    */
   AttachmentSizeInBytes: number | undefined;
 
   /**
    * <p>A case-sensitive name of the attachment being uploaded.</p>
+   * @public
    */
   AttachmentName: string | undefined;
 
   /**
-   * <p>A unique case sensitive identifier to support idempotency of request.</p>
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
    */
-  ClientToken?: string;
+  ClientToken?: string | undefined;
 
   /**
    * <p>The authentication token associated with the participant's connection.</p>
+   * @public
    */
   ConnectionToken: string | undefined;
 }
 
-export namespace StartAttachmentUploadRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartAttachmentUploadRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Fields to be used while uploading the attachment.</p>
+ * @public
  */
 export interface UploadMetadata {
   /**
    * <p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response
    * to <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html">StartAttachmentUpload</a>.</p>
+   * @public
    */
-  Url?: string;
+  Url?: string | undefined;
 
   /**
    * <p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>
+   * @public
    */
-  UrlExpiry?: string;
+  UrlExpiry?: string | undefined;
 
   /**
    * <p>The headers to be provided while uploading the file to the URL.</p>
+   * @public
    */
-  HeadersToInclude?: { [key: string]: string };
+  HeadersToInclude?: Record<string, string> | undefined;
 }
 
-export namespace UploadMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadMetadata): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartAttachmentUploadResponse {
   /**
    * <p>A unique identifier for the attachment.</p>
+   * @public
    */
-  AttachmentId?: string;
+  AttachmentId?: string | undefined;
 
   /**
-   * <p>Fields to be used while uploading the attachment.</p>
+   * <p>The headers to be provided while uploading the file to the URL.</p>
+   * @public
    */
-  UploadMetadata?: UploadMetadata;
-}
-
-export namespace StartAttachmentUploadResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartAttachmentUploadResponse): any => ({
-    ...obj,
-  });
+  UploadMetadata?: UploadMetadata | undefined;
 }

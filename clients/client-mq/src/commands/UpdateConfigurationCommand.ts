@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateConfigurationRequest, UpdateConfigurationResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1UpdateConfigurationCommand,
-  serializeAws_restJson1UpdateConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateConfigurationRequest, UpdateConfigurationResponse } from "../models/models_0";
+import { UpdateConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConfigurationCommand}.
+ */
 export interface UpdateConfigurationCommandInput extends UpdateConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConfigurationCommand}.
+ */
 export interface UpdateConfigurationCommandOutput extends UpdateConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,79 @@ export interface UpdateConfigurationCommandOutput extends UpdateConfigurationRes
  * ```javascript
  * import { MqClient, UpdateConfigurationCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, UpdateConfigurationCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // UpdateConfigurationRequest
+ *   ConfigurationId: "STRING_VALUE", // required
+ *   Data: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new UpdateConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateConfigurationResponse
+ * //   Arn: "STRING_VALUE",
+ * //   Created: new Date("TIMESTAMP"),
+ * //   Id: "STRING_VALUE",
+ * //   LatestRevision: { // ConfigurationRevision
+ * //     Created: new Date("TIMESTAMP"), // required
+ * //     Description: "STRING_VALUE",
+ * //     Revision: Number("int"), // required
+ * //   },
+ * //   Name: "STRING_VALUE",
+ * //   Warnings: [ // __listOfSanitizationWarning
+ * //     { // SanitizationWarning
+ * //       AttributeName: "STRING_VALUE",
+ * //       ElementName: "STRING_VALUE",
+ * //       Reason: "DISALLOWED_ELEMENT_REMOVED" || "DISALLOWED_ATTRIBUTE_REMOVED" || "INVALID_ATTRIBUTE_VALUE_REMOVED", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdateConfigurationCommandInput - {@link UpdateConfigurationCommandInput}
+ * @returns {@link UpdateConfigurationCommandOutput}
  * @see {@link UpdateConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateConfigurationCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateConfigurationCommand extends $Command<
-  UpdateConfigurationCommandInput,
-  UpdateConfigurationCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateConfigurationCommandInput, UpdateConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "UpdateConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateConfigurationResponse.filterSensitiveLog,
+export class UpdateConfigurationCommand extends command<UpdateConfigurationCommandInput, UpdateConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConfiguration",
+  UpdateConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConfigurationRequest;
+      output: UpdateConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateConfigurationCommandOutput> {
-    return deserializeAws_restJson1UpdateConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateConfigurationCommandInput;
+      output: UpdateConfigurationCommandOutput;
+    };
+  };
 }

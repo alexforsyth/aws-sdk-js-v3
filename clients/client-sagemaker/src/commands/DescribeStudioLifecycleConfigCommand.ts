@@ -1,100 +1,83 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeStudioLifecycleConfigRequest, DescribeStudioLifecycleConfigResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1DescribeStudioLifecycleConfigCommand,
-  serializeAws_json1_1DescribeStudioLifecycleConfigCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
-
-export interface DescribeStudioLifecycleConfigCommandInput extends DescribeStudioLifecycleConfigRequest {}
-export interface DescribeStudioLifecycleConfigCommandOutput
-  extends DescribeStudioLifecycleConfigResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStudioLifecycleConfigRequest, DescribeStudioLifecycleConfigResponse } from "../models/models_3";
+import { DescribeStudioLifecycleConfig$ } from "../schemas/schemas_0";
 
 /**
- * <p>Describes the Studio Lifecycle Configuration.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStudioLifecycleConfigCommand}.
+ */
+export interface DescribeStudioLifecycleConfigCommandInput extends DescribeStudioLifecycleConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStudioLifecycleConfigCommand}.
+ */
+export interface DescribeStudioLifecycleConfigCommandOutput extends DescribeStudioLifecycleConfigResponse, __MetadataBearer {}
+
+/**
+ * <p>Describes the Amazon SageMaker AI Studio Lifecycle Configuration.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, DescribeStudioLifecycleConfigCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeStudioLifecycleConfigCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeStudioLifecycleConfigRequest
+ *   StudioLifecycleConfigName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeStudioLifecycleConfigCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStudioLifecycleConfigResponse
+ * //   StudioLifecycleConfigArn: "STRING_VALUE",
+ * //   StudioLifecycleConfigName: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   StudioLifecycleConfigContent: "STRING_VALUE",
+ * //   StudioLifecycleConfigAppType: "JupyterServer" || "KernelGateway" || "CodeEditor" || "JupyterLab",
+ * // };
+ *
  * ```
  *
+ * @param DescribeStudioLifecycleConfigCommandInput - {@link DescribeStudioLifecycleConfigCommandInput}
+ * @returns {@link DescribeStudioLifecycleConfigCommandOutput}
  * @see {@link DescribeStudioLifecycleConfigCommandInput} for command's `input` shape.
  * @see {@link DescribeStudioLifecycleConfigCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStudioLifecycleConfigCommand extends $Command<
-  DescribeStudioLifecycleConfigCommandInput,
-  DescribeStudioLifecycleConfigCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStudioLifecycleConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStudioLifecycleConfigCommandInput, DescribeStudioLifecycleConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeStudioLifecycleConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStudioLifecycleConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStudioLifecycleConfigResponse.filterSensitiveLog,
+export class DescribeStudioLifecycleConfigCommand extends command<DescribeStudioLifecycleConfigCommandInput, DescribeStudioLifecycleConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStudioLifecycleConfig",
+  DescribeStudioLifecycleConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStudioLifecycleConfigRequest;
+      output: DescribeStudioLifecycleConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStudioLifecycleConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeStudioLifecycleConfigCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeStudioLifecycleConfigCommandOutput> {
-    return deserializeAws_json1_1DescribeStudioLifecycleConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStudioLifecycleConfigCommandInput;
+      output: DescribeStudioLifecycleConfigCommandOutput;
+    };
+  };
 }

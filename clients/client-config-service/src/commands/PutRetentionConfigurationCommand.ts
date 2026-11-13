@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import { PutRetentionConfigurationRequest, PutRetentionConfigurationResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1PutRetentionConfigurationCommand,
-  serializeAws_json1_1PutRetentionConfigurationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutRetentionConfigurationRequest, PutRetentionConfigurationResponse } from "../models/models_0";
+import { PutRetentionConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutRetentionConfigurationCommand}.
+ */
 export interface PutRetentionConfigurationCommandInput extends PutRetentionConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutRetentionConfigurationCommand}.
+ */
 export interface PutRetentionConfigurationCommandOutput extends PutRetentionConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -29,80 +30,66 @@ export interface PutRetentionConfigurationCommandOutput extends PutRetentionConf
  * 			as <b>default</b>. When you have a
  * 				<code>RetentionConfiguration</code> object named <b>default</b>, calling the API modifies the
  * 			default object. </p>
- * 		       <note>
- * 			         <p>Currently, Config supports only one retention
+ *          <note>
+ *             <p>Currently, Config supports only one retention
  * 				configuration per region in your account.</p>
- * 		       </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConfigServiceClient, PutRetentionConfigurationCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, PutRetentionConfigurationCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // PutRetentionConfigurationRequest
+ *   RetentionPeriodInDays: Number("int"), // required
+ * };
  * const command = new PutRetentionConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // PutRetentionConfigurationResponse
+ * //   RetentionConfiguration: { // RetentionConfiguration
+ * //     Name: "STRING_VALUE", // required
+ * //     RetentionPeriodInDays: Number("int"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutRetentionConfigurationCommandInput - {@link PutRetentionConfigurationCommandInput}
+ * @returns {@link PutRetentionConfigurationCommandOutput}
  * @see {@link PutRetentionConfigurationCommandInput} for command's `input` shape.
  * @see {@link PutRetentionConfigurationCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more of the specified parameters are not valid. Verify
+ * 			that your parameters are valid and try again.</p>
+ *
+ * @throws {@link MaxNumberOfRetentionConfigurationsExceededException} (client fault)
+ *  <p>Failed to add the retention configuration because a retention configuration with that name already exists.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class PutRetentionConfigurationCommand extends $Command<
-  PutRetentionConfigurationCommandInput,
-  PutRetentionConfigurationCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutRetentionConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutRetentionConfigurationCommandInput, PutRetentionConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "PutRetentionConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutRetentionConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutRetentionConfigurationResponse.filterSensitiveLog,
+export class PutRetentionConfigurationCommand extends command<PutRetentionConfigurationCommandInput, PutRetentionConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutRetentionConfiguration",
+  PutRetentionConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutRetentionConfigurationRequest;
+      output: PutRetentionConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutRetentionConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutRetentionConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutRetentionConfigurationCommandOutput> {
-    return deserializeAws_json1_1PutRetentionConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutRetentionConfigurationCommandInput;
+      output: PutRetentionConfigurationCommandOutput;
+    };
+  };
 }

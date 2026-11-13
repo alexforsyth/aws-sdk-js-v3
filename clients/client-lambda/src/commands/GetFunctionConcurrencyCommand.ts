@@ -1,96 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { GetFunctionConcurrencyRequest, GetFunctionConcurrencyResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFunctionConcurrencyCommand,
-  serializeAws_restJson1GetFunctionConcurrencyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFunctionConcurrencyRequest, GetFunctionConcurrencyResponse } from "../models/models_0";
+import { GetFunctionConcurrency$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFunctionConcurrencyCommand}.
+ */
 export interface GetFunctionConcurrencyCommandInput extends GetFunctionConcurrencyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFunctionConcurrencyCommand}.
+ */
 export interface GetFunctionConcurrencyCommandOutput extends GetFunctionConcurrencyResponse, __MetadataBearer {}
 
 /**
- * <p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a
- *       function, use <a>PutFunctionConcurrency</a>.</p>
+ * <p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a function, use <a>PutFunctionConcurrency</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, GetFunctionConcurrencyCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, GetFunctionConcurrencyCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // GetFunctionConcurrencyRequest
+ *   FunctionName: "STRING_VALUE", // required
+ * };
  * const command = new GetFunctionConcurrencyCommand(input);
  * const response = await client.send(command);
+ * // { // GetFunctionConcurrencyResponse
+ * //   ReservedConcurrentExecutions: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param GetFunctionConcurrencyCommandInput - {@link GetFunctionConcurrencyCommandInput}
+ * @returns {@link GetFunctionConcurrencyCommandOutput}
  * @see {@link GetFunctionConcurrencyCommandInput} for command's `input` shape.
  * @see {@link GetFunctionConcurrencyCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To get the reserved concurrency setting for a function
+ * ```javascript
+ * // The following example returns the reserved concurrency setting for a function named my-function.
+ * const input = {
+ *   FunctionName: "my-function"
+ * };
+ * const command = new GetFunctionConcurrencyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ReservedConcurrentExecutions: 250
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetFunctionConcurrencyCommand extends $Command<
-  GetFunctionConcurrencyCommandInput,
-  GetFunctionConcurrencyCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFunctionConcurrencyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFunctionConcurrencyCommandInput, GetFunctionConcurrencyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "GetFunctionConcurrencyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFunctionConcurrencyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFunctionConcurrencyResponse.filterSensitiveLog,
+export class GetFunctionConcurrencyCommand extends command<GetFunctionConcurrencyCommandInput, GetFunctionConcurrencyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFunctionConcurrency",
+  GetFunctionConcurrency$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionConcurrencyRequest;
+      output: GetFunctionConcurrencyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFunctionConcurrencyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFunctionConcurrencyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFunctionConcurrencyCommandOutput> {
-    return deserializeAws_restJson1GetFunctionConcurrencyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFunctionConcurrencyCommandInput;
+      output: GetFunctionConcurrencyCommandOutput;
+    };
+  };
 }

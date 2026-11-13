@@ -1,0 +1,77 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePublicIpv4PoolRequest, DeletePublicIpv4PoolResult } from "../models/models_3";
+import { DeletePublicIpv4Pool$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePublicIpv4PoolCommand}.
+ */
+export interface DeletePublicIpv4PoolCommandInput extends DeletePublicIpv4PoolRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePublicIpv4PoolCommand}.
+ */
+export interface DeletePublicIpv4PoolCommandOutput extends DeletePublicIpv4PoolResult, __MetadataBearer {}
+
+/**
+ * <p>Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, DeletePublicIpv4PoolCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, DeletePublicIpv4PoolCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // DeletePublicIpv4PoolRequest
+ *   DryRun: true || false,
+ *   PoolId: "STRING_VALUE", // required
+ *   NetworkBorderGroup: "STRING_VALUE",
+ * };
+ * const command = new DeletePublicIpv4PoolCommand(input);
+ * const response = await client.send(command);
+ * // { // DeletePublicIpv4PoolResult
+ * //   ReturnValue: true || false,
+ * // };
+ *
+ * ```
+ *
+ * @param DeletePublicIpv4PoolCommandInput - {@link DeletePublicIpv4PoolCommandInput}
+ * @returns {@link DeletePublicIpv4PoolCommandOutput}
+ * @see {@link DeletePublicIpv4PoolCommandInput} for command's `input` shape.
+ * @see {@link DeletePublicIpv4PoolCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class DeletePublicIpv4PoolCommand extends command<DeletePublicIpv4PoolCommandInput, DeletePublicIpv4PoolCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePublicIpv4Pool",
+  DeletePublicIpv4Pool$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePublicIpv4PoolRequest;
+      output: DeletePublicIpv4PoolResult;
+    };
+    sdk: {
+      input: DeletePublicIpv4PoolCommandInput;
+      output: DeletePublicIpv4PoolCommandOutput;
+    };
+  };
+}

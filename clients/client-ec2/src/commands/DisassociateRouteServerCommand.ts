@@ -1,0 +1,83 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateRouteServerRequest, DisassociateRouteServerResult } from "../models/models_6";
+import { DisassociateRouteServer$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateRouteServerCommand}.
+ */
+export interface DisassociateRouteServerCommandInput extends DisassociateRouteServerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateRouteServerCommand}.
+ */
+export interface DisassociateRouteServerCommandOutput extends DisassociateRouteServerResult, __MetadataBearer {}
+
+/**
+ * <p>Disassociates a route server from a VPC.</p>
+ *          <p>A route server association is the connection established between a route server and a VPC.</p>
+ *          <p>For more information see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html">Dynamic routing in your VPC with VPC Route Server</a> in the <i>Amazon VPC User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, DisassociateRouteServerCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, DisassociateRouteServerCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // DisassociateRouteServerRequest
+ *   RouteServerId: "STRING_VALUE", // required
+ *   VpcId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
+ * const command = new DisassociateRouteServerCommand(input);
+ * const response = await client.send(command);
+ * // { // DisassociateRouteServerResult
+ * //   RouteServerAssociation: { // RouteServerAssociation
+ * //     RouteServerId: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     State: "associating" || "associated" || "disassociating",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DisassociateRouteServerCommandInput - {@link DisassociateRouteServerCommandInput}
+ * @returns {@link DisassociateRouteServerCommandOutput}
+ * @see {@link DisassociateRouteServerCommandInput} for command's `input` shape.
+ * @see {@link DisassociateRouteServerCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class DisassociateRouteServerCommand extends command<DisassociateRouteServerCommandInput, DisassociateRouteServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateRouteServer",
+  DisassociateRouteServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateRouteServerRequest;
+      output: DisassociateRouteServerResult;
+    };
+    sdk: {
+      input: DisassociateRouteServerCommandInput;
+      output: DisassociateRouteServerCommandOutput;
+    };
+  };
+}

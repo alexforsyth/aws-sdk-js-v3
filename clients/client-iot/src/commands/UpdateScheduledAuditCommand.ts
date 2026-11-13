@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { UpdateScheduledAuditRequest, UpdateScheduledAuditResponse } from "../models/models_2";
-import {
-  deserializeAws_restJson1UpdateScheduledAuditCommand,
-  serializeAws_restJson1UpdateScheduledAuditCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateScheduledAuditRequest, UpdateScheduledAuditResponse } from "../models/models_2";
+import { UpdateScheduledAudit$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateScheduledAuditCommand}.
+ */
 export interface UpdateScheduledAuditCommandInput extends UpdateScheduledAuditRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateScheduledAuditCommand}.
+ */
 export interface UpdateScheduledAuditCommandOutput extends UpdateScheduledAuditResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,65 @@ export interface UpdateScheduledAuditCommandOutput extends UpdateScheduledAuditR
  * ```javascript
  * import { IoTClient, UpdateScheduledAuditCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, UpdateScheduledAuditCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // UpdateScheduledAuditRequest
+ *   frequency: "DAILY" || "WEEKLY" || "BIWEEKLY" || "MONTHLY",
+ *   dayOfMonth: "STRING_VALUE",
+ *   dayOfWeek: "SUN" || "MON" || "TUE" || "WED" || "THU" || "FRI" || "SAT",
+ *   targetCheckNames: [ // TargetAuditCheckNames
+ *     "STRING_VALUE",
+ *   ],
+ *   scheduledAuditName: "STRING_VALUE", // required
+ * };
  * const command = new UpdateScheduledAuditCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateScheduledAuditResponse
+ * //   scheduledAuditArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateScheduledAuditCommandInput - {@link UpdateScheduledAuditCommandInput}
+ * @returns {@link UpdateScheduledAuditCommandOutput}
  * @see {@link UpdateScheduledAuditCommandInput} for command's `input` shape.
  * @see {@link UpdateScheduledAuditCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateScheduledAuditCommand extends $Command<
-  UpdateScheduledAuditCommandInput,
-  UpdateScheduledAuditCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateScheduledAuditCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateScheduledAuditCommandInput, UpdateScheduledAuditCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "UpdateScheduledAuditCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateScheduledAuditRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateScheduledAuditResponse.filterSensitiveLog,
+export class UpdateScheduledAuditCommand extends command<UpdateScheduledAuditCommandInput, UpdateScheduledAuditCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateScheduledAudit",
+  UpdateScheduledAudit$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateScheduledAuditRequest;
+      output: UpdateScheduledAuditResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateScheduledAuditCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateScheduledAuditCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateScheduledAuditCommandOutput> {
-    return deserializeAws_restJson1UpdateScheduledAuditCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateScheduledAuditCommandInput;
+      output: UpdateScheduledAuditCommandOutput;
+    };
+  };
 }

@@ -1,100 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutEventsRequest } from "../models/models_0";
-import {
-  PersonalizeEventsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../PersonalizeEventsClient";
-import {
-  deserializeAws_restJson1PutEventsCommand,
-  serializeAws_restJson1PutEventsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutEventsRequest } from "../models/models_0";
+import { PutEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutEventsCommand}.
+ */
 export interface PutEventsCommandInput extends PutEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutEventsCommand}.
+ */
 export interface PutEventsCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Records user interaction event data. For more information see
- *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.</p>
+ * <p>Records item interaction event data. For more information see
+ *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html">Recording item interaction events</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PersonalizeEventsClient, PutEventsCommand } from "@aws-sdk/client-personalize-events"; // ES Modules import
  * // const { PersonalizeEventsClient, PutEventsCommand } = require("@aws-sdk/client-personalize-events"); // CommonJS import
+ * // import type { PersonalizeEventsClientConfig } from "@aws-sdk/client-personalize-events";
+ * const config = {}; // type is PersonalizeEventsClientConfig
  * const client = new PersonalizeEventsClient(config);
+ * const input = { // PutEventsRequest
+ *   trackingId: "STRING_VALUE", // required
+ *   userId: "STRING_VALUE",
+ *   sessionId: "STRING_VALUE", // required
+ *   eventList: [ // EventList // required
+ *     { // Event
+ *       eventId: "STRING_VALUE",
+ *       eventType: "STRING_VALUE", // required
+ *       eventValue: Number("float"),
+ *       itemId: "STRING_VALUE",
+ *       properties: "STRING_VALUE",
+ *       sentAt: new Date("TIMESTAMP"), // required
+ *       recommendationId: "STRING_VALUE",
+ *       impression: [ // Impression
+ *         "STRING_VALUE",
+ *       ],
+ *       metricAttribution: { // MetricAttribution
+ *         eventAttributionSource: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new PutEventsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutEventsCommandInput - {@link PutEventsCommandInput}
+ * @returns {@link PutEventsCommandOutput}
  * @see {@link PutEventsCommandInput} for command's `input` shape.
  * @see {@link PutEventsCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeEventsClientResolvedConfig | config} for PersonalizeEventsClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link PersonalizeEventsServiceException}
+ * <p>Base exception class for all service exceptions from PersonalizeEvents service.</p>
+ *
+ *
+ * @public
  */
-export class PutEventsCommand extends $Command<
-  PutEventsCommandInput,
-  PutEventsCommandOutput,
-  PersonalizeEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutEventsCommandInput, PutEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeEventsClient";
-    const commandName = "PutEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutEventsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutEventsCommand extends command<PutEventsCommandInput, PutEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutEvents",
+  PutEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutEventsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutEventsCommandOutput> {
-    return deserializeAws_restJson1PutEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutEventsCommandInput;
+      output: PutEventsCommandOutput;
+    };
+  };
 }

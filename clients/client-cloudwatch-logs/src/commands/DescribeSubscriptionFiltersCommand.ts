@@ -1,101 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
-import { DescribeSubscriptionFiltersRequest, DescribeSubscriptionFiltersResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSubscriptionFiltersCommand,
-  serializeAws_json1_1DescribeSubscriptionFiltersCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DescribeSubscriptionFiltersCommandInput extends DescribeSubscriptionFiltersRequest {}
-export interface DescribeSubscriptionFiltersCommandOutput
-  extends DescribeSubscriptionFiltersResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSubscriptionFiltersRequest, DescribeSubscriptionFiltersResponse } from "../models/models_0";
+import { DescribeSubscriptionFilters$ } from "../schemas/schemas_0";
 
 /**
- * <p>Lists the subscription filters for the specified log group. You can list all the subscription filters or filter the results by prefix.
- *       The results are ASCII-sorted by filter name.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSubscriptionFiltersCommand}.
+ */
+export interface DescribeSubscriptionFiltersCommandInput extends DescribeSubscriptionFiltersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSubscriptionFiltersCommand}.
+ */
+export interface DescribeSubscriptionFiltersCommandOutput extends DescribeSubscriptionFiltersResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists the subscription filters for the specified log group. You can list all the
+ *       subscription filters or filter the results by prefix. The results are ASCII-sorted by filter
+ *       name.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchLogsClient, DescribeSubscriptionFiltersCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
  * // const { CloudWatchLogsClient, DescribeSubscriptionFiltersCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * // import type { CloudWatchLogsClientConfig } from "@aws-sdk/client-cloudwatch-logs";
+ * const config = {}; // type is CloudWatchLogsClientConfig
  * const client = new CloudWatchLogsClient(config);
+ * const input = { // DescribeSubscriptionFiltersRequest
+ *   logGroupName: "STRING_VALUE", // required
+ *   filterNamePrefix: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   limit: Number("int"),
+ * };
  * const command = new DescribeSubscriptionFiltersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSubscriptionFiltersResponse
+ * //   subscriptionFilters: [ // SubscriptionFilters
+ * //     { // SubscriptionFilter
+ * //       filterName: "STRING_VALUE",
+ * //       logGroupName: "STRING_VALUE",
+ * //       filterPattern: "STRING_VALUE",
+ * //       destinationArn: "STRING_VALUE",
+ * //       roleArn: "STRING_VALUE",
+ * //       distribution: "Random" || "ByLogStream",
+ * //       applyOnTransformedLogs: true || false,
+ * //       creationTime: Number("long"),
+ * //       fieldSelectionCriteria: "STRING_VALUE",
+ * //       emitSystemFields: [ // EmitSystemFields
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeSubscriptionFiltersCommandInput - {@link DescribeSubscriptionFiltersCommandInput}
+ * @returns {@link DescribeSubscriptionFiltersCommandOutput}
  * @see {@link DescribeSubscriptionFiltersCommandInput} for command's `input` shape.
  * @see {@link DescribeSubscriptionFiltersCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchLogsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for CloudWatchLogsClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>A parameter is specified incorrectly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service cannot complete the request.</p>
+ *
+ * @throws {@link CloudWatchLogsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchLogs service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSubscriptionFiltersCommand extends $Command<
-  DescribeSubscriptionFiltersCommandInput,
-  DescribeSubscriptionFiltersCommandOutput,
-  CloudWatchLogsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSubscriptionFiltersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchLogsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSubscriptionFiltersCommandInput, DescribeSubscriptionFiltersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchLogsClient";
-    const commandName = "DescribeSubscriptionFiltersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSubscriptionFiltersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSubscriptionFiltersResponse.filterSensitiveLog,
+export class DescribeSubscriptionFiltersCommand extends command<DescribeSubscriptionFiltersCommandInput, DescribeSubscriptionFiltersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSubscriptionFilters",
+  DescribeSubscriptionFilters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSubscriptionFiltersRequest;
+      output: DescribeSubscriptionFiltersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSubscriptionFiltersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSubscriptionFiltersCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSubscriptionFiltersCommandOutput> {
-    return deserializeAws_json1_1DescribeSubscriptionFiltersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSubscriptionFiltersCommandInput;
+      output: DescribeSubscriptionFiltersCommandOutput;
+    };
+  };
 }

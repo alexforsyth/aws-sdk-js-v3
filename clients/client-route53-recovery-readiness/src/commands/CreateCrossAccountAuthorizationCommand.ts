@@ -1,107 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateCrossAccountAuthorizationRequest, CreateCrossAccountAuthorizationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateCrossAccountAuthorizationCommand,
-  serializeAws_restJson1CreateCrossAccountAuthorizationCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryReadinessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryReadinessClient";
-
-export interface CreateCrossAccountAuthorizationCommandInput extends CreateCrossAccountAuthorizationRequest {}
-export interface CreateCrossAccountAuthorizationCommandOutput
-  extends CreateCrossAccountAuthorizationResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  CreateCrossAccountAuthorizationRequest,
+  CreateCrossAccountAuthorizationResponse,
+} from "../models/models_0";
+import { CreateCrossAccountAuthorization$ } from "../schemas/schemas_0";
 
 /**
- * Create a new cross account readiness authorization.
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateCrossAccountAuthorizationCommand}.
+ */
+export interface CreateCrossAccountAuthorizationCommandInput extends CreateCrossAccountAuthorizationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateCrossAccountAuthorizationCommand}.
+ */
+export interface CreateCrossAccountAuthorizationCommandOutput extends CreateCrossAccountAuthorizationResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a cross-account readiness authorization. This lets you authorize another account to work with Route 53 Application Recovery Controller, for example, to check the readiness status of resources in a separate account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53RecoveryReadinessClient, CreateCrossAccountAuthorizationCommand } from "@aws-sdk/client-route53-recovery-readiness"; // ES Modules import
  * // const { Route53RecoveryReadinessClient, CreateCrossAccountAuthorizationCommand } = require("@aws-sdk/client-route53-recovery-readiness"); // CommonJS import
+ * // import type { Route53RecoveryReadinessClientConfig } from "@aws-sdk/client-route53-recovery-readiness";
+ * const config = {}; // type is Route53RecoveryReadinessClientConfig
  * const client = new Route53RecoveryReadinessClient(config);
+ * const input = { // CreateCrossAccountAuthorizationRequest
+ *   CrossAccountAuthorization: "STRING_VALUE", // required
+ * };
  * const command = new CreateCrossAccountAuthorizationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateCrossAccountAuthorizationResponse
+ * //   CrossAccountAuthorization: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateCrossAccountAuthorizationCommandInput - {@link CreateCrossAccountAuthorizationCommandInput}
+ * @returns {@link CreateCrossAccountAuthorizationCommandOutput}
  * @see {@link CreateCrossAccountAuthorizationCommandInput} for command's `input` shape.
  * @see {@link CreateCrossAccountAuthorizationCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for Route53RecoveryReadinessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  User does not have sufficient access to perform this action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Updating or deleting a resource can cause an inconsistent state.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link Route53RecoveryReadinessServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryReadiness service.</p>
+ *
+ *
+ * @public
  */
-export class CreateCrossAccountAuthorizationCommand extends $Command<
-  CreateCrossAccountAuthorizationCommandInput,
-  CreateCrossAccountAuthorizationCommandOutput,
-  Route53RecoveryReadinessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateCrossAccountAuthorizationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryReadinessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateCrossAccountAuthorizationCommandInput, CreateCrossAccountAuthorizationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryReadinessClient";
-    const commandName = "CreateCrossAccountAuthorizationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateCrossAccountAuthorizationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateCrossAccountAuthorizationResponse.filterSensitiveLog,
+export class CreateCrossAccountAuthorizationCommand extends command<CreateCrossAccountAuthorizationCommandInput, CreateCrossAccountAuthorizationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateCrossAccountAuthorization",
+  CreateCrossAccountAuthorization$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCrossAccountAuthorizationRequest;
+      output: CreateCrossAccountAuthorizationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateCrossAccountAuthorizationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateCrossAccountAuthorizationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateCrossAccountAuthorizationCommandOutput> {
-    return deserializeAws_restJson1CreateCrossAccountAuthorizationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateCrossAccountAuthorizationCommandInput;
+      output: CreateCrossAccountAuthorizationCommandOutput;
+    };
+  };
 }

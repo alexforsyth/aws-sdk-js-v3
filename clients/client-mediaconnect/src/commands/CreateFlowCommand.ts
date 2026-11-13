@@ -1,95 +1,865 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { CreateFlowRequest, CreateFlowResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateFlowCommand,
-  serializeAws_restJson1CreateFlowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFlowRequest, CreateFlowResponse } from "../models/models_0";
+import { CreateFlow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFlowCommand}.
+ */
 export interface CreateFlowCommandInput extends CreateFlowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFlowCommand}.
+ */
 export interface CreateFlowCommandOutput extends CreateFlowResponse, __MetadataBearer {}
 
 /**
- * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
+ * <p> Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, CreateFlowCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, CreateFlowCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // CreateFlowRequest
+ *   AvailabilityZone: "STRING_VALUE",
+ *   Entitlements: [ // __listOfGrantEntitlementRequest
+ *     { // GrantEntitlementRequest
+ *       DataTransferSubscriberFeePercent: Number("int"),
+ *       Description: "STRING_VALUE",
+ *       Encryption: { // Encryption
+ *         Algorithm: "aes128" || "aes192" || "aes256",
+ *         ConstantInitializationVector: "STRING_VALUE",
+ *         DeviceId: "STRING_VALUE",
+ *         KeyType: "speke" || "static-key" || "srt-password",
+ *         Region: "STRING_VALUE",
+ *         ResourceId: "STRING_VALUE",
+ *         RoleArn: "STRING_VALUE", // required
+ *         SecretArn: "STRING_VALUE",
+ *         Url: "STRING_VALUE",
+ *       },
+ *       EntitlementStatus: "ENABLED" || "DISABLED",
+ *       Name: "STRING_VALUE",
+ *       Subscribers: [ // __listOfString // required
+ *         "STRING_VALUE",
+ *       ],
+ *       EntitlementTags: { // __mapOfString
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ *   MediaStreams: [ // __listOfAddMediaStreamRequest
+ *     { // AddMediaStreamRequest
+ *       Attributes: { // MediaStreamAttributesRequest
+ *         Fmtp: { // FmtpRequest
+ *           ChannelOrder: "STRING_VALUE",
+ *           Colorimetry: "BT601" || "BT709" || "BT2020" || "BT2100" || "ST2065-1" || "ST2065-3" || "XYZ",
+ *           ExactFramerate: "STRING_VALUE",
+ *           Par: "STRING_VALUE",
+ *           Range: "NARROW" || "FULL" || "FULLPROTECT",
+ *           ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ *           Tcs: "SDR" || "PQ" || "HLG" || "LINEAR" || "BT2100LINPQ" || "BT2100LINHLG" || "ST2065-1" || "ST428-1" || "DENSITY",
+ *         },
+ *         Lang: "STRING_VALUE",
+ *       },
+ *       ClockRate: Number("int"),
+ *       Description: "STRING_VALUE",
+ *       MediaStreamId: Number("int"), // required
+ *       MediaStreamName: "STRING_VALUE", // required
+ *       MediaStreamType: "video" || "audio" || "ancillary-data", // required
+ *       VideoFormat: "STRING_VALUE",
+ *       MediaStreamTags: {
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ *   Name: "STRING_VALUE", // required
+ *   Outputs: [ // __listOfAddOutputRequest
+ *     { // AddOutputRequest
+ *       CidrAllowList: [
+ *         "STRING_VALUE",
+ *       ],
+ *       Description: "STRING_VALUE",
+ *       Destination: "STRING_VALUE",
+ *       Encryption: {
+ *         Algorithm: "aes128" || "aes192" || "aes256",
+ *         ConstantInitializationVector: "STRING_VALUE",
+ *         DeviceId: "STRING_VALUE",
+ *         KeyType: "speke" || "static-key" || "srt-password",
+ *         Region: "STRING_VALUE",
+ *         ResourceId: "STRING_VALUE",
+ *         RoleArn: "STRING_VALUE", // required
+ *         SecretArn: "STRING_VALUE",
+ *         Url: "STRING_VALUE",
+ *       },
+ *       MaxLatency: Number("int"),
+ *       MediaStreamOutputConfigurations: [ // __listOfMediaStreamOutputConfigurationRequest
+ *         { // MediaStreamOutputConfigurationRequest
+ *           DestinationConfigurations: [ // __listOfDestinationConfigurationRequest
+ *             { // DestinationConfigurationRequest
+ *               DestinationIp: "STRING_VALUE", // required
+ *               DestinationPort: Number("int"), // required
+ *               Interface: { // InterfaceRequest
+ *                 Name: "STRING_VALUE", // required
+ *               },
+ *             },
+ *           ],
+ *           EncodingName: "jxsv" || "raw" || "smpte291" || "pcm", // required
+ *           EncodingParameters: { // EncodingParametersRequest
+ *             CompressionFactor: Number("double"), // required
+ *             EncoderProfile: "main" || "high", // required
+ *           },
+ *           MediaStreamName: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *       MinLatency: Number("int"),
+ *       Name: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       Protocol: "zixi-push" || "rtp-fec" || "rtp" || "zixi-pull" || "rist" || "st2110-jpegxs" || "cdi" || "srt-listener" || "srt-caller" || "fujitsu-qos" || "udp" || "ndi-speed-hq" || "rtmp-push",
+ *       RemoteId: "STRING_VALUE",
+ *       SenderControlPort: Number("int"),
+ *       SmoothingLatency: Number("int"),
+ *       StreamId: "STRING_VALUE",
+ *       VpcInterfaceAttachment: { // VpcInterfaceAttachment
+ *         VpcInterfaceName: "STRING_VALUE",
+ *       },
+ *       OutputStatus: "ENABLED" || "DISABLED",
+ *       NdiSpeedHqQuality: Number("int"),
+ *       NdiProgramName: "STRING_VALUE",
+ *       OutputTags: {
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *       RouterIntegrationState: "ENABLED" || "DISABLED",
+ *       RouterIntegrationTransitEncryption: { // FlowTransitEncryption
+ *         EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ *         EncryptionKeyConfiguration: { // FlowTransitEncryptionKeyConfiguration Union: only one key present
+ *           SecretsManager: { // SecretsManagerEncryptionKeyConfiguration
+ *             SecretArn: "STRING_VALUE", // required
+ *             RoleArn: "STRING_VALUE", // required
+ *           },
+ *           Automatic: {},
+ *         },
+ *       },
+ *       NdiOutputTimecodeSource: "EMBEDDED_TIMECODE" || "UTC_SYSTEM_TIME",
+ *       NdiAudioReferenceLevel: Number("int"),
+ *       RtmpPushSettings: { // RtmpPushOutputSettings
+ *         ApplicationName: "STRING_VALUE", // required
+ *         StreamName: "STRING_VALUE", // required
+ *         TlsEncryption: { // TlsEncryption
+ *           EncryptionType: "PUBLIC",
+ *           EncryptionConfiguration: { // TlsEncryptionConfiguration Union: only one key present
+ *             Public: {},
+ *           },
+ *         },
+ *       },
+ *     },
+ *   ],
+ *   Source: { // SetSourceRequest
+ *     Decryption: {
+ *       Algorithm: "aes128" || "aes192" || "aes256",
+ *       ConstantInitializationVector: "STRING_VALUE",
+ *       DeviceId: "STRING_VALUE",
+ *       KeyType: "speke" || "static-key" || "srt-password",
+ *       Region: "STRING_VALUE",
+ *       ResourceId: "STRING_VALUE",
+ *       RoleArn: "STRING_VALUE", // required
+ *       SecretArn: "STRING_VALUE",
+ *       Url: "STRING_VALUE",
+ *     },
+ *     Description: "STRING_VALUE",
+ *     EntitlementArn: "STRING_VALUE",
+ *     IngestPort: Number("int"),
+ *     MaxBitrate: Number("int"),
+ *     MaxLatency: Number("int"),
+ *     MaxSyncBuffer: Number("int"),
+ *     MediaStreamSourceConfigurations: [ // __listOfMediaStreamSourceConfigurationRequest
+ *       { // MediaStreamSourceConfigurationRequest
+ *         EncodingName: "jxsv" || "raw" || "smpte291" || "pcm", // required
+ *         InputConfigurations: [ // __listOfInputConfigurationRequest
+ *           { // InputConfigurationRequest
+ *             InputPort: Number("int"), // required
+ *             Interface: {
+ *               Name: "STRING_VALUE", // required
+ *             },
+ *           },
+ *         ],
+ *         MediaStreamName: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *     MinLatency: Number("int"),
+ *     Name: "STRING_VALUE",
+ *     Protocol: "zixi-push" || "rtp-fec" || "rtp" || "zixi-pull" || "rist" || "st2110-jpegxs" || "cdi" || "srt-listener" || "srt-caller" || "fujitsu-qos" || "udp" || "ndi-speed-hq" || "rtmp-push",
+ *     SenderControlPort: Number("int"),
+ *     SenderIpAddress: "STRING_VALUE",
+ *     SourceListenerAddress: "STRING_VALUE",
+ *     SourceListenerPort: Number("int"),
+ *     StreamId: "STRING_VALUE",
+ *     VpcInterfaceName: "STRING_VALUE",
+ *     WhitelistCidr: "STRING_VALUE",
+ *     GatewayBridgeSource: { // SetGatewayBridgeSourceRequest
+ *       BridgeArn: "STRING_VALUE", // required
+ *       VpcInterfaceAttachment: {
+ *         VpcInterfaceName: "STRING_VALUE",
+ *       },
+ *     },
+ *     NdiSourceSettings: { // NdiSourceSettings
+ *       SourceName: "STRING_VALUE",
+ *       AudioReferenceLevel: Number("int"),
+ *     },
+ *     SourceTags: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     RouterIntegrationState: "ENABLED" || "DISABLED",
+ *     RouterIntegrationTransitDecryption: {
+ *       EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ *       EncryptionKeyConfiguration: {//  Union: only one key present
+ *         SecretsManager: {
+ *           SecretArn: "STRING_VALUE", // required
+ *           RoleArn: "STRING_VALUE", // required
+ *         },
+ *         Automatic: {},
+ *       },
+ *     },
+ *     RtmpPushSettings: { // SetRtmpPushSourceSettings
+ *       NamingConfiguration: { // RtmpPushNamingConfiguration Union: only one key present
+ *         Manual: { // ManualRtmpPushNamingConfiguration
+ *           ApplicationName: "STRING_VALUE", // required
+ *           StreamName: "STRING_VALUE", // required
+ *         },
+ *         Automatic: {},
+ *       },
+ *     },
+ *   },
+ *   SourceFailoverConfig: { // FailoverConfig
+ *     FailoverMode: "MERGE" || "FAILOVER",
+ *     RecoveryWindow: Number("int"),
+ *     SourcePriority: { // SourcePriority
+ *       PrimarySource: "STRING_VALUE",
+ *     },
+ *     State: "ENABLED" || "DISABLED",
+ *   },
+ *   Sources: [ // __listOfSetSourceRequest
+ *     {
+ *       Decryption: {
+ *         Algorithm: "aes128" || "aes192" || "aes256",
+ *         ConstantInitializationVector: "STRING_VALUE",
+ *         DeviceId: "STRING_VALUE",
+ *         KeyType: "speke" || "static-key" || "srt-password",
+ *         Region: "STRING_VALUE",
+ *         ResourceId: "STRING_VALUE",
+ *         RoleArn: "STRING_VALUE", // required
+ *         SecretArn: "STRING_VALUE",
+ *         Url: "STRING_VALUE",
+ *       },
+ *       Description: "STRING_VALUE",
+ *       EntitlementArn: "STRING_VALUE",
+ *       IngestPort: Number("int"),
+ *       MaxBitrate: Number("int"),
+ *       MaxLatency: Number("int"),
+ *       MaxSyncBuffer: Number("int"),
+ *       MediaStreamSourceConfigurations: [
+ *         {
+ *           EncodingName: "jxsv" || "raw" || "smpte291" || "pcm", // required
+ *           InputConfigurations: [
+ *             {
+ *               InputPort: Number("int"), // required
+ *               Interface: {
+ *                 Name: "STRING_VALUE", // required
+ *               },
+ *             },
+ *           ],
+ *           MediaStreamName: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *       MinLatency: Number("int"),
+ *       Name: "STRING_VALUE",
+ *       Protocol: "zixi-push" || "rtp-fec" || "rtp" || "zixi-pull" || "rist" || "st2110-jpegxs" || "cdi" || "srt-listener" || "srt-caller" || "fujitsu-qos" || "udp" || "ndi-speed-hq" || "rtmp-push",
+ *       SenderControlPort: Number("int"),
+ *       SenderIpAddress: "STRING_VALUE",
+ *       SourceListenerAddress: "STRING_VALUE",
+ *       SourceListenerPort: Number("int"),
+ *       StreamId: "STRING_VALUE",
+ *       VpcInterfaceName: "STRING_VALUE",
+ *       WhitelistCidr: "STRING_VALUE",
+ *       GatewayBridgeSource: {
+ *         BridgeArn: "STRING_VALUE", // required
+ *         VpcInterfaceAttachment: {
+ *           VpcInterfaceName: "STRING_VALUE",
+ *         },
+ *       },
+ *       NdiSourceSettings: {
+ *         SourceName: "STRING_VALUE",
+ *         AudioReferenceLevel: Number("int"),
+ *       },
+ *       SourceTags: {
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *       RouterIntegrationState: "ENABLED" || "DISABLED",
+ *       RouterIntegrationTransitDecryption: {
+ *         EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ *         EncryptionKeyConfiguration: {//  Union: only one key present
+ *           SecretsManager: {
+ *             SecretArn: "STRING_VALUE", // required
+ *             RoleArn: "STRING_VALUE", // required
+ *           },
+ *           Automatic: {},
+ *         },
+ *       },
+ *       RtmpPushSettings: {
+ *         NamingConfiguration: {//  Union: only one key present
+ *           Manual: {
+ *             ApplicationName: "STRING_VALUE", // required
+ *             StreamName: "STRING_VALUE", // required
+ *           },
+ *           Automatic: {},
+ *         },
+ *       },
+ *     },
+ *   ],
+ *   VpcInterfaces: [ // __listOfVpcInterfaceRequest
+ *     { // VpcInterfaceRequest
+ *       Name: "STRING_VALUE", // required
+ *       NetworkInterfaceType: "ena" || "efa",
+ *       RoleArn: "STRING_VALUE", // required
+ *       SecurityGroupIds: [ // required
+ *         "STRING_VALUE",
+ *       ],
+ *       SubnetId: "STRING_VALUE", // required
+ *       VpcInterfaceTags: "<__mapOfString>",
+ *     },
+ *   ],
+ *   Maintenance: { // AddMaintenance
+ *     MaintenanceDay: "Monday" || "Tuesday" || "Wednesday" || "Thursday" || "Friday" || "Saturday" || "Sunday", // required
+ *     MaintenanceStartHour: "STRING_VALUE", // required
+ *   },
+ *   SourceMonitoringConfig: { // MonitoringConfig
+ *     ThumbnailState: "ENABLED" || "DISABLED",
+ *     AudioMonitoringSettings: [ // __listOfAudioMonitoringSetting
+ *       { // AudioMonitoringSetting
+ *         SilentAudio: { // SilentAudio
+ *           State: "ENABLED" || "DISABLED",
+ *           ThresholdSeconds: Number("int"),
+ *         },
+ *       },
+ *     ],
+ *     ContentQualityAnalysisState: "ENABLED" || "DISABLED",
+ *     VideoMonitoringSettings: [ // __listOfVideoMonitoringSetting
+ *       { // VideoMonitoringSetting
+ *         BlackFrames: { // BlackFrames
+ *           State: "ENABLED" || "DISABLED",
+ *           ThresholdSeconds: Number("int"),
+ *         },
+ *         FrozenFrames: { // FrozenFrames
+ *           State: "ENABLED" || "DISABLED",
+ *           ThresholdSeconds: Number("int"),
+ *         },
+ *       },
+ *     ],
+ *   },
+ *   FlowSize: "MEDIUM" || "LARGE" || "LARGE_4X",
+ *   NdiConfig: { // NdiConfig
+ *     NdiState: "ENABLED" || "DISABLED",
+ *     MachineName: "STRING_VALUE",
+ *     NdiDiscoveryServers: [ // __listOfNdiDiscoveryServerConfig
+ *       { // NdiDiscoveryServerConfig
+ *         DiscoveryServerAddress: "STRING_VALUE", // required
+ *         DiscoveryServerPort: Number("int"),
+ *         VpcInterfaceAdapter: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ *   EncodingConfig: { // EncodingConfig
+ *     EncodingProfile: "DISTRIBUTION_H264_DEFAULT" || "CONTRIBUTION_H264_DEFAULT",
+ *     VideoMaxBitrate: Number("int"),
+ *   },
+ *   FlowTags: "<__mapOfString>",
+ * };
  * const command = new CreateFlowCommand(input);
  * const response = await client.send(command);
+ * // { // CreateFlowResponse
+ * //   Flow: { // Flow
+ * //     AvailabilityZone: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     EgressIp: "STRING_VALUE",
+ * //     Entitlements: [ // __listOfEntitlement // required
+ * //       { // Entitlement
+ * //         DataTransferSubscriberFeePercent: Number("int"),
+ * //         Description: "STRING_VALUE",
+ * //         Encryption: { // Encryption
+ * //           Algorithm: "aes128" || "aes192" || "aes256",
+ * //           ConstantInitializationVector: "STRING_VALUE",
+ * //           DeviceId: "STRING_VALUE",
+ * //           KeyType: "speke" || "static-key" || "srt-password",
+ * //           Region: "STRING_VALUE",
+ * //           ResourceId: "STRING_VALUE",
+ * //           RoleArn: "STRING_VALUE", // required
+ * //           SecretArn: "STRING_VALUE",
+ * //           Url: "STRING_VALUE",
+ * //         },
+ * //         EntitlementArn: "STRING_VALUE", // required
+ * //         EntitlementStatus: "ENABLED" || "DISABLED",
+ * //         Name: "STRING_VALUE", // required
+ * //         Subscribers: [ // __listOfString // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     FlowArn: "STRING_VALUE", // required
+ * //     MediaStreams: [ // __listOfMediaStream
+ * //       { // MediaStream
+ * //         Attributes: { // MediaStreamAttributes
+ * //           Fmtp: { // Fmtp
+ * //             ChannelOrder: "STRING_VALUE",
+ * //             Colorimetry: "BT601" || "BT709" || "BT2020" || "BT2100" || "ST2065-1" || "ST2065-3" || "XYZ",
+ * //             ExactFramerate: "STRING_VALUE",
+ * //             Par: "STRING_VALUE",
+ * //             Range: "NARROW" || "FULL" || "FULLPROTECT",
+ * //             ScanMode: "progressive" || "interlace" || "progressive-segmented-frame",
+ * //             Tcs: "SDR" || "PQ" || "HLG" || "LINEAR" || "BT2100LINPQ" || "BT2100LINHLG" || "ST2065-1" || "ST428-1" || "DENSITY",
+ * //           },
+ * //           Lang: "STRING_VALUE",
+ * //         },
+ * //         ClockRate: Number("int"),
+ * //         Description: "STRING_VALUE",
+ * //         Fmt: Number("int"), // required
+ * //         MediaStreamId: Number("int"), // required
+ * //         MediaStreamName: "STRING_VALUE", // required
+ * //         MediaStreamType: "video" || "audio" || "ancillary-data", // required
+ * //         VideoFormat: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Name: "STRING_VALUE", // required
+ * //     Outputs: [ // __listOfOutput // required
+ * //       { // Output
+ * //         DataTransferSubscriberFeePercent: Number("int"),
+ * //         Description: "STRING_VALUE",
+ * //         Destination: "STRING_VALUE",
+ * //         Encryption: {
+ * //           Algorithm: "aes128" || "aes192" || "aes256",
+ * //           ConstantInitializationVector: "STRING_VALUE",
+ * //           DeviceId: "STRING_VALUE",
+ * //           KeyType: "speke" || "static-key" || "srt-password",
+ * //           Region: "STRING_VALUE",
+ * //           ResourceId: "STRING_VALUE",
+ * //           RoleArn: "STRING_VALUE", // required
+ * //           SecretArn: "STRING_VALUE",
+ * //           Url: "STRING_VALUE",
+ * //         },
+ * //         EntitlementArn: "STRING_VALUE",
+ * //         ListenerAddress: "STRING_VALUE",
+ * //         MediaLiveInputArn: "STRING_VALUE",
+ * //         MediaStreamOutputConfigurations: [ // __listOfMediaStreamOutputConfiguration
+ * //           { // MediaStreamOutputConfiguration
+ * //             DestinationConfigurations: [ // __listOfDestinationConfiguration
+ * //               { // DestinationConfiguration
+ * //                 DestinationIp: "STRING_VALUE", // required
+ * //                 DestinationPort: Number("int"), // required
+ * //                 Interface: { // Interface
+ * //                   Name: "STRING_VALUE", // required
+ * //                 },
+ * //                 OutboundIp: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //             EncodingName: "jxsv" || "raw" || "smpte291" || "pcm", // required
+ * //             EncodingParameters: { // EncodingParameters
+ * //               CompressionFactor: Number("double"), // required
+ * //               EncoderProfile: "main" || "high", // required
+ * //             },
+ * //             MediaStreamName: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //         Name: "STRING_VALUE", // required
+ * //         OutputArn: "STRING_VALUE", // required
+ * //         Port: Number("int"),
+ * //         Transport: { // Transport
+ * //           CidrAllowList: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           MaxBitrate: Number("int"),
+ * //           MaxLatency: Number("int"),
+ * //           MaxSyncBuffer: Number("int"),
+ * //           MinLatency: Number("int"),
+ * //           Protocol: "zixi-push" || "rtp-fec" || "rtp" || "zixi-pull" || "rist" || "st2110-jpegxs" || "cdi" || "srt-listener" || "srt-caller" || "fujitsu-qos" || "udp" || "ndi-speed-hq" || "rtmp-push", // required
+ * //           RemoteId: "STRING_VALUE",
+ * //           SenderControlPort: Number("int"),
+ * //           SenderIpAddress: "STRING_VALUE",
+ * //           SmoothingLatency: Number("int"),
+ * //           SourceListenerAddress: "STRING_VALUE",
+ * //           SourceListenerPort: Number("int"),
+ * //           StreamId: "STRING_VALUE",
+ * //           NdiSpeedHqQuality: Number("int"),
+ * //           NdiProgramName: "STRING_VALUE",
+ * //           NdiSourceSettings: { // NdiSourceSettings
+ * //             SourceName: "STRING_VALUE",
+ * //             AudioReferenceLevel: Number("int"),
+ * //           },
+ * //           NdiOutputTimecodeSource: "EMBEDDED_TIMECODE" || "UTC_SYSTEM_TIME",
+ * //           NdiAudioReferenceLevel: Number("int"),
+ * //           RtmpPushSourceSettings: { // RtmpPushSourceSettings
+ * //             ApplicationName: "STRING_VALUE", // required
+ * //             StreamName: "STRING_VALUE", // required
+ * //             NamingType: "MANUAL" || "AUTOMATIC", // required
+ * //           },
+ * //           RtmpPushOutputSettings: { // RtmpPushOutputSettings
+ * //             ApplicationName: "STRING_VALUE", // required
+ * //             StreamName: "STRING_VALUE", // required
+ * //             TlsEncryption: { // TlsEncryption
+ * //               EncryptionType: "PUBLIC",
+ * //               EncryptionConfiguration: { // TlsEncryptionConfiguration Union: only one key present
+ * //                 Public: {},
+ * //               },
+ * //             },
+ * //           },
+ * //         },
+ * //         VpcInterfaceAttachment: { // VpcInterfaceAttachment
+ * //           VpcInterfaceName: "STRING_VALUE",
+ * //         },
+ * //         BridgeArn: "STRING_VALUE",
+ * //         BridgePorts: [ // __listOfInteger
+ * //           Number("int"),
+ * //         ],
+ * //         OutputStatus: "ENABLED" || "DISABLED",
+ * //         PeerIpAddress: "STRING_VALUE",
+ * //         RouterIntegrationState: "ENABLED" || "DISABLED",
+ * //         RouterIntegrationTransitEncryption: { // FlowTransitEncryption
+ * //           EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //           EncryptionKeyConfiguration: { // FlowTransitEncryptionKeyConfiguration Union: only one key present
+ * //             SecretsManager: { // SecretsManagerEncryptionKeyConfiguration
+ * //               SecretArn: "STRING_VALUE", // required
+ * //               RoleArn: "STRING_VALUE", // required
+ * //             },
+ * //             Automatic: {},
+ * //           },
+ * //         },
+ * //         ConnectedRouterInputArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Source: { // Source
+ * //       DataTransferSubscriberFeePercent: Number("int"),
+ * //       Decryption: {
+ * //         Algorithm: "aes128" || "aes192" || "aes256",
+ * //         ConstantInitializationVector: "STRING_VALUE",
+ * //         DeviceId: "STRING_VALUE",
+ * //         KeyType: "speke" || "static-key" || "srt-password",
+ * //         Region: "STRING_VALUE",
+ * //         ResourceId: "STRING_VALUE",
+ * //         RoleArn: "STRING_VALUE", // required
+ * //         SecretArn: "STRING_VALUE",
+ * //         Url: "STRING_VALUE",
+ * //       },
+ * //       Description: "STRING_VALUE",
+ * //       EntitlementArn: "STRING_VALUE",
+ * //       IngestIp: "STRING_VALUE",
+ * //       IngestPort: Number("int"),
+ * //       MediaStreamSourceConfigurations: [ // __listOfMediaStreamSourceConfiguration
+ * //         { // MediaStreamSourceConfiguration
+ * //           EncodingName: "jxsv" || "raw" || "smpte291" || "pcm", // required
+ * //           InputConfigurations: [ // __listOfInputConfiguration
+ * //             { // InputConfiguration
+ * //               InputIp: "STRING_VALUE", // required
+ * //               InputPort: Number("int"), // required
+ * //               Interface: {
+ * //                 Name: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //           ],
+ * //           MediaStreamName: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       Name: "STRING_VALUE", // required
+ * //       SenderControlPort: Number("int"),
+ * //       SenderIpAddress: "STRING_VALUE",
+ * //       SourceArn: "STRING_VALUE", // required
+ * //       Transport: {
+ * //         CidrAllowList: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         MaxBitrate: Number("int"),
+ * //         MaxLatency: Number("int"),
+ * //         MaxSyncBuffer: Number("int"),
+ * //         MinLatency: Number("int"),
+ * //         Protocol: "zixi-push" || "rtp-fec" || "rtp" || "zixi-pull" || "rist" || "st2110-jpegxs" || "cdi" || "srt-listener" || "srt-caller" || "fujitsu-qos" || "udp" || "ndi-speed-hq" || "rtmp-push", // required
+ * //         RemoteId: "STRING_VALUE",
+ * //         SenderControlPort: Number("int"),
+ * //         SenderIpAddress: "STRING_VALUE",
+ * //         SmoothingLatency: Number("int"),
+ * //         SourceListenerAddress: "STRING_VALUE",
+ * //         SourceListenerPort: Number("int"),
+ * //         StreamId: "STRING_VALUE",
+ * //         NdiSpeedHqQuality: Number("int"),
+ * //         NdiProgramName: "STRING_VALUE",
+ * //         NdiSourceSettings: {
+ * //           SourceName: "STRING_VALUE",
+ * //           AudioReferenceLevel: Number("int"),
+ * //         },
+ * //         NdiOutputTimecodeSource: "EMBEDDED_TIMECODE" || "UTC_SYSTEM_TIME",
+ * //         NdiAudioReferenceLevel: Number("int"),
+ * //         RtmpPushSourceSettings: {
+ * //           ApplicationName: "STRING_VALUE", // required
+ * //           StreamName: "STRING_VALUE", // required
+ * //           NamingType: "MANUAL" || "AUTOMATIC", // required
+ * //         },
+ * //         RtmpPushOutputSettings: {
+ * //           ApplicationName: "STRING_VALUE", // required
+ * //           StreamName: "STRING_VALUE", // required
+ * //           TlsEncryption: {
+ * //             EncryptionType: "PUBLIC",
+ * //             EncryptionConfiguration: {//  Union: only one key present
+ * //               Public: {},
+ * //             },
+ * //           },
+ * //         },
+ * //       },
+ * //       VpcInterfaceName: "STRING_VALUE",
+ * //       WhitelistCidr: "STRING_VALUE",
+ * //       GatewayBridgeSource: { // GatewayBridgeSource
+ * //         BridgeArn: "STRING_VALUE", // required
+ * //         VpcInterfaceAttachment: {
+ * //           VpcInterfaceName: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       PeerIpAddress: "STRING_VALUE",
+ * //       RouterIntegrationState: "ENABLED" || "DISABLED",
+ * //       RouterIntegrationTransitDecryption: {
+ * //         EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //         EncryptionKeyConfiguration: {//  Union: only one key present
+ * //           SecretsManager: {
+ * //             SecretArn: "STRING_VALUE", // required
+ * //             RoleArn: "STRING_VALUE", // required
+ * //           },
+ * //           Automatic: {},
+ * //         },
+ * //       },
+ * //       ConnectedRouterOutputArn: "STRING_VALUE",
+ * //     },
+ * //     SourceFailoverConfig: { // FailoverConfig
+ * //       FailoverMode: "MERGE" || "FAILOVER",
+ * //       RecoveryWindow: Number("int"),
+ * //       SourcePriority: { // SourcePriority
+ * //         PrimarySource: "STRING_VALUE",
+ * //       },
+ * //       State: "ENABLED" || "DISABLED",
+ * //     },
+ * //     Sources: [ // __listOfSource
+ * //       {
+ * //         DataTransferSubscriberFeePercent: Number("int"),
+ * //         Decryption: {
+ * //           Algorithm: "aes128" || "aes192" || "aes256",
+ * //           ConstantInitializationVector: "STRING_VALUE",
+ * //           DeviceId: "STRING_VALUE",
+ * //           KeyType: "speke" || "static-key" || "srt-password",
+ * //           Region: "STRING_VALUE",
+ * //           ResourceId: "STRING_VALUE",
+ * //           RoleArn: "STRING_VALUE", // required
+ * //           SecretArn: "STRING_VALUE",
+ * //           Url: "STRING_VALUE",
+ * //         },
+ * //         Description: "STRING_VALUE",
+ * //         EntitlementArn: "STRING_VALUE",
+ * //         IngestIp: "STRING_VALUE",
+ * //         IngestPort: Number("int"),
+ * //         MediaStreamSourceConfigurations: [
+ * //           {
+ * //             EncodingName: "jxsv" || "raw" || "smpte291" || "pcm", // required
+ * //             InputConfigurations: [
+ * //               {
+ * //                 InputIp: "STRING_VALUE", // required
+ * //                 InputPort: Number("int"), // required
+ * //                 Interface: {
+ * //                   Name: "STRING_VALUE", // required
+ * //                 },
+ * //               },
+ * //             ],
+ * //             MediaStreamName: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //         Name: "STRING_VALUE", // required
+ * //         SenderControlPort: Number("int"),
+ * //         SenderIpAddress: "STRING_VALUE",
+ * //         SourceArn: "STRING_VALUE", // required
+ * //         Transport: {
+ * //           CidrAllowList: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           MaxBitrate: Number("int"),
+ * //           MaxLatency: Number("int"),
+ * //           MaxSyncBuffer: Number("int"),
+ * //           MinLatency: Number("int"),
+ * //           Protocol: "zixi-push" || "rtp-fec" || "rtp" || "zixi-pull" || "rist" || "st2110-jpegxs" || "cdi" || "srt-listener" || "srt-caller" || "fujitsu-qos" || "udp" || "ndi-speed-hq" || "rtmp-push", // required
+ * //           RemoteId: "STRING_VALUE",
+ * //           SenderControlPort: Number("int"),
+ * //           SenderIpAddress: "STRING_VALUE",
+ * //           SmoothingLatency: Number("int"),
+ * //           SourceListenerAddress: "STRING_VALUE",
+ * //           SourceListenerPort: Number("int"),
+ * //           StreamId: "STRING_VALUE",
+ * //           NdiSpeedHqQuality: Number("int"),
+ * //           NdiProgramName: "STRING_VALUE",
+ * //           NdiSourceSettings: {
+ * //             SourceName: "STRING_VALUE",
+ * //             AudioReferenceLevel: Number("int"),
+ * //           },
+ * //           NdiOutputTimecodeSource: "EMBEDDED_TIMECODE" || "UTC_SYSTEM_TIME",
+ * //           NdiAudioReferenceLevel: Number("int"),
+ * //           RtmpPushSourceSettings: {
+ * //             ApplicationName: "STRING_VALUE", // required
+ * //             StreamName: "STRING_VALUE", // required
+ * //             NamingType: "MANUAL" || "AUTOMATIC", // required
+ * //           },
+ * //           RtmpPushOutputSettings: {
+ * //             ApplicationName: "STRING_VALUE", // required
+ * //             StreamName: "STRING_VALUE", // required
+ * //             TlsEncryption: {
+ * //               EncryptionType: "PUBLIC",
+ * //               EncryptionConfiguration: {//  Union: only one key present
+ * //                 Public: {},
+ * //               },
+ * //             },
+ * //           },
+ * //         },
+ * //         VpcInterfaceName: "STRING_VALUE",
+ * //         WhitelistCidr: "STRING_VALUE",
+ * //         GatewayBridgeSource: {
+ * //           BridgeArn: "STRING_VALUE", // required
+ * //           VpcInterfaceAttachment: {
+ * //             VpcInterfaceName: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         PeerIpAddress: "STRING_VALUE",
+ * //         RouterIntegrationState: "ENABLED" || "DISABLED",
+ * //         RouterIntegrationTransitDecryption: {
+ * //           EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //           EncryptionKeyConfiguration: {//  Union: only one key present
+ * //             SecretsManager: {
+ * //               SecretArn: "STRING_VALUE", // required
+ * //               RoleArn: "STRING_VALUE", // required
+ * //             },
+ * //             Automatic: {},
+ * //           },
+ * //         },
+ * //         ConnectedRouterOutputArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Status: "STANDBY" || "ACTIVE" || "UPDATING" || "DELETING" || "STARTING" || "STOPPING" || "ERROR", // required
+ * //     VpcInterfaces: [ // __listOfVpcInterface
+ * //       { // VpcInterface
+ * //         Name: "STRING_VALUE", // required
+ * //         NetworkInterfaceIds: [ // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         NetworkInterfaceType: "ena" || "efa", // required
+ * //         RoleArn: "STRING_VALUE", // required
+ * //         SecurityGroupIds: "<__listOfString>", // required
+ * //         SubnetId: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     Maintenance: { // Maintenance
+ * //       MaintenanceDay: "Monday" || "Tuesday" || "Wednesday" || "Thursday" || "Friday" || "Saturday" || "Sunday",
+ * //       MaintenanceDeadline: "STRING_VALUE",
+ * //       MaintenanceScheduledDate: "STRING_VALUE",
+ * //       MaintenanceStartHour: "STRING_VALUE",
+ * //     },
+ * //     SourceMonitoringConfig: { // MonitoringConfig
+ * //       ThumbnailState: "ENABLED" || "DISABLED",
+ * //       AudioMonitoringSettings: [ // __listOfAudioMonitoringSetting
+ * //         { // AudioMonitoringSetting
+ * //           SilentAudio: { // SilentAudio
+ * //             State: "ENABLED" || "DISABLED",
+ * //             ThresholdSeconds: Number("int"),
+ * //           },
+ * //         },
+ * //       ],
+ * //       ContentQualityAnalysisState: "ENABLED" || "DISABLED",
+ * //       VideoMonitoringSettings: [ // __listOfVideoMonitoringSetting
+ * //         { // VideoMonitoringSetting
+ * //           BlackFrames: { // BlackFrames
+ * //             State: "ENABLED" || "DISABLED",
+ * //             ThresholdSeconds: Number("int"),
+ * //           },
+ * //           FrozenFrames: { // FrozenFrames
+ * //             State: "ENABLED" || "DISABLED",
+ * //             ThresholdSeconds: Number("int"),
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //     FlowSize: "MEDIUM" || "LARGE" || "LARGE_4X",
+ * //     NdiConfig: { // NdiConfig
+ * //       NdiState: "ENABLED" || "DISABLED",
+ * //       MachineName: "STRING_VALUE",
+ * //       NdiDiscoveryServers: [ // __listOfNdiDiscoveryServerConfig
+ * //         { // NdiDiscoveryServerConfig
+ * //           DiscoveryServerAddress: "STRING_VALUE", // required
+ * //           DiscoveryServerPort: Number("int"),
+ * //           VpcInterfaceAdapter: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //     EncodingConfig: { // EncodingConfig
+ * //       EncodingProfile: "DISTRIBUTION_H264_DEFAULT" || "CONTRIBUTION_H264_DEFAULT",
+ * //       VideoMaxBitrate: Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateFlowCommandInput - {@link CreateFlowCommandInput}
+ * @returns {@link CreateFlowCommandOutput}
  * @see {@link CreateFlowCommandInput} for command's `input` shape.
  * @see {@link CreateFlowCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link CreateFlow420Exception} (client fault)
+ *  <p>Exception raised by Elemental MediaConnect when creating the flow. See the error message for the operation for more information on the cause of this exception. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class CreateFlowCommand extends $Command<
-  CreateFlowCommandInput,
-  CreateFlowCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateFlowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateFlowCommandInput, CreateFlowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "CreateFlowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateFlowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateFlowResponse.filterSensitiveLog,
+export class CreateFlowCommand extends command<CreateFlowCommandInput, CreateFlowCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFlow",
+  CreateFlow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFlowRequest;
+      output: CreateFlowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateFlowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateFlowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateFlowCommandOutput> {
-    return deserializeAws_restJson1CreateFlowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateFlowCommandInput;
+      output: CreateFlowCommandOutput;
+    };
+  };
 }

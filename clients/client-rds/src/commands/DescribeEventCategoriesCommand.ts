@@ -1,99 +1,162 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeEventCategoriesMessage, EventCategoriesMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeEventCategoriesCommand,
-  serializeAws_queryDescribeEventCategoriesCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEventCategoriesMessage, EventCategoriesMessage } from "../models/models_0";
+import { DescribeEventCategories$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventCategoriesCommand}.
+ */
 export interface DescribeEventCategoriesCommandInput extends DescribeEventCategoriesMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventCategoriesCommand}.
+ */
 export interface DescribeEventCategoriesCommandOutput extends EventCategoriesMessage, __MetadataBearer {}
 
 /**
- * <p>Displays a list of categories for all event source types, or, if specified, for a specified source type.
- *             You can see a list of the event categories and source types
- *             in <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html">
- *                 Events</a> in the <i>Amazon RDS User Guide.</i>
- *          </p>
+ * <p>Displays a list of categories for all event source types, or, if specified, for a specified source type. You can also see this list in the "Amazon RDS event categories and event messages" section of the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html"> <i>Amazon RDS User Guide</i> </a> or the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Messages.html"> <i>Amazon Aurora User Guide</i> </a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSClient, DescribeEventCategoriesCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DescribeEventCategoriesCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DescribeEventCategoriesMessage
+ *   SourceType: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeEventCategoriesCommand(input);
  * const response = await client.send(command);
+ * // { // EventCategoriesMessage
+ * //   EventCategoriesMapList: [ // EventCategoriesMapList
+ * //     { // EventCategoriesMap
+ * //       SourceType: "STRING_VALUE",
+ * //       EventCategories: [ // EventCategoriesList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventCategoriesCommandInput - {@link DescribeEventCategoriesCommandInput}
+ * @returns {@link DescribeEventCategoriesCommandOutput}
  * @see {@link DescribeEventCategoriesCommandInput} for command's `input` shape.
  * @see {@link DescribeEventCategoriesCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To describe event categories
+ * ```javascript
+ * // The following example retrieves details about the event categories for all available event sources.
+ * const input = {
+ *   Filters:   [],
+ *   SourceType: ""
+ * };
+ * const command = new DescribeEventCategoriesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   EventCategoriesMapList: [
+ *     {
+ *       EventCategories: [
+ *         "deletion",
+ *         "read replica",
+ *         "failover",
+ *         "restoration",
+ *         "maintenance",
+ *         "low storage",
+ *         "configuration change",
+ *         "backup",
+ *         "creation",
+ *         "availability",
+ *         "recovery",
+ *         "failure",
+ *         "backtrack",
+ *         "notification"
+ *       ],
+ *       SourceType: "db-instance"
+ *     },
+ *     {
+ *       EventCategories: [
+ *         "configuration change",
+ *         "failure"
+ *       ],
+ *       SourceType: "db-security-group"
+ *     },
+ *     {
+ *       EventCategories: [
+ *         "configuration change"
+ *       ],
+ *       SourceType: "db-parameter-group"
+ *     },
+ *     {
+ *       EventCategories: [
+ *         "deletion",
+ *         "creation",
+ *         "restoration",
+ *         "notification"
+ *       ],
+ *       SourceType: "db-snapshot"
+ *     },
+ *     {
+ *       EventCategories: [
+ *         "failover",
+ *         "failure",
+ *         "notification"
+ *       ],
+ *       SourceType: "db-cluster"
+ *     },
+ *     {
+ *       EventCategories: [
+ *         "backup"
+ *       ],
+ *       SourceType: "db-cluster-snapshot"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeEventCategoriesCommand extends $Command<
-  DescribeEventCategoriesCommandInput,
-  DescribeEventCategoriesCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventCategoriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventCategoriesCommandInput, DescribeEventCategoriesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DescribeEventCategoriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventCategoriesMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EventCategoriesMessage.filterSensitiveLog,
+export class DescribeEventCategoriesCommand extends command<DescribeEventCategoriesCommandInput, DescribeEventCategoriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEventCategories",
+  DescribeEventCategories$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventCategoriesMessage;
+      output: EventCategoriesMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEventCategoriesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEventCategoriesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEventCategoriesCommandOutput> {
-    return deserializeAws_queryDescribeEventCategoriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventCategoriesCommandInput;
+      output: DescribeEventCategoriesCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdatePipelineRequest, UpdatePipelineResponse } from "../models/models_3";
-import {
-  deserializeAws_json1_1UpdatePipelineCommand,
-  serializeAws_json1_1UpdatePipelineCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdatePipelineRequest, UpdatePipelineResponse } from "../models/models_5";
+import { UpdatePipeline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdatePipelineCommand}.
+ */
 export interface UpdatePipelineCommandInput extends UpdatePipelineRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdatePipelineCommand}.
+ */
 export interface UpdatePipelineCommandOutput extends UpdatePipelineResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface UpdatePipelineCommandOutput extends UpdatePipelineResponse, __M
  * ```javascript
  * import { SageMakerClient, UpdatePipelineCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, UpdatePipelineCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // UpdatePipelineRequest
+ *   PipelineName: "STRING_VALUE", // required
+ *   PipelineDisplayName: "STRING_VALUE",
+ *   PipelineDefinition: "STRING_VALUE",
+ *   PipelineDefinitionS3Location: { // PipelineDefinitionS3Location
+ *     Bucket: "STRING_VALUE", // required
+ *     ObjectKey: "STRING_VALUE", // required
+ *     VersionId: "STRING_VALUE",
+ *   },
+ *   PipelineDescription: "STRING_VALUE",
+ *   RoleArn: "STRING_VALUE",
+ *   ParallelismConfiguration: { // ParallelismConfiguration
+ *     MaxParallelExecutionSteps: Number("int"), // required
+ *   },
+ *   PipelineVersionAliases: [ // PipelineVersionAliasList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UpdatePipelineCommand(input);
  * const response = await client.send(command);
+ * // { // UpdatePipelineResponse
+ * //   PipelineArn: "STRING_VALUE",
+ * //   PipelineVersionId: Number("long"),
+ * // };
+ *
  * ```
  *
+ * @param UpdatePipelineCommandInput - {@link UpdatePipelineCommandInput}
+ * @returns {@link UpdatePipelineCommandOutput}
  * @see {@link UpdatePipelineCommandInput} for command's `input` shape.
  * @see {@link UpdatePipelineCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when you attempted to modify a SageMaker entity such as an <code>Experiment</code> or <code>Artifact</code>.</p>
+ *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class UpdatePipelineCommand extends $Command<
-  UpdatePipelineCommandInput,
-  UpdatePipelineCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdatePipelineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdatePipelineCommandInput, UpdatePipelineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "UpdatePipelineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdatePipelineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdatePipelineResponse.filterSensitiveLog,
+export class UpdatePipelineCommand extends command<UpdatePipelineCommandInput, UpdatePipelineCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdatePipeline",
+  UpdatePipeline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePipelineRequest;
+      output: UpdatePipelineResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdatePipelineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdatePipelineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdatePipelineCommandOutput> {
-    return deserializeAws_json1_1UpdatePipelineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdatePipelineCommandInput;
+      output: UpdatePipelineCommandOutput;
+    };
+  };
 }

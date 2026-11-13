@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LexModelsV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LexModelsV2Client";
-import { DescribeResourcePolicyRequest, DescribeResourcePolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeResourcePolicyCommand,
-  serializeAws_restJson1DescribeResourcePolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeResourcePolicyRequest, DescribeResourcePolicyResponse } from "../models/models_0";
+import { DescribeResourcePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeResourcePolicyCommand}.
+ */
 export interface DescribeResourcePolicyCommandInput extends DescribeResourcePolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeResourcePolicyCommand}.
+ */
 export interface DescribeResourcePolicyCommandOutput extends DescribeResourcePolicyResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface DescribeResourcePolicyCommandOutput extends DescribeResourcePol
  * ```javascript
  * import { LexModelsV2Client, DescribeResourcePolicyCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
  * // const { LexModelsV2Client, DescribeResourcePolicyCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
  * const client = new LexModelsV2Client(config);
+ * const input = { // DescribeResourcePolicyRequest
+ *   resourceArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeResourcePolicyCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeResourcePolicyResponse
+ * //   resourceArn: "STRING_VALUE",
+ * //   policy: "STRING_VALUE",
+ * //   revisionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeResourcePolicyCommandInput - {@link DescribeResourcePolicyCommandInput}
+ * @returns {@link DescribeResourcePolicyCommandOutput}
  * @see {@link DescribeResourcePolicyCommandInput} for command's `input` shape.
  * @see {@link DescribeResourcePolicyCommandOutput} for command's `response` shape.
- * @see {@link LexModelsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>You asked to describe a resource that doesn't exist. Check the
+ *          resource that you are requesting and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeResourcePolicyCommand extends $Command<
-  DescribeResourcePolicyCommandInput,
-  DescribeResourcePolicyCommandOutput,
-  LexModelsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeResourcePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeResourcePolicyCommandInput, DescribeResourcePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelsV2Client";
-    const commandName = "DescribeResourcePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeResourcePolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeResourcePolicyResponse.filterSensitiveLog,
+export class DescribeResourcePolicyCommand extends command<DescribeResourcePolicyCommandInput, DescribeResourcePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeResourcePolicy",
+  DescribeResourcePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeResourcePolicyRequest;
+      output: DescribeResourcePolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeResourcePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeResourcePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeResourcePolicyCommandOutput> {
-    return deserializeAws_restJson1DescribeResourcePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeResourcePolicyCommandInput;
+      output: DescribeResourcePolicyCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { ListAnalyzersRequest, ListAnalyzersResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAnalyzersCommand,
-  serializeAws_restJson1ListAnalyzersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAnalyzersRequest, ListAnalyzersResponse } from "../models/models_0";
+import { ListAnalyzers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAnalyzersCommand}.
+ */
 export interface ListAnalyzersCommandInput extends ListAnalyzersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAnalyzersCommand}.
+ */
 export interface ListAnalyzersCommandOutput extends ListAnalyzersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,115 @@ export interface ListAnalyzersCommandOutput extends ListAnalyzersResponse, __Met
  * ```javascript
  * import { AccessAnalyzerClient, ListAnalyzersCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, ListAnalyzersCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // ListAnalyzersRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   type: "STRING_VALUE",
+ * };
  * const command = new ListAnalyzersCommand(input);
  * const response = await client.send(command);
+ * // { // ListAnalyzersResponse
+ * //   analyzers: [ // AnalyzersList // required
+ * //     { // AnalyzerSummary
+ * //       arn: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       type: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       lastResourceAnalyzed: "STRING_VALUE",
+ * //       lastResourceAnalyzedAt: new Date("TIMESTAMP"),
+ * //       tags: { // TagsMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       status: "STRING_VALUE", // required
+ * //       statusReason: { // StatusReason
+ * //         code: "STRING_VALUE", // required
+ * //       },
+ * //       configuration: { // AnalyzerConfiguration Union: only one key present
+ * //         unusedAccess: { // UnusedAccessConfiguration
+ * //           unusedAccessAge: Number("int"),
+ * //           analysisRule: { // AnalysisRule
+ * //             exclusions: [ // AnalysisRuleCriteriaList
+ * //               { // AnalysisRuleCriteria
+ * //                 accountIds: [ // AccountIdsList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 resourceTags: [ // TagsList
+ * //                   {
+ * //                     "<keys>": "STRING_VALUE",
+ * //                   },
+ * //                 ],
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //         internalAccess: { // InternalAccessConfiguration
+ * //           analysisRule: { // InternalAccessAnalysisRule
+ * //             inclusions: [ // InternalAccessAnalysisRuleCriteriaList
+ * //               { // InternalAccessAnalysisRuleCriteria
+ * //                 accountIds: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 resourceTypes: [ // ResourceTypeList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 resourceArns: [ // ResourceArnsList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //       managedBy: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAnalyzersCommandInput - {@link ListAnalyzersCommandInput}
+ * @returns {@link ListAnalyzersCommandOutput}
  * @see {@link ListAnalyzersCommandInput} for command's `input` shape.
  * @see {@link ListAnalyzersCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class ListAnalyzersCommand extends $Command<
-  ListAnalyzersCommandInput,
-  ListAnalyzersCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAnalyzersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAnalyzersCommandInput, ListAnalyzersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "ListAnalyzersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAnalyzersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAnalyzersResponse.filterSensitiveLog,
+export class ListAnalyzersCommand extends command<ListAnalyzersCommandInput, ListAnalyzersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAnalyzers",
+  ListAnalyzers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAnalyzersRequest;
+      output: ListAnalyzersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAnalyzersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAnalyzersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAnalyzersCommandOutput> {
-    return deserializeAws_restJson1ListAnalyzersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAnalyzersCommandInput;
+      output: ListAnalyzersCommandOutput;
+    };
+  };
 }

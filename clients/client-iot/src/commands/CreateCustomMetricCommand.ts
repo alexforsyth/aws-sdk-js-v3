@@ -1,28 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { CreateCustomMetricRequest, CreateCustomMetricResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateCustomMetricCommand,
-  serializeAws_restJson1CreateCustomMetricCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateCustomMetricRequest, CreateCustomMetricResponse } from "../models/models_0";
+import { CreateCustomMetric$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateCustomMetricCommand}.
+ */
 export interface CreateCustomMetricCommandInput extends CreateCustomMetricRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateCustomMetricCommand}.
+ */
 export interface CreateCustomMetricCommandOutput extends CreateCustomMetricResponse, __MetadataBearer {}
 
 /**
- * <p> Use this API to define a
+ * <note>
+ *             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+ *          </note>
+ *          <p> Use this API to define a
  *       Custom
  *       Metric
  *       published by your devices to Device Defender. </p>
@@ -32,68 +36,72 @@ export interface CreateCustomMetricCommandOutput extends CreateCustomMetricRespo
  * ```javascript
  * import { IoTClient, CreateCustomMetricCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, CreateCustomMetricCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // CreateCustomMetricRequest
+ *   metricName: "STRING_VALUE", // required
+ *   displayName: "STRING_VALUE",
+ *   metricType: "string-list" || "ip-address-list" || "number-list" || "number", // required
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   clientRequestToken: "STRING_VALUE", // required
+ * };
  * const command = new CreateCustomMetricCommand(input);
  * const response = await client.send(command);
+ * // { // CreateCustomMetricResponse
+ * //   metricName: "STRING_VALUE",
+ * //   metricArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateCustomMetricCommandInput - {@link CreateCustomMetricCommandInput}
+ * @returns {@link CreateCustomMetricCommandOutput}
  * @see {@link CreateCustomMetricCommandInput} for command's `input` shape.
  * @see {@link CreateCustomMetricCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class CreateCustomMetricCommand extends $Command<
-  CreateCustomMetricCommandInput,
-  CreateCustomMetricCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateCustomMetricCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateCustomMetricCommandInput, CreateCustomMetricCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "CreateCustomMetricCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateCustomMetricRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateCustomMetricResponse.filterSensitiveLog,
+export class CreateCustomMetricCommand extends command<CreateCustomMetricCommandInput, CreateCustomMetricCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateCustomMetric",
+  CreateCustomMetric$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCustomMetricRequest;
+      output: CreateCustomMetricResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateCustomMetricCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateCustomMetricCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateCustomMetricCommandOutput> {
-    return deserializeAws_restJson1CreateCustomMetricCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateCustomMetricCommandInput;
+      output: CreateCustomMetricCommandOutput;
+    };
+  };
 }

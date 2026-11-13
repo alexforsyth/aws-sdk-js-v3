@@ -1,22 +1,11 @@
 /*
- * Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
  */
-
 package software.amazon.smithy.aws.typescript.codegen;
 
-import static software.amazon.smithy.typescript.codegen.TypeScriptDependency.DEV_DEPENDENCY;
 import static software.amazon.smithy.typescript.codegen.TypeScriptDependency.NORMAL_DEPENDENCY;
+import static software.amazon.smithy.typescript.codegen.TypeScriptDependency.PEER_DEPENDENCY;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -26,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import software.amazon.smithy.codegen.core.SymbolDependency;
-import software.amazon.smithy.codegen.core.SymbolDependencyContainer;
+import software.amazon.smithy.typescript.codegen.Dependency;
 import software.amazon.smithy.utils.IoUtils;
 import software.amazon.smithy.utils.SmithyInternalApi;
 
@@ -35,42 +24,137 @@ import software.amazon.smithy.utils.SmithyInternalApi;
  * this package.
  */
 @SmithyInternalApi
-public enum AwsDependency implements SymbolDependencyContainer {
+public enum AwsDependency implements Dependency {
 
+    AWS_SDK_CORE(NORMAL_DEPENDENCY, "@aws-sdk/core"),
     MIDDLEWARE_SIGNING(NORMAL_DEPENDENCY, "@aws-sdk/middleware-signing"),
+    MIDDLEWARE_TOKEN(NORMAL_DEPENDENCY, "@aws-sdk/middleware-token"),
     CREDENTIAL_PROVIDER_NODE(NORMAL_DEPENDENCY, "@aws-sdk/credential-provider-node"),
     ACCEPT_HEADER(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-api-gateway"),
     S3_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-s3"),
-    ADD_EXPECT_CONTINUE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-expect-continue"),
     GLACIER_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-glacier"),
     MACHINELEARNING_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-machinelearning"),
-    S3_CONTROL_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-s3-control"),
-    SSEC_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-ssec"),
     RDS_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-rds"),
-    LOCATION_CONSTRAINT(NORMAL_DEPENDENCY, "@aws-sdk/middleware-location-constraint"),
     ROUTE53_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-route53"),
     EC2_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-ec2"),
-    BUCKET_ENDPOINT_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-bucket-endpoint"),
-    MIDDLEWARE_HOST_HEADER(NORMAL_DEPENDENCY, "@aws-sdk/middleware-host-header"),
     SQS_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-sqs"),
     BODY_CHECKSUM_GENERATOR_BROWSER(NORMAL_DEPENDENCY, "@aws-sdk/body-checksum-browser"),
     BODY_CHECKSUM_GENERATOR_NODE(NORMAL_DEPENDENCY, "@aws-sdk/body-checksum-node"),
     XML_BUILDER(NORMAL_DEPENDENCY, "@aws-sdk/xml-builder"),
-    XML_PARSER(NORMAL_DEPENDENCY, "fast-xml-parser", "3.19.0"),
-    HTML_ENTITIES(NORMAL_DEPENDENCY, "entities", "2.2.0"),
-    UUID_GENERATOR(NORMAL_DEPENDENCY, "uuid", "^8.3.2"),
-    UUID_GENERATOR_TYPES(DEV_DEPENDENCY, "@types/uuid", "^8.3.0"),
     MIDDLEWARE_EVENTSTREAM(NORMAL_DEPENDENCY, "@aws-sdk/middleware-eventstream"),
     AWS_SDK_EVENTSTREAM_HANDLER_NODE(NORMAL_DEPENDENCY, "@aws-sdk/eventstream-handler-node"),
     TRANSCRIBE_STREAMING_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-transcribe-streaming"),
     STS_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-sts"),
     STS_CLIENT(NORMAL_DEPENDENCY, "@aws-sdk/client-sts"),
-    NODE_CONFIG_PROVIDER(NORMAL_DEPENDENCY, "@aws-sdk/node-config-provider"),
+    STS_CLIENT_PEER(PEER_DEPENDENCY, "@aws-sdk/client-sts"),
+    SSO_OIDC_CLIENT(NORMAL_DEPENDENCY, "@aws-sdk/client-sso-oidc"),
+    MIDDLEWARE_ENDPOINT_DISCOVERY(NORMAL_DEPENDENCY, "@aws-sdk/middleware-endpoint-discovery"),
+    /**
+     * @deprecated use {@code @aws-sdk/checksums/sha} via {@link AwsSdkChecksumsSubmodules#SHA}.
+     */
+    @Deprecated
+    AWS_CRYPTO_SHA1_BROWSER(NORMAL_DEPENDENCY, "@aws-crypto/sha1-browser", "5.2.0"),
+    SIGNATURE_V4_MULTIREGION(NORMAL_DEPENDENCY, "@aws-sdk/signature-v4-multi-region"),
+    MIDDLEWARE_WEBSOCKET(NORMAL_DEPENDENCY, "@aws-sdk/middleware-websocket"),
+    FLEXIBLE_CHECKSUMS_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/checksums"),
+
+    // Conditionally added when auth trait is present
+    MIDDLEWARE_API_KEY(NORMAL_DEPENDENCY, "@aws-sdk/middleware-api-key"),
+
+    // Conditionally added when @httpBearerAuth is used in an AWS service
+    TOKEN_PROVIDERS(NORMAL_DEPENDENCY, "@aws-sdk/token-providers"),
+    TYPES(NORMAL_DEPENDENCY, "@aws-sdk/types"),
+
+    CLIENT_DYNAMODB_PEER(PEER_DEPENDENCY, "@aws-sdk/client-dynamodb", "^3.0.0"),
+    UTIL_DYNAMODB(NORMAL_DEPENDENCY, "@aws-sdk/util-dynamodb", "*"),
+    DYNAMODB_CODEC(NORMAL_DEPENDENCY, "@aws-sdk/dynamodb-codec"),
+
+    // Deprecated: migrated into @aws-sdk/middleware-sdk-s3 submodules.
+    /**
+     * @deprecated use {@code @aws-sdk/middleware-sdk-s3/s3} via {@link AwsSdkS3Submodules#S3}.
+     */
+    @Deprecated
+    ADD_EXPECT_CONTINUE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-expect-continue"),
+    /**
+     * @deprecated use {@code @aws-sdk/middleware-sdk-s3/s3-control} via {@link AwsSdkS3Submodules#S3_CONTROL}.
+     */
+    @Deprecated
+    S3_CONTROL_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-sdk-s3-control"),
+    /**
+     * @deprecated use {@code @aws-sdk/middleware-sdk-s3/s3} via {@link AwsSdkS3Submodules#S3}.
+     */
+    @Deprecated
+    SSEC_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-ssec"),
+    /**
+     * @deprecated use {@code @aws-sdk/middleware-sdk-s3/s3} via {@link AwsSdkS3Submodules#S3}.
+     */
+    @Deprecated
+    LOCATION_CONSTRAINT(NORMAL_DEPENDENCY, "@aws-sdk/middleware-location-constraint"),
+    /**
+     * @deprecated use {@code @aws-sdk/middleware-sdk-s3/s3} via {@link AwsSdkS3Submodules#S3}.
+     */
+    @Deprecated
+    BUCKET_ENDPOINT_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-bucket-endpoint"),
+
+    // Deprecated: other.
+    /**
+     * @deprecated use SmithyDependency.UUID.
+     */
+    @Deprecated
+    UUID_GENERATOR(NORMAL_DEPENDENCY, "uuid", "^9.0.1"),
+    /**
+     * @deprecated use SmithyDependency.UUID_TYPES.
+     */
+    @Deprecated
+    UUID_GENERATOR_TYPES(NORMAL_DEPENDENCY, "@types/uuid", "^9.0.1"),
+    @Deprecated
+    MD5_BROWSER(NORMAL_DEPENDENCY, "@aws-sdk/md5-js", "3.374.0"),
+    @Deprecated
+    STREAM_HASHER_NODE(NORMAL_DEPENDENCY, "@aws-sdk/hash-stream-node", "3.374.0"),
+    @Deprecated
+    STREAM_HASHER_BROWSER(NORMAL_DEPENDENCY, "@aws-sdk/hash-blob-browser", "3.374.0"),
+
+    // Deprecated: migrated into @aws-sdk/core/client.
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
+    MIDDLEWARE_HOST_HEADER(NORMAL_DEPENDENCY, "@aws-sdk/middleware-host-header"),
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
     MIDDLEWARE_LOGGER(NORMAL_DEPENDENCY, "@aws-sdk/middleware-logger"),
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
+    RECURSION_DETECTION_MIDDLEWARE(NORMAL_DEPENDENCY, "@aws-sdk/middleware-recursion-detection"),
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
     MIDDLEWARE_USER_AGENT("dependencies", "@aws-sdk/middleware-user-agent"),
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
     AWS_SDK_UTIL_USER_AGENT_BROWSER(NORMAL_DEPENDENCY, "@aws-sdk/util-user-agent-browser"),
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
     AWS_SDK_UTIL_USER_AGENT_NODE(NORMAL_DEPENDENCY, "@aws-sdk/util-user-agent-node"),
-    MIDDLEWARE_ENDPOINT_DISCOVERY(NORMAL_DEPENDENCY, "@aws-sdk/middleware-endpoint-discovery");
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
+    UTIL_ENDPOINTS(NORMAL_DEPENDENCY, "@aws-sdk/util-endpoints"),
+    /**
+     * @deprecated use {@code @aws-sdk/core/client} via {@link AwsSdkCoreSubmodules#CLIENT}.
+     */
+    @Deprecated
+    REGION_CONFIG_RESOLVER(NORMAL_DEPENDENCY, "@aws-sdk/region-config-resolver");
 
     public final String packageName;
     public final String version;
@@ -86,10 +170,14 @@ public enum AwsDependency implements SymbolDependencyContainer {
         this.version = version;
     }
 
-
     @Override
     public List<SymbolDependency> getDependencies() {
         return Collections.singletonList(dependency);
+    }
+
+    @Override
+    public String getPackageName() {
+        return this.packageName;
     }
 
     private static final class SdkVersion {
@@ -97,7 +185,7 @@ public enum AwsDependency implements SymbolDependencyContainer {
 
         static {
             String rawProperties =
-                    IoUtils.readUtf8Url(AwsDependency.class.getResource("sdkVersions.properties")).trim();
+                IoUtils.readUtf8Url(AwsDependency.class.getResource("sdkVersions.properties")).trim();
             Properties p = new Properties();
             try {
                 p.load(new StringReader(rawProperties));
@@ -118,8 +206,13 @@ public enum AwsDependency implements SymbolDependencyContainer {
             if (!VERSIONS.containsKey(packageName)) {
                 throw new IllegalArgumentException("No version for " + packageName);
             }
-            return VERSIONS.get(packageName);
+            String version = VERSIONS.get(packageName);
+            if (packageName.startsWith("@smithy/") || packageName.startsWith("@aws-sdk/")) {
+                if (!version.startsWith("^") && version.matches("^\\d+\\.\\d+\\.\\d+$")) {
+                    version = "^" + version;
+                }
+            }
+            return version;
         }
     }
 }
-

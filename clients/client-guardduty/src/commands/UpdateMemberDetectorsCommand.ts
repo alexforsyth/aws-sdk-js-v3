@@ -1,95 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { UpdateMemberDetectorsRequest, UpdateMemberDetectorsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateMemberDetectorsCommand,
-  serializeAws_restJson1UpdateMemberDetectorsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMemberDetectorsRequest, UpdateMemberDetectorsResponse } from "../models/models_1";
+import { UpdateMemberDetectors$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMemberDetectorsCommand}.
+ */
 export interface UpdateMemberDetectorsCommandInput extends UpdateMemberDetectorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMemberDetectorsCommand}.
+ */
 export interface UpdateMemberDetectorsCommandOutput extends UpdateMemberDetectorsResponse, __MetadataBearer {}
 
 /**
- * <p>Contains information on member accounts to be updated.</p>
+ * <p>Contains information on member accounts to be updated.</p> <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>) and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html">Runtime Monitoring</a>.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GuardDutyClient, UpdateMemberDetectorsCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, UpdateMemberDetectorsCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // UpdateMemberDetectorsRequest
+ *   DetectorId: "STRING_VALUE", // required
+ *   AccountIds: [ // AccountIds // required
+ *     "STRING_VALUE",
+ *   ],
+ *   DataSources: { // DataSourceConfigurations
+ *     S3Logs: { // S3LogsConfiguration
+ *       Enable: true || false, // required
+ *     },
+ *     Kubernetes: { // KubernetesConfiguration
+ *       AuditLogs: { // KubernetesAuditLogsConfiguration
+ *         Enable: true || false, // required
+ *       },
+ *     },
+ *     MalwareProtection: { // MalwareProtectionConfiguration
+ *       ScanEc2InstanceWithFindings: { // ScanEc2InstanceWithFindings
+ *         EbsVolumes: true || false,
+ *       },
+ *     },
+ *   },
+ *   Features: [ // MemberFeaturesConfigurations
+ *     { // MemberFeaturesConfiguration
+ *       Name: "S3_DATA_EVENTS" || "EKS_AUDIT_LOGS" || "EBS_MALWARE_PROTECTION" || "RDS_LOGIN_EVENTS" || "LAMBDA_NETWORK_LOGS" || "EKS_RUNTIME_MONITORING" || "RUNTIME_MONITORING" || "AI_PROTECTION",
+ *       Status: "ENABLED" || "DISABLED",
+ *       AdditionalConfiguration: [ // MemberAdditionalConfigurations
+ *         { // MemberAdditionalConfiguration
+ *           Name: "EKS_ADDON_MANAGEMENT" || "ECS_FARGATE_AGENT_MANAGEMENT" || "EC2_AGENT_MANAGEMENT" || "RDS_DATA_RISK",
+ *           Status: "ENABLED" || "DISABLED",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new UpdateMemberDetectorsCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateMemberDetectorsResponse
+ * //   UnprocessedAccounts: [ // UnprocessedAccounts // required
+ * //     { // UnprocessedAccount
+ * //       AccountId: "STRING_VALUE", // required
+ * //       Result: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdateMemberDetectorsCommandInput - {@link UpdateMemberDetectorsCommandInput}
+ * @returns {@link UpdateMemberDetectorsCommandOutput}
  * @see {@link UpdateMemberDetectorsCommandInput} for command's `input` shape.
  * @see {@link UpdateMemberDetectorsCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateMemberDetectorsCommand extends $Command<
-  UpdateMemberDetectorsCommandInput,
-  UpdateMemberDetectorsCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateMemberDetectorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateMemberDetectorsCommandInput, UpdateMemberDetectorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "UpdateMemberDetectorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateMemberDetectorsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateMemberDetectorsResponse.filterSensitiveLog,
+export class UpdateMemberDetectorsCommand extends command<UpdateMemberDetectorsCommandInput, UpdateMemberDetectorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMemberDetectors",
+  UpdateMemberDetectors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMemberDetectorsRequest;
+      output: UpdateMemberDetectorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateMemberDetectorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateMemberDetectorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateMemberDetectorsCommandOutput> {
-    return deserializeAws_restJson1UpdateMemberDetectorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateMemberDetectorsCommandInput;
+      output: UpdateMemberDetectorsCommandOutput;
+    };
+  };
 }

@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteTransitGatewayPrefixListReferenceRequest,
   DeleteTransitGatewayPrefixListReferenceResult,
-} from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTransitGatewayPrefixListReferenceCommand,
-  serializeAws_ec2DeleteTransitGatewayPrefixListReferenceCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_3";
+import { DeleteTransitGatewayPrefixListReference$ } from "../schemas/schemas_0";
 
-export interface DeleteTransitGatewayPrefixListReferenceCommandInput
-  extends DeleteTransitGatewayPrefixListReferenceRequest {}
-export interface DeleteTransitGatewayPrefixListReferenceCommandOutput
-  extends DeleteTransitGatewayPrefixListReferenceResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayPrefixListReferenceCommand}.
+ */
+export interface DeleteTransitGatewayPrefixListReferenceCommandInput extends DeleteTransitGatewayPrefixListReferenceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayPrefixListReferenceCommand}.
+ */
+export interface DeleteTransitGatewayPrefixListReferenceCommandOutput extends DeleteTransitGatewayPrefixListReferenceResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a reference (route) to a prefix list in a specified transit gateway route table.</p>
@@ -34,77 +32,60 @@ export interface DeleteTransitGatewayPrefixListReferenceCommandOutput
  * ```javascript
  * import { EC2Client, DeleteTransitGatewayPrefixListReferenceCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTransitGatewayPrefixListReferenceCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayPrefixListReferenceRequest
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   PrefixListId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTransitGatewayPrefixListReferenceCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTransitGatewayPrefixListReferenceResult
+ * //   TransitGatewayPrefixListReference: { // TransitGatewayPrefixListReference
+ * //     TransitGatewayRouteTableId: "STRING_VALUE",
+ * //     PrefixListId: "STRING_VALUE",
+ * //     PrefixListOwnerId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "modifying" || "deleting",
+ * //     Blackhole: true || false,
+ * //     TransitGatewayAttachment: { // TransitGatewayPrefixListAttachment
+ * //       TransitGatewayAttachmentId: "STRING_VALUE",
+ * //       ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //       ResourceId: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteTransitGatewayPrefixListReferenceCommandInput - {@link DeleteTransitGatewayPrefixListReferenceCommandInput}
+ * @returns {@link DeleteTransitGatewayPrefixListReferenceCommandOutput}
  * @see {@link DeleteTransitGatewayPrefixListReferenceCommandInput} for command's `input` shape.
  * @see {@link DeleteTransitGatewayPrefixListReferenceCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTransitGatewayPrefixListReferenceCommand extends $Command<
-  DeleteTransitGatewayPrefixListReferenceCommandInput,
-  DeleteTransitGatewayPrefixListReferenceCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTransitGatewayPrefixListReferenceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DeleteTransitGatewayPrefixListReferenceCommandInput,
-    DeleteTransitGatewayPrefixListReferenceCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTransitGatewayPrefixListReferenceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTransitGatewayPrefixListReferenceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTransitGatewayPrefixListReferenceResult.filterSensitiveLog,
+export class DeleteTransitGatewayPrefixListReferenceCommand extends command<DeleteTransitGatewayPrefixListReferenceCommandInput, DeleteTransitGatewayPrefixListReferenceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGatewayPrefixListReference",
+  DeleteTransitGatewayPrefixListReference$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayPrefixListReferenceRequest;
+      output: DeleteTransitGatewayPrefixListReferenceResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteTransitGatewayPrefixListReferenceCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTransitGatewayPrefixListReferenceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTransitGatewayPrefixListReferenceCommandOutput> {
-    return deserializeAws_ec2DeleteTransitGatewayPrefixListReferenceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTransitGatewayPrefixListReferenceCommandInput;
+      output: DeleteTransitGatewayPrefixListReferenceCommandOutput;
+    };
+  };
 }

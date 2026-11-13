@@ -1,0 +1,76 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { MalformedLongInput } from "../models/models_0";
+import { MalformedLong$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MalformedLongCommand}.
+ */
+export interface MalformedLongCommandInput extends MalformedLongInput {}
+/**
+ * @public
+ *
+ * The output of {@link MalformedLongCommand}.
+ */
+export interface MalformedLongCommandOutput extends __MetadataBearer {}
+
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, MalformedLongCommand } from "@aws-sdk/aws-protocoltests-restjson-schema"; // ES Modules import
+ * // const { RestJsonProtocolClient, MalformedLongCommand } = require("@aws-sdk/aws-protocoltests-restjson-schema"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson-schema";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // MalformedLongInput
+ *   longInBody: Number("long"),
+ *   longInPath: Number("long"), // required
+ *   longInQuery: Number("long"),
+ *   longInHeader: Number("long"),
+ * };
+ * const command = new MalformedLongCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param MalformedLongCommandInput - {@link MalformedLongCommandInput}
+ * @returns {@link MalformedLongCommandOutput}
+ * @see {@link MalformedLongCommandInput} for command's `input` shape.
+ * @see {@link MalformedLongCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class MalformedLongCommand extends command<MalformedLongCommandInput, MalformedLongCommandOutput>(
+  _ep0,
+  _mw0,
+  "MalformedLong",
+  MalformedLong$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MalformedLongInput;
+      output: {};
+    };
+    sdk: {
+      input: MalformedLongCommandInput;
+      output: MalformedLongCommandOutput;
+    };
+  };
+}

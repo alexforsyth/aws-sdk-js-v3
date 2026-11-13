@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { CreateMitigationActionRequest, CreateMitigationActionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateMitigationActionCommand,
-  serializeAws_restJson1CreateMitigationActionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateMitigationActionRequest, CreateMitigationActionResponse } from "../models/models_0";
+import { CreateMitigationAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateMitigationActionCommand}.
+ */
 export interface CreateMitigationActionCommandInput extends CreateMitigationActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateMitigationActionCommand}.
+ */
 export interface CreateMitigationActionCommandOutput extends CreateMitigationActionResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,94 @@ export interface CreateMitigationActionCommandOutput extends CreateMitigationAct
  * ```javascript
  * import { IoTClient, CreateMitigationActionCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, CreateMitigationActionCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // CreateMitigationActionRequest
+ *   actionName: "STRING_VALUE", // required
+ *   roleArn: "STRING_VALUE", // required
+ *   actionParams: { // MitigationActionParams
+ *     updateDeviceCertificateParams: { // UpdateDeviceCertificateParams
+ *       action: "DEACTIVATE", // required
+ *     },
+ *     updateCACertificateParams: { // UpdateCACertificateParams
+ *       action: "DEACTIVATE", // required
+ *     },
+ *     addThingsToThingGroupParams: { // AddThingsToThingGroupParams
+ *       thingGroupNames: [ // ThingGroupNames // required
+ *         "STRING_VALUE",
+ *       ],
+ *       overrideDynamicGroups: true || false,
+ *     },
+ *     replaceDefaultPolicyVersionParams: { // ReplaceDefaultPolicyVersionParams
+ *       templateName: "BLANK_POLICY", // required
+ *     },
+ *     enableIoTLoggingParams: { // EnableIoTLoggingParams
+ *       roleArnForLogging: "STRING_VALUE", // required
+ *       logLevel: "DEBUG" || "INFO" || "ERROR" || "WARN" || "DISABLED", // required
+ *     },
+ *     publishFindingToSnsParams: { // PublishFindingToSnsParams
+ *       topicArn: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateMitigationActionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateMitigationActionResponse
+ * //   actionArn: "STRING_VALUE",
+ * //   actionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateMitigationActionCommandInput - {@link CreateMitigationActionCommandInput}
+ * @returns {@link CreateMitigationActionCommandOutput}
  * @see {@link CreateMitigationActionCommandInput} for command's `input` shape.
  * @see {@link CreateMitigationActionCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class CreateMitigationActionCommand extends $Command<
-  CreateMitigationActionCommandInput,
-  CreateMitigationActionCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateMitigationActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateMitigationActionCommandInput, CreateMitigationActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "CreateMitigationActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateMitigationActionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateMitigationActionResponse.filterSensitiveLog,
+export class CreateMitigationActionCommand extends command<CreateMitigationActionCommandInput, CreateMitigationActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateMitigationAction",
+  CreateMitigationAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMitigationActionRequest;
+      output: CreateMitigationActionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateMitigationActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateMitigationActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateMitigationActionCommandOutput> {
-    return deserializeAws_restJson1CreateMitigationActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateMitigationActionCommandInput;
+      output: CreateMitigationActionCommandOutput;
+    };
+  };
 }

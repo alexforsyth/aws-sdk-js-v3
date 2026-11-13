@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListOperationsCommand,
   ListOperationsCommandInput,
   ListOperationsCommandOutput,
 } from "../commands/ListOperationsCommand";
-import { Route53Domains } from "../Route53Domains";
 import { Route53DomainsClient } from "../Route53DomainsClient";
-import { Route53DomainsPaginationConfiguration } from "./Interfaces";
+import type { Route53DomainsPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: Route53DomainsClient,
-  input: ListOperationsCommandInput,
-  ...args: any
-): Promise<ListOperationsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListOperationsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Route53Domains,
-  input: ListOperationsCommandInput,
-  ...args: any
-): Promise<ListOperationsCommandOutput> => {
-  // @ts-ignore
-  return await client.listOperations(input, ...args);
-};
-export async function* paginateListOperations(
+export const paginateListOperations: (
   config: Route53DomainsPaginationConfiguration,
   input: ListOperationsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListOperationsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListOperationsCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxItems"] = config.pageSize;
-    if (config.client instanceof Route53Domains) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof Route53DomainsClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Route53Domains | Route53DomainsClient");
-    }
-    yield page;
-    token = page.NextPageMarker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListOperationsCommandOutput> = createPaginator<
+  Route53DomainsPaginationConfiguration,
+  ListOperationsCommandInput,
+  ListOperationsCommandOutput
+>(Route53DomainsClient, ListOperationsCommand, "Marker", "NextPageMarker", "MaxItems");

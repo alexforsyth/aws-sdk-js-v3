@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { DescribeTrackerRequest, DescribeTrackerResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeTrackerCommand,
-  serializeAws_restJson1DescribeTrackerCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTrackerRequest, DescribeTrackerResponse } from "../models/models_0";
+import { DescribeTracker$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTrackerCommand}.
+ */
 export interface DescribeTrackerCommandInput extends DescribeTrackerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTrackerCommand}.
+ */
 export interface DescribeTrackerCommandOutput extends DescribeTrackerResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface DescribeTrackerCommandOutput extends DescribeTrackerResponse, _
  * ```javascript
  * import { LocationClient, DescribeTrackerCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, DescribeTrackerCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // DescribeTrackerRequest
+ *   TrackerName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeTrackerCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTrackerResponse
+ * //   TrackerName: "STRING_VALUE", // required
+ * //   TrackerArn: "STRING_VALUE", // required
+ * //   Description: "STRING_VALUE", // required
+ * //   PricingPlan: "STRING_VALUE",
+ * //   PricingPlanDataSource: "STRING_VALUE",
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   CreateTime: new Date("TIMESTAMP"), // required
+ * //   UpdateTime: new Date("TIMESTAMP"), // required
+ * //   KmsKeyId: "STRING_VALUE",
+ * //   PositionFiltering: "STRING_VALUE",
+ * //   EventBridgeEnabled: true || false,
+ * //   KmsKeyEnableGeospatialQueries: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DescribeTrackerCommandInput - {@link DescribeTrackerCommandInput}
+ * @returns {@link DescribeTrackerCommandOutput}
  * @see {@link DescribeTrackerCommandInput} for command's `input` shape.
  * @see {@link DescribeTrackerCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource that you've entered was not found in your AWS account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTrackerCommand extends $Command<
-  DescribeTrackerCommandInput,
-  DescribeTrackerCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTrackerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTrackerCommandInput, DescribeTrackerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "DescribeTrackerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTrackerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTrackerResponse.filterSensitiveLog,
+export class DescribeTrackerCommand extends command<DescribeTrackerCommandInput, DescribeTrackerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTracker",
+  DescribeTracker$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTrackerRequest;
+      output: DescribeTrackerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTrackerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeTrackerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTrackerCommandOutput> {
-    return deserializeAws_restJson1DescribeTrackerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTrackerCommandInput;
+      output: DescribeTrackerCommandOutput;
+    };
+  };
 }

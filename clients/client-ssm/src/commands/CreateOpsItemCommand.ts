@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateOpsItemRequest, CreateOpsItemResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateOpsItemCommand,
-  serializeAws_json1_1CreateOpsItemCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateOpsItemRequest, CreateOpsItemResponse } from "../models/models_0";
+import { CreateOpsItem$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateOpsItemCommand}.
+ */
 export interface CreateOpsItemCommandInput extends CreateOpsItemRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateOpsItemCommand}.
+ */
 export interface CreateOpsItemCommandOutput extends CreateOpsItemResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html">Getting started with
- *     OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+ * <p>Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html">Set up OpsCenter</a> in the
+ *     <i>Amazon Web Services Systems Manager User Guide</i>.</p>
  *          <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and
  *    remediate operational issues impacting the performance and health of their Amazon Web Services resources. For
  *    more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">Amazon Web Services Systems Manager OpsCenter</a> in the
@@ -33,68 +34,99 @@ export interface CreateOpsItemCommandOutput extends CreateOpsItemResponse, __Met
  * ```javascript
  * import { SSMClient, CreateOpsItemCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, CreateOpsItemCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // CreateOpsItemRequest
+ *   Description: "STRING_VALUE", // required
+ *   OpsItemType: "STRING_VALUE",
+ *   OperationalData: { // OpsItemOperationalData
+ *     "<keys>": { // OpsItemDataValue
+ *       Value: "STRING_VALUE",
+ *       Type: "SearchableString" || "String",
+ *     },
+ *   },
+ *   Notifications: [ // OpsItemNotifications
+ *     { // OpsItemNotification
+ *       Arn: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Priority: Number("int"),
+ *   RelatedOpsItems: [ // RelatedOpsItems
+ *     { // RelatedOpsItem
+ *       OpsItemId: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   Source: "STRING_VALUE", // required
+ *   Title: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   Category: "STRING_VALUE",
+ *   Severity: "STRING_VALUE",
+ *   ActualStartTime: new Date("TIMESTAMP"),
+ *   ActualEndTime: new Date("TIMESTAMP"),
+ *   PlannedStartTime: new Date("TIMESTAMP"),
+ *   PlannedEndTime: new Date("TIMESTAMP"),
+ *   AccountId: "STRING_VALUE",
+ * };
  * const command = new CreateOpsItemCommand(input);
  * const response = await client.send(command);
+ * // { // CreateOpsItemResponse
+ * //   OpsItemId: "STRING_VALUE",
+ * //   OpsItemArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateOpsItemCommandInput - {@link CreateOpsItemCommandInput}
+ * @returns {@link CreateOpsItemCommandOutput}
  * @see {@link CreateOpsItemCommandInput} for command's `input` shape.
  * @see {@link CreateOpsItemCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link OpsItemAccessDeniedException} (client fault)
+ *  <p>You don't have permission to view OpsItems in the specified account. Verify that your account
+ *    is configured either as a Systems Manager delegated administrator or that you are logged into the Organizations
+ *    management account.</p>
+ *
+ * @throws {@link OpsItemAlreadyExistsException} (client fault)
+ *  <p>The OpsItem already exists.</p>
+ *
+ * @throws {@link OpsItemInvalidParameterException} (client fault)
+ *  <p>A specified parameter argument isn't valid. Verify the available arguments and try
+ *    again.</p>
+ *
+ * @throws {@link OpsItemLimitExceededException} (client fault)
+ *  <p>The request caused OpsItems to exceed one or more quotas.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class CreateOpsItemCommand extends $Command<
-  CreateOpsItemCommandInput,
-  CreateOpsItemCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateOpsItemCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateOpsItemCommandInput, CreateOpsItemCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "CreateOpsItemCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateOpsItemRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateOpsItemResponse.filterSensitiveLog,
+export class CreateOpsItemCommand extends command<CreateOpsItemCommandInput, CreateOpsItemCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateOpsItem",
+  CreateOpsItem$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateOpsItemRequest;
+      output: CreateOpsItemResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateOpsItemCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateOpsItemCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateOpsItemCommandOutput> {
-    return deserializeAws_json1_1CreateOpsItemCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateOpsItemCommandInput;
+      output: CreateOpsItemCommandOutput;
+    };
+  };
 }

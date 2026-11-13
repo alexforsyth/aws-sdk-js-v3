@@ -1,99 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteSecurityGroupRequest } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteSecurityGroupCommand,
-  serializeAws_ec2DeleteSecurityGroupCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSecurityGroupRequest, DeleteSecurityGroupResult } from "../models/models_3";
+import { DeleteSecurityGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSecurityGroupCommand}.
+ */
 export interface DeleteSecurityGroupCommandInput extends DeleteSecurityGroupRequest {}
-export interface DeleteSecurityGroupCommandOutput extends __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSecurityGroupCommand}.
+ */
+export interface DeleteSecurityGroupCommandOutput extends DeleteSecurityGroupResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a security group.</p>
- *          <p>If you attempt to delete a security group that is associated with an instance, or is
- * 			  referenced by another security group, the operation fails with
- * 				<code>InvalidGroup.InUse</code> in EC2-Classic or
- * 				<code>DependencyViolation</code> in EC2-VPC.</p>
+ *          <p>If you attempt to delete a security group that is associated with an instance or network interface, is
+ * 			  referenced by another security group in the same VPC, or has a VPC association, the operation fails with
+ * 				<code>DependencyViolation</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DeleteSecurityGroupCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteSecurityGroupCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteSecurityGroupRequest
+ *   GroupId: "STRING_VALUE",
+ *   GroupName: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteSecurityGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteSecurityGroupResult
+ * //   Return: true || false,
+ * //   GroupId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteSecurityGroupCommandInput - {@link DeleteSecurityGroupCommandInput}
+ * @returns {@link DeleteSecurityGroupCommandOutput}
  * @see {@link DeleteSecurityGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteSecurityGroupCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To delete a security group
+ * ```javascript
+ * // This example deletes the specified security group.
+ * const input = {
+ *   GroupId: "sg-903004f8"
+ * };
+ * const command = new DeleteSecurityGroupCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteSecurityGroupCommand extends $Command<
-  DeleteSecurityGroupCommandInput,
-  DeleteSecurityGroupCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSecurityGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSecurityGroupCommandInput, DeleteSecurityGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteSecurityGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSecurityGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteSecurityGroupCommand extends command<DeleteSecurityGroupCommandInput, DeleteSecurityGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSecurityGroup",
+  DeleteSecurityGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSecurityGroupRequest;
+      output: DeleteSecurityGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSecurityGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteSecurityGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSecurityGroupCommandOutput> {
-    return deserializeAws_ec2DeleteSecurityGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSecurityGroupCommandInput;
+      output: DeleteSecurityGroupCommandOutput;
+    };
+  };
 }

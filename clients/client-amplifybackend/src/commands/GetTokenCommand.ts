@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyBackendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyBackendClient";
-import { GetTokenRequest, GetTokenResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetTokenCommand,
-  serializeAws_restJson1GetTokenCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetTokenRequest, GetTokenResponse } from "../models/models_0";
+import { GetToken$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTokenCommand}.
+ */
 export interface GetTokenCommandInput extends GetTokenRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTokenCommand}.
+ */
 export interface GetTokenCommandOutput extends GetTokenResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface GetTokenCommandOutput extends GetTokenResponse, __MetadataBeare
  * ```javascript
  * import { AmplifyBackendClient, GetTokenCommand } from "@aws-sdk/client-amplifybackend"; // ES Modules import
  * // const { AmplifyBackendClient, GetTokenCommand } = require("@aws-sdk/client-amplifybackend"); // CommonJS import
+ * // import type { AmplifyBackendClientConfig } from "@aws-sdk/client-amplifybackend";
+ * const config = {}; // type is AmplifyBackendClientConfig
  * const client = new AmplifyBackendClient(config);
+ * const input = { // GetTokenRequest
+ *   AppId: "STRING_VALUE", // required
+ *   SessionId: "STRING_VALUE", // required
+ * };
  * const command = new GetTokenCommand(input);
  * const response = await client.send(command);
+ * // { // GetTokenResponse
+ * //   AppId: "STRING_VALUE",
+ * //   ChallengeCode: "STRING_VALUE",
+ * //   SessionId: "STRING_VALUE",
+ * //   Ttl: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetTokenCommandInput - {@link GetTokenCommandInput}
+ * @returns {@link GetTokenCommandOutput}
  * @see {@link GetTokenCommandInput} for command's `input` shape.
  * @see {@link GetTokenCommandOutput} for command's `response` shape.
- * @see {@link AmplifyBackendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmplifyBackendClientResolvedConfig | config} for AmplifyBackendClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>An error returned if a request is not formed properly.</p>
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  <p>An error returned if there's a temporary issue with the service.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An error returned when a specific resource type is not found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>An error that is returned when a limit of a specific type has been exceeded.</p>
+ *
+ * @throws {@link AmplifyBackendServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyBackend service.</p>
+ *
+ *
+ * @public
  */
-export class GetTokenCommand extends $Command<
-  GetTokenCommandInput,
-  GetTokenCommandOutput,
-  AmplifyBackendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTokenCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyBackendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTokenCommandInput, GetTokenCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyBackendClient";
-    const commandName = "GetTokenCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTokenRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetTokenResponse.filterSensitiveLog,
+export class GetTokenCommand extends command<GetTokenCommandInput, GetTokenCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetToken",
+  GetToken$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTokenRequest;
+      output: GetTokenResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetTokenCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetTokenCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetTokenCommandOutput> {
-    return deserializeAws_restJson1GetTokenCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTokenCommandInput;
+      output: GetTokenCommandOutput;
+    };
+  };
 }

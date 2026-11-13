@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RegisterDomainInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0RegisterDomainCommand,
-  serializeAws_json1_0RegisterDomainCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterDomainInput } from "../models/models_0";
+import { RegisterDomain$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterDomainCommand}.
+ */
 export interface RegisterDomainCommandInput extends RegisterDomainInput {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterDomainCommand}.
+ */
 export interface RegisterDomainCommandOutput extends __MetadataBearer {}
 
 /**
@@ -51,68 +52,65 @@ export interface RegisterDomainCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SWFClient, RegisterDomainCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, RegisterDomainCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // RegisterDomainInput
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   workflowExecutionRetentionPeriodInDays: "STRING_VALUE", // required
+ *   tags: [ // ResourceTagList
+ *     { // ResourceTag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new RegisterDomainCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RegisterDomainCommandInput - {@link RegisterDomainCommandInput}
+ * @returns {@link RegisterDomainCommandOutput}
  * @see {@link RegisterDomainCommandInput} for command's `input` shape.
  * @see {@link RegisterDomainCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link DomainAlreadyExistsFault} (client fault)
+ *  <p>Returned if the domain already exists. You may get this fault if you are registering a domain that is either already registered or deprecated, or if you undeprecate a domain that is currently registered.</p>
+ *
+ * @throws {@link LimitExceededFault} (client fault)
+ *  <p>Returned by any operation if a system imposed limitation has been reached. To address this fault you should either clean up unused resources or increase the limit by contacting AWS.</p>
+ *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link TooManyTagsFault} (client fault)
+ *  <p>You've exceeded the number of tags allowed for a domain.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterDomainCommand extends $Command<
-  RegisterDomainCommandInput,
-  RegisterDomainCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterDomainCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterDomainCommandInput, RegisterDomainCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "RegisterDomainCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterDomainInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RegisterDomainCommand extends command<RegisterDomainCommandInput, RegisterDomainCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterDomain",
+  RegisterDomain$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterDomainInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterDomainCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0RegisterDomainCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterDomainCommandOutput> {
-    return deserializeAws_json1_0RegisterDomainCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterDomainCommandInput;
+      output: RegisterDomainCommandOutput;
+    };
+  };
 }

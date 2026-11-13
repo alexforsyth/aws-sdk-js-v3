@@ -1,183 +1,1876 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type AcceptNetworkFirewallTransitGatewayAttachmentCommandInput,
+  type AcceptNetworkFirewallTransitGatewayAttachmentCommandOutput,
+  AcceptNetworkFirewallTransitGatewayAttachmentCommand,
+} from "./commands/AcceptNetworkFirewallTransitGatewayAttachmentCommand";
+import {
+  type AssociateAvailabilityZonesCommandInput,
+  type AssociateAvailabilityZonesCommandOutput,
+  AssociateAvailabilityZonesCommand,
+} from "./commands/AssociateAvailabilityZonesCommand";
+import {
+  type AssociateFirewallPolicyCommandInput,
+  type AssociateFirewallPolicyCommandOutput,
   AssociateFirewallPolicyCommand,
-  AssociateFirewallPolicyCommandInput,
-  AssociateFirewallPolicyCommandOutput,
 } from "./commands/AssociateFirewallPolicyCommand";
 import {
+  type AssociateSubnetsCommandInput,
+  type AssociateSubnetsCommandOutput,
   AssociateSubnetsCommand,
-  AssociateSubnetsCommandInput,
-  AssociateSubnetsCommandOutput,
 } from "./commands/AssociateSubnetsCommand";
 import {
+  type CreateContainerAssociationCommandInput,
+  type CreateContainerAssociationCommandOutput,
+  CreateContainerAssociationCommand,
+} from "./commands/CreateContainerAssociationCommand";
+import {
+  type CreateFirewallCommandInput,
+  type CreateFirewallCommandOutput,
   CreateFirewallCommand,
-  CreateFirewallCommandInput,
-  CreateFirewallCommandOutput,
 } from "./commands/CreateFirewallCommand";
 import {
+  type CreateFirewallPolicyCommandInput,
+  type CreateFirewallPolicyCommandOutput,
   CreateFirewallPolicyCommand,
-  CreateFirewallPolicyCommandInput,
-  CreateFirewallPolicyCommandOutput,
 } from "./commands/CreateFirewallPolicyCommand";
 import {
+  type CreateFirewallPolicyV2CommandInput,
+  type CreateFirewallPolicyV2CommandOutput,
+  CreateFirewallPolicyV2Command,
+} from "./commands/CreateFirewallPolicyV2Command";
+import {
+  type CreateRuleGroupCommandInput,
+  type CreateRuleGroupCommandOutput,
   CreateRuleGroupCommand,
-  CreateRuleGroupCommandInput,
-  CreateRuleGroupCommandOutput,
 } from "./commands/CreateRuleGroupCommand";
 import {
+  type CreateTLSInspectionConfigurationCommandInput,
+  type CreateTLSInspectionConfigurationCommandOutput,
+  CreateTLSInspectionConfigurationCommand,
+} from "./commands/CreateTLSInspectionConfigurationCommand";
+import {
+  type CreateVpcEndpointAssociationCommandInput,
+  type CreateVpcEndpointAssociationCommandOutput,
+  CreateVpcEndpointAssociationCommand,
+} from "./commands/CreateVpcEndpointAssociationCommand";
+import {
+  type DeleteContainerAssociationCommandInput,
+  type DeleteContainerAssociationCommandOutput,
+  DeleteContainerAssociationCommand,
+} from "./commands/DeleteContainerAssociationCommand";
+import {
+  type DeleteFirewallCommandInput,
+  type DeleteFirewallCommandOutput,
   DeleteFirewallCommand,
-  DeleteFirewallCommandInput,
-  DeleteFirewallCommandOutput,
 } from "./commands/DeleteFirewallCommand";
 import {
+  type DeleteFirewallPolicyCommandInput,
+  type DeleteFirewallPolicyCommandOutput,
   DeleteFirewallPolicyCommand,
-  DeleteFirewallPolicyCommandInput,
-  DeleteFirewallPolicyCommandOutput,
 } from "./commands/DeleteFirewallPolicyCommand";
 import {
+  type DeleteFirewallPolicyV2CommandInput,
+  type DeleteFirewallPolicyV2CommandOutput,
+  DeleteFirewallPolicyV2Command,
+} from "./commands/DeleteFirewallPolicyV2Command";
+import {
+  type DeleteNetworkFirewallTransitGatewayAttachmentCommandInput,
+  type DeleteNetworkFirewallTransitGatewayAttachmentCommandOutput,
+  DeleteNetworkFirewallTransitGatewayAttachmentCommand,
+} from "./commands/DeleteNetworkFirewallTransitGatewayAttachmentCommand";
+import {
+  type DeleteProxyCommandInput,
+  type DeleteProxyCommandOutput,
+  DeleteProxyCommand,
+} from "./commands/DeleteProxyCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
   DeleteResourcePolicyCommand,
-  DeleteResourcePolicyCommandInput,
-  DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
 import {
+  type DeleteRuleGroupCommandInput,
+  type DeleteRuleGroupCommandOutput,
   DeleteRuleGroupCommand,
-  DeleteRuleGroupCommandInput,
-  DeleteRuleGroupCommandOutput,
 } from "./commands/DeleteRuleGroupCommand";
 import {
+  type DeleteTLSInspectionConfigurationCommandInput,
+  type DeleteTLSInspectionConfigurationCommandOutput,
+  DeleteTLSInspectionConfigurationCommand,
+} from "./commands/DeleteTLSInspectionConfigurationCommand";
+import {
+  type DeleteVpcEndpointAssociationCommandInput,
+  type DeleteVpcEndpointAssociationCommandOutput,
+  DeleteVpcEndpointAssociationCommand,
+} from "./commands/DeleteVpcEndpointAssociationCommand";
+import {
+  type DescribeContainerAssociationCommandInput,
+  type DescribeContainerAssociationCommandOutput,
+  DescribeContainerAssociationCommand,
+} from "./commands/DescribeContainerAssociationCommand";
+import {
+  type DescribeFirewallCommandInput,
+  type DescribeFirewallCommandOutput,
   DescribeFirewallCommand,
-  DescribeFirewallCommandInput,
-  DescribeFirewallCommandOutput,
 } from "./commands/DescribeFirewallCommand";
 import {
+  type DescribeFirewallMetadataCommandInput,
+  type DescribeFirewallMetadataCommandOutput,
+  DescribeFirewallMetadataCommand,
+} from "./commands/DescribeFirewallMetadataCommand";
+import {
+  type DescribeFirewallPolicyCommandInput,
+  type DescribeFirewallPolicyCommandOutput,
   DescribeFirewallPolicyCommand,
-  DescribeFirewallPolicyCommandInput,
-  DescribeFirewallPolicyCommandOutput,
 } from "./commands/DescribeFirewallPolicyCommand";
 import {
+  type DescribeFirewallPolicyV2CommandInput,
+  type DescribeFirewallPolicyV2CommandOutput,
+  DescribeFirewallPolicyV2Command,
+} from "./commands/DescribeFirewallPolicyV2Command";
+import {
+  type DescribeFlowOperationCommandInput,
+  type DescribeFlowOperationCommandOutput,
+  DescribeFlowOperationCommand,
+} from "./commands/DescribeFlowOperationCommand";
+import {
+  type DescribeLoggingConfigurationCommandInput,
+  type DescribeLoggingConfigurationCommandOutput,
   DescribeLoggingConfigurationCommand,
-  DescribeLoggingConfigurationCommandInput,
-  DescribeLoggingConfigurationCommandOutput,
 } from "./commands/DescribeLoggingConfigurationCommand";
 import {
+  type DescribeProxyCommandInput,
+  type DescribeProxyCommandOutput,
+  DescribeProxyCommand,
+} from "./commands/DescribeProxyCommand";
+import {
+  type DescribeResourcePolicyCommandInput,
+  type DescribeResourcePolicyCommandOutput,
   DescribeResourcePolicyCommand,
-  DescribeResourcePolicyCommandInput,
-  DescribeResourcePolicyCommandOutput,
 } from "./commands/DescribeResourcePolicyCommand";
 import {
+  type DescribeRuleGroupCommandInput,
+  type DescribeRuleGroupCommandOutput,
   DescribeRuleGroupCommand,
-  DescribeRuleGroupCommandInput,
-  DescribeRuleGroupCommandOutput,
 } from "./commands/DescribeRuleGroupCommand";
 import {
+  type DescribeRuleGroupMetadataCommandInput,
+  type DescribeRuleGroupMetadataCommandOutput,
+  DescribeRuleGroupMetadataCommand,
+} from "./commands/DescribeRuleGroupMetadataCommand";
+import {
+  type DescribeRuleGroupSummaryCommandInput,
+  type DescribeRuleGroupSummaryCommandOutput,
+  DescribeRuleGroupSummaryCommand,
+} from "./commands/DescribeRuleGroupSummaryCommand";
+import {
+  type DescribeTLSInspectionConfigurationCommandInput,
+  type DescribeTLSInspectionConfigurationCommandOutput,
+  DescribeTLSInspectionConfigurationCommand,
+} from "./commands/DescribeTLSInspectionConfigurationCommand";
+import {
+  type DescribeVpcEndpointAssociationCommandInput,
+  type DescribeVpcEndpointAssociationCommandOutput,
+  DescribeVpcEndpointAssociationCommand,
+} from "./commands/DescribeVpcEndpointAssociationCommand";
+import {
+  type DisassociateAvailabilityZonesCommandInput,
+  type DisassociateAvailabilityZonesCommandOutput,
+  DisassociateAvailabilityZonesCommand,
+} from "./commands/DisassociateAvailabilityZonesCommand";
+import {
+  type DisassociateSubnetsCommandInput,
+  type DisassociateSubnetsCommandOutput,
   DisassociateSubnetsCommand,
-  DisassociateSubnetsCommandInput,
-  DisassociateSubnetsCommandOutput,
 } from "./commands/DisassociateSubnetsCommand";
 import {
+  type GetAnalysisReportResultsCommandInput,
+  type GetAnalysisReportResultsCommandOutput,
+  GetAnalysisReportResultsCommand,
+} from "./commands/GetAnalysisReportResultsCommand";
+import {
+  type ListAnalysisReportsCommandInput,
+  type ListAnalysisReportsCommandOutput,
+  ListAnalysisReportsCommand,
+} from "./commands/ListAnalysisReportsCommand";
+import {
+  type ListContainerAssociationsCommandInput,
+  type ListContainerAssociationsCommandOutput,
+  ListContainerAssociationsCommand,
+} from "./commands/ListContainerAssociationsCommand";
+import {
+  type ListFirewallPoliciesCommandInput,
+  type ListFirewallPoliciesCommandOutput,
   ListFirewallPoliciesCommand,
-  ListFirewallPoliciesCommandInput,
-  ListFirewallPoliciesCommandOutput,
 } from "./commands/ListFirewallPoliciesCommand";
 import {
+  type ListFirewallPoliciesV2CommandInput,
+  type ListFirewallPoliciesV2CommandOutput,
+  ListFirewallPoliciesV2Command,
+} from "./commands/ListFirewallPoliciesV2Command";
+import {
+  type ListFirewallsCommandInput,
+  type ListFirewallsCommandOutput,
   ListFirewallsCommand,
-  ListFirewallsCommandInput,
-  ListFirewallsCommandOutput,
 } from "./commands/ListFirewallsCommand";
 import {
+  type ListFlowOperationResultsCommandInput,
+  type ListFlowOperationResultsCommandOutput,
+  ListFlowOperationResultsCommand,
+} from "./commands/ListFlowOperationResultsCommand";
+import {
+  type ListFlowOperationsCommandInput,
+  type ListFlowOperationsCommandOutput,
+  ListFlowOperationsCommand,
+} from "./commands/ListFlowOperationsCommand";
+import {
+  type ListRuleGroupsCommandInput,
+  type ListRuleGroupsCommandOutput,
   ListRuleGroupsCommand,
-  ListRuleGroupsCommandInput,
-  ListRuleGroupsCommandOutput,
 } from "./commands/ListRuleGroupsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
-  PutResourcePolicyCommand,
-  PutResourcePolicyCommandInput,
-  PutResourcePolicyCommandOutput,
-} from "./commands/PutResourcePolicyCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type ListTLSInspectionConfigurationsCommandInput,
+  type ListTLSInspectionConfigurationsCommandOutput,
+  ListTLSInspectionConfigurationsCommand,
+} from "./commands/ListTLSInspectionConfigurationsCommand";
 import {
+  type ListVpcEndpointAssociationsCommandInput,
+  type ListVpcEndpointAssociationsCommandOutput,
+  ListVpcEndpointAssociationsCommand,
+} from "./commands/ListVpcEndpointAssociationsCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type RejectNetworkFirewallTransitGatewayAttachmentCommandInput,
+  type RejectNetworkFirewallTransitGatewayAttachmentCommandOutput,
+  RejectNetworkFirewallTransitGatewayAttachmentCommand,
+} from "./commands/RejectNetworkFirewallTransitGatewayAttachmentCommand";
+import {
+  type StartAnalysisReportCommandInput,
+  type StartAnalysisReportCommandOutput,
+  StartAnalysisReportCommand,
+} from "./commands/StartAnalysisReportCommand";
+import {
+  type StartFlowCaptureCommandInput,
+  type StartFlowCaptureCommandOutput,
+  StartFlowCaptureCommand,
+} from "./commands/StartFlowCaptureCommand";
+import {
+  type StartFlowFlushCommandInput,
+  type StartFlowFlushCommandOutput,
+  StartFlowFlushCommand,
+} from "./commands/StartFlowFlushCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAvailabilityZoneChangeProtectionCommandInput,
+  type UpdateAvailabilityZoneChangeProtectionCommandOutput,
+  UpdateAvailabilityZoneChangeProtectionCommand,
+} from "./commands/UpdateAvailabilityZoneChangeProtectionCommand";
+import {
+  type UpdateContainerAssociationCommandInput,
+  type UpdateContainerAssociationCommandOutput,
+  UpdateContainerAssociationCommand,
+} from "./commands/UpdateContainerAssociationCommand";
+import {
+  type UpdateFirewallAnalysisSettingsCommandInput,
+  type UpdateFirewallAnalysisSettingsCommandOutput,
+  UpdateFirewallAnalysisSettingsCommand,
+} from "./commands/UpdateFirewallAnalysisSettingsCommand";
+import {
+  type UpdateFirewallDeleteProtectionCommandInput,
+  type UpdateFirewallDeleteProtectionCommandOutput,
   UpdateFirewallDeleteProtectionCommand,
-  UpdateFirewallDeleteProtectionCommandInput,
-  UpdateFirewallDeleteProtectionCommandOutput,
 } from "./commands/UpdateFirewallDeleteProtectionCommand";
 import {
+  type UpdateFirewallDescriptionCommandInput,
+  type UpdateFirewallDescriptionCommandOutput,
   UpdateFirewallDescriptionCommand,
-  UpdateFirewallDescriptionCommandInput,
-  UpdateFirewallDescriptionCommandOutput,
 } from "./commands/UpdateFirewallDescriptionCommand";
 import {
+  type UpdateFirewallEncryptionConfigurationCommandInput,
+  type UpdateFirewallEncryptionConfigurationCommandOutput,
+  UpdateFirewallEncryptionConfigurationCommand,
+} from "./commands/UpdateFirewallEncryptionConfigurationCommand";
+import {
+  type UpdateFirewallPolicyChangeProtectionCommandInput,
+  type UpdateFirewallPolicyChangeProtectionCommandOutput,
   UpdateFirewallPolicyChangeProtectionCommand,
-  UpdateFirewallPolicyChangeProtectionCommandInput,
-  UpdateFirewallPolicyChangeProtectionCommandOutput,
 } from "./commands/UpdateFirewallPolicyChangeProtectionCommand";
 import {
+  type UpdateFirewallPolicyCommandInput,
+  type UpdateFirewallPolicyCommandOutput,
   UpdateFirewallPolicyCommand,
-  UpdateFirewallPolicyCommandInput,
-  UpdateFirewallPolicyCommandOutput,
 } from "./commands/UpdateFirewallPolicyCommand";
 import {
+  type UpdateFirewallPolicyV2CommandInput,
+  type UpdateFirewallPolicyV2CommandOutput,
+  UpdateFirewallPolicyV2Command,
+} from "./commands/UpdateFirewallPolicyV2Command";
+import {
+  type UpdateLoggingConfigurationCommandInput,
+  type UpdateLoggingConfigurationCommandOutput,
   UpdateLoggingConfigurationCommand,
-  UpdateLoggingConfigurationCommandInput,
-  UpdateLoggingConfigurationCommandOutput,
 } from "./commands/UpdateLoggingConfigurationCommand";
 import {
+  type UpdateProxySettingsCommandInput,
+  type UpdateProxySettingsCommandOutput,
+  UpdateProxySettingsCommand,
+} from "./commands/UpdateProxySettingsCommand";
+import {
+  type UpdateRuleGroupCommandInput,
+  type UpdateRuleGroupCommandOutput,
   UpdateRuleGroupCommand,
-  UpdateRuleGroupCommandInput,
-  UpdateRuleGroupCommandOutput,
 } from "./commands/UpdateRuleGroupCommand";
 import {
+  type UpdateSubnetChangeProtectionCommandInput,
+  type UpdateSubnetChangeProtectionCommandOutput,
   UpdateSubnetChangeProtectionCommand,
-  UpdateSubnetChangeProtectionCommandInput,
-  UpdateSubnetChangeProtectionCommandOutput,
 } from "./commands/UpdateSubnetChangeProtectionCommand";
+import {
+  type UpdateTLSInspectionConfigurationCommandInput,
+  type UpdateTLSInspectionConfigurationCommandOutput,
+  UpdateTLSInspectionConfigurationCommand,
+} from "./commands/UpdateTLSInspectionConfigurationCommand";
+import type { NetworkFirewallServiceException } from "./models/NetworkFirewallServiceException";
 import { NetworkFirewallClient } from "./NetworkFirewallClient";
+import { paginateGetAnalysisReportResults } from "./pagination/GetAnalysisReportResultsPaginator";
+import { paginateListAnalysisReports } from "./pagination/ListAnalysisReportsPaginator";
+import { paginateListContainerAssociations } from "./pagination/ListContainerAssociationsPaginator";
+import { paginateListFirewallPolicies } from "./pagination/ListFirewallPoliciesPaginator";
+import { paginateListFirewallPoliciesV2 } from "./pagination/ListFirewallPoliciesV2Paginator";
+import { paginateListFirewalls } from "./pagination/ListFirewallsPaginator";
+import { paginateListFlowOperationResults } from "./pagination/ListFlowOperationResultsPaginator";
+import { paginateListFlowOperations } from "./pagination/ListFlowOperationsPaginator";
+import { paginateListRuleGroups } from "./pagination/ListRuleGroupsPaginator";
+import { paginateListTagsForResource } from "./pagination/ListTagsForResourcePaginator";
+import { paginateListTLSInspectionConfigurations } from "./pagination/ListTLSInspectionConfigurationsPaginator";
+import { paginateListVpcEndpointAssociations } from "./pagination/ListVpcEndpointAssociationsPaginator";
+import { waitUntilFirewallPolicyActive } from "./waiters/waitForFirewallPolicyActive";
+
+const commands = {
+  AcceptNetworkFirewallTransitGatewayAttachmentCommand,
+  AssociateAvailabilityZonesCommand,
+  AssociateFirewallPolicyCommand,
+  AssociateSubnetsCommand,
+  CreateContainerAssociationCommand,
+  CreateFirewallCommand,
+  CreateFirewallPolicyCommand,
+  CreateFirewallPolicyV2Command,
+  CreateRuleGroupCommand,
+  CreateTLSInspectionConfigurationCommand,
+  CreateVpcEndpointAssociationCommand,
+  DeleteContainerAssociationCommand,
+  DeleteFirewallCommand,
+  DeleteFirewallPolicyCommand,
+  DeleteFirewallPolicyV2Command,
+  DeleteNetworkFirewallTransitGatewayAttachmentCommand,
+  DeleteProxyCommand,
+  DeleteResourcePolicyCommand,
+  DeleteRuleGroupCommand,
+  DeleteTLSInspectionConfigurationCommand,
+  DeleteVpcEndpointAssociationCommand,
+  DescribeContainerAssociationCommand,
+  DescribeFirewallCommand,
+  DescribeFirewallMetadataCommand,
+  DescribeFirewallPolicyCommand,
+  DescribeFirewallPolicyV2Command,
+  DescribeFlowOperationCommand,
+  DescribeLoggingConfigurationCommand,
+  DescribeProxyCommand,
+  DescribeResourcePolicyCommand,
+  DescribeRuleGroupCommand,
+  DescribeRuleGroupMetadataCommand,
+  DescribeRuleGroupSummaryCommand,
+  DescribeTLSInspectionConfigurationCommand,
+  DescribeVpcEndpointAssociationCommand,
+  DisassociateAvailabilityZonesCommand,
+  DisassociateSubnetsCommand,
+  GetAnalysisReportResultsCommand,
+  ListAnalysisReportsCommand,
+  ListContainerAssociationsCommand,
+  ListFirewallPoliciesCommand,
+  ListFirewallPoliciesV2Command,
+  ListFirewallsCommand,
+  ListFlowOperationResultsCommand,
+  ListFlowOperationsCommand,
+  ListRuleGroupsCommand,
+  ListTagsForResourceCommand,
+  ListTLSInspectionConfigurationsCommand,
+  ListVpcEndpointAssociationsCommand,
+  PutResourcePolicyCommand,
+  RejectNetworkFirewallTransitGatewayAttachmentCommand,
+  StartAnalysisReportCommand,
+  StartFlowCaptureCommand,
+  StartFlowFlushCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAvailabilityZoneChangeProtectionCommand,
+  UpdateContainerAssociationCommand,
+  UpdateFirewallAnalysisSettingsCommand,
+  UpdateFirewallDeleteProtectionCommand,
+  UpdateFirewallDescriptionCommand,
+  UpdateFirewallEncryptionConfigurationCommand,
+  UpdateFirewallPolicyCommand,
+  UpdateFirewallPolicyChangeProtectionCommand,
+  UpdateFirewallPolicyV2Command,
+  UpdateLoggingConfigurationCommand,
+  UpdateProxySettingsCommand,
+  UpdateRuleGroupCommand,
+  UpdateSubnetChangeProtectionCommand,
+  UpdateTLSInspectionConfigurationCommand,
+};
+const paginators = {
+  paginateGetAnalysisReportResults,
+  paginateListAnalysisReports,
+  paginateListContainerAssociations,
+  paginateListFirewallPolicies,
+  paginateListFirewallPoliciesV2,
+  paginateListFirewalls,
+  paginateListFlowOperationResults,
+  paginateListFlowOperations,
+  paginateListRuleGroups,
+  paginateListTagsForResource,
+  paginateListTLSInspectionConfigurations,
+  paginateListVpcEndpointAssociations,
+};
+const waiters = {
+  waitUntilFirewallPolicyActive,
+};
 
 /**
- * <p>This is the API Reference for AWS Network Firewall. This guide is for developers who need
+ * @public
+ */
+export interface NetworkFirewallRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface NetworkFirewall {
+  /**
+   * @see {@link AcceptNetworkFirewallTransitGatewayAttachmentCommand}
+   */
+  acceptNetworkFirewallTransitGatewayAttachment(
+    args: AcceptNetworkFirewallTransitGatewayAttachmentCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<AcceptNetworkFirewallTransitGatewayAttachmentCommandOutput>;
+  acceptNetworkFirewallTransitGatewayAttachment(
+    args: AcceptNetworkFirewallTransitGatewayAttachmentCommandInput,
+    cb: (err: any, data?: AcceptNetworkFirewallTransitGatewayAttachmentCommandOutput) => void
+  ): void;
+  acceptNetworkFirewallTransitGatewayAttachment(
+    args: AcceptNetworkFirewallTransitGatewayAttachmentCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: AcceptNetworkFirewallTransitGatewayAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateAvailabilityZonesCommand}
+   */
+  associateAvailabilityZones(
+    args: AssociateAvailabilityZonesCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<AssociateAvailabilityZonesCommandOutput>;
+  associateAvailabilityZones(
+    args: AssociateAvailabilityZonesCommandInput,
+    cb: (err: any, data?: AssociateAvailabilityZonesCommandOutput) => void
+  ): void;
+  associateAvailabilityZones(
+    args: AssociateAvailabilityZonesCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: AssociateAvailabilityZonesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateFirewallPolicyCommand}
+   */
+  associateFirewallPolicy(
+    args: AssociateFirewallPolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<AssociateFirewallPolicyCommandOutput>;
+  associateFirewallPolicy(
+    args: AssociateFirewallPolicyCommandInput,
+    cb: (err: any, data?: AssociateFirewallPolicyCommandOutput) => void
+  ): void;
+  associateFirewallPolicy(
+    args: AssociateFirewallPolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: AssociateFirewallPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateSubnetsCommand}
+   */
+  associateSubnets(
+    args: AssociateSubnetsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<AssociateSubnetsCommandOutput>;
+  associateSubnets(
+    args: AssociateSubnetsCommandInput,
+    cb: (err: any, data?: AssociateSubnetsCommandOutput) => void
+  ): void;
+  associateSubnets(
+    args: AssociateSubnetsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: AssociateSubnetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContainerAssociationCommand}
+   */
+  createContainerAssociation(
+    args: CreateContainerAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateContainerAssociationCommandOutput>;
+  createContainerAssociation(
+    args: CreateContainerAssociationCommandInput,
+    cb: (err: any, data?: CreateContainerAssociationCommandOutput) => void
+  ): void;
+  createContainerAssociation(
+    args: CreateContainerAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateContainerAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFirewallCommand}
+   */
+  createFirewall(
+    args: CreateFirewallCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateFirewallCommandOutput>;
+  createFirewall(
+    args: CreateFirewallCommandInput,
+    cb: (err: any, data?: CreateFirewallCommandOutput) => void
+  ): void;
+  createFirewall(
+    args: CreateFirewallCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateFirewallCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFirewallPolicyCommand}
+   */
+  createFirewallPolicy(
+    args: CreateFirewallPolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateFirewallPolicyCommandOutput>;
+  createFirewallPolicy(
+    args: CreateFirewallPolicyCommandInput,
+    cb: (err: any, data?: CreateFirewallPolicyCommandOutput) => void
+  ): void;
+  createFirewallPolicy(
+    args: CreateFirewallPolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateFirewallPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFirewallPolicyV2Command}
+   */
+  createFirewallPolicyV2(
+    args: CreateFirewallPolicyV2CommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateFirewallPolicyV2CommandOutput>;
+  createFirewallPolicyV2(
+    args: CreateFirewallPolicyV2CommandInput,
+    cb: (err: any, data?: CreateFirewallPolicyV2CommandOutput) => void
+  ): void;
+  createFirewallPolicyV2(
+    args: CreateFirewallPolicyV2CommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateFirewallPolicyV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRuleGroupCommand}
+   */
+  createRuleGroup(
+    args: CreateRuleGroupCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateRuleGroupCommandOutput>;
+  createRuleGroup(
+    args: CreateRuleGroupCommandInput,
+    cb: (err: any, data?: CreateRuleGroupCommandOutput) => void
+  ): void;
+  createRuleGroup(
+    args: CreateRuleGroupCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateRuleGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTLSInspectionConfigurationCommand}
+   */
+  createTLSInspectionConfiguration(
+    args: CreateTLSInspectionConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateTLSInspectionConfigurationCommandOutput>;
+  createTLSInspectionConfiguration(
+    args: CreateTLSInspectionConfigurationCommandInput,
+    cb: (err: any, data?: CreateTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+  createTLSInspectionConfiguration(
+    args: CreateTLSInspectionConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVpcEndpointAssociationCommand}
+   */
+  createVpcEndpointAssociation(
+    args: CreateVpcEndpointAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<CreateVpcEndpointAssociationCommandOutput>;
+  createVpcEndpointAssociation(
+    args: CreateVpcEndpointAssociationCommandInput,
+    cb: (err: any, data?: CreateVpcEndpointAssociationCommandOutput) => void
+  ): void;
+  createVpcEndpointAssociation(
+    args: CreateVpcEndpointAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: CreateVpcEndpointAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContainerAssociationCommand}
+   */
+  deleteContainerAssociation(): Promise<DeleteContainerAssociationCommandOutput>;
+  deleteContainerAssociation(
+    args: DeleteContainerAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteContainerAssociationCommandOutput>;
+  deleteContainerAssociation(
+    args: DeleteContainerAssociationCommandInput,
+    cb: (err: any, data?: DeleteContainerAssociationCommandOutput) => void
+  ): void;
+  deleteContainerAssociation(
+    args: DeleteContainerAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteContainerAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFirewallCommand}
+   */
+  deleteFirewall(): Promise<DeleteFirewallCommandOutput>;
+  deleteFirewall(
+    args: DeleteFirewallCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteFirewallCommandOutput>;
+  deleteFirewall(
+    args: DeleteFirewallCommandInput,
+    cb: (err: any, data?: DeleteFirewallCommandOutput) => void
+  ): void;
+  deleteFirewall(
+    args: DeleteFirewallCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteFirewallCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFirewallPolicyCommand}
+   */
+  deleteFirewallPolicy(): Promise<DeleteFirewallPolicyCommandOutput>;
+  deleteFirewallPolicy(
+    args: DeleteFirewallPolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteFirewallPolicyCommandOutput>;
+  deleteFirewallPolicy(
+    args: DeleteFirewallPolicyCommandInput,
+    cb: (err: any, data?: DeleteFirewallPolicyCommandOutput) => void
+  ): void;
+  deleteFirewallPolicy(
+    args: DeleteFirewallPolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteFirewallPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFirewallPolicyV2Command}
+   */
+  deleteFirewallPolicyV2(): Promise<DeleteFirewallPolicyV2CommandOutput>;
+  deleteFirewallPolicyV2(
+    args: DeleteFirewallPolicyV2CommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteFirewallPolicyV2CommandOutput>;
+  deleteFirewallPolicyV2(
+    args: DeleteFirewallPolicyV2CommandInput,
+    cb: (err: any, data?: DeleteFirewallPolicyV2CommandOutput) => void
+  ): void;
+  deleteFirewallPolicyV2(
+    args: DeleteFirewallPolicyV2CommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteFirewallPolicyV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNetworkFirewallTransitGatewayAttachmentCommand}
+   */
+  deleteNetworkFirewallTransitGatewayAttachment(
+    args: DeleteNetworkFirewallTransitGatewayAttachmentCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteNetworkFirewallTransitGatewayAttachmentCommandOutput>;
+  deleteNetworkFirewallTransitGatewayAttachment(
+    args: DeleteNetworkFirewallTransitGatewayAttachmentCommandInput,
+    cb: (err: any, data?: DeleteNetworkFirewallTransitGatewayAttachmentCommandOutput) => void
+  ): void;
+  deleteNetworkFirewallTransitGatewayAttachment(
+    args: DeleteNetworkFirewallTransitGatewayAttachmentCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteNetworkFirewallTransitGatewayAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProxyCommand}
+   */
+  deleteProxy(
+    args: DeleteProxyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteProxyCommandOutput>;
+  deleteProxy(
+    args: DeleteProxyCommandInput,
+    cb: (err: any, data?: DeleteProxyCommandOutput) => void
+  ): void;
+  deleteProxy(
+    args: DeleteProxyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteProxyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRuleGroupCommand}
+   */
+  deleteRuleGroup(): Promise<DeleteRuleGroupCommandOutput>;
+  deleteRuleGroup(
+    args: DeleteRuleGroupCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteRuleGroupCommandOutput>;
+  deleteRuleGroup(
+    args: DeleteRuleGroupCommandInput,
+    cb: (err: any, data?: DeleteRuleGroupCommandOutput) => void
+  ): void;
+  deleteRuleGroup(
+    args: DeleteRuleGroupCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteRuleGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTLSInspectionConfigurationCommand}
+   */
+  deleteTLSInspectionConfiguration(): Promise<DeleteTLSInspectionConfigurationCommandOutput>;
+  deleteTLSInspectionConfiguration(
+    args: DeleteTLSInspectionConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteTLSInspectionConfigurationCommandOutput>;
+  deleteTLSInspectionConfiguration(
+    args: DeleteTLSInspectionConfigurationCommandInput,
+    cb: (err: any, data?: DeleteTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+  deleteTLSInspectionConfiguration(
+    args: DeleteTLSInspectionConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVpcEndpointAssociationCommand}
+   */
+  deleteVpcEndpointAssociation(
+    args: DeleteVpcEndpointAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DeleteVpcEndpointAssociationCommandOutput>;
+  deleteVpcEndpointAssociation(
+    args: DeleteVpcEndpointAssociationCommandInput,
+    cb: (err: any, data?: DeleteVpcEndpointAssociationCommandOutput) => void
+  ): void;
+  deleteVpcEndpointAssociation(
+    args: DeleteVpcEndpointAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DeleteVpcEndpointAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeContainerAssociationCommand}
+   */
+  describeContainerAssociation(): Promise<DescribeContainerAssociationCommandOutput>;
+  describeContainerAssociation(
+    args: DescribeContainerAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeContainerAssociationCommandOutput>;
+  describeContainerAssociation(
+    args: DescribeContainerAssociationCommandInput,
+    cb: (err: any, data?: DescribeContainerAssociationCommandOutput) => void
+  ): void;
+  describeContainerAssociation(
+    args: DescribeContainerAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeContainerAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFirewallCommand}
+   */
+  describeFirewall(): Promise<DescribeFirewallCommandOutput>;
+  describeFirewall(
+    args: DescribeFirewallCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeFirewallCommandOutput>;
+  describeFirewall(
+    args: DescribeFirewallCommandInput,
+    cb: (err: any, data?: DescribeFirewallCommandOutput) => void
+  ): void;
+  describeFirewall(
+    args: DescribeFirewallCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeFirewallCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFirewallMetadataCommand}
+   */
+  describeFirewallMetadata(): Promise<DescribeFirewallMetadataCommandOutput>;
+  describeFirewallMetadata(
+    args: DescribeFirewallMetadataCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeFirewallMetadataCommandOutput>;
+  describeFirewallMetadata(
+    args: DescribeFirewallMetadataCommandInput,
+    cb: (err: any, data?: DescribeFirewallMetadataCommandOutput) => void
+  ): void;
+  describeFirewallMetadata(
+    args: DescribeFirewallMetadataCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeFirewallMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFirewallPolicyCommand}
+   */
+  describeFirewallPolicy(): Promise<DescribeFirewallPolicyCommandOutput>;
+  describeFirewallPolicy(
+    args: DescribeFirewallPolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeFirewallPolicyCommandOutput>;
+  describeFirewallPolicy(
+    args: DescribeFirewallPolicyCommandInput,
+    cb: (err: any, data?: DescribeFirewallPolicyCommandOutput) => void
+  ): void;
+  describeFirewallPolicy(
+    args: DescribeFirewallPolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeFirewallPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFirewallPolicyV2Command}
+   */
+  describeFirewallPolicyV2(): Promise<DescribeFirewallPolicyV2CommandOutput>;
+  describeFirewallPolicyV2(
+    args: DescribeFirewallPolicyV2CommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeFirewallPolicyV2CommandOutput>;
+  describeFirewallPolicyV2(
+    args: DescribeFirewallPolicyV2CommandInput,
+    cb: (err: any, data?: DescribeFirewallPolicyV2CommandOutput) => void
+  ): void;
+  describeFirewallPolicyV2(
+    args: DescribeFirewallPolicyV2CommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeFirewallPolicyV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFlowOperationCommand}
+   */
+  describeFlowOperation(
+    args: DescribeFlowOperationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeFlowOperationCommandOutput>;
+  describeFlowOperation(
+    args: DescribeFlowOperationCommandInput,
+    cb: (err: any, data?: DescribeFlowOperationCommandOutput) => void
+  ): void;
+  describeFlowOperation(
+    args: DescribeFlowOperationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeFlowOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLoggingConfigurationCommand}
+   */
+  describeLoggingConfiguration(): Promise<DescribeLoggingConfigurationCommandOutput>;
+  describeLoggingConfiguration(
+    args: DescribeLoggingConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeLoggingConfigurationCommandOutput>;
+  describeLoggingConfiguration(
+    args: DescribeLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
+  ): void;
+  describeLoggingConfiguration(
+    args: DescribeLoggingConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeProxyCommand}
+   */
+  describeProxy(): Promise<DescribeProxyCommandOutput>;
+  describeProxy(
+    args: DescribeProxyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeProxyCommandOutput>;
+  describeProxy(
+    args: DescribeProxyCommandInput,
+    cb: (err: any, data?: DescribeProxyCommandOutput) => void
+  ): void;
+  describeProxy(
+    args: DescribeProxyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeProxyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourcePolicyCommand}
+   */
+  describeResourcePolicy(
+    args: DescribeResourcePolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeResourcePolicyCommandOutput>;
+  describeResourcePolicy(
+    args: DescribeResourcePolicyCommandInput,
+    cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
+  ): void;
+  describeResourcePolicy(
+    args: DescribeResourcePolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRuleGroupCommand}
+   */
+  describeRuleGroup(): Promise<DescribeRuleGroupCommandOutput>;
+  describeRuleGroup(
+    args: DescribeRuleGroupCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeRuleGroupCommandOutput>;
+  describeRuleGroup(
+    args: DescribeRuleGroupCommandInput,
+    cb: (err: any, data?: DescribeRuleGroupCommandOutput) => void
+  ): void;
+  describeRuleGroup(
+    args: DescribeRuleGroupCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeRuleGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRuleGroupMetadataCommand}
+   */
+  describeRuleGroupMetadata(): Promise<DescribeRuleGroupMetadataCommandOutput>;
+  describeRuleGroupMetadata(
+    args: DescribeRuleGroupMetadataCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeRuleGroupMetadataCommandOutput>;
+  describeRuleGroupMetadata(
+    args: DescribeRuleGroupMetadataCommandInput,
+    cb: (err: any, data?: DescribeRuleGroupMetadataCommandOutput) => void
+  ): void;
+  describeRuleGroupMetadata(
+    args: DescribeRuleGroupMetadataCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeRuleGroupMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRuleGroupSummaryCommand}
+   */
+  describeRuleGroupSummary(): Promise<DescribeRuleGroupSummaryCommandOutput>;
+  describeRuleGroupSummary(
+    args: DescribeRuleGroupSummaryCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeRuleGroupSummaryCommandOutput>;
+  describeRuleGroupSummary(
+    args: DescribeRuleGroupSummaryCommandInput,
+    cb: (err: any, data?: DescribeRuleGroupSummaryCommandOutput) => void
+  ): void;
+  describeRuleGroupSummary(
+    args: DescribeRuleGroupSummaryCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeRuleGroupSummaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTLSInspectionConfigurationCommand}
+   */
+  describeTLSInspectionConfiguration(): Promise<DescribeTLSInspectionConfigurationCommandOutput>;
+  describeTLSInspectionConfiguration(
+    args: DescribeTLSInspectionConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeTLSInspectionConfigurationCommandOutput>;
+  describeTLSInspectionConfiguration(
+    args: DescribeTLSInspectionConfigurationCommandInput,
+    cb: (err: any, data?: DescribeTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+  describeTLSInspectionConfiguration(
+    args: DescribeTLSInspectionConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeVpcEndpointAssociationCommand}
+   */
+  describeVpcEndpointAssociation(
+    args: DescribeVpcEndpointAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DescribeVpcEndpointAssociationCommandOutput>;
+  describeVpcEndpointAssociation(
+    args: DescribeVpcEndpointAssociationCommandInput,
+    cb: (err: any, data?: DescribeVpcEndpointAssociationCommandOutput) => void
+  ): void;
+  describeVpcEndpointAssociation(
+    args: DescribeVpcEndpointAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DescribeVpcEndpointAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAvailabilityZonesCommand}
+   */
+  disassociateAvailabilityZones(
+    args: DisassociateAvailabilityZonesCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DisassociateAvailabilityZonesCommandOutput>;
+  disassociateAvailabilityZones(
+    args: DisassociateAvailabilityZonesCommandInput,
+    cb: (err: any, data?: DisassociateAvailabilityZonesCommandOutput) => void
+  ): void;
+  disassociateAvailabilityZones(
+    args: DisassociateAvailabilityZonesCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DisassociateAvailabilityZonesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateSubnetsCommand}
+   */
+  disassociateSubnets(
+    args: DisassociateSubnetsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<DisassociateSubnetsCommandOutput>;
+  disassociateSubnets(
+    args: DisassociateSubnetsCommandInput,
+    cb: (err: any, data?: DisassociateSubnetsCommandOutput) => void
+  ): void;
+  disassociateSubnets(
+    args: DisassociateSubnetsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: DisassociateSubnetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAnalysisReportResultsCommand}
+   */
+  getAnalysisReportResults(
+    args: GetAnalysisReportResultsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<GetAnalysisReportResultsCommandOutput>;
+  getAnalysisReportResults(
+    args: GetAnalysisReportResultsCommandInput,
+    cb: (err: any, data?: GetAnalysisReportResultsCommandOutput) => void
+  ): void;
+  getAnalysisReportResults(
+    args: GetAnalysisReportResultsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: GetAnalysisReportResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnalysisReportsCommand}
+   */
+  listAnalysisReports(): Promise<ListAnalysisReportsCommandOutput>;
+  listAnalysisReports(
+    args: ListAnalysisReportsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListAnalysisReportsCommandOutput>;
+  listAnalysisReports(
+    args: ListAnalysisReportsCommandInput,
+    cb: (err: any, data?: ListAnalysisReportsCommandOutput) => void
+  ): void;
+  listAnalysisReports(
+    args: ListAnalysisReportsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListAnalysisReportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListContainerAssociationsCommand}
+   */
+  listContainerAssociations(): Promise<ListContainerAssociationsCommandOutput>;
+  listContainerAssociations(
+    args: ListContainerAssociationsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListContainerAssociationsCommandOutput>;
+  listContainerAssociations(
+    args: ListContainerAssociationsCommandInput,
+    cb: (err: any, data?: ListContainerAssociationsCommandOutput) => void
+  ): void;
+  listContainerAssociations(
+    args: ListContainerAssociationsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListContainerAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFirewallPoliciesCommand}
+   */
+  listFirewallPolicies(): Promise<ListFirewallPoliciesCommandOutput>;
+  listFirewallPolicies(
+    args: ListFirewallPoliciesCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListFirewallPoliciesCommandOutput>;
+  listFirewallPolicies(
+    args: ListFirewallPoliciesCommandInput,
+    cb: (err: any, data?: ListFirewallPoliciesCommandOutput) => void
+  ): void;
+  listFirewallPolicies(
+    args: ListFirewallPoliciesCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListFirewallPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFirewallPoliciesV2Command}
+   */
+  listFirewallPoliciesV2(): Promise<ListFirewallPoliciesV2CommandOutput>;
+  listFirewallPoliciesV2(
+    args: ListFirewallPoliciesV2CommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListFirewallPoliciesV2CommandOutput>;
+  listFirewallPoliciesV2(
+    args: ListFirewallPoliciesV2CommandInput,
+    cb: (err: any, data?: ListFirewallPoliciesV2CommandOutput) => void
+  ): void;
+  listFirewallPoliciesV2(
+    args: ListFirewallPoliciesV2CommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListFirewallPoliciesV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFirewallsCommand}
+   */
+  listFirewalls(): Promise<ListFirewallsCommandOutput>;
+  listFirewalls(
+    args: ListFirewallsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListFirewallsCommandOutput>;
+  listFirewalls(
+    args: ListFirewallsCommandInput,
+    cb: (err: any, data?: ListFirewallsCommandOutput) => void
+  ): void;
+  listFirewalls(
+    args: ListFirewallsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListFirewallsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowOperationResultsCommand}
+   */
+  listFlowOperationResults(
+    args: ListFlowOperationResultsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListFlowOperationResultsCommandOutput>;
+  listFlowOperationResults(
+    args: ListFlowOperationResultsCommandInput,
+    cb: (err: any, data?: ListFlowOperationResultsCommandOutput) => void
+  ): void;
+  listFlowOperationResults(
+    args: ListFlowOperationResultsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListFlowOperationResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowOperationsCommand}
+   */
+  listFlowOperations(
+    args: ListFlowOperationsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListFlowOperationsCommandOutput>;
+  listFlowOperations(
+    args: ListFlowOperationsCommandInput,
+    cb: (err: any, data?: ListFlowOperationsCommandOutput) => void
+  ): void;
+  listFlowOperations(
+    args: ListFlowOperationsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListFlowOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRuleGroupsCommand}
+   */
+  listRuleGroups(): Promise<ListRuleGroupsCommandOutput>;
+  listRuleGroups(
+    args: ListRuleGroupsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListRuleGroupsCommandOutput>;
+  listRuleGroups(
+    args: ListRuleGroupsCommandInput,
+    cb: (err: any, data?: ListRuleGroupsCommandOutput) => void
+  ): void;
+  listRuleGroups(
+    args: ListRuleGroupsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListRuleGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTLSInspectionConfigurationsCommand}
+   */
+  listTLSInspectionConfigurations(): Promise<ListTLSInspectionConfigurationsCommandOutput>;
+  listTLSInspectionConfigurations(
+    args: ListTLSInspectionConfigurationsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListTLSInspectionConfigurationsCommandOutput>;
+  listTLSInspectionConfigurations(
+    args: ListTLSInspectionConfigurationsCommandInput,
+    cb: (err: any, data?: ListTLSInspectionConfigurationsCommandOutput) => void
+  ): void;
+  listTLSInspectionConfigurations(
+    args: ListTLSInspectionConfigurationsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListTLSInspectionConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVpcEndpointAssociationsCommand}
+   */
+  listVpcEndpointAssociations(): Promise<ListVpcEndpointAssociationsCommandOutput>;
+  listVpcEndpointAssociations(
+    args: ListVpcEndpointAssociationsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<ListVpcEndpointAssociationsCommandOutput>;
+  listVpcEndpointAssociations(
+    args: ListVpcEndpointAssociationsCommandInput,
+    cb: (err: any, data?: ListVpcEndpointAssociationsCommandOutput) => void
+  ): void;
+  listVpcEndpointAssociations(
+    args: ListVpcEndpointAssociationsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: ListVpcEndpointAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RejectNetworkFirewallTransitGatewayAttachmentCommand}
+   */
+  rejectNetworkFirewallTransitGatewayAttachment(
+    args: RejectNetworkFirewallTransitGatewayAttachmentCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<RejectNetworkFirewallTransitGatewayAttachmentCommandOutput>;
+  rejectNetworkFirewallTransitGatewayAttachment(
+    args: RejectNetworkFirewallTransitGatewayAttachmentCommandInput,
+    cb: (err: any, data?: RejectNetworkFirewallTransitGatewayAttachmentCommandOutput) => void
+  ): void;
+  rejectNetworkFirewallTransitGatewayAttachment(
+    args: RejectNetworkFirewallTransitGatewayAttachmentCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: RejectNetworkFirewallTransitGatewayAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAnalysisReportCommand}
+   */
+  startAnalysisReport(
+    args: StartAnalysisReportCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<StartAnalysisReportCommandOutput>;
+  startAnalysisReport(
+    args: StartAnalysisReportCommandInput,
+    cb: (err: any, data?: StartAnalysisReportCommandOutput) => void
+  ): void;
+  startAnalysisReport(
+    args: StartAnalysisReportCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: StartAnalysisReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartFlowCaptureCommand}
+   */
+  startFlowCapture(
+    args: StartFlowCaptureCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<StartFlowCaptureCommandOutput>;
+  startFlowCapture(
+    args: StartFlowCaptureCommandInput,
+    cb: (err: any, data?: StartFlowCaptureCommandOutput) => void
+  ): void;
+  startFlowCapture(
+    args: StartFlowCaptureCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: StartFlowCaptureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartFlowFlushCommand}
+   */
+  startFlowFlush(
+    args: StartFlowFlushCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<StartFlowFlushCommandOutput>;
+  startFlowFlush(
+    args: StartFlowFlushCommandInput,
+    cb: (err: any, data?: StartFlowFlushCommandOutput) => void
+  ): void;
+  startFlowFlush(
+    args: StartFlowFlushCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: StartFlowFlushCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAvailabilityZoneChangeProtectionCommand}
+   */
+  updateAvailabilityZoneChangeProtection(
+    args: UpdateAvailabilityZoneChangeProtectionCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateAvailabilityZoneChangeProtectionCommandOutput>;
+  updateAvailabilityZoneChangeProtection(
+    args: UpdateAvailabilityZoneChangeProtectionCommandInput,
+    cb: (err: any, data?: UpdateAvailabilityZoneChangeProtectionCommandOutput) => void
+  ): void;
+  updateAvailabilityZoneChangeProtection(
+    args: UpdateAvailabilityZoneChangeProtectionCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateAvailabilityZoneChangeProtectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContainerAssociationCommand}
+   */
+  updateContainerAssociation(
+    args: UpdateContainerAssociationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateContainerAssociationCommandOutput>;
+  updateContainerAssociation(
+    args: UpdateContainerAssociationCommandInput,
+    cb: (err: any, data?: UpdateContainerAssociationCommandOutput) => void
+  ): void;
+  updateContainerAssociation(
+    args: UpdateContainerAssociationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateContainerAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallAnalysisSettingsCommand}
+   */
+  updateFirewallAnalysisSettings(): Promise<UpdateFirewallAnalysisSettingsCommandOutput>;
+  updateFirewallAnalysisSettings(
+    args: UpdateFirewallAnalysisSettingsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallAnalysisSettingsCommandOutput>;
+  updateFirewallAnalysisSettings(
+    args: UpdateFirewallAnalysisSettingsCommandInput,
+    cb: (err: any, data?: UpdateFirewallAnalysisSettingsCommandOutput) => void
+  ): void;
+  updateFirewallAnalysisSettings(
+    args: UpdateFirewallAnalysisSettingsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallAnalysisSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallDeleteProtectionCommand}
+   */
+  updateFirewallDeleteProtection(
+    args: UpdateFirewallDeleteProtectionCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallDeleteProtectionCommandOutput>;
+  updateFirewallDeleteProtection(
+    args: UpdateFirewallDeleteProtectionCommandInput,
+    cb: (err: any, data?: UpdateFirewallDeleteProtectionCommandOutput) => void
+  ): void;
+  updateFirewallDeleteProtection(
+    args: UpdateFirewallDeleteProtectionCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallDeleteProtectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallDescriptionCommand}
+   */
+  updateFirewallDescription(): Promise<UpdateFirewallDescriptionCommandOutput>;
+  updateFirewallDescription(
+    args: UpdateFirewallDescriptionCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallDescriptionCommandOutput>;
+  updateFirewallDescription(
+    args: UpdateFirewallDescriptionCommandInput,
+    cb: (err: any, data?: UpdateFirewallDescriptionCommandOutput) => void
+  ): void;
+  updateFirewallDescription(
+    args: UpdateFirewallDescriptionCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallDescriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallEncryptionConfigurationCommand}
+   */
+  updateFirewallEncryptionConfiguration(): Promise<UpdateFirewallEncryptionConfigurationCommandOutput>;
+  updateFirewallEncryptionConfiguration(
+    args: UpdateFirewallEncryptionConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallEncryptionConfigurationCommandOutput>;
+  updateFirewallEncryptionConfiguration(
+    args: UpdateFirewallEncryptionConfigurationCommandInput,
+    cb: (err: any, data?: UpdateFirewallEncryptionConfigurationCommandOutput) => void
+  ): void;
+  updateFirewallEncryptionConfiguration(
+    args: UpdateFirewallEncryptionConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallEncryptionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallPolicyCommand}
+   */
+  updateFirewallPolicy(
+    args: UpdateFirewallPolicyCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallPolicyCommandOutput>;
+  updateFirewallPolicy(
+    args: UpdateFirewallPolicyCommandInput,
+    cb: (err: any, data?: UpdateFirewallPolicyCommandOutput) => void
+  ): void;
+  updateFirewallPolicy(
+    args: UpdateFirewallPolicyCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallPolicyChangeProtectionCommand}
+   */
+  updateFirewallPolicyChangeProtection(
+    args: UpdateFirewallPolicyChangeProtectionCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallPolicyChangeProtectionCommandOutput>;
+  updateFirewallPolicyChangeProtection(
+    args: UpdateFirewallPolicyChangeProtectionCommandInput,
+    cb: (err: any, data?: UpdateFirewallPolicyChangeProtectionCommandOutput) => void
+  ): void;
+  updateFirewallPolicyChangeProtection(
+    args: UpdateFirewallPolicyChangeProtectionCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallPolicyChangeProtectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFirewallPolicyV2Command}
+   */
+  updateFirewallPolicyV2(
+    args: UpdateFirewallPolicyV2CommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateFirewallPolicyV2CommandOutput>;
+  updateFirewallPolicyV2(
+    args: UpdateFirewallPolicyV2CommandInput,
+    cb: (err: any, data?: UpdateFirewallPolicyV2CommandOutput) => void
+  ): void;
+  updateFirewallPolicyV2(
+    args: UpdateFirewallPolicyV2CommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateFirewallPolicyV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLoggingConfigurationCommand}
+   */
+  updateLoggingConfiguration(): Promise<UpdateLoggingConfigurationCommandOutput>;
+  updateLoggingConfiguration(
+    args: UpdateLoggingConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateLoggingConfigurationCommandOutput>;
+  updateLoggingConfiguration(
+    args: UpdateLoggingConfigurationCommandInput,
+    cb: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
+  ): void;
+  updateLoggingConfiguration(
+    args: UpdateLoggingConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProxySettingsCommand}
+   */
+  updateProxySettings(): Promise<UpdateProxySettingsCommandOutput>;
+  updateProxySettings(
+    args: UpdateProxySettingsCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateProxySettingsCommandOutput>;
+  updateProxySettings(
+    args: UpdateProxySettingsCommandInput,
+    cb: (err: any, data?: UpdateProxySettingsCommandOutput) => void
+  ): void;
+  updateProxySettings(
+    args: UpdateProxySettingsCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateProxySettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRuleGroupCommand}
+   */
+  updateRuleGroup(
+    args: UpdateRuleGroupCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateRuleGroupCommandOutput>;
+  updateRuleGroup(
+    args: UpdateRuleGroupCommandInput,
+    cb: (err: any, data?: UpdateRuleGroupCommandOutput) => void
+  ): void;
+  updateRuleGroup(
+    args: UpdateRuleGroupCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateRuleGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSubnetChangeProtectionCommand}
+   */
+  updateSubnetChangeProtection(
+    args: UpdateSubnetChangeProtectionCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateSubnetChangeProtectionCommandOutput>;
+  updateSubnetChangeProtection(
+    args: UpdateSubnetChangeProtectionCommandInput,
+    cb: (err: any, data?: UpdateSubnetChangeProtectionCommandOutput) => void
+  ): void;
+  updateSubnetChangeProtection(
+    args: UpdateSubnetChangeProtectionCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateSubnetChangeProtectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTLSInspectionConfigurationCommand}
+   */
+  updateTLSInspectionConfiguration(
+    args: UpdateTLSInspectionConfigurationCommandInput,
+    options?: NetworkFirewallRequestOptions
+  ): Promise<UpdateTLSInspectionConfigurationCommandOutput>;
+  updateTLSInspectionConfiguration(
+    args: UpdateTLSInspectionConfigurationCommandInput,
+    cb: (err: any, data?: UpdateTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+  updateTLSInspectionConfiguration(
+    args: UpdateTLSInspectionConfigurationCommandInput,
+    options: NetworkFirewallRequestOptions,
+    cb: (err: any, data?: UpdateTLSInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAnalysisReportResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetAnalysisReportResultsCommandOutput}.
+   */
+  paginateGetAnalysisReportResults(
+    args: GetAnalysisReportResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetAnalysisReportResultsCommandOutput>;
+
+  /**
+   * @see {@link ListAnalysisReportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnalysisReportsCommandOutput}.
+   */
+  paginateListAnalysisReports(
+    args?: ListAnalysisReportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnalysisReportsCommandOutput>;
+
+  /**
+   * @see {@link ListContainerAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContainerAssociationsCommandOutput}.
+   */
+  paginateListContainerAssociations(
+    args?: ListContainerAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContainerAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListFirewallPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFirewallPoliciesCommandOutput}.
+   */
+  paginateListFirewallPolicies(
+    args?: ListFirewallPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFirewallPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListFirewallPoliciesV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFirewallPoliciesV2CommandOutput}.
+   */
+  paginateListFirewallPoliciesV2(
+    args?: ListFirewallPoliciesV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFirewallPoliciesV2CommandOutput>;
+
+  /**
+   * @see {@link ListFirewallsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFirewallsCommandOutput}.
+   */
+  paginateListFirewalls(
+    args?: ListFirewallsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFirewallsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowOperationResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowOperationResultsCommandOutput}.
+   */
+  paginateListFlowOperationResults(
+    args: ListFlowOperationResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowOperationResultsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowOperationsCommandOutput}.
+   */
+  paginateListFlowOperations(
+    args: ListFlowOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListRuleGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRuleGroupsCommandOutput}.
+   */
+  paginateListRuleGroups(
+    args?: ListRuleGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRuleGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTagsForResourceCommandOutput}.
+   */
+  paginateListTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTagsForResourceCommandOutput>;
+
+  /**
+   * @see {@link ListTLSInspectionConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTLSInspectionConfigurationsCommandOutput}.
+   */
+  paginateListTLSInspectionConfigurations(
+    args?: ListTLSInspectionConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTLSInspectionConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListVpcEndpointAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVpcEndpointAssociationsCommandOutput}.
+   */
+  paginateListVpcEndpointAssociations(
+    args?: ListVpcEndpointAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVpcEndpointAssociationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeFirewallPolicyCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFirewallPolicyActive(
+    args: DescribeFirewallPolicyCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<NetworkFirewall>, "client">
+  ): Promise<WaiterResult<DescribeFirewallPolicyCommandOutput>>;
+}
+
+/**
+ * <p>This is the API Reference for Network Firewall. This guide is for developers who need
  *          detailed information about the Network Firewall API actions, data types, and errors. </p>
- *          <ul>
- *             <li>
- *                <p>The REST API requires you to handle connection details, such as calculating
+ *          <p>The REST API requires you to handle connection details, such as calculating
  *                signatures, handling request retries, and error handling. For general information
- *                about using the AWS REST APIs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-apis.html">AWS APIs</a>. </p>
- *                <p>To access Network Firewall using the REST API endpoint:
+ *                about using the Amazon Web Services REST APIs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-apis.html">Amazon Web Services APIs</a>. </p>
+ *          <p>To view the complete list of Amazon Web Services Regions where Network Firewall is available, see
+ *          <a href="https://docs.aws.amazon.com/general/latest/gr/network-firewall.html">Service
+ *             endpoints and quotas</a> in the <i>Amazon Web Services General
+ *                Reference</i>.
+ *       </p>
+ *          <p>To access Network Firewall using the IPv4 REST API endpoint:
  *                   <code>https://network-firewall.<region>.amazonaws.com </code>
- *                </p>
- *             </li>
- *             <li>
- *                <p>Alternatively, you can use one of the AWS SDKs to access an API that's tailored to
+ *          </p>
+ *          <p>To access Network Firewall using the Dualstack (IPv4 and IPv6) REST API endpoint:
+ *                <code>https://network-firewall.<region>.aws.api </code>
+ *          </p>
+ *          <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to
  *                the programming language or platform that you're using. For more information, see
- *                   <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p>
- *             </li>
- *             <li>
- *                <p>For descriptions of Network Firewall features, including and step-by-step
+ *                <a href="http://aws.amazon.com/tools/#SDKs">Amazon Web Services SDKs</a>.</p>
+ *          <p>For descriptions of Network Firewall features, including and step-by-step
  *                instructions on how to use them through the Network Firewall console, see the <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/">Network Firewall Developer
  *                   Guide</a>.</p>
- *             </li>
- *          </ul>
  *          <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and
  *          prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the
  *          perimeter of your VPC. This includes filtering traffic going to and coming from an internet
- *          gateway, NAT gateway, or over VPN or AWS Direct Connect. Network Firewall uses rules that are compatible
- *       with Suricata, a free, open source intrusion detection system (IDS) engine.
- *       AWS Network Firewall supports Suricata version 5.0.2. For information about Suricata,
- *           see the <a href="https://suricata-ids.org/">Suricata website</a>.</p>
+ *          gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible
+ *       with Suricata, a free, open source network analysis and threat detection engine.
+ *       Network Firewall supports Suricata version 8.0.3. For information about Suricata,
+ *           see the <a href="https://suricata.io/">Suricata website</a> and the
+ *           <a href="https://suricata.readthedocs.io/en/suricata-8.0.3/">Suricata User Guide</a>. </p>
  *          <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.
  *          The following are just a few examples: </p>
  *          <ul>
  *             <li>
- *                <p>Allow domains or IP addresses for known AWS service endpoints, such as Amazon S3, and
+ *                <p>Allow domains or IP addresses for known Amazon Web Services service endpoints, such as Amazon S3, and
  *                block all other forms of traffic.</p>
  *             </li>
  *             <li>
@@ -205,12 +1898,17 @@ import { NetworkFirewallClient } from "./NetworkFirewallClient";
  *                subnet for the sole use of Network Firewall. </p>
  *             </li>
  *             <li>
- *                <p>In Network Firewall, create stateless and stateful rule groups,
+ *                <p>In Network Firewall, define the firewall behavior as follows: </p>
+ *                <ol>
+ *                   <li>
+ *                      <p>Create stateless and stateful rule groups,
  *                  to define the components of the network traffic filtering behavior that you want your firewall to have. </p>
- *             </li>
- *             <li>
- *                <p>In Network Firewall, create a firewall policy that uses your rule groups and
- *                  specifies additional default traffic filtering behavior. </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>Create a firewall policy that uses your rule groups and
+ *                      specifies additional default traffic filtering behavior. </p>
+ *                   </li>
+ *                </ol>
  *             </li>
  *             <li>
  *                <p>In Network Firewall, create a firewall and specify your new firewall policy and
@@ -222,1033 +1920,10 @@ import { NetworkFirewallClient } from "./NetworkFirewallClient";
  *                endpoints.</p>
  *             </li>
  *          </ol>
+ *          <p>After your firewall is established, you can add firewall endpoints for new Availability Zones by following the prior steps for the Amazon VPC setup and
+ *       firewall subnet definitions. You can also add endpoints to Availability Zones that you're using in the firewall, either for the same VPC
+ *           or for another VPC, by following the prior steps for the Amazon VPC setup, and defining the new VPC subnets as VPC endpoint associations. </p>
+ * @public
  */
-export class NetworkFirewall extends NetworkFirewallClient {
-  /**
-   * <p>Associates a <a>FirewallPolicy</a> to a <a>Firewall</a>. </p>
-   *          <p>A firewall policy defines how to monitor and manage your VPC network traffic, using a
-   *          collection of inspection rule groups and other settings. Each firewall requires one
-   *          firewall policy association, and you can use the same firewall policy for multiple
-   *          firewalls. </p>
-   */
-  public associateFirewallPolicy(
-    args: AssociateFirewallPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateFirewallPolicyCommandOutput>;
-  public associateFirewallPolicy(
-    args: AssociateFirewallPolicyCommandInput,
-    cb: (err: any, data?: AssociateFirewallPolicyCommandOutput) => void
-  ): void;
-  public associateFirewallPolicy(
-    args: AssociateFirewallPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateFirewallPolicyCommandOutput) => void
-  ): void;
-  public associateFirewallPolicy(
-    args: AssociateFirewallPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateFirewallPolicyCommandOutput) => void),
-    cb?: (err: any, data?: AssociateFirewallPolicyCommandOutput) => void
-  ): Promise<AssociateFirewallPolicyCommandOutput> | void {
-    const command = new AssociateFirewallPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Associates the specified subnets in the Amazon VPC to the firewall. You can specify one
-   *          subnet for each of the Availability Zones that the VPC spans. </p>
-   *          <p>This request creates an AWS Network Firewall firewall endpoint in each of the subnets. To
-   *          enable the firewall's protections, you must also modify the VPC's route tables for each
-   *          subnet's Availability Zone, to redirect the traffic that's coming into and going out of the
-   *          zone through the firewall endpoint. </p>
-   */
-  public associateSubnets(
-    args: AssociateSubnetsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateSubnetsCommandOutput>;
-  public associateSubnets(
-    args: AssociateSubnetsCommandInput,
-    cb: (err: any, data?: AssociateSubnetsCommandOutput) => void
-  ): void;
-  public associateSubnets(
-    args: AssociateSubnetsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateSubnetsCommandOutput) => void
-  ): void;
-  public associateSubnets(
-    args: AssociateSubnetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateSubnetsCommandOutput) => void),
-    cb?: (err: any, data?: AssociateSubnetsCommandOutput) => void
-  ): Promise<AssociateSubnetsCommandOutput> | void {
-    const command = new AssociateSubnetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an AWS Network Firewall <a>Firewall</a> and accompanying <a>FirewallStatus</a> for a VPC. </p>
-   *          <p>The firewall defines the configuration settings for an AWS Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall AWS resource. </p>
-   *          <p>After you create a firewall, you can provide additional settings, like the logging configuration. </p>
-   *          <p>To update the settings for a firewall, you use the operations that apply to the settings
-   *          themselves, for example <a>UpdateLoggingConfiguration</a>, <a>AssociateSubnets</a>, and <a>UpdateFirewallDeleteProtection</a>. </p>
-   *          <p>To manage a firewall's tags, use the standard AWS resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>
-   *          <p>To retrieve information about firewalls, use <a>ListFirewalls</a> and <a>DescribeFirewall</a>.</p>
-   */
-  public createFirewall(
-    args: CreateFirewallCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateFirewallCommandOutput>;
-  public createFirewall(
-    args: CreateFirewallCommandInput,
-    cb: (err: any, data?: CreateFirewallCommandOutput) => void
-  ): void;
-  public createFirewall(
-    args: CreateFirewallCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateFirewallCommandOutput) => void
-  ): void;
-  public createFirewall(
-    args: CreateFirewallCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFirewallCommandOutput) => void),
-    cb?: (err: any, data?: CreateFirewallCommandOutput) => void
-  ): Promise<CreateFirewallCommandOutput> | void {
-    const command = new CreateFirewallCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates the firewall policy for the firewall according to the specifications. </p>
-   *          <p>An AWS Network Firewall firewall policy defines the behavior of a firewall, in a collection of
-   *          stateless and stateful rule groups and other settings. You can use one firewall policy for
-   *          multiple firewalls. </p>
-   */
-  public createFirewallPolicy(
-    args: CreateFirewallPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateFirewallPolicyCommandOutput>;
-  public createFirewallPolicy(
-    args: CreateFirewallPolicyCommandInput,
-    cb: (err: any, data?: CreateFirewallPolicyCommandOutput) => void
-  ): void;
-  public createFirewallPolicy(
-    args: CreateFirewallPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateFirewallPolicyCommandOutput) => void
-  ): void;
-  public createFirewallPolicy(
-    args: CreateFirewallPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFirewallPolicyCommandOutput) => void),
-    cb?: (err: any, data?: CreateFirewallPolicyCommandOutput) => void
-  ): Promise<CreateFirewallPolicyCommandOutput> | void {
-    const command = new CreateFirewallPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates the specified stateless or stateful rule group, which includes the rules for
-   *          network traffic inspection, a capacity setting, and tags. </p>
-   *          <p>You provide your rule group specification in your request using either
-   *             <code>RuleGroup</code> or <code>Rules</code>.</p>
-   */
-  public createRuleGroup(
-    args: CreateRuleGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRuleGroupCommandOutput>;
-  public createRuleGroup(
-    args: CreateRuleGroupCommandInput,
-    cb: (err: any, data?: CreateRuleGroupCommandOutput) => void
-  ): void;
-  public createRuleGroup(
-    args: CreateRuleGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRuleGroupCommandOutput) => void
-  ): void;
-  public createRuleGroup(
-    args: CreateRuleGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRuleGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateRuleGroupCommandOutput) => void
-  ): Promise<CreateRuleGroupCommandOutput> | void {
-    const command = new CreateRuleGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified <a>Firewall</a> and its <a>FirewallStatus</a>.
-   *        This operation requires the firewall's <code>DeleteProtection</code> flag to be
-   *             <code>FALSE</code>. You can't revert this operation. </p>
-   *          <p>You can check whether a firewall is
-   *          in use by reviewing the route tables for the Availability Zones where you have
-   *          firewall subnet mappings. Retrieve the subnet mappings by calling <a>DescribeFirewall</a>.
-   *          You define and update the route tables through Amazon VPC. As needed, update the route tables for the
-   *          zones to remove the firewall endpoints. When the route tables no longer use the firewall endpoints,
-   *          you can remove the firewall safely.</p>
-   *          <p>To delete a firewall, remove the delete protection if you need to using <a>UpdateFirewallDeleteProtection</a>,
-   *          then delete the firewall by calling <a>DeleteFirewall</a>. </p>
-   */
-  public deleteFirewall(
-    args: DeleteFirewallCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteFirewallCommandOutput>;
-  public deleteFirewall(
-    args: DeleteFirewallCommandInput,
-    cb: (err: any, data?: DeleteFirewallCommandOutput) => void
-  ): void;
-  public deleteFirewall(
-    args: DeleteFirewallCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteFirewallCommandOutput) => void
-  ): void;
-  public deleteFirewall(
-    args: DeleteFirewallCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFirewallCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFirewallCommandOutput) => void
-  ): Promise<DeleteFirewallCommandOutput> | void {
-    const command = new DeleteFirewallCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified <a>FirewallPolicy</a>. </p>
-   */
-  public deleteFirewallPolicy(
-    args: DeleteFirewallPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteFirewallPolicyCommandOutput>;
-  public deleteFirewallPolicy(
-    args: DeleteFirewallPolicyCommandInput,
-    cb: (err: any, data?: DeleteFirewallPolicyCommandOutput) => void
-  ): void;
-  public deleteFirewallPolicy(
-    args: DeleteFirewallPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteFirewallPolicyCommandOutput) => void
-  ): void;
-  public deleteFirewallPolicy(
-    args: DeleteFirewallPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFirewallPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFirewallPolicyCommandOutput) => void
-  ): Promise<DeleteFirewallPolicyCommandOutput> | void {
-    const command = new DeleteFirewallPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a resource policy that you created in a <a>PutResourcePolicy</a> request. </p>
-   */
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteResourcePolicyCommandOutput>;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): Promise<DeleteResourcePolicyCommandOutput> | void {
-    const command = new DeleteResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified <a>RuleGroup</a>. </p>
-   */
-  public deleteRuleGroup(
-    args: DeleteRuleGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRuleGroupCommandOutput>;
-  public deleteRuleGroup(
-    args: DeleteRuleGroupCommandInput,
-    cb: (err: any, data?: DeleteRuleGroupCommandOutput) => void
-  ): void;
-  public deleteRuleGroup(
-    args: DeleteRuleGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRuleGroupCommandOutput) => void
-  ): void;
-  public deleteRuleGroup(
-    args: DeleteRuleGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRuleGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRuleGroupCommandOutput) => void
-  ): Promise<DeleteRuleGroupCommandOutput> | void {
-    const command = new DeleteRuleGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data objects for the specified firewall. </p>
-   */
-  public describeFirewall(
-    args: DescribeFirewallCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeFirewallCommandOutput>;
-  public describeFirewall(
-    args: DescribeFirewallCommandInput,
-    cb: (err: any, data?: DescribeFirewallCommandOutput) => void
-  ): void;
-  public describeFirewall(
-    args: DescribeFirewallCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeFirewallCommandOutput) => void
-  ): void;
-  public describeFirewall(
-    args: DescribeFirewallCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFirewallCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFirewallCommandOutput) => void
-  ): Promise<DescribeFirewallCommandOutput> | void {
-    const command = new DescribeFirewallCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data objects for the specified firewall policy. </p>
-   */
-  public describeFirewallPolicy(
-    args: DescribeFirewallPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeFirewallPolicyCommandOutput>;
-  public describeFirewallPolicy(
-    args: DescribeFirewallPolicyCommandInput,
-    cb: (err: any, data?: DescribeFirewallPolicyCommandOutput) => void
-  ): void;
-  public describeFirewallPolicy(
-    args: DescribeFirewallPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeFirewallPolicyCommandOutput) => void
-  ): void;
-  public describeFirewallPolicy(
-    args: DescribeFirewallPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFirewallPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFirewallPolicyCommandOutput) => void
-  ): Promise<DescribeFirewallPolicyCommandOutput> | void {
-    const command = new DescribeFirewallPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the logging configuration for the specified firewall. </p>
-   */
-  public describeLoggingConfiguration(
-    args: DescribeLoggingConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeLoggingConfigurationCommandOutput>;
-  public describeLoggingConfiguration(
-    args: DescribeLoggingConfigurationCommandInput,
-    cb: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
-  ): void;
-  public describeLoggingConfiguration(
-    args: DescribeLoggingConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
-  ): void;
-  public describeLoggingConfiguration(
-    args: DescribeLoggingConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeLoggingConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
-  ): Promise<DescribeLoggingConfigurationCommandOutput> | void {
-    const command = new DescribeLoggingConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a resource policy that you created in a <a>PutResourcePolicy</a> request. </p>
-   */
-  public describeResourcePolicy(
-    args: DescribeResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeResourcePolicyCommandOutput>;
-  public describeResourcePolicy(
-    args: DescribeResourcePolicyCommandInput,
-    cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
-  ): void;
-  public describeResourcePolicy(
-    args: DescribeResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
-  ): void;
-  public describeResourcePolicy(
-    args: DescribeResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
-  ): Promise<DescribeResourcePolicyCommandOutput> | void {
-    const command = new DescribeResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data objects for the specified rule group. </p>
-   */
-  public describeRuleGroup(
-    args: DescribeRuleGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRuleGroupCommandOutput>;
-  public describeRuleGroup(
-    args: DescribeRuleGroupCommandInput,
-    cb: (err: any, data?: DescribeRuleGroupCommandOutput) => void
-  ): void;
-  public describeRuleGroup(
-    args: DescribeRuleGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRuleGroupCommandOutput) => void
-  ): void;
-  public describeRuleGroup(
-    args: DescribeRuleGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRuleGroupCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRuleGroupCommandOutput) => void
-  ): Promise<DescribeRuleGroupCommandOutput> | void {
-    const command = new DescribeRuleGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes the specified subnet associations from the firewall. This removes the
-   *           firewall endpoints from the subnets and removes any network filtering protections that the endpoints
-   *           were providing.
-   *       </p>
-   */
-  public disassociateSubnets(
-    args: DisassociateSubnetsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateSubnetsCommandOutput>;
-  public disassociateSubnets(
-    args: DisassociateSubnetsCommandInput,
-    cb: (err: any, data?: DisassociateSubnetsCommandOutput) => void
-  ): void;
-  public disassociateSubnets(
-    args: DisassociateSubnetsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateSubnetsCommandOutput) => void
-  ): void;
-  public disassociateSubnets(
-    args: DisassociateSubnetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateSubnetsCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateSubnetsCommandOutput) => void
-  ): Promise<DisassociateSubnetsCommandOutput> | void {
-    const command = new DisassociateSubnetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the metadata for the firewall policies that you have defined. Depending on
-   *          your setting for max results and the number of firewall policies, a single call might not
-   *          return the full list. </p>
-   */
-  public listFirewallPolicies(
-    args: ListFirewallPoliciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListFirewallPoliciesCommandOutput>;
-  public listFirewallPolicies(
-    args: ListFirewallPoliciesCommandInput,
-    cb: (err: any, data?: ListFirewallPoliciesCommandOutput) => void
-  ): void;
-  public listFirewallPolicies(
-    args: ListFirewallPoliciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListFirewallPoliciesCommandOutput) => void
-  ): void;
-  public listFirewallPolicies(
-    args: ListFirewallPoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFirewallPoliciesCommandOutput) => void),
-    cb?: (err: any, data?: ListFirewallPoliciesCommandOutput) => void
-  ): Promise<ListFirewallPoliciesCommandOutput> | void {
-    const command = new ListFirewallPoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the metadata for the firewalls that you have defined. If you provide VPC
-   *          identifiers in your request, this returns only the firewalls for those VPCs.</p>
-   *          <p>Depending on your setting for max results and the number of firewalls, a single call
-   *          might not return the full list. </p>
-   */
-  public listFirewalls(
-    args: ListFirewallsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListFirewallsCommandOutput>;
-  public listFirewalls(
-    args: ListFirewallsCommandInput,
-    cb: (err: any, data?: ListFirewallsCommandOutput) => void
-  ): void;
-  public listFirewalls(
-    args: ListFirewallsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListFirewallsCommandOutput) => void
-  ): void;
-  public listFirewalls(
-    args: ListFirewallsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFirewallsCommandOutput) => void),
-    cb?: (err: any, data?: ListFirewallsCommandOutput) => void
-  ): Promise<ListFirewallsCommandOutput> | void {
-    const command = new ListFirewallsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the metadata for the rule groups that you have defined. Depending on your
-   *          setting for max results and the number of rule groups, a single call might not return the
-   *          full list. </p>
-   */
-  public listRuleGroups(
-    args: ListRuleGroupsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRuleGroupsCommandOutput>;
-  public listRuleGroups(
-    args: ListRuleGroupsCommandInput,
-    cb: (err: any, data?: ListRuleGroupsCommandOutput) => void
-  ): void;
-  public listRuleGroups(
-    args: ListRuleGroupsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRuleGroupsCommandOutput) => void
-  ): void;
-  public listRuleGroups(
-    args: ListRuleGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRuleGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListRuleGroupsCommandOutput) => void
-  ): Promise<ListRuleGroupsCommandOutput> | void {
-    const command = new ListRuleGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the tags associated with the specified resource. Tags are key:value pairs that
-   *          you can use to categorize and manage your resources, for purposes like billing. For
-   *          example, you might set the tag key to "customer" and the value to the customer name or ID.
-   *          You can specify one or more tags to add to each AWS resource, up to 50 tags for a
-   *          resource.</p>
-   *          <p>You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall
-   *          policies, and rule groups. </p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates an AWS Identity and Access Management policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the AWS Resource Access Manager (RAM) service
-   *            to manage resource sharing for Network Firewall. </p>
-   *          <p>Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform. </p>
-   *          <p>When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy. </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html">GetResourceShareInvitations</a> - Returns the Amazon Resource Names (ARNs) of the resource share invitations.  </p>
-   *            </li>
-   *             <li>
-   *                <p>
-   *                   <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html">AcceptResourceShareInvitation</a> - Accepts the share invitation for a specified resource share. </p>
-   *            </li>
-   *          </ul>
-   *          <p>For additional information about resource sharing using RAM, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/what-is.html">AWS Resource Access Manager User Guide</a>.</p>
-   */
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutResourcePolicyCommandOutput>;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): Promise<PutResourcePolicyCommandOutput> | void {
-    const command = new PutResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds the specified tags to the specified resource. Tags are key:value pairs that you can
-   *          use to categorize and manage your resources, for purposes like billing. For example, you
-   *          might set the tag key to "customer" and the value to the customer name or ID. You can
-   *          specify one or more tags to add to each AWS resource, up to 50 tags for a resource.</p>
-   *          <p>You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall
-   *          policies, and rule groups. </p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes the tags with the specified keys from the specified resource. Tags are key:value
-   *          pairs that you can use to categorize and manage your resources, for purposes like billing.
-   *          For example, you might set the tag key to "customer" and the value to the customer name or
-   *          ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a
-   *          resource.</p>
-   *          <p>You can manage tags for the AWS resources that you manage through AWS Network Firewall:
-   *          firewalls, firewall policies, and rule groups. </p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies the flag, <code>DeleteProtection</code>, which indicates whether it is possible
-   *          to delete the firewall. If the flag is set to <code>TRUE</code>, the firewall is protected
-   *          against deletion. This setting helps protect against accidentally deleting a firewall
-   *          that's in use. </p>
-   */
-  public updateFirewallDeleteProtection(
-    args: UpdateFirewallDeleteProtectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFirewallDeleteProtectionCommandOutput>;
-  public updateFirewallDeleteProtection(
-    args: UpdateFirewallDeleteProtectionCommandInput,
-    cb: (err: any, data?: UpdateFirewallDeleteProtectionCommandOutput) => void
-  ): void;
-  public updateFirewallDeleteProtection(
-    args: UpdateFirewallDeleteProtectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFirewallDeleteProtectionCommandOutput) => void
-  ): void;
-  public updateFirewallDeleteProtection(
-    args: UpdateFirewallDeleteProtectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFirewallDeleteProtectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFirewallDeleteProtectionCommandOutput) => void
-  ): Promise<UpdateFirewallDeleteProtectionCommandOutput> | void {
-    const command = new UpdateFirewallDeleteProtectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies the description for the specified firewall. Use the description to help you
-   *          identify the firewall when you're working with it. </p>
-   */
-  public updateFirewallDescription(
-    args: UpdateFirewallDescriptionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFirewallDescriptionCommandOutput>;
-  public updateFirewallDescription(
-    args: UpdateFirewallDescriptionCommandInput,
-    cb: (err: any, data?: UpdateFirewallDescriptionCommandOutput) => void
-  ): void;
-  public updateFirewallDescription(
-    args: UpdateFirewallDescriptionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFirewallDescriptionCommandOutput) => void
-  ): void;
-  public updateFirewallDescription(
-    args: UpdateFirewallDescriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFirewallDescriptionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFirewallDescriptionCommandOutput) => void
-  ): Promise<UpdateFirewallDescriptionCommandOutput> | void {
-    const command = new UpdateFirewallDescriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the properties of the specified firewall policy.</p>
-   */
-  public updateFirewallPolicy(
-    args: UpdateFirewallPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFirewallPolicyCommandOutput>;
-  public updateFirewallPolicy(
-    args: UpdateFirewallPolicyCommandInput,
-    cb: (err: any, data?: UpdateFirewallPolicyCommandOutput) => void
-  ): void;
-  public updateFirewallPolicy(
-    args: UpdateFirewallPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFirewallPolicyCommandOutput) => void
-  ): void;
-  public updateFirewallPolicy(
-    args: UpdateFirewallPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFirewallPolicyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFirewallPolicyCommandOutput) => void
-  ): Promise<UpdateFirewallPolicyCommandOutput> | void {
-    const command = new UpdateFirewallPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p></p>
-   */
-  public updateFirewallPolicyChangeProtection(
-    args: UpdateFirewallPolicyChangeProtectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFirewallPolicyChangeProtectionCommandOutput>;
-  public updateFirewallPolicyChangeProtection(
-    args: UpdateFirewallPolicyChangeProtectionCommandInput,
-    cb: (err: any, data?: UpdateFirewallPolicyChangeProtectionCommandOutput) => void
-  ): void;
-  public updateFirewallPolicyChangeProtection(
-    args: UpdateFirewallPolicyChangeProtectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFirewallPolicyChangeProtectionCommandOutput) => void
-  ): void;
-  public updateFirewallPolicyChangeProtection(
-    args: UpdateFirewallPolicyChangeProtectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFirewallPolicyChangeProtectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFirewallPolicyChangeProtectionCommandOutput) => void
-  ): Promise<UpdateFirewallPolicyChangeProtectionCommandOutput> | void {
-    const command = new UpdateFirewallPolicyChangeProtectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the logging configuration for the specified firewall. </p>
-   *          <p>To change the logging configuration, retrieve the <a>LoggingConfiguration</a> by calling <a>DescribeLoggingConfiguration</a>, then change it and provide
-   *          the modified object to this update call. You must change the logging configuration one
-   *             <a>LogDestinationConfig</a> at a time inside the retrieved <a>LoggingConfiguration</a> object. </p>
-   *          <p>You can perform only one of the following actions in any call to
-   *             <code>UpdateLoggingConfiguration</code>: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Create a new log destination object by adding a single
-   *                   <code>LogDestinationConfig</code> array element to
-   *                   <code>LogDestinationConfigs</code>.</p>
-   *             </li>
-   *             <li>
-   *                <p>Delete a log destination object by removing a single
-   *                   <code>LogDestinationConfig</code> array element from
-   *                   <code>LogDestinationConfigs</code>.</p>
-   *             </li>
-   *             <li>
-   *                <p>Change the <code>LogDestination</code> setting in a single
-   *                   <code>LogDestinationConfig</code> array element.</p>
-   *             </li>
-   *          </ul>
-   *          <p>You can't change the <code>LogDestinationType</code> or <code>LogType</code> in a
-   *             <code>LogDestinationConfig</code>. To change these settings, delete the existing
-   *             <code>LogDestinationConfig</code> object and create a new one, using two separate calls
-   *          to this update operation.</p>
-   */
-  public updateLoggingConfiguration(
-    args: UpdateLoggingConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateLoggingConfigurationCommandOutput>;
-  public updateLoggingConfiguration(
-    args: UpdateLoggingConfigurationCommandInput,
-    cb: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
-  ): void;
-  public updateLoggingConfiguration(
-    args: UpdateLoggingConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
-  ): void;
-  public updateLoggingConfiguration(
-    args: UpdateLoggingConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLoggingConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
-  ): Promise<UpdateLoggingConfigurationCommandOutput> | void {
-    const command = new UpdateLoggingConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the rule settings for the specified rule group. You use a rule group by
-   *          reference in one or more firewall policies. When you modify a rule group, you modify all
-   *          firewall policies that use the rule group. </p>
-   *          <p>To update a rule group, first call <a>DescribeRuleGroup</a> to retrieve the
-   *          current <a>RuleGroup</a> object, update the object as needed, and then provide
-   *          the updated object to this call. </p>
-   */
-  public updateRuleGroup(
-    args: UpdateRuleGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRuleGroupCommandOutput>;
-  public updateRuleGroup(
-    args: UpdateRuleGroupCommandInput,
-    cb: (err: any, data?: UpdateRuleGroupCommandOutput) => void
-  ): void;
-  public updateRuleGroup(
-    args: UpdateRuleGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRuleGroupCommandOutput) => void
-  ): void;
-  public updateRuleGroup(
-    args: UpdateRuleGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRuleGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRuleGroupCommandOutput) => void
-  ): Promise<UpdateRuleGroupCommandOutput> | void {
-    const command = new UpdateRuleGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p></p>
-   */
-  public updateSubnetChangeProtection(
-    args: UpdateSubnetChangeProtectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSubnetChangeProtectionCommandOutput>;
-  public updateSubnetChangeProtection(
-    args: UpdateSubnetChangeProtectionCommandInput,
-    cb: (err: any, data?: UpdateSubnetChangeProtectionCommandOutput) => void
-  ): void;
-  public updateSubnetChangeProtection(
-    args: UpdateSubnetChangeProtectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSubnetChangeProtectionCommandOutput) => void
-  ): void;
-  public updateSubnetChangeProtection(
-    args: UpdateSubnetChangeProtectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSubnetChangeProtectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSubnetChangeProtectionCommandOutput) => void
-  ): Promise<UpdateSubnetChangeProtectionCommandOutput> | void {
-    const command = new UpdateSubnetChangeProtectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class NetworkFirewall extends NetworkFirewallClient implements NetworkFirewall {}
+createAggregatedClient(commands, NetworkFirewall, { paginators, waiters });

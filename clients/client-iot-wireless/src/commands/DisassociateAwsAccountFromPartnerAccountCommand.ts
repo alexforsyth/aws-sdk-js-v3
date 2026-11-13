@@ -1,110 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisassociateAwsAccountFromPartnerAccountRequest,
   DisassociateAwsAccountFromPartnerAccountResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateAwsAccountFromPartnerAccountCommand,
-  serializeAws_restJson1DisassociateAwsAccountFromPartnerAccountCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface DisassociateAwsAccountFromPartnerAccountCommandInput
-  extends DisassociateAwsAccountFromPartnerAccountRequest {}
-export interface DisassociateAwsAccountFromPartnerAccountCommandOutput
-  extends DisassociateAwsAccountFromPartnerAccountResponse,
-    __MetadataBearer {}
+import { DisassociateAwsAccountFromPartnerAccount$ } from "../schemas/schemas_0";
 
 /**
- * <p>Disassociates your AWS account from a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, disassociates your AWS account from all partner accounts.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateAwsAccountFromPartnerAccountCommand}.
+ */
+export interface DisassociateAwsAccountFromPartnerAccountCommandInput extends DisassociateAwsAccountFromPartnerAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateAwsAccountFromPartnerAccountCommand}.
+ */
+export interface DisassociateAwsAccountFromPartnerAccountCommandOutput extends DisassociateAwsAccountFromPartnerAccountResponse, __MetadataBearer {}
+
+/**
+ * <p>Disassociates your AWS account from a partner account. If
+ *                 <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>,
+ *             disassociates your AWS account from all partner accounts.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTWirelessClient, DisassociateAwsAccountFromPartnerAccountCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, DisassociateAwsAccountFromPartnerAccountCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // DisassociateAwsAccountFromPartnerAccountRequest
+ *   PartnerAccountId: "STRING_VALUE", // required
+ *   PartnerType: "Sidewalk", // required
+ * };
  * const command = new DisassociateAwsAccountFromPartnerAccountCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateAwsAccountFromPartnerAccountCommandInput - {@link DisassociateAwsAccountFromPartnerAccountCommandInput}
+ * @returns {@link DisassociateAwsAccountFromPartnerAccountCommandOutput}
  * @see {@link DisassociateAwsAccountFromPartnerAccountCommandInput} for command's `input` shape.
  * @see {@link DisassociateAwsAccountFromPartnerAccountCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateAwsAccountFromPartnerAccountCommand extends $Command<
-  DisassociateAwsAccountFromPartnerAccountCommandInput,
-  DisassociateAwsAccountFromPartnerAccountCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateAwsAccountFromPartnerAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DisassociateAwsAccountFromPartnerAccountCommandInput,
-    DisassociateAwsAccountFromPartnerAccountCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "DisassociateAwsAccountFromPartnerAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateAwsAccountFromPartnerAccountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateAwsAccountFromPartnerAccountResponse.filterSensitiveLog,
+export class DisassociateAwsAccountFromPartnerAccountCommand extends command<DisassociateAwsAccountFromPartnerAccountCommandInput, DisassociateAwsAccountFromPartnerAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateAwsAccountFromPartnerAccount",
+  DisassociateAwsAccountFromPartnerAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateAwsAccountFromPartnerAccountRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateAwsAccountFromPartnerAccountCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateAwsAccountFromPartnerAccountCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateAwsAccountFromPartnerAccountCommandOutput> {
-    return deserializeAws_restJson1DisassociateAwsAccountFromPartnerAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateAwsAccountFromPartnerAccountCommandInput;
+      output: DisassociateAwsAccountFromPartnerAccountCommandOutput;
+    };
+  };
 }

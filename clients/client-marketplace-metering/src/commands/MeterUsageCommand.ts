@@ -1,105 +1,188 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MarketplaceMeteringClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MarketplaceMeteringClient";
-import { MeterUsageRequest, MeterUsageResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1MeterUsageCommand,
-  serializeAws_json1_1MeterUsageCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { MeterUsageRequest, MeterUsageResult } from "../models/models_0";
+import { MeterUsage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MeterUsageCommand}.
+ */
 export interface MeterUsageCommandInput extends MeterUsageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link MeterUsageCommand}.
+ */
 export interface MeterUsageCommandOutput extends MeterUsageResult, __MetadataBearer {}
 
 /**
- * <p>API to emit metering records. For identical requests, the API is idempotent. It
- *             simply returns the metering record ID.</p>
- *         <p>MeterUsage is authenticated on the buyer's AWS account using credentials from the
- *             EC2 instance, ECS task, or EKS pod.</p>
- *         <p>MeterUsage can optionally include multiple usage allocations, to provide customers
- *             with usage data split into buckets by tags that you define (or allow the customer to
- *             define).</p>
+ * <p>As a seller, your software hosted in the buyer's Amazon Web Services account uses this API action to emit metering records directly to Amazon Web Services Marketplace.
+ *             You must use the following buyer Amazon Web Services account credentials to sign the API request.</p>
+ *          <ul>
+ *             <li>
+ *                <p>For <b>Amazon EC2</b> deployments, your software must use the
+ *                     <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">IAM role for Amazon EC2</a>
+ *                     to sign the API call for <code>MeterUsage</code> API operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>For <b>Amazon EKS</b> deployments, your software must use
+ *                     <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">IAM roles for service accounts (IRSA)</a>
+ *                     to sign the API call for the <code>MeterUsage</code> API operation. Using
+ *                     <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">EKS Pod Identity</a>, the node role, or long-term access keys is not supported.</p>
+ *             </li>
+ *             <li>
+ *                <p>For <b>Amazon ECS</b> deployments, your software must use
+ *                     <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">Amazon ECS task IAM</a>
+ *                     role to sign the API call for the <code>MeterUsage</code> API operation. Using the node role or long-term access keys are not supported.</p>
+ *             </li>
+ *             <li>
+ *                <p>For <b>Amazon Bedrock AgentCore Runtime</b> deployments, your software must use the
+ *                     <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-permissions.html#runtime-permissions-execution">AgentCore Runtime execution role</a>
+ *                     to sign the API call for the <code>MeterUsage</code> API operation. Long-term access keys are not supported.</p>
+ *             </li>
+ *          </ul>
+ *          <p>The handling of <code>MeterUsage</code> requests varies between Amazon Bedrock AgentCore Runtime and non-Amazon Bedrock AgentCore deployments.</p>
+ *          <ul>
+ *             <li>
+ *                <p>For <b>non-Amazon Bedrock AgentCore Runtime</b> deployments, you can only report usage once per hour for each dimension.
+ *                     For AMI-based products, this is per dimension and per EC2 instance. For container products, this is per dimension and per ECS task or EKS pod. You can't modify values
+ *                     after they're recorded. If you report usage before a current hour ends, you will be unable to report additional usage until the next hour begins.
+ *                     The <code>Timestamp</code> request parameter is rounded down to the hour and used to enforce this once-per-hour rule for idempotency.
+ *                     For requests that are identical after the <code>Timestamp</code> is rounded down, the API is idempotent and returns the metering record ID.</p>
+ *             </li>
+ *             <li>
+ *                <p>For <b>Amazon Bedrock AgentCore Runtime</b> deployments, you can report usage multiple times per hour for the same dimension.
+ *                     You do not need to aggregate metering records by the hour. You must include an idempotency token in the <code>ClientToken</code> request parameter. If using an Amazon
+ *                     SDK or the Amazon Web Services CLI, you must use the latest version which automatically includes an idempotency token in the <code>ClientToken</code> request parameter so that the request is processed successfully.
+ *                     The <code>Timestamp</code> request parameter is not rounded down to the hour and is not used for duplicate validation. Requests with duplicate <code>Timestamps</code> are aggregated as long as the
+ *                     <code>ClientToken</code> is unique.</p>
+ *             </li>
+ *          </ul>
+ *          <p>If you submit records more than six hours after events occur, the records won't be accepted. The timestamp in your request determines when an event is recorded.</p>
+ *          <p>To report fractional usage, use <code>UsageQuantityAsDecimal</code> instead of
+ *                 <code>UsageQuantity</code>.</p>
+ *          <p>You can optionally include multiple usage allocations, to provide customers with usage data split into buckets by tags that you define or allow the customer to define.</p>
+ *          <p>For Amazon Web Services Regions that support <code>MeterUsage</code>, see <a href="https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#meterusage-region-support-ec2">MeterUsage Region support for Amazon EC2</a> and <a href="https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#meterusage-region-support-ecs-eks">MeterUsage Region support for Amazon ECS and Amazon EKS</a>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MarketplaceMeteringClient, MeterUsageCommand } from "@aws-sdk/client-marketplace-metering"; // ES Modules import
  * // const { MarketplaceMeteringClient, MeterUsageCommand } = require("@aws-sdk/client-marketplace-metering"); // CommonJS import
+ * // import type { MarketplaceMeteringClientConfig } from "@aws-sdk/client-marketplace-metering";
+ * const config = {}; // type is MarketplaceMeteringClientConfig
  * const client = new MarketplaceMeteringClient(config);
+ * const input = { // MeterUsageRequest
+ *   ProductCode: "STRING_VALUE", // required
+ *   Timestamp: new Date("TIMESTAMP"), // required
+ *   UsageDimension: "STRING_VALUE", // required
+ *   UsageQuantity: Number("int"),
+ *   UsageQuantityAsDecimal: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   UsageAllocations: [ // UsageAllocations
+ *     { // UsageAllocation
+ *       AllocatedUsageQuantity: Number("int"),
+ *       AllocatedUsageQuantityAsDecimal: "STRING_VALUE",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE", // required
+ *           Value: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   ClientToken: "STRING_VALUE",
+ * };
  * const command = new MeterUsageCommand(input);
  * const response = await client.send(command);
+ * // { // MeterUsageResult
+ * //   MeteringRecordId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param MeterUsageCommandInput - {@link MeterUsageCommandInput}
+ * @returns {@link MeterUsageCommandOutput}
  * @see {@link MeterUsageCommandInput} for command's `input` shape.
  * @see {@link MeterUsageCommandOutput} for command's `response` shape.
- * @see {@link MarketplaceMeteringClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MarketplaceMeteringClientResolvedConfig | config} for MarketplaceMeteringClient's `config` shape.
  *
+ * @throws {@link CustomerNotEntitledException} (client fault)
+ *  <p>Exception thrown when the customer does not have a valid subscription for the
+ *             product.</p>
+ *
+ * @throws {@link DuplicateRequestException} (client fault)
+ *  <p>A metering record has already been emitted by the same EC2 instance, ECS task, or EKS
+ *             pod for the given {<code>usageDimension</code>, <code>timestamp</code>} with a different
+ *                 <code>usageQuantity</code>. Quantities are compared by value, so a whole-number and a
+ *             decimal quantity with the same value (for example, <code>17</code> and
+ *                 <code>17.00</code>) are not different.</p>
+ *
+ * @throws {@link IdempotencyConflictException} (client fault)
+ *  <p>The <code>ClientToken</code> is being used for multiple requests.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error has occurred. Retry your request. If the problem persists, post a
+ *             message with details on the Amazon Web Services forums.</p>
+ *
+ * @throws {@link InvalidEndpointRegionException} (client fault)
+ *  <p>The endpoint being called is in a Amazon Web Services Region different from your EC2 instance, ECS
+ *             task, or EKS pod. The Region of the Metering Service endpoint and the Amazon Web Services Region of
+ *             the resource must match.</p>
+ *
+ * @throws {@link InvalidProductCodeException} (client fault)
+ *  <p>The product code passed does not match the product code used for publishing the
+ *             product.</p>
+ *
+ * @throws {@link InvalidTagException} (client fault)
+ *  <p>The tag is invalid, or the number of tags is greater than 5.</p>
+ *
+ * @throws {@link InvalidUsageAllocationsException} (client fault)
+ *  <p>Sum of allocated usage quantities is not equal to the usage quantity, or the
+ *             allocations don't use the same type of quantity (whole number or decimal) as the usage
+ *             quantity.</p>
+ *
+ * @throws {@link InvalidUsageDimensionException} (client fault)
+ *  <p>The usage dimension does not match one of the <code>UsageDimensions</code> associated
+ *             with products.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The calls to the API are throttled.</p>
+ *
+ * @throws {@link TimestampOutOfBoundsException} (client fault)
+ *  <p>The <code>timestamp</code> value passed in the <code>UsageRecord</code> is out of
+ *             allowed range.</p>
+ *          <p>For <code>BatchMeterUsage</code>, if any of the records are outside of the allowed
+ *             range, the entire batch is not processed. You must remove invalid records and try
+ *             again.</p>
+ *
+ * @throws {@link MarketplaceMeteringServiceException}
+ * <p>Base exception class for all service exceptions from MarketplaceMetering service.</p>
+ *
+ *
+ * @public
  */
-export class MeterUsageCommand extends $Command<
-  MeterUsageCommandInput,
-  MeterUsageCommandOutput,
-  MarketplaceMeteringClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: MeterUsageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MarketplaceMeteringClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MeterUsageCommandInput, MeterUsageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MarketplaceMeteringClient";
-    const commandName = "MeterUsageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: MeterUsageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: MeterUsageResult.filterSensitiveLog,
+export class MeterUsageCommand extends command<MeterUsageCommandInput, MeterUsageCommandOutput>(
+  _ep0,
+  _mw0,
+  "MeterUsage",
+  MeterUsage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MeterUsageRequest;
+      output: MeterUsageResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: MeterUsageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1MeterUsageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<MeterUsageCommandOutput> {
-    return deserializeAws_json1_1MeterUsageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MeterUsageCommandInput;
+      output: MeterUsageCommandOutput;
+    };
+  };
 }

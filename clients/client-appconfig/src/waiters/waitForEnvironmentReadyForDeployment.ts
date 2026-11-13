@@ -1,0 +1,75 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import type { AppConfigClient } from "../AppConfigClient";
+import {
+  type GetEnvironmentCommandInput,
+  type GetEnvironmentCommandOutput,
+  GetEnvironmentCommand,
+} from "../commands/GetEnvironmentCommand";
+import type { AppConfigServiceException } from "../models/AppConfigServiceException";
+
+const checkState = async (client: AppConfigClient, input: GetEnvironmentCommandInput): Promise<WaiterResult<GetEnvironmentCommandOutput | AppConfigServiceException>> => {
+  let reason;
+  try {
+    let result: GetEnvironmentCommandOutput & any = await client.send(new GetEnvironmentCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.State;
+      }
+      if (returnComparator() === "ReadyForDeployment") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.State;
+      }
+      if (returnComparator() === "RolledBack") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.State;
+      }
+      if (returnComparator() === "Reverted") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ *
+ *  @deprecated Use waitUntilEnvironmentReadyForDeployment instead. waitForEnvironmentReadyForDeployment does not throw error in non-success cases.
+ */
+export const waitForEnvironmentReadyForDeployment = async (
+  params: WaiterConfiguration<AppConfigClient>,
+  input: GetEnvironmentCommandInput
+): Promise<WaiterResult<GetEnvironmentCommandOutput | AppConfigServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to GetEnvironmentCommand for polling.
+ */
+export const waitUntilEnvironmentReadyForDeployment = async (
+  params: WaiterConfiguration<AppConfigClient>,
+  input: GetEnvironmentCommandInput
+): Promise<WaiterResult<GetEnvironmentCommandOutput>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<GetEnvironmentCommandOutput>;
+};

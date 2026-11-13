@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { StartMultiplexRequest, StartMultiplexResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1StartMultiplexCommand,
-  serializeAws_restJson1StartMultiplexCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartMultiplexRequest, StartMultiplexResponse } from "../models/models_1";
+import { StartMultiplex$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartMultiplexCommand}.
+ */
 export interface StartMultiplexCommandInput extends StartMultiplexRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartMultiplexCommand}.
+ */
 export interface StartMultiplexCommandOutput extends StartMultiplexResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,95 @@ export interface StartMultiplexCommandOutput extends StartMultiplexResponse, __M
  * ```javascript
  * import { MediaLiveClient, StartMultiplexCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, StartMultiplexCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // StartMultiplexRequest
+ *   MultiplexId: "STRING_VALUE", // required
+ * };
  * const command = new StartMultiplexCommand(input);
  * const response = await client.send(command);
+ * // { // StartMultiplexResponse
+ * //   Arn: "STRING_VALUE",
+ * //   AvailabilityZones: [ // __listOf__string
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Destinations: [ // __listOfMultiplexOutputDestination
+ * //     { // MultiplexOutputDestination
+ * //       MediaConnectSettings: { // MultiplexMediaConnectOutputDestinationSettings
+ * //         EntitlementArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   Id: "STRING_VALUE",
+ * //   MultiplexSettings: { // MultiplexSettings
+ * //     MaximumVideoBufferDelayMilliseconds: Number("int"),
+ * //     TransportStreamBitrate: Number("int"), // required
+ * //     TransportStreamId: Number("int"), // required
+ * //     TransportStreamReservedBitrate: Number("int"),
+ * //   },
+ * //   Name: "STRING_VALUE",
+ * //   PipelinesRunningCount: Number("int"),
+ * //   ProgramCount: Number("int"),
+ * //   State: "CREATING" || "CREATE_FAILED" || "IDLE" || "STARTING" || "RUNNING" || "RECOVERING" || "STOPPING" || "DELETING" || "DELETED",
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartMultiplexCommandInput - {@link StartMultiplexCommandInput}
+ * @returns {@link StartMultiplexCommandOutput}
  * @see {@link StartMultiplexCommandInput} for command's `input` shape.
  * @see {@link StartMultiplexCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Placeholder documentation for ConflictException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class StartMultiplexCommand extends $Command<
-  StartMultiplexCommandInput,
-  StartMultiplexCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartMultiplexCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartMultiplexCommandInput, StartMultiplexCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "StartMultiplexCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartMultiplexRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartMultiplexResponse.filterSensitiveLog,
+export class StartMultiplexCommand extends command<StartMultiplexCommandInput, StartMultiplexCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartMultiplex",
+  StartMultiplex$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMultiplexRequest;
+      output: StartMultiplexResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartMultiplexCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartMultiplexCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartMultiplexCommandOutput> {
-    return deserializeAws_restJson1StartMultiplexCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartMultiplexCommandInput;
+      output: StartMultiplexCommandOutput;
+    };
+  };
 }

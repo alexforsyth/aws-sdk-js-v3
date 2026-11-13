@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { DeleteMLModelInput, DeleteMLModelOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteMLModelCommand,
-  serializeAws_json1_1DeleteMLModelCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMLModelInput, DeleteMLModelOutput } from "../models/models_0";
+import { DeleteMLModel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMLModelCommand}.
+ */
 export interface DeleteMLModelCommandInput extends DeleteMLModelInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMLModelCommand}.
+ */
 export interface DeleteMLModelCommandOutput extends DeleteMLModelOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,56 @@ export interface DeleteMLModelCommandOutput extends DeleteMLModelOutput, __Metad
  * ```javascript
  * import { MachineLearningClient, DeleteMLModelCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, DeleteMLModelCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // DeleteMLModelInput
+ *   MLModelId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteMLModelCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteMLModelOutput
+ * //   MLModelId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteMLModelCommandInput - {@link DeleteMLModelCommandInput}
+ * @returns {@link DeleteMLModelCommandOutput}
  * @see {@link DeleteMLModelCommandInput} for command's `input` shape.
  * @see {@link DeleteMLModelCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource cannot be located.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMLModelCommand extends $Command<
-  DeleteMLModelCommandInput,
-  DeleteMLModelCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMLModelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMLModelCommandInput, DeleteMLModelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "DeleteMLModelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMLModelInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMLModelOutput.filterSensitiveLog,
+export class DeleteMLModelCommand extends command<DeleteMLModelCommandInput, DeleteMLModelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMLModel",
+  DeleteMLModel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMLModelInput;
+      output: DeleteMLModelOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMLModelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteMLModelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteMLModelCommandOutput> {
-    return deserializeAws_json1_1DeleteMLModelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMLModelCommandInput;
+      output: DeleteMLModelCommandOutput;
+    };
+  };
 }

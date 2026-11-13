@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { DeleteRealtimeEndpointInput, DeleteRealtimeEndpointOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteRealtimeEndpointCommand,
-  serializeAws_json1_1DeleteRealtimeEndpointCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRealtimeEndpointInput, DeleteRealtimeEndpointOutput } from "../models/models_0";
+import { DeleteRealtimeEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRealtimeEndpointCommand}.
+ */
 export interface DeleteRealtimeEndpointCommandInput extends DeleteRealtimeEndpointInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRealtimeEndpointCommand}.
+ */
 export interface DeleteRealtimeEndpointCommandOutput extends DeleteRealtimeEndpointOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface DeleteRealtimeEndpointCommandOutput extends DeleteRealtimeEndpo
  * ```javascript
  * import { MachineLearningClient, DeleteRealtimeEndpointCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, DeleteRealtimeEndpointCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // DeleteRealtimeEndpointInput
+ *   MLModelId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRealtimeEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRealtimeEndpointOutput
+ * //   MLModelId: "STRING_VALUE",
+ * //   RealtimeEndpointInfo: { // RealtimeEndpointInfo
+ * //     PeakRequestsPerSecond: Number("int"),
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     EndpointUrl: "STRING_VALUE",
+ * //     EndpointStatus: "NONE" || "READY" || "UPDATING" || "FAILED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteRealtimeEndpointCommandInput - {@link DeleteRealtimeEndpointCommandInput}
+ * @returns {@link DeleteRealtimeEndpointCommandOutput}
  * @see {@link DeleteRealtimeEndpointCommandInput} for command's `input` shape.
  * @see {@link DeleteRealtimeEndpointCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource cannot be located.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRealtimeEndpointCommand extends $Command<
-  DeleteRealtimeEndpointCommandInput,
-  DeleteRealtimeEndpointCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRealtimeEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRealtimeEndpointCommandInput, DeleteRealtimeEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "DeleteRealtimeEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRealtimeEndpointInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRealtimeEndpointOutput.filterSensitiveLog,
+export class DeleteRealtimeEndpointCommand extends command<DeleteRealtimeEndpointCommandInput, DeleteRealtimeEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRealtimeEndpoint",
+  DeleteRealtimeEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRealtimeEndpointInput;
+      output: DeleteRealtimeEndpointOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRealtimeEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteRealtimeEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRealtimeEndpointCommandOutput> {
-    return deserializeAws_json1_1DeleteRealtimeEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRealtimeEndpointCommandInput;
+      output: DeleteRealtimeEndpointCommandOutput;
+    };
+  };
 }

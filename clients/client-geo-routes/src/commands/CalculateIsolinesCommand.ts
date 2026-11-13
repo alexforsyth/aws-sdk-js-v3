@@ -1,0 +1,318 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CalculateIsolinesRequest, CalculateIsolinesResponse } from "../models/models_0";
+import { CalculateIsolines$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CalculateIsolinesCommand}.
+ */
+export interface CalculateIsolinesCommandInput extends CalculateIsolinesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CalculateIsolinesCommand}.
+ */
+export interface CalculateIsolinesCommandOutput extends CalculateIsolinesResponse, __MetadataBearer {}
+
+/**
+ * <p>Calculates areas that can be reached within specified time or distance thresholds from a given point. For example, you can use this operation to determine the area within a 30-minute drive of a store location, find neighborhoods within walking distance of a school, or identify delivery zones based on drive time.</p> <p>Isolines (also known as isochrones for time-based calculations) are useful for various applications including:</p> <ul> <li> <p>Service area visualization - Show customers the area you can serve within promised delivery times</p> </li> <li> <p>Site selection - Analyze potential business locations based on population within travel distance</p> </li> <li> <p>Site selection - Determine areas that can be reached within specified response times</p> </li> </ul> <note> <p>Route preferences such as avoiding toll roads or ferries are treated as preferences rather than absolute restrictions. If a viable route cannot be calculated while honoring all preferences, some may be ignored.</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-isolines.html">Calculate isolines</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { GeoRoutesClient, CalculateIsolinesCommand } from "@aws-sdk/client-geo-routes"; // ES Modules import
+ * // const { GeoRoutesClient, CalculateIsolinesCommand } = require("@aws-sdk/client-geo-routes"); // CommonJS import
+ * // import type { GeoRoutesClientConfig } from "@aws-sdk/client-geo-routes";
+ * const config = {}; // type is GeoRoutesClientConfig
+ * const client = new GeoRoutesClient(config);
+ * const input = { // CalculateIsolinesRequest
+ *   Allow: { // IsolineAllowOptions
+ *     Hot: true || false,
+ *     Hov: true || false,
+ *   },
+ *   ArrivalTime: "STRING_VALUE",
+ *   Avoid: { // IsolineAvoidanceOptions
+ *     Areas: [ // IsolineAvoidanceAreaList
+ *       { // IsolineAvoidanceArea
+ *         Except: [ // IsolineAvoidanceAreaGeometryList
+ *           { // IsolineAvoidanceAreaGeometry
+ *             BoundingBox: [ // BoundingBox
+ *               Number("double"),
+ *             ],
+ *             Corridor: { // Corridor
+ *               LineString: [ // LineString // required
+ *                 [ // Position
+ *                   Number("double"),
+ *                 ],
+ *               ],
+ *               Radius: Number("int"), // required
+ *             },
+ *             Polygon: [ // LinearRings
+ *               [ // LinearRing
+ *                 [
+ *                   Number("double"),
+ *                 ],
+ *               ],
+ *             ],
+ *             PolylineCorridor: { // PolylineCorridor
+ *               Polyline: "STRING_VALUE", // required
+ *               Radius: Number("int"), // required
+ *             },
+ *             PolylinePolygon: [ // PolylineRingList
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *         Geometry: {
+ *           BoundingBox: [
+ *             Number("double"),
+ *           ],
+ *           Corridor: {
+ *             LineString: [ // required
+ *               [
+ *                 Number("double"),
+ *               ],
+ *             ],
+ *             Radius: Number("int"), // required
+ *           },
+ *           Polygon: [
+ *             [
+ *               [
+ *                 Number("double"),
+ *               ],
+ *             ],
+ *           ],
+ *           PolylineCorridor: {
+ *             Polyline: "STRING_VALUE", // required
+ *             Radius: Number("int"), // required
+ *           },
+ *           PolylinePolygon: [
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       },
+ *     ],
+ *     CarShuttleTrains: true || false,
+ *     ControlledAccessHighways: true || false,
+ *     DirtRoads: true || false,
+ *     Ferries: true || false,
+ *     SeasonalClosure: true || false,
+ *     TollRoads: true || false,
+ *     TollTransponders: true || false,
+ *     TruckRoadTypes: [ // TruckRoadTypeList
+ *       "STRING_VALUE",
+ *     ],
+ *     Tunnels: true || false,
+ *     UTurns: true || false,
+ *     ZoneCategories: [ // IsolineAvoidanceZoneCategoryList
+ *       { // IsolineAvoidanceZoneCategory
+ *         Category: "CongestionPricing" || "Environmental" || "Vignette",
+ *       },
+ *     ],
+ *   },
+ *   DepartNow: true || false,
+ *   DepartureTime: "STRING_VALUE",
+ *   Destination: "<Position>",
+ *   DestinationOptions: { // IsolineDestinationOptions
+ *     AvoidActionsForDistance: Number("long"),
+ *     Heading: Number("double"),
+ *     Matching: { // IsolineMatchingOptions
+ *       NameHint: "STRING_VALUE",
+ *       OnRoadThreshold: Number("long"),
+ *       Radius: Number("long"),
+ *       Strategy: "MatchAny" || "MatchMostSignificantRoad",
+ *     },
+ *     SideOfStreet: { // IsolineSideOfStreetOptions
+ *       Position: "<Position>", // required
+ *       UseWith: "AnyStreet" || "DividedStreetOnly",
+ *     },
+ *   },
+ *   IsolineGeometryFormat: "FlexiblePolyline" || "Simple",
+ *   IsolineGranularity: { // IsolineGranularityOptions
+ *     MaxPoints: Number("int"),
+ *     MaxResolution: Number("long"),
+ *   },
+ *   Key: "STRING_VALUE",
+ *   OptimizeIsolineFor: "AccurateCalculation" || "BalancedCalculation" || "FastCalculation",
+ *   OptimizeRoutingFor: "FastestRoute" || "ShortestRoute",
+ *   Origin: "<Position>",
+ *   OriginOptions: { // IsolineOriginOptions
+ *     AvoidActionsForDistance: Number("long"),
+ *     Heading: Number("double"),
+ *     Matching: {
+ *       NameHint: "STRING_VALUE",
+ *       OnRoadThreshold: Number("long"),
+ *       Radius: Number("long"),
+ *       Strategy: "MatchAny" || "MatchMostSignificantRoad",
+ *     },
+ *     SideOfStreet: {
+ *       Position: "<Position>", // required
+ *       UseWith: "AnyStreet" || "DividedStreetOnly",
+ *     },
+ *   },
+ *   Thresholds: { // IsolineThresholds
+ *     Distance: [ // DistanceThresholdList
+ *       Number("long"),
+ *     ],
+ *     Time: [ // TimeThresholdList
+ *       Number("long"),
+ *     ],
+ *   },
+ *   Traffic: { // IsolineTrafficOptions
+ *     FlowEventThresholdOverride: Number("long"),
+ *     Usage: "IgnoreTrafficData" || "UseTrafficData",
+ *   },
+ *   TravelMode: "Car" || "Pedestrian" || "Scooter" || "Truck",
+ *   TravelModeOptions: { // IsolineTravelModeOptions
+ *     Car: { // IsolineCarOptions
+ *       EngineType: "Electric" || "InternalCombustion" || "PluginHybrid",
+ *       LicensePlate: { // IsolineVehicleLicensePlate
+ *         LastCharacter: "STRING_VALUE",
+ *       },
+ *       MaxSpeed: Number("double"),
+ *       Occupancy: Number("int"),
+ *     },
+ *     Scooter: { // IsolineScooterOptions
+ *       EngineType: "Electric" || "InternalCombustion" || "PluginHybrid",
+ *       LicensePlate: {
+ *         LastCharacter: "STRING_VALUE",
+ *       },
+ *       MaxSpeed: Number("double"),
+ *       Occupancy: Number("int"),
+ *     },
+ *     Truck: { // IsolineTruckOptions
+ *       AxleCount: Number("int"),
+ *       EngineType: "Electric" || "InternalCombustion" || "PluginHybrid",
+ *       GrossWeight: Number("long"),
+ *       HazardousCargos: [ // IsolineHazardousCargoTypeList
+ *         "Combustible" || "Corrosive" || "Explosive" || "Flammable" || "Gas" || "HarmfulToWater" || "Organic" || "Other" || "Poison" || "PoisonousInhalation" || "Radioactive",
+ *       ],
+ *       Height: Number("long"),
+ *       HeightAboveFirstAxle: Number("long"),
+ *       KpraLength: Number("long"),
+ *       Length: Number("long"),
+ *       LicensePlate: {
+ *         LastCharacter: "STRING_VALUE",
+ *       },
+ *       MaxSpeed: Number("double"),
+ *       Occupancy: Number("int"),
+ *       PayloadCapacity: Number("long"),
+ *       TireCount: Number("int"),
+ *       Trailer: { // IsolineTrailerOptions
+ *         AxleCount: Number("int"),
+ *         TrailerCount: Number("int"),
+ *       },
+ *       TruckType: "LightTruck" || "StraightTruck" || "Tractor",
+ *       TunnelRestrictionCode: "STRING_VALUE",
+ *       WeightPerAxle: Number("long"),
+ *       WeightPerAxleGroup: { // WeightPerAxleGroup
+ *         Single: Number("long"),
+ *         Tandem: Number("long"),
+ *         Triple: Number("long"),
+ *         Quad: Number("long"),
+ *         Quint: Number("long"),
+ *       },
+ *       Width: Number("long"),
+ *     },
+ *   },
+ * };
+ * const command = new CalculateIsolinesCommand(input);
+ * const response = await client.send(command);
+ * // { // CalculateIsolinesResponse
+ * //   ArrivalTime: "STRING_VALUE",
+ * //   DepartureTime: "STRING_VALUE",
+ * //   IsolineGeometryFormat: "FlexiblePolyline" || "Simple", // required
+ * //   Isolines: [ // IsolineList // required
+ * //     { // Isoline
+ * //       Connections: [ // IsolineConnectionList // required
+ * //         { // IsolineConnection
+ * //           FromPolygonIndex: Number("int"), // required
+ * //           Geometry: { // IsolineConnectionGeometry
+ * //             LineString: [ // LineString
+ * //               [ // Position
+ * //                 Number("double"),
+ * //               ],
+ * //             ],
+ * //             Polyline: "STRING_VALUE",
+ * //           },
+ * //           ToPolygonIndex: Number("int"), // required
+ * //         },
+ * //       ],
+ * //       DistanceThreshold: Number("long"),
+ * //       Geometries: [ // IsolineShapeGeometryList // required
+ * //         { // IsolineShapeGeometry
+ * //           Polygon: [ // LinearRings
+ * //             [ // LinearRing
+ * //               [
+ * //                 Number("double"),
+ * //               ],
+ * //             ],
+ * //           ],
+ * //           PolylinePolygon: [ // PolylineRingList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       TimeThreshold: Number("long"),
+ * //     },
+ * //   ],
+ * //   PricingBucket: "STRING_VALUE", // required
+ * //   SnappedDestination: [
+ * //     Number("double"),
+ * //   ],
+ * //   SnappedOrigin: [
+ * //     Number("double"),
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param CalculateIsolinesCommandInput - {@link CalculateIsolinesCommandInput}
+ * @returns {@link CalculateIsolinesCommandOutput}
+ * @see {@link CalculateIsolinesCommandInput} for command's `input` shape.
+ * @see {@link CalculateIsolinesCommandOutput} for command's `response` shape.
+ * @see {@link GeoRoutesClientResolvedConfig | config} for GeoRoutesClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an AWS service.</p>
+ *
+ * @throws {@link GeoRoutesServiceException}
+ * <p>Base exception class for all service exceptions from GeoRoutes service.</p>
+ *
+ *
+ * @public
+ */
+export class CalculateIsolinesCommand extends command<CalculateIsolinesCommandInput, CalculateIsolinesCommandOutput>(
+  _ep0,
+  _mw0,
+  "CalculateIsolines",
+  CalculateIsolines$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CalculateIsolinesRequest;
+      output: CalculateIsolinesResponse;
+    };
+    sdk: {
+      input: CalculateIsolinesCommandInput;
+      output: CalculateIsolinesCommandOutput;
+    };
+  };
+}

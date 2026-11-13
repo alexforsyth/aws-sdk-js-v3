@@ -1,78 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ExportSchemaRequest, ExportSchemaResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ExportSchemaCommand,
-  serializeAws_restJson1ExportSchemaCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ExportSchemaRequest, ExportSchemaResponse } from "../models/models_0";
+import { ExportSchema$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ExportSchemaCommand}.
+ */
 export interface ExportSchemaCommandInput extends ExportSchemaRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ExportSchemaCommand}.
+ */
 export interface ExportSchemaCommandOutput extends ExportSchemaResponse, __MetadataBearer {}
 
-export class ExportSchemaCommand extends $Command<
-  ExportSchemaCommandInput,
-  ExportSchemaCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ExportSchemaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ExportSchemaCommandInput, ExportSchemaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "ExportSchemaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ExportSchemaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ExportSchemaResponse.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { SchemasClient, ExportSchemaCommand } from "@aws-sdk/client-schemas"; // ES Modules import
+ * // const { SchemasClient, ExportSchemaCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
+ * const client = new SchemasClient(config);
+ * const input = { // ExportSchemaRequest
+ *   RegistryName: "STRING_VALUE", // required
+ *   SchemaName: "STRING_VALUE", // required
+ *   SchemaVersion: "STRING_VALUE",
+ *   Type: "STRING_VALUE", // required
+ * };
+ * const command = new ExportSchemaCommand(input);
+ * const response = await client.send(command);
+ * // { // ExportSchemaResponse
+ * //   Content: "STRING_VALUE",
+ * //   SchemaArn: "STRING_VALUE",
+ * //   SchemaName: "STRING_VALUE",
+ * //   SchemaVersion: "STRING_VALUE",
+ * //   Type: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ExportSchemaCommandInput - {@link ExportSchemaCommandInput}
+ * @returns {@link ExportSchemaCommandOutput}
+ * @see {@link ExportSchemaCommandInput} for command's `input` shape.
+ * @see {@link ExportSchemaCommandOutput} for command's `response` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ */
+export class ExportSchemaCommand extends command<ExportSchemaCommandInput, ExportSchemaCommandOutput>(
+  _ep0,
+  _mw0,
+  "ExportSchema",
+  ExportSchema$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExportSchemaRequest;
+      output: ExportSchemaResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ExportSchemaCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ExportSchemaCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ExportSchemaCommandOutput> {
-    return deserializeAws_restJson1ExportSchemaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ExportSchemaCommandInput;
+      output: ExportSchemaCommandOutput;
+    };
+  };
 }

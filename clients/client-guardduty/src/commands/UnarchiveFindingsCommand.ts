@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { UnarchiveFindingsRequest, UnarchiveFindingsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UnarchiveFindingsCommand,
-  serializeAws_restJson1UnarchiveFindingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UnarchiveFindingsRequest, UnarchiveFindingsResponse } from "../models/models_1";
+import { UnarchiveFindings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UnarchiveFindingsCommand}.
+ */
 export interface UnarchiveFindingsCommandInput extends UnarchiveFindingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UnarchiveFindingsCommand}.
+ */
 export interface UnarchiveFindingsCommandOutput extends UnarchiveFindingsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,54 @@ export interface UnarchiveFindingsCommandOutput extends UnarchiveFindingsRespons
  * ```javascript
  * import { GuardDutyClient, UnarchiveFindingsCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, UnarchiveFindingsCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // UnarchiveFindingsRequest
+ *   DetectorId: "STRING_VALUE", // required
+ *   FindingIds: [ // FindingIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UnarchiveFindingsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UnarchiveFindingsCommandInput - {@link UnarchiveFindingsCommandInput}
+ * @returns {@link UnarchiveFindingsCommandOutput}
  * @see {@link UnarchiveFindingsCommandInput} for command's `input` shape.
  * @see {@link UnarchiveFindingsCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class UnarchiveFindingsCommand extends $Command<
-  UnarchiveFindingsCommandInput,
-  UnarchiveFindingsCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UnarchiveFindingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UnarchiveFindingsCommandInput, UnarchiveFindingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "UnarchiveFindingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UnarchiveFindingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UnarchiveFindingsResponse.filterSensitiveLog,
+export class UnarchiveFindingsCommand extends command<UnarchiveFindingsCommandInput, UnarchiveFindingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UnarchiveFindings",
+  UnarchiveFindings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UnarchiveFindingsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UnarchiveFindingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UnarchiveFindingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UnarchiveFindingsCommandOutput> {
-    return deserializeAws_restJson1UnarchiveFindingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UnarchiveFindingsCommandInput;
+      output: UnarchiveFindingsCommandOutput;
+    };
+  };
 }

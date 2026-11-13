@@ -1,98 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { DeleteGlobalClusterMessage, DeleteGlobalClusterResult } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteGlobalClusterCommand,
-  serializeAws_queryDeleteGlobalClusterCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGlobalClusterMessage, DeleteGlobalClusterResult } from "../models/models_0";
+import { DeleteGlobalCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGlobalClusterCommand}.
+ */
 export interface DeleteGlobalClusterCommandInput extends DeleteGlobalClusterMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGlobalClusterCommand}.
+ */
 export interface DeleteGlobalClusterCommandOutput extends DeleteGlobalClusterResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.</p>
- *         <note>
+ *          <note>
  *             <p>This action only applies to Amazon DocumentDB clusters.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DocDBClient, DeleteGlobalClusterCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, DeleteGlobalClusterCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // DeleteGlobalClusterMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new DeleteGlobalClusterCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteGlobalClusterResult
+ * //   GlobalCluster: { // GlobalCluster
+ * //     GlobalClusterIdentifier: "STRING_VALUE",
+ * //     GlobalClusterResourceId: "STRING_VALUE",
+ * //     GlobalClusterArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     DatabaseName: "STRING_VALUE",
+ * //     StorageEncrypted: true || false,
+ * //     DeletionProtection: true || false,
+ * //     GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //       { // GlobalClusterMember
+ * //         DBClusterArn: "STRING_VALUE",
+ * //         Readers: [ // ReadersArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         IsWriter: true || false,
+ * //         SynchronizationStatus: "connected" || "pending-resync",
+ * //       },
+ * //     ],
+ * //     FailoverState: { // FailoverState
+ * //       Status: "pending" || "failing-over" || "cancelling",
+ * //       FromDbClusterArn: "STRING_VALUE",
+ * //       ToDbClusterArn: "STRING_VALUE",
+ * //       IsDataLossAllowed: true || false,
+ * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteGlobalClusterCommandInput - {@link DeleteGlobalClusterCommandInput}
+ * @returns {@link DeleteGlobalClusterCommandOutput}
  * @see {@link DeleteGlobalClusterCommandInput} for command's `input` shape.
  * @see {@link DeleteGlobalClusterCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link GlobalClusterNotFoundFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global cluster.</p>
+ *
+ * @throws {@link InvalidGlobalClusterStateFault} (client fault)
+ *  <p>The requested operation can't be performed while the cluster is in this state.</p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteGlobalClusterCommand extends $Command<
-  DeleteGlobalClusterCommandInput,
-  DeleteGlobalClusterCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteGlobalClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteGlobalClusterCommandInput, DeleteGlobalClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "DeleteGlobalClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteGlobalClusterMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteGlobalClusterResult.filterSensitiveLog,
+export class DeleteGlobalClusterCommand extends command<DeleteGlobalClusterCommandInput, DeleteGlobalClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGlobalCluster",
+  DeleteGlobalCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGlobalClusterMessage;
+      output: DeleteGlobalClusterResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteGlobalClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteGlobalClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteGlobalClusterCommandOutput> {
-    return deserializeAws_queryDeleteGlobalClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteGlobalClusterCommandInput;
+      output: DeleteGlobalClusterCommandOutput;
+    };
+  };
 }

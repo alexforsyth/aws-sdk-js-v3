@@ -1,41 +1,41 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteBucketReplicationRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteBucketReplicationCommand,
-  serializeAws_restXmlDeleteBucketReplicationCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw4, command } from "../commandBuilder";
+import type { DeleteBucketReplicationRequest } from "../models/models_0";
+import { DeleteBucketReplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteBucketReplicationCommand}.
+ */
 export interface DeleteBucketReplicationCommandInput extends DeleteBucketReplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteBucketReplicationCommand}.
+ */
 export interface DeleteBucketReplicationCommandOutput extends __MetadataBearer {}
 
 /**
- * <p> Deletes the replication configuration from the bucket.</p>
- *          <p>To use this operation, you must have permissions to perform the
- *             <code>s3:PutReplicationConfiguration</code> action. The bucket owner has these
- *          permissions by default and can grant it to others. For more information about permissions,
- *          see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing Access Permissions to Your Amazon S3
- *             Resources</a>. </p>
- *          <note>
- *             <p>It can take a while for the deletion of a replication configuration to fully
- *             propagate.</p>
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
  *          </note>
- *
- *          <p> For information about replication configuration, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a> in the <i>Amazon S3 User Guide</i>.</p>
- *
+ *          <p> Deletes the replication configuration from the bucket.</p>
+ *          <p>To use this operation, you must have permissions to perform the
+ *         <code>s3:PutReplicationConfiguration</code> action. The bucket owner has these permissions by default
+ *       and can grant it to others. For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing Access Permissions to Your Amazon S3
+ *         Resources</a>. </p>
+ *          <note>
+ *             <p>It can take a while for the deletion of a replication configuration to fully propagate.</p>
+ *          </note>
+ *          <p> For information about replication configuration, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a> in the
+ *         <i>Amazon S3 User Guide</i>.</p>
  *          <p>The following operations are related to <code>DeleteBucketReplication</code>:</p>
  *          <ul>
  *             <li>
@@ -49,74 +49,67 @@ export interface DeleteBucketReplicationCommandOutput extends __MetadataBearer {
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, DeleteBucketReplicationCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, DeleteBucketReplicationCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // DeleteBucketReplicationRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new DeleteBucketReplicationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteBucketReplicationCommandInput - {@link DeleteBucketReplicationCommandInput}
+ * @returns {@link DeleteBucketReplicationCommandOutput}
  * @see {@link DeleteBucketReplicationCommandInput} for command's `input` shape.
  * @see {@link DeleteBucketReplicationCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @example To delete bucket replication configuration
+ * ```javascript
+ * // The following example deletes replication configuration set on bucket.
+ * const input = {
+ *   Bucket: "example"
+ * };
+ * const command = new DeleteBucketReplicationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteBucketReplicationCommand extends $Command<
-  DeleteBucketReplicationCommandInput,
-  DeleteBucketReplicationCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteBucketReplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteBucketReplicationCommandInput, DeleteBucketReplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "DeleteBucketReplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteBucketReplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteBucketReplicationCommand extends command<DeleteBucketReplicationCommandInput, DeleteBucketReplicationCommandOutput>(
+  _ep3,
+  _mw4,
+  "DeleteBucketReplication",
+  DeleteBucketReplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBucketReplicationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteBucketReplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteBucketReplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteBucketReplicationCommandOutput> {
-    return deserializeAws_restXmlDeleteBucketReplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteBucketReplicationCommandInput;
+      output: DeleteBucketReplicationCommandOutput;
+    };
+  };
 }

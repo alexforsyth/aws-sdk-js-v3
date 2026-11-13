@@ -1,99 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetReadinessCheckStatusRequest, GetReadinessCheckStatusResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetReadinessCheckStatusCommand,
-  serializeAws_restJson1GetReadinessCheckStatusCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryReadinessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryReadinessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetReadinessCheckStatusRequest, GetReadinessCheckStatusResponse } from "../models/models_0";
+import { GetReadinessCheckStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetReadinessCheckStatusCommand}.
+ */
 export interface GetReadinessCheckStatusCommandInput extends GetReadinessCheckStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetReadinessCheckStatusCommand}.
+ */
 export interface GetReadinessCheckStatusCommandOutput extends GetReadinessCheckStatusResponse, __MetadataBearer {}
 
 /**
- * Returns information about the status of a Readiness Check.
+ * <p>Gets the readiness status for an individual readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in a recovery group, use GetRecoveryGroupReadinessSummary.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53RecoveryReadinessClient, GetReadinessCheckStatusCommand } from "@aws-sdk/client-route53-recovery-readiness"; // ES Modules import
  * // const { Route53RecoveryReadinessClient, GetReadinessCheckStatusCommand } = require("@aws-sdk/client-route53-recovery-readiness"); // CommonJS import
+ * // import type { Route53RecoveryReadinessClientConfig } from "@aws-sdk/client-route53-recovery-readiness";
+ * const config = {}; // type is Route53RecoveryReadinessClientConfig
  * const client = new Route53RecoveryReadinessClient(config);
+ * const input = { // GetReadinessCheckStatusRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   ReadinessCheckName: "STRING_VALUE", // required
+ * };
  * const command = new GetReadinessCheckStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetReadinessCheckStatusResponse
+ * //   Messages: [ // __listOfMessage
+ * //     { // Message
+ * //       MessageText: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   Readiness: "READY" || "NOT_READY" || "UNKNOWN" || "NOT_AUTHORIZED",
+ * //   Resources: [ // __listOfResourceResult
+ * //     { // ResourceResult
+ * //       ComponentId: "STRING_VALUE",
+ * //       LastCheckedTimestamp: new Date("TIMESTAMP"), // required
+ * //       Readiness: "READY" || "NOT_READY" || "UNKNOWN" || "NOT_AUTHORIZED", // required
+ * //       ResourceArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetReadinessCheckStatusCommandInput - {@link GetReadinessCheckStatusCommandInput}
+ * @returns {@link GetReadinessCheckStatusCommandOutput}
  * @see {@link GetReadinessCheckStatusCommandInput} for command's `input` shape.
  * @see {@link GetReadinessCheckStatusCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryReadinessClientResolvedConfig | config} for Route53RecoveryReadinessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  User does not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link Route53RecoveryReadinessServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryReadiness service.</p>
+ *
+ *
+ * @public
  */
-export class GetReadinessCheckStatusCommand extends $Command<
-  GetReadinessCheckStatusCommandInput,
-  GetReadinessCheckStatusCommandOutput,
-  Route53RecoveryReadinessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetReadinessCheckStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryReadinessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetReadinessCheckStatusCommandInput, GetReadinessCheckStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryReadinessClient";
-    const commandName = "GetReadinessCheckStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetReadinessCheckStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetReadinessCheckStatusResponse.filterSensitiveLog,
+export class GetReadinessCheckStatusCommand extends command<GetReadinessCheckStatusCommandInput, GetReadinessCheckStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetReadinessCheckStatus",
+  GetReadinessCheckStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetReadinessCheckStatusRequest;
+      output: GetReadinessCheckStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetReadinessCheckStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetReadinessCheckStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetReadinessCheckStatusCommandOutput> {
-    return deserializeAws_restJson1GetReadinessCheckStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetReadinessCheckStatusCommandInput;
+      output: GetReadinessCheckStatusCommandOutput;
+    };
+  };
 }

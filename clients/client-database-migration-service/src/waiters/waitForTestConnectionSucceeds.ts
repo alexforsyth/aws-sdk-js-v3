@@ -1,27 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeConnectionsCommand, DescribeConnectionsCommandInput } from "../commands/DescribeConnectionsCommand";
-import { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
+import {
+  type DescribeConnectionsCommandInput,
+  type DescribeConnectionsCommandOutput,
+  DescribeConnectionsCommand,
+} from "../commands/DescribeConnectionsCommand";
+import type { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
+import type { DatabaseMigrationServiceServiceException } from "../models/DatabaseMigrationServiceServiceException";
 
-const checkState = async (
-  client: DatabaseMigrationServiceClient,
-  input: DescribeConnectionsCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: DatabaseMigrationServiceClient, input: DescribeConnectionsCommandInput): Promise<WaiterResult<DescribeConnectionsCommandOutput | DatabaseMigrationServiceServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeConnectionsCommand(input));
+    let result: DescribeConnectionsCommandOutput & any = await client.send(new DescribeConnectionsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Connections);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Connections);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "successful";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "successful")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -29,13 +38,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Connections);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Connections);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "failed") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -53,7 +62,7 @@ const checkState = async (
 export const waitForTestConnectionSucceeds = async (
   params: WaiterConfiguration<DatabaseMigrationServiceClient>,
   input: DescribeConnectionsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeConnectionsCommandOutput | DatabaseMigrationServiceServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -65,8 +74,8 @@ export const waitForTestConnectionSucceeds = async (
 export const waitUntilTestConnectionSucceeds = async (
   params: WaiterConfiguration<DatabaseMigrationServiceClient>,
   input: DescribeConnectionsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeConnectionsCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeConnectionsCommandOutput>;
 };

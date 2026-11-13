@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvsClient";
-import { ListStreamKeysRequest, ListStreamKeysResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListStreamKeysCommand,
-  serializeAws_restJson1ListStreamKeysCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStreamKeysRequest, ListStreamKeysResponse } from "../models/models_0";
+import { ListStreamKeys$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStreamKeysCommand}.
+ */
 export interface ListStreamKeysCommandInput extends ListStreamKeysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListStreamKeysCommand}.
+ */
 export interface ListStreamKeysCommandOutput extends ListStreamKeysResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,67 @@ export interface ListStreamKeysCommandOutput extends ListStreamKeysResponse, __M
  * ```javascript
  * import { IvsClient, ListStreamKeysCommand } from "@aws-sdk/client-ivs"; // ES Modules import
  * // const { IvsClient, ListStreamKeysCommand } = require("@aws-sdk/client-ivs"); // CommonJS import
+ * // import type { IvsClientConfig } from "@aws-sdk/client-ivs";
+ * const config = {}; // type is IvsClientConfig
  * const client = new IvsClient(config);
+ * const input = { // ListStreamKeysRequest
+ *   channelArn: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListStreamKeysCommand(input);
  * const response = await client.send(command);
+ * // { // ListStreamKeysResponse
+ * //   streamKeys: [ // StreamKeyList // required
+ * //     { // StreamKeySummary
+ * //       arn: "STRING_VALUE",
+ * //       channelArn: "STRING_VALUE",
+ * //       tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStreamKeysCommandInput - {@link ListStreamKeysCommandInput}
+ * @returns {@link ListStreamKeysCommandOutput}
  * @see {@link ListStreamKeysCommandInput} for command's `input` shape.
  * @see {@link ListStreamKeysCommandOutput} for command's `response` shape.
- * @see {@link IvsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IvsClientResolvedConfig | config} for IvsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IvsServiceException}
+ * <p>Base exception class for all service exceptions from Ivs service.</p>
+ *
+ *
+ * @public
  */
-export class ListStreamKeysCommand extends $Command<
-  ListStreamKeysCommandInput,
-  ListStreamKeysCommandOutput,
-  IvsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStreamKeysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStreamKeysCommandInput, ListStreamKeysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvsClient";
-    const commandName = "ListStreamKeysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStreamKeysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStreamKeysResponse.filterSensitiveLog,
+export class ListStreamKeysCommand extends command<ListStreamKeysCommandInput, ListStreamKeysCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStreamKeys",
+  ListStreamKeys$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStreamKeysRequest;
+      output: ListStreamKeysResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStreamKeysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListStreamKeysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStreamKeysCommandOutput> {
-    return deserializeAws_restJson1ListStreamKeysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStreamKeysCommandInput;
+      output: ListStreamKeysCommandOutput;
+    };
+  };
 }

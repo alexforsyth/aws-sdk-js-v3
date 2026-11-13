@@ -1,35 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAvailableManagementCidrRangesRequest, ListAvailableManagementCidrRangesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAvailableManagementCidrRangesCommand,
-  serializeAws_json1_1ListAvailableManagementCidrRangesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListAvailableManagementCidrRangesRequest,
+  ListAvailableManagementCidrRangesResult,
+} from "../models/models_0";
+import { ListAvailableManagementCidrRanges$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAvailableManagementCidrRangesCommand}.
+ */
 export interface ListAvailableManagementCidrRangesCommandInput extends ListAvailableManagementCidrRangesRequest {}
-export interface ListAvailableManagementCidrRangesCommandOutput
-  extends ListAvailableManagementCidrRangesResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListAvailableManagementCidrRangesCommand}.
+ */
+export interface ListAvailableManagementCidrRangesCommandOutput extends ListAvailableManagementCidrRangesResult, __MetadataBearer {}
 
 /**
  * <p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use
  *          for the network management interface when you enable Bring Your Own License (BYOL). </p>
- *
- *          <p>This operation can be run only by Amazon Web Services accounts that are enabled for BYOL. If your account
- *          isn't enabled for BYOL, you'll receive an <code>AccessDeniedException</code> error.</p>
- *
+ *          <p>This operation can be run only by Amazon Web Services accounts that are enabled for BYOL.
+ *          If your account isn't enabled for BYOL, you'll receive an
+ *             <code>AccessDeniedException</code> error.</p>
  *          <p>The management network interface is connected to a secure Amazon WorkSpaces management
  *          network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces
  *          clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>
@@ -38,74 +39,58 @@ export interface ListAvailableManagementCidrRangesCommandOutput
  * ```javascript
  * import { WorkSpacesClient, ListAvailableManagementCidrRangesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, ListAvailableManagementCidrRangesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // ListAvailableManagementCidrRangesRequest
+ *   ManagementCidrRangeConstraint: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAvailableManagementCidrRangesCommand(input);
  * const response = await client.send(command);
+ * // { // ListAvailableManagementCidrRangesResult
+ * //   ManagementCidrRanges: [ // DedicatedTenancyCidrRangeList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAvailableManagementCidrRangesCommandInput - {@link ListAvailableManagementCidrRangesCommandInput}
+ * @returns {@link ListAvailableManagementCidrRangesCommandOutput}
  * @see {@link ListAvailableManagementCidrRangesCommandInput} for command's `input` shape.
  * @see {@link ListAvailableManagementCidrRangesCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class ListAvailableManagementCidrRangesCommand extends $Command<
-  ListAvailableManagementCidrRangesCommandInput,
-  ListAvailableManagementCidrRangesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAvailableManagementCidrRangesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAvailableManagementCidrRangesCommandInput, ListAvailableManagementCidrRangesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "ListAvailableManagementCidrRangesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAvailableManagementCidrRangesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAvailableManagementCidrRangesResult.filterSensitiveLog,
+export class ListAvailableManagementCidrRangesCommand extends command<ListAvailableManagementCidrRangesCommandInput, ListAvailableManagementCidrRangesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAvailableManagementCidrRanges",
+  ListAvailableManagementCidrRanges$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAvailableManagementCidrRangesRequest;
+      output: ListAvailableManagementCidrRangesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListAvailableManagementCidrRangesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAvailableManagementCidrRangesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAvailableManagementCidrRangesCommandOutput> {
-    return deserializeAws_json1_1ListAvailableManagementCidrRangesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAvailableManagementCidrRangesCommandInput;
+      output: ListAvailableManagementCidrRangesCommandOutput;
+    };
+  };
 }

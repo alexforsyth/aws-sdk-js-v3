@@ -1,81 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin, Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MalformedAcceptWithPayloadInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1MalformedAcceptWithPayloadCommand,
-  serializeAws_restJson1MalformedAcceptWithPayloadCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { MalformedAcceptWithPayloadOutput } from "../models/models_0";
+import { de_MalformedAcceptWithPayloadCommand, se_MalformedAcceptWithPayloadCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MalformedAcceptWithPayloadCommand}.
+ */
 export interface MalformedAcceptWithPayloadCommandInput {}
-export interface MalformedAcceptWithPayloadCommandOutput extends MalformedAcceptWithPayloadInput, __MetadataBearer {}
+/**
+ * @public
+ */
+export type MalformedAcceptWithPayloadCommandOutputType = Omit<MalformedAcceptWithPayloadOutput, "payload"> & {
+  payload?: Uint8ArrayBlobAdapter;
+};
 
-export class MalformedAcceptWithPayloadCommand extends $Command<
-  MalformedAcceptWithPayloadCommandInput,
-  MalformedAcceptWithPayloadCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
+/**
+ * @public
+ *
+ * The output of {@link MalformedAcceptWithPayloadCommand}.
+ */
+export interface MalformedAcceptWithPayloadCommandOutput extends MalformedAcceptWithPayloadCommandOutputType, __MetadataBearer {}
 
-  constructor(readonly input: MalformedAcceptWithPayloadCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MalformedAcceptWithPayloadCommandInput, MalformedAcceptWithPayloadCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "MalformedAcceptWithPayloadCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: MalformedAcceptWithPayloadInput.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, MalformedAcceptWithPayloadCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, MalformedAcceptWithPayloadCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = {};
+ * const command = new MalformedAcceptWithPayloadCommand(input);
+ * const response = await client.send(command);
+ * // { // MalformedAcceptWithPayloadOutput
+ * //   payload: new Uint8Array(),
+ * // };
+ *
+ * ```
+ *
+ * @param MalformedAcceptWithPayloadCommandInput - {@link MalformedAcceptWithPayloadCommandInput}
+ * @returns {@link MalformedAcceptWithPayloadCommandOutput}
+ * @see {@link MalformedAcceptWithPayloadCommandInput} for command's `input` shape.
+ * @see {@link MalformedAcceptWithPayloadCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class MalformedAcceptWithPayloadCommand extends $Command
+  .classBuilder<
+    MalformedAcceptWithPayloadCommandInput,
+    MalformedAcceptWithPayloadCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "MalformedAcceptWithPayload", {})
+  .n("RestJsonProtocolClient", "MalformedAcceptWithPayloadCommand")
+  .f(void 0, void 0)
+  .ser(se_MalformedAcceptWithPayloadCommand)
+  .de(de_MalformedAcceptWithPayloadCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: MalformedAcceptWithPayloadOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: MalformedAcceptWithPayloadCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1MalformedAcceptWithPayloadCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<MalformedAcceptWithPayloadCommandOutput> {
-    return deserializeAws_restJson1MalformedAcceptWithPayloadCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MalformedAcceptWithPayloadCommandInput;
+      output: MalformedAcceptWithPayloadCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,1785 @@
+const _A = "Average";
+const _AA = "AlarmActions";
+const _AAV = "ApproximateAggregateValue";
+const _AAl = "AlarmArn";
+const _AC = "ActionConfiguration";
+const _ACA = "AlarmContributorAttributes";
+const _ACI = "AlarmContributorId";
+const _ACUT = "AlarmConfigurationUpdatedTimestamp";
+const _ACl = "AlarmContributor";
+const _ACla = "AlarmContributors";
+const _AD = "AnomalyDetector";
+const _ADC = "AnomalyDetectorConfiguration";
+const _ADETR = "AnomalyDetectorExcludedTimeRanges";
+const _ADI = "AnomalyDetectorId";
+const _ADIn = "AnomalyDetectorIds";
+const _ADKK = "AssociateDatasetKmsKey";
+const _ADKKI = "AssociateDatasetKmsKeyInput";
+const _ADKKO = "AssociateDatasetKmsKeyOutput";
+const _ADT = "AnomalyDetectorTypes";
+const _ADl = "AlarmDescription";
+const _ADn = "AnomalyDetectors";
+const _AE = "ActionsEnabled";
+const _AEg = "AggregationExpression";
+const _AHI = "AlarmHistoryItem";
+const _AHIl = "AlarmHistoryItems";
+const _AI = "AccountId";
+const _ALLC = "ActionLogLineCount";
+const _ALLRA = "ActionLogLineRoleArn";
+const _AMRA = "AlarmMuteRuleArn";
+const _AMRN = "AlarmMuteRuleName";
+const _AMRS = "AlarmMuteRuleSummary";
+const _AMRSl = "AlarmMuteRuleSummaries";
+const _AN = "AlarmName";
+const _ANP = "AlarmNamePrefix";
+const _ANl = "AlarmNames";
+const _AOTL = "ApplyOnTransformedLogs";
+const _AP = "ActionPrefix";
+const _APQLC = "AlarmPromQLCriteria";
+const _AR = "AlarmRule";
+const _AS = "AdaptationSpeed";
+const _ASB = "ActionsSuppressedBy";
+const _ASEP = "ActionsSuppressorExtensionPeriod";
+const _ASR = "ActionsSuppressedReason";
+const _ASWP = "ActionsSuppressorWaitPeriod";
+const _ASc = "ActionsSuppressor";
+const _ASd = "AdditionalStatistics";
+const _ASg = "AggregationStatistic";
+const _AT = "AlarmType";
+const _ATP = "AlarmTagsPropagation";
+const _ATl = "AlarmTypes";
+const _AUC = "ApproximateUniqueCount";
+const _AV = "AggregateValue";
+const _AVp = "ApproximateValue";
+const _Ar = "Arn";
+const _At = "Attributes";
+const _BF = "BatchFailures";
+const _C = "Configuration";
+const _CA = "ContributorAttributes";
+const _CAo = "CompositeAlarm";
+const _CAom = "CompositeAlarms";
+const _CAr = "CreatedAt";
+const _CD = "CreationDate";
+const _CE = "ConflictException";
+const _CI = "ContributorId";
+const _CME = "ConcurrentModificationException";
+const _CO = "ComparisonOperator";
+const _COAN = "ChildrenOfAlarmName";
+const _CRMC = "CreateResourceMetricsConfiguration";
+const _CRMCI = "CreateResourceMetricsConfigurationInput";
+const _CRMCO = "CreateResourceMetricsConfigurationOutput";
+const _Co = "Contributors";
+const _Cod = "Code";
+const _Cou = "Counts";
+const _D = "Dimensions";
+const _DA = "DashboardArn";
+const _DAA = "DisableAlarmActions";
+const _DAAI = "DisableAlarmActionsInput";
+const _DAC = "DescribeAlarmContributors";
+const _DACI = "DescribeAlarmContributorsInput";
+const _DACO = "DescribeAlarmContributorsOutput";
+const _DAD = "DeleteAnomalyDetector";
+const _DADI = "DeleteAnomalyDetectorInput";
+const _DADIe = "DescribeAnomalyDetectorsInput";
+const _DADO = "DeleteAnomalyDetectorOutput";
+const _DADOe = "DescribeAnomalyDetectorsOutput";
+const _DADe = "DescribeAnomalyDetectors";
+const _DAFM = "DescribeAlarmsForMetric";
+const _DAFMI = "DescribeAlarmsForMetricInput";
+const _DAFMO = "DescribeAlarmsForMetricOutput";
+const _DAH = "DescribeAlarmHistory";
+const _DAHI = "DescribeAlarmHistoryInput";
+const _DAHO = "DescribeAlarmHistoryOutput";
+const _DAI = "DeleteAlarmsInput";
+const _DAIe = "DescribeAlarmsInput";
+const _DAMR = "DeleteAlarmMuteRule";
+const _DAMRI = "DeleteAlarmMuteRuleInput";
+const _DAO = "DescribeAlarmsOutput";
+const _DAe = "DeleteAlarms";
+const _DAes = "DescribeAlarms";
+const _DB = "DashboardBody";
+const _DD = "DeleteDashboards";
+const _DDI = "DeleteDashboardsInput";
+const _DDKK = "DisassociateDatasetKmsKey";
+const _DDKKI = "DisassociateDatasetKmsKeyInput";
+const _DDKKO = "DisassociateDatasetKmsKeyOutput";
+const _DDO = "DeleteDashboardsOutput";
+const _DE = "DashboardEntry";
+const _DEa = "DashboardEntries";
+const _DF = "DimensionFilter";
+const _DFi = "DimensionFilters";
+const _DI = "DatasetIdentifier";
+const _DIIE = "DashboardInvalidInputError";
+const _DIR = "DeleteInsightRules";
+const _DIRI = "DeleteInsightRulesInput";
+const _DIRIe = "DescribeInsightRulesInput";
+const _DIRIi = "DisableInsightRulesInput";
+const _DIRO = "DeleteInsightRulesOutput";
+const _DIROe = "DescribeInsightRulesOutput";
+const _DIROi = "DisableInsightRulesOutput";
+const _DIRe = "DescribeInsightRules";
+const _DIRi = "DisableInsightRules";
+const _DIa = "DatasetId";
+const _DMDQD = "DeleteMetricDataQueryDefinition";
+const _DMDQDI = "DeleteMetricDataQueryDefinitionInput";
+const _DMDQDO = "DeleteMetricDataQueryDefinitionOutput";
+const _DMS = "DeleteMetricStream";
+const _DMSI = "DeleteMetricStreamInput";
+const _DMSO = "DeleteMetricStreamOutput";
+const _DN = "DashboardName";
+const _DNFE = "DashboardNotFoundError";
+const _DNP = "DashboardNamePrefix";
+const _DNa = "DashboardNames";
+const _DP = "DataPath";
+const _DRMC = "DeleteResourceMetricsConfiguration";
+const _DRMCI = "DeleteResourceMetricsConfigurationInput";
+const _DRMCO = "DeleteResourceMetricsConfigurationOutput";
+const _DTA = "DatapointsToAlarm";
+const _DVM = "DashboardValidationMessage";
+const _DVMa = "DashboardValidationMessages";
+const _Da = "Datapoint";
+const _Dat = "Datapoints";
+const _De = "Description";
+const _Def = "Definition";
+const _Di = "Dimension";
+const _Du = "Duration";
+const _E = "Enabled";
+const _EAA = "EnableAlarmActions";
+const _EAAI = "EnableAlarmActionsInput";
+const _EC = "EvaluationCriteria";
+const _ED = "ExpireDate";
+const _EDn = "EndDate";
+const _EF = "ExcludeFilters";
+const _EI = "EvaluationInterval";
+const _EIR = "EnableInsightRules";
+const _EIRI = "EnableInsightRulesInput";
+const _EIRO = "EnableInsightRulesOutput";
+const _ELSCP = "EvaluateLowSampleCountPercentile";
+const _EMD = "EntityMetricData";
+const _EMDL = "EntityMetricDataList";
+const _EP = "EvaluationPeriods";
+const _ES = "ExtendedStatistics";
+const _ESv = "EvaluationState";
+const _ESx = "ExtendedStatistic";
+const _ET = "EndTime";
+const _ETK = "ExcludedTagKeys";
+const _ETO = "EndTimeOffset";
+const _ETR = "ExcludedTimeRanges";
+const _ETx = "ExceptionType";
+const _EW = "EvaluationWindow";
+const _En = "Entity";
+const _Ent = "Entries";
+const _Ex = "Expression";
+const _F = "Failures";
+const _FA = "FirehoseArn";
+const _FC = "FailureCode";
+const _FD = "FailureDescription";
+const _FR = "FailureResource";
+const _GAMR = "GetAlarmMuteRule";
+const _GAMRI = "GetAlarmMuteRuleInput";
+const _GAMRO = "GetAlarmMuteRuleOutput";
+const _GD = "GetDashboard";
+const _GDI = "GetDashboardInput";
+const _GDIe = "GetDatasetInput";
+const _GDO = "GetDashboardOutput";
+const _GDOe = "GetDatasetOutput";
+const _GDe = "GetDataset";
+const _GIRR = "GetInsightRuleReport";
+const _GIRRI = "GetInsightRuleReportInput";
+const _GIRRO = "GetInsightRuleReportOutput";
+const _GMD = "GetMetricData";
+const _GMDI = "GetMetricDataInput";
+const _GMDO = "GetMetricDataOutput";
+const _GMDQD = "GetMetricDataQueryDefinition";
+const _GMDQDI = "GetMetricDataQueryDefinitionInput";
+const _GMDQDO = "GetMetricDataQueryDefinitionOutput";
+const _GMS = "GetMetricStatistics";
+const _GMSI = "GetMetricStatisticsInput";
+const _GMSIe = "GetMetricStreamInput";
+const _GMSO = "GetMetricStatisticsOutput";
+const _GMSOe = "GetMetricStreamOutput";
+const _GMSe = "GetMetricStream";
+const _GMWI = "GetMetricWidgetImage";
+const _GMWII = "GetMetricWidgetImageInput";
+const _GMWIO = "GetMetricWidgetImageOutput";
+const _GOTE = "GetOTelEnrichment";
+const _GOTEI = "GetOTelEnrichmentInput";
+const _GOTEO = "GetOTelEnrichmentOutput";
+const _GRMC = "GetResourceMetricsConfiguration";
+const _GRMCI = "GetResourceMetricsConfigurationInput";
+const _GRMCO = "GetResourceMetricsConfigurationOutput";
+const _HD = "HistoryData";
+const _HIT = "HistoryItemType";
+const _HS = "HistorySummary";
+const _I = "Id";
+const _IDA = "InsufficientDataActions";
+const _IF = "IncludeFilters";
+const _IFF = "InvalidFormatFault";
+const _ILA = "IncludeLinkedAccounts";
+const _ILAM = "IncludeLinkedAccountsMetrics";
+const _IM = "IncludeMetrics";
+const _INT = "InvalidNextToken";
+const _IPCE = "InvalidParameterCombinationException";
+const _IPVE = "InvalidParameterValueException";
+const _IR = "InsightRules";
+const _IRC = "InsightRuleContributor";
+const _IRCD = "InsightRuleContributorDatapoint";
+const _IRCDn = "InsightRuleContributorDatapoints";
+const _IRCn = "InsightRuleContributors";
+const _IRMD = "InsightRuleMetricDatapoint";
+const _IRMDn = "InsightRuleMetricDatapoints";
+const _IRn = "InsightRule";
+const _ISF = "InternalServiceFault";
+const _ITK = "IncludedTagKeys";
+const _It = "Items";
+const _K = "Keys";
+const _KA = "KeyAttributes";
+const _KADE = "KmsAccessDeniedException";
+const _KKA = "KmsKeyArn";
+const _KKDE = "KmsKeyDisabledException";
+const _KKNFE = "KmsKeyNotFoundException";
+const _KL = "KeyLabels";
+const _Ke = "Key";
+const _L = "Label";
+const _LA = "LogAlarms";
+const _LAMR = "ListAlarmMuteRules";
+const _LAMRI = "ListAlarmMuteRulesInput";
+const _LAMRO = "ListAlarmMuteRulesOutput";
+const _LAo = "LogAlarm";
+const _LD = "ListDashboards";
+const _LDI = "ListDashboardsInput";
+const _LDO = "ListDashboardsOutput";
+const _LEE = "LimitExceededException";
+const _LEF = "LimitExceededFault";
+const _LGI = "LogGroupIdentifiers";
+const _LM = "LastModified";
+const _LMDQD = "ListMetricDataQueryDefinitions";
+const _LMDQDI = "ListMetricDataQueryDefinitionsInput";
+const _LMDQDO = "ListMetricDataQueryDefinitionsOutput";
+const _LMI = "ListMetricsInput";
+const _LMIR = "ListManagedInsightRules";
+const _LMIRI = "ListManagedInsightRulesInput";
+const _LMIRO = "ListManagedInsightRulesOutput";
+const _LMO = "ListMetricsOutput";
+const _LMS = "ListMetricStreams";
+const _LMSI = "ListMetricStreamsInput";
+const _LMSO = "ListMetricStreamsOutput";
+const _LMi = "ListMetrics";
+const _LO = "LabelOptions";
+const _LTFR = "ListTagsForResource";
+const _LTFRI = "ListTagsForResourceInput";
+const _LTFRO = "ListTagsForResourceOutput";
+const _LUD = "LastUpdateDate";
+const _LUT = "LastUpdatedTimestamp";
+const _M = "Message";
+const _MA = "MetricAlarms";
+const _MAe = "MetricAlarm";
+const _MC = "MetricCharacteristics";
+const _MCC = "MaxContributorCount";
+const _MCV = "MaxContributorValue";
+const _MD = "MetricData";
+const _MDQ = "MetricDataQueries";
+const _MDQDS = "MetricDataQueryDefinitionSummary";
+const _MDQDSe = "MetricDataQueryDefinitionSummaries";
+const _MDQe = "MetricDataQuery";
+const _MDR = "MetricDataResults";
+const _MDRM = "MetricDataResultMessages";
+const _MDRe = "MetricDataResult";
+const _MDa = "MaxDatapoints";
+const _MDe = "MetricDatapoints";
+const _MDes = "MessageData";
+const _MDet = "MetricDatum";
+const _MES = "MetricExpressionString";
+const _MMAD = "MetricMathAnomalyDetector";
+const _MN = "MetricName";
+const _MNe = "MetricNames";
+const _MR = "MaxRecords";
+const _MRD = "ManagedRuleDescription";
+const _MRDa = "ManagedRuleDescriptions";
+const _MRPE = "MissingRequiredParameterException";
+const _MRS = "ManagedRuleState";
+const _MRa = "MaxResults";
+const _MRan = "ManagedRule";
+const _MRana = "ManagedRules";
+const _MS = "MetricSelections";
+const _MSE = "MetricStreamEntry";
+const _MSEe = "MetricStreamEntries";
+const _MSF = "MetricStreamFilter";
+const _MSFe = "MetricStreamFilters";
+const _MSSC = "MetricStreamStatisticsConfiguration";
+const _MSSCe = "MetricStreamStatisticsConfigurations";
+const _MSSIM = "MetricStreamStatisticsIncludeMetrics";
+const _MSSM = "MetricStreamStatisticsMetric";
+const _MSe = "MetricStat";
+const _MT = "MuteType";
+const _MTe = "MetricTimezone";
+const _MTu = "MuteTargets";
+const _MW = "MetricWidget";
+const _MWI = "MetricWidgetImage";
+const _Ma = "Maximum";
+const _Me = "Metrics";
+const _Mes = "Messages";
+const _Met = "Metric";
+const _Mi = "Minimum";
+const _N = "Namespace";
+const _NT = "NextToken";
+const _Na = "Name";
+const _Nam = "Names";
+const _OA = "OwningAccount";
+const _OAw = "OwningAccounts";
+const _OB = "OrderBy";
+const _OF = "OutputFormat";
+const _OFS = "OutlierFilteringStrength";
+const _OKA = "OKActions";
+const _OSEAWUPE = "OnlyStartEvaluatingAfterWarmUpPeriodEnds";
+const _OTEMS = "OTelEnrichmentMetricSelector";
+const _OTEMSL = "OTelEnrichmentMetricSelectorList";
+const _P = "Period";
+const _PAD = "PutAnomalyDetector";
+const _PADI = "PutAnomalyDetectorInput";
+const _PADO = "PutAnomalyDetectorOutput";
+const _PAMR = "PutAlarmMuteRule";
+const _PAMRI = "PutAlarmMuteRuleInput";
+const _PCA = "PutCompositeAlarm";
+const _PCAI = "PutCompositeAlarmInput";
+const _PD = "PutDashboard";
+const _PDI = "PutDashboardInput";
+const _PDO = "PutDashboardOutput";
+const _PF = "PartialFailure";
+const _PIR = "PutInsightRule";
+const _PIRI = "PutInsightRuleInput";
+const _PIRO = "PutInsightRuleOutput";
+const _PLA = "PutLogAlarm";
+const _PLAI = "PutLogAlarmInput";
+const _PMA = "PutMetricAlarm";
+const _PMAI = "PutMetricAlarmInput";
+const _PMD = "PutMetricData";
+const _PMDI = "PutMetricDataInput";
+const _PMDQD = "PutMetricDataQueryDefinition";
+const _PMDQDI = "PutMetricDataQueryDefinitionInput";
+const _PMDQDO = "PutMetricDataQueryDefinitionOutput";
+const _PMIR = "PutManagedInsightRules";
+const _PMIRI = "PutManagedInsightRulesInput";
+const _PMIRO = "PutManagedInsightRulesOutput";
+const _PMS = "PutMetricStream";
+const _PMSI = "PutMetricStreamInput";
+const _PMSO = "PutMetricStreamOutput";
+const _POAN = "ParentsOfAlarmName";
+const _PP = "PendingPeriod";
+const _PQLC = "PromQLCriteria";
+const _PS = "PeriodicSpikes";
+const _Pa = "Path";
+const _Q = "Query";
+const _QARN = "QueryARN";
+const _QRTA = "QueryResultsToAlarm";
+const _QRTE = "QueryResultsToEvaluate";
+const _QS = "QueryString";
+const _R = "Rule";
+const _RA = "ResourceArn";
+const _RARN = "ResourceARN";
+const _RAe = "RecentlyActive";
+const _RAo = "RoleArn";
+const _RC = "ResourceConflict";
+const _RD = "ReturnData";
+const _RDu = "RuleDefinition";
+const _RI = "ResourceId";
+const _RMC = "ResourceMetricsConfiguration";
+const _RMS = "ResourceMetricSelection";
+const _RMSL = "ResourceMetricSelectionList";
+const _RN = "RuleNames";
+const _RNF = "ResourceNotFound";
+const _RNFE = "ResourceNotFoundException";
+const _RNu = "RuleName";
+const _RP = "RecoveryPeriod";
+const _RS = "RuleState";
+const _RT = "ResourceType";
+const _Ra = "Range";
+const _S = "Status";
+const _SAS = "SetAlarmState";
+const _SASI = "SetAlarmStateInput";
+const _SB = "ScanBy";
+const _SC = "SampleCount";
+const _SCc = "ScheduleConfiguration";
+const _SCt = "StatisticsConfigurations";
+const _SCta = "StatusCode";
+const _SD = "StartDate";
+const _SE = "ScheduleExpression";
+const _SEV = "StrictEntityValidation";
+const _SMAD = "SingleMetricAnomalyDetector";
+const _SMS = "StartMetricStreams";
+const _SMSI = "StartMetricStreamsInput";
+const _SMSIt = "StopMetricStreamsInput";
+const _SMSO = "StartMetricStreamsOutput";
+const _SMSOt = "StopMetricStreamsOutput";
+const _SMSt = "StopMetricStreams";
+const _SOTE = "StartOTelEnrichment";
+const _SOTEI = "StartOTelEnrichmentInput";
+const _SOTEIt = "StopOTelEnrichmentInput";
+const _SOTEO = "StartOTelEnrichmentOutput";
+const _SOTEOt = "StopOTelEnrichmentOutput";
+const _SOTEt = "StopOTelEnrichment";
+const _SQC = "ScheduledQueryConfiguration";
+const _SQRARN = "ScheduledQueryRoleARN";
+const _SR = "StateReason";
+const _SRD = "StateReasonData";
+const _SRt = "StorageResolution";
+const _SS = "StatisticSet";
+const _ST = "StartTime";
+const _STO = "StartTimeOffset";
+const _STT = "StateTransitionedTimestamp";
+const _SUT = "StateUpdatedTimestamp";
+const _SV = "StateValue";
+const _SVt = "StatisticValues";
+const _SW = "SlidingWindow";
+const _Sc = "Schema";
+const _Sch = "Schedule";
+const _Si = "Size";
+const _St = "Stat";
+const _Sta = "Statistic";
+const _Stat = "Statistics";
+const _State = "State";
+const _Statu = "Statuses";
+const _Su = "Sum";
+const _T = "Timestamp";
+const _TK = "TagKeys";
+const _TL = "TagList";
+const _TMD = "TreatMissingData";
+const _TMI = "ThresholdMetricId";
+const _TN = "TemplateName";
+const _TR = "TagResource";
+const _TRI = "TagResourceInput";
+const _TRO = "TagResourceOutput";
+const _Ta = "Tags";
+const _Tag = "Tag";
+const _Th = "Threshold";
+const _Ti = "Timezone";
+const _Tim = "Timestamps";
+const _Ty = "Type";
+const _U = "Unit";
+const _UA = "UpdatedAt";
+const _UC = "UniqueContributors";
+const _UOTE = "UpdateOTelEnrichment";
+const _UOTEI = "UpdateOTelEnrichmentInput";
+const _UOTEO = "UpdateOTelEnrichmentOutput";
+const _UR = "UntagResource";
+const _URI = "UntagResourceInput";
+const _URMC = "UpdateResourceMetricsConfiguration";
+const _URMCI = "UpdateResourceMetricsConfigurationInput";
+const _URMCO = "UpdateResourceMetricsConfigurationOutput";
+const _URO = "UntagResourceOutput";
+const _V = "Value";
+const _VE = "ValidationException";
+const _Va = "Values";
+const _WCW = "WallClockWindow";
+const _WUC = "WarmUpConfiguration";
+const _WUPDIM = "WarmUpPeriodDurationInMinutes";
+const _aQE = "awsQueryError";
+const _c = "client";
+const _dVM = "dashboardValidationMessages";
+const _e = "error";
+const _hE = "httpError";
+const _m = "message";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.cloudwatch";
+const _se = "server";
+const n0 = "com.amazonaws.cloudwatch";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import { CloudWatchServiceException } from "../models/CloudWatchServiceException";
+import {
+  ConcurrentModificationException,
+  ConflictException,
+  DashboardInvalidInputError,
+  DashboardNotFoundError,
+  InternalServiceFault,
+  InvalidFormatFault,
+  InvalidNextToken,
+  InvalidParameterCombinationException,
+  InvalidParameterValueException,
+  KmsAccessDeniedException,
+  KmsKeyDisabledException,
+  KmsKeyNotFoundException,
+  LimitExceededException,
+  LimitExceededFault,
+  MissingRequiredParameterException,
+  ResourceConflict,
+  ResourceNotFound,
+  ResourceNotFoundException,
+  ValidationException,
+} from "../models/errors";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var CloudWatchServiceException$: StaticErrorSchema = [-3, _s, "CloudWatchServiceException", 0, [], []];
+_s_registry.registerError(CloudWatchServiceException$, CloudWatchServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var ConcurrentModificationException$: StaticErrorSchema = [-3, n0, _CME,
+  { [_aQE]: [`ConcurrentModificationException`, 429], [_e]: _c, [_hE]: 429 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ConcurrentModificationException$, ConcurrentModificationException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var DashboardInvalidInputError$: StaticErrorSchema = [-3, n0, _DIIE,
+  { [_aQE]: [`InvalidParameterInput`, 400], [_e]: _c, [_hE]: 400 },
+  [_m, _dVM],
+  [0, () => DashboardValidationMessages]
+];
+n0_registry.registerError(DashboardInvalidInputError$, DashboardInvalidInputError);
+export var DashboardNotFoundError$: StaticErrorSchema = [-3, n0, _DNFE,
+  { [_aQE]: [`ResourceNotFound`, 404], [_e]: _c, [_hE]: 404 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(DashboardNotFoundError$, DashboardNotFoundError);
+export var InternalServiceFault$: StaticErrorSchema = [-3, n0, _ISF,
+  { [_aQE]: [`InternalServiceError`, 500], [_e]: _se, [_hE]: 500 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(InternalServiceFault$, InternalServiceFault);
+export var InvalidFormatFault$: StaticErrorSchema = [-3, n0, _IFF,
+  { [_aQE]: [`InvalidFormat`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidFormatFault$, InvalidFormatFault);
+export var InvalidNextToken$: StaticErrorSchema = [-3, n0, _INT,
+  { [_aQE]: [`InvalidNextToken`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidNextToken$, InvalidNextToken);
+export var InvalidParameterCombinationException$: StaticErrorSchema = [-3, n0, _IPCE,
+  { [_aQE]: [`InvalidParameterCombination`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidParameterCombinationException$, InvalidParameterCombinationException);
+export var InvalidParameterValueException$: StaticErrorSchema = [-3, n0, _IPVE,
+  { [_aQE]: [`InvalidParameterValue`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidParameterValueException$, InvalidParameterValueException);
+export var KmsAccessDeniedException$: StaticErrorSchema = [-3, n0, _KADE,
+  { [_e]: _c },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(KmsAccessDeniedException$, KmsAccessDeniedException);
+export var KmsKeyDisabledException$: StaticErrorSchema = [-3, n0, _KKDE,
+  { [_e]: _c },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(KmsKeyDisabledException$, KmsKeyDisabledException);
+export var KmsKeyNotFoundException$: StaticErrorSchema = [-3, n0, _KKNFE,
+  { [_e]: _c },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(KmsKeyNotFoundException$, KmsKeyNotFoundException);
+export var LimitExceededException$: StaticErrorSchema = [-3, n0, _LEE,
+  { [_aQE]: [`LimitExceededException`, 400], [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(LimitExceededException$, LimitExceededException);
+export var LimitExceededFault$: StaticErrorSchema = [-3, n0, _LEF,
+  { [_aQE]: [`LimitExceeded`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(LimitExceededFault$, LimitExceededFault);
+export var MissingRequiredParameterException$: StaticErrorSchema = [-3, n0, _MRPE,
+  { [_aQE]: [`MissingParameter`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(MissingRequiredParameterException$, MissingRequiredParameterException);
+export var ResourceConflict$: StaticErrorSchema = [-3, n0, _RC,
+  { [_aQE]: [`ResourceConflict`, 409], [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ResourceConflict$, ResourceConflict);
+export var ResourceNotFound$: StaticErrorSchema = [-3, n0, _RNF,
+  { [_aQE]: [`ResourceNotFound`, 404], [_e]: _c, [_hE]: 404 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ResourceNotFound$, ResourceNotFound);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_aQE]: [`ResourceNotFoundException`, 404], [_e]: _c, [_hE]: 404 },
+  [_RT, _RI, _M],
+  [0, 0, 0]
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_aQE]: [`ValidationError`, 400], [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var MetricExpressionString: StaticSimpleSchema = [0, n0, _MES, 8, 0];
+export var ActionConfiguration$: StaticStructureSchema = [3, n0, _AC,
+  0,
+  [_ATP],
+  [() => AlarmTagsPropagation$]
+];
+export var AlarmContributor$: StaticStructureSchema = [3, n0, _ACl,
+  0,
+  [_CI, _CA, _SR, _STT],
+  [0, 128 | 0, 0, 4], 3
+];
+export var AlarmHistoryItem$: StaticStructureSchema = [3, n0, _AHI,
+  0,
+  [_AN, _ACI, _AT, _T, _HIT, _HS, _HD, _ACA],
+  [0, 0, 0, 4, 0, 0, 0, 128 | 0]
+];
+export var AlarmMuteRuleSummary$: StaticStructureSchema = [3, n0, _AMRS,
+  0,
+  [_AMRA, _ED, _S, _MT, _LUT],
+  [0, 4, 0, 0, 4]
+];
+export var AlarmPromQLCriteria$: StaticStructureSchema = [3, n0, _APQLC,
+  0,
+  [_Q, _PP, _RP],
+  [0, 1, 1], 1
+];
+export var AlarmTagsPropagation$: StaticStructureSchema = [3, n0, _ATP,
+  0,
+  [_E, _ITK, _ETK],
+  [2, 64 | 0, 64 | 0], 1
+];
+export var AnomalyDetector$: StaticStructureSchema = [3, n0, _AD,
+  0,
+  [_ADI, _N, _MN, _D, _St, _C, _SV, _MC, _SMAD, _MMAD],
+  [0, 0, 0, () => Dimensions, 0, () => AnomalyDetectorConfiguration$, 0, () => MetricCharacteristics$, () => SingleMetricAnomalyDetector$, () => MetricMathAnomalyDetector$]
+];
+export var AnomalyDetectorConfiguration$: StaticStructureSchema = [3, n0, _ADC,
+  0,
+  [_ETR, _MTe, _AS, _OFS],
+  [() => AnomalyDetectorExcludedTimeRanges, 0, 0, 0]
+];
+export var AssociateDatasetKmsKeyInput$: StaticStructureSchema = [3, n0, _ADKKI,
+  0,
+  [_DI, _KKA],
+  [0, 0], 2
+];
+export var AssociateDatasetKmsKeyOutput$: StaticStructureSchema = [3, n0, _ADKKO,
+  0,
+  [],
+  []
+];
+export var CompositeAlarm$: StaticStructureSchema = [3, n0, _CAo,
+  0,
+  [_AE, _AA, _AAl, _ACUT, _ADl, _AN, _AR, _IDA, _OKA, _SR, _SRD, _SUT, _SV, _STT, _ASB, _ASR, _ASc, _ASWP, _ASEP, _AC],
+  [2, 64 | 0, 0, 4, 0, 0, 0, 64 | 0, 64 | 0, 0, 0, 4, 0, 4, 0, 0, 0, 1, 1, () => ActionConfiguration$]
+];
+export var CreateResourceMetricsConfigurationInput$: StaticStructureSchema = [3, n0, _CRMCI,
+  0,
+  [_RA, _MS],
+  [0, () => ResourceMetricSelectionList], 1
+];
+export var CreateResourceMetricsConfigurationOutput$: StaticStructureSchema = [3, n0, _CRMCO,
+  0,
+  [_RMC],
+  [() => ResourceMetricsConfiguration$], 1
+];
+export var DashboardEntry$: StaticStructureSchema = [3, n0, _DE,
+  0,
+  [_DN, _DA, _LM, _Si],
+  [0, 0, 4, 1]
+];
+export var DashboardValidationMessage$: StaticStructureSchema = [3, n0, _DVM,
+  0,
+  [_DP, _M],
+  [0, 0]
+];
+export var Datapoint$: StaticStructureSchema = [3, n0, _Da,
+  0,
+  [_T, _SC, _A, _Su, _Mi, _Ma, _U, _ES],
+  [4, 1, 1, 1, 1, 1, 0, 128 | 1]
+];
+export var DeleteAlarmMuteRuleInput$: StaticStructureSchema = [3, n0, _DAMRI,
+  0,
+  [_AMRN],
+  [0], 1
+];
+export var DeleteAlarmsInput$: StaticStructureSchema = [3, n0, _DAI,
+  0,
+  [_ANl],
+  [64 | 0], 1
+];
+export var DeleteAnomalyDetectorInput$: StaticStructureSchema = [3, n0, _DADI,
+  0,
+  [_ADI, _N, _MN, _D, _St, _SMAD, _MMAD],
+  [0, 0, 0, () => Dimensions, 0, () => SingleMetricAnomalyDetector$, () => MetricMathAnomalyDetector$]
+];
+export var DeleteAnomalyDetectorOutput$: StaticStructureSchema = [3, n0, _DADO,
+  0,
+  [],
+  []
+];
+export var DeleteDashboardsInput$: StaticStructureSchema = [3, n0, _DDI,
+  0,
+  [_DNa],
+  [64 | 0], 1
+];
+export var DeleteDashboardsOutput$: StaticStructureSchema = [3, n0, _DDO,
+  0,
+  [],
+  []
+];
+export var DeleteInsightRulesInput$: StaticStructureSchema = [3, n0, _DIRI,
+  0,
+  [_RN],
+  [64 | 0], 1
+];
+export var DeleteInsightRulesOutput$: StaticStructureSchema = [3, n0, _DIRO,
+  0,
+  [_F],
+  [() => BatchFailures]
+];
+export var DeleteMetricDataQueryDefinitionInput$: StaticStructureSchema = [3, n0, _DMDQDI,
+  0,
+  [_I],
+  [0], 1
+];
+export var DeleteMetricDataQueryDefinitionOutput$: StaticStructureSchema = [3, n0, _DMDQDO,
+  0,
+  [],
+  []
+];
+export var DeleteMetricStreamInput$: StaticStructureSchema = [3, n0, _DMSI,
+  0,
+  [_Na],
+  [0], 1
+];
+export var DeleteMetricStreamOutput$: StaticStructureSchema = [3, n0, _DMSO,
+  0,
+  [],
+  []
+];
+export var DeleteResourceMetricsConfigurationInput$: StaticStructureSchema = [3, n0, _DRMCI,
+  0,
+  [_RA],
+  [0], 1
+];
+export var DeleteResourceMetricsConfigurationOutput$: StaticStructureSchema = [3, n0, _DRMCO,
+  0,
+  [],
+  []
+];
+export var DescribeAlarmContributorsInput$: StaticStructureSchema = [3, n0, _DACI,
+  0,
+  [_AN, _NT],
+  [0, 0], 1
+];
+export var DescribeAlarmContributorsOutput$: StaticStructureSchema = [3, n0, _DACO,
+  0,
+  [_ACla, _NT],
+  [() => AlarmContributors, 0], 1
+];
+export var DescribeAlarmHistoryInput$: StaticStructureSchema = [3, n0, _DAHI,
+  0,
+  [_AN, _ACI, _ATl, _HIT, _SD, _EDn, _MR, _NT, _SB],
+  [0, 0, 64 | 0, 0, 4, 4, 1, 0, 0]
+];
+export var DescribeAlarmHistoryOutput$: StaticStructureSchema = [3, n0, _DAHO,
+  0,
+  [_AHIl, _NT],
+  [() => AlarmHistoryItems, 0]
+];
+export var DescribeAlarmsForMetricInput$: StaticStructureSchema = [3, n0, _DAFMI,
+  0,
+  [_MN, _N, _Sta, _ESx, _D, _P, _U],
+  [0, 0, 0, 0, () => Dimensions, 1, 0], 2
+];
+export var DescribeAlarmsForMetricOutput$: StaticStructureSchema = [3, n0, _DAFMO,
+  0,
+  [_MA],
+  [() => MetricAlarms]
+];
+export var DescribeAlarmsInput$: StaticStructureSchema = [3, n0, _DAIe,
+  0,
+  [_ANl, _ANP, _ATl, _COAN, _POAN, _SV, _AP, _MR, _NT],
+  [64 | 0, 0, 64 | 0, 0, 0, 0, 0, 1, 0]
+];
+export var DescribeAlarmsOutput$: StaticStructureSchema = [3, n0, _DAO,
+  0,
+  [_CAom, _MA, _LA, _NT],
+  [() => CompositeAlarms, () => MetricAlarms, () => LogAlarms, 0]
+];
+export var DescribeAnomalyDetectorsInput$: StaticStructureSchema = [3, n0, _DADIe,
+  0,
+  [_ADIn, _NT, _MRa, _N, _MN, _D, _ADT],
+  [64 | 0, 0, 1, 0, 0, () => Dimensions, 64 | 0]
+];
+export var DescribeAnomalyDetectorsOutput$: StaticStructureSchema = [3, n0, _DADOe,
+  0,
+  [_ADn, _NT],
+  [() => AnomalyDetectors, 0]
+];
+export var DescribeInsightRulesInput$: StaticStructureSchema = [3, n0, _DIRIe,
+  0,
+  [_NT, _MRa],
+  [0, 1]
+];
+export var DescribeInsightRulesOutput$: StaticStructureSchema = [3, n0, _DIROe,
+  0,
+  [_NT, _IR],
+  [0, () => InsightRules]
+];
+export var Dimension$: StaticStructureSchema = [3, n0, _Di,
+  0,
+  [_Na, _V],
+  [0, 0], 2
+];
+export var DimensionFilter$: StaticStructureSchema = [3, n0, _DF,
+  0,
+  [_Na, _V],
+  [0, 0], 1
+];
+export var DisableAlarmActionsInput$: StaticStructureSchema = [3, n0, _DAAI,
+  0,
+  [_ANl],
+  [64 | 0], 1
+];
+export var DisableInsightRulesInput$: StaticStructureSchema = [3, n0, _DIRIi,
+  0,
+  [_RN],
+  [64 | 0], 1
+];
+export var DisableInsightRulesOutput$: StaticStructureSchema = [3, n0, _DIROi,
+  0,
+  [_F],
+  [() => BatchFailures]
+];
+export var DisassociateDatasetKmsKeyInput$: StaticStructureSchema = [3, n0, _DDKKI,
+  0,
+  [_DI],
+  [0], 1
+];
+export var DisassociateDatasetKmsKeyOutput$: StaticStructureSchema = [3, n0, _DDKKO,
+  0,
+  [],
+  []
+];
+export var EnableAlarmActionsInput$: StaticStructureSchema = [3, n0, _EAAI,
+  0,
+  [_ANl],
+  [64 | 0], 1
+];
+export var EnableInsightRulesInput$: StaticStructureSchema = [3, n0, _EIRI,
+  0,
+  [_RN],
+  [64 | 0], 1
+];
+export var EnableInsightRulesOutput$: StaticStructureSchema = [3, n0, _EIRO,
+  0,
+  [_F],
+  [() => BatchFailures]
+];
+export var Entity$: StaticStructureSchema = [3, n0, _En,
+  0,
+  [_KA, _At],
+  [128 | 0, 128 | 0]
+];
+export var EntityMetricData$: StaticStructureSchema = [3, n0, _EMD,
+  0,
+  [_En, _MD],
+  [() => Entity$, () => MetricData]
+];
+export var GetAlarmMuteRuleInput$: StaticStructureSchema = [3, n0, _GAMRI,
+  0,
+  [_AMRN],
+  [0], 1
+];
+export var GetAlarmMuteRuleOutput$: StaticStructureSchema = [3, n0, _GAMRO,
+  0,
+  [_Na, _AMRA, _De, _R, _MTu, _SD, _ED, _S, _LUT, _MT],
+  [0, 0, 0, () => Rule$, () => MuteTargets$, 4, 4, 0, 4, 0]
+];
+export var GetDashboardInput$: StaticStructureSchema = [3, n0, _GDI,
+  0,
+  [_DN],
+  [0], 1
+];
+export var GetDashboardOutput$: StaticStructureSchema = [3, n0, _GDO,
+  0,
+  [_DA, _DB, _DN],
+  [0, 0, 0]
+];
+export var GetDatasetInput$: StaticStructureSchema = [3, n0, _GDIe,
+  0,
+  [_DI],
+  [0], 1
+];
+export var GetDatasetOutput$: StaticStructureSchema = [3, n0, _GDOe,
+  0,
+  [_DIa, _Ar, _KKA],
+  [0, 0, 0], 2
+];
+export var GetInsightRuleReportInput$: StaticStructureSchema = [3, n0, _GIRRI,
+  0,
+  [_RNu, _ST, _ET, _P, _MCC, _Me, _OB],
+  [0, 4, 4, 1, 1, 64 | 0, 0], 4
+];
+export var GetInsightRuleReportOutput$: StaticStructureSchema = [3, n0, _GIRRO,
+  0,
+  [_KL, _ASg, _AV, _AUC, _Co, _MDe],
+  [64 | 0, 0, 1, 1, () => InsightRuleContributors, () => InsightRuleMetricDatapoints]
+];
+export var GetMetricDataInput$: StaticStructureSchema = [3, n0, _GMDI,
+  0,
+  [_MDQ, _ST, _ET, _NT, _SB, _MDa, _LO],
+  [() => MetricDataQueries, 4, 4, 0, 0, 1, () => LabelOptions$], 3
+];
+export var GetMetricDataOutput$: StaticStructureSchema = [3, n0, _GMDO,
+  0,
+  [_MDR, _NT, _Mes],
+  [() => MetricDataResults, 0, () => MetricDataResultMessages]
+];
+export var GetMetricDataQueryDefinitionInput$: StaticStructureSchema = [3, n0, _GMDQDI,
+  0,
+  [_I],
+  [0], 1
+];
+export var GetMetricDataQueryDefinitionOutput$: StaticStructureSchema = [3, n0, _GMDQDO,
+  0,
+  [_I, _Ar, _Pa, _Ex, _Ty, _CAr, _UA],
+  [0, 0, 0, [() => MetricExpressionString, 0], 0, 4, 4], 7
+];
+export var GetMetricStatisticsInput$: StaticStructureSchema = [3, n0, _GMSI,
+  0,
+  [_N, _MN, _ST, _ET, _P, _D, _Stat, _ES, _U],
+  [0, 0, 4, 4, 1, () => Dimensions, 64 | 0, 64 | 0, 0], 5
+];
+export var GetMetricStatisticsOutput$: StaticStructureSchema = [3, n0, _GMSO,
+  0,
+  [_L, _Dat],
+  [0, () => Datapoints]
+];
+export var GetMetricStreamInput$: StaticStructureSchema = [3, n0, _GMSIe,
+  0,
+  [_Na],
+  [0], 1
+];
+export var GetMetricStreamOutput$: StaticStructureSchema = [3, n0, _GMSOe,
+  0,
+  [_Ar, _Na, _IF, _EF, _FA, _RAo, _State, _CD, _LUD, _OF, _SCt, _ILAM],
+  [0, 0, () => MetricStreamFilters, () => MetricStreamFilters, 0, 0, 0, 4, 4, 0, () => MetricStreamStatisticsConfigurations, 2]
+];
+export var GetMetricWidgetImageInput$: StaticStructureSchema = [3, n0, _GMWII,
+  0,
+  [_MW, _OF],
+  [0, 0], 1
+];
+export var GetMetricWidgetImageOutput$: StaticStructureSchema = [3, n0, _GMWIO,
+  0,
+  [_MWI],
+  [21]
+];
+export var GetOTelEnrichmentInput$: StaticStructureSchema = [3, n0, _GOTEI,
+  0,
+  [],
+  []
+];
+export var GetOTelEnrichmentOutput$: StaticStructureSchema = [3, n0, _GOTEO,
+  0,
+  [_S, _IF, _EF, _CAr, _UA],
+  [0, () => OTelEnrichmentMetricSelectorList, () => OTelEnrichmentMetricSelectorList, 4, 4], 1
+];
+export var GetResourceMetricsConfigurationInput$: StaticStructureSchema = [3, n0, _GRMCI,
+  0,
+  [_RA],
+  [0], 1
+];
+export var GetResourceMetricsConfigurationOutput$: StaticStructureSchema = [3, n0, _GRMCO,
+  0,
+  [_RMC],
+  [() => ResourceMetricsConfiguration$], 1
+];
+export var InsightRule$: StaticStructureSchema = [3, n0, _IRn,
+  0,
+  [_Na, _State, _Sc, _Def, _MRan, _AOTL],
+  [0, 0, 0, 0, 2, 2], 4
+];
+export var InsightRuleContributor$: StaticStructureSchema = [3, n0, _IRC,
+  0,
+  [_K, _AAV, _Dat],
+  [64 | 0, 1, () => InsightRuleContributorDatapoints], 3
+];
+export var InsightRuleContributorDatapoint$: StaticStructureSchema = [3, n0, _IRCD,
+  0,
+  [_T, _AVp],
+  [4, 1], 2
+];
+export var InsightRuleMetricDatapoint$: StaticStructureSchema = [3, n0, _IRMD,
+  0,
+  [_T, _UC, _MCV, _SC, _A, _Su, _Mi, _Ma],
+  [4, 1, 1, 1, 1, 1, 1, 1], 1
+];
+export var LabelOptions$: StaticStructureSchema = [3, n0, _LO,
+  0,
+  [_Ti],
+  [0]
+];
+export var ListAlarmMuteRulesInput$: StaticStructureSchema = [3, n0, _LAMRI,
+  0,
+  [_AN, _Statu, _MR, _NT],
+  [0, 64 | 0, 1, 0]
+];
+export var ListAlarmMuteRulesOutput$: StaticStructureSchema = [3, n0, _LAMRO,
+  0,
+  [_AMRSl, _NT],
+  [() => AlarmMuteRuleSummaries, 0]
+];
+export var ListDashboardsInput$: StaticStructureSchema = [3, n0, _LDI,
+  0,
+  [_DNP, _NT],
+  [0, 0]
+];
+export var ListDashboardsOutput$: StaticStructureSchema = [3, n0, _LDO,
+  0,
+  [_DEa, _NT],
+  [() => DashboardEntries, 0]
+];
+export var ListManagedInsightRulesInput$: StaticStructureSchema = [3, n0, _LMIRI,
+  0,
+  [_RARN, _NT, _MRa],
+  [0, 0, 1], 1
+];
+export var ListManagedInsightRulesOutput$: StaticStructureSchema = [3, n0, _LMIRO,
+  0,
+  [_MRana, _NT],
+  [() => ManagedRuleDescriptions, 0]
+];
+export var ListMetricDataQueryDefinitionsInput$: StaticStructureSchema = [3, n0, _LMDQDI,
+  0,
+  [_MRa, _NT],
+  [1, 0]
+];
+export var ListMetricDataQueryDefinitionsOutput$: StaticStructureSchema = [3, n0, _LMDQDO,
+  0,
+  [_It, _NT],
+  [() => MetricDataQueryDefinitionSummaries, 0], 1
+];
+export var ListMetricsInput$: StaticStructureSchema = [3, n0, _LMI,
+  0,
+  [_N, _MN, _D, _NT, _RAe, _ILA, _OA],
+  [0, 0, () => DimensionFilters, 0, 0, 2, 0]
+];
+export var ListMetricsOutput$: StaticStructureSchema = [3, n0, _LMO,
+  0,
+  [_Me, _NT, _OAw],
+  [() => Metrics, 0, 64 | 0]
+];
+export var ListMetricStreamsInput$: StaticStructureSchema = [3, n0, _LMSI,
+  0,
+  [_NT, _MRa],
+  [0, 1]
+];
+export var ListMetricStreamsOutput$: StaticStructureSchema = [3, n0, _LMSO,
+  0,
+  [_NT, _Ent],
+  [0, () => MetricStreamEntries]
+];
+export var ListTagsForResourceInput$: StaticStructureSchema = [3, n0, _LTFRI,
+  0,
+  [_RARN],
+  [0], 1
+];
+export var ListTagsForResourceOutput$: StaticStructureSchema = [3, n0, _LTFRO,
+  0,
+  [_Ta],
+  [() => TagList]
+];
+export var LogAlarm$: StaticStructureSchema = [3, n0, _LAo,
+  0,
+  [_AN, _AAl, _ADl, _ACUT, _AE, _OKA, _AA, _IDA, _SV, _SR, _SRD, _SUT, _SQC, _QRTE, _QRTA, _Th, _CO, _TMD, _STT, _ESv, _ALLC, _ALLRA, _WUC, _AC],
+  [0, 0, 0, 4, 2, 64 | 0, 64 | 0, 64 | 0, 0, 0, 0, 4, () => ScheduledQueryConfiguration$, 1, 1, 1, 0, 0, 4, 0, 1, 0, () => WarmUpConfiguration$, () => ActionConfiguration$]
+];
+export var ManagedRule$: StaticStructureSchema = [3, n0, _MRan,
+  0,
+  [_TN, _RARN, _Ta],
+  [0, 0, () => TagList], 2
+];
+export var ManagedRuleDescription$: StaticStructureSchema = [3, n0, _MRD,
+  0,
+  [_TN, _RARN, _RS],
+  [0, 0, () => ManagedRuleState$]
+];
+export var ManagedRuleState$: StaticStructureSchema = [3, n0, _MRS,
+  0,
+  [_RNu, _State],
+  [0, 0], 2
+];
+export var MessageData$: StaticStructureSchema = [3, n0, _MDes,
+  0,
+  [_Cod, _V],
+  [0, 0]
+];
+export var Metric$: StaticStructureSchema = [3, n0, _Met,
+  0,
+  [_N, _MN, _D],
+  [0, 0, () => Dimensions]
+];
+export var MetricAlarm$: StaticStructureSchema = [3, n0, _MAe,
+  0,
+  [_AN, _AAl, _ADl, _ACUT, _AE, _OKA, _AA, _IDA, _SV, _SR, _SRD, _SUT, _MN, _N, _Sta, _ESx, _D, _P, _U, _EP, _DTA, _Th, _CO, _TMD, _ELSCP, _Me, _TMI, _ESv, _STT, _EW, _WUC, _EC, _EI, _AC],
+  [0, 0, 0, 4, 2, 64 | 0, 64 | 0, 64 | 0, 0, 0, 0, 4, 0, 0, 0, 0, () => Dimensions, 1, 0, 1, 1, 1, 0, 0, 0, () => MetricDataQueries, 0, 0, 4, () => EvaluationWindow$, () => WarmUpConfiguration$, () => EvaluationCriteria$, 1, () => ActionConfiguration$]
+];
+export var MetricCharacteristics$: StaticStructureSchema = [3, n0, _MC,
+  0,
+  [_PS],
+  [2]
+];
+export var MetricDataQuery$: StaticStructureSchema = [3, n0, _MDQe,
+  0,
+  [_I, _MSe, _Ex, _L, _RD, _P, _AI],
+  [0, () => MetricStat$, 0, 0, 2, 1, 0], 1
+];
+export var MetricDataQueryDefinitionSummary$: StaticStructureSchema = [3, n0, _MDQDS,
+  0,
+  [_I, _Pa, _Ty, _UA],
+  [0, 0, 0, 4], 3
+];
+export var MetricDataResult$: StaticStructureSchema = [3, n0, _MDRe,
+  0,
+  [_I, _L, _Tim, _Va, _SCta, _Mes],
+  [0, 0, 64 | 4, 64 | 1, 0, () => MetricDataResultMessages]
+];
+export var MetricDatum$: StaticStructureSchema = [3, n0, _MDet,
+  0,
+  [_MN, _D, _T, _V, _SVt, _Va, _Cou, _U, _SRt],
+  [0, () => Dimensions, 4, 1, () => StatisticSet$, 64 | 1, 64 | 1, 0, 1], 1
+];
+export var MetricMathAnomalyDetector$: StaticStructureSchema = [3, n0, _MMAD,
+  0,
+  [_MDQ],
+  [() => MetricDataQueries]
+];
+export var MetricStat$: StaticStructureSchema = [3, n0, _MSe,
+  0,
+  [_Met, _P, _St, _U],
+  [() => Metric$, 1, 0, 0], 3
+];
+export var MetricStreamEntry$: StaticStructureSchema = [3, n0, _MSE,
+  0,
+  [_Ar, _CD, _LUD, _Na, _FA, _State, _OF],
+  [0, 4, 4, 0, 0, 0, 0]
+];
+export var MetricStreamFilter$: StaticStructureSchema = [3, n0, _MSF,
+  0,
+  [_N, _MNe],
+  [0, 64 | 0]
+];
+export var MetricStreamStatisticsConfiguration$: StaticStructureSchema = [3, n0, _MSSC,
+  0,
+  [_IM, _ASd],
+  [() => MetricStreamStatisticsIncludeMetrics, 64 | 0], 2
+];
+export var MetricStreamStatisticsMetric$: StaticStructureSchema = [3, n0, _MSSM,
+  0,
+  [_N, _MN],
+  [0, 0], 2
+];
+export var MuteTargets$: StaticStructureSchema = [3, n0, _MTu,
+  0,
+  [_ANl],
+  [64 | 0], 1
+];
+export var OTelEnrichmentMetricSelector$: StaticStructureSchema = [3, n0, _OTEMS,
+  0,
+  [_N, _MNe],
+  [0, 64 | 0], 1
+];
+export var PartialFailure$: StaticStructureSchema = [3, n0, _PF,
+  0,
+  [_FR, _ETx, _FC, _FD],
+  [0, 0, 0, 0]
+];
+export var PutAlarmMuteRuleInput$: StaticStructureSchema = [3, n0, _PAMRI,
+  0,
+  [_Na, _R, _De, _MTu, _Ta, _SD, _ED],
+  [0, () => Rule$, 0, () => MuteTargets$, () => TagList, 4, 4], 2
+];
+export var PutAnomalyDetectorInput$: StaticStructureSchema = [3, n0, _PADI,
+  0,
+  [_N, _MN, _D, _St, _C, _MC, _SMAD, _MMAD],
+  [0, 0, () => Dimensions, 0, () => AnomalyDetectorConfiguration$, () => MetricCharacteristics$, () => SingleMetricAnomalyDetector$, () => MetricMathAnomalyDetector$]
+];
+export var PutAnomalyDetectorOutput$: StaticStructureSchema = [3, n0, _PADO,
+  0,
+  [_ADI],
+  [0]
+];
+export var PutCompositeAlarmInput$: StaticStructureSchema = [3, n0, _PCAI,
+  0,
+  [_AN, _AR, _AE, _AA, _ADl, _IDA, _OKA, _Ta, _ASc, _ASWP, _ASEP, _AC],
+  [0, 0, 2, 64 | 0, 0, 64 | 0, 64 | 0, () => TagList, 0, 1, 1, () => ActionConfiguration$], 2
+];
+export var PutDashboardInput$: StaticStructureSchema = [3, n0, _PDI,
+  0,
+  [_DN, _DB, _Ta],
+  [0, 0, () => TagList], 2
+];
+export var PutDashboardOutput$: StaticStructureSchema = [3, n0, _PDO,
+  0,
+  [_DVMa],
+  [() => DashboardValidationMessages]
+];
+export var PutInsightRuleInput$: StaticStructureSchema = [3, n0, _PIRI,
+  0,
+  [_RNu, _RDu, _RS, _Ta, _AOTL],
+  [0, 0, 0, () => TagList, 2], 2
+];
+export var PutInsightRuleOutput$: StaticStructureSchema = [3, n0, _PIRO,
+  0,
+  [],
+  []
+];
+export var PutLogAlarmInput$: StaticStructureSchema = [3, n0, _PLAI,
+  0,
+  [_AN, _SQC, _QRTE, _QRTA, _Th, _CO, _ADl, _ALLC, _ALLRA, _AE, _OKA, _AA, _IDA, _TMD, _Ta, _WUC, _AC],
+  [0, () => ScheduledQueryConfiguration$, 1, 1, 1, 0, 0, 1, 0, 2, 64 | 0, 64 | 0, 64 | 0, 0, () => TagList, () => WarmUpConfiguration$, () => ActionConfiguration$], 6
+];
+export var PutManagedInsightRulesInput$: StaticStructureSchema = [3, n0, _PMIRI,
+  0,
+  [_MRana],
+  [() => ManagedRules], 1
+];
+export var PutManagedInsightRulesOutput$: StaticStructureSchema = [3, n0, _PMIRO,
+  0,
+  [_F],
+  [() => BatchFailures]
+];
+export var PutMetricAlarmInput$: StaticStructureSchema = [3, n0, _PMAI,
+  0,
+  [_AN, _ADl, _AE, _OKA, _AA, _IDA, _MN, _N, _Sta, _ESx, _D, _P, _U, _EP, _DTA, _Th, _CO, _TMD, _ELSCP, _Me, _Ta, _TMI, _EW, _WUC, _EC, _EI, _AC],
+  [0, 0, 2, 64 | 0, 64 | 0, 64 | 0, 0, 0, 0, 0, () => Dimensions, 1, 0, 1, 1, 1, 0, 0, 0, () => MetricDataQueries, () => TagList, 0, () => EvaluationWindow$, () => WarmUpConfiguration$, () => EvaluationCriteria$, 1, () => ActionConfiguration$], 1
+];
+export var PutMetricDataInput$: StaticStructureSchema = [3, n0, _PMDI,
+  0,
+  [_N, _MD, _EMD, _SEV],
+  [0, () => MetricData, () => EntityMetricDataList, 2], 1
+];
+export var PutMetricDataQueryDefinitionInput$: StaticStructureSchema = [3, n0, _PMDQDI,
+  0,
+  [_Pa, _Ex, _Ty, _I, _Ta],
+  [0, [() => MetricExpressionString, 0], 0, 0, () => TagList], 3
+];
+export var PutMetricDataQueryDefinitionOutput$: StaticStructureSchema = [3, n0, _PMDQDO,
+  0,
+  [_I, _Ar, _Pa, _Ex, _Ty, _CAr, _UA],
+  [0, 0, 0, [() => MetricExpressionString, 0], 0, 4, 4], 7
+];
+export var PutMetricStreamInput$: StaticStructureSchema = [3, n0, _PMSI,
+  0,
+  [_Na, _FA, _RAo, _OF, _IF, _EF, _Ta, _SCt, _ILAM],
+  [0, 0, 0, 0, () => MetricStreamFilters, () => MetricStreamFilters, () => TagList, () => MetricStreamStatisticsConfigurations, 2], 4
+];
+export var PutMetricStreamOutput$: StaticStructureSchema = [3, n0, _PMSO,
+  0,
+  [_Ar],
+  [0]
+];
+export var Range$: StaticStructureSchema = [3, n0, _Ra,
+  0,
+  [_ST, _ET],
+  [4, 4], 2
+];
+export var ResourceMetricsConfiguration$: StaticStructureSchema = [3, n0, _RMC,
+  0,
+  [_RA, _CAr, _UA, _MS],
+  [0, 4, 4, () => ResourceMetricSelectionList], 3
+];
+export var ResourceMetricSelection$: StaticStructureSchema = [3, n0, _RMS,
+  0,
+  [_IM],
+  [64 | 0], 1
+];
+export var Rule$: StaticStructureSchema = [3, n0, _R,
+  0,
+  [_Sch],
+  [() => Schedule$], 1
+];
+export var Schedule$: StaticStructureSchema = [3, n0, _Sch,
+  0,
+  [_Ex, _Du, _Ti],
+  [0, 0, 0], 2
+];
+export var ScheduleConfiguration$: StaticStructureSchema = [3, n0, _SCc,
+  0,
+  [_SE, _STO, _ETO],
+  [0, 1, 1], 2
+];
+export var ScheduledQueryConfiguration$: StaticStructureSchema = [3, n0, _SQC,
+  0,
+  [_QS, _SQRARN, _SCc, _AEg, _LGI, _QARN, _Ta],
+  [0, 0, () => ScheduleConfiguration$, 0, 64 | 0, 0, () => TagList], 4
+];
+export var SetAlarmStateInput$: StaticStructureSchema = [3, n0, _SASI,
+  0,
+  [_AN, _SV, _SR, _SRD],
+  [0, 0, 0, 0], 3
+];
+export var SingleMetricAnomalyDetector$: StaticStructureSchema = [3, n0, _SMAD,
+  0,
+  [_AI, _N, _MN, _D, _St],
+  [0, 0, 0, () => Dimensions, 0]
+];
+export var SlidingWindow$: StaticStructureSchema = [3, n0, _SW,
+  0,
+  [],
+  []
+];
+export var StartMetricStreamsInput$: StaticStructureSchema = [3, n0, _SMSI,
+  0,
+  [_Nam],
+  [64 | 0], 1
+];
+export var StartMetricStreamsOutput$: StaticStructureSchema = [3, n0, _SMSO,
+  0,
+  [],
+  []
+];
+export var StartOTelEnrichmentInput$: StaticStructureSchema = [3, n0, _SOTEI,
+  0,
+  [_IF, _EF],
+  [() => OTelEnrichmentMetricSelectorList, () => OTelEnrichmentMetricSelectorList]
+];
+export var StartOTelEnrichmentOutput$: StaticStructureSchema = [3, n0, _SOTEO,
+  0,
+  [_IF, _EF, _CAr, _UA],
+  [() => OTelEnrichmentMetricSelectorList, () => OTelEnrichmentMetricSelectorList, 4, 4]
+];
+export var StatisticSet$: StaticStructureSchema = [3, n0, _SS,
+  0,
+  [_SC, _Su, _Mi, _Ma],
+  [1, 1, 1, 1], 4
+];
+export var StopMetricStreamsInput$: StaticStructureSchema = [3, n0, _SMSIt,
+  0,
+  [_Nam],
+  [64 | 0], 1
+];
+export var StopMetricStreamsOutput$: StaticStructureSchema = [3, n0, _SMSOt,
+  0,
+  [],
+  []
+];
+export var StopOTelEnrichmentInput$: StaticStructureSchema = [3, n0, _SOTEIt,
+  0,
+  [],
+  []
+];
+export var StopOTelEnrichmentOutput$: StaticStructureSchema = [3, n0, _SOTEOt,
+  0,
+  [],
+  []
+];
+export var Tag$: StaticStructureSchema = [3, n0, _Tag,
+  0,
+  [_Ke, _V],
+  [0, 0], 2
+];
+export var TagResourceInput$: StaticStructureSchema = [3, n0, _TRI,
+  0,
+  [_RARN, _Ta],
+  [0, () => TagList], 2
+];
+export var TagResourceOutput$: StaticStructureSchema = [3, n0, _TRO,
+  0,
+  [],
+  []
+];
+export var UntagResourceInput$: StaticStructureSchema = [3, n0, _URI,
+  0,
+  [_RARN, _TK],
+  [0, 64 | 0], 2
+];
+export var UntagResourceOutput$: StaticStructureSchema = [3, n0, _URO,
+  0,
+  [],
+  []
+];
+export var UpdateOTelEnrichmentInput$: StaticStructureSchema = [3, n0, _UOTEI,
+  0,
+  [_IF, _EF],
+  [() => OTelEnrichmentMetricSelectorList, () => OTelEnrichmentMetricSelectorList]
+];
+export var UpdateOTelEnrichmentOutput$: StaticStructureSchema = [3, n0, _UOTEO,
+  0,
+  [_IF, _EF, _CAr, _UA],
+  [() => OTelEnrichmentMetricSelectorList, () => OTelEnrichmentMetricSelectorList, 4, 4]
+];
+export var UpdateResourceMetricsConfigurationInput$: StaticStructureSchema = [3, n0, _URMCI,
+  0,
+  [_RA, _MS],
+  [0, () => ResourceMetricSelectionList], 1
+];
+export var UpdateResourceMetricsConfigurationOutput$: StaticStructureSchema = [3, n0, _URMCO,
+  0,
+  [_RMC],
+  [() => ResourceMetricsConfiguration$], 1
+];
+export var WallClockWindow$: StaticStructureSchema = [3, n0, _WCW,
+  0,
+  [_Ti],
+  [0]
+];
+export var WarmUpConfiguration$: StaticStructureSchema = [3, n0, _WUC,
+  0,
+  [_WUPDIM, _OSEAWUPE],
+  [1, 2], 1
+];
+var __Unit = "unit" as const;
+var AlarmContributors: StaticListSchema = [1, n0, _ACla,
+  0, () => AlarmContributor$
+];
+var AlarmHistoryItems: StaticListSchema = [1, n0, _AHIl,
+  0, () => AlarmHistoryItem$
+];
+var AlarmMuteRuleStatuses = 64 | 0;
+var AlarmMuteRuleSummaries: StaticListSchema = [1, n0, _AMRSl,
+  0, () => AlarmMuteRuleSummary$
+];
+var AlarmNames = 64 | 0;
+var AlarmTagsPropagationTagKeys = 64 | 0;
+var AlarmTypes = 64 | 0;
+var AnomalyDetectorExcludedTimeRanges: StaticListSchema = [1, n0, _ADETR,
+  0, () => Range$
+];
+var AnomalyDetectorIds = 64 | 0;
+var AnomalyDetectors: StaticListSchema = [1, n0, _ADn,
+  0, () => AnomalyDetector$
+];
+var AnomalyDetectorTypes = 64 | 0;
+var BatchFailures: StaticListSchema = [1, n0, _BF,
+  0, () => PartialFailure$
+];
+var CompositeAlarms: StaticListSchema = [1, n0, _CAom,
+  0, () => CompositeAlarm$
+];
+var Counts = 64 | 1;
+var DashboardEntries: StaticListSchema = [1, n0, _DEa,
+  0, () => DashboardEntry$
+];
+var DashboardNames = 64 | 0;
+var DashboardValidationMessages: StaticListSchema = [1, n0, _DVMa,
+  0, () => DashboardValidationMessage$
+];
+var Datapoints: StaticListSchema = [1, n0, _Dat,
+  0, () => Datapoint$
+];
+var DatapointValues = 64 | 1;
+var DimensionFilters: StaticListSchema = [1, n0, _DFi,
+  0, () => DimensionFilter$
+];
+var Dimensions: StaticListSchema = [1, n0, _D,
+  0, () => Dimension$
+];
+var EntityMetricDataList: StaticListSchema = [1, n0, _EMDL,
+  0, () => EntityMetricData$
+];
+var ExtendedStatistics = 64 | 0;
+var InsightRuleContributorDatapoints: StaticListSchema = [1, n0, _IRCDn,
+  0, () => InsightRuleContributorDatapoint$
+];
+var InsightRuleContributorKeyLabels = 64 | 0;
+var InsightRuleContributorKeys = 64 | 0;
+var InsightRuleContributors: StaticListSchema = [1, n0, _IRCn,
+  0, () => InsightRuleContributor$
+];
+var InsightRuleMetricDatapoints: StaticListSchema = [1, n0, _IRMDn,
+  0, () => InsightRuleMetricDatapoint$
+];
+var InsightRuleMetricList = 64 | 0;
+var InsightRuleNames = 64 | 0;
+var InsightRules: StaticListSchema = [1, n0, _IR,
+  0, () => InsightRule$
+];
+var LogAlarms: StaticListSchema = [1, n0, _LA,
+  0, () => LogAlarm$
+];
+var LogGroupIdentifiers = 64 | 0;
+var ManagedRuleDescriptions: StaticListSchema = [1, n0, _MRDa,
+  0, () => ManagedRuleDescription$
+];
+var ManagedRules: StaticListSchema = [1, n0, _MRana,
+  0, () => ManagedRule$
+];
+var MetricAlarms: StaticListSchema = [1, n0, _MA,
+  0, () => MetricAlarm$
+];
+var MetricData: StaticListSchema = [1, n0, _MD,
+  0, () => MetricDatum$
+];
+var MetricDataQueries: StaticListSchema = [1, n0, _MDQ,
+  0, () => MetricDataQuery$
+];
+var MetricDataQueryDefinitionSummaries: StaticListSchema = [1, n0, _MDQDSe,
+  0, () => MetricDataQueryDefinitionSummary$
+];
+var MetricDataResultMessages: StaticListSchema = [1, n0, _MDRM,
+  0, () => MessageData$
+];
+var MetricDataResults: StaticListSchema = [1, n0, _MDR,
+  0, () => MetricDataResult$
+];
+var MetricNameList = 64 | 0;
+var Metrics: StaticListSchema = [1, n0, _Me,
+  0, () => Metric$
+];
+var MetricStreamEntries: StaticListSchema = [1, n0, _MSEe,
+  0, () => MetricStreamEntry$
+];
+var MetricStreamFilterMetricNames = 64 | 0;
+var MetricStreamFilters: StaticListSchema = [1, n0, _MSFe,
+  0, () => MetricStreamFilter$
+];
+var MetricStreamNames = 64 | 0;
+var MetricStreamStatisticsAdditionalStatistics = 64 | 0;
+var MetricStreamStatisticsConfigurations: StaticListSchema = [1, n0, _MSSCe,
+  0, () => MetricStreamStatisticsConfiguration$
+];
+var MetricStreamStatisticsIncludeMetrics: StaticListSchema = [1, n0, _MSSIM,
+  0, () => MetricStreamStatisticsMetric$
+];
+var MuteTargetAlarmNameList = 64 | 0;
+var OTelEnrichmentMetricNameList = 64 | 0;
+var OTelEnrichmentMetricSelectorList: StaticListSchema = [1, n0, _OTEMSL,
+  0, () => OTelEnrichmentMetricSelector$
+];
+var OwningAccounts = 64 | 0;
+var ResourceList = 64 | 0;
+var ResourceMetricSelectionList: StaticListSchema = [1, n0, _RMSL,
+  0, () => ResourceMetricSelection$
+];
+var Statistics = 64 | 0;
+var TagKeyList = 64 | 0;
+var TagList: StaticListSchema = [1, n0, _TL,
+  0, () => Tag$
+];
+var Timestamps = 64 | 4;
+var Values = 64 | 1;
+var ContributorAttributes = 128 | 0;
+var DatapointValueMap = 128 | 1;
+var EntityAttributesMap = 128 | 0;
+var EntityKeyAttributesMap = 128 | 0;
+export var EvaluationCriteria$: StaticUnionSchema = [4, n0, _EC,
+  0,
+  [_PQLC],
+  [() => AlarmPromQLCriteria$]
+];
+export var EvaluationWindow$: StaticUnionSchema = [4, n0, _EW,
+  0,
+  [_WCW, _SW],
+  [() => WallClockWindow$, () => SlidingWindow$]
+];
+export var AssociateDatasetKmsKey$: StaticOperationSchema = [9, n0, _ADKK,
+  0, () => AssociateDatasetKmsKeyInput$, () => AssociateDatasetKmsKeyOutput$
+];
+export var CreateResourceMetricsConfiguration$: StaticOperationSchema = [9, n0, _CRMC,
+  0, () => CreateResourceMetricsConfigurationInput$, () => CreateResourceMetricsConfigurationOutput$
+];
+export var DeleteAlarmMuteRule$: StaticOperationSchema = [9, n0, _DAMR,
+  0, () => DeleteAlarmMuteRuleInput$, () => __Unit
+];
+export var DeleteAlarms$: StaticOperationSchema = [9, n0, _DAe,
+  0, () => DeleteAlarmsInput$, () => __Unit
+];
+export var DeleteAnomalyDetector$: StaticOperationSchema = [9, n0, _DAD,
+  0, () => DeleteAnomalyDetectorInput$, () => DeleteAnomalyDetectorOutput$
+];
+export var DeleteDashboards$: StaticOperationSchema = [9, n0, _DD,
+  0, () => DeleteDashboardsInput$, () => DeleteDashboardsOutput$
+];
+export var DeleteInsightRules$: StaticOperationSchema = [9, n0, _DIR,
+  0, () => DeleteInsightRulesInput$, () => DeleteInsightRulesOutput$
+];
+export var DeleteMetricDataQueryDefinition$: StaticOperationSchema = [9, n0, _DMDQD,
+  2, () => DeleteMetricDataQueryDefinitionInput$, () => DeleteMetricDataQueryDefinitionOutput$
+];
+export var DeleteMetricStream$: StaticOperationSchema = [9, n0, _DMS,
+  0, () => DeleteMetricStreamInput$, () => DeleteMetricStreamOutput$
+];
+export var DeleteResourceMetricsConfiguration$: StaticOperationSchema = [9, n0, _DRMC,
+  0, () => DeleteResourceMetricsConfigurationInput$, () => DeleteResourceMetricsConfigurationOutput$
+];
+export var DescribeAlarmContributors$: StaticOperationSchema = [9, n0, _DAC,
+  0, () => DescribeAlarmContributorsInput$, () => DescribeAlarmContributorsOutput$
+];
+export var DescribeAlarmHistory$: StaticOperationSchema = [9, n0, _DAH,
+  0, () => DescribeAlarmHistoryInput$, () => DescribeAlarmHistoryOutput$
+];
+export var DescribeAlarms$: StaticOperationSchema = [9, n0, _DAes,
+  0, () => DescribeAlarmsInput$, () => DescribeAlarmsOutput$
+];
+export var DescribeAlarmsForMetric$: StaticOperationSchema = [9, n0, _DAFM,
+  0, () => DescribeAlarmsForMetricInput$, () => DescribeAlarmsForMetricOutput$
+];
+export var DescribeAnomalyDetectors$: StaticOperationSchema = [9, n0, _DADe,
+  0, () => DescribeAnomalyDetectorsInput$, () => DescribeAnomalyDetectorsOutput$
+];
+export var DescribeInsightRules$: StaticOperationSchema = [9, n0, _DIRe,
+  0, () => DescribeInsightRulesInput$, () => DescribeInsightRulesOutput$
+];
+export var DisableAlarmActions$: StaticOperationSchema = [9, n0, _DAA,
+  0, () => DisableAlarmActionsInput$, () => __Unit
+];
+export var DisableInsightRules$: StaticOperationSchema = [9, n0, _DIRi,
+  0, () => DisableInsightRulesInput$, () => DisableInsightRulesOutput$
+];
+export var DisassociateDatasetKmsKey$: StaticOperationSchema = [9, n0, _DDKK,
+  2, () => DisassociateDatasetKmsKeyInput$, () => DisassociateDatasetKmsKeyOutput$
+];
+export var EnableAlarmActions$: StaticOperationSchema = [9, n0, _EAA,
+  0, () => EnableAlarmActionsInput$, () => __Unit
+];
+export var EnableInsightRules$: StaticOperationSchema = [9, n0, _EIR,
+  0, () => EnableInsightRulesInput$, () => EnableInsightRulesOutput$
+];
+export var GetAlarmMuteRule$: StaticOperationSchema = [9, n0, _GAMR,
+  0, () => GetAlarmMuteRuleInput$, () => GetAlarmMuteRuleOutput$
+];
+export var GetDashboard$: StaticOperationSchema = [9, n0, _GD,
+  0, () => GetDashboardInput$, () => GetDashboardOutput$
+];
+export var GetDataset$: StaticOperationSchema = [9, n0, _GDe,
+  0, () => GetDatasetInput$, () => GetDatasetOutput$
+];
+export var GetInsightRuleReport$: StaticOperationSchema = [9, n0, _GIRR,
+  0, () => GetInsightRuleReportInput$, () => GetInsightRuleReportOutput$
+];
+export var GetMetricData$: StaticOperationSchema = [9, n0, _GMD,
+  0, () => GetMetricDataInput$, () => GetMetricDataOutput$
+];
+export var GetMetricDataQueryDefinition$: StaticOperationSchema = [9, n0, _GMDQD,
+  0, () => GetMetricDataQueryDefinitionInput$, () => GetMetricDataQueryDefinitionOutput$
+];
+export var GetMetricStatistics$: StaticOperationSchema = [9, n0, _GMS,
+  0, () => GetMetricStatisticsInput$, () => GetMetricStatisticsOutput$
+];
+export var GetMetricStream$: StaticOperationSchema = [9, n0, _GMSe,
+  0, () => GetMetricStreamInput$, () => GetMetricStreamOutput$
+];
+export var GetMetricWidgetImage$: StaticOperationSchema = [9, n0, _GMWI,
+  0, () => GetMetricWidgetImageInput$, () => GetMetricWidgetImageOutput$
+];
+export var GetOTelEnrichment$: StaticOperationSchema = [9, n0, _GOTE,
+  0, () => GetOTelEnrichmentInput$, () => GetOTelEnrichmentOutput$
+];
+export var GetResourceMetricsConfiguration$: StaticOperationSchema = [9, n0, _GRMC,
+  0, () => GetResourceMetricsConfigurationInput$, () => GetResourceMetricsConfigurationOutput$
+];
+export var ListAlarmMuteRules$: StaticOperationSchema = [9, n0, _LAMR,
+  0, () => ListAlarmMuteRulesInput$, () => ListAlarmMuteRulesOutput$
+];
+export var ListDashboards$: StaticOperationSchema = [9, n0, _LD,
+  0, () => ListDashboardsInput$, () => ListDashboardsOutput$
+];
+export var ListManagedInsightRules$: StaticOperationSchema = [9, n0, _LMIR,
+  0, () => ListManagedInsightRulesInput$, () => ListManagedInsightRulesOutput$
+];
+export var ListMetricDataQueryDefinitions$: StaticOperationSchema = [9, n0, _LMDQD,
+  0, () => ListMetricDataQueryDefinitionsInput$, () => ListMetricDataQueryDefinitionsOutput$
+];
+export var ListMetrics$: StaticOperationSchema = [9, n0, _LMi,
+  0, () => ListMetricsInput$, () => ListMetricsOutput$
+];
+export var ListMetricStreams$: StaticOperationSchema = [9, n0, _LMS,
+  0, () => ListMetricStreamsInput$, () => ListMetricStreamsOutput$
+];
+export var ListTagsForResource$: StaticOperationSchema = [9, n0, _LTFR,
+  0, () => ListTagsForResourceInput$, () => ListTagsForResourceOutput$
+];
+export var PutAlarmMuteRule$: StaticOperationSchema = [9, n0, _PAMR,
+  0, () => PutAlarmMuteRuleInput$, () => __Unit
+];
+export var PutAnomalyDetector$: StaticOperationSchema = [9, n0, _PAD,
+  0, () => PutAnomalyDetectorInput$, () => PutAnomalyDetectorOutput$
+];
+export var PutCompositeAlarm$: StaticOperationSchema = [9, n0, _PCA,
+  0, () => PutCompositeAlarmInput$, () => __Unit
+];
+export var PutDashboard$: StaticOperationSchema = [9, n0, _PD,
+  0, () => PutDashboardInput$, () => PutDashboardOutput$
+];
+export var PutInsightRule$: StaticOperationSchema = [9, n0, _PIR,
+  0, () => PutInsightRuleInput$, () => PutInsightRuleOutput$
+];
+export var PutLogAlarm$: StaticOperationSchema = [9, n0, _PLA,
+  0, () => PutLogAlarmInput$, () => __Unit
+];
+export var PutManagedInsightRules$: StaticOperationSchema = [9, n0, _PMIR,
+  0, () => PutManagedInsightRulesInput$, () => PutManagedInsightRulesOutput$
+];
+export var PutMetricAlarm$: StaticOperationSchema = [9, n0, _PMA,
+  0, () => PutMetricAlarmInput$, () => __Unit
+];
+export var PutMetricData$: StaticOperationSchema = [9, n0, _PMD,
+  0, () => PutMetricDataInput$, () => __Unit
+];
+export var PutMetricDataQueryDefinition$: StaticOperationSchema = [9, n0, _PMDQD,
+  2, () => PutMetricDataQueryDefinitionInput$, () => PutMetricDataQueryDefinitionOutput$
+];
+export var PutMetricStream$: StaticOperationSchema = [9, n0, _PMS,
+  0, () => PutMetricStreamInput$, () => PutMetricStreamOutput$
+];
+export var SetAlarmState$: StaticOperationSchema = [9, n0, _SAS,
+  0, () => SetAlarmStateInput$, () => __Unit
+];
+export var StartMetricStreams$: StaticOperationSchema = [9, n0, _SMS,
+  0, () => StartMetricStreamsInput$, () => StartMetricStreamsOutput$
+];
+export var StartOTelEnrichment$: StaticOperationSchema = [9, n0, _SOTE,
+  0, () => StartOTelEnrichmentInput$, () => StartOTelEnrichmentOutput$
+];
+export var StopMetricStreams$: StaticOperationSchema = [9, n0, _SMSt,
+  0, () => StopMetricStreamsInput$, () => StopMetricStreamsOutput$
+];
+export var StopOTelEnrichment$: StaticOperationSchema = [9, n0, _SOTEt,
+  0, () => StopOTelEnrichmentInput$, () => StopOTelEnrichmentOutput$
+];
+export var TagResource$: StaticOperationSchema = [9, n0, _TR,
+  0, () => TagResourceInput$, () => TagResourceOutput$
+];
+export var UntagResource$: StaticOperationSchema = [9, n0, _UR,
+  0, () => UntagResourceInput$, () => UntagResourceOutput$
+];
+export var UpdateOTelEnrichment$: StaticOperationSchema = [9, n0, _UOTE,
+  0, () => UpdateOTelEnrichmentInput$, () => UpdateOTelEnrichmentOutput$
+];
+export var UpdateResourceMetricsConfiguration$: StaticOperationSchema = [9, n0, _URMC,
+  0, () => UpdateResourceMetricsConfigurationInput$, () => UpdateResourceMetricsConfigurationOutput$
+];

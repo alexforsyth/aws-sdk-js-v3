@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateHITWithHITTypeRequest, CreateHITWithHITTypeResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1CreateHITWithHITTypeCommand,
-  serializeAws_json1_1CreateHITWithHITTypeCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateHITWithHITTypeRequest, CreateHITWithHITTypeResponse } from "../models/models_0";
+import { CreateHITWithHITType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateHITWithHITTypeCommand}.
+ */
 export interface CreateHITWithHITTypeCommandInput extends CreateHITWithHITTypeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateHITWithHITTypeCommand}.
+ */
 export interface CreateHITWithHITTypeCommandOutput extends CreateHITWithHITTypeResponse, __MetadataBearer {}
 
 /**
@@ -45,68 +46,141 @@ export interface CreateHITWithHITTypeCommandOutput extends CreateHITWithHITTypeR
  * ```javascript
  * import { MTurkClient, CreateHITWithHITTypeCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, CreateHITWithHITTypeCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // CreateHITWithHITTypeRequest
+ *   HITTypeId: "STRING_VALUE", // required
+ *   MaxAssignments: Number("int"),
+ *   LifetimeInSeconds: Number("long"), // required
+ *   Question: "STRING_VALUE",
+ *   RequesterAnnotation: "STRING_VALUE",
+ *   UniqueRequestToken: "STRING_VALUE",
+ *   AssignmentReviewPolicy: { // ReviewPolicy
+ *     PolicyName: "STRING_VALUE", // required
+ *     Parameters: [ // PolicyParameterList
+ *       { // PolicyParameter
+ *         Key: "STRING_VALUE",
+ *         Values: [ // StringList
+ *           "STRING_VALUE",
+ *         ],
+ *         MapEntries: [ // ParameterMapEntryList
+ *           { // ParameterMapEntry
+ *             Key: "STRING_VALUE",
+ *             Values: [
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *     ],
+ *   },
+ *   HITReviewPolicy: {
+ *     PolicyName: "STRING_VALUE", // required
+ *     Parameters: [
+ *       {
+ *         Key: "STRING_VALUE",
+ *         Values: [
+ *           "STRING_VALUE",
+ *         ],
+ *         MapEntries: [
+ *           {
+ *             Key: "STRING_VALUE",
+ *             Values: [
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *     ],
+ *   },
+ *   HITLayoutId: "STRING_VALUE",
+ *   HITLayoutParameters: [ // HITLayoutParameterList
+ *     { // HITLayoutParameter
+ *       Name: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateHITWithHITTypeCommand(input);
  * const response = await client.send(command);
+ * // { // CreateHITWithHITTypeResponse
+ * //   HIT: { // HIT
+ * //     HITId: "STRING_VALUE",
+ * //     HITTypeId: "STRING_VALUE",
+ * //     HITGroupId: "STRING_VALUE",
+ * //     HITLayoutId: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Title: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Question: "STRING_VALUE",
+ * //     Keywords: "STRING_VALUE",
+ * //     HITStatus: "Assignable" || "Unassignable" || "Reviewable" || "Reviewing" || "Disposed",
+ * //     MaxAssignments: Number("int"),
+ * //     Reward: "STRING_VALUE",
+ * //     AutoApprovalDelayInSeconds: Number("long"),
+ * //     Expiration: new Date("TIMESTAMP"),
+ * //     AssignmentDurationInSeconds: Number("long"),
+ * //     RequesterAnnotation: "STRING_VALUE",
+ * //     QualificationRequirements: [ // QualificationRequirementList
+ * //       { // QualificationRequirement
+ * //         QualificationTypeId: "STRING_VALUE", // required
+ * //         Comparator: "LessThan" || "LessThanOrEqualTo" || "GreaterThan" || "GreaterThanOrEqualTo" || "EqualTo" || "NotEqualTo" || "Exists" || "DoesNotExist" || "In" || "NotIn", // required
+ * //         IntegerValues: [ // IntegerList
+ * //           Number("int"),
+ * //         ],
+ * //         LocaleValues: [ // LocaleList
+ * //           { // Locale
+ * //             Country: "STRING_VALUE", // required
+ * //             Subdivision: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         RequiredToPreview: true || false,
+ * //         ActionsGuarded: "Accept" || "PreviewAndAccept" || "DiscoverPreviewAndAccept",
+ * //       },
+ * //     ],
+ * //     HITReviewStatus: "NotReviewed" || "MarkedForReview" || "ReviewedAppropriate" || "ReviewedInappropriate",
+ * //     NumberOfAssignmentsPending: Number("int"),
+ * //     NumberOfAssignmentsAvailable: Number("int"),
+ * //     NumberOfAssignmentsCompleted: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateHITWithHITTypeCommandInput - {@link CreateHITWithHITTypeCommandInput}
+ * @returns {@link CreateHITWithHITTypeCommandOutput}
  * @see {@link CreateHITWithHITTypeCommandInput} for command's `input` shape.
  * @see {@link CreateHITWithHITTypeCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class CreateHITWithHITTypeCommand extends $Command<
-  CreateHITWithHITTypeCommandInput,
-  CreateHITWithHITTypeCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateHITWithHITTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateHITWithHITTypeCommandInput, CreateHITWithHITTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "CreateHITWithHITTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateHITWithHITTypeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateHITWithHITTypeResponse.filterSensitiveLog,
+export class CreateHITWithHITTypeCommand extends command<CreateHITWithHITTypeCommandInput, CreateHITWithHITTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateHITWithHITType",
+  CreateHITWithHITType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHITWithHITTypeRequest;
+      output: CreateHITWithHITTypeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateHITWithHITTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateHITWithHITTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateHITWithHITTypeCommandOutput> {
-    return deserializeAws_json1_1CreateHITWithHITTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateHITWithHITTypeCommandInput;
+      output: CreateHITWithHITTypeCommandOutput;
+    };
+  };
 }

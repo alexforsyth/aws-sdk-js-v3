@@ -1,32 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodeStarConnectionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodeStarConnectionsClient";
-import { CreateConnectionInput, CreateConnectionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0CreateConnectionCommand,
-  serializeAws_json1_0CreateConnectionCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateConnectionInput, CreateConnectionOutput } from "../models/models_0";
+import { CreateConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateConnectionCommand}.
+ */
 export interface CreateConnectionCommandInput extends CreateConnectionInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateConnectionCommand}.
+ */
 export interface CreateConnectionCommandOutput extends CreateConnectionOutput, __MetadataBearer {}
 
 /**
- * <p>Creates a connection that can then be given to other AWS services like CodePipeline so
+ * <p>Creates a connection that can then be given to other Amazon Web Services services like CodePipeline so
  *       that it can access third-party code repositories. The connection is in pending status until
  *       the third-party connection handshake is completed from the console.</p>
  * @example
@@ -34,68 +31,70 @@ export interface CreateConnectionCommandOutput extends CreateConnectionOutput, _
  * ```javascript
  * import { CodeStarConnectionsClient, CreateConnectionCommand } from "@aws-sdk/client-codestar-connections"; // ES Modules import
  * // const { CodeStarConnectionsClient, CreateConnectionCommand } = require("@aws-sdk/client-codestar-connections"); // CommonJS import
+ * // import type { CodeStarConnectionsClientConfig } from "@aws-sdk/client-codestar-connections";
+ * const config = {}; // type is CodeStarConnectionsClientConfig
  * const client = new CodeStarConnectionsClient(config);
+ * const input = { // CreateConnectionInput
+ *   ProviderType: "Bitbucket" || "GitHub" || "GitHubEnterpriseServer" || "GitLab" || "GitLabSelfManaged",
+ *   ConnectionName: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   HostArn: "STRING_VALUE",
+ * };
  * const command = new CreateConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateConnectionOutput
+ * //   ConnectionArn: "STRING_VALUE", // required
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateConnectionCommandInput - {@link CreateConnectionCommandInput}
+ * @returns {@link CreateConnectionCommandOutput}
  * @see {@link CreateConnectionCommandInput} for command's `input` shape.
  * @see {@link CreateConnectionCommandOutput} for command's `response` shape.
- * @see {@link CodeStarConnectionsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeStarConnectionsClientResolvedConfig | config} for CodeStarConnectionsClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Exceeded the maximum limit for connections.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found. Verify the connection resource ARN and try again.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>Resource not found. Verify the ARN for the host resource and try again.</p>
+ *
+ * @throws {@link CodeStarConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeStarConnections service.</p>
+ *
+ *
+ * @public
  */
-export class CreateConnectionCommand extends $Command<
-  CreateConnectionCommandInput,
-  CreateConnectionCommandOutput,
-  CodeStarConnectionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeStarConnectionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateConnectionCommandInput, CreateConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeStarConnectionsClient";
-    const commandName = "CreateConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateConnectionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateConnectionOutput.filterSensitiveLog,
+export class CreateConnectionCommand extends command<CreateConnectionCommandInput, CreateConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateConnection",
+  CreateConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConnectionInput;
+      output: CreateConnectionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CreateConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateConnectionCommandOutput> {
-    return deserializeAws_json1_0CreateConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateConnectionCommandInput;
+      output: CreateConnectionCommandOutput;
+    };
+  };
 }

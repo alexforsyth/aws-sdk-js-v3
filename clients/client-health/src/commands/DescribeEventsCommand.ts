@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HealthClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../HealthClient";
-import { DescribeEventsRequest, DescribeEventsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEventsCommand,
-  serializeAws_json1_1DescribeEventsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEventsRequest, DescribeEventsResponse } from "../models/models_0";
+import { DescribeEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventsCommand}.
+ */
 export interface DescribeEventsCommandInput extends DescribeEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventsCommand}.
+ */
 export interface DescribeEventsCommandOutput extends DescribeEventsResponse, __MetadataBearer {}
 
 /**
@@ -32,10 +33,10 @@ export interface DescribeEventsCommandOutput extends DescribeEventsResponse, __M
  *             <ul>
  *                <li>
  *                   <p>When you call the <code>DescribeEvents</code> operation and specify an entity
- *                   for the <code>entityValues</code> parameter, AWS Health might return public
+ *                   for the <code>entityValues</code> parameter, Health might return public
  *                   events that aren't specific to that resource. For example, if you call
  *                      <code>DescribeEvents</code> and specify an ID for an Amazon Elastic Compute Cloud (Amazon EC2)
- *                   instance, AWS Health might return events that aren't specific to that resource or
+ *                   instance, Health might return events that aren't specific to that resource or
  *                   service. To get events that are specific to a service, use the
  *                      <code>services</code> parameter in the <code>filter</code> object. For more
  *                   information, see <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a>.</p>
@@ -50,68 +51,132 @@ export interface DescribeEventsCommandOutput extends DescribeEventsResponse, __M
  * ```javascript
  * import { HealthClient, DescribeEventsCommand } from "@aws-sdk/client-health"; // ES Modules import
  * // const { HealthClient, DescribeEventsCommand } = require("@aws-sdk/client-health"); // CommonJS import
+ * // import type { HealthClientConfig } from "@aws-sdk/client-health";
+ * const config = {}; // type is HealthClientConfig
  * const client = new HealthClient(config);
+ * const input = { // DescribeEventsRequest
+ *   filter: { // EventFilter
+ *     actionabilities: [ // EventActionabilityList
+ *       "ACTION_REQUIRED" || "ACTION_MAY_BE_REQUIRED" || "INFORMATIONAL",
+ *     ],
+ *     eventArns: [ // eventArnList
+ *       "STRING_VALUE",
+ *     ],
+ *     eventTypeCodes: [ // eventTypeList2
+ *       "STRING_VALUE",
+ *     ],
+ *     services: [ // serviceList
+ *       "STRING_VALUE",
+ *     ],
+ *     regions: [ // regionList
+ *       "STRING_VALUE",
+ *     ],
+ *     availabilityZones: [ // availabilityZones
+ *       "STRING_VALUE",
+ *     ],
+ *     startTimes: [ // dateTimeRangeList
+ *       { // DateTimeRange
+ *         from: new Date("TIMESTAMP"),
+ *         to: new Date("TIMESTAMP"),
+ *       },
+ *     ],
+ *     endTimes: [
+ *       {
+ *         from: new Date("TIMESTAMP"),
+ *         to: new Date("TIMESTAMP"),
+ *       },
+ *     ],
+ *     lastUpdatedTimes: [
+ *       {
+ *         from: new Date("TIMESTAMP"),
+ *         to: new Date("TIMESTAMP"),
+ *       },
+ *     ],
+ *     entityArns: [ // entityArnList
+ *       "STRING_VALUE",
+ *     ],
+ *     entityValues: [ // entityValueList
+ *       "STRING_VALUE",
+ *     ],
+ *     eventTypeCategories: [ // eventTypeCategoryList2
+ *       "issue" || "accountNotification" || "scheduledChange" || "investigation",
+ *     ],
+ *     tags: [ // tagFilter
+ *       { // tagSet
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     ],
+ *     eventStatusCodes: [ // eventStatusCodeList
+ *       "open" || "closed" || "upcoming",
+ *     ],
+ *     personas: [ // EventPersonaList
+ *       "OPERATIONS" || "SECURITY" || "BILLING",
+ *     ],
+ *   },
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   locale: "STRING_VALUE",
+ * };
  * const command = new DescribeEventsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEventsResponse
+ * //   events: [ // EventList
+ * //     { // Event
+ * //       arn: "STRING_VALUE",
+ * //       service: "STRING_VALUE",
+ * //       eventTypeCode: "STRING_VALUE",
+ * //       eventTypeCategory: "issue" || "accountNotification" || "scheduledChange" || "investigation",
+ * //       region: "STRING_VALUE",
+ * //       availabilityZone: "STRING_VALUE",
+ * //       startTime: new Date("TIMESTAMP"),
+ * //       endTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedTime: new Date("TIMESTAMP"),
+ * //       statusCode: "open" || "closed" || "upcoming",
+ * //       eventScopeCode: "PUBLIC" || "ACCOUNT_SPECIFIC" || "NONE",
+ * //       actionability: "ACTION_REQUIRED" || "ACTION_MAY_BE_REQUIRED" || "INFORMATIONAL",
+ * //       personas: [ // EventPersonaList
+ * //         "OPERATIONS" || "SECURITY" || "BILLING",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventsCommandInput - {@link DescribeEventsCommandInput}
+ * @returns {@link DescribeEventsCommandOutput}
  * @see {@link DescribeEventsCommandInput} for command's `input` shape.
  * @see {@link DescribeEventsCommandOutput} for command's `response` shape.
- * @see {@link HealthClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link HealthClientResolvedConfig | config} for HealthClient's `config` shape.
  *
+ * @throws {@link InvalidPaginationToken} (client fault)
+ *  <p>The specified pagination token (<code>nextToken</code>) is not valid.</p>
+ *
+ * @throws {@link UnsupportedLocale} (client fault)
+ *  <p>The specified locale is not supported.</p>
+ *
+ * @throws {@link HealthServiceException}
+ * <p>Base exception class for all service exceptions from Health service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEventsCommand extends $Command<
-  DescribeEventsCommandInput,
-  DescribeEventsCommandOutput,
-  HealthClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: HealthClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventsCommandInput, DescribeEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "HealthClient";
-    const commandName = "DescribeEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEventsResponse.filterSensitiveLog,
+export class DescribeEventsCommand extends command<DescribeEventsCommandInput, DescribeEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEvents",
+  DescribeEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventsRequest;
+      output: DescribeEventsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEventsCommandOutput> {
-    return deserializeAws_json1_1DescribeEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventsCommandInput;
+      output: DescribeEventsCommandOutput;
+    };
+  };
 }

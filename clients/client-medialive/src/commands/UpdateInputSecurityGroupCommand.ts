@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { UpdateInputSecurityGroupRequest, UpdateInputSecurityGroupResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateInputSecurityGroupCommand,
-  serializeAws_restJson1UpdateInputSecurityGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateInputSecurityGroupRequest, UpdateInputSecurityGroupResponse } from "../models/models_1";
+import { UpdateInputSecurityGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateInputSecurityGroupCommand}.
+ */
 export interface UpdateInputSecurityGroupCommandInput extends UpdateInputSecurityGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateInputSecurityGroupCommand}.
+ */
 export interface UpdateInputSecurityGroupCommandOutput extends UpdateInputSecurityGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,94 @@ export interface UpdateInputSecurityGroupCommandOutput extends UpdateInputSecuri
  * ```javascript
  * import { MediaLiveClient, UpdateInputSecurityGroupCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, UpdateInputSecurityGroupCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // UpdateInputSecurityGroupRequest
+ *   InputSecurityGroupId: "STRING_VALUE", // required
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   WhitelistRules: [ // __listOfInputWhitelistRuleCidr
+ *     { // InputWhitelistRuleCidr
+ *       Cidr: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateInputSecurityGroupCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateInputSecurityGroupResponse
+ * //   SecurityGroup: { // InputSecurityGroup
+ * //     Arn: "STRING_VALUE",
+ * //     Id: "STRING_VALUE",
+ * //     Inputs: [ // __listOf__string
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     State: "IDLE" || "IN_USE" || "UPDATING" || "DELETED",
+ * //     Tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     WhitelistRules: [ // __listOfInputWhitelistRule
+ * //       { // InputWhitelistRule
+ * //         Cidr: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Channels: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateInputSecurityGroupCommandInput - {@link UpdateInputSecurityGroupCommandInput}
+ * @returns {@link UpdateInputSecurityGroupCommandOutput}
  * @see {@link UpdateInputSecurityGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateInputSecurityGroupCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Placeholder documentation for ConflictException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateInputSecurityGroupCommand extends $Command<
-  UpdateInputSecurityGroupCommandInput,
-  UpdateInputSecurityGroupCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateInputSecurityGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateInputSecurityGroupCommandInput, UpdateInputSecurityGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "UpdateInputSecurityGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateInputSecurityGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateInputSecurityGroupResponse.filterSensitiveLog,
+export class UpdateInputSecurityGroupCommand extends command<UpdateInputSecurityGroupCommandInput, UpdateInputSecurityGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateInputSecurityGroup",
+  UpdateInputSecurityGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateInputSecurityGroupRequest;
+      output: UpdateInputSecurityGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateInputSecurityGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateInputSecurityGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateInputSecurityGroupCommandOutput> {
-    return deserializeAws_restJson1UpdateInputSecurityGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateInputSecurityGroupCommandInput;
+      output: UpdateInputSecurityGroupCommandOutput;
+    };
+  };
 }

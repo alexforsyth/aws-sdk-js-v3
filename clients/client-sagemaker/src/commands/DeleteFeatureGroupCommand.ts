@@ -1,100 +1,76 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteFeatureGroupRequest } from "../models/models_1";
-import {
-  deserializeAws_json1_1DeleteFeatureGroupCommand,
-  serializeAws_json1_1DeleteFeatureGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFeatureGroupRequest } from "../models/models_2";
+import { DeleteFeatureGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFeatureGroupCommand}.
+ */
 export interface DeleteFeatureGroupCommandInput extends DeleteFeatureGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFeatureGroupCommand}.
+ */
 export interface DeleteFeatureGroupCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Delete the <code>FeatureGroup</code> and any data that was written to the
- *             <code>OnlineStore</code> of the <code>FeatureGroup</code>. Data cannot be accessed from
- *          the <code>OnlineStore</code> immediately after <code>DeleteFeatureGroup</code> is called. </p>
- *          <p>Data written into the <code>OfflineStore</code> will not be deleted. The Amazon Web Services Glue
- *          database and tables that are automatically created for your <code>OfflineStore</code> are
- *          not deleted. </p>
+ * <p>Delete the <code>FeatureGroup</code> and any data that was written to the <code>OnlineStore</code> of the <code>FeatureGroup</code>. Data cannot be accessed from the <code>OnlineStore</code> immediately after <code>DeleteFeatureGroup</code> is called. </p> <p>Data written into the <code>OfflineStore</code> will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your <code>OfflineStore</code> are not deleted. </p> <p>Note that it can take approximately 10-15 minutes to delete an <code>OnlineStore</code> <code>FeatureGroup</code> with the <code>InMemory</code> <code>StorageType</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, DeleteFeatureGroupCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DeleteFeatureGroupCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DeleteFeatureGroupRequest
+ *   FeatureGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteFeatureGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteFeatureGroupCommandInput - {@link DeleteFeatureGroupCommandInput}
+ * @returns {@link DeleteFeatureGroupCommandOutput}
  * @see {@link DeleteFeatureGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteFeatureGroupCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFeatureGroupCommand extends $Command<
-  DeleteFeatureGroupCommandInput,
-  DeleteFeatureGroupCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFeatureGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFeatureGroupCommandInput, DeleteFeatureGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DeleteFeatureGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFeatureGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteFeatureGroupCommand extends command<DeleteFeatureGroupCommandInput, DeleteFeatureGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFeatureGroup",
+  DeleteFeatureGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFeatureGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFeatureGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteFeatureGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFeatureGroupCommandOutput> {
-    return deserializeAws_json1_1DeleteFeatureGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFeatureGroupCommandInput;
+      output: DeleteFeatureGroupCommandOutput;
+    };
+  };
 }

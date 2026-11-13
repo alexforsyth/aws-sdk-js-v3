@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MgnClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MgnClient";
-import { GetLaunchConfigurationRequest, LaunchConfiguration } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetLaunchConfigurationCommand,
-  serializeAws_restJson1GetLaunchConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLaunchConfigurationRequest, LaunchConfiguration } from "../models/models_0";
+import { GetLaunchConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLaunchConfigurationCommand}.
+ */
 export interface GetLaunchConfigurationCommandInput extends GetLaunchConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLaunchConfigurationCommand}.
+ */
 export interface GetLaunchConfigurationCommandOutput extends LaunchConfiguration, __MetadataBearer {}
 
 /**
@@ -28,68 +29,93 @@ export interface GetLaunchConfigurationCommandOutput extends LaunchConfiguration
  * ```javascript
  * import { MgnClient, GetLaunchConfigurationCommand } from "@aws-sdk/client-mgn"; // ES Modules import
  * // const { MgnClient, GetLaunchConfigurationCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
  * const client = new MgnClient(config);
+ * const input = { // GetLaunchConfigurationRequest
+ *   sourceServerID: "STRING_VALUE", // required
+ *   accountID: "STRING_VALUE",
+ * };
  * const command = new GetLaunchConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // LaunchConfiguration
+ * //   sourceServerID: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   ec2LaunchTemplateID: "STRING_VALUE",
+ * //   launchDisposition: "STRING_VALUE",
+ * //   targetInstanceTypeRightSizingMethod: "STRING_VALUE",
+ * //   copyPrivateIp: true || false,
+ * //   copyTags: true || false,
+ * //   licensing: { // Licensing
+ * //     osByol: true || false,
+ * //   },
+ * //   bootMode: "STRING_VALUE",
+ * //   postLaunchActions: { // PostLaunchActions
+ * //     deployment: "STRING_VALUE",
+ * //     s3LogBucket: "STRING_VALUE",
+ * //     s3OutputKeyPrefix: "STRING_VALUE",
+ * //     cloudWatchLogGroupName: "STRING_VALUE",
+ * //     ssmDocuments: [ // SsmDocuments
+ * //       { // SsmDocument
+ * //         actionName: "STRING_VALUE", // required
+ * //         ssmDocumentName: "STRING_VALUE", // required
+ * //         timeoutSeconds: Number("int"),
+ * //         mustSucceedForCutover: true || false,
+ * //         parameters: { // SsmDocumentParameters
+ * //           "<keys>": [ // SsmParameterStoreParameters
+ * //             { // SsmParameterStoreParameter
+ * //               parameterType: "STRING_VALUE", // required
+ * //               parameterName: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //         externalParameters: { // SsmDocumentExternalParameters
+ * //           "<keys>": { // SsmExternalParameter Union: only one key present
+ * //             dynamicPath: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * //   enableMapAutoTagging: true || false,
+ * //   mapAutoTaggingMpeID: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetLaunchConfigurationCommandInput - {@link GetLaunchConfigurationCommandInput}
+ * @returns {@link GetLaunchConfigurationCommandOutput}
  * @see {@link GetLaunchConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetLaunchConfigurationCommandOutput} for command's `response` shape.
- * @see {@link MgnClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found exception.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
  */
-export class GetLaunchConfigurationCommand extends $Command<
-  GetLaunchConfigurationCommandInput,
-  GetLaunchConfigurationCommandOutput,
-  MgnClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLaunchConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MgnClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLaunchConfigurationCommandInput, GetLaunchConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MgnClient";
-    const commandName = "GetLaunchConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLaunchConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: LaunchConfiguration.filterSensitiveLog,
+export class GetLaunchConfigurationCommand extends command<GetLaunchConfigurationCommandInput, GetLaunchConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLaunchConfiguration",
+  GetLaunchConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLaunchConfigurationRequest;
+      output: LaunchConfiguration;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLaunchConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetLaunchConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLaunchConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetLaunchConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLaunchConfigurationCommandInput;
+      output: GetLaunchConfigurationCommandOutput;
+    };
+  };
 }

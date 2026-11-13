@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppRunnerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppRunnerClient";
-import { StartDeploymentRequest, StartDeploymentResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0StartDeploymentCommand,
-  serializeAws_json1_0StartDeploymentCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartDeploymentRequest, StartDeploymentResponse } from "../models/models_0";
+import { StartDeployment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartDeploymentCommand}.
+ */
 export interface StartDeploymentCommandInput extends StartDeploymentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartDeploymentCommand}.
+ */
 export interface StartDeploymentCommandOutput extends StartDeploymentResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +34,56 @@ export interface StartDeploymentCommandOutput extends StartDeploymentResponse, _
  * ```javascript
  * import { AppRunnerClient, StartDeploymentCommand } from "@aws-sdk/client-apprunner"; // ES Modules import
  * // const { AppRunnerClient, StartDeploymentCommand } = require("@aws-sdk/client-apprunner"); // CommonJS import
+ * // import type { AppRunnerClientConfig } from "@aws-sdk/client-apprunner";
+ * const config = {}; // type is AppRunnerClientConfig
  * const client = new AppRunnerClient(config);
+ * const input = { // StartDeploymentRequest
+ *   ServiceArn: "STRING_VALUE", // required
+ * };
  * const command = new StartDeploymentCommand(input);
  * const response = await client.send(command);
+ * // { // StartDeploymentResponse
+ * //   OperationId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param StartDeploymentCommandInput - {@link StartDeploymentCommandInput}
+ * @returns {@link StartDeploymentCommandOutput}
  * @see {@link StartDeploymentCommandInput} for command's `input` shape.
  * @see {@link StartDeploymentCommandOutput} for command's `response` shape.
- * @see {@link AppRunnerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppRunnerClientResolvedConfig | config} for AppRunnerClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An unexpected service exception occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource doesn't exist for the specified Amazon Resource Name (ARN) in your Amazon Web Services account.</p>
+ *
+ * @throws {@link AppRunnerServiceException}
+ * <p>Base exception class for all service exceptions from AppRunner service.</p>
+ *
+ *
+ * @public
  */
-export class StartDeploymentCommand extends $Command<
-  StartDeploymentCommandInput,
-  StartDeploymentCommandOutput,
-  AppRunnerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartDeploymentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppRunnerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartDeploymentCommandInput, StartDeploymentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppRunnerClient";
-    const commandName = "StartDeploymentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartDeploymentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartDeploymentResponse.filterSensitiveLog,
+export class StartDeploymentCommand extends command<StartDeploymentCommandInput, StartDeploymentCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartDeployment",
+  StartDeployment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDeploymentRequest;
+      output: StartDeploymentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartDeploymentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0StartDeploymentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartDeploymentCommandOutput> {
-    return deserializeAws_json1_0StartDeploymentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartDeploymentCommandInput;
+      output: StartDeploymentCommandOutput;
+    };
+  };
 }

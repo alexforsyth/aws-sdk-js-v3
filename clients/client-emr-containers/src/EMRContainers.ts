@@ -1,551 +1,702 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CancelJobRunCommandInput,
+  type CancelJobRunCommandOutput,
   CancelJobRunCommand,
-  CancelJobRunCommandInput,
-  CancelJobRunCommandOutput,
 } from "./commands/CancelJobRunCommand";
 import {
+  type CreateJobTemplateCommandInput,
+  type CreateJobTemplateCommandOutput,
+  CreateJobTemplateCommand,
+} from "./commands/CreateJobTemplateCommand";
+import {
+  type CreateManagedEndpointCommandInput,
+  type CreateManagedEndpointCommandOutput,
   CreateManagedEndpointCommand,
-  CreateManagedEndpointCommandInput,
-  CreateManagedEndpointCommandOutput,
 } from "./commands/CreateManagedEndpointCommand";
 import {
+  type CreateSecurityConfigurationCommandInput,
+  type CreateSecurityConfigurationCommandOutput,
+  CreateSecurityConfigurationCommand,
+} from "./commands/CreateSecurityConfigurationCommand";
+import {
+  type CreateVirtualClusterCommandInput,
+  type CreateVirtualClusterCommandOutput,
   CreateVirtualClusterCommand,
-  CreateVirtualClusterCommandInput,
-  CreateVirtualClusterCommandOutput,
 } from "./commands/CreateVirtualClusterCommand";
 import {
+  type DeleteJobTemplateCommandInput,
+  type DeleteJobTemplateCommandOutput,
+  DeleteJobTemplateCommand,
+} from "./commands/DeleteJobTemplateCommand";
+import {
+  type DeleteManagedEndpointCommandInput,
+  type DeleteManagedEndpointCommandOutput,
   DeleteManagedEndpointCommand,
-  DeleteManagedEndpointCommandInput,
-  DeleteManagedEndpointCommandOutput,
 } from "./commands/DeleteManagedEndpointCommand";
 import {
+  type DeleteSecurityConfigurationCommandInput,
+  type DeleteSecurityConfigurationCommandOutput,
+  DeleteSecurityConfigurationCommand,
+} from "./commands/DeleteSecurityConfigurationCommand";
+import {
+  type DeleteVirtualClusterCommandInput,
+  type DeleteVirtualClusterCommandOutput,
   DeleteVirtualClusterCommand,
-  DeleteVirtualClusterCommandInput,
-  DeleteVirtualClusterCommandOutput,
 } from "./commands/DeleteVirtualClusterCommand";
 import {
+  type DescribeJobRunCommandInput,
+  type DescribeJobRunCommandOutput,
   DescribeJobRunCommand,
-  DescribeJobRunCommandInput,
-  DescribeJobRunCommandOutput,
 } from "./commands/DescribeJobRunCommand";
 import {
+  type DescribeJobTemplateCommandInput,
+  type DescribeJobTemplateCommandOutput,
+  DescribeJobTemplateCommand,
+} from "./commands/DescribeJobTemplateCommand";
+import {
+  type DescribeManagedEndpointCommandInput,
+  type DescribeManagedEndpointCommandOutput,
   DescribeManagedEndpointCommand,
-  DescribeManagedEndpointCommandInput,
-  DescribeManagedEndpointCommandOutput,
 } from "./commands/DescribeManagedEndpointCommand";
 import {
-  DescribeVirtualClusterCommand,
-  DescribeVirtualClusterCommandInput,
-  DescribeVirtualClusterCommandOutput,
-} from "./commands/DescribeVirtualClusterCommand";
-import { ListJobRunsCommand, ListJobRunsCommandInput, ListJobRunsCommandOutput } from "./commands/ListJobRunsCommand";
+  type DescribeSecurityConfigurationCommandInput,
+  type DescribeSecurityConfigurationCommandOutput,
+  DescribeSecurityConfigurationCommand,
+} from "./commands/DescribeSecurityConfigurationCommand";
 import {
+  type DescribeVirtualClusterCommandInput,
+  type DescribeVirtualClusterCommandOutput,
+  DescribeVirtualClusterCommand,
+} from "./commands/DescribeVirtualClusterCommand";
+import {
+  type GetManagedEndpointSessionCredentialsCommandInput,
+  type GetManagedEndpointSessionCredentialsCommandOutput,
+  GetManagedEndpointSessionCredentialsCommand,
+} from "./commands/GetManagedEndpointSessionCredentialsCommand";
+import {
+  type ListJobRunsCommandInput,
+  type ListJobRunsCommandOutput,
+  ListJobRunsCommand,
+} from "./commands/ListJobRunsCommand";
+import {
+  type ListJobTemplatesCommandInput,
+  type ListJobTemplatesCommandOutput,
+  ListJobTemplatesCommand,
+} from "./commands/ListJobTemplatesCommand";
+import {
+  type ListManagedEndpointsCommandInput,
+  type ListManagedEndpointsCommandOutput,
   ListManagedEndpointsCommand,
-  ListManagedEndpointsCommandInput,
-  ListManagedEndpointsCommandOutput,
 } from "./commands/ListManagedEndpointsCommand";
 import {
+  type ListSecurityConfigurationsCommandInput,
+  type ListSecurityConfigurationsCommandOutput,
+  ListSecurityConfigurationsCommand,
+} from "./commands/ListSecurityConfigurationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListVirtualClustersCommandInput,
+  type ListVirtualClustersCommandOutput,
   ListVirtualClustersCommand,
-  ListVirtualClustersCommandInput,
-  ListVirtualClustersCommandOutput,
 } from "./commands/ListVirtualClustersCommand";
-import { StartJobRunCommand, StartJobRunCommandInput, StartJobRunCommandOutput } from "./commands/StartJobRunCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartJobRunCommandInput,
+  type StartJobRunCommandOutput,
+  StartJobRunCommand,
+} from "./commands/StartJobRunCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import {
+  type UpdateVirtualClusterCommandInput,
+  type UpdateVirtualClusterCommandOutput,
+  UpdateVirtualClusterCommand,
+} from "./commands/UpdateVirtualClusterCommand";
 import { EMRContainersClient } from "./EMRContainersClient";
+import { paginateListJobRuns } from "./pagination/ListJobRunsPaginator";
+import { paginateListJobTemplates } from "./pagination/ListJobTemplatesPaginator";
+import { paginateListManagedEndpoints } from "./pagination/ListManagedEndpointsPaginator";
+import { paginateListSecurityConfigurations } from "./pagination/ListSecurityConfigurationsPaginator";
+import { paginateListVirtualClusters } from "./pagination/ListVirtualClustersPaginator";
+
+const commands = {
+  CancelJobRunCommand,
+  CreateJobTemplateCommand,
+  CreateManagedEndpointCommand,
+  CreateSecurityConfigurationCommand,
+  CreateVirtualClusterCommand,
+  DeleteJobTemplateCommand,
+  DeleteManagedEndpointCommand,
+  DeleteSecurityConfigurationCommand,
+  DeleteVirtualClusterCommand,
+  DescribeJobRunCommand,
+  DescribeJobTemplateCommand,
+  DescribeManagedEndpointCommand,
+  DescribeSecurityConfigurationCommand,
+  DescribeVirtualClusterCommand,
+  GetManagedEndpointSessionCredentialsCommand,
+  ListJobRunsCommand,
+  ListJobTemplatesCommand,
+  ListManagedEndpointsCommand,
+  ListSecurityConfigurationsCommand,
+  ListTagsForResourceCommand,
+  ListVirtualClustersCommand,
+  StartJobRunCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateVirtualClusterCommand,
+};
+const paginators = {
+  paginateListJobRuns,
+  paginateListJobTemplates,
+  paginateListManagedEndpoints,
+  paginateListSecurityConfigurations,
+  paginateListVirtualClusters,
+};
 
 /**
- * <p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run
- *          open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With
- *          this deployment option, you can focus on running analytics workloads while Amazon EMR on
- *          EKS builds, configures, and manages containers for open-source applications. For more
- *          information about Amazon EMR on EKS concepts and tasks, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html">What is Amazon EMR on EKS</a>.</p>
- *          <p>
- *             <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The
- *             <code>emr-containers</code> prefix is used in the following scenarios: </p>
- *          <ul>
- *             <li>
- *                <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws
- *                   emr-containers start-job-run</code>.</p>
- *             </li>
- *             <li>
- *                <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, <code>"Action": [
- *             "emr-containers:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR on EKS</a>.</p>
- *             </li>
- *             <li>
- *                <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example, <code>emr-containers.us-east-2.amazonaws.com</code>. For more
- *             information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints">Amazon EMR on EKS Service Endpoints</a>.</p>
- *             </li>
- *          </ul>
+ * @public
  */
-export class EMRContainers extends EMRContainersClient {
+export interface EMRContainersRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface EMRContainers {
   /**
-   * <p>Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>
+   * @see {@link CancelJobRunCommand}
    */
-  public cancelJobRun(
+  cancelJobRun(
     args: CancelJobRunCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<CancelJobRunCommandOutput>;
-  public cancelJobRun(args: CancelJobRunCommandInput, cb: (err: any, data?: CancelJobRunCommandOutput) => void): void;
-  public cancelJobRun(
+  cancelJobRun(
     args: CancelJobRunCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CancelJobRunCommandOutput) => void
   ): void;
-  public cancelJobRun(
+  cancelJobRun(
     args: CancelJobRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelJobRunCommandOutput) => void),
-    cb?: (err: any, data?: CancelJobRunCommandOutput) => void
-  ): Promise<CancelJobRunCommandOutput> | void {
-    const command = new CancelJobRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: CancelJobRunCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>
+   * @see {@link CreateJobTemplateCommand}
    */
-  public createManagedEndpoint(
+  createJobTemplate(
+    args: CreateJobTemplateCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<CreateJobTemplateCommandOutput>;
+  createJobTemplate(
+    args: CreateJobTemplateCommandInput,
+    cb: (err: any, data?: CreateJobTemplateCommandOutput) => void
+  ): void;
+  createJobTemplate(
+    args: CreateJobTemplateCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: CreateJobTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateManagedEndpointCommand}
+   */
+  createManagedEndpoint(
     args: CreateManagedEndpointCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<CreateManagedEndpointCommandOutput>;
-  public createManagedEndpoint(
+  createManagedEndpoint(
     args: CreateManagedEndpointCommandInput,
     cb: (err: any, data?: CreateManagedEndpointCommandOutput) => void
   ): void;
-  public createManagedEndpoint(
+  createManagedEndpoint(
     args: CreateManagedEndpointCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: CreateManagedEndpointCommandOutput) => void
   ): void;
-  public createManagedEndpoint(
-    args: CreateManagedEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateManagedEndpointCommandOutput) => void),
-    cb?: (err: any, data?: CreateManagedEndpointCommandOutput) => void
-  ): Promise<CreateManagedEndpointCommandOutput> | void {
-    const command = new CreateManagedEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>
+   * @see {@link CreateSecurityConfigurationCommand}
    */
-  public createVirtualCluster(
+  createSecurityConfiguration(
+    args: CreateSecurityConfigurationCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<CreateSecurityConfigurationCommandOutput>;
+  createSecurityConfiguration(
+    args: CreateSecurityConfigurationCommandInput,
+    cb: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
+  ): void;
+  createSecurityConfiguration(
+    args: CreateSecurityConfigurationCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: CreateSecurityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVirtualClusterCommand}
+   */
+  createVirtualCluster(
     args: CreateVirtualClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<CreateVirtualClusterCommandOutput>;
-  public createVirtualCluster(
+  createVirtualCluster(
     args: CreateVirtualClusterCommandInput,
     cb: (err: any, data?: CreateVirtualClusterCommandOutput) => void
   ): void;
-  public createVirtualCluster(
+  createVirtualCluster(
     args: CreateVirtualClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: CreateVirtualClusterCommandOutput) => void
   ): void;
-  public createVirtualCluster(
-    args: CreateVirtualClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateVirtualClusterCommandOutput) => void),
-    cb?: (err: any, data?: CreateVirtualClusterCommandOutput) => void
-  ): Promise<CreateVirtualClusterCommandOutput> | void {
-    const command = new CreateVirtualClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>
+   * @see {@link DeleteJobTemplateCommand}
    */
-  public deleteManagedEndpoint(
+  deleteJobTemplate(
+    args: DeleteJobTemplateCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<DeleteJobTemplateCommandOutput>;
+  deleteJobTemplate(
+    args: DeleteJobTemplateCommandInput,
+    cb: (err: any, data?: DeleteJobTemplateCommandOutput) => void
+  ): void;
+  deleteJobTemplate(
+    args: DeleteJobTemplateCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: DeleteJobTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteManagedEndpointCommand}
+   */
+  deleteManagedEndpoint(
     args: DeleteManagedEndpointCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<DeleteManagedEndpointCommandOutput>;
-  public deleteManagedEndpoint(
+  deleteManagedEndpoint(
     args: DeleteManagedEndpointCommandInput,
     cb: (err: any, data?: DeleteManagedEndpointCommandOutput) => void
   ): void;
-  public deleteManagedEndpoint(
+  deleteManagedEndpoint(
     args: DeleteManagedEndpointCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: DeleteManagedEndpointCommandOutput) => void
   ): void;
-  public deleteManagedEndpoint(
-    args: DeleteManagedEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteManagedEndpointCommandOutput) => void),
-    cb?: (err: any, data?: DeleteManagedEndpointCommandOutput) => void
-  ): Promise<DeleteManagedEndpointCommandOutput> | void {
-    const command = new DeleteManagedEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>
+   * @see {@link DeleteSecurityConfigurationCommand}
    */
-  public deleteVirtualCluster(
+  deleteSecurityConfiguration(
+    args: DeleteSecurityConfigurationCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<DeleteSecurityConfigurationCommandOutput>;
+  deleteSecurityConfiguration(
+    args: DeleteSecurityConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
+  ): void;
+  deleteSecurityConfiguration(
+    args: DeleteSecurityConfigurationCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: DeleteSecurityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVirtualClusterCommand}
+   */
+  deleteVirtualCluster(
     args: DeleteVirtualClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<DeleteVirtualClusterCommandOutput>;
-  public deleteVirtualCluster(
+  deleteVirtualCluster(
     args: DeleteVirtualClusterCommandInput,
     cb: (err: any, data?: DeleteVirtualClusterCommandOutput) => void
   ): void;
-  public deleteVirtualCluster(
+  deleteVirtualCluster(
     args: DeleteVirtualClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: DeleteVirtualClusterCommandOutput) => void
   ): void;
-  public deleteVirtualCluster(
-    args: DeleteVirtualClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteVirtualClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteVirtualClusterCommandOutput) => void
-  ): Promise<DeleteVirtualClusterCommandOutput> | void {
-    const command = new DeleteVirtualClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays detailed information about a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>
+   * @see {@link DescribeJobRunCommand}
    */
-  public describeJobRun(
+  describeJobRun(
     args: DescribeJobRunCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<DescribeJobRunCommandOutput>;
-  public describeJobRun(
+  describeJobRun(
     args: DescribeJobRunCommandInput,
     cb: (err: any, data?: DescribeJobRunCommandOutput) => void
   ): void;
-  public describeJobRun(
+  describeJobRun(
     args: DescribeJobRunCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: DescribeJobRunCommandOutput) => void
   ): void;
-  public describeJobRun(
-    args: DescribeJobRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeJobRunCommandOutput) => void),
-    cb?: (err: any, data?: DescribeJobRunCommandOutput) => void
-  ): Promise<DescribeJobRunCommandOutput> | void {
-    const command = new DescribeJobRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>
+   * @see {@link DescribeJobTemplateCommand}
    */
-  public describeManagedEndpoint(
+  describeJobTemplate(
+    args: DescribeJobTemplateCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<DescribeJobTemplateCommandOutput>;
+  describeJobTemplate(
+    args: DescribeJobTemplateCommandInput,
+    cb: (err: any, data?: DescribeJobTemplateCommandOutput) => void
+  ): void;
+  describeJobTemplate(
+    args: DescribeJobTemplateCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: DescribeJobTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeManagedEndpointCommand}
+   */
+  describeManagedEndpoint(
     args: DescribeManagedEndpointCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<DescribeManagedEndpointCommandOutput>;
-  public describeManagedEndpoint(
+  describeManagedEndpoint(
     args: DescribeManagedEndpointCommandInput,
     cb: (err: any, data?: DescribeManagedEndpointCommandOutput) => void
   ): void;
-  public describeManagedEndpoint(
+  describeManagedEndpoint(
     args: DescribeManagedEndpointCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: DescribeManagedEndpointCommandOutput) => void
   ): void;
-  public describeManagedEndpoint(
-    args: DescribeManagedEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeManagedEndpointCommandOutput) => void),
-    cb?: (err: any, data?: DescribeManagedEndpointCommandOutput) => void
-  ): Promise<DescribeManagedEndpointCommandOutput> | void {
-    const command = new DescribeManagedEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>
+   * @see {@link DescribeSecurityConfigurationCommand}
    */
-  public describeVirtualCluster(
+  describeSecurityConfiguration(
+    args: DescribeSecurityConfigurationCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<DescribeSecurityConfigurationCommandOutput>;
+  describeSecurityConfiguration(
+    args: DescribeSecurityConfigurationCommandInput,
+    cb: (err: any, data?: DescribeSecurityConfigurationCommandOutput) => void
+  ): void;
+  describeSecurityConfiguration(
+    args: DescribeSecurityConfigurationCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: DescribeSecurityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeVirtualClusterCommand}
+   */
+  describeVirtualCluster(
     args: DescribeVirtualClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<DescribeVirtualClusterCommandOutput>;
-  public describeVirtualCluster(
+  describeVirtualCluster(
     args: DescribeVirtualClusterCommandInput,
     cb: (err: any, data?: DescribeVirtualClusterCommandOutput) => void
   ): void;
-  public describeVirtualCluster(
+  describeVirtualCluster(
     args: DescribeVirtualClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: DescribeVirtualClusterCommandOutput) => void
   ): void;
-  public describeVirtualCluster(
-    args: DescribeVirtualClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeVirtualClusterCommandOutput) => void),
-    cb?: (err: any, data?: DescribeVirtualClusterCommandOutput) => void
-  ): Promise<DescribeVirtualClusterCommandOutput> | void {
-    const command = new DescribeVirtualClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists job runs based on a set of parameters. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>
+   * @see {@link GetManagedEndpointSessionCredentialsCommand}
    */
-  public listJobRuns(args: ListJobRunsCommandInput, options?: __HttpHandlerOptions): Promise<ListJobRunsCommandOutput>;
-  public listJobRuns(args: ListJobRunsCommandInput, cb: (err: any, data?: ListJobRunsCommandOutput) => void): void;
-  public listJobRuns(
+  getManagedEndpointSessionCredentials(
+    args: GetManagedEndpointSessionCredentialsCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<GetManagedEndpointSessionCredentialsCommandOutput>;
+  getManagedEndpointSessionCredentials(
+    args: GetManagedEndpointSessionCredentialsCommandInput,
+    cb: (err: any, data?: GetManagedEndpointSessionCredentialsCommandOutput) => void
+  ): void;
+  getManagedEndpointSessionCredentials(
+    args: GetManagedEndpointSessionCredentialsCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: GetManagedEndpointSessionCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListJobRunsCommand}
+   */
+  listJobRuns(
     args: ListJobRunsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: EMRContainersRequestOptions
+  ): Promise<ListJobRunsCommandOutput>;
+  listJobRuns(
+    args: ListJobRunsCommandInput,
     cb: (err: any, data?: ListJobRunsCommandOutput) => void
   ): void;
-  public listJobRuns(
+  listJobRuns(
     args: ListJobRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListJobRunsCommandOutput) => void),
-    cb?: (err: any, data?: ListJobRunsCommandOutput) => void
-  ): Promise<ListJobRunsCommandOutput> | void {
-    const command = new ListJobRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: ListJobRunsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>
+   * @see {@link ListJobTemplatesCommand}
    */
-  public listManagedEndpoints(
+  listJobTemplates(): Promise<ListJobTemplatesCommandOutput>;
+  listJobTemplates(
+    args: ListJobTemplatesCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<ListJobTemplatesCommandOutput>;
+  listJobTemplates(
+    args: ListJobTemplatesCommandInput,
+    cb: (err: any, data?: ListJobTemplatesCommandOutput) => void
+  ): void;
+  listJobTemplates(
+    args: ListJobTemplatesCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: ListJobTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListManagedEndpointsCommand}
+   */
+  listManagedEndpoints(
     args: ListManagedEndpointsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<ListManagedEndpointsCommandOutput>;
-  public listManagedEndpoints(
+  listManagedEndpoints(
     args: ListManagedEndpointsCommandInput,
     cb: (err: any, data?: ListManagedEndpointsCommandOutput) => void
   ): void;
-  public listManagedEndpoints(
+  listManagedEndpoints(
     args: ListManagedEndpointsCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: ListManagedEndpointsCommandOutput) => void
   ): void;
-  public listManagedEndpoints(
-    args: ListManagedEndpointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListManagedEndpointsCommandOutput) => void),
-    cb?: (err: any, data?: ListManagedEndpointsCommandOutput) => void
-  ): Promise<ListManagedEndpointsCommandOutput> | void {
-    const command = new ListManagedEndpointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags assigned to the resources.</p>
+   * @see {@link ListSecurityConfigurationsCommand}
    */
-  public listTagsForResource(
+  listSecurityConfigurations(): Promise<ListSecurityConfigurationsCommandOutput>;
+  listSecurityConfigurations(
+    args: ListSecurityConfigurationsCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<ListSecurityConfigurationsCommandOutput>;
+  listSecurityConfigurations(
+    args: ListSecurityConfigurationsCommandInput,
+    cb: (err: any, data?: ListSecurityConfigurationsCommandOutput) => void
+  ): void;
+  listSecurityConfigurations(
+    args: ListSecurityConfigurationsCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: ListSecurityConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists information about the specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>
+   * @see {@link ListVirtualClustersCommand}
    */
-  public listVirtualClusters(
+  listVirtualClusters(): Promise<ListVirtualClustersCommandOutput>;
+  listVirtualClusters(
     args: ListVirtualClustersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<ListVirtualClustersCommandOutput>;
-  public listVirtualClusters(
+  listVirtualClusters(
     args: ListVirtualClustersCommandInput,
     cb: (err: any, data?: ListVirtualClustersCommandOutput) => void
   ): void;
-  public listVirtualClusters(
+  listVirtualClusters(
     args: ListVirtualClustersCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: ListVirtualClustersCommandOutput) => void
   ): void;
-  public listVirtualClusters(
-    args: ListVirtualClustersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListVirtualClustersCommandOutput) => void),
-    cb?: (err: any, data?: ListVirtualClustersCommandOutput) => void
-  ): Promise<ListVirtualClustersCommandOutput> | void {
-    const command = new ListVirtualClustersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>
+   * @see {@link StartJobRunCommand}
    */
-  public startJobRun(args: StartJobRunCommandInput, options?: __HttpHandlerOptions): Promise<StartJobRunCommandOutput>;
-  public startJobRun(args: StartJobRunCommandInput, cb: (err: any, data?: StartJobRunCommandOutput) => void): void;
-  public startJobRun(
+  startJobRun(
     args: StartJobRunCommandInput,
-    options: __HttpHandlerOptions,
+    options?: EMRContainersRequestOptions
+  ): Promise<StartJobRunCommandOutput>;
+  startJobRun(
+    args: StartJobRunCommandInput,
     cb: (err: any, data?: StartJobRunCommandOutput) => void
   ): void;
-  public startJobRun(
+  startJobRun(
     args: StartJobRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartJobRunCommandOutput) => void),
-    cb?: (err: any, data?: StartJobRunCommandOutput) => void
-  ): Promise<StartJobRunCommandOutput> | void {
-    const command = new StartJobRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: StartJobRunCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: EMRContainersRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from resources.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: EMRContainersRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: EMRContainersRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateVirtualClusterCommand}
+   */
+  updateVirtualCluster(
+    args: UpdateVirtualClusterCommandInput,
+    options?: EMRContainersRequestOptions
+  ): Promise<UpdateVirtualClusterCommandOutput>;
+  updateVirtualCluster(
+    args: UpdateVirtualClusterCommandInput,
+    cb: (err: any, data?: UpdateVirtualClusterCommandOutput) => void
+  ): void;
+  updateVirtualCluster(
+    args: UpdateVirtualClusterCommandInput,
+    options: EMRContainersRequestOptions,
+    cb: (err: any, data?: UpdateVirtualClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListJobRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListJobRunsCommandOutput}.
+   */
+  paginateListJobRuns(
+    args: ListJobRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListJobRunsCommandOutput>;
+
+  /**
+   * @see {@link ListJobTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListJobTemplatesCommandOutput}.
+   */
+  paginateListJobTemplates(
+    args?: ListJobTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListJobTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListManagedEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListManagedEndpointsCommandOutput}.
+   */
+  paginateListManagedEndpoints(
+    args: ListManagedEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListManagedEndpointsCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityConfigurationsCommandOutput}.
+   */
+  paginateListSecurityConfigurations(
+    args?: ListSecurityConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListVirtualClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVirtualClustersCommandOutput}.
+   */
+  paginateListVirtualClusters(
+    args?: ListVirtualClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVirtualClustersCommandOutput>;
 }
+
+/**
+ * <p>
+ *             Amazon EMR on EKS provides a deployment option for Amazon EMR that allows
+ *          you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).
+ *          With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.
+ *          For more information about Amazon EMR on EKS concepts and tasks, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html">What is
+ *             Amazon EMR on EKS
+ *             </a>.</p>
+ *          <p>
+ *             <i>
+ *                Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following
+ *          scenarios: </p>
+ *          <ul>
+ *             <li>
+ *                <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,
+ *                   <code>aws emr-containers start-job-run</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For
+ *                example, <code>"Action": [ "emr-containers:StartJobRun"]</code>. For more
+ *                information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR on EKS
+ *                   </a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,
+ *                   <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see
+ *                   <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints">
+ *                      Amazon EMR on EKSService Endpoints</a>.</p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export class EMRContainers extends EMRContainersClient implements EMRContainers {}
+createAggregatedClient(commands, EMRContainers, { paginators });

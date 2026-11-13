@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { CreateForecastRequest, CreateForecastResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateForecastCommand,
-  serializeAws_json1_1CreateForecastCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateForecastRequest, CreateForecastResponse } from "../models/models_0";
+import { CreateForecast$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateForecastCommand}.
+ */
 export interface CreateForecastCommandInput extends CreateForecastRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateForecastCommand}.
+ */
 export interface CreateForecastCommandOutput extends CreateForecastResponse, __MetadataBearer {}
 
 /**
@@ -41,73 +42,101 @@ export interface CreateForecastCommandOutput extends CreateForecastResponse, __M
  *         or export the forecast. Use the <a>DescribeForecast</a> operation to get the
  *         status.</p>
  *          </note>
+ *          <p>By default, a forecast includes predictions for every item (<code>item_id</code>) in the dataset group that was used to train the predictor.
+ *       However, you can use the <code>TimeSeriesSelector</code> object to generate a forecast on a subset of time series. Forecast creation is skipped for any time series that you specify that are not in the input dataset. The forecast export file will not contain these time series or their forecasted values.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ForecastClient, CreateForecastCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, CreateForecastCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // CreateForecastRequest
+ *   ForecastName: "STRING_VALUE", // required
+ *   PredictorArn: "STRING_VALUE", // required
+ *   ForecastTypes: [ // ForecastTypes
+ *     "STRING_VALUE",
+ *   ],
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   TimeSeriesSelector: { // TimeSeriesSelector
+ *     TimeSeriesIdentifiers: { // TimeSeriesIdentifiers
+ *       DataSource: { // DataSource
+ *         S3Config: { // S3Config
+ *           Path: "STRING_VALUE", // required
+ *           RoleArn: "STRING_VALUE", // required
+ *           KMSKeyArn: "STRING_VALUE",
+ *         },
+ *       },
+ *       Schema: { // Schema
+ *         Attributes: [ // SchemaAttributes
+ *           { // SchemaAttribute
+ *             AttributeName: "STRING_VALUE",
+ *             AttributeType: "string" || "integer" || "float" || "timestamp" || "geolocation",
+ *           },
+ *         ],
+ *       },
+ *       Format: "STRING_VALUE",
+ *     },
+ *   },
+ * };
  * const command = new CreateForecastCommand(input);
  * const response = await client.send(command);
+ * // { // CreateForecastResponse
+ * //   ForecastArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateForecastCommandInput - {@link CreateForecastCommandInput}
+ * @returns {@link CreateForecastCommandOutput}
  * @see {@link CreateForecastCommandInput} for command's `input` shape.
  * @see {@link CreateForecastCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of resources per account has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>There is already a resource with this name. Try again with a different name.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class CreateForecastCommand extends $Command<
-  CreateForecastCommandInput,
-  CreateForecastCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateForecastCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateForecastCommandInput, CreateForecastCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "CreateForecastCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateForecastRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateForecastResponse.filterSensitiveLog,
+export class CreateForecastCommand extends command<CreateForecastCommandInput, CreateForecastCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateForecast",
+  CreateForecast$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateForecastRequest;
+      output: CreateForecastResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateForecastCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateForecastCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateForecastCommandOutput> {
-    return deserializeAws_json1_1CreateForecastCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateForecastCommandInput;
+      output: CreateForecastCommandOutput;
+    };
+  };
 }

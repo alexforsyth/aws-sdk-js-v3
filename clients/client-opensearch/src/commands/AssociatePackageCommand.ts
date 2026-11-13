@@ -1,95 +1,127 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AssociatePackageRequest, AssociatePackageResponse } from "../models/models_0";
-import { OpenSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OpenSearchClient";
-import {
-  deserializeAws_restJson1AssociatePackageCommand,
-  serializeAws_restJson1AssociatePackageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociatePackageRequest, AssociatePackageResponse } from "../models/models_0";
+import { AssociatePackage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociatePackageCommand}.
+ */
 export interface AssociatePackageCommandInput extends AssociatePackageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociatePackageCommand}.
+ */
 export interface AssociatePackageCommandOutput extends AssociatePackageResponse, __MetadataBearer {}
 
 /**
- * <p>Associates a package with an Amazon OpenSearch Service domain.</p>
+ * <p>Associates a package with an Amazon OpenSearch Service domain. For more information,
+ *             see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html">Custom packages
+ *                 for Amazon OpenSearch Service</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OpenSearchClient, AssociatePackageCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
  * // const { OpenSearchClient, AssociatePackageCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
  * const client = new OpenSearchClient(config);
+ * const input = { // AssociatePackageRequest
+ *   PackageID: "STRING_VALUE", // required
+ *   DomainName: "STRING_VALUE", // required
+ *   PrerequisitePackageIDList: [ // PackageIDList
+ *     "STRING_VALUE",
+ *   ],
+ *   AssociationConfiguration: { // PackageAssociationConfiguration
+ *     KeyStoreAccessOption: { // KeyStoreAccessOption
+ *       KeyAccessRoleArn: "STRING_VALUE",
+ *       KeyStoreAccessEnabled: true || false, // required
+ *     },
+ *   },
+ * };
  * const command = new AssociatePackageCommand(input);
  * const response = await client.send(command);
+ * // { // AssociatePackageResponse
+ * //   DomainPackageDetails: { // DomainPackageDetails
+ * //     PackageID: "STRING_VALUE",
+ * //     PackageName: "STRING_VALUE",
+ * //     PackageType: "TXT-DICTIONARY" || "ZIP-PLUGIN" || "PACKAGE-LICENSE" || "PACKAGE-CONFIG",
+ * //     LastUpdated: new Date("TIMESTAMP"),
+ * //     DomainName: "STRING_VALUE",
+ * //     DomainPackageStatus: "ASSOCIATING" || "ASSOCIATION_FAILED" || "ACTIVE" || "DISSOCIATING" || "DISSOCIATION_FAILED",
+ * //     PackageVersion: "STRING_VALUE",
+ * //     PrerequisitePackageIDList: [ // PackageIDList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ReferencePath: "STRING_VALUE",
+ * //     ErrorDetails: { // ErrorDetails
+ * //       ErrorType: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //     AssociationConfiguration: { // PackageAssociationConfiguration
+ * //       KeyStoreAccessOption: { // KeyStoreAccessOption
+ * //         KeyAccessRoleArn: "STRING_VALUE",
+ * //         KeyStoreAccessEnabled: true || false, // required
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AssociatePackageCommandInput - {@link AssociatePackageCommandInput}
+ * @returns {@link AssociatePackageCommandOutput}
  * @see {@link AssociatePackageCommandInput} for command's `input` shape.
  * @see {@link AssociatePackageCommandOutput} for command's `response` shape.
- * @see {@link OpenSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An error occurred because you don't have permissions to access the resource.</p>
+ *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>An error occurred because the client attempts to remove a resource that is currently in use.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
  */
-export class AssociatePackageCommand extends $Command<
-  AssociatePackageCommandInput,
-  AssociatePackageCommandOutput,
-  OpenSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociatePackageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OpenSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociatePackageCommandInput, AssociatePackageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OpenSearchClient";
-    const commandName = "AssociatePackageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociatePackageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociatePackageResponse.filterSensitiveLog,
+export class AssociatePackageCommand extends command<AssociatePackageCommandInput, AssociatePackageCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociatePackage",
+  AssociatePackage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociatePackageRequest;
+      output: AssociatePackageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociatePackageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AssociatePackageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociatePackageCommandOutput> {
-    return deserializeAws_restJson1AssociatePackageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociatePackageCommandInput;
+      output: AssociatePackageCommandOutput;
+    };
+  };
 }

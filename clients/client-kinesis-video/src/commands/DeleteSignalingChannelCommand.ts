@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisVideoClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisVideoClient";
-import { DeleteSignalingChannelInput, DeleteSignalingChannelOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteSignalingChannelCommand,
-  serializeAws_restJson1DeleteSignalingChannelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSignalingChannelInput, DeleteSignalingChannelOutput } from "../models/models_0";
+import { DeleteSignalingChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSignalingChannelCommand}.
+ */
 export interface DeleteSignalingChannelCommandInput extends DeleteSignalingChannelInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSignalingChannelCommand}.
+ */
 export interface DeleteSignalingChannelCommandOutput extends DeleteSignalingChannelOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,84 @@ export interface DeleteSignalingChannelCommandOutput extends DeleteSignalingChan
  * ```javascript
  * import { KinesisVideoClient, DeleteSignalingChannelCommand } from "@aws-sdk/client-kinesis-video"; // ES Modules import
  * // const { KinesisVideoClient, DeleteSignalingChannelCommand } = require("@aws-sdk/client-kinesis-video"); // CommonJS import
+ * // import type { KinesisVideoClientConfig } from "@aws-sdk/client-kinesis-video";
+ * const config = {}; // type is KinesisVideoClientConfig
  * const client = new KinesisVideoClient(config);
+ * const input = { // DeleteSignalingChannelInput
+ *   ChannelARN: "STRING_VALUE", // required
+ *   CurrentVersion: "STRING_VALUE",
+ * };
  * const command = new DeleteSignalingChannelCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteSignalingChannelCommandInput - {@link DeleteSignalingChannelCommandInput}
+ * @returns {@link DeleteSignalingChannelCommandOutput}
  * @see {@link DeleteSignalingChannelCommandInput} for command's `input` shape.
  * @see {@link DeleteSignalingChannelCommandOutput} for command's `response` shape.
- * @see {@link KinesisVideoClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisVideoClientResolvedConfig | config} for KinesisVideoClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to perform this operation.</p>
+ *
+ * @throws {@link ClientLimitExceededException} (client fault)
+ *  <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
+ *             allowed client calls. Try making the call later.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The value for this input parameter is invalid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>When the input <code>StreamARN</code> or <code>ChannelARN</code>
+ *             in <code>CLOUD_STORAGE_MODE</code> is already mapped to a different
+ *             Kinesis Video Stream resource, or if the provided input <code>StreamARN</code>
+ *             or <code>ChannelARN</code> is not in Active status, try one of the following : </p>
+ *          <ol>
+ *             <li>
+ *                <p>The <code>DescribeMediaStorageConfiguration</code> API to determine what the stream given channel is mapped to.
+ *             </p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>DescribeMappedResourceConfiguration</code> API to determine the channel that the given stream is mapped to.
+ *             </p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>DescribeStream</code> or <code>DescribeSignalingChannel</code> API to determine the status of the resource.
+ *             </p>
+ *             </li>
+ *          </ol>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Amazon Kinesis Video Streams can't find the stream that you specified.</p>
+ *
+ * @throws {@link VersionMismatchException} (client fault)
+ *  <p>The stream version that you specified is not the latest version. To get the latest
+ *             version, use the <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html">DescribeStream</a>
+ *             API.</p>
+ *
+ * @throws {@link KinesisVideoServiceException}
+ * <p>Base exception class for all service exceptions from KinesisVideo service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSignalingChannelCommand extends $Command<
-  DeleteSignalingChannelCommandInput,
-  DeleteSignalingChannelCommandOutput,
-  KinesisVideoClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSignalingChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisVideoClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSignalingChannelCommandInput, DeleteSignalingChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisVideoClient";
-    const commandName = "DeleteSignalingChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSignalingChannelInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSignalingChannelOutput.filterSensitiveLog,
+export class DeleteSignalingChannelCommand extends command<DeleteSignalingChannelCommandInput, DeleteSignalingChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSignalingChannel",
+  DeleteSignalingChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSignalingChannelInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSignalingChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteSignalingChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSignalingChannelCommandOutput> {
-    return deserializeAws_restJson1DeleteSignalingChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSignalingChannelCommandInput;
+      output: DeleteSignalingChannelCommandOutput;
+    };
+  };
 }

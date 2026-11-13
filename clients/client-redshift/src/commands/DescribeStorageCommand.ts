@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerStorageMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeStorageCommand,
-  serializeAws_queryDescribeStorageCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CustomerStorageMessage } from "../models/models_0";
+import { DescribeStorage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStorageCommand}.
+ */
 export interface DescribeStorageCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStorageCommand}.
+ */
 export interface DescribeStorageCommandOutput extends CustomerStorageMessage, __MetadataBearer {}
 
 /**
@@ -28,68 +29,46 @@ export interface DescribeStorageCommandOutput extends CustomerStorageMessage, __
  * ```javascript
  * import { RedshiftClient, DescribeStorageCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeStorageCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = {};
  * const command = new DescribeStorageCommand(input);
  * const response = await client.send(command);
+ * // { // CustomerStorageMessage
+ * //   TotalBackupSizeInMegaBytes: Number("double"),
+ * //   TotalProvisionedStorageInMegaBytes: Number("double"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeStorageCommandInput - {@link DescribeStorageCommandInput}
+ * @returns {@link DescribeStorageCommandOutput}
  * @see {@link DescribeStorageCommandInput} for command's `input` shape.
  * @see {@link DescribeStorageCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStorageCommand extends $Command<
-  DescribeStorageCommandInput,
-  DescribeStorageCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStorageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStorageCommandInput, DescribeStorageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeStorageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: CustomerStorageMessage.filterSensitiveLog,
+export class DescribeStorageCommand extends command<DescribeStorageCommandInput, DescribeStorageCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStorage",
+  DescribeStorage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: CustomerStorageMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStorageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeStorageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeStorageCommandOutput> {
-    return deserializeAws_queryDescribeStorageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStorageCommandInput;
+      output: DescribeStorageCommandOutput;
+    };
+  };
 }

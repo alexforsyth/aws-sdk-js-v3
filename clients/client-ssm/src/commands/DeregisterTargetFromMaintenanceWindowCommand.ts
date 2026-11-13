@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeregisterTargetFromMaintenanceWindowRequest,
   DeregisterTargetFromMaintenanceWindowResult,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeregisterTargetFromMaintenanceWindowCommand,
-  serializeAws_json1_1DeregisterTargetFromMaintenanceWindowCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { DeregisterTargetFromMaintenanceWindow$ } from "../schemas/schemas_0";
 
-export interface DeregisterTargetFromMaintenanceWindowCommandInput
-  extends DeregisterTargetFromMaintenanceWindowRequest {}
-export interface DeregisterTargetFromMaintenanceWindowCommandOutput
-  extends DeregisterTargetFromMaintenanceWindowResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeregisterTargetFromMaintenanceWindowCommand}.
+ */
+export interface DeregisterTargetFromMaintenanceWindowCommandInput extends DeregisterTargetFromMaintenanceWindowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeregisterTargetFromMaintenanceWindowCommand}.
+ */
+export interface DeregisterTargetFromMaintenanceWindowCommandOutput extends DeregisterTargetFromMaintenanceWindowResult, __MetadataBearer {}
 
 /**
  * <p>Removes a target from a maintenance window.</p>
@@ -34,74 +32,63 @@ export interface DeregisterTargetFromMaintenanceWindowCommandOutput
  * ```javascript
  * import { SSMClient, DeregisterTargetFromMaintenanceWindowCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DeregisterTargetFromMaintenanceWindowCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DeregisterTargetFromMaintenanceWindowRequest
+ *   WindowId: "STRING_VALUE", // required
+ *   WindowTargetId: "STRING_VALUE", // required
+ *   Safe: true || false,
+ * };
  * const command = new DeregisterTargetFromMaintenanceWindowCommand(input);
  * const response = await client.send(command);
+ * // { // DeregisterTargetFromMaintenanceWindowResult
+ * //   WindowId: "STRING_VALUE",
+ * //   WindowTargetId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeregisterTargetFromMaintenanceWindowCommandInput - {@link DeregisterTargetFromMaintenanceWindowCommandInput}
+ * @returns {@link DeregisterTargetFromMaintenanceWindowCommandOutput}
  * @see {@link DeregisterTargetFromMaintenanceWindowCommandInput} for command's `input` shape.
  * @see {@link DeregisterTargetFromMaintenanceWindowCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link DoesNotExistException} (client fault)
+ *  <p>Error returned when the ID specified for a resource, such as a maintenance window or patch
+ *    baseline, doesn't exist.</p>
+ *          <p>For information about resource quotas in Amazon Web Services Systems Manager, see <a href="https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm">Systems Manager service quotas</a> in the
+ *     <i>Amazon Web Services General Reference</i>.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link TargetInUseException} (client fault)
+ *  <p>You specified the <code>Safe</code> option for the DeregisterTargetFromMaintenanceWindow
+ *    operation, but the target is still referenced in a task.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DeregisterTargetFromMaintenanceWindowCommand extends $Command<
-  DeregisterTargetFromMaintenanceWindowCommandInput,
-  DeregisterTargetFromMaintenanceWindowCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeregisterTargetFromMaintenanceWindowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeregisterTargetFromMaintenanceWindowCommandInput, DeregisterTargetFromMaintenanceWindowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DeregisterTargetFromMaintenanceWindowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeregisterTargetFromMaintenanceWindowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeregisterTargetFromMaintenanceWindowResult.filterSensitiveLog,
+export class DeregisterTargetFromMaintenanceWindowCommand extends command<DeregisterTargetFromMaintenanceWindowCommandInput, DeregisterTargetFromMaintenanceWindowCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeregisterTargetFromMaintenanceWindow",
+  DeregisterTargetFromMaintenanceWindow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterTargetFromMaintenanceWindowRequest;
+      output: DeregisterTargetFromMaintenanceWindowResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeregisterTargetFromMaintenanceWindowCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeregisterTargetFromMaintenanceWindowCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeregisterTargetFromMaintenanceWindowCommandOutput> {
-    return deserializeAws_json1_1DeregisterTargetFromMaintenanceWindowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeregisterTargetFromMaintenanceWindowCommandInput;
+      output: DeregisterTargetFromMaintenanceWindowCommandOutput;
+    };
+  };
 }
